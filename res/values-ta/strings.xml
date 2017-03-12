@@ -1018,6 +1018,8 @@
     <string name="firmware_version" msgid="4801135784886859972">"Android பதிப்பு"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android பாதுகாப்பின் இணைப்புநிரல் நிலை"</string>
     <string name="model_info" msgid="1952009518045740889">"மாடல்"</string>
+    <string name="hardware_info" msgid="2605080746512527805">"மாடல் &amp; வன்பொருள்"</string>
+    <string name="hardware_revision" msgid="8893547686367095527">"வன்பொருள் பதிப்பு"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"உபகரணத்தின் ஐடி"</string>
     <string name="baseband_version" msgid="1848990160763524801">"பேஸ்பேண்ட் பதிப்பு"</string>
     <string name="kernel_version" msgid="9192574954196167602">"கர்னல் பதிப்பு"</string>
@@ -1293,6 +1295,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS பயன்பாட்டை மாற்றவா?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"<xliff:g id="CURRENT_APP">%2$s</xliff:g> க்குப் பதிலாக <xliff:g id="NEW_APP">%1$s</xliff:g> ஐ உங்கள் SMS பயன்பாடாகப் பயன்படுத்தவா?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g> ஐ உங்கள் SMS பயன்பாடாகப் பயன்படுத்தவா?"</string>
+    <string name="network_scorer_picker_title" msgid="376571247088897050">"நெட்வொர்க் ஸ்கோரர்"</string>
+    <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"ஏதுமில்லை"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"வைஃபை அசிஸ்டண்டை மாற்றவா?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"நெட்வொர்க் இணைப்புகளை நிர்வகிக்க, <xliff:g id="CURRENT_APP">%2$s</xliff:g>க்குப் பதிலாக <xliff:g id="NEW_APP">%1$s</xliff:g>ஐப் பயன்படுத்தவா?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"நெட்வொர்க் இணைப்புகளை நிர்வகிக்க <xliff:g id="NEW_APP">%s</xliff:g>ஐப் பயன்படுத்தவா?"</string>
@@ -1614,7 +1618,8 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"தன்னியக்க நிறுத்தற்குறியிடுதல்"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"கைமுறை விசைப்பலகை அமைப்பு"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\".\" ஐச் செருக Space விசையை இருமுறை அழுத்தவும்"</string>
-    <string name="show_password" msgid="3001113966880559611">"கடவுச்சொற்களைக் காட்டு"</string>
+    <string name="show_password" msgid="4837897357002495384">"கடவுச்சொற்களைக் காட்டு"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"உள்ளிடும் போதே எழுத்துக்குறிகளைச் சற்று நேரம் காட்டும்"</string>
     <string name="ime_security_warning" msgid="4135828934735934248">"இந்த உள்ளீட்டு முறையானது, கடவுச்சொற்கள் மற்றும் கிரெடிட் கார்டு எண்கள் போன்ற தனிப்பட்ட தகவல் உள்பட நீங்கள் உள்ளிடும் எல்லா உரையையும் சேகரிக்கக்கூடும். இது <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> பயன்பாட்டிலிருந்து வந்துள்ளது. இந்த உள்ளீட்டு முறையைப் பயன்படுத்தவா?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"கடவுச்சொற்கள் மற்றும் கிரெடிட் கார்டு எண்கள் போன்ற தனிப்பட்ட தரவு உள்பட நீங்கள் உள்ளிடும் எல்லா உரையையும் இந்த பிழைத்திருத்தி சேகரிக்கலாம். இது <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> பயன்பாட்டிலிருந்து வந்ததாகும். பிழைத்திருத்தியைப் பயன்படுத்தவா?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"அமைப்பு"</string>
@@ -1701,12 +1706,14 @@
     <string name="accessibility_settings_summary" msgid="6654271785747778959">"திரைப் படிப்பான்கள், ஆடியோ, காட்சி, ஊடாடல் கட்டுப்பாடுகள்"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"காட்சி அமைப்புகள்"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"உங்கள் தேவைகளுக்கேற்ப இந்தச் சாதனத்தைத் தனிப்பயனாக்கலாம். இந்த அணுகல்தன்மை அம்சங்களை அமைப்புகளுக்குச் சென்று மாற்றலாம்."</string>
-    <string name="accessibility_services_title" msgid="2592221829284342237">"சேவைகள்"</string>
+    <string name="screen_reader_category_title" msgid="7739154903913400641">"திரைப் படிப்பான்கள்"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ஆடியோ &amp; திரையில் காட்டப்படும் உரை"</string>
+    <string name="display_category_title" msgid="685461049938269166">"காட்சி"</string>
+    <string name="interaction_control_category_title" msgid="7836591031872839151">"ஊடாடல் கட்டுப்பாடுகள்"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"பதிவிறக்கிய சேவைகள்"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"திரைப் படிப்பான் முக்கியமாக பார்வையற்றோர் மற்றும் பார்வைக் குறைபாடு உள்ளவர்களுக்காக வடிவமைக்கப்பட்டது"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"உங்கள் திரையில் உள்ளவற்றைச் சத்தமாகப் படித்துக் காட்ட, அவற்றைத் தட்டவும்"</string>
-    <string name="accessibility_system_title" msgid="7187919089874130484">"முறைமை"</string>
-    <string name="accessibility_display_title" msgid="7610175687949675162">"காட்சி"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"தலைப்புகள்"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"பெரிதாக்கும் வசதி"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"அளவை மாற்ற, 3 முறை தட்டவும்"</string>
@@ -1829,6 +1836,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> மீதமுள்ளது"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"சார்ஜ் செய்வதற்கு <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
+    <!-- no translation found for background_activity_title (8618384801540759730) -->
+    <skip />
+    <!-- no translation found for background_activity_summary (8140094430510517362) -->
+    <skip />
     <string name="device_screen_usage" msgid="224482533839040430">"திரை உபயோகம்"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"திரை நுகர்வு"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"மொபைல் நெட்வொர்க்கை ஸ்கேன் செய்தல்"</string>
@@ -2610,6 +2621,7 @@
     <string name="keywords_unification" msgid="1922900767659821025">"பணி சுயவிவரம், நிர்வகிக்கப்படும் சுயவிவரம், ஒருங்கிணை, ஒருங்கிணைத்தல், பணி, சுயவிவரம்"</string>
     <string name="keywords_gesture" msgid="5696040361482126337">"சைகை"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"கட்டணம் செலுத்தவும், தட்டவும், கட்டணம் செலுத்துதல்"</string>
+    <string name="keywords_backup" msgid="470070289135403022">"காப்புப்பிரதி, காப்புப் பிரதி"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"வைஃபை NFC குறியை அமை"</string>
     <string name="write_tag" msgid="8571858602896222537">"எழுது"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"எழுத, குறியைத் தட்டவும்..."</string>
@@ -3320,6 +3332,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"அறிவிப்புகளைப் பார்க்க, சாதனத்தின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"அசிஸ்ட் சைகை"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
+    <!-- no translation found for assist_gesture_sensitivity_title (8424299091547331080) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"இயக்கு"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"முடக்கு"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"பூட்லோடர் ஏற்கனவே திறந்துள்ளது"</string>
@@ -3338,77 +3352,81 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"சொந்த கணக்கு தரவை தானாக ஒத்திசை"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"பணி கணக்கு தரவை தானாக ஒத்திசை"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"கணக்கு ஒத்திசைவு"</string>
-    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"தனியுரிமை"</string>
-    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"தனியுரிமை"</string>
-    <string name="enterprise_privacy_header" msgid="5605095630252702716">"உங்கள் பணித் தரவிற்கு அணுகல் வழங்க, நிறுவனமானது உங்கள் சாதனத்தில் அமைப்புகளை மாற்றி, மென்பொருளை நிறுவக்கூடும். இதனால், உங்கள் தனிப்பட்ட உள்ளடக்கத்தை உங்கள் நிர்வாகி பார்க்கலாம். கூடுதல் விவரங்களை அறிய, உங்கள் நிறுவனத்தின் நிர்வாகியைத் தொடர்புகொள்ளவும்."</string>
-    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"உங்கள் நிறுவனத்தால் எத்தகைய தகவலைப் பார்க்க முடியும்?"</string>
-    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"நிறுவனம் எதைப் பார்க்கலாம் என்பதை பாதிக்கும் மாற்றங்கள் எவை?"</string>
-    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"உங்களின் சாதன அணுகலைப் பாதிக்கும் செயல்கள் எவை?"</string>
+    <!-- no translation found for enterprise_privacy_settings (6858635744375208603) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_summary (7747966656794398109) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_title (4256061862530939767) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_footer (7832358498590676058) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_category (7313392680107938517) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_changes_category (9079283547182933771) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_device_access_category (5423434164248819058) -->
+    <skip />
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"உங்கள் பணிக் கணக்குடன் தொடர்புடைய மின்னஞ்சல் மற்றும் கேலெண்டர் போன்ற தரவு"</string>
-    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"உங்கள் சாதனத்தில் உள்ள எல்லாப் பயன்பாடுகளின் பட்டியல்"</string>
-    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
-      <item quantity="other">உங்கள் சாதனத்தில் மொத்தம் உள்ள <xliff:g id="COUNT_1">%d</xliff:g> பயன்பாடுகளின் பட்டியல்</item>
-      <item quantity="one">உங்கள் சாதனத்தில் மொத்தம் உள்ள <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாட்டின் பட்டியல்</item>
-    </plurals>
-    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"உங்கள் சாதனத்தில் உள்ள ஒவ்வொரு பயன்பாட்டின் உபயோகம் (செலவழித்த நேரமும் பயன்படுத்திய தரவின் அளவும்)"</string>
-    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"உங்கள் சாதனத்தில் உள்ள ட்ராஃபிக் பதிவுகள்"</string>
-    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"உங்களின் மிகச் சமீபத்திய பிழை அறிக்கை"</string>
-    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"உங்களின் மிகச் சமீபத்திய பாதுகாப்புப் பதிவு"</string>
-    <string name="enterprise_privacy_never" msgid="1304035596746436921">"ஒருபோதும் வேண்டாம்"</string>
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages" formatted="false" msgid="6167929812245127890">
-      <item quantity="other">உங்கள் நிர்வாகி <xliff:g id="COUNT_1">%d</xliff:g> பயன்பாடுகளை நிறுவியுள்ளார்</item>
-      <item quantity="one">உங்கள் நிர்வாகி <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாட்டை நிறுவியுள்ளார்</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_location_access_packages" formatted="false" msgid="2063855792932186160">
-      <item quantity="other">உங்கள் இருப்பிடத்தை அணுக, நிர்வாகி <xliff:g id="COUNT_1">%d</xliff:g> பயன்பாடுகளை அனுமதித்துள்ளார்</item>
-      <item quantity="one">உங்கள் இருப்பிடத்தை அணுக, நிர்வாகி <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாட்டை அனுமதித்துள்ளார்</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_microphone_access_packages" formatted="false" msgid="8539289058651013237">
-      <item quantity="other">உங்கள் மைக்ரோஃபோனை அணுக, நிர்வாகி <xliff:g id="COUNT_1">%d</xliff:g> பயன்பாடுகளை அனுமதித்துள்ளார்</item>
-      <item quantity="one">உங்கள் மைக்ரோஃபோனை அணுக, நிர்வாகி <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாட்டை அனுமதித்துள்ளார்</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_camera_access_packages" formatted="false" msgid="8289040803304039501">
-      <item quantity="other">உங்கள் கேமராவை அணுக, நிர்வாகி <xliff:g id="COUNT_1">%d</xliff:g> பயன்பாடுகளை அனுமதித்துள்ளார்</item>
-      <item quantity="one">உங்கள் கேமராவை அணுக, நிர்வாகி <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாட்டை அனுமதித்துள்ளார்</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps" formatted="false" msgid="271160181904414484">
-      <item quantity="other">உங்கள் நிர்வாகி, <xliff:g id="COUNT_1">%d</xliff:g> இயல்புப் பயன்பாடுகளை அமைத்துள்ளார்</item>
-      <item quantity="one">உங்கள் நிர்வாகி, <xliff:g id="COUNT_0">%d</xliff:g> இயல்புப் பயன்பாட்டை அமைத்துள்ளார்</item>
-    </plurals>
+    <!-- no translation found for enterprise_privacy_installed_packages (2313698828178764590) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_packages (2765037387436064893) -->
+    <!-- no translation found for enterprise_privacy_number_packages_actionable (3351021029919034993) -->
+    <!-- no translation found for enterprise_privacy_usage_stats (6257434796480671245) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_network_logs (6594098950963377666) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_bug_reports (843225086779037863) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_security_logs (5377362481617301074) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_none (7706621148858381189) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_installed_packages (6353757812144878828) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_location_access (943112505930395028) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (1101307566418116040) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (97095968133740652) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3292470316317639698) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method (6531350246850814920) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method_name (4941106433683067953) -->
+    <skip />
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"\"VPNஐ எப்போதும் இயக்கத்தில் வை\" என்பது இயக்கப்பட்டுள்ளது"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"\"VPNஐ எப்போதும் இயக்கத்தில் வை\" என்பது உங்கள் தனிப்பட்ட சுயவிவரத்தில் இயக்கப்பட்டுள்ளது"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"\"VPNஐ எப்போதும் இயக்கத்தில் வை\" என்பது உங்கள் பணி விவரத்தில் இயக்கப்பட்டுள்ளது"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"குளோபல் HTTP ப்ராக்ஸி அமைக்கப்பட்டுள்ளது"</string>
-    <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"நிர்வாகியானவர் சாதனத்தைப் பூட்டலாம், கடவுச்சொல்லை மீட்டமைக்கலாம்"</string>
+    <!-- no translation found for enterprise_privacy_ca_certs_user (2353089666351669619) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_personal (7437886817297309222) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs (5907058613578926277) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (7939443347696810129) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_work (2032113890560053206) -->
+    <!-- no translation found for enterprise_privacy_lock_device (8791656477097208540) -->
+    <skip />
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"நிர்வாகியானவர் சாதனத் தரவு முழுவதையும் நீக்கலாம்"</string>
-    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
-      <item quantity="other">அதிகபட்சமாக <xliff:g id="COUNT_1">%d</xliff:g> முறை கடவுச்சொல்லை உள்ளிட முயற்சி செய்யும் வகையில் நிர்வாகி அமைத்துள்ளார். மேலும் ஒருமுறை தவறான கடவுச்சொல்லை உள்ளிட்டால் சாதனத்தின் எல்லாத் தரவும் நீக்கப்படும்</item>
-      <item quantity="one">அதிகபட்சமாக <xliff:g id="COUNT_0">%d</xliff:g> முறை கடவுச்சொல்லை உள்ளிட முயற்சி செய்யும் வகையில் நிர்வாகி அமைத்துள்ளார். மேலும் ஒருமுறை தவறான கடவுச்சொல்லை உள்ளிட்டால் சாதனத்தின் எல்லாத் தரவும் நீக்கப்படும்</item>
-    </plurals>
-    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
-      <item quantity="other">அதிகபட்சமாக <xliff:g id="COUNT_1">%d</xliff:g> முறை கடவுச்சொல்லை உள்ளிட முயற்சி செய்யும் வகையில் நிர்வாகி அமைத்துள்ளார். மேலும் ஒருமுறை தவறான கடவுச்சொல்லை உள்ளிட்டால் பணி விவரத்தின் தரவு நீக்கப்படும்</item>
-      <item quantity="one">அதிகபட்சமாக <xliff:g id="COUNT_0">%d</xliff:g> முறை கடவுச்சொல்லை உள்ளிட முயற்சி செய்யும் வகையில் நிர்வாகி அமைத்துள்ளார். மேலும் ஒருமுறை தவறான கடவுச்சொல்லை உள்ளிட்டால் பணி விவரத்தின் தரவு நீக்கப்படும்</item>
-    </plurals>
-    <string name="do_disclosure_generic" msgid="5666469247267523806">"இந்தச் சாதனம் நிர்வகிக்கப்படுகிறது."</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (1001255609345002878) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4040565826652951057) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_failed_password_wipe (5279099270351036696) -->
+    <!-- no translation found for do_disclosure_generic (8653670456990823307) -->
+    <skip />
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"இந்தச் சாதனத்தை நிர்வகிப்பது: <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"மேலும் அறிக"</string>
-    <!-- no translation found for storage_photos_videos (319854636702241898) -->
-    <skip />
-    <!-- no translation found for storage_music_audio (789779084825206838) -->
-    <skip />
+    <string name="storage_photos_videos" msgid="319854636702241898">"படங்களும் வீடியோக்களும்"</string>
+    <string name="storage_music_audio" msgid="789779084825206838">"இசையும் ஆடியோவும்"</string>
     <string name="storage_games" msgid="7703159201697117621">"கேம்கள்"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"பிற பயன்பாடுகள்"</string>
     <string name="storage_files" msgid="8581083146777364063">"கோப்புகள்"</string>
-    <string name="storage_settings_2" msgid="6369810699930056554">"மொபைல் சேமிப்பகம்"</string>
+    <!-- no translation found for storage_settings_2 (4306047711760327031) -->
+    <skip />
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_free" msgid="8829609507318832879">"<xliff:g id="TOTAL">%1$s</xliff:g> காலியாக உள்ளது"</string>
     <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g>%%"</string>
-    <string name="storage_manager_indicator" msgid="1516810749625915020">"சேமிப்பக நிர்வாகி: <xliff:g id="STATUS">^1</xliff:g>"</string>
-    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ஆஃப்"</string>
-    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ஆன்"</string>
-    <!-- no translation found for install_type_instant (3174425974536078647) -->
-    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"கேம்கள்"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"ஆடியோ கோப்புகள்"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g>க்கு நிறுவல்நீக்கப்பட்டது)"</string>
@@ -3418,4 +3436,8 @@
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>ஐ உங்கள் தன்னிரப்பிப் பயன்பாடாக அமைக்கவா? <xliff:g id="APP_NAME_1">%1$s</xliff:g> உங்கள் திரையைப் படித்து, பிற பயன்பாடுகளில் உள்ள புலங்களை நிரப்பலாம்."</string>
     <string name="device_theme" msgid="4571803018917608588">"சாதனத்தின் தீம்"</string>
     <string name="default_theme" msgid="7085644992078579076">"இயல்பு"</string>
+    <string name="storage_manager_indicator" msgid="1516810749625915020">"சேமிப்பக நிர்வாகி: <xliff:g id="STATUS">^1</xliff:g>"</string>
+    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ஆஃப்"</string>
+    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ஆன்"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"இன்ஸ்டண்ட் பயன்பாடு"</string>
 </resources>

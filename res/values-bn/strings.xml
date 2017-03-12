@@ -1018,6 +1018,8 @@
     <string name="firmware_version" msgid="4801135784886859972">"Android সংস্করণ"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android সুরক্ষার প্যাচ লেবেল"</string>
     <string name="model_info" msgid="1952009518045740889">"মডেল"</string>
+    <string name="hardware_info" msgid="2605080746512527805">"মডেল ও হার্ডওয়্যার"</string>
+    <string name="hardware_revision" msgid="8893547686367095527">"হার্ডওয়্যার সংস্করণ"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"সরঞ্জাম ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"বেসব্যান্ড সংস্করণ"</string>
     <string name="kernel_version" msgid="9192574954196167602">"কার্নেল সংস্করণ"</string>
@@ -1293,6 +1295,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS অ্যাপ্লিকেশান পরিবর্তন করবেন?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"<xliff:g id="CURRENT_APP">%2$s</xliff:g> এর পরিবর্তে <xliff:g id="NEW_APP">%1$s</xliff:g> কে SMS অ্যাপ্লিকেশান হিসেবে ব্যবহার করবেন?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g> কে আপনার SMS অ্যাপ্লিকেশান হিসেবে ব্যবহার করবেন?"</string>
+    <string name="network_scorer_picker_title" msgid="376571247088897050">"নেটওয়ার্ক স্কোরার"</string>
+    <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"কোনো কিছুই নয়"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"ওয়াই-ফাই সহকারী পরিবর্তন করবেন?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"আপনার নেটওয়ার্ক সংযোগ পরিচালনা করার জন্য <xliff:g id="CURRENT_APP">%2$s</xliff:g> এর পরিবর্তে <xliff:g id="NEW_APP">%1$s</xliff:g> ব্যবহার করবেন?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"আপনার নেটওয়ার্ক সংযোগ পরিচালনা করার জন্য <xliff:g id="NEW_APP">%s</xliff:g> ব্যবহার করবেন?"</string>
@@ -1614,7 +1618,8 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"স্বতঃ স্বরাঘাত"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"ফিজিক্যাল কীবোর্ড সেটিংস"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\"।\" প্রবেশ করাতে দুইবার \'স্পেস\' কী টিপুন"</string>
-    <string name="show_password" msgid="3001113966880559611">"পাসওয়ার্ড দৃশ্যমান করুন"</string>
+    <string name="show_password" msgid="4837897357002495384">"পাসওয়ার্ড দেখুন"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"টাইপ করার সময় অক্ষরগুলি কয়েক মুহূর্তের জন্য দেখুন"</string>
     <string name="ime_security_warning" msgid="4135828934735934248">"এই ইনপুট পদ্ধতিটি হয়তো পাসওয়ার্ড এবং ক্রেডিট কার্ড নম্বর সহ আপনার টাইপ করা সমস্ত পাঠ্য সংগ্রহ করতে সক্ষম হতে পারে। এটি <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> অ্যাপ্লিকেশানের। এই ইনপুট পদ্ধতিটি ব্যবহার করবেন?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"এই বানান পরীক্ষকটি হয়তো পাসওয়ার্ড এবং ক্রেডিট কার্ড নম্বর সহ আপনার টাইপ করা সমস্ত পাঠ্য সংগ্রহ করতে সক্ষম হতে পারে। এটি <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> অ্যাপ্লিকেশানের। এই বানান পরীক্ষকটি ব্যবহার করবেন?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"সেটিংস"</string>
@@ -1701,12 +1706,14 @@
     <string name="accessibility_settings_summary" msgid="6654271785747778959">"স্ক্রিন রিডার, অডিও, ডিসপ্লে, ইন্টারঅ্যাকশন নিয়ন্ত্রণগুলি"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"দৃষ্টিশক্তির সেটিংস"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"আপনি এই ডিভাইসটি নিজের পছন্দমত সেট করতে পারেন৷ এই অ্যাক্সেসযোগ্যতার বৈশিষ্ট্যগুলি পরে সেটিংসে গিয়ে পরিবর্তন করা যাবে৷"</string>
-    <string name="accessibility_services_title" msgid="2592221829284342237">"পরিষেবাগুলি"</string>
+    <string name="screen_reader_category_title" msgid="7739154903913400641">"স্ক্রিন রিডার"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"অডিও এবং অন-স্ক্রিন পাঠ্য"</string>
+    <string name="display_category_title" msgid="685461049938269166">"ডিসপ্লে"</string>
+    <string name="interaction_control_category_title" msgid="7836591031872839151">"ইন্টারঅ্যাকশন নিয়ন্ত্রণগুলি"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"ডাউনলোড করা পরিষেবাগুলি"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"স্ক্রীন রিডার প্রাথমিকভাবে অন্ধত্ব এবং কম দৃষ্টি সম্পন্ন ব্যক্তিদের জন্য"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"স্ক্রিনের আইটেমগুলিতে আলতো চাপ দিলে সেগুলি উচ্চারণ করে শোনানো হবে"</string>
-    <string name="accessibility_system_title" msgid="7187919089874130484">"সিস্টেম"</string>
-    <string name="accessibility_display_title" msgid="7610175687949675162">"প্রদর্শন"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"ক্যাপশান"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"বিবর্ধন করার অঙ্গভঙ্গি"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"জুম করতে ৩ বার আলতো চাপ দিন"</string>
@@ -1829,6 +1836,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> অবশিষ্ট রয়েছে"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> চার্জ করা বাকি"</string>
+    <!-- no translation found for background_activity_title (8618384801540759730) -->
+    <skip />
+    <!-- no translation found for background_activity_summary (8140094430510517362) -->
+    <skip />
     <string name="device_screen_usage" msgid="224482533839040430">"স্ক্রিনের ব্যবহার"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"স্ক্রিনের জন্য ব্যবহার"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"মোবাইল নেটওয়ার্ক স্ক্যান করা"</string>
@@ -2610,6 +2621,7 @@
     <string name="keywords_unification" msgid="1922900767659821025">"কর্মস্থলের প্রোফাইল, পরিচালিত প্রোফাইল, ঐক্যবদ্ধ, একীকরণ, কাজ, প্রোফাইল"</string>
     <string name="keywords_gesture" msgid="5696040361482126337">"অঙ্গভঙ্গি"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"অর্থপ্রদান, আলতো চাপা, পেমেন্ট"</string>
+    <string name="keywords_backup" msgid="470070289135403022">"ব্যাকআপ, ব্যাক আপ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"ওয়াই-ফাই NFC ট্যাগ সেটআপ করুন"</string>
     <string name="write_tag" msgid="8571858602896222537">"লিখুন"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"লিখতে একটি ট্যাগে আলতো চাপুন..."</string>
@@ -3320,6 +3332,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ডিভাইসের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"সহায়ক সঙ্কেত"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
+    <!-- no translation found for assist_gesture_sensitivity_title (8424299091547331080) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"চালু আছে"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"বন্ধ আছে"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"বুটলোডার ইতিমধ্যেই আনলক করা হয়েছে"</string>
@@ -3338,77 +3352,81 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ব্যক্তিগত অ্যাকাউন্টের ডেটা স্বতঃসিঙ্ক"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"কাজের অ্যাকাউন্টের ডেটা স্বতঃসিঙ্ক"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"অ্যাকাউন্ট সিঙ্ক"</string>
-    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"গোপনীয়তা"</string>
-    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"গোপনীয়তা"</string>
-    <string name="enterprise_privacy_header" msgid="5605095630252702716">"আপনার কর্মস্থলের ডেটাতে অ্যাক্সেস প্রদান করার জন্য, আপনার প্রতিষ্ঠান আপনার ডিভাইসের সেটিংস পরিবর্তন করতে এবং সফ্টওয়্যার ইনস্টল করতে পারে, যার ফলে আপনার ব্যক্তিগত কিছু সামগ্রী আপনার প্রশাসকের কাছে দৃশ্যমান হতে পারে৷ আরো বিশদ বিবরণের জন্য আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন৷"</string>
-    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"আপনার প্রতিষ্ঠান কোন ধরনের তথ্য দেখতে পারে?"</string>
-    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"\'কোন পরিবর্তনগুলি প্রভাব ফেলতে পারে\' বিষয়টিকে কি আপনার প্রতিষ্ঠান দেখতে পারে?"</string>
-    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"এই ডিভাইসে আপনার অ্যাক্সেস করার ক্ষেত্রে কোন ক্রিয়াগুলি প্রভাব ফেলতে পারে?"</string>
+    <!-- no translation found for enterprise_privacy_settings (6858635744375208603) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_summary (7747966656794398109) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_title (4256061862530939767) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_footer (7832358498590676058) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_category (7313392680107938517) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_changes_category (9079283547182933771) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_device_access_category (5423434164248819058) -->
+    <skip />
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"ইমেল এবং ক্যালেন্ডারের মতো আপনার কর্মক্ষেত্রের অ্যাকাউন্টের সাথে যুক্ত ডেটা"</string>
-    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"আপনার ডিভাইসে থাকা সমস্ত অ্যাপের তালিকা"</string>
-    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
-      <item quantity="one">আপনার ডিভাইসে থাকা সমস্ত <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপের তালিকা</item>
-      <item quantity="other">আপনার ডিভাইসে থাকা সমস্ত <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপের তালিকা</item>
-    </plurals>
-    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"আপনার ডিভাইসের প্রতিটি অ্যাপ্লিকেশানের (ডেটা ব্যবহারের সময় এবং পরিমাণ) ব্যবহার"</string>
-    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"আপনার ডিভাইসের ট্রাফিক লগ"</string>
-    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"আপনার সর্বশেষ ত্রুটির প্রতিবেদন"</string>
-    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"আপনার সর্বশেষ নিরাপত্তা লগ"</string>
-    <string name="enterprise_privacy_never" msgid="1304035596746436921">"কখনই নয়"</string>
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages" formatted="false" msgid="6167929812245127890">
-      <item quantity="one">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g> টি অ্যাপ ইনস্টল করেছেন</item>
-      <item quantity="other"> আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g> টি অ্যাপ ইনস্টল করেছেন</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_location_access_packages" formatted="false" msgid="2063855792932186160">
-      <item quantity="one">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপকে আপনার অবস্থান অ্যাক্সেস করার অনুমতি দিয়েছেন</item>
-      <item quantity="other">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপকে আপনার অবস্থান অ্যাক্সেস করার অনুমতি দিয়েছেন</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_microphone_access_packages" formatted="false" msgid="8539289058651013237">
-      <item quantity="one">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপকে আপনার মাইক্রোফোন অ্যাক্সেস করার অনুমতি দিয়েছেন</item>
-      <item quantity="other">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপকে আপনার মাইক্রোফোন অ্যাক্সেস করার অনুমতি দিয়েছেন</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_camera_access_packages" formatted="false" msgid="8289040803304039501">
-      <item quantity="one">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপকে আপনার ক্যামেরা অ্যাক্সেস করার অনুমতি দিয়েছেন</item>
-      <item quantity="other">আপনার প্রশাসক <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপকে আপনার ক্যামেরা অ্যাক্সেস করার অনুমতি দিয়েছেন</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps" formatted="false" msgid="271160181904414484">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি ডিফল্ট অ্যাপ আপনার প্রশাসকের দ্বারা সেট করা হয়েছে</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি ডিফল্ট অ্যাপ আপনার প্রশাসকের দ্বারা সেট করা হয়েছে</item>
-    </plurals>
+    <!-- no translation found for enterprise_privacy_installed_packages (2313698828178764590) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_packages (2765037387436064893) -->
+    <!-- no translation found for enterprise_privacy_number_packages_actionable (3351021029919034993) -->
+    <!-- no translation found for enterprise_privacy_usage_stats (6257434796480671245) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_network_logs (6594098950963377666) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_bug_reports (843225086779037863) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_security_logs (5377362481617301074) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_none (7706621148858381189) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_installed_packages (6353757812144878828) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_location_access (943112505930395028) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (1101307566418116040) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (97095968133740652) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3292470316317639698) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method (6531350246850814920) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method_name (4941106433683067953) -->
+    <skip />
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"সর্বদা-চালু VPN অন করা আছে"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"আপনার ব্যক্তিগত প্রোফাইলে সর্বদা-চালু VPN অন করা আছে"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"আপনার কর্মস্থলের প্রোফাইলে সর্বদা-চালু VPN অন করা আছে"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"বৈশ্বিক HTTP প্রক্সী সেট করা আছে"</string>
-    <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"প্রশাসক ডিভাইসটি লক করতে ও পাসওয়ার্ড রিসেট করতে পারবেন"</string>
+    <!-- no translation found for enterprise_privacy_ca_certs_user (2353089666351669619) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_personal (7437886817297309222) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs (5907058613578926277) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (7939443347696810129) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_work (2032113890560053206) -->
+    <!-- no translation found for enterprise_privacy_lock_device (8791656477097208540) -->
+    <skip />
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"প্রশাসক ডিভাইসের সমস্ত ডেটা মুছে দিতে পারবেন"</string>
-    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
-      <item quantity="one">প্রশাসক পাসওয়ার্ড দেওয়ার প্রচেষ্টা সর্বাধিক সংখ্যা <xliff:g id="COUNT_1">%d</xliff:g> এ নির্দিষ্ট করেছেন, তার বেশি বার ভুল পাসওয়ার্ড দিলে ডিভাইসের সমস্ত ডেটা মুছে দেওয়া হবে</item>
-      <item quantity="other">প্রশাসক পাসওয়ার্ড দেওয়ার প্রচেষ্টা সর্বাধিক সংখ্যা <xliff:g id="COUNT_1">%d</xliff:g> এ নির্দিষ্ট করেছেন, তার বেশি বার ভুল পাসওয়ার্ড দিলে ডিভাইসের সমস্ত ডেটা মুছে দেওয়া হবে</item>
-    </plurals>
-    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
-      <item quantity="one">প্রশাসক পাসওয়ার্ড দেওয়ার প্রচেষ্টা সর্বাধিক সংখ্যা <xliff:g id="COUNT_1">%d</xliff:g> এ নির্দিষ্ট করেছেন, তার বেশি বার ভুল পাসওয়ার্ড দিলে কর্মস্থলের প্রোফাইলের ডেটা মুছে দেওয়া হবে</item>
-      <item quantity="other">প্রশাসক পাসওয়ার্ড দেওয়ার প্রচেষ্টা সর্বাধিক সংখ্যা <xliff:g id="COUNT_1">%d</xliff:g> এ নির্দিষ্ট করেছেন, তার বেশি বার ভুল পাসওয়ার্ড দিলে কর্মস্থলের প্রোফাইলের ডেটা মুছে দেওয়া হবে</item>
-    </plurals>
-    <string name="do_disclosure_generic" msgid="5666469247267523806">"এই ডিভাইসটি পরিচালিত।"</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (1001255609345002878) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4040565826652951057) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_failed_password_wipe (5279099270351036696) -->
+    <!-- no translation found for do_disclosure_generic (8653670456990823307) -->
+    <skip />
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"এই ডিভাইসটি <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> দ্বারা পরিচালিত।"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"আরো জানুন"</string>
-    <!-- no translation found for storage_photos_videos (319854636702241898) -->
-    <skip />
-    <!-- no translation found for storage_music_audio (789779084825206838) -->
-    <skip />
+    <string name="storage_photos_videos" msgid="319854636702241898">"ফটো এবং ভিডিওগুলি"</string>
+    <string name="storage_music_audio" msgid="789779084825206838">"গান এবং অডিও"</string>
     <string name="storage_games" msgid="7703159201697117621">"গেম্স"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"অন্যান্য অ্যাপ্লিকেশান"</string>
     <string name="storage_files" msgid="8581083146777364063">"ফাইল"</string>
-    <string name="storage_settings_2" msgid="6369810699930056554">"ফোনের সঞ্চয়স্থান"</string>
+    <!-- no translation found for storage_settings_2 (4306047711760327031) -->
+    <skip />
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_free" msgid="8829609507318832879">"<xliff:g id="TOTAL">%1$s</xliff:g> খালি"</string>
     <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g>%%"</string>
-    <string name="storage_manager_indicator" msgid="1516810749625915020">"সঞ্চয়স্থান পরিচালক: <xliff:g id="STATUS">^1</xliff:g>"</string>
-    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"বন্ধ আছে"</string>
-    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"চালু আছে"</string>
-    <!-- no translation found for install_type_instant (3174425974536078647) -->
-    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"গেম্স"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"অডিও ফাইলগুলি"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(ইউজার <xliff:g id="USER">%s</xliff:g> এর জন্য আনইনস্টল হয়েছে)"</string>
@@ -3418,4 +3436,8 @@
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> কে আপনার স্বতঃপূরণ অ্যাপ করবেন? <xliff:g id="APP_NAME_1">%1$s</xliff:g> আপনার স্ক্রিন পড়তে ও অন্যান্য অ্যাপে বিভিন্ন ফিল্ডগুলি পূরণ করতে পারবে।"</string>
     <string name="device_theme" msgid="4571803018917608588">"ডিভাইসের থিম"</string>
     <string name="default_theme" msgid="7085644992078579076">"ডিফল্ট"</string>
+    <string name="storage_manager_indicator" msgid="1516810749625915020">"সঞ্চয়স্থান পরিচালক: <xliff:g id="STATUS">^1</xliff:g>"</string>
+    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"বন্ধ আছে"</string>
+    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"চালু আছে"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"ঝটপট অ্যাপ"</string>
 </resources>
