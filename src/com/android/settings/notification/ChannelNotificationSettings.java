@@ -113,7 +113,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             .getApplicationFeatureProvider(activity)
             .newAppHeaderController(this /* fragment */, null /* appHeader */)
             .setIcon(mAppRow.icon)
-            .setLabel(getNotificationChannelLabel(mChannel))
+            .setLabel(mChannel.getName())
             .setSummary(mAppRow.label)
             .setPackageName(mAppRow.pkg)
             .setUid(mAppRow.uid)

@@ -145,7 +145,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                             ? R.string.notification_channels_other
                             : R.string.notification_channels);
                 } else {
-                    groupCategory.setTitle(getNotificationGroupLabel(group));
+                    groupCategory.setTitle(group.getName());
                 }
                 groupCategory.setKey(group.getId());
                 groupCategory.setOrderingAsAdded(true);
@@ -161,13 +161,13 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                             getPrefContext());
                     channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
                     channelPref.setKey(channel.getId());
-                    channelPref.setTitle(getNotificationChannelLabel(channel));
+                    channelPref.setTitle(channel.getName());
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
                     channelPref.setMultiLine(true);
 
                     if (channel.isDeleted()) {
                         channelPref.setTitle(getString(R.string.deleted_channel_name,
-                                getNotificationChannelLabel(channel)));
+                                channel.getName()));
                         channelPref.setEnabled(false);
                     } else {
                         channelPref.setSummary(getImportanceSummary(channel.getImportance()));
@@ -257,8 +257,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             if (left.isDeleted() != right.isDeleted()) {
                 return Boolean.compare(left.isDeleted(), right.isDeleted());
             }
-            CharSequence leftName = getNotificationChannelLabel(left);
-            CharSequence rightName = getNotificationChannelLabel(right);
+            CharSequence leftName = left.getName();
+            CharSequence rightName = right.getName();
             if (!Objects.equals(leftName, rightName)) {
                 return sCollator.compare(leftName.toString(), rightName.toString());
             }
@@ -278,8 +278,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     } else if (right.getId() == null && left.getId() != null) {
                         return -1;
                     }
-                    CharSequence leftName = getNotificationGroupLabel(left);
-                    CharSequence rightName = getNotificationGroupLabel(right);
+                    CharSequence leftName = left.getName();
+                    CharSequence rightName = right.getName();
                     // sort rest of the groups by name
                     if (!Objects.equals(leftName, rightName)) {
                         return sCollator.compare(leftName.toString(), rightName.toString());
