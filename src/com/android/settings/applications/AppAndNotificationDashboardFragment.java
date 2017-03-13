@@ -43,6 +43,12 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mProgressiveDisclosureMixin.setTileLimit(3);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.app_and_notification;
     }
