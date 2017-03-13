@@ -15,16 +15,11 @@
  */
 package com.android.settings.dashboard.conditional;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnLayoutChangeListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -124,12 +119,6 @@ public class ConditionAdapterUtils {
                 }
             }
         }
-    }
-
-    private static void setHeight(View detailGroup, int height) {
-        final LayoutParams params = detailGroup.getLayoutParams();
-        params.height = height;
-        detailGroup.setLayoutParams(params);
     }
 
     private static void setViewVisibility(View containerView, int viewId, boolean visible) {

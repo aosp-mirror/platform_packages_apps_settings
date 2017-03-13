@@ -18,6 +18,7 @@ package com.android.settings.dashboard.suggestions;
 
 import android.content.Context;
 
+import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
@@ -38,8 +39,14 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Ranks the list of suggestions in place.
-     * @param suggestions: List of suggestion Tiles
-     * @param suggestionIds: List of suggestion ids corresponding to the suggestion tiles.
+     *
+     * @param suggestions   List of suggestion Tiles
+     * @param suggestionIds List of suggestion ids corresponding to the suggestion tiles.
      */
     void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds);
+
+    /**
+     * Dismisses a suggestion.
+     */
+    void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion);
 }

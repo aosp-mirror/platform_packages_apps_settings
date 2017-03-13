@@ -35,6 +35,7 @@ import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
@@ -70,6 +71,7 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
+    private SuggestionDismissController mSuggestionDismissHandler;
 
     @Override
     public int getMetricsCategory() {
@@ -119,8 +121,7 @@ public class DashboardSummary extends InstrumentedFragment
             }
         }
         if (DEBUG_TIMING) {
-            Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
-                    + " ms");
+            Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime) + " ms");
         }
     }
 
@@ -177,7 +178,7 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onViewCreated(View view, Bundle bundle) {
         long startTime = System.currentTimeMillis();
-        mDashboard = (FocusRecyclerView) view.findViewById(R.id.dashboard_container);
+        mDashboard = view.findViewById(R.id.dashboard_container);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         if (bundle != null) {
@@ -192,6 +193,8 @@ public class DashboardSummary extends InstrumentedFragment
         mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
                 bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
+        mSuggestionDismissHandler = new SuggestionDismissController(
+                getContext(), mDashboard, mSuggestionParser, mAdapter);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
@@ -243,7 +246,7 @@ public class DashboardSummary extends InstrumentedFragment
                 List<String> suggestionIds = new ArrayList<>(suggestions.size());
                 for (Tile suggestion : suggestions) {
                     suggestionIds.add(
-                        DashboardAdapter.getSuggestionIdentifier(context, suggestion));
+                            DashboardAdapter.getSuggestionIdentifier(context, suggestion));
                 }
                 // TODO: create a Suggestion class to maintain the id and other info
                 mSuggestionFeatureProvider.rankSuggestions(suggestions, suggestionIds);
@@ -251,7 +254,8 @@ public class DashboardSummary extends InstrumentedFragment
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
-                    mAdapter.disableSuggestion(suggestion);
+                    mSuggestionFeatureProvider.dismissSuggestion(
+                            context, mSuggestionParser, suggestion);
                     suggestions.remove(i--);
                 }
             }
@@ -277,7 +281,7 @@ public class DashboardSummary extends InstrumentedFragment
         // API that takes a single category.
         List<DashboardCategory> categories = new ArrayList<>();
         categories.add(mDashboardFeatureProvider.getTilesForCategory(
-            CategoryKey.CATEGORY_HOMEPAGE));
+                CategoryKey.CATEGORY_HOMEPAGE));
         if (suggestions != null) {
             mAdapter.setCategoriesAndSuggestions(categories, suggestions);
         } else {
