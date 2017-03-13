@@ -19,6 +19,7 @@ package com.android.settings.webview;
 import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -33,9 +34,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageItemInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
-import android.support.v7.preference.PreferenceManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -324,5 +327,31 @@ public class WebViewAppPickerTest {
                 "(uninstalled for user %s)", FIRST_USER.name);
         assertThat(mPicker.getDisabledReason(wvusWrapper, mContext,
                 DEFAULT_PACKAGE_NAME)).isEqualTo(EXPECTED_DISABLED_REASON);
+    }
+
+    /**
+     * Ensure that the version name of a WebView package is displayed after its name in the
+     * preference title.
+     */
+    @Test
+    public void testWebViewVersionAddedAfterLabel() throws PackageManager.NameNotFoundException {
+        PackageItemInfo mockPackageItemInfo = mock(PackageItemInfo.class);
+        mockPackageItemInfo.packageName = DEFAULT_PACKAGE_NAME;
+        when(mockPackageItemInfo.loadLabel(any())).thenReturn("myPackage");
+        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(
+                mockPackageItemInfo, "" /* disabledReason */);
+
+        PackageInfo packageInfo = new PackageInfo();
+        packageInfo.versionName = "myVersionName";
+        PackageManager pm = mock(PackageManager.class);
+        when(pm.getPackageInfo(eq(DEFAULT_PACKAGE_NAME), anyInt())).thenReturn(packageInfo);
+        when(mPackageManager.getPackageManager()).thenReturn(pm);
+
+        RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
+        mPicker.configurePreferenceFromAppInfo(mockPreference,
+                DEFAULT_PACKAGE_NAME, webviewAppInfo, null, null);
+
+        verify(mockPreference, times(1)).setTitle(eq("myPackage myVersionName"));
+        verify(mockPreference, times(1)).setTitle(any());
     }
 }
