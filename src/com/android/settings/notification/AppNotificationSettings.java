@@ -218,7 +218,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void setupBlock() {
-        if (mAppRow.systemApp) {
+        if (mAppRow.systemApp && !mAppRow.banned) {
             setVisible(mBlock, false);
         } else {
             mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
@@ -243,6 +243,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             setVisible(category, !banned);
         }
         setVisible(mBadge, !banned);
+        if (mAppRow.systemApp && !mAppRow.banned) {
+            setVisible(mBlock, false);
+        }
     }
 
     private Comparator<NotificationChannel> mChannelComparator =

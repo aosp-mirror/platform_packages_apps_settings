@@ -134,7 +134,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         }
         mLights.setDisabledByAdmin(mSuspendedAppsAdmin);
         mVibrate.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
+        if (mImportance.isEnabled()) {
+            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
         mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
@@ -185,21 +187,26 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     protected void setupBlockAndImportance() {
-        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBlock.setChecked(mChannel.getImportance() == NotificationManager.IMPORTANCE_NONE);
-        mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean value = (Boolean) newValue;
-                int importance = value ?  IMPORTANCE_NONE : IMPORTANCE_LOW;
-                mImportance.setValue(String.valueOf(importance));
-                mChannel.setImportance(importance);
-                mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                mBackend.updateChannel(mPkg, mUid, mChannel);
-                updateDependents();
-                return true;
-            }
-        });
+        if (mAppRow.systemApp && mChannel.getImportance() != NotificationManager.IMPORTANCE_NONE) {
+            setVisible(mBlock, false);
+        } else {
+            mBlock.setEnabled(mAppRow.systemApp);
+            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+            mBlock.setChecked(mChannel.getImportance() == NotificationManager.IMPORTANCE_NONE);
+            mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean value = (Boolean) newValue;
+                    int importance = value ? IMPORTANCE_NONE : IMPORTANCE_LOW;
+                    mImportance.setValue(String.valueOf(importance));
+                    mChannel.setImportance(importance);
+                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+                    mBackend.updateChannel(mPkg, mUid, mChannel);
+                    updateDependents();
+                    return true;
+                }
+            });
+        }
         mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
         mBadge.setEnabled(mAppRow.showBadge);
         mBadge.setChecked(mChannel.canShowBadge());
@@ -217,7 +224,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
         final int numImportances = IMPORTANCE_HIGH - IMPORTANCE_MIN + 1;
         List<String> summaries = new ArrayList<>();
-        List<String> values = new ArrayList<>();;
+        List<String> values = new ArrayList<>();
+        ;
         for (int i = 0; i < numImportances; i++) {
             int importance = i + 1;
             summaries.add(getImportanceSummary(importance));
@@ -232,18 +240,21 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mImportance.setEntries(summaries.toArray(new String[0]));
         mImportance.setValue(String.valueOf(mChannel.getImportance()));
         mImportance.setSummary("%s");
-
-        mImportance.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                int importance = Integer.parseInt((String) newValue);
-                mChannel.setImportance(importance);
-                mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                mBackend.updateChannel(mPkg, mUid, mChannel);
-                updateDependents();
-                return true;
-            }
-        });
+        if (mAppRow.lockedImportance) {
+            mImportance.setEnabled(false);
+        } else {
+            mImportance.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    int importance = Integer.parseInt((String) newValue);
+                    mChannel.setImportance(importance);
+                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+                    mBackend.updateChannel(mPkg, mUid, mChannel);
+                    updateDependents();
+                    return true;
+                }
+            });
+        }
     }
 
     protected void setupPriorityPref(boolean priority) {
