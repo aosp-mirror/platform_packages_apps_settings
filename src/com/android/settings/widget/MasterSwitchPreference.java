@@ -20,7 +20,8 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.widget.CompoundButton;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -61,20 +62,23 @@ public class MasterSwitchPreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        mSwitch = (Switch) holder.itemView.findViewById(R.id.switchWidget);
-        if (mSwitch != null) {
-            mSwitch.setChecked(mChecked);
-            mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final View widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        if (widgetView != null) {
+            widgetView.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-                    if (!callChangeListener(isChecked)) {
-                        button.setChecked(!isChecked);
+                public void onClick(View v) {
+                    setChecked(!mChecked);
+                    if (!callChangeListener(mChecked)) {
+                        setChecked(!mChecked);
                     } else {
-                        persistBoolean(isChecked);
-                        mChecked = isChecked;
+                        persistBoolean(mChecked);
                     }
                 }
             });
+        }
+        mSwitch = (Switch) holder.itemView.findViewById(R.id.switchWidget);
+        if (mSwitch != null) {
+            mSwitch.setChecked(mChecked);
         }
         if (mMultiLine) {
             TextView textView = (TextView)holder.findViewById(android.R.id.title);

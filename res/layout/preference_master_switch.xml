@@ -21,7 +21,6 @@
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:background="@android:color/transparent"
     android:clipToPadding="false">
 
@@ -85,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="end|center_vertical"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"/>
 
 </LinearLayout>
