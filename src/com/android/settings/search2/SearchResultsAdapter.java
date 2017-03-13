@@ -106,8 +106,10 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
     /**
      * Merge the results from each of the loaders into one list for the adapter.
      * Prioritizes results from the local database over installed apps.
+     *
+     * @return Number of matched results
      */
-    public void mergeResults() {
+    public int mergeResults() {
         final List<? extends SearchResult> databaseResults = mResultsMap
                 .get(DatabaseResultLoader.class.getName());
         final List<? extends SearchResult> installedAppResults = mResultsMap
@@ -139,6 +141,8 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
 
         mSearchResults.addAll(results);
         notifyDataSetChanged();
+
+        return mSearchResults.size();
     }
 
     public void clearResults() {

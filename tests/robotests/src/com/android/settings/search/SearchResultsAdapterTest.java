@@ -60,7 +60,7 @@ import static org.mockito.Mockito.doReturn;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class SearchAdapterTest {
+public class SearchResultsAdapterTest {
 
     @Mock
     private SearchFragment mFragment;
@@ -114,7 +114,7 @@ public class SearchAdapterTest {
                 InstalledAppResultLoader.class.getName());
         mAdapter.addResultsToMap(getDummyDbResults(),
                 DatabaseResultLoader.class.getName());
-        mAdapter.mergeResults();
+        int count = mAdapter.mergeResults();
 
         List<SearchResult> results = mAdapter.getSearchResults();
         assertThat(results.get(0).title).isEqualTo("alpha");
@@ -123,6 +123,7 @@ public class SearchAdapterTest {
         assertThat(results.get(3).title).isEqualTo("bravo");
         assertThat(results.get(4).title).isEqualTo("appCharlie");
         assertThat(results.get(5).title).isEqualTo("Charlie");
+        assertThat(count).isEqualTo(6);
     }
 
     private List<SearchResult> getDummyDbResults() {

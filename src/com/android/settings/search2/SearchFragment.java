@@ -31,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 
@@ -71,7 +72,7 @@ public class SearchFragment extends InstrumentedFragment implements
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     static final String RESULT_CLICK_COUNT = "settings_search_result_click_count";
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     String mQuery;
 
     private final SaveQueryRecorderCallback mSaveQueryRecorderCallback =
@@ -89,6 +90,7 @@ public class SearchFragment extends InstrumentedFragment implements
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     RecyclerView mResultsRecyclerView;
     private SearchView mSearchView;
+    private LinearLayout mNoResultsView;
 
     @VisibleForTesting
     final RecyclerView.OnScrollListener mScrollListener =
@@ -118,6 +120,8 @@ public class SearchFragment extends InstrumentedFragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         mSearchAdapter = new SearchResultsAdapter(this);
+        
+        mSearchFeatureProvider.initFeedbackButton();
 
         final LoaderManager loaderManager = getLoaderManager();
 
@@ -155,6 +159,8 @@ public class SearchFragment extends InstrumentedFragment implements
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mResultsRecyclerView.addOnScrollListener(mScrollListener);
+
+        mNoResultsView = (LinearLayout) view.findViewById(R.id.no_results_layout);
         return view;
     }
 
@@ -184,16 +190,26 @@ public class SearchFragment extends InstrumentedFragment implements
         if (TextUtils.equals(query, mQuery)) {
             return true;
         }
+
+        final boolean isEmptyQuery = TextUtils.isEmpty(query);
+
+        // Hide no-results-view when the new query is not a super-string of the previous
+        if ((mQuery != null) && (mNoResultsView.getVisibility() == View.VISIBLE)
+                && (query.length() < mQuery.length())) {
+            mNoResultsView.setVisibility(View.GONE);
+        }
+
         mResultClickCount = 0;
         mNeverEnteredQuery = false;
         mQuery = query;
         mSearchAdapter.clearResults();
 
-        if (TextUtils.isEmpty(mQuery)) {
+        if (isEmptyQuery) {
             final LoaderManager loaderManager = getLoaderManager();
             loaderManager.destroyLoader(LOADER_ID_DATABASE);
             loaderManager.destroyLoader(LOADER_ID_INSTALLED_APPS);
             loaderManager.restartLoader(LOADER_ID_RECENTS, null /* args */, this /* callback */);
+            mSearchFeatureProvider.hideFeedbackButton();
         } else {
             restartLoaders();
         }
@@ -232,7 +248,12 @@ public class SearchFragment extends InstrumentedFragment implements
         mSearchAdapter.addResultsToMap(data, loader.getClass().getName());
 
         if (mUnfinishedLoadersCount.decrementAndGet() == 0) {
-            mSearchAdapter.mergeResults();
+            final int resultCount = mSearchAdapter.mergeResults();
+            mSearchFeatureProvider.showFeedbackButton(this, getView());
+
+            if (resultCount == 0) {
+                mNoResultsView.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -255,6 +276,14 @@ public class SearchFragment extends InstrumentedFragment implements
         mUnfinishedLoadersCount.set(NUM_QUERY_LOADERS);
         loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
         loaderManager.restartLoader(LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
+    }
+
+    public String getQuery() {
+        return mQuery;
+    }
+
+    public List<SearchResult> getSearchResults() {
+        return mSearchAdapter.getSearchResults();
     }
 
     @VisibleForTesting (otherwise = VisibleForTesting.PRIVATE)

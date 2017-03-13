@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
 
+import android.view.View;
 import com.android.settings.dashboard.SiteMapManager;
 
 /**
@@ -68,4 +69,25 @@ public interface SearchFeatureProvider {
      * Updates the Settings indexes
      */
     void updateIndex(Context context);
+
+    /**
+     * Initializes the feedback button in case it was dismissed.
+     */
+    default void initFeedbackButton() {
+    }
+
+    /**
+     * Show a button users can click to submit feedback on the quality of the search results.
+     */
+    default void showFeedbackButton(SearchFragment fragment, View view) {
+    }
+
+    /**
+     * Hide the feedback button shown by
+     * {@link #showFeedbackButton(SearchFragment fragment, View view) showFeedbackButton}
+     */
+    default void hideFeedbackButton() {
+    }
+
+
 }
