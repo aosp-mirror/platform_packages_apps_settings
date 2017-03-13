@@ -21,9 +21,12 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.VisibleForTesting;
 import android.widget.Toast;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -84,14 +87,25 @@ public final class Utils {
 
     // TODO: wire this up to show connection errors...
     static void showConnectingError(Context context, String name) {
-        showError(context, name, R.string.bluetooth_connecting_error_message);
+        showConnectingError(context, name, getLocalBtManager(context));
+    }
+
+    @VisibleForTesting
+    static void showConnectingError(Context context, String name, LocalBluetoothManager manager) {
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider().visible(context,
+            MetricsEvent.VIEW_UNKNOWN, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR);
+        showError(context, name, R.string.bluetooth_connecting_error_message, manager);
     }
 
     static void showError(Context context, String name, int messageResId) {
+        showError(context, name, messageResId, getLocalBtManager(context));
+    }
+
+    private static void showError(Context context, String name, int messageResId,
+            LocalBluetoothManager manager) {
         String message = context.getString(messageResId, name);
-        LocalBluetoothManager manager = getLocalBtManager(context);
         Context activity = manager.getForegroundActivity();
-        if(manager.isForegroundActivity()) {
+        if (manager.isForegroundActivity()) {
             new AlertDialog.Builder(activity)
                 .setTitle(R.string.bluetooth_error_title)
                 .setMessage(message)

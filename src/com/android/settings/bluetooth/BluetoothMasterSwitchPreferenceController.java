@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
@@ -54,7 +55,8 @@ public class BluetoothMasterSwitchPreferenceController extends PreferenceControl
         mBtPreference = (MasterSwitchPreference) screen.findPreference(KEY_TOGGLE_BLUETOOTH);
         mBluetoothEnabler = new BluetoothEnabler(mContext,
             new MasterSwitchController(mBtPreference),
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider(), mBluetoothManager);
+            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider(), mBluetoothManager,
+            MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE);
     }
 
     @Override

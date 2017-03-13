@@ -27,7 +27,6 @@ import android.provider.Settings;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.search.Index;
@@ -52,6 +51,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
 
     private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
     private static final int EVENT_UPDATE_INDEX = 0;
+    private final int mMetricsEvent;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -77,13 +77,15 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     };
 
     public BluetoothEnabler(Context context, SwitchWidgetController switchWidget,
-            MetricsFeatureProvider metricsFeatureProvider, LocalBluetoothManager manager) {
+            MetricsFeatureProvider metricsFeatureProvider, LocalBluetoothManager manager,
+            int metricsEvent) {
         mContext = context;
         mMetricsFeatureProvider = metricsFeatureProvider;
         mSwitchWidget = switchWidget;
         mSwitch = mSwitchWidget.getSwitch();
         mSwitchWidget.setListener(this);
         mValidListener = false;
+        mMetricsEvent = metricsEvent;
 
         if (manager == null) {
             // Bluetooth is not supported
@@ -191,7 +193,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             return false;
         }
 
-        mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_BLUETOOTH_TOGGLE, isChecked);
+        mMetricsFeatureProvider.action(mContext, mMetricsEvent, isChecked);
 
         if (mLocalAdapter != null) {
             boolean status = mLocalAdapter.setBluetoothEnabled(isChecked);
