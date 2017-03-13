@@ -24,27 +24,26 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class ExternalSourcesDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
 
-    private static final String KEY_EXTERNAL_SOURCES_SETTINGS_SWITCH =
-            "external_sources_settings_switch";
-    private static final String KEY_EXTERNAL_SOURCES_SETTINGS_DESC =
-            "external_sources_settings_description";
+    private static final String KEY_EXTERNAL_SOURCE_SWITCH = "external_sources_settings_switch";
 
     private AppStateInstallAppsBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
-    private Preference mExternalSourcesSettingsDesc;
+    private UserManager mUserManager;
+    private RestrictedSwitchPreference mSwitchPref;
     private InstallAppsState mInstallAppsState;
 
     @Override
@@ -54,15 +53,10 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         final Context context = getActivity();
         mAppBridge = new AppStateInstallAppsBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mUserManager = UserManager.get(context);
 
         addPreferencesFromResource(R.xml.external_sources_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_EXTERNAL_SOURCES_SETTINGS_SWITCH);
-        mExternalSourcesSettingsDesc = findPreference(KEY_EXTERNAL_SOURCES_SETTINGS_DESC);
-
-        getPreferenceScreen().setTitle(R.string.install_other_apps);
-        mSwitchPref.setTitle(R.string.external_source_switch_title);
-        mExternalSourcesSettingsDesc.setSummary(R.string.install_all_warning);
-
+        mSwitchPref = (RestrictedSwitchPreference) findPreference(KEY_EXTERNAL_SOURCE_SWITCH);
         mSwitchPref.setOnPreferenceChangeListener(this);
     }
 
@@ -84,6 +78,18 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     }
 
     static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
+        final UserManager um = UserManager.get(context);
+        final int userRestrictionSource = um.getUserRestrictionSource(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+                UserHandle.getUserHandleForUid(entry.info.uid));
+        switch (userRestrictionSource) {
+            case UserManager.RESTRICTION_SOURCE_DEVICE_OWNER:
+            case UserManager.RESTRICTION_SOURCE_PROFILE_OWNER:
+                return context.getString(R.string.disabled_by_admin);
+            case UserManager.RESTRICTION_SOURCE_SYSTEM:
+                return context.getString(R.string.disabled);
+        }
+
         final InstallAppsState appsState;
         if (entry.extraInfo instanceof InstallAppsState) {
             appsState = (InstallAppsState) entry.extraInfo;
@@ -103,6 +109,17 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
 
     @Override
     protected boolean refreshUi() {
+        if (mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+                UserHandle.of(UserHandle.myUserId()))) {
+            mSwitchPref.setChecked(false);
+            mSwitchPref.setSummary(R.string.disabled);
+            mSwitchPref.setEnabled(false);
+            return true;
+        }
+        mSwitchPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
+        if (mSwitchPref.isDisabledByAdmin()) {
+            return true;
+        }
         mInstallAppsState = mAppBridge.createInstallAppsStateFor(mPackageName,
                 mPackageInfo.applicationInfo.uid);
         if (!mInstallAppsState.isPotentialAppSource()) {
@@ -110,8 +127,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             mSwitchPref.setEnabled(false);
             return true;
         }
-        final boolean canInstallApps = mInstallAppsState.canInstallApps();
-        mSwitchPref.setChecked(canInstallApps);
+        mSwitchPref.setChecked(mInstallAppsState.canInstallApps());
         return true;
     }
 
