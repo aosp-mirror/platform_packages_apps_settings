@@ -30,7 +30,6 @@ import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
@@ -39,7 +38,6 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.util.MutableInt;
 import android.view.View;
@@ -51,8 +49,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
@@ -196,6 +192,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             } else if (mClearCacheObserver == null) { // Lazy initialization of observer
                 mClearCacheObserver = new ClearCacheObserver();
             }
+            mMetricsFeatureProvider.action(getContext(),
+                    MetricsEvent.ACTION_SETTINGS_CLEAR_APP_CACHE);
             mPm.deleteApplicationCacheFiles(mPackageName, mClearCacheObserver);
         } else if (v == mClearDataButton) {
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
@@ -344,6 +342,7 @@ public class AppStorageSettings extends AppInfoWithHeader
      * button for a system package
      */
     private void initiateClearUserData() {
+        mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_SETTINGS_CLEAR_APP_DATA);
         mClearDataButton.setEnabled(false);
         // Invoke uninstall or clear user data based on sysPackage
         String packageName = mAppEntry.info.packageName;
