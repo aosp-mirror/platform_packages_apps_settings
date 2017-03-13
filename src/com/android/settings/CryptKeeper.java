@@ -57,7 +57,6 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -66,6 +65,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
+import com.android.settings.widget.ImeAwareEditText;
 
 import java.util.List;
 
@@ -122,7 +122,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private boolean mCooldown = false;
 
     PowerManager.WakeLock mWakeLock;
-    private EditText mPasswordEntry;
+    private ImeAwareEditText mPasswordEntry;
     private LockPatternView mLockPatternView;
     /** Number of calls to {@link #notifyUser()} to ignore before notifying. */
     private int mNotificationCountdown = 0;
@@ -277,9 +277,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // Reenable the password entry
             if (mPasswordEntry != null) {
                 mPasswordEntry.setEnabled(true);
-                final InputMethodManager imm = (InputMethodManager) getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(mPasswordEntry, 0);
+                mPasswordEntry.scheduleShowSoftInput();
                 setBackFunctionality(true);
             }
         }
@@ -744,7 +742,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
      private void passwordEntryInit() {
         // Password/pin case
-        mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
+        mPasswordEntry = (ImeAwareEditText) findViewById(R.id.passwordEntry);
         if (mPasswordEntry != null){
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.requestFocus();
@@ -797,16 +795,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             }
         }
 
-        // Asynchronously throw up the IME, since there are issues with requesting it to be shown
-        // immediately.
+        // Make sure that the IME is shown when everything becomes ready.
         if (mLockPatternView == null && !mCooldown) {
             getWindow().setSoftInputMode(
                                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-            mHandler.postDelayed(new Runnable() {
-                @Override public void run() {
-                    imm.showSoftInputUnchecked(0, null);
-                }
-            }, 0);
+            if (mPasswordEntry != null) {
+                mPasswordEntry.scheduleShowSoftInput();
+            }
         }
 
         updateEmergencyCallButtonState();
