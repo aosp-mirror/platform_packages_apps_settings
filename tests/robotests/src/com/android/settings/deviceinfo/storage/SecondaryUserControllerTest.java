@@ -69,6 +69,7 @@ public class SecondaryUserControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mPrimaryUser = new UserInfo();
+        mPrimaryUser.flags = UserInfo.FLAG_PRIMARY;
         mController = new SecondaryUserController(mContext, mPrimaryUser);
 
         when(mScreen.getContext()).thenReturn(mContext);
@@ -166,5 +167,24 @@ public class SecondaryUserControllerTest {
         Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getSummary()).isEqualTo("99.00B");
+    }
+
+    @Test
+    public void dontAddPrimaryProfileAsASecondaryProfile() throws Exception {
+        ArrayList<UserInfo> userInfos = new ArrayList<>();
+        // The primary UserInfo may be a different object with a different name... but represent the
+        // same user!
+        UserInfo primaryUserRenamed = new UserInfo();
+        primaryUserRenamed.name = "Owner";
+        primaryUserRenamed.flags = UserInfo.FLAG_PRIMARY;
+        userInfos.add(primaryUserRenamed);
+        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
+        when(mUserManager.getUsers()).thenReturn(userInfos);
+        List<PreferenceController> controllers =
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
+
+        assertThat(controllers).hasSize(1);
+        // We should have the NoSecondaryUserController.
+        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
     }
 }

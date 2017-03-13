@@ -32,6 +32,7 @@ import com.android.settings.core.PreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * SecondaryUserController controls the preferences on the Storage screen which had to do with
  * secondary users.
@@ -62,7 +63,7 @@ public class SecondaryUserController extends PreferenceController implements
         List<UserInfo> infos = userManager.getUsers();
         for (int i = 0, size = infos.size(); i < size; i++) {
             UserInfo info = infos.get(i);
-            if (info.equals(primaryUser)) {
+            if (info.isPrimary()) {
                 continue;
             }
 
