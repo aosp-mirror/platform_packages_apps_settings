@@ -25,7 +25,6 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,9 +35,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -49,17 +46,18 @@ import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.SingleLineSummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -70,20 +68,9 @@ import java.util.Set;
 public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 
-    // Index of the first preference in a preference category.
-    private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = 0;
-
     // Preference categories
-    private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
-    private static final String CATEGORY_AUDIO_AND_CAPTIONS = "audio_and_captions_category";
-    private static final String CATEGORY_DISPLAY = "display_category";
-    private static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
-    private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
-
-    private static final String[] CATEGORIES = new String[] {
-        CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
-        CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
-    };
+    private static final String SERVICES_CATEGORY = "services_category";
+    private static final String SYSTEM_CATEGORY = "system_category";
 
     // Preferences
     private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
@@ -131,7 +118,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // ID for dialog that confirms shortcut capabilities
     private static final int DIALOG_ID_ADD_SHORTCUT_WARNING = 1;
 
-    private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
+    // Auxiliary members.
+    static final Set<ComponentName> sInstalledServices = new HashSet<>();
+
+    private final Map<String, String> mLongPressTimeoutValuetoTitleMap = new HashMap<>();
 
     private final Handler mHandler = new Handler();
 
@@ -139,7 +129,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         @Override
         public void run() {
             if (getActivity() != null) {
-                updateServicePreferences();
+                updateServicesPreferences();
             }
         }
     };
@@ -174,7 +164,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             new SettingsContentObserver(mHandler) {
                 @Override
                 public void onChange(boolean selfChange, Uri uri) {
-                    updateServicePreferences();
+                    updateServicesPreferences();
                 }
             };
 
@@ -185,12 +175,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     };
 
-    private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
-            new ArrayMap<>();
-    private final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
-            new ArrayMap<>();
-    private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
-            new ArrayMap<>();
+    // Preference controls.
+    private PreferenceCategory mServicesCategory;
+    private PreferenceCategory mSystemsCategory;
 
     private SwitchPreference mToggleHighTextContrastPreference;
     private SwitchPreference mTogglePowerButtonEndsCallPreference;
@@ -273,7 +260,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
         mSelectLongPressTimeoutPreference.setSummary(
-                mLongPressTimeoutValueToTitleMap.get(stringValue));
+                mLongPressTimeoutValuetoTitleMap.get(stringValue));
     }
 
     private void handleToggleInversionPreferenceChange(boolean checked) {
@@ -399,10 +386,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void initializeAllPreferences() {
-        for (int i = 0; i < CATEGORIES.length; i++) {
-            PreferenceCategory prefCategory = (PreferenceCategory) findPreference(CATEGORIES[i]);
-            mCategoryToPrefCategoryMap.put(CATEGORIES[i], prefCategory);
-        }
+        mServicesCategory = (PreferenceCategory) findPreference(SERVICES_CATEGORY);
+        mSystemsCategory = (PreferenceCategory) findPreference(SYSTEM_CATEGORY);
 
         // Text contrast.
         mToggleHighTextContrastPreference =
@@ -417,16 +402,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 (SwitchPreference) findPreference(TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE);
         if (!KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
                 || !Utils.isVoiceCapable(getActivity())) {
-            mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL)
-                    .removePreference(mTogglePowerButtonEndsCallPreference);
+            mSystemsCategory.removePreference(mTogglePowerButtonEndsCallPreference);
         }
 
         // Lock screen rotation.
         mToggleLockScreenRotationPreference =
                 (SwitchPreference) findPreference(TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE);
         if (!RotationPolicy.isRotationSupported(getActivity())) {
-            mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL)
-                    .removePreference(mToggleLockScreenRotationPreference);
+            mSystemsCategory.removePreference(mToggleLockScreenRotationPreference);
         }
 
         // Large pointer icon.
@@ -441,7 +424,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSelectLongPressTimeoutPreference =
                 (ListPreference) findPreference(SELECT_LONG_PRESS_TIMEOUT_PREFERENCE);
         mSelectLongPressTimeoutPreference.setOnPreferenceChangeListener(this);
-        if (mLongPressTimeoutValueToTitleMap.size() == 0) {
+        if (mLongPressTimeoutValuetoTitleMap.size() == 0) {
             String[] timeoutValues = getResources().getStringArray(
                     R.array.long_press_timeout_selector_values);
             mLongPressTimeoutDefault = Integer.parseInt(timeoutValues[0]);
@@ -449,7 +432,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     R.array.long_press_timeout_selector_titles);
             final int timeoutValueCount = timeoutValues.length;
             for (int i = 0; i < timeoutValueCount; i++) {
-                mLongPressTimeoutValueToTitleMap.put(timeoutValues[i], timeoutTitles[i]);
+                mLongPressTimeoutValuetoTitleMap.put(timeoutValues[i], timeoutTitles[i]);
             }
         }
 
@@ -476,32 +459,17 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateAllPreferences() {
+        updateServicesPreferences();
         updateSystemPreferences();
-        updateServicePreferences();
     }
 
-    private void updateServicePreferences() {
+    private void updateServicesPreferences() {
         // Since services category is auto generated we have to do a pass
         // to generate it since services can come and go and then based on
         // the global accessibility state to decided whether it is enabled.
 
         // Generate.
-        ArrayList<Preference> servicePreferences =
-                new ArrayList<>(mServicePreferenceToPreferenceCategoryMap.keySet());
-        for (int i = 0; i < servicePreferences.size(); i++) {
-            Preference service = servicePreferences.get(i);
-            PreferenceCategory category = mServicePreferenceToPreferenceCategoryMap.get(service);
-            category.removePreference(service);
-        }
-
-        initializePreBundledServicesMapFromArray(CATEGORY_SCREEN_READER,
-                R.array.config_preinstalled_screen_reader_services);
-        initializePreBundledServicesMapFromArray(CATEGORY_AUDIO_AND_CAPTIONS,
-                R.array.config_preinstalled_audio_and_caption_services);
-        initializePreBundledServicesMapFromArray(CATEGORY_DISPLAY,
-                R.array.config_preinstalled_display_services);
-        initializePreBundledServicesMapFromArray(CATEGORY_INTERACTION_CONTROL,
-                R.array.config_preinstalled_interaction_control_services);
+        mServicesCategory.removeAll();
 
         AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(getActivity());
 
@@ -514,49 +482,36 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         final boolean accessibilityEnabled = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_ENABLED, 0) == 1;
 
-        PreferenceCategory downloadedServicesCategory =
-                mCategoryToPrefCategoryMap.get(CATEGORY_DOWNLOADED_SERVICES);
-        // Temporarily add the downloaded services category back if it was previously removed.
-        if (findPreference(CATEGORY_DOWNLOADED_SERVICES) == null) {
-            getPreferenceScreen().addPreference(downloadedServicesCategory);
-        }
-
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             AccessibilityServiceInfo info = installedServices.get(i);
 
-            SingleLineSummaryPreference preference =
-                    new SingleLineSummaryPreference(downloadedServicesCategory.getContext(), null);
+            RestrictedPreference preference =
+                    new RestrictedPreference(mServicesCategory.getContext());
             String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
-            Drawable icon = info.getResolveInfo().loadIcon(getPackageManager());
-            if (icon == null) {
-                // todo (saigem): add a default
-            }
-
             ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
-            String packageName = serviceInfo.packageName;
-            ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
-            String componentNameKey = componentName.flattenToString();
+            ComponentName componentName = new ComponentName(serviceInfo.packageName,
+                    serviceInfo.name);
 
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
-            preference.setIcon(icon);
             final boolean serviceEnabled = accessibilityEnabled
                     && enabledServices.contains(componentName);
-            String serviceState = serviceEnabled ?
-                    getString(R.string.accessibility_feature_state_on) :
-                    getString(R.string.accessibility_feature_state_off);
-            String serviceSummary = info.loadSummary(getPackageManager());
-            serviceSummary = (TextUtils.isEmpty(serviceSummary)) ? serviceState.toUpperCase() :
-                    serviceState.toUpperCase() + " / " + serviceSummary;
+            String serviceEnabledString;
+            if (serviceEnabled) {
+                serviceEnabledString = getString(R.string.accessibility_feature_state_on);
+            } else {
+                serviceEnabledString = getString(R.string.accessibility_feature_state_off);
+            }
 
             // Disable all accessibility services that are not permitted.
+            String packageName = serviceInfo.packageName;
             boolean serviceAllowed =
                     permittedServices == null || permittedServices.contains(packageName);
             if (!serviceAllowed && !serviceEnabled) {
                 EnforcedAdmin admin = RestrictedLockUtils.checkIfAccessibilityServiceDisallowed(
-                        getActivity(), packageName, UserHandle.myUserId());
+                        getActivity(), serviceInfo.packageName, UserHandle.myUserId());
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);
                 } else {
@@ -566,7 +521,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 preference.setEnabled(true);
             }
 
-            preference.setSummary(serviceSummary);
+            preference.setSummary(serviceEnabledString);
+
+            preference.setOrder(i);
             preference.setFragment(ToggleAccessibilityServicePreferenceFragment.class.getName());
             preference.setPersistent(true);
 
@@ -586,33 +543,26 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 extras.putString(EXTRA_SETTINGS_TITLE,
                         getString(R.string.accessibility_menu_item_settings));
                 extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
-                        new ComponentName(packageName, settingsClassName).flattenToString());
+                        new ComponentName(info.getResolveInfo().serviceInfo.packageName,
+                                settingsClassName).flattenToString());
             }
+
             extras.putParcelable(EXTRA_COMPONENT_NAME, componentName);
 
-            PreferenceCategory prefCategory = downloadedServicesCategory;
-            // Set the appropriate category if the service comes pre-installed.
-            if (mPreBundledServiceComponentToCategoryMap.containsKey(componentName)) {
-                prefCategory = mPreBundledServiceComponentToCategoryMap.get(componentName);
+            mServicesCategory.addPreference(preference);
+        }
+
+        if (mServicesCategory.getPreferenceCount() == 0) {
+            if (mNoServicesMessagePreference == null) {
+                mNoServicesMessagePreference = new Preference(getPrefContext());
+                mNoServicesMessagePreference.setPersistent(false);
+                mNoServicesMessagePreference.setLayoutResource(
+                        R.layout.text_description_preference);
+                mNoServicesMessagePreference.setSelectable(false);
+                mNoServicesMessagePreference.setSummary(
+                        getString(R.string.accessibility_no_services_installed));
             }
-            preference.setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
-            prefCategory.addPreference(preference);
-            mServicePreferenceToPreferenceCategoryMap.put(preference, prefCategory);
-        }
-
-        // If the user has not installed any additional services, hide the category.
-        if (downloadedServicesCategory.getPreferenceCount() == 0) {
-            PreferenceScreen screen = getPreferenceScreen();
-            screen.removePreference(downloadedServicesCategory);
-        }
-    }
-
-    private void initializePreBundledServicesMapFromArray(String categoryKey, int key) {
-        String[] services = getResources().getStringArray(key);
-        PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
-        for (int i = 0; i < services.length; i++) {
-            ComponentName component = ComponentName.unflattenFromString(services[i]);
-            mPreBundledServiceComponentToCategoryMap.put(component, category);
+            mServicesCategory.addPreference(mNoServicesMessagePreference);
         }
     }
 
@@ -652,7 +602,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.Secure.LONG_PRESS_TIMEOUT, mLongPressTimeoutDefault);
         String value = String.valueOf(longPressTimeout);
         mSelectLongPressTimeoutPreference.setValue(value);
-        mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValueToTitleMap.get(value));
+        mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValuetoTitleMap.get(value));
 
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
