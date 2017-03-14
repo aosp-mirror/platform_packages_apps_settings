@@ -98,6 +98,11 @@ public class StorageAsyncLoader
                     result.musicAppsSize += attributedAppSizeInBytes;
                     break;
                 default:
+                    // The deprecated game flag does not set the category.
+                    if ((app.flags & ApplicationInfo.FLAG_IS_GAME) != 0) {
+                        result.gamesSize += attributedAppSizeInBytes;
+                        break;
+                    }
                     result.otherAppsSize += attributedAppSizeInBytes;
                     break;
             }
