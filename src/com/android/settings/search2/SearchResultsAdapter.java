@@ -19,7 +19,7 @@ package com.android.settings.search2;
 import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,10 +32,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.android.settings.search2.SearchResult.TOP_RANK;
 import static com.android.settings.search2.SearchResult.BOTTOM_RANK;
+import static com.android.settings.search2.SearchResult.TOP_RANK;
 
-public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
+public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     private final List<SearchResult> mSearchResults;
     private final SearchFragment mFragment;
@@ -91,16 +91,28 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
 
     /**
      * Store the results from each of the loaders to be merged when all loaders are finished.
-     * @param freshResults are the results from the loader.
+     *
+     * @param results         the results from the loader.
      * @param loaderClassName class name of the loader.
      */
     @MainThread
-    public void addResultsToMap(List<? extends SearchResult> freshResults,
-            String loaderClassName) {
-        if (freshResults == null) {
+    public void addSearchResults(List<? extends SearchResult> results, String loaderClassName) {
+        if (results == null) {
             return;
         }
-        mResultsMap.put(loaderClassName, freshResults);
+        mResultsMap.put(loaderClassName, results);
+    }
+
+    /**
+     * Displays recent searched queries.
+     *
+     * @return The number of saved queries to display
+     */
+    public int displaySavedQuery(List<? extends SearchResult> data) {
+        clearResults();
+        mSearchResults.addAll(data);
+        notifyDataSetChanged();
+        return mSearchResults.size();
     }
 
     /**
@@ -109,7 +121,7 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
      *
      * @return Number of matched results
      */
-    public int mergeResults() {
+    public int displaySearchResults() {
         final List<? extends SearchResult> databaseResults = mResultsMap
                 .get(DatabaseResultLoader.class.getName());
         final List<? extends SearchResult> installedAppResults = mResultsMap
@@ -129,7 +141,7 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
             while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
                 results.add(installedAppResults.get(appIndex++));
             }
-            rank ++;
+            rank++;
         }
 
         while (dbIndex < dbSize) {

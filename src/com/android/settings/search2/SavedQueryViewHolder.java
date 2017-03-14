@@ -25,7 +25,7 @@ public class SavedQueryViewHolder extends SearchViewHolder {
 
     public SavedQueryViewHolder(View view) {
         super(view);
-        titleView = (TextView) view.findViewById(android.R.id.title);
+        titleView = view.findViewById(android.R.id.title);
     }
 
     @Override
