@@ -217,7 +217,11 @@ public class WifiConfigController implements TextWatcher,
 
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
         } else {
-            mConfigUi.setTitle(mAccessPoint.getSsid());
+            if (!mAccessPoint.isPasspointConfig()) {
+                mConfigUi.setTitle(mAccessPoint.getSsid());
+            } else {
+                mConfigUi.setTitle(mAccessPoint.getConfigName());
+            }
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 
@@ -258,7 +262,8 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
 
-            if ((!mAccessPoint.isSaved() && !mAccessPoint.isActive())
+            if ((!mAccessPoint.isSaved() && !mAccessPoint.isActive()
+                    && !mAccessPoint.isPasspointConfig())
                     || mMode != WifiConfigUiBase.MODE_VIEW) {
                 showSecurityFields();
                 showIpConfigFields();
@@ -326,7 +331,8 @@ public class WifiConfigController implements TextWatcher,
                     addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
-                if (mAccessPoint.isSaved() || mAccessPoint.isActive()) {
+                if (mAccessPoint.isSaved() || mAccessPoint.isActive()
+                        || mAccessPoint.isPasspointConfig()) {
                     mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }
