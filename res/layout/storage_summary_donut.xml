@@ -31,8 +31,8 @@
         android:orientation="vertical"
         android:paddingStart="@dimen/preference_no_icon_padding_start"
         android:paddingEnd="@dimen/storage_summary_padding_end"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp" >
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp" >
 
         <TextView
             android:id="@android:id/title"
@@ -53,6 +53,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:maxLines="10"
+            android:paddingBottom="20dp"
             android:textAlignment="viewStart"
             android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
