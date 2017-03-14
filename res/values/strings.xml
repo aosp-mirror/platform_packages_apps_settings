@@ -1304,10 +1304,13 @@
     <string name="device_admin_title">Device administration</string>
 
     <!-- Title of preference to manage device admins -->
-    <string name="manage_device_admin">Device administrators</string>
+    <string name="manage_device_admin">Device admin apps</string>
 
-    <!-- Summary of preference to manage device policies -->
-    <string name="manage_device_admin_summary">View or deactivate device administrators</string>
+    <!-- Summary of preference to manage device administrators, informing the user how many device administrator apps are installed and active -->
+    <plurals name="number_of_device_admins">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> active app</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> active apps</item>
+    </plurals>
 
     <!-- Title of preference to manage trust agents -->
     <string name="manage_trust_agents">Trust agents</string>
@@ -8135,13 +8138,13 @@
     <!-- Enterprise Privacy --> <skip />
 
     <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. -->
-    <string name="enterprise_privacy_settings">Device management</string>
+    <string name="enterprise_privacy_settings">Managed device details</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
-    <string name="enterprise_privacy_settings_summary">View all settings applied by your admin</string>
-    <!-- Enterprise Privacy settings activity title -->
-    <string name="enterprise_privacy_settings_title">Device management</string>
-    <!-- Enterprise Privacy settings activity footer, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_footer">To provide access to your work data, your organization may change settings and install software on your device. \n\nFor more details, contact your organization\'s admin.</string>
+    <string name="enterprise_privacy_settings_summary_generic">Changes &amp; settings managed by your organization</string>
+    <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
+    <string name="enterprise_privacy_settings_summary_with_name">Changes &amp; settings managed by <xliff:g id="organization_name" example="Foo, Inc.">%s</xliff:g></string>
+    <!-- Enterprise Privacy settings activity header, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_header">To provide access to your work data, your organization may change settings and install software on your device.\n\nFor more details, contact your organization\'s admin.</string>
     <!-- Title for the 'Types of information your organization can see' preference category. [CHAR LIMIT=60] -->
     <string name="enterprise_privacy_exposure_category">Types of information your organization can see</string>
     <!-- Title for the 'Changes made by your organization’s admin' preference category. [CHAR LIMIT=60] -->
@@ -8201,8 +8204,8 @@
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_personal">
-        <item quantity="one">Trusted CA Certificate installed in the personal profile</item>
-        <item quantity="other">Trusted CA Certificates installed in the personal profile</item>
+        <item quantity="one">Trusted CA Certificate installed in your personal profile</item>
+        <item quantity="other">Trusted CA Certificates installed in your personal profile</item>
     </plurals>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
@@ -8216,8 +8219,8 @@
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_work">
-        <item quantity="one">Trusted CA Certificate installed in the work profile</item>
-        <item quantity="other">Trusted CA Certificates installed in the work profile</item>
+        <item quantity="one">Trusted CA Certificate installed in your work profile</item>
+        <item quantity="other">Trusted CA Certificates installed in your work profile</item>
     </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>

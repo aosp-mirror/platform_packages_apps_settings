@@ -17,7 +17,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:key="enterprise_privacy_settings"
-        android:title="@string/enterprise_privacy_settings_title">
+        android:title="@string/enterprise_privacy_settings">
+
+    <!-- Header -->
+    <Preference
+            android:icon="@drawable/ic_info_outline_24dp"
+            android:summary="@string/enterprise_privacy_header"
+            android:selectable="false"/>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_category">
         <com.android.settings.DividerPreference
@@ -107,8 +113,4 @@
                 android:key="failed_password_wipe_managed_profile"
                 settings:multiLine="true"/>
     </PreferenceCategory>
-
-    <com.android.settings.widget.FooterPreference
-            android:title="@string/enterprise_privacy_footer"
-            android:selectable="false"/>
 </PreferenceScreen>

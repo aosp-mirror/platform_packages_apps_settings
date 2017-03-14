@@ -32,6 +32,11 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     }
 
     @Override
+    public @Nullable List<ComponentName> getActiveAdminsAsUser(int userId) {
+        return mDpm.getActiveAdminsAsUser(userId);
+    }
+
+    @Override
     public int getMaximumFailedPasswordsForWipe(@Nullable ComponentName admin, int userHandle) {
         return mDpm.getMaximumFailedPasswordsForWipe(admin, userHandle);
     }

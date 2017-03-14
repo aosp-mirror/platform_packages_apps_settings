@@ -39,13 +39,11 @@
 
         <Preference android:key="manage_device_admin"
                 android:title="@string/manage_device_admin"
-                android:summary="@string/manage_device_admin_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
         <Preference android:key="enterprise_privacy"
                 android:title="@string/enterprise_privacy_settings"
-                android:summary="@string/enterprise_privacy_settings_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"/>
 

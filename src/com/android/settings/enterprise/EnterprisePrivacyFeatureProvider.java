@@ -32,6 +32,13 @@ public interface EnterprisePrivacyFeatureProvider {
     boolean isInCompMode();
 
     /**
+     * Returns the name of the organization managing the device via a Device Owner app. If the device
+     * is not managed by a Device Owner app or the name of the managing organization was not set,
+     * returns {@code null}.
+     */
+    String getDeviceOwnerOrganizationName();
+
+    /**
      * Returns a message informing the user that the device is managed by a Device Owner app. The
      * message includes a Learn More link that takes the user to the enterprise privacy section of
      * Settings. If the device is not managed by a Device Owner app, returns {@code null}.
@@ -100,4 +107,10 @@ public interface EnterprisePrivacyFeatureProvider {
      * managed profile (if any).
      */
     int getNumberOfOwnerInstalledCaCertsInManagedProfile();
+
+    /**
+     * Returns the number of Device Admin apps active in the current user and the user's managed
+     * profile (if any).
+     */
+    int getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile();
 }
