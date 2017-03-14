@@ -1018,6 +1018,8 @@
     <string name="firmware_version" msgid="4801135784886859972">"Android අනුවාදය"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android ආරක්ෂණ පැච් මට්ටම"</string>
     <string name="model_info" msgid="1952009518045740889">"මාදිලිය"</string>
+    <string name="hardware_info" msgid="2605080746512527805">"මාදිලිය සහ දෘඨාංග"</string>
+    <string name="hardware_revision" msgid="8893547686367095527">"දෘඨාංග අනුවාදය"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"උපකරණ ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"පාදම් කලාප අනුවාදය"</string>
     <string name="kernel_version" msgid="9192574954196167602">"කර්නලයේ අනුවාදය"</string>
@@ -1293,6 +1295,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS යෙදුම වෙනස් කරන්නද?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"ඔබගේ SMS යෙදුම ලෙස <xliff:g id="CURRENT_APP">%2$s</xliff:g> වෙනුවට <xliff:g id="NEW_APP">%1$s</xliff:g> භාවිතා කරන්නද?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"ඔබගේ SMS යෙදුම ලෙස <xliff:g id="NEW_APP">%s</xliff:g> භාවිතා කරන්නද?"</string>
+    <string name="network_scorer_picker_title" msgid="376571247088897050">"ජාල ස්කෝරය"</string>
+    <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"කිසිවක් නැත"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Wi‑Fi සහායක වෙනස් කරන්නද?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"ඔබගේ ජාල සම්බන්ධතා කළමනාකරණය කිරීමට <xliff:g id="CURRENT_APP">%2$s</xliff:g> වෙනුවට <xliff:g id="NEW_APP">%1$s</xliff:g> භාවිතා කරන්නද?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"ඔබගේ ජාල සම්බන්ධතා කළමනාකරණය කිරීමට <xliff:g id="NEW_APP">%s</xliff:g> භාවිතා කරන්නද?"</string>
@@ -1614,7 +1618,8 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"ස්වයංක්‍රියව-විරාම ලකුණු තබන්න"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"භෞතික යතුරුපුවරු සැකසුම්"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\".\" ඇතුලත් කිරීමට Space යතුර දෙවරක් ඔබන්න"</string>
-    <string name="show_password" msgid="3001113966880559611">"මුරපද දෘශ්‍යමාන කරන්න"</string>
+    <string name="show_password" msgid="4837897357002495384">"මුරපද පෙන්වන්න"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"ඔබ ටයිප් කරන ගමන් අකුරු පොඩි වේලාවකට පෙන්වන්න"</string>
     <string name="ime_security_warning" msgid="4135828934735934248">"මෙම ආදාන ක්‍රමය මුරපද සහ ණයපත් අංක වැනි පෞද්ගලික දත්ත ඇතුළුව ඔබ ටයිප් කරන පෙළ එකතු කිරීමට හැකිය, එය <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> යෙදුමන් ලැබේ. මෙම ආදාන ක්‍රමය භාවිතා කරන්නද?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"මුරපද සහ ණයපත් අංක වැනි පෞද්ගලික දත්ත ඇතුළුව මෙම අකුරු වින්‍යාස පරීක්ෂකය ඔබට ටයිප් කරන සියලු පෙළ එකතු කිරීමට හැක. එය <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> යෙදුමෙන් එයි. මෙම අකුරු වින්‍යාස පරීක්ෂකය භාවිතා කරන්නද?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"සැකසීම්"</string>
@@ -1701,12 +1706,14 @@
     <string name="accessibility_settings_summary" msgid="6654271785747778959">"තිර කියවන, ශ්‍රව්‍ය, සංදර්ශක, අන්තර්ක්‍රියා පාලන"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"දෘශ්‍ය සැකසීම්"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"ඔබට ඔබේ අවශ්‍යතාවන්ට ගැළපෙන පරිදි මෙම උපාංගය අභිරුචිකරණය කළ හැකිය. මෙම ප්‍රවේශ්‍යතා විශේෂාංග සැකසීම්වල පසුව වෙනස් කළ හැකිය."</string>
-    <string name="accessibility_services_title" msgid="2592221829284342237">"සේවා"</string>
+    <string name="screen_reader_category_title" msgid="7739154903913400641">"තිර කියවන"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ශ්‍රව්‍ය සහ තිරය මත පෙළ"</string>
+    <string name="display_category_title" msgid="685461049938269166">"සංදර්ශකය"</string>
+    <string name="interaction_control_category_title" msgid="7836591031872839151">"අන්තර්ක්‍රියා පාලන"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"බාගත් සේවා"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"තිර කියවනය මූලික වශයෙන් අන්ධ සහ අඩු දෘශ්‍යතාව සහිත පුද්ගලයන් සඳහාය"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"හඬ නඟා කියවීමට සවන් දීම සඳහා ඔබේ තිරය මත අයිතම තට්ටු කරන්න"</string>
-    <string name="accessibility_system_title" msgid="7187919089874130484">"පද්ධතිය"</string>
-    <string name="accessibility_display_title" msgid="7610175687949675162">"සංදර්ශකය"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"සිරස්තල"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"විශාලන අභිනය"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"විශාලනය කිරීමට 3 වරක් තට්ටු කරන්න"</string>
@@ -1829,6 +1836,8 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> ක් ඉතිරියි"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> වෙත වෙනස් කරන්න"</string>
+    <string name="background_activity_title" msgid="8618384801540759730">"පසුබිම් ක්‍රියාකාරිත්වය"</string>
+    <string name="background_activity_summary" msgid="8140094430510517362">"පසුබිමේ ධාවනය කිරීමට යෙදුමට අවසර දෙන්න"</string>
     <string name="device_screen_usage" msgid="224482533839040430">"තිර භාවිතය"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"තිර පරිභෝජනය"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"ජංගම ජාල පරිලෝකනය කරමින්"</string>
@@ -2610,6 +2619,7 @@
     <string name="keywords_unification" msgid="1922900767659821025">"කාර්යාල පැතිකඩ, කළමනාකරණය කළ පැතිකඩ, ඒකාබද්ධ, ඒකාබද්ධ කිරීම, කාර්යාල, පැතිකඩ"</string>
     <string name="keywords_gesture" msgid="5696040361482126337">"ඉංගිතය"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"ගෙවීම, තට්ටු කිරීම, ගෙවීම්"</string>
+    <string name="keywords_backup" msgid="470070289135403022">"උපස්ථ, උපස්ථ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ටැගයක් ස්ථාපනය කරන්න"</string>
     <string name="write_tag" msgid="8571858602896222537">"ලියනවා"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"ලිවීමට ටැගයට තට්ටු කරන්න..."</string>
@@ -3320,6 +3330,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"ඔබේ දැනුම්දීම් පරීක්ෂා කිරීමට, ඔබේ උපාංගයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"ඉඟිතයට සහාය දක්වන්න"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
+    <!-- no translation found for assist_gesture_sensitivity_title (8424299091547331080) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"ක්‍රියාත්මකයි"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ක්‍රියාවිරහිතයි"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader දැනටමත් අගුලු හැර ඇත"</string>
@@ -3338,77 +3350,81 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ස්වයං සමමුහු. පුද්. ගිණු. දත්ත"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"ස්වයං සමමුහු. කාර්. ගිණු. දත්ත"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"ගිණුම් සමමුහුර්තය"</string>
-    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"රහස්‍යතාව"</string>
-    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"රහස්‍යතාව"</string>
-    <string name="enterprise_privacy_header" msgid="5605095630252702716">"ඔබේ කාර්යාල දත්තවලට ප්‍රවේශය සැපයීමට, ඔබේ සංවිධානය සැකසීම් වෙනස් කිරීමට සහ ඔබේ උපාංගය මත මෘදුකාංග ස්ථාපනය කිරීමට හැකිය, එය ඔබේ සමහර පුද්ගලික දත්ත ඔබේ පරිපාලකට දෘශ්‍යමාන කළ හැකිය. වැඩි විස්තර සඳහා ඔබේ සංවිධානයේ පරිපාලක අමතන්න."</string>
-    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"ඔබේ සංවිධානයට බැලිය හැක්කේ කුමන ආකාරවල තොරතුරුද?"</string>
-    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"ඔබේ සංවිධානයට බැලිය හැකි දේ ගැන බලපාන වෙනස් කිරීම් මොනවාද?"</string>
-    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"මෙම උපාංගය වෙත ඔබේ ප්‍රවේශය කෙරෙහි බලපෑමට හැකි ක්‍රියා මොනවාද?"</string>
+    <string name="enterprise_privacy_settings" msgid="6858635744375208603">"උපාංග කළමනාකරණය"</string>
+    <string name="enterprise_privacy_settings_summary" msgid="7747966656794398109">"ඔබගේ පරිපාලක විසින් යොදා ඇති සියලු සැකසීම් බලන්න"</string>
+    <string name="enterprise_privacy_settings_title" msgid="4256061862530939767">"උපාංග කළමනාකරණය"</string>
+    <string name="enterprise_privacy_footer" msgid="7832358498590676058">"ඔබේ කාර්යාල දත්තවලට ප්‍රවේශය සැපයීමට, ඔබේ සංවිධානය සැකසීම් වෙනස් කිරීමට සහ ඔබේ උපාංගය මත මෘදුකාංග ස්ථාපනය කිරීමට හැකිය.\n\nවැඩි විස්තර සඳහා ඔබේ සංවිධානයේ පරිපාලක අමතන්න."</string>
+    <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"ඔබේ සංවිධානයට බැලිය හැකි තොරතුරු වර්ග"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"ඔබගේ සංවිධානයේ පරිපාලක විසින් කරන ලද වෙනස්කම්"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"මෙම උපාංගයට ඔබගේ ප්‍රවේශය"</string>
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"ඊ-තැපැල් සහ දින දර්ශනය වැනි, ඔබේ කාර්යාල ගිණුම හා සම්බන්ධ දත්ත"</string>
-    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"ඔබගේ උපාංගය මත සියලු යෙදුම් ලැයිස්තුව"</string>
-    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
-      <item quantity="one">ඔබේ උපාංගයෙහි සියලු යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>හි ලැයිස්තුව</item>
-      <item quantity="other">ඔබේ උපාංගයෙහි සියලු යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>හි ලැයිස්තුව</item>
+    <string name="enterprise_privacy_installed_packages" msgid="2313698828178764590">"ඔබගේ උපාංගයේ ඇති යෙදුම් වල ලැයිස්තුව"</string>
+    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="2765037387436064893">
+      <item quantity="one">යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක්</item>
+      <item quantity="other">යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක්</item>
     </plurals>
-    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"ඔබගේ උපාංගය මත එක් එක් යෙදුමෙහි භාවිතය (ගත කළ කාලය සහ භාවිත කළ දත්ත ප්‍රමාණය)"</string>
-    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"ඔබගේ උපාංගය මත තදබදය ගැන ලොග"</string>
-    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"ඔබේ වඩාත්ම මෑත දෝෂ වාර්තාව"</string>
-    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"ඔබේ වඩාත්ම මෑත ආරක්ෂක ලොගය"</string>
-    <string name="enterprise_privacy_never" msgid="1304035596746436921">"කවදාවත් නෑ"</string>
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages" formatted="false" msgid="6167929812245127890">
-      <item quantity="one">ඔබගේ පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක් ස්ථාපන‍ය කර ඇත</item>
-      <item quantity="other">ඔබගේ පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක් ස්ථාපන‍ය කර ඇත</item>
+    <plurals name="enterprise_privacy_number_packages_actionable" formatted="false" msgid="3351021029919034993">
+      <item quantity="one">යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක්. බැලීමට තට්ටු කරන්න.</item>
+      <item quantity="other">යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක්. බැලීමට තට්ටු කරන්න.</item>
     </plurals>
-    <plurals name="enterprise_privacy_number_location_access_packages" formatted="false" msgid="2063855792932186160">
-      <item quantity="one">පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>කට ඔබේ ස්ථානය වෙත ප්‍රවේශය ඉඩ දී ඇත</item>
-      <item quantity="other">පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>කට ඔබේ ස්ථානය වෙත ප්‍රවේශය ඉඩ දී ඇත</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_microphone_access_packages" formatted="false" msgid="8539289058651013237">
-      <item quantity="one">පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>කට ඔබේ මයික්‍රෆෝනය වෙත ප්‍රවේශය ඉඩ දී ඇත</item>
-      <item quantity="other">පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>කට ඔබේ මයික්‍රෆෝනය වෙත ප්‍රවේශය ඉඩ දී ඇත</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_camera_access_packages" formatted="false" msgid="8289040803304039501">
-      <item quantity="one">පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>කට ඔබේ කැමරාව වෙත ප්‍රවේශය ඉඩ දී ඇත</item>
-      <item quantity="other">පරිපාලක විසින් යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>කට ඔබේ කැමරාව වෙත ප්‍රවේශය ඉඩ දී ඇත</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps" formatted="false" msgid="271160181904414484">
-      <item quantity="one">ඔබේ පරිපාලක විසින් පෙරනිමි යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක් සකසා ඇත</item>
-      <item quantity="other">ඔබේ පරිපාලක විසින් පෙරනිමි යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g>ක් සකසා ඇත</item>
-    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="6257434796480671245">"ඔබගේ උපාංග මත එක් එක් යෙදුමෙහි ගත කළ කාලය සහ දත්ත"</string>
+    <string name="enterprise_privacy_network_logs" msgid="6594098950963377666">"ඔබගේ උපාංගය මත ජාල තදබදය ගැන ලොග"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="843225086779037863">"වඩාත්ම මෑත දෝෂ වාර්තාව"</string>
+    <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"වඩාත්ම මෑත ආරක්ෂක ලොගය"</string>
+    <string name="enterprise_privacy_none" msgid="7706621148858381189">"කිසිවක් නැත"</string>
+    <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"ස්ථාපනය කළ යෙදුම්"</string>
+    <string name="enterprise_privacy_location_access" msgid="943112505930395028">"ඔබගේ ස්ථානය ප්‍රවේශ කිරීමට අවසර ඇති යෙදුම්"</string>
+    <string name="enterprise_privacy_microphone_access" msgid="1101307566418116040">"ඔබගේ මයික්‍රෝෆෝනය ප්‍රවේශ කිරීමට අවසර ඇති යෙදුම්"</string>
+    <string name="enterprise_privacy_camera_access" msgid="97095968133740652">"ඔබගේ කැමරාව ප්‍රවේශ කිරීමට අවසර ඇති යෙදුම්"</string>
+    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3292470316317639698">"පෙරනිමි යෙදුම් සකසා ඇත"</string>
+    <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"පෙරනිමි යතුරු පුවරුව"</string>
+    <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> වෙත සකසන්න"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"සැම විට ක්‍රියාත්මක VPN ක්‍රියාත්මකයි"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"ඔබේ පුද්ගලික පැතිකඩ මත සැම විට ක්‍රියාත්මක VPN ක්‍රියාත්මකයි"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"ඔබේ කාර්යාල පැතිකඩ මත සැම විට ක්‍රියාත්මක VPN ක්‍රියාත්මකයි"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"ගෝලීය HTTP ප්‍රොක්සි සකසන ලදී"</string>
-    <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"පරිපාලකට උපාංගය අගුලු දැමීමට සහ මුරපදය යළි සැකසීමට හැකිය"</string>
+    <plurals name="enterprise_privacy_ca_certs_user" formatted="false" msgid="2353089666351669619">
+      <item quantity="one">විශ්වසනීය CA සහතික ස්ථාපනය කරන ලදි</item>
+      <item quantity="other">විශ්වසනීය CA සහතික ස්ථාපනය කරන ලදි</item>
+    </plurals>
+    <plurals name="enterprise_privacy_ca_certs_personal" formatted="false" msgid="7437886817297309222">
+      <item quantity="one">පුද්ගලික පැතිකඩ තුළ විශ්වසනීය CA සහතික ස්ථාපනය කරන ලදි</item>
+      <item quantity="other">පුද්ගලික පැතිකඩ තුළ විශ්වසනීය CA සහතික ස්ථාපනය කරන ලදි</item>
+    </plurals>
+    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="5907058613578926277">
+      <item quantity="one">සහතික <xliff:g id="COUNT_1">%d</xliff:g>ක්</item>
+      <item quantity="other">සහතික <xliff:g id="COUNT_1">%d</xliff:g>ක්</item>
+    </plurals>
+    <plurals name="enterprise_privacy_number_ca_certs_actionable" formatted="false" msgid="7939443347696810129">
+      <item quantity="one">සහතික <xliff:g id="COUNT_1">%d</xliff:g>ක්. බැලීමට තට්ටු කරන්න.</item>
+      <item quantity="other">සහතික <xliff:g id="COUNT_1">%d</xliff:g>ක්. බැලීමට තට්ටු කරන්න.</item>
+    </plurals>
+    <plurals name="enterprise_privacy_ca_certs_work" formatted="false" msgid="2032113890560053206">
+      <item quantity="one">කාර්යාල පැතිකඩ තුළ විශ්වසනීය CA සහතික ස්ථාපනය කරන ලදි</item>
+      <item quantity="other">කාර්යාල පැතිකඩ තුළ විශ්වසනීය CA සහතික ස්ථාපනය කරන ලදි</item>
+    </plurals>
+    <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"පරිපාලකට උපාංගය අගුලු දැමීමට සහ මුරපදය යළි සැකසීමට හැකිය"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"පරිපාලකට සියලු උපාංග දත්ත මැකීමට හැකිය"</string>
-    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
-      <item quantity="one">සියලුම උපාංග දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
-      <item quantity="other">සියලුම උපාංග දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
+    <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"සියලු උපාංග දත්ත මකාදැමීමට පෙර අසාර්ථක මුරපද උත්සහ"</string>
+    <string name="enterprise_privacy_failed_password_wipe_work" msgid="4040565826652951057">"කාර්යාල පැතිකඩ දත්ත මකාදැමීමට පෙර අසාර්ථක මුරපද උත්සහ"</string>
+    <plurals name="enterprise_privacy_number_failed_password_wipe" formatted="false" msgid="5279099270351036696">
+      <item quantity="one">උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක්</item>
+      <item quantity="other">උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක්</item>
     </plurals>
-    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
-      <item quantity="one">කාර්යාල පැතිකඩ දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
-      <item quantity="other">කාර්යාල පැතිකඩ දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
-    </plurals>
-    <string name="do_disclosure_generic" msgid="5666469247267523806">"මෙම උපාංගය කළමනාකරණය කෙරේ."</string>
+    <string name="do_disclosure_generic" msgid="8653670456990823307">"මෙම උපාංගය ඔබගේ සංවිධානය විසින් කළමනාකරණය කරනු ලැබේ."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"මෙම උපාංගය <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> මගින් කළමනාකරණය කෙරේ"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"තව දැන ගන්න"</string>
-    <!-- no translation found for storage_photos_videos (319854636702241898) -->
-    <skip />
-    <!-- no translation found for storage_music_audio (789779084825206838) -->
-    <skip />
+    <string name="storage_photos_videos" msgid="319854636702241898">"ඡායාරූප සහ වීඩියෝ"</string>
+    <string name="storage_music_audio" msgid="789779084825206838">"සංගීතය සහ ශ්‍රව්‍ය"</string>
     <string name="storage_games" msgid="7703159201697117621">"ක්‍රීඩා"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"වෙනත් යෙදුම්"</string>
     <string name="storage_files" msgid="8581083146777364063">"ගොනු"</string>
-    <string name="storage_settings_2" msgid="6369810699930056554">"දුරකථන ගබඞාව"</string>
+    <!-- no translation found for storage_settings_2 (4306047711760327031) -->
+    <skip />
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_free" msgid="8829609507318832879">"<xliff:g id="TOTAL">%1$s</xliff:g> නිදහස්ය"</string>
     <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g>%%"</string>
-    <string name="storage_manager_indicator" msgid="1516810749625915020">"ගබඩා කළමනාකරු: <xliff:g id="STATUS">^1</xliff:g>"</string>
-    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ක්‍රියාවිරහිතයි"</string>
-    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ක්‍රියාත්මකයි"</string>
-    <!-- no translation found for install_type_instant (3174425974536078647) -->
-    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"ක්‍රීඩා"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"ශ්‍රව්‍ය ගොනු"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g> පරිශීලක සඳහා අස්ථාපනය කෙරිණි)"</string>
@@ -3418,4 +3434,8 @@
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ඔබේ ස්වයං පිරවුම් යෙදුම බවට පත් කරන්නද? <xliff:g id="APP_NAME_1">%1$s</xliff:g> හට ඔබේ තිරය කියවීමට සහ වෙනත් යෙදුම්වල ක්ෂේත්‍ර පිරවීමට හැකි වනු ඇත."</string>
     <string name="device_theme" msgid="4571803018917608588">"උපාංග තේමාව"</string>
     <string name="default_theme" msgid="7085644992078579076">"පෙරනිමි"</string>
+    <string name="storage_manager_indicator" msgid="1516810749625915020">"ගබඩා කළමනාකරු: <xliff:g id="STATUS">^1</xliff:g>"</string>
+    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ක්‍රියාවිරහිතයි"</string>
+    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ක්‍රියාත්මකයි"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"ක්ෂණික යෙදුම"</string>
 </resources>

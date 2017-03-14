@@ -1038,6 +1038,8 @@
     <string name="firmware_version" msgid="4801135784886859972">"„Android“ versija"</string>
     <string name="security_patch" msgid="8438384045870296634">"„Android“ saugos pataisos lygis"</string>
     <string name="model_info" msgid="1952009518045740889">"Modelis"</string>
+    <string name="hardware_info" msgid="2605080746512527805">"Modelis ir aparatinė įranga"</string>
+    <string name="hardware_revision" msgid="8893547686367095527">"Aparatinės įrangos versija"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Įrangos ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Nemoduliuojamo perdavimo versija"</string>
     <string name="kernel_version" msgid="9192574954196167602">"„Kernel“ versija"</string>
@@ -1313,6 +1315,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Pakeisti SMS programą?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Naudoti „<xliff:g id="NEW_APP">%1$s</xliff:g>“ kaip SMS programą vietoj „<xliff:g id="CURRENT_APP">%2$s</xliff:g>“?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Naudoti „<xliff:g id="NEW_APP">%s</xliff:g>“ kaip SMS programą?"</string>
+    <string name="network_scorer_picker_title" msgid="376571247088897050">"Tinklo įvertinimo priemonė"</string>
+    <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"Nėra"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Pakeisti „Wi-Fi“ pagelbiklį?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Naudoti <xliff:g id="NEW_APP">%1$s</xliff:g> vietoje <xliff:g id="CURRENT_APP">%2$s</xliff:g> tinklo ryšiams tvarkyti?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Naudoti <xliff:g id="NEW_APP">%s</xliff:g> tinklo ryšiams tvarkyti?"</string>
@@ -1636,7 +1640,8 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"Automatiškai dėti skyrybos ženklus"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Fiziniai klaviatūros nustatymai"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Du kartus paspauskite tarpo klavišą, kad įterptumėte „.“"</string>
-    <string name="show_password" msgid="3001113966880559611">"Padaryti slaptažodžius matomus"</string>
+    <string name="show_password" msgid="4837897357002495384">"Rodyti slaptažodžius"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"Trumpai rodyti simbolius vedant tekstą"</string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Naudojant šį įvesties metodą galima rinkti visą įvedamą tekstą, įskaitant asmeninius duomenis, pvz., slaptažodžius ir kredito kortelių numerius. Jis pateikiamas naudojant programą „<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>“. Naudoti šį įvesties metodą?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Naudojant šią rašybos tikrinimo programą galima rinkti visą įvedamą tekstą, įskaitant asmeninius duomenis, pvz., slaptažodžius ir kredito kortelių numerius. Ji pateikiama naudojant programą „<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>“. Naudoti šią rašybos tikrinimo programą?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Nustatymai"</string>
@@ -1723,12 +1728,14 @@
     <string name="accessibility_settings_summary" msgid="6654271785747778959">"Ekrano skaitytuvai, garso, vaizdo, sąveikos valdikliai"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Regėjimo nustatymai"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Galite tinkinti šį įrenginį pagal savo poreikius. Vėliau šias pritaikymo neįgaliesiems funkcijas galite pakeisti nustatymuose."</string>
-    <string name="accessibility_services_title" msgid="2592221829284342237">"Paslaugos"</string>
+    <string name="screen_reader_category_title" msgid="7739154903913400641">"Ekrano skaitytuvai"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Garsas ir tekstas ekrane"</string>
+    <string name="display_category_title" msgid="685461049938269166">"Ekranas"</string>
+    <string name="interaction_control_category_title" msgid="7836591031872839151">"Sąveikos valdikliai"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Atsisiųstos paslaugos"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Ekrano skaitytuvas pirmiausia skirtas akliems ar regos sutrikimų turintiems žmonėms"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"Palieskite elementus ekrane, kad jie būtų skaitomi balsu"</string>
-    <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
-    <string name="accessibility_display_title" msgid="7610175687949675162">"Ekranas"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtitrai"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Didinimo gestas"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Palieskite 3 kartus, kad keistumėte mastelį."</string>
@@ -1863,6 +1870,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Liko: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Liko įkrauti: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
+    <!-- no translation found for background_activity_title (8618384801540759730) -->
+    <skip />
+    <!-- no translation found for background_activity_summary (8140094430510517362) -->
+    <skip />
     <string name="device_screen_usage" msgid="224482533839040430">"Ekrano naudojimas"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Ekrano suvartojama energija"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Mobiliojo ryšio tinklo nuskaitymas"</string>
@@ -2654,6 +2665,7 @@
     <string name="keywords_unification" msgid="1922900767659821025">"darbo profilis, tvarkomas profilis, suvienodinti, suvienodinimas, darbas, profilis"</string>
     <string name="keywords_gesture" msgid="5696040361482126337">"gestas"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"mokėti, paliesti, mokėjimai"</string>
+    <string name="keywords_backup" msgid="470070289135403022">"atsarginė kopija, kurti atsarginę kopiją"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nustatyti „Wi-Fi“ ALR žymą"</string>
     <string name="write_tag" msgid="8571858602896222537">"Rašyti"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Palieskite žymą, kad galėtumėte rašyti..."</string>
@@ -3392,6 +3404,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Jei norite patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu įrenginio užpakalinėje dalyje."</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Pagalbinis gestas"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
+    <!-- no translation found for assist_gesture_sensitivity_title (8424299091547331080) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"Įjungta"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Išjungta"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Paleidyklė jau atrakinta"</string>
@@ -3410,93 +3424,81 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"Aut. sinchr. asm. pask. duom."</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"Aut. sinchr. darbo pask. duom."</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Paskyros sinchronizavimas"</string>
-    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Privatumas"</string>
-    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Privatumas"</string>
-    <string name="enterprise_privacy_header" msgid="5605095630252702716">"Norėdama suteikti prieigą prie jūsų darbo duomenų, organizacija gali pakeisti nustatymus ir įdiegti programinę įrangą jūsų įrenginyje, todėl administratorius gali matyti kai kurį asmeninį turinį. Jei reikia daugiau išsamios informacijos, susisiekite su organizacijos administratoriumi."</string>
-    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"Kokio tipo informaciją organizacija gali matyti?"</string>
-    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"Kokie pakeit. turi įtakos tam, ką organizacija gali matyti?"</string>
-    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"Kokie veiksmai gali paveikti prieigą prie šio įrenginio?"</string>
+    <!-- no translation found for enterprise_privacy_settings (6858635744375208603) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_summary (7747966656794398109) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_title (4256061862530939767) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_footer (7832358498590676058) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_category (7313392680107938517) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_changes_category (9079283547182933771) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_device_access_category (5423434164248819058) -->
+    <skip />
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Su darbo paskyra susiję duomenys, pvz., el. pašto ir kalendoriaus"</string>
-    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Visų įrenginyje esančių programų sąrašas"</string>
-    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
-      <item quantity="one">Visų įrenginyje esančių programų (<xliff:g id="COUNT_1">%d</xliff:g>) sąrašas</item>
-      <item quantity="few">Visų įrenginyje esančių programų (<xliff:g id="COUNT_1">%d</xliff:g>) sąrašas</item>
-      <item quantity="many">Visų įrenginyje esančių programų (<xliff:g id="COUNT_1">%d</xliff:g>) sąrašas</item>
-      <item quantity="other">Visų įrenginyje esančių programų (<xliff:g id="COUNT_1">%d</xliff:g>) sąrašas</item>
-    </plurals>
-    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Kiekvienos įrenginyje esančios programos naudojimas (praleistas laikas ir sunaudotų duomenų kiekis)"</string>
-    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Srauto žurnalai jūsų įrenginyje"</string>
-    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"Pats naujausias pranešimas apie riktą"</string>
-    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Pats naujausias saugos žurnalas"</string>
-    <string name="enterprise_privacy_never" msgid="1304035596746436921">"Niekada"</string>
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages" formatted="false" msgid="6167929812245127890">
-      <item quantity="one">Jūsų administratorius įdiegė <xliff:g id="COUNT_1">%d</xliff:g> programą</item>
-      <item quantity="few">Jūsų administratorius įdiegė <xliff:g id="COUNT_1">%d</xliff:g> programas</item>
-      <item quantity="many">Jūsų administratorius įdiegė <xliff:g id="COUNT_1">%d</xliff:g> programos</item>
-      <item quantity="other">Jūsų administratorius įdiegė <xliff:g id="COUNT_1">%d</xliff:g> programų</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_location_access_packages" formatted="false" msgid="2063855792932186160">
-      <item quantity="one">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programai pasiekti jūsų vietovę</item>
-      <item quantity="few">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programoms pasiekti jūsų vietovę</item>
-      <item quantity="many">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programos pasiekti jūsų vietovę</item>
-      <item quantity="other">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programų pasiekti jūsų vietovę</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_microphone_access_packages" formatted="false" msgid="8539289058651013237">
-      <item quantity="one">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programai pasiekti jūsų mikrofoną</item>
-      <item quantity="few">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programoms pasiekti jūsų mikrofoną</item>
-      <item quantity="many">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programos pasiekti jūsų mikrofoną</item>
-      <item quantity="other">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programų pasiekti jūsų mikrofoną</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_camera_access_packages" formatted="false" msgid="8289040803304039501">
-      <item quantity="one">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programai pasiekti jūsų fotoaparatą</item>
-      <item quantity="few">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programoms pasiekti jūsų fotoaparatą</item>
-      <item quantity="many">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programos pasiekti jūsų fotoaparatą</item>
-      <item quantity="other">Jūsų administratorius leido <xliff:g id="COUNT_1">%d</xliff:g> programų pasiekti jūsų fotoaparatą</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps" formatted="false" msgid="271160181904414484">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> administratoriaus nustatyta numatytoji programa</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> administratoriaus nustatytos numatytosios programos</item>
-      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> administratoriaus nustatytos numatytosios programos</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> administratoriaus nustatytų numatytųjų programų</item>
-    </plurals>
+    <!-- no translation found for enterprise_privacy_installed_packages (2313698828178764590) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_packages (2765037387436064893) -->
+    <!-- no translation found for enterprise_privacy_number_packages_actionable (3351021029919034993) -->
+    <!-- no translation found for enterprise_privacy_usage_stats (6257434796480671245) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_network_logs (6594098950963377666) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_bug_reports (843225086779037863) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_security_logs (5377362481617301074) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_none (7706621148858381189) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_installed_packages (6353757812144878828) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_location_access (943112505930395028) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (1101307566418116040) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (97095968133740652) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3292470316317639698) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method (6531350246850814920) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method_name (4941106433683067953) -->
+    <skip />
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"Visada įjungto VPN funkcija įjungta"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Visada įjungto VPN funkcija įjungta jūsų asmeniniame profilyje"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Visada įjungto VPN funkcija įjungta jūsų darbo profilyje"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Nustatytas visuotinis HTTP tarpinis serveris"</string>
-    <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"Administratorius gali užrakinti įrenginį ir iš naujo nustatyti slaptažodį"</string>
+    <!-- no translation found for enterprise_privacy_ca_certs_user (2353089666351669619) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_personal (7437886817297309222) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs (5907058613578926277) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (7939443347696810129) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_work (2032113890560053206) -->
+    <!-- no translation found for enterprise_privacy_lock_device (8791656477097208540) -->
+    <skip />
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"Administratorius gali ištrinti visus įrenginio duomenis"</string>
-    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
-      <item quantity="one">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui visi įrenginio duomenys bus ištrinti</item>
-      <item quantity="few">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui visi įrenginio duomenys bus ištrinti</item>
-      <item quantity="many">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui visi įrenginio duomenys bus ištrinti</item>
-      <item quantity="other">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui visi įrenginio duomenys bus ištrinti</item>
-    </plurals>
-    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
-      <item quantity="one">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui darbo profilio duomenys bus ištrinti</item>
-      <item quantity="few">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui darbo profilio duomenys bus ištrinti</item>
-      <item quantity="many">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui darbo profilio duomenys bus ištrinti</item>
-      <item quantity="other">Administratorius nustatė didžiausią leistiną bandymų įvesti slaptažodį skaičių – <xliff:g id="COUNT_1">%d</xliff:g>. Paskui darbo profilio duomenys bus ištrinti</item>
-    </plurals>
-    <string name="do_disclosure_generic" msgid="5666469247267523806">"Šis įrenginys tvarkomas."</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (1001255609345002878) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4040565826652951057) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_failed_password_wipe (5279099270351036696) -->
+    <!-- no translation found for do_disclosure_generic (8653670456990823307) -->
+    <skip />
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Šį įrenginį tvarko „<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>“."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"Sužinoti daugiau"</string>
-    <!-- no translation found for storage_photos_videos (319854636702241898) -->
-    <skip />
-    <!-- no translation found for storage_music_audio (789779084825206838) -->
-    <skip />
+    <string name="storage_photos_videos" msgid="319854636702241898">"Nuotraukos ir vaizdo įrašai"</string>
+    <string name="storage_music_audio" msgid="789779084825206838">"Muzika ir garso įrašai"</string>
     <string name="storage_games" msgid="7703159201697117621">"Žaidimai"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Kitos programos"</string>
     <string name="storage_files" msgid="8581083146777364063">"Failai"</string>
-    <string name="storage_settings_2" msgid="6369810699930056554">"Telefono saugykla"</string>
+    <!-- no translation found for storage_settings_2 (4306047711760327031) -->
+    <skip />
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_free" msgid="8829609507318832879">"<xliff:g id="TOTAL">%1$s</xliff:g> nemokamai"</string>
     <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g> %%"</string>
-    <string name="storage_manager_indicator" msgid="1516810749625915020">"Saugyklos tvarkytuvė: <xliff:g id="STATUS">^1</xliff:g>"</string>
-    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Išjungta"</string>
-    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Įjungta"</string>
-    <!-- no translation found for install_type_instant (3174425974536078647) -->
-    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"Žaidimai"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Garso failai"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(pašalinta naudotojui <xliff:g id="USER">%s</xliff:g>)"</string>
@@ -3506,4 +3508,8 @@
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"Nustatyti „<xliff:g id="APP_NAME_0">%1$s</xliff:g>“ kaip automatinio pildymo programą? „<xliff:g id="APP_NAME_1">%1$s</xliff:g>“ galės skaityti ekrane pateikiamą informaciją ir užpildyti laukus kitose programose."</string>
     <string name="device_theme" msgid="4571803018917608588">"Įrenginio tema"</string>
     <string name="default_theme" msgid="7085644992078579076">"Numatytoji"</string>
+    <string name="storage_manager_indicator" msgid="1516810749625915020">"Saugyklos tvarkytuvė: <xliff:g id="STATUS">^1</xliff:g>"</string>
+    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Išjungta"</string>
+    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Įjungta"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"Akimirksniu įkeliama programėlė"</string>
 </resources>

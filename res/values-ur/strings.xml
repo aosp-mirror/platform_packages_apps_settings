@@ -1018,6 +1018,8 @@
     <string name="firmware_version" msgid="4801135784886859972">"‏Android ورژن"</string>
     <string name="security_patch" msgid="8438384045870296634">"‏Android سیکیورٹی پیچ کی سطح"</string>
     <string name="model_info" msgid="1952009518045740889">"ماڈل"</string>
+    <string name="hardware_info" msgid="2605080746512527805">"ماڈل اور ہارڈ ویئر"</string>
+    <string name="hardware_revision" msgid="8893547686367095527">"ہارڈ ویئر کا ورژن"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"‏آلہ ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"بیس بینڈ ورژن"</string>
     <string name="kernel_version" msgid="9192574954196167602">"کرنل ورژن"</string>
@@ -1293,6 +1295,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"‏SMS ایپ تبدیل کریں؟"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"‏اپنے SMS ایپ بطور <xliff:g id="CURRENT_APP">%2$s</xliff:g> کے بجائے <xliff:g id="NEW_APP">%1$s</xliff:g> کو استعمال کریں؟"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"‏<xliff:g id="NEW_APP">%s</xliff:g> کو اپنے SMS ایپ کے بطور استعمال کریں؟"</string>
+    <string name="network_scorer_picker_title" msgid="376571247088897050">"نیٹ ورک اسکورر"</string>
+    <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"کوئی نہیں"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"‏Wi‑Fi اسسٹنٹ تبدیل کریں؟"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"اپنے نیٹ ورک کنکشنز کا نظم کرنے کیلئے <xliff:g id="CURRENT_APP">%2$s</xliff:g> کے بجائے <xliff:g id="NEW_APP">%1$s</xliff:g> کا استعمال کریں؟"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"اپنے نیٹ ورک کنکشنز کا نظم کرنے کیلئے <xliff:g id="NEW_APP">%s</xliff:g> کا استعمال کریں؟"</string>
@@ -1614,7 +1618,8 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"خود کار طور پر رموز اوقاف لگائیں"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"فزیکل کی بورڈ کی ترتیبات"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\".\" کو داخل کرنے کیلئے اسپیس کلید کو دو بار دبائیں"</string>
-    <string name="show_password" msgid="3001113966880559611">"پاس ورڈز کو مرئی بنائیں"</string>
+    <string name="show_password" msgid="4837897357002495384">"پاس ورڈ دکھائیں"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"آپ کے ٹائپ کرتے وقت حروف کو اختصار کے ساتھ ڈسپلے کریں"</string>
     <string name="ime_security_warning" msgid="4135828934735934248">"اندراج کا یہ طریقہ آپ کے ٹائپ کردہ سبھی متن کو جمع کر سکتا ہے، بشمول ذاتی ڈیٹا جیسے پاس ورڈز اور کریڈٹ کارڈ نمبرز۔ یہ <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> ایپ سے آتا ہے۔ اندراج کا یہ طریقہ استعمال کریں؟"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"یہ سپیل چیکر آپ کے ذریعے ٹائپ کردہ سبھی متن کو جمع کر سکتا ہے، بشمول ذاتی ڈیٹا جیسے پاس ورڈز اور کریڈٹ کارڈ نمبرز۔ یہ <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> ایپ سے آتا ہے۔ یہ سپیل چیکر استعمال کریں؟"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"ترتیبات"</string>
@@ -1701,12 +1706,14 @@
     <string name="accessibility_settings_summary" msgid="6654271785747778959">"اسکرین قارئین، آڈیو، ڈسپلے، تعامل کنٹرولز"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"بصارتی ترتیبات"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"آپ اس آلہ کو اپنی ضروریات کے مطابق حسب ضرورت بنا سکتے ہیں۔ یہ ایکسیسبیلٹی خصوصیات بعد میں ترتیبات میں تبدیل ہو سکتی ہیں۔"</string>
-    <string name="accessibility_services_title" msgid="2592221829284342237">"سروسز"</string>
+    <string name="screen_reader_category_title" msgid="7739154903913400641">"قارئین اسکرین"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"آڈیو اور اسکرین پر موجود ٹیکسٹ"</string>
+    <string name="display_category_title" msgid="685461049938269166">"ڈسپلے"</string>
+    <string name="interaction_control_category_title" msgid="7836591031872839151">"تعامل کنٹرولز"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"ڈاؤن لوڈ شدہ سروسز"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"سکرین قاری بنیادی طور پر اندھے پن اور کم بصارت والے لوگوں کیلئے ہے"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"آئٹمز کو بہ آواز بلند پڑھتے ہوئے سننے کیلئے اپنی اسکرین پر ان آئٹمز کو تھپتھپائیں"</string>
-    <string name="accessibility_system_title" msgid="7187919089874130484">"سسٹم"</string>
-    <string name="accessibility_display_title" msgid="7610175687949675162">"ڈسپلے"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"کیپشنز"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"میگنیفکیشن اشارے"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"زوم کرنے کیلئے 3 بار تھپتھپائیں"</string>
@@ -1829,6 +1836,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> باقی"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> چارج کرنے کیلئے"</string>
+    <!-- no translation found for background_activity_title (8618384801540759730) -->
+    <skip />
+    <!-- no translation found for background_activity_summary (8140094430510517362) -->
+    <skip />
     <string name="device_screen_usage" msgid="224482533839040430">"اسکرین کا استعمال"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"اسکرین کی کھپت"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"موبائل نیٹ ورک اسکیننگ"</string>
@@ -2608,6 +2619,7 @@
     <string name="keywords_unification" msgid="1922900767659821025">"دفتری پروفائل، منظم پروفائل، یکجا کریں، یکجا کرنا، کام، پروفائل"</string>
     <string name="keywords_gesture" msgid="5696040361482126337">"اشارہ"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"ادائیگی کریں، تھپتھپائیں، ادائیگیاں"</string>
+    <string name="keywords_backup" msgid="470070289135403022">"بیک اپ، بیک اپ لیں"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏Wi-Fi NFC ٹیگ ترتیب دیں"</string>
     <string name="write_tag" msgid="8571858602896222537">"تحریر کریں"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"لکھنے کیلئے ایک ٹیگ کو تھپتھپائیں…"</string>
@@ -3318,6 +3330,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"اپنی اطلاعات چیک کرنے کیلئے اپنے آلہ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"معاونت کا اشارہ"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
+    <!-- no translation found for assist_gesture_sensitivity_title (8424299091547331080) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"آن"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"آف"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"بوٹ لوڈر پہلے سے غیر مقفل ہے"</string>
@@ -3336,77 +3350,81 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ذاتی اکاؤنٹ ڈیٹا کو خودکار مطابقت پذیر بنائیں"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"دفتری اکاؤنٹ ڈیٹا کو خودکار مطابقت پذیر بنائیں"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"اکاؤنٹ کی مطابقت پذیری"</string>
-    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"رازداری"</string>
-    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"رازداری"</string>
-    <string name="enterprise_privacy_header" msgid="5605095630252702716">"آپ کے دفتری ڈیٹا تک رسائی مہیا کرنے کیلئے، آپ کی تنظیم ہو سکتا ہے ترتیبات تبدیل کرے اور آپ کے آلہ پر سافٹ وئیر انسٹال کرے، جس سے آپ کے ذاتی مواد میں سے کچھ آپ کے منتظم کیلئے مرئی ہو سکتا ہے۔ مزید تفصیلات کیلئے اپنی تنظیم کے منتظم سے رابطہ کریں۔"</string>
-    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"آپ کی تنظیم کن اقسام کی معلومات دیکھ سکتی ہے؟"</string>
-    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"آپ کی تنظیم کیا دیکھ سکتی ہے اس پر کون سی تبدیلیاں اثر انداز ہو سکتی ہیں؟"</string>
-    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"اس آلہ تک آپ کی رسائی پر کون سی کاروائیاں اثر انداز ہو سکتی ہیں؟"</string>
+    <!-- no translation found for enterprise_privacy_settings (6858635744375208603) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_summary (7747966656794398109) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_title (4256061862530939767) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_footer (7832358498590676058) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_category (7313392680107938517) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_exposure_changes_category (9079283547182933771) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_device_access_category (5423434164248819058) -->
+    <skip />
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"آپ کے دفتری اکاؤنٹ سے وابستہ ڈیٹا، جیسے ای میل اور کیلنڈر"</string>
-    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"آپ کے آلہ پر موجود تمام ایپس کی فہرست"</string>
-    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
-      <item quantity="other">آپ کے آلہ پر موجود تمام <xliff:g id="COUNT_1">%d</xliff:g> ایپس کی فہرست</item>
-      <item quantity="one">آپ کے آلہ پر موجود تمام <xliff:g id="COUNT_0">%d</xliff:g> ایپ کی فہرست</item>
-    </plurals>
-    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"آپ کے آلہ پر موجود ہر ایپ کا استعمال (صرف شدہ وقت اور استعمال کردہ ڈیٹا کی مقدار)"</string>
-    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"آپ کے آلہ پر ٹریفک لاگز"</string>
-    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"آپ کی سب سے حالیہ بگ رپورٹ"</string>
-    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"آپ کا حالیہ ترین سیکیورٹی لاگ"</string>
-    <string name="enterprise_privacy_never" msgid="1304035596746436921">"کبھی نہیں"</string>
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages" formatted="false" msgid="6167929812245127890">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ایپس آپ کے ایڈمن کے ذریعے انسٹال کی گئیں</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ایپ آپ کے ایڈمن کے ذریعے انسٹال کی گئی</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_location_access_packages" formatted="false" msgid="2063855792932186160">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ایپس کو آپ کے ایڈمن کے ذریعہ آپ کے مقام تک رسائی کی اجازت ہے</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ایپ کو آپ کے ایڈمن کے ذریعہ آپ کے مقام تک رسائی کی اجازت ہے</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_microphone_access_packages" formatted="false" msgid="8539289058651013237">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ایپس کو آپ کے ایڈمن کے ذریعہ آپ کے مائیکروفون تک رسائی کی اجازت ہے</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ایپ کو آپ کے ایڈمن کے ذریعہ آپ کے مائیکروفون تک رسائی کی اجازت ہے</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_camera_access_packages" formatted="false" msgid="8289040803304039501">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ایپس کو آپ کے ایڈمن کے ذریعہ آپ کے کیمرا تک رسائی کی اجازت ہے</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ایپ کو آپ کے ایڈمن کے ذریعہ آپ کے کیمرا تک رسائی کی اجازت ہے</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps" formatted="false" msgid="271160181904414484">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ڈیفالٹ ایپس آپ کے ایڈمن کے ذریعہ سیٹ ہے</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ڈیفالٹ ایپ آپ کے ایڈمن کے ذریعہ سیٹ ہے</item>
-    </plurals>
+    <!-- no translation found for enterprise_privacy_installed_packages (2313698828178764590) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_packages (2765037387436064893) -->
+    <!-- no translation found for enterprise_privacy_number_packages_actionable (3351021029919034993) -->
+    <!-- no translation found for enterprise_privacy_usage_stats (6257434796480671245) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_network_logs (6594098950963377666) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_bug_reports (843225086779037863) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_security_logs (5377362481617301074) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_none (7706621148858381189) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_installed_packages (6353757812144878828) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_location_access (943112505930395028) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (1101307566418116040) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (97095968133740652) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3292470316317639698) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method (6531350246850814920) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_input_method_name (4941106433683067953) -->
+    <skip />
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"‏ہمیشہ آن VPN آن ہو گیا"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"‏ہمیشہ آن VPN آپ کی ذاتی پروفائل میں آن ہو گيا"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"‏ہمیشہ آن VPN آپ کی دفتری پروفائل میں آن ہو گيا"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"‏عالمی HTTP پراکسی سیٹ ہے"</string>
-    <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"ایڈمن آلہ کو مقفل اور پاس ورڈ کو دوبارہ ترتیب دے سکتا ہے"</string>
+    <!-- no translation found for enterprise_privacy_ca_certs_user (2353089666351669619) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_personal (7437886817297309222) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs (5907058613578926277) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (7939443347696810129) -->
+    <!-- no translation found for enterprise_privacy_ca_certs_work (2032113890560053206) -->
+    <!-- no translation found for enterprise_privacy_lock_device (8791656477097208540) -->
+    <skip />
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"ایڈمن آلہ کے تمام ڈیٹا کو حذف کرسکتا ہے"</string>
-    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
-      <item quantity="other"> منتظم نے آلہ کے تمام ڈیٹا کو حذف کرنے سے قبل پاس ورڈ درج کرنے کی زیادہ سے زیادہ کوششوں کی تعداد کو <xliff:g id="COUNT_1">%d</xliff:g> پر سیٹ کیا ہے</item>
-      <item quantity="one"> منتظم نے آلہ کے تمام ڈیٹا کو حذف کرنے سے قبل پاس ورڈ درج کرنے کی زیادہ سے زیادہ کوششوں کی تعداد کو <xliff:g id="COUNT_0">%d</xliff:g> پر سیٹ کیا ہے</item>
-    </plurals>
-    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
-      <item quantity="other"> منتظم نے دفتری پروفائل ڈیٹا کو حذف کرنے سے قبل پاس ورڈ درج کرنے کی زیادہ سے زیادہ کوششوں کی تعداد کو <xliff:g id="COUNT_1">%d</xliff:g> پر سیٹ کیا ہے</item>
-      <item quantity="one"> منتظم نے دفتری پروفائل ڈیٹا کو حذف کرنے سے قبل پاس ورڈ درج کرنے کی زیادہ سے زیادہ کوششوں کی تعداد کو <xliff:g id="COUNT_0">%d</xliff:g> پر سیٹ کیا ہے</item>
-    </plurals>
-    <string name="do_disclosure_generic" msgid="5666469247267523806">"یہ آلہ زیر انتظام ہے۔"</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (1001255609345002878) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4040565826652951057) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_failed_password_wipe (5279099270351036696) -->
+    <!-- no translation found for do_disclosure_generic (8653670456990823307) -->
+    <skip />
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"یہ آلہ <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> کے زیر انتظام ہے۔"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"مزید جانیں"</string>
-    <!-- no translation found for storage_photos_videos (319854636702241898) -->
-    <skip />
-    <!-- no translation found for storage_music_audio (789779084825206838) -->
-    <skip />
+    <string name="storage_photos_videos" msgid="319854636702241898">"تصاویر اور ویڈیوز"</string>
+    <string name="storage_music_audio" msgid="789779084825206838">"موسیقی اور آڈیو"</string>
     <string name="storage_games" msgid="7703159201697117621">"گیمز"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"دیگر ایپس"</string>
     <string name="storage_files" msgid="8581083146777364063">"فائلز"</string>
-    <string name="storage_settings_2" msgid="6369810699930056554">"فون کی اسٹوریج"</string>
+    <!-- no translation found for storage_settings_2 (4306047711760327031) -->
+    <skip />
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_free" msgid="8829609507318832879">"<xliff:g id="TOTAL">%1$s</xliff:g> خالی ہے"</string>
     <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g>%%"</string>
-    <string name="storage_manager_indicator" msgid="1516810749625915020">"اسٹوریج مینیجر: <xliff:g id="STATUS">^1</xliff:g>"</string>
-    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"آف"</string>
-    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"آن"</string>
-    <!-- no translation found for install_type_instant (3174425974536078647) -->
-    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"گیمز"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"آڈیو فائلز"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(صارف کیلیے اَن انسٹال ہوگیا <xliff:g id="USER">%s</xliff:g>)"</string>
@@ -3416,4 +3434,8 @@
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> کو اپنا آٹو فل ایپ بنائيں؟ <xliff:g id="APP_NAME_1">%1$s</xliff:g> آپ کے اسکرین کو پڑھنے اور دوسرے ایپس میں فیلڈز کو بھرنے کے لائق ہوجائے گا۔"</string>
     <string name="device_theme" msgid="4571803018917608588">"آلہ کا تھیم"</string>
     <string name="default_theme" msgid="7085644992078579076">"ڈیفالٹ"</string>
+    <string name="storage_manager_indicator" msgid="1516810749625915020">"اسٹوریج مینیجر: <xliff:g id="STATUS">^1</xliff:g>"</string>
+    <string name="storage_manager_indicator_off" msgid="7488057587180724388">"آف"</string>
+    <string name="storage_manager_indicator_on" msgid="8625551710194584733">"آن"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"فوری ایپ"</string>
 </resources>
