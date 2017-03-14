@@ -157,8 +157,6 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_MEMORY = "memory";
     private static final String KEY_VERSION = "app_version";
 
-    private static final String NOTIFICATION_TUNER_SETTING = "show_importance_slider";
-
     private final HashSet<String> mHomePackages = new HashSet<>();
 
     private boolean mInitialized;
@@ -735,6 +733,8 @@ public class InstalledAppDetails extends AppInfoBase
                                 new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Disable the app
+                                mMetricsFeatureProvider.action(getContext(),
+                                        MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
                                 new DisableChanger(InstalledAppDetails.this, mAppEntry.info,
                                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
                                 .execute((Object)null);
@@ -749,6 +749,8 @@ public class InstalledAppDetails extends AppInfoBase
                                 new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Disable the app and ask for uninstall
+                                mMetricsFeatureProvider.action(getContext(),
+                                        MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
                                 uninstallPkg(mAppEntry.info.packageName,
                                         false, true);
                             }
@@ -777,13 +779,14 @@ public class InstalledAppDetails extends AppInfoBase
         Uri packageURI = Uri.parse("package:"+packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
+        mMetricsFeatureProvider.action(
+                getContext(), MetricsEvent.ACTION_SETTINGS_UNINSTALL_APP);
         startActivityForResult(uninstallIntent, REQUEST_UNINSTALL);
         mDisableAfterUninstall = andDisable;
     }
 
     private void forceStopPackage(String pkgName) {
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
-                MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
+        mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(LOG_TAG, "Stopping package " + pkgName);
@@ -802,7 +805,7 @@ public class InstalledAppDetails extends AppInfoBase
             mForceStopButton.setEnabled(false);
         } else {
             mForceStopButton.setEnabled(enabled);
-            mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+            mForceStopButton.setOnClickListener(this);
         }
     }
 
@@ -875,6 +878,8 @@ public class InstalledAppDetails extends AppInfoBase
                 Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
                 uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
                         mPackageName);
+                mMetricsFeatureProvider.action(
+                        activity, MetricsEvent.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN);
                 activity.startActivityForResult(uninstallDAIntent, REQUEST_REMOVE_DEVICE_ADMIN);
                 return;
             }
@@ -895,6 +900,11 @@ public class InstalledAppDetails extends AppInfoBase
                         showDialogInner(DLG_DISABLE, 0);
                     }
                 } else {
+                    mMetricsFeatureProvider.action(
+                            getActivity(),
+                            mAppEntry.info.enabled
+                                    ? MetricsEvent.ACTION_SETTINGS_DISABLE_APP
+                                    : MetricsEvent.ACTION_SETTINGS_ENABLE_APP);
                     new DisableChanger(this, mAppEntry.info,
                             PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
                                     .execute((Object) null);

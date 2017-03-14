@@ -17,8 +17,6 @@ package com.android.settings.search2;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.os.UserHandle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * The ViewHolder for the Search RecyclerView.
@@ -39,12 +39,16 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
     public final TextView breadcrumbView;
     public final ImageView iconView;
 
+    protected final MetricsFeatureProvider mMetricsFeatureProvider;
+
     public SearchViewHolder(View view) {
         super(view);
-        titleView = (TextView) view.findViewById(android.R.id.title);
-        summaryView = (TextView) view.findViewById(android.R.id.summary);
-        iconView = (ImageView) view.findViewById(android.R.id.icon);
-        breadcrumbView = (TextView) view.findViewById(R.id.breadcrumb);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(view.getContext())
+                .getMetricsFeatureProvider();
+        titleView = view.findViewById(android.R.id.title);
+        summaryView = view.findViewById(android.R.id.summary);
+        iconView = view.findViewById(android.R.id.icon);
+        breadcrumbView = view.findViewById(R.id.breadcrumb);
     }
 
     public void onBind(SearchFragment fragment, SearchResult result) {

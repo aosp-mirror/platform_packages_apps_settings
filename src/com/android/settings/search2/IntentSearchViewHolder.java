@@ -23,8 +23,6 @@ import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 
 /**
  * ViewHolder for intent based search results.
@@ -32,12 +30,8 @@ import com.android.settings.overlay.FeatureFactory;
  */
 public class IntentSearchViewHolder extends SearchViewHolder {
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
-
     public IntentSearchViewHolder(View view) {
         super(view);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(view.getContext())
-                .getMetricsFeatureProvider();
     }
 
     @Override

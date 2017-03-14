@@ -18,10 +18,11 @@
 package com.android.settings.search2;
 
 import android.content.Context;
+import android.util.Pair;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 /**
@@ -36,7 +37,7 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
     public InlineSwitchViewHolder(View view, Context context) {
         super(view);
         mContext = context;
-        switchView = (Switch) view.findViewById(R.id.switchView);
+        switchView = view.findViewById(R.id.switchView);
     }
 
     @Override
@@ -47,12 +48,21 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
         }
         final InlineSwitchPayload payload = (InlineSwitchPayload) result.payload;
         switchView.setChecked(payload.getSwitchValue(mContext));
-        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                fragment.onSearchResultClicked();
-                payload.setSwitchValue(mContext, isChecked);
-            }
+        switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            final Pair<Integer, Object> name = Pair.create(
+                    MetricsEvent.FIELD_SETTINGS_SEARCH_INLINE_RESULT_NAME, payload.settingsUri);
+            final Pair<Integer, Object> value = Pair.create(
+                    MetricsEvent.FIELD_SETTINGS_SEARCH_INLINE_RESULT_VALUE, isChecked
+                            ? "checked"
+                            : "not-checked");
+            final Pair<Integer, Object> rank = Pair.create(
+                    MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK, getAdapterPosition());
+            mMetricsFeatureProvider.action(mContext,
+                    MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_INLINE_RESULT,
+                    name, value, rank);
+
+            fragment.onSearchResultClicked();
+            payload.setSwitchValue(mContext, isChecked);
         });
     }
 }

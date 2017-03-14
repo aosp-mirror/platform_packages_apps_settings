@@ -192,6 +192,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             } else if (mClearCacheObserver == null) { // Lazy initialization of observer
                 mClearCacheObserver = new ClearCacheObserver();
             }
+            mMetricsFeatureProvider.action(getContext(),
+                    MetricsEvent.ACTION_SETTINGS_CLEAR_APP_CACHE);
             mPm.deleteApplicationCacheFiles(mPackageName, mClearCacheObserver);
         } else if (v == mClearDataButton) {
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
@@ -340,6 +342,7 @@ public class AppStorageSettings extends AppInfoWithHeader
      * button for a system package
      */
     private void initiateClearUserData() {
+        mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_SETTINGS_CLEAR_APP_DATA);
         mClearDataButton.setEnabled(false);
         // Invoke uninstall or clear user data based on sysPackage
         String packageName = mAppEntry.info.packageName;
