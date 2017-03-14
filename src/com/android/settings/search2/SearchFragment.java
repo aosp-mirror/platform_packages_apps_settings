@@ -45,9 +45,8 @@ import com.android.settings.overlay.FeatureFactory;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SearchFragment extends InstrumentedFragment implements
-        SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<List<? extends SearchResult>>
-{
+public class SearchFragment extends InstrumentedFragment implements SearchView.OnQueryTextListener,
+        LoaderManager.LoaderCallbacks<List<? extends SearchResult>> {
     private static final String TAG = "SearchFragment";
 
     @VisibleForTesting
@@ -66,7 +65,7 @@ public class SearchFragment extends InstrumentedFragment implements
     private static final int NUM_QUERY_LOADERS = 2;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);;
+    AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);
 
     // Logging
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -82,7 +81,7 @@ public class SearchFragment extends InstrumentedFragment implements
     private int mResultClickCount;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    @VisibleForTesting (otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     SearchFeatureProvider mSearchFeatureProvider;
 
     private SearchResultsAdapter mSearchAdapter;
@@ -93,8 +92,7 @@ public class SearchFragment extends InstrumentedFragment implements
     private LinearLayout mNoResultsView;
 
     @VisibleForTesting
-    final RecyclerView.OnScrollListener mScrollListener =
-            new RecyclerView.OnScrollListener() {
+    final RecyclerView.OnScrollListener mScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             if (dy != 0) {
@@ -120,7 +118,7 @@ public class SearchFragment extends InstrumentedFragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         mSearchAdapter = new SearchResultsAdapter(this);
-        
+
         mSearchFeatureProvider.initFeedbackButton();
 
         final LoaderManager loaderManager = getLoaderManager();
@@ -155,12 +153,12 @@ public class SearchFragment extends InstrumentedFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.search_panel_2, container, false);
-        mResultsRecyclerView = (RecyclerView) view.findViewById(R.id.list_results);
+        mResultsRecyclerView = view.findViewById(R.id.list_results);
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mResultsRecyclerView.addOnScrollListener(mScrollListener);
 
-        mNoResultsView = (LinearLayout) view.findViewById(R.id.no_results_layout);
+        mNoResultsView = view.findViewById(R.id.no_results_layout);
         return view;
     }
 
@@ -245,16 +243,20 @@ public class SearchFragment extends InstrumentedFragment implements
     @Override
     public void onLoadFinished(Loader<List<? extends SearchResult>> loader,
             List<? extends SearchResult> data) {
-        mSearchAdapter.addResultsToMap(data, loader.getClass().getName());
-
-        if (mUnfinishedLoadersCount.decrementAndGet() == 0) {
-            final int resultCount = mSearchAdapter.mergeResults();
-            mSearchFeatureProvider.showFeedbackButton(this, getView());
-
-            if (resultCount == 0) {
-                mNoResultsView.setVisibility(View.VISIBLE);
-            }
+        final int resultCount;
+        switch (loader.getId()) {
+            case LOADER_ID_RECENTS:
+                resultCount = mSearchAdapter.displaySavedQuery(data);
+                break;
+            default:
+                mSearchAdapter.addSearchResults(data, loader.getClass().getName());
+                if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
+                    return;
+                }
+                resultCount = mSearchAdapter.displaySearchResults();
         }
+        mNoResultsView.setVisibility(resultCount == 0 ? View.VISIBLE : View.GONE);
+        mSearchFeatureProvider.showFeedbackButton(this, getView());
     }
 
     @Override
@@ -267,6 +269,8 @@ public class SearchFragment extends InstrumentedFragment implements
 
     public void onSavedQueryClicked(CharSequence query) {
         final String queryString = query.toString();
+        mMetricsFeatureProvider.action(getContext(),
+                MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY);
         mSearchView.setQuery(queryString, false /* submit */);
         onQueryTextChange(queryString);
     }
@@ -286,7 +290,7 @@ public class SearchFragment extends InstrumentedFragment implements
         return mSearchAdapter.getSearchResults();
     }
 
-    @VisibleForTesting (otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     SearchView makeSearchView(ActionBar actionBar, String query) {
         final SearchView searchView = new SearchView(actionBar.getThemedContext());
         searchView.setIconifiedByDefault(false);

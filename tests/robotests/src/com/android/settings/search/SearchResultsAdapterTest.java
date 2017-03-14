@@ -21,9 +21,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -34,13 +34,12 @@ import com.android.settings.search2.InstalledAppResultLoader;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.ResultPayload;
-import com.android.settings.search2.SearchActivity;
 import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
 import com.android.settings.search2.SearchResultsAdapter;
-
 import com.android.settings.search2.SearchViewHolder;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,15 +47,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.ShadowViewGroup;
-import org.robolectric.util.ActivityController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -85,15 +80,15 @@ public class SearchResultsAdapterTest {
     @Test
     public void testSingleSourceMerge_ExactCopyReturned() {
         ArrayList<SearchResult> intentResults = getIntentSampleResults();
-        mAdapter.addResultsToMap(intentResults, mLoaderClassName);
-        mAdapter.mergeResults();
+        mAdapter.addSearchResults(intentResults, mLoaderClassName);
+        mAdapter.displaySearchResults();
 
         List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).containsAllIn(intentResults);
     }
 
     @Test
-    public void testCreatViewHolder_ReturnsIntentResult() {
+    public void testCreateViewHolder_ReturnsIntentResult() {
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INTENT);
@@ -101,7 +96,7 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testCreatViewHolder_ReturnsInlineSwitchResult() {
+    public void testCreateViewHolder_ReturnsInlineSwitchResult() {
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INLINE_SWITCH);
@@ -110,11 +105,11 @@ public class SearchResultsAdapterTest {
 
     @Test
     public void testEndToEndSearch_ProperResultsMerged() {
-        mAdapter.addResultsToMap(getDummyAppResults(),
+        mAdapter.addSearchResults(getDummyAppResults(),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addResultsToMap(getDummyDbResults(),
+        mAdapter.addSearchResults(getDummyDbResults(),
                 DatabaseResultLoader.class.getName());
-        int count = mAdapter.mergeResults();
+        int count = mAdapter.displaySearchResults();
 
         List<SearchResult> results = mAdapter.getSearchResults();
         assertThat(results.get(0).title).isEqualTo("alpha");
