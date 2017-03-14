@@ -27,6 +27,9 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
@@ -52,7 +55,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION,
+        shadows = {
+                SettingsShadowResources.class,
+                SettingsShadowResources.SettingsShadowTheme.class,
+                ShadowDynamicIndexableContentMonitor.class
+        })
 public class DashboardAdapterTest {
 
     @Mock
@@ -82,6 +91,7 @@ public class DashboardAdapterTest {
         when(mResources
                 .getQuantityString(any(int.class), any(int.class), Matchers.<Object>anyVararg()))
                 .thenReturn("");
+        FakeFeatureFactory.setupForTest(context);
         mDashboardAdapter = new DashboardAdapter(context, null, mMetricsFeatureProvider,
                 null, null);
         mSuggestionHeaderData = new DashboardData.SuggestionHeaderData(true, 1, 0);

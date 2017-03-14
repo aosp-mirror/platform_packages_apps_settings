@@ -66,6 +66,8 @@ public class SettingsShadowResources extends ShadowResources {
             id = R.drawable.ic_settings_wireless;
         } else if (id == R.drawable.app_filter_spinner_background) {
             id = R.drawable.ic_expand_more_inverse;
+        } else if (id == R.drawable.selectable_card_grey) {
+            id = R.drawable.ic_expand_more_inverse;
         }
         return super.loadDrawable(value, id, theme);
     }
