@@ -23,6 +23,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
@@ -71,14 +72,25 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         return controllers;
     }
 
+    public static boolean isPageEnabled(Context context) {
+        return FeatureFactory.getFactory(context)
+                .getEnterprisePrivacyFeatureProvider(context)
+                .hasDeviceOwner();
+    }
+
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                final SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.enterprise_privacy_settings;
-                return Arrays.asList(sir);
-            }
-        };
+            new BaseSearchIndexProvider() {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return isPageEnabled(context);
+                }
+
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.enterprise_privacy_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

@@ -16,21 +16,28 @@
 
 package com.android.settings.enterprise;
 
+import android.content.Context;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import java.util.List;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link EnterprisePrivacySettings}.
@@ -39,10 +46,17 @@ import java.util.List;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterprisePrivacySettingsTest {
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private EnterprisePrivacySettings mSettings;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
         mSettings = new EnterprisePrivacySettings();
     }
 
@@ -66,6 +80,24 @@ public final class EnterprisePrivacySettingsTest {
     public void testGetPreferenceScreenResId() {
         assertThat(mSettings.getPreferenceScreenResId())
                 .isEqualTo(R.xml.enterprise_privacy_settings);
+    }
+
+    @Test
+    public void isPageEnabled_hasDeviceOwner_shouldReturnTrue() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner())
+                .thenReturn(true);
+
+        assertThat(EnterprisePrivacySettings.isPageEnabled(mContext))
+                .isTrue();
+    }
+
+    @Test
+    public void isPageEnabled_noDeviceOwner_shouldReturnFalse() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner())
+                .thenReturn(false);
+
+        assertThat(EnterprisePrivacySettings.isPageEnabled(mContext))
+                .isFalse();
     }
 
     @Test

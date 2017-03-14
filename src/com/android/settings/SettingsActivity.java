@@ -64,6 +64,7 @@ import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.SearchResultsSummary;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search2.SearchFeatureProvider;
@@ -945,8 +946,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         setTileEnabled(new ComponentName(packageName,
                         Settings.EnterprisePrivacySettingsActivity.class.getName()),
-                FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
-                        .hasDeviceOwner(), isAdmin);
+                EnterprisePrivacySettings.isPageEnabled(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                         Settings.WifiDisplaySettingsActivity.class.getName()),
