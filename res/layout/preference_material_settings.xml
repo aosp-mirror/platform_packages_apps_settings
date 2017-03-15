@@ -20,7 +20,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:gravity="center_vertical"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
@@ -49,13 +49,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
 
         <TextView
             android:id="@android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="24dp"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceListItem"
             android:ellipsize="marquee"/>
@@ -64,6 +65,7 @@
             android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="24dp"
             android:layout_below="@android:id/title"
             android:layout_alignStart="@android:id/title"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
