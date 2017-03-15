@@ -55,6 +55,9 @@ import java.io.File;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageSummaryDonutPreferenceControllerTest {
+    private static final long KILOBYTE = 1024; // Note: When O comes around, this value changes!
+    private static final long MEGABYTE = KILOBYTE * KILOBYTE;
+    private static final long GIGABYTE = KILOBYTE * MEGABYTE;
     private Context mContext;
     private StorageSummaryDonutPreferenceController mController;
     private StorageSummaryDonutPreference mPreference;
@@ -80,20 +83,20 @@ public class StorageSummaryDonutPreferenceControllerTest {
 
     @Test
     public void testEmpty() throws Exception {
-        mController.updateBytes(0, 0);
+        mController.updateBytes(0, 32 * GIGABYTE);
         mController.updateState(mPreference);
 
         assertThat(mPreference.getTitle().toString()).isEqualTo("0.00B");
-        assertThat(mPreference.getSummary().toString()).isEqualTo("0.00B free");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 32GB");
     }
 
     @Test
-    public void testUsedStorage() throws Exception {
-        mController.updateBytes(1024, 1024 * 10);
+    public void testTotalStorage() throws Exception {
+        mController.updateBytes(KILOBYTE, KILOBYTE * 10);
         mController.updateState(mPreference);
 
         assertThat(mPreference.getTitle().toString()).isEqualTo("1.00KB");
-        assertThat(mPreference.getSummary().toString()).isEqualTo("9.00KB free");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 10KB");
     }
 
     @Test
@@ -102,15 +105,15 @@ public class StorageSummaryDonutPreferenceControllerTest {
         File file = Mockito.mock(File.class);
         StorageVolumeProvider svp = Mockito.mock(StorageVolumeProvider.class);
         when(volume.getPath()).thenReturn(file);
-        when(file.getTotalSpace()).thenReturn(1024L * 10);
-        when(file.getFreeSpace()).thenReturn(1024L);
-        when(svp.getPrimaryStorageSize()).thenReturn(1024L * 10);
+        when(file.getTotalSpace()).thenReturn(KILOBYTE * 10);
+        when(file.getFreeSpace()).thenReturn(KILOBYTE);
+        when(svp.getPrimaryStorageSize()).thenReturn(KILOBYTE * 10);
 
         mController.updateSizes(svp, volume);
         mController.updateState(mPreference);
 
         assertThat(mPreference.getTitle().toString()).isEqualTo("9.00KB");
-        assertThat(mPreference.getSummary().toString()).isEqualTo("1.00KB free");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 10KB");
     }
 
     @Test
