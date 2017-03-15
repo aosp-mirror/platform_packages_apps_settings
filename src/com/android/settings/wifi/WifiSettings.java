@@ -42,7 +42,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -65,6 +64,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
@@ -187,6 +187,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
         getPreferenceManager().setPreferenceComparisonCallback(
                 new PreferenceManager.SimplePreferenceComparisonCallback());
         addPreferencesFromResource(R.xml.wifi_settings);
@@ -496,6 +497,12 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        // If the preference has a fragment set, open that
+        if (preference.getFragment() != null) {
+            preference.setOnPreferenceClickListener(null);
+            return super.onPreferenceTreeClick(preference);
+        }
+
         if (preference instanceof LongPressAccessPointPreference) {
             mSelectedAccessPoint = ((LongPressAccessPointPreference) preference).getAccessPoint();
             if (mSelectedAccessPoint == null) {
@@ -665,14 +672,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 removeCachedPrefs(mAccessPointsPreferenceCategory);
                 if (!hasAvailableAccessPoints) {
                     setProgressBarVisible(true);
-                    Preference pref = new Preference(getContext()) {
-                        @Override
-                        public void onBindViewHolder(PreferenceViewHolder holder) {
-                            super.onBindViewHolder(holder);
-                            // Show a line on each side of add network.
-                            holder.setDividerAllowedBelow(true);
-                        }
-                    };
+                    Preference pref = new Preference(getPrefContext());
                     pref.setSelectable(false);
                     pref.setSummary(R.string.wifi_empty_list_wifi_on);
                     pref.setOrder(index++);
@@ -752,7 +752,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             return true;
         }
 
-        // Else same AP is connected, nothing to do
+        // Else same AP is connected, simply refresh the connected access point preference
+        // (first and only access point in this category).
+        ((LongPressAccessPointPreference) mConnectedAccessPointPreferenceCategory.getPreference(0))
+                .refresh();
         return true;
     }
 
@@ -767,6 +770,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (pref == null) {
             pref = createLongPressActionPointPreference(connectedAp);
         }
+
+        // Save the state of the current access point in the bundle so that we can restore it
+        // in the Wifi Network Details Fragment
+        pref.getAccessPoint().saveWifiState(pref.getExtras());
+        pref.setFragment(WifiNetworkDetailsFragment.class.getName());
+
         pref.refresh();
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
         mConnectedAccessPointPreferenceCategory.setVisible(true);
@@ -862,6 +871,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onConnectedChanged() {
+        onAccessPointsChanged();
         changeNextButtonState(mWifiTracker.isConnected());
     }
 
