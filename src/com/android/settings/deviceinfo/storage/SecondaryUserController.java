@@ -28,6 +28,7 @@ import android.util.SparseArray;
 import com.android.settings.Utils;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.deviceinfo.StorageItemPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +47,9 @@ public class SecondaryUserController extends PreferenceController implements
     private static final int SIZE_NOT_SET = -1;
 
     private @NonNull UserInfo mUser;
-    private @Nullable StorageItemPreferenceAlternate mStoragePreference;
+    private @Nullable StorageItemPreference mStoragePreference;
     private long mSize;
+    private long mTotalSizeBytes;
 
     /**
      * Adds the appropriate controllers to a controller list for handling all secondary users on
@@ -98,14 +100,14 @@ public class SecondaryUserController extends PreferenceController implements
     @Override
     public void displayPreference(PreferenceScreen screen) {
         if (mStoragePreference == null) {
-            mStoragePreference = new StorageItemPreferenceAlternate(screen.getContext());
+            mStoragePreference = new StorageItemPreference(screen.getContext());
 
             PreferenceGroup group =
                     (PreferenceGroup) screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
             mStoragePreference.setTitle(mUser.name);
             mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
             if (mSize != SIZE_NOT_SET) {
-                mStoragePreference.setStorageSize(mSize);
+                mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
             }
             group.setVisible(true);
             group.addPreference(mStoragePreference);
@@ -137,8 +139,16 @@ public class SecondaryUserController extends PreferenceController implements
     public void setSize(long size) {
         mSize = size;
         if (mStoragePreference != null) {
-            mStoragePreference.setStorageSize(mSize);
+            mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
         }
+    }
+
+    /**
+     * Sets the total size for the preference for the progress bar.
+     * @param totalSizeBytes Total size in bytes.
+     */
+    public void setTotalSize(long totalSizeBytes) {
+        mTotalSizeBytes = totalSizeBytes;
     }
 
     public void handleResult(SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {

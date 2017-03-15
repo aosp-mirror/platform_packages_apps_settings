@@ -15,6 +15,8 @@
  */
 package com.android.settings.deviceinfo.storage;
 
+import static com.android.settings.TestUtils.KILOBYTE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
@@ -43,6 +45,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -60,11 +63,6 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageItemPreferenceControllerTest {
-    /**
-     *  In O, this will change to 1000 instead of 1024 due to the formatter properly defining a
-     *  kilobyte.
-     */
-    private static long KILOBYTE = 1024L;
     private Context mContext;
     private VolumeInfo mVolume;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -72,7 +70,7 @@ public class StorageItemPreferenceControllerTest {
     @Mock
     private StorageVolumeProvider mSvp;
     private StorageItemPreferenceController mController;
-    private StorageItemPreferenceAlternate mPreference;
+    private StorageItemPreference mPreference;
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -87,7 +85,7 @@ public class StorageItemPreferenceControllerTest {
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
         mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp);
-        mPreference = new StorageItemPreferenceAlternate(mContext);
+        mPreference = new StorageItemPreference(mContext);
 
         // Inflate the preference and the widget.
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -190,12 +188,12 @@ public class StorageItemPreferenceControllerTest {
 
     @Test
     public void testMeasurementCompletedUpdatesPreferences() {
-        StorageItemPreferenceAlternate audio = new StorageItemPreferenceAlternate(mContext);
-        StorageItemPreferenceAlternate image = new StorageItemPreferenceAlternate(mContext);
-        StorageItemPreferenceAlternate games = new StorageItemPreferenceAlternate(mContext);
-        StorageItemPreferenceAlternate apps = new StorageItemPreferenceAlternate(mContext);
-        StorageItemPreferenceAlternate system = new StorageItemPreferenceAlternate(mContext);
-        StorageItemPreferenceAlternate files = new StorageItemPreferenceAlternate(mContext);
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
         PreferenceScreen screen = mock(PreferenceScreen.class);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);

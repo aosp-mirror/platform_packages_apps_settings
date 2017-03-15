@@ -114,6 +114,16 @@ public class StorageDashboardFragment extends DashboardFragment
         mSummaryController.updateBytes(usedBytes, totalSize);
         mPreferenceController.setVolume(mVolume);
         mPreferenceController.setSystemSize(systemSize);
+
+        mPreferenceController.setTotalSize(totalSize);
+        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
+            PreferenceController controller = mSecondaryUsers.get(i);
+            if (controller instanceof SecondaryUserController) {
+                SecondaryUserController userController = (SecondaryUserController) controller;
+                userController.setTotalSize(totalSize);
+
+            }
+        }
     }
 
     @Override

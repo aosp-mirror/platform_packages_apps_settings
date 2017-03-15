@@ -35,6 +35,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -71,13 +72,14 @@ public class StorageItemPreferenceController extends PreferenceController {
     private VolumeInfo mVolume;
     private int mUserId;
     private long mSystemSize;
+    private long mTotalSize;
 
-    private StorageItemPreferenceAlternate mPhotoPreference;
-    private StorageItemPreferenceAlternate mAudioPreference;
-    private StorageItemPreferenceAlternate mGamePreference;
-    private StorageItemPreferenceAlternate mAppPreference;
-    private StorageItemPreferenceAlternate mFilePreference;
-    private StorageItemPreferenceAlternate mSystemPreference;
+    private StorageItemPreference mPhotoPreference;
+    private StorageItemPreference mAudioPreference;
+    private StorageItemPreference mGamePreference;
+    private StorageItemPreference mAppPreference;
+    private StorageItemPreference mFilePreference;
+    private StorageItemPreference mSystemPreference;
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
@@ -164,37 +166,38 @@ public class StorageItemPreferenceController extends PreferenceController {
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mPhotoPreference = (StorageItemPreferenceAlternate) screen.findPreference(PHOTO_KEY);
-        mAudioPreference = (StorageItemPreferenceAlternate) screen.findPreference(AUDIO_KEY);
-        mGamePreference = (StorageItemPreferenceAlternate) screen.findPreference(GAME_KEY);
-        mAppPreference = (StorageItemPreferenceAlternate) screen.findPreference(OTHER_APPS_KEY);
-        mSystemPreference = (StorageItemPreferenceAlternate) screen.findPreference(SYSTEM_KEY);
-        mFilePreference = (StorageItemPreferenceAlternate) screen.findPreference(FILES_KEY);
+        mPhotoPreference = (StorageItemPreference) screen.findPreference(PHOTO_KEY);
+        mAudioPreference = (StorageItemPreference) screen.findPreference(AUDIO_KEY);
+        mGamePreference = (StorageItemPreference) screen.findPreference(GAME_KEY);
+        mAppPreference = (StorageItemPreference) screen.findPreference(OTHER_APPS_KEY);
+        mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
+        mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
     }
 
     public void onLoadFinished(StorageAsyncLoader.AppsStorageResult data) {
         // TODO(b/35927909): Figure out how to split out apps which are only installed for work
         //       profiles in order to attribute those app's code bytes only to that profile.
         mPhotoPreference.setStorageSize(
-                data.externalStats.imageBytes + data.externalStats.videoBytes);
-        mAudioPreference.setStorageSize(data.musicAppsSize + data.externalStats.audioBytes);
-        mGamePreference.setStorageSize(data.gamesSize);
-        mAppPreference.setStorageSize(data.otherAppsSize);
+                data.externalStats.imageBytes + data.externalStats.videoBytes, mTotalSize);
+        mAudioPreference.setStorageSize(
+                data.musicAppsSize + data.externalStats.audioBytes, mTotalSize);
+        mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
+        mAppPreference.setStorageSize(data.otherAppsSize, mTotalSize);
         if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(mSystemSize + data.systemSize);
+            mSystemPreference.setStorageSize(mSystemSize + data.systemSize, mTotalSize);
         }
 
         long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
                 - data.externalStats.videoBytes - data.externalStats.imageBytes;
-        mFilePreference.setStorageSize(unattributedBytes);
+        mFilePreference.setStorageSize(unattributedBytes, mTotalSize);
     }
 
-    /**
-     * Sets the system size for the system size preference.
-     * @param systemSize the size of the system in bytes
-     */
-    public void setSystemSize(long systemSize) {
-        mSystemSize = systemSize;
+    public void setSystemSize(long systemSizeBytes) {
+        mSystemSize = systemSizeBytes;
+    }
+
+    public void setTotalSize(long totalSizeBytes) {
+        mTotalSize = totalSizeBytes;
     }
 
     /**

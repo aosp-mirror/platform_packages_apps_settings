@@ -29,6 +29,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
@@ -38,8 +39,9 @@ import com.android.settingslib.drawer.SettingsDrawerActivity;
 public class UserProfileController extends PreferenceController implements
         StorageAsyncLoader.ResultHandler {
     private static final String PREFERENCE_KEY_BASE = "pref_profile_";
-    private StorageItemPreferenceAlternate mStoragePreference;
+    private StorageItemPreference mStoragePreference;
     private UserInfo mUser;
+    private long mTotalSizeBytes;
     private final int mPreferenceOrder;
 
     public UserProfileController(Context context, UserInfo info, int preferenceOrder) {
@@ -60,7 +62,7 @@ public class UserProfileController extends PreferenceController implements
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mStoragePreference = new StorageItemPreferenceAlternate(screen.getContext());
+        mStoragePreference = new StorageItemPreference(screen.getContext());
         mStoragePreference.setOrder(mPreferenceOrder);
         mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
         mStoragePreference.setTitle(mUser.name);
@@ -91,16 +93,20 @@ public class UserProfileController extends PreferenceController implements
         int userId = mUser.id;
         StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
         if (result != null) {
-            setSize(result.externalStats.totalBytes);
+            setSize(result.externalStats.totalBytes, mTotalSizeBytes);
         }
     }
 
     /**
      * Sets the size for the preference using a byte count.
      */
-    public void setSize(long size) {
+    public void setSize(long size, long totalSize) {
         if (mStoragePreference != null) {
-            mStoragePreference.setStorageSize(size);
+            mStoragePreference.setStorageSize(size, totalSize);
         }
+    }
+
+    public void setTotalSize(long totalSize) {
+        mTotalSizeBytes = totalSize;
     }
 }

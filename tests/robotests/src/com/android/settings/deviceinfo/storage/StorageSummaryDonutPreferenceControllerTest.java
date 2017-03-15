@@ -52,12 +52,13 @@ import org.robolectric.annotation.Config;
 
 import java.io.File;
 
+import static com.android.settings.TestUtils.KILOBYTE;
+import static com.android.settings.TestUtils.MEGABYTE;
+import static com.android.settings.TestUtils.GIGABYTE;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageSummaryDonutPreferenceControllerTest {
-    private static final long KILOBYTE = 1024; // Note: When O comes around, this value changes!
-    private static final long MEGABYTE = KILOBYTE * KILOBYTE;
-    private static final long GIGABYTE = KILOBYTE * MEGABYTE;
     private Context mContext;
     private StorageSummaryDonutPreferenceController mController;
     private StorageSummaryDonutPreference mPreference;
