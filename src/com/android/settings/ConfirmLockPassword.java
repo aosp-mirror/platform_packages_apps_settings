@@ -122,7 +122,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 Bundle savedInstanceState) {
             final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality(
                     mEffectiveUserId);
-            View view = inflater.inflate(R.layout.confirm_lock_password, null);
+
+            ConfirmLockPassword activity = (ConfirmLockPassword) getActivity();
+            View view = inflater.inflate(
+                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.INTERNAL
+                            ? R.layout.confirm_lock_password_internal
+                            : R.layout.confirm_lock_password,
+                    container,
+                    false);
 
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
@@ -406,25 +413,22 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
             mDisappearing = true;
 
-            if (getActivity().getThemeResId() == R.style.Theme_ConfirmDeviceCredentialsDark) {
-                mDisappearAnimationUtils.startAnimation(getActiveViews(), new Runnable() {
-                    @Override
-                    public void run() {
-                        // Bail if there is no active activity.
-                        if (getActivity() == null || getActivity().isFinishing()) {
-                            return;
-                        }
-
-                        getActivity().setResult(RESULT_OK, intent);
-                        getActivity().finish();
-                        getActivity().overridePendingTransition(
-                                R.anim.confirm_credential_close_enter,
-                                R.anim.confirm_credential_close_exit);
-                    }
+            final ConfirmLockPassword activity = (ConfirmLockPassword) getActivity();
+            // Bail if there is no active activity.
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+            if (activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.DARK) {
+                mDisappearAnimationUtils.startAnimation(getActiveViews(), () -> {
+                    activity.setResult(RESULT_OK, intent);
+                    activity.finish();
+                    activity.overridePendingTransition(
+                            R.anim.confirm_credential_close_enter,
+                            R.anim.confirm_credential_close_exit);
                 });
             } else {
-                getActivity().setResult(RESULT_OK, intent);
-                getActivity().finish();
+                activity.setResult(RESULT_OK, intent);
+                activity.finish();
             }
         }
 
