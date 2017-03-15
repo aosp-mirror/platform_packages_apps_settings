@@ -73,19 +73,22 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
             Log.w(TAG, "Missing package or uid or packageinfo or channel");
-            toastAndFinish();
+            finish();
             return;
         }
-        final Activity activity = getActivity();
+
+        if (getPreferenceScreen() != null) {
+            getPreferenceScreen().removeAll();
+        }
         addPreferencesFromResource(R.xml.channel_notification_settings);
+        getPreferenceScreen().setOrderingAsAdded(true);
 
         // load settings intent
-        ArrayMap<String, NotificationBackend.AppRow>
-                rows = new ArrayMap<String, NotificationBackend.AppRow>();
+        ArrayMap<String, NotificationBackend.AppRow> rows = new ArrayMap<String, NotificationBackend.AppRow>();
         rows.put(mAppRow.pkg, mAppRow);
         collectConfigActivities(rows);
 
@@ -109,36 +112,25 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             setupBlockAndImportance();
             updateDependents();
         }
-        final Preference pref = FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this /* fragment */, null /* appHeader */)
-            .setIcon(mAppRow.icon)
-            .setLabel(mChannel.getName())
-            .setSummary(mAppRow.label)
-            .setPackageName(mAppRow.pkg)
-            .setUid(mAppRow.uid)
-            .setAppNotifPrefIntent(mAppRow.settingsIntent)
-            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-            .done(getPrefContext());
+        final Preference pref = FeatureFactory.getFactory(getActivity())
+                .getApplicationFeatureProvider(getActivity())
+                .newAppHeaderController(this /* fragment */, null /* appHeader */)
+                .setIcon(mAppRow.icon)
+                .setLabel(mChannel.getName())
+                .setSummary(mAppRow.label)
+                .setPackageName(mAppRow.pkg)
+                .setUid(mAppRow.uid)
+                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
-            Log.w(TAG, "Missing package or uid or packageinfo or channel");
-            finish();
-            return;
+        if (mAppRow.settingsIntent != null) {
+            Preference intentPref = new Preference(getPrefContext());
+            intentPref.setIntent(mAppRow.settingsIntent);
+            intentPref.setTitle(mContext.getString(R.string.app_settings_link));
+            getPreferenceScreen().addPreference(intentPref);
         }
-        mLights.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mVibrate.setDisabledByAdmin(mSuspendedAppsAdmin);
-        if (mImportance.isEnabled()) {
-            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
     private void setupLights() {
@@ -321,6 +313,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                         return true;
                     }
                 });
+        mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,

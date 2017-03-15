@@ -6473,8 +6473,14 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
 
-    <!-- [CHAR LIMIT=60] App notification settings: Text to display for deleted channels -->
-    <string name="deleted_channel_name"><xliff:g id="channel_name" example="Promotions">%1$s</xliff:g> (deleted)</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
+    <string name="app_settings_link">Additional settings in the app</string>
+
+    <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
+    <plurals name="deleted_channels">
+        <item quantity="one">%d category deleted</item>
+        <item quantity="other">%d categories deleted</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option title -->
     <string name="app_notification_block_title">Block all</string>

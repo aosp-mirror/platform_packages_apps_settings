@@ -124,7 +124,7 @@ public class NotificationBackend {
 
     public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
         try {
-            return sINM.getNotificationChannelGroupsForPackage(pkg, uid, true);
+            return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
@@ -136,6 +136,15 @@ public class NotificationBackend {
             sINM.updateNotificationChannelForPackage(pkg, uid, channel);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public int getDeletedChannelCount(String pkg, int uid) {
+        try {
+            return sINM.getDeletedChannelCount(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
         }
     }
 
