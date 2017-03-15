@@ -39,7 +39,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserManager;
-import android.security.KeyStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
