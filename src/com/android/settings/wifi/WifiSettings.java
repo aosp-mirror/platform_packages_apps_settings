@@ -178,9 +178,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onViewCreated(view, savedInstanceState);
         final Activity activity = getActivity();
         if (activity != null) {
-            if (!isUiRestricted()) {
-                mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
-            }
+            mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
+            setProgressBarVisible(false);
         }
     }
 
@@ -614,15 +613,19 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onAccessPointsChanged() {
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
+        final int wifiState = mWifiManager.getWifiState();
         if (isUiRestricted()) {
             removeConnectedAccessPointPreference();
             mAccessPointsPreferenceCategory.removeAll();
             if (!isUiRestrictedByOnlyAdmin()) {
-                addMessagePreference(R.string.wifi_empty_list_user_restricted);
+                if (wifiState == WifiManager.WIFI_AP_STATE_DISABLED) {
+                    setOffMessage();
+                } else {
+                    addMessagePreference(R.string.wifi_empty_list_user_restricted);
+                }
             }
             return;
         }
-        final int wifiState = mWifiManager.getWifiState();
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -801,22 +804,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void setOffMessage() {
-        if (isUiRestricted()) {
-            removeConnectedAccessPointPreference();
-            mAccessPointsPreferenceCategory.removeAll();
-            if (!isUiRestrictedByOnlyAdmin()) {
-                addMessagePreference(R.string.wifi_empty_list_user_restricted);
-            }
-            return;
-        }
-
         final CharSequence briefText = getText(R.string.wifi_empty_list_wifi_off);
 
         // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
         // read the system settings directly. Because when the device is in Airplane mode, even if
         // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
         final ContentResolver resolver = getActivity().getContentResolver();
-        final boolean wifiScanningMode = Settings.Global.getInt(
+        final boolean wifiScanningMode = !isUiRestricted() && Settings.Global.getInt(
                 resolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
 
         if (!wifiScanningMode) {
@@ -850,7 +844,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
-            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
+            mProgressHeader.setVisibility(visible && !isUiRestricted() ? View.VISIBLE : View.GONE);
         }
     }
 
