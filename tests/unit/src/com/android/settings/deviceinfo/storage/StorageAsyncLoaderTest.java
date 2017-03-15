@@ -145,7 +145,7 @@ public class StorageAsyncLoaderTest {
     }
 
     @Test
-    public void testSystemAppsBaseSizeIsIgnored() throws Exception {
+    public void testSystemAppsBaseSizeIsAddedToSystem() throws Exception {
         ApplicationInfo systemApp =
                 addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         systemApp.flags = ApplicationInfo.FLAG_SYSTEM;
@@ -154,6 +154,7 @@ public class StorageAsyncLoaderTest {
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(10L);
+        assertThat(result.get(PRIMARY_USER_ID).systemSize).isEqualTo(1L);
     }
 
     @Test
