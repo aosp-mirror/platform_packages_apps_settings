@@ -126,7 +126,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final DrainType drainType = sipper.drainType;
         final int uid = sipper.getUid();
 
-        // TODO(b/34385770): add logic to extract type service
         if (drainType == DrainType.WIFI) {
             return UsageType.WIFI;
         } else if (drainType == DrainType.BLUETOOTH) {
@@ -164,7 +163,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             usageData.totalPowerMah += sipper.totalPowerMah;
         }
 
-        // TODO(b/34385770): add logic to extract the summary
+        // TODO(b/35396770): add logic to extract the summary
         final List<PowerUsageData> batteryDataList = new ArrayList<>(batteryDataMap.values());
         final double totalPower = statusHelper.getTotalPower();
         for (final PowerUsageData usageData : batteryDataList) {
