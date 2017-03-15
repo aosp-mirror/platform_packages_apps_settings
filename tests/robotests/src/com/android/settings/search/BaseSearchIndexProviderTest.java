@@ -18,7 +18,9 @@ package com.android.settings.search;
 
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
@@ -28,9 +30,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -96,4 +100,34 @@ public class BaseSearchIndexProviderTest {
 
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).contains(TEST_PREF_KEY);
     }
+
+    @Test
+    public void getNonIndexableKeys_pageSearchIsDisabled_shouldSuppressEverything() {
+        final BaseSearchIndexProvider provider = new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                final SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.language_and_input;
+                return Arrays.asList(sir);
+            }
+
+            @Override
+            protected boolean isPageSearchEnabled(Context context) {
+                return false;
+            }
+        };
+
+        final List<String> nonIndexableKeys = provider
+                .getNonIndexableKeys(RuntimeEnvironment.application);
+
+        assertThat(nonIndexableKeys).containsAllOf("phone_language", "spellcheckers_settings",
+                "key_user_dictionary_settings", "gesture_settings_category", "gesture_assist",
+                "gesture_swipe_down_fingerprint", "gesture_double_tap_power",
+                "gesture_double_twist", "gesture_double_tap_screen", "gesture_pick_up",
+                "pointer_settings_category", "pointer_speed", "voice_category", "tts_settings",
+                "game_controller_settings_category", "vibrate_input_devices");
+    }
+
+
 }
