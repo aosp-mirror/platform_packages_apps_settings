@@ -74,8 +74,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     String mQuery;
 
-    private final SaveQueryRecorderCallback mSaveQueryRecorderCallback =
-            new SaveQueryRecorderCallback();
+    private final SaveQueryCallback mSaveQueryCallback =
+            new SaveQueryCallback();
 
     private boolean mNeverEnteredQuery = true;
     private int mResultClickCount;
@@ -218,8 +218,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public boolean onQueryTextSubmit(String query) {
         // Save submitted query.
-        getLoaderManager().restartLoader(SaveQueryRecorderCallback.LOADER_ID_SAVE_QUERY_TASK, null,
-                mSaveQueryRecorderCallback);
+        getLoaderManager().restartLoader(SaveQueryCallback.LOADER_ID_SAVE_QUERY_TASK, null,
+                mSaveQueryCallback);
         hideKeyboard();
         return true;
     }
@@ -264,6 +264,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     public void onSearchResultClicked() {
+        getLoaderManager().restartLoader(SaveQueryCallback.LOADER_ID_SAVE_QUERY_TASK, null,
+                mSaveQueryCallback);
         mResultClickCount++;
     }
 
@@ -273,6 +275,13 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY);
         mSearchView.setQuery(queryString, false /* submit */);
         onQueryTextChange(queryString);
+    }
+
+    public void onRemoveSavedQueryClicked(CharSequence title) {
+        final Bundle args = new Bundle();
+        args.putString(SaveQueryCallback.ARG_REMOVE_QUERY, title.toString());
+        getLoaderManager().restartLoader(SaveQueryCallback.LOADER_ID_REMOVE_QUERY_TASK,
+                args, mSaveQueryCallback);
     }
 
     private void restartLoaders() {
@@ -317,19 +326,31 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         }
     }
 
-    private class SaveQueryRecorderCallback implements LoaderManager.LoaderCallbacks<Void> {
+    private class SaveQueryCallback implements LoaderManager.LoaderCallbacks<Void> {
         // TODO: make a generic background task manager to handle one-off tasks like this one.
 
         private static final int LOADER_ID_SAVE_QUERY_TASK = 0;
+        private static final int LOADER_ID_REMOVE_QUERY_TASK = 1;
+        private static final String ARG_REMOVE_QUERY = "remove_query";
 
         @Override
         public Loader<Void> onCreateLoader(int id, Bundle args) {
-            return new SavedQueryRecorder(getActivity(), mQuery);
+            switch (id) {
+                case LOADER_ID_SAVE_QUERY_TASK:
+                    return new SavedQueryRecorder(getActivity(), mQuery);
+                case LOADER_ID_REMOVE_QUERY_TASK:
+                    return new SavedQueryRemover(getActivity(), args.getString(ARG_REMOVE_QUERY));
+            }
+            return null;
         }
 
         @Override
         public void onLoadFinished(Loader<Void> loader, Void data) {
-
+            switch (loader.getId()) {
+                case LOADER_ID_REMOVE_QUERY_TASK:
+                    getLoaderManager().restartLoader(LOADER_ID_RECENTS, null, SearchFragment.this);
+                    break;
+            }
         }
 
         @Override

@@ -22,17 +22,18 @@ import android.widget.TextView;
 public class SavedQueryViewHolder extends SearchViewHolder {
 
     public final TextView titleView;
+    public final View removeButton;
 
     public SavedQueryViewHolder(View view) {
         super(view);
         titleView = view.findViewById(android.R.id.title);
+        removeButton = view.findViewById(android.R.id.icon);
     }
 
     @Override
     public void onBind(SearchFragment fragment, SearchResult result) {
         titleView.setText(result.title);
-        itemView.setOnClickListener(v -> {
-            fragment.onSavedQueryClicked(result.title);
-        });
+        titleView.setOnClickListener(v -> fragment.onSavedQueryClicked(result.title));
+        removeButton.setOnClickListener(v -> fragment.onRemoveSavedQueryClicked(result.title));
     }
 }

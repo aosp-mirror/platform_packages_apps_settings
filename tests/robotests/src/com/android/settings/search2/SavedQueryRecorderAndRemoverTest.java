@@ -36,10 +36,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class SavedQueryRecorderTest {
+public class SavedQueryRecorderAndRemoverTest {
 
     private Context mContext;
     private SavedQueryRecorder mRecorder;
+    private SavedQueryRemover mRemover;
 
     @Before
     public void setUp() {
@@ -52,16 +53,25 @@ public class SavedQueryRecorderTest {
     }
 
     @Test
-    public void canSaveQueryToDb() {
+    public void canSaveAndRemoveQuery() {
         final String query = "test";
         mRecorder = new SavedQueryRecorder(mContext, query);
+        mRemover = new SavedQueryRemover(mContext, query);
 
+        // Record a new query and load all queries from DB
         mRecorder.loadInBackground();
-
         final SavedQueryLoader loader = new SavedQueryLoader(mContext);
         List<? extends SearchResult> results = loader.loadInBackground();
 
+        // Should contain the newly recorded query
         assertThat(results.size()).isEqualTo(1);
         assertThat(results.get(0).title).isEqualTo(query);
+
+        // Remove the query and load all queries from DB
+        mRemover.loadInBackground();
+        results = loader.loadInBackground();
+
+        // Saved query list should be empty because it's removed.
+        assertThat(results).isEmpty();
     }
 }
