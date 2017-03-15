@@ -43,7 +43,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -66,7 +65,8 @@ public class SearchFragmentTest {
 
     @Mock
     private SavedQueryLoader mSavedQueryLoader;
-
+    @Mock
+    private SavedQueryController mSavedQueryController;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -96,6 +96,7 @@ public class SearchFragmentTest {
         SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
                 .findFragmentById(R.id.main_content);
 
+        ReflectionHelpers.setField(fragment, "mShowingSavedQuery", false);
         fragment.mQuery = testQuery;
 
         activityController.saveInstanceState(bundle).pause().stop().destroy();
@@ -111,12 +112,6 @@ public class SearchFragmentTest {
 
     @Test
     public void screenRotateEmptyString_ShouldNotCrash() {
-        when(mFeatureFactory.searchFeatureProvider
-                .getDatabaseSearchLoader(any(Context.class), anyString()))
-                .thenReturn(mDatabaseResultLoader);
-        when(mFeatureFactory.searchFeatureProvider
-                .getInstalledAppSearchLoader(any(Context.class), anyString()))
-                .thenReturn(mInstalledAppResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -134,10 +129,12 @@ public class SearchFragmentTest {
         activityController = Robolectric.buildActivity(SearchActivity.class);
         activityController.setup(bundle);
 
-        verify(mFeatureFactory.searchFeatureProvider)
+        verify(mFeatureFactory.searchFeatureProvider, never())
                 .getDatabaseSearchLoader(any(Context.class), anyString());
-        verify(mFeatureFactory.searchFeatureProvider)
+        verify(mFeatureFactory.searchFeatureProvider, never())
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
+        verify(mFeatureFactory.searchFeatureProvider, times(2))
+                .getSavedQueryLoader(any(Context.class));
     }
 
     @Test
@@ -160,6 +157,7 @@ public class SearchFragmentTest {
 
         fragment.onQueryTextChange(testQuery);
         activityController.get().onBackPressed();
+
         activityController.pause().stop().destroy();
 
         verify(mFeatureFactory.metricsFeatureProvider, never()).action(
@@ -174,7 +172,7 @@ public class SearchFragmentTest {
     }
 
     @Test
-    public void queryTextChangeToEmpty_shouldTriggerSavedQueryLoader() {
+    public void queryTextChangeToEmpty_shouldLoadSavedQuery() {
         when(mFeatureFactory.searchFeatureProvider
                 .getDatabaseSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mDatabaseResultLoader);
@@ -190,20 +188,15 @@ public class SearchFragmentTest {
 
         SearchFragment fragment = spy((SearchFragment) activityController.get().getFragmentManager()
                 .findFragmentById(R.id.main_content));
-
-        final SearchResultsAdapter adapter = mock(SearchResultsAdapter.class);
-        ReflectionHelpers.setField(fragment, "mSearchAdapter", adapter);
+        ReflectionHelpers.setField(fragment, "mSavedQueryController", mSavedQueryController);
+        fragment.mQuery = "123";
+        fragment.onQueryTextChange("");
 
         verify(mFeatureFactory.searchFeatureProvider, never())
                 .getDatabaseSearchLoader(any(Context.class), anyString());
         verify(mFeatureFactory.searchFeatureProvider, never())
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
-        verify(mFeatureFactory.searchFeatureProvider)
-                .getSavedQueryLoader(any(Context.class));
-
-        fragment.onLoadFinished(mSavedQueryLoader, null /* data */);
-
-        verify(adapter).displaySavedQuery(anyList());
+        verify(mSavedQueryController).loadSavedQueries();
     }
 
     @Test
@@ -235,6 +228,8 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
 
         ActivityController<SearchActivity> activityController =
                 Robolectric.buildActivity(SearchActivity.class);
@@ -258,6 +253,8 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
 
         ActivityController<SearchActivity> activityController =
                 Robolectric.buildActivity(SearchActivity.class);
@@ -282,12 +279,14 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
 
         ActivityController<SearchActivity> activityController =
                 Robolectric.buildActivity(SearchActivity.class);
         activityController.setup();
-        SearchFragment fragment = (SearchFragment) spy(activityController.get().getFragmentManager()
-                .findFragmentById(R.id.main_content));
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
 
         fragment.onQueryTextChange("non-empty");
 

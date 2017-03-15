@@ -54,11 +54,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
     // State values
     private static final String STATE_QUERY = "state_query";
+    private static final String STATE_SHOWING_SAVED_QUERY = "state_showing_saved_query";
     private static final String STATE_NEVER_ENTERED_QUERY = "state_never_entered_query";
     private static final String STATE_RESULT_CLICK_COUNT = "state_result_click_count";
 
     // Loader IDs
-    private static final int LOADER_ID_RECENTS = 0;
     private static final int LOADER_ID_DATABASE = 1;
     private static final int LOADER_ID_INSTALLED_APPS = 2;
 
@@ -74,12 +74,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     String mQuery;
 
-    private final SaveQueryCallback mSaveQueryCallback =
-            new SaveQueryCallback();
-
     private boolean mNeverEnteredQuery = true;
+    private boolean mShowingSavedQuery;
     private int mResultClickCount;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private SavedQueryController mSavedQueryController;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     SearchFeatureProvider mSearchFeatureProvider;
@@ -117,20 +116,26 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mSearchAdapter = new SearchResultsAdapter(this);
-
-        mSearchFeatureProvider.initFeedbackButton();
-
         final LoaderManager loaderManager = getLoaderManager();
+        mSearchAdapter = new SearchResultsAdapter(this);
+        mSavedQueryController = new SavedQueryController(
+                getContext(), loaderManager, mSearchAdapter);
+        mSearchFeatureProvider.initFeedbackButton();
 
         if (savedInstanceState != null) {
             mQuery = savedInstanceState.getString(STATE_QUERY);
             mNeverEnteredQuery = savedInstanceState.getBoolean(STATE_NEVER_ENTERED_QUERY);
             mResultClickCount = savedInstanceState.getInt(STATE_RESULT_CLICK_COUNT);
-            loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
-            loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
+            mShowingSavedQuery = savedInstanceState.getBoolean(STATE_SHOWING_SAVED_QUERY);
+            if (mShowingSavedQuery) {
+                mSavedQueryController.loadSavedQueries();
+            } else {
+                loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
+                loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
+            }
         } else {
-            loaderManager.initLoader(LOADER_ID_RECENTS, null, this);
+            mShowingSavedQuery = true;
+            mSavedQueryController.loadSavedQueries();
         }
 
         final Activity activity = getActivity();
@@ -180,6 +185,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         super.onSaveInstanceState(outState);
         outState.putString(STATE_QUERY, mQuery);
         outState.putBoolean(STATE_NEVER_ENTERED_QUERY, mNeverEnteredQuery);
+        outState.putBoolean(STATE_SHOWING_SAVED_QUERY, mShowingSavedQuery);
         outState.putInt(STATE_RESULT_CLICK_COUNT, mResultClickCount);
     }
 
@@ -206,7 +212,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             final LoaderManager loaderManager = getLoaderManager();
             loaderManager.destroyLoader(LOADER_ID_DATABASE);
             loaderManager.destroyLoader(LOADER_ID_INSTALLED_APPS);
-            loaderManager.restartLoader(LOADER_ID_RECENTS, null /* args */, this /* callback */);
+            mShowingSavedQuery = true;
+            mSavedQueryController.loadSavedQueries();
             mSearchFeatureProvider.hideFeedbackButton();
         } else {
             restartLoaders();
@@ -218,8 +225,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public boolean onQueryTextSubmit(String query) {
         // Save submitted query.
-        getLoaderManager().restartLoader(SaveQueryCallback.LOADER_ID_SAVE_QUERY_TASK, null,
-                mSaveQueryCallback);
+        mSavedQueryController.saveQuery(mQuery);
         hideKeyboard();
         return true;
     }
@@ -233,8 +239,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 return mSearchFeatureProvider.getDatabaseSearchLoader(activity, mQuery);
             case LOADER_ID_INSTALLED_APPS:
                 return mSearchFeatureProvider.getInstalledAppSearchLoader(activity, mQuery);
-            case LOADER_ID_RECENTS:
-                return mSearchFeatureProvider.getSavedQueryLoader(activity);
             default:
                 return null;
         }
@@ -243,18 +247,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public void onLoadFinished(Loader<List<? extends SearchResult>> loader,
             List<? extends SearchResult> data) {
-        final int resultCount;
-        switch (loader.getId()) {
-            case LOADER_ID_RECENTS:
-                resultCount = mSearchAdapter.displaySavedQuery(data);
-                break;
-            default:
-                mSearchAdapter.addSearchResults(data, loader.getClass().getName());
-                if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
-                    return;
-                }
-                resultCount = mSearchAdapter.displaySearchResults();
+        mSearchAdapter.addSearchResults(data, loader.getClass().getName());
+        if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
+            return;
         }
+        final int resultCount = mSearchAdapter.displaySearchResults();
         mNoResultsView.setVisibility(resultCount == 0 ? View.VISIBLE : View.GONE);
         mSearchFeatureProvider.showFeedbackButton(this, getView());
     }
@@ -264,8 +261,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     public void onSearchResultClicked() {
-        getLoaderManager().restartLoader(SaveQueryCallback.LOADER_ID_SAVE_QUERY_TASK, null,
-                mSaveQueryCallback);
+        mSavedQueryController.saveQuery(mQuery);
         mResultClickCount++;
     }
 
@@ -278,13 +274,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     public void onRemoveSavedQueryClicked(CharSequence title) {
-        final Bundle args = new Bundle();
-        args.putString(SaveQueryCallback.ARG_REMOVE_QUERY, title.toString());
-        getLoaderManager().restartLoader(SaveQueryCallback.LOADER_ID_REMOVE_QUERY_TASK,
-                args, mSaveQueryCallback);
+        mSavedQueryController.removeQuery(title.toString());
     }
 
     private void restartLoaders() {
+        mShowingSavedQuery = false;
         final LoaderManager loaderManager = getLoaderManager();
         mUnfinishedLoadersCount.set(NUM_QUERY_LOADERS);
         loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
@@ -323,39 +317,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
         if (mResultsRecyclerView != null) {
             mResultsRecyclerView.requestFocus();
-        }
-    }
-
-    private class SaveQueryCallback implements LoaderManager.LoaderCallbacks<Void> {
-        // TODO: make a generic background task manager to handle one-off tasks like this one.
-
-        private static final int LOADER_ID_SAVE_QUERY_TASK = 0;
-        private static final int LOADER_ID_REMOVE_QUERY_TASK = 1;
-        private static final String ARG_REMOVE_QUERY = "remove_query";
-
-        @Override
-        public Loader<Void> onCreateLoader(int id, Bundle args) {
-            switch (id) {
-                case LOADER_ID_SAVE_QUERY_TASK:
-                    return new SavedQueryRecorder(getActivity(), mQuery);
-                case LOADER_ID_REMOVE_QUERY_TASK:
-                    return new SavedQueryRemover(getActivity(), args.getString(ARG_REMOVE_QUERY));
-            }
-            return null;
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Void> loader, Void data) {
-            switch (loader.getId()) {
-                case LOADER_ID_REMOVE_QUERY_TASK:
-                    getLoaderManager().restartLoader(LOADER_ID_RECENTS, null, SearchFragment.this);
-                    break;
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Void> loader) {
-
         }
     }
 }
