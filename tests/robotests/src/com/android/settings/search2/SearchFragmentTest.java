@@ -276,7 +276,6 @@ public class SearchFragmentTest {
 
     @Test
     public void onLoadFinished_ShowsFeedback() {
-
         when(mFeatureFactory.searchFeatureProvider
                 .getDatabaseSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockDBLoader(RuntimeEnvironment.application));

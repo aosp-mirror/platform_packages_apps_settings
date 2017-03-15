@@ -45,6 +45,8 @@ public class SavedQueryViewHolderTest {
     private Context mContext;
     private SavedQueryViewHolder mHolder;
     private View mView;
+    private View mTitleView;
+    private View mRemoveButton;
 
     @Before
     public void setUp() {
@@ -52,6 +54,8 @@ public class SavedQueryViewHolderTest {
         mContext = RuntimeEnvironment.application;
         mView = LayoutInflater.from(mContext)
                 .inflate(R.layout.search_saved_query_item, null);
+        mTitleView = mView.findViewById(android.R.id.title);
+        mRemoveButton = mView.findViewById(android.R.id.icon);
         mHolder = new SavedQueryViewHolder(mView);
     }
 
@@ -60,8 +64,10 @@ public class SavedQueryViewHolderTest {
         final SearchResult result = mock(SearchResult.class);
         mHolder.onBind(mSearchFragment, result);
 
-        mView.performClick();
+        mTitleView.performClick();
+        mRemoveButton.performClick();
 
         verify(mSearchFragment).onSavedQueryClicked(any(CharSequence.class));
+        verify(mSearchFragment).onRemoveSavedQueryClicked(any(CharSequence.class));
     }
 }
