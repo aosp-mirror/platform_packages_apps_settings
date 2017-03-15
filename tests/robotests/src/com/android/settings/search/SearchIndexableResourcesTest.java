@@ -63,7 +63,6 @@ public class SearchIndexableResourcesTest {
 
         assertThat(index).isNotNull();
         assertThat(index.className).isEqualTo("java.lang.String");
-        assertThat(index.rank).isEqualTo(Ranking.RANK_OTHERS);
         assertThat(index.xmlResId).isEqualTo(XML_RES_ID);
         assertThat(index.iconResId).isEqualTo(ICON_RES_ID);
         final int afterCount = SearchIndexableResources.values().size();
@@ -77,7 +76,6 @@ public class SearchIndexableResourcesTest {
 
         assertThat(index).isNotNull();
         assertThat(index.className).isEqualTo(WifiSettings.class.getName());
-        assertThat(index.rank).isEqualTo(Ranking.RANK_WIFI);
         assertThat(index.xmlResId).isEqualTo(NO_DATA_RES_ID);
         assertThat(index.iconResId).isEqualTo(R.drawable.ic_settings_wireless);
     }

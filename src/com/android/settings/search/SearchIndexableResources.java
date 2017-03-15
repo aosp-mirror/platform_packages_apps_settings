@@ -95,8 +95,7 @@ public final class SearchIndexableResources {
     static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,
             @DrawableRes int iconResId) {
         String className = indexClass.getName();
-        int rank = Ranking.getRankForClassName(className);
-        sResMap.put(className, new SearchIndexableResource(rank, xmlResId, className, iconResId));
+        sResMap.put(className, new SearchIndexableResource(0, xmlResId, className, iconResId));
     }
 
     static {

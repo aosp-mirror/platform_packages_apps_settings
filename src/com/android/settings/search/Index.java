@@ -331,7 +331,7 @@ public class Index {
 
     private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
         try {
-            final int baseRank = Ranking.getBaseRankForAuthority(authority);
+            final int baseRank = 0;
 
             final Context context = mBaseAuthority.equals(authority) ?
                     mContext : mContext.createPackageContext(packageName, 0);
