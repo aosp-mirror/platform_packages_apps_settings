@@ -168,6 +168,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final Activity activity = getActivity();
         if (activity != null) {
             mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
+            setProgressBarVisible(false);
         }
     }
 
@@ -602,14 +603,19 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onAccessPointsChanged() {
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
+        final int wifiState = mWifiManager.getWifiState();
         if (isUiRestricted()) {
             if (!isUiRestrictedByOnlyAdmin()) {
-                addMessagePreference(R.string.wifi_empty_list_user_restricted);
+                if (WifiManager.WIFI_STATE_DISABLED == wifiState) {
+                    addMessagePreference(R.string.wifi_empty_list_wifi_off);
+                }
+                else {
+                    addMessagePreference(R.string.wifi_empty_list_user_restricted);
+                }
             }
             getPreferenceScreen().removeAll();
             return;
         }
-        final int wifiState = mWifiManager.getWifiState();
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -702,7 +708,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void setOffMessage() {
         if (isUiRestricted()) {
             if (!isUiRestrictedByOnlyAdmin()) {
-                addMessagePreference(R.string.wifi_empty_list_user_restricted);
+                addMessagePreference(R.string.wifi_empty_list_wifi_off);
             }
             getPreferenceScreen().removeAll();
             return;
@@ -758,7 +764,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
-            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
+            mProgressHeader.setVisibility(visible && !isUiRestricted() ? View.VISIBLE : View.GONE);
         }
     }
 
