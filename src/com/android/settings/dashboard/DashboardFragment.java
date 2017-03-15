@@ -69,7 +69,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
         mProgressiveDisclosureMixin = mDashboardFeatureProvider
-                .getProgressiveDisclosureMixin(context, this);
+                .getProgressiveDisclosureMixin(context, this, getArguments());
         getLifecycle().addObserver(mProgressiveDisclosureMixin);
 
         List<PreferenceController> controllers = getPreferenceControllers(context);
