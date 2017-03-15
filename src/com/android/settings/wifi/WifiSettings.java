@@ -642,7 +642,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 for (; index < numAccessPointsToShow; index++) {
                     AccessPoint accessPoint = accessPoints.get(index);
                     // Ignore access points that are out of range.
-                    if (accessPoint.getLevel() != -1) {
+                    if (accessPoint.isReachable()) {
                         String key = accessPoint.getBssid();
                         if (TextUtils.isEmpty(key)) {
                             key = accessPoint.getSsidStr();
