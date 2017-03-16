@@ -18,8 +18,9 @@
         android:title="@string/accessibility_settings"
         android:persistent="true">
 
-    <ListPreference
+    <Preference
             android:key="accessibility_shortcut_preference"
+            android:fragment="com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment"
             android:title="@string/accessibility_global_gesture_preference_title"/>
 
     <PreferenceCategory

@@ -61,7 +61,6 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         }
     }
 
-
     @Override
     public void bindPreferenceExtra(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {

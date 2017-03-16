@@ -30,6 +30,7 @@ import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.MagnificationPreferenceFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
@@ -175,6 +176,8 @@ public final class SearchIndexableResources {
         addIndex(LockscreenDashboardFragment.class, R.xml.security_lockscreen_settings,
             R.drawable.ic_settings_security);
         addIndex(MagnificationPreferenceFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_accessibility);
+        addIndex(AccessibilityShortcutPreferenceFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accessibility);
     }
 

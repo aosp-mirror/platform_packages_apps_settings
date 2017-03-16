@@ -20,6 +20,7 @@ import android.app.AppGlobals;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -76,16 +77,15 @@ public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
     public CharSequence loadLabel() {
         if (componentName != null) {
             try {
-                final ActivityInfo actInfo = AppGlobals.getPackageManager().getActivityInfo(
-                        componentName, 0, userId);
-                if (actInfo != null) {
-                    return actInfo.loadLabel(mPm.getPackageManager());
+                final ComponentInfo componentInfo = getComponentInfo();
+                if (componentInfo != null) {
+                    return componentInfo.loadLabel(mPm.getPackageManager());
                 } else {
                     final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, userId);
                     return appInfo.loadLabel(mPm.getPackageManager());
                 }
-            } catch (RemoteException | PackageManager.NameNotFoundException e) {
+            } catch (PackageManager.NameNotFoundException e) {
                 return null;
             }
         } else if (packageItemInfo != null) {
@@ -100,16 +100,15 @@ public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
     public Drawable loadIcon() {
         if (componentName != null) {
             try {
-                final ActivityInfo actInfo = AppGlobals.getPackageManager().getActivityInfo(
-                        componentName, 0, userId);
-                if (actInfo != null) {
-                    return actInfo.loadIcon(mPm.getPackageManager());
+                final ComponentInfo componentInfo = getComponentInfo();
+                if (componentInfo != null) {
+                    return componentInfo.loadIcon(mPm.getPackageManager());
                 } else {
                     final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, userId);
                     return appInfo.loadIcon(mPm.getPackageManager());
                 }
-            } catch (RemoteException | PackageManager.NameNotFoundException e) {
+            } catch (PackageManager.NameNotFoundException e) {
                 return null;
             }
         }
@@ -127,6 +126,20 @@ public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
         } else if (packageItemInfo != null) {
             return packageItemInfo.packageName;
         } else {
+            return null;
+        }
+    }
+
+    private ComponentInfo getComponentInfo() {
+        try {
+            ComponentInfo componentInfo = AppGlobals.getPackageManager().getActivityInfo(
+                    componentName, 0, userId);
+            if (componentInfo == null) {
+                componentInfo = AppGlobals.getPackageManager().getServiceInfo(
+                        componentName, 0, userId);
+            }
+            return componentInfo;
+        } catch (RemoteException e) {
             return null;
         }
     }

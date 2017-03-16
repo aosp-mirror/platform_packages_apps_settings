@@ -78,9 +78,16 @@ public class AccessibilityServiceWarning {
         return StorageManager.isNonDefaultBlockEncrypted();
     }
 
-    private static View createEnableDialogContentView(Activity parentActivity,
+    /**
+     * Get a content View for a dialog to confirm that they want to enable a service.
+     *
+     * @param context A valid context
+     * @param info The info about a service
+     * @return A content view suitable for viewing
+     */
+    private static View createEnableDialogContentView(Context context,
             AccessibilityServiceInfo info) {
-        LayoutInflater inflater = (LayoutInflater) parentActivity.getSystemService(
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
         View content = inflater.inflate(R.layout.enable_accessibility_service_dialog_content,
@@ -89,8 +96,8 @@ public class AccessibilityServiceWarning {
         TextView encryptionWarningView = (TextView) content.findViewById(
                 R.id.encryption_warning);
         if (isFullDiskEncrypted()) {
-            String text = parentActivity.getString(R.string.enable_service_encryption_warning,
-                    info.getResolveInfo().loadLabel(parentActivity.getPackageManager()));
+            String text = context.getString(R.string.enable_service_encryption_warning,
+                    info.getResolveInfo().loadLabel(context.getPackageManager()));
             encryptionWarningView.setText(text);
             encryptionWarningView.setVisibility(View.VISIBLE);
         } else {
@@ -99,8 +106,8 @@ public class AccessibilityServiceWarning {
 
         TextView capabilitiesHeaderView = (TextView) content.findViewById(
                 R.id.capabilities_header);
-        capabilitiesHeaderView.setText(parentActivity.getString(R.string.capabilities_list_title,
-                info.getResolveInfo().loadLabel(parentActivity.getPackageManager())));
+        capabilitiesHeaderView.setText(context.getString(R.string.capabilities_list_title,
+                info.getResolveInfo().loadLabel(context.getPackageManager())));
 
         LinearLayout capabilitiesView = (LinearLayout) content.findViewById(R.id.capabilities);
 
@@ -110,21 +117,21 @@ public class AccessibilityServiceWarning {
 
         ImageView imageView = (ImageView) capabilityView.findViewById(
                 com.android.internal.R.id.perm_icon);
-        imageView.setImageDrawable(parentActivity.getDrawable(
+        imageView.setImageDrawable(context.getDrawable(
                 com.android.internal.R.drawable.ic_text_dot));
 
         TextView labelView = (TextView) capabilityView.findViewById(
                 com.android.internal.R.id.permission_group);
-        labelView.setText(parentActivity.getString(
+        labelView.setText(context.getString(
                 R.string.capability_title_receiveAccessibilityEvents));
 
         TextView descriptionView = (TextView) capabilityView.findViewById(
                 com.android.internal.R.id.permission_list);
         descriptionView.setText(
-                parentActivity.getString(R.string.capability_desc_receiveAccessibilityEvents));
+                context.getString(R.string.capability_desc_receiveAccessibilityEvents));
 
         List<AccessibilityServiceInfo.CapabilityInfo> capabilities =
-                info.getCapabilityInfos(parentActivity);
+                info.getCapabilityInfos(context);
 
         capabilitiesView.addView(capabilityView);
 
@@ -138,16 +145,16 @@ public class AccessibilityServiceWarning {
 
             imageView = (ImageView) capabilityView.findViewById(
                     com.android.internal.R.id.perm_icon);
-            imageView.setImageDrawable(parentActivity.getDrawable(
+            imageView.setImageDrawable(context.getDrawable(
                     com.android.internal.R.drawable.ic_text_dot));
 
             labelView = (TextView) capabilityView.findViewById(
                     com.android.internal.R.id.permission_group);
-            labelView.setText(parentActivity.getString(capability.titleResId));
+            labelView.setText(context.getString(capability.titleResId));
 
             descriptionView = (TextView) capabilityView.findViewById(
                     com.android.internal.R.id.permission_list);
-            descriptionView.setText(parentActivity.getString(capability.descResId));
+            descriptionView.setText(context.getString(capability.descResId));
 
             capabilitiesView.addView(capabilityView);
         }
