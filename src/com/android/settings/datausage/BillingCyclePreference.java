@@ -58,8 +58,9 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
         mSubId = subId;
         mServices = services;
         mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
-        setSummary(getContext().getString(R.string.billing_cycle_fragment_summary,
-                mPolicy != null ? mPolicy.cycleDay : 1));
+        setSummary(getContext().getString(R.string.billing_cycle_fragment_summary, mPolicy != null
+                ? mPolicy.cycleDay
+                : "1"));
         setIntent(getIntent());
     }
 

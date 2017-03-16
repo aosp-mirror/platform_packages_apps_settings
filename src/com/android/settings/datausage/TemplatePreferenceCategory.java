@@ -17,10 +17,10 @@ package com.android.settings.datausage;
 import android.content.Context;
 import android.net.NetworkTemplate;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.util.AttributeSet;
-import com.android.settings.DividedCategory;
 
-public class TemplatePreferenceCategory extends DividedCategory implements TemplatePreference {
+public class TemplatePreferenceCategory extends PreferenceCategory implements TemplatePreference {
 
     private NetworkTemplate mTemplate;
     private int mSubId;
