@@ -49,7 +49,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;
@@ -248,7 +247,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testAddResource_RowsInserted() {
-        SearchIndexableResource resource = getFakeResource(R.xml.ia_display_settings);
+        SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(16);
@@ -256,7 +255,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testAddResource_withNIKs_rowsInsertedDisabled() {
-        SearchIndexableResource resource = getFakeResource(R.xml.ia_display_settings);
+        SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
         // Only add 2 of 16 items to be disabled.
         String[] keys = {"brightness", "wallpaper"};
         Map<String, Set<String>> niks = getNonIndexableKeys(keys);
