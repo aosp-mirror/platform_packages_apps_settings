@@ -47,13 +47,10 @@ import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
@@ -63,7 +60,6 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DynamicIndexableContentMonitor;
@@ -81,9 +77,7 @@ import java.util.Set;
 public class SettingsActivity extends SettingsDrawerActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
-        ButtonBarHandler, FragmentManager.OnBackStackChangedListener,
-        SearchView.OnQueryTextListener, SearchView.OnCloseListener,
-        MenuItem.OnActionExpandListener {
+        ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
 
     private static final String LOG_TAG = "Settings";
 
@@ -91,8 +85,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
-    private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
-    private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
     private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
     private static final String SAVE_KEY_SHOW_SEARCH = ":settings:show_search";
 
@@ -166,8 +158,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
-    private static final String EMPTY_QUERY = "";
-
     private static final int REQUEST_SUGGESTION = 42;
 
     private String mFragmentClass;
@@ -226,24 +216,14 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private ViewGroup mContent;
 
-    private SearchView mSearchView;
-    private MenuItem mSearchMenuItem;
-    private boolean mSearchMenuItemExpanded = false;
-    private SearchResultsSummary mSearchResultsFragment;
     private SearchFeatureProvider mSearchFeatureProvider;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
-    private boolean mNeedToRevertToInitialFragment = false;
-
     private DashboardFeatureProvider mDashboardFeatureProvider;
-    private Intent mResultIntentData;
     private ComponentName mCurrentSuggestion;
-
-    @VisibleForTesting
-    String mSearchQuery;
 
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
@@ -270,51 +250,12 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (mNeedToRevertToInitialFragment) {
-            revertToInitialFragment();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mDisplaySearch) {
             return false;
         }
 
-        MenuInflater inflater = getMenuInflater();
-        if (mSearchFeatureProvider.isEnabled(this)) {
-            mSearchFeatureProvider.setUpSearchMenu(menu, this);
-            return true;
-        }
-        inflater.inflate(R.menu.options_menu, menu);
-
-
-        // Cache the search query (can be overridden by the OnQueryTextListener)
-        final String query = mSearchQuery;
-
-        mSearchMenuItem = menu.findItem(R.id.search);
-        mSearchView = (SearchView) mSearchMenuItem.getActionView();
-
-        if (mSearchMenuItem == null || mSearchView == null) {
-            return false;
-        }
-
-        if (mSearchResultsFragment != null) {
-            mSearchResultsFragment.setSearchView(mSearchView);
-        }
-
-        mSearchMenuItem.setOnActionExpandListener(this);
-        mSearchView.setMaxWidth(Integer.MAX_VALUE);
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setOnCloseListener(this);
-
-        if (mSearchMenuItemExpanded) {
-            mSearchMenuItem.expandActionView();
-        }
-        mSearchView.setQuery(query, true /* submit */);
+        mSearchFeatureProvider.setUpSearchMenu(menu, this);
         return true;
     }
 
@@ -417,8 +358,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (savedState != null) {
             // We are restarting from a previous saved state; used that to initialize, instead
             // of starting fresh.
-            mSearchMenuItemExpanded = savedState.getBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED);
-            mSearchQuery = savedState.getString(SAVE_KEY_SEARCH_QUERY);
             setTitleFromIntent(intent);
 
             ArrayList<DashboardCategory> categories =
@@ -430,7 +369,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
-            mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
 
         } else {
             launchSettingFragment(initialFragmentName, isSubSettings, intent);
@@ -456,21 +394,21 @@ public class SettingsActivity extends SettingsDrawerActivity
                 Button backButton = (Button)findViewById(R.id.back_button);
                 backButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
-                        setResult(RESULT_CANCELED, getResultIntentData());
+                        setResult(RESULT_CANCELED, null);
                         finish();
                     }
                 });
                 Button skipButton = (Button)findViewById(R.id.skip_button);
                 skipButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
-                        setResult(RESULT_OK, getResultIntentData());
+                        setResult(RESULT_OK, null);
                         finish();
                     }
                 });
                 mNextButton = (Button)findViewById(R.id.next_button);
                 mNextButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
-                        setResult(RESULT_OK, getResultIntentData());
+                        setResult(RESULT_OK, null);
                         finish();
                     }
                 });
@@ -614,20 +552,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         outState.putBoolean(SAVE_KEY_SHOW_HOME_AS_UP, mDisplayHomeAsUpEnabled);
-        outState.putBoolean(SAVE_KEY_SHOW_SEARCH, mDisplaySearch);
-
-        if (mDisplaySearch) {
-            // The option menus are created if the ActionBar is visible and they are also created
-            // asynchronously. If you launch Settings with an Intent action like
-            // android.intent.action.POWER_USAGE_SUMMARY and at the same time your device is locked
-            // thru a LockScreen, onCreateOptionsMenu() is not yet called and references to the search
-            // menu item and search view are null.
-            boolean isExpanded = (mSearchMenuItem != null) && mSearchMenuItem.isActionViewExpanded();
-            outState.putBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED, isExpanded);
-
-            String query = (mSearchView != null) ? mSearchView.getQuery().toString() : EMPTY_QUERY;
-            outState.putString(SAVE_KEY_SEARCH_QUERY, query);
-        }
     }
 
     @Override
@@ -653,9 +577,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
         mDynamicIndexableContentMonitor.register(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
 
-        if(mDisplaySearch && !TextUtils.isEmpty(mSearchQuery)) {
-            onQueryTextSubmit(mSearchQuery);
-        }
         updateTilesList();
     }
 
@@ -1009,96 +930,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public boolean shouldUpRecreateTask(Intent targetIntent) {
         return super.shouldUpRecreateTask(new Intent(this, SettingsActivity.class));
-    }
-
-    @Deprecated
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        if (mSearchFeatureProvider.isEnabled(this)) {
-            return false;
-        }
-        mSearchQuery = query;
-        switchToSearchResultsFragmentIfNeeded();
-        return mSearchResultsFragment.onQueryTextSubmit(query);
-    }
-
-    @Deprecated
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        mSearchQuery = newText;
-        if (mSearchFeatureProvider.isEnabled(this) || mSearchResultsFragment == null) {
-            return false;
-        }
-        return mSearchResultsFragment.onQueryTextChange(newText);
-    }
-
-    @Override
-    public boolean onClose() {
-        return false;
-    }
-
-    @Override
-    public boolean onMenuItemActionExpand(MenuItem item) {
-        if (item.getItemId() == mSearchMenuItem.getItemId()) {
-            switchToSearchResultsFragmentIfNeeded();
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onMenuItemActionCollapse(MenuItem item) {
-        if (item.getItemId() == mSearchMenuItem.getItemId()) {
-            if (mSearchMenuItemExpanded) {
-                revertToInitialFragment();
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void onProfileTileOpen() {
-        if (!mIsShowingDashboard) {
-            finish();
-        }
-    }
-
-    @Deprecated
-    private void switchToSearchResultsFragmentIfNeeded() {
-        if (mSearchResultsFragment != null) {
-            return;
-        }
-        Fragment current = getFragmentManager().findFragmentById(R.id.main_content);
-        if (current != null && current instanceof SearchResultsSummary) {
-            mSearchResultsFragment = (SearchResultsSummary) current;
-        } else {
-            setContentHeaderView(null);
-            mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
-                    SearchResultsSummary.class.getName(), null, false, true,
-                    R.string.search_results_title, null, true);
-        }
-        mSearchResultsFragment.setSearchView(mSearchView);
-        mSearchMenuItemExpanded = true;
-    }
-
-    @Deprecated
-    public void needToRevertToInitialFragment() {
-        mNeedToRevertToInitialFragment = true;
-    }
-
-    @Deprecated
-    private void revertToInitialFragment() {
-        mNeedToRevertToInitialFragment = false;
-        mSearchResultsFragment = null;
-        mSearchMenuItemExpanded = false;
-        getFragmentManager().popBackStackImmediate(SettingsActivity.BACK_STACK_PREFS,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        if (mSearchMenuItem != null) {
-            mSearchMenuItem.collapseActionView();
-        }
-    }
-
-    public Intent getResultIntentData() {
-        return mResultIntentData;
     }
 
     public void startSuggestion(Intent intent) {
