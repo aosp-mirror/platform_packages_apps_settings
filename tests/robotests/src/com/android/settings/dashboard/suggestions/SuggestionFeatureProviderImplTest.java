@@ -36,6 +36,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyString;
@@ -78,6 +79,32 @@ public class SuggestionFeatureProviderImplTest {
         mProvider.dismissSuggestion(mContext, null, mSuggestion);
 
         verifyZeroInteractions(mFactory.metricsFeatureProvider);
+    }
+
+    @Test
+    public void getSuggestionIdentifier_samePackage_returnClassName() {
+        final Tile suggestion = new Tile();
+        suggestion.intent = new Intent()
+                .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
+        assertThat(mProvider.getSuggestionIdentifier(RuntimeEnvironment.application, suggestion))
+                .isEqualTo("123");
+    }
+
+    @Test
+    public void getSuggestionIdentifier_differentPackage_returnPackageName() {
+        final Tile suggestion = new Tile();
+        suggestion.intent = new Intent()
+                .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
+        assertThat(mProvider.getSuggestionIdentifier(mContext, suggestion))
+                .isEqualTo(RuntimeEnvironment.application.getPackageName());
+    }
+
+    @Test
+    public void getSuggestionIdentifier_nullComponent_shouldNotCrash() {
+        final Tile suggestion = new Tile();
+        suggestion.intent = new Intent();
+        assertThat(mProvider.getSuggestionIdentifier(mContext, suggestion))
+                .isNotEmpty();
     }
 
     @Test

@@ -21,7 +21,6 @@ import android.content.pm.PackageManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
@@ -50,9 +49,10 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
 
     public SuggestionFeatureProviderImpl(Context context) {
+        final Context appContext = context.getApplicationContext();
         mSuggestionRanker = new SuggestionRanker(
-                new SuggestionFeaturizer(new EventStore(context.getApplicationContext())));
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context)
+                new SuggestionFeaturizer(new EventStore(appContext)));
+        mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
     }
 
@@ -68,7 +68,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         }
         mMetricsFeatureProvider.action(
                 context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                DashboardAdapter.getSuggestionIdentifier(context, suggestion));
+                getSuggestionIdentifier(context, suggestion));
 
         final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
         if (!parser.dismissSuggestion(suggestion, isSmartSuggestionEnabled)) {
@@ -79,6 +79,20 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
         parser.markCategoryDone(suggestion.category);
+    }
+
+    @Override
+    public String getSuggestionIdentifier(Context context, Tile suggestion) {
+        if (suggestion.intent == null || suggestion.intent.getComponent() == null) {
+            return "unknown_suggestion";
+        }
+        String packageName = suggestion.intent.getComponent().getPackageName();
+        if (packageName.equals(context.getPackageName())) {
+            // Since Settings provides several suggestions, fill in the class instead of the
+            // package for these.
+            packageName = suggestion.intent.getComponent().getClassName();
+        }
+        return packageName;
     }
 
 }

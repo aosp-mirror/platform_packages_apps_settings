@@ -49,4 +49,9 @@ public interface SuggestionFeatureProvider {
      * Dismisses a suggestion.
      */
     void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion);
+
+    /**
+     * Returns an identifier for the suggestion
+     */
+    String getSuggestionIdentifier(Context context, Tile suggestion);
 }
