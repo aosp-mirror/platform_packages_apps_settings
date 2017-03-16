@@ -41,7 +41,6 @@ import android.util.Xml;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.Ranking;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.SearchIndexableResources;
 
@@ -346,19 +345,17 @@ public class DatabaseIndexingManager {
     @VisibleForTesting
     boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
         try {
-            // TODO delete base rank. does nothing.
-            final int baseRank = Ranking.getBaseRankForAuthority(authority);
 
             final Context context = mBaseAuthority.equals(authority) ?
                     mContext : mContext.createPackageContext(packageName, 0);
 
             final Uri uriForResources = buildUriForXmlResources(authority);
             addIndexablesForXmlResourceUri(context, packageName, uriForResources,
-                    SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS, baseRank);
+                    SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS);
 
             final Uri uriForRawData = buildUriForRawData(authority);
             addIndexablesForRawDataUri(context, packageName, uriForRawData,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS, baseRank);
+                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(LOG_TAG, "Could not create context for " + packageName + ": "
@@ -497,7 +494,7 @@ public class DatabaseIndexingManager {
     }
 
     private void addIndexablesForXmlResourceUri(Context packageContext, String packageName,
-            Uri uri, String[] projection, int baseRank) {
+            Uri uri, String[] projection) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
         final Cursor cursor = resolver.query(uri, projection, null, null, null);
@@ -512,7 +509,6 @@ public class DatabaseIndexingManager {
             if (count > 0) {
                 while (cursor.moveToNext()) {
                     final int providerRank = cursor.getInt(COLUMN_INDEX_XML_RES_RANK);
-                    final int rank = (providerRank > 0) ? baseRank + providerRank : baseRank;
 
                     final int xmlResId = cursor.getInt(COLUMN_INDEX_XML_RES_RESID);
 
@@ -526,7 +522,6 @@ public class DatabaseIndexingManager {
                             COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS);
 
                     SearchIndexableResource sir = new SearchIndexableResource(packageContext);
-                    sir.rank = rank;
                     sir.xmlResId = xmlResId;
                     sir.className = className;
                     sir.packageName = packageName;
@@ -544,7 +539,7 @@ public class DatabaseIndexingManager {
     }
 
     private void addIndexablesForRawDataUri(Context packageContext, String packageName,
-            Uri uri, String[] projection, int baseRank) {
+            Uri uri, String[] projection) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
         final Cursor cursor = resolver.query(uri, projection, null, null, null);
@@ -559,7 +554,6 @@ public class DatabaseIndexingManager {
             if (count > 0) {
                 while (cursor.moveToNext()) {
                     final int providerRank = cursor.getInt(COLUMN_INDEX_RAW_RANK);
-                    final int rank = (providerRank > 0) ? baseRank + providerRank : baseRank;
 
                     final String title = cursor.getString(COLUMN_INDEX_RAW_TITLE);
                     final String summaryOn = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_ON);
@@ -582,7 +576,6 @@ public class DatabaseIndexingManager {
                     final int userId = cursor.getInt(COLUMN_INDEX_RAW_USER_ID);
 
                     SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
-                    data.rank = rank;
                     data.title = title;
                     data.summaryOn = summaryOn;
                     data.summaryOff = summaryOff;
