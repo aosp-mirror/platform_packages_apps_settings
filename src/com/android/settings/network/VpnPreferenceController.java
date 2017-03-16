@@ -150,13 +150,13 @@ public class VpnPreferenceController extends PreferenceController implements Lif
             uid = userInfo.id;
         }
         VpnConfig vpn = vpns.get(uid);
-        final String vpnName;
+        final String summary;
         if (vpn == null) {
-            vpnName = null;
+            summary = mContext.getString(R.string.vpn_disconnected_summary);
         } else {
-            vpnName = getNameForVpnConfig(vpn, UserHandle.of(uid));
+            summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
         }
-        new Handler(Looper.getMainLooper()).post(() -> mPreference.setSummary(vpnName));
+        new Handler(Looper.getMainLooper()).post(() -> mPreference.setSummary(summary));
     }
 
     private String getNameForVpnConfig(VpnConfig cfg, UserHandle user) {

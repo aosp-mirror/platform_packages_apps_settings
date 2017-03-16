@@ -2961,7 +2961,7 @@
     <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
     <string name="tether_settings_title_usb_bluetooth">Tethering</string>
     <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=50]-->
-    <string name="tether_settings_title_all">Hotspot &amp; Tethering</string>
+    <string name="tether_settings_title_all">Hotspot &amp; tethering</string>
     <!-- Tethering setting summary when both Wi-Fi hotspot and tether are turned on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_hotspot_on_tether_on">Hotspot on, tethering</string>
     <!-- Tethering setting summary when Wi-Fi hotspot is on and tether is off [CHAR LIMIT=NONE]-->
@@ -3019,7 +3019,7 @@
     <string name="tethering_help_button_text">Help</string>
 
     <!-- Wireless controls, item title to go into the network settings -->
-    <string name="network_settings_title">Mobile networks</string>
+    <string name="network_settings_title">Mobile network</string>
 
     <!-- Mobile plan [CHAR LIMIT=35]-->
     <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
@@ -5478,6 +5478,8 @@
     <string name="vpn_no_network">There is no network connection. Please try again later.</string>
     <!-- Toast message when VPN has disconnected automatically due to Clear credentials. [CHAR LIMIT=NONE] -->
     <string name="vpn_disconnected">Disconnected from VPN</string>
+    <!-- Seting subtext indicating the device is not currently connected to any VPN [CHAR LIMIT=40]-->
+    <string name="vpn_disconnected_summary">None</string>
     <!-- Toast message when a certificate is missing. [CHAR LIMIT=100] -->
     <string name="vpn_missing_cert">A certificate is missing. Please edit the profile.</string>
 
@@ -7192,7 +7194,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
-    <string name="usb_use_file_transfers">Transfer files</string>
+    <string name="usb_use_file_transfers">Transferring files</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
@@ -7200,7 +7202,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
-    <string name="usb_use_photo_transfers">Transfer photos (PTP)</string>
+    <string name="usb_use_photo_transfers">Transferring photos (PTP)</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
@@ -7208,7 +7210,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
-    <string name="usb_use_MIDI">Use device as MIDI</string>
+    <string name="usb_use_MIDI">Using device as MIDI</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
@@ -7220,8 +7222,6 @@
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
-    <!-- Summary for the USB preference when nothing is connected through the usb port.  [CHAR LIMIT=40] -->
-    <string name="usb_nothing_connected">Nothing connected</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
@@ -7467,7 +7467,7 @@
     <string name="screen_zoom_conversation_timestamp_4">Tue 6:03PM</string>
 
     <!-- Wi-Fi state - Disconnected [CHAR LIMIT=NONE] -->
-    <string name="disconnected">Disconnected</string>
+    <string name="disconnected">Not connected</string>
 
     <!-- Summary of data usage [CHAR LIMIT=NONE] -->
     <string name="data_usage_summary_format"><xliff:g id="amount" example="50%">%1$s</xliff:g> of data used</string>
@@ -7880,8 +7880,8 @@
     <!-- Title of screen controlling which apps have access to send premium SMS messages [CHAR LIMIT=60] -->
     <string name="premium_sms_access">Premium SMS access</string>
 
-    <!-- [CHAR LIMIT=25] Bluetooth is disabled. -->
-    <string name="bluetooth_disabled">Disabled</string>
+    <!-- Bluetooth is disabled. -->
+    <string name="bluetooth_disabled">Not visible to other devices</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>

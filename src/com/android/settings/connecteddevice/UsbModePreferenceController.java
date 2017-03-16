@@ -119,7 +119,7 @@ public class UsbModePreferenceController extends PreferenceController
                 preference.setEnabled(true);
                 preference.setSummary(getTitle(mode));
             } else {
-                preference.setSummary(R.string.usb_nothing_connected);
+                preference.setSummary(R.string.disconnected);
                 preference.setEnabled(false);
             }
         }

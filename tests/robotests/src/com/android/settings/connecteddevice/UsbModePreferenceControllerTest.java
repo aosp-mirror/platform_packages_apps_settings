@@ -113,7 +113,7 @@ public class UsbModePreferenceControllerTest {
         preference.setEnabled(true);
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(R.string.usb_nothing_connected));
+                mContext.getString(R.string.disconnected));
     }
 
     @Test
