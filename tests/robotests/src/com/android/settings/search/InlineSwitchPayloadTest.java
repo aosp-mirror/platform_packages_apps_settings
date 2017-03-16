@@ -17,6 +17,7 @@
 
 package com.android.settings.search;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.util.ArrayMap;
 import android.content.Context;
@@ -43,7 +44,7 @@ public class InlineSwitchPayloadTest {
         final int source = ResultPayload.SettingsSource.SECURE;
 
         final Context context = ShadowApplication.getInstance().getApplicationContext();
-        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, null);
+        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, null, null);
         try {
             payload.getSwitchValue(context);
             fail("Should have thrown exception for null map");
@@ -59,7 +60,7 @@ public class InlineSwitchPayloadTest {
         final ArrayMap<Integer, Boolean> map = new ArrayMap<>();
 
         final Context context = ShadowApplication.getInstance().getApplicationContext();
-        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map);
+        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map, null);
         try {
             payload.getSwitchValue(context);
             fail("Should have thrown exception for bad map");
@@ -76,13 +77,19 @@ public class InlineSwitchPayloadTest {
         final ArrayMap<Integer, Boolean> map = new ArrayMap<>();
         map.put(1, true);
         map.put(0, false);
+        final String intentKey = "key";
+        final String intentVal = "value";
+        final Intent intent = new Intent();
+        intent.putExtra(intentKey, intentVal);
 
-        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map);
+        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map, intent);
+        final Intent retainedIntent = payload.getIntent();
         assertThat(payload.settingsUri).isEqualTo(uri);
         assertThat(payload.inlineType).isEqualTo(type);
         assertThat(payload.settingSource).isEqualTo(source);
         assertThat(payload.valueMap.get(1)).isTrue();
         assertThat(payload.valueMap.get(0)).isFalse();
+        assertThat(retainedIntent.getStringExtra(intentKey)).isEqualTo(intentVal);
     }
 
     @Test
@@ -93,20 +100,27 @@ public class InlineSwitchPayloadTest {
         final ArrayMap<Integer, Boolean> map = new ArrayMap<>();
         map.put(1, true);
         map.put(0, false);
+        final String intentKey = "key";
+        final String intentVal = "value";
+        final Intent intent = new Intent();
+        intent.putExtra(intentKey, intentVal);
 
         Parcel parcel = Parcel.obtain();
         parcel.writeString(uri);
         parcel.writeInt(type);
         parcel.writeInt(source);
+        parcel.writeParcelable(intent, 0);
         parcel.writeMap(map);
         parcel.setDataPosition(0);
 
         InlineSwitchPayload payload = InlineSwitchPayload.CREATOR.createFromParcel(parcel);
+        final Intent builtIntent = payload.getIntent();
         assertThat(payload.settingsUri).isEqualTo(uri);
         assertThat(payload.inlineType).isEqualTo(type);
         assertThat(payload.settingSource).isEqualTo(source);
         assertThat(payload.valueMap.get(1)).isTrue();
         assertThat(payload.valueMap.get(0)).isFalse();
+        assertThat(builtIntent.getStringExtra(intentKey)).isEqualTo(intentVal);
     }
 
 

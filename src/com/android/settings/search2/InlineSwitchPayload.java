@@ -18,6 +18,7 @@
 package com.android.settings.search2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
@@ -38,14 +39,15 @@ public class InlineSwitchPayload extends InlinePayload {
     public final Map<Integer, Boolean> valueMap;
 
     public InlineSwitchPayload(String newUri, @SettingsSource int settingsSource,
-            Map<Integer, Boolean> map) {
-        super(newUri, PayloadType.INLINE_SWITCH, settingsSource);
+            Map<Integer, Boolean> map, Intent intent) {
+        super(newUri, PayloadType.INLINE_SWITCH, settingsSource, intent);
         valueMap = map;
     }
 
     private InlineSwitchPayload(Parcel in) {
         super(in.readString() /* Uri */ , in.readInt() /* Payload Type */,
-                in.readInt() /* Settings Source */);
+                in.readInt() /* Settings Source */,
+                (Intent) in.readParcelable(Intent.class.getClassLoader()) /* Intent */);
         valueMap = in.readHashMap(Integer.class.getClassLoader());
     }
 
@@ -64,6 +66,7 @@ public class InlineSwitchPayload extends InlinePayload {
         dest.writeString(settingsUri);
         dest.writeInt(inlineType);
         dest.writeInt(settingSource);
+        dest.writeParcelable(mIntent, flags);
         dest.writeMap(valueMap);
     }
 

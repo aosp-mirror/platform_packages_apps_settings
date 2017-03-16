@@ -31,9 +31,8 @@ import com.android.settings.search2.AppSearchResult;
 import com.android.settings.search2.DatabaseResultLoader;
 import com.android.settings.search2.InlineSwitchViewHolder;
 import com.android.settings.search2.InstalledAppResultLoader;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.ResultPayload;
+import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
@@ -154,7 +153,7 @@ public class SearchResultsAdapterTest {
 
     private List<SearchResult> getDummyDbResults() {
         List<SearchResult> results = new ArrayList<>();
-        IntentPayload payload = new IntentPayload(new Intent());
+        ResultPayload payload = new ResultPayload(new Intent());
         SearchResult.Builder builder = new SearchResult.Builder();
         builder.addPayload(payload);
 
@@ -175,7 +174,7 @@ public class SearchResultsAdapterTest {
 
     private List<AppSearchResult> getDummyAppResults() {
         List<AppSearchResult> results = new ArrayList<>();
-        IntentPayload payload = new IntentPayload(new Intent());
+        ResultPayload payload = new ResultPayload(new Intent());
         AppSearchResult.Builder builder = new AppSearchResult.Builder();
         builder.addPayload(payload);
 
@@ -198,7 +197,7 @@ public class SearchResultsAdapterTest {
         ArrayList<SearchResult> sampleResults = new ArrayList<>();
         ArrayList<String> breadcrumbs = new ArrayList<>();
         final Drawable icon = mContext.getDrawable(R.drawable.ic_search_history);
-        final ResultPayload payload = new IntentPayload(null);
+        final ResultPayload payload = new ResultPayload(null);
         final SearchResult.Builder builder = new Builder();
         builder.addTitle("title")
                 .addSummary("summary")

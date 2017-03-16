@@ -14,14 +14,17 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import android.util.ArrayMap;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.search2.DatabaseIndexingUtils;
 import com.android.settings.search2.InlineSwitchPayload;
 import com.android.settings.search2.ResultPayload;
+import com.android.settings.R;
 
 import java.util.Map;
 
@@ -71,7 +74,11 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
         valueMap.put(SCREEN_BRIGHTNESS_MODE_AUTOMATIC, true);
         valueMap.put(SCREEN_BRIGHTNESS_MODE_MANUAL, false);
 
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                getClass().getName(), KEY_AUTO_BRIGHTNESS,
+                mContext.getString(R.string.display_settings));
+
         return new InlineSwitchPayload(SCREEN_BRIGHTNESS_MODE,
-                ResultPayload.SettingsSource.SYSTEM, valueMap);
+                ResultPayload.SettingsSource.SYSTEM, valueMap, intent);
     }
 }

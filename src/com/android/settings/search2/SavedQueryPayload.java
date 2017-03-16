@@ -27,11 +27,13 @@ public class SavedQueryPayload extends ResultPayload {
     public final String query;
 
     public SavedQueryPayload(String query) {
+        super(null /* Intent */);
         this.query = query;
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     SavedQueryPayload(Parcel in) {
+        super(null /* Intent */);
         query = in.readString();
     }
 

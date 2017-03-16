@@ -25,14 +25,8 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.display.AutoBrightnessPreferenceController;
-import com.android.settings.gestures.DoubleTapPowerPreferenceController;
-import com.android.settings.gestures.DoubleTapScreenPreferenceController;
-import com.android.settings.gestures.DoubleTwistPreferenceController;
-import com.android.settings.gestures.PickupGesturePreferenceController;
-import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search2.DatabaseIndexingUtils;
 
-import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.ResultPayload;
 import org.junit.Before;
 import org.junit.Test;
@@ -103,13 +97,13 @@ public class DatabaseIndexingUtilsTest {
 
             @Override
             public ResultPayload getResultPayload() {
-                return new IntentPayload(null);
+                return new ResultPayload(null);
             }
         };
         ArrayMap<String,PreferenceController> map = new ArrayMap<>();
         map.put(key, prefController);
 
         ResultPayload payload = DatabaseIndexingUtils.getPayloadFromUriMap(map, key);
-        assertThat(payload).isInstanceOf(IntentPayload.class);
+        assertThat(payload).isInstanceOf(ResultPayload.class);
     }
 }
