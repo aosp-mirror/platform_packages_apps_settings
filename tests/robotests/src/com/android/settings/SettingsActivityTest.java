@@ -30,7 +30,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -57,20 +56,6 @@ public class SettingsActivityTest {
 
         mActivity = spy(new SettingsActivity());
         doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
-    }
-
-    @Test
-    public void testQueryTextChange_shouldUpdate() {
-        final String testQuery = "abc";
-
-        assertThat(mActivity.mSearchQuery).isNull();
-        try {
-            mActivity.onQueryTextChange(testQuery);
-        } catch (NullPointerException e) {
-            // Expected, because searchFeatureProvider is not wired up.
-        }
-
-        assertThat(mActivity.mSearchQuery).isEqualTo(testQuery);
     }
 
     @Test

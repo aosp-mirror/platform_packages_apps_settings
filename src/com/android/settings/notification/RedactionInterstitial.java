@@ -130,7 +130,7 @@ public class RedactionInterstitial extends SettingsActivity {
             if (v.getId() == R.id.redaction_done_button) {
                 final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
                 if (activity != null) {
-                    activity.setResult(RESULT_OK, activity.getResultIntentData());
+                    activity.setResult(RESULT_OK, null);
                     finish();
                 }
             }
