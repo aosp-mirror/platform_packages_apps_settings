@@ -77,7 +77,7 @@ public class SecurityFeatureProviderImplTest {
     private SecurityFeatureProviderImpl mImpl;
 
     @Implements(com.android.settingslib.drawer.TileUtils.class)
-    public static class TileUtilsMock {
+    public static class ShadowTileUtils {
         @Implementation
         public static Pair getIconFromUri(Context context, String packageName, String uriString,
                 Map<String, IContentProvider> providerMap) {
@@ -131,7 +131,7 @@ public class SecurityFeatureProviderImplTest {
 
     @Test
     @Config(shadows = {
-            TileUtilsMock.class,
+            ShadowTileUtils.class,
     })
     public void updateTilesData_shouldUpdateMatchingPreference() {
         Bundle bundle = new Bundle();
@@ -151,7 +151,7 @@ public class SecurityFeatureProviderImplTest {
 
     @Test
     @Config(shadows = {
-            TileUtilsMock.class,
+            ShadowTileUtils.class,
     })
     public void updateTilesData_shouldNotUpdateAlreadyUpdatedPreference() {
         Bundle bundle = new Bundle();
@@ -181,6 +181,31 @@ public class SecurityFeatureProviderImplTest {
         verify(screen.findPreference(MOCK_KEY)).setIcon(SecurityFeatureProviderImpl.DEFAULT_ICON);
         verify(screen.findPreference(MOCK_KEY))
                 .setSummary(SecurityFeatureProviderImpl.DEFAULT_SUMMARY);
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowTileUtils.class,
+    })
+    public void initPreferences_shouldLoadCached() {
+        Bundle bundle = new Bundle();
+        bundle.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI, URI_GET_ICON);
+        bundle.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, URI_GET_SUMMARY);
+
+        PreferenceScreen screen = getPreferenceScreen();
+        DashboardCategory dashboardCategory = getDashboardCategory();
+        dashboardCategory.getTile(0).metaData = bundle;
+
+        SecurityFeatureProviderImpl.sIconCache.put(
+                URI_GET_ICON,
+                ShadowTileUtils.getIconFromUri(null, null, null, null));
+        SecurityFeatureProviderImpl.sSummaryCache.put(
+                URI_GET_SUMMARY,
+                MOCK_SUMMARY);
+
+        mImpl.initPreferences(mContext, screen, dashboardCategory);
+        verify(screen.findPreference(MOCK_KEY)).setIcon(mMockDrawable);
+        verify(screen.findPreference(MOCK_KEY)).setSummary(MOCK_SUMMARY);
     }
 
     private PreferenceScreen getPreferenceScreen() {
