@@ -27,7 +27,6 @@ import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.SearchIndexableData;
@@ -53,10 +52,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
@@ -82,9 +83,40 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INT
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RANK;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
 
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_RANK;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ENABLED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ICON;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_ACTION;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.LOCALE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.PAYLOAD;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.SCREEN_TITLE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.USER_ID;
+import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
+
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ID;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_KEY;
+import static com.android.settings.search2.DatabaseResultLoader.SELECT_COLUMNS;
+
 /**
  * Consumes the SearchIndexableProvider content providers.
  * Updates the Resource, Raw Data and non-indexable data for Search.
+ *
+ * TODO this class needs to be refactored by moving most of its methods into controllers
  */
 public class DatabaseIndexingManager {
     private static final String LOG_TAG = "DatabaseIndexingManager";
@@ -93,51 +125,14 @@ public class DatabaseIndexingManager {
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
     private static final String NODE_NAME_LIST_PREFERENCE = "ListPreference";
 
-    private static final List<String> EMPTY_LIST = Collections.<String>emptyList();
+    private static final List<String> EMPTY_LIST = Collections.emptyList();
 
     private final String mBaseAuthority;
 
-    /**
-     * A private class to describe the update data for the Index database
-     */
-    private static class UpdateData {
-        public List<SearchIndexableData> dataToUpdate;
-        public List<SearchIndexableData> dataToDelete;
-        public Map<String, List<String>> nonIndexableKeys;
-
-        public boolean forceUpdate;
-        public boolean fullIndex;
-
-        public UpdateData() {
-            dataToUpdate = new ArrayList<>();
-            dataToDelete = new ArrayList<>();
-            nonIndexableKeys = new HashMap<>();
-        }
-
-        public UpdateData(DatabaseIndexingManager.UpdateData other) {
-            dataToUpdate = new ArrayList<>(other.dataToUpdate);
-            dataToDelete = new ArrayList<>(other.dataToDelete);
-            nonIndexableKeys = new HashMap<>(other.nonIndexableKeys);
-            forceUpdate = other.forceUpdate;
-            fullIndex = other.fullIndex;
-        }
-
-        public DatabaseIndexingManager.UpdateData copy() {
-            return new DatabaseIndexingManager.UpdateData(this);
-        }
-
-        public void clear() {
-            dataToUpdate.clear();
-            dataToDelete.clear();
-            nonIndexableKeys.clear();
-            forceUpdate = false;
-            fullIndex = false;
-        }
-    }
-
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
-    private final DatabaseIndexingManager.UpdateData mDataToProcess =
-            new DatabaseIndexingManager.UpdateData();
+
+    @VisibleForTesting
+    final UpdateData mDataToProcess = new UpdateData();
     private Context mContext;
 
     public DatabaseIndexingManager(Context context, String baseAuthority) {
@@ -157,31 +152,201 @@ public class DatabaseIndexingManager {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
-                List<ResolveInfo> list =
-                        mContext.getPackageManager().queryIntentContentProviders(intent, 0);
-
-                final int size = list.size();
-                for (int n = 0; n < size; n++) {
-                    final ResolveInfo info = list.get(n);
-                    if (!DatabaseIndexingUtils.isWellKnownProvider(info, mContext)) {
-                        continue;
-                    }
-                    final String authority = info.providerInfo.authority;
-                    final String packageName = info.providerInfo.packageName;
-
-                    addIndexablesFromRemoteProvider(packageName, authority);
-                    addNonIndexablesKeysFromRemoteProvider(packageName, authority);
-                }
-
-                mDataToProcess.fullIndex = true;
-                updateInternal();
+                performIndexing();
             }
         });
     }
 
-    private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
+    /**
+     * Accumulate all data and non-indexable keys from each of the content-providers.
+     * Only the first indexing for the default language gets static search results - subsequent
+     * calls will only gather non-indexable keys.
+     */
+    @VisibleForTesting
+    void performIndexing() {
+        final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
+        final List<ResolveInfo> list =
+                mContext.getPackageManager().queryIntentContentProviders(intent, 0);
+
+        final boolean isLocaleIndexed = isLocaleIndexed();
+
+        for (final ResolveInfo info : list) {
+            if (!DatabaseIndexingUtils.isWellKnownProvider(info, mContext)) {
+                continue;
+            }
+            final String authority = info.providerInfo.authority;
+            final String packageName = info.providerInfo.packageName;
+
+            if (!isLocaleIndexed) {
+                addIndexablesFromRemoteProvider(packageName, authority);
+            }
+            addNonIndexablesKeysFromRemoteProvider(packageName, authority);
+        }
+
+        final String localeStr = Locale.getDefault().toString();
+        updateDatabase(isLocaleIndexed, localeStr);
+    }
+
+    @VisibleForTesting
+    boolean isLocaleIndexed() {
+        final String locale = Locale.getDefault().toString();
+        return IndexDatabaseHelper.getInstance(mContext).isLocaleAlreadyIndexed(mContext, locale);
+    }
+
+    /**
+     * Adds new data to the database and verifies the correctness of the ENABLED column.
+     * First, the data to be updated and all non-indexable keys are copied locally.
+     * Then all new data to be added is inserted.
+     * Then search results are verified to have the correct value of enabled.
+     * Finally, we record that the locale has been indexed.
+     *
+     * @param isIncrementalUpdate true when the language has already been indexed.
+     * @param localeStr the default locale for the device.
+     */
+    @VisibleForTesting
+    void updateDatabase(boolean isIncrementalUpdate, String localeStr) {
+        mIsAvailable.set(false);
+        final UpdateData copy;
+
+        synchronized (mDataToProcess) {
+            copy = mDataToProcess.copy();
+            mDataToProcess.clear();
+        }
+
+        final List<SearchIndexableData> dataToUpdate = copy.dataToUpdate;
+        final Map<String, Set<String>> nonIndexableKeys = copy.nonIndexableKeys;
+
+        final SQLiteDatabase database = getWritableDatabase();
+        if (database == null) {
+            Log.w(LOG_TAG, "Cannot indexDatabase Index as I cannot get a writable database");
+            return;
+        }
+
         try {
+            database.beginTransaction();
+
+            // Add new data from Providers at initial index time, or inserted later.
+            if (dataToUpdate.size() > 0) {
+                addDataToDatabase(database, localeStr, dataToUpdate, nonIndexableKeys);
+            }
+
+            // Only check for non-indexable key updates after initial index.
+            // Enabled state with non-indexable keys is checked when items are first inserted.
+            if (isIncrementalUpdate) {
+                updateDataInDatabase(database, nonIndexableKeys);
+            }
+
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+        // TODO Refactor: move the locale out of the helper class
+        IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
+
+        mIsAvailable.set(true);
+    }
+
+    /**
+     * Inserts {@link SearchIndexableData} into the database.
+     *
+     * @param database where the data will be inserted.
+     * @param localeStr is the locale of the data to be inserted.
+     * @param dataToUpdate is a {@link List} of the data to be inserted.
+     * @param nonIndexableKeys is a {@link Map} from Package Name to a {@link Set} of keys which
+     *                         identify search results which should not be surfaced.
+     */
+    @VisibleForTesting
+    void addDataToDatabase(SQLiteDatabase database, String localeStr,
+            List<SearchIndexableData> dataToUpdate, Map<String, Set<String>> nonIndexableKeys) {
+        final long current = System.currentTimeMillis();
+
+        for (SearchIndexableData data : dataToUpdate) {
+            try {
+                indexOneSearchIndexableData(database, localeStr, data, nonIndexableKeys);
+            } catch (Exception e) {
+                Log.e(LOG_TAG, "Cannot index: " + (data != null ? data.className : data)
+                        + " for locale: " + localeStr, e);
+            }
+        }
+
+        final long now = System.currentTimeMillis();
+        Log.d(LOG_TAG, "Indexing locale '" + localeStr + "' took " +
+                (now - current) + " millis");
+    }
+
+    /**
+     * Upholds the validity of enabled data for the user.
+     * All rows which are enabled but are now flagged with non-indexable keys will become disabled.
+     * All rows which are disabled but no longer a non-indexable key will become enabled.
+     *
+     * @param database The database to validate.
+     * @param nonIndexableKeys A map between package name and the set of non-indexable keys for it.
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void updateDataInDatabase(SQLiteDatabase database,
+            Map<String, Set<String>> nonIndexableKeys) {
+        final String whereEnabled = ENABLED + " = 1";
+        final String whereDisabled = ENABLED + " = 0";
+
+        final Cursor enabledResults = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS,
+                whereEnabled, null, null, null, null);
+
+        final ContentValues enabledToDisabledValue = new ContentValues();
+        enabledToDisabledValue.put(ENABLED, 0);
+
+        String packageName;
+        // TODO Refactor: Move these two loops into one method.
+        while (enabledResults.moveToNext()) {
+            // Package name is the key for remote providers.
+            // If package name is null, the provider is Settings.
+            packageName = enabledResults.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
+            if (packageName == null) {
+                packageName = mContext.getPackageName();
+            }
+
+            final String key = enabledResults.getString(COLUMN_INDEX_KEY);
+            final Set<String> packageKeys = nonIndexableKeys.get(packageName);
+
+            // The indexed item is set to Enabled but is now non-indexable
+            if (packageKeys != null && packageKeys.contains(key)) {
+                final String whereClause = DOCID + " = " + enabledResults.getInt(COLUMN_INDEX_ID);
+                database.update(TABLE_PREFS_INDEX, enabledToDisabledValue, whereClause, null);
+            }
+        }
+        enabledResults.close();
+
+        final Cursor disabledResults = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS,
+                whereDisabled, null, null, null, null);
+
+        final ContentValues disabledToEnabledValue = new ContentValues();
+        disabledToEnabledValue.put(ENABLED, 1);
+
+        while (disabledResults.moveToNext()) {
+            // Package name is the key for remote providers.
+            // If package name is null, the provider is Settings.
+            packageName = disabledResults.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
+            if (packageName == null) {
+                packageName = mContext.getPackageName();
+            }
+
+            final String key = disabledResults.getString(COLUMN_INDEX_KEY);
+            final Set<String> packageKeys = nonIndexableKeys.get(packageName);
+
+            // The indexed item is set to Disabled but is no longer non-indexable.
+            // We do not enable keys when packageKeys is null because it means the keys came
+            // from an unrecognized package and therefore should not be surfaced as results.
+            if (packageKeys != null && !packageKeys.contains(key)) {
+                String whereClause = DOCID + " = " + disabledResults.getInt(COLUMN_INDEX_ID);
+                database.update(TABLE_PREFS_INDEX, disabledToEnabledValue, whereClause, null);
+            }
+        }
+        disabledResults.close();
+    }
+
+    @VisibleForTesting
+    boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
+        try {
+            // TODO delete base rank. does nothing.
             final int baseRank = Ranking.getBaseRankForAuthority(authority);
 
             final Context context = mBaseAuthority.equals(authority) ?
@@ -202,11 +367,12 @@ public class DatabaseIndexingManager {
         }
     }
 
-    private void addNonIndexablesKeysFromRemoteProvider(String packageName,
+    @VisibleForTesting
+    void addNonIndexablesKeysFromRemoteProvider(String packageName,
             String authority) {
         final List<String> keys =
                 getNonIndexablesKeysFromRemoteProvider(packageName, authority);
-        addNonIndexableKeys(packageName, keys);
+        addNonIndexableKeys(packageName, new HashSet<>(keys));
     }
 
     private List<String> getNonIndexablesKeysFromRemoteProvider(String packageName,
@@ -235,7 +401,7 @@ public class DatabaseIndexingManager {
             return EMPTY_LIST;
         }
 
-        List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList<>();
         try {
             final int count = cursor.getCount();
             if (count > 0) {
@@ -256,31 +422,19 @@ public class DatabaseIndexingManager {
         }
     }
 
-    public void deleteIndexableData(SearchIndexableData data) {
-        synchronized (mDataToProcess) {
-            mDataToProcess.dataToDelete.add(data);
-        }
-    }
-
-    public void addNonIndexableKeys(String authority, List<String> keys) {
+    public void addNonIndexableKeys(String authority, Set<String> keys) {
         synchronized (mDataToProcess) {
             mDataToProcess.nonIndexableKeys.put(authority, keys);
-        }
-    }
-
-    private void updateFromRemoteProvider(String packageName, String authority) {
-        if (addIndexablesFromRemoteProvider(packageName, authority)) {
-            updateInternal();
         }
     }
 
     /**
      * Update the Index for a specific class name resources
      *
-     * @param className the class name (typically a fragment name).
-     * @param rebuild true means that you want to delete the data from the Index first.
+     * @param className              the class name (typically a fragment name).
+     * @param rebuild                true means that you want to delete the data from the Index first.
      * @param includeInSearchResults true means that you want the bit "enabled" set so that the
-     * data will be seen included into the search results
+     *                               data will be seen included into the search results
      */
     public void updateFromClassNameResource(String className, final boolean rebuild,
             boolean includeInSearchResults) {
@@ -297,12 +451,8 @@ public class DatabaseIndexingManager {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                if (rebuild) {
-                    deleteIndexableData(res);
-                }
                 addIndexableData(res);
-                mDataToProcess.forceUpdate = true;
-                updateInternal();
+                performIndexing();
                 res.enabled = false;
             }
         });
@@ -313,8 +463,7 @@ public class DatabaseIndexingManager {
             @Override
             public void run() {
                 addIndexableData(data);
-                mDataToProcess.forceUpdate = true;
-                updateInternal();
+                performIndexing();
             }
         });
     }
@@ -345,16 +494,6 @@ public class DatabaseIndexingManager {
     private static Uri buildUriForNonIndexableKeys(String authority) {
         return Uri.parse("content://" + authority + "/" +
                 SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
-    }
-
-    private void updateInternal() {
-        synchronized (mDataToProcess) {
-            final DatabaseIndexingManager.UpdateIndexTask task =
-                    new DatabaseIndexingManager.UpdateIndexTask();
-            DatabaseIndexingManager.UpdateData copy = mDataToProcess.copy();
-            task.execute(copy);
-            mDataToProcess.clear();
-        }
     }
 
     private void addIndexablesForXmlResourceUri(Context packageContext, String packageName,
@@ -468,7 +607,7 @@ public class DatabaseIndexingManager {
     }
 
     public void indexOneSearchIndexableData(SQLiteDatabase database, String localeStr,
-            SearchIndexableData data, Map<String, List<String>> nonIndexableKeys) {
+            SearchIndexableData data, Map<String, Set<String>> nonIndexableKeys) {
         if (data instanceof SearchIndexableResource) {
             indexOneResource(database, localeStr, (SearchIndexableResource) data, nonIndexableKeys);
         } else if (data instanceof SearchIndexableRaw) {
@@ -502,7 +641,7 @@ public class DatabaseIndexingManager {
     }
 
     private void indexOneResource(SQLiteDatabase database, String localeStr,
-            SearchIndexableResource sir, Map<String, List<String>> nonIndexableKeysFromResource) {
+            SearchIndexableResource sir, Map<String, Set<String>> nonIndexableKeysFromResource) {
 
         if (sir == null) {
             Log.e(LOG_TAG, "Cannot index a null resource!");
@@ -512,9 +651,9 @@ public class DatabaseIndexingManager {
         final List<String> nonIndexableKeys = new ArrayList<String>();
 
         if (sir.xmlResId > SearchIndexableResources.NO_DATA_RES_ID) {
-            List<String> resNonIndxableKeys = nonIndexableKeysFromResource.get(sir.packageName);
-            if (resNonIndxableKeys != null && resNonIndxableKeys.size() > 0) {
-                nonIndexableKeys.addAll(resNonIndxableKeys);
+            Set<String> resNonIndexableKeys = nonIndexableKeysFromResource.get(sir.packageName);
+            if (resNonIndexableKeys != null && resNonIndexableKeys.size() > 0) {
+                nonIndexableKeys.addAll(resNonIndexableKeys);
             }
 
             indexFromResource(database, localeStr, sir, nonIndexableKeys);
@@ -605,6 +744,7 @@ public class DatabaseIndexingManager {
             headerKeywords = XmlParserUtils.getDataKeywords(context, attrs);
             enabled = !nonIndexableKeys.contains(key);
 
+            // TODO: Set payload type for header results
             DatabaseRow.Builder headerBuilder = new DatabaseRow.Builder();
             headerBuilder.setLocale(localeStr)
                     .setEntries(null)
@@ -799,31 +939,29 @@ public class DatabaseIndexingManager {
 
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, row.getDocId());
-        values.put(IndexDatabaseHelper.IndexColumns.LOCALE, row.locale);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, row.rank);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, row.updatedTitle);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, row.normalizedTitle);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, row.updatedSummaryOn);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
-                row.normalizedSummaryOn);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, row.updatedSummaryOff);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
-                row.normalizedSummaryOff);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, row.entries);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, row.spaceDelimitedKeywords);
-        values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME, row.className);
-        values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, row.screenTitle);
-        values.put(IndexDatabaseHelper.IndexColumns.INTENT_ACTION, row.intentAction);
-        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, row.intentTargetPackage);
-        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, row.intentTargetClass);
-        values.put(IndexDatabaseHelper.IndexColumns.ICON, row.iconResId);
-        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, row.enabled);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, row.key);
-        values.put(IndexDatabaseHelper.IndexColumns.USER_ID, row.userId);
-        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, row.payloadType);
-        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, row.payload);
+        values.put(LOCALE, row.locale);
+        values.put(DATA_RANK, row.rank);
+        values.put(DATA_TITLE, row.updatedTitle);
+        values.put(DATA_TITLE_NORMALIZED, row.normalizedTitle);
+        values.put(DATA_SUMMARY_ON, row.updatedSummaryOn);
+        values.put(DATA_SUMMARY_ON_NORMALIZED, row.normalizedSummaryOn);
+        values.put(DATA_SUMMARY_OFF, row.updatedSummaryOff);
+        values.put(DATA_SUMMARY_OFF_NORMALIZED, row.normalizedSummaryOff);
+        values.put(DATA_ENTRIES, row.entries);
+        values.put(DATA_KEYWORDS, row.spaceDelimitedKeywords);
+        values.put(CLASS_NAME, row.className);
+        values.put(SCREEN_TITLE, row.screenTitle);
+        values.put(INTENT_ACTION, row.intentAction);
+        values.put(INTENT_TARGET_PACKAGE, row.intentTargetPackage);
+        values.put(INTENT_TARGET_CLASS, row.intentTargetClass);
+        values.put(ICON, row.iconResId);
+        values.put(ENABLED, row.enabled);
+        values.put(DATA_KEY_REF, row.key);
+        values.put(USER_ID, row.userId);
+        values.put(PAYLOAD_TYPE, row.payloadType);
+        values.put(PAYLOAD, row.payload);
 
-        database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
+        database.replaceOrThrow(TABLE_PREFS_INDEX, null, values);
 
         if (!TextUtils.isEmpty(row.className) && !TextUtils.isEmpty(row.childClassName)) {
             ContentValues siteMapPair = new ContentValues();
@@ -839,129 +977,34 @@ public class DatabaseIndexingManager {
     }
 
     /**
-     * A private class for updating the Index database
+     * A private class to describe the indexDatabase data for the Index database
      */
-    private class UpdateIndexTask extends AsyncTask<DatabaseIndexingManager.UpdateData, Integer,
-            Void> {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static class UpdateData {
+        public List<SearchIndexableData> dataToUpdate;
+        public List<SearchIndexableData> dataToDisable;
+        public Map<String, Set<String>> nonIndexableKeys;
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mIsAvailable.set(false);
+        public UpdateData() {
+            dataToUpdate = new ArrayList<>();
+            dataToDisable = new ArrayList<>();
+            nonIndexableKeys = new HashMap<>();
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            mIsAvailable.set(true);
+        public UpdateData(UpdateData other) {
+            dataToUpdate = new ArrayList<>(other.dataToUpdate);
+            dataToDisable = new ArrayList<>(other.dataToDisable);
+            nonIndexableKeys = new HashMap<>(other.nonIndexableKeys);
         }
 
-        @Override
-        protected Void doInBackground(DatabaseIndexingManager.UpdateData... params) {
-            try {
-                final List<SearchIndexableData> dataToUpdate = params[0].dataToUpdate;
-                final List<SearchIndexableData> dataToDelete = params[0].dataToDelete;
-                final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
-
-                final boolean forceUpdate = params[0].forceUpdate;
-                final boolean fullIndex = params[0].fullIndex;
-
-                final SQLiteDatabase database = getWritableDatabase();
-                if (database == null) {
-                    Log.e(LOG_TAG, "Cannot update Index as I cannot get a writable database");
-                    return null;
-                }
-                final String localeStr = Locale.getDefault().toString();
-
-                try {
-                    database.beginTransaction();
-                    if (dataToDelete.size() > 0) {
-                        processDataToDelete(database, localeStr, dataToDelete);
-                    }
-                    if (dataToUpdate.size() > 0) {
-                        processDataToUpdate(database, localeStr, dataToUpdate, nonIndexableKeys,
-                                forceUpdate);
-                    }
-                    database.setTransactionSuccessful();
-                } finally {
-                    database.endTransaction();
-                }
-                if (fullIndex) {
-                    IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
-                }
-            } catch (SQLiteFullException e) {
-                Log.e(LOG_TAG, "Unable to index search, out of space", e);
-            }
-
-            return null;
+        public UpdateData copy() {
+            return new UpdateData(this);
         }
 
-        private boolean processDataToUpdate(SQLiteDatabase database, String localeStr,
-                List<SearchIndexableData> dataToUpdate, Map<String, List<String>> nonIndexableKeys,
-                boolean forceUpdate) {
-
-            if (!forceUpdate && IndexDatabaseHelper.isLocaleAlreadyIndexed(mContext, localeStr)) {
-                Log.d(LOG_TAG, "Locale '" + localeStr + "' is already indexed");
-                return true;
-            }
-
-            boolean result = false;
-            final long current = System.currentTimeMillis();
-
-            final int count = dataToUpdate.size();
-            for (int n = 0; n < count; n++) {
-                final SearchIndexableData data = dataToUpdate.get(n);
-                try {
-                    indexOneSearchIndexableData(database, localeStr, data, nonIndexableKeys);
-                } catch (Exception e) {
-                    Log.e(LOG_TAG, "Cannot index: " + (data != null ? data.className : data)
-                            + " for locale: " + localeStr, e);
-                }
-            }
-
-            final long now = System.currentTimeMillis();
-            Log.d(LOG_TAG, "Indexing locale '" + localeStr + "' took " +
-                    (now - current) + " millis");
-            return result;
-        }
-
-        private boolean processDataToDelete(SQLiteDatabase database, String localeStr,
-                List<SearchIndexableData> dataToDelete) {
-
-            boolean result = false;
-            final long current = System.currentTimeMillis();
-
-            final int count = dataToDelete.size();
-            for (int n = 0; n < count; n++) {
-                final SearchIndexableData data = dataToDelete.get(n);
-                if (data == null) {
-                    continue;
-                }
-                if (!TextUtils.isEmpty(data.className)) {
-                    delete(database, IndexDatabaseHelper.IndexColumns.CLASS_NAME, data.className);
-                } else {
-                    if (data instanceof SearchIndexableRaw) {
-                        final SearchIndexableRaw raw = (SearchIndexableRaw) data;
-                        if (!TextUtils.isEmpty(raw.title)) {
-                            delete(database, IndexDatabaseHelper.IndexColumns.DATA_TITLE,
-                                    raw.title);
-                        }
-                    }
-                }
-            }
-
-            final long now = System.currentTimeMillis();
-            Log.d(LOG_TAG, "Deleting data for locale '" + localeStr + "' took " +
-                    (now - current) + " millis");
-            return result;
-        }
-
-        private int delete(SQLiteDatabase database, String columName, String value) {
-            final String whereClause = columName + "=?";
-            final String[] whereArgs = new String[]{value};
-
-            return database.delete(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, whereClause,
-                    whereArgs);
+        public void clear() {
+            dataToUpdate.clear();
+            dataToDisable.clear();
+            nonIndexableKeys.clear();
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,21 +12,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package com.android.settings.testutils.shadow;
 
-import android.content.ContentResolver;
-import android.content.SyncAdapterType;
-
+import android.content.Context;
+import android.content.pm.ResolveInfo;
+import com.android.settings.search2.DatabaseIndexingUtils;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(ContentResolver.class)
-public class ShadowContentResolver {
-
+/**
+ * Shadow of {@link DatabaseIndexingUtils}
+ */
+@Implements(DatabaseIndexingUtils.class)
+public class ShadowDatabaseIndexingUtils {
     @Implementation
-    public static SyncAdapterType[] getSyncAdapterTypesAsUser(int userId) {
-        return new SyncAdapterType[0];
+    public static boolean isWellKnownProvider(ResolveInfo info, Context context) {
+        return true;
     }
 }
