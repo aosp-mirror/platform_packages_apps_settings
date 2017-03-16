@@ -64,9 +64,9 @@ import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settings.widget.GearPreference;
@@ -79,7 +79,6 @@ import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutorService;
 import java.util.List;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
@@ -366,7 +365,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // The above preferences come and go based on security state, so we need to update
         // the index. This call is expected to be fairly cheap, but we may want to do something
         // smarter in the future.
-        Index.getInstance(getActivity())
+        final Activity activity = getActivity();
+        FeatureFactory.getFactory(activity).getSearchFeatureProvider().getIndexingManager(activity)
                 .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
 
         PreferenceGroup securityStatusPreferenceGroup =

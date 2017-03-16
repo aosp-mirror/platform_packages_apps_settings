@@ -26,7 +26,6 @@ import android.view.MenuItem;
 import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search.Index;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -99,11 +98,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     @Override
     public void updateIndex(Context context) {
         long indexStartTime = System.currentTimeMillis();
-        if (isEnabled(context)) {
-            getIndexingManager(context).indexDatabase();
-        } else {
-            Index.getInstance(context).update();
-        }
+        getIndexingManager(context).indexDatabase();
         Log.d(TAG, "IndexDatabase() took " +
                 (System.currentTimeMillis() - indexStartTime) + " ms");
     }

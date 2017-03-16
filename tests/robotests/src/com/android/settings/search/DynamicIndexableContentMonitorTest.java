@@ -62,6 +62,7 @@ import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.search2.DatabaseIndexingManager;
 import com.android.settings.testutils.shadow.ShadowActivityWithLoadManager;
 import com.android.settings.testutils.shadow.ShadowContextImplWithRegisterReceiver;
 import com.android.settings.testutils.shadow.ShadowInputManager;
@@ -72,6 +73,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -108,8 +111,10 @@ public class DynamicIndexableContentMonitorTest {
     private static final String IME_PACKAGE_1 = "ime-1";
     private static final String IME_PACKAGE_2 = "ime-2";
 
-    private LoaderManager mLoaderManager = mock(LoaderManager.class);
-    private Index mIndex = mock(Index.class);
+    @Mock
+    private LoaderManager mLoaderManager;
+    @Mock
+    private DatabaseIndexingManager mIndexManager;
 
     private Activity mActivity;
     private InputManager mInputManager;
@@ -124,6 +129,7 @@ public class DynamicIndexableContentMonitorTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(Activity.class).get();
         mInputManager = InputManager.getInstance();
 
@@ -160,13 +166,13 @@ public class DynamicIndexableContentMonitorTest {
 
     @Test
     public void testLockedUser() {
-        mMonitor.register(mActivity, LOADER_ID, mIndex, false /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, false /* isUserUnlocked */);
 
         // No loader procedure happens.
         verify(mLoaderManager, never()).initLoader(
                 anyInt(), any(Bundle.class), any(LoaderManager.LoaderCallbacks.class));
         // No indexing happens.
-        verify(mIndex, never()).updateFromClassNameResource(
+        verify(mIndexManager, never()).updateFromClassNameResource(
                 anyString(), anyBoolean(), anyBoolean());
 
         mMonitor.unregister(mActivity, LOADER_ID);
@@ -179,7 +185,7 @@ public class DynamicIndexableContentMonitorTest {
     public void testWithNoPrintingFeature() {
         mRobolectricPackageManager.setSystemFeature(PackageManager.FEATURE_PRINTING, false);
 
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         // No loader procedure happens.
         verify(mLoaderManager, never()).initLoader(
@@ -194,12 +200,12 @@ public class DynamicIndexableContentMonitorTest {
         assertThat(extractPackageMonitor()).isNull();
 
         // To suppress spurious test fail in {@link #shutDown()}.
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
     }
 
     @Test
     public void testPrinterServiceIndex() {
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         // Loader procedure happens.
         verify(mLoaderManager, only()).initLoader(LOADER_ID, null, mMonitor);
@@ -217,7 +223,7 @@ public class DynamicIndexableContentMonitorTest {
 
     @Test
     public void testInputDevicesMonitor() {
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         // Rebuild indexing should happen.
         verifyRebuildIndexing(PhysicalKeyboardFragment.class);
@@ -229,9 +235,9 @@ public class DynamicIndexableContentMonitorTest {
          * Nothing happens on successive register calls.
          */
         mMonitor.unregister(mActivity, LOADER_ID);
-        reset(mIndex);
+        reset(mIndexManager);
 
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         verifyNoIndexing(PhysicalKeyboardFragment.class);
         assertThat(extactInputDeviceListener()).isEqualTo(listener);
@@ -239,7 +245,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * A device is added.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         listener.onInputDeviceAdded(1 /* deviceId */);
 
@@ -248,7 +254,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * A device is removed.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         listener.onInputDeviceRemoved(2 /* deviceId */);
 
@@ -257,7 +263,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * A device is changed.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         listener.onInputDeviceChanged(3 /* deviceId */);
 
@@ -266,14 +272,14 @@ public class DynamicIndexableContentMonitorTest {
 
     @Test
     public void testAccessibilityServicesMonitor() throws Exception {
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         verifyRebuildIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service package is installed, incremental indexing happen.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         installAccessibilityService(A11Y_PACKAGE_1);
 
@@ -282,7 +288,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When another accessibility service package is installed, incremental indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         installAccessibilityService(A11Y_PACKAGE_2);
 
@@ -291,7 +297,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an accessibility service is disabled, rebuild indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         disableInstalledPackage(A11Y_PACKAGE_1);
 
@@ -300,7 +306,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an accessibility service is enabled, incremental indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         enableInstalledPackage(A11Y_PACKAGE_1);
 
@@ -309,7 +315,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an accessibility service package is uninstalled, rebuild indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         uninstallAccessibilityService(A11Y_PACKAGE_1);
 
@@ -318,7 +324,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service package is installed, nothing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         installInputMethodService(IME_PACKAGE_1);
 
@@ -327,7 +333,7 @@ public class DynamicIndexableContentMonitorTest {
 
     @Test
     public void testInputMethodServicesMonitor() throws Exception {
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         verifyRebuildIndexing(VirtualKeyboardFragment.class);
         verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
@@ -341,7 +347,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service package is installed, incremental indexing happen.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         installInputMethodService(IME_PACKAGE_1);
 
@@ -351,7 +357,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When another input method service package is installed, incremental indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         installInputMethodService(IME_PACKAGE_2);
 
@@ -361,7 +367,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service is disabled, rebuild indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         disableInstalledPackage(IME_PACKAGE_1);
 
@@ -371,7 +377,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service is enabled, incremental indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         enableInstalledPackage(IME_PACKAGE_1);
 
@@ -381,7 +387,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service package is uninstalled, rebuild indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         uninstallInputMethodService(IME_PACKAGE_1);
 
@@ -391,7 +397,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an accessibility service package is installed, nothing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         installAccessibilityService(A11Y_PACKAGE_1);
 
@@ -401,7 +407,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When enabled IMEs list is changed, rebuild indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         observer.onChange(false /* selfChange */, enabledInputMethodsContentUri);
 
@@ -411,7 +417,7 @@ public class DynamicIndexableContentMonitorTest {
 
     @Test
     public void testUserDictionaryChangeMonitor() throws Exception {
-        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
+        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         // Content observer should be registered.
         final ContentObserver observer = extractContentObserver(UserDictionary.Words.CONTENT_URI);
@@ -422,7 +428,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When user dictionary content is changed, rebuild indexing happens.
          */
-        reset(mIndex);
+        reset(mIndexManager);
 
         observer.onChange(false /* selfChange */, UserDictionary.Words.CONTENT_URI);
 
@@ -434,21 +440,21 @@ public class DynamicIndexableContentMonitorTest {
      */
 
     private void verifyNoIndexing(Class<?> indexingClass) {
-        verify(mIndex, never()).updateFromClassNameResource(eq(indexingClass.getName()),
+        verify(mIndexManager, never()).updateFromClassNameResource(eq(indexingClass.getName()),
                 anyBoolean(), anyBoolean());
     }
 
     private void verifyRebuildIndexing(Class<?> indexingClass) {
-        verify(mIndex, times(1)).updateFromClassNameResource(indexingClass.getName(),
+        verify(mIndexManager, times(1)).updateFromClassNameResource(indexingClass.getName(),
                 true /* rebuild */, true /* includeInSearchResults */);
-        verify(mIndex, never()).updateFromClassNameResource(indexingClass.getName(),
+        verify(mIndexManager, never()).updateFromClassNameResource(indexingClass.getName(),
                 false /* rebuild */, true /* includeInSearchResults */);
     }
 
     private void verifyIncrementalIndexing(Class<?> indexingClass) {
-        verify(mIndex, times(1)).updateFromClassNameResource(indexingClass.getName(),
+        verify(mIndexManager, times(1)).updateFromClassNameResource(indexingClass.getName(),
                 false /* rebuild */, true /* includeInSearchResults */);
-        verify(mIndex, never()).updateFromClassNameResource(indexingClass.getName(),
+        verify(mIndexManager, never()).updateFromClassNameResource(indexingClass.getName(),
                 true /* rebuild */, true /* includeInSearchResults */);
     }
 
