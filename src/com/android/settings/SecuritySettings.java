@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -67,6 +66,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settings.widget.GearPreference;
@@ -917,11 +917,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     public static class SecuritySubSettings extends SettingsPreferenceFragment
-            implements OnPreferenceChangeListener {
+            implements OnPreferenceChangeListener, OwnerInfoPreferenceController.OwnerInfoCallback {
 
         private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
         private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
-        private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
         private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
 
         // These switch preferences need special handling since they're not all stored in Settings.
@@ -931,11 +930,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private TimeoutListPreference mLockAfter;
         private SwitchPreference mVisiblePattern;
         private SwitchPreference mPowerButtonInstantlyLocks;
-        private RestrictedPreference mOwnerInfoPref;
 
         private TrustAgentManager mTrustAgentManager;
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDPM;
+        private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
 
         @Override
         public int getMetricsCategory() {
@@ -950,6 +949,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
             mLockPatternUtils = new LockPatternUtils(getContext());
             mDPM = getContext().getSystemService(DevicePolicyManager.class);
+            mOwnerInfoPreferenceController =
+                new OwnerInfoPreferenceController(getContext(), this, null /* lifecycle */);
             createPreferenceHierarchy();
         }
 
@@ -968,7 +969,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         mLockPatternUtils.getPowerButtonInstantlyLocks(MY_USER_ID));
             }
 
-            updateOwnerInfo();
+            mOwnerInfoPreferenceController.updateSummary();
         }
 
         @Override
@@ -1010,26 +1011,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         trustAgentLabel));
             }
 
-            mOwnerInfoPref = (RestrictedPreference) findPreference(KEY_OWNER_INFO_SETTINGS);
-            if (mOwnerInfoPref != null) {
-                if (mLockPatternUtils.isDeviceOwnerInfoEnabled()) {
-                    EnforcedAdmin admin = RestrictedLockUtils.getDeviceOwner(getActivity());
-                    mOwnerInfoPref.setDisabledByAdmin(admin);
-                } else {
-                    mOwnerInfoPref.setDisabledByAdmin(null);
-                    mOwnerInfoPref.setEnabled(!mLockPatternUtils.isLockScreenDisabled(MY_USER_ID));
-                    if (mOwnerInfoPref.isEnabled()) {
-                        mOwnerInfoPref.setOnPreferenceClickListener(
-                                new OnPreferenceClickListener() {
-                                    @Override
-                                    public boolean onPreferenceClick(Preference preference) {
-                                        OwnerInfoSettings.show(SecuritySubSettings.this);
-                                        return true;
-                                    }
-                                });
-                    }
-                }
-            }
+            mOwnerInfoPreferenceController.displayPreference(getPreferenceScreen());
+            mOwnerInfoPreferenceController.updateEnableState();
 
             for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
                 final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
@@ -1093,17 +1076,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mLockAfter.setSummary(summary);
         }
 
-        public void updateOwnerInfo() {
-            if (mOwnerInfoPref != null) {
-                if (mLockPatternUtils.isDeviceOwnerInfoEnabled()) {
-                    mOwnerInfoPref.setSummary(
-                            mLockPatternUtils.getDeviceOwnerInfo());
-                } else {
-                    mOwnerInfoPref.setSummary(mLockPatternUtils.isOwnerInfoEnabled(MY_USER_ID)
-                            ? mLockPatternUtils.getOwnerInfo(MY_USER_ID)
-                            : getString(R.string.owner_info_settings_summary));
-                }
-            }
+        @Override
+        public void onOwnerInfoUpdated() {
+            mOwnerInfoPreferenceController.updateSummary();
         }
 
         private static int getResIdForLockUnlockSubScreen(Context context,

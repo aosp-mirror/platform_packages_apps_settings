@@ -111,6 +111,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
@@ -242,6 +243,7 @@ public class SettingsGateway {
             UserAndAccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
+            LockscreenDashboardFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
