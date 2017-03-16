@@ -32,6 +32,7 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
@@ -53,15 +54,24 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         LifecycleObserver, OnResume {
     private static final String TAG = "WifiDetailsPrefCtrl";
 
-    private static final String KEY_CONNECTION_DETAIL_PREF = "connection_detail";
-    private static final String KEY_SIGNAL_STRENGTH_PREF = "signal_strength";
-    private static final String KEY_FREQUENCY_PREF = "frequency";
-    private static final String KEY_SECURITY_PREF = "security";
-    private static final String KEY_IP_ADDRESS_PREF = "ip_address";
-    private static final String KEY_ROUTER_PREF = "router";
-    private static final String KEY_SUBNET_MASK_PREF = "subnet_mask";
-    private static final String KEY_DNS_PREF = "dns";
-    private static final String KEY_IPV6_ADDRESS_CATEGORY = "ipv6_details_category";
+    @VisibleForTesting
+    static final String KEY_CONNECTION_DETAIL_PREF = "connection_detail";
+    @VisibleForTesting
+    static final String KEY_SIGNAL_STRENGTH_PREF = "signal_strength";
+    @VisibleForTesting
+    static final String KEY_FREQUENCY_PREF = "frequency";
+    @VisibleForTesting
+    static final String KEY_SECURITY_PREF = "security";
+    @VisibleForTesting
+    static final String KEY_IP_ADDRESS_PREF = "ip_address";
+    @VisibleForTesting
+    static final String KEY_ROUTER_PREF = "router";
+    @VisibleForTesting
+    static final String KEY_SUBNET_MASK_PREF = "subnet_mask";
+    @VisibleForTesting
+    static final String KEY_DNS_PREF = "dns";
+    @VisibleForTesting
+    static final String KEY_IPV6_ADDRESS_CATEGORY = "ipv6_details_category";
 
     private AccessPoint mAccessPoint;
     private NetworkInfo mNetworkInfo;
@@ -166,7 +176,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 R.color.wifi_details_icon_color, mContext.getTheme()));
         mSignalStrengthPref.setIcon(wifiIconDark);
 
-        int summarySignalLevel = WifiManager.calculateSignalLevel(mRssi, mSignalStr.length);
+        int summarySignalLevel = mAccessPoint.getLevel();
         mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
 
         // Frequency Pref
