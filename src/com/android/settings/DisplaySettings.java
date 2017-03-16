@@ -36,7 +36,6 @@ import com.android.settings.display.ThemePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.display.VrDisplayPreferenceController;
 import com.android.settings.display.WallpaperPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -64,7 +63,7 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.ia_display_settings;
+        return R.xml.display_settings;
     }
 
     @Override
@@ -104,7 +103,7 @@ public class DisplaySettings extends DashboardFragment {
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.ia_display_settings;
+                    sir.xmlResId = R.xml.display_settings;
                     result.add(sir);
                     return result;
                 }

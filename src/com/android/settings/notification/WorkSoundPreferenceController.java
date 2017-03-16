@@ -222,7 +222,7 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
                     KEY_WORK_ALARM_RINGTONE);
         }
         if (!mVoiceCapable) {
-            mWorkPreferenceCategory.removePreference(mWorkPhoneRingtonePreference);
+            mWorkPhoneRingtonePreference.setVisible(false);
             mWorkPhoneRingtonePreference = null;
         }
 

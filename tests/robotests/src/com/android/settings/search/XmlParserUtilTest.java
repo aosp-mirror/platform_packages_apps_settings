@@ -56,7 +56,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataTitleValid_ReturnsPreferenceTitle() {
-        XmlResourceParser parser = getChildByType(R.xml.ia_display_settings,
+        XmlResourceParser parser = getChildByType(R.xml.display_settings,
                 "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String title = XmlParserUtils.getDataTitle(mContext, attrs);
@@ -66,7 +66,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataKeywordsValid_ReturnsPreferenceKeywords() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String keywords = XmlParserUtils.getDataKeywords(mContext, attrs);
         String expKeywords = mContext.getString(R.string.keywords_display);
@@ -75,7 +75,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataKeyValid_ReturnsPreferenceKey() {
-        XmlResourceParser parser = getChildByType(R.xml.ia_display_settings,
+        XmlResourceParser parser = getChildByType(R.xml.display_settings,
                 "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = XmlParserUtils.getDataKey(mContext, attrs);
@@ -85,7 +85,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataSummaryValid_ReturnsPreferenceSummary() {
-        XmlResourceParser parser = getChildByType(R.xml.ia_display_settings,
+        XmlResourceParser parser = getChildByType(R.xml.display_settings,
                 "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = XmlParserUtils.getDataSummary(mContext, attrs);
@@ -128,7 +128,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataKeyInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = XmlParserUtils.getDataKey(mContext, attrs);
         assertThat(key).isNull();
@@ -136,7 +136,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataSummaryInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = XmlParserUtils.getDataSummary(mContext, attrs);
         assertThat(summary).isNull();
@@ -144,7 +144,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataSummaryOffInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summaryOff = XmlParserUtils.getDataSummaryOff(mContext, attrs);
         assertThat(summaryOff).isNull();
@@ -152,7 +152,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataEntriesInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String entries = XmlParserUtils.getDataEntries(mContext, attrs);
         assertThat(entries).isNull();

@@ -98,7 +98,7 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.ia_sound_settings;
+        return R.xml.sound_settings;
     }
 
     @Override
@@ -216,7 +216,7 @@ public class SoundSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.ia_sound_settings;
+                    sir.xmlResId = R.xml.sound_settings;
                     return Arrays.asList(sir);
                 }
 

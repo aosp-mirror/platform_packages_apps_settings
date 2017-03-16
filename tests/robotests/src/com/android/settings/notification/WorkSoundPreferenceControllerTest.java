@@ -134,7 +134,6 @@ public class WorkSoundPreferenceControllerTest {
         mController.displayPreference(mScreen);
         verify(mWorkCategory).setVisible(false);
 
-
         // However, when a managed profile is added later, the category should appear.
         mController.onResume();
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
@@ -201,6 +200,27 @@ public class WorkSoundPreferenceControllerTest {
         mController.onPreferenceChange(preference, "hello");
 
         verify(preference).setSummary(anyString());
+    }
+
+    @Test
+    public void onResume_noVoiceCapability_shouldHidePhoneRingtone() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
+        mController = new WorkSoundPreferenceController(mContext, mFragment, null, mAudioHelper);
+
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(UserHandle.myUserId());
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isSingleVolume()).thenReturn(false);
+        when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
+        when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
+
+        // Precondition: work profile is available.
+        assertThat(mController.isAvailable()).isTrue();
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        verify(mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE)).setVisible(false);
     }
 
     @Test
