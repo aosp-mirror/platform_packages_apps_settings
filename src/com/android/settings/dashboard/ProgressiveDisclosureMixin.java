@@ -33,6 +33,7 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnCreate;
 import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,13 +57,13 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     private boolean mUserExpanded;
 
     public ProgressiveDisclosureMixin(Context context,
-            MetricsFeatureProvider metricsFeatureProvider,
-            PreferenceFragment fragment) {
+            PreferenceFragment fragment, boolean keepExpanded) {
         mContext = context;
         mFragment = fragment;
         mExpandButton = new ExpandPreference(context);
         mExpandButton.setOnPreferenceClickListener(this);
-        mMetricsFeatureProvider = metricsFeatureProvider;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mUserExpanded = keepExpanded;
     }
 
     @Override
@@ -119,7 +120,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
      * Whether the screen should be collapsed.
      */
     public boolean shouldCollapse(PreferenceScreen screen) {
-        return screen.getPreferenceCount() >= mTileLimit && !mUserExpanded;
+        return !mUserExpanded && screen.getPreferenceCount() >= mTileLimit;
     }
 
     /**

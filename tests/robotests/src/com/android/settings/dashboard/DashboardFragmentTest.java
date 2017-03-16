@@ -74,8 +74,8 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = new ArrayList<>();
         mDashboardCategory.tiles.add(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
-        when(mFakeFeatureFactory.dashboardFeatureProvider
-                .getProgressiveDisclosureMixin(any(Context.class), eq(mTestFragment)))
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getProgressiveDisclosureMixin(
+                any(Context.class), eq(mTestFragment), any(Bundle.class)))
                 .thenReturn(mDisclosureMixin);
         when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
                 .thenReturn(mDashboardCategory);
