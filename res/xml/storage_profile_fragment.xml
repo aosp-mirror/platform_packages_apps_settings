@@ -20,22 +20,27 @@
     android:title="@string/storage_settings">
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_photos_videos"
-        android:title="@string/storage_photos_videos">
-    </com.android.settings.deviceinfo.StorageItemPreference>
+        android:title="@string/storage_photos_videos"
+        android:icon="@drawable/ic_photo_library_vd_theme_24"
+        android:order="2" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_music_audio"
-        android:title="@string/storage_music_audio">
-    </com.android.settings.deviceinfo.StorageItemPreference>
+        android:title="@string/storage_music_audio"
+        android:icon="@drawable/ic_music_note_vd_theme_24"
+        android:order="3" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_games"
-        android:title="@string/storage_games">
-    </com.android.settings.deviceinfo.StorageItemPreference>
+        android:title="@string/storage_games"
+        android:icon="@drawable/ic_videogame_vd_theme_24"
+        android:order="4" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_other_apps"
-        android:title="@string/storage_other_apps">
-    </com.android.settings.deviceinfo.StorageItemPreference>
+        android:title="@string/storage_other_apps"
+        android:icon="@drawable/ic_apps_vd_theme_24"
+        android:order="5" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_files"
-        android:title="@string/storage_files">
-    </com.android.settings.deviceinfo.StorageItemPreference>
+        android:title="@string/storage_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:order="6" />
 </PreferenceScreen>

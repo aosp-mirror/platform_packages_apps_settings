@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
 import android.support.v7.preference.PreferenceScreen;
@@ -231,5 +232,44 @@ public class StorageItemPreferenceControllerTest {
         assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
         assertThat(system.getSummary().toString()).isEqualTo("16.00KB");
         assertThat(files.getSummary().toString()).isEqualTo("5.00KB");
+    }
+
+    @Test
+    public void settingUserIdAppliesNewIcons() {
+        StorageItemPreference audio = spy(new StorageItemPreference(mContext));
+        audio.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference image = spy(new StorageItemPreference(mContext));
+        image.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference games = spy(new StorageItemPreference(mContext));
+        games.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference apps = spy(new StorageItemPreference(mContext));
+        apps.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference system = spy(new StorageItemPreference(mContext));
+        system.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference files = spy(new StorageItemPreference(mContext));
+        files.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.PHOTO_KEY))).thenReturn(image);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.OTHER_APPS_KEY))).thenReturn(apps);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.SYSTEM_KEY))).thenReturn(system);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.FILES_KEY))).thenReturn(files);
+        mController.displayPreference(screen);
+
+        mController.setUserId(new UserHandle(10));
+
+        verify(audio, times(2)).setIcon(any(Drawable.class));
+        verify(image, times(2)).setIcon(any(Drawable.class));
+        verify(games, times(2)).setIcon(any(Drawable.class));
+        verify(apps, times(2)).setIcon(any(Drawable.class));
+        verify(system, times(2)).setIcon(any(Drawable.class));
+        verify(files, times(2)).setIcon(any(Drawable.class));
     }
 }

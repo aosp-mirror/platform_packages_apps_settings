@@ -73,8 +73,7 @@ public class StorageProfileFragment extends DashboardFragment
 
         mPreferenceController.setVolume(mVolume);
         mUserId = args.getInt(USER_ID_EXTRA, UserHandle.myUserId());
-        // TODO(b/36224168): Use the user id to appropriately badge the preferences.
-        mPreferenceController.setUserId(mUserId);
+        mPreferenceController.setUserId(UserHandle.of(mUserId));
     }
 
     @Override
