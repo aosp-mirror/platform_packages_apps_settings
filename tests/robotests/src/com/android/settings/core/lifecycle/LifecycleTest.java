@@ -16,12 +16,18 @@
 package com.android.settings.core.lifecycle;
 
 import android.content.Context;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.events.OnAttach;
+import com.android.settings.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settings.core.lifecycle.events.OnDestroy;
+import com.android.settings.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settings.core.lifecycle.events.OnPause;
+import com.android.settings.core.lifecycle.events.OnPrepareOptionsMenu;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
@@ -71,7 +77,8 @@ public class LifecycleTest {
     }
 
     public static class TestObserver implements LifecycleObserver, OnAttach, OnStart, OnResume,
-            OnPause, OnStop, OnDestroy {
+            OnPause, OnStop, OnDestroy, OnCreateOptionsMenu, OnPrepareOptionsMenu,
+            OnOptionsItemSelected {
 
         boolean mOnAttachObserved;
         boolean mOnAttachHasContext;
@@ -80,6 +87,9 @@ public class LifecycleTest {
         boolean mOnPauseObserved;
         boolean mOnStopObserved;
         boolean mOnDestroyObserved;
+        boolean mOnCreateOptionsMenuObserved;
+        boolean mOnPrepareOptionsMenuObserved;
+        boolean mOnOptionsItemSelectedObserved;
 
         @Override
         public void onAttach(Context context) {
@@ -111,6 +121,22 @@ public class LifecycleTest {
         public void onDestroy() {
             mOnDestroyObserved = true;
         }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            mOnCreateOptionsMenuObserved = true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem menuItem) {
+            mOnOptionsItemSelectedObserved = true;
+            return true;
+        }
+
+        @Override
+        public void onPrepareOptionsMenu(Menu menu) {
+            mOnPrepareOptionsMenuObserved = true;
+        }
     }
 
     @Test
@@ -122,6 +148,12 @@ public class LifecycleTest {
         assertThat(activity.mActObserver.mOnStartObserved).isTrue();
         ac.resume();
         assertThat(activity.mActObserver.mOnResumeObserved).isTrue();
+        activity.onCreateOptionsMenu(null);
+        assertThat(activity.mActObserver.mOnCreateOptionsMenuObserved).isTrue();
+        activity.onPrepareOptionsMenu(null);
+        assertThat(activity.mActObserver.mOnPrepareOptionsMenuObserved).isTrue();
+        activity.onOptionsItemSelected(null);
+        assertThat(activity.mActObserver.mOnOptionsItemSelectedObserved).isTrue();
         ac.pause();
         assertThat(activity.mActObserver.mOnPauseObserved).isTrue();
         ac.stop();
@@ -136,7 +168,11 @@ public class LifecycleTest {
                 Robolectric.buildFragment(TestDialogFragment.class);
         TestDialogFragment fragment = fragmentController.get();
 
-        fragmentController.attach().create().start().resume().pause().stop().destroy();
+        fragmentController.attach().create().start().resume();
+        fragment.onCreateOptionsMenu(null, null);
+        fragment.onPrepareOptionsMenu(null);
+        fragment.onOptionsItemSelected(null);
+        fragmentController.pause().stop().destroy();
 
         assertThat(fragment.mFragObserver.mOnAttachObserved).isTrue();
         assertThat(fragment.mFragObserver.mOnAttachHasContext).isTrue();
@@ -145,6 +181,9 @@ public class LifecycleTest {
         assertThat(fragment.mFragObserver.mOnPauseObserved).isTrue();
         assertThat(fragment.mFragObserver.mOnStopObserved).isTrue();
         assertThat(fragment.mFragObserver.mOnDestroyObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnCreateOptionsMenuObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnPrepareOptionsMenuObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnOptionsItemSelectedObserved).isTrue();
     }
 
     @Test
@@ -153,7 +192,11 @@ public class LifecycleTest {
                 Robolectric.buildFragment(TestFragment.class);
         TestFragment fragment = fragmentController.get();
 
-        fragmentController.attach().create().start().resume().pause().stop().destroy();
+        fragmentController.attach().create().start().resume();
+        fragment.onCreateOptionsMenu(null, null);
+        fragment.onPrepareOptionsMenu(null);
+        fragment.onOptionsItemSelected(null);
+        fragmentController.pause().stop().destroy();
 
         assertThat(fragment.mFragObserver.mOnAttachObserved).isTrue();
         assertThat(fragment.mFragObserver.mOnAttachHasContext).isTrue();
@@ -162,5 +205,35 @@ public class LifecycleTest {
         assertThat(fragment.mFragObserver.mOnPauseObserved).isTrue();
         assertThat(fragment.mFragObserver.mOnStopObserved).isTrue();
         assertThat(fragment.mFragObserver.mOnDestroyObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnCreateOptionsMenuObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnPrepareOptionsMenuObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnOptionsItemSelectedObserved).isTrue();
+    }
+
+    private static class OptionItemAccepter implements LifecycleObserver, OnOptionsItemSelected {
+        public boolean wasCalled = false;
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem menuItem) {
+            wasCalled = true;
+            return false;
+        }
+    }
+
+    @Test
+    public void onOptionItemSelectedShortCircuitsIfAnObserverHandlesTheMenuItem() {
+        FragmentController<TestFragment> fragmentController =
+                Robolectric.buildFragment(TestFragment.class);
+        TestFragment fragment = fragmentController.get();
+        OptionItemAccepter accepter = new OptionItemAccepter();
+        fragment.getLifecycle().addObserver(accepter);
+
+        fragmentController.attach().create().start().resume();
+        fragment.onCreateOptionsMenu(null, null);
+        fragment.onPrepareOptionsMenu(null);
+        fragment.onOptionsItemSelected(null);
+        fragmentController.pause().stop().destroy();
+
+        assertThat(accepter.wasCalled).isFalse();
     }
 }

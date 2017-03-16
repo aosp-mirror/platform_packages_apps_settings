@@ -18,12 +18,19 @@ package com.android.settings.core.lifecycle;
 import android.annotation.UiThread;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.preference.PreferenceScreen;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnCreate;
+import com.android.settings.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settings.core.lifecycle.events.OnDestroy;
+import com.android.settings.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settings.core.lifecycle.events.OnPause;
+import com.android.settings.core.lifecycle.events.OnPrepareOptionsMenu;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settings.core.lifecycle.events.OnStart;
@@ -121,5 +128,32 @@ public class Lifecycle {
                 ((OnDestroy) observer).onDestroy();
             }
         }
+    }
+
+    public void onCreateOptionsMenu(final Menu menu, final @Nullable MenuInflater inflater) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof OnCreateOptionsMenu) {
+                ((OnCreateOptionsMenu) observer).onCreateOptionsMenu(menu, inflater);
+            }
+        }
+    }
+
+    public void onPrepareOptionsMenu(final Menu menu) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof OnPrepareOptionsMenu) {
+                ((OnPrepareOptionsMenu) observer).onPrepareOptionsMenu(menu);
+            }
+        }
+    }
+
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof OnOptionsItemSelected) {
+                if (((OnOptionsItemSelected) observer).onOptionsItemSelected(menuItem)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

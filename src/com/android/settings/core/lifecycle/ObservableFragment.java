@@ -20,6 +20,9 @@ import android.annotation.CallSuper;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class ObservableFragment extends Fragment {
 
@@ -83,5 +86,29 @@ public class ObservableFragment extends Fragment {
     public void onDestroy() {
         mLifecycle.onDestroy();
         super.onDestroy();
+    }
+
+    @CallSuper
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        mLifecycle.onCreateOptionsMenu(menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @CallSuper
+    @Override
+    public void onPrepareOptionsMenu(final Menu menu) {
+        mLifecycle.onPrepareOptionsMenu(menu);
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @CallSuper
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        boolean lifecycleHandled = mLifecycle.onOptionsItemSelected(menuItem);
+        if (!lifecycleHandled) {
+            return super.onOptionsItemSelected(menuItem);
+        }
+        return lifecycleHandled;
     }
 }
