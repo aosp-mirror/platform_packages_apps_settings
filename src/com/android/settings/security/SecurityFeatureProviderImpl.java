@@ -39,6 +39,7 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
 import java.util.concurrent.Executors;
+import java.util.TreeMap;
 import java.util.Map;
 
 /** Implementation for {@code SecurityFeatureProvider}. */
@@ -50,6 +51,12 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
     static final Drawable DEFAULT_ICON = null;
     @VisibleForTesting
     static final String DEFAULT_SUMMARY = " ";
+
+    @VisibleForTesting
+    static Map<String, Pair<String, Integer>> sIconCache = new TreeMap<>();
+
+    @VisibleForTesting
+    static Map<String, String> sSummaryCache = new TreeMap<>();
 
     /** Update preferences with data from associated tiles. */
     public void updatePreferences(final Context context, final PreferenceScreen preferenceScreen,
@@ -89,11 +96,33 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
             if (matchingPref == null) {
                 continue;
             }
-            // Remove any icons that may be loaded before we inject the final icon.
-            matchingPref.setIcon(DEFAULT_ICON);
-            // Reserve room for the summary. This prevents the title from having to shift when the
-            // final title is injected.
-            matchingPref.setSummary(DEFAULT_SUMMARY);
+            // Either remove an icon by replacing them with nothing, or use the cached one since
+            // there is a delay in fetching the injected icon, and we don't want an inappropriate
+            // icon to be displayed while waiting for the injected icon.
+            final String iconUri =
+                    tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_ICON_URI, null);
+            Drawable drawable = DEFAULT_ICON;
+            if ((iconUri != null) && sIconCache.containsKey(iconUri)) {
+                Pair<String, Integer> icon = sIconCache.get(iconUri);
+                try {
+                    drawable = context.getPackageManager()
+                            .getResourcesForApplication(icon.first /* package name */)
+                                    .getDrawable(icon.second /* res id */,
+                                            context.getTheme());
+                } catch (PackageManager.NameNotFoundException e) {
+                    // Ignore and just load the default icon.
+                }
+            }
+            matchingPref.setIcon(drawable);
+            // Either reserve room for the summary or load the cached one. This prevents the title
+            // from shifting when the final summary is injected.
+            final String summaryUri =
+                    tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
+            String summary = DEFAULT_SUMMARY;
+            if ((summaryUri != null) && sSummaryCache.containsKey(summaryUri)) {
+                summary = sSummaryCache.get(summaryUri);
+            }
+            matchingPref.setSummary(summary);
         }
     }
 
@@ -115,8 +144,9 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
                 continue;
             }
             // Check if the tile has content providers for dynamically updatable content.
-            String iconUri = tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_ICON_URI, null);
-            String summaryUri =
+            final String iconUri =
+                    tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_ICON_URI, null);
+            final String summaryUri =
                     tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
             if (!TextUtils.isEmpty(iconUri)) {
                 String packageName = null;
@@ -131,6 +161,7 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
                 Pair<String, Integer> icon =
                         TileUtils.getIconFromUri(context, packageName, iconUri, providerMap);
                 if (icon != null) {
+                    sIconCache.put(iconUri, icon);
                     // Icon is only returned if the icon belongs to Settings or the target app.
                     // setIcon must be called on the UI thread.
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -153,6 +184,7 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
             if (!TextUtils.isEmpty(summaryUri)) {
                 String summary = TileUtils.getTextFromUri(context, summaryUri, providerMap,
                         TileUtils.META_DATA_PREFERENCE_SUMMARY);
+                sSummaryCache.put(summaryUri, summary);
                 // setSummary must be called on UI thread.
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
