@@ -312,22 +312,6 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextAppearance.FingerprintMessage"
-        parent="android:TextAppearance.Material.Subhead">
-        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
-    </style>
-
-    <style name="Button.FingerprintButton"
-        parent="android:Widget.Material.Button.Borderless">
-        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
-    </style>
-
-    <style name="TextAppearance.FingerprintLink"
-           parent="TextAppearance.FingerprintMessage">
-        <item name="android:textColor">?android:attr/colorAccent</item>
-    </style>
-
     <style name="TextAppearance.FingerprintErrorText"
         parent="android:TextAppearance.Material.Body1">
         <item name="android:textColor">?android:attr/colorError</item>
