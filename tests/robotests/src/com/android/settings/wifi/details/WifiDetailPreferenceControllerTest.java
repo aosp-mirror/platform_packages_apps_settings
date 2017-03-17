@@ -56,11 +56,6 @@ public class WifiDetailPreferenceControllerTest {
     private static final int RSSI = -55;
     private static final String SECURITY = "None";
 
-    private Context mContext = RuntimeEnvironment.application;
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Drawable mockWifiIcon;
-
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
 
@@ -80,6 +75,7 @@ public class WifiDetailPreferenceControllerTest {
     @Mock private WifiDetailPreference mockDnsPref;
     @Mock private PreferenceCategory mockIpv6AddressCategory;
 
+    private Context mContext = RuntimeEnvironment.application;
     private Lifecycle mLifecycle;
     private WifiDetailPreferenceController mController;
 
