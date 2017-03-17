@@ -143,7 +143,6 @@
         </activity>
 
         <!-- Wireless Controls -->
-
         <activity android:name=".Settings$NetworkDashboardActivity"
             android:taskAffinity="com.android.settings"
             android:label="@string/network_dashboard_title"
@@ -803,13 +802,12 @@
                   android:icon="@drawable/ic_wallpaper"
                   android:taskAffinity="">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.WallpaperTypeSettings" />
+                       android:value="com.android.settings.wallpaper.WallpaperTypeSettings" />
         </activity>
 
-        <activity android:name="WallpaperSuggestionActivity"
+        <activity android:name=".wallpaper.WallpaperSuggestionActivity"
                   android:label="@string/wallpaper_settings_title"
                   android:icon="@drawable/ic_wallpaper"
-                  android:exported="true"
                   android:theme="@android:style/Theme.NoDisplay">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
@@ -1942,8 +1940,9 @@
                 android:value="com.android.settings.DevelopmentSettings" />
         </activity-alias>
 
-        <activity android:name=".AppPicker" android:label="@string/select_application"
-                android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity android:name=".development.AppPicker"
+                  android:label="@string/select_application"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
         <activity android:name="Settings$WebViewAppPickerActivity"
                   android:label="@string/select_webview_provider_dialog_title">

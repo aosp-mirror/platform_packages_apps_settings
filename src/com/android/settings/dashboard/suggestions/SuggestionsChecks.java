@@ -1,18 +1,20 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-package com.android.settings.dashboard;
+package com.android.settings.dashboard.suggestions;
 
 import android.app.AutomaticZenRule;
 import android.app.IWallpaperManager;
@@ -30,15 +32,14 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 
 import com.android.ims.ImsManager;
-import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.FingerprintSuggestionActivity;
 import com.android.settings.Settings.ScreenLockSuggestionActivity;
 import com.android.settings.Settings.WifiCallingSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
 import com.android.settings.Utils;
-import com.android.settings.WallpaperSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.Collection;

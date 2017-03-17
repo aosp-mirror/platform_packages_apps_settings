@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.development;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.settings.R;
 import com.android.settings.applications.AppViewHolder;
 
 import java.text.Collator;
