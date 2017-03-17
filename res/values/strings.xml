@@ -6341,7 +6341,14 @@
     <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
 
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
-    <string name="app_notifications_title">App notifications</string>
+    <string name="app_notifications_title">Notifications</string>
+
+    <!-- Notification Settings: Summary for the option managing notifications per application. [CHAR LIMIT=60] -->
+    <plurals name="app_notifications_summary">
+        <item quantity="zero">On for all apps</item>
+        <item quantity="one">Off for 1 app</item>
+        <item quantity="other">Off for <xliff:g id="off_count" example="10">%d</xliff:g> apps</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=100] Notification importance slider title -->
     <string name="notification_importance_title">Importance</string>
@@ -6963,11 +6970,8 @@
 
    <!-- Label for list that shows all permissions -->
    <string name="app_permissions">App permissions</string>
-   <!-- Summary of permissions currently granted to apps [CHAR LIMIT=45] -->
-   <string name="app_permissions_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed additional access</string>
-   <!-- Summary of number of apps currently granted a single permission [CHAR
-        LIMIT=45] -->
-   <string name="app_permissions_group_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed</string>
+   <!-- Summary of permissions currently granted to apps [CHAR LIMIT=60] -->
+   <string name="app_permissions_summary">Apps using <xliff:g id="apps" example="location">%1$s</xliff:g></string>
 
    <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
    <string name="tap_to_wake">Tap to wake</string>
@@ -6989,9 +6993,9 @@
 
     <!-- Description of settings item that leads to list of all apps that can open web links [CHAR LIMIT=NONE] -->
     <plurals name="domain_urls_apps_summary">
-        <item quantity="zero">No app can open any supported link</item>
-        <item quantity="one">One app can open its supported links</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can open their supported links</item>
+        <item quantity="zero">No app opening supported links</item>
+        <item quantity="one">One app opening supported links</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps opening supported links</item>
     </plurals>
 
     <!-- Explanation that the app that will ALWAYS be launched to open web links to domains that it understands -->
