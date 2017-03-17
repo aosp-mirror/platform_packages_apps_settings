@@ -27,7 +27,7 @@ import android.view.View;
 import android.view.WindowManagerGlobal;
 
 import com.android.internal.app.LocalePicker;
-import com.android.settings.DevelopmentSettings;
+import com.android.settings.development.DevelopmentSettings;
 
 public abstract class DevelopmentTiles extends TileService {
 

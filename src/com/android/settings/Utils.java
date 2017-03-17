@@ -750,30 +750,6 @@ public final class Utils extends com.android.settingslib.Utils {
                || um.getUserProfiles().contains(otherUser);
    }
 
-
-    /**
-     * Returns whether or not this device is able to be OEM unlocked.
-     */
-    static boolean isOemUnlockEnabled(Context context) {
-        PersistentDataBlockManager manager =(PersistentDataBlockManager)
-                context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
-        return manager.getOemUnlockEnabled();
-    }
-
-    /**
-     * Allows enabling or disabling OEM unlock on this device. OEM unlocked
-     * devices allow users to flash other OSes to them.
-     */
-    static void setOemUnlockEnabled(Context context, boolean enabled) {
-        try {
-            PersistentDataBlockManager manager = (PersistentDataBlockManager)
-                    context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
-            manager.setOemUnlockEnabled(enabled);
-        } catch (SecurityException e) {
-            Log.e(TAG, "Fail to set oem unlock.", e);
-        }
-    }
-
     /**
      * Return whether or not the user should have a SIM Cards option in Settings.
      * TODO: Change back to returning true if count is greater than one after testing.

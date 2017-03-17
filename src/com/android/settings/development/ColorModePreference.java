@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.development;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -24,6 +24,8 @@ import android.os.Looper;
 import android.support.v14.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.Display;
+
+import com.android.settings.R;
 
 import java.util.ArrayList;
 

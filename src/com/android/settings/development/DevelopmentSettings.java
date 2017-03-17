@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.development;
 
 import android.Manifest;
 import android.app.Activity;
@@ -55,7 +55,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
@@ -84,11 +83,12 @@ import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.development.AppPicker;
-import com.android.settings.development.BugReportInPowerPreferenceController;
-import com.android.settings.development.BugReportPreferenceController;
-import com.android.settings.development.TelephonyMonitorPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -1082,12 +1082,13 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private boolean enableOemUnlockPreference() {
-        return !isBootloaderUnlocked() && isOemUnlockAllowed();
+        return !isBootloaderUnlocked() && OemUnlockUtils.isOemUnlockAllowed(mUm);
     }
 
     private void updateOemUnlockOptions() {
         if (mEnableOemUnlock != null) {
-            updateSwitchPreference(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
+            updateSwitchPreference(mEnableOemUnlock,
+                    OemUnlockUtils.isOemUnlockEnabled(getActivity()));
             updateOemUnlockSettingDescription();
             // Showing mEnableOemUnlock preference as device has persistent data block.
             mEnableOemUnlock.setDisabledByAdmin(null);
@@ -2297,7 +2298,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    Utils.setOemUnlockEnabled(getActivity(), true);
+                    OemUnlockUtils.setOemUnlockEnabled(getActivity(), true);
                 }
             }
         };
@@ -2369,7 +2370,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 if (mEnableOemUnlock.isChecked()) {
                     confirmEnableOemUnlock();
                 } else {
-                    Utils.setOemUnlockEnabled(getActivity(), false);
+                    OemUnlockUtils.setOemUnlockEnabled(getActivity(), false);
                 }
             }
         } else {
@@ -2439,7 +2440,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     confirmEnableOemUnlock();
                 }
             } else {
-                Utils.setOemUnlockEnabled(getActivity(), false);
+                OemUnlockUtils.setOemUnlockEnabled(getActivity(), false);
             }
         } else if (preference == mMockLocationAppPref) {
             Intent intent = new Intent(getActivity(), AppPicker.class);
@@ -2807,7 +2808,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
-            } else if (!isOemUnlockAllowed()) {
+            } else if (!OemUnlockUtils.isOemUnlockAllowed(mUm)) {
                 // If the device isn't SIM-locked but OEM unlock is disabled by the system via the
                 // user restriction, this means either some other carrier restriction is in place or
                 // the device hasn't been able to confirm which restrictions (SIM-lock or otherwise)
@@ -2842,14 +2843,5 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return flashLockState == PersistentDataBlockManager.FLASH_LOCK_UNLOCKED;
     }
 
-    /**
-     * Returns {@code true} if OEM unlock is disallowed by user restriction
-     * {@link UserManager#DISALLOW_FACTORY_RESET} or {@link UserManager#DISALLOW_OEM_UNLOCK}.
-     * Otherwise, returns {@code false}.
-     */
-    private boolean isOemUnlockAllowed() {
-        UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
-        return !(mUm.hasBaseUserRestriction(UserManager.DISALLOW_OEM_UNLOCK, userHandle)
-                || mUm.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle));
-    }
+
 }

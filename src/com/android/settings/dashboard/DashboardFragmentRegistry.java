@@ -18,7 +18,6 @@ package com.android.settings.dashboard;
 
 import android.util.ArrayMap;
 
-import com.android.settings.DevelopmentSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
@@ -26,6 +25,7 @@ import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.language.LanguageAndInputSettings;
