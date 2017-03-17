@@ -55,8 +55,8 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
         summary.setTitle(TextUtils.expandTemplate(
                 mContext.getText(R.string.storage_size_large_alternate), result.value,
                 result.units));
-        summary.setSummary(mContext.getString(R.string.storage_volume_free,
-                Formatter.formatFileSize(mContext, mTotalBytes - mUsedBytes)));
+        summary.setSummary(mContext.getString(R.string.storage_volume_total,
+                Formatter.formatShortFileSize(mContext, mTotalBytes)));
         summary.setPercent(mUsedBytes, mTotalBytes);
         summary.setEnabled(true);
     }

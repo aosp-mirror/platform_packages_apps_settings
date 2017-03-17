@@ -2698,7 +2698,7 @@
     <string name="storage_detail_dialog_system">System includes files that Android can\u2019t display individually.</string>
 
     <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, movies, apps, or other data that is taking up <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
+    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, apps, or other data, using <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
 \n\nTo view details, switch to <xliff:g id="user" example="Guest user">^1</xliff:g>.</string>
 
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
@@ -8284,12 +8284,13 @@
     <string name="storage_files">Files</string>
 
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings_2">Phone storage</string>
+    <string name="storage_settings_2" product="tablet">Tablet storage</string>
+    <string name="storage_settings_2" product="default">Phone storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>
-    <!-- Summary of a single storage volume free space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_free"><xliff:g id="total" example="32GB">%1$s</xliff:g> free</string>
+    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
+    <string name="storage_volume_total">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
     <!-- The percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=4]-->
     <string name="storage_percent_used"><xliff:g id="percent" example="50%">%1$s</xliff:g>%%</string>
 
@@ -8332,5 +8333,8 @@
 
     <!-- Added as the value of a header field indicating this is an instant app (as opposed to installed normally) -->
     <string name="install_type_instant">Instant app</string>
+
+    <!-- Warning for when the automatic storage manager is turned off. [CHAR LIMIT=NONE] -->
+    <string name="automatic_storage_manager_deactivation_warning">Turn off the storage manager?</string>
 
 </resources>
