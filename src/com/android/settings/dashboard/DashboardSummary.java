@@ -190,8 +190,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
         Log.d(TAG, "adapter created");
-        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
-                bundle, mConditionManager.getConditions());
+        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
         mSuggestionDismissHandler = new SuggestionDismissController(
                 getContext(), mDashboard, mSuggestionParser, mAdapter);
@@ -245,8 +244,8 @@ public class DashboardSummary extends InstrumentedFragment
             if (isSmartSuggestionEnabled) {
                 List<String> suggestionIds = new ArrayList<>(suggestions.size());
                 for (Tile suggestion : suggestions) {
-                    suggestionIds.add(
-                            DashboardAdapter.getSuggestionIdentifier(context, suggestion));
+                    suggestionIds.add(mSuggestionFeatureProvider.getSuggestionIdentifier(
+                            context, suggestion));
                 }
                 // TODO: create a Suggestion class to maintain the id and other info
                 mSuggestionFeatureProvider.rankSuggestions(suggestions, suggestionIds);

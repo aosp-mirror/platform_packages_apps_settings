@@ -40,8 +40,8 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -60,6 +60,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
+    private final SuggestionFeatureProvider mSuggestionFeatureProvider;
     private final ArrayList<String> mSuggestionsShownLogged;
     private boolean mFirstFrameDrawn;
 
@@ -97,17 +98,17 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     };
 
-    public DashboardAdapter(Context context, SuggestionParser parser,
-            MetricsFeatureProvider metricsFeatureProvider, Bundle savedInstanceState,
+    public DashboardAdapter(Context context, Bundle savedInstanceState,
             List<Condition> conditions) {
         List<Tile> suggestions = null;
         List<DashboardCategory> categories = null;
         int suggestionMode = DashboardData.SUGGESTION_MODE_DEFAULT;
 
         mContext = context;
-        mMetricsFeatureProvider = metricsFeatureProvider;
-        mDashboardFeatureProvider = FeatureFactory.getFactory(context)
-                .getDashboardFeatureProvider(context);
+        final FeatureFactory factory = FeatureFactory.getFactory(context);
+        mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
+        mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
+        mSuggestionFeatureProvider = factory.getSuggestionFeatureProvider(context);
         mCache = new IconCache(context);
 
         setHasStableIds(true);
@@ -120,7 +121,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             mSuggestionsShownLogged = savedInstanceState.getStringArrayList(
                     STATE_SUGGESTIONS_SHOWN_LOGGED);
         } else {
-            mSuggestionsShownLogged = new ArrayList<String>();
+            mSuggestionsShownLogged = new ArrayList<>();
         }
 
         mDashboardData = new DashboardData.Builder()
@@ -173,11 +174,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
         if (shownSuggestions != null) {
             for (Tile suggestion : shownSuggestions) {
-                String suggestionId = getSuggestionIdentifier(mContext, suggestion);
+                final String identifier = mSuggestionFeatureProvider.getSuggestionIdentifier(
+                        mContext, suggestion);
                 mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                        getSuggestionIdentifier(mContext, suggestion));
-                mSuggestionsShownLogged.add(getSuggestionIdentifier(mContext, suggestion));
+                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, identifier);
+                mSuggestionsShownLogged.add(identifier);
             }
         }
     }
@@ -237,7 +238,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 break;
             case R.layout.suggestion_tile:
                 final Tile suggestion = (Tile) mDashboardData.getItemEntityByPosition(position);
-                String suggestionId = getSuggestionIdentifier(mContext, suggestion);
+                final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
+                        mContext, suggestion);
                 // This is for cases when a suggestion is dismissed and the next one comes to view
                 if (!mSuggestionsShownLogged.contains(suggestionId)) {
                     mMetricsFeatureProvider.action(
@@ -245,14 +247,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     mSuggestionsShownLogged.add(suggestionId);
                 }
                 onBindTile(holder, suggestion);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mMetricsFeatureProvider.action(mContext,
-                                MetricsEvent.ACTION_SETTINGS_SUGGESTION,
-                                DashboardAdapter.getSuggestionIdentifier(mContext, suggestion));
-                        ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
-                    }
+                holder.itemView.setOnClickListener(v -> {
+                    mMetricsFeatureProvider.action(mContext,
+                            MetricsEvent.ACTION_SETTINGS_SUGGESTION, suggestionId);
+                    ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
                 });
                 break;
             case R.layout.condition_card:
@@ -260,13 +258,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         == mDashboardData.getExpandedCondition();
                 ConditionAdapterUtils.bindViews(
                         (Condition) mDashboardData.getItemEntityByPosition(position),
-                        holder, isExpanded, mConditionClickListener,
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                onExpandClick(v);
-                            }
-                        });
+                        holder, isExpanded, mConditionClickListener, v -> onExpandClick(v));
                 break;
         }
     }
@@ -291,7 +283,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             return;
         }
         for (Tile suggestion : mDashboardData.getSuggestions()) {
-            String suggestionId = getSuggestionIdentifier(mContext, suggestion);
+            String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
+                    mContext, suggestion);
             if (mSuggestionsShownLogged.contains(suggestionId)) {
                 mMetricsFeatureProvider.action(
                         mContext, MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, suggestionId);
@@ -318,16 +311,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public Object getItem(long itemId) {
         return mDashboardData.getItemEntityById(itemId);
-    }
-
-    public static String getSuggestionIdentifier(Context context, Tile suggestion) {
-        String packageName = suggestion.intent.getComponent().getPackageName();
-        if (packageName.equals(context.getPackageName())) {
-            // Since Settings provides several suggestions, fill in the class instead of the
-            // package for these.
-            packageName = suggestion.intent.getComponent().getClassName();
-        }
-        return packageName;
     }
 
     private void notifyDashboardDataChanged(DashboardData prevData) {
@@ -394,33 +377,30 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             holder.summary.setText(
                     mContext.getString(R.string.suggestions_summary, undisplayedSuggestionCount));
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int suggestionMode;
-                if (moreSuggestions) {
-                    suggestionMode = DashboardData.SUGGESTION_MODE_EXPANDED;
+        holder.itemView.setOnClickListener(v -> {
+            final int suggestionMode;
+            if (moreSuggestions) {
+                suggestionMode = DashboardData.SUGGESTION_MODE_EXPANDED;
 
-                    for (Tile suggestion : mDashboardData.getSuggestions()) {
-                        String suggestionId =
-                                DashboardAdapter.getSuggestionIdentifier(mContext, suggestion);
-                        if (!mSuggestionsShownLogged.contains(suggestionId)) {
-                            mMetricsFeatureProvider.action(
-                                    mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                                    suggestionId);
-                            mSuggestionsShownLogged.add(suggestionId);
-                        }
+                for (Tile suggestion : mDashboardData.getSuggestions()) {
+                    final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
+                            mContext, suggestion);
+                    if (!mSuggestionsShownLogged.contains(suggestionId)) {
+                        mMetricsFeatureProvider.action(
+                                mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                                suggestionId);
+                        mSuggestionsShownLogged.add(suggestionId);
                     }
-                } else {
-                    suggestionMode = DashboardData.SUGGESTION_MODE_COLLAPSED;
                 }
-
-                DashboardData prevData = mDashboardData;
-                mDashboardData = new DashboardData.Builder(prevData)
-                        .setSuggestionMode(suggestionMode)
-                        .build();
-                notifyDashboardDataChanged(prevData);
+            } else {
+                suggestionMode = DashboardData.SUGGESTION_MODE_COLLAPSED;
             }
+
+            DashboardData prevData = mDashboardData;
+            mDashboardData = new DashboardData.Builder(prevData)
+                    .setSuggestionMode(suggestionMode)
+                    .build();
+            notifyDashboardDataChanged(prevData);
         });
     }
 

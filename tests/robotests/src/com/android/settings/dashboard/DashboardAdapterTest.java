@@ -21,35 +21,32 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
-import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import org.mockito.Matchers;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -64,20 +61,19 @@ import static org.mockito.Mockito.when;
         })
 public class DashboardAdapterTest {
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
     @Mock
     private View mView;
     @Mock
     private Condition mCondition;
     @Mock
-    private MetricsFeatureProvider mMetricsFeatureProvider;
-    @Mock
     private Resources mResources;
-    @Mock
-    private DashboardData mDashboardData;
     @Captor
     private ArgumentCaptor<Integer> mActionCategoryCaptor = ArgumentCaptor.forClass(Integer.class);
     @Captor
     private ArgumentCaptor<String> mActionPackageCaptor = ArgumentCaptor.forClass(String.class);
+    private FakeFeatureFactory mFactory;
     private DashboardAdapter mDashboardAdapter;
     private DashboardAdapter.DashboardItemHolder mSuggestionHolder;
     private DashboardData.SuggestionHeaderData mSuggestionHeaderData;
@@ -85,15 +81,20 @@ public class DashboardAdapterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        Context context = RuntimeEnvironment.application;
-        context = spy(context);
-        when(context.getResources()).thenReturn(mResources);
-        when(mResources
-                .getQuantityString(any(int.class), any(int.class), Matchers.<Object>anyVararg()))
+        FakeFeatureFactory.setupForTest(mContext);
+        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(mFactory.suggestionsFeatureProvider
+                .getSuggestionIdentifier(any(Context.class), any(Tile.class)))
+                .thenAnswer(invocation -> {
+                    final Object[] args = invocation.getArguments();
+                    return ((Tile)args[1]).intent.getComponent().getPackageName();
+                });
+
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getQuantityString(any(int.class), any(int.class), any()))
                 .thenReturn("");
-        FakeFeatureFactory.setupForTest(context);
-        mDashboardAdapter = new DashboardAdapter(context, null, mMetricsFeatureProvider,
-                null, null);
+
+        mDashboardAdapter = new DashboardAdapter(mContext, null, null);
         mSuggestionHeaderData = new DashboardData.SuggestionHeaderData(true, 1, 0);
         when(mView.getTag()).thenReturn(mCondition);
     }
@@ -109,7 +110,7 @@ public class DashboardAdapterTest {
     @Test
     public void testSuggestionsLogs_NotExpanded() {
         setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
-        verify(mMetricsFeatureProvider, times(2)).action(
+        verify(mFactory.metricsFeatureProvider, times(2)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg2"};
@@ -117,15 +118,15 @@ public class DashboardAdapterTest {
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION
         };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
         assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
     }
 
     @Test
     public void testSuggestionsLogs_NotExpandedAndPaused() {
         setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         mDashboardAdapter.onPause();
-        verify(mMetricsFeatureProvider, times(4)).action(
+        verify(mFactory.metricsFeatureProvider, times(4)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg2", "pkg1", "pkg2"};
@@ -134,8 +135,8 @@ public class DashboardAdapterTest {
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION};
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
         assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
     }
 
     @Test
@@ -144,7 +145,7 @@ public class DashboardAdapterTest {
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
-        verify(mMetricsFeatureProvider, times(3)).action(
+        verify(mFactory.metricsFeatureProvider, times(3)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg2", "pkg3"};
@@ -164,7 +165,7 @@ public class DashboardAdapterTest {
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
-        verify(mMetricsFeatureProvider, times(6)).action(
+        verify(mFactory.metricsFeatureProvider, times(6)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg2", "pkg3", "pkg1", "pkg2", "pkg3"};
@@ -187,7 +188,7 @@ public class DashboardAdapterTest {
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
-        verify(mMetricsFeatureProvider, times(7)).action(
+        verify(mFactory.metricsFeatureProvider, times(7)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{
@@ -213,7 +214,7 @@ public class DashboardAdapterTest {
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
-        verify(mMetricsFeatureProvider, times(10)).action(
+        verify(mFactory.metricsFeatureProvider, times(10)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{
@@ -240,7 +241,7 @@ public class DashboardAdapterTest {
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
-        verify(mMetricsFeatureProvider, times(1)).action(
+        verify(mFactory.metricsFeatureProvider, times(1)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1"};
@@ -258,7 +259,7 @@ public class DashboardAdapterTest {
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
-        verify(mMetricsFeatureProvider, times(2)).action(
+        verify(mFactory.metricsFeatureProvider, times(2)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg1"};
@@ -277,7 +278,7 @@ public class DashboardAdapterTest {
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
-        verify(mMetricsFeatureProvider, times(3)).action(
+        verify(mFactory.metricsFeatureProvider, times(3)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg1", "pkg1"};
@@ -298,7 +299,7 @@ public class DashboardAdapterTest {
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
-        verify(mMetricsFeatureProvider, times(4)).action(
+        verify(mFactory.metricsFeatureProvider, times(4)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
         String[] expectedPackages = new String[]{"pkg1", "pkg1", "pkg1", "pkg1"};
@@ -313,23 +314,18 @@ public class DashboardAdapterTest {
     }
 
     private List<Tile> makeSuggestions(String[] pkgNames) {
-        List<Tile> suggestions = new ArrayList<Tile>();
+        final List<Tile> suggestions = new ArrayList<>();
         for (String pkgName : pkgNames) {
-            suggestions.add(makeSuggestion(pkgName, "cls"));
+            Tile suggestion = new Tile();
+            suggestion.intent = new Intent("action");
+            suggestion.intent.setComponent(new ComponentName(pkgName, "cls"));
+            suggestions.add(suggestion);
         }
         return suggestions;
     }
 
-    private Tile makeSuggestion(String pkgName, String className) {
-        Tile suggestion = new Tile();
-        suggestion.intent = new Intent("action");
-        suggestion.intent.setComponent(new ComponentName(pkgName, className));
-        return suggestion;
-    }
-
     private void setUpSuggestions(List<Tile> suggestions) {
-        mDashboardAdapter.setCategoriesAndSuggestions(
-                new ArrayList<DashboardCategory>(), suggestions);
+        mDashboardAdapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
         mSuggestionHolder = mDashboardAdapter.onCreateViewHolder(
                 new FrameLayout(RuntimeEnvironment.application),
                 mDashboardAdapter.getItemViewType(0));
