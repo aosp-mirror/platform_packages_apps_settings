@@ -30,6 +30,7 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.search2.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -172,7 +173,10 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
+
+        when(mFactory.searchFeatureProvider.getIndexingManager(any(Context.class)))
+                .thenReturn(mock(DatabaseIndexingManager.class));
 
         mController = new BuildNumberPreferenceController(
                 context, mActivity, mFragment, mLifecycle);

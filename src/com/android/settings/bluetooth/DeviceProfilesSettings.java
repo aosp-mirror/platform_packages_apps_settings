@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -117,10 +116,6 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
                 break;
             case DialogInterface.BUTTON_NEUTRAL:
                 mCachedDevice.unpair();
-                com.android.settings.bluetooth.Utils.updateSearchIndex(getContext(),
-                        BluetoothSettings.class.getName(), mCachedDevice.getName(),
-                        getString(R.string.bluetooth_settings),
-                        R.drawable.ic_settings_bluetooth, false);
                 break;
         }
     }

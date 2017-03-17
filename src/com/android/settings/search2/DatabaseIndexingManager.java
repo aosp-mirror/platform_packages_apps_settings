@@ -120,6 +120,9 @@ import static com.android.settings.search2.DatabaseResultLoader.SELECT_COLUMNS;
 public class DatabaseIndexingManager {
     private static final String LOG_TAG = "DatabaseIndexingManager";
 
+    public static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
+            "SEARCH_INDEX_DATA_PROVIDER";
+
     private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
     private static final String NODE_NAME_LIST_PREFERENCE = "ListPreference";

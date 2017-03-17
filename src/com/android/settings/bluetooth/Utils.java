@@ -27,8 +27,6 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.Index;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 import com.android.settingslib.bluetooth.Utils.ErrorListener;
@@ -114,21 +112,6 @@ public final class Utils {
         } else {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    /**
-     * Update the search Index for a specific class name and resources.
-     */
-    public static void updateSearchIndex(Context context, String className, String title,
-            String screenTitle, int iconResId, boolean enabled) {
-        SearchIndexableRaw data = new SearchIndexableRaw(context);
-        data.className = className;
-        data.title = title;
-        data.screenTitle = screenTitle;
-        data.iconResId = iconResId;
-        data.enabled = enabled;
-
-        Index.getInstance(context).updateFromSearchIndexableData(data);
     }
 
     public static LocalBluetoothManager getLocalBtManager(Context context) {

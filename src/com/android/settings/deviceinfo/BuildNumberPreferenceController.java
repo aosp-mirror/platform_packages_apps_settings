@@ -40,7 +40,7 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.Index;
+import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils;
 
 public class BuildNumberPreferenceController extends PreferenceController
@@ -221,8 +221,7 @@ public class BuildNumberPreferenceController extends PreferenceController
                 Toast.LENGTH_LONG);
         mDevHitToast.show();
         // This is good time to index the Developer Options
-        Index.getInstance(
-                mContext.getApplicationContext()).updateFromClassNameResource(
-                DevelopmentSettings.class.getName(), true, true);
+        FeatureFactory.getFactory(mContext).getSearchFeatureProvider().getIndexingManager(mContext)
+                .updateFromClassNameResource(DevelopmentSettings.class.getName(), true, true);
     }
 }

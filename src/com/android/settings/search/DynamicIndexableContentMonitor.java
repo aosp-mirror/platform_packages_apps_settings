@@ -52,7 +52,9 @@ import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.search2.DatabaseIndexingManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +69,7 @@ public final class DynamicIndexableContentMonitor implements
     private static final PackageChangeMonitor PACKAGE_CHANGE_MONITOR = new PackageChangeMonitor();
 
     // Null if not initialized.
-    @Nullable private Index mIndex;
+    @Nullable private DatabaseIndexingManager mIndexManager;
     private Context mContext;
     private boolean mHasFeaturePrinting;
 
@@ -112,22 +114,25 @@ public final class DynamicIndexableContentMonitor implements
         final boolean isUserUnlocked = activity
                 .getSystemService(UserManager.class)
                 .isUserUnlocked();
-        register(activity, loaderId, Index.getInstance(activity), isUserUnlocked);
+        register(activity, loaderId, FeatureFactory.getFactory(activity)
+                        .getSearchFeatureProvider().getIndexingManager(activity), isUserUnlocked);
     }
 
     /**
-     * For testing to inject {@link Index} object. Also because currently Robolectric doesn't
-     * support API 24, we can not test code that calls {@link UserManager#isUserUnlocked()}.
+     * For testing to inject {@link DatabaseIndexingManager} object.
+     * Also because currently Robolectric doesn't support API 24, we can not test code that calls
+     * {@link UserManager#isUserUnlocked()}.
      */
     @VisibleForTesting
-    void register(Activity activity, int loaderId, Index index, boolean isUserUnlocked) {
+    void register(Activity activity, int loaderId, DatabaseIndexingManager indexManager,
+                  boolean isUserUnlocked) {
         if (!isUserUnlocked) {
             Log.w(TAG, "Skipping content monitoring because user is locked");
             return;
         }
         final Context context = activity.getApplicationContext();
         mContext = context;
-        mIndex = index;
+        mIndexManager = indexManager;
 
         PACKAGE_CHANGE_MONITOR.registerMonitor(context);
         mHasFeaturePrinting = context.getPackageManager()
@@ -137,11 +142,11 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         // Watch for input device changes.
-        InputDevicesMonitor.getInstance().initialize(context, index);
+        InputDevicesMonitor.getInstance().initialize(context, mIndexManager);
 
         // Start tracking packages.
-        AccessibilityServicesMonitor.getInstance().initialize(context, index);
-        InputMethodServicesMonitor.getInstance().initialize(context, index);
+        AccessibilityServicesMonitor.getInstance().initialize(context, mIndexManager);
+        InputMethodServicesMonitor.getInstance().initialize(context, mIndexManager);
     }
 
     /**
@@ -152,7 +157,7 @@ public final class DynamicIndexableContentMonitor implements
      * @param loaderId id for loading print services.
      */
     public void unregister(Activity activity, int loaderId) {
-        if (mIndex == null) return;
+        if (mIndexManager == null) return;
 
         PACKAGE_CHANGE_MONITOR.unregisterMonitor();
         if (mHasFeaturePrinting) {
@@ -170,7 +175,7 @@ public final class DynamicIndexableContentMonitor implements
     @Override
     public void onLoadFinished(Loader<List<PrintServiceInfo>> loader,
             List<PrintServiceInfo> services) {
-        mIndex.updateFromClassNameResource(PrintSettingsFragment.class.getName(),
+        mIndexManager.updateFromClassNameResource(PrintSettingsFragment.class.getName(),
                 false /* rebuild */, true /* includeInSearchResult */);
     }
 
@@ -183,7 +188,7 @@ public final class DynamicIndexableContentMonitor implements
     private static class InputDevicesMonitor implements InputManager.InputDeviceListener {
 
         // Null if not initialized.
-        @Nullable private Index mIndex;
+        @Nullable private DatabaseIndexingManager mIndexManager;
         private InputManager mInputManager;
 
         private InputDevicesMonitor() {}
@@ -198,15 +203,15 @@ public final class DynamicIndexableContentMonitor implements
 
         @VisibleForTesting
         synchronized void resetForTesting() {
-            if (mIndex != null) {
+            if (mIndexManager != null) {
                 mInputManager.unregisterInputDeviceListener(this /* listener */);
             }
-            mIndex = null;
+            mIndexManager = null;
         }
 
-        synchronized void initialize(Context context, Index index) {
-            if (mIndex != null) return;
-            mIndex = index;
+        synchronized void initialize(Context context, DatabaseIndexingManager indexManager) {
+            if (mIndexManager != null) return;
+            mIndexManager = indexManager;
             mInputManager = (InputManager) context.getSystemService(Context.INPUT_SERVICE);
             buildIndex(true /* rebuild */);
 
@@ -215,7 +220,7 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         private void buildIndex(boolean rebuild) {
-            mIndex.updateFromClassNameResource(PhysicalKeyboardFragment.class.getName(),
+            mIndexManager.updateFromClassNameResource(PhysicalKeyboardFragment.class.getName(),
                     rebuild, true /* includeInSearchResult */);
         }
 
@@ -314,7 +319,7 @@ public final class DynamicIndexableContentMonitor implements
     private static class AccessibilityServicesMonitor {
 
         // Null if not initialized.
-        @Nullable private Index mIndex;
+        @Nullable private DatabaseIndexingManager mIndexManager;
         private PackageManager mPackageManager;
         private final List<String> mAccessibilityServices = new ArrayList<>();
 
@@ -331,12 +336,12 @@ public final class DynamicIndexableContentMonitor implements
 
         @VisibleForTesting
         synchronized void resetForTesting() {
-            mIndex = null;
+            mIndexManager = null;
         }
 
-        synchronized void initialize(Context context, Index index) {
-            if (mIndex != null) return;
-            mIndex = index;
+        synchronized void initialize(Context context, DatabaseIndexingManager index) {
+            if (mIndexManager != null) return;
+            mIndexManager = index;
             mPackageManager = context.getPackageManager();
             mAccessibilityServices.clear();
             buildIndex(true /* rebuild */);
@@ -354,12 +359,12 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         private void buildIndex(boolean rebuild) {
-            mIndex.updateFromClassNameResource(AccessibilitySettings.class.getName(),
+            mIndexManager.updateFromClassNameResource(AccessibilitySettings.class.getName(),
                     rebuild, true /* includeInSearchResult */);
         }
 
         synchronized void onPackageAvailable(String packageName) {
-            if (mIndex == null) return;
+            if (mIndexManager == null) return;
             if (mAccessibilityServices.contains(packageName)) return;
 
             final Intent intent = getAccessibilityServiceIntent(packageName);
@@ -371,7 +376,7 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         synchronized void onPackageUnavailable(String packageName) {
-            if (mIndex == null) return;
+            if (mIndexManager == null) return;
             if (!mAccessibilityServices.remove(packageName)) return;
             buildIndex(true /* rebuild */);
         }
@@ -385,7 +390,7 @@ public final class DynamicIndexableContentMonitor implements
                 Settings.Secure.getUriFor(Settings.Secure.ENABLED_INPUT_METHODS);
 
         // Null if not initialized.
-        @Nullable private Index mIndex;
+        @Nullable private DatabaseIndexingManager mIndexManager;
         private PackageManager mPackageManager;
         private ContentResolver mContentResolver;
         private final List<String> mInputMethodServices = new ArrayList<>();
@@ -406,19 +411,19 @@ public final class DynamicIndexableContentMonitor implements
 
         @VisibleForTesting
         synchronized void resetForTesting() {
-            if (mIndex != null) {
+            if (mIndexManager != null) {
                 mContentResolver.unregisterContentObserver(this /* observer */);
             }
-            mIndex = null;
+            mIndexManager = null;
         }
 
-        synchronized void initialize(Context context, Index index) {
+        synchronized void initialize(Context context, DatabaseIndexingManager indexManager) {
             final boolean hasFeatureIme = context.getPackageManager()
                     .hasSystemFeature(PackageManager.FEATURE_INPUT_METHODS);
             if (!hasFeatureIme) return;
 
-            if (mIndex != null) return;
-            mIndex = index;
+            if (mIndexManager != null) return;
+            mIndexManager = indexManager;
             mPackageManager = context.getPackageManager();
             mContentResolver = context.getContentResolver();
             mInputMethodServices.clear();
@@ -448,12 +453,12 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         private void buildIndex(Class<?> indexClass, boolean rebuild) {
-            mIndex.updateFromClassNameResource(indexClass.getName(), rebuild,
+            mIndexManager.updateFromClassNameResource(indexClass.getName(), rebuild,
                     true /* includeInSearchResult */);
         }
 
         synchronized void onPackageAvailable(String packageName) {
-            if (mIndex == null) return;
+            if (mIndexManager == null) return;
             if (mInputMethodServices.contains(packageName)) return;
 
             final Intent intent = getIMEServiceIntent(packageName);
@@ -466,7 +471,7 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         synchronized void onPackageUnavailable(String packageName) {
-            if (mIndex == null) return;
+            if (mIndexManager == null) return;
             if (!mInputMethodServices.remove(packageName)) return;
             buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
             buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);

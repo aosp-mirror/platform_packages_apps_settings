@@ -21,15 +21,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.Settings;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -52,19 +49,6 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
     private static final int EVENT_UPDATE_INDEX = 0;
     private final int mMetricsEvent;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case EVENT_UPDATE_INDEX:
-                    final boolean isBluetoothOn = msg.getData().getBoolean(EVENT_DATA_IS_BT_ON);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            BluetoothSettings.class.getName(), true, isBluetoothOn);
-                    break;
-            }
-        }
-    };
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -142,7 +126,6 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             case BluetoothAdapter.STATE_ON:
                 setChecked(true);
                 mSwitchWidget.setEnabled(true);
-                updateSearchIndex(true);
                 break;
             case BluetoothAdapter.STATE_TURNING_OFF:
                 mSwitchWidget.setEnabled(false);
@@ -150,12 +133,10 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             case BluetoothAdapter.STATE_OFF:
                 setChecked(false);
                 mSwitchWidget.setEnabled(true);
-                updateSearchIndex(false);
                 break;
             default:
                 setChecked(false);
                 mSwitchWidget.setEnabled(true);
-                updateSearchIndex(false);
         }
     }
 
@@ -171,15 +152,6 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
                 mSwitchWidget.startListening();
             }
         }
-    }
-
-    private void updateSearchIndex(boolean isBluetoothOn) {
-        mHandler.removeMessages(EVENT_UPDATE_INDEX);
-
-        Message msg = new Message();
-        msg.what = EVENT_UPDATE_INDEX;
-        msg.getData().putBoolean(EVENT_DATA_IS_BT_ON, isBluetoothOn);
-        mHandler.sendMessage(msg);
     }
 
     @Override

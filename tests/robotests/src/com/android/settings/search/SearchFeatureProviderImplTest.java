@@ -88,13 +88,4 @@ public class SearchFeatureProviderImplTest {
         mProvider.updateIndex(mActivity);
         verify(mProvider).getIndexingManager(any(Context.class));
     }
-
-    @Test
-    public void testUpdateIndexNewSearch_UsesIndex() {
-        mProvider = spy(new SearchFeatureProviderImpl());
-        when(mProvider.isEnabled(mActivity)).thenReturn(false);
-
-        mProvider.updateIndex(mActivity);
-        verify(mProvider, never()).getIndexingManager(any(Context.class));
-    }
 }

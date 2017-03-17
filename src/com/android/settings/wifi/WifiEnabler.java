@@ -24,8 +24,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Handler;
-import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -34,7 +32,6 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -78,19 +75,6 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
     private static final String EVENT_DATA_IS_WIFI_ON = "is_wifi_on";
     private static final int EVENT_UPDATE_INDEX = 0;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case EVENT_UPDATE_INDEX:
-                    final boolean isWiFiOn = msg.getData().getBoolean(EVENT_DATA_IS_WIFI_ON);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            WifiSettings.class.getName(), true, isWiFiOn);
-                    break;
-            }
-        }
-    };
 
     public WifiEnabler(Context context, SwitchWidgetController switchWidget,
             MetricsFeatureProvider metricsFeatureProvider) {
@@ -155,7 +139,6 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
             case WifiManager.WIFI_STATE_ENABLED:
                 setSwitchBarChecked(true);
                 mSwitchWidget.setEnabled(true);
-                updateSearchIndex(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
                 mSwitchWidget.setEnabled(false);
@@ -163,12 +146,10 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
             case WifiManager.WIFI_STATE_DISABLED:
                 setSwitchBarChecked(false);
                 mSwitchWidget.setEnabled(true);
-                updateSearchIndex(false);
                 break;
             default:
                 setSwitchBarChecked(false);
                 mSwitchWidget.setEnabled(true);
-                updateSearchIndex(false);
         }
         if (mayDisableTethering(!mSwitchWidget.isChecked())) {
             if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
@@ -180,15 +161,6 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
                 mSwitchWidget.setDisabledByAdmin(admin);
             }
         }
-    }
-
-    private void updateSearchIndex(boolean isWiFiOn) {
-        mHandler.removeMessages(EVENT_UPDATE_INDEX);
-
-        Message msg = new Message();
-        msg.what = EVENT_UPDATE_INDEX;
-        msg.getData().putBoolean(EVENT_DATA_IS_WIFI_ON, isWiFiOn);
-        mHandler.sendMessage(msg);
     }
 
     private void setSwitchBarChecked(boolean checked) {
