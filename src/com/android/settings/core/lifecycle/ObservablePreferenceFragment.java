@@ -21,6 +21,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 /**
  * {@link PreferenceFragment} that has hooks to observe fragment lifecycle events.
@@ -95,4 +98,27 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
         super.onDestroy();
     }
 
+    @CallSuper
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        mLifecycle.onCreateOptionsMenu(menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @CallSuper
+    @Override
+    public void onPrepareOptionsMenu(final Menu menu) {
+        mLifecycle.onPrepareOptionsMenu(menu);
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @CallSuper
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        boolean lifecycleHandled = mLifecycle.onOptionsItemSelected(menuItem);
+        if (!lifecycleHandled) {
+            return super.onOptionsItemSelected(menuItem);
+        }
+        return lifecycleHandled;
+    }
 }

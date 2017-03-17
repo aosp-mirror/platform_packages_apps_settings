@@ -19,6 +19,8 @@ import android.annotation.Nullable;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * {@link Activity} that has hooks to observe activity lifecycle events.
@@ -72,5 +74,32 @@ public class ObservableActivity extends Activity {
     protected void onDestroy() {
         mLifecycle.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        if (super.onCreateOptionsMenu(menu)) {
+            mLifecycle.onCreateOptionsMenu(menu, null);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+        if (super.onPrepareOptionsMenu(menu)) {
+            mLifecycle.onPrepareOptionsMenu(menu);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        boolean lifecycleHandled = mLifecycle.onOptionsItemSelected(menuItem);
+        if (!lifecycleHandled) {
+            return super.onOptionsItemSelected(menuItem);
+        }
+        return lifecycleHandled;
     }
 }

@@ -17,6 +17,9 @@ package com.android.settings.core.lifecycle;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 /**
  * {@link DialogFragment} that has hooks to observe fragment lifecycle events.
@@ -61,4 +64,24 @@ public class ObservableDialogFragment extends DialogFragment {
         super.onDestroy();
     }
 
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        mLifecycle.onCreateOptionsMenu(menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(final Menu menu) {
+        mLifecycle.onPrepareOptionsMenu(menu);
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        boolean lifecycleHandled = mLifecycle.onOptionsItemSelected(menuItem);
+        if (!lifecycleHandled) {
+            return super.onOptionsItemSelected(menuItem);
+        }
+        return lifecycleHandled;
+    }
 }
