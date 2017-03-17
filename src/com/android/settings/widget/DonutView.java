@@ -44,7 +44,7 @@ public class DonutView extends View {
     public DonutView(Context context, AttributeSet attrs) {
         super(context, attrs);
         float density = getResources().getDisplayMetrics().density;
-        mStrokeWidth = 10f * density;
+        mStrokeWidth = 6f * density;
 
         mBackgroundCircle = new Paint();
         mBackgroundCircle.setAntiAlias(true);
