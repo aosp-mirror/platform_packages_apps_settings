@@ -17,7 +17,6 @@
 package com.android.settings.vpn2;
 
 import static org.mockito.AdditionalMatchers.not;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import android.content.Context;
