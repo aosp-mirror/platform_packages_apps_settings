@@ -57,7 +57,6 @@ public class BatteryHistoryPreference extends Preference {
         if (mBatteryInfo == null) {
             return;
         }
-        view.itemView.setClickable(true);
         view.setDividerAllowedAbove(true);
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
         ((TextView) view.findViewById(R.id.estimation)).setText(
