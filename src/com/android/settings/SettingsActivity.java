@@ -68,7 +68,6 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
-import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -879,8 +878,10 @@ public class SettingsActivity extends SettingsDrawerActivity
             final List<DashboardCategory> categories = mDashboardFeatureProvider.getAllCategories();
             synchronized (categories) {
                 for (DashboardCategory category : categories) {
-                    for (Tile tile : category.tiles) {
-                        ComponentName component = tile.intent.getComponent();
+                    final int tileCount = category.getTilesCount();
+                    for (int i = 0; i < tileCount; i++) {
+                        final ComponentName component = category.getTile(i).intent.getComponent();
+
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
                                 SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
