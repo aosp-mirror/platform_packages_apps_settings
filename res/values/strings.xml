@@ -5375,6 +5375,16 @@
     <string name="vpn_no_ca_cert">(don\u2019t verify server)</string>
     <!-- Option to use the server certificate received from the VPN server. [CHAR LIMIT=40] -->
     <string name="vpn_no_server_cert">(received from server)</string>
+    <!-- Reason for Always-on VPN checkbox being disabled: the selected VPN type doesn't support always-on. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_type">The selected VPN type can\u2019t be always on</string>
+    <!-- Reason for Always-on VPN checkbox being disabled: the server address is invalid. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_server">Always-on VPN only supports numeric server addresses</string>
+    <!-- Reason for Always-on VPN checkbox being disabled: no DNS is found. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_no_dns">A DNS server must be specified for always-on VPN</string>
+    <!-- Reason for Always-on VPN checkbox being disabled: DNS server addresses are invalid. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_dns">DNS server addresses must be numeric for always-on VPN</string>
+    <!-- Reason for Always-on VPN checkbox being disabled: generic reason. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_other">The information entered doesn\u2019t support always-on VPN</string>
 
     <!-- Button label to cancel changing a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_cancel">Cancel</string>
