@@ -80,6 +80,7 @@ public final class BluetoothPairingService extends Service {
         Log.d(TAG, "Dismiss pairing for " + mDevice.getAddress() + " (" + mDevice.getName() + "), Cancelled.");
       }
       stopForeground(true);
+      stopSelf();
     }
   };
 
@@ -89,6 +90,12 @@ public final class BluetoothPairingService extends Service {
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
+    if (intent == null) {
+      Log.e(TAG, "Can't start: null intent!");
+      stopSelf();
+      return START_NOT_STICKY;
+    }
+
     Resources res = getResources();
     Notification.Builder builder = new Notification.Builder(this)
         .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
@@ -98,6 +105,12 @@ public final class BluetoothPairingService extends Service {
         getPairingDialogIntent(this, intent), PendingIntent.FLAG_ONE_SHOT);
 
     mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+    if (mDevice.getBondState() != BluetoothDevice.BOND_BONDING) {
+      Log.w(TAG, "Device " + mDevice + " not bonding: " + mDevice.getBondState());
+      stopSelf();
+      return START_NOT_STICKY;
+    }
 
     String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
     if (TextUtils.isEmpty(name)) {
@@ -119,7 +132,7 @@ public final class BluetoothPairingService extends Service {
     registerReceiver(mCancelReceiver, filter);
 
     startForeground(NOTIFICATION_ID, builder.getNotification());
-    return START_STICKY;
+    return START_REDELIVER_INTENT;
   }
 
   @Override
