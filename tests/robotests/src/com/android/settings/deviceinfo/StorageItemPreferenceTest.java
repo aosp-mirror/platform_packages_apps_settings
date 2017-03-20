@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.settings.deviceinfo.storage;
+package com.android.settings.deviceinfo;
+
+import static com.android.settings.TestUtils.KILOBYTE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.view.LayoutInflater;
+import android.widget.ProgressBar;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -29,28 +34,41 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class StorageItemPreferenceAlternateTest {
+public class StorageItemPreferenceTest {
     private Context mContext;
+    private StorageItemPreference mPreference;
 
     @Before
     public void setUp() throws Exception {
         mContext = RuntimeEnvironment.application;
+        mPreference = new StorageItemPreference(mContext);
     }
 
     @Test
     public void testBeforeLoad() {
-        StorageItemPreferenceAlternate pref = new StorageItemPreferenceAlternate(mContext);
-        assertThat(((String) pref.getSummary())).isEqualTo(
+        assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.memory_calculating_size));
     }
 
     @Test
     public void testAfterLoad() {
-        StorageItemPreferenceAlternate pref = new StorageItemPreferenceAlternate(mContext);
-        pref.setStorageSize(1024L);
-        assertThat(((String) pref.getSummary())).isEqualTo("1.00KB");
+        mPreference.setStorageSize(KILOBYTE, KILOBYTE * 10);
+        assertThat(((String) mPreference.getSummary())).isEqualTo("1.00KB");
     }
+
+    @Test
+    public void testProgressBarPercentageSet() {
+        final PreferenceViewHolder holder = new PreferenceViewHolder(
+                LayoutInflater.from(mContext).inflate(R.layout.storage_item, null));
+        final ProgressBar progressBar =
+                (ProgressBar) holder.itemView.findViewById(android.R.id.progress);
+
+        mPreference.onBindViewHolder(holder);
+        mPreference.setStorageSize(KILOBYTE, KILOBYTE * 10);
+
+        assertThat(progressBar.getProgress()).isEqualTo(10);
+    }
+
 }

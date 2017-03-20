@@ -30,28 +30,28 @@
         android:order="1"
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="true"/>
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_photos_videos"
         android:title="@string/storage_photos_videos"
-        android:order="2"
-        settings:allowDividerAbove="true" />
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
+        settings:allowDividerAbove="true"
+        android:order="2" />
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_music_audio"
         android:title="@string/storage_music_audio"
         android:order="3" />
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_games"
         android:title="@string/storage_games"
         android:order="4" />
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_other_apps"
         android:title="@string/storage_other_apps"
         android:order="5" />
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_files"
         android:title="@string/storage_files"
         android:order="6" />
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_system"
         android:title="@string/storage_detail_system"
         android:order="100" />
