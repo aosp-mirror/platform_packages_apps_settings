@@ -19,35 +19,31 @@ import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class ImePreferenceController extends PreferenceController {
+public class ImePreferenceController extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_INPUT_METHOD = "input_method";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public ImePreferenceController(Context context) {
-        super(context);
+    public ImePreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
 
     @Override
     public void updateState(Preference preference) {
-        final String ownerSetIme = mFeatureProvider.getImeLabelIfOwnerSet();
-        if (ownerSetIme == null) {
-            preference.setVisible(false);
-            return;
-        }
         preference.setSummary(mContext.getResources().getString(
-            R.string.enterprise_privacy_input_method_name, ownerSetIme));
-        preference.setVisible(true);
+            R.string.enterprise_privacy_input_method_name,
+            mFeatureProvider.getImeLabelIfOwnerSet()));
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mFeatureProvider.getImeLabelIfOwnerSet() != null;
     }
 
     @Override

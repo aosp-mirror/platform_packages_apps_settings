@@ -96,7 +96,7 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
 
     @Test
     public void testIsAvailableSync() {
-        EnterpriseInstalledPackagesPreferenceController controller
+        final EnterpriseInstalledPackagesPreferenceController controller
                 = new EnterpriseInstalledPackagesPreferenceController(mContext,
                         null /* lifecycle */, false /* async */);
 

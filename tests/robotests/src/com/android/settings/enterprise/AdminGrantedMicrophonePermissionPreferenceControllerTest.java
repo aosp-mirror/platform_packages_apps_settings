@@ -39,8 +39,8 @@ public final class AdminGrantedMicrophonePermissionPreferenceControllerTest exte
     }
 
     @Override
-    public void setUp() {
-        super.setUp();
-        mController = new AdminGrantedMicrophonePermissionPreferenceController(mContext);
+    protected AdminGrantedPermissionsPreferenceControllerBase createController(boolean async) {
+        return new AdminGrantedMicrophonePermissionPreferenceController(mContext,
+                null /* lifecycle */, async);
     }
 }

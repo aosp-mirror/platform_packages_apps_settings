@@ -19,16 +19,17 @@ import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class CaCertsPreferenceController extends PreferenceController {
+public class CaCertsPreferenceController extends DynamicAvailabilityPreferenceController {
 
     private static final String CA_CERTS = "ca_certs";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public CaCertsPreferenceController(Context context) {
-        super(context);
+    public CaCertsPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -37,18 +38,14 @@ public class CaCertsPreferenceController extends PreferenceController {
     public void updateState(Preference preference) {
         final int certs =
                 mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile();
-        if (certs == 0) {
-            preference.setVisible(false);
-            return;
-        }
         preference.setSummary(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
-        preference.setVisible(true);
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()
+                > 0;
     }
 
     @Override

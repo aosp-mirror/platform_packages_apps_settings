@@ -50,7 +50,8 @@ public final class FailedPasswordWipePreferenceControllerBaseTest extends
     private class FailedPasswordWipePreferenceControllerBaseTestable extends
             FailedPasswordWipePreferenceControllerBase {
         FailedPasswordWipePreferenceControllerBaseTestable() {
-            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext);
+            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext,
+                    null /* lifecycle */);
         }
 
         @Override

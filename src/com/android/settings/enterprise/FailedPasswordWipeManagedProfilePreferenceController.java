@@ -14,6 +14,7 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
+import com.android.settings.core.lifecycle.Lifecycle;
 
 public class FailedPasswordWipeManagedProfilePreferenceController
         extends FailedPasswordWipePreferenceControllerBase {
@@ -21,8 +22,9 @@ public class FailedPasswordWipeManagedProfilePreferenceController
     private static final String KEY_FAILED_PASSWORD_WIPE_MANAGED_PROFILE
             = "failed_password_wipe_managed_profile";
 
-    public FailedPasswordWipeManagedProfilePreferenceController(Context context) {
-        super(context);
+    public FailedPasswordWipeManagedProfilePreferenceController(Context context,
+            Lifecycle lifecycle) {
+        super(context, lifecycle);
     }
 
     @Override

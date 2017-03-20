@@ -54,9 +54,10 @@ public interface ApplicationFeatureProvider {
      *
      * @param permissions Only consider apps that have been granted one or more of these permissions
      *        by the admin, either at run-time or install-time
+     * @param async Whether to count asynchronously in a background thread
      * @param callback The callback to invoke with the result
      */
-    void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions,
+    void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions, boolean async,
             NumberOfAppsCallback callback);
 
     /**

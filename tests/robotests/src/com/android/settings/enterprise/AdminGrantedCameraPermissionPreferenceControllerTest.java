@@ -39,8 +39,8 @@ public final class AdminGrantedCameraPermissionPreferenceControllerTest extends
     }
 
     @Override
-    public void setUp() {
-        super.setUp();
-        mController = new AdminGrantedCameraPermissionPreferenceController(mContext);
+    protected AdminGrantedPermissionsPreferenceControllerBase createController(boolean async) {
+        return new AdminGrantedCameraPermissionPreferenceController(mContext,null /* lifecycle */,
+                async);
     }
 }

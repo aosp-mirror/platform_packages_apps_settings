@@ -54,32 +54,29 @@ public final class CaCertsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new CaCertsPreferenceController(mContext);
-
-        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
-                10, 10)).thenReturn("10 certs");
+        mController = new CaCertsPreferenceController(mContext, null /* lifecycle */);
     }
 
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
 
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(0);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
-
-        preference.setVisible(false);
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
+                10, 10)).thenReturn("10 certs");
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
                 .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(10);
         mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
         assertThat(preference.getSummary()).isEqualTo("10 certs");
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider
+                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(0);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider
+                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(10);
         assertThat(mController.isAvailable()).isTrue();
     }
 

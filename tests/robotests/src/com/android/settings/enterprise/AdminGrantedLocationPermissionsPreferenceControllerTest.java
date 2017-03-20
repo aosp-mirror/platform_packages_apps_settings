@@ -40,8 +40,8 @@ public final class AdminGrantedLocationPermissionsPreferenceControllerTest exten
     }
 
     @Override
-    public void setUp() {
-        super.setUp();
-        mController = new AdminGrantedLocationPermissionsPreferenceController(mContext);
+    protected AdminGrantedPermissionsPreferenceControllerBase createController(boolean async) {
+        return new AdminGrantedLocationPermissionsPreferenceController(mContext,
+                null /* lifecycle */, async);
     }
 }

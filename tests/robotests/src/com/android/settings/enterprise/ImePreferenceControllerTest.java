@@ -57,7 +57,7 @@ public final class ImePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new ImePreferenceController(mContext);
+        mController = new ImePreferenceController(mContext, null /* lifecycle */);
         when(mContext.getResources().getString(R.string.enterprise_privacy_input_method_name,
                 DEFAULT_IME_LABEL)).thenReturn(DEFAULT_IME_TEXT);
     }
@@ -65,22 +65,21 @@ public final class ImePreferenceControllerTest {
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
-            .thenReturn(null);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
             .thenReturn(DEFAULT_IME_LABEL);
         mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
         assertThat(preference.getSummary()).isEqualTo(DEFAULT_IME_TEXT);
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
+            .thenReturn(null);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
+            .thenReturn(DEFAULT_IME_LABEL);
         assertThat(mController.isAvailable()).isTrue();
     }
 

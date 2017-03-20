@@ -68,39 +68,56 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mController = createController(true /* async */);
     }
 
-    private void setNumberOfPackagesWithAdminGrantedPermissions(int number) {
+    private void setNumberOfPackagesWithAdminGrantedPermissions(int number, boolean async) {
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
-                        invocation.getArguments()[1]).onNumberOfAppsResult(number);
+                        invocation.getArguments()[2]).onNumberOfAppsResult(number);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
                     .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
-                            anyObject());
+                            eq(async), anyObject());
     }
 
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(false);
+        preference.setVisible(true);
 
-        setNumberOfPackagesWithAdminGrantedPermissions(20);
+        setNumberOfPackagesWithAdminGrantedPermissions(0, true /* async */);
+        mController.updateState(preference);
+        assertThat(preference.isVisible()).isFalse();
+
+        setNumberOfPackagesWithAdminGrantedPermissions(20, true /* async */);
         when(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_packages_actionable,20, 20))
                 .thenReturn("20 packages");
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("20 packages");
         assertThat(preference.isVisible()).isTrue();
-
-        setNumberOfPackagesWithAdminGrantedPermissions(0);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
     }
 
     @Test
-    public void testIsAvailable() {
+    public void testIsAvailableSync() {
+        final AdminGrantedPermissionsPreferenceControllerBase controller
+                = createController(false /* async */);
+
+        setNumberOfPackagesWithAdminGrantedPermissions(0, false /* async */);
+        assertThat(controller.isAvailable()).isFalse();
+
+        setNumberOfPackagesWithAdminGrantedPermissions(20, false /* async */);
+        assertThat(controller.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testIsAvailableAsync() {
+        setNumberOfPackagesWithAdminGrantedPermissions(0, true /* async */);
+        assertThat(mController.isAvailable()).isTrue();
+
+        setNumberOfPackagesWithAdminGrantedPermissions(20, true /* async */);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -125,4 +142,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
     public void testGetPreferenceKey() {
         assertThat(mController.getPreferenceKey()).isEqualTo(mKey);
     }
+
+    protected abstract AdminGrantedPermissionsPreferenceControllerBase createController(
+            boolean async);
 }

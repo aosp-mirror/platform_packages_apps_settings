@@ -19,15 +19,17 @@ import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public abstract class FailedPasswordWipePreferenceControllerBase extends PreferenceController {
+public abstract class FailedPasswordWipePreferenceControllerBase
+        extends DynamicAvailabilityPreferenceController {
 
     protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public FailedPasswordWipePreferenceControllerBase(Context context) {
-        super(context);
+    public FailedPasswordWipePreferenceControllerBase(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -37,18 +39,13 @@ public abstract class FailedPasswordWipePreferenceControllerBase extends Prefere
     @Override
     public void updateState(Preference preference) {
         final int failedPasswordsBeforeWipe = getMaximumFailedPasswordsBeforeWipe();
-        if (failedPasswordsBeforeWipe == 0) {
-            preference.setVisible(false);
-        } else {
-            preference.setVisible(true);
-            preference.setSummary(mContext.getResources().getQuantityString(
-                    R.plurals.enterprise_privacy_number_failed_password_wipe,
-                    failedPasswordsBeforeWipe, failedPasswordsBeforeWipe));
-        }
+        preference.setSummary(mContext.getResources().getQuantityString(
+                R.plurals.enterprise_privacy_number_failed_password_wipe,
+                failedPasswordsBeforeWipe, failedPasswordsBeforeWipe));
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return getMaximumFailedPasswordsBeforeWipe() > 0;
     }
 }

@@ -64,17 +64,21 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new SecurityLogsPreferenceController(context));
         controllers.add(new EnterpriseInstalledPackagesPreferenceController(context, lifecycle,
                 async));
-        controllers.add(new AdminGrantedLocationPermissionsPreferenceController(context));
-        controllers.add(new AdminGrantedMicrophonePermissionPreferenceController(context));
-        controllers.add(new AdminGrantedCameraPermissionPreferenceController(context));
+        controllers.add(new AdminGrantedLocationPermissionsPreferenceController(context, lifecycle,
+                async));
+        controllers.add(new AdminGrantedMicrophonePermissionPreferenceController(context, lifecycle,
+                async));
+        controllers.add(new AdminGrantedCameraPermissionPreferenceController(context, lifecycle,
+                async));
         controllers.add(new EnterpriseSetDefaultAppsPreferenceController(context, lifecycle));
-        controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
-        controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
-        controllers.add(new GlobalHttpProxyPreferenceController(context));
-        controllers.add(new CaCertsPreferenceController(context));
-        controllers.add(new FailedPasswordWipePrimaryUserPreferenceController(context));
-        controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context));
-        controllers.add(new ImePreferenceController(context));
+        controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context, lifecycle));
+        controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context, lifecycle));
+        controllers.add(new GlobalHttpProxyPreferenceController(context, lifecycle));
+        controllers.add(new CaCertsPreferenceController(context, lifecycle));
+        controllers.add(new FailedPasswordWipePrimaryUserPreferenceController(context, lifecycle));
+        controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context,
+                lifecycle));
+        controllers.add(new ImePreferenceController(context, lifecycle));
         return controllers;
     }
 

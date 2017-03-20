@@ -14,30 +14,26 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class AlwaysOnVpnManagedProfilePreferenceController extends PreferenceController {
+public class AlwaysOnVpnManagedProfilePreferenceController
+        extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_ALWAYS_ON_VPN_MANAGED_PROFILE = "always_on_vpn_managed_profile";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public AlwaysOnVpnManagedProfilePreferenceController(Context context) {
-        super(context);
+    public AlwaysOnVpnManagedProfilePreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setVisible(mFeatureProvider.isAlwaysOnVpnSetInManagedProfile());
-    }
-
-    @Override
     public boolean isAvailable() {
-        return true;
+        return mFeatureProvider.isAlwaysOnVpnSetInManagedProfile();
     }
 
     @Override

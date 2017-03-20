@@ -17,16 +17,18 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class AlwaysOnVpnPrimaryUserPreferenceController extends PreferenceController {
+public class AlwaysOnVpnPrimaryUserPreferenceController
+        extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_ALWAYS_ON_VPN_PRIMARY_USER = "always_on_vpn_primary_user";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public AlwaysOnVpnPrimaryUserPreferenceController(Context context) {
-        super(context);
+    public AlwaysOnVpnPrimaryUserPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -36,12 +38,11 @@ public class AlwaysOnVpnPrimaryUserPreferenceController extends PreferenceContro
         preference.setTitle(mFeatureProvider.isInCompMode()
                 ? R.string.enterprise_privacy_always_on_vpn_personal
                 : R.string.enterprise_privacy_always_on_vpn_device);
-        preference.setVisible(mFeatureProvider.isAlwaysOnVpnSetInPrimaryUser());
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mFeatureProvider.isAlwaysOnVpnSetInPrimaryUser();
     }
 
     @Override

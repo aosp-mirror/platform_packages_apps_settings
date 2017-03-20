@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2017 The Android Open Source Project
  *
@@ -20,28 +21,32 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public abstract class AdminGrantedPermissionsPreferenceControllerBase extends PreferenceController {
+public abstract class AdminGrantedPermissionsPreferenceControllerBase
+        extends DynamicAvailabilityPreferenceController {
 
     private final String[] mPermissions;
     private final String mPermissionGroup;
     private final ApplicationFeatureProvider mFeatureProvider;
+    private final boolean mAsync;
 
-    public AdminGrantedPermissionsPreferenceControllerBase(Context context,
-                                                           String[] permissions,
-                                                           String permissionGroup) {
-        super(context);
+    public AdminGrantedPermissionsPreferenceControllerBase(Context context, Lifecycle lifecycle,
+            boolean async, String[] permissions, String permissionGroup) {
+        super(context, lifecycle);
         mPermissions = permissions;
         mPermissionGroup = permissionGroup;
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
+        mAsync = async;
     }
 
     @Override
     public void updateState(Preference preference) {
         mFeatureProvider.calculateNumberOfAppsWithAdminGrantedPermissions(mPermissions,
+                true /* async */,
                 (num) -> {
                     if (num == 0) {
                         preference.setVisible(false);
@@ -55,7 +60,22 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase extends Pr
 
     @Override
     public boolean isAvailable() {
-        return true;
+        if (mAsync) {
+            // When called on the main UI thread, we must not block. Since calculating the number of
+            // apps that the admin has granted a given permissions takes a bit of time, we always
+            // return true here and determine the pref's actual visibility asynchronously in
+            // updateState().
+            return true;
+        }
+
+        // When called by the search indexer, we are on a background thread that we can block. Also,
+        // changes to the pref's visibility made in updateState() would not be seen by the indexer.
+        // We block and return synchronously whether the admin has granted the given permissions to
+        // any apps or not.
+        final Boolean[] haveAppsWithAdminGrantedPermissions = { null };
+        mFeatureProvider.calculateNumberOfAppsWithAdminGrantedPermissions(mPermissions,
+                false /* async */, (num) -> haveAppsWithAdminGrantedPermissions[0] = num > 0);
+        return haveAppsWithAdminGrantedPermissions[0];
     }
 
     @Override

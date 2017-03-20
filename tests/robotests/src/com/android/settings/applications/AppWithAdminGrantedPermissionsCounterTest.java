@@ -89,8 +89,7 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void testCountInstalledAppsAcrossAllUsers() throws Exception {
+    private void verifyCountInstalledAppsAcrossAllUsers(boolean async) throws Exception {
         // There are two users.
         mUsersToCount = Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
@@ -181,10 +180,14 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
 
         // Count the number of all apps installed that were granted on or more permissions by the
-        // admin.  Wait for the background task to finish.
-        (new AppWithAdminGrantedPermissionsCounterTestable(PERMISSIONS)).execute();
-        ShadowApplication.runBackgroundTasks();
-
+        // admin.
+        if (async) {
+            (new AppWithAdminGrantedPermissionsCounterTestable(PERMISSIONS)).execute();
+            // Wait for the background task to finish.
+            ShadowApplication.runBackgroundTasks();
+        } else {
+            (new AppWithAdminGrantedPermissionsCounterTestable(PERMISSIONS)).executeInForeground();
+        }
         assertThat(mAppCount).isEqualTo(3);
 
         // Verify that installed packages were retrieved for the users returned by
@@ -194,7 +197,16 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 eq(MANAGED_PROFILE_ID));
         verify(mPackageManager, atLeast(0)).getInstallReason(anyObject(), anyObject());
         verifyNoMoreInteractions(mPackageManager);
+    }
 
+    @Test
+    public void testCountInstalledAppsAcrossAllUsersSync() throws Exception {
+        verifyCountInstalledAppsAcrossAllUsers(false /* async */);
+    }
+
+    @Test
+    public void testCountInstalledAppsAcrossAllUsersAync() throws Exception {
+        verifyCountInstalledAppsAcrossAllUsers(true /* async */);
     }
 
     private class AppWithAdminGrantedPermissionsCounterTestable extends
