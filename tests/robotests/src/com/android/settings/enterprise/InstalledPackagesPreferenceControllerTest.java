@@ -68,11 +68,10 @@ public final class InstalledPackagesPreferenceControllerTest {
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
-                        invocation.getArguments()[1]).onNumberOfAppsResult(number);
+                        invocation.getArguments()[2]).onNumberOfAppsResult(number);
                 return null;
-            }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfInstalledApps(
-                            eq(ApplicationFeatureProvider.IGNORE_INSTALL_REASON), anyObject());
+            }}).when(mFeatureFactory.applicationFeatureProvider).calculateNumberOfInstalledApps(
+                    eq(ApplicationFeatureProvider.IGNORE_INSTALL_REASON), eq(true), anyObject());
     }
 
     @Test

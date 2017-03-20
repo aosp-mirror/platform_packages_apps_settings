@@ -62,18 +62,19 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new EnterpriseInstalledPackagesPreferenceController(mContext);
+        mController = new EnterpriseInstalledPackagesPreferenceController(mContext,
+                null /* lifecycle */, true /* async */);
     }
 
-    private void setNumberOfEnterpriseInstalledPackages(int number) {
+    private void setNumberOfEnterpriseInstalledPackages(int number, boolean async) {
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
-                        invocation.getArguments()[1]).onNumberOfAppsResult(number);
+                        invocation.getArguments()[2]).onNumberOfAppsResult(number);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
                     .calculateNumberOfInstalledApps(eq(PackageManager.INSTALL_REASON_POLICY),
-                            anyObject());
+                            eq(async), anyObject());
     }
 
     @Test
@@ -81,11 +82,11 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
         preference.setVisible(true);
 
-        setNumberOfEnterpriseInstalledPackages(0);
+        setNumberOfEnterpriseInstalledPackages(0, true /* async */);
         mController.updateState(preference);
         assertThat(preference.isVisible()).isFalse();
 
-        setNumberOfEnterpriseInstalledPackages(20);
+        setNumberOfEnterpriseInstalledPackages(20, true /* async */);
         when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
                 20, 20)).thenReturn("20 packages");
         mController.updateState(preference);
@@ -94,7 +95,24 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable() {
+    public void testIsAvailableSync() {
+        EnterpriseInstalledPackagesPreferenceController controller
+                = new EnterpriseInstalledPackagesPreferenceController(mContext,
+                        null /* lifecycle */, false /* async */);
+
+        setNumberOfEnterpriseInstalledPackages(0, false /* async */);
+        assertThat(controller.isAvailable()).isFalse();
+
+        setNumberOfEnterpriseInstalledPackages(20, false /* async */);
+        assertThat(controller.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testIsAvailableAsync() {
+        setNumberOfEnterpriseInstalledPackages(0, true /* async */);
+        assertThat(mController.isAvailable()).isTrue();
+
+        setNumberOfEnterpriseInstalledPackages(20, true /* async */);
         assertThat(mController.isAvailable()).isTrue();
     }
 

@@ -97,8 +97,7 @@ public final class InstalledAppCounterTest {
                         : new ArrayList<ResolveInfo>());
     }
 
-    @Test
-    public void testCountInstalledAppsAcrossAllUsers() {
+    private void testCountInstalledAppsAcrossAllUsers(boolean async) {
         // There are two users.
         mUsersToCount = Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
@@ -156,12 +155,8 @@ public final class InstalledAppCounterTest {
         when(mPackageManager.getInstallReason(APP_6, managedProfileUser))
                 .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
 
-        // Count the number of all apps installed, irrespective of install reason. Wait for the
-        // background task to finish.
-        (new InstalledAppCounterTestable(ApplicationFeatureProvider.IGNORE_INSTALL_REASON))
-                .execute();
-        ShadowApplication.runBackgroundTasks();
-
+        // Count the number of all apps installed, irrespective of install reason.
+        count(ApplicationFeatureProvider.IGNORE_INSTALL_REASON, async);
         assertThat(mInstalledAppCount).isEqualTo(5);
 
         // Verify that installed packages were retrieved for the users returned by
@@ -173,14 +168,33 @@ public final class InstalledAppCounterTest {
                 anyInt());
         verifyNoMoreInteractions(mPackageManager);
 
-        // Count once more, considering apps installed by enterprise policy only. Wait for the
-        // background task to finish.
-        mInstalledAppCount = -1;
-        (new InstalledAppCounterTestable(PackageManager.INSTALL_REASON_POLICY)).execute();
-        ShadowApplication.runBackgroundTasks();
-
+        // Count once more, considering apps installed by enterprise policy only.
+        count(PackageManager.INSTALL_REASON_POLICY, async);
         assertThat(mInstalledAppCount).isEqualTo(3);
     }
+
+    @Test
+    public void testCountInstalledAppsAcrossAllUsersSync() {
+        testCountInstalledAppsAcrossAllUsers(false /* async */);
+    }
+
+    @Test
+    public void testCountInstalledAppsAcrossAllUsersAsync() {
+        testCountInstalledAppsAcrossAllUsers(true /* async */);
+    }
+
+    private void count(int installReason, boolean async) {
+        mInstalledAppCount = -1;
+        final InstalledAppCounterTestable counter = new InstalledAppCounterTestable(installReason);
+        if (async) {
+            counter.execute();
+            // Wait for the background task to finish.
+            ShadowApplication.runBackgroundTasks();
+        } else {
+            counter.executeInForeground();
+        }
+    }
+
 
     private class InstalledAppCounterTestable extends InstalledAppCounter {
         public InstalledAppCounterTestable(int installReason) {

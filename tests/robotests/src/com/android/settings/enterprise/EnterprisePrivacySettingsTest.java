@@ -104,6 +104,18 @@ public final class EnterprisePrivacySettingsTest {
     public void getPreferenceControllers() {
         final List<PreferenceController> controllers = mSettings.getPreferenceControllers(
                 ShadowApplication.getInstance().getApplicationContext());
+        verifyPreferenceControllers(controllers);
+    }
+
+    @Test
+    public void getSearchIndexProviderPreferenceControllers() {
+        final List<PreferenceController> controllers
+                = EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(
+                        ShadowApplication.getInstance().getApplicationContext());
+        verifyPreferenceControllers(controllers);
+    }
+
+    private void verifyPreferenceControllers(List<PreferenceController> controllers) {
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(17);
         assertThat(controllers.get(0)).isInstanceOf(InstalledPackagesPreferenceController.class);
