@@ -62,6 +62,13 @@ public final class ManageDeviceAdminPreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
+                .getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile()).thenReturn(0);
+        when(mContext.getResources().getString(R.string.number_of_device_admins_none))
+                .thenReturn("no apps");
+        mController.updateState(preference);
+        assertThat(preference.getSummary()).isEqualTo("no apps");
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider
                 .getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile()).thenReturn(5);
         when(mContext.getResources().getQuantityString(R.plurals.number_of_device_admins, 5, 5))
                 .thenReturn("5 active apps");

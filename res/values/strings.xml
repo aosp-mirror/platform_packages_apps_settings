@@ -1306,6 +1306,9 @@
     <!-- Title of preference to manage device admins -->
     <string name="manage_device_admin">Device admin apps</string>
 
+    <!-- Summary of preference to manage device administrators, informing the user that currently no device administrator apps are installed and active -->
+    <string name="number_of_device_admins_none">No active apps</string>
+
     <!-- Summary of preference to manage device administrators, informing the user how many device administrator apps are installed and active -->
     <plurals name="number_of_device_admins">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> active app</item>
@@ -8168,7 +8171,7 @@
     <!-- Enterprise Privacy --> <skip />
 
     <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. Note: "Device" is singular and refers to the device (e.g. phone or tablet) that the user is holding in their hand. -->
-    <string name="enterprise_privacy_settings">Managed device details</string>
+    <string name="enterprise_privacy_settings">Managed device info</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
     <string name="enterprise_privacy_settings_summary_generic">Changes &amp; settings managed by your organization</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
@@ -8229,13 +8232,13 @@
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
     <!-- Label explaining that the admin installed trusted CA certificates for the current user. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_user">
-        <item quantity="one">Trusted CA Certificate installed</item>
-        <item quantity="other">Trusted CA Certificates installed</item>
+        <item quantity="one">Trusted CA certificate installed</item>
+        <item quantity="other">Trusted CA certificates installed</item>
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_personal">
-        <item quantity="one">Trusted CA Certificate installed in your personal profile</item>
-        <item quantity="other">Trusted CA Certificates installed in your personal profile</item>
+        <item quantity="one">Trusted CA certificate installed in your personal profile</item>
+        <item quantity="other">Trusted CA certificates installed in your personal profile</item>
     </plurals>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
