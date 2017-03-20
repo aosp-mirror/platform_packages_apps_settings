@@ -102,7 +102,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
     private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
-    private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
     private static final String KEY_UNIFICATION = "unification";
 
@@ -350,10 +349,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Credential storage
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-
-        // Application install
-        PreferenceGroup deviceAdminCategory = (PreferenceGroup)
-                root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
 
         // Advanced Security features
         Preference manageAgents = root.findPreference(KEY_MANAGE_TRUST_AGENTS);
