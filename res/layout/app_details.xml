@@ -18,7 +18,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/app_snippet"
-    style="@style/AppInfoHeader"
+    style="@style/EntityHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal|top"
@@ -79,7 +79,7 @@
 
             <TextView
                 android:id="@+id/app_detail_title"
-                style="@style/TextAppearance.AppInfoTitle"
+                style="@style/TextAppearance.EntityHeaderTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
@@ -89,22 +89,24 @@
 
             <TextView
                 android:id="@+id/install_type"
-                style="@style/TextAppearance.AppInfoSummary"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:singleLine="true"
-                android:ellipsize="marquee"/>
+                android:ellipsize="marquee"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"/>
 
             <TextView
                 android:id="@+id/app_detail_summary"
-                style="@style/TextAppearance.AppInfoSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:singleLine="true"
-                android:ellipsize="marquee"/>
+                android:ellipsize="marquee"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"/>
 
         </LinearLayout>
 
