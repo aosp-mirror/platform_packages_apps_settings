@@ -36,8 +36,10 @@ public class ManageDeviceAdminPreferenceController extends PreferenceController 
     public void updateState(Preference preference) {
         final int activeAdmins
                 = mFeatureProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile();
-        preference.setSummary(mContext.getResources().getQuantityString(
-                R.plurals.number_of_device_admins, activeAdmins, activeAdmins));
+        preference.setSummary(activeAdmins == 0
+                ? mContext.getResources().getString(R.string.number_of_device_admins_none)
+                : mContext.getResources().getQuantityString(R.plurals.number_of_device_admins,
+                        activeAdmins, activeAdmins));
     }
 
     @Override
