@@ -39,8 +39,8 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.development.DevelopmentSettings;
+import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils;
 
 public class BuildNumberPreferenceController extends PreferenceController
@@ -210,10 +210,9 @@ public class BuildNumberPreferenceController extends PreferenceController
     private void enableDevelopmentSettings() {
         mDevHitCountdown = 0;
         mProcessingLastDevHit = false;
-        mContext.getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE).edit()
-                .putBoolean(DevelopmentSettings.PREF_SHOW, true)
-                .apply();
+        DevelopmentSettingsEnabler.enableDevelopmentSettings(mContext,
+                mContext.getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                        Context.MODE_PRIVATE));
         if (mDevHitToast != null) {
             mDevHitToast.cancel();
         }
