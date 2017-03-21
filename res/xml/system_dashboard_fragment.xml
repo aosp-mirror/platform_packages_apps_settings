@@ -23,7 +23,7 @@
     <Preference
         android:key="system_update_settings"
         android:title="@string/system_update_settings_list_item_title"
-        android:summary="@string/system_update_settings_list_item_summary"
+        android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_system_update"
         android:order="-30">
         <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"/>
@@ -41,7 +41,7 @@
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
-        android:title="@string/device_reset_title"
+        android:title="@string/master_clear_title"
         android:icon="@drawable/ic_restore"
         android:order="-20"
         settings:keywords="@string/keywords_factory_data_reset"

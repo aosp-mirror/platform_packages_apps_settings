@@ -24,6 +24,7 @@ import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
@@ -56,7 +57,7 @@ public abstract class DefaultAppPreferenceController extends PreferenceControlle
             preference.setSummary(defaultAppLabel);
         } else {
             Log.d(TAG, "No default app");
-            preference.setSummary(null);
+            preference.setSummary(R.string.app_list_preference_none);
         }
         mayUpdateGearIcon(app, preference);
     }

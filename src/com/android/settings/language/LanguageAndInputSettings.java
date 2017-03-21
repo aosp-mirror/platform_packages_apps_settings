@@ -16,11 +16,17 @@
 
 package com.android.settings.language;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 import android.speech.tts.TtsEngines;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
@@ -28,14 +34,15 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.inputmethod.GameControllerPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
-import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
@@ -103,6 +110,43 @@ public class LanguageAndInputSettings extends DashboardFragment {
     void setAmbientDisplayConfig(AmbientDisplayConfiguration ambientConfig) {
         mAmbientDisplayConfig = ambientConfig;
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                final String flattenComponent = Settings.Secure.getString(
+                        mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+                if (!TextUtils.isEmpty(flattenComponent)) {
+                    final PackageManager packageManage = mContext.getPackageManager();
+                    final String pkg = ComponentName.unflattenFromString(flattenComponent)
+                            .getPackageName();
+                    final InputMethodManager imm = (InputMethodManager) mContext.getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    final List<InputMethodInfo> imis = imm.getInputMethodList();
+                    for (InputMethodInfo imi : imis) {
+                        if (TextUtils.equals(imi.getPackageName(), pkg)) {
+                            mSummaryLoader.setSummary(this, imi.loadLabel(packageManage));
+                            return;
+                        }
+                    }
+                }
+                mSummaryLoader.setSummary(this, "");
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {

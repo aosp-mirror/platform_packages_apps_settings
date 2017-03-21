@@ -16,20 +16,25 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
@@ -89,6 +94,18 @@ public class SystemUpdatePreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mScreen).removePreference(any(Preference.class));
+    }
+
+    @Test
+    public void updateState_shouldSetToAndroidVersion() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mController = new SystemUpdatePreferenceController(
+                RuntimeEnvironment.application, mUserManager);
+        mController.updateState(preference);
+
+        assertThat(preference.getSummary())
+                .isEqualTo(RuntimeEnvironment.application.getString(R.string.about_summary,
+                        Build.VERSION.RELEASE));
     }
 
     @Test

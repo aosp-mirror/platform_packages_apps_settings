@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -75,7 +76,7 @@ public class DefaultAppPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(null);
+        verify(mPreference).setSummary(R.string.app_list_preference_none);
     }
 
     private static class TestPreferenceController extends DefaultAppPreferenceController {

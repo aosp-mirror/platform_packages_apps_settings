@@ -23,6 +23,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
@@ -75,7 +76,7 @@ public class DefaultAutofillPreferenceControllerTest {
         final Preference pref = mock(Preference.class);
 
         mController.updateState(pref);
-        verify(pref).setSummary(null);
+        verify(pref).setSummary(R.string.app_list_preference_none);
     }
 
     @Test

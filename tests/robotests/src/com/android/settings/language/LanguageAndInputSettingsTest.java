@@ -16,8 +16,14 @@
 
 package com.android.settings.language;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
+import android.provider.Settings;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -27,6 +33,8 @@ import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +44,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -51,6 +60,10 @@ public class LanguageAndInputSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private InputMethodManager mInputMethodManager;
     private TestFragment mFragment;
 
     @Before
@@ -58,7 +71,7 @@ public class LanguageAndInputSettingsTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mock(InputManager.class));
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
-            .thenReturn(mock(TextServicesManager.class));
+                .thenReturn(mock(TextServicesManager.class));
         mFragment = new TestFragment(mContext);
     }
 
@@ -85,6 +98,33 @@ public class LanguageAndInputSettingsTest {
         final List<PreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
 
         assertThat(controllers.isEmpty()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowSecureSettings.class,
+    })
+    public void testSummary_shouldSetToCurrentImeName() {
+        final Activity activity = mock(Activity.class);
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final ComponentName componentName = new ComponentName("pkg", "cls");
+        ShadowSecureSettings.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD,
+                componentName.flattenToString());
+        when(activity.getSystemService(Context.INPUT_METHOD_SERVICE))
+                .thenReturn(mInputMethodManager);
+        when(activity.getPackageManager()).thenReturn(mPackageManager);
+        final List<InputMethodInfo> imis = new ArrayList<>();
+        imis.add(mock(InputMethodInfo.class));
+        when(imis.get(0).getPackageName()).thenReturn(componentName.getPackageName());
+        when(mInputMethodManager.getInputMethodList()).thenReturn(imis);
+
+        SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(activity, loader);
+
+        provider.setListening(true);
+
+        verify(imis.get(0)).loadLabel(mPackageManager);
+        verify(loader).setSummary(provider, null);
     }
 
     /**

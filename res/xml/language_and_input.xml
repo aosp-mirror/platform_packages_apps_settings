@@ -34,19 +34,22 @@
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
     </PreferenceCategory>
 
-    <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
-    <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
-         See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
-    <Preference
-        android:key="spellcheckers_settings"
-        android:title="@string/spellcheckers_settings_title"
-        android:persistent="false"
-        android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"/>
+    <PreferenceCategory
+        android:title="@string/input_assistance">
+        <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
+        <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
+             See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
+        <Preference
+            android:key="spellcheckers_settings"
+            android:title="@string/spellcheckers_settings_title"
+            android:persistent="false"
+            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"/>
 
-    <!-- User dictionary preference title and fragment will be set programmatically. -->
-    <Preference
-        android:key="key_user_dictionary_settings"
-        android:title="@string/user_dict_settings_title"/>
+        <!-- User dictionary preference title and fragment will be set programmatically. -->
+        <Preference
+            android:key="key_user_dictionary_settings"
+            android:title="@string/user_dict_settings_title"/>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="gesture_settings_category"

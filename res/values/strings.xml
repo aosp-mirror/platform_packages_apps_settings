@@ -2910,8 +2910,6 @@
     <string name="reset_network_complete_toast">Network settings have been reset</string>
 
     <!-- Master Clear -->
-    <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading [CHAR LIMIT=30] -->
-    <string name="device_reset_title">Reset device</string>
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -3769,6 +3767,8 @@
     <string name="language_settings">Languages&#160;&amp; input</string>
     <!-- Title of Languages & input settings screen -->
     <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
+    <!-- Title of preference category that lists all settings about helping user input such as spell checker [CHAR LIMIT=60]-->
+    <string name="input_assistance">Input assistance</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -3815,7 +3815,7 @@
     <string name="failed_to_open_app_settings_toast">Failed to open settings for <xliff:g id="spell_application_name">%1$s</xliff:g></string>
 
     <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
-    <string name="keyboard_and_input_methods_category">Keyboard and input methods</string>
+    <string name="keyboard_and_input_methods_category">Keyboard &amp; inputs</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="virtual_keyboard_category">Virtual keyboards</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
@@ -7536,7 +7536,7 @@
     <string name="backup_disabled">Back up disabled</string>
 
     <!-- Summary of device info page [CHAR LIMIT=NONE] -->
-    <string name="about_summary">Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
+    <string name="about_summary">Updated to Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
 
     <!-- Title for dialog displayed when user clicks on a setting locked by an admin [CHAR LIMIT=30] -->
     <string name="disabled_by_policy_title">Action not allowed</string>
@@ -8119,8 +8119,8 @@
     <!-- Summary text for ambient display (device) [CHAR LIMIT=160]-->
     <string name="ambient_display_pickup_summary" product="device">To quickly check your notifications, pick up your device.</string>
 
-    <!-- Title text for fingerprint swipe for notifications [CHAR LIMIT=60]-->
-    <string name="fingerprint_swipe_for_notifications_title">Swipe for notifications</string>
+    <!-- Title text for fingerprint swipe for notifications [CHAR LIMIT=80]-->
+    <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
 
     <!-- Summary text for fingerprint swipe for notifications (phone) [CHAR LIMIT=160]-->
     <string name="fingerprint_swipe_for_notifications_summary" product="default">To check your notifications, swipe down on the fingerprint sensor on the back of your phone.</string>
@@ -8318,8 +8318,8 @@
     <string name="webview_disabled_for_user">(disabled for user <xliff:g id="user" example="John Doe">%s</xliff:g>)</string>
 
     <!-- AutoFill strings -->
-    <!-- Preference label for the auto-fill app. [CHAR LIMIT=60] -->
-    <string name="autofill_app">Autofill app</string>
+    <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
+    <string name="autofill_app">Autofill service</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill</string>
     <!-- Title of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->

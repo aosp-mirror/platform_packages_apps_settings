@@ -17,6 +17,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.PersistableBundle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -25,6 +26,7 @@ import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 
@@ -76,6 +78,12 @@ public class SystemUpdatePreferenceController extends PreferenceController {
         }
         // always return false here because this handler does not want to block other handlers.
         return false;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        preference.setSummary(mContext.getString(R.string.about_summary,
+                Build.VERSION.RELEASE));
     }
 
     /**
