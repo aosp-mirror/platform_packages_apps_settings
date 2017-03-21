@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
+
 import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.Dialog;
@@ -70,11 +72,10 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 /**
  * Two types of UI are provided here.
@@ -231,8 +232,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWifiTracker =
-                new WifiTracker(getActivity(), this, mBgThread.getLooper(), true, true, false);
+        mWifiTracker = WifiTrackerFactory.create(
+                getActivity(), this, mBgThread.getLooper(), true, true, false);
         mWifiManager = mWifiTracker.getManager();
 
         mConnectListener = new WifiManager.ActionListener() {
