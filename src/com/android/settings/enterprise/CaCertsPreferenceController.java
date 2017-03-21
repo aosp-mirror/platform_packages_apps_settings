@@ -22,12 +22,12 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-public class CaCertsCurrentUserPreferenceController extends PreferenceController {
+public class CaCertsPreferenceController extends PreferenceController {
 
-    private static final String CA_CERTS_CURRENT_USER = "ca_certs_current_user";
+    private static final String CA_CERTS = "ca_certs";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public CaCertsCurrentUserPreferenceController(Context context) {
+    public CaCertsPreferenceController(Context context) {
         super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
@@ -35,14 +35,12 @@ public class CaCertsCurrentUserPreferenceController extends PreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        final int certs = mFeatureProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser();
+        final int certs =
+                mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile();
         if (certs == 0) {
             preference.setVisible(false);
             return;
         }
-        preference.setTitle(mFeatureProvider.isInCompMode()
-                ? R.string.enterprise_privacy_ca_certs_personal
-                : R.string.enterprise_privacy_ca_certs_user);
         preference.setSummary(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
         preference.setVisible(true);
@@ -55,6 +53,6 @@ public class CaCertsCurrentUserPreferenceController extends PreferenceController
 
     @Override
     public String getPreferenceKey() {
-        return CA_CERTS_CURRENT_USER;
+        return CA_CERTS;
     }
 }

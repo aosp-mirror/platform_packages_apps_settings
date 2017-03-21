@@ -71,8 +71,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
         controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
         controllers.add(new GlobalHttpProxyPreferenceController(context));
-        controllers.add(new CaCertsCurrentUserPreferenceController(context));
-        controllers.add(new CaCertsManagedProfilePreferenceController(context));
+        controllers.add(new CaCertsPreferenceController(context));
         controllers.add(new FailedPasswordWipePrimaryUserPreferenceController(context));
         controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context));
         controllers.add(new ImePreferenceController(context));
