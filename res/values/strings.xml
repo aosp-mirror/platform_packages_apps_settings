@@ -3343,20 +3343,25 @@
     <string name="install_applications">Unknown sources</string>
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  [CHAR LIMIT=30] -->
     <string name="install_applications_title">Allow all app sources</string>
-    <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  [CHAR LIMIT=65] -->
-    <string name="install_unknown_applications_title">Lets you install apps from sources other than Google Play</string>
-    <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  -->
-    <string name="install_unknown_applications">Allow installation of apps from unknown sources</string>
-    <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
-    <string name="install_all_warning" product="tablet">Your tablet and personal data are more vulnerable to attack by apps
- from unknown sources. You agree that you are solely responsible for any
- damage to your tablet or loss of data that may result from using
- these apps.</string>
-    <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
-    <string name="install_all_warning" product="default">Your phone and personal data are more vulnerable to attack by apps
- from unknown sources. You agree that you are solely responsible for any
- damage to your phone or loss of data that may result from using
- these apps.</string>
+
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="tablet">
+        Your tablet and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your tablet or loss of data that may
+        result from their use.
+    </string>
+
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="default">
+        Your phone and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your phone or loss of data that may
+        result from their use.
+    </string>
+
     <!-- Applications settings screen, setting check box title. If checked, applications show more settings options. -->
     <string name="advanced_settings">Advanced settings</string>
     <!-- Applications settings screen, setting check box summary.  This is the summary for "Advanced settings" checkbox  -->
@@ -7356,9 +7361,9 @@
     <string name="system_alert_window_off">No</string>
 
     <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
-    <string name="install_other_apps">Install other apps</string>
+    <string name="install_other_apps">Install unknown apps</string>
     <!-- Keywords for setting screen for controlling apps that can install other apps on device -->
-    <string name="keywords_install_other_apps">install apps external unknown sources</string>
+    <string name="keywords_install_other_apps">install apps unknown sources</string>
 
     <!-- Write Settings settings -->
     <!-- Settings title in main settings screen for WRITE_SETTINGS [CHAR LIMIT=30] -->
@@ -7391,7 +7396,7 @@
     <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
     <string name="external_source_untrusted">No</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
-    <string name="external_source_switch_title">Trust apps from this source</string>
+    <string name="external_source_switch_title">Allow app installs</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>

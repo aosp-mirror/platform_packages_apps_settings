@@ -43,12 +43,10 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
 
     private final IPackageManager mIpm;
     private final AppOpsManager mAppOpsManager;
-    private final Context mContext;
 
     public AppStateInstallAppsBridge(Context context, ApplicationsState appState,
             Callback callback) {
         super(appState, callback);
-        mContext = context;
         mIpm = AppGlobals.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
     }
