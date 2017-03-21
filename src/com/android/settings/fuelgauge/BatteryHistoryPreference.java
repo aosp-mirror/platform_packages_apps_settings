@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -36,7 +37,8 @@ import com.android.settingslib.graph.UsageView;
  */
 public class BatteryHistoryPreference extends Preference {
 
-    private BatteryInfo mBatteryInfo;
+    @VisibleForTesting
+    BatteryInfo mBatteryInfo;
 
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,11 +59,8 @@ public class BatteryHistoryPreference extends Preference {
         if (mBatteryInfo == null) {
             return;
         }
-        view.setDividerAllowedAbove(true);
+
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
-        ((TextView) view.findViewById(R.id.estimation)).setText(
-                mBatteryInfo.remainingLabel != null ?
-                        mBatteryInfo.remainingLabel : mBatteryInfo.statusLabel);
         UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
         usageView.findViewById(R.id.label_group).setAlpha(.7f);
         mBatteryInfo.bindHistory(usageView);
