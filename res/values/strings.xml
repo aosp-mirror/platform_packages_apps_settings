@@ -8227,13 +8227,13 @@
     <!-- Label indicating that the admin installed one or more apps on the device. -->
     <string name="enterprise_privacy_enterprise_installed_packages">Apps installed</string>
     <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_location_access">Apps allowed to access your location</string>
+    <string name="enterprise_privacy_location_access">Location permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_microphone_access">Apps allowed to access your microphone</string>
+    <string name="enterprise_privacy_microphone_access">Microphone permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the camera. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_camera_access">Apps allowed to access your camera</string>
+    <string name="enterprise_privacy_camera_access">Camera permissions</string>
     <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_enterprise_set_default_apps">Default apps set</string>
+    <string name="enterprise_privacy_enterprise_set_default_apps">Default apps</string>
     <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_input_method">Default keyboard</string>
     <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
@@ -8247,30 +8247,21 @@
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
     <!-- Label explaining that the admin installed trusted CA certificates for the current user. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_ca_certs_user">
-        <item quantity="one">Trusted CA certificate installed</item>
-        <item quantity="other">Trusted CA certificates installed</item>
-    </plurals>
+    <string name="enterprise_privacy_ca_certs_user">Trusted credentials</string>
     <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_ca_certs_personal">
-        <item quantity="one">Trusted CA certificate installed in your personal profile</item>
-        <item quantity="other">Trusted CA certificates installed in your personal profile</item>
-    </plurals>
+    <string name="enterprise_privacy_ca_certs_personal">Trusted credentials in your personal profile</string>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CA certificate</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CA certificates</item>
     </plurals>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs_actionable">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate. Tap to view.</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates. Tap to view.</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CA certificate. Tap to view.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CA certificates. Tap to view.</item>
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_ca_certs_work">
-        <item quantity="one">Trusted CA Certificate installed in your work profile</item>
-        <item quantity="other">Trusted CA Certificates installed in your work profile</item>
-    </plurals>
+    <string name="enterprise_privacy_ca_certs_work">Trusted credentials in your work profile</string>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->

@@ -40,9 +40,9 @@ public class CaCertsCurrentUserPreferenceController extends PreferenceController
             preference.setVisible(false);
             return;
         }
-        preference.setTitle(mContext.getResources().getQuantityString(
-                mFeatureProvider.isInCompMode() ? R.plurals.enterprise_privacy_ca_certs_personal :
-                        R.plurals.enterprise_privacy_ca_certs_user, certs));
+        preference.setTitle(mFeatureProvider.isInCompMode()
+                ? R.string.enterprise_privacy_ca_certs_personal
+                : R.string.enterprise_privacy_ca_certs_user);
         preference.setSummary(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
         preference.setVisible(true);

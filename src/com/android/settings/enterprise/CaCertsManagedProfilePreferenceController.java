@@ -40,8 +40,6 @@ public class CaCertsManagedProfilePreferenceController extends PreferenceControl
             preference.setVisible(false);
             return;
         }
-        preference.setTitle(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_ca_certs_work, certs));
         preference.setSummary(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
         preference.setVisible(true);
