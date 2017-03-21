@@ -23,19 +23,13 @@
         android:fragment="com.android.settings.wifi.WifiSettings"
         android:key="toggle_wifi"
         android:title="@string/wifi_settings"
+        android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_wireless"
         android:order="-30">
         <intent
             android:action="android.settings.WIFI_SETTINGS"
             android:targetClass="Settings$WifiSettingsActivity"/>
     </com.android.settings.widget.MasterSwitchPreference>
-
-    <SwitchPreference
-        android:key="toggle_airplane"
-        android:title="@string/airplane_mode"
-        android:icon="@drawable/ic_airplanemode_active"
-        android:disableDependentsState="true"
-        android:order="5"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_settings"
@@ -58,6 +52,7 @@
         android:title="@string/tether_settings_title_all"
         android:icon="@drawable/ic_wifi_tethering"
         android:order="-5"
+        android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true"/>
 
@@ -67,6 +62,7 @@
         android:title="@string/vpn_settings_title"
         android:icon="@drawable/ic_vpn_key"
         android:order="0"
+        android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_vpn"
         settings:useAdminDisabledSummary="true"/>
 
@@ -76,6 +72,13 @@
         android:persistent="false"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"/>
+
+    <SwitchPreference
+        android:key="toggle_airplane"
+        android:title="@string/airplane_mode"
+        android:icon="@drawable/ic_airplanemode_active"
+        android:disableDependentsState="true"
+        android:order="5"/>
 
     <Preference
         android:fragment="com.android.settings.ProxySelector"
