@@ -22,20 +22,25 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
 /**
  * DonutView represents a donut graph. It visualizes a certain percentage of fullness with a
- * corresponding label with the fullness on the inside (i.e. "50%" inside of the donut.
+ * corresponding label with the fullness on the inside (i.e. "50%" inside of the donut).
  */
 public class DonutView extends View {
     private static final int TOP = -90;
     private float mStrokeWidth;
+    private float mDeviceDensity;
     private int mPercent;
     private Paint mBackgroundCircle;
     private Paint mFilledArc;
     private TextPaint mTextPaint;
+    private TextPaint mBigNumberPaint;
+    private String mPercentString;
+    private String mFullString;
 
     public DonutView(Context context) {
         super(context);
@@ -43,8 +48,8 @@ public class DonutView extends View {
 
     public DonutView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        float density = getResources().getDisplayMetrics().density;
-        mStrokeWidth = 6f * density;
+        mDeviceDensity = getResources().getDisplayMetrics().density;
+        mStrokeWidth = 6f * mDeviceDensity;
 
         mBackgroundCircle = new Paint();
         mBackgroundCircle.setAntiAlias(true);
@@ -63,28 +68,43 @@ public class DonutView extends View {
         mTextPaint = new TextPaint();
         mTextPaint.setColor(Utils.getColorAccent(getContext()));
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextSize(18f * density);
+        mTextPaint.setTextSize(14f * mDeviceDensity);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        mBigNumberPaint = new TextPaint();
+        mBigNumberPaint.setColor(Utils.getColorAccent(getContext()));
+        mBigNumberPaint.setAntiAlias(true);
+        mBigNumberPaint.setTextSize(30f * mDeviceDensity);
+        mBigNumberPaint.setTextAlign(Paint.Align.CENTER);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        drawDonut(canvas);
+        drawInnerText(canvas);
+    }
+
+    private void drawDonut(Canvas canvas) {
         canvas.drawArc(0 + mStrokeWidth, 0 + mStrokeWidth, getWidth() - mStrokeWidth,
                 getHeight() - mStrokeWidth, TOP, 360, false, mBackgroundCircle);
 
         canvas.drawArc(0 + mStrokeWidth, 0 + mStrokeWidth, getWidth() - mStrokeWidth,
                 getHeight() - mStrokeWidth, TOP, (360 * mPercent / 100), false, mFilledArc);
+    }
 
-        int centerX = getWidth() / 2;
-        int centerY = getHeight() / 2;
+    private void drawInnerText(Canvas canvas) {
+        final float centerX = getWidth() / 2;
+        final float centerY = getHeight() / 2;
+        final float totalHeight = getTextHeight(mTextPaint) + getTextHeight(mBigNumberPaint);
+        final float startY = centerY + totalHeight / 2;
 
-        String percentString =
-                String.format(getContext().getString(R.string.storage_percent_used), mPercent);
-        // drawText uses the Y dimension as the floor of the text, so we do this to center.
-        canvas.drawText(percentString, centerX,
-                centerY + getTextHeight(mTextPaint) / 2 - mTextPaint.descent(),
-                mTextPaint);
+        // The first line is the height of the bottom text + its descender above the bottom line.
+        canvas.drawText(mPercentString, centerX,
+                startY - getTextHeight(mTextPaint) - mBigNumberPaint.descent(),
+                mBigNumberPaint);
+        // The second line starts at the bottom + room for the descender.
+        canvas.drawText(mFullString, centerX, startY - mTextPaint.descent(), mTextPaint);
     }
 
     /**
@@ -92,6 +112,8 @@ public class DonutView extends View {
      */
     public void setPercentage(int percent) {
         mPercent = percent;
+        mPercentString = Utils.formatPercentage(mPercent);
+        mFullString = getContext().getString(R.string.storage_percent_full);
         invalidate();
     }
 
