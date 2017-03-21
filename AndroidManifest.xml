@@ -564,11 +564,13 @@
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system"/>
+                       android:value="com.android.settings.category.ia.system"/>
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.language.LanguageAndInputSettings"/>
+                       android:value="com.android.settings.language.LanguageAndInputSettings"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true"/>
+                       android:value="true"/>
         </activity>
 
         <activity android:name="Settings$AvailableVirtualKeyboardActivity"
@@ -1889,6 +1891,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.summary"
+                android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.development.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2388,6 +2392,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.accounts" />
+            <meta-data android:name="com.android.settings.summary"
+                android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2519,6 +2525,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <intent-filter android:priority="120">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.apps"/>
+            <meta-data android:name="com.android.settings.summary"
+                android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ConfigureNotificationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2873,16 +2886,25 @@
 
         <activity android:name="Settings$AdvancedAppsActivity"
                   android:taskAffinity=""
-                  android:exported="true">
+                  android:exported="true"
+                  android:label="@string/app_default_dashboard_title"
+                  android:icon="@drawable/ic_adb">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
                 <action android:name="android.settings.HOME_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter android:priority="130">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AdvancedAppSettings" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                        android:value="true" />
+                       android:value="true" />
         </activity>
 
         <!-- Keep compatibility with old WebView-picker implementation -->
@@ -2921,6 +2943,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3000,34 +3024,6 @@
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/support_summary"/>
         </activity>
-
-        <activity-alias android:name="ConfigureNotificationDashboardAlias"
-                  android:targetActivity="Settings$ConfigureNotificationSettingsActivity">
-            <intent-filter android:priority="120">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.apps"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ConfigureNotificationSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
-
-        <activity-alias android:name="AppDefaultDashboardAlias"
-                        android:targetActivity="Settings$AdvancedAppsActivity"
-                        android:label="@string/app_default_dashboard_title"
-                        android:icon="@drawable/ic_adb">
-            <intent-filter android:priority="130">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.apps"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.AdvancedAppSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
 
         <!-- End of information architecture host activities -->
 
