@@ -71,7 +71,7 @@
     <!-- Wifi Calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="wfc_provisioned_switch_string">Wifi Calling Provisioned</string>
 
-    <!-- Cell Radio Power. Only shown in diagnostic screen, so precise translation is not needed. -->
+    <!-- Title for controlling on/off for Mobile phone's radio power. Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="radio_info_radio_power">Mobile Radio Power</string>
 
     <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -1639,7 +1639,7 @@
     <string name="wifi_switch_away_when_unvalidated">Switch to mobile data if Wi\u2011Fi loses Internet access.</string>
     <!-- Preference title for option to automatically switch away from bad wifi networks [CHAR LIMIT=60]-->
     <string name="wifi_cellular_data_fallback_title">Switch to mobile data automatically</string>
-    <!-- Preference summary for option to automatically switch away from bad wifi networks [CHAR LIMIT=None]-->
+    <!-- Preference summary to automatically switch away from bad wifi networks [CHAR LIMIT=None]-->
     <string name="wifi_cellular_data_fallback_summary">Use mobile data when Wi\u2011Fi has no Internet access. Data usage may apply.</string>
     <!-- Action bar text message to manually add a wifi network [CHAR LIMIT=20]-->
     <string name="wifi_add_network">Add network</string>
@@ -1806,7 +1806,8 @@
 
     <!-- Dialog text to tell the user that the selected network has lost Internet access, and asking the user whether they want to avoid this network. -->
     <string name="lost_internet_access_title">Wi\u2011Fi is not connected to the Internet</string>
-    <string name="lost_internet_access_text">You can switch to the mobile network whenever Wi\u2011Fi has a bad connection. Data usage may apply.</string>
+    <string name="lost_internet_access_text">You can switch to the mobile network whenever Wi\u2011Fi has a bad connection. Data usage charges may apply.</string>
+    <!-- Button text to let user switch to mobile data -->
     <string name="lost_internet_access_switch">Switch to mobile</string>
     <string name="lost_internet_access_cancel">Stay on Wi\u2011Fi</string>
     <string name="lost_internet_access_persist">Never show again</string>
@@ -5284,7 +5285,7 @@
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=40] -->
     <string name="data_usage_app_restrict_background">Background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_background_summary">Enable usage of Mobile data in the background</string>
+    <string name="data_usage_app_restrict_background_summary">Enable usage of mobile data in the background</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=84] -->
     <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a mobile data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
