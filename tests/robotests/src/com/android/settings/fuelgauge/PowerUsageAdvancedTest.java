@@ -27,6 +27,7 @@ import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageTyp
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
@@ -38,6 +39,7 @@ import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -45,6 +47,7 @@ import static org.mockito.Mockito.when;
 public class PowerUsageAdvancedTest {
     private static final int FAKE_UID_1 = 50;
     private static final int FAKE_UID_2 = 100;
+    private static final int DISCHARGE_AMOUNT = 60;
     private static final double TYPE_APP_USAGE = 80;
     private static final double TYPE_BLUETOOTH_USAGE = 50;
     private static final double TYPE_WIFI_USAGE = 0;
@@ -53,7 +56,7 @@ public class PowerUsageAdvancedTest {
     private static final double PRECISION = 0.001;
     @Mock
     private BatterySipper mBatterySipper;
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
@@ -76,6 +79,8 @@ public class PowerUsageAdvancedTest {
         batterySippers.add(new BatterySipper(DrainType.WIFI, new FakeUid(FAKE_UID_1),
                 TYPE_WIFI_USAGE));
 
+        when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt())).thenReturn(
+                DISCHARGE_AMOUNT);
         when(mBatteryStatsHelper.getUsageList()).thenReturn(batterySippers);
         when(mBatteryStatsHelper.getTotalPower()).thenReturn(TOTAL_USAGE);
         mPowerUsageAdvanced.setPackageManager(mPackageManager);
@@ -118,9 +123,9 @@ public class PowerUsageAdvancedTest {
 
     @Test
     public void testParsePowerUsageData_PercentageCalculatedCorrectly() {
-        final double percentApp = TYPE_APP_USAGE * 2 / TOTAL_USAGE * 100;
-        final double percentWifi = TYPE_WIFI_USAGE / TOTAL_USAGE * 100;
-        final double percentBluetooth = TYPE_BLUETOOTH_USAGE / TOTAL_USAGE * 100;
+        final double percentApp = TYPE_APP_USAGE * 2 / TOTAL_USAGE * DISCHARGE_AMOUNT;
+        final double percentWifi = TYPE_WIFI_USAGE / TOTAL_USAGE * DISCHARGE_AMOUNT;
+        final double percentBluetooth = TYPE_BLUETOOTH_USAGE / TOTAL_USAGE * DISCHARGE_AMOUNT;
 
         List<PowerUsageData> batteryData =
                 mPowerUsageAdvanced.parsePowerUsageData(mBatteryStatsHelper);
