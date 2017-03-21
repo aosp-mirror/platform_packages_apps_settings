@@ -29,7 +29,6 @@
     <Preference
         android:key="default_browser"
         android:title="@string/default_browser_title"
-        android:summary="@string/default_browser_title_none"
         android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
         android:order="-19">
         <extra android:name="for_work" android:value="false"/>
@@ -38,7 +37,6 @@
     <Preference
         android:key="default_home"
         android:title="@string/home_app"
-        android:summary="@string/no_default_home"
         android:fragment="com.android.settings.applications.defaultapps.DefaultHomePicker"
         settings:keywords="@string/keywords_home"
         android:order="-18"/>
@@ -66,7 +64,6 @@
     <com.android.settings.widget.GearPreference
         android:key="default_autofill"
         android:title="@string/autofill_app"
-        android:summary="@string/app_list_preference_none"
         android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
         settings:keywords="@string/autofill_keywords"
         android:order="-14"/>
@@ -91,7 +88,6 @@
         <Preference
             android:key="work_default_browser"
             android:title="@string/default_browser_title"
-            android:summary="@string/default_browser_title_none"
             android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker">
             <extra android:name="for_work" android:value="true"/>
         </Preference>
