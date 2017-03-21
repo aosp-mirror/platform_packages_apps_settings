@@ -26,6 +26,8 @@ import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.wifi.WifiStatusTracker;
 
+import static android.net.wifi.WifiInfo.removeDoubleQuotes;
+
 /**
  * Helper class that listeners to wifi callback and notify client when there is update in
  * wifi summary info.
@@ -78,7 +80,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
         if (!mWifiTracker.connected) {
             return mContext.getString(R.string.disconnected);
         }
-        return mWifiTracker.ssid;
+        return removeDoubleQuotes(mWifiTracker.ssid);
     }
 
 }

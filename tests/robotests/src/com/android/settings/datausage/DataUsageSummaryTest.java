@@ -18,8 +18,15 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkPolicy;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
+
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.NetworkPolicyEditor;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +34,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
+
+import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -56,5 +71,76 @@ public class DataUsageSummaryTest {
     public void testMobileDataStatus() {
         boolean hasMobileData = DataUsageSummary.hasMobileData(mContext);
         assertThat(hasMobileData).isTrue();
+    }
+
+    @Test
+    public void testUpdateNetworkRestrictionSummary_shouldSetSummary() {
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        final NetworkRestrictionsPreference preference = mock(NetworkRestrictionsPreference.class);
+        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
+        final WifiManager wifiManager = mock(WifiManager.class);
+        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
+        ReflectionHelpers.setField(dataUsageSummary, "mWifiManager", wifiManager);
+        when(wifiManager.getConfiguredNetworks()).thenReturn(new ArrayList<WifiConfiguration>());
+        doReturn(mContext.getResources()).when(dataUsageSummary).getResources();
+
+        dataUsageSummary.updateNetworkRestrictionSummary(preference);
+
+        verify(preference).setSummary(mContext.getResources().getQuantityString(
+            R.plurals.network_restrictions_summary, 0, 0));
+    }
+
+    @Test
+    public void testIsMetered_noSsid_shouldReturnFalse() {
+        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
+        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
+        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
+        WifiConfiguration config = mock(WifiConfiguration.class);
+
+        assertThat(dataUsageSummary.isMetered(config)).isFalse();
+    }
+
+    @Test
+    public void testIsMetered_noNetworkPolicy_shouldReturnFalse() {
+        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
+        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
+        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
+        WifiConfiguration config = mock(WifiConfiguration.class);
+        config.SSID = "network1";
+        doReturn(null).when(policyEditor).getPolicyMaybeUnquoted(any());
+
+        assertThat(dataUsageSummary.isMetered(config)).isFalse();
+    }
+
+    @Test
+    public void testIsMetered_policyHasLimit_shouldReturnTrue() {
+        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
+        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
+        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
+        WifiConfiguration config = mock(WifiConfiguration.class);
+        config.SSID = "network1";
+        NetworkPolicy policy = mock(NetworkPolicy.class);
+        policy.limitBytes = 100;
+        doReturn(policy).when(policyEditor).getPolicyMaybeUnquoted(any());
+
+        assertThat(dataUsageSummary.isMetered(config)).isTrue();
+    }
+
+    @Test
+    public void testIsMetered_noPolicyLimit_shouldReturnMeteredValue() {
+        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
+        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
+        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
+        WifiConfiguration config = mock(WifiConfiguration.class);
+        config.SSID = "network1";
+        NetworkPolicy policy = mock(NetworkPolicy.class);
+        policy.limitBytes = NetworkPolicy.LIMIT_DISABLED;
+        doReturn(policy).when(policyEditor).getPolicyMaybeUnquoted(any());
+
+        policy.metered = true;
+        assertThat(dataUsageSummary.isMetered(config)).isTrue();
+
+        policy.metered = false;
+        assertThat(dataUsageSummary.isMetered(config)).isFalse();
     }
 }

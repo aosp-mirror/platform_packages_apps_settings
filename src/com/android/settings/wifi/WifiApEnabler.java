@@ -28,7 +28,6 @@ import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.datausage.DataSaverBackend;
-import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
 
@@ -140,6 +139,8 @@ public class WifiApEnabler {
             updateConfigSummary(wifiConfig);
         } else if (wifiErrored) {
             mSwitch.setSummary(R.string.wifi_error);
+        } else {
+            mSwitch.setSummary(R.string.wifi_hotspot_off_subtext);
         }
     }
 

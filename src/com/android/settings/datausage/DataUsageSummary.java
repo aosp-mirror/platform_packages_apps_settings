@@ -20,13 +20,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
+import android.net.NetworkPolicy;
+import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
@@ -56,6 +61,7 @@ import java.util.List;
 
 import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_WIFI;
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
 
 public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
@@ -68,6 +74,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private static final String KEY_STATUS_HEADER = "status_header";
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
+    private static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
@@ -75,6 +82,10 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
     private int mDataUsageTemplate;
+    private NetworkRestrictionsPreference mNetworkRestrcitionPreference;
+    private WifiManager mWifiManager;
+    private NetworkPolicyManager mPolicyManager;
+    private NetworkPolicyEditor mPolicyEditor;
 
     @Override
     protected int getHelpResource() {
@@ -85,16 +96,21 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        boolean hasMobileData = hasMobileData(getContext());
-        mDataUsageController = new DataUsageController(getContext());
+        final Context context = getContext();
+        mPolicyManager = NetworkPolicyManager.from(context);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
+
+        boolean hasMobileData = hasMobileData(context);
+        mDataUsageController = new DataUsageController(context);
         mDataInfoController = new DataUsageInfoController();
         addPreferencesFromResource(R.xml.data_usage);
 
-        int defaultSubId = getDefaultSubscriptionId(getContext());
+        int defaultSubId = getDefaultSubscriptionId(context);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
-        mDefaultTemplate = getDefaultTemplate(getContext(), defaultSubId);
+        mDefaultTemplate = getDefaultTemplate(context, defaultSubId);
         mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
@@ -115,11 +131,11 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             removePreference(KEY_LIMIT_SUMMARY);
             mSummaryPreference.setSelectable(false);
         }
-        boolean hasWifiRadio = hasWifiRadio(getContext());
+        boolean hasWifiRadio = hasWifiRadio(context);
         if (hasWifiRadio) {
             addWifiSection();
         }
-        if (hasEthernet(getContext())) {
+        if (hasEthernet(context)) {
             addEthernetSection();
         }
         mDataUsageTemplate = hasMobileData ? R.string.cell_data_template
@@ -171,6 +187,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
         category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
+        mNetworkRestrcitionPreference =
+            (NetworkRestrictionsPreference) category.findPreference(KEY_NETWORK_RESTRICTIONS);
     }
 
     private void addEthernetSection() {
@@ -258,6 +276,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         } else if (mLimitPreference != null) {
             mLimitPreference.setSummary(null);
         }
+
+        updateNetworkRestrictionSummary(mNetworkRestrcitionPreference);
 
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
@@ -360,6 +380,39 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         } else {
             return NetworkTemplate.buildTemplateEthernet();
         }
+    }
+
+    @VisibleForTesting
+    void updateNetworkRestrictionSummary(NetworkRestrictionsPreference preference) {
+        if (preference == null) {
+            return;
+        }
+        mPolicyEditor.read();
+        int count = 0;
+        for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
+            if (isMetered(config)) {
+                count++;
+            }
+        }
+        preference.setSummary(getResources().getQuantityString(
+            R.plurals.network_restrictions_summary, count, count));
+    }
+
+    @VisibleForTesting
+    boolean isMetered(WifiConfiguration config) {
+        if (config.SSID == null) {
+            return false;
+        }
+        final String networkId = config.isPasspoint() ? config.providerFriendlyName : config.SSID;
+        final NetworkPolicy policy =
+            mPolicyEditor.getPolicyMaybeUnquoted(NetworkTemplate.buildTemplateWifi(networkId));
+        if (policy == null) {
+            return false;
+        }
+        if (policy.limitBytes != LIMIT_DISABLED) {
+            return true;
+        }
+        return policy.metered;
     }
 
     private static class SummaryProvider
