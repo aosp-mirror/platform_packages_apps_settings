@@ -597,8 +597,6 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                     data = new SearchIndexableRaw(context);
                     data.key = componentName.flattenToString();
                     data.title = service.getResolveInfo().loadLabel(packageManager).toString();
-                    data.summaryOn = context.getString(R.string.print_feature_state_on);
-                    data.summaryOff = context.getString(R.string.print_feature_state_off);
                     data.screenTitle = screenTitle;
                     indexables.add(data);
                 }

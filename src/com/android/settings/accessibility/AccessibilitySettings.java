@@ -775,8 +775,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
                 indexable.key = componentName.flattenToString();
                 indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
-                indexable.summaryOn = context.getString(R.string.accessibility_feature_state_on);
-                indexable.summaryOff = context.getString(R.string.accessibility_feature_state_off);
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
             }
