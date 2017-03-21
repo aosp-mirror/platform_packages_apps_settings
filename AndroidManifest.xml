@@ -2490,6 +2490,18 @@
                 android:value="com.android.settings.applications.PictureInPictureSettings" />
         </activity>
 
+        <activity android:name="Settings$AppPictureInPictureSettingsActivity"
+            android:label="@string/picture_in_picture_title"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.settings.PICTURE_IN_PICTURE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.PictureInPictureDetails" />
+        </activity>
+
         <activity android:name="Settings$ZenAccessSettingsActivity"
                   android:label="@string/manage_zen_access_title"
                   android:taskAffinity="">

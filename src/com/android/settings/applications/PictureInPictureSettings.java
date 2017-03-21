@@ -15,13 +15,9 @@
  */
 package com.android.settings.applications;
 
-import static android.app.AppOpsManager.MODE_ALLOWED;
-import static android.app.AppOpsManager.MODE_ERRORED;
-import static android.app.AppOpsManager.OP_ENTER_PICTURE_IN_PICTURE_ON_HIDE;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
 import android.annotation.Nullable;
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -30,8 +26,8 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.ArrayMap;
 import android.view.View;
@@ -40,7 +36,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.notification.EmptyTextSettings;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,28 +93,6 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         return false;
     }
 
-    /**
-     * Sets whether the app associated with the given {@param packageName} is allowed to enter
-     * picture-in-picture when it is hidden.
-     */
-    static void setEnterPipOnHideStateForPackage(Context context, int uid, String packageName,
-            boolean value) {
-        final AppOpsManager appOps = context.getSystemService(AppOpsManager.class);
-        final int newMode = value ? MODE_ALLOWED : MODE_ERRORED;
-        appOps.setMode(OP_ENTER_PICTURE_IN_PICTURE_ON_HIDE,
-                uid, packageName, newMode);
-    }
-
-    /**
-     * @return whether the app associated with the given {@param packageName} is allowed to enter
-     *         picture-in-picture when it is hidden.
-     */
-    static boolean getEnterPipOnHideStateForPackage(Context context, int uid, String packageName) {
-        final AppOpsManager appOps = context.getSystemService(AppOpsManager.class);
-        return appOps.checkOpNoThrow(OP_ENTER_PICTURE_IN_PICTURE_ON_HIDE,
-                uid, packageName) == MODE_ALLOWED;
-    }
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -147,8 +120,8 @@ public class PictureInPictureSettings extends EmptyTextSettings {
             if (checkPackageHasPictureInPictureActivities(packageInfo.packageName,
                     packageInfo.activities)) {
                 final String packageName = packageInfo.applicationInfo.packageName;
-                final boolean state = getEnterPipOnHideStateForPackage(mContext,
-                        packageInfo.applicationInfo.uid, packageName);
+                final boolean state = PictureInPictureDetails.getEnterPipStateForPackage(
+                        mContext, packageInfo.applicationInfo.uid, packageName);
                 pipApps.add(packageInfo.applicationInfo);
                 packageToState.put(packageName, state);
             }
@@ -160,17 +133,18 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         for (final ApplicationInfo appInfo : pipApps) {
             final String packageName = appInfo.packageName;
             final CharSequence label = appInfo.loadLabel(mPackageManager);
-            final SwitchPreference pref = new SwitchPreference(prefContext);
-            pref.setPersistent(false);
+
+            final Preference pref = new Preference(prefContext);
             pref.setIcon(appInfo.loadIcon(mPackageManager));
             pref.setTitle(label);
-            pref.setChecked(packageToState.get(packageName));
-            pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            pref.setSummary(PictureInPictureDetails.getPreferenceSummary(prefContext,
+                    appInfo.uid, packageName));
+            pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    logSpecialPermissionChange((Boolean) newValue, packageName);
-                    setEnterPipOnHideStateForPackage(mContext, appInfo.uid, packageName,
-                            (Boolean) newValue);
+                public boolean onPreferenceClick(Preference preference) {
+                    AppInfoBase.startAppInfoFragment(PictureInPictureDetails.class,
+                            R.string.picture_in_picture_app_detail_title, packageName, appInfo.uid,
+                            PictureInPictureSettings.this, -1, getMetricsCategory());
                     return true;
                 }
             });
@@ -187,14 +161,5 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
-    }
-
-    @VisibleForTesting
-    void logSpecialPermissionChange(boolean newState, String packageName) {
-        int logCategory = newState
-                ? MetricsEvent.APP_PICTURE_IN_PICTURE_ON_HIDE_ALLOW
-                : MetricsEvent.APP_PICTURE_IN_PICTURE_ON_HIDE_DENY;
-        FeatureFactory.getFactory(getContext())
-                .getMetricsFeatureProvider().action(getContext(), logCategory, packageName);
     }
 }

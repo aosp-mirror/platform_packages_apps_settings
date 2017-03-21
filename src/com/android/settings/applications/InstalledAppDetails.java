@@ -52,7 +52,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -1041,17 +1040,16 @@ public class InstalledAppDetails extends AppInfoBase
                 category.addPreference(pref);
             }
             if (hasPictureInPictureActivities) {
-                final SwitchPreference pref = new SwitchPreference(getPrefContext());
-                pref.setPersistent(false);
+                Preference pref = new Preference(getPrefContext());
                 pref.setTitle(R.string.picture_in_picture_app_detail_title);
-                pref.setSummary(R.string.picture_in_picture_app_detail_summary);
-                pref.setChecked(PictureInPictureSettings.getEnterPipOnHideStateForPackage(
-                        getContext(), mPackageInfo.applicationInfo.uid, mPackageName));
-                pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                pref.setKey("picture_in_picture");
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        PictureInPictureSettings.setEnterPipOnHideStateForPackage(getContext(),
-                                mPackageInfo.applicationInfo.uid, mPackageName, (Boolean) newValue);
+                    public boolean onPreferenceClick(Preference preference) {
+                        AppInfoBase.startAppInfoFragment(PictureInPictureDetails.class,
+                                R.string.picture_in_picture_app_detail_title, mPackageName,
+                                mPackageInfo.applicationInfo.uid, InstalledAppDetails.this,
+                                -1, getMetricsCategory());
                         return true;
                     }
                 });
@@ -1163,6 +1161,11 @@ public class InstalledAppDetails extends AppInfoBase
         pref = findPreference("system_alert_window");
         if (pref != null) {
             pref.setSummary(DrawOverlayDetails.getSummary(getContext(), mAppEntry));
+        }
+        pref = findPreference("picture_in_picture");
+        if (pref != null) {
+            pref.setSummary(PictureInPictureDetails.getPreferenceSummary(getContext(),
+                    mPackageInfo.applicationInfo.uid, mPackageName));
         }
         pref = findPreference("write_settings_apps");
         if (pref != null) {

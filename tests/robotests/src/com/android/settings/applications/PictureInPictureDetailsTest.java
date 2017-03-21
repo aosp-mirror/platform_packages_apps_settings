@@ -17,8 +17,6 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -34,40 +32,32 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.lang.reflect.Field;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class PictureInPictureSettingsTest {
+public class PictureInPictureDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
     private FakeFeatureFactory mFeatureFactory;
-    private PictureInPictureSettings mFragment;
+    private PictureInPictureDetails mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mFragment = new PictureInPictureSettings();
+        mFragment = new PictureInPictureDetails();
     }
 
     @Test
     public void testIgnoredApp() {
-        for (String ignoredPackage : mFragment.IGNORE_PACKAGE_LIST) {
+        for (String ignoredPackage : PictureInPictureSettings.IGNORE_PACKAGE_LIST) {
             assertThat(checkPackageHasPictureInPictureActivities(ignoredPackage, true))
                             .isFalse();
         }
@@ -94,11 +84,11 @@ public class PictureInPictureSettingsTest {
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(true, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_PICTURE_IN_PICTURE_ON_HIDE_ALLOW), eq("app"));
+                eq(MetricsProto.MetricsEvent.APP_PICTURE_IN_PICTURE_ALLOW), eq("app"));
 
         mFragment.logSpecialPermissionChange(false, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_PICTURE_IN_PICTURE_ON_HIDE_DENY), eq("app"));
+                eq(MetricsProto.MetricsEvent.APP_PICTURE_IN_PICTURE_DENY), eq("app"));
     }
 
     private boolean checkPackageHasPictureInPictureActivities(String packageName,
