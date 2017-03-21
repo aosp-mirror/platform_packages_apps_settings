@@ -40,17 +40,16 @@ public final class AdminGrantedPermissionsPreferenceControllerBaseTest extends
     }
 
     @Override
-    public void setUp() {
-        super.setUp();
-        mController = new AdminGrantedPermissionsPreferenceControllerBaseTestable();
+    protected AdminGrantedPermissionsPreferenceControllerBase createController(boolean async) {
+        return new AdminGrantedPermissionsPreferenceControllerBaseTestable(async);
     }
 
     private class AdminGrantedPermissionsPreferenceControllerBaseTestable extends
             AdminGrantedPermissionsPreferenceControllerBase {
 
-        AdminGrantedPermissionsPreferenceControllerBaseTestable() {
-            super(AdminGrantedPermissionsPreferenceControllerBaseTest.this.mContext, mPermissions,
-                    mPermissionGroup);
+        AdminGrantedPermissionsPreferenceControllerBaseTestable(boolean async) {
+            super(AdminGrantedPermissionsPreferenceControllerBaseTest.this.mContext,
+                    null /* lifecycle */, async, mPermissions, mPermissionGroup);
         }
 
         @Override

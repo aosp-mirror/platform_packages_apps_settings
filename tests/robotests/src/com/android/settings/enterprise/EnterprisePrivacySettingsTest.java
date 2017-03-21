@@ -117,7 +117,7 @@ public final class EnterprisePrivacySettingsTest {
 
     private void verifyPreferenceControllers(List<PreferenceController> controllers) {
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(17);
+        assertThat(controllers.size()).isEqualTo(16);
         assertThat(controllers.get(0)).isInstanceOf(InstalledPackagesPreferenceController.class);
         assertThat(controllers.get(1)).isInstanceOf(NetworkLogsPreferenceController.class);
         assertThat(controllers.get(2)).isInstanceOf(BugReportsPreferenceController.class);
@@ -137,13 +137,11 @@ public final class EnterprisePrivacySettingsTest {
         assertThat(controllers.get(10)).isInstanceOf(
                 AlwaysOnVpnManagedProfilePreferenceController.class);
         assertThat(controllers.get(11)).isInstanceOf(GlobalHttpProxyPreferenceController.class);
-        assertThat(controllers.get(12)).isInstanceOf(CaCertsCurrentUserPreferenceController.class);
+        assertThat(controllers.get(12)).isInstanceOf(CaCertsPreferenceController.class);
         assertThat(controllers.get(13)).isInstanceOf(
-                CaCertsManagedProfilePreferenceController.class);
-        assertThat(controllers.get(14)).isInstanceOf(
                 FailedPasswordWipePrimaryUserPreferenceController.class);
-        assertThat(controllers.get(15)).isInstanceOf(
+        assertThat(controllers.get(14)).isInstanceOf(
                 FailedPasswordWipeManagedProfilePreferenceController.class);
-        assertThat(controllers.get(16)).isInstanceOf(ImePreferenceController.class);
+        assertThat(controllers.get(15)).isInstanceOf(ImePreferenceController.class);
     }
 }

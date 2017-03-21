@@ -43,7 +43,8 @@ public final class FailedPasswordWipeManagedProfilePreferenceControllerTest exte
     @Override
     public void setUp() {
         super.setUp();
-        mController = new FailedPasswordWipeManagedProfilePreferenceController(mContext);
+        mController = new FailedPasswordWipeManagedProfilePreferenceController(mContext,
+                null /* lifecycle */);
     }
 
     @Override

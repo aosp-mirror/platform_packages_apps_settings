@@ -88,7 +88,7 @@ public final class ApplicationFeatureProviderImplTest {
                 mPackageManagerService, mDevicePolicyManager);
     }
 
-    private void testCalculateNumberOfInstalledApps(boolean async) {
+    private void verifyCalculateNumberOfInstalledApps(boolean async) {
         setUpUsersAndInstalledApps();
 
         when(mPackageManager.getInstallReason(APP_1, new UserHandle(MAIN_USER_ID)))
@@ -117,16 +117,16 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Test
     public void testCalculateNumberOfInstalledAppsSync() {
-        testCalculateNumberOfInstalledApps(false /* async */);
+        verifyCalculateNumberOfInstalledApps(false /* async */);
     }
 
     @Test
     public void testCalculateNumberOfInstalledAppsAsync() {
-        testCalculateNumberOfInstalledApps(true /* async */);
+        verifyCalculateNumberOfInstalledApps(true /* async */);
     }
 
-    @Test
-    public void testCalculateNumberOfAppsWithAdminGrantedPermissions() throws Exception {
+    private void verifyCalculateNumberOfAppsWithAdminGrantedPermissions(boolean async)
+            throws Exception {
         setUpUsersAndInstalledApps();
 
         when(mDevicePolicyManager.getPermissionGrantState(null, APP_1, PERMISSION))
@@ -143,13 +143,23 @@ public final class ApplicationFeatureProviderImplTest {
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
         mAppCount = -1;
-        mProvider.calculateNumberOfAppsWithAdminGrantedPermissions(new String[] {PERMISSION},
-                (num) -> {
-                    mAppCount = num;
-                });
-        ShadowApplication.runBackgroundTasks();
+        mProvider.calculateNumberOfAppsWithAdminGrantedPermissions(new String[] {PERMISSION}, async,
+                (num) -> mAppCount = num);
+        if (async) {
+            ShadowApplication.runBackgroundTasks();
+        }
         assertThat(mAppCount).isEqualTo(2);
 
+    }
+
+    @Test
+    public void testCalculateNumberOfAppsWithAdminGrantedPermissionsSync() throws Exception {
+        verifyCalculateNumberOfAppsWithAdminGrantedPermissions(false /* async */);
+    }
+
+    @Test
+    public void testCalculateNumberOfAppsWithAdminGrantedPermissionsAsync() throws Exception {
+        verifyCalculateNumberOfAppsWithAdminGrantedPermissions(true /* async */);
     }
 
     @Test

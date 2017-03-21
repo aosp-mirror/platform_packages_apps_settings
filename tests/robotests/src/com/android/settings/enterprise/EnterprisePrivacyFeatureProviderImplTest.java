@@ -268,39 +268,45 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
-    public void testGetNumberOfOwnerInstalledCaCertsInCurrentUser() {
+    public void testGetNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile() {
         final UserHandle userHandle = new UserHandle(UserHandle.USER_SYSTEM);
-
-        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
-                .thenReturn(null);
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(0);
-        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
-                .thenReturn(new ArrayList<String>());
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(0);
-        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
-                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(2);
-    }
-
-    @Test
-    public void testGetNumberOfOwnerInstalledCaCertsInManagedProfile() {
-        final UserHandle userHandle = new UserHandle(MANAGED_PROFILE_USER_ID);
+        final UserHandle managedProfileUserHandle = new UserHandle(MANAGED_PROFILE_USER_ID);
         final UserInfo managedProfile =
                 new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE);
 
-        mProfiles.add(managedProfile);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
+                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
                 .thenReturn(null);
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(0);
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
                 .thenReturn(new ArrayList<String>());
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(0);
         when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
                 .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(2);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(2);
+
+        mProfiles.add(managedProfile);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
+                .thenReturn(null);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(2);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
+                .thenReturn(new ArrayList<String>());
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(2);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(managedProfileUserHandle))
+                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(4);
 
         mProfiles.remove(managedProfile);
-        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile())
+                .isEqualTo(2);
     }
 
     @Test

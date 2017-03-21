@@ -69,9 +69,15 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     @Override
     public void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions,
-            NumberOfAppsCallback callback) {
-        new AllUserAppWithAdminGrantedPermissionsCounter(mContext, permissions, mPm, mPms, mDpm,
-                callback).execute();
+            boolean async, NumberOfAppsCallback callback) {
+        final AllUserAppWithAdminGrantedPermissionsCounter counter =
+                new AllUserAppWithAdminGrantedPermissionsCounter(mContext, permissions, mPm, mPms,
+                        mDpm, callback);
+        if (async) {
+            counter.execute();
+        } else {
+            counter.executeInForeground();
+        }
     }
 
     @Override

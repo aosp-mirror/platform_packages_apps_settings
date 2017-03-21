@@ -37,60 +37,46 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link CaCertsManagedProfilePreferenceController}.
+ * Tests for {@link CaCertsPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class CaCertsManagedProfilePreferenceControllerTest {
-
-    private final String NUMBER_INSTALLED_CERTS_1 = "1 cert";
-    private final String NUMBER_INSTALLED_CERTS_10 = "10 certs";
+public final class CaCertsPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
 
-    private CaCertsManagedProfilePreferenceController mController;
+    private CaCertsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new CaCertsManagedProfilePreferenceController(mContext);
-
-        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
-                1, 1)).thenReturn(NUMBER_INSTALLED_CERTS_1);
-        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
-                10, 10)).thenReturn(NUMBER_INSTALLED_CERTS_10);
+        mController = new CaCertsPreferenceController(mContext, null /* lifecycle */);
     }
 
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
 
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
+                10, 10)).thenReturn("10 certs");
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsInManagedProfile()).thenReturn(0);
+                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(10);
         mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsInManagedProfile()).thenReturn(1);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
-        assertThat(preference.getSummary()).isEqualTo(NUMBER_INSTALLED_CERTS_1);
-
-        preference.setVisible(false);
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsInManagedProfile()).thenReturn(10);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
-        assertThat(preference.getSummary()).isEqualTo(NUMBER_INSTALLED_CERTS_10);
+        assertThat(preference.getSummary()).isEqualTo("10 certs");
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider
+                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(0);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider
+                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(10);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -102,6 +88,6 @@ public final class CaCertsManagedProfilePreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("ca_certs_managed_profile");
+        assertThat(mController.getPreferenceKey()).isEqualTo("ca_certs");
     }
 }

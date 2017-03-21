@@ -56,7 +56,8 @@ public final class AlwaysOnVpnPrimaryUserPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AlwaysOnVpnPrimaryUserPreferenceController(mContext);
+        mController = new AlwaysOnVpnPrimaryUserPreferenceController(mContext,
+                null /* lifecycle */);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_device))
                 .thenReturn(VPN_SET_DEVICE);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_personal))
@@ -66,37 +67,27 @@ public final class AlwaysOnVpnPrimaryUserPreferenceControllerTest {
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isInCompMode()).thenReturn(false);
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
-                .thenReturn(false);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
                 .thenReturn(true);
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isInCompMode()).thenReturn(false);
         mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
         assertThat(preference.getTitle()).isEqualTo(VPN_SET_DEVICE);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isInCompMode()).thenReturn(true);
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
-                .thenReturn(false);
         mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
-                .thenReturn(true);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
         assertThat(preference.getTitle()).isEqualTo(VPN_SET_PERSONAL);
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
+                .thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
+                .thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 

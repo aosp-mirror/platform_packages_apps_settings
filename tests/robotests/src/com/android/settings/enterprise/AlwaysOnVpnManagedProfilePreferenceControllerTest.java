@@ -52,27 +52,18 @@ public final class AlwaysOnVpnManagedProfilePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AlwaysOnVpnManagedProfilePreferenceController(mContext);
-    }
-
-    @Test
-    public void testUpdateState() {
-        final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInManagedProfile())
-                .thenReturn(false);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInManagedProfile())
-                .thenReturn(true);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
+        mController = new AlwaysOnVpnManagedProfilePreferenceController(mContext,
+                null /* lifecycle */);
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInManagedProfile())
+                .thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInManagedProfile())
+                .thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 

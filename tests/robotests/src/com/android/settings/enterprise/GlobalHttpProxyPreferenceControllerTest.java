@@ -51,27 +51,17 @@ public final class GlobalHttpProxyPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new GlobalHttpProxyPreferenceController(mContext);
-    }
-
-    @Test
-    public void testUpdateState() {
-        final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
-                .thenReturn(false);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
-
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
-                .thenReturn(true);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isTrue();
+        mController = new GlobalHttpProxyPreferenceController(mContext, null /* lifecycle */);
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
+                .thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
+                .thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 

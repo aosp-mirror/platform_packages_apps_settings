@@ -61,7 +61,6 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(false);
 
         setMaximumFailedPasswordsBeforeWipe(10);
         when(mContext.getResources().getQuantityString(
@@ -69,14 +68,14 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
                 .thenReturn("10 attempts");
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("10 attempts");
-
-        setMaximumFailedPasswordsBeforeWipe(0);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
     }
 
     @Test
     public void testIsAvailable() {
+        setMaximumFailedPasswordsBeforeWipe(0);
+        assertThat(mController.isAvailable()).isFalse();
+
+        setMaximumFailedPasswordsBeforeWipe(10);
         assertThat(mController.isAvailable()).isTrue();
     }
 

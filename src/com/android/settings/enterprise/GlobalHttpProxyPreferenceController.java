@@ -14,30 +14,25 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class GlobalHttpProxyPreferenceController extends PreferenceController {
+public class GlobalHttpProxyPreferenceController extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_GLOBAL_HTTP_PROXY = "global_http_proxy";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public GlobalHttpProxyPreferenceController(Context context) {
-        super(context);
+    public GlobalHttpProxyPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setVisible(mFeatureProvider.isGlobalHttpProxySet());
-    }
-
-    @Override
     public boolean isAvailable() {
-        return true;
+        return mFeatureProvider.isGlobalHttpProxySet();
     }
 
     @Override

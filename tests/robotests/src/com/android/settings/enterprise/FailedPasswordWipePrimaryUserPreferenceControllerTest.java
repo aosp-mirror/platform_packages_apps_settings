@@ -43,7 +43,8 @@ public final class FailedPasswordWipePrimaryUserPreferenceControllerTest extends
     @Override
     public void setUp() {
         super.setUp();
-        mController = new FailedPasswordWipePrimaryUserPreferenceController(mContext);
+        mController = new FailedPasswordWipePrimaryUserPreferenceController(mContext,
+                null /* lifecycle */);
     }
 
     @Override
