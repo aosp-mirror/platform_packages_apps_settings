@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -214,6 +215,32 @@ public class DashboardFeatureProviderImplTest {
 
         assertThat(preference.getKey()).isNotNull();
         assertThat(preference.getOrder()).isEqualTo(Preference.DEFAULT_ORDER);
+    }
+
+    @Test
+    public void bindPreference_noSummary_shouldSetSummaryToPlaceholder() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, null /*key */, Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getSummary())
+                .isEqualTo(RuntimeEnvironment.application.getString(R.string.summary_placeholder));
+    }
+
+    @Test
+    public void bindPreference_hasSummary_shouldSetSummary() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.summary = "test";
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, null /*key */, Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getSummary()).isEqualTo(tile.summary);
     }
 
     @Test

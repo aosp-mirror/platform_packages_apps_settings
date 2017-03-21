@@ -28,6 +28,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -124,7 +125,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         } else {
             pref.setKey(getDashboardKeyForTile(tile));
         }
-        pref.setSummary(tile.summary);
+        if (tile.summary != null) {
+            pref.setSummary(tile.summary);
+        } else {
+            pref.setSummary(R.string.summary_placeholder);
+        }
         if (tile.icon != null) {
             pref.setIcon(tile.icon.loadDrawable(activity));
         }
