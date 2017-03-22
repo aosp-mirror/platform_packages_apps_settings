@@ -15,6 +15,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.ColorInt;
@@ -46,6 +47,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";
     private static final String KEY_BATTERY_USAGE_LIST = "battery_usage_list";
+    private static final int STATUS_TYPE = BatteryStats.STATS_SINCE_CHARGED;
 
     @VisibleForTesting
     final int[] mUsageTypes = {
@@ -165,9 +167,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         // TODO(b/35396770): add logic to extract the summary
         final List<PowerUsageData> batteryDataList = new ArrayList<>(batteryDataMap.values());
+        final int dischargeAmount = statusHelper.getStats().getDischargeAmount(STATUS_TYPE);
         final double totalPower = statusHelper.getTotalPower();
         for (final PowerUsageData usageData : batteryDataList) {
-            usageData.percentage = (usageData.totalPowerMah / totalPower) * 100;
+            usageData.percentage = (usageData.totalPowerMah / totalPower) * dischargeAmount;
         }
 
         Collections.sort(batteryDataList);
