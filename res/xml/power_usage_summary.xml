@@ -30,9 +30,9 @@
         android:title="@string/battery_power_management">
 
         <com.android.settings.widget.MasterSwitchPreference
+            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"
             android:key="battery_saver"
-            android:title="@string/battery_saver"
-            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"/>
+            android:title="@string/battery_saver"/>
 
         <SwitchPreference
             android:key="battery_percentage"
