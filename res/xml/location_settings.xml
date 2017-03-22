@@ -44,6 +44,11 @@
             </intent>
         </Preference>
 
+        <Preference
+            android:key="location_scanning"
+            android:title="@string/location_scanning_screen_title"
+            android:fragment="com.android.settings.location.ScanningSettings"/>
+
         <PreferenceCategory
             android:key="recent_location_requests"
             android:title="@string/location_category_recent_location_requests" />
