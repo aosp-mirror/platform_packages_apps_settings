@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -69,6 +70,7 @@ public class LanguageAndInputSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mock(InputManager.class));
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
                 .thenReturn(mock(TextServicesManager.class));

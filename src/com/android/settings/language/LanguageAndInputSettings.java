@@ -31,6 +31,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
@@ -103,6 +104,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new DoubleTapScreenPreferenceController(
                 context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
+        controllers.add(new DefaultAutofillPreferenceController(context));
         return controllers;
     }
 

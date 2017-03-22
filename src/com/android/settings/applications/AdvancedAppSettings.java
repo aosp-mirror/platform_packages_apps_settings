@@ -20,7 +20,6 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
@@ -61,7 +60,6 @@ public class AdvancedAppSettings extends DashboardFragment {
         controllers.add(new DefaultSmsPreferenceController(context));
         controllers.add(new DefaultEmergencyPreferenceController(context));
         controllers.add(new DefaultHomePreferenceController(context));
-        controllers.add(new DefaultAutofillPreferenceController(context));
         return controllers;
     }
 
