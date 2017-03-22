@@ -157,7 +157,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.search_panel_2, container, false);
+        final View view = inflater.inflate(R.layout.search_panel, container, false);
         mResultsRecyclerView = view.findViewById(R.id.list_results);
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
