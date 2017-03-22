@@ -15,7 +15,6 @@
  */
 package com.android.settings.nfc;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -33,7 +32,6 @@ import android.widget.RadioButton;
 
 import com.android.settings.CustomDialogPreference;
 import com.android.settings.R;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 
 import java.util.List;
@@ -59,7 +57,7 @@ public class NfcPaymentPreference extends CustomDialogPreference implements
         mAdapter = new NfcPaymentAdapter();
         setDialogTitle(context.getString(R.string.nfc_payment_pay_with));
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        setWidgetLayoutResource(R.layout.preference_widget_settings);
+        setWidgetLayoutResource(R.layout.preference_widget_gear);
 
         refresh();
     }

@@ -33,12 +33,21 @@ public class GearPreference extends RestrictedPreference implements View.OnClick
 
     public GearPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setWidgetLayoutResource(R.layout.preference_widget_settings);
     }
 
     public void setOnGearClickListener(OnGearClickListener l) {
         mOnGearClickListener = l;
         notifyChanged();
+    }
+
+    @Override
+    protected int getSecondTargetResId() {
+        return R.layout.preference_widget_gear;
+    }
+
+    @Override
+    protected boolean shouldHideSecondTarget() {
+        return mOnGearClickListener == null;
     }
 
     @Override
