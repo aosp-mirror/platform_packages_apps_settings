@@ -63,7 +63,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     @Override
     public void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion) {
-        if (parser == null || suggestion == null) {
+        if (parser == null || suggestion == null || context == null) {
             return;
         }
         mMetricsFeatureProvider.action(

@@ -120,6 +120,14 @@ public class SuggestionFeatureProviderImplTest {
         verify(mContext, never()).getPackageManager();
     }
 
+
+    @Test
+    public void dismissSuggestion_noContext_shouldDoNothing() {
+        mProvider.dismissSuggestion(null, mSuggestionParser, mSuggestion);
+
+        verifyZeroInteractions(mFactory.metricsFeatureProvider);
+    }
+
     @Test
     public void dismissSuggestion_hasNoMoreDismissCount_shouldDisableComponent() {
         when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
