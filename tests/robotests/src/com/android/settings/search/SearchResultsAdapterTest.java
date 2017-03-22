@@ -63,6 +63,8 @@ public class SearchResultsAdapterTest {
     private Context mContext;
     private String mLoaderClassName;
 
+    private String[] TITLES = {"alpha", "bravo", "charlie", "appAlpha", "appBravo", "appCharlie"};
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -72,13 +74,13 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testNoResultsAdded_EmptyListReturned() {
+    public void testNoResultsAdded_emptyListReturned() {
         List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).isEmpty();
     }
 
     @Test
-    public void testSingleSourceMerge_ExactCopyReturned() {
+    public void testSingleSourceMerge_exactCopyReturned() {
         ArrayList<SearchResult> intentResults = getIntentSampleResults();
         mAdapter.addSearchResults(intentResults, mLoaderClassName);
         mAdapter.displaySearchResults();
@@ -88,7 +90,7 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testCreateViewHolder_ReturnsIntentResult() {
+    public void testCreateViewHolder_returnsIntentResult() {
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INTENT);
@@ -96,7 +98,7 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testCreateViewHolder_ReturnsInlineSwitchResult() {
+    public void testCreateViewHolder_returnsInlineSwitchResult() {
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INLINE_SWITCH);
@@ -104,21 +106,54 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testEndToEndSearch_ProperResultsMerged() {
-        mAdapter.addSearchResults(getDummyAppResults(),
+    public void testEndToEndSearch_properResultsMerged_correctOrder() {
+        mAdapter.addSearchResults(getDummyAppResults(), InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(getDummyDbResults(), DatabaseResultLoader.class.getName());
+        mAdapter.displaySearchResults();
+
+        List<SearchResult> results = mAdapter.getSearchResults();
+        List<SearchResult> sortedDummyResults  = getSortedDummyResults();
+
+        assertThat(results).containsExactlyElementsIn(sortedDummyResults).inOrder();
+    }
+
+    @Test
+    public void testEndToEndSearch_addResults_resultsAddedInOrder() {
+        List<AppSearchResult> appResults = getDummyAppResults();
+        List<SearchResult> dbResults = getDummyDbResults();
+        // Add two individual items
+        mAdapter.addSearchResults(appResults.subList(0,1),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(getDummyDbResults(),
-                DatabaseResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults.subList(0,1), DatabaseResultLoader.class.getName());
+        mAdapter.displaySearchResults();
+        // Add super-set of items
+        mAdapter.addSearchResults(appResults, InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults, DatabaseResultLoader.class.getName());
+        mAdapter.displaySearchResults();
+
+        List<SearchResult> results = mAdapter.getSearchResults();
+        List<SearchResult> sortedDummyResults  = getSortedDummyResults();
+        assertThat(results).containsExactlyElementsIn(sortedDummyResults).inOrder();
+    }
+
+    @Test
+    public void testEndToEndSearch_removeResults_resultsAdded() {
+        List<AppSearchResult> appResults = getDummyAppResults();
+        List<SearchResult> dbResults = getDummyDbResults();
+        // Add list of items
+        mAdapter.addSearchResults(appResults, InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults, DatabaseResultLoader.class.getName());
+        mAdapter.displaySearchResults();
+        // Add subset of items
+        mAdapter.addSearchResults(appResults.subList(0,1),
+                InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults.subList(0,1), DatabaseResultLoader.class.getName());
         int count = mAdapter.displaySearchResults();
 
         List<SearchResult> results = mAdapter.getSearchResults();
-        assertThat(results.get(0).title).isEqualTo("alpha");
-        assertThat(results.get(1).title).isEqualTo("appAlpha");
-        assertThat(results.get(2).title).isEqualTo("appBravo");
-        assertThat(results.get(3).title).isEqualTo("bravo");
-        assertThat(results.get(4).title).isEqualTo("appCharlie");
-        assertThat(results.get(5).title).isEqualTo("Charlie");
-        assertThat(count).isEqualTo(6);
+        assertThat(results.get(0).title).isEqualTo(TITLES[0]);
+        assertThat(results.get(1).title).isEqualTo(TITLES[3]);
+        assertThat(count).isEqualTo(2);
     }
 
     private List<SearchResult> getDummyDbResults() {
@@ -127,15 +162,15 @@ public class SearchResultsAdapterTest {
         SearchResult.Builder builder = new SearchResult.Builder();
         builder.addPayload(payload);
 
-        builder.addTitle("alpha")
+        builder.addTitle(TITLES[0])
                 .addRank(1);
         results.add(builder.build());
 
-        builder.addTitle("bravo")
+        builder.addTitle(TITLES[1])
                 .addRank(3);
         results.add(builder.build());
 
-        builder.addTitle("Charlie")
+        builder.addTitle(TITLES[2])
                 .addRank(6);
         results.add(builder.build());
 
@@ -148,19 +183,33 @@ public class SearchResultsAdapterTest {
         AppSearchResult.Builder builder = new AppSearchResult.Builder();
         builder.addPayload(payload);
 
-        builder.addTitle("appAlpha")
+        builder.addTitle(TITLES[3])
                 .addRank(1);
         results.add(builder.build());
 
-        builder.addTitle("appBravo")
+        builder.addTitle(TITLES[4])
                 .addRank(2);
         results.add(builder.build());
 
-        builder.addTitle("appCharlie")
+        builder.addTitle(TITLES[5])
                 .addRank(4);
         results.add(builder.build());
 
         return results;
+    }
+
+    private List<SearchResult> getSortedDummyResults() {
+        List<AppSearchResult> appResults = getDummyAppResults();
+        List<SearchResult> dbResults = getDummyDbResults();
+        List<SearchResult> sortedResults = new ArrayList<>(appResults.size() + dbResults.size());
+        sortedResults.add(dbResults.get(0)); // alpha
+        sortedResults.add(appResults.get(0)); // appAlpha
+        sortedResults.add(appResults.get(1)); // appBravo
+        sortedResults.add(dbResults.get(1)); // bravo
+        sortedResults.add(appResults.get(2)); // appCharlie
+        sortedResults.add(dbResults.get(2)); // Charlie
+
+        return sortedResults;
     }
 
     private ArrayList<SearchResult> getIntentSampleResults() {

@@ -93,7 +93,7 @@ public class SearchResult implements Comparable<SearchResult> {
         icon = builder.mIcon;
         payload = builder.mResultPayload;
         viewType = payload.getType();
-        stableId = Objects.hash(title, summary, breadcrumbs, rank, icon, payload, viewType);
+        stableId = Objects.hash(title, summary, breadcrumbs, rank, viewType);
     }
 
     @Override
@@ -102,6 +102,22 @@ public class SearchResult implements Comparable<SearchResult> {
             return -1;
         }
         return this.rank - searchResult.rank;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof SearchResult)) {
+            return false;
+        }
+        return this.stableId == ((SearchResult) obj).stableId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) stableId;
     }
 
     public static class Builder {
@@ -127,19 +143,19 @@ public class SearchResult implements Comparable<SearchResult> {
             return this;
         }
 
-        public Builder  addRank(int rank) {
+        public Builder addRank(int rank) {
             if (rank >= 0 && rank <= 9) {
                 mRank = rank;
             }
             return this;
         }
 
-        public Builder  addIcon(Drawable icon) {
+        public Builder addIcon(Drawable icon) {
             mIcon = icon;
             return this;
         }
 
-        public Builder  addPayload(ResultPayload payload) {
+        public Builder addPayload(ResultPayload payload) {
             mResultPayload = payload;
             return this;
         }
