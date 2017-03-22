@@ -83,6 +83,7 @@ public class AppInfoWithHeaderTest {
 
         PreferenceManager mManager;
         PreferenceScreen mScreen;
+        Context mShadowContext;
 
         public TestFragment() {
             mPm = mock(PackageManager.class);
@@ -90,10 +91,10 @@ public class AppInfoWithHeaderTest {
             mScreen = mock(PreferenceScreen.class);
             mPackageInfo = new PackageInfo();
             mPackageInfo.applicationInfo = new ApplicationInfo();
+            mShadowContext = ShadowApplication.getInstance().getApplicationContext();
             ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                                              (InstantAppDataProvider) (info -> false));
-            when(mManager.getContext())
-                    .thenReturn(ShadowApplication.getInstance().getApplicationContext());
+            when(mManager.getContext()).thenReturn(mShadowContext);
         }
 
         @Override
@@ -119,6 +120,11 @@ public class AppInfoWithHeaderTest {
         @Override
         public PreferenceManager getPreferenceManager() {
             return mManager;
+        }
+
+        @Override
+        public Context getContext() {
+            return mShadowContext;
         }
     }
 

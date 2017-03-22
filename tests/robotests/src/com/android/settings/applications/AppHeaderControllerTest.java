@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 
-import android.annotation.IdRes;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -25,12 +24,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -44,8 +41,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -54,8 +51,6 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.EnumSet;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -79,7 +74,8 @@ public class AppHeaderControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mShadowContext = ShadowApplication.getInstance().getApplicationContext();
+        mShadowContext = RuntimeEnvironment.application;
+        when(mFragment.getContext()).thenReturn(mShadowContext);
         mLayoutInflater = LayoutInflater.from(mShadowContext);
         mInfo = new PackageInfo();
         mInfo.versionName = "1234";
@@ -291,5 +287,13 @@ public class AppHeaderControllerTest {
         assertThat(label.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(label.getText()).isEqualTo(
                 appHeader.getResources().getString(R.string.install_type_instant));
+    }
+
+    @Test
+    public void initAppHeaderController_appHeaderNull_useFragmentContext() {
+        mController = new AppHeaderController(mContext, mFragment, null);
+
+        // Fragment.getContext() is invoked to inflate the view
+        verify(mFragment).getContext();
     }
 }
