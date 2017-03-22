@@ -20,6 +20,7 @@ import static com.android.settings.TestUtils.KILOBYTE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -45,6 +46,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.StorageStatsSource;
@@ -184,6 +186,15 @@ public class StorageItemPreferenceControllerTest {
                 ManageApplications.class.getName());
         assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
                 .isEqualTo(R.string.game_storage_settings);
+    }
+
+    @Test
+    public void testClickSystem() {
+        mPreference.setKey("pref_system");
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+
+        verify(mFragment.getFragmentManager().beginTransaction()).add(
+                any(PrivateVolumeSettings.SystemInfoFragment.class), anyString());
     }
 
     @Test
