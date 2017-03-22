@@ -17,8 +17,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -70,11 +68,10 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
-                        invocation.getArguments()[2]).onNumberOfAppsResult(number);
+                        invocation.getArguments()[1]).onNumberOfAppsResult(number);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfInstalledApps(eq(PackageManager.INSTALL_REASON_POLICY),
-                            eq(async), anyObject());
+                    .calculateNumberOfPolicyInstalledApps(eq(async), anyObject());
     }
 
     @Test

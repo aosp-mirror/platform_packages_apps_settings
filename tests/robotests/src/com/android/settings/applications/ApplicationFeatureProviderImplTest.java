@@ -88,7 +88,7 @@ public final class ApplicationFeatureProviderImplTest {
                 mPackageManagerService, mDevicePolicyManager);
     }
 
-    private void verifyCalculateNumberOfInstalledApps(boolean async) {
+    private void verifyCalculateNumberOfPolicyInstalledApps(boolean async) {
         setUpUsersAndInstalledApps();
 
         when(mPackageManager.getInstallReason(APP_1, new UserHandle(MAIN_USER_ID)))
@@ -96,18 +96,8 @@ public final class ApplicationFeatureProviderImplTest {
         when(mPackageManager.getInstallReason(APP_2, new UserHandle(MANAGED_PROFILE_ID)))
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
-        // Count all installed apps.
         mAppCount = -1;
-        mProvider.calculateNumberOfInstalledApps(ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
-                async, (num) -> mAppCount = num);
-        if (async) {
-            ShadowApplication.runBackgroundTasks();
-        }
-        assertThat(mAppCount).isEqualTo(2);
-
-        // Count apps with specific install reason only.
-        mAppCount = -1;
-        mProvider.calculateNumberOfInstalledApps(PackageManager.INSTALL_REASON_POLICY, async,
+        mProvider.calculateNumberOfPolicyInstalledApps(async,
                 (num) -> mAppCount = num);
         if (async) {
             ShadowApplication.runBackgroundTasks();
@@ -117,12 +107,12 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Test
     public void testCalculateNumberOfInstalledAppsSync() {
-        verifyCalculateNumberOfInstalledApps(false /* async */);
+        verifyCalculateNumberOfPolicyInstalledApps(false /* async */);
     }
 
     @Test
     public void testCalculateNumberOfInstalledAppsAsync() {
-        verifyCalculateNumberOfInstalledApps(true /* async */);
+        verifyCalculateNumberOfPolicyInstalledApps(true /* async */);
     }
 
     private void verifyCalculateNumberOfAppsWithAdminGrantedPermissions(boolean async)

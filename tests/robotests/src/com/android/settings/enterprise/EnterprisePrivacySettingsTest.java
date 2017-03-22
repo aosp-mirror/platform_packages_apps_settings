@@ -117,31 +117,34 @@ public final class EnterprisePrivacySettingsTest {
 
     private void verifyPreferenceControllers(List<PreferenceController> controllers) {
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(16);
-        assertThat(controllers.get(0)).isInstanceOf(InstalledPackagesPreferenceController.class);
-        assertThat(controllers.get(1)).isInstanceOf(NetworkLogsPreferenceController.class);
-        assertThat(controllers.get(2)).isInstanceOf(BugReportsPreferenceController.class);
-        assertThat(controllers.get(3)).isInstanceOf(SecurityLogsPreferenceController.class);
-        assertThat(controllers.get(4)).isInstanceOf(
+        assertThat(controllers.size()).isEqualTo(15);
+        int position = 0;
+        assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                SecurityLogsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
                 EnterpriseInstalledPackagesPreferenceController.class);
-        assertThat(controllers.get(5)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 AdminGrantedLocationPermissionsPreferenceController.class);
-        assertThat(controllers.get(6)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 AdminGrantedMicrophonePermissionPreferenceController.class);
-        assertThat(controllers.get(7)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 AdminGrantedCameraPermissionPreferenceController.class);
-        assertThat(controllers.get(8)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 EnterpriseSetDefaultAppsPreferenceController.class);
-        assertThat(controllers.get(9)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 AlwaysOnVpnPrimaryUserPreferenceController.class);
-        assertThat(controllers.get(10)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 AlwaysOnVpnManagedProfilePreferenceController.class);
-        assertThat(controllers.get(11)).isInstanceOf(GlobalHttpProxyPreferenceController.class);
-        assertThat(controllers.get(12)).isInstanceOf(CaCertsPreferenceController.class);
-        assertThat(controllers.get(13)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
+                GlobalHttpProxyPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                CaCertsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
                 FailedPasswordWipePrimaryUserPreferenceController.class);
-        assertThat(controllers.get(14)).isInstanceOf(
+        assertThat(controllers.get(position++)).isInstanceOf(
                 FailedPasswordWipeManagedProfilePreferenceController.class);
-        assertThat(controllers.get(15)).isInstanceOf(ImePreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(ImePreferenceController.class);
     }
 }
