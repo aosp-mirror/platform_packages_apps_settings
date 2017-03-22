@@ -40,6 +40,7 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.applications.AppHeaderController;
@@ -130,6 +131,14 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             intentPref.setIntent(mAppRow.settingsIntent);
             intentPref.setTitle(mContext.getString(R.string.app_settings_link));
             getPreferenceScreen().addPreference(intentPref);
+        }
+
+        if (!TextUtils.isEmpty(mChannel.getDescription())) {
+            DimmableIconPreference descPref = new DimmableIconPreference(getPrefContext());
+            descPref.setSelectable(false);
+            descPref.setSummary(mChannel.getDescription());
+            descPref.setIcon(R.drawable.ic_info);
+            getPreferenceScreen().addPreference(descPref);
         }
     }
 

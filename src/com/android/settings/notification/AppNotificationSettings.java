@@ -203,7 +203,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
             if (deletedChannelCount > 0) {
                 DimmableIconPreference deletedPref = new DimmableIconPreference(getPrefContext());
-                deletedPref.setEnabled(false);
+                deletedPref.setSelectable(false);
                 deletedPref.setTitle(getResources().getQuantityString(
                         R.plurals.deleted_channels, deletedChannelCount, deletedChannelCount));
                 deletedPref.setIcon(R.drawable.ic_info);
