@@ -57,6 +57,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -75,6 +76,8 @@ public class SearchResultsAdapterTest {
     private Context mContext;
     private String mLoaderClassName;
 
+    private String[] TITLES = {"alpha", "bravo", "charlie", "appAlpha", "appBravo", "appCharlie"};
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -86,13 +89,13 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testNoResultsAdded_EmptyListReturned() {
+    public void testNoResultsAdded_emptyListReturned() {
         List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).isEmpty();
     }
 
     @Test
-    public void testSingleSourceMerge_ExactCopyReturned() {
+    public void testSingleSourceMerge_exactCopyReturned() {
         ArrayList<SearchResult> intentResults = getIntentSampleResults();
         mAdapter.addSearchResults(intentResults, mLoaderClassName);
         mAdapter.displaySearchResults("");
@@ -102,7 +105,7 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testCreateViewHolder_ReturnsIntentResult() {
+    public void testCreateViewHolder_returnsIntentResult() {
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INTENT);
@@ -110,7 +113,7 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testCreateViewHolder_ReturnsInlineSwitchResult() {
+    public void testCreateViewHolder_returnsInlineSwitchResult() {
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INLINE_SWITCH);
@@ -118,20 +121,42 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testEndToEndSearch_ProperResultsMerged() {
-        mAdapter.addSearchResults(getDummyAppResults(),
-                InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(getDummyDbResults(),
-                DatabaseResultLoader.class.getName());
+    public void testEndToEndSearch_properResultsMerged_correctOrder() {
+        mAdapter.addSearchResults(getDummyAppResults(), InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(getDummyDbResults(), DatabaseResultLoader.class.getName());
         int count = mAdapter.displaySearchResults("");
 
         List<SearchResult> results = mAdapter.getSearchResults();
-        assertThat(results.get(0).title).isEqualTo("alpha");
-        assertThat(results.get(1).title).isEqualTo("appAlpha");
-        assertThat(results.get(2).title).isEqualTo("appBravo");
-        assertThat(results.get(3).title).isEqualTo("bravo");
-        assertThat(results.get(4).title).isEqualTo("appCharlie");
-        assertThat(results.get(5).title).isEqualTo("Charlie");
+        assertThat(results.get(0).title).isEqualTo(TITLES[0]); // alpha
+        assertThat(results.get(1).title).isEqualTo(TITLES[3]); // appAlpha
+        assertThat(results.get(2).title).isEqualTo(TITLES[4]); // appBravo
+        assertThat(results.get(3).title).isEqualTo(TITLES[1]); // bravo
+        assertThat(results.get(4).title).isEqualTo(TITLES[5]); // appCharlie
+        assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
+        assertThat(count).isEqualTo(6);
+    }
+
+    @Test
+    public void testEndToEndSearch_addResults_resultsAddedInOrder() {
+        List<AppSearchResult> appResults = getDummyAppResults();
+        List<SearchResult> dbResults = getDummyDbResults();
+        // Add two individual items
+        mAdapter.addSearchResults(appResults.subList(0,1),
+                InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults.subList(0,1), DatabaseResultLoader.class.getName());
+        mAdapter.displaySearchResults("");
+        // Add super-set of items
+        mAdapter.addSearchResults(appResults, InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults, DatabaseResultLoader.class.getName());
+        int count = mAdapter.displaySearchResults("");
+
+        List<SearchResult> results = mAdapter.getSearchResults();
+        assertThat(results.get(0).title).isEqualTo(TITLES[0]); // alpha
+        assertThat(results.get(1).title).isEqualTo(TITLES[3]); // appAlpha
+        assertThat(results.get(2).title).isEqualTo(TITLES[4]); // appBravo
+        assertThat(results.get(3).title).isEqualTo(TITLES[1]); // bravo
+        assertThat(results.get(4).title).isEqualTo(TITLES[5]); // appCharlie
+        assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         assertThat(count).isEqualTo(6);
     }
 
@@ -146,9 +171,29 @@ public class SearchResultsAdapterTest {
     @Test
     public void testDisplayResults_ShouldRunSmartRankingIfEnabled() {
         when(mSearchFeatureProvider.isSmartSearchRankingEnabled(any()))
-            .thenReturn(true);
+                .thenReturn(true);
         mAdapter.displaySearchResults("");
         verify(mSearchFeatureProvider, times(1)).rankSearchResults(anyString(), anyList());
+    }
+
+    @Test
+    public void testEndToEndSearch_removeResults_resultsAdded() {
+        List<AppSearchResult> appResults = getDummyAppResults();
+        List<SearchResult> dbResults = getDummyDbResults();
+        // Add list of items
+        mAdapter.addSearchResults(appResults, InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults, DatabaseResultLoader.class.getName());
+        mAdapter.displaySearchResults("");
+        // Add subset of items
+        mAdapter.addSearchResults(appResults.subList(0,1),
+                InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(dbResults.subList(0,1), DatabaseResultLoader.class.getName());
+        int count = mAdapter.displaySearchResults("");
+
+        List<SearchResult> results = mAdapter.getSearchResults();
+        assertThat(results.get(0).title).isEqualTo(TITLES[0]);
+        assertThat(results.get(1).title).isEqualTo(TITLES[3]);
+        assertThat(count).isEqualTo(2);
     }
 
     private List<SearchResult> getDummyDbResults() {
@@ -157,15 +202,15 @@ public class SearchResultsAdapterTest {
         SearchResult.Builder builder = new SearchResult.Builder();
         builder.addPayload(payload);
 
-        builder.addTitle("alpha")
+        builder.addTitle(TITLES[0])
                 .addRank(1);
         results.add(builder.build());
 
-        builder.addTitle("bravo")
+        builder.addTitle(TITLES[1])
                 .addRank(3);
         results.add(builder.build());
 
-        builder.addTitle("Charlie")
+        builder.addTitle(TITLES[2])
                 .addRank(6);
         results.add(builder.build());
 
@@ -178,15 +223,15 @@ public class SearchResultsAdapterTest {
         AppSearchResult.Builder builder = new AppSearchResult.Builder();
         builder.addPayload(payload);
 
-        builder.addTitle("appAlpha")
+        builder.addTitle(TITLES[3])
                 .addRank(1);
         results.add(builder.build());
 
-        builder.addTitle("appBravo")
+        builder.addTitle(TITLES[4])
                 .addRank(2);
         results.add(builder.build());
 
-        builder.addTitle("appCharlie")
+        builder.addTitle(TITLES[5])
                 .addRank(4);
         results.add(builder.build());
 

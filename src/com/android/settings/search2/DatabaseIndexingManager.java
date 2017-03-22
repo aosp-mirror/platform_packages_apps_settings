@@ -517,7 +517,7 @@ public class DatabaseIndexingManager {
             if (count > 0) {
                 while (cursor.moveToNext()) {
                     final int providerRank = cursor.getInt(COLUMN_INDEX_XML_RES_RANK);
-
+                    // TODO remove provider rank
                     final int xmlResId = cursor.getInt(COLUMN_INDEX_XML_RES_RESID);
 
                     final String className = cursor.getString(COLUMN_INDEX_XML_RES_CLASS_NAME);
@@ -562,7 +562,7 @@ public class DatabaseIndexingManager {
             if (count > 0) {
                 while (cursor.moveToNext()) {
                     final int providerRank = cursor.getInt(COLUMN_INDEX_RAW_RANK);
-
+                    // TODO Remove rank
                     final String title = cursor.getString(COLUMN_INDEX_RAW_TITLE);
                     final String summaryOn = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_ON);
                     final String summaryOff = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_OFF);
