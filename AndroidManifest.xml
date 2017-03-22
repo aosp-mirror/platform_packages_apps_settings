@@ -272,7 +272,7 @@
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.CONFIGURE_WIFI_SETTINGS" />
+                <action android:name="android.settings.WIFI_IP_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
