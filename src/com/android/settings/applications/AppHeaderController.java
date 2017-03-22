@@ -90,7 +90,7 @@ public class AppHeaderController {
         if (appHeader != null) {
             mAppHeader = appHeader;
         } else {
-            mAppHeader = LayoutInflater.from(mContext)
+            mAppHeader = LayoutInflater.from(fragment.getContext())
                     .inflate(R.layout.app_details, null /* root */);
         }
     }
