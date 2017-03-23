@@ -7561,8 +7561,11 @@
     <!-- Summary of memory screen [CHAR LIMIT=NONE] -->
     <string name="memory_summary">Avg <xliff:g id="used_memory" example="1.7GB">%1$s</xliff:g> of <xliff:g id="total_memory" example="2GB">%2$s</xliff:g> memory used</string>
 
-    <!-- Summary of user screen [CHAR LIMIT=NONE] -->
-    <string name="user_summary">Current user: <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
+    <!-- Summary of Users & accounts setting screen [CHAR LIMIT=NONE] -->
+    <string name="users_and_accounts_summary">Current user: <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
+
+    <!-- Summary of User settings [CHAR LIMIT=NONE] -->
+    <string name="users_summary">Signed in as <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
 
     <!-- Summary of payment screen [CHAR LIMIT=NONE] -->
     <string name="payment_summary"><xliff:g id="app_name" example="Payment App">%1$s</xliff:g> is default</string>
@@ -8217,11 +8220,13 @@
     <string name="configure_section_header">Configure</string>
 
     <!-- Switch label to enable auto sync account [CHAR LIMIT=60] -->
-    <string name="auto_sync_account_title">Auto sync account data</string>
+    <string name="auto_sync_account_title">Automatically sync data</string>
     <!-- Switch label to enable auto sync personal account [CHAR LIMIT=60] -->
-    <string name="auto_sync_personal_account_title">Auto sync personal account data</string>
+    <string name="auto_sync_personal_account_title">Automatically sync personal data</string>
     <!-- Switch label to enable auto sync work account [CHAR LIMIT=60] -->
-    <string name="auto_sync_work_account_title">Auto sync work account data</string>
+    <string name="auto_sync_work_account_title">Automatically sync work data</string>
+    <!-- Switch summary to enable auto sync account [CHAR LIMIT=NONE] -->
+    <string name="auto_sync_account_summary">Let apps refresh data automatically</string>
     <!-- Preference label to sync account [CHAR LIMIT=60] -->
     <string name="account_sync_title">Account sync</string>
 

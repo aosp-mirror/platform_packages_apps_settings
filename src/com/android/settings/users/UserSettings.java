@@ -61,6 +61,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -1006,6 +1007,36 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onLabelChanged(CharSequence label) {
         mMePreference.setTitle(label);
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
+                    UserHandle.myUserId());
+                mSummaryLoader.setSummary(this, mContext.getString(R.string.users_summary,
+                    info.name));
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+        new SummaryLoader.SummaryProviderFactory() {
+            @Override
+            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                    SummaryLoader summaryLoader) {
+                return new SummaryProvider(activity, summaryLoader);
+            }
+        };
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
