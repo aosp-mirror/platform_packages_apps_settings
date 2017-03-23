@@ -4348,6 +4348,8 @@
 
     <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=60] -->
     <string name="power_usage_list_summary">App usage since last full charge</string>
+    <!-- Description for the screen usage item [CHAR_LIMIT=120] -->
+    <string name="screen_usage_summary">Amount of time screen has been on since full charge</string>
     <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
     <string name="device_usage_list_summary">Device usage since last full charge</string>
     <!-- Battery usage since unplugged -->
@@ -4546,19 +4548,21 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
+    <string name="battery_used_by"><xliff:g id="percent">%1$s</xliff:g> used by <xliff:g id="app">%2$s</xliff:g></string>
     <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
     <string name="battery_overall_usage">%1$s of overall battery</string>
     <!-- Description for battery usage detail information since last full charge. [CHAR LIMIT=120] -->
-    <string name="battery_detail_since_full_charge">Usage breakdown since last full charge</string>
+    <string name="battery_detail_since_full_charge">Breakdown since full charge</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
 
-    <!-- Description for charging time left, i.e. 50min Time to full charge. [CHAR LIMIT=80]-->
-    <string name="estimated_charging_time_left">Time to full charge</string>
+    <!-- Description for charging time left, i.e. 50min until fully charged [CHAR LIMIT=80]-->
+    <string name="estimated_charging_time_left">Until fully charged</string>
 
     <!-- Description for estimated time. [CHAR LIMIT=80]-->
-    <string name="estimated_time_description">Estimation may change based on usage</string>
+    <string name="estimated_time_description">Estimate may change based on usage</string>
 
     <!-- Menu label for viewing battery usage since unplugged -->
     <string name="menu_stats_unplugged"><xliff:g id="unplugged">%1$s</xliff:g> since unplugged</string>
