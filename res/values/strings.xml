@@ -8235,16 +8235,6 @@
     <string name="enterprise_privacy_enterprise_data">Data associated with your work account, such as email and calendar</string>
     <!-- Label explaining that the admin can see apps installed on the device. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_installed_packages">List of apps on your device</string>
-    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps</item>
-    </plurals>
-    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_packages_actionable">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app. Tap to view.</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps. Tap to view.</item>
-    </plurals>
     <!-- Label explaining that the admin can see app usage statistics. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_usage_stats">Time and data spent in each app on your device</string>
     <!-- Label explaining that the admin can retrieve network logs on the device. [CHAR LIMIT=NONE] -->
@@ -8257,6 +8247,11 @@
     <string name="enterprise_privacy_none">None</string>
     <!-- Label indicating that the admin installed one or more apps on the device. -->
     <string name="enterprise_privacy_enterprise_installed_packages">Apps installed</string>
+    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. The number shown is a minimum as there may be additional apps we do not know about. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_packages_lower_bound">
+        <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> app</item>
+        <item quantity="other">Minimum <xliff:g id="count">%d</xliff:g> apps</item>
+    </plurals>
     <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_location_access">Location permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
@@ -8265,6 +8260,11 @@
     <string name="enterprise_privacy_camera_access">Camera permissions</string>
     <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_enterprise_set_default_apps">Default apps</string>
+    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps</item>
+    </plurals>
     <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_input_method">Default keyboard</string>
     <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
@@ -8279,15 +8279,10 @@
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
     <!-- Label explaining that the admin installed trusted CA certificates. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_ca_certs">Trusted credentials</string>
-    <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
+    <!-- Summary indicating the number of trusted CA certificates installed by the admin. The number shown is a minimum as there may be additional CA certificates we do not know about. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> CA certificate</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> CA certificates</item>
-    </plurals>
-    <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_ca_certs_actionable">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> CA certificate. Tap to view.</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> CA certificates. Tap to view.</item>
+        <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> CA certificate</item>
+        <item quantity="other">Minimum <xliff:g id="count">%d</xliff:g> CA certificates</item>
     </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>

@@ -87,10 +87,11 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         assertThat(preference.isVisible()).isFalse();
 
         setNumberOfEnterpriseInstalledPackages(20, true /* async */);
-        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
-                20, 20)).thenReturn("20 packages");
+        when(mContext.getResources().getQuantityString(
+                R.plurals.enterprise_privacy_number_packages_lower_bound, 20, 20))
+                .thenReturn("minimum 20 apps");
         mController.updateState(preference);
-        assertThat(preference.getSummary()).isEqualTo("20 packages");
+        assertThat(preference.getSummary()).isEqualTo("minimum 20 apps");
         assertThat(preference.isVisible()).isTrue();
     }
 

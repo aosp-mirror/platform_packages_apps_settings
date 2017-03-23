@@ -53,7 +53,8 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
                     } else {
                         preference.setVisible(true);
                         preference.setSummary(mContext.getResources().getQuantityString(
-                                R.plurals.enterprise_privacy_number_packages_actionable, num, num));
+                                R.plurals.enterprise_privacy_number_packages_lower_bound,
+                                num, num));
                     }
                 });
     }

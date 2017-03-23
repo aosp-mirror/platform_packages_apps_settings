@@ -93,10 +93,10 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
         setNumberOfPackagesWithAdminGrantedPermissions(20, true /* async */);
         when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_packages_actionable,20, 20))
-                .thenReturn("20 packages");
+                R.plurals.enterprise_privacy_number_packages_lower_bound, 20, 20))
+                .thenReturn("minimum 20 apps");
         mController.updateState(preference);
-        assertThat(preference.getSummary()).isEqualTo("20 packages");
+        assertThat(preference.getSummary()).isEqualTo("minimum 20 apps");
         assertThat(preference.isVisible()).isTrue();
     }
 
