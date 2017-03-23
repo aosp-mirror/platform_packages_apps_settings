@@ -199,7 +199,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                                     "bluetooth_disable_absolute_volume";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
                                     "persist.bluetooth.disableabsvol";
+    private static final String BLUETOOTH_AVRCP_VERSION_PROPERTY =
+                                    "persist.bluetooth.avrcpversion";
 
+    private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
     private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY = "bluetooth_select_a2dp_sample_rate";
     private static final String BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY = "bluetooth_select_a2dp_bits_per_sample";
@@ -280,6 +283,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private BluetoothA2dp mBluetoothA2dp;
     private final Object mBluetoothA2dpLock = new Object();
+    private ListPreference mBluetoothSelectAvrcpVersion;
     private ListPreference mBluetoothSelectA2dpCodec;
     private ListPreference mBluetoothSelectA2dpSampleRate;
     private ListPreference mBluetoothSelectA2dpBitsPerSample;
@@ -474,6 +478,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
+        mBluetoothSelectAvrcpVersion = addListPreference(BLUETOOTH_SELECT_AVRCP_VERSION_KEY);
         mBluetoothSelectA2dpCodec = addListPreference(BLUETOOTH_SELECT_A2DP_CODEC_KEY);
         mBluetoothSelectA2dpSampleRate = addListPreference(BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY);
         mBluetoothSelectA2dpBitsPerSample = addListPreference(BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY);
@@ -1781,6 +1786,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         String[] summaries;
         int index;
 
+        // Init the AVRCP Version - Default
+        values = getResources().getStringArray(R.array.bluetooth_avrcp_version_values);
+        summaries = getResources().getStringArray(R.array.bluetooth_avrcp_versions);
+        String value = SystemProperties.get(BLUETOOTH_AVRCP_VERSION_PROPERTY);
+        index = mBluetoothSelectAvrcpVersion.findIndexOfValue(value);
+        mBluetoothSelectAvrcpVersion.setValue(values[index]);
+        mBluetoothSelectAvrcpVersion.setSummary(summaries[index]);
+
         // Init the Codec Type - Default
         values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_values);
         summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_summaries);
@@ -1815,6 +1828,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         index = 0;
         mBluetoothSelectA2dpLdacPlaybackQuality.setValue(values[index]);
         mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(summaries[index]);
+    }
+
+    private void writeBluetoothAvrcpVersion(Object newValue) {
+        SystemProperties.set(BLUETOOTH_AVRCP_VERSION_PROPERTY, newValue.toString());
+        int index = mBluetoothSelectAvrcpVersion.findIndexOfValue(newValue.toString());
+        if (index >= 0) {
+            String[] titles = getResources().getStringArray(R.array.bluetooth_avrcp_versions);
+            mBluetoothSelectAvrcpVersion.setSummary(titles[index]);
+        }
     }
 
     private void updateBluetoothA2dpConfigurationValues() {
@@ -2544,6 +2566,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 toast.show();
             }
             return false;
+        } else if (preference == mBluetoothSelectAvrcpVersion) {
+           writeBluetoothAvrcpVersion(newValue);
+           return true;
         } else if ((preference == mBluetoothSelectA2dpCodec) ||
                    (preference == mBluetoothSelectA2dpSampleRate) ||
                    (preference == mBluetoothSelectA2dpBitsPerSample) ||
