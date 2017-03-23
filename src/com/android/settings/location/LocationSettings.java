@@ -17,9 +17,7 @@
 package com.android.settings.location;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,16 +25,13 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Switch;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
@@ -97,8 +92,6 @@ public class LocationSettings extends LocationSettingsBase
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
     /** Key for preference category "Location services" */
     private static final String KEY_LOCATION_SERVICES = "location_services";
-
-    private static final int MENU_SCANNING = Menu.FIRST;
 
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
@@ -311,8 +304,9 @@ public class LocationSettings extends LocationSettingsBase
         injector = new SettingsInjector(context);
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
-        List<Preference> locationServices = injector.getInjectedSettings(lockdownOnLocationAccess ?
-                UserHandle.myUserId() : UserHandle.USER_CURRENT);
+        final Context prefContext = categoryLocationServices.getContext();
+        final List<Preference> locationServices = injector.getInjectedSettings(prefContext,
+                lockdownOnLocationAccess ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
 
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -333,29 +327,6 @@ public class LocationSettings extends LocationSettingsBase
         } else {
             // If there's no item to display, remove the whole category.
             root.removePreference(categoryLocationServices);
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, MENU_SCANNING, 0, R.string.location_menu_scanning);
-        // The super class adds "Help & Feedback" menu item.
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        switch (item.getItemId()) {
-            case MENU_SCANNING:
-                activity.startPreferencePanel(
-                        this,
-                        ScanningSettings.class.getName(), null,
-                        R.string.location_scanning_screen_title, null, LocationSettings.this,
-                        0);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 
