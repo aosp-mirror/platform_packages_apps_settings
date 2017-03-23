@@ -31,6 +31,7 @@ import android.widget.EditText;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.security.OwnerInfoPreferenceController.OwnerInfoCallback;
 
 public class OwnerInfoSettings extends InstrumentedDialogFragment implements OnClickListener {
 
@@ -76,8 +77,8 @@ public class OwnerInfoSettings extends InstrumentedDialogFragment implements OnC
             mLockPatternUtils.setOwnerInfoEnabled(!TextUtils.isEmpty(info), mUserId);
             mLockPatternUtils.setOwnerInfo(info, mUserId);
 
-            if (getTargetFragment() instanceof SecuritySettings.SecuritySubSettings) {
-                ((SecuritySettings.SecuritySubSettings) getTargetFragment()).updateOwnerInfo();
+            if (getTargetFragment() instanceof OwnerInfoCallback) {
+                ((OwnerInfoCallback) getTargetFragment()).onOwnerInfoUpdated();
             }
         }
     }
