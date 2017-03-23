@@ -16,7 +16,6 @@
 
 package com.android.settings.print;
 
-import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ActivityNotFoundException;
 import android.content.AsyncTaskLoader;
@@ -37,9 +36,9 @@ import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -191,12 +190,14 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
             mPrintServicesCategory.removeAll();
             PackageManager pm = getActivity().getPackageManager();
+            final Context context = getPrefContext();
+            if (context == null) {
+                Log.w(TAG, "No preference context, skip adding print services");
+                return;
+            }
 
-            final int numServices = services.size();
-            for (int i = 0; i < numServices; i++) {
-                PrintServiceInfo service = services.get(i);
-                PreferenceScreen preference = getPreferenceManager().createPreferenceScreen(
-                        getActivity());
+            for (PrintServiceInfo service : services) {
+                Preference preference = new Preference(context);
 
                 String title = service.getResolveInfo().loadLabel(pm).toString();
                 preference.setTitle(title);
@@ -310,13 +311,14 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                 }
 
                 mActivePrintJobsCategory.removeAll();
+                final Context context = getPrefContext();
+                if (context == null) {
+                    Log.w(TAG, "No preference context, skip adding print jobs");
+                    return;
+                }
 
-                final int printJobCount = printJobs.size();
-                for (int i = 0; i < printJobCount; i++) {
-                    PrintJobInfo printJob = printJobs.get(i);
-
-                    PreferenceScreen preference = getPreferenceManager()
-                            .createPreferenceScreen(getActivity());
+                for (PrintJobInfo printJob : printJobs) {
+                    Preference preference = new Preference(context);
 
                     preference.setPersistent(false);
                     preference.setFragment(PrintJobSettingsFragment.class.getName());
@@ -503,51 +505,56 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     /**
      * Provider for the print settings summary
      */
-    private static class PrintSummaryProvider
-            implements SummaryLoader.SummaryProvider, PrintJobStateChangeListener {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static class PrintSummaryProvider implements SummaryLoader.SummaryProvider {
         private final Context mContext;
-        private final PrintManager mPrintManager;
+        private final PrintManagerWrapper mPrintManager;
         private final SummaryLoader mSummaryLoader;
 
         /**
          * Create a new {@link PrintSummaryProvider}.
          *
-         * @param context The context this provider is for
+         * @param context       The context this provider is for
          * @param summaryLoader The summary load using this provider
          */
-        public PrintSummaryProvider(Context context, SummaryLoader summaryLoader) {
+        PrintSummaryProvider(Context context, SummaryLoader summaryLoader,
+                PrintManagerWrapper printManager) {
             mContext = context;
             mSummaryLoader = summaryLoader;
-            mPrintManager = ((PrintManager) context.getSystemService(Context.PRINT_SERVICE))
-                    .getGlobalPrintManagerForUser(context.getUserId());
+            mPrintManager = printManager;
         }
 
         @Override
         public void setListening(boolean isListening) {
             if (mPrintManager != null) {
                 if (isListening) {
-                    mPrintManager.addPrintJobStateChangeListener(this);
-                    onPrintJobStateChanged(null);
-                } else {
-                    mPrintManager.removePrintJobStateChangeListener(this);
+                    List<PrintServiceInfo> services =
+                            mPrintManager.getPrintServices(PrintManager.ALL_SERVICES);
+                    if (services == null || services.isEmpty()) {
+                        mSummaryLoader.setSummary(this,
+                                mContext.getString(R.string.print_settings_summary_no_service));
+                    } else {
+                        final int count = services.size();
+                        mSummaryLoader.setSummary(this,
+                                mContext.getResources().getQuantityString(
+                                        R.plurals.print_settings_summary, count, count));
+                    }
                 }
             }
         }
 
-        @Override
-        public void onPrintJobStateChanged(PrintJobId printJobId) {
-            List<PrintJob> printJobs = mPrintManager.getPrintJobs();
+        static class PrintManagerWrapper {
 
-            int numActivePrintJobs = 0;
-            final int numPrintJobs = printJobs.size();
-            for (int i = 0; i < numPrintJobs; i++) {
-                if (shouldShowToUser(printJobs.get(i).getInfo())) {
-                    numActivePrintJobs++;
-                }
+            private final PrintManager mPrintManager;
+
+            PrintManagerWrapper(Context context) {
+                mPrintManager = ((PrintManager) context.getSystemService(Context.PRINT_SERVICE))
+                        .getGlobalPrintManagerForUser(context.getUserId());
             }
 
-            mSummaryLoader.setSummary(this, mContext.getResources().getQuantityString(
-                    R.plurals.print_settings_title, numActivePrintJobs, numActivePrintJobs));
+            public List<PrintServiceInfo> getPrintServices(int selectionFlags) {
+                return mPrintManager.getPrintServices(selectionFlags);
+            }
         }
     }
 
@@ -555,14 +562,9 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
      * A factory for {@link PrintSummaryProvider providers} the settings app can use to read the
      * print summary.
      */
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new PrintSummaryProvider(activity, summaryLoader);
-        }
-    };
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+            (activity, summaryLoader) -> new PrintSummaryProvider(activity, summaryLoader,
+                    new PrintSummaryProvider.PrintManagerWrapper(activity));
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
