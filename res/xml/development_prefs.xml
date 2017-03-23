@@ -202,6 +202,13 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary"/>
 
         <ListPreference
+            android:key="bluetooth_select_avrcp_version"
+            android:title="@string/bluetooth_select_avrcp_version_string"
+            android:dialogTitle="@string/bluetooth_select_avrcp_version_dialog_title"
+            android:entries="@array/bluetooth_avrcp_versions"
+            android:entryValues="@array/bluetooth_avrcp_version_values" />
+
+        <ListPreference
             android:key="bluetooth_select_a2dp_codec"
             android:title="@string/bluetooth_select_a2dp_codec_type"
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_type_dialog_title"
