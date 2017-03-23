@@ -91,8 +91,8 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getText(R.string.high_power_prompt_title);
         p.mMessage = getString(R.string.high_power_prompt_body, ai.loadLabel(getPackageManager()));
-        p.mPositiveButtonText = getText(R.string.yes);
-        p.mNegativeButtonText = getText(R.string.no);
+        p.mPositiveButtonText = getText(R.string.allow);
+        p.mNegativeButtonText = getText(R.string.deny);
         p.mPositiveButtonListener = this;
         p.mNegativeButtonListener = this;
         setupAlert();
