@@ -73,7 +73,6 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
-import com.android.settings.tts.TtsSlidersFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
@@ -171,7 +170,6 @@ public final class SearchIndexableResources {
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
         addIndex(
                 TtsEnginePreferenceFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
-        addIndex(TtsSlidersFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
     }
 
     private SearchIndexableResources() {
