@@ -56,10 +56,10 @@
             android:title="@string/display_auto_rotate_title" />
 
         <SwitchPreference
-                android:key="auto_brightness"
-                android:title="@string/auto_brightness_title"
-                settings:keywords="@string/keywords_display_auto_brightness"
-                android:summary="@string/auto_brightness_summary" />
+            android:key="auto_brightness"
+            android:title="@string/auto_brightness_title"
+            settings:keywords="@string/keywords_display_auto_brightness"
+            android:summary="@string/auto_brightness_summary" />
 
         <Preference
             android:key="font_size"
@@ -87,32 +87,42 @@
             android:entryValues="@array/night_mode_values" /> -->
 
         <SwitchPreference
-                android:key="camera_gesture"
-                android:title="@string/camera_gesture_title"
-                android:summary="@string/camera_gesture_desc" />
+            android:key="camera_gesture"
+            android:title="@string/camera_gesture_title"
+            android:summary="@string/camera_gesture_desc" />
 
         <SwitchPreference
-                android:key="lift_to_wake"
-                android:title="@string/lift_to_wake_title" />
+            android:key="lift_to_wake"
+            android:title="@string/lift_to_wake_title" />
+
+        <Preference
+            android:key="gesture_double_tap_screen"
+            android:title="@string/ambient_display_title"
+            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"/>
+
+        <Preference
+            android:key="gesture_pick_up"
+            android:title="@string/ambient_display_pickup_title"
+            android:fragment="com.android.settings.gestures.PickupGestureSettings"/>
 
         <SwitchPreference
-                android:key="doze"
-                android:title="@string/doze_title"
-                android:summary="@string/doze_summary" />
+            android:key="doze"
+            android:title="@string/doze_title"
+            android:summary="@string/doze_summary" />
 
         <SwitchPreference
-                android:key="tap_to_wake"
-                android:title="@string/tap_to_wake"
-                android:summary="@string/tap_to_wake_summary" />
+            android:key="tap_to_wake"
+            android:title="@string/tap_to_wake"
+            android:summary="@string/tap_to_wake_summary" />
 
         <ListPreference
-                android:key="theme"
-                android:title="@string/device_theme"
-                android:summary="%s" />
+            android:key="theme"
+            android:title="@string/device_theme"
+            android:summary="%s" />
 
         <DropDownPreference
-                android:key="vr_display_pref"
-                android:summary="%s"
-                android:title="@string/display_vr_pref_title" />
+            android:key="vr_display_pref"
+            android:summary="%s"
+            android:title="@string/display_vr_pref_title" />
 
 </PreferenceScreen>

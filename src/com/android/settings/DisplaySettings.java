@@ -17,10 +17,13 @@
 package com.android.settings;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.AutoRotatePreferenceController;
@@ -36,6 +39,8 @@ import com.android.settings.display.ThemePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.display.VrDisplayPreferenceController;
 import com.android.settings.display.WallpaperPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -68,7 +73,7 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     @Override
@@ -76,7 +81,8 @@ public class DisplaySettings extends DashboardFragment {
         return R.string.help_uri_display;
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context) {
+    private static List<PreferenceController> buildPreferenceControllers(
+            Context context, Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new AutoBrightnessPreferenceController(context));
         controllers.add(new AutoRotatePreferenceController(context));
@@ -87,6 +93,11 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new NightDisplayPreferenceController(context));
         controllers.add(new NightModePreferenceController(context));
         controllers.add(new ScreenSaverPreferenceController(context));
+        AmbientDisplayConfiguration ambientDisplayConfig = new AmbientDisplayConfiguration(context);
+        controllers.add(new PickupGesturePreferenceController(
+                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
+        controllers.add(new DoubleTapScreenPreferenceController(
+                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new TapToWakePreferenceController(context));
         controllers.add(new TimeoutPreferenceController(context));
         controllers.add(new VrDisplayPreferenceController(context));
@@ -110,7 +121,7 @@ public class DisplaySettings extends DashboardFragment {
 
                 @Override
                 public List<PreferenceController> getPreferenceControllers(Context context) {
-                    return buildPreferenceControllers(context);
+                    return buildPreferenceControllers(context, null);
                 }
             };
 }
