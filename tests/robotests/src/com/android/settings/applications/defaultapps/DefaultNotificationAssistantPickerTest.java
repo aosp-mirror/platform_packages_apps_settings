@@ -70,9 +70,9 @@ public class DefaultNotificationAssistantPickerTest {
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefault() {
-        mPicker.setDefaultAppKey(TEST_APP_KEY);
+        mPicker.setDefaultKey(TEST_APP_KEY);
 
-        assertThat(mPicker.getDefaultAppKey()).isEqualTo(TEST_APP_KEY);
+        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
     }
 
     @Test
@@ -81,6 +81,6 @@ public class DefaultNotificationAssistantPickerTest {
                 Settings.Secure.ENABLED_NOTIFICATION_ASSISTANT,
                 TEST_APP_KEY);
 
-        assertThat(mPicker.getDefaultAppKey()).isEqualTo(TEST_APP_KEY);
+        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
     }
 }

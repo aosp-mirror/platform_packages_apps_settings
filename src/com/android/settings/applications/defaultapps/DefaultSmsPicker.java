@@ -47,7 +47,7 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
 
         for (SmsApplication.SmsApplicationData smsApplicationData : smsApplications) {
             try {
-                candidates.add(new DefaultAppInfo(
+                candidates.add(new DefaultAppInfo(mPm,
                         mPm.getApplicationInfoAsUser(smsApplicationData.mPackageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.
@@ -58,13 +58,13 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         return mDefaultKeyUpdater.getDefaultApplication(getContext());
     }
 
     @Override
-    protected boolean setDefaultAppKey(String key) {
-        if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, getDefaultAppKey())) {
+    protected boolean setDefaultKey(String key) {
+        if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, getDefaultKey())) {
             mDefaultKeyUpdater.setDefaultApplication(getContext(), key);
             return true;
         }
@@ -72,7 +72,7 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getConfirmationMessage(DefaultAppInfo info) {
+    protected String getConfirmationMessage(CandidateInfo info) {
         return Utils.isPackageDirectBootAware(getContext(), info.getKey()) ? null
                 : getContext().getString(R.string.direct_boot_unaware_dialog_message);
     }

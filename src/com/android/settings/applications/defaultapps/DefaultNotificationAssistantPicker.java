@@ -43,12 +43,12 @@ public class DefaultNotificationAssistantPicker extends DefaultAppPickerFragment
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         return Settings.Secure.getString(getContext().getContentResolver(), mConfig.setting);
     }
 
     @Override
-    protected boolean setDefaultAppKey(String value) {
+    protected boolean setDefaultKey(String value) {
         Settings.Secure.putString(getContext().getContentResolver(), mConfig.setting, value);
         return true;
     }
@@ -75,7 +75,7 @@ public class DefaultNotificationAssistantPicker extends DefaultAppPickerFragment
                 continue;
             }
 
-            candidates.add(new DefaultAppInfo(
+            candidates.add(new DefaultAppInfo(mPm,
                     mUserId, new ComponentName(info.packageName, info.name)));
         }
         return candidates;

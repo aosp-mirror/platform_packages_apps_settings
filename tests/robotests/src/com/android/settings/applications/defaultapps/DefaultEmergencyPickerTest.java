@@ -70,8 +70,8 @@ public class DefaultEmergencyPickerTest {
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefault() {
-        assertThat(mPicker.setDefaultAppKey(TEST_APP_KEY)).isTrue();
-        assertThat(mPicker.getDefaultAppKey()).isEqualTo(TEST_APP_KEY);
+        assertThat(mPicker.setDefaultKey(TEST_APP_KEY)).isTrue();
+        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
     }
 
     @Test
@@ -80,6 +80,6 @@ public class DefaultEmergencyPickerTest {
                 Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION,
                 TEST_APP_KEY);
 
-        assertThat(mPicker.getDefaultAppKey()).isEqualTo(TEST_APP_KEY);
+        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
     }
 }

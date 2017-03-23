@@ -83,6 +83,6 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
         if (cn == null) {
             return null;
         }
-        return new DefaultAppInfo(mUserId, cn);
+        return new DefaultAppInfo(mPackageManager, mUserId, cn);
     }
 }

@@ -26,9 +26,9 @@ public class WebViewAppPreferenceController extends DefaultAppPreferenceControll
 
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
 
-    private Context mContext;
-    private Preference mPreference;
+    private final Context mContext;
     private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
+    private Preference mPreference;
 
     public WebViewAppPreferenceController(Context context) {
         this(context, new WebViewUpdateServiceWrapper());
@@ -44,7 +44,8 @@ public class WebViewAppPreferenceController extends DefaultAppPreferenceControll
     @Override
     public DefaultAppInfo getDefaultAppInfo() {
         PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
-        return new DefaultAppInfo(currentPackage == null ? null : currentPackage.applicationInfo);
+        return new DefaultAppInfo(mPackageManager,
+                currentPackage == null ? null : currentPackage.applicationInfo);
     }
 
     @Override

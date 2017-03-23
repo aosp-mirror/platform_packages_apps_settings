@@ -16,6 +16,8 @@
 
 package com.android.settings.location;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -48,8 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * System location settings (Settings &gt; Location). The screen has three parts:

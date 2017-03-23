@@ -16,9 +16,14 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -35,13 +40,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -73,14 +71,14 @@ public class DefaultAutofillPickerTest {
 
     @Test
     public void setAndGetDefaultAppKey_shouldUpdateDefaultAutoFill() {
-        assertThat(mPicker.setDefaultAppKey(TEST_APP_KEY)).isTrue();
-        assertThat(mPicker.getDefaultAppKey()).isEqualTo(TEST_APP_KEY);
+        assertThat(mPicker.setDefaultKey(TEST_APP_KEY)).isTrue();
+        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
     }
 
     @Test
     public void getConfirmationMessage_shouldNotBeNull() {
         final DefaultAppInfo info = mock(DefaultAppInfo.class);
-        when(info.loadLabel(any(PackageManager.class))).thenReturn("test_app_name");
+        when(info.loadLabel()).thenReturn("test_app_name");
         assertThat(mPicker.getConfirmationMessage(info)).isNotNull();
     }
 

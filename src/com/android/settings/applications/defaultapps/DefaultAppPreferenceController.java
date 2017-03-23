@@ -51,7 +51,7 @@ public abstract class DefaultAppPreferenceController extends PreferenceControlle
         final DefaultAppInfo app = getDefaultAppInfo();
         CharSequence defaultAppLabel = null;
         if (app != null) {
-            defaultAppLabel = app.loadLabel(mPackageManager.getPackageManager());
+            defaultAppLabel = app.loadLabel();
         }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);

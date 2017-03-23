@@ -67,14 +67,14 @@ public class DefaultBrowserPickerTest {
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefaultBrowser() {
-        mPicker.setDefaultAppKey(TEST_APP_KEY);
+        mPicker.setDefaultKey(TEST_APP_KEY);
         verify(mPackageManager)
                 .setDefaultBrowserPackageNameAsUser(eq(TEST_APP_KEY), anyInt());
     }
 
     @Test
     public void getDefaultAppKey_shouldReturnDefaultBrowser() {
-        mPicker.getDefaultAppKey();
+        mPicker.getDefaultKey();
         verify(mPackageManager)
                 .getDefaultBrowserPackageNameAsUser(anyInt());
     }

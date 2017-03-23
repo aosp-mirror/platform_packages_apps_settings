@@ -60,8 +60,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
     public void updateState(Preference preference) {
         super.updateState(preference);
         final DefaultAppInfo defaultApp = getDefaultAppInfo();
-        final CharSequence defaultAppLabel = defaultApp != null
-                ? defaultApp.loadLabel(mPackageManager.getPackageManager()) : null;
+        final CharSequence defaultAppLabel = defaultApp != null ? defaultApp.loadLabel() : null;
         if (TextUtils.isEmpty(defaultAppLabel)) {
             final String onlyAppLabel = getOnlyAppLabel();
             if (!TextUtils.isEmpty(onlyAppLabel)) {
@@ -75,7 +74,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         final ComponentName currentDefaultHome = mPackageManager.getHomeActivities(homeActivities);
 
-        return new DefaultAppInfo(mUserId, currentDefaultHome);
+        return new DefaultAppInfo(mPackageManager, mUserId, currentDefaultHome);
     }
 
     private String getOnlyAppLabel() {

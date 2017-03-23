@@ -68,14 +68,15 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
             } else {
                 summary = null;
             }
-            final DefaultAppInfo candidate = new DefaultAppInfo(mUserId, activityName, summary);
+            final DefaultAppInfo candidate =
+                    new DefaultAppInfo(mPm, mUserId, activityName, summary);
             candidates.add(candidate);
         }
         return candidates;
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         final ComponentName currentDefaultHome = mPm.getHomeActivities(homeActivities);
         if (currentDefaultHome != null) {
@@ -85,7 +86,7 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected boolean setDefaultAppKey(String key) {
+    protected boolean setDefaultKey(String key) {
         if (!TextUtils.isEmpty(key)) {
             final ComponentName component = ComponentName.unflattenFromString(key);
             final List<ResolveInfo> homeActivities = new ArrayList<>();
