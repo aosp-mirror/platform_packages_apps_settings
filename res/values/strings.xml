@@ -744,10 +744,12 @@
     <string name="security_settings_title">Security &amp; screen lock</string>
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
+    <!-- Security Settings screen Encryption and crendential summary -->
+    <string name="encryption_and_credential_settings_summary">Phone encrypted</string>
     <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen preferences</string>
     <!-- Security Settings screen setting option summary for the item to take you to the lock screen preference screen -->
-    <string name="lockscreen_settings_summary">Access settings in lock screen</string>
+    <string name="lockscreen_settings_summary">Show all notification content</string>
 
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
@@ -1069,6 +1071,12 @@
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title">Screen lock</string>
 
+    <!--  Summary for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=NONE] -->
+    <string name="unlock_set_unlock_launch_picker_summary_lock_immediately"><xliff:g id="unlock_method" example="PIN">%1$s</xliff:g> / Immediately after sleep</string>
+
+    <!--  Summary for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=NONE] -->
+    <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout"><xliff:g id="unlock_method" example="PIN">%1$s</xliff:g> / <xliff:g id="timeout_string">%2$s</xliff:g> after sleep</string>
+
     <!--  Profile Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method for the managed profile when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title_profile">Work profile lock</string>
@@ -1320,8 +1328,14 @@
     <!-- Summary shown when trust agent settings is disabled because the user hasn't set up primary security -->
     <string name="disabled_because_no_backup_security">To use, first set a screen lock</string>
 
-    <!-- Summary of preference to manage device policies -->
-    <string name="manage_trust_agents_summary">View or deactivate trust agents</string>
+    <!-- Summary of preference to manage device policies when there is no trust agents-->
+    <string name="manage_trust_agents_summary">None</string>
+
+    <!-- Summary of preference to manage device policies when there is trust agent-->
+    <plurals name="manage_trust_agents_summary_on">
+        <item quantity="one">1 active trust agent</item>
+        <item quantity="other"><xliff:g id="count" example="3">%d</xliff:g> active trust agents</item>
+    </plurals>
 
     <!-- Bluetooth settings -->
     <!-- Bluetooth settings check box title on Main Settings screen -->
@@ -2318,8 +2332,12 @@
 
     <!-- SIM lock settings title  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings">SIM card lock settings</string>
-    <!-- Security & location settings screen, setting option name  [CHAR LIMIT=40] -->
-    <string name="sim_lock_settings_category">Set up SIM card lock</string>
+    <!-- Security & screen lock settings screen, SIM card lock setting option name  [CHAR LIMIT=40] -->
+    <string name="sim_lock_settings_category">SIM card lock</string>
+    <!-- Security & screen lock settings screen, SIM card lock setting summary when off [CHAR LIMIT=NONE] -->
+    <string name="sim_lock_settings_summary_off">Off</string>
+    <!-- Security & screen lock settings screen, SIM card lock setting summary when on [CHAR LIMIT=NONE] -->
+    <string name="sim_lock_settings_summary_on">Locked</string>
     <!-- Security & location settings screen, section heading for settings related to sim card locking  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings_title">SIM card lock</string>
     <!-- SIM card lock settings screen, setting check box label  [CHAR LIMIT=40] -->
