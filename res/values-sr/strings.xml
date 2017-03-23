@@ -42,8 +42,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"Додељено за VoLTE"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Видео позивање је додељено"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Позивање преко Wifi везе је додељено"</string>
-    <!-- no translation found for radio_info_radio_power (7187666084867419643) -->
-    <skip />
+    <string name="radio_info_radio_power" msgid="7187666084867419643">"Напајање за радио на мобилним уређајима"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Прикажи SIM адресар"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Прикажи бројеве за фиксно бирање"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Прикажи бројеве за сервисно бирање"</string>
@@ -278,12 +277,10 @@
     <string name="radio_controls_title" msgid="3447085191369779032">"Још"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Бежична веза и мреже"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Управљање Wi-Fi мрежом, Bluetooth-ом, режимом рада у авиону, мобилним мрежама и VPN-ом"</string>
-    <!-- no translation found for cellular_data_title (6835451574385496662) -->
-    <skip />
+    <string name="cellular_data_title" msgid="6835451574385496662">"Мобилни подаци"</string>
     <string name="calls_title" msgid="3544471959217176768">"Позиви"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS поруке"</string>
-    <!-- no translation found for cellular_data_summary (4660351864416939504) -->
-    <skip />
+    <string name="cellular_data_summary" msgid="4660351864416939504">"Омогућава потрошњу података на моб. мрежи"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Дозволи потр. подат. у ромингу"</string>
     <string name="roaming" msgid="3596055926335478572">"Пренос подат. у ромингу"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Повезивање са услугом за податке током роминга"</string>
@@ -574,10 +571,14 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Откажи"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Следеће"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Подешавање је довршено."</string>
-    <string name="device_admin_title" msgid="3562216873644263804">"Администрација уређаја"</string>
-    <!-- no translation found for manage_device_admin (537804979483211453) -->
+    <string name="manage_device_admin" msgid="537804979483211453">"Апликације за администраторе уређаја"</string>
+    <!-- no translation found for number_of_device_admins_none (7185056721919496069) -->
     <skip />
-    <!-- no translation found for number_of_device_admins (3361891840111523393) -->
+    <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> активна апликација</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> активне апликације</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> активних апликација</item>
+    </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Trust agents"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Да бисте га користили, прво подесите закључавање екрана"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Trust agents - Приказ или деактивирање"</string>
@@ -710,12 +711,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi оптимизација"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Смањи коришћење батерије када је Wi-Fi укључен"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Огран. бат. коју користи Wi-Fi"</string>
-    <!-- no translation found for wifi_switch_away_when_unvalidated (1707247692180853058) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_title (8753386877755616476) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (6375399280719867214) -->
-    <skip />
+    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"Пређи на мобилне податке ако Wi‑Fi изгуби приступ интернету."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"Аутоматски пређи на мобилне податке"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"Користите мобилне податке када Wi‑Fi нема приступ интернету. Може да вам буде наплаћена потрошња података."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Додај мрежу"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"Подешавања Wi‑Fi-ја"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi мреже"</string>
@@ -796,10 +794,9 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"Ова мрежа нема приступ интернету. Желите ли да останете повезани?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Не питај поново за ову мрежу"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi мрежа није повезана са интернетом"</string>
-    <!-- no translation found for lost_internet_access_text (8346249124967998580) -->
+    <!-- no translation found for lost_internet_access_text (9029649339816197345) -->
     <skip />
-    <!-- no translation found for lost_internet_access_switch (2262459569601190039) -->
-    <skip />
+    <string name="lost_internet_access_switch" msgid="2262459569601190039">"Пређи на мобилне податке"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"Остани на Wi‑Fi-ју"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"Не приказуј поново"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Повежи"</string>
@@ -814,12 +811,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Конфигуришите Wi‑Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC адреса"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP адреса"</string>
-    <!-- no translation found for wifi_details_subnet_mask (6547625164186585943) -->
-    <skip />
-    <!-- no translation found for wifi_details_dns (8648826607751830768) -->
-    <skip />
-    <!-- no translation found for wifi_details_ipv6_address_header (4334059712014889425) -->
-    <skip />
+    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Маска подмреже"</string>
+    <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 адресе"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Сачуване мреже"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP подешавања"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Напредна подешавања Wi‑Fi мреже нису доступна за овог корисника"</string>
@@ -851,8 +845,7 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Желите ли да заборавите ову групу?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Преносни Wi-Fi хотспот"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi хотспот"</string>
-    <!-- no translation found for wifi_hotspot_checkbox_text_summary (5347703013899354452) -->
-    <skip />
+    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"Пружа Wi‑Fi мрежу помоћу мобилне везе"</string>
     <!-- no translation found for wifi_hotspot_off_subtext (2745508221200463254) -->
     <skip />
     <!-- no translation found for wifi_hotspot_off_subtext (7746761268472599794) -->
@@ -866,7 +859,8 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Подешавање Wi‑Fi хотспота"</string>
     <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5560680057727007011) -->
     <skip />
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> преносни Wi‑Fi хотспот"</string>
+    <!-- no translation found for wifi_tether_configure_subtext (2050196439900426456) -->
+    <skip />
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Позивање преко Wi-Fi-ја"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Позивање преко Wi-Fi-ја"</string>
@@ -877,15 +871,29 @@
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Подешавања роминга"</string>
-    <!-- no translation found for wifi_calling_mode_choices:1 (1335127656328817518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (7715869266611010880) -->
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Предност има Wi-Fi"</item>
+    <item msgid="1335127656328817518">"Желим мобилне податке"</item>
+    <item msgid="3132912693346866895">"Само Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="7715869266611010880">"Мобилни подаци"</item>
+    <item msgid="2838022395783120596">"Само Wi-Fi"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (5074515506087318555) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (1118703915148755405) -->
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Предност има Wi-Fi"</item>
+    <item msgid="5074515506087318555">"Желим мобилне податке"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="1118703915148755405">"Мобилни подаци"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2."</item>
     <item msgid="6200207341126893791">"1."</item>
@@ -895,7 +903,6 @@
     <string name="emergency_address_summary" msgid="306028701568728126">"Адреса коју користе хитне службе као вашу локацију ако позовете такву службу помоћу Wi-Fi мреже."</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Приказ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
-    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Јачине звука"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Музички ефекти"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"Јачина звука звона"</string>
@@ -946,8 +953,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Лични налог – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Претрага"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Управљање подешавањима претраге и историјом"</string>
-    <!-- no translation found for search_settings_no_results (8799027492641230999) -->
-    <skip />
+    <string name="search_settings_no_results" msgid="8799027492641230999">"Нема резултата"</string>
     <string name="display_settings" msgid="7965901687241669598">"Приказ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Аутоматско ротирање екрана"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Промени положај аутоматски приликом ротирања таблета"</string>
@@ -969,6 +975,8 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Од заласка до изласка сунца"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Време почетка"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Време завршетка"</string>
+    <!-- no translation found for night_display_temperature_title (1435292789272017136) -->
+    <skip />
     <string name="night_display_summary_off" msgid="7009821232380000786">"Искључено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Никада се не укључује аутоматски."</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Укључује се аутоматски у <xliff:g id="ID_1">%1$s</xliff:g>."</string>
@@ -1024,14 +1032,11 @@
     <string name="sim_enter_ok" msgid="6475946836899218919">"Потврди"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Откажи"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Пронађено је више SIM картица"</string>
-    <!-- no translation found for sim_multi_sims_summary (2698176447067691396) -->
-    <skip />
+    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"Изаберите жељену SIM картицу за мобилне податке."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"Променити SIM за податке?"</string>
-    <!-- no translation found for sim_change_data_message (5854582807996717811) -->
-    <skip />
+    <string name="sim_change_data_message" msgid="5854582807996717811">"Желите да користите <xliff:g id="NEW_SIM">%1$s</xliff:g>, а не <xliff:g id="OLD_SIM">%2$s</xliff:g>, за мобилне податке?"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"Ажурирати жељени SIM?"</string>
-    <!-- no translation found for sim_preferred_message (8466930554330635780) -->
-    <skip />
+    <string name="sim_preferred_message" msgid="8466930554330635780">"<xliff:g id="NEW_SIM">%1$s</xliff:g> је једина SIM картица у уређају. Желите ли да користите ову SIM картицу за мобилне податке, позиве и SMS поруке?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Нетачан SIM PIN кôд. Сада морате да контактирате мобилног оператера да бисте откључали уређај."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="one">Нетачан SIM PIN кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушај.</item>
@@ -1256,15 +1261,13 @@
     <string name="menu_restore" msgid="8260067415075573273">"Поново постави подразумевано"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Поновно постављање подразумеваних подешавања назива приступне тачке је завршено"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Ресетовање подешавања мреже"</string>
-    <!-- no translation found for reset_network_desc (5547979398298881406) -->
-    <skip />
+    <string name="reset_network_desc" msgid="5547979398298881406">"Овим ресетујете сва подешавања мреже, укључујући:\n\n"<li>"Wi‑Fi"</li>\n<li>"Мобилне податке"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Ресетуј подешавања"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Желите ли да ресетујете сва подешавања мреже? Ова радња не може да се опозове!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Ресетуј подешавања"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Желите да ресетујете?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Ресетовање мреже није доступно за овог корисника"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Подешавања мреже су ресетована"</string>
-    <string name="device_reset_title" msgid="2384019005638768076">"Ресетуј уређај"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Ресетовање на фабричка подешавања"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Овим бришете све податке из "<b>"интерне меморије"</b>" таблета, укључујући:\n\n"<li>"Google налог"</li>\n<li>"Податке и подешавања система и апликација"</li>\n<li>"Преузете апликације"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Овим бришете све податке из "<b>"интерне меморије"</b>" телефона, укључујући:\n\n"<li>"Google налог"</li>\n<li>"Податке и подешавања система и апликација"</li>\n<li>"Преузете апликације"</li></string>
@@ -1362,10 +1365,8 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Велика потрошња батерије"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Мала потрошња батерије"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим локације"</string>
-    <!-- no translation found for location_mode_high_accuracy_description (3453010562265338113) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (2365298246603348985) -->
-    <skip />
+    <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"Користи GPS, Wi‑Fi, Bluetooth или мобилне мреже за одређивање локације"</string>
+    <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"Користи Wi‑Fi, Bluetooth или мобилне мреже за одређивање локације"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Користи GPS за одређивање локације"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Скенирање"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Скенирање"</string>
@@ -1482,10 +1483,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Подешавања апликације"</string>
     <string name="install_applications" msgid="4872012136210802181">"Непознати извори"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Дозволи све изворе апликација"</string>
-    <string name="install_unknown_applications_title" msgid="663831043139080992">"Омогућава инсталирање апликација из извора који нису Google Play"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"Дозволи инсталацију апликација из непознатих извора"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Таблет и лични подаци су подложнији нападу апликација из непознатих извора. Сагласни сте да сте само ви одговорни за сву штету на таблету или губитак података до којих може да дође услед коришћења ових апликација."</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"Телефон и лични подаци су подложнији нападу апликација из непознатих извора. Сагласни сте да сте само ви одговорни за сву штету на телефону или губитак података до којих може да дође услед коришћења ових апликација."</string>
+    <!-- no translation found for install_all_warning (8310489909586138165) -->
+    <skip />
+    <!-- no translation found for install_all_warning (1952257127370115988) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"Напредна подешавања"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Омогући још опција подешавања"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Информације о апликацији"</string>
@@ -1655,6 +1656,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Ако зауставите ову услугу, неке функције телефона ће можда престати исправно да функционишу док не искључите и поново укључите телефон."</string>
     <string name="language_settings" msgid="8758655933029560944">"Језици и унос"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Језици и унос"</string>
+    <!-- no translation found for input_assistance (7577795275222555487) -->
+    <skip />
     <string name="keyboard_settings_category" msgid="8275523930352487827">"Тастатура и методе уноса"</string>
     <string name="phone_language" msgid="7116581601133118044">"Језици"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1672,8 +1675,10 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Подешавања"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Језик"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"Отварање подешавања за апликацију <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> није успело"</string>
-    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Тастатура и методи уноса"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"Виртуелна тастатура"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (6035224122054465137) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (9084929359894695824) -->
+    <skip />
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Доступна виртуелна тастатура"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"Управљајте тастатурама"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Помоћ за тастатуру"</string>
@@ -2008,10 +2013,8 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Аутоматски укључи"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Никада"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"на <xliff:g id="PERCENT">%1$s</xliff:g> батерије"</string>
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
-    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"Проценат напуњености батерије"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"Приказује проценат напуњености батерије на статусној траци"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Статистика процеса"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Штреберска статистика о активним процесима"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Искоришћеност меморије"</string>
@@ -2257,8 +2260,7 @@
     <string name="data_usage_accounting" msgid="7170028915873577387">"Обрачун података код мобилног оператера се можда разликује од вашег уређаја."</string>
     <string name="data_usage_app" msgid="4970478397515423303">"Коришћење апликације"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"ИНФОРМАЦИЈЕ О АПЛИКАЦИЈИ"</string>
-    <!-- no translation found for data_usage_cellular_data (9168928285122125137) -->
-    <skip />
+    <string name="data_usage_cellular_data" msgid="9168928285122125137">"Мобилни подаци"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Подешавање ограничења за податке"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Циклус потрошње података"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Коришћење апликације"</string>
@@ -2273,8 +2275,7 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Мрежна ограничења"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Аутоматски синхронизуј податке"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM картице"</string>
-    <!-- no translation found for data_usage_menu_cellular_networks (8339835014751511300) -->
-    <skip />
+    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Мобилне мреже"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Паузирано је на ограничењу"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Аутоматски синхронизуј податке"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Аутом. синхрон. личне податке"</string>
@@ -2285,8 +2286,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Први план"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Позадина"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"ограничена"</string>
-    <!-- no translation found for data_usage_disable_mobile (8656552431969276305) -->
-    <skip />
+    <string name="data_usage_disable_mobile" msgid="8656552431969276305">"Желите да онемогућите мобилне податке?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"Подеси ограничење за мобил. под."</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"Подеси ограничење за 4G податке"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"Подеси ограничење за 2G-3G податке"</string>
@@ -2305,13 +2305,12 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"У позадини:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Подешавања апликације"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Позадински подаци"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (179956961840654750) -->
+    <!-- no translation found for data_usage_app_restrict_background_summary (5853552187570622572) -->
     <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"За ограничење позадинских података за ову апл. прво ограничите мобилне податке."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Желите ли да ограничите позадинске податке?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Ова функција може да заустави апликацију која зависи од позадинских података када су доступне само мобилне мреже.\n\nАдекватније контроле за коришћење података можете да пронађете у подешавањима доступним у оквиру апликације."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (55012417305745608) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Ограничавање позадинских података је могуће само када будете подесили ограничење за мобилне податке."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Укључити аутом. синх. података?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на таблет.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на таблету. Тако функционише Google налог."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на телефон.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на телефону. Тако функционише Google налог."</string>
@@ -2323,17 +2322,12 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Подешавање упозорења о коришћењу података"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Подешавање ограничења за коришћење података"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Ограничавање потрошње података"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (4983487893343645667) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (3926320594049434225) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Таблет ће искључити мобилне податке чим достигне ограничење које сте подесили.\n\nПошто потрошњу података мери таблет, а мобилни оператер може другачије да рачуна потрошњу, размислите о томе да подесите неко уобичајено ограничење."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Телефон ће искључити мобилне податке чим достигне ограничење које сте подесили.\n\nПошто потрошњу података мери телефон, а мобилни оператер може другачије да рачуна потрошњу, размислите о томе да подесите неко уобичајено ограничење."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Желите ли да ограничите позадинске податке?"</string>
-    <!-- no translation found for data_usage_restrict_background (434093644726734586) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7096707497743363380) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7910798414964288424) -->
-    <skip />
+    <string name="data_usage_restrict_background" msgid="434093644726734586">"Ако ограничите мобилне позадинске податке, неке апликације и услуге неће функционисати ако нисте повезани са Wi-Fi-јем."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Ако ограничите мобилне позадинске податке, неке апликације и услуге неће функционисати ако нисте повезани са Wi-Fi-јем.\n\nОво подешавање утиче на све кориснике на овом таблету."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"Ако ограничите мобилне позадинске податке, неке апликације и услуге неће функционисати ако нисте повезани са Wi-Fi-јем.\n\nОво подешавање утиче на све кориснике на овом телефону."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"упозорење:"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"ограничење:"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Уклоњене апликације"</string>
@@ -2343,8 +2337,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: Таблет је измерио да је искоришћено око <xliff:g id="TOTAL">%1$s</xliff:g>. Оператер можда другачије мери."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: Телефон је измерио да је искоришћено око <xliff:g id="TOTAL">%1$s</xliff:g>. Оператер можда другачије мери."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Мрежна ограничења"</string>
-    <!-- no translation found for data_usage_metered_body (7655851702771342507) -->
-    <skip />
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"Мреже са ограничењем се третирају као мобилне мреже када постоји ограничење за позадинске податке. Апликације могу да вас упозоре када намеравате да користите те мреже за велика преузимања."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Мобилне мреже"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Wi‑Fi мреже са ограничењем"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Да бисте изабрали мреже са ограничењем, укључите Wi-Fi."</string>
@@ -2526,7 +2519,6 @@
     <string name="application_restrictions" msgid="8207332020898004394">"Дозволе за апликације и садржај"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Апликације са ограничењима"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Прошири подешавања апликације"</string>
-    <string name="home_app_uninstall_button" msgid="6808453012607962899">"Деинсталирај ову апликацију"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Ово подешавање утиче на све кориснике овомг таблета."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Ово подешавање утиче на све кориснике овог телефона."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Промена језика"</string>
@@ -2603,8 +2595,7 @@
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> – <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM картице су промењене"</string>
     <string name="sim_cards_changed_message_summary" msgid="8258058274989383204">"Додирните да бисте подесили активности"</string>
-    <!-- no translation found for sim_cellular_data_unavailable (9109302537004566098) -->
-    <skip />
+    <string name="sim_cellular_data_unavailable" msgid="9109302537004566098">"Мобилни подаци нису доступни"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"Додирните да бисте изабрали SIM картицу за податке"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Увек користи ово за позиве"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"Изаберите SIM картицу за податке"</string>
@@ -2812,7 +2803,14 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Ниједна инсталирана апликација не подржава слику у слици"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"сус слика у"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Слика у слици"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="5406267586308110783">"Дозвољава унос слике у слици при напуштању апликације"</string>
+    <!-- no translation found for picture_in_picture_app_detail_switch (1131910667023738296) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_app_detail_summary (7942592478427522244) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_on (6103704909710176555) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_off (5654388666434625247) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Приступ опцији Не узнемиравај"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Ниједна инсталирана апликација није захтевала приступ опцији Не узнемиравај"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Учитавају се апликације..."</string>
@@ -3162,8 +3160,10 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Апликације са дозволом"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Да"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"Не"</string>
-    <string name="install_other_apps" msgid="4215339768128036452">"Инсталирање других апликација"</string>
-    <string name="keywords_install_other_apps" msgid="3320171242043396361">"инсталирај апликације са непознатих спољних извора"</string>
+    <!-- no translation found for install_other_apps (6986686991775883017) -->
+    <skip />
+    <!-- no translation found for keywords_install_other_apps (761078076051006558) -->
+    <skip />
     <string name="write_settings" msgid="4797457275727195681">"Мењање подешавања система"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"уписивати мењати систем подешавања"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_0">%1$d</xliff:g> од <xliff:g id="COUNT_1">%2$d</xliff:g> аплик. има(ју) дозволу за измену подешавања система"</string>
@@ -3178,7 +3178,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"Не"</string>
     <string name="external_source_trusted" msgid="6857780460845250885">"Да"</string>
     <string name="external_source_untrusted" msgid="6608922938133896956">"Не"</string>
-    <string name="external_source_switch_title" msgid="5709145695271819076">"Веруј апликацијама са овог извора"</string>
+    <!-- no translation found for external_source_switch_title (5581865736984836418) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Двапут заокрените за камеру"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Отворите апликацију Камера тако што ћете двапут заокренути ручни зглоб"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Притисните дугме за напајање двапут за камеру"</string>
@@ -3222,18 +3223,14 @@
     <string name="location_on_summary" msgid="5127631544018313587">"УКЉУЧЕНО/<xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"ИСКЉУЧЕНО"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Прављење резервне копије је онемогућено"</string>
-    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <!-- no translation found for about_summary (924181828102801010) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Радња није дозвољена"</string>
-    <!-- no translation found for disabled_by_policy_title_adjust_volume (7399450998356045023) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_outgoing_calls (7919816644946067058) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_sms (5733307423899610340) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_camera (6225008536855644874) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_screen_capture (4066913623298047094) -->
-    <skip />
+    <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"Не можете да промените јачину звука"</string>
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Позивање није дозвољено"</string>
+    <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS-ови нису дозвољени"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"Камера није дозвољена"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Прављење снимака екрана није дозвољено"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"Ова радња је онемогућена. Контактирајте администратора организације да бисте сазнали више."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Још детаља"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"Администратор може да надгледа апликације и податке повезане са профилом за Work, укључујући подешавања, дозволе, корпоративни приступ, мрежну активност и информације о локацији уређаја, као и да управља њима."</string>
@@ -3246,13 +3243,11 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Хотспот је укључен"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Преносни Wi-Fi хотспот <xliff:g id="ID_1">%1$s</xliff:g> је активан, Wi-Fi за овај уређај је искључен."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Режим рада у авиону је укључен"</string>
-    <!-- no translation found for condition_airplane_summary (5561586417832393666) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="5561586417832393666">"Wi-Fi, Bluetooth и мобилна мрежа су искључени. Не можете да упућујете телефонске позиве нити да се повезујете на интернет."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"Не узнемиравај је укључено (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Уштеда батерије је укључена"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Перформансе су погоршане. Услуге локације и позадински подаци су искључени."</string>
-    <!-- no translation found for condition_cellular_title (1327317003797575735) -->
-    <skip />
+    <string name="condition_cellular_title" msgid="1327317003797575735">"Мобилни подаци су искључени"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Интернет је доступан само преко Wi-Fi-ја"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"Уштеда података је укључена"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Позадински подаци су доступни само преко Wi-Fi-ја. То може да утиче на неке апликације или услуге када Wi-Fi није доступан."</string>
@@ -3270,14 +3265,12 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Аутоматска ажурирања система"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (захтева рестартовање)"</string>
     <string name="usage" msgid="2977875522080448986">"Потрошња"</string>
-    <!-- no translation found for cellular_data_usage (2155683719898158203) -->
-    <skip />
+    <string name="cellular_data_usage" msgid="2155683719898158203">"Потрошња мобилних података"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Потрошња Wi-Fi података"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Потрошња података на етернету"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Етернет"</string>
-    <!-- no translation found for cell_data_template (405684854174361041) -->
-    <skip />
+    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> мобилних података"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi података"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> података на етернету"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Упозорење за потрошњу података: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3448,7 +3441,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"Узмите телефон да бисте брзо прегледали обавештења."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Узмите таблет да бисте брзо прегледали обавештења."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Узмите уређај да бисте брзо прегледали обавештења."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Превлачење прстом за обавештења"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (5816346492253270243) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Да бисте проверили обавештења, превуците прстом надоле по сензору за отисак прста на задњој страни телефона."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Да бисте проверили обавештења, превуците прстом надоле по сензору за отисак прста на задњој страни таблета."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Да бисте проверили обавештења, превуците прстом надоле по сензору за отисак прста на задњој страни уређаја."</string>
@@ -3473,14 +3467,11 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"Аутом. синхр. личне податке са налога"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"Аутом. синхр. пословне податке са налога"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Синхронизација налога"</string>
-    <!-- no translation found for enterprise_privacy_settings (5190573945078964986) -->
+    <!-- no translation found for enterprise_privacy_settings (1177106810374146496) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_generic (5853292305730761128) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_with_name (4266234968317996188) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_header (7402406406883832509) -->
-    <skip />
+    <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Промене и подешавања којима управља организација"</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"Промене и подешавања којима управља <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
+    <string name="enterprise_privacy_header" msgid="7402406406883832509">"Организација може да промени подешавања и да инсталира софтвер на уређају ради омогућавања приступа пословним подацима. \n\nОбратите се администратору организације за додатне информације."</string>
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"Врсте информација које организација може да види"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"Промене које је унео администратор организације"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"Приступ овом уређају"</string>
@@ -3502,33 +3493,24 @@
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"Најновија безбедносна евиденција"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"Нема"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"Апликације су инсталиране"</string>
-    <string name="enterprise_privacy_location_access" msgid="943112505930395028">"Апликације којима је дозвољено да приступају локацији"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="1101307566418116040">"Апликације којима је дозвољено да приступају микрофону"</string>
-    <string name="enterprise_privacy_camera_access" msgid="97095968133740652">"Апликације којима је дозвољен приступ камери"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3292470316317639698">"Подразумеване апликације су подешене"</string>
+    <!-- no translation found for enterprise_privacy_location_access (4158197200885270634) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (5717375623568864441) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (4858146118537519375) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3288495615791128724) -->
+    <skip />
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"Подразумевана тастатура"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"Подешено је на <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"Стално укључени VPN је укључен"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Стално укључени VPN је укључен на личном профилу"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Стално укључени VPN је укључен на профилу за Work"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Глобални HTTP прокси је подешен"</string>
-    <plurals name="enterprise_privacy_ca_certs_user" formatted="false" msgid="2353089666351669619">
-      <item quantity="one">Поуздани СА сертификати су инсталирани</item>
-      <item quantity="few">Поуздани СА сертификати су инсталирани</item>
-      <item quantity="other">Поуздани СА сертификати су инсталирани</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_personal (1866786954859360699) -->
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="5907058613578926277">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> сертификат</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> сертификата</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> сертификата</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_ca_certs_actionable" formatted="false" msgid="7939443347696810129">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> сертификат. Додирните да бисте прегледали.</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> сертификата. Додирните да бисте прегледали.</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> сертификата. Додирните да бисте прегледали.</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_work (6555905416417106313) -->
+    <!-- no translation found for enterprise_privacy_ca_certs (5885892204903688909) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_ca_certs (9073641163359459048) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (5823294380629654635) -->
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"Администратор може да закључава уређај и ресетује лозинку"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"Администратор може да брише све податке са уређаја"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"Неуспели покушаји уноса лозинке пре брисања свих података са уређаја"</string>
@@ -3558,7 +3540,8 @@
     <string name="audio_files_title" msgid="4777048870657911307">"Аудио датотеке"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(деинсталирано за корисника <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(онемогућено за корисника <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="autofill_app" msgid="3889348218462883960">"Апликација за аутоматско попуњавање"</string>
+    <!-- no translation found for autofill_app (7338387238377914374) -->
+    <skip />
     <string name="autofill_keywords" msgid="7485591824120812710">"аутоматски, попуњавање, аутоматско попуњавање"</string>
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"Желите ли да <xliff:g id="APP_NAME_0">%1$s</xliff:g> буде апликација за аутоматско попуњавање? <xliff:g id="APP_NAME_1">%1$s</xliff:g> ће моћи да чита садржај екрана и да попуњава поља у другим апликацијама."</string>
     <string name="device_theme" msgid="4571803018917608588">"Тема уређаја"</string>

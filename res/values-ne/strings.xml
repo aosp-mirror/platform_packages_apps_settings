@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE को प्रावधानीकरणलाई सक्रिय गरिएको छ"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"भिडियो कलिङ सम्बन्धी प्रावधानलाई सक्रिय गरिएको छ"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wifi कलिङ सम्बन्धी प्रावधानलाई सक्रिय गरिएको छ"</string>
-    <!-- no translation found for radio_info_radio_power (7187666084867419643) -->
-    <skip />
+    <string name="radio_info_radio_power" msgid="7187666084867419643">"मोबाइल रेडियोको पावर"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM को ठेगाना पुस्तिका हेर्नुहोस्"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"स्थिर डायल गर्ने नम्बरहरू हेर्नुहोस्"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"सेवा डायल गर्ने नम्बरहरू हेर्नुहोस्"</string>
@@ -276,12 +275,10 @@
     <string name="radio_controls_title" msgid="3447085191369779032">"थप"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"ताररहित सञ्जाल"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Wi-Fi, ब्लुटुथ, हवाइजहाज मोड, मोबाइल नेटवर्क, र VPNs व्यवस्थापन गर्नुहोस्"</string>
-    <!-- no translation found for cellular_data_title (6835451574385496662) -->
-    <skip />
+    <string name="cellular_data_title" msgid="6835451574385496662">"मोबाइल डेटा"</string>
     <string name="calls_title" msgid="3544471959217176768">"कलहरू"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS सन्देशहरू"</string>
-    <!-- no translation found for cellular_data_summary (4660351864416939504) -->
-    <skip />
+    <string name="cellular_data_summary" msgid="4660351864416939504">"मोबाइल नेटवर्कमार्फत डेटा प्रयोग गर्न अनुमति दिनुहोस्"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"रोमिङ हुँदा डेटा उपयोग अनुमति"</string>
     <string name="roaming" msgid="3596055926335478572">"डेटा रोमिङ"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"रोमिङ हुँदा डेटा सेवासँग जोड्नुहोस्"</string>
@@ -565,10 +562,13 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"रद्द गर्नुहोस्"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"अर्को"</string>
     <string name="lock_setup" msgid="3355847066343753943">"सेटअप पूरा भयो।"</string>
-    <string name="device_admin_title" msgid="3562216873644263804">"यन्त्र प्रशासन"</string>
-    <!-- no translation found for manage_device_admin (537804979483211453) -->
+    <string name="manage_device_admin" msgid="537804979483211453">"यन्त्रका प्रशासकीय अनुप्रयोगहरू"</string>
+    <!-- no translation found for number_of_device_admins_none (7185056721919496069) -->
     <skip />
-    <!-- no translation found for number_of_device_admins (3361891840111523393) -->
+    <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> सक्रिय अनुप्रयोगहरू</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> सक्रिय अनुप्रयोग</item>
+    </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"विश्वसनीय प्रतिनिधि"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"प्रयोग गर्न, पहिले स्क्रिन लक सेट गर्नुहोस्"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"विश्वस्त प्रतिनिधि हेर्नुहोस् वा निष्क्रिय गर्नुहोस्"</string>
@@ -701,12 +701,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi अप्टिमाइजेसन"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi-Fi चालेको बेला ब्याट्रिको प्रयोग कम गर्नुहोस्"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"वाइफाइले सीमित ब्याट्री प्रयोग"</string>
-    <!-- no translation found for wifi_switch_away_when_unvalidated (1707247692180853058) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_title (8753386877755616476) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (6375399280719867214) -->
-    <skip />
+    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"Wi-Fi मार्फत  इन्टरनेट अनुपलब्ध भए मोबाइल डेटामा स्विच गर्नुहोस्।"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"मोबाइल डेटामा स्वतः स्विच गर्नुहोस्"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"Wi-Fi मार्फत इन्टरनेटमाथिको पहुँच नहुँदा मोबाइल डेटाको प्रयोग गर्नुहोस्। डेटा खर्च हुन सक्छ।"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"नेटवर्क जोड्नुहोस्"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"Wi‑Fi का प्राथमिकताहरू"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi नेटवर्कहरू"</string>
@@ -787,10 +784,9 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"यो नेटवर्क इन्टरनेटमा पहुँच छैन। सम्पर्क कायम राख्न चाहनुहुन्छ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"यस नेटवर्कको लागि फेरि नसोध्नुहोस्"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi को इन्टरनेटमा जडान भएको छैन"</string>
-    <!-- no translation found for lost_internet_access_text (8346249124967998580) -->
+    <!-- no translation found for lost_internet_access_text (9029649339816197345) -->
     <skip />
-    <!-- no translation found for lost_internet_access_switch (2262459569601190039) -->
-    <skip />
+    <string name="lost_internet_access_switch" msgid="2262459569601190039">"मोबाइलमा स्विच गर्नुहोस्"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi‑Fi मा कायम रहनुहोस्"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"फेरि कहिल्यै नदेखाउनुहोस्"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"जडान गर्नुहोस्"</string>
@@ -805,12 +801,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi-Fi कन्फिगर गर्नुहोस्"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"म्याक ठेगाना"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP ठेगाना"</string>
-    <!-- no translation found for wifi_details_subnet_mask (6547625164186585943) -->
-    <skip />
-    <!-- no translation found for wifi_details_dns (8648826607751830768) -->
-    <skip />
-    <!-- no translation found for wifi_details_ipv6_address_header (4334059712014889425) -->
-    <skip />
+    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"सबनेट मास्क"</string>
+    <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 ठेगानाहरू"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"सुरक्षित सञ्जालहरू"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP सेटिङहरू"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"यस प्रयोगकर्ताका लागि Wi‑Fi उन्नत सम्बन्धी सेटिङहरू उपलब्ध छैनन्"</string>
@@ -842,8 +835,7 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"यो समूह बिर्सनुभयो?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"पोर्टेबल Wi-Fi हटस्पट"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi हटस्पट"</string>
-    <!-- no translation found for wifi_hotspot_checkbox_text_summary (5347703013899354452) -->
-    <skip />
+    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"Wi-Fi नेटवर्क प्रदान गर्न मोबाइल जडान प्रयोग गर्नुहोस्"</string>
     <!-- no translation found for wifi_hotspot_off_subtext (2745508221200463254) -->
     <skip />
     <!-- no translation found for wifi_hotspot_off_subtext (7746761268472599794) -->
@@ -857,7 +849,8 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Wi-Fi हटस्पट सेटअप"</string>
     <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5560680057727007011) -->
     <skip />
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> पोर्टेबल Wi-Fi हटस्पट"</string>
+    <!-- no translation found for wifi_tether_configure_subtext (2050196439900426456) -->
+    <skip />
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi कलिङ"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Wi-Fi कलिङलाई सक्रिय गर्नुहोस्"</string>
@@ -868,15 +861,29 @@
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"रोमिङ सम्बन्धी प्राथमिकता"</string>
-    <!-- no translation found for wifi_calling_mode_choices:1 (1335127656328817518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (7715869266611010880) -->
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fi को सुझाव गरियो"</item>
+    <item msgid="1335127656328817518">"मोबाइल रूचाइएको छ"</item>
+    <item msgid="3132912693346866895">"Wi-Fi मात्र"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="7715869266611010880">"मोबाइल"</item>
+    <item msgid="2838022395783120596">"Wi-Fi मात्र"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (5074515506087318555) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (1118703915148755405) -->
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Wi-Fi रुचाइएको"</item>
+    <item msgid="5074515506087318555">"मोबाइल रूचाइएको छ"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="1118703915148755405">"मोबाइल"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"२"</item>
     <item msgid="6200207341126893791">"१"</item>
@@ -886,7 +893,6 @@
     <string name="emergency_address_summary" msgid="306028701568728126">"तपाईँले WiFi को प्रयोग गरी कुनै ९११ सम्बन्धी कल गर्दा आपतकालीन सेवाहरूले तपाईँको स्थानको रूपमा प्रयोग गर्ने ठेगाना"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"प्रदर्शन"</string>
     <string name="sound_settings" msgid="5534671337768745343">"आवाज"</string>
-    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"भोल्युम"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"संगीत प्रभावहरू"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"घन्टीको भोल्युम"</string>
@@ -937,8 +943,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"व्यक्तिगत खाता - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"खोज्नुहोस्"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"खोज सेटिङहरू र इतिहास प्रबन्ध गर्नुहोस्"</string>
-    <!-- no translation found for search_settings_no_results (8799027492641230999) -->
-    <skip />
+    <string name="search_settings_no_results" msgid="8799027492641230999">"कुनै परिणाम फेला पारिएन"</string>
     <string name="display_settings" msgid="7965901687241669598">"प्रदर्शन"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"स्वतःघुम्ने स्क्रिन"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ट्याब्लेट घुमाउँदा स्वचालित रूपमा अभिमुखिकरण स्विच गर्नुहोस्"</string>
@@ -960,6 +965,8 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"सूर्यास्तदेखि सूर्योदयसम्म"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"सुरु समय"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"समय समाप्ति"</string>
+    <!-- no translation found for night_display_temperature_title (1435292789272017136) -->
+    <skip />
     <string name="night_display_summary_off" msgid="7009821232380000786">"निष्क्रिय। <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"कहिल्यै पनि स्वतः सक्रिय हुनेछैन।"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः सक्रिय हुनेछ।"</string>
@@ -1015,14 +1022,11 @@
     <string name="sim_enter_ok" msgid="6475946836899218919">"ठीक छ"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"रद्द गर्नुहोस्"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"धेरै SIM हरू भेटियो"</string>
-    <!-- no translation found for sim_multi_sims_summary (2698176447067691396) -->
-    <skip />
+    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"मोबाइल डेटाको लागि तपाईंको रूचिको SIM छनौट गर्नुहोस्।"</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"डेटा सिम परिवर्तन गर्नुहुन्छ?"</string>
-    <!-- no translation found for sim_change_data_message (5854582807996717811) -->
-    <skip />
+    <string name="sim_change_data_message" msgid="5854582807996717811">"मोबाइल डेटाको लागि <xliff:g id="OLD_SIM">%2$s</xliff:g> को सट्टा <xliff:g id="NEW_SIM">%1$s</xliff:g> को प्रयोग गर्ने हो?"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"प्रमुख SIM कार्ड अपडेट गर्ने?"</string>
-    <!-- no translation found for sim_preferred_message (8466930554330635780) -->
-    <skip />
+    <string name="sim_preferred_message" msgid="8466930554330635780">"तपाईंको यन्त्रमा <xliff:g id="NEW_SIM">%1$s</xliff:g> SIM मात्र छ। तपाईं मोबाइल डेटा, कल र SMS सन्देशहरूका लागि यो SIM प्रयोग गर्न चाहनुहुन्छ?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM PIN कोड गलत छ तपाईंले अाफ्नो उपकरण खोल्नलाई तपाईंको वाहकसँग सम्पर्क गर्नै पर्दर्छ।"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="other"> गलत SIM PIN कोड, तपाईं सँग <xliff:g id="NUMBER_1">%d</xliff:g> पटक प्रयास बाँकी छ।</item>
@@ -1246,15 +1250,13 @@
     <string name="menu_restore" msgid="8260067415075573273">"पूर्वनिर्धारितमा पुनःसेट गर्नुहोस्"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"पूर्वनिर्धारित APN सेटिङहरू पुनःसेट पुरा भयो।"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"सञ्जाल सेटिङहरू रिसेट"</string>
-    <!-- no translation found for reset_network_desc (5547979398298881406) -->
-    <skip />
+    <string name="reset_network_desc" msgid="5547979398298881406">"यसले निम्न सेटिङहरू लगायत सम्पूर्ण नेटवर्क सम्बन्धी सेटिहरूलाई रिसेट गर्नेछ:\n\n"<li>"Wi‑Fi"</li>\n<li>"मोबाइल डेटा"</li>\n<li>"ब्लुटुथ"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"सेटिङहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"सबै नेटवर्क सेटिङहरू रिसेट गर्ने हो? तपाईं यी कार्य अनडू गर्न सक्नुहुन्न!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"सेटिङहरू रिसेट गर्नुहोस्"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"रिसेट गर्ने हो?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"नेटवर्क रिसेट यो प्रयोगकर्ताको लागि उपलब्ध छैन"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"सञ्जाल सेटिङ्हरू रिसेट गरियो"</string>
-    <string name="device_reset_title" msgid="2384019005638768076">"उपकरण पुनः सेट गर्नुहोस्"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"कारखाना डेटा रिसेट"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"यस कार्यले तपाईँको सम्पूर्ण डेटा मेटाउँछ ट्याब्लेटको "<b>" आन्तरिक भण्डारणबाट "</b>" : जसमा, \n \n "<li>" तपाईँको Google खाता "</li>" \n "<li>" प्रणाली र अनुप्रयोग डेटा र सेटिङहरू"</li>" \n "<li>" डाउनलोड गरिएका अनुप्रयोगहरू "</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"यसले सबै डेटा तपाईंको "<b>"आन्तरिक भण्डारणबाट मेटाउँदछ"</b>", समावेश गर्दछ:\n\n"<li>"तपाईंको Google खाता"</li>\n<li>"प्रणाली र अनुप्रयोग डेटा र सेटिङहरू"</li>\n<li>"डाउनलोड गरिएका अनुप्रयोगहरू"</li></string>
@@ -1352,10 +1354,8 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"उच्च ब्याट्री प्रयोग"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"कम ब्याट्री प्रयोग"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"स्थान मोड"</string>
-    <!-- no translation found for location_mode_high_accuracy_description (3453010562265338113) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (2365298246603348985) -->
-    <skip />
+    <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"स्थान निर्धारण गर्न GPS, Wi-Fi, ब्लुटुथ वा मोबाइल नेटवर्कहरूको प्रयोग गर्नुहोस्"</string>
+    <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"स्थान निर्धारण गर्न Wi-Fi, ब्लुटुथ वा मोबाइल नेटवर्कहरूको प्रयोग गर्नुहोस्"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"स्थान निर्धारण गर्न GPS प्रयोग गर्नुहोस्"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"स्क्यान गर्दै"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"स्क्यान गर्दै"</string>
@@ -1472,10 +1472,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"अनुप्रयोग सेटिङहरू"</string>
     <string name="install_applications" msgid="4872012136210802181">"अज्ञात स्रोतहरू"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"सबै अनुप्रयोग स्रोतहरू अनुमति"</string>
-    <string name="install_unknown_applications_title" msgid="663831043139080992">"Google प्ले भन्दा अन्य स्रोतबाट अनुप्रयोगको स्थापना गर्न दिनुहोस्"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"अज्ञात स्थानबाट अनुप्रयोगहरूका स्थापनाका लागि अनुमति दिनुहोस्"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"तपाईंको ट्याब्लेट र व्यक्तिगत डेटा अज्ञात स्रोतहरूबाट अनुप्रयोगहरूद्वारा हमलाको निकै मारमा छन्। यी अनुप्रोगहरू गर्दा तपाईंको ट्याब्लेट बिग्रने वा डेटा हराउने नतिजाको लागि तपाईं आफैँ जिम्मेवार हुन सहमत हुनु हुन्छ।"</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"तपाईंका फोन र व्यक्तिगत डेटा अज्ञात स्रोतका अनुप्रयोगहरूबाट हुने आक्रमणमा पर्न सक्ने बढी सम्भावना छ। यी अनुप्रयोगको प्रयोगबाट तपाईंको फोनमा वा डेटामा हुन सक्ने नोक्सानीका लागि तपाईं आफै जिम्मेवार हुनु हुन्छ भन्नेमा तपाईं सहमत हुनु हुन्छ।"</string>
+    <!-- no translation found for install_all_warning (8310489909586138165) -->
+    <skip />
+    <!-- no translation found for install_all_warning (1952257127370115988) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"जटिल सेटिङहरू"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"थप सेटिङ विकल्पहरू सक्षम पार्नुहोस्"</string>
     <string name="application_info_label" msgid="5736524913065714880">"अनुप्रयोग जानकारी"</string>
@@ -1644,6 +1644,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"यदि तपाईँले यस सेवालाई बन्द गर्नु भएको खण्डमा तपाईँको फोनका केही सुविधाहरू सही तवरले काम गर्न बन्द गर्न सक्छन् तबसम्म तपाईँले फेरि यसलाई पावर बन्द गरी फेरि सुरु गर्नु हुन्न।"</string>
     <string name="language_settings" msgid="8758655933029560944">"भाषा र इनपुट"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"भाषा र इनपुट"</string>
+    <!-- no translation found for input_assistance (7577795275222555487) -->
+    <skip />
     <string name="keyboard_settings_category" msgid="8275523930352487827">"किबोर्ड र इनपुट विधिहरू"</string>
     <string name="phone_language" msgid="7116581601133118044">"भाषाहरू"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1661,8 +1663,10 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"सेटिङहरू"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"भाषा"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>का लागि सेटिङहरू खोल्न विफल भयो।"</string>
-    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"किबोर्ड र इनपुट विधिहरू"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"भर्चुअल किबोर्ड"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (6035224122054465137) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (9084929359894695824) -->
+    <skip />
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"उपलब्ध भर्चुअल किबोर्ड"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"किबोर्डहरूको व्यवस्थापन गर्नुहोस्"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"किबोर्डमा सहायता"</string>
@@ -1991,10 +1995,8 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"स्वतः खोल्नुहोस्"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"कहिले पनि होइन"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> ब्याट्री हुँदा"</string>
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
-    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"ब्याट्रीको प्रतिशत"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"वस्तुस्थिति पट्टीमा ब्याट्रीको प्रतिशत देखाउनुहोस्"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"प्रक्रिया तथ्याङ्क"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"चालु रहने प्रक्रियाहरूको बारेको geeky तथ्याङ्क"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"मेमोरी प्रयोग"</string>
@@ -2240,8 +2242,7 @@
     <string name="data_usage_accounting" msgid="7170028915873577387">"वाहक डेटा लेखा तपाईँको उपकरणबाट फरक हुन सक्छ।"</string>
     <string name="data_usage_app" msgid="4970478397515423303">"अनुप्रयोग उपयोग"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"APP INFO"</string>
-    <!-- no translation found for data_usage_cellular_data (9168928285122125137) -->
-    <skip />
+    <string name="data_usage_cellular_data" msgid="9168928285122125137">"मोबाइल डेटा"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"डेटा सीमा सेट गर्नुहोस्"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"डेटाको प्रयोग चक्र"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"अनुप्रयोग उपयोग"</string>
@@ -2256,8 +2257,7 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"सञ्जाल प्रतिबन्धहरू"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"स्वचालित सिंक डेटा"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM कार्डहरू"</string>
-    <!-- no translation found for data_usage_menu_cellular_networks (8339835014751511300) -->
-    <skip />
+    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"मोबाइल नेटवर्कहरू"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"सीमामा रोकिएको"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"डेटा स्वत: सिंक गर्नुहोस्"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"व्यक्तिगत डेटा स्वचालित सिंक"</string>
@@ -2268,8 +2268,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"अग्रभूमि"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"पृष्ठभूमि"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"प्रतिबन्धित"</string>
-    <!-- no translation found for data_usage_disable_mobile (8656552431969276305) -->
-    <skip />
+    <string name="data_usage_disable_mobile" msgid="8656552431969276305">"मोबाइल डेटा निष्क्रिय पार्ने हो?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"मोबाइल डेटा सीमा निर्धारण गर्नुहोस्"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G डेटा सीमा निर्धारण गर्नुहोस्"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-3G डेटा सीमा सेट गर्नुहोस्"</string>
@@ -2288,13 +2287,12 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"पृष्ठभूमि:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"अनुप्रयोग सेटिङ्हरू"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"पृष्ठभूमि डेटा"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (179956961840654750) -->
+    <!-- no translation found for data_usage_app_restrict_background_summary (5853552187570622572) -->
     <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"यस अनुप्रयोगलाई पृष्ठभूमि डेटामा सीमित गराउन पहिले मोबाइल डेटा सीमा सेट गर्नुहोस्।"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"पृष्ठभूमि डेटा प्रतिबन्ध गर्ने हो?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"यस फिचरले पृष्ठभूमि डेटामा निर्भर अनुप्रयोगलाई मोबाइल सञ्जाल उपलब्ध हुने समयमा मात्र काम नगर्ने बनाउन सक्छ। \n \n यस अनुप्रयोग भित्रको सेटिङमा तपाईँले थप उपयुक्त डेटाको प्रयोग नियन्त्रणहरू भेट्टाउन सक्नुहुन्छ।"</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (55012417305745608) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"तपाईंले मोबाइल डेटाको सीमा सेट गर्नुभएको बेलामा मात्र पृष्ठभूमिको डेटालाई सीमित गर्न सम्भव हुन्छ।"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"डेटा स्वचालित सिंक खोल्ने हो?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"तपाईंले वेबमा आफ्नो खातामा गर्न हुने कुनै पनि परिवर्तनहरू स्वचालित रूपमा तपाईँको ट्याब्लेटमा प्रतिलिपि गरिने छ।\n\nकेही खाता पनि स्वचालित वेब ट्याब्लेटमा तपाईंले बनाउने कुनै पनि परिवर्तनहरू प्रतिलिपि हुनसक्छ। Google खाताले यसरी कार्य गर्दछ।"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"तपाईंले वेबमा आफ्नो खातामा गर्न हुने कुनै पनि परिवर्तनहरू स्वचालित रूपमा तपाईँको फोनमा प्रतिलिपि गरिने छ।\n\nकेही खाता पनि स्वचालित वेब फोनमा तपाईंले बनाउने कुनै पनि परिवर्तनहरू प्रतिलिपि हुनसक्छ। Google खाताले यसरी कार्य गर्दछ।"</string>
@@ -2306,17 +2304,12 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"डेटा उपयोग चेतावनी सेट गर्नुहोस्"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"डेटा उपयोग सीमा सेट गर्नुहोस्"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"डेटाको प्रयोग सीमित गर्दै"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (4983487893343645667) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (3926320594049434225) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"तपाईंको ट्याब्लेट तपाईंले सेट गर्नुभएको अधिकतम डेटा प्रयोगको सीमामा पुगेपछि यसले मोबाइल डेटालाई निष्क्रिय पार्नेछ।\n\nतपाईंको ट्याब्लेटले र तपाईंको सेवा प्रदायकले फरक तरिकाले डेटा प्रयोगको मापन गर्न सक्ने हुनाले विवेकपूर्ण तरिकाले यसको सीमा सेट गर्ने बारे विचार गर्नुहोस्।"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"तपाईंको फोन तपाईंले सेट गर्नुभएको अधिकतम डेटा प्रयोगको सीमामा पुगेपछि यसले मोबाइल डेटालाई निष्क्रिय पार्नेछ।\n\nतपाईंको फोनले र तपाईंको सेवा प्रदायकले फरक तरिकाले डेटा प्रयोगको मापन गर्न सक्ने हुनाले विवेकपूर्ण तरिकाले यसको सीमा सेट गर्ने बारे विचार गर्नुहोस्।"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"पृष्ठभूमि डेटा प्रतिबन्ध गर्न चाहनुहुन्छ?"</string>
-    <!-- no translation found for data_usage_restrict_background (434093644726734586) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7096707497743363380) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7910798414964288424) -->
-    <skip />
+    <string name="data_usage_restrict_background" msgid="434093644726734586">"तपाईंले पृष्ठभूमिको मोबाइल डेटालाई सीमित गर्नुहुन्छ भने केही अनुप्रयोग र सेवाहरूले तपाईं Wi‑Fi मा जडान नहुँदासम्म काम गर्ने छैनन्।"</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"तपाईंले पृष्ठभूमिको मोबाइल डेटालाई सीमित गर्नुहुन्छ भने केही अनुप्रयोग र सेवाहरूले तपाईं Wi‑Fi मा जडान नहुँदासम्म काम गर्ने छैनन्।\n\nयस सेटिङले यस ट्याब्लेटमा भएका सबै प्रयोगकर्ताहरूलाई प्रभाव पार्दछ।"</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"तपाईंले पृष्ठभूमिको मोबाइल डेटालाई सीमित गर्नुहुन्छ भने केही अनुप्रयोग र सेवाहरूले तपाईं Wi‑Fi मा जडान नहुँदासम्म काम गर्ने छैनन्।\n\nयस सेटिङले यस फोनमा भएका सबै प्रयोगकर्ताहरूलाई प्रभाव पार्दछ।"</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">" <xliff:g id="NUMBER">^1</xliff:g> "</font>" "<font size="9">" <xliff:g id="UNIT">^2</xliff:g> "</font>" \n "<font size="12">" चेतावनी "</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">" <xliff:g id="NUMBER">^1</xliff:g> "</font>" "<font size="9">" <xliff:g id="UNIT">^2</xliff:g> "</font>" \n "<font size="12">" सीमा "</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"हटाइएका अनुप्रयोगहरू"</string>
@@ -2326,8 +2319,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: को बारेमा <xliff:g id="TOTAL">%1$s</xliff:g> तपाईँको ट्याब्लेटले नापे जस्तो रूपमा प्रयोग भयो। तपाईँको ढुवानीको डेटा उपयोग लेखा सायद भिन्न हुन सक्छ।"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: करिब<xliff:g id="TOTAL">%1$s</xliff:g> प्रयोग भएको, तपाईँको फोनले मापन गरेअनुसार। तपाईँको डेटाको प्रयोग बाहकको खाता अनुसार फरक पर्न सक्छ।"</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"सञ्जाल प्रतिबन्धहरू"</string>
-    <!-- no translation found for data_usage_metered_body (7655851702771342507) -->
-    <skip />
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"पृष्ठभूमिको डेटा सीमित गरिएको बेला सीमित नेटवर्कहरूलाई मोबाइल डेटा जस्तै मानिन्छ। ठूला फाइलहरू डाउनलोड गर्नका लागि यी नेटवर्कहरूको प्रयोग गर्नुअघि अनुप्रयोगहरूले चेतावनी दिन सक्छन्।"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"मोबाइल नेटवर्क"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"मिटर राखिएका Wi-Fi सञ्जालहरू"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"मिटर राखिएका सञ्जालहरू चयन गर्न, Wi-Fi खोल्नुहोस्।"</string>
@@ -2505,7 +2497,6 @@
     <string name="application_restrictions" msgid="8207332020898004394">"अनुप्रयोगहरू र सामग्री अनुमति दिनुहोस्"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"प्रतिबन्धको साथ अनुप्रयोगहरू"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"अनुप्रयोगको लागि सेटिङहरू विस्तार गर्नुहोस्"</string>
-    <string name="home_app_uninstall_button" msgid="6808453012607962899">"यस अनुप्रयोगलाई अनइन्स्टल गर्नुहोस्"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"यो सेटिङले यस ट्याब्लेटमा सबै प्रयोगकर्ताहरूलाई प्रभाव पार्दछ।"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"यो सेटिङले यस फोनमा सबै प्रयोगकर्ताहरूलाई प्रभाव पार्दछ।"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"भाषा परिवर्तन गर्नुहोस्"</string>
@@ -2582,8 +2573,7 @@
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM कार्ड परिवर्तन गरेको छ"</string>
     <string name="sim_cards_changed_message_summary" msgid="8258058274989383204">"गतिविधिहरु सेट गर्न ट्याप गर्नुहोस्"</string>
-    <!-- no translation found for sim_cellular_data_unavailable (9109302537004566098) -->
-    <skip />
+    <string name="sim_cellular_data_unavailable" msgid="9109302537004566098">"मोबाइल डेटा अनुपलब्ध छ।"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"डेटा SIM चयन गर्न ट्याप गर्नुहोस्"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"सधैं यो कलको लागि प्रयोग गर्नुहोस्"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"डेटाको लागि सिम चयन गर्नुहोस्"</string>
@@ -2789,7 +2779,14 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"स्थापना गरिएका कुनै पनि अनुप्रयोगहरूले तस्बिरमा तस्बिर मोडलाई समर्थन गर्दैनन्"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"तस्बिरमा तस्बिर मोडमा तस्बिर"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"तस्बिरमा तस्बिर"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="5406267586308110783">"अनुप्रयोगबाट बाहिरिँदा तस्बिरमा तस्बिर मोडमा प्रविष्ट गर्ने अनुमति दिनुहोस्"</string>
+    <!-- no translation found for picture_in_picture_app_detail_switch (1131910667023738296) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_app_detail_summary (7942592478427522244) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_on (6103704909710176555) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_off (5654388666434625247) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="2611116122628520522">"पहुँचमा बाधा नपुर्‍यानुहोस्"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"कुनै पनि स्थापित अनुप्रयोगहरू द्वारा पहुँचमा बाधा नपुर्‍यानुहोस् को माग गरेका छैनन्"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"अनुप्रयोगहरू लोड हुँदै..."</string>
@@ -3133,8 +3130,10 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"अनुमतिसहित अनुप्रयोगहरू"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"हो"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"होइन"</string>
-    <string name="install_other_apps" msgid="4215339768128036452">"अन्य अनुप्रयोगहरूको स्थापना"</string>
-    <string name="keywords_install_other_apps" msgid="3320171242043396361">"बाह्य अज्ञात स्रोतहरूबाट प्राप्त अनुप्रयोगहरू स्थापना गर्नुहोस्‌"</string>
+    <!-- no translation found for install_other_apps (6986686991775883017) -->
+    <skip />
+    <!-- no translation found for keywords_install_other_apps (761078076051006558) -->
+    <skip />
     <string name="write_settings" msgid="4797457275727195681">"प्रणाली सेटिङहरू परिमार्जन"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"परिमार्जन प्रणाली सेटिङहरू लेख्नुहोस्"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g> मा <xliff:g id="COUNT_0">%1$d</xliff:g> अनुप्रयोगलाई प्रणाली सेटिङहरू परिमार्जन गर्न अनुमति छ"</string>
@@ -3149,7 +3148,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"होइन"</string>
     <string name="external_source_trusted" msgid="6857780460845250885">"हो"</string>
     <string name="external_source_untrusted" msgid="6608922938133896956">"होइन"</string>
-    <string name="external_source_switch_title" msgid="5709145695271819076">"यो स्रोतबाट प्राप्त अनुप्रयोगहरूलाई विश्वास गर्नुहोस्"</string>
+    <!-- no translation found for external_source_switch_title (5581865736984836418) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"क्यामेराका लागि दुई पटक बटार्नुहोस्"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"दुई पटक आफ्नो नारी बटारेर क्यामेरा अनुप्रयोग खोल्नुहोस्"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"क्यामेराका लागि दुई पटक पावर बटन थिच्नुहोस्"</string>
@@ -3192,18 +3192,14 @@
     <string name="location_on_summary" msgid="5127631544018313587">"सक्रिय / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"निष्क्रिय"</string>
     <string name="backup_disabled" msgid="485189128759595412">"ब्याकअप असक्षम गरियो"</string>
-    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <!-- no translation found for about_summary (924181828102801010) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"कार्यलाई अनुमति छैन"</string>
-    <!-- no translation found for disabled_by_policy_title_adjust_volume (7399450998356045023) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_outgoing_calls (7919816644946067058) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_sms (5733307423899610340) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_camera (6225008536855644874) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_screen_capture (4066913623298047094) -->
-    <skip />
+    <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"भोल्युम परिवर्तन गर्न सकिँदैन।"</string>
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"कल गर्न अनुमति छैन"</string>
+    <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS लाई अनुमति छैन"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"यो क्यामेरालाई अनुमति छैन"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"स्क्रिनसटलाई अनुमति छैन"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"यस कारबाहीलाई असक्षम गरिएको छ। थप जान्नका लागि आफ्नो संगठनको प्रशासकलाई सम्पर्क गर्नुहोस्।"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"थप विवरणहरु"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"तपाईँको प्रशासकले यस  कार्य प्रोफाइलसँग सम्बद्ध सेटिङ, अनुमति, कर्पोरेट पहुँच, नेटवर्क गतिविधि र यन्त्रको स्थान लगायतका जानकारीका साथै अनुपरयोग र डेटालाई अनुगमन र व्यवस्थापन गर्न सक्छ।"</string>
@@ -3216,13 +3212,11 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"हटस्पट खुला छ"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"पोर्टेबल Wi-Fi हटस्पट <xliff:g id="ID_1">%1$s</xliff:g> सक्रिय छ, यो उपकरणको लागि Wi-Fi बन्द छ।"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"हवाइजहाज मोड खुला छ"</string>
-    <!-- no translation found for condition_airplane_summary (5561586417832393666) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="5561586417832393666">"Wi-Fi, ब्लुटुथ र सेलुलर नेटवर्क निष्क्रिय छन्। तपाईं फोन कल गर्न वा इन्टरनेटमा जडान हुन सक्नुहुन्न।"</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"बाधा नपुर्याउनुहोस् खुला छ (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"ब्याट्री सञ्चयकर्ता सक्रिय छ"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"कार्यसम्पादन घट्यो। स्थान सेवाहरू र पृष्ठभूमि डेटा निष्क्रिय पारिएका छन्।"</string>
-    <!-- no translation found for condition_cellular_title (1327317003797575735) -->
-    <skip />
+    <string name="condition_cellular_title" msgid="1327317003797575735">"मोबाइल डेटा निष्क्रिय छ"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"इन्टरनेट केवल Wi-Fi मार्फत मात्र उपलब्ध छ"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"डेटा सेभर अन छ"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"पृष्ठभूमि डेटा Wi-Fi मार्फत मात्र उपलब्ध छ। Wi-Fi उपलब्ध नहुँदा यसले केही अनुप्रयोग वा सेवाहरूलाई प्रभावित गर्न सक्नेछ।"</string>
@@ -3240,14 +3234,12 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"स्वचालित प्रणाली अद्यावधिकहरू"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (पुन: बुट गर्नु आवश्यक छ)"</string>
     <string name="usage" msgid="2977875522080448986">"उपयोग"</string>
-    <!-- no translation found for cellular_data_usage (2155683719898158203) -->
-    <skip />
+    <string name="cellular_data_usage" msgid="2155683719898158203">"मोबाइल डेटाको प्रयोग"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi डेटाको उपयोग"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"इथरनेट डेटाको उपयोग"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"इथरनेट"</string>
-    <!-- no translation found for cell_data_template (405684854174361041) -->
-    <skip />
+    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> मोबाइल डेटा"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi को डेटा"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> इथरनेटको डेटा"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावनी"</string>
@@ -3416,7 +3408,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"द्रुत रूपमा आफ्ना सूचनाहरू जाँच्न आफ्नो फोन उठाउनुहोस्।"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"द्रुत रूपमा आफ्ना सूचनाहरू जाँच्न आफ्नो ट्याब्लेट उठाउनुहोस्।"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"द्रुत रूपमा आफ्ना सूचनाहरू जाँच्न आफ्नो यन्त्र उठाउनुहोस्।"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"सूचनाहरूका लागि स्वाइप गर्ने"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (5816346492253270243) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"अफ्ना सूचनाहरूको जाँच गर्न आफ्नो फोनको पछाडिको भागमा रहेको फिंगरप्रिन्ट सेन्सरमा तलतिर स्वाइप गर्नुहोस्।"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"अफ्ना सूचनाहरूको जाँच गर्न आफ्नो ट्याब्लेटको पछाडिको भागमा रहेको फिंगरप्रिन्ट सेन्सरमा तलतिर स्वाइप गर्नुहोस्।"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"अफ्ना सूचनाहरूको जाँच गर्न आफ्नो यन्त्रको पछाडिको भागमा रहेको फिंगरप्रिन्ट सेन्सरमा तलतिर स्वाइप गर्नुहोस्।"</string>
@@ -3441,14 +3434,11 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"व्यक्तिगत खाताको डेटा स्वतः सिंक गर्नुहोस्"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"कार्य खाताको डेटा स्वतः सिंक गर्नुहोस्"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"खाताको सिंक"</string>
-    <!-- no translation found for enterprise_privacy_settings (5190573945078964986) -->
+    <!-- no translation found for enterprise_privacy_settings (1177106810374146496) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_generic (5853292305730761128) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_with_name (4266234968317996188) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_header (7402406406883832509) -->
-    <skip />
+    <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"तपाईंको संगठनले व्यवस्थापन गरेका परिवर्तन र सेटिङहरू"</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ले व्यवस्थापन गरेका परिवर्तन र सेटिङहरू  "</string>
+    <string name="enterprise_privacy_header" msgid="7402406406883832509">"तपाईंको संगठनले तपाईंलाई आफ्नो कार्य सम्बन्धी डेटामाथि पहुँच राख्न दिनका लागि सेटिङहरू परिवर्तन गरी तपाईंको यन्त्रमा सफ्टवेयर स्थापना पनि गर्नसक्छ। \n\nथप विवरणहरूका लागि आफ्नो संगठनका प्रशासकलाई सम्पर्क गर्नुहोस्।"</string>
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"तपाईंको संगठनले देख्न सक्ने जानकारीका प्रकारहरू"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"तपाईंको संगठनका प्रशासकले गर्नुभएका परिवर्तनहरू"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"तपाईंको यस यन्त्रमाथिको पहुँच"</string>
@@ -3468,30 +3458,24 @@
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"सबैभन्दा पछिल्लो सुरक्षा लग"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"कुनै पनि होइन"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"अनुप्रयोगहरू स्थापना गरियो"</string>
-    <string name="enterprise_privacy_location_access" msgid="943112505930395028">"अनुप्रयोगहरूलाई तपाईको स्थानमाथि पहुँच राख्ने अनुमति दिइएको छ"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="1101307566418116040">"अनुप्रयोगहरूलाई तपाईको माइक्रोफोन माथि पहुँच राख्ने अनुमति दिइएको छ"</string>
-    <string name="enterprise_privacy_camera_access" msgid="97095968133740652">"अनुप्रयोगहरूलाई तपाईंको क्यामेरामाथि पहुँच राख्ने अनुमति दिइएको छ"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3292470316317639698">"पूर्वनिर्धारित अनुप्रयोगहरू सेट गरिएका छन्"</string>
+    <!-- no translation found for enterprise_privacy_location_access (4158197200885270634) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (5717375623568864441) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (4858146118537519375) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3288495615791128724) -->
+    <skip />
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"पूर्वनिर्धारित किबोर्ड"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> मा सेट गरिएको छ"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"सधैँ-सक्रिय रहने VPN सेवा सक्रिय गरिएको छ"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"तपाईँको व्यक्तिगत प्रोफाइलमा सधैँ-सक्रिय रहने VPN सेवा सक्रिय गरिएको छ"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"तपाईँको कार्य प्रोफाइलमा सधैँ-सक्रिय रहने VPN सेवा सक्रिय गरिएको छ"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"विश्वव्यापी HTTP प्रोक्सी सेट गरियो"</string>
-    <plurals name="enterprise_privacy_ca_certs_user" formatted="false" msgid="2353089666351669619">
-      <item quantity="other">विश्वसनीय CA का प्रमाणपत्रहरू स्थापना गरिएका छन्</item>
-      <item quantity="one">विश्वसनीय CA को प्रमाणपत्र स्थापना गरिएको छ</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_personal (1866786954859360699) -->
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="5907058613578926277">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> प्रमाणपत्रहरू</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> प्रमाणपत्र</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_ca_certs_actionable" formatted="false" msgid="7939443347696810129">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> प्रमाणपत्रहरू। हेर्न ट्याप गर्नुहोस्।</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> प्रमाणपत्र। हेर्न ट्याप गर्नुहोस्।</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_work (6555905416417106313) -->
+    <!-- no translation found for enterprise_privacy_ca_certs (5885892204903688909) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_ca_certs (9073641163359459048) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (5823294380629654635) -->
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"प्रशासकले यन्त्र लक गर्न र पासवर्ड रिसेट गर्न सक्नुहुन्छ"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"प्रशासकले यन्त्रका सबै डेटा मेट्न सक्नुहुन्छ"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"यन्त्रको सबै डेटा मेट्नुअघि पासवर्ड प्रविष्ट गर्ने असफल प्रयासहरूको संख्या"</string>
@@ -3520,7 +3504,8 @@
     <string name="audio_files_title" msgid="4777048870657911307">"अडियो फाइलहरू"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(प्रयोगकर्ता <xliff:g id="USER">%s</xliff:g> को लागि स्थापना रद्द गरियो)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(प्रयोगकर्ता <xliff:g id="USER">%s</xliff:g> को लागि असक्षम पारियो)"</string>
-    <string name="autofill_app" msgid="3889348218462883960">"स्वत: भरण अनुप्रयोग"</string>
+    <!-- no translation found for autofill_app (7338387238377914374) -->
+    <skip />
     <string name="autofill_keywords" msgid="7485591824120812710">"स्वतः, भरण, स्वतः भरण"</string>
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> लाई आफ्नो स्वतः भरण अनुप्रयोग बनाउने हो? <xliff:g id="APP_NAME_1">%1$s</xliff:g> ले तपाईँको स्क्रिन पढ्न र अन्य अनुप्रयोगहरूका क्षेत्रहरू भर्न सक्नेछ।"</string>
     <string name="device_theme" msgid="4571803018917608588">"यन्त्रको विषयवस्तु"</string>

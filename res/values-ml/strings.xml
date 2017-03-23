@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE പ്രൊവിഷൻ"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"വീഡിയോ കോളിംഗ് ഏർപ്പെടുത്തി"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"വൈഫൈ കോളിംഗ് ഏർപ്പെടുത്തി"</string>
-    <!-- no translation found for radio_info_radio_power (7187666084867419643) -->
-    <skip />
+    <string name="radio_info_radio_power" msgid="7187666084867419643">"മൊബൈൽ റേഡിയോ പവർ"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"സിം വിലാസ പുസ്‌‌തകം കാണുക"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"സ്ഥിര ഡയലിംഗ് നമ്പറുകൾ കാണുക"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"സർവീസ് ഡയലിംഗ് നമ്പറുകൾ കാണുക"</string>
@@ -276,12 +275,10 @@
     <string name="radio_controls_title" msgid="3447085191369779032">"കൂടുതൽ"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"വയർലസ്സും നെറ്റ്‌വർക്കും"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"വൈഫൈ, ബ്ലൂടൂത്ത്, ഫ്ലൈറ്റ് മോഡ്, മൊബൈൽ നെറ്റ്‌വർക്കുകൾ, VPN-കൾ എന്നിവ നിയന്ത്രിക്കുക"</string>
-    <!-- no translation found for cellular_data_title (6835451574385496662) -->
-    <skip />
+    <string name="cellular_data_title" msgid="6835451574385496662">"മൊബൈൽ ഡാറ്റ"</string>
     <string name="calls_title" msgid="3544471959217176768">"കോളുകൾ"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS സന്ദേശങ്ങൾ"</string>
-    <!-- no translation found for cellular_data_summary (4660351864416939504) -->
-    <skip />
+    <string name="cellular_data_summary" msgid="4660351864416939504">"മൊബൈൽ നെറ്റ്‌വർക്കിലൂടെയുള്ള ഡാറ്റ ഉപയോഗം അനുവദിക്കുക"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"റോമിംഗിലുള്ളപ്പോൾ ഡാറ്റ ഉപയോഗം അനുവദിക്കുക"</string>
     <string name="roaming" msgid="3596055926335478572">"ഡാറ്റ റോമിംഗ്"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"റോമിംഗിലാകുമ്പോൾ ഡാറ്റ സേവനങ്ങളുമായി കണ‌ക്റ്റുചെയ്യുക"</string>
@@ -565,10 +562,13 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"റദ്ദാക്കുക"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"അടുത്തത്"</string>
     <string name="lock_setup" msgid="3355847066343753943">"സജ്ജീകരണം പൂർത്തിയായി."</string>
-    <string name="device_admin_title" msgid="3562216873644263804">"ഉപകരണ അഡ്മിനിസ്ട്രേഷൻ"</string>
-    <!-- no translation found for manage_device_admin (537804979483211453) -->
+    <string name="manage_device_admin" msgid="537804979483211453">"ഉപകരണ അഡ്‌മിൽ ആപ്പുകൾ"</string>
+    <!-- no translation found for number_of_device_admins_none (7185056721919496069) -->
     <skip />
-    <!-- no translation found for number_of_device_admins (3361891840111523393) -->
+    <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ആപ്‌സ് സജീവമാണ്</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ആപ്പ് സജീവമാണ്</item>
+    </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"പരിചിത ഏജന്റുകൾ"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"ഉപയോഗിക്കാൻ, ആദ്യം സ്‌ക്രീൻ ലോക്ക് സജ്ജീകരിക്കുക"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"പരിചിത ഏജന്റുകളെ കാണുക അല്ലെങ്കിൽ നിർജീവമാക്കുക"</string>
@@ -701,12 +701,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"വൈഫൈ ഒപ്റ്റിമൈസുചെയ്യൽ"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"വൈഫൈ ഓണായിരിക്കുമ്പോൾ ബാറ്ററി ഉപഭോഗം കുറയ്‌ക്കുക"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"വൈഫൈ യുടെ ബാറ്ററി ഉപഭോഗം പരിമിതമാണ്"</string>
-    <!-- no translation found for wifi_switch_away_when_unvalidated (1707247692180853058) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_title (8753386877755616476) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (6375399280719867214) -->
-    <skip />
+    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"വൈഫൈയിൽ ഇന്റർനെറ്റ് ആക്‌സസ്സ് ഇല്ലെങ്കിൽ മൊബൈൽ ഡാറ്റയിലേക്ക് മാറുക."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"മൊബൈൽ ഡാറ്റയിലേക്ക് സ്വയമേവ മാറുക"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"വൈഫൈയിൽ നിന്നുള്ള ഇന്റർനെറ്റ് ഇല്ലാത്തപ്പോൾ മൊബൈൽ ഡാറ്റ ഉപയോഗിക്കുക. ഡാറ്റായുടെ ഉപയോഗ നിരക്ക് ബാധകമായേക്കാം."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"നെറ്റ്‌വർക്ക് ചേർക്കുക"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"വൈ-ഫൈ മുൻഗണനകൾ"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"വൈഫൈ നെറ്റ്‌വർക്കുകൾ"</string>
@@ -787,10 +784,9 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"ഈ നെറ്റ്‌വർക്കിൽ ഇന്റർനെറ്റ് ആക്‌സസ് ഇല്ല. കണക്റ്റുചെയ്ത നിലയിൽ തുടരണോ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ഈ നെറ്റ്‌വർക്കിനായി വീണ്ടും ആവശ്യപ്പെടരുത്"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"ഇന്റർനെറ്റിലേക്ക് വൈഫൈ കണക്റ്റുചെയ്‌തിട്ടില്ല"</string>
-    <!-- no translation found for lost_internet_access_text (8346249124967998580) -->
+    <!-- no translation found for lost_internet_access_text (9029649339816197345) -->
     <skip />
-    <!-- no translation found for lost_internet_access_switch (2262459569601190039) -->
-    <skip />
+    <string name="lost_internet_access_switch" msgid="2262459569601190039">"മൊബൈലിലേക്ക് മാറുക"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"വൈഫൈയിൽ തുടരുക"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"ഒരിക്കലും വീണ്ടും കാണിക്കരുത്"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"കണക്റ്റുചെയ്യുക"</string>
@@ -805,12 +801,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"വൈഫൈ കോൺഫിഗർ ചെയ്യുക"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC വിലാസം"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP വിലാസം"</string>
-    <!-- no translation found for wifi_details_subnet_mask (6547625164186585943) -->
-    <skip />
-    <!-- no translation found for wifi_details_dns (8648826607751830768) -->
-    <skip />
-    <!-- no translation found for wifi_details_ipv6_address_header (4334059712014889425) -->
-    <skip />
+    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"സബ്‌നെറ്റ് മാസ്‌ക്"</string>
+    <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 വിലാസങ്ങൾ"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"സംരക്ഷിച്ച നെറ്റ്‌വർക്ക്"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP ക്രമീകരണങ്ങൾ"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"ഈ ഉപയോക്താവിന് വൈഫൈ വിപുല ക്രമീകരണം ലഭ്യമല്ല"</string>
@@ -842,8 +835,7 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"ഈ ഗ്രൂപ്പിനെ മറക്കണോ?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"പോർട്ടബിൾ വൈഫൈ ഹോട്ട്‌സ്പോട്ട്"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ട്"</string>
-    <!-- no translation found for wifi_hotspot_checkbox_text_summary (5347703013899354452) -->
-    <skip />
+    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"വൈഫൈ നെറ്റ്‌വർക്ക് നൽകുന്നതിന് മൊബൈൽ കണക്ഷൻ ഉപയോഗിക്കുക"</string>
     <!-- no translation found for wifi_hotspot_off_subtext (2745508221200463254) -->
     <skip />
     <!-- no translation found for wifi_hotspot_off_subtext (7746761268472599794) -->
@@ -857,7 +849,8 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ട് സജ്ജീകരണം"</string>
     <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5560680057727007011) -->
     <skip />
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> പോർട്ടബിൾ വൈഫൈ ഹോട്ട്‌സ്പോട്ട്"</string>
+    <!-- no translation found for wifi_tether_configure_subtext (2050196439900426456) -->
+    <skip />
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"വൈഫൈ കോളിംഗ്"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"വൈഫൈ കോളിംഗ് ഓണാക്കുക"</string>
@@ -868,15 +861,29 @@
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"റോമിംഗ് മുൻഗണന"</string>
-    <!-- no translation found for wifi_calling_mode_choices:1 (1335127656328817518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (7715869266611010880) -->
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"വൈഫൈ തിരഞ്ഞെടുത്തിരിക്കുന്നു"</item>
+    <item msgid="1335127656328817518">"മൊബൈൽ ഡാറ്റ ഉപയോഗിക്കാൻ താൽപ്പര്യപ്പെടുന്നു"</item>
+    <item msgid="3132912693346866895">"വൈഫൈ മാത്രം"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"വൈ-ഫൈ"</item>
+    <item msgid="7715869266611010880">"മൊബൈൽ"</item>
+    <item msgid="2838022395783120596">"വൈ-ഫൈ മാത്രം"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (5074515506087318555) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (1118703915148755405) -->
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Wi-Fi തിരഞ്ഞെടുത്തിരിക്കുന്നു"</item>
+    <item msgid="5074515506087318555">"തിരഞ്ഞെടുത്ത മൊബൈൽ"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"വൈ-ഫൈ"</item>
+    <item msgid="1118703915148755405">"മൊബൈൽ"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -886,7 +893,6 @@
     <string name="emergency_address_summary" msgid="306028701568728126">"വൈഫൈ ഉപയോഗിച്ച് നിങ്ങൾ 911-ലേക്ക് വിളിക്കുമ്പോൾ, ലൊക്കേഷൻ പോലുള്ള അടിയന്തര സേവനങ്ങൾ ഉപയോഗിക്കുന്ന വിലാസം"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ഡിസ്പ്ലേ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ശബ്‌ദം"</string>
-    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"വോളിയം"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"സംഗീത ഇഫക്‌റ്റുകൾ"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"റിംഗ് വോളിയം"</string>
@@ -937,8 +943,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"വ്യക്തിഗത അക്കൗണ്ട് - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"തിരയൽ"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"തിരയൽ ക്രമീകരണങ്ങളും ചരിത്രവും നിയന്ത്രിക്കുക"</string>
-    <!-- no translation found for search_settings_no_results (8799027492641230999) -->
-    <skip />
+    <string name="search_settings_no_results" msgid="8799027492641230999">"ഫലങ്ങൾ ഇല്ല"</string>
     <string name="display_settings" msgid="7965901687241669598">"ഡിസ്പ്ലേ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"സ്‌ക്രീൻ സ്വയമേ തിരിക്കുക"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ സ്വയമേവ ഓറിയന്റേഷൻ മാറുക"</string>
@@ -960,6 +965,8 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"സൂര്യോദയം മുതൽ അസ്തമയം വരെ"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"ആരംഭിക്കുന്ന സമയം"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"അവസാനിക്കുന്ന സമയം"</string>
+    <!-- no translation found for night_display_temperature_title (1435292789272017136) -->
+    <skip />
     <string name="night_display_summary_off" msgid="7009821232380000786">"ഓഫ്. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"ഒരിക്കലും സ്വയമേവ ഓണാക്കില്ല."</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g>-ന് സ്വയമേവ ഓണാക്കും."</string>
@@ -1015,14 +1022,11 @@
     <string name="sim_enter_ok" msgid="6475946836899218919">"ശരി"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"റദ്ദാക്കുക"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"ഒന്നിലധികം സിം-കൾ കണ്ടെത്തി"</string>
-    <!-- no translation found for sim_multi_sims_summary (2698176447067691396) -->
-    <skip />
+    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"മൊബൈൽ ഡാറ്റയ്ക്ക് നിങ്ങൾക്ക് ഇഷ്ടമുള്ള സിം തിരഞ്ഞെടുക്കുക."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"ഡാറ്റ SIM മാറ്റണോ?"</string>
-    <!-- no translation found for sim_change_data_message (5854582807996717811) -->
-    <skip />
+    <string name="sim_change_data_message" msgid="5854582807996717811">"മൊബൈൽ ഡാറ്റയ്ക്ക് <xliff:g id="OLD_SIM">%2$s</xliff:g>-ന് പകരം <xliff:g id="NEW_SIM">%1$s</xliff:g> ഉപയോഗിക്കണോ?"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"തിരഞ്ഞെടുത്ത SIM കാർഡ് അപ്‌ഡേറ്റുചെയ്യണോ?"</string>
-    <!-- no translation found for sim_preferred_message (8466930554330635780) -->
-    <skip />
+    <string name="sim_preferred_message" msgid="8466930554330635780">"നിങ്ങളുടെ ഉപകരണത്തിൽ ഉള്ള ഒരേയൊരു സിം <xliff:g id="NEW_SIM">%1$s</xliff:g> ആണ്. മൊബൈൽ ഡാറ്റ, കോളുകൾ, SMS സന്ദേശങ്ങൾ എന്നിവയ്ക്ക് ഈ സിം ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"സിം പിൻ കോഡ് തെറ്റാണ്, നിങ്ങളുടെ ഉപകരണം അൺലോക്കുചെയ്യാൻ ഇപ്പോൾ നിങ്ങളുടെ കാരിയറുമായി ബന്ധപ്പെടണം."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="other">SIM PIN കോഡ് തെറ്റാണ്, നിങ്ങൾക്ക് <xliff:g id="NUMBER_1">%d</xliff:g> ശ്രമങ്ങൾ കൂടി ശേഷിക്കുന്നു.</item>
@@ -1246,15 +1250,13 @@
     <string name="menu_restore" msgid="8260067415075573273">"സ്ഥിരമായതിലേക്ക് പുനഃസജ്ജമാക്കുക"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"സ്ഥിര APN ക്രമീകരണങ്ങൾ പുനഃസജ്ജീകരിക്കൽ പൂർത്തിയാക്കി."</string>
     <string name="reset_network_title" msgid="4557113742173895074">"നെറ്റ്‌വർക്ക്‌സെറ്റിംഗ് റീസെറ്റുചെയ്യൂ"</string>
-    <!-- no translation found for reset_network_desc (5547979398298881406) -->
-    <skip />
+    <string name="reset_network_desc" msgid="5547979398298881406">"ഇങ്ങനെ ചെയ്താൽ ഇനിപ്പറയുന്നവ ഉപ്പെടെയുള്ള എല്ലാ നെറ്റ്‍വർക്ക് ക്രമീകരണവും പുനഃക്രമീകരിക്കപ്പെടും:\n\n"<li>"വൈഫൈ"</li>\n<li>"മൊബൈൽ ഡാറ്റ"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"ക്രമീകരണം റീസെറ്റുചെയ്യുക"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"എല്ലാ നെറ്റ്‌വർക്കിംഗ് ക്രമീകരണവും റീസെറ്റുചെയ്യണോ? നിങ്ങൾക്ക് ഈ പ്രവർത്തനം പഴയപടിയാക്കാനാവില്ല!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"ക്രമീകരണം റീസെറ്റുചെയ്യുക"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"റീസെറ്റുചെയ്യണോ?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ഈ ഉപയോക്താവിന് നെറ്റ്‌വർക്ക് റീസെറ്റ് ലഭ്യമല്ല"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"നെറ്റ്‌വർക്ക് ക്രമീകരണം റീസെറ്റുചെയ്‌തു"</string>
-    <string name="device_reset_title" msgid="2384019005638768076">"ഉപകരണം പുനഃസജ്ജീകരിക്കുക"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"ഫാക്‌ടറിഡാറ്റ റീസെറ്റ്"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"ഇത് നിങ്ങളുടെ ടാബ്‌ലെറ്റിന്റെ "<b>"ആന്തരിക സംഭരണത്തിൽ"</b>" നിന്നും ഇവയുൾപ്പെടെ എല്ലാ ഡാറ്റയും മായ്ക്കും:\n\n"<li>"നിങ്ങളുടെ Google അക്കൗണ്ട്"</li>\n<li>"സി‌സ്റ്റത്തിന്റെയും അപ്ലിക്കേഷന്റെയും ഡാറ്റയും ക്രമീകരണങ്ങളും"</li>\n<li>"ഡൗൺലോഡുചെ‌യ്‌ത അപ്ലിക്കേഷനുകൾ"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"ഇത് നിങ്ങളുടെ ഫോണിലെ "<b>"ആന്തരിക സംഭരണത്തിലെ"</b>" എല്ലാ ഡാറ്റയും മായ്ക്കും, അതിൽ ഇവയുൾപ്പെടുന്നു:\n\n"<li>"നിങ്ങളുടെ Google അക്കൗണ്ട്"</li>\n<li>"സിസ്റ്റം, അപ്ലിക്കേഷൻ എന്നിവയുടെ ഡാറ്റയും ക്രമീകരണങ്ങളും"</li>\n<li>"ഡൗൺലോഡ്ചെയ്‌ത അപ്ലിക്കേഷനുകൾ"</li></string>
@@ -1352,10 +1354,8 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"ഉയർന്ന ബാറ്ററി ഉപയോഗം"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"കുറഞ്ഞ ബാറ്ററി ഉപയോഗം"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"ലൊക്കേഷൻ മോഡ്"</string>
-    <!-- no translation found for location_mode_high_accuracy_description (3453010562265338113) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (2365298246603348985) -->
-    <skip />
+    <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"GPS, വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്കുകൾ എന്നിവയിലൊന്ന് ലൊക്കേഷൻ നിർണ്ണയിക്കുന്നതിന് ഉപയോഗിക്കുക"</string>
+    <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്കുകൾ എന്നിവയിലൊന്ന് ലൊക്കേഷൻ നിർണ്ണയിക്കുന്നതിന് ഉപയോഗിക്കുക"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ലൊക്കേഷൻ നിർണ്ണയിക്കാൻ GPS ഉപയോഗിക്കുക"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"സ്കാനിംഗ്"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"സ്കാനിംഗ്"</string>
@@ -1472,10 +1472,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"അപ്ലിക്കേഷൻ ക്രമീകരണങ്ങൾ"</string>
     <string name="install_applications" msgid="4872012136210802181">"അജ്ഞാത ഉറവിടങ്ങൾ"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"എല്ലാ അപ്ലിക്കേഷൻ ഉറവിടങ്ങളും അനുവദിക്കുക"</string>
-    <string name="install_unknown_applications_title" msgid="663831043139080992">"Google Play-യ്ക്ക് പുറമെയുള്ള മറ്റ് ഉറവിടങ്ങളിൽ നിന്ന് അപ്ലിക്കേഷനുകൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ അനുവദിക്കുന്നു"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"അജ്ഞാത ഉറവിടങ്ങളിൽ നിന്നും അപ്ലിക്കേഷനുകൾ ഇൻസ്റ്റാളുചെയ്യാൻ അനുവദിക്കുക"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"അജ്ഞാത ഉറവിടങ്ങളിൽ നിന്നുള്ള അപ്ലിക്കേഷനുകളാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ അപ്ലിക്കേഷനുകൾ ഉപയോഗിക്കുന്നതിലൂടെ നിങ്ങളുടെ ടാബ്‌ലെറ്റിനു സംഭവിക്കുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾ മാത്രമാണ് ഉത്തരവാദിയെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"അജ്ഞാത ഉറവിടങ്ങളിൽ നിന്നുള്ള അപ്ലിക്കേഷനുകളാൽ നിങ്ങളുടെ ഫോണും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ അപ്ലിക്കേഷനുകൾ ഉപയോഗിക്കുന്നതിലൂടെ നിങ്ങളുടെ ഫോണിനു സംഭവിക്കുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾ മാത്രമാണ് ഉത്തരവാദിയെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
+    <!-- no translation found for install_all_warning (8310489909586138165) -->
+    <skip />
+    <!-- no translation found for install_all_warning (1952257127370115988) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"വിപുലമായ ക്രമീകരണം"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"കൂടുതൽ ക്രമീകരണ ഓപ്‌ഷനുകൾ പ്രവർത്തനക്ഷമമാക്കുക"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ആപ്പ് വിവരം"</string>
@@ -1644,6 +1644,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"നിങ്ങൾ ഈ സേവനം നിർത്തുകയാണെങ്കിൽ, നിങ്ങളുടെ ഫോൺ ഓഫാക്കി വീണ്ടും ഓണാക്കുന്നതുവരെ അതിലെ ചില സവിശേഷതകൾ ശരിയായി പ്രവർത്തിക്കുന്നത് അവസാനിപ്പിക്കാനിടയുണ്ട്."</string>
     <string name="language_settings" msgid="8758655933029560944">"ഭാഷകളും ഇൻപുട്ടും"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"ഭാഷകളും ഇൻപുട്ടും"</string>
+    <!-- no translation found for input_assistance (7577795275222555487) -->
+    <skip />
     <string name="keyboard_settings_category" msgid="8275523930352487827">"കീബോർഡും ടൈപ്പുചെയ്യൽ രീതികളും"</string>
     <string name="phone_language" msgid="7116581601133118044">"ഭാഷകൾ"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1661,8 +1663,10 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"ക്രമീകരണം"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"ഭാഷ"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> എന്നതിനായുള്ള ക്രമീകരണങ്ങൾ തുറക്കുന്നതിൽ പരാജയപ്പെട്ടു"</string>
-    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"കീബോർഡും ഇൻപുട്ട് രീതികളും"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"വെർച്വൽ കീബോർഡ്"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (6035224122054465137) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (9084929359894695824) -->
+    <skip />
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"ലഭ്യമായ വെർച്വൽ കീബോർഡ്"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"കീബോർഡുകൾ മാനേജുചെയ്യുക"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"കീബോർഡ് സഹായം"</string>
@@ -1991,10 +1995,8 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"ഓട്ടോമാറ്റിക്കായി ഓണാക്കുക"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"ഒരിക്കലും"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> ബാറ്ററിയിൽ"</string>
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
-    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"ബാറ്ററി ശതമാനം"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"സ്‌റ്റാറ്റസ് ബാറിൽ ബാറ്ററി ശതമാനം കാണിക്കുക"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"പ്രോസസ്സ് സ്ഥിതിവിവരക്കണക്കുകൾ"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"പ്രവർത്തന പ്രോസസ്സുകളെക്കുറിച്ചുള്ള Geeky സ്ഥിതിവിവരക്കണക്കുകൾ"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"മെമ്മറി ഉപയോഗം"</string>
@@ -2240,8 +2242,7 @@
     <string name="data_usage_accounting" msgid="7170028915873577387">"കാരിയർ ഡാറ്റ കണക്കാക്കുന്നത് ഉപകരണത്തിൽ നിന്നും വ്യത്യാസപ്പെട്ടിരിക്കാം."</string>
     <string name="data_usage_app" msgid="4970478397515423303">"അപ്ലിക്കേഷൻ ഉപയോഗം"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"ആപ്പ് വിവരം"</string>
-    <!-- no translation found for data_usage_cellular_data (9168928285122125137) -->
-    <skip />
+    <string name="data_usage_cellular_data" msgid="9168928285122125137">"മൊബൈൽ ഡാറ്റ"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"ഡാറ്റ പരിധി സജ്ജീകരിക്കുക"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"ഡാറ്റ ഉപയോഗ സൈക്കിൾ"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"അപ്ലിക്കേഷൻ ഉപയോഗം"</string>
@@ -2256,8 +2257,7 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"നെറ്റ്‌വർക്ക് നിയന്ത്രണം"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"സിം കാർഡുകൾ"</string>
-    <!-- no translation found for data_usage_menu_cellular_networks (8339835014751511300) -->
-    <skip />
+    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"മൊബൈൽ നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"പരിധിയിൽ തൽക്കാലം നിർത്തി"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"ഡാറ്റ സ്വയമേ സമന്വയിപ്പിക്കൂ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"വ്യക്തിഗത ഡാറ്റ സ്വയമേവ സമന്വയിപ്പിക്കുക"</string>
@@ -2268,8 +2268,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"ഫോർഗ്രൗണ്ട്"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"പശ്ചാത്തലം"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"നിയന്ത്രിതം"</string>
-    <!-- no translation found for data_usage_disable_mobile (8656552431969276305) -->
-    <skip />
+    <string name="data_usage_disable_mobile" msgid="8656552431969276305">"മൊബൈൽ ഡാറ്റ ഓഫാക്കണോ?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"മൊബൈൽ ഡാറ്റ പരിധി സജ്ജീകരിക്കുക"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G ഡാറ്റ പരിധി സജ്ജീകരിക്കുക"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-3G ഡാറ്റ പരിധി സജ്ജീകരിക്കുക"</string>
@@ -2288,13 +2287,12 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"പ‌ശ്ചാത്തലം:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"അപ്ലിക്കേഷൻ ക്രമീകരണങ്ങൾ"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"പശ്ചാത്തല ഡാറ്റ"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (179956961840654750) -->
+    <!-- no translation found for data_usage_app_restrict_background_summary (5853552187570622572) -->
     <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"ഈ അപ്ലിക്കേഷനായി പശ്ചാത്തല ഡാറ്റ നിയന്ത്രിക്കുന്നതിന്, ആദ്യം ഒരു മൊബൈൽ ഡാറ്റ പരിധി സജ്ജീകരിക്കുക."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"പശ്ചാത്തല ഡാറ്റ നിയന്ത്രിക്കണോ?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"മൊബൈൽ നെറ്റ്‌വർക്കുകൾ ലഭ്യമാകുമ്പോൾ മാത്രം പാശ്ചാത്തല ഡാറ്റയെ ആശ്രയിക്കുന്ന ഒരു അപ്ലിക്കേഷൻ പ്രവർത്തനം നിർത്തുന്നതിന് ഈ സവിശേഷത ഇടയാക്കും.\n\nഅപ്ലിക്കേഷനിൽ ലഭ്യമായ ക്രമീകരണങ്ങളിൽ കൂടുതൽ ഉചിതമായ ഡാറ്റാ ഉപയോഗ നിയന്ത്രണങ്ങൾ നിങ്ങൾക്ക് കണ്ടെത്താനാകും."</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (55012417305745608) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"മൊബൈൽ ഡാറ്റക്ക് പരിധി സജ്ജീകരിക്കുമ്പോൾ മാത്രമേ പശ്ചാത്തല ഡാറ്റ പരിമിതപ്പെടുത്താൻ കഴിയൂ."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"ഡാറ്റ സ്വയംസമന്വയിപ്പിക്കൽ ഓണാക്കണോ?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"വെബിൽ നിങ്ങളുടെ അക്കൗണ്ടുകളിൽ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം നിങ്ങളുടെ ടാബ്‌ലെറ്റിലേക്ക് സ്വയമേവ പകർത്തും.\n\nടാബ്‌ലെറ്റിൽ നിങ്ങൾ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം ചില അക്കൗണ്ടുകൾ സ്വയമേവ വെബിലേക്കും പകർത്താനിടയുണ്ട്. ഒരു Google അക്കൗണ്ട് ഇത്തരത്തിൽ പ്രവർത്തിക്കുന്നു."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"വെബിൽ നിങ്ങളുടെ അക്കൗണ്ടുകളിൽ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം നിങ്ങളുടെ ഫോണിലേക്ക് സ്വയമേവ പകർത്തും.\n\nഫോണിൽ നിങ്ങൾ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം ചില അക്കൗണ്ടുകൾ സ്വയമേവ വെബിലേക്കും പകർത്താനിടയുണ്ട്. ഒരു Google അക്കൗണ്ട് ഇത്തരത്തിൽ പ്രവർത്തിക്കുന്നു."</string>
@@ -2306,17 +2304,12 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"ഡാറ്റ ഉപയോഗ മുന്നറിയിപ്പ് സജ്ജീകരിക്കുക"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"ഡാറ്റ ഉപയോഗ പരിധി സജ്ജീകരിക്കുക"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"ഡാറ്റ ഉപയോഗം നിയന്ത്രിക്കുന്നു"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (4983487893343645667) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (3926320594049434225) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"നിങ്ങൾ സജ്ജീകരിച്ച ‌പരിധിയെത്തിയാൽ ടാബ്‌ലെറ്റ്, മൊബൈൽ ഡാറ്റ ഓഫാക്കും.\n\nഡാറ്റ ഉപയോഗം കണക്കാക്കുന്നത് നിങ്ങളുടെ ടാബ്‌ലെറ്റ് ആയതിനാലും, നിങ്ങളുടെ കാരിയർ വ്യത്യസ്ത രീതിയിൽ ഉപയോഗം കണക്കാക്കിയേക്കാം എന്നതിനാലും, ഒരു മിതമായ ‌ഡാറ്റാ പരിധി ‌സജ്ജീകരിക്കാൻ ‌നോക്കുക."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"നിങ്ങൾ സജ്ജീകരിച്ച ‌പരിധിയെത്തിയാൽ ഫോൺ, മൊബൈൽ ഡാറ്റ ഓഫാക്കും.\n\nഡാറ്റ ഉപയോഗം കണക്കാക്കുന്നത് നിങ്ങളുടെ ഫോൺ ആയതിനാലും, നിങ്ങളുടെ കാരിയർ വ്യത്യസ്ത രീതിയിൽ ഉപയോഗം കണക്കാക്കിയേക്കാം എന്നതിനാലും, ഒരു മിതമായ ‌ഡാറ്റാ പരിധി ‌സജ്ജീകരിക്കാൻ ‌നോക്കുക."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"പശ്ചാത്തല ഡാറ്റ നിയന്ത്രിക്കണോ?"</string>
-    <!-- no translation found for data_usage_restrict_background (434093644726734586) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7096707497743363380) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7910798414964288424) -->
-    <skip />
+    <string name="data_usage_restrict_background" msgid="434093644726734586">"പശ്ചാത്തല മൊബൈൽ ഡാറ്റയെ പരിമിതപ്പെടുത്തുകയാണെങ്കിൽ, ചില ആപ്‌സും സേവനങ്ങളും വൈഫൈയിൽ കണക്റ്റുചെയ്യുന്നതുവരെ പ്രവർത്തിക്കില്ല."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"പശ്ചാത്തലത്തിൽ മൊബൈൽ ഡാറ്റയെ പരിമിതപ്പെടുത്തുകയാണെങ്കിൽ, ചില ആപ്‌സും സേവനങ്ങളും വൈഫൈയിൽ കണക്റ്റുചെയ്യുന്നതുവരെ പ്രവർത്തിക്കില്ല.\n\nഈ ടാബ്‌ലെറ്റിലെ എല്ലാ ഉപയോക്താക്കൾക്കും ഈ ക്രമീകരണം ബാധകമാകും."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"പശ്ചാത്തലത്തിൽ മൊബൈൽ ഡാറ്റയെ പരിമിതപ്പെടുത്തുകയാണെങ്കിൽ, ചില ആപ്‌സും സേവനങ്ങളും വൈഫൈയിൽ കണക്റ്റുചെയ്യുന്നതുവരെ പ്രവർത്തിക്കില്ല.\n\nഈ ഫോണിലെ എല്ലാ ഉപയോക്താക്കൾക്കും ഈ ക്രമീകരണം ബാധകമാണ്."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"മുന്നറിയിപ്പ്"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"പരിധി"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"നീക്കംചെയ്‌ത അപ്ലിക്കേഷനുകൾ"</string>
@@ -2326,8 +2319,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് കണക്കാക്കിയത് അനുസരിച്ച് <xliff:g id="RANGE">%2$s</xliff:g>: ഏകദേശം <xliff:g id="TOTAL">%1$s</xliff:g> ഉപയോഗിച്ചു. നിങ്ങളുടെ കാരിയർ ഡാറ്റ ഉപയോഗം കണക്കാക്കുന്നത് മറ്റൊരു വിധത്തിലാകാം."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"നിങ്ങളുടെ ഫോൺ കണക്കാക്കിയത് അനുസരിച്ച് <xliff:g id="RANGE">%2$s</xliff:g>: ഏകദേശം <xliff:g id="TOTAL">%1$s</xliff:g> ഉപയോഗിച്ചു. നിങ്ങളുടെ കാരിയർ ഡാറ്റ ഉപയോഗം കണക്കാക്കുന്നത് മറ്റൊരു വിധത്തിലാകാം."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"നെറ്റ്‌വർക്ക് നിയന്ത്രണം"</string>
-    <!-- no translation found for data_usage_metered_body (7655851702771342507) -->
-    <skip />
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"പശ്ചാത്തല ഡാറ്റ പരിമിതപ്പെടുത്തിയിരിക്കുമ്പോൾ, മീറ്റർ മാപക നെറ്റ്‌വർക്കുകൾ മൊബൈൽ ഡാറ്റ പോലെ തന്നെ പരിഗണിക്കപ്പെടുന്നു. വലിയ ഡൗൺലോഡുകൾക്ക് ഈ നെറ്റ്‌വർക്കുകൾ ഉപയോഗിക്കുന്നതിന് മുമ്പ് ആപ്‌സ് മുന്നറിയിപ്പ് നൽകിയേക്കും."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"മൊബൈൽ നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"മീറ്റർ-മാപക വൈഫൈ നെറ്റ്‌വർക്ക്"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"മീറ്റർ-മാപക നെറ്റ്‌വർക്കുകൾ തിരഞ്ഞെടുക്കാൻ വൈഫൈ ഓണാക്കുക."</string>
@@ -2505,7 +2497,6 @@
     <string name="application_restrictions" msgid="8207332020898004394">"അപ്ലിക്കേഷനുകളും ഉള്ളടക്കവും അനുവദിക്കുക"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"നിയന്ത്രണങ്ങളുള്ള അപ്ലിക്കേഷനുകൾ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"അപ്ലിക്കേഷനുകൾക്കായുള്ള ക്രമീകരണങ്ങൾ വിപുലീകരിക്കുക"</string>
-    <string name="home_app_uninstall_button" msgid="6808453012607962899">"ഈ അപ്ലിക്കേഷൻ അൺഇൻസ്റ്റാളുചെയ്യുക"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"ഈ ടാബ്‌ലെറ്റിലെ എല്ലാ ഉപയോക്താക്കളെയും ഈ ക്രമീകരണം ബാധിക്കുന്നു."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"ഈ ഫോണിലെ എല്ലാ ഉപയോക്താക്കളെയും ഈ ക്രമീകരണം ബാധിക്കുന്നു."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"ഭാഷ മാറ്റുക"</string>
@@ -2582,8 +2573,7 @@
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"സിം കാർഡുകൾ മാറി"</string>
     <string name="sim_cards_changed_message_summary" msgid="8258058274989383204">"ആക്ടിവിറ്റികൾ സജ്ജീകരിക്കാൻ ടാപ്പുചെയ്യുക"</string>
-    <!-- no translation found for sim_cellular_data_unavailable (9109302537004566098) -->
-    <skip />
+    <string name="sim_cellular_data_unavailable" msgid="9109302537004566098">"മൊബൈൽ ഡാറ്റ ലഭ്യമല്ല"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"ഡാറ്റ സിം തിരഞ്ഞെടുക്കാൻ ടാപ്പുചെയ്യുക"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"ഇത് എല്ലായ്‌പ്പോഴും കോളുകൾക്കായി ഉപയോഗിക്കുക"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"ഡാറ്റയ്‌ക്കായി ഒരു SIM തിരഞ്ഞെടുക്കുക"</string>
@@ -2789,7 +2779,14 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"ഇൻസ്റ്റാൾ ചെയ്തിരിക്കുന്ന ആപ്പുകളൊന്നും \'ചിത്രത്തിനുള്ളിൽ ചിത്രം\' എന്നതിനെ പിന്തുണയ്ക്കുന്നില്ല"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"pip ചിത്രത്തിനുള്ളിൽ ചിത്രം"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"ചിത്രത്തിനുള്ളിൽ ചിത്രം"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="5406267586308110783">"ആപ്പിൽ നിന്ന് പുറത്തുപോവുമ്പോൾ \'ചിത്രത്തിനുള്ളിൽ ചിത്രം\' എന്നതിലേയ്ക്കുള്ള  പ്രവേശനം അനുവദനീയമാക്കുക"</string>
+    <!-- no translation found for picture_in_picture_app_detail_switch (1131910667023738296) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_app_detail_summary (7942592478427522244) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_on (6103704909710176555) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_off (5654388666434625247) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\'ശല്യപ്പെടുത്തരുത്\' ആക്‌സസ്സ്"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ഇൻസ്റ്റാളുചെയ്‌തവയൊന്നും \'ശല്യപ്പെടുത്തരുത്\' മോഡിൽ പ്രവേശിക്കാൻ അഭ്യർത്ഥിച്ചിട്ടില്ല"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"അപ്ലിക്കേഷനുകൾ ലോഡുചെയ്യുന്നു..."</string>
@@ -3133,8 +3130,10 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"അനുമതിയുള്ള ആപ്സ്"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"ഉണ്ട്"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"ഇല്ല"</string>
-    <string name="install_other_apps" msgid="4215339768128036452">"മറ്റ് ആപ്പുകൾ ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
-    <string name="keywords_install_other_apps" msgid="3320171242043396361">"ബാഹ്യ അജ്ഞാത ഉറവിടങ്ങളിൽ നിന്നുള്ള ആപ്പുകൾ ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
+    <!-- no translation found for install_other_apps (6986686991775883017) -->
+    <skip />
+    <!-- no translation found for keywords_install_other_apps (761078076051006558) -->
+    <skip />
     <string name="write_settings" msgid="4797457275727195681">"സിസ്റ്റം ക്രമീകരണങ്ങൾ പരിഷ്‌ക്കരിക്കുക"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"സിസ്റ്റം ക്രമീകരണം പരിഷ്കരിക്കാൻ എഴുതുക"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"സിസ്റ്റം ക്രമീകരണം പരിഷ്കരിക്കുന്നതിന് <xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g> ആപ്പുകളെ അനുവദിച്ചു"</string>
@@ -3149,7 +3148,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"ഇല്ല"</string>
     <string name="external_source_trusted" msgid="6857780460845250885">"അതെ"</string>
     <string name="external_source_untrusted" msgid="6608922938133896956">"അല്ല"</string>
-    <string name="external_source_switch_title" msgid="5709145695271819076">"ഈ ഉറവിടത്തിൽ നിന്നുള്ള ആപ്പുകളെ വിശ്വസിക്കാം"</string>
+    <!-- no translation found for external_source_switch_title (5581865736984836418) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"ക്യാമറയ്ക്കായി രണ്ടുതവണ തിരിക്കുക"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"നിങ്ങളുടെ കൈത്തണ്ട രണ്ടുപ്രാവശ്യം തിരിച്ചുകൊണ്ട് ക്യാമറാ ആപ്പ് തുറക്കുക"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ക്യാമറയ്ക്ക് പവർബട്ടൺ രണ്ടുതവണയമർത്തൂ"</string>
@@ -3192,18 +3192,14 @@
     <string name="location_on_summary" msgid="5127631544018313587">"ഓൺ / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"ഓഫ്"</string>
     <string name="backup_disabled" msgid="485189128759595412">"ബാക്കപ്പ് പ്രവർത്തനരഹിതമാക്കി"</string>
-    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <!-- no translation found for about_summary (924181828102801010) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"പ്രവർത്തനം അനുവദനീയമല്ല"</string>
-    <!-- no translation found for disabled_by_policy_title_adjust_volume (7399450998356045023) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_outgoing_calls (7919816644946067058) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_sms (5733307423899610340) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_camera (6225008536855644874) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_screen_capture (4066913623298047094) -->
-    <skip />
+    <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"വോളിയം മാറ്റാനാകില്ല"</string>
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"കോൾ ചെയ്യുന്നത് അനുവദനീയമല്ല"</string>
+    <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS അനുവദനീയമല്ല"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"ക്യാമറ അനുവദനീയമല്ല"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"സ്‌ക്രീൻഷോട്ട് അനുവദനീയമല്ല"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"ഈ പ്രവർത്തനം പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നു. കൂടുതലറിയാൻ നിങ്ങളുടെ സ്ഥാപനത്തിന്റെ അഡ്മിനിസ്ട്രേറ്ററെ ബന്ധപ്പെടുക."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"കൂടുതൽ‍ വിശദാംശങ്ങൾ"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"ക്രമീകരണവും അനുമതികളും കോർപ്പറേറ്റ് ആക്‌സസും നെറ്റ്‌വർക്ക് ആക്ടിവിറ്റിയും ഉപകരണത്തിന്റെ ലൊക്കേഷൻ വിവരങ്ങളും ഉൾപ്പെടെ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലുമായി ബന്ധപ്പെട്ട ആപ്‌സും വിവരങ്ങളും നിരീക്ഷിക്കാനും മാനേജുചെയ്യാനും അഡ്‌മിനിസ്‌ട്രേറ്റർക്ക് കഴിയും."</string>
@@ -3216,13 +3212,11 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"ഹോട്ട്സ്പോട്ട് ഓണാണ്"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"പോർട്ടബിൾ വൈഫൈ ഹോട്ട്‌സ്പോട്ട് <xliff:g id="ID_1">%1$s</xliff:g> സജീവമാണ്, ഈ ഉപകരണത്തിനായുള്ള വൈഫൈ ഓഫാക്കിയിരിക്കുന്നു."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"വിമാന മോഡ് ഓണാണ്"</string>
-    <!-- no translation found for condition_airplane_summary (5561586417832393666) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="5561586417832393666">"വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്ക് എന്നിവ ഓഫാക്കിയിരിക്കുന്നു. നിങ്ങൾക്ക് കോൾ ചെയ്യാനോ ഇന്റർനെറ്റിലേക്ക് കണക്റ്റുചെയ്യാനോ കഴിയില്ല."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"\'ശല്യപ്പെടുത്തരുത്\' ഓണാണ് (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"ബാറ്ററി സേവർ ഓണാണ്"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"പ്രകടനനിലവാരം കുറഞ്ഞിരിക്കുന്നു. ലൊക്കേഷൻ സേവനങ്ങളും പശ്ചാത്തല ഡാറ്റയും ഓഫാക്കി."</string>
-    <!-- no translation found for condition_cellular_title (1327317003797575735) -->
-    <skip />
+    <string name="condition_cellular_title" msgid="1327317003797575735">"മൊബൈൽ ഡാറ്റ ഓഫാണ്"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"വൈഫൈ വഴി മാത്രം ഇന്റർനെറ്റ് ലഭ്യമാണ്"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"ഡാറ്റ സേവർ ഓണാണ്"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"വൈഫൈ വഴി മാത്രം പശ്ചാത്തല ഡാറ്റ ലഭ്യമാണ്. വൈഫൈ ലഭ്യമല്ലാത്തപ്പോൾ ചില ആപ്സോ സേവനങ്ങളോ ഇതിനാൽ ബാധിക്കപ്പെട്ടേക്കാം."</string>
@@ -3240,14 +3234,12 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"സ്വയമേവയുള്ള സിസ്റ്റം അപ്ഡേറ്റുകൾ"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"ബൈൻഡർ ചെയ്‌ത HAL-കൾ (റീബൂട്ട് ആവശ്യമാണ്)"</string>
     <string name="usage" msgid="2977875522080448986">"ഉപയോഗം"</string>
-    <!-- no translation found for cellular_data_usage (2155683719898158203) -->
-    <skip />
+    <string name="cellular_data_usage" msgid="2155683719898158203">"മൊബൈൽ ഡാറ്റ ഉപയോഗം"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"വൈഫൈ ഡാറ്റ ഉപയോഗം"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ഇതർനെറ്റ് ഡാറ്റാ ഉപയോഗം"</string>
     <string name="wifi" msgid="1081550856200013637">"വൈഫൈ"</string>
     <string name="ethernet" msgid="6600095783781389720">"ഇതർനെറ്റ്"</string>
-    <!-- no translation found for cell_data_template (405684854174361041) -->
-    <skip />
+    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> മൊബൈൽ ഡാറ്റ"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> വൈഫൈ ഡാറ്റ"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ഇതർനെറ്റ് ഡാറ്റ"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ഡാറ്റാ മുന്നറിയിപ്പ്"</string>
@@ -3414,7 +3406,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"അറിയിപ്പുകൾ വേഗത്തിൽ പരിശോധിക്കുന്നതിന്, നിങ്ങളുടെ ഫോൺ കയ്യിലെടുക്കുക."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"അറിയിപ്പുകൾ വേഗത്തിൽ പരിശോധിക്കുന്നതിന്, നിങ്ങളുടെ ടാബ്‌ലെറ്റ് കയ്യിലെടുക്കുക."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"അറിയിപ്പുകൾ വേഗത്തിൽ പരിശോധിക്കുന്നതിന്, നിങ്ങളുടെ ഉപകരണം കയ്യിലെടുക്കുക."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"അറിയിപ്പുകൾ കാണാൻ സ്വൈപ്പുചെയ്യുക"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (5816346492253270243) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ ഫോണിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ടാബ്‌ലെറ്റിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ഉപകരണത്തിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
@@ -3439,14 +3432,11 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"വ്യക്തിഗത അക്കൗണ്ട് വിവരങ്ങൾ സ്വയമേവ സമന്വയിപ്പിക്കുക"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"ഔദ്യോഗിക അക്കൗണ്ട് വിവരങ്ങൾ സ്വയമേവ സമന്വയിപ്പിക്കുക"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"അക്കൗണ്ട് സമന്വയം"</string>
-    <!-- no translation found for enterprise_privacy_settings (5190573945078964986) -->
+    <!-- no translation found for enterprise_privacy_settings (1177106810374146496) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_generic (5853292305730761128) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_with_name (4266234968317996188) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_header (7402406406883832509) -->
-    <skip />
+    <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"മാറ്റങ്ങളും ക്രമീകരണവും മാനേജുചെയ്യുന്നത് നിങ്ങളുടെ സ്ഥാപനമാണ്"</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"മാറ്റങ്ങളും ക്രമീകരണവും മാനേജുചെയ്യുന്നത് <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ആണ്"</string>
+    <string name="enterprise_privacy_header" msgid="7402406406883832509">"നിങ്ങളുടെ ഔദ്യോഗിക ഡാറ്റയിലേക്ക് ആക്‌സസ്സ് നൽകുന്നതിന്, നിങ്ങളുടെ സ്ഥാപനം ക്രമീകരണം മാറ്റിയേക്കാം അല്ലെങ്കിൽ നിങ്ങളുടെ ഉപകരണത്തിൽ സോഫ്റ്റ്‍വെയര്‍ ഇൻസ്‌റ്റാൾ ചെയ്തേക്കാം.\n\nകൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ സ്ഥാപനത്തിന്റെ അഡ്‌മിനുമായി ബന്ധപ്പെടുക."</string>
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"നിങ്ങൾക്ക് സ്ഥാപനത്തിന് കാണാൻ കഴിയുന്ന വിവര തരങ്ങൾ"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"നിങ്ങളുടെ സ്ഥാപനത്തിന്റെ അഡ്‌മിൻ വരുത്തിയ മാറ്റങ്ങൾ"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"ഈ ഉപകരണത്തിലേക്കുള്ള നിങ്ങളുടെ ആക്സസ്സ്"</string>
@@ -3466,30 +3456,24 @@
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"ഏറ്റവും പുതിയ സുരക്ഷാ ലോഗ്"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"ഒന്നുമില്ല"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"അപ്ലിക്കേഷനുകൾ ഇൻസ്റ്റാളുചെയ്‌തു"</string>
-    <string name="enterprise_privacy_location_access" msgid="943112505930395028">"നിങ്ങളുടെ ലൊക്കേഷൻ ആക്സസ്സ് ചെയ്യുന്നതിന് അനുവദിക്കപ്പെട്ടിട്ടുള്ള ആപ്‌സ്"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="1101307566418116040">"നിങ്ങളുടെ മൈക്രോഫോൺ ആക്സസ്സ് ചെയ്യുന്നതിന് അനുവദിക്കപ്പെട്ടിട്ടുള്ള ആപ്‌സ്"</string>
-    <string name="enterprise_privacy_camera_access" msgid="97095968133740652">"നിങ്ങളുടെ ക്യാമറ ആക്സസ്സ് ചെയ്യാൻ അനുവദിക്കപ്പെട്ടിട്ടുള്ള ആപ്‌സ്"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3292470316317639698">"ഡിഫോൾട്ട് ആപ്‌സ് സജ്ജമാക്കി"</string>
+    <!-- no translation found for enterprise_privacy_location_access (4158197200885270634) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (5717375623568864441) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (4858146118537519375) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3288495615791128724) -->
+    <skip />
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"ഡിഫോൾട്ട് കീബോർഡ്"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> എന്നതിലേക്ക് സജ്ജമാക്കുക"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"എപ്പോഴും ഓണായിരിക്കുന്ന VPN ഓണാണ്"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"എപ്പോഴും ഓണായിരിക്കുന്ന VPN നിങ്ങളുടെ സ്വകാര്യ പ്രൊഫൈലിൽ ഓണായിരിക്കുന്നു"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"എല്ലായ്‌പ്പോഴും ഓണായിരിക്കുന്ന VPN നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലിൽ ഓണായിരിക്കുന്നു"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"ഗ്ലോബൽ HTTP പ്രോക്സി സെറ്റ്"</string>
-    <plurals name="enterprise_privacy_ca_certs_user" formatted="false" msgid="2353089666351669619">
-      <item quantity="other">പരിചിത CA സർട്ടിഫിക്കറ്റുകൾ ഇൻസ്റ്റാൾ ചെയ്തു</item>
-      <item quantity="one">പരിചിത CA സർട്ടിഫിക്കറ്റ് ഇൻസ്റ്റാൾ ചെയ്തു</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_personal (1866786954859360699) -->
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="5907058613578926277">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> സർട്ടിഫിക്കറ്റുകൾ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> സർട്ടിഫിക്കറ്റ്</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_ca_certs_actionable" formatted="false" msgid="7939443347696810129">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> സർട്ടിഫിക്കറ്റുകൾ. കാണാൻ ടാപ്പുചെയ്യുക.</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> സർട്ടിഫിക്കറ്റ്. കാണാൻ ടാപ്പുചെയ്യുക.</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_work (6555905416417106313) -->
+    <!-- no translation found for enterprise_privacy_ca_certs (5885892204903688909) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_ca_certs (9073641163359459048) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (5823294380629654635) -->
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"അഡ്മിന് ഉപകരണം ‌ലോക്കുചെയ്യാനും പാസ്‌വേഡ് പുനഃക്രമീകരിക്കാനും കഴിയും"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"അഡ്മിന് ഉപകരണത്തിലെ എല്ലാ ‌ഡാറ്റയും ഇല്ലാതാക്കാൻ ‌കഴിയും"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"എല്ലാ ഉപകരണ ഡാറ്റയും ഇല്ലാതാക്കുന്നതിന് മുമ്പ് പരാജയപ്പെട്ട പാസ്‌വേഡ് ശ്രമങ്ങൾ"</string>
@@ -3518,7 +3502,8 @@
     <string name="audio_files_title" msgid="4777048870657911307">"ഓഡിയോ ഫയലുകള്‍‌"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g> എന്നയാൾക്ക് ‌അൺഇൻസ്റ്റാൾചെയ്തു)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> എന്നയാൾക്ക് കാണാനാവില്ല)"</string>
-    <string name="autofill_app" msgid="3889348218462883960">"സ്വയമേവ പൂരിപ്പിക്കുന്ന ആപ്പ്"</string>
+    <!-- no translation found for autofill_app (7338387238377914374) -->
+    <skip />
     <string name="autofill_keywords" msgid="7485591824120812710">"സ്വയമേവ, പൂരിപ്പിക്കൽ, സ്വയമേവ പൂരിപ്പിക്കൽ"</string>
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> എന്നതിനെ നിങ്ങളുടെ സ്വയമേവ പൂരിപ്പിക്കുന്ന ആപ്പ് ആക്കണോ? <xliff:g id="APP_NAME_1">%1$s</xliff:g> എന്നതിന് നിങ്ങളുടെ സ്ക്രീൻ ‌വായിക്കാനും മറ്റ് ആപ്പുകളിലെ ഫീൽഡുകൾ പൂരിപ്പിക്കാനും കഴിയും."</string>
     <string name="device_theme" msgid="4571803018917608588">"ഉപകരണത്തിന്റെ തീം"</string>
