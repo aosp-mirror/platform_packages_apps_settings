@@ -50,7 +50,8 @@ public class EnterpriseInstalledPackagesPreferenceController
                     } else {
                         preference.setVisible(true);
                         preference.setSummary(mContext.getResources().getQuantityString(
-                                R.plurals.enterprise_privacy_number_packages, num, num));
+                                R.plurals.enterprise_privacy_number_packages_lower_bound, num,
+                                num));
                     }
                 });
     }
