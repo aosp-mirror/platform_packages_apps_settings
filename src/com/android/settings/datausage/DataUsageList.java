@@ -476,7 +476,7 @@ public class DataUsageList extends DataUsageBase {
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
         final TelephonyManager tele = TelephonyManager.from(context);
-        final int slotId = SubscriptionManager.getSlotId(subId);
+        final int slotId = SubscriptionManager.getSlotIndex(subId);
         final boolean isReady = tele.getSimState(slotId) == SIM_STATE_READY;
 
         boolean retVal =  conn.isNetworkSupported(TYPE_MOBILE) && isReady;
