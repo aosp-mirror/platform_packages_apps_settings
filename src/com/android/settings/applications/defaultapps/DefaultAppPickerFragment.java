@@ -24,113 +24,36 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.ArrayMap;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
  */
-public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFragment implements
-        RadioButtonPreference.OnClickListener {
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    static final String EXTRA_FOR_WORK = "for_work";
-
-    private final Map<String, DefaultAppInfo> mCandidates = new ArrayMap<>();
+public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment {
 
     protected PackageManagerWrapper mPm;
-    protected UserManager mUserManager;
-    protected int mUserId;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mPm = new PackageManagerWrapperImpl(context.getPackageManager());
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        final Bundle arguments = getArguments();
-
-        boolean mForWork = false;
-        if (arguments != null) {
-            mForWork = arguments.getBoolean(EXTRA_FOR_WORK);
-        }
-        final UserHandle managedProfile = Utils.getManagedProfile(mUserManager);
-        mUserId = mForWork && managedProfile != null
-                ? managedProfile.getIdentifier()
-                : UserHandle.myUserId();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-        setHasOptionsMenu(true);
-        return view;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.app_picker_prefs);
-        updateCandidates();
-    }
-
-    @VisibleForTesting
-    public void updateCandidates() {
-        mCandidates.clear();
-        final List<? extends DefaultAppInfo> candidateList = getCandidates();
-        if (candidateList != null) {
-            for (DefaultAppInfo info : candidateList) {
-                mCandidates.put(info.getKey(), info);
-            }
-        }
-        final String defaultAppKey = getDefaultAppKey();
-        final String systemDefaultAppKey = getSystemDefaultAppKey();
-        final PreferenceScreen screen = getPreferenceScreen();
-        screen.removeAll();
-        if (shouldShowItemNone()) {
-            final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
-            nonePref.setIcon(R.drawable.ic_remove_circle);
-            nonePref.setTitle(R.string.app_list_preference_none);
-            nonePref.setChecked(TextUtils.isEmpty(defaultAppKey));
-            nonePref.setOnClickListener(this);
-            screen.addPreference(nonePref);
-        }
-        for (Map.Entry<String, DefaultAppInfo> app : mCandidates.entrySet()) {
-            RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
-            configurePreferenceFromAppInfo(
-                    pref, app.getKey(), app.getValue(), defaultAppKey, systemDefaultAppKey);
-            screen.addPreference(pref);
-        }
-        mayCheckOnlyRadioButton();
     }
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
-        final String confirmationMessage = getConfirmationMessage(mCandidates.get(selectedKey));
+        final String confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
         final Activity activity = getActivity();
         if (TextUtils.isEmpty(confirmationMessage)) {
-            onRadioButtonConfirmed(selectedKey);
+            super.onRadioButtonClicked(selected);
         } else if (activity != null) {
             final DialogFragment fragment = ConfirmationDialogFragment.newInstance(
                     this, selectedKey, confirmationMessage);
@@ -138,63 +61,21 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
         }
     }
 
-    private void onRadioButtonConfirmed(String selectedKey) {
-        final boolean success = setDefaultAppKey(selectedKey);
-        if (success) {
-            updateCheckedState(selectedKey);
-        }
-        onSelectionPerformed(success);
-    }
 
-    @VisibleForTesting
-    public void updateCheckedState(String selectedKey) {
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen != null) {
-            final int count = screen.getPreferenceCount();
-            for (int i = 0; i < count; i++) {
-                final Preference pref = screen.getPreference(i);
-                if (pref instanceof RadioButtonPreference) {
-                    final RadioButtonPreference radioPref = (RadioButtonPreference) pref;
-                    final boolean newCheckedState = TextUtils.equals(pref.getKey(), selectedKey);
-                    if (radioPref.isChecked() != newCheckedState) {
-                        radioPref.setChecked(TextUtils.equals(pref.getKey(), selectedKey));
-                    }
-                }
-            }
+    @Override
+    public void bindPreferenceExtra(RadioButtonPreference pref,
+            String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
+        if (!(info instanceof DefaultAppInfo)) {
+            return;
+        }
+        if (TextUtils.equals(systemDefaultKey, key)) {
+            pref.setSummary(R.string.system_app);
+        } else if (!TextUtils.isEmpty(((DefaultAppInfo) info).summary)) {
+            pref.setSummary(((DefaultAppInfo) info).summary);
         }
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    void mayCheckOnlyRadioButton() {
-        final PreferenceScreen screen = getPreferenceScreen();
-        // If there is only 1 thing on screen, select it.
-        if (screen != null && screen.getPreferenceCount() == 1) {
-            final Preference onlyPref = screen.getPreference(0);
-            if (onlyPref instanceof RadioButtonPreference) {
-                ((RadioButtonPreference) onlyPref).setChecked(true);
-            }
-        }
-    }
-
-    protected boolean shouldShowItemNone() {
-        return false;
-    }
-
-    protected String getSystemDefaultAppKey() {
-        return null;
-    }
-
-    protected abstract List<? extends DefaultAppInfo> getCandidates();
-
-    protected abstract String getDefaultAppKey();
-
-    protected abstract boolean setDefaultAppKey(String key);
-
-    // Called after the user tries to select an item.
-    protected void onSelectionPerformed(boolean success) {
-    }
-
-    protected String getConfirmationMessage(DefaultAppInfo appInfo) {
+    protected String getConfirmationMessage(CandidateInfo info) {
         return null;
     }
 
@@ -240,24 +121,5 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
                         bundle.getString(EXTRA_KEY));
             }
         }
-    }
-
-    @VisibleForTesting
-    public RadioButtonPreference configurePreferenceFromAppInfo(RadioButtonPreference pref,
-            String appKey, DefaultAppInfo info, String defaultAppKey, String systemDefaultAppKey) {
-        pref.setTitle(info.loadLabel(mPm.getPackageManager()));
-        pref.setIcon(info.loadIcon(mPm.getPackageManager()));
-        pref.setKey(appKey);
-        if (TextUtils.equals(defaultAppKey, appKey)) {
-            pref.setChecked(true);
-        }
-        if (TextUtils.equals(systemDefaultAppKey, appKey)) {
-            pref.setSummary(R.string.system_app);
-        } else if (!TextUtils.isEmpty(info.summary)) {
-            pref.setSummary(info.summary);
-        }
-        pref.setEnabled(info.enabled);
-        pref.setOnClickListener(this);
-        return pref;
     }
 }

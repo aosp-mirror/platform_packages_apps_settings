@@ -26,91 +26,101 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
+import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.widget.RadioButtonPickerFragment;
+
 /**
  * Data model representing an app in DefaultAppPicker UI.
  */
-public class DefaultAppInfo {
+public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
 
     public final int userId;
     public final ComponentName componentName;
     public final PackageItemInfo packageItemInfo;
     public final String summary;
-    public final boolean enabled;
+    protected final PackageManagerWrapper mPm;
 
-    public DefaultAppInfo(int uid, ComponentName cn) {
-        this(uid, cn, null /* summary */);
+    public DefaultAppInfo(PackageManagerWrapper pm, int uid, ComponentName cn) {
+        this(pm, uid, cn, null /* summary */);
     }
 
-    public DefaultAppInfo(int uid, ComponentName cn, String summary) {
-        this(uid, cn, summary, true /* enabled */);
+    public DefaultAppInfo(PackageManagerWrapper pm, int uid, ComponentName cn, String summary) {
+        this(pm, uid, cn, summary, true /* enabled */);
     }
 
-    public DefaultAppInfo(int uid, ComponentName cn, String summary, boolean enabled) {
+    public DefaultAppInfo(PackageManagerWrapper pm, int uid, ComponentName cn, String summary,
+            boolean enabled) {
+        super(enabled);
+        mPm = pm;
         packageItemInfo = null;
         userId = uid;
         componentName = cn;
         this.summary = summary;
-        this.enabled = enabled;
     }
 
-    public DefaultAppInfo(PackageItemInfo info, String summary, boolean enabled) {
+    public DefaultAppInfo(PackageManagerWrapper pm, PackageItemInfo info, String summary,
+            boolean enabled) {
+        super(enabled);
+        mPm = pm;
         userId = UserHandle.myUserId();
         packageItemInfo = info;
         componentName = null;
         this.summary = summary;
-        this.enabled = enabled;
     }
 
-    public DefaultAppInfo(PackageItemInfo info) {
-        this(info, null /* summary */, true /* enabled */);
+    public DefaultAppInfo(PackageManagerWrapper pm, PackageItemInfo info) {
+        this(pm, info, null /* summary */, true /* enabled */);
     }
 
-    public CharSequence loadLabel(PackageManager pm) {
+    @Override
+    public CharSequence loadLabel() {
         if (componentName != null) {
             try {
                 final ActivityInfo actInfo = AppGlobals.getPackageManager().getActivityInfo(
                         componentName, 0, userId);
                 if (actInfo != null) {
-                    return actInfo.loadLabel(pm);
+                    return actInfo.loadLabel(mPm.getPackageManager());
                 } else {
-                    final ApplicationInfo appInfo = pm.getApplicationInfoAsUser(
+                    final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, userId);
-                    return appInfo.loadLabel(pm);
+                    return appInfo.loadLabel(mPm.getPackageManager());
                 }
             } catch (RemoteException | PackageManager.NameNotFoundException e) {
                 return null;
             }
         } else if (packageItemInfo != null) {
-            return packageItemInfo.loadLabel(pm);
+            return packageItemInfo.loadLabel(mPm.getPackageManager());
         } else {
             return null;
         }
 
     }
 
-    public Drawable loadIcon(PackageManager pm) {
+    @Override
+    public Drawable loadIcon() {
         if (componentName != null) {
             try {
                 final ActivityInfo actInfo = AppGlobals.getPackageManager().getActivityInfo(
                         componentName, 0, userId);
                 if (actInfo != null) {
-                    return actInfo.loadIcon(pm);
+                    return actInfo.loadIcon(mPm.getPackageManager());
                 } else {
-                    final ApplicationInfo appInfo = pm.getApplicationInfoAsUser(
+                    final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, userId);
-                    return appInfo.loadIcon(pm);
+                    return appInfo.loadIcon(mPm.getPackageManager());
                 }
             } catch (RemoteException | PackageManager.NameNotFoundException e) {
                 return null;
             }
         }
         if (packageItemInfo != null) {
-            return packageItemInfo.loadIcon(pm);
+            return packageItemInfo.loadIcon(mPm.getPackageManager());
         } else {
             return null;
         }
     }
 
+    @Override
     public String getKey() {
         if (componentName != null) {
             return componentName.flattenToString();

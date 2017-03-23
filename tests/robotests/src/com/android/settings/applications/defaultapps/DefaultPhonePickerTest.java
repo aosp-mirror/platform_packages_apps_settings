@@ -75,14 +75,14 @@ public class DefaultPhonePickerTest {
 
     @Test
     public void getSystemDefaultPackage_shouldAskDefaultKeyUpdater() {
-        mPicker.getSystemDefaultAppKey();
+        mPicker.getSystemDefaultKey();
 
         verify(mDefaultKeyUpdater).getSystemDialerPackage();
     }
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefault() {
-        mPicker.setDefaultAppKey(TEST_APP_KEY);
+        mPicker.setDefaultKey(TEST_APP_KEY);
 
         verify(mDefaultKeyUpdater).setDefaultDialerApplication(
                 any(Context.class), eq(TEST_APP_KEY), anyInt());
@@ -90,7 +90,7 @@ public class DefaultPhonePickerTest {
 
     @Test
     public void getDefaultAppKey_shouldReturnDefault() {
-        mPicker.getDefaultAppKey();
+        mPicker.getDefaultKey();
         verify(mDefaultKeyUpdater).getDefaultDialerApplication(any(Context.class), anyInt());
     }
 }

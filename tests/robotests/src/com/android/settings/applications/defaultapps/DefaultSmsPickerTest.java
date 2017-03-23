@@ -73,14 +73,14 @@ public class DefaultSmsPickerTest {
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefault() {
-        mPicker.setDefaultAppKey(TEST_APP_KEY);
+        mPicker.setDefaultKey(TEST_APP_KEY);
 
         verify(mDefaultKeyUpdater).setDefaultApplication(any(Context.class), eq(TEST_APP_KEY));
     }
 
     @Test
     public void getDefaultAppKey_shouldReturnDefault() {
-        mPicker.getDefaultAppKey();
+        mPicker.getDefaultKey();
 
         verify(mDefaultKeyUpdater).getDefaultApplication(any(Context.class));
     }

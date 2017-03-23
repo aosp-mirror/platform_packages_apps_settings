@@ -35,12 +35,12 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         return mPm.getDefaultBrowserPackageNameAsUser(mUserId);
     }
 
     @Override
-    protected boolean setDefaultAppKey(String packageName) {
+    protected boolean setDefaultKey(String packageName) {
         return mPm.setDefaultBrowserPackageNameAsUser(packageName, mUserId);
     }
 
@@ -59,7 +59,7 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
                 continue;
             }
             try {
-                candidates.add(new DefaultAppInfo(
+                candidates.add(new DefaultAppInfo(mPm,
                         mPm.getApplicationInfoAsUser(info.activityInfo.packageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

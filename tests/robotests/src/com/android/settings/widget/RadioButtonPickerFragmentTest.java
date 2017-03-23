@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.defaultapps;
-
+package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
@@ -30,7 +29,8 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,8 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class DefaultAppPickerFragmentTest {
+public class RadioButtonPickerFragmentTest {
+
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
@@ -68,20 +69,39 @@ public class DefaultAppPickerFragmentTest {
     }
 
     @Test
-    public void clickPreference_hasConfirmation_shouldShowConfirmation() {
+    public void onAttach_userIsInitialized() {
+        mFragment.onAttach((Context) mActivity);
+
+        verify(mActivity).getPackageManager();
+        verify(mActivity).getSystemService(Context.USER_SERVICE);
+    }
+
+    @Test
+    public void displaySingleOption_shouldSelectRadioButton() {
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(RuntimeEnvironment.application);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(pref);
+
+        mFragment.mayCheckOnlyRadioButton();
+
+        assertThat(pref.isChecked()).isTrue();
+    }
+
+    @Test
+    public void clickPreference_shouldConfirm() {
         final RadioButtonPreference pref =
                 new RadioButtonPreference(RuntimeEnvironment.application);
         pref.setKey("TEST");
-        doReturn("confirmation_text").when(mFragment)
-                .getConfirmationMessage(any(DefaultAppInfo.class));
-        doReturn(mActivity).when(mFragment).getActivity();
 
         mFragment.onRadioButtonClicked(pref);
+
+        assertThat(mFragment.setDefaultKeyCalled).isTrue();
     }
 
     public static class TestFragment extends DefaultAppPickerFragment {
 
-        boolean setDefaultAppKeyCalled;
+        boolean setDefaultKeyCalled;
 
         @Override
         public int getMetricsCategory() {
@@ -100,7 +120,7 @@ public class DefaultAppPickerFragmentTest {
 
         @Override
         protected boolean setDefaultKey(String key) {
-            setDefaultAppKeyCalled = true;
+            setDefaultKeyCalled = true;
             return true;
         }
 

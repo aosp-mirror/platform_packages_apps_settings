@@ -50,7 +50,7 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
                 DefaultDialerManager.getInstalledDialerApplications(getContext(), mUserId);
         for (String packageName : dialerPackages) {
             try {
-                candidates.add(new DefaultAppInfo(
+                candidates.add(new DefaultAppInfo(mPm,
                         mPm.getApplicationInfoAsUser(packageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.
@@ -60,18 +60,18 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         return mDefaultKeyUpdater.getDefaultDialerApplication(getContext(), mUserId);
     }
 
     @Override
-    protected String getSystemDefaultAppKey() {
+    protected String getSystemDefaultKey() {
         return mDefaultKeyUpdater.getSystemDialerPackage();
     }
 
     @Override
-    protected boolean setDefaultAppKey(String key) {
-        if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, getDefaultAppKey())) {
+    protected boolean setDefaultKey(String key) {
+        if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, getDefaultKey())) {
             return mDefaultKeyUpdater.setDefaultDialerApplication(getContext(), key, mUserId);
         }
         return false;

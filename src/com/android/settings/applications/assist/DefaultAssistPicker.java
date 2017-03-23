@@ -79,31 +79,30 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
                 continue;
             }
             packages.add(packageName);
-            candidates.add(new DefaultAppInfo(mUserId, info.component));
+            candidates.add(new DefaultAppInfo(mPm, mUserId, info.component));
         }
         return candidates;
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         final ComponentName cn = getCurrentAssist();
         if (cn != null) {
-            return new DefaultAppInfo(mUserId, cn).getKey();
+            return new DefaultAppInfo(mPm, mUserId, cn).getKey();
         }
         return null;
     }
 
     @Override
-    protected String getConfirmationMessage(DefaultAppInfo appInfo) {
+    protected String getConfirmationMessage(CandidateInfo appInfo) {
         if (appInfo == null) {
             return null;
         }
-        return getContext().getString(R.string.assistant_security_warning,
-                appInfo.loadLabel(mPm.getPackageManager()));
+        return getContext().getString(R.string.assistant_security_warning, appInfo.loadLabel());
     }
 
     @Override
-    protected boolean setDefaultAppKey(String key) {
+    protected boolean setDefaultKey(String key) {
         if (TextUtils.isEmpty(key)) {
             setAssistNone();
             return true;

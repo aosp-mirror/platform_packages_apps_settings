@@ -19,12 +19,12 @@ package com.android.settings.applications.assist;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 
@@ -61,19 +61,19 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
         for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
             final boolean enabled = TextUtils.equals(info.key, mAssistRestrict);
             hasEnabled |= enabled;
-            candidates.add(new VoiceInputDefaultAppInfo(mUserId, info, enabled));
+            candidates.add(new VoiceInputDefaultAppInfo(mPm, mUserId, info, enabled));
         }
 
         final boolean assistIsService = !hasEnabled;
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
             final boolean enabled = !assistIsService;
-            candidates.add(new VoiceInputDefaultAppInfo(mUserId, info, enabled));
+            candidates.add(new VoiceInputDefaultAppInfo(mPm, mUserId, info, enabled));
         }
         return candidates;
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         final ComponentName currentService = getCurrentService(mHelper);
         if (currentService == null) {
             return null;
@@ -82,7 +82,7 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected boolean setDefaultAppKey(String value) {
+    protected boolean setDefaultKey(String value) {
         for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
             if (TextUtils.equals(value, info.key)) {
                 Settings.Secure.putString(getContext().getContentResolver(),
@@ -132,9 +132,9 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
         public VoiceInputHelper.BaseInfo mInfo;
 
-        public VoiceInputDefaultAppInfo(int userId, VoiceInputHelper.BaseInfo info,
-                boolean enabled) {
-            super(userId, info.componentName, null /* summary */, enabled);
+        public VoiceInputDefaultAppInfo(PackageManagerWrapper pm, int userId,
+                VoiceInputHelper.BaseInfo info, boolean enabled) {
+            super(pm, userId, info.componentName, null /* summary */, enabled);
             mInfo = info;
         }
 
@@ -144,7 +144,7 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
         }
 
         @Override
-        public CharSequence loadLabel(PackageManager pm) {
+        public CharSequence loadLabel() {
             if (mInfo instanceof VoiceInputHelper.InteractionInfo) {
                 return mInfo.appLabel;
             } else {

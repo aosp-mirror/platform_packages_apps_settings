@@ -19,17 +19,18 @@ package com.android.settings.webview;
 import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 
@@ -61,7 +62,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
         List<ApplicationInfo> pkgs =
                 getWebViewUpdateServiceWrapper().getValidWebViewApplicationInfos(getContext());
         for (ApplicationInfo ai : pkgs) {
-            packageInfoList.add(createDefaultAppInfo(ai,
+            packageInfoList.add(createDefaultAppInfo(mPm, ai,
                     getDisabledReason(getWebViewUpdateServiceWrapper(),
                             getContext(), ai.packageName)));
         }
@@ -69,12 +70,12 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         PackageInfo currentPackage = getWebViewUpdateServiceWrapper().getCurrentWebViewPackage();
         return currentPackage == null ? null : currentPackage.packageName;
     }
 
-    protected boolean setDefaultAppKey(String key) {
+    protected boolean setDefaultKey(String key) {
         boolean success = getWebViewUpdateServiceWrapper().setWebViewProvider(key);
         return success;
     }
@@ -110,25 +111,28 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     private static class WebViewAppInfo extends DefaultAppInfo {
-        public WebViewAppInfo(PackageItemInfo packageItemInfo, String summary, boolean enabled) {
-          super(packageItemInfo, summary, enabled);
+        public WebViewAppInfo(PackageManagerWrapper pm, PackageItemInfo packageItemInfo,
+                String summary, boolean enabled) {
+            super(pm, packageItemInfo, summary, enabled);
         }
 
         @Override
-        public CharSequence loadLabel(PackageManager pm) {
+        public CharSequence loadLabel() {
             String versionName = "";
             try {
-                versionName = pm.getPackageInfo(packageItemInfo.packageName, 0).versionName;
+                versionName = mPm.getPackageManager().
+                        getPackageInfo(packageItemInfo.packageName, 0).versionName;
             } catch (PackageManager.NameNotFoundException e) {
             }
-            return String.format("%s %s", super.loadLabel(pm), versionName);
+            return String.format("%s %s", super.loadLabel(), versionName);
         }
     }
 
 
     @VisibleForTesting
-    DefaultAppInfo createDefaultAppInfo(PackageItemInfo packageItemInfo, String disabledReason) {
-        return new WebViewAppInfo(packageItemInfo, disabledReason,
+    DefaultAppInfo createDefaultAppInfo(PackageManagerWrapper pm, PackageItemInfo packageItemInfo,
+            String disabledReason) {
+        return new WebViewAppInfo(pm, packageItemInfo, disabledReason,
                 TextUtils.isEmpty(disabledReason) /* enabled */);
     }
 
@@ -139,7 +143,6 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     @VisibleForTesting
     String getDisabledReason(WebViewUpdateServiceWrapper webviewUpdateServiceWrapper,
             Context context, String packageName) {
-        StringBuilder disabledReason = new StringBuilder();
         List<UserPackageWrapper> userPackages =
                 webviewUpdateServiceWrapper.getPackageInfosAllUsers(context, packageName);
         for (UserPackageWrapper userPackage : userPackages) {
@@ -150,7 +153,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
             } else if (!userPackage.isEnabledPackage()) {
                 // Package disabled
                 return context.getString(
-                    R.string.webview_disabled_for_user, userPackage.getUserInfo().name);
+                        R.string.webview_disabled_for_user, userPackage.getUserInfo().name);
             }
         }
         return null;

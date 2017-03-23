@@ -49,7 +49,7 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
                 final PackageInfo packageInfo =
                         mPm.getPackageManager().getPackageInfo(info.activityInfo.packageName, 0);
                 final ApplicationInfo appInfo = packageInfo.applicationInfo;
-                candidates.add(new DefaultAppInfo(appInfo));
+                candidates.add(new DefaultAppInfo(mPm, appInfo));
                 // Get earliest installed system app.
                 if (isSystemApp(appInfo) && (bestMatch == null ||
                         bestMatch.firstInstallTime > packageInfo.firstInstallTime)) {
@@ -59,9 +59,9 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
                 // Skip unknown packages.
             }
             if (bestMatch != null) {
-                final String defaultKey = getDefaultAppKey();
+                final String defaultKey = getDefaultKey();
                 if (TextUtils.isEmpty(defaultKey)) {
-                    setDefaultAppKey(bestMatch.packageName);
+                    setDefaultKey(bestMatch.packageName);
                 }
             }
         }
@@ -69,19 +69,19 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getConfirmationMessage(DefaultAppInfo info) {
+    protected String getConfirmationMessage(CandidateInfo info) {
         return Utils.isPackageDirectBootAware(getContext(), info.getKey()) ? null
                 : getContext().getString(R.string.direct_boot_unaware_dialog_message);
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         return Settings.Secure.getString(getContext().getContentResolver(),
                 Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION);
     }
 
     @Override
-    protected boolean setDefaultAppKey(String key) {
+    protected boolean setDefaultKey(String key) {
         final ContentResolver contentResolver = getContext().getContentResolver();
         final String previousValue = Settings.Secure.getString(contentResolver,
                 Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION);

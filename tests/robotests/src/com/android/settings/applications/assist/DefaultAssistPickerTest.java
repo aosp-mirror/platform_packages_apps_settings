@@ -61,12 +61,12 @@ public class DefaultAssistPickerTest {
         final List<DefaultAssistPicker.Info> assistants = new ArrayList<>();
         assistants.add(new DefaultAssistPicker.Info(TEST_ASSIST));
         ReflectionHelpers.setField(mPicker, "mAvailableAssistants", assistants);
-        mPicker.setDefaultAppKey(TEST_ASSIST.flattenToString());
+        mPicker.setDefaultKey(TEST_ASSIST.flattenToString());
 
         assertThat(Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ASSISTANT))
                 .isEqualTo(TEST_ASSIST.flattenToString());
-        assertThat(mPicker.getDefaultAppKey())
+        assertThat(mPicker.getDefaultKey())
                 .isEqualTo(TEST_ASSIST.flattenToString());
     }
 
@@ -74,12 +74,12 @@ public class DefaultAssistPickerTest {
     public void setDefaultAppKey_noAvaialbleAssit_shouldClearDefaultAssist() {
         final List<DefaultAssistPicker.Info> assistants = new ArrayList<>();
         ReflectionHelpers.setField(mPicker, "mAvailableAssistants", assistants);
-        mPicker.setDefaultAppKey(TEST_ASSIST.flattenToString());
+        mPicker.setDefaultKey(TEST_ASSIST.flattenToString());
 
         assertThat(Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ASSISTANT))
                 .isEmpty();
-        assertThat(mPicker.getDefaultAppKey())
+        assertThat(mPicker.getDefaultKey())
                 .isNull();
     }
 
@@ -88,12 +88,12 @@ public class DefaultAssistPickerTest {
         final List<DefaultAssistPicker.Info> assistants = new ArrayList<>();
         assistants.add(new DefaultAssistPicker.Info(TEST_ASSIST));
         ReflectionHelpers.setField(mPicker, "mAvailableAssistants", assistants);
-        mPicker.setDefaultAppKey(null);
+        mPicker.setDefaultKey(null);
 
         assertThat(Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ASSISTANT))
                 .isEmpty();
-        assertThat(mPicker.getDefaultAppKey())
+        assertThat(mPicker.getDefaultKey())
                 .isNull();
     }
 }

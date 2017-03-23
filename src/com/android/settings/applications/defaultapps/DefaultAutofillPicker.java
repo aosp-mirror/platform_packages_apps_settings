@@ -56,34 +56,34 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         final List<ResolveInfo> resolveInfos = mPm.getPackageManager()
                 .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
-            candidates.add(new DefaultAppInfo(mUserId, new ComponentName(
+            candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
                     info.serviceInfo.packageName, info.serviceInfo.name)));
         }
         final List<ResolveInfo> oldResolveInfos = mPm.getPackageManager()
                 .queryIntentServices(OLD_AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : oldResolveInfos) {
-            candidates.add(new DefaultAppInfo(mUserId, new ComponentName(
+            candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
                     info.serviceInfo.packageName, info.serviceInfo.name)));
         }
         return candidates;
     }
 
     @Override
-    protected String getDefaultAppKey() {
+    protected String getDefaultKey() {
         return Settings.Secure.getString(getContext().getContentResolver(), SETTING);
     }
 
     @Override
-    protected String getConfirmationMessage(DefaultAppInfo appInfo) {
+    protected String getConfirmationMessage(CandidateInfo appInfo) {
         if (appInfo == null) {
             return null;
         }
-        final CharSequence appName = appInfo.loadLabel(mPm.getPackageManager());
+        final CharSequence appName = appInfo.loadLabel();
         return getContext().getString(R.string.autofill_confirmation_message, appName);
     }
 
     @Override
-    protected boolean setDefaultAppKey(String key) {
+    protected boolean setDefaultKey(String key) {
         Settings.Secure.putString(getContext().getContentResolver(), SETTING, key);
         return true;
     }

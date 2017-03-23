@@ -72,7 +72,7 @@ public class DefaultHomePickerTest {
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefault() {
-        assertThat(mPicker.setDefaultAppKey(TEST_APP_KEY)).isTrue();
+        assertThat(mPicker.setDefaultKey(TEST_APP_KEY)).isTrue();
 
         verify(mPackageManager).replacePreferredActivity(any(IntentFilter.class),
                 anyInt(), any(ComponentName[].class), any(ComponentName.class));
@@ -83,7 +83,7 @@ public class DefaultHomePickerTest {
         final ComponentName cn = mock(ComponentName.class);
         when(mPackageManager.getHomeActivities(anyList()))
                 .thenReturn(cn);
-        mPicker.getDefaultAppKey();
+        mPicker.getDefaultKey();
         verify(cn).flattenToString();
     }
 
