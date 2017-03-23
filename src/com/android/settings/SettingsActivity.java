@@ -84,7 +84,10 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
-    private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
+    @VisibleForTesting
+    static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
+    @VisibleForTesting
+    static final String SAVE_KEY_SHOW_SEARCH = ":settings:show_search";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -193,8 +196,10 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private Button mNextButton;
 
-    private boolean mDisplayHomeAsUpEnabled;
-    private boolean mDisplaySearch;
+    @VisibleForTesting
+    boolean mDisplayHomeAsUpEnabled;
+    @VisibleForTesting
+    boolean mDisplaySearch;
 
     private boolean mIsShowingDashboard;
     private boolean mIsShortcut;
@@ -231,7 +236,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (!mDisplaySearch) {
             return false;
         }
-
         mSearchFeatureProvider.setUpSearchMenu(menu, this);
         return true;
     }
@@ -514,12 +518,28 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        saveState(outState);
+    }
 
+    /**
+     * For testing purposes to avoid crashes from final variables in Activity's onSaveInstantState.
+     */
+    @VisibleForTesting
+    void saveState(Bundle outState) {
         if (mCategories.size() > 0) {
             outState.putParcelableArrayList(SAVE_KEY_CATEGORIES, mCategories);
         }
 
         outState.putBoolean(SAVE_KEY_SHOW_HOME_AS_UP, mDisplayHomeAsUpEnabled);
+        outState.putBoolean(SAVE_KEY_SHOW_SEARCH, mDisplaySearch);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        mDisplayHomeAsUpEnabled = savedInstanceState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
+        mDisplaySearch = savedInstanceState.getBoolean(SAVE_KEY_SHOW_SEARCH);
     }
 
     @Override
