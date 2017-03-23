@@ -46,7 +46,7 @@ public class DeviceModelPreferenceController extends PreferenceController {
         super.displayPreference(screen);
         final Preference pref = screen.findPreference(KEY_DEVICE_MODEL);
         if (pref != null) {
-            pref.setSummary(Build.MODEL + DeviceInfoUtils.getMsvSuffix());
+            pref.setSummary(getDeviceModel());
         }
     }
 
@@ -63,5 +63,9 @@ public class DeviceModelPreferenceController extends PreferenceController {
         final HardwareInfoDialogFragment fragment = HardwareInfoDialogFragment.newInstance();
         fragment.show(mHost.getFragmentManager(), HardwareInfoDialogFragment.TAG);
         return true;
+    }
+
+    public static String getDeviceModel() {
+        return Build.MODEL + DeviceInfoUtils.getMsvSuffix();
     }
 }

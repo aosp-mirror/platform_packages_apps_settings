@@ -49,13 +49,13 @@ import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.SingleLineSummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.ArrayList;
@@ -524,8 +524,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             AccessibilityServiceInfo info = installedServices.get(i);
 
-            SingleLineSummaryPreference preference =
-                    new SingleLineSummaryPreference(downloadedServicesCategory.getContext(), null);
+            RestrictedPreference preference =
+                    new RestrictedPreference(downloadedServicesCategory.getContext());
             String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
             Drawable icon = info.getResolveInfo().loadIcon(getPackageManager());

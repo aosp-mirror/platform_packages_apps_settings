@@ -26,6 +26,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.BasebandVersionPreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
@@ -85,6 +86,31 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         return buildPreferenceControllers(context, getActivity(), this /* fragment */,
                 getLifecycle());
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(SummaryLoader summaryLoader) {
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                mSummaryLoader.setSummary(this, DeviceModelPreferenceController.getDeviceModel());
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                SummaryLoader summaryLoader) {
+            return new SummaryProvider(summaryLoader);
+        }
+    };
 
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
