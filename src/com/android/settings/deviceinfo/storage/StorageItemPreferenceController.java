@@ -35,6 +35,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
@@ -52,6 +53,7 @@ public class StorageItemPreferenceController extends PreferenceController {
     private static final String TAG = "StorageItemPreference";
 
     private static final String IMAGE_MIME_TYPE = "image/*";
+    private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
 
     @VisibleForTesting
     static final String PHOTO_KEY = "pref_photos_videos";
@@ -104,8 +106,6 @@ public class StorageItemPreferenceController extends PreferenceController {
             return false;
         }
 
-        // TODO: Currently, this reflects the existing behavior for these toggles.
-        //       After the intermediate views are built, swap them in.
         Intent intent = null;
         if (preference.getKey() == null) {
             return false;
@@ -133,6 +133,11 @@ public class StorageItemPreferenceController extends PreferenceController {
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(
                         mContext, MetricsEvent.STORAGE_FILES);
                 break;
+            case SYSTEM_KEY:
+                final SystemInfoFragment dialog = new SystemInfoFragment();
+                dialog.setTargetFragment(mFragment, 0);
+                dialog.show(mFragment.getFragmentManager(), SYSTEM_FRAGMENT_TAG);
+                return true;
         }
 
         if (intent != null) {

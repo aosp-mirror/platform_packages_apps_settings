@@ -27,6 +27,7 @@ import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.UserHandle;
@@ -759,7 +760,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.storage_detail_dialog_system)
+                    .setMessage(getContext().getString(R.string.storage_detail_dialog_system,
+                            Build.VERSION.RELEASE))
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }
