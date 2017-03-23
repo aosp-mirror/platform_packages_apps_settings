@@ -16,7 +16,15 @@
 
 package com.android.settings.language;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -48,13 +56,6 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LanguageAndInputSettingsTest {
@@ -64,6 +65,12 @@ public class LanguageAndInputSettingsTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
+    private InputManager mIm;
+    @Mock
+    private InputMethodManager mImm;
+    @Mock
+    private DevicePolicyManager mDpm;
+    @Mock
     private InputMethodManager mInputMethodManager;
     private TestFragment mFragment;
 
@@ -72,8 +79,11 @@ public class LanguageAndInputSettingsTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mock(InputManager.class));
+        when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mIm);
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
                 .thenReturn(mock(TextServicesManager.class));
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(mDpm);
+        when(mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).thenReturn(mImm);
         mFragment = new TestFragment(mContext);
     }
 
@@ -96,6 +106,7 @@ public class LanguageAndInputSettingsTest {
     }
 
     @Test
+
     public void testGetPreferenceControllers_shouldAllBeCreated() {
         final List<PreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
 
