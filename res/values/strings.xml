@@ -6271,9 +6271,6 @@
     <!-- Sound: Other sounds: Title for the option enabling boot sounds. [CHAR LIMIT=30] -->
     <string name="boot_sounds_title">Power on sounds</string>
 
-    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
-    <string name="zen_mode_settings_title">Do Not Disturb preferences</string>
-
     <!-- Sound: Summary for the Do not Disturb option when there is no automatic rules turned on. [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_summary_off">No automatic rules turned on</string>
 
@@ -6282,6 +6279,9 @@
         <item quantity="one">1 automatic rule turned on</item>
         <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> automatic rules turned on</item>
     </plurals>
+
+    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
+    <string name="zen_mode_settings_title">Do Not Disturb</string>
 
     <!-- Do not disturb: Title for the Priority interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_priority_settings_title">Priority only allows</string>
@@ -6353,7 +6353,7 @@
     <string name="other_sound_category_preference_title">Other sounds and vibrations</string>
 
     <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
-    <string name="configure_notification_settings">Notification preferences</string>
+    <string name="configure_notification_settings">Notifications</string>
 
     <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
     <string name="advanced_section_header">Advanced</string>
@@ -6362,7 +6362,7 @@
     <string name="profile_section_header">Work notifications</string>
 
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
-    <string name="notification_pulse_title">Pulse notification light</string>
+    <string name="notification_pulse_title">Blink light</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_title">On the lock screen</string>
@@ -6413,32 +6413,38 @@
     <!-- [CHAR LIMIT=100] Notification importance slider title -->
     <string name="notification_importance_title">Importance</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance slider: unset importance level description -->
-    <string name="notification_importance_none">Not set</string>
-
-    <!-- [CHAR LIMIT=100] Notification Importance slider: unspecified importance level description -->
+    <!-- [CHAR LIMIT=100] Notification Importance: unspecified importance level description -->
     <string name="notification_importance_unspecified">Let the app decide</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance slider: blocked importance level description -->
+    <!-- [CHAR LIMIT=100] Notification Importance: blocked importance level description -->
     <string name="notification_importance_blocked">Never show notifications</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance slider: min importance level description -->
+    <!-- [CHAR LIMIT=100] Notification Importance: min importance level description -->
     <string name="notification_importance_min">No sound or visual interruption</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance slider: low importance level description -->
-    <string name="notification_importance_low">Show silently</string>
+    <!-- [CHAR LIMIT=100] Notification Importance: low importance level description -->
+    <string name="notification_importance_low">No sound</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance slider: normal importance level description -->
+    <!-- [CHAR LIMIT=100] Notification Importance: normal importance level description -->
     <string name="notification_importance_default">Make sound</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance slider: high importance level description -->
+    <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
 
-    <!-- [CHAR LIMIT=60] Notification importance reset button -->
-    <string name="importance_reset">Reset</string>
+    <!-- [CHAR LIMIT=100] Notification Importance summary: min importance level description -->
+    <string name="notification_importance_min_summary">Low: No sound or visual interruption</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance summary: low importance level description -->
+    <string name="notification_importance_low_summary">Medium: No sound</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance summary: normal importance level description -->
+    <string name="notification_importance_default_summary">High: Make sound</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance summary: high importance level description -->
+    <string name="notification_importance_high_summary">Urgent: Make sound and pop on screen</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title -->
-    <string name="show_silently">Show silently</string>
+    <string name="allow_sound">Allow Sound</string>
 
     <!-- [CHAR LIMIT=180] Notification importance summary -->
     <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
@@ -6552,11 +6558,28 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
 
+    <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
+    <string name="app_notification_listing_summary_zero">Turned on for all apps</string>
+    <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
+    <plurals name="app_notification_listing_summary_others">
+        <item quantity="one">Turned off for <xliff:g id="count" example="1">%d</xliff:g> app</item>
+        <item quantity="other">Turned off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
+    </plurals>
+
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
     <plurals name="deleted_channels">
-        <item quantity="one">%d category deleted</item>
-        <item quantity="other">%d categories deleted</item>
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category deleted</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories deleted</item>
     </plurals>
+
+    <!-- [CHAR LIMIT=45\ Global notification badge setting -->
+    <string name="notification_badges">Notification badges</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: notifications enabled-->
+    <string name="notification_toggle_on">On</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: notifications disabled-->
+    <string name="notification_toggle_off">Off</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option title -->
     <string name="app_notification_block_title">Block all</string>
@@ -6571,7 +6594,7 @@
     <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
 
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Badging option title -->
-    <string name="notification_badge_title">Show badge</string>
+    <string name="notification_badge_title">Badge app icon</string>
 
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Badge option description-->
     <string name="notification_badge_summary">Show notifications as badges on the Home app, if supported.</string>
@@ -6601,10 +6624,19 @@
     <string name="app_notification_importance_title">Importance</string>
 
     <!-- [CHAR LIMIT=180] Notification settings: lights -->
-    <string name="notification_show_lights_title">Always pulse notification light</string>
+    <string name="notification_show_lights_title">Blink light</string>
 
     <!-- [CHAR LIMIT=180] Notification settings: vibration -->
-    <string name="notification_vibrate_title">Always vibrate</string>
+    <string name="notification_vibrate_title">Vibrate</string>
+
+    <!-- [CHAR LIMIT=180] Notification settings: sound -->
+    <string name="notification_channel_sound_title">Sound</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Rule delete button -->
+    <string name="zen_mode_rule_delete_button">Delete</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Rule name edit button -->
+    <string name="zen_mode_rule_rename_button">Rename</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule name option and edit dialog title -->
     <string name="zen_mode_rule_name">Rule name</string>
@@ -6616,7 +6648,7 @@
     <string name="zen_mode_rule_name_warning">Rule name already in use</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
-    <string name="zen_mode_add_rule">Add rule</string>
+    <string name="zen_mode_add_rule">Add more</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule menu option name -->
     <string name="zen_mode_delete_rule">Delete rule</string>
@@ -6973,11 +7005,13 @@
    <string name="change_storage">Change storage</string>
 
    <!-- Label for notification settings for an specific app [CHAR LIMIT=40] -->
-   <string name="notifications_label">Notifications</string>
-   <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
-   <string name="notifications_enabled">Normal</string>
-   <!-- App notification summary with notifications disabled [CHAR LIMIT=40] -->
-   <string name="notifications_disabled">Blocked</string>
+     <string name="notifications_label">App notifications</string>
+    <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
+    <string name="notifications_enabled">On</string>
+    <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
+    <string name="notifications_disabled">Everything turned off</string>
+    <!-- Label for showing apps with some blocked notifications in list [CHAR LIMIT=30] -->
+    <string name="notifications_partly_blocked"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> categories turned off</string>
     <!-- App notification summary with notifications silenced [CHAR LIMIT=40] -->
     <string name="notifications_silenced">Silenced</string>
     <!-- App notification summary with notifications redacted [CHAR LIMIT=70] -->
@@ -6990,12 +7024,15 @@
     <string name="notifications_summary_divider">\u00A0/\u00A0</string>
     <!-- App notification summary for advanced controls -->
     <string name="notification_summary_level">Level %d</string>
+    <!-- App notification summary channel divider-->
+    <string name="notification_summary_channel"><xliff:g id="channel_name">%1$s</xliff:g> \u2022 <xliff:g id="group_name">%2$s</xliff:g></string>
+
 
    <!-- Permissions preference summary [CHAR LIMIT=40] -->
-   <plurals name="permissions_summary">
+    <plurals name="permissions_summary">
        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> permission granted</item>
        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
-   </plurals>
+    </plurals>
 
    <!-- Runtime permissions preference summary [CHAR LIMIT=40] -->
    <plurals name="runtime_permissions_summary">
@@ -7025,8 +7062,19 @@
     <string name="filter_personal_apps">Personal</string>
     <!-- Label for showing work apps in list [CHAR LIMIT=30] -->
     <string name="filter_work_apps">Work</string>
+
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
-    <string name="filter_notif_blocked_apps">Blocked</string>
+    <string name="filter_notif_all_apps">Apps: All</string>
+    <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_blocked_apps">Apps: Turned off</string>
+    <!-- Label for showing categories with urgent notifications in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_urgent_channels">Categories: Urgent importance</string>
+    <!-- Label for showing categories with low importance notifications in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_low_channels">Categories: Low importance</string>
+    <!-- Label for showing categories with blocked notifications in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_blocked_channels">Categories: Turned off</string>
+    <!-- Label for showing categories with notifications that override dnd in list [CHAR LIMIT=30] -->
+    <string name="filter_notif_dnd_channels">Categories: Overrides Do Not Disturb</string>
 
     <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
     <string name="advanced_apps">Advanced</string>
