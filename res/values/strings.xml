@@ -4239,10 +4239,13 @@
     <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
     <string name="print_settings">Printing</string>
 
-    <!-- Print frameworks summary in settings screen [CHAR LIMIT=50] -->
-    <plurals name="print_settings_title">
-        <item quantity="one">1 print job</item>
-        <item quantity="other">%d print jobs</item>
+    <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
+    <string name="print_settings_summary_no_service">No print service</string>
+
+    <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
+    <plurals name="print_settings_summary">
+        <item quantity="one">1 print service</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services</item>
     </plurals>
 
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
