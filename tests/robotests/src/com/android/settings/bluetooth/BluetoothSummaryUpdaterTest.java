@@ -86,7 +86,8 @@ public class BluetoothSummaryUpdaterTest {
     public void register_true_shouldSendSummaryChange() {
         mSummaryUpdater.register(true);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connected));
+        verify(mListener).onSummaryChanged(
+            mContext.getString(R.string.bluetooth_connected_summary));
     }
 
     @Test
@@ -102,7 +103,8 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.register(true);
         mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connected));
+        verify(mListener).onSummaryChanged(
+            mContext.getString(R.string.bluetooth_connected_summary));
     }
 
     @Test
@@ -111,7 +113,8 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.register(true);
         mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_TURNING_ON);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disconnected));
+        verify(mListener).onSummaryChanged(
+            mContext.getString(R.string.disconnected));
     }
 
     @Test
@@ -128,7 +131,8 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.onConnectionStateChanged(null /* device */,
             BluetoothAdapter.STATE_CONNECTED);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connected));
+        verify(mListener).onSummaryChanged(
+            mContext.getString(R.string.bluetooth_connected_summary));
     }
 
     @Test
@@ -137,7 +141,8 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.onConnectionStateChanged(null /* device */,
             BluetoothAdapter.STATE_CONNECTED);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disconnected));
+        verify(mListener).onSummaryChanged(
+            mContext.getString(R.string.disconnected));
     }
 
     @Test

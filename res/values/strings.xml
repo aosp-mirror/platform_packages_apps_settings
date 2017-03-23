@@ -4249,12 +4249,12 @@
     <string name="print_settings">Printing</string>
 
     <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
-    <string name="print_settings_summary_no_service">No print service</string>
+    <string name="print_settings_summary_no_service">Off</string>
 
     <!-- Print setting summary in settings screen [CHAR LIMIT=50] -->
     <plurals name="print_settings_summary">
-        <item quantity="one">1 print service</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services</item>
+        <item quantity="one">1 print service on</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services on</item>
     </plurals>
 
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
@@ -7230,7 +7230,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for charging only. -->
-    <string name="usb_use_charging_only">Charge this device</string>
+    <string name="usb_use_charging_only">Charging this device</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for charging only. -->
@@ -7238,7 +7238,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for powering the other device only. -->
-    <string name="usb_use_power_only">Supply power</string>
+    <string name="usb_use_power_only">Supplying power</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for powering the other device. -->
@@ -7938,8 +7938,11 @@
     <!-- Title of screen controlling which apps have access to send premium SMS messages [CHAR LIMIT=60] -->
     <string name="premium_sms_access">Premium SMS access</string>
 
-    <!-- Bluetooth is disabled. -->
+    <!-- Summary for Bluetooth when disabled. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disabled">Not visible to other devices</string>
+
+    <!-- Summary for Bluetooth when connected. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connected_summary">Connected to </string>
 
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
