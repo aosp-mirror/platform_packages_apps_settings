@@ -21,7 +21,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.view.View;
@@ -46,7 +45,7 @@ class SpellCheckerPreference extends CustomListPreference {
     public SpellCheckerPreference(final Context context, final SpellCheckerInfo[] scis) {
         super(context, null);
         mScis = scis;
-        setWidgetLayoutResource(R.layout.preference_widget_settings);
+        setWidgetLayoutResource(R.layout.preference_widget_gear);
         CharSequence[] labels = new CharSequence[scis.length];
         CharSequence[] values = new CharSequence[scis.length];
         for (int i = 0 ; i < scis.length; i++) {

@@ -17,7 +17,6 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
@@ -27,12 +26,13 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.TwoTargetPreference;
 
 /**
  * A custom preference that provides inline switch toggle. It has a mandatory field for title, and
  * optional fields for icon and sub-text.
  */
-public class MasterSwitchPreference extends Preference {
+public class MasterSwitchPreference extends TwoTargetPreference {
 
     private Switch mSwitch;
     private boolean mChecked;
@@ -41,28 +41,29 @@ public class MasterSwitchPreference extends Preference {
     public MasterSwitchPreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
     }
 
     public MasterSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
     public MasterSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public MasterSwitchPreference(Context context) {
         super(context);
-        init();
+    }
+
+    @Override
+    protected int getSecondTargetResId() {
+        return R.layout.preference_widget_master_switch;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        final View widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        final View widgetView = holder.findViewById(android.R.id.widget_frame);
         if (widgetView != null) {
             widgetView.setOnClickListener(new OnClickListener() {
                 @Override
@@ -76,12 +77,12 @@ public class MasterSwitchPreference extends Preference {
                 }
             });
         }
-        mSwitch = (Switch) holder.itemView.findViewById(R.id.switchWidget);
+        mSwitch = (Switch) holder.findViewById(R.id.switchWidget);
         if (mSwitch != null) {
             mSwitch.setChecked(mChecked);
         }
         if (mMultiLine) {
-            TextView textView = (TextView)holder.findViewById(android.R.id.title);
+            TextView textView = (TextView) holder.findViewById(android.R.id.title);
             if (textView != null) {
                 textView.setSingleLine(false);
             }
@@ -97,10 +98,6 @@ public class MasterSwitchPreference extends Preference {
         if (mSwitch != null) {
             mSwitch.setChecked(checked);
         }
-    }
-
-    public boolean isSwitchEnabled() {
-        return mSwitch != null && mSwitch.isEnabled();
     }
 
     public void setSwitchEnabled(boolean enabled) {
@@ -127,10 +124,5 @@ public class MasterSwitchPreference extends Preference {
 
     public Switch getSwitch() {
         return mSwitch;
-    }
-
-    private void init() {
-        setLayoutResource(R.layout.preference_master_switch);
-        setWidgetLayoutResource(R.layout.preference_widget_master_switch);
     }
 }
