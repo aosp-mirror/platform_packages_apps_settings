@@ -98,13 +98,13 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
         }
         switch (mConnectionState) {
             case BluetoothAdapter.STATE_CONNECTED:
-                return mContext.getString(R.string.bluetooth_connected);
+                return mContext.getString(R.string.bluetooth_connected_summary);
             case BluetoothAdapter.STATE_CONNECTING:
                 return mContext.getString(R.string.bluetooth_connecting);
             case BluetoothAdapter.STATE_DISCONNECTING:
                 return mContext.getString(R.string.bluetooth_disconnecting);
             default:
-                return mContext.getString(R.string.bluetooth_disconnected);
+                return mContext.getString(R.string.disconnected);
         }
     }
 
