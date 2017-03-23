@@ -51,9 +51,9 @@
                 android:title="@string/screen_zoom_title"/>
 
         <Preference
-                android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
-                android:key="screen_magnification_preference_screen"
-                android:title="@string/accessibility_screen_magnification_title" />
+            android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+            android:key="magnification_preference_screen"
+            android:title="@string/accessibility_screen_magnification_title"/>
 
         <Preference
                 android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
