@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"‏VoLTE سے لیس"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"ویڈیو کالنگ فراہم کردہ"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"‏WiFi کالنگ فراہم کردہ"</string>
-    <!-- no translation found for radio_info_radio_power (7187666084867419643) -->
-    <skip />
+    <string name="radio_info_radio_power" msgid="7187666084867419643">"موبائل ریڈیو پاور"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"‏SIM ایڈریس بک دیکھیں"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"فکسڈ ڈائلنگ نمبرز دیکھیں"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"سروس ڈائلنگ نمبرز دیکھیں"</string>
@@ -276,12 +275,10 @@
     <string name="radio_controls_title" msgid="3447085191369779032">"مزید"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"وائرلیس اور نیٹ ورکس"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"‏Wi‑Fi، بلوٹوتھ، ہوائی جہاز وضع، موبائل نیٹ ورکس اور VPNs کا نظم کریں"</string>
-    <!-- no translation found for cellular_data_title (6835451574385496662) -->
-    <skip />
+    <string name="cellular_data_title" msgid="6835451574385496662">"موبائل ڈیٹا"</string>
     <string name="calls_title" msgid="3544471959217176768">"کالز"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"‏SMS پیغامات"</string>
-    <!-- no translation found for cellular_data_summary (4660351864416939504) -->
-    <skip />
+    <string name="cellular_data_summary" msgid="4660351864416939504">"موبائل نیٹ ورک پر ڈیٹا استعمال کرنے دیں"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"رومنگ میں ڈیٹا استعمال کرنے کی اجازت دیں"</string>
     <string name="roaming" msgid="3596055926335478572">"ڈیٹا رومنگ"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"رومنگ کے وقت ڈیٹا سروسز سے مربوط ہوں"</string>
@@ -565,10 +562,13 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"منسوخ کریں"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"اگلا"</string>
     <string name="lock_setup" msgid="3355847066343753943">"سیٹ اپ مکمل ہو گیا ہے۔"</string>
-    <string name="device_admin_title" msgid="3562216873644263804">"آلہ کا نظم و نسق"</string>
-    <!-- no translation found for manage_device_admin (537804979483211453) -->
+    <string name="manage_device_admin" msgid="537804979483211453">"آلہ کے منتظم کی ایپس"</string>
+    <!-- no translation found for number_of_device_admins_none (7185056721919496069) -->
     <skip />
-    <!-- no translation found for number_of_device_admins (3361891840111523393) -->
+    <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> فعال ایپس</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> فعال ایپ</item>
+    </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"ٹرسٹ ایجنٹس"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"استعمال کرنے کیلئے، پہلے ایک اسکرین لاک سیٹ کریں"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"ٹرسٹ ایجنٹس کو دیکھیں اور انہیں غیر فعال کریں"</string>
@@ -701,12 +701,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"‏Wi‑Fi بیش کارکردگی"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"‏Wi‑Fi آن ہونے پر بیٹری کے استعمال کو کم کریں"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"‏Wi‑Fi کے ذریعے مستعمل بیٹری محدود کریں"</string>
-    <!-- no translation found for wifi_switch_away_when_unvalidated (1707247692180853058) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_title (8753386877755616476) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (6375399280719867214) -->
-    <skip />
+    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"‏Wi‑Fi پر انٹرنیٹ رسائی ختم ہونے پر موبائل ڈیٹا میں سوئچ کریں۔"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"خودکار طور پر موبائل ڈیٹا پر سوئچ کریں"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"‏Wi-Fi پر انٹرنیٹ رسائی نہ ہونے کی صورت میں موبائل ڈیٹا استعمال کریں۔ ڈیٹا کے استعمال کا اطلاق ہو سکتا ہے۔"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"نیٹ ورک شامل کریں"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"‏Wi‑Fi کی ترجیحات"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"‏Wi‑Fi نیٹ ورکس"</string>
@@ -787,10 +784,9 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"اس نیٹ ورک کو انٹرنیٹ تک رسائی نہیں ہے۔ منسلک رہیں؟"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"اس نیٹ ورک کیلئے دوبارہ نہ پوچھیں"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"‏Wi-Fi انٹرنیٹ سے منسلک نہیں ہے"</string>
-    <!-- no translation found for lost_internet_access_text (8346249124967998580) -->
+    <!-- no translation found for lost_internet_access_text (9029649339816197345) -->
     <skip />
-    <!-- no translation found for lost_internet_access_switch (2262459569601190039) -->
-    <skip />
+    <string name="lost_internet_access_switch" msgid="2262459569601190039">"موبائل پر سوئچ کریں"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"‏Wi-Fi پر رہیں"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"دوبارہ کبھی نہ دکھائیں"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"مربوط کریں"</string>
@@ -805,12 +801,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"‏Wi‑Fi کنفیگر کریں"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"‏MAC پتہ"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"‏IP پتہ"</string>
-    <!-- no translation found for wifi_details_subnet_mask (6547625164186585943) -->
-    <skip />
-    <!-- no translation found for wifi_details_dns (8648826607751830768) -->
-    <skip />
-    <!-- no translation found for wifi_details_ipv6_address_header (4334059712014889425) -->
-    <skip />
+    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"سب نیٹ ماسک"</string>
+    <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"‏IPv6 پتے"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"محفوظ کردہ نیٹ ورکس"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"‏IP ترتیبات"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"‏اس صارف کیلئے Wi‑Fi کی اعلی ترتیبات دستیاب نہیں ہیں"</string>
@@ -842,8 +835,7 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"اس گروپ کو بھول جائیں؟"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"‏پورٹیبل Wi‑Fi ہاٹ اسپاٹ"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"‏Wi‑Fi ہاٹ اسپاٹ"</string>
-    <!-- no translation found for wifi_hotspot_checkbox_text_summary (5347703013899354452) -->
-    <skip />
+    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"‏Wi‑Fi نیٹ ورک فراہمی کیلئے موبائل کنکشن استعمال کریں"</string>
     <!-- no translation found for wifi_hotspot_off_subtext (2745508221200463254) -->
     <skip />
     <!-- no translation found for wifi_hotspot_off_subtext (7746761268472599794) -->
@@ -857,7 +849,8 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"‏Wi‑Fi ہاٹ اسپاٹ سیٹ اپ"</string>
     <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5560680057727007011) -->
     <skip />
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"‏<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> پورٹیبل Wi‑Fi ہاٹ اسپاٹ"</string>
+    <!-- no translation found for wifi_tether_configure_subtext (2050196439900426456) -->
+    <skip />
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"‏Wi-Fi کالنگ"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"‏Wi-Fi کالنگ آن کریں"</string>
@@ -868,15 +861,29 @@
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"رومنگ کی ترجیح"</string>
-    <!-- no translation found for wifi_calling_mode_choices:1 (1335127656328817518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (7715869266611010880) -->
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"‏Wi-Fi ترجیحی"</item>
+    <item msgid="1335127656328817518">"موبائل ترجیحی"</item>
+    <item msgid="3132912693346866895">"‏صرف Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="7715869266611010880">"موبائل"</item>
+    <item msgid="2838022395783120596">"‏صرف Wi-Fi"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (5074515506087318555) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (1118703915148755405) -->
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"‏Wi-Fi ترجیحی"</item>
+    <item msgid="5074515506087318555">"موبائل ترجیحی"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="1118703915148755405">"موبائل"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -886,7 +893,6 @@
     <string name="emergency_address_summary" msgid="306028701568728126">"‏اگر آپ WiFi استعمال کرکے 911 پر کال کریں تو ایمرجنسی سروسز کی جانب سے پتہ آپ کے مقام کے طور پر استعمال ہوتا ہے"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ڈسپلے"</string>
     <string name="sound_settings" msgid="5534671337768745343">"آواز"</string>
-    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"والیومز"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"موسیقی کے اثرات"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"رنگ والیوم"</string>
@@ -937,8 +943,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"ذاتی اکاؤنٹ - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"تلاش کریں"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"تلاش کی ترتیبات اور سرگزشت کا نظم کریں"</string>
-    <!-- no translation found for search_settings_no_results (8799027492641230999) -->
-    <skip />
+    <string name="search_settings_no_results" msgid="8799027492641230999">"کوئی نتائج نہیں"</string>
     <string name="display_settings" msgid="7965901687241669598">"ڈسپلے"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"اسکرین کو خود کار طور پر گھمائیں"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ٹیبلٹ گھماتے وقت سمت بندی کو خود کار طور پر سوئچ کریں"</string>
@@ -960,6 +965,8 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"طلوع غروب سے طلوع آفتاب تک"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"وقت آغاز"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"وقت اختتام"</string>
+    <!-- no translation found for night_display_temperature_title (1435292789272017136) -->
+    <skip />
     <string name="night_display_summary_off" msgid="7009821232380000786">"آف۔ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"کبھی بھی خودکار طور پر آن نہیں ہو گا۔"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> پر خودکار طور پر آن ہو جائے گا۔"</string>
@@ -1015,14 +1022,11 @@
     <string name="sim_enter_ok" msgid="6475946836899218919">"ٹھیک ہے"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"منسوخ کریں"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"‏متعدد SIMs ملے"</string>
-    <!-- no translation found for sim_multi_sims_summary (2698176447067691396) -->
-    <skip />
+    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"‏موبائل ڈیٹا کیلئے اپنا ترجیحی SIM منتخب کریں۔"</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"‏ڈیٹا SIM تبدیل کریں؟"</string>
-    <!-- no translation found for sim_change_data_message (5854582807996717811) -->
-    <skip />
+    <string name="sim_change_data_message" msgid="5854582807996717811">"موبائل ڈیٹا کے لیے <xliff:g id="OLD_SIM">%2$s</xliff:g> کی بجائے <xliff:g id="NEW_SIM">%1$s</xliff:g> استعمال کریں؟"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"‏ترجیحی SIM کارڈ اپ ڈیٹ کریں؟"</string>
-    <!-- no translation found for sim_preferred_message (8466930554330635780) -->
-    <skip />
+    <string name="sim_preferred_message" msgid="8466930554330635780">"‏<xliff:g id="NEW_SIM">%1$s</xliff:g> آپ کے آلے میں واحد SIM ہے۔ کیا آپ اس SIM کو موبائل ڈیٹا، کالز اور SMS پیغامات کیلئے استعمال کرنا چاہتے ہیں؟"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"‏SIM کا غلط PIN اب آپ کو اپنا آلہ غیر مقفل کرنے کیلئے اپنے کیریئر سے رابطہ کرنا چاہیے۔"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="other">‏غلط SIM PIN کوڈ، آپ کے پاس <xliff:g id="NUMBER_1">%d</xliff:g> کوششیں بچی ہیں۔</item>
@@ -1246,15 +1250,13 @@
     <string name="menu_restore" msgid="8260067415075573273">"ڈیفالٹ پر دوبارہ ترتیب دیں"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"‏ڈیفالٹ APN ترتیبات کو دوبارہ ترتیب دینے کا عمل مکمل ہو گیا۔"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"نیٹ ورک کی ترتیبات دوبارہ ترتیب دیں"</string>
-    <!-- no translation found for reset_network_desc (5547979398298881406) -->
-    <skip />
+    <string name="reset_network_desc" msgid="5547979398298881406">"‏یہ نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دے گا، بشمول:\n\n"<li>"Wi‑Fi"</li>\n<li>"موبائل ڈیٹا"</li>\n<li>"بلوٹوتھ"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"ترتیبات دوبارہ ترتیب دیں"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"نیٹ ورک کی سبھی ترتیبات کو دوبارہ ترتیب دیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"ترتیبات دوبارہ ترتیب دیں"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"دوبارہ ترتیب دیں؟"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"اس صارف کیلئے نیٹ ورک کو دوبارہ ترتیب دینا دستیاب نہیں ہے"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"نیٹ ورک کی ترتیبات کو دوبارہ ترتیب دیا گیا ہے"</string>
-    <string name="device_reset_title" msgid="2384019005638768076">"آلہ کو دوبارہ ترتیب دیں"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"فیکٹری ڈیٹا ری سیٹ"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"‏یہ آپ کے ٹیبلٹ کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا کو حذف کر دے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"‏یہ آپ کے فون کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا کو حذف کر دے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
@@ -1352,10 +1354,8 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"بیٹری کا زیادہ استعمال"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"بیٹری کا کم استعمال"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"مقام وضع"</string>
-    <!-- no translation found for location_mode_high_accuracy_description (3453010562265338113) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (2365298246603348985) -->
-    <skip />
+    <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"‏مقام کا تعین کرنے کیلئے GPS‏، Wi‑Fi، بلوٹوتھ یا موبائل نیٹ ورکس استعمال کریں"</string>
+    <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"‏مقام کا تعین کرنے کیلئے Wi‑Fi، بلوٹوتھ یا موبائل نیٹ ورکس استعمال کریں"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"‏مقام کا تعین کرنے کیلئے GPS استعمال کریں"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"اسکیننگ"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"اسکیننگ"</string>
@@ -1472,10 +1472,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"ایپ کی ترتیبات"</string>
     <string name="install_applications" msgid="4872012136210802181">"نامعلوم ذرائع"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"ایپ کے سبھی مآخذ کی اجازت دیں"</string>
-    <string name="install_unknown_applications_title" msgid="663831043139080992">"‏آپ کو Google Play کے علاوہ مآخذ سے ایپس انسٹال کرنے دیتا ہے"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"نامعلوم ذرائع سے ایپس کے انسٹالیشن کی اجازت دیں"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"آپ کے ٹیبلٹ اور ذاتی ڈيٹا کو نامعلوم ذرائع کی ایپس سے حملے کا زیادہ خطرہ ہے۔ آپ اس بات سے متفق ہیں کہ ان ایپس کی وجہ سے آپ اپنے ٹیبلٹ میں ہونے والے کسی نقصان یا ڈیٹا کے نقصان کیلئے تنہا ذمہ دار ہوں گے۔"</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"آپ کے فون یا ذاتی ڈیٹا کو نامعلوم ذرائع کی ایپس سے حملے کا زیادہ خطرہ ہے۔ آپ اس بات سے متفق ہیں کہ آپ ان ایپس کے استعمال سے اپنے فون کو ہونے والے کسی نقصان یا ڈیٹا کے نقصان کیلئے تنہا ذمہ دار ہوں گے۔"</string>
+    <!-- no translation found for install_all_warning (8310489909586138165) -->
+    <skip />
+    <!-- no translation found for install_all_warning (1952257127370115988) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"جدید ترین ترتیبات"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"مزید ترتیبات اختیارات کو فعال کریں"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ایپ کی معلومات"</string>
@@ -1644,6 +1644,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"اگر آپ اس سروس کو روک دیتے ہیں تو آپ کے فون کی کچھ خصوصیات ٹھیک سے کام کرنا بند کر سکتی ہیں الّا یہ کہ آپ اس کی پاور بند کر دیں اور پھر دوبارہ آن کریں۔"</string>
     <string name="language_settings" msgid="8758655933029560944">"زبانیں اور ان پٹ"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"زبانیں اور ان پٹ"</string>
+    <!-- no translation found for input_assistance (7577795275222555487) -->
+    <skip />
     <string name="keyboard_settings_category" msgid="8275523930352487827">"کی بورڈ اور اندراج کے طریقے"</string>
     <string name="phone_language" msgid="7116581601133118044">"زبانیں"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1661,8 +1663,10 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"ترتیبات"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"زبان"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> کیلئے ترتیبات کھولنے میں ناکام ہوگیا"</string>
-    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"کی بورڈ اور اندراج کے طریقے"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"ورچوئل کی بورڈ"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (6035224122054465137) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (9084929359894695824) -->
+    <skip />
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"دستیاب ورچوئل کی بورڈ"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"کی بورڈز کا نظم کریں"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"کی بورڈ سے متعلق مدد"</string>
@@ -1991,10 +1995,8 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"خود کار طور پر آن کریں"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"کبھی نہیں"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> بیٹری پر"</string>
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
-    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"بیٹری فیصد"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"اسٹیٹس بار میں بیٹری فیصد دکھائیں"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"پروسیس اعداد و شمار"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"جاری پروسیسز کے بارے میں مفید اعداد و شمار"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"میموری کا استعمال"</string>
@@ -2240,8 +2242,7 @@
     <string name="data_usage_accounting" msgid="7170028915873577387">"کیریئر ڈیٹا کا حساب آپ کے آلہ سے مختلف ہو سکتا ہے۔"</string>
     <string name="data_usage_app" msgid="4970478397515423303">"ایپ کا استعمال"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"ایپ کی معلومات"</string>
-    <!-- no translation found for data_usage_cellular_data (9168928285122125137) -->
-    <skip />
+    <string name="data_usage_cellular_data" msgid="9168928285122125137">"موبائل ڈیٹا"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"ڈیٹا کی حد سیٹ کریں"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"ڈیٹا کے استعمال کا سائیکل"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"ایپ کا استعمال"</string>
@@ -2256,8 +2257,7 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"نیٹ ورک کی پابندیاں"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"ڈیٹا آٹو سنک کریں"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"‏SIM کارڈز"</string>
-    <!-- no translation found for data_usage_menu_cellular_networks (8339835014751511300) -->
-    <skip />
+    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"موبائل نیٹ ورکس"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"حد پر موقوف ہو گیا"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"ڈیٹا آٹو سنک کریں"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"ذاتی ڈیٹا آٹو سنک کریں"</string>
@@ -2268,8 +2268,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"پیش منظر"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"پس منظر"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"محدود"</string>
-    <!-- no translation found for data_usage_disable_mobile (8656552431969276305) -->
-    <skip />
+    <string name="data_usage_disable_mobile" msgid="8656552431969276305">"موبائل ڈیٹا آف کریں؟"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"موبائل ڈيٹا کی حد سیٹ کریں"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"‏4G ڈیٹا کی حد سیٹ کریں"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"‏2G-3G ڈیٹا کی حد سیٹ کریں"</string>
@@ -2288,13 +2287,12 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"پس منظر:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"ایپ کی ترتیبات"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"پس منظر کا ڈیٹا"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (179956961840654750) -->
+    <!-- no translation found for data_usage_app_restrict_background_summary (5853552187570622572) -->
     <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"اس ایپ کیلئے پس منظر ڈیٹا محدود کرنے کیلئے موبائل ڈيٹا کی حد سیٹ کریں۔"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"پس منظر کا ڈیٹا محدود کریں؟"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"اس خصوصیت کی وجہ سے پس منظر کے ڈیٹا پر انحصار کرنے والی کوئی ایپ صرف موبائل نیٹ ورکس دستیاب ہونے پر کام کرنا بند کرسکتی ہے۔\n\nآپ مزید مناسب ڈیٹا کے استعمال کے کنٹرولز ایپ میں ہی دستیاب ترتیبات میں تلاش کرسکتے ہیں۔"</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (55012417305745608) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"پس منظر ڈیٹا کو محدود کرنا صرف اسی وقت ممکن ہے جب آپ نے موبائل ڈيٹا کی ایک حد مقرر کی ہو۔"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"ڈیٹا آٹو سنک کریں کو آن کریں؟"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"‏آپ ویب پر اپنے اکاؤنٹس میں جو بھی تبدیلیاں کرتے ہیں وہ آپ کے ٹیبلیٹ میں خود بخود کاپی ہو جائیں گی۔\n\nکچھ اکاؤنٹس ایسی تبدیلیاں جو آپ ٹیبلیٹ پر کرتے ہیں انہیں خود بخود ویب پر بھی کاپی کر سکتے ہیں۔ Google اکاؤنٹ اس طریقے سے کام کرتا ہے۔"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"‏آپ ویب پر اپنے اکاؤنٹس میں جو بھی تبدیلیاں کرتے ہیں وہ آپ کے فون میں خود بخود کاپی ہو جائیں گی۔\n\nکچھ اکاؤنٹس ایسی تبدیلیاں جو آپ فون پر کرتے ہیں انہیں خود بخود ویب پر بھی کاپی کر سکتے ہیں۔ Google اکاؤنٹ اس طریقے سے کام کرتا ہے۔"</string>
@@ -2306,17 +2304,12 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"ڈیٹا کے استعمال کی وارننگ سیٹ کریں"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"ڈیٹا کے استعمال کی حد سیٹ کریں"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"ڈیٹا کا استعمال محدود کرنا"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (4983487893343645667) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (3926320594049434225) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"آپ کا ٹیبلیٹ آپ کی مقرر کردہ حد کو پہنچ جانے پر موبائل ڈیٹا کو آف کردے گا۔\n\nچونکہ ڈیٹا کے استعمال کی پیمائش آپ کے ٹیبلیٹ کے ذریعے کی جاتی ہے اور آپ کا کیریئر استعمال کا حساب مختلف طریقے سے کرسکتا ہے لہذا ایک محتاط حد مقرر کرنے پر غور کریں۔"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"آپ کا فون آپ کی مقرر کردہ حد کو پہنچ جانے پر موبائل ڈیٹا کو آف کردے گا۔\n\nچونکہ ڈیٹا کے استعمال کی پیمائش آپ کے فون کے ذریعے کی جاتی ہے اور آپ کا کیریئر استعمال کا حساب مختلف طریقے سے کرسکتا ہے لہذا ایک محتاط حد مقرر کرنے پر غور کریں۔"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"پس منظر ڈیٹا محدود کریں؟"</string>
-    <!-- no translation found for data_usage_restrict_background (434093644726734586) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7096707497743363380) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7910798414964288424) -->
-    <skip />
+    <string name="data_usage_restrict_background" msgid="434093644726734586">"‏اگر آپ پس منظر کا موبائل ڈیٹا محدود کرتے ہیں تو کچھ ایپس اور سروسز اس وقت تک کام نہیں کریں گی جب تک آپ Wi‑Fi سے منسلک نہ ہوں۔"</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"‏اگر آپ پس منظر کا موبائل ڈیٹا محدود کرتے ہیں تو کچھ ایپس اور سروسز اس وقت تک کام نہیں کریں گی جب تک آپ Wi‑Fi سے منسلک نہ ہوں۔\n\nیہ ترتیب اس ٹیبلیٹ پر موجود سبھی صارفین کو متاثر کرتی ہے۔"</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"‏اگر آپ پس منظر کا موبائل ڈیٹا محدود کرتے ہیں تو کچھ ایپس اور سروسز اس وقت تک کام نہیں کریں گی جب تک آپ Wi‑Fi سے منسلک نہ ہوں۔\n\nیہ ترتیب اس فون پر موجود سبھی صارفین کو متاثر کرتی ہے۔"</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"وارننگ<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12"></font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"حد"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"ہٹائی گئی ایپس"</string>
@@ -2326,8 +2319,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: آپ کے ٹیبلٹ کے ذریعہ کی گئی پیمائش کے مطابق، تقریباً <xliff:g id="TOTAL">%1$s</xliff:g> استعمال ہوا۔ آپ کے کیریئر کا ڈیٹا کے استعمال کا حساب مختلف ہوسکتا ہے۔"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: آپ کے فون کے ذریعہ کی گئی پیمائش کے مطابق، تقریباً <xliff:g id="TOTAL">%1$s</xliff:g> استعمال ہوا۔ آپ کے کیریئر کا ڈیٹا کے استعمال کا حساب مختلف ہوسکتا ہے۔"</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"نیٹ ورک کی پابندیاں"</string>
-    <!-- no translation found for data_usage_metered_body (7655851702771342507) -->
-    <skip />
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"پس منظر کے ڈیٹا پر پابندی ہونے پر میٹرڈ نیٹ ورکس کے ساتھ موبائل نیٹ ورک جیسا برتاؤ کیا جاتا ہے۔ بڑے ڈاؤن لوڈز کیلئے ان نیٹ ورکس کو استعمال کرنے سے پہلے ایپس متنبہ کرسکتی ہیں۔"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"موبائل نیٹ ورکس"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"‏میٹرڈ Wi‑Fi نیٹ ورکس"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"‏میٹرڈ نیٹ ورکس منتخب کرنے کیلئے، Wi‑Fi کو آن کریں۔"</string>
@@ -2505,7 +2497,6 @@
     <string name="application_restrictions" msgid="8207332020898004394">"ایپس اور مواد کی اجازت دیں"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"پابندیوں والی ایپلیکیشنز"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ایپ کیلئے ترتیبات پھیلائیں"</string>
-    <string name="home_app_uninstall_button" msgid="6808453012607962899">"یہ ایپلیکیشن اَن انسٹال کریں"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"یہ ترتیب اس ٹیبلٹ پر موجود سبھی صارفین کو متاثر کرتی ہے۔"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"یہ ترتیب اس فون پر موجود سبھی صارفین کو متاثر کرتی ہے۔"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"زبان تبدیل کریں"</string>
@@ -2582,8 +2573,7 @@
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"‏SIM کارڈز تبدیل ہوگئے ہیں"</string>
     <string name="sim_cards_changed_message_summary" msgid="8258058274989383204">"سرگرمیاں سیٹ کرنے کیلئے تھپتھپائیں"</string>
-    <!-- no translation found for sim_cellular_data_unavailable (9109302537004566098) -->
-    <skip />
+    <string name="sim_cellular_data_unavailable" msgid="9109302537004566098">"موبائل ڈیٹا دستیاب نہیں ہے"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"‏ایک ڈیٹا SIM منتخب کرنے کیلئے تھپتھپائیں"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"کالز کیلئے ہمیشہ اس کا استعمال کریں"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"‏ڈیٹا کیلئے ایک SIM منتخب کریں"</string>
@@ -2787,7 +2777,14 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"کوئی ایپس تصویر میں تصویر کا معاون نہیں ہے"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"تصویر میں تصویر"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"تصویر میں تصویر"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="5406267586308110783">"ایپ چھوڑنے پر تصویر میں تصویر داخل کرنے کی اجازت دیں"</string>
+    <!-- no translation found for picture_in_picture_app_detail_switch (1131910667023738296) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_app_detail_summary (7942592478427522244) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_on (6103704909710176555) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_off (5654388666434625247) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="2611116122628520522">"ڈسٹرب نہ کریں تک رسائی"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"کسی انسٹال کردہ ایپس نے ڈسٹرب نہ کریں تک رسائی کی درخواست نہیں کی ہے"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"ایپس لوڈ ہو رہی ہیں…"</string>
@@ -3131,8 +3128,10 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"اجازت والی ایپس"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"ہاں"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"نہیں"</string>
-    <string name="install_other_apps" msgid="4215339768128036452">"دوسری ایپس انسٹال کریں"</string>
-    <string name="keywords_install_other_apps" msgid="3320171242043396361">"خارجی نامعلوم ماخذات کی ایپس کو انسٹال کریں"</string>
+    <!-- no translation found for install_other_apps (6986686991775883017) -->
+    <skip />
+    <!-- no translation found for keywords_install_other_apps (761078076051006558) -->
+    <skip />
     <string name="write_settings" msgid="4797457275727195681">"سسٹم ترتیبات میں ترمیم کریں"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"\'سسٹم ترتیبات میں ترمیم کریں\' لکھیں"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g> میں سے <xliff:g id="COUNT_0">%1$d</xliff:g> ایپس کو سسٹم ترتیبات میں ترمیم کرنے کی اجازت ہے"</string>
@@ -3147,7 +3146,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"نہیں"</string>
     <string name="external_source_trusted" msgid="6857780460845250885">"ہاں"</string>
     <string name="external_source_untrusted" msgid="6608922938133896956">"نہیں"</string>
-    <string name="external_source_switch_title" msgid="5709145695271819076">"اس مآخذ کی ایپس پر اعتماد کریں"</string>
+    <!-- no translation found for external_source_switch_title (5581865736984836418) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"کیمرا کیلئے دو بار مروڑیں"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"اپنی کلائی کو دو بار مروڑ کر کیمرا ایپ کھولیں"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"کیمرا کیلئے پاور بٹن دو بار دبائیں"</string>
@@ -3190,18 +3190,14 @@
     <string name="location_on_summary" msgid="5127631544018313587">"آن / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"آف"</string>
     <string name="backup_disabled" msgid="485189128759595412">"بیک اپ غیر فعال ہے"</string>
-    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>‎"</string>
+    <!-- no translation found for about_summary (924181828102801010) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"کارروائی کی اجازت نہیں ہے"</string>
-    <!-- no translation found for disabled_by_policy_title_adjust_volume (7399450998356045023) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_outgoing_calls (7919816644946067058) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_sms (5733307423899610340) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_camera (6225008536855644874) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_screen_capture (4066913623298047094) -->
-    <skip />
+    <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"والیوم تبدیل نہیں کر سکتے"</string>
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"کال کرنے کی اجازت نہیں ہے"</string>
+    <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"‏SMS کی اجازت نہیں ہے"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"کیمرے کی اجازت نہیں ہے"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"اسکرین شاٹ کی اجازت نہیں ہے"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"یہ کارروائی غیر فعال ہے۔ مزید جاننے کیلئے اپنی تنظیم کے منتظم سے رابطہ کریں۔"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"مزید تفصیلات"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"آپ کا منتظم آپ کے دفتری پروفائل سے وابستہ ایپس اور ڈیٹا، بشمول ترتیبات، اجازتیں، کارپوریٹ رسائی، نیٹ ورک کی سرگرمی اور آلہ کے مقام کی معلومات مانیٹر اور منظم کر سکتا ہے۔"</string>
@@ -3214,13 +3210,11 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"ہاٹ سپاٹ آن ہے"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"‏پورٹیبل Wi‑Fi ہاٹ اسپاٹ <xliff:g id="ID_1">%1$s</xliff:g> فعال ہے، اس آلہ کیلئے Wi-Fi آف ہے۔"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"ہوائی جہاز وضع آن ہے"</string>
-    <!-- no translation found for condition_airplane_summary (5561586417832393666) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="5561586417832393666">"‏Wi-Fi، بلوٹوتھ اور موبائل نیٹ ورک آف کر دئے گئے ہیں۔ آپ فون کالز نہیں کر سکتے یا انٹرنیٹ سے منسلک نہیں ہو سکتے۔"</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"\'ڈسٹرب نہ کریں\' آن ہے (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"بیٹری سیور آن ہے"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"کارکردگی گھٹا دی گئی ہے۔ مقام سروسز اور پس منظر ڈیٹا آف کر دیا گیا ہے۔"</string>
-    <!-- no translation found for condition_cellular_title (1327317003797575735) -->
-    <skip />
+    <string name="condition_cellular_title" msgid="1327317003797575735">"موبائل ڈیٹا آف ہے"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"‏انٹرنیٹ صرف بذریعہ Wi-Fi دستیاب ہے"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"ڈیٹا سیور آن ہے"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"‏پس منظر ڈیٹا صرف بذریعہ Wi-Fi دستیاب ہے۔ جب Wi-Fi دستیاب نہ ہو تو کچھ ایپس یا سروسز متاثر ہو سکتی ہیں۔"</string>
@@ -3238,14 +3232,12 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"خودکار سسٹم اپ ڈیٹس"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"‏بائنڈرائز کردہ HALs (ریبوٹ درکار ہے)"</string>
     <string name="usage" msgid="2977875522080448986">"استعمال"</string>
-    <!-- no translation found for cellular_data_usage (2155683719898158203) -->
-    <skip />
+    <string name="cellular_data_usage" msgid="2155683719898158203">"موبائل ڈیٹا کا استعمال"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"‏Wi-Fi ڈیٹا کا استعمال"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ایتھرنیٹ ڈیٹا کا استعمال"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"ایتھرنیٹ"</string>
-    <!-- no translation found for cell_data_template (405684854174361041) -->
-    <skip />
+    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> موبائل ڈیٹا"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"‏<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi ڈیٹا"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ایتھرنیٹ ڈیٹا"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ڈیٹا انتباہ"</string>
@@ -3412,7 +3404,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"اپنی اطلاعات فوری طور پر چیک کرنے کیلئے، اپنا فون اٹھائیں۔"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"اپنی اطلاعات فوری طور پر چیک کرنے کیلئے، اپنا ٹیبلیٹ اٹھائیں۔"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"اپنی اطلاعات فوری طور پر چیک کرنے کیلئے، اپنا آلہ اٹھائیں۔"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"اطلاعات کیلئے سوائپ کریں"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (5816346492253270243) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"اپنی اطلاعات چیک کرنے کیلئے اپنے ٹیبلیٹ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"اپنی اطلاعات چیک کرنے کیلئے اپنے آلہ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
@@ -3437,14 +3430,11 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ذاتی اکاؤنٹ ڈیٹا کو خودکار مطابقت پذیر بنائیں"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"دفتری اکاؤنٹ ڈیٹا کو خودکار مطابقت پذیر بنائیں"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"اکاؤنٹ کی مطابقت پذیری"</string>
-    <!-- no translation found for enterprise_privacy_settings (5190573945078964986) -->
+    <!-- no translation found for enterprise_privacy_settings (1177106810374146496) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_generic (5853292305730761128) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_with_name (4266234968317996188) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_header (7402406406883832509) -->
-    <skip />
+    <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"آپ کی تنظیم کے ذریعے نظم کردہ ترتیبات اور تبدیلیاں"</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> کے ذریعے نظم کردہ ترتیبات اور تبدیلیاں"</string>
+    <string name="enterprise_privacy_header" msgid="7402406406883832509">"آپ کے دفتری ڈیٹا تک رسائی فراہم کرنے کیلئے، آپ کی تنظیم ترتیبات تبدیل کر کے آپ کے آلے پر سافٹ ویئر انسٹال کر سکتی ہے۔\n\nمزید تفصیلات کیلئے، اپنی تنظیم کے منتظم سے رابطہ کریں۔"</string>
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"معلومات کی وہ قسمیں جنہیں آپ کی تنظیم دیکھ سکتی ہے"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"آپ کی تنظیم کے منتظم کے ذریعے کی گئی تبدیلیاں"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"اس آلے تک آپ کی رسائی"</string>
@@ -3464,30 +3454,24 @@
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"حالیہ ترین سیکیورٹی لاگ"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"کوئی نہیں"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"ایپس انسٹال کئے گئے"</string>
-    <string name="enterprise_privacy_location_access" msgid="943112505930395028">"وہ ایپس جنہیں آپ کے مقام تک رسائی کی اجازت ہے"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="1101307566418116040">"وہ ایپس جنہیں آپ کے مائیکروفون تک رسائی کی اجازت ہے"</string>
-    <string name="enterprise_privacy_camera_access" msgid="97095968133740652">"وہ ایپس جنہیں آپ کے کیمرے تک رسائی کی اجازت ہے"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3292470316317639698">"ڈیفالٹ ایپس سیٹ ہو گیا"</string>
+    <!-- no translation found for enterprise_privacy_location_access (4158197200885270634) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (5717375623568864441) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (4858146118537519375) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3288495615791128724) -->
+    <skip />
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"ڈیفالٹ کی بورڈ"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> پر سیٹ"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"‏ہمیشہ آن VPN آن ہو گیا"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"‏ہمیشہ آن VPN آپ کی ذاتی پروفائل میں آن ہو گيا"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"‏ہمیشہ آن VPN آپ کی دفتری پروفائل میں آن ہو گيا"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"‏عالمی HTTP پراکسی سیٹ ہے"</string>
-    <plurals name="enterprise_privacy_ca_certs_user" formatted="false" msgid="2353089666351669619">
-      <item quantity="other">‏بھروسہ مند CA سرٹیفکیٹس انسٹال کئے گئے</item>
-      <item quantity="one">‏بھروسہ مند CA سرٹیفکیٹ انسٹال کیا گیا</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_personal (1866786954859360699) -->
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="5907058613578926277">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> سرٹیفکیٹس</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> سرٹیفکیٹ</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_ca_certs_actionable" formatted="false" msgid="7939443347696810129">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> سرٹیفکیٹس۔ دیکھنے کیلئے تھپتھپائیں۔</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> سرٹیفکیٹ۔ دیکھنے کیلئے تھپتھپائیں۔</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_work (6555905416417106313) -->
+    <!-- no translation found for enterprise_privacy_ca_certs (5885892204903688909) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_ca_certs (9073641163359459048) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (5823294380629654635) -->
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"منتظم آلے کو مقفل کر کے دوبارہ پاس ورڈ ترتیب دے سکتا ہے"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"ایڈمن آلہ کے تمام ڈیٹا کو حذف کرسکتا ہے"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"آلے کے تمام ڈیٹا کو حذف کرنے سے قبل پاس ورڈ درج کرنے کی ناکام کوششیں"</string>
@@ -3516,7 +3500,8 @@
     <string name="audio_files_title" msgid="4777048870657911307">"آڈیو فائلز"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(صارف کیلیے اَن انسٹال ہوگیا <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(صارف کے لیے غیر فعال ہوگیا <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="autofill_app" msgid="3889348218462883960">"آٹو فل ایپ"</string>
+    <!-- no translation found for autofill_app (7338387238377914374) -->
+    <skip />
     <string name="autofill_keywords" msgid="7485591824120812710">"آٹو، فل، آٹو فل"</string>
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> کو اپنا آٹو فل ایپ بنائيں؟ <xliff:g id="APP_NAME_1">%1$s</xliff:g> آپ کے اسکرین کو پڑھنے اور دوسرے ایپس میں فیلڈز کو بھرنے کے لائق ہوجائے گا۔"</string>
     <string name="device_theme" msgid="4571803018917608588">"آلہ کا تھیم"</string>

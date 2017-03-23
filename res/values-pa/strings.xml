@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE ਪ੍ਰੋਵਿਨਜਨਡ"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"ਵੀਡੀਓ ਕਾਲਿੰਗ ਦੀ ਪ੍ਰੋਵੀਜ਼ਨ ਕੀਤੀ ਗਈ"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wifi ਕਾਲਿੰਗ ਦੀ ਪ੍ਰੋਵੀਜ਼ਨ ਕੀਤੀ ਗਈ"</string>
-    <!-- no translation found for radio_info_radio_power (7187666084867419643) -->
-    <skip />
+    <string name="radio_info_radio_power" msgid="7187666084867419643">"ਮੋਬਾਈਲ ਰੇਡੀਓ ਪਾਵਰ"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"ਸਿਮ ਪਤਾ ਬੁੱਕ ਵੇਖੋ"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"ਫਿਕਸਡ ਡਾਇਲਿੰਗ ਨੰਬਰ ਦੇਖੋ"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"ਸੇਵਾ ਡਾਇਲਿੰਗ ਨੰਬਰ ਦੇਖੋ"</string>
@@ -276,12 +275,10 @@
     <string name="radio_controls_title" msgid="3447085191369779032">"ਹੋਰ"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"ਵਾਇਰਲੈੱਸ ਅਤੇ ਨੈੱਟਵਰਕ"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Wi‑Fi, Bluetooth, ਏਅਰਪਲੇਨ ਮੋਡ, ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ &amp; VPN ਵਿਵਸਥਿਤ ਕਰੋ"</string>
-    <!-- no translation found for cellular_data_title (6835451574385496662) -->
-    <skip />
+    <string name="cellular_data_title" msgid="6835451574385496662">"ਮੋਬਾਈਲ ਡੈਟਾ"</string>
     <string name="calls_title" msgid="3544471959217176768">"ਕਾਲਾਂ"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS ਸੁਨੇਹੇ"</string>
-    <!-- no translation found for cellular_data_summary (4660351864416939504) -->
-    <skip />
+    <string name="cellular_data_summary" msgid="4660351864416939504">"ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ \'ਤੇ ਡੈਟਾ ਉਪਯੋਗ ਯੋਗ ਬਣਾਓ"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"ਰੋਮਿੰਗ ਵੇਲੇ ਡੈਟਾ ਉਪਯੋਗ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
     <string name="roaming" msgid="3596055926335478572">"ਡੈਟਾ ਰੋਮਿੰਗ"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"ਰੋਮਿੰਗ ਵੇਲੇ ਡੈਟਾ ਸੇਵਾਵਾਂ ਨਾਲ ਕਨੈਕਟ ਕਰੋ"</string>
@@ -565,10 +562,13 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"ਰੱਦ ਕਰੋ"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"ਅੱਗੇ"</string>
     <string name="lock_setup" msgid="3355847066343753943">"ਸੈਟਅਪ ਪੂਰਾ ਹੈ।"</string>
-    <string name="device_admin_title" msgid="3562216873644263804">"ਡੀਵਾਈਸ ਪ੍ਰਸ਼ਾਸਨ"</string>
-    <!-- no translation found for manage_device_admin (537804979483211453) -->
+    <string name="manage_device_admin" msgid="537804979483211453">"ਡੀਵਾਈਸ ਪ੍ਰਸ਼ਾਸਕ ਐਪਾਂ"</string>
+    <!-- no translation found for number_of_device_admins_none (7185056721919496069) -->
     <skip />
-    <!-- no translation found for number_of_device_admins (3361891840111523393) -->
+    <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ਕਿਰਿਆਸ਼ੀਲ ਐਪ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ਕਿਰਿਆਸ਼ੀਲ ਐਪਾਂ</item>
+    </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"ਭਰੋਸੇਯੋਗ ਏਜੰਟ"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"ਵਰਤਣ ਲਈ, ਪਹਿਲਾਂ ਇੱਕ ਸਕ੍ਰੀਨ ਲੌਕ ਸੈੱਟ ਕਰੋ"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"ਭਰੋਸੇਯੋਗ ਏਜੰਟ ਦੇਖੋ ਜਾਂ ਅਕਿਰਿਆਸ਼ੀਲ ਬਣਾਓ"</string>
@@ -701,12 +701,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi‑Fi ਅਨੁਕੂਲਨ"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"ਜਦੋਂ Wi‑Fi ਚਾਲੂ ਹੋਵੇ ਤਾਂ ਬੈਟਰੀ ਵਰਤੋਂ ਘੱਟ ਕਰੋ"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi ਵੱਲੋਂ ਵਰਤੀ ਗਈ ਸੀਮਿਤ ਬੈਟਰੀ"</string>
-    <!-- no translation found for wifi_switch_away_when_unvalidated (1707247692180853058) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_title (8753386877755616476) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (6375399280719867214) -->
-    <skip />
+    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"Wi‑Fi ਦੀ ਇੰਟਰਨੈੱਟ \'ਤੇ ਪਹੁੰਚ ਚਲੀ ਜਾਣ \'ਤੇ ਬਦਲਕੇ ਮੋਬਾਈਲ ਡੈਟੇ \'ਤੇ ਜਾਓ।"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਬਦਲੀ ਕਰਕੇ ਮੋਬਾਈਲ ਡੈਟੇ \'ਤੇ ਜਾਓ"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"Wi‑Fi ਦੀ ਇੰਟਰਨੈੱਟ \'ਤੇ ਪਹੁੰਚ ਨਾ ਹੋਣ \'ਤੇ ਮੋਬਾਈਲ ਡੈਟਾ ਵਰਤੋ। ਡੈਟਾ ਉਪਯੋਗ ਵਾਸਤੇ ਖਰਚੇ ਲਾਗੂ ਹੋ ਸਕਦੇ ਹਨ।"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"ਨੈੱਟਵਰਕ ਜੋੜੋ"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"Wi‑Fi ਤਰਜੀਹਾਂ"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi ਨੈੱਟਵਰਕ"</string>
@@ -787,10 +784,9 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"ਇਸ ਨੈੱਟਵਰਕ ਦੀ ਕੋਈ ਇੰਟਰਨੈਟ ਪਹੁੰਚ ਨਹੀਂ ਹੈ। ਕੀ ਕਨੈਕਟ ਰਹਿਣਾ ਹੈ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ਇਸ ਨੈੱਟਵਰਕ ਲਈ ਦੁਬਾਰਾ ਨਾ ਆਖੋ"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi ਇੰਟਰਨੈੱਟ ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੈ"</string>
-    <!-- no translation found for lost_internet_access_text (8346249124967998580) -->
+    <!-- no translation found for lost_internet_access_text (9029649339816197345) -->
     <skip />
-    <!-- no translation found for lost_internet_access_switch (2262459569601190039) -->
-    <skip />
+    <string name="lost_internet_access_switch" msgid="2262459569601190039">"ਬਦਲਕੇ ਮੋਬਾਈਲ ਕਰੋ"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi‑Fi \'ਤੇ ਬਣੇ ਰਹੋ"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"ਕਦੇ ਦੁਬਾਰਾ ਨਾ ਵਿਖਾਓ"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"ਕਨੈਕਟ ਕਰੋ"</string>
@@ -805,12 +801,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi-Fi ਦਾ ਸੰਰੂਪਣ ਕਰੋ"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC ਪਤਾ"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP ਪਤਾ"</string>
-    <!-- no translation found for wifi_details_subnet_mask (6547625164186585943) -->
-    <skip />
-    <!-- no translation found for wifi_details_dns (8648826607751830768) -->
-    <skip />
-    <!-- no translation found for wifi_details_ipv6_address_header (4334059712014889425) -->
-    <skip />
+    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"ਸਬਨੈੱਟ ਮਾਸਕ"</string>
+    <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 ਪਤੇ"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਨੈੱਟਵਰਕ"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP ਸੈਟਿੰਗਾਂ"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Wi‑Fi ਉੱਨਤ ਸੈਟਿੰਗਾਂ ਇਸ ਵਰਤੋਂਕਾਰ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹਨ"</string>
@@ -842,8 +835,7 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"ਕੀ ਇਹ ਸਮੂਹ ਛੱਡਣਾ ਹੈ?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"ਪੋਰਟੇਬਲ Wi‑Fi ਹੌਟਸਪੌਟ"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi ਹੌਟਸਪੌਟ"</string>
-    <!-- no translation found for wifi_hotspot_checkbox_text_summary (5347703013899354452) -->
-    <skip />
+    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"Wi‑Fi ਨੈੱਟਵਰਕ ਮੁਹੱਈਆ ਕਰਵਾਉਣ ਲਈ ਮੋਬਾਈਲ ਕਨੈਕਸ਼ਨ ਵਰਤੋ"</string>
     <!-- no translation found for wifi_hotspot_off_subtext (2745508221200463254) -->
     <skip />
     <!-- no translation found for wifi_hotspot_off_subtext (7746761268472599794) -->
@@ -857,7 +849,8 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Wi‑Fi ਹੌਟਸਪੌਟ ਸੈਟਅਪ"</string>
     <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5560680057727007011) -->
     <skip />
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> ਪੋਰਟੇਬਲ Wi‑Fi ਹੌਟਸਪੌਟ"</string>
+    <!-- no translation found for wifi_tether_configure_subtext (2050196439900426456) -->
+    <skip />
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi ਕਾਲਿੰਗ"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Wi-Fi ਕਾਲਿੰਗ ਚਾਲੂ ਕਰੋ"</string>
@@ -868,15 +861,29 @@
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"ਰੋਮਿੰਗ ਤਰਜੀਹ"</string>
-    <!-- no translation found for wifi_calling_mode_choices:1 (1335127656328817518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (7715869266611010880) -->
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"ਤਰਜੀਹੀ Wi-Fi"</item>
+    <item msgid="1335127656328817518">"ਮੋਬਾਈਲ ਨੂੰ ਤਰਜੀਹ ਹੈ"</item>
+    <item msgid="3132912693346866895">"ਕੇਵਲ Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="7715869266611010880">"ਮੋਬਾਈਲ"</item>
+    <item msgid="2838022395783120596">"ਸਿਰਫ਼ Wi-Fi"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (5074515506087318555) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (1118703915148755405) -->
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Wi-Fi ਤਰਜੀਹੀ"</item>
+    <item msgid="5074515506087318555">"ਮੋਬਾਈਲ ਨੂੰ ਤਰਜੀਹ ਹੈ"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="1118703915148755405">"ਮੋਬਾਈਲ"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -886,7 +893,6 @@
     <string name="emergency_address_summary" msgid="306028701568728126">"ਤੁਹਾਡੇ ਵੱਲੋਂ WiFi ਦੀ ਵਰਤੋਂ ਨਾਲ 911 ਨੂੰ ਕਾਲ ਕਰਨ \'ਤੇ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਦੁਆਰਾ ਤੁਹਾਡੇ ਟਿਕਾਣੇ ਵਜੋਂ ਵਰਤਿਆ ਜਾਣ ਵਾਲਾ ਪਤਾ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ਡਿਸਪਲੇ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ਧੁਨੀ"</string>
-    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"ਵੋਲਯੂਮ"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"ਸੰਗੀਤ ਇਫੈਕਟਸ"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"ਰਿੰਗ ਵੌਲਯੂਮ"</string>
@@ -937,8 +943,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"ਨਿੱਜੀ ਖਾਤਾ - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"ਖੋਜੋ"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"ਖੋਜ ਸੈਟਿੰਗ ਅਤੇ ਇਤਿਹਾਸ ਵਿਵਸਥਿਤ ਕਰੋ"</string>
-    <!-- no translation found for search_settings_no_results (8799027492641230999) -->
-    <skip />
+    <string name="search_settings_no_results" msgid="8799027492641230999">"ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ"</string>
     <string name="display_settings" msgid="7965901687241669598">"ਡਿਸਪਲੇ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"ਆਟੋ-ਰੋਟੇਟ ਸਕ੍ਰੀਨ"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ਟੈਬਲੇਟ ਨੂੰ ਰੋਟੇਟ ਕਰਨ ਵੇਲੇ ਆਟੋਮੈਟਿਕਲੀ ਅਨੁਕੂਲਨ ਸਵਿਚ ਕਰੋ"</string>
@@ -960,6 +965,8 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"ਸੂਰਜ ਛਿਪਣ ਤੋਂ ਸੂਰਜ ਚੜ੍ਹਨ ਤੱਕ"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"ਸ਼ੁਰੂਆਤੀ ਸਮਾਂ"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"ਸਮਾਪਤੀ ਸਮਾਂ"</string>
+    <!-- no translation found for night_display_temperature_title (1435292789272017136) -->
+    <skip />
     <string name="night_display_summary_off" msgid="7009821232380000786">"ਬੰਦ। <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"ਆਪਣੇ ਆਪ ਕਦੇ ਵੀ ਚਾਲੂ ਨਹੀਂ ਹੋਵੇਗੀ।"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> ਵਜੇ ਆਪਣੇ ਆਪ ਚਾਲੂ ਹੋ ਜਾਵੇਗੀ।"</string>
@@ -1015,14 +1022,11 @@
     <string name="sim_enter_ok" msgid="6475946836899218919">"ਠੀਕ"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ਰੱਦ ਕਰੋ"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"ਮਲਟੀਪਲ SIM ਮਿਲੇ"</string>
-    <!-- no translation found for sim_multi_sims_summary (2698176447067691396) -->
-    <skip />
+    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"ਉਹ SIM ਚੁਣੋ ਜਿਸਨੂੰ ਤੁਸੀਂ ਮੋਬਾਈਲ ਡੈਟੇ ਲਈ ਤਰਜੀਹ ਦਿੰਦੇ ਹੋ।"</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"ਕੀ ਡੈਟਾ SIM ਬਦਲਣਾ ਹੈ?"</string>
-    <!-- no translation found for sim_change_data_message (5854582807996717811) -->
-    <skip />
+    <string name="sim_change_data_message" msgid="5854582807996717811">"ਮੋਬਾਈਲ ਡੈਟੇ ਦੇ ਲਈ <xliff:g id="OLD_SIM">%2$s</xliff:g> ਦੀ ਬਜਾਏ <xliff:g id="NEW_SIM">%1$s</xliff:g> ਨੂੰ ਵਰਤੀਏ?"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"ਕੀ ਤਰਜੀਹੀ SIM ਕਾਰਡ ਅਪਡੇਟ ਕਰਨਾ ਹੈ?"</string>
-    <!-- no translation found for sim_preferred_message (8466930554330635780) -->
-    <skip />
+    <string name="sim_preferred_message" msgid="8466930554330635780">"ਤੁਹਾਡੀ ਡੀਵਾਈਸ ਵਿੱਚ ਸਿਰਫ਼ <xliff:g id="NEW_SIM">%1$s</xliff:g> SIM ਹੀ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ SIM ਨੂੰ ਮੋਬਾਈਲ ਡੈਟੇ, ਕਾਲਾਂ, ਅਤੇ SMS ਸੁਨੇਹਿਆਂ ਦੇ ਲਈ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"ਗ਼ਲਤ SIM PIN ਕੋਡ, ਹੁਣ ਤੁਹਾਨੂੰ ਆਪਣੀ ਡੀਵਾਈਸ ਨੂੰ ਅਨਲੌਕ ਕਰਨ ਲਈ ਆਪਣੇ ਕੈਰੀਅਰ ਨੂੰ ਸੰਪਰਕ ਕਰਨਾ ਪਵੇਗਾ।"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="one">ਗ਼ਲਤ SIM PIN ਕੋਡ, ਤੁਹਾਡੇ ਕੋਲ <xliff:g id="NUMBER_1">%d</xliff:g> ਕੋਸ਼ਿਸ਼ਾਂ ਬਾਕੀ ਹਨ।</item>
@@ -1246,15 +1250,13 @@
     <string name="menu_restore" msgid="8260067415075573273">"ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈੱਟ ਕਰੋ"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"ਡਿਫੌਲਟ APN ਸੈਟਿੰਗਾਂ ਰੀਸੈੱਟ ਕਰਨਾ ਪੂਰਾ ਹੋਇਆ।"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"ਨੈੱਟਵਰਕ ਸੈਟਿੰਗਾਂ ਰੀਸੈੱਟ"</string>
-    <!-- no translation found for reset_network_desc (5547979398298881406) -->
-    <skip />
+    <string name="reset_network_desc" msgid="5547979398298881406">"ਇਹ ਨੈੱਟਵਰਕ ਦੀਆਂ ਸਾਰੀਆਂ ਸੈਟਿੰਗਾਂ ਨੂੰ ਰੀਸੈੱਟ ਕਰੇਗਾ, ਜਿਸ ਵਿੱਚ ਇਹ ਸ਼ਾਮਲ ਹਨ:\n\n"<li>"Wi‑Fi"</li>\n<li>"ਮੋਬਾਈਲ ਡੈਟਾ"</li>\n<li>"ਬਲੂਟੁੱਥ"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"ਰੀਸੈੱਟ ਸੈਟਿੰਗਾਂ"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"ਕੀ ਸਾਰੀਆਂ ਨੈੱਟਵਰਕ ਸੈਟਿੰਗਾਂ ਰੀਸੈੱਟ ਕਰਨੀਆਂ ਹਨ? ਤੁਸੀਂ ਇਹ ਕਿਰਿਆ ਅਨਡੂ ਨਹੀ ਕਰ ਸਕਦੇ!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"ਰੀਸੈੱਟ ਸੈਟਿੰਗਾਂ"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"ਕੀ ਰੀਸੈੱਟ ਕਰਨਾ ਹੈ?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ਇਸ ਉਪਭੋਗਤਾ ਲਈ ਨੈੱਟਵਰਕ ਰੀਸੈੱਟ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ਨੈੱਟਵਰਕ ਸੈਟਿੰਗਾਂ ਰੀਸੈੱਟ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ"</string>
-    <string name="device_reset_title" msgid="2384019005638768076">"ਡੀਵਾਈਸ ਰੀਸੈੱਟ ਕਰੋ"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"ਫੈਕਟਰੀ ਡੈਟਾ ਰੀਸੈੱਟ"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"ਇਹ ਤੁਹਾਡੀ ਟੈਬਲੇਟ ਦੀ "<b>"ਅੰਦਰੂਨੀ ਸਟੋਰੇਜ"</b>"ਦਾ ਸਾਰਾ ਡੈਟਾ ਮਿਟਾ ਦੇਵੇਗਾ, ਜਿਸ ਵਿੱਚ ਸ਼ਾਮਲ ਹੈ:\n\n"<li>"ਤੁਹਾਡਾ Google ਖਾਤਾ"</li>\n<li>"ਸਿਸਟਮ ਅਤੇ ਐਪ ਡੈਟਾ ਅਤੇ ਸੈਟਿੰਗਾਂ"</li>\n<li>"ਡਾਊਨਲੋਡ ਕੀਤੇ ਐਪਸ"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"ਇਹ ਤੁਹਾਡੇ ਫੋਨ ਦੀ "<b>"ਅੰਦਰੂਨੀ ਸਟੋਰੇਜ"</b>" ਦਾ ਸਾਰਾ ਡੈਟਾ ਮਿਟਾ ਦੇਵੇਗਾ, ਜਿਸ ਵਿੱਚ ਸ਼ਾਮਲ ਹੈ:\n\n"<li>"ਤੁਹਾਡਾ Google ਖਾਤਾ"</li>\n<li>"ਸਿਸਟਮ ਅਤੇ ਐਪ ਡੈਟਾ ਅਤੇ ਸੈਟਿੰਗਾਂ"</li>\n<li>"ਡਾਊਨਲੋਡ ਕੀਤੇ ਐਪਸ"</li></string>
@@ -1352,10 +1354,8 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"ਉੱਚ ਬੈਟਰੀ ਵਰਤੋਂ"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"ਘੱਟ ਬੈਟਰੀ ਵਰਤੋਂ"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"ਸਥਿਤੀ ਮੋਡ"</string>
-    <!-- no translation found for location_mode_high_accuracy_description (3453010562265338113) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (2365298246603348985) -->
-    <skip />
+    <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"ਟਿਕਾਣੇ ਦਾ ਪਤਾ ਲਗਾਉਣ ਲਈ GPS, Wi‑Fi, ਬਲੂਟੁੱਥ, ਜਾਂ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਵਰਤੋ"</string>
+    <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"ਟਿਕਾਣੇ ਦਾ ਪਤਾ ਲਗਾਉਣ ਲਈ Wi‑Fi, ਬਲੂਟੁੱਥ, ਜਾਂ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਵਰਤੋ"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ਨਿਰਧਾਰਿਤ ਸਥਾਨ ਦਾ ਪਤਾ ਲਗਾਉਣ ਲਈ GPS ਵਰਤੋ"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"ਸਕੈਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"ਸਕੈਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"</string>
@@ -1472,10 +1472,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"ਐਪ ਸੈਟਿੰਗਾਂ"</string>
     <string name="install_applications" msgid="4872012136210802181">"ਅਗਿਆਤ ਸਰੋਤ"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"ਸਾਰੇ ਐਪ ਸਰੋਤਾਂ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
-    <string name="install_unknown_applications_title" msgid="663831043139080992">"ਤੁਹਾਨੂੰ Google Play ਤੋਂ ਇਲਾਵਾ ਹੋਰਾਂ ਸਰੋਤਾਂ ਤੋਂ ਐਪਸ ਇੰਸਟੌਲ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"ਅਗਿਆਤ ਸਰੋਤਾਂ ਤੋਂ ਐਪਾਂ ਦੀ ਸਥਾਪਨਾ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"ਤੁਹਾਡਾ ਟੈਬਲੈੱਟ ਅਤੇ ਨਿੱਜੀ ਡੈਟਾ ਅਗਿਆਤ ਸਰੋਤਾਂ ਤੋਂ ਲਈਆਂ ਐਪਾਂ ਵੱਲੋਂ ਹਮਲੇ ਪ੍ਰਤੀ ਵਧੇਰੇ ਕਮਜ਼ੋਰ ਹੈ। ਤੁਸੀਂ ਸਹਿਮਤੀ ਦਿੰਦੇ ਹੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਟੈਬਲੈੱਟ ਨੂੰ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਅਤੇ ਡੈਟੇ ਦੇ ਨਸ਼ਟ ਹੋਣ ਲਈ ਕੇਵਲ ਖੁਦ ਜ਼ਿੰਮੇਵਾਰ ਹੋ, ਜੋ ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਵਰਤਣ ਦੇ ਸਿੱਟੇ ਵਜੋਂ ਹੋ ਸਕਦਾ ਹੈ।"</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"ਤੁਹਾਡਾ ਫੋਨ ਅਤੇ ਨਿੱਜੀ ਡੈਟਾ ਅਗਿਆਤ ਸਰੋਤਾਂ ਤੋਂ ਲਈਆਂ ਐਪਾਂ ਵੱਲੋਂ ਹਮਲੇ ਪ੍ਰਤੀ ਵਧੇਰੇ ਕਮਜ਼ੋਰ ਹੈ। ਤੁਸੀਂ ਸਹਿਮਤੀ ਦਿੰਦੇ ਹੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਫੋਨ ਨੂੰ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਅਤੇ ਡੈਟੇ ਦੇ ਨਸ਼ਟ ਹੋਣ ਲਈ ਕੇਵਲ ਖੁਦ ਜ਼ਿੰਮੇਵਾਰ ਹੋ, ਜੋ ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਵਰਤਣ ਦੇ ਸਿੱਟੇ ਵਜੋਂ ਹੋ ਸਕਦਾ ਹੈ।"</string>
+    <!-- no translation found for install_all_warning (8310489909586138165) -->
+    <skip />
+    <!-- no translation found for install_all_warning (1952257127370115988) -->
+    <skip />
     <string name="advanced_settings" msgid="1777249286757067969">"ਉੱਨਤ ਸੈਟਿੰਗਾਂ"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"ਹੋਰ ਸੈਟਿੰਗਾਂ ਚੋਣਾਂ ਸਮਰੱਥ ਬਣਾਓ"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ਐਪ ਜਾਣਕਾਰੀ"</string>
@@ -1644,6 +1644,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"ਜੇਕਰ ਤੁਸੀਂ ਇਹ ਸੇਵਾ ਬੰਦ ਕਰਦੇ ਹੋ, ਤਾਂ ਤੁਹਾਡੇ ਫੋਨ ਦੀਆਂ ਕੁਝ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਸਹੀ ਢੰਗ ਨਾਲ ਕੰਮ ਕਰਨਾ ਬੰਦ ਕਰ ਸਕਦੀਆਂ ਹਨ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ ਇਸਦੀ ਪਾਵਰ ਬੰਦ ਅਤੇ ਫਿਰ ਦੁਬਾਰਾ ਚਾਲੂ ਨਹੀਂ ਕਰਦੇ।"</string>
     <string name="language_settings" msgid="8758655933029560944">"ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਇਨਪੁੱਟ"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਇਨਪੁੱਟ"</string>
+    <!-- no translation found for input_assistance (7577795275222555487) -->
+    <skip />
     <string name="keyboard_settings_category" msgid="8275523930352487827">"ਕੀ-ਬੋਰਡ &amp; ਇਨਪੁਟ ਵਿਧੀਆਂ"</string>
     <string name="phone_language" msgid="7116581601133118044">"ਭਾਸ਼ਾਵਾਂ"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1661,8 +1663,10 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"ਸੈਟਿੰਗਾਂ"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"ਭਾਸ਼ਾ"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> ਲਈ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹਣ ਵਿੱਚ ਅਸਫਲ"</string>
-    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"ਕੀ-ਬੋਰਡ ਅਤੇ ਇਨਪੁੱਟ ਵਿਧੀਆਂ"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"ਆਭਾਸੀ ਕੀ-ਬੋਰਡ"</string>
+    <!-- no translation found for keyboard_and_input_methods_category (6035224122054465137) -->
+    <skip />
+    <!-- no translation found for virtual_keyboard_category (9084929359894695824) -->
+    <skip />
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"ਉਪਲਬਧ ਆਭਾਸੀ ਕੀ-ਬੋਰਡ"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"ਕੀ-ਬੋਰਡਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"ਕੀ-ਬੋਰਡ ਸਹਾਇਤਾ"</string>
@@ -1991,10 +1995,8 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"ਆਟੋਮੈਟਿਕਲੀ ਚਾਲੂ ਕਰੋ"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"ਕਦੇ ਵੀ ਨਹੀਂ"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> \'ਤੇ ਬੈਟਰੀ"</string>
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
-    <!-- no translation found for battery_percentage_description (8511658577507384014) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"ਬੈਟਰੀ ਪ੍ਰਤੀਸ਼ਤ"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"ਅਵਸਥਾ ਪੱਟੀ ਵਿੱਚ ਬੈਟਰੀ ਪ੍ਰਤੀਸ਼ਤ ਦਿਖਾਓ"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"ਪ੍ਰਕਿਰਿਆ ਸਟੈਟਸ"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"ਚੱਲ ਰਹੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਬਾਰੇ Geeky ਸਟੈਟਸ"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"ਮੈਮਰੀ ਵਰਤੋਂ"</string>
@@ -2240,8 +2242,7 @@
     <string name="data_usage_accounting" msgid="7170028915873577387">"ਕੈਰੀਅਰ ਦਾ ਡੈਟਾ ਹਿਸਾਬ ਤੁਹਾਡੀ ਡੀਵਾਈਸ ਤੋਂ ਵੱਖ ਹੋ ਸਕਦਾ ਹੈ।"</string>
     <string name="data_usage_app" msgid="4970478397515423303">"ਐਪ ਵਰਤੋਂ"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"ਐਪ ਜਾਣਕਾਰੀ"</string>
-    <!-- no translation found for data_usage_cellular_data (9168928285122125137) -->
-    <skip />
+    <string name="data_usage_cellular_data" msgid="9168928285122125137">"ਮੋਬਾਈਲ ਡੈਟਾ"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"ਡੈਟਾ ਸੀਮਾ ਸੈੱਟ ਕਰੋ"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"ਡੈਟਾ ਉਪਯੋਗ ਸਾਈਕਲ"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"ਐਪ ਵਰਤੋਂ"</string>
@@ -2256,8 +2257,7 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"ਨੈੱਟਵਰਕ ਪ੍ਰਤਿਬੰਧ"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM ਕਾਰਡ"</string>
-    <!-- no translation found for data_usage_menu_cellular_networks (8339835014751511300) -->
-    <skip />
+    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"ਸੀਮਾ ਤੇ ਰੋਕਿਆ"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"ਨਿੱਜੀ ਡੈਟਾ ਆਟੋ-ਸਿੰਕ ਕਰੋ"</string>
@@ -2268,8 +2268,7 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"ਫੋਰਗ੍ਰਾਊਂਡ"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"ਪਿਛੋਕੜ"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"ਪ੍ਰਤਿਬੰਧਿਤ"</string>
-    <!-- no translation found for data_usage_disable_mobile (8656552431969276305) -->
-    <skip />
+    <string name="data_usage_disable_mobile" msgid="8656552431969276305">"ਮੋਬਾਈਲ ਡੈਟਾ ਬੰਦ ਕਰੀਏ?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="4644364396844393848">"ਮੋਬਾਈਲ ਡੈਟਾ ਸੀਮਾ ਸੈੱਟ ਕਰੋ"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"4G ਡੈਟਾ ਸੀਮਾ ਸੈੱਟ ਕਰੋ"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"2G-3G ਡੈਟਾ ਸੀਮਾ ਸੈੱਟ ਕਰੋ"</string>
@@ -2288,13 +2287,12 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"ਪਿਛੋਕੜ"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"ਐਪ ਸੈਟਿੰਗਾਂ"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"ਪਿਛੋਕੜ ਡੈਟਾ"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (179956961840654750) -->
+    <!-- no translation found for data_usage_app_restrict_background_summary (5853552187570622572) -->
     <skip />
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"ਇਸ ਐਪ ਲਈ ਪਿਛੋਕੜ ਡੈਟਾ ਤੇ ਪ੍ਰਤਿਬੰਧ ਲਾਉਣ ਲਈ, ਪਹਿਲਾਂ ਇੱਕ ਮੋਬਾਈਲ ਡੈਟਾ ਸੀਮਾ ਸੈੱਟ ਕਰੋ।"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"ਕੀ ਪਿਛੋਕੜ ਡੈਟਾ ਤੇ ਪ੍ਰਤਿਬੰਧ ਲਾਉਣਾ ਹੈ?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਇੱਕ ਅਜਿਹੇ ਐਪ ਦਾ ਕਾਰਨ ਬਣ ਸਕਦੀ ਹੈ ਜੋ ਕੰਮ ਕਰਨਾ ਬੰਦ ਕਰਨ ਲਈ ਪਿਛੋਕੜ ਡੈਟਾ ਤੇ ਨਿਰਭਰ ਹੈ, ਕੇਵਲ ਉਦੋਂ ਜਦੋਂ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਉਪਲਬਧ ਹੋਣ।\n\nਤੁਸੀਂ ਐਪ ਵਿੱਚ ਉਪਲਬਧ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਹੋਰ ਉਚਿਤ ਡੈਟਾ ਉਪਯੋਗ ਨਿਯੰਤਰਣ ਲੱਭ ਸਕਦੇ ਹੋ।"</string>
-    <!-- no translation found for data_usage_restrict_denied_dialog (55012417305745608) -->
-    <skip />
+    <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"ਬੈਕਗ੍ਰਾਊਂਡ ਡੈਟੇ \'ਤੇ ਪਾਬੰਦੀ ਲਗਾਉਣਾ ਕੇਵਲ ਉਦੋਂ ਸੰਭਵ ਹੈ ਜਦੋਂ ਤੁਸੀਂ ਇੱਕ ਮੋਬਾਈਲ ਡੈਟਾ ਸੀਮਾ ਸੈੱਟ ਕੀਤੀ ਹੋਵੇ।"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"ਕੀ ਆਟੋ-ਸਿੰਕ ਡੈਟਾ ਚਾਲੂ ਕਰਨਾ ਹੈ?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"ਤੁਸੀਂ ਵੈਬ ਤੇ ਆਪਣੇ ਖਾਤਿਆਂ ਵਿੱਚ ਜੋ ਕੋਈ ਵੀ ਬਦਲਾਵ ਕਰਦੇ ਹੋ, ਉਹ ਆਟੋਮੈਟਿਕਲੀ ਤੁਹਾਡੀ ਟੈਬਲੇਟ ਤੇ ਕਾਪੀ ਕੀਤੇ ਜਾਣਗੇ।\n\nਕੁਝ ਖਾਤੇ ਆਟੋਮੈਟਿਕਲੀ ਉਹ ਬਦਲਾਵ ਕਾਪੀ ਕਰ ਸਕਦੇ ਹਨ ਜੋ ਤੁਸੀਂ ਵੈਬ ਤੇ ਆਪਣੀ ਟੈਬਲੇਟ ਵਿੱਚ ਕਰਦੇ ਹੋ। ਇੱਕ Google ਖਾਤਾ ਇਸ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਦਾ ਹੈ।"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"ਤੁਸੀਂ ਵੈਬ ਤੇ ਆਪਣੇ ਖਾਤਿਆਂ ਵਿੱਚ ਜੋ ਕੋਈ ਵੀ ਬਦਲਾਵ ਕਰਦੇ ਹੋ, ਉਹ ਆਟੋਮੈਟਿਕਲੀ ਤੁਹਾਡੇ ਫੋਨ ਤੇ ਕਾਪੀ ਕੀਤੇ ਜਾਣਗੇ।\n\nਕੁਝ ਖਾਤੇ ਆਟੋਮੈਟਿਕਲੀ ਉਹ ਬਦਲਾਵ ਕਾਪੀ ਕਰ ਸਕਦੇ ਹਨ ਜੋ ਤੁਸੀਂ ਵੈਬ ਤੇ ਆਪਣੇ ਫੋਨ ਵਿੱਚ ਕਰਦੇ ਹੋ। ਇੱਕ Google ਖਾਤਾ ਇਸ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਦਾ ਹੈ।"</string>
@@ -2306,17 +2304,12 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"ਡੈਟਾ ਉਪਯੋਗ ਚਿਤਾਵਨੀ ਸੈੱਟ ਕਰੋ"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"ਡੈਟਾ ਉਪਯੋਗ ਸੀਮਾ ਸੈੱਟ ਕਰੋ"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"ਡੈਟਾ ਉਪਯੋਗ ਸੀਮਿਤ ਕਰ ਰਿਹਾ ਹੈ"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (4983487893343645667) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (3926320594049434225) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"ਤੁਹਾਡਾ ਟੈਬਲੈੱਟ ਤੁਹਾਡੇ ਵੱਲੋਂ ਸੈੱਟ ਕੀਤੀ ਮੋਬਾਈਲ ਡੈਟੇ ਦੀ ਸੀਮਾ ਉੱਤੇ ਪਹੁੰਚਣ \'ਤੇ ਮੋਬਾਈਲ ਡੈਟਾ ਬੰਦ ਕਰ ਦੇਵੇਗਾ।\n\nਕਿਉਂਕਿ ਡੈਟਾ ਉਪਯੋਗ ਤੁਹਾਡੇ ਟੈਬਲੈੱਟ ਵੱਲੋਂ ਮਾਪਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਤੁਹਾਡਾ ਕੈਰੀਅਰ ਉਪਯੋਗ ਦਾ ਹਿਸਾਬ ਵੱਖਰੇ ਢੰਗ ਨਾ ਲਗਾਵੇ, ਇਸ ਕਰਕੇ ਕੋਈ ਕੰਜੂਸੀਕਾਰੀ ਸੀਮਾ ਸੈੱਟ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੇ ਵੱਲੋਂ ਸੈੱਟ ਕੀਤੀ ਮੋਬਾਈਲ ਡੈਟੇ ਦੀ ਸੀਮਾ ਉੱਤੇ ਪਹੁੰਚਣ \'ਤੇ ਮੋਬਾਈਲ ਡੈਟਾ ਬੰਦ ਕਰ ਦੇਵੇਗਾ।\n\nਕਿਉਂਕਿ ਡੈਟਾ ਉਪਯੋਗ ਤੁਹਾਡੇ ਫ਼ੋਨ ਵੱਲੋਂ ਮਾਪਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਤੁਹਾਡਾ ਕੈਰੀਅਰ ਉਪਯੋਗ ਦਾ ਹਿਸਾਬ ਵੱਖਰੇ ਢੰਗ ਨਾਲ ਲਗਾਵੇ, ਇਸ ਕਰਕੇ ਕੋਈ ਕੰਜੂਸੀਕਾਰੀ ਸੀਮਾ ਸੈੱਟ ਕਰਨ ਬਾਰੇ ਵਿਚਾਰ ਕਰੋ।"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"ਕੀ ਪਿਛੋਕੜ ਡੈਟਾ ਤੇ ਪ੍ਰਤਿਬੰਧ ਲਾਉਣਾ ਹੈ?"</string>
-    <!-- no translation found for data_usage_restrict_background (434093644726734586) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7096707497743363380) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (7910798414964288424) -->
-    <skip />
+    <string name="data_usage_restrict_background" msgid="434093644726734586">"ਜੇਕਰ ਤੁਸੀਂ ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਬਾਈਲ ਡੈਟੇ \'ਤੇ ਪਾਬੰਦੀ ਲਗਾਉਂਦੇ ਹੋ, ਤਾਂ ਕੁਝ ਐਪਾਂ ਅਤੇ ਸੇਵਾਵਾਂ ਉਦੋਂ ਤੱਕ ਕੰਮ ਨਹੀਂ ਕਰਨਗੀਆਂ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ Wi‑Fi ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੁੰਦੇ।"</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"ਜੇਕਰ ਤੁਸੀਂ ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਬਾਈਲ ਡੈਟੇ \'ਤੇ ਪ੍ਰਤੀਬੰਧ ਲਗਾਉਂਦੇ ਹੋ, ਤਾਂ ਕੁਝ ਐਪਾਂ ਅਤੇ ਸੇਵਾਵਾਂ ਉਦੋਂ ਤੱਕ ਕੰਮ ਨਹੀਂ ਕਰਨਗੀਆਂ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ Wi‑Fi ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੁੰਦੇ।\n\nਇਹ ਸੈਟਿੰਗ ਇਸ ਟੈਬਲੈੱਟ \'ਤੇ ਸਾਰੇ ਵਰਤੋਂਕਾਰਾਂ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰਦੀ ਹੈ।"</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"ਜੇਕਰ ਤੁਸੀਂ ਬੈਕਗ੍ਰਾਊਂਡ ਮੋਬਾਈਲ ਡੈਟੇ \'ਤੇ ਪਾਬੰਦੀ ਲਗਾਉਂਦੇ ਹੋ, ਤਾਂ ਕੁਝ ਐਪਾਂ ਅਤੇ ਸੇਵਾਵਾਂ ਉਦੋਂ ਤੱਕ ਕੰਮ ਨਹੀਂ ਕਰਨਗੀਆਂ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ Wi‑Fi ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੁੰਦੇ।\n\nਇਹ ਸੈਟਿੰਗ ਇਸ ਫ਼ੋਨ \'ਤੇ ਸਾਰੇ ਵਰਤੋਂਕਾਰਾਂ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰਦੀ ਹੈ।"</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ਚਿਤਾਵਨੀ"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ਸੀਮਾ"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"ਹਟਾਏ ਗਏ ਐਪਸ"</string>
@@ -2326,8 +2319,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: ਲਗਭਗ <xliff:g id="TOTAL">%1$s</xliff:g> ਵਰਤੋਂ ਕੀਤੀ, ਜਿਵੇਂ ਕਿ ਤੁਹਾਡੀ ਟੈਬਲੇਟ ਵੱਲੋਂ ਹਿਸਾਬ ਲਗਾਇਆ ਗਿਆ ਹੈ। ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਦਾ ਡੈਟਾ ਉਪਯੋਗ ਹਿਸਾਬ ਵੱਖ ਹੋ ਸਕਦਾ ਹੈ।"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: ਲਗਭਗ <xliff:g id="TOTAL">%1$s</xliff:g> ਵਰਤੋਂ ਕੀਤੀ, ਜਿਵੇਂ ਕਿ ਤੁਹਾਡੇ ਫੋਨ ਵੱਲੋਂ ਹਿਸਾਬ ਲਗਾਇਆ ਗਿਆ ਹੈ। ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਦਾ ਡੈਟਾ ਉਪਯੋਗ ਹਿਸਾਬ ਵੱਖ ਹੋ ਸਕਦਾ ਹੈ।"</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"ਨੈੱਟਵਰਕ ਪ੍ਰਤਿਬੰਧ"</string>
-    <!-- no translation found for data_usage_metered_body (7655851702771342507) -->
-    <skip />
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"ਬੈਕਗ੍ਰਾਊਂਡ ਡੈਟੇ \'ਤੇ ਪਾਬੰਦੀ ਲਗਾਏ ਜਾਣ \'ਤੇ ਮੀਟਰ ਕੀਤੇ ਨੈੱਟਵਰਕਾਂ ਨਾਲ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕਾਂ ਵਰਗਾ ਵਿਹਾਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਐਪਾਂ ਵੱਡੇ ਡਾਊਨਲੋਡਾਂ ਲਈ ਇਹਨਾਂ ਨੈੱਟਵਰਕਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਚੇਤਾਵਨੀ ਦੇ ਸਕਦੀਆਂ ਹਨ।"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"ਮੀਟਰਡ Wi‑Fi ਨੈੱਟਵਰਕ"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"ਮੀਟਰਡ ਨੈੱਟਵਰਕ ਚੁਣਨ ਲਈ, Wi‑Fi ਚਾਲੂ ਕਰੋ।"</string>
@@ -2505,7 +2497,6 @@
     <string name="application_restrictions" msgid="8207332020898004394">"ਐਪਸ ਅਤੇ ਸਮੱਗਰੀ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"ਪ੍ਰਤਿਬੰਧਾਂ ਵਾਲੇ ਐਪਲੀਕੇਸ਼ਨ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਸੈਟਿੰਗਾਂ ਦਾ ਵਿਸਤਾਰ ਕਰੋ"</string>
-    <string name="home_app_uninstall_button" msgid="6808453012607962899">"ਇਹ ਐਪਲੀਕੇਸ਼ਨ ਅਣਇੰਸਟੌਲ ਕਰੋ"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"ਇਹ ਸੈਟਿੰਗ ਇਸ ਟੈਬਲੇਟ ਦੇ ਸਾਰੇ ਉਪਭੋਗਤਾਵਾਂ ਤੇ ਅਸਰ ਪਾਉਂਦੀ ਹੈ।"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"ਇਹ ਸੈਟਿੰਗ ਇਸ ਫੋਨ ਦੇ ਸਾਰੇ ਉਪਭੋਗਤਾਵਾਂ ਤੇ ਅਸਰ ਪਾਉਂਦੀ ਹੈ।"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"ਭਾਸ਼ਾ ਬਦਲੋ"</string>
@@ -2582,8 +2573,7 @@
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM ਕਾਰਡ ਬਦਲੇ ਗਏ ਹਨ"</string>
     <string name="sim_cards_changed_message_summary" msgid="8258058274989383204">"ਸਰਗਰਮੀਆਂ ਸੈੱਟ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ"</string>
-    <!-- no translation found for sim_cellular_data_unavailable (9109302537004566098) -->
-    <skip />
+    <string name="sim_cellular_data_unavailable" msgid="9109302537004566098">"ਮੋਬਾਈਲ ਡੈਟਾ ਅਣਉਪਲਬਧ ਹੈ"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"ਇੱਕ ਡੈਟਾ SIM ਚੁਣਨ ਲਈ ਟੈਪ ਕਰੋ"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"ਕਾਲਾਂ ਲਈ ਹਮੇਸ਼ਾਂ ਇਹ ਵਰਤੋ"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"ਡੈਟਾ ਲਈ ਇੱਕ SIM ਚੁਣੋ"</string>
@@ -2789,7 +2779,14 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"ਸਥਾਪਤ ਕੀਤੀਆਂ ਹੋਈਆਂ ਐਪਾਂ ਵਿੱਚੋਂ ਕੋਈ ਵੀ ਐਪ ਤਸਵੀਰ-ਵਿੱਚ-ਤਸਵੀਰ ਮੋਡ ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੀ"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"pip ਤਸਵੀਰ ਵਿੱਚ"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"ਤਸਵੀਰ-ਵਿੱਚ-ਤਸਵੀਰ ਮੋਡ"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="5406267586308110783">"ਐਪ ਤੋਂ ਬਾਹਰ ਆਉਣ ਸਮੇਂ ਤਸਵੀਰ-ਵਿੱਚ-ਤਸਵੀਰ ਮੋਡ ਵਿੱਚ ਦਾਖਲ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ"</string>
+    <!-- no translation found for picture_in_picture_app_detail_switch (1131910667023738296) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_app_detail_summary (7942592478427522244) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_on (6103704909710176555) -->
+    <skip />
+    <!-- no translation found for picture_in_picture_off (5654388666434625247) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="2611116122628520522">"ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਐਕਸੈਸ"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ਕਿਸੇ ਵੀ ਸਥਾਪਿਤ ਐਪਸ ਨੇ ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਐਕਸੈਸ ਦੀ ਬੇਨਤੀ ਨਹੀਂ ਕੀਤੀ ਹੈ"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"ਐਪਸ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."</string>
@@ -3133,8 +3130,10 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"ਅਨੁਮਤੀ ਵਾਲੀਆਂ ਐਪਸ"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"ਹਾਂ"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"ਨਹੀਂ"</string>
-    <string name="install_other_apps" msgid="4215339768128036452">"ਹੋਰ ਐਪਾਂ ਸਥਾਪਤ ਕਰੋ"</string>
-    <string name="keywords_install_other_apps" msgid="3320171242043396361">"ਬਾਹਰੀ ਅਗਿਆਤ ਸਰੋਤਾਂ ਤੋਂ ਐਪਾਂ ਸਥਾਪਤ ਕਰੋ"</string>
+    <!-- no translation found for install_other_apps (6986686991775883017) -->
+    <skip />
+    <!-- no translation found for keywords_install_other_apps (761078076051006558) -->
+    <skip />
     <string name="write_settings" msgid="4797457275727195681">"ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ ਸੰਸ਼ੋਧਿਤ ਕਰੋ"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"ਸੰਸ਼ੋਧਿਤ ਸਿਸਟਮ ਸੈਟਿੰਗਸ ਲਿਖੋ"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g> ਵਿੱਚੋਂ <xliff:g id="COUNT_0">%1$d</xliff:g> ਐਪ ਨੂੰ ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ ਸੰਸ਼ੋਧਿਤ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿੱਤੀ"</string>
@@ -3149,7 +3148,8 @@
     <string name="write_settings_off" msgid="5156104383386336233">"ਨਹੀਂ"</string>
     <string name="external_source_trusted" msgid="6857780460845250885">"ਹਾਂ"</string>
     <string name="external_source_untrusted" msgid="6608922938133896956">"ਨਹੀਂ"</string>
-    <string name="external_source_switch_title" msgid="5709145695271819076">"ਇਸ ਸਰੋਤ ਦੀਆਂ ਐਪਾਂ \'ਤੇ ਭਰੋਸਾ ਕਰੋ"</string>
+    <!-- no translation found for external_source_switch_title (5581865736984836418) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"ਕੈਮਰੇ ਲਈ ਦੋ ਵਾਰ ਮੋੜੋ"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"ਆਪਣੇ ਗੁੱਟ ਨੂੰ ਦੋ ਵਾਰ ਮੋੜਕੇ ਕੈਮਰਾ ਐਪ ਖੋਲ੍ਹੋ"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ਕੈਮਰੇ ਲਈ ਪਾਵਰ ਬਟਨ ਨੂੰ ਦੋ ਵਾਰੀ ਦਬਾਓ"</string>
@@ -3192,18 +3192,14 @@
     <string name="location_on_summary" msgid="5127631544018313587">"ਚਾਲੂ / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"ਬੰਦ"</string>
     <string name="backup_disabled" msgid="485189128759595412">"ਬੈਕ ਅੱਪ ਅਯੋਗ ਬਣਾਇਆ ਗਿਆ"</string>
-    <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <!-- no translation found for about_summary (924181828102801010) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"ਕਾਰਵਾਈ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ"</string>
-    <!-- no translation found for disabled_by_policy_title_adjust_volume (7399450998356045023) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_outgoing_calls (7919816644946067058) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_sms (5733307423899610340) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_camera (6225008536855644874) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_screen_capture (4066913623298047094) -->
-    <skip />
+    <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"ਤੁਸੀਂ ਵੌਲਿਊਮ ਨੂੰ ਬਦਲ ਨਹੀਂ ਸਕਦੇ"</string>
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"ਕਾਲ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"</string>
+    <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"ਕੈਮਰੇ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"ਸਕ੍ਰੀਨਸ਼ਾਟ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"ਇਹ ਕਾਰਵਾਈ ਅਯੋਗ ਬਣਾਈ ਗਈ ਹੈ। ਹੋਰ ਜਾਣਨ ਲਈ ਆਪਣੀ ਸੰਸਥਾ ਦੇ ਪ੍ਰਸ਼ਾਸਕ ਨੂੰ ਸੰਪਰਕ ਕਰੋ।"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"ਹੋਰ ਵੇਰਵੇ"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"ਤੁਹਾਡਾ ਪ੍ਰਸ਼ਾਸਕ ਤੁਹਾਡੀ ਕੰਮ ਪ੍ਰੋਫਾਈਲ ਨਾਲ ਸਬੰਧਿਤ ਐਪਾਂ ਅਤੇ ਡੈਟੇ ਦੀ ਨਿਗਰਾਨੀ ਅਤੇ ਪ੍ਰਬੰਧਨ ਕਰ ਸਕਦਾ ਹੈ, ਜਿਸ ਵਿੱਚ ਸੈਟਿੰਗਾਂ, ਇਜਾਜ਼ਤਾਂ, ਕਾਰਪੋਰੇਟ ਪਹੁੰਚ, ਨੈੱਟਵਰਕ ਸਰਗਰਮੀ, ਅਤੇ ਡੀਵਾਈਸ ਦੀ ਟਿਕਾਣਾ ਜਾਣਕਾਰੀ  ਸ਼ਾਮਲ ਹੈ।"</string>
@@ -3216,13 +3212,11 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"ਹੌਟਸਪੌਟ ਚਾਲੂ ਹੈ"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"ਪੋਰਟੇਬਲ Wi-Fi ਹੌਟਸਪੌਟ <xliff:g id="ID_1">%1$s</xliff:g> ਸਰਗਰਮ ਹੈ, ਇਸ ਡੀਵਾਈਸ ਲਈ Wi-Fi ਬੰਦ ਹੈ।"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"ਜਹਾਜ਼ ਮੋਡ ਚਾਲੂ ਹੈ"</string>
-    <!-- no translation found for condition_airplane_summary (5561586417832393666) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="5561586417832393666">"Wi-Fi, ਬਲੂਟੁੱਥ, ਅਤੇ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਬੰਦ ਹਨ। ਤੁਸੀਂ ਫ਼ੋਨ ਕਾਲਾਂ ਨਹੀਂ ਕਰ ਸਕਦੇ ਜਾਂ ਇੰਟਰਨੈੱਟ ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੋ ਸਕਦੇ।"</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"ਮੈਨੂੰ ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ ਚਾਲੂ ਹੈ (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"ਬੈਟਰੀ ਸੇਵਰ ਚਾਲੂ ਹੈ"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"ਕਾਰਗੁਜ਼ਾਰੀ ਘਟਾਈ ਗਈ ਹੈ। ਟਿਕਾਣਾ ਸੇਵਾਵਾਂ ਅਤੇ ਪਿਛੋਕੜ ਡੈਟਾ ਬੰਦ ਹਨ।"</string>
-    <!-- no translation found for condition_cellular_title (1327317003797575735) -->
-    <skip />
+    <string name="condition_cellular_title" msgid="1327317003797575735">"ਮੋਬਾਈਲ ਡੈਟਾ ਬੰਦ ਹੈ"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"ਇੰਟਰਨੈੱਟ ਸਿਰਫ਼ Wi-Fi ਰਾਹੀਂ ਹੀ ਉਪਲਬਧ ਹੈ"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"ਡੈਟਾ ਸੇਵਰ ਚਾਲੂ ਹੈ"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"ਪਿਛੋਕੜ ਡੈਟਾ ਸਿਰਫ਼ Wi-Fi ਰਾਹੀਂ ਉਪਲਬਧ ਹੈ। Wi-Fi ਉਪਲਬਧ ਨਾ ਹੋਣ \'ਤੇ ਇਹ ਕੁਝ ਐਪਾਂ ਜਾਂ ਸੇਵਾਵਾਂ \'ਤੇ ਅਸਰ ਪਾ ਸਕਦਾ ਹੈ।"</string>
@@ -3240,14 +3234,12 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ਸਵੈਚਾਲਿਤ ਸਿਸਟਮ ਅੱਪਡੇਟਾਂ"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (ਰੀਬੂਟ ਦੀ ਲੋੜ ਹੈ)"</string>
     <string name="usage" msgid="2977875522080448986">"ਵਰਤੋਂ"</string>
-    <!-- no translation found for cellular_data_usage (2155683719898158203) -->
-    <skip />
+    <string name="cellular_data_usage" msgid="2155683719898158203">"ਮੋਬਾਈਲ ਡੈਟਾ ਉਪਯੋਗ"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi ਡੈਟਾ ਉਪਯੋਗ"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ਈਥਰਨੈੱਟ ਡੈਟਾ ਉਪਯੋਗ"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"ਈਥਰਨੈੱਟ"</string>
-    <!-- no translation found for cell_data_template (405684854174361041) -->
-    <skip />
+    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> ਮੋਬਾਈਲ ਡੈਟਾ"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi ਡੈਟਾ"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ਈਥਰਨੈੱਟ ਡੈਟਾ"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ਡੈਟਾ ਚੇਤਾਵਨੀ"</string>
@@ -3414,7 +3406,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਚੁੱਕੋ।"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਟੈਬਲੈੱਟ ਨੂੰ ਚੁੱਕੋ।"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੀ ਡੀਵਾਈਸ ਨੂੰ ਚੁੱਕੋ।"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"ਸੂਚਨਾਵਾਂ ਲਈ ਸਵਾਈਪ ਕਰੋ"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (5816346492253270243) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਫ਼ੋਨ ਦੇ ਪਿਛਲੇ ਪਾਸੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ \'ਤੇ ਹੇਠਾਂ ਨੂੰ ਸਵਾਈਪ ਕਰੋ।"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਟੈਬਲੈੱਟ ਦੇ ਪਿਛਲੇ ਪਾਸੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ \'ਤੇ ਹੇਠਾਂ ਨੂੰ ਸਵਾਈਪ ਕਰੋ।"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ, ਆਪਣੀ ਡੀਵਾਈਸ ਦੇ ਪਿਛਲੇ ਪਾਸੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ \'ਤੇ ਹੇਠਾਂ ਨੂੰ ਸਵਾਈਪ ਕਰੋ।"</string>
@@ -3439,14 +3432,11 @@
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ਵਿਅਕਤੀਗਤ ਖਾਤਾ ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"ਕਾਰਜ ਖਾਤਾ ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"ਖਾਤਾ ਸਮਕਾਲੀਕਰਨ"</string>
-    <!-- no translation found for enterprise_privacy_settings (5190573945078964986) -->
+    <!-- no translation found for enterprise_privacy_settings (1177106810374146496) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_generic (5853292305730761128) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_settings_summary_with_name (4266234968317996188) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_header (7402406406883832509) -->
-    <skip />
+    <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"ਤਬਦੀਲੀਆਂ ਅਤੇ ਸੈਟਿੰਗਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਤੁਹਾਡੇ ਸੰਗਠਨ ਵੱਲੋਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ"</string>
+    <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"ਤਬਦੀਲੀਆਂ ਅਤੇ ਸੈਟਿੰਗਾਂ ਦਾ ਪ੍ਰਬੰਧਨ <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ਵੱਲੋਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ"</string>
+    <string name="enterprise_privacy_header" msgid="7402406406883832509">"ਤੁਹਾਡੇ ਕਾਰਜ ਡੈਟੇ ਤੱਕ ਪਹੁੰਚ ਮੁਹੱਈਆ ਕਰਵਾਉਣ ਲਈ, ਤੁਹਾਡਾ ਸੰਗਠਨ ਤੁਹਾਡੀ ਡੀਵਾਈਸ \'ਤੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਬਦਲ ਅਤੇ ਸਾਫਟਵੇਅਰ ਸਥਾਪਤ ਕਰ ਸਕਦਾ ਹੈ।\n\nਹੋਰ ਵੇਰਵਿਆਂ ਲਈ, ਆਪਣੇ ਸੰਗਠਨ ਦੇ ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"</string>
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"ਜਾਣਕਾਰੀ ਦੀਆਂ ਉਹ ਕਿਸਮਾਂ ਜੋ ਤੁਹਾਡਾ ਸੰਗਠਨ ਵੇਖ ਸਕਦਾ ਹੈ"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"ਤੁਹਾਡੇ ਸੰਗਠਨ ਦੇ ਪ੍ਰਸ਼ਾਸਕ ਵੱਲੋਂ ਕੀਤੀਆਂ ਗਈਆਂ ਤਬਦੀਲੀਆਂ"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"ਇਸ ਡੀਵਾਈਸ \'ਤੇ ਤੁਹਾਡੀ ਪਹੁੰਚ"</string>
@@ -3466,30 +3456,24 @@
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"ਸਭ ਤੋਂ ਹਾਲੀਆ ਸੁਰੱਖਿਆ ਲੌਗ"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"ਕੋਈ ਨਹੀਂ"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"ਐਪਾਂ ਸਥਾਪਤ ਕੀਤੀਆਂ ਗਈਆਂ"</string>
-    <string name="enterprise_privacy_location_access" msgid="943112505930395028">"ਉਹ ਐਪਾਂ ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਤੁਹਾਡੇ ਟਿਕਾਣੇ \'ਤੇ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ ਹੈ"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="1101307566418116040">"ਉਹ ਐਪਾਂ ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਤੁਹਾਡੇ ਮਾਈਕ੍ਰੋਫ਼ੋਨ \'ਤੇ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ ਹੈ"</string>
-    <string name="enterprise_privacy_camera_access" msgid="97095968133740652">"ਉਹ ਐਪਾਂ ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਤੁਹਾਡੇ ਕੈਮਰੇ \'ਤੇ ਪਹੁੰਚ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ ਹੈ"</string>
-    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3292470316317639698">"ਸੈੱਟ ਕੀਤੀਆਂ ਗਈਆਂ ਪੂਰਵ-ਨਿਰਧਾਰਤ ਐਪਾਂ"</string>
+    <!-- no translation found for enterprise_privacy_location_access (4158197200885270634) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_microphone_access (5717375623568864441) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_camera_access (4858146118537519375) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3288495615791128724) -->
+    <skip />
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"ਪੂਰਵ-ਨਿਰਧਾਰਤ ਕੀ-ਬੋਰਡ"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> \'ਤੇ ਸੈੱਟ ਹੈ"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"\'ਹਮੇਸ਼ਾ-ਚਾਲੂ VPN\' ਵਿਕਲਪ ਨੂੰ ਚਾਲੂ ਕੀਤਾ ਹੋਇਆ ਹੈ"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"ਤੁਹਾਡੇ ਨਿੱਜੀ ਪ੍ਰੋਫਾਈਲ ਵਿੱਚ \'ਹਮੇਸ਼ਾ-ਚਾਲੂ VPN\' ਵਿਕਲਪ ਨੂੰ ਚਾਲੂ ਕੀਤਾ ਹੋਇਆ ਹੈ"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"ਤੁਹਾਡੇ ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ ਵਿੱਚ \'ਹਮੇਸ਼ਾ-ਚਾਲੂ VPN\' ਵਿਕਲਪ ਨੂੰ ਚਾਲੂ ਕੀਤਾ ਹੋਇਆ ਹੈ"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"ਗਲੋਬਲ HTTP ਪ੍ਰੌਕਸੀ ਸੈੱਟ ਕੀਤੀ ਗਈ"</string>
-    <plurals name="enterprise_privacy_ca_certs_user" formatted="false" msgid="2353089666351669619">
-      <item quantity="one">ਭਰੋਸੇਯੋਗ CA ਪ੍ਰਮਾਣ-ਪੱਤਰ ਸਥਾਪਤ ਕੀਤਾ ਗਿਆ</item>
-      <item quantity="other">ਭਰੋਸੇਯੋਗ CA ਪ੍ਰਮਾਣ-ਪੱਤਰ ਸਥਾਪਤ ਕੀਤੇ ਗਏ</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_personal (1866786954859360699) -->
-    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="5907058613578926277">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ਪ੍ਰਮਾਣ-ਪੱਤਰ</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ਪ੍ਰਮਾਣ-ਪੱਤਰ</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_ca_certs_actionable" formatted="false" msgid="7939443347696810129">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ਪ੍ਰਮਾਣ-ਪੱਤਰ। ਵੇਖਣ ਲਈ ਟੈਪ ਕਰੋ।</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ਪ੍ਰਮਾਣ-ਪੱਤਰ। ਵੇਖਣ ਲਈ ਟੈਪ ਕਰੋ।</item>
-    </plurals>
-    <!-- no translation found for enterprise_privacy_ca_certs_work (6555905416417106313) -->
+    <!-- no translation found for enterprise_privacy_ca_certs (5885892204903688909) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_number_ca_certs (9073641163359459048) -->
+    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (5823294380629654635) -->
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"ਪ੍ਰਸ਼ਾਸਕ ਡੀਵਾਈਸ ਨੂੰ ਲੌਕ ਅਤੇ ਪਾਸਵਰਡ ਨੂੰ ਰੀਸੈੱਟ ਕਰ ਸਕਦਾ ਹੈ"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"ਪ੍ਰਸ਼ਾਸਕ ਡੀਵਾਈਸ ਦਾ ਸਾਰਾ ਡੈਟਾ ਮਿਟਾ ਸਕਦਾ ਹੈ"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"ਸਾਰਾ ਡੀਵਾਈਸ ਡੈਟਾ ਮਿਟਾਏ ਜਾਣ ਤੋਂ ਪਹਿਲਾਂ ਪਾਸਵਰਡ ਦਾਖਲ ਕਰਨ ਦੀਆਂ ਅਸਫਲ ਕੋਸ਼ਿਸ਼ਾਂ ਦੀ ਗਿਣਤੀ"</string>
@@ -3518,7 +3502,8 @@
     <string name="audio_files_title" msgid="4777048870657911307">"ਔਡੀਓ ਫ਼ਾਈਲਾਂ"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(ਵਰਤੋਂਕਾਰ <xliff:g id="USER">%s</xliff:g> ਲਈ ਅਣਸਥਾਪਤ ਕੀਤੀ)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(ਵਰਤੋਂਕਾਰ <xliff:g id="USER">%s</xliff:g> ਲਈ ਅਯੋਗ ਬਣਾਈ)"</string>
-    <string name="autofill_app" msgid="3889348218462883960">"ਆਟੋਫਿਲ ਐਪ"</string>
+    <!-- no translation found for autofill_app (7338387238377914374) -->
+    <skip />
     <string name="autofill_keywords" msgid="7485591824120812710">"ਆਟੋ, ਫਿਲ, ਆਟੋਫਿਲ"</string>
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"ਕੀ <xliff:g id="APP_NAME_0">%1$s</xliff:g> ਨੂੰ ਆਪਣੀ ਆਟੋਫਿਲ ਐਪ ਬਣਾਉਣਾ ਹੈ? <xliff:g id="APP_NAME_1">%1$s</xliff:g> ਤੁਹਾਡੀ ਸਕ੍ਰੀਨ ਨੂੰ ਪੜ੍ਹ ਸਕੇਗੀ ਅਤੇ ਹੋਰ ਐਪਾਂ ਵਿੱਚ ਖੇਤਰਾਂ ਨੂੰ ਭਰ ਸਕੇਗੀ।"</string>
     <string name="device_theme" msgid="4571803018917608588">"ਡੀਵਾਈਸ ਥੀਮ"</string>
