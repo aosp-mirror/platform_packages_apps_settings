@@ -100,8 +100,8 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
             if (listening) {
                 UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
                         UserHandle.myUserId());
-                mSummaryLoader.setSummary(this, mContext.getString(R.string.user_summary,
-                        info.name));
+                mSummaryLoader.setSummary(this,
+                    mContext.getString(R.string.users_and_accounts_summary, info.name));
             }
         }
     }

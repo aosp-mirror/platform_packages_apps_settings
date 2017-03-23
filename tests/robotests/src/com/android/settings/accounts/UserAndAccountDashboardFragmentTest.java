@@ -101,7 +101,7 @@ public class UserAndAccountDashboardFragmentTest {
                 .createSummaryProvider(activity, loader);
         provider.setListening(true);
 
-        verify(activity).getString(R.string.user_summary,
+        verify(activity).getString(R.string.users_and_accounts_summary,
                 userInfo.name);
     }
 
