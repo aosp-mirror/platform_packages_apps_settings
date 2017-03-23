@@ -17,17 +17,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
-import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
-public class VrDisplayPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class VrDisplayPreferenceController extends PreferenceController {
 
-    private static final String TAG = "VrDisplayPrefContr";
     private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
 
     public VrDisplayPreferenceController(Context context) {
@@ -47,31 +43,14 @@ public class VrDisplayPreferenceController extends PreferenceController implemen
 
     @Override
     public void updateState(Preference preference) {
-        final DropDownPreference pref = (DropDownPreference) preference;
-        pref.setEntries(new CharSequence[]{
-                mContext.getString(R.string.display_vr_pref_low_persistence),
-                mContext.getString(R.string.display_vr_pref_off),
-        });
-        pref.setEntryValues(new CharSequence[]{"0", "1"});
-
         int currentUser = ActivityManager.getCurrentUser();
         int current = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.VR_DISPLAY_MODE,
-                            /*default*/Settings.Secure.VR_DISPLAY_MODE_LOW_PERSISTENCE,
+                Settings.Secure.VR_DISPLAY_MODE, Settings.Secure.VR_DISPLAY_MODE_LOW_PERSISTENCE,
                 currentUser);
-        pref.setValueIndex(current);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        int i = Integer.parseInt((String) newValue);
-        int u = ActivityManager.getCurrentUser();
-        if (!Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                Settings.Secure.VR_DISPLAY_MODE,
-                i, u)) {
-            Log.e(TAG, "Could not change setting for " +
-                    Settings.Secure.VR_DISPLAY_MODE);
+        if (current == 0) {
+            preference.setSummary(R.string.display_vr_pref_low_persistence);
+        } else {
+            preference.setSummary(R.string.display_vr_pref_off);
         }
-        return true;
     }
 }
