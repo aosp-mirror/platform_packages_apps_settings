@@ -6394,9 +6394,11 @@
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
     <string name="app_notifications_title">Notifications</string>
 
-    <!-- Notification Settings: Summary for the option managing notifications per application. [CHAR LIMIT=60] -->
-    <plurals name="app_notifications_summary">
-        <item quantity="zero">On for all apps</item>
+    <!-- Notification Settings: Summary for managing notifications when notifications is on for all apps. [CHAR LIMIT=60] -->
+    <string name="app_notifications_summary_on">On for all apps</string>
+
+    <!-- Notification Settings: Summary for managing notifications when notifications is off for some apps. [CHAR LIMIT=60] -->
+    <plurals name="app_notifications_summary_off">
         <item quantity="one">Off for 1 app</item>
         <item quantity="other">Off for <xliff:g id="off_count" example="10">%d</xliff:g> apps</item>
     </plurals>
@@ -7051,9 +7053,11 @@
     <!-- Summary of an app that can open several domain's URLs [CHAR LIMIT=45] -->
     <string name="domain_urls_summary_some">Open <xliff:g id="domain" example="mail.google.com">%s</xliff:g> and other URLs</string>
 
-    <!-- Description of settings item that leads to list of all apps that can open web links [CHAR LIMIT=NONE] -->
-    <plurals name="domain_urls_apps_summary">
-        <item quantity="zero">No app opening supported links</item>
+    <!-- Summary of open web links settings when no app can open supported links [CHAR LIMIT=NONE] -->
+    <string name="domain_urls_apps_summary_off">No app opening supported links</string>
+
+    <!-- Summary of open web links settings when at least one app can open supported links [CHAR LIMIT=NONE] -->
+    <plurals name="domain_urls_apps_summary_on">
         <item quantity="one">One app opening supported links</item>
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps opening supported links</item>
     </plurals>
