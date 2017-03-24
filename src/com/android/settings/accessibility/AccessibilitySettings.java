@@ -470,12 +470,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setIcon(icon);
             final boolean serviceEnabled = accessibilityEnabled
                     && enabledServices.contains(componentName);
-            String serviceState = serviceEnabled ?
-                    getString(R.string.accessibility_feature_state_on) :
-                    getString(R.string.accessibility_feature_state_off);
-            String serviceSummary = info.loadSummary(getPackageManager());
-            serviceSummary = (TextUtils.isEmpty(serviceSummary)) ? serviceState :
-                    serviceSummary;
+            final String serviceState = serviceEnabled ?
+                    getString(R.string.accessibility_summary_state_enabled) :
+                    getString(R.string.accessibility_summary_state_disabled);
+            final String serviceSummary = info.loadSummary(getPackageManager());
+            final String stateSummaryCombo = getString(
+                    R.string.accessibility_summary_default_combination,
+                    serviceState, serviceSummary);
+            preference.setSummary((TextUtils.isEmpty(serviceSummary)) ? serviceState
+                    : stateSummaryCombo);
 
             // Disable all accessibility services that are not permitted.
             boolean serviceAllowed =
@@ -492,7 +495,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 preference.setEnabled(true);
             }
 
-            preference.setSummary(serviceSummary);
             preference.setFragment(ToggleAccessibilityServicePreferenceFragment.class.getName());
             preference.setPersistent(true);
 
