@@ -64,6 +64,16 @@ public interface EnterprisePrivacyFeatureProvider {
     Date getLastNetworkLogRetrievalTime();
 
     /**
+     * Returns whether security logging is currently enabled.
+     */
+    boolean isSecurityLoggingEnabled();
+
+    /**
+     * Returns whether network logging is currently enabled.
+     */
+    boolean isNetworkLoggingEnabled();
+
+    /**
      * Returns whether the Device Owner in the primary user set an always-on VPN.
      */
     boolean isAlwaysOnVpnSetInPrimaryUser();

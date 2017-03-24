@@ -81,6 +81,20 @@ public interface DevicePolicyManagerWrapper {
             String permission);
 
     /**
+     * Calls {@code DevicePolicyManager.isSecurityLoggingEnabled()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isSecurityLoggingEnabled
+     */
+    boolean isSecurityLoggingEnabled(@Nullable ComponentName admin);
+
+    /**
+     * Calls {@code DevicePolicyManager.isNetworkLoggingEnabled()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isNetworkLoggingEnabled
+     */
+    boolean isNetworkLoggingEnabled(@Nullable ComponentName admin);
+
+    /**
      * Calls {@code DevicePolicyManager.getLastSecurityLogRetrievalTime()}.
      *
      * @see android.app.admin.DevicePolicyManager#getLastSecurityLogRetrievalTime

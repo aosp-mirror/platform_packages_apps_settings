@@ -19,6 +19,7 @@ package com.android.settings.enterprise;
 import android.annotation.NonNull;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
 
@@ -65,6 +66,18 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     public int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
             String permission) {
         return mDpm.getPermissionGrantState(admin, packageName, permission);
+    }
+
+    @Override
+    public boolean isSecurityLoggingEnabled(@Nullable ComponentName admin) {
+        // TODO(b/36584321): Switch to DevicePolicyManager#isSecurityLoggingEnabled once that is
+        // callable by the system.
+        return SystemProperties.getBoolean("persist.logd.security", false);
+    }
+
+    @Override
+    public boolean isNetworkLoggingEnabled(@Nullable ComponentName admin) {
+        return mDpm.isNetworkLoggingEnabled(admin);
     }
 
     @Override

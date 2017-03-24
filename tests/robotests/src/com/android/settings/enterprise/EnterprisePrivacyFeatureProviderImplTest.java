@@ -177,6 +177,24 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsSecurityLoggingEnabled() {
+        when(mDevicePolicyManager.isSecurityLoggingEnabled(null)).thenReturn(false);
+        assertThat(mProvider.isSecurityLoggingEnabled()).isFalse();
+
+        when(mDevicePolicyManager.isSecurityLoggingEnabled(null)).thenReturn(true);
+        assertThat(mProvider.isSecurityLoggingEnabled()).isTrue();
+    }
+
+    @Test
+    public void testIsNetworkLoggingEnabled() {
+        when(mDevicePolicyManager.isNetworkLoggingEnabled(null)).thenReturn(false);
+        assertThat(mProvider.isNetworkLoggingEnabled()).isFalse();
+
+        when(mDevicePolicyManager.isNetworkLoggingEnabled(null)).thenReturn(true);
+        assertThat(mProvider.isNetworkLoggingEnabled()).isTrue();
+    }
+
+    @Test
     public void testIsAlwaysOnVpnSetInPrimaryUser() {
         when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MY_USER_ID)).thenReturn(null);
         assertThat(mProvider.isAlwaysOnVpnSetInPrimaryUser()).isFalse();

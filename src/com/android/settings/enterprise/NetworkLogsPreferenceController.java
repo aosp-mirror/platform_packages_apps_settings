@@ -31,6 +31,12 @@ public class NetworkLogsPreferenceController extends AdminActionPreferenceContro
     }
 
     @Override
+    public boolean isAvailable() {
+        return mFeatureProvider.isNetworkLoggingEnabled() ||
+                mFeatureProvider.getLastNetworkLogRetrievalTime() != null;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY_NETWORK_LOGS;
     }

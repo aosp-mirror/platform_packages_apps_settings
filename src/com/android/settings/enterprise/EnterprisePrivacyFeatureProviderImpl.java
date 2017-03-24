@@ -132,6 +132,16 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
+    public boolean isSecurityLoggingEnabled() {
+        return mDpm.isSecurityLoggingEnabled(null);
+    }
+
+    @Override
+    public boolean isNetworkLoggingEnabled() {
+        return mDpm.isNetworkLoggingEnabled(null);
+    }
+
+    @Override
     public boolean isAlwaysOnVpnSetInPrimaryUser() {
         return VpnUtils.isAlwaysOnVpnSet(mCm, MY_USER_ID);
     }
