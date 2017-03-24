@@ -7216,13 +7216,12 @@
     <string name="high_power_desc">Don\u2019t apply battery optimization. May drain your battery more quickly.</string>
 
     <!-- Title of prompt dialog app can invoke to turn off optimization [CHAR LIMIT=NONE] -->
-    <string name="high_power_prompt_title">Ignore battery optimizations?</string>
+    <string name="high_power_prompt_title">Let app always run in background?</string>
 
     <!-- Body text of prompt dialog app can invoke to turn off optimization [CHAR LIMIT=NONE] -->
-    <string name="high_power_prompt_body">Let app
-        <xliff:g id="app_name" example="Settings">%1$s</xliff:g> stay connected in the
-        background?  This may use more battery.</string>
-
+    <string name="high_power_prompt_body">
+        Allowing <xliff:g id="app_name" example="Settings">%1$s</xliff:g> to always run in the background may reduce battery life.
+        \n\nYou can change this later from Settings > Apps &amp; notifications.</string>
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
     <string name="battery_summary"><xliff:g id="percentage" example="2">%1$d</xliff:g>%% use since last full charge</string>
 
