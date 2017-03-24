@@ -16,13 +16,16 @@
 
 package com.android.settings.accessibility;
 
-import android.content.ContentResolver;
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -41,6 +44,10 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
             "screen_magnification_gestures_preference_screen";
     private static final String MAGNIFICATION_NAVBAR_PREFERENCE_SCREEN_KEY =
             "screen_magnification_navbar_preference_screen";
+
+    // Pseudo ComponentName used to represent navbar magnification in Settings.Secure.
+    private static final String MAGNIFICATION_COMPONENT_ID =
+            "com.android.server.accessibility.MagnificationController";
 
     private Preference mMagnificationGesturesPreference;
     private Preference mMagnificationNavbarPreference;
@@ -147,17 +154,38 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
         extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mLaunchedFromSuw);
     }
 
-    static int getConfigurationWarningStringResourceForSecureSettingsKey(String key,
-            ContentResolver resolver) {
-        if (Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED.equals(key)) {
-            if (Settings.Secure.getInt(resolver,
-                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 1) {
-                // TODO(b/34720082): Only report a config warning when nav-bar is not mapped to mag
-                return R.string.accessibility_screen_magnification_navbar_configuration_warning;
+    static CharSequence getConfigurationWarningStringForSecureSettingsKey(String key,
+            Context context) {
+        if (!Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED.equals(key)) {
+            return null;
+        }
+        if (Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 0) {
+            return null;
+        }
+        final AccessibilityManager am = (AccessibilityManager) context.getSystemService(
+                Context.ACCESSIBILITY_SERVICE);
+        final String assignedId = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+        if (!TextUtils.isEmpty(assignedId) && !MAGNIFICATION_COMPONENT_ID.equals(assignedId)) {
+            final ComponentName assignedComponentName = ComponentName.unflattenFromString(
+                    assignedId);
+            final List<AccessibilityServiceInfo> activeServices =
+                    am.getEnabledAccessibilityServiceList(
+                            AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+            final int serviceCount = activeServices.size();
+            for (int i = 0; i < serviceCount; i++) {
+                final AccessibilityServiceInfo info = activeServices.get(i);
+                if (info.getComponentName().equals(assignedComponentName)) {
+                    final CharSequence assignedServiceName = info.getResolveInfo().loadLabel(
+                            context.getPackageManager());
+                    return context.getString(
+                            R.string.accessibility_screen_magnification_navbar_configuration_warning,
+                            assignedServiceName);
+                }
             }
         }
-
-        return -1;
+        return null;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
