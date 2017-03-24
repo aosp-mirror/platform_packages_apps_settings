@@ -141,8 +141,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         }
         for (Map.Entry<String, CandidateInfo> app : mCandidates.entrySet()) {
             RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
-            bindPreference(
-                    pref, app.getKey(), app.getValue(), defaultKey);
+            bindPreference(pref, app.getKey(), app.getValue(), defaultKey);
             bindPreferenceExtra(pref, app.getKey(), app.getValue(), defaultKey, systemDefaultKey);
             screen.addPreference(pref);
         }

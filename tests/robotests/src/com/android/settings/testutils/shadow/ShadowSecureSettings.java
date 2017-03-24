@@ -53,6 +53,17 @@ public class ShadowSecureSettings {
     }
 
     @Implementation
+    public static boolean putIntForUser(ContentResolver cr, String name, int value,
+            int userHandle) {
+        return putInt(cr, name, value);
+    }
+
+    @Implementation
+    public static int getIntForUser(ContentResolver cr, String name, int def, int userHandle) {
+        return getInt(cr, name, def);
+    }
+
+    @Implementation
     public static int getInt(ContentResolver resolver, String name, int defaultValue) {
         Integer value = (Integer) mValueMap.get(name);
         return value == null ? defaultValue : value;
