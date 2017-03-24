@@ -46,10 +46,8 @@ import org.robolectric.util.ReflectionHelpers;
         shadows = ShadowNfcAdapter.class
 )
 public class WriteWifiConfigToNfcDialogTest {
-    private static final int NETWORK_ID = 17;
-
     @Mock Activity mActivity;
-    @Mock WifiManager mWifiManager;
+    @Mock WifiManagerWrapper mWifiManager;
 
     private WriteWifiConfigToNfcDialog mWriteWifiConfigToNfcDialog;
 
@@ -61,7 +59,7 @@ public class WriteWifiConfigToNfcDialogTest {
                 .thenReturn(ReflectionHelpers.newInstance(InputMethodManager.class));
 
         mWriteWifiConfigToNfcDialog = new WriteWifiConfigToNfcDialog(RuntimeEnvironment.application,
-                NETWORK_ID, 0 /* security */, mWifiManager);
+                0 /* security */, mWifiManager);
         mWriteWifiConfigToNfcDialog.setOwnerActivity(mActivity);
         mWriteWifiConfigToNfcDialog.onCreate(null /* savedInstanceState */);
     }
@@ -73,7 +71,7 @@ public class WriteWifiConfigToNfcDialogTest {
 
     @Test
     public void testOnClick_nfcConfigurationTokenDoesNotContainPasswordHex() {
-        when(mWifiManager.getWpsNfcConfigurationToken(NETWORK_ID)).thenReturn("blah");
+        when(mWifiManager.getCurrentNetworkWpsNfcConfigurationToken()).thenReturn("blah");
 
         mWriteWifiConfigToNfcDialog.onClick(null);
 
@@ -82,7 +80,7 @@ public class WriteWifiConfigToNfcDialogTest {
 
     @Test
     public void testOnClick_nfcConfigurationTokenIsNull() {
-        when(mWifiManager.getWpsNfcConfigurationToken(NETWORK_ID)).thenReturn(null);
+        when(mWifiManager.getCurrentNetworkWpsNfcConfigurationToken()).thenReturn(null);
 
         mWriteWifiConfigToNfcDialog.onClick(null);
 
@@ -92,7 +90,7 @@ public class WriteWifiConfigToNfcDialogTest {
     @Test
     public void testOnClick_nfcConfigurationTokenContainsPasswordHex() {
         // This is the corresponding passwordHex for an empty string password.
-        when(mWifiManager.getWpsNfcConfigurationToken(NETWORK_ID)).thenReturn("10270000");
+        when(mWifiManager.getCurrentNetworkWpsNfcConfigurationToken()).thenReturn("10270000");
 
         mWriteWifiConfigToNfcDialog.onClick(null);
 

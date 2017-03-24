@@ -577,12 +577,12 @@ public class WifiSettings extends RestrictedSettingsFragment
             case WRITE_NFC_DIALOG_ID:
                 if (mSelectedAccessPoint != null) {
                     mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
-                            getActivity(), mSelectedAccessPoint.getConfig().networkId,
+                            getActivity(),
                             mSelectedAccessPoint.getSecurity(),
-                            mWifiManager);
+                            new WifiManagerWrapper(mWifiManager));
                 } else if (mWifiNfcDialogSavedState != null) {
-                    mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
-                            getActivity(), mWifiNfcDialogSavedState, mWifiManager);
+                    mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(getActivity(),
+                            mWifiNfcDialogSavedState, new WifiManagerWrapper(mWifiManager));
                 }
 
                 return mWifiToNfcDialog;
