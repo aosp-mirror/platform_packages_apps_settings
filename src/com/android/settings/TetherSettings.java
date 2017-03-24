@@ -142,7 +142,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted()) {
             mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
+            getPreferenceScreen().removeAll();
             return;
         }
 
