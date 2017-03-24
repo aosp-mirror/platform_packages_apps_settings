@@ -37,20 +37,18 @@ import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -63,10 +61,9 @@ import java.util.TreeMap;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class UserCredentialsSettings extends OptionsMenuFragment implements OnItemClickListener {
+public class UserCredentialsSettings extends SettingsPreferenceFragment
+        implements View.OnClickListener {
     private static final String TAG = "UserCredentialsSettings";
-
-    private ListView mListView;
 
     @Override
     public int getMetricsCategory() {
@@ -80,27 +77,18 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.user_credentials, parent, false);
-
-        // Set up an OnItemClickListener for the credential list.
-        mListView = (ListView) rootView.findViewById(R.id.credential_list);
-        mListView.setOnItemClickListener(this);
-
-        return rootView;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final Credential item = (Credential) parent.getItemAtPosition(position);
-        CredentialDialogFragment.show(this, item);
+    public void onClick(final View view) {
+        final Credential item = (Credential) view.getTag();
+        if (item != null) {
+            CredentialDialogFragment.show(this, item);
+        }
     }
 
     protected void announceRemoval(String alias) {
-        if (isAdded()) {
-            mListView.announceForAccessibility(getString(R.string.user_credential_removed, alias));
+        if (!isAdded()) {
+            return;
         }
+        getListView().announceForAccessibility(getString(R.string.user_credential_removed, alias));
     }
 
     protected void refreshItems() {
@@ -288,25 +276,60 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
 
         @Override
         protected void onPostExecute(List<Credential> credentials) {
-            final Credential[] credentialArray = credentials.toArray(new Credential[0]);
-            mListView.setAdapter(new CredentialAdapter(getContext(), credentialArray));
+            if (!isAdded()) {
+                return;
+            }
+
+            if (credentials == null || credentials.size() == 0) {
+                // Create a "no credentials installed" message for the empty case.
+                TextView emptyTextView = (TextView) getActivity().findViewById(android.R.id.empty);
+                emptyTextView.setText(R.string.user_credential_none_installed);
+                setEmptyView(emptyTextView);
+            } else {
+                setEmptyView(null);
+            }
+
+            getListView().setAdapter(
+                    new CredentialAdapter(credentials, UserCredentialsSettings.this));
         }
     }
 
     /**
      * Helper class to display {@link Credential}s in a list.
      */
-    private static class CredentialAdapter extends ArrayAdapter<Credential> {
+    private static class CredentialAdapter extends RecyclerView.Adapter<ViewHolder> {
         private static final int LAYOUT_RESOURCE = R.layout.user_credential_preference;
 
-        public CredentialAdapter(Context context, final Credential[] objects) {
-            super(context, LAYOUT_RESOURCE, objects);
+        private final List<Credential> mItems;
+        private final View.OnClickListener mListener;
+
+        public CredentialAdapter(List<Credential> items, @Nullable View.OnClickListener listener) {
+            mItems = items;
+            mListener = listener;
         }
 
         @Override
-        public View getView(int position, @Nullable View view, ViewGroup parent) {
-            return getCredentialView(getItem(position), LAYOUT_RESOURCE, view, parent,
-                    /* expanded */ false);
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            return new ViewHolder(inflater.inflate(LAYOUT_RESOURCE, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder h, int position) {
+            getCredentialView(mItems.get(position), LAYOUT_RESOURCE, h.itemView, null, false);
+            h.itemView.setTag(mItems.get(position));
+            h.itemView.setOnClickListener(mListener);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mItems.size();
+        }
+    }
+
+    private static class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View item) {
+            super(item);
         }
     }
 
