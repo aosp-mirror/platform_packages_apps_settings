@@ -25,6 +25,11 @@ import java.util.List;
 
 public abstract class InstalledAppCounter extends AppCounter {
 
+    /**
+     * Count all installed packages, irrespective of install reason.
+     */
+    public static final int IGNORE_INSTALL_REASON = -1;
+
     private final int mInstallReason;
     private final PackageManagerWrapper mPackageManager;
 
@@ -38,7 +43,7 @@ public abstract class InstalledAppCounter extends AppCounter {
     @Override
     protected boolean includeInCount(ApplicationInfo info) {
         final int userId = UserHandle.getUserId(info.uid);
-        if (mInstallReason != ApplicationFeatureProvider.IGNORE_INSTALL_REASON
+        if (mInstallReason != IGNORE_INSTALL_REASON
                 && mPackageManager.getInstallReason(info.packageName,
                         new UserHandle(userId)) != mInstallReason) {
             return false;

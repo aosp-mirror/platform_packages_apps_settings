@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.RemoteException;
@@ -56,10 +57,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
-    public void calculateNumberOfInstalledApps(int installReason, boolean async,
-            NumberOfAppsCallback callback) {
-        final AllUserInstalledAppCounter counter = new AllUserInstalledAppCounter(mContext,
-                installReason, mPm, callback);
+    public void calculateNumberOfPolicyInstalledApps(boolean async, NumberOfAppsCallback callback) {
+        final AllUserPolicyInstalledAppCounter counter =
+                new AllUserPolicyInstalledAppCounter(mContext, mPm, callback);
         if (async) {
             counter.execute();
         } else {
@@ -113,12 +113,12 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         return activities;
     }
 
-    private static class AllUserInstalledAppCounter extends InstalledAppCounter {
+    private static class AllUserPolicyInstalledAppCounter extends InstalledAppCounter {
         private NumberOfAppsCallback mCallback;
 
-        AllUserInstalledAppCounter(Context context, int installReason,
-                PackageManagerWrapper packageManager, NumberOfAppsCallback callback) {
-            super(context, installReason, packageManager);
+        AllUserPolicyInstalledAppCounter(Context context, PackageManagerWrapper packageManager,
+                                         NumberOfAppsCallback callback) {
+            super(context, PackageManager.INSTALL_REASON_POLICY, packageManager);
             mCallback = callback;
         }
 

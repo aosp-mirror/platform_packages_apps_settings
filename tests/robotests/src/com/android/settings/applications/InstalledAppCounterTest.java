@@ -156,7 +156,7 @@ public final class InstalledAppCounterTest {
                 .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
 
         // Count the number of all apps installed, irrespective of install reason.
-        count(ApplicationFeatureProvider.IGNORE_INSTALL_REASON, async);
+        count(InstalledAppCounter.IGNORE_INSTALL_REASON, async);
         assertThat(mInstalledAppCount).isEqualTo(5);
 
         // Verify that installed packages were retrieved for the users returned by

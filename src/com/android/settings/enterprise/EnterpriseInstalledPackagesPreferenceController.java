@@ -14,8 +14,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -42,8 +40,7 @@ public class EnterpriseInstalledPackagesPreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        mFeatureProvider.calculateNumberOfInstalledApps(
-                PackageManager.INSTALL_REASON_POLICY, true /* async */,
+        mFeatureProvider.calculateNumberOfPolicyInstalledApps(true /* async */,
                 (num) -> {
                     if (num == 0) {
                         preference.setVisible(false);
@@ -69,8 +66,8 @@ public class EnterpriseInstalledPackagesPreferenceController
         // changes to the pref's visibility made in updateState() would not be seen by the indexer.
         // We block and return synchronously whether there are enterprise-installed apps or not.
         final Boolean[] haveEnterpriseInstalledPackages = { null };
-        mFeatureProvider.calculateNumberOfInstalledApps(PackageManager.INSTALL_REASON_POLICY,
-                false /* async */, (num) -> haveEnterpriseInstalledPackages[0] = num > 0);
+        mFeatureProvider.calculateNumberOfPolicyInstalledApps(false /* async */,
+                (num) -> haveEnterpriseInstalledPackages[0] = num > 0);
         return haveEnterpriseInstalledPackages[0];
     }
 

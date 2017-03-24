@@ -69,7 +69,6 @@ import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
-import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
@@ -1398,7 +1397,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                new InstalledAppCounter(mContext, ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
+                new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
                         new PackageManagerWrapperImpl(mContext.getPackageManager())) {
                     @Override
                     protected void onCountComplete(int num) {
