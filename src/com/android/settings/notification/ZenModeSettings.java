@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
@@ -26,6 +27,9 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
@@ -135,6 +139,29 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 s = mContext.getString(R.string.zen_mode_screen_off_visual_interruptions);
             }
             return s;
+        }
+
+        String getAutomaticRulesSummary() {
+            final int count = getEnabledAutomaticRulesCount();
+            return count == 0 ? mContext.getString(R.string.zen_mode_settings_summary_off)
+                : mContext.getResources().getQuantityString(
+                    R.plurals.zen_mode_settings_summary_on, count, count);
+        }
+
+        @VisibleForTesting
+        int getEnabledAutomaticRulesCount() {
+            int count = 0;
+            final Map<String, AutomaticZenRule> ruleMap =
+                NotificationManager.from(mContext).getAutomaticZenRules();
+            if (ruleMap != null) {
+                for (Entry<String, AutomaticZenRule> ruleEntry : ruleMap.entrySet()) {
+                    final AutomaticZenRule rule = ruleEntry.getValue();
+                    if (rule != null && rule.isEnabled()) {
+                        count++;
+                    }
+                }
+            }
+            return count;
         }
 
         @VisibleForTesting

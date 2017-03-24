@@ -56,38 +56,34 @@
                 android:title="@string/zen_mode_settings_title"
                 settings:useAdminDisabledSummary="true"
                 settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
-                android:fragment="com.android.settings.notification.ZenModeSettings" />
+                android:fragment="com.android.settings.notification.ZenModeSettings"
+                settings:allowDividerAbove="true" />
 
-        <PreferenceCategory
-          android:key="ringtones_preferecence_category"
-          android:title="@string/ringtones_category_preference_title" >
+        <!-- Phone ringtone -->
+        <com.android.settings.DefaultRingtonePreference
+            android:key="ringtone"
+            android:title="@string/ringtone_title"
+            android:dialogTitle="@string/ringtone_title"
+            android:summary="@string/summary_placeholder"
+            android:ringtoneType="ringtone"
+            settings:allowDividerAbove="true" />
 
-                <!-- Phone ringtone -->
-                <com.android.settings.DefaultRingtonePreference
-                    android:key="ringtone"
-                    android:title="@string/ringtone_title"
-                    android:dialogTitle="@string/ringtone_title"
-                    android:summary="@string/summary_placeholder"
-                    android:ringtoneType="ringtone" />
+        <!-- Default notification ringtone -->
+        <com.android.settings.DefaultRingtonePreference
+            android:key="notification_ringtone"
+            android:title="@string/notification_ringtone_title"
+            android:dialogTitle="@string/notification_ringtone_title"
+            android:summary="@string/summary_placeholder"
+            android:ringtoneType="notification" />
 
-                <!-- Default notification ringtone -->
-                <com.android.settings.DefaultRingtonePreference
-                    android:key="notification_ringtone"
-                    android:title="@string/notification_ringtone_title"
-                    android:dialogTitle="@string/notification_ringtone_title"
-                    android:summary="@string/summary_placeholder"
-                    android:ringtoneType="notification" />
-
-                <!-- Default alarm ringtone -->
-                <com.android.settings.DefaultRingtonePreference
-                    android:key="alarm_ringtone"
-                    android:title="@string/alarm_ringtone_title"
-                    android:dialogTitle="@string/alarm_ringtone_title"
-                    android:summary="@string/summary_placeholder"
-                    android:persistent="false"
-                    android:ringtoneType="alarm" />
-
-        </PreferenceCategory>
+        <!-- Default alarm ringtone -->
+        <com.android.settings.DefaultRingtonePreference
+            android:key="alarm_ringtone"
+            android:title="@string/alarm_ringtone_title"
+            android:dialogTitle="@string/alarm_ringtone_title"
+            android:summary="@string/summary_placeholder"
+            android:persistent="false"
+            android:ringtoneType="alarm" />
 
         <!-- Other sounds -->
         <PreferenceCategory
@@ -144,7 +140,8 @@
         <com.android.settingslib.RestrictedPreference
           android:key="cell_broadcast_settings"
           android:title="@string/cell_broadcast_settings"
-          settings:useAdminDisabledSummary="true">
+          settings:useAdminDisabledSummary="true"
+          settings:allowDividerAbove="true" >
                 <intent
                   android:action="android.intent.action.MAIN"
                   android:targetPackage="com.android.cellbroadcastreceiver"
