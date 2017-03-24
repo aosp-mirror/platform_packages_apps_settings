@@ -101,7 +101,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         Collections.sort(accessPoints, new Comparator<AccessPoint>() {
             public int compare(AccessPoint ap1, AccessPoint ap2) {
                 if (ap1.getConfigName() != null) {
-                    return ap1.getConfigName().compareTo(ap2.getConfigName());
+                    return ap1.getConfigName().compareToIgnoreCase(ap2.getConfigName());
                 } else {
                     return -1;
                 }
