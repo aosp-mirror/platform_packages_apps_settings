@@ -55,7 +55,12 @@ public class NetworkResetActionMenuController {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     boolean isAvailable() {
-        return !RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        return isAvailable(mContext);
+    }
+
+    static boolean isAvailable(Context context) {
+        return !RestrictedLockUtils.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
     }
+
 }
