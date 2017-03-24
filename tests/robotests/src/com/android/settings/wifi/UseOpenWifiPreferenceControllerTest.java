@@ -56,9 +56,9 @@ import org.robolectric.annotation.Config;
 public class UseOpenWifiPreferenceControllerTest {
     private static ComponentName ENABLE_ACTIVITY_COMPONENT = new ComponentName("package", "activityClass");
     private static NetworkScorerAppData APP_DATA =
-            new NetworkScorerAppData(0, null, null, ENABLE_ACTIVITY_COMPONENT);
+            new NetworkScorerAppData(0, null, null, ENABLE_ACTIVITY_COMPONENT, null);
     private static NetworkScorerAppData APP_DATA_NO_ACTIVITY =
-            new NetworkScorerAppData(0, null, null, null);
+            new NetworkScorerAppData(0, null, null, null, null);
 
     @Mock private Lifecycle mLifecycle;
     @Mock private Fragment mFragment;

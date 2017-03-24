@@ -118,7 +118,8 @@ public class NetworkScorerPickerTest {
     public void testUpdateCandidates_validScorer() {
         ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE_1, TEST_SCORER_CLASS_1);
         NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
-                0, scorer, TEST_SCORER_LABEL_1, null /* enableUseOpenWifiActivity */);
+                0, scorer, TEST_SCORER_LABEL_1, null /* enableUseOpenWifiActivity */,
+                null /* networkAvailableNotificationChannelId */);
         when(mNetworkScoreManager.getAllValidScorers()).thenReturn(
                 Lists.newArrayList(scorerAppData));
         when(mNetworkScoreManager.getActiveScorerPackage()).thenReturn(TEST_SCORER_PACKAGE_1);

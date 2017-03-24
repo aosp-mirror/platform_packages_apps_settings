@@ -68,7 +68,8 @@ public class NetworkScorerPickerPreferenceControllerTest {
         Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
         ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE, TEST_SCORER_CLASS);
         NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
-                0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */);
+                0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */,
+                null /* networkAvailableNotificationChannelId */);
         when(mNetworkScorer.getActiveScorer()).thenReturn(scorerAppData);
         Preference preference = mock(Preference.class);
 
