@@ -96,13 +96,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     public boolean onPreferenceTreeClick(Preference preference) {
         if (mDisplayMagnificationPreference == preference) {
             Bundle extras = mDisplayMagnificationPreference.getExtras();
-            extras.putString(AccessibilitySettings.EXTRA_TITLE,
-                    getString(R.string.accessibility_screen_magnification_title));
-            extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
-                    getText(R.string.accessibility_screen_magnification_summary));
-            extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                    Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
+            extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, true);
         }
 
         return super.onPreferenceTreeClick(preference);

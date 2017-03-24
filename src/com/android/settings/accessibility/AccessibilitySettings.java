@@ -121,6 +121,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
+    static final String EXTRA_VIDEO_RAW_RESOURCE_ID = "video_resource";
+    static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -350,9 +352,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
             return true;
-        } else if (mDisplayMagnificationPreferenceScreen == preference) {
-            handleDisplayMagnificationPreferenceScreenClick();
-            return true;
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -385,17 +384,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private void handleToggleMasterMonoPreferenceClick() {
         Settings.System.putIntForUser(getContentResolver(), Settings.System.MASTER_MONO,
                 mToggleMasterMonoPreference.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
-    }
-
-    private void handleDisplayMagnificationPreferenceScreenClick() {
-        Bundle extras = mDisplayMagnificationPreferenceScreen.getExtras();
-        extras.putString(EXTRA_TITLE, getString(
-                R.string.accessibility_screen_magnification_title));
-        extras.putCharSequence(EXTRA_SUMMARY, getActivity().getResources().getText(
-                R.string.accessibility_screen_magnification_summary));
-        extras.putBoolean(EXTRA_CHECKED, Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
-        super.onPreferenceTreeClick(mDisplayMagnificationPreferenceScreen);
     }
 
     private void initializeAllPreferences() {
@@ -656,8 +644,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                mDisplayMagnificationPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
