@@ -16,9 +16,19 @@
 
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.os.Build;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
+
+import com.android.settings.dashboard.SummaryLoader;
+import com.android.settingslib.DeviceInfoUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,11 +37,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -43,6 +48,8 @@ public class DeviceInfoSettingsTest {
     private PreferenceScreen mScreen;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private SummaryLoader mSummaryLoader;
 
     private DeviceInfoSettings mSettings;
 
@@ -57,5 +64,15 @@ public class DeviceInfoSettingsTest {
     @Test
     public void getPrefXml_shouldReturnDeviceInfoXml() {
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings);
+    }
+
+    @Test
+    public void getSummary_shouldReturnDeviceModel() {
+        final SummaryLoader.SummaryProvider mProvider = DeviceInfoSettings.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(null, mSummaryLoader);
+
+        mProvider.setListening(true);
+
+        verify(mSummaryLoader).setSummary(mProvider, Build.MODEL + DeviceInfoUtils.getMsvSuffix());
     }
 }

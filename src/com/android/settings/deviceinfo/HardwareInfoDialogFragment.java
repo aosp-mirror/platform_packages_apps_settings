@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
@@ -30,7 +29,6 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.DeviceInfoUtils;
 
 public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
 
@@ -55,7 +53,7 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
                 .inflate(R.layout.dialog_hardware_info, null /* parent */);
         // Model
         setText(content, R.id.model_label, R.id.model_value,
-                Build.MODEL + DeviceInfoUtils.getMsvSuffix());
+                DeviceModelPreferenceController.getDeviceModel());
         // Hardware rev
         setText(content, R.id.hardware_rev_label, R.id.hardware_rev_value,
                 SystemProperties.get("ro.boot.hardware.revision"));
