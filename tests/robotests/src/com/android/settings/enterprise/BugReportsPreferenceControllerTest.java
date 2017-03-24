@@ -20,11 +20,13 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
 import java.util.Date;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
@@ -45,6 +47,11 @@ public final class BugReportsPreferenceControllerTest extends
     public void setDate(Date date) {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getLastBugReportRequestTime())
                 .thenReturn(date);
+    }
+
+    @Test
+    public void testIsAvailable() {
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Override

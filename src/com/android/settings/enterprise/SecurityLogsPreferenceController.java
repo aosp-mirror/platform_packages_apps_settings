@@ -31,6 +31,12 @@ public class SecurityLogsPreferenceController extends AdminActionPreferenceContr
     }
 
     @Override
+    public boolean isAvailable() {
+        return mFeatureProvider.isSecurityLoggingEnabled() ||
+                mFeatureProvider.getLastSecurityLogRetrievalTime() != null;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY_SECURITY_LOGS;
     }

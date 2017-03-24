@@ -21,10 +21,13 @@ import android.content.Context;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
 import java.util.Date;
+
+import static com.google.common.truth.Truth.assertThat;
 
 /**
  * Tests for {@link AdminActionPreferenceControllerBase}.
@@ -45,6 +48,11 @@ public final class AdminActionPreferenceControllerBaseTest extends
     @Override
     public void setDate(Date date) {
         mDate = date;
+    }
+
+    @Test
+    public void testIsAvailable() {
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Override
