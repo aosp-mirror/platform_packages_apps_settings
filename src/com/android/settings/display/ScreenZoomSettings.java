@@ -94,6 +94,11 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
     }
 
     @Override
+    public int getHelpResource() {
+        return R.string.help_url_display_size;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsEvent.DISPLAY_SCREEN_ZOOM;
     }
