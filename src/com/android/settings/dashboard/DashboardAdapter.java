@@ -237,6 +237,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         mDashboardData.getItemEntityByPosition(position));
                 break;
             case R.layout.suggestion_tile:
+            case R.layout.suggestion_tile_card:
                 final Tile suggestion = (Tile) mDashboardData.getItemEntityByPosition(position);
                 final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
                         mContext, suggestion);
@@ -247,7 +248,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     mSuggestionsShownLogged.add(suggestionId);
                 }
                 onBindTile(holder, suggestion);
-                holder.itemView.setOnClickListener(v -> {
+                View clickHandler = holder.itemView;
+                // If a view with @android:id/primary is defined, use that as the click handler
+                // instead.
+                final View primaryAction = holder.itemView.findViewById(android.R.id.primary);
+                if (primaryAction != null) {
+                    clickHandler = primaryAction;
+                    // set the item view to disabled to remove any touch effects
+                    holder.itemView.setEnabled(false);
+                }
+                clickHandler.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
                             MetricsEvent.ACTION_SETTINGS_SUGGESTION, suggestionId);
                     ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
@@ -405,13 +415,18 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     private void onBindTile(DashboardItemHolder holder, Tile tile) {
-        holder.icon.setImageDrawable(mCache.getIcon(tile.icon));
-        holder.title.setText(tile.title);
-        if (!TextUtils.isEmpty(tile.summary)) {
-            holder.summary.setText(tile.summary);
-            holder.summary.setVisibility(View.VISIBLE);
+        if (tile.remoteViews != null) {
+            final ViewGroup itemView = (ViewGroup) holder.itemView;
+            itemView.addView(tile.remoteViews.apply(itemView.getContext(), itemView));
         } else {
-            holder.summary.setVisibility(View.GONE);
+            holder.icon.setImageDrawable(mCache.getIcon(tile.icon));
+            holder.title.setText(tile.title);
+            if (!TextUtils.isEmpty(tile.summary)) {
+                holder.summary.setText(tile.summary);
+                holder.summary.setVisibility(View.VISIBLE);
+            } else {
+                holder.summary.setVisibility(View.GONE);
+            }
         }
     }
 
