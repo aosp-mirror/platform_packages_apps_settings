@@ -142,6 +142,21 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public int getWifiScanBackgroundCount(int which)  {
+        return 0;
+    }
+
+    @Override
+    public long getWifiScanActualTime(long elapsedRealtimeUs)  {
+        return 0;
+    }
+
+    @Override
+    public long getWifiScanBackgroundTime(long elapsedRealtimeUs)  {
+        return 0;
+    }
+
+    @Override
     public long getWifiBatchedScanTime(int csphBin, long elapsedRealtimeUs, int which) {
         return 0;
     }
@@ -272,6 +287,11 @@ public class FakeUid extends Uid {
 
     @Override
     public Timer getBluetoothScanTimer() {
+        return null;
+    }
+
+    @Override
+    public Timer getBluetoothScanBackgroundTimer() {
         return null;
     }
 
