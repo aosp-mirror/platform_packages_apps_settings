@@ -721,7 +721,7 @@
     <!-- Text shown for title of settings checkbox to enable widgets [CHAR LIMIT=20]-->
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
-    <string name="security_enable_widgets_disabled_summary">Disabled by administrator</string>
+    <string name="security_enable_widgets_disabled_summary">Disabled by admin</string>
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
@@ -758,7 +758,7 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Privacy</string>
     <!-- Summary for settings preference disabled by administrator [CHAR LIMIT=50] -->
-    <string name="disabled_by_administrator_summary">Disabled by administrator</string>
+    <string name="disabled_by_administrator_summary">Disabled by admin</string>
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
     <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
@@ -870,7 +870,11 @@
     <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_disclaimer">In addition to unlocking your phone, you can also use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
     <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for in the case unlocking is disabled [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled">Screen lock option disabled. Contact your organization\'s administrator to learn more. <annotation id="admin_details">More details</annotation>\n\nYou can still use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled">
+        The screen lock option is disabled. To learn more, contact your organization\'s admin.
+        <annotation id="admin_details">More details</annotation>\n\nYou can still use your
+        fingerprint to authorize purchases and app access.
+        <annotation id="url">Learn more</annotation></string>
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
 
@@ -885,8 +889,11 @@
     <string name="fingerprint_last_delete_title">Remove all fingerprints?</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to unlock your phone, authorize purchases, or sign in to apps with them.</string>
-    <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your fingerprints to unlock your work profile, authorize purchases, or sign in to work apps.</string>
+    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to
+        unlock your phone, authorize purchases, or sign in to apps with them</string>
+    <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your
+        fingerprints to unlock your work profile, authorize purchases, or sign in to work
+        apps</string>
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
@@ -1137,7 +1144,8 @@
     <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
 
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
-    <string name="unlock_set_unlock_disabled_summary">Disabled by administrator, encryption policy, or credential storage</string>
+    <string name="unlock_set_unlock_disabled_summary">Disabled by admin, encryption policy, or
+        credential storage</string>
 
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off">None</string>
@@ -1231,15 +1239,17 @@
     <string name="lockpassword_continue_label">Continue</string>
 
     <!-- Error shown in popup when password is too long -->
-    <string name="lockpassword_password_too_long">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> characters.</string>
+    <string name="lockpassword_password_too_long">Must be fewer than
+        <xliff:g id="number" example="17">%d</xliff:g> characters</string>
     <!-- Error shown in popup when PIN is too long -->
-    <string name="lockpassword_pin_too_long">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits.</string>
+    <string name="lockpassword_pin_too_long">Must be fewer than
+        <xliff:g id="number" example="17">%d</xliff:g> digits</string>
 
     <!-- Error shown when in PIN mode and user enters a non-digit -->
-    <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9.</string>
+    <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9</string>
 
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
-    <string name="lockpassword_pin_recently_used">Device administrator doesn\u2019t allow using a recent PIN.</string>
+    <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
@@ -1290,10 +1300,12 @@
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
-    <string name="lockpassword_password_recently_used">Device administrator doesn\u2019t allow using a recent password.</string>
+    <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
+        password</string>
 
     <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
-    <string name="lockpassword_pin_no_sequential_digits">An ascending, descending or repeated sequence of digits is forbidden</string>
+    <string name="lockpassword_pin_no_sequential_digits">Ascending, descending, or repeated sequence
+        of digits isn\'t allowed</string>
 
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_ok_label">OK</string>
@@ -1310,13 +1322,13 @@
     <!-- Toast shown when lock pattern or password successfully setup. [CHAR LIMIT=64] -->
     <string name="lock_setup" msgid="5507462851158901718">Setup is complete.</string>
 
-    <!-- Title of preference to manage device admins -->
+    <!-- Title of preference to manage device admin apps, which are used by IT admins to manage devices -->
     <string name="manage_device_admin">Device admin apps</string>
 
-    <!-- Summary of preference to manage device administrators, informing the user that currently no device administrator apps are installed and active -->
+    <!-- Summary of preference to manage device admin apps, informing the user that currently no device admin apps are installed and active -->
     <string name="number_of_device_admins_none">No active apps</string>
 
-    <!-- Summary of preference to manage device administrators, informing the user how many device administrator apps are installed and active -->
+    <!-- Summary of preference to manage device admin apps, informing the user how many device admin apps are installed and active -->
     <plurals name="number_of_device_admins">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> active app</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> active apps</item>
@@ -2123,8 +2135,8 @@
          the same as the incoming call volume. -->
     <string name="checkbox_notification_same_as_incoming_call">Use incoming call volume for notifications</string>
 
-    <!-- Home settings screen, text indicating that a launcer does not support work profiles [CHAR LIMIT=100] -->
-    <string name="home_work_profile_not_supported">Doesn\u2019t support work profiles</string>
+    <!-- Home settings screen, text indicating that a launcher does not support work profiles [CHAR LIMIT=100] -->
+    <string name="home_work_profile_not_supported">Doesn\'t support work profiles</string>
 
     <!-- Sound settings screen, setting option title-->
     <string name="notification_sound_dialog_title">Default notification sound</string>
@@ -3637,7 +3649,7 @@
     <string name="invalid_location">Install location isn\u2019t valid.</string>
     <string name="system_package">System updates can\u2019t be installed on external media.</string>
     <!-- Error message shown when trying to move device administrators to external disks, such as SD card [CHAR_LIMIT=none] -->
-    <string name="move_error_device_admin">Device Administrator can\u2019t be installed on external media.</string>
+    <string name="move_error_device_admin">Device admin app can\'t be installed on external media</string>
 
     <string name="force_stop_dlg_title">Force stop?</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when killing persistent apps-->
@@ -4899,7 +4911,7 @@
     <!-- Summary text of the "automatic restore" setting -->
     <string name="auto_restore_summary">When reinstalling an app, restore backed up settings and data</string>
     <!-- Title of the preference informing the user about the backup service being inactive [CHAR LIMIT=50]-->
-    <string name="backup_inactive_title">Backup service is inactive.</string>
+    <string name="backup_inactive_title">Backup service isn\'t active</string>
     <!-- Default summary text of the "Configure backup account" setting [CHAR LIMIT=80]-->
     <string name="backup_configure_account_default_summary">No account is currently storing backed up data</string>
 
@@ -4911,52 +4923,55 @@
     <string name="fullbackup_erase_dialog_message">Stop backing up device data (such as Wi-Fi passwords and call history) and app data (such as settings and files stored by apps), plus erase all copies on remote servers?</string>
     <!-- Summary for explanation of what full app data backup means. Manufacturers may wish to overlay this resource with their own text  -->
     <string name="fullbackup_data_summary">Automatically back up device data (such as Wi-Fi passwords and call history) and app data (such as settings and files stored by apps) remotely.\n\nWhen you turn on automatic backup, device and app data is periodically saved remotely. App data can be any data that an app has saved (based on developer settings), including potentially sensitive data such as contacts, messages, and photos.</string>
-    <!-- Device admin settings screen --><skip />
-    <!-- Device admin settings activity title -->
-    <string name="device_admin_settings_title">Device administration settings</string>
-    <!-- Label for screen showing the active device policy -->
-    <string name="active_device_admin_msg">Device administrator</string>
-    <!-- Label for button to remove the active device admin [CHAR LIMIT=80] -->
-    <string name="remove_device_admin">Deactivate this device administrator</string>
-    <!-- Label for button to uninstall the device admin application [CHAR LIMIT=80] -->
+    <!-- Device admin app settings screen --><skip />
+    <!-- Device admin app settings activity title -->
+    <string name="device_admin_settings_title">Device admin settings</string>
+    <!-- Label for screen showing the active device admin apps -->
+    <string name="active_device_admin_msg">Device admin app</string>
+    <!-- Label for button to remove the active device admin app [CHAR LIMIT=80] -->
+    <string name="remove_device_admin">Deactivate this device admin app</string>
+    <!-- Label for button to uninstall the device admin app [CHAR LIMIT=80] -->
     <string name="uninstall_device_admin">Uninstall app</string>
-    <!-- Label for button to deactivate and uninstall the device admin [CHAR_LIMIT=50]-->
-    <string name="remove_and_uninstall_device_admin">Deactivate and Uninstall</string>
-    <!-- Label for screen showing to select device policy -->
-    <string name="select_device_admin_msg">Device administrators</string>
-    <!-- Message when there are no available device admins to display -->
-    <string name="no_device_admins">No available device administrators</string>
-    <!-- Message displayed when the device admin can only be disabled by deleting the work profile [CHAR_LIMIT=120] -->
-    <!-- Title for personal device admins on the list [CHAR_LIMIT=25] -->
+    <!-- Label for button to deactivate and uninstall the device admin app [CHAR_LIMIT=50]-->
+    <string name="remove_and_uninstall_device_admin">Deactivate &amp; uninstall</string>
+    <!-- Label for screen showing to select device admin apps -->
+    <string name="select_device_admin_msg">Device admin apps</string>
+    <!-- Message when there are no available device admin apps to display -->
+    <string name="no_device_admins">No device admin apps available</string>
+    <!-- Title for personal device admin apps on the list [CHAR_LIMIT=25] -->
     <string name="personal_device_admin_title">Personal</string>
-    <!-- Title for managed device admins on the list [CHAR_LIMIT=25] -->
+    <!-- Title for managed device admin apps on the list [CHAR_LIMIT=25] -->
     <string name="managed_device_admin_title">Work</string>
 
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
 
-    <!-- Label for screen showing to add device policy -->
-    <string name="add_device_admin_msg">Activate device administrator?</string>
+    <!-- Title for screen to add a device admin app [CHAR LIMIT=40] -->
+    <string name="add_device_admin_msg">Activate device admin app?</string>
     <!-- Label for button to set the active device admin [CHAR_LIMIT=80] -->
-    <string name="add_device_admin">Activate this device administrator</string>
+    <string name="add_device_admin">Activate this device admin app</string>
     <!-- Device admin add activity title -->
-    <string name="device_admin_add_title">Device administrator</string>
+    <string name="device_admin_add_title">Device admin</string>
     <!-- Device admin warning message about policies an admin can use -->
-    <string name="device_admin_warning">Activating this administrator will allow
+    <string name="device_admin_warning">Activating this admin app will allow
         the app <xliff:g id="app_name">%1$s</xliff:g> to perform the
         following operations:</string>
     <!-- Device admin warning message about policies an admin can use -->
-    <string name="device_admin_status">This administrator is active and allows
+    <string name="device_admin_status">This admin app is active and allows
         the app <xliff:g id="app_name">%1$s</xliff:g> to perform the
         following operations:</string>
 
     <!-- Title for screen to set a profile owner [CHAR LIMIT=40] -->
     <string name="profile_owner_add_title">Activate Profile Manager?</string>
     <!-- Warning when trying to add a profile owner admin after setup has completed. [CHAR LIMIT=none] -->
-    <string name="adding_profile_owner_warning">By proceeding, your User will be managed by your Administrator which may also be able to store associated data, in addition to your personal data.\n\nYour Administrator has the ability to monitor and manage settings, access, apps, and data associated with this User, including network activity and your device\u2019s location information.</string>
+    <string name="adding_profile_owner_warning">By proceeding, your user will be managed by your
+        admin which may also be able to store associated data, in addition to your personal
+        data.\n\nYour admin has the ability to monitor and manage settings, access, apps,
+        and data associated with this user, including network activity and your device\'s location
+        information.</string>
 
     <!-- Message displayed to let the user know that some of the options are disabled by admin. [CHAR LIMIT=NONE] -->
-    <string name="admin_disabled_other_options">Other options are disabled by your administrator.</string>
+    <string name="admin_disabled_other_options">Other options are disabled by your admin</string>
     <string name="admin_more_details">More details</string>
 
     <!-- Name to assign to a Network Access Point that was saved without a name -->
@@ -5168,7 +5183,7 @@
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. [CHAR LIMIT=NONE] -->
-    <string name="remove_account_failed">This change isn\u2019t allowed by your administrator</string>
+    <string name="remove_account_failed">This change isn\'t allowed by your admin</string>
     <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
     <string name="provider_label">Push subscriptions</string>
     <!-- Formatter in AccountSyncSettings for each application we wish to synchronize, e.g. "Sync Calendar" -->
@@ -5477,7 +5492,7 @@
     <!-- Dialog title to connect to a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_connect_to">Connect to <xliff:g id="profile" example="School">%s</xliff:g></string>
     <!-- Dialog message body to disconnect from a VPN profile. -->
-    <string name="vpn_disconnect_confirm">Disconnect this VPN.</string>
+    <string name="vpn_disconnect_confirm">Disconnect this VPN?</string>
     <!-- Button label to disconnect from a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_disconnect">Disconnect</string>
     <!-- Field label to show the version number for a VPN app. [CHAR LIMIT=40] -->
@@ -5501,7 +5516,7 @@
     <!-- Dialog mesage title when the user can't connect an always-on vpn [CHAR LIMIT=NONE] -->
     <string name="vpn_cant_connect_title"><xliff:g id="vpn_name" example="OpenVPN">%1$s</xliff:g> can\'t connect</string>
     <!-- Dialog message subtitle when the user can't connect an always-on vpn [CHAR LIMIT=NONE] -->
-    <string name="vpn_cant_connect_message">This app doesn\'t support always-on VPN.</string>
+    <string name="vpn_cant_connect_message">This app doesn\'t support always-on VPN</string>
     <!-- Preference title for VPN settings. [CHAR LIMIT=40] -->
     <string name="vpn_title">VPN</string>
     <!-- Preference title to create a new VPN profile. [CHAR LIMIT=40] -->
@@ -5513,7 +5528,7 @@
     <!-- Menu item to select always-on VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_menu_lockdown">Always-on VPN</string>
     <!-- Placeholder when VPN settings is open but no VPNs have been created. [CHAR LIMIT=100] -->
-    <string name="vpn_no_vpns_added">No VPNs added.</string>
+    <string name="vpn_no_vpns_added">No VPNs added</string>
     <!-- Preference summary for active always-on vpn [CHAR LIMIT=40] -->
     <string name="vpn_always_on_active">Always-on active</string>
     <!-- Preference summary for inactive always-on vpn [CHAR LIMIT=40] -->
@@ -5543,7 +5558,7 @@
     <!-- Seting subtext indicating the device is not currently connected to any VPN [CHAR LIMIT=40]-->
     <string name="vpn_disconnected_summary">None</string>
     <!-- Toast message when a certificate is missing. [CHAR LIMIT=100] -->
-    <string name="vpn_missing_cert">A certificate is missing. Please edit the profile.</string>
+    <string name="vpn_missing_cert">A certificate is missing. Try editing the profile.</string>
 
     <!-- Tab label for built-in system CA certificates. -->
     <string name="trusted_credentials_system_tab">System</string>
@@ -5575,7 +5590,7 @@
     <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
-    <string name="user_credential_title">Credential Details</string>
+    <string name="user_credential_title">Credential details</string>
     <!-- Announcement to confirm a user credential being removed. [CHAR LIMIT=NONE] -->
     <string name="user_credential_removed">Removed credential: <xliff:g id="credential_name" example="signing key">%s</xliff:g></string>
 
@@ -6865,7 +6880,7 @@
     <string name="oem_preferred_feedback_reporter" translatable="false"></string>
 
     <!-- PIN entry dialog title for entering the administrator PIN [CHAR LIMIT=none] -->
-    <string name="restr_pin_enter_admin_pin">Enter administrator PIN</string>
+    <string name="restr_pin_enter_admin_pin">Enter admin PIN</string>
 
     <!-- Switch On/Off  -->
     <string name="switch_on_text">On</string>
@@ -7460,7 +7475,8 @@
     <string name="app_list_preference_none">None</string>
 
     <!-- Warning message about disabling usage access on profile owner [CHAR LIMIT=NONE] -->
-    <string name="work_profile_usage_access_warning">Turning off usage access for this app doesn\u2019t prevent your administrator tracking data usage for apps in your work profile.</string>
+    <string name="work_profile_usage_access_warning">Turning off usage access for this app doesn\'t
+        prevent your admin from tracking data usage for apps in your work profile</string>
 
     <!-- Number of characters used for lock screen text [CHAR LIMIT=NONE] -->
     <string name="accessibility_lock_screen_progress"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="1">%2$d</xliff:g> characters used</string>
@@ -7653,15 +7669,22 @@
     <!-- Title for dialog displayed to tell user that screenshots are disabled by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
     <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
-    <string name="default_admin_support_msg">This action is disabled. Contact your organization\'s administrator to learn more.</string>
+    <string name="default_admin_support_msg">This action is disabled. To learn more, contact your
+        organization\'s admin.</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
     <string name="admin_support_more_info">More details</string>
     <!-- Shown in admin details page to warn user about policies the admin can set in a work profile. [CHAR LIMIT=NONE] -->
-    <string name="admin_profile_owner_message">Your administrator can monitor and manage apps and data associated with your work profile, including settings, permissions, corporate access, network activity, and the device\'s location information.</string>
+    <string name="admin_profile_owner_message">Your admin can monitor and manage apps and data
+        associated with your work profile, including settings, permissions, corporate access,
+        network activity, and the device\'s location information.</string>
     <!-- Shown in admin details page to warn user about policies the admin can set on a user. [CHAR LIMIT=NONE] -->
-    <string name="admin_profile_owner_user_message">Your administrator can monitor and manage apps and data associated with this user, including settings, permissions, corporate access, network activity, and the device\'s location information.</string>
+    <string name="admin_profile_owner_user_message">Your admin can monitor and manage apps and data
+        associated with this user, including settings, permissions, corporate access,
+        network activity, and the device\'s location information.</string>
     <!-- Shown in admin details page to warn user about policies the admin can set on a device. [CHAR LIMIT=NONE] -->
-    <string name="admin_device_owner_message">Your administrator can monitor and manage apps and data associated with this device, including settings, permissions, corporate access, network activity, and the device\'s location information.</string>
+    <string name="admin_device_owner_message">Your admin can monitor and manage apps and data
+        associated with this device, including settings, permissions, corporate access,
+        network activity, and the device\'s location information.</string>
 
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>
