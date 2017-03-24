@@ -6410,15 +6410,6 @@
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
     <string name="app_notifications_title">Notifications</string>
 
-    <!-- Notification Settings: Summary for managing notifications when notifications is on for all apps. [CHAR LIMIT=60] -->
-    <string name="app_notifications_summary_on">On for all apps</string>
-
-    <!-- Notification Settings: Summary for managing notifications when notifications is off for some apps. [CHAR LIMIT=60] -->
-    <plurals name="app_notifications_summary_off">
-        <item quantity="one">Off for 1 app</item>
-        <item quantity="other">Off for <xliff:g id="off_count" example="10">%d</xliff:g> apps</item>
-    </plurals>
-
     <!-- [CHAR LIMIT=100] Notification importance slider title -->
     <string name="notification_importance_title">Importance</string>
 
@@ -7555,12 +7546,12 @@
 
     <!-- Summary of notifications [CHAR LIMIT=NONE] -->
     <plurals name="notification_summary">
-        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> app blocked from sending</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps blocked from sending</item>
+        <item quantity="one">Off for 1 app</item>
+        <item quantity="other">Off for <xliff:g id="count" example="10">%d</xliff:g> apps</item>
     </plurals>
 
     <!-- Summary of notifications when no apps are blocked [CHAR LIMIT=NONE] -->
-    <string name="notification_summary_none">All apps allowed to send</string>
+    <string name="notification_summary_none">On for all apps</string>
 
     <!-- Summary of apps [CHAR LIMIT=NONE] -->
     <string name="apps_summary"><xliff:g id="count" example="24">%1$d</xliff:g> apps installed</string>
@@ -7930,7 +7921,13 @@
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
-    <string name="special_access">Special access</string>
+    <string name="special_access">Special app access</string>
+
+    <!-- Summary for special access settings [CHAR_LIMIT=NONE] -->
+    <plurals name="special_access_summary">
+        <item quantity="one">1 app can use unrestricted data</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can use unrestricted data</item>
+    </plurals>
 
     <!-- Developer option to convert to file encryption - final warning -->
     <string name="confirm_convert_to_fbe_warning">Really wipe user data and convert to file encryption?</string>
