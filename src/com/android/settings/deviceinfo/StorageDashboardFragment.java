@@ -20,6 +20,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -47,6 +48,7 @@ import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
+import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.StorageStatsSource;
@@ -61,6 +63,7 @@ public class StorageDashboardFragment extends DashboardFragment
     implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
+    private static final int ICON_JOB_ID = 1;
     private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
@@ -69,34 +72,6 @@ public class StorageDashboardFragment extends DashboardFragment
     private StorageItemPreferenceController mPreferenceController;
     private PrivateVolumeOptionMenuController mOptionMenuController;
     private List<PreferenceController> mSecondaryUsers;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getLoaderManager().initLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
-    }
-
-    @Override
-    public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
-            Bundle args) {
-        Context context = getContext();
-        return new StorageAsyncLoader(context,
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class)),
-                mVolume.fsUuid,
-                new StorageStatsSource(context),
-                new PackageManagerWrapperImpl(context.getPackageManager()));
-    }
-
-    @Override
-    public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader,
-            SparseArray<StorageAsyncLoader.AppsStorageResult> data) {
-        mPreferenceController.onLoadFinished(data.get(UserHandle.myUserId()));
-        updateSecondaryUserControllers(mSecondaryUsers, data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader) {
-    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -137,6 +112,13 @@ public class StorageDashboardFragment extends DashboardFragment
 
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().initLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
+        getLoaderManager().initLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
     }
 
     @Override
@@ -227,4 +209,55 @@ public class StorageDashboardFragment extends DashboardFragment
                 }
 
             };
+
+    @Override
+    public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
+            Bundle args) {
+        Context context = getContext();
+        return new StorageAsyncLoader(context,
+                new UserManagerWrapperImpl(context.getSystemService(UserManager.class)),
+                mVolume.fsUuid,
+                new StorageStatsSource(context),
+                new PackageManagerWrapperImpl(context.getPackageManager()));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader,
+            SparseArray<StorageAsyncLoader.AppsStorageResult> data) {
+        mPreferenceController.onLoadFinished(data.get(UserHandle.myUserId()));
+        updateSecondaryUserControllers(mSecondaryUsers, data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader) {
+    }
+
+    /**
+     * IconLoaderCallbacks exists because StorageDashboardFragment already implements
+     * LoaderCallbacks for a different type.
+     */
+    public final class IconLoaderCallbacks
+            implements LoaderManager.LoaderCallbacks<SparseArray<Drawable>> {
+        @Override
+        public Loader<SparseArray<Drawable>> onCreateLoader(int id, Bundle args) {
+            return new UserIconLoader(
+                    getContext(),
+                    () -> UserIconLoader.loadUserIconsWithContext(getContext()));
+        }
+
+        @Override
+        public void onLoadFinished(
+                Loader<SparseArray<Drawable>> loader, SparseArray<Drawable> data) {
+            mSecondaryUsers
+                    .stream()
+                    .filter(controller -> controller instanceof UserIconLoader.UserIconHandler)
+                    .forEach(
+                            controller ->
+                                    ((UserIconLoader.UserIconHandler) controller)
+                                            .handleUserIcons(data));
+        }
+
+        @Override
+        public void onLoaderReset(Loader<SparseArray<Drawable>> loader) {}
+    }
 }

@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
 import android.support.v7.preference.Preference;
@@ -28,25 +29,27 @@ import android.util.SparseArray;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
+import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
-/**
- * Defines a {@link PreferenceController} which handles a single profile of the primary user.
- */
-public class UserProfileController extends PreferenceController implements
-        StorageAsyncLoader.ResultHandler {
+/** Defines a {@link PreferenceController} which handles a single profile of the primary user. */
+public class UserProfileController extends PreferenceController
+        implements StorageAsyncLoader.ResultHandler, UserIconLoader.UserIconHandler {
     private static final String PREFERENCE_KEY_BASE = "pref_profile_";
     private StorageItemPreference mStoragePreference;
+    private UserManagerWrapper mUserManager;
     private UserInfo mUser;
     private long mTotalSizeBytes;
     private final int mPreferenceOrder;
 
-    public UserProfileController(Context context, UserInfo info, int preferenceOrder) {
+    public UserProfileController(
+            Context context, UserInfo info, UserManagerWrapper userManager, int preferenceOrder) {
         super(context);
         mUser = Preconditions.checkNotNull(info);
+        mUserManager = userManager;
         mPreferenceOrder = preferenceOrder;
     }
 
@@ -66,7 +69,6 @@ public class UserProfileController extends PreferenceController implements
         mStoragePreference.setOrder(mPreferenceOrder);
         mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
         mStoragePreference.setTitle(mUser.name);
-        // TODO(b/36252572): Set user icon here.
         screen.addPreference(mStoragePreference);
     }
 
@@ -109,5 +111,13 @@ public class UserProfileController extends PreferenceController implements
 
     public void setTotalSize(long totalSize) {
         mTotalSizeBytes = totalSize;
+    }
+
+    @Override
+    public void handleUserIcons(SparseArray<Drawable> fetchedIcons) {
+        Drawable userIcon = fetchedIcons.get(mUser.id);
+        if (userIcon != null) {
+            mStoragePreference.setIcon(userIcon);
+        }
     }
 }

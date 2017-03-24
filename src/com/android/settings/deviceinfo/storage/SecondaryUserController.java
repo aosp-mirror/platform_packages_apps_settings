@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -37,8 +38,8 @@ import java.util.List;
  * SecondaryUserController controls the preferences on the Storage screen which had to do with
  * secondary users.
  */
-public class SecondaryUserController extends PreferenceController implements
-        StorageAsyncLoader.ResultHandler {
+public class SecondaryUserController extends PreferenceController
+        implements StorageAsyncLoader.ResultHandler, UserIconLoader.UserIconHandler {
     // PreferenceGroupKey to try to add our preference onto.
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     private static final String PREFERENCE_KEY_BASE = "pref_user_";
@@ -69,8 +70,9 @@ public class SecondaryUserController extends PreferenceController implements
             }
 
             if (info == null || Utils.isProfileOf(primaryUser, info)) {
-                controllers.add(new UserProfileController(context, info,
-                        USER_PROFILE_INSERTION_LOCATION));
+                controllers.add(
+                        new UserProfileController(
+                                context, info, userManager, USER_PROFILE_INSERTION_LOCATION));
                 continue;
             }
 
@@ -108,8 +110,6 @@ public class SecondaryUserController extends PreferenceController implements
             if (mSize != SIZE_NOT_SET) {
                 mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
             }
-
-            // TODO(b/36252572): Set the user icon appropriately here.
 
             group.setVisible(true);
             group.addPreference(mStoragePreference);
@@ -158,6 +158,14 @@ public class SecondaryUserController extends PreferenceController implements
         StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
         if (result != null) {
             setSize(result.externalStats.totalBytes);
+        }
+    }
+
+    @Override
+    public void handleUserIcons(SparseArray<Drawable> fetchedIcons) {
+        Drawable userIcon = fetchedIcons.get(mUser.id);
+        if (userIcon != null) {
+            mStoragePreference.setIcon(userIcon);
         }
     }
 
