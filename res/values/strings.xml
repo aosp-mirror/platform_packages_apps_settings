@@ -2936,6 +2936,10 @@
     <!-- APNs screen toast message to inform reset default APN settings is completed -->
     <string name="restore_default_apn_completed">Reset default APN settings completed.</string>
 
+
+    <!-- Title for a screen containing all device reset options [CHAR LIMIT=50] -->
+    <string name="reset_dashboard_title">Reset</string>
+
     <!-- Reset Network -->
     <!-- SD card & phone storage settings screen, setting option name under Backup & Restore heading -->
     <string name="reset_network_title">Network settings reset</string>
@@ -2957,6 +2961,12 @@
     <!-- Master Clear -->
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
+    <!-- Summary text for factory data reset describing what will be reset [CHAR_LIMIT=NONE]-->
+    <plurals name="master_clear_with_account_summary">
+        <item quantity="one">1 account will be reset</item>
+        <item quantity="other"><xliff:g id="account_count">%1$d</xliff:g> accounts will be reset</item>
+    </plurals>
+    <string name="master_clear_summary">Internal storage &amp; all data will be reset</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
