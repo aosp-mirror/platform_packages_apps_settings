@@ -27,8 +27,7 @@
                 android:key="always_on_vpn"
                 android:title="@string/vpn_menu_lockdown"
                 android:defaultValue="false"
-                android:summaryOn="@string/vpn_always_on_active"
-                android:summaryOff="@string/vpn_always_on_inactive"
+                android:summary="@string/vpn_always_on_summary"
                 settings:userRestriction="no_config_vpn"
                 settings:useAdditionalSummary="true"
                 settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
@@ -37,8 +36,6 @@
                 android:key="lockdown_vpn"
                 android:title="@string/vpn_require_connection"
                 android:defaultValue="false"
-                android:summaryOn="@string/vpn_lockdown_active"
-                android:summaryOff="@string/vpn_lockdown_inactive"
                 android:dependency="always_on_vpn"
                 settings:userRestriction="no_config_vpn"
                 settings:useAdditionalSummary="true"

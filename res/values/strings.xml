@@ -5512,16 +5512,26 @@
     <string name="vpn_no_ca_cert">(don\u2019t verify server)</string>
     <!-- Option to use the server certificate received from the VPN server. [CHAR LIMIT=40] -->
     <string name="vpn_no_server_cert">(received from server)</string>
-    <!-- Reason for Always-on VPN checkbox being disabled: the selected VPN type doesn't support always-on. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_type">The selected VPN type can\u2019t be always on</string>
-    <!-- Reason for Always-on VPN checkbox being disabled: the server address is invalid. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_server">Always-on VPN only supports numeric server addresses</string>
-    <!-- Reason for Always-on VPN checkbox being disabled: no DNS is found. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_no_dns">A DNS server must be specified for always-on VPN</string>
-    <!-- Reason for Always-on VPN checkbox being disabled: DNS server addresses are invalid. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_dns">DNS server addresses must be numeric for always-on VPN</string>
-    <!-- Reason for Always-on VPN checkbox being disabled: generic reason. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_other">The information entered doesn\u2019t support always-on VPN</string>
+    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
+        the selected VPN type doesn't support always-on. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_type">This VPN type can\'t stay connected at all
+        times</string>
+    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
+        the server address is not in numeric form (e.g. 8.8.8.8). [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_server">Always-on VPN only supports numeric server
+        addresses</string>
+    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
+        no DNS is found. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_no_dns">A DNS server must be specified for always-on
+        VPN</string>
+    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
+        DNS server addresses are not in numeric form (e.g. 8.8.8.8). [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_dns">DNS server addresses must be numeric for
+        always-on VPN</string>
+    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
+        generic error. [CHAR LIMIT=120] -->
+    <string name="vpn_always_on_invalid_reason_other">The information entered doesn\'t support
+        always-on VPN</string>
 
     <!-- Button label to cancel changing a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_cancel">Cancel</string>
@@ -5577,20 +5587,16 @@
     <string name="vpn_menu_lockdown">Always-on VPN</string>
     <!-- Placeholder when VPN settings is open but no VPNs have been created. [CHAR LIMIT=100] -->
     <string name="vpn_no_vpns_added">No VPNs added</string>
-    <!-- Preference summary for active always-on vpn [CHAR LIMIT=40] -->
-    <string name="vpn_always_on_active">Always-on active</string>
-    <!-- Preference summary for inactive always-on vpn [CHAR LIMIT=40] -->
-    <string name="vpn_always_on_inactive">Always-on inactive</string>
-    <!-- Preference summary for app not supporting always-on vpn [CHAR LIMIT=NONE] -->
-    <string name="vpn_not_supported_by_this_app">Not supported by this app</string>
-    <!-- Preference title for forcing all network connections to go through VPN. -->
-    <string name="vpn_require_connection">Only allow connections through VPN</string>
-    <!-- Dialog message title to confirm forcing all network connections to go through VPN. [CHAR LIMIT=40] -->
+    <!-- Preference summary for always-on VPN checkbox. [CHAR LIMIT=40] -->
+    <string name="vpn_always_on_summary">Stay connected to VPN at all times</string>
+    <!-- Preference summary for app not supporting always-on VPN [CHAR LIMIT=40] -->
+    <string name="vpn_always_on_summary_not_supported">Not supported by this app</string>
+    <!-- Preference title for the toggle that controls whether to force all network connections to
+        go through VPN. [CHAR LIMIT=40] -->
+    <string name="vpn_require_connection">Block connections without VPN</string>
+    <!-- Dialog message title to confirm forcing all network connections to go through VPN.
+        [CHAR LIMIT=40] -->
     <string name="vpn_require_connection_title">Require VPN connection?</string>
-    <!-- Preference summary when the preference to force all network connections to go through a VPN is enabled, blocking all other network traffic. In this case apps must use the VPN for all connections. -->
-    <string name="vpn_lockdown_active">Lockdown active</string>
-    <!-- Preference summary when the preference to force all network connections to go through a VPN is disabled. In this case use of the VPN is optional for apps. -->
-    <string name="vpn_lockdown_inactive">Lockdown inactive</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>

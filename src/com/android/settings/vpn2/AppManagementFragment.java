@@ -259,13 +259,13 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
             if (isAlwaysOnSupportedByApp(mPackageInfo.applicationInfo)) {
                 // setSummary doesn't override the admin message when user restriction is applied
-                mPreferenceAlwaysOn.setSummary(null);
+                mPreferenceAlwaysOn.setSummary(R.string.vpn_always_on_summary);
                 // setEnabled is not required here, as checkRestrictionAndSetDisabled
                 // should have refreshed the enable state.
             } else {
                 mPreferenceAlwaysOn.setEnabled(false);
                 mPreferenceLockdown.setEnabled(false);
-                mPreferenceAlwaysOn.setSummary(R.string.vpn_not_supported_by_this_app);
+                mPreferenceAlwaysOn.setSummary(R.string.vpn_always_on_summary_not_supported);
             }
         }
     }
