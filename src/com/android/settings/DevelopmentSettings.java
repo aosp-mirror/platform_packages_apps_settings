@@ -1789,7 +1789,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         // Init the AVRCP Version - Default
         values = getResources().getStringArray(R.array.bluetooth_avrcp_version_values);
         summaries = getResources().getStringArray(R.array.bluetooth_avrcp_versions);
-        String value = SystemProperties.get(BLUETOOTH_AVRCP_VERSION_PROPERTY);
+        String value = SystemProperties.get(BLUETOOTH_AVRCP_VERSION_PROPERTY, values[0]);
         index = mBluetoothSelectAvrcpVersion.findIndexOfValue(value);
         mBluetoothSelectAvrcpVersion.setValue(values[index]);
         mBluetoothSelectAvrcpVersion.setSummary(summaries[index]);
