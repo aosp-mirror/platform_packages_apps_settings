@@ -2250,10 +2250,10 @@
     <!-- Sound & display settings screen, setting option summary to enable adaptive brightness [CHAR LIMIT=100] -->
     <string name="auto_brightness_summary">Optimize brightness level for available light</string>
 
-    <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
-    <string name="night_display_title">Night Light</string>
-    <!-- Night display screen, description of night display feature (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
-    <string name="night_display_text">Night Light tints your screen amber. This makes it easier to look at your screen or read in dim light, and may help you fall asleep more easily.</string>
+    <!-- Night display screen, setting option name to enable night display. [CHAR LIMIT=30] -->
+    <string name="night_display_title">Night display</string>
+    <!-- Night display screen, description of night display feature. [CHAR LIMIT=NONE] -->
+    <string name="night_display_text">Night display tints your screen amber. This makes it easier to look at your screen or read in dim light, and may help you fall asleep more easily.</string>
     <!-- Night display screen, category title for settings to schedule when night display activates automatically. [CHAR LIMIT=30] -->
     <string name="night_display_category_schedule">Schedule</string>
     <!-- Night display screen, category title for settings to manually activate night display. [CHAR LIMIT=30] -->
@@ -7793,10 +7793,16 @@
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
     <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
 
-    <!-- Title of condition that night display is on (renamed "Night Light" with title caps) [CHAR LIMIT=30] -->
-    <string name="condition_night_display_title">Night Light is on</string>
+    <!--  Night display: Title for the night display option Suggestion. [CHAR LIMIT=NONE] -->
+    <string name="night_display_suggestion_title">Set night display schedule</string>
 
-    <!-- Summary of condition that night display is on (renamed "Night Light" with title caps) [CHAR LIMIT=NONE] -->
+    <!--  Night display: Summary for the night display option Suggestion. [CHAR LIMIT=30] -->
+    <string name="night_display_suggestion_summary">Tint screen amber to help you fall asleep</string>
+
+    <!-- Title of condition that night display is on [CHAR LIMIT=30] -->
+    <string name="condition_night_display_title">Night display is on</string>
+
+    <!-- Summary of condition that night display is on [CHAR LIMIT=NONE] -->
     <string name="condition_night_display_summary">Screen is tinted amber. This may help you fall asleep.</string>
 
     <!-- Title for the suggestions section on the dashboard [CHAR LIMIT=30] -->
