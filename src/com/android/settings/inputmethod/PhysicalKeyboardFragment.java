@@ -136,7 +136,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         unregisterShowVirtualKeyboardSettingsObserver();
     }
 
-    public void onLoadFinishedInternal(
+    private void onLoadFinishedInternal(
             final int loaderId, @NonNull final List<Keyboards> keyboardsList) {
         if (!mLoaderIDs.remove(loaderId)) {
             // Already destroyed loader.  Ignore.
@@ -198,8 +198,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     @NonNull
-    private static ArrayList<HardKeyboardDeviceInfo> getHardKeyboards() {
-        final ArrayList<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
+    public static List<HardKeyboardDeviceInfo> getHardKeyboards() {
+        final List<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
         final int[] devicesIds = InputDevice.getDeviceIds();
         for (int deviceId : devicesIds) {
             final InputDevice device = InputDevice.getDevice(deviceId);
@@ -211,7 +211,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private void updateHardKeyboards() {
-        final ArrayList<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards();
+        final List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards();
         if (!Objects.equals(newHardKeyboards, mLastHardKeyboards)) {
             clearLoader();
             mLastHardKeyboards.clear();

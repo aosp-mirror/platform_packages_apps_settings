@@ -43,7 +43,9 @@ import com.android.settings.gestures.DoubleTwistPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.inputmethod.GameControllerPreferenceController;
+import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
+import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
@@ -87,9 +89,11 @@ public class LanguageAndInputSettings extends DashboardFragment {
         controllers.add(new UserDictionaryPreferenceController(context));
         controllers.add(new TtsPreferenceController(context, new TtsEngines(context)));
         // Input
+        controllers.add(new VirtualKeyboardPreferenceController(context));
+        controllers.add(new PhysicalKeyboardPreferenceController(context, lifecycle));
         final GameControllerPreferenceController gameControllerPreferenceController
                 = new GameControllerPreferenceController(context);
-        getLifecycle().addObserver(gameControllerPreferenceController);
+        lifecycle.addObserver(gameControllerPreferenceController);
 
         if (mAmbientDisplayConfig == null) {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
