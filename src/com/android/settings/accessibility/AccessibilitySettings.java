@@ -587,11 +587,32 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
+        updateMagnificationSummary(mDisplayMagnificationPreferenceScreen);
+
         updateFontSizeSummary(mFontSizePreferenceScreen);
 
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
+    }
+
+    private void updateMagnificationSummary(Preference pref) {
+        final boolean tripleTapEnabled = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1;
+        final boolean buttonEnabled = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 1;
+
+        int summaryResId = 0;
+        if (!tripleTapEnabled && !buttonEnabled) {
+            summaryResId = R.string.accessibility_feature_state_off;
+        } else if (!tripleTapEnabled && buttonEnabled) {
+            summaryResId = R.string.accessibility_screen_magnification_navbar_title;
+        } else if (tripleTapEnabled && !buttonEnabled) {
+            summaryResId = R.string.accessibility_screen_magnification_gestures_title;
+        } else {
+            summaryResId = R.string.accessibility_screen_magnification_state_navbar_gesture;
+        }
+        pref.setSummary(summaryResId);
     }
 
     private void updateFeatureSummary(String prefKey, Preference pref) {

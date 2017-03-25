@@ -214,14 +214,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void updateConfigurationWarningIfNeeded() {
-        final int warningRes =
-                MagnificationPreferenceFragment
-                        .getConfigurationWarningStringResourceForSecureSettingsKey(
-                        mPreferenceKey, getContentResolver());
-        if (warningRes != -1) {
-            mConfigWarningPreference.setSummary(warningRes);
+        final CharSequence warningMessage =
+                MagnificationPreferenceFragment.getConfigurationWarningStringForSecureSettingsKey(
+                        mPreferenceKey, getPrefContext());
+        if (warningMessage != null) {
+            mConfigWarningPreference.setSummary(warningMessage);
         }
-        mConfigWarningPreference.setVisible(warningRes != -1);
+        mConfigWarningPreference.setVisible(warningMessage != null);
     }
 
     private static int getScreenWidth(Context context) {
