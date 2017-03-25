@@ -23,6 +23,8 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.util.Log;
+
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
 /**
@@ -56,8 +58,12 @@ public class BackgroundActivityPreferenceController extends PreferenceController
 
         if (mode == AppOpsManager.MODE_ERRORED) {
             preference.setEnabled(false);
+            preference.setSummary(R.string.background_activity_summary_disabled);
         } else {
-            ((SwitchPreference) preference).setChecked(mode != AppOpsManager.MODE_IGNORED);
+            final boolean checked = mode != AppOpsManager.MODE_IGNORED;
+            ((SwitchPreference) preference).setChecked(checked);
+            preference.setSummary(checked ? R.string.background_activity_summary_on
+                    : R.string.background_activity_summary_off);
         }
     }
 

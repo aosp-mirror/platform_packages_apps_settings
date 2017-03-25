@@ -74,6 +74,7 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
 import android.service.persistentdata.PersistentDataBlockManager;
+import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
@@ -1239,6 +1240,17 @@ public final class Utils extends com.android.settingslib.Utils {
                 VolumeInfo.ID_PRIVATE_INTERNAL);
         VolumeInfo volume = sm.findVolumeById(volumeId);
         return isVolumeValid(volume) ? volume : null;
+    }
+
+    /**
+     * Return the resource id to represent the install status for an app
+     */
+    @StringRes
+    public static int getInstallationStatus(ApplicationInfo info) {
+        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+            return R.string.not_installed;
+        }
+        return info.enabled ? R.string.installed : R.string.disabled;
     }
 
     private static boolean isVolumeValid(VolumeInfo volume) {

@@ -63,6 +63,10 @@ public class PowerGaugePreference extends TintablePreference {
         notifyChanged();
     }
 
+    public String getPercent() {
+        return mProgress.toString();
+    }
+
     BatteryEntry getInfo() {
         return mInfo;
     }

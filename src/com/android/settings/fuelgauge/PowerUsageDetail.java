@@ -69,6 +69,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO(b/35810915): Delete this page once ag/1971493 is done.
 public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickListener {
 
     // Note: Must match the sequence of the DrainType

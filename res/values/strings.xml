@@ -4419,8 +4419,12 @@
 
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
     <string name="background_activity_title">Background activity</string>
-    <!-- Summary for the background activity [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary">Allow the app to run in the background</string>
+    <!-- Summary for the background activity when it is on [CHAR_LIMIT=120] -->
+    <string name="background_activity_summary_on">App can run in the background when not in use</string>
+    <!-- Summary for the background activity when it is off [CHAR_LIMIT=120] -->
+    <string name="background_activity_summary_off">App\'s background activity is limited when not in use</string>
+    <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
+    <string name="background_activity_summary_disabled">App not allowed to run in background</string>
 
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=40] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
@@ -4634,13 +4638,25 @@
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
     <string name="battery_used_by"><xliff:g id="percent">%1$s</xliff:g> used by <xliff:g id="app">%2$s</xliff:g></string>
     <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
-    <string name="battery_overall_usage">%1$s of overall battery</string>
+    <string name="battery_overall_usage"><xliff:g id="percent">%1$s</xliff:g> of overall battery</string>
     <!-- Description for battery usage detail information since last full charge. [CHAR LIMIT=120] -->
     <string name="battery_detail_since_full_charge">Breakdown since last full charge</string>
     <!-- Title for usage time since last full charge. [CHAR LIMIT=60] -->
     <string name="battery_last_full_charge">Last full charge</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=120] -->
     <string name="battery_footer_summary">Remaining battery time is approximate and can change based on usage</string>
+    <!-- Title for battery usage detail in foreground. [CHAR LIMIT=80] -->
+    <string name="battery_detail_foreground">While using app</string>
+    <!-- Title for battery usage detail in background. [CHAR LIMIT=80] -->
+    <string name="battery_detail_background">While in background</string>
+    <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
+    <string name="battery_detail_power_usage">Battery usage</string>
+    <!-- Description for battery usage amount, i.e. 16% of overall app usage(340 mAh). [CHAR LIMIT=120] -->
+    <string name="battery_detail_power_percentage"><xliff:g id="percent">%1$s</xliff:g> of total app usage (<xliff:g id="power">%2$d</xliff:g>mAh)</string>
+    <!-- Title for the battery usage group, which means all the battery data are calculated 'since full charge' [CHAR LIMIT=40] -->
+    <string name ="battery_detail_info_title">Since full charge</string>
+    <!-- Title for the battery management group [CHAR LIMIT=40] -->
+    <string name ="battery_detail_manage_title">Manage battery usage</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
