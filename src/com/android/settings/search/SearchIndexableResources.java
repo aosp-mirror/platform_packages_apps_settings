@@ -74,6 +74,7 @@ import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
 import com.android.settings.users.UserSettings;
@@ -166,6 +167,7 @@ public final class SearchIndexableResources {
                 R.xml.zen_mode_visual_interruptions_settings,
                 R.drawable.ic_settings_notifications);
         addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(ResetDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_restore);
         addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_devices_other);

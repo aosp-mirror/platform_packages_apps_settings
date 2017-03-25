@@ -16,11 +16,10 @@
 package com.android.settings.system;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-
 import static org.mockito.Mockito.when;
 
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.os.UserManager;
 
@@ -45,13 +44,17 @@ public class FactoryResetPreferenceControllerTest {
     private Context mContext;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private AccountManager mAccountManager;
 
     private FactoryResetPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new FactoryResetPreferenceController(mContext, mUserManager);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
+        mController = new FactoryResetPreferenceController(mContext);
     }
 
     @Test
@@ -68,7 +71,8 @@ public class FactoryResetPreferenceControllerTest {
         assertThat(mController.isAvailable()).isFalse();
     }
 
-    @Test public void getPreferenceKey() {
+    @Test
+    public void getPreferenceKey() {
         assertThat(mController.getPreferenceKey()).isEqualTo(FACTORY_RESET_KEY);
     }
 }
