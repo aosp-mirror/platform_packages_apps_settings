@@ -32,7 +32,7 @@ public class VibrateOnTouchPreferenceController extends SettingPrefController {
             Lifecycle lifecycle) {
         super(context, parent, lifecycle);
         mPreference = new SettingPref(
-            TYPE_SYSTEM, KEY_VIBRATE_ON_TOUCH, System.HAPTIC_FEEDBACK_ENABLED, DEFAULT_ON) {
+            TYPE_SYSTEM, KEY_VIBRATE_ON_TOUCH, System.HAPTIC_FEEDBACK_ENABLED, 0) {
             @Override
             public boolean isApplicable(Context context) {
                 return hasHaptic(context);
