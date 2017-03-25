@@ -21,6 +21,7 @@ import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -30,11 +31,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,23 +47,27 @@ import static org.mockito.Mockito.when;
 public class ZenModePreferenceControllerTest {
 
     @Mock
-    private Context mContext;
-    @Mock
     private Preference mPreference;
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
     private Policy mPolicy;
 
+    private Context mContext;
     private ZenModePreferenceController mController;
+    private ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
+        mContext = shadowApplication.getApplicationContext();
         mController = new ZenModePreferenceController(mContext);
-        when(mContext.getSystemService(Context.NOTIFICATION_SERVICE))
-            .thenReturn(mNotificationManager);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
+        mSummaryBuilder = spy(new ZenModeSettings.SummaryBuilder(mContext));
+        ReflectionHelpers.setField(mController, "mSummaryBuilder", mSummaryBuilder);
+        doReturn(0).when(mSummaryBuilder).getEnabledAutomaticRulesCount();
     }
 
     @Test
@@ -72,8 +80,12 @@ public class ZenModePreferenceControllerTest {
         when(mPreference.isEnabled()).thenReturn(true);
 
         mController.updateState(mPreference);
+        verify(mPreference).setSummary(mContext.getString(R.string.zen_mode_settings_summary_off));
 
-        verify(mPreference).setSummary(anyString());
+        doReturn(1).when(mSummaryBuilder).getEnabledAutomaticRulesCount();
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
+            R.plurals.zen_mode_settings_summary_on, 1, 1));
     }
 
     @Test
