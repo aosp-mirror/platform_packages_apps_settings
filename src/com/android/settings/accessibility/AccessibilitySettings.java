@@ -103,7 +103,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
-            "screen_magnification_preference_screen";
+            "magnification_preference_screen";
     private static final String FONT_SIZE_PREFERENCE_SCREEN =
             "font_size_preference_screen";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
