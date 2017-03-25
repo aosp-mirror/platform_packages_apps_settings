@@ -299,6 +299,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         // On/off switch is hidden for Setup Wizard (returns null)
         mWifiEnabler = createWifiEnabler();
+
+        mWifiTracker.startTracking();
     }
 
     /**
@@ -318,7 +320,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiEnabler.resume(activity);
         }
 
-        mWifiTracker.startTracking();
         activity.invalidateOptionsMenu();
     }
 
@@ -328,7 +329,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.pause();
         }
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
         mWifiTracker.stopTracking();
     }
 
