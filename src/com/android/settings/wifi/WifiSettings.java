@@ -815,8 +815,17 @@ public class WifiSettings extends RestrictedSettingsFragment
             return;
         }
         mAdditionalSettingsPreferenceCategory.addPreference(mConfigureWifiSettingsPreference);
-        if (mWifiTracker.doSavedNetworksExist()) {
+        boolean wifiWakeupEnabled = Settings.Global.getInt(
+                getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+        mConfigureWifiSettingsPreference.setSummary(getString(wifiWakeupEnabled
+                ? R.string.wifi_configure_settings_preference_summary_wakeup_on
+                : R.string.wifi_configure_settings_preference_summary_wakeup_off));
+        int numSavedNetworks = mWifiTracker.getNumSavedNetworks();
+        if (numSavedNetworks > 0) {
             mAdditionalSettingsPreferenceCategory.addPreference(mSavedNetworksPreference);
+            mSavedNetworksPreference.setSummary(
+                    getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
+                            numSavedNetworks, numSavedNetworks));
         } else {
             mAdditionalSettingsPreferenceCategory.removePreference(mSavedNetworksPreference);
         }
