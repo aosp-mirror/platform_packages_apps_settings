@@ -13,22 +13,29 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
 import com.android.settings.overlay.FeatureFactory;
@@ -64,6 +71,38 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private PackageManager mPackageManager;
+    private UserManager mUserManager;
+    private Map<Integer, PowerUsageData> mBatteryDataMap;
+
+    Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case BatteryEntry.MSG_UPDATE_NAME_ICON:
+                    final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(
+                            STATUS_TYPE);
+                    final double totalPower = mStatsHelper.getTotalPower();
+                    final BatteryEntry entry = (BatteryEntry) msg.obj;
+                    final int usageType = extractUsageType(entry.sipper);
+
+                    PowerUsageData usageData = mBatteryDataMap.get(usageType);
+                    Preference pref = findPreference(String.valueOf(usageType));
+                    if (pref != null && usageData != null) {
+                        updateUsageDataSummary(usageData, totalPower, dischargeAmount);
+                        pref.setSummary(usageData.summary);
+                    }
+                    break;
+                case BatteryEntry.MSG_REPORT_FULLY_DRAWN:
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        activity.reportFullyDrawn();
+                    }
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -76,12 +115,28 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
         mPackageManager = context.getPackageManager();
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         refreshStats();
+    }
+
+    @Override
+    public void onPause() {
+        BatteryEntry.stopRequestQueue();
+        mHandler.removeMessages(BatteryEntry.MSG_UPDATE_NAME_ICON);
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity().isChangingConfigurations()) {
+            BatteryEntry.clearUidCache();
+        }
     }
 
     @Override
@@ -116,15 +171,19 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             final PowerUsageData batteryData = dataList.get(i);
             final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext());
 
+            pref.setKey(String.valueOf(batteryData.usageType));
             pref.setTitle(batteryData.titleResId);
             pref.setSummary(batteryData.summary);
             pref.setPercent(batteryData.percentage);
             mUsageListGroup.addPreference(pref);
         }
+
+        BatteryEntry.startRequestQueue();
     }
 
     @VisibleForTesting
-    @UsageType int extractUsageType(BatterySipper sipper) {
+    @UsageType
+    int extractUsageType(BatterySipper sipper) {
         final DrainType drainType = sipper.drainType;
         final int uid = sipper.getUid();
 
@@ -163,19 +222,54 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
             final PowerUsageData usageData = batteryDataMap.get(extractUsageType(sipper));
             usageData.totalPowerMah += sipper.totalPowerMah;
+            if (sipper.drainType == DrainType.APP && sipper.usageTimeMs != 0) {
+                sipper.usageTimeMs = BatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL,
+                        sipper.uidObj, STATUS_TYPE);
+            }
+            usageData.totalUsageTimeMs += sipper.usageTimeMs;
+            usageData.usageList.add(sipper);
         }
 
-        // TODO(b/35396770): add logic to extract the summary
         final List<PowerUsageData> batteryDataList = new ArrayList<>(batteryDataMap.values());
         final int dischargeAmount = statusHelper.getStats().getDischargeAmount(STATUS_TYPE);
         final double totalPower = statusHelper.getTotalPower();
         for (final PowerUsageData usageData : batteryDataList) {
             usageData.percentage = (usageData.totalPowerMah / totalPower) * dischargeAmount;
+            updateUsageDataSummary(usageData, totalPower, dischargeAmount);
         }
 
         Collections.sort(batteryDataList);
 
+        mBatteryDataMap = batteryDataMap;
         return batteryDataList;
+    }
+
+    @VisibleForTesting
+    void updateUsageDataSummary(PowerUsageData usageData, double totalPower, int dischargeAmount) {
+        if (usageData.usageList.size() <= 1) {
+            usageData.summary = getString(R.string.battery_used_for,
+                    Utils.formatElapsedTime(getContext(), usageData.totalUsageTimeMs, false));
+        } else {
+            BatterySipper sipper = findBatterySipperWithMaxBatteryUsage(usageData.usageList);
+            BatteryEntry batteryEntry = new BatteryEntry(getContext(), mHandler, mUserManager,
+                    sipper);
+            final double percentage = (sipper.totalPowerMah / totalPower) * dischargeAmount;
+            usageData.summary = getString(R.string.battery_used_by,
+                    Utils.formatPercentage(percentage, true), batteryEntry.name);
+        }
+    }
+
+    @VisibleForTesting
+    BatterySipper findBatterySipperWithMaxBatteryUsage(List<BatterySipper> usageList) {
+        BatterySipper sipper = usageList.get(0);
+        for (int i = 1, size = usageList.size(); i < size; i++) {
+            final BatterySipper comparedSipper = usageList.get(i);
+            if (comparedSipper.totalPowerMah > sipper.totalPowerMah) {
+                sipper = comparedSipper;
+            }
+        }
+
+        return sipper;
     }
 
     @VisibleForTesting
@@ -221,10 +315,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         public String summary;
         public double percentage;
         public double totalPowerMah;
+        public long totalUsageTimeMs;
         @ColorInt
         public int iconColor;
         @UsageType
         public int usageType;
+        public List<BatterySipper> usageList;
 
         public PowerUsageData(@UsageType int usageType) {
             this(usageType, 0);
@@ -233,8 +329,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         public PowerUsageData(@UsageType int usageType, double totalPower) {
             this.usageType = usageType;
             totalPowerMah = 0;
+            totalUsageTimeMs = 0;
             titleResId = getTitleResId(usageType);
             totalPowerMah = totalPower;
+            usageList = new ArrayList<>();
         }
 
         private int getTitleResId(@UsageType int usageType) {
