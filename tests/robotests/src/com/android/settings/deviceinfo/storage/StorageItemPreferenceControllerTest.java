@@ -190,6 +190,24 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    public void testClickMovies() {
+        mPreference.setKey("pref_movies");
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                any(UserHandle.class));
+
+        Intent intent = argumentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.storage_movies_tv);
+    }
+
+    @Test
     public void testClickSystem() {
         mPreference.setKey("pref_system");
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
@@ -203,6 +221,7 @@ public class StorageItemPreferenceControllerTest {
         StorageItemPreference audio = new StorageItemPreference(mContext);
         StorageItemPreference image = new StorageItemPreference(mContext);
         StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference movies = new StorageItemPreference(mContext);
         StorageItemPreference apps = new StorageItemPreference(mContext);
         StorageItemPreference system = new StorageItemPreference(mContext);
         StorageItemPreference files = new StorageItemPreference(mContext);
@@ -214,6 +233,8 @@ public class StorageItemPreferenceControllerTest {
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
         when(screen.findPreference(
+                eq(StorageItemPreferenceController.MOVIES_KEY))).thenReturn(movies);
+        when(screen.findPreference(
                 eq(StorageItemPreferenceController.OTHER_APPS_KEY))).thenReturn(apps);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.SYSTEM_KEY))).thenReturn(system);
@@ -224,6 +245,7 @@ public class StorageItemPreferenceControllerTest {
         mController.setSystemSize(KILOBYTE * 6);
         StorageAsyncLoader.AppsStorageResult result = new StorageAsyncLoader.AppsStorageResult();
         result.gamesSize = KILOBYTE * 8;
+        result.videoAppsSize = KILOBYTE * 16;
         result.musicAppsSize = KILOBYTE * 4;
         result.otherAppsSize = KILOBYTE * 9;
         result.systemSize = KILOBYTE * 10;
@@ -240,6 +262,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(audio.getSummary().toString()).isEqualTo("14.00KB"); // 4KB apps + 10KB files
         assertThat(image.getSummary().toString()).isEqualTo("35.00KB"); // 15KB video + 20KB images
         assertThat(games.getSummary().toString()).isEqualTo("8.00KB");
+        assertThat(movies.getSummary().toString()).isEqualTo("16.00KB");
         assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
         assertThat(system.getSummary().toString()).isEqualTo("16.00KB");
         assertThat(files.getSummary().toString()).isEqualTo("5.00KB");
