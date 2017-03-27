@@ -489,6 +489,10 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
+                if (sipper.usageTimeMs == 0 && sipper.drainType == DrainType.APP) {
+                    sipper.usageTimeMs = BatteryUtils.getProcessTimeMs(
+                            BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
+                }
                 setUsageSummary(pref, usedTime, sipper.usageTimeMs);
                 if ((sipper.drainType != DrainType.APP
                         || sipper.uidObj.getUid() == Process.ROOT_UID)
