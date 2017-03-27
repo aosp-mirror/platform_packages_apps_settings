@@ -20,6 +20,9 @@ import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
@@ -165,8 +168,35 @@ public class StorageItemPreferenceController extends PreferenceController {
     /**
      * Sets the user id for which this preference controller is handling.
      */
-    public void setUserId(int userId) {
-        mUserId = userId;
+    public void setUserId(UserHandle userHandle) {
+        mUserId = userHandle.getIdentifier();
+
+        PackageManager pm = mContext.getPackageManager();
+        badgePreference(pm, userHandle, mPhotoPreference);
+        badgePreference(pm, userHandle, mAudioPreference);
+        badgePreference(pm, userHandle, mGamePreference);
+        badgePreference(pm, userHandle, mAppPreference);
+        badgePreference(pm, userHandle, mSystemPreference);
+        badgePreference(pm, userHandle, mFilePreference);
+    }
+
+    private void badgePreference(PackageManager pm, UserHandle userHandle, Preference preference) {
+        if (preference != null) {
+            Drawable currentIcon = preference.getIcon();
+            // Sigh... Applying the badge to the icon clobbers the tint on the base drawable.
+            // For some reason, re-applying it here means the tint remains.
+            currentIcon = applyTint(mContext, currentIcon);
+            preference.setIcon(pm.getUserBadgedIcon(currentIcon, userHandle));
+        }
+    }
+
+    private static Drawable applyTint(Context context, Drawable icon) {
+        TypedArray array =
+                context.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});
+        icon = icon.mutate();
+        icon.setTint(array.getColor(0, 0));
+        array.recycle();
+        return icon;
     }
 
     @Override
