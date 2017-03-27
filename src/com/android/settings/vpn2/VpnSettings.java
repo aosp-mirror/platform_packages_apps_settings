@@ -19,6 +19,7 @@ package com.android.settings.vpn2;
 import android.annotation.UiThread;
 import android.annotation.WorkerThread;
 import android.app.AppOpsManager;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -208,9 +209,16 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     public boolean handleMessage(Message message) {
         mUpdater.removeMessages(RESCAN_MESSAGE);
 
+        //Return if activity has been recycled
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return true;
+        }
+        final Context context = activity.getApplicationContext();
+
         // Run heavy RPCs before switching to UI thread
         final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
-        final List<AppVpnInfo> vpnApps = getVpnApps(getActivity(), /* includeProfiles */ true);
+        final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true);
 
         final Map<String, LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
         final Set<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
@@ -219,7 +227,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         final String lockdownVpnKey = VpnUtils.getLockdownVpn();
 
         // Refresh list of VPNs
-        getActivity().runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // Can't do anything useful if the context has gone away
@@ -271,7 +279,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 }
             }
         });
-
         mUpdater.sendEmptyMessageDelayed(RESCAN_MESSAGE, RESCAN_INTERVAL_MS);
         return true;
     }
