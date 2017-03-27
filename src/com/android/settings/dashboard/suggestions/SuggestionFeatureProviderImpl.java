@@ -83,7 +83,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     @Override
     public String getSuggestionIdentifier(Context context, Tile suggestion) {
-        if (suggestion.intent == null || suggestion.intent.getComponent() == null) {
+        if (suggestion.intent == null || suggestion.intent.getComponent() == null
+                || context == null) {
             return "unknown_suggestion";
         }
         String packageName = suggestion.intent.getComponent().getPackageName();

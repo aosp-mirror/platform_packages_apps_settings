@@ -108,6 +108,15 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
+    public void getSuggestionIdentifier_nullContext_shouldNotCrash() {
+        final Tile suggestion = new Tile();
+        suggestion.intent = new Intent()
+            .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
+        assertThat(mProvider.getSuggestionIdentifier(null, suggestion))
+            .isNotEmpty();
+    }
+
+    @Test
     public void dismissSuggestion_hasMoreDismissCount_shouldNotDisableComponent() {
         when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
                 .thenReturn(false);
@@ -119,7 +128,6 @@ public class SuggestionFeatureProviderImplTest {
                 anyString());
         verify(mContext, never()).getPackageManager();
     }
-
 
     @Test
     public void dismissSuggestion_noContext_shouldDoNothing() {
