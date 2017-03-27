@@ -594,8 +594,11 @@ public class PowerUsageSummary extends PowerUsageBase {
     boolean shouldHideSipper(BatterySipper sipper) {
         final DrainType drainType = sipper.drainType;
 
-        return drainType == DrainType.IDLE || drainType == DrainType.CELL
-                || drainType == DrainType.SCREEN || drainType == DrainType.BLUETOOTH
+        return drainType == DrainType.IDLE
+                || drainType == DrainType.CELL
+                || drainType == DrainType.WIFI
+                || drainType == DrainType.SCREEN
+                || drainType == DrainType.BLUETOOTH
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
                 || mPowerFeatureProvider.isTypeService(sipper)
                 || mPowerFeatureProvider.isTypeSystem(sipper);

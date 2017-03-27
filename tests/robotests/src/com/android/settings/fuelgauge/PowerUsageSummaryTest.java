@@ -315,6 +315,12 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
+    public void testShouldHideSipper_TypeWifi_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.WIFI;
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
     public void testShouldHideSipper_TypeCell_ReturnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.CELL;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
