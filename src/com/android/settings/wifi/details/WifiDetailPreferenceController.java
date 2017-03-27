@@ -149,7 +149,6 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     @Override
     public void onResume() {
         mWifiInfo = mWifiManager.getConnectionInfo();
-        mWifiConfig = mWifiManager.getWifiApConfiguration();
 
         refreshFromWifiInfo();
         setIpText();
@@ -256,5 +255,18 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
             builder.append(addresses.get(i).getHostAddress());
         }
         mDnsPref.setDetailText(builder.toString());
+    }
+
+    /**
+     * Forgets the wifi network associated with this preference.
+     */
+    public void forgetNetwork() {
+        if (mWifiConfig.ephemeral) {
+            mWifiManager.disableEphemeralNetwork(mWifiConfig.SSID);
+        } else if (mWifiConfig.isPasspoint()) {
+            mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
+        } else {
+            mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
+        }
     }
 }
