@@ -139,10 +139,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
 
-    // should see all networks instead of collapsing networks and showing mSeeAllNetworksPreference.
-    private boolean mSeeAllNetworks;
-    private static final int NETWORKS_TO_INITIALLY_SHOW = 5;
-
     // Save the dialog details
     private int mDialogMode;
     private AccessPoint mDlgAccessPoint;
@@ -160,7 +156,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private PreferenceCategory mAccessPointsPreferenceCategory;
     private PreferenceCategory mAdditionalSettingsPreferenceCategory;
     private Preference mAddPreference;
-    private Preference mSeeAllNetworksPreference;
     private Preference mConfigureWifiSettingsPreference;
     private Preference mSavedNetworksPreference;
     private LinkablePreference mStatusMessagePreference;
@@ -210,10 +205,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         mAddPreference = new Preference(prefContext);
         mAddPreference.setIcon(R.drawable.ic_menu_add_inset);
         mAddPreference.setTitle(R.string.wifi_add_network);
-        mSeeAllNetworksPreference = new Preference(prefContext);
-        mSeeAllNetworksPreference.setIcon(R.drawable.ic_arrow_down_24dp);
-        mSeeAllNetworksPreference.setTitle(R.string.wifi_see_all_networks_button_title);
-        mSeeAllNetworks = false;
         mStatusMessagePreference = new LinkablePreference(prefContext);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
@@ -525,9 +516,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         } else if (preference == mAddPreference) {
             onAddNetworkPressed();
-        } else if (preference == mSeeAllNetworksPreference) {
-            mSeeAllNetworks = true;
-            onAccessPointsChanged();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -671,12 +659,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         int index =
                 configureConnectedAccessPointPreferenceCategory(accessPoints) ? 1 : 0;
-        boolean fewerNetworksThanLimit =
-                accessPoints.size() <= index + NETWORKS_TO_INITIALLY_SHOW;
-        int numAccessPointsToShow = mSeeAllNetworks || fewerNetworksThanLimit
-                ? accessPoints.size() : index + NETWORKS_TO_INITIALLY_SHOW;
-
-        for (; index < numAccessPointsToShow; index++) {
+        int numAccessPoints = accessPoints.size();
+        for (; index < numAccessPoints; index++) {
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
             if (accessPoint.isReachable()) {
@@ -707,15 +691,8 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
         removeCachedPrefs(mAccessPointsPreferenceCategory);
-        if (mSeeAllNetworks || fewerNetworksThanLimit) {
-            mAccessPointsPreferenceCategory.removePreference(mSeeAllNetworksPreference);
-            mAddPreference.setOrder(index);
-            mAccessPointsPreferenceCategory.addPreference(mAddPreference);
-        } else {
-            mAccessPointsPreferenceCategory.removePreference(mAddPreference);
-            mSeeAllNetworksPreference.setOrder(index);
-            mAccessPointsPreferenceCategory.addPreference(mSeeAllNetworksPreference);
-        }
+        mAddPreference.setOrder(index);
+        mAccessPointsPreferenceCategory.addPreference(mAddPreference);
         setConfigureWifiSettingsVisibility();
 
         if (!hasAvailableAccessPoints) {
