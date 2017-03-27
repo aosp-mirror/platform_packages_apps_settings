@@ -140,6 +140,7 @@ public class StorageProfileFragment extends DashboardFragment
         // TODO(b/35927909): Attribute app sizes better than zeroing out for profiles.
         result.gamesSize = 0;
         result.musicAppsSize = 0;
+        result.videoAppsSize = 0;
         result.otherAppsSize = 0;
         return result;
     }

@@ -44,6 +44,7 @@ public class StorageProfileFragmentTest {
         result.musicAppsSize = 100;
         result.otherAppsSize = 200;
         result.gamesSize = 300;
+        result.videoAppsSize = 400;
         result.externalStats = new StorageStatsSource.ExternalStorageStats(6, 1, 2, 3);
         SparseArray<StorageAsyncLoader.AppsStorageResult> resultsArray = new SparseArray<>();
         resultsArray.put(0, result);
@@ -57,6 +58,7 @@ public class StorageProfileFragmentTest {
 
         StorageAsyncLoader.AppsStorageResult extractedResult = resultCaptor.getValue();
         assertThat(extractedResult.musicAppsSize).isEqualTo(0);
+        assertThat(extractedResult.videoAppsSize).isEqualTo(0);
         assertThat(extractedResult.otherAppsSize).isEqualTo(0);
         assertThat(extractedResult.gamesSize).isEqualTo(0);
         assertThat(extractedResult.externalStats.audioBytes).isEqualTo(1);

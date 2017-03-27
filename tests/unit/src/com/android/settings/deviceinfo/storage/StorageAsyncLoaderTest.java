@@ -169,6 +169,17 @@ public class StorageAsyncLoaderTest {
         assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
     }
 
+    @Test
+    public void testVideoAppsAreFiltered() throws Exception {
+        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(11L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
+    }
+
     private ApplicationInfo addPackage(
             String packageName, long cacheSize, long codeSize, long dataSize, int category) {
         StorageStatsSource.AppStorageStats storageStats =
