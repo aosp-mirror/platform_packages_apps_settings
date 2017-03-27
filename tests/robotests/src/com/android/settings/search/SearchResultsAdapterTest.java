@@ -34,6 +34,7 @@ import com.android.settings.search2.InstalledAppResultLoader;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.ResultPayload;
+import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
@@ -48,6 +49,14 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +68,10 @@ public class SearchResultsAdapterTest {
 
     @Mock
     private SearchFragment mFragment;
+    @Mock
+    private SearchFeatureProvider mSearchFeatureProvider;
+    @Mock
+    private Context mMockContext;
     private SearchResultsAdapter mAdapter;
     private Context mContext;
     private String mLoaderClassName;
@@ -67,8 +80,10 @@ public class SearchResultsAdapterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = Robolectric.buildActivity(Activity.class).get();
-        mAdapter = new SearchResultsAdapter(mFragment);
+        mAdapter = new SearchResultsAdapter(mFragment, mSearchFeatureProvider);
         mLoaderClassName = DatabaseResultLoader.class.getName();
+        when(mFragment.getContext()).thenReturn(mMockContext);
+        when(mMockContext.getApplicationContext()).thenReturn(mContext);
     }
 
     @Test
@@ -81,7 +96,7 @@ public class SearchResultsAdapterTest {
     public void testSingleSourceMerge_ExactCopyReturned() {
         ArrayList<SearchResult> intentResults = getIntentSampleResults();
         mAdapter.addSearchResults(intentResults, mLoaderClassName);
-        mAdapter.displaySearchResults();
+        mAdapter.displaySearchResults("");
 
         List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).containsAllIn(intentResults);
@@ -109,7 +124,7 @@ public class SearchResultsAdapterTest {
                 InstalledAppResultLoader.class.getName());
         mAdapter.addSearchResults(getDummyDbResults(),
                 DatabaseResultLoader.class.getName());
-        int count = mAdapter.displaySearchResults();
+        int count = mAdapter.displaySearchResults("");
 
         List<SearchResult> results = mAdapter.getSearchResults();
         assertThat(results.get(0).title).isEqualTo("alpha");
@@ -119,6 +134,22 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(4).title).isEqualTo("appCharlie");
         assertThat(results.get(5).title).isEqualTo("Charlie");
         assertThat(count).isEqualTo(6);
+    }
+
+    @Test
+    public void testDisplayResults_ShouldNotRunSmartRankingIfDisabled() {
+        when(mSearchFeatureProvider.isSmartSearchRankingEnabled(any()))
+            .thenReturn(false);
+        mAdapter.displaySearchResults("");
+        verify(mSearchFeatureProvider, never()).rankSearchResults(anyString(), anyList());
+    }
+
+    @Test
+    public void testDisplayResults_ShouldRunSmartRankingIfEnabled() {
+        when(mSearchFeatureProvider.isSmartSearchRankingEnabled(any()))
+            .thenReturn(true);
+        mAdapter.displaySearchResults("");
+        verify(mSearchFeatureProvider, times(1)).rankSearchResults(anyString(), anyList());
     }
 
     private List<SearchResult> getDummyDbResults() {

@@ -51,6 +51,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
             mMetricsFeatureProvider.action(v.getContext(),
                     MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
                     resultName, rank);
+            mSearchFeatureProvider.searchResultClicked(fragment.mQuery, result);
             fragment.startActivity(intent);
         });
     }

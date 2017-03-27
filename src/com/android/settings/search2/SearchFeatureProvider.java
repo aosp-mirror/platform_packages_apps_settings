@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.View;
 import com.android.settings.dashboard.SiteMapManager;
 
+import java.util.List;
+
 /**
  * FeatureProvider for Settings Search
  */
@@ -89,5 +91,29 @@ public interface SearchFeatureProvider {
     default void hideFeedbackButton() {
     }
 
+    /**
+     * Ranks search results based on the input query.
+     *
+     * @param query input user query
+     * @param searchResults list of search results to be ranked
+     */
+    default void rankSearchResults(String query, List<SearchResult> searchResults) {
+    }
+
+    /**
+     * Notify that a search result is clicked.
+     *
+     * @param query input user query
+     * @param searchResult clicked result
+     */
+    default void searchResultClicked(String query, SearchResult searchResult) {
+    }
+
+    /**
+     * @return true to enable search ranking.
+     */
+    default boolean isSmartSearchRankingEnabled(Context context) {
+        return false;
+    }
 
 }
