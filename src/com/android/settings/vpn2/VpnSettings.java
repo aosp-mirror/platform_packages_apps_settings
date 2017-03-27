@@ -18,6 +18,7 @@ package com.android.settings.vpn2;
 
 import android.annotation.UiThread;
 import android.annotation.WorkerThread;
+import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -215,9 +216,16 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @Override @WorkerThread
     public boolean handleMessage(Message message) {
+        //Return if activity has been recycled
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return true;
+        }
+        final Context context = activity.getApplicationContext();
+
         // Run heavy RPCs before switching to UI thread
         final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
-        final List<AppVpnInfo> vpnApps = getVpnApps(getActivity(), /* includeProfiles */ true);
+        final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true);
 
         final Map<String, LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
         final Set<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
@@ -226,7 +234,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         final String lockdownVpnKey = VpnUtils.getLockdownVpn();
 
         // Refresh list of VPNs
-        getActivity().runOnUiThread(new UpdatePreferences(this)
+        activity.runOnUiThread(new UpdatePreferences(this)
                 .legacyVpns(vpnProfiles, connectedLegacyVpns, lockdownVpnKey)
                 .appVpns(vpnApps, connectedAppVpns, alwaysOnAppVpnInfos));
 
