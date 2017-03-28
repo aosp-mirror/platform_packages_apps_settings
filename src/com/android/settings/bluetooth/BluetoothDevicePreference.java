@@ -30,13 +30,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
@@ -49,14 +50,15 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
  * BluetoothDevicePreference is the preference type used to display each remote
  * Bluetooth device in the Bluetooth Settings screen.
  */
-public final class BluetoothDevicePreference extends GearPreference implements
-        CachedBluetoothDevice.Callback {
-    private static final String TAG = "BluetoothDevicePref";
+public final class BluetoothDevicePreference extends Preference implements
+        CachedBluetoothDevice.Callback, OnClickListener {
+    private static final String TAG = "BluetoothDevicePreference";
 
     private static int sDimAlpha = Integer.MIN_VALUE;
 
     private final CachedBluetoothDevice mCachedDevice;
-    private final UserManager mUserManager;
+
+    private OnClickListener mOnSettingsClickListener;
 
     private AlertDialog mDisconnectDialog;
 
@@ -74,8 +76,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
     public final String BLUETOOTH = r.getString(R.string.bluetooth_talkback_bluetooth);
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
-        super(context, null);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        super(context);
 
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
@@ -84,6 +85,14 @@ public final class BluetoothDevicePreference extends GearPreference implements
         }
 
         mCachedDevice = cachedDevice;
+
+        if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
+            UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            if (!um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
+                setWidgetLayoutResource(R.layout.preference_bluetooth);
+            }
+        }
+
         mCachedDevice.registerCallback(this);
 
         onDeviceAttributesChanged();
@@ -93,20 +102,12 @@ public final class BluetoothDevicePreference extends GearPreference implements
         notifyChanged();
     }
 
-    @Override
-    protected boolean shouldHideSecondTarget() {
-        return mCachedDevice == null
-                || mCachedDevice.getBondState() != BluetoothDevice.BOND_BONDED
-                || mUserManager.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH);
-    }
-
-    @Override
-    protected int getSecondTargetResId() {
-        return R.layout.preference_widget_gear;
-    }
-
     CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
+    }
+
+    public void setOnSettingsClickListener(OnClickListener listener) {
+        mOnSettingsClickListener = listener;
     }
 
     @Override
@@ -117,10 +118,6 @@ public final class BluetoothDevicePreference extends GearPreference implements
             mDisconnectDialog.dismiss();
             mDisconnectDialog = null;
         }
-    }
-
-    public CachedBluetoothDevice getBluetoothDevice() {
-        return mCachedDevice;
     }
 
     public void onDeviceAttributesChanged() {
@@ -160,10 +157,11 @@ public final class BluetoothDevicePreference extends GearPreference implements
         }
 
         if (mCachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
-            ImageView deviceDetails = (ImageView) view.findViewById(R.id.settings_button);
+            ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
 
             if (deviceDetails != null) {
                 deviceDetails.setOnClickListener(this);
+                deviceDetails.setTag(mCachedDevice);
             }
         }
         final ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
@@ -171,6 +169,13 @@ public final class BluetoothDevicePreference extends GearPreference implements
             imageView.setContentDescription(contentDescription);
         }
         super.onBindViewHolder(view);
+    }
+
+    public void onClick(View v) {
+        // Should never be null by construction
+        if (mOnSettingsClickListener != null) {
+            mOnSettingsClickListener.onClick(v);
+        }
     }
 
     @Override
@@ -202,19 +207,19 @@ public final class BluetoothDevicePreference extends GearPreference implements
         int bondState = mCachedDevice.getBondState();
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
 
         if (mCachedDevice.isConnected()) {
             metricsFeatureProvider.action(getContext(),
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
             metricsFeatureProvider.action(getContext(),
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
             mCachedDevice.connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             metricsFeatureProvider.action(getContext(),
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
             pair();
         }
     }
@@ -278,10 +283,10 @@ public final class BluetoothDevicePreference extends GearPreference implements
             }
         }
         if (btClass != null) {
-            if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
+          if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
                 return new Pair<Integer, String>(R.drawable.ic_bt_headset_hfp, HEADSET);
             }
-            if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
+          if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
                 return new Pair<Integer, String>(R.drawable.ic_bt_headphones_a2dp, HEADPHONE);
             }
         }
