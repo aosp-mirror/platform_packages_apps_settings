@@ -226,8 +226,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
 
     private static final String OTA_DISABLE_AUTOMATIC_UPDATE_KEY = "ota_disable_automatic_update";
-    private static final String ENABLE_HAL_BINDERIZATION_KEY = "enable_hal_binderization";
-    private static final String ENABLE_HAL_BINDERIZATION_PROPERTY = "persist.hal.binderization";
 
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
@@ -291,7 +289,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mBluetoothSelectA2dpLdacPlaybackQuality;
 
     private SwitchPreference mOtaDisableAutomaticUpdate;
-    private SwitchPreference mEnableHalBinderization;
     private SwitchPreference mWifiAllowScansWithTraffic;
     private SwitchPreference mStrictMode;
     private SwitchPreference mPointerLocation;
@@ -531,8 +528,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mOtaDisableAutomaticUpdate = findAndInitSwitchPref(OTA_DISABLE_AUTOMATIC_UPDATE_KEY);
 
-        mEnableHalBinderization = findAndInitSwitchPref(ENABLE_HAL_BINDERIZATION_KEY);
-
         mColorModePreference = (ColorModePreference) findPreference(KEY_COLOR_MODE);
         mColorModePreference.updateCurrentAndSupported();
         if (mColorModePreference.getColorModeCount() < 2) {
@@ -762,7 +757,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateShowAllANRsOptions();
         updateVerifyAppsOverUsbOptions();
         updateOtaDisableAutomaticUpdateOptions();
-        updateEnableHalBinderizationOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
         updateLogdSizeValues();
@@ -1050,17 +1044,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getActivity().getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
                 mOtaDisableAutomaticUpdate.isChecked() ? 0 : 1);
-    }
-
-    private void updateEnableHalBinderizationOptions() {
-        updateSwitchPreference(mEnableHalBinderization,
-                SystemProperties.getBoolean(ENABLE_HAL_BINDERIZATION_PROPERTY, false));
-    }
-
-    private void writeEnableHalBinderizationOptions() {
-        SystemProperties.set(ENABLE_HAL_BINDERIZATION_PROPERTY,
-                             mEnableHalBinderization.isChecked() ? "true" : "false");
-        pokeSystemProperties();
     }
 
     private boolean enableVerifierSetting() {
@@ -2466,8 +2449,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeVerifyAppsOverUsbOptions();
         } else if (preference == mOtaDisableAutomaticUpdate) {
             writeOtaDisableAutomaticUpdateOptions();
-        } else if (preference == mEnableHalBinderization) {
-            writeEnableHalBinderizationOptions();
         } else if (preference == mStrictMode) {
             writeStrictModeVisualOptions();
         } else if (preference == mPointerLocation) {
