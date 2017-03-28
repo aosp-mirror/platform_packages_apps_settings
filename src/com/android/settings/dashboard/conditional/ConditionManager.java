@@ -21,6 +21,9 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnPause;
+import com.android.settings.core.lifecycle.events.OnResume;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
@@ -34,7 +37,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ConditionManager {
+public class ConditionManager implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "ConditionManager";
 
@@ -226,6 +229,20 @@ public class ConditionManager {
 
     public void remListener(ConditionListener listener) {
         mListeners.remove(listener);
+    }
+
+    @Override
+    public void onResume() {
+        for (int i = 0, size = mConditions.size(); i < size; i++) {
+            mConditions.get(i).onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        for (int i = 0, size = mConditions.size(); i < size; i++) {
+            mConditions.get(i).onPause();
+        }
     }
 
     private class ConditionLoader extends AsyncTask<Void, Void, ArrayList<Condition>> {

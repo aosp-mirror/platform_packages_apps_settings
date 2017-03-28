@@ -18,6 +18,7 @@ package com.android.settings.dashboard.conditional;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.util.Log;
@@ -29,8 +30,14 @@ import com.android.settingslib.WirelessUtils;
 public class AirplaneModeCondition extends Condition {
     public static String TAG = "APM_Condition";
 
+    private final Receiver mReceiver;
+
+    private static final IntentFilter AIRPLANE_MODE_FILTER =
+        new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+
     public AirplaneModeCondition(ConditionManager conditionManager) {
         super(conditionManager);
+        mReceiver = new Receiver();
     }
 
     @Override
@@ -40,8 +47,13 @@ public class AirplaneModeCondition extends Condition {
     }
 
     @Override
-    protected Class<?> getReceiverClass() {
-        return Receiver.class;
+    protected BroadcastReceiver getReceiver() {
+        return mReceiver;
+    }
+
+    @Override
+    protected IntentFilter getIntentFilter() {
+        return AIRPLANE_MODE_FILTER;
     }
 
     @Override

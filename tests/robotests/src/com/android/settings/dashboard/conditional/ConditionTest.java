@@ -15,7 +15,9 @@
  */
 package com.android.settings.dashboard.conditional;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -31,7 +33,9 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -41,6 +45,8 @@ public class ConditionTest {
     private ConditionManager mConditionManager;
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock
+    private Context mContext;
 
     private TestCondition mCondition;
 
@@ -48,6 +54,7 @@ public class ConditionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mCondition = new TestCondition(mConditionManager, mMetricsFeatureProvider);
+        when(mConditionManager.getContext()).thenReturn(mContext);
     }
 
     @Test
@@ -66,9 +73,26 @@ public class ConditionTest {
                 eq(TestCondition.TEST_METRIC_CONSTANT));
     }
 
+    @Test
+    public void onSilenceChanged_silenced_shouldRegisterReceiver() {
+        mCondition.onSilenceChanged(true);
+
+        verify(mContext).registerReceiver(
+            TestCondition.mReceiver, TestCondition.TESTS_INTENT_FILTER);
+    }
+
+    @Test
+    public void onSilenceChanged_notSilenced_shouldUnregisterReceiver() {
+        mCondition.onSilenceChanged(false);
+
+        verify(mContext).unregisterReceiver(TestCondition.mReceiver);
+    }
+
     private static final class TestCondition extends Condition {
 
         private static final int TEST_METRIC_CONSTANT = 1234;
+        private static final IntentFilter TESTS_INTENT_FILTER = new IntentFilter("TestIntent");
+        private static final BroadcastReceiver mReceiver = mock(BroadcastReceiver.class);
 
         TestCondition(ConditionManager manager,
                 MetricsFeatureProvider metricsFeatureProvider) {
@@ -114,5 +138,16 @@ public class ConditionTest {
         public void onActionClick(int index) {
 
         }
+
+        @Override
+        public BroadcastReceiver getReceiver() {
+            return mReceiver;
+        }
+
+        @Override
+        public IntentFilter getIntentFilter() {
+            return TESTS_INTENT_FILTER;
+        }
+
     }
 }
