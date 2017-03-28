@@ -17,10 +17,8 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.os.UserManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -34,10 +32,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -71,7 +66,7 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider).action(
-                mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
+            mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
     }
 
     @Test
@@ -82,7 +77,7 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider).action(
-                mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
+            mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
     }
 
     @Test
@@ -94,46 +89,6 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider).action(
-                mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
-    }
-
-    @Test
-    public void getSecondTargetResource_shouldBeGearIconLayout() {
-        assertThat(mPreference.getSecondTargetResId()).isEqualTo(R.layout.preference_widget_gear);
-    }
-
-    @Test
-    public void shouldHideSecondTarget_noDevice_shouldReturnTrue() {
-        ReflectionHelpers.setField(mPreference, "mCachedDevice", null);
-
-        assertThat(mPreference.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    public void shouldHideSecondTarget_notBond_shouldReturnTrue() {
-        when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
-
-        assertThat(mPreference.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    public void shouldHideSecondTarget_hasUserRestriction_shouldReturnTrue() {
-        final UserManager um = mock(UserManager.class);
-        ReflectionHelpers.setField(mPreference, "mUserManager", um);
-        when(um.hasUserRestriction(UserManager.DISALLOW_CONFIG_BLUETOOTH))
-                .thenReturn(true);
-
-        assertThat(mPreference.shouldHideSecondTarget()).isTrue();
-    }
-
-    @Test
-    public void shouldHideSecondTarget_hasBoundDeviceAndNoRestriction_shouldReturnFalse() {
-        when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
-        final UserManager um = mock(UserManager.class);
-        ReflectionHelpers.setField(mPreference, "mUserManager", um);
-        when(um.hasUserRestriction(UserManager.DISALLOW_CONFIG_BLUETOOTH))
-                .thenReturn(false);
-
-        assertThat(mPreference.shouldHideSecondTarget()).isFalse();
+            mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
     }
 }
