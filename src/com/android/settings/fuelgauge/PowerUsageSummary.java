@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -26,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
+import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
@@ -39,7 +39,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -60,6 +59,7 @@ import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.FooterPreferenceMixin;
 import com.android.settingslib.BatteryInfo;
 
 import java.util.ArrayList;
@@ -87,8 +87,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final int SECONDS_IN_HOUR = 60 * 60;
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
-    private static final String KEY_SCREEN_CONSUMPTION = "screen_consumption";
-    private static final String KEY_CELLULAR_NETWORK = "cellular_network";
+    private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
 
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
@@ -100,14 +99,15 @@ public class PowerUsageSummary extends PowerUsageBase {
     static final int MENU_TOGGLE_APPS = Menu.FIRST + 5;
     private static final int MENU_HELP = Menu.FIRST + 6;
 
+    private final FooterPreferenceMixin mFooterPreferenceMixin =
+            new FooterPreferenceMixin(this, getLifecycle());
+
     @VisibleForTesting
     boolean mShowAllApps = false;
     @VisibleForTesting
-    Preference mScreenUsagePref;
+    PowerGaugePreference mScreenUsagePref;
     @VisibleForTesting
-    Preference mScreenConsumptionPref;
-    @VisibleForTesting
-    Preference mCellularNetworkPref;
+    PowerGaugePreference mLastFullChargePref;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerFeatureProvider;
 
@@ -122,9 +122,10 @@ public class PowerUsageSummary extends PowerUsageBase {
 
         mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
-        mScreenUsagePref = findPreference(KEY_SCREEN_USAGE);
-        mScreenConsumptionPref = findPreference(KEY_SCREEN_CONSUMPTION);
-        mCellularNetworkPref = findPreference(KEY_CELLULAR_NETWORK);
+        mScreenUsagePref = (PowerGaugePreference) findPreference(KEY_SCREEN_USAGE);
+        mLastFullChargePref = (PowerGaugePreference) findPreference(
+                KEY_TIME_SINCE_LAST_FULL_CHARGE);
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
 
         initFeatureProvider();
     }
@@ -417,8 +418,11 @@ public class PowerUsageSummary extends PowerUsageBase {
         final int dischargeAmount = USE_FAKE_DATA ? 5000
                 : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
 
-        updateScreenPreference(dischargeAmount);
-        updateCellularPreference(dischargeAmount);
+        final long runningTime = calculateRunningTimeBasedOnStatsType();
+        updateScreenPreference();
+        updateLastFullChargePreference(runningTime);
+        mAppListGroup.setTitle(getString(R.string.power_usage_list_summary,
+                Utils.formatElapsedTime(context, runningTime, false)));
 
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
@@ -527,28 +531,27 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
-    void updateScreenPreference(final int dischargeAmount) {
+    void updateScreenPreference() {
         final BatterySipper sipper = findBatterySipperByType(
                 mStatsHelper.getUsageList(), DrainType.SCREEN);
         final Context context = getContext();
-        final double totalPowerMah = sipper != null ? sipper.totalPowerMah : 0;
         final long usageTimeMs = sipper != null ? sipper.usageTimeMs : 0;
-        final double percentOfTotal = calculatePercentage(totalPowerMah, dischargeAmount);
 
-        mScreenUsagePref.setSummary(getString(R.string.battery_used_for,
-                Utils.formatElapsedTime(context, usageTimeMs, false)));
-        mScreenConsumptionPref.setSummary(getString(R.string.battery_overall_usage,
-                Utils.formatPercentage(percentOfTotal, true)));
+        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(context, usageTimeMs, false));
     }
 
     @VisibleForTesting
-    void updateCellularPreference(final int dischargeAmount) {
-        final BatterySipper sipper = findBatterySipperByType(
-                mStatsHelper.getUsageList(), DrainType.CELL);
-        final double totalPowerMah = sipper != null ? sipper.totalPowerMah : 0;
-        final double percentOfTotal = calculatePercentage(totalPowerMah, dischargeAmount);
-        mCellularNetworkPref.setSummary(getString(R.string.battery_overall_usage,
-                Utils.formatPercentage(percentOfTotal, true)));
+    void updateLastFullChargePreference(long timeMs) {
+        mLastFullChargePref.setSubtitle(getString(R.string.power_last_full_charge_summary,
+                Utils.formatElapsedTime(getContext(), timeMs, false)));
+    }
+
+    @VisibleForTesting
+    long calculateRunningTimeBasedOnStatsType() {
+        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+        // Return the battery time (millisecond) on status mStatsType
+        return mStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs,
+                mStatsType /* STATS_SINCE_CHARGED */) / 1000;
     }
 
     @VisibleForTesting
@@ -559,22 +562,15 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
         final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
-        final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.time);
+        final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent);
         final TextView summary1 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
-        final TextView summary2 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary2);
-        final int visible = info.remainingTimeUs != 0 ? View.VISIBLE : View.INVISIBLE;
-        final int summaryResId = info.mDischarging ?
-                R.string.estimated_time_left : R.string.estimated_charging_time_left;
-
-        if (info.remainingTimeUs != 0) {
-            timeText.setText(Utils.formatElapsedTime(context, info.remainingTimeUs / 1000, false));
+        timeText.setText(Utils.formatPercentage(info.mBatteryLevel));
+        if (info.remainingLabel == null ) {
+            summary1.setText(info.statusLabel);
         } else {
-            timeText.setText(info.statusLabel);
+            summary1.setText(info.remainingLabel);
         }
 
-        summary1.setText(summaryResId);
-        summary1.setVisibility(visible);
-        summary2.setVisibility(visible);
         batteryView.setBatteryInfo(info.mBatteryLevel);
     }
 
