@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
+import android.icu.text.Collator;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -49,6 +50,19 @@ import java.util.List;
 public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         implements Indexable, WifiDialog.WifiDialogListener {
     private static final String TAG = "SavedAccessPointsWifiSettings";
+    private static final Comparator<AccessPoint> SAVED_NETWORK_COMPARATOR =
+            new Comparator<AccessPoint>() {
+        final Collator mCollator = Collator.getInstance();
+        @Override
+        public int compare(AccessPoint ap1, AccessPoint ap2) {
+            return mCollator.compare(
+                    nullToEmpty(ap1.getConfigName()), nullToEmpty(ap2.getConfigName()));
+        }
+
+        private String nullToEmpty(String string) {
+            return (string == null) ? "" : string;
+        }
+    };
 
     private WifiDialog mDialog;
     private WifiManager mWifiManager;
@@ -98,15 +112,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context, true,
                 false, true);
-        Collections.sort(accessPoints, new Comparator<AccessPoint>() {
-            public int compare(AccessPoint ap1, AccessPoint ap2) {
-                if (ap1.getConfigName() != null) {
-                    return ap1.getConfigName().compareToIgnoreCase(ap2.getConfigName());
-                } else {
-                    return -1;
-                }
-            }
-        });
+        Collections.sort(accessPoints, SAVED_NETWORK_COMPARATOR);
         preferenceScreen.removeAll();
 
         final int accessPointsSize = accessPoints.size();
