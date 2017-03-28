@@ -146,6 +146,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
 
     private static final String KEY_HEADER = "header_view";
+    private static final String KEY_INSTANT_APP_BUTTONS = "instant_app_buttons";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
     private static final String KEY_NOTIFICATION = "notification_settings";
     private static final String KEY_STORAGE = "storage_settings";
@@ -222,13 +223,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (isBundled) {
             enabled = handleDisableable(mUninstallButton);
         } else {
-            if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
-                    && mUserManager.getUsers().size() >= 2) {
-                // When we have multiple users, there is a separate menu
-                // to uninstall for all users.
-                enabled = false;
-            }
-            mUninstallButton.setText(R.string.uninstall_text);
+            enabled = initUnintsallButtonForUserApp();
         }
         // If this is a device admin, it can't be uninstalled or disabled.
         // We do this here so the text of the button is still set correctly.
@@ -296,6 +291,22 @@ public class InstalledAppDetails extends AppInfoBase
             // Register listener
             mUninstallButton.setOnClickListener(this);
         }
+    }
+
+    @VisibleForTesting
+    boolean initUnintsallButtonForUserApp() {
+        boolean enabled = true;
+        if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
+                && mUserManager.getUsers().size() >= 2) {
+            // When we have multiple users, there is a separate menu
+            // to uninstall for all users.
+            enabled = false;
+        } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
+            enabled = false;
+            mUninstallButton.setVisibility(View.GONE);
+        }
+        mUninstallButton.setText(R.string.uninstall_text);
+        return enabled;
     }
 
     /** Returns if the supplied package is device owner or profile owner of at least one user */
@@ -455,12 +466,6 @@ public class InstalledAppDetails extends AppInfoBase
         mForceStopButton.setEnabled(false);
     }
 
-    private Intent resolveIntent(Intent i) {
-        ResolveInfo result = getContext().getPackageManager().resolveActivity(i, 0);
-        return result != null ? new Intent(i.getAction())
-                .setClassName(result.activityInfo.packageName, result.activityInfo.name) : null;
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(0, UNINSTALL_UPDATES, 0, R.string.app_factory_reset)
@@ -569,6 +574,8 @@ public class InstalledAppDetails extends AppInfoBase
             showIt = false;
         } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2
                 && (appEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
+            showIt = false;
+        } else if (AppUtils.isInstant(appEntry.info)) {
             showIt = false;
         }
         return showIt;
@@ -800,11 +807,15 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
-    private void checkForceStop() {
+    @VisibleForTesting
+    void checkForceStop() {
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             // User can't force stop device admin.
             Log.w(LOG_TAG, "User can't force stop device admin");
             updateForceStopButton(false);
+        } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
+            updateForceStopButton(false);
+            mForceStopButton.setVisibility(View.GONE);
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
@@ -1064,6 +1075,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         addAppInstallerInfoPref(screen);
+        maybeAddInstantAppButtons();
     }
 
     private boolean isPotentialAppSource() {
@@ -1074,16 +1086,9 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
-        String installerPackageName = null;
-        try {
-            installerPackageName =
-                    getContext().getPackageManager().getInstallerPackageName(mPackageName);
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Exception while retrieving the package installer of " + mPackageName, e);
-        }
-        if (installerPackageName == null) {
-            return;
-        }
+        String installerPackageName =
+                AppStoreUtil.getInstallerPackageName(getContext(), mPackageName);
+
         final CharSequence installerLabel = Utils.getApplicationLabel(getContext(),
                 installerPackageName);
         if (installerLabel == null) {
@@ -1096,16 +1101,29 @@ public class InstalledAppDetails extends AppInfoBase
         pref.setTitle(R.string.app_install_details_title);
         pref.setKey("app_info_store");
         pref.setSummary(getString(R.string.app_install_details_summary, installerLabel));
-        final Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
-                .setPackage(installerPackageName);
-        final Intent result = resolveIntent(intent);
-        if (result != null) {
-            result.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
-            pref.setIntent(result);
+
+        Intent intent =
+                AppStoreUtil.getAppStoreLink(getContext(), installerPackageName, mPackageName);
+        if (intent != null) {
+            pref.setIntent(intent);
         } else {
             pref.setEnabled(false);
         }
         category.addPreference(pref);
+    }
+
+    @VisibleForTesting
+    void maybeAddInstantAppButtons() {
+        if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
+            LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
+            final Activity activity = getActivity();
+            FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newInstantAppButtonsController(this,
+                            buttons.findViewById(R.id.instant_app_button_container))
+                    .setPackageName(mPackageName)
+                    .show();
+        }
     }
 
     private boolean hasPermission(String permission) {

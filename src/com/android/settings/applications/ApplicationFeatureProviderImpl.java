@@ -29,6 +29,7 @@ import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
 
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 
 import java.util.List;
@@ -54,6 +55,12 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     @Override
     public AppHeaderController newAppHeaderController(Fragment fragment, View appHeader) {
         return new AppHeaderController(mContext, fragment, appHeader);
+    }
+
+    @Override
+    public InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
+            View view) {
+        return new InstantAppButtonsController(mContext, fragment, view);
     }
 
     @Override

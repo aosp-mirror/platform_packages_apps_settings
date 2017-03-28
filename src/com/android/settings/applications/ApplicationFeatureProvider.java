@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
@@ -28,6 +30,14 @@ public interface ApplicationFeatureProvider {
      * Returns a new {@link AppHeaderController} instance to customize app header.
      */
     AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
+
+    /**
+     *
+     *  Returns a new {@link InstantAppButtonsController} instance for showing buttons
+     *  only relevant to instant apps.
+     */
+    InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
+            View view);
 
     /**
      * Calculates the total number of apps installed on the device via policy across all users
