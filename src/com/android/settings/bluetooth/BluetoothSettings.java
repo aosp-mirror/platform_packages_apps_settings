@@ -45,14 +45,13 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.FooterPreference;
-import com.android.settings.widget.GearPreference;
-import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
@@ -477,25 +476,24 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
     }
 
-    private final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
-        // User clicked on advanced options icon for a device in the list
-        if (!(pref instanceof BluetoothDevicePreference)) {
-            Log.w(TAG, "onClick() called for other View: " + pref);
-            return;
+    private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // User clicked on advanced options icon for a device in the list
+            if (!(v.getTag() instanceof CachedBluetoothDevice)) {
+                Log.w(TAG, "onClick() called for other View: " + v);
+                return;
+            }
+
+            final CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
+            Bundle args = new Bundle();
+            args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
+                    device.getDevice().getAddress());
+            DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
+            profileSettings.setArguments(args);
+            profileSettings.show(getFragmentManager(),
+                    DeviceProfilesSettings.class.getSimpleName());
         }
-        final CachedBluetoothDevice device =
-                ((BluetoothDevicePreference) pref).getBluetoothDevice();
-        if (device == null) {
-            Log.w(TAG, "No BT device attached with this pref: " + pref);
-            return;
-        }
-        final Bundle args = new Bundle();
-        args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
-                device.getDevice().getAddress());
-        final DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
-        profileSettings.setArguments(args);
-        profileSettings.show(getFragmentManager(),
-                DeviceProfilesSettings.class.getSimpleName());
     };
 
     /**
@@ -508,7 +506,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         CachedBluetoothDevice cachedDevice = preference.getCachedDevice();
         if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
             // Only paired device have an associated advanced settings screen
-            preference.setOnGearClickListener(mDeviceProfilesListener);
+            preference.setOnSettingsClickListener(mDeviceProfilesListener);
         }
     }
 
