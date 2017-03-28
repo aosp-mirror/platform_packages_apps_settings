@@ -19,6 +19,7 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -69,17 +70,9 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     }
 
     private void forgetNetwork() {
-        WifiInfo info = mWifiDetailPreferenceController.getWifiInfo();
         mMetricsFeatureProvider.action(getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
-        if (!info.isEphemeral()) {
-                // Network is active but has no network ID - must be ephemeral.
-                mWifiManager.disableEphemeralNetwork(
-                        AccessPoint.convertToQuotedString(info.getSSID()));
-        } else if (mAccessPoint.getConfig().isPasspoint()) {
-            mWifiManager.removePasspointConfiguration(mAccessPoint.getConfig().FQDN);
-        } else {
-            mWifiManager.forget(info.getNetworkId(), null /* action listener */);
-        }
+        mWifiDetailPreferenceController.forgetNetwork();
+        mForgetButton.setEnabled(false);
     }
 
     @Override
