@@ -115,6 +115,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
 
+    private final Runnable mUpdateAccessPointsRunnable = () -> {
+        updateAccessPointPreferences();
+    };
+    private final Runnable mHideProgressBarRunnable = () -> {
+        setProgressBarVisible(false);
+    };
+
     protected WifiManager mWifiManager;
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
@@ -360,8 +367,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onStop() {
-        super.onStop();
         mWifiTracker.stopTracking();
+        getView().removeCallbacks(mUpdateAccessPointsRunnable);
+        getView().removeCallbacks(mHideProgressBarRunnable);
+        super.onStop();
     }
 
     @Override
@@ -625,9 +634,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             case WifiManager.WIFI_STATE_ENABLED:
                 setProgressBarVisible(true);
                 // Have the progress bar displayed before starting to modify APs
-                getView().postDelayed(() -> {
-                        updateAccessPointPreferences();
-                    }, 300 /* delay milliseconds */);
+                getView().postDelayed(mUpdateAccessPointsRunnable, 300 /* delay milliseconds */);
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
@@ -705,9 +712,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             mAccessPointsPreferenceCategory.addPreference(pref);
         } else {
             // Continuing showing progress bar for an additional delay to overlap with animation
-            getView().postDelayed(() -> {
-                    setProgressBarVisible(false);
-                }, 1700 /* delay millis */);
+            getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
         }
     }
 
