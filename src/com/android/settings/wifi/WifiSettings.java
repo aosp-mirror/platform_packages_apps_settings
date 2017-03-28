@@ -513,13 +513,18 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (mSelectedAccessPoint == null) {
                 return false;
             }
-            /** Bypass dialog for unsecured, unsaved, and inactive networks */
-            if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE &&
-                    !mSelectedAccessPoint.isSaved() && !mSelectedAccessPoint.isActive()) {
+            if (mSelectedAccessPoint.isActive()) {
+                return super.onPreferenceTreeClick(preference);
+            }
+            /** Bypass dialog and connect to unsecured or previously connected saved networks. */
+            WifiConfiguration config = mSelectedAccessPoint.getConfig();
+            if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
-                connect(mSelectedAccessPoint.getConfig(), false /* isSavedNetwork */);
-            } else if (mSelectedAccessPoint.isSaved()) {
-                showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_VIEW);
+                connect(mSelectedAccessPoint.getConfig(), mSelectedAccessPoint.isSaved());
+            } else if (mSelectedAccessPoint.isSaved() && config != null
+                    && config.getNetworkSelectionStatus() != null
+                    && config.getNetworkSelectionStatus().getHasEverConnected()) {
+                connect(config, true /* isSavedNetwork */);
             } else {
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
             }
