@@ -27,44 +27,35 @@
     android:background="@drawable/selectable_card_grey"
     style="@style/EntityHeader">
 
-    <com.android.settings.fuelgauge.BatteryMeterView
-        android:id="@+id/battery_header_icon"
-        android:layout_width="@dimen/battery_meter_width"
-        android:layout_height="@dimen/battery_meter_height"/>
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="48dp"
         android:layout_marginEnd="12dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/battery_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"/>
 
         <TextView
             android:id="@+id/summary1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:gravity="center"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             android:text="@string/estimated_time_left"/>
 
-        <TextView
-            android:id="@+id/summary2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:textAppearance="@android:style/TextAppearance.Material.Small"
-            android:text="@string/estimated_time_description"/>
-
     </LinearLayout>
+
+    <com.android.settings.fuelgauge.BatteryMeterView
+        android:id="@+id/battery_header_icon"
+        android:layout_width="@dimen/battery_meter_width"
+        android:layout_height="@dimen/battery_meter_height"
+        android:layout_gravity="end"
+        android:layout_marginEnd="24dp"/>
 
 </LinearLayout>
