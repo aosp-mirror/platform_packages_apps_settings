@@ -13,6 +13,7 @@ package com.android.settings.dashboard.conditional;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
@@ -23,8 +24,14 @@ import com.android.settings.Settings;
 
 public class CellularDataCondition extends Condition {
 
+    private final Receiver mReceiver;
+
+    private static final IntentFilter DATA_CONNECTION_FILTER =
+        new IntentFilter(TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
+
     public CellularDataCondition(ConditionManager manager) {
         super(manager);
+        mReceiver = new Receiver();
     }
 
     @Override
@@ -41,8 +48,13 @@ public class CellularDataCondition extends Condition {
     }
 
     @Override
-    protected Class<?> getReceiverClass() {
-        return Receiver.class;
+    protected BroadcastReceiver getReceiver() {
+        return mReceiver;
+    }
+
+    @Override
+    protected IntentFilter getIntentFilter() {
+        return DATA_CONNECTION_FILTER;
     }
 
     @Override

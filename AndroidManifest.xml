@@ -3033,39 +3033,6 @@
             android:exported="true"
             android:permission="android.permission.DUMP" />
 
-        <!-- Conditional receivers, only enabled during silenced state, default off-->
-        <receiver
-            android:name=".dashboard.conditional.HotspotCondition$Receiver"
-            android:enabled="false">
-            <intent-filter>
-                 <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
-            </intent-filter>
-       </receiver>
-
-        <receiver
-            android:name=".dashboard.conditional.AirplaneModeCondition$Receiver"
-            android:enabled="false">
-            <intent-filter>
-                 <action android:name="android.intent.action.AIRPLANE_MODE" />
-            </intent-filter>
-       </receiver>
-
-        <receiver
-            android:name=".dashboard.conditional.DndCondition$Receiver"
-            android:enabled="false">
-            <intent-filter>
-                 <action android:name="android.app.action.INTERRUPTION_FILTER_CHANGED_INTERNAL" />
-            </intent-filter>
-       </receiver>
-
-        <receiver
-            android:name=".dashboard.conditional.CellularDataCondition$Receiver"
-            android:enabled="false">
-            <intent-filter>
-                 <action android:name="android.intent.action.ANY_DATA_STATE" />
-            </intent-filter>
-       </receiver>
-
         <!-- Quick Settings tiles for Developer Options -->
         <service
             android:name=".qstile.DevelopmentTiles$ShowLayout"
