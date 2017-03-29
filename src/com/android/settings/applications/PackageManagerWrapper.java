@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageDeleteObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
@@ -104,4 +105,10 @@ public interface PackageManagerWrapper {
      * Calls {@code PackageManager.getPrimaryStorageCurrentVolume}
      */
     VolumeInfo getPrimaryStorageCurrentVolume();
+
+    /**
+     * Calls {@code PackageManager.deletePackageAsUser}
+     */
+    void deletePackageAsUser(String packageName, IPackageDeleteObserver observer, int flags,
+            int userId);
 }

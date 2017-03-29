@@ -85,6 +85,7 @@ import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceC
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -189,6 +190,8 @@ public class InstalledAppDetails extends AppInfoBase
 
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
+
+    private InstantAppButtonsController mInstantAppButtonsController;
 
     private AppStorageStats mLastResult;
 
@@ -771,6 +774,9 @@ public class InstalledAppDetails extends AppInfoBase
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
         }
+        if (mInstantAppButtonsController != null) {
+            return mInstantAppButtonsController.createDialog(id);
+        }
         return null;
     }
 
@@ -1120,10 +1126,11 @@ public class InstalledAppDetails extends AppInfoBase
         if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
             final Activity activity = getActivity();
-            FeatureFactory.getFactory(activity)
+            mInstantAppButtonsController = FeatureFactory.getFactory(activity)
                     .getApplicationFeatureProvider(activity)
                     .newInstantAppButtonsController(this,
-                            buttons.findViewById(R.id.instant_app_button_container))
+                            buttons.findViewById(R.id.instant_app_button_container),
+                            id -> showDialogInner(id, 0))
                     .setPackageName(mPackageName)
                     .show();
         }
