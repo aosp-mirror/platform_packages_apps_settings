@@ -16,11 +16,19 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
@@ -36,6 +44,8 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -50,7 +60,8 @@ import java.util.List;
  *
  * This fragment will replace {@link PowerUsageDetail}
  */
-public class AdvancedPowerUsageDetail extends PowerUsageBase {
+public class AdvancedPowerUsageDetail extends PowerUsageBase implements
+        ButtonActionDialogFragment.AppButtonsDialogListener {
 
     public static final String TAG = "AdvancedPowerUsageDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -67,6 +78,9 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase {
     private static final String KEY_PREF_POWER_USAGE = "app_power_usage";
     private static final String KEY_PREF_HEADER = "header_view";
 
+    private static final int REQUEST_UNINSTALL = 0;
+    private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
+
     @VisibleForTesting
     LayoutPreference mHeaderPreference;
     @VisibleForTesting
@@ -77,6 +91,11 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase {
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
     private Preference mPowerUsagePreference;
+    private AppButtonsPreferenceController mAppButtonsPreferenceController;
+
+    private DevicePolicyManagerWrapper mDpm;
+    private UserManager mUserManager;
+    private PackageManager mPackageManager;
 
     public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
             BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent) {
@@ -113,6 +132,17 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        mState = ApplicationsState.getInstance(getActivity().getApplication());
+        mDpm = new DevicePolicyManagerWrapperImpl(
+                (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
+        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
+        mPackageManager = activity.getPackageManager();
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
@@ -120,7 +150,6 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase {
         mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
         mPowerUsagePreference = findPreference(KEY_PREF_POWER_USAGE);
         mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
-        mState = ApplicationsState.getInstance(getActivity().getApplication());
 
         final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         if (packageName != null) {
@@ -160,7 +189,13 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase {
 
         if (mAppEntry == null) {
             controller.setLabel(bundle.getString(EXTRA_LABEL));
-            controller.setIcon(getContext().getDrawable(bundle.getInt(EXTRA_ICON_ID)));
+
+            final int iconId = bundle.getInt(EXTRA_ICON_ID, 0);
+            if (iconId == 0) {
+                controller.setIcon(context.getPackageManager().getDefaultActivityIcon());
+            } else {
+                controller.setIcon(context.getDrawable(bundle.getInt(EXTRA_ICON_ID)));
+            }
         } else {
             mState.ensureIcon(mAppEntry);
             controller.setLabel(mAppEntry);
@@ -196,9 +231,26 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase {
         controllers.add(new BackgroundActivityPreferenceController(context, uid));
         controllers.add(new BatteryOptimizationPreferenceController(
                 (SettingsActivity) getActivity(), this));
-        controllers.add(
-                new AppButtonsPreferenceController(getActivity(), getLifecycle(), packageName));
+        mAppButtonsPreferenceController = new AppButtonsPreferenceController(
+                (SettingsActivity) getActivity(), this, getLifecycle(), packageName, mState, mDpm,
+                mUserManager, mPackageManager, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+        controllers.add(mAppButtonsPreferenceController);
 
         return controllers;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mAppButtonsPreferenceController != null) {
+            mAppButtonsPreferenceController.handleActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void handleDialogClick(int id) {
+        if (mAppButtonsPreferenceController != null) {
+            mAppButtonsPreferenceController.handleDialogClick(id);
+        }
     }
 }
