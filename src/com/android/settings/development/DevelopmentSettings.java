@@ -2055,6 +2055,20 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC;
             codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
             break;
+        case 6:
+        synchronized (mBluetoothA2dpLock) {
+            if (mBluetoothA2dp != null) {
+                mBluetoothA2dp.enableOptionalCodecs();
+            }
+        }
+        return;
+        case 7:
+        synchronized (mBluetoothA2dpLock) {
+            if (mBluetoothA2dp != null) {
+                mBluetoothA2dp.disableOptionalCodecs();
+            }
+        }
+        return;
         default:
             break;
         }
