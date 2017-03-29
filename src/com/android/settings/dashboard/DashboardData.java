@@ -218,7 +218,13 @@ public class DashboardData {
      */
     private void countSuggestion(Tile tile, boolean add) {
         if (add) {
-            mItems.add(new Item(tile, R.layout.suggestion_tile, Objects.hash(tile.title), false));
+            mItems.add(new Item(
+                    tile,
+                    tile.remoteViews != null
+                            ? R.layout.suggestion_tile_card
+                            : R.layout.suggestion_tile,
+                    Objects.hash(tile.title),
+                    false));
         }
         mId++;
     }
