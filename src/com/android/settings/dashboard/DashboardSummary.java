@@ -92,6 +92,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
         mConditionManager = ConditionManager.get(activity, false);
+        getLifecycle().addObserver(mConditionManager);
         mSuggestionParser = new SuggestionParser(activity,
                 activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
