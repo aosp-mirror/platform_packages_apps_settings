@@ -129,4 +129,25 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#getOwnerInstalledCaCerts
      */
     List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user);
+
+    /**
+     * Calls {@code DevicePolicyManager.isDeviceOwnerAppOnAnyUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isDeviceOwnerAppOnAnyUser
+     */
+    boolean isDeviceOwnerAppOnAnyUser(String packageName);
+
+    /**
+     * Calls {@code DevicePolicyManager.packageHasActiveAdmins()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#packageHasActiveAdmins
+     */
+    boolean packageHasActiveAdmins(String packageName);
+
+    /**
+     * Calls {@code DevicePolicyManager.isUninstallInQueue()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isUninstallInQueue
+     */
+    boolean isUninstallInQueue(String packageName);
 }

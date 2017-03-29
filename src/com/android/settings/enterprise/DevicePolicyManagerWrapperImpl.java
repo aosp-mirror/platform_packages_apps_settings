@@ -101,4 +101,19 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     public List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user) {
         return mDpm.getOwnerInstalledCaCerts(user);
     }
+
+    @Override
+    public boolean isDeviceOwnerAppOnAnyUser(String packageName) {
+        return mDpm.isDeviceOwnerAppOnAnyUser(packageName);
+    }
+
+    @Override
+    public boolean packageHasActiveAdmins(String packageName) {
+        return mDpm.packageHasActiveAdmins(packageName);
+    }
+
+    @Override
+    public boolean isUninstallInQueue(String packageName) {
+        return mDpm.isUninstallInQueue(packageName);
+    }
 }
