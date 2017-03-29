@@ -65,6 +65,8 @@ public class StorageItemPreferenceController extends PreferenceController {
     @VisibleForTesting
     static final String GAME_KEY = "pref_games";
     @VisibleForTesting
+    static final String MOVIES_KEY = "pref_movies";
+    @VisibleForTesting
     static final String OTHER_APPS_KEY = "pref_other_apps";
     @VisibleForTesting
     static final String SYSTEM_KEY = "pref_system";
@@ -82,6 +84,7 @@ public class StorageItemPreferenceController extends PreferenceController {
     private StorageItemPreference mPhotoPreference;
     private StorageItemPreference mAudioPreference;
     private StorageItemPreference mGamePreference;
+    private StorageItemPreference mMoviesPreference;
     private StorageItemPreference mAppPreference;
     private StorageItemPreference mFilePreference;
     private StorageItemPreference mSystemPreference;
@@ -122,6 +125,9 @@ public class StorageItemPreferenceController extends PreferenceController {
                 break;
             case GAME_KEY:
                 intent = getGamesIntent();
+                break;
+            case MOVIES_KEY:
+                intent = getMoviesIntent();
                 break;
             case OTHER_APPS_KEY:
                 // Because we are likely constructed with a null volume, this is theoretically
@@ -204,6 +210,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         mPhotoPreference = (StorageItemPreference) screen.findPreference(PHOTO_KEY);
         mAudioPreference = (StorageItemPreference) screen.findPreference(AUDIO_KEY);
         mGamePreference = (StorageItemPreference) screen.findPreference(GAME_KEY);
+        mMoviesPreference = (StorageItemPreference) screen.findPreference(MOVIES_KEY);
         mAppPreference = (StorageItemPreference) screen.findPreference(OTHER_APPS_KEY);
         mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
         mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
@@ -217,6 +224,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         mAudioPreference.setStorageSize(
                 data.musicAppsSize + data.externalStats.audioBytes, mTotalSize);
         mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
+        mMoviesPreference.setStorageSize(data.videoAppsSize, mTotalSize);
         mAppPreference.setStorageSize(data.otherAppsSize, mTotalSize);
         if (mSystemPreference != null) {
             mSystemPreference.setStorageSize(mSystemSize + data.systemSize, mTotalSize);
@@ -243,6 +251,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         list.add(PHOTO_KEY);
         list.add(AUDIO_KEY);
         list.add(GAME_KEY);
+        list.add(MOVIES_KEY);
         list.add(OTHER_APPS_KEY);
         list.add(SYSTEM_KEY);
         list.add(FILES_KEY);
@@ -281,12 +290,21 @@ public class StorageItemPreferenceController extends PreferenceController {
     }
 
     private Intent getGamesIntent() {
-            Bundle args = new Bundle(1);
-            args.putString(ManageApplications.EXTRA_CLASSNAME,
-                    Settings.GamesStorageActivity.class.getName());
-            return Utils.onBuildStartFragmentIntent(mContext,
-                    ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
-                    null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        Bundle args = new Bundle(1);
+        args.putString(ManageApplications.EXTRA_CLASSNAME,
+                Settings.GamesStorageActivity.class.getName());
+        return Utils.onBuildStartFragmentIntent(mContext,
+                ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
+                null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+    }
+
+    private Intent getMoviesIntent() {
+        Bundle args = new Bundle(1);
+        args.putString(ManageApplications.EXTRA_CLASSNAME,
+                Settings.MoviesStorageActivity.class.getName());
+        return Utils.onBuildStartFragmentIntent(mContext,
+                ManageApplications.class.getName(), args, null, R.string.storage_movies_tv,
+                null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
     private Intent getFilesIntent() {
