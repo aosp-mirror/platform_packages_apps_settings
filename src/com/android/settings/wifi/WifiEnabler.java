@@ -134,14 +134,12 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
-                mSwitchWidget.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_ENABLED:
                 setSwitchBarChecked(true);
                 mSwitchWidget.setEnabled(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
-                mSwitchWidget.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_DISABLED:
                 setSwitchBarChecked(false);
