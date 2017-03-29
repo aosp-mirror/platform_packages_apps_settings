@@ -49,6 +49,7 @@ import com.android.settingslib.AppItem;
 import com.android.settingslib.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.concurrent.BlockingQueue;
@@ -207,19 +208,12 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 removePreference(KEY_APP_LIST);
             }
         } else {
-            if (mAppItem.key == TrafficStats.UID_REMOVED) {
-                mLabel = getContext().getString(R.string.data_usage_uninstalled_apps_users);
-            } else if (mAppItem.key == TrafficStats.UID_TETHERING) {
-                mLabel = getContext().getString(R.string.tether_settings_title_all);
-            } else {
-                final int userId = UidDetailProvider.getUserIdForKey(mAppItem.key);
-                final UserManager um = UserManager.get(getActivity());
-                final UserInfo info = um.getUserInfo(userId);
-                final PackageManager pm = getPackageManager();
-                mIcon = Utils.getUserIcon(getActivity(), um, info);
-                mLabel = Utils.getUserLabel(getActivity(), info);
-                mPackageName = getActivity().getPackageName();
-            }
+            final Context context = getActivity();
+            UidDetail uidDetail = new UidDetailProvider(context).getUidDetail(mAppItem.key, true);
+            mIcon = uidDetail.icon;
+            mLabel = uidDetail.label;
+            mPackageName = context.getPackageName();
+
             removePreference(KEY_UNRESTRICTED_DATA);
             removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
