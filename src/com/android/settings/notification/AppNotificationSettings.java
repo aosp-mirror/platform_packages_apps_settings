@@ -102,6 +102,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
             @Override
             protected void onPostExecute(Void unused) {
+                if (getHost() == null) {
+                    return;
+                }
                 populateChannelList();
             }
         }.execute();
