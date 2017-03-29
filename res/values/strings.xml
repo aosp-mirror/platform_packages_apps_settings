@@ -4470,8 +4470,10 @@
     <!-- Title for the cellular network in power use UI(i.e. Mobile network scanning: 30% of battery usage) [CHAR_LIMIT=40] -->
     <string name="device_cellular_network">Mobile network scanning</string>
 
-    <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=60] -->
-    <string name="power_usage_list_summary">App usage since full charge</string>
+    <!-- Label for time since last full charge in power use UI, i.e. "7 h 20 min ago" [CHAR_LIMIT=60] -->
+    <string name="power_last_full_charge_summary"><xliff:g id="time">%1$s</xliff:g> ago</string>
+    <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=120] -->
+    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="time">%1$s</xliff:g> ago)</string>
     <!-- Description for the screen usage item [CHAR_LIMIT=120] -->
     <string name="screen_usage_summary">Amount of time screen has been on since full charge</string>
     <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
