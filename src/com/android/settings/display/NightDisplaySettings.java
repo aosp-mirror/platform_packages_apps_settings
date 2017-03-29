@@ -70,8 +70,6 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         mTemperaturePreference.setMax(convertTemperature(mController.getMinimumColorTemperature()));
-        mTemperaturePreference.setDefaultProgress(convertTemperature(
-                mController.getDefaultColorTemperature()));
         mTemperaturePreference.setContinuousUpdates(true);
     }
 
