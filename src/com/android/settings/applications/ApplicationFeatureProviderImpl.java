@@ -58,8 +58,8 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     @Override
     public InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
-            View view) {
-        return new InstantAppButtonsController(mContext, fragment, view);
+            View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate) {
+        return new InstantAppButtonsController(mContext, fragment, view, showDialogDelegate);
     }
 
     @Override

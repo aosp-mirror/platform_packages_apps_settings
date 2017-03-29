@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -48,7 +49,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -222,6 +225,20 @@ public final class InstalledAppDetailsTest {
         verify(forceStopButton).setVisibility(View.GONE);
     }
 
+    @Test
+    public void instantApps_buttonControllerHandlesDialog() {
+        InstantAppButtonsController mockController = mock(InstantAppButtonsController.class);
+        ReflectionHelpers.setField(
+                mAppDetail, "mInstantAppButtonsController", mockController);
+        // Make sure first that button controller is not called for supported dialog id
+        AlertDialog mockDialog = mock(AlertDialog.class);
+        when(mockController.createDialog(InstantAppButtonsController.DLG_CLEAR_APP))
+                .thenReturn(mockDialog);
+        assertThat(mAppDetail.createDialog(InstantAppButtonsController.DLG_CLEAR_APP, 0))
+                .isEqualTo(mockDialog);
+        verify(mockController).createDialog(InstantAppButtonsController.DLG_CLEAR_APP);
+    }
+
     // A helper class for testing the InstantAppButtonsController - it lets us look up the
     // preference associated with a key for instant app buttons and get back a mock
     // LayoutPreference (to avoid a null pointer exception).
@@ -261,8 +278,8 @@ public final class InstalledAppDetailsTest {
         FakeFeatureFactory.setupForTest(mContext);
         FakeFeatureFactory factory =
                 (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        when(factory.applicationFeatureProvider.newInstantAppButtonsController(any(),
-                any())).thenReturn(buttonsController);
+        when(factory.applicationFeatureProvider.newInstantAppButtonsController(
+                any(), any(), any())).thenReturn(buttonsController);
 
         fragment.maybeAddInstantAppButtons();
         verify(buttonsController).setPackageName(anyString());
