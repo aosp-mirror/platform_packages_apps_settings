@@ -197,9 +197,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     @Override
     public void onConfirmLockdown(Bundle options, boolean isEnabled, boolean isLockdown) {
-        if (setAlwaysOnVpnByUI(isEnabled, isLockdown)) {
-            updateUI();
-        }
+        setAlwaysOnVpnByUI(isEnabled, isLockdown);
     }
 
     private boolean setAlwaysOnVpnByUI(boolean isEnabled, boolean isLockdown) {
@@ -214,6 +212,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         final boolean success = setAlwaysOnVpn(isEnabled, isLockdown);
         if (isEnabled && (!success || !isVpnAlwaysOn())) {
             CannotConnectFragment.show(this, mVpnLabel);
+        } else {
+            updateUI();
         }
         return success;
     }
