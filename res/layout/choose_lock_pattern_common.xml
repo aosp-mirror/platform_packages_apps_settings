@@ -22,6 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
+    settings:suwFooter="@layout/choose_lock_pattern_common_footer"
     settings:suwHeaderText="@string/lockpassword_choose_your_pattern_header">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
@@ -55,35 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
                 android:layout_weight="4" />
-
-            <!-- Buttons are hidden during setup, and use the buttons in setup navigation bar instead -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:orientation="horizontal">
-
-                <!-- left : cancel, or re-try -->
-                <Button android:id="@+id/footerLeftButton"
-                    style="@style/SetupWizardButton.Negative"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lockpattern_tutorial_cancel_label" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <!-- right : confirm or ok -->
-                <Button android:id="@+id/footerRightButton"
-                    style="@style/SetupWizardButton.Positive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lockpattern_tutorial_continue_label" />
-
-            </LinearLayout>
 
         </LinearLayout>
 
