@@ -54,6 +54,7 @@ public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
     private static final int RSSI = -55;
+    private static final int LINK_SPEED = 123;
     private static final String SECURITY = "None";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -67,6 +68,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Mock private Preference mockConnectionDetailPref;
     @Mock private WifiDetailPreference mockSignalStrengthPref;
+    @Mock private WifiDetailPreference mockLinkSpeedPref;
     @Mock private WifiDetailPreference mockFrequencyPref;
     @Mock private WifiDetailPreference mockSecurityPref;
     @Mock private WifiDetailPreference mockIpAddressPref;
@@ -97,6 +99,7 @@ public class WifiDetailPreferenceControllerTest {
         setupMockedPreferenceScreen();
 
         when(mockWifiInfo.getRssi()).thenReturn(RSSI);
+        when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
         when(mockWifiManager.getConnectionInfo()).thenReturn(mockWifiInfo);
     }
 
@@ -106,6 +109,8 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockConnectionDetailPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
                 .thenReturn(mockSignalStrengthPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_LINK_SPEED))
+                .thenReturn(mockLinkSpeedPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_FREQUENCY_PREF))
                 .thenReturn(mockFrequencyPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SECURITY_PREF))
@@ -176,6 +181,15 @@ public class WifiDetailPreferenceControllerTest {
         mController.onResume();
 
         verify(mockSignalStrengthPref).setDetailText(expectedStrength);
+    }
+
+    @Test
+    public void linkSpeedPref_shouldHaveDetailTextSet() {
+        String expectedLinkSpeed = mContext.getString(R.string.link_speed, LINK_SPEED);
+
+        mController.onResume();
+
+        verify(mockLinkSpeedPref).setDetailText(expectedLinkSpeed);
     }
 
     @Test
