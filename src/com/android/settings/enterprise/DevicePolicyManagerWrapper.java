@@ -52,13 +52,6 @@ public interface DevicePolicyManagerWrapper {
     ComponentName getDeviceOwnerComponentOnAnyUser();
 
     /**
-     * Calls {@code DevicePolicyManager.getDeviceOwnerUserId()}.
-     *
-     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerUserId
-     */
-    int getDeviceOwnerUserId();
-
-    /**
      * Calls {@code DevicePolicyManager.getProfileOwnerAsUser()}.
      *
      * @see android.app.admin.DevicePolicyManager#getProfileOwnerAsUser

@@ -40,8 +40,8 @@ public interface ApplicationFeatureProvider {
             View view);
 
     /**
-     * Calculates the total number of apps installed on the device via policy across all users
-     * and managed profiles.
+     * Calculates the total number of apps installed on the device via policy in the current user
+     * and all its managed profiles.
      *
      * @param async Whether to count asynchronously in a background thread
      * @param callback The callback to invoke with the result
@@ -49,9 +49,8 @@ public interface ApplicationFeatureProvider {
     void calculateNumberOfPolicyInstalledApps(boolean async, NumberOfAppsCallback callback);
 
     /**
-     * Asynchronously calculates the total number of apps installed on the device, across all users
-     * and managed profiles, that have been granted one or more of the given permissions by the
-     * admin.
+     * Asynchronously calculates the total number of apps installed in the current user and all its
+     * managed profiles that have been granted one or more of the given permissions by the admin.
      *
      * @param permissions Only consider apps that have been granted one or more of these permissions
      *        by the admin, either at run-time or install-time
