@@ -362,7 +362,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // smarter in the future.
         final Activity activity = getActivity();
         FeatureFactory.getFactory(activity).getSearchFeatureProvider().getIndexingManager(activity)
-                .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
+                .updateFromClassNameResource(SecuritySettings.class.getName(),
+                        true /* includeInSearchResults */);
 
         PreferenceGroup securityStatusPreferenceGroup =
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
