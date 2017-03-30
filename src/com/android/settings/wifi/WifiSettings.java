@@ -650,7 +650,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
             case WifiManager.WIFI_STATE_DISABLING:
                 addMessagePreference(R.string.wifi_stopping);
-                setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
