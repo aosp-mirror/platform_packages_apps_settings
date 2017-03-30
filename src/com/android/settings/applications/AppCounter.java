@@ -20,6 +20,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.AsyncTask;
+import android.os.UserHandle;
 import android.os.UserManager;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
     @Override
     protected Integer doInBackground(Void... params) {
         int count = 0;
-        for (UserInfo user : getUsersToCount()) {
+        for (UserInfo user : mUm.getProfiles(UserHandle.myUserId())) {
             final List<ApplicationInfo> list =
                     mPm.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
                             | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
@@ -62,6 +63,5 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
     }
 
     protected abstract void onCountComplete(int num);
-    protected abstract List<UserInfo> getUsersToCount();
     protected abstract boolean includeInCount(ApplicationInfo info);
 }

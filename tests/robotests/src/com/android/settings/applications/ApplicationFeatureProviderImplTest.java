@@ -190,7 +190,7 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     private void setUpUsersAndInstalledApps() {
-        when(mUserManager.getUsers(true)).thenReturn(Arrays.asList(
+        when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
                 new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
 

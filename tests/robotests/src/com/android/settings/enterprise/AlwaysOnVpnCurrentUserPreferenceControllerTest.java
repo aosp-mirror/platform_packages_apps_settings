@@ -36,11 +36,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link AlwaysOnVpnPrimaryUserPreferenceController}.
+ * Tests for {@link AlwaysOnVpnCurrentUserPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class AlwaysOnVpnPrimaryUserPreferenceControllerTest {
+public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
 
     private final String VPN_SET_DEVICE = "VPN set";
     private final String VPN_SET_PERSONAL = "VPN set in personal profile";
@@ -49,14 +49,14 @@ public final class AlwaysOnVpnPrimaryUserPreferenceControllerTest {
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
 
-    private AlwaysOnVpnPrimaryUserPreferenceController mController;
+    private AlwaysOnVpnCurrentUserPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AlwaysOnVpnPrimaryUserPreferenceController(mContext,
+        mController = new AlwaysOnVpnCurrentUserPreferenceController(mContext,
                 null /* lifecycle */);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_device))
                 .thenReturn(VPN_SET_DEVICE);
@@ -68,7 +68,7 @@ public final class AlwaysOnVpnPrimaryUserPreferenceControllerTest {
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
 
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInCurrentUser())
                 .thenReturn(true);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isInCompMode()).thenReturn(false);
@@ -82,11 +82,11 @@ public final class AlwaysOnVpnPrimaryUserPreferenceControllerTest {
 
     @Test
     public void testIsAvailable() {
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInCurrentUser())
                 .thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
 
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInPrimaryUser())
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider.isAlwaysOnVpnSetInCurrentUser())
                 .thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
