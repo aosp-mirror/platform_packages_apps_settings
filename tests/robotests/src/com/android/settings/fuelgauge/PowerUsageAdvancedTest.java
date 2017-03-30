@@ -15,31 +15,40 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Process;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.Utils;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -53,9 +62,13 @@ public class PowerUsageAdvancedTest {
     private static final double TYPE_WIFI_USAGE = 0;
     private static final double TOTAL_USAGE = TYPE_APP_USAGE * 2 + TYPE_BLUETOOTH_USAGE
             + TYPE_WIFI_USAGE;
+    private static final double TOTAL_POWER = 500;
     private static final double PRECISION = 0.001;
+    private static final String STUB_STRING = "stub_string";
     @Mock
-    private BatterySipper mBatterySipper;
+    private BatterySipper mNormalBatterySipper;
+    @Mock
+    private BatterySipper mMaxBatterySipper;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -63,11 +76,14 @@ public class PowerUsageAdvancedTest {
     @Mock
     private PackageManager mPackageManager;
     private PowerUsageAdvanced mPowerUsageAdvanced;
+    private PowerUsageData mPowerUsageData;
+    private Context mShadowContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPowerUsageAdvanced = new PowerUsageAdvanced();
+        mShadowContext = RuntimeEnvironment.application;
+        mPowerUsageAdvanced = spy(new PowerUsageAdvanced());
 
         List<BatterySipper> batterySippers = new ArrayList<>();
         batterySippers.add(new BatterySipper(DrainType.APP,
@@ -83,16 +99,24 @@ public class PowerUsageAdvancedTest {
                 DISCHARGE_AMOUNT);
         when(mBatteryStatsHelper.getUsageList()).thenReturn(batterySippers);
         when(mBatteryStatsHelper.getTotalPower()).thenReturn(TOTAL_USAGE);
+        when(mPowerUsageAdvanced.getContext()).thenReturn(mShadowContext);
+        doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any(), any());
+        doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any());
         mPowerUsageAdvanced.setPackageManager(mPackageManager);
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
+
+        mPowerUsageData = new PowerUsageData(UsageType.APP);
+        mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
+        mMaxBatterySipper.drainType = DrainType.BLUETOOTH;
+        mNormalBatterySipper.drainType = DrainType.SCREEN;
     }
 
     @Test
     public void testExtractUsageType_TypeSystem_ReturnSystem() {
-        mBatterySipper.drainType = DrainType.APP;
+        mNormalBatterySipper.drainType = DrainType.APP;
         when(mPowerUsageFeatureProvider.isTypeSystem(any())).thenReturn(true);
 
-        assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
+        assertThat(mPowerUsageAdvanced.extractUsageType(mNormalBatterySipper))
                 .isEqualTo(UsageType.SYSTEM);
     }
 
@@ -105,19 +129,19 @@ public class PowerUsageAdvancedTest {
 
         assertThat(drainTypes.length).isEqualTo(usageTypes.length);
         for (int i = 0, size = drainTypes.length; i < size; i++) {
-            mBatterySipper.drainType = drainTypes[i];
-            assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
+            mNormalBatterySipper.drainType = drainTypes[i];
+            assertThat(mPowerUsageAdvanced.extractUsageType(mNormalBatterySipper))
                     .isEqualTo(usageTypes[i]);
         }
     }
 
     @Test
     public void testExtractUsageType_TypeService_ReturnService() {
-        mBatterySipper.drainType = DrainType.APP;
-        when(mBatterySipper.getUid()).thenReturn(FAKE_UID_1);
+        mNormalBatterySipper.drainType = DrainType.APP;
+        when(mNormalBatterySipper.getUid()).thenReturn(FAKE_UID_1);
         when(mPowerUsageFeatureProvider.isTypeService(any())).thenReturn(true);
 
-        assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
+        assertThat(mPowerUsageAdvanced.extractUsageType(mNormalBatterySipper))
                 .isEqualTo(UsageType.SERVICE);
     }
 
@@ -144,6 +168,37 @@ public class PowerUsageAdvancedTest {
                     break;
             }
         }
+    }
+
+    @Test
+    public void testUpdateUsageDataSummary_onlyOneApp_showUsageTime() {
+        mPowerUsageData.usageList.add(mNormalBatterySipper);
+        mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
+
+        verify(mPowerUsageAdvanced).getString(eq(R.string.battery_used_for), any());
+    }
+
+    @Test
+    public void testUpdateUsageDataSummary_moreThanOneApp_showMaxUsageApp() {
+        mPowerUsageData.usageList.add(mNormalBatterySipper);
+        mPowerUsageData.usageList.add(mMaxBatterySipper);
+        doReturn(mMaxBatterySipper).when(mPowerUsageAdvanced).findBatterySipperWithMaxBatteryUsage(
+                mPowerUsageData.usageList);
+        final double percentage = (TYPE_BLUETOOTH_USAGE / TOTAL_POWER) * DISCHARGE_AMOUNT;
+        mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
+
+        verify(mPowerUsageAdvanced).getString(eq(R.string.battery_used_by),
+                eq(Utils.formatPercentage(percentage, true)), any());
+    }
+
+    @Test
+    public void testFindBatterySipperWithMaxBatteryUsage_findCorrectOne() {
+        mPowerUsageData.usageList.add(mNormalBatterySipper);
+        mPowerUsageData.usageList.add(mMaxBatterySipper);
+        BatterySipper sipper = mPowerUsageAdvanced.findBatterySipperWithMaxBatteryUsage(
+                mPowerUsageData.usageList);
+
+        assertThat(sipper).isEqualTo(mMaxBatterySipper);
     }
 
     @Test
