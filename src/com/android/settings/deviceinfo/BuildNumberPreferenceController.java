@@ -221,6 +221,7 @@ public class BuildNumberPreferenceController extends PreferenceController
         mDevHitToast.show();
         // This is good time to index the Developer Options
         FeatureFactory.getFactory(mContext).getSearchFeatureProvider().getIndexingManager(mContext)
-                .updateFromClassNameResource(DevelopmentSettings.class.getName(), true, true);
+                .updateFromClassNameResource(DevelopmentSettings.class.getName(),
+                        true /* includeInSearchResults */);
     }
 }

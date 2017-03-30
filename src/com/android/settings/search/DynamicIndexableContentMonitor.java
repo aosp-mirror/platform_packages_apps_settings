@@ -176,7 +176,7 @@ public final class DynamicIndexableContentMonitor implements
     public void onLoadFinished(Loader<List<PrintServiceInfo>> loader,
             List<PrintServiceInfo> services) {
         mIndexManager.updateFromClassNameResource(PrintSettingsFragment.class.getName(),
-                false /* rebuild */, true /* includeInSearchResult */);
+                true /* includeInSearchResults */);
     }
 
     @Override
@@ -213,30 +213,30 @@ public final class DynamicIndexableContentMonitor implements
             if (mIndexManager != null) return;
             mIndexManager = indexManager;
             mInputManager = (InputManager) context.getSystemService(Context.INPUT_SERVICE);
-            buildIndex(true /* rebuild */);
+            buildIndex();
 
             // Watch for input device changes.
             mInputManager.registerInputDeviceListener(this /* listener */, null /* handler */);
         }
 
-        private void buildIndex(boolean rebuild) {
+        private void buildIndex() {
             mIndexManager.updateFromClassNameResource(PhysicalKeyboardFragment.class.getName(),
-                    rebuild, true /* includeInSearchResult */);
+                    true /* includeInSearchResults */);
         }
 
         @Override
         public void onInputDeviceAdded(int deviceId) {
-            buildIndex(false /* rebuild */);
+            buildIndex();
         }
 
         @Override
         public void onInputDeviceRemoved(int deviceId) {
-            buildIndex(true /* rebuild */);
+            buildIndex();
         }
 
         @Override
         public void onInputDeviceChanged(int deviceId) {
-            buildIndex(true /* rebuild */);
+            buildIndex();
         }
     }
 
@@ -344,7 +344,7 @@ public final class DynamicIndexableContentMonitor implements
             mIndexManager = index;
             mPackageManager = context.getPackageManager();
             mAccessibilityServices.clear();
-            buildIndex(true /* rebuild */);
+            buildIndex();
 
             // Cache accessibility service packages to know when they go away.
             AccessibilityManager accessibilityManager = (AccessibilityManager) context
@@ -358,9 +358,9 @@ public final class DynamicIndexableContentMonitor implements
             }
         }
 
-        private void buildIndex(boolean rebuild) {
+        private void buildIndex() {
             mIndexManager.updateFromClassNameResource(AccessibilitySettings.class.getName(),
-                    rebuild, true /* includeInSearchResult */);
+                    true /* includeInSearchResults */);
         }
 
         synchronized void onPackageAvailable(String packageName) {
@@ -372,13 +372,13 @@ public final class DynamicIndexableContentMonitor implements
                     .queryIntentServices(intent, 0 /* flags */);
             if (services == null || services.isEmpty()) return;
             mAccessibilityServices.add(packageName);
-            buildIndex(false /* rebuild */);
+            buildIndex();
         }
 
         synchronized void onPackageUnavailable(String packageName) {
             if (mIndexManager == null) return;
             if (!mAccessibilityServices.remove(packageName)) return;
-            buildIndex(true /* rebuild */);
+            buildIndex();
         }
     }
 
@@ -428,10 +428,10 @@ public final class DynamicIndexableContentMonitor implements
             mContentResolver = context.getContentResolver();
             mInputMethodServices.clear();
             // Build index of {@link UserDictionary}.
-            buildIndex(LanguageAndInputSettings.class, true /* rebuild */);
+            buildIndex(LanguageAndInputSettings.class);
             // Build index of IMEs.
-            buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
-            buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class);
+            buildIndex(AvailableVirtualKeyboardFragment.class);
 
             // Cache IME service packages to know when they go away.
             final InputMethodManager inputMethodManager = (InputMethodManager) context
@@ -452,9 +452,9 @@ public final class DynamicIndexableContentMonitor implements
                     false /* notifyForDescendants */, this /* observer */);
         }
 
-        private void buildIndex(Class<?> indexClass, boolean rebuild) {
-            mIndexManager.updateFromClassNameResource(indexClass.getName(), rebuild,
-                    true /* includeInSearchResult */);
+        private void buildIndex(Class<?> indexClass) {
+            mIndexManager.updateFromClassNameResource(indexClass.getName(),
+                    true /* includeInSearchResults */);
         }
 
         synchronized void onPackageAvailable(String packageName) {
@@ -466,24 +466,24 @@ public final class DynamicIndexableContentMonitor implements
                     .queryIntentServices(intent, 0 /* flags */);
             if (services == null || services.isEmpty()) return;
             mInputMethodServices.add(packageName);
-            buildIndex(VirtualKeyboardFragment.class, false /* rebuild */);
-            buildIndex(AvailableVirtualKeyboardFragment.class, false /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class);
+            buildIndex(AvailableVirtualKeyboardFragment.class);
         }
 
         synchronized void onPackageUnavailable(String packageName) {
             if (mIndexManager == null) return;
             if (!mInputMethodServices.remove(packageName)) return;
-            buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
-            buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class);
+            buildIndex(AvailableVirtualKeyboardFragment.class);
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (ENABLED_INPUT_METHODS_CONTENT_URI.equals(uri)) {
-                buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
-                buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
+                buildIndex(VirtualKeyboardFragment.class);
+                buildIndex(AvailableVirtualKeyboardFragment.class);
             } else if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
-                buildIndex(LanguageAndInputSettings.class, true /* rebuild */);
+                buildIndex(LanguageAndInputSettings.class);
             }
         }
     }
