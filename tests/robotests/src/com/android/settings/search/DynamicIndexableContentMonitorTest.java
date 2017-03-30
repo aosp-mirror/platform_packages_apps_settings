@@ -63,6 +63,7 @@ import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.search2.DatabaseIndexingManager;
+import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.shadow.ShadowActivityWithLoadManager;
 import com.android.settings.testutils.shadow.ShadowContextImplWithRegisterReceiver;
 import com.android.settings.testutils.shadow.ShadowInputManager;
@@ -162,6 +163,8 @@ public class DynamicIndexableContentMonitorTest {
 
         DynamicIndexableContentMonitor.resetForTesting();
         mRobolectricPackageManager.reset();
+
+        DatabaseTestUtils.clearDb();
     }
 
     @Test
@@ -173,7 +176,7 @@ public class DynamicIndexableContentMonitorTest {
                 anyInt(), any(Bundle.class), any(LoaderManager.LoaderCallbacks.class));
         // No indexing happens.
         verify(mIndexManager, never()).updateFromClassNameResource(
-                anyString(), anyBoolean(), anyBoolean());
+                anyString(), anyBoolean());
 
         mMonitor.unregister(mActivity, LOADER_ID);
 
@@ -226,7 +229,7 @@ public class DynamicIndexableContentMonitorTest {
         mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
         // Rebuild indexing should happen.
-        verifyRebuildIndexing(PhysicalKeyboardFragment.class);
+        verifyIncrementalIndexing(PhysicalKeyboardFragment.class);
         // Input monitor should be registered to InputManager.
         final InputManager.InputDeviceListener listener = extactInputDeviceListener();
         assertThat(listener).isNotNull();
@@ -258,7 +261,7 @@ public class DynamicIndexableContentMonitorTest {
 
         listener.onInputDeviceRemoved(2 /* deviceId */);
 
-        verifyRebuildIndexing(PhysicalKeyboardFragment.class);
+        verifyIncrementalIndexing(PhysicalKeyboardFragment.class);
 
         /*
          * A device is changed.
@@ -267,14 +270,14 @@ public class DynamicIndexableContentMonitorTest {
 
         listener.onInputDeviceChanged(3 /* deviceId */);
 
-        verifyRebuildIndexing(PhysicalKeyboardFragment.class);
+        verifyIncrementalIndexing(PhysicalKeyboardFragment.class);
     }
 
     @Test
     public void testAccessibilityServicesMonitor() throws Exception {
         mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
-        verifyRebuildIndexing(AccessibilitySettings.class);
+        verifyIncrementalIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service package is installed, incremental indexing happen.
@@ -301,7 +304,7 @@ public class DynamicIndexableContentMonitorTest {
 
         disableInstalledPackage(A11Y_PACKAGE_1);
 
-        verifyRebuildIndexing(AccessibilitySettings.class);
+        verifyIncrementalIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service is enabled, incremental indexing happens.
@@ -319,7 +322,7 @@ public class DynamicIndexableContentMonitorTest {
 
         uninstallAccessibilityService(A11Y_PACKAGE_1);
 
-        verifyRebuildIndexing(AccessibilitySettings.class);
+        verifyIncrementalIndexing(AccessibilitySettings.class);
 
         /*
          * When an input method service package is installed, nothing happens.
@@ -335,8 +338,8 @@ public class DynamicIndexableContentMonitorTest {
     public void testInputMethodServicesMonitor() throws Exception {
         mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
 
-        verifyRebuildIndexing(VirtualKeyboardFragment.class);
-        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
 
         final Uri enabledInputMethodsContentUri = Settings.Secure.getUriFor(
                 Settings.Secure.ENABLED_INPUT_METHODS);
@@ -371,8 +374,8 @@ public class DynamicIndexableContentMonitorTest {
 
         disableInstalledPackage(IME_PACKAGE_1);
 
-        verifyRebuildIndexing(VirtualKeyboardFragment.class);
-        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an input method service is enabled, incremental indexing happens.
@@ -391,8 +394,8 @@ public class DynamicIndexableContentMonitorTest {
 
         uninstallInputMethodService(IME_PACKAGE_1);
 
-        verifyRebuildIndexing(VirtualKeyboardFragment.class);
-        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an accessibility service package is installed, nothing happens.
@@ -411,8 +414,8 @@ public class DynamicIndexableContentMonitorTest {
 
         observer.onChange(false /* selfChange */, enabledInputMethodsContentUri);
 
-        verifyRebuildIndexing(VirtualKeyboardFragment.class);
-        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
     }
 
     @Test
@@ -423,7 +426,7 @@ public class DynamicIndexableContentMonitorTest {
         final ContentObserver observer = extractContentObserver(UserDictionary.Words.CONTENT_URI);
         assertThat(observer).isNotNull();
 
-        verifyRebuildIndexing(LanguageAndInputSettings.class);
+        verifyIncrementalIndexing(LanguageAndInputSettings.class);
 
         /*
          * When user dictionary content is changed, rebuild indexing happens.
@@ -432,7 +435,7 @@ public class DynamicIndexableContentMonitorTest {
 
         observer.onChange(false /* selfChange */, UserDictionary.Words.CONTENT_URI);
 
-        verifyRebuildIndexing(LanguageAndInputSettings.class);
+        verifyIncrementalIndexing(LanguageAndInputSettings.class);
     }
 
     /*
@@ -441,21 +444,14 @@ public class DynamicIndexableContentMonitorTest {
 
     private void verifyNoIndexing(Class<?> indexingClass) {
         verify(mIndexManager, never()).updateFromClassNameResource(eq(indexingClass.getName()),
-                anyBoolean(), anyBoolean());
-    }
-
-    private void verifyRebuildIndexing(Class<?> indexingClass) {
-        verify(mIndexManager, times(1)).updateFromClassNameResource(indexingClass.getName(),
-                true /* rebuild */, true /* includeInSearchResults */);
-        verify(mIndexManager, never()).updateFromClassNameResource(indexingClass.getName(),
-                false /* rebuild */, true /* includeInSearchResults */);
+                anyBoolean());
     }
 
     private void verifyIncrementalIndexing(Class<?> indexingClass) {
         verify(mIndexManager, times(1)).updateFromClassNameResource(indexingClass.getName(),
-                false /* rebuild */, true /* includeInSearchResults */);
+                true /* includeInSearchResults */);
         verify(mIndexManager, never()).updateFromClassNameResource(indexingClass.getName(),
-                true /* rebuild */, true /* includeInSearchResults */);
+                false /* includeInSearchResults */);
     }
 
     /*

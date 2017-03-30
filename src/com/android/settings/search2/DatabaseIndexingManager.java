@@ -187,6 +187,8 @@ public class DatabaseIndexingManager {
 
         final String localeStr = Locale.getDefault().toString();
         updateDatabase(isLocaleIndexed, localeStr);
+
+        IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
     }
 
     @VisibleForTesting
@@ -242,8 +244,6 @@ public class DatabaseIndexingManager {
         } finally {
             database.endTransaction();
         }
-        // TODO Refactor: move the locale out of the helper class
-        IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
 
         mIsAvailable.set(true);
     }
@@ -432,12 +432,10 @@ public class DatabaseIndexingManager {
      * Update the Index for a specific class name resources
      *
      * @param className              the class name (typically a fragment name).
-     * @param rebuild                true means that you want to delete the data from the Index first.
      * @param includeInSearchResults true means that you want the bit "enabled" set so that the
      *                               data will be seen included into the search results
      */
-    public void updateFromClassNameResource(String className, final boolean rebuild,
-            boolean includeInSearchResults) {
+    public void updateFromClassNameResource(String className, boolean includeInSearchResults) {
         if (className == null) {
             throw new IllegalArgumentException("class name cannot be null!");
         }
@@ -452,24 +450,10 @@ public class DatabaseIndexingManager {
             @Override
             public void run() {
                 addIndexableData(res);
-                performIndexing();
+                updateDatabase(false, Locale.getDefault().toString());
                 res.enabled = false;
             }
         });
-    }
-
-    public void updateFromSearchIndexableData(final SearchIndexableData data) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                addIndexableData(data);
-                performIndexing();
-            }
-        });
-    }
-
-    private SQLiteDatabase getReadableDatabase() {
-        return IndexDatabaseHelper.getInstance(mContext).getReadableDatabase();
     }
 
     private SQLiteDatabase getWritableDatabase() {

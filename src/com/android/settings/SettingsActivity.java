@@ -30,7 +30,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -86,7 +85,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
     private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
-    private static final String SAVE_KEY_SHOW_SEARCH = ":settings:show_search";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -188,19 +186,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
     };
 
-    private final BroadcastReceiver mUserAddRemoveReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (mSearchFeatureProvider != null && !mSearchFeatureProvider.isEnabled(context)) {
-                String action = intent.getAction();
-                if (action.equals(Intent.ACTION_USER_ADDED)
-                        || action.equals(Intent.ACTION_USER_REMOVED)) {
-                    mSearchFeatureProvider.updateIndex(getApplicationContext());
-                }
-            }
-        }
-    };
-
     private DynamicIndexableContentMonitor mDynamicIndexableContentMonitor;
 
     private ActionBar mActionBar;
@@ -239,14 +224,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         return false;
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (!mSearchFeatureProvider.isEnabled(this)) {
-            mSearchFeatureProvider.updateIndex(getApplicationContext());
-        }
     }
 
     @Override
@@ -345,15 +322,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         mContent = (ViewGroup) findViewById(R.id.main_content);
 
         getFragmentManager().addOnBackStackChangedListener(this);
-
-        if (mIsShowingDashboard && !mSearchFeatureProvider.isEnabled(this)) {
-            // Run the Index update only if we have some space
-            if (!Utils.isLowStorage(this)) {
-                mSearchFeatureProvider.updateIndex(getApplicationContext());
-            } else {
-                Log.w(LOG_TAG, "Cannot update the Indexer as we are running low on storage space!");
-            }
-        }
 
         if (savedState != null) {
             // We are restarting from a previous saved state; used that to initialize, instead
@@ -568,10 +536,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mDevelopmentPreferencesListener);
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        if (!mSearchFeatureProvider.isEnabled(this)) {
-            registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
-            registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
-        }
         if (mDynamicIndexableContentMonitor == null) {
             mDynamicIndexableContentMonitor = new DynamicIndexableContentMonitor();
         }
@@ -587,9 +551,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mDevelopmentPreferencesListener);
         mDevelopmentPreferencesListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
-        if (!mSearchFeatureProvider.isEnabled(this)) {
-            unregisterReceiver(mUserAddRemoveReceiver);
-        }
         if (mDynamicIndexableContentMonitor != null) {
             mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
         }

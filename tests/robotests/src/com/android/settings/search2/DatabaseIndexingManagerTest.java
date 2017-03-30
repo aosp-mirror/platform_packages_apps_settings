@@ -741,8 +741,15 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testLocaleUpdated_afterIndexing_localeAdded() {
+    public void testLocaleUpdated_afterIndexing_localeNotAdded() {
         mManager.updateDatabase(false, localeStr);
+        assertThat(IndexDatabaseHelper.getInstance(mContext)
+                .isLocaleAlreadyIndexed(mContext, localeStr)).isFalse();
+    }
+
+    @Test
+    public void testLocaleUpdated_afterFullIndexing_localeAdded() {
+        mManager.performIndexing();
         assertThat(IndexDatabaseHelper.getInstance(mContext)
                 .isLocaleAlreadyIndexed(mContext, localeStr)).isTrue();
     }

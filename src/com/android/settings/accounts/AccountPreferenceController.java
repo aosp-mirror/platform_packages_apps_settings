@@ -318,7 +318,7 @@ public class AccountPreferenceController extends PreferenceController
         }
         mProfiles.put(userInfo.id, profileData);
         new SearchFeatureProviderImpl().getIndexingManager(mContext).updateFromClassNameResource(
-                UserAndAccountDashboardFragment.class.getName(), true, true);
+                UserAndAccountDashboardFragment.class.getName(), true /* includeInSearchResults */);
     }
 
     private DimmableIconPreference newAddAccountPreference(Context context) {
