@@ -27,8 +27,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
     private static final String PACKAGE_MEDIA_PROVIDER = "com.android.providers.media";
+    private static final String PACKAGE_SYSTEMUI = "com.android.systemui";
     private static final String[] PACKAGES_SYSTEM = {PACKAGE_MEDIA_PROVIDER,
-            PACKAGE_CALENDAR_PROVIDER};
+            PACKAGE_CALENDAR_PROVIDER, PACKAGE_SYSTEMUI};
 
     protected PackageManager mPackageManager;
 
