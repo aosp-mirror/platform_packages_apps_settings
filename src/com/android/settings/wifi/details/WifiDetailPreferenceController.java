@@ -59,6 +59,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     @VisibleForTesting
     static final String KEY_SIGNAL_STRENGTH_PREF = "signal_strength";
     @VisibleForTesting
+    static final String KEY_LINK_SPEED = "link_speed";
+    @VisibleForTesting
     static final String KEY_FREQUENCY_PREF = "frequency";
     @VisibleForTesting
     static final String KEY_SECURITY_PREF = "security";
@@ -85,6 +87,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     // Preferences - in order of appearance
     private Preference mConnectionDetailPref;
     private WifiDetailPreference mSignalStrengthPref;
+    private WifiDetailPreference mLinkSpeedPref;
     private WifiDetailPreference mFrequencyPref;
     private WifiDetailPreference mSecurityPref;
     private WifiDetailPreference mIpAddressPref;
@@ -128,6 +131,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         mSignalStrengthPref =
                 (WifiDetailPreference) screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
+        mLinkSpeedPref = (WifiDetailPreference) screen.findPreference(KEY_LINK_SPEED);
         mFrequencyPref = (WifiDetailPreference) screen.findPreference(KEY_FREQUENCY_PREF);
         mSecurityPref = (WifiDetailPreference) screen.findPreference(KEY_SECURITY_PREF);
 
@@ -177,6 +181,10 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         int summarySignalLevel = mAccessPoint.getLevel();
         mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
+
+        // Link Speed Pref
+        mLinkSpeedPref.setDetailText(mContext.getString(
+                R.string.link_speed, mWifiInfo.getLinkSpeed()));
 
         // Frequency Pref
         final int frequency = mWifiInfo.getFrequency();
