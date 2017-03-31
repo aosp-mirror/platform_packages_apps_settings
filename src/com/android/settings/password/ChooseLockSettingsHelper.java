@@ -19,10 +19,13 @@ package com.android.settings.password;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
@@ -202,6 +205,21 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
             long challenge, int userId) {
+        return launchConfirmationActivity(request, title, header, description, returnCredentials,
+                external, hasChallenge, challenge, userId, null /* alternateButton */);
+    }
+
+    public boolean launchFrpConfirmationActivity(int request, @Nullable CharSequence header,
+            @Nullable CharSequence description, @Nullable CharSequence alternateButton) {
+        return launchConfirmationActivity(request, null /* title */, header, description,
+                false /* returnCredentials */, true /* external */, false /* hasChallenge */,
+                0 /* challenge */, LockPatternUtils.USER_FRP, alternateButton);
+    }
+
+    private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
+            @Nullable CharSequence header, @Nullable CharSequence description,
+            boolean returnCredentials, boolean external, boolean hasChallenge,
+            long challenge, int userId, @Nullable CharSequence alternateButton) {
         final int effectiveUserId = UserManager.get(mActivity).getCredentialOwnerProfile(userId);
         boolean launched = false;
 
@@ -211,7 +229,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, returnCredentials, external,
-                                hasChallenge, challenge, userId);
+                                hasChallenge, challenge, userId, alternateButton);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -223,7 +241,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, returnCredentials, external,
-                                hasChallenge, challenge, userId);
+                                hasChallenge, challenge, userId, alternateButton);
                 break;
         }
         return launched;
@@ -232,7 +250,7 @@ public final class ChooseLockSettingsHelper {
     private boolean launchConfirmationActivity(int request, CharSequence title, CharSequence header,
             CharSequence message, Class<?> activityClass, boolean returnCredentials,
             boolean external, boolean hasChallenge, long challenge,
-            int userId) {
+            int userId, @Nullable CharSequence alternateButton) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
@@ -247,6 +265,7 @@ public final class ChooseLockSettingsHelper {
         // we should never have a drawer when confirming device credentials.
         intent.putExtra(SettingsActivity.EXTRA_HIDE_DRAWER, true);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        intent.putExtra(KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL, alternateButton);
         intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

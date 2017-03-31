@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -45,7 +44,6 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
@@ -197,7 +195,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
-            boolean isStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
+            boolean isStrongAuthRequired = isStrongAuthRequired();
             boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
             // Map boolean flags to an index by isStrongAuth << 2 + isProfile << 1 + isAlpha.
             int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((isProfile ? 1 : 0) << 1)
