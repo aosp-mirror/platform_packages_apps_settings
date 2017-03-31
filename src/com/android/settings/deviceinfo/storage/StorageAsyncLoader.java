@@ -79,8 +79,14 @@ public class StorageAsyncLoader
         UserHandle myUser = UserHandle.of(userId);
         for (int i = 0, size = applicationInfos.size(); i < size; i++) {
             ApplicationInfo app = applicationInfos.get(i);
-            StorageStatsSource.AppStorageStats stats =
-                    mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
+
+            StorageStatsSource.AppStorageStats stats;
+            try {
+                stats = mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
+            } catch (IllegalStateException e) {
+                // This may happen if the package was removed during our calculation.
+                continue;
+            }
 
             long attributedAppSizeInBytes = stats.getDataBytes();
             // This matches how the package manager calculates sizes -- by zeroing out code sizes of
