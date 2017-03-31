@@ -417,6 +417,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private void onBindTile(DashboardItemHolder holder, Tile tile) {
         if (tile.remoteViews != null) {
             final ViewGroup itemView = (ViewGroup) holder.itemView;
+            itemView.removeAllViews();
             itemView.addView(tile.remoteViews.apply(itemView.getContext(), itemView));
         } else {
             holder.icon.setImageDrawable(mCache.getIcon(tile.icon));
