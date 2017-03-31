@@ -7434,7 +7434,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for charging only. -->
-    <string name="usb_use_charging_only">Charging this device</string>
+    <string name="usb_use_charging_only">Charge this device</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for charging only. -->
@@ -7442,15 +7442,15 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for powering the other device only. -->
-    <string name="usb_use_power_only">Supplying power</string>
+    <string name="usb_use_power_only">Supply power</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for powering the other device. -->
-    <string name="usb_use_power_only_desc">Supply power to the other connected device</string>
+    <string name="usb_use_power_only_desc">Charge the connected device. Works only with devices that support USB charging.</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
-    <string name="usb_use_file_transfers">Transferring files</string>
+    <string name="usb_use_file_transfers">Transfer files</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
@@ -7458,7 +7458,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
-    <string name="usb_use_photo_transfers">Transferring photos (PTP)</string>
+    <string name="usb_use_photo_transfers">Transfer photos (PTP)</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
@@ -7466,7 +7466,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
-    <string name="usb_use_MIDI">Using device as MIDI</string>
+    <string name="usb_use_MIDI">Use device as MIDI</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
@@ -7478,6 +7478,17 @@
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
+
+    <!-- Settings item summary for USB preference when set to charging only [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_charging_only">Charging this device</string>
+    <!-- Settings item summary for USB preference when set to powering the other device only [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_power_only">Supplying power</string>
+    <!-- Settings item summary for USB preference when set to transferring files via MTP [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_file_transfers">Transferring files</string>
+    <!-- Settings item summary for USB preference when set to transferring photos via PTP [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_photo_transfers">Transferring photos (PTP)</string>
+    <!-- Settings item summary for USB preference when set to entering MIDI mode [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_MIDI">Using device as MIDI</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
