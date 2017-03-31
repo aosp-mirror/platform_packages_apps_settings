@@ -117,7 +117,7 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        getLoaderManager().initLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
+        getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
         getLoaderManager().initLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
     }
 
