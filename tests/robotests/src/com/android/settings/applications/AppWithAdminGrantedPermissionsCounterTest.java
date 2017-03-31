@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -35,7 +36,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
@@ -76,24 +76,25 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     private final String PERMISSION_2 = "some.permission.2";
     private final String[] PERMISSIONS = {PERMISSION_1, PERMISSION_2};
 
+    @Mock private UserManager mUserManager;
     @Mock private Context mContext;
     @Mock private PackageManagerWrapper mPackageManager;
     @Mock private IPackageManagerWrapper mPackageManagerService;
     @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
-    private List<UserInfo> mUsersToCount;
 
     private int mAppCount = -1;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
     }
 
-    private void verifyCountInstalledAppsAcrossAllUsers(boolean async) throws Exception {
+    private void verifyCountInstalledApps(boolean async) throws Exception {
         // There are two users.
-        mUsersToCount = Arrays.asList(
+        when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
-                new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0));
+                new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
 
         // The first user has five apps installed:
         // * app1 uses run-time permissions. It has been granted one of the permissions by the
@@ -190,8 +191,8 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         }
         assertThat(mAppCount).isEqualTo(3);
 
-        // Verify that installed packages were retrieved for the users returned by
-        // InstalledAppCounterTestable.getUsersToCount() only.
+        // Verify that installed packages were retrieved the current user and the user's managed
+        // profile only.
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(),
                 eq(MANAGED_PROFILE_ID));
@@ -200,13 +201,13 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     }
 
     @Test
-    public void testCountInstalledAppsAcrossAllUsersSync() throws Exception {
-        verifyCountInstalledAppsAcrossAllUsers(false /* async */);
+    public void testCountInstalledAppsSync() throws Exception {
+        verifyCountInstalledApps(false /* async */);
     }
 
     @Test
-    public void testCountInstalledAppsAcrossAllUsersAync() throws Exception {
-        verifyCountInstalledAppsAcrossAllUsers(true /* async */);
+    public void testCountInstalledAppsAync() throws Exception {
+        verifyCountInstalledApps(true /* async */);
     }
 
     private class AppWithAdminGrantedPermissionsCounterTestable extends
@@ -219,11 +220,6 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         @Override
         protected void onCountComplete(int num) {
             mAppCount = num;
-        }
-
-        @Override
-        protected List<UserInfo> getUsersToCount() {
-            return mUsersToCount;
         }
     }
 }

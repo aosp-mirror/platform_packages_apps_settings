@@ -32,9 +32,9 @@ public interface EnterprisePrivacyFeatureProvider {
     boolean isInCompMode();
 
     /**
-     * Returns the name of the organization managing the device via a Device Owner app. If the device
-     * is not managed by a Device Owner app or the name of the managing organization was not set,
-     * returns {@code null}.
+     * Returns the name of the organization managing the device via a Device Owner app. If the
+     * device is not managed by a Device Owner app or the name of the managing organization was not
+     * set, returns {@code null}.
      */
     String getDeviceOwnerOrganizationName();
 
@@ -74,12 +74,13 @@ public interface EnterprisePrivacyFeatureProvider {
     boolean isNetworkLoggingEnabled();
 
     /**
-     * Returns whether the Device Owner in the primary user set an always-on VPN.
+     * Returns whether the Device Owner or Profile Owner in the current user set an always-on VPN.
      */
-    boolean isAlwaysOnVpnSetInPrimaryUser();
+    boolean isAlwaysOnVpnSetInCurrentUser();
 
     /**
-     * Returns whether the Profile Owner in the managed profile (if any) set an always-on VPN.
+     * Returns whether the Profile Owner in the current user's managed profile (if any) set an
+     * always-on VPN.
      */
     boolean isAlwaysOnVpnSetInManagedProfile();
 
@@ -89,10 +90,10 @@ public interface EnterprisePrivacyFeatureProvider {
     boolean isGlobalHttpProxySet();
 
     /**
-     * Returns the number of failed login attempts that the Device Owner allows before the entire
-     * device is wiped, or zero if no such limit is set.
+     * Returns the number of failed login attempts that the Device Owner or Profile Owner allows
+     * before the current user is wiped, or zero if no such limit is set.
      */
-    int getMaximumFailedPasswordsBeforeWipeInPrimaryUser();
+    int getMaximumFailedPasswordsBeforeWipeInCurrentUser();
 
     /**
      * Returns the number of failed login attempts that the Profile Owner allows before the current
