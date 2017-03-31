@@ -79,9 +79,13 @@ public class PowerGaugePreference extends TintablePreference {
         return mProgress.toString();
     }
 
-    public void setSubtitle(String subtitle) {
+    public void setSubtitle(CharSequence subtitle) {
         mProgress = subtitle;
         notifyChanged();
+    }
+
+    public CharSequence getSubtitle() {
+        return mProgress;
     }
 
     BatteryEntry getInfo() {

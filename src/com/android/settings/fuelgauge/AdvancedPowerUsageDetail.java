@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -82,6 +83,8 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
     ApplicationsState mState;
     @VisibleForTesting
     ApplicationsState.AppEntry mAppEntry;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
 
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
@@ -136,6 +139,7 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
                 (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPackageManager = activity.getPackageManager();
+        mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
     @Override

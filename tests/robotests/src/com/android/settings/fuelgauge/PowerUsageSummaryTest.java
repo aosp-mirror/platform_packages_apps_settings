@@ -86,15 +86,16 @@ import static org.mockito.Mockito.when;
 public class PowerUsageSummaryTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String TIME_LEFT = "2h30min";
+    private static final String STUB_STRING = "stub_string";
     private static final int BATTERY_LEVEL = 55;
     private static final int UID = 123;
     private static final int POWER_MAH = 100;
     private static final long REMAINING_TIME_US = 100000;
-    private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 25000;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
             TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
     private static final int DISCHARGE_AMOUNT = 100;
-    private static final long USAGE_TIME_MS = 10000;
+    private static final long USAGE_TIME_MS = 65 * 60 * 1000;
     private static final double TOTAL_POWER = 200;
     private static final double BATTERY_SCREEN_USAGE = 300;
     private static final double BATTERY_SYSTEM_USAGE = 600;
@@ -123,8 +124,6 @@ public class PowerUsageSummaryTest {
     @Mock
     private BatterySipper mCellBatterySipper;
     @Mock
-    private PowerGaugePreference mPreference;
-    @Mock
     private LayoutPreference mBatteryLayoutPref;
     @Mock
     private TextView mBatteryPercentText;
@@ -132,10 +131,6 @@ public class PowerUsageSummaryTest {
     private TextView mSummary1;
     @Mock
     private BatteryInfo mBatteryInfo;
-    @Mock
-    private PowerGaugePreference mScreenUsagePref;
-    @Mock
-    private PowerGaugePreference mLastFullChargePref;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryHelper;
     @Mock
@@ -148,6 +143,9 @@ public class PowerUsageSummaryTest {
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
     private BatteryMeterView mBatteryMeterView;
+    private PowerGaugePreference mPreference;
+    private PowerGaugePreference mScreenUsagePref;
+    private PowerGaugePreference mLastFullChargePref;
 
     @Before
     public void setUp() {
@@ -158,6 +156,9 @@ public class PowerUsageSummaryTest {
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         when(mContext.getSystemService(Context.POWER_SERVICE)).thenReturn(mPowerManager);
 
+        mPreference = new PowerGaugePreference(mRealContext);
+        mScreenUsagePref = new PowerGaugePreference(mRealContext);
+        mLastFullChargePref = new PowerGaugePreference(mRealContext);
         mFragment = spy(new TestFragment(mContext));
         mFragment.initFeatureProvider();
         mBatteryMeterView = new BatteryMeterView(mRealContext);
@@ -200,6 +201,7 @@ public class PowerUsageSummaryTest {
         when(mBatteryHelper.getUsageList()).thenReturn(mUsageList);
         mFragment.mScreenUsagePref = mScreenUsagePref;
         mFragment.mLastFullChargePref = mLastFullChargePref;
+        mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
     }
@@ -304,16 +306,21 @@ public class PowerUsageSummaryTest {
     public void testSetUsageSummary_timeLessThanOneMinute_DoNotSetSummary() {
         final long usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
 
-        mFragment.setUsageSummary(mPreference, "", usageTimeMs);
-        verify(mPreference, never()).setSummary(anyString());
+        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
         final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
+        doReturn(mRealContext).when(mFragment).getContext();
+        final String expectedSummary = "Used for 2m";
 
-        mFragment.setUsageSummary(mPreference, "", usageTimeMs);
-        verify(mPreference).setSummary(anyString());
+        mFragment.setUsageSummary(mPreference, usageTimeMs);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
     }
 
     @Test
@@ -380,32 +387,37 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testUpdateScreenPreference_showCorrectSummary() {
-        final String expectedUsedTime = Utils.formatElapsedTime(mRealContext, USAGE_TIME_MS, false);
         doReturn(mScreenBatterySipper).when(mFragment).findBatterySipperByType(any(), any());
         doReturn(mRealContext).when(mFragment).getContext();
+        final CharSequence expectedSummary = Utils.formatElapsedTime(mRealContext, USAGE_TIME_MS,
+                false);
 
         mFragment.updateScreenPreference();
 
-        verify(mScreenUsagePref).setSubtitle(expectedUsedTime);
+        assertThat(mScreenUsagePref.getSubtitle()).isEqualTo(expectedSummary);
     }
 
     @Test
     public void testUpdateLastFullChargePreference_showCorrectSummary() {
+        final CharSequence formattedString = mRealContext.getText(
+                R.string.power_last_full_charge_summary);
+        final CharSequence timeSequence = Utils.formatElapsedTime(mRealContext,
+                TIME_SINCE_LAST_FULL_CHARGE_MS, false);
+        final CharSequence expectedSummary = TextUtils.expandTemplate(
+                formattedString, timeSequence);
+        doReturn(formattedString).when(mFragment).getText(R.string.power_last_full_charge_summary);
         doReturn(mRealContext).when(mFragment).getContext();
-        final String expected = mRealContext.getString(R.string.power_last_full_charge_summary,
-                Utils.formatElapsedTime(mRealContext, TIME_SINCE_LAST_FULL_CHARGE_MS, false));
-        doReturn(expected).when(mFragment).getString(eq(R.string.power_last_full_charge_summary),
-                any());
 
         mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
 
-        verify(mLastFullChargePref).setSubtitle(expected);
+        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo(expectedSummary);
     }
 
     @Test
     public void testUpdatePreference_usageListEmpty_shouldNotCrash() {
         when(mBatteryHelper.getUsageList()).thenReturn(new ArrayList<BatterySipper>());
-        doReturn("").when(mFragment).getString(anyInt(), any());
+        doReturn(STUB_STRING).when(mFragment).getString(anyInt(), any());
+        doReturn(mRealContext).when(mFragment).getContext();
 
         // Should not crash when update
         mFragment.updateScreenPreference();
