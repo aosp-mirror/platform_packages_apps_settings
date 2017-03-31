@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -77,34 +78,19 @@ public class UsbModePreferenceController extends PreferenceController
         mUsbReceiver.register();
     }
 
-    public static int getSummary(int mode) {
+    @VisibleForTesting
+    int getSummary(int mode) {
         switch (mode) {
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_use_charging_only_desc;
+                return R.string.usb_summary_charging_only;
             case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_use_power_only_desc;
+                return R.string.usb_summary_power_only;
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
-                return R.string.usb_use_file_transfers_desc;
+                return R.string.usb_summary_file_transfers;
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
-                return R.string.usb_use_photo_transfers_desc;
+                return R.string.usb_summary_photo_transfers;
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
-                return R.string.usb_use_MIDI_desc;
-        }
-        return 0;
-    }
-
-    public static int getTitle(int mode) {
-        switch (mode) {
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_use_charging_only;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_use_power_only;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
-                return R.string.usb_use_file_transfers;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
-                return R.string.usb_use_photo_transfers;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
-                return R.string.usb_use_MIDI;
+                return R.string.usb_summary_MIDI;
         }
         return 0;
     }
@@ -117,7 +103,7 @@ public class UsbModePreferenceController extends PreferenceController
         if (preference != null) {
             if (mUsbReceiver.isConnected()) {
                 preference.setEnabled(true);
-                preference.setSummary(getTitle(mode));
+                preference.setSummary(getSummary(mode));
             } else {
                 preference.setSummary(R.string.disconnected);
                 preference.setEnabled(false);
