@@ -16,10 +16,8 @@
 package com.android.settings.wifi.details;
 
 import android.content.Context;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -63,8 +61,9 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
         // Header Title set automatically from launching Preference
 
-        mForgetButton = (Button) ((LayoutPreference) findPreference(KEY_FORGET_BUTTON))
-                .findViewById(R.id.button);
+        LayoutPreference forgetPreference = ((LayoutPreference) findPreference(KEY_FORGET_BUTTON));
+        forgetPreference.setVisible(mWifiDetailPreferenceController.canForgetNetwork());
+        mForgetButton = (Button) forgetPreference.findViewById(R.id.button);
         mForgetButton.setText(R.string.forget);
         mForgetButton.setOnClickListener(view -> forgetNetwork());
     }
@@ -72,7 +71,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     private void forgetNetwork() {
         mMetricsFeatureProvider.action(getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         mWifiDetailPreferenceController.forgetNetwork();
-        mForgetButton.setEnabled(false);
+        getActivity().finish();
     }
 
     @Override
