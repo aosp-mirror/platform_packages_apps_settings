@@ -195,13 +195,13 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsAlwaysOnVpnSetInPrimaryUser() {
+    public void testIsAlwaysOnVpnSetInCurrentUser() {
         when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MY_USER_ID)).thenReturn(null);
-        assertThat(mProvider.isAlwaysOnVpnSetInPrimaryUser()).isFalse();
+        assertThat(mProvider.isAlwaysOnVpnSetInCurrentUser()).isFalse();
 
         when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MY_USER_ID))
                 .thenReturn(VPN_PACKAGE_ID);
-        assertThat(mProvider.isAlwaysOnVpnSetInPrimaryUser()).isTrue();
+        assertThat(mProvider.isAlwaysOnVpnSetInCurrentUser()).isTrue();
     }
 
     @Test
@@ -230,16 +230,14 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
-    public void testGetMaximumFailedPasswordsForWipeInPrimaryUser() {
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
-        when(mDevicePolicyManager.getDeviceOwnerUserId()).thenReturn(UserHandle.USER_NULL);
-        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).isEqualTo(0);
-
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
-        when(mDevicePolicyManager.getDeviceOwnerUserId()).thenReturn(UserHandle.USER_SYSTEM);
-        when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, UserHandle.USER_SYSTEM))
+    public void testGetMaximumFailedPasswordsForWipeInCurrentUser() {
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MY_USER_ID)).thenReturn(null);
+        when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, MY_USER_ID))
                 .thenReturn(10);
-        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).isEqualTo(10);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInCurrentUser()).isEqualTo(0);
+
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MY_USER_ID)).thenReturn(OWNER);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInCurrentUser()).isEqualTo(10);
     }
 
     @Test
@@ -247,7 +245,6 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         when(mDevicePolicyManager.getProfileOwnerAsUser(MANAGED_PROFILE_USER_ID)).thenReturn(OWNER);
         when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, MANAGED_PROFILE_USER_ID))
                 .thenReturn(10);
-
         assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInManagedProfile()).isEqualTo(0);
 
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));

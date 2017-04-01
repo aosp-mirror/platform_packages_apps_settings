@@ -47,11 +47,6 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     }
 
     @Override
-    public int getDeviceOwnerUserId() {
-        return mDpm.getDeviceOwnerUserId();
-    }
-
-    @Override
     public @Nullable ComponentName getProfileOwnerAsUser(final int userId) {
         return mDpm.getProfileOwnerAsUser(userId);
     }

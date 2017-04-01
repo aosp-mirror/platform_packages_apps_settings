@@ -17,23 +17,23 @@ import android.content.Context;
 
 import com.android.settings.core.lifecycle.Lifecycle;
 
-public class FailedPasswordWipePrimaryUserPreferenceController
+public class FailedPasswordWipeCurrentUserPreferenceController
         extends FailedPasswordWipePreferenceControllerBase {
 
-    private static final String KEY_FAILED_PASSWORD_WIPE_PRIMARY_USER
-            = "failed_password_wipe_primary_user";
+    private static final String KEY_FAILED_PASSWORD_WIPE_CURRENT_USER
+            = "failed_password_wipe_current_user";
 
-    public FailedPasswordWipePrimaryUserPreferenceController(Context context, Lifecycle lifecycle) {
+    public FailedPasswordWipeCurrentUserPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, lifecycle);
     }
 
     @Override
     protected int getMaximumFailedPasswordsBeforeWipe() {
-        return mFeatureProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser();
+        return mFeatureProvider.getMaximumFailedPasswordsBeforeWipeInCurrentUser();
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_FAILED_PASSWORD_WIPE_PRIMARY_USER;
+        return KEY_FAILED_PASSWORD_WIPE_CURRENT_USER;
     }
 }
