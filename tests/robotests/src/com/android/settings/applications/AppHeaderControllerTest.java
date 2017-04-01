@@ -28,6 +28,7 @@ import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -276,6 +277,17 @@ public class AppHeaderControllerTest {
                 .isEqualTo(View.GONE);
     }
 
+    // Ensure that the instant app label does not show up when we haven't told the controller the
+    // app is instant.
+    @Test
+    public void instantApps_normalAppsDontGetInstantAppsBadge() {
+        final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
+        mController = new AppHeaderController(mContext, mFragment, appHeader);
+        mController.done();
+        assertThat(appHeader.findViewById(R.id.app_icon_instant_apps_badge).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
     // Test that the "instant apps" label is present in the header when we have an instant app.
     @Test
     public void instantApps_expectedHeaderItem() {
@@ -284,6 +296,8 @@ public class AppHeaderControllerTest {
         mController.setIsInstantApp(true);
         mController.done();
         TextView label = (TextView)appHeader.findViewById(R.id.install_type);
+        ImageView badgeView = appHeader.findViewById(R.id.app_icon_instant_apps_badge);
+        assertThat(badgeView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(label.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(label.getText()).isEqualTo(
                 appHeader.getResources().getString(R.string.install_type_instant));
