@@ -34,7 +34,9 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
+import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionsChecks;
@@ -43,14 +45,15 @@ import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
-        implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
-        FocusRecyclerView.FocusListener {
+        implements CategoryListener, ConditionListener,
+        FocusListener, SuggestionDismissController.Callback {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
     private static final int MAX_WAIT_MILLIS = 700;
@@ -195,7 +198,7 @@ public class DashboardSummary extends InstrumentedFragment
         mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
         mSuggestionDismissHandler = new SuggestionDismissController(
-                getContext(), mDashboard, mSuggestionParser, mAdapter);
+                getContext(), mDashboard, mSuggestionParser, this);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
@@ -234,6 +237,18 @@ public class DashboardSummary extends InstrumentedFragment
         if (scrollToTop) {
             mDashboard.scrollToPosition(0);
         }
+    }
+
+    @Override
+    public Tile getSuggestionForPosition(int position) {
+        return (Tile) mAdapter.getItem(mAdapter.getItemId(position));
+    }
+
+    @Override
+    public void onSuggestionDismissed(Tile suggestion) {
+        // Refresh the UI to pick up suggestions that can now be shown because, say, a higher
+        // priority suggestion has been dismissed, or an exclusive suggestion category is emptied.
+        rebuildUI();
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {

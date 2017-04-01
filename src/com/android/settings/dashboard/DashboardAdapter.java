@@ -39,7 +39,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
-import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -49,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
-        implements SummaryLoader.SummaryConsumer, SuggestionDismissController.Callback {
+        implements SummaryLoader.SummaryConsumer {
     public static final String TAG = "DashboardAdapter";
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
@@ -338,26 +337,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
                 .setExpandedCondition(condition)
-                .build();
-        notifyDashboardDataChanged(prevData);
-    }
-
-    @Override
-    public Tile getSuggestionForPosition(int position) {
-        return (Tile) mDashboardData.getItemEntityByPosition(position);
-    }
-
-    @Override
-    public void onSuggestionDismissed(Tile suggestion) {
-        final List<Tile> suggestions = mDashboardData.getSuggestions();
-        if (suggestions == null) {
-            return;
-        }
-        suggestions.remove(suggestion);
-
-        final DashboardData prevData = mDashboardData;
-        mDashboardData = new DashboardData.Builder(prevData)
-                .setSuggestions(suggestions)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
