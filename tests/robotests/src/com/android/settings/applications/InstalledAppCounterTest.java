@@ -78,7 +78,6 @@ public final class InstalledAppCounterTest {
     @Mock private UserManager mUserManager;
     @Mock private Context mContext;
     @Mock private PackageManagerWrapper mPackageManager;
-    private List<UserInfo> mUsersToCount;
 
     private int mInstalledAppCount = -1;
 
@@ -99,9 +98,9 @@ public final class InstalledAppCounterTest {
 
     private void testCountInstalledAppsAcrossAllUsers(boolean async) {
         // There are two users.
-        mUsersToCount = Arrays.asList(
+        when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
-                new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0));
+                new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
 
         // The first user has four apps installed:
         // * app1 is an updated system app. It should be counted.
@@ -159,8 +158,8 @@ public final class InstalledAppCounterTest {
         count(InstalledAppCounter.IGNORE_INSTALL_REASON, async);
         assertThat(mInstalledAppCount).isEqualTo(5);
 
-        // Verify that installed packages were retrieved for the users returned by
-        // InstalledAppCounterTestable.getUsersToCount() only.
+        // Verify that installed packages were retrieved the current user and the user's managed
+        // profile only.
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(),
                 eq(MANAGED_PROFILE_ID));
@@ -204,11 +203,6 @@ public final class InstalledAppCounterTest {
         @Override
         protected void onCountComplete(int num) {
             mInstalledAppCount = num;
-        }
-
-        @Override
-        protected List<UserInfo> getUsersToCount() {
-            return mUsersToCount;
         }
     }
 

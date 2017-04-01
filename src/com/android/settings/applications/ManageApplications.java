@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
@@ -1403,11 +1402,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     protected void onCountComplete(int num) {
                         mLoader.setSummary(SummaryProvider.this,
                                 mContext.getString(R.string.apps_summary, num));
-                    }
-
-                    @Override
-                    protected List<UserInfo> getUsersToCount() {
-                         return mUm.getProfiles(UserHandle.myUserId());
                     }
                 }.execute();
             }

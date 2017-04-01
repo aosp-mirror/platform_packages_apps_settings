@@ -134,7 +134,7 @@ public final class EnterprisePrivacySettingsTest {
         assertThat(controllers.get(position++)).isInstanceOf(
                 EnterpriseSetDefaultAppsPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
-                AlwaysOnVpnPrimaryUserPreferenceController.class);
+                AlwaysOnVpnCurrentUserPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 AlwaysOnVpnManagedProfilePreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
@@ -142,7 +142,7 @@ public final class EnterprisePrivacySettingsTest {
         assertThat(controllers.get(position++)).isInstanceOf(
                 CaCertsPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
-                FailedPasswordWipePrimaryUserPreferenceController.class);
+                FailedPasswordWipeCurrentUserPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 FailedPasswordWipeManagedProfilePreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(ImePreferenceController.class);

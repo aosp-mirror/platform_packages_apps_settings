@@ -27,29 +27,29 @@ import org.robolectric.annotation.Config;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link FailedPasswordWipePrimaryUserPreferenceController}.
+ * Tests for {@link FailedPasswordWipeCurrentUserPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class FailedPasswordWipePrimaryUserPreferenceControllerTest extends
+public final class FailedPasswordWipeCurrentUserPreferenceControllerTest extends
         FailedPasswordWipePreferenceControllerTestBase {
 
     private int mMaximumFailedPasswordsBeforeWipe = 0;
 
-    public FailedPasswordWipePrimaryUserPreferenceControllerTest() {
-        super("failed_password_wipe_primary_user");
+    public FailedPasswordWipeCurrentUserPreferenceControllerTest() {
+        super("failed_password_wipe_current_user");
     }
 
     @Override
     public void setUp() {
         super.setUp();
-        mController = new FailedPasswordWipePrimaryUserPreferenceController(mContext,
+        mController = new FailedPasswordWipeCurrentUserPreferenceController(mContext,
                 null /* lifecycle */);
     }
 
     @Override
     public void setMaximumFailedPasswordsBeforeWipe(int maximum) {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).thenReturn(maximum);
+                .getMaximumFailedPasswordsBeforeWipeInCurrentUser()).thenReturn(maximum);
     }
 }
