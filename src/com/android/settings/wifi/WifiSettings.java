@@ -196,17 +196,12 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mConnectedAccessPointPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
-
         mAccessPointsPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
         mAdditionalSettingsPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_ADDITIONAL_SETTINGS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
-
-        if (isUiRestricted()) {
-            getPreferenceScreen().removePreference(mAdditionalSettingsPreferenceCategory);
-        }
 
         Context prefContext = getPrefContext();
         mAddPreference = new Preference(prefContext);
@@ -215,6 +210,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         mStatusMessagePreference = new LinkablePreference(prefContext);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
+
+        if (isUiRestricted()) {
+            getPreferenceScreen().removePreference(mAdditionalSettingsPreferenceCategory);
+            addMessagePreference(R.string.wifi_empty_list_user_restricted);
+        }
 
         mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         mBgThread.start();
@@ -314,7 +314,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
-            onAccessPointsChanged();
+            updateAccessPointsDelayed();
         }
     }
 
@@ -614,53 +614,75 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /**
-     * Shows the latest access points available with supplemental information like
-     * the strength of network and the security for it.
+     * Called to indicate the list of AccessPoints has been updated and
+     * getAccessPoints should be called to get the latest information.
      */
     @Override
     public void onAccessPointsChanged() {
+        updateAccessPointsDelayed();
+    }
+
+    /**
+     * Updates access points from {@link WifiManager#getScanResults()}. Adds a delay to have
+     * progress bar displayed before starting to modify APs.
+     */
+    private void updateAccessPointsDelayed() {
         // Safeguard from some delayed event handling
-        if (getActivity() == null) return;
-        final int wifiState = mWifiManager.getWifiState();
+        if (getActivity() != null && !isUiRestricted() && mWifiManager.isWifiEnabled()) {
+            setProgressBarVisible(true);
+            getView().postDelayed(mUpdateAccessPointsRunnable, 300 /* delay milliseconds */);
+        }
+    }
+
+    /** Called when the state of Wifi has changed. */
+    @Override
+    public void onWifiStateChanged(int state) {
         if (isUiRestricted()) {
-            removeConnectedAccessPointPreference();
-            mAccessPointsPreferenceCategory.removeAll();
-            if (!isUiRestrictedByOnlyAdmin()) {
-                if (wifiState == WifiManager.WIFI_AP_STATE_DISABLED) {
-                    setOffMessage();
-                } else {
-                    addMessagePreference(R.string.wifi_empty_list_user_restricted);
-                }
-            }
             return;
         }
 
+        final int wifiState = mWifiManager.getWifiState();
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                setProgressBarVisible(true);
-                // Have the progress bar displayed before starting to modify APs
-                getView().postDelayed(mUpdateAccessPointsRunnable, 300 /* delay milliseconds */);
+                updateAccessPointsDelayed();
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
                 removeConnectedAccessPointPreference();
                 mAccessPointsPreferenceCategory.removeAll();
+                addMessagePreference(R.string.wifi_starting);
                 setProgressBarVisible(true);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLING:
+                removeConnectedAccessPointPreference();
+                mAccessPointsPreferenceCategory.removeAll();
                 addMessagePreference(R.string.wifi_stopping);
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
-                setConfigureWifiSettingsVisibility();
                 setProgressBarVisible(false);
                 break;
         }
     }
 
+    /**
+     * Called when the connection state of wifi has changed and isConnected
+     * should be called to get the updated state.
+     */
+    @Override
+    public void onConnectedChanged() {
+        updateAccessPointsDelayed();
+        changeNextButtonState(mWifiTracker.isConnected());
+    }
+
+
     private void updateAccessPointPreferences() {
+        // in case state has changed
+        if (!mWifiManager.isWifiEnabled()) {
+            return;
+        }
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
 
@@ -796,10 +818,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void setConfigureWifiSettingsVisibility() {
-        if (isUiRestricted()) {
-            mAdditionalSettingsPreferenceCategory.removeAll();
-            return;
-        }
         mAdditionalSettingsPreferenceCategory.addPreference(mConfigureWifiSettingsPreference);
         boolean wifiWakeupEnabled = Settings.Global.getInt(
                 getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
@@ -824,7 +842,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         // read the system settings directly. Because when the device is in Airplane mode, even if
         // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
         final ContentResolver resolver = getActivity().getContentResolver();
-        final boolean wifiScanningMode = !isUiRestricted() && Settings.Global.getInt(
+        final boolean wifiScanningMode = Settings.Global.getInt(
                 resolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
 
         if (!wifiScanningMode) {
@@ -858,30 +876,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
-            mProgressHeader.setVisibility(
-                    visible && !isUiRestricted() ? View.VISIBLE : View.INVISIBLE);
+            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
         }
-    }
-
-    @Override
-    public void onWifiStateChanged(int state) {
-        switch (state) {
-            case WifiManager.WIFI_STATE_ENABLING:
-                addMessagePreference(R.string.wifi_starting);
-                setProgressBarVisible(true);
-                break;
-
-            case WifiManager.WIFI_STATE_DISABLED:
-                setOffMessage();
-                setProgressBarVisible(false);
-                break;
-        }
-    }
-
-    @Override
-    public void onConnectedChanged() {
-        onAccessPointsChanged();
-        changeNextButtonState(mWifiTracker.isConnected());
     }
 
     /**
