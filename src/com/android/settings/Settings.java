@@ -16,7 +16,10 @@
 
 package com.android.settings;
 
+import android.os.Bundle;
+
 import com.android.settings.applications.AppOpsSummary;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.fingerprint.FingerprintSettings;
 
@@ -154,7 +157,15 @@ public class Settings extends SettingsActivity {
     public static class TestingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiAPITestActivity extends SettingsActivity { /* empty */ }
     public static class WifiInfoActivity extends SettingsActivity { /* empty */ }
-    public static class EnterprisePrivacySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class EnterprisePrivacySettingsActivity extends SettingsActivity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (!EnterprisePrivacySettings.isPageEnabled(this)) {
+                finish();
+            }
+        }
+    }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
