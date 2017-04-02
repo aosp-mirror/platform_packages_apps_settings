@@ -106,6 +106,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mSignalStr = context.getResources().getStringArray(R.array.wifi_signal);
         mWifiConfig = accessPoint.getConfig();
         mWifiManager = wifiManager;
+        mWifiInfo = wifiManager.getConnectionInfo();
 
         lifecycle.addObserver(this);
     }
@@ -266,15 +267,24 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     }
 
     /**
+     * Returns whether the network represented by this preference can be forgotten.
+     */
+    public boolean canForgetNetwork() {
+        return mWifiInfo != null && mWifiInfo.isEphemeral() || mWifiConfig != null;
+    }
+
+    /**
      * Forgets the wifi network associated with this preference.
      */
     public void forgetNetwork() {
-        if (mWifiConfig.ephemeral) {
-            mWifiManager.disableEphemeralNetwork(mWifiConfig.SSID);
-        } else if (mWifiConfig.isPasspoint()) {
-            mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
-        } else {
-            mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
+        if (mWifiInfo != null && mWifiInfo.isEphemeral()) {
+            mWifiManager.disableEphemeralNetwork(mWifiInfo.getSSID());
+        } else if (mWifiConfig != null) {
+            if (mWifiConfig.isPasspoint()) {
+                mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
+            } else {
+                mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
+            }
         }
     }
 }
