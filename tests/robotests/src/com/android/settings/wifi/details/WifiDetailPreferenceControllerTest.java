@@ -18,6 +18,7 @@ package com.android.settings.wifi.details;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -93,14 +94,14 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getRssi()).thenReturn(RSSI);
         when(mockAccessPoint.getSecurityString(false)).thenReturn(SECURITY);
 
+        when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
+        when(mockWifiInfo.getRssi()).thenReturn(RSSI);
+        when(mockWifiManager.getConnectionInfo()).thenReturn(mockWifiInfo);
+
         mController = new WifiDetailPreferenceController(
                 mockAccessPoint, mContext, mLifecycle, mockWifiManager);
 
         setupMockedPreferenceScreen();
-
-        when(mockWifiInfo.getRssi()).thenReturn(RSSI);
-        when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
-        when(mockWifiManager.getConnectionInfo()).thenReturn(mockWifiInfo);
     }
 
     private void setupMockedPreferenceScreen() {
@@ -143,7 +144,8 @@ public class WifiDetailPreferenceControllerTest {
     public void latestWifiInfoAndConfig_shouldBeFetchedOnResume() {
         mController.onResume();
 
-        verify(mockWifiManager).getConnectionInfo();
+        // Once in construction, once in onResume
+        verify(mockWifiManager, times(2)).getConnectionInfo();
     }
 
     @Test
@@ -193,19 +195,41 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void forgetNetwork_ephemeral() {
-        WifiConfiguration wifiConfiguration = new WifiConfiguration();
-        wifiConfiguration.SSID = "ssid";
-        // WifiConfiguration#isEphemeral will not be visible in robolectric until O is supported
-        wifiConfiguration.ephemeral = true;
-        when(mockAccessPoint.getConfig()).thenReturn(wifiConfiguration);
+    public void canForgetNetwork_noNetwork() {
+        when(mockAccessPoint.getConfig()).thenReturn(null);
 
         mController = new WifiDetailPreferenceController(
                 mockAccessPoint, mContext, mLifecycle, mockWifiManager);
 
+        assertThat(mController.canForgetNetwork()).isFalse();
+    }
+
+    @Test
+    public void canForgetNetwork_ephemeral() {
+        when(mockWifiInfo.isEphemeral()).thenReturn(true);
+        when(mockAccessPoint.getConfig()).thenReturn(null);
+
+        mController = new WifiDetailPreferenceController(
+                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
+
+        assertThat(mController.canForgetNetwork()).isTrue();
+    }
+
+    @Test
+    public void canForgetNetwork_saved() {
+        assertThat(mController.canForgetNetwork()).isTrue();
+    }
+
+    @Test
+    public void forgetNetwork_ephemeral() {
+        String ssid = "ssid";
+
+        when(mockWifiInfo.isEphemeral()).thenReturn(true);
+        when(mockWifiInfo.getSSID()).thenReturn(ssid);
+
         mController.forgetNetwork();
 
-        verify(mockWifiManager).disableEphemeralNetwork(wifiConfiguration.SSID);
+        verify(mockWifiManager).disableEphemeralNetwork(ssid);
     }
 
     @Test
