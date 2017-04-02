@@ -37,7 +37,7 @@ public interface ApplicationFeatureProvider {
      *  only relevant to instant apps.
      */
     InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
-            View view);
+            View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate);
 
     /**
      * Calculates the total number of apps installed on the device via policy in the current user
