@@ -546,13 +546,16 @@ public class InstalledAppDetails extends AppInfoBase
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
         mState.ensureIcon(mAppEntry);
         final Activity activity = getActivity();
+        final boolean isInstantApp = AppUtils.isInstant(mPackageInfo.applicationInfo);
+        final CharSequence summary =
+                isInstantApp ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
         FeatureFactory.getFactory(activity)
             .getApplicationFeatureProvider(activity)
             .newAppHeaderController(this, appSnippet)
             .setLabel(mAppEntry)
             .setIcon(mAppEntry)
-            .setSummary(getString(Utils.getInstallationStatus(mAppEntry.info)))
-            .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
+            .setSummary(summary)
+            .setIsInstantApp(isInstantApp)
             .done(false /* rebindActions */);
         mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
     }

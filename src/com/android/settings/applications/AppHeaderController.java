@@ -219,13 +219,13 @@ public class AppHeaderController {
         }
         setText(R.id.app_detail_title, mLabel);
         setText(R.id.app_detail_summary, mSummary);
-        if (rebindActions) {
-            bindAppHeaderButtons();
-        }
-
         if (mIsInstantApp) {
             setText(R.id.install_type,
                     mAppHeader.getResources().getString(R.string.install_type_instant));
+        }
+
+        if (rebindActions) {
+            bindAppHeaderButtons();
         }
 
         return mAppHeader;
