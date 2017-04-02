@@ -301,6 +301,8 @@ public class AppHeaderControllerTest {
         assertThat(label.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(label.getText()).isEqualTo(
                 appHeader.getResources().getString(R.string.install_type_instant));
+        assertThat(appHeader.findViewById(R.id.app_detail_summary).getVisibility())
+                .isEqualTo(View.GONE);
     }
 
     @Test
