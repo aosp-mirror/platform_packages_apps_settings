@@ -29,8 +29,11 @@ import com.android.settings.TintablePreference;
 import com.android.settings.Utils;
 
 /**
- * Custom preference for displaying power consumption as a bar and an icon on
+ * Custom preference for displaying battery usage info as a bar and an icon on
  * the left for the subsystem/app type.
+ *
+ * The battery usage info could be usage percentage or usage time. The preference
+ * won't show any icon if it is null.
  */
 public class PowerGaugePreference extends TintablePreference {
     private final int mIconSize;
@@ -41,16 +44,25 @@ public class PowerGaugePreference extends TintablePreference {
 
     public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
             BatteryEntry info) {
-        super(context, null);
+        this(context, null, icon, contentDescription, info);
+    }
+
+    public PowerGaugePreference(Context context) {
+        this(context, null, null, null, null);
+    }
+
+    public PowerGaugePreference(Context context, AttributeSet attrs) {
+        this(context, attrs, null, null, null);
+    }
+
+    private PowerGaugePreference(Context context, AttributeSet attrs, Drawable icon,
+            CharSequence contentDescription, BatteryEntry info) {
+        super(context, attrs);
         setIcon(icon != null ? icon : new ColorDrawable(0));
         setWidgetLayoutResource(R.layout.preference_widget_summary);
         mInfo = info;
         mContentDescription = contentDescription;
         mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
-    }
-
-    public PowerGaugePreference(Context context) {
-        this(context, null, null, null);
     }
 
     public void setContentDescription(String name) {
@@ -65,6 +77,11 @@ public class PowerGaugePreference extends TintablePreference {
 
     public String getPercent() {
         return mProgress.toString();
+    }
+
+    public void setSubtitle(String subtitle) {
+        mProgress = subtitle;
+        notifyChanged();
     }
 
     BatteryEntry getInfo() {
