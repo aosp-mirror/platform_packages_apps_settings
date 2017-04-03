@@ -373,6 +373,30 @@ public class DashboardAdapterTest {
         verify(mContext).startSuggestion(any(Intent.class));
     }
 
+    @Test
+    public void testBindViewHolder_viewsClearedOnRebind() {
+        Context context = new ContextThemeWrapper(application, R.style.Theme_Settings);
+
+        List<Tile> packages = makeSuggestions("pkg1");
+        RemoteViews remoteViews = mock(RemoteViews.class);
+        FrameLayout layout = new FrameLayout(context);
+        Button primary = new Button(context);
+        primary.setId(android.R.id.primary);
+        layout.addView(primary);
+        doReturn(layout).when(remoteViews).apply(any(Context.class), any(ViewGroup.class));
+        packages.get(0).remoteViews = remoteViews;
+        mDashboardAdapter.setCategoriesAndSuggestions(Collections.emptyList(), packages);
+        mSuggestionHolder = mDashboardAdapter.onCreateViewHolder(
+                new FrameLayout(context),
+                R.layout.suggestion_tile_card);
+
+        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 1);
+        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 1);
+
+        ViewGroup itemView = (ViewGroup) mSuggestionHolder.itemView;
+        assertThat(itemView.getChildCount()).isEqualTo(1);
+    }
+
     private List<Tile> makeSuggestions(String... pkgNames) {
         final List<Tile> suggestions = new ArrayList<>();
         for (String pkgName : pkgNames) {
