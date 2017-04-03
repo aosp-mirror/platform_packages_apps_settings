@@ -24,6 +24,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -107,6 +108,13 @@ public class DashboardSummaryTest {
         doNothing().when(mSummary).rebuildUI();
         mSummary.onCategoriesChanged();
         mSummary.onCategoriesChanged();
+        verify(mSummary).rebuildUI();
+    }
+
+    @Test
+    public void onSuggestionDismissed_categoryShouldBeRefreshed() {
+        doNothing().when(mSummary).rebuildUI();
+        mSummary.onSuggestionDismissed(mock(Tile.class));
         verify(mSummary).rebuildUI();
     }
 }
