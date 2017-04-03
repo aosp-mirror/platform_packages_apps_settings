@@ -240,6 +240,7 @@ public class EditUserPhotoController {
 
             @Override
             protected void onPostExecute(Void result) {
+                if (!mFragment.isAdded()) return;
                 cropPhoto();
             }
         }.execute();
