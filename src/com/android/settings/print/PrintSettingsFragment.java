@@ -529,7 +529,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             if (mPrintManager != null) {
                 if (isListening) {
                     List<PrintServiceInfo> services =
-                            mPrintManager.getPrintServices(PrintManager.ALL_SERVICES);
+                            mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
                     if (services == null || services.isEmpty()) {
                         mSummaryLoader.setSummary(this,
                                 mContext.getString(R.string.print_settings_summary_no_service));
