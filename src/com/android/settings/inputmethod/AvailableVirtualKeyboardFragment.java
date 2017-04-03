@@ -43,12 +43,11 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
@@ -115,7 +114,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     private static Drawable getInputMethodIcon(@NonNull final PackageManager packageManager,
             @NonNull final InputMethodInfo imi) {
         final ServiceInfo si = imi.getServiceInfo();
-        final ApplicationInfo ai = si.applicationInfo;
+        final ApplicationInfo ai = si != null ? si.applicationInfo : null;
         final String packageName = imi.getPackageName();
         if (si == null || ai == null || packageName == null) {
             return new ColorDrawable(Color.TRANSPARENT);
@@ -151,8 +150,8 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         final Context context = getPrefContext();
         final PackageManager packageManager = getActivity().getPackageManager();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
-        final int N = (imis == null ? 0 : imis.size());
-        for (int i = 0; i < N; ++i) {
+        final int numImis = (imis == null ? 0 : imis.size());
+        for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName());
@@ -162,14 +161,9 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
-        Collections.sort(mInputMethodPreferenceList, new Comparator<InputMethodPreference>() {
-            @Override
-            public int compare(InputMethodPreference lhs, InputMethodPreference rhs) {
-                return lhs.compareTo(rhs, collator);
-            }
-        });
+        mInputMethodPreferenceList.sort((lhs, rhs) -> lhs.compareTo(rhs, collator));
         getPreferenceScreen().removeAll();
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < numImis; ++i) {
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
             pref.setOrder(i);
             getPreferenceScreen().addPreference(pref);
@@ -190,8 +184,6 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     static List<SearchIndexableRaw> buildSearchIndexOfInputMethods(final Context context,
             final List<InputMethodInfo> inputMethods, final String screenTitle) {
         final List<SearchIndexableRaw> indexes = new ArrayList<>();
-        final InputMethodManager imm = (InputMethodManager) context.getSystemService(
-                Context.INPUT_METHOD_SERVICE);
         for (int i = 0; i < inputMethods.size(); i++) {
             final InputMethodInfo imi = inputMethods.get(i);
             final ServiceInfo serviceInfo = imi.getServiceInfo();
@@ -207,7 +199,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         return indexes;
     }
 
-    public static Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
         @Override
         public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
