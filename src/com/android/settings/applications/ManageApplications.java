@@ -264,12 +264,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     LIST_TYPE_MAIN,
                     LIST_TYPE_STORAGE));
 
-
-    // List types that should show instant apps.
-    public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
-                    LIST_TYPE_MAIN,
-                    LIST_TYPE_STORAGE));
-
     private View mRootView;
 
     private View mSpinnerHeader;
