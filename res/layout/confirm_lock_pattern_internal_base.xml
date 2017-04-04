@@ -58,15 +58,6 @@
                     android:layout_marginStart="?attr/suwMarginSides"
                     android:layout_marginEnd="?attr/suwMarginSides" />
 
-                <Button
-                    android:id="@+id/cancelButton"
-                    style="@style/SetupWizardButton.Negative"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides"
-                    android:text="@string/cancel" />
-
             </LinearLayout>
 
         </ScrollView>
@@ -108,5 +99,15 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
+        <Button
+            android:id="@+id/cancelButton"
+            style="@style/SuwGlifButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?attr/suwMarginSides"
+            android:layout_marginEnd="?attr/suwMarginSides"
+            android:text="@string/cancel" />
+
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+
 </com.android.setupwizardlib.GlifLayout>
