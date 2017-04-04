@@ -180,8 +180,8 @@ public class RequestPermissionActivity extends Activity implements
                 builder.setMessage(message);
             } else {
                 CharSequence message = mAppLabel != null
-                        ? getString(R.string.bluetooth_ask_discovery, mAppLabel)
-                        : getString(R.string.bluetooth_ask_discovery_no_name);
+                        ? getString(R.string.bluetooth_ask_discovery, mAppLabel, mTimeout)
+                        : getString(R.string.bluetooth_ask_discovery_no_name, mTimeout);
                 builder.setMessage(message);
             }
             builder.setPositiveButton(getString(R.string.allow), this);
