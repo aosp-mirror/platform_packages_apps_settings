@@ -33,6 +33,7 @@ import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -86,10 +87,12 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Activity to pick an application that will be used to display installation information and
@@ -252,6 +255,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_WRITE_SETTINGS = 7;
     public static final int LIST_TYPE_MANAGE_SOURCES = 8;
     public static final int LIST_TYPE_GAMES = 9;
+
+
+    // List types that should show instant apps.
+    public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
+                    LIST_TYPE_MAIN,
+                    LIST_TYPE_STORAGE));
 
     private View mRootView;
 
@@ -701,7 +710,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     }
 
     public void setHasInstant(boolean haveInstantApps) {
-        mFilterAdapter.setFilterEnabled(FILTER_APPS_INSTANT, haveInstantApps);
+        if (LIST_TYPES_WITH_INSTANT.contains(mListType)) {
+            mFilterAdapter.setFilterEnabled(FILTER_APPS_INSTANT, haveInstantApps);
+        }
     }
 
     static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
@@ -956,8 +967,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 filterObj = mOverrideFilter;
             }
             if (!mManageApplications.mShowSystem) {
-                filterObj = new CompoundFilter(filterObj,
-                        ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+                if (LIST_TYPES_WITH_INSTANT.contains(mManageApplications.mListType)) {
+                    filterObj = new CompoundFilter(filterObj,
+                            ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_AND_INSTANT);
+                } else {
+                    filterObj = new CompoundFilter(filterObj,
+                            ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+                }
             }
             switch (mLastSortMode) {
                 case R.id.sort_order_size:
