@@ -599,6 +599,8 @@ public class PowerUsageSummary extends PowerUsageBase {
                 || drainType == DrainType.WIFI
                 || drainType == DrainType.SCREEN
                 || drainType == DrainType.BLUETOOTH
+                || drainType == DrainType.UNACCOUNTED
+                || drainType == DrainType.OVERCOUNTED
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
                 || mPowerFeatureProvider.isTypeService(sipper)
                 || mPowerFeatureProvider.isTypeSystem(sipper);
@@ -625,7 +627,11 @@ public class PowerUsageSummary extends PowerUsageBase {
             final BatterySipper sipper = sippers.get(i);
             if (shouldHideSipper(sipper)) {
                 sippers.remove(i);
-                totalPowerMah += sipper.totalPowerMah;
+                if (sipper.drainType != DrainType.OVERCOUNTED
+                        && sipper.drainType != DrainType.UNACCOUNTED) {
+                    // Don't add it if it is overcounted or unaccounted
+                    totalPowerMah += sipper.totalPowerMah;
+                }
             }
         }
 

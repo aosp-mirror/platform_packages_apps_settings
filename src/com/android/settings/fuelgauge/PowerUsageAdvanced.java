@@ -66,7 +66,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.USER,
             UsageType.IDLE,
             UsageType.APP,
-            UsageType.UNACCOUNTED};
+            UsageType.UNACCOUNTED,
+            UsageType.OVERCOUNTED};
     private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
@@ -169,6 +170,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mUsageListGroup.removeAll();
         for (int i = 0, size = dataList.size(); i < size; i++) {
             final PowerUsageData batteryData = dataList.get(i);
+            if (shouldHide(batteryData)) {
+                continue;
+            }
             final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext());
 
             pref.setKey(String.valueOf(batteryData.usageType));
@@ -199,6 +203,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.CELL;
         } else if (drainType == DrainType.UNACCOUNTED) {
             return UsageType.UNACCOUNTED;
+        } else if (drainType == DrainType.OVERCOUNTED) {
+            return UsageType.OVERCOUNTED;
         } else if (mPowerUsageFeatureProvider.isTypeSystem(sipper)) {
             return UsageType.SYSTEM;
         } else if (mPowerUsageFeatureProvider.isTypeService(sipper)) {
@@ -206,6 +212,16 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         } else {
             return UsageType.APP;
         }
+    }
+
+    @VisibleForTesting
+    boolean shouldHide(PowerUsageData powerUsageData) {
+        if (powerUsageData.usageType == UsageType.UNACCOUNTED
+                || powerUsageData.usageType == UsageType.OVERCOUNTED) {
+            return true;
+        }
+
+        return false;
     }
 
     @VisibleForTesting
@@ -297,7 +313,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 UsageType.BLUETOOTH,
                 UsageType.USER,
                 UsageType.IDLE,
-                UsageType.UNACCOUNTED})
+                UsageType.UNACCOUNTED,
+                UsageType.OVERCOUNTED})
         public @interface UsageType {
             int APP = 0;
             int WIFI = 1;
@@ -308,6 +325,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             int USER = 6;
             int IDLE = 7;
             int UNACCOUNTED = 8;
+            int OVERCOUNTED = 9;
         }
 
         @StringRes
@@ -353,6 +371,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return R.string.power_idle;
                 case UsageType.UNACCOUNTED:
                     return R.string.power_unaccounted;
+                case UsageType.OVERCOUNTED:
+                    return R.string.power_overcounted;
                 case UsageType.APP:
                 default:
                     return R.string.power_apps;
