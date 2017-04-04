@@ -18,17 +18,25 @@ package com.android.settings.fuelgauge;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.graph.BatteryMeterDrawableBase;
 
 public class BatteryMeterView extends ImageView {
-    private BatteryMeterDrawable mDrawable;
+    @VisibleForTesting
+    BatteryMeterDrawable mDrawable;
+    @VisibleForTesting
+    ColorFilter mErrorColorFilter;
+    @VisibleForTesting
+    ColorFilter mAccentColorFilter;
 
     public BatteryMeterView(Context context) {
         this(context, null, 0);
@@ -42,21 +50,30 @@ public class BatteryMeterView extends ImageView {
         super(context, attrs, defStyleAttr);
 
         final int frameColor = context.getColor(R.color.batterymeter_frame_color);
-        final int tintColor = Utils.getColorAttr(context, android.R.attr.colorAccent);
+        mAccentColorFilter = new PorterDuffColorFilter(
+                Utils.getColorAttr(context, android.R.attr.colorAccent), PorterDuff.Mode.SRC_IN);
+        mErrorColorFilter = new PorterDuffColorFilter(
+                context.getColor(R.color.battery_icon_color_error), PorterDuff.Mode.SRC_IN);
 
         mDrawable = new BatteryMeterDrawable(context, frameColor);
-        mDrawable.setColorFilter(new PorterDuffColorFilter(tintColor, PorterDuff.Mode.SRC_IN));
         mDrawable.setShowPercent(false);
+        mDrawable.setBatteryColorFilter(mAccentColorFilter);
+        mDrawable.setWarningColorFilter(
+                new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
         setImageDrawable(mDrawable);
     }
 
-    public void setBatteryInfo(int level) {
+    public void setBatteryLevel(int level) {
         mDrawable.setBatteryLevel(level);
+        if (level < mDrawable.getCriticalLevel()) {
+            mDrawable.setBatteryColorFilter(mErrorColorFilter);
+        } else {
+            mDrawable.setBatteryColorFilter(mAccentColorFilter);
+        }
     }
 
-    @VisibleForTesting
-    void setBatteryDrawable(BatteryMeterDrawable drawable) {
-        mDrawable = drawable;
+    public void setCharging(boolean charging) {
+        mDrawable.setCharging(charging);
     }
 
     public static class BatteryMeterDrawable extends BatteryMeterDrawableBase {
@@ -80,6 +97,16 @@ public class BatteryMeterView extends ImageView {
         @Override
         public int getIntrinsicHeight() {
             return mIntrinsicHeight;
+        }
+
+        public void setWarningColorFilter(@Nullable ColorFilter colorFilter) {
+            mWarningTextPaint.setColorFilter(colorFilter);
+        }
+
+        public void setBatteryColorFilter(@Nullable ColorFilter colorFilter) {
+            mFramePaint.setColorFilter(colorFilter);
+            mBatteryPaint.setColorFilter(colorFilter);
+            mBoltPaint.setColorFilter(colorFilter);
         }
     }
 

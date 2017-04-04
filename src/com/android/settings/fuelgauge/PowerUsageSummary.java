@@ -568,14 +568,15 @@ public class PowerUsageSummary extends PowerUsageBase {
                 .findViewById(R.id.battery_header_icon);
         final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent);
         final TextView summary1 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
-        timeText.setText(Utils.formatPercentage(info.mBatteryLevel));
+        timeText.setText(Utils.formatPercentage(info.batteryLevel));
         if (info.remainingLabel == null ) {
             summary1.setText(info.statusLabel);
         } else {
             summary1.setText(info.remainingLabel);
         }
 
-        batteryView.setBatteryInfo(info.mBatteryLevel);
+        batteryView.setBatteryLevel(info.batteryLevel);
+        batteryView.setCharging(!info.discharging);
     }
 
     @VisibleForTesting
@@ -736,7 +737,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
                     @Override
                     public void onBatteryInfoLoaded(BatteryInfo info) {
-                        mLoader.setSummary(SummaryProvider.this, info.mChargeLabelString);
+                        mLoader.setSummary(SummaryProvider.this, info.chargeLabelString);
                     }
                 });
             }

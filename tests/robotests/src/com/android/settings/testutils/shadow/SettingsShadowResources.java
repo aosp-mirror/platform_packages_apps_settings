@@ -5,9 +5,12 @@ import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ArrayRes;
+import android.support.annotation.ColorRes;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
@@ -50,6 +53,14 @@ public class SettingsShadowResources extends ShadowResources {
             return 0;
         }
         return directlyOn(realResources, Resources.class).getDimensionPixelSize(id);
+    }
+
+    @Implementation
+    public int getColor(@ColorRes int id, @Nullable Theme theme) throws NotFoundException {
+        if (id == R.color.battery_icon_color_error) {
+            return Color.WHITE;
+        }
+        return directlyOn(realResources, Resources.class).getColor(id, theme);
     }
 
     @Implementation
