@@ -35,6 +35,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -104,12 +105,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
-        Collections.sort(mInputMethodPreferenceList, new Comparator<InputMethodPreference>() {
-            @Override
-            public int compare(InputMethodPreference lhs, InputMethodPreference rhs) {
-                return lhs.compareTo(rhs, collator);
-            }
-        });
+        mInputMethodPreferenceList.sort((lhs, rhs) -> lhs.compareTo(rhs, collator));
         getPreferenceScreen().removeAll();
         for (int i = 0; i < N; ++i) {
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
