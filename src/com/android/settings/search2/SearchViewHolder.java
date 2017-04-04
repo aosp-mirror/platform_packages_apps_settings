@@ -40,11 +40,14 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
     public final ImageView iconView;
 
     protected final MetricsFeatureProvider mMetricsFeatureProvider;
+    protected final SearchFeatureProvider mSearchFeatureProvider;
 
     public SearchViewHolder(View view) {
         super(view);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(view.getContext())
-                .getMetricsFeatureProvider();
+        final FeatureFactory featureFactory = FeatureFactory
+                .getFactory(view.getContext().getApplicationContext());
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
+        mSearchFeatureProvider = featureFactory.getSearchFeatureProvider();
         titleView = view.findViewById(android.R.id.title);
         summaryView = view.findViewById(android.R.id.summary);
         iconView = view.findViewById(android.R.id.icon);

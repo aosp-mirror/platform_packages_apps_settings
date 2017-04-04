@@ -40,11 +40,14 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
     private final List<SearchResult> mSearchResults;
     private final SearchFragment mFragment;
     private Map<String, List<? extends SearchResult>> mResultsMap;
+    private final SearchFeatureProvider mSearchFeatureProvider;
 
-    public SearchResultsAdapter(SearchFragment fragment) {
+    public SearchResultsAdapter(SearchFragment fragment,
+            SearchFeatureProvider searchFeatureProvider) {
         mFragment = fragment;
         mSearchResults = new ArrayList<>();
         mResultsMap = new ArrayMap<>();
+        mSearchFeatureProvider = searchFeatureProvider;
 
         setHasStableIds(true);
     }
@@ -119,9 +122,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
      * Merge the results from each of the loaders into one list for the adapter.
      * Prioritizes results from the local database over installed apps.
      *
+     * @param query user query corresponding to these results
      * @return Number of matched results
      */
-    public int displaySearchResults() {
+    public int displaySearchResults(String query) {
         final List<? extends SearchResult> databaseResults = mResultsMap
                 .get(DatabaseResultLoader.class.getName());
         final List<? extends SearchResult> installedAppResults = mResultsMap
@@ -149,6 +153,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         }
         while (appIndex < appSize) {
             results.add(installedAppResults.get(appIndex++));
+        }
+
+        if (mSearchFeatureProvider
+                .isSmartSearchRankingEnabled(mFragment.getContext().getApplicationContext())) {
+            // TODO: run this in parallel to loading the results if takes too long
+            mSearchFeatureProvider.rankSearchResults(query, results);
         }
 
         mSearchResults.addAll(results);

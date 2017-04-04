@@ -117,7 +117,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         final LoaderManager loaderManager = getLoaderManager();
-        mSearchAdapter = new SearchResultsAdapter(this);
+        mSearchAdapter = new SearchResultsAdapter(this, mSearchFeatureProvider);
         mSavedQueryController = new SavedQueryController(
                 getContext(), loaderManager, mSearchAdapter);
         mSearchFeatureProvider.initFeedbackButton();
@@ -251,7 +251,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
             return;
         }
-        final int resultCount = mSearchAdapter.displaySearchResults();
+        final int resultCount = mSearchAdapter.displaySearchResults(mQuery);
         mNoResultsView.setVisibility(resultCount == 0 ? View.VISIBLE : View.GONE);
         mSearchFeatureProvider.showFeedbackButton(this, getView());
     }
