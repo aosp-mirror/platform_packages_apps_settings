@@ -2558,6 +2558,7 @@
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="android.settings.SOUND_SETTINGS" />
+                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -2565,10 +2566,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter android:priority="6">
                 <action android:name="com.android.settings.action.SETTINGS" />
