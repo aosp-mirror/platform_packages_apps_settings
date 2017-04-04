@@ -22,10 +22,15 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
 import android.util.Log;
+
+import com.android.internal.os.BatterySipper;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * Utils for battery operation
@@ -43,9 +48,14 @@ public class BatteryUtils {
     }
 
     private static final String TAG = "BatteryUtils";
+
+    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
+    private static final int SECONDS_IN_HOUR = 60 * 60;
     private static BatteryUtils sInstance;
 
     private PackageManager mPackageManager;
+    @VisibleForTesting
+    PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public static BatteryUtils getInstance(Context context) {
         if (sInstance == null || sInstance.isDataCorrupted()) {
@@ -56,6 +66,8 @@ public class BatteryUtils {
 
     private BatteryUtils(Context context) {
         mPackageManager = context.getPackageManager();
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(
+                context).getPowerUsageFeatureProvider(context);
     }
 
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
@@ -103,6 +115,67 @@ public class BatteryUtils {
         Log.v(TAG, "foreground time(us): " + timeUs);
 
         return convertUsToMs(timeUs);
+    }
+
+    /**
+     * Remove the {@link BatterySipper} that we should hide.
+     *
+     * @param sippers sipper list that need to check and remove
+     * @return the total power of the hidden items of {@link BatterySipper}
+     */
+    public double removeHiddenBatterySippers(List<BatterySipper> sippers) {
+        double totalPowerMah = 0;
+        for (int i = sippers.size() - 1; i >= 0; i--) {
+            final BatterySipper sipper = sippers.get(i);
+            if (shouldHideSipper(sipper)) {
+                sippers.remove(i);
+                if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED
+                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED) {
+                    // Don't add it if it is overcounted or unaccounted
+                    totalPowerMah += sipper.totalPowerMah;
+                }
+            }
+        }
+
+        return totalPowerMah;
+    }
+
+    /**
+     * Check whether we should hide the battery sipper.
+     */
+    public boolean shouldHideSipper(BatterySipper sipper) {
+        final BatterySipper.DrainType drainType = sipper.drainType;
+
+        return drainType == BatterySipper.DrainType.IDLE
+                || drainType == BatterySipper.DrainType.CELL
+                || drainType == BatterySipper.DrainType.WIFI
+                || drainType == BatterySipper.DrainType.SCREEN
+                || drainType == BatterySipper.DrainType.BLUETOOTH
+                || drainType == BatterySipper.DrainType.UNACCOUNTED
+                || drainType == BatterySipper.DrainType.OVERCOUNTED
+                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
+                || mPowerUsageFeatureProvider.isTypeService(sipper)
+                || mPowerUsageFeatureProvider.isTypeSystem(sipper);
+    }
+
+    /**
+     * Calculate the power usage percentage for an app
+     *
+     * @param powerUsageMah   power used by the app
+     * @param totalPowerMah   total power used in the system
+     * @param hiddenPowerMah  power used by no-actionable app that we want to hide, i.e. Screen,
+     *                        Android OS.
+     * @param dischargeAmount The discharge amount calculated by {@link BatteryStats}
+     * @return A percentage value scaled by {@paramref dischargeAmount}
+     * @see BatteryStats#getDischargeAmount(int)
+     */
+    public double calculateBatteryPercent(double powerUsageMah, double totalPowerMah,
+            double hiddenPowerMah, int dischargeAmount) {
+        if (totalPowerMah == 0) {
+            return 0;
+        }
+
+        return (powerUsageMah / (totalPowerMah - hiddenPowerMah)) * dischargeAmount;
     }
 
     private long convertUsToMs(long timeUs) {
