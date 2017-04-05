@@ -60,7 +60,7 @@ public class StorageItemPreferenceTest {
 
     @Test
     public void testProgressBarPercentageSet() {
-        final PreferenceViewHolder holder = new PreferenceViewHolder(
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(R.layout.storage_item, null));
         final ProgressBar progressBar =
                 (ProgressBar) holder.itemView.findViewById(android.R.id.progress);

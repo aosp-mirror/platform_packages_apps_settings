@@ -56,7 +56,7 @@ public class FooterPreferenceTest {
     @Test
     public void bindPreference_shouldLinkifyContent() {
         final FooterPreference preference = new FooterPreference(mContext);
-        final PreferenceViewHolder holder = new PreferenceViewHolder(
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(R.layout.preference_footer, null));
 
         preference.onBindViewHolder(holder);
