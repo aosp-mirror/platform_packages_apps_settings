@@ -1560,7 +1560,7 @@
         </activity>
 
         <activity android:name=".notification.RedactionInterstitial"
-            android:theme="@style/SetupWizardTheme.Light" />
+            android:theme="@style/GlifTheme.Light" />
 
         <activity android:name=".notification.RedactionSettingsStandalone"
                   android:exported="true">
@@ -1571,11 +1571,11 @@
         </activity>
 
         <activity android:name="ConfirmLockPattern"
-            android:theme="@style/SetupWizardTheme.Light"/>
+            android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name="ConfirmLockPassword"
             android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/SetupWizardTheme.Light"/>
+            android:theme="@style/GlifTheme.Light"/>
 
         <activity
             android:name=".Settings$FingerprintSuggestionActivity"
@@ -1607,7 +1607,7 @@
         <activity android:name=".fingerprint.SetupFingerprintEnrollIntroduction"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
-            android:theme="@style/SetupWizardTheme.Light">
+            android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETUP" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1617,17 +1617,17 @@
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPattern$InternalActivity"
             android:exported="false"
-            android:theme="@style/SetupWizardTheme.Light"/>
+            android:theme="@style/GlifTheme.Light"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPassword$InternalActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/SetupWizardTheme.Light"/>
+            android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name="SetupChooseLockGeneric"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardTheme.Light"
+            android:theme="@style/GlifTheme.Light"
             android:label="@string/lock_settings_picker_title">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SETUP_LOCK_SCREEN" />
@@ -1690,30 +1690,30 @@
         <activity android:name="SetupChooseLockPattern"
             android:exported="false"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardTheme.Light" />
+            android:theme="@style/GlifTheme.Light" />
 
         <activity android:name="ChooseLockPattern"
             android:exported="false"
-            android:theme="@style/SetupWizardTheme.Light" />
+            android:theme="@style/GlifTheme.Light" />
 
         <activity android:name="SetupChooseLockPassword"
             android:exported="false"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardTheme.Light"
+            android:theme="@style/GlifTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <activity android:name="ChooseLockPassword"
             android:exported="false"
-            android:theme="@style/SetupWizardTheme.Light"
+            android:theme="@style/GlifTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity android:name=".SetupEncryptionInterstitial"
             android:label="@string/encryption_interstitial_header"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardTheme.Light"/>
+            android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name=".EncryptionInterstitial"
-            android:theme="@style/SetupWizardTheme.Light" />
+            android:theme="@style/GlifTheme.Light" />
 
         <activity android:name=".Settings$StatusActivity"
                 android:label="@string/device_status_activity_title"

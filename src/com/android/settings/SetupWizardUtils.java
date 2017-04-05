@@ -23,11 +23,20 @@ import com.android.setupwizardlib.util.WizardManagerHelper;
 public class SetupWizardUtils {
 
     public static int getTheme(Intent intent) {
-        if (WizardManagerHelper.isLightTheme(intent, true)) {
-            return R.style.SetupWizardTheme_Light;
-        } else {
-            return R.style.SetupWizardTheme;
+        String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
+        if (theme != null) {
+            switch (theme) {
+                case WizardManagerHelper.THEME_GLIF_V2_LIGHT:
+                    return R.style.GlifV2Theme_Light;
+                case WizardManagerHelper.THEME_GLIF_V2:
+                    return R.style.GlifV2Theme;
+                case WizardManagerHelper.THEME_GLIF_LIGHT:
+                    return R.style.GlifTheme_Light;
+                case WizardManagerHelper.THEME_GLIF:
+                    return R.style.GlifTheme;
+            }
         }
+        return R.style.GlifTheme_Light;
     }
 
     public static int getTransparentTheme(Intent intent) {

@@ -52,7 +52,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
             mConfirmCredentialTheme = ConfirmCredentialTheme.DARK;
         } else {
-            setTheme(R.style.SetupWizardTheme_Light);
+            setTheme(R.style.GlifTheme_Light);
             mConfirmCredentialTheme = ConfirmCredentialTheme.INTERNAL;
         }
         super.onCreate(savedState);
