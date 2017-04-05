@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 
 import android.app.Activity;
+import android.app.usage.StorageStatsManager;
 import android.icu.text.NumberFormat;
 import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
@@ -40,6 +41,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -73,9 +75,14 @@ public class StorageSettingsTest {
         final SummaryLoader.SummaryProvider provider =
                 StorageSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(mActivity, loader);
         final VolumeInfo volumeInfo = mVolumes.get(0);
+        when(volumeInfo.isMountedReadable()).thenReturn(true);
         when(volumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
-        when(volumeInfo.getPath().getTotalSpace()).thenReturn(500L);
-        when(volumeInfo.getPath().getFreeSpace()).thenReturn(0L);
+        when(mStorageManagerVolumeProvider.getTotalBytes(
+                        any(StorageStatsManager.class), any(VolumeInfo.class)))
+                .thenReturn(500L);
+        when(mStorageManagerVolumeProvider.getFreeBytes(
+                        any(StorageStatsManager.class), any(VolumeInfo.class)))
+                .thenReturn(0L);
 
         ReflectionHelpers.setField(
                 provider, "mStorageManagerVolumeProvider", mStorageManagerVolumeProvider);
