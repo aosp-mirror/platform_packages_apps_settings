@@ -718,7 +718,7 @@ public class InstalledAppDetails extends AppInfoBase
                     ? R.string.storage_type_external
                     : R.string.storage_type_internal);
             return context.getString(R.string.storage_summary_format,
-                    getSize(context, stats), storageType);
+                    getSize(context, stats), storageType.toString().toLowerCase());
         }
     }
 
