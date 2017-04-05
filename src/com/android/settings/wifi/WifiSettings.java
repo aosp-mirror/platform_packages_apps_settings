@@ -836,32 +836,24 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void setOffMessage() {
-        final CharSequence briefText = getText(R.string.wifi_empty_list_wifi_off);
-
+        final CharSequence title = getText(R.string.wifi_empty_list_wifi_off);
         // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
         // read the system settings directly. Because when the device is in Airplane mode, even if
         // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
-        final ContentResolver resolver = getActivity().getContentResolver();
-        final boolean wifiScanningMode = Settings.Global.getInt(
-                resolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-
-        if (!wifiScanningMode) {
-            // Show only the brief text if the user is not allowed to configure scanning settings,
-            // or the scanning mode has been turned off.
-            mStatusMessagePreference.setTitle(briefText);
-        } else {
-            LinkifyUtils.OnClickListener clickListener = new LinkifyUtils.OnClickListener() {
-                @Override
-                public void onClick() {
-                    final SettingsActivity activity = (SettingsActivity) getActivity();
-                    activity.startPreferencePanel(WifiSettings.this,
-                            ScanningSettings.class.getName(),
-                            null, R.string.location_scanning_screen_title, null, null, 0);
-                }
-            };
-            mStatusMessagePreference.setText(
-                    briefText, getText(R.string.wifi_scan_notify_text), clickListener);
-        }
+        final boolean wifiScanningMode = Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        final CharSequence description = wifiScanningMode ? getText(R.string.wifi_scan_notify_text)
+                : getText(R.string.wifi_scan_notify_text_scanning_off);
+        final LinkifyUtils.OnClickListener clickListener = new LinkifyUtils.OnClickListener() {
+            @Override
+            public void onClick() {
+                final SettingsActivity activity = (SettingsActivity) getActivity();
+                activity.startPreferencePanel(WifiSettings.this,
+                        ScanningSettings.class.getName(),
+                        null, R.string.location_scanning_screen_title, null, null, 0);
+            }
+        };
+        mStatusMessagePreference.setText(title, description, clickListener);
         removeConnectedAccessPointPreference();
         mAccessPointsPreferenceCategory.removeAll();
         mAccessPointsPreferenceCategory.addPreference(mStatusMessagePreference);
