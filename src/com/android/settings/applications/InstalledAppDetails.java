@@ -89,6 +89,7 @@ import com.android.settings.applications.instantapps.InstantAppButtonsController
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.notification.AppNotificationSettings;
@@ -183,10 +184,12 @@ public class InstalledAppDetails extends AppInfoBase
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
 
-    private Preference mBatteryPreference;
-
-    private BatteryStatsHelper mBatteryHelper;
-    private BatterySipper mSipper;
+    @VisibleForTesting
+    Preference mBatteryPreference;
+    @VisibleForTesting
+    BatterySipper mSipper;
+    @VisibleForTesting
+    BatteryStatsHelper mBatteryHelper;
 
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
@@ -194,6 +197,7 @@ public class InstalledAppDetails extends AppInfoBase
     private InstantAppButtonsController mInstantAppButtonsController;
 
     private AppStorageStats mLastResult;
+    private String mBatteryPercent;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -686,7 +690,8 @@ public class InstalledAppDetails extends AppInfoBase
                     BatteryStats.STATS_SINCE_CHARGED);
             final int percentOfMax = (int) ((mSipper.totalPowerMah)
                     / mBatteryHelper.getTotalPower() * dischargeAmount + .5f);
-            mBatteryPreference.setSummary(getString(R.string.battery_summary, percentOfMax));
+            mBatteryPercent = Utils.formatPercentage(percentOfMax);
+            mBatteryPreference.setSummary(getString(R.string.battery_summary, mBatteryPercent));
         } else {
             mBatteryPreference.setEnabled(false);
             mBatteryPreference.setSummary(getString(R.string.no_battery_summary));
@@ -960,9 +965,9 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mDataPreference) {
             startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
         } else if (preference == mBatteryPreference) {
-            BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
-            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
-                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true, false);
+            BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
+            AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
+                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
         } else {
             return false;
         }
