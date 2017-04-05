@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static android.os.BatteryStats.Uid.PROCESS_STATE_BACKGROUND;
@@ -56,7 +57,8 @@ public class BatteryUtilsTest {
     private static final long TIME_EXPECTED_ALL = 15000;
 
     @Mock
-    BatteryStats.Uid mUid;
+    private BatteryStats.Uid mUid;
+    private BatteryUtils mBatteryUtils;
 
     @Before
     public void setUp() {
@@ -72,11 +74,13 @@ public class BatteryUtilsTest {
                 anyLong(), anyInt());
         doReturn(TIME_STATE_BACKGROUND).when(mUid).getProcessStateTime(eq(PROCESS_STATE_BACKGROUND),
                 anyLong(), anyInt());
+
+        mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
     }
 
     @Test
     public void testGetProcessTimeMs_typeForeground_timeCorrect() {
-        final long time = BatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.FOREGROUND, mUid,
+        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.FOREGROUND, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(TIME_EXPECTED_FOREGROUND);
@@ -84,7 +88,7 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetProcessTimeMs_typeBackground_timeCorrect() {
-        final long time = BatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.BACKGROUND, mUid,
+        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.BACKGROUND, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(TIME_EXPECTED_BACKGROUND);
@@ -92,7 +96,7 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetProcessTimeMs_typeAll_timeCorrect() {
-        final long time = BatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, mUid,
+        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(TIME_EXPECTED_ALL);
@@ -100,7 +104,7 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetProcessTimeMs_uidNull_returnZero() {
-        final long time = BatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, null,
+        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, null,
                 BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(0);

@@ -110,6 +110,8 @@ public class PowerUsageSummary extends PowerUsageBase {
     PowerGaugePreference mLastFullChargePref;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerFeatureProvider;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
 
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
@@ -126,6 +128,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         mLastFullChargePref = (PowerGaugePreference) findPreference(
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
+
+        mBatteryUtils = BatteryUtils.getInstance(getContext());
 
         initFeatureProvider();
     }
@@ -494,7 +498,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
                 if (sipper.usageTimeMs == 0 && sipper.drainType == DrainType.APP) {
-                    sipper.usageTimeMs = BatteryUtils.getProcessTimeMs(
+                    sipper.usageTimeMs = mBatteryUtils.getProcessTimeMs(
                             BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
                 }
                 setUsageSummary(pref, usedTime, sipper.usageTimeMs);
