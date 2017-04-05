@@ -15,19 +15,17 @@
  */
 package com.android.settings.fuelgauge;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.os.Process;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -40,6 +38,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.BatteryInfo;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,13 +52,15 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -77,9 +78,13 @@ import static org.mockito.Mockito.when;
 public class PowerUsageSummaryTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String TIME_LEFT = "2h30min";
+    private static final int BATTERY_LEVEL = 55;
     private static final int UID = 123;
     private static final int POWER_MAH = 100;
     private static final long REMAINING_TIME_US = 100000;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 25000;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
+            TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
     private static final int DISCHARGE_AMOUNT = 100;
     private static final long USAGE_TIME_MS = 10000;
     private static final double TOTAL_POWER = 200;
@@ -117,20 +122,16 @@ public class PowerUsageSummaryTest {
     @Mock
     private BatteryMeterView mBatteryMeterView;
     @Mock
-    private TextView mTimeText;
+    private TextView mBatteryPercentText;
     @Mock
     private TextView mSummary1;
     @Mock
-    private TextView mSummary2;
-    @Mock
     private BatteryInfo mBatteryInfo;
     @Mock
-    private Preference mScreenUsagePref;
+    private PowerGaugePreference mScreenUsagePref;
     @Mock
-    private Preference mScreenConsumptionPref;
-    @Mock
-    private Preference mCellularNetworkPref;
-    @Mock
+    private PowerGaugePreference mLastFullChargePref;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryHelper;
     @Mock
     private PowerManager mPowerManager;
@@ -153,7 +154,7 @@ public class PowerUsageSummaryTest {
 
         mFragment = spy(new TestFragment(mContext));
         mFragment.initFeatureProvider();
-        
+
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())
                 .thenReturn(MENU_ADDITIONAL_BATTERY_INFO);
@@ -162,6 +163,8 @@ public class PowerUsageSummaryTest {
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(ADDITIONAL_BATTERY_INFO_INTENT);
         when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
+        when(mBatteryHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
+                TIME_SINCE_LAST_FULL_CHARGE_US);
 
         when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
@@ -172,8 +175,7 @@ public class PowerUsageSummaryTest {
         mCellBatterySipper.totalPowerMah = POWER_MAH;
 
         when(mBatteryLayoutPref.findViewById(R.id.summary1)).thenReturn(mSummary1);
-        when(mBatteryLayoutPref.findViewById(R.id.summary2)).thenReturn(mSummary2);
-        when(mBatteryLayoutPref.findViewById(R.id.time)).thenReturn(mTimeText);
+        when(mBatteryLayoutPref.findViewById(R.id.battery_percent)).thenReturn(mBatteryPercentText);
         when(mBatteryLayoutPref.findViewById(R.id.battery_header_icon))
                 .thenReturn(mBatteryMeterView);
         mFragment.setBatteryLayoutPreference(mBatteryLayoutPref);
@@ -194,8 +196,9 @@ public class PowerUsageSummaryTest {
         mFragment.mStatsHelper = mBatteryHelper;
         when(mBatteryHelper.getUsageList()).thenReturn(mUsageList);
         mFragment.mScreenUsagePref = mScreenUsagePref;
-        mFragment.mScreenConsumptionPref = mScreenConsumptionPref;
-        mFragment.mCellularNetworkPref = mCellularNetworkPref;
+        mFragment.mLastFullChargePref = mLastFullChargePref;
+
+        mBatteryInfo.mBatteryLevel = BATTERY_LEVEL;
     }
 
     @Test
@@ -226,7 +229,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testOptionsMenu_MenuHighPower_MetricEventInvoked() {
+    public void testOptionsMenu_menuHighPower_metricEventInvoked() {
         mFragment.onOptionsItemSelected(mHighPowerMenu);
 
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
@@ -234,7 +237,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testOptionsMenu_MenuAdditionalBattery_MetricEventInvoked() {
+    public void testOptionsMenu_menuAdditionalBattery_metricEventInvoked() {
         mFragment.onOptionsItemSelected(mAdditionalBatteryInfoMenu);
 
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
@@ -242,7 +245,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testOptionsMenu_MenuAppToggle_MetricEventInvoked() {
+    public void testOptionsMenu_menuAppToggle_metricEventInvoked() {
         mFragment.onOptionsItemSelected(mToggleAppsMenu);
         mFragment.mShowAllApps = false;
 
@@ -251,7 +254,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testOptionsMenu_ToggleAppsEnabled() {
+    public void testOptionsMenu_toggleAppsEnabled() {
         when(mFeatureFactory.powerUsageFeatureProvider.isPowerAccountingToggleEnabled())
                 .thenReturn(true);
         mFragment.mShowAllApps = false;
@@ -262,13 +265,13 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testOptionsMenu_ClickToggleAppsMenu_DataChanged() {
+    public void testOptionsMenu_clickToggleAppsMenu_dataChanged() {
         testToggleAllApps(true);
         testToggleAllApps(false);
     }
 
     @Test
-    public void testExtractKeyFromSipper_TypeAPPUidObjectNull_ReturnPackageNames() {
+    public void testExtractKeyFromSipper_typeAPPUidObjectNull_returnPackageNames() {
         mNormalBatterySipper.uidObj = null;
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
@@ -277,7 +280,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testExtractKeyFromSipper_TypeOther_ReturnDrainType() {
+    public void testExtractKeyFromSipper_typeOther_returnDrainType() {
         mNormalBatterySipper.uidObj = null;
         mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
 
@@ -286,7 +289,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testExtractKeyFromSipper_TypeAPPUidObjectNotNull_ReturnUid() {
+    public void testExtractKeyFromSipper_typeAPPUidObjectNotNull_returnUid() {
         mNormalBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
@@ -295,7 +298,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testRemoveHiddenBatterySippers_ContainsHiddenSippers_RemoveAndReturnValue() {
+    public void testRemoveHiddenBatterySippers_containsHiddenSippers_removeAndReturnValue() {
         final List<BatterySipper> sippers = new ArrayList<>();
         sippers.add(mNormalBatterySipper);
         sippers.add(mScreenBatterySipper);
@@ -309,37 +312,37 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testShouldHideSipper_TypeIdle_ReturnTrue() {
+    public void testShouldHideSipper_typeIdle_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
-    public void testShouldHideSipper_TypeWifi_ReturnTrue() {
+    public void testShouldHideSipper_typeWifi_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.WIFI;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
-    public void testShouldHideSipper_TypeCell_ReturnTrue() {
+    public void testShouldHideSipper_typeCell_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.CELL;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
-    public void testShouldHideSipper_TypeScreen_ReturnTrue() {
+    public void testShouldHideSipper_typeScreen_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
-    public void testShouldHideSipper_TypeBluetooth_ReturnTrue() {
+    public void testShouldHideSipper_typeBluetooth_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
-    public void testShouldHideSipper_TypeSystem_ReturnTrue() {
+    public void testShouldHideSipper_typeSystem_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(Process.ROOT_UID);
         when(mFeatureFactory.powerUsageFeatureProvider.isTypeSystem(Matchers.<BatterySipper>any()))
@@ -348,14 +351,14 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testShouldHideSipper_UidNormal_ReturnFalse() {
+    public void testShouldHideSipper_uidNormal_returnFalse() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isFalse();
     }
 
     @Test
-    public void testShouldHideSipper_TypeService_ReturnTrue() {
+    public void testShouldHideSipper_typeService_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         when(mFeatureFactory.powerUsageFeatureProvider.isTypeService(Matchers.<BatterySipper>any()))
@@ -365,7 +368,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testSetUsageSummary_TimeLessThanOneMinute_DoNotSetSummary() {
+    public void testSetUsageSummary_timeLessThanOneMinute_doNotSetSummary() {
         final long usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
 
         mFragment.setUsageSummary(mPreference, "", usageTimeMs);
@@ -373,7 +376,7 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testSetUsageSummary_TimeMoreThanOneMinute_SetSummary() {
+    public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
         final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
 
         mFragment.setUsageSummary(mPreference, "", usageTimeMs);
@@ -381,45 +384,25 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testUpdatePreference_NoEstimatedTime_DoNotShowSummary() {
-        mBatteryInfo.remainingTimeUs = 0;
+    public void testUpdatePreference_hasRemainingTime_showRemainingLabel() {
         mBatteryInfo.remainingLabel = TIME_LEFT;
+
         mFragment.updateHeaderPreference(mBatteryInfo);
 
-        verify(mSummary1).setVisibility(View.INVISIBLE);
-        verify(mSummary2).setVisibility(View.INVISIBLE);
+        verify(mSummary1).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
-    public void testUpdatePreference_HasEstimatedTime_ShowSummary() {
-        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
-        mBatteryInfo.remainingLabel = TIME_LEFT;
+    public void testUpdatePreference_noRemainingTime_showStatusLabel() {
+        mBatteryInfo.remainingLabel = null;
+
         mFragment.updateHeaderPreference(mBatteryInfo);
 
-        verify(mSummary1).setVisibility(View.VISIBLE);
-        verify(mSummary2).setVisibility(View.VISIBLE);
+        verify(mSummary1).setText(mBatteryInfo.statusLabel);
     }
 
     @Test
-    public void testUpdatePreference_Charging_ShowChargingTimeLeft() {
-        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
-        mBatteryInfo.mDischarging = false;
-
-        mFragment.updateHeaderPreference(mBatteryInfo);
-        verify(mSummary1).setText(R.string.estimated_charging_time_left);
-    }
-
-    @Test
-    public void testUpdatePreference_NotCharging_ShowTimeLeft() {
-        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
-        mBatteryInfo.mDischarging = true;
-
-        mFragment.updateHeaderPreference(mBatteryInfo);
-        verify(mSummary1).setText(R.string.estimated_time_left);
-    }
-
-    @Test
-    public void testUpdateHeaderPreference_AsyncUpdate_ShouldNotCrash() {
+    public void testUpdateHeaderPreference_asyncUpdate_shouldNotCrash() {
         when(mFragment.getContext()).thenReturn(null);
         mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
 
@@ -451,49 +434,48 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testUpdateCellularPreference_ShowCorrectSummary() {
-        final double percent = POWER_MAH / TOTAL_POWER * DISCHARGE_AMOUNT;
-        final String expectedSummary = mRealContext.getString(R.string.battery_overall_usage,
-                Utils.formatPercentage((int) percent));
-        doReturn(expectedSummary).when(mFragment)
-                .getString(eq(R.string.battery_overall_usage), anyInt());
-        mFragment.updateCellularPreference(DISCHARGE_AMOUNT);
+    public void testUpdateScreenPreference_showCorrectSummary() {
+        final String expectedUsedTime = Utils.formatElapsedTime(mRealContext, USAGE_TIME_MS, false);
+        doReturn(mScreenBatterySipper).when(mFragment).findBatterySipperByType(any(), any());
+        doReturn(mRealContext).when(mFragment).getContext();
 
-        verify(mCellularNetworkPref).setSummary(expectedSummary);
+        mFragment.updateScreenPreference();
+
+        verify(mScreenUsagePref).setSubtitle(expectedUsedTime);
     }
 
     @Test
-    public void testUpdateScreenPreference_ShowCorrectSummary() {
-        final String expectedUsedTime = mRealContext.getString(R.string.battery_used_for,
-                Utils.formatElapsedTime(mRealContext, USAGE_TIME_MS, false));
-        final double percent = BATTERY_SCREEN_USAGE / TOTAL_POWER * DISCHARGE_AMOUNT;
-        final String expectedOverallUsage = mRealContext.getString(R.string.battery_overall_usage,
-                Utils.formatPercentage((int) percent));
-        doReturn(expectedUsedTime).when(mFragment).getString(
-                eq(R.string.battery_used_for), anyInt());
-        doReturn(expectedOverallUsage).when(mFragment).getString(
-                eq(R.string.battery_overall_usage), anyInt());
+    public void testUpdateLastFullChargePreference_showCorrectSummary() {
+        doReturn(mRealContext).when(mFragment).getContext();
+        final String expected = mRealContext.getString(R.string.power_last_full_charge_summary,
+                Utils.formatElapsedTime(mRealContext, TIME_SINCE_LAST_FULL_CHARGE_MS, false));
+        doReturn(expected).when(mFragment).getString(eq(R.string.power_last_full_charge_summary),
+                any());
 
-        mFragment.updateScreenPreference(DISCHARGE_AMOUNT);
+        mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
 
-        verify(mScreenUsagePref).setSummary(expectedUsedTime);
-        verify(mScreenConsumptionPref).setSummary(expectedOverallUsage);
+        verify(mLastFullChargePref).setSubtitle(expected);
     }
 
     @Test
-    public void testUpdatePreference_UsageListEmpty_ShouldNotCrash() {
+    public void testUpdatePreference_usageListEmpty_shouldNotCrash() {
         when(mBatteryHelper.getUsageList()).thenReturn(new ArrayList<BatterySipper>());
-        doReturn("").when(mFragment).getString(anyInt(), Matchers.anyObject());
+        doReturn("").when(mFragment).getString(anyInt(), any());
 
         // Should not crash when update
-        mFragment.updateScreenPreference(DISCHARGE_AMOUNT);
-        mFragment.updateCellularPreference(DISCHARGE_AMOUNT);
+        mFragment.updateScreenPreference();
     }
 
     @Test
     public void testCalculatePercentage() {
         final double percent = mFragment.calculatePercentage(POWER_MAH, DISCHARGE_AMOUNT);
         assertThat(percent).isWithin(PRECISION).of(POWER_USAGE_PERCENTAGE);
+    }
+
+    @Test
+    public void testCalculateRunningTimeBasedOnStatsType() {
+        assertThat(mFragment.calculateRunningTimeBasedOnStatsType()).isEqualTo(
+                TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
     public static class TestFragment extends PowerUsageSummary {
