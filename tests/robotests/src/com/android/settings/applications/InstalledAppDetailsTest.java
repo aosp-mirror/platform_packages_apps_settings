@@ -23,12 +23,16 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.os.BatteryStats;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
@@ -53,8 +57,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -64,23 +70,37 @@ import static org.mockito.Mockito.when;
 public final class InstalledAppDetailsTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-
     @Mock
     ApplicationFeatureProvider mApplicationFeatureProvider;
-
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock
-    private Activity mActivity;
+    private SettingsActivity mActivity;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private Preference mBatteryPreference;
+    @Mock
+    private BatterySipper mBatterySipper;
+    @Mock
+    private BatteryStatsHelper mBatteryStatsHelper;
+    @Mock
+    private BatteryStats.Uid mUid;
 
     private InstalledAppDetails mAppDetail;
+    private Context mShadowContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mAppDetail = new InstalledAppDetails();
+        mShadowContext = RuntimeEnvironment.application;
+
+        mAppDetail = spy(new InstalledAppDetails());
+
+        mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
+        mBatterySipper.uidObj = mUid;
+        doReturn(mActivity).when(mAppDetail).getActivity();
+        doReturn(mShadowContext).when(mAppDetail).getContext();
 
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
@@ -157,6 +177,16 @@ public final class InstalledAppDetailsTest {
         verify(mActivity, never()).finishAndRemoveTask();
     }
 
+    @Test
+    public void launchPowerUsageDetailFragment_shouldNotCrash() {
+        mAppDetail.mBatteryPreference = mBatteryPreference;
+        mAppDetail.mSipper = mBatterySipper;
+        mAppDetail.mBatteryHelper = mBatteryStatsHelper;
+
+        // Should not crash
+        mAppDetail.onPreferenceClick(mBatteryPreference);
+    }
+
     // Tests that we don't show the "uninstall for all users" button for instant apps.
     @Test
     public void instantApps_noUninstallForAllButton() {
@@ -184,7 +214,7 @@ public final class InstalledAppDetailsTest {
     public void instantApps_noUninstallButton() {
         // Make this app appear to be instant.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                                         (InstantAppDataProvider) (i -> true));
+                (InstantAppDataProvider) (i -> true));
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
