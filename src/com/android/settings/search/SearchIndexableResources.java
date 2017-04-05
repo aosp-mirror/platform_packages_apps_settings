@@ -50,7 +50,6 @@ import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
-import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
@@ -126,7 +125,6 @@ public final class SearchIndexableResources {
         addIndex(StorageSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(PowerUsageSummary.class,
                 R.xml.power_usage_summary, R.drawable.ic_settings_battery);
-        addIndex(PowerUsageDetail.class, NO_DATA_RES_ID, R.drawable.ic_settings_battery);
         addIndex(PowerUsageAdvanced.class, NO_DATA_RES_ID, R.drawable.ic_settings_battery);
         addIndex(BatterySaverSettings.class,
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);

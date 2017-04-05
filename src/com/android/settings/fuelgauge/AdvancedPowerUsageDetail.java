@@ -58,7 +58,6 @@ import java.util.List;
  * 1. Detail battery usage information for app(i.e. usage time, usage amount)
  * 2. Battery related controls for app(i.e uninstall, force stop)
  *
- * This fragment will replace {@link PowerUsageDetail}
  */
 public class AdvancedPowerUsageDetail extends PowerUsageBase implements
         ButtonActionDialogFragment.AppButtonsDialogListener {
