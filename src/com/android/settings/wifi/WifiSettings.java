@@ -516,7 +516,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (mSelectedAccessPoint.isActive()) {
                 return super.onPreferenceTreeClick(preference);
             }
-            /** Bypass dialog and connect to unsecured or previously connected saved networks. */
+            /**
+             * Bypass dialog and connect to unsecured networks, or previously connected saved
+             * networks, or Passpoint provided networks.
+             */
             WifiConfiguration config = mSelectedAccessPoint.getConfig();
             if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
@@ -524,6 +527,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             } else if (mSelectedAccessPoint.isSaved() && config != null
                     && config.getNetworkSelectionStatus() != null
                     && config.getNetworkSelectionStatus().getHasEverConnected()) {
+                connect(config, true /* isSavedNetwork */);
+            } else if (mSelectedAccessPoint.isPasspoint()) {
+                // Access point provided by an installed Passpoint provider, connect using
+                // the associated config.
                 connect(config, true /* isSavedNetwork */);
             } else {
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
