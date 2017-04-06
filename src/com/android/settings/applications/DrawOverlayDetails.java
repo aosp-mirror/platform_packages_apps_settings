@@ -36,6 +36,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
+import com.android.settings.core.TouchOverlayManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -61,6 +62,8 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     private Intent mSettingsIntent;
     private OverlayState mOverlayState;
 
+    private TouchOverlayManager mTouchOverlayManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         Context context = getActivity();
         mOverlayBridge = new AppStateOverlayBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mTouchOverlayManager = new TouchOverlayManager(context);
 
         // find preferences
         addPreferencesFromResource(R.xml.app_ops_permissions_details);
@@ -87,6 +91,20 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
         mSettingsIntent = new Intent(Intent.ACTION_MAIN)
                 .setAction(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mTouchOverlayManager.setOverlayAllowed(false);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mTouchOverlayManager.setOverlayAllowed(true);
     }
 
     @Override
