@@ -68,14 +68,15 @@ public class PrintSettingsFragmentTest {
         when(printServices.isEmpty()).thenReturn(false);
         when(printServices.size()).thenReturn(2);
         // 2 services
-        when(mPrintManager.getPrintServices(PrintManager.ALL_SERVICES)).thenReturn(printServices);
+        when(mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES))
+            .thenReturn(printServices);
 
         mSummaryProvider.setListening(true);
 
         verify(mRes).getQuantityString(R.plurals.print_settings_summary, 2, 2);
 
         // No service
-        when(mPrintManager.getPrintServices(PrintManager.ALL_SERVICES)).thenReturn(null);
+        when(mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES)).thenReturn(null);
 
         mSummaryProvider.setListening(true);
 
