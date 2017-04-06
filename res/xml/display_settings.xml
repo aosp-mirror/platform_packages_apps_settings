@@ -27,6 +27,19 @@
         <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
     </Preference>
 
+    <com.android.settings.display.NightDisplayPreference
+        android:key="night_display"
+        android:title="@string/night_display_title"
+        android:fragment="com.android.settings.display.NightDisplaySettings"
+        settings:widgetLayout="@null"
+        settings:keywords="@string/keywords_display_night_display" />
+
+    <SwitchPreference
+        android:key="auto_brightness"
+        android:title="@string/auto_brightness_title"
+        settings:keywords="@string/keywords_display_auto_brightness"
+        android:summary="@string/auto_brightness_summary" />
+
     <com.android.settingslib.RestrictedPreference
         android:key="wallpaper"
         android:title="@string/wallpaper_settings_title"
@@ -36,13 +49,6 @@
             android:targetPackage="@string/config_wallpaper_picker_package"
             android:targetClass="@string/config_wallpaper_picker_class" />
     </com.android.settingslib.RestrictedPreference>
-
-    <com.android.settings.display.NightDisplayPreference
-        android:key="night_display"
-        android:title="@string/night_display_title"
-        android:fragment="com.android.settings.display.NightDisplaySettings"
-        settings:widgetLayout="@null"
-        settings:keywords="@string/keywords_display_night_display" />
 
     <com.android.settings.TimeoutListPreference
         android:key="screen_timeout"
@@ -55,12 +61,6 @@
         android:key="auto_rotate"
         android:summary="%s"
         android:title="@string/display_auto_rotate_title" />
-
-    <SwitchPreference
-        android:key="auto_brightness"
-        android:title="@string/auto_brightness_title"
-        settings:keywords="@string/keywords_display_auto_brightness"
-        android:summary="@string/auto_brightness_summary" />
 
     <Preference
         android:key="font_size"
