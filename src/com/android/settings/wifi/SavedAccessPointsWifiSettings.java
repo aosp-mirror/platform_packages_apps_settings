@@ -66,6 +66,18 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         }
     };
 
+    private final WifiManager.ActionListener mForgetListener = new WifiManager.ActionListener() {
+        @Override
+        public void onSuccess() {
+            initPreferences();
+        }
+
+        @Override
+        public void onFailure(int reason) {
+            initPreferences();
+        }
+    };
+
     private WifiDialog mDialog;
     private WifiManager mWifiManager;
     private AccessPoint mDlgAccessPoint;
@@ -229,11 +241,12 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                     Log.e(TAG, "Failed to remove Passpoint configuration for "
                             + mSelectedAccessPoint.getConfigName());
                 }
+                initPreferences();
             } else {
-                mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, null);
+                // mForgetListener will call initPreferences upon completion
+                mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, mForgetListener);
             }
             mSelectedAccessPoint = null;
-            initPreferences();
         }
     }
 
