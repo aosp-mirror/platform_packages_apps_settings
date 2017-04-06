@@ -103,7 +103,7 @@ public class WifiSummaryUpdaterTest {
         mWifiTracker.enabled = false;
 
         assertThat(mSummaryUpdater.getSummary()).isEqualTo(
-            mContext.getString(R.string.wifi_disabled_generic));
+            mContext.getString(R.string.switch_off_text));
     }
 
     @Test
