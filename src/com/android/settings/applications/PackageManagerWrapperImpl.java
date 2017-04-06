@@ -24,6 +24,7 @@ import android.content.pm.IPackageDeleteObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
+import android.os.storage.VolumeInfo;
 
 import java.util.List;
 
@@ -96,5 +97,10 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     public void deletePackageAsUser(String packageName, IPackageDeleteObserver observer, int flags,
             int userId) {
         mPm.deletePackageAsUser(packageName, observer, flags, userId);
+    }
+
+    @Override
+    public VolumeInfo getPrimaryStorageCurrentVolume() {
+        return mPm.getPrimaryStorageCurrentVolume();
     }
 }
