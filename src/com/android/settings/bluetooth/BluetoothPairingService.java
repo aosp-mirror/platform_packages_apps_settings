@@ -65,6 +65,7 @@ public final class BluetoothPairingService extends Service {
     return pairingIntent;
   }
 
+  private boolean mRegistered = false;
   private final BroadcastReceiver mCancelReceiver = new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -130,6 +131,7 @@ public final class BluetoothPairingService extends Service {
     filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
     filter.addAction(BluetoothDevice.ACTION_PAIRING_CANCEL);
     registerReceiver(mCancelReceiver, filter);
+    mRegistered = true;
 
     startForeground(NOTIFICATION_ID, builder.getNotification());
     return START_REDELIVER_INTENT;
@@ -137,7 +139,10 @@ public final class BluetoothPairingService extends Service {
 
   @Override
   public void onDestroy() {
-    unregisterReceiver(mCancelReceiver);
+    if (mRegistered) {
+      unregisterReceiver(mCancelReceiver);
+      mRegistered = false;
+    }
     stopForeground(true);
   }
 
