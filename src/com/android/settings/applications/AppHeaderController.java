@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.graphics.Outline;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
@@ -31,6 +33,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,12 +64,23 @@ public class AppHeaderController {
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
 
+    public static final ViewOutlineProvider OUTLINE_PROVIDER = new ViewOutlineProvider() {
+        @Override
+        public void getOutline(View view, Outline outline) {
+            Drawable background = ((ImageView)view).getDrawable();
+            if (background != null) {
+                background.getOutline(outline);
+            }
+        }
+    };
+
     private static final String TAG = "AppDetailFeature";
 
     private final Context mContext;
     private final Fragment mFragment;
     private final int mMetricsCategory;
     private final View mAppHeader;
+    private final int mIconElevation;
 
     private Drawable mIcon;
     private CharSequence mLabel;
@@ -93,6 +107,8 @@ public class AppHeaderController {
             mAppHeader = LayoutInflater.from(fragment.getContext())
                     .inflate(R.layout.app_details, null /* root */);
         }
+        mIconElevation = mContext.getResources()
+            .getDimensionPixelSize(R.dimen.launcher_icon_elevation);
     }
 
     public AppHeaderController setIcon(Drawable icon) {
@@ -212,6 +228,13 @@ public class AppHeaderController {
         ImageView iconView = (ImageView) mAppHeader.findViewById(R.id.app_detail_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
+            if (mIcon instanceof AdaptiveIconDrawable) {
+                iconView.setElevation(mIconElevation);
+                iconView.setOutlineProvider(OUTLINE_PROVIDER);
+            } else {
+                iconView.setElevation(0);
+                iconView.setOutlineProvider(null);
+            }
             ImageView badgeView = mAppHeader.findViewById(R.id.app_icon_instant_apps_badge);
             if (badgeView != null) {
                 badgeView.setVisibility(mIsInstantApp ? View.VISIBLE : View.GONE);
