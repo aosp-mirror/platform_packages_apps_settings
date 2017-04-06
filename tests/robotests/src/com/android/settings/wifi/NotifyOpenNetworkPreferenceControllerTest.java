@@ -16,26 +16,29 @@
 
 package com.android.settings.wifi;
 
-import static android.provider.Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED;
-import static android.provider.Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON;
-
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
+import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
-import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
+import android.content.pm.PackageManager;
+import android.net.NetworkScorerAppData;
+import android.os.RemoteException;
 import android.support.v7.preference.Preference;
-
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
-
+import com.android.settings.network.NetworkScoreManagerWrapper;
+import com.android.settings.utils.NotificationChannelHelper;
+import com.android.settings.utils.NotificationChannelHelper.NotificationChannelWrapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -44,71 +47,123 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotifyOpenNetworkPreferenceControllerTest {
 
+    private static final String TEST_SCORER_PACKAGE = "Test Package";
+    private static final String TEST_SCORER_CLASS = "Test Class";
+    private static final String TEST_SCORER_LABEL = "Test Label";
+    private static final String NOTIFICATION_ID = "Notification Id";
+    private static final CharSequence NOTIFICATION_NAME = "Notification Name";
+
     private Context mContext;
     private NotifyOpenNetworksPreferenceController mController;
+    @Mock private NetworkScoreManagerWrapper mNetworkScorer;
+    @Mock private NotificationChannelHelper mNotificationChannelHelper;
+    @Mock private PackageManager mPackageManager;
+    @Mock private NotificationChannelWrapper mChannel;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new NotifyOpenNetworksPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new NotifyOpenNetworksPreferenceController(
+                mContext, mNetworkScorer, mNotificationChannelHelper, mPackageManager);
+        ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE, TEST_SCORER_CLASS);
+
+        NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
+                0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */,
+                NOTIFICATION_ID);
+        when(mNetworkScorer.getActiveScorer()).thenReturn(scorerAppData);
     }
 
     @Test
-    public void testIsAvailable_shouldAlwaysReturnTrue() {
+    public void testIsAvailable_shouldReturnFalseWhenScorerDoesNotExist()
+            throws RemoteException {
+        when(mNetworkScorer.getActiveScorer()).thenReturn(null);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void testIsAvailable_shouldReturnFalseWhenNotificationChannelIdDoesNotExist()
+            throws RemoteException {
+        ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE, TEST_SCORER_CLASS);
+        NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
+                0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */,
+                null /* networkAvailableNotificationChannelId */);
+        when(mNetworkScorer.getActiveScorer()).thenReturn(scorerAppData);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void testIsAvailable_shouldReturnFalseWhenNotificationChannelDoesNotExist()
+            throws RemoteException {
+        when(mNotificationChannelHelper.getNotificationChannelForPackage(
+                anyString(), anyInt(), anyString(), anyBoolean())).thenReturn(null);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void testIsAvailable_shouldReturnTrueWhenNotificationChannelExists()
+            throws RemoteException {
+        when(mNotificationChannelHelper.getNotificationChannelForPackage(
+                anyString(), anyInt(), anyString(), anyBoolean())).thenReturn(mChannel);
+
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void handlePreferenceTreeClick_nonMatchingKey_shouldDoNothing() {
-        final SwitchPreference pref = new SwitchPreference(mContext);
+        final Preference pref = new Preference(mContext);
 
         assertThat(mController.handlePreferenceTreeClick(pref)).isFalse();
     }
 
     @Test
-    public void handlePreferenceTreeClick_nonMatchingType_shouldDoNothing() {
+    public void handlePreferenceTreeClick_nullScorer_shouldDoNothing() {
         final Preference pref = new Preference(mContext);
         pref.setKey(mController.getPreferenceKey());
+        when(mNetworkScorer.getActiveScorer()).thenReturn(null);
 
         assertThat(mController.handlePreferenceTreeClick(pref)).isFalse();
     }
 
     @Test
-    public void handlePreferenceTreeClick_matchingKeyAndType_shouldUpdateSetting() {
-        final SwitchPreference pref = new SwitchPreference(mContext);
-        pref.setChecked(true);
+    public void handlePreferenceTreeClick_matchingKeyAndScorerExists_shouldLaunchActivity()
+            throws RemoteException {
+        final Preference pref = new Preference(mContext);
         pref.setKey(mController.getPreferenceKey());
+        when(mNotificationChannelHelper.getNotificationChannelForPackage(
+                anyString(), anyInt(), anyString(), anyBoolean())).thenReturn(mChannel);
 
         assertThat(mController.handlePreferenceTreeClick(pref)).isTrue();
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0))
-                .isEqualTo(1);
     }
 
     @Test
-    public void updateState_preferenceSetCheckedAndSetEnabledWhenSettingsAreEnabled() {
-        final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
-        Settings.System.putInt(mContext.getContentResolver(),
-                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 1);
+    public void updateState_notificationsEnabled_shouldShowEnabledSummary() throws RemoteException {
+        final Preference pref = new Preference(mContext);
+        pref.setKey(mController.getPreferenceKey());
+        when(mNotificationChannelHelper.getNotificationChannelForPackage(
+                anyString(), anyInt(), anyString(), anyBoolean())).thenReturn(mChannel);
+        when(mChannel.getImportance()).thenReturn(NotificationManager.IMPORTANCE_DEFAULT);
+        mController.updateState(pref);
 
-        mController.updateState(preference);
-
-        verify(preference).setChecked(true);
-        verify(preference).setEnabled(true);
+        assertThat(pref.getSummary()).isEqualTo(
+                mContext.getString(R.string.notification_toggle_on));
     }
 
     @Test
-    public void updateState_preferenceSetCheckedAndSetEnabledWhenSettingsAreDisabled() {
-        final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 0);
-        Settings.System.putInt(mContext.getContentResolver(),
-                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0);
+    public void updateState_notificationsEnabled_shouldShowDisabledSummary()
+            throws RemoteException {
+        final Preference pref = new Preference(mContext);
+        pref.setKey(mController.getPreferenceKey());
+        when(mNotificationChannelHelper.getNotificationChannelForPackage(
+                anyString(), anyInt(), anyString(), anyBoolean())).thenReturn(mChannel);
+        when(mChannel.getImportance()).thenReturn(NotificationManager.IMPORTANCE_NONE);
+        mController.updateState(pref);
 
-        mController.updateState(preference);
-
-        verify(preference).setChecked(false);
-        verify(preference).setEnabled(false);
+        assertThat(pref.getSummary()).isEqualTo(
+                mContext.getString(R.string.notification_toggle_off));
     }
+
 }
