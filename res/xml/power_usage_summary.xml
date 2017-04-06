@@ -30,11 +30,13 @@
 
         <com.android.settings.fuelgauge.PowerGaugePreference
             android:key="last_full_charge"
-            android:title="@string/battery_last_full_charge"/>
+            android:title="@string/battery_last_full_charge"
+            android:selectable="false"/>
 
         <com.android.settings.fuelgauge.PowerGaugePreference
             android:key="screen_usage"
-            android:title="@string/device_screen_usage"/>
+            android:title="@string/device_screen_usage"
+            android:selectable="false"/>
 
     </PreferenceCategory>
 
