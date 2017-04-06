@@ -19,10 +19,11 @@ package com.android.settings.applications;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.TouchOverlayManager;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowPreferenceFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +33,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -47,17 +49,22 @@ public class DrawOverlayDetailsTest {
     private FakeFeatureFactory mFeatureFactory;
     private DrawOverlayDetails mFragment;
 
+    @Mock
+    private TouchOverlayManager mTouchOverlayManager;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
         mFragment = new DrawOverlayDetails();
-        mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        ReflectionHelpers.setField(mFragment, "mTouchOverlayManager", mTouchOverlayManager);
     }
 
     @Test
     public void logSpecialPermissionChange() {
+        mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
         mFragment.logSpecialPermissionChange(true, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW), eq("app"));
@@ -65,5 +72,19 @@ public class DrawOverlayDetailsTest {
         mFragment.logSpecialPermissionChange(false, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY), eq("app"));
+    }
+
+    @Test
+    @Config(shadows = ShadowPreferenceFragment.class)
+    public void onStart_disableOverlay() {
+        mFragment.onStart();
+        verify(mTouchOverlayManager).setOverlayAllowed(false);
+    }
+
+    @Test
+    @Config(shadows = ShadowPreferenceFragment.class)
+    public void onStop_enableOverlay() {
+        mFragment.onStop();
+        verify(mTouchOverlayManager).setOverlayAllowed(true);
     }
 }
