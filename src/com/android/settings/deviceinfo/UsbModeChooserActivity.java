@@ -31,6 +31,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,7 +41,6 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settings.connecteddevice.UsbModePreferenceController;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -136,9 +136,9 @@ public class UsbModeChooserActivity extends Activity {
         View v = mLayoutInflater.inflate(R.layout.restricted_radio_with_summary, container, false);
 
         TextView titleView = (TextView) v.findViewById(android.R.id.title);
-        titleView.setText(UsbModePreferenceController.getTitle(mode));
+        titleView.setText(getTitle(mode));
         TextView summaryView = (TextView) v.findViewById(android.R.id.summary);
-        summaryView.setText(UsbModePreferenceController.getSummary(mode));
+        updateSummary(summaryView, mode);
 
         if (disallowedByAdmin) {
             if (mEnforcedAdmin != null) {
@@ -178,4 +178,27 @@ public class UsbModeChooserActivity extends Activity {
         }
     }
 
+    @VisibleForTesting
+    static void updateSummary(TextView summaryView, int mode) {
+        if (mode == (UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE)) {
+            summaryView.setText(R.string.usb_use_power_only_desc);
+        }
+    }
+
+    @VisibleForTesting
+    static int getTitle(int mode) {
+        switch (mode) {
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_use_charging_only;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_use_power_only;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
+                return R.string.usb_use_file_transfers;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
+                return R.string.usb_use_photo_transfers;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
+                return R.string.usb_use_MIDI;
+        }
+        return 0;
+    }
 }

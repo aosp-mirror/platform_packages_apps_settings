@@ -48,62 +48,32 @@ public class UsbModePreferenceControllerTest {
 
     @Test
     public void testGetSummary_chargeDevice() {
-        assertThat(UsbModePreferenceController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[0]))
-                .isEqualTo(R.string.usb_use_charging_only_desc);
+        assertThat(mController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[0]))
+                .isEqualTo(R.string.usb_summary_charging_only);
     }
 
     @Test
     public void testGetSummary_supplyPower() {
-        assertThat(UsbModePreferenceController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[1]))
-                .isEqualTo(R.string.usb_use_power_only_desc);
+        assertThat(mController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[1]))
+                .isEqualTo(R.string.usb_summary_power_only);
     }
 
     @Test
     public void testGetSummary_TransferFiles() {
-        assertThat(UsbModePreferenceController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[2]))
-                .isEqualTo(R.string.usb_use_file_transfers_desc);
+        assertThat(mController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[2]))
+                .isEqualTo(R.string.usb_summary_file_transfers);
     }
 
     @Test
     public void testGetSummary_TransferPhoto() {
-        assertThat(UsbModePreferenceController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[3]))
-                .isEqualTo(R.string.usb_use_photo_transfers_desc);
+        assertThat(mController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[3]))
+                .isEqualTo(R.string.usb_summary_photo_transfers);
     }
 
     @Test
     public void testGetSummary_MIDI() {
-        assertThat(UsbModePreferenceController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[4]))
-                .isEqualTo(R.string.usb_use_MIDI_desc);
-    }
-
-    @Test
-    public void testGetTitle_chargeDevice() {
-        assertThat(UsbModePreferenceController.getTitle(UsbModeChooserActivity.DEFAULT_MODES[0]))
-                .isEqualTo(R.string.usb_use_charging_only);
-    }
-
-    @Test
-    public void testGetTitle_supplyPower() {
-        assertThat(UsbModePreferenceController.getTitle(UsbModeChooserActivity.DEFAULT_MODES[1]))
-                .isEqualTo(R.string.usb_use_power_only);
-    }
-
-    @Test
-    public void testGetTitle_TransferFiles() {
-        assertThat(UsbModePreferenceController.getTitle(UsbModeChooserActivity.DEFAULT_MODES[2]))
-                .isEqualTo(R.string.usb_use_file_transfers);
-    }
-
-    @Test
-    public void testGetTitle_TransferPhoto() {
-        assertThat(UsbModePreferenceController.getTitle(UsbModeChooserActivity.DEFAULT_MODES[3]))
-                .isEqualTo(R.string.usb_use_photo_transfers);
-    }
-
-    @Test
-    public void testGetTitle_MIDI() {
-        assertThat(UsbModePreferenceController.getTitle(UsbModeChooserActivity.DEFAULT_MODES[4]))
-                .isEqualTo(R.string.usb_use_MIDI);
+        assertThat(mController.getSummary(UsbModeChooserActivity.DEFAULT_MODES[4]))
+                .isEqualTo(R.string.usb_summary_MIDI);
     }
 
     @Test
@@ -131,7 +101,7 @@ public class UsbModePreferenceControllerTest {
         mContext.sendStickyBroadcast(intent);
 
         assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(R.string.usb_use_charging_only));
+                mContext.getString(R.string.usb_summary_charging_only));
     }
 
 }
