@@ -51,13 +51,9 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final DefaultAppInfo defaultApp = getDefaultAppInfo();
-        final CharSequence defaultAppLabel = defaultApp != null ? defaultApp.loadLabel() : null;
-        if (TextUtils.isEmpty(defaultAppLabel)) {
-            final String onlyAppLabel = getOnlyAppLabel();
-            if (!TextUtils.isEmpty(onlyAppLabel)) {
-                preference.setSummary(onlyAppLabel);
-            }
+        final CharSequence defaultAppLabel = getDefaultAppLabel();
+        if (!TextUtils.isEmpty(defaultAppLabel)) {
+            preference.setSummary(defaultAppLabel);
         }
     }
 
@@ -70,6 +66,19 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
+    }
+
+    @Override
+    public CharSequence getDefaultAppLabel() {
+        if (!isAvailable()) {
+            return null;
+        }
+        final DefaultAppInfo defaultApp = getDefaultAppInfo();
+        final CharSequence defaultAppLabel = defaultApp != null ? defaultApp.loadLabel() : null;
+        if (!TextUtils.isEmpty(defaultAppLabel)) {
+            return defaultAppLabel;
+        }
+        return getOnlyAppLabel();
     }
 
     private List<ResolveInfo> getCandidates() {
