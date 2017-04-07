@@ -40,7 +40,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
@@ -65,7 +64,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.trustagent.TrustAgentManager;
@@ -102,7 +100,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
     private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
-    private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
+    @VisibleForTesting
+    static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
     private static final String KEY_UNIFICATION = "unification";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
@@ -312,11 +311,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mIsAdmin = mUm.isAdminUser();
 
         // Fingerprint and trust agents
+        int numberOfTrustAgent = 0;
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
             maybeAddFingerprintPreference(securityCategory, UserHandle.myUserId());
-            addTrustAgentSettings(securityCategory);
+            numberOfTrustAgent = addTrustAgentSettings(securityCategory);
         }
 
         mVisiblePatternProfile =
@@ -351,11 +351,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
 
         // Advanced Security features
-        Preference manageAgents = root.findPreference(KEY_MANAGE_TRUST_AGENTS);
-        if (manageAgents != null && !mLockPatternUtils.isSecure(MY_USER_ID)) {
-            manageAgents.setEnabled(false);
-            manageAgents.setSummary(R.string.disabled_because_no_backup_security);
-        }
+        initTrustAgentPreference(root, numberOfTrustAgent);
 
         // The above preferences come and go based on security state, so we need to update
         // the index. This call is expected to be fairly cheap, but we may want to do something
@@ -410,6 +406,23 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return root;
     }
 
+    @VisibleForTesting
+    void initTrustAgentPreference(PreferenceScreen root, int numberOfTrustAgent) {
+        Preference manageAgents = root.findPreference(KEY_MANAGE_TRUST_AGENTS);
+        if (manageAgents != null) {
+            if (!mLockPatternUtils.isSecure(MY_USER_ID)) {
+                manageAgents.setEnabled(false);
+                manageAgents.setSummary(R.string.disabled_because_no_backup_security);
+            } else if (numberOfTrustAgent > 0) {
+                manageAgents.setSummary(getActivity().getResources().getQuantityString(
+                    R.plurals.manage_trust_agents_summary_on,
+                    numberOfTrustAgent, numberOfTrustAgent));
+            } else {
+                manageAgents.setSummary(R.string.manage_trust_agents_summary);
+            }
+        }
+    }
+
     /*
      * Sets the preference as disabled by admin if PASSWORD_QUALITY_MANAGED is set.
      * The preference must be a RestrictedPreference.
@@ -434,7 +447,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
     }
 
-    private void addTrustAgentSettings(PreferenceGroup securityCategory) {
+    // Return the number of trust agents being added
+    private int addTrustAgentSettings(PreferenceGroup securityCategory) {
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
         ArrayList<TrustAgentComponentInfo> agents = getActiveTrustAgents(
             getActivity(), mTrustAgentManager, mLockPatternUtils, mDPM);
@@ -459,6 +473,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
             }
         }
+        return agents.size();
     }
 
     /* Return true if a there is a Slot that has Icc.
