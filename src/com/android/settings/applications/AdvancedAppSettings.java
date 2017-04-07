@@ -15,9 +15,11 @@
  */
 package com.android.settings.applications;
 
+import android.app.Activity;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
@@ -29,6 +31,7 @@ import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenc
 import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -78,4 +81,55 @@ public class AdvancedAppSettings extends DashboardFragment {
                     return Arrays.asList(sir);
                 }
             };
+
+    static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+        private final DefaultSmsPreferenceController mDefaultSmsPreferenceController;
+        private final DefaultBrowserPreferenceController mDefaultBrowserPreferenceController;
+        private final DefaultPhonePreferenceController mDefaultPhonePreferenceController;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+            mDefaultSmsPreferenceController = new DefaultSmsPreferenceController(mContext);
+            mDefaultBrowserPreferenceController = new DefaultBrowserPreferenceController(mContext);
+            mDefaultPhonePreferenceController = new DefaultPhonePreferenceController(mContext);
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (!listening) {
+                return;
+            }
+            CharSequence summary = concatSummaryText(
+                mDefaultSmsPreferenceController.getDefaultAppLabel(),
+                mDefaultBrowserPreferenceController.getDefaultAppLabel());
+            summary = concatSummaryText(summary,
+                mDefaultPhonePreferenceController.getDefaultAppLabel());
+            if (!TextUtils.isEmpty(summary)) {
+                mSummaryLoader.setSummary(this, summary);
+            }
+        }
+
+        private CharSequence concatSummaryText(CharSequence summary1, CharSequence summary2) {
+            if (TextUtils.isEmpty(summary1)) {
+                return summary2;
+            }
+            if (TextUtils.isEmpty(summary2)) {
+                return summary1;
+            }
+            return mContext.getString(R.string.join_many_items_middle, summary1, summary2);
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+        new SummaryLoader.SummaryProviderFactory() {
+            @Override
+            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                    SummaryLoader summaryLoader) {
+                return new AdvancedAppSettings.SummaryProvider(activity, summaryLoader);
+            }
+        };
 }
