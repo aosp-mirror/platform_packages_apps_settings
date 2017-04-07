@@ -207,7 +207,7 @@ public class PowerUsageAdvancedTest {
 
         assertThat(usageTypeSet).asList().containsExactly(UsageType.APP, UsageType.WIFI,
                 UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.SERVICE,
-                UsageType.USER, UsageType.SYSTEM, UsageType.UNACCOUNTED);
+                UsageType.USER, UsageType.SYSTEM, UsageType.UNACCOUNTED, UsageType.OVERCOUNTED);
     }
 
     @Test
@@ -222,5 +222,28 @@ public class PowerUsageAdvancedTest {
         for (int i = 1, size = dataList.size(); i < size; i++) {
             assertThat(dataList.get(i - 1).totalPowerMah).isAtLeast(dataList.get(i).totalPowerMah);
         }
+    }
+
+    @Test
+    public void testShouldHide_typeUnAccounted_returnTrue() {
+        mPowerUsageData.usageType = UsageType.UNACCOUNTED;
+
+        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isTrue();
+    }
+
+
+    @Test
+    public void testShouldHide_typeOverCounted_returnTrue() {
+        mPowerUsageData.usageType = UsageType.OVERCOUNTED;
+
+        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isTrue();
+    }
+
+
+    @Test
+    public void testShouldHide_typeNormal_returnFalse() {
+        mPowerUsageData.usageType = UsageType.APP;
+
+        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isFalse();
     }
 }
