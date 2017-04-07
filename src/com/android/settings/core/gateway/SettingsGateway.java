@@ -76,8 +76,8 @@ import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatterySaverSettings;
-import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
@@ -210,7 +210,7 @@ public class SettingsGateway {
             ZenModeEventRuleSettings.class.getName(),
             ZenModeVisualInterruptionSettings.class.getName(),
             ProcessStatsUi.class.getName(),
-            PowerUsageDetail.class.getName(),
+            AdvancedPowerUsageDetail.class.getName(),
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
