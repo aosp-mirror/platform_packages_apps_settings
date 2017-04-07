@@ -22,22 +22,30 @@ import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
+import com.android.settings.dashboard.SummaryLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdvancedAppSettingsTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
     private AdvancedAppSettings mFragment;
@@ -46,14 +54,86 @@ public class AdvancedAppSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = RuntimeEnvironment.application;
         mFragment = new AdvancedAppSettings();
-        mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        mFragment.onAttach(mContext);
     }
 
     @Test
     public void getPreferenceScreenResId_shouldUseAppDefaultSettingPrefLayout() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.app_default_settings);
+    }
+
+    @Test
+    public void setListening_shouldUpdateSummary() {
+        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
+        final AdvancedAppSettings.SummaryProvider summaryProvider =
+            new AdvancedAppSettings.SummaryProvider(mContext, summaryLoader);
+        final DefaultSmsPreferenceController defaultSms =
+            mock(DefaultSmsPreferenceController.class);
+        final DefaultBrowserPreferenceController defaultBrowser =
+            mock(DefaultBrowserPreferenceController.class);
+        final DefaultPhonePreferenceController defaultPhone =
+            mock(DefaultPhonePreferenceController.class);
+        ReflectionHelpers.setField(summaryProvider, "mDefaultSmsPreferenceController", defaultSms);
+        ReflectionHelpers.setField(
+            summaryProvider, "mDefaultBrowserPreferenceController", defaultBrowser);
+        ReflectionHelpers.setField(
+            summaryProvider, "mDefaultPhonePreferenceController", defaultPhone);
+
+        // all available
+        when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
+        when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Browser1, Phone1");
+
+        // 2 available
+        when(defaultSms.getDefaultAppLabel()).thenReturn(null);
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
+        when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1, Phone1");
+
+        when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
+        when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Phone1");
+
+        when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
+        when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Browser1");
+
+        // 1 available
+        when(defaultSms.getDefaultAppLabel()).thenReturn(null);
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
+        when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1");
+
+        when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
+        when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Sms1");
+
+        when(defaultSms.getDefaultAppLabel()).thenReturn(null);
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
+        when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
+        summaryProvider.setListening(true);
+        verify(summaryLoader).setSummary(summaryProvider, "Phone1");
+
+        // None available
+        when(defaultSms.getDefaultAppLabel()).thenReturn(null);
+        when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
+        when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
+        summaryProvider.setListening(true);
+        verify(summaryLoader, never()).setSummary(summaryProvider, eq(anyString()));
+
     }
 
 }

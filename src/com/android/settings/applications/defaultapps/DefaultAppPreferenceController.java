@@ -49,10 +49,7 @@ public abstract class DefaultAppPreferenceController extends PreferenceControlle
     @Override
     public void updateState(Preference preference) {
         final DefaultAppInfo app = getDefaultAppInfo();
-        CharSequence defaultAppLabel = null;
-        if (app != null) {
-            defaultAppLabel = app.loadLabel();
-        }
+        CharSequence defaultAppLabel = getDefaultAppLabel();
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);
         } else {
@@ -82,6 +79,17 @@ public abstract class DefaultAppPreferenceController extends PreferenceControlle
      */
     protected Intent getSettingIntent(DefaultAppInfo info) {
         //By default return null. It's up to subclasses to provide logic.
+        return null;
+    }
+
+    public CharSequence getDefaultAppLabel() {
+        if (!isAvailable()) {
+            return null;
+        }
+        final DefaultAppInfo app = getDefaultAppInfo();
+        if (app != null) {
+            return app.loadLabel();
+        }
         return null;
     }
 }
