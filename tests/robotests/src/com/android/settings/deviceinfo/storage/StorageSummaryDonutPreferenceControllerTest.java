@@ -79,7 +79,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
         final View view =
                 inflater.inflate(
                         mPreference.getLayoutResource(), new LinearLayout(mContext), false);
-        mHolder = new PreferenceViewHolder(view);
+        mHolder = PreferenceViewHolder.createInstanceForTests(view);
     }
 
     @Test

@@ -73,7 +73,7 @@ public class BatteryHistoryPreferenceTest {
 
         mBatteryHistoryPreference = new BatteryHistoryPreference(context, null);
         mBatteryHistoryPreference.mBatteryInfo = mBatteryInfo;
-        mViewHolder = spy(new PreferenceViewHolder(itemView));
+        mViewHolder = spy(PreferenceViewHolder.createInstanceForTests(itemView));
         when(mViewHolder.findViewById(R.id.battery_usage)).thenReturn(mUsageView);
         when(mViewHolder.findViewById(R.id.charge)).thenReturn(mTextView);
         when(mUsageView.findViewById(anyInt())).thenReturn(mLabelView);
