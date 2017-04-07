@@ -90,6 +90,7 @@ public class PowerUsageSummaryTest {
     private static final double TOTAL_POWER = 200;
     private static final double BATTERY_SCREEN_USAGE = 300;
     private static final double BATTERY_SYSTEM_USAGE = 600;
+    private static final double BATTERY_OVERCOUNTED_USAGE = 500;
     private static final double PRECISION = 0.001;
     private static final double POWER_USAGE_PERCENTAGE = 50;
     private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
@@ -111,6 +112,8 @@ public class PowerUsageSummaryTest {
     private BatterySipper mNormalBatterySipper;
     @Mock
     private BatterySipper mScreenBatterySipper;
+    @Mock
+    private BatterySipper mOvercountedBatterySipper;
     @Mock
     private BatterySipper mSystemBatterySipper;
     @Mock
@@ -187,6 +190,9 @@ public class PowerUsageSummaryTest {
         mSystemBatterySipper.drainType = BatterySipper.DrainType.APP;
         mSystemBatterySipper.totalPowerMah = BATTERY_SYSTEM_USAGE;
         when(mSystemBatterySipper.getUid()).thenReturn(Process.SYSTEM_UID);
+
+        mOvercountedBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
+        mOvercountedBatterySipper.totalPowerMah = BATTERY_OVERCOUNTED_USAGE;
 
         mUsageList = new ArrayList<>();
         mUsageList.add(mNormalBatterySipper);
@@ -303,6 +309,7 @@ public class PowerUsageSummaryTest {
         sippers.add(mNormalBatterySipper);
         sippers.add(mScreenBatterySipper);
         sippers.add(mSystemBatterySipper);
+        sippers.add(mOvercountedBatterySipper);
         when(mFeatureFactory.powerUsageFeatureProvider.isTypeSystem(mSystemBatterySipper))
                 .thenReturn(true);
 
@@ -314,6 +321,18 @@ public class PowerUsageSummaryTest {
     @Test
     public void testShouldHideSipper_typeIdle_returnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.IDLE;
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_TypeUnAccounted_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_TypeOverCounted_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
