@@ -360,6 +360,8 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void updateAddPreference() {
+            if (getActivity() == null) return; // Activity went away
+
             /* Disable preference if too many fingerprints added */
             final int max = getContext().getResources().getInteger(
                     com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
