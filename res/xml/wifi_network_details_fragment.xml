@@ -55,11 +55,15 @@
             android:key="ip_details_category"
             android:title="@string/wifi_setup_detail">
         <com.android.settings.wifi.WifiDetailPreference
+            android:key="mac_address"
+            android:title="@string/wifi_advanced_mac_address_title"
+            android:selectable="false"/>
+        <com.android.settings.wifi.WifiDetailPreference
                 android:key="ip_address"
                 android:title="@string/wifi_ip_address"
                 android:selectable="false"/>
         <com.android.settings.wifi.WifiDetailPreference
-                android:key="router"
+                android:key="gateway"
                 android:title="@string/wifi_gateway"
                 android:selectable="false"/>
         <com.android.settings.wifi.WifiDetailPreference
