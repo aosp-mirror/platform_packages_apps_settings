@@ -17,44 +17,39 @@
 package com.android.settings.deletionhelper;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.content.ContentResolver;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemProperties;
-import android.os.storage.StorageManager;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SwitchBar;
 
 /**
  * AutomaticStorageManagerSettings is the Settings screen for configuration and management of the
  * automatic storage manager.
  */
-public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment implements
-        OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
-    public static final int DEFAULT_DAYS_TO_RETAIN = 90;
-
+public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
+        implements OnPreferenceChangeListener {
     private static final String KEY_DAYS = "days";
-    private static final String KEY_DELETION_HELPER = "deletion_helper";
     private static final String KEY_FREED = "freed_bytes";
-    private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
     private static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY =
             "ro.storage_manager.enabled";
 
+    private AutomaticStorageManagerSwitchBarController mSwitchController;
     private DropDownPreference mDaysToRetain;
     private Preference mFreedBytes;
-    private Preference mDeletionHelper;
-    private SwitchPreference mStorageManagerSwitch;
+    private SwitchBar mSwitchBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,18 +58,20 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        initializeDaysToRetainPreference();
+        initializeFreedBytesPreference();
+        initializeSwitchBar();
+
+        return view;
+    }
+
+    private void initializeDaysToRetainPreference() {
         mDaysToRetain = (DropDownPreference) findPreference(KEY_DAYS);
         mDaysToRetain.setOnPreferenceChangeListener(this);
-
-        mFreedBytes = findPreference(KEY_FREED);
-
-        mDeletionHelper = findPreference(KEY_DELETION_HELPER);
-        mDeletionHelper.setOnPreferenceClickListener(this);
-
-        mStorageManagerSwitch = (SwitchPreference) findPreference(KEY_STORAGE_MANAGER_SWITCH);
-        mStorageManagerSwitch.setOnPreferenceChangeListener(this);
 
         ContentResolver cr = getContentResolver();
         int photosDaysToRetain = Settings.Secure.getInt(cr,
@@ -83,7 +80,24 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         String[] stringValues =
                 getResources().getStringArray(R.array.automatic_storage_management_days_values);
         mDaysToRetain.setValue(stringValues[daysValueToIndex(photosDaysToRetain, stringValues)]);
+    }
 
+    private void initializeSwitchBar() {
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.show();
+        mSwitchController =
+                new AutomaticStorageManagerSwitchBarController(
+                        getContext(),
+                        mSwitchBar,
+                        mMetricsFeatureProvider,
+                        mDaysToRetain,
+                        getFragmentManager());
+    }
+
+    private void initializeFreedBytesPreference() {
+        ContentResolver cr = getContentResolver();
+        mFreedBytes = findPreference(KEY_FREED);
         long freedBytes = Settings.Secure.getLong(cr,
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED,
                 0);
@@ -93,11 +107,13 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         if (freedBytes == 0 || lastRunMillis == 0) {
             mFreedBytes.setVisible(false);
         } else {
-            Activity activity = getActivity();
-            mFreedBytes.setSummary(activity.getString(
-                    R.string.automatic_storage_manager_freed_bytes,
-                    Formatter.formatFileSize(activity, freedBytes),
-                    DateUtils.formatDateTime(activity, lastRunMillis, DateUtils.FORMAT_SHOW_DATE)));
+            final Activity activity = getActivity();
+            mFreedBytes.setSummary(
+                    activity.getString(
+                            R.string.automatic_storage_manager_freed_bytes,
+                            Formatter.formatFileSize(activity, freedBytes),
+                            DateUtils.formatDateTime(
+                                    activity, lastRunMillis, DateUtils.FORMAT_SHOW_DATE)));
         }
     }
 
@@ -107,31 +123,27 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         boolean isStorageManagerChecked =
                 Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-        mStorageManagerSwitch.setChecked(isStorageManagerChecked);
+        // Using the setCheckedInternal means the checked status won't propagate through the
+        // listeners -- this will prevent us from accidentally causing a metrics event on resume.
+        mSwitchBar.setCheckedInternal(isStorageManagerChecked);
         mDaysToRetain.setEnabled(isStorageManagerChecked);
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mSwitchBar.hide();
+        mSwitchController.tearDown();
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        switch (preference.getKey()) {
-            case KEY_STORAGE_MANAGER_SWITCH:
-                boolean storageManagerChecked = (boolean) newValue;
-                mMetricsFeatureProvider.action(getContext(),
-                        MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER, storageManagerChecked);
-                mDaysToRetain.setEnabled(storageManagerChecked);
-                Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
-                        storageManagerChecked ? 1 : 0);
-                // Only show a warning if enabling.
-                if (storageManagerChecked) {
-                    maybeShowWarning();
-                }
-                break;
-            case KEY_DAYS:
-                Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
-                        Integer.parseInt((String) newValue));
-                break;
+        if (KEY_DAYS.equals(preference.getKey())) {
+            Settings.Secure.putInt(
+                    getContentResolver(),
+                    Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
+                    Integer.parseInt((String) newValue));
         }
         return true;
     }
@@ -139,15 +151,6 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.STORAGE_MANAGER_SETTINGS;
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (KEY_DELETION_HELPER.equals(preference.getKey())) {
-            Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
-            getContext().startActivity(intent);
-        }
-        return true;
     }
 
     @Override
@@ -163,16 +166,5 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
             }
         }
         return indices.length - 1;
-    }
-
-    private void maybeShowWarning() {
-        // If the storage manager is on by default, we can use the normal message.
-        boolean warningUnneeded = SystemProperties.getBoolean(
-                STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY, false);
-        if (warningUnneeded) {
-            return;
-        }
-        ActivationWarningFragment fragment = ActivationWarningFragment.newInstance();
-        fragment.show(getFragmentManager(), ActivationWarningFragment.TAG);
     }
 }
