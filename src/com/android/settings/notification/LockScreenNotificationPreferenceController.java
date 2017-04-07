@@ -267,16 +267,20 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
         }
     }
 
+    public int getSummaryResource() {
+        final boolean enabled = getLockscreenNotificationsEnabled(UserHandle.myUserId());
+        final boolean allowPrivate = !mSecure
+            || getLockscreenAllowPrivateNotifications(UserHandle.myUserId());
+        return !enabled ? R.string.lock_screen_notifications_summary_disable :
+            allowPrivate ? R.string.lock_screen_notifications_summary_show :
+                R.string.lock_screen_notifications_summary_hide;
+    }
+
     private void updateLockscreenNotifications() {
         if (mLockscreen == null) {
             return;
         }
-        final boolean enabled = getLockscreenNotificationsEnabled(UserHandle.myUserId());
-        final boolean allowPrivate = !mSecure
-                || getLockscreenAllowPrivateNotifications(UserHandle.myUserId());
-        mLockscreenSelectedValue = !enabled ? R.string.lock_screen_notifications_summary_disable :
-                allowPrivate ? R.string.lock_screen_notifications_summary_show :
-                        R.string.lock_screen_notifications_summary_hide;
+        mLockscreenSelectedValue = getSummaryResource();
         mLockscreen.setValue(Integer.toString(mLockscreenSelectedValue));
     }
 
