@@ -60,6 +60,7 @@ import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
 import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
 import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.location.LocationPreferenceController;
+import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -103,6 +104,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @VisibleForTesting
     static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
     private static final String KEY_UNIFICATION = "unification";
+    @VisibleForTesting
+    static final String KEY_LOCKSCREEN_PREFERENCES = "lockscreen_preferences";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
@@ -169,6 +172,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LocationPreferenceController mLocationcontroller;
     private ManageDeviceAdminPreferenceController mManageDeviceAdminPreferenceController;
     private EnterprisePrivacyPreferenceController mEnterprisePrivacyPreferenceController;
+    private LockScreenNotificationPreferenceController mLockScreenNotificationPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -210,6 +214,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 = new ManageDeviceAdminPreferenceController(activity);
         mEnterprisePrivacyPreferenceController
                 = new EnterprisePrivacyPreferenceController(activity, null /* lifecycle */);
+        mLockScreenNotificationPreferenceController
+                = new LockScreenNotificationPreferenceController(activity);
     }
 
     private static int getResIdForLockUnlockScreen(Context context,
@@ -317,6 +323,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (securityCategory != null) {
             maybeAddFingerprintPreference(securityCategory, UserHandle.myUserId());
             numberOfTrustAgent = addTrustAgentSettings(securityCategory);
+            setLockscreenPreferencesSummary(securityCategory);
         }
 
         mVisiblePatternProfile =
@@ -420,6 +427,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 manageAgents.setSummary(R.string.manage_trust_agents_summary);
             }
+        }
+    }
+
+    @VisibleForTesting
+    void setLockscreenPreferencesSummary(PreferenceGroup group) {
+        final Preference lockscreenPreferences = group.findPreference(KEY_LOCKSCREEN_PREFERENCES);
+        if (lockscreenPreferences != null) {
+            lockscreenPreferences.setSummary(
+                mLockScreenNotificationPreferenceController.getSummaryResource());
         }
     }
 

@@ -24,10 +24,12 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -47,6 +49,7 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Map;
+import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -185,5 +188,23 @@ public class SecuritySettingsTest {
         securitySettings.initTrustAgentPreference(screen, 2);
         verify(preference).setSummary(context.getResources().getQuantityString(
             R.plurals.manage_trust_agents_summary_on, 2, 2));
+    }
+
+    @Test
+    public void testSetLockscreenPreferencesSummary_shouldSetSummaryFromLockScreenNotification() {
+        final Preference preference = mock(Preference.class);
+        final PreferenceGroup group = mock(PreferenceGroup.class);
+        when(group.findPreference(SecuritySettings.KEY_LOCKSCREEN_PREFERENCES))
+            .thenReturn(preference);
+        final LockScreenNotificationPreferenceController controller =
+            mock(LockScreenNotificationPreferenceController.class);
+
+        final SecuritySettings securitySettings = new SecuritySettings();
+        ReflectionHelpers.setField(securitySettings,
+            "mLockScreenNotificationPreferenceController", controller);
+
+        when(controller.getSummaryResource()).thenReturn(1234);
+        securitySettings.setLockscreenPreferencesSummary(group);
+        verify(preference).setSummary(1234);
     }
 }
