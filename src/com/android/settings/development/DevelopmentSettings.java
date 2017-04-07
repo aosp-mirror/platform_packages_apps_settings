@@ -127,7 +127,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
-    private static final String WEBVIEW_MULTIPROCESS_KEY = "enable_webview_multiprocess";
     private static final String ENABLE_OEM_UNLOCK = "oem_unlock_enable";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
@@ -319,7 +318,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mOverlayDisplayDevices;
 
     private WebViewAppPreferenceController mWebViewAppPrefController;
-    private SwitchPreference mWebViewMultiprocess;
 
     private ListPreference mSimulateColorSpace;
 
@@ -497,7 +495,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mLogpersist = null;
         }
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
-        mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
         mBluetoothEnableInbandRinging = findAndInitSwitchPref(BLUETOOTH_ENABLE_INBAND_RINGING_KEY);
         if (!BluetoothHeadset.isInbandRingingSupported(getContext())) {
@@ -814,7 +811,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateForceResizableOptions();
         Preference webViewAppPref = findPreference(mWebViewAppPrefController.getPreferenceKey());
         mWebViewAppPrefController.updateState(webViewAppPref);
-        updateWebViewMultiprocessOptions();
         updateOemUnlockOptions();
         if (mColorTemperaturePreference != null) {
             updateColorTemperature();
@@ -850,21 +846,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateAllOptions();
         mDontPokeProperties = false;
         pokeSystemProperties();
-    }
-
-    private void updateWebViewMultiprocessOptions() {
-        try {
-            updateSwitchPreference(mWebViewMultiprocess,
-                                   mWebViewUpdateService.isMultiProcessEnabled());
-        } catch (RemoteException e) {
-        }
-    }
-
-    private void writeWebViewMultiprocessOptions() {
-        try {
-            mWebViewUpdateService.enableMultiProcess(mWebViewMultiprocess.isChecked());
-        } catch (RemoteException e) {
-        }
     }
 
     private void updateHdcpValues() {
@@ -2551,8 +2532,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mBluetoothEnableInbandRinging) {
             writeBluetoothEnableInbandRingingOptions();
-        } else if (preference == mWebViewMultiprocess) {
-            writeWebViewMultiprocessOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
         } else {
