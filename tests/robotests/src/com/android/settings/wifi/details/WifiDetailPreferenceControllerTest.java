@@ -24,7 +24,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.IpPrefix;
@@ -56,9 +58,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -79,12 +78,14 @@ public class WifiDetailPreferenceControllerTest {
     private PreferenceScreen mockScreen;
 
     @Mock private AccessPoint mockAccessPoint;
-    @Mock private WifiManager mockWifiManager;
+    @Mock private Activity mockActivity;
     @Mock private ConnectivityManager mockConnectivityManager;
+    @Mock private Network mockNetwork;
     @Mock private NetworkInfo mockNetworkInfo;
     @Mock private WifiConfiguration mockWifiConfig;
     @Mock private WifiInfo mockWifiInfo;
-    @Mock private Network mockNetwork;
+    @Mock private WifiNetworkDetailsFragment mockFragment;
+    @Mock private WifiManager mockWifiManager;
 
     @Mock private Preference mockConnectionDetailPref;
     @Mock private WifiDetailPreference mockSignalStrengthPref;
@@ -122,6 +123,9 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getRssi()).thenReturn(RSSI);
         when(mockAccessPoint.getSecurityString(false)).thenReturn(SECURITY);
 
+        when(mockConnectivityManager.getNetworkInfo(any(Network.class)))
+                .thenReturn(mockNetworkInfo);
+
         when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
         when(mockWifiInfo.getRssi()).thenReturn(RSSI);
         when(mockWifiInfo.getMacAddress()).thenReturn(MAC_ADDRESS);
@@ -131,10 +135,21 @@ public class WifiDetailPreferenceControllerTest {
         mLinkProperties = new LinkProperties();
         when(mockConnectivityManager.getLinkProperties(mockNetwork)).thenReturn(mLinkProperties);
 
-        mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager, mockConnectivityManager);
+        when(mockFragment.getActivity()).thenReturn(mockActivity);
+
+        mController = newWifiDetailPreferenceController();
 
         setupMockedPreferenceScreen();
+    }
+
+    private WifiDetailPreferenceController newWifiDetailPreferenceController() {
+        return new WifiDetailPreferenceController(
+                mockAccessPoint,
+                mockConnectivityManager,
+                mContext,
+                mockFragment,
+                mLifecycle,
+                mockWifiManager);
     }
 
     private void setupMockedPreferenceScreen() {
@@ -175,11 +190,17 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void latestWifiInfoAndConfig_shouldBeFetchedOnResume() {
+    public void latestWifiInfo_shouldBeFetchedOnResume() {
         mController.onResume();
 
-        // Once in construction, once in onResume
-        verify(mockWifiManager, times(2)).getConnectionInfo();
+        verify(mockWifiManager, times(1)).getConnectionInfo();
+    }
+
+    @Test
+    public void latestNetworkInfo_shouldBeFetchedOnResume() {
+        mController.onResume();
+
+        verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
     }
 
     @Test
@@ -321,9 +342,9 @@ public class WifiDetailPreferenceControllerTest {
     @Test
     public void canForgetNetwork_noNetwork() {
         when(mockAccessPoint.getConfig()).thenReturn(null);
-
-        mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager, mockConnectivityManager);
+        mController = newWifiDetailPreferenceController();
+        mController.displayPreference(mockScreen);
+        mController.onResume();
 
         assertThat(mController.canForgetNetwork()).isFalse();
     }
@@ -332,9 +353,9 @@ public class WifiDetailPreferenceControllerTest {
     public void canForgetNetwork_ephemeral() {
         when(mockWifiInfo.isEphemeral()).thenReturn(true);
         when(mockAccessPoint.getConfig()).thenReturn(null);
-
-        mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager, mockConnectivityManager);
+        mController = newWifiDetailPreferenceController();
+        mController.displayPreference(mockScreen);
+        mController.onResume();
 
         assertThat(mController.canForgetNetwork()).isTrue();
     }
@@ -347,9 +368,10 @@ public class WifiDetailPreferenceControllerTest {
     @Test
     public void forgetNetwork_ephemeral() {
         String ssid = "ssid";
-
         when(mockWifiInfo.isEphemeral()).thenReturn(true);
         when(mockWifiInfo.getSSID()).thenReturn(ssid);
+
+        mController.onResume();
 
         mController.forgetNetwork();
 
@@ -363,5 +385,39 @@ public class WifiDetailPreferenceControllerTest {
         mController.forgetNetwork();
 
         verify(mockWifiManager).forget(mockWifiConfig.networkId, null);
+    }
+
+    @Test
+    public void networkStateChangedIntent_shouldRefetchInfo() {
+        mController.onResume();
+        verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
+        verify(mockWifiManager, times(1)).getConnectionInfo();
+
+        mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
+
+        verify(mockConnectivityManager, times(2)).getNetworkInfo(any(Network.class));
+        verify(mockWifiManager, times(2)).getConnectionInfo();
+    }
+
+    @Test
+    public void rssiChangedIntent_shouldRefetchInfo() {
+        mController.onResume();
+        verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
+        verify(mockWifiManager, times(1)).getConnectionInfo();
+
+        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
+
+        verify(mockConnectivityManager, times(2)).getNetworkInfo(any(Network.class));
+        verify(mockWifiManager, times(2)).getConnectionInfo();
+    }
+
+    @Test
+    public void networkDisconnectdState_shouldFinishActivity() {
+        mController.onResume();
+
+        when(mockConnectivityManager.getNetworkInfo(any(Network.class))).thenReturn(null);
+        mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
+
+        verify(mockActivity).finish();
     }
 }
