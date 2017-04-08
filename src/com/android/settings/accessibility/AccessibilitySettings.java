@@ -549,6 +549,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateSystemPreferences() {
+        // Move color inversion and color correction preferences to Display category if device
+        // supports HWC hardware-accelerated color transform.
+        if (isColorTransformAccelerated(getContext())) {
+            PreferenceCategory experimentalCategory =
+                    mCategoryToPrefCategoryMap.get(CATEGORY_EXPERIMENTAL);
+            PreferenceCategory displayCategory =
+                    mCategoryToPrefCategoryMap.get(CATEGORY_DISPLAY);
+            experimentalCategory.removePreference(mToggleInversionPreference);
+            experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
+            mToggleInversionPreference.setOrder(mToggleLargePointerIconPreference.getOrder());
+            mDisplayDaltonizerPreferenceScreen.setOrder(mToggleInversionPreference.getOrder());
+            mToggleInversionPreference.setSummary(R.string.summary_empty);
+            displayCategory.addPreference(mToggleInversionPreference);
+            displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
+        }
+
         // Text contrast.
         mToggleHighTextContrastPreference.setChecked(
                 Settings.Secure.getInt(getContentResolver(),
@@ -598,6 +614,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
+    }
+
+    private boolean isColorTransformAccelerated(Context context) {
+        return context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
     }
 
     private void updateMagnificationSummary(Preference pref) {
