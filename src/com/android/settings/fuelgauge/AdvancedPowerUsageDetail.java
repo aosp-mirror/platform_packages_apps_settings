@@ -104,10 +104,11 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
         final Bundle args = new Bundle();
         final BatterySipper sipper = entry.sipper;
         final BatteryStats.Uid uid = sipper.uidObj;
+        final BatteryUtils batteryUtils = BatteryUtils.getInstance(caller);
 
-        final long backgroundTimeMs = BatteryUtils.getProcessTimeMs(
+        final long backgroundTimeMs = batteryUtils.getProcessTimeMs(
                 BatteryUtils.StatusType.BACKGROUND, uid, which);
-        final long foregroundTimeMs = BatteryUtils.getProcessTimeMs(
+        final long foregroundTimeMs = batteryUtils.getProcessTimeMs(
                 BatteryUtils.StatusType.FOREGROUND, uid, which);
 
         if (ArrayUtils.isEmpty(sipper.mPackages)) {
