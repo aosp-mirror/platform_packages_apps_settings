@@ -74,6 +74,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private PackageManager mPackageManager;
     private UserManager mUserManager;
     private Map<Integer, PowerUsageData> mBatteryDataMap;
+    private BatteryUtils mBatteryUtils;
 
     Handler mHandler = new Handler() {
 
@@ -117,6 +118,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 .getPowerUsageFeatureProvider(context);
         mPackageManager = context.getPackageManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
@@ -239,8 +241,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             final PowerUsageData usageData = batteryDataMap.get(extractUsageType(sipper));
             usageData.totalPowerMah += sipper.totalPowerMah;
             if (sipper.drainType == DrainType.APP && sipper.usageTimeMs != 0) {
-                sipper.usageTimeMs = BatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL,
-                        sipper.uidObj, STATUS_TYPE);
+                sipper.usageTimeMs = mBatteryUtils.getProcessTimeMs(
+                        BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, STATUS_TYPE);
             }
             usageData.totalUsageTimeMs += sipper.usageTimeMs;
             usageData.usageList.add(sipper);

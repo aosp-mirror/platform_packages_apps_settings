@@ -74,7 +74,7 @@ public final class InstalledAppDetailsTest {
     ApplicationFeatureProvider mApplicationFeatureProvider;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
