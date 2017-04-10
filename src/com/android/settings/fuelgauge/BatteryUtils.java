@@ -16,9 +16,13 @@
 package com.android.settings.fuelgauge;
 
 import android.annotation.IntDef;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -38,7 +42,23 @@ public class BatteryUtils {
         int ALL = 2;
     }
 
-    public static long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
+    private static final String TAG = "BatteryUtils";
+    private static BatteryUtils sInstance;
+
+    private PackageManager mPackageManager;
+
+    public static BatteryUtils getInstance(Context context) {
+        if (sInstance == null || sInstance.isDataCorrupted()) {
+            sInstance = new BatteryUtils(context);
+        }
+        return sInstance;
+    }
+
+    private BatteryUtils(Context context) {
+        mPackageManager = context.getPackageManager();
+    }
+
+    public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
             int which) {
         if (uid == null) {
             return 0;
@@ -56,33 +76,45 @@ public class BatteryUtils {
         return 0;
     }
 
-    private static long getProcessBackgroundTimeMs(BatteryStats.Uid uid, int which) {
+    private long getProcessBackgroundTimeMs(BatteryStats.Uid uid, int which) {
         final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
         final long timeUs = uid.getProcessStateTime(
                 BatteryStats.Uid.PROCESS_STATE_BACKGROUND, rawRealTimeUs, which);
-        return  convertUsToMs(timeUs);
+
+        Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
+        Log.v(TAG, "background time(us): " + timeUs);
+        return convertUsToMs(timeUs);
     }
 
-    private static long getProcessForegroundTimeMs(BatteryStats.Uid uid, int which) {
+    private long getProcessForegroundTimeMs(BatteryStats.Uid uid, int which) {
         final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
         final int foregroundTypes[] = {BatteryStats.Uid.PROCESS_STATE_TOP,
                 BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE,
                 BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING,
                 BatteryStats.Uid.PROCESS_STATE_FOREGROUND};
+        Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
+
         long timeUs = 0;
         for (int type : foregroundTypes) {
-            timeUs += uid.getProcessStateTime(type, rawRealTimeUs, which);
+            final long localTime = uid.getProcessStateTime(type, rawRealTimeUs, which);
+            Log.v(TAG, "type: " + type + " time(us): " + localTime);
+            timeUs += localTime;
         }
+        Log.v(TAG, "foreground time(us): " + timeUs);
 
         return convertUsToMs(timeUs);
     }
 
-    private static long convertUsToMs(long timeUs) {
+    private long convertUsToMs(long timeUs) {
         return timeUs / 1000;
     }
 
-    private static long convertMsToUs(long timeMs) {
+    private long convertMsToUs(long timeMs) {
         return timeMs * 1000;
+    }
+
+    private boolean isDataCorrupted() {
+        return mPackageManager == null;
     }
 
 }

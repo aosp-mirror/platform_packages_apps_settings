@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -96,7 +97,8 @@ public class AdvancedPowerUsageDetailTest {
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private BatteryStats.Uid mUid;
-    private Bundle mTestBundle;
+    @Mock
+    private PackageManager mPackageManager;
     private AdvancedPowerUsageDetail mFragment;
     private FakeFeatureFactory mFeatureFactory;
     private SettingsActivity mTestActivity;
@@ -141,6 +143,7 @@ public class AdvancedPowerUsageDetailTest {
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
+        doReturn(mPackageManager).when(mTestActivity).getPackageManager();
 
         final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
 
