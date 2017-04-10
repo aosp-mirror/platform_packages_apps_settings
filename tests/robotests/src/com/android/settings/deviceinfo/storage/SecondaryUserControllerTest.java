@@ -19,12 +19,14 @@ package com.android.settings.deviceinfo.storage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -34,7 +36,9 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceController;
+import com.android.settingslib.R;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.drawable.UserIconDrawable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -186,5 +190,25 @@ public class SecondaryUserControllerTest {
         assertThat(controllers).hasSize(1);
         // We should have the NoSecondaryUserController.
         assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
+    }
+
+    @Test
+    public void iconCallbackChangesPreferenceIcon() throws Exception {
+        SparseArray<Drawable> icons = new SparseArray<>();
+        Bitmap userBitmap =
+                BitmapFactory.decodeResource(
+                        RuntimeEnvironment.application.getResources(), R.drawable.home);
+        UserIconDrawable drawable = new UserIconDrawable(100 /* size */).setIcon(userBitmap).bake();
+        icons.put(10, drawable);
+        mPrimaryUser.name = TEST_NAME;
+        mPrimaryUser.id = 10;
+        mController.displayPreference(mScreen);
+
+        mController.handleUserIcons(icons);
+
+        final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mGroup).addPreference(argumentCaptor.capture());
+        Preference preference = argumentCaptor.getValue();
+        assertThat(preference.getIcon()).isEqualTo(drawable);
     }
 }
