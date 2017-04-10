@@ -245,7 +245,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return version;
     }
 
-    public static void clearLocalesIndexed(Context context) {
+    public static void clearCachedIndexed(Context context) {
         context.getSharedPreferences(INDEX, 0).edit().clear().commit();
     }
 
@@ -257,8 +257,16 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return context.getSharedPreferences(INDEX, 0).getBoolean(locale, false);
     }
 
+    public static boolean isBuildIndexed(Context context, String buildNo) {
+        return context.getSharedPreferences(INDEX, 0).getBoolean(buildNo, false);
+    }
+
+    public static void setBuildIndexed(Context context, String buildNo) {
+        context.getSharedPreferences(INDEX, 0).edit().putBoolean(buildNo, true).commit();
+    }
+
     private void dropTables(SQLiteDatabase db) {
-        clearLocalesIndexed(mContext);
+        clearCachedIndexed(mContext);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_META_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_PREFS_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SAVED_QUERIES);
