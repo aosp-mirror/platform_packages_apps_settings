@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,6 +25,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.SparseArray;
@@ -36,7 +38,9 @@ import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.deviceinfo.StorageProfileFragment;
+import com.android.settingslib.R;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.drawable.UserIconDrawable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,16 +70,15 @@ public class UserProfileControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mPrimaryProfile = new UserInfo();
-        mController = new UserProfileController(mContext, mPrimaryProfile, 0);
+        mController = new UserProfileController(mContext, mPrimaryProfile, mUserManager, 0);
         when(mScreen.getContext()).thenReturn(mContext);
+        mPrimaryProfile.name = TEST_NAME;
+        mPrimaryProfile.id = 10;
+        mController.displayPreference(mScreen);
     }
 
     @Test
     public void controllerAddsPrimaryProfilePreference() throws Exception {
-        mPrimaryProfile.name = TEST_NAME;
-        mPrimaryProfile.id = 10;
-        mController.displayPreference(mScreen);
-
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
@@ -86,9 +89,6 @@ public class UserProfileControllerTest {
 
     @Test
     public void tappingProfilePreferenceSendsToStorageProfileFragment() throws Exception {
-        mPrimaryProfile.name = TEST_NAME;
-        mPrimaryProfile.id = 10;
-        mController.displayPreference(mScreen);
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
@@ -105,9 +105,6 @@ public class UserProfileControllerTest {
 
     @Test
     public void acceptingResultUpdatesPreferenceSize() throws Exception {
-        mPrimaryProfile.name = TEST_NAME;
-        mPrimaryProfile.id = 10;
-        mController.displayPreference(mScreen);
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
         StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
@@ -120,5 +117,22 @@ public class UserProfileControllerTest {
         Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getSummary()).isEqualTo("99.00B");
+    }
+
+    @Test
+    public void iconCallbackChangesPreferenceIcon() throws Exception {
+        SparseArray<Drawable> icons = new SparseArray<>();
+        Bitmap userBitmap =
+                BitmapFactory.decodeResource(
+                        RuntimeEnvironment.application.getResources(), R.drawable.home);
+        UserIconDrawable drawable = new UserIconDrawable(100 /* size */).setIcon(userBitmap).bake();
+        icons.put(10, drawable);
+
+        mController.handleUserIcons(icons);
+
+        final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mScreen).addPreference(argumentCaptor.capture());
+        Preference preference = argumentCaptor.getValue();
+        assertThat(preference.getIcon()).isEqualTo(drawable);
     }
 }
