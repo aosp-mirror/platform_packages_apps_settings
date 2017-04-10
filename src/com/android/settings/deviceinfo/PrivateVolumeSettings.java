@@ -484,28 +484,13 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
             } break;
             case R.string.storage_detail_images: {
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(
-                        DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "images_root"),
-                        DocumentsContract.Root.MIME_TYPE_ITEM);
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-
+                intent = getIntentForStorage(AUTHORITY_MEDIA, "images_root");
             } break;
             case R.string.storage_detail_videos: {
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(
-                        DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "videos_root"),
-                        DocumentsContract.Root.MIME_TYPE_ITEM);
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-
+                intent = getIntentForStorage(AUTHORITY_MEDIA, "videos_root");
             } break;
             case R.string.storage_detail_audio: {
-                intent = new Intent(DocumentsContract.Root.MIME_TYPE_ITEM);
-                intent.setDataAndType(
-                        DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"),
-                        DocumentsContract.Root.MIME_TYPE_ITEM);
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-
+                intent = getIntentForStorage(AUTHORITY_MEDIA, "audio_root");
             } break;
             case R.string.storage_detail_system: {
                 SystemInfoFragment.show(this);
@@ -544,6 +529,16 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             return true;
         }
         return super.onPreferenceTreeClick(pref);
+    }
+
+    private Intent getIntentForStorage(String authority, String root) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(
+                DocumentsContract.buildRootUri(authority, root),
+                DocumentsContract.Root.MIME_TYPE_ITEM);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+
+        return intent;
     }
 
     private final MeasurementReceiver mReceiver = new MeasurementReceiver() {
