@@ -33,9 +33,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.io.File;
@@ -493,19 +493,20 @@ public class RunningServiceDetails extends InstrumentedPreferenceFragment
             }
         });
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        setHasOptionsMenu(true);
         mUid = getArguments().getInt(KEY_UID, -1);
         mUserId = getArguments().getInt(KEY_USER_ID, 0);
         mProcessName = getArguments().getString(KEY_PROCESS, null);
         mShowBackground = getArguments().getBoolean(KEY_BACKGROUND, false);
-        
-        mAm = (ActivityManager)getActivity().getSystemService(Context.ACTIVITY_SERVICE);
-        mInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        
+
+        mAm = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        mInflater = (LayoutInflater) getActivity().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+
         mState = RunningState.getInstance(getActivity());
     }
     
