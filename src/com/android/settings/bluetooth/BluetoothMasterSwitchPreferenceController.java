@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.LifecycleObserver;
@@ -26,9 +27,9 @@ import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
-import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.MasterSwitchController;
+import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 public class BluetoothMasterSwitchPreferenceController extends PreferenceController
@@ -41,12 +42,20 @@ public class BluetoothMasterSwitchPreferenceController extends PreferenceControl
     private MasterSwitchPreference mBtPreference;
     private BluetoothEnabler mBluetoothEnabler;
     private BluetoothSummaryUpdater mSummaryUpdater;
+    private RestrictionUtils mRestrictionUtils;
 
     public BluetoothMasterSwitchPreferenceController(Context context,
             LocalBluetoothManager bluetoothManager) {
+        this(context, bluetoothManager, new RestrictionUtils());
+    }
+
+    @VisibleForTesting
+    public BluetoothMasterSwitchPreferenceController(Context context,
+            LocalBluetoothManager bluetoothManager, RestrictionUtils restrictionUtils) {
         super(context);
         mBluetoothManager = bluetoothManager;
         mSummaryUpdater = new BluetoothSummaryUpdater(mContext, this, mBluetoothManager);
+        mRestrictionUtils = restrictionUtils;
     }
 
     @Override
@@ -56,7 +65,8 @@ public class BluetoothMasterSwitchPreferenceController extends PreferenceControl
         mBluetoothEnabler = new BluetoothEnabler(mContext,
             new MasterSwitchController(mBtPreference),
             FeatureFactory.getFactory(mContext).getMetricsFeatureProvider(), mBluetoothManager,
-            MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE);
+            MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
+            mRestrictionUtils);
     }
 
     @Override

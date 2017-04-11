@@ -21,13 +21,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -45,6 +48,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
+    private final RestrictionUtils mRestrictionUtils;
 
     private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
     private static final int EVENT_UPDATE_INDEX = 0;
@@ -63,6 +67,13 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     public BluetoothEnabler(Context context, SwitchWidgetController switchWidget,
             MetricsFeatureProvider metricsFeatureProvider, LocalBluetoothManager manager,
             int metricsEvent) {
+        this(context, switchWidget, metricsFeatureProvider, manager, metricsEvent,
+                new RestrictionUtils());
+    }
+
+    public BluetoothEnabler(Context context, SwitchWidgetController switchWidget,
+            MetricsFeatureProvider metricsFeatureProvider, LocalBluetoothManager manager,
+            int metricsEvent, RestrictionUtils restrictionUtils) {
         mContext = context;
         mMetricsFeatureProvider = metricsFeatureProvider;
         mSwitchWidget = switchWidget;
@@ -79,6 +90,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             mLocalAdapter = manager.getBluetoothAdapter();
         }
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mRestrictionUtils = restrictionUtils;
     }
 
     public void setupSwitchController() {
@@ -90,13 +102,15 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     }
 
     public void resume(Context context) {
+        if (mContext != context) {
+            mContext = context;
+        }
+
+        maybeEnforceRestrictions();
+
         if (mLocalAdapter == null) {
             mSwitchWidget.setEnabled(false);
             return;
-        }
-
-        if (mContext != context) {
-            mContext = context;
         }
 
         // Bluetooth state is not sticky, so set it manually
@@ -156,6 +170,10 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
 
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
+        if (maybeEnforceRestrictions()) {
+            return true;
+        }
+
         // Show toast message if Bluetooth is not allowed in airplane mode
         if (isChecked &&
                 !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
@@ -182,4 +200,29 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         mSwitchWidget.setEnabled(false);
         return true;
     }
+
+    /**
+     * Enforces user restrictions disallowing Bluetooth (or its configuration) if there are any.
+     *
+     * @return if there was any user restriction to enforce.
+     */
+    @VisibleForTesting
+    boolean maybeEnforceRestrictions() {
+        EnforcedAdmin admin = mRestrictionUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH);
+        if (admin == null) {
+            admin = mRestrictionUtils.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH);
+        }
+        mSwitchWidget.setDisabledByAdmin(admin);
+        if (admin != null) {
+            mSwitchWidget.setChecked(false);
+            if (mSwitch != null) {
+                mSwitch.setEnabled(false);
+                mSwitch.setChecked(false);
+            }
+        }
+        return admin != null;
+    }
+
 }
