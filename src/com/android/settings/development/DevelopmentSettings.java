@@ -396,7 +396,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             // Block access to developer options if the user is not the owner, if user policy
             // restricts it, or if the device has not been provisioned
             mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
+            addPreferencesFromResource(R.xml.empty_settings);
             return;
         }
 
