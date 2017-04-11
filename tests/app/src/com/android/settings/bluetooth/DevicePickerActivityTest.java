@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+package com.android.settings.bluetooth;
 
 import android.app.Instrumentation;
 import android.content.Intent;
@@ -26,31 +22,25 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
-public class PowerUsageSummaryUiTest {
-    private static final String BATTERY_INTENT = "android.intent.action.POWER_USAGE_SUMMARY";
+public class DevicePickerActivityTest {
+
+    private Instrumentation mInstrumentation;
 
     @Before
-    public void SetUp() {
-        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        instrumentation.startActivitySync(new Intent(BATTERY_INTENT));
+    public void setUp() throws Exception {
+        mInstrumentation = InstrumentationRegistry.getInstrumentation();
     }
 
     @Test
-    public void testClickLastFullCharge_shouldNotCrash() {
-        onView(withText(R.string.battery_last_full_charge)).perform(click());
+    public void startActivityNoCrash() {
+        mInstrumentation.startActivitySync(
+                new Intent("android.bluetooth.devicepicker.action.LAUNCH"));
+        // No crash
     }
-
-    @Test
-    public void testClickScreenUsage_shouldNotCrash() {
-        onView(withText(R.string.device_screen_usage)).perform(click());
-    }
-
 }
