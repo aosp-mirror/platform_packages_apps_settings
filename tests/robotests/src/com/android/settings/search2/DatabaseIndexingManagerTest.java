@@ -30,6 +30,8 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.util.ArrayMap;
@@ -74,7 +76,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows={ShadowRunnableAsyncTask.class})
+        shadows = {ShadowRunnableAsyncTask.class})
 public class DatabaseIndexingManagerTest {
     private final String localeStr = "en_US";
 
@@ -122,7 +124,7 @@ public class DatabaseIndexingManagerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mManager = spy(new DatabaseIndexingManager(mContext,"com.android.settings"));
+        mManager = spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
         mDb = IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
 
         doReturn(mPackageManager).when(mContext).getPackageManager();
@@ -671,40 +673,93 @@ public class DatabaseIndexingManagerTest {
     // Test new public indexing flow
 
     @Test
-    @Config(shadows= {
-            ShadowDatabaseIndexingUtils.class,
-    })
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_fullIndex_getsDataFromProviders() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
-        ShadowContentResolver.registerProvider(
-                AUTHORITY_ONE, provider
-        );
+        ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
 
         // Test that Indexables are added for Full indexing
         when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
                 .thenReturn(getDummyResolveInfo());
 
         DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, "com.android.settings"));
-        doReturn(false).when(manager).isLocaleIndexed();
+                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
 
         manager.performIndexing();
 
-        verify(manager).updateDatabase(false, Locale.getDefault().toString());
-
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        cursor.moveToPosition(0);
-
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
+        verify(manager).addIndexablesFromRemoteProvider(PACKAGE_ONE, AUTHORITY_ONE);
+        verify(manager).updateDatabase(true /* isFullIndex */, Locale.getDefault().toString());
     }
 
     @Test
-    @Config(shadows= {
-            ShadowDatabaseIndexingUtils.class,
-    })
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_incrementalIndex_noDataAdded() {
+        DummyProvider provider = new DummyProvider();
+        provider.onCreate();
+        ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
+
+        // Test that Indexables are added for Full indexing
+        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
+                .thenReturn(getDummyResolveInfo());
+
+        DatabaseIndexingManager manager =
+                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+        doReturn(false).when(manager).isFullIndex(anyString(), anyString());
+
+        manager.mDataToProcess.dataToUpdate.clear();
+
+        manager.performIndexing();
+
+        verify(manager, times(0)).addDataToDatabase(any(SQLiteDatabase.class), anyString(),
+                anyList(), anyMap());
+        verify(manager, times(0)).addIndexablesFromRemoteProvider(PACKAGE_ONE, AUTHORITY_ONE);
+        verify(manager).updateDataInDatabase(any(SQLiteDatabase.class), anyMap());
+    }
+
+    @Test
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
+    public void testPerformIndexing_localeChanged_databaseDropped() {
+        DummyProvider provider = new DummyProvider();
+        provider.onCreate();
+        ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
+
+        // Test that Indexables are added for Full indexing
+        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
+                .thenReturn(getDummyResolveInfo());
+
+        // Initialize the Manager
+        DatabaseIndexingManager manager =
+                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
+
+        // Insert data point which will be dropped
+        final String oldTitle = "This is French";
+        insertSpecialCase(oldTitle, true, "key");
+
+        // Add a data point to be added by the indexing
+        SearchIndexableRaw raw = new SearchIndexableRaw(mContext);
+        final String newTitle = "This is English";
+        raw.title = newTitle;
+        manager.mDataToProcess.dataToUpdate.add(raw);
+
+        manager.performIndexing();
+
+        // Assert that the New Title is inserted
+        final Cursor newCursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE data_title = '" +
+                newTitle + "'", null);
+        assertThat(newCursor.getCount()).isEqualTo(1);
+
+        // Assert that the Old Title is no longer in the database, since it was dropped
+        final Cursor oldCursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE data_title = '" +
+                oldTitle + "'", null);
+        assertThat(oldCursor.getCount()).isEqualTo(0);
+    }
+
+    @Test
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
+    public void testPerformIndexing_onOta_FullIndex() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
         ShadowContentResolver.registerProvider(
@@ -716,19 +771,40 @@ public class DatabaseIndexingManagerTest {
                 .thenReturn(getDummyResolveInfo());
 
         DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, "com.android.settings"));
-        doReturn(true).when(manager).isLocaleIndexed();
+                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
 
         manager.performIndexing();
 
-        final Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
+        verify(manager).updateDatabase(true /* isFullIndex */, Locale.getDefault().toString());
+    }
 
-        assertThat(cursor.getCount()).isEqualTo(0);
+    @Test
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
+    public void testPerformIndexing_onOta_buildNumberIsCached() {
+        DummyProvider provider = new DummyProvider();
+        provider.onCreate();
+        ShadowContentResolver.registerProvider(
+                AUTHORITY_ONE, provider
+        );
+
+        // Test that Indexables are added for Full indexing
+        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
+                .thenReturn(getDummyResolveInfo());
+
+        DatabaseIndexingManager manager =
+                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
+
+        manager.performIndexing();
+
+        assertThat(IndexDatabaseHelper.getInstance(mContext).isBuildIndexed(mContext,
+                Build.FINGERPRINT)).isTrue();
     }
 
     @Test
     public void testFullUpdatedDatabase_noData_addDataToDatabaseNotCalled() {
-        mManager.updateDatabase(false, localeStr);
+        mManager.updateDatabase(true /* isFullIndex */, localeStr);
         mManager.mDataToProcess.dataToUpdate.clear();
         verify(mManager, times(0)).addDataToDatabase(any(SQLiteDatabase.class), anyString(),
                 anyList(), anyMap());
@@ -736,13 +812,13 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testFullUpdatedDatabase_updatedDataInDatabaseNotCalled() {
-        mManager.updateDatabase(false, localeStr);
+        mManager.updateDatabase(true /* isFullIndex */, localeStr);
         verify(mManager, times(0)).updateDataInDatabase(any(SQLiteDatabase.class), anyMap());
     }
 
     @Test
     public void testLocaleUpdated_afterIndexing_localeNotAdded() {
-        mManager.updateDatabase(false, localeStr);
+        mManager.updateDatabase(true /* isFullIndex */, localeStr);
         assertThat(IndexDatabaseHelper.getInstance(mContext)
                 .isLocaleAlreadyIndexed(mContext, localeStr)).isFalse();
     }
@@ -758,7 +834,7 @@ public class DatabaseIndexingManagerTest {
     public void testUpdateDatabase_newEligibleData_addedToDatabase() {
         // Test that addDataToDatabase is called when dataToUpdate is non-empty
         mManager.mDataToProcess.dataToUpdate.add(getFakeRaw());
-        mManager.updateDatabase(false, localeStr);
+        mManager.updateDatabase(true /* isFullIndex */, localeStr);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         cursor.moveToPosition(0);

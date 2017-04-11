@@ -29,6 +29,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
@@ -170,7 +171,16 @@ public class DatabaseIndexingManager {
         final List<ResolveInfo> list =
                 mContext.getPackageManager().queryIntentContentProviders(intent, 0);
 
-        final boolean isLocaleIndexed = isLocaleIndexed();
+        final String localeStr = Locale.getDefault().toString();
+        final String fingerprint = Build.FINGERPRINT;
+        final boolean isFullIndex = isFullIndex(localeStr, fingerprint);
+
+        // Drop the database when the locale or build has changed. This eliminates rows which are
+        // dynamically inserted in the old language, or deprecated settings.
+        if (isFullIndex) {
+            final SQLiteDatabase db = getWritableDatabase();
+            IndexDatabaseHelper.getInstance(mContext).reconstruct(db);
+        }
 
         for (final ResolveInfo info : list) {
             if (!DatabaseIndexingUtils.isWellKnownProvider(info, mContext)) {
@@ -179,22 +189,32 @@ public class DatabaseIndexingManager {
             final String authority = info.providerInfo.authority;
             final String packageName = info.providerInfo.packageName;
 
-            if (!isLocaleIndexed) {
+            if (isFullIndex) {
                 addIndexablesFromRemoteProvider(packageName, authority);
             }
             addNonIndexablesKeysFromRemoteProvider(packageName, authority);
         }
 
-        final String localeStr = Locale.getDefault().toString();
-        updateDatabase(isLocaleIndexed, localeStr);
+        updateDatabase(isFullIndex, localeStr);
 
         IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
+        IndexDatabaseHelper.setBuildIndexed(mContext, fingerprint);
     }
 
+    /**
+     * Perform a full index on an OTA or when the locale has changed
+     *
+     * @param locale is the default for the device
+     * @param fingerprint id for the current build.
+     * @return true when the locale or build has changed since last index.
+     */
     @VisibleForTesting
-    boolean isLocaleIndexed() {
-        final String locale = Locale.getDefault().toString();
-        return IndexDatabaseHelper.getInstance(mContext).isLocaleAlreadyIndexed(mContext, locale);
+    boolean isFullIndex(String locale, String fingerprint) {
+        final boolean isLocaleIndexed = IndexDatabaseHelper.getInstance(mContext)
+                .isLocaleAlreadyIndexed(mContext, locale);
+        final boolean isBuildIndexed = IndexDatabaseHelper.getInstance(mContext)
+                .isBuildIndexed(mContext, fingerprint);
+        return !isLocaleIndexed || !isBuildIndexed;
     }
 
     /**
@@ -204,11 +224,11 @@ public class DatabaseIndexingManager {
      * Then search results are verified to have the correct value of enabled.
      * Finally, we record that the locale has been indexed.
      *
-     * @param isIncrementalUpdate true when the language has already been indexed.
+     * @param needsReindexing true the database needs to be rebuilt.
      * @param localeStr the default locale for the device.
      */
     @VisibleForTesting
-    void updateDatabase(boolean isIncrementalUpdate, String localeStr) {
+    void updateDatabase(boolean needsReindexing, String localeStr) {
         mIsAvailable.set(false);
         final UpdateData copy;
 
@@ -236,7 +256,7 @@ public class DatabaseIndexingManager {
 
             // Only check for non-indexable key updates after initial index.
             // Enabled state with non-indexable keys is checked when items are first inserted.
-            if (isIncrementalUpdate) {
+            if (!needsReindexing) {
                 updateDataInDatabase(database, nonIndexableKeys);
             }
 
@@ -284,7 +304,7 @@ public class DatabaseIndexingManager {
      * @param database The database to validate.
      * @param nonIndexableKeys A map between package name and the set of non-indexable keys for it.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void updateDataInDatabase(SQLiteDatabase database,
             Map<String, Set<String>> nonIndexableKeys) {
         final String whereEnabled = ENABLED + " = 1";
@@ -348,7 +368,6 @@ public class DatabaseIndexingManager {
     @VisibleForTesting
     boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
         try {
-
             final Context context = mBaseAuthority.equals(authority) ?
                     mContext : mContext.createPackageContext(packageName, 0);
 
