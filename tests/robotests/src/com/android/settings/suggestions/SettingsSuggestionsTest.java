@@ -54,12 +54,6 @@ public class SettingsSuggestionsTest {
   }
 
   @Test
-  public void nightDisplaySettings_isValid() {
-    assertSuggestionEquals("Settings$NightDisplaySettingsActivity",
-        R.string.night_display_suggestion_title, R.string.night_display_suggestion_summary);
-  }
-
-  @Test
   public void fingerprintSuggestion_isValid() {
     assertSuggestionEquals("com.android.settings.Settings$FingerprintSuggestionActivity",
         R.string.suggestion_additional_fingerprints,
