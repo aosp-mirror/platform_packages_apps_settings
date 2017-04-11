@@ -34,6 +34,8 @@ public class SwipeToNotificationSettings extends DashboardFragment {
 
     private static final String TAG = "SwipeToNotifSettings";
 
+    private static final String KEY = "gesture_swipe_down_fingerprint";
+
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_GESTURE_SWIPE_TO_NOTIFICATION;
@@ -57,7 +59,7 @@ public class SwipeToNotificationSettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
+        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle, KEY));
         return controllers;
     }
 

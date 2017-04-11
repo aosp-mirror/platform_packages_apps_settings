@@ -45,11 +45,12 @@ public class SwipeToNotificationPreferenceControllerTest {
     private Context mContext;
 
     private SwipeToNotificationPreferenceController mController;
+    private static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint";
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new SwipeToNotificationPreferenceController(mContext, null);
+        mController = new SwipeToNotificationPreferenceController(mContext, null, KEY_SWIPE_DOWN);
     }
 
     @Test
@@ -75,7 +76,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         // Set the setting to be enabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
-        mController = new SwipeToNotificationPreferenceController(context, null);
+        mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
@@ -85,7 +86,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         // Set the setting to be disabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
-        mController = new SwipeToNotificationPreferenceController(context, null);
+        mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }

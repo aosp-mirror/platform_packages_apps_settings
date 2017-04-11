@@ -35,6 +35,7 @@ import java.util.List;
 public class DoubleTapScreenSettings extends DashboardFragment {
 
     private static final String TAG = "DoubleTapScreen";
+    private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
 
     @Override
     public int getMetricsCategory() {
@@ -60,7 +61,8 @@ public class DoubleTapScreenSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle,
-                new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
+                new AmbientDisplayConfiguration(context), UserHandle.myUserId(),
+                KEY_DOUBLE_TAP_SCREEN));
         return controllers;
     }
 
