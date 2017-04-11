@@ -90,10 +90,14 @@ public class BackgroundActivityPreferenceController extends PreferenceController
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean switchOn = (Boolean) newValue;
-        mAppOpsManager.setUidMode(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid,
-                switchOn ? AppOpsManager.MODE_DEFAULT : AppOpsManager.MODE_IGNORED);
-
+        mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage,
+                switchOn ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
         return true;
+    }
+
+    @VisibleForTesting
+    String getTargetPackage() {
+        return mTargetPackage;
     }
 
     @VisibleForTesting
