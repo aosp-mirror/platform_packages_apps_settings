@@ -32,10 +32,12 @@
         android:title="@string/notification_importance_title" />
 
     <!-- Default ringtone -->
-    <com.android.settings.notification.DefaultNotificationTonePreference
+    <com.android.settings.notification.NotificationSoundPreference
         android:key="ringtone"
-        android:title="@string/notification_ringtone_title"
-        android:dialogTitle="@string/notification_ringtone_title"
+        android:title="@string/notification_channel_sound_title"
+        android:dialogTitle="@string/notification_channel_sound_title"
+        android:showSilent="true"
+        android:showDefault="true"
         android:ringtoneType="notification" />
 
     <!-- Vibration -->
