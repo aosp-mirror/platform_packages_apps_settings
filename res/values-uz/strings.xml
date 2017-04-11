@@ -333,15 +333,13 @@
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Shifrlash va hisob ma’lumotlari"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Telefon shifrlangan"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Ekran qulfi parametrlari"</string>
-    <string name="lockscreen_settings_summary" msgid="8788089950462346171">"Bildirishnoma to‘liq ko‘rsatilsin"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Joylashuv va xavfsizlik sozlamalari"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Mening joylashuvim, ekran qulfi, hisob ma‘lumotlari omborini qulflash sozlamalari"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Maxfiylik"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Administrator tomonidan o‘chirilgan"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Xavfsizlik holati"</string>
     <string name="security_dashboard_summary" msgid="7778812098315813315">"Joylashuv, barmoq izi"</string>
-    <!-- no translation found for security_dashboard_summary_no_fingerprint (6407130749972933883) -->
-    <skip />
+    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"Joylashuv"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmoq izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Barmoq izlari"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Barmoq izi sozlamalari"</string>
@@ -698,8 +696,7 @@
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Yuqori sifatli ochiq tarmoqlarga avtomatik ulanish"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifikatlarni o‘rnatish"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Wi-Fi tarmoqlari o‘chirilgan bo‘lsa-da, joylashuv aniqligini oshirish maqsadida tizimga oid ilova va xizmatlar Wi-Fi tarmoqlarini qidirishda davom etadi. Buni <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>tekshirish sozlamalari<xliff:g id="LINK_END_1">LINK_END</xliff:g> orqali o‘chirib qo‘yish mumkin."</string>
-    <!-- no translation found for wifi_scan_notify_text_scanning_off (3426075479272242098) -->
-    <skip />
+    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Joylashuv aniqligini oshirish uchun <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>sozlamalar<xliff:g id="LINK_END_1">LINK_END</xliff:g> orqali Wi-Fi tarmoqlarni qidirishni yoqing."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Boshqa ko‘rsatilmasin"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Uyqu rejimida Wi-Fi"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Uyqu rejimida Wi-Fi yoniq tursin"</string>
@@ -1062,7 +1059,7 @@
     <string name="pin_failed" msgid="1848423634948587645">"SIM karta PIN kodining amaliyoti bajarilmadi!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Planshet holati"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefon holati"</string>
-    <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Tizim yangilanishlari"</string>
+    <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Tizimni yangilash"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android versiyasi"</string>
     <string name="security_patch" msgid="8438384045870296634">"Xavfsizlik tizimi yangilanishi"</string>
@@ -2009,8 +2006,7 @@
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"To‘liq quvvat olganidan beri sarflangan quvvat"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Oxirgi marta to‘liq quvvat olganidan beri"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"Qolgan batareya vaqti taxminiy va foydalanish intensivligiga qarab o‘zgarishi mumkin"</string>
-    <!-- no translation found for battery_detail_foreground (3350401514602032183) -->
-    <skip />
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"Faol ishlatilganda"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Fon rejimida"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Batareya sarfi"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"Jami ilovalar sarfining <xliff:g id="PERCENT">%1$s</xliff:g> qismi (<xliff:g id="POWER">%2$d</xliff:g> mA*soat)"</string>
@@ -2971,7 +2967,8 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Qurilmani ishga tushirishda parol talab qilish orqali uni yanada kuchliroq himoyalashingiz mumkin. Qurilma ishga tushmaguncha, u qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallarini qabul qila olmaydi. \n\nBu yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi. Qurilmani ishga tushirish uchun parol talab qilinsinmi?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Qurilmani qulfdan chiqarish uchun siz nafaqat barmoq izidan foydalanish, balki unga qo‘shimcha tarzda PIN kod kiritilishini ham talab qilishingiz mumkin. Qurilma ishga tushmaguncha, qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallari ishlamaydi.\n\nBu xususiyat yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi. Qurilmani ishga tushirish uchun PIN kod talab qilinsinmi?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Qurilmani qulfdan chiqarish uchun siz nafaqat barmoq izidan foydalanish, balki unga qo‘shimcha tarzda chizmali kalit kiritilishini ham talab qilishingiz mumkin. Qurilma ishga tushmaguncha, qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallari ishlamaydi.\n\nBu xususiyat yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi. Qurilmani ishga tushirish uchun grafik kalit talab qilinsinmi?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Qurilmani qulfdan chiqarish uchun siz nafaqat barmoq izidan foydalanish, balki unga qo‘shimcha tarzda parol kiritilishini ham talab qilishingiz mumkin. Qurilma ishga tushmaguncha, qo‘ng‘iroqlar, xabarlar yoki bildirishnomalar, jumladan, uyg‘otkich signallari ishlamaydi.\n\nBu xususiyat yo‘qolgan yoki o‘g‘irlangan qurilmadagi ma’lumotlarni himoyalashga yordam beradi. Qurilmani ishga tushirish uchun parol talab qilinsinmi?"</string>
+    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
+    <skip />
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Ha"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Yo‘q"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN-kod talab qilinsinmi?"</string>
@@ -3096,8 +3093,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"Batareya cheklovlari joriy etilmasin. Batareya quvvati tez sarflanishi mumkin."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Ilova doim fonda ishlashiga ruxsat berilsinmi?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasiga doim fonda ishlashiga ruxsat berilsa, batareya quvvati tezroq sarflanadi. \n\nBuni keyinroq Sozlamalar &gt; Ilovalar va bildirishnomalar orqali o‘zgartirishingiz mumkin."</string>
-    <!-- no translation found for battery_summary (8044042095190688654) -->
-    <skip />
+    <string name="battery_summary" msgid="8044042095190688654">"To‘liq quvvatlangandan keyin <xliff:g id="PERCENTAGE">%1$s</xliff:g> quvvat sarflandi"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Quvvat boshqaruvi"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"To‘liq quvvatlangandan so‘ng quvvat sarflanmadi"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Ilova sozlamalari"</string>
@@ -3177,8 +3173,7 @@
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Boshqa oynalar ustidan ochish"</string>
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Boshqa ilovalar ustidan ochilishiga ruxsat"</string>
     <string name="app_overlay_permission_preference" msgid="9039432222453006038">"Ilovani barcha oynalar ustidan ochish"</string>
-    <!-- no translation found for allow_overlay_description (8961670023925421358) -->
-    <skip />
+    <string name="allow_overlay_description" msgid="8961670023925421358">"Interfeys elementlarini boshqa oynalar ustidan ko‘rsatiladi. Bu ilovalar bilan ishlashingizga xalaqit qilishi yoki ularning interfeysini buzib tashlashi mumkin."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtual borliq tinglovchi stereo yordamchi xizmat"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"tizim signal muloqot oynasi boshqa ilovalar ustidan ochilish"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Boshqa oynalar ustidan ochish"</string>
@@ -3480,14 +3475,10 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Internetga ulaning yoki operator bilan bog‘laning"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Operator tomonidan qulflangan qurilmalarda ishlamaydi"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Jami <xliff:g id="SIZE">%1$s</xliff:g> joy bo‘shatildi\n\nOxirgi marta ishga tushirilgan: <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for web_action_enable_title (4051513950976670853) -->
-    <skip />
-    <!-- no translation found for web_action_enable_summary (3108127559723396382) -->
-    <skip />
-    <!-- no translation found for web_action_section_title (7364647086538399136) -->
-    <skip />
-    <!-- no translation found for instant_apps_account (1433620209791992528) -->
-    <skip />
+    <string name="web_action_enable_title" msgid="4051513950976670853">"Darhol ochiladigan ilovalar"</string>
+    <string name="web_action_enable_summary" msgid="3108127559723396382">"Havolalarni ilovalarda (hatto ular o‘rnatilmagan bo‘lsa ham) ochish"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"Darhol ochiladigan ilovalar"</string>
+    <string name="instant_apps_account" msgid="1433620209791992528">"Darhol ochiladigan ilovalar uchun hisob"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"O‘rnatilgan ilovalar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Xotirangiz hozirda xotira boshqaruvi tomonidan boshqarilmoqda"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> uchun hisoblar"</string>
@@ -3574,11 +3565,9 @@
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Telefon xotirasi"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Jami: <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <!-- no translation found for storage_percent_full (6095012055875077036) -->
-    <skip />
+    <string name="storage_percent_full" msgid="6095012055875077036">"band"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Ilova ma’lumotlarini tozalash"</string>
-    <!-- no translation found for clear_instant_app_confirmation (7451671214898856857) -->
-    <skip />
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Ushbu darhol ochiladigan ilova olib tashlansinmi?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"O‘yinlar"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Audio fayllar"</string>
     <string name="app_info_storage_title" msgid="5554719444625611987">"Band qilgan joyi"</string>
