@@ -62,11 +62,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
-    void initDevicePreference(BluetoothDevicePreference preference) {
-        preference.setWidgetLayoutResource(R.layout.preference_empty_list);
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_ID_REFRESH, 0, R.string.bluetooth_search_for_devices)
                 .setEnabled(true)
