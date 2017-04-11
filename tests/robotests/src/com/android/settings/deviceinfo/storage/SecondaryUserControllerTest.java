@@ -211,4 +211,20 @@ public class SecondaryUserControllerTest {
         Preference preference = argumentCaptor.getValue();
         assertThat(preference.getIcon()).isEqualTo(drawable);
     }
+
+    @Test
+    public void setIcon_doesntNpeOnNullPreference() throws Exception {
+        SparseArray<Drawable> icons = new SparseArray<>();
+        Bitmap userBitmap =
+                BitmapFactory.decodeResource(
+                        RuntimeEnvironment.application.getResources(), R.drawable.home);
+        UserIconDrawable drawable = new UserIconDrawable(100 /* size */).setIcon(userBitmap).bake();
+        icons.put(10, drawable);
+        mPrimaryUser.name = TEST_NAME;
+        mPrimaryUser.id = 10;
+
+        mController.handleUserIcons(icons);
+
+        // Doesn't crash
+    }
 }
