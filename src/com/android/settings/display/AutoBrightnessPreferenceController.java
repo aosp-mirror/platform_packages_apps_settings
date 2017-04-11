@@ -36,10 +36,11 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 public class AutoBrightnessPreferenceController extends PreferenceController implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
+    private final String mAutoBrightnessKey;
 
-    public AutoBrightnessPreferenceController(Context context) {
+    public AutoBrightnessPreferenceController(Context context, String key) {
         super(context);
+        mAutoBrightnessKey = key;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
 
     @Override
     public String getPreferenceKey() {
-        return KEY_AUTO_BRIGHTNESS;
+        return mAutoBrightnessKey;
     }
 
     @Override
@@ -75,7 +76,7 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
         valueMap.put(SCREEN_BRIGHTNESS_MODE_MANUAL, false);
 
         final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
-                getClass().getName(), KEY_AUTO_BRIGHTNESS,
+                getClass().getName(), mAutoBrightnessKey,
                 mContext.getString(R.string.display_settings));
 
         return new InlineSwitchPayload(SCREEN_BRIGHTNESS_MODE,

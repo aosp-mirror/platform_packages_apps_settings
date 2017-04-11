@@ -36,9 +36,11 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.BatteryInfo;
 
 import org.junit.Before;
@@ -421,6 +423,33 @@ public class PowerUsageSummaryTest {
     public void testCalculateRunningTimeBasedOnStatsType() {
         assertThat(mFragment.calculateRunningTimeBasedOnStatsType()).isEqualTo(
                 TIME_SINCE_LAST_FULL_CHARGE_MS);
+    }
+
+    @Test
+    public void testNonIndexableKeys_MatchPreferenceKeys() {
+        final Context context = RuntimeEnvironment.application;
+        final List<String> niks = PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context,
+                R.xml.power_usage_summary);
+
+        assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
+        final Context context = RuntimeEnvironment.application;
+        final PowerUsageSummary fragment = new PowerUsageSummary();
+        final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
+                fragment.getPreferenceScreenResId());
+        final List<String> preferenceKeys = new ArrayList<>();
+
+        for (PreferenceController controller : fragment.getPreferenceControllers(context)) {
+            preferenceKeys.add(controller.getPreferenceKey());
+        }
+
+        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
     }
 
     public static class TestFragment extends PowerUsageSummary {
