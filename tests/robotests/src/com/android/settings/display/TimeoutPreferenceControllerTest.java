@@ -42,11 +42,13 @@ public class TimeoutPreferenceControllerTest {
     private TimeoutListPreference mPreference;
     private TimeoutPreferenceController mController;
 
+    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mController = new TimeoutPreferenceController(mContext);
+        mController = new TimeoutPreferenceController(mContext, KEY_SCREEN_TIMEOUT);
     }
 
     @Test

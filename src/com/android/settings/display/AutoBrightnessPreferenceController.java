@@ -33,10 +33,11 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 public class AutoBrightnessPreferenceController extends PreferenceController implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
+    private final String mAutoBrightnessKey;
 
-    public AutoBrightnessPreferenceController(Context context) {
+    public AutoBrightnessPreferenceController(Context context, String key) {
         super(context);
+        mAutoBrightnessKey = key;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
 
     @Override
     public String getPreferenceKey() {
-        return KEY_AUTO_BRIGHTNESS;
+        return mAutoBrightnessKey;
     }
 
     @Override
