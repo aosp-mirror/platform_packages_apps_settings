@@ -15,7 +15,9 @@
 package com.android.settings.applications;
 
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -55,6 +57,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     private ApplicationsState.Session mSession;
     private PreferenceGroup mDomainAppList;
     private SwitchPreference mWebAction;
+    private Preference mInstantAppAccountPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -126,6 +129,26 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
                 mWebAction.setOnPreferenceChangeListener(this);
                 webActionCategory.addPreference(mWebAction);
 
+                // Determine whether we should show the instant apps account chooser setting
+                ComponentName instantAppSettingsComponent = getActivity().getPackageManager()
+                        .getInstantAppResolverSettingsComponent();
+                Intent instantAppSettingsIntent = null;
+                if (instantAppSettingsComponent != null) {
+                    instantAppSettingsIntent =
+                            new Intent().setComponent(instantAppSettingsComponent);
+                }
+                if (instantAppSettingsIntent != null) {
+                    final Intent launchIntent = instantAppSettingsIntent;
+                    // TODO: Make this button actually launch the account chooser.
+                    mInstantAppAccountPreference = new Preference(getPrefContext());
+                    mInstantAppAccountPreference.setTitle(R.string.instant_apps_account);
+                    mInstantAppAccountPreference.setOnPreferenceClickListener(pref -> {
+                        startActivity(launchIntent);
+                        return true;
+                    });
+                    webActionCategory.addPreference(mInstantAppAccountPreference);
+                }
+
                 // list to manage link handling per app
                 mDomainAppList = new PreferenceCategory(getPrefContext());
                 mDomainAppList.setTitle(R.string.domain_url_section_title);
@@ -138,9 +161,11 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mWebAction) {
-            final int enabled = (boolean) newValue ? 1 : 0;
+            boolean checked = (boolean) newValue;
             Settings.Secure.putInt(
-                    getContentResolver(), Settings.Secure.WEB_ACTION_ENABLED, enabled);
+                    getContentResolver(),
+                    Settings.Secure.WEB_ACTION_ENABLED, checked ? 1 : 0);
+            mWebAction.setChecked(checked);
             return true;
         }
         return false;
