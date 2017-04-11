@@ -21,26 +21,24 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import android.util.ArrayMap;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
 
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_screen_video";
-    private static final String PREF_KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
+    private final String mDoubleTapScreenPrefKey;
 
     private final AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
     private final int mUserId;
 
     public DoubleTapScreenPreferenceController(Context context, Lifecycle lifecycle,
-            AmbientDisplayConfiguration config, @UserIdInt int userId) {
+            AmbientDisplayConfiguration config, @UserIdInt int userId, String key) {
         super(context, lifecycle);
         mAmbientConfig = config;
         mUserId = userId;
+        mDoubleTapScreenPrefKey = key;
     }
 
     @Override
@@ -50,7 +48,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY_DOUBLE_TAP_SCREEN;
+        return mDoubleTapScreenPrefKey;
     }
 
     @Override

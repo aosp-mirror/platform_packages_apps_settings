@@ -54,6 +54,8 @@ public class DisplaySettings extends DashboardFragment {
 
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
+    private static final String KEY_PICK_UP = "gesture_pick_up_display_summary";
+    private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen_display_summary";
 
     @Override
     public int getMetricsCategory() {
@@ -100,9 +102,10 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new ScreenSaverPreferenceController(context));
         AmbientDisplayConfiguration ambientDisplayConfig = new AmbientDisplayConfiguration(context);
         controllers.add(new PickupGesturePreferenceController(
-                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
+                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId(), KEY_PICK_UP));
         controllers.add(new DoubleTapScreenPreferenceController(
-                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
+                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId(),
+                KEY_DOUBLE_TAP_SCREEN));
         controllers.add(new TapToWakePreferenceController(context));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new VrDisplayPreferenceController(context));

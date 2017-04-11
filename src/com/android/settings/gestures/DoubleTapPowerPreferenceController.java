@@ -20,18 +20,16 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import android.util.ArrayMap;
 import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
-    private static final String PREF_KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
+    private final String mDoubleTapPowerKey;
 
-    public DoubleTapPowerPreferenceController(Context context, Lifecycle lifecycle) {
+    public DoubleTapPowerPreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, lifecycle);
+        mDoubleTapPowerKey = key;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY_DOUBLE_TAP_POWER;
+        return mDoubleTapPowerKey;
     }
 
     @Override
