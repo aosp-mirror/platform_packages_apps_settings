@@ -269,11 +269,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             if (left.isDeleted() != right.isDeleted()) {
                 return Boolean.compare(left.isDeleted(), right.isDeleted());
             }
-            CharSequence leftName = left.getName();
-            CharSequence rightName = right.getName();
-            if (!Objects.equals(leftName, rightName)) {
-                return sCollator.compare(leftName.toString(), rightName.toString());
-            }
             return left.getId().compareTo(right.getId());
         }
     };
@@ -289,12 +284,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                         return 1;
                     } else if (right.getId() == null && left.getId() != null) {
                         return -1;
-                    }
-                    CharSequence leftName = left.getName();
-                    CharSequence rightName = right.getName();
-                    // sort rest of the groups by name
-                    if (!Objects.equals(leftName, rightName)) {
-                        return sCollator.compare(leftName.toString(), rightName.toString());
                     }
                     return left.getId().compareTo(right.getId());
                 }
