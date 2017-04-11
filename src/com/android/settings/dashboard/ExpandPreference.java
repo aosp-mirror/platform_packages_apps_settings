@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 
 import com.android.settings.R;
@@ -50,5 +51,11 @@ public class ExpandPreference extends Preference {
         setIcon(R.drawable.ic_arrow_down_24dp);
         setTitle(R.string.advanced_section_header);
         setOrder(999);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        holder.setDividerAllowedAbove(false);
     }
 }
