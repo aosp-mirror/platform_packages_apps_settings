@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
@@ -85,7 +86,11 @@ public class SoundSettings extends DashboardFragment {
         if (preference instanceof RingtonePreference) {
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
-            startActivityForResult(preference.getIntent(), REQUEST_CODE);
+            startActivityForResultAsUser(
+                    mRequestPreference.getIntent(),
+                    REQUEST_CODE,
+                    null,
+                    UserHandle.of(mRequestPreference.getUserId()));
             return true;
         }
         return super.onPreferenceTreeClick(preference);

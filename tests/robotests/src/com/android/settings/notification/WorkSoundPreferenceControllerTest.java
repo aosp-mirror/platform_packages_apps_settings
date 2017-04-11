@@ -27,6 +27,7 @@ import android.telephony.TelephonyManager;
 
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
+import com.android.settings.RingtonePreference;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -251,4 +252,26 @@ public class WorkSoundPreferenceControllerTest {
         verify(mWorkCategory.findPreference(KEY_WORK_ALARM_RINGTONE))
                 .setSummary(eq(notAvailable));
     }
+
+    @Test
+    public void onResume_shouldSetUserIdToPreference() {
+        final int managedProfileUserId = 10;
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(managedProfileUserId);
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isSingleVolume()).thenReturn(false);
+        when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
+        when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        verify((RingtonePreference) mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
+                .setUserId(managedProfileUserId);
+        verify((RingtonePreference) mWorkCategory.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
+                .setUserId(managedProfileUserId);
+        verify((RingtonePreference) mWorkCategory.findPreference(KEY_WORK_ALARM_RINGTONE))
+                .setUserId(managedProfileUserId);
+    }
+
 }
