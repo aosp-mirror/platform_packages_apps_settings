@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
@@ -33,19 +34,40 @@ public class BatteryOptimizationPreferenceController extends PreferenceControlle
 
     private static final String KEY_BACKGROUND_ACTIVITY = "battery_optimization";
 
+
+    private PowerWhitelistBackend mBackend;
     private Fragment mFragment;
     private SettingsActivity mSettingsActivity;
+    private String mPackageName;
 
     public BatteryOptimizationPreferenceController(SettingsActivity settingsActivity,
-            Fragment fragment) {
+            Fragment fragment, String packageName) {
         super(settingsActivity);
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
+        mPackageName = packageName;
+        mBackend = PowerWhitelistBackend.getInstance();
+    }
+
+    @VisibleForTesting
+    BatteryOptimizationPreferenceController(SettingsActivity settingsActivity,
+            Fragment fragment, String packageName, PowerWhitelistBackend backend) {
+        super(settingsActivity);
+        mFragment = fragment;
+        mSettingsActivity = settingsActivity;
+        mPackageName = packageName;
+        mBackend = backend;
     }
 
     @Override
     public boolean isAvailable() {
         return true;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        final boolean isWhitelisted = mBackend.isWhitelisted(mPackageName);
+        preference.setSummary(isWhitelisted ? R.string.high_power_on : R.string.high_power_off);
     }
 
     @Override
@@ -66,4 +88,5 @@ public class BatteryOptimizationPreferenceController extends PreferenceControlle
                 R.string.high_power_apps, null, null, 0);
         return true;
     }
+
 }
