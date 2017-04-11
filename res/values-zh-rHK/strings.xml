@@ -333,15 +333,13 @@
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"加密和憑證"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"手機已加密"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"螢幕鎖定偏好設定"</string>
-    <string name="lockscreen_settings_summary" msgid="8788089950462346171">"顯示所有通知內容"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"設定我的位置、螢幕解鎖及認證儲存空間鎖定"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"私隱權"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"已由管理員停用"</string>
     <string name="security_status_title" msgid="5848766673665944640">"安全性狀態"</string>
     <string name="security_dashboard_summary" msgid="7778812098315813315">"位置、指紋"</string>
-    <!-- no translation found for security_dashboard_summary_no_fingerprint (6407130749972933883) -->
-    <skip />
+    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"位置"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指紋"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"管理指紋"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"使用指紋"</string>
@@ -698,8 +696,7 @@
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"自動連線至高品質的公共網絡"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"為提高定位準確度，系統應用程式和服務仍可掃瞄 Wi-Fi 網絡。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃瞄設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此設定。"</string>
-    <!-- no translation found for wifi_scan_notify_text_scanning_off (3426075479272242098) -->
-    <skip />
+    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"為提高定位準確度，請前往「<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃瞄設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>」開啟 Wi-Fi 掃瞄功能。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"不用再顯示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠時繼續連接 Wi-Fi 網絡"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"休眠狀態仍保持 Wi-Fi 連線"</string>
@@ -2974,7 +2971,8 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"為加強保護此裝置，您可以在裝置啟動前要求輸入密碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入密碼嗎？"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"為加強保護此裝置，除了使用指紋解鎖裝置外，您亦可以在裝置啟動前要求輸入 PIN 碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入 PIN 碼嗎？"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"為加強保護此裝置，除了使用指紋解鎖裝置外，您亦可以在裝置啟動前要求畫出上鎖圖案。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求畫出上鎖圖案嗎？"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"為加強保護此裝置，除了使用指紋解鎖裝置外，您亦可以在裝置啟動前要求輸入密碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入密碼嗎？"</string>
+    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
+    <skip />
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"是"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"否"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"要求輸入 PIN 嗎？"</string>
@@ -3099,8 +3097,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"不使用電池優化，可能會加速耗電。"</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"允許應用程式一律在背景中執行嗎？"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」一律在背景中執行可能會縮短電池壽命。\n\n您日後可以前往「設定」&gt;「應用程式與通知」中變更這項設定。"</string>
-    <!-- no translation found for battery_summary (8044042095190688654) -->
-    <skip />
+    <string name="battery_summary" msgid="8044042095190688654">"自上次完全充電後已使用 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"電源管理"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"自上次完全充電後，沒有消耗電量"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"應用程式設定"</string>
@@ -3180,8 +3177,7 @@
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"在其他應用程式上顯示內容"</string>
     <string name="permit_draw_overlay" msgid="7456536798718633432">"允許在其他應用程式上顯示內容"</string>
     <string name="app_overlay_permission_preference" msgid="9039432222453006038">"允許應用程式在頂端顯示"</string>
-    <!-- no translation found for allow_overlay_description (8961670023925421358) -->
-    <skip />
+    <string name="allow_overlay_description" msgid="8961670023925421358">"允許此應用程式在您目前使用的其他應用程式上層顯示內容，因此可能會干擾您使用相關應用程式，或變更這些應用程式的顯示或運作方式。"</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"VR 虛擬實境 接聽器 立體聲 協助服務"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"系統提示視窗對話框在其他應用程式上層顯示"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"在其他應用程式上顯示內容"</string>
@@ -3483,14 +3479,10 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"連線至互聯網或聯絡您的流動網絡供應商"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"無法在已遭流動網絡供應商鎖定的裝置上啟用"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已釋放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行時間：<xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for web_action_enable_title (4051513950976670853) -->
-    <skip />
-    <!-- no translation found for web_action_enable_summary (3108127559723396382) -->
-    <skip />
-    <!-- no translation found for web_action_section_title (7364647086538399136) -->
-    <skip />
-    <!-- no translation found for instant_apps_account (1433620209791992528) -->
-    <skip />
+    <string name="web_action_enable_title" msgid="4051513950976670853">"即時應用程式"</string>
+    <string name="web_action_enable_summary" msgid="3108127559723396382">"即使您沒有安裝應用程式，亦可在應用程式內開啟連結"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"即時應用程式"</string>
+    <string name="instant_apps_account" msgid="1433620209791992528">"即時應用程式帳戶"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安裝的應用程式"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"您的儲存空間即將由儲存空間管理員管理"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>的帳戶"</string>
@@ -3580,8 +3572,7 @@
     <!-- no translation found for storage_percent_full (6095012055875077036) -->
     <skip />
     <string name="clear_instant_app_data" msgid="2004222610585890909">"清除應用程式"</string>
-    <!-- no translation found for clear_instant_app_confirmation (7451671214898856857) -->
-    <skip />
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"您要移除此即時應用程式嗎？"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"遊戲"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"音訊檔案"</string>
     <string name="app_info_storage_title" msgid="5554719444625611987">"已使用的儲存空間"</string>
