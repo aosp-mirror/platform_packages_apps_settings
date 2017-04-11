@@ -18,7 +18,6 @@ package com.android.settings.vpn2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -67,13 +66,18 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
 
     public static void show(Fragment parent, PackageInfo packageInfo, String label,
             boolean managing, boolean connected) {
+        if (!managing && !connected) {
+            // We can't display anything useful for this case.
+            return;
+        }
         show(parent, null, packageInfo, label, managing, connected);
     }
 
     public static void show(Fragment parent, Listener listener, PackageInfo packageInfo,
             String label, boolean managing, boolean connected) {
-        if (!parent.isAdded())
+        if (!parent.isAdded()) {
             return;
+        }
 
         Bundle args = new Bundle();
         args.putParcelable(ARG_PACKAGE, packageInfo);
@@ -100,7 +104,7 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
         final String label = args.getString(ARG_LABEL);
         boolean managing = args.getBoolean(ARG_MANAGING);
         boolean connected = args.getBoolean(ARG_CONNECTED);
-        mPackageInfo = (PackageInfo) args.getParcelable(ARG_PACKAGE);
+        mPackageInfo = args.getParcelable(ARG_PACKAGE);
 
         if (managing) {
             return new AppDialog(getActivity(), this, mPackageInfo, label);
