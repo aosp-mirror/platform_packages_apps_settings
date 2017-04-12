@@ -14,20 +14,23 @@
  * limitations under the License
  */
 
-package com.android.settings.applications;
+package com.android.settings.users;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+import android.content.Context;
+import android.os.UserHandle;
 import android.os.UserManager;
 
-public abstract class InstalledAppLister extends AppLister {
+import java.util.List;
 
-    public InstalledAppLister(PackageManagerWrapper packageManager, UserManager userManager) {
-        super(packageManager, userManager);
+public class UserFeatureProviderImpl implements UserFeatureProvider {
+    UserManager mUm;
+
+    public UserFeatureProviderImpl(Context context) {
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override
-    protected boolean includeInCount(ApplicationInfo info) {
-        return InstalledAppCounter.includeInCount(PackageManager.INSTALL_REASON_POLICY, mPm, info);
+    public List<UserHandle> getUserProfiles() {
+        return mUm.getUserProfiles();
     }
 }

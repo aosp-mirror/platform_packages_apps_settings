@@ -14,28 +14,29 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
+import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.users.UserFeatureProvider;
 
 public class EnterpriseSetDefaultAppsPreferenceController
         extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";
-    private final ApplicationFeatureProvider mFeatureProvider;
+    private final ApplicationFeatureProvider mApplicationFeatureProvider;
+    private final UserFeatureProvider mUserFeatureProvider;
 
     public EnterpriseSetDefaultAppsPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, lifecycle);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        final FeatureFactory factory = FeatureFactory.getFactory(context);
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(context);
+        mUserFeatureProvider = factory.getUserFeatureProvider(context);
     }
 
     @Override
@@ -56,47 +57,14 @@ public class EnterpriseSetDefaultAppsPreferenceController
     }
 
     private int getNumberOfEnterpriseSetDefaultApps() {
-        // Browser
-        int num = mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                buildIntent(Intent.ACTION_VIEW, Intent.CATEGORY_BROWSABLE, "http:", null)}).size();
-        // Camera
-        num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
-                new Intent(MediaStore.ACTION_VIDEO_CAPTURE)}).size();
-        // Map
-        num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                buildIntent(Intent.ACTION_VIEW, null, "geo:", null)}).size();
-        // E-mail
-        num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                new Intent(Intent.ACTION_SENDTO), new Intent(Intent.ACTION_SEND),
-                new Intent(Intent.ACTION_SEND_MULTIPLE)}).size();
-        // Calendar
-        num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                buildIntent(Intent.ACTION_INSERT, null, null, "vnd.android.cursor.dir/event")})
-                .size();
-        // Contacts
-        num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                buildIntent(Intent.ACTION_PICK, null, null,
-                        ContactsContract.Contacts.CONTENT_TYPE)}).size();
-        // Dialer
-        num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
-                new Intent(Intent.ACTION_DIAL), new Intent(Intent.ACTION_CALL)}).size();
-
+        int num = 0;
+        for (UserHandle user : mUserFeatureProvider.getUserProfiles()) {
+            for (EnterpriseDefaultApps app : EnterpriseDefaultApps.values()) {
+                num += mApplicationFeatureProvider
+                        .findPersistentPreferredActivities(user.getIdentifier(),
+                                app.getIntents()).size();
+            }
+        }
         return num;
-    }
-
-    private static Intent buildIntent(String action, String category, String protocol,
-            String type) {
-        final Intent intent = new Intent(action);
-        if (category != null) {
-            intent.addCategory(category);
-        }
-        if (protocol != null) {
-            intent.setData(Uri.parse(protocol));
-        }
-        if (type != null) {
-            intent.setType(type);
-        }
-        return intent;
     }
 }
