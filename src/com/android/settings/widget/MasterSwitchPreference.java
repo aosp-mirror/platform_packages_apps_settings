@@ -36,7 +36,6 @@ public class MasterSwitchPreference extends TwoTargetPreference {
 
     private Switch mSwitch;
     private boolean mChecked;
-    private boolean mMultiLine;
 
     public MasterSwitchPreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -81,12 +80,6 @@ public class MasterSwitchPreference extends TwoTargetPreference {
         if (mSwitch != null) {
             mSwitch.setChecked(mChecked);
         }
-        if (mMultiLine) {
-            TextView textView = (TextView) holder.findViewById(android.R.id.title);
-            if (textView != null) {
-                textView.setSingleLine(false);
-            }
-        }
     }
 
     public boolean isChecked() {
@@ -104,14 +97,6 @@ public class MasterSwitchPreference extends TwoTargetPreference {
         if (mSwitch != null) {
             mSwitch.setEnabled(enabled);
         }
-    }
-
-    public boolean isMultiLine() {
-        return mMultiLine;
-    }
-
-    public void setMultiLine(boolean multiLine) {
-        mMultiLine = multiLine;
     }
 
     /**

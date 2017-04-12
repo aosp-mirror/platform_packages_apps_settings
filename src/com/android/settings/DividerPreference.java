@@ -25,7 +25,6 @@ public class DividerPreference extends Preference {
 
     private Boolean mAllowAbove;
     private Boolean mAllowBelow;
-    private Boolean mMultiLine;
 
     public DividerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,9 +34,6 @@ public class DividerPreference extends Preference {
         }
         if (a.hasValue(R.styleable.DividerPreference_allowDividerBelow)) {
             mAllowBelow = a.getBoolean(R.styleable.DividerPreference_allowDividerBelow, false);
-        }
-        if (a.hasValue(R.styleable.DividerPreference_multiLine)) {
-            mMultiLine = a.getBoolean(R.styleable.DividerPreference_multiLine, false);
         }
     }
 
@@ -63,13 +59,6 @@ public class DividerPreference extends Preference {
         }
         if (mAllowBelow != null) {
             holder.setDividerAllowedBelow(mAllowBelow);
-        }
-
-        if (mMultiLine != null && mMultiLine) {
-            TextView textView = (TextView)holder.findViewById(android.R.id.title);
-            if (textView != null) {
-                textView.setSingleLine(false);
-            }
         }
     }
 }

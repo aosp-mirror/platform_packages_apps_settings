@@ -165,7 +165,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     channelPref.setKey(channel.getId());
                     channelPref.setTitle(channel.getName());
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
-                    channelPref.setMultiLine(true);
                     channelPref.setSummary(getImportanceSummary(channel.getImportance()));
                     Bundle channelArgs = new Bundle();
                     channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
