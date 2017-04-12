@@ -4,11 +4,10 @@ package com.android.settings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.util.Log;
-
-import com.android.settingslib.TetherUtil;
 
 /**
  * This receiver catches when quick settings turns off the hotspot, so we can
@@ -18,6 +17,13 @@ public class HotspotOffReceiver extends BroadcastReceiver {
 
     private static final String TAG = "HotspotOffReceiver";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    private Context mContext;
+    private boolean mRegistered;
+
+    public HotspotOffReceiver(Context context) {
+        mContext = context;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -29,6 +35,21 @@ public class HotspotOffReceiver extends BroadcastReceiver {
                 TetherService.cancelRecheckAlarmIfNecessary(
                         context, ConnectivityManager.TETHERING_WIFI);
             }
+        }
+    }
+
+    public void register() {
+        if (!mRegistered) {
+            mContext.registerReceiver(this,
+                new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION));
+            mRegistered = true;
+        }
+    }
+
+    public void unregister() {
+        if (mRegistered) {
+            mContext.unregisterReceiver(this);
+            mRegistered = false;
         }
     }
 }

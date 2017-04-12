@@ -41,7 +41,6 @@ import android.util.ArrayMap;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +68,7 @@ public class TetherService extends Service {
     private UsageStatsManagerWrapper mUsageManagerWrapper;
     private ArrayList<Integer> mCurrentTethers;
     private ArrayMap<Integer, List<ResultReceiver>> mPendingCallbacks;
+    private HotspotOffReceiver mHotspotReceiver;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -94,6 +94,7 @@ public class TetherService extends Service {
         if (mUsageManagerWrapper == null) {
             mUsageManagerWrapper = new UsageStatsManagerWrapper(this);
         }
+        mHotspotReceiver = new HotspotOffReceiver(this);
     }
 
     @Override
@@ -179,6 +180,11 @@ public class TetherService extends Service {
         if (index <= mCurrentTypeIndex && mCurrentTypeIndex > 0) {
             mCurrentTypeIndex--;
         }
+    }
+
+    @VisibleForTesting
+    void setHotspotOffReceiver(HotspotOffReceiver receiver) {
+        mHotspotReceiver = receiver;
     }
 
     private ArrayList<Integer> stringToTethers(String tethersStr) {
@@ -276,7 +282,8 @@ public class TetherService extends Service {
         }
     }
 
-    private void scheduleAlarm() {
+    @VisibleForTesting
+    void scheduleAlarm() {
         Intent intent = new Intent(this, TetherService.class);
         intent.putExtra(ConnectivityManager.EXTRA_RUN_PROVISION, true);
 
@@ -289,6 +296,7 @@ public class TetherService extends Service {
         if (DEBUG) Log.d(TAG, "Scheduling alarm at interval " + periodMs);
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, firstTime, periodMs,
                 pendingIntent);
+        mHotspotReceiver.register();
     }
 
     /**
@@ -302,7 +310,8 @@ public class TetherService extends Service {
         context.startService(intent);
     }
 
-    private void cancelAlarmIfNecessary() {
+    @VisibleForTesting
+    void cancelAlarmIfNecessary() {
         if (mCurrentTethers.size() != 0) {
             if (DEBUG) Log.d(TAG, "Tethering still active, not cancelling alarm");
             return;
@@ -312,6 +321,7 @@ public class TetherService extends Service {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
         if (DEBUG) Log.d(TAG, "Tethering no longer active, canceling recheck");
+        mHotspotReceiver.unregister();
     }
 
     private void fireCallbacksForType(int type, int result) {
