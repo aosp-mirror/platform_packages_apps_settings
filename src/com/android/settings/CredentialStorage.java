@@ -295,6 +295,10 @@ public final class CredentialStorage extends Activity {
             }
         }
 
+        // Send the broadcast.
+        Intent broadcast = new Intent(KeyChain.ACTION_KEYCHAIN_CHANGED);
+        sendBroadcast(broadcast);
+
         setResult(RESULT_OK);
     }
 
