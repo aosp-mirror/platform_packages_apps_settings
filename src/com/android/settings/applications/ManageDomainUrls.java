@@ -125,7 +125,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
                 mWebAction.setTitle(R.string.web_action_enable_title);
                 mWebAction.setSummary(R.string.web_action_enable_summary);
                 mWebAction.setChecked(Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.WEB_ACTION_ENABLED, 1) != 0);
+                        Settings.Secure.INSTANT_APPS_ENABLED, 1) != 0);
                 mWebAction.setOnPreferenceChangeListener(this);
                 webActionCategory.addPreference(mWebAction);
 
@@ -164,8 +164,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             boolean checked = (boolean) newValue;
             Settings.Secure.putInt(
                     getContentResolver(),
-                    Settings.Secure.WEB_ACTION_ENABLED, checked ? 1 : 0);
-            mWebAction.setChecked(checked);
+                    Settings.Secure.INSTANT_APPS_ENABLED, checked ? 1 : 0);
             return true;
         }
         return false;
