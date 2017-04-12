@@ -265,6 +265,19 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save the mLocalePreference values, so we can repopulate it with entries.
+        outState.putCharSequenceArray(STATE_KEY_LOCALE_ENTRIES,
+                mLocalePreference.getEntries());
+        outState.putCharSequenceArray(STATE_KEY_LOCALE_ENTRY_VALUES,
+                mLocalePreference.getEntryValues());
+        outState.putCharSequence(STATE_KEY_LOCALE_VALUE,
+                mLocalePreference.getValue());
+    }
+
     private void initSettings() {
         final ContentResolver resolver = getContentResolver();
 
