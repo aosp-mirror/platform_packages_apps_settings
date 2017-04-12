@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AuthenticatorDescription;
 import android.accounts.OnAccountsUpdateListener;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -26,12 +27,18 @@ import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,7 +81,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     // If an account type is set, then show only accounts of that type
     private String mAccountType;
-    // Temporary hack, to deal with backward compatibility 
+    // Temporary hack, to deal with backward compatibility
     private Account mFirstAccount;
 
     @Override
@@ -85,6 +92,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         if (args != null && args.containsKey(KEY_ACCOUNT_TYPE)) {
             mAccountType = args.getString(KEY_ACCOUNT_TYPE);
         }
+        mUserHandle = new UserHandle(UserHandle.getCallingUserId());
         addPreferencesFromResource(R.xml.manage_accounts_settings);
         setHasOptionsMenu(true);
     }
@@ -382,15 +390,18 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     /**
-     * Filters through the preference list provided by GoogleLoginService.
+     * Recursively filters through the preference list provided by GoogleLoginService.
      *
      * This method removes all the invalid intent from the list, adds account name as extra into the
      * intent, and hack the location settings to start it as a fragment.
      */
-    private void updatePreferenceIntents(PreferenceScreen prefs) {
-        PackageManager pm = getActivity().getPackageManager();
+    private void updatePreferenceIntents(PreferenceGroup prefs) {
+        final PackageManager pm = getActivity().getPackageManager();
         for (int i = 0; i < prefs.getPreferenceCount();) {
             Preference pref = prefs.getPreference(i);
+            if (pref instanceof PreferenceGroup) {
+                updatePreferenceIntents((PreferenceGroup) pref);
+            }
             Intent intent = pref.getIntent();
             if (intent != null) {
                 // Hack. Launch "Location" as fragment instead of as activity.
@@ -415,17 +426,73 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                             LocationSettings.class.getName(),
                             R.string.location_settings_title));
                 } else {
-                    ResolveInfo ri = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                    ResolveInfo ri = pm.resolveActivityAsUser(intent,
+                            PackageManager.MATCH_DEFAULT_ONLY, mUserHandle.getIdentifier());
                     if (ri == null) {
                         prefs.removePreference(pref);
                         continue;
                     } else {
                         intent.putExtra(ACCOUNT_KEY, mFirstAccount);
                         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                            @Override
+                            public boolean onPreferenceClick(Preference preference) {
+                                Intent prefIntent = preference.getIntent();
+                                /*
+                                 * Check the intent to see if it resolves to a exported=false
+                                 * activity that doesn't share a uid with the authenticator.
+                                 *
+                                 * Otherwise the intent is considered unsafe in that it will be
+                                 * exploiting the fact that settings has system privileges.
+                                 */
+                                if (isSafeIntent(pm, prefIntent)) {
+                                    getActivity().startActivityAsUser(prefIntent, mUserHandle);
+                                } else {
+                                    Log.e(TAG,
+                                            "Refusing to launch authenticator intent because"
+                                                    + " it exploits Settings permissions: "
+                                                    + prefIntent);
+                                }
+                                return true;
+                            }
+                        });
                     }
                 }
+
             }
             i++;
+        }
+    }
+
+    /**
+     * Determines if the supplied Intent is safe. A safe intent is one that is
+     * will launch a exported=true activity or owned by the same uid as the
+     * authenticator supplying the intent.
+     */
+    private boolean isSafeIntent(PackageManager pm, Intent intent) {
+        AuthenticatorDescription authDesc =
+                mAuthenticatorHelper.getAccountTypeDescription(mAccountType);
+        ResolveInfo resolveInfo =
+            pm.resolveActivityAsUser(intent, 0, mUserHandle.getIdentifier());
+        if (resolveInfo == null) {
+            return false;
+        }
+        ActivityInfo resolvedActivityInfo = resolveInfo.activityInfo;
+        ApplicationInfo resolvedAppInfo = resolvedActivityInfo.applicationInfo;
+        try {
+            if (resolvedActivityInfo.exported) {
+                if (resolvedActivityInfo.permission == null) {
+                    return true; // exported activity without permission.
+                } else if (pm.checkPermission(resolvedActivityInfo.permission,
+                        authDesc.packageName) == PackageManager.PERMISSION_GRANTED) {
+                    return true;
+                }
+            }
+            ApplicationInfo authenticatorAppInf = pm.getApplicationInfo(authDesc.packageName, 0);
+            return  resolvedAppInfo.uid == authenticatorAppInf.uid;
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Intent considered unsafe due to exception.", e);
+            return false;
         }
     }
 
