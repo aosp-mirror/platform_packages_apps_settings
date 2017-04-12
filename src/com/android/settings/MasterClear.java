@@ -33,6 +33,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
+import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,11 +72,14 @@ public class MasterClear extends OptionsMenuFragment
     private static final int KEYGUARD_REQUEST = 55;
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
+    static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
     private View mContentView;
     private Button mInitiateButton;
     private View mExternalStorageContainer;
-    private CheckBox mExternalStorage;
+    @VisibleForTesting CheckBox mExternalStorage;
+    private View mEsimStorageContainer;
+    @VisibleForTesting CheckBox mEsimStorage;
     private ScrollView mScrollView;
 
     private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
@@ -115,9 +119,11 @@ public class MasterClear extends OptionsMenuFragment
         }
     }
 
-    private void showFinalConfirmation() {
+    @VisibleForTesting
+    void showFinalConfirmation() {
         Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
+        args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 this, MasterClearConfirm.class.getName(),
                 args, R.string.master_clear_confirm_title, null, null, 0);
@@ -165,6 +171,8 @@ public class MasterClear extends OptionsMenuFragment
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
+        mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
         mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
@@ -196,6 +204,20 @@ public class MasterClear extends OptionsMenuFragment
                     mExternalStorage.toggle();
                 }
             });
+        }
+
+        EuiccManager euiccManager =
+                        (EuiccManager) getActivity().getSystemService(Context.EUICC_SERVICE);
+        if (euiccManager.isEnabled()) {
+            mEsimStorageContainer.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    mEsimStorage.toggle();
+                }
+            });
+        } else {
+            mEsimStorageContainer.setVisibility(View.GONE);
         }
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
