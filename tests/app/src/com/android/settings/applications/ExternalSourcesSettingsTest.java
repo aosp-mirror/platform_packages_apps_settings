@@ -93,7 +93,7 @@ public class ExternalSourcesSettingsTest {
 
     private Intent createManageExternalSourcesListIntent() {
         final Intent manageExternalSourcesIntent = new Intent();
-        manageExternalSourcesIntent.setAction(Settings.ACTION_MANAGE_EXTERNAL_SOURCES);
+        manageExternalSourcesIntent.setAction(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
         return manageExternalSourcesIntent;
     }
 
