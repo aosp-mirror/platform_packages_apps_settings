@@ -38,6 +38,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.text.format.DateFormat;
@@ -50,11 +51,20 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";
     private final Handler mHandler = new Handler();
+
     private Object mStatusChangeListenerHandle;
+    protected AuthenticatorHelper mAuthenticatorHelper;
+    protected UserHandle mUserHandle;
+
     private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
-    private AuthenticatorHelper mAuthenticatorHelper = new AuthenticatorHelper();
     private java.text.DateFormat mDateFormat;
     private java.text.DateFormat mTimeFormat;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        mAuthenticatorHelper = new AuthenticatorHelper();
+    }
 
     /**
      * Overload to handle account updates.
