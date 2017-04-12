@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.Manifest.permission;
+import android.annotation.IdRes;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -1107,13 +1108,16 @@ public class InstalledAppDetails extends AppInfoBase
         if (installerLabel == null) {
             return;
         }
+        final int detailsStringId = AppUtils.isInstant(mPackageInfo.applicationInfo)
+                ? R.string.instant_app_details_summary
+                : R.string.app_install_details_summary;
         PreferenceCategory category = new PreferenceCategory(getPrefContext());
         category.setTitle(R.string.app_install_details_group_title);
         screen.addPreference(category);
         Preference pref = new Preference(getPrefContext());
         pref.setTitle(R.string.app_install_details_title);
         pref.setKey("app_info_store");
-        pref.setSummary(getString(R.string.app_install_details_summary, installerLabel));
+        pref.setSummary(getString(detailsStringId, installerLabel));
 
         Intent intent =
                 AppStoreUtil.getAppStoreLink(getContext(), installerPackageName, mPackageName);
