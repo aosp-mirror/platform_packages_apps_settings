@@ -16,6 +16,7 @@
 package com.android.settings.wifi.details;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.widget.Button;
@@ -45,13 +46,10 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     private AccessPoint mAccessPoint;
     private Button mForgetButton;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
-    private WifiManager mWifiManager;
 
     @Override
     public void onAttach(Context context) {
         mAccessPoint = new AccessPoint(context, getArguments());
-        mWifiManager = context.getSystemService(WifiManager.class);
-
         super.onAttach(context);
     }
 
@@ -95,7 +93,8 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 mAccessPoint,
                 context,
                 getLifecycle(),
-                mWifiManager);
+                context.getSystemService(WifiManager.class),
+                context.getSystemService(ConnectivityManager.class));
 
         ArrayList<PreferenceController> controllers = new ArrayList(1);
         controllers.add(mWifiDetailPreferenceController);
