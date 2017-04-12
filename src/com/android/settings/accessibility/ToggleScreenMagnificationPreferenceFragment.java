@@ -20,6 +20,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
@@ -76,6 +77,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 }
             });
 
+            // Make sure the VideoView does not request audio focus.
+            videoView.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
+
             // Resolve and set the video content
             Bundle args = getArguments();
             if ((args != null) && args.containsKey(
@@ -85,6 +89,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         getPrefContext().getPackageName(),
                         args.getInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID))));
             }
+
             // Make sure video controls (e.g. for pausing) are not displayed.
             videoView.setMediaController(null);
 
