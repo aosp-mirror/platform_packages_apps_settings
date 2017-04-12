@@ -18,18 +18,20 @@ package com.android.settings.wifi.details;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
-import android.net.DhcpInfo;
+import android.net.IpPrefix;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkBadging;
 import android.net.NetworkInfo;
 import android.net.NetworkUtils;
+import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -44,7 +46,9 @@ import com.android.settingslib.wifi.AccessPoint;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * Controller for logic pertaining to displaying Wifi information for the
@@ -65,9 +69,11 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     @VisibleForTesting
     static final String KEY_SECURITY_PREF = "security";
     @VisibleForTesting
+    static final String KEY_MAC_ADDRESS_PREF = "mac_address";
+    @VisibleForTesting
     static final String KEY_IP_ADDRESS_PREF = "ip_address";
     @VisibleForTesting
-    static final String KEY_ROUTER_PREF = "router";
+    static final String KEY_GATEWAY_PREF = "gateway";
     @VisibleForTesting
     static final String KEY_SUBNET_MASK_PREF = "subnet_mask";
     @VisibleForTesting
@@ -83,6 +89,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
+    private final ConnectivityManager mConnectivityManager;
 
     // Preferences - in order of appearance
     private Preference mConnectionDetailPref;
@@ -90,14 +97,15 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private WifiDetailPreference mLinkSpeedPref;
     private WifiDetailPreference mFrequencyPref;
     private WifiDetailPreference mSecurityPref;
+    private WifiDetailPreference mMacAddressPref;
     private WifiDetailPreference mIpAddressPref;
-    private WifiDetailPreference mRouterPref;
+    private WifiDetailPreference mGatewayPref;
     private WifiDetailPreference mSubnetPref;
     private WifiDetailPreference mDnsPref;
     private PreferenceCategory mIpv6AddressCategory;
 
     public WifiDetailPreferenceController(AccessPoint accessPoint, Context context,
-            Lifecycle lifecycle, WifiManager wifiManager) {
+            Lifecycle lifecycle, WifiManager wifiManager, ConnectivityManager connectivityManager) {
         super(context);
 
         mAccessPoint = accessPoint;
@@ -106,6 +114,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mSignalStr = context.getResources().getStringArray(R.array.wifi_signal);
         mWifiConfig = accessPoint.getConfig();
         mWifiManager = wifiManager;
+        mConnectivityManager = connectivityManager;
         mWifiInfo = wifiManager.getConnectionInfo();
 
         lifecycle.addObserver(this);
@@ -136,8 +145,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mFrequencyPref = (WifiDetailPreference) screen.findPreference(KEY_FREQUENCY_PREF);
         mSecurityPref = (WifiDetailPreference) screen.findPreference(KEY_SECURITY_PREF);
 
+        mMacAddressPref = (WifiDetailPreference) screen.findPreference(KEY_MAC_ADDRESS_PREF);
         mIpAddressPref = (WifiDetailPreference) screen.findPreference(KEY_IP_ADDRESS_PREF);
-        mRouterPref = (WifiDetailPreference) screen.findPreference(KEY_ROUTER_PREF);
+        mGatewayPref = (WifiDetailPreference) screen.findPreference(KEY_GATEWAY_PREF);
         mSubnetPref = (WifiDetailPreference) screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = (WifiDetailPreference) screen.findPreference(KEY_DNS_PREF);
 
@@ -174,6 +184,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mConnectionDetailPref.setIcon(wifiIcon);
         mConnectionDetailPref.setTitle(mAccessPoint.getSettingsSummary());
 
+        // MAC Address Pref
+        mMacAddressPref.setDetailText(mWifiInfo.getMacAddress());
+
         // Signal Strength Pref
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTint(mContext.getResources().getColor(
@@ -184,6 +197,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
 
         // Link Speed Pref
+        int linkSpeedMbps = mWifiInfo.getLinkSpeed();
+        mLinkSpeedPref.setVisible(linkSpeedMbps >= 0);
         mLinkSpeedPref.setDetailText(mContext.getString(
                 R.string.link_speed, mWifiInfo.getLinkSpeed()));
 
@@ -203,67 +218,87 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     }
 
     private void setIpText() {
+        // Reset all fields
         mIpv6AddressCategory.removeAll();
         mIpv6AddressCategory.setVisible(false);
+        mIpAddressPref.setVisible(false);
+        mSubnetPref.setVisible(false);
+        mGatewayPref.setVisible(false);
+        mDnsPref.setVisible(false);
 
         Network currentNetwork = mWifiManager.getCurrentNetwork();
         if (currentNetwork == null) {
             return;
         }
 
-        ConnectivityManager cm = mContext.getSystemService(ConnectivityManager.class);
-        LinkProperties prop = cm.getLinkProperties(currentNetwork);
-        List<InetAddress> addresses = prop.getAllAddresses();
+        LinkProperties linkProperties = mConnectivityManager.getLinkProperties(currentNetwork);
+        if (linkProperties == null) {
+            return;
+        }
+        List<InetAddress> addresses = linkProperties.getAddresses();
 
-        // Set ip addresses
+        // Set IPv4 and Ipv6 addresses
         for (int i = 0; i < addresses.size(); i++) {
             InetAddress addr = addresses.get(i);
             if (addr instanceof Inet4Address) {
                 mIpAddressPref.setDetailText(addr.getHostAddress());
+                mIpAddressPref.setVisible(true);
             } else if (addr instanceof Inet6Address) {
                 String ip = addr.getHostAddress();
                 Preference pref = new Preference(mPrefContext);
                 pref.setKey(ip);
                 pref.setTitle(ip);
                 mIpv6AddressCategory.addPreference(pref);
-                mIpv6AddressCategory.setVisible(true); // TODO(sghuman): Make sure to
+                mIpv6AddressCategory.setVisible(true);
             }
         }
 
-        String subnetMask = null;
-        String router;
-        DhcpInfo dhcp = mWifiManager.getDhcpInfo();
-        if (dhcp != null) {
-            if (dhcp.netmask == 0) {
-                Log.e(TAG, "invalid netmask value of 0 for DhcpInfo: " + dhcp);
-                mSubnetPref.setVisible(false);
-            } else {
-                subnetMask = NetworkUtils.intToInetAddress(dhcp.netmask).getHostAddress();
-                mSubnetPref.setVisible(true);
+        // Set up IPv4 gateway and subnet mask
+        String gateway = null;
+        String subnet = null;
+        for (RouteInfo routeInfo : linkProperties.getRoutes()) {
+            if (routeInfo.hasGateway() && routeInfo.getGateway() instanceof Inet4Address) {
+                gateway = routeInfo.getGateway().getHostAddress();
             }
-
-            router = NetworkUtils.intToInetAddress(dhcp.gateway).getHostAddress();
-        } else { // Statically configured IP
-
-            // TODO(sghuman): How do we get subnet mask for static ips?
-            mSubnetPref.setVisible(false);
-
-            router = mWifiManager.getWifiApConfiguration().getStaticIpConfiguration().gateway
-                    .getHostAddress();
+            IpPrefix ipPrefix = routeInfo.getDestination();
+            if (ipPrefix != null && ipPrefix.getAddress() instanceof Inet4Address
+                    && ipPrefix.getPrefixLength() > 0) {
+                subnet = ipv4PrefixLengthToSubnetMask(ipPrefix.getPrefixLength());
+            }
         }
-        mRouterPref.setDetailText(router);
-        mSubnetPref.setDetailText(subnetMask);
 
-        // Set DNS
-        addresses = prop.getDnsServers();
-        StringBuilder builder = new StringBuilder();
-
-        // addresses is backed by an ArrayList, so use a hand-written iterator for performance gains
-        for (int i = 0; i < addresses.size(); i++) {
-            if (i > 0) builder.append(", ");
-            builder.append(addresses.get(i).getHostAddress());
+        if (!TextUtils.isEmpty(subnet)) {
+            mSubnetPref.setDetailText(subnet);
+            mSubnetPref.setVisible(true);
         }
-        mDnsPref.setDetailText(builder.toString());
+
+        if (!TextUtils.isEmpty(gateway)) {
+            mGatewayPref.setDetailText(gateway);
+            mGatewayPref.setVisible(true);
+        }
+
+        // Set IPv4 DNS addresses
+        StringJoiner stringJoiner = new StringJoiner(",");
+        for (InetAddress dnsServer : linkProperties.getDnsServers()) {
+            if (dnsServer instanceof Inet4Address) {
+                stringJoiner.add(dnsServer.getHostAddress());
+            }
+        }
+        String dnsText = stringJoiner.toString();
+        if (!dnsText.isEmpty()) {
+            mDnsPref.setDetailText(dnsText);
+            mDnsPref.setVisible(true);
+        }
+    }
+
+    private static String ipv4PrefixLengthToSubnetMask(int prefixLength) {
+        try {
+            InetAddress all = InetAddress.getByAddress(
+                    new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255});
+            return NetworkUtils.getNetworkPart(all, prefixLength).getHostAddress();
+        } catch (UnknownHostException e) {
+            return null;
+        }
     }
 
     /**

@@ -18,14 +18,22 @@ package com.android.settings.wifi.details;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.IpPrefix;
+import android.net.LinkAddress;
+import android.net.LinkProperties;
+import android.net.Network;
 import android.net.NetworkBadging;
 import android.net.NetworkInfo;
+import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -46,8 +54,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -56,28 +70,35 @@ public class WifiDetailPreferenceControllerTest {
     private static final int LEVEL = 1;
     private static final int RSSI = -55;
     private static final int LINK_SPEED = 123;
+    private static final String MAC_ADDRESS = WifiInfo.DEFAULT_MAC_ADDRESS;
     private static final String SECURITY = "None";
+
+    private InetAddress mIpv4Address;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
 
     @Mock private AccessPoint mockAccessPoint;
     @Mock private WifiManager mockWifiManager;
+    @Mock private ConnectivityManager mockConnectivityManager;
     @Mock private NetworkInfo mockNetworkInfo;
     @Mock private WifiConfiguration mockWifiConfig;
     @Mock private WifiInfo mockWifiInfo;
+    @Mock private Network mockNetwork;
 
     @Mock private Preference mockConnectionDetailPref;
     @Mock private WifiDetailPreference mockSignalStrengthPref;
     @Mock private WifiDetailPreference mockLinkSpeedPref;
     @Mock private WifiDetailPreference mockFrequencyPref;
     @Mock private WifiDetailPreference mockSecurityPref;
+    @Mock private WifiDetailPreference mockMacAddressPref;
     @Mock private WifiDetailPreference mockIpAddressPref;
-    @Mock private WifiDetailPreference mockRouterPref;
+    @Mock private WifiDetailPreference mockGatewayPref;
     @Mock private WifiDetailPreference mockSubnetPref;
     @Mock private WifiDetailPreference mockDnsPref;
     @Mock private PreferenceCategory mockIpv6AddressCategory;
 
+    private LinkProperties mLinkProperties;
     private Context mContext = RuntimeEnvironment.application;
     private Lifecycle mLifecycle;
     private WifiDetailPreferenceController mController;
@@ -88,6 +109,13 @@ public class WifiDetailPreferenceControllerTest {
 
         mLifecycle = new Lifecycle();
 
+        try {
+            mIpv4Address = InetAddress.getByAddress(
+                    new byte[] { (byte) 255, (byte) 255, (byte) 255, (byte) 255 });
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);
         when(mockAccessPoint.getNetworkInfo()).thenReturn(mockNetworkInfo);
@@ -96,16 +124,20 @@ public class WifiDetailPreferenceControllerTest {
 
         when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
         when(mockWifiInfo.getRssi()).thenReturn(RSSI);
+        when(mockWifiInfo.getMacAddress()).thenReturn(MAC_ADDRESS);
         when(mockWifiManager.getConnectionInfo()).thenReturn(mockWifiInfo);
 
+        when(mockWifiManager.getCurrentNetwork()).thenReturn(mockNetwork);
+        mLinkProperties = new LinkProperties();
+        when(mockConnectivityManager.getLinkProperties(mockNetwork)).thenReturn(mLinkProperties);
+
         mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
+                mockAccessPoint, mContext, mLifecycle, mockWifiManager, mockConnectivityManager);
 
         setupMockedPreferenceScreen();
     }
 
     private void setupMockedPreferenceScreen() {
-
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_CONNECTION_DETAIL_PREF))
                 .thenReturn(mockConnectionDetailPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
@@ -116,10 +148,12 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockFrequencyPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SECURITY_PREF))
                 .thenReturn(mockSecurityPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_MAC_ADDRESS_PREF))
+                .thenReturn(mockMacAddressPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_IP_ADDRESS_PREF))
                 .thenReturn(mockIpAddressPref);
-        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_ROUTER_PREF))
-                .thenReturn(mockRouterPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_GATEWAY_PREF))
+                .thenReturn(mockGatewayPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SUBNET_MASK_PREF))
                 .thenReturn(mockSubnetPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_DNS_PREF))
@@ -195,11 +229,101 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    public void linkSpeedPref_shouldNotShowIfNotSet() {
+        when(mockWifiInfo.getLinkSpeed()).thenReturn(-1);
+
+        mController.onResume();
+
+        verify(mockLinkSpeedPref).setVisible(false);
+    }
+
+    @Test
+    public void macAddressPref_shouldHaveDetailTextSet() {
+        mController.onResume();
+
+        verify(mockMacAddressPref).setDetailText(MAC_ADDRESS);
+    }
+
+    @Test
+    public void ipAddressPref_shouldHaveDetailTextSet() {
+        LinkAddress ipv4Address = new LinkAddress(mIpv4Address, 32);
+
+        mLinkProperties.addLinkAddress(ipv4Address);
+
+        mController.onResume();
+
+        verify(mockIpAddressPref).setDetailText(mIpv4Address.getHostAddress());
+    }
+
+    @Test
+    public void gatewayAndSubnet_shouldHaveDetailTextSet() {
+        int prefixLength = 24;
+        IpPrefix subnet = new IpPrefix(mIpv4Address, prefixLength);
+        InetAddress gateway = mIpv4Address;
+        mLinkProperties.addRoute(new RouteInfo(subnet, gateway));
+
+        mController.onResume();
+
+        verify(mockSubnetPref).setDetailText("255.255.255.0");
+        verify(mockGatewayPref).setDetailText(mIpv4Address.getHostAddress());
+    }
+
+    @Test
+    public void dnsServersPref_shouldHaveDetailTextSet() throws UnknownHostException {
+        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,4,4}));
+        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,8,8}));
+
+        mController.onResume();
+
+        verify(mockDnsPref).setDetailText("8.8.4.4,8.8.8.8");
+    }
+
+    @Test
+    public void noCurrentNetwork_allIpDetailsHidden() {
+        when(mockWifiManager.getCurrentNetwork()).thenReturn(null);
+        reset(mockIpv6AddressCategory, mockIpAddressPref, mockSubnetPref, mockGatewayPref,
+                mockDnsPref);
+
+        mController.onResume();
+
+        verify(mockIpv6AddressCategory).setVisible(false);
+        verify(mockIpAddressPref).setVisible(false);
+        verify(mockSubnetPref).setVisible(false);
+        verify(mockGatewayPref).setVisible(false);
+        verify(mockDnsPref).setVisible(false);
+        verify(mockIpv6AddressCategory, never()).setVisible(true);
+        verify(mockIpAddressPref, never()).setVisible(true);
+        verify(mockSubnetPref, never()).setVisible(true);
+        verify(mockGatewayPref, never()).setVisible(true);
+        verify(mockDnsPref, never()).setVisible(true);
+    }
+
+    @Test
+    public void noLinkProperties_allIpDetailsHidden() {
+        when(mockConnectivityManager.getLinkProperties(mockNetwork)).thenReturn(null);
+        reset(mockIpv6AddressCategory, mockIpAddressPref, mockSubnetPref, mockGatewayPref,
+                mockDnsPref);
+
+        mController.onResume();
+
+        verify(mockIpv6AddressCategory).setVisible(false);
+        verify(mockIpAddressPref).setVisible(false);
+        verify(mockSubnetPref).setVisible(false);
+        verify(mockGatewayPref).setVisible(false);
+        verify(mockDnsPref).setVisible(false);
+        verify(mockIpv6AddressCategory, never()).setVisible(true);
+        verify(mockIpAddressPref, never()).setVisible(true);
+        verify(mockSubnetPref, never()).setVisible(true);
+        verify(mockGatewayPref, never()).setVisible(true);
+        verify(mockDnsPref, never()).setVisible(true);
+    }
+
+    @Test
     public void canForgetNetwork_noNetwork() {
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
         mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
+                mockAccessPoint, mContext, mLifecycle, mockWifiManager, mockConnectivityManager);
 
         assertThat(mController.canForgetNetwork()).isFalse();
     }
@@ -210,7 +334,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
         mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
+                mockAccessPoint, mContext, mLifecycle, mockWifiManager, mockConnectivityManager);
 
         assertThat(mController.canForgetNetwork()).isTrue();
     }
