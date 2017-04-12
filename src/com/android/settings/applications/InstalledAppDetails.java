@@ -91,6 +91,7 @@ import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
@@ -197,6 +198,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     private AppStorageStats mLastResult;
     private String mBatteryPercent;
+    private BatteryUtils mBatteryUtils;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -357,6 +359,7 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
+        mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
     @Override
@@ -685,10 +688,14 @@ public class InstalledAppDetails extends AppInfoBase
     private void updateBattery() {
         if (mSipper != null) {
             mBatteryPreference.setEnabled(true);
-            int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
+            final int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
                     BatteryStats.STATS_SINCE_CHARGED);
-            final int percentOfMax = (int) ((mSipper.totalPowerMah)
-                    / mBatteryHelper.getTotalPower() * dischargeAmount + .5f);
+
+            final List<BatterySipper> usageList = new ArrayList<>(mBatteryHelper.getUsageList());
+            final double hiddenAmount = mBatteryUtils.removeHiddenBatterySippers(usageList);
+            final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
+                    mSipper.totalPowerMah, mBatteryHelper.getTotalPower(), hiddenAmount,
+                    dischargeAmount);
             mBatteryPercent = Utils.formatPercentage(percentOfMax);
             mBatteryPreference.setSummary(getString(R.string.battery_summary, mBatteryPercent));
         } else {

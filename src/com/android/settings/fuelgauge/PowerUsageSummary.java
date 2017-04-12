@@ -80,11 +80,8 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final boolean USE_FAKE_DATA = false;
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_HEADER = "battery_header";
-
-    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
-    private static final int SECONDS_IN_HOUR = 60 * 60;
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
@@ -432,20 +429,16 @@ public class PowerUsageSummary extends PowerUsageBase {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
 
-            double hiddenPowerMah = mShowAllApps ? 0 : removeHiddenBatterySippers(usageList);
+            double hiddenPowerMah = mShowAllApps ? 0 :
+                    mBatteryUtils.removeHiddenBatterySippers(usageList);
 
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
-                // Deduct the power of hidden items from total power, which is used to
-                // calculate percentOfTotal
-                double totalPower = USE_FAKE_DATA ?
-                        4000 : mStatsHelper.getTotalPower() - hiddenPowerMah;
+                double totalPower = USE_FAKE_DATA ? 4000 : mStatsHelper.getTotalPower();
 
-                // With deduction in totalPower, percentOfTotal is higher because it adds the part
-                // used in screen, system, etc
-                final double percentOfTotal = totalPower == 0 ? 0 :
-                        ((sipper.totalPowerMah / totalPower) * dischargeAmount);
+                final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
+                        sipper.totalPowerMah, totalPower, hiddenPowerMah, dischargeAmount);
 
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
@@ -595,22 +588,6 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
-    boolean shouldHideSipper(BatterySipper sipper) {
-        final DrainType drainType = sipper.drainType;
-
-        return drainType == DrainType.IDLE
-                || drainType == DrainType.CELL
-                || drainType == DrainType.WIFI
-                || drainType == DrainType.SCREEN
-                || drainType == DrainType.BLUETOOTH
-                || drainType == DrainType.UNACCOUNTED
-                || drainType == DrainType.OVERCOUNTED
-                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
-                || mPowerFeatureProvider.isTypeService(sipper)
-                || mPowerFeatureProvider.isTypeSystem(sipper);
-    }
-
-    @VisibleForTesting
     String extractKeyFromSipper(BatterySipper sipper) {
         if (sipper.uidObj != null) {
             return Integer.toString(sipper.getUid());
@@ -622,24 +599,6 @@ public class PowerUsageSummary extends PowerUsageBase {
             Log.w(TAG, "Inappropriate BatterySipper without uid and package names: " + sipper);
             return "-1";
         }
-    }
-
-    @VisibleForTesting
-    double removeHiddenBatterySippers(List<BatterySipper> sippers) {
-        double totalPowerMah = 0;
-        for (int i = sippers.size() - 1; i >= 0; i--) {
-            final BatterySipper sipper = sippers.get(i);
-            if (shouldHideSipper(sipper)) {
-                sippers.remove(i);
-                if (sipper.drainType != DrainType.OVERCOUNTED
-                        && sipper.drainType != DrainType.UNACCOUNTED) {
-                    // Don't add it if it is overcounted or unaccounted
-                    totalPowerMah += sipper.totalPowerMah;
-                }
-            }
-        }
-
-        return totalPowerMah;
     }
 
     @VisibleForTesting
