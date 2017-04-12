@@ -2796,7 +2796,7 @@
         </provider>
 
         <activity android:name="Settings$OverlaySettingsActivity"
-                android:label="@string/draw_overlay_title"
+                android:label="@string/draw_overlay"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
@@ -2807,7 +2807,7 @@
         </activity>
 
         <activity android:name="Settings$AppDrawOverlaySettingsActivity"
-                android:label="@string/draw_overlay_title"
+                android:label="@string/draw_overlay"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
