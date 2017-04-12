@@ -112,6 +112,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -158,6 +159,8 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_BATTERY = "battery";
     private static final String KEY_MEMORY = "memory";
     private static final String KEY_VERSION = "app_version";
+    private static final String KEY_INSTANT_APP_SUPPORTED_LINKS =
+            "instant_app_launch_supported_domain_urls";
 
     private final HashSet<String> mHomePackages = new HashSet<>();
 
@@ -175,6 +178,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mDataPreference;
     private Preference mMemoryPreference;
     private Preference mVersionPreference;
+    private AppDomainsPreference mInstantAppDomainsPreference;
 
     private boolean mDisableAfterUninstall;
 
@@ -432,7 +436,8 @@ public class InstalledAppDetails extends AppInfoBase
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
         mVersionPreference = findPreference(KEY_VERSION);
-
+        mInstantAppDomainsPreference =
+                (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);
         mLaunchPreference = findPreference(KEY_LAUNCH);
         if (mAppEntry != null && mAppEntry.info != null) {
             if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 ||
@@ -550,6 +555,25 @@ public class InstalledAppDetails extends AppInfoBase
     public void onLoaderReset(Loader<AppStorageStats> loader) {
     }
 
+    /**
+     * Utility method to hide and show specific preferences based on whether the app being displayed
+     * is an Instant App or an installed app.
+     */
+    @VisibleForTesting
+    void prepareInstantAppPrefs() {
+        final boolean isInstant = AppUtils.isInstant(mPackageInfo.applicationInfo);
+        if (isInstant) {
+            Set<String> handledDomainSet = Utils.getHandledDomains(mPm, mPackageInfo.packageName);
+            String[] handledDomains = handledDomainSet.toArray(new String[handledDomainSet.size()]);
+            mInstantAppDomainsPreference.setTitles(handledDomains);
+            // Dummy values, unused in the implementation
+            mInstantAppDomainsPreference.setValues(new int[handledDomains.length]);
+            getPreferenceScreen().removePreference(mLaunchPreference);
+        } else {
+            getPreferenceScreen().removePreference(mInstantAppDomainsPreference);
+        }
+    }
+
     // Utility method to set application label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
@@ -641,6 +665,7 @@ public class InstalledAppDetails extends AppInfoBase
         checkForceStop();
         setAppLabelAndIcon(mPackageInfo);
         initUninstallButtons();
+        prepareInstantAppPrefs();
 
         // Update the preference summaries.
         Activity context = getActivity();
