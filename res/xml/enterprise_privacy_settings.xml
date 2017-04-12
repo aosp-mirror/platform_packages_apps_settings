@@ -28,84 +28,64 @@
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_category">
         <com.android.settings.DividerPreference
                 android:layout_height="wrap_content"
-                android:title="@string/enterprise_privacy_enterprise_data"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_enterprise_data"/>
         <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_installed_packages"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_installed_packages"/>
         <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_usage_stats"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_usage_stats"/>
         <com.android.settings.DividerPreference
                 android:key="network_logs"
-                android:title="@string/enterprise_privacy_network_logs"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_network_logs"/>
         <com.android.settings.DividerPreference
                 android:key="bug_reports"
-                android:title="@string/enterprise_privacy_bug_reports"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_bug_reports"/>
         <com.android.settings.DividerPreference
                 android:key="security_logs"
-                android:title="@string/enterprise_privacy_security_logs"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_security_logs"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
         <com.android.settings.DividerPreference
                 android:key="number_enterprise_installed_packages"
-                android:title="@string/enterprise_privacy_enterprise_installed_packages"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_enterprise_installed_packages"/>
         <com.android.settings.DividerPreference
                 android:key="enterprise_privacy_number_location_access_packages"
-                android:title="@string/enterprise_privacy_location_access"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_location_access"/>
         <com.android.settings.DividerPreference
                 android:key="enterprise_privacy_number_microphone_access_packages"
-                android:title="@string/enterprise_privacy_microphone_access"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_microphone_access"/>
         <com.android.settings.DividerPreference
                 android:key="enterprise_privacy_number_camera_access_packages"
-                android:title="@string/enterprise_privacy_camera_access"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_camera_access"/>
         <com.android.settings.DividerPreference
                 android:key="number_enterprise_set_default_apps"
-                android:title="@string/enterprise_privacy_enterprise_set_default_apps"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_enterprise_set_default_apps"/>
         <com.android.settings.DividerPreference
-                android:key="always_on_vpn_primary_user"
-                settings:multiLine="true"/>
+                android:key="always_on_vpn_primary_user"/>
         <com.android.settings.DividerPreference
                 android:key="always_on_vpn_managed_profile"
-                android:title="@string/enterprise_privacy_always_on_vpn_work"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_always_on_vpn_work"/>
         <com.android.settings.DividerPreference
                 android:key="input_method"
-                android:title="@string/enterprise_privacy_input_method"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_input_method"/>
         <com.android.settings.DividerPreference
                 android:key="global_http_proxy"
-                android:title="@string/enterprise_privacy_global_http_proxy"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_global_http_proxy"/>
         <com.android.settings.DividerPreference
                 android:key="ca_certs"
-                android:title="@string/enterprise_privacy_ca_certs"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_ca_certs"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">
         <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_lock_device"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_lock_device"/>
         <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_wipe_device"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_wipe_device"/>
         <com.android.settings.DividerPreference
                 android:key="failed_password_wipe_current_user"
-                android:title="@string/enterprise_privacy_failed_password_wipe_device"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_failed_password_wipe_device"/>
         <com.android.settings.DividerPreference
                 android:key="failed_password_wipe_managed_profile"
-                android:title="@string/enterprise_privacy_failed_password_wipe_work"
-                settings:multiLine="true"/>
+                android:title="@string/enterprise_privacy_failed_password_wipe_work"/>
     </PreferenceCategory>
 </PreferenceScreen>
