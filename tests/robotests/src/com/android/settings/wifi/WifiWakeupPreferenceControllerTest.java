@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static android.provider.Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED;
+import static android.provider.Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE;
 import static android.provider.Settings.Global.WIFI_WAKEUP_ENABLED;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -29,6 +30,7 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.Lifecycle;
@@ -52,6 +54,7 @@ public class WifiWakeupPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new WifiWakeupPreferenceController(mContext, mock(Lifecycle.class));
+        Settings.System.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 1);
     }
 
     @Test
@@ -95,6 +98,7 @@ public class WifiWakeupPreferenceControllerTest {
 
         verify(preference).setChecked(true);
         verify(preference).setEnabled(true);
+        verify(preference).setSummary(R.string.wifi_wakeup_summary);
     }
 
     @Test
@@ -107,5 +111,20 @@ public class WifiWakeupPreferenceControllerTest {
 
         verify(preference).setChecked(false);
         verify(preference).setEnabled(false);
+        verify(preference).setSummary(R.string.wifi_wakeup_summary);
+    }
+
+    @Test
+    public void updateState_preferenceSetUncheckedAndSetDisabledWhenWifiScanningDisabled() {
+        final SwitchPreference preference = mock(SwitchPreference.class);
+        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
+        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.System.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+
+        mController.updateState(preference);
+
+        verify(preference).setChecked(true);
+        verify(preference).setEnabled(false);
+        verify(preference).setSummary(R.string.wifi_wakeup_summary_scanning_disabled);
     }
 }
