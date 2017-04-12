@@ -74,6 +74,13 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
+    public void listPolicyInstalledApps(ListOfAppsCallback callback) {
+        final CurrentUserPolicyInstalledAppLister lister =
+                new CurrentUserPolicyInstalledAppLister(mPm, mUm, callback);
+        lister.execute();
+    }
+
+    @Override
     public void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions,
             boolean async, NumberOfAppsCallback callback) {
         final CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter counter =
@@ -84,6 +91,15 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         } else {
             counter.executeInForeground();
         }
+    }
+
+    @Override
+    public void listAppsWithAdminGrantedPermissions(String[] permissions,
+            ListOfAppsCallback callback) {
+        final CurrentUserAppWithAdminGrantedPermissionsLister lister =
+                new CurrentUserAppWithAdminGrantedPermissionsLister(permissions, mPm, mPms, mDpm,
+                        mUm, callback);
+        lister.execute();
     }
 
     @Override
@@ -152,4 +168,39 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             mCallback.onNumberOfAppsResult(num);
         }
     }
+
+    private static class CurrentUserPolicyInstalledAppLister extends InstalledAppLister {
+        private ListOfAppsCallback mCallback;
+
+        CurrentUserPolicyInstalledAppLister(PackageManagerWrapper packageManager,
+                UserManager userManager, ListOfAppsCallback callback) {
+            super(packageManager, userManager);
+            mCallback = callback;
+        }
+
+        @Override
+        protected void onAppListBuilt(List<UserAppInfo> list) {
+            mCallback.onListOfAppsResult(list);
+        }
+    }
+
+    private static class CurrentUserAppWithAdminGrantedPermissionsLister extends
+            AppWithAdminGrantedPermissionsLister {
+        private ListOfAppsCallback mCallback;
+
+        CurrentUserAppWithAdminGrantedPermissionsLister(String[] permissions,
+                PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
+                DevicePolicyManagerWrapper devicePolicyManager, UserManager userManager,
+                ListOfAppsCallback callback) {
+            super(permissions, packageManager, packageManagerService, devicePolicyManager,
+                    userManager);
+            mCallback = callback;
+        }
+
+        @Override
+        protected void onAppListBuilt(List<UserAppInfo> list) {
+            mCallback.onListOfAppsResult(list);
+        }
+    }
+
 }

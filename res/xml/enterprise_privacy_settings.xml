@@ -16,8 +16,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:key="enterprise_privacy_settings"
-        android:title="@string/enterprise_privacy_settings">
+                  android:key="enterprise_privacy_settings"
+                  android:title="@string/enterprise_privacy_settings">
 
     <!-- Header -->
     <Preference
@@ -46,15 +46,19 @@
 
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
         <com.android.settings.DividerPreference
+                android:fragment="com.android.settings.enterprise.ApplicationListFragment$EnterpriseInstalledPackages"
                 android:key="number_enterprise_installed_packages"
                 android:title="@string/enterprise_privacy_enterprise_installed_packages"/>
         <com.android.settings.DividerPreference
+                android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionLocation"
                 android:key="enterprise_privacy_number_location_access_packages"
                 android:title="@string/enterprise_privacy_location_access"/>
         <com.android.settings.DividerPreference
+                android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionMicrophone"
                 android:key="enterprise_privacy_number_microphone_access_packages"
                 android:title="@string/enterprise_privacy_microphone_access"/>
         <com.android.settings.DividerPreference
+                android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionCamera"
                 android:key="enterprise_privacy_number_camera_access_packages"
                 android:title="@string/enterprise_privacy_camera_access"/>
         <com.android.settings.DividerPreference
