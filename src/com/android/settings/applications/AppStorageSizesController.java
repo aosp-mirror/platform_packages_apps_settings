@@ -39,6 +39,7 @@ public class AppStorageSizesController {
     @Nullable
     private StorageStatsSource.AppStorageStats mLastResult;
     private boolean mLastResultFailed;
+    private boolean mCachedCleared;
     private long mLastCodeSize = -1;
     private long mLastDataSize = -1;
     private long mLastCacheSize = -1;
@@ -77,7 +78,7 @@ public class AppStorageSizesController {
                 mLastDataSize = dataSize;
                 mDataSize.setSummary(getSizeStr(context, dataSize));
             }
-            long cacheSize = mLastResult.getCacheBytes();
+            long cacheSize = mCachedCleared ? 0 : mLastResult.getCacheBytes();
             if (mLastCacheSize != cacheSize) {
                 mLastCacheSize = cacheSize;
                 mCacheSize.setSummary(getSizeStr(context, cacheSize));
@@ -98,6 +99,15 @@ public class AppStorageSizesController {
     public void setResult(StorageStatsSource.AppStorageStats result) {
         mLastResult = result;
         mLastResultFailed = result == null;
+    }
+
+    /**
+     * Sets if we have cleared the cache and should zero the cache bytes.
+     * When the cache is cleared, the cache directories are recreated. These directories have
+     * some size, but are empty. We zero this out to best match user expectations.
+     */
+    public void setCacheCleared(boolean isCleared) {
+        mCachedCleared = isCleared;
     }
 
     private String getSizeStr(Context context, long size) {

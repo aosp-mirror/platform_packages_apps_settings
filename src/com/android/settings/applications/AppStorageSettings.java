@@ -101,6 +101,8 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final String KEY_URI_CATEGORY = "uri_category";
     private static final String KEY_CLEAR_URI = "clear_uri_button";
 
+    private static final String KEY_CACHE_CLEARED = "cache_cleared";
+
     // Views related to cache info
     private Preference mCacheSize;
     private Button mClearDataButton;
@@ -115,6 +117,7 @@ public class AppStorageSettings extends AppInfoWithHeader
     private PreferenceCategory mUri;
 
     private boolean mCanClearData = true;
+    private boolean mCacheCleared;
 
     private AppStorageStats mLastResult;
     private AppStorageSizesController mSizeController;
@@ -133,6 +136,9 @@ public class AppStorageSettings extends AppInfoWithHeader
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCacheCleared = savedInstanceState.getBoolean(KEY_CACHE_CLEARED, false);
+        }
 
         addPreferencesFromResource(R.xml.app_storage_settings);
         setupViews();
@@ -143,6 +149,12 @@ public class AppStorageSettings extends AppInfoWithHeader
     public void onResume() {
         super.onResume();
         updateSize();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_CACHE_CLEARED, mCacheCleared);
     }
 
     private void setupViews() {
@@ -523,6 +535,10 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private void updateUiWithSize(AppStorageStats result) {
+        if (mCacheCleared) {
+            mSizeController.setCacheCleared(true);
+        }
+
         mSizeController.updateUi(getContext());
 
         if (result == null) {
@@ -539,7 +555,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                 mClearDataButton.setEnabled(true);
                 mClearDataButton.setOnClickListener(this);
             }
-            if (cacheSize <= 0) {
+            if (cacheSize <= 0 || mCacheCleared) {
                 mClearCacheButton.setEnabled(false);
             } else {
                 mClearCacheButton.setEnabled(true);
@@ -562,6 +578,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                     processClearMsg(msg);
                     break;
                 case MSG_CLEAR_CACHE:
+                    mCacheCleared = true;
                     // Refresh size info
                     updateSize();
                     break;
