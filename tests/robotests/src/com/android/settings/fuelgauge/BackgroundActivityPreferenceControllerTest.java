@@ -85,16 +85,16 @@ public class BackgroundActivityPreferenceControllerTest {
     public void testOnPreferenceChange_TurnOnCheck_MethodInvoked() {
         mController.onPreferenceChange(mPreference, true);
 
-        verify(mAppOpsManager).setUidMode(AppOpsManager.OP_RUN_IN_BACKGROUND,
-                UID_NORMAL, AppOpsManager.MODE_DEFAULT);
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL,
+                mController.getTargetPackage(), AppOpsManager.MODE_ALLOWED);
     }
 
     @Test
     public void testOnPreferenceChange_TurnOffCheck_MethodInvoked() {
         mController.onPreferenceChange(null, false);
 
-        verify(mAppOpsManager).setUidMode(AppOpsManager.OP_RUN_IN_BACKGROUND,
-                UID_NORMAL, AppOpsManager.MODE_IGNORED);
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL,
+                mController.getTargetPackage(), AppOpsManager.MODE_IGNORED);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class BackgroundActivityPreferenceControllerTest {
         mController = new BackgroundActivityPreferenceController(mContext, UID_SPECIAL);
         when(mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_SPECIAL, LOW_SDK_PACKAGE))
-                .thenReturn(AppOpsManager.MODE_DEFAULT);
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
         when(mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_SPECIAL, HIGH_SDK_PACKAGE))
                 .thenReturn(AppOpsManager.MODE_IGNORED);
