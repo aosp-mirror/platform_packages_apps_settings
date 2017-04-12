@@ -45,6 +45,8 @@ import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.users.UserFeatureProvider;
+import com.android.settings.users.UserFeatureProviderImpl;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 
 /**
@@ -63,6 +65,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
+    private UserFeatureProvider mUserFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -155,6 +158,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl(context);
         }
         return mSuggestionFeatureProvider;
+    }
+
+    @Override
+    public UserFeatureProvider getUserFeatureProvider(Context context) {
+        if (mUserFeatureProvider == null) {
+            mUserFeatureProvider = new UserFeatureProviderImpl(context);
+        }
+        return mUserFeatureProvider;
     }
 
     @Override

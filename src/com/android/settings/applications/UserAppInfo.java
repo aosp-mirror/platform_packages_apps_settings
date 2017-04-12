@@ -43,9 +43,10 @@ public class UserAppInfo {
         if (other == null || getClass() != other.getClass()) {
             return false;
         }
-
         final UserAppInfo that = (UserAppInfo) other;
 
+        // As UserInfo and AppInfo do not support hashcode/equals contract, assume
+        // equality based on corresponding identity fields.
         return that.userInfo.id == userInfo.id && TextUtils.equals(that.appInfo.packageName,
                 appInfo.packageName);
     }

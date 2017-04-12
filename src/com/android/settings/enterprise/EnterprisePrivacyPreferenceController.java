@@ -14,7 +14,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;

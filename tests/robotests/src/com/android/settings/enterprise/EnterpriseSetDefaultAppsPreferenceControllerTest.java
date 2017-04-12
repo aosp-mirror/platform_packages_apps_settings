@@ -18,32 +18,35 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
-import android.util.ArraySet;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.EnterpriseDefaultApps;
+import com.android.settings.applications.UserAppInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Answers;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.anyObject;
 import static org.mockito.Mockito.when;
 
@@ -56,6 +59,8 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private UserManager mUm;
     private FakeFeatureFactory mFeatureFactory;
 
     private EnterpriseSetDefaultAppsPreferenceController mController;
@@ -69,49 +74,39 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
                 null /* lifecycle */);
     }
 
-    private static Intent buildIntent(String action, String category, String protocol,
-            String type) {
-        final Intent intent = new Intent(action);
-        if (category != null) {
-            intent.addCategory(category);
+    private void setEnterpriseSetDefaultApps(Intent[] intents, int number) {
+        final ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.packageName = "app";
+        for (int i = 0; i < number; i++) {
+            final List<UserAppInfo> apps = new ArrayList<>(number);
+            apps.add(new UserAppInfo(new UserInfo(i, "user." + i, UserInfo.FLAG_ADMIN), appInfo));
+            when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(eq(i),
+                    argThat(new MatchesIntents(intents)))).thenReturn(apps);
         }
-        if (protocol != null) {
-            intent.setData(Uri.parse(protocol));
-        }
-        if (type != null) {
-            intent.setType(type);
-        }
-        return intent;
     }
 
-    private void setEnterpriseSetDefaultApps(Intent[] intents, int number) {
-        final Set<ApplicationFeatureProvider.PersistentPreferredActivityInfo> apps
-                = new ArraySet<>(number);
-        for (int i = 0; i < number; i++) {
-            apps.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo("app", i));
+    private void configureUsers(int number) {
+        final List<UserHandle> users = new ArrayList<>(number);
+        for (int i = 0; i < 64; i++) {
+            users.add(new UserHandle(i));
         }
-        when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(
-                argThat(new MatchesIntents(intents)))).thenReturn(apps);
+        when(mFeatureFactory.userFeatureProvider.getUserProfiles()).thenReturn(users);
     }
 
     @Test
     public void testUpdateState() {
-        setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_VIEW,
-                Intent.CATEGORY_BROWSABLE, "http:", null)}, 1);
-        setEnterpriseSetDefaultApps(new Intent[] {new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
-                new Intent(MediaStore.ACTION_VIDEO_CAPTURE)}, 2);
-        setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_VIEW, null, "geo:",
-                null)}, 4);
-        setEnterpriseSetDefaultApps(new Intent[] {new Intent(Intent.ACTION_SENDTO),
-                new Intent(Intent.ACTION_SEND), new Intent(Intent.ACTION_SEND_MULTIPLE)}, 8);
-        setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_INSERT, null, null,
-                "vnd.android.cursor.dir/event")}, 16);
-        setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_PICK, null, null,
-                ContactsContract.Contacts.CONTENT_TYPE)}, 32);
-        setEnterpriseSetDefaultApps(new Intent[] {new Intent(Intent.ACTION_DIAL),
-                new Intent(Intent.ACTION_CALL)}, 64);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.BROWSER.getIntents(), 1);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.CAMERA.getIntents(), 2);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.MAP.getIntents(), 4);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.EMAIL.getIntents(), 8);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.CALENDAR.getIntents(), 16);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.CONTACTS.getIntents(), 32);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.PHONE.getIntents(), 64);
         when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
                 127, 127)).thenReturn("127 apps");
+
+        // As setEnterpriseSetDefaultApps uses fake Users, we need to list them via UserManager.
+        configureUsers(64);
 
         final Preference preference = new Preference(mContext, null, 0, 0);
         mController.updateState(preference);
@@ -120,13 +115,12 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     @Test
     public void testIsAvailable() {
-        when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(
-                anyObject())).thenReturn(
-                        new ArraySet<ApplicationFeatureProvider.PersistentPreferredActivityInfo>());
+        when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(anyInt(),
+                anyObject())).thenReturn(new ArrayList<UserAppInfo>());
         assertThat(mController.isAvailable()).isFalse();
 
-        setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_VIEW,
-                Intent.CATEGORY_BROWSABLE, "http:", null)}, 1);
+        setEnterpriseSetDefaultApps(EnterpriseDefaultApps.BROWSER.getIntents(), 1);
+        configureUsers(1);
         assertThat(mController.isAvailable()).isTrue();
     }
 

@@ -39,11 +39,6 @@ public abstract class ApplicationListFragment extends DashboardFragment
     static final String TAG = "EnterprisePrivacySettings";
 
     @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.ENTERPRISE_PRIVACY_SETTINGS;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -75,6 +70,11 @@ public abstract class ApplicationListFragment extends DashboardFragment
             FeatureFactory.getFactory(context).getApplicationFeatureProvider(context)
                     .listAppsWithAdminGrantedPermissions(mPermissions, callback);
         }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.ENTERPRISE_PRIVACY_PERMISSIONS;
+        }
     }
 
     public static class AdminGrantedPermissionCamera extends AdminGrantedPermission {
@@ -98,6 +98,11 @@ public abstract class ApplicationListFragment extends DashboardFragment
 
     public static class EnterpriseInstalledPackages extends ApplicationListFragment {
         public EnterpriseInstalledPackages() {
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.ENTERPRISE_PRIVACY_INSTALLED_APPS;
         }
 
         @Override
