@@ -48,6 +48,7 @@ public class SecondaryUserController extends PreferenceController
 
     private @NonNull UserInfo mUser;
     private @Nullable StorageItemPreference mStoragePreference;
+    private Drawable mUserIcon;
     private long mSize;
     private long mTotalSizeBytes;
 
@@ -113,6 +114,7 @@ public class SecondaryUserController extends PreferenceController
 
             group.setVisible(true);
             group.addPreference(mStoragePreference);
+            maybeSetIcon();
         }
     }
 
@@ -163,9 +165,13 @@ public class SecondaryUserController extends PreferenceController
 
     @Override
     public void handleUserIcons(SparseArray<Drawable> fetchedIcons) {
-        Drawable userIcon = fetchedIcons.get(mUser.id);
-        if (userIcon != null) {
-            mStoragePreference.setIcon(userIcon);
+        mUserIcon = fetchedIcons.get(mUser.id);
+        maybeSetIcon();
+    }
+
+    private void maybeSetIcon() {
+        if (mUserIcon != null && mStoragePreference != null) {
+            mStoragePreference.setIcon(mUserIcon);
         }
     }
 
