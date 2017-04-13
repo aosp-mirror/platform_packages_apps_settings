@@ -75,6 +75,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     private static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
+    private static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
@@ -491,6 +492,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
                 if (hasMobileData) {
                     keys.add(KEY_RESTRICT_BACKGROUND);
                 }
+                keys.add(KEY_WIFI_USAGE_TITLE);
 
                 return keys;
             }
