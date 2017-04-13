@@ -69,7 +69,6 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     private void forgetNetwork() {
         mMetricsFeatureProvider.action(getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         mWifiDetailPreferenceController.forgetNetwork();
-        getActivity().finish();
     }
 
     @Override
@@ -91,10 +90,11 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         mWifiDetailPreferenceController = new WifiDetailPreferenceController(
                 mAccessPoint,
+                context.getSystemService(ConnectivityManager.class),
                 context,
+                this,
                 getLifecycle(),
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class));
+                context.getSystemService(WifiManager.class));
 
         ArrayList<PreferenceController> controllers = new ArrayList(1);
         controllers.add(mWifiDetailPreferenceController);
