@@ -47,15 +47,20 @@
         android:icon="@drawable/ic_videogame_vd_theme_24"
         android:order="4" />
     <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_movies"
+        android:title="@string/storage_movies_tv"
+        android:icon="@drawable/ic_theaters_vd_theme_24"
+        android:order="5" />
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_other_apps"
         android:title="@string/storage_other_apps"
         android:icon="@drawable/ic_apps_vd_theme_24"
-        android:order="5" />
+        android:order="6" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_files"
         android:title="@string/storage_files"
         android:icon="@drawable/ic_folder_vd_theme_24"
-        android:order="6" />
+        android:order="7" />
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_system"
         android:title="@string/storage_detail_system"
