@@ -387,6 +387,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
+        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreferenceScreen);
 
         // Font size.
         mFontSizePreferenceScreen = findPreference(FONT_SIZE_PREFERENCE_SCREEN);
@@ -675,6 +676,19 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     ? AccessibilityShortcutPreferenceFragment.getServiceName(getContext())
                     : getString(R.string.accessibility_feature_state_off);
             mAccessibilityShortcutPreferenceScreen.setSummary(summary);
+        }
+    }
+
+    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
+        // Some devices support only a single magnification mode. In these cases, we redirect to
+        // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
+        // single list item.
+        final Context context = preference.getContext();
+        if (!MagnificationPreferenceFragment.isApplicable(context.getResources())) {
+            preference.setFragment(ToggleScreenMagnificationPreferenceFragment.class.getName());
+            final Bundle extras = preference.getExtras();
+            MagnificationPreferenceFragment.populateMagnificationGesturesPreferenceExtras(extras,
+                    context);
         }
     }
 
