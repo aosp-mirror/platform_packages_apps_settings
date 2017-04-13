@@ -24,6 +24,7 @@ import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
+import android.text.Html;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -65,12 +66,14 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected String getConfirmationMessage(CandidateInfo appInfo) {
+    protected CharSequence getConfirmationMessage(CandidateInfo appInfo) {
         if (appInfo == null) {
             return null;
         }
         final CharSequence appName = appInfo.loadLabel();
-        return getContext().getString(R.string.autofill_confirmation_message, appName);
+        final String message = getContext().getString(
+                R.string.autofill_confirmation_message, appName);
+        return Html.fromHtml(message);
     }
 
     @Override
