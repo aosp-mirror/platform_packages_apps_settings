@@ -21,7 +21,6 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -29,7 +28,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
@@ -63,7 +61,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
     protected RestrictedSwitchPreference mLights;
     protected RestrictedSwitchPreference mVibrate;
-    protected DefaultNotificationTonePreference mRingtone;
+    protected NotificationSoundPreference mRingtone;
     protected RestrictedDropDownPreference mImportance;
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedDropDownPreference mVisibilityOverride;
@@ -102,7 +100,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 (RestrictedDropDownPreference) findPreference(KEY_VISIBILITY_OVERRIDE);
         mLights = (RestrictedSwitchPreference) findPreference(KEY_LIGHTS);
         mVibrate = (RestrictedSwitchPreference) findPreference(KEY_VIBRATE);
-        mRingtone = (DefaultNotificationTonePreference) findPreference(KEY_RINGTONE);
+        mRingtone = (NotificationSoundPreference) findPreference(KEY_RINGTONE);
 
         if (mPkgInfo != null && mChannel != null) {
             setupPriorityPref(mChannel.canBypassDnd());
