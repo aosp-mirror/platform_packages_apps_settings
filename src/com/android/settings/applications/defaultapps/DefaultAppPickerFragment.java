@@ -50,7 +50,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
-        final String confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
+        final CharSequence confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
         final Activity activity = getActivity();
         if (TextUtils.isEmpty(confirmationMessage)) {
             super.onRadioButtonClicked(selected);
@@ -74,7 +74,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         }
     }
 
-    protected String getConfirmationMessage(CandidateInfo info) {
+    protected CharSequence getConfirmationMessage(CandidateInfo info) {
         return null;
     }
 
@@ -91,11 +91,11 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         }
 
         public static ConfirmationDialogFragment newInstance(DefaultAppPickerFragment parent,
-                String key, String message) {
+                String key, CharSequence message) {
             final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment();
             final Bundle argument = new Bundle();
             argument.putString(EXTRA_KEY, key);
-            argument.putString(EXTRA_MESSAGE, message);
+            argument.putCharSequence(EXTRA_MESSAGE, message);
             fragment.setArguments(argument);
             fragment.setTargetFragment(parent, 0);
             return fragment;
@@ -105,7 +105,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Bundle bundle = getArguments();
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                    .setMessage(bundle.getString(EXTRA_MESSAGE))
+                    .setMessage(bundle.getCharSequence(EXTRA_MESSAGE))
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, null);
             return builder.create();
