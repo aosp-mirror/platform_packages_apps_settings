@@ -37,6 +37,8 @@ import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settingslib.BatteryInfo;
 
 import org.junit.Before;
@@ -74,7 +76,13 @@ import static org.mockito.Mockito.when;
  */
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION,
+        shadows = {
+                SettingsShadowResources.class,
+                SettingsShadowResources.SettingsShadowTheme.class,
+                ShadowDynamicIndexableContentMonitor.class
+        })
 public class PowerUsageSummaryTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String TIME_LEFT = "2h30min";
@@ -119,8 +127,6 @@ public class PowerUsageSummaryTest {
     @Mock
     private LayoutPreference mBatteryLayoutPref;
     @Mock
-    private BatteryMeterView mBatteryMeterView;
-    @Mock
     private TextView mBatteryPercentText;
     @Mock
     private TextView mSummary1;
@@ -141,6 +147,7 @@ public class PowerUsageSummaryTest {
     private Context mRealContext;
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
+    private BatteryMeterView mBatteryMeterView;
 
     @Before
     public void setUp() {
@@ -153,6 +160,8 @@ public class PowerUsageSummaryTest {
 
         mFragment = spy(new TestFragment(mContext));
         mFragment.initFeatureProvider();
+        mBatteryMeterView = new BatteryMeterView(mRealContext);
+        mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())
@@ -192,7 +201,7 @@ public class PowerUsageSummaryTest {
         mFragment.mScreenUsagePref = mScreenUsagePref;
         mFragment.mLastFullChargePref = mLastFullChargePref;
 
-        mBatteryInfo.mBatteryLevel = BATTERY_LEVEL;
+        mBatteryInfo.batteryLevel = BATTERY_LEVEL;
     }
 
     @Test
@@ -314,6 +323,18 @@ public class PowerUsageSummaryTest {
         mFragment.updateHeaderPreference(mBatteryInfo);
 
         verify(mSummary1).setText(mBatteryInfo.remainingLabel);
+    }
+
+    @Test
+    public void testUpdatePreference_updateBatteryInfo() {
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+        mBatteryInfo.batteryLevel = BATTERY_LEVEL;
+        mBatteryInfo.discharging = true;
+
+        mFragment.updateHeaderPreference(mBatteryInfo);
+
+        assertThat(mBatteryMeterView.mDrawable.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
+        assertThat(mBatteryMeterView.mDrawable.getCharging()).isEqualTo(false);
     }
 
     @Test

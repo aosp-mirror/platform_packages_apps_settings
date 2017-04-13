@@ -15,12 +15,17 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
+import android.graphics.ColorFilter;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +34,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -42,10 +49,15 @@ import static org.mockito.Mockito.verify;
         })
 public class BatteryMeterViewTest {
     private static final int BATTERY_LEVEL = 100;
+    private static final int BATTERY_CRITICAL_LEVEL = 15;
+    private static final int BATTERY_LOW_LEVEL = 3;
     @Mock
-    private BatteryMeterView.BatteryMeterDrawable mDrawable;
+    private ColorFilter mErrorColorFilter;
+    @Mock
+    private ColorFilter mAccentColorFilter;
     private Context mContext;
     private BatteryMeterView mBatteryMeterView;
+    private BatteryMeterView.BatteryMeterDrawable mDrawable;
 
     @Before
     public void setUp() {
@@ -53,13 +65,33 @@ public class BatteryMeterViewTest {
 
         mContext = RuntimeEnvironment.application;
         mBatteryMeterView = new BatteryMeterView(mContext);
-        mBatteryMeterView.setBatteryDrawable(mDrawable);
+        mDrawable = spy(new BatteryMeterView.BatteryMeterDrawable(mContext, 0));
+
+        mBatteryMeterView.mDrawable = mDrawable;
+        mBatteryMeterView.mAccentColorFilter = mAccentColorFilter;
+        mBatteryMeterView.mErrorColorFilter = mErrorColorFilter;
+
+        doReturn(BATTERY_CRITICAL_LEVEL).when(mDrawable).getCriticalLevel();
     }
 
     @Test
-    public void testSetBatteryInfo_SetCorrectly() {
-        mBatteryMeterView.setBatteryInfo(BATTERY_LEVEL);
+    public void testSetBatteryInfo_setCorrectly() {
+        mBatteryMeterView.setBatteryLevel(BATTERY_LEVEL);
 
-        verify(mDrawable).setBatteryLevel(BATTERY_LEVEL);
+        assertThat(mDrawable.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
+    }
+
+    @Test
+    public void testSetBatteryInfo_levelLow_setErrorColor() {
+        mBatteryMeterView.setBatteryLevel(BATTERY_LOW_LEVEL);
+
+        verify(mDrawable).setBatteryColorFilter(mErrorColorFilter);
+    }
+
+    @Test
+    public void testSetBatteryInfo_levelNormal_setNormalColor() {
+        mBatteryMeterView.setBatteryLevel(BATTERY_LEVEL);
+
+        verify(mDrawable).setBatteryColorFilter(mAccentColorFilter);
     }
 }
