@@ -228,22 +228,36 @@ public class PowerUsageAdvancedTest {
     public void testShouldHide_typeUnAccounted_returnTrue() {
         mPowerUsageData.usageType = UsageType.UNACCOUNTED;
 
-        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isTrue();
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
 
 
     @Test
-    public void testShouldHide_typeOverCounted_returnTrue() {
+    public void testShouldHideCategory_typeOverCounted_returnTrue() {
         mPowerUsageData.usageType = UsageType.OVERCOUNTED;
 
-        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isTrue();
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
-
 
     @Test
-    public void testShouldHide_typeNormal_returnFalse() {
+    public void testShouldHideCategory_typeNormal_returnFalse() {
         mPowerUsageData.usageType = UsageType.APP;
 
-        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isFalse();
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
     }
+
+    @Test
+    public void testShouldHideSummary_typeCell_returnTrue() {
+        mPowerUsageData.usageType = UsageType.CELL;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeNormal_returnFalse() {
+        mPowerUsageData.usageType = UsageType.APP;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isFalse();
+    }
+
 }
