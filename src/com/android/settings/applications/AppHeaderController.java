@@ -63,17 +63,6 @@ public class AppHeaderController {
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
-
-    public static final ViewOutlineProvider OUTLINE_PROVIDER = new ViewOutlineProvider() {
-        @Override
-        public void getOutline(View view, Outline outline) {
-            Drawable background = ((ImageView)view).getDrawable();
-            if (background != null) {
-                background.getOutline(outline);
-            }
-        }
-    };
-
     private static final String TAG = "AppDetailFeature";
 
     private final Context mContext;
@@ -228,13 +217,6 @@ public class AppHeaderController {
         ImageView iconView = (ImageView) mAppHeader.findViewById(R.id.app_detail_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
-            if (mIcon instanceof AdaptiveIconDrawable) {
-                iconView.setElevation(mIconElevation);
-                iconView.setOutlineProvider(OUTLINE_PROVIDER);
-            } else {
-                iconView.setElevation(0);
-                iconView.setOutlineProvider(null);
-            }
             ImageView badgeView = mAppHeader.findViewById(R.id.app_icon_instant_apps_badge);
             if (badgeView != null) {
                 badgeView.setVisibility(mIsInstantApp ? View.VISIBLE : View.GONE);
