@@ -230,7 +230,7 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
 
         controllers.add(new BackgroundActivityPreferenceController(context, uid));
         controllers.add(new BatteryOptimizationPreferenceController(
-                (SettingsActivity) getActivity(), this));
+                (SettingsActivity) getActivity(), this, packageName));
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
                 (SettingsActivity) getActivity(), this, getLifecycle(), packageName, mState, mDpm,
                 mUserManager, mPackageManager, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
