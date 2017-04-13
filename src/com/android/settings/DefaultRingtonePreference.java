@@ -19,40 +19,15 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 
 public class DefaultRingtonePreference extends RingtonePreference {
     private static final String TAG = "DefaultRingtonePreference";
 
-    private int mUserId = UserHandle.USER_CURRENT;
-    protected Context mUserContext;
-
     public DefaultRingtonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mUserContext = getContext();
-    }
-
-    public void setUserId(int userId) {
-        mUserId = userId;
-        mUserContext = Utils.createPackageContextAsUser(getContext(), mUserId);
-    }
-
-    @Override
-    public void performClick() {
-        if (mUserId != UserHandle.USER_CURRENT) {
-            if (Utils.confirmWorkProfileCredentialsIfNecessary(getContext(), mUserId) ||
-                    Utils.startQuietModeDialogIfNecessary(getContext(),
-                            UserManager.get(getContext()), mUserId)) {
-                return;
-            }
-        }
-        super.performClick();
     }
 
     @Override
@@ -64,9 +39,6 @@ public class DefaultRingtonePreference extends RingtonePreference {
          * doesn't make sense to show a 'Default' item.
          */
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
-        if (mUserId != UserHandle.USER_CURRENT) {
-            ringtonePickerIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-        }
     }
 
     @Override
