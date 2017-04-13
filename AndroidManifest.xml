@@ -166,7 +166,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.NetworkDashboardFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/network_dashboard_summary"/>
+                android:resource="@string/network_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -193,7 +193,7 @@
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/connected_devices_dashboard_summary"/>
+                android:resource="@string/connected_devices_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -877,7 +877,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/display_dashboard_summary"/>
+                android:resource="@string/display_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2560,7 +2560,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/sound_dashboard_summary"/>
+                android:resource="@string/sound_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2966,7 +2966,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/app_and_notification_dashboard_summary"/>
+                       android:resource="@string/app_and_notification_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$UserAndAccountDashboardActivity"
@@ -2998,7 +2998,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.system.SystemDashboardFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/system_dashboard_summary"/>
+                       android:resource="@string/system_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$SupportDashboardActivity"
