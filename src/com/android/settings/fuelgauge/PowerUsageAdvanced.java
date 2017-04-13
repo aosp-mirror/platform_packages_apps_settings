@@ -126,7 +126,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     public void onResume() {
         super.onResume();
-        refreshStats();
     }
 
     @Override
@@ -165,8 +164,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
-    protected void refreshStats() {
-        super.refreshStats();
+    protected void refreshUi() {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
 
         updatePreference(mHistPref);
 
