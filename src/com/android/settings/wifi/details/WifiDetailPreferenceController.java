@@ -15,7 +15,11 @@
  */
 package com.android.settings.wifi.details;
 
+import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.IpPrefix;
@@ -39,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settingslib.wifi.AccessPoint;
@@ -55,8 +60,9 @@ import java.util.StringJoiner;
  * {@link WifiNetworkDetailsFragment}.
  */
 public class WifiDetailPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume {
+        LifecycleObserver, OnPause, OnResume {
     private static final String TAG = "WifiDetailsPrefCtrl";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     @VisibleForTesting
     static final String KEY_CONNECTION_DETAIL_PREF = "connection_detail";
@@ -82,14 +88,15 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     static final String KEY_IPV6_ADDRESS_CATEGORY = "ipv6_details_category";
 
     private AccessPoint mAccessPoint;
+    private final ConnectivityManager mConnectivityManager;
+    private final Fragment mFragment;
     private NetworkInfo mNetworkInfo;
     private Context mPrefContext;
     private int mRssi;
     private String[] mSignalStr;
-    private WifiConfiguration mWifiConfig;
+    private final WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
-    private final ConnectivityManager mConnectivityManager;
 
     // Preferences - in order of appearance
     private Preference mConnectionDetailPref;
@@ -104,18 +111,39 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private WifiDetailPreference mDnsPref;
     private PreferenceCategory mIpv6AddressCategory;
 
-    public WifiDetailPreferenceController(AccessPoint accessPoint, Context context,
-            Lifecycle lifecycle, WifiManager wifiManager, ConnectivityManager connectivityManager) {
+    private final IntentFilter mFilter;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()) {
+                case WifiManager.NETWORK_STATE_CHANGED_ACTION:
+                case WifiManager.RSSI_CHANGED_ACTION:
+                    updateInfo();
+            }
+        }
+    };
+
+    public WifiDetailPreferenceController(
+            AccessPoint accessPoint,
+            ConnectivityManager connectivityManager,
+            Context context,
+            Fragment fragment,
+            Lifecycle lifecycle,
+            WifiManager wifiManager) {
         super(context);
 
         mAccessPoint = accessPoint;
+        mConnectivityManager = connectivityManager;
+        mFragment = fragment;
         mNetworkInfo = accessPoint.getNetworkInfo();
         mRssi = accessPoint.getRssi();
         mSignalStr = context.getResources().getStringArray(R.array.wifi_signal);
         mWifiConfig = accessPoint.getConfig();
         mWifiManager = wifiManager;
-        mConnectivityManager = connectivityManager;
-        mWifiInfo = wifiManager.getConnectionInfo();
+
+        mFilter = new IntentFilter();
+        mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
 
         lifecycle.addObserver(this);
     }
@@ -163,38 +191,32 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
     @Override
     public void onResume() {
-        mWifiInfo = mWifiManager.getConnectionInfo();
+        updateInfo();
 
-        refreshFromWifiInfo();
-        setIpText();
+        mContext.registerReceiver(mReceiver, mFilter);
     }
 
-    private void refreshFromWifiInfo() {
-        if (mWifiInfo == null) {
+    @Override
+    public void onPause() {
+        mContext.unregisterReceiver(mReceiver);
+    }
+
+    private void updateInfo() {
+        mNetworkInfo = mConnectivityManager.getNetworkInfo(mWifiManager.getCurrentNetwork());
+        mWifiInfo = mWifiManager.getConnectionInfo();
+        if (mNetworkInfo == null || mWifiInfo == null) {
+            exitActivity();
             return;
         }
-        mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
 
-        int iconSignalLevel = WifiManager.calculateSignalLevel(
-                mWifiInfo.getRssi(), WifiManager.RSSI_LEVELS);
-        Drawable wifiIcon = NetworkBadging.getWifiIcon(
-                iconSignalLevel, NetworkBadging.BADGING_NONE, mContext.getTheme()).mutate();
+        refreshNetworkState();
 
-        // Connected Header Pref
-        mConnectionDetailPref.setIcon(wifiIcon);
-        mConnectionDetailPref.setTitle(mAccessPoint.getSettingsSummary());
+        // Update Connection Header icon and Signal Strength Preference
+        mRssi = mWifiInfo.getRssi();
+        refreshRssiViews();
 
         // MAC Address Pref
         mMacAddressPref.setDetailText(mWifiInfo.getMacAddress());
-
-        // Signal Strength Pref
-        Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
-        wifiIconDark.setTint(mContext.getResources().getColor(
-                R.color.wifi_details_icon_color, mContext.getTheme()));
-        mSignalStrengthPref.setIcon(wifiIconDark);
-
-        int summarySignalLevel = mAccessPoint.getLevel();
-        mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
 
         // Link Speed Pref
         int linkSpeedMbps = mWifiInfo.getLinkSpeed();
@@ -215,6 +237,37 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
             Log.e(TAG, "Unexpected frequency " + frequency);
         }
         mFrequencyPref.setDetailText(band);
+
+        setIpText();
+    }
+
+    private void exitActivity() {
+        if (DEBUG) {
+            Log.d(TAG, "Exiting the WifiNetworkDetailsPage");
+        }
+        mFragment.getActivity().finish();
+    }
+
+    private void refreshNetworkState() {
+        mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
+        mConnectionDetailPref.setTitle(mAccessPoint.getSettingsSummary());
+    }
+
+    private void refreshRssiViews() {
+        int iconSignalLevel = WifiManager.calculateSignalLevel(
+                mRssi, WifiManager.RSSI_LEVELS);
+        Drawable wifiIcon = NetworkBadging.getWifiIcon(
+                iconSignalLevel, NetworkBadging.BADGING_NONE, mContext.getTheme()).mutate();
+
+        mConnectionDetailPref.setIcon(wifiIcon);
+
+        Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
+        wifiIconDark.setTint(mContext.getResources().getColor(
+                R.color.wifi_details_icon_color, mContext.getTheme()));
+        mSignalStrengthPref.setIcon(wifiIconDark);
+
+        int summarySignalLevel = mAccessPoint.getLevel();
+        mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
     }
 
     private void setIpText() {
@@ -321,5 +374,6 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
             }
         }
+        mFragment.getActivity().finish();
     }
 }
