@@ -34,6 +34,9 @@
         android:icon="@drawable/ic_videogame_vd_theme_24"
         android:order="4" />
     <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_movies"
+        android:title="@string/storage_movies_tv" />
+    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_other_apps"
         android:title="@string/storage_other_apps"
         android:icon="@drawable/ic_apps_vd_theme_24"
