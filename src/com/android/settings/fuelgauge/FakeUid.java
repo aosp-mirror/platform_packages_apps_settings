@@ -266,11 +266,6 @@ public class FakeUid extends Uid {
     }
 
     @Override
-    public long getCpuPowerMaUs(int which) {
-        return 0;
-    }
-
-    @Override
     public BatteryStats.ControllerActivityCounter getWifiControllerActivity() {
         return null;
     }
