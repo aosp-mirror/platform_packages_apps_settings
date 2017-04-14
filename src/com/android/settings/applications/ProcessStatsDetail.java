@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.applications.AppHeaderController.ActionType;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -57,8 +59,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.android.settings.applications.AppHeaderController.ActionType;
 
 public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
@@ -137,7 +137,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                 ? mApp.mUiTargetApp.uid
                 : UserHandle.USER_NULL)
             .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
-            .done(getPrefContext());
+            .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

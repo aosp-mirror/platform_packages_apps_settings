@@ -49,7 +49,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 /** These settings are per app, so should not be returned in global search results. */
 public class AppNotificationSettings extends NotificationSettingsBase {
@@ -109,8 +108,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             }
         }.execute();
 
-        final Preference pref = FeatureFactory.getFactory(getActivity())
-                .getApplicationFeatureProvider(getActivity())
+        final Activity activity = getActivity();
+        final Preference pref = FeatureFactory.getFactory(activity)
+                .getApplicationFeatureProvider(activity)
                 .newAppHeaderController(this /* fragment */, null /* appHeader */)
                 .setIcon(mAppRow.icon)
                 .setLabel(mAppRow.label)
@@ -118,7 +118,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 .setUid(mAppRow.uid)
                 .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
                         AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                .done(getPrefContext());
+                .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
 
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
