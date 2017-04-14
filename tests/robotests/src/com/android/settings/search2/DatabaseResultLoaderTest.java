@@ -59,6 +59,7 @@ public class DatabaseResultLoaderTest {
     private SiteMapManager mSiteMapManager;
     private Context mContext;
     private DatabaseResultLoader loader;
+    private ResultPayload mResultPayload;
 
     private final String titleOne = "titleOne";
     private final String titleTwo = "titleTwo";
@@ -74,6 +75,7 @@ public class DatabaseResultLoaderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mResultPayload = new ResultPayload(new Intent());
         FakeFeatureFactory.setupForTest(mMockContext);
         FakeFeatureFactory factory =
                 (FakeFeatureFactory) FakeFeatureFactory.getFactory(mMockContext);
@@ -215,12 +217,11 @@ public class DatabaseResultLoaderTest {
     public void testDeDupe_noDuplicates_originalListReturn() {
         // Three elements with unique titles and summaries
         List<SearchResult> results = new ArrayList();
-        IntentPayload intentPayload = new IntentPayload(new Intent());
 
         SearchResult.Builder builder = new SearchResult.Builder();
         builder.addTitle(titleOne)
                 .addSummary(summaryOne)
-                .addPayload(intentPayload);
+                .addPayload(mResultPayload);
         SearchResult resultOne = builder.build();
         results.add(resultOne);
 
@@ -245,13 +246,12 @@ public class DatabaseResultLoaderTest {
     @Test
     public void testDeDupe_oneDuplicate_duplicateRemoved() {
         List<SearchResult> results = new ArrayList();
-        IntentPayload intentPayload = new IntentPayload(new Intent());
 
         SearchResult.Builder builder = new SearchResult.Builder();
         builder.addTitle(titleOne)
                 .addSummary(summaryOne)
                 .addRank(0)
-                .addPayload(intentPayload);
+                .addPayload(mResultPayload);
         SearchResult resultOne = builder.build();
         results.add(resultOne);
 
@@ -278,9 +278,7 @@ public class DatabaseResultLoaderTest {
     @Test
     public void testDeDupe_firstDupeInline_secondDuplicateRemoved() {
         List<SearchResult> results = new ArrayList();
-        InlineSwitchPayload inlinePayload = new InlineSwitchPayload("", 0,
-                null);
-        IntentPayload intentPayload = new IntentPayload(new Intent());
+        InlineSwitchPayload inlinePayload = new InlineSwitchPayload("", 0, null, null);
 
         SearchResult.Builder builder = new SearchResult.Builder();
         // Inline result
@@ -295,7 +293,7 @@ public class DatabaseResultLoaderTest {
         builder.addTitle(titleOne)
                 .addSummary(summaryOne)
                 .addRank(1)
-                .addPayload(intentPayload);
+                .addPayload(mResultPayload);
         SearchResult resultTwo = builder.build();
         results.add(resultTwo);
 
@@ -329,23 +327,20 @@ public class DatabaseResultLoaderTest {
          * (1) Intent One
          */
         List<SearchResult> results = new ArrayList();
-        InlineSwitchPayload inlinePayload = new InlineSwitchPayload("", 0,
-                null);
-        IntentPayload intentPayload = new IntentPayload(new Intent());
-
+        InlineSwitchPayload inlinePayload = new InlineSwitchPayload("", 0, null, null);
 
         SearchResult.Builder builder = new SearchResult.Builder();
         // Intent One
         builder.addTitle(titleOne)
                 .addSummary(summaryOne)
-                .addPayload(intentPayload);
+                .addPayload(mResultPayload);
         SearchResult resultOne = builder.build();
         results.add(resultOne);
 
         // Intent Two
         builder.addTitle(titleTwo)
                 .addSummary(summaryTwo)
-                .addPayload(intentPayload);
+                .addPayload(mResultPayload);
         SearchResult resultTwo = builder.build();
         results.add(resultTwo);
 
@@ -365,7 +360,7 @@ public class DatabaseResultLoaderTest {
         // Intent Four
         builder.addTitle(titleFour)
                 .addSummary(summaryOne)
-                .addPayload(intentPayload);
+                .addPayload(mResultPayload);
         SearchResult resultFive = builder.build();
         results.add(resultFive);
 
@@ -395,6 +390,7 @@ public class DatabaseResultLoaderTest {
     private void insertSpecialCase(String specialCase) {
         String normalized = DatabaseIndexingUtils.normalizeHyphen(specialCase);
         normalized = DatabaseIndexingUtils.normalizeString(normalized);
+        final ResultPayload payload = new ResultPayload(new Intent());
 
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, normalized.hashCode());
@@ -419,12 +415,14 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
-        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, (String) null);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, ResultPayloadUtils.marshall(payload));
 
         mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
     }
 
     private void setUpDb() {
+        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(new Intent()));
+
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.LOCALE, "en-us");
@@ -448,7 +446,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
-        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, (String) null);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, payload);
 
         mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
 
@@ -475,7 +473,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
-        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, (String) null);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, payload);
         mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
 
         values = new ContentValues();
@@ -501,7 +499,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
-        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, (String) null);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, payload);
 
         mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.search2;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,10 +29,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.IntentSearchViewHolder;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -105,7 +101,7 @@ public class IntentSearchViewHolderTest {
         verify(mFragment).startActivity(any(Intent.class));
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
-                eq(((IntentPayload)result.payload).intent.getComponent().flattenToString()),
+                eq(((ResultPayload)result.payload).getIntent().getComponent().flattenToString()),
                 any(Pair.class));
     }
 
@@ -113,7 +109,7 @@ public class IntentSearchViewHolderTest {
     public void testBindViewElements_emptySummary_hideSummaryView() {
         final SearchResult result = new Builder().addTitle(TITLE)
                 .addRank(1)
-                .addPayload(new IntentPayload(null))
+                .addPayload(new ResultPayload(null))
                 .addIcon(mIcon)
                 .build();
 
@@ -129,7 +125,7 @@ public class IntentSearchViewHolderTest {
         breadcrumbs.add("c");
         final SearchResult result = new Builder().addTitle(TITLE)
                 .addRank(1)
-                .addPayload(new IntentPayload(null))
+                .addPayload(new ResultPayload(null))
                 .addBreadcrumbs(breadcrumbs)
                 .addIcon(mIcon)
                 .build();
@@ -144,7 +140,7 @@ public class IntentSearchViewHolderTest {
         builder.addTitle(TITLE)
                 .addSummary(SUMMARY)
                 .addRank(1)
-                .addPayload(new IntentPayload(
+                .addPayload(new ResultPayload(
                         new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
                 .addIcon(mIcon);

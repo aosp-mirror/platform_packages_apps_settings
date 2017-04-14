@@ -19,15 +19,20 @@ package com.android.settings.search2;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.Indexable;
 
@@ -56,6 +61,18 @@ public class DatabaseIndexingUtils {
 
     private static final Pattern REMOVE_DIACRITICALS_PATTERN
             = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+
+    /**
+     * Builds intent into a subsetting.
+     */
+    public static Intent buildSubsettingIntent(Context context, String className, String key,
+            String screenTitle) {
+        final Bundle args = new Bundle();
+        args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
+        return Utils.onBuildStartFragmentIntent(context,
+                className, args, null, 0, screenTitle, false,
+                MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
+    }
 
     /**
      * @param className which wil provide the map between from {@link Uri}s to

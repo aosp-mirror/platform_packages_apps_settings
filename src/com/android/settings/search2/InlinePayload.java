@@ -16,6 +16,8 @@
 
 package com.android.settings.search2;
 
+import android.content.Intent;
+
 /**
  * Abstract Payload for inline settings results.
  */
@@ -35,7 +37,9 @@ public abstract class InlinePayload extends ResultPayload {
      */
     @SettingsSource public int settingSource;
 
-    public InlinePayload(String uri, @PayloadType int type, @SettingsSource int source) {
+    public InlinePayload(String uri, @PayloadType int type, @SettingsSource int source,
+            Intent intent) {
+        super(intent);
         settingsUri = uri;
         inlineType = type;
         settingSource = source;

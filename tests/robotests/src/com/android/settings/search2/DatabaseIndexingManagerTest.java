@@ -225,7 +225,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
@@ -319,7 +322,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
@@ -401,7 +407,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
@@ -455,7 +464,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
@@ -509,7 +521,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     // Tests for the flow: IndexOneResource -> IndexFromProvider -> IndexFromResource ->
@@ -578,7 +593,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
@@ -643,7 +661,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
@@ -880,7 +901,10 @@ public class DatabaseIndexingManagerTest {
         // Payload Type - default is 0
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload
-        assertThat(cursor.getBlob(20)).isNull();
+        byte[] payload = cursor.getBlob(20);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+                ResultPayload.CREATOR);
+        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test

@@ -34,7 +34,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
@@ -98,7 +97,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchR
                         .addTitle(info.loadLabel(pm))
                         .addRank(getRank(wordDiff))
                         .addBreadcrumbs(getBreadCrumb())
-                        .addPayload(new IntentPayload(intent));
+                        .addPayload(new ResultPayload(intent));
                 results.add(builder.build());
             }
         }

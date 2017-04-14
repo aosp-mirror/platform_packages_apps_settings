@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.search2;
 
 import android.content.Intent;
 import android.os.Parcel;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.IntentPayload;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -31,8 +30,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class IntentPayloadTest {
-    private IntentPayload mPayload;
+public class ResultPayloadTest {
+    private ResultPayload mPayload;
 
     private final String EXTRA_KEY = "key";
     private final String EXTRA_VALUE = "value";
@@ -43,14 +42,14 @@ public class IntentPayloadTest {
         intent.putExtra(EXTRA_KEY, EXTRA_VALUE);
         Parcel parcel = Parcel.obtain();
 
-        mPayload = new IntentPayload(intent);
+        mPayload = new ResultPayload(intent);
         mPayload.writeToParcel(parcel, 0);
         // Reset parcel for reading
         parcel.setDataPosition(0);
-        IntentPayload newPayload = IntentPayload.CREATOR.createFromParcel(parcel);
+        ResultPayload newPayload = ResultPayload.CREATOR.createFromParcel(parcel);
 
-        String originalIntentExtra = mPayload.intent.getStringExtra(EXTRA_KEY);
-        String copiedIntentExtra = newPayload.intent.getStringExtra(EXTRA_KEY);
+        String originalIntentExtra = mPayload.getIntent().getStringExtra(EXTRA_KEY);
+        String copiedIntentExtra = newPayload.getIntent().getStringExtra(EXTRA_KEY);
         assertThat(originalIntentExtra).isEqualTo(copiedIntentExtra);
     }
 }

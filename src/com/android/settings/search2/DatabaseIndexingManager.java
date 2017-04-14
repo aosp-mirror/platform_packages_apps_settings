@@ -17,6 +17,7 @@
 
 package com.android.settings.search2;
 
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -39,6 +40,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.Indexable;
@@ -927,7 +929,7 @@ public class DatabaseIndexingManager {
                 .setNormalizedSummaryOff(normalizedSummaryOff)
                 .setSpaceDelimitedKeywords(spaceDelimitedKeywords);
 
-        updateOneRow(database, builder.build());
+        updateOneRow(database, builder.build(mContext));
     }
 
     private void updateOneRow(SQLiteDatabase database, DatabaseRow row) {
@@ -1212,7 +1214,45 @@ public class DatabaseIndexingManager {
                 return this;
             }
 
-            public DatabaseRow build() {
+            /**
+             * Adds intent to inline payloads, or creates an Intent Payload as a fallback if the
+             * payload is null.
+             */
+            private void setIntent(Context context) {
+                if (mPayload != null) {
+                    return;
+                }
+                final Intent intent = buildIntent(context);
+                mPayload = new ResultPayload(intent);
+                mPayloadType = ResultPayload.PayloadType.INTENT;
+            }
+
+            /**
+             * Adds Intent payload to builder.
+             */
+            private Intent buildIntent(Context context) {
+                final Intent intent;
+
+                if (TextUtils.isEmpty(mIntentAction)) {
+                    // Action is null, we will launch it as a sub-setting
+                    intent = DatabaseIndexingUtils.buildSubsettingIntent(context, mClassName, mKey,
+                            mScreenTitle);
+                } else {
+                    intent = new Intent(mIntentAction);
+                    final String targetClass = mIntentTargetClass;
+                    if (!TextUtils.isEmpty(mIntentTargetPackage)
+                            && !TextUtils.isEmpty(targetClass)) {
+                        final ComponentName component = new ComponentName(mIntentTargetPackage,
+                                targetClass);
+                        intent.setComponent(component);
+                    }
+                    intent.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, mKey);
+                }
+                return intent;
+            }
+
+            public DatabaseRow build(Context context) {
+                setIntent(context);
                 return new DatabaseRow(this);
             }
         }

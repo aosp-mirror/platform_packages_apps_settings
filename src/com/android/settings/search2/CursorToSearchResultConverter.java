@@ -17,21 +17,15 @@
 
 package com.android.settings.search2;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.BadParcelableException;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 import com.android.settings.dashboard.SiteMapManager;
 
 import java.util.ArrayList;
@@ -46,9 +40,6 @@ import java.util.Set;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_CLASS_NAME;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ICON;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ID;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION;
-import static com.android.settings.search2.DatabaseResultLoader
-        .COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS;
 import static com.android.settings.search2.DatabaseResultLoader
         .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_KEY;
@@ -132,7 +123,6 @@ class CursorToSearchResultConverter {
         mKeys.add(docId);
 
         final String pkgName = cursor.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
-        final String action = cursor.getString(COLUMN_INDEX_INTENT_ACTION);
         final String title = cursor.getString(COLUMN_INDEX_TITLE);
         final String summaryOn = cursor.getString(COLUMN_INDEX_SUMMARY_ON);
         final String className = cursor.getString(COLUMN_INDEX_CLASS_NAME);
@@ -140,16 +130,7 @@ class CursorToSearchResultConverter {
         final String iconResStr = cursor.getString(COLUMN_INDEX_ICON);
         final int payloadType = cursor.getInt(COLUMN_INDEX_PAYLOAD_TYPE);
         final byte[] marshalledPayload = cursor.getBlob(COLUMN_INDEX_PAYLOAD);
-        final ResultPayload payload;
-
-        if (marshalledPayload != null) {
-            payload = getUnmarshalledPayload(marshalledPayload, payloadType);
-        } else if (payloadType == ResultPayload.PayloadType.INTENT) {
-            payload = getIntentPayload(cursor, action, key, className, pkgName);
-        } else {
-            Log.w(TAG, "Error creating payload - bad marshalling data or mismatched types");
-            return null;
-        }
+        final ResultPayload payload = getUnmarshalledPayload(marshalledPayload, payloadType);
 
         final List<String> breadcrumbs = getBreadcrumbs(sitemapManager, cursor);
         final int rank = getRank(title, breadcrumbs, baseRank, key);
@@ -196,34 +177,12 @@ class CursorToSearchResultConverter {
         return icon;
     }
 
-    private IntentPayload getIntentPayload(Cursor cursor, String action, String key,
-            String className, String pkgName ) {
-        IntentPayload payload;
-        if (TextUtils.isEmpty(action)) {
-            final String screenTitle = cursor.getString(COLUMN_INDEX_SCREEN_TITLE);
-            // Action is null, we will launch it as a sub-setting
-            final Bundle args = new Bundle();
-            args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
-            final Intent intent = Utils.onBuildStartFragmentIntent(mContext,
-                    className, args, null, 0, screenTitle, false,
-                    MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
-            payload = new IntentPayload(intent);
-        } else {
-            final Intent intent = new Intent(action);
-            final String targetClass = cursor.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS);
-            if (!TextUtils.isEmpty(pkgName) && !TextUtils.isEmpty(targetClass)) {
-                final ComponentName component = new ComponentName(pkgName, targetClass);
-                intent.setComponent(component);
-            }
-            intent.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
-            payload = new IntentPayload(intent);
-        }
-        return payload;
-    }
-
     private ResultPayload getUnmarshalledPayload(byte[] unmarshalledPayload, int payloadType) {
         try {
             switch (payloadType) {
+                case ResultPayload.PayloadType.INTENT:
+                    return ResultPayloadUtils.unmarshall(unmarshalledPayload,
+                            ResultPayload.CREATOR);
                 case ResultPayload.PayloadType.INLINE_SWITCH:
                     return ResultPayloadUtils.unmarshall(unmarshalledPayload,
                             InlineSwitchPayload.CREATOR);
@@ -269,5 +228,4 @@ class CursorToSearchResultConverter {
         }
         return baseRank;
     }
-
 }

@@ -17,6 +17,8 @@
 package com.android.settings.search2;
 
 import android.annotation.IntDef;
+import android.content.Intent;
+import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.lang.annotation.Retention;
@@ -26,14 +28,15 @@ import java.lang.annotation.RetentionPolicy;
  * A interface for search results types. Examples include Inline results, third party apps
  * or any future possibilities.
  */
-public abstract class ResultPayload implements Parcelable {
+public class ResultPayload implements Parcelable {
+    protected final Intent mIntent;
 
     @IntDef({PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH,
             PayloadType.INTENT, PayloadType.SAVED_QUERY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PayloadType {
         /**
-         * Resulting page will be started using an intent
+         * Resulting page will be started using an mIntent
          */
         int INTENT = 0;
 
@@ -64,6 +67,42 @@ public abstract class ResultPayload implements Parcelable {
     }
 
 
+    private ResultPayload(Parcel in) {
+        mIntent = in.readParcelable(ResultPayload.class.getClassLoader());
+    }
+
+    public ResultPayload(Intent intent) {
+        mIntent = intent;
+    }
+
     @ResultPayload.PayloadType
-    public abstract int getType();
+    public int getType() {
+        return PayloadType.INTENT;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(mIntent, flags);
+    }
+
+    public static final Creator<ResultPayload> CREATOR = new Creator<ResultPayload>() {
+        @Override
+        public ResultPayload createFromParcel(Parcel in) {
+            return new ResultPayload(in);
+        }
+
+        @Override
+        public ResultPayload[] newArray(int size) {
+            return new ResultPayload[size];
+        }
+    };
+
+    public Intent getIntent() {
+        return mIntent;
+    }
 }

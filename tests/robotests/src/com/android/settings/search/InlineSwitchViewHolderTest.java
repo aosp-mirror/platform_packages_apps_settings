@@ -117,7 +117,7 @@ public class InlineSwitchViewHolderTest {
         builder.addTitle(TITLE)
                 .addSummary(SUMMARY)
                 .addRank(1)
-                .addPayload(new InlineSwitchPayload("", 0, null))
+                .addPayload(new InlineSwitchPayload("", 0, null, null))
                 .addBreadcrumbs(new ArrayList<>())
                 .addIcon(mIcon)
                 .addPayload(mPayload);

@@ -18,12 +18,12 @@
 package com.android.settings.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.ResultPayload;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
@@ -57,7 +57,7 @@ public class SearchResultBuilderTest {
         mSummary = "summary";
         mBreadcrumbs = new ArrayList<>();
         mRank = 3;
-        mResultPayload = new IntentPayload(null);
+        mResultPayload = new ResultPayload(new Intent());
 
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         mIcon = context.getDrawable(R.drawable.ic_search_history);

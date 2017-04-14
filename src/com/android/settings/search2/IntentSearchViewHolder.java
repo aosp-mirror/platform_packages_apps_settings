@@ -40,7 +40,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
 
         itemView.setOnClickListener(v -> {
             fragment.onSearchResultClicked();
-            final Intent intent = ((IntentPayload) result.payload).intent;
+            final Intent intent = result.payload.getIntent();
             final ComponentName cn = intent.getComponent();
             final Pair<Integer, Object> rank = Pair.create(
                     MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK, getAdapterPosition());
