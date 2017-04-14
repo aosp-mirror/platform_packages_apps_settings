@@ -440,6 +440,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         if (mHelpUri != null && getActivity() != null) {
             HelpUtils.prepareHelpMenuItem(getActivity(), menu, mHelpUri, getClass().getName());
         }
