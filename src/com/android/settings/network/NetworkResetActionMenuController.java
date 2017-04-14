@@ -17,9 +17,6 @@
 package com.android.settings.network;
 
 import android.content.Context;
-import android.os.UserHandle;
-import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,15 +24,16 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.ResetNetwork;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
 
 public class NetworkResetActionMenuController {
 
     private static final int MENU_NETWORK_RESET = Menu.FIRST + 200;
     private final Context mContext;
+    private final NetworkResetRestrictionChecker mRestrictionChecker;
 
     public NetworkResetActionMenuController(Context context) {
         mContext = context;
+        mRestrictionChecker = new NetworkResetRestrictionChecker(context);
     }
 
     public void buildMenuItem(Menu menu) {
@@ -53,14 +51,8 @@ public class NetworkResetActionMenuController {
         }
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+
     boolean isAvailable() {
-        return isAvailable(mContext);
+        return !mRestrictionChecker.hasRestriction();
     }
-
-    static boolean isAvailable(Context context) {
-        return !RestrictedLockUtils.hasBaseUserRestriction(context,
-                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-    }
-
 }

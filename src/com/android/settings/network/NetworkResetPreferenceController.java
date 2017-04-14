@@ -22,13 +22,16 @@ import com.android.settings.core.PreferenceController;
 
 public class NetworkResetPreferenceController extends PreferenceController {
 
+    private final NetworkResetRestrictionChecker mRestrictionChecker;
+
     public NetworkResetPreferenceController(Context context) {
         super(context);
+        mRestrictionChecker = new NetworkResetRestrictionChecker(context);
     }
 
     @Override
     public boolean isAvailable() {
-        return NetworkResetActionMenuController.isAvailable(mContext);
+        return !mRestrictionChecker.hasRestriction();
     }
 
     @Override
