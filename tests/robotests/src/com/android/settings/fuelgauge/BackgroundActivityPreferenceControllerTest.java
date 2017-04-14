@@ -23,7 +23,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v14.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,9 +33,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,17 +59,18 @@ public class BackgroundActivityPreferenceControllerTest {
     @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
-    private SwitchPreference mPreference;
-    @Mock
     private ApplicationInfo mHighApplicationInfo;
     @Mock
     private ApplicationInfo mLowApplicationInfo;
     private BackgroundActivityPreferenceController mController;
+    private SwitchPreference mPreference;
+    private Context mShadowContext;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
+        mShadowContext = RuntimeEnvironment.application;
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getSystemService(Context.APP_OPS_SERVICE)).thenReturn(mAppOpsManager);
         when(mPackageManager.getPackagesForUid(UID_NORMAL)).thenReturn(PACKAGES_NORMAL);
@@ -77,7 +83,8 @@ public class BackgroundActivityPreferenceControllerTest {
         mHighApplicationInfo.targetSdkVersion = Build.VERSION_CODES.O;
         mLowApplicationInfo.targetSdkVersion = Build.VERSION_CODES.L;
 
-        mController = new BackgroundActivityPreferenceController(mContext, UID_NORMAL);
+        mPreference = new SwitchPreference(mShadowContext);
+        mController = spy(new BackgroundActivityPreferenceController(mContext, UID_NORMAL));
         mController.isAvailable();
     }
 
@@ -87,14 +94,16 @@ public class BackgroundActivityPreferenceControllerTest {
 
         verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL,
                 mController.getTargetPackage(), AppOpsManager.MODE_ALLOWED);
+        verify(mController).updateSummary(mPreference);
     }
 
     @Test
     public void testOnPreferenceChange_TurnOffCheck_MethodInvoked() {
-        mController.onPreferenceChange(null, false);
+        mController.onPreferenceChange(mPreference, false);
 
         verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL,
                 mController.getTargetPackage(), AppOpsManager.MODE_IGNORED);
+        verify(mController).updateSummary(mPreference);
     }
 
     @Test
@@ -105,7 +114,8 @@ public class BackgroundActivityPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setChecked(true);
+        assertThat(mPreference.isChecked()).isTrue();
+        verify(mController).updateSummary(mPreference);
     }
 
     @Test
@@ -116,7 +126,46 @@ public class BackgroundActivityPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setChecked(false);
+        assertThat(mPreference.isChecked()).isFalse();
+        verify(mController).updateSummary(mPreference);
+    }
+
+    @Test
+    public void testUpdateSummary_modeError_showSummaryDisabled() {
+        when(mAppOpsManager
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL, LOW_SDK_PACKAGE))
+                .thenReturn(AppOpsManager.MODE_ERRORED);
+        final CharSequence expectedSummary = mShadowContext.getText(
+                R.string.background_activity_summary_disabled);
+        mController.updateSummary(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void testUpdateSummary_modeDefault_showSummaryOn() {
+        when(mAppOpsManager
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL, LOW_SDK_PACKAGE))
+                .thenReturn(AppOpsManager.MODE_DEFAULT);
+        final CharSequence expectedSummary = mShadowContext.getText(
+                R.string.background_activity_summary_on);
+
+        mController.updateSummary(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void testUpdateSummary_modeIgnored_showSummaryOff() {
+        when(mAppOpsManager
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_NORMAL, LOW_SDK_PACKAGE))
+                .thenReturn(AppOpsManager.MODE_IGNORED);
+        final CharSequence expectedSummary = mShadowContext.getText(
+                R.string.background_activity_summary_off);
+
+        mController.updateSummary(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo(expectedSummary);
     }
 
     @Test
@@ -144,6 +193,6 @@ public class BackgroundActivityPreferenceControllerTest {
 
         assertThat(available).isTrue();
         // Should get status from LOW_SDK_PACKAGE
-        verify(mPreference).setChecked(true);
+        assertThat(mPreference.isChecked()).isTrue();
     }
 }

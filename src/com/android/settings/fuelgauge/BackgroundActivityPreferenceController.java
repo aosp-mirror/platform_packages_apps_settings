@@ -55,16 +55,14 @@ public class BackgroundActivityPreferenceController extends PreferenceController
     public void updateState(Preference preference) {
         final int mode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage);
-
         if (mode == AppOpsManager.MODE_ERRORED) {
             preference.setEnabled(false);
-            preference.setSummary(R.string.background_activity_summary_disabled);
         } else {
             final boolean checked = mode != AppOpsManager.MODE_IGNORED;
             ((SwitchPreference) preference).setChecked(checked);
-            preference.setSummary(checked ? R.string.background_activity_summary_on
-                    : R.string.background_activity_summary_off);
         }
+
+        updateSummary(preference);
     }
 
     @Override
@@ -92,6 +90,8 @@ public class BackgroundActivityPreferenceController extends PreferenceController
         boolean switchOn = (Boolean) newValue;
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage,
                 switchOn ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
+
+        updateSummary(preference);
         return true;
     }
 
@@ -112,5 +112,19 @@ public class BackgroundActivityPreferenceController extends PreferenceController
         }
 
         return false;
+    }
+
+    @VisibleForTesting
+    void updateSummary(Preference preference) {
+        final int mode = mAppOpsManager
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage);
+
+        if (mode == AppOpsManager.MODE_ERRORED) {
+            preference.setSummary(R.string.background_activity_summary_disabled);
+        } else {
+            final boolean checked = mode != AppOpsManager.MODE_IGNORED;
+            preference.setSummary(checked ? R.string.background_activity_summary_on
+                    : R.string.background_activity_summary_off);
+        }
     }
 }
