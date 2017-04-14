@@ -24,6 +24,7 @@ import android.content.pm.ResolveInfo;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
 
+import android.support.annotation.VisibleForTesting;
 import com.android.internal.app.AssistUtils;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
@@ -56,13 +57,10 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
         if (services == null || services.isEmpty()) {
             return null;
         }
-        final ResolveInfo resolveInfo = services.get(0);
-        final VoiceInteractionServiceInfo voiceInfo =
-                new VoiceInteractionServiceInfo(pm, resolveInfo.serviceInfo);
-        if (!voiceInfo.getSupportsAssist()) {
+        final String activity = getAssistSettingsActivity(cn, services.get(0), pm);
+        if (activity == null) {
             return null;
         }
-        final String activity = voiceInfo.getSettingsActivity();
         return new Intent(Intent.ACTION_MAIN)
                 .setComponent(new ComponentName(cn.getPackageName(), activity));
     }
@@ -84,5 +82,15 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
             return null;
         }
         return new DefaultAppInfo(mPackageManager, mUserId, cn);
+    }
+
+    @VisibleForTesting
+    String getAssistSettingsActivity(ComponentName cn, ResolveInfo resolveInfo, PackageManager pm) {
+        final VoiceInteractionServiceInfo voiceInfo =
+            new VoiceInteractionServiceInfo(pm, resolveInfo.serviceInfo);
+        if (!voiceInfo.getSupportsAssist()) {
+            return null;
+        }
+        return voiceInfo.getSettingsActivity();
     }
 }
