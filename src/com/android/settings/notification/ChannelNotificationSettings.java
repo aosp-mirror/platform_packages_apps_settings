@@ -175,9 +175,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mRingtone.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Uri ringtone = Uri.parse((String) newValue);
-                mRingtone.setRingtone(ringtone);
-                mChannel.setSound(ringtone, mChannel.getAudioAttributes());
+                mChannel.setSound((Uri) newValue, mChannel.getAudioAttributes());
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_SOUND);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return false;
@@ -238,7 +236,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mImportance.setEntryValues(values.toArray(new String[0]));
         mImportance.setEntries(summaries.toArray(new String[0]));
         mImportance.setValue(String.valueOf(mChannel.getImportance()));
-        mImportance.setSummary("%s");
+        mImportance.setSummary(getImportanceSummary(mChannel.getImportance()));
         if (mAppRow.lockedImportance) {
             mImportance.setEnabled(false);
         } else {
