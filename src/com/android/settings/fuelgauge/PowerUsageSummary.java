@@ -683,22 +683,28 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
         private final Context mContext;
         private final SummaryLoader mLoader;
+        private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                // TODO: Listen.
+            mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
+            mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
                 BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
                     @Override
                     public void onBatteryInfoLoaded(BatteryInfo info) {
                         mLoader.setSummary(SummaryProvider.this, info.chargeLabelString);
                     }
                 });
+            });
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                mBatteryBroadcastReceiver.register();
+            } else {
+                mBatteryBroadcastReceiver.unRegister();
             }
         }
     }
