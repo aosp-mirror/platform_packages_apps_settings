@@ -16,20 +16,28 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+import android.os.Bundle;
+import android.view.Menu;
+import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -42,6 +50,9 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsActivityTest {
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
+
     @Mock
     private FragmentManager mFragmentManager;
     @Mock
@@ -50,9 +61,14 @@ public class SettingsActivityTest {
     private Bitmap mBitmap;
     private SettingsActivity mActivity;
 
+    private FakeFeatureFactory mFeatureFactory;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
 
         mActivity = spy(new SettingsActivity());
         doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
@@ -61,7 +77,6 @@ public class SettingsActivityTest {
     @Test
     public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash()
             throws ClassNotFoundException {
-        mActivity = spy(new SettingsActivity());
         when(mActivity.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 
@@ -75,5 +90,52 @@ public class SettingsActivityTest {
         mActivity.setTaskDescription(mTaskDescription);
 
         verify(mTaskDescription).setIcon(any());
+    }
+
+    @Test
+    public void testCreateOptionsMenu_setsUpSearch() {
+        ReflectionHelpers.setField(mActivity, "mSearchFeatureProvider",
+                mFeatureFactory.getSearchFeatureProvider());
+        mActivity.mDisplaySearch = true;
+        mActivity.onCreateOptionsMenu(null);
+
+        verify(mFeatureFactory.getSearchFeatureProvider()).setUpSearchMenu(any(Menu.class),
+                any(Activity.class));
+    }
+
+    @Test
+    public void testSaveState_DisplaySearchSaved() {
+        mActivity.mDisplaySearch = true;
+        Bundle bundle = new Bundle();
+        mActivity.saveState(bundle);
+
+        assertThat((boolean) bundle.get(SettingsActivity.SAVE_KEY_SHOW_SEARCH)).isTrue();
+    }
+
+    @Test
+    public void testSaveState_EnabledHomeSaved() {
+        mActivity.mDisplayHomeAsUpEnabled = true;
+        Bundle bundle = new Bundle();
+        mActivity.saveState(bundle);
+
+        assertThat((boolean) bundle.get(SettingsActivity.SAVE_KEY_SHOW_HOME_AS_UP)).isTrue();
+    }
+
+    @Test
+    public void testRestoreState_DisplaySearchRestored() {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(SettingsActivity.SAVE_KEY_SHOW_SEARCH, true);
+        mActivity.onRestoreInstanceState(bundle);
+
+        assertThat(mActivity.mDisplaySearch).isTrue();
+    }
+
+    @Test
+    public void testRestoreState_EnabledHomeRestored() {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(SettingsActivity.SAVE_KEY_SHOW_SEARCH, true);
+        mActivity.onRestoreInstanceState(bundle);
+
+        assertThat(mActivity.mDisplaySearch).isTrue();
     }
 }
