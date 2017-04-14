@@ -51,6 +51,7 @@ public class MasterClearConfirm extends OptionsMenuFragment {
 
     private View mContentView;
     private boolean mEraseSdCard;
+    private boolean mEraseEsims;
 
     /**
      * The user has gone through the multiple confirmation, so now we go ahead
@@ -125,6 +126,7 @@ public class MasterClearConfirm extends OptionsMenuFragment {
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
         intent.putExtra(Intent.EXTRA_WIPE_EXTERNAL_STORAGE, mEraseSdCard);
+        intent.putExtra(Intent.EXTRA_WIPE_ESIMS, mEraseEsims);
         getActivity().sendBroadcast(intent);
         // Intent handling is asynchronous -- assume it will happen soon.
     }
@@ -175,6 +177,8 @@ public class MasterClearConfirm extends OptionsMenuFragment {
         Bundle args = getArguments();
         mEraseSdCard = args != null
                 && args.getBoolean(MasterClear.ERASE_EXTERNAL_EXTRA);
+        mEraseEsims = args != null
+                && args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
     }
 
     @Override
