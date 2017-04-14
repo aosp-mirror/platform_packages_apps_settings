@@ -172,7 +172,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mUsageListGroup.removeAll();
         for (int i = 0, size = dataList.size(); i < size; i++) {
             final PowerUsageData batteryData = dataList.get(i);
-            if (shouldHide(batteryData)) {
+            if (shouldHideCategory(batteryData)) {
                 continue;
             }
             final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext());
@@ -217,7 +217,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @VisibleForTesting
-    boolean shouldHide(PowerUsageData powerUsageData) {
+    boolean shouldHideCategory(PowerUsageData powerUsageData) {
         if (powerUsageData.usageType == UsageType.UNACCOUNTED
                 || powerUsageData.usageType == UsageType.OVERCOUNTED) {
             return true;
@@ -264,6 +264,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @VisibleForTesting
     void updateUsageDataSummary(PowerUsageData usageData, double totalPower, int dischargeAmount) {
+        if (shouldHideSummary(usageData)) {
+            return;
+        }
         if (usageData.usageList.size() <= 1) {
             usageData.summary = getString(R.string.battery_used_for,
                     Utils.formatElapsedTime(getContext(), usageData.totalUsageTimeMs, false));
@@ -275,6 +278,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             usageData.summary = getString(R.string.battery_used_by,
                     Utils.formatPercentage(percentage, true), batteryEntry.name);
         }
+    }
+
+    @VisibleForTesting
+    boolean shouldHideSummary(PowerUsageData powerUsageData) {
+        @UsageType final int usageType = powerUsageData.usageType;
+
+        return usageType == UsageType.CELL;
     }
 
     @VisibleForTesting
