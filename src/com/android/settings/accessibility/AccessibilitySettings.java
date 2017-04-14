@@ -31,6 +31,7 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -76,11 +77,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_AUDIO_AND_CAPTIONS = "audio_and_captions_category";
     private static final String CATEGORY_DISPLAY = "display_category";
     private static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
+    private static final String CATEGORY_EXPERIMENTAL = "experimental_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
 
     private static final String[] CATEGORIES = new String[] {
         CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
-        CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
+        CATEGORY_INTERACTION_CONTROL, CATEGORY_EXPERIMENTAL, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Preferences
@@ -454,9 +456,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     new RestrictedPreference(downloadedServicesCategory.getContext());
             String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
-            Drawable icon = info.getResolveInfo().loadIcon(getPackageManager());
-            if (icon == null) {
-                // todo (saigem): add a default
+            Drawable icon;
+            if (info.getResolveInfo().getIconResource() == 0) {
+                icon = ContextCompat.getDrawable(getContext(), R.mipmap.ic_accessibility_generic);
+            } else {
+                icon = info.getResolveInfo().loadIcon(getPackageManager());
             }
 
             ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
