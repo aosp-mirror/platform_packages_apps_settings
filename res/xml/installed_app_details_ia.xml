@@ -52,6 +52,11 @@
         android:summary="@string/summary_placeholder"
         android:selectable="true"/>
 
+    <com.android.settings.applications.AppDomainsPreference
+        android:key="instant_app_launch_supported_domain_urls"
+        android:title="@string/app_launch_supported_domain_urls_title"
+        android:selectable="true" />
+
     <Preference
         android:key="data_settings"
         android:title="@string/data_usage_summary_title"
