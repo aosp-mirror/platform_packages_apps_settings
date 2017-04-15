@@ -110,6 +110,13 @@ public class AppStorageSizesController {
         mCachedCleared = isCleared;
     }
 
+    /**
+     * Returns the last result calculated, if it exists. If it does not, returns null.
+     */
+    public StorageStatsSource.AppStorageStats getLastResult() {
+        return mLastResult;
+    }
+
     private String getSizeStr(Context context, long size) {
         return Formatter.formatFileSize(context, size);
     }
