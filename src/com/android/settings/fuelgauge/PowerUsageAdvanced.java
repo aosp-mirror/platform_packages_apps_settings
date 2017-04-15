@@ -227,6 +227,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @VisibleForTesting
+    boolean shouldShowBatterySipper(BatterySipper batterySipper) {
+        return batterySipper.drainType != DrainType.SCREEN;
+    }
+
+    @VisibleForTesting
     List<PowerUsageData> parsePowerUsageData(BatteryStatsHelper statusHelper) {
         final List<BatterySipper> batterySippers = statusHelper.getUsageList();
         final Map<Integer, PowerUsageData> batteryDataMap = new HashMap<>();
@@ -245,7 +250,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                         BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, STATUS_TYPE);
             }
             usageData.totalUsageTimeMs += sipper.usageTimeMs;
-            usageData.usageList.add(sipper);
+            if (shouldShowBatterySipper(sipper)) {
+                usageData.usageList.add(sipper);
+            }
         }
 
         final List<PowerUsageData> batteryDataList = new ArrayList<>(batteryDataMap.values());

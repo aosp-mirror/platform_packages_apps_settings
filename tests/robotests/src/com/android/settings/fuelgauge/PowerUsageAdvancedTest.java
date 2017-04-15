@@ -260,4 +260,18 @@ public class PowerUsageAdvancedTest {
         assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isFalse();
     }
 
+    @Test
+    public void testShouldShowBatterySipper_typeScreen_returnFalse() {
+        mNormalBatterySipper.drainType = DrainType.SCREEN;
+
+        assertThat(mPowerUsageAdvanced.shouldShowBatterySipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testShouldShowBatterySipper_typeNormal_returnTrue() {
+        mNormalBatterySipper.drainType = DrainType.APP;
+
+        assertThat(mPowerUsageAdvanced.shouldShowBatterySipper(mNormalBatterySipper)).isTrue();
+    }
+
 }
