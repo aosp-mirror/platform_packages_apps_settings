@@ -2645,6 +2645,10 @@
                 android:value="true" />
         </activity>
 
+        <!-- Confirmation dialog for enabling notification access from CompanionDeviceManager -->
+        <activity android:name=".notification.NotificationAccessConfirmationActivity"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
