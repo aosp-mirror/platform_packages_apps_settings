@@ -47,6 +47,7 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.style.URLSpan;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -604,7 +605,9 @@ public class FingerprintSettings extends SubSettings {
 
         private void renameFingerPrint(int fingerId, String newName) {
             mFingerprintManager.rename(fingerId, mUserId, newName);
-            mFingerprintsRenaming.put(fingerId, newName);
+            if (!TextUtils.isEmpty(newName)) {
+                mFingerprintsRenaming.put(fingerId, newName);
+            }
             updatePreferences();
         }
 
