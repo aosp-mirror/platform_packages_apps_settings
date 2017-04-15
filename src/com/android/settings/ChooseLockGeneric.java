@@ -129,6 +129,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mHideDrawer = false;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
         private boolean mIsSetNewPassword = false;
+        private UserManager mUserManager;
 
         protected boolean mForFingerprint = false;
 
@@ -166,6 +167,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
+            mUserManager = UserManager.get(getActivity());
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -751,11 +753,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
                 mFingerprintManager.setActiveUser(UserHandle.myUserId());
             }
-            final UserManager um = UserManager.get(getActivity());
             boolean hasChildProfile = false;
-            if (!um.getUserInfo(parentUserId).isManagedProfile()) {
+            if (!mUserManager.getUserInfo(parentUserId).isManagedProfile()) {
                 // Current user is primary profile, remove work profile fingerprints if necessary
-                final List<UserInfo> profiles = um.getProfiles(parentUserId);
+                final List<UserInfo> profiles = mUserManager.getProfiles(parentUserId);
                 final int profilesSize = profiles.size();
                 for (int i = 0; i < profilesSize; i++) {
                     final UserInfo userInfo = profiles.get(i);
