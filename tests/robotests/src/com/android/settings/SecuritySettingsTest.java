@@ -101,24 +101,7 @@ public class SecuritySettingsTest {
     }
 
     @Test
-    @Config(shadows = {
-            ShadowSecureSettings.class,
-    })
-    public void testSummaryProvider_packageVerifierDisabled() {
-        // Package verifier state is set to disabled.
-        ShadowSecureSettings.putInt(null, Settings.Secure.PACKAGE_VERIFIER_STATE, -1);
-        mSummaryProvider.setListening(true);
-
-        verify(mSummaryLoader, times(1)).setSummary(any(), isNull(String.class));
-    }
-
-    @Test
-    @Config(shadows = {
-            ShadowSecureSettings.class,
-    })
     public void testSummaryProvider_hasFingerPrint_hasStaticSummary() {
-        // Package verifier state is set to disabled.
-        ShadowSecureSettings.putInt(null, Settings.Secure.PACKAGE_VERIFIER_STATE, -1);
         final FingerprintManager fpm = mock(FingerprintManager.class);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(true);
@@ -133,37 +116,29 @@ public class SecuritySettingsTest {
     }
 
     @Test
-    public void testGetPackageVerifierSummary_nullInput() {
-        assertThat(mSummaryProvider.getPackageVerifierSummary(null)).isNull();
+    public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoFingerprint() {
+        final FingerprintManager fpm = mock(FingerprintManager.class);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+            .thenReturn(false);
 
-        when(mDashboardCategory.getTilesCount()).thenReturn(0);
+        mSummaryProvider.setListening(true);
 
-        assertThat(mSummaryProvider.getPackageVerifierSummary(mDashboardCategory)).isNull();
+        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
     }
 
     @Test
-    public void testGetPackageVerifierSummary_noMatchingTile() {
-        when(mDashboardCategory.getTilesCount()).thenReturn(1);
-        when(mDashboardCategory.getTile(0)).thenReturn(new Tile());
+    public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoFingerprint() {
+        final FingerprintManager fpm = mock(FingerprintManager.class);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+            .thenReturn(true);
 
-        assertThat(mSummaryProvider.getPackageVerifierSummary(mDashboardCategory)).isNull();
-    }
+        // Cast to Object to workaround a robolectric casting bug
+        when((Object) mContext.getSystemService(FingerprintManager.class)).thenReturn(fpm);
+        when(fpm.isHardwareDetected()).thenReturn(false);
 
-    @Test
-    @Config(shadows = {
-            ShadowTileUtils.class,
-    })
-    public void testGetPackageVerifierSummary_matchingTile() {
-        when(mDashboardCategory.getTilesCount()).thenReturn(1);
-        Tile tile = new Tile();
-        tile.key = SecuritySettings.KEY_PACKAGE_VERIFIER_STATUS;
-        Bundle bundle = new Bundle();
-        bundle.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, "content://host/path");
-        tile.metaData = bundle;
-        when(mDashboardCategory.getTile(0)).thenReturn(tile);
+        mSummaryProvider.setListening(true);
 
-        assertThat(mSummaryProvider.getPackageVerifierSummary(mDashboardCategory))
-                .isEqualTo(MOCK_SUMMARY);
+        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
     }
 
     @Test
