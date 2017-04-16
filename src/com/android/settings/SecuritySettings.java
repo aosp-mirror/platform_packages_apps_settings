@@ -1227,54 +1227,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         @Override
         public void setListening(boolean listening) {
-            if (!listening) {
-                return;
-            }
-            int packageVerifierState = Settings.Secure.getInt(mContext.getContentResolver(),
-                    Settings.Secure.PACKAGE_VERIFIER_STATE, 0);
-            DashboardFeatureProvider dashboardFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
-            if (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED) {
-                // Calling the feature provider could potentially be slow, so do this on a separate
-                // thread so as to not block the loading of Settings.
-                Executors.newSingleThreadExecutor().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        DashboardCategory dashboardCategory =
-                                dashboardFeatureProvider.getTilesForCategory(
-                                        CategoryKey.CATEGORY_SECURITY);
-                        mSummaryLoader.setSummary(SummaryProvider.this,
-                                getPackageVerifierSummary(dashboardCategory));
-                    }
-                });
-            } else {
-                final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(mContext);
+            if (listening) {
+                final FingerprintManager fpm =
+                    Utils.getFingerprintManagerOrNull(mContext);
                 if (fpm != null && fpm.isHardwareDetected()) {
                     mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.security_dashboard_summary));
+                        mContext.getString(R.string.security_dashboard_summary));
                 } else {
-                    mSummaryLoader.setSummary(this, null);
+                    mSummaryLoader.setSummary(this, mContext.getString(
+                        R.string.security_dashboard_summary_no_fingerprint));
                 }
             }
-        }
-
-        @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-        String getPackageVerifierSummary(DashboardCategory dashboardCategory) {
-            int tilesCount = (dashboardCategory != null) ? dashboardCategory.getTilesCount() : 0;
-            if (tilesCount == 0) {
-                return null;
-            }
-            for (int i = 0; i < tilesCount; i++) {
-                Tile tile = dashboardCategory.getTile(i);
-                if (!KEY_PACKAGE_VERIFIER_STATUS.equals(tile.key)) {
-                    continue;
-                }
-                String summaryUri = tile.metaData.getString(
-                        TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
-                return TileUtils.getTextFromUri(mContext, summaryUri,
-                        new ArrayMap<>(), TileUtils.META_DATA_PREFERENCE_SUMMARY);
-            }
-            return null;
         }
     }
 
