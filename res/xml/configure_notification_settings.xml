@@ -18,6 +18,10 @@
                   android:title="@string/configure_notification_settings"
                   android:key="configure_notification_settings">
 
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"
+        android:order="1"/>
+
     <!-- Pulse notification light -->
     <SwitchPreference
         android:key="notification_pulse"
