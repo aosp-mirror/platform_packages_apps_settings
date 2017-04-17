@@ -45,9 +45,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
 
     protected BatteryStatsHelper mStatsHelper;
     protected UserManager mUm;
-
-    private String mBatteryLevel;
-    private String mBatteryStatus;
+    private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
 
     @Override
     public void onAttach(Activity activity) {
@@ -61,6 +59,13 @@ public abstract class PowerUsageBase extends DashboardFragment {
         super.onCreate(icicle);
         mStatsHelper.create(icicle);
         setHasOptionsMenu(true);
+
+        mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
+        mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
+            if (!mHandler.hasMessages(MSG_REFRESH_STATS)) {
+                mHandler.sendEmptyMessageDelayed(MSG_REFRESH_STATS, 500);
+            }
+        });
     }
 
     @Override
@@ -73,8 +78,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     public void onResume() {
         super.onResume();
         BatteryStatsHelper.dropFile(getActivity(), BatteryHistoryDetail.BATTERY_HISTORY_FILE);
-        updateBatteryStatus(getActivity().registerReceiver(mBatteryInfoReceiver,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
+        mBatteryBroadcastReceiver.register();
         if (mHandler.hasMessages(MSG_REFRESH_STATS)) {
             mHandler.removeMessages(MSG_REFRESH_STATS);
             mStatsHelper.clearStats();
@@ -84,7 +88,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mBatteryInfoReceiver);
+        mBatteryBroadcastReceiver.unRegister();
     }
 
     @Override
@@ -109,20 +113,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
         historyPref.setStats(mStatsHelper);
     }
 
-    private boolean updateBatteryStatus(Intent intent) {
-        if (intent != null) {
-            String batteryLevel = com.android.settings.Utils.getBatteryPercentage(intent);
-            String batteryStatus = com.android.settings.Utils.getBatteryStatus(getResources(),
-                    intent);
-            if (!batteryLevel.equals(mBatteryLevel) || !batteryStatus.equals(mBatteryStatus)) {
-                mBatteryLevel = batteryLevel;
-                mBatteryStatus = batteryStatus;
-                return true;
-            }
-        }
-        return false;
-    }
-
     static final int MSG_REFRESH_STATS = 100;
 
     private final Handler mHandler = new Handler() {
@@ -133,19 +123,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
                     mStatsHelper.clearStats();
                     refreshStats();
                     break;
-            }
-        }
-    };
-
-    private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (Intent.ACTION_BATTERY_CHANGED.equals(action)
-                    && updateBatteryStatus(intent)) {
-                if (!mHandler.hasMessages(MSG_REFRESH_STATS)) {
-                    mHandler.sendEmptyMessageDelayed(MSG_REFRESH_STATS, 500);
-                }
             }
         }
     };
