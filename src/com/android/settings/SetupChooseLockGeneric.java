@@ -17,10 +17,8 @@
 package com.android.settings;
 
 import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -120,12 +118,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                 data.putExtra(EXTRA_PASSWORD_QUALITY,
                         lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
 
-                PackageManager packageManager = getPackageManager();
-                ComponentName componentName = new ComponentName("com.android.settings",
-                        "com.android.settings.SetupRedactionInterstitial");
-                packageManager.setComponentEnabledSetting(componentName,
-                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                        PackageManager.DONT_KILL_APP);
                 super.onActivityResult(requestCode, resultCode, data);
             }
             // If the started activity was cancelled (e.g. the user presses back), then this
