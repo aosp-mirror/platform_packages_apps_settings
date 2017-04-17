@@ -16,8 +16,9 @@
 
 package com.android.settings.applications;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.Manifest.permission;
-import android.annotation.IdRes;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -114,8 +115,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -413,12 +412,13 @@ public class InstalledAppDetails extends AppInfoBase
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
         mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
         FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
-            .setPackageName(mPackageName)
-            .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
-                AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
-            .bindAppHeaderButtons();
+                .getApplicationFeatureProvider(activity)
+                .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
+                .setPackageName(mPackageName)
+                .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
+                        AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
+                .styleActionBar(activity)
+                .bindAppHeaderButtons();
         prepareUninstallAndStop();
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
@@ -590,7 +590,7 @@ public class InstalledAppDetails extends AppInfoBase
             .setIcon(mAppEntry)
             .setSummary(summary)
             .setIsInstantApp(isInstantApp)
-            .done(false /* rebindActions */);
+            .done(activity, false /* rebindActions */);
         mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
     }
 

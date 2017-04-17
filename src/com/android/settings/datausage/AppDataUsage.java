@@ -14,6 +14,8 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -57,8 +59,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -353,7 +353,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             .setUid(uid)
             .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
                 AppHeaderController.ActionType.ACTION_NONE)
-            .done(getPrefContext());
+            .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

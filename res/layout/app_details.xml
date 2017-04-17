@@ -17,30 +17,24 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/app_snippet"
-    style="@style/EntityHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal|top"
-    android:orientation="vertical"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingTop="24dp"
-    android:paddingBottom="24dp"
-    android:clipChildren="false"
-    android:clipToPadding="false">
+    android:orientation="vertical">
 
     <!-- App snippet with buttons -->
     <RelativeLayout
+        android:id="@+id/app_snippet"
+        style="@style/EntityHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:clipChildren="false"
-        android:clipToPadding="false">
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="0dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
 
         <FrameLayout android:id="@+id/app_icon_frame"
-                     android:layout_width="80dp"
-                     android:layout_height="80dp"
+                     android:layout_width="56dp"
+                     android:layout_height="56dp"
                      android:clipChildren="false"
                      android:clipToPadding="false">
             <ImageView
@@ -54,8 +48,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="8dp"
-                android:visibility="gone"
+                android:layout_margin="4dp"
                 android:elevation="20dp"
                 android:background="@drawable/ic_instant_apps_badge_bg"
                 android:src="@drawable/ic_instant_apps_badge" />
@@ -70,19 +63,22 @@
 
             <ImageButton
                 android:id="@+id/right_button"
-                style="@android:style/Widget.Material.Button.Borderless"
+                style="?android:attr/actionOverflowButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="0dp"
+                android:minWidth="@dimen/min_tap_target_size"
                 android:src="@drawable/ic_settings_24dp"
                 android:tint="?android:attr/colorAccent"/>
 
             <ImageButton
                 android:id="@+id/left_button"
-                style="@android:style/Widget.Material.Button.Borderless"
+                style="?android:attr/actionOverflowButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="0dp"
+                android:minWidth="@dimen/min_tap_target_size"
+                android:src="@null"
                 android:tint="?android:attr/colorAccent"/>
 
         </LinearLayout>
@@ -130,5 +126,10 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <!-- Drop shadow -->
+    <View android:layout_width="match_parent"
+          android:layout_height="5dp"
+          android:background="@drawable/action_bar_dropshadow"/>
 
 </LinearLayout>
