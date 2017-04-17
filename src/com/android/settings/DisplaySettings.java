@@ -50,6 +50,8 @@ import java.util.List;
 public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
 
+    public static final String KEY_DISPLAY_SIZE = "screen_zoom";
+
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
 
@@ -120,6 +122,13 @@ public class DisplaySettings extends DashboardFragment {
                     sir.xmlResId = R.xml.display_settings;
                     result.add(sir);
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = new ArrayList<>();
+                    keys.add(KEY_DISPLAY_SIZE);
+                    return keys;
                 }
 
                 @Override

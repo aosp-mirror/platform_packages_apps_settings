@@ -31,9 +31,11 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +44,7 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
         Indexable {
 
     // Settings App preference keys
+    private static final String PREFERENCE_TITLE_KEY = "magnification_preference_screen_title";
     private static final String MAGNIFICATION_GESTURES_PREFERENCE_SCREEN_KEY =
             "screen_magnification_gestures_preference_screen";
     private static final String MAGNIFICATION_NAVBAR_PREFERENCE_SCREEN_KEY =
@@ -213,6 +216,13 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
                     } else {
                         return Collections.emptyList();
                     }
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(PREFERENCE_TITLE_KEY);
+                    return keys;
                 }
             };
 }
