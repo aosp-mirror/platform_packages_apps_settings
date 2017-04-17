@@ -17,7 +17,18 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -25,12 +36,12 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.View;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.LayoutPreference;
@@ -46,22 +57,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
@@ -77,6 +76,8 @@ public class AdvancedPowerUsageDetailTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Activity mActivity;
     @Mock
     private AppHeaderController mAppHeaderController;
     @Mock
@@ -85,8 +86,6 @@ public class AdvancedPowerUsageDetailTest {
     private ApplicationsState mState;
     @Mock
     private ApplicationsState.AppEntry mAppEntry;
-    @Mock
-    private Drawable mIconDrawable;
     @Mock
     private Bundle mBundle;
     @Mock
@@ -111,6 +110,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment = spy(new AdvancedPowerUsageDetail());
         doReturn(mContext).when(mFragment).getContext();
+        doReturn(mActivity).when(mFragment).getActivity();
         doReturn(SUMMARY).when(mFragment).getString(anyInt());
         doReturn(APP_LABEL).when(mBundle).getString(anyString());
         doReturn(mBundle).when(mFragment).getArguments();

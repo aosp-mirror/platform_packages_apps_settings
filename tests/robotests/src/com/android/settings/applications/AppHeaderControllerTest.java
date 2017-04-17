@@ -17,6 +17,15 @@
 package com.android.settings.applications;
 
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -24,6 +33,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
@@ -34,7 +44,6 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,14 +54,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppHeaderControllerTest {
@@ -60,11 +61,9 @@ public class AppHeaderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private ApplicationsState.AppEntry mAppEntry;
+    private Activity mActivity;
     @Mock
     private Fragment mFragment;
-    @Mock
-    private View mAppHeader;
 
     private Context mShadowContext;
     private LayoutInflater mLayoutInflater;
@@ -85,7 +84,7 @@ public class AppHeaderControllerTest {
     @Test
     public void testBuildView_constructedWithoutView_shouldCreateNewView() {
         mController = new AppHeaderController(mShadowContext, mFragment, null);
-        View view = mController.done();
+        View view = mController.done(mActivity);
 
         assertThat(view).isNotNull();
     }
@@ -93,7 +92,7 @@ public class AppHeaderControllerTest {
     @Test
     public void testBuildView_withContext_shouldBuildPreference() {
         mController = new AppHeaderController(mShadowContext, mFragment, null);
-        Preference preference = mController.done(mShadowContext);
+        Preference preference = mController.done(mActivity, mShadowContext);
 
         assertThat(preference instanceof LayoutPreference).isTrue();
     }
@@ -102,7 +101,7 @@ public class AppHeaderControllerTest {
     public void testBuildView_constructedWithView_shouldReturnSameView() {
         View inputView = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         mController = new AppHeaderController(mShadowContext, mFragment, inputView);
-        View view = mController.done();
+        View view = mController.done(mActivity);
 
         assertThat(view).isSameAs(inputView);
     }
@@ -111,14 +110,14 @@ public class AppHeaderControllerTest {
     public void bindViews_shouldBindAllData() {
         final String testString = "test";
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
-        final TextView label = (TextView) appHeader.findViewById(R.id.app_detail_title);
-        final TextView version = (TextView) appHeader.findViewById(R.id.app_detail_summary);
+        final TextView label = appHeader.findViewById(R.id.app_detail_title);
+        final TextView version = appHeader.findViewById(R.id.app_detail_summary);
 
         mController = new AppHeaderController(mShadowContext, mFragment, appHeader);
         mController.setLabel(testString);
         mController.setSummary(testString);
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(label.getText()).isEqualTo(testString);
         assertThat(version.getText()).isEqualTo(testString);
@@ -139,7 +138,7 @@ public class AppHeaderControllerTest {
         mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
                 AppHeaderController.ActionType.ACTION_NONE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.VISIBLE);
@@ -164,7 +163,7 @@ public class AppHeaderControllerTest {
         mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
                 AppHeaderController.ActionType.ACTION_NONE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.GONE);
@@ -183,7 +182,7 @@ public class AppHeaderControllerTest {
         mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
                 AppHeaderController.ActionType.ACTION_NONE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.GONE);
@@ -201,7 +200,7 @@ public class AppHeaderControllerTest {
                 .setButtonActions(
                         AppHeaderController.ActionType.ACTION_APP_INFO,
                         AppHeaderController.ActionType.ACTION_NONE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.GONE);
@@ -221,7 +220,7 @@ public class AppHeaderControllerTest {
                 .setButtonActions(
                         AppHeaderController.ActionType.ACTION_APP_INFO,
                         AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.VISIBLE);
@@ -242,7 +241,7 @@ public class AppHeaderControllerTest {
                 .setButtonActions(
                         AppHeaderController.ActionType.ACTION_APP_INFO,
                         AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getContentDescription())
                 .isEqualTo("App Info");
@@ -258,7 +257,7 @@ public class AppHeaderControllerTest {
                 .setButtonActions(
                         AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                         AppHeaderController.ActionType.ACTION_NONE);
-        mController.done();
+        mController.done(mActivity);
 
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.VISIBLE);
@@ -272,7 +271,7 @@ public class AppHeaderControllerTest {
     public void instantApps_normalAppsDontGetLabel() {
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
-        mController.done();
+        mController.done(mActivity);
         assertThat(appHeader.findViewById(R.id.install_type).getVisibility())
                 .isEqualTo(View.GONE);
     }
@@ -283,7 +282,7 @@ public class AppHeaderControllerTest {
     public void instantApps_normalAppsDontGetInstantAppsBadge() {
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
-        mController.done();
+        mController.done(mActivity);
         assertThat(appHeader.findViewById(R.id.app_icon_instant_apps_badge).getVisibility())
                 .isEqualTo(View.GONE);
     }
@@ -294,8 +293,8 @@ public class AppHeaderControllerTest {
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
         mController.setIsInstantApp(true);
-        mController.done();
-        TextView label = (TextView)appHeader.findViewById(R.id.install_type);
+        mController.done(mActivity);
+        TextView label = appHeader.findViewById(R.id.install_type);
         ImageView badgeView = appHeader.findViewById(R.id.app_icon_instant_apps_badge);
         assertThat(badgeView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(label.getVisibility()).isEqualTo(View.VISIBLE);
@@ -304,6 +303,29 @@ public class AppHeaderControllerTest {
         assertThat(appHeader.findViewById(R.id.app_detail_summary).getVisibility())
                 .isEqualTo(View.GONE);
     }
+
+    @Test
+    public void styleActionBar_invalidObjects_shouldNotCrash() {
+        mController = new AppHeaderController(mShadowContext, mFragment, null);
+        mController.styleActionBar(null);
+
+        when(mActivity.getActionBar()).thenReturn(null);
+        mController.styleActionBar(mActivity);
+
+        verify(mActivity).getActionBar();
+    }
+
+    @Test
+    public void styleActionBar_setElevationAndBackground() {
+        final ActionBar actionBar = mActivity.getActionBar();
+
+        mController = new AppHeaderController(mShadowContext, mFragment, null);
+        mController.styleActionBar(mActivity);
+
+        verify(actionBar).setElevation(0);
+        verify(actionBar).setBackgroundDrawable(any(Drawable.class));
+    }
+
 
     @Test
     public void initAppHeaderController_appHeaderNull_useFragmentContext() {

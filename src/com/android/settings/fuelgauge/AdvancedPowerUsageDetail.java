@@ -17,16 +17,12 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
@@ -179,7 +175,7 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
     @VisibleForTesting
     void initHeader() {
         final View appSnippet = mHeaderPreference.findViewById(R.id.app_snippet);
-        final Context context = getContext();
+        final Activity context = getActivity();
         final Bundle bundle = getArguments();
         AppHeaderController controller = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context)
@@ -203,7 +199,7 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
             controller.setSummary(getString(Utils.getInstallationStatus(mAppEntry.info)));
         }
 
-        controller.done(true /* rebindActions */);
+        controller.done(context, true /* rebindActions */);
     }
 
     @Override

@@ -21,6 +21,7 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -111,8 +112,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             setupBlockAndImportance();
             updateDependents();
         }
-        final Preference pref = FeatureFactory.getFactory(getActivity())
-                .getApplicationFeatureProvider(getActivity())
+        final Activity activity = getActivity();
+        final Preference pref = FeatureFactory.getFactory(activity)
+                .getApplicationFeatureProvider(activity)
                 .newAppHeaderController(this /* fragment */, null /* appHeader */)
                 .setIcon(mAppRow.icon)
                 .setLabel(mChannel.getName())
@@ -121,7 +123,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 .setUid(mAppRow.uid)
                 .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
                         AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                .done(getPrefContext());
+                .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
 
         if (mAppRow.settingsIntent != null) {
