@@ -16,7 +16,11 @@
 
 package com.android.settings.notification;
 
-import android.app.admin.DevicePolicyManager;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +30,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,17 +37,12 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.RestrictedCheckBox;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
-
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class RedactionInterstitial extends SettingsActivity {
 
@@ -128,6 +126,7 @@ public class RedactionInterstitial extends SettingsActivity {
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.redaction_done_button) {
+                SetupRedactionInterstitial.setEnabled(getContext(), false);
                 final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
                 if (activity != null) {
                     activity.setResult(RESULT_OK, null);
