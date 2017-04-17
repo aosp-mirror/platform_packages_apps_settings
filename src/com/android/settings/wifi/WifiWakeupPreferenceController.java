@@ -26,6 +26,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import com.android.settings.R;
 
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
@@ -97,10 +98,20 @@ public class WifiWakeupPreferenceController extends PreferenceController impleme
             return;
         }
         final SwitchPreference enableWifiWakeup = (SwitchPreference) preference;
+
         enableWifiWakeup.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1);
-        enableWifiWakeup.setEnabled(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1);
+
+        boolean wifiScanningEnabled = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        boolean networkRecommendationsEnabled = Settings.Global.getInt(
+                mContext.getContentResolver(),
+                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
+        enableWifiWakeup.setEnabled(networkRecommendationsEnabled && wifiScanningEnabled);
+
+        enableWifiWakeup.setSummary(wifiScanningEnabled ?
+                R.string.wifi_wakeup_summary :
+                R.string.wifi_wakeup_summary_scanning_disabled);
     }
 
     class SettingObserver extends ContentObserver {
