@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import android.annotation.NonNull;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.UserHandle;
 import android.util.Log;
 
@@ -26,6 +27,8 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+
+import java.io.IOException;
 
 /**
  * Fetches the storage stats using the StorageStatsManager for a given package and user tuple.
@@ -49,7 +52,7 @@ public class FetchPackageStorageAsyncLoader extends AsyncLoader<AppStorageStats>
         AppStorageStats result = null;
         try {
             result = mSource.getStatsForPackage(mInfo.volumeUuid, mInfo.packageName, mUser);
-        } catch (IllegalStateException e) {
+        } catch (NameNotFoundException | IOException e) {
             Log.w(TAG, "Package may have been removed during query, failing gracefully", e);
         }
         return result;

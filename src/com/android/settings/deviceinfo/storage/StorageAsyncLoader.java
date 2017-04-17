@@ -23,6 +23,7 @@ import static android.content.pm.ApplicationInfo.CATEGORY_VIDEO;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -32,6 +33,7 @@ import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -83,7 +85,7 @@ public class StorageAsyncLoader
             StorageStatsSource.AppStorageStats stats;
             try {
                 stats = mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
-            } catch (IllegalStateException e) {
+            } catch (NameNotFoundException | IOException e) {
                 // This may happen if the package was removed during our calculation.
                 Log.w("App unexpectedly not found", e);
                 continue;
@@ -122,7 +124,11 @@ public class StorageAsyncLoader
         }
 
         Log.d(TAG, "Loading external stats");
-        result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(userId));
+        try {
+            result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(userId));
+        } catch (IOException e) {
+            Log.w(TAG, e);
+        }
         Log.d(TAG, "Obtaining result completed");
         return result;
     }
