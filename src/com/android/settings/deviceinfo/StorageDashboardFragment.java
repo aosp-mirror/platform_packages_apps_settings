@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -78,16 +79,15 @@ public class StorageDashboardFragment extends DashboardFragment
         super.onCreate(icicle);
 
         // Initialize the storage sizes that we can quickly calc.
-        final Context context = getActivity();
-        StorageManager sm = context.getSystemService(StorageManager.class);
+        final Activity activity = getActivity();
+        StorageManager sm = activity.getSystemService(StorageManager.class);
         mVolume = Utils.maybeInitializeVolume(sm, getArguments());
         if (mVolume == null) {
-            getActivity().finish();
+            activity.finish();
             return;
         }
 
-        mOptionMenuController = new PrivateVolumeOptionMenuController(
-                context, mVolume, new PackageManagerWrapperImpl(context.getPackageManager()));
+        initializeOptionsMenu(activity);
 
         final long sharedDataSize = mVolume.getPath().getTotalSpace();
         long totalSize = sm.getPrimaryStorageSize();
@@ -112,6 +112,15 @@ public class StorageDashboardFragment extends DashboardFragment
 
             }
         }
+    }
+
+    @VisibleForTesting
+    void initializeOptionsMenu(Activity activity) {
+        mOptionMenuController = new PrivateVolumeOptionMenuController(
+                activity, mVolume, new PackageManagerWrapperImpl(activity.getPackageManager()));
+        getLifecycle().addObserver(mOptionMenuController);
+        setHasOptionsMenu(true);
+        activity.invalidateOptionsMenu();
     }
 
     @Override
@@ -156,7 +165,6 @@ public class StorageDashboardFragment extends DashboardFragment
                 new AutomaticStorageManagementSwitchPreferenceController(
                         context, mMetricsFeatureProvider, getFragmentManager());
         getLifecycle().addObserver(asmController);
-        getLifecycle().addObserver(mOptionMenuController);
         controllers.add(asmController);
         return controllers;
     }
