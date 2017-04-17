@@ -194,8 +194,8 @@ public class StorageAsyncLoaderTest {
         // Should not crash.
     }
 
-    private ApplicationInfo addPackage(
-            String packageName, long cacheSize, long codeSize, long dataSize, int category) {
+    private ApplicationInfo addPackage(String packageName, long cacheSize, long codeSize,
+            long dataSize, int category) throws Exception {
         StorageStatsSource.AppStorageStats storageStats =
                 mock(StorageStatsSource.AppStorageStats.class);
         when(storageStats.getCodeBytes()).thenReturn(codeSize);
