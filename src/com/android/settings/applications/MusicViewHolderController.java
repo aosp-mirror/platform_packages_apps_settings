@@ -23,15 +23,20 @@ import android.os.UserHandle;
 import android.provider.DocumentsContract;
 import android.support.annotation.WorkerThread;
 import android.text.format.Formatter;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.applications.StorageStatsSource;
 
+import java.io.IOException;
+
 /**
  * MusicViewHolderController controls an Audio/Music file view in the ManageApplications view.
  */
 public class MusicViewHolderController implements FileViewHolderController {
+    private static final String TAG = "MusicViewHolderController";
+
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
     private Context mContext;
@@ -51,7 +56,12 @@ public class MusicViewHolderController implements FileViewHolderController {
     @Override
     @WorkerThread
     public void queryStats() {
-        mMusicSize = mSource.getExternalStorageStats(mVolumeUuid, mUser).audioBytes;
+        try {
+            mMusicSize = mSource.getExternalStorageStats(mVolumeUuid, mUser).audioBytes;
+        } catch (IOException e) {
+            mMusicSize = 0;
+            Log.w(TAG, e);
+        }
     }
 
     @Override
