@@ -59,7 +59,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementDetails;
@@ -126,7 +125,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     private int mItemPoolIndex;
 
     private Preference mExplore;
-    private Preference mAutomaticStorageManagement;
 
     private boolean mNeedsUpdate;
 
@@ -185,7 +183,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mCurrentUser = mUserManager.getUserInfo(UserHandle.myUserId());
 
         mExplore = buildAction(R.string.storage_menu_explore);
-        mAutomaticStorageManagement = buildAction(R.string.storage_menu_manage);
 
         mNeedsUpdate = true;
 
@@ -212,9 +209,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        if (getResources().getBoolean(R.bool.config_storage_manager_settings_enabled)) {
-            addPreference(screen, mAutomaticStorageManagement);
-        }
         addPreference(screen, mSummary);
 
         List<UserInfo> allUsers = mUserManager.getUsers();
@@ -331,6 +325,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private StorageItemPreference buildItem() {
         final StorageItemPreference item = new StorageItemPreference(getPrefContext());
+        item.setIcon(R.drawable.empty_icon);
         return item;
     }
 
@@ -511,11 +506,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             case R.string.storage_menu_explore: {
                 intent = mSharedVolume.buildBrowseIntent();
             } break;
-            case R.string.storage_menu_manage: {
-                startFragment(this, AutomaticStorageManagerSettings.class.getCanonicalName(),
-                        R.string.automatic_storage_manager_settings, 0, null);
-                return true;
-            }
             case 0: {
                 UserInfoFragment.show(this, pref.getTitle(), pref.getSummary());
                 return true;
