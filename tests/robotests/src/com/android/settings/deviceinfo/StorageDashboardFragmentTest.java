@@ -18,6 +18,10 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import android.app.Activity;
 import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 
@@ -53,6 +57,15 @@ public class StorageDashboardFragmentTest {
     @Test
     public void testCategory_isConnectedDevice() {
         assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_STORAGE);
+    }
+
+    @Test
+    public void test_initializeOptionsMenuInvalidatesExistingMenu() {
+        Activity activity = mock(Activity.class);
+
+        mFragment.initializeOptionsMenu(activity);
+
+        verify(activity).invalidateOptionsMenu();
     }
 
     @Test
