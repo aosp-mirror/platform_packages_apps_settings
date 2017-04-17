@@ -40,6 +40,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FetchPackageStorageAsyncLoaderTest {
@@ -56,7 +58,7 @@ public class FetchPackageStorageAsyncLoaderTest {
     }
 
     @Test
-    public void worksForValidPackageNameAndUid() {
+    public void worksForValidPackageNameAndUid() throws Exception {
         AppStorageStats stats = mock(AppStorageStats.class);
         when(stats.getCodeBytes()).thenReturn(1L);
         when(stats.getDataBytes()).thenReturn(2L);
@@ -72,9 +74,9 @@ public class FetchPackageStorageAsyncLoaderTest {
     }
 
     @Test
-    public void installerExceptionHandledCleanly() {
+    public void installerExceptionHandledCleanly() throws Exception {
         when(mSource.getStatsForPackage(anyString(), anyString(), any(UserHandle.class))).
-                thenThrow(new IllegalStateException("intentional failure"));
+                thenThrow(new IOException("intentional failure"));
         ApplicationInfo info = new ApplicationInfo();
         info.packageName = PACKAGE_NAME;
         FetchPackageStorageAsyncLoader task = new FetchPackageStorageAsyncLoader(

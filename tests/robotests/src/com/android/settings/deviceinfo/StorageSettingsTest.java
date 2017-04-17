@@ -70,7 +70,7 @@ public class StorageSettingsTest {
     }
 
     @Test
-    public void updateSummary_shouldDisplayUsedPercentAndFreeSpace() {
+    public void updateSummary_shouldDisplayUsedPercentAndFreeSpace() throws Exception {
         final SummaryLoader loader = mock(SummaryLoader.class);
         final SummaryLoader.SummaryProvider provider =
                 StorageSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(mActivity, loader);
