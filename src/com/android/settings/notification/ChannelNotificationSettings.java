@@ -22,16 +22,13 @@ import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -44,7 +41,6 @@ import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
@@ -53,9 +49,6 @@ import java.util.List;
 public class ChannelNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "ChannelSettings";
 
-    protected static final String KEY_BYPASS_DND = "bypass_dnd";
-    protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
-    protected static final String KEY_IMPORTANCE = "importance";
     protected static final String KEY_LIGHTS = "lights";
     protected static final String KEY_VIBRATE = "vibrate";
     protected static final String KEY_RINGTONE = "ringtone";
@@ -63,9 +56,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected RestrictedSwitchPreference mLights;
     protected RestrictedSwitchPreference mVibrate;
     protected NotificationSoundPreference mRingtone;
-    protected RestrictedDropDownPreference mImportance;
-    protected RestrictedSwitchPreference mPriority;
-    protected RestrictedDropDownPreference mVisibilityOverride;
 
     @Override
     public int getMetricsCategory() {
@@ -224,7 +214,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         final int numImportances = IMPORTANCE_HIGH - IMPORTANCE_MIN + 1;
         List<String> summaries = new ArrayList<>();
         List<String> values = new ArrayList<>();
-        ;
+
         for (int i = 0; i < numImportances; i++) {
             int importance = i + 1;
             summaries.add(getImportanceSummary(importance));
@@ -254,105 +244,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 }
             });
         }
-    }
-
-    protected void setupPriorityPref(boolean priority) {
-        mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mPriority.setChecked(priority);
-        mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean bypassZenMode = (Boolean) newValue;
-                mChannel.setBypassDnd(bypassZenMode);
-                mChannel.lockFields(NotificationChannel.USER_LOCKED_PRIORITY);
-                mBackend.updateChannel(mPkg, mUid, mChannel);
-                return true;
-            }
-        });
-    }
-
-    protected void setupVisOverridePref(int sensitive) {
-        ArrayList<CharSequence> entries = new ArrayList<>();
-        ArrayList<CharSequence> values = new ArrayList<>();
-
-        mVisibilityOverride.clearRestrictedItems();
-        if (getLockscreenNotificationsEnabled() && getLockscreenAllowPrivateNotifications()) {
-            final String summaryShowEntry =
-                    getString(R.string.lock_screen_notifications_summary_show);
-            final String summaryShowEntryValue =
-                    Integer.toString(NotificationManager.VISIBILITY_NO_OVERRIDE);
-            entries.add(summaryShowEntry);
-            values.add(summaryShowEntryValue);
-            setRestrictedIfNotificationFeaturesDisabled(summaryShowEntry, summaryShowEntryValue,
-                    DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS
-                            | DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
-        }
-
-        final String summaryHideEntry = getString(R.string.lock_screen_notifications_summary_hide);
-        final String summaryHideEntryValue = Integer.toString(Notification.VISIBILITY_PRIVATE);
-        entries.add(summaryHideEntry);
-        values.add(summaryHideEntryValue);
-        setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
-                DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
-        entries.add(getString(R.string.lock_screen_notifications_summary_disable));
-        values.add(Integer.toString(Notification.VISIBILITY_SECRET));
-        mVisibilityOverride.setEntries(entries.toArray(new CharSequence[entries.size()]));
-        mVisibilityOverride.setEntryValues(values.toArray(new CharSequence[values.size()]));
-
-        if (sensitive == Ranking.VISIBILITY_NO_OVERRIDE) {
-            mVisibilityOverride.setValue(Integer.toString(getGlobalVisibility()));
-        } else {
-            mVisibilityOverride.setValue(Integer.toString(sensitive));
-        }
-        mVisibilityOverride.setSummary("%s");
-
-        mVisibilityOverride.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        int sensitive = Integer.parseInt((String) newValue);
-                        if (sensitive == getGlobalVisibility()) {
-                            sensitive = Ranking.VISIBILITY_NO_OVERRIDE;
-                        }
-                        mChannel.setLockscreenVisibility(sensitive);
-                        mChannel.lockFields(NotificationChannel.USER_LOCKED_VISIBILITY);
-                        mBackend.updateChannel(mPkg, mUid, mChannel);
-                        return true;
-                    }
-                });
-        mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
-    }
-
-    private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
-            CharSequence entryValue, int keyguardNotificationFeatures) {
-        RestrictedLockUtils.EnforcedAdmin admin =
-                RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                        mContext, keyguardNotificationFeatures, mUserId);
-        if (admin != null) {
-            RestrictedDropDownPreference.RestrictedItem item =
-                    new RestrictedDropDownPreference.RestrictedItem(entry, entryValue, admin);
-            mVisibilityOverride.addRestrictedItem(item);
-        }
-    }
-
-    private int getGlobalVisibility() {
-        int globalVis = Ranking.VISIBILITY_NO_OVERRIDE;
-        if (!getLockscreenNotificationsEnabled()) {
-            globalVis = Notification.VISIBILITY_SECRET;
-        } else if (!getLockscreenAllowPrivateNotifications()) {
-            globalVis = Notification.VISIBILITY_PRIVATE;
-        }
-        return globalVis;
-    }
-
-    private boolean getLockscreenNotificationsEnabled() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
-    }
-
-    private boolean getLockscreenAllowPrivateNotifications() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
     private boolean isLockScreenSecure() {
