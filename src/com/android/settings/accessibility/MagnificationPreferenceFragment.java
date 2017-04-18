@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -34,6 +35,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public final class MagnificationPreferenceFragment extends SettingsPreferenceFragment implements
@@ -123,18 +125,7 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
 
     private void handleMagnificationGesturesPreferenceScreenClick() {
         Bundle extras = mMagnificationGesturesPreference.getExtras();
-        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
-        extras.putString(AccessibilitySettings.EXTRA_TITLE, getString(
-                R.string.accessibility_screen_magnification_gestures_title));
-        extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
-                getActivity().getResources().getText(
-                        R.string.accessibility_screen_magnification_summary));
-        extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
-        extras.putInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID,
-                R.raw.accessibility_screen_magnification);
+        populateMagnificationGesturesPreferenceExtras(extras, getContext());
         extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mLaunchedFromSuw);
     }
 
@@ -188,14 +179,40 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
         return null;
     }
 
+    static void populateMagnificationGesturesPreferenceExtras(Bundle extras, Context context) {
+        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        extras.putString(AccessibilitySettings.EXTRA_TITLE, context.getString(
+                R.string.accessibility_screen_magnification_gestures_title));
+        extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY, context.getResources().getText(
+                R.string.accessibility_screen_magnification_summary));
+        extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
+                Settings.Secure.getInt(context.getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
+        extras.putInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID,
+                R.raw.accessibility_screen_magnification);
+    }
+
+    /**
+     * @return {@code true} if this fragment should be shown, {@code false} otherwise. This
+     * fragment is shown in the case that more than one magnification mode is available.
+     */
+    static boolean isApplicable(Resources res) {
+        return res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+    }
+
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.accessibility_magnification_settings;
-                    return Arrays.asList(sir);
+                    if (isApplicable(context.getResources())) {
+                        final SearchIndexableResource sir = new SearchIndexableResource(context);
+                        sir.xmlResId = R.xml.accessibility_magnification_settings;
+                        return Arrays.asList(sir);
+                    } else {
+                        return Collections.emptyList();
+                    }
                 }
             };
 }
