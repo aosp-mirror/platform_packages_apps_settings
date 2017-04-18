@@ -138,7 +138,7 @@
             android:title="@string/wait_for_debugger"
             android:summary="@string/wait_for_debugger_summary"/>
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="verify_apps_over_usb"
             android:title="@string/verify_apps_over_usb_title"
             android:summary="@string/verify_apps_over_usb_summary"/>
