@@ -59,7 +59,7 @@ import android.os.UserManager;
 import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.service.persistentdata.PersistentDataBlockManager;
+import android.service.oemlock.OemLockManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
@@ -238,7 +238,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
-    private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
     private static final String FLASH_LOCKED_PROP = "ro.boot.flash.locked";
 
     private static final String SHORTCUT_MANAGER_RESET_KEY = "reset_shortcut_manager_throttling";
@@ -252,7 +251,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private IWebViewUpdateService mWebViewUpdateService;
     private UserManager mUm;
     private WifiManager mWifiManager;
-    private PersistentDataBlockManager mOemUnlockManager;
+    private OemLockManager mOemLockManager;
     private TelephonyManager mTelephonyManager;
 
     private SwitchBar mSwitchBar;
@@ -383,8 +382,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mWebViewUpdateService = WebViewFactory.getUpdateService();
-        mOemUnlockManager = (PersistentDataBlockManager) getActivity()
-                .getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+        mOemLockManager = (OemLockManager) getSystemService(Context.OEM_LOCK_SERVICE);
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -431,7 +429,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
         mEnableOemUnlock = (RestrictedSwitchPreference) findAndInitSwitchPref(ENABLE_OEM_UNLOCK);
-        if (!showEnableOemUnlockPreference()) {
+        if (!showEnableOemUnlockPreference(getActivity())) {
             removePreference(mEnableOemUnlock);
             mEnableOemUnlock = null;
         }
@@ -1070,18 +1068,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
     }
 
-    private static boolean showEnableOemUnlockPreference() {
-        return !SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("");
+    private static boolean showEnableOemUnlockPreference(Context context) {
+        return context.getSystemService(Context.OEM_LOCK_SERVICE) != null;
     }
 
     private boolean enableOemUnlockPreference() {
-        return !isBootloaderUnlocked() && OemUnlockUtils.isOemUnlockAllowed(mUm);
+        return !isBootloaderUnlocked() && mOemLockManager.canUserAllowOemUnlock();
     }
 
     private void updateOemUnlockOptions() {
         if (mEnableOemUnlock != null) {
-            updateSwitchPreference(mEnableOemUnlock,
-                    OemUnlockUtils.isOemUnlockEnabled(getActivity()));
+            updateSwitchPreference(mEnableOemUnlock, mOemLockManager.isOemUnlockAllowed());
             updateOemUnlockSettingDescription();
             // Showing mEnableOemUnlock preference as device has persistent data block.
             mEnableOemUnlock.setDisabledByAdmin(null);
@@ -2339,7 +2336,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    OemUnlockUtils.setOemUnlockEnabled(getActivity(), true);
+                    mOemLockManager.setOemUnlockAllowedByUser(true);
                 }
             }
         };
@@ -2410,7 +2407,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 if (mEnableOemUnlock.isChecked()) {
                     confirmEnableOemUnlock();
                 } else {
-                    OemUnlockUtils.setOemUnlockEnabled(getActivity(), false);
+                    mOemLockManager.setOemUnlockAllowedByUser(false);
                 }
             }
         } else {
@@ -2480,7 +2477,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     confirmEnableOemUnlock();
                 }
             } else {
-                OemUnlockUtils.setOemUnlockEnabled(getActivity(), false);
+                mOemLockManager.setOemUnlockAllowedByUser(false);
             }
         } else if (preference == mMockLocationAppPref) {
             Intent intent = new Intent(getActivity(), AppPicker.class);
@@ -2821,7 +2818,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     }
 
                     final List<String> keys = new ArrayList<String>();
-                    if (!showEnableOemUnlockPreference()) {
+                    if (!showEnableOemUnlockPreference(context)) {
                         keys.add(ENABLE_OEM_UNLOCK);
                     }
                     return keys;
@@ -2849,11 +2846,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
-            } else if (!OemUnlockUtils.isOemUnlockAllowed(mUm)) {
-                // If the device isn't SIM-locked but OEM unlock is disabled by the system via the
-                // user restriction, this means either some other carrier restriction is in place or
-                // the device hasn't been able to confirm which restrictions (SIM-lock or otherwise)
-                // apply.
+            } else if (!mOemLockManager.canUserAllowOemUnlock()) {
+                // If the device isn't SIM-locked but OEM unlock is disallowed by some party, this
+                // means either some other carrier restriction is in place or the device hasn't been
+                // able to confirm which restrictions (SIM-lock or otherwise) apply.
                 oemUnlockSummary =
                         R.string.oem_unlock_enable_disabled_summary_connectivity_or_locked;
             }
@@ -2876,12 +2872,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
      * Returns {@code true} if the bootloader has been unlocked. Otherwise, returns {code false}.
      */
     private boolean isBootloaderUnlocked() {
-        int flashLockState = PersistentDataBlockManager.FLASH_LOCK_UNKNOWN;
-        if (mOemUnlockManager != null) {
-            flashLockState = mOemUnlockManager.getFlashLockState();
-        }
-
-        return flashLockState == PersistentDataBlockManager.FLASH_LOCK_UNLOCKED;
+        return mOemLockManager.isDeviceOemUnlocked();
     }
 
 

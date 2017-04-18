@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.service.oemlock.OemLockManager;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,12 +68,14 @@ public class MasterClearConfirm extends OptionsMenuFragment {
 
             final PersistentDataBlockManager pdbManager = (PersistentDataBlockManager)
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+            final OemLockManager oemLockManager = (OemLockManager)
+                    getActivity().getSystemService(Context.OEM_LOCK_SERVICE);
 
-            if (pdbManager != null && !pdbManager.getOemUnlockEnabled() &&
+            if (pdbManager != null && !oemLockManager.isOemUnlockAllowed() &&
                     Utils.isDeviceProvisioned(getActivity())) {
-                // if OEM unlock is enabled, this will be wiped during FR process. If disabled, it
-                // will be wiped here, unless the device is still being provisioned, in which case
-                // the persistent data block will be preserved.
+                // if OEM unlock is allowed, the persistent data block will be wiped during FR
+                // process. If disabled, it will be wiped here, unless the device is still being
+                // provisioned, in which case the persistent data block will be preserved.
                 new AsyncTask<Void, Void, Void>() {
                     int mOldOrientation;
                     ProgressDialog mProgressDialog;
