@@ -2,6 +2,7 @@ package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -25,7 +26,19 @@ public class NotificationSoundPreference extends RingtonePreference {
 
     public void setRingtone(Uri ringtone) {
         mRingtone = ringtone;
+        setSummary("\u00A0");
         updateRingtoneName(mRingtone);
+    }
+
+    @Override
+    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+            setRingtone(uri);
+            callChangeListener(uri);
+        }
+
+        return true;
     }
 
     private void updateRingtoneName(final Uri uri) {
