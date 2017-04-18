@@ -218,12 +218,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @VisibleForTesting
     boolean shouldHideCategory(PowerUsageData powerUsageData) {
-        if (powerUsageData.usageType == UsageType.UNACCOUNTED
-                || powerUsageData.usageType == UsageType.OVERCOUNTED) {
-            return true;
-        }
-
-        return false;
+        return powerUsageData.usageType == UsageType.UNACCOUNTED
+                || powerUsageData.usageType == UsageType.OVERCOUNTED
+                || (powerUsageData.usageType == UsageType.USER && mUserManager.getUserCount() == 1);
     }
 
     @VisibleForTesting
@@ -315,6 +312,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @VisibleForTesting
     void setPowerUsageFeatureProvider(PowerUsageFeatureProvider provider) {
         mPowerUsageFeatureProvider = provider;
+    }
+    @VisibleForTesting
+    void setUserManager(UserManager userManager) {
+        mUserManager = userManager;
     }
 
     /**

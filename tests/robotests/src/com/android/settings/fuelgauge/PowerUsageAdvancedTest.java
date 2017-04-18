@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.UserManager;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -75,6 +76,8 @@ public class PowerUsageAdvancedTest {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private UserManager mUserManager;
     private PowerUsageAdvanced mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
@@ -104,6 +107,7 @@ public class PowerUsageAdvancedTest {
         doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any());
         mPowerUsageAdvanced.setPackageManager(mPackageManager);
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
+        mPowerUsageAdvanced.setUserManager(mUserManager);
 
         mPowerUsageData = new PowerUsageData(UsageType.APP);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
@@ -225,18 +229,33 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
-    public void testShouldHide_typeUnAccounted_returnTrue() {
+    public void testShouldHideCategory_typeUnAccounted_returnTrue() {
         mPowerUsageData.usageType = UsageType.UNACCOUNTED;
 
         assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
-
 
     @Test
     public void testShouldHideCategory_typeOverCounted_returnTrue() {
         mPowerUsageData.usageType = UsageType.OVERCOUNTED;
 
         assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideCategory_typeUserAndOnlyOne_returnTrue() {
+        mPowerUsageData.usageType = UsageType.USER;
+        doReturn(1).when(mUserManager).getUserCount();
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideCategory_typeUserAndMoreThanOne_returnFalse() {
+        mPowerUsageData.usageType = UsageType.USER;
+        doReturn(2).when(mUserManager).getUserCount();
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
     }
 
     @Test
