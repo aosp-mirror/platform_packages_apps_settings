@@ -25,7 +25,6 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,13 +55,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
-    }
-
-    private static List<PreferenceController> buildPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SpecialAppAccessPreferenceController(context));
-        return controllers;
+        return null;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -73,11 +66,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.app_and_notification;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
-                    return buildPreferenceControllers(context);
                 }
             };
 }
