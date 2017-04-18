@@ -7057,42 +7057,30 @@
     <!-- Encryption interstitial button to continue with the shown setting.  Appears on screen that asks the user to opt in/out of encrypting device with a pin/pattern/password. [CHAR LIMIT=NONE] -->
     <string name="encryption_continue_button">Continue</string>
 
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin">
-   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=2317181134653424679] -->
+    <string name="encryption_interstitial_message_pin">You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?
    </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern">
-   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=7081249914068568570] -->
+    <string name="encryption_interstitial_message_pattern">You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?
    </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password">
-   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=7796567133897436443] -->
+    <string name="encryption_interstitial_message_password">You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require password to start your device?
    </string>
 
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=4550632760119547492] -->
+    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=932184823193006087] -->
+    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=5560954719370251702] -->
+    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device></string>
 
-    <!-- Radio button text that require a PIN to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_pin">Require PIN to start device</string>
-    <!-- Radio button text that require a pattern to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_pattern">Require pattern to start device</string>
-    <!-- Radio button text that require a password to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_password">Require password to start device</string>
-
-    <!-- Radio button text that doesn't require a PIN to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_pin">No thanks</string>
-    <!-- Radio button text that doesn't require a pattern to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_pattern">No thanks</string>
-    <!-- Radio button text that doesn't require a password to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_password">No thanks</string>
+    <!-- Button label to say yes to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] [BACKUP_MESSAGE_ID=4439509435889513411] -->
+    <string name="encryption_interstitial_yes">Yes</string>
+    <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] [BACKUP_MESSAGE_ID=8935031349097025137] -->
+    <string name="encryption_interstitial_no">No</string>
 
    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
    <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
