@@ -161,7 +161,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     final NotificationChannel channel = channels.get(i);
                     MasterSwitchPreference channelPref = new MasterSwitchPreference(
                             getPrefContext());
-                    channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
+                    channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null && !mAppRow.systemApp);
                     channelPref.setKey(channel.getId());
                     channelPref.setTitle(channel.getName());
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
