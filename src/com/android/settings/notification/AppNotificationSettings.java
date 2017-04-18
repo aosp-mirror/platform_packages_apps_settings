@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
@@ -56,9 +57,13 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_BLOCK = "block";
+    private static final String KEY_IMPORTANCE = "allow_sound";
 
     private List<NotificationChannelGroup> mChannelGroupList;
     private List<PreferenceCategory> mChannelGroups = new ArrayList();
+    private RestrictedSwitchPreference mImportanceToggle;
+
+    private boolean mShowLegacyChannelConfig = false;
 
     @Override
     public int getMetricsCategory() {
@@ -139,6 +144,15 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             empty.setTitle(R.string.no_channels);
             empty.setEnabled(false);
             groupCategory.addPreference(empty);
+
+        } else if (mChannelGroupList.size() == 1 &&
+                mChannelGroupList.get(0).getChannels().get(0).getId()
+                        .equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+            // Legacy app using only default channel. Hoist default channel settings to main panel.
+            mShowLegacyChannelConfig = true;
+            mChannel = mChannelGroupList.get(0).getChannels().get(0);
+            populateDefaultChannelPrefs();
+
         } else {
             for (NotificationChannelGroup group : mChannelGroupList) {
                 PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
@@ -159,39 +173,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 int N = channels.size();
                 for (int i = 0; i < N; i++) {
                     final NotificationChannel channel = channels.get(i);
-                    MasterSwitchPreference channelPref = new MasterSwitchPreference(
-                            getPrefContext());
-                    channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null && !mAppRow.systemApp);
-                    channelPref.setKey(channel.getId());
-                    channelPref.setTitle(channel.getName());
-                    channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
-                    channelPref.setSummary(getImportanceSummary(channel.getImportance()));
-                    Bundle channelArgs = new Bundle();
-                    channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-                    channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
-                    channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                    channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-                    Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                            ChannelNotificationSettings.class.getName(),
-                            channelArgs, null, 0, null, false, getMetricsCategory());
-                    channelPref.setIntent(channelIntent);
-
-                    channelPref.setOnPreferenceChangeListener(
-                            new Preference.OnPreferenceChangeListener() {
-                                @Override
-                                public boolean onPreferenceChange(Preference preference,
-                                        Object o) {
-                                    boolean value = (Boolean) o;
-                                    int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
-                                    channel.setImportance(importance);
-                                    channel.lockFields(
-                                            NotificationChannel.USER_LOCKED_IMPORTANCE);
-                                    mBackend.updateChannel(mPkg, mUid, channel);
-
-                                    return true;
-                                }
-                            });
-                    groupCategory.addPreference(channelPref);
+                    populateSingleChannelPrefs(groupCategory, channel);
                 }
             }
 
@@ -213,6 +195,74 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             }
         }
         updateDependents(mAppRow.banned);
+    }
+
+    private void populateSingleChannelPrefs(PreferenceCategory groupCategory,
+            final NotificationChannel channel) {
+        MasterSwitchPreference channelPref = new MasterSwitchPreference(
+                getPrefContext());
+        channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null && !mAppRow.systemApp);
+        channelPref.setKey(channel.getId());
+        channelPref.setTitle(channel.getName());
+        channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
+        channelPref.setSummary(getImportanceSummary(channel.getImportance()));
+        Bundle channelArgs = new Bundle();
+        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+        channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
+        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
+        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                ChannelNotificationSettings.class.getName(),
+                channelArgs, null, 0, null, false, getMetricsCategory());
+        channelPref.setIntent(channelIntent);
+
+        channelPref.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference,
+                            Object o) {
+                        boolean value = (Boolean) o;
+                        int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
+                        channel.setImportance(importance);
+                        channel.lockFields(
+                                NotificationChannel.USER_LOCKED_IMPORTANCE);
+                        mBackend.updateChannel(mPkg, mUid, channel);
+
+                        return true;
+                    }
+                });
+        groupCategory.addPreference(channelPref);
+    }
+
+    private void populateDefaultChannelPrefs() {
+        addPreferencesFromResource(R.xml.legacy_channel_notification_settings);
+        mPriority =
+                (RestrictedSwitchPreference) findPreference(KEY_BYPASS_DND);
+        mVisibilityOverride =
+                (RestrictedDropDownPreference) findPreference(KEY_VISIBILITY_OVERRIDE);
+        mImportanceToggle = (RestrictedSwitchPreference) findPreference(KEY_IMPORTANCE);
+
+        if (mPkgInfo != null && mChannel != null) {
+            setupPriorityPref(mChannel.canBypassDnd());
+            setupVisOverridePref(mChannel.getLockscreenVisibility());
+            setupImportanceToggle();
+        }
+    }
+
+    private void setupImportanceToggle() {
+        mImportanceToggle.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mImportanceToggle.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT);
+        mImportanceToggle.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final int importance = ((Boolean) newValue ? IMPORTANCE_DEFAULT : IMPORTANCE_LOW);
+                mChannel.setImportance(importance);
+                mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+                mBackend.updateChannel(mPkg, mUid, mChannel);
+                return true;
+            }
+        });
     }
 
     private void setupBadge() {
@@ -254,6 +304,11 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             setVisible(category, !banned);
         }
         setVisible(mBadge, !banned);
+        if (mShowLegacyChannelConfig) {
+            setVisible(mImportanceToggle, !banned);
+            setVisible(mPriority, !banned);
+            setVisible(mVisibilityOverride, !banned);
+        }
         if (mAppRow.systemApp && !mAppRow.banned) {
             setVisible(mBlock, false);
         }
