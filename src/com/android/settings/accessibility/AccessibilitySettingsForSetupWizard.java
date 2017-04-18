@@ -18,9 +18,9 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
@@ -79,6 +79,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
                 findService(SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME));
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
                 findService(SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME));
+        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
     @Override
@@ -144,5 +145,19 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             description = getString(R.string.accessibility_service_default_description);
         }
         extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
+    }
+
+    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
+        // Some devices support only a single magnification mode. In these cases, we redirect to
+        // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
+        // single list item.
+        final Context context = preference.getContext();
+        if (!MagnificationPreferenceFragment.isApplicable(context.getResources())) {
+            preference.setFragment(
+                    ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
+            final Bundle extras = preference.getExtras();
+            MagnificationPreferenceFragment.populateMagnificationGesturesPreferenceExtras(extras,
+                    context);
+        }
     }
 }
