@@ -123,9 +123,6 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
         boolean isStorageManagerChecked =
                 Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-        // Using the setCheckedInternal means the checked status won't propagate through the
-        // listeners -- this will prevent us from accidentally causing a metrics event on resume.
-        mSwitchBar.setCheckedInternal(isStorageManagerChecked);
         mDaysToRetain.setEnabled(isStorageManagerChecked);
     }
 

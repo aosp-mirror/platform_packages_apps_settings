@@ -52,6 +52,17 @@ public class AutomaticStorageManagerSwitchBarController
         mDaysToRetainPreference = Preconditions.checkNotNull(daysToRetainPreference);
         mFragmentManager = Preconditions.checkNotNull(fragmentManager);
 
+        initializeCheckedStatus();
+    }
+
+    private void initializeCheckedStatus() {
+        boolean isStorageManagerChecked =
+                Settings.Secure.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
+                                0)
+                        != 0;
+        mSwitchBar.setChecked(isStorageManagerChecked);
         mSwitchBar.addOnSwitchChangeListener(this);
     }
 
