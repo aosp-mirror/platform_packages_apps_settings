@@ -63,6 +63,7 @@ public class AppHeaderController {
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
+
     private static final String TAG = "AppDetailFeature";
 
     private final Context mContext;
@@ -179,10 +180,6 @@ public class AppHeaderController {
         ImageView iconView = mAppHeader.findViewById(R.id.app_detail_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
-            ImageView badgeView = mAppHeader.findViewById(R.id.app_icon_instant_apps_badge);
-            if (badgeView != null) {
-                badgeView.setVisibility(mIsInstantApp ? View.VISIBLE : View.GONE);
-            }
         }
         setText(R.id.app_detail_title, mLabel);
         setText(R.id.app_detail_summary, mSummary);

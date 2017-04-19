@@ -39,6 +39,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -129,7 +130,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             .getApplicationFeatureProvider(activity)
             .newAppHeaderController(this, null /* appHeader */)
             .setIcon(mApp.mUiTargetApp != null
-                ? mApp.mUiTargetApp.loadIcon(mPm)
+                ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
                 : new ColorDrawable(0))
             .setLabel(mApp.mUiLabel)
             .setPackageName(mApp.mPackage)

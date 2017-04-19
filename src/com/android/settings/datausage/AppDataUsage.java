@@ -40,6 +40,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -159,7 +160,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 PackageManager pm = getPackageManager();
                 try {
                     ApplicationInfo info = pm.getApplicationInfo(mPackages.valueAt(0), 0);
-                    mIcon = info.loadIcon(pm);
+                    mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
                     mLabel = info.loadLabel(pm);
                     mPackageName = info.packageName;
                 } catch (PackageManager.NameNotFoundException e) {
