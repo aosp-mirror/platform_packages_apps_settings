@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -96,13 +97,13 @@ public class SecondaryUserControllerTest {
     public void controllerUpdatesSummaryOfNewPreference() throws Exception {
         mPrimaryUser.name = TEST_NAME;
         mController.displayPreference(mScreen);
-        mController.setSize(10L);
+        mController.setSize(MEGABYTE_IN_BYTES * 10);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
 
         verify(mGroup).addPreference(argumentCaptor.capture());
 
         Preference preference = argumentCaptor.getValue();
-        assertThat(preference.getSummary()).isEqualTo("10.00B");
+        assertThat(preference.getSummary()).isEqualTo("0.01GB");
     }
 
     @Test
@@ -162,7 +163,12 @@ public class SecondaryUserControllerTest {
         StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
-        userResult.externalStats = new StorageStatsSource.ExternalStorageStats(99, 33, 33, 33);
+        userResult.externalStats =
+                new StorageStatsSource.ExternalStorageStats(
+                        MEGABYTE_IN_BYTES * 30,
+                        MEGABYTE_IN_BYTES * 10,
+                        MEGABYTE_IN_BYTES * 10,
+                        MEGABYTE_IN_BYTES * 10);
         result.put(10, userResult);
 
         mController.handleResult(result);
@@ -170,7 +176,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("99.00B");
+        assertThat(preference.getSummary()).isEqualTo("0.03GB");
     }
 
     @Test
