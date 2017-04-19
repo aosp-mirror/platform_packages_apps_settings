@@ -19,9 +19,7 @@ package com.android.settings.search;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static com.android.settings.search.SearchIndexableResources.NO_DATA_RES_ID;
 
-import static com.android.settings.search.SearchIndexableResources.sResMap;
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.annotation.DrawableRes;
@@ -35,12 +33,14 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.wifi.WifiSettings;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -50,6 +50,21 @@ public class SearchIndexableResourcesTest {
     private static final int XML_RES_ID = R.xml.physical_keyboard_settings;
     @DrawableRes
     private static final int ICON_RES_ID = R.drawable.ic_settings_language;
+
+    Map<String, SearchIndexableResource> sResMapCopy;
+
+    @Before
+    public void setUp() {
+        sResMapCopy = new HashMap<>(SearchIndexableResources.sResMap);
+    }
+
+    @After
+    public void cleanUp() {
+        SearchIndexableResources.sResMap.clear();
+        for (String key : sResMapCopy.keySet()) {
+            SearchIndexableResources.sResMap.put(key, sResMapCopy.get(key));
+        }
+    }
 
     @Test
     public void testAddIndex() {

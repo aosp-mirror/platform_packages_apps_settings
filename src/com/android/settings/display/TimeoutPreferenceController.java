@@ -35,10 +35,11 @@ public class TimeoutPreferenceController extends PreferenceController implements
     /** If there is no setting in the provider, use this. */
     public static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
-    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
+    private final String mScreenTimeoutKey;
 
-    public TimeoutPreferenceController(Context context) {
+    public TimeoutPreferenceController(Context context, String key) {
         super(context);
+        mScreenTimeoutKey = key;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class TimeoutPreferenceController extends PreferenceController implements
 
     @Override
     public String getPreferenceKey() {
-        return KEY_SCREEN_TIMEOUT;
+        return mScreenTimeoutKey;
     }
 
     @Override

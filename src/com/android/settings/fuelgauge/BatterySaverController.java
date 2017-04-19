@@ -43,7 +43,7 @@ import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
 
 public class BatterySaverController extends PreferenceController implements
         Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart, OnStop {
-    private static final String KEY_BATTERY_SAVER = "battery_saver";
+    private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
     private static final String TAG = "BatterySaverController";
     private static final boolean DEBUG = false;
 
