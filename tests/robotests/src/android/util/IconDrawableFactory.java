@@ -16,17 +16,29 @@
 package android.util;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
- * This class is only needed to get around RoboElectric issue.
+ * This class is only needed to get around Robolectric issue.
  */
-public final class LauncherIcons {
+public class IconDrawableFactory {
 
-    public LauncherIcons(Context context) {
+    public static IconDrawableFactory newInstance(Context context) {
+        return new IconDrawableFactory();
     }
 
-    public Drawable wrapIconDrawableWithShadow(Drawable drawable) {
-        return drawable;
+    public Drawable getBadgedIcon(ApplicationInfo appInfo) {
+        return getBadgedIcon(appInfo, 0);
+    }
+
+    public Drawable getBadgedIcon(ApplicationInfo appInfo, int userId) {
+        return getBadgedIcon(appInfo, appInfo, userId);
+    }
+
+    public Drawable getBadgedIcon(PackageItemInfo itemInfo, ApplicationInfo appInfo, int userId) {
+        return new ColorDrawable(0);
     }
 }

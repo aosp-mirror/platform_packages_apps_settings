@@ -21,6 +21,7 @@ import static com.android.settings.applications.AppHeaderController.ActionType;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -43,7 +44,8 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         final Preference pref = FeatureFactory.getFactory(activity)
                 .getApplicationFeatureProvider(activity)
                 .newAppHeaderController(this, null /* appHeader */)
-                .setIcon(mPackageInfo.applicationInfo.loadIcon(mPm))
+                .setIcon(IconDrawableFactory.newInstance(activity)
+                        .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(mPackageInfo)
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
