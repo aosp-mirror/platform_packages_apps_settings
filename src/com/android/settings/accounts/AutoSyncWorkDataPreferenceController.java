@@ -18,6 +18,8 @@ package com.android.settings.accounts;
 import android.app.Fragment;
 import android.content.Context;
 
+import com.android.settings.Utils;
+
 public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPreferenceController {
 
     private static final String TAG = "AutoSyncWorkData";
@@ -25,11 +27,11 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPr
 
     public AutoSyncWorkDataPreferenceController(Context context, Fragment parent) {
         super(context, parent);
+        mUserHandle = Utils.getManagedProfile(mUserManager);
     }
 
     @Override
     public String getPreferenceKey() {
         return KEY_AUTO_SYNC_WORK_ACCOUNT;
     }
-
 }
