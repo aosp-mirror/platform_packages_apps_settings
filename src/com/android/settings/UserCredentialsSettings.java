@@ -37,6 +37,8 @@ import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyStore;
+import android.security.keymaster.KeyCharacteristics;
+import android.security.keymaster.KeymasterDefs;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -48,18 +50,14 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
+import java.security.UnrecoverableKeyException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class UserCredentialsSettings extends SettingsPreferenceFragment
         implements View.OnClickListener {
@@ -254,27 +252,57 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             return credentials;
         }
 
+        private boolean isAsymmetric(KeyStore keyStore, String alias, int uid)
+            throws UnrecoverableKeyException {
+                KeyCharacteristics keyCharacteristics = new KeyCharacteristics();
+                int errorCode = keyStore.getKeyCharacteristics(alias, null, null, uid,
+                        keyCharacteristics);
+                if (errorCode != KeyStore.NO_ERROR) {
+                    throw (UnrecoverableKeyException)
+                            new UnrecoverableKeyException("Failed to obtain information about key")
+                                    .initCause(KeyStore.getKeyStoreException(errorCode));
+                }
+                Integer keymasterAlgorithm = keyCharacteristics.getEnum(
+                        KeymasterDefs.KM_TAG_ALGORITHM);
+                if (keymasterAlgorithm == null) {
+                    throw new UnrecoverableKeyException("Key algorithm unknown");
+                }
+                return keymasterAlgorithm == KeymasterDefs.KM_ALGORITHM_RSA ||
+                        keymasterAlgorithm == KeymasterDefs.KM_ALGORITHM_EC;
+        }
+
         private SortedMap<String, Credential> getCredentialsForUid(KeyStore keyStore, int uid) {
             final SortedMap<String, Credential> aliasMap = new TreeMap<>();
             for (final Credential.Type type : Credential.Type.values()) {
-                for (final String alias : keyStore.list(type.prefix, uid)) {
-                    if (UserHandle.getAppId(uid) == Process.SYSTEM_UID) {
-                        // Do not show work profile keys in user credentials
-                        if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
-                                alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
+                for (final String prefix : type.prefix) {
+                    for (final String alias : keyStore.list(prefix, uid)) {
+                        if (UserHandle.getAppId(uid) == Process.SYSTEM_UID) {
+                            // Do not show work profile keys in user credentials
+                            if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
+                                    alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
+                                continue;
+                            }
+                            // Do not show synthetic password keys in user credential
+                            if (alias.startsWith(LockPatternUtils.SYNTHETIC_PASSWORD_KEY_PREFIX)) {
+                                continue;
+                            }
+                        }
+                        try {
+                            if (type == Credential.Type.USER_KEY &&
+                                    !isAsymmetric(keyStore, prefix + alias, uid)) {
+                                continue;
+                            }
+                        } catch (UnrecoverableKeyException e) {
+                            Log.e(TAG, "Unable to determine algorithm of key: " + prefix + alias, e);
                             continue;
                         }
-                        // Do not show synthetic password keys in user credential
-                        if (alias.startsWith(LockPatternUtils.SYNTHETIC_PASSWORD_KEY_PREFIX)) {
-                            continue;
+                        Credential c = aliasMap.get(alias);
+                        if (c == null) {
+                            c = new Credential(alias, uid);
+                            aliasMap.put(alias, c);
                         }
+                        c.storedTypes.add(type);
                     }
-                    Credential c = aliasMap.get(alias);
-                    if (c == null) {
-                        c = new Credential(alias, uid);
-                        aliasMap.put(alias, c);
-                    }
-                    c.storedTypes.add(type);
                 }
             }
             return aliasMap;
@@ -344,7 +372,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
      */
     private static final SparseArray<Credential.Type> credentialViewTypes = new SparseArray<>();
     static {
-        credentialViewTypes.put(R.id.contents_userkey, Credential.Type.USER_PRIVATE_KEY);
+        credentialViewTypes.put(R.id.contents_userkey, Credential.Type.USER_KEY);
         credentialViewTypes.put(R.id.contents_usercrt, Credential.Type.USER_CERTIFICATE);
         credentialViewTypes.put(R.id.contents_cacrt, Credential.Type.CA_CERTIFICATE);
     }
@@ -380,12 +408,11 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
         static enum Type {
             CA_CERTIFICATE (Credentials.CA_CERTIFICATE),
             USER_CERTIFICATE (Credentials.USER_CERTIFICATE),
-            USER_PRIVATE_KEY (Credentials.USER_PRIVATE_KEY),
-            USER_SECRET_KEY (Credentials.USER_SECRET_KEY);
+            USER_KEY(Credentials.USER_PRIVATE_KEY, Credentials.USER_SECRET_KEY);
 
-            final String prefix;
+            final String[] prefix;
 
-            Type(String prefix) {
+            Type(String... prefix) {
                 this.prefix = prefix;
             }
         }
@@ -407,8 +434,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
          * <ul>
          *   <li>{@link Credentials.CA_CERTIFICATE}</li>
          *   <li>{@link Credentials.USER_CERTIFICATE}</li>
-         *   <li>{@link Credentials.USER_PRIVATE_KEY}</li>
-         *   <li>{@link Credentials.USER_SECRET_KEY}</li>
+         *   <li>{@link Credentials.USER_KEY}</li>
          * </ul>
          */
         final EnumSet<Type> storedTypes = EnumSet.noneOf(Type.class);
