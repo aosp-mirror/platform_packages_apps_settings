@@ -34,7 +34,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
@@ -310,9 +310,10 @@ public class AppHeaderControllerTest {
         mController.styleActionBar(mActivity);
 
         verify(actionBar).setElevation(0);
-        verify(actionBar).setBackgroundDrawable(any(Drawable.class));
+        // Enforce a color drawable as background here, as image based drawables might not be
+        // wide enough to cover entire action bar.
+        verify(actionBar).setBackgroundDrawable(any(ColorDrawable.class));
     }
-
 
     @Test
     public void initAppHeaderController_appHeaderNull_useFragmentContext() {

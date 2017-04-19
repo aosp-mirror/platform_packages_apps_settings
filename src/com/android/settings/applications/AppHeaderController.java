@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
@@ -217,9 +218,8 @@ public class AppHeaderController {
             Log.w(TAG, "No actionbar, cannot style actionbar.");
             return this;
         }
-        final Drawable appHeaderBackground =
-                mAppHeader.findViewById(R.id.app_snippet).getBackground();
-        actionBar.setBackgroundDrawable(appHeaderBackground);
+        actionBar.setBackgroundDrawable(
+                new ColorDrawable(Utils.getColorAttr(activity, android.R.attr.colorSecondary)));
         actionBar.setElevation(0);
 
         return this;
