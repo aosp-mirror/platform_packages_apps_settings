@@ -284,11 +284,13 @@ public class MasterClear extends OptionsMenuFragment
                     .getAuthenticatorTypesAsUser(profileId);
             final int M = descs.length;
 
-            View titleView = Utils.inflateCategoryHeader(inflater, contents);
-            final TextView titleText = (TextView) titleView.findViewById(android.R.id.title);
-            titleText.setText(userInfo.isManagedProfile() ? R.string.category_work
-                    : R.string.category_personal);
-            contents.addView(titleView);
+            if (profilesSize > 1) {
+                View titleView = Utils.inflateCategoryHeader(inflater, contents);
+                final TextView titleText = (TextView) titleView.findViewById(android.R.id.title);
+                titleText.setText(userInfo.isManagedProfile() ? R.string.category_work
+                        : R.string.category_personal);
+                contents.addView(titleView);
+            }
 
             for (int i = 0; i < N; i++) {
                 Account account = accounts[i];
