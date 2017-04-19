@@ -16,31 +16,27 @@
 
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS;
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.provider.Settings.System;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
+import java.text.NumberFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.internal.ShadowExtractor;
-import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -50,10 +46,6 @@ public class BrightnessLevelPreferenceControllerTest {
     @Mock
     private ContentResolver mContentResolver;
     @Mock
-    private PowerManagerWrapper mPowerManager;
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
     private Preference mPreference;
 
     private BrightnessLevelPreferenceController mController;
@@ -61,15 +53,8 @@ public class BrightnessLevelPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        when(mPowerManager.getMinimumScreenBrightnessSetting()).thenReturn(0);
-        when(mPowerManager.getMaximumScreenBrightnessSetting()).thenReturn(100);
-        when(mPowerManager.getMinimumScreenBrightnessForVrSetting()).thenReturn(0);
-        when(mPowerManager.getMaximumScreenBrightnessForVrSetting()).thenReturn(100);
-        when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mController = spy(new BrightnessLevelPreferenceController(mContext, null, mPowerManager));
-        doReturn(false).when(mController).isInVrMode();
 
+        mController = new BrightnessLevelPreferenceController(mContext);
     }
 
     @Test
@@ -78,80 +63,14 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onResume_shouldRegisterObserver() {
-        Context context = RuntimeEnvironment.application;
-        BrightnessLevelPreferenceController controller =
-            new BrightnessLevelPreferenceController(context, null, mPowerManager);
-        ShadowContentResolver shadowContentResolver =
-            (ShadowContentResolver) ShadowExtractor.extract(context.getContentResolver());
-
-        controller.onResume();
-
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isNotEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS))).isNotEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR))).isNotEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ))).isNotEmpty();
-    }
-
-    @Test
-    public void onPause_shouldUnregisterObserver() {
-        Context context = RuntimeEnvironment.application;
-        BrightnessLevelPreferenceController controller =
-            new BrightnessLevelPreferenceController(context, null, mPowerManager);
-        ShadowContentResolver shadowContentResolver =
-            (ShadowContentResolver) ShadowExtractor.extract(context.getContentResolver());
-
-        controller.displayPreference(mScreen);
-        controller.onResume();
-        controller.onPause();
-
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS))).isEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR))).isEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ))).isEmpty();
-    }
-
-    @Test
-    public void updateState_inVrMode_shouldSetSummaryToVrBrightness() {
-        doReturn(true).when(mController).isInVrMode();
-        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR, 85);
+    public void updateState_shouldSetSummary() {
+        final NumberFormat formatter = NumberFormat.getPercentInstance();
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
+        Settings.System.putInt(mContentResolver, SCREEN_BRIGHTNESS, 45);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary("85%");
+        verify(mPreference).setSummary(formatter.format(45.0 / 255));
     }
 
-    @Test
-    public void updateState_autoBrightness_shouldSetSummaryToVrBrightness() {
-        doReturn(false).when(mController).isInVrMode();
-        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
-            System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
-
-        System.putFloat(mContentResolver, System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0.0f);
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary("50%");
-    }
-
-    @Test
-    public void updateState_manualBrightness_shouldSetSummaryToVrBrightness() {
-        doReturn(false).when(mController).isInVrMode();
-        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
-            System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-
-        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS, 45);
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary("45%");
-    }
 }
