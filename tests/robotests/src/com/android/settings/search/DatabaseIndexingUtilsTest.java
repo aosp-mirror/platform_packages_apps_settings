@@ -26,7 +26,6 @@ import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.search2.DatabaseIndexingUtils;
-
 import com.android.settings.search2.ResultPayload;
 import org.junit.Before;
 import org.junit.Test;
