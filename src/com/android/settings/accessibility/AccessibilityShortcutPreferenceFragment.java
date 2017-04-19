@@ -95,7 +95,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         CharSequence serviceName = getServiceName(getContext());
         mServicePreference.setSummary(serviceName);
         mOnLockScreenSwitchPreference.setChecked(Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, 1) == 1);
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, 0) == 1);
         if (TextUtils.equals(serviceName, getString(R.string.accessibility_no_service_selected))) {
             // If there's no service configured, enabling the shortcut will have no effect
             // It should already be disabled, but force the switch to off just in case
