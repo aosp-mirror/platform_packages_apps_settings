@@ -54,11 +54,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -73,6 +75,7 @@ public class WifiDetailPreferenceControllerTest {
     private static final String SECURITY = "None";
 
     private InetAddress mIpv4Address;
+    private Inet6Address mIpv6Address;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
@@ -113,6 +116,12 @@ public class WifiDetailPreferenceControllerTest {
         try {
             mIpv4Address = InetAddress.getByAddress(
                     new byte[] { (byte) 255, (byte) 255, (byte) 255, (byte) 255 });
+            mIpv6Address = Inet6Address.getByAddress(
+                    "123", /* host */
+                    new byte[] {
+                            (byte) 0xFE, (byte) 0x80, 0, 0, 0, 0, 0, 0, 0x02, 0x11, 0x25,
+                            (byte) 0xFF, (byte) 0xFE, (byte) 0xF8, (byte) 0x7C, (byte) 0xB2},
+                    1  /*scope id */);
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
@@ -153,6 +162,8 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     private void setupMockedPreferenceScreen() {
+        when(mockScreen.getPreferenceManager().getContext()).thenReturn(mContext);
+
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_CONNECTION_DETAIL_PREF))
                 .thenReturn(mockConnectionDetailPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
@@ -419,5 +430,31 @@ public class WifiDetailPreferenceControllerTest {
         mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
 
         verify(mockActivity).finish();
+    }
+
+    @Test
+    public void ipv6AddressPref_shouldHaveHostAddressTextSet() {
+        LinkAddress ipv6Address = new LinkAddress(mIpv6Address, 128);
+
+        mLinkProperties.addLinkAddress(ipv6Address);
+
+        mController.onResume();
+
+        ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mockIpv6AddressCategory).addPreference(preferenceCaptor.capture());
+        assertThat(preferenceCaptor.getValue().getTitle()).isEqualTo(mIpv6Address.getHostAddress());
+    }
+
+    @Test
+    public void ipv6AddressPref_shouldNotBeSelectable() {
+        LinkAddress ipv6Address = new LinkAddress(mIpv6Address, 128);
+
+        mLinkProperties.addLinkAddress(ipv6Address);
+
+        mController.onResume();
+
+        ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mockIpv6AddressCategory).addPreference(preferenceCaptor.capture());
+        assertThat(preferenceCaptor.getValue().isSelectable()).isFalse();
     }
 }
