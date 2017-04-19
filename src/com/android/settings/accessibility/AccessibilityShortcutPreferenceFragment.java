@@ -42,12 +42,9 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
 
     public static final String SHORTCUT_SERVICE_KEY = "accessibility_shortcut_service";
     public static final String ON_LOCK_SCREEN_KEY = "accessibility_shortcut_on_lock_screen";
-    // ID for dialog that confirms shortcut capabilities
-    private static final int DIALOG_ID_ADD_SHORTCUT_WARNING = 1;
 
     private Preference mServicePreference;
     private SwitchPreference mOnLockScreenSwitchPreference;
-    private String mSelectedServiceComponentNameString;
 
     @Override
     public int getMetricsCategory() {

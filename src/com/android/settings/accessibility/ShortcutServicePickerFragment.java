@@ -15,6 +15,8 @@
  */
 package com.android.settings.accessibility;
 
+import static android.content.DialogInterface.BUTTON_POSITIVE;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -147,7 +149,7 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             final Fragment fragment = getTargetFragment();
-            if (fragment instanceof DefaultAppPickerFragment) {
+            if ((which == BUTTON_POSITIVE) && (fragment instanceof DefaultAppPickerFragment)) {
                 final Bundle bundle = getArguments();
                 ((ShortcutServicePickerFragment) fragment).onServiceConfirmed(
                         bundle.getString(EXTRA_KEY));
