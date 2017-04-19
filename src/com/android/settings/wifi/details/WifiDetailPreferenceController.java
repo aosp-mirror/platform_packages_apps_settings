@@ -301,6 +301,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 Preference pref = new Preference(mPrefContext);
                 pref.setKey(ip);
                 pref.setTitle(ip);
+                pref.setSelectable(false);
                 mIpv6AddressCategory.addPreference(pref);
                 mIpv6AddressCategory.setVisible(true);
             }
