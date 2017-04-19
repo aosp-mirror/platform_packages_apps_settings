@@ -28,8 +28,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-
 import android.util.Log;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
@@ -41,9 +41,10 @@ public class AutoSyncDataPreferenceController extends PreferenceController {
     private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";
     private static final String KEY_AUTO_SYNC_ACCOUNT = "auto_sync_account_data";
 
-    protected UserManager mUserManager;
-    private UserHandle mUserHandle;
-    private Fragment mParentFragment;
+    protected final UserManager mUserManager;
+    private final Fragment mParentFragment;
+
+    protected UserHandle mUserHandle;
 
     public AutoSyncDataPreferenceController(Context context, Fragment parent) {
         super(context);
