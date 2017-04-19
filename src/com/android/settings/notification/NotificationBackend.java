@@ -18,7 +18,6 @@ package com.android.settings.notification;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -28,6 +27,7 @@ import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.settingslib.Utils;
@@ -48,7 +48,7 @@ public class NotificationBackend {
             Log.e(TAG, "Error loading application label for " + row.pkg, t);
             row.label = row.pkg;
         }
-        row.icon = app.loadIcon(pm);
+        row.icon = IconDrawableFactory.newInstance(context).getBadgedIcon(app);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
         row.showBadge = canShowBadge(row.pkg, row.uid);
         row.userId = UserHandle.getUserId(row.uid);

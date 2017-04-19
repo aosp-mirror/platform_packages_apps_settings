@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AdaptiveIconDrawable;
 import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,7 +34,6 @@ import android.preference.PreferenceFrameLayout;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.LauncherIcons;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -55,8 +53,8 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.Spinner;
-
 import android.widget.TextView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
@@ -826,7 +824,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private final AppStateBaseBridge mExtraInfoBridge;
         private final Handler mBgHandler;
         private final Handler mFgHandler;
-        private final LauncherIcons mLauncherIcons;
 
         private int mFilterMode;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
@@ -882,7 +879,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mContext = manageApplications.getActivity();
             mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
-            mLauncherIcons = new LauncherIcons(mContext);
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
                         manageApplications.mNotifBackend);
@@ -1317,9 +1313,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     }
                     mState.ensureIcon(entry);
                     if (entry.icon != null) {
-                        if (entry.icon instanceof AdaptiveIconDrawable) {
-                            entry.icon = mLauncherIcons.wrapIconDrawableWithShadow(entry.icon);
-                        }
                         holder.appIcon.setImageDrawable(entry.icon);
                     }
                     updateSummary(holder);

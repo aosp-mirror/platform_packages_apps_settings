@@ -31,28 +31,13 @@
         android:paddingEnd="0dp"
         android:paddingTop="24dp"
         android:paddingBottom="24dp">
-
-        <FrameLayout android:id="@+id/app_icon_frame"
-                     android:layout_width="56dp"
-                     android:layout_height="56dp"
-                     android:clipChildren="false"
-                     android:clipToPadding="false">
-            <ImageView
-                android:id="@+id/app_detail_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal"
-                android:antialias="true"/>
-            <ImageView android:id="@+id/app_icon_instant_apps_badge"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="4dp"
-                android:elevation="20dp"
-                android:background="@drawable/ic_instant_apps_badge_bg"
-                android:src="@drawable/ic_instant_apps_badge" />
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/app_detail_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:antialias="true"/>
 
         <LinearLayout
             android:id="@+id/app_detail_links"
@@ -86,7 +71,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/app_icon_frame"
+            android:layout_toEndOf="@id/app_detail_icon"
             android:layout_toStartOf="@id/app_detail_links"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
