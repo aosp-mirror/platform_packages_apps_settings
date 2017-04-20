@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.Loader;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,16 +28,11 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
-import android.util.Log;
 import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
@@ -58,7 +52,6 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class StorageDashboardFragment extends DashboardFragment
     implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
@@ -101,8 +94,7 @@ public class StorageDashboardFragment extends DashboardFragment
         final long usedBytes = totalSize - mVolume.getPath().getFreeSpace();
         mSummaryController.updateBytes(usedBytes, totalSize);
         mPreferenceController.setVolume(mVolume);
-        mPreferenceController.setSystemSize(systemSize);
-
+        mPreferenceController.setUsedSize(usedBytes);
         mPreferenceController.setTotalSize(totalSize);
         for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
             PreferenceController controller = mSecondaryUsers.get(i);

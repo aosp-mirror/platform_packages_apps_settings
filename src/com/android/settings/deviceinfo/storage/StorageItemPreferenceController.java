@@ -78,7 +78,7 @@ public class StorageItemPreferenceController extends PreferenceController {
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
     private int mUserId;
-    private long mSystemSize;
+    private long mUsedBytes;
     private long mTotalSize;
 
     private StorageItemPreference mPhotoPreference;
@@ -226,17 +226,29 @@ public class StorageItemPreferenceController extends PreferenceController {
         mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
         mMoviesPreference.setStorageSize(data.videoAppsSize, mTotalSize);
         mAppPreference.setStorageSize(data.otherAppsSize, mTotalSize);
-        if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(mSystemSize + data.systemSize, mTotalSize);
-        }
 
-        long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
-                - data.externalStats.videoBytes - data.externalStats.imageBytes;
-        mFilePreference.setStorageSize(unattributedBytes, mTotalSize);
+        long unattributedExternalBytes =
+                data.externalStats.totalBytes
+                        - data.externalStats.audioBytes
+                        - data.externalStats.videoBytes
+                        - data.externalStats.imageBytes;
+        mFilePreference.setStorageSize(unattributedExternalBytes, mTotalSize);
+
+        // We define the system size as everything we can't classify.
+        if (mSystemPreference != null) {
+            mSystemPreference.setStorageSize(
+                    mUsedBytes
+                            - data.externalStats.totalBytes
+                            - data.musicAppsSize
+                            - data.gamesSize
+                            - data.videoAppsSize
+                            - data.otherAppsSize,
+                    mTotalSize);
+        }
     }
 
-    public void setSystemSize(long systemSizeBytes) {
-        mSystemSize = systemSizeBytes;
+    public void setUsedSize(long usedSizeBytes) {
+        mUsedBytes = usedSizeBytes;
     }
 
     public void setTotalSize(long totalSizeBytes) {
