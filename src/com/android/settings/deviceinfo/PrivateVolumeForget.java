@@ -53,7 +53,17 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
             Bundle savedInstanceState) {
         final StorageManager storage = getActivity().getSystemService(StorageManager.class);
         final String fsUuid = getArguments().getString(VolumeRecord.EXTRA_FS_UUID);
+        // Passing null will crash the StorageManager, so let's early exit.
+        if (fsUuid == null) {
+            getActivity().finish();
+            return null;
+        }
         mRecord = storage.findRecordByUuid(fsUuid);
+
+        if (mRecord == null) {
+            getActivity().finish();
+            return null;
+        }
 
         final View view = inflater.inflate(R.layout.storage_internal_forget, container, false);
         final TextView body = (TextView) view.findViewById(R.id.body);
