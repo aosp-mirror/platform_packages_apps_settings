@@ -329,7 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"ගිණුම්"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"ස්ථානය"</string>
     <string name="account_settings_title" msgid="626177544686329806">"ගිණුම්"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"ආරක්ෂාව සහ තිර අගුල"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"ආරක්ෂාව සහ ස්ථානය"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"සංකේතනය සහ අක්තපත්‍ර"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"දුරකතනය සංකේතනය කර ඇත"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"අගුලු තිර අභිරුචි"</string>
@@ -338,8 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"රහස්‍යතාව"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"ඔබගේ පරිපාලක විසින් අබල කර ඇත"</string>
     <string name="security_status_title" msgid="5848766673665944640">"ආරක්ෂක තත්ත්වය"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"ස්ථානය, ඇඟිලි සලකුණ"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"ස්ථානය"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"තිර අගුල, ඇඟිලි සලකුණ"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"තිර අගුල"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"ඇඟිලි සලකුණ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"ඇඟිලි සලකුණු කළමනාකරණය කරන්න"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"මෙය සඳහා ඇඟිලි සලකුණු භාවිත කරන්න"</string>
@@ -689,6 +689,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"ඉහළ ගුණත්වයේ විවෘත ජාලයක් ලබා ගත හැකි විට දැනුම් දෙන්න"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi ස්වයංක්‍රියව නැවත සබල කරන්න"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"ඔබගේ නිවෙස් ජාලය වැනි සුරැකි ඉහළ ගුණත්ව ජාල අවට ස්වයංක්‍රියව නැවත Wi-Fi සබල කරන්න"</string>
+    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"දුර්වල සම්බන්ධතා මඟහරින්න"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"හොඳ අන්තර්ජාල සම්බන්ධතාවයක් නොමැති නම් Wi‑Fi ජාල භාවිතා නොකරන්න"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"හොඳ අන්තර්ජාල සම්බන්ධතාවක් තිබෙන ජාල පමණක් භාවිතා කරන්න"</string>
@@ -810,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi‑Fi වින්‍යාස කිරීම"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC ලිපිනය"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP ලිපිනය"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"සබ්නෙට් මාස්ක්"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"සබ්නෙට් මාස්ක්"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 ලිපින"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 ලිපින"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"සුරකින ලද ජාල"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP සැකසීම්"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"මෙම පරිශීලකයා සඳහා Wi‑Fi උසස් සැකසීම් නැත"</string>
@@ -1012,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"අක්‍රියයි"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"දුරකථනය රඳවා ඇති විට සහ/හෝ නිද්‍රාවේ ඇති විට සිදු වන දේ පාලනය කිරීමට, තිර සුරැකුම ක්‍රියාත්මක කරන්න."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"පටන් ගන්න මොන වේලාවටද"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"වර්තමාන තිර සුරැකුම"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"දැන් අරඹන්න"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"සැකසීම්"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ස්වයංක්‍රිය දීප්තිය"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"අවදි කිරීමට ඔසවන්න"</string>
-    <string name="doze_title" msgid="5389406335828323273">"එන දැනුම්දීම් තිරය"</string>
+    <string name="doze_title" msgid="2259176504273878294">"ස්ථානික දර්ශනය"</string>
     <string name="doze_summary" msgid="3846219936142814032">"ඔබට දැනුම්දීම් ලැබුණ විට තිරය අවදි කරන්න"</string>
     <string name="title_font_size" msgid="4405544325522105222">"අකුරු ප්‍රමාණය"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"පෙළ වඩාත් විශාල හෝ කුඩා කරන්න"</string>
@@ -1298,6 +1301,11 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"SD කාඩ් පත මකන්න"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"සංගීත හෝ ජායාරුප ආදී අභ්‍යන්තර USB ආචයනයේ සියලු දත්ත මකන්න"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"සංගීත හෝ ඡායාරූප ආදී SD කාඩ් පතේ සියලු දත්ත මකන්න"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"eSIMs මකන්න"</string>
+    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
+    <skip />
+    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
+    <skip />
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"ටැබ්ලටය යළි සකසන්න"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"දුරකථනය නැවත සකසන්න"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"ඔබගේ සියලු පෞද්ගලික තොරතුරු සහ බාගත කළ යෙදුම් මකන්නද? ඔබට මෙම ක්‍රියාව ආපසු හැරවිය නොහැක!"</string>
@@ -1608,6 +1616,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Store"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"යෙදුම් විස්තර"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"<xliff:g id="APP_STORE">%1$s</xliff:g> වෙතින් ස්ථාපනය කළ යෙදුම"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"<xliff:g id="APP_STORE">%1$s</xliff:g> හි තවත් තතු"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"යෙදුම් ක්‍රියා"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"ධාවනය වෙමින්"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(කිසිදිනෙක භාවිතා කර නැත)"</string>
@@ -2724,6 +2733,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"දැනුම්දීමේ ශබ්ද ත්‍රීවතාව"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"දුරකථන රිගින්ටෝනය"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"පෙරනිමි දැනුම්දීම් හඬ"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"යෙදුම සපයන හඬ"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"පෙරනිමි දැනුම්දීම් හඬ"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"පෙරනිමි එලාම හඬ"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"ඇමතුම් සඳහාත් කම්පනය කරන්න"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"වෙනත් ශබ්ද"</string>
@@ -2800,6 +2811,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"ශබ්ද කිරීම, කම්පනය කිරීම, හෝ මෙම දැනුම්දීම් වත්මන් තිරයේ දසුන මතට එබිකම් කිරීම නොකරන්න."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"දැනුම්දීම් සහායක"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"දැනුම්දීම් ප්‍රවේශනය"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"කාර්යාල පැතිකඩ දැනුම් දීම්වලට පිවිසීම අවහිර කර ඇත"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"යෙදුම්වලට දැනුම් දීම් කියවිය නොහැක"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
@@ -2967,8 +2979,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"උපාංගය ආරම්භ වීමට පෙර ඔබගේ මුරපදය අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැක. උපාංගය ආරම්භ වන තෙක්, එයට සීනු ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබාගත නොහැක.\n\nනැතිවූ හෝ සොරකම් කළ උපාංග වල දත්ත ආරක්ෂා කිරීමට මෙය උදව් කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට මුරපදයක් අවශ්‍යද?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ PIN අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට PIN එක අවශ්‍යද?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ රටාව අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට රටාවක් අවශ්‍යද?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ මුරපදය අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට මුරපදය එක අවශ්‍යද?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"ඔව්"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"නැත"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN එක අවශ්‍යද?"</string>
@@ -3166,7 +3177,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"කිසිවක් නැත"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"මෙම යෙදුම සඳහා භාවිත ප්‍රවේශය ක්‍රියාවිරහිත කිරීම, ඔබේ පරිපාලක විසින් ඔබේ කාර්යාල පැතිකඩෙහි ඇති යෙදුම් සඳහා දත්ත භාවිතය හඹා යාම වළක්වන්නේ නැත"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"අනුලකුණු <xliff:g id="COUNT_1">%2$d</xliff:g> න් <xliff:g id="COUNT_0">%1$d</xliff:g> ක් භාවිත කරන ලදී"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"වෙනත් යෙදුම් උඩින් පෙන්විය හැකි යෙදුම්"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"වෙනත් යෙදුම් උඩින් පෙන්වන්න"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"වෙනත් යෙදුම් උඩින් පෙන්වන්න"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"යෙදුම්"</string>
@@ -3269,8 +3279,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"පසුබිම් දත්ත Wi-Fi හරහා පමණක් ලබා ගත හැකිය. Wi-Fi ලබා ගත නොහැකි වූ විට මෙය සමහර යෙදුම් හෝ සේවා කෙරෙහි බලපෑ හැකිය."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"කාර්යාල පැතිකඩ අක්‍රියයි"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"යෙදුම්, පසුබිම් සමමුහුර්ත කිරීම, සහ ඔබේ වැඩ පැතිකඩ හා සම්බන්ධ අනෙකුත් විශේෂාංග ක්‍රියාවිරහිතයි."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"රාත්‍රී ආලෝක කාලසටහන සකසන්න"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"ඇම්බර් වර්ණ තිරය මඟින් ඔබට නිදාගැනීමට උදව් කරයි"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"රාත්‍රී ආලෝකය ක්‍රියාත්මකයි"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"තිරය ඇම්බර් වර්ණ ගන්වා ඇත. මෙය ඔබට නින්දට පත් වීමට උදවු විය හැකිය."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"යෝජනා"</string>
@@ -3575,7 +3583,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> පරිශීලක සඳහා අබල කෙරිණි)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"ස්වයං පිරවුම් සේවාව"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"ස්වයං, පිරවුම, ස්වයං පිරවුම"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ඔබේ ස්වයං පිරවුම් යෙදුම බවට පත් කරන්නද? <xliff:g id="APP_NAME_1">%1$s</xliff:g> හට ඔබේ තිරය කියවීමට සහ වෙනත් යෙදුම්වල ක්ෂේත්‍ර පිරවීමට හැකි වනු ඇත."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ඔබ මෙම යෙදුම විශ්වාස කරන බව සහතික කර ගන්න&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ස්වයං පිරවිය හැකි දේවල් නිර්ණය කිරීමට ඔබේ තිරයෙහි ඇති දේවල් භාවිත කරයි."</string>
     <string name="device_theme" msgid="4571803018917608588">"උපාංග තේමාව"</string>
     <string name="default_theme" msgid="7085644992078579076">"පෙරනිමි"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"ගබඩා කළමනාකරු: <xliff:g id="STATUS">^1</xliff:g>"</string>

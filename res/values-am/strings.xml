@@ -329,7 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"መለያዎች"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"አካባቢ"</string>
     <string name="account_settings_title" msgid="626177544686329806">"መለያዎች"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"ደህንነት እና የማያ ገጽ መቆለፊያ"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"ደህንነት እና አካባቢ"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"ምስጠራ እና ምስክርነቶች"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"ስልክ ተመስጥሯል"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"የማያ ገጽ ቁልፍ ምርጫዎች"</string>
@@ -338,8 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"ግላዊነት"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"በአስተዳዳሪ ተሰናክሏል"</string>
     <string name="security_status_title" msgid="5848766673665944640">"የደህንነት ሁኔታ"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"አካባቢ፣ የጣት አሻራ"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"አካባቢ"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"የማያ ገጽ ቁልፍ፣ የጣት አሻራ"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"ማሳያ መቆለፊያ"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"የጣት አሻራ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"የጣት አሻራዎችን ያስተዳድሩ"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"የጣት አሻራን ይጠቀሙ ለ"</string>
@@ -689,6 +689,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"ባለከፍተኛ ጥራት ይፋዊ አውታረ መረብ የሚገኝ ሲሆን አሳውቅ"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fiን በራስ-ሰር አብራ"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"እንደ የቤትዎ አውታረ መረብ ካሉ የተቀመጡ አውታረ መረቦች አጠገብ ሲሆኑ Wi‑Fi ተመልሶ ይበራል"</string>
+    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"ደካማ ግንኙነቶችን አስወግድ"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"ጥሩ የበይነመረብ ግንኙነት ከሌለው በስተቀር የWi-Fi አውታረ መረብ አይጠቀሙ"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"ጥሩ የበይነመረብ ግንኙነት ያላቸው አውታረ መረቦችን ብቻ ተጠቀም"</string>
@@ -810,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"የWi-Fi ያዋቅሩ"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC አድራሻ"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP አድራሻ"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"የንዑስ አውታር ጭንብል"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"የንዑስ አውታር ጭንብል"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"ዲኤንኤስ"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"የIPv6 አድራሻዎች"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"የIPv6 አድራሻዎች"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"የተቀመጡ አውታረ መረቦች"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP ቅንብሮች"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"የላቁ የWi‑Fi ቅንብሮች ለዚህ ተጠቃሚ አይገኙም"</string>
@@ -1012,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"ጠፍቷል"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"ስልኩ ሲተከል እና/ወይም ሲተኛ ምን እንደሚከሰት ለመቆጣጠር የገጽ ማያ ማቆያን ያብሩ።"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"መቼ እንደሚጀመር"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"የአሁኑ ማያ ገጽ ማሳረፊያ"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"አሁን ጀምር"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"ቅንብሮች"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ራስ ሰርብሩህነት"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"ለማንቃት ያንሱ"</string>
-    <string name="doze_title" msgid="5389406335828323273">"የገቢ ማሳወቂያ ማያ ገጽ"</string>
+    <string name="doze_title" msgid="2259176504273878294">"ከባቢያዊ ማሳያ"</string>
     <string name="doze_summary" msgid="3846219936142814032">"ማሳወቂያዎችን ሲቀበሉ ማያ ገጽን አንቃ"</string>
     <string name="title_font_size" msgid="4405544325522105222">"የቁምፊ መጠን"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ጽሑፍ ያተልቁ ወይም ያሳንሱ"</string>
@@ -1298,6 +1301,11 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"የSD ካርድ አጥፋ"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"እንደ ሙዚቃ እና ፎቶዎች፣ ሁሉንም ውሂብ በውስጥ USB ማከማቻ አጥፋ።"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"እንደ ሙዚቃ እና ፎቶዎች፣ ሁሉንም ውሂብ በSD ካርድ ላይ አጥፋ።"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"eSIM ደምስስ"</string>
+    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
+    <skip />
+    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
+    <skip />
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"ጡባዊ ዳግም አስጀምር"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"ስልክ ድጋሚ አስጀምር"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"ሁሉም የእርስዎ የግል መረጃ እና የወረዱ መተግበሪያዎች ይሰረዙ? ይህን እርምጃ መቀልበስ አይችሉም!"</string>
@@ -1608,6 +1616,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"መደብር"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"የመተግበሪያ ዝርዝሮች"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"መተግበሪያ ከ<xliff:g id="APP_STORE">%1$s</xliff:g> ተጭኗል"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"በ<xliff:g id="APP_STORE">%1$s</xliff:g> ላይ ተጨማሪ መረጃ"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"መተግበሪያ ops"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"ሩጫ"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(በጭራሽ ስራ ላይ ያልዋለ)"</string>
@@ -2724,6 +2733,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"የማሳወቂያ ድምጽ መጠን"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"የስልክ ጥሪ ድምፅ"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"ነባሪ የማሳወቂያ ድምጽ"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"በመተግበሪያ የቀረበ ድምጽ"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"ነባሪ የማሳወቂያ ድምጽ"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"ነባሪ የማንቂያ ድምጽ"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"እንዲሁም ለጥሪዎችም ንዘር"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"ሌሎች ድምጾች"</string>
@@ -2800,6 +2811,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"ድምፅ አታሰማ፣ አትንዘር ወይም እነዚህን ማሳወቂያዎች ወደ የአሁኑ ማያ ገጽ አታሳይ።"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"የማሳወቂያ ረዳት"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"የማሳወቂያ መዳረሻ"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"የስራ መገለጫ ማሳወቂያዎች መዳረሻ ታግዷል"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"መተግበሪያዎች ማሳወቂያዎችን ማንበብ አይችሉም"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">የ%d መተግበሪያዎች ማሳወቂያዎችን ማንበብ ይችላሉ</item>
@@ -2967,8 +2979,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"ይህ መሣሪያ ከመጀመሩ በፊት የእርስዎን የይለፍ ቃል እንዲጠይቅ በማድረግ ተጨማሪ ጥበቃ ሊያደርጉለት ይችላሉ። መሣሪያው እስከሚጀምር ድረስ ጥሪዎችን፣ መልእክቶችን ወይም ማንቂያዎችን ጨምሮ ማሳወቂያዎችን መቀበል አይችሉም። \n\nይህ በጠፉ ወይም በተሰረቁ መሣሪያዎች ላይ ላለ ውሂብ ጥበቃ ለማድረግ ያግዛል። መሣሪያዎን ለማስጀመር የይለፍ ቃል ይጠየቅ?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"መሣሪያዎን ለማስከፈት የጣት አሻራዎን ከመጠቀም ባሻገር ይህ መሣሪያ ከመጀመሩ በፊት የእርስዎን ፒን እንዲጠይቅ በማድረግ ደህንነቱን ይበልጥ ሊያስጠብቁለት ይችላሉ። መሣሪያው እስከሚጀምር ድረስ ጥሪዎችን፣ መልእክቶችን ወይም ማንቂያዎችን ጨምሮ ማሳወቂያዎችን መቀበል አይችልም።\n\nይህ በጠፉ ወይም በተሰረቁ መሣሪያዎች ላይ ላለ ውሂብ ጥበቃ ለማድረግ ያግዛል። መሣሪያዎን ለማስጀመር ፒን ይጠየቅ?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"መሣሪያዎን ለማስከፈት የጣት አሻራዎን ከመጠቀም ባሻገር ይህ መሣሪያ ከመጀመሩ በፊት የእርስዎን ስርዓተ-ጥለት እንዲጠይቅ በማድረግ ደህንነቱን ይበልጥ ሊያስጠብቁለት ይችላሉ። መሣሪያው እስከሚጀምር ድረስ ጥሪዎችን፣ መልእክቶችን ወይም ማንቂያዎችን ጨምሮ ማሳወቂያዎችን መቀበል አይችልም።\n\nይህ በጠፉ ወይም በተሰረቁ መሣሪያዎች ላይ ላለ ውሂብ ጥበቃ ለማድረግ ያግዛል። መሣሪያዎን ለማስጀመር ስርዓተ-ጥለት ይጠየቅ?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"መሣሪያዎን ለመክፈት የጣት አሻራዎን ከመጠቀም ባሻገር ይህ መሣሪያ ከመጀመሩ በፊት የእርስዎን ይለፍ ቃል እንዲጠይቅ በማድረግ ደህንነቱን ይበልጥ ሊያስጠብቁለት ይችላሉ። መሣሪያው እስከሚጀምር ድረስ ጥሪዎችን፣ መልእክቶችን ወይም ማንቂያዎችን ጨምሮ ማሳወቂያዎችን መቀበል አይችልም።\n\nይህ በጠፉ ወይም በተሰረቁ መሣሪያዎች ላይ ያለ የውሂብ ለመጠበቅ ያግዛል። መሣሪያዎን ለማስጀመር የይለፍ ኮድ ይጠየቅ?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"አዎ"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"የለም"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"ፒን ይጠየቅ?"</string>
@@ -3166,7 +3177,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"ምንም"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"ለዚህ መተግሪያ የአጠቃቀም መዳረሻን ማጥፋት አሰተዳዳሪዎን በስራ መገለጫዎ ውስጥ የመተግበሪዎች ውሂብ አጠቃቀምን ከመከታተል አያግደውም።"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> ከ<xliff:g id="COUNT_1">%2$d</xliff:g> ቁምፊዎች ጥቅም ላይ ውለዋል"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"በሌሎች መተግበሪያዎች ላይ ማሳየት የሚችሉ መተግበሪያዎች"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"በሌሎች መተግበሪያዎች ላይ አሳይ"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"በሌሎች መተግበሪያዎች ላይ አሳይ"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"መተግበሪያዎች"</string>
@@ -3269,8 +3279,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"የጀርባ ውሂብ በWi-Fi በኩል ብቻ ነው የሚገኘው። ይሄ Wi-Fi በማይገኝበት ጊዜ በአንዳንድ መተግበሪያዎች ወይም አገልግሎቶች ላይ ተጽዕኖ ሊፈጥር ይችላል።"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"የሥራ መገለጫ ጠፍቷል"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"መተግበሪያዎች፣ የበስተጀርባ ሥምረት፣ እና ሌሎች ከእርስዎ የሥራ መገለጫ ጋር የተገናኙ ባህሪዎች ጠፍተዋል።"</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"የማታ ብርሃት መርሐግብርን ያዘጋጁ"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"እንዲተኙ ለማገዝ ለማያ ገጹ ብርቱካናማ ቅልም ይስጡት።"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"የምሽት ብርሃን በርቷል"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"ማያ ገጽ ብርቱካናማ ቅልም አለው። ይሄ እንዲተኙ ሊያግዘዎት ይችላል።"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"የአስተያየት ጥቆማዎች"</string>
@@ -3575,7 +3583,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(ለተጠቃሚ <xliff:g id="USER">%s</xliff:g> ተሰናክሏል)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"የራስ-ሙላ አገልግሎት"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"ራስ-ሰር፣ ሙላ፣ ራስ-ሙላ"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> የራስዎ የራስ-ሙላ መተግበሪያ ይሁን? <xliff:g id="APP_NAME_1">%1$s</xliff:g> የእርስዎን ማያ ገጽ ማንበብና በሌሎች መተግበሪያዎች ውስጥ ያሉ መስኮችን መሙላት ይችላል።"</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ይህን መተግበሪያ የሚያምኑት መሆንዎን ያረጋግጡ&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google ራስ-ሙላ&gt;%1$s&lt;/xliff:g&gt; ምን በራስ መሞላት እንደሚችል ለማወቅ በማያ ገጽዎ ላይ ያለውን ነገር ይጠቀማል።"</string>
     <string name="device_theme" msgid="4571803018917608588">"የመሣሪያ ገጽታ"</string>
     <string name="default_theme" msgid="7085644992078579076">"ነባሪ"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"የማከማቻ አስተዳዳሪ፦ <xliff:g id="STATUS">^1</xliff:g>"</string>

@@ -329,7 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Comptes"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Position"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Comptes"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Sécurité et verrouillage d\'écran"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Sécurité et localisation"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Cryptage et authentifiants"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Téléphone crypté"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Préférences de l\'écran de verrouillage"</string>
@@ -338,8 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Confidentialité"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Désactivé par l\'administrateur"</string>
     <string name="security_status_title" msgid="5848766673665944640">"État de la sécurité"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Position, empreintes digitales"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"Lieu"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Verrouillage de l\'écran, empreintes digitales"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Verrouillage de l\'écran"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Lecteur d\'empreintes digitales"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gérer les empreintes digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Util. empr. dig. pour"</string>
@@ -689,6 +689,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"M\'informer quand un réseau public de haute qualité se trouve à proximité"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activer le Wi-Fi automatiquement"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Le Wi‑Fi se réactivera automatiquement à proximité des réseaux de haute qualité qui sont enregistrés, comme celui de votre domicile"</string>
+    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Éviter les connexions instables"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ne pas utiliser de réseau Wi-Fi, sauf en cas de connexion Internet de bonne qualité"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"N\'utiliser que réseaux dotés d\'une connexion Internet stable"</string>
@@ -810,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Configurer le Wi-Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Adresse MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Adresse IP"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Masque de sous-réseau"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Masque de sous-réseau"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"Adresses IPv6"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"Adresses IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Réseaux enregistrés"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"Paramètres IP"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Les paramètres Wi-Fi avancés ne sont pas accessibles pour cet utilisateur"</string>
@@ -1012,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Désactivé"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Pour déterminer le comportement du téléphone lorsqu\'il se trouve sur une station d\'accueil ou lorsqu\'il est en veille, activez l\'écran de veille."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Quand commencer"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Écran de veille actuel"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Commencer"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Paramètres"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Soulever pour activer"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Écran de notification entrante"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Affichage en mode Veille"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activer l\'écran lorsque vous recevez des notifications"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de police"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Agrandissez ou réduisez le texte"</string>
@@ -1298,6 +1301,11 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Effacer la carte SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Effacer toutes les données de la mémoire de stockage USB interne, telles que la musique ou les photos"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Effacer toutes les données de la carte SD, telles que la musique ou les photos"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"Effacer les cartes eSIM"</string>
+    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
+    <skip />
+    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
+    <skip />
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Réinitialiser la tablette"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Réinitialiser le téléphone"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Effacer toutes vos données personnelles et les applications téléchargées? Cette action est irréversible."</string>
@@ -1608,6 +1616,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Boutique d\'applications"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Détails de l\'application"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Source de l\'application : <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"Plus d\'information sur <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Fonctionnement des applications"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"En cours d\'exécution"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Jamais utilisé)"</string>
@@ -2006,8 +2015,7 @@
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Détails de l\'utilisation depuis la dernière charge complète"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Dernière charge complète"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"L\'autonomie restante de la pile est approximative et peut changer en fonction de l\'utilisation"</string>
-    <!-- no translation found for battery_detail_foreground (3350401514602032183) -->
-    <skip />
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"Durant l\'utilisation active"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Lorsqu\'elle fonctionne en arrière-plan"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Utilisation de la pile"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> de l\'utilisation totale de l\'application (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
@@ -2725,6 +2733,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume des notifications"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Sonnerie du téléphone"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Son de notification par défaut"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Son fourni par l\'application"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Son de notification par défaut"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Son par défaut pour l\'alarme"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibreur aussi pour les appels"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Autres sons"</string>
@@ -2801,6 +2811,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Ne pas émettre de son, activer le vibreur ni afficher ces notifications sur l\'écran actif."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistant des notifications"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accès aux notifications"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"L\'accès aux notifications du profil professionnel est bloqué"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Les applications ne peuvent pas lire les notifications."</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">%d application peut lire les notifications</item>
@@ -2968,8 +2979,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Pour améliorer la protection de cet appareil, vous pouvez exiger l\'entrée du mot de passe avant le démarrage. L\'appareil ne reçoit pas d\'appels, de messages ni de notifications, y compris les alertes, tant qu\'il n\'a pas démarré. \n\nCette fonctionnalité permet de protéger les données en cas de perte ou de vol de l\'appareil. Exiger un mot de passe pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre NIP avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le NIP pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre schéma avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger le schéma pour démarrer l\'appareil?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Vous pouvez ajouter un niveau de protection pour le déverrouillage de cet appareil en exigeant votre mot de passe avant que l\'appareil ne démarre, en plus de la lecture de votre empreinte digitale. L\'appareil ne peut pas recevoir d\'appel, de message, de notification, ni d\'alarme tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Exiger un mot de passe pour démarrer l\'appareil?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Oui"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Non"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Exiger le NIP?"</string>
@@ -3167,7 +3177,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Aucun"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Désactiver l\'accès aux données d\'utilisation pour cette application n\'empêchera pas votre administrateur d\'effectuer le suivi de la consommation des données pour les applications de votre profil professionnel"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> sur <xliff:g id="COUNT_1">%2$d</xliff:g> caractères utilisés"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Applications pouvant se superposer à d\'autres"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Afficher par-dessus autres applis"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Afficher par-dessus les autres applications"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Applications"</string>
@@ -3270,8 +3279,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Les données en arrière-plan ne sont accessibles que par Wi-Fi. Cela peut nuire à certaines applications ou certains services lorsque le Wi-Fi n\'est pas accessible."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Profil professionnel désactivé"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Les applications, la synchronisation en arrière-plan et d\'autres fonctionnalités liées à votre profil professionnel sont désactivées."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Créer un horaire pour le mode Éclairage nocturne"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Écran ambre pour vous aider à vous endormir"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Éclairage nocturne activé"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"L\'écran a une teinte ambre. Cela peut vous aider à vous endormir."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Suggestions"</string>
@@ -3566,8 +3573,7 @@
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Stockage du téléphone"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Utilisé(s) sur <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <!-- no translation found for storage_percent_full (6095012055875077036) -->
-    <skip />
+    <string name="storage_percent_full" msgid="6095012055875077036">"utilisé"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Effacer les données de l\'application"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Voulez-vous supprimer cette application instantanée?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Jeux"</string>
@@ -3577,7 +3583,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(désactivé pour l\'utilisateur <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Service de remplissage automatique"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatique, remplir, remplissage automatique"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"Définir <xliff:g id="APP_NAME_0">%1$s</xliff:g> comme application de remplissage automatique? <xliff:g id="APP_NAME_1">%1$s</xliff:g> pourra lire le contenu de votre écran et remplir les champs dans d\'autres applications."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Assurez-vous de faire confiance à cette application&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Remplissage automatique&gt;%1$s&lt;/xliff:g&gt;utilise les éléments affichés à l\'écran pour déterminer les champs qui peuvent bénéficier de l\'entrée automatique."</string>
     <string name="device_theme" msgid="4571803018917608588">"Thème de l\'appareil"</string>
     <string name="default_theme" msgid="7085644992078579076">"Par défaut"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Gestionnaire de stockage : <xliff:g id="STATUS">^1</xliff:g>"</string>
