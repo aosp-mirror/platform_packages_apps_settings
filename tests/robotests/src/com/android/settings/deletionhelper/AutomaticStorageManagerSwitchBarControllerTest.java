@@ -16,6 +16,8 @@
 
 package com.android.settings.deletionhelper;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -117,6 +120,43 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
         SettingsShadowSystemProperties.set("ro.storage_manager.enabled", "true");
 
         mController.onSwitchChanged(null, true);
+
+        verify(mFragmentManager.beginTransaction(), never())
+                .add(any(Fragment.class), eq(ActivationWarningFragment.TAG));
+    }
+
+    @Test
+    public void initializeSwitchOnConstruction() {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
+                1);
+
+        mController =
+                new AutomaticStorageManagerSwitchBarController(
+                        mContext,
+                        mSwitchBar,
+                        mMetricsFeatureProvider,
+                        mPreference,
+                        mFragmentManager);
+
+        assertThat(mSwitchBar.isChecked()).isTrue();
+    }
+
+    @Test
+    public void initializingSwitchDoesNotTriggerView() {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
+                1);
+
+        mController =
+                new AutomaticStorageManagerSwitchBarController(
+                        mContext,
+                        mSwitchBar,
+                        mMetricsFeatureProvider,
+                        mPreference,
+                        mFragmentManager);
 
         verify(mFragmentManager.beginTransaction(), never())
                 .add(any(Fragment.class), eq(ActivationWarningFragment.TAG));
