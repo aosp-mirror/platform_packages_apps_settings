@@ -73,6 +73,8 @@ public class AdvancedPowerUsageDetailTest {
     private static final long FOREGROUND_TIME_US = 200 * 1000;
     private static final long BACKGROUND_TIME_MS = 100;
     private static final long FOREGROUND_TIME_MS = 200;
+    private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
+    private static final long PHONE_BACKGROUND_TIME_MS = 0;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -137,6 +139,7 @@ public class AdvancedPowerUsageDetailTest {
         ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
         mBatteryEntry.iconId = ICON_ID;
         mBatterySipper.uidObj = mUid;
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
@@ -186,6 +189,23 @@ public class AdvancedPowerUsageDetailTest {
                 BACKGROUND_TIME_MS);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME)).isEqualTo(
                 FOREGROUND_TIME_MS);
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT)).isEqualTo(
+                USAGE_PERCENT);
+    }
+
+    @Test
+    public void testStartBatteryDetailPage_typeNotApp_hasBasicData() {
+        mBatterySipper.drainType = BatterySipper.DrainType.PHONE;
+        mBatterySipper.usageTimeMs = PHONE_FOREGROUND_TIME_MS;
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
+                mBatteryEntry, USAGE_PERCENT);
+
+        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME)).isEqualTo(
+                PHONE_FOREGROUND_TIME_MS);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME)).isEqualTo(
+                PHONE_BACKGROUND_TIME_MS);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT)).isEqualTo(
                 USAGE_PERCENT);
     }
