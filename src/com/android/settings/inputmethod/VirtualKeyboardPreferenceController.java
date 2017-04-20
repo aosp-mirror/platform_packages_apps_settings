@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.Preference;
+import android.text.BidiFormatter;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -76,12 +77,15 @@ public class VirtualKeyboardPreferenceController extends PreferenceController {
             return;
         }
 
+        final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
+
         String summary = null;
         for (String label : labels) {
             if (summary == null) {
-                summary = label;
+                summary = bidiFormatter.unicodeWrap(label);
             } else {
-                summary = mContext.getString(R.string.join_many_items_middle, summary, label);
+                summary = mContext.getString(R.string.join_many_items_middle, summary,
+                        bidiFormatter.unicodeWrap(label));
             }
         }
         preference.setSummary(summary);
