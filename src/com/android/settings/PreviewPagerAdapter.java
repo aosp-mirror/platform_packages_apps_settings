@@ -74,7 +74,7 @@ public class PreviewPagerAdapter extends PagerAdapter {
                 // Create a new configuration for the specified value. It won't
                 // have any theme set, so manually apply the current theme.
                 final Context configContext = context.createConfigurationContext(configurations[j]);
-                configContext.setTheme(context.getThemeResId());
+                configContext.getTheme().setTo(context.getTheme());
 
                 final LayoutInflater configInflater = LayoutInflater.from(configContext);
                 final ViewStub sampleViewStub = new ViewStub(configContext);
