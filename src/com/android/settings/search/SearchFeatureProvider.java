@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.search.ranking.SearchResultsRankerCallback;
 
 import java.util.List;
 
@@ -98,21 +99,30 @@ public interface SearchFeatureProvider {
     }
 
     /**
-     * Ranks search results based on the input query.
+     * Query search results based on the input query.
      *
+     * @param context application context
      * @param query input user query
-     * @param searchResults list of search results to be ranked
+     * @param searchResultsRankerCallback {@link SearchResultsRankerCallback}
      */
-    default void rankSearchResults(String query, List<SearchResult> searchResults) {
+    default void querySearchResults(Context context, String query,
+            SearchResultsRankerCallback searchResultsRankerCallback) {
+    }
+
+    /**
+     * Cancel pending search query
+     */
+    default void cancelPendingSearchQuery(Context context) {
     }
 
     /**
      * Notify that a search result is clicked.
      *
+     * @param context application context
      * @param query input user query
      * @param searchResult clicked result
      */
-    default void searchResultClicked(String query, SearchResult searchResult) {
+    default void searchResultClicked(Context context, String query, SearchResult searchResult) {
     }
 
     /**
