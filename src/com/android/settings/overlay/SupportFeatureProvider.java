@@ -129,6 +129,19 @@ public interface SupportFeatureProvider {
     void startSupport(Activity activity, Account account, @SupportType int type);
 
     /**
+     * Starts support v2, invokes the support home page. Will no-op if support v2 is not enabled.
+     *
+     * @param activity Calling activity.
+     */
+    void startSupportV2(Activity activity);
+
+    /**
+     * Checks if support v2 is enabled for this device.
+     * @return a boolean indicating if support v2 is enabled.
+     */
+    boolean isSupportV2Enabled();
+
+    /**
      * Returns an {@link Intent} that opens help and allow user get help on sign in.
      */
     Intent getSignInHelpIntent(Context context);
