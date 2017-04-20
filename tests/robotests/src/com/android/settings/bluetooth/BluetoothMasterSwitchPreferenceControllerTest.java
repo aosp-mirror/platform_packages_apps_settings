@@ -52,6 +52,8 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private MasterSwitchPreference mPreference;
+    @Mock
+    private RestrictionUtils mRestrictionUtils;
 
     private Context mContext;
     private BluetoothMasterSwitchPreferenceController mController;
@@ -60,7 +62,8 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mController = new BluetoothMasterSwitchPreferenceController(mContext, mBluetoothManager);
+        mController = new BluetoothMasterSwitchPreferenceController(
+                mContext, mBluetoothManager, mRestrictionUtils);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
