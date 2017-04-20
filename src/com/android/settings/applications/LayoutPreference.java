@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -31,7 +32,10 @@ import com.android.settings.Utils;
 
 public class LayoutPreference extends Preference {
 
-    private View mRootView;
+    private final View.OnClickListener mClickListener = v -> performClick(v);
+
+    @VisibleForTesting
+    View mRootView;
 
     public LayoutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,7 +63,7 @@ public class LayoutPreference extends Preference {
 
     private void setView(View view) {
         setLayoutResource(R.layout.layout_preference_frame);
-        final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
+        final ViewGroup allDetails = view.findViewById(R.id.all_details);
         if (allDetails != null) {
             Utils.forceCustomPadding(allDetails, true /* additive padding */);
         }
@@ -68,9 +72,14 @@ public class LayoutPreference extends Preference {
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        super.onBindViewHolder(view);
-        FrameLayout layout = (FrameLayout) view.itemView;
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        holder.itemView.setOnClickListener(mClickListener);
+
+        final boolean selectable = isSelectable();
+        holder.itemView.setFocusable(selectable);
+        holder.itemView.setClickable(selectable);
+
+        FrameLayout layout = (FrameLayout) holder.itemView;
         layout.removeAllViews();
         ViewGroup parent = (ViewGroup) mRootView.getParent();
         if (parent != null) {
