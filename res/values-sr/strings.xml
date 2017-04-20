@@ -331,7 +331,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Налози"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Локација"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Налози"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Безбедност и закључавање екрана"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Безбедност и локација"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Шифровање и акредитиви"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Телефон је шифрован"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Подешавања закључаног екрана"</string>
@@ -340,8 +340,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Приватност"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Администратор је онемогућио"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Безбедносни статус"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Локација, отисак прста"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"Локација"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Закључавање екрана, отисак прста"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Закључавање екрана"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отисак прста"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Управљај отис. прстију"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Користи отис. прста за"</string>
@@ -700,6 +700,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Обавести ме кад год је доступна јавна мрежа високог квалитета"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Аутоматски укључи Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi ће се поново укључити у близини сачуваних мрежа високог квалитета, као што је кућна мрежа"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Недоступно је јер је искључено Wi‑Fi скенирање"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Избегавај лоше везе"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Не користи Wi-Fi мрежу ако нема добру интернет везу"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Коришћење само оних мрежа које имају добру интернет везу"</string>
@@ -822,9 +823,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Конфигуришите Wi‑Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC адреса"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP адреса"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Маска подмреже"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Маска подмреже"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 адресе"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 адресе"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Сачуване мреже"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP подешавања"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Напредна подешавања Wi‑Fi мреже нису доступна за овог корисника"</string>
@@ -1024,11 +1025,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Искључено"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Да бисте контролисали шта се дешава када је телефон на базној станици и/или у стању спавања, укључите чувар екрана."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Када почети"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Тренутни чувар екрана"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Започни одмах"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Подешавања"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Аутоматски ниво осветљености"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Подигни за активацију"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Екран долазног обавештења"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Амбијентални екран"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Пробудите екран када примите обавештења"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Величина фонта"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Омогућава да текст буде већи или мањи"</string>
@@ -1312,6 +1314,9 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Избриши SD картицу"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Обриши све податке из интерне USB меморије, као што су музика и фотографије."</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Избриши све податке са SD картице, као што су музика или фотографије"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"Обришите eSIM-ове"</string>
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Обришите све eSIM-ове на телефону. На тај начин нећете отказати мобилни тарифни пакет."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Обришите све eSIM-ове на таблету. На тај начин нећете отказати мобилни тарифни пакет."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Враћање таблета на подразумеване вредности"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Ресетуј телефон"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Желите ли да обришете све личне податке и преузете апликације? Не можете да опозовете ову радњу!"</string>
@@ -1623,6 +1628,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Продавница"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Детаљи о апликацији"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Апликација је инсталирана из продавнице <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"Више информација на <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Операције апликација"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Активно"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Никада није коришћено)"</string>
@@ -2198,7 +2204,7 @@
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"Администратор је онемогућио друге опције"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"Још детаља"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Без наслова"</string>
-    <string name="sound_category_sound_title" msgid="1488759370067953996">"Опште"</string>
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"Општа"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Евиденција обавештења"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Мелодија звона и вибрација позива"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Систем"</string>
@@ -2750,6 +2756,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Јачина звука за обавештења"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Звук звона телефона"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Подразумевани звук обавештења"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Звук апликације"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Подразумевани звук обавештења"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Подразумевани звук аларма"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Вибрација и за позиве"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Други звукови"</string>
@@ -2827,6 +2835,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Нема никаквог звука ни вибрације нити се ова обавештења накратко приказују на актуелном екрану."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Помоћник за обавештења"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Приступ обавештењима"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Приступ обавештењима профила за Work је блокиран"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Апликације не могу да читају обавештења"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">%d апликација може да чита обавештења</item>
@@ -2999,8 +3008,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Можете додатно да заштитите уређај тако што ћете га подесити да тражи лозинку пре покретања. Док се уређај не покрене, не може да прима позиве, поруке или обавештења, укључујући аларме. \n\nТо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати лозинку при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи PIN пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати PIN при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати шаблон при покретању уређаја?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи лозинке пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати лозинку при покретању уређаја?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Тражити PIN?"</string>
@@ -3203,7 +3211,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Ништа"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Искључивање приступа коришћењу за ову апликацију не спречава администратора да прати потрошњу података за апликације на профилу за Work"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Употребљени знакови: <xliff:g id="COUNT_0">%1$d</xliff:g> од <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Апликације које могу да се приказују преко других"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Приказ преко других апликација"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Приказ преко других апликација"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Апликације"</string>
@@ -3307,8 +3314,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Позадински подаци су доступни само преко Wi-Fi-ја. То може да утиче на неке апликације или услуге када Wi-Fi није доступан."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Профил за Work је искључен"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Апликације, синхронизација у позадини и друге функције повезане са профилом за Work су искључене."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Подесите распоред за ноћно светло"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Подесите жутонаранџаст екран да лакше заспите"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Ноћно светло је укључено"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Екран има жутонаранџасту нијансу. То може да вам помогне да заспите."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Предлози"</string>
@@ -3626,7 +3631,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(онемогућено за корисника <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Услуга аутоматског попуњавања"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"аутоматски, попуњавање, аутоматско попуњавање"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"Желите ли да <xliff:g id="APP_NAME_0">%1$s</xliff:g> буде апликација за аутоматско попуњавање? <xliff:g id="APP_NAME_1">%1$s</xliff:g> ће моћи да чита садржај екрана и да попуњава поља у другим апликацијама."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Уверите се да је ова апликација поуздана&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google аутоматско попуњавање&gt;%1$s&lt;/xliff:g&gt; користи садржај екрана за утврђивање података који могу аутоматски да се попуне."</string>
     <string name="device_theme" msgid="4571803018917608588">"Тема уређаја"</string>
     <string name="default_theme" msgid="7085644992078579076">"Подразумевана"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Менаџер меморијског простора: <xliff:g id="STATUS">^1</xliff:g>"</string>

@@ -329,7 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Cuentas"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Ubicación"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Cuentas"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Seguridad y bloqueo de pantalla"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Seguridad y ubicación"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encriptación y credenciales"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Teléfono encriptado"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferencias de pantalla bloqueada"</string>
@@ -338,8 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Privacidad"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"El administrador inhabilitó esta opción"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Estado de seguridad"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Ubicación, huella digital"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"Ubicación"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Bloqueo de pantalla, huella digital"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Bloqueo de pantalla"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Huella digital"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Adm. huellas digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar huella dig. para"</string>
@@ -350,7 +350,7 @@
       <item quantity="one">Se configuró <xliff:g id="COUNT_0">%1$d</xliff:g> huella digital.</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Usar huella digital"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloquea con huella digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Usa tus huellas digitales"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Solo toca el sensor de huellas digitales para desbloquear tu teléfono, autorizar compras o acceder a las apps. Ten cuidado con las personas que agregas, ya que todas las huellas digitales que agregues podrán realizar estas acciones.\n\nNota: Tu huella digital puede ser menos segura que un PIN o un patrón eficaz."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Toca el sensor de huellas digitales para autorizar compras o acceder a las apps. Ten cuidado con las personas que agregas, ya que todas las huellas digitales que agregues podrán realizar estas acciones.\n\nNota: No puedes usar tu huella digital para desbloquear este dispositivo. Para obtener más información, comunícate con el administrador de la organización."</string>
@@ -585,8 +585,8 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Administrar conexiones, establecer nombre y detección del dispositivo"</string>
-    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"¿Sincronizar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Código de sincronización Bluetooth"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"¿Vincular con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Código de vinculación Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Ingresa el código de sincronización y luego presiona Intro."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN contiene letras o símbolos."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Por lo general, 0000 o 1234"</string>
@@ -649,7 +649,7 @@
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Habilitar pantalla inalámbrica"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No se encontraron dispositivos cercanos."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Conectando"</string>
-    <string name="wifi_display_status_connected" msgid="8364125226376985558">"Conectada"</string>
+    <string name="wifi_display_status_connected" msgid="8364125226376985558">"Conectado"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"En uso"</string>
     <string name="wifi_display_status_not_available" msgid="5714978725794210102">"No disponible"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Configuración de visualización"</string>
@@ -689,6 +689,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Notificarme cuando haya una red pública de alta calidad"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activar Wi-Fi automáticamente"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"El Wi-Fi se volverá a activar automáticamente cerca de redes guardadas de alta calidad, como tu red doméstica"</string>
+    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Evitar malas conexiones"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Usar solo redes con una conexión a Internet estable"</string>
@@ -810,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Configurar Wi-Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Dirección MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Dirección IP"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Máscara de subred"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Máscara de subred"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"Direcciones IPv6"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"Direcciones IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Redes guardadas"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"Configuración de IP"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"La configuración avanzada de Wi‑Fi no está disponible para este usuario"</string>
@@ -1012,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Apagado"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Para controlar qué sucede cuando el teléfono está conectado o suspendido, activa el protector de pantalla."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Cuándo comenzar"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Protector de pantalla actual"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Comenzar ahora"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Configuración"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Notificaciones entrantes"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activar la pantalla al recibir notificaciones"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumenta o reduce el tamaño del texto en pantalla"</string>
@@ -1274,7 +1277,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se restableció la configuración predeterminada de APN."</string>
     <string name="reset_dashboard_title" msgid="4412694650600342973">"Restablecer"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Restablecer configuración de red"</string>
-    <string name="reset_network_desc" msgid="5547979398298881406">"Se restablecerán las opciones de configuración de todas redes, lo que incluye:\n\n"<li>"Wi‑Fi"</li>\n<li>"datos móviles"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_desc" msgid="5547979398298881406">"Se restablecerán las opciones de configuración de todas las redes, incluidos:\n\n"<li>"Wi‑Fi"</li>\n<li>"datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer configuración"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"¿Quieres restablecer la configuración de red? Esta acción no se puede deshacer."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Restablecer configuración"</string>
@@ -1298,6 +1301,11 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Borrar tarjeta SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Borra todos los datos del almacenamiento USB, como la música o las fotos."</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Borra todos los datos de la tarjeta SD, como música o fotos."</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"Borrar eSIM"</string>
+    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
+    <skip />
+    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
+    <skip />
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Restablecer la tablet"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Restablecer dispositivo"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"¿Deseas eliminar toda tu información personal y las aplicaciones descargadas? Esta acción no se puede deshacer."</string>
@@ -1517,7 +1525,7 @@
     <string name="uninstall_all_users_text" msgid="851857393177950340">"Desinstalar en todos los usuarios"</string>
     <string name="install_text" msgid="884360662922471113">"Instalar"</string>
     <string name="disable_text" msgid="6544054052049395202">"Inhabilitar"</string>
-    <string name="enable_text" msgid="9217362512327828987">"Activar"</string>
+    <string name="enable_text" msgid="9217362512327828987">"Habilitar"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Eliminar datos"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Desinstalar las actualizaciones"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Has elegido lanzar esta aplicación de manera predeterminada para algunas acciones."</string>
@@ -1608,6 +1616,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Store"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Detalles de la app"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"La app se instaló desde <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"Más información en <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Operaciones de las aplicaciones"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"En curso"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Sin utilizar)"</string>
@@ -1753,7 +1762,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Configuración de accesibilidad"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Lectores de pantalla, pantalla, controles de interacción"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Configuración de visión"</string>
-    <string name="vision_settings_description" msgid="5679491180156408260">"Puedes personalizar este dispositivo para que se adapte a tus necesidades. Estas funciones de accesibilidad puede cambiarse más tarde en Configuración."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"Puedes personalizar este dispositivo para que se adapte a tus necesidades. Estas funciones de accesibilidad pueden cambiarse más tarde en Configuración."</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio y texto en pantalla"</string>
     <string name="display_category_title" msgid="685461049938269166">"Pantalla"</string>
@@ -2724,6 +2733,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volumen de notificación"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Tono de llamada"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Sonido predeterminado"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Sonido que proporcionó la app"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Sonido de notificaciones predeterminado"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Alarma: sonido predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrar también en llamadas"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Otros sonidos"</string>
@@ -2800,6 +2811,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"No emitir sonido, vibrar ni mostrar estas notificaciones en la pantalla actual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistente de notificaciones"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acceso a notificaciones"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"El acceso a las notificaciones del perfil de trabajo está bloqueado"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer las notificaciones."</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for manage_notification_access_summary_nonzero (7930130030691218387) -->
@@ -2910,7 +2922,7 @@
     <string name="zen_mode_events" msgid="7914446030988618264">"Eventos"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Todos los emisores"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Emisores seleccionados"</string>
-    <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Repetir emisores"</string>
+    <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Llamadas repetidas"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"Permitir llamada si la misma persona llama por segunda vez en un período de <xliff:g id="MINUTES">%d</xliff:g> minuto(s)"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activar automáticam."</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nunca"</string>
@@ -2965,8 +2977,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Puedes solicitar la contraseña del dispositivo antes de iniciarlo para aumentar la protección. Mientras el dispositivo se inicia, no puede recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados. ¿Deseas solicitar contraseña para iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Además de usar tu huella digital para desbloquear el dispositivo, puedes solicitar el PIN antes de iniciarlo para aumentar la protección. Mientras el dispositivo se inicia, no puede recibir llamadas, mensajes, ni notificaciones, incluidas las alarmas. \n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados. ¿Deseas solicitar el PIN para iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Además de usar tu huella digital para desbloquear el dispositivo, puedes solicitar el patrón antes de iniciarlo para aumentar la protección. Mientras el dispositivo se inicia, no puede recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados. ¿Deseas solicitar el patrón para iniciar el dispositivo?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Además de usar tu huella digital para desbloquear el dispositivo, puedes solicitar una contraseña antes de iniciarlo para aumentar la protección. Mientras el dispositivo se inicia, no puede recibir llamadas, mensajes ni notificaciones, incluidas las alarmas.\n\nEsta opción ayuda a proteger los datos en dispositivos perdidos o robados. ¿Deseas solicitar la contraseña para iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Sí"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"No"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"¿Solicitar PIN?"</string>
@@ -3164,7 +3175,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Ninguno"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Desactivar el acceso al uso de datos para esta app no evitará que el administrador realice el seguimiento del uso de datos de las apps de tu perfil de trabajo"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Caracteres utilizados: <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Apps que no pueden mostrarse sobre otras apps"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Mostrar sobre otras apps"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Mostrar sobre otras apps"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplicaciones"</string>
@@ -3267,8 +3277,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Los datos en segundo plano solo están disponibles por medio de Wi-Fi. Si no hay una conexión Wi-Fi disponible, podrían verse afectados algunos servicios o apps."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Las apps, la sincronización en segundo plano y otras funciones relacionadas con tu perfil de trabajo están desactivadas."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Programar Luz nocturna"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Tono ámbar para la noche"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"\"Luz nocturna\" activada"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"La pantalla tiene un tono ámbar que te ayudará a conciliar el sueño."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Sugerencias"</string>
@@ -3314,8 +3322,8 @@
     <string name="data_saver_title" msgid="398458827917495765">"Reducir datos"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acceso a datos sin restricción"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Se desactivaron los datos en segundo plano"</string>
-    <string name="data_saver_on" msgid="6774217590237934709">"Activada"</string>
-    <string name="data_saver_off" msgid="6892309031162738794">"Desactivada"</string>
+    <string name="data_saver_on" msgid="6774217590237934709">"Activado"</string>
+    <string name="data_saver_off" msgid="6892309031162738794">"Desactivado"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Uso de datos sin restricción"</string>
     <string name="unrestricted_app_summary" msgid="6458008993501723912">"Acceso a datos sin restricción"</string>
     <string name="home_app" msgid="4066188520886810030">"App de la página principal"</string>
@@ -3573,7 +3581,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(se inhabilitó para <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Servicio autocompletar"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"auto, completar, autocompletar"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"¿Quieres que <xliff:g id="APP_NAME_0">%1$s</xliff:g> sea tu app de autocompletar? <xliff:g id="APP_NAME_1">%1$s</xliff:g> podrá leer tu pantalla y completar campos en otras apps."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Asegúrate de que esta app sea confiable&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; usa el contenido de tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="device_theme" msgid="4571803018917608588">"Tema del dispositivo"</string>
     <string name="default_theme" msgid="7085644992078579076">"Predeterminado"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Administrador de almacenamiento: <xliff:g id="STATUS">^1</xliff:g>"</string>

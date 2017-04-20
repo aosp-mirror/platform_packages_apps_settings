@@ -329,7 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"ანგარიშები"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"მდებარეობა"</string>
     <string name="account_settings_title" msgid="626177544686329806">"ანგარიშები"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"უსაფრთხოება და ეკრანის დაბლოკვა"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"უსაფრთხოება და მდებარეობა"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"დაშიფვრა და ავტორიზაციის მონაცემები"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"ტელეფონი დაშიფრულია"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"ჩაკეტილი ეკრანის პარამეტრები"</string>
@@ -338,8 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"კონფიდენციალურობა"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"გათიშულია ადმინისტრატორის მიერ"</string>
     <string name="security_status_title" msgid="5848766673665944640">"უსაფრთხოების სტატუსი"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"მდებარეობა, თითის ანაბეჭდი"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"მდებარეობა"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"ეკრანის დაბლოკვა, თითის ანაბეჭდი"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"ეკრანის დაბლოკვა"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"თითის ანაბეჭდი"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"ანაბეჭდების მართვა"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ანაბეჭდების გამოყენება"</string>
@@ -689,6 +689,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"შეტყობინების მიღება მაღალხარისხიანი საჯარო ქსელის ხელმისაწვდომობისას"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi-ს ავტომატურად ჩართვა"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi ჩაირთვება შენახულ, მაღალხარისხიან ქსელებთან სიახლოვისას (მაგალითად, სახლის ქსელისას)"</string>
+    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Wi-Fi ქსელების ფილტრი"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"არ გამოიყენო Wi‑Fi ქსელი, თუ მას არ აქვს კარგი ინტერნეტ კავშირი"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"მხოლოდ იმ ქსელების გამოყენება, რომლებსაც კარგი ინტერნეტ-კავშირი გააჩნია"</string>
@@ -810,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi‑Fi-ს კონფიგურაცია"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC მისამართი"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP მისამართი"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"ქვექსელის შენიღბვა"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"ქვექსელის ნიღაბი"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 მისამართები"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 მისამართები"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"დამახსოვრ. ქსელები"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP პარამეტრები"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"გაფართოებული Wi‑Fi პარამეტრები ამ მომხმარებლისთვის მიუწვდომელია"</string>
@@ -1012,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"გამორთული"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"დოკ-სადგურთან მიერთების და/ან ძილის რეჟიმზე გადასვლის დროს ტელეფონის ქცევის სამართავად, ჩართეთ ეკრანმზოგი."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"გაშვების დრო"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"ამჟამინდელი ეკრანმზოგი"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"დაწყება ახლავე"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"პარამეტრები"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ავტომატური სიკაშკაშე"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"გაღვიძება აწევისას"</string>
-    <string name="doze_title" msgid="5389406335828323273">"შემომავალი შეტყობინების ეკრანი"</string>
+    <string name="doze_title" msgid="2259176504273878294">"გარემოს ეკრანი"</string>
     <string name="doze_summary" msgid="3846219936142814032">"ეკრანის გამოღვიძება შეტყობინებების მიღებისას"</string>
     <string name="title_font_size" msgid="4405544325522105222">"შრიფტის ზომა"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ტექსტის გადიდება ან დაპატარავება"</string>
@@ -1298,6 +1301,11 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"SD ბარათის წაშლა"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"შიდა USB მეხსიერებიდან ყველა მონაცემების წაშლა, როგორიცაა მუსიკა ან ფოტოები"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"წაიშალოს SD ბარათის ყველა მონაცემი, როგორიცაა მუსიკა და ფოტოები"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"eSIM-ების ამოშლა"</string>
+    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
+    <skip />
+    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
+    <skip />
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"ტაბლეტის მონაცემების ჩამოყრა"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"ტელეფონის საწყისი მდგომარეობის აღდგენა"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"გსურთ მთელი თქვენი პირადი ინფორმაციისა და ჩამოტვირთული აპების წაშლა? ამ მოქმედების გაუქმება შეუძლებელია!"</string>
@@ -1608,6 +1616,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"მაღაზია"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"აპის შესახებ"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"აპის წყარო: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"დამატებითი ინფორმაცია <xliff:g id="APP_STORE">%1$s</xliff:g>-ში"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"ოპერაციები აპებში"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"გაშვებული"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(არ ყოფილა გამოყენებული)"</string>
@@ -2006,8 +2015,7 @@
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"დეტალები ბოლო სრული დატენვიდან"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"ბოლო სრული დატენვა"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"ბატარეის მუშაობის დარჩენილი დრო მიახლოებითია და შეიძლება შეიცვალოს მოხმარების მიხედვით"</string>
-    <!-- no translation found for battery_detail_foreground (3350401514602032183) -->
-    <skip />
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"აქტიურად გამოყენებისას"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"ფონურ რეჟიმში ყოფნისას"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"ბატარეის მოხმარება"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"აპების სართო მოხმარების <xliff:g id="PERCENT">%1$s</xliff:g> (<xliff:g id="POWER">%2$d</xliff:g>მა·სთ)"</string>
@@ -2725,6 +2733,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"შეტყობინების ხმა"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"ტელეფონის ზარი"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"შეტყობინებების ნაგულისხმევი ხმა"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"აპის მიერ უზრუნველყოფილი ხმა"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"შეტყობინებების ნაგულისხმევი ხმა"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"მაღვიძარას ნაგულისხმევი ხმა"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"ზარებზე ასევე ვიბრირება"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"სხვა ხმები"</string>
@@ -2801,6 +2811,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"შეტყობინებებისთვის ხმისა თუ ვიბრაციის გათიშვა და მიმდინარე ეკრანზე ანთების აკრძალვა."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"შეტყობინებათა ასისტენტი"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"შეტყობინებებზე წვდომა"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"სამსახურის პროფილის შეტყობინებებზე წვდომა დაბლოკილია"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"აპები ვერ კითხულობს შეტყობინებებს"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d აპს შეუძლია შეტყობინებების წაკითხვა</item>
@@ -2968,8 +2979,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"ამ მოწყობილობის დაცვის გაძლიერება შეგიძლიათ მის გასაშვებად პაროლის შეყვანის მოთხოვნის გააქტიურებით. მოწყობილობის გაშვებამდე ის ვერ მიიღებს ზარებს, შეტყობინებებს და შეხსენებებს (მათ შორის, არ იმუშავებს მაღვიძარები). \n\nეს მოწყობილობის დაკარგვის ან მოპარვის შემთხვევაში მონაცემების დაცვას ემსახურება. გსურთ თქვენი მოწყობილობის გასაშვებად პაროლის შეყვანის მოთხოვნის გააქტიურება?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"განსაბლოკად თითის ანაბეჭდის გამოყენებასთან ერთად, ამ მოწყობილობის დაცვის გაძლიერება შეგიძლიათ მის გასაშვებად PIN-კოდის შეყვანის მოთხოვნის გააქტიურებით. მოწყობილობის გაშვებამდე ის ვერ მიიღებს ზარებს, შეტყობინებებს და შეხსენებებს (მათ შორის, არ იმუშავებს მაღვიძარები).\n\nეს მოწყობილობის დაკარგვის ან მოპარვის შემთხვევაში მონაცემების დაცვას ემსახურება. გსურთ თქვენი მოწყობილობის გასაშვებად PIN-კოდის შეყვანის მოთხოვნის გააქტიურება?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"განსაბლოკად თითის ანაბეჭდის გამოყენებასთან ერთად, ამ მოწყობილობის დაცვის გაძლიერება შეგიძლიათ მის გასაშვებად ნიმუშის დახატვის მოთხოვნის გააქტიურებით. მოწყობილობის გაშვებამდე ის ვერ მიიღებს ზარებს, შეტყობინებებს და შეხსენებებს (მათ შორის, არ იმუშავებს მაღვიძარები).\n\nეს მოწყობილობის დაკარგვის ან მოპარვის შემთხვევაში მონაცემების დაცვას ემსახურება. გსურთ თქვენი მოწყობილობის გასაშვებად ნიმუშის დახატვის მოთხოვნის გააქტიურება?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"განსაბლოკად თითის ანაბეჭდის გამოყენებასთან ერთად, ამ მოწყობილობის დაცვის გაძლიერება შეგიძლიათ მის გასაშვებად პაროლის შეყვანის მოთხოვნის გააქტიურებით. მოწყობილობის გაშვებამდე ის ვერ მიიღებს ზარებს, შეტყობინებებს და შეხსენებებს (მათ შორის, არ იმუშავებს მაღვიძარები).\n\nეს მოწყობილობის დაკარგვის ან მოპარვის შემთხვევაში მონაცემების დაცვას ემსახურება. გსურთ თქვენი მოწყობილობის გასაშვებად პაროლის შეყვანის მოთხოვნის გააქტიურება?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"დიახ"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"არა"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"მოთხოვნილი იქნეს PIN?"</string>
@@ -3167,7 +3177,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"არაფერი"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"ამ აპისთვის მოხმარებაზე წვდომის გამორთვა ხელს არ უშლის თქვენს ადმინისტრატორს, აღრიცხოს მონაცემთა მოხმარება თქვენს სამუშაო პროფილში არსებული აპებისთვის"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g> გამოყენებული სიმბოლოდან"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"აპები, რომლებსაც სხვა აპების ზემოდან გამოჩენა შეუძლია"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"სხვა აპების ზემოდან გამოჩენა"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"სხვა აპების ზემოდან გამოჩენა"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"აპები"</string>
@@ -3270,8 +3279,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"უკანა ფონის მონაცემები ხელმისაწვდომია მხოლოდ Wi-Fi-ს მეშვეობით. ამან შეიძლება გავლენა იქონიოს ზოგიერთი აპის ან სერვისის მუშაობაზე, როცა Wi-Fi მიუწვდომელი იქნება."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"სამსახურის პროფილი გამორთულია"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"აპები, ფონური სინქრონიზაცია და თქვენს სამსახურის პროფილთან დაკავშირებული სხვა ფუნქციები გამორთულია."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"ღამის განათების განრიგის დაყენება"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"ეკრანის ქარვისფრად შეფერვა, რაც დაძინებაში დაგეხმარებათ"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"ღამის განათება ჩართულია"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"ეკრანს ახლა ქარვისფერი ელფერი აქვს. ეს დაძინებაში დაგეხმარებათ."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"შემოთავაზებები"</string>
@@ -3566,8 +3573,7 @@
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"ტელეფონის მეხსიერება"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"გამოყენებულია <xliff:g id="TOTAL">%1$s</xliff:g>-დან"</string>
-    <!-- no translation found for storage_percent_full (6095012055875077036) -->
-    <skip />
+    <string name="storage_percent_full" msgid="6095012055875077036">"გამოყენებული"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"აპის გასუფთავება"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"გსურთ ამ მყისიერი აპის ამოშლა?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"თამაშები"</string>
@@ -3577,7 +3583,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(გათიშულია მომხმარებლისთვის: <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"ავტომატური შევსების სერვისი"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"ავტომატური, შევსება, ავტოშევსება"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"გსურთ, <xliff:g id="APP_NAME_0">%1$s</xliff:g> ავტომატური შევსების ნაგულისხმევი აპი გახდეს? <xliff:g id="APP_NAME_1">%1$s</xliff:g> თქვენს ეკრანზე არსებული ინფორმაციის წაკითხვას და სხვა აპებში ველების შევსებას შეძლებს."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;დარწმუნდით, რომ ენდობით ამ აპს&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google-ის ავტომატური შევსება&gt;%1$s&lt;/xliff:g&gt; იყენებს თქვენს ეკრანზე არსებულ კონტენტს, რათა გაარკვიოს, რა შეიძლება შეივსოს ავტომატურად."</string>
     <string name="device_theme" msgid="4571803018917608588">"მოწყობილობის თემა"</string>
     <string name="default_theme" msgid="7085644992078579076">"ნაგულისხმევი"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"მეხსიერების მენეჯერი: <xliff:g id="STATUS">^1</xliff:g>"</string>

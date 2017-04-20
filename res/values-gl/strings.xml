@@ -329,7 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Contas"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Localización"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Contas"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Seguranza e bloqueo da pantalla"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Seguranza e localización"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encriptación e credenciais"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Teléfono encriptado"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferencias da pantalla de bloqueo"</string>
@@ -338,8 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Privacidade"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Desactivado polo administrador"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Estado da seguranza"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Localización, impresión dixital"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"Localización"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Bloqueo da pantalla, impresión dixital"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Bloqueo da pantalla"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Impresión dixital"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Xest. identificación"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Usar identificac. para"</string>
@@ -689,6 +689,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Notifica cando unha rede pública de alta calidade estea dispoñible"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activar a wifi automaticamente"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"A wifi volverase activar preto de redes de alta calidade gardadas, como a túa rede doméstica"</string>
+    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Evitar conexións deficientes"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Non utilizar unha rede wifi se non ten unha boa conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Usa só redes que teñan unha boa conexión a Internet"</string>
@@ -810,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Configurar wifi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Enderezo MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Enderezo IP"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Máscara de subrede"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Máscara de subrede"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"Enderezos IPv6"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"Enderezos IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Redes gardadas"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"Configuración IP"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"A configuración avanzada da wifi non está dispoñible para este usuario"</string>
@@ -1012,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Desactivado"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Para controlar o que sucederá cando o teléfono estea ancorado ou en modo de suspensión, activa o protector de pantalla."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Cando comezar"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Protector de pantalla actual"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Iniciar agora"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Configuración"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar para acender"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Pantalla notificación entrante"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activa a pantalla cando recibes notificacións"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño do tipo de letra"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Reduce ou amplía o texto"</string>
@@ -1298,6 +1301,11 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Borrar tarxeta SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Borra todos os datos do almacenamento USB interno, como a música ou as fotos"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Borra todos os datos da tarxeta SD, como a música ou as fotos"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"Borrar as eSIM"</string>
+    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
+    <skip />
+    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
+    <skip />
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Restablecer tableta"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Restablecer teléfono"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Queres borrar toda a túa información persoal e as aplicacións descargadas? Non podes desfacer esta acción."</string>
@@ -1608,6 +1616,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Tenda"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Detalles da aplicación"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"A aplicación instalouse desde <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"Máis información en <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Operacións das aplicacións"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Activa"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Nunca utilizada)"</string>
@@ -2081,7 +2090,7 @@
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este servizo de entrada de voz poderá supervisar que a voz sempre estea activada e controlar as aplicacións compatibles coa voz no teu nome. Procede da aplicación <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Queres activar o uso deste servizo?"</string>
     <string name="tts_engine_preference_title" msgid="1578826947311494239">"Motor preferido"</string>
     <string name="tts_engine_settings_title" msgid="6886964122861384818">"Configuración do motor"</string>
-    <string name="tts_sliders_title" msgid="992059150784095263">"Velocidade da voz e ton"</string>
+    <string name="tts_sliders_title" msgid="992059150784095263">"Velocidade da fala e ton"</string>
     <string name="tts_engine_section_title" msgid="6289240207677024034">"Motor"</string>
     <string name="tts_install_voice_title" msgid="6275828614052514320">"Voces"</string>
     <string name="tts_spoken_language" msgid="5542499183472504027">"Idioma falado"</string>
@@ -2724,6 +2733,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume das notificacións"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ton de chamada do teléfono"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Son de notificación predeterminado"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Son fornecido pola aplicación"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Son de notificación predeterminado"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Son de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrar tamén nas chamadas"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Outros sons"</string>
@@ -2800,6 +2811,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Non emitir son, vibrar nin mostrar estas notificacións na pantalla actual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistente de notificacións"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acceso a notificacións"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"O acceso ás notificacións do perfil de traballo está bloqueado"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"As aplicacións non poden ler as notificacións"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d aplicacións poden ler notificacións</item>
@@ -2967,8 +2979,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Podes protexer aínda máis este dispositivo solicitando o teu contrasinal antes de inicialo. Ata que o dispositivo se inicie, non pode recibir chamadas, mensaxes, notificacións, nin tampouco alarmas. \n\nEsta acción axudará a protexer os datos en dispositivos perdidos ou roubados. Queres solicitar un contrasinal para iniciar o dispositivo?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Ademais de usar a túa impresión dixital para desbloquear o dispositivo, tamén podes protexelo solicitando o teu PIN antes de inicialo. Ata que o dispositivo se inicie, non pode recibir chamadas, mensaxes, notificacións, nin tampouco alarmas.\n\nEsta acción axudará a protexer os datos en dispositivos perdidos ou roubados. Queres solicitar un padrón para iniciar o dispositivo?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Ademais de usar a túa impresión dixital para desbloquear o dispositivo, tamén podes protexelo solicitando o teu padrón antes de inicialo. Ata que o dispositivo se inicie, non pode recibir chamadas, mensaxes, notificacións, nin tampouco alarmas.\n\nEsta acción axudará a protexer os datos en dispositivos perdidos ou roubados. Queres solicitar un padrón para iniciar o dispositivo?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Ademais de usar a túa impresión dixital para desbloquear o dispositivo, tamén podes protexelo solicitando o teu contrasinal antes de inicialo. Ata que o dispositivo se inicie, non pode recibir chamadas, mensaxes, notificacións, nin tan sequera alarmas.\n\nDeste xeito, axúdache a protexer os datos en caso de perda ou roubo dos dispositivos. Queres solicitar o contrasinal para iniciar o dispositivo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Si"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Non"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Requirir PIN?"</string>
@@ -3166,7 +3177,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Ningún"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"A desactivación do acceso de uso desta aplicación non impide que o teu administrador realice o seguimento do uso de datos das aplicacións no teu perfil de traballo"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Uso de <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> caracteres"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Aplicacións que se poden mostrar sobre outras"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Superpoñer sobre aplicacións"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Mostrar sobre outras aplicacións"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplicacións"</string>
@@ -3269,8 +3279,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Os datos en segundo plano só están dispoñibles a través de wifi. Esta opción pode afectar a algunhas aplicacións ou servizos cando non haxa wifi."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de traballo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"As aplicacións, a sincronización en segundo plano e outras funcións relacionadas co teu perfil de traballo están desactivadas."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Define a programación da Luz nocturna"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Ton ámbar na pantalla para coller o sono"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"A luz nocturna está activada"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"A pantalla ten un ton ámbar que che pode axudar a coller o sono."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Suxestións"</string>
@@ -3575,7 +3583,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(desactivado polo usuario <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Servizo de autocompletar"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automático, completar, autocompletar"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"Queres que a aplicación <xliff:g id="APP_NAME_0">%1$s</xliff:g> sexa a encargada do proceso de autocompletar? A aplicación <xliff:g id="APP_NAME_1">%1$s</xliff:g> poderá ler a túa pantalla e completar os campos noutras aplicacións."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Asegúrate de que confías nesta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Autocompletar de Google&gt;%1$s&lt;/xliff:g&gt; utiliza o contido da pantalla para determinar o que se pode completar."</string>
     <string name="device_theme" msgid="4571803018917608588">"Tema do dispositivo"</string>
     <string name="default_theme" msgid="7085644992078579076">"Predeterminado"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Xestor de almacenamento: <xliff:g id="STATUS">^1</xliff:g>"</string>

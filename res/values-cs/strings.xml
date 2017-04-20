@@ -333,7 +333,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Účty"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Poloha"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Účty"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Zabezpečení a zámek obrazovky"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Zabezpečení a poloha"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Šifrování a identifikační údaje"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Telefon je zašifrován"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Předvolby obrazovky uzamčení"</string>
@@ -342,8 +342,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Ochrana soukromí"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Zakázáno administrátorem"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Stav zabezpečení"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Poloha, otisky prstů"</string>
-    <string name="security_dashboard_summary_no_fingerprint" msgid="6407130749972933883">"Poloha"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Zámek obrazovky, otisky prstů"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Zámek obrazovky"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Otisk prstu"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Správa otisků prstů"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"K čemu otisk používat"</string>
@@ -449,7 +449,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Ochraňte svůj tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Ochraňte své zařízení"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Chraňte svůj telefon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Za účelem zvýšení zabezpečení nastavte záložní zámek obrazovky."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Pro ještě lepší zabezpečení nastavte záložní zámek obrazovky."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Aktivujte funkce ochrany zařízení a zabraňte tak ostatním v používání tabletu bez vašeho svolení. Vyberte zámek obrazovky, který chcete používat."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Aktivujte funkce ochrany zařízení a zabraňte tak ostatním v jeho používání bez vašeho svolení. Vyberte zámek obrazovky, který chcete používat."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Aktivujte funkce ochrany zařízení a zabraňte tak ostatním v používání telefonu bez vašeho svolení. Vyberte zámek obrazovky, který chcete používat."</string>
@@ -711,6 +711,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Zobrazit oznámení, když je dostupná kvalitní veřejná síť"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Zapínat Wi-Fi automaticky"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"V dosahu kvalitních uložených sítí, jako je například vaše domácí síť, se Wi-Fi znovu zapne"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Nedostupné, protože je vypnuto vyhledávání Wi-Fi"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Ignorovat slabá připojení"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Nepoužívat síť Wi-Fi, pokud nemá dostatečně kvalitní internetové připojení"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Použít jen sítě s dobrým připojením k internetu"</string>
@@ -834,9 +835,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Konfigurace Wi‑Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Adresa MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP adresa"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Maska podsítě"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Maska podsítě"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"Adresy IPv6"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"Adresy IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Uložené sítě"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"Nastavení IP adresy"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Rozšířená nastavení sítě Wi-Fi nejsou pro tohoto uživatele dostupná."</string>
@@ -1036,11 +1037,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Vyp."</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Chcete-li nastavit, co se stane, když je telefon vložen do doku nebo je v režimu spánku, zapněte spořič obrazovky."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Kdy spustit"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Aktuální spořič obrazovky"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Spustit"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Nastavení"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatický jas"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Probudit zvednutím zařízení"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Obrazovka příchozího oznámení"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Ambientní displej"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Probudit obrazovku, když dostanete oznámení"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Velikost písma"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Umožňuje zvětšit nebo zmenšit text"</string>
@@ -1326,6 +1328,9 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Smazat kartu SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Smazat všechna data v interním úložišti USB, například hudbu a fotografie."</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Smazat všechna data na kartě SD, například hudbu a fotografie."</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"Vymazat eSIM karty"</string>
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Vymazat všechny eSIM karty v telefonu. Tímto krokem nebude zrušen mobilní tarif."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Vymazat všechny eSIM karty v tabletu. Tímto krokem nebude zrušen mobilní tarif."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Resetovat tablet"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Resetovat telefon"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Chcete vymazat všechny osobní údaje a stažené aplikace? Tuto akci nelze vrátit zpět."</string>
@@ -1638,6 +1643,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Obchod"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Podrobnosti o aplikaci"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Aplikace nainstalovaná z obchodu <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"Další informace: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Operace aplikací"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Spuštěno"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Nebylo použito)"</string>
@@ -2776,6 +2782,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Hlasitost oznámení"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Vyzváněcí tón telefonu"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Výchozí zvuk oznámení"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Zvuk z aplikace"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Výchozí zvuk oznámení"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Výchozí zvuk budíku"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"U hovorů také vibrovat"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Ostatní zvuky"</string>
@@ -2854,6 +2862,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Na tato oznámení nebudete upozorněni zvukem ani vibrací, ani se nebude zobrazovat jejich náhled na aktuální obrazovce."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistent oznámení"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Přístup k oznámením"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Přístup k oznámením pracovního profilu je zablokován"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikace nesmí číst oznámení"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="few">%d aplikace mohou číst oznámení</item>
@@ -3031,8 +3040,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Toto zařízení můžete dále ochránit tím, že před jeho spuštěním bude požadováno heslo. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků. \n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních. Má být před spuštěním zařízení vyžadováno heslo?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Kromě odemykání otiskem prstu můžete toto zařízení dále ochránit tím, že před jeho spuštěním bude požadován PIN. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků.\n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních. Má být před spuštěním zařízení vyžadován PIN?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Kromě odemykání otiskem prstu můžete toto zařízení dále ochránit tím, že před jeho spuštěním bude požadováno gesto. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků.\n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních. Má být před spuštěním zařízení vyžadováno gesto?"</string>
-    <!-- no translation found for encryption_interstitial_message_password_for_fingerprint (5560954719370251702) -->
-    <skip />
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Kromě odemykání otiskem prstu můžete toto zařízení dále ochránit tím, že před jeho spuštěním bude požadováno heslo. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků.\n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních. Má být před spuštěním zařízení vyžadováno heslo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Ano"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ne"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Požadovat kód PIN?"</string>
@@ -3240,7 +3248,6 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Žádné"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"I když této aplikaci vypnete přístup k informacím o využití, administrátor bude moci i nadále sledovat využití aplikací ve vašem pracovním profilu"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Použité znaky: <xliff:g id="COUNT_0">%1$d</xliff:g> z <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Aplikace, které se smí zobrazovat přes jiné aplikace"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Zobrazit přes ostatní aplikace"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Zobrazit přes ostatní aplikace"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplikace"</string>
@@ -3345,8 +3352,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Data na pozadí jsou dostupná pouze prostřednictvím Wi-Fi. Tato skutečnost může mít vliv na některé aplikace a služby, pokud síť Wi-Fi není k dispozici."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Pracovní profil je vypnutý"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Aplikace, synchronizace na pozadí a další funkce související s pracovním profilem jsou vypnuty."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nastavení plánu Nočního režimu"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Pro snazší usínání obrazovku zbarvit do oranžova"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Noční režim je aktivní"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Obrazovka je tónována oranžově. Možná vám to pomůže usnout."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Návrhy"</string>
@@ -3677,7 +3682,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(pro uživatele <xliff:g id="USER">%s</xliff:g> nedostupné)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Služba automatického vyplňování"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatické vyplňování, vyplňování"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"Chcete aplikaci <xliff:g id="APP_NAME_0">%1$s</xliff:g> nastavit jako aplikaci na automatické vyplňování? Aplikace <xliff:g id="APP_NAME_1">%1$s</xliff:g> bude moci číst obsah vaší obrazovky a vyplňovat pole v ostatních aplikacích."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Zkontrolujte, zda se jedná o důvěryhodnou aplikaci&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Automatické doplňování Google&gt;%1$s&lt;/xliff:g&gt; určuje na základě obsahu obrazovky, co lze automaticky vyplnit."</string>
     <string name="device_theme" msgid="4571803018917608588">"Motiv zařízení"</string>
     <string name="default_theme" msgid="7085644992078579076">"Výchozí"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Správce úložiště: <xliff:g id="STATUS">^1</xliff:g>"</string>
