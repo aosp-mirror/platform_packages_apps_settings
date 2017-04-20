@@ -21,6 +21,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
 import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -81,6 +82,7 @@ public class LinkablePreference extends Preference {
                     mContentTitle.length(),
                     Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
             textView.setText(boldSpan);
+            textView.setMovementMethod(new LinkMovementMethod());
         }
     }
 
