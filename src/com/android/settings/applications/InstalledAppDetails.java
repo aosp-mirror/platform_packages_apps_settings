@@ -415,8 +415,8 @@ public class InstalledAppDetails extends AppInfoBase
                 .getApplicationFeatureProvider(activity)
                 .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
                 .setPackageName(mPackageName)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
-                        AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
+                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
+                        AppHeaderController.ActionType.ACTION_NONE)
                 .styleActionBar(activity)
                 .bindAppHeaderButtons();
         prepareUninstallAndStop();

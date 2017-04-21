@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -162,25 +161,6 @@ public class AppHeaderControllerTest {
         mController = new AppHeaderController(mContext, mFragment, appLinks);
         mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
-                AppHeaderController.ActionType.ACTION_NONE);
-        mController.done(mActivity);
-
-        assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
-                .isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void bindButton_noStoreLink_shouldNotShowButton() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
-        when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(null);
-
-        mController = new AppHeaderController(mContext, mFragment, appLinks);
-        mController.setButtonActions(
-                AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
                 AppHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
