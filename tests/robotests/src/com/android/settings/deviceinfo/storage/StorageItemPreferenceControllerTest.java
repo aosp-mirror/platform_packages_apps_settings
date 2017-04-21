@@ -114,6 +114,7 @@ public class StorageItemPreferenceControllerTest {
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getType()).isEqualTo("image/*");
         assertThat(intent.getAction()).isEqualTo(android.content.Intent.ACTION_VIEW);
+        assertThat(intent.getBooleanExtra(Intent.EXTRA_FROM_STORAGE, false)).isTrue();
     }
 
     @Test
