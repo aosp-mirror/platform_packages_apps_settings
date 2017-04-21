@@ -37,119 +37,136 @@ import com.android.settings.R;
  */
 public final class BluetoothPairingService extends Service {
 
-  private static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
+    private static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
 
-  private static final String TAG = "BluetoothPairingService";
+    private static final String ACTION_DISMISS_PAIRING =
+            "com.android.settings.bluetooth.ACTION_DISMISS_PAIRING";
 
-  private BluetoothDevice mDevice;
+    private static final String TAG = "BluetoothPairingService";
 
-  public static Intent getPairingDialogIntent(Context context, Intent intent) {
+    private BluetoothDevice mDevice;
 
-    BluetoothDevice device =
-        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-    int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
-        BluetoothDevice.ERROR);
-    Intent pairingIntent = new Intent();
-    pairingIntent.setClass(context, BluetoothPairingDialog.class);
-    pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
-    pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
-    if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION ||
-        type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
-        type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
-      int pairingKey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY,
-          BluetoothDevice.ERROR);
-      pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_KEY, pairingKey);
-    }
-    pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
-    pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    return pairingIntent;
-  }
-
-  private boolean mRegistered = false;
-  private final BroadcastReceiver mCancelReceiver = new BroadcastReceiver() {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-      String action = intent.getAction();
-      if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
-        int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
-            BluetoothDevice.ERROR);
-        if ((bondState != BluetoothDevice.BOND_NONE) && (bondState != BluetoothDevice.BOND_BONDED)) {
-          return;
+    public static Intent getPairingDialogIntent(Context context, Intent intent) {
+        BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+        int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
+                BluetoothDevice.ERROR);
+        Intent pairingIntent = new Intent();
+        pairingIntent.setClass(context, BluetoothPairingDialog.class);
+        pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
+        pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
+        if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION ||
+                type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
+                type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
+            int pairingKey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY,
+                    BluetoothDevice.ERROR);
+            pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_KEY, pairingKey);
         }
-        Log.d(TAG, "Dismiss pairing for " + mDevice.getAddress() + " (" + mDevice.getName() + "), BondState: " + bondState);
-      } else {
-        Log.d(TAG, "Dismiss pairing for " + mDevice.getAddress() + " (" + mDevice.getName() + "), Cancelled.");
-      }
-      stopForeground(true);
-      stopSelf();
-    }
-  };
-
-  @Override
-  public void onCreate() {
-  }
-
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-    if (intent == null) {
-      Log.e(TAG, "Can't start: null intent!");
-      stopSelf();
-      return START_NOT_STICKY;
+        pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
+        pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return pairingIntent;
     }
 
-    Resources res = getResources();
-    Notification.Builder builder = new Notification.Builder(this)
-        .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
-        .setTicker(res.getString(R.string.bluetooth_notif_ticker));
+    private boolean mRegistered = false;
+    private final BroadcastReceiver mCancelReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
+                int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
+                        BluetoothDevice.ERROR);
+                if ((bondState != BluetoothDevice.BOND_NONE) && (bondState != BluetoothDevice.BOND_BONDED)) {
+                    return;
+                }
+            } else if (action.equals(ACTION_DISMISS_PAIRING)) {
+                Log.d(TAG, "Notification cancel " + mDevice.getAddress() + " (" +
+                        mDevice.getName() + ")");
+                mDevice.cancelPairingUserInput();
+            } else {
+                int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
+                        BluetoothDevice.ERROR);
+                Log.d(TAG, "Dismiss pairing for " + mDevice.getAddress() + " (" +
+                        mDevice.getName() + "), BondState: " + bondState);
+            }
+            stopForeground(true);
+            stopSelf();
+        }
+    };
 
-    PendingIntent pending = PendingIntent.getActivity(this, 0,
-        getPairingDialogIntent(this, intent), PendingIntent.FLAG_ONE_SHOT);
-
-    mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-    if (mDevice.getBondState() != BluetoothDevice.BOND_BONDING) {
-      Log.w(TAG, "Device " + mDevice + " not bonding: " + mDevice.getBondState());
-      stopSelf();
-      return START_NOT_STICKY;
+    @Override
+    public void onCreate() {
     }
 
-    String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-    if (TextUtils.isEmpty(name)) {
-      BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-      name = device != null ? device.getAliasName() : getString(android.R.string.unknownName);
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent == null) {
+            Log.e(TAG, "Can't start: null intent!");
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        Resources res = getResources();
+        Notification.Builder builder = new Notification.Builder(this)
+                .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
+                .setTicker(res.getString(R.string.bluetooth_notif_ticker));
+
+        PendingIntent pairIntent = PendingIntent.getActivity(this, 0,
+                getPairingDialogIntent(this, intent), PendingIntent.FLAG_ONE_SHOT);
+
+        PendingIntent dismissIntent = PendingIntent.getBroadcast(this, 0,
+                new Intent(ACTION_DISMISS_PAIRING), PendingIntent.FLAG_ONE_SHOT);
+
+        mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+        if (mDevice != null && mDevice.getBondState() != BluetoothDevice.BOND_BONDING) {
+            Log.w(TAG, "Device " + mDevice + " not bonding: " + mDevice.getBondState());
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+        if (TextUtils.isEmpty(name)) {
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            name = device != null ? device.getAliasName() : res.getString(android.R.string.unknownName);
+        }
+
+        Log.d(TAG, "Show pairing notification for " + mDevice.getAddress() + " (" + name + ")");
+
+        Notification.Action pairAction = new Notification.Action.Builder(0,
+                res.getString(R.string.bluetooth_device_context_pair_connect), pairIntent).build();
+        Notification.Action dismissAction = new Notification.Action.Builder(0,
+                res.getString(android.R.string.cancel), dismissIntent).build();
+
+        builder.setContentTitle(res.getString(R.string.bluetooth_notif_title))
+                .setContentText(res.getString(R.string.bluetooth_notif_message, name))
+                .setContentIntent(pairIntent)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setColor(getColor(com.android.internal.R.color.system_notification_accent_color))
+                .addAction(pairAction)
+                .addAction(dismissAction);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_PAIRING_CANCEL);
+        filter.addAction(ACTION_DISMISS_PAIRING);
+        registerReceiver(mCancelReceiver, filter);
+        mRegistered = true;
+
+        startForeground(NOTIFICATION_ID, builder.getNotification());
+        return START_REDELIVER_INTENT;
     }
 
-    Log.d(TAG, "Show pairing notification for " + mDevice.getAddress() + " (" + name + ")");
-
-    builder.setContentTitle(res.getString(R.string.bluetooth_notif_title))
-        .setContentText(res.getString(R.string.bluetooth_notif_message, name))
-        .setContentIntent(pending)
-        .setDefaults(Notification.DEFAULT_SOUND)
-        .setColor(getColor(com.android.internal.R.color.system_notification_accent_color));
-
-    IntentFilter filter = new IntentFilter();
-    filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-    filter.addAction(BluetoothDevice.ACTION_PAIRING_CANCEL);
-    registerReceiver(mCancelReceiver, filter);
-    mRegistered = true;
-
-    startForeground(NOTIFICATION_ID, builder.getNotification());
-    return START_REDELIVER_INTENT;
-  }
-
-  @Override
-  public void onDestroy() {
-    if (mRegistered) {
-      unregisterReceiver(mCancelReceiver);
-      mRegistered = false;
+    @Override
+    public void onDestroy() {
+        if (mRegistered) {
+            unregisterReceiver(mCancelReceiver);
+            mRegistered = false;
+        }
+        stopForeground(true);
     }
-    stopForeground(true);
-  }
 
-  @Override
-  public IBinder onBind(Intent intent) {
-    // No binding.
-    return null;
-  }
-
+    @Override
+    public IBinder onBind(Intent intent) {
+        // No binding.
+        return null;
+    }
 }
