@@ -107,7 +107,7 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new VrDisplayPreferenceController(context));
         controllers.add(new WallpaperPreferenceController(context));
         controllers.add(new ThemePreferenceController(context));
-        controllers.add(new BrightnessLevelPreferenceController(context, lifecycle));
+        controllers.add(new BrightnessLevelPreferenceController(context));
         return controllers;
     }
 
