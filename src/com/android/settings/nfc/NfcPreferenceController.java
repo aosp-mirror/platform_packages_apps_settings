@@ -39,8 +39,8 @@ import java.util.List;
 public class NfcPreferenceController extends PreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
-    private static final String KEY_TOGGLE_NFC = "toggle_nfc";
-    private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
+    public static final String KEY_TOGGLE_NFC = "toggle_nfc";
+    public static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
 
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;

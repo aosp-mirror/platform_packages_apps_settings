@@ -15,8 +15,12 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.drawer.CategoryKey;
@@ -24,22 +28,33 @@ import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedDeviceDashboardFragmentTest {
+    @Mock
+    Context mContext;
+
+    @Mock
+    private PackageManager mManager;
 
     private ConnectedDeviceDashboardFragment mFragment;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mFragment = new ConnectedDeviceDashboardFragment();
+        when(mContext.getPackageManager()).thenReturn(mManager);
     }
 
     @Test
@@ -50,11 +65,47 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                        ShadowApplication.getInstance().getApplicationContext(),
-                        true /* enabled */);
+                mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(mContext, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void testSearchIndexProvider_NoNfc_KeyAdded() {
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(keys).isNotNull();
+        assertThat(keys).contains(NfcPreferenceController.KEY_TOGGLE_NFC);
+        assertThat(keys).contains(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
+    }
+
+    @Test
+    public void testSearchIndexProvider_NFC_KeyNotAdded() {
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(keys).isNotNull();
+        assertThat(keys).doesNotContain(NfcPreferenceController.KEY_TOGGLE_NFC);
+        assertThat(keys).doesNotContain(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
+    }
+
+    @Test
+    public void testSearchIndexProvider_NoBluetooth_KeyAdded() {
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)).thenReturn(false);
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(keys).isNotNull();
+        assertThat(keys).contains(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
+    }
+
+    @Test
+    public void testSearchIndexProvider_Bluetooth_KeyNotAdded() {
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)).thenReturn(true);
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(keys).isNotNull();
+        assertThat(keys).doesNotContain(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
     }
 }
