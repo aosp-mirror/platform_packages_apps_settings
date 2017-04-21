@@ -945,7 +945,6 @@
 
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
-                android:icon="@drawable/ic_settings_applications"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
@@ -2507,7 +2506,6 @@
 
         <activity android:name="Settings$ConfigureNotificationSettingsActivity"
                 android:label="@string/configure_notification_settings"
-                android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
@@ -2882,8 +2880,7 @@
         <activity android:name="Settings$AdvancedAppsActivity"
                   android:taskAffinity=""
                   android:exported="true"
-                  android:label="@string/app_default_dashboard_title"
-                  android:icon="@drawable/ic_adb">
+                  android:label="@string/app_default_dashboard_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
                 <action android:name="android.settings.HOME_SETTINGS" />
