@@ -140,13 +140,13 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
-    public void testExtractUsageType_TypeService_ReturnService() {
+    public void testExtractUsageType_TypeService_ReturnSystem() {
         mNormalBatterySipper.drainType = DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(FAKE_UID_1);
         when(mPowerUsageFeatureProvider.isTypeService(any())).thenReturn(true);
 
         assertThat(mPowerUsageAdvanced.extractUsageType(mNormalBatterySipper))
-                .isEqualTo(UsageType.SERVICE);
+                .isEqualTo(UsageType.SYSTEM);
     }
 
     @Test
@@ -210,8 +210,8 @@ public class PowerUsageAdvancedTest {
         final int[] usageTypeSet = mPowerUsageAdvanced.mUsageTypes;
 
         assertThat(usageTypeSet).asList().containsExactly(UsageType.APP, UsageType.WIFI,
-                UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.SERVICE,
-                UsageType.USER, UsageType.SYSTEM, UsageType.UNACCOUNTED, UsageType.OVERCOUNTED);
+                UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.USER,
+                UsageType.SYSTEM, UsageType.UNACCOUNTED, UsageType.OVERCOUNTED);
     }
 
     @Test
