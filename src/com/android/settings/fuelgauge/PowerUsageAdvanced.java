@@ -60,7 +60,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     final int[] mUsageTypes = {
             UsageType.WIFI,
             UsageType.CELL,
-            UsageType.SERVICE,
             UsageType.SYSTEM,
             UsageType.BLUETOOTH,
             UsageType.USER,
@@ -207,10 +206,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.UNACCOUNTED;
         } else if (drainType == DrainType.OVERCOUNTED) {
             return UsageType.OVERCOUNTED;
-        } else if (mPowerUsageFeatureProvider.isTypeSystem(sipper)) {
+        } else if (mPowerUsageFeatureProvider.isTypeSystem(sipper)
+                || mPowerUsageFeatureProvider.isTypeService(sipper)) {
             return UsageType.SYSTEM;
-        } else if (mPowerUsageFeatureProvider.isTypeService(sipper)) {
-            return UsageType.SERVICE;
         } else {
             return UsageType.APP;
         }
@@ -328,7 +326,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         @IntDef({UsageType.APP,
                 UsageType.WIFI,
                 UsageType.CELL,
-                UsageType.SERVICE,
                 UsageType.SYSTEM,
                 UsageType.BLUETOOTH,
                 UsageType.USER,
@@ -339,13 +336,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             int APP = 0;
             int WIFI = 1;
             int CELL = 2;
-            int SERVICE = 3;
-            int SYSTEM = 4;
-            int BLUETOOTH = 5;
-            int USER = 6;
-            int IDLE = 7;
-            int UNACCOUNTED = 8;
-            int OVERCOUNTED = 9;
+            int SYSTEM = 3;
+            int BLUETOOTH = 4;
+            int USER = 5;
+            int IDLE = 6;
+            int UNACCOUNTED = 7;
+            int OVERCOUNTED = 8;
         }
 
         @StringRes
@@ -379,8 +375,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return R.string.power_wifi;
                 case UsageType.CELL:
                     return R.string.power_cell;
-                case UsageType.SERVICE:
-                    return R.string.power_service;
                 case UsageType.SYSTEM:
                     return R.string.power_system;
                 case UsageType.BLUETOOTH:
