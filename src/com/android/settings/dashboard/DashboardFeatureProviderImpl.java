@@ -20,9 +20,9 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -51,22 +51,17 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
 
-
     protected final Context mContext;
+
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final CategoryManager mCategoryManager;
+    private final PackageManager mPackageManager;
 
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
         mCategoryManager = CategoryManager.get(context, getExtraIntentAction());
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
-    @VisibleForTesting
-    DashboardFeatureProviderImpl(Context context, CategoryManager categoryManager) {
-        mContext = context.getApplicationContext();
-        mCategoryManager = categoryManager;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mPackageManager = context.getPackageManager();
     }
 
     @Override
@@ -208,6 +203,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,
             int sourceMetricCategory) {
+        if (!isIntentResolvable(intent)) {
+            Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
+            return;
+        }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
         if (tile.userHandle == null) {
             mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
@@ -218,5 +217,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         } else {
             ProfileSelectDialog.show(activity.getFragmentManager(), tile);
         }
+    }
+
+    private boolean isIntentResolvable(Intent intent) {
+        return mPackageManager.resolveActivity(intent, 0) != null;
     }
 }

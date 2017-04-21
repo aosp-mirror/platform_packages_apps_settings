@@ -50,6 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
@@ -294,8 +295,34 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void clickPreference_withUnresolvableIntent_shouldNotLaunchAnything() {
+        ReflectionHelpers.setField(
+                mImpl, "mPackageManager", RuntimeEnvironment.getPackageManager());
+        Activity activity = Robolectric.buildActivity(Activity.class).get();
+        final ShadowApplication application = ShadowApplication.getInstance();
+        final Preference preference = new Preference(application.getApplicationContext());
+        final Tile tile = new Tile();
+        tile.key = "key";
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        tile.metaData = new Bundle();
+        tile.metaData.putString("com.android.settings.intent.action", "TestAction");
+        tile.userHandle = null;
+
+        mImpl.bindPreferenceToTile(activity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        final ShadowActivity.IntentForResult launchIntent =
+                shadowOf(activity).getNextStartedActivityForResult();
+
+        assertThat(launchIntent).isNull();
+    }
+
+    @Test
     public void getPreferences_noCategory_shouldReturnNull() {
-        mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
+        mImpl = new DashboardFeatureProviderImpl(mActivity);
+        ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
         when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
                 .thenReturn(null);
 
@@ -306,7 +333,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void getPreferences_noTileForCategory_shouldReturnNull() {
-        mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
+        mImpl = new DashboardFeatureProviderImpl(mActivity);
+        ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
         when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
                 .thenReturn(new DashboardCategory());
 
@@ -317,7 +345,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void getPreferences_hasTileForCategory_shouldReturnPrefList() {
-        mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
+        mImpl = new DashboardFeatureProviderImpl(mActivity);
+        ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
         final DashboardCategory category = new DashboardCategory();
         category.tiles.add(new Tile());
         when(mCategoryManager
