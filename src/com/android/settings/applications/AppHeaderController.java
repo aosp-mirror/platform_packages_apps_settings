@@ -52,15 +52,13 @@ public class AppHeaderController {
     @IntDef({ActionType.ACTION_NONE,
             ActionType.ACTION_APP_INFO,
             ActionType.ACTION_APP_PREFERENCE,
-            ActionType.ACTION_STORE_DEEP_LINK,
             ActionType.ACTION_NOTIF_PREFERENCE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
         int ACTION_APP_INFO = 1;
-        int ACTION_STORE_DEEP_LINK = 2;
-        int ACTION_APP_PREFERENCE = 3;
-        int ACTION_NOTIF_PREFERENCE = 4;
+        int ACTION_APP_PREFERENCE = 2;
+        int ACTION_NOTIF_PREFERENCE = 3;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
@@ -254,20 +252,6 @@ public class AppHeaderController {
                 }
                 return;
             }
-            case ActionType.ACTION_STORE_DEEP_LINK: {
-                final Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
-                        .setPackage(getInstallerPackageName(mContext, mPackageName));
-                final Intent result = resolveIntent(intent);
-                if (result == null) {
-                    button.setVisibility(View.GONE);
-                } else {
-                    result.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
-                    button.setImageResource(R.drawable.ic_sim_sd);
-                    button.setOnClickListener(v -> mFragment.startActivity(intent));
-                    button.setVisibility(View.VISIBLE);
-                }
-                return;
-            }
             case ActionType.ACTION_NOTIF_PREFERENCE: {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
@@ -292,15 +276,6 @@ public class AppHeaderController {
                 button.setVisibility(View.GONE);
                 return;
             }
-        }
-    }
-
-    private String getInstallerPackageName(Context context, String packageName) {
-        try {
-            return context.getPackageManager().getInstallerPackageName(packageName);
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Exception while retrieving the package installer of " + packageName, e);
-            return null;
         }
     }
 
