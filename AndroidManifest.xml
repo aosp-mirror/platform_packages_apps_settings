@@ -2848,7 +2848,7 @@
                 android:label="@string/install_other_apps"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_UNKNOWN_APP_SOURCES" />
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2859,7 +2859,7 @@
                   android:label="@string/install_other_apps"
                   android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_UNKNOWN_APP_SOURCES" />
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
