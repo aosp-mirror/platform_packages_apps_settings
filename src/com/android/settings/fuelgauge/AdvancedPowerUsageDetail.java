@@ -101,11 +101,12 @@ public class AdvancedPowerUsageDetail extends PowerUsageBase implements
         final BatterySipper sipper = entry.sipper;
         final BatteryStats.Uid uid = sipper.uidObj;
         final BatteryUtils batteryUtils = BatteryUtils.getInstance(caller);
+        final boolean isTypeApp = sipper.drainType == BatterySipper.DrainType.APP;
 
-        final long backgroundTimeMs = batteryUtils.getProcessTimeMs(
-                BatteryUtils.StatusType.BACKGROUND, uid, which);
-        final long foregroundTimeMs = batteryUtils.getProcessTimeMs(
-                BatteryUtils.StatusType.FOREGROUND, uid, which);
+        final long foregroundTimeMs = isTypeApp ? batteryUtils.getProcessTimeMs(
+                BatteryUtils.StatusType.FOREGROUND, uid, which) : sipper.usageTimeMs;
+        final long backgroundTimeMs = isTypeApp ? batteryUtils.getProcessTimeMs(
+                BatteryUtils.StatusType.BACKGROUND, uid, which) : 0;
 
         if (ArrayUtils.isEmpty(sipper.mPackages)) {
             // populate data for system app
