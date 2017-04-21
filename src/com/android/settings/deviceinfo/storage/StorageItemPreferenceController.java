@@ -275,6 +275,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         intent.setAction(android.content.Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         intent.setType(IMAGE_MIME_TYPE);
+        intent.putExtra(Intent.EXTRA_FROM_STORAGE, true);
         return intent;
     }
 
