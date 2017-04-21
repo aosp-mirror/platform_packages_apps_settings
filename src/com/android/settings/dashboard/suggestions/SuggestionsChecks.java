@@ -68,7 +68,11 @@ public class SuggestionsChecks {
         } else if (className.equals(ScreenLockSuggestionActivity.class.getName())) {
             return isDeviceSecured();
         } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
-            return isDeviceSecured() || !isFingerprintEnabled();
+            FingerprintManager manager = Utils.getFingerprintManagerOrNull(mContext);
+            if (manager == null || !isFingerprintEnabled()) {
+                return true;
+            }
+            return manager.hasEnrolledFingerprints();
         }
 
         SuggestionFeatureProvider provider =
