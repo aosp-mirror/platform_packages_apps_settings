@@ -17,6 +17,8 @@
 package com.android.settings.bluetooth;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothDevice;
@@ -41,6 +43,9 @@ public final class BluetoothPairingService extends Service {
 
     private static final String ACTION_DISMISS_PAIRING =
             "com.android.settings.bluetooth.ACTION_DISMISS_PAIRING";
+
+    private static final String BLUETOOTH_NOTIFICATION_CHANNEL =
+            "bluetooth_notification_channel";
 
     private static final String TAG = "BluetoothPairingService";
 
@@ -94,6 +99,13 @@ public final class BluetoothPairingService extends Service {
 
     @Override
     public void onCreate() {
+      NotificationManager mgr = (NotificationManager)this
+         .getSystemService(Context.NOTIFICATION_SERVICE);
+      NotificationChannel notificationChannel = new NotificationChannel(
+         BLUETOOTH_NOTIFICATION_CHANNEL,
+         this.getString(R.string.bluetooth),
+         NotificationManager.IMPORTANCE_HIGH);
+      mgr.createNotificationChannel(notificationChannel);
     }
 
     @Override
@@ -105,7 +117,8 @@ public final class BluetoothPairingService extends Service {
         }
 
         Resources res = getResources();
-        Notification.Builder builder = new Notification.Builder(this)
+        Notification.Builder builder = new Notification.Builder(this,
+            BLUETOOTH_NOTIFICATION_CHANNEL)
                 .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
                 .setTicker(res.getString(R.string.bluetooth_notif_ticker));
 
