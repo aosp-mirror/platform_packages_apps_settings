@@ -51,6 +51,9 @@ import java.util.List;
 public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
 
+    private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
+    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DISPLAY;
@@ -85,7 +88,7 @@ public class DisplaySettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AutoBrightnessPreferenceController(context));
+        controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new AutoRotatePreferenceController(context));
         controllers.add(new CameraGesturePreferenceController(context));
         controllers.add(new DozePreferenceController(context));
@@ -100,7 +103,7 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new DoubleTapScreenPreferenceController(
                 context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new TapToWakePreferenceController(context));
-        controllers.add(new TimeoutPreferenceController(context));
+        controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new VrDisplayPreferenceController(context));
         controllers.add(new WallpaperPreferenceController(context));
         controllers.add(new ThemePreferenceController(context));

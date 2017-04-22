@@ -70,7 +70,7 @@ public abstract class CodeInspector {
         return true;
     }
 
-    protected void initializeGrandfatherList(List<String> grandfather, String filename) {
+    public static void initializeGrandfatherList(List<String> grandfather, String filename) {
         try {
             final InputStream in = ShadowApplication.getInstance().getApplicationContext()
                     .getAssets()

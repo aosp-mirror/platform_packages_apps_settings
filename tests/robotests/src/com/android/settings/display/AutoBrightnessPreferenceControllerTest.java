@@ -43,12 +43,13 @@ public class AutoBrightnessPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private AutoBrightnessPreferenceController mController;
+    private final String PREFERENCE_KEY = "auto_brightness";
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mController = new AutoBrightnessPreferenceController(mContext);
+        mController = new AutoBrightnessPreferenceController(mContext, PREFERENCE_KEY);
     }
 
     @Test
@@ -72,7 +73,7 @@ public class AutoBrightnessPreferenceControllerTest {
     @Test
     public void testPreferenceController_ProperResultPayloadType() {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
-        mController = new AutoBrightnessPreferenceController(context);
+        mController = new AutoBrightnessPreferenceController(context, PREFERENCE_KEY);
         ResultPayload payload = mController.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }
@@ -80,7 +81,7 @@ public class AutoBrightnessPreferenceControllerTest {
     @Test
     public void testPreferenceController_CorrectPayload() {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
-        mController = new AutoBrightnessPreferenceController(context);
+        mController = new AutoBrightnessPreferenceController(context, PREFERENCE_KEY);
         InlineSwitchPayload payload = (InlineSwitchPayload) mController.getResultPayload();
         assertThat(payload.settingsUri).isEqualTo("screen_brightness_mode");
         assertThat(payload.settingSource).isEqualTo(ResultPayload.SettingsSource.SYSTEM);
