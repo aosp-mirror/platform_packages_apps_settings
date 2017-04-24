@@ -788,9 +788,14 @@ public class ApnEditor extends SettingsPreferenceFragment
      * Check the key fields' validity and save if valid.
      * @param force save even if the fields are not valid, if the app is
      *        being suspended
-     * @return true if the data was saved
+     * @return true if there's no error
      */
     private boolean validateAndSave(boolean force) {
+        // nothing to do if it's a read only APN
+        if (mReadOnlyApn) {
+            return true;
+        }
+
         String name = checkNotSet(mName.getText());
         String apn = checkNotSet(mApn.getText());
         String mcc = checkNotSet(mMcc.getText());
