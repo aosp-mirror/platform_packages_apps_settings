@@ -23,6 +23,8 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.speech.tts.TtsEngines;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
@@ -81,7 +83,16 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getLifecycle();
+        if (mAmbientDisplayConfig == null) {
+            mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
+        }
+
+        return buildPreferenceControllers(context, getLifecycle(), mAmbientDisplayConfig);
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(@NonNull Context context,
+            @Nullable Lifecycle lifecycle,
+            @NonNull AmbientDisplayConfiguration ambientDisplayConfiguration) {
         final List<PreferenceController> controllers = new ArrayList<>();
         // Language
         controllers.add(new PhoneLanguagePreferenceController(context));
@@ -93,11 +104,10 @@ public class LanguageAndInputSettings extends DashboardFragment {
         controllers.add(new PhysicalKeyboardPreferenceController(context, lifecycle));
         final GameControllerPreferenceController gameControllerPreferenceController
                 = new GameControllerPreferenceController(context);
-        lifecycle.addObserver(gameControllerPreferenceController);
-
-        if (mAmbientDisplayConfig == null) {
-            mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
+        if (lifecycle != null) {
+            lifecycle.addObserver(gameControllerPreferenceController);
         }
+
         controllers.add(gameControllerPreferenceController);
         // Gestures
         controllers.add(new AssistGesturePreferenceController(context, lifecycle));
@@ -105,9 +115,9 @@ public class LanguageAndInputSettings extends DashboardFragment {
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
         controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle));
         controllers.add(new PickupGesturePreferenceController(
-                context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
+                context, lifecycle, ambientDisplayConfiguration, UserHandle.myUserId()));
         controllers.add(new DoubleTapScreenPreferenceController(
-                context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
+                context, lifecycle, ambientDisplayConfiguration, UserHandle.myUserId()));
         controllers.add(new DefaultAutofillPreferenceController(context));
         return controllers;
     }
@@ -162,6 +172,12 @@ public class LanguageAndInputSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.language_and_input;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context, null,
+                            new AmbientDisplayConfiguration(context));
                 }
             };
 }
