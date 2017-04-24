@@ -110,4 +110,22 @@ public class AppStorageSizesControllerTest {
         assertThat(mDataPreference.getSummary()).isEqualTo("100B");
         assertThat(mTotalPreference.getSummary()).isEqualTo("101B");
     }
+
+    @Test
+    public void fakeDataFlagSetsDataAndCacheToZero() {
+        AppStorageStats result = mock(AppStorageStats.class);
+        when(result.getCodeBytes()).thenReturn(1L);
+        when(result.getCacheBytes()).thenReturn(10L);
+        when(result.getDataBytes()).thenReturn(100L);
+        when(result.getTotalBytes()).thenReturn(111L);
+
+        mController.setResult(result);
+        mController.setDataCleared(true);
+        mController.updateUi(mContext);
+
+        assertThat(mAppPreference.getSummary()).isEqualTo("1.00B");
+        assertThat(mCachePreference.getSummary()).isEqualTo("0.00B");
+        assertThat(mDataPreference.getSummary()).isEqualTo("0.00B");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("1.00B");
+    }
 }
