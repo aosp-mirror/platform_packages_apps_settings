@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -69,6 +68,9 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class InstalledAppDetailsTest {
+
+    private static final String PACKAGE_NAME = "test_package_name";
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -179,6 +181,24 @@ public final class InstalledAppDetailsTest {
 
         assertThat(mAppDetail.ensurePackageInfoAvailable(mActivity)).isTrue();
         verify(mActivity, never()).finishAndRemoveTask();
+    }
+
+    @Test
+    public void packageSizeChange_isOtherPackage_shouldNotRefreshUi() {
+        ReflectionHelpers.setField(mAppDetail, "mPackageName", PACKAGE_NAME);
+        mAppDetail.onPackageSizeChanged("Not_" + PACKAGE_NAME);
+
+        verify(mAppDetail, never()).refreshUi();
+    }
+
+    @Test
+    public void packageSizeChange_isOwnPackage_shouldRefreshUi() {
+        doReturn(Boolean.TRUE).when(mAppDetail).refreshUi();
+        ReflectionHelpers.setField(mAppDetail, "mPackageName", PACKAGE_NAME);
+
+        mAppDetail.onPackageSizeChanged(PACKAGE_NAME);
+
+        verify(mAppDetail).refreshUi();
     }
 
     @Test

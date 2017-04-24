@@ -454,6 +454,10 @@ public class InstalledAppDetails extends AppInfoBase
 
     @Override
     public void onPackageSizeChanged(String packageName) {
+        if (!TextUtils.equals(packageName, mPackageName)) {
+            Log.d(LOG_TAG, "Package change irrelevant, skipping");
+          return;
+        }
         refreshUi();
     }
 
