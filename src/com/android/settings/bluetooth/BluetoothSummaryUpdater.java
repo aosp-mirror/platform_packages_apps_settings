@@ -17,14 +17,22 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
+
 import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Helper class that listeners to bluetooth callback and notify client when there is update in
@@ -98,7 +106,7 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
         }
         switch (mConnectionState) {
             case BluetoothAdapter.STATE_CONNECTED:
-                return mContext.getString(R.string.bluetooth_connected_summary);
+                return getConnectedDeviceSummary();
             case BluetoothAdapter.STATE_CONNECTING:
                 return mContext.getString(R.string.bluetooth_connecting);
             case BluetoothAdapter.STATE_DISCONNECTING:
@@ -143,6 +151,29 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
         return mBluetoothManager != null
             ? mBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()
             : null;
+    }
+
+    @VisibleForTesting
+    String getConnectedDeviceSummary() {
+        String deviceName = null;
+        int count = 0;
+        final Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
+        if (devices == null || devices.isEmpty()) {
+            return null;
+        }
+
+        for (BluetoothDevice device : devices) {
+            if (device.isConnected()) {
+                deviceName = device.getName();
+                count++;
+                if (count > 1) {
+                    break;
+                }
+            }
+        }
+
+        return count > 1 ? mContext.getString(R.string.bluetooth_connected_multiple_devices_summary)
+                : mContext.getString(R.string.bluetooth_connected_summary, deviceName);
     }
 
 }
