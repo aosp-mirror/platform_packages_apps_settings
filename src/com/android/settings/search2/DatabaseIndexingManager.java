@@ -426,6 +426,13 @@ public class DatabaseIndexingManager {
             if (count > 0) {
                 while (cursor.moveToNext()) {
                     final String key = cursor.getString(COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE);
+
+                    if (TextUtils.isEmpty(key) && Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
+                        Log.v(LOG_TAG, "Empty non-indexable key from: "
+                                + packageContext.getPackageName());
+                        continue;
+                    }
+
                     result.add(key);
                 }
             }
