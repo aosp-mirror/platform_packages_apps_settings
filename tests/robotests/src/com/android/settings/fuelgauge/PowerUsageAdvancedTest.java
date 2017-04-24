@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
+import android.text.TextUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -105,9 +106,12 @@ public class PowerUsageAdvancedTest {
         when(mPowerUsageAdvanced.getContext()).thenReturn(mShadowContext);
         doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any(), any());
         doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any());
+        doReturn(mShadowContext.getText(R.string.battery_used_for)).when(
+                mPowerUsageAdvanced).getText(R.string.battery_used_for);
         mPowerUsageAdvanced.setPackageManager(mPackageManager);
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
         mPowerUsageAdvanced.setUserManager(mUserManager);
+        mPowerUsageAdvanced.mBatteryUtils = spy(new BatteryUtils(mShadowContext));
 
         mPowerUsageData = new PowerUsageData(UsageType.APP);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
@@ -176,10 +180,12 @@ public class PowerUsageAdvancedTest {
 
     @Test
     public void testUpdateUsageDataSummary_onlyOneApp_showUsageTime() {
+        final String expectedSummary = "Used for 0m";
         mPowerUsageData.usageList.add(mNormalBatterySipper);
+
         mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
 
-        verify(mPowerUsageAdvanced).getString(eq(R.string.battery_used_for), any());
+        assertThat(mPowerUsageData.summary.toString()).isEqualTo(expectedSummary);
     }
 
     @Test

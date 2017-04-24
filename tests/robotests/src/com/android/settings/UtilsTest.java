@@ -19,7 +19,10 @@ import android.os.Bundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
+import android.text.style.TtsSpan;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,10 +38,14 @@ import java.net.InetAddress;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
 
+    private static final String TIME_DESCRIPTION = "1 day 20 hours 30 minutes";
     private Context mContext;
-    @Mock private WifiManager wifiManager;
-    @Mock private Network network;
-    @Mock private ConnectivityManager connectivityManager;
+    @Mock
+    private WifiManager wifiManager;
+    @Mock
+    private Network network;
+    @Mock
+    private ConnectivityManager connectivityManager;
 
     @Before
     public void setUp() {
@@ -47,7 +54,7 @@ public class UtilsTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(wifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-            .thenReturn(connectivityManager);
+                .thenReturn(connectivityManager);
     }
 
     @Test
@@ -89,7 +96,8 @@ public class UtilsTest {
         final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
         final String expectedTime = "5m 0s";
 
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, true)).isEqualTo(expectedTime);
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
     }
 
     @Test
@@ -97,7 +105,8 @@ public class UtilsTest {
         final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
         final String expectedTime = "5m";
 
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, false)).isEqualTo(expectedTime);
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
     }
 
     @Test
@@ -106,7 +115,23 @@ public class UtilsTest {
                 + 4 * DateUtils.HOUR_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
         final String expectedTime = "2d 4h 15m";
 
-        assertThat(Utils.formatElapsedTime(mContext, testMillis, false)).isEqualTo(expectedTime);
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_onlyContainsMinute_hasTtsSpan() {
+        final double testMillis = 15 * DateUtils.MINUTE_IN_MILLIS;
+
+        final CharSequence charSequence = Utils.formatElapsedTime(mContext, testMillis, false);
+        assertThat(charSequence).isInstanceOf(SpannableStringBuilder.class);
+
+        final SpannableStringBuilder expectedString = (SpannableStringBuilder) charSequence;
+        final TtsSpan[] ttsSpans = expectedString.getSpans(0, expectedString.length(),
+                TtsSpan.class);
+
+        assertThat(ttsSpans).asList().hasSize(1);
+        assertThat(ttsSpans[0].getType()).isEqualTo(TtsSpan.TYPE_MEASURE);
     }
 
     @Test
@@ -119,13 +144,13 @@ public class UtilsTest {
     }
 
     @Test
-    public void getInstallationStatus_notInstalled_shouldReturnUninstalled() {
+    public void testGetInstallationStatus_notInstalled_shouldReturnUninstalled() {
         assertThat(Utils.getInstallationStatus(new ApplicationInfo()))
                 .isEqualTo(R.string.not_installed);
     }
 
     @Test
-    public void getInstallationStatus_enabled_shouldReturnInstalled() {
+    public void testGetInstallationStatus_enabled_shouldReturnInstalled() {
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
@@ -134,7 +159,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void getInstallationStatus_disabled_shouldReturnDisabled() {
+    public void testGetInstallationStatus_disabled_shouldReturnDisabled() {
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = false;

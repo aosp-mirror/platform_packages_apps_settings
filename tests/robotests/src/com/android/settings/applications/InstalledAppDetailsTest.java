@@ -87,6 +87,8 @@ public final class InstalledAppDetailsTest {
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private BatteryStats.Uid mUid;
+    @Mock
+    private PackageManager mPackageManager;
 
     private InstalledAppDetails mAppDetail;
     private Context mShadowContext;
@@ -94,14 +96,15 @@ public final class InstalledAppDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mShadowContext = RuntimeEnvironment.application;
 
+        mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new InstalledAppDetails());
 
         mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mBatterySipper.uidObj = mUid;
         doReturn(mActivity).when(mAppDetail).getActivity();
         doReturn(mShadowContext).when(mAppDetail).getContext();
+        doReturn(mPackageManager).when(mActivity).getPackageManager();
 
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",

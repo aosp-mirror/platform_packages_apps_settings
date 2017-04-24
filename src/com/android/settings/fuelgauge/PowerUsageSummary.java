@@ -418,15 +418,16 @@ public class PowerUsageSummary extends PowerUsageBase {
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
         final int colorControl = context.getColor(value.resourceId);
-        final String usedTime = context.getString(R.string.battery_used_for);
         final int dischargeAmount = USE_FAKE_DATA ? 5000
                 : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
 
         final long runningTime = calculateRunningTimeBasedOnStatsType();
         updateScreenPreference();
         updateLastFullChargePreference(runningTime);
-        mAppListGroup.setTitle(getString(R.string.power_usage_list_summary,
-                Utils.formatElapsedTime(context, runningTime, false)));
+
+        final CharSequence timeSequence = Utils.formatElapsedTime(context, runningTime, false);
+        mAppListGroup.setTitle(
+                TextUtils.expandTemplate(getText(R.string.power_usage_list_summary), timeSequence));
 
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
@@ -497,7 +498,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                     sipper.usageTimeMs = mBatteryUtils.getProcessTimeMs(
                             BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
                 }
-                setUsageSummary(pref, usedTime, sipper.usageTimeMs);
+                setUsageSummary(pref, sipper.usageTimeMs);
                 if ((sipper.drainType != DrainType.APP
                         || sipper.uidObj.getUid() == Process.ROOT_UID)
                         && sipper.drainType != DrainType.USER) {
@@ -534,16 +535,17 @@ public class PowerUsageSummary extends PowerUsageBase {
     void updateScreenPreference() {
         final BatterySipper sipper = findBatterySipperByType(
                 mStatsHelper.getUsageList(), DrainType.SCREEN);
-        final Context context = getContext();
         final long usageTimeMs = sipper != null ? sipper.usageTimeMs : 0;
 
-        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(context, usageTimeMs, false));
+        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(getContext(), usageTimeMs, false));
     }
 
     @VisibleForTesting
     void updateLastFullChargePreference(long timeMs) {
-        mLastFullChargePref.setSubtitle(getString(R.string.power_last_full_charge_summary,
-                Utils.formatElapsedTime(getContext(), timeMs, false)));
+        final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), timeMs, false);
+        mLastFullChargePref.setSubtitle(
+                TextUtils.expandTemplate(getText(R.string.power_last_full_charge_summary),
+                        timeSequence));
     }
 
     @VisibleForTesting
@@ -583,11 +585,13 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
-    void setUsageSummary(Preference preference, String usedTimePrefix, long usageTimeMs) {
+    void setUsageSummary(Preference preference, long usageTimeMs) {
         // Only show summary when usage time is longer than one minute
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
-            preference.setSummary(String.format(usedTimePrefix,
-                    Utils.formatElapsedTime(getContext(), usageTimeMs, false)));
+            final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
+                    false);
+            preference.setSummary(
+                    TextUtils.expandTemplate(getText(R.string.battery_used_for), timeSequence));
         }
     }
 
