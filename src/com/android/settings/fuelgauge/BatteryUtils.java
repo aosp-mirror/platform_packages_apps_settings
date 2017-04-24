@@ -15,14 +15,13 @@
  */
 package com.android.settings.fuelgauge;
 
-import android.annotation.IntDef;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.android.internal.os.BatterySipper;
@@ -64,7 +63,8 @@ public class BatteryUtils {
         return sInstance;
     }
 
-    private BatteryUtils(Context context) {
+    @VisibleForTesting
+    BatteryUtils(Context context) {
         mPackageManager = context.getPackageManager();
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(
                 context).getPowerUsageFeatureProvider(context);

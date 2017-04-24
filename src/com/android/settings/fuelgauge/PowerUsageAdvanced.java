@@ -29,6 +29,7 @@ import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatterySipper;
@@ -67,13 +68,15 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.APP,
             UsageType.UNACCOUNTED,
             UsageType.OVERCOUNTED};
+
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
     private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private PackageManager mPackageManager;
     private UserManager mUserManager;
     private Map<Integer, PowerUsageData> mBatteryDataMap;
-    private BatteryUtils mBatteryUtils;
 
     Handler mHandler = new Handler() {
 
@@ -270,8 +273,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return;
         }
         if (usageData.usageList.size() <= 1) {
-            usageData.summary = getString(R.string.battery_used_for,
-                    Utils.formatElapsedTime(getContext(), usageData.totalUsageTimeMs, false));
+            CharSequence timeSequence = Utils.formatElapsedTime(getContext(),
+                    usageData.totalUsageTimeMs, false);
+            usageData.summary = TextUtils.expandTemplate(getText(R.string.battery_used_for),
+                    timeSequence);
         } else {
             BatterySipper sipper = findBatterySipperWithMaxBatteryUsage(usageData.usageList);
             BatteryEntry batteryEntry = new BatteryEntry(getContext(), mHandler, mUserManager,
@@ -346,7 +351,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         @StringRes
         public int titleResId;
-        public String summary;
+        public CharSequence summary;
         public double percentage;
         public double totalPowerMah;
         public long totalUsageTimeMs;
