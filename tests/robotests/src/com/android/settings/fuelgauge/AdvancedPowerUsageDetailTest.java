@@ -57,6 +57,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RuntimeEnvironment;
+
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -143,6 +145,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
+        mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());

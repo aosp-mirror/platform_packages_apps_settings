@@ -33,6 +33,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.os.BatteryStats.Uid.PROCESS_STATE_BACKGROUND;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE;
@@ -47,9 +50,7 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -127,6 +128,8 @@ public class BatteryUtilsTest {
 
         mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
+
+        mBatteryUtils = spy(new BatteryUtils(RuntimeEnvironment.application));
     }
 
     @Test
