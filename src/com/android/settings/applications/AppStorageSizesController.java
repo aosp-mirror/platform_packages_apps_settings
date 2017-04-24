@@ -40,6 +40,7 @@ public class AppStorageSizesController {
     private StorageStatsSource.AppStorageStats mLastResult;
     private boolean mLastResultFailed;
     private boolean mCachedCleared;
+    private boolean mDataCleared;
     private long mLastCodeSize = -1;
     private long mLastDataSize = -1;
     private long mLastCacheSize = -1;
@@ -69,7 +70,7 @@ public class AppStorageSizesController {
             mTotalSize.setSummary(errorRes);
         } else {
             long codeSize = mLastResult.getCodeBytes();
-            long dataSize = mLastResult.getDataBytes();
+            long dataSize = mDataCleared ? 0 : mLastResult.getDataBytes();
             if (mLastCodeSize != codeSize) {
                 mLastCodeSize = codeSize;
                 mAppSize.setSummary(getSizeStr(context, codeSize));
@@ -78,7 +79,7 @@ public class AppStorageSizesController {
                 mLastDataSize = dataSize;
                 mDataSize.setSummary(getSizeStr(context, dataSize));
             }
-            long cacheSize = mCachedCleared ? 0 : mLastResult.getCacheBytes();
+            long cacheSize = (mDataCleared || mCachedCleared) ? 0 : mLastResult.getCacheBytes();
             if (mLastCacheSize != cacheSize) {
                 mLastCacheSize = cacheSize;
                 mCacheSize.setSummary(getSizeStr(context, cacheSize));
@@ -108,6 +109,15 @@ public class AppStorageSizesController {
      */
     public void setCacheCleared(boolean isCleared) {
         mCachedCleared = isCleared;
+    }
+
+    /**
+     * Sets if we have cleared data and should zero the data bytes.
+     * When the data is cleared, the directory are recreated. Directories have some size, but are
+     * empty. We zero this out to best match user expectations.
+     */
+    public void setDataCleared(boolean isCleared) {
+        mDataCleared = isCleared;
     }
 
     /**
