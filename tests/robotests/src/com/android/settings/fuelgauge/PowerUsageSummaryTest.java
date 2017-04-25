@@ -486,7 +486,7 @@ public class PowerUsageSummaryTest {
         }
 
         @Override
-        protected void refreshStats() {
+        protected void refreshUi() {
             // Leave it empty for toggle apps menu test
         }
     }

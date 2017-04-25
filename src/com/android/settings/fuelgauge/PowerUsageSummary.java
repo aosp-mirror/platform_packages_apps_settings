@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Build;
@@ -142,7 +144,6 @@ public class PowerUsageSummary extends PowerUsageBase {
     @Override
     public void onResume() {
         super.onResume();
-        refreshStats();
     }
 
     @Override
@@ -236,7 +237,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 } else {
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
-                refreshStats();
+                refreshUi();
                 return true;
             case MENU_HIGH_POWER_APPS:
                 Bundle args = new Bundle();
@@ -259,7 +260,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
-                refreshStats();
+                refreshUi();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -396,15 +397,11 @@ public class PowerUsageSummary extends PowerUsageBase {
         return results;
     }
 
-    protected void refreshStats() {
-        super.refreshStats();
-
-        BatteryInfo.getBatteryInfo(getContext(), new BatteryInfo.Callback() {
-            @Override
-            public void onBatteryInfoLoaded(BatteryInfo info) {
-                updateHeaderPreference(info);
-            }
-        });
+    protected void refreshUi() {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
 
         cacheRemoveAllPrefs(mAppListGroup);
         mAppListGroup.setOrderingAsAdded(false);
@@ -413,7 +410,13 @@ public class PowerUsageSummary extends PowerUsageBase {
         final PowerProfile powerProfile = mStatsHelper.getPowerProfile();
         final BatteryStats stats = mStatsHelper.getStats();
         final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
-        final Context context = getContext();
+
+        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+        Intent batteryBroadcast = context.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast,
+                mStatsHelper.getStats(), elapsedRealtimeUs, false);
+        updateHeaderPreference(batteryInfo);
 
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
