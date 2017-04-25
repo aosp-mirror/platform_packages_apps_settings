@@ -17,14 +17,10 @@
 
 package com.android.settings.accounts;
 
-import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncStatusObserver;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,12 +28,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.utils.LocalClassLoaderContextThemeWrapper;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
