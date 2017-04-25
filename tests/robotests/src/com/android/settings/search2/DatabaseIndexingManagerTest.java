@@ -303,7 +303,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(0);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
