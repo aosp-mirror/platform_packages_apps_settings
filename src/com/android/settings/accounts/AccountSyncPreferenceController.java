@@ -25,6 +25,7 @@ import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 
@@ -53,8 +54,9 @@ public class AccountSyncPreferenceController extends PreferenceController {
         final Bundle args = new Bundle();
         args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, mAccount);
         args.putParcelable(EXTRA_USER, mUserHandle);
-        Utils.startWithFragment(mContext, AccountSyncSettings.class.getName(), args, null, 0, -1,
-            mAccount.name, MetricsProto.MetricsEvent.ACCOUNT);
+        Utils.startWithFragment(mContext, AccountSyncSettings.class.getName(), args, null, 0,
+                R.string.account_sync_title, null, MetricsProto.MetricsEvent.ACCOUNT);
+
         return true;
     }
 
