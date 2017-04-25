@@ -99,6 +99,7 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final String KEY_CLEAR_URI = "clear_uri_button";
 
     private static final String KEY_CACHE_CLEARED = "cache_cleared";
+    private static final String KEY_DATA_CLEARED = "data_cleared";
 
     // Views related to cache info
     private Preference mCacheSize;
@@ -115,6 +116,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private boolean mCanClearData = true;
     private boolean mCacheCleared;
+    private boolean mDataCleared;
 
     private AppStorageSizesController mSizeController;
 
@@ -130,6 +132,8 @@ public class AppStorageSettings extends AppInfoWithHeader
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mCacheCleared = savedInstanceState.getBoolean(KEY_CACHE_CLEARED, false);
+            mDataCleared = savedInstanceState.getBoolean(KEY_DATA_CLEARED, false);
+            mCacheCleared = mCacheCleared || mDataCleared;
         }
 
         addPreferencesFromResource(R.xml.app_storage_settings);
@@ -147,6 +151,7 @@ public class AppStorageSettings extends AppInfoWithHeader
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_CACHE_CLEARED, mCacheCleared);
+        outState.putBoolean(KEY_DATA_CLEARED, mDataCleared);
     }
 
     private void setupViews() {
@@ -527,6 +532,9 @@ public class AppStorageSettings extends AppInfoWithHeader
         if (mCacheCleared) {
             mSizeController.setCacheCleared(true);
         }
+        if (mDataCleared) {
+            mSizeController.setDataCleared(true);
+        }
 
         mSizeController.updateUi(getContext());
 
@@ -538,7 +546,7 @@ public class AppStorageSettings extends AppInfoWithHeader
             long dataSize = result.getDataBytes();
             long cacheSize = result.getCacheBytes();
 
-            if (dataSize <= 0 || !mCanClearData) {
+            if (dataSize <= 0 || !mCanClearData || mDataCleared) {
                 mClearDataButton.setEnabled(false);
             } else {
                 mClearDataButton.setEnabled(true);
@@ -564,6 +572,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             }
             switch (msg.what) {
                 case MSG_CLEAR_USER_DATA:
+                    mDataCleared = true;
+                    mCacheCleared = true;
                     processClearMsg(msg);
                     break;
                 case MSG_CLEAR_CACHE:
