@@ -19,6 +19,7 @@ package com.android.settings.search2;
 import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
@@ -37,8 +38,9 @@ import static com.android.settings.search2.SearchResult.TOP_RANK;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
-    private final List<SearchResult> mSearchResults;
     private final SearchFragment mFragment;
+
+    private List<SearchResult> mSearchResults;
     private Map<String, List<? extends SearchResult>> mResultsMap;
 
     public SearchResultsAdapter(SearchFragment fragment) {
@@ -128,7 +130,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 .get(InstalledAppResultLoader.class.getName());
         final int dbSize = (databaseResults != null) ? databaseResults.size() : 0;
         final int appSize = (installedAppResults != null) ? installedAppResults.size() : 0;
-        final List<SearchResult> results = new ArrayList<>(dbSize + appSize);
+        final List<SearchResult> newResults = new ArrayList<>(dbSize + appSize);
 
         int dbIndex = 0;
         int appIndex = 0;
@@ -136,23 +138,25 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
 
         while (rank <= BOTTOM_RANK) {
             while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
-                results.add(databaseResults.get(dbIndex++));
+                newResults.add(databaseResults.get(dbIndex++));
             }
             while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
-                results.add(installedAppResults.get(appIndex++));
+                newResults.add(installedAppResults.get(appIndex++));
             }
             rank++;
         }
 
         while (dbIndex < dbSize) {
-            results.add(databaseResults.get(dbIndex++));
+            newResults.add(databaseResults.get(dbIndex++));
         }
         while (appIndex < appSize) {
-            results.add(installedAppResults.get(appIndex++));
+            newResults.add(installedAppResults.get(appIndex++));
         }
 
-        mSearchResults.addAll(results);
-        notifyDataSetChanged();
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
+                new SearchResultDiffCallback(mSearchResults, newResults), false /* detectMoves */);
+        mSearchResults = newResults;
+        diffResult.dispatchUpdatesTo(this);
 
         return mSearchResults.size();
     }

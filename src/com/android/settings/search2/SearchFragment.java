@@ -168,6 +168,17 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (TextUtils.isEmpty(mQuery)) {
+            return;
+        }
+        final String query = mQuery;
+        mQuery = "";
+        onQueryTextChange(query);
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         final Activity activity = getActivity();
@@ -206,7 +217,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         mResultClickCount = 0;
         mNeverEnteredQuery = false;
         mQuery = query;
-        mSearchAdapter.clearResults();
 
         if (isEmptyQuery) {
             final LoaderManager loaderManager = getLoaderManager();
@@ -252,7 +262,13 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             return;
         }
         final int resultCount = mSearchAdapter.displaySearchResults();
-        mNoResultsView.setVisibility(resultCount == 0 ? View.VISIBLE : View.GONE);
+
+        if (resultCount == 0) {
+            mNoResultsView.setVisibility(View.VISIBLE);
+        } else {
+            mNoResultsView.setVisibility(View.GONE);
+            mResultsRecyclerView.scrollToPosition(0);
+        }
         mSearchFeatureProvider.showFeedbackButton(this, getView());
     }
 
