@@ -111,7 +111,7 @@ public class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.setPackageManager(mPackageManager);
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
         mPowerUsageAdvanced.setUserManager(mUserManager);
-        mPowerUsageAdvanced.mBatteryUtils = spy(new BatteryUtils(mShadowContext));
+        mPowerUsageAdvanced.setBatteryUtils(BatteryUtils.getInstance(mShadowContext));
 
         mPowerUsageData = new PowerUsageData(UsageType.APP);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
@@ -299,4 +299,16 @@ public class PowerUsageAdvancedTest {
         assertThat(mPowerUsageAdvanced.shouldShowBatterySipper(mNormalBatterySipper)).isTrue();
     }
 
+    @Test
+    public void testCalculateHiddenPower_returnCorrectPower() {
+        List<PowerUsageData> powerUsageDataList = new ArrayList<>();
+        final double unaccountedPower = 100;
+        final double normalPower = 150;
+        powerUsageDataList.add(new PowerUsageData(UsageType.UNACCOUNTED, unaccountedPower));
+        powerUsageDataList.add(new PowerUsageData(UsageType.APP, normalPower));
+        powerUsageDataList.add(new PowerUsageData(UsageType.CELL, normalPower));
+
+        assertThat(mPowerUsageAdvanced.calculateHiddenPower(powerUsageDataList)).isWithin(
+                PRECISION).of(unaccountedPower);
+    }
 }
