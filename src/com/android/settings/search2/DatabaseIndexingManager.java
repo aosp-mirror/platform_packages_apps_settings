@@ -751,7 +751,6 @@ public class DatabaseIndexingManager {
                     .setEntries(null)
                     .setClassName(fragmentName)
                     .setScreenTitle(screenTitle)
-                    .setIconResId(iconResId)
                     .setRank(rank)
                     .setIntentAction(intentAction)
                     .setIntentTargetPackage(intentTargetPackage)
