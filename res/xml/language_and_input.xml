@@ -76,16 +76,6 @@
             android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"/>
 
         <Preference
-            android:key="gesture_double_tap_power"
-            android:title="@string/double_tap_power_for_camera_title"
-            android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"/>
-
-        <Preference
-            android:key="gesture_double_twist"
-            android:title="@string/double_twist_for_camera_mode_title"
-            android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"/>
-
-        <Preference
             android:key="gesture_double_tap_screen"
             android:title="@string/ambient_display_title"
             android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"/>
@@ -94,6 +84,21 @@
             android:key="gesture_pick_up"
             android:title="@string/ambient_display_pickup_title"
             android:fragment="com.android.settings.gestures.PickupGestureSettings"/>
+
+        <Preference
+            android:key="gesture_camera_lift_trigger_summary"
+            android:title="@string/camera_lift_trigger_title"
+            android:fragment="com.android.settings.gestures.CameraLiftTriggerSettings"/>
+
+        <Preference
+            android:key="gesture_double_tap_power"
+            android:title="@string/double_tap_power_for_camera_title"
+            android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"/>
+
+        <Preference
+            android:key="gesture_double_twist"
+            android:title="@string/double_twist_for_camera_mode_title"
+            android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"/>
 
     </PreferenceCategory>
 

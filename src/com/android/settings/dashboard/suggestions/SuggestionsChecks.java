@@ -30,8 +30,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.Settings;
 
 import com.android.ims.ImsManager;
+import com.android.settings.Settings.CameraLiftTriggerSuggestionActivity;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.FingerprintSuggestionActivity;
 import com.android.settings.Settings.ScreenLockSuggestionActivity;
@@ -73,6 +75,8 @@ public class SuggestionsChecks {
                 return true;
             }
             return manager.hasEnrolledFingerprints();
+        } else if (className.equals(CameraLiftTriggerSuggestionActivity.class.getName())) {
+            return isCameraLiftTriggerEnabled();
         }
 
         SuggestionFeatureProvider provider =
@@ -132,6 +136,12 @@ public class SuggestionsChecks {
         final int dpmFlags = dpManager.getKeyguardDisabledFeatures(null, /* admin */
                 mContext.getUserId());
         return (dpmFlags & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) == 0;
+    }
+
+    private boolean isCameraLiftTriggerEnabled() {
+        final int triggerEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED, 0);
+        return triggerEnabled == 1;
     }
 
     private final IWallpaperManagerCallback mCallback = new IWallpaperManagerCallback.Stub() {
