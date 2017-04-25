@@ -52,7 +52,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
     if (powerManager.isInteractive() && shouldShowDialog) {
       // Since the screen is on and the BT-related activity is in the foreground,
       // just open the dialog
-      context.startActivity(pairingIntent);
+      context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
     } else {
       // Put up a notification that leads to the dialog
       intent.setClass(context, BluetoothPairingService.class);

@@ -24,16 +24,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 
 /**
  * BluetoothPairingDialog asks the user to enter a PIN / Passkey / simple confirmation
  * for pairing with a remote Bluetooth device. It is an activity that appears as a dialog.
  */
-public final class BluetoothPairingDialog extends Activity {
+public class BluetoothPairingDialog extends Activity {
     public static final String FRAGMENT_TAG = "bluetooth.pairing.fragment";
 
     private BluetoothPairingController mBluetoothPairingController;
-    private boolean mReceiverRegistered;
+    private boolean mReceiverRegistered = false;
 
     /**
      * Dismiss the dialog if the bond state changes to bonded or none,
@@ -62,23 +63,26 @@ public final class BluetoothPairingDialog extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean fragmentFound = true;
-
-        BluetoothPairingDialogFragment bluetoothFragment =
-                (BluetoothPairingDialogFragment) getFragmentManager()
-                        .findFragmentByTag(FRAGMENT_TAG);
         Intent intent = getIntent();
         mBluetoothPairingController = new BluetoothPairingController(intent, this);
-
-        // check if the fragment exists already
+        // build the dialog fragment
+        boolean fragmentFound = true;
+        // check if the fragment has been preloaded
+        BluetoothPairingDialogFragment bluetoothFragment =
+            (BluetoothPairingDialogFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+        // dismiss the fragment if it is already used
+        if (bluetoothFragment != null && (bluetoothFragment.isPairingControllerSet()
+            || bluetoothFragment.isPairingDialogActivitySet())) {
+            bluetoothFragment.dismiss();
+            bluetoothFragment = null;
+        }
+        // build a new fragment if it is null
         if (bluetoothFragment == null) {
             fragmentFound = false;
             bluetoothFragment = new BluetoothPairingDialogFragment();
         }
-
-        // set the controller
         bluetoothFragment.setPairingController(mBluetoothPairingController);
-
+        bluetoothFragment.setPairingDialogActivity(this);
         // pass the fragment to the manager when it is created from scratch
         if (!fragmentFound) {
             bluetoothFragment.show(getFragmentManager(), FRAGMENT_TAG);
@@ -101,8 +105,15 @@ public final class BluetoothPairingDialog extends Activity {
         }
     }
 
-    private void dismiss() {
+    @VisibleForTesting
+    void dismiss() {
         if (!isFinishing()) {
+            BluetoothPairingDialogFragment bluetoothFragment =
+                (BluetoothPairingDialogFragment) getFragmentManager()
+                    .findFragmentByTag(FRAGMENT_TAG);
+            if (bluetoothFragment != null) {
+                bluetoothFragment.dismiss();
+            }
             finish();
         }
     }
