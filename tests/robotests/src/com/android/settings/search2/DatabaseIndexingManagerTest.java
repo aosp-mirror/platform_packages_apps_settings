@@ -37,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.IndexDatabaseHelper;
+import com.android.settings.search.IndexingCallback;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.shadow.ShadowDatabaseIndexingUtils;
@@ -47,6 +48,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
@@ -67,6 +69,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -933,6 +936,32 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getCount()).isEqualTo(1);
         assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
     }
+
+    @Test
+    public void testUpdateAsyncTask_onPostExecute_performsCallback() {
+        IndexingCallback callback = mock(IndexingCallback.class);
+
+        DatabaseIndexingManager.IndexingTask task = mManager.new IndexingTask(callback);
+        task.execute();
+
+        Robolectric.flushForegroundThreadScheduler();
+
+        verify(callback).onIndexingFinished();
+    }
+
+    @Test
+    public void testUpdateAsyncTask_onPostExecute_setsIndexingComplete() {
+        SearchFeatureProviderImpl provider = new SearchFeatureProviderImpl();
+        DatabaseIndexingManager manager = spy(provider.getIndexingManager(mContext));
+        DatabaseIndexingManager.IndexingTask task = manager.new IndexingTask(null);
+        doNothing().when(manager).performIndexing();
+
+        task.execute();
+        Robolectric.flushForegroundThreadScheduler();
+
+        assertThat(provider.isIndexingComplete(mContext)).isTrue();
+    }
+
     // Util functions
 
     private SearchIndexableRaw getFakeRaw() {

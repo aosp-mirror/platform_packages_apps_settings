@@ -41,12 +41,23 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.IndexingCallback;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * This fragment manages the lifecycle of indexing and searching.
+ *
+ * In onCreate, the indexing process is initiated in DatabaseIndexingManager.
+ * While the indexing is happening, loaders are blocked from accessing the database, but the user
+ * is free to start typing their query.
+ *
+ * When the indexing is complete, the fragment gets a callback to initialize the loaders and search
+ * the query if the user has entered text.
+ */
 public class SearchFragment extends InstrumentedFragment implements SearchView.OnQueryTextListener,
-        LoaderManager.LoaderCallbacks<List<? extends SearchResult>> {
+        LoaderManager.LoaderCallbacks<List<? extends SearchResult>>, IndexingCallback {
     private static final String TAG = "SearchFragment";
 
     @VisibleForTesting
@@ -59,26 +70,30 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     private static final String STATE_RESULT_CLICK_COUNT = "state_result_click_count";
 
     // Loader IDs
-    private static final int LOADER_ID_DATABASE = 1;
-    private static final int LOADER_ID_INSTALLED_APPS = 2;
+    @VisibleForTesting
+    static final int LOADER_ID_DATABASE = 1;
+    @VisibleForTesting
+    static final int LOADER_ID_INSTALLED_APPS = 2;
 
     private static final int NUM_QUERY_LOADERS = 2;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);
 
     // Logging
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     static final String RESULT_CLICK_COUNT = "settings_search_result_click_count";
 
     @VisibleForTesting
     String mQuery;
 
     private boolean mNeverEnteredQuery = true;
-    private boolean mShowingSavedQuery;
+    @VisibleForTesting
+    boolean mShowingSavedQuery;
     private int mResultClickCount;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private SavedQueryController mSavedQueryController;
+    @VisibleForTesting
+    SavedQueryController mSavedQueryController;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     SearchFeatureProvider mSearchFeatureProvider;
@@ -87,7 +102,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     RecyclerView mResultsRecyclerView;
-    private SearchView mSearchView;
+    @VisibleForTesting
+    SearchView mSearchView;
     private LinearLayout mNoResultsView;
 
     @VisibleForTesting
@@ -116,6 +132,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
         final LoaderManager loaderManager = getLoaderManager();
         mSearchAdapter = new SearchResultsAdapter(this);
         mSavedQueryController = new SavedQueryController(
@@ -127,15 +144,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mNeverEnteredQuery = savedInstanceState.getBoolean(STATE_NEVER_ENTERED_QUERY);
             mResultClickCount = savedInstanceState.getInt(STATE_RESULT_CLICK_COUNT);
             mShowingSavedQuery = savedInstanceState.getBoolean(STATE_SHOWING_SAVED_QUERY);
-            if (mShowingSavedQuery) {
-                mSavedQueryController.loadSavedQueries();
-            } else {
-                loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
-                loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
-            }
         } else {
             mShowingSavedQuery = true;
-            mSavedQueryController.loadSavedQueries();
         }
 
         final Activity activity = getActivity();
@@ -148,7 +158,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
         // Run the Index update only if we have some space
         if (!Utils.isLowStorage(activity)) {
-            mSearchFeatureProvider.updateIndex(activity);
+            mSearchFeatureProvider.updateIndex(activity, this /* indexingCallback */);
         } else {
             Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
         }
@@ -170,12 +180,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public void onResume() {
         super.onResume();
-        if (TextUtils.isEmpty(mQuery)) {
-            return;
-        }
-        final String query = mQuery;
-        mQuery = "";
-        onQueryTextChange(query);
+        requery();
     }
 
     @Override
@@ -217,6 +222,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         mResultClickCount = 0;
         mNeverEnteredQuery = false;
         mQuery = query;
+
+        // If indexing is not finished, register the query text, but don't search.
+        if (!mSearchFeatureProvider.isIndexingComplete(getActivity())) {
+            return true;
+        }
 
         if (isEmptyQuery) {
             final LoaderManager loaderManager = getLoaderManager();
@@ -276,6 +286,22 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     public void onLoaderReset(Loader<List<? extends SearchResult>> loader) {
     }
 
+    /**
+     * Gets called when Indexing is completed.
+     */
+    @Override
+    public void onIndexingFinished() {
+        if (mShowingSavedQuery) {
+            mSavedQueryController.loadSavedQueries();
+        } else {
+            final LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
+            loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
+        }
+
+        requery();
+    }
+
     public void onSearchResultClicked() {
         mSavedQueryController.saveQuery(mQuery);
         mResultClickCount++;
@@ -307,6 +333,15 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
     public List<SearchResult> getSearchResults() {
         return mSearchAdapter.getSearchResults();
+    }
+
+    private void requery() {
+        if (TextUtils.isEmpty(mQuery)) {
+            return;
+        }
+        final String query = mQuery;
+        mQuery = "";
+        onQueryTextChange(query);
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
