@@ -102,7 +102,6 @@ public class BatteryUtils {
         final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
         final int foregroundTypes[] = {BatteryStats.Uid.PROCESS_STATE_TOP,
                 BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE,
-                BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING,
                 BatteryStats.Uid.PROCESS_STATE_FOREGROUND};
         Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
 
