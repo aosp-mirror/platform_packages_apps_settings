@@ -3078,6 +3078,7 @@
             android:permission="android.permission.DUMP"
             android:enabled="@bool/config_has_help" />
 
+
         <!-- Activities for moves/gestures suggestions -->
         <activity
             android:name=".Settings$CameraLiftTriggerSuggestionActivity"
@@ -3096,9 +3097,17 @@
                        android:resource="@string/camera_lift_trigger_suggestion_summary" />
         </activity>
 
-        <activity android:name=".applications.defaultapps.AutofillPickerActivity"
-                android:taskAffinity=""
-                android:noHistory="true">
+        <activity android:name=".applications.autofill.AutofillPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="false">
+        </activity>
+
+        <activity android:name=".applications.autofill.AutofillPickerTrampolineActivity"
+                android:theme="@android:style/Theme.NoDisplay"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:label="@string/autofill_app">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
                 <category android:name="android.intent.category.DEFAULT" />
