@@ -16,6 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -84,6 +85,21 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.connected_devices;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    PackageManager pm = context.getPackageManager();
+                    final List<String> keys = new ArrayList<String>();
+
+                    if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
+                        keys.add(NfcPreferenceController.KEY_TOGGLE_NFC);
+                        keys.add(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
+                    }
+                    if (!pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
+                        keys.add(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
+                    }
+                    return keys;
                 }
             };
 }
