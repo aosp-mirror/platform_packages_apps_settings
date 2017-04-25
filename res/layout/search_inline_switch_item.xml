@@ -46,9 +46,8 @@
             android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary"
-            android:maxLines="10"/>
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"/>
 
         <include layout="@layout/search_breadcrumb_view"/>
     </LinearLayout>
