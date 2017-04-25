@@ -68,8 +68,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             PACKAGE + ".ConfirmCredentials.showWhenLocked";
 
     private FingerprintUiHelper mFingerprintHelper;
-    protected boolean mIsStrongAuthRequired;
-    private boolean mAllowFpAuthentication;
     protected boolean mReturnCredentials = false;
     protected Button mCancelButton;
     protected ImageView mFingerprintIcon;
@@ -83,8 +81,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAllowFpAuthentication = getActivity().getIntent().getBooleanExtra(
-                ALLOW_FP_AUTHENTICATION, false);
         mReturnCredentials = getActivity().getIntent().getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
         // Only take this argument into account if it belongs to the current profile.
@@ -133,23 +129,26 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     // credential. Otherwise, fingerprint can't unlock fbe/keystore through
     // verifyTiedProfileChallenge. In such case, we also wanna show the user message that
     // fingerprint is disabled due to device restart.
-    private boolean isFingerprintDisallowedByStrongAuth() {
+    protected boolean isFingerprintDisallowedByStrongAuth() {
         return !(mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
                 && mUserManager.isUserUnlocked(mUserId));
+    }
+
+    private boolean isFingerprintAllowed() {
+        return !mReturnCredentials
+                && getActivity().getIntent().getBooleanExtra(ALLOW_FP_AUTHENTICATION, false)
+                && !isFingerprintDisallowedByStrongAuth()
+                && !isFingerprintDisabledByAdmin();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mIsStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
-        mAllowFpAuthentication = getActivity().getIntent().getBooleanExtra(
-                        ALLOW_FP_AUTHENTICATION, false)
-                && !isFingerprintDisabledByAdmin() && !mReturnCredentials && !mIsStrongAuthRequired;
         refreshLockScreen();
     }
 
     protected void refreshLockScreen() {
-        if (mAllowFpAuthentication) {
+        if (isFingerprintAllowed()) {
             mFingerprintHelper.startListening();
         } else {
             if (mFingerprintHelper.isListening()) {
