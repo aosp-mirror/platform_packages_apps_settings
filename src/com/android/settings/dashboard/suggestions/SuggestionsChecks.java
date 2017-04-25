@@ -17,19 +17,13 @@
 package com.android.settings.dashboard.suggestions;
 
 import android.app.AutomaticZenRule;
-import android.app.IWallpaperManager;
-import android.app.IWallpaperManager.Stub;
-import android.app.IWallpaperManagerCallback;
 import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.os.ServiceManager;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
@@ -49,10 +43,14 @@ import java.util.Collection;
  */
 public class SuggestionsChecks {
 
+    private static final String TAG = "SuggestionsChecks";
     private final Context mContext;
+
+    private final WallpaperManagerWrapper mWallpaperManager;
 
     public SuggestionsChecks(Context context) {
         mContext = context.getApplicationContext();
+        mWallpaperManager = new WallpaperManagerWrapper(mContext);
     }
 
     public boolean isSuggestionComplete(Tile suggestion) {
@@ -76,7 +74,7 @@ public class SuggestionsChecks {
         }
 
         SuggestionFeatureProvider provider =
-            FeatureFactory.getFactory(mContext).getSuggestionFeatureProvider(mContext);
+                FeatureFactory.getFactory(mContext).getSuggestionFeatureProvider(mContext);
         if (provider != null && provider.isPresent(className)) {
             return provider.isSuggestionCompleted(mContext);
         }
@@ -114,16 +112,9 @@ public class SuggestionsChecks {
         return false;
     }
 
-    private boolean hasWallpaperSet() {
-        IBinder b = ServiceManager.getService(Context.WALLPAPER_SERVICE);
-        IWallpaperManager service = Stub.asInterface(b);
-        try {
-            return !service.isSetWallpaperAllowed(mContext.getOpPackageName()) ||
-                    service.getWallpaper(mCallback, WallpaperManager.FLAG_SYSTEM,
-                            new Bundle(), mContext.getUserId()) != null;
-        } catch (RemoteException e) {
-        }
-        return false;
+    @VisibleForTesting
+    boolean hasWallpaperSet() {
+        return mWallpaperManager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
     }
 
     private boolean isFingerprintEnabled() {
@@ -133,11 +124,4 @@ public class SuggestionsChecks {
                 mContext.getUserId());
         return (dpmFlags & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) == 0;
     }
-
-    private final IWallpaperManagerCallback mCallback = new IWallpaperManagerCallback.Stub() {
-        @Override
-        public void onWallpaperChanged() throws RemoteException {
-             // Don't care.
-        }
-    };
 }
