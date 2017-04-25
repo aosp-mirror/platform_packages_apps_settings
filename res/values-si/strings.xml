@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"ඉහළ ගුණත්වයේ විවෘත ජාලයක් ලබා ගත හැකි විට දැනුම් දෙන්න"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi ස්වයංක්‍රියව නැවත සබල කරන්න"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"ඔබගේ නිවෙස් ජාලය වැනි සුරැකි ඉහළ ගුණත්ව ජාල අවට ස්වයංක්‍රියව නැවත Wi-Fi සබල කරන්න"</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi-Fi ස්කෑන් කිරීම ක්‍රියාවිරහිත කර ඇති නිසා ලබා ගත නොහැකිය"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"දුර්වල සම්බන්ධතා මඟහරින්න"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"හොඳ අන්තර්ජාල සම්බන්ධතාවයක් නොමැති නම් Wi‑Fi ජාල භාවිතා නොකරන්න"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"හොඳ අන්තර්ජාල සම්බන්ධතාවක් තිබෙන ජාල පමණක් භාවිතා කරන්න"</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"සංගීත හෝ ජායාරුප ආදී අභ්‍යන්තර USB ආචයනයේ සියලු දත්ත මකන්න"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"සංගීත හෝ ඡායාරූප ආදී SD කාඩ් පතේ සියලු දත්ත මකන්න"</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"eSIMs මකන්න"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"දුරකථනයෙහි සියලු eSIMs මකන්න. මෙය ඔබගේ ජංගම සේවා සැලසුම අවලංගු නොකරනු ඇත."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"ටැබ්ලට් පරිගණකයෙහි සියලු eSIMs මකන්න. මෙය ඔබගේ ජංගම සේවා සැලසුම අවලංගු නොකරනු ඇත."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"ටැබ්ලටය යළි සකසන්න"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"දුරකථනය නැවත සකසන්න"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"ඔබගේ සියලු පෞද්ගලික තොරතුරු සහ බාගත කළ යෙදුම් මකන්නද? ඔබට මෙම ක්‍රියාව ආපසු හැරවිය නොහැක!"</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"පූර්ණ ආරෝපණයෙන් පසුව තිර භාවිතය"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"තිර පරිභෝජනය"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"ජංගම ජාල පරිලෝකනය කරමින්"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g>කට පෙර"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"පූර්ණ ආරෝපණය සිට යෙදුම් භාවිතය (<xliff:g id="TIME">%1$s</xliff:g>කට පෙර)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g>කට පෙර"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"පූර්ණ ආරෝපණය සිට යෙදුම් භාවිතය (<xliff:g id="TIME">^1</xliff:g>කට පෙර)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"පූර්ණ ආරෝපණය සිට තිරය සක්‍රියව තිබූ වේලාව"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"පූර්ණ ආරෝපණයෙන් පසුව උපාංග භාවිතය"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"පේනුවෙන් ඉවත් කළ පසු බැටරි භාවිතය"</string>
@@ -1949,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"කැමරාව"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"බ්ලූටූත්"</string>
-    <string name="power_cell" msgid="6596471490976003056">"සෙල් ස්ටෑන්ඩ්බයි"</string>
+    <string name="power_cell" msgid="3392999761958982492">"ජංගම ජාලය පොරොත්තු"</string>
     <string name="power_phone" msgid="5392641106474567277">"හඬ ඇමතුම්"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"අක්‍රිය ටැබ්ලටය"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"අක්‍රිය දුරකථනය"</string>
@@ -2009,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"බැටරි භාවිතය බලය භාවිතයේ ආසන්නය වේ සහ බැටරි අඩු වීමේ සෑම ප්‍රභවයවයක්ම ඇතුළත් නොවේ. විවිධත්වය වනුයේ ගණනය කරන ලද ආසන්න බලයේ භාවිතය සහ බැටරියේ නිරීක්ෂිත ඇත්තට අඩු වීම අතර වෙනසය."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"වැඩියෙන් ගණනය කළ බල භාවිතය"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"%1$sක් භාවිත කරන ලදී"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> වෙතින් <xliff:g id="PERCENT">%1$s</xliff:g>ක් භාවිතා කර ඇත"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"සමස්ත බැටරියෙන් <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"අවසන් පූර්ණ ආරෝපණයෙන් පසුව ප්‍රභේදනය"</string>
@@ -3205,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"මෙම අවසරය යෙදුමකට පද්ධති සැකසීම් විකරණය කිරීමට ඉඩ දෙයි."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"ඔව්"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"නැත"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"ඔව්"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"එපා"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"යෙදුම ස්ථාපනයට ඉඩ දීම"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"කැමරාව සඳහා දෙවරක් කරකවන්න"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"ඔබේ මැණික් කටුව දෙවරක් කරකවා කැමරා යෙදුම විවෘත කරන්න"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"කැමරාව සඳහා බල බොත්තම දෙවරක් ඔබන්න"</string>
@@ -3393,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"වාරික SMS ඔබෙන් මුදල් අය කළ හැකි අතර ඔබේ වාහක බිල්පතට එක් කරනු ඇත. ඔබ යෙදුමක් සඳහා අවසර සබල කරන්නේ නම්, ඔබට එම යෙදුම භාවිතයෙන් වාරික SMS යැවීමට හැකි වනු ඇත."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"වාරික SMS ප්රවේශය"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"වෙනත් උපාංග වෙතට දෘශ්‍ය නොවේ"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"වෙත සම්බන්ධිතයි"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> වෙත සම්බන්ධිතයි"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"උපාංග කිහිපයකට සම්බන්ධිතයි"</string>
     <string name="demo_mode" msgid="2798762752209330277">"පද්ධති UI ආදර්ශන ප්‍රකාරය"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"ඉක්මන් සැකසීම් සංවර්ධක ටයිල්"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"උදවු කිරීමට අප මෙතැනය"</string>
@@ -3473,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"ඔබේ දැනුම්දීම් පරීක්ෂා කිරීමට, ඔබේ දුරකථනයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"ඔබේ දැනුම්දීම් පරීක්ෂා කිරීමට, ඔබේ ටැබ්ලට් පරිගණකයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"ඔබේ දැනුම්දීම් පරීක්ෂා කිරීමට, ඔබේ උපාංගයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"ඉඟිතයට සහාය දක්වන්න"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"සංවේදීතාවය"</string>

@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"جب اعلی معیاری عوامی نیٹ ورک دستیاب ہو مطلع کریں"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"‏خود کار طور پر Wi‑Fi آن کریں"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"‏آپ کے ہوم نیٹ ورک کی طرح، اعلی معیاری محفوظ نیٹ ورکس کے قریب ہونے پر Wi‑Fi واپس آن ہو جائے گا۔"</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"‏Wi‑Fi اسکیننگ آف ہونے کی وجہ سے Wi-Fi ویک اپ دستیاب نہیں ہے"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"خراب کنکشن سے اجتناب کریں"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"‏Wi‑Fi نیٹ ورک کا تب تک استعمال نہ کریں جب تک ایک اچھا انٹرنیٹ کنکشن موجود نہ ہو"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"صرف اچھے انٹرنیٹ کنکشن والے نیٹ ورکس کا استعمال کریں"</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"‏داخلی USB اسٹوریج پر موجود سبھی ڈیٹا، جیسے موسیقی یا تصاویر کو حذف کریں"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"‏SD کارڈ پر موجود سبھی ڈیٹا حذف کریں، جیسے موسیقی یا تصاویر"</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"‏eSIMs مٹائیں"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"‏فون پر سبھی eSIMs صاف کریں۔ اس سے آپ کے موبائل سروس کا پلان منسوخ نہیں ہوگا۔"</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"‏ٹیبلیٹ پر سبھی eSIMs صاف کریں۔ اس سے آپ کے موبائل سروس کا پلان منسوخ نہیں ہوگا۔"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"ٹیبلٹ کو دوبارہ ترتیب دیں"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"فون کو دوبارہ ترتیب دیں"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"آپ کی سبھی ذاتی معلومات اور ڈاؤن لوڈ کردہ ایپس ہٹا دیں؟ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں!"</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"مکمل چارج کے بعد سے اسکرین کا استعمال"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"اسکرین کی کھپت"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"موبائل نیٹ ورک اسکیننگ"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g> قبل"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"مکمل چارج کے بعد سے ایپ کا استعمال (<xliff:g id="TIME">%1$s</xliff:g> قبل)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> قبل"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"مکمل چارج کے بعد سے ایپ کا استعمال (<xliff:g id="TIME">^1</xliff:g> قبل)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"مکمل چارج کے بعد سے اسکرین آن ہونے کے وقت کی مقدار"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"مکمل چارج کے بعد سے آلہ کا استعمال"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"پلگ ہٹانے کے بعد سے بیٹری کا استعمال"</string>
@@ -1949,7 +1946,8 @@
     <string name="power_camera" msgid="4976286950934622605">"کیمرا"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"بلوٹوتھ"</string>
-    <string name="power_cell" msgid="6596471490976003056">"سیل اسٹینڈ بائی"</string>
+    <!-- no translation found for power_cell (3392999761958982492) -->
+    <skip />
     <string name="power_phone" msgid="5392641106474567277">"صوتی کالز"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"ٹیبلٹ معطل ہے"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"فون معطل"</string>
@@ -2009,7 +2007,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"بیٹری کا استعمال پاور کے استعمال کا ایک تخمینہ ہوتا ہے اور اس میں بیٹری ڈرین کا ہر ماخذ شامل نہیں ہوتا ہے۔ متفرق شمار کردہ پاور کے تخمینی استعمال اور بیٹری پر مشاہدہ کردہ اصل ڈرین کے درمیان فرق ہوتا ہے۔"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"پاور کا ضرورت سے زیادہ استعمال"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"‏%1$s کیلئے استعمال کیا گيا"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> کے ذریعے <xliff:g id="PERCENT">%1$s</xliff:g> استعمال کیا گیا"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"مجموعی بیٹری میں سے <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"پچھلے مکمل چارج کے بعد سے تجزیہ"</string>
@@ -3203,9 +3202,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"یہ اجازت ایپ کو سسٹم ترتیبات میں ترمیم کرنے دیتی ہے۔"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"ہاں"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"نہیں"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"ہاں"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"نہیں"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"ایپ انسٹالز کو اجازت دیں"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"کیمرا کیلئے دو بار مروڑیں"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"اپنی کلائی کو دو بار مروڑ کر کیمرا ایپ کھولیں"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"کیمرا کیلئے پاور بٹن دو بار دبائیں"</string>
@@ -3391,7 +3393,10 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"‏ہو سکتا ہے آپ کو پریمیم SMS کے پیسے ادا کرنا پڑیں اور یہ آپ کے کیرئیر بلز میں شامل ہو جائیں گے۔ اگر آپ ایک ایپ کیلئے اجازت فعال کرتے ہیں تو آپ اس ایپ کو استعمال کرکے آپ پریمیم SMS بھیج پائیں گے۔"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"‏پریمیم SMS رسائی"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"دیگر آلات کو مرئی نہیں"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"اس سے منسلک"</string>
+    <!-- no translation found for bluetooth_connected_summary (7672528674593152862) -->
+    <skip />
+    <!-- no translation found for bluetooth_connected_multiple_devices_summary (9173661896296663932) -->
+    <skip />
     <string name="demo_mode" msgid="2798762752209330277">"‏سسٹم UI ڈیمو موڈ"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"فوری ترتیبات کے ڈیولپر ٹائلز"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"ہم مدد کیلئے ہیں نا"</string>
@@ -3471,6 +3476,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"اپنی اطلاعات چیک کرنے کیلئے اپنے ٹیبلیٹ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"اپنی اطلاعات چیک کرنے کیلئے اپنے آلہ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"معاونت کا اشارہ"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"حسّاسیت"</string>

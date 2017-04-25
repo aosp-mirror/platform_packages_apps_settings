@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"고품질 공용 네트워크를 사용할 수 있을 때 알립니다."</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"자동으로 Wi‑Fi 사용 설정"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"홈 네트워크 등의 저장된 고품질 네트워크가 가까이 있을 때 Wi‑Fi가 다시 사용 설정됩니다."</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi 검색이 사용 중지되어 사용할 수 없습니다."</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"불량 네트워크 방지"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"인터넷 연결이 원활하지 않은 경우 Wi-Fi 네트워크를 사용하지 않음"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"인터넷 연결이 안정적인 네트워크만 사용합니다."</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"내부 USB 저장소에 있는 모든 데이터(예: 음악 또는 사진)를 지웁니다."</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"SD 카드에 있는 모든 데이터(예: 음악 또는 사진)를 지웁니다."</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"e-SIM 삭제"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"휴대전화에서 모든 eSIM을 삭제합니다. 삭제하더라도 휴대기기 서비스 요금제를 계속 사용할 수 있습니다."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"태블릿에서 모든 eSIM을 삭제합니다. 삭제하더라도 휴대기기 서비스 요금제를 계속 사용할 수 있습니다."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"태블릿 초기화"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"휴대전화 초기화"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"모든 개인정보와 다운로드한 앱을 삭제하시겠습니까? 수행한 후에는 작업을 취소할 수 없습니다."</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"충전 완료 후 화면 사용"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"화면 소비 전력"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"모바일 네트워크 검색"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g> 전"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"충전 완료(<xliff:g id="TIME">%1$s</xliff:g> 전) 후 앱 사용"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> 전"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"충전 완료(<xliff:g id="TIME">^1</xliff:g> 전) 후 앱 사용"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"충전 완료 후 화면이 켜진 시간"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"충전 완료 후 기기 사용"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"플러그를 뽑은 이후 배터리 전원 사용"</string>
@@ -1949,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"카메라"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"블루투스"</string>
-    <string name="power_cell" msgid="6596471490976003056">"대기 소모 전력"</string>
+    <string name="power_cell" msgid="3392999761958982492">"모바일 네트워크 대기"</string>
     <string name="power_phone" msgid="5392641106474567277">"음성 통화"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"유휴 상태 태블릿"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"휴대전화 유휴 상태"</string>
@@ -2009,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"배터리 사용량은 대략적으로 계산한 전원 사용량이며 모든 배터리 소모 요인이 포함되지는 않습니다. 기타 전원 사용량은 대략 계산한 전원 사용량과 배터리에서 관찰된 실제 소모량 사이의 차이입니다."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"전력 사용량 과다 산정됨"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"%1$s 동안 사용"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g>에서 <xliff:g id="PERCENT">%1$s</xliff:g> 사용"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"전체 배터리 사용량의 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"마지막 충전 완료 후 사용 내역 분석"</string>
@@ -3205,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"이 권한은 앱이 시스템 설정을 수정하도록 허용합니다."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"예"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"아니요"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"예"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"아니요"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"앱 설치 허용"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"손목을 두 번 돌려 카메라 열기"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"손목을 두 번 돌리면 카메라 앱이 열립니다."</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"전원 버튼을 두 번 눌러 카메라 열기"</string>
@@ -3393,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"프리미엄 SMS는 요금이 부과될 수 있으며 이는 이동통신사 요금에 추가됩니다. 앱에 권한을 부여하면 해당 앱을 사용하여 프리미엄 SMS를 사용할 수 있게 됩니다."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"프리미엄 SMS 액세스"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"다른 기기에서 보이지 않음"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"연결된 기기"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g>에 연결됨"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"여러 기기에 연결됨"</string>
     <string name="demo_mode" msgid="2798762752209330277">"시스템 UI 데모 모드"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"빠른 설정 개발자 타일"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Google로부터 지원받기"</string>
@@ -3473,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"알림을 확인하려면 휴대전화 뒷면의 지문 센서에서 아래로 스와이프합니다."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"알림을 확인하려면 태블릿 뒷면의 지문 센서에서 아래로 스와이프합니다."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"알림을 확인하려면 기기 뒷면의 지문 센서에서 아래로 스와이프합니다."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"지원 동작"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"민감도"</string>

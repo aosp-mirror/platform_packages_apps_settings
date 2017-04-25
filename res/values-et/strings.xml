@@ -647,7 +647,7 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Jäta seaded meelde"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Ülekandmine"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Luba juhtmeta ekraaniühendus"</string>
-    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Läheduses seadmeid ei leitud."</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Läheduses olevaid seadmeid ei leitud."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Ühendamine"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Ühendatud"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Kasutusel"</string>
@@ -663,8 +663,8 @@
     <string name="wifi_ask_enable" msgid="2795469717302060104">"Rakendus <xliff:g id="REQUESTER">%s</xliff:g> soovib WiFi sisse lülitada"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"Rakendus <xliff:g id="REQUESTER">%s</xliff:g> soovib WiFi välja lülitada"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Lubab andmete vahetust, kui tahvelarvuti puudutab teist seadet"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Lubab andmete vahetust, kui telefon puudutab teist seadet"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Lubab andmevahetuse, kui tahvelarvuti puudutab teist seadet"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Lubab andmevahetuse, kui telefon puudutab teist seadet"</string>
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC sisselülitamine"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC vahetab andmeid selle seadme ja muude läheduses asuvate seadmete või sihtmärkide vahel (nt makseterminalid, juurdepääsulugejad ja interaktiivsed reklaamid või märgendid)."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
@@ -672,7 +672,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Väljas"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Pole saadaval, kuna NFC on välja lülitatud"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Kui see funktsioon on sisse lülitatud, saate rakenduse sisu teise NFC-toega seadmesse kiirega saata, kui hoiate seadmeid üksteise lähedal. Nii saate kiirega edastada näiteks veebilehti, YouTube\'i videoid, kontakte ja muud.\n\nLihtsalt hoidke seadmeid lähestikku (tavaliselt tagakülgi koos) ja seejärel puudutage seadme ekraani. Rakendus määrab, mida kiirega edastatakse."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Kui see funktsioon on sisse lülitatud, saate rakenduse sisu teise NFC-toega seadmesse saata, kui hoiate seadmeid üksteise lähedal. Nii saate edastada näiteks veebilehti, YouTube\'i videoid, kontakte ja muud.\n\nLihtsalt hoidke seadmeid lähestikku (tavaliselt tagakülgi koos) ja seejärel puudutage seadme ekraani. Rakendus määrab, mida edastatakse."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Lülita WiFi sisse"</string>
     <string name="wifi_settings" msgid="29722149822540994">"WiFi"</string>
@@ -1914,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Ekraani kasutus alates viimasest täislaadimisest"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Ekraani energiatarve"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Mobiilivõrgustiku skannimine"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g> tagasi"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Rakenduste akukasutus alates viimasest täislaadimisest (<xliff:g id="TIME">%1$s</xliff:g> tagasi)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> tagasi"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Rakenduste akukasutus alates viimasest täislaadimisest (<xliff:g id="TIME">^1</xliff:g> tagasi)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Ekraani töötamise aeg alates viimasest täislaadimisest"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Seadme kasutus alates viimasest täislaadimisest"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akukasutus alates lahutamisest"</string>
@@ -1946,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Kaamera"</string>
     <string name="power_wifi" msgid="1135085252964054957">"WiFi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Mobiiltelefon ooterežiimil"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Mobiilsidevõrk on ooterežiimis"</string>
     <string name="power_phone" msgid="5392641106474567277">"Tavakõned"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tahvelarvuti on ooterežiimis"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon tegevuseta"</string>
@@ -2006,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Akukasutus näitab ligikaudset energiatarbimist ega sisalda iga energiatarbimise allikat. Kategooria Muu kajastab arvutatud ligikaudse energiatarbimise ja aku tegeliku tarbimise vahet."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Liigselt arvestatud energiatarbimine"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"Kasutatud %1$s"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> kasutab <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> kogu akumahust"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Üksikasjalik teave alates viimasest täislaadimisest"</string>
@@ -3202,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Luba võimaldab rakendusel muuta süsteemiseadeid."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Jah"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Ei"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Jah"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Ei"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Luba rakenduste installimine"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Pöörake kaks korda kaamera avamiseks"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Avage kaamerarakendus, pöörates rannet kaks korda"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kaamera avam. vajut. 2 korda toitenuppu"</string>
@@ -3390,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Tasuliste SMS-ide saatmisel võidakse teilt nõuda tasu, mis lisatakse operaatori esitatud arvele. Kui annate rakendusele loa, saate selle rakendusega tasulisi SMS-e saata."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Juurdepääs tasuliste SMS-ide saatmiseks"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Ei ole teiste seadmete jaoks nähtav"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Ühendatud:"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Ühendatud seadmega <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Ühendatud mitme seadmega"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Süsteemi kasutajaliidese demorežiim"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Arendaja kiirseadete paanid"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Oleme valmis teid aitama"</string>
@@ -3470,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Märguannete kontrollimiseks pühkige telefoni tagaküljel oleval sõrmejäljeanduril alla."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Märguannete kontrollimiseks pühkige tahvelarvuti tagaküljel oleval sõrmejäljeanduril alla."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Märguannete kontrollimiseks pühkige seadme tagaküljel oleval sõrmejäljeanduril alla."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Abiliigutus"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Tundlikkus"</string>
