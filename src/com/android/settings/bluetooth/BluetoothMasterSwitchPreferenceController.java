@@ -36,7 +36,7 @@ public class BluetoothMasterSwitchPreferenceController extends PreferenceControl
         implements OnSummaryChangeListener,
         LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
 
-    private static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
+    public static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
 
     private LocalBluetoothManager mBluetoothManager;
     private MasterSwitchPreference mBtPreference;
