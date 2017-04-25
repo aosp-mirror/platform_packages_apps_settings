@@ -77,6 +77,22 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
                         getPackageName(),
                         Fs.fileFromPath("./frameworks/base/core/res/res"),
                         null));
+                paths.add(new ResourcePath(
+                        getPackageName(),
+                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/main/res"),
+                        null));
+                paths.add(new ResourcePath(
+                        getPackageName(),
+                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/gingerbread/res"),
+                        null));
+                paths.add(new ResourcePath(
+                        getPackageName(),
+                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/recyclerview/res"),
+                        null));
+                paths.add(new ResourcePath(
+                        getPackageName(),
+                        Fs.fileFromPath("./frameworks/support/v7/appcompat/res"),
+                        null));
                 return paths;
             }
         };
