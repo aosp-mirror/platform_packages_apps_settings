@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Google Inc.
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
+import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,6 +41,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
+
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -54,7 +56,8 @@ public class SuggestionsChecksTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
-
+    @Mock
+    private WallpaperManagerWrapper mWallpaperManager;
     private SuggestionsChecks mSuggestionsChecks;
 
     @Before
@@ -117,5 +120,25 @@ public class SuggestionsChecksTest {
         tile.intent.setComponent(new ComponentName(mContext,
                 Settings.FingerprintEnrollSuggestionActivity.class));
         return tile;
+    }
+
+    @Test
+    public void hasWallpaperSet_no_shouldReturnFalse() {
+        ReflectionHelpers.setField(mSuggestionsChecks, "mWallpaperManager", mWallpaperManager);
+        when(mWallpaperManager.getWallpaperId(WallpaperManager.FLAG_SYSTEM))
+                .thenReturn(0);
+
+        assertThat(mSuggestionsChecks.hasWallpaperSet())
+                .isFalse();
+    }
+
+    @Test
+    public void hasWallpaperSet_yes_shouldReturnTrue() {
+        ReflectionHelpers.setField(mSuggestionsChecks, "mWallpaperManager", mWallpaperManager);
+        when(mWallpaperManager.getWallpaperId(WallpaperManager.FLAG_SYSTEM))
+                .thenReturn(100);
+
+        assertThat(mSuggestionsChecks.hasWallpaperSet())
+                .isTrue();
     }
 }
