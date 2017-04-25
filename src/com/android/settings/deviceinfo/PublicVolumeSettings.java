@@ -98,7 +98,9 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             mVolume = mStorageManager.findVolumeByUuid(fsUuid);
         } else {
             final String volId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
-            mVolume = mStorageManager.findVolumeById(volId);
+            if (volId != null) {
+                mVolume = mStorageManager.findVolumeById(volId);
+            }
         }
 
         if (!isVolumeValid()) {
@@ -129,6 +131,12 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // If the volume isn't valid, we are not scaffolded to set up a view.
+        if (!isVolumeValid()) {
+            return;
+        }
+
         final Resources resources = getResources();
         final int padding = resources.getDimensionPixelSize(
                 R.dimen.unmount_button_padding);
