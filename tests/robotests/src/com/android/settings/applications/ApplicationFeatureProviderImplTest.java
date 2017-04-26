@@ -20,19 +20,20 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.ArraySet;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,8 +42,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -76,6 +78,7 @@ public final class ApplicationFeatureProviderImplTest {
     private ApplicationFeatureProvider mProvider;
 
     private int mAppCount = -1;
+    private List<UserAppInfo> mAppList = null;
 
     @Before
     public void setUp() {
@@ -103,6 +106,22 @@ public final class ApplicationFeatureProviderImplTest {
             ShadowApplication.runBackgroundTasks();
         }
         assertThat(mAppCount).isEqualTo(1);
+    }
+
+    @Test
+    public void testListPolicyInstalledApps() {
+        setUpUsersAndInstalledApps();
+
+        when(mPackageManager.getInstallReason(APP_1, new UserHandle(MAIN_USER_ID)))
+                .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
+        when(mPackageManager.getInstallReason(APP_2, new UserHandle(MANAGED_PROFILE_ID)))
+                .thenReturn(PackageManager.INSTALL_REASON_POLICY);
+
+        mAppList = null;
+        mProvider.listPolicyInstalledApps((list) -> mAppList = list);
+        assertThat(mAppList).isNotNull();
+        assertThat(mAppList.size()).isEqualTo(1);
+        assertThat(mAppList.get(0).appInfo.packageName).isEqualTo(APP_2);
     }
 
     @Test
@@ -139,7 +158,6 @@ public final class ApplicationFeatureProviderImplTest {
             ShadowApplication.runBackgroundTasks();
         }
         assertThat(mAppCount).isEqualTo(2);
-
     }
 
     @Test
@@ -153,9 +171,43 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
+    public void testListAppsWithAdminGrantedPermissions()
+            throws Exception {
+        setUpUsersAndInstalledApps();
+
+        when(mDevicePolicyManager.getPermissionGrantState(null, APP_1, PERMISSION))
+                .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED);
+        when(mDevicePolicyManager.getPermissionGrantState(null, APP_2, PERMISSION))
+                .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_DENIED);
+        when(mPackageManagerService.checkUidPermission(PERMISSION, APP_1_UID))
+                .thenReturn(PackageManager.PERMISSION_DENIED);
+        when(mPackageManagerService.checkUidPermission(PERMISSION, APP_2_UID))
+                .thenReturn(PackageManager.PERMISSION_GRANTED);
+        when(mPackageManager.getInstallReason(APP_1, new UserHandle(MAIN_USER_ID)))
+                .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
+        when(mPackageManager.getInstallReason(APP_2, new UserHandle(MANAGED_PROFILE_ID)))
+                .thenReturn(PackageManager.INSTALL_REASON_POLICY);
+
+        mAppList = null;
+        mProvider.listAppsWithAdminGrantedPermissions(new String[] {PERMISSION},
+                (list) -> mAppList = list);
+        assertThat(mAppList).isNotNull();
+        assertThat(mAppList.size()).isEqualTo(2);
+        assertThat(Arrays.asList(mAppList.get(0).appInfo.packageName,
+                mAppList.get(1).appInfo.packageName).containsAll(Arrays.asList(APP_1, APP_2)))
+                .isTrue();
+    }
+
+    @Test
     public void testFindPersistentPreferredActivities() throws Exception {
+        final UserInfo mainUser = new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN);
+        final UserInfo managedUser = new UserInfo(MANAGED_PROFILE_ID, "managed",
+                UserInfo.FLAG_MANAGED_PROFILE);
+
         when(mUserManager.getUserProfiles()).thenReturn(Arrays.asList(new UserHandle(MAIN_USER_ID),
                 new UserHandle(MANAGED_PROFILE_ID)));
+        when(mUserManager.getUserInfo(MAIN_USER_ID)).thenReturn(mainUser);
+        when(mUserManager.getUserInfo(MANAGED_PROFILE_ID)).thenReturn(managedUser);
 
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
         final Intent editIntent = new Intent(Intent.ACTION_EDIT);
@@ -176,17 +228,21 @@ public final class ApplicationFeatureProviderImplTest {
         when(mPackageManagerService.findPersistentPreferredActivity(sendIntent, MANAGED_PROFILE_ID))
                 .thenReturn(null);
 
-        final Set<ApplicationFeatureProvider.PersistentPreferredActivityInfo> expectedActivities
-                = new ArraySet<>();
-        expectedActivities.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo(APP_1,
-                MAIN_USER_ID));
-        expectedActivities.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo(APP_1,
-                MANAGED_PROFILE_ID));
-        expectedActivities.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo(APP_2,
-                MANAGED_PROFILE_ID));
+        final List<UserAppInfo> expectedMainUserActivities = new ArrayList<>();
+        expectedMainUserActivities.add(new UserAppInfo(mainUser,
+                new ApplicationInfo(app1.activityInfo.applicationInfo)));
+        final List<UserAppInfo> expectedManagedUserActivities = new ArrayList<>();
+        expectedManagedUserActivities.add(new UserAppInfo(managedUser,
+                new ApplicationInfo(app1.activityInfo.applicationInfo)));
+        expectedManagedUserActivities.add(new UserAppInfo(managedUser,
+                new ApplicationInfo(app2.activityInfo.applicationInfo)));
 
-        assertThat(mProvider.findPersistentPreferredActivities(
-                new Intent[] {viewIntent, editIntent, sendIntent})).isEqualTo(expectedActivities);
+        assertThat(mProvider.findPersistentPreferredActivities(MAIN_USER_ID,
+                new Intent[] {viewIntent, editIntent, sendIntent}))
+                .isEqualTo(expectedMainUserActivities);
+        assertThat(mProvider.findPersistentPreferredActivities(MANAGED_PROFILE_ID,
+                new Intent[] {viewIntent, editIntent, sendIntent}))
+                .isEqualTo(expectedManagedUserActivities);
     }
 
     private void setUpUsersAndInstalledApps() {
@@ -208,8 +264,11 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     private ResolveInfo createResolveInfo(String packageName) {
+        final ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.packageName = packageName;
         final ActivityInfo activityInfo = new ActivityInfo();
         activityInfo.packageName = packageName;
+        activityInfo.applicationInfo = applicationInfo;
         final ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.activityInfo = activityInfo;
         return resolveInfo;

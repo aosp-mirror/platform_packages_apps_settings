@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -31,6 +32,7 @@ import android.view.View;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -74,6 +76,13 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
+    public void listPolicyInstalledApps(ListOfAppsCallback callback) {
+        final CurrentUserPolicyInstalledAppLister lister =
+                new CurrentUserPolicyInstalledAppLister(mPm, mUm, callback);
+        lister.execute();
+    }
+
+    @Override
     public void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions,
             boolean async, NumberOfAppsCallback callback) {
         final CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter counter =
@@ -87,36 +96,43 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
-    public Set<PersistentPreferredActivityInfo> findPersistentPreferredActivities(
-            Intent[] intents) {
-        final Set<PersistentPreferredActivityInfo> activities = new ArraySet<>();
-        final List<UserHandle> users = mUm.getUserProfiles();
+    public void listAppsWithAdminGrantedPermissions(String[] permissions,
+            ListOfAppsCallback callback) {
+        final CurrentUserAppWithAdminGrantedPermissionsLister lister =
+                new CurrentUserAppWithAdminGrantedPermissionsLister(permissions, mPm, mPms, mDpm,
+                        mUm, callback);
+        lister.execute();
+    }
+
+    @Override
+    public List<UserAppInfo> findPersistentPreferredActivities(int userId, Intent[] intents) {
+        final List<UserAppInfo> preferredActivities = new ArrayList<>();
+        final Set<UserAppInfo> uniqueApps = new ArraySet<>();
+        final UserInfo userInfo = mUm.getUserInfo(userId);
         for (final Intent intent : intents) {
-            for (final UserHandle user : users) {
-                final int userId = user.getIdentifier();
-                try {
-                    final ResolveInfo resolveInfo = mPms.findPersistentPreferredActivity(intent,
-                            userId);
-                    if (resolveInfo != null) {
-                        ComponentInfo componentInfo = null;
-                        if (resolveInfo.activityInfo != null) {
-                            componentInfo = resolveInfo.activityInfo;
-                        } else if (resolveInfo.serviceInfo != null) {
-                            componentInfo = resolveInfo.serviceInfo;
-                        } else if (resolveInfo.providerInfo != null) {
-                            componentInfo = resolveInfo.providerInfo;
-                        }
-                        if (componentInfo != null) {
-                            activities.add(new PersistentPreferredActivityInfo(
-                                    componentInfo.packageName, userId));
+            try {
+                final ResolveInfo resolveInfo =
+                        mPms.findPersistentPreferredActivity(intent, userId);
+                if (resolveInfo != null) {
+                    ComponentInfo componentInfo = null;
+                    if (resolveInfo.activityInfo != null) {
+                        componentInfo = resolveInfo.activityInfo;
+                    } else if (resolveInfo.serviceInfo != null) {
+                        componentInfo = resolveInfo.serviceInfo;
+                    } else if (resolveInfo.providerInfo != null) {
+                        componentInfo = resolveInfo.providerInfo;
+                    }
+                    if (componentInfo != null) {
+                        UserAppInfo info = new UserAppInfo(userInfo, componentInfo.applicationInfo);
+                        if (uniqueApps.add(info)) {
+                            preferredActivities.add(info);
                         }
                     }
-                } catch (RemoteException exception) {
                 }
+            } catch (RemoteException exception) {
             }
-
         }
-        return activities;
+        return preferredActivities;
     }
 
     private static class CurrentUserAndManagedProfilePolicyInstalledAppCounter
@@ -152,4 +168,39 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             mCallback.onNumberOfAppsResult(num);
         }
     }
+
+    private static class CurrentUserPolicyInstalledAppLister extends InstalledAppLister {
+        private ListOfAppsCallback mCallback;
+
+        CurrentUserPolicyInstalledAppLister(PackageManagerWrapper packageManager,
+                UserManager userManager, ListOfAppsCallback callback) {
+            super(packageManager, userManager);
+            mCallback = callback;
+        }
+
+        @Override
+        protected void onAppListBuilt(List<UserAppInfo> list) {
+            mCallback.onListOfAppsResult(list);
+        }
+    }
+
+    private static class CurrentUserAppWithAdminGrantedPermissionsLister extends
+            AppWithAdminGrantedPermissionsLister {
+        private ListOfAppsCallback mCallback;
+
+        CurrentUserAppWithAdminGrantedPermissionsLister(String[] permissions,
+                PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
+                DevicePolicyManagerWrapper devicePolicyManager, UserManager userManager,
+                ListOfAppsCallback callback) {
+            super(permissions, packageManager, packageManagerService, devicePolicyManager,
+                    userManager);
+            mCallback = callback;
+        }
+
+        @Override
+        protected void onAppListBuilt(List<UserAppInfo> list) {
+            mCallback.onListOfAppsResult(list);
+        }
+    }
+
 }

@@ -15,11 +15,16 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+
 import android.accounts.Account;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -28,9 +33,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import static org.mockito.Mockito.mock;
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -42,13 +44,18 @@ public class AccountSyncPreferenceControllerTest {
         final Context context = application.getApplicationContext();
         final Preference preference = new Preference(context);
         preference.setKey("account_sync");
-        AccountSyncPreferenceController controller = new AccountSyncPreferenceController(context);
-        controller.init(new Account("acct1", "type1"), mock(UserHandle.class));
 
+        final AccountSyncPreferenceController controller =
+                new AccountSyncPreferenceController(context);
+        controller.init(new Account("acct1", "type1"), mock(UserHandle.class));
         controller.handlePreferenceTreeClick(preference);
 
-        assertThat(application.getNextStartedActivity().getStringExtra(
-            SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(AccountSyncSettings.class.getName());
+        final Intent nextActivity = application.getNextStartedActivity();
+
+        assertThat(nextActivity.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AccountSyncSettings.class.getName());
+        assertThat(nextActivity.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.account_sync_title);
     }
 
 }

@@ -37,6 +37,7 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.AssistGesturePreferenceController;
+import com.android.settings.gestures.CameraLiftTriggerPreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
@@ -55,6 +56,8 @@ import java.util.List;
 public class LanguageAndInputSettings extends DashboardFragment {
 
     private static final String TAG = "LangAndInputSettings";
+
+    private static final String KEY_CAMERA_LIFT_TRIGGER = "gesture_camera_lift_trigger_summary";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
@@ -108,6 +111,8 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new DoubleTapScreenPreferenceController(
                 context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
+        controllers.add(new CameraLiftTriggerPreferenceController(context, lifecycle,
+                KEY_CAMERA_LIFT_TRIGGER));
         controllers.add(new DefaultAutofillPreferenceController(context));
         return controllers;
     }

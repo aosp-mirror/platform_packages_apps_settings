@@ -145,6 +145,7 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
     public static class ScreenLockSuggestionActivity extends ChooseLockGeneric { /* empty */ }
+    public static class CameraLiftTriggerSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
