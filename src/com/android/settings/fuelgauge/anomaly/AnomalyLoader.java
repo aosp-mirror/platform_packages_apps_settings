@@ -39,13 +39,16 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
     }
 
     @Override
-    protected void onDiscardResult(List<Anomaly> result) {}
+    protected void onDiscardResult(List<Anomaly> result) {
+    }
 
     @Override
     public List<Anomaly> loadInBackground() {
         final List<Anomaly> anomalies = new ArrayList<>();
-        anomalies.addAll(new WakeLockAnomalyDetector().detectAnomalies(mBatteryStatsHelper));
+        anomalies.addAll(new WakeLockAnomalyDetector(getContext())
+                .detectAnomalies(mBatteryStatsHelper));
 
         return anomalies;
     }
+
 }

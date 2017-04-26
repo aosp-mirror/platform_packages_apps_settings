@@ -16,7 +16,20 @@
 
 package com.android.settings.fuelgauge.anomaly.checker;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.BatteryStats;
+import android.os.SystemClock;
+import android.support.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
+import android.util.ArrayMap;
+import android.util.Log;
+
+import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.Utils;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 import java.util.ArrayList;
@@ -26,11 +39,79 @@ import java.util.List;
  * Check whether apps holding wakelock too long
  */
 public class WakeLockAnomalyDetector implements AnomalyDetector {
+    private static final String TAG = "WakeLockAnomalyChecker";
+    // TODO: get threshold form server side
+    private static final long WAKE_LOCK_THRESHOLD_MS = 2 * DateUtils.MINUTE_IN_MILLIS;
+    private PackageManager mPackageManager;
+    private Context mContext;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
+
+    public WakeLockAnomalyDetector(Context context) {
+        mContext = context;
+        mPackageManager = context.getPackageManager();
+        mBatteryUtils = BatteryUtils.getInstance(context);
+    }
 
     @Override
     public List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper) {
-        //TODO(b/36921529): check anomaly using the batteryStatsHelper
+        final List<BatterySipper> batterySippers = batteryStatsHelper.getUsageList();
         final List<Anomaly> anomalies = new ArrayList<>();
+        final long rawRealtime = SystemClock.elapsedRealtime();
+
+        // Check the app one by one
+        for (int i = 0, size = batterySippers.size(); i < size; i++) {
+            final BatterySipper sipper = batterySippers.get(i);
+            final BatteryStats.Uid uid = sipper.uidObj;
+            if (uid == null) {
+                continue;
+            }
+            final ArrayMap<String, ? extends BatteryStats.Uid.Wakelock> wakelocks =
+                    uid.getWakelockStats();
+            long maxPartialWakeLockMs = 0;
+
+            for (int iw = wakelocks.size() - 1; iw >= 0; iw--) {
+                final BatteryStats.Timer timer = wakelocks.valueAt(iw).getWakeTime(
+                        BatteryStats.WAKE_TYPE_PARTIAL);
+                if (timer == null) {
+                    continue;
+                }
+                maxPartialWakeLockMs = Math.max(maxPartialWakeLockMs,
+                        getTotalDurationMs(timer, rawRealtime));
+            }
+
+            // Report it if wakelock time is too long and it is not a hidden batterysipper
+            // TODO: add more attributes to detect wakelock anomaly
+            if (maxPartialWakeLockMs > WAKE_LOCK_THRESHOLD_MS
+                    && !mBatteryUtils.shouldHideSipper(sipper)) {
+                final String packageName = getPackageName(uid.getUid());
+                final CharSequence displayName = Utils.getApplicationLabel(mContext,
+                        packageName);
+
+                Anomaly anomaly = new Anomaly.Builder()
+                        .setUid(uid.getUid())
+                        .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                        .setDisplayName(displayName)
+                        .setPackageName(packageName)
+                        .build();
+                anomalies.add(anomaly);
+            }
+
+        }
         return anomalies;
+    }
+
+    private String getPackageName(int uid) {
+        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
+
+        return packageNames == null ? null : packageNames[0];
+    }
+
+    @VisibleForTesting
+    long getTotalDurationMs(BatteryStats.Timer timer, long rawRealtime) {
+        if (timer == null) {
+            return 0;
+        }
+        return timer.getTotalDurationMsLocked(rawRealtime);
     }
 }
