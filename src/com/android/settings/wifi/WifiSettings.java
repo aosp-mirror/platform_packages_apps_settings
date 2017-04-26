@@ -340,13 +340,19 @@ public class WifiSettings extends RestrictedSettingsFragment
         mWifiTracker.startTracking();
 
         if (!isUiRestricted() && mWifiManager.isWifiEnabled()) {
-            setProgressBarVisible(true);
-            mWifiTracker.forceUpdate();
-            if (DEBUG) Log.d(TAG, "WifiSettings onStart APs: " + mWifiTracker.getAccessPoints());
-
-            getView().removeCallbacks(mUpdateAccessPointsRunnable);
-            updateAccessPointPreferences();
+            forceUpdateAPs();
         }
+    }
+
+    private void forceUpdateAPs() {
+        setProgressBarVisible(true);
+        mWifiTracker.forceUpdate();
+        if (DEBUG) {
+            Log.d(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
+        }
+
+        getView().removeCallbacks(mUpdateAccessPointsRunnable);
+        updateAccessPointPreferences();
     }
 
     /**
@@ -661,7 +667,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final int wifiState = mWifiManager.getWifiState();
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                updateAccessPointsDelayed();
+                forceUpdateAPs();
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:

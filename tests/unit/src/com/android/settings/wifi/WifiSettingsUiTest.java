@@ -19,17 +19,21 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-import android.app.Instrumentation;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
+
+import com.google.common.collect.Lists;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,9 +47,13 @@ public class WifiSettingsUiTest {
 
     // TODO(sghuman): Investigate why resource ids are not resolving correctly in the test apk,
     // then remove this manual string entry
-    private static final String WIFI_PREFERENCES = "Wi\\u2011Fi preferences";
+    private static final String WIFI_PREFERENCES = "Wi\u2011Fi preferences";
 
+    @Mock private AccessPoint mockAccessPoint;
     @Mock private WifiTracker mockWifiTracker;
+    @Mock private WifiManager mockWifiManager;
+
+    private Context mContext;
 
     @Rule
     public ActivityTestRule<WifiSettingsActivity> mActivityRule =
@@ -54,7 +62,14 @@ public class WifiSettingsUiTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = InstrumentationRegistry.getTargetContext();
+
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
+        when(mockWifiTracker.getManager()).thenReturn(mockWifiManager);
+        when(mockWifiTracker.getAccessPoints()).thenReturn(
+                Lists.asList(mockAccessPoint, new AccessPoint[]{}));
+
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
     }
 
     private void launchActivity() {
