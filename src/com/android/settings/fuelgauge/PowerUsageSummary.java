@@ -64,7 +64,7 @@ import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
 import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
-import com.android.settings.fuelgauge.anomaly.AnomalyPreferenceController;
+import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.FooterPreferenceMixin;
@@ -125,7 +125,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
-    private AnomalyPreferenceController mAnomalyPreferenceController;
+    private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
     private LoaderManager.LoaderCallbacks<List<Anomaly>> mAnomalyLoaderCallbacks =
@@ -139,7 +139,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
                     // show high usage preference if possible
-                    mAnomalyPreferenceController.updateAnomalyPreference(data);
+                    mAnomalySummaryPreferenceController.updateHighUsagePreference(data);
                 }
 
                 @Override
@@ -159,8 +159,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mLastFullChargePref = (PowerGaugePreference) findPreference(
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
-        mAnomalyPreferenceController = new AnomalyPreferenceController(this);
-
+        mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
+                (SettingsActivity) getActivity(), this);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
 
         initFeatureProvider();
@@ -193,7 +193,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (mAnomalyPreferenceController.onPreferenceTreeClick(preference)) {
+        if (mAnomalySummaryPreferenceController.onPreferenceTreeClick(preference)) {
             return true;
         }
         if (KEY_BATTERY_HEADER.equals(preference.getKey())) {
@@ -727,7 +727,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     public void onAnomalyHandled(Anomaly anomaly) {
-        mAnomalyPreferenceController.hideAnomalyPreference();
+        mAnomalySummaryPreferenceController.hideHighUsagePreference();
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
