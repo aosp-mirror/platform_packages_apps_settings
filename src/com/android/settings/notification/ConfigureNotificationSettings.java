@@ -17,20 +17,23 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ConfigureNotificationSettings extends DashboardFragment {
     private static final String TAG = "ConfigNotiSettings";
-
-    private LockScreenNotificationPreferenceController mLockScreenNotificationController;
 
     @Override
     public int getMetricsCategory() {
@@ -49,15 +52,42 @@ public class ConfigureNotificationSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle());
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         final PulseNotificationPreferenceController pulseController =
                 new PulseNotificationPreferenceController(context);
-        mLockScreenNotificationController = new LockScreenNotificationPreferenceController(context);
-        getLifecycle().addObserver(pulseController);
-        getLifecycle().addObserver(mLockScreenNotificationController);
-        controllers.add(new SwipeToNotificationPreferenceController(context, getLifecycle()));
+        final LockScreenNotificationPreferenceController lockScreenNotificationController =
+                new LockScreenNotificationPreferenceController(context);
+        if (lifecycle != null) {
+            lifecycle.addObserver(pulseController);
+            lifecycle.addObserver(lockScreenNotificationController);
+        }
+        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
         controllers.add(pulseController);
-        controllers.add(mLockScreenNotificationController);
+        controllers.add(lockScreenNotificationController);
         return controllers;
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.configure_notification_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context, null);
+                }
+            };
 }

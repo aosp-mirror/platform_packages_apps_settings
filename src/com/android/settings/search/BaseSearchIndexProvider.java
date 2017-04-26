@@ -19,6 +19,7 @@ package com.android.settings.search;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.CallSuper;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -57,6 +58,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     @Override
+    @CallSuper
     public List<String> getNonIndexableKeys(Context context) {
         if (!isPageSearchEnabled(context)) {
             // Entire page should be suppressed, mark all keys from this page as non-indexable.
