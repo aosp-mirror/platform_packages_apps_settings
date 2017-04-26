@@ -236,12 +236,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
+            boolean isStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
             if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
-                return mIsStrongAuthRequired
+                return isStrongAuthRequired
                         ? R.string.lockpassword_strong_auth_required_reason_restart_work_pattern
                         : R.string.lockpassword_confirm_your_pattern_generic_profile;
             } else {
-                return mIsStrongAuthRequired
+                return isStrongAuthRequired
                         ? R.string.lockpassword_strong_auth_required_reason_restart_device_pattern
                         : R.string.lockpassword_confirm_your_pattern_generic;
             }
