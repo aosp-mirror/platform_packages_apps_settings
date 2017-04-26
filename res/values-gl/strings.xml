@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Notifica cando unha rede pública de alta calidade estea dispoñible"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activar a wifi automaticamente"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"A wifi volverase activar preto de redes de alta calidade gardadas, como a túa rede doméstica"</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Non está dispoñible porque a busca de redes wifi está desactivada"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Evitar conexións deficientes"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Non utilizar unha rede wifi se non ten unha boa conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Usa só redes que teñan unha boa conexión a Internet"</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Borra todos os datos do almacenamento USB interno, como a música ou as fotos"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Borra todos os datos da tarxeta SD, como a música ou as fotos"</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"Borrar as eSIM"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Borra todas as eSIM do teléfono. Esta acción non cancelará o teu plan de servizo móbil."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Borra todas as eSIM da tableta. Esta acción non cancelará o teu plan de servizo móbil."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Restablecer tableta"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Restablecer teléfono"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Queres borrar toda a túa información persoal e as aplicacións descargadas? Non podes desfacer esta acción."</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Uso da pantalla desde a carga completa"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumo da pantalla"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Busca da rede de telefonía móbil"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Hai <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso da aplicación desde a carga completa (hai <xliff:g id="TIME">%1$s</xliff:g>)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Hai <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso da aplicación desde a carga completa (hai <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tempo durante o que a pantalla estivo activada desde a carga completa"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Uso do dispositivo desde a carga completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso da batería desde que se desconectou"</string>
@@ -1949,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Cámara"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wifi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Modo de espera de cela"</string>
+    <string name="power_cell" msgid="3392999761958982492">"A rede de telefonía móbil está en modo de espera"</string>
     <string name="power_phone" msgid="5392641106474567277">"Chamadas de voz"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tableta inactiva"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Teléfono inactivo"</string>
@@ -2009,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"O uso da batería é unha aproximación do uso de enerxía e non inclúe todas as fontes de consumo de batería. Variado indica a diferenza entre o uso de enerxía aproximado computado e o consumo real que se observa na batería."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Reconto excesivo do uso de enerxía"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"Tempo de uso da batería: %1$s"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> utilizado por <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> da batería total"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Análise detallada desde a última carga completa"</string>
@@ -3205,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Con este permiso unha aplicación pode modificar a configuración do sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Si"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Non"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Si"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Non"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Permitir instalacións de aplicacións"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dobre xiro para abrir a cámara"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Xira o pulso dúas veces para abrir a aplicación da cámara"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Botón de acendido dúas veces para cámara"</string>
@@ -3393,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"É posible que teñas que pagar polas mensaxes premium, cuxos custos se engadirán ás facturas do teu operador. Se activas o permiso para unha aplicación, poderás enviar mensaxes premium a través desa aplicación."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Acceso ás mensaxes premium"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Non é visible para outros dispositivos"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Conectado a"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Conectado a: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Conectado a varios dispositivos"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modo de demostración da IU do sistema"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Mosaicos para programadores de configuración rápida"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Se precisas axuda, conta connosco"</string>
@@ -3473,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira do teléfono."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira da tableta."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira do dispositivo."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Asistencia cos xestos"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidade"</string>

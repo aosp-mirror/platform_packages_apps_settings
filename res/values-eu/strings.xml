@@ -109,7 +109,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Deskonektatu?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Gailu honekin duzun konexioa amaituko da:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Ez daukazu Bluetooth-ezarpenak aldatzeko baimenik."</string>
-    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth konexioa aktibo badago, inguruko gailuek <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ikusi ahal izango dute."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth ezarpenak irekita badaude, inguruko gailuek <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ikusi ahal izango dute."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> deskonektatu nahi duzu?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Igorpena"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profila desgaitu?"</string>
@@ -672,7 +672,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Desaktibatuta"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Ez dago erabilgarri NFC desaktibatuta dagoelako"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Eginbide hau aktibatzen baduzu, NFC bidez parteka dezakezu aplikazioen edukia NFC erabiltzen duten beste gailu batzuekin, gailuak bata besteari hurbilduta. Besteak beste, web-orriak, YouTube bideoak, kontaktuak eta beste hainbat gauza parteka ditzakezu.\n\nHori egiteko, hurbildu gailuak bata bestearengana (bizkarrez bizkar jarri behar izaten dira normalean), eta sakatu pantaila. Aplikazioak zehaztuko du partekatu beharrekoa zer den."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Eginbide hau aktibatzen baduzu, NFC bidez parteka dezakezu aplikazioen edukia NFC erabiltzen duten beste gailu batzuekin, gailuak bata besteari hurbilduta. Besteak beste, web-orriak, YouTube bideoak, kontaktuak eta beste hainbat gauza parteka ditzakezu.\n\nHori egiteko, hurbildu gailuak bata bestearengana (atzealdeak elkartu behar izan ohi dira), eta sakatu pantaila. Aplikazioak zehaztuko du partekatu beharrekoa zer den."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Aktibatu Wi-Fia"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi-Fi"</string>
@@ -1887,7 +1887,7 @@
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Gehitu inprimagailua"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"Bilatu"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"Inprimagailuak bilatzen"</string>
-    <string name="print_service_disabled" msgid="7739452396114245222">"Zerbitzua desgaitu da"</string>
+    <string name="print_service_disabled" msgid="7739452396114245222">"Zerbitzua desgaituta dago"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Inprimatze-lanak"</string>
     <string name="print_print_job" msgid="7563741676053287211">"Inprimatze-lana"</string>
     <string name="print_restart" msgid="8373999687329384202">"Berrabiarazi"</string>
@@ -1914,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Pantailaren erabilera gailua guztiz kargatu zenetik"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Pantailaren kontsumoa"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Sare mugikorra bilatzen"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Duela <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Aplikazioen erabilera gailua guztiz kargatu zenetik (duela <xliff:g id="TIME">%1$s</xliff:g>)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Duela <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Aplikazioen erabilera gailua guztiz kargatu zenetik (duela <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Gailua guztiz kargatu zenetik pantaila piztuta egon den denbora"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Gailuaren erabilera hura guztiz kargatu zenetik"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Bateriaren erabilera entxufea atera ondoren"</string>
@@ -1946,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Sare mugikorraren bilaketa"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Sare mugikorra egonean dagoela"</string>
     <string name="power_phone" msgid="5392641106474567277">"Ahots-deiak"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tableta inaktibo"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefonoa inaktibo"</string>
@@ -2006,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Bateriaren erabilerari buruzko datuetan, energiaren gutxi gorabeherako erabilera adierazten da eta ez dira bateria agortzen duten iturburu guztiak aipatzen. Bestelako erabileretan, kalkulatutako gutxi gorabeherako erabileraren eta bateriaren benetako kontsumoaren arteko desberdintasuna adierazten da."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Uste baino energia gutxiago erabili da."</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"Erabilitako denbora: %1$s"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> erabili du <xliff:g id="APP">%2$s</xliff:g> aplikazioak"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Bateria osoaren <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Guztiz kargatu zen azken aldiaz geroztik emandako erabilerari buruzko datuak"</string>
@@ -3202,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Baimen honekin, sistemaren ezarpenak alda ditzakete aplikazioek."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Bai"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Ez"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Bai"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Ez"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Baimendu aplikazioak instalatzea"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera irekitzeko, biratu birritan"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Ireki kameraren aplikazioa eskumuturra birritan biratuta"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Ireki kamera etengailua birritan sakatuta"</string>
@@ -3390,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMSak ordaindu egin behar izan ditzakezu eta, hala bada, operadorearen fakturan gehituko da haien kostua. Aplikazioei baimen hau ematen badiezu, premium SMSak bidaltzeko gai izango dira."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium SMSetarako sarbidea"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Ezin dute ikusi gainerako gailuek"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Hona konektatuta:"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> gailura konektatuta"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Gailu batera baino gehiagotara konektatuta"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistemaren erabiltzaile-interfazearen demo modua"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Ezarpen bizkorretako garatzaileentzako lauzak"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Laguntzeko gauzkazu"</string>
@@ -3470,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Jakinarazpenei begiratu bat emateko, pasatu hatza beherantz telefonoaren atzealdeko hatz-marken sentsorean."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Jakinarazpenei begiratu bat emateko, pasatu hatza beherantz tabletaren atzealdeko hatz-marken sentsorean."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Jakinarazpenei begiratu bat emateko, pasatu hatza beherantz gailuaren atzealdeko hatz-marken sentsorean."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Laguntza aktibatzeko keinua"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sentikortasuna"</string>
@@ -3580,7 +3591,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> - desgaituta)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Betetze automatikoaren zerbitzua"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"bete, automatikoki, betetze automatiko"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Ziurtatu aplikazioa fidagarria dela&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google-ren betetze automatikoak&gt;%1$s&lt;/xliff:g&gt; pantailan dagoena erabiltzen du automatikoki bete daitekeena zehazteko."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Ziurtatu aplikazioa fidagarria dela&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; eginbideak pantailan dagoena erabiltzen du automatikoki bete daitekeena zehazteko."</string>
     <string name="device_theme" msgid="4571803018917608588">"Gailuaren gaia"</string>
     <string name="default_theme" msgid="7085644992078579076">"Lehenetsia"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Memoria-kudeatzailea: <xliff:g id="STATUS">^1</xliff:g>"</string>

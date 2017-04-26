@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Varsle når et offentlig nettverk av høy kvalitet er tilgjengelig"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Slå på Wi‑Fi automatisk"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi slås på igjen i nærheten av lagrede nettverk av høy kvalitet, for eksempel hjemmenettverket ditt"</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Utilgjengelig fordi Wi‑Fi-skanning er slått av"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Unngå dårlige tilkoblinger"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ikke bruk et Wi-Fi-nettverk med mindre det har en brukbar Internett-tilkobling"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Bare bruk nettverk som har en god nettilkobling"</string>
@@ -1174,7 +1173,7 @@
     <string name="storage_external_title" msgid="3433462910096848696">"Bærbar lagring"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> brukt av <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="1303803057698959872">"Brukt av <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_used" msgid="1303803057698959872">"brukt av <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="6113121714019000244">"Total lagringsplass brukt av <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="687641090137253647">"<xliff:g id="NAME">%1$s</xliff:g> er montert"</string>
     <string name="storage_mount_failure" msgid="1042621107954547316">"Kunne ikke montere <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1200,7 +1199,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"System"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Utforsk <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Annet omfatter delte filer lagret av apper, filer lastet ned fra Internett eller Bluetooth, Android-filer og så videre. \n\nFor å se det synlige innholdet på <xliff:g id="NAME">^1</xliff:g>, trykk på Utforsk."</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Systemet inkluderer filer som brukes for å kjøre Android-versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Delen System inneholder filer som brukes for å kjøre Android-versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> kan ha lagret bilder, musikk, apper eller andre data, som bruker <xliff:g id="SIZE">^2</xliff:g> lagringsplass. \n\nFor å se mer informasjon, bytt til <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Konfigurer <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Bruk som bærbar lagring"</string>
@@ -1277,7 +1276,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Tilbakestilling av standard APN-innstillinger er fullført."</string>
     <string name="reset_dashboard_title" msgid="4412694650600342973">"Tilbakestill"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Tilbakestill nettverksinnstillingene"</string>
-    <string name="reset_network_desc" msgid="5547979398298881406">"Dette tilbakestiller alle nettverksinnstillinger, inkludert:\n\n"<li>"Wi‑Fi"</li>\n<li>"mobildata"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_desc" msgid="5547979398298881406">"Dette tilbakestiller alle nettverksinnstillinger, inkludert:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Tilbakestill innstillingene"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Vil du tilbakestille alle nettverksinnstillingene? Du kan ikke angre denne handlingen."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Tilbakestill innstillingene"</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Slett alle data på intern USB-lagring, som for eksempel musikk eller bilder"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Slett alle data fra SD-kortet, som musikk og bilder"</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"Tøm e-SIM-kort"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Tøm alle e-SIM-kortene i telefonen. Dette avslutter ikke mobilabonnementet ditt."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Tøm alle e-SIM-kortene i nettbrettet. Dette avslutter ikke mobilabonnementet ditt."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Tilbakestill nettbrettet"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Tilbakestill telefonen"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Vil du slette den personlige informasjonen din og nedlastede apper? Du kan ikke angre denne handlingen."</string>
@@ -1347,7 +1344,7 @@
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"Ikke tilknyttet"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Kan ikke knytte til mer enn <xliff:g id="MAXCONNECTION">%1$d</xliff:g> enheter."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kobles fra."</string>
-    <string name="tethering_footer_info" msgid="7287131664937054043">"Bruk Wi-Fi-soner og internettdeling til å gi Internett til andre enheter via mobildatatilkoblingen din."</string>
+    <string name="tethering_footer_info" msgid="7287131664937054043">"Bruk Wi-Fi-soner og internettdeling for å gi andre enheter Internett-tilgang via telefonens mobildataforbindelse."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Hjelp"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Mobilnettverk"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobilabonnement"</string>
@@ -1601,7 +1598,7 @@
     <string name="system_package" msgid="1352722848400644991">"Systemoppdateringer kan ikke installeres på eksterne medier."</string>
     <string name="move_error_device_admin" msgid="8673026002690505763">"Administratorappen på enheten kan ikke installeres på eksterne medier"</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Vil du tvinge avslutning?"</string>
-    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Hvis du tvangsstopper en app, kan den oppføre seg uventet."</string>
+    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Hvis du tvinger avslutning av en app, kan det oppstå problemer."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Kan ikke flytte appen. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Foretrukket installeringssted"</string>
@@ -1780,7 +1777,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Zoom inn på skjermen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trykk tre ganger for å zoome"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Trykk på en knapp for å zoome"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"For å zoome"</b>", trykk raskt på skjermen tre ganger.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoom"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", trykk raskt på skjermen tre ganger, og hold nede fingeren på det tredje trykket.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"For å zoome"</b>", trykk raskt på skjermen tre ganger.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoom"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", trykk raskt på skjermen tre ganger, og hold fingeren nede på det tredje trykket.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Når forstørrelse er slått på, bruker du Tilgjengelighet-knappen nederst på skjermen for å forstørre raskt.\n\n"<b>"For å zoome"</b>", trykk på Tilgjengelighet-knappen, og trykk deretter hvor som helst på skjermen.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoomen"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", trykk på Tilgjengelighet-knappen, og trykk deretter og hold hvor som helst på skjermen.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Tilgjengelighet-knappen er satt til <xliff:g id="SERVICE">%1$s</xliff:g>. For å bruke forstørrelse, trykk på og hold inne Tilgjengelighet-knappen, og velg deretter forstørrelse."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Snarvei for tilgjengelighet"</string>
@@ -1866,7 +1863,7 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Du må bekrefte PIN-koden din for å slå på <xliff:g id="SERVICE">%1$s</xliff:g>, fordi den påvirker datakryptering."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Du må bekrefte passordet ditt for å slå på <xliff:g id="SERVICE">%1$s</xliff:g>, fordi den påvirker datakryptering."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"observere handlingene dine"</string>
-    <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"Den får varsler når du bruker apper."</string>
+    <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"Appen mottar varsler når du bruker andre apper."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Vil du stoppe <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="disable_service_message" msgid="2247101878627941561">"Du stopper <xliff:g id="SERVICE">%1$s</xliff:g> ved å trykke på OK."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Ingen tjenester er installert"</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Skjermbruk siden batteriet var fulladet"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Strømforbruk fra skjermen"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Skanning etter mobilnettverk"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"for <xliff:g id="TIME">%1$s</xliff:g> siden"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Appbruk siden batteriet var fulladet (for <xliff:g id="TIME">%1$s</xliff:g> siden)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"for <xliff:g id="TIME">^1</xliff:g> siden"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Appbruk siden batteriet var fulladet (for <xliff:g id="TIME">^1</xliff:g> siden)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Hvor lenge skjermen har vært på siden batteriet var fulladet"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Enhetsbruk siden batteriet var fulladet"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Batteribruk siden strømmen ble trukket ut"</string>
@@ -1949,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Celle-standby"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Mobilnettverk i ventemodus"</string>
     <string name="power_phone" msgid="5392641106474567277">"Telefonsamtaler"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Nettbrettet ikke i bruk"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefonen ikke i bruk"</string>
@@ -2009,14 +2006,15 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Batteribruken er anslått, og inkluderer ikke hver kilde som bruker batteriet. Forskjellen mellom den anslåtte batteribruken og den registrerte batteribruken, føres opp under annen batteribruk."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Overberegnet strømforbruk"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"Brukt i %1$s"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> brukt av <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> av total batteribruk"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Oversikt siden sist batteriet var fulladet"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Sist batteriet var fulladet"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"Gjenværende batteritid er omtrentlig og kan endres basert på bruk"</string>
-    <string name="battery_detail_foreground" msgid="3350401514602032183">"Mens den brukes aktivt"</string>
-    <string name="battery_detail_background" msgid="1929644393553768999">"Mens den er i bakgrunnen"</string>
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"Aktiv bruk"</string>
+    <string name="battery_detail_background" msgid="1929644393553768999">"I bakgrunnen"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Batteribruk"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> av total appbruk (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Siden sist batteriet var fulladet"</string>
@@ -2343,13 +2341,13 @@
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Vil du slå av auto-synkronisering?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Dette bevarer data- og batteribruk, men du må synkronisere hver konto manuelt for å samle ny informasjon. Du kommer ikke til å motta varsler når det gjøres oppdateringer."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Tilbakestillingsdato for brukssyklus"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Dato for hver måned:"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Dato hver måned:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Bekreft"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Angi advarsel for databruk"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Angi grense for databruk"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Begrensning av databruk"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Nettbrettet slår av mobildata når det har nådd grensen du har angitt.\n\nSiden databruken måles av nettbrettet, og operatøren din kan beregne bruken annerledes, kan det være lurt å angi en konservativ grense."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Telefonen slår av mobildata når den har nådd grensen du har angitt.\n\nSiden databruken måles av telefonen, og operatøren din kan beregne bruken annerledes, kan det være lurt å angi en konservativ grense."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Mobildata slås av når du har brukt mengden du har angitt.\n\nSiden databruken måles av telefonen, og operatøren din kan beregne bruken annerledes, kan det være lurt å angi en konservativ grense."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"Vil du begrense bruken av bakgrunnsdata?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi.\n\nDenne innstillingen påvirker alle brukerne på dette nettbrettet."</string>
@@ -3205,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Med denne tillatelsen kan apper endre systeminnstillingene."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ja"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nei"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Ja"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Nei"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Tillat appinstalleringer"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Vri to ganger for å åpne kameraet"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Åpne kameraappen ved å vri to ganger på håndleddet"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tykk på av/på-knappen to ganger for kamera"</string>
@@ -3230,7 +3231,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"tirs kl. 18.02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"tirs kl. 18.03"</string>
     <string name="disconnected" msgid="4836600637485526329">"Ikke tilkoblet"</string>
-    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> av dataen er brukt"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> med data er brukt"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">Av for <xliff:g id="COUNT">%d</xliff:g> apper</item>
       <item quantity="one">Av for én app</item>
@@ -3302,7 +3303,7 @@
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advarsel for databruk: <xliff:g id="ID_1">%1$s</xliff:g> / datagrense: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Faktureringssyklus"</string>
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Den månedlige faktureringssyklusen starter den <xliff:g id="ID_1">%1$s</xliff:g>. dagen i måneden"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Månedlig fakturering starter <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Månedlig, den <xliff:g id="ID_1">%1$s</xliff:g>. hver måned"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Nettverksbegrensninger"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> begrensninger</item>
@@ -3393,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium-SMS kan koste penger og legges til telefonregningen din. Hvis du slår på tillatelse for en app, kan du sende premium-SMS via den appen."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Tilgang til premium-SMS"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Ikke synlig for andre enheter"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Koblet til"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Koblet til <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Koblet til flere enheter"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demomodus for systembrukergrensesnittet"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Fliser med hurtiginnstillinger for utviklere"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Vi er her for å hjelpe deg"</string>
@@ -3473,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av nettbrettet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av enheten."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Assistansebevegelse"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensivitet"</string>
@@ -3572,7 +3580,7 @@
     <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"Lagring på nettbrett"</string>
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Telefonlagring"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
-    <string name="storage_volume_total" msgid="3499221850532701342">"Brukt av <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"brukt av <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"brukt"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Fjern appen"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Vil du fjerne denne instant-appen?"</string>

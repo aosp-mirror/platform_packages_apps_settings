@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"高品質の公共ネットワークが利用可能なときに通知する"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi を自動的に ON にする"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"ホーム ネットワークなどの高品質の保存済みネットワークの検出時に Wi‑Fi を ON にする"</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi のスキャンが OFF になっているため利用できません"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"接続不良のとき無効にする"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"安定したインターネット接続があるときのみWi-Fiネットワークを使用する"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"インターネット接続が安定したネットワークのみ使用する"</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"内部USBストレージ内の全データ（音楽、画像など）を消去します"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"SDカード内の全データ（音楽、画像など）を消去します"</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"eSIM を消去"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"スマートフォン上の eSIM をすべて消去します。この操作でモバイル サービス プランがキャンセルされることはありません。"</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"タブレット上の eSIM をすべて消去します。この操作でモバイル サービス プランがキャンセルされることはありません。"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"タブレットをリセット"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"モバイル端末をリセット"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"個人情報とダウンロードしたアプリをすべて削除しますか？この操作は元に戻せません。"</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"フル充電からの画面の電池使用状況"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"画面消費"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"モバイル ネットワークのスキャン"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g>前"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"フル充電（<xliff:g id="TIME">%1$s</xliff:g>前）からのアプリの電池使用状況"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g>前"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"フル充電（<xliff:g id="TIME">^1</xliff:g>前）からのアプリの電池使用状況"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"フル充電からの画面がオンだった時間"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"フル充電からの端末の電池使用状況"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"電池使用時間"</string>
@@ -1949,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"カメラ"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"セルスタンバイ"</string>
+    <string name="power_cell" msgid="3392999761958982492">"モバイル ネットワーク スタンバイ"</string>
     <string name="power_phone" msgid="5392641106474567277">"通話"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"アイドル状態"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"アイドル状態"</string>
@@ -2009,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"電池使用量は消費電力の概算であり、電池を消費するすべてのソースが含まれているわけではありません。「その他」は、算出された概算消費電力と実際に確認された電池消費量との差です。"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"過剰算出された消費電力"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"%1$s、使用しました"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g>: <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"電池使用量全体の <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"前回のフル充電からの内訳"</string>
@@ -3209,9 +3207,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"この権限により、アプリはシステム設定の変更ができるようになります。"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"可"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"不可"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"信頼する"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"信頼しない"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"アプリのインストールを許可する"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"2回ひねる動作でカメラアプリを開く"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"手首を2回ひねる動作でカメラアプリを開きます"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"電源ボタンを2回押してカメラを起動"</string>
@@ -3397,7 +3398,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"プレミアム SMS で料金が発生した場合は、携帯通信会社の請求に加算されます。アプリで権限を有効にすると、そのアプリを使用してプレミアム SMS を送信できるようになります。"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"プレミアム SMS へのアクセス"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"他の端末には非表示"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"接続先"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> に接続しました"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"複数のデバイスに接続しました"</string>
     <string name="demo_mode" msgid="2798762752209330277">"システム UI デモモード"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"クイック設定開発者用タイル"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"サポートのご案内"</string>
@@ -3477,6 +3479,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"通知を確認するには、スマートフォンの背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"通知を確認するには、タブレットの背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"通知を確認するには、端末の背面にある指紋認証センサーを下にスワイプします。"</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"アシスト操作"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"感度"</string>
