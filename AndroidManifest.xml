@@ -3096,6 +3096,16 @@
                        android:resource="@string/camera_lift_trigger_suggestion_summary" />
         </activity>
 
+        <activity android:name=".applications.defaultapps.AutofillPickerActivity"
+                android:taskAffinity=""
+                android:noHistory="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
