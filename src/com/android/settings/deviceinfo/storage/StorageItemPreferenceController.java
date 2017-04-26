@@ -214,6 +214,15 @@ public class StorageItemPreferenceController extends PreferenceController {
         mAppPreference = (StorageItemPreference) screen.findPreference(OTHER_APPS_KEY);
         mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
         mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
+
+        final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
+        // If we don't have a shared volume for our internal storage (or the shared volume isn't
+        // mounted as readable for whatever reason), we should hide the File preference.
+        final boolean hideFilePreference =
+                (sharedVolume == null) || !sharedVolume.isMountedReadable();
+        if (hideFilePreference) {
+            screen.removePreference(mFilePreference);
+        }
     }
 
     public void onLoadFinished(StorageAsyncLoader.AppsStorageResult data) {
