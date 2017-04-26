@@ -57,4 +57,9 @@ public interface PowerUsageFeatureProvider {
      * Check whether the toggle for power accounting is enabled
      */
     boolean isPowerAccountingToggleEnabled();
+
+    /**
+     * Check whether the anomaly detection is enabled
+     */
+    boolean isAnomalyDetectionEnabled();
 }
