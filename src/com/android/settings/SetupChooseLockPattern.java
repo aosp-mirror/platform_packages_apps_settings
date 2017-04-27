@@ -75,7 +75,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         protected Intent getRedactionInterstitialIntent(Context context) {
             // Setup wizard's redaction interstitial is deferred to optional step. Enable that
             // optional step if the lock screen was set up.
-            SetupRedactionInterstitial.setEnabled(context, false);
+            SetupRedactionInterstitial.setEnabled(context, true);
             return null;
         }
     }
