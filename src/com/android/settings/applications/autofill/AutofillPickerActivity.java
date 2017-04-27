@@ -11,16 +11,17 @@
  * KIND, either express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.android.settings.applications.defaultapps;
+package com.android.settings.applications.autofill;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.applications.defaultapps.DefaultAutofillPicker;
 
 /**
- * Standalone activity used to launch {@link DefaultAppPickerFragment} from a
+ * Standalone activity used to launch a {@link DefaultAutofillPicker} fragment from a
  * {@link android.provider.Settings#ACTION_REQUEST_SET_AUTOFILL_SERVICE} intent.
  */
 public class AutofillPickerActivity extends SettingsActivity {
@@ -32,7 +33,6 @@ public class AutofillPickerActivity extends SettingsActivity {
         intent.putExtra(EXTRA_SHOW_FRAGMENT, DefaultAutofillPicker.class.getName());
         intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.autofill_app);
         intent.putExtra(DefaultAutofillPicker.EXTRA_PACKAGE_NAME, packageName);
-
         super.onCreate(savedInstanceState);
     }
 
