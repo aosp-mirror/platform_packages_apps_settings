@@ -83,11 +83,11 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
                         null));
                 paths.add(new ResourcePath(
                         getPackageName(),
-                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/gingerbread/res"),
+                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/eclair-mr1/res"),
                         null));
                 paths.add(new ResourcePath(
                         getPackageName(),
-                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/recyclerview/res"),
+                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/full-support/res"),
                         null));
                 paths.add(new ResourcePath(
                         getPackageName(),
