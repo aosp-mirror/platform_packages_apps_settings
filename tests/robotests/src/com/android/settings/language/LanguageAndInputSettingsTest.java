@@ -31,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.view.autofill.AutofillManager;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
@@ -72,6 +73,8 @@ public class LanguageAndInputSettingsTest {
     private DevicePolicyManager mDpm;
     @Mock
     private InputMethodManager mInputMethodManager;
+    @Mock
+    private AutofillManager mAutofillManager;
     private TestFragment mFragment;
 
     @Before
@@ -84,6 +87,7 @@ public class LanguageAndInputSettingsTest {
                 .thenReturn(mock(TextServicesManager.class));
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(mDpm);
         when(mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).thenReturn(mImm);
+        when(mContext.getSystemService(AutofillManager.class)).thenReturn(mAutofillManager);
         mFragment = new TestFragment(mContext);
     }
 
