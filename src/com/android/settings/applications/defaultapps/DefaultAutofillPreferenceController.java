@@ -21,16 +21,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.autofill.AutofillManager;
+
+import com.android.settings.applications.AutofillManagerWrapper;
+import com.android.settings.applications.AutofillManagerWrapperImpl;
 
 public class DefaultAutofillPreferenceController extends DefaultAppPreferenceController {
+    private AutofillManagerWrapper mAutofillManager;
 
     public DefaultAutofillPreferenceController(Context context) {
         super(context);
+
+        mAutofillManager = new AutofillManagerWrapperImpl(
+                mContext.getSystemService(AutofillManager.class));
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mAutofillManager.hasAutofillFeature()
+                && mAutofillManager.isAutofillSupported();
     }
 
     @Override

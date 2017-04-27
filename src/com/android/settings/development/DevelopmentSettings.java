@@ -40,7 +40,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IShortcutService;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.usb.IUsbManager;
 import android.hardware.usb.UsbManager;
@@ -140,7 +139,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
     private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
-    private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String DEBUG_VIEW_ATTRIBUTES = "debug_view_attributes";
     private static final String FORCE_ALLOW_ON_EXTERNAL_KEY = "force_allow_on_external";
     private static final String STRICT_MODE_KEY = "strict_mode";
@@ -207,6 +205,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                                     "persist.bluetooth.avrcpversion";
     private static final String BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY =
                                     "persist.bluetooth.enableinbandringing";
+    private static final String BLUETOOTH_BTSNOOP_ENABLE_PROPERTY =
+                                    "persist.bluetooth.btsnoopenable";
 
     private static final String BLUETOOTH_ENABLE_INBAND_RINGING_KEY = "bluetooth_enable_inband_ringing";
     private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
@@ -225,8 +225,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BACKGROUND_CHECK_KEY = "background_check";
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
-
-    private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
@@ -274,7 +272,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private Preference mMockLocationAppPref;
 
     private SwitchPreference mWaitForDebugger;
-    private SwitchPreference mVerifyAppsOverUsb;
+    private VerifyAppsOverUsbPreferenceController mVerifyAppsOverUsbController;
     private SwitchPreference mWifiDisplayCertification;
     private SwitchPreference mWifiVerboseLogging;
     private SwitchPreference mWifiAggressiveHandover;
@@ -391,6 +389,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugReportInPowerController = new BugReportInPowerPreferenceController(getActivity());
         mTelephonyMonitorController = new TelephonyMonitorPreferenceController(getActivity());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
+        mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
@@ -451,14 +450,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mMockLocationAppPref = findPreference(MOCK_LOCATION_APP_KEY);
         mAllPrefs.add(mMockLocationAppPref);
 
-        mVerifyAppsOverUsb = findAndInitSwitchPref(VERIFY_APPS_OVER_USB_KEY);
-        if (!showVerifierSetting()) {
-            if (debugDebuggingCategory != null) {
-                debugDebuggingCategory.removePreference(mVerifyAppsOverUsb);
-            } else {
-                mVerifyAppsOverUsb.setEnabled(false);
-            }
-        }
+        mVerifyAppsOverUsbController.displayPreference(getPreferenceScreen());
+
         mStrictMode = findAndInitSwitchPref(STRICT_MODE_KEY);
         mPointerLocation = findAndInitSwitchPref(POINTER_LOCATION_KEY);
         mShowTouches = findAndInitSwitchPref(SHOW_TOUCHES_KEY);
@@ -765,8 +758,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
-        updateSwitchPreference(mBtHciSnoopLog, Settings.Secure.getInt(cr,
-                Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
+        updateSwitchPreference(mBtHciSnoopLog, SystemProperties.getBoolean(
+                BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, false));
         updateSwitchPreference(mDebugViewAttributes, Settings.Global.getInt(cr,
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0) != 0);
         updateSwitchPreference(mForceAllowOnExternal, Settings.Global.getInt(cr,
@@ -793,7 +786,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
-        updateVerifyAppsOverUsbOptions();
+        mVerifyAppsOverUsbController.updatePreference();
         updateOtaDisableAutomaticUpdateOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
@@ -879,10 +872,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeBtHciSnoopLogOptions() {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        adapter.configHciSnoopLog(mBtHciSnoopLog.isChecked());
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.BLUETOOTH_HCI_LOG,
-                mBtHciSnoopLog.isChecked() ? 1 : 0);
+        SystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY,
+                Boolean.toString(mBtHciSnoopLog.isChecked()));
     }
 
     private void writeDebuggerOptions() {
@@ -993,19 +984,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void updateVerifyAppsOverUsbOptions() {
-        updateSwitchPreference(mVerifyAppsOverUsb,
-                Settings.Global.getInt(getActivity().getContentResolver(),
-                        Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1) != 0);
-        mVerifyAppsOverUsb.setEnabled(enableVerifierSetting());
-    }
-
-    private void writeVerifyAppsOverUsbOptions() {
-        Settings.Global.putInt(getActivity().getContentResolver(),
-                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB,
-                mVerifyAppsOverUsb.isChecked() ? 1 : 0);
-    }
-
     private void updateOtaDisableAutomaticUpdateOptions() {
         // We use the "disabled status" in code, but show the opposite text
         // "Automatic system updates" on screen. So a value 0 indicates the
@@ -1022,31 +1000,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getActivity().getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
                 mOtaDisableAutomaticUpdate.isChecked() ? 0 : 1);
-    }
-
-    private boolean enableVerifierSetting() {
-        final ContentResolver cr = getActivity().getContentResolver();
-        if (Settings.Global.getInt(cr, Settings.Global.ADB_ENABLED, 0) == 0) {
-            return false;
-        }
-        if (Settings.Global.getInt(cr, Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) == 0) {
-            return false;
-        } else {
-            final PackageManager pm = getActivity().getPackageManager();
-            final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
-            verification.setType(PACKAGE_MIME_TYPE);
-            verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(verification, 0);
-            if (receivers.size() == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean showVerifierSetting() {
-        return Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
     }
 
     private static boolean showEnableOemUnlockPreference(Context context) {
@@ -2414,6 +2367,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
 
+        if (mVerifyAppsOverUsbController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
         if (preference == mEnableAdb) {
             if (mEnableAdb.isChecked()) {
                 mDialogClicked = false;
@@ -2428,8 +2385,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             } else {
                 Settings.Global.putInt(getActivity().getContentResolver(),
                         Settings.Global.ADB_ENABLED, 0);
-                mVerifyAppsOverUsb.setEnabled(false);
-                mVerifyAppsOverUsb.setChecked(false);
+                mVerifyAppsOverUsbController.updatePreference();
                 updateBugreportOptions();
             }
         } else if (preference == mClearAdbKeys) {
@@ -2479,8 +2435,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             startActivityForResult(intent, RESULT_DEBUG_APP);
         } else if (preference == mWaitForDebugger) {
             writeDebuggerOptions();
-        } else if (preference == mVerifyAppsOverUsb) {
-            writeVerifyAppsOverUsbOptions();
         } else if (preference == mOtaDisableAutomaticUpdate) {
             writeOtaDisableAutomaticUpdateOptions();
         } else if (preference == mStrictMode) {
@@ -2628,8 +2582,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mDialogClicked = true;
                 Settings.Global.putInt(getActivity().getContentResolver(),
                         Settings.Global.ADB_ENABLED, 1);
-                mVerifyAppsOverUsb.setEnabled(true);
-                updateVerifyAppsOverUsbOptions();
+                mVerifyAppsOverUsbController.updatePreference();
                 updateBugreportOptions();
             } else {
                 // Reset the toggle

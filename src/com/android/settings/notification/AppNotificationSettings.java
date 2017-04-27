@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.Activity;
 import android.app.NotificationChannel;
@@ -251,12 +252,14 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     private void setupImportanceToggle() {
         mImportanceToggle.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mImportanceToggle.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT);
+        mImportanceToggle.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
+                || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
         mImportanceToggle.setOnPreferenceChangeListener(
                 new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final int importance = ((Boolean) newValue ? IMPORTANCE_DEFAULT : IMPORTANCE_LOW);
+                final int importance =
+                        ((Boolean) newValue ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_LOW);
                 mChannel.setImportance(importance);
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                 mBackend.updateChannel(mPkg, mUid, mChannel);

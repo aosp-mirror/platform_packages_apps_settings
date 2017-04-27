@@ -16,28 +16,23 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
+import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryStats;
+import android.content.Loader;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.utils.AsyncLoader;
 
 /**
  * Common base class for things that need to show the battery usage graph.
  */
-public abstract class PowerUsageBase extends DashboardFragment {
+public abstract class PowerUsageBase extends DashboardFragment
+        implements LoaderManager.LoaderCallbacks<BatteryStatsHelper> {
 
     // +1 to allow ordering for PowerUsageSummary.
     @VisibleForTesting
@@ -62,27 +57,23 @@ public abstract class PowerUsageBase extends DashboardFragment {
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
         mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
-            if (!mHandler.hasMessages(MSG_REFRESH_STATS)) {
-                mHandler.sendEmptyMessageDelayed(MSG_REFRESH_STATS, 500);
-            }
+            getLoaderManager().restartLoader(0, null, this);
         });
+
+        getLoaderManager().initLoader(0, icicle, this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mStatsHelper.clearStats();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         BatteryStatsHelper.dropFile(getActivity(), BatteryHistoryDetail.BATTERY_HISTORY_FILE);
         mBatteryBroadcastReceiver.register();
-        if (mHandler.hasMessages(MSG_REFRESH_STATS)) {
-            mHandler.removeMessages(MSG_REFRESH_STATS);
-            mStatsHelper.clearStats();
-        }
     }
 
     @Override
@@ -94,7 +85,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onStop() {
         super.onStop();
-        mHandler.removeMessages(MSG_REFRESH_STATS);
     }
 
     @Override
@@ -105,26 +95,27 @@ public abstract class PowerUsageBase extends DashboardFragment {
         }
     }
 
-    protected void refreshStats() {
-        mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, mUm.getUserProfiles());
-    }
+    protected abstract void refreshUi();
 
     protected void updatePreference(BatteryHistoryPreference historyPref) {
         historyPref.setStats(mStatsHelper);
     }
 
-    static final int MSG_REFRESH_STATS = 100;
+    @Override
+    public Loader<BatteryStatsHelper> onCreateLoader(int id,
+            Bundle args) {
+        return new BatteryStatsHelperLoader(getContext(), args);
+    }
 
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_REFRESH_STATS:
-                    mStatsHelper.clearStats();
-                    refreshStats();
-                    break;
-            }
-        }
-    };
+    @Override
+    public void onLoadFinished(Loader<BatteryStatsHelper> loader,
+            BatteryStatsHelper statsHelper) {
+        mStatsHelper = statsHelper;
+        refreshUi();
+    }
 
+    @Override
+    public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
+
+    }
 }

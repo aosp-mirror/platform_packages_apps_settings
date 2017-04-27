@@ -47,6 +47,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     private AlertDialog.Builder mBuilder;
     private AlertDialog mDialog;
     private BluetoothPairingController mPairingController;
+    private BluetoothPairingDialog mPairingDialogActivity;
     private EditText mPairingView;
     /**
      * The interface we expect a listener to implement. Typically this should be done by
@@ -61,9 +62,13 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if (mPairingController == null) {
+        if (!isPairingControllerSet()) {
             throw new IllegalStateException(
-                    "Must call setPairingController() before showing dialog");
+                "Must call setPairingController() before showing dialog");
+        }
+        if (!isPairingDialogActivitySet()) {
+            throw new IllegalStateException(
+                "Must call setPairingDialogActivity() before showing dialog");
         }
         mBuilder = new AlertDialog.Builder(getActivity());
         mDialog = setupDialog();
@@ -97,6 +102,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         } else if (which == DialogInterface.BUTTON_NEGATIVE) {
             mPairingController.onDialogNegativeClick(this);
         }
+        mPairingDialogActivity.dismiss();
     }
 
     @Override
@@ -119,12 +125,39 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
      * controller may not be substituted once it is assigned. Forcibly switching a
      * controller for a new one will lead to undefined behavior.
      */
-    public void setPairingController(BluetoothPairingController pairingController) {
-        if (mPairingController != null) {
+    void setPairingController(BluetoothPairingController pairingController) {
+        if (isPairingControllerSet()) {
             throw new IllegalStateException("The controller can only be set once. "
                     + "Forcibly replacing it will lead to undefined behavior");
         }
         mPairingController = pairingController;
+    }
+
+    /**
+     * Checks whether mPairingController is set
+     * @return True when mPairingController is set, False otherwise
+     */
+    boolean isPairingControllerSet() {
+        return mPairingController != null;
+    }
+
+    /**
+     * Sets the BluetoothPairingDialog activity that started this fragment
+     * @param pairingDialogActivity The pairing dialog activty that started this fragment
+     */
+    void setPairingDialogActivity(BluetoothPairingDialog pairingDialogActivity) {
+        if (isPairingDialogActivitySet()) {
+            throw new IllegalStateException("The pairing dialog activity can only be set once");
+        }
+        mPairingDialogActivity = pairingDialogActivity;
+    }
+
+    /**
+     * Checks whether mPairingDialogActivity is set
+     * @return True when mPairingDialogActivity is set, False otherwise
+     */
+    boolean isPairingDialogActivitySet() {
+        return mPairingDialogActivity != null;
     }
 
     /**

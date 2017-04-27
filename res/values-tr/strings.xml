@@ -689,8 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Herkese açık yüksek kaliteli bir ağ kullanılabilir olduğunda bildir"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Kablosuz ağı otomatik olarak aç"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Ev ağınız gibi yüksek kaliteli kayıtlı ağların yakınında olduğunuzda kablosuz özelliği tekrar açılır"</string>
-    <!-- no translation found for wifi_wakeup_summary_scanning_disabled (7247227922074840445) -->
-    <skip />
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Kablosuz ağ taraması kapalı olduğu için kullanılamıyor"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Kötü bağlantılardan kaçın"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"İnternet bağlantısı iyi olmadıkça Kablosuz ağı kullanma"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Yalnızca iyi İnternet bağlantısı olan ağları kullanın"</string>
@@ -1302,10 +1301,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Dahili USB bellekteki müzik veya fotoğraf gibi tüm verileri sil"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"SD kartındaki müzik ve fotoğraf gibi tüm verileri sil"</string>
     <string name="erase_esim_storage" msgid="1886761972867390123">"eSIM\'leri sil"</string>
-    <!-- no translation found for erase_esim_storage_description (708691303677321598) -->
-    <skip />
-    <!-- no translation found for erase_esim_storage_description (1780953956941209107) -->
-    <skip />
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Telefondaki tüm eSIM\'leri siler. Bu işlem, mobil hizmet planınızı iptal etmez."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Tabletteki tüm eSIM\'leri siler. Bu işlem, mobil hizmet planınızı iptal etmez."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Tableti sıfırla"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Telefonu sıfırla"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Tüm kişisel bilgileriniz ve indirdiğiniz uygulamalar silinsin mi? Bu işlemi geri alamazsınız!"</string>
@@ -1917,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Tam şarjdan sonraki ekran kullanımı"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Ekranın pil tüketimi"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Mobil ağ tarama"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g> önce"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Tam şarjdan sonraki uygulama kullanımı (<xliff:g id="TIME">%1$s</xliff:g> önce)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> önce"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Tam şarjdan sonraki uygulama kullanımı (<xliff:g id="TIME">^1</xliff:g> önce)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tam şarjdan sonra ekranın açık olduğu süre"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Tam şarjdan sonraki cihaz kullanımı"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Fişten çekildikten sonra pil kullanımı"</string>
@@ -1949,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Kablosuz"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Telefon beklemesi"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Mobil ağ beklemede"</string>
     <string name="power_phone" msgid="5392641106474567277">"Sesli aramalar"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet boşta"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon boşta"</string>
@@ -2009,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Pil kullanımı, güç tüketimini yaklaşık olarak gösterir ve pili harcayan kaynakların hepsini hesaba dahil etmez. Çeşitli kaynaklar adı altında belirtilen değer, hesaplanan yaklaşık güç tüketimi ile pilin gerçek kullanımı arasındaki farktır."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Fazla hesaplanan güç kullanımı"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"%1$s kullandı"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> kadarı <xliff:g id="APP">%2$s</xliff:g> tarafından kullanılıyor"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Toplam pilin <xliff:g id="PERCENT">%1$s</xliff:g> kadarı"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Son tam şarjdan sonraki kullanım dökümü"</string>
@@ -3205,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Bu izin, bir uygulanın sistem ayarlarını değiştirmesine olanak sağlar."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Evet"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Hayır"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Evet"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Hayır"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Uygulamaların yüklenmesine izin ver"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera için iki kez bükün"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Bileğinizi iki kez bükerek kamera uygulamasını açın"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kamera için güç düğmesine iki kez bas"</string>
@@ -3393,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMS kullanımı, para ödemenizi gerektirebilir ve bu ücret operatör faturanıza eklenir. Bir uygulamaya bu izni verdiğinizde söz konusu uygulamayı kullanarak ücretli SMS gönderebilirsiniz."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium SMS erişimi"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Diğer cihazlar tarafından görülemez"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Şu cihaza bağlandı:"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> cihazına bağlı"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Birden çok cihaza bağlı"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistem Kullanıcı Arayüzü demo modu"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Hızlı ayarlar geliştirici blokları"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Yardımcı olmak için buradayız"</string>
@@ -3473,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Bildirimlerinizi kontrol etmek için telefonunuzun arkasındaki parmak izi sensöründe parmağınızı hızlıca aşağı kaydırın."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Bildirimlerinizi kontrol etmek için tabletinizin arkasındaki parmak izi sensöründe parmağınızı hızlıca aşağı kaydırın."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Bildirimlerinizi kontrol etmek için cihazınızın arkasındaki parmak izi sensöründe parmağınızı hızlıca aşağı kaydırın."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Asistan hareketi"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Hassasiyet"</string>

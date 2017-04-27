@@ -1914,8 +1914,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Uso de la pantalla desde carga completa"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumo de la pantalla"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Búsqueda de redes móviles"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Hace <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso de las aplicaciones desde la última carga completa (hace <xliff:g id="TIME">%1$s</xliff:g>)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Hace <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso de las aplicaciones desde la última carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tiempo que la pantalla ha estado encendida desde la carga completa"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Uso del dispositivo desde la carga completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se cargó"</string>
@@ -1946,7 +1946,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Cámara"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Dispositivo inactivo"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Red móvil en espera"</string>
     <string name="power_phone" msgid="5392641106474567277">"Llamadas de voz"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet inactivo"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Teléfono inactivo"</string>
@@ -2006,7 +2006,8 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"El uso de batería es un cálculo aproximado de consumo de energía que no incluye todas las fuentes de consumo de la batería. El uso de batería variado es la diferencia entre el consumo de energía aproximado calculado y el consumo real de batería."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Uso de potencia sobrecalculado"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"Utilizada durante %1$s"</string>
+    <!-- no translation found for battery_used_for (2690821851327075443) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> usado por <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> del total de batería"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Desglose desde la última carga completa"</string>
@@ -2990,7 +2991,7 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Información relacionada con el IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(N.º <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Abrir de forma predeterminada"</string>
-    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Enlaces de apertura"</string>
+    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Abrir enlaces"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Abrir enlaces compatibles"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Se abren sin preguntar"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Enlaces compatibles"</string>
@@ -3046,7 +3047,7 @@
     <string name="app_permissions_summary" msgid="5163974162150406324">"Aplicaciones que utilizan <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tocar para activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Toca dos veces cualquier punto de la pantalla para activar el dispositivo"</string>
-    <string name="domain_urls_title" msgid="3132983644568821250">"Enlaces de apertura"</string>
+    <string name="domain_urls_title" msgid="3132983644568821250">"Abrir enlaces"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"No se abren enlaces compatibles"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Abre <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Abrir <xliff:g id="DOMAIN">%s</xliff:g> y otras URL"</string>
@@ -3202,9 +3203,12 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Cuando se concede este permiso, la aplicación puede modificar los ajustes del sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Sí"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"No"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Sí"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"No"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Permitir descargas de aplicaciones"</string>
+    <!-- no translation found for external_source_trusted (2707996266575928037) -->
+    <skip />
+    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
+    <skip />
+    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
+    <skip />
     <string name="camera_gesture_title" msgid="1075838577642393011">"Doble giro para abrir la cámara"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Gira la muñeca dos veces para abrir la aplicación Cámara"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Botón de encendido dos veces para cámara"</string>
@@ -3319,7 +3323,7 @@
       <item quantity="one">1 aplicación puede usar datos no restringidos cuando el ahorro de datos está activado</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Ahorro de datos"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acceso a datos no restringidos"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acceso a datos no restringido"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Las conexiones automáticas están desactivadas"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Sí"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"No"</string>
@@ -3390,7 +3394,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Es posible que el envío de SMS premium te cueste dinero y el importe correspondiente se sume a las facturas de tu operador. Si habilitas el permiso para una aplicación, puedes enviar SMS premium con ella."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Acceso SMS premium"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Invisible para otros dispositivos"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Conectado con"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Conectado a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Conectado a varios dispositivos"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modo de demostración de IU del sistema"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Ajustes rápidos de mosaicos de desarrolladores"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Queremos ayudarte"</string>
@@ -3470,6 +3475,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del teléfono."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del dispositivo."</string>
+    <!-- no translation found for camera_lift_trigger_title (4332044339327639701) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_summary (8580625412416846375) -->
+    <skip />
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (2895730254279051683) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto de asistencia"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidad"</string>
@@ -3580,7 +3591,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(opción inhabilitada para <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Servicio Autocompletar"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automático, completar, autocompletar"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Asegúrate de que confías en esta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; utiliza el contenido que se muestra en la pantalla para determinar el texto que se puede autocompletar."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Asegúrate de que confías en esta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Autocompletar de Google&gt;%1$s&lt;/xliff:g&gt; utiliza el contenido que se muestra en la pantalla para determinar el texto que se puede autocompletar."</string>
     <string name="device_theme" msgid="4571803018917608588">"Tema del dispositivo"</string>
     <string name="default_theme" msgid="7085644992078579076">"Predeterminado"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Administrador de Almacenamiento: <xliff:g id="STATUS">^1</xliff:g>"</string>

@@ -268,7 +268,7 @@
 
         <activity android:name="Settings$ConfigureWifiSettingsActivity"
                 android:taskAffinity="com.android.settings"
-                android:label="@string/wifi_configure_titlebar"
+                android:label="@string/wifi_configure_settings_preference_title"
                 android:icon="@drawable/ic_settings_wireless"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WifiSettingsActivity">
@@ -3078,6 +3078,7 @@
             android:permission="android.permission.DUMP"
             android:enabled="@bool/config_has_help" />
 
+
         <!-- Activities for moves/gestures suggestions -->
         <activity
             android:name=".Settings$CameraLiftTriggerSuggestionActivity"
@@ -3094,6 +3095,24 @@
                        android:resource="@string/camera_lift_trigger_title" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/camera_lift_trigger_suggestion_summary" />
+        </activity>
+
+        <activity android:name=".applications.autofill.AutofillPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="false">
+        </activity>
+
+        <activity android:name=".applications.autofill.AutofillPickerTrampolineActivity"
+                android:theme="@android:style/Theme.NoDisplay"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:label="@string/autofill_app">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->

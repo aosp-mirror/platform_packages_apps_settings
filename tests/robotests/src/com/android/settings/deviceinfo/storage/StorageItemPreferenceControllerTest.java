@@ -84,7 +84,7 @@ public class StorageItemPreferenceControllerTest {
         FakeFeatureFactory.setupForTest(mContext);
         mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
-        mVolume = new VolumeInfo("id", 0, null, "id");
+        mVolume = spy(new VolumeInfo("id", 0, null, "id"));
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
         mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp);
@@ -304,5 +304,91 @@ public class StorageItemPreferenceControllerTest {
         verify(apps, times(2)).setIcon(any(Drawable.class));
         verify(system, times(2)).setIcon(any(Drawable.class));
         verify(files, times(2)).setIcon(any(Drawable.class));
+    }
+
+    @Test
+    public void displayPreference_dontHideFilePreferenceWhenEmulatedInternalStorageUsed() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.isMountedReadable()).thenReturn(true);
+
+        mController.displayPreference(screen);
+
+        verify(screen, times(0)).removePreference(files);
+    }
+
+    @Test
+    public void displayPreference_hideFilePreferenceWhenEmulatedStorageUnreadable() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.isMountedReadable()).thenReturn(false);
+
+        mController.displayPreference(screen);
+
+        verify(screen).removePreference(files);
+    }
+
+    @Test
+    public void displayPreference_hideFilePreferenceWhenNoEmulatedInternalStorage() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(null);
+
+        mController.displayPreference(screen);
+
+        verify(screen).removePreference(files);
     }
 }

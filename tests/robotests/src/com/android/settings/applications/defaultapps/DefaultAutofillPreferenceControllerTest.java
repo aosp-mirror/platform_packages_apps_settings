@@ -22,10 +22,12 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.applications.AutofillManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -54,6 +56,8 @@ public class DefaultAutofillPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PackageManagerWrapper mPackageManager;
+    @Mock
+    private AutofillManagerWrapper mAutofillManager;
 
     private DefaultAutofillPreferenceController mController;
 
@@ -64,10 +68,23 @@ public class DefaultAutofillPreferenceControllerTest {
 
         mController = spy(new DefaultAutofillPreferenceController(mContext));
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
+        ReflectionHelpers.setField(mController, "mAutofillManager", mAutofillManager);
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void isAvailableIfHasFeatureAndSupported() {
+        when(mContext.getSystemService(AutofillManager.class)).thenReturn(null);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mAutofillManager.hasAutofillFeature()).thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mAutofillManager.hasAutofillFeature()).thenReturn(true);
+        when(mAutofillManager.isAutofillSupported()).thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+
+        when(mAutofillManager.hasAutofillFeature()).thenReturn(true);
+        when(mAutofillManager.isAutofillSupported()).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
