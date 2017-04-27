@@ -15,16 +15,20 @@
  */
 package com.android.settings.network;
 
+import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.view.Menu;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
@@ -74,4 +78,15 @@ public class NetworkDashboardFragmentTest {
         verify(resetController).buildMenuItem(any(Menu.class));
     }
 
+    @Test
+    public void testNonIndexableKeys_existInXmlLayout() {
+        final Context context = RuntimeEnvironment.application;
+        final List<String> niks = NetworkDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+        final int xmlId = (new NetworkDashboardFragment()).getPreferenceScreenResId();
+
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
+
+        assertThat(keys).containsAllIn(niks);
+    }
 }
