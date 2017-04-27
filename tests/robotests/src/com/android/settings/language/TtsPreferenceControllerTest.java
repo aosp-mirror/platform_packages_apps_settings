@@ -38,9 +38,7 @@ import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -94,7 +92,7 @@ public class TtsPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        // Remove both category and preference.
-        verify(mScreen, times(2)).removePreference(any(Preference.class));
+        // Remove preference.
+        verify(mScreen).removePreference(any(Preference.class));
     }
 }
