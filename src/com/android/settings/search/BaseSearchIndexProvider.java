@@ -33,7 +33,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,7 +41,6 @@ import java.util.List;
 public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     private static final String TAG = "BaseSearchIndex";
-    private static final List<String> EMPTY_LIST = Collections.emptyList();
 
     public BaseSearchIndexProvider() {
     }
@@ -72,7 +70,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
             }
             return nonIndexableKeys;
         } else {
-            return EMPTY_LIST;
+            return new ArrayList<>();
         }
     }
 
@@ -93,7 +91,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         final List<SearchIndexableResource> resources = getXmlResourcesToIndex(
                 context, true /* not used*/);
         if (resources == null || resources.isEmpty()) {
-            return EMPTY_LIST;
+            return new ArrayList<>();
         }
         final List<String> nonIndexableKeys = new ArrayList<>();
         for (SearchIndexableResource res : resources) {
