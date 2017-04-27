@@ -97,21 +97,12 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="pointer_settings_category"
-        android:title="@string/pointer_settings_category">
+    <PreferenceCategory>
 
         <com.android.settings.PointerSpeedPreference
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
             android:dialogTitle="@string/pointer_speed"/>
-
-    </PreferenceCategory>
-
-    <!-- TTS -->
-    <PreferenceCategory
-        android:key="voice_category"
-        android:title="@string/voice_category">
 
         <Preference
             android:key="tts_settings"
