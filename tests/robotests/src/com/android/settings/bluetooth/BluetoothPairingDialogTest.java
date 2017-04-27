@@ -54,9 +54,13 @@ public class BluetoothPairingDialogTest {
     @Mock
     private BluetoothPairingController controller;
 
+    @Mock
+    private BluetoothPairingDialog dialogActivity;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doNothing().when(dialogActivity).dismiss();
     }
 
     @Test
@@ -214,6 +218,17 @@ public class BluetoothPairingDialogTest {
         fail("Setting the controller multiple times should throw an exception.");
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void dialogDoesNotAllowSwappingActivity() {
+        // instantiate a fragment
+        BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
+        frag.setPairingDialogActivity(dialogActivity);
+
+        // this should throw an error
+        frag.setPairingDialogActivity(dialogActivity);
+        fail("Setting the dialog activity multiple times should throw an exception.");
+    }
+
     @Test
     public void dialogPositiveButtonDisabledWhenUserInputInvalid() {
         // set the correct dialog type
@@ -342,11 +357,52 @@ public class BluetoothPairingDialogTest {
                 .contains(device);
     }
 
+    @Test
+    public void pairingDialogDismissedOnPositiveClick() {
+        // set the dialog variant to confirmation/consent
+        when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
+
+        // we don't care what this does, just that it is called
+        doNothing().when(controller).onDialogPositiveClick(any());
+
+        // build the fragment
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        // click the button and verify that the controller hook was called
+        frag.onClick(frag.getmDialog(), AlertDialog.BUTTON_POSITIVE);
+
+        verify(controller, times(1)).onDialogPositiveClick(any());
+        verify(dialogActivity, times(1)).dismiss();
+    }
+
+    @Test
+    public void pairingDialogDismissedOnNegativeClick() {
+        // set the dialog variant to confirmation/consent
+        when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
+
+        // we don't care what this does, just that it is called
+        doNothing().when(controller).onDialogNegativeClick(any());
+
+        // build the fragment
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        // click the button and verify that the controller hook was called
+        frag.onClick(frag.getmDialog(), AlertDialog.BUTTON_NEGATIVE);
+
+        verify(controller, times(1)).onDialogNegativeClick(any());
+        verify(dialogActivity, times(1)).dismiss();
+    }
+
     private BluetoothPairingDialogFragment makeFragment() {
         BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
+        assertThat(frag.isPairingControllerSet()).isFalse();
         frag.setPairingController(controller);
+        assertThat(frag.isPairingDialogActivitySet()).isFalse();
+        frag.setPairingDialogActivity(dialogActivity);
         FragmentTestUtil.startFragment(frag);
         assertThat(frag.getmDialog()).isNotNull();
+        assertThat(frag.isPairingControllerSet()).isTrue();
+        assertThat(frag.isPairingDialogActivitySet()).isTrue();
         return frag;
     }
 }
