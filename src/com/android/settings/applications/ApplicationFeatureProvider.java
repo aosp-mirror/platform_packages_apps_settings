@@ -16,14 +16,14 @@
 
 package com.android.settings.applications;
 
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
-
+import android.annotation.UserIdInt;
 import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
 
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
+
 import java.util.List;
-import java.util.Set;
 
 public interface ApplicationFeatureProvider {
 
@@ -80,16 +80,18 @@ public interface ApplicationFeatureProvider {
     void listAppsWithAdminGrantedPermissions(String[] permissions, ListOfAppsCallback callback);
 
     /**
-     * Return the persistent preferred activities configured by the admin for the current user and
-     * all its managed profiles. A persistent preferred activity is an activity that the admin
-     * configured to always handle a given intent (e.g. open browser), even if the user has other
-     * apps installed that would also be able to handle the intent.
+     * Return the persistent preferred activities configured by the admin for the given user.
+     * A persistent preferred activity is an activity that the admin configured to always handle a
+     * given intent (e.g. open browser), even if the user has other apps installed that would also
+     * be able to handle the intent.
      *
+     * @param userId ID of the user for which to find persistent preferred activities
      * @param intent The intents for which to find persistent preferred activities
      *
-     * @return the persistent preferred activites for the given intent
+     * @return the persistent preferred activites for the given intents, ordered first by user id,
+     * then by package name
      */
-    Set<PersistentPreferredActivityInfo> findPersistentPreferredActivities(Intent[] intents);
+    List<UserAppInfo> findPersistentPreferredActivities(@UserIdInt int userId, Intent[] intents);
 
     /**
      * Callback that receives the number of packages installed on the device.
@@ -103,31 +105,5 @@ public interface ApplicationFeatureProvider {
      */
     interface ListOfAppsCallback {
         void onListOfAppsResult(List<UserAppInfo> result);
-    }
-
-    public static class PersistentPreferredActivityInfo {
-        public final String packageName;
-        public final int userId;
-
-        public PersistentPreferredActivityInfo(String packageName, int userId) {
-            this.packageName = packageName;
-            this.userId = userId;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (!(other instanceof PersistentPreferredActivityInfo)) {
-                return false;
-            }
-            final PersistentPreferredActivityInfo otherActivityInfo
-                    = (PersistentPreferredActivityInfo) other;
-            return otherActivityInfo.packageName.equals(packageName)
-                    && otherActivityInfo.userId == userId;
-        }
-
-        @Override
-        public int hashCode() {
-            return packageName.hashCode() ^ userId;
-        }
     }
 }

@@ -31,6 +31,7 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.users.UserFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -93,6 +94,8 @@ public abstract class FeatureFactory {
     public abstract SurveyFeatureProvider getSurveyFeatureProvider(Context context);
 
     public abstract SecurityFeatureProvider getSecurityFeatureProvider();
+
+    public abstract UserFeatureProvider getUserFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

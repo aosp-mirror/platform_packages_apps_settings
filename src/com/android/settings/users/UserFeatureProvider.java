@@ -14,20 +14,18 @@
  * limitations under the License
  */
 
-package com.android.settings.applications;
+package com.android.settings.users;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.UserManager;
+import android.os.UserHandle;
 
-public abstract class InstalledAppLister extends AppLister {
+import java.util.List;
 
-    public InstalledAppLister(PackageManagerWrapper packageManager, UserManager userManager) {
-        super(packageManager, userManager);
-    }
-
-    @Override
-    protected boolean includeInCount(ApplicationInfo info) {
-        return InstalledAppCounter.includeInCount(PackageManager.INSTALL_REASON_POLICY, mPm, info);
-    }
+public interface UserFeatureProvider {
+    /**
+     * Returns a list of UserHandles for profiles associated with the user that the calling process
+     * is running on, including the user itself.
+     *
+     * @return A non-empty list of UserHandles associated with the calling user.
+     */
+    List<UserHandle> getUserProfiles();
 }

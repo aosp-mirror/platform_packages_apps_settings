@@ -30,6 +30,7 @@ import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
+import com.android.settings.users.UserFeatureProvider;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -52,6 +53,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SurveyFeatureProvider surveyFeatureProvider;
     public final SecurityFeatureProvider securityFeatureProvider;
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
+    public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
 
     /**
@@ -86,6 +88,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         surveyFeatureProvider = mock(SurveyFeatureProvider.class);
         securityFeatureProvider = mock(SecurityFeatureProvider.class);
         suggestionsFeatureProvider = mock(SuggestionFeatureProvider.class);
+        userFeatureProvider = mock(UserFeatureProvider.class);
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
     }
 
@@ -142,6 +145,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public SecurityFeatureProvider getSecurityFeatureProvider() {
         return securityFeatureProvider;
+    }
+
+    @Override
+    public UserFeatureProvider getUserFeatureProvider(Context context) {
+        return userFeatureProvider;
     }
 
     @Override
