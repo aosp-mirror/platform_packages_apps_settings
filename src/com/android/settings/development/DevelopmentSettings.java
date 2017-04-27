@@ -205,6 +205,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                                     "persist.bluetooth.avrcpversion";
     private static final String BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY =
                                     "persist.bluetooth.enableinbandringing";
+    private static final String BLUETOOTH_BTSNOOP_ENABLE_PROPERTY =
+                                    "persist.bluetooth.btsnoopenable";
 
     private static final String BLUETOOTH_ENABLE_INBAND_RINGING_KEY = "bluetooth_enable_inband_ringing";
     private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
@@ -758,8 +760,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
-        updateSwitchPreference(mBtHciSnoopLog, Settings.Secure.getInt(cr,
-                Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
+        updateSwitchPreference(mBtHciSnoopLog, SystemProperties.getBoolean(
+                BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, false));
         updateSwitchPreference(mDebugViewAttributes, Settings.Global.getInt(cr,
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0) != 0);
         updateSwitchPreference(mForceAllowOnExternal, Settings.Global.getInt(cr,
@@ -872,10 +874,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeBtHciSnoopLogOptions() {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        adapter.configHciSnoopLog(mBtHciSnoopLog.isChecked());
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.BLUETOOTH_HCI_LOG,
-                mBtHciSnoopLog.isChecked() ? 1 : 0);
+        SystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY,
+                Boolean.toString(mBtHciSnoopLog.isChecked()));
     }
 
     private void writeDebuggerOptions() {
