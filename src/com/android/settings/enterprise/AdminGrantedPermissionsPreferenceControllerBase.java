@@ -16,7 +16,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -32,6 +31,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
     private final String mPermissionGroup;
     private final ApplicationFeatureProvider mFeatureProvider;
     private final boolean mAsync;
+    private boolean mHasApps;
 
     public AdminGrantedPermissionsPreferenceControllerBase(Context context, Lifecycle lifecycle,
             boolean async, String[] permissions, String permissionGroup) {
@@ -41,6 +41,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
         mAsync = async;
+        mHasApps = false;
     }
 
     @Override
@@ -50,11 +51,13 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
                 (num) -> {
                     if (num == 0) {
                         preference.setVisible(false);
+                        mHasApps = false;
                     } else {
                         preference.setVisible(true);
                         preference.setSummary(mContext.getResources().getQuantityString(
                                 R.plurals.enterprise_privacy_number_packages_lower_bound,
                                 num, num));
+                        mHasApps = true;
                     }
                 });
     }
@@ -76,7 +79,8 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
         final Boolean[] haveAppsWithAdminGrantedPermissions = { null };
         mFeatureProvider.calculateNumberOfAppsWithAdminGrantedPermissions(mPermissions,
                 false /* async */, (num) -> haveAppsWithAdminGrantedPermissions[0] = num > 0);
-        return haveAppsWithAdminGrantedPermissions[0];
+        mHasApps = haveAppsWithAdminGrantedPermissions[0];
+        return mHasApps;
     }
 
     @Override
@@ -84,9 +88,9 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
         if (!getPreferenceKey().equals(preference.getKey())) {
             return false;
         }
-        final Intent intent = new Intent(Intent.ACTION_MANAGE_PERMISSION_APPS)
-                .putExtra(Intent.EXTRA_PERMISSION_NAME, mPermissionGroup);
-        mContext.startActivity(intent);
-        return true;
+        if (!mHasApps) {
+            return false;
+        }
+        return super.handlePreferenceTreeClick(preference);
     }
 }

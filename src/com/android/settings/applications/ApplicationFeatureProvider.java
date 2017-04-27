@@ -22,6 +22,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ApplicationFeatureProvider {
@@ -49,6 +50,14 @@ public interface ApplicationFeatureProvider {
     void calculateNumberOfPolicyInstalledApps(boolean async, NumberOfAppsCallback callback);
 
     /**
+     * Asynchronously builds the list of apps installed on the device via policy in the current user
+     * and all its managed profiles.
+     *
+     * @param callback The callback to invoke with the result
+     */
+    void listPolicyInstalledApps(ListOfAppsCallback callback);
+
+    /**
      * Asynchronously calculates the total number of apps installed in the current user and all its
      * managed profiles that have been granted one or more of the given permissions by the admin.
      *
@@ -59,6 +68,16 @@ public interface ApplicationFeatureProvider {
      */
     void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions, boolean async,
             NumberOfAppsCallback callback);
+
+    /**
+     * Asynchronously builds the list of apps installed in the current user and all its
+     * managed profiles that have been granted one or more of the given permissions by the admin.
+     *
+     * @param permissions Only consider apps that have been granted one or more of these permissions
+     *        by the admin, either at run-time or install-time
+     * @param callback The callback to invoke with the result
+     */
+    void listAppsWithAdminGrantedPermissions(String[] permissions, ListOfAppsCallback callback);
 
     /**
      * Return the persistent preferred activities configured by the admin for the current user and
@@ -77,6 +96,13 @@ public interface ApplicationFeatureProvider {
      */
     interface NumberOfAppsCallback {
         void onNumberOfAppsResult(int num);
+    }
+
+    /**
+     * Callback that receives the list of packages installed on the device.
+     */
+    interface ListOfAppsCallback {
+        void onListOfAppsResult(List<UserAppInfo> result);
     }
 
     public static class PersistentPreferredActivityInfo {

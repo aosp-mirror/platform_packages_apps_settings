@@ -31,7 +31,6 @@ import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
 
     private final String[] mPermissions;
-    private final PackageManagerWrapper mPackageManager;
     private final IPackageManagerWrapper mPackageManagerService;
     private final DevicePolicyManagerWrapper mDevicePolicyManager;
 
@@ -40,18 +39,24 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
             DevicePolicyManagerWrapper devicePolicyManager) {
         super(context, packageManager);
         mPermissions = permissions;
-        mPackageManager = packageManager;
         mPackageManagerService = packageManagerService;
         mDevicePolicyManager = devicePolicyManager;
     }
 
     @Override
     protected boolean includeInCount(ApplicationInfo info) {
+        return includeInCount(mPermissions, mDevicePolicyManager, mPm, mPackageManagerService,
+                info);
+    }
+
+    public static boolean includeInCount(String[] permissions,
+            DevicePolicyManagerWrapper devicePolicyManager, PackageManagerWrapper packageManager,
+            IPackageManagerWrapper packageManagerService, ApplicationInfo info) {
         if (info.targetSdkVersion >= Build.VERSION_CODES.M) {
             // The app uses run-time permissions. Check whether one or more of the permissions were
             // granted by enterprise policy.
-            for (final String permission : mPermissions) {
-                if (mDevicePolicyManager.getPermissionGrantState(null /* admin */, info.packageName,
+            for (final String permission : permissions) {
+                if (devicePolicyManager.getPermissionGrantState(null /* admin */, info.packageName,
                         permission) == DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED) {
                     return true;
                 }
@@ -61,14 +66,14 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
 
         // The app uses install-time permissions. Check whether the app requested one or more of the
         // permissions and was installed by enterprise policy, implicitly granting permissions.
-        if (mPackageManager.getInstallReason(info.packageName,
+        if (packageManager.getInstallReason(info.packageName,
                 new UserHandle(UserHandle.getUserId(info.uid)))
                         != PackageManager.INSTALL_REASON_POLICY) {
             return false;
         }
         try {
-            for (final String permission : mPermissions) {
-                if (mPackageManagerService.checkUidPermission(permission, info.uid)
+            for (final String permission : permissions) {
+                if (packageManagerService.checkUidPermission(permission, info.uid)
                         == PackageManager.PERMISSION_GRANTED) {
                     return true;
                 }
