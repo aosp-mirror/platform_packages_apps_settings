@@ -18,16 +18,7 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
     <!-- Importance -->
-    <!-- Block -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="block"
-        android:title="@string/app_notification_block_title"
-        android:summary="@string/app_notification_block_summary"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
-    <!-- Importance -->
-    <com.android.settings.notification.RestrictedDropDownPreference
+    <Preference
         android:key="importance"
         android:title="@string/notification_importance_title" />
 
