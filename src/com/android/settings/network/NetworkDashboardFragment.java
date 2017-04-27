@@ -142,5 +142,13 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                     sir.xmlResId = R.xml.network_and_internet;
                     return Arrays.asList(sir);
                 }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = new ArrayList<>();
+                    // Remove master switch as a result
+                    keys.add(WifiMasterSwitchPreferenceController.KEY_TOGGLE_WIFI);
+                    return keys;
+                }
             };
 }

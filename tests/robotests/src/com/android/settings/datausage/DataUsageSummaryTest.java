@@ -25,6 +25,8 @@ import android.net.wifi.WifiManager;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.NetworkPolicyEditor;
 
 import org.junit.Before;
@@ -32,11 +34,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -142,5 +146,18 @@ public class DataUsageSummaryTest {
 
         policy.metered = false;
         assertThat(dataUsageSummary.isMetered(config)).isFalse();
+    }
+
+    @Test
+    public void testNonIndexableKeys_existInXmlLayout() {
+        final Context context = RuntimeEnvironment.application;
+        final List<String> niks = DataUsageSummary.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+        final List<String> keys = new ArrayList<>();
+
+        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage_wifi));
+        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage));
+
+        assertThat(keys).containsAllIn(niks);
     }
 }
