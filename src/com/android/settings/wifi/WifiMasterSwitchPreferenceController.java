@@ -33,7 +33,7 @@ public class WifiMasterSwitchPreferenceController extends PreferenceController
         implements SummaryUpdater.OnSummaryChangeListener,
         LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
 
-    private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
+    public static final String KEY_TOGGLE_WIFI = "toggle_wifi";
 
     private MasterSwitchPreference mWifiPreference;
     private WifiEnabler mWifiEnabler;

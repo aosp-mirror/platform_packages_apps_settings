@@ -23,6 +23,7 @@ import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -30,13 +31,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -92,20 +92,15 @@ public class ConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
-    public void testSearchIndexProvider_NoBluetooth_KeyAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)).thenReturn(false);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+    public void testNonIndexableKeys_existInXmlLayout() {
+        final Context context = RuntimeEnvironment.application;
+        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
+        final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+        final int xmlId = (new ConnectedDeviceDashboardFragment()).getPreferenceScreenResId();
 
-        assertThat(keys).isNotNull();
-        assertThat(keys).contains(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
-    }
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
-    @Test
-    public void testSearchIndexProvider_Bluetooth_KeyNotAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)).thenReturn(true);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).doesNotContain(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
+        assertThat(keys).containsAllIn(niks);
     }
 }
