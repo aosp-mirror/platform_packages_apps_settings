@@ -150,6 +150,9 @@ public class WpsDialog extends AlertDialog {
             DialogState dialogState = mDialogState.valueOf(savedInstanceState.getString(DIALOG_STATE));
             String msg = savedInstanceState.getString(DIALOG_MSG_STRING);
             updateDialog(dialogState, msg);
+            if (dialogState == DialogState.WPS_START) {
+                startWps();
+            }
         }
     }
 
@@ -180,9 +183,7 @@ public class WpsDialog extends AlertDialog {
 
         setView(mView);
         if (savedInstanceState == null) {
-            WpsInfo wpsConfig = new WpsInfo();
-            wpsConfig.setup = mWpsSetup;
-            mWifiManager.startWps(wpsConfig, mWpsListener);
+            startWps();
         }
         super.onCreate(savedInstanceState);
     }
@@ -276,4 +277,9 @@ public class WpsDialog extends AlertDialog {
         }
     }
 
+    private void startWps() {
+        WpsInfo wpsConfig = new WpsInfo();
+        wpsConfig.setup = mWpsSetup;
+        mWifiManager.startWps(wpsConfig, mWpsListener);
+    }
 }
