@@ -625,7 +625,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (mOptionsMenu == null) {
             return;
         }
-        final Context context = getActivity();
         mOptionsMenu.findItem(R.id.advanced).setVisible(false);
 
         mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(mListType == LIST_TYPE_STORAGE
@@ -637,6 +636,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 && mListType != LIST_TYPE_HIGH_POWER);
         mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem
                 && mListType != LIST_TYPE_HIGH_POWER);
+
+        mOptionsMenu.findItem(R.id.reset_app_preferences).setVisible(mListType == LIST_TYPE_MAIN);
     }
 
     @Override
