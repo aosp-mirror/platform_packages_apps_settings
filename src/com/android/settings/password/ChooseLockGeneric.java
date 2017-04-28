@@ -29,7 +29,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.hardware.fingerprint.Fingerprint;
@@ -40,6 +39,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.security.KeyStore;
+import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -95,14 +95,9 @@ public class ChooseLockGeneric extends SettingsActivity {
     }
 
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
+
         private static final String TAG = "ChooseLockGenericFragment";
         private static final int MIN_PASSWORD_LENGTH = 4;
-        private static final String KEY_UNLOCK_SET_OFF = "unlock_set_off";
-        private static final String KEY_UNLOCK_SET_NONE = "unlock_set_none";
-        private static final String KEY_UNLOCK_SET_PIN = "unlock_set_pin";
-        private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
-        private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
-        private static final String KEY_UNLOCK_SET_MANAGED = "unlock_set_managed";
         private static final String KEY_SKIP_FINGERPRINT = "unlock_skip_fingerprint";
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
@@ -111,6 +106,27 @@ public class ChooseLockGeneric extends SettingsActivity {
         public static final String ENCRYPT_REQUESTED_QUALITY = "encrypt_requested_quality";
         public static final String ENCRYPT_REQUESTED_DISABLED = "encrypt_requested_disabled";
         public static final String TAG_FRP_WARNING_DIALOG = "frp_warning_dialog";
+
+        /**
+         * Boolean extra determining whether a "screen lock options" button should be shown. This
+         * extra is both sent and received by ChooseLockGeneric.
+         *
+         * When this extra is false, nothing will be done.
+         * When ChooseLockGeneric receives this extra set as true, and if ChooseLockGeneric is
+         * starting ChooseLockPassword or ChooseLockPattern automatically without user interaction,
+         * ChooseLockGeneric will set this extra to true when starting ChooseLockPassword/Pattern.
+         *
+         * This gives the user the choice to select a different screen lock type, even if
+         * ChooseLockGeneric selected a default.
+         */
+        public static final String EXTRA_SHOW_OPTIONS_BUTTON = "show_options_button";
+
+        /**
+         * Original intent extras used to start this activity. This is passed to ChooseLockPassword
+         * when the "screen lock options" button is shown, so that when that button is clicked,
+         * ChooseLockGeneric can be relaunched with the same extras.
+         */
+        public static final String EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS = "choose_lock_generic_extras";
 
         private static final int CONFIRM_EXISTING_REQUEST = 100;
         private static final int ENABLE_ENCRYPTION_REQUEST = 101;
@@ -136,6 +152,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private ManagedLockPasswordProvider mManagedPasswordProvider;
         private boolean mIsSetNewPassword = false;
         private UserManager mUserManager;
+        private ChooseLockGenericController mController;
 
         protected boolean mForFingerprint = false;
 
@@ -192,6 +209,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     UserManager.get(getActivity()),
                     getArguments(),
                     getActivity().getIntent().getExtras()).getIdentifier();
+            mController = new ChooseLockGenericController(getContext(), mUserId);
             if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
                     && UserManager.get(getActivity()).isManagedProfile(mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
@@ -303,7 +321,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     finish();
                     return;
                 }
-                updateUnlockMethodAndFinish(quality, disabled);
+                updateUnlockMethodAndFinish(quality, disabled, false /* chooseLockSkipped */);
             }
         }
 
@@ -328,6 +346,15 @@ public class ChooseLockGeneric extends SettingsActivity {
                 if (resultCode != RESULT_CANCELED || mForChangeCredRequiredForBoot) {
                     getActivity().setResult(resultCode, data);
                     finish();
+                } else {
+                    // If PASSWORD_TYPE_KEY is set, this activity is used as a trampoline to start
+                    // the actual password enrollment. If the result is canceled, which means the
+                    // user pressed back, finish the activity with result canceled.
+                    int quality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
+                    if (quality != -1) {
+                        getActivity().setResult(RESULT_CANCELED, data);
+                        finish();
+                    }
                 }
             } else if (requestCode == CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
                     && resultCode == FingerprintEnrollBase.RESULT_FINISHED) {
@@ -374,7 +401,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (quality == -1) {
                 // If caller didn't specify password quality, show UI and allow the user to choose.
                 quality = intent.getIntExtra(MINIMUM_QUALITY_KEY, -1);
-                quality = upgradeQuality(quality);
+                quality = mController.upgradeQuality(quality);
                 final boolean hideDisabledPrefs = intent.getBooleanExtra(
                         HIDE_DISABLED_PREFS, false);
                 final PreferenceScreen prefScreen = getPreferenceScreen();
@@ -387,7 +414,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 updateCurrentPreference();
                 updatePreferenceSummaryIfNeeded();
             } else {
-                updateUnlockMethodAndFinish(quality, false);
+                updateUnlockMethodAndFinish(quality, false, true /* chooseLockSkipped */);
             }
         }
 
@@ -395,37 +422,51 @@ public class ChooseLockGeneric extends SettingsActivity {
             addPreferencesFromResource(R.xml.security_settings_picker);
 
             // Used for testing purposes
-            findPreference(KEY_UNLOCK_SET_NONE).setViewId(R.id.lock_none);
+            findPreference(ScreenLockType.NONE.preferenceKey).setViewId(R.id.lock_none);
             findPreference(KEY_SKIP_FINGERPRINT).setViewId(R.id.lock_none);
-            findPreference(KEY_UNLOCK_SET_PIN).setViewId(R.id.lock_pin);
-            findPreference(KEY_UNLOCK_SET_PASSWORD).setViewId(R.id.lock_password);
+            findPreference(ScreenLockType.PIN.preferenceKey).setViewId(R.id.lock_pin);
+            findPreference(ScreenLockType.PASSWORD.preferenceKey).setViewId(R.id.lock_password);
         }
 
         private void updatePreferenceText() {
             if (mForFingerprint) {
-                final String key[] = { KEY_UNLOCK_SET_PATTERN,
-                        KEY_UNLOCK_SET_PIN,
-                        KEY_UNLOCK_SET_PASSWORD };
-                final int res[] = { R.string.fingerprint_unlock_set_unlock_pattern,
-                        R.string.fingerprint_unlock_set_unlock_pin,
-                        R.string.fingerprint_unlock_set_unlock_password };
-                for (int i = 0; i < key.length; i++) {
-                    Preference pref = findPreference(key[i]);
-                    if (pref != null) { // can be removed by device admin
-                        pref.setTitle(res[i]);
-                    }
-                }
+                setPreferenceTitle(ScreenLockType.PATTERN,
+                        R.string.fingerprint_unlock_set_unlock_pattern);
+                setPreferenceTitle(ScreenLockType.PIN, R.string.fingerprint_unlock_set_unlock_pin);
+                setPreferenceTitle(ScreenLockType.PASSWORD,
+                        R.string.fingerprint_unlock_set_unlock_password);
             }
 
             if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
-                Preference managed = findPreference(KEY_UNLOCK_SET_MANAGED);
-                managed.setTitle(mManagedPasswordProvider.getPickerOptionTitle(mForFingerprint));
+                setPreferenceTitle(ScreenLockType.MANAGED,
+                        mManagedPasswordProvider.getPickerOptionTitle(mForFingerprint));
             } else {
-                removePreference(KEY_UNLOCK_SET_MANAGED);
+                removePreference(ScreenLockType.MANAGED.preferenceKey);
             }
 
             if (!(mForFingerprint && mIsSetNewPassword)) {
                 removePreference(KEY_SKIP_FINGERPRINT);
+            }
+        }
+
+        private void setPreferenceTitle(ScreenLockType lock, @StringRes int title) {
+            Preference preference = findPreference(lock.preferenceKey);
+            if (preference != null) {
+                preference.setTitle(title);
+            }
+        }
+
+        private void setPreferenceTitle(ScreenLockType lock, CharSequence title) {
+            Preference preference = findPreference(lock.preferenceKey);
+            if (preference != null) {
+                preference.setTitle(title);
+            }
+        }
+
+        private void setPreferenceSummary(ScreenLockType lock, @StringRes int summary) {
+            Preference preference = findPreference(lock.preferenceKey);
+            if (preference != null) {
+                preference.setSummary(summary);
             }
         }
 
@@ -441,39 +482,12 @@ public class ChooseLockGeneric extends SettingsActivity {
             final int credentialOwner = UserManager.get(getContext())
                     .getCredentialOwnerProfile(mUserId);
             if (mLockPatternUtils.isLockScreenDisabled(credentialOwner)) {
-                return KEY_UNLOCK_SET_OFF;
+                return ScreenLockType.NONE.preferenceKey;
             }
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(credentialOwner)) {
-                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    return KEY_UNLOCK_SET_PATTERN;
-                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                    return KEY_UNLOCK_SET_PIN;
-                case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
-                case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
-                case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                    return KEY_UNLOCK_SET_PASSWORD;
-                case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
-                    return KEY_UNLOCK_SET_MANAGED;
-                case DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED:
-                    return KEY_UNLOCK_SET_NONE;
-            }
-            return null;
-        }
-
-        /** increases the quality if necessary */
-        private int upgradeQuality(int quality) {
-            quality = upgradeQualityForDPM(quality);
-            return quality;
-        }
-
-        private int upgradeQualityForDPM(int quality) {
-            // Compare min allowed password quality
-            int minQuality = mDPM.getPasswordQuality(null, mUserId);
-            if (quality < minQuality) {
-                quality = minQuality;
-            }
-            return quality;
+            ScreenLockType lock =
+                    ScreenLockType.fromQuality(
+                            mLockPatternUtils.getKeyguardStoredPasswordQuality(credentialOwner));
+            return lock != null ? lock.preferenceKey : null;
         }
 
         /***
@@ -501,54 +515,17 @@ public class ChooseLockGeneric extends SettingsActivity {
             int adminEnforcedQuality = mDPM.getPasswordQuality(null, mUserId);
             EnforcedAdmin enforcedAdmin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
                     getActivity(), mUserId);
-            for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
-                Preference pref = entries.getPreference(i);
+
+            for (ScreenLockType lock : ScreenLockType.values()) {
+                String key = lock.preferenceKey;
+                Preference pref = findPreference(key);
                 if (pref instanceof RestrictedPreference) {
-                    final String key = pref.getKey();
-                    boolean enabled = true;
-                    boolean visible = true;
-                    boolean disabledByAdmin = false;
-                    if (KEY_UNLOCK_SET_OFF.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-                        if (getResources().getBoolean(R.bool.config_hide_none_security_option)) {
-                            enabled = false;
-                            visible = false;
-                        }
-                        disabledByAdmin = adminEnforcedQuality
-                                > DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-                    } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
-                        if (getResources().getBoolean(R.bool.config_hide_swipe_security_option)) {
-                            enabled = false;
-                            visible = false;
-                        } else {
-                            if (mUserId != UserHandle.myUserId()) {
-                                // Swipe doesn't make sense for profiles.
-                                visible = false;
-                            }
-                            enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-                        }
-                        disabledByAdmin = adminEnforcedQuality
-                                > DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-                    } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
-                        disabledByAdmin = adminEnforcedQuality
-                                > DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
-                    } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
-                        disabledByAdmin = adminEnforcedQuality
-                                > DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
-                    } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
-                        disabledByAdmin = adminEnforcedQuality
-                                > DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
-                    } else if (KEY_UNLOCK_SET_MANAGED.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_MANAGED
-                                && mManagedPasswordProvider.isManagedPasswordChoosable();
-                        disabledByAdmin = adminEnforcedQuality
-                                > DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
-                    }
+                    boolean visible = mController.isScreenLockVisible(lock);
+                    boolean enabled = mController.isScreenLockEnabled(lock, quality);
+                    boolean disabledByAdmin =
+                            mController.isScreenLockDisabledByAdmin(lock, adminEnforcedQuality);
                     if (hideDisabled) {
-                        visible = enabled;
+                        visible = visible && enabled;
                     }
                     if (!visible) {
                         entries.removePreference(pref);
@@ -583,21 +560,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 return;
             }
 
-            CharSequence summary = getString(R.string.secure_lock_encryption_warning);
-
-            PreferenceScreen screen = getPreferenceScreen();
-            final int preferenceCount = screen.getPreferenceCount();
-            for (int i = 0; i < preferenceCount; i++) {
-                Preference preference = screen.getPreference(i);
-                switch (preference.getKey()) {
-                    case KEY_UNLOCK_SET_PATTERN:
-                    case KEY_UNLOCK_SET_PIN:
-                    case KEY_UNLOCK_SET_PASSWORD:
-                    case KEY_UNLOCK_SET_MANAGED: {
-                        preference.setSummary(summary);
-                    } break;
-                }
-            }
+            setPreferenceSummary(ScreenLockType.PATTERN, R.string.secure_lock_encryption_warning);
+            setPreferenceSummary(ScreenLockType.PIN, R.string.secure_lock_encryption_warning);
+            setPreferenceSummary(ScreenLockType.PASSWORD, R.string.secure_lock_encryption_warning);
+            setPreferenceSummary(ScreenLockType.MANAGED, R.string.secure_lock_encryption_warning);
         }
 
         protected Intent getLockManagedPasswordIntent(String password) {
@@ -643,17 +609,24 @@ public class ChooseLockGeneric extends SettingsActivity {
          *
          * @param quality the desired quality. Ignored if DevicePolicyManager requires more security
          * @param disabled whether or not to show LockScreen at all. Only meaningful when quality is
+         * @param chooseLockSkipped whether or not this activity is skipped. This is true when this
+         * activity was not shown to the user at all, instead automatically proceeding based on
+         * the given intent extras, typically {@link LockPatternUtils#PASSWORD_TYPE_KEY}.
          * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}
          */
-        void updateUnlockMethodAndFinish(int quality, boolean disabled) {
+        void updateUnlockMethodAndFinish(int quality, boolean disabled, boolean chooseLockSkipped) {
             // Sanity check. We should never get here without confirming user's existing password.
             if (!mPasswordConfirmed) {
                 throw new IllegalStateException("Tried to update password without confirming it");
             }
 
-            quality = upgradeQuality(quality);
+            quality = mController.upgradeQuality(quality);
             Intent intent = getIntentForUnlockMethod(quality);
             if (intent != null) {
+                if (getIntent().getBooleanExtra(EXTRA_SHOW_OPTIONS_BUTTON, false)) {
+                    intent.putExtra(EXTRA_SHOW_OPTIONS_BUTTON, chooseLockSkipped);
+                }
+                intent.putExtra(EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS, getIntent().getExtras());
                 startActivityForResult(intent,
                         mIsSetNewPassword && mHasChallenge
                                 ? CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
@@ -831,35 +804,33 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private boolean isUnlockMethodSecure(String unlockMethod) {
-            return !(KEY_UNLOCK_SET_OFF.equals(unlockMethod) ||
-                    KEY_UNLOCK_SET_NONE.equals(unlockMethod));
+            return !(ScreenLockType.SWIPE.preferenceKey.equals(unlockMethod) ||
+                    ScreenLockType.NONE.preferenceKey.equals(unlockMethod));
         }
 
         private boolean setUnlockMethod(String unlockMethod) {
             EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, unlockMethod);
 
-            if (KEY_UNLOCK_SET_OFF.equals(unlockMethod)) {
-                updateUnlockMethodAndFinish(
-                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true /* disabled */ );
-            } else if (KEY_UNLOCK_SET_NONE.equals(unlockMethod)) {
-                updateUnlockMethodAndFinish(
-                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false /* disabled */ );
-            } else if (KEY_UNLOCK_SET_MANAGED.equals(unlockMethod)) {
-                maybeEnableEncryption(DevicePolicyManager.PASSWORD_QUALITY_MANAGED, false);
-            } else if (KEY_UNLOCK_SET_PATTERN.equals(unlockMethod)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
-            } else if (KEY_UNLOCK_SET_PIN.equals(unlockMethod)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
-            } else if (KEY_UNLOCK_SET_PASSWORD.equals(unlockMethod)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
-            } else {
-                Log.e(TAG, "Encountered unknown unlock method to set: " + unlockMethod);
-                return false;
+            ScreenLockType lock = ScreenLockType.fromKey(unlockMethod);
+            if (lock != null) {
+                switch (lock) {
+                    case NONE:
+                    case SWIPE:
+                        updateUnlockMethodAndFinish(
+                                lock.defaultQuality,
+                                lock == ScreenLockType.NONE,
+                                false /* chooseLockSkipped */);
+                        return true;
+                    case PATTERN:
+                    case PIN:
+                    case PASSWORD:
+                    case MANAGED:
+                        maybeEnableEncryption(lock.defaultQuality, false);
+                        return true;
+                }
             }
-            return true;
+            Log.e(TAG, "Encountered unknown unlock method to set: " + unlockMethod);
+            return false;
         }
 
         private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet) {
@@ -905,23 +876,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                         .setTitle(args.getInt(ARG_TITLE_RES))
                         .setMessage(args.getInt(ARG_MESSAGE_RES))
                         .setPositiveButton(R.string.unlock_disable_frp_warning_ok,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        ((ChooseLockGenericFragment) getParentFragment())
-                                                .setUnlockMethod(
-                                                        args.getString(ARG_UNLOCK_METHOD_TO_SET));
-                                    }
-                                }
-                        )
-                        .setNegativeButton(R.string.cancel,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        dismiss();
-                                    }
-                                }
-                        )
+                                (dialog, whichButton) -> {
+                                    String unlockMethod = args.getString(ARG_UNLOCK_METHOD_TO_SET);
+                                    ((ChooseLockGenericFragment) getParentFragment())
+                                            .setUnlockMethod(unlockMethod);
+                                })
+                        .setNegativeButton(R.string.cancel, (dialog, whichButton) -> dismiss())
                         .create();
             }
 

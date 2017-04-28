@@ -28,6 +28,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Insets;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -171,7 +172,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinNumeric = 0;
         private int mPasswordMinNonLetter = 0;
         private int mPasswordMinLengthToFulfillAllPolicies = 0;
-        private int mUserId;
+        protected int mUserId;
         private boolean mHideDrawer = false;
         /**
          * Password requirements that we need to verify.
@@ -188,7 +189,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private TextView mHeaderText;
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
-        private boolean mIsAlphaMode;
+        protected boolean mIsAlphaMode;
         private Button mCancelButton;
         private Button mNextButton;
 
@@ -290,6 +291,11 @@ public class ChooseLockPassword extends SettingsActivity {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+
+            // Make the password container consume the optical insets so the edit text is aligned
+            // with the sides of the parent visually.
+            ViewGroup container = view.findViewById(R.id.password_container);
+            container.setOpticalInsets(Insets.NONE);
 
             mCancelButton = (Button) view.findViewById(R.id.cancel_button);
             mCancelButton.setOnClickListener(this);
