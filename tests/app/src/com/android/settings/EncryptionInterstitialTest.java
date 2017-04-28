@@ -93,7 +93,7 @@ public class EncryptionInterstitialTest {
         Intent mMatchedIntent = null;
 
         @Override
-        public ActivityResult onMatchIntent(Intent intent) {
+        public ActivityResult onStartActivity(Intent intent) {
             if ("test.unlock.intent".equals(intent.getAction())) {
                 mMatchedIntent = intent;
                 return new ActivityResult(Activity.RESULT_OK, null);
