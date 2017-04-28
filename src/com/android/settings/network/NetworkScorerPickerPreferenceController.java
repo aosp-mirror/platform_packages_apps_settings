@@ -17,14 +17,16 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.net.NetworkScorerAppData;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
+import java.util.List;
+
 /**
  * {@link PreferenceController} that shows the active network scorer and toggles the preference
- * based on {@link Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED}.
+ * based on whether or not there are valid scorers installed.
  */
 public class NetworkScorerPickerPreferenceController extends PreferenceController {
 
@@ -45,8 +47,9 @@ public class NetworkScorerPickerPreferenceController extends PreferenceControlle
 
     @Override
     public void updateState(Preference preference) {
-        boolean enabled = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
+        final List<NetworkScorerAppData> allValidScorers =
+                mNetworkScoreManager.getAllValidScorers();
+        boolean enabled = !allValidScorers.isEmpty();
         preference.setEnabled(enabled);
         if (!enabled) {
             preference.setSummary(null);
