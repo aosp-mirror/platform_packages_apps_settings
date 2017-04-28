@@ -21,9 +21,11 @@
     android:title="@string/reset_dashboard_title">
 
     <!-- Network reset -->
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="network_reset_pref"
         android:title="@string/reset_network_title"
+        settings:userRestriction="no_network_reset"
+        settings:useAdminDisabledSummary="true"
         android:fragment="com.android.settings.ResetNetwork" />
 
     <!-- Reset app preferences -->
