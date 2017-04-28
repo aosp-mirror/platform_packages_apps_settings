@@ -14,16 +14,13 @@
 
 package com.android.settings.datausage;
 
-import static android.net.NetworkPolicy.LIMIT_DISABLED;
-import static android.net.NetworkPolicy.WARNING_DISABLED;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.icu.text.NumberFormat;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -45,7 +42,8 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 
-import java.text.ParseException;
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicy.WARNING_DISABLED;
 
 public class BillingCycleSettings extends DataUsageBase implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
@@ -248,6 +246,7 @@ public class BillingCycleSettings extends DataUsageBase implements
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
             final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
                     : editor.getPolicyWarningBytes(template);
+            final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
             if (bytes > 1.5f * GB_IN_BYTES) {
                 final String bytesText = formatText(bytes / (float) GB_IN_BYTES);
@@ -266,7 +265,7 @@ public class BillingCycleSettings extends DataUsageBase implements
 
         private String formatText(float v) {
             v = Math.round(v * 100) / 100f;
-            return NumberFormat.getInstance().format(v);
+            return String.valueOf(v);
         }
 
         @Override
@@ -279,20 +278,15 @@ public class BillingCycleSettings extends DataUsageBase implements
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
-            EditText bytesField = mView.findViewById(R.id.bytes);
-            Spinner spinner = mView.findViewById(R.id.size_spinner);
+            EditText bytesField = (EditText) mView.findViewById(R.id.bytes);
+            Spinner spinner = (Spinner) mView.findViewById(R.id.size_spinner);
 
             String bytesString = bytesField.getText().toString();
-
-            double input = 0;
-            try {
-                input = NumberFormat.getInstance().parse(bytesString).doubleValue();
-            } catch (ParseException e) {
-                Log.w(TAG, "Failed to parse byte value " + bytesString);
+            if (bytesString.isEmpty()) {
+                bytesString = "0";
             }
-
-            final long bytes = (long) (input
-                    * (spinner.getSelectedItemPosition() == 0 ? MB_IN_BYTES : GB_IN_BYTES));
+            final long bytes = (long) (Float.valueOf(bytesString)
+                        * (spinner.getSelectedItemPosition() == 0 ? MB_IN_BYTES : GB_IN_BYTES));
 
             // to fix the overflow problem
             final long correctedBytes = Math.min(MAX_DATA_LIMIT_BYTES, bytes);
