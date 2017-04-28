@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,6 +31,7 @@ import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -39,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultAutofillPicker extends DefaultAppPickerFragment {
+
+    private static final String TAG = "DefaultAutofillPicker";
 
     static final String SETTING = Settings.Secure.AUTOFILL_SERVICE;
     static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
@@ -89,8 +93,13 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         final List<ResolveInfo> resolveInfos = mPm.getPackageManager()
                 .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
-            candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
-                    info.serviceInfo.packageName, info.serviceInfo.name)));
+            final String permission = info.serviceInfo.permission;
+            // TODO(b/37563972): remove BIND_AUTOFILL once clients use BIND_AUTOFILL_SERVICE
+            if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)
+                    || Manifest.permission.BIND_AUTOFILL.equals(permission)) {
+                candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
+                        info.serviceInfo.packageName, info.serviceInfo.name)));
+            }
         }
         return candidates;
     }
@@ -157,9 +166,15 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 final String flattenKey = new ComponentName(
                         serviceInfo.packageName, serviceInfo.name).flattenToString();
                 if (TextUtils.equals(mSelectedKey, flattenKey)) {
-                    final String settingsActivity = new AutofillServiceInfo(
-                            mPackageManager, serviceInfo)
-                            .getSettingsActivity();
+                    final String settingsActivity;
+                    try {
+                        settingsActivity = new AutofillServiceInfo(mPackageManager, serviceInfo)
+                                .getSettingsActivity();
+                    } catch (SecurityException e) {
+                        // Service does not declare the proper permission, ignore it.
+                        Log.w(TAG, "Error getting info for " + serviceInfo + ": " + e);
+                        return null;
+                    }
                     if (TextUtils.isEmpty(settingsActivity)) {
                         return null;
                     }
