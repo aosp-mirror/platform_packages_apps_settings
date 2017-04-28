@@ -14,14 +14,15 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
-import static com.android.settings.ConfirmDeviceCredentialBaseFragment.LastTryDialog;
 import static com.google.common.truth.Truth.assertThat;
 
-import android.R;
+import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.TestConfig;
+import com.android.settings.password.ConfirmDeviceCredentialBaseFragment.LastTryDialog;
+
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -45,11 +46,14 @@ public class ConfirmCredentialTest {
         FragmentManager fm = Robolectric.buildActivity(Activity.class).get().getFragmentManager();
 
         // Launch only one instance at a time.
-        assertThat(LastTryDialog.show(fm, "title", R.string.yes, R.string.ok, false)).isTrue();
-        assertThat(LastTryDialog.show(fm, "title", R.string.yes, R.string.ok, false)).isFalse();
+        assertThat(LastTryDialog.show(
+                fm, "title", android.R.string.yes, android.R.string.ok, false)).isTrue();
+        assertThat(LastTryDialog.show(
+                fm, "title", android.R.string.yes, android.R.string.ok, false)).isFalse();
 
         // After cancelling, the dialog should be re-shown when asked for.
         LastTryDialog.hide(fm);
-        assertThat(LastTryDialog.show(fm, "title", R.string.yes, R.string.ok, false)).isTrue();
+        assertThat(LastTryDialog.show(
+                fm, "title", android.R.string.yes, android.R.string.ok, false)).isTrue();
     }
 }

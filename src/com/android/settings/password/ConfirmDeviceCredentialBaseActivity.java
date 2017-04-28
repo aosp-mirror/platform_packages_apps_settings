@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.Fragment;
 import android.app.KeyguardManager;
@@ -23,6 +23,10 @@ import android.os.UserManager;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.Fragment;
 import android.content.Intent;

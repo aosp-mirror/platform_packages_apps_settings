@@ -30,7 +30,6 @@ import android.util.Pair;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
@@ -38,6 +37,7 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;

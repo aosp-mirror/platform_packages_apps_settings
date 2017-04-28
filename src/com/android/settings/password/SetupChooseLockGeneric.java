@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -31,6 +31,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
+import com.android.settings.SetupEncryptionInterstitial;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.fingerprint.SetupSkipDialog;
 import com.android.settings.utils.SettingsDividerItemDecoration;
@@ -172,57 +175,17 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         @Override
-        protected Intent getLockPasswordIntent(Context context, int quality,
-                int minLength, final int maxLength,
-                boolean requirePasswordToDecrypt, boolean confirmCredentials, int userId) {
-            final Intent intent = SetupChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, confirmCredentials);
+        protected Intent getLockPasswordIntent(int quality, int minLength, int maxLength) {
+            final Intent intent = SetupChooseLockPassword.modifyIntentForSetup(
+                    getContext(), super.getLockPasswordIntent(quality, minLength, maxLength));
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }
 
         @Override
-        protected Intent getLockPasswordIntent(Context context, int quality,
-                int minLength, final int maxLength,
-                boolean requirePasswordToDecrypt, long challenge, int userId) {
-            final Intent intent = SetupChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, challenge);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getLockPasswordIntent(Context context, int quality, int minLength,
-                int maxLength, boolean requirePasswordToDecrypt, String password, int userId) {
-            final Intent intent = SetupChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, password);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                final boolean confirmCredentials, int userId) {
-            final Intent intent = SetupChooseLockPattern.createIntent(context, requirePassword,
-                    confirmCredentials);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                long challenge, int userId) {
-            final Intent intent = SetupChooseLockPattern.createIntent(context, requirePassword,
-                    challenge);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                final String pattern, int userId) {
-            final Intent intent = SetupChooseLockPattern.createIntent(context, requirePassword,
-                    pattern);
+        protected Intent getLockPatternIntent() {
+            final Intent intent = SetupChooseLockPattern.modifyIntentForSetup(
+                    getContext(), super.getLockPatternIntent());
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

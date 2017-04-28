@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -56,7 +56,7 @@ import java.util.List;
  * m SettingsTests &&
  * adb install \
  * -r -g  ${ANDROID_PRODUCT_OUT}/data/app/SettingsTests/SettingsTests.apk &&
- * adb shell am instrument -e class com.android.settings.ChooseLockGenericTest \
+ * adb shell am instrument -e class com.android.settings.password.ChooseLockGenericTest \
  * -w com.android.settings.tests/android.support.test.runner.AndroidJUnitRunner
  */
 @RunWith(AndroidJUnit4.class)

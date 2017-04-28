@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.pressKey;
@@ -29,6 +29,8 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.KeyEvent;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;

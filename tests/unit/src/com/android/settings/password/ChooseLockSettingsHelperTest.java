@@ -1,5 +1,12 @@
-package com.android.settings;
+package com.android.settings.password;
 
+
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -15,13 +22,6 @@ import com.android.internal.widget.LockPatternUtils;
 import org.mockito.ArgumentCaptor;
 
 import java.util.List;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class ChooseLockSettingsHelperTest extends AndroidTestCase {
 
