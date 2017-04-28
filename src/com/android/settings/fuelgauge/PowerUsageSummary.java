@@ -139,7 +139,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
                     // show high usage preference if possible
-                    mAnomalySummaryPreferenceController.updateHighUsagePreference(data);
+                    mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(data);
                 }
 
                 @Override
