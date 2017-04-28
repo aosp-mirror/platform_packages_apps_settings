@@ -183,4 +183,19 @@ public class MasterSwitchPreferenceTest {
         preference.setDisabledByAdmin(null);
         assertThat(toggle.isEnabled()).isTrue();
     }
+
+    @Test
+    public void onBindViewHolder_toggleButtonShouldHaveContentDescription() {
+        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
+            LayoutInflater.from(mContext)
+                .inflate(R.layout.preference_widget_master_switch, null));
+        final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
+        final String label = "TestButton";
+        preference.setTitle(label);
+
+        preference.onBindViewHolder(holder);
+
+        assertThat(toggle.getContentDescription()).isEqualTo(label);
+    }
 }
