@@ -4373,6 +4373,12 @@
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services on</item>
     </plurals>
 
+    <!-- Print setting summary in settings screenm indicating how many print jobs are active [CHAR LIMIT=None] -->
+    <plurals name="print_jobs_summary">
+        <item quantity="one">1 print job</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print jobs</item>
+    </plurals>
+
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
     <string name="print_settings_title">Print services</string>
 
@@ -8021,7 +8027,7 @@
     <string name="data_saver_title">Data saver</string>
 
     <!-- Button that leads to list of apps with unrestricted data access [CHAR LIMIT=60] -->
-    <string name="unrestricted_data_saver">Unrestricted data access</string>
+    <string name="unrestricted_data_saver">Unrestricted data</string>
 
     <!-- Description of message shown when app is blacklisted for background data access [CHAR LIMIT=NONE] -->
     <string name="restrict_background_blacklisted">Background data is turned off</string>
