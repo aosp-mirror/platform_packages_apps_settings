@@ -25,17 +25,28 @@
         android:title="@string/app_permissions"
         android:order="-130"
         settings:keywords="@string/keywords_app_permissions">
-        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
     </Preference>
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
-        android:order="10"/>
+        android:order="10" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="app_and_notif_cell_broadcast_settings"
+        android:title="@string/cell_broadcast_settings"
+        android:order="15"
+        settings:useAdminDisabledSummary="true">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.cellbroadcastreceiver"
+            android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
+    </com.android.settingslib.RestrictedPreference>
 
     <Preference
         android:key="special_access"
         android:fragment="com.android.settings.applications.SpecialAccessSettings"
         android:title="@string/special_access"
-        android:order="20"/>
+        android:order="20" />
 
 </PreferenceScreen>
