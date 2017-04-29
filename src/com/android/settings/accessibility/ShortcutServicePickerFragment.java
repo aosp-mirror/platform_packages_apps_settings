@@ -67,7 +67,7 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
             candidates.add(new DefaultAppInfo(mPm,
                     UserHandle.myUserId(),
                     installedServiceInfo.getComponentName(),
-                    installedServiceInfo.loadSummary(mPm.getPackageManager()),
+                    (String) installedServiceInfo.loadSummary(mPm.getPackageManager()),
                     true /* enabled */));
         }
 
