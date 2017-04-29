@@ -120,7 +120,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
      * Whether the screen should be collapsed.
      */
     public boolean shouldCollapse(PreferenceScreen screen) {
-        return !mUserExpanded && screen.getPreferenceCount() >= mTileLimit;
+        return !mUserExpanded && screen.getPreferenceCount() > mTileLimit;
     }
 
     /**
@@ -218,7 +218,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
                 return pref;
             }
             if (pref instanceof PreferenceGroup) {
-                final Preference returnedPreference = ((PreferenceGroup)pref).findPreference(key);
+                final Preference returnedPreference = ((PreferenceGroup) pref).findPreference(key);
                 if (returnedPreference != null) {
                     return returnedPreference;
                 }
