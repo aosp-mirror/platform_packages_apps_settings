@@ -1687,7 +1687,6 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Гарын товчлолын туслагч"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Боломжтой товчлолыг харуулах"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Өгөгдмөл"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"Хулгана/тракпад"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Заагчийн хурд"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Тоглоом Контроллер"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Чичиргээ ашиглах"</string>
@@ -2003,8 +2002,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Батерейны ашиглалт нь цэнэг зарцуулалтын ойролцоо хэмжүүр бөгөөд батерей зарцуулдаг бүх сурвалжийг багтаахгүй. Бусад цахилгаан хэрэглээ гэдэг нь тооцоолсон ашиглалт болон бодит цэнэг зарцуулалтын зөрүү юм."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Хэтрүүлэн тооцсон цахилгаан ашиглалт"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <!-- no translation found for battery_used_for (2690821851327075443) -->
-    <skip />
+    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>-д ашигласан"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> <xliff:g id="PERCENT">%1$s</xliff:g>-г ашигласан"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Бүх батерейны <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Сүүлд бүрэн цэнэглэснээс хойших ашиглалтын мэдээлэл"</string>
@@ -2076,7 +2074,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Дуугаар оруулах &amp; гарах тохиргоо"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Дуут хайлт"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Андройд гар"</string>
-    <string name="voice_category" msgid="1430370497125803904">"Яриа"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"Дуун оруулалтын тохиргоо"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Дуугаар оруулах"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Дуун оруулгын үйлчилгээ"</string>
@@ -2551,7 +2548,7 @@
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"Өгөгдмөлийг ашиглах"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"Байнга"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Өөр төлбөрийн апп нээлттэй байхаас бусад үед"</string>
-    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"\"Tap &amp; төл\" машин дээр төлөх:"</string>
+    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"\"Товшиж төлөх\" дээр төлөх:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Tерминалаар тооцоо хийж байна"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Төлбөрийн апп-г тохируулаарай. Холбоoгүй тэмдэг бүхий терминалд утасныхаа ард талыг бариарай."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Ойлголоо"</string>
@@ -2791,6 +2788,8 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Таны төхөөрөмж түгжээтэй үед та профайлын мэдэгдлээ хэрхэн харахыг хүсэж байна вэ?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Профайлын мэдэгдэл"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Мэдэгдэл"</string>
+    <!-- no translation found for notification_channel_title (2260666541030178452) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"Ач холбогдол"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Апп-р шийдүүлнэ үү"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Мэдэгдлийг хэзээ ч харуулахгүй"</string>
@@ -2798,10 +2797,14 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Дуугүй"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Дуу гаргах"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Дуу гаргаж, дэлгэцэд гэнэт гаргах"</string>
-    <string name="notification_importance_min_summary" msgid="8233873580287975662">"Бага: Дуугүй эсвэл үзэхэд саадгүй"</string>
-    <string name="notification_importance_low_summary" msgid="1296192045494524565">"Дунд зэрэг: Дуугүй"</string>
-    <string name="notification_importance_default_summary" msgid="5730277944596984792">"Өндөр: Дуу гаргах"</string>
-    <string name="notification_importance_high_summary" msgid="3248683220940159642">"Яаралтай: Дуу гаргаж, дэлгэцэд гэнэт гаргах"</string>
+    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
+    <skip />
+    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
+    <skip />
+    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
+    <skip />
+    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
+    <skip />
     <string name="allow_sound" msgid="6585849855452076626">"Дууг зөвшөөрөх"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Эдгээр мэдэгдлүүдийг одоогийн дэлгэцэд харахдаа дуугүй, чичиргээгүй болон яаралтай гаргаж ирэхгүй болгож тохируулна уу."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Мэдэгдлийн туслагч"</string>
@@ -2833,6 +2836,10 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\"Бүү саад бол\" хандалт"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Суулгасан апп-аас \"Бүү саад бол\" хандалтыг хүссэн апп байхгүй байна."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Апп-уудыг ачаалж байна..."</string>
+    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
+    <skip />
+    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"Ангилал"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Бусад"</string>
     <string name="no_channels" msgid="3077375508177744586">"Энэ апп ямар ч мэдэгдэл нийтлээгүй"</string>
@@ -3197,12 +3204,9 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Энэ нь апп-д системийн тохиргоог өөрчлөхийг зөвшөөрдөг."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Тийм"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Үгүй"</string>
-    <!-- no translation found for external_source_trusted (2707996266575928037) -->
-    <skip />
-    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
-    <skip />
-    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
-    <skip />
+    <string name="external_source_trusted" msgid="2707996266575928037">"Зөвшөөрсөн"</string>
+    <string name="external_source_untrusted" msgid="2677442511837596726">"Зөвшөөрөөгүй"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"Энэ эх сурвалжаас зөвшөөрөх"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Камер нээхийн тулд бугуйгаа 2 удаа эргүүлэх"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Бугуйгаа 2 удаа эргүүлэн камерын апп-ыг нээгээрэй"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Камер нээхийн тулд асаах/унтраах товчлуурыг 2 удаа дараарай"</string>

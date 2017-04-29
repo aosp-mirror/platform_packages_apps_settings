@@ -461,7 +461,7 @@
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"无安全措施"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"图案"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性"</string>
-    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN码"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN 码"</string>
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"中高等安全性"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密码"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高安全性"</string>
@@ -476,7 +476,7 @@
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"滑动"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"图案"</string>
-    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN码"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN 码"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"密码"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"设置了屏幕锁定后，您还可以在“设置”&gt;“安全”中设置指纹。"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"关闭屏幕锁定"</string>
@@ -1199,7 +1199,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"系统"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"浏览<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"“其他”包括应用所保存的共享文件、通过互联网或蓝牙下载的文件、Android 文件等。\n\n要查看此<xliff:g id="NAME">^1</xliff:g>中的可见内容，请点按“浏览”。"</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"“系统”中包含用于运行 Android 版本 <xliff:g id="VERSION">%s</xliff:g> 的文件"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"“系统”中包含用于运行 Android <xliff:g id="VERSION">%s</xliff:g> 的文件"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g>可能保存了照片、音乐、应用或其他数据（占用了 <xliff:g id="SIZE">^2</xliff:g> 的存储空间）。\n\n要查看详情，请切换至<xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"设置您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"用作便携式存储设备"</string>
@@ -1533,7 +1533,7 @@
     <string name="sort_order_alpha" msgid="1410278099123670628">"按名称排序"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"按大小排序"</string>
     <string name="show_running_services" msgid="5736278767975544570">"显示当前运行的服务"</string>
-    <string name="show_background_processes" msgid="2009840211972293429">"显示缓存进程"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"显示已缓存的进程"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"紧急警报应用"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"重置应用偏好设置"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"要重置应用偏好设置吗？"</string>
@@ -1683,11 +1683,10 @@
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"键盘辅助功能"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"实体键盘"</string>
     <string name="show_ime" msgid="2658582193437188227">"显示虚拟键盘"</string>
-    <string name="show_ime_summary" msgid="8164993045923240698">"连接到实体键盘时使其在屏幕上保持显示状态"</string>
+    <string name="show_ime_summary" msgid="8164993045923240698">"开启后，连接到实体键盘时，它会一直显示在屏幕上"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"键盘快捷键帮助程序"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"显示可用的快捷键"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"默认"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"鼠标/触控板"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"指针速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"游戏控制器"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"使用振动器"</string>
@@ -1762,7 +1761,7 @@
     <string name="display_category_title" msgid="685461049938269166">"显示"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"互动控件"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"已下载的服务"</string>
-    <string name="experimental_category_title" msgid="5272318666666893547">"实验性"</string>
+    <string name="experimental_category_title" msgid="5272318666666893547">"实验性功能"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"屏幕阅读器主要适用于盲人和视力不佳的人士"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"点按屏幕上的内容即可让系统大声朗读出来"</string>
@@ -1774,12 +1773,12 @@
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"在屏幕上放大"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"点按三次即可放大"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"点按按钮即可放大"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505">"在屏幕上快速点按屏幕三次即可"<b>"放大"</b>"。\n"<ul><li>"用双指或多指在屏幕上拖动即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性地放大"</b>"，请快速在屏幕上点按三次，并在最后一次点按时按住手指不放。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您不能在键盘和导航栏中使用放大功能。"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"要放大"</b>"，在屏幕上快速点按屏幕三次即可。\n"<ul><li>"用双指或多指在屏幕上拖动即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性地放大"</b>"，请快速在屏幕上点按三次，并在最后一次点按时按住手指不放。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您不能在键盘和导航栏中使用放大功能。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"启用放大功能后，使用屏幕底部的“无障碍”按钮可以快速放大。\n\n"<b>"要放大"</b>"，请点按“无障碍”按钮，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性地放大"</b>"，请点按“无障碍”按钮，然后触摸并按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您不能在键盘和导航栏中使用放大功能。"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"“无障碍”按钮已设为“<xliff:g id="SERVICE">%1$s</xliff:g>”。要使用放大功能，请触摸并按住“无障碍”按钮，然后选择“放大功能”。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"无障碍快捷方式"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"快捷方式服务"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"允许在锁定屏幕上使用"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"屏幕锁定时也可以用"</string>
     <string name="accessibility_shortcut_description" msgid="6488524140219209763">"启用这项快捷方式后，同时按下两个音量按钮 3 秒钟即可启动无障碍功能。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"高对比度文字"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"自动更新屏幕放大状态"</string>
@@ -1908,7 +1907,7 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"在您未使用应用时，应用可在后台运行"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"在您未使用应用时，应用的后台活动会受限"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"不允许应用在后台运行"</string>
-    <string name="device_screen_usage" msgid="3386088035570409683">"充满电后的屏幕用电量"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"上次充满电后的屏幕用电量"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"屏幕耗电量"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"移动网络扫描"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g>前"</string>
@@ -2003,11 +2002,10 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"耗电量显示的是大致用电量，并不包括所有耗电来源所消耗的电量。其他耗电量显示的是系统计算出的大致耗电量与实际观察到的耗电量之间的差异量。"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"多算了的用电量"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>毫安时"</string>
-    <!-- no translation found for battery_used_for (2690821851327075443) -->
-    <skip />
+    <string name="battery_used_for" msgid="2690821851327075443">"使用时间：<xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g>用电量占 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"整体用电量的 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"自上次充满电后的详细用量信息"</string>
+    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"自上次充满电后的用电明细"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"上次充满电"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"电池的剩余使用时间为大致数据，且可能会因使用情形而变化"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"在前台运行时"</string>
@@ -2076,7 +2074,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"语音输入与输出设置"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"语音搜索"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android键盘"</string>
-    <string name="voice_category" msgid="1430370497125803904">"语音"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"语音输入设置"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"语音输入"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"语音输入服务"</string>
@@ -2791,6 +2788,8 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"在设备锁定时，您希望个人资料通知如何显示？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"个人资料通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
+    <!-- no translation found for notification_channel_title (2260666541030178452) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"重要程度"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"让应用决定"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"一律不显示通知"</string>
@@ -2798,10 +2797,14 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"不发出提示音"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"发出提示音"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"发出提示音并在屏幕上弹出通知"</string>
-    <string name="notification_importance_min_summary" msgid="8233873580287975662">"低：不发出提示音，也不在屏幕上弹出通知"</string>
-    <string name="notification_importance_low_summary" msgid="1296192045494524565">"中：不发出提示音"</string>
-    <string name="notification_importance_default_summary" msgid="5730277944596984792">"高：发出提示音"</string>
-    <string name="notification_importance_high_summary" msgid="3248683220940159642">"紧急：发出提示音并在屏幕上弹出通知"</string>
+    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
+    <skip />
+    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
+    <skip />
+    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
+    <skip />
+    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
+    <skip />
     <string name="allow_sound" msgid="6585849855452076626">"允许发出提示音"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"不发出提示音，不振动，也不在当前屏幕上短暂显示这些通知。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知助手"</string>
@@ -2835,14 +2838,18 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"“勿扰”权限"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"没有任何已安装应用申请“勿扰”权限"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在加载应用…"</string>
+    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
+    <skip />
+    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"类别"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"其他"</string>
     <string name="no_channels" msgid="3077375508177744586">"此应用未发布任何通知"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"应用中的其他设置"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"已开启所有应用的通知"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="5668835155965827890">
-      <item quantity="other">已关闭 <xliff:g id="COUNT_1">%d</xliff:g> 个应用的通知</item>
-      <item quantity="one">已关闭 <xliff:g id="COUNT_0">%d</xliff:g> 个应用的通知</item>
+      <item quantity="other">已屏蔽 <xliff:g id="COUNT_1">%d</xliff:g> 个应用的通知</item>
+      <item quantity="one">已屏蔽 <xliff:g id="COUNT_0">%d</xliff:g> 个应用的通知</item>
     </plurals>
     <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
       <item quantity="other">已删除 <xliff:g id="COUNT_1">%d</xliff:g> 个类别</item>
@@ -3031,7 +3038,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"个人应用"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"工作应用"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"应用：全部"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"应用：已关闭"</string>
+    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"已屏蔽的应用"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"类别：重要性 - 紧急"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"类别：重要性 - 低"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"类别：已关闭"</string>
@@ -3071,7 +3078,7 @@
     <string name="default_app" msgid="6864503001385843060">"（默认）"</string>
     <string name="system_app" msgid="9068313769550747372">"（系统）"</string>
     <string name="system_default_app" msgid="3091113402349739037">"（系统默认）"</string>
-    <string name="apps_storage" msgid="4353308027210435513">"应用存储空间"</string>
+    <string name="apps_storage" msgid="4353308027210435513">"应用所占存储空间"</string>
     <string name="usage_access" msgid="5479504953931038165">"使用情况访问权限"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"允许访问使用记录"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"应用使用偏好设置"</string>
@@ -3199,12 +3206,9 @@
     <string name="write_settings_description" msgid="6868293938839954623">"此权限允许应用修改系统设置。"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"允许"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"不允许"</string>
-    <!-- no translation found for external_source_trusted (2707996266575928037) -->
-    <skip />
-    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
-    <skip />
-    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
-    <skip />
+    <string name="external_source_trusted" msgid="2707996266575928037">"允许"</string>
+    <string name="external_source_untrusted" msgid="2677442511837596726">"不允许"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"允许来自此来源的应用"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"扭转两次即可打开相机"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭转手腕两次即可打开相机应用"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按电源按钮两次即可打开相机"</string>
@@ -3229,8 +3233,8 @@
     <string name="disconnected" msgid="4836600637485526329">"未连接"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 的数据"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
-      <item quantity="other">已关闭 <xliff:g id="COUNT">%d</xliff:g> 个应用的通知</item>
-      <item quantity="one">已关闭 1 个应用的通知</item>
+      <item quantity="other">已屏蔽 <xliff:g id="COUNT">%d</xliff:g> 个应用的通知</item>
+      <item quantity="one">已屏蔽 1 个应用的通知</item>
     </plurals>
     <string name="notification_summary_none" msgid="4586376436702610">"目前设为接收所有应用的通知"</string>
     <string name="apps_summary" msgid="193158055537070092">"已安装 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
@@ -3461,7 +3465,7 @@
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>
     <string name="ambient_display_summary" msgid="2521630136233865893">"要快速查看通知，请在屏幕上点按两次。"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"拿起手机即可查看"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"触碰即主动显示"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"拿起平板电脑即可查看"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"拿起设备即可查看"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"要快速查看通知，请拿起您的手机。"</string>
@@ -3568,9 +3572,9 @@
     <string name="storage_other_apps" msgid="5524321740031718083">"其他应用"</string>
     <string name="storage_files" msgid="8581083146777364063">"文件"</string>
     <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"平板电脑存储空间"</string>
-    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"手机存储空间"</string>
+    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"手机存储空间使用情况"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
-    <string name="storage_volume_total" msgid="3499221850532701342">"使用量：<xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"（总共 <xliff:g id="TOTAL">%1$s</xliff:g>）"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"已使用"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"清除应用"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"要移除这个免安装应用吗？"</string>

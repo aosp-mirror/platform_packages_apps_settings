@@ -457,7 +457,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Изберете начин за заключване на екрана"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Няма"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
-    <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"Прекарване на пръст"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"С бързо плъзгане"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Без защита"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Фигура"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Средна защита"</string>
@@ -474,7 +474,7 @@
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Можете да отключвате телефона си посредством отпечатъка си. От съображения за сигурност трябва да зададете резервна опция за заключване на екрана."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Деакт. от админ., правила за шифроване или хранил. за идент. данни"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Няма"</string>
-    <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Прекарване на пръст"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"С бързо плъзгане"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Фигура"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"ПИН"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Парола"</string>
@@ -1687,7 +1687,6 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Помощник за клавишни комбинации"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Показване на наличните клавишни комбинации"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"По подразбиране"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"Мишка/тракпад"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Скорост на курсора"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Контролер за игри"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Използване на у-вото за вибрация"</string>
@@ -2003,8 +2002,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Данните за използването на батерията са приблизителни и не включват всеки източник, който я изтощава. Разходът на енергия за други цели представлява разликата между изчислената приблизителна стойност и действителното наблюдавано изразходване на батерията."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Отчетено в повече захранване"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мАч"</string>
-    <!-- no translation found for battery_used_for (2690821851327075443) -->
-    <skip />
+    <string name="battery_used_for" msgid="2690821851327075443">"Използвано за <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"Използван капацитет от <xliff:g id="APP">%2$s</xliff:g>: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> от общия капацитет на батерията"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Разбивка след последното пълно зареждане"</string>
@@ -2076,7 +2074,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Настройки за въвеждане и синтезиране на глас"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Гласово търсене"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Клавиатура на Android"</string>
-    <string name="voice_category" msgid="1430370497125803904">"Говор"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"Настройки за гласово въвеждане"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Гласово въвеждане"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Услуги за гласово въвеждане"</string>
@@ -2791,6 +2788,8 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Как искате да се показват известията от потребителския профил, когато устройството ви е заключено?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Известия от потр. профил"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Известия"</string>
+    <!-- no translation found for notification_channel_title (2260666541030178452) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"Важност"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Нека приложението да реши"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Без показване на известия"</string>
@@ -2798,10 +2797,14 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Без звук"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Възпроизвеждане на звук"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Възпроизвеждане на звук и показване на изскачащ прозорец на екрана"</string>
-    <string name="notification_importance_min_summary" msgid="8233873580287975662">"Малка важност: Без звук или визуално прекъсване"</string>
-    <string name="notification_importance_low_summary" msgid="1296192045494524565">"Средна важност: Без звук"</string>
-    <string name="notification_importance_default_summary" msgid="5730277944596984792">"Голяма важност: Възпроизвеждане на звук"</string>
-    <string name="notification_importance_high_summary" msgid="3248683220940159642">"Неотложна важност: Възпроизвеждане на звук и показване на известието на екрана"</string>
+    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
+    <skip />
+    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
+    <skip />
+    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
+    <skip />
+    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
+    <skip />
     <string name="allow_sound" msgid="6585849855452076626">"Разрешаване на звуковия сигнал"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Без издаване на звук, вибриране или показване на тези известия на текущия екран."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Помощник за известия"</string>
@@ -2835,6 +2838,10 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Достъп до „Не безпокойте“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Никое инсталирано приложение не е заявило достъп до „Не безпокойте“"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Приложенията се зареждат..."</string>
+    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
+    <skip />
+    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"Категории"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Други"</string>
     <string name="no_channels" msgid="3077375508177744586">"Това приложение не е публикувало известия"</string>
@@ -3199,12 +3206,9 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Това разрешение позволява на дадено приложение да променя системните настройки."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Да"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Не"</string>
-    <!-- no translation found for external_source_trusted (2707996266575928037) -->
-    <skip />
-    <!-- no translation found for external_source_untrusted (2677442511837596726) -->
-    <skip />
-    <!-- no translation found for external_source_switch_title (3621381992793251070) -->
-    <skip />
+    <string name="external_source_trusted" msgid="2707996266575928037">"Има разрешение"</string>
+    <string name="external_source_untrusted" msgid="2677442511837596726">"Няма разрешение"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"Разрешаване от този източник"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Завъртане два пъти за достъп до камерата"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Отворете приложението Камера с двукратно завъртане на китката си"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"За камерата натиснете бутона за захранване 2 пъти"</string>
@@ -3570,7 +3574,7 @@
     <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"Хранилище на таблета"</string>
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Хранилище на телефона"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
-    <string name="storage_volume_total" msgid="3499221850532701342">"Използвано от <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"използвани от <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"ползв."</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Изчистване на приложението"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Искате ли да премахнете това мигновено приложение?"</string>
