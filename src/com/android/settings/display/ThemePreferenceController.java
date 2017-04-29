@@ -18,6 +18,7 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION
 import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.RemoteException;
@@ -35,6 +36,7 @@ import com.android.settings.overlay.FeatureFactory;
 
 import libcore.util.Objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ThemePreferenceController extends PreferenceController implements
@@ -109,12 +111,22 @@ public class ThemePreferenceController extends PreferenceController implements
         return true;
     }
 
+    private boolean isChangeableOverlay(String packageName) {
+        try {
+            PackageInfo pi = mPackageManager.getPackageInfo(packageName, 0);
+            return pi != null && !pi.isStaticOverlay;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
     private String getTheme() {
         try {
             List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
                     UserHandle.myUserId());
             for (int i = 0, size = infos.size(); i < size; i++) {
-                if (infos.get(i).isEnabled()) {
+                if (infos.get(i).isEnabled() &&
+                         isChangeableOverlay(infos.get(i).packageName)) {
                     return infos.get(i).packageName;
                 }
             }
@@ -141,11 +153,13 @@ public class ThemePreferenceController extends PreferenceController implements
         try {
             List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
                     UserHandle.myUserId());
-            String[] pkgs = new String[infos.size()];
+            List<String> pkgs = new ArrayList(infos.size());
             for (int i = 0, size = infos.size(); i < size; i++) {
-                pkgs[i] = infos.get(i).packageName;
+                if (isChangeableOverlay(infos.get(i).packageName)) {
+                    pkgs.add(infos.get(i).packageName);
+                }
             }
-            return pkgs;
+            return pkgs.toArray(new String[pkgs.size()]);
         } catch (RemoteException e) {
         }
         return new String[0];
