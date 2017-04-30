@@ -25,72 +25,68 @@
             android:summary="@string/enterprise_privacy_header"
             android:selectable="false"/>
 
-    <PreferenceCategory android:title="@string/enterprise_privacy_exposure_category">
-        <com.android.settings.DividerPreference
-                android:layout_height="wrap_content"
-                android:title="@string/enterprise_privacy_enterprise_data"/>
-        <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_installed_packages"/>
-        <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_usage_stats"/>
-        <com.android.settings.DividerPreference
-                android:key="network_logs"
-                android:title="@string/enterprise_privacy_network_logs"/>
-        <com.android.settings.DividerPreference
-                android:key="bug_reports"
-                android:title="@string/enterprise_privacy_bug_reports"/>
-        <com.android.settings.DividerPreference
-                android:key="security_logs"
-                android:title="@string/enterprise_privacy_security_logs"/>
+    <PreferenceCategory android:title="@string/enterprise_privacy_exposure_category"
+                        android:contentDescription="@string/enterprise_privacy_exposure_category">
+        <Preference android:layout_height="wrap_content"
+                    android:title="@string/enterprise_privacy_enterprise_data"
+                    android:selectable="false"/>
+        <Preference android:title="@string/enterprise_privacy_installed_packages"
+                    android:selectable="false"/>
+        <Preference android:title="@string/enterprise_privacy_usage_stats"
+                    android:selectable="false"/>
+        <Preference android:key="network_logs"
+                    android:title="@string/enterprise_privacy_network_logs"
+                    android:selectable="false"/>
+        <Preference android:key="bug_reports"
+                    android:title="@string/enterprise_privacy_bug_reports"
+                    android:selectable="false"/>
+        <Preference android:key="security_logs"
+                    android:title="@string/enterprise_privacy_security_logs"
+                    android:selectable="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
-        <com.android.settings.DividerPreference
-                android:fragment="com.android.settings.enterprise.ApplicationListFragment$EnterpriseInstalledPackages"
-                android:key="number_enterprise_installed_packages"
-                android:title="@string/enterprise_privacy_enterprise_installed_packages"/>
-        <com.android.settings.DividerPreference
-                android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionLocation"
-                android:key="enterprise_privacy_number_location_access_packages"
-                android:title="@string/enterprise_privacy_location_access"/>
-        <com.android.settings.DividerPreference
-                android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionMicrophone"
-                android:key="enterprise_privacy_number_microphone_access_packages"
-                android:title="@string/enterprise_privacy_microphone_access"/>
-        <com.android.settings.DividerPreference
-                android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionCamera"
-                android:key="enterprise_privacy_number_camera_access_packages"
-                android:title="@string/enterprise_privacy_camera_access"/>
-        <com.android.settings.DividerPreference
-                android:fragment="com.android.settings.enterprise.EnterpriseSetDefaultAppsListFragment"
-                android:key="number_enterprise_set_default_apps"
-                android:title="@string/enterprise_privacy_enterprise_set_default_apps"/>
-        <com.android.settings.DividerPreference
-                android:key="always_on_vpn_primary_user"/>
-        <com.android.settings.DividerPreference
-                android:key="always_on_vpn_managed_profile"
-                android:title="@string/enterprise_privacy_always_on_vpn_work"/>
-        <com.android.settings.DividerPreference
-                android:key="input_method"
-                android:title="@string/enterprise_privacy_input_method"/>
-        <com.android.settings.DividerPreference
-                android:key="global_http_proxy"
-                android:title="@string/enterprise_privacy_global_http_proxy"/>
-        <com.android.settings.DividerPreference
-                android:key="ca_certs"
-                android:title="@string/enterprise_privacy_ca_certs"/>
+        <Preference android:fragment="com.android.settings.enterprise.ApplicationListFragment$EnterpriseInstalledPackages"
+                    android:key="number_enterprise_installed_packages"
+                    android:title="@string/enterprise_privacy_enterprise_installed_packages"/>
+        <Preference android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionLocation"
+                    android:key="enterprise_privacy_number_location_access_packages"
+                    android:title="@string/enterprise_privacy_location_access"/>
+        <Preference android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionMicrophone"
+                    android:key="enterprise_privacy_number_microphone_access_packages"
+                    android:title="@string/enterprise_privacy_microphone_access"/>
+        <Preference android:fragment="com.android.settings.enterprise.ApplicationListFragment$AdminGrantedPermissionCamera"
+                    android:key="enterprise_privacy_number_camera_access_packages"
+                    android:title="@string/enterprise_privacy_camera_access"/>
+        <Preference android:fragment="com.android.settings.enterprise.EnterpriseSetDefaultAppsListFragment"
+                    android:key="number_enterprise_set_default_apps"
+                    android:title="@string/enterprise_privacy_enterprise_set_default_apps"/>
+        <Preference android:key="always_on_vpn_primary_user"
+                    android:selectable="false"/>
+        <Preference android:key="always_on_vpn_managed_profile"
+                    android:title="@string/enterprise_privacy_always_on_vpn_work"
+                    android:selectable="false"/>
+        <Preference android:key="input_method"
+                    android:title="@string/enterprise_privacy_input_method"
+                    android:selectable="false"/>
+        <Preference android:key="global_http_proxy"
+                    android:title="@string/enterprise_privacy_global_http_proxy"
+                    android:selectable="false"/>
+        <Preference android:key="ca_certs"
+                    android:title="@string/enterprise_privacy_ca_certs"
+                    android:selectable="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">
-        <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_lock_device"/>
-        <com.android.settings.DividerPreference
-                android:title="@string/enterprise_privacy_wipe_device"/>
-        <com.android.settings.DividerPreference
-                android:key="failed_password_wipe_current_user"
-                android:title="@string/enterprise_privacy_failed_password_wipe_device"/>
-        <com.android.settings.DividerPreference
-                android:key="failed_password_wipe_managed_profile"
-                android:title="@string/enterprise_privacy_failed_password_wipe_work"/>
+        <Preference android:title="@string/enterprise_privacy_lock_device"
+                    android:selectable="false"/>
+        <Preference android:title="@string/enterprise_privacy_wipe_device"
+                    android:selectable="false"/>
+        <Preference android:key="failed_password_wipe_current_user"
+                    android:title="@string/enterprise_privacy_failed_password_wipe_device"
+                    android:selectable="false"/>
+        <Preference android:key="failed_password_wipe_managed_profile"
+                    android:title="@string/enterprise_privacy_failed_password_wipe_work"
+                    android:selectable="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

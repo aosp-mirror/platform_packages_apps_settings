@@ -16,29 +16,38 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
+import android.support.v7.preference.Preference;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAppPickerFragment.ConfirmationDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultAutofillPicker extends DefaultAppPickerFragment {
+
+    private static final String TAG = "DefaultAutofillPicker";
 
     static final String SETTING = Settings.Secure.AUTOFILL_SERVICE;
     static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
@@ -52,6 +61,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
      * Set when the fragment is implementing ACTION_REQUEST_SET_AUTOFILL_SERVICE.
      */
     public DialogInterface.OnClickListener mCancelListener;
+    private final Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +74,9 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 activity.finish();
             };
         }
+
+        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
+        update();
     }
 
     @Override
@@ -83,14 +96,86 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         return true;
     }
 
+    /**
+     * Monitor coming and going auto fill services and calls {@link #update()} when necessary
+     */
+    private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
+        @Override
+        public void onPackageAdded(String packageName, int uid) {
+            mHandler.post(() -> update());
+        }
+
+        @Override
+        public void onPackageModified(String packageName) {
+            mHandler.post(() -> update());
+        }
+
+        @Override
+        public void onPackageRemoved(String packageName, int uid) {
+            mHandler.post(() -> update());
+        }
+    };
+
+    /**
+     * Update the data in this UI.
+     */
+    private void update() {
+        updateCandidates();
+        addAddServicePreference();
+    }
+
+    @Override
+    public void onDestroy() {
+        mSettingsPackageMonitor.unregister();
+        super.onDestroy();
+    }
+
+    /**
+     * Gets the preference that allows to add a new autofill service.
+     *
+     * @return The preference or {@code null} if no service can be added
+     */
+    private Preference newAddServicePreferenceOrNull() {
+        final String searchUri = Settings.Secure.getString(getActivity().getContentResolver(),
+                Settings.Secure.AUTOFILL_SERVICE_SEARCH_URI);
+        if (TextUtils.isEmpty(searchUri)) {
+            return null;
+        }
+
+        final Intent addNewServiceIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri));
+        Preference preference = new Preference(getPrefContext());
+        preference.setTitle(R.string.print_menu_item_add_service);
+        preference.setIcon(R.drawable.ic_menu_add);
+        preference.setOrder(Integer.MAX_VALUE -1);
+        preference.setIntent(addNewServiceIntent);
+        preference.setPersistent(false);
+        return preference;
+    }
+
+    /**
+     * Add a preference that allows the user to add a service if the market link for that is
+     * configured.
+     */
+    private void addAddServicePreference() {
+        final Preference addNewServicePreference = newAddServicePreferenceOrNull();
+        if (addNewServicePreference != null) {
+            getPreferenceScreen().addPreference(addNewServicePreference);
+        }
+    }
+
     @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> resolveInfos = mPm.getPackageManager()
                 .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
-            candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
-                    info.serviceInfo.packageName, info.serviceInfo.name)));
+            final String permission = info.serviceInfo.permission;
+            // TODO(b/37563972): remove BIND_AUTOFILL once clients use BIND_AUTOFILL_SERVICE
+            if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)
+                    || Manifest.permission.BIND_AUTOFILL.equals(permission)) {
+                candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
+                        info.serviceInfo.packageName, info.serviceInfo.name)));
+            }
         }
         return candidates;
     }
@@ -157,9 +242,15 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 final String flattenKey = new ComponentName(
                         serviceInfo.packageName, serviceInfo.name).flattenToString();
                 if (TextUtils.equals(mSelectedKey, flattenKey)) {
-                    final String settingsActivity = new AutofillServiceInfo(
-                            mPackageManager, serviceInfo)
-                            .getSettingsActivity();
+                    final String settingsActivity;
+                    try {
+                        settingsActivity = new AutofillServiceInfo(mPackageManager, serviceInfo)
+                                .getSettingsActivity();
+                    } catch (SecurityException e) {
+                        // Service does not declare the proper permission, ignore it.
+                        Log.w(TAG, "Error getting info for " + serviceInfo + ": " + e);
+                        return null;
+                    }
                     if (TextUtils.isEmpty(settingsActivity)) {
                         return null;
                     }
