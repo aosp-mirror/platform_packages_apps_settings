@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.Loader;
 import android.graphics.drawable.Drawable;
@@ -29,6 +30,7 @@ import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.util.SparseArray;
+import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -44,9 +46,11 @@ import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
+import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import java.util.ArrayList;
@@ -58,9 +62,12 @@ public class StorageDashboardFragment extends DashboardFragment
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
+    private static final int VOLUME_SIZE_JOB_ID = 2;
     private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
+    private PrivateStorageInfo mStorageInfo;
+    private SparseArray<StorageAsyncLoader.AppsStorageResult> mAppsResult;
 
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
@@ -81,29 +88,6 @@ public class StorageDashboardFragment extends DashboardFragment
         }
 
         initializeOptionsMenu(activity);
-
-        final long sharedDataSize = mVolume.getPath().getTotalSpace();
-        long totalSize = sm.getPrimaryStorageSize();
-        long systemSize = totalSize - sharedDataSize;
-
-        if (totalSize <= 0) {
-            totalSize = sharedDataSize;
-            systemSize = 0;
-        }
-
-        final long usedBytes = totalSize - mVolume.getPath().getFreeSpace();
-        mSummaryController.updateBytes(usedBytes, totalSize);
-        mPreferenceController.setVolume(mVolume);
-        mPreferenceController.setUsedSize(usedBytes);
-        mPreferenceController.setTotalSize(totalSize);
-        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
-            PreferenceController controller = mSecondaryUsers.get(i);
-            if (controller instanceof SecondaryUserController) {
-                SecondaryUserController userController = (SecondaryUserController) controller;
-                userController.setTotalSize(totalSize);
-
-            }
-        }
     }
 
     @VisibleForTesting
@@ -116,10 +100,40 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
+    public void onViewCreated(View v, Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        setLoading(true, false);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
         getLoaderManager().initLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
+        getLoaderManager().initLoader(VOLUME_SIZE_JOB_ID, Bundle.EMPTY, new VolumeSizeCallbacks());
+    }
+
+    private void onReceivedSizes() {
+        if (mStorageInfo == null || mAppsResult == null) {
+            return;
+        }
+
+        long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
+        mSummaryController.updateBytes(privateUsedBytes, mStorageInfo.totalBytes);
+        mPreferenceController.setVolume(mVolume);
+        mPreferenceController.setUsedSize(privateUsedBytes);
+        mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
+        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
+            PreferenceController controller = mSecondaryUsers.get(i);
+            if (controller instanceof SecondaryUserController) {
+                SecondaryUserController userController = (SecondaryUserController) controller;
+                userController.setTotalSize(mStorageInfo.totalBytes);
+            }
+        }
+
+        mPreferenceController.onLoadFinished(mAppsResult.get(UserHandle.myUserId()));
+        updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
+        setLoading(false, true);
     }
 
     @Override
@@ -224,8 +238,8 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader,
             SparseArray<StorageAsyncLoader.AppsStorageResult> data) {
-        mPreferenceController.onLoadFinished(data.get(UserHandle.myUserId()));
-        updateSecondaryUserControllers(mSecondaryUsers, data);
+        mAppsResult = data;
+        onReceivedSizes();
     }
 
     @Override
@@ -259,5 +273,32 @@ public class StorageDashboardFragment extends DashboardFragment
 
         @Override
         public void onLoaderReset(Loader<SparseArray<Drawable>> loader) {}
+    }
+
+    public final class VolumeSizeCallbacks
+            implements LoaderManager.LoaderCallbacks<PrivateStorageInfo> {
+        @Override
+        public Loader<PrivateStorageInfo> onCreateLoader(int id, Bundle args) {
+            Context context = getContext();
+            StorageManager sm = context.getSystemService(StorageManager.class);
+            StorageManagerVolumeProvider smvp = new StorageManagerVolumeProvider(sm);
+            final StorageStatsManager stats = context.getSystemService(StorageStatsManager.class);
+            return new VolumeSizesLoader(context, smvp, stats, mVolume);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<PrivateStorageInfo> loader) {}
+
+        @Override
+        public void onLoadFinished(
+                Loader<PrivateStorageInfo> loader, PrivateStorageInfo privateStorageInfo) {
+            if (privateStorageInfo == null) {
+                getActivity().finish();
+                return;
+            }
+
+            mStorageInfo = privateStorageInfo;
+            onReceivedSizes();
+        }
     }
 }
