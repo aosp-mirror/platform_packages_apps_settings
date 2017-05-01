@@ -262,7 +262,6 @@ public class SettingsGateway {
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
-            Settings.SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
