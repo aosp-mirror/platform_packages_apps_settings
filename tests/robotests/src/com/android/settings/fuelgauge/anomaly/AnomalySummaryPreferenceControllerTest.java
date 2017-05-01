@@ -84,7 +84,7 @@ public class AnomalySummaryPreferenceControllerTest {
         mAnomalyList = new ArrayList<>();
 
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                mSettingsActivity, mFragment);
+                mSettingsActivity, mFragment, 0 /* metricskey */);
     }
 
     @Test

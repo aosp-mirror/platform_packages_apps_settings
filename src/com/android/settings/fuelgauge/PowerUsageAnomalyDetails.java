@@ -28,6 +28,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.util.IconDrawableFactory;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.PreferenceController;
@@ -92,7 +93,8 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
             AnomalyPreference anomalyPreference = (AnomalyPreference) preference;
             final Anomaly anomaly = anomalyPreference.getAnomaly();
 
-            AnomalyDialogFragment dialogFragment = AnomalyDialogFragment.newInstance(anomaly);
+            AnomalyDialogFragment dialogFragment = AnomalyDialogFragment.newInstance(anomaly,
+                    MetricsProto.MetricsEvent.FUELGAUGE_ANOMALY_DETAIL);
             dialogFragment.setTargetFragment(this, REQUEST_ANOMALY_ACTION);
             dialogFragment.show(getFragmentManager(), TAG);
 

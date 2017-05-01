@@ -42,11 +42,19 @@ public class AnomalySummaryPreferenceController {
     List<Anomaly> mAnomalies;
     private SettingsActivity mSettingsActivity;
 
+    /**
+     * Metrics key about fragment that create this controller
+     *
+     * @see com.android.internal.logging.nano.MetricsProto.MetricsEvent
+     */
+    private int mMetricsKey;
+
     public AnomalySummaryPreferenceController(SettingsActivity activity,
-            PreferenceFragment fragment) {
+            PreferenceFragment fragment, int metricsKey) {
         mFragment = fragment;
         mSettingsActivity = activity;
         mAnomalyPreference = mFragment.getPreferenceScreen().findPreference(ANOMALY_KEY);
+        mMetricsKey = metricsKey;
         hideHighUsagePreference();
     }
 
@@ -54,7 +62,8 @@ public class AnomalySummaryPreferenceController {
         if (mAnomalies != null && ANOMALY_KEY.equals(preference.getKey())) {
             if (mAnomalies.size() == 1) {
                 final Anomaly anomaly = mAnomalies.get(0);
-                AnomalyDialogFragment dialogFragment = AnomalyDialogFragment.newInstance(anomaly);
+                AnomalyDialogFragment dialogFragment = AnomalyDialogFragment.newInstance(anomaly,
+                        mMetricsKey);
                 dialogFragment.setTargetFragment(mFragment, REQUEST_ANOMALY_ACTION);
                 dialogFragment.show(mFragment.getFragmentManager(), TAG);
             } else {
