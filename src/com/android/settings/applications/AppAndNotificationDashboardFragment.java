@@ -62,6 +62,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new SpecialAppAccessPreferenceController(context));
+        controllers.add(new AppPermissionsPreferenceController(context));
         return controllers;
     }
 
