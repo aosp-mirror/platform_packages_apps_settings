@@ -130,13 +130,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int SIZE_EXTERNAL = 2;
 
     // Filter options used for displayed list of applications
-    // The order which they appear is the order they will show when spinner is present.
+    // Filters will appear sorted based on their value defined here.
     public static final int FILTER_APPS_POWER_WHITELIST = 0;
     public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
     public static final int FILTER_APPS_ALL = 2;
     public static final int FILTER_APPS_ENABLED = 3;
-    public static final int FILTER_APPS_DISABLED = 4;
-    public static final int FILTER_APPS_INSTANT = 5;
+    public static final int FILTER_APPS_INSTANT = 4;
+    public static final int FILTER_APPS_DISABLED = 5;
     public static final int FILTER_APPS_BLOCKED = 6;
     public static final int FILTER_APPS_PERSONAL = 7;
     public static final int FILTER_APPS_WORK = 8;
