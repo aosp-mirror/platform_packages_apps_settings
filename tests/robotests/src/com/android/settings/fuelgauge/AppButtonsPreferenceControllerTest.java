@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
@@ -48,7 +48,9 @@ import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,6 +63,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -186,6 +189,32 @@ public class AppButtonsPreferenceControllerTest {
 
         verify(mController).handleDisableable(any());
         verify(mUninstallButton).setEnabled(false);
+    }
+
+    @Test
+    public void testIsAvailable_nonInstantApp() throws Exception {
+        mController.mAppEntry = mAppEntry;
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                new InstantAppDataProvider() {
+                    @Override
+                    public boolean isInstantApp(ApplicationInfo info) {
+                        return false;
+                    }
+                });
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testIsAvailable_instantApp() throws Exception {
+        mController.mAppEntry = mAppEntry;
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                new InstantAppDataProvider() {
+                    @Override
+                    public boolean isInstantApp(ApplicationInfo info) {
+                        return true;
+                    }
+                });
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
