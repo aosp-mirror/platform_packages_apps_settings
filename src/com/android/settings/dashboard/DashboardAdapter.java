@@ -137,20 +137,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
             List<Tile> suggestions) {
-        // TODO: Better place for tinting?
-        final TypedArray a = mContext.obtainStyledAttributes(new int[]{
-                android.R.attr.colorControlNormal});
-        int tintColor = a.getColor(0, mContext.getColor(android.R.color.white));
-        a.recycle();
-        for (int i = 0; i < categories.size(); i++) {
-            for (int j = 0; j < categories.get(i).tiles.size(); j++) {
-                final Tile tile = categories.get(i).tiles.get(j);
+        if (mDashboardFeatureProvider.shouldTintIcon()) {
+            // TODO: Better place for tinting?
+            final TypedArray a = mContext.obtainStyledAttributes(new int[]{
+                    android.R.attr.colorControlNormal});
+            final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
+            a.recycle();
+            for (int i = 0; i < categories.size(); i++) {
+                for (int j = 0; j < categories.get(i).tiles.size(); j++) {
+                    final Tile tile = categories.get(i).tiles.get(j);
 
-                if (!mContext.getPackageName().equals(
-                        tile.intent.getComponent().getPackageName())) {
-                    // If this drawable is coming from outside Settings, tint it to match the
-                    // color.
-                    tile.icon.setTint(tintColor);
+                    if (!mContext.getPackageName().equals(
+                            tile.intent.getComponent().getPackageName())) {
+                        // If this drawable is coming from outside Settings, tint it to match the
+                        // color.
+                        tile.icon.setTint(tintColor);
+                    }
                 }
             }
         }

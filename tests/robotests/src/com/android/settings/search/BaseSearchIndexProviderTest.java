@@ -125,7 +125,7 @@ public class BaseSearchIndexProviderTest {
                 "key_user_dictionary_settings", "gesture_settings_category", "gesture_assist",
                 "gesture_swipe_down_fingerprint", "gesture_double_tap_power",
                 "gesture_double_twist", "gesture_double_tap_screen", "gesture_pick_up",
-                "pointer_settings_category", "pointer_speed", "voice_category", "tts_settings",
+                "pointer_speed", "tts_settings",
                 "game_controller_settings_category", "vibrate_input_devices");
     }
 

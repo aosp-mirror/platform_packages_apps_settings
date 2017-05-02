@@ -47,6 +47,7 @@ import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
+import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
@@ -66,6 +67,7 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.PaymentSettings;
+import com.android.settings.notification.ChannelImportanceSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
@@ -182,6 +184,9 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_accessibility);
         addIndex(AccessibilityShortcutPreferenceFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accessibility);
+        addIndex(ChannelImportanceSettings.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_notifications);
+        addIndex(DreamSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
     }
 
     private SearchIndexableResources() {

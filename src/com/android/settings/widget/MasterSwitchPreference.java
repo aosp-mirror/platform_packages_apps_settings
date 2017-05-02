@@ -83,6 +83,7 @@ public class MasterSwitchPreference extends TwoTargetPreference {
 
         mSwitch = (Switch) holder.findViewById(R.id.switchWidget);
         if (mSwitch != null) {
+            mSwitch.setContentDescription(getTitle());
             mSwitch.setChecked(mChecked);
             mSwitch.setEnabled(mEnableSwitch);
         }

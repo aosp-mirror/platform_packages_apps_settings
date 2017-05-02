@@ -31,7 +31,7 @@ public class NetworkResetPreferenceController extends PreferenceController {
 
     @Override
     public boolean isAvailable() {
-        return !mRestrictionChecker.hasRestriction();
+        return !mRestrictionChecker.hasUserRestriction();
     }
 
     @Override

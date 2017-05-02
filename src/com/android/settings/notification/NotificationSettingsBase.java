@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.widget.FooterPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -39,6 +40,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -63,6 +65,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
     protected static final String KEY_IMPORTANCE = "importance";
+    protected static final String KEY_BLOCKED_DESC = "block_desc";
 
     protected PackageManager mPm;
     protected UserManager mUm;
@@ -73,11 +76,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected int mUserId;
     protected String mPkg;
     protected PackageInfo mPkgInfo;
-    protected RestrictedSwitchPreference mBlock;
     protected RestrictedSwitchPreference mBadge;
-    protected RestrictedDropDownPreference mImportance;
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedDropDownPreference mVisibilityOverride;
+    protected FooterPreference mBlockedDesc;
 
     protected EnforcedAdmin mSuspendedAppsAdmin;
     protected boolean mDndVisualEffectsSuppressed;
@@ -323,6 +325,15 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                     }
                 });
         mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
+    }
+
+    protected void setupBlockDesc(int summaryResId) {
+        mBlockedDesc = new FooterPreference(getPrefContext());
+        mBlockedDesc.setSelectable(false);
+        mBlockedDesc.setTitle(summaryResId);
+        mBlockedDesc.setEnabled(false);
+        mBlockedDesc.setOrder(50);
+        getPreferenceScreen().addPreference(mBlockedDesc);
     }
 
 

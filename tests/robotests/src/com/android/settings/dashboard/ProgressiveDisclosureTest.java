@@ -93,6 +93,15 @@ public class ProgressiveDisclosureTest {
     }
 
     @Test
+    public void shouldNotCollapse_preferenceCountSameAsThreshold() {
+        when(mScreen.getPreferenceCount()).thenReturn(5);
+
+        mMixin.setTileLimit(5);
+
+        assertThat(mMixin.shouldCollapse(mScreen)).isFalse();
+    }
+
+    @Test
     public void shouldNotCollapse_whenStartAsExpanded() {
         when(mScreen.getPreferenceCount()).thenReturn(5);
 

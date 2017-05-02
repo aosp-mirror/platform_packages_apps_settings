@@ -18,6 +18,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/header_category_system">
 
+    <!-- Backup -->
+    <Preference
+        android:key="backup_settings"
+        android:title="@string/privacy_settings_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_settings_backup"
+        android:order="-60">
+        <intent android:action="android.settings.BACKUP_AND_RESET_SETTINGS" />
+    </Preference>
+
     <!-- System updates -->
     <Preference
         android:key="system_update_settings"
