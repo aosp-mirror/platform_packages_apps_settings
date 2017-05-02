@@ -75,9 +75,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -88,9 +90,6 @@ public class WifiDetailPreferenceControllerTest {
     private static final int LINK_SPEED = 123;
     private static final String MAC_ADDRESS = WifiInfo.DEFAULT_MAC_ADDRESS;
     private static final String SECURITY = "None";
-
-    private InetAddress mIpv4Address;
-    private Inet6Address mIpv6Address;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
@@ -124,30 +123,70 @@ public class WifiDetailPreferenceControllerTest {
 
     @Captor private ArgumentCaptor<NetworkCallback> mCallbackCaptor;
     @Captor private ArgumentCaptor<View.OnClickListener> mForgetClickListener;
+    @Captor private ArgumentCaptor<Preference> mIpv6AddressCaptor;
 
     private Context mContext = RuntimeEnvironment.application;
     private Lifecycle mLifecycle;
     private LinkProperties mLinkProperties;
     private WifiDetailPreferenceController mController;
 
+    // This class exists so that these values can be made static final. They can't be static final
+    // members of the test class, because any attempt to call IpPrefix or RouteInfo constructors
+    // during static initialization of the test class results in NoSuchMethorError being thrown
+    // when the test is run.
+    private static class Constants {
+        static final int IPV4_PREFIXLEN = 25;
+        static final LinkAddress IPV4_ADDR;
+        static final Inet4Address IPV4_GATEWAY;
+        static final RouteInfo IPV4_DEFAULT;
+        static final RouteInfo IPV4_SUBNET;
+        static final LinkAddress IPV6_LINKLOCAL;
+        static final LinkAddress IPV6_GLOBAL1;
+        static final LinkAddress IPV6_GLOBAL2;
+        static final InetAddress IPV4_DNS1;
+        static final InetAddress IPV4_DNS2;
+        static final InetAddress IPV6_DNS;
+
+        private static LinkAddress ipv6LinkAddress(String addr) throws UnknownHostException {
+            return new LinkAddress(InetAddress.getByName(addr), 64);
+        }
+
+        private static LinkAddress ipv4LinkAddress(String addr, int prefixlen)
+                throws UnknownHostException {
+            return new LinkAddress(InetAddress.getByName(addr), prefixlen);
+        }
+
+        static {
+            try {
+                // We create our test constants in these roundabout ways because the robolectric
+                // shadows don't contain NetworkUtils.parseNumericAddress and other utility methods,
+                // so the easy ways to do things fail with NoSuchMethodError.
+                IPV4_ADDR = ipv4LinkAddress("192.0.2.2", IPV4_PREFIXLEN);
+                IPV4_GATEWAY = (Inet4Address) InetAddress.getByName("192.0.2.127");
+
+                final Inet4Address any4 = (Inet4Address) InetAddress.getByName("0.0.0.0");
+                IpPrefix subnet = new IpPrefix(IPV4_ADDR.getAddress(), IPV4_PREFIXLEN);
+                IPV4_SUBNET = new RouteInfo(subnet, any4);
+                IPV4_DEFAULT = new RouteInfo(new IpPrefix(any4, 0), IPV4_GATEWAY);
+
+                IPV6_LINKLOCAL = ipv6LinkAddress("fe80::211:25ff:fef8:7cb2%1");
+                IPV6_GLOBAL1 = ipv6LinkAddress("2001:db8:1::211:25ff:fef8:7cb2");
+                IPV6_GLOBAL2 = ipv6LinkAddress("2001:db8:1::3dfe:8902:f98f:739d");
+
+                IPV4_DNS1 = InetAddress.getByName("8.8.8.8");
+                IPV4_DNS2 = InetAddress.getByName("8.8.4.4");
+                IPV6_DNS = InetAddress.getByName("2001:4860:4860::64");
+            } catch (UnknownHostException e) {
+                throw new RuntimeException("Invalid hardcoded IP addresss: " + e);
+            }
+        }
+    }
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mLifecycle = new Lifecycle();
-
-        try {
-            mIpv4Address = InetAddress.getByAddress(
-                    new byte[] { (byte) 255, (byte) 255, (byte) 255, (byte) 255 });
-            mIpv6Address = Inet6Address.getByAddress(
-                    "123", /* host */
-                    new byte[] {
-                            (byte) 0xFE, (byte) 0x80, 0, 0, 0, 0, 0, 0, 0x02, 0x11, 0x25,
-                            (byte) 0xFF, (byte) 0xFE, (byte) 0xF8, (byte) 0x7C, (byte) 0xB2},
-                    1  /*scope id */);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
 
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);
@@ -171,6 +210,8 @@ public class WifiDetailPreferenceControllerTest {
         when(mockConnectivityManager.getLinkProperties(mockNetwork)).thenReturn(mLinkProperties);
 
         when(mockFragment.getActivity()).thenReturn(mockActivity);
+
+        when(mockIpv6AddressCategory.addPreference(mIpv6AddressCaptor.capture())).thenReturn(true);
 
         setupMockedPreferenceScreen();
         mController = newWifiDetailPreferenceController();
@@ -330,26 +371,23 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void ipAddressPref_shouldHaveDetailTextSet() {
-        LinkAddress ipv4Address = new LinkAddress(mIpv4Address, 32);
-
-        mLinkProperties.addLinkAddress(ipv4Address);
+        mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
 
         mController.displayPreference(mockScreen);
 
-        verify(mockIpAddressPref).setDetailText(mIpv4Address.getHostAddress());
+        verify(mockIpAddressPref).setDetailText(Constants.IPV4_ADDR.getAddress().getHostAddress());
     }
 
     @Test
     public void gatewayAndSubnet_shouldHaveDetailTextSet() {
-        int prefixLength = 24;
-        IpPrefix subnet = new IpPrefix(mIpv4Address, prefixLength);
-        InetAddress gateway = mIpv4Address;
-        mLinkProperties.addRoute(new RouteInfo(subnet, gateway));
+        mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
+        mLinkProperties.addRoute(Constants.IPV4_DEFAULT);
+        mLinkProperties.addRoute(Constants.IPV4_SUBNET);
 
         mController.displayPreference(mockScreen);
 
-        verify(mockSubnetPref).setDetailText("255.255.255.0");
-        verify(mockGatewayPref).setDetailText(mIpv4Address.getHostAddress());
+        verify(mockSubnetPref).setDetailText("255.255.255.128");
+        verify(mockGatewayPref).setDetailText("192.0.2.127");
     }
 
     @Test
@@ -391,6 +429,95 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockSubnetPref, never()).setVisible(true);
         verify(mockGatewayPref, never()).setVisible(true);
         verify(mockDnsPref, never()).setVisible(true);
+    }
+
+    // Convenience method to convert a LinkAddress to a string without a prefix length.
+    private String asString(LinkAddress l) {
+        return l.getAddress().getHostAddress();
+    }
+
+    // Pretend that the NetworkCallback was triggered with a new copy of lp. We need to create a
+    // new copy because the code only updates if !mLinkProperties.equals(lp).
+    private void updateLinkProperties(LinkProperties lp) {
+        mCallbackCaptor.getValue().onLinkPropertiesChanged(mockNetwork, new LinkProperties(lp));
+    }
+
+    // Check that all IP information is deleted before being redrawn.
+    // TODO: switch the code to redrawing in place and remove this method.
+    private void verifyIpLayerInfoCleared(InOrder inOrder) {
+        inOrder.verify(mockIpv6AddressCategory).removeAll();
+        inOrder.verify(mockIpv6AddressCategory).setVisible(false);
+        inOrder.verify(mockIpAddressPref).setVisible(false);
+        inOrder.verify(mockSubnetPref).setVisible(false);
+        inOrder.verify(mockGatewayPref).setVisible(false);
+        inOrder.verify(mockDnsPref).setVisible(false);
+    }
+
+    private void verifyDisplayedIpv6Addresses(InOrder inOrder, LinkAddress... addresses) {
+        for (LinkAddress l: addresses) {
+            inOrder.verify(mockIpv6AddressCategory).addPreference(mIpv6AddressCaptor.capture());
+            assertThat(mIpv6AddressCaptor.getValue().getTitle()).isEqualTo(asString(l));
+        }
+        inOrder.verify(mockIpv6AddressCategory).setVisible(true);
+    }
+
+    @Test
+    public void onLinkPropertiesChanged_updatesFields() {
+        mController.displayPreference(mockScreen);
+        mController.onResume();
+
+        InOrder inOrder = inOrder(mockIpAddressPref, mockGatewayPref, mockSubnetPref,
+                mockDnsPref, mockIpv6AddressCategory);
+
+        LinkProperties lp = new LinkProperties();
+
+        lp.addLinkAddress(Constants.IPV6_LINKLOCAL);
+        updateLinkProperties(lp);
+        verifyIpLayerInfoCleared(inOrder);
+        verifyDisplayedIpv6Addresses(inOrder, Constants.IPV6_LINKLOCAL);
+
+        lp.addRoute(Constants.IPV4_DEFAULT);
+        updateLinkProperties(lp);
+        verifyIpLayerInfoCleared(inOrder);
+        inOrder.verify(mockGatewayPref).setDetailText(Constants.IPV4_GATEWAY.getHostAddress());
+        inOrder.verify(mockGatewayPref).setVisible(true);
+
+        lp.addLinkAddress(Constants.IPV4_ADDR);
+        lp.addRoute(Constants.IPV4_SUBNET);
+        updateLinkProperties(lp);
+        verifyIpLayerInfoCleared(inOrder);
+        inOrder.verify(mockIpAddressPref).setDetailText(asString(Constants.IPV4_ADDR));
+        inOrder.verify(mockIpAddressPref).setVisible(true);
+        inOrder.verify(mockSubnetPref).setDetailText("255.255.255.128");
+        inOrder.verify(mockSubnetPref).setVisible(true);
+
+        lp.addLinkAddress(Constants.IPV6_GLOBAL1);
+        lp.addLinkAddress(Constants.IPV6_GLOBAL2);
+        updateLinkProperties(lp);
+        verifyIpLayerInfoCleared(inOrder);
+        verifyDisplayedIpv6Addresses(inOrder,
+                Constants.IPV6_LINKLOCAL,
+                Constants.IPV6_GLOBAL1,
+                Constants.IPV6_GLOBAL2);
+
+        lp.removeLinkAddress(Constants.IPV6_GLOBAL1);
+        updateLinkProperties(lp);
+        verifyIpLayerInfoCleared(inOrder);
+        verifyDisplayedIpv6Addresses(inOrder,
+                Constants.IPV6_LINKLOCAL,
+                Constants.IPV6_GLOBAL2);
+
+        lp.addDnsServer(Constants.IPV6_DNS);
+        updateLinkProperties(lp);
+        inOrder.verify(mockDnsPref, never()).setVisible(true);
+
+        lp.addDnsServer(Constants.IPV4_DNS1);
+        lp.addDnsServer(Constants.IPV4_DNS2);
+        updateLinkProperties(lp);
+        inOrder.verify(mockDnsPref).setDetailText(
+                Constants.IPV4_DNS1.getHostAddress() + "," +
+                Constants.IPV4_DNS2.getHostAddress());
+        inOrder.verify(mockDnsPref).setVisible(true);
     }
 
     @Test
@@ -496,28 +623,27 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void ipv6AddressPref_shouldHaveHostAddressTextSet() {
-        LinkAddress ipv6Address = new LinkAddress(mIpv6Address, 128);
-
-        mLinkProperties.addLinkAddress(ipv6Address);
+        mLinkProperties.addLinkAddress(Constants.IPV6_LINKLOCAL);
+        mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL1);
+        mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
 
         mController.displayPreference(mockScreen);
 
-        ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(mockIpv6AddressCategory).addPreference(preferenceCaptor.capture());
-        assertThat(preferenceCaptor.getValue().getTitle()).isEqualTo(mIpv6Address.getHostAddress());
+        List <Preference> addrs = mIpv6AddressCaptor.getAllValues();
+        assertThat(addrs.size()).isEqualTo(3);
+
+        assertThat((String) addrs.get(0).getTitle()).isEqualTo(asString(Constants.IPV6_LINKLOCAL));
+        assertThat((String) addrs.get(1).getTitle()).isEqualTo(asString(Constants.IPV6_GLOBAL1));
+        assertThat((String) addrs.get(2).getTitle()).isEqualTo(asString(Constants.IPV6_GLOBAL2));
     }
 
     @Test
     public void ipv6AddressPref_shouldNotBeSelectable() {
-        LinkAddress ipv6Address = new LinkAddress(mIpv6Address, 128);
-
-        mLinkProperties.addLinkAddress(ipv6Address);
+        mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
 
         mController.displayPreference(mockScreen);
 
-        ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(mockIpv6AddressCategory).addPreference(preferenceCaptor.capture());
-        assertThat(preferenceCaptor.getValue().isSelectable()).isFalse();
+        assertThat(mockIpv6AddressCategory.isSelectable()).isFalse();
     }
 
     @Test
