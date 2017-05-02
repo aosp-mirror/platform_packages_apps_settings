@@ -279,6 +279,20 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
+    public void testShouldHideSummary_typeWifi_returnTrue() {
+        mPowerUsageData.usageType = UsageType.WIFI;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeBluetooth_returnTrue() {
+        mPowerUsageData.usageType = UsageType.BLUETOOTH;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
     public void testShouldHideSummary_typeNormal_returnFalse() {
         mPowerUsageData.usageType = UsageType.APP;
 

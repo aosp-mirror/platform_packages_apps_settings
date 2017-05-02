@@ -291,7 +291,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     boolean shouldHideSummary(PowerUsageData powerUsageData) {
         @UsageType final int usageType = powerUsageData.usageType;
 
-        return usageType == UsageType.CELL;
+        return usageType == UsageType.CELL
+                || usageType == UsageType.BLUETOOTH
+                || usageType == UsageType.WIFI;
     }
 
     @VisibleForTesting
