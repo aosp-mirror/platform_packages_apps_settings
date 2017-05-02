@@ -31,9 +31,7 @@ import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
-import android.provider.SearchIndexablesContract;
 import android.util.ArrayMap;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -62,6 +60,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -69,6 +68,7 @@ import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -903,7 +903,7 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testUpdateDataInDatabase_DisabledResultsAreIndexable_BecomeEnabled() {
+    public void testUpdateDataInDatabase_disabledResultsAreIndexable_becomeEnabled() {
         // Both results are initially disabled, and then TITLE_TWO gets enabled.
         final boolean enabled = false;
         insertSpecialCase(TITLE_ONE, enabled, KEY_ONE);
@@ -921,6 +921,18 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(2)).isEqualTo(TITLE_TWO);
     }
 
+    @Test
+    @Config(shadows = {ShadowContentResolver.class})
+    public void testEmptyNonIndexableKeys_emptyDataKeyResources_addedToDatabase() {
+        insertSpecialCase(TITLE_ONE, true /* enabled */, null /* dataReferenceKey */);
+
+        mManager.updateDatabase(false, localeStr);
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
+        cursor.moveToPosition(0);
+        assertThat(cursor.getCount()).isEqualTo(1);
+        assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
+    }
     // Util functions
 
     private SearchIndexableRaw getFakeRaw() {
@@ -986,11 +998,11 @@ public class DatabaseIndexingManagerTest {
     // TODO move this method and its counterpart in CursorToSearchResultConverterTest into
     // a util class with public fields to assert values.
     private Cursor getDummyCursor() {
-        MatrixCursor cursor = new MatrixCursor(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         final String BLANK = "";
 
         ArrayList<String> item =
-                new ArrayList<>(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS.length);
+                new ArrayList<>(INDEXABLES_RAW_COLUMNS.length);
         item.add("42"); // Rank
         item.add(TITLE_ONE); // Title
         item.add(BLANK); // Summary on
