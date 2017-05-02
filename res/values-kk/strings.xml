@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE қамтамасыз ету"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Бейне қоңырау шалу қарастырылған"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wi-Fi арқылы қоңырау шалу қарастырылған"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence қосулы"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Радиосигнал күші"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM мекенжай кітапшасын қарау"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Бекітілген теру нөмірлерін қарау"</string>
@@ -1676,7 +1675,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Қатты пернетақта параметрлері"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Енгізу үшін бос орын пернесін екі рет басу \".\""</string>
     <string name="show_password" msgid="4837897357002495384">"Құпия сөздерді көрсету"</string>
-    <string name="show_password_summary" msgid="3365397574784829969">"Таңбалар терілген кезде қысқа уақыт көрсетіледі"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"Таңбалар терілген кезде аз уақыт көрсетіледі"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Бұл орфографиялық тексеру қызметі сіз терген барлық мәтіндерді, кілтсөздер мен кредит карта нөмірі сияқты жеке ақпаратты қоса, жинауы мүмкін. Ол <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> қолданбасы арқылы жабдықталған.  Осы орфографиялық тексеру қызметі қолданылсын ба?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Параметрлер"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Тіл"</string>
@@ -1876,7 +1875,10 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> басып шығару қызметі қосулы</item>
       <item quantity="one">1 басып шығару қызметі қосулы</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> басып шығару тапсырмасы</item>
+      <item quantity="one">1 басып шығару тапсырмасы</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Басу қызметтері"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Ешқандай қызметтер орнатылмаған"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Ешқандай принтерлер табылмады"</string>
@@ -1916,7 +1918,7 @@
     <string name="device_screen_consumption" msgid="4607589286438986687">"Экран жарығына жұмсалатын заряд шығыны"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Мобильдік желіні сканерлеу"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> бұрын"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Толық зарядталғаннан кейін (<xliff:g id="TIME">^1</xliff:g> бұрын) қолданбалардың тұтынуы"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Толық зарядтан кейін (<xliff:g id="TIME">^1</xliff:g> бұрын) қолданба тұтынуы"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Толық зарядталғаннан кейін экран қосулы болған уақыт мөлшері"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Толық зарядталғаннан кейін құрылғының пайдаланылуы"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Ажыратылғаннан бері батарея қолданысы"</string>
@@ -1936,7 +1938,7 @@
     <string name="awake" msgid="387122265874485088">"Құрылғыны ояту уақыты"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi‑Fi уақытында"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi‑Fi уақытында"</string>
-    <string name="advanced_battery_title" msgid="2068039111517508622">"Батарея зарядын кеңейтілген пайдалану"</string>
+    <string name="advanced_battery_title" msgid="2068039111517508622">"Батарея зарядын пайдалану туралы"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Тарих егжей-тегжейі"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Батарея зарядының тұтынылуы"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Қолдану деректері"</string>
@@ -2010,7 +2012,7 @@
     <string name="battery_used_for" msgid="2690821851327075443">"Пайдаланылу уақыты: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> <xliff:g id="PERCENT">%1$s</xliff:g>-н пайдаланды"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Жалпы батарея зарядының <xliff:g id="PERCENT">%1$s</xliff:g>-ы"</string>
-    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Соңғы толық зарядталғаннан кейін пайдаланылғаны"</string>
+    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Толық зарядталғаннан кейін пайдаланылғаны"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Соңғы толық зарядталуы"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"Қалған батарея зарядының уақыты шамамен көрсетілген және оның тұтынылуына қарай өзгеруі мүмкін"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Белсенді пайдаланылатын кезде"</string>
@@ -2195,7 +2197,7 @@
     <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Қосылмаған"</string>
     <string name="wifi_setup_add_network" msgid="5939624680150051807">"Желі қосу"</string>
     <string name="wifi_setup_refresh_list" msgid="3411615711486911064">"Тізімді жаңалау"</string>
-    <string name="wifi_setup_skip" msgid="6661541841684895522">"Аттап өту"</string>
+    <string name="wifi_setup_skip" msgid="6661541841684895522">"Өткізіп жіберу"</string>
     <string name="wifi_setup_next" msgid="3388694784447820477">"Келесі"</string>
     <string name="wifi_setup_back" msgid="144777383739164044">"Артқа"</string>
     <string name="wifi_setup_detail" msgid="2336990478140503605">"Желі деректері"</string>
@@ -3325,8 +3327,7 @@
       <item quantity="one">Трафикті үнемдеу функциясы қосулы кезде, 1 қолданбаға деректерді шексіз пайдалануға рұқсат етілген</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Трафикті үнемдеу"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Шектелмейтін деректер"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Фондық дерек өшірілген"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Қосулы"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Өшірулі"</string>

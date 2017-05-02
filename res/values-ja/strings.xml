@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE プロビジョニング"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"ビデオ ハングアウト対応"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wi-Fi 通話対応"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB / プレゼンス プロビジョニング"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"モバイル無線電力"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM のアドレス帳を表示"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"発信番号制限を表示"</string>
@@ -1876,7 +1875,10 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 件の印刷サービスが ON です</item>
       <item quantity="one">1 件の印刷サービスが ON です</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 個の印刷ジョブ</item>
+      <item quantity="one">1 個の印刷ジョブ</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"印刷サービス"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"インストールされているサービスはありません"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"プリンタが見つかりません"</string>
@@ -2797,8 +2799,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"端末がロックされている場合、プロファイル通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"プロファイル通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
-    <!-- no translation found for notification_channel_title (2260666541030178452) -->
-    <skip />
+    <string name="notification_channel_title" msgid="2260666541030178452">"通知のカテゴリ"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要度"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"アプリに判断させる"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"通知を表示しない"</string>
@@ -2806,14 +2807,10 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"音声なし"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"音声で知らせる"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"音声とポップアップで知らせる"</string>
-    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
-    <skip />
-    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
-    <skip />
-    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
-    <skip />
-    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
-    <skip />
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"低"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"緊急"</string>
     <string name="allow_sound" msgid="6585849855452076626">"音の許可"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"音やバイブレーションで知らせず、現在の画面に通知を数秒間表示することもしません。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知アシスタント"</string>
@@ -2848,10 +2845,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"マナーモードへのアクセス"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"マナーモードへのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"アプリを読み込んでいます..."</string>
-    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
-    <skip />
-    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android により、このアプリの通知はこの端末には表示されません"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android により、この通知のカテゴリはこの端末には表示されません"</string>
     <string name="notification_channels" msgid="5346841743182627500">"カテゴリ"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"その他"</string>
     <string name="no_channels" msgid="3077375508177744586">"このアプリの通知はありません"</string>
@@ -3108,12 +3103,9 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"使用状況に関する通知"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"すべてのアプリを表示"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"余分なアプリを非表示"</string>
-    <!-- no translation found for power_high_usage_title (6027369425057347826) -->
-    <skip />
-    <!-- no translation found for power_high_usage_summary (1601789953052530021) -->
-    <skip />
-    <!-- no translation found for power_high_usage_multiple_apps_summary (4867266981228175401) -->
-    <skip />
+    <string name="power_high_usage_title" msgid="6027369425057347826">"使用が多いアイテム"</string>
+    <string name="power_high_usage_summary" msgid="1601789953052530021">"「<xliff:g id="APP">%1$s</xliff:g>」は正常に動作していません"</string>
+    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> 個のアプリが正常に動作していません"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"最適化していないアプリ"</string>
     <string name="high_power_on" msgid="6216293998227583810">"最適化していないアプリ"</string>
     <string name="high_power_off" msgid="3393904131961263278">"電池の使用を最適化"</string>
@@ -3339,8 +3331,7 @@
       <item quantity="one">データセーバーが ON のときのデータ無制限使用を 1 個のアプリに許可しました</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"データセーバー"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"データ無制限アクセス"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"バックグラウンド データは無効になっています"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"ON"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"OFF"</string>
