@@ -105,8 +105,11 @@ public class CellularDataCondition extends Condition {
         public void onReceive(Context context, Intent intent) {
             if (TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED.equals(
                     intent.getAction())) {
-                ConditionManager.get(context).getCondition(CellularDataCondition.class)
-                        .refreshState();
+                CellularDataCondition condition = ConditionManager.get(context).getCondition(
+                        CellularDataCondition.class);
+                if (condition != null) {
+                    condition.refreshState();
+                }
             }
         }
     }
