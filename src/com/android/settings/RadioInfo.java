@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.QueuedWork;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -32,6 +33,7 @@ import android.os.AsyncResult;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.CarrierConfigManager;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
@@ -130,6 +132,9 @@ public class RadioInfo extends Activity {
     private static final int IMS_WFC_PROVISIONED_CONFIG_ID =
         ImsConfig.ConfigConstants.VOICE_OVER_WIFI_SETTING_ENABLED;
 
+    private static final int EAB_PROVISIONED_CONFIG_ID =
+        ImsConfig.ConfigConstants.EAB_SETTING_ENABLED;
+
     //Values in must match mCellInfoRefreshRates
     private static final String[] mCellInfoRefreshRateLabels = {
             "Disabled",
@@ -201,6 +206,7 @@ public class RadioInfo extends Activity {
     private Switch imsVolteProvisionedSwitch;
     private Switch imsVtProvisionedSwitch;
     private Switch imsWfcProvisionedSwitch;
+    private Switch eabProvisionedSwitch;
     private Spinner preferredNetworkType;
     private Spinner cellInfoRefreshRateSpinner;
 
@@ -406,6 +412,7 @@ public class RadioInfo extends Activity {
         imsVolteProvisionedSwitch = (Switch) findViewById(R.id.volte_provisioned_switch);
         imsVtProvisionedSwitch = (Switch) findViewById(R.id.vt_provisioned_switch);
         imsWfcProvisionedSwitch = (Switch) findViewById(R.id.wfc_provisioned_switch);
+        eabProvisionedSwitch = (Switch) findViewById(R.id.eab_provisioned_switch);
 
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 
@@ -478,6 +485,7 @@ public class RadioInfo extends Activity {
         imsVolteProvisionedSwitch.setOnCheckedChangeListener(mImsVolteCheckedChangeListener);
         imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
+        eabProvisionedSwitch.setOnCheckedChangeListener(mEabCheckedChangeListener);
 
         mTelephonyManager.listen(mPhoneStateListener,
                   PhoneStateListener.LISTEN_CALL_STATE
@@ -1170,6 +1178,11 @@ public class RadioInfo extends Activity {
         setImsConfigProvisionedState(IMS_WFC_PROVISIONED_CONFIG_ID, state);
     }
 
+    void setEabProvisionedState(boolean state) {
+        Log.d(TAG, "setEabProvisioned() state: " + ((state)? "on":"off"));
+        setImsConfigProvisionedState(EAB_PROVISIONED_CONFIG_ID, state);
+    }
+
     void setImsConfigProvisionedState(int configItem, boolean state) {
         if (phone != null && mImsManager != null) {
             QueuedWork.queue(new Runnable() {
@@ -1239,6 +1252,48 @@ public class RadioInfo extends Activity {
         }
     };
 
+    private boolean isEabProvisioned() {
+        return isFeatureProvisioned(EAB_PROVISIONED_CONFIG_ID, false);
+    }
+
+    OnCheckedChangeListener mEabCheckedChangeListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setEabProvisionedState(isChecked);
+        }
+    };
+
+    private boolean isFeatureProvisioned(int featureId, boolean defaultValue) {
+        boolean provisioned = defaultValue;
+        if (mImsManager != null) {
+            try {
+                ImsConfig imsConfig = mImsManager.getConfigInterface();
+                if (imsConfig != null) {
+                    provisioned =
+                            (imsConfig.getProvisionedValue(featureId)
+                                    == ImsConfig.FeatureValueConstants.ON);
+                }
+            } catch (ImsException ex) {
+                Log.e(TAG, "isFeatureProvisioned() exception:", ex);
+            }
+        }
+
+        log("isFeatureProvisioned() featureId=" + featureId + " provisioned=" + provisioned);
+        return provisioned;
+    }
+
+    private static boolean isEabEnabledByPlatform(Context context) {
+        if (context != null) {
+            CarrierConfigManager configManager = (CarrierConfigManager)
+                    context.getSystemService(Context.CARRIER_CONFIG_SERVICE);
+            if (configManager != null && configManager.getConfig().getBoolean(
+                        CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void updateImsProvisionedState() {
         log("updateImsProvisionedState isImsVolteProvisioned()=" + isImsVolteProvisioned());
         //delightful hack to prevent on-checked-changed calls from
@@ -1260,6 +1315,11 @@ public class RadioInfo extends Activity {
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
         imsWfcProvisionedSwitch.setEnabled(
             mImsManager.isWfcEnabledByPlatform(phone.getContext()));
+
+        eabProvisionedSwitch.setOnCheckedChangeListener(null);
+        eabProvisionedSwitch.setChecked(isEabProvisioned());
+        eabProvisionedSwitch.setOnCheckedChangeListener(mEabCheckedChangeListener);
+        eabProvisionedSwitch.setEnabled(isEabEnabledByPlatform(phone.getContext()));
     }
 
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {

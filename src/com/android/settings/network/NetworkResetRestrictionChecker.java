@@ -45,9 +45,13 @@ public class NetworkResetRestrictionChecker {
                 mContext, UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId()) != null;
     }
 
-    boolean hasRestriction() {
+    boolean hasUserRestriction() {
         return !mUserManager.isAdminUser()
-                || hasUserBaseRestriction()
+                || hasUserBaseRestriction();
+    }
+
+    boolean hasRestriction() {
+        return hasUserRestriction()
                 || isRestrictionEnforcedByAdmin();
     }
 }

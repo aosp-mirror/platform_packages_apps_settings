@@ -17,9 +17,11 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.Loader;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Build;
@@ -59,6 +61,10 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
+import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
+import com.android.settings.fuelgauge.anomaly.AnomalyPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.FooterPreferenceMixin;
@@ -74,7 +80,8 @@ import java.util.List;
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
  * consumed since the last time it was unplugged.
  */
-public class PowerUsageSummary extends PowerUsageBase {
+public class PowerUsageSummary extends PowerUsageBase implements
+        AnomalyDialogFragment.AnomalyDialogListener {
 
     static final String TAG = "PowerUsageSummary";
 
@@ -84,6 +91,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final String KEY_BATTERY_HEADER = "battery_header";
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
+    private static final int ANOMALY_LOADER = 1;
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
@@ -117,7 +125,28 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
+    private AnomalyPreferenceController mAnomalyPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
+
+    private LoaderManager.LoaderCallbacks<List<Anomaly>> mAnomalyLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<List<Anomaly>>() {
+
+                @Override
+                public Loader<List<Anomaly>> onCreateLoader(int id, Bundle args) {
+                    return new AnomalyLoader(getContext(), mStatsHelper);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
+                    // show high usage preference if possible
+                    mAnomalyPreferenceController.updateAnomalyPreference(data);
+                }
+
+                @Override
+                public void onLoaderReset(Loader<List<Anomaly>> loader) {
+
+                }
+            };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -130,6 +159,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         mLastFullChargePref = (PowerGaugePreference) findPreference(
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
+        mAnomalyPreferenceController = new AnomalyPreferenceController(this);
 
         mBatteryUtils = BatteryUtils.getInstance(getContext());
 
@@ -163,6 +193,9 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (mAnomalyPreferenceController.onPreferenceTreeClick(preference)) {
+            return true;
+        }
         if (KEY_BATTERY_HEADER.equals(preference.getKey())) {
             performBatteryHeaderClick();
             return true;
@@ -402,6 +435,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         if (context == null) {
             return;
         }
+
+        getLoaderManager().initLoader(ANOMALY_LOADER, null, mAnomalyLoaderCallbacks);
 
         cacheRemoveAllPrefs(mAppListGroup);
         mAppListGroup.setOrderingAsAdded(false);
@@ -689,6 +724,11 @@ public class PowerUsageSummary extends PowerUsageBase {
             super.handleMessage(msg);
         }
     };
+
+    @Override
+    public void onAnomalyHandled(Anomaly anomaly) {
+        mAnomalyPreferenceController.hideAnomalyPreference();
+    }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
         private final Context mContext;

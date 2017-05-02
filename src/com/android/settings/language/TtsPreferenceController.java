@@ -18,14 +18,11 @@ package com.android.settings.language;
 
 import android.content.Context;
 import android.speech.tts.TtsEngines;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 
 public class TtsPreferenceController extends PreferenceController {
 
-    private static final String KEY_VOICE_CATEGORY = "voice_category";
     private static final String KEY_TTS_SETTINGS = "tts_settings";
 
     private final TtsEngines mTtsEngines;
@@ -38,14 +35,6 @@ public class TtsPreferenceController extends PreferenceController {
     @Override
     public boolean isAvailable() {
         return !mTtsEngines.getEngines().isEmpty();
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        if (!isAvailable()) {
-            removePreference(screen, KEY_VOICE_CATEGORY);
-        }
     }
 
     @Override

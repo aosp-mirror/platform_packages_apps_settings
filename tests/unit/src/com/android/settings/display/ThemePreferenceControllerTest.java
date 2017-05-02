@@ -16,11 +16,10 @@
 
 package com.android.settings.display;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.content.ContextWrapper;
 import android.content.om.OverlayInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
@@ -58,7 +58,7 @@ public class ThemePreferenceControllerTest {
     public void setup() {
         mMockOverlayManager = mock(OverlayManager.class);
         mMockPackageManager = mock(PackageManager.class);
-        mContext = new ContextWrapper(InstrumentationRegistry.getContext()) {
+        mContext = new ContextWrapper(InstrumentationRegistry.getTargetContext()) {
             @Override
             public PackageManager getPackageManager() {
                 return mMockPackageManager;
@@ -82,6 +82,8 @@ public class ThemePreferenceControllerTest {
             }
             return info;
         });
+        when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                new PackageInfo());
         when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt())).thenReturn(
                 list(info1, info2));
         ListPreference pref = mock(ListPreference.class);
@@ -91,31 +93,71 @@ public class ThemePreferenceControllerTest {
 
 
         CharSequence[] entries = arg.getValue();
-        assertEquals(2, entries.length);
-        assertEquals("Theme1", entries[0]);
-        assertEquals("Theme2", entries[1]);
+        assertThat(entries).asList().containsExactly("Theme1", "Theme2");
 
         verify(pref).setEntryValues(arg.capture());
         CharSequence[] entryValues = arg.getValue();
-        assertEquals("com.android.Theme1", entryValues[0]);
-        assertEquals("com.android.Theme2", entryValues[1]);
+        assertThat(entryValues).asList().containsExactly(
+                "com.android.Theme1", "com.android.Theme2");
 
         verify(pref).setValue(eq("com.android.Theme1"));
     }
 
     @Test
+    public void testUpdateState_withStaticOverlay() throws Exception {
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+                "", OverlayInfo.STATE_ENABLED, 0);
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+                "", OverlayInfo.STATE_ENABLED, 0);
+        when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
+            ApplicationInfo info = mock(ApplicationInfo.class);
+            if ("com.android.Theme1".equals(inv.getArguments()[0])) {
+                when(info.loadLabel(any())).thenReturn("Theme1");
+            } else {
+                when(info.loadLabel(any())).thenReturn("Theme2");
+            }
+            return info;
+        });
+        PackageInfo pi = new PackageInfo();
+        pi.isStaticOverlay = true;
+        when(mMockPackageManager.getPackageInfo(eq("com.android.Theme1"), anyInt())).thenReturn(pi);
+        when(mMockPackageManager.getPackageInfo(eq("com.android.Theme2"), anyInt())).thenReturn(
+                new PackageInfo());
+        when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt())).thenReturn(
+                list(info1, info2));
+        ListPreference pref = mock(ListPreference.class);
+        mPreferenceController.updateState(pref);
+        ArgumentCaptor<String[]> arg = ArgumentCaptor.forClass(String[].class);
+        verify(pref).setEntries(arg.capture());
+
+
+        CharSequence[] entries = arg.getValue();
+        assertThat(entries).asList().containsExactly("Theme2");
+
+        verify(pref).setEntryValues(arg.capture());
+        CharSequence[] entryValues = arg.getValue();
+        assertThat(entryValues).asList().containsExactly("com.android.Theme2");
+
+        verify(pref).setValue(eq("com.android.Theme2"));
+    }
+
+    @Test
     public void testAvailable_false() throws Exception {
+        when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                new PackageInfo());
         when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
                 .thenReturn(list(new OverlayInfo("", "", "", 0, 0)));
-        assertFalse(mPreferenceController.isAvailable());
+        assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
     @Test
     public void testAvailable_true() throws Exception {
+        when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
+                 new PackageInfo());
         when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
                 .thenReturn(list(new OverlayInfo("", "", "", 0, 0),
                         new OverlayInfo("", "", "", 0, 0)));
-        assertTrue(mPreferenceController.isAvailable());
+        assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
     private ArrayList<OverlayInfo> list(OverlayInfo... infos) {

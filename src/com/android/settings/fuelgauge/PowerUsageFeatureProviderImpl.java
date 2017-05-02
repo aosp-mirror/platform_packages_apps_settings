@@ -84,4 +84,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean isPowerAccountingToggleEnabled() {
         return false;
     }
+
+    @Override
+    public boolean isAnomalyDetectionEnabled() {
+        return false;
+    }
 }

@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -377,5 +378,14 @@ public final class InstalledAppDetailsTest {
         // Will be 1 still due to above call
         verify(mockPreferenceScreen, times(1))
                 .removePreference(mockAppDomainsPref);
+    }
+
+    @Test
+    public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
+        doReturn(true).when(mAppDetail).refreshUi();
+
+        mAppDetail.onActivityResult(InstalledAppDetails.REQUEST_UNINSTALL, 0, mock(Intent.class));
+
+        verify(mActivity).invalidateOptionsMenu();
     }
 }

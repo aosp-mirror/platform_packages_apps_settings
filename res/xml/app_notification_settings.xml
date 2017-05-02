@@ -18,13 +18,6 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/app_notifications_title"
         android:key="app_notification_settings">
-    <!-- Block -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="block"
-        android:title="@string/app_notification_block_title"
-        android:summary="@string/app_notification_block_summary"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
     <!-- Show badge -->
     <com.android.settingslib.RestrictedSwitchPreference

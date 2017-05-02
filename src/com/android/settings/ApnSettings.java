@@ -184,7 +184,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
         if (mUnavailable) {
-            addPreferencesFromResource(R.xml.empty_settings);
+            addPreferencesFromResource(R.xml.placeholder_prefs);
             return;
         }
 

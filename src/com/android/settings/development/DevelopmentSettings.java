@@ -331,12 +331,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private SwitchPreference mColorTemperaturePreference;
 
-    private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
+    private final ArrayList<Preference> mAllPrefs = new ArrayList<>();
 
-    private final ArrayList<SwitchPreference> mResetSwitchPrefs
-            = new ArrayList<SwitchPreference>();
+    private final ArrayList<SwitchPreference> mResetSwitchPrefs = new ArrayList<>();
 
-    private final HashSet<Preference> mDisabledPrefs = new HashSet<Preference>();
+    private final HashSet<Preference> mDisabledPrefs = new HashSet<>();
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
     private Dialog mEnableDialog;
@@ -396,7 +395,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             // Block access to developer options if the user is not the owner, if user policy
             // restricts it, or if the device has not been provisioned
             mUnavailable = true;
-            addPreferencesFromResource(R.xml.empty_settings);
+            addPreferencesFromResource(R.xml.placeholder_prefs);
             return;
         }
 
@@ -2723,7 +2722,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
-                private boolean isShowingDeveloperOptions(Context context) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
                     return context.getSharedPreferences(DevelopmentSettings.PREF_FILE,
                             Context.MODE_PRIVATE).getBoolean(
                             DevelopmentSettings.PREF_SHOW,
@@ -2734,10 +2734,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
 
-                    if (!isShowingDeveloperOptions(context)) {
-                        return null;
-                    }
-
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.development_prefs;
                     return Arrays.asList(sir);
@@ -2745,11 +2741,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    if (!isShowingDeveloperOptions(context)) {
-                        return null;
-                    }
+                    final List<String> keys = super.getNonIndexableKeys(context);
 
-                    final List<String> keys = new ArrayList<String>();
                     if (!showEnableOemUnlockPreference(context)) {
                         keys.add(ENABLE_OEM_UNLOCK);
                     }

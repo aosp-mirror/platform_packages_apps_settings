@@ -71,6 +71,9 @@
     <!-- Wifi Calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="wfc_provisioned_switch_string">Wifi Calling Provisioned</string>
 
+    <!-- EAB provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
+    <string name="eab_provisioned_switch_string">EAB/Presence Provisioned</string>
+
     <!-- Title for controlling on/off for Mobile phone's radio power. Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="radio_info_radio_power">Mobile Radio Power</string>
 
@@ -3937,8 +3940,6 @@
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
 
-    <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to mouse and trackpad devices. [CHAR LIMIT=40] -->
-    <string name="pointer_settings_category">Mouse/trackpad</string>
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
 
@@ -4370,6 +4371,12 @@
     <plurals name="print_settings_summary">
         <item quantity="one">1 print service on</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print services on</item>
+    </plurals>
+
+    <!-- Print setting summary in settings screenm indicating how many print jobs are active [CHAR LIMIT=None] -->
+    <plurals name="print_jobs_summary">
+        <item quantity="one">1 print job</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> print jobs</item>
     </plurals>
 
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
@@ -4849,8 +4856,6 @@
     <string name="voice_search_settings_title">Voice search</string>
     <!-- Title of keyboard settings list item within voice input/output settings -->
     <string name="keyboard_settings_title">Android keyboard</string>
-    <!-- Title for the 'voice input' category of voice input/output settings -->
-    <string name="voice_category">Speech</string>
 
     <!-- Voice input settings --><skip />
     <!-- [CHAR_LIMIT=NONE] Name of the settings item to open the voice input settings. -->
@@ -6566,7 +6571,10 @@
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
     <string name="app_notifications_title">Notifications</string>
 
-    <!-- [CHAR LIMIT=100] Notification importance slider title -->
+    <!-- [CHAR LIMIT=100] Notification channel title -->
+    <string name="notification_channel_title">Notification category</string>
+
+    <!-- [CHAR LIMIT=100] Notification importance screen title -->
     <string name="notification_importance_title">Importance</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance: unspecified importance level description -->
@@ -6587,17 +6595,17 @@
     <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: min importance level description -->
-    <string name="notification_importance_min_summary">Low: No sound or visual interruption</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
+    <string name="notification_importance_min_title">Low</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: low importance level description -->
-    <string name="notification_importance_low_summary">Medium: No sound</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level title -->
+    <string name="notification_importance_low_title">Medium</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: normal importance level description -->
-    <string name="notification_importance_default_summary">High: Make sound</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level title -->
+    <string name="notification_importance_default_title">High</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: high importance level description -->
-    <string name="notification_importance_high_summary">Urgent: Make sound and pop on screen</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
+    <string name="notification_importance_high_title">Urgent</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title -->
     <string name="allow_sound">Allow Sound</string>
@@ -6705,6 +6713,12 @@
 
     <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
     <string name="loading_notification_apps">Loading apps...</string>
+
+    <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
+    <string name="app_notifications_off_desc">Android is blocking this app\'s notifications from appearing on this device</string>
+
+    <!-- [CHAR LIMIT=NONE] Text appearing when channel notifications are off -->
+    <string name="channel_notifications_off_desc">Android is blocking this category of notifications from appearing on this device</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
     <string name="notification_channels">Categories</string>
@@ -8013,7 +8027,7 @@
     <string name="data_saver_title">Data saver</string>
 
     <!-- Button that leads to list of apps with unrestricted data access [CHAR LIMIT=60] -->
-    <string name="unrestricted_data_saver">Unrestricted data access</string>
+    <string name="unrestricted_data_saver">Unrestricted data</string>
 
     <!-- Description of message shown when app is blacklisted for background data access [CHAR LIMIT=NONE] -->
     <string name="restrict_background_blacklisted">Background data is turned off</string>
@@ -8702,5 +8716,6 @@
     <!-- Trigger Carrier Provisioning [CHAR LIMIT=NONE] -->
     <string name="trigger_carrier_provisioning">Trigger Carrier Provisioning</string>
 
-
+    <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
+    <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
 </resources>

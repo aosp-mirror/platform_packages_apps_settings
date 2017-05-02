@@ -403,12 +403,13 @@ public class WifiConfigController implements TextWatcher,
                 && ((mAccessPointSecurity == AccessPoint.SECURITY_WEP
                         && mPasswordView.length() == 0)
                     || (mAccessPointSecurity == AccessPoint.SECURITY_PSK
-                           && mPasswordView.length() < 8))) {
+                           && (mPasswordView.length() < 8 || mPasswordView.length() > 63)))) {
             passwordInvalid = true;
         }
-
         if ((mSsidView != null && mSsidView.length() == 0)
-                || ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid)) {
+                || ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid
+                // If AccessPoint is saved (we're modifying it), allow zero length (unchanged) pw
+                || mAccessPoint.isSaved() && passwordInvalid && mPasswordView.length() > 0)) {
             enabled = false;
         } else {
             enabled = ipAndProxyFieldsAreValid();

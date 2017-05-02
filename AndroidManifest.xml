@@ -2934,8 +2934,6 @@
             <intent-filter android:priority="60">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2952,6 +2950,11 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
+        </activity>
+
+        <activity android:name="Settings$LegacySupportActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+            android:value="com.android.settings.dashboard.SupportFragment"/>
         </activity>
 
         <!-- Information architecture host activities -->
@@ -3003,17 +3006,16 @@
                        android:resource="@string/system_dashboard_summary"/>
         </activity>
 
-        <activity android:name=".Settings$SupportDashboardActivity"
+        <activity android:name=".dashboard.SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
                   android:icon="@drawable/ic_help"
+                  android:theme="@android:style/Theme.NoDisplay"
                   android:enabled="@bool/config_support_enabled">
             <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.dashboard.SupportFragment"/>
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/support_summary"/>
         </activity>
