@@ -34,7 +34,7 @@ public class LegacyVpnPreference extends ManageablePreference {
 
     LegacyVpnPreference(Context context) {
         super(context, null /* attrs */);
-        setIcon(R.drawable.ic_settings_24dp);
+        setIcon(R.drawable.ic_vpn_key);
     }
 
     public VpnProfile getProfile() {
