@@ -38,6 +38,7 @@ import android.os.Handler;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.support.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -54,7 +55,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -348,9 +348,7 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        if (!userManager.isSplitSystemUser()) {
+        if (!isSplitSystemUser()) {
             mSharedCheckBox.setVisibility(View.GONE);
         }
 
@@ -358,6 +356,13 @@ public class WifiConfigController implements TextWatcher,
         if (mConfigUi.getSubmitButton() != null) {
             enableSubmitIfAppropriate();
         }
+    }
+
+    @VisibleForTesting
+    boolean isSplitSystemUser() {
+        final UserManager userManager =
+                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        return userManager.isSplitSystemUser();
     }
 
     private void addRow(ViewGroup group, int name, String value) {
@@ -407,9 +412,12 @@ public class WifiConfigController implements TextWatcher,
             passwordInvalid = true;
         }
         if ((mSsidView != null && mSsidView.length() == 0)
+                // If Accesspoint is not saved, apply passwordInvalid check
                 || ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid
-                // If AccessPoint is saved (we're modifying it), allow zero length (unchanged) pw
-                || mAccessPoint.isSaved() && passwordInvalid && mPasswordView.length() > 0)) {
+                // If AccessPoint is saved (modifying network) and password is changed, apply
+                // Invalid password check
+                || mAccessPoint != null && mAccessPoint.isSaved() && passwordInvalid
+                    && mPasswordView.length() > 0)) {
             enabled = false;
         } else {
             enabled = ipAndProxyFieldsAreValid();
