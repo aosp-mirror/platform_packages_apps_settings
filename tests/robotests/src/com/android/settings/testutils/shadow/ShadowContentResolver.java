@@ -19,8 +19,14 @@ package com.android.settings.testutils.shadow;
 import android.content.ContentResolver;
 import android.content.SyncAdapterType;
 
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.net.Uri;
+import android.provider.SearchIndexablesContract;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 
 @Implements(ContentResolver.class)
 public class ShadowContentResolver {
@@ -28,5 +34,14 @@ public class ShadowContentResolver {
     @Implementation
     public static SyncAdapterType[] getSyncAdapterTypesAsUser(int userId) {
         return new SyncAdapterType[0];
+    }
+
+    @Implementation
+    public final Cursor query(Uri uri, String[] projection, String selection,
+            String[] selectionArgs, String sortOrder) {
+        MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
+        MatrixCursor.RowBuilder builder = cursor.newRow()
+                .add(SearchIndexablesContract.NonIndexableKey.COLUMN_KEY_VALUE, "");
+        return cursor;
     }
 }
