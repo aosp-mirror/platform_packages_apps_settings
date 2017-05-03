@@ -16,9 +16,6 @@
 
 package com.android.settings.core.codeinspection;
 
-import com.google.common.truth.Truth;
-
-import org.junit.Assert;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.io.BufferedReader;
@@ -56,7 +53,7 @@ public abstract class CodeInspector {
         }
         final String packageName = clazz.getPackage().getName();
         // Classes that are not in Settings
-        if (!packageName.contains(PACKAGE_NAME + ".")) {
+        if (!packageName.contains(PACKAGE_NAME + ".") && !packageName.endsWith(PACKAGE_NAME)) {
             return false;
         }
         final String className = clazz.getName();
