@@ -71,6 +71,14 @@ public class XmlParserUtils {
         return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_keywords);
     }
 
+    public static int getDataIcon(Context context, AttributeSet attrs) {
+        final TypedArray ta = context.obtainStyledAttributes(attrs,
+                com.android.internal.R.styleable.Preference);
+        final int dataIcon = ta.getResourceId(com.android.internal.R.styleable.Icon_icon, 0);
+        ta.recycle();
+        return dataIcon;
+    }
+
     /**
      * Returns the fragment name if this preference launches a child fragment.
      */
@@ -80,17 +88,9 @@ public class XmlParserUtils {
     }
 
     private static String getData(Context context, AttributeSet set, int[] attrs, int resId) {
-        final TypedArray sa = context.obtainStyledAttributes(set, attrs);
-        final TypedValue tv = sa.peekValue(resId);
-
-        CharSequence data = null;
-        if (tv != null && tv.type == TypedValue.TYPE_STRING) {
-            if (tv.resourceId != 0) {
-                data = context.getText(tv.resourceId);
-            } else {
-                data = tv.string;
-            }
-        }
+        final TypedArray ta = context.obtainStyledAttributes(set, attrs);
+        String data = ta.getString(resId);
+        ta.recycle();
         return (data != null) ? data.toString() : null;
     }
 

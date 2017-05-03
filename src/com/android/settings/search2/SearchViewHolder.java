@@ -69,11 +69,9 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
             AppSearchResult appResult = (AppSearchResult) result;
             PackageManager pm = fragment.getActivity().getPackageManager();
             iconView.setImageDrawable(appResult.info.loadIcon(pm));
-        } else if (result.icon != null) {
-            iconView.setImageDrawable(result.icon);
-            // TODO set color of icon
         } else {
-            iconView.setBackgroundResource(R.drawable.empty_icon);
+            // Valid even when result.icon is null.
+            iconView.setImageDrawable(result.icon);
         }
 
         bindBreadcrumbView(result);
