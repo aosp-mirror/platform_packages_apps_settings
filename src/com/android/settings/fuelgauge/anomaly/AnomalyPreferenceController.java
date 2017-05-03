@@ -20,6 +20,8 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
+
 import java.util.List;
 
 /**
@@ -66,8 +68,10 @@ public class AnomalyPreferenceController {
     public void updateAnomalyPreference(List<Anomaly> anomalies) {
         mAnomalies = anomalies;
 
-        mAnomalyPreference.setVisible(true);
-        //TODO(b/36924669): update summary for anomaly preference
+        if (!mAnomalies.isEmpty()) {
+            mAnomalyPreference.setVisible(true);
+            //TODO(b/36924669): update summary for anomaly preference
+        }
     }
 
     public void hideAnomalyPreference() {
