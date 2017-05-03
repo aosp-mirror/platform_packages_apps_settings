@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -108,7 +109,12 @@ public class UserProfileControllerTest {
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
         StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
-        userResult.externalStats = new StorageStatsSource.ExternalStorageStats(99, 33, 33, 33);
+        userResult.externalStats =
+                new StorageStatsSource.ExternalStorageStats(
+                        99 * MEGABYTE_IN_BYTES,
+                        33 * MEGABYTE_IN_BYTES,
+                        33 * MEGABYTE_IN_BYTES,
+                        33 * MEGABYTE_IN_BYTES);
         result.put(10, userResult);
 
         mController.handleResult(result);
@@ -116,7 +122,7 @@ public class UserProfileControllerTest {
         verify(mScreen).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("99.00B");
+        assertThat(preference.getSummary()).isEqualTo("0.10GB");
     }
 
     @Test
