@@ -15,8 +15,10 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.Process;
 import android.text.TextUtils;
@@ -142,6 +144,8 @@ public class PowerUsageSummaryTest {
     private PowerManager mPowerManager;
     @Mock
     private SettingsActivity mSettingsActivity;
+    @Mock
+    private LoaderManager mLoaderManager;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -485,6 +489,18 @@ public class PowerUsageSummaryTest {
         assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
     }
 
+
+    @Test
+    public void testInitAnomalyDetectionIfPossible_detectionEnabled_init() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isAnomalyDetectionEnabled()).thenReturn(
+                true);
+        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+
+        mFragment.initAnomalyDetectionIfPossible();
+
+        verify(mLoaderManager).initLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
+                any());
+    }
 
     public static class TestFragment extends PowerUsageSummary {
 
