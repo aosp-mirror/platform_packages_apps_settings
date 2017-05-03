@@ -81,6 +81,7 @@ public class StorageItemPreferenceController extends PreferenceController {
     private long mUsedBytes;
     private long mTotalSize;
 
+    private PreferenceScreen mScreen;
     private StorageItemPreference mPhotoPreference;
     private StorageItemPreference mAudioPreference;
     private StorageItemPreference mGamePreference;
@@ -169,6 +170,22 @@ public class StorageItemPreferenceController extends PreferenceController {
      */
     public void setVolume(VolumeInfo volume) {
         mVolume = volume;
+        setFilesPreferenceVisibility();
+    }
+
+    private void setFilesPreferenceVisibility() {
+        if (mScreen != null) {
+            final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
+            // If we don't have a shared volume for our internal storage (or the shared volume isn't
+            // mounted as readable for whatever reason), we should hide the File preference.
+            final boolean hideFilePreference =
+                    (sharedVolume == null) || !sharedVolume.isMountedReadable();
+            if (hideFilePreference) {
+                mScreen.removePreference(mFilePreference);
+            } else {
+                mScreen.addPreference(mFilePreference);
+            }
+        }
     }
 
     /**
@@ -207,6 +224,7 @@ public class StorageItemPreferenceController extends PreferenceController {
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        mScreen = screen;
         mPhotoPreference = (StorageItemPreference) screen.findPreference(PHOTO_KEY);
         mAudioPreference = (StorageItemPreference) screen.findPreference(AUDIO_KEY);
         mGamePreference = (StorageItemPreference) screen.findPreference(GAME_KEY);
@@ -215,14 +233,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
         mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
 
-        final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
-        // If we don't have a shared volume for our internal storage (or the shared volume isn't
-        // mounted as readable for whatever reason), we should hide the File preference.
-        final boolean hideFilePreference =
-                (sharedVolume == null) || !sharedVolume.isMountedReadable();
-        if (hideFilePreference) {
-            screen.removePreference(mFilePreference);
-        }
+        setFilesPreferenceVisibility();
     }
 
     public void onLoadFinished(StorageAsyncLoader.AppsStorageResult data) {
