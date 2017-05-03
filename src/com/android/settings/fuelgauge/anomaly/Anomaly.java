@@ -51,7 +51,6 @@ public class Anomaly implements Parcelable {
     public final int type;
     public final int uid;
     public final long wakelockTimeMs;
-
     /**
      * Display name of this anomaly, usually it is the app name
      */
@@ -98,7 +97,6 @@ public class Anomaly implements Parcelable {
         }
 
         Anomaly other = (Anomaly) obj;
-
         return type == other.type
                 && uid == other.uid
                 && wakelockTimeMs == other.wakelockTimeMs
