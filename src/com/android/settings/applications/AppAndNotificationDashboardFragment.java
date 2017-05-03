@@ -16,6 +16,9 @@
 
 package com.android.settings.applications;
 
+import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -56,13 +59,22 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        final Activity activity = getActivity();
+        final Application app;
+        if (activity != null) {
+            app = activity.getApplication();
+        } else {
+            app = null;
+        }
+        return buildPreferenceControllers(context, app, this);
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context) {
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            Application app, Fragment host) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new SpecialAppAccessPreferenceController(context));
         controllers.add(new AppPermissionsPreferenceController(context));
+        controllers.add(new RecentAppsPreferenceController(context, app, host));
         return controllers;
     }
 
@@ -78,7 +90,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
                 @Override
                 public List<PreferenceController> getPreferenceControllers(Context context) {
-                    return buildPreferenceControllers(context);
+                    return buildPreferenceControllers(context, null, null /* host */);
                 }
             };
 }
