@@ -275,8 +275,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (usageData.usageList.size() <= 1) {
             CharSequence timeSequence = Utils.formatElapsedTime(getContext(),
                     usageData.totalUsageTimeMs, false);
-            usageData.summary = TextUtils.expandTemplate(getText(R.string.battery_used_for),
-                    timeSequence);
+            usageData.summary = usageData.usageType == UsageType.IDLE ? timeSequence
+                    : TextUtils.expandTemplate(getText(R.string.battery_used_for), timeSequence);
         } else {
             BatterySipper sipper = findBatterySipperWithMaxBatteryUsage(usageData.usageList);
             BatteryEntry batteryEntry = new BatteryEntry(getContext(), mHandler, mUserManager,
