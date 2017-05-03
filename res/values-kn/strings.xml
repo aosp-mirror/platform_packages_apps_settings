@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE ಪೂರೈಸಲಾಗಿದೆ"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"ವೀಡಿಯೊ ಕರೆ ಸೌಲಭ್ಯ ಕಲ್ಪಿಸಲಾಗಿದೆ"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"ವೈಫೈ ಕರೆ ಸೌಲಭ್ಯ ಕಲ್ಪಿಸಲಾಗಿದೆ"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/ಪ್ರಸ್ತುತ ಸಿದ್ಧವಾಗಿದೆ"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"ಮೊಬೈಲ್ ರೇಡಿಯೋ ಪವರ್"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"ಸಿಮ್ ವಿಳಾಸ ಪುಸ್ತಕವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"ಸ್ಥಿರ ಡಯಲಿಂಗ್ ಸಂಖ್ಯೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
@@ -1876,7 +1875,10 @@
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> ಮುದ್ರಣ ಸೇವೆಗಳು ಆನ್ ಆಗಿವೆ</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ಮುದ್ರಣ ಸೇವೆಗಳು ಆನ್ ಆಗಿವೆ</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> ಮುದ್ರಣ ಕಾರ್ಯಗಳು</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ಮುದ್ರಣ ಕಾರ್ಯಗಳು</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"ಮುದ್ರಣ ಸೇವೆಗಳು"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"ಯಾವುದೇ ಸೇವೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿಲ್ಲ"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"ಯಾವುದೇ ಮುದ್ರಕಗಳು ಕಂಡುಬಂದಿಲ್ಲ"</string>
@@ -2793,8 +2795,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"ನಿಮ್ಮ ಸಾಧನವು ಲಾಕ್‌ ಆಗಿರುವಾಗ, ನೀವು ಪ್ರೊಫೈಲ್‌ ಅಧಿಸೂಚನೆಗಳನ್ನು ಹೇಗೆ ತೋರಿಸಲು ಬಯಸುವಿರಿ?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"ಪ್ರೊಫೈಲ್‌ ಅಧಿಸೂಚನೆಗಳು"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"ಅಧಿಸೂಚನೆಗಳು"</string>
-    <!-- no translation found for notification_channel_title (2260666541030178452) -->
-    <skip />
+    <string name="notification_channel_title" msgid="2260666541030178452">"ಅಧಿಸೂಚನೆ ವರ್ಗ"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"ಪ್ರಾಮುಖ್ಯತೆ"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"ಅಪ್ಲಿಕೇಶನ್‌ ನಿರ್ಧರಿಸಲು ಬಿಡಿ"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"ಎಂದಿಗೂ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಬೇಡಿ"</string>
@@ -2802,14 +2803,10 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"ಧ್ವನಿ ಇಲ್ಲ"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"ಧ್ವನಿ ಮಾಡಿ"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"ಪರದೆಯ ಮೇಲೆ ಧ್ವನಿಮಾಡಿ ಮತ್ತು ಪಾಪ್ ಮಾಡಿ"</string>
-    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
-    <skip />
-    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
-    <skip />
-    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
-    <skip />
-    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
-    <skip />
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"ಕಡಿಮೆ"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"ಮಧ್ಯಮ"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"ಅಧಿಕ"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"ತುರ್ತು"</string>
     <string name="allow_sound" msgid="6585849855452076626">"ಧ್ವನಿಗೆ ಅನುಮತಿ ನೀಡಿ"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"ಪ್ರಸ್ತುತ ಪರದೆಯಲ್ಲಿ ಈ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಲು ಧ್ವನಿ, ವೈಬ್ರೇಷನ್ ಅಥವಾ ಇಣುಕು ನೋಟ ಮಾಡಬೇಡ."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"ಅಧಿಸೂಚನೆ ಸಹಾಯಕ"</string>
@@ -2844,10 +2841,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಪ್ರವೇಶ"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ಸ್ಥಾಪಿಸಲಾದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಯಾವುದೇ ಅಡಚಣೆ ಮಾಡಬೇಡಿಗೆ ಪ್ರವೇಶ ವಿನಂತಿಸಿಲ್ಲ"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
-    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
-    <skip />
-    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"ಈ ಸಾಧನದಲ್ಲಿ ಗೋಚರವಾಗುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಧಿಸೂಚನೆಗಳನ್ನು Android ನಿರ್ಬಂಧಿಸುತ್ತದೆ"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"ಈ ಸಾಧನದಲ್ಲಿ ಗೋಚರವಾಗುವ ಈ ಪ್ರಕಾರದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಧಿಸೂಚನೆಗಳನ್ನು Android ನಿರ್ಬಂಧಿಸುತ್ತದೆ"</string>
     <string name="notification_channels" msgid="5346841743182627500">"ವಿಭಾಗಗಳು"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"ಇತರೆ"</string>
     <string name="no_channels" msgid="3077375508177744586">"ಯಾವುದೇ ಅಧಿಸೂಚನೆಗಳನ್ನು ಈ ಅಪ್ಲಿಕೇಶನ್‌ ಪೋಸ್ಟ್‌ ಮಾಡಿಲ್ಲ"</string>
@@ -3104,12 +3099,9 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"ಬಳಕೆ ಎಚ್ಚರಿಕೆಗಳು"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರದರ್ಶಿಸಿ"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"ಹೆಚ್ಚುವರಿ ಅಪ್ಲಿಕೇಶನ್‌ ಮರೆಮಾಡಿ"</string>
-    <!-- no translation found for power_high_usage_title (6027369425057347826) -->
-    <skip />
-    <!-- no translation found for power_high_usage_summary (1601789953052530021) -->
-    <skip />
-    <!-- no translation found for power_high_usage_multiple_apps_summary (4867266981228175401) -->
-    <skip />
+    <string name="power_high_usage_title" msgid="6027369425057347826">"ಅಧಿಕ ಬಳಕೆ"</string>
+    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> ಅಸಹಜವಾಗಿ ವರ್ತಿಸುತ್ತಿದೆ"</string>
+    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಅಸಹಜವಾಗಿ ವರ್ತಿಸುತ್ತಿವೆ"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ಆಪ್ಟಿಮೈಸ್ ಮಾಡಲಾಗಿಲ್ಲ"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ಆಪ್ಟಿಮೈಸ್ ಮಾಡಲಾಗಿಲ್ಲ"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ಬ್ಯಾಟರಿ ಬಳಕೆಯನ್ನು ಆಪ್ಟಿಮೈಸ್ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
@@ -3335,8 +3327,7 @@
       <item quantity="other">ಡೇಟಾ ಉಳಿಸುವಿಕೆಯು ಆನ್ ಆಗಿರುವಾಗ ಅನಿರ್ಬಂಧಿಸಿದ ಡೇಟಾವನ್ನು ಬಳಸಲು <xliff:g id="COUNT">%1$d</xliff:g> ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಅನುಮತಿಸಲಾಗಿದೆ</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"ಡೇಟಾ ಸೇವರ್"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"ಅನಿಯಂತ್ರಿತ ಡೇಟಾ"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"ಹಿನ್ನೆಲೆ ಡೇಟಾವನ್ನು ಆಫ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"ಆನ್"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"ಆಫ್"</string>

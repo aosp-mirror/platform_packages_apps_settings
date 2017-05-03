@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE-tildelt"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Identitetshåndtering aktiv for videoanrop"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Identitetshåndtering aktiv for Wi-Fi-anrop"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence er klargjort"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Strømforsyning for mobilradio"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Se adressebok for SIM-kort"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Vis faste numre"</string>
@@ -1876,7 +1875,10 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> utskriftstjenester er på</item>
       <item quantity="one">1 utskriftstjeneste er på</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> utskriftsjobber</item>
+      <item quantity="one">1 utskriftsjobb</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Utskriftstjenester"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Ingen tjenester er installert"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Fant ingen skrivere"</string>
@@ -2793,8 +2795,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Hvordan vil du at profilvarsler skal vises når enheten er låst?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profilvarsler"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Varsler"</string>
-    <!-- no translation found for notification_channel_title (2260666541030178452) -->
-    <skip />
+    <string name="notification_channel_title" msgid="2260666541030178452">"Varselkategori"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Viktighet"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"La appen bestemme"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Vis aldri varsler"</string>
@@ -2802,14 +2803,10 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Ingen lyd"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Lag lyd"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Lag lyd og vis i forgrunnen"</string>
-    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
-    <skip />
-    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
-    <skip />
-    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
-    <skip />
-    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
-    <skip />
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"Lav"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"Middels"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"Høy"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"Haster"</string>
     <string name="allow_sound" msgid="6585849855452076626">"Tillat lyd"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Disse varslene vises ikke kjapt på skjermen – verken med vibrering eller lyd."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Varselassistent"</string>
@@ -2844,10 +2841,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"«Ikke forstyrr»-tilgang"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Ingen installerte apper har bedt om «Ikke forstyrr»-tilgang"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Laster inn apper …"</string>
-    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
-    <skip />
-    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blokkerer varslene fra denne appen fra å vises på denne enheten"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android blokkerer denne varselkategorien fra å vises på denne enheten"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Kategorier"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Annet"</string>
     <string name="no_channels" msgid="3077375508177744586">"Denne appen har ikke publisert noen varsler"</string>
@@ -3104,12 +3099,9 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"Bruksvarsler"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"Vis alle apper"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Skjul ekstra apper"</string>
-    <!-- no translation found for power_high_usage_title (6027369425057347826) -->
-    <skip />
-    <!-- no translation found for power_high_usage_summary (1601789953052530021) -->
-    <skip />
-    <!-- no translation found for power_high_usage_multiple_apps_summary (4867266981228175401) -->
-    <skip />
+    <string name="power_high_usage_title" msgid="6027369425057347826">"Høy bruk"</string>
+    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> oppfører seg unormalt"</string>
+    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> apper oppfører seg unormalt"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Ikke optimalisert"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Ikke optimalisert"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimaliserer batteribruken"</string>
@@ -3335,8 +3327,7 @@
       <item quantity="one">1 app kan bruke ubegrenset med data når Datasparing er på</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Datasparing"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Ubegrenset datatilgang"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Bakgrunnsdata er slått av"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"På"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Av"</string>

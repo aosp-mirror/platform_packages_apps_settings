@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE-ի տրամադրում"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Տեսազանգերի նախապատրաստում"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wifi զանգերի նախապատրաստում"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/ներկայության տրամադրում"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Բջջային ռադիոազդանշանի հզորությունը"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Դիտել SIM քարտի հասցեագիրքը"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Տեսնել ամրակցված հեռախոսահամարները"</string>
@@ -307,7 +306,7 @@
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Ժամը"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"Կարգավորել ժամը"</string>
     <string name="date_time_set_timezone_title" msgid="3047322337368233197">"Ժամային գոտին"</string>
-    <string name="date_time_set_timezone" msgid="5045627174274377814">"Ընտրել ժամային գոտին"</string>
+    <string name="date_time_set_timezone" msgid="5045627174274377814">"Ժամային գոտի"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Ամսաթիվը"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Կարգավորել ամսաթիվը"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Տեսակավորել ըստ այբուբենի"</string>
@@ -1561,13 +1560,13 @@
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB կրիչ"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD քարտի պահոց"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Չափի վերահաշվարկում…"</string>
-    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Մաքրե՞լ ծրագրային տվյալները:"</string>
+    <string name="clear_data_dlg_title" msgid="5605258400134511197">"Մաքրե՞լ հավելվածների տվյալները:"</string>
     <string name="clear_data_dlg_text" msgid="3951297329833822490">"Այս ծրագրի բոլոր տվյալները մշտապես կջնջվեն: Այն կներառի բոլոր ֆայլերը, կարգավորումները, հաշիվները, տվյալների շտեմարանները և այլն:"</string>
     <string name="dlg_ok" msgid="2402639055725653590">"Լավ"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Չեղարկել"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Հավելվածը չի գտնվել տեղադրված հավելվածների ցանկում:"</string>
-    <string name="clear_data_failed" msgid="7214074331627422248">"Չհաջողվեց մաքրել ծրագրային տվյալները:"</string>
+    <string name="clear_data_failed" msgid="7214074331627422248">"Չհաջողվեց մաքրել հավելվածների տվյալները:"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Մաքրել տվյալները"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Տվյալների ջնջումը ծրագրից չհաջողվեց:"</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Այս հավելվածը պլանշետի վրա կարող է մատչել հետևյալը`"</string>
@@ -1876,7 +1875,10 @@
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> print services on</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> տպման ծառայություն միացված է</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> print jobs</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> տպելու առաջադրանք</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Տպման ծառայություններ"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Տեղադրված ծառայաթյուններ չկան"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Տպիչներ չեն գտնվել"</string>
@@ -2339,8 +2341,8 @@
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Ոստայնում ձեր հաշվի մեջ կատարած ցանկացած փոփոխություն ավտոմատ կպատճենվի ձեր հեռախոսում:\n\nՈրոշ հաշիվներ կարող են հեռախոսով կատարած փոփոխություններն ավտոմատ պատճենել ոստայնում: Google հաշիվն աշխատում է հենց այդպես:"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Անջատե՞լ ինքնահամաժամեցումը"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Դա կկրճատի թրաֆիկն ու մարտկոցի օգտագործման չափը, սակայն նոր տվյալներ ստանալու համար անհրաժեշտ կլինի ձեռքով համաժամեցնել յուրաքանչյուր հաշիվ։ Թարմացումների մասին ծանուցումներ չեն ցուցադրվի։"</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Տվյալների աշխատաշրջանի ամսաթվի վերասահմանում"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Ամենամսյա ամսաթիվ`"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Վիճակագրության վերակայում"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Ամսվա օրը`"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Պահել"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Սահմանել տվյալների օգտագործման նախազգուշացում"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Թրաֆիկի օգտագործման սահմանը"</string>
@@ -2360,11 +2362,11 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>` մոտավորապես <xliff:g id="TOTAL">%1$s</xliff:g> է օգտագործված` ըստ պլանշետի չափման: Օպերատորի հաշիվների տվյալները կարող են այլ լինել:"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>` մոտավորապես <xliff:g id="TOTAL">%1$s</xliff:g> օգտագործված է` ըստ հեռախոսի տվյալների: Օպերատորի տվյալները կարող են տարբերվել:"</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Ցանցային սահմանափակումներ"</string>
-    <string name="data_usage_metered_body" msgid="7655851702771342507">"Երբ ֆոնային տվյալների օգտագործումը սահմանափակված է, չափված ցանցերը դիտարկվում են որպես բջջային ցանցեր: Ծավալուն ներբեռնումների դեպքում հավելվածները կարող են զգուշացնել՝ այս ցանցերն օգտագործելուց առաջ:"</string>
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"Եթե ֆոնային ռեժիմում տվյալների փոխանցումը սահմանափակ է, ապա սահմանափակումներով ցանցերը դիտարկվում են որպես բջջային ցանցեր: Մեծ ծավալի ներբեռնումների դեպքում հավելվածներում զգուշացում է ցուցադրվում՝ նախքան այսպիսի ցանց օգտագործելը։"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Շարժական ցանցեր"</string>
-    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Չափված Wi-Fi ցանցեր"</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Սահմանափակ Wi-Fi ցանցեր"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Չափված ցանցեր ընտրելու համար միացրեք Wi‑Fi-ը:"</string>
-    <string name="data_usage_disclaimer" msgid="6887858149980673444">"Օպերատորի հաշվարկը տվյալների կապի վերաբերյալ կարող է տարբերվել սարքի հաշվարկից:"</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"Օպերատորի վիճակագրությունը կարող է տարբերվել սարքի վիճակագրությունից։"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Շտապ կանչ"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Վերադառնալ զանգին"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Անուն"</string>
@@ -2449,10 +2451,10 @@
     <string name="user_credential_removed" msgid="6514189495799401838">"Հեռացված հավատարմագիրը՝ <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="3729607560420971841">"Օգտատիրոջ հավատարմագրեր չեն տեղադրվել"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Ուղղագրիչ"</string>
-    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Մուտքագրեք ձեր ընթացիկ ամբողջական պահուստավորման գաղտնաբառը այստեղ"</string>
-    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Մուտքագրեք այստեղ նոր գաղտնաբառը` ամբողջական պահուստավորման համար"</string>
-    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Մուտքագրեք կրկին ձեր նոր պահուստային գաղտնաբառը այստեղ"</string>
-    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Սահմանել պահուստավորման գաղտնաբառը"</string>
+    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Մուտքագրեք ընթացիկ գաղտնաբառը"</string>
+    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Մուտքագրեք նոր գաղտնաբառը"</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Կրկին մուտքագրեք նոր գաղտնաբառը"</string>
+    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Պահել նոր գաղտնաբառը"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Չեղարկել"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Հավելյալ համակարգի թարմացումներ"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Անջատված"</string>
@@ -2586,7 +2588,7 @@
     <string name="access_point_names" msgid="1381602020438634481">"Մատչման կետերի անունները"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Ընդլայնված 4G LTE ռեժիմ"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"Օգտագործեք LTE տվյալների կապը՝ ձայնի և հաղորդակցման որակը բարձրացնելու համար (Խորհուրդ է տրվում)"</string>
-    <string name="preferred_network_type_title" msgid="3431041717309776341">"Նախընտրելի ցանցի տեսակը"</string>
+    <string name="preferred_network_type_title" msgid="3431041717309776341">"Ցանցի նախընտրելի տեսակը"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (խորհուրդ է տրվում)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"Աշխատանքային SIM"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Ծրագրերի և բովանդակության մուտք"</string>
@@ -2808,7 +2810,7 @@
     <string name="allow_sound" msgid="6585849855452076626">"Թույլատրել ձայնը"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Ձայնային ազդանշան չհնչեցնել, չթրթռալ և ընթացիկ էկրանին այս ծանուցումները չցուցադրել:"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Ծանուցումների օգնական"</string>
-    <string name="manage_notification_access_title" msgid="7510080164564944891">"Մուտք ծանուցումներին"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"Ծանուցումների օգտագործում"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Աշխատանքային պրոֆիլի ծանուցումների մուտքն արգելափակված է"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Ծրագրիը չի կարող կարդալ ծանուցումները"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -2839,8 +2841,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Հասանելիությունը՝ «չանհանգստացնել»"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Տեղադրված հավելվածներից ոչ մեկը Չանհանգստացնել հարցում չի ուղարկել"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Ծրագրերը բեռնվում են..."</string>
-    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android-ն արգելափակում է այս սարքի վրա հավելվածի ծանուցումների ցուցադրումը"</string>
-    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android-ն արգելափակում է այս սարքի վրա ծանուցումների տվյալ կատեգորիայի ցուցադրումը"</string>
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android-ն արգելափակում այս հավելվածի ծանուցումների ցուցադրումը"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android-ն արգելափակում է ծանուցումների տվյալ կատեգորիայի ցուցադրումը"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Կարգեր"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Այլ"</string>
     <string name="no_channels" msgid="3077375508177744586">"Այս հավելվածը ծանուցումներ չի փակցրել"</string>
@@ -3098,9 +3100,9 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Ցուցադրել բոլոր հավելվածները"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Թաքցնել լրացուցիչ հավելվածները"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Գերօգտագործում"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> սխալ գործարկում"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> հավելվածների սխալ գործարկում"</string>
-    <string name="high_power_filter_on" msgid="3222265297576680099">"Չօպտիմալացված"</string>
+    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g>-ը աշխատում է սխալներով"</string>
+    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> հավելված սխալ է աշխատում"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"Չեն տնտեսում լիցքը"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Չօպտիմալացված"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Մարտկոցի սպառման օպտիմալացում"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Մարտկոցի օպտիմալացումը հասանելի չէ"</string>
@@ -3294,7 +3296,7 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Ավտոմատ համակարգային թարմացումներ"</string>
     <string name="usage" msgid="2977875522080448986">"Օգտագործում"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Բջջային թրաֆիկ"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi տվյալների օգտագործումը"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi թրաֆիկ"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet տվյալների օգտագործում"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
@@ -3311,7 +3313,7 @@
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> restrictions</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> սահմանափակում</item>
     </plurals>
-    <string name="operator_warning" msgid="1862988028996859195">"Օպերատորի հաշվարկը տվյալների օգտագործման վերաբերյալ կարող է տարբերվել սարքի հաշվարկից"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"Օպերատորի վիճակագրությունը կարող է տարբերվել սարքի վիճակագրությունից։"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Օգտագործվել է <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Տվյալների մասին զգուշացում"</string>
     <string name="data_warning" msgid="209133958008062117">"Տվյալների նախազգուշացում"</string>
@@ -3325,8 +3327,7 @@
       <item quantity="other">Երբ Տվյալների խնայումը միացված է, <xliff:g id="COUNT">%1$d</xliff:g> հավելվածին թույլ է տրվում օգտագործել տվյալներն անսահմանափակ</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Թրաֆիկի խնայում"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Տվյալների անսահմանափակ օգտագործում"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Ֆոնային տվյալներն անջատված են"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Միացված է"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Անջատված է"</string>
@@ -3384,7 +3385,7 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> հավելված կարող է անսահմանափակ տվյալներ օգտագործել</item>
     </plurals>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Սրբե՞լ օգտատիրոջ տվյալները և անցնել ֆայլի գաղտնագրման:"</string>
-    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Սրբել և փոխարկել"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Սրբել և անցնել"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Վերակայել ShortcutManager-ի արագության սահմանափակումները"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager-ի արագության սահմանափակումները վերակայվել են"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Վերահսկել կողպէկրանի ծանուցումները"</string>
@@ -3393,9 +3394,9 @@
     <string name="page_tab_title_support" msgid="6330657582897417458">"Աջակցում"</string>
     <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Ամենափոքր լայնությունը"</string>
-    <string name="premium_sms_none" msgid="8268105565738040566">"Տեղադրված հավելվածներից ոչ մեկը Պրեմիում SMS-ների օգտագործման հարցում չի կատարել"</string>
-    <string name="premium_sms_warning" msgid="9086859595338944882">"Պրեմիում SMS-ները կարող են առաջացնել լրացուցիչ ծախսեր և ավելացնել բջջային օպերատորի կողմից ներկայացվող վճարման հաշիվները: Եթե նման թույլտվություն տրամադրեք որևէ հավելվածին, ապա այդ հավելվածի միջոցով կկարողանաք ուղարկել Պրեմիում SMS-ներ:"</string>
-    <string name="premium_sms_access" msgid="4660047004791638305">"Պրեմիում SMS-ների օգտագործում"</string>
+    <string name="premium_sms_none" msgid="8268105565738040566">"Տեղադրված հավելվածներից ոչ մեկը վճարովի SMS-ների օգտագործման հարցում չի կատարել"</string>
+    <string name="premium_sms_warning" msgid="9086859595338944882">"Վճարովի SMS-ները կարող են լրացուցիչ ծախսեր առաջացնել: Հավելվածին թույտվություն տալու դեպքում կկարողանաք դրա միջոցով վճարովի SMS-ներ ուղարկել։"</string>
+    <string name="premium_sms_access" msgid="4660047004791638305">"Վճարովի SMS"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Տեսանելի չէ այս սարքերի համար"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Կապակցված է <xliff:g id="ID_1">%1$s</xliff:g>-ին"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Կապակցված է բազմակի շարժական սարքերի"</string>

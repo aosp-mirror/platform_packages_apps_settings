@@ -42,8 +42,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"Dodeljeno za VoLTE"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Video pozivanje je dodeljeno"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Pozivanje preko Wifi veze je dodeljeno"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Dodeljeno prisustvo"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Napajanje za radio na mobilnim uređajima"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Prikaži SIM adresar"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Prikaži brojeve za fiksno biranje"</string>
@@ -324,7 +323,7 @@
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Poruka na zaključanom ekranu"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Omogući vidžete"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Administrator je onemogućio"</string>
-    <string name="owner_info_settings_summary" msgid="7472393443779227052">"Nijedno"</string>
+    <string name="owner_info_settings_summary" msgid="7472393443779227052">"Ništa"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"Npr. Jocin Android."</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Podaci o korisniku"</string>
@@ -1035,7 +1034,7 @@
     <string name="doze_summary" msgid="3846219936142814032">"Probudite ekran kada primite obaveštenja"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veličina fonta"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Omogućava da tekst bude veći ili manji"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Podešavanja zaključavanja SIM kartice"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Zaključavanje SIM kartice"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"Zaključavanje SIM kartice"</string>
     <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"Isključeno"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"Zaključano"</string>
@@ -1213,7 +1212,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Istraži uređaj <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Ostalo obuhvata deljene datoteke koje su sačuvale aplikacije, datoteke preuzete sa Interneta ili Bluetooth-a, Android datoteke i tako dalje. \n\nDa biste videli vidljivi sadržaj na uređaju <xliff:g id="NAME">^1</xliff:g>, dodirnite Istraži."</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Sistem obuhvata datoteke koje se koriste za pokretanje verzije Android-a <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Sistem obuhvata datoteke koje se koriste za pokretanje verzije Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> možda ima sačuvane slike, muziku, aplikacije ili druge podatke, koji zauzimaju <xliff:g id="SIZE">^2</xliff:g> memorijskog prostora. \n\nDa biste pogledali detalje, pređite na <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Podesite uređaj <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Koristi kao prenosivu memoriju"</string>
@@ -1808,7 +1807,7 @@
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kombinujte kanale kada puštate audio sadržaj"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Odlaganje dodira i zadržavanja"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inverzija boja"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Može da utiče na učinak"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Može da utiče na kvalitet rada"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Klik kada pokazivač prestane da se kreće"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Odlaganje pre klika"</string>
     <string name="accessibility_summary_default_combination" msgid="90096949592817459">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
@@ -1897,7 +1896,11 @@
       <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> usluge štampanja su uključene</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> usluga štampanja je uključeno</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> zadatak za štampanje</item>
+      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> zadatka za štampanje</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> zadataka za štampanje</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Usluge štampanja"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nijedna usluga nije instalirana"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Nije pronađen nijedan štampač"</string>
@@ -2034,8 +2037,8 @@
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Pregled od poslednjeg potpunog punjenja"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Poslednje potpuno punjenje"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"Preostalo trajanje baterije je približno i može da se menja u zavisnosti od načina korišćenja"</string>
-    <string name="battery_detail_foreground" msgid="3350401514602032183">"Dok se aktivno koristi"</string>
-    <string name="battery_detail_background" msgid="1929644393553768999">"Dok je u pozadini"</string>
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"U aktivnoj upotrebi"</string>
+    <string name="battery_detail_background" msgid="1929644393553768999">"U pozadini"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Potrošnja baterije"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> ukupne potrošnje aplikacija (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Od potpunog punjenja"</string>
@@ -2189,7 +2192,7 @@
     <string name="remove_device_admin" msgid="9207368982033308173">"Deaktiviraj ovu aplikaciju za administratora uređaja"</string>
     <string name="uninstall_device_admin" msgid="271120195128542165">"Deinstaliraj aplikaciju"</string>
     <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"Deaktiviraj i deinstaliraj"</string>
-    <string name="select_device_admin_msg" msgid="7347389359013278077">"Aplikacije za administratore uređaja"</string>
+    <string name="select_device_admin_msg" msgid="7347389359013278077">"Aplikacije za administratora"</string>
     <string name="no_device_admins" msgid="4846602835339095768">"Nema dostupnih aplikacija za administratora uređaja"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Lični"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Posao"</string>
@@ -2274,7 +2277,7 @@
     <string name="preference_change_password_title" msgid="8955581790270130056">"Promeni lozinku"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"Podešavanja naloga"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"Ukloni nalog"</string>
-    <string name="header_add_an_account" msgid="756108499532023798">"Dodavanje naloga"</string>
+    <string name="header_add_an_account" msgid="756108499532023798">"Dodajte nalog"</string>
     <string name="finish_button_label" msgid="481587707657751116">"Završi"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Želite li da uklonite nalog?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Uklanjanjem ovog naloga izbrisaćete sve poruke, kontakte i druge podatke sa tableta!"</string>
@@ -2358,8 +2361,8 @@
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Uključiti autom. sinh. podataka?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Sve promene koje unesete u naloge na vebu će automatski biti kopirane na tablet.\n\nNeki nalozi mogu i automatski da kopiraju na veb sve promene koje unesete na tabletu. Tako funkcioniše Google nalog."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Sve promene koje unesete u naloge na vebu će automatski biti kopirane na telefon.\n\nNeki nalozi mogu i automatski da kopiraju na veb sve promene koje unesete na telefonu. Tako funkcioniše Google nalog."</string>
-    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Isključiti autom. sinh. podataka?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Na ovaj način će se smanjiti potrošnja podataka i baterije, ali biće potrebno da ručno sinhronizujete svaki nalog da biste prikupili nedavne informacije. Nećete primati ni obaveštenja kada dođe do ažuriranja."</string>
+    <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Isključujete auto-sinh. podataka?"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"To će se smanjiti potrošnju podataka i baterije, ali biće potrebno da ručno sinhronizujete svaki nalog da biste prikupili nedavne informacije. Nećete primati ni obaveštenja kada dođe do ažuriranja."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum vraćanja ciklusa potrošnje na početne vrednosti"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Datum svakog meseca:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Podesi"</string>
@@ -2561,7 +2564,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Istorija poziva će biti deljena sa ovim korisnikom."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Uključiti telefonske pozive i SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Istorija poziva i SMS-ova će se deliti sa ovim korisnikom."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Informacije o hitnom slučaju"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Informacije za hitni slučaj"</string>
     <string name="emergency_info_summary" msgid="5062945162967838521">"Informacije i kontakti za <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Dozvole za aplikacije i sadržaj"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikacije sa ograničenjima"</string>
@@ -3231,7 +3234,7 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije sa dozvolom"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Da"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"Ne"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"Instalirajte nepoznate aplikacije"</string>
+    <string name="install_other_apps" msgid="6986686991775883017">"Instaliranje nepoznatih aplikacija"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instaliranje aplikacije nepoznati izvori"</string>
     <string name="write_settings" msgid="4797457275727195681">"Menjanje podešavanja sistema"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"upisivati menjati sistem podešavanja"</string>
@@ -3365,8 +3368,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplikacija ima dozvolu da koristi neograničenu količinu podataka kada je Ušteda podataka uključena</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Ušteda podataka"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Neograničen pristup podacima"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Prenos podataka u pozadini je isključen"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Uključeno"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Isključeno"</string>

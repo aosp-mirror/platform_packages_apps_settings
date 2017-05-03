@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE को प्रावधानीकरणलाई सक्रिय गरिएको छ"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"भिडियो कलिङ सम्बन्धी प्रावधानलाई सक्रिय गरिएको छ"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wifi कलिङ सम्बन्धी प्रावधानलाई सक्रिय गरिएको छ"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence Provisioned"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"मोबाइल रेडियोको पावर"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM को ठेगाना पुस्तिका हेर्नुहोस्"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"स्थिर डायल गर्ने नम्बरहरू हेर्नुहोस्"</string>
@@ -1638,7 +1637,7 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> प्रक्रिया र <xliff:g id="NUMSERVICES">%2$d</xliff:g> सेवाहरू"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> प्रक्रियाहरू र <xliff:g id="NUMSERVICES">%2$d</xliff:g> सेवा"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> प्रक्रियाहरू र <xliff:g id="NUMSERVICES">%2$d</xliff:g> सेवाहरू"</string>
-    <string name="running_processes_header_title" msgid="6588371727640789560">"उपकरण मेमोरी"</string>
+    <string name="running_processes_header_title" msgid="6588371727640789560">"यन्त्रको मेमोरी"</string>
     <string name="running_processes_header_footer" msgid="723908176275428442">"अनुप्रयोग RAM उपयोग"</string>
     <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"प्रणाली"</string>
     <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"अनुप्रयोगहरू"</string>
@@ -1876,7 +1875,10 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> वटा छाप्ने सेवा खुला छन्</item>
       <item quantity="one">१ वटा छाप्ने सेवा खुला छ</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> छपाइ कार्यहरू</item>
+      <item quantity="one">१ छपाइ कार्य</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"प्रिन्ट सेवाहरु"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"कुनै पनि सेवाहरू स्थापित छैनन्"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"कुनै प्रिन्टरहरु भेटाईएन"</string>
@@ -2452,7 +2454,7 @@
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"यहाँ तपाईंको हालको ब्याकअप पासवर्ड टाइप गर्नुहोस्"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"पूर्ण ब्याकअपहरूको लागि यहाँ नयाँ पासवर्ड टाइप गर्नुहोस्"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"तपाईँको नयाँ पूर्ण जगेडा पासवर्ड यहाँ पुनःटाइप गर्नुहोस्"</string>
-    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"जगेडा पासवर्ड सेट गर्नुहोस्"</string>
+    <string name="backup_pw_set_button_text" msgid="2387480910044648795">"ब्याकअप पासवर्ड सेट गर्नुहोस्"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"रद्द गर्नुहोस्"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"थप प्रणाली अपडेटहरू"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"असक्षम पारियो"</string>
@@ -2793,8 +2795,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"तपाईंको यन्त्र लक हुँदा, तपाईं प्रोफाइल सूचनाहरू कसरी देखाउन चाहनुहुन्छ?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"प्रोफाइल सूचनाहरू"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"सूचनाहरू"</string>
-    <!-- no translation found for notification_channel_title (2260666541030178452) -->
-    <skip />
+    <string name="notification_channel_title" msgid="2260666541030178452">"सूचनाको प्रकार"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"महत्त्व"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"अनुप्रयोगलाई निर्णय गर्न दिनुहोस्"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"सूचनाहरू कहिल्यै नदेखाउनुहोस्"</string>
@@ -2802,14 +2803,10 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"आवाज ननिकाल्ने"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"आवाज निकाल्ने"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"आवाज निकाल्ने र स्क्रिनमा पपअप देखाउने"</string>
-    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
-    <skip />
-    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
-    <skip />
-    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
-    <skip />
-    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
-    <skip />
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"कम"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"सामान्य"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"उच्च"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"जरुरी"</string>
     <string name="allow_sound" msgid="6585849855452076626">"आवाजलाई अनुमति दिनुहोस्"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"ध्वनि, कम्पन नगर्नुहोस् वा हालको स्क्रिनमा यी सूचनाहरूलाई दृश्यमा नचियाउनुहोस्।"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"सूचना सहायक"</string>
@@ -2844,10 +2841,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"पहुँचमा बाधा नपुर्‍यानुहोस्"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"कुनै पनि स्थापित अनुप्रयोगहरू द्वारा पहुँचमा बाधा नपुर्‍यानुहोस् को माग गरेका छैनन्"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"अनुप्रयोगहरू लोड हुँदै..."</string>
-    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
-    <skip />
-    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android ले यो यन्त्रमा यस अनुप्रयोगका सूचनाहरूलाई देखिनबाट रोक लगाइरहेको छ"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android ले यो यन्त्रमा यस प्रकारका सूचनाहरूलाई देखिनबाट रोक लगाइरहेको छ"</string>
     <string name="notification_channels" msgid="5346841743182627500">"कोटीहरू"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"अन्य"</string>
     <string name="no_channels" msgid="3077375508177744586">"यो अनुप्रयोगले कुनै पनि सूचना पोस्ट गरेको छैन"</string>
@@ -3104,12 +3099,9 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"ब्याट्रीको प्रयोग सम्बन्धी अलर्ट"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"सबै अनुप्रयोगहरू देखाउनुहोस्"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"अतिरिक्त अनुप्रयोगहरू लुकाउनु"</string>
-    <!-- no translation found for power_high_usage_title (6027369425057347826) -->
-    <skip />
-    <!-- no translation found for power_high_usage_summary (1601789953052530021) -->
-    <skip />
-    <!-- no translation found for power_high_usage_multiple_apps_summary (4867266981228175401) -->
-    <skip />
+    <string name="power_high_usage_title" msgid="6027369425057347826">"ब्याट्रीको उच्च प्रयोग"</string>
+    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> असामान्य व्यवहार देखाउँदै छ"</string>
+    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> अनुप्रयोगहरू असामान्य व्यवहार देखाउँदै छन्"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"आफू अनुकूल भएको छैन"</string>
     <string name="high_power_on" msgid="6216293998227583810">"आफू अनुकूल नगरिएको"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ब्याट्री प्रयोग आफू अनुकूल गर्दै"</string>
@@ -3335,8 +3327,7 @@
       <item quantity="one">डेटा सेभर अन हुँदा १ अनुप्रयोगलाई असीमित डेटाको प्रयोग गर्न अनुमति दिइयो</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"डेटा सेभर"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"असीमित डेटा"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"पृष्ठभूमिको डेटालाई निष्क्रिय पारियो"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"सक्रिय गर्नुहोस्"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"निष्क्रिय गर्नुहोस्"</string>

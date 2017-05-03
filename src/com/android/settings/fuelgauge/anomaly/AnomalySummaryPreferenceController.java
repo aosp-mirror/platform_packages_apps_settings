@@ -20,13 +20,16 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.PowerUsageAnomalyDetails;
+
 import java.util.List;
 
 /**
- * Manager that responsible for updating anomaly preference and handling preference click.
+ * Manager that responsible for updating high usage preference and handling preference click.
  */
-public class AnomalyPreferenceController {
-    private static final String TAG = "AnomalyPreferenceController";
+public class AnomalySummaryPreferenceController {
+    private static final String TAG = "HighUsagePreferenceController";
     @VisibleForTesting
     static final String ANOMALY_KEY = "high_usage";
     private static final int REQUEST_ANOMALY_ACTION = 0;
@@ -35,11 +38,14 @@ public class AnomalyPreferenceController {
     Preference mAnomalyPreference;
     @VisibleForTesting
     List<Anomaly> mAnomalies;
+    private SettingsActivity mSettingsActivity;
 
-    public AnomalyPreferenceController(PreferenceFragment fragment) {
+    public AnomalySummaryPreferenceController(SettingsActivity activity,
+            PreferenceFragment fragment) {
         mFragment = fragment;
+        mSettingsActivity = activity;
         mAnomalyPreference = mFragment.getPreferenceScreen().findPreference(ANOMALY_KEY);
-        hideAnomalyPreference();
+        hideHighUsagePreference();
     }
 
     public boolean onPreferenceTreeClick(Preference preference) {
@@ -50,7 +56,8 @@ public class AnomalyPreferenceController {
                 dialogFragment.setTargetFragment(mFragment, REQUEST_ANOMALY_ACTION);
                 dialogFragment.show(mFragment.getFragmentManager(), TAG);
             } else {
-                //TODO(b/37681665): start a new fragment to handle it
+                PowerUsageAnomalyDetails.startBatteryAbnormalPage(mSettingsActivity, mFragment,
+                        mAnomalies);
             }
             return true;
         }
@@ -63,14 +70,16 @@ public class AnomalyPreferenceController {
      *
      * @param anomalies used to update the summary, this method will store a reference of it
      */
-    public void updateAnomalyPreference(List<Anomaly> anomalies) {
+    public void updateHighUsagePreference(List<Anomaly> anomalies) {
         mAnomalies = anomalies;
 
-        mAnomalyPreference.setVisible(true);
-        //TODO(b/36924669): update summary for anomaly preference
+        if (!mAnomalies.isEmpty()) {
+            mAnomalyPreference.setVisible(true);
+            //TODO(b/36924669): update summary for anomaly preference
+        }
     }
 
-    public void hideAnomalyPreference() {
+    public void hideHighUsagePreference() {
         mAnomalyPreference.setVisible(false);
     }
 }

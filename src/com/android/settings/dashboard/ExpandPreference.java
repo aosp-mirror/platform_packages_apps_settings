@@ -47,7 +47,6 @@ public class ExpandPreference extends Preference {
     }
 
     private void init() {
-        setLayoutResource(R.layout.expand_preference);
         setIcon(R.drawable.ic_arrow_down_24dp);
         setTitle(R.string.advanced_section_header);
         setOrder(999);

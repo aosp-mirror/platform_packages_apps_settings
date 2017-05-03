@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"已佈建 VoLTE"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"已佈建視像通話"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"已佈建 Wi-Fi 通話"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"已佈建 EAB/Presence"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"流動無線電的電源"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"查看 SIM 卡通訊錄"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定撥號"</string>
@@ -894,7 +893,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"當開啟 Wi-Fi 通話時，您的手機可根據偏好設定及訊號強弱，選擇使用 Wi-Fi 網絡或流動網絡供應商的網絡安排來電轉接。開啟此功能前，請向您的流動網絡供應商查詢收費及其他詳情。"</string>
+    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"當開啟 Wi-Fi 通話時，您的手機可根據偏好設定及訊號強弱，選擇使用 Wi-Fi 網絡或流動網絡供應商的網絡安排來電轉駁。開啟此功能前，請向您的流動網絡供應商查詢收費及其他詳情。"</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"更新緊急地址"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"當您使用 Wi-Fi 致電 911 時，緊急服務使用的地址將會作為您的地點"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"顯示"</string>
@@ -1315,7 +1314,7 @@
     <string name="master_clear_progress_title" msgid="5194793778701994634">"正在清除"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"請稍候…"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
-    <string name="call_settings_summary" msgid="7291195704801002886">"設定留言信箱、來電轉接、來電待接和來電顯示"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"設定留言信箱、來電轉駁、來電等候和來電顯示"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB 網絡共享"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"可攜式熱點"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"藍牙網絡共享"</string>
@@ -1380,7 +1379,7 @@
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"使用 GPS、Wi‑Fi、藍牙或流動網絡定位"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"使用 Wi‑Fi、藍牙或流動網絡定位"</string>
     <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"使用 GPS 和裝置感應器定位"</string>
-    <string name="location_scanning_screen_title" msgid="4408076862929611554">"正在掃瞄"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"掃瞄"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi-Fi 掃瞄"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"允許系統應用程式和服務隨時偵測 Wi-Fi 網絡，以提高位置資訊的準確度。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"藍牙掃瞄"</string>
@@ -1877,7 +1876,10 @@
       <item quantity="other">已啟用 <xliff:g id="COUNT">%1$d</xliff:g> 項列印服務</item>
       <item quantity="one">已啟用 1 項列印服務</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 項列印工作</item>
+      <item quantity="one"> 1 項列印工作</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"列印服務"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"未安裝任何服務"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"找不到打印機"</string>
@@ -2796,8 +2798,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"裝置鎖定時，應如何顯示個人檔案通知？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"個人檔案通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
-    <!-- no translation found for notification_channel_title (2260666541030178452) -->
-    <skip />
+    <string name="notification_channel_title" msgid="2260666541030178452">"通知類別"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要性"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"讓應用程式決定"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"永不顯示通知"</string>
@@ -2805,14 +2806,10 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"不發出音效"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"發出音效"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"發出音效並在螢幕上彈出通知"</string>
-    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
-    <skip />
-    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
-    <skip />
-    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
-    <skip />
-    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
-    <skip />
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"低"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"緊急"</string>
     <string name="allow_sound" msgid="6585849855452076626">"允許發出音效"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"禁止這些通知發出音效、震動或不時於目前螢幕上出現。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知小幫手"</string>
@@ -2847,10 +2844,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[請勿騷擾] 存取"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"沒有已安裝的應用程式要求 [請勿騷擾] 存取。"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式…"</string>
-    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
-    <skip />
-    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
-    <skip />
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android 已禁止這個應用程式在此裝置上顯示通知"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android 已禁止在此裝置上顯示這個類別的通知"</string>
     <string name="notification_channels" msgid="5346841743182627500">"類別"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"其他"</string>
     <string name="no_channels" msgid="3077375508177744586">"此應用程式未發佈任何通知"</string>
@@ -3107,12 +3102,9 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"用量警示"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"顯示所有應用程式"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"隱藏其他應用程式"</string>
-    <!-- no translation found for power_high_usage_title (6027369425057347826) -->
-    <skip />
-    <!-- no translation found for power_high_usage_summary (1601789953052530021) -->
-    <skip />
-    <!-- no translation found for power_high_usage_multiple_apps_summary (4867266981228175401) -->
-    <skip />
+    <string name="power_high_usage_title" msgid="6027369425057347826">"耗電量高"</string>
+    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> 無法正常運作"</string>
+    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> 個應用程式無法正常運作"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"尚未優化"</string>
     <string name="high_power_on" msgid="6216293998227583810">"尚未優化"</string>
     <string name="high_power_off" msgid="3393904131961263278">"正在優化電池使用"</string>
@@ -3338,8 +3330,7 @@
       <item quantity="one">「數據節省模式」開啟時，允許 1 個應用程式使用無限制數據</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"數據節省程式"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"無限制數據存取"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"背景數據已關閉"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"開啟"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"關閉"</string>

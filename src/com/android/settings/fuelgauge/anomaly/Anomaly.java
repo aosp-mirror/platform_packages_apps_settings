@@ -19,9 +19,11 @@ package com.android.settings.fuelgauge.anomaly;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.IntDef;
+import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Objects;
 
 /**
  * Data that represents an app has been detected as anomaly. It contains
@@ -49,11 +51,10 @@ public class Anomaly implements Parcelable {
     public final int type;
     public final int uid;
     public final long wakelockTimeMs;
-
     /**
      * Display name of this anomaly, usually it is the app name
      */
-    public final String displayName;
+    public final CharSequence displayName;
     public final String packageName;
 
     private Anomaly(Builder builder) {
@@ -67,7 +68,7 @@ public class Anomaly implements Parcelable {
     private Anomaly(Parcel in) {
         type = in.readInt();
         uid = in.readInt();
-        displayName = in.readString();
+        displayName = in.readCharSequence();
         packageName = in.readString();
         wakelockTimeMs = in.readLong();
     }
@@ -81,9 +82,31 @@ public class Anomaly implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(type);
         dest.writeInt(uid);
-        dest.writeString(displayName);
+        dest.writeCharSequence(displayName);
         dest.writeString(packageName);
         dest.writeLong(wakelockTimeMs);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Anomaly)) {
+            return false;
+        }
+
+        Anomaly other = (Anomaly) obj;
+        return type == other.type
+                && uid == other.uid
+                && wakelockTimeMs == other.wakelockTimeMs
+                && TextUtils.equals(displayName, other.displayName)
+                && TextUtils.equals(packageName, other.packageName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, uid, displayName, packageName, wakelockTimeMs);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -100,7 +123,7 @@ public class Anomaly implements Parcelable {
         @AnomalyType
         private int mType;
         private int mUid;
-        private String mDisplayName;
+        private CharSequence mDisplayName;
         private String mPackageName;
         private long mWakeLockTimeMs;
 
@@ -114,7 +137,7 @@ public class Anomaly implements Parcelable {
             return this;
         }
 
-        public Builder setDisplayName(String displayName) {
+        public Builder setDisplayName(CharSequence displayName) {
             mDisplayName = displayName;
             return this;
         }
