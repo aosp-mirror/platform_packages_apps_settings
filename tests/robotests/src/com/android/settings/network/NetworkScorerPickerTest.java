@@ -20,6 +20,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -112,6 +113,33 @@ public class NetworkScorerPickerTest {
         verify(mPreferenceScreen).addPreference(arg.capture());
         assertThat(arg.getValue().getTitle()).isEqualTo(
                 mContext.getString(R.string.network_scorer_picker_none_preference));
+        assertThat(arg.getValue().isChecked()).isTrue();
+    }
+
+    @Test
+    public void testUpdateCandidates_validScorers_noActiveScorer() {
+        ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE_1, TEST_SCORER_CLASS_1);
+        NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
+                0, scorer, TEST_SCORER_LABEL_1, null /* enableUseOpenWifiActivity */,
+                null /* networkAvailableNotificationChannelId */);
+        when(mNetworkScoreManager.getAllValidScorers()).thenReturn(
+                Lists.newArrayList(scorerAppData));
+        when(mNetworkScoreManager.getActiveScorerPackage()).thenReturn(null);
+
+        ArgumentCaptor<RadioButtonPreference> arg =
+                ArgumentCaptor.forClass(RadioButtonPreference.class);
+
+        mFragment.updateCandidates();
+
+        verify(mPreferenceScreen, times(2)).addPreference(arg.capture());
+
+        final RadioButtonPreference nonePref = arg.getAllValues().get(0);
+        assertThat(nonePref.getKey()).isNull();
+        assertThat(nonePref.isChecked()).isTrue();
+
+        final RadioButtonPreference testScorerPref = arg.getAllValues().get(1);
+        assertThat(testScorerPref.getTitle()).isEqualTo(TEST_SCORER_LABEL_1);
+        assertThat(testScorerPref.isChecked()).isFalse();
     }
 
     @Test
@@ -128,7 +156,10 @@ public class NetworkScorerPickerTest {
 
         mFragment.updateCandidates();
 
-        verify(mPreferenceScreen).addPreference(arg.capture());
+        // The first preference added is the "none" preference and the second is the
+        // pref for the test scorer.
+        verify(mPreferenceScreen, times(2)).addPreference(arg.capture());
+        // Returns the last captured value which is expected to be the test scorer pref.
         RadioButtonPreference pref = arg.getValue();
         assertThat(pref.getTitle()).isEqualTo(TEST_SCORER_LABEL_1);
         assertThat(pref.isChecked()).isTrue();

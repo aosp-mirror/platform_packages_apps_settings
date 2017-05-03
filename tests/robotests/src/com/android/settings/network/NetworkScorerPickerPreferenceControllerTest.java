@@ -16,8 +16,8 @@
 
 package com.android.settings.network;
 
-import static android.provider.Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED;
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,11 +25,12 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.net.NetworkScorerAppData;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -65,11 +68,12 @@ public class NetworkScorerPickerPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceSetSummaryAsActiveScorerLabel() {
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
         ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE, TEST_SCORER_CLASS);
         NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
                 0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */,
                 null /* networkAvailableNotificationChannelId */);
+        when(mNetworkScorer.getAllValidScorers())
+                .thenReturn(Collections.singletonList(scorerAppData));
         when(mNetworkScorer.getActiveScorer()).thenReturn(scorerAppData);
         Preference preference = mock(Preference.class);
 
@@ -79,8 +83,13 @@ public class NetworkScorerPickerPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_noActiveScorer_preferenceSetSummaryToNone() {
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
+    public void updateState_scorersAvailable_noActiveScorer_preferenceSetSummaryToNone() {
+        ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE, TEST_SCORER_CLASS);
+        NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
+                0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */,
+                null /* networkAvailableNotificationChannelId */);
+        when(mNetworkScorer.getAllValidScorers())
+                .thenReturn(Collections.singletonList(scorerAppData));
         when(mNetworkScorer.getActiveScorer()).thenReturn(null);
         Preference preference = mock(Preference.class);
 
@@ -91,9 +100,25 @@ public class NetworkScorerPickerPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_networkRecommendationsDisabled_preferenceDisabled() {
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 0);
-        when(mNetworkScorer.getActiveScorer()).thenReturn(null);
+    public void updateState_scorersAvailable_preferenceEnabled() {
+        ComponentName scorer = new ComponentName(TEST_SCORER_PACKAGE, TEST_SCORER_CLASS);
+        NetworkScorerAppData scorerAppData = new NetworkScorerAppData(
+                0, scorer, TEST_SCORER_LABEL, null /* enableUseOpenWifiActivity */,
+                null /* networkAvailableNotificationChannelId */);
+        when(mNetworkScorer.getAllValidScorers())
+                .thenReturn(Collections.singletonList(scorerAppData));
+
+        Preference preference = mock(Preference.class);
+
+        mController.updateState(preference);
+
+        verify(preference).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_noScorersAvailable_preferenceDisabled() {
+        when(mNetworkScorer.getAllValidScorers())
+                .thenReturn(Collections.emptyList());
         Preference preference = mock(Preference.class);
 
         mController.updateState(preference);
