@@ -1,5 +1,11 @@
 package com.android.settings.testutils.shadow;
 
+import static android.util.TypedValue.TYPE_REFERENCE;
+
+import static org.robolectric.RuntimeEnvironment.application;
+import static org.robolectric.Shadows.shadowOf;
+import static org.robolectric.internal.Shadow.directlyOn;
+
 import android.annotation.DimenRes;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
@@ -12,6 +18,7 @@ import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.util.TypedValue;
 
 import com.android.settings.R;
@@ -20,20 +27,18 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
+import org.robolectric.internal.Shadow;
 import org.robolectric.res.StyleData;
 import org.robolectric.res.StyleResolver;
 import org.robolectric.res.builder.XmlResourceParserImpl;
 import org.robolectric.shadows.ShadowAssetManager;
 import org.robolectric.shadows.ShadowResources;
 import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.util.ReflectionHelpers.ClassParameter;
 import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Map;
-
-import static android.util.TypedValue.TYPE_REFERENCE;
-import static org.robolectric.Shadows.shadowOf;
-import static org.robolectric.internal.Shadow.directlyOn;
 
 /**
  * Shadow Resources and Theme classes to handle resource references that Robolectric shadows cannot
@@ -44,6 +49,25 @@ public class SettingsShadowResources extends ShadowResources {
 
     @RealObject
     public Resources realResources;
+
+    private static SparseArray<Object> sResourceOverrides = new SparseArray<>();
+
+    public static void overrideResource(int id, Object value) {
+        sResourceOverrides.put(id, value);
+    }
+
+    public static void overrideResource(String name, Object value) {
+        final Resources res = application.getResources();
+        final int resId = res.getIdentifier(name, null, null);
+        if (resId == 0) {
+            throw new Resources.NotFoundException("Cannot override \"" + name + "\"");
+        }
+        overrideResource(resId, value);
+    }
+
+    public static void reset() {
+        sResourceOverrides.clear();
+    }
 
     @Implementation
     public int getDimensionPixelSize(@DimenRes int id) throws NotFoundException {
@@ -91,6 +115,16 @@ public class SettingsShadowResources extends ShadowResources {
             return new int[2];
         }
         return directlyOn(realResources, Resources.class).getIntArray(id);
+    }
+
+    @Implementation
+    public String getString(int id) {
+        final Object override = sResourceOverrides.get(id);
+        if (override instanceof String) {
+            return (String) override;
+        }
+        return Shadow.directlyOn(
+                realResources, Resources.class, "getString", ClassParameter.from(int.class, id));
     }
 
     @Implements(Theme.class)
