@@ -34,7 +34,7 @@ import java.util.List;
 public class EmergencyInfoPreferenceController extends PreferenceController {
 
     private static final String KEY_EMERGENCY_INFO = "emergency_info";
-    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENGY_INFO";
+    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";
     private static final String PACKAGE_NAME_EMERGENCY = "com.android.emergency";
 
     public EmergencyInfoPreferenceController(Context context) {
