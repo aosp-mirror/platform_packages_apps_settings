@@ -45,6 +45,9 @@ public class Anomaly implements Parcelable {
         int FORCE_STOP = 0;
     }
 
+    @AnomalyType
+    public static final int[] ANOMALY_TYPE_LIST = {AnomalyType.WAKE_LOCK};
+
     /**
      * Type of this this anomaly
      */
