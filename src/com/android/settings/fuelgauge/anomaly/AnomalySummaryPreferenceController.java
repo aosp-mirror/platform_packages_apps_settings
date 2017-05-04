@@ -16,10 +16,12 @@
 
 package com.android.settings.fuelgauge.anomaly;
 
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.PowerUsageAnomalyDetails;
 
@@ -70,12 +72,18 @@ public class AnomalySummaryPreferenceController {
      *
      * @param anomalies used to update the summary, this method will store a reference of it
      */
-    public void updateHighUsagePreference(List<Anomaly> anomalies) {
+    public void updateAnomalySummaryPreference(List<Anomaly> anomalies) {
+        final Context context = mFragment.getContext();
         mAnomalies = anomalies;
 
         if (!mAnomalies.isEmpty()) {
             mAnomalyPreference.setVisible(true);
-            //TODO(b/36924669): update summary for anomaly preference
+            final int count = mAnomalies.size();
+            final String summary = context.getResources().getQuantityString(
+                    R.plurals.power_high_usage_summary, count,
+                    mAnomalies.get(0).displayName, count);
+
+            mAnomalyPreference.setSummary(summary);
         }
     }
 

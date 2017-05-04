@@ -14,7 +14,6 @@
 
 package com.android.settings.applications;
 
-import android.app.AppGlobals;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -32,7 +31,7 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
 
     public AppCounter(Context context, PackageManagerWrapper packageManager) {
         mPm = packageManager;
-        mUm = UserManager.get(context);
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override

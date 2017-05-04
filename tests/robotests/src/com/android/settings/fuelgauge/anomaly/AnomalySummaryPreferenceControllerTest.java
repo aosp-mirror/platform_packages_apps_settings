@@ -53,6 +53,7 @@ public class AnomalySummaryPreferenceControllerTest {
     @Anomaly.AnomalyType
     private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final String DISPLAY_NAME = "app";
     private static final int UID = 111;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -75,32 +76,47 @@ public class AnomalySummaryPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
         mPreference.setKey(AnomalySummaryPreferenceController.ANOMALY_KEY);
-        when(mFragment.getPreferenceManager().findPreference(any())).thenReturn(mPreference);
+        when(mFragment.getPreferenceScreen().findPreference(any())).thenReturn(mPreference);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        when(mFragment.getContext()).thenReturn(mContext);
 
         mAnomalyList = new ArrayList<>();
-        Anomaly anomaly = new Anomaly.Builder()
-                .setType(ANOMALY_TYPE)
-                .setUid(UID)
-                .setPackageName(PACKAGE_NAME)
-                .build();
-        mAnomalyList.add(anomaly);
 
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
                 mSettingsActivity, mFragment);
     }
 
     @Test
-    public void testUpdateHighUsagePreference_hasCorrectData() {
-        mAnomalySummaryPreferenceController.updateHighUsagePreference(mAnomalyList);
+    public void testUpdateHighUsageSummaryPreference_hasCorrectData() {
+        mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalyList);
 
-        //add more test when this method is complete
         assertThat(mAnomalySummaryPreferenceController.mAnomalies).isEqualTo(mAnomalyList);
     }
 
     @Test
+    public void testUpdateAnomalySummaryPreference_oneAnomaly_showCorrectSummary() {
+        mAnomalyList.add(createTestAnomaly());
+
+        mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalyList);
+
+        assertThat(mPreference.getSummary()).isEqualTo("app behaving abnormally");
+    }
+
+    @Test
+    public void testUpdateAnomalySummaryPreference_multipleAnomalies_showCorrectSummary() {
+        mAnomalyList.add(createTestAnomaly());
+        mAnomalyList.add(createTestAnomaly());
+
+        mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalyList);
+
+        assertThat(mPreference.getSummary()).isEqualTo("2 apps behaving abnormally");
+    }
+
+    @Test
     public void testOnPreferenceTreeClick_oneAnomaly_showDialog() {
+
+        mAnomalyList.add(createTestAnomaly());
         mAnomalySummaryPreferenceController.mAnomalies = mAnomalyList;
 
         mAnomalySummaryPreferenceController.onPreferenceTreeClick(mPreference);
@@ -108,6 +124,15 @@ public class AnomalySummaryPreferenceControllerTest {
         verify(mFragmentManager).beginTransaction();
         verify(mFragmentTransaction).add(any(), anyString());
         verify(mFragmentTransaction).commit();
+    }
+
+    private Anomaly createTestAnomaly() {
+        return new Anomaly.Builder()
+                .setType(ANOMALY_TYPE)
+                .setUid(UID)
+                .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
+                .build();
     }
 
 }

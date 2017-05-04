@@ -26,7 +26,9 @@
         android:layout="@layout/battery_header"/>
 
     <Preference
-        android:key="high_usage"/>
+        android:key="high_usage"
+        android:icon="@drawable/ic_battery_alert_24dp"
+        android:title="@string/power_high_usage_title"/>
 
     <PreferenceCategory
         android:key="device_usage_list">

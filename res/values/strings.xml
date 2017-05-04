@@ -750,7 +750,9 @@
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
-    <string name="encryption_and_credential_settings_summary">Phone encrypted</string>
+    <string name="encryption_and_credential_settings_summary" product="default">Phone encrypted</string>
+    <!-- Security Settings screen Encryption and crendential summary -->
+    <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen preferences</string>
 
@@ -3470,6 +3472,10 @@
     <string name="install_applications">Unknown sources</string>
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  [CHAR LIMIT=30] -->
     <string name="install_applications_title">Allow all app sources</string>
+    <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
+    <string name="recent_app_category_title">Recently used apps</string>
+    <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
+    <string name="see_all_apps_title">See all apps</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="tablet">
@@ -7410,11 +7416,11 @@
     <!-- Title for high usage item, which means power high usage [CHAR LIMIT=30] -->
     <string name="power_high_usage_title">High usage</string>
 
-    <!-- Summary for high usage item, showing one app is behaving abnormally [CHAR LIMIT=80] -->
-    <string name="power_high_usage_summary"><xliff:g id="app">%1$s</xliff:g> behaving abnormally</string>
-
-    <!-- Summary for high usage item, showing several apps are behaving abnormally [CHAR LIMIT=80] -->
-    <string name="power_high_usage_multiple_apps_summary"><xliff:g id="number">%1$d</xliff:g> apps behaving abnormally</string>
+    <!-- Summary for high usage item, showing app/apps are behaving abnormally [CHAR LIMIT=80] -->
+    <plurals name="power_high_usage_summary">
+        <item quantity="one"><xliff:g id="app">%1$s</xliff:g> behaving abnormally</item>
+        <item quantity="other"><xliff:g id="number">%2$d</xliff:g> apps behaving abnormally</item>
+    </plurals>
 
     <!-- Filter for apps allowed to use a lot of power [CHAR LIMIT=25] -->
     <string name="high_power_filter_on">Not optimized</string>
