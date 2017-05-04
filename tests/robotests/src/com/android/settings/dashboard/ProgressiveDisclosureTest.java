@@ -25,7 +25,6 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -58,8 +57,6 @@ public class ProgressiveDisclosureTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
-    private FakeFeatureFactory mFakeFeatureFactory;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceFragment mPreferenceFragment;
     @Mock
@@ -75,7 +72,6 @@ public class ProgressiveDisclosureTest {
         FakeFeatureFactory.setupForTest(mContext);
         mScreen = mPreferenceFragment.getPreferenceScreen();
         mAppContext = ShadowApplication.getInstance().getApplicationContext();
-        mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
         mMixin = new ProgressiveDisclosureMixin(mAppContext,
                 mPreferenceFragment, false /* keepExpanded */);
         ReflectionHelpers.setField(mMixin, "mExpandButton", mExpandButton);
@@ -312,6 +308,25 @@ public class ProgressiveDisclosureTest {
         mMixin.updateExpandButtonSummary();
 
         verify(mExpandButton).setSummary(null);
+    }
+
+    @Test
+    public void updateExpandSummary_doNotIncludeEmptyPrefTitle() {
+        final Preference pref1 = new Preference(mAppContext);
+        pref1.setTitle("1");
+        final Preference pref2 = new Preference(mAppContext);
+        pref2.setTitle(null);
+        final Preference pref3 = new Preference(mAppContext);
+        pref3.setTitle("3");
+        final Preference pref4 = new Preference(mAppContext);
+        pref4.setTitle("");
+
+        mMixin.addToCollapsedList(pref1);
+        mMixin.addToCollapsedList(pref2);
+        mMixin.addToCollapsedList(pref3);
+        mMixin.addToCollapsedList(pref4);
+
+        verify(mExpandButton).setSummary("1, 3");
     }
 
     @Test
