@@ -16,6 +16,7 @@
 
 package com.android.settings.language;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -77,6 +78,20 @@ public class LanguageAndInputSettings extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mProgressiveDisclosureMixin.setTileLimit(2);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Hack to update action bar title. It's necessary to refresh title because this page user
+        // can change locale from here and fragment won't relaunch. Once language changes, title
+        // must display in the new language.
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        activity.setTitle(R.string.language_keyboard_settings_title);
     }
 
     @Override
