@@ -16,6 +16,11 @@
 
 package com.android.settings.vpn2;
 
+import android.net.ConnectivityManager;
+import android.net.ConnectivityManager.NetworkCallback;
+import android.net.Network;
+import android.net.NetworkRequest;
+import android.os.Handler;
 import android.net.ProxyInfo;
 
 /**
@@ -25,6 +30,11 @@ import android.net.ProxyInfo;
  * hidden and are thus invisible to Robolectric.
  */
 public interface ConnectivityManagerWrapper {
+
+    /**
+     * Returns the real ConnectivityManager object wrapped by this wrapper.
+     */
+    public ConnectivityManager getConnectivityManager();
 
     /**
      * Calls {@code ConnectivityManager.getAlwaysOnVpnPackageForUser()}.
@@ -39,4 +49,27 @@ public interface ConnectivityManagerWrapper {
      * @see android.net.ConnectivityManager#getGlobalProxy
      */
    ProxyInfo getGlobalProxy();
+
+    /**
+     * Calls {@code ConnectivityManager.registerNetworkCallback()}.
+     *
+     * This is part of the ConnectivityManager public API in SDK 26 or above, but is not yet visible
+     * to the robolectric tests, which currently build with SDK 23.
+     * TODO: delete this once the robolectric tests build with SDK 26 or above.
+     *
+     * @see android.net.ConnectivityManager#registerNetworkCallback(NetworkRequest,NetworkCallback,Handler)
+     */
+    public void registerNetworkCallback(NetworkRequest request, NetworkCallback callback,
+            Handler handler);
+
+    /**
+     * Calls {@code ConnectivityManager.startCaptivePortalApp()}.
+     *
+     * This is part of the ConnectivityManager public API in SDK 26 or above, but is not yet visible
+     * to the robolectric tests, which currently build with SDK 23.
+     * TODO: delete this once the robolectric tests build with SDK 26 or above.
+     *
+     * @see android.net.ConnectivityManager#startCaptivePortalApp(Network)
+     */
+    public void startCaptivePortalApp(Network network);
 }

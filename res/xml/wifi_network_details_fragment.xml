@@ -28,9 +28,9 @@
             android:key="general_details_category" >
         <!-- Buttons -->
         <com.android.settings.applications.LayoutPreference
-                android:key="forget_button"
-                android:selectable="false"
-                android:layout="@layout/single_button_panel" />
+            android:key="buttons"
+            android:layout="@layout/two_buttons_panel"
+            android:selectable="false" />
 
         <com.android.settings.wifi.WifiDetailPreference
                 android:key="signal_strength"
