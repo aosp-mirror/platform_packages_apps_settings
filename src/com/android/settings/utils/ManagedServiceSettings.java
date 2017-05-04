@@ -19,8 +19,8 @@ package com.android.settings.utils;
 import android.annotation.Nullable;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,15 +28,17 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.notification.EmptyTextSettings;
 
@@ -48,6 +50,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
 
     protected Context mContext;
     private PackageManager mPM;
+    private DevicePolicyManager mDpm;
     protected ServiceListing mServiceListing;
 
     abstract protected Config getConfig();
@@ -62,6 +65,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
 
         mContext = getActivity();
         mPM = mContext.getPackageManager();
+        mDpm = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mServiceListing = new ServiceListing(mContext, mConfig);
         mServiceListing.addCallback(new ServiceListing.Callback() {
             @Override
@@ -92,6 +96,9 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     }
 
     private void updateList(List<ServiceInfo> services) {
+        UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        final int managedProfileId = Utils.getManagedProfileId(um, UserHandle.myUserId());
+
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         Collections.sort(services, new PackageItemInfo.DisplayNameComparator(mPM));
@@ -103,6 +110,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             pref.setIcon(service.loadIcon(mPM));
             pref.setTitle(title);
             pref.setChecked(mServiceListing.isEnabled(cn));
+            if (managedProfileId != UserHandle.USER_NULL
+                    && !mDpm.isNotificationListenerServicePermitted(
+                            service.packageName, managedProfileId)) {
+                pref.setSummary(R.string.work_profile_notification_access_blocked_summary);
+            }
             pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
