@@ -17,11 +17,15 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
+import android.util.IconDrawableFactory;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -50,6 +54,9 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     List<Anomaly> mAnomalies;
     @VisibleForTesting
     PreferenceGroup mAbnormalListGroup;
+    @VisibleForTesting
+    PackageManager mPackageManager;
+    IconDrawableFactory mIconDrawableFactory;
 
     public static void startBatteryAbnormalPage(SettingsActivity caller,
             PreferenceFragment fragment, List<Anomaly> anomalies) {
@@ -64,9 +71,12 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final Context context = getContext();
 
         mAnomalies = getArguments().getParcelableArrayList(EXTRA_ANOMALY_LIST);
         mAbnormalListGroup = (PreferenceGroup) findPreference(KEY_PREF_ANOMALY_LIST);
+        mPackageManager = context.getPackageManager();
+        mIconDrawableFactory = IconDrawableFactory.newInstance(context, false /* EmbedShadow */);
     }
 
     @Override
@@ -120,6 +130,10 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
             final Anomaly anomaly = mAnomalies.get(i);
             Preference pref = new AnomalyPreference(getPrefContext(), anomaly);
 
+            Drawable icon = getIconFromPackageName(anomaly.packageName);
+            if (icon != null) {
+                pref.setIcon(icon);
+            }
             mAbnormalListGroup.addPreference(pref);
         }
     }
@@ -128,5 +142,15 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     public void onAnomalyHandled(Anomaly anomaly) {
         mAnomalies.remove(anomaly);
         refreshUi();
+    }
+
+    Drawable getIconFromPackageName(String packageName) {
+        try {
+            final ApplicationInfo appInfo = mPackageManager.getApplicationInfo(packageName,
+                    PackageManager.GET_META_DATA);
+            return mIconDrawableFactory.getBadgedIcon(appInfo);
+        } catch (PackageManager.NameNotFoundException e) {
+            return mPackageManager.getDefaultActivityIcon();
+        }
     }
 }
