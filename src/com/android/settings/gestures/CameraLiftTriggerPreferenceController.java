@@ -57,7 +57,7 @@ public class CameraLiftTriggerPreferenceController extends GesturePreferenceCont
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean enabled = (boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED, enabled ? 0 : 1);
+                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED, enabled ? 1 : 0);
         return true;
     }
 
