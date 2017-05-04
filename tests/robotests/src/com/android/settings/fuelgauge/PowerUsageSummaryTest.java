@@ -15,12 +15,14 @@
  */
 package com.android.settings.fuelgauge;
 
+import java.util.List;
+import org.robolectric.RuntimeEnvironment;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.content.ContentResolver;
 import android.os.PowerManager;
-import android.os.Process;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.SparseArray;
@@ -51,14 +53,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
@@ -69,7 +68,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -146,6 +144,8 @@ public class PowerUsageSummaryTest {
     private SettingsActivity mSettingsActivity;
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private ContentResolver mContentResolver;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -489,6 +489,21 @@ public class PowerUsageSummaryTest {
         assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
     }
 
+    @Test
+    public void testUseEnhancedEstimateIfAvailable() {
+        // mock out the provider
+        final long time = 60 * 1000 * 1000;
+        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
+        mFragment.mPowerFeatureProvider = provider;
+        mFragment.mEnhancedEstimate = time;
+
+        mFragment.useEnhancedEstimateIfAvailable(mRealContext, mBatteryInfo);
+
+        // The string that gets returned always has weird whitespacing to make it fit
+        // so we're just going to check that it contains the correct value we care about.
+        assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(time);
+        assertThat(mBatteryInfo.remainingLabel).contains("About 17 hrs");
+    }
 
     @Test
     public void testInitAnomalyDetectionIfPossible_detectionEnabled_init() {

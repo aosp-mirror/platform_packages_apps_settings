@@ -16,7 +16,10 @@
 
 package com.android.settings.fuelgauge;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import com.android.internal.os.BatterySipper;
 
 /**
@@ -62,4 +65,24 @@ public interface PowerUsageFeatureProvider {
      * Check whether the anomaly detection is enabled
      */
     boolean isAnomalyDetectionEnabled();
+
+    /**
+     * Returns an improved prediction for battery time remaining.
+     */
+    long getEnhancedBatteryPrediction(Context context);
+
+    /**
+     * Checks whether the toggle for enhanced battery predictions is enabled.
+     */
+    boolean isEnhancedBatteryPredictionEnabled(Context context);
+
+    /**
+     * Returns the Uri used to query for an enhanced battery prediction from a cursor loader.
+     */
+    Uri getEnhancedBatteryPredictionUri();
+
+    /**
+     * Returns the the estimate in the cursor as a long or -1 if the cursor is null
+     */
+    long getTimeRemainingEstimate(Cursor cursor);
 }
