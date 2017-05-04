@@ -189,6 +189,16 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
+    public void testUpdateUsageDataSummary_typeIdle_showUsageTime() {
+        mPowerUsageData.usageType = UsageType.IDLE;
+        mPowerUsageData.usageList.add(mNormalBatterySipper);
+
+        mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
+
+        assertThat(mPowerUsageData.summary.toString()).isEqualTo("0m");
+    }
+
+    @Test
     public void testUpdateUsageDataSummary_moreThanOneApp_showMaxUsageApp() {
         mPowerUsageData.usageList.add(mNormalBatterySipper);
         mPowerUsageData.usageList.add(mMaxBatterySipper);
