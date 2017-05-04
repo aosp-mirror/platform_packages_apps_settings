@@ -21,6 +21,7 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
@@ -91,6 +93,7 @@ public class PowerUsageSummaryTest {
     private static final String STUB_STRING = "stub_string";
     private static final int BATTERY_LEVEL = 55;
     private static final int UID = 123;
+    private static final int UID_2 = 234;
     private static final int POWER_MAH = 100;
     private static final long REMAINING_TIME_US = 100000;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
@@ -148,6 +151,7 @@ public class PowerUsageSummaryTest {
     private PowerGaugePreference mPreference;
     private PowerGaugePreference mScreenUsagePref;
     private PowerGaugePreference mLastFullChargePref;
+    private SparseArray<List<Anomaly>> mAnomalySparseArray;
 
     @Before
     public void setUp() {
@@ -463,6 +467,24 @@ public class PowerUsageSummaryTest {
 
         assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
     }
+
+    @Test
+    public void testUpdateAnomalySparseArray() {
+        mFragment.mAnomalySparseArray = new SparseArray<>();
+        final List<Anomaly> anomalies = new ArrayList<>();
+        final Anomaly anomaly1 = new Anomaly.Builder().setUid(UID).build();
+        final Anomaly anomaly2 = new Anomaly.Builder().setUid(UID).build();
+        final Anomaly anomaly3 = new Anomaly.Builder().setUid(UID_2).build();
+        anomalies.add(anomaly1);
+        anomalies.add(anomaly2);
+        anomalies.add(anomaly3);
+
+        mFragment.updateAnomalySparseArray(anomalies);
+
+        assertThat(mFragment.mAnomalySparseArray.get(UID)).containsExactly(anomaly1, anomaly2);
+        assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
+    }
+
 
     public static class TestFragment extends PowerUsageSummary {
 
