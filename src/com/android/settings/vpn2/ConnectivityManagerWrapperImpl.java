@@ -17,6 +17,10 @@
 package com.android.settings.vpn2;
 
 import android.net.ConnectivityManager;
+import android.net.ConnectivityManager.NetworkCallback;
+import android.net.Network;
+import android.net.NetworkRequest;
+import android.os.Handler;
 import android.net.ProxyInfo;
 
 public class ConnectivityManagerWrapperImpl implements ConnectivityManagerWrapper {
@@ -28,6 +32,11 @@ public class ConnectivityManagerWrapperImpl implements ConnectivityManagerWrappe
     }
 
     @Override
+    public ConnectivityManager getConnectivityManager() {
+        return mCm;
+    }
+
+    @Override
     public String getAlwaysOnVpnPackageForUser(int userId) {
         return mCm.getAlwaysOnVpnPackageForUser(userId);
     }
@@ -35,5 +44,16 @@ public class ConnectivityManagerWrapperImpl implements ConnectivityManagerWrappe
     @Override
     public ProxyInfo getGlobalProxy() {
         return mCm.getGlobalProxy();
+    }
+
+    @Override
+    public void registerNetworkCallback(NetworkRequest request, NetworkCallback callback,
+            Handler handler) {
+        mCm.registerNetworkCallback(request, callback, handler);
+    }
+
+    @Override
+    public void startCaptivePortalApp(Network network) {
+        mCm.startCaptivePortalApp(network);
     }
 }
