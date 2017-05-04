@@ -23,14 +23,15 @@ import static org.mockito.Mockito.mock;
 import android.content.pm.ApplicationInfo;
 
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import org.junit.Test;
 
 public class ManageApplicationsTest {
     @Test
-    public void getStorageFilter_filtersVolumeForAudio() {
-        ApplicationsState.AppFilter filter =
-                ManageApplications.getStorageFilter(
+    public void getOverrideFilter_filtersVolumeForAudio() {
+        AppFilter filter =
+                ManageApplications.getOverrideFilter(
                         ManageApplications.LIST_TYPE_STORAGE,
                         ManageApplications.STORAGE_TYPE_MUSIC,
                         "uuid");
@@ -44,9 +45,9 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void getStorageFilter_filtersVolumeForVideo() {
-        ApplicationsState.AppFilter filter =
-                ManageApplications.getStorageFilter(
+    public void getOverrideFilter_filtersVolumeForVideo() {
+        AppFilter filter =
+                ManageApplications.getOverrideFilter(
                         ManageApplications.LIST_TYPE_MOVIES,
                         ManageApplications.STORAGE_TYPE_DEFAULT,
                         "uuid");
@@ -60,9 +61,9 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void getStorageFilter_filtersVolumeForGames() {
+    public void getOverrideFilter_filtersVolumeForGames() {
         ApplicationsState.AppFilter filter =
-                ManageApplications.getStorageFilter(
+                ManageApplications.getOverrideFilter(
                         ManageApplications.LIST_TYPE_GAMES,
                         ManageApplications.STORAGE_TYPE_DEFAULT,
                         "uuid");
@@ -73,5 +74,15 @@ public class ManageApplicationsTest {
         appEntry.info = info;
 
         assertThat(filter.filterApp(appEntry)).isTrue();
+    }
+
+    @Test
+    public void getOverrideFilter_isEmptyNormally() {
+        ApplicationsState.AppFilter filter =
+                ManageApplications.getOverrideFilter(
+                        ManageApplications.LIST_TYPE_MAIN,
+                        ManageApplications.STORAGE_TYPE_DEFAULT,
+                        "uuid");
+        assertThat(filter).isNull();
     }
 }
