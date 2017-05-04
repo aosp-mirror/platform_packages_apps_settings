@@ -64,9 +64,9 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
 
     private static final int UID = 123;
-    private static final long TIME_EXPECTED_FOREGROUND = 6500;
+    private static final long TIME_EXPECTED_FOREGROUND = 1500;
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
-    private static final long TIME_EXPECTED_ALL = 12500;
+    private static final long TIME_EXPECTED_ALL = 7500;
     private static final double BATTERY_SCREEN_USAGE = 300;
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
