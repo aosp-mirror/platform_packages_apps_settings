@@ -92,7 +92,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_BATTERY_HEADER = "battery_header";
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
-    private static final int ANOMALY_LOADER = 1;
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
@@ -101,6 +100,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
 
+    @VisibleForTesting
+    static final int ANOMALY_LOADER = 1;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -446,7 +447,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             return;
         }
 
-        getLoaderManager().initLoader(ANOMALY_LOADER, null, mAnomalyLoaderCallbacks);
+        initAnomalyDetectionIfPossible();
 
         final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
         Intent batteryBroadcast = context.registerReceiver(null,
@@ -574,6 +575,13 @@ public class PowerUsageSummary extends PowerUsageBase implements
         removeCachedPrefs(mAppListGroup);
 
         BatteryEntry.startRequestQueue();
+    }
+
+    @VisibleForTesting
+    void initAnomalyDetectionIfPossible() {
+        if (mPowerFeatureProvider.isAnomalyDetectionEnabled()) {
+            getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
+        }
     }
 
     @VisibleForTesting
