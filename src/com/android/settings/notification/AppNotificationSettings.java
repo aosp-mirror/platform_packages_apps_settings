@@ -91,6 +91,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
         if (getPreferenceScreen() != null) {
             getPreferenceScreen().removeAll();
+            mChannelGroups.clear();
+            mShowLegacyChannelConfig = false;
         }
 
         addPreferencesFromResource(R.xml.app_notification_settings);
