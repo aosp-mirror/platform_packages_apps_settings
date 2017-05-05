@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"खाते"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"सुरक्षा और स्‍थान"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"एन्क्रिप्शन और क्रेडेंशियल"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"फ़ोन एन्क्रिप्ट किया गया है"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"फ़ोन एन्क्रिप्ट किया गया है"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"लॉक स्क्रीन प्राथमिकताएं"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"मेरा स्‍थान, स्‍क्रीन अनलॉक, सिम कार्ड लॉक, प्रमाणिकता मेमोरी लॉक सेट करें"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"मेरा स्‍थान, स्‍क्रीन अनलॉक, प्रमाणिकता मेमोरी लॉक सेट करें"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"ऐप्स सेटिंग"</string>
     <string name="install_applications" msgid="4872012136210802181">"अज्ञात स्रोत"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"सभी ऐप्स स्रोतों को अनुमति दें"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"हाल ही में उपयोग किए गए ऐप्लिकेशन"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"सभी ऐप्लिकेशन देखें"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"आपके टैबलेट और व्यक्तिगत डेटा पर अनजान ऐप्लिकेशन की ओर से हमला किए जाने का जोखिम ज़्यादा है. इस स्रोत से आने वाले ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि उनके उपयोग के कारण आपके टैबलेट को होने वाले किसी भी नुकसान या डेटा की हानि के लिए आप ही ज़िम्मेदार हैं."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"आपके फ़ोन और व्यक्तिगत डेटा पर अनजान ऐप्लिकेशन की ओर से हमला किए जाने का जोखिम ज़्यादा है. इस स्रोत से आने वाले ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि उनके उपयोग के कारण आपके फ़ोन को होने वाले किसी भी नुकसान या डेटा की हानि के लिए आप ही ज़िम्मेदार हैं."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"अतिरिक्त सेटिंग"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"विवरणों का उपयोग करें"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"पावर उपयोग एडजस्ट करें"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"शामिल पैकेज"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"ऐप्लिकेशन का असामान्य व्यवहार"</string>
     <string name="power_screen" msgid="3023346080675904613">"स्क्रीन"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"फ़्लैशलाइट"</string>
     <string name="power_camera" msgid="4976286950934622605">"कैमरा"</string>
@@ -2806,7 +2811,7 @@
     <string name="notification_importance_min_title" msgid="6974673091137544803">"कम"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"मध्यम"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"उच्च"</string>
-    <string name="notification_importance_high_title" msgid="3058778300264746473">"अति आवश्यक"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"बहुत ज़रूरी"</string>
     <string name="allow_sound" msgid="6585849855452076626">"ध्वनि की अनुमति दें"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"वर्तमान स्क्रीन पर इन नोटिफिकेशन के लिए ना तो ध्वनि करें, ना कंपन करें और ना ही झलक दिखाएं."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"नोटिफिकेशन सहायक"</string>
@@ -3099,9 +3104,11 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"उपयोग संबंधी सूचनाएं"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"सभी ऐप दिखाएं"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"अतिरिक्त ऐप छिपाएं"</string>
-    <string name="power_high_usage_title" msgid="6027369425057347826">"अत्यधिक उपयोग"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> असामान्य व्यवहार कर रहा है"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन असामान्य व्यवहार कर रहे हैं"</string>
+    <string name="power_high_usage_title" msgid="6027369425057347826">"बहुत अधिक उपयोग"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="one"><xliff:g id="NUMBER">%2$d</xliff:g> ऐप्लिकेशन असामान्य व्यवहार कर रहे हैं</item>
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> ऐप्लिकेशन असामान्य व्यवहार कर रहे हैं</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ऑप्‍टिमाइज़ नहीं किया गया"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ऑप्‍टिमाइज़ नहीं किया गया"</string>
     <string name="high_power_off" msgid="3393904131961263278">"बैटरी उपयोग ऑप्‍टिमाइज़ किया जा रहा है"</string>
@@ -3327,7 +3334,7 @@
       <item quantity="other">डेटा बचतकर्ता चालू होने पर <xliff:g id="COUNT">%1$d</xliff:g> ऐप्‍स को अप्रतिबंधित डेटा का उपयोग करने की अनुमति है</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"डेटा बचतकर्ता"</string>
-    <string name="unrestricted_data_saver" msgid="952796077540228711">"प्रतिबंधित नहीं किया गया डेटा"</string>
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"अप्रतिबंधित डेटा"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"पृष्ठभूमि डेटा बंद है"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"चालू"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"बंद"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"अपने नोटिफ़िकेशन देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"अपने नोटिफ़िकेशन देखने के लिए, अपने टैबलेट के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"अपने नोटिफ़िकेशन देखने के लिए, अपने डिवाइस के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"कैमरा खोलने के लिए फ़ोन उठाएं"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"अपने आप कैमरा खोलने के लिए, अपने फ़ोन को फ़ोटो लेने (भू-दृश्य या पोर्ट्रेट) जैसा उठाएं. यह तब काम करता है जब जब आपका फ़ोन निष्क्रिय या लॉक हो."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"कोई पल न चूकें"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"कैमरा खोलने के लिए उठाएं"</string>
+    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"अपने आप कैमरा खोलने के लिए, अपने फ़ोन को फ़ोटो लेने (भू-दृश्य या पोर्ट्रेट) जैसा उठाएं. यह तब काम करता है जब आपका फ़ोन निष्क्रिय या लॉक हो."</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"लॉक स्क्रीन से फ़ोटो लें"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"सहायक हावभाव"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"संवेदनशीलता"</string>

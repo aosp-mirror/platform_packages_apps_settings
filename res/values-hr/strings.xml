@@ -334,7 +334,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Računi"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Sigurnost i lokacija"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Enkripcija i vjerodajnice"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Telefon je kriptiran"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon je kriptiran"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Postavke zaključanog zaslona"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Postavi Moju lokaciju, otključavanje zaslona, zaključavanje SIM kartice, zaključavanje spremnika za vjerodajnice"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Postavi Moju lokaciju, otključavanje zaslona, zaključavanje pohranjivanja vjerodajnica"</string>
@@ -1506,6 +1508,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Postavke aplikacije"</string>
     <string name="install_applications" msgid="4872012136210802181">"Nepoznati izvori"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Dopusti sve izvore aplikacija"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Nedavno korištene aplikacije"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Pogledajte sve aplikacije"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Vaš tablet i osobni podaci izloženiji su napadima nepoznatih aplikacija. Instaliranjem aplikacija iz takvog izvora prihvaćate odgovornost za svu štetu nastalu na tabletu  ili gubitak podataka uzrokovan upotrebom tih aplikacija."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Vaš telefon i osobni podaci izloženiji su napadima nepoznatih aplikacija. Instaliranjem aplikacija iz takvog izvora prihvaćate odgovornost za svu štetu nastalu na telefonu ili gubitak podataka uzrokovan upotrebom tih aplikacija."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Napredne postavke"</string>
@@ -1966,6 +1970,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Detalji upotrebe"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Podesi potrošnju energije"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Uključeni paketi"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Neuobičajeno ponašanje aplikacije"</string>
     <string name="power_screen" msgid="3023346080675904613">"Zaslon"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Svjetiljka"</string>
     <string name="power_camera" msgid="4976286950934622605">"Fotoaparat"</string>
@@ -3137,8 +3142,11 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Pokaži sve aplikacije"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Sakrij dodatne aplikacije"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Visoka potrošnja"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"Aplikacija <xliff:g id="APP">%1$s</xliff:g> ne ponaša se na uobičajen način"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"Aplikacija koje se ne ponašaju na uobičajen način: <xliff:g id="NUMBER">%1$d</xliff:g>"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="one"><xliff:g id="NUMBER">%2$d</xliff:g> aplikacija ne ponaša se na uobičajen način</item>
+      <item quantity="few"><xliff:g id="NUMBER">%2$d</xliff:g> aplikacije ne ponašaju se na uobičajen način</item>
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> aplikacija ne ponaša se na uobičajen način</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Nije optimizirano"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Nije optimizirano"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimiziranje upotrebe baterije"</string>
@@ -3524,9 +3532,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Da biste pogledali obavijesti, prijeđite prstom prema dolje po senzoru otiska prsta na stražnjoj strani telefona."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Da biste pogledali obavijesti, prijeđite prstom prema dolje po senzoru otiska prsta na stražnjoj strani tableta."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Da biste pogledali obavijesti, prijeđite prstom prema dolje po senzoru otiska prsta na stražnjoj strani uređaja."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Podignite za otvaranje fotoaparata"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Podignite da biste otvorili fotoaparat"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Da biste automatski otvorili fotoaparat, podignite telefon u položaj za snimanje (vodoravno ili okomito). Funkcionira kada je telefon u stanju mirovanja ili zaključan."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Nemojte propustiti nijedan trenutak"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Fotografirajte sa zaključanog zaslona"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Pomoćni pokret"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Osjetljivost"</string>

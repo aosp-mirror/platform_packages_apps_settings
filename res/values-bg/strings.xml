@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Профили"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Сигурност и местоположение"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Шифроване и идентификационни данни"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Телефонът е шифрован"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Телефонът е шифрован"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Предпочитания за закл. екран"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Задаване на Моето местоположение, отключване на екран, заключване на SIM картата и на хранилището за идентификационни данни"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Задаване на Моето местоположение, отключване на екран и заключване на хранилището за идентификационни данни"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Настройки за приложения"</string>
     <string name="install_applications" msgid="4872012136210802181">"Неизвестни източници"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Всички източници: Разрешаване"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Наскоро използвани приложения"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Вижте всички приложения"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Таблетът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Телефонът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Разширени настройки"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Подробности"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Настройване на захранването"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Включени пакети"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Необичайно поведение на приложението"</string>
     <string name="power_screen" msgid="3023346080675904613">"Екран"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Светкавица"</string>
     <string name="power_camera" msgid="4976286950934622605">"Камера"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Показване на всички приложения"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Допълн. приложения: Скриване"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Висок разход"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"Поведението на <xliff:g id="APP">%1$s</xliff:g> е необичайно"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"Поведението на <xliff:g id="NUMBER">%1$d</xliff:g> приложения е необичайно"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other">Поведението на <xliff:g id="NUMBER">%2$d</xliff:g> приложения е необичайно</item>
+      <item quantity="one">Поведението на <xliff:g id="APP">%1$s</xliff:g> е необичайно</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Без оптимизиране"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Без оптимизиране"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Разходът на батерията се оптимизира"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на телефона си."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на таблета си."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на устройството си."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Вдигнете, за да отворите камерата"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Вдигнете, за да отворите камерата"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"За да отворите автоматично камерата, вдигнете телефона си и го задръжте както при правене на снимка (хоризонтално или вертикално). Функцията работи, когато устройството ви е в спящ режим или е заключено."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Не пропускайте нито един момент"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Правене на снимки от заключения екран"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Помощен жест"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Чувствителност"</string>

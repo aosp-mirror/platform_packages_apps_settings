@@ -331,7 +331,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Konten"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Sicherheit &amp; Standort"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Verschlüsselung &amp; Anmeldedaten"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Smartphone verschlüsselt"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Smartphone verschlüsselt"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Einstellungen für Sperrbildschirm"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Meinen Standort, Display-Entsperrung, SIM-Kartensperre und Sperre für Anmeldedatenspeicher festlegen"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Meinen Standort, Display-Entsperrung, SIM-Kartensperrung und Sperrung des Anmeldedatenspeichers festlegen"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"App-Einstellungen"</string>
     <string name="install_applications" msgid="4872012136210802181">"Unbekannte Herkunft"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Alle App-Quellen zulassen"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Kürzlich verwendete Apps"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Alle Apps ansehen"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Apps mit unbekannter Herkunft können gefährlich für dein Tablet und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Tablet und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Apps mit unbekannter Herkunft können gefährlich für dein Smartphone und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Smartphone und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Erweiterte Einstellungen"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Details"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Energieverbrauch anpassen"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Enthaltene Pakete"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"App funktioniert nicht wie gewohnt"</string>
     <string name="power_screen" msgid="3023346080675904613">"Display"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Taschenlampe"</string>
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
@@ -2756,7 +2761,7 @@
       <item quantity="one">1 automatische Regel aktiviert</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="842308776768942600">"Einstellungen für \"Nicht stören\""</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Nur wichtige Unterbr. zulassen"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Nur wichtige Unterbrechungen zulassen"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatische Regeln"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"\"Nicht stören\"-Regeln einrichten"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Töne &amp; Vibrationen zu bestimmten Zeiten einschränken"</string>
@@ -2863,8 +2868,8 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Diese Benachrichtigungen niemals anzeigen"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Benachrichtigungen anzeigen"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Benachrichtigungen niemals in der Leiste oder auf Peripheriegeräten anzeigen"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Kennzeichensymbol"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Benachrichtigungen falls möglich als Badges in der Home App anzeigen"</string>
+    <string name="notification_badge_title" msgid="7166470350070693657">"App-Symbol markieren"</string>
+    <string name="notification_badge_summary" msgid="3944771498030335669">"Bei Benachrichtigungen App-Symbol markieren, sofern möglich"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\"Nicht stören\" deaktivieren"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Diese Benachrichtigungen dürfen auch dann empfangen werden, wenn für den Modus \"Nicht stören\" die Option \"Nur wichtige Unterbrechungen\" ausgewählt ist."</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Auf dem Sperrbildschirm"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Alle Apps anzeigen"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Weitere Apps ausblenden"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Häufig verwendet"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"\"<xliff:g id="APP">%1$s</xliff:g>\" funktioniert nicht wie gewohnt"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> Apps funktionieren nicht wie gewohnt"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> Apps funktionieren nicht wie gewohnt</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> funktioniert nicht wie gewohnt</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Nicht optimiert"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Nicht optimiert"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Akkuverbrauch optimiert"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Du kannst deine Benachrichtigungen lesen, indem du auf der Rückseite deines Smartphones über den Fingerabdrucksensor nach unten wischst."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Du kannst deine Benachrichtigungen lesen, indem du auf der Rückseite deines Tablets über den Fingerabdrucksensor nach unten wischst."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Du kannst deine Benachrichtigungen lesen, indem du auf der Rückseite deines Geräts über den Fingerabdrucksensor nach unten wischst."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Zum Öffnen der Kamera hochheben"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Smartphone hochnehmen, um die Kamera zu öffnen"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Wenn du dein Smartphone hochhebst und es zum Fotografieren im Hoch- oder Querformat hältst, öffnet sich die Kamera automatisch. Dies funktioniert, wenn das Gerät im Ruhemodus oder gesperrt ist."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Keinen Moment verpassen"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Fotos vom Sperrbildschirm aus aufnehmen"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Assistent-Bewegung"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Empfindlichkeit"</string>

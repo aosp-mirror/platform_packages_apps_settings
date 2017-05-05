@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE तरतूद केली"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"व्हिडिओ कॉलिंगची तरतूद केली"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"वायफाय कॉलिंगची तरतूद केली"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/उपस्थितीची तरतूद आहे"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"मोबाइल रेडिओ पॉवर"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"सिम अॅड्रेस बुक पहा"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"निश्चित डायलिंग नंबर पहा"</string>
@@ -333,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"खाती"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"सुरक्षितता आणि स्थान"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"कूटबद्धीकरण आणि क्रेडेन्शियल"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"फोन कूटबद्ध केला"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"फोन कूटबद्ध केला"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"लॉक स्क्रीन प्राधान्ये"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"माझे स्थान, स्क्रीन अनलॉक, सिम कार्ड लॉक, क्रेडेन्शियल संचयन लॉक सेट करा"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"माझे स्थान, स्क्रीन लॉक, क्रेडेन्शियल संचयन लॉक सेट करा"</string>
@@ -1493,6 +1494,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"अ‍ॅप सेटिंग्ज"</string>
     <string name="install_applications" msgid="4872012136210802181">"अज्ञात स्त्रोत"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"सर्व अॅप स्त्रोतांना अनुमती द्या"</string>
+    <!-- no translation found for recent_app_category_title (8449656234283016115) -->
+    <skip />
+    <!-- no translation found for see_all_apps_title (1810966300215671576) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"आपले टॅबलेट आणि वैयक्तिक डेटा अज्ञात अनुप्रयोगांद्वारे आक्रमणांपासून अधिक असुरक्षित असतात. या स्रोताकडील अ‍ॅप्स स्थापित करून, आपण सहमत आहात की त्यांच्या वापराच्या परिणामी होणार्‍या आपल्या टॅबलेटच्या कोणत्याही नुकसानासाठी किंवा डेटाच्या हानीसाठी आपण जबाबदार आहात."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"आपला फोन आणि वैयक्तिक डेटा अज्ञात अनुप्रयोगांद्वारे आक्रमणांपासून अधिक असुरक्षित असतात. या स्रोताकडील अ‍ॅप्स स्थापित करून, आपण सहमत आहात की त्यांच्या वापराच्या परिणामी होणार्‍या आपल्या फोनच्या कोणत्याही नुकसानासाठी किंवा डेटाच्या हानीसाठी आपण जबाबदार आहात."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"प्रगत सेटिंग्ज"</string>
@@ -1876,7 +1881,10 @@
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> मुद्रण सेवा चालू</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> मुद्रण सेवा चालू</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> मुद्रण कार्य</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> मुद्रण कार्ये</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"मुद्रण सेवा"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"कोणत्याही सेवा स्थापित केल्या नाहीत"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"कोणतेही प्रिंटर आढळले नाहीत"</string>
@@ -1942,6 +1950,8 @@
     <string name="details_subtitle" msgid="32593908269911734">"तपशील वापरा"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"पॉवर वापर समायोजित करा"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"समाविष्ट पॅकेज"</string>
+    <!-- no translation found for battery_abnormal_details_title (7803612642167433678) -->
+    <skip />
     <string name="power_screen" msgid="3023346080675904613">"स्क्रीन"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"फ्लॅशलाइट"</string>
     <string name="power_camera" msgid="4976286950934622605">"कॅमेरा"</string>
@@ -3098,8 +3108,7 @@
     <string name="show_all_apps" msgid="1742726460081356745">"सर्व अॅप्स दर्शवा"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"अतिरिक्त अॅप्स लपवा"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"जास्त वापर"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> अस्वाभाविकपणे काम करत आहे"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> अ‍ॅप्स अस्वाभाविकपणे काम करत आहेत"</string>
+    <!-- no translation found for power_high_usage_summary (467347882627862744) -->
     <string name="high_power_filter_on" msgid="3222265297576680099">"ऑप्टिमाइझ न केलेले"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ऑप्टिमाइझ न केलेले"</string>
     <string name="high_power_off" msgid="3393904131961263278">"बॅटरी वापर ऑप्टिमाइझ करीत आहे"</string>
@@ -3325,8 +3334,7 @@
       <item quantity="other">डेटा बचतकर्ता चालू असताना <xliff:g id="COUNT">%1$d</xliff:g> अनुप्रयोगांना अनिर्बंध डेटा वापरण्याची अनुमती दिली</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"डेटा बचतकर्ता"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"अनिर्बंधित डेटा"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"पार्श्वभूमी डेटा बंद केला आहे"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"चालू"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"बंद"</string>
@@ -3478,9 +3486,11 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"आपल्या सूचना तपासण्यासाठी, आपल्या फोनच्या पाठीमागे फिंगरप्रिंट सेन्सरवर खाली स्वाइप करा."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"आपल्या सूचना तपासण्यासाठी, आपल्या टॅबलेटच्या मागे फिंगरप्रिंट सेन्सरवर खाली स्वाइप करा."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"आपल्या सूचना तपासण्यासाठी, आपल्या डिव्हाइसच्या मागे फिंगरप्रिंट सेन्सरवर खाली स्वाइप करा."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"कॅमेरा उघडण्यासाठी वर करा"</string>
+    <!-- no translation found for camera_lift_trigger_title (2758206307949942951) -->
+    <skip />
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"कॅमेरा स्‍वयंचलितपणे उघडण्‍यासाठी, तुमचा फोन फोटो घेण्याच्या (लँडस्केप किंवा पोर्ट्रेट) स्थितीत वर धरा. तुमचा फोन स्लीप मोड किंवा लॉक केलेला असताना हे काम करते."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"एक क्षणही चूकवू नका"</string>
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (3574391686649107540) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"सहाय्यता जेश्चर"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"संवेदनशीलता"</string>
