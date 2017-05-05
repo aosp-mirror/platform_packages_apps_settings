@@ -101,7 +101,7 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     private void updatePrefs() {
         NetworkPolicy policy = services.mPolicyEditor.getPolicy(mNetworkTemplate);
-        mBillingCycle.setSummary(getString(R.string.billing_cycle_summary, policy != null ?
+        mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, policy != null ?
                 policy.cycleDay : 1));
         if (policy != null && policy.warningBytes != WARNING_DISABLED) {
             mDataWarning.setSummary(Formatter.formatFileSize(getContext(), policy.warningBytes));
