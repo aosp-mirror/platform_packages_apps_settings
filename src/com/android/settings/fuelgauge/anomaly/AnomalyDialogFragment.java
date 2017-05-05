@@ -34,9 +34,11 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
 
     private static final String ARG_ANOMALY = "anomaly";
+    private static final String ARG_METRICS_KEY = "metrics_key";
 
     @VisibleForTesting
     Anomaly mAnomaly;
+    private AnomalyUtils mAnomalyUtils;
 
     /**
      * Listener to give the control back to target fragment
@@ -52,14 +54,21 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
         void onAnomalyHandled(Anomaly anomaly);
     }
 
-    public static AnomalyDialogFragment newInstance(Anomaly anomaly) {
+    public static AnomalyDialogFragment newInstance(Anomaly anomaly, int metricsKey) {
         AnomalyDialogFragment dialogFragment = new AnomalyDialogFragment();
 
-        Bundle args = new Bundle(1);
+        Bundle args = new Bundle(2);
         args.putParcelable(ARG_ANOMALY, anomaly);
+        args.putInt(ARG_METRICS_KEY, metricsKey);
         dialogFragment.setArguments(args);
 
         return dialogFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mAnomalyUtils = AnomalyUtils.getInstance(getContext());
     }
 
     @Override
@@ -75,8 +84,10 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
             return;
         }
 
-        final AnomalyAction anomalyAction = AnomalyUtils.getAnomalyAction(mAnomaly.type);
-        anomalyAction.handlePositiveAction(mAnomaly.packageName);
+        final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly.type);
+        final int metricsKey = getArguments().getInt(ARG_METRICS_KEY);
+
+        anomalyAction.handlePositiveAction(mAnomaly.packageName, metricsKey);
         lsn.onAnomalyHandled(mAnomaly);
     }
 
@@ -86,7 +97,7 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
         mAnomaly = bundle.getParcelable(ARG_ANOMALY);
 
         final Context context = getContext();
-        final AnomalyAction anomalyAction = AnomalyUtils.getAnomalyAction(mAnomaly.type);
+        final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly.type);
         switch (anomalyAction.getActionType()) {
             case Anomaly.AnomalyActionType.FORCE_STOP:
                 return new AlertDialog.Builder(context)

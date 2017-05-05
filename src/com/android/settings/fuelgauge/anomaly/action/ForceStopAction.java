@@ -16,15 +16,39 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.util.Pair;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Force stop action for anomaly app, which means to stop the app which causes anomaly
  */
 public class ForceStopAction implements AnomalyAction {
+
+    private Context mContext;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+    private ActivityManager mActivityManager;
+
+    public ForceStopAction(Context context) {
+        mContext = context;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mActivityManager = (ActivityManager) context.getSystemService(
+                Context.ACTIVITY_SERVICE);
+    }
+
     @Override
-    public void handlePositiveAction(String packageName) {
+    public void handlePositiveAction(String packageName, int metricsKey) {
         // force stop the package
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP, packageName,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
+
+        mActivityManager.forceStopPackage(packageName);
     }
 
     @Override

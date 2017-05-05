@@ -16,23 +16,41 @@
 
 package com.android.settings.fuelgauge.anomaly;
 
+import android.content.Context;
+import android.support.annotation.VisibleForTesting;
+
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 
 /**
- * Utitily class for anomaly detection
+ * Utility class for anomaly detection
  */
 public class AnomalyUtils {
+    private Context mContext;
+    private static AnomalyUtils sInstance;
+
+    @VisibleForTesting
+    AnomalyUtils(Context context) {
+        mContext = context.getApplicationContext();
+    }
+
+    public static AnomalyUtils getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new AnomalyUtils(context);
+        }
+        return sInstance;
+    }
 
     /**
-     * Return the corresponding {@link AnomalyAction} according to {@link AnomalyType}
+     * Return the corresponding {@link AnomalyAction} according to
+     * {@link com.android.settings.fuelgauge.anomaly.Anomaly.AnomalyType}
      *
      * @return corresponding {@link AnomalyAction}, or null if cannot find it.
      */
-    public static final AnomalyAction getAnomalyAction(int anomalyType) {
+    public final AnomalyAction getAnomalyAction(@Anomaly.AnomalyType int anomalyType) {
         switch (anomalyType) {
             case Anomaly.AnomalyType.WAKE_LOCK:
-                return new ForceStopAction();
+                return new ForceStopAction(mContext);
             default:
                 return null;
         }
