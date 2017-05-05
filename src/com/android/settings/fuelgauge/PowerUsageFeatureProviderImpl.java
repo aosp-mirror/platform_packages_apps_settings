@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Process;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
@@ -88,5 +90,25 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isAnomalyDetectionEnabled() {
         return false;
+    }
+
+    @Override
+    public long getEnhancedBatteryPrediction(Context context) {
+        return -1;
+    }
+
+    @Override
+    public boolean isEnhancedBatteryPredictionEnabled(Context context) {
+        return false;
+    }
+
+    @Override
+    public Uri getEnhancedBatteryPredictionUri() {
+        return null;
+    }
+
+    @Override
+    public long getTimeRemainingEstimate(Cursor cursor) {
+        return 0;
     }
 }
