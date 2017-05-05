@@ -32,7 +32,7 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
 
     public AppCounter(Context context, PackageManagerWrapper packageManager) {
         mPm = packageManager;
-        mUm = UserManager.get(context);
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override

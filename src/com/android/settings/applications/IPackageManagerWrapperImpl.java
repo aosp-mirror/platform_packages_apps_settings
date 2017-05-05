@@ -18,6 +18,8 @@ package com.android.settings.applications;
 
 import android.content.Intent;
 import android.content.pm.IPackageManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.ParceledListSlice;
 import android.content.pm.ResolveInfo;
 import android.os.RemoteException;
 
@@ -39,4 +41,27 @@ public class IPackageManagerWrapperImpl implements IPackageManagerWrapper {
             throws RemoteException {
         return mPms.findPersistentPreferredActivity(intent, userId);
     }
+
+    @Override
+    public PackageInfo getPackageInfo(String packageName, int flags, int userId)
+            throws RemoteException {
+        return mPms.getPackageInfo(packageName, flags, userId);
+    }
+
+    @Override
+    public String[] getAppOpPermissionPackages(String permissionName) throws RemoteException {
+        return mPms.getAppOpPermissionPackages(permissionName);
+    }
+
+    @Override
+    public boolean isPackageAvailable(String packageName, int userId) throws RemoteException {
+        return mPms.isPackageAvailable(packageName, userId);
+    }
+
+    @Override
+    public ParceledListSlice<PackageInfo> getPackagesHoldingPermissions(
+        String[] permissions, int flags, int userId) throws RemoteException {
+        return mPms.getPackagesHoldingPermissions(permissions, flags, userId);
+    }
+
 }
