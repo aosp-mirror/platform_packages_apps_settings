@@ -34,6 +34,8 @@ import com.android.settings.overlay.FeatureFactory;
  */
 public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
 
+    private final String mPlaceholderSummary;
+
     public final TextView titleView;
     public final TextView summaryView;
     public final TextView breadcrumbView;
@@ -49,11 +51,14 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
         summaryView = view.findViewById(android.R.id.summary);
         iconView = view.findViewById(android.R.id.icon);
         breadcrumbView = view.findViewById(R.id.breadcrumb);
+
+        mPlaceholderSummary = view.getContext().getString(R.string.summary_placeholder);
     }
 
     public void onBind(SearchFragment fragment, SearchResult result) {
         titleView.setText(result.title);
-        if (TextUtils.isEmpty(result.summary)) {
+        if (TextUtils.isEmpty(result.summary)
+                || TextUtils.equals(result.summary, mPlaceholderSummary)) {
             summaryView.setVisibility(View.GONE);
         } else {
             summaryView.setText(result.summary);
