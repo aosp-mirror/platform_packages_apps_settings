@@ -29,9 +29,12 @@ import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
+
+import java.util.List;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
@@ -39,6 +42,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
  */
 public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private static final int MENU_ID_REFRESH = Menu.FIRST;
+    private static final String TAG = "DevicePickerFragment";
 
     public DevicePickerFragment() {
         super(null /* Not tied to any user restrictions. */);
@@ -51,8 +55,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     @Override
     void addPreferencesForActivity() {
-        addPreferencesFromResource(R.xml.device_picker);
-
         Intent intent = getActivity().getIntent();
         mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
         setFilter(intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
@@ -148,6 +150,21 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
             mLocalAdapter.startScanning(false);
         }
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.device_picker;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return null;
     }
 
     private void sendDevicePickedIntent(BluetoothDevice device) {

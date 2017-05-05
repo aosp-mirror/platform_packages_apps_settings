@@ -24,7 +24,7 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.util.Log;
 
-import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -42,7 +42,7 @@ import java.util.WeakHashMap;
  * @see DevicePickerFragment
  */
 public abstract class DeviceListPreferenceFragment extends
-        RestrictedSettingsFragment implements BluetoothCallback {
+        RestrictedDashboardFragment implements BluetoothCallback {
 
     private static final String TAG = "DeviceListPreferenceFragment";
 

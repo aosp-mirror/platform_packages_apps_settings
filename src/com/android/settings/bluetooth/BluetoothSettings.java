@@ -45,6 +45,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -168,7 +169,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
     @Override
     void addPreferencesForActivity() {
-        addPreferencesFromResource(R.xml.bluetooth_settings);
         final Context prefContext = getPrefContext();
         mPairedDevicesCategory = new PreferenceCategory(prefContext);
         mPairedDevicesCategory.setKey(KEY_PAIRED_DEVICES);
@@ -515,6 +515,21 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     protected int getHelpResource() {
         return R.string.help_url_bluetooth;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.bluetooth_settings;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return null;
     }
 
     @VisibleForTesting
