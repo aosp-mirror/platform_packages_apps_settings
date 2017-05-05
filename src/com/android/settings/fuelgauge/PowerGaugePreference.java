@@ -111,8 +111,9 @@ public class PowerGaugePreference extends TintablePreference {
         if (mShowAnomalyIcon) {
             subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_warning_24dp, 0,
                     0, 0);
+        } else {
+            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         }
-        ((TextView) view.findViewById(R.id.widget_summary)).setText(mProgress);
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);

@@ -82,7 +82,7 @@ public class PowerGaugePreferenceTest {
     }
 
     @Test
-    public void testOnBindViewHolder_bindAnomalyIcon() {
+    public void testOnBindViewHolder_showAnomaly_bindAnomalyIcon() {
         mPowerGaugePreference.shouldShowAnomalyIcon(true);
         mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
 
@@ -90,6 +90,17 @@ public class PowerGaugePreferenceTest {
                 R.id.widget_summary)).getCompoundDrawablesRelative();
 
         assertThat(drawables[0]).isInstanceOf(VectorDrawable.class);
+    }
+
+    @Test
+    public void testOnBindViewHolder_notShowAnomaly_bindAnomalyIcon() {
+        mPowerGaugePreference.shouldShowAnomalyIcon(false);
+        mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
+
+        final Drawable[] drawables = ((TextView) mPreferenceViewHolder.findViewById(
+                R.id.widget_summary)).getCompoundDrawablesRelative();
+
+        assertThat(drawables[0]).isNull();
     }
 
     @Test
