@@ -137,7 +137,7 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(BACKGROUND_TIME_US).when(mUid).getProcessStateTime(
                 eq(BatteryStats.Uid.PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
         doReturn(FOREGROUND_TIME_US).when(mUid).getProcessStateTime(
-                eq(BatteryStats.Uid.PROCESS_STATE_FOREGROUND), anyLong(), anyInt());
+                eq(BatteryStats.Uid.PROCESS_STATE_TOP), anyLong(), anyInt());
         ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
         mBatteryEntry.iconId = ICON_ID;
         mBatterySipper.uidObj = mUid;
