@@ -292,7 +292,7 @@
     <string name="networks" msgid="6333316876545927039">"Valg af udbyder"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"Vælg en netværksudbyder"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Dato og tid"</string>
-    <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"Indstil dato og tid"</string>
+    <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"Angiv dato og klokkeslæt"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"Angiv dato, klokkeslæt, tidszone og formater"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"Automatisk dato og tid"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Brug netværkets tid"</string>
@@ -331,7 +331,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Konti"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Sikkerhed og placering"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Kryptering og loginoplysninger"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Telefonen er krypteret"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefonen er krypteret"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Præferencer for låseskærm"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låst SIM-kort og lager for loginoplysninger"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Angiv Min placering, oplåsning af skærmen, lager for loginoplysninger"</string>
@@ -700,7 +702,7 @@
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Hvis du vil forbedre nøjagtigheden af placeringer, skal du slå Wi-Fi-scanning til i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>scanningsindstillingerne<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Vis ikke igen"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Hold Wi-Fi aktiveret i dvale"</string>
-    <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Slå Wi-Fi til i dvaletilstand"</string>
+    <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi-Fi aktiveret i dvaletilstand"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Der opstod et problem ved ændring af indstillingen"</string>
     <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"Gør mere effektiv"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi-optimering"</string>
@@ -1484,7 +1486,7 @@
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Den samme som enhedens skærmlås"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Administrer apps"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Administrer og fjern installerede apps"</string>
-    <string name="applications_settings" msgid="5281808652705396152">"Oplysninger om appen"</string>
+    <string name="applications_settings" msgid="5281808652705396152">"Appinfo"</string>
     <string name="applications_settings_summary" msgid="6683465446264515367">"Administrer apps, konfigurer genveje til hurtig start"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"Indstillinger for app"</string>
     <string name="install_applications" msgid="4872012136210802181">"Ukendte kilder"</string>
@@ -2358,7 +2360,7 @@
     <string name="data_usage_metered_body" msgid="7655851702771342507">"Forbrugsbaserede netværk behandles ligesom mobilnetværk, når baggrundsdata begrænses. Apps kan advare dig, før du bruger disse netværk til store downloads."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobilnetværk"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Forbrugsbaserede Wi-Fi-netværk"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"For at vælge forbrugsbaserede netværk skal du slå Wi-Fi til."</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Hvis du vil vælge forbrugsbaserede netværk, skal du slå Wi-Fi til."</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Mobilselskabets dataopgørelse kan variere afhængigt af din enhed."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Nødopkald"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Tilbage til opkald"</string>
@@ -2650,9 +2652,9 @@
       <item quantity="one">Vis %d skjult element</item>
       <item quantity="other">Vis %d skjulte elementer</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="4771589228992391573">"Netværk &amp; internet"</string>
+    <string name="network_dashboard_title" msgid="4771589228992391573">"Netværk og internet"</string>
     <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, mobil, dataforbrug, hotspot"</string>
-    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Tilsluttede enheder"</string>
+    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Forbundne enheder"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Cast, NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps og underretninger"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Tilladelser, standardapps"</string>
@@ -2839,7 +2841,7 @@
     <string name="notification_channels_other" msgid="5645317113885788226">"Andre"</string>
     <string name="no_channels" msgid="3077375508177744586">"Denne app har ikke sendt nogen underretninger"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Yderligere indstillinger i appen"</string>
-    <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Slået til for alle apps"</string>
+    <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Aktiveret for alle apps"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="5668835155965827890">
       <item quantity="one">Slået fra for <xliff:g id="COUNT_1">%d</xliff:g> app</item>
       <item quantity="other">Slået fra for <xliff:g id="COUNT_1">%d</xliff:g> apps</item>
@@ -3292,8 +3294,8 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobildata"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi-data"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-data"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> Dataadvarsel"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> Dataadvarsel / <xliff:g id="ID_2">%2$s</xliff:g> Datagrænse"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"Dataadvarsel ved <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Dataadvarsel ved <xliff:g id="ID_1">%1$s</xliff:g> / Datagrænse på <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Faktureringscyklus"</string>
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Den månedlige cyklus starter den <xliff:g id="ID_1">%1$s</xliff:g>. i hver måned"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Hver måned fra og med den <xliff:g id="ID_1">%1$s</xliff:g>."</string>
@@ -3450,8 +3452,7 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr din telefon med hurtige bevægelser"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr din tablet med hurtige bevægelser"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr din enhed med hurtige bevægelser"</string>
-    <!-- no translation found for double_tap_power_for_camera_title (64716226816032800) -->
-    <skip />
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Gå til kamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Du kan åbne dit kamera hurtigt ved at trykke to gange på afbryderknappen. Denne genvej fungerer fra enhver skærm."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vip kameraet"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
@@ -3465,7 +3466,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"Du kan hurtigt se dine underretninger ved at tage din telefon op."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Du kan hurtigt se dine underretninger ved at samle din tablet op."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Du kan hurtigt se dine underretninger ved at samle din enhed op."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Stryg med fingeraftryk for at se underretninger"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Stryg over fingeraftryk for at se underretninger"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Du kan tjekke dine underretninger ved at stryge nedad på fingeraftrykslæseren på bagsiden af telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Du kan tjekke dine underretninger ved at stryge nedad på fingeraftrykslæseren på bagsiden af din tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Du kan tjekke dine underretninger ved at stryge nedad på fingeraftrykslæseren på bagsiden af enheden."</string>
