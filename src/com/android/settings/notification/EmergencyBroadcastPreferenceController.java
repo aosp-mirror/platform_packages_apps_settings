@@ -20,9 +20,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.core.PreferenceController;
 import com.android.settingslib.RestrictedPreference;
@@ -33,20 +33,22 @@ import com.android.settingslib.RestrictedPreference;
  */
 public class EmergencyBroadcastPreferenceController extends PreferenceController {
 
-    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+    private final String mPrefKey;
 
     private AccountRestrictionHelper mHelper;
     private UserManager mUserManager;
     private PackageManager mPm;
     private boolean mCellBroadcastAppLinkEnabled;
 
-    public EmergencyBroadcastPreferenceController(Context context) {
-        this(context, new AccountRestrictionHelper(context));
+    public EmergencyBroadcastPreferenceController(Context context, String prefKey) {
+        this(context, new AccountRestrictionHelper(context), prefKey);
     }
 
-    @VisibleForTesting
-    EmergencyBroadcastPreferenceController(Context context, AccountRestrictionHelper helper) {
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    EmergencyBroadcastPreferenceController(Context context, AccountRestrictionHelper helper,
+            String prefKey) {
         super(context);
+        mPrefKey = prefKey;
         mHelper = helper;
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPm = mContext.getPackageManager();
@@ -60,7 +62,7 @@ public class EmergencyBroadcastPreferenceController extends PreferenceController
             return;
         }
         ((RestrictedPreference) preference).checkRestrictionAndSetDisabled(
-            UserManager.DISALLOW_CONFIG_CELL_BROADCASTS);
+                UserManager.DISALLOW_CONFIG_CELL_BROADCASTS);
     }
 
     @Override
@@ -70,23 +72,23 @@ public class EmergencyBroadcastPreferenceController extends PreferenceController
 
     @Override
     public String getPreferenceKey() {
-        return KEY_CELL_BROADCAST_SETTINGS;
+        return mPrefKey;
     }
 
     @Override
     public boolean isAvailable() {
         return mUserManager.isAdminUser() && mCellBroadcastAppLinkEnabled
-            && !mHelper.hasBaseUserRestriction(
+                && !mHelper.hasBaseUserRestriction(
                 UserManager.DISALLOW_CONFIG_CELL_BROADCASTS, UserHandle.myUserId());
     }
 
     private boolean isCellBroadcastAppLinkEnabled() {
         boolean enabled = mContext.getResources().getBoolean(
-            com.android.internal.R.bool.config_cellBroadcastAppLinks);
+                com.android.internal.R.bool.config_cellBroadcastAppLinks);
         if (enabled) {
             try {
                 if (mPm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
-                    == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
                     enabled = false;  // CMAS app disabled
                 }
             } catch (IllegalArgumentException ignored) {
