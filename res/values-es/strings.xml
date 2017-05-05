@@ -41,7 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE administrada"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Videollamada preparada"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Llamada Wi-Fi preparada"</string>
-    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/presencia asignados"</string>
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence asignados"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Potencia de la señal móvil"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Ver libreta de direcciones de tarjeta SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Ver números de marcación fija"</string>
@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Cuentas"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Seguridad y ubicación"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Cifrado y credenciales"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Teléfono cifrado"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Teléfono cifrado"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Ajustes de la pantalla de bloqueo"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Establecer Mi ubicación, bloqueo de pantalla, bloqueo de tarjeta SIM y bloqueo de almacenamiento de credenciales"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Establecer ubicación, bloqueo de pantalla y bloqueo de almacenamiento de credenciales"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Ajustes de aplicación"</string>
     <string name="install_applications" msgid="4872012136210802181">"Orígenes desconocidos"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Permitir todas las fuentes"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Aplicaciones utilizadas recientemente"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Ver todas las aplicaciones"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Tu tablet y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu tablet o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Tu teléfono y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu teléfono o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Ajustes avanzados"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Cómo reducir el uso de la batería"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Paquetes incluidos"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Comportamiento anormal de la aplicación"</string>
     <string name="power_screen" msgid="3023346080675904613">"Pantalla"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Linterna"</string>
     <string name="power_camera" msgid="4976286950934622605">"Cámara"</string>
@@ -2863,8 +2868,8 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"No mostrar nunca estas notificaciones"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Mostrar notificaciones"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"No mostrar nunca notificaciones en el panel de notificaciones ni en dispositivos periféricos"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Incluir icono de la aplicación"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Mostrar notificaciones como insignias en la aplicación Home (si es compatible)"</string>
+    <string name="notification_badge_title" msgid="7166470350070693657">"Mostrar icono de la aplicación"</string>
+    <string name="notification_badge_summary" msgid="3944771498030335669">"Mostrar notificaciones como iconos en la aplicación Home (si es compatible)"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Priorizar"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"No bloquear notificaciones cuando la opción No molestar esté establecida en Solo prioritarias"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"En la pantalla de bloqueo"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Mostrar todas las aplicaciones"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Ocultar aplicaciones extra"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Uso elevado"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> no funciona con normalidad"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> aplicaciones no funcionan con normalidad"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> aplicaciones no funcionan con normalidad</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> no funciona con normalidad</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Sin optimizar"</string>
     <string name="high_power_on" msgid="6216293998227583810">"No optimizada"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimizando el uso de la batería"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del teléfono."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del dispositivo."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Levantar para abrir la cámara"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Levanta el teléfono para abrir la cámara"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Para abrir la cámara de forma automática, levanta el teléfono como si quisieras hacer una foto (en posición horizontal o vertical). Funciona cuando el teléfono está bloqueado o en suspensión."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"No te pierdas ningún momento"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Haz fotos desde la pantalla de bloqueo"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto de asistencia"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidad"</string>

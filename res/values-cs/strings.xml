@@ -336,7 +336,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Účty"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Zabezpečení a poloha"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Šifrování a identifikační údaje"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Telefon je zašifrován"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon je zašifrován"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Předvolby obrazovky uzamčení"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moje poloha, odemknutí obrazovky, zámek SIM, zámek úložiště pověření"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavení funkce Moje poloha, odemknutí obrazovky a zamknutí úložiště pověření"</string>
@@ -695,7 +697,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Vypnuto"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Není k dispozici, protože je vypnuta funkce NFC"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Když je funkce zapnutá, můžete přenášet obsah aplikace do jiného zařízení s funkcí NFC tak, že obě zařízení podržíte blízko sebe. Přenášet můžete například webové stránky, videa YouTube, kontakty a další.\n\nPřiložte zařízení k sobě (zpravidla zadní stranou) a klepněte na obrazovku. Aplikace určí, jaký obsah se bude přenášet."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Když je funkce zapnutá, můžete přenášet obsah aplikace do jiného zařízení s funkcí NFC tak, že obě zařízení podržíte blízko sebe. Přenášet můžete například webové stránky, videa na YouTube, kontakty a další.\n\nPřiložte zařízení k sobě (zpravidla zadní stranou) a klepněte na obrazovku. Aplikace určí, jaký obsah se bude přenášet."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Zapnout Wi-Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi-Fi"</string>
@@ -1520,6 +1522,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Nastavení aplikace"</string>
     <string name="install_applications" msgid="4872012136210802181">"Neznámé zdroje"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Povolit všechny zdroje aplikací"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Nedávno použité aplikace"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Zobrazit všechny aplikace"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Tablet a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození tabletu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Telefon a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození telefonu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Upřesnit nastavení"</string>
@@ -1988,6 +1992,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Podrobnosti využívání"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Upravit spotřebu energie"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Zahrnuté balíčky"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Neobvyklé chování aplikace"</string>
     <string name="power_screen" msgid="3023346080675904613">"Displej"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Svítilna"</string>
     <string name="power_camera" msgid="4976286950934622605">"Fotoaparát"</string>
@@ -3174,8 +3179,12 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Zobrazit všechny aplikace"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Skrýt aplikace navíc"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Vysoké využití"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"Aplikace <xliff:g id="APP">%1$s</xliff:g> se chová neobvykle"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"Aplikace (<xliff:g id="NUMBER">%1$d</xliff:g>) se chovají neobvykle"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="few"><xliff:g id="NUMBER">%2$d</xliff:g> aplikace se chovají neobvykle</item>
+      <item quantity="many"><xliff:g id="NUMBER">%2$d</xliff:g> aplikace se chová neobvykle</item>
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> aplikací se chová neobvykle</item>
+      <item quantity="one">Aplikace <xliff:g id="APP">%1$s</xliff:g> se chová neobvykle</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Neoptimalizováno"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Neoptimalizováno"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimalizace využívání baterie"</string>
@@ -3183,7 +3192,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"Optimalizace výdrže baterie nebude použita. Baterie se může vybíjet rychleji."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Povolit aplikaci stále běžet na pozadí?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"Pokud aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> povolíte stále běžet na pozadí, může to zkrátit životnost baterie. \n\nToto nastavení můžete později změnit v sekci Nastavení &gt; Aplikace a oznámení."</string>
-    <string name="battery_summary" msgid="8044042095190688654">"Od posledního úplného nabití bylo využito <xliff:g id="PERCENTAGE">%1$s</xliff:g> %% baterie"</string>
+    <string name="battery_summary" msgid="8044042095190688654">"Od posledního úplného nabití bylo využito <xliff:g id="PERCENTAGE">%1$s</xliff:g> baterie"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Správa napájení"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Baterie od posledního úplného nabití nebyla využita"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Nastavení aplikace"</string>
@@ -3569,9 +3578,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Chcete-li zkontrolovat oznámení, přejeďte prstem dolů po snímači otisků prstů na zadní straně telefonu."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Chcete-li zkontrolovat oznámení, přejeďte prstem dolů po snímači otisků prstů na zadní straně tabletu."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Chcete-li zkontrolovat oznámení, přejeďte prstem dolů po snímači otisků prstů na zadní straně zařízení."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Spuštění fotoaparátu zvednutím"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Otevřít fotoaparát, když zvednete zařízení"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Chcete-li automaticky spustit fotoaparát, zvedněte telefon do polohy pro focení (na výšku nebo na šířku). Funguje, i když je telefon v režimu spánku nebo uzamčený."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Nic už vám neuteče"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Focení na obrazovce uzamčení"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto asistence"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Citlivost"</string>

@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Konton"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Säkerhet och plats"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Kryptering och användaruppgifter"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Mobilen är krypterad"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Mobilen är krypterad"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Inställningar för låsskärm"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ställ in Min plats, skärmupplåsning, lås för SIM-kort och lås för uppgiftslagring"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ställ in Min plats, skärmupplåsning, lås för uppgiftslagring"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Appinställningar"</string>
     <string name="install_applications" msgid="4872012136210802181">"Okända källor"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Tillåt alla appkällor"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Senast använda appar"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Visa alla appar"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Surfplattan och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på surfplattan eller förlust av data som kan uppstå när du använder dessa appar."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Mobilen och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på mobilen eller förlust av data som kan uppstå när du använder dessa appar."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Avancerade inställningar"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Information om användning"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Justera strömförbrukningen"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Inkluderade paket"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Appar fungerar inte normalt"</string>
     <string name="power_screen" msgid="3023346080675904613">"Skärm"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Ficklampa"</string>
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Visa alla appar"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Dölj extra appar"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Hög förbrukning"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> fungerar inte normalt"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> appar fungerar inte normalt"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> appar fungerar inte normalt</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> fungerar inte normalt</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Inte optimerade"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Inte optimerad"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Använder optimerad batteriförbrukning"</string>
@@ -3109,7 +3116,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"Använd inte batterioptimering. Med detta alternativ kan batteriet kan ta slut fortare."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Vill du tillåta att appen alltid körs i bakgrunden?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"Om du tillåter att <xliff:g id="APP_NAME">%1$s</xliff:g> alltid körs i bakgrunden kan batteritiden minska. \n\nDu kan ändra detta senare under Inställningar &gt; Appar och aviseringar."</string>
-    <string name="battery_summary" msgid="8044042095190688654">"Står för <xliff:g id="PERCENTAGE">%1$s</xliff:g> %% av batteriförbrukningen sedan batteriet senast var fulladdat"</string>
+    <string name="battery_summary" msgid="8044042095190688654">"Står för <xliff:g id="PERCENTAGE">%1$s</xliff:g> av batteriförbrukningen sedan batteriet senast var fulladdat"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Energialternativ"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Har inte förbrukat något batteri sedan batteriet senast var fulladdat"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Appinställningar"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av mobilen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av surfplattan."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av enheten."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Lyft för att öppna kameran"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Höj mobilen för att öppna kameran"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Öppna kameran automatiskt genom att lyfta mobilen som om du skulle ta ett foto (liggande eller stående). Fungerar när mobilen är i viloläge eller låst."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Missa aldrig ett viktigt ögonblick"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Ta foton från låsskärmen"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Assistentrörelse"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Känslighet"</string>

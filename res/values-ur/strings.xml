@@ -41,8 +41,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"‏VoLTE سے لیس"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"ویڈیو کالنگ فراہم کردہ"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"‏WiFi کالنگ فراہم کردہ"</string>
-    <!-- no translation found for eab_provisioned_switch_string (3482272907448592975) -->
-    <skip />
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"‏EAB/موجودگی فراہم کر دی گئی"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"موبائل ریڈیو پاور"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"‏SIM ایڈریس بک دیکھیں"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"فکسڈ ڈائلنگ نمبرز دیکھیں"</string>
@@ -333,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"اکاؤنٹس"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"سیکیورٹی اور مقام"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"مرموز کاری اور اسناد"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"فون مرموز کیا گيا"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"فون مرموز کیا گيا"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"مقفل اسکرین کی ترجیحات"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"‏میرا مقام، اسکرین اَن لاک، SIM کارڈ لاک، اسناد کے اسٹوریج کا لاک سیٹ کریں"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"میرا مقام، اسکرین ان لاک، اسناد کے اسٹوریج کا لاک سیٹ کریں"</string>
@@ -1493,6 +1494,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"ایپ کی ترتیبات"</string>
     <string name="install_applications" msgid="4872012136210802181">"نامعلوم ذرائع"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"ایپ کے سبھی مآخذ کی اجازت دیں"</string>
+    <!-- no translation found for recent_app_category_title (8449656234283016115) -->
+    <skip />
+    <!-- no translation found for see_all_apps_title (1810966300215671576) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"آپ کے ٹیبلیٹ اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے ٹیبلیٹ کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"آپ کے فون اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے فون کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"جدید ترین ترتیبات"</string>
@@ -1876,7 +1881,10 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> پرنٹ سروسز آن ہیں</item>
       <item quantity="one">1 پرنٹ سروس آن ہے</item>
     </plurals>
-    <!-- no translation found for print_jobs_summary (5810106725778525400) -->
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> پرنٹ جابز</item>
+      <item quantity="one">1 پرنٹ جاب</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"پرنٹ سروسز"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"کوئی سروسز انسٹال نہیں ہے"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"کوئی پرنٹرز نہیں ملے"</string>
@@ -1942,6 +1950,8 @@
     <string name="details_subtitle" msgid="32593908269911734">"استعمال کی تفصیلات"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"پاور کا استعمال ایڈجسٹ کریں"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"شامل کردہ پیکیجز"</string>
+    <!-- no translation found for battery_abnormal_details_title (7803612642167433678) -->
+    <skip />
     <string name="power_screen" msgid="3023346080675904613">"اسکرین"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"فلیش لائٹ"</string>
     <string name="power_camera" msgid="4976286950934622605">"کیمرا"</string>
@@ -3096,8 +3106,7 @@
     <string name="show_all_apps" msgid="1742726460081356745">"سبھی ایپس دکھائیں"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"اضافی ایپس چھپائیں"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"بہت زیادہ استعمال"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> معمول کے خلاف برتاؤ کر رہی ہے"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> ایپس معمول کے خلاف برتاؤ کر رہی ہیں"</string>
+    <!-- no translation found for power_high_usage_summary (467347882627862744) -->
     <string name="high_power_filter_on" msgid="3222265297576680099">"بہترین بنائی گئی نہیں ہیں"</string>
     <string name="high_power_on" msgid="6216293998227583810">"بہترین بنائی گئی نہیں ہیں"</string>
     <string name="high_power_off" msgid="3393904131961263278">"بیٹری استعمال کو بہترین بنا رہی ہے"</string>
@@ -3323,8 +3332,7 @@
       <item quantity="one">ڈیٹا سیور آن ہو تو 1 ایپ کو غیر محدود ڈیٹا استعمال کرنے کی اجازت ہے</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"ڈیٹا سیور"</string>
-    <!-- no translation found for unrestricted_data_saver (952796077540228711) -->
-    <skip />
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"غیر محدود ڈیٹا"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"پس منظر کا ڈیٹا آف ہے"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"آن"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"آف"</string>
@@ -3476,9 +3484,11 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"اپنی اطلاعات چیک کرنے کیلئے اپنے ٹیبلیٹ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"اپنی اطلاعات چیک کرنے کیلئے اپنے آلہ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"کیمرا کھولنے کیلئے اٹھائیں"</string>
+    <!-- no translation found for camera_lift_trigger_title (2758206307949942951) -->
+    <skip />
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"کیمرا کو خودکار طور پر کھولنے کیلئے، اپنے فون کو تصویر لینے والی پوزیشن (لینڈ اسکیپ یا پورٹریٹ) تک اٹھائيں۔ یہ اس وقت کام کرتا ہے جب آپ کا فون سلیپ وضع میں ہوتا ہے یا مقفل ہوتا ہے۔"</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"کسی لمحے سے محروم نہ رہیں"</string>
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (3574391686649107540) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"معاونت کا اشارہ"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"حسّاسیت"</string>

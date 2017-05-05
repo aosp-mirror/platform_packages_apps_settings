@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"கணக்குகள்"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"பாதுகாப்பு &amp; இருப்பிடம்"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"என்கிரிப்ஷன் &amp; அனுமதிச் சான்றுகள்"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"ஃபோன் என்கிரிப்ட் செய்யப்பட்டது"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"ஃபோன் என்கிரிப்ட் செய்யப்பட்டது"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"பூட்டுத் திரை விருப்பத்தேர்வுகள்"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"எனது இருப்பிடம், திரை திற, சிம் கார்டு பூட்டு, நற்சான்று சேமிப்பிட பூட்டு ஆகியவற்றை அமைக்கவும்"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"எனது இருப்பிடம், திரையைத் திற, நற்சான்று சேமிப்பிடப் பூட்டு ஆகியவற்றை அமைக்கவும்"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"பயன்பாட்டு அமைப்பு"</string>
     <string name="install_applications" msgid="4872012136210802181">"அறியப்படாத மூலங்கள்"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"எல்லா பயன்பாட்டு ஆதாரங்களையும் அனுமதி"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"சமீபத்தில் பயன்படுத்திய பயன்பாடுகள்"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"எல்லாப் பயன்பாடுகளையும் காட்டு"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"அறியப்படாத பயன்பாடுகளால் உங்கள் டேப்லெட்டும் தனிப்பட்ட தரவும் அதிகம் பாதிப்பிற்கு உள்ளாகும். இந்த மூலத்திலிருந்து பயன்பாடுகளை நிறுவுவதால், அவற்றைப் பயன்படுத்தும் போது உங்கள் டேப்லெட்டுக்கு ஏதேனும் சேதம் ஏற்பட்டாலோ அல்லது தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"அறியப்படாத பயன்பாடுககளால் உங்கள் மொபைலும் தனிப்பட்ட தரவும் அதிகம் பாதிப்பிற்கு உள்ளாகும். இந்த மூலத்திலிருந்து பயன்பாடுகளை நிறுவுவதால், அவற்றைப் பயன்படுத்தும் போது உங்கள் மொபைலுக்கு ஏதேனும் சேதம் ஏற்பட்டாலோ அல்லது தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"மேம்பட்ட அமைப்பு"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"விவரங்களைப் பயன்படுத்து"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"ஆற்றல் பயன்பாட்டைச் சரிசெய்க"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"உள்ளடங்கும் தொகுப்புகள்"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"வழக்கத்திற்கு மாறான பயன்பாட்டின் செயல்பாடு"</string>
     <string name="power_screen" msgid="3023346080675904613">"திரை"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"டார்ச் லைட்"</string>
     <string name="power_camera" msgid="4976286950934622605">"கேமரா"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"எல்லா பயன்பாடுகளையும் காட்டு"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"கூடுதல் பயன்பாடுகளை மறை"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"அதிக உபயோகம்"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"வழக்கத்திற்கு மாறாக <xliff:g id="APP">%1$s</xliff:g> செயல்படுகிறது"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"வழக்கத்திற்கு மாறாக <xliff:g id="NUMBER">%1$d</xliff:g> பயன்பாடுகள் செயல்படுகின்றன"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other">வழக்கத்திற்கு மாறாக <xliff:g id="NUMBER">%2$d</xliff:g> பயன்பாடுகள் செயல்படுகின்றன</item>
+      <item quantity="one">வழக்கத்திற்கு மாறாக <xliff:g id="APP">%1$s</xliff:g> செயல்படுகிறது</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"மேம்படுத்தப்படாதவை"</string>
     <string name="high_power_on" msgid="6216293998227583810">"மேம்படுத்தப்படாதது"</string>
     <string name="high_power_off" msgid="3393904131961263278">"பேட்டரி உபயோகத்தை மேம்படுத்தும்"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"அறிவிப்புகளைப் பார்க்க, மொபைலின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"அறிவிப்புகளைப் பார்க்க, டேப்லெட்டின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"அறிவிப்புகளைப் பார்க்க, சாதனத்தின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"கேமராவைத் திறக்க, மொபைலை எடுக்கவும்"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"கேமராவைத் திறக்க, மொபைலை எடுக்கவும்"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"கேமராவைத் தானாகத் திறக்க, படமெடுக்கும் நிலையில் (நீளவாக்கில் அல்லது அகலவாக்கில்) மொபைலை எடுக்கவும். மொபைல் உறக்கநிலையில் அல்லது பூட்டப்பட்டிருக்கும் நிலையில் இருக்கும் போது இந்த அம்சம் வேலைசெய்யும்."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"எந்தவொரு தருணத்தையும் தவறவிடாதீர்கள்"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"பூட்டுத் திரையில் இருந்து படங்களை எடுக்கலாம்"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"அசிஸ்ட் சைகை"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"உணர்திறன்"</string>
