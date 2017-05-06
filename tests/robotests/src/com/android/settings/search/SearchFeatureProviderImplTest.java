@@ -18,7 +18,6 @@
 package com.android.settings.search;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.Menu;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -35,14 +34,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -73,19 +69,10 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
-    public void getSiteMapManager_shouldCacheInstanec() {
+    public void getSiteMapManager_shouldCacheInstance() {
         final SiteMapManager manager1 = mProvider.getSiteMapManager();
         final SiteMapManager manager2 = mProvider.getSiteMapManager();
 
         assertThat(manager1).isSameAs(manager2);
-    }
-
-    @Test
-    public void testUpdateIndexNewSearch_UsesDatabaseIndexingManager() {
-        mProvider = spy(new SearchFeatureProviderImpl());
-        when(mProvider.isEnabled(mActivity)).thenReturn(true);
-
-        mProvider.updateIndex(mActivity);
-        verify(mProvider).getIndexingManager(any(Context.class));
     }
 }
