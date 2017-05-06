@@ -372,7 +372,11 @@ public class WifiConfigController implements TextWatcher,
         group.addView(row);
     }
 
-    private String getSignalString() {
+    @VisibleForTesting
+    String getSignalString() {
+        if (!mAccessPoint.isReachable()) {
+            return null;
+        }
         final int level = mAccessPoint.getLevel();
 
         return (level > -1 && level < mLevels.length) ? mLevels[level] : null;
