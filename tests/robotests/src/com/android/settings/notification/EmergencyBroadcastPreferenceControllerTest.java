@@ -44,6 +44,8 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EmergencyBroadcastPreferenceControllerTest {
 
+    private static final String PREF_TEST_KEY = "test_key";
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -62,7 +64,8 @@ public class EmergencyBroadcastPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new EmergencyBroadcastPreferenceController(mContext, mAccountHelper);
+        mController = new EmergencyBroadcastPreferenceController(mContext, mAccountHelper,
+                PREF_TEST_KEY);
     }
 
     @Test
@@ -73,12 +76,17 @@ public class EmergencyBroadcastPreferenceControllerTest {
     }
 
     @Test
+    public void getPreferenceKey_shouldReturnKeyDefinedInConstructor() {
+        assertThat(mController.getPreferenceKey()).isEqualTo(PREF_TEST_KEY);
+    }
+
+    @Test
     public void isAvailable_notAdminUser_shouldReturnFalse() {
         when(mUserManager.isAdminUser()).thenReturn(false);
         when(mContext.getResources().getBoolean(
-            com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(true);
+                com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(true);
         when(mPackageManager.getApplicationEnabledSetting(anyString()))
-            .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mAccountHelper.hasBaseUserRestriction(anyString(), anyInt())).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -88,11 +96,11 @@ public class EmergencyBroadcastPreferenceControllerTest {
     public void isAvailable_hasConfigCellBroadcastRestriction_shouldReturnFalse() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getResources().getBoolean(
-            com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(true);
+                com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(true);
         when(mPackageManager.getApplicationEnabledSetting(anyString()))
-            .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mAccountHelper.hasBaseUserRestriction(
-            eq(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS), anyInt())).thenReturn(true);
+                eq(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS), anyInt())).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -101,9 +109,9 @@ public class EmergencyBroadcastPreferenceControllerTest {
     public void isAvailable_cellBroadcastAppLinkDisabled_shouldReturnFalse() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getResources().getBoolean(
-            com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(false);
+                com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(false);
         when(mPackageManager.getApplicationEnabledSetting(anyString()))
-            .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+                .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         when(mAccountHelper.hasBaseUserRestriction(anyString(), anyInt())).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -113,9 +121,9 @@ public class EmergencyBroadcastPreferenceControllerTest {
     public void isAvailable_cellBroadcastReceiverDisabled_shouldReturnFalse() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getResources().getBoolean(
-            com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(true);
+                com.android.internal.R.bool.config_cellBroadcastAppLinks)).thenReturn(true);
         when(mPackageManager.getApplicationEnabledSetting(anyString()))
-            .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+                .thenReturn(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
         when(mAccountHelper.hasBaseUserRestriction(anyString(), anyInt())).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
