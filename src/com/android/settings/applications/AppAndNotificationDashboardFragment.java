@@ -26,6 +26,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
@@ -72,6 +73,8 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Application app, Fragment host) {
         final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new EmergencyBroadcastPreferenceController(context,
+                "app_and_notif_cell_broadcast_settings"));
         controllers.add(new SpecialAppAccessPreferenceController(context));
         controllers.add(new AppPermissionsPreferenceController(context));
         controllers.add(new RecentAppsPreferenceController(context, app, host));

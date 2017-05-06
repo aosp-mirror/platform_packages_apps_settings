@@ -186,7 +186,8 @@ public class SoundSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePreferenceController(context));
-        controllers.add(new EmergencyBroadcastPreferenceController(context));
+        controllers.add(new EmergencyBroadcastPreferenceController(
+                context, "cell_broadcast_settings"));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
         // === Volumes ===
