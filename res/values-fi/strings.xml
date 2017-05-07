@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Tilit"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Suojaus ja sijainti"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Salaus ja kirjautumistiedot"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Puhelimen tiedot on salattu."</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Puhelimen tiedot on salattu."</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Lukitusnäytön asetukset"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Aseta Oma sijainti, näytön lukituksen poisto, SIM-kortin lukitus, käyttöoikeustietojen tallennustilan lukitus"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Aseta Oma sijainti, näytön lukituksen poisto, käyttöoikeustietojen tallennustilan lukitus"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Sovellusasetukset"</string>
     <string name="install_applications" msgid="4872012136210802181">"Tuntemattomat lähteet"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Salli kaikki lähteet"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Viimeksi käytetyt sovellukset"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Näytä kaikki sovellukset"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Tuntemattomista lähteistä tulevat sovellukset voivat helpommin kaapata tablettisi ja henkilötietosi. Lataamalla sovelluksia tästä lähteestä hyväksyt, että olet itse vastuussa tabletillesi aiheutuvista vahingoista tai tietojen katoamisesta, joka saattaa johtua sovellusten käytöstä."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Tuntemattomista lähteistä tulevat sovellukset voivat helpommin kaapata puhelimesi ja henkilötietosi. Lataamalla sovelluksia tästä lähteestä hyväksyt, että olet itse vastuussa puhelimellesi aiheutuvista vahingoista tai tietojen katoamisesta, joka saattaa johtua sovellusten käytöstä."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Lisäasetukset"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Käyttötiedot"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Säädä virrankäyttöä"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Sisältyvät paketit"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Epätavallista sovelluskäyttäytymistä"</string>
     <string name="power_screen" msgid="3023346080675904613">"Näyttö"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Taskulamppu"</string>
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Näytä kaikki sovellukset"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Piilota ylimääräiset"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Suuri virrankulutus"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> toimii epätavallisesti."</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> sovellusta toimii epätavallisesti."</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> sovellusta toimii epätavallisesti.</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> toimii epätavallisesti.</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Ei optimointia"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Ei optimointia"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Akun käyttöä optimoidaan."</string>
@@ -3109,7 +3116,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"Älä optimoi akun käyttöä. Tämä voi kuluttaa akkua nopeammin."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Annetaanko sovellukselle oikeus toimia aina taustalla?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"Jos <xliff:g id="APP_NAME">%1$s</xliff:g> saa toimia aina taustalla, laitteen akku voi kulua loppuun nopeammin. \n\nVoit muuttaa tätä asetusta myöhemmin kohdassa Asetukset &gt; Sovellukset ja ilmoitukset."</string>
-    <string name="battery_summary" msgid="8044042095190688654">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> %% käytetty täyteen lataamisen jälkeen"</string>
+    <string name="battery_summary" msgid="8044042095190688654">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> käytetty täyteen lataamisen jälkeen"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Virranhallinta"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Ei akun käyttöä täyteen lataamisen jälkeen"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Sovellusasetukset"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Voit katsoa ilmoitukset pyyhkäisemällä puhelimen takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Voit katsoa ilmoitukset pyyhkäisemällä tabletin takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Voit katsoa ilmoitukset pyyhkäisemällä laitteen takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Avaa kamera nostamalla"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Avaa kamera nostamalla"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Avaa kamera automaattisesti nostamalla puhelin kuvanottoasentoon (vaaka- tai pystysuunnassa). Tämä toimii, kun puhelin on lepotilassa tai lukittu."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Älä missaa hetkeäkään"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Ota kuvia lukitusnäytöltä."</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Apuele"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Herkkyys"</string>

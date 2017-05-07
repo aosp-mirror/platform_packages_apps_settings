@@ -57,7 +57,7 @@ public class AnomalyDialogFragmentTest {
                 .setPackageName(PACKAGE_NAME)
                 .build();
 
-        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mAnomaly);
+        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mAnomaly, 0 /* metricskey */);
     }
 
     @Test

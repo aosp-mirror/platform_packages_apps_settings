@@ -153,8 +153,9 @@ public class RecentAppsPreferenceController extends PreferenceController
     @VisibleForTesting
     void refreshUi(Context prefContext) {
         reloadData();
-        if (shouldDisplayRecentApps()) {
-            displayRecentApps(prefContext);
+        final List<UsageStats> recentApps = getDisplayableRecentAppList();
+        if (recentApps != null && !recentApps.isEmpty()) {
+            displayRecentApps(prefContext, recentApps);
         } else {
             displayOnlyAppInfo();
         }
@@ -182,11 +183,10 @@ public class RecentAppsPreferenceController extends PreferenceController
         }
     }
 
-    private void displayRecentApps(Context prefContext) {
+    private void displayRecentApps(Context prefContext, List<UsageStats> recentApps) {
         mCategory.setTitle(R.string.recent_app_category_title);
         mSeeAllPref.setTitle(R.string.see_all_apps_title);
         mSeeAllPref.setIcon(R.drawable.ic_chevron_right_24dp);
-        final List<UsageStats> recentApps = getDisplayableRecentAppList();
 
         // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.
         // Build a cached preference pool
@@ -276,14 +276,6 @@ public class RecentAppsPreferenceController extends PreferenceController
         return recentApps;
     }
 
-    /**
-     * Whether or not we should show a list of recent apps, and a see all link.
-     */
-    @VisibleForTesting
-    boolean shouldDisplayRecentApps() {
-        return mContext.getResources().getBoolean(R.bool.config_display_recent_apps)
-                && mApplicationsState != null && mStats != null && !mStats.isEmpty();
-    }
 
     /**
      * Whether or not the app should be included in recent list.

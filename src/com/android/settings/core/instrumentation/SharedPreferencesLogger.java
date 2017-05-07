@@ -144,7 +144,7 @@ public class SharedPreferencesLogger implements SharedPreferences {
             } catch (Exception e) {
             }
             try {
-                pm.getPackageInfo(value, PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                pm.getPackageInfo(value, PackageManager.MATCH_ANY_USER);
                 logPackageName(key, value);
             } catch (PackageManager.NameNotFoundException e) {
                 // Clearly not a package, and it's unlikely this preference is in prefSet, so

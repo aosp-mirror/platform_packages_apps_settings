@@ -79,7 +79,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private static final String LOG_TAG = "Settings";
 
-    private static final int LOADER_ID_INDEXABLE_CONTENT_MONITOR = 1;
+    public static final int LOADER_ID_INDEXABLE_CONTENT_MONITOR = 1;
 
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";

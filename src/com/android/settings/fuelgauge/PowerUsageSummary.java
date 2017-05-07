@@ -19,11 +19,15 @@ package com.android.settings.fuelgauge;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.res.TypedArray;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,9 +42,9 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -92,7 +96,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_BATTERY_HEADER = "battery_header";
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
-    private static final int ANOMALY_LOADER = 1;
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
@@ -101,6 +104,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
 
+    @VisibleForTesting
+    static final int ANOMALY_LOADER = 1;
+    private static final int BATTERY_ESTIMATE_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -123,6 +129,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    long mEnhancedEstimate = -1;
+
     /**
      * SparseArray that maps uid to {@link Anomaly}, so we could find {@link Anomaly} by uid
      */
@@ -157,6 +166,40 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 }
             };
 
+    private LoaderManager.LoaderCallbacks<Cursor> mBatteryPredictionLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<Cursor>() {
+
+                @Override
+                public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+                    final Uri queryUri = mPowerFeatureProvider.getEnhancedBatteryPredictionUri();
+                    return new CursorLoader(getContext(), queryUri, null, null, null, null);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+                    try {
+                        if (cursor != null && cursor.moveToFirst()) {
+                            mEnhancedEstimate =
+                                    mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
+                        }
+                    } finally {
+                        cursor.close();
+                    }
+                    final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+                    Intent batteryBroadcast = getContext().registerReceiver(null,
+                            new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                    BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(getContext(),
+                            batteryBroadcast, mStatsHelper.getStats(), elapsedRealtimeUs, false);
+                    useEnhancedEstimateIfAvailable(getContext(), batteryInfo);
+                    updateHeaderPreference(batteryInfo);
+                }
+
+                @Override
+                public void onLoaderReset(Loader<Cursor> loader) {
+                    // do nothing
+                }
+            };
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -169,11 +212,15 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                (SettingsActivity) getActivity(), this);
+                (SettingsActivity) getActivity(), this, MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
         mAnomalySparseArray = new SparseArray<>();
 
         initFeatureProvider();
+        if (mPowerFeatureProvider != null) {
+            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
+                    mBatteryPredictionLoaderCallbacks);
+        }
     }
 
     @Override
@@ -446,13 +493,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
             return;
         }
 
-        getLoaderManager().initLoader(ANOMALY_LOADER, null, mAnomalyLoaderCallbacks);
+        initAnomalyDetectionIfPossible();
 
         final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
         Intent batteryBroadcast = context.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast,
                 mStatsHelper.getStats(), elapsedRealtimeUs, false);
+        useEnhancedEstimateIfAvailable(context, batteryInfo);
         updateHeaderPreference(batteryInfo);
 
         final long runningTime = calculateRunningTimeBasedOnStatsType();
@@ -577,6 +625,13 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @VisibleForTesting
+    void initAnomalyDetectionIfPossible() {
+        if (mPowerFeatureProvider.isAnomalyDetectionEnabled()) {
+            getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
+        }
+    }
+
+    @VisibleForTesting
     BatterySipper findBatterySipperByType(List<BatterySipper> usageList, DrainType type) {
         for (int i = 0, size = usageList.size(); i < size; i++) {
             final BatterySipper sipper = usageList.get(i);
@@ -686,6 +741,18 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 mAnomalySparseArray.append(anomaly.uid, new ArrayList<>());
             }
             mAnomalySparseArray.get(anomaly.uid).add(anomaly);
+        }
+    }
+
+    @VisibleForTesting
+    void useEnhancedEstimateIfAvailable(Context context, BatteryInfo batteryInfo) {
+        if (mEnhancedEstimate > 0) {
+            final Resources resources = context.getResources();
+            batteryInfo.remainingTimeUs = mEnhancedEstimate;
+            String timeString = Formatter.formatShortElapsedTime(context, mEnhancedEstimate);
+            batteryInfo.remainingLabel = resources.getString(
+                    com.android.settingslib.R.string.power_remaining_duration_only,
+                    timeString);
         }
     }
 

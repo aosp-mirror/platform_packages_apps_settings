@@ -500,7 +500,7 @@ public class RunningState {
                 si.mRunningService = service;
                 try {
                     si.mServiceInfo = ActivityThread.getPackageManager().getServiceInfo(
-                            service.service, PackageManager.MATCH_UNINSTALLED_PACKAGES,
+                            service.service, PackageManager.MATCH_ANY_USER,
                             UserHandle.getUserId(service.uid));
 
                     if (si.mServiceInfo == null) {

@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"帳戶"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"安全性與位置"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"加密和憑證"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"電話已加密"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"電話已加密"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"螢幕鎖定偏好設定"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"設定我的位置、解除鎖定畫面及鎖定認證儲存空間"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"應用程式設定"</string>
     <string name="install_applications" msgid="4872012136210802181">"不明的來源"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"允許安裝所有來源的應用程式"</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"最近使用過的應用程式"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"查看所有應用程式"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"來歷不明的應用程式可能會損害你的平板電腦和個人資料。安裝這個來源提供的應用程式集表示你同意，如因使用這些應用程式導致你的平板電腦受損或資料遺失，須自行負責。"</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"來歷不明的應用程式可能會損害你的手機和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的手機受損或資料遺失，須自行負責。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"進階設定"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"使用狀況詳細資訊"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"調整電力使用"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"已包含封裝檔案"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"異常的應用程式行為"</string>
     <string name="power_screen" msgid="3023346080675904613">"螢幕"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"手電筒"</string>
     <string name="power_camera" msgid="4976286950934622605">"相機"</string>
@@ -3104,8 +3109,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"顯示所有應用程式"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"隱藏其他應用程式"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"電池用量高"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"<xliff:g id="APP">%1$s</xliff:g> 的行為異常"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> 個應用程式的行為異常"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> 個應用程式的行為異常</item>
+      <item quantity="one">「<xliff:g id="APP">%1$s</xliff:g>」的行為異常</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"未套用最佳化設定"</string>
     <string name="high_power_on" msgid="6216293998227583810">"未套用最佳化設定"</string>
     <string name="high_power_off" msgid="3393904131961263278">"採用電池效能最佳化設定"</string>
@@ -3483,9 +3490,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"將手指放在手機背面的指紋感應器上並向下滑動，即可查看通知。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"將手指放在平板電腦背面的指紋感應器上並向下滑動，即可查看通知。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"將手指放在裝置背面的指紋感應器上並向下滑動，即可查看通知。"</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"在拿起手機時開啟相機"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"在拿起手機時開啟相機"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"如要自動開啟相機，只要將手機拿起做出拍照 (橫向或縱向) 動作即可。即使手機進入睡眠模式或鎖定狀態，都能使用此功能。"</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"絕不錯過任何精彩時刻"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"從鎖定畫面拍照"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"輔助手勢"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"敏感度"</string>

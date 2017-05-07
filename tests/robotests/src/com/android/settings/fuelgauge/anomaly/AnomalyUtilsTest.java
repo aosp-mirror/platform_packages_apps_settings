@@ -22,17 +22,25 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyUtilsTest {
+    private AnomalyUtils mAnomalyUtils;
+
+    @Before
+    public void setUp() {
+        mAnomalyUtils = new AnomalyUtils(RuntimeEnvironment.application);
+    }
 
     @Test
     public void testGetAnomalyAction_typeWakeLock_returnForceStop() {
-        assertThat(AnomalyUtils.getAnomalyAction(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
+        assertThat(mAnomalyUtils.getAnomalyAction(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
                 ForceStopAction.class);
     }
 }

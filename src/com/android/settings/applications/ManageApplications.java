@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.annotation.IdRes;
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -416,12 +417,15 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
-        // Storage filters below.
-        mApplications.setOverrideFilter(getStorageFilter(mListType, mStorageType, mVolumeUuid));
+
+        AppFilter overrideFilter = getOverrideFilter(mListType, mStorageType, mVolumeUuid);
+        if (overrideFilter != null) {
+            mApplications.setOverrideFilter(overrideFilter);
+        }
     }
 
     @VisibleForTesting
-    static AppFilter getStorageFilter(int listType, int storageType, String volumeUuid) {
+    static @Nullable AppFilter getOverrideFilter(int listType, int storageType, String volumeUuid) {
         AppFilter filter = new VolumeFilter(volumeUuid);
         if (listType == LIST_TYPE_STORAGE) {
             if (storageType == STORAGE_TYPE_MUSIC) {
@@ -437,7 +441,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
         }
 
-        return filter;
+        return null;
     }
 
     private int getDefaultFilter() {

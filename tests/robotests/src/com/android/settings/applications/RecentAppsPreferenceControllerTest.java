@@ -125,30 +125,6 @@ public class RecentAppsPreferenceControllerTest {
     }
 
     @Test
-    public void configOff_shouldNotDisplayRecentApps() {
-        mController = new RecentAppsPreferenceController(mMockContext, (Application) null, null);
-        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
-                .thenReturn(false);
-
-        assertThat(mController.shouldDisplayRecentApps()).isFalse();
-    }
-
-    @Test
-    public void configOn_shouldDisplayRecentAppsWhenHaveData() {
-        final List<UsageStats> stats = new ArrayList<>();
-        stats.add(mock(UsageStats.class));
-        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
-                .thenReturn(true);
-        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
-
-        mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
-
-        mController.reloadData();
-        assertThat(mController.shouldDisplayRecentApps()).isTrue();
-    }
-
-    @Test
     public void display_shouldNotShowRecents_showAppInfoPreference() {
         mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
@@ -206,4 +182,37 @@ public class RecentAppsPreferenceControllerTest {
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
     }
 
+    @Test
+    public void display_hasRecentButNoneDisplayable_showAppInfo() {
+        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
+                .thenReturn(true);
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+        final UsageStats stat2 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "com.android.phone";
+        stats.add(stat1);
+
+        stat2.mLastTimeUsed = System.currentTimeMillis();
+        stat2.mPackageName = "com.android.settings";
+        stats.add(stat2);
+
+        // stat1, stat2 are not displayable
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mock(ApplicationsState.AppEntry.class));
+        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mock(ApplicationsState.AppEntry.class));
+        when(mMockContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+
+        mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
+        mController.displayPreference(mScreen);
+
+        verify(mCategory, never()).addPreference(any(Preference.class));
+        verify(mCategory).setTitle(null);
+        verify(mSeeAllPref).setTitle(R.string.applications_settings);
+        verify(mSeeAllPref).setIcon(null);
+    }
 }

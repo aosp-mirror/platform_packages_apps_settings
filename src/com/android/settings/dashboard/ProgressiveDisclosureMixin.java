@@ -231,7 +231,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     /**
      * Add preference to collapsed list.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void addToCollapsedList(Preference preference) {
         // Insert preference based on it's order.
         int insertionIndex = Collections.binarySearch(mCollapsedPrefs, preference);
@@ -242,12 +242,12 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         updateExpandButtonSummary();
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     List<Preference> getCollapsedPrefs() {
         return mCollapsedPrefs;
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void updateExpandButtonSummary() {
         final int size = mCollapsedPrefs.size();
         if (size == 0) {
@@ -257,8 +257,11 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         } else {
             CharSequence summary = mCollapsedPrefs.get(0).getTitle();
             for (int i = 1; i < size; i++) {
-                summary = mContext.getString(R.string.join_many_items_middle, summary,
-                        mCollapsedPrefs.get(i).getTitle());
+                final CharSequence nextSummary = mCollapsedPrefs.get(i).getTitle();
+                if (!TextUtils.isEmpty(nextSummary)) {
+                    summary = mContext.getString(R.string.join_many_items_middle, summary,
+                            nextSummary);
+                }
             }
             mExpandButton.setSummary(summary);
         }

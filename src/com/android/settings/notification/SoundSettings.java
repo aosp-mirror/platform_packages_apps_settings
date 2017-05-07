@@ -76,6 +76,11 @@ public class SoundSettings extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_sound;
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         mVolumeCallback.stopSample();
@@ -181,7 +186,8 @@ public class SoundSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePreferenceController(context));
-        controllers.add(new EmergencyBroadcastPreferenceController(context));
+        controllers.add(new EmergencyBroadcastPreferenceController(
+                context, "cell_broadcast_settings"));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
         // === Volumes ===

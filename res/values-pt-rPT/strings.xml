@@ -332,7 +332,9 @@
     <string name="account_settings_title" msgid="626177544686329806">"Contas"</string>
     <string name="security_settings_title" msgid="6134528367364159294">"Segurança e localização"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encriptação e credenciais"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Dados do telemóvel encriptados"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Dados do telemóvel encriptados"</string>
+    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferências do ecrã de bloqueio"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Definir A minha localização, desbloqueio do ecrã, bloqueio do cartão SIM, bloqueio do armazenamento de credenciais"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Definir O meu local, desbloqueio do ecrã, bloqueio do armazenamento de credenciais"</string>
@@ -1492,6 +1494,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Definições da aplicação"</string>
     <string name="install_applications" msgid="4872012136210802181">"Fontes desconhecidas"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Permit. todas as fontes aplic."</string>
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Aplicações utilizadas recentemente"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Ver todas as aplicações"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"O seu tablet e os dados pessoais são mais vulneráveis a ataques de aplicações desconhecidas. Ao instalar aplicações desta fonte, aceita ser responsável por quaisquer danos no tablet ou perdas de dados que possam resultar da utilização do mesmo."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"O seu telemóvel e os dados pessoais são mais vulneráveis a ataques de aplicações desconhecidas. Ao instalar aplicações desta fonte, aceita ser responsável por quaisquer danos no telemóvel ou perdas de dados que possam resultar da utilização do mesmo."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Definições avançadas"</string>
@@ -1944,6 +1948,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Utilizar detalhes"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Ajustar utilização de energia"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Pacotes incluídos"</string>
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Comportamento anormal da aplicação"</string>
     <string name="power_screen" msgid="3023346080675904613">"Ecrã"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Lanterna"</string>
     <string name="power_camera" msgid="4976286950934622605">"Câmara"</string>
@@ -3100,8 +3105,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Mostrar todas as aplicações"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Ocultar aplicações adicionais"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Utilização elevada"</string>
-    <string name="power_high_usage_summary" msgid="1601789953052530021">"A aplicação <xliff:g id="APP">%1$s</xliff:g> está a apresentar um comportamento anormal"</string>
-    <string name="power_high_usage_multiple_apps_summary" msgid="4867266981228175401">"<xliff:g id="NUMBER">%1$d</xliff:g> aplicações estão a apresentar um comportamento anormal"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> aplicações estão a apresentar um comportamento anormal</item>
+      <item quantity="one">A aplicação <xliff:g id="APP">%1$s</xliff:g> está a apresentar um comportamento anormal</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Não otimizada"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Não otimizada"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Utilização otimizada da bateria"</string>
@@ -3479,9 +3486,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do telemóvel."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para verificar as suas notificações, deslize rapidamente para baixo no sensor de impressões digitais situado na parte posterior do dispositivo."</string>
-    <string name="camera_lift_trigger_title" msgid="4332044339327639701">"Levantar para abrir a câmara"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Levantar para abrir a câmara"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Para abrir a câmara automaticamente, levante o telemóvel e coloque-o numa posição adequada para tirar fotos (orientação de paisagem ou de retrato). Funciona quando o telemóvel está em suspensão ou bloqueado."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="2895730254279051683">"Nunca perca um momento"</string>
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Tirar fotos a partir do ecrã de bloqueio"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto de assistência"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidade"</string>

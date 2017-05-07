@@ -27,6 +27,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -59,11 +60,17 @@ import java.util.List;
 public class PowerUsageAnomalyDetailsTest {
     private static final String NAME_APP_1 = "app1";
     private static final String NAME_APP_2 = "app2";
+    private static final String PACKAGE_NAME_1 = "com.android.app1";
+    private static final String PACKAGE_NAME_2 = "com.android.app2";
 
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
     private PreferenceManager mPreferenceManager;
+    @Mock
+    private Drawable mDrawable1;
+    @Mock
+    private Drawable mDrawable2;
     private Context mContext;
     private PowerUsageAnomalyDetails mFragment;
     private PreferenceGroup mAbnormalListGroup;
@@ -80,16 +87,19 @@ public class PowerUsageAnomalyDetailsTest {
         mAnomalyList = new ArrayList<>();
         Anomaly anomaly1 = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .setPackageName(PACKAGE_NAME_1)
                 .setDisplayName(NAME_APP_1)
                 .build();
         mAnomalyList.add(anomaly1);
         Anomaly anomaly2 = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .setPackageName(PACKAGE_NAME_2)
                 .setDisplayName(NAME_APP_2)
                 .build();
         mAnomalyList.add(anomaly2);
 
         mFragment = spy(new PowerUsageAnomalyDetails());
+        doReturn(null).when(mFragment).getIconFromPackageName(any());
         mFragment.mAbnormalListGroup = mAbnormalListGroup;
         mFragment.mAnomalies = mAnomalyList;
         doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
@@ -114,6 +124,28 @@ public class PowerUsageAnomalyDetailsTest {
         mFragment.refreshUi();
 
         assertThat(testAnomalyList).containsExactlyElementsIn(mAnomalyList);
+    }
+
+    @Test
+    public void testRefreshUi_iconCorrect() {
+        doReturn(mDrawable1).when(mFragment).getIconFromPackageName(PACKAGE_NAME_1);
+        doReturn(mDrawable2).when(mFragment).getIconFromPackageName(PACKAGE_NAME_2);
+
+        final List<Drawable> testIcons = new ArrayList<>();
+        final ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(
+                Preference.class);
+        Answer<Void> prefCallable = new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocation) throws Throwable {
+                testIcons.add(preferenceCaptor.getValue().getIcon());
+                return null;
+            }
+        };
+        doAnswer(prefCallable).when(mAbnormalListGroup).addPreference(preferenceCaptor.capture());
+
+        mFragment.refreshUi();
+
+        assertThat(testIcons).containsExactly(mDrawable1, mDrawable2);
     }
 
     @Test

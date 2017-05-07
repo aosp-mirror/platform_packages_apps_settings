@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.storage.StorageManager;
+import android.text.BidiFormatter;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import com.android.settings.R;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Utility class for creating the dialog that asks users for explicit permission to grant
@@ -44,7 +46,7 @@ public class AccessibilityServiceWarning {
             AccessibilityServiceInfo info, DialogInterface.OnClickListener listener) {
         final AlertDialog ad = new AlertDialog.Builder(parentActivity)
                 .setTitle(parentActivity.getString(R.string.enable_service_title,
-                        info.getResolveInfo().loadLabel(parentActivity.getPackageManager())))
+                        getServiceName(parentActivity, info)))
                 .setView(createEnableDialogContentView(parentActivity, info))
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, listener)
@@ -97,7 +99,7 @@ public class AccessibilityServiceWarning {
                 R.id.encryption_warning);
         if (isFullDiskEncrypted()) {
             String text = context.getString(R.string.enable_service_encryption_warning,
-                    info.getResolveInfo().loadLabel(context.getPackageManager()));
+                    getServiceName(context, info));
             encryptionWarningView.setText(text);
             encryptionWarningView.setVisibility(View.VISIBLE);
         } else {
@@ -107,7 +109,7 @@ public class AccessibilityServiceWarning {
         TextView capabilitiesHeaderView = (TextView) content.findViewById(
                 R.id.capabilities_header);
         capabilitiesHeaderView.setText(context.getString(R.string.capabilities_list_title,
-                info.getResolveInfo().loadLabel(context.getPackageManager())));
+                getServiceName(context, info)));
 
         LinearLayout capabilitiesView = (LinearLayout) content.findViewById(R.id.capabilities);
 
@@ -160,5 +162,13 @@ public class AccessibilityServiceWarning {
         }
 
         return content;
+    }
+
+    // Get the service name and bidi wrap it to protect from bidi side effects.
+    private static CharSequence getServiceName(Context context, AccessibilityServiceInfo info) {
+        final Locale locale = context.getResources().getConfiguration().getLocales().get(0);
+        final CharSequence label =
+                info.getResolveInfo().loadLabel(context.getPackageManager());
+        return BidiFormatter.getInstance(locale).unicodeWrap(label);
     }
 }

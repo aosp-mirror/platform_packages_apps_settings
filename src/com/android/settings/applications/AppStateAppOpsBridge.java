@@ -19,12 +19,12 @@ import android.app.AppGlobals;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
 import android.content.Context;
-import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
@@ -46,7 +46,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
 
     private static final String TAG = "AppStateAppOpsBridge";
 
-    private final IPackageManager mIPackageManager;
+    private final IPackageManagerWrapper mIPackageManager;
     private final UserManager mUserManager;
     private final List<UserHandle> mProfiles;
     private final AppOpsManager mAppOpsManager;
@@ -56,9 +56,16 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
 
     public AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions) {
+        this(context, appState, callback, appOpsOpCode, permissions,
+            new IPackageManagerWrapperImpl(AppGlobals.getPackageManager()));
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
+            int appOpsOpCode, String[] permissions, IPackageManagerWrapper packageManager) {
         super(appState, callback);
         mContext = context;
-        mIPackageManager = AppGlobals.getPackageManager();
+        mIPackageManager = packageManager;
         mUserManager = UserManager.get(context);
         mProfiles = mUserManager.getUserProfiles();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
@@ -92,18 +99,21 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                 .getUserId(uid)));
         try {
             permissionState.packageInfo = mIPackageManager.getPackageInfo(pkg,
-                    PackageManager.GET_PERMISSIONS | PackageManager.MATCH_UNINSTALLED_PACKAGES,
+                    PackageManager.GET_PERMISSIONS | PackageManager.MATCH_ANY_USER,
                     permissionState.userHandle.getIdentifier());
-            // Check static permission state (whatever that is declared in package manifest)
-            String[] requestedPermissions = permissionState.packageInfo.requestedPermissions;
-            int[] permissionFlags = permissionState.packageInfo.requestedPermissionsFlags;
-            if (requestedPermissions != null) {
-                for (int i = 0; i < requestedPermissions.length; i++) {
-                    if (doesAnyPermissionMatch(requestedPermissions[i], mPermissions)) {
-                        permissionState.permissionDeclared = true;
-                        if ((permissionFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
-                            permissionState.staticPermissionGranted = true;
-                            break;
+            if (permissionState.packageInfo != null) {
+                // Check static permission state (whatever that is declared in package manifest)
+                String[] requestedPermissions = permissionState.packageInfo.requestedPermissions;
+                int[] permissionFlags = permissionState.packageInfo.requestedPermissionsFlags;
+                if (requestedPermissions != null) {
+                    for (int i = 0; i < requestedPermissions.length; i++) {
+                        if (doesAnyPermissionMatch(requestedPermissions[i], mPermissions)) {
+                            permissionState.permissionDeclared = true;
+                            if ((permissionFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED)
+                                    != 0) {
+                                permissionState.staticPermissionGranted = true;
+                                break;
+                            }
                         }
                     }
                 }

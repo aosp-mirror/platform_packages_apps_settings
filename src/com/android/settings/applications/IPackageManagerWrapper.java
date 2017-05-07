@@ -17,6 +17,8 @@
 package com.android.settings.applications;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.ParceledListSlice;
 import android.content.pm.ResolveInfo;
 import android.os.RemoteException;
 
@@ -41,4 +43,33 @@ public interface IPackageManagerWrapper {
      * @see android.content.pm.IPackageManager#findPersistentPreferredActivity
      */
     ResolveInfo findPersistentPreferredActivity(Intent intent, int userId) throws RemoteException;
+
+    /**
+     * Calls {@code IPackageManager.getPackageInfo()}.
+     *
+     * @see android.content.pm.IPackageManager#getPackageInfo
+     */
+    PackageInfo getPackageInfo(String packageName, int flags, int userId) throws RemoteException;
+
+    /**
+     * Calls {@code IPackageManager.getAppOpPermissionPackages()}.
+     *
+     * @see android.content.pm.IPackageManager#getAppOpPermissionPackages
+     */
+    String[] getAppOpPermissionPackages(String permissionName) throws RemoteException;
+
+    /**
+     * Calls {@code IPackageManager.isPackageAvailable()}.
+     *
+     * @see android.content.pm.IPackageManager#isPackageAvailable
+     */
+    boolean isPackageAvailable(String packageName, int userId) throws RemoteException;
+
+    /**
+     * Calls {@code IPackageManager.getPackagesHoldingPermissions()}.
+     *
+     * @see android.content.pm.IPackageManager#getPackagesHoldingPermissions
+     */
+    ParceledListSlice<PackageInfo> getPackagesHoldingPermissions(
+        String[] permissions, int flags, int userId) throws RemoteException;
 }

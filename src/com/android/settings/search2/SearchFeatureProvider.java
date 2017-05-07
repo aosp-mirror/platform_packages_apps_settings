@@ -21,6 +21,7 @@ import android.view.Menu;
 
 import android.view.View;
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.search.IndexingCallback;
 
 import java.util.List;
 
@@ -70,7 +71,12 @@ public interface SearchFeatureProvider {
     /**
      * Updates the Settings indexes
      */
-    void updateIndex(Context context);
+    void updateIndex(Context context, IndexingCallback callback);
+
+    /**
+     * @returns true when indexing is complete.
+     */
+    boolean isIndexingComplete(Context context);
 
     /**
      * Initializes the feedback button in case it was dismissed.

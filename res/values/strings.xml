@@ -746,7 +746,7 @@
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security &amp; Location</string>
+    <string name="security_settings_title">Security &amp; location</string>
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
@@ -2127,6 +2127,9 @@
     <string name="sound_settings">Sound</string>
     <!-- DO NOT TRANSLATE Summary placeholder -->
     <string name="summary_placeholder" translatable="false">&#160;</string>
+    <!-- DO NOT TRANSLATE Summary placeholder reserving 2 lines -->
+    <string name="summary_two_lines_placeholder" translatable="false">&#160;\n&#160;</string>
+
     <!-- DO NOT TRANSLATE Empty summary for dynamic preferences -->
     <string name="summary_empty" translatable="false"></string>
     <!-- Sound settings screen, volume title -->
@@ -4315,6 +4318,11 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
+    <!-- Warning shown when user input has been blocked due to another app overlaying screen
+         content. Since we don't know what the app is showing on top of the input target, we
+         can't verify user consent. [CHAR LIMIT=NONE] -->
+    <string name="window_obscured_warning">Because another app is displaying on top of these options,
+        Settings can\u2019t respond to your action.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
         enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
     <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
@@ -7984,10 +7992,7 @@
     <string name="billing_cycle">Billing cycle</string>
 
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
-    <string name="billing_cycle_summary">Monthly cycle starts on the <xliff:g name="day" example="1st">%1$s</xliff:g> of every month</string>
-
-    <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
-    <string name="billing_cycle_fragment_summary">Monthly starting <xliff:g name="day_of_month" example="1st">%1$s</xliff:g></string>
+    <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>
 
     <!-- Title of button and screen for which wifi networks have data restrictions [CHAR LIMIT=30 -->
     <string name="network_restrictions">Network restrictions</string>
@@ -8201,7 +8206,7 @@
     <string name="page_tab_title_support">Support</string>
 
     <!-- Summary of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
-    <string name="developer_density_summary"><xliff:g name="count" example="320">%d</xliff:g> dp</string>
+    <string name="density_pixel_summary" translatable="false"><xliff:g name="count" example="320">%1$s</xliff:g> dp</string>
 
     <!-- Title of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
     <string name="developer_smallest_width">Smallest width</string>
