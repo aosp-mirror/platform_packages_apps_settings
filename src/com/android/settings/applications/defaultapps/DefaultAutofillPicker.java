@@ -181,7 +181,14 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     }
 
     public static String getDefaultKey(Context context) {
-        return Settings.Secure.getString(context.getContentResolver(), SETTING);
+        String setting = Settings.Secure.getString(context.getContentResolver(), SETTING);
+        if (setting != null) {
+            ComponentName componentName = ComponentName.unflattenFromString(setting);
+            if (componentName != null) {
+                return componentName.flattenToString();
+            }
+        }
+        return null;
     }
 
     @Override
