@@ -42,6 +42,7 @@ import android.util.Xml;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.Indexable;
+import com.android.settings.search.IndexingCallback;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.SearchIndexableResources;
 
@@ -132,7 +133,8 @@ public class DatabaseIndexingManager {
 
     private final String mBaseAuthority;
 
-    private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
+    @VisibleForTesting
+    final AtomicBoolean mIsIndexingComplete = new AtomicBoolean(false);
 
     @VisibleForTesting
     final UpdateData mDataToProcess = new UpdateData();
@@ -147,17 +149,13 @@ public class DatabaseIndexingManager {
         mContext = context;
     }
 
-    public boolean isAvailable() {
-        return mIsAvailable.get();
+    public boolean isIndexingComplete() {
+        return mIsIndexingComplete.get();
     }
 
-    public void indexDatabase() {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                performIndexing();
-            }
-        });
+    public void indexDatabase(IndexingCallback callback) {
+        IndexingTask task = new IndexingTask(callback);
+        task.execute();
     }
 
     /**
@@ -171,15 +169,12 @@ public class DatabaseIndexingManager {
         final List<ResolveInfo> list =
                 mContext.getPackageManager().queryIntentContentProviders(intent, 0);
 
-        final String localeStr = Locale.getDefault().toString();
-        final String fingerprint = Build.FINGERPRINT;
+        String localeStr = Locale.getDefault().toString();
+        String fingerprint = Build.FINGERPRINT;
         final boolean isFullIndex = isFullIndex(localeStr, fingerprint);
 
-        // Drop the database when the locale or build has changed. This eliminates rows which are
-        // dynamically inserted in the old language, or deprecated settings.
         if (isFullIndex) {
-            final SQLiteDatabase db = getWritableDatabase();
-            IndexDatabaseHelper.getInstance(mContext).reconstruct(db);
+            rebuildDatabase();
         }
 
         for (final ResolveInfo info : list) {
@@ -218,6 +213,18 @@ public class DatabaseIndexingManager {
     }
 
     /**
+     * Reconstruct the database in the following cases:
+     * - Language has changed
+     * - Build has changed
+     */
+    private void rebuildDatabase() {
+        // Drop the database when the locale or build has changed. This eliminates rows which are
+        // dynamically inserted in the old language, or deprecated settings.
+        final SQLiteDatabase db = getWritableDatabase();
+        IndexDatabaseHelper.getInstance(mContext).reconstruct(db);
+    }
+
+    /**
      * Adds new data to the database and verifies the correctness of the ENABLED column.
      * First, the data to be updated and all non-indexable keys are copied locally.
      * Then all new data to be added is inserted.
@@ -229,7 +236,6 @@ public class DatabaseIndexingManager {
      */
     @VisibleForTesting
     void updateDatabase(boolean needsReindexing, String localeStr) {
-        mIsAvailable.set(false);
         final UpdateData copy;
 
         synchronized (mDataToProcess) {
@@ -264,8 +270,6 @@ public class DatabaseIndexingManager {
         } finally {
             database.endTransaction();
         }
-
-        mIsAvailable.set(true);
     }
 
     /**
@@ -1220,6 +1224,35 @@ public class DatabaseIndexingManager {
 
             public DatabaseRow build() {
                 return new DatabaseRow(this);
+            }
+        }
+    }
+
+    public class IndexingTask extends AsyncTask<Void, Void, Void> {
+
+        @VisibleForTesting
+        IndexingCallback mCallback;
+
+        public IndexingTask(IndexingCallback callback) {
+            mCallback = callback;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mIsIndexingComplete.set(false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            performIndexing();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            mIsIndexingComplete.set(true);
+            if (mCallback != null) {
+                mCallback.onIndexingFinished();
             }
         }
     }
