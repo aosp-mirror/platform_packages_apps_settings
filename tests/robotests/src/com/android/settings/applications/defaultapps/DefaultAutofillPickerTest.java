@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserManager;
 
@@ -41,12 +42,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAutofillPickerTest {
 
-    private static final String TEST_APP_KEY = "123";
+    private static final String TEST_APP_KEY = new ComponentName("foo.bar",
+            "foo.bar.Baz").flattenToString();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
@@ -81,6 +82,4 @@ public class DefaultAutofillPickerTest {
         when(info.loadLabel()).thenReturn("test_app_name");
         assertThat(mPicker.getConfirmationMessage(info)).isNotNull();
     }
-
-
 }
