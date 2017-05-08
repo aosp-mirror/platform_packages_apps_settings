@@ -147,6 +147,14 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    public void handlePreferenceTreeClick_tappingAudioWhileUninitializedDoesntCrash() {
+        mController.setVolume(null);
+
+        mPreference.setKey("pref_music_audio");
+        mController.handlePreferenceTreeClick(mPreference);
+    }
+
+    @Test
     public void testClickApps() {
         mPreference.setKey("pref_other_apps");
         mController.handlePreferenceTreeClick(mPreference);
@@ -162,6 +170,14 @@ public class StorageItemPreferenceControllerTest {
                 ManageApplications.class.getName());
         assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
                 .isEqualTo(R.string.apps_storage);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_tappingAppsWhileUninitializedDoesntCrash() {
+        mController.setVolume(null);
+
+        mPreference.setKey("pref_other_apps");
+        mController.handlePreferenceTreeClick(mPreference);
     }
 
     @Test
