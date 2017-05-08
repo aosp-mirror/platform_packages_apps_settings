@@ -15,6 +15,9 @@
  */
 package com.android.settings.wifi.details;
 
+import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
+import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
+
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,8 +31,8 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkBadging;
 import android.net.NetworkCapabilities;
-import android.net.NetworkRequest;
 import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.net.NetworkUtils;
 import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
@@ -41,19 +44,21 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
-import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settings.vpn2.ConnectivityManagerWrapper;
+import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.Inet4Address;
@@ -62,9 +67,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.StringJoiner;
-
-import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
-import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
 
 /**
  * Controller for logic pertaining to displaying Wifi information for the
@@ -115,10 +117,12 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private final WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     // UI elements - in order of appearance
     private Preference mConnectionDetailPref;
     private LayoutPreference mButtonsPref;
+    private Button mForgetButton;
     private Button mSignInButton;
     private WifiDetailPreference mSignalStrengthPref;
     private WifiDetailPreference mLinkSpeedPref;
@@ -129,8 +133,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private WifiDetailPreference mGatewayPref;
     private WifiDetailPreference mSubnetPref;
     private WifiDetailPreference mDnsPref;
-    private PreferenceCategory mIpv6AddressCategory;
 
+    private PreferenceCategory mIpv6AddressCategory;
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -179,7 +183,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
             Fragment fragment,
             Handler handler,
             Lifecycle lifecycle,
-            WifiManager wifiManager) {
+            WifiManager wifiManager,
+            MetricsFeatureProvider metricsFeatureProvider) {
         super(context);
 
         mAccessPoint = accessPoint;
@@ -187,11 +192,10 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mConnectivityManagerWrapper = connectivityManagerWrapper;
         mFragment = fragment;
         mHandler = handler;
-        mNetworkInfo = accessPoint.getNetworkInfo();
-        mRssi = accessPoint.getRssi();
         mSignalStr = context.getResources().getStringArray(R.array.wifi_signal);
         mWifiConfig = accessPoint.getConfig();
         mWifiManager = wifiManager;
+        mMetricsFeatureProvider = metricsFeatureProvider;
 
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -241,22 +245,18 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 (PreferenceCategory) screen.findPreference(KEY_IPV6_ADDRESS_CATEGORY);
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
-    }
-
-    public WifiInfo getWifiInfo() {
-        return mWifiInfo;
+        mForgetButton = (Button) mButtonsPref.findViewById(R.id.left_button);
+        mForgetButton.setText(R.string.forget);
+        mForgetButton.setOnClickListener(view -> forgetNetwork());
+        updateInfo();
     }
 
     @Override
     public void onResume() {
         mConnectivityManagerWrapper.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
                 mHandler);
-        mNetwork = mWifiManager.getCurrentNetwork();
-        mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
-        mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
-
-        updateInfo();
-
+        // updateInfo() will be called during registration because NETWORK_STATE_CHANGED_ACTION is
+        // a sticky broadcast.
         mContext.registerReceiver(mReceiver, mFilter);
     }
 
@@ -265,17 +265,25 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mNetwork = null;
         mLinkProperties = null;
         mNetworkCapabilities = null;
+        mNetworkInfo = null;
+        mWifiInfo = null;
         mContext.unregisterReceiver(mReceiver);
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
     private void updateInfo() {
+        mNetwork = mWifiManager.getCurrentNetwork();
+        mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
+        mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
         mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
         mWifiInfo = mWifiManager.getConnectionInfo();
         if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
             exitActivity();
             return;
         }
+
+        // Update whether the forgot button should be displayed.
+        mForgetButton.setVisibility(canForgetNetwork() ? View.VISIBLE : View.INVISIBLE);
 
         refreshNetworkState();
 
@@ -307,6 +315,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mFrequencyPref.setDetailText(band);
 
         updateIpLayerInfo();
+        mButtonsPref.setVisible(mForgetButton.getVisibility() == View.VISIBLE
+                || mSignInButton.getVisibility() == View.VISIBLE);
     }
 
     private void exitActivity() {
@@ -422,7 +432,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     /**
      * Returns whether the network represented by this preference can be forgotten.
      */
-    public boolean canForgetNetwork() {
+    private boolean canForgetNetwork() {
         return mWifiInfo != null && mWifiInfo.isEphemeral() || mWifiConfig != null;
     }
 
@@ -437,7 +447,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     /**
      * Forgets the wifi network associated with this preference.
      */
-    public void forgetNetwork() {
+    private void forgetNetwork() {
         if (mWifiInfo != null && mWifiInfo.isEphemeral()) {
             mWifiManager.disableEphemeralNetwork(mWifiInfo.getSSID());
         } else if (mWifiConfig != null) {
@@ -447,6 +457,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
             }
         }
+        mMetricsFeatureProvider.action(
+                mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
     }
 }
