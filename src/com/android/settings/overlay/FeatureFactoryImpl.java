@@ -27,6 +27,8 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.applications.IPackageManagerWrapperImpl;
 import com.android.settings.applications.PackageManagerWrapperImpl;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
@@ -66,6 +68,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
+    private BluetoothFeatureProvider mBluetoothFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -166,6 +169,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mUserFeatureProvider = new UserFeatureProviderImpl(context);
         }
         return mUserFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        if (mBluetoothFeatureProvider == null) {
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl();
+        }
+        return mBluetoothFeatureProvider;
     }
 
     @Override

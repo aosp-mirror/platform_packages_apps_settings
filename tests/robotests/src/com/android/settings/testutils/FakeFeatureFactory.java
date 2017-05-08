@@ -18,6 +18,7 @@ package com.android.settings.testutils;
 import android.content.Context;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -34,6 +35,7 @@ import com.android.settings.users.UserFeatureProvider;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 /**
@@ -55,6 +57,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
+    public final BluetoothFeatureProvider bluetoothFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -90,6 +93,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         suggestionsFeatureProvider = mock(SuggestionFeatureProvider.class);
         userFeatureProvider = mock(UserFeatureProvider.class);
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
+        bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
     }
 
     @Override
@@ -150,6 +154,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public UserFeatureProvider getUserFeatureProvider(Context context) {
         return userFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        return bluetoothFeatureProvider;
     }
 
     @Override
