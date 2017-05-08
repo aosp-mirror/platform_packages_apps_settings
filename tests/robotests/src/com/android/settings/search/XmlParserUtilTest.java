@@ -89,7 +89,7 @@ public class XmlParserUtilTest {
                 "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = XmlParserUtils.getDataSummary(mContext, attrs);
-        String expSummary = mContext.getString(R.string.screen_timeout_summary);
+        String expSummary = mContext.getString(R.string.summary_placeholder);
         assertThat(summary).isEqualTo(expSummary);
 
     }
