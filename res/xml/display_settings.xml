@@ -57,10 +57,9 @@
         android:entries="@array/screen_timeout_entries"
         android:entryValues="@array/screen_timeout_values" />
 
-    <DropDownPreference
+    <SwitchPreference
         android:key="auto_rotate"
-        android:summary="%s"
-        android:title="@string/display_auto_rotate_title" />
+        android:title="@string/accelerometer_title" />
 
     <Preference
         android:key="font_size"

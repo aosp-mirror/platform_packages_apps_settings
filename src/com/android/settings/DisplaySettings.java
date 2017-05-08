@@ -91,7 +91,7 @@ public class DisplaySettings extends DashboardFragment {
             Context context, Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
-        controllers.add(new AutoRotatePreferenceController(context));
+        controllers.add(new AutoRotatePreferenceController(context, lifecycle));
         controllers.add(new CameraGesturePreferenceController(context));
         controllers.add(new DozePreferenceController(context));
         controllers.add(new FontSizePreferenceController(context));
