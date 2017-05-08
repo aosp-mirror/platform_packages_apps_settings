@@ -300,6 +300,10 @@ public class StorageItemPreferenceController extends PreferenceController {
     }
 
     private Intent getAudioIntent() {
+        if (mVolume == null) {
+            return null;
+        }
+
         Bundle args = new Bundle();
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
@@ -312,6 +316,10 @@ public class StorageItemPreferenceController extends PreferenceController {
     }
 
     private Intent getAppsIntent() {
+        if (mVolume == null) {
+            return null;
+        }
+
         Bundle args = new Bundle();
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
