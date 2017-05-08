@@ -128,6 +128,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
 
+    /**
+     * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is neccesary to
+     * ensure that behavior is consistent if {@link #isUiRestricted()} changes. It could be changed
+     * by the Test DPC tool in AFW mode.
+     */
+    private boolean mIsRestricted;
+
     private WifiEnabler mWifiEnabler;
     // An access point being editted is stored here.
     private AccessPoint mSelectedAccessPoint;
@@ -214,10 +221,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
 
-        if (isUiRestricted()) {
-            getPreferenceScreen().removePreference(mAdditionalSettingsPreferenceCategory);
-            addMessagePreference(R.string.wifi_empty_list_user_restricted);
-        }
+        mIsRestricted = isUiRestricted();
 
         mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         mBgThread.start();
@@ -339,9 +343,15 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mWifiTracker.startTracking();
 
-        if (!isUiRestricted() && mWifiManager.isWifiEnabled()) {
-            forceUpdateAPs();
+        if (mIsRestricted) {
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.wifi_empty_list_user_restricted);
+            }
+            getPreferenceScreen().removeAll();
+            return;
         }
+
+        onWifiStateChanged(mWifiManager.getWifiState());
     }
 
     private void forceUpdateAPs() {
@@ -418,7 +428,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // If the user is not allowed to configure wifi, do not handle menu selections.
-        if (isUiRestricted()) return false;
+        if (mIsRestricted) {
+            return false;
+        }
 
         switch (item.getItemId()) {
             case MENU_ID_WPS_PBC:
@@ -651,7 +663,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     private void updateAccessPointsDelayed() {
         // Safeguard from some delayed event handling
-        if (getActivity() != null && !isUiRestricted() && mWifiManager.isWifiEnabled()) {
+        if (getActivity() != null && !mIsRestricted && mWifiManager.isWifiEnabled()) {
             setProgressBarVisible(true);
             getView().postDelayed(mUpdateAccessPointsRunnable, 300 /* delay milliseconds */);
         }
@@ -660,7 +672,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged(int state) {
-        if (isUiRestricted()) {
+        if (mIsRestricted) {
             return;
         }
 
@@ -699,7 +711,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         updateAccessPointsDelayed();
         changeNextButtonState(mWifiTracker.isConnected());
     }
-
 
     private void updateAccessPointPreferences() {
         // in case state has changed
