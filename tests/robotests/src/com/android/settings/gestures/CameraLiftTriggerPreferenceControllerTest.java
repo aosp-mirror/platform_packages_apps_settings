@@ -100,4 +100,26 @@ public class CameraLiftTriggerPreferenceControllerTest {
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
+
+    @Test
+    public void testEnablePreference_shouldSetSetting() {
+        final Context context = RuntimeEnvironment.application;
+        mController = new CameraLiftTriggerPreferenceController(context, null,
+                KEY_CAMERA_LIFT_TRIGGER);
+        mController.onPreferenceChange(null, true);
+
+        assertThat(Settings.Secure.getInt(context.getContentResolver(),
+                CAMERA_LIFT_TRIGGER_ENABLED, 0)).isEqualTo(1);
+    }
+
+    @Test
+    public void testDisablePreference_shouldClearSetting() {
+        final Context context = RuntimeEnvironment.application;
+        mController = new CameraLiftTriggerPreferenceController(context, null,
+                KEY_CAMERA_LIFT_TRIGGER);
+        mController.onPreferenceChange(null, false);
+
+        assertThat(Settings.Secure.getInt(context.getContentResolver(),
+                CAMERA_LIFT_TRIGGER_ENABLED, 1)).isEqualTo(0);
+    }
 }
