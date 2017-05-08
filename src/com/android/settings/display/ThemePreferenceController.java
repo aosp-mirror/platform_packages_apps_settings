@@ -13,8 +13,6 @@
  */
 package com.android.settings.display;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_THEME;
-
 import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
@@ -38,6 +36,8 @@ import libcore.util.Objects;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_THEME;
 
 public class ThemePreferenceController extends PreferenceController implements
         Preference.OnPreferenceChangeListener {
@@ -94,6 +94,7 @@ public class ThemePreferenceController extends PreferenceController implements
             theme = mContext.getString(R.string.default_theme);
             pref.setSummary(theme);
         }
+        pref.setSummary(theme);
         pref.setValue(theme);
     }
 
