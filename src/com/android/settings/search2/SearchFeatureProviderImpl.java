@@ -19,6 +19,7 @@ package com.android.settings.search2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,9 @@ import android.view.MenuItem;
 import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.search.IndexingCallback;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -88,6 +92,11 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         return mDatabaseIndexingManager;
     }
 
+    @Override
+    public boolean isIndexingComplete(Context context) {
+        return getIndexingManager(context).isIndexingComplete();
+    }
+
     public SiteMapManager getSiteMapManager() {
         if (mSiteMapManager == null) {
             mSiteMapManager = new SiteMapManager();
@@ -96,9 +105,9 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public void updateIndex(Context context) {
+    public void updateIndex(Context context, IndexingCallback callback) {
         long indexStartTime = System.currentTimeMillis();
-        getIndexingManager(context).indexDatabase();
+        getIndexingManager(context).indexDatabase(callback);
         Log.d(TAG, "IndexDatabase() took " +
                 (System.currentTimeMillis() - indexStartTime) + " ms");
     }
