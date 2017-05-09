@@ -330,11 +330,10 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Account"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Geolocalizzazione"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Account"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"Sicurezza e posizione"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Sicurezza e posizione"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Crittografia e credenziali"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefono criptato"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispositivo criptato"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Pref. schermata di blocco"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Imposta La mia posizione, sblocco schermo, blocco SIM, blocco cred."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Imposta La mia posizione, sblocco schermo, blocco archivio credenziali"</string>
@@ -440,7 +439,7 @@
     <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Imposta il blocco schermo"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Proteggi il tuo dispositivo"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Usa l\'impronta digitale"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Sblocco del dispositivo con l\'impronta digitale"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Sblocca il dispositivo con l\'impronta digitale"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Blocco schermo"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Scegli blocco lavoro"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Proteggi il tuo tablet"</string>
@@ -1531,7 +1530,7 @@
     <string name="app_factory_reset" msgid="6635744722502563022">"Disinstalla aggiornamenti"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Hai scelto di avviare questa applicazione per impostazione predefinita per alcune azioni."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Hai scelto di consentire a questa applicazione di creare widget e di accedere ai relativi dati."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nessuna applicazione predefinita impostata."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nessuna app predefinita impostata."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Cancella predefinite"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Questa applicazione potrebbe non essere stata ideata per il tuo schermo. Puoi stabilire come adattarla al tuo schermo qui."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"Chiedi all\'avvio"</string>
@@ -1860,6 +1859,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Utilizzare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> deve:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Un\'app sta oscurando una richiesta di autorizzazione, pertanto Impostazioni non può verificare la tua risposta."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se attivi <xliff:g id="SERVICE">%1$s</xliff:g>, il dispositivo non utilizzerà il blocco schermo per migliorare la crittografia dei dati."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Il dispositivo non utilizzerà il blocco schermo per migliorare la crittografia dei dati perché hai attivato un servizio di accessibilità."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"L\'attivazione di <xliff:g id="SERVICE">%1$s</xliff:g> incide sulla crittografia dei dati, pertanto devi confermare la sequenza."</string>
@@ -2543,8 +2544,8 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"La cronologia chiamate verrà condivisa con questo utente."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Desideri attivare chiamate e SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"La cronologia chiamate e SMS verrà condivisa con questo utente."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Informazioni per emergenze"</string>
-    <string name="emergency_info_summary" msgid="5062945162967838521">"Info e contatti per <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Informazioni per le emergenze"</string>
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Dati e contatti di <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Consenti app e contenuti"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applicazioni con limitazioni"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Espandi impostazioni per app"</string>
@@ -2974,11 +2975,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Questo profilo di lavoro è gestito da:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Gestito da <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Sperimentale)"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"Rotazione del dispositivo"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Ruota i contenuti dello schermo"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Rimani in visualizzazione verticale"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Rimani in visualizzazione orizzontale"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Rimani in orientamento corrente"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Avvio sicuro"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continua"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Puoi proteggere ulteriormente il dispositivo attivando la richiesta del PIN prima dell\'avvio. Fino all\'avvio, il dispositivo non può ricevere chiamate, messaggi o notifiche, incluse le sveglie. \n\nIn questo modo puoi proteggere i dati su dispositivi persi o rubati. Vuoi richiedere il PIN per avviare il dispositivo?"</string>
@@ -3313,8 +3309,8 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Avviso sui dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Avviso sui dati: <xliff:g id="ID_1">%1$s</xliff:g>/Limite dati: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciclo di fatturazione"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"Il ciclo mensile ha inizio il giorno <xliff:g id="ID_1">%1$s</xliff:g> di ogni mese"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Mensile a partire dal giorno <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
+    <skip />
     <string name="network_restrictions" msgid="8234695294536675380">"Restrizioni di rete"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> restrizioni</item>
@@ -3399,7 +3395,6 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Mostra o nascondi i contenuti delle notifiche"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tutte"</string>
     <string name="page_tab_title_support" msgid="6330657582897417458">"Assistenza"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Larghezza minima"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nessuna app installata ha richiesto l\'accesso a SMS premium"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Gli SMS premium potrebbero comportare costi, che verranno aggiunti alle fatture del tuo operatore. Se attivi l\'autorizzazione per un\'app, potrai utilizzarla per inviare SMS premium."</string>
@@ -3493,7 +3488,7 @@
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilità"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"On"</string>
-    <string name="gesture_setting_off" msgid="5230169535435881894">"Disattivati"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Disattivato"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Il bootloader è già sbloccato"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Devi prima connetterti a Internet"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connettiti a Internet o contatta il tuo operatore"</string>
