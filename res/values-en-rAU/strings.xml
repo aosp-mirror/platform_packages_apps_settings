@@ -329,11 +329,10 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Accounts"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Location"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Accounts"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"Security &amp; Location"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Security &amp; location"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encryption &amp; credentials"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Phone encrypted"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Device encrypted"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Lock screen preferences"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Set My Location, screen unlock, SIM card lock, credential storage lock"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Set My Location, screen unlock, credential storage lock"</string>
@@ -767,9 +766,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Anonymous identity"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Password"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Show password"</string>
-    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Select AP Band"</string>
-    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz Band"</string>
-    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz Band"</string>
+    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Select AP band"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz band"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz band"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP settings"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Share with other device users"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(unchanged)"</string>
@@ -1324,7 +1323,7 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Can’t tether or use portable hotspots while Data Saver is on"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB tethering"</string>
-    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB connected, tick to tether"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB connected, slide to tether"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Tethered"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="8427089411146908205">"Can\'t tether when USB storage is in use"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB not connected"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Use <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> needs to:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Because an app is obscuring a permission request, Settings can’t verify your response."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"If you turn on <xliff:g id="SERVICE">%1$s</xliff:g>, your device won’t use your screen lock to enhance data encryption."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Because you\'ve turned on an accessibility service, your device won’t use your screen lock to enhance data encryption."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Because turning on <xliff:g id="SERVICE">%1$s</xliff:g> affects data encryption, you need to confirm your pattern."</string>
@@ -2797,7 +2798,7 @@
     <string name="notification_importance_min" msgid="5455049524984686275">"No sound or visual interruption"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"No sound"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Make sound"</string>
-    <string name="notification_importance_high" msgid="2082429479238228527">"Make sound and pop on screen"</string>
+    <string name="notification_importance_high" msgid="2082429479238228527">"Make sound and pop up on screen"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Low"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Medium"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"High"</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Don\'t make sound, vibrate or peek these notifications into view on the current screen."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Notification assistant"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Notification access"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Access to work profile notifications is blocked"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps cannot read notifications"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d apps can read notifications</item>
@@ -3266,7 +3268,7 @@
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Portable Wi-Fi hotspot <xliff:g id="ID_1">%1$s</xliff:g> is active, Wi-Fi for this device is turned off."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Aeroplane mode is on"</string>
     <string name="condition_airplane_summary" msgid="5561586417832393666">"Wi-Fi, Bluetooth and mobile network are turned off. You can\'t make phone calls or connect to the Internet."</string>
-    <string name="condition_zen_title" msgid="2679168532600816392">"Do not disturb is on (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <string name="condition_zen_title" msgid="2679168532600816392">"Do Not Disturb is on (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Battery Saver is on"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Performance is reduced. Location services and background data are turned off."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Mobile data is off"</string>
@@ -3294,8 +3296,8 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobile data"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi data"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet data"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> Data warning"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> Data warning / <xliff:g id="ID_2">%2$s</xliff:g> Data limit"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> data warning"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> data warning / <xliff:g id="ID_2">%2$s</xliff:g> data limit"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Billing cycle"</string>
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Monthly cycle starts on the <xliff:g id="ID_1">%1$s</xliff:g> of every month"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Monthly starting <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3333,7 +3335,7 @@
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Add another fingerprint"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Unlock with a different finger"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"On / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="battery_saver_off_summary" msgid="8309471955051162327">"Off / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_summary" msgid="8309471955051162327">"Off/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Never turn on automatically"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Turn on automatically at %1$s battery"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Not using battery optimisation"</string>

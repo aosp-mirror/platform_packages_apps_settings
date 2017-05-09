@@ -332,8 +332,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Sicurezza e posizione"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Crittografia e credenziali"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefono criptato"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispositivo criptato"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Pref. schermata di blocco"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Imposta La mia posizione, sblocco schermo, blocco SIM, blocco cred."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Imposta La mia posizione, sblocco schermo, blocco archivio credenziali"</string>
@@ -439,7 +438,7 @@
     <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Imposta il blocco schermo"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Proteggi il tuo dispositivo"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Usa l\'impronta digitale"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Sblocco del dispositivo con l\'impronta digitale"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Sblocca il dispositivo con l\'impronta digitale"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Blocco schermo"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Scegli blocco lavoro"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Proteggi il tuo tablet"</string>
@@ -1526,7 +1525,7 @@
     <string name="app_factory_reset" msgid="6635744722502563022">"Disinstalla aggiornamenti"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Hai scelto di avviare questa applicazione per impostazione predefinita per alcune azioni."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Hai scelto di consentire a questa applicazione di creare widget e di accedere ai relativi dati."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nessuna applicazione predefinita impostata."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nessuna app predefinita impostata."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Cancella predefinite"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Questa applicazione potrebbe non essere stata ideata per il tuo schermo. Puoi stabilire come adattarla al tuo schermo qui."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"Chiedi all\'avvio"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Utilizzare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> deve:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Un\'app sta oscurando una richiesta di autorizzazione, pertanto Impostazioni non può verificare la tua risposta."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se attivi <xliff:g id="SERVICE">%1$s</xliff:g>, il dispositivo non utilizzerà il blocco schermo per migliorare la crittografia dei dati."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Il dispositivo non utilizzerà il blocco schermo per migliorare la crittografia dei dati perché hai attivato un servizio di accessibilità."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"L\'attivazione di <xliff:g id="SERVICE">%1$s</xliff:g> incide sulla crittografia dei dati, pertanto devi confermare la sequenza."</string>
@@ -2533,8 +2534,8 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"La cronologia chiamate verrà condivisa con questo utente."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Desideri attivare chiamate e SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"La cronologia chiamate e SMS verrà condivisa con questo utente."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Informazioni per emergenze"</string>
-    <string name="emergency_info_summary" msgid="5062945162967838521">"Info e contatti per <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Informazioni per le emergenze"</string>
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Dati e contatti di <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Consenti app e contenuti"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applicazioni con limitazioni"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Espandi impostazioni per app"</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Non emettere suoni o vibrazioni e non mostrare queste notifiche nella schermata corrente."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistente notifica"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accesso alle notifiche"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Accosso bloccato alle notifiche del profilo di lavoro"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Le app non possono leggere le notifiche"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">Le app %d possono leggere le notifiche</item>
@@ -3474,7 +3476,7 @@
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilità"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"On"</string>
-    <string name="gesture_setting_off" msgid="5230169535435881894">"Disattivati"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Disattivato"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Il bootloader è già sbloccato"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Devi prima connetterti a Internet"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connettiti a Internet o contatta il tuo operatore"</string>

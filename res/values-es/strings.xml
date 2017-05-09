@@ -332,8 +332,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Seguridad y ubicación"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Cifrado y credenciales"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Teléfono cifrado"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispositivo cifrado"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Ajustes de la pantalla de bloqueo"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Establecer Mi ubicación, bloqueo de pantalla, bloqueo de tarjeta SIM y bloqueo de almacenamiento de credenciales"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Establecer ubicación, bloqueo de pantalla y bloqueo de almacenamiento de credenciales"</string>
@@ -377,7 +376,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Eliminar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"¡Empecemos!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Pon el dedo en el sensor y levántalo cuando notes una vibración."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Continuar"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Sigue un poco más"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Mueve el dedo ligeramente para añadir todas las partes de tu huella digital."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Huella digital añadida"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Cuando aparezca este icono, puedes usar tu huella digital para identificarte o autorizar una compra."</string>
@@ -625,8 +624,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opciones…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Ajustes avanzados"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Ajustes avanzados de Bluetooth"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetooth permite la comunicación con dispositivos Bluetooth cercanos."</string>
-    <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden detectar dispositivos Bluetooth aunque esté desactivada la conexión Bluetooth. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Permite la comunicación con dispositivos Bluetooth cercanos"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden detectar dispositivos Bluetooth aunque esta conexión esté desactivada. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Conectar con…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> se desconectará del perfil de audio A2DP."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> se desconectará del audio manos libres."</string>
@@ -687,10 +686,10 @@
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
     <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"Banda de 5 GHz no disponible en este país"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Modo avión"</string>
-    <string name="wifi_notify_open_networks" msgid="76298880708051981">"Notificación de red abierta"</string>
+    <string name="wifi_notify_open_networks" msgid="76298880708051981">"Notificaciones de redes abiertas"</string>
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Recibir una notificación si hay una red pública de alta calidad disponible"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activar Wi-Fi automáticamente"</string>
-    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"La conexión Wi-Fi se volverá a activar automáticamente cerca de las redes de alta calidad guardadas, por ejemplo, la de tu casa"</string>
+    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"La conexión Wi-Fi se volverá a activar automáticamente cerca de las redes de alta calidad guardadas, como la de tu casa"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"No está disponible porque la búsqueda de redes Wi-Fi está desactivada"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Solo conexiones estables"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
@@ -1099,7 +1098,7 @@
     <string name="status_signal_strength" msgid="3732655254188304547">"Intensidad de la señal"</string>
     <string name="status_roaming" msgid="2638800467430913403">"Itinerancia"</string>
     <string name="status_operator" msgid="2274875196954742087">"Red"</string>
-    <string name="status_wifi_mac_address" msgid="2202206684020765378">"Dirección MAC de Wi‑Fi"</string>
+    <string name="status_wifi_mac_address" msgid="2202206684020765378">"Dirección MAC de la red Wi‑Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Dirección de Bluetooth"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"Número de serie"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"No disponible"</string>
@@ -1276,7 +1275,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Restaurando la configuración de APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer ajustes"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se ha restablecido la configuración predeterminada de APN."</string>
-    <string name="reset_dashboard_title" msgid="4412694650600342973">"Recuperar ajustes"</string>
+    <string name="reset_dashboard_title" msgid="4412694650600342973">"Restablecer ajustes"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"Restablecer ajustes de red"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Se recuperarán todos los ajustes de red, como:\n\n"<li>"Wi‑Fi"</li>\n<li>"Datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer ajustes"</string>
@@ -1331,15 +1330,15 @@
     <string name="usb_tethering_turnon_subtext" msgid="4748616058219273033">"Conectar para activar"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Error al compartir por USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Compartir por Bluetooth"</string>
-    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="2092766774943506688">"Compartiendo conexión a Internet del tablet vía Bluetooth"</string>
-    <string name="bluetooth_tethering_available_subtext" product="default" msgid="313873759999970236">"Compartiendo conexión a Internet del móvil vía Bluetooth"</string>
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="6388191062495199481">"Compartiendo la conexión a Internet con 1 dispositivo vía Bluetooth"</string>
-    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="5970460338828861091">"Compartiendo la conexión a Internet con 1 dispositivo vía Bluetooth"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="3253150865825199632">"Compartiendo la conexión a Internet con <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> dispositivos vía Bluetooth"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8268867745495039177">"Compartiendo la conexión a Internet con <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> dispositivos vía Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Compartiendo la conexión a Internet de este <xliff:g id="DEVICE_NAME">%1$d</xliff:g> vía Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="1889565070769307732">"No se comparte la conexión a Internet de este tablet vía Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="1838503633450298902">"No se comparte la conexión a Internet de este móvil vía Bluetooth"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="2092766774943506688">"Compartiendo conexión a Internet del tablet por Bluetooth"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="313873759999970236">"Compartiendo conexión a Internet del móvil por Bluetooth"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="6388191062495199481">"Compartiendo la conexión a Internet con 1 dispositivo por Bluetooth"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="5970460338828861091">"Compartiendo la conexión a Internet con 1 dispositivo por Bluetooth"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="3253150865825199632">"Compartiendo la conexión a Internet con <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> dispositivos por Bluetooth"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8268867745495039177">"Compartiendo la conexión a Internet con <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> dispositivos por Bluetooth"</string>
+    <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Compartiendo la conexión a Internet de este <xliff:g id="DEVICE_NAME">%1$d</xliff:g> por Bluetooth"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="1889565070769307732">"No se comparte la conexión a Internet de este tablet por Bluetooth"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="1838503633450298902">"No se comparte la conexión a Internet de este móvil por Bluetooth"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"No anclado"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"No se puede anclar a más de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivos."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Se desactivará el anclaje a red de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -1351,7 +1350,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"¿Cambiar aplicación de SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"¿Usar <xliff:g id="NEW_APP">%1$s</xliff:g> en lugar de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como aplicación de SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"¿Usar <xliff:g id="NEW_APP">%s</xliff:g> como aplicación de SMS?"</string>
-    <string name="network_scorer_picker_title" msgid="6383879578279046456">"Proveedor de valoración de red"</string>
+    <string name="network_scorer_picker_title" msgid="6383879578279046456">"Proveedor de valoración de redes"</string>
     <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"Ninguno"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"¿Cambiar asistente de Wi‑Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"¿Quieres usar <xliff:g id="NEW_APP">%1$s</xliff:g> en lugar de <xliff:g id="CURRENT_APP">%2$s</xliff:g> para administrar tus conexiones de red?"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"¿Usar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Una aplicación está bloqueando una solicitud de permiso, por lo que Ajustes no puede verificar tu respuesta."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si activas <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Has activado un servicio de accesibilidad, por lo que el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Activar <xliff:g id="SERVICE">%1$s</xliff:g> afecta al cifrado de datos, por lo que debes confirmar tu patrón."</string>
@@ -2004,7 +2005,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"El uso de batería es un cálculo aproximado de consumo de energía que no incluye todas las fuentes de consumo de la batería. El uso de batería variado es la diferencia entre el consumo de energía aproximado calculado y el consumo real de batería."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Uso de potencia sobrecalculado"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="2690821851327075443">"Usada durante <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"En uso durante <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> usado por <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> del total de batería"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Desglose desde la última carga completa"</string>
@@ -2113,7 +2114,7 @@
     <string name="gadget_brightness_state_off" msgid="946382262872753084">"desactivado"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Almacenamiento de credenciales"</string>
-    <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde memoria"</string>
+    <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde almacenamiento"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Instalar desde la tarjeta SD"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados desde almacenamiento"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalar certificados desde la tarjeta SD"</string>
@@ -2653,7 +2654,7 @@
       <item quantity="one">Mostrar %d elemento oculto</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Red e Internet"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, móvil, uso de datos, punto de acceso"</string>
+    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, datos móviles, uso de datos, punto de acceso"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Dispositivos conectados"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Enviar pantalla, NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplicaciones y notificaciones"</string>
@@ -2736,7 +2737,7 @@
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sonidos de bloqueo de pantalla"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"Sonidos de carga de batería"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Sonidos al conectar"</string>
-    <string name="touch_sounds_title" msgid="5326587106892390176">"Sonidos táctiles"</string>
+    <string name="touch_sounds_title" msgid="5326587106892390176">"Sonidos al tocar"</string>
     <string name="vibrate_on_touch_title" msgid="5388579924689395023">"Vibrar al tocar"</string>
     <string name="dock_audio_media_title" msgid="1346838179626123900">"Reproducciones altavoz base"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Todo el audio"</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"No emitir sonido, vibrar ni mostrar notificaciones en la pantalla actual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistente de notificaciones"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acceso a notificaciones"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Se ha bloqueado el acceso a las notificaciones del perfil de trabajo"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer notificaciones"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d aplicaciones pueden leer notificaciones</item>
@@ -2970,10 +2972,10 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Mantener orientación actual"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Inicio seguro"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continuar"</string>
-    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Para proteger aún más tu dispositivo, haz que solicite el PIN antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia. \n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir PIN al iniciar el dispositivo?"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Para proteger aún más tu dispositivo, haz que solicite tu PIN antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia. \n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir PIN al iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Para proteger aún más tu dispositivo, haz que solicite el patrón antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia. \n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir patrón al iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Para proteger aún más tu dispositivo, haz que solicite la contraseña antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia. \n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir contraseña al iniciar el dispositivo?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Además de utilizar la huella digital para desbloquear el dispositivo, puedes protegerlo aún más si haces que solicite el PIN antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia.\n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir el PIN al iniciar el dispositivo?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Además de utilizar la huella digital para desbloquear el dispositivo, puedes protegerlo aún más si haces que solicite tu PIN antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia.\n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir PIN al iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Además de utilizar la huella digital para desbloquear el dispositivo, puedes protegerlo aún más si haces que solicite el patrón antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia.\n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir patrón al iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Además de utilizar la huella digital para desbloquear el dispositivo, puedes protegerlo aún más si haces que solicite la contraseña antes de iniciarse. El dispositivo no puede recibir llamadas, mensajes ni notificaciones (incluidas alarmas) hasta que no se inicia.\n\nEsto es útil para proteger tus datos si pierdes el dispositivo o te lo roban. ¿Pedir contraseña al iniciar el dispositivo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Sí"</string>
@@ -3074,7 +3076,7 @@
     <string name="system_app" msgid="9068313769550747372">"(Sistema)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Predeterminados del sistema)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"Almacenamiento de apps"</string>
-    <string name="usage_access" msgid="5479504953931038165">"Acceso a uso"</string>
+    <string name="usage_access" msgid="5479504953931038165">"Acceso al uso"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"Permitir acceso de uso"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Preferencias de uso de aplicaciones"</string>
     <string name="usage_access_description" msgid="1352111094596416795">"El acceso de uso permite que una aplicación controle las aplicaciones que utilizas y con qué frecuencia, así como tu operador, los ajustes de idioma y otros detalles."</string>
@@ -3318,7 +3320,7 @@
       <item quantity="one">1 aplicación puede usar datos sin restricción cuando el ahorro de datos está activado</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Ahorro de datos"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acceso a datos no restringido"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acceso a datos sin restricción"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Las conexiones automáticas están desactivadas"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Activado"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Desactivado"</string>
@@ -3466,7 +3468,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"Coge el teléfono para consultar las notificaciones rápidamente."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Coge el tablet para consultar las notificaciones rápidamente."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Coge el dispositivo para consultar las notificaciones rápidamente."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Deslizar la huella para abrir notificaciones"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Deslizar por el sensor de huellas para abrir notificaciones"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del teléfono."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del dispositivo."</string>

@@ -336,8 +336,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Lokalizacja i blokady"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Szyfrowanie i dane logowania"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon zaszyfrowany"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Urządzenie zaszyfrowane"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Ustawienia ekranu blokady"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ustaw funkcję Moja lokalizacja, odblokowywanie ekranu, blokadę karty SIM, blokadę magazynu danych logowania."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ustaw funkcję Moja lokalizacja, odblokowywanie ekranu, blokadę magazynu danych logowania"</string>
@@ -1102,8 +1101,8 @@
     <string name="build_number" msgid="3075795840572241758">"Numer kompilacji"</string>
     <string name="selinux_status" msgid="6212165375172061672">"Stan SELinux"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Niedostępna"</string>
-    <string name="device_status_activity_title" msgid="1411201799384697904">"Informacje o telefonie"</string>
-    <string name="device_status" msgid="607405385799807324">"Informacje o telefonie"</string>
+    <string name="device_status_activity_title" msgid="1411201799384697904">"Stan telefonu"</string>
+    <string name="device_status" msgid="607405385799807324">"Stan telefonu"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Stan baterii, sieci i inne informacje"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Numer telefonu, sygnał itd."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Pamięć wewnętrzna"</string>
@@ -1453,7 +1452,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Wybierz kod PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Potwierdź hasło"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Potwierdź wzór"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Potwierdź kod PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Potwierdź PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Hasła nie są takie same"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Kody PIN nie są takie same"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Wybór blokady"</string>
@@ -1754,7 +1753,7 @@
     <string name="input_method" msgid="5434026103176856164">"Sposób wprowadzania tekstu"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Obecna klawiatura"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Wybór sposobu wprowadzania tekstu"</string>
-    <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatyczny"</string>
+    <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatycznie"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Zawsze pokazuj"</string>
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"Zawsze ukrywaj"</string>
     <string name="configure_input_method" msgid="1317429869771850228">"Konfiguruj metody wprowadzania"</string>
@@ -1895,6 +1894,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Włączyć <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Wymagania <xliff:g id="SERVICE">%1$s</xliff:g>:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Aplikacja Ustawienia nie może zweryfikować Twojej odpowiedzi, ponieważ inna aplikacja zasłania prośbę o udzielenie uprawnień."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jeśli włączysz usługę <xliff:g id="SERVICE">%1$s</xliff:g>, Twoje urządzenie nie będzie korzystać z blokady ekranu, by usprawnić szyfrowanie danych."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Włączyłeś usługę ułatwień dostępu, więc Twoje urządzenie nie będzie korzystać z blokady ekranu, by usprawnić szyfrowanie danych."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Ponieważ włączenie <xliff:g id="SERVICE">%1$s</xliff:g> wpływa na szyfrowanie danych, musisz potwierdzić swój wzór."</string>
@@ -2390,7 +2391,7 @@
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Jeśli ograniczysz mobilną transmisję danych w tle, niektóre aplikacje i usługi będą działać tylko przy połączeniu z Wi‑Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Jeśli ograniczysz mobilną transmisję danych w tle, niektóre aplikacje i usługi będą działać tylko przy połączeniu z Wi‑Fi.\n\nTo ustawienie obowiązuje u wszystkich użytkowników tego tabletu."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"Jeśli ograniczysz mobilną transmisję danych w tle, niektóre aplikacje i usługi będą działać tylko przy połączeniu z Wi‑Fi.\n\nTo ustawienie obowiązuje u wszystkich użytkowników tego telefonu."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ostrzeżenie"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Ostrzeżenie:"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limit"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Usunięte aplikacje"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Usunięte aplikacje i użytkownicy"</string>
@@ -2584,7 +2585,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Włączyć SMS-y i rozmowy telefoniczne?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Historia połączeń i SMS-ów będzie dostępna dla tego użytkownika."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Informacje alarmowe"</string>
-    <string name="emergency_info_summary" msgid="5062945162967838521">"Informacje i kontakty dla użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Dane i kontakty użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Zezwól na aplikacje i zawartość"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikacje z ograniczeniami"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Rozwiń ustawienia aplikacji"</string>
@@ -2705,7 +2706,7 @@
       <item quantity="one">Pokaż %d ukryty element</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Sieć i internet"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, mobilne, transmisja danych, hotspot"</string>
+    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, sieć komórkowa, transmisja danych, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Połączone urządzenia"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, przesyłanie, komunikacja NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikacje i powiadomienia"</string>
@@ -2860,6 +2861,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Nie sygnalizuj tych powiadomień dźwiękiem ani wibracjami ani nie wyświetlaj ich na bieżącym ekranie."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asystent powiadomień"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Dostęp do powiadomień"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Dostęp do powiadomień profilu do pracy jest zablokowany"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikacje nie mogą odczytywać powiadomień"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="few">%d aplikacje mogą odczytywać powiadomienia</item>
@@ -3037,9 +3039,9 @@
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Możesz jeszcze lepiej zabezpieczyć urządzenie, wymuszając wpisanie kodu PIN przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości i powiadomień (w tym alarmów). \n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Wymagać hasła do uruchomienia urządzenia?"</string>
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Możesz jeszcze lepiej zabezpieczyć urządzenie, wymuszając narysowanie wzoru przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości i powiadomień (w tym alarmów). \n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Wymagać hasła do uruchomienia urządzenia?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Możesz jeszcze lepiej zabezpieczyć urządzenie, wymuszając podanie hasła przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości i powiadomień (w tym alarmów). \n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Wymagać hasła do uruchomienia urządzenia?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Oprócz odblokowywania urządzenia odciskiem palca, możesz jeszcze lepiej zabezpieczyć urządzenie, wymuszając wpisanie kodu PIN przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości i powiadomień (w tym alarmów). \n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Wymagać hasła do uruchomienia urządzenia?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Oprócz odblokowywania urządzenia odciskiem palca, możesz jeszcze lepiej zabezpieczyć urządzenie, wymuszając narysowanie wzoru przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości i powiadomień (w tym alarmów). \n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Wymagać hasła do uruchomienia urządzenia?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Oprócz odblokowywania urządzenia odciskiem palca, możesz jeszcze lepiej zabezpieczyć urządzenie, wymuszając podanie hasła przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości i powiadomień (w tym alarmów). \n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Wymagać hasła do uruchomienia urządzenia?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Możesz nie tylko odblokowywać urządzenie odciskiem palca, ale też jeszcze lepiej je zabezpieczyć, wymuszając wpisanie kodu PIN przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Czy wymagać kodu PIN do uruchomienia urządzenia?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Możesz nie tylko odblokowywać urządzenie odciskiem palca, ale też jeszcze lepiej je zabezpieczyć, wymuszając narysowanie wzoru przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Czy wymagać wzoru do uruchomienia urządzenia?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Możesz nie tylko odblokowywać urządzenie odciskiem palca, ale też jeszcze lepiej je zabezpieczyć, wymuszając podanie hasła przed uruchomieniem. Do czasu uruchomienia urządzenie nie może odbierać połączeń, wiadomości ani powiadomień (w tym alarmów).\n\nTo pomaga zabezpieczyć dane na utraconych lub skradzionych urządzeniach. Czy wymagać hasła do uruchomienia urządzenia?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Tak"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nie"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Wymagać kodu PIN?"</string>
@@ -3049,7 +3051,7 @@
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Gdy narysujesz swój wzór, by włączyć to urządzenie, usługi ułatwień dostępu takie jak <xliff:g id="SERVICE">%1$s</xliff:g> nie będą jeszcze aktywne."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Gdy wpiszesz swoje hasło, by włączyć to urządzenie, usługi ułatwień dostępu takie jak <xliff:g id="SERVICE">%1$s</xliff:g> nie będą jeszcze aktywne."</string>
     <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Uwaga: po restarcie ta aplikacja będzie mogła uruchomić się dopiero po odblokowaniu telefonu"</string>
-    <string name="imei_information_title" msgid="8499085421609752290">"Informacje o IMEI"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"Numer IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informacje związane z IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Gniazdo <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Otwórz domyślnie"</string>
@@ -3382,7 +3384,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ograniczenia</item>
       <item quantity="one">1 ograniczenie</item>
     </plurals>
-    <string name="operator_warning" msgid="1862988028996859195">"Operator komórkowy może obliczać ilość przesłanych danych inaczej niż urządzenie"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"Operator komórkowy może obliczać ilość przesłanych danych inaczej niż urządzenie."</string>
     <string name="data_used_template" msgid="3245919669966296505">"Wykorzystano <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Ustaw próg ostrzegawczy"</string>
     <string name="data_warning" msgid="209133958008062117">"Próg ostrzegawczy"</string>
@@ -3392,10 +3394,10 @@
     <string name="configure" msgid="1029654422228677273">"Skonfiguruj"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Inne aplikacje korzystające z transmisji danych"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> aplikacje mogą używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone</item>
-      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> aplikacji może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplikacji może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone</item>
-      <item quantity="one">1 aplikacja może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone</item>
+      <item quantity="few"><xliff:g id="COUNT">%1$d</xliff:g> aplikacje mogą używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone.</item>
+      <item quantity="many"><xliff:g id="COUNT">%1$d</xliff:g> aplikacji może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone.</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplikacji może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone.</item>
+      <item quantity="one">1 aplikacja może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone.</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Oszczędzanie danych"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"Nieograniczony dostęp do danych"</string>

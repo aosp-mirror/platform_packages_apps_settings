@@ -334,8 +334,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Bezbednost i lokacija"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Šifrovanje i akreditivi"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon je šifrovan"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Uređaj je šifrovan"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Podešavanja zaključanog ekrana"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Podešavanje Moje lokacije, otključavanja ekrana, zaključavanja SIM kartice i zaključavanja akreditiva skladišta"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Podešavanje Moje lokacije, otključavanja ekrana, zaključavanja skladišta akreditiva"</string>
@@ -1875,6 +1874,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Želite li da koristite <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> treba:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Pošto aplikacija skriva zahtev za dozvolu, Podešavanja ne mogu da verifikuju odgovor."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ako uključite <xliff:g id="SERVICE">%1$s</xliff:g>, uređaj neće koristiti zaključavanje ekrana da bi poboljšao šifrovanje podataka."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Pošto ste uključili uslugu pristupačnosti, uređaj neće koristiti zaključavanje ekrana da bi poboljšao šifrovanje podataka."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Pošto uključivanje usluge <xliff:g id="SERVICE">%1$s</xliff:g> utiče na šifrovanje podataka, treba da potvrdite šablon."</string>
@@ -2833,6 +2834,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Nema nikakvog zvuka ni vibracije niti se ova obaveštenja nakratko prikazuju na aktuelnom ekranu."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Pomoćnik za obaveštenja"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Pristup obaveštenjima"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Pristup obaveštenjima profila za Work je blokiran"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikacije ne mogu da čitaju obaveštenja"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">%d aplikacija može da čita obaveštenja</item>
@@ -2951,7 +2953,7 @@
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Svi pozivaoci"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Izabrani pozivaoci"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Ponovni pozivaoci"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"Ako ista osoba pozove po drugi put u periodu od <xliff:g id="MINUTES">%d</xliff:g> min, dozvoli poziv"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"Ako ista osoba pozove po drugi put u roku od <xliff:g id="MINUTES">%d</xliff:g> min, dozvoli poziv"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Automatski uključi"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nikad"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Svake večeri"</string>
@@ -3002,10 +3004,10 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Zadrži aktuelni položaj"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Bezbedno pokretanje"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Nastavi"</string>
-    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Možete dodatno da zaštitite ovaj uređaj tako što ćete ga podesiti da traži PIN pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme. \n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati PIN pri pokretanju uređaja?"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Možete dodatno da zaštitite ovaj uređaj tako što ćete ga podesiti da traži PIN pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme. \n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Želite zahtev za PIN pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Možete dodatno da zaštitite ovaj uređaj tako što ćete ga podesiti da traži šablon pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme. \n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati šablon pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Možete dodatno da zaštitite uređaj tako što ćete ga podesiti da traži lozinku pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke ili obaveštenja, uključujući alarme. \n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati lozinku pri pokretanju uređaja?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži PIN pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati PIN pri pokretanju uređaja?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži PIN pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Želite zahtev za PIN pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži šablon pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati šablon pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži lozinku pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati lozinku pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Da"</string>

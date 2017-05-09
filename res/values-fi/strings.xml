@@ -332,8 +332,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Suojaus ja sijainti"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Salaus ja kirjautumistiedot"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Puhelimen tiedot on salattu."</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Laite salattu"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Lukitusnäytön asetukset"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Aseta Oma sijainti, näytön lukituksen poisto, SIM-kortin lukitus, käyttöoikeustietojen tallennustilan lukitus"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Aseta Oma sijainti, näytön lukituksen poisto, käyttöoikeustietojen tallennustilan lukitus"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Otetaanko <xliff:g id="SERVICE">%1$s</xliff:g> käyttöön?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> saa luvan:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Sovellus peittää lupapyynnön, joten Asetukset ei voi vahvistaa valintaasi."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jos <xliff:g id="SERVICE">%1$s</xliff:g> otetaan käyttöön, laitteesi ei käytä näytön lukitusta tiedon salauksen parantamiseen."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Laite ei käytä näytön lukitusta tiedon salauksen parantamiseen, koska otit käytettävyyspalvelun käyttöön."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Koska palvelun <xliff:g id="SERVICE">%1$s</xliff:g> ottaminen käyttöön vaikuttaa tietojen salaukseen, sinun pitää vahvistaa kuvio."</string>
@@ -2360,7 +2361,7 @@
     <string name="data_usage_metered_body" msgid="7655851702771342507">"Käytön mukaan laskutettavia verkkoja käsitellään samaan tapaan kuin mobiiliverkkoja, kun taustatiedonsiirtoa on rajoitettu. Sovelluksissa saattaa näkyä varoitus näiden verkkojen käyttämisestä kookkaisiin latauksiin."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobiiliverkot"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Käytön mukaan laskutettavat Wi-Fi-verkot"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Ota Wi-Fi käyttöön, niin voit valita käytön mukaan laskututettavat verkot."</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Ota Wi-Fi käyttöön, niin voit valita käytön mukaan laskutettavat verkot."</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Operaattorin mittaustulos saattaa erota laitteesi mittaamasta."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Hätäpuhelu"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Palaa puheluun"</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Ilmoitus ei tule aktiiviselle näytölle eikä salli ääniä tai värinää."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Ilmoitusapuri"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Pääsy ilmoituksiin"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Työprofiilin ilmoitusten käyttö on estetty."</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Sovellukset eivät voi lukea ilmoituksia"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d sovellusta voi lukea ilmoituksia</item>
@@ -3297,7 +3299,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Datavaroitus <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Datavaroitus <xliff:g id="ID_1">%1$s</xliff:g> / Datankäyttöraja <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Laskutusjakso"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"Kuukauden jakso alkaa joka kuukauden <xliff:g id="ID_1">%1$s</xliff:g> päivänä."</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"Kuukauden jakso alkaa joka kuukauden <xliff:g id="ID_1">%1$s</xliff:g>. päivänä."</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Kuukausi, alkaa päivänä <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Verkkorajoitukset"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">

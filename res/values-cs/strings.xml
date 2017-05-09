@@ -336,8 +336,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Zabezpečení a poloha"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Šifrování a identifikační údaje"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon je zašifrován"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Zařízení je zašifrováno"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Předvolby obrazovky uzamčení"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moje poloha, odemknutí obrazovky, zámek SIM, zámek úložiště pověření"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavení funkce Moje poloha, odemknutí obrazovky a zamknutí úložiště pověření"</string>
@@ -1319,11 +1318,11 @@
       <item quantity="one">1 účet bude obnoven</item>
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"Interní úložiště a všechna data budou vymazána"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" tabletu, mj. i:\n\n"<li>"váš účet Google,"</li>\n<li>"nastavení a data systému a aplikací,"</li>\n<li>"stažené aplikace."</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" telefonu, mj. i:\n\n"<li>"váš účet Google,"</li>\n<li>"nastavení a data systému a aplikací,"</li>\n<li>"stažené aplikace."</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" tabletu, mj. i:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" telefonu, mj. i:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Aktuálně jste přihlášeni k těmto účtům:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"V tomto zařízení jsou přítomni další uživatelé.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Hudba"</li>\n<li>"Fotky"</li>\n<li>"další uživatelské údaje"</li></string>
+    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"hudba"</li>\n<li>"fotky"</li>\n<li>"další uživatelské údaje"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Chcete-li smazat také hudbu, obrázky a další uživatelská data, je potřeba vymazat "<b>"úložiště USB"</b>"."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Chcete-li smazat také hudbu, obrázky a další uživatelská data, je potřeba vymazat "<b>"kartu SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Smazat úložiště USB"</string>
@@ -1895,6 +1894,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Zapnout <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> potřebuje:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Žádost o oprávnění je blokována jinou aplikací. Nastavení proto vaši odpověď nemůže ověřit."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Pokud zapnete službu <xliff:g id="SERVICE">%1$s</xliff:g>, zařízení nebude používat zámek obrazovky k vylepšení šifrování dat."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Vzhledem k tomu, že jste zapnuli službu přístupnosti, nebude zařízení používat zámek obrazovky k vylepšení šifrování dat."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Protože zapnutí služby <xliff:g id="SERVICE">%1$s</xliff:g> má vliv na šifrování dat, je třeba, abyste potvrdili své gesto."</string>
@@ -2860,6 +2861,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Na tato oznámení nebudete upozorněni zvukem ani vibrací, ani se nebude zobrazovat jejich náhled na aktuální obrazovce."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistent oznámení"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Přístup k oznámením"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Přístup k oznámením pracovního profilu je zablokován"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikace nesmí číst oznámení"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="few">%d aplikace mohou číst oznámení</item>

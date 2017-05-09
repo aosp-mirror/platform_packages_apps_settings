@@ -332,8 +332,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"安全性与位置信息"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"加密与凭据"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"手机已加密"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"设备已加密"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"锁定屏幕偏好设置"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"设置我的位置、屏幕解锁、SIM卡锁定和凭据存储锁定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"设置我的位置、屏幕解锁和凭据存储锁定"</string>
@@ -1773,7 +1772,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"使用按钮进行放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"使用按钮/点按屏幕三次进行放大"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"在屏幕上放大"</string>
-    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"点按三次即可放大"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"点按三次即可放大屏幕"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"点按按钮即可放大"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"要放大"</b>"，在屏幕上快速点按屏幕三次即可。\n"<ul><li>"用双指或多指在屏幕上拖动即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性地放大"</b>"，请快速在屏幕上点按三次，并在最后一次点按时按住手指不放。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您不能在键盘和导航栏中使用放大功能。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"启用放大功能后，使用屏幕底部的“无障碍”按钮可以快速放大。\n\n"<b>"要放大"</b>"，请点按“无障碍”按钮，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性地放大"</b>"，请点按“无障碍”按钮，然后触摸并按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您不能在键盘和导航栏中使用放大功能。"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"要启用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由于某个应用遮挡了权限请求界面，因此“设置”应用无法验证您的回应。"</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您开启<xliff:g id="SERVICE">%1$s</xliff:g>，您的设备将无法使用屏幕锁定来增强数据加密。"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"由于您已开启无障碍服务，因此您的设备将无法使用屏幕锁定来增强数据加密。"</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的解锁图案。"</string>
@@ -1944,7 +1945,7 @@
     <string name="power_camera" msgid="4976286950934622605">"相机"</string>
     <string name="power_wifi" msgid="1135085252964054957">"WLAN"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"蓝牙"</string>
-    <string name="power_cell" msgid="3392999761958982492">"移动网络空闲状态"</string>
+    <string name="power_cell" msgid="3392999761958982492">"移动网络待机"</string>
     <string name="power_phone" msgid="5392641106474567277">"语音通话"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"平板电脑待机"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"手机待机"</string>
@@ -2633,7 +2634,7 @@
     <string name="color_orange" msgid="4417567658855022517">"橙色"</string>
     <string name="color_purple" msgid="3888532466427762504">"紫色"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"尚未插入SIM卡"</string>
-    <string name="sim_status_title" msgid="6744870675182447160">"SIM卡状态"</string>
+    <string name="sim_status_title" msgid="6744870675182447160">"SIM 卡状态"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"使用默认SIM卡回电"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"用于外拨电话的 SIM 卡"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"其他通话设置"</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"不发出提示音，不振动，也不在当前屏幕上短暂显示这些通知。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知助手"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知使用权"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"已禁止访问工作资料通知"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"应用无法读取通知"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d 个应用可以读取通知</item>
@@ -3226,7 +3228,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"周二下午 6:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"周二下午 6:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"未连接"</string>
-    <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 的数据"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 流量"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">已屏蔽 <xliff:g id="COUNT">%d</xliff:g> 个应用的通知</item>
       <item quantity="one">已屏蔽 1 个应用的通知</item>
