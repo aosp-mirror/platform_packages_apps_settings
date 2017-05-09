@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.os.BatteryStats;
+import android.os.BatteryStats.Counter;
 import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
 import android.util.ArrayMap;
@@ -287,6 +288,11 @@ public class FakeUid extends Uid {
 
     @Override
     public Timer getBluetoothScanBackgroundTimer() {
+        return null;
+    }
+
+    @Override
+    public Counter getBluetoothScanResultCounter() {
         return null;
     }
 
