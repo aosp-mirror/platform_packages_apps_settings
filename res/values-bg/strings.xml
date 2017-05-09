@@ -332,8 +332,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Сигурност и местоположение"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Шифроване и идентификационни данни"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Телефонът е шифрован"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Устройството е шифровано"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Предпочитания за закл. екран"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Задаване на Моето местоположение, отключване на екран, заключване на SIM картата и на хранилището за идентификационни данни"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Задаване на Моето местоположение, отключване на екран и заключване на хранилището за идентификационни данни"</string>
@@ -857,7 +856,7 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Настройка на точката за достъп до Wi‑Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Точка за достъп до Wi‑Fi: Настр."</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP – точка за достъп до Wi‑Fi с WPA2 PSK"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"Точка за достъп до „<xliff:g id="NETWORK_SSID">%1$s</xliff:g>“ с <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"Точка за достъп до <xliff:g id="NETWORK_SSID">%1$s</xliff:g> с <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Обаждания през Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Обаждания през Wi-Fi: Включв."</string>
@@ -1486,7 +1485,7 @@
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Като опцията за заключване на екрана на устройството"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Управление на приложенията"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Управление и премахване на инсталирани приложения"</string>
-    <string name="applications_settings" msgid="5281808652705396152">"Информация за приложението"</string>
+    <string name="applications_settings" msgid="5281808652705396152">"Информация за приложенията"</string>
     <string name="applications_settings_summary" msgid="6683465446264515367">"Управление на приложения, задаване на преки пътища за бързо стартиране"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"Настройки за приложения"</string>
     <string name="install_applications" msgid="4872012136210802181">"Неизвестни източници"</string>
@@ -1495,7 +1494,7 @@
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Телефонът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Разширени настройки"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Да се активират още опции за настройки"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"Информация за приложението"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"Информация за приложенията"</string>
     <string name="storage_label" msgid="8700867073480107253">"Хранилище"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"Отваряне по подразбиране"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Настройки по подразбиране"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Да се използва ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> изисква:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"От Настройки не може да се получи потвърждение за отговора ви, защото заявката за разрешение се прикрива от приложение."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ако включите <xliff:g id="SERVICE">%1$s</xliff:g>, устройството ви няма да използва заключването на екрана ви за подобряване на шифроването на данни."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Тъй като сте включили услуга за достъпност, устройството ви няма да използва заключването на екрана ви за подобряване на шифроването на данни."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Тъй като включването на <xliff:g id="SERVICE">%1$s</xliff:g> засяга шифроването на данни, трябва да потвърдите фигурата си."</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Без издаване на звук, вибриране или показване на тези известия на текущия екран."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Помощник за известия"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Достъп до известията"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Достъпът до известията в служебния потребителски профил е блокиран"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Приложенията не могат да четат известията"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d приложения могат да четат известията</item>
@@ -3297,7 +3299,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>/ограничение за данните: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Цикъл на таксуване"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"Месечният цикъл започва на <xliff:g id="ID_1">%1$s</xliff:g> всеки месец"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"Месечният платежен цикъл започва на <xliff:g id="ID_1">%1$s</xliff:g> число всеки месец"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Ежемесечно от <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Мрежови ограничения"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3466,10 +3468,10 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"За да проверите бързо известията си, повдигнете телефона си."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"За да проверите бързо известията си, повдигнете таблета си."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"За да проверите бързо известията си, повдигнете устройството си."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Преглед на известията с прекарване на пръст през сензора за отпечатъци"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на телефона си."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на таблета си."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на устройството си."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Преглед на известията с плъзване на пръст през сензора за отпечатъци"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на телефона си."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на таблета си."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на устройството си."</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Помощен жест"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Чувствителност"</string>

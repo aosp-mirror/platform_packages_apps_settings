@@ -332,8 +332,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Ασφάλεια και τοποθεσία"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Κρυπτογράφηση και διαπιστευτήρια"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Το τηλέφωνο είναι κρυπτογραφημένο"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Η συσκευή είναι κρυπτογραφημένη"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Προτιμήσεις κλειδ. οθόνης"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ορισμός του \"Η τοποθεσία μου\", ξεκλειδώματος οθόνης, κλειδώματος κάρτας SIM, κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ορισμός του \"Η τοποθεσία μου\", του ξεκλειδώματος οθόνης και του κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
@@ -701,7 +700,7 @@
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Για τη βελτίωση του εντοπισμού τοποθεσίας, οι εφαρμογές και οι υπηρεσίες θα μπορούν ακόμη να εκτελέσουν σάρωση για δίκτυα Wi‑Fi. Μπορείτε να αλλάξετε αυτήν την επιλογή στις <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ρυθμίσεις σάρωσης<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Για τη βελτίωση της ακρίβειας του εντοπισμού τοποθεσίας, ενεργοποιήστε τη σάρωση για δίκτυα Wi-Fi στις <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ρυθμίσεις σάρωσης<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Να μην εμφανιστεί ξανά"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Να παραμένει ενεργοποιημένο το Wi-Fi κατά την αναστολή λειτουργίας"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Ενεργό Wi-Fi κατά την αναστ. λειτ."</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Ενεργό Wi-Fi κατά την αδράνεια"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Προέκυψε κάποιο πρόβλημα κατά την αλλαγή της ρύθμισης"</string>
     <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"Βελτίωση αποτελεσματικότητας"</string>
@@ -1678,7 +1677,7 @@
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Αυτός ο ορθογραφικός έλεγχος που χρησιμοποιείτε ενδέχεται να έχει τη δυνατότητα να συλλέξει όλο το κείμενο που πληκτρολογείτε, συμπεριλαμβανομένων προσωπικών δεδομένων όπως κωδικών πρόσβασης και αριθμών πιστωτικών καρτών. Προέρχεται από την εφαρμογή <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Θέλετε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο;"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Ρυθμίσεις"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Γλώσσα"</string>
-    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"Πληκτρολόγιο και είσοδοι"</string>
+    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"Πληκτρολόγιο και είσοδος"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Εικονικό πληκτρολόγιο"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Διαθέσιμο εικονικό πληκτρολόγιο"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"Διαχείριση πληκτρολογίων"</string>
@@ -1855,6 +1854,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Χρήση υπηρεσίας <xliff:g id="SERVICE">%1$s</xliff:g>;"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Η υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g> απαιτεί τα εξής:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Επειδή μια εφαρμογή αποκρύπτει ένα αίτημα άδειας, δεν είναι δυνατή η επαλήθευση της απάντησής σας από τις Ρυθμίσεις."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Εάν ενεργοποιήσετε την υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g>, η συσκευή σας δεν θα χρησιμοποιεί το κλείδωμα οθόνης για τη βελτίωση της κρυπτογράφησης δεδομένων."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Επειδή έχετε ενεργοποιήσει την υπηρεσία προσβασιμότητας, η συσκευή σας δεν θα χρησιμοποιεί το κλείδωμα οθόνης για τη βελτίωση της κρυπτογράφησης δεδομένων."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Επειδή η ενεργοποίηση της υπηρεσίας <xliff:g id="SERVICE">%1$s</xliff:g> επηρεάζει την κρυπτογράφηση δεδομένων, χρειάζεται να επιβεβαιώσετε το μοτίβο σας."</string>
@@ -2806,6 +2807,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Να μην συνοδεύονται αυτές οι ειδοποιήσεις από ήχο, δόνηση ή προβολή σε αναδυόμενο παράθυρο κατά την προβολή τους στην τρέχουσα οθόνη."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Βοηθός ειδοποιήσεων"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Πρόσβαση ειδοπ/σεων"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Η πρόσβαση στις ειδοποιήσεις προφίλ εργασίας έχει αποκλειστεί"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Οι εφαρμογές δεν μπορούν να διαβάσουν ειδοποιήσεις"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d εφαρμογές μπορούν να διαβάσουν ειδοποιήσεις</item>

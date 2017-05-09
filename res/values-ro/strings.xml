@@ -334,8 +334,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Securitate și locație"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Criptare și date de conectare"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon criptat"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispozitiv criptat"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferințe ecran de blocare"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Setați Locația mea, deblocarea ecranului, blocarea cardului SIM, blocarea stocării acreditărilor"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Setați Locația mea, deblocarea ecranului, blocarea stocării acreditărilor"</string>
@@ -433,8 +432,8 @@
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Avertisment: datele de pe dispozitiv vor fi șterse după încă <xliff:g id="COUNT">^1</xliff:g> încercări nereușite de deblocare!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Introduceți parola"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Criptare nereușită"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"Criptarea a fost întreruptă și nu se poate finaliza. Prin urmare, datele de pe tableta dvs. nu mai sunt accesibile. \n\nPentru a relua utilizarea tabletei, trebuie să efectuați o resetare la valorile din fabrică. Când configurați tableta după resetare, veți putea restabili toate datele pentru care ați creat copii de rezervă în Contul Google."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"Criptarea a fost întreruptă și nu se poate finaliza. Prin urmare, datele de pe telefonul dvs. nu mai sunt accesibile. \n\nPentru a relua utilizarea telefonului, trebuie să efectuați o resetare la valorile din fabrică. Când configurați telefonul după resetare, veți putea restabili toate datele pentru care ați creat copii de rezervă în Contul Google."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"Criptarea a fost întreruptă și nu se poate finaliza. Prin urmare, datele de pe tableta dvs. nu mai sunt accesibile. \n\nPentru a relua utilizarea tabletei, trebuie să reveniți la setările din fabrică. Când configurați tableta după resetare, veți putea restabili toate datele pentru care ați creat copii de rezervă în Contul Google."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"Criptarea a fost întreruptă și nu se poate finaliza. Prin urmare, datele de pe telefonul dvs. nu mai sunt accesibile. \n\nPentru a relua utilizarea telefonului, trebuie să reveniți la setările din fabrică. Când configurați telefonul după resetare, veți putea restabili toate datele pentru care ați creat copii de rezervă în Contul Google."</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Decriptarea nu a reușit"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Parola pe care ați introdus-o este corectă, dar, din păcate, datele sunt deteriorate. \n\nPentru a relua utilizarea tabletei, trebuie să reveniți la setările din fabrică. Când vă configurați tableta după resetare, veți putea să restabiliți toate datele care au backup în Contul Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Parola pe care ați introdus-o este corectă, dar, din păcate, datele sunt deteriorate. \n\nPentru a relua utilizarea telefonului, trebuie să reveniți la setările din fabrică. Când vă configurați telefonul după resetare, veți putea să restabiliți toate datele care au backup în Contul Google."</string>
@@ -636,7 +635,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opțiuni…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avansate"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Setări Bluetooth avansate"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Activarea Bluetooth permite comunicarea cu alte dispozitive Bluetooth din apropiere."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Activarea Bluetooth facilitează comunicarea cu alte dispozitive Bluetooth din apropiere."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Pentru a îmbunătăți precizia localizării, aplicațiile și serviciile de sistem pot totuși să detecteze dispozitivele Bluetooth. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Conectați-vă la..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> va fi deconectat de la media audio."</string>
@@ -685,7 +684,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Dezactivată"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Indisponibilă, deoarece NFC este oprit"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"După activarea acestei funcții, puteți transmite conținutul aplicațiilor către un alt dispozitiv compatibil NFC, ținând cele două dispozitive apropiate unul de celălalt. De exemplu, puteți să transmiteți pagini web, videoclipuri YouTube, persoane de contact și multe altele.\n\nNu trebuie decât să apropiați cele două dispozitive (de obicei, așezându-le spate în spate) și să atingeți ecranul. Aplicația determină apoi ce poate fi transmis."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"După activarea acestei funcții, puteți transmite conținutul aplicațiilor către un alt dispozitiv compatibil NFC, ținând cele două dispozitive apropiate unul de celălalt. De exemplu, puteți să transmiteți pagini web, videoclipuri YouTube, date de contact și multe altele.\n\nNu trebuie decât să apropiați cele două dispozitive (de obicei, așezându-le spate în spate) și să atingeți ecranul. Aplicația determină apoi ce poate fi transmis."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Activați conexiunea Wi-Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi-Fi"</string>
@@ -1017,7 +1016,7 @@
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Personalizat"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Schimbați imaginea de fundal"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizați ecranul"</string>
-    <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Alege o imagine din"</string>
+    <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Alege o imagine de fundal din"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Economizor de ecran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"În timpul încărcării sau andocării"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"În ambele situații"</string>
@@ -1298,15 +1297,15 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Resetați?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Resetarea rețelei nu este disponibilă pentru acest utilizator"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Setările pentru rețea au fost reinițializate"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"Resetarea configurării din fabrică"</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"Revenire la setările din fabrică"</string>
     <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
       <item quantity="few"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> conturi vor fi resetate</item>
       <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> de conturi vor fi resetate</item>
       <item quantity="one">1 cont va fi resetat</item>
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"Se vor reseta stocarea internă și toate datele"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a tabletei dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate."</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a telefonului dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate."</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a tabletei dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate;"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a telefonului dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate;"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"În prezent sunteți conectat(ă) la următoarele conturi:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Pe acest dispozitiv sunt prezenți și alți utilizatori.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzică"</li>\n<li>"Fotografii"</li>\n<li>"Alte date ale utilizatorului"</li></string>
@@ -1875,6 +1874,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Utilizați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> are funcțiile:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Deoarece o aplicație acoperă o solicitare de permisiune, Setările nu vă pot verifica răspunsul."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Dacă activați <xliff:g id="SERVICE">%1$s</xliff:g>, dispozitivul nu va utiliza blocarea ecranului pentru a îmbunătăți criptarea datelor."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Pentru că ați activat un serviciu de accesibilitate, dispozitivul nu va utiliza blocarea ecranului pentru a îmbunătăți criptarea datelor."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Deoarece activarea serviciului <xliff:g id="SERVICE">%1$s</xliff:g> afectează criptarea datelor, trebuie să confirmați modelul."</string>
@@ -2025,7 +2026,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Utilizarea bateriei reprezintă o aproximare a energiei utilizate și nu include toate sursele de consumare a bateriei. Modurile diferite de utilizare a bateriei reprezintă diferența dintre energia consumată aproximativă calculată și consumul efectiv observat pentru baterie."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Consumul supraevaluat al bateriei"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="2690821851327075443">"Utilizată de <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"Utilizată <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> folosită de <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> din bateria încărcată complet"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Detaliere de la ultima încărcare completă"</string>
@@ -2038,7 +2039,7 @@
     <string name="battery_detail_info_title" msgid="8227822131405620369">"De la încărcarea completă"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Gestionați utilizarea bateriei"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"Timp estimat rămas"</string>
-    <string name="estimated_charging_time_left" msgid="5614442409326164691">"Până la încărcare completă"</string>
+    <string name="estimated_charging_time_left" msgid="5614442409326164691">"Până la încărcarea completă"</string>
     <string name="estimated_time_description" msgid="8760210909000037089">"Estimarea se poate modifica în funcție de utilizare"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> de la deconectare"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"De la ultima deconectare pentru <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -2706,7 +2707,7 @@
     <string name="keywords_battery" msgid="1173830745699768388">"consum de energie, încărcare"</string>
     <string name="keywords_spell_checker" msgid="1399641226370605729">"ortografie, dicționar, verificare ortografică, corectare automată"</string>
     <string name="keywords_voice_input" msgid="769778245192531102">"instrument recunoaștere, introducere text, vorbire, rostiți, limbă, mâini libere, recunoaștere, jignitor, cuvânt, audio, istoric, set căști-microfon bluetooth"</string>
-    <string name="keywords_text_to_speech_output" msgid="5150660047085754699">"evaluați, limbă, valori prestabilite, rostiți, vorbire, transformarea textului în vorbire, accesibilitate, cititor de ecran, orb"</string>
+    <string name="keywords_text_to_speech_output" msgid="5150660047085754699">"evaluați, limbă, valori prestabilite, rostiți, vorbire, redare vocală a textului, accesibilitate, cititor de ecran, orb"</string>
     <string name="keywords_date_and_time" msgid="758325881602648204">"ceas, militar"</string>
     <string name="keywords_network_reset" msgid="6024276007080940820">"resetați, restabiliți, setări din fabrică"</string>
     <string name="keywords_factory_data_reset" msgid="5894970373671252165">"goliți, ștergeți, restabiliți, eliminați"</string>
@@ -2833,6 +2834,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Sunetul și vibrațiile sunt dezactivate, iar aceste notificări nu se afișează pentru o scurtă durată pe ecranul actual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistent pentru notificări"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acces la notificări"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Accesul la notificările privind profilul de serviciu este blocat"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplicațiile nu pot citi notificările"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="few">%d aplicații pot citi notificările</item>
@@ -2860,7 +2862,7 @@
     <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Permiteți acestei aplicații să creeze o fereastră picture-in-picture în timp ce aplicația este deschisă sau după ce ieșiți (de exemplu, pentru a continua vizionarea unui videoclip). Această fereastră se afișează peste alte aplicații pe care le folosiți."</string>
     <string name="picture_in_picture_on" msgid="6103704909710176555">"Da"</string>
     <string name="picture_in_picture_off" msgid="5654388666434625247">"Nu"</string>
-    <string name="manage_zen_access_title" msgid="2611116122628520522">"Accesul Nu deranja"</string>
+    <string name="manage_zen_access_title" msgid="2611116122628520522">"Acces la funcția Nu deranja"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nicio aplicație instalată nu a solicitat accesul Nu deranja"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Se încarcă aplicațiile..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blochează notificările acestei aplicații pe acest dispozitiv"</string>
@@ -3163,7 +3165,7 @@
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Încărcarea acestui dispozitiv"</string>
     <string name="usb_summary_power_only" msgid="3629517713817003738">"Alimentarea altui dispozitiv"</string>
-    <string name="usb_summary_file_transfers" msgid="6435943692610175111">"Transferul de fișiere"</string>
+    <string name="usb_summary_file_transfers" msgid="6435943692610175111">"Transfer de fișiere"</string>
     <string name="usb_summary_photo_transfers" msgid="8440204169576585250">"Transferul de fotografii (PTP)"</string>
     <string name="usb_summary_MIDI" msgid="5687906612187885908">"Dispozitivul se folosește ca MIDI"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Verificare de fundal"</string>
@@ -3304,7 +3306,7 @@
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Hotspotul Wi-Fi portabil <xliff:g id="ID_1">%1$s</xliff:g> este activ, conexiunea Wi-Fi pentru acest dispozitiv este dezactivată."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Modul Avion este activat"</string>
     <string name="condition_airplane_summary" msgid="5561586417832393666">"Wi-Fi, Bluetooth și rețeaua mobilă sunt dezactivate. Nu puteți să efectuați apeluri telefonice sau să vă conectați la internet."</string>
-    <string name="condition_zen_title" msgid="2679168532600816392">"„Nu deranja” este activat (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <string name="condition_zen_title" msgid="2679168532600816392">"„Nu deranja” e activat (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Economisire baterie activată"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Performanța este redusă. Serviciile de localizare și datele de fundal sunt dezactivate."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Datele mobile sunt dezactivate"</string>
@@ -3410,7 +3412,7 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"niciunul"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Obiectul clasificării lipsește."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Obiectul clasificării nu conține această cheie."</string>
-    <string name="special_access" msgid="3458780842491881155">"Accesul special al aplicațiilor"</string>
+    <string name="special_access" msgid="3458780842491881155">"Acces special pentru aplicații"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplicații pot folosi date nerestricționate</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de aplicații pot folosi date nerestricționate</item>
@@ -3535,7 +3537,7 @@
     <string name="auto_sync_account_title" msgid="898796354710116383">"Sincronizare automată a datelor"</string>
     <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"Sincronizare automată a datelor personale"</string>
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Sincronizare automată a datelor de serviciu"</string>
-    <string name="auto_sync_account_summary" msgid="692499211629185107">"Permiteți aplicațiilor să actualizeze automat date"</string>
+    <string name="auto_sync_account_summary" msgid="692499211629185107">"Permiteți aplicațiilor să actualizeze date automat"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Sincronizarea contului"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Informații privind dispozitivul gestionat"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Modificări și setări gestionate de organizația dvs."</string>
@@ -3621,7 +3623,7 @@
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Stocare pe telefon"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Folosit din <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <string name="storage_percent_full" msgid="6095012055875077036">"utilizat"</string>
+    <string name="storage_percent_full" msgid="6095012055875077036">"folosit"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Ștergeți aplicația"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Doriți să eliminați această aplicație instantanee?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Jocuri"</string>

@@ -334,8 +334,7 @@
     <string name="security_settings_title" msgid="6134528367364159294">"Sigurnost i lokacija"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Enkripcija i vjerodajnice"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon je kriptiran"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Uređaj je kriptiran"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Postavke zaključanog zaslona"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Postavi Moju lokaciju, otključavanje zaslona, zaključavanje SIM kartice, zaključavanje spremnika za vjerodajnice"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Postavi Moju lokaciju, otključavanje zaslona, zaključavanje pohranjivanja vjerodajnica"</string>
@@ -1875,6 +1874,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Želite li upotrijebiti uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> treba sljedeće:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Budući da aplikacija prekriva zahtjev za dopuštenje, Postavke ne mogu potvrditi vaš odgovor."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ako uključite <xliff:g id="SERVICE">%1$s</xliff:g>, vaš uređaj neće upotrebljavati PIN ili zaporku za zaključavanje zaslona za bolje šifriranje podataka."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Budući da ste uključili uslugu pristupačnosti, vaš uređaj neće upotrebljavati PIN ili zaporku za zaključavanje zaslona za bolje šifriranje podataka."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Budući da uključivanje usluge <xliff:g id="SERVICE">%1$s</xliff:g> utječe na enkripciju podataka, morate potvrditi uzorak."</string>
@@ -2833,6 +2834,7 @@
     <string name="show_silently_summary" msgid="7616604629123146565">"Nemoj emitirati zvuk, vibrirati niti prikazivati obavijesti na trenutačnom zaslonu."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Pomoćnik za obavijesti"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Pristup obavijestima"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Blokiran je pristup obavijestima radnog profila"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikacije ne mogu čitati obavijesti"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">%d aplikacija može čitati obavijesti</item>
@@ -2942,7 +2944,7 @@
     <string name="zen_mode_all_messages" msgid="6449223378976743208">"Sve poruke"</string>
     <string name="zen_mode_selected_messages" msgid="8245990149599142281">"Odabrane poruke"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Od svakoga"</string>
-    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Samo iz kontakata"</string>
+    <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Samo od kontakata"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Samo od kontakata sa zvjezdicom"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ništa"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmi"</string>
@@ -3332,7 +3334,7 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> mobilnih podataka"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi podataka"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet podataka"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"Upozorenje o potrošnji podataka za <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="cell_warning_only" msgid="763147658209027140">"Upozori na potrošnju podataka na <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Upozorenje o potrošnji podataka za <xliff:g id="ID_1">%1$s</xliff:g>/Podaci su ograničeni na <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciklus naplate"</string>
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Mjesečni ciklus počinje <xliff:g id="ID_1">%1$s</xliff:g> svakog mjeseca"</string>
