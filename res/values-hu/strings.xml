@@ -330,11 +330,10 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Fiókok"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Tartózkodási hely"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Fiókok"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"Biztonság és hely"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Biztonság és hely"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Titkosítás és hitelesítési adatok"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon titkosítva"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Az eszköz titkosítva"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"A lezárási képernyő beállításai"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Saját pozíció beállítása, képernyőzár feloldása, SIM-kártya zárolása, hitelesítési adatok tárolójának zárolása"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Saját pozíció beállítása, képernyőzár feloldása, hitelesítési adatok tárolójának zárolása"</string>
@@ -671,7 +670,7 @@
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC bekapcsolása"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"Az NFC adatokat küld ezen eszköz és a közelben található egyéb eszközök és célpontok – például fizetési terminálok, beléptetési terminálok, interaktív hirdetések vagy címkék – között."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
-    <string name="android_beam_on_summary" msgid="3618057099355636830">"Készen áll alkalmazástartalmak továbbítására NFC segítségével"</string>
+    <string name="android_beam_on_summary" msgid="3618057099355636830">"Alkalmazástartalmakat tud továbbítani NFC segítségével"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Ki"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Nem érhető el, mert az NFC ki van kapcsolva"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
@@ -1292,7 +1291,7 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"A belső tárhely és minden adat visszaállításra kerül"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ez minden adatot töröl a táblagép "<b>"belső tárolójáról"</b>", többek között: \n \n"<li>"Google Fiókját"</li>\n<li>"A rendszer- és alkalmazásadatokat és beállításokat"</li>" \n "<li>"A letöltött alkalmazásokat"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ez minden adatot töröl a telefon "<b>"belső tárolójáról"</b>", többek között: \n \n"<li>"Google-fiókját;"</li>\n<li>"a rendszer- és alkalmazásadatokat és beállításokat;"</li>" \n "<li>"a letöltött alkalmazásokat."</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ez minden adatot töröl a telefon "<b>"belső tárolójáról"</b>", többek között: \n \n"<li>"Google-fiókját;"</li>\n<li>"a rendszer- és alkalmazásadatokat és beállításokat;"</li>" \n"<li>"a letöltött alkalmazásokat."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Jelenleg a következő fiókokba van bejelentkezve:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Más felhasználók is vannak ezen az eszközön.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Zene"</li>\n<li>"Fotók"</li>\n<li>"Más felhasználói adatok"</li></string>
@@ -1860,6 +1859,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Használja a(z) <xliff:g id="SERVICE">%1$s</xliff:g> szolgáltatást?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"A(z) <xliff:g id="SERVICE">%1$s</xliff:g> szolgáltatásnak a következőkre van szüksége:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Mivel az egyik alkalmazás zavar egy engedélykérelmet, a Beállítások funkció nem tudja ellenőrizni az Ön válaszát."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ha engedélyezi a(z) <xliff:g id="SERVICE">%1$s</xliff:g> szolgáltatást, az eszköz nem fogja használni a képernyőzárat az adattitkosítás növelése érdekében."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Mivel engedélyezett egy kisegítő szolgáltatást, az eszköz nem fogja használni a képernyőzárat az adattitkosítás növelése érdekében."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Mivel a(z) <xliff:g id="SERVICE">%1$s</xliff:g> bekapcsolása hatással van az adatok titkosítására, meg kell erősítenie mintáját."</string>
@@ -2976,11 +2977,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"A munkahelyi profil kezelője:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Kezeli: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Kísérleti)"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"Eszközforgatás"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Az oldal tartalmának forgatása"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Álló nézet megtartása"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Fekvő nézet megtartása"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Jelenlegi tájolás megtartása"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Biztonságos indítás"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Tovább"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"További védelmet adhat az eszköznek, ha elindítása előtt PIN-kódot kér. Amíg az eszköz el nem indul, nem tud hívásokat, üzeneteket és értesítéseket fogadni (beleértve a riasztásokat is).\n\nEz segít az elvesztett vagy ellopott eszközökön lévő adatok védelmében. Beállítja PIN-kód kérését az eszköz indítása előtt?"</string>
@@ -3315,8 +3311,8 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> adatforgalmi figyelmeztetés"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – adatforgalmi figyelmeztetés / <xliff:g id="ID_2">%2$s</xliff:g> – adatforgalom korlátozása"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Számlázási ciklus"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"A havi ciklus minden hónap <xliff:g id="ID_1">%1$s</xliff:g>. napján kezdődik"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Havonta a hónap <xliff:g id="ID_1">%1$s</xliff:g>. napján"</string>
+    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
+    <skip />
     <string name="network_restrictions" msgid="8234695294536675380">"Hálózati korlátozások"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> korlátozás</item>
@@ -3401,7 +3397,6 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Összes"</string>
     <string name="page_tab_title_support" msgid="6330657582897417458">"Támogatás"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Legkeskenyebb szélesség"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Egy telepített alkalmazás sem kért hozzáférést a Prémium sms-ekhez"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"A Prémium sms-ek használata pénzbe kerülhet Önnek, és a szolgáltató által kiállított számlák végösszegét növeli. Ha engedélyt ad valamelyik alkalmazásnak, akkor azzal lehetősége lesz prémium sms-eket küldeni."</string>
@@ -3433,7 +3428,7 @@
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Nem tud bejelentkezni?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Rendszeradatok elküldése"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Ne jelenjen meg újra"</string>
-    <string name="support_account_request_prefix" msgid="6387847874661861650">"Lekérés a következőként:"</string>
+    <string name="support_account_request_prefix" msgid="6387847874661861650">"Kérelmező fiók:"</string>
     <string name="support_account_picker_add_account" msgid="5076277544846506214">"Fiók hozzáadása"</string>
     <string name="support_system_information_title" msgid="3439905790018934773">"Rendszer-információk"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Munkaprofil beállításai"</string>

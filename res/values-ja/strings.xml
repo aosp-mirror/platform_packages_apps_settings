@@ -330,11 +330,10 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"アカウント"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"位置情報"</string>
     <string name="account_settings_title" msgid="626177544686329806">"アカウント"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"セキュリティと現在地情報"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"セキュリティと現在地情報"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"暗号化と認証情報"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"スマートフォンの暗号化"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"端末の暗号化"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"ロック画面の設定"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"現在地、画面ロック、SIMカードロック、認証情報ストレージのロック"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"現在地、画面のロック解除、認証情報ストレージのロックを設定します"</string>
@@ -1860,6 +1859,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g>を利用しますか？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要です。"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"アプリが許可リクエストを隠しているため、設定側でユーザーの応答を確認できません。"</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにすると、端末データの暗号化の強化に画面ロックは使用されなくなります。"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"ユーザー補助サービスがONに設定されているため、端末データの暗号化の強化に画面ロックは使用されません。"</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、パターンの確認が必要となります。"</string>
@@ -2978,11 +2979,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"この仕事用プロファイルを管理するアプリ:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>によって管理されています"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"（試験運用）"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"端末の回転"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"画面のコンテンツを回転させる"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"縦向きのままにする"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"横向きのままにする"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"現在の向きを維持する"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"起動時の保護"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"次へ"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"端末のロック解除に指紋を使うだけでなく、起動時に PIN を入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動に PIN を必要としますか？"</string>
@@ -3317,8 +3313,8 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> データ警告"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> データ警告 / <xliff:g id="ID_2">%2$s</xliff:g> データ上限"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"請求期間"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"月単位の請求期間の開始日は、毎月 <xliff:g id="ID_1">%1$s</xliff:g> 日です"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"<xliff:g id="ID_1">%1$s</xliff:g> 日から月単位で請求"</string>
+    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
+    <skip />
     <string name="network_restrictions" msgid="8234695294536675380">"ネットワーク制限"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 個の制限</item>
@@ -3403,7 +3399,6 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
     <string name="page_tab_title_support" msgid="6330657582897417458">"サポート"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小幅"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"プレミアム SMS へのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"プレミアム SMS で料金が発生した場合は、携帯通信会社の請求に加算されます。アプリで権限を有効にすると、そのアプリを使用してプレミアム SMS を送信できるようになります。"</string>
