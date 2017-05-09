@@ -70,7 +70,10 @@ public class WifiWakeupPreferenceController extends PreferenceController impleme
 
     @Override
     public boolean isAvailable() {
-        return true;
+        final int defaultValue = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_wifi_wakeup_available);
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultValue) == 1;
     }
 
     @Override
