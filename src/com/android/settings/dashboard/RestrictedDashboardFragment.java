@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.dashboard;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -29,10 +31,10 @@ import android.os.UserManager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settingslib.RestrictedLockUtils;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Base class for settings screens that should be pin protected when in restricted mode or
@@ -42,14 +44,14 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  * {@link UserManager.hasUserRestriction()}, then the user will have to enter the restrictions
  * pin before seeing the Settings screen.
  *
- * If this settings screen should be pin protected whenever
  * {@link RestrictionsManager.hasRestrictionsProvider()} returns true, pass in
  * {@link RESTRICT_IF_OVERRIDABLE} to the constructor instead of a restrictions key.
  *
- * @deprecated Use {@link RestrictedDashboardFragment} instead
+ * This fragment is a replacement of {@link RestrictedSettingsFragment} but extends
+ * from {@link DashboardFragment}, so we could also use
+ * {@link com.android.settings.core.PreferenceController} in this fragment.
  */
-@Deprecated
-public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment {
+public abstract class RestrictedDashboardFragment extends DashboardFragment {
 
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";
 
@@ -91,7 +93,7 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
      *            be protected whenever a restrictions provider is set. Pass in
      *            null if it should never be protected.
      */
-    public RestrictedSettingsFragment(String restrictionKey) {
+    public RestrictedDashboardFragment(String restrictionKey) {
         mRestrictionKey = restrictionKey;
     }
 

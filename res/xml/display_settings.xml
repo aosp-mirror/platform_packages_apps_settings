@@ -53,14 +53,13 @@
     <com.android.settings.TimeoutListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout"
-        android:summary="@string/screen_timeout_summary"
+        android:summary="@string/summary_placeholder"
         android:entries="@array/screen_timeout_entries"
         android:entryValues="@array/screen_timeout_values" />
 
-    <DropDownPreference
+    <SwitchPreference
         android:key="auto_rotate"
-        android:summary="%s"
-        android:title="@string/display_auto_rotate_title" />
+        android:title="@string/accelerometer_title" />
 
     <Preference
         android:key="font_size"
@@ -119,7 +118,7 @@
     <ListPreference
         android:key="theme"
         android:title="@string/device_theme"
-        android:summary="%s" />
+        android:summary="@string/summary_placeholder" />
 
     <Preference
         android:key="vr_display_pref"
