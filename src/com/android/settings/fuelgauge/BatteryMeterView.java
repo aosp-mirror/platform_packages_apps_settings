@@ -51,7 +51,7 @@ public class BatteryMeterView extends ImageView {
     public BatteryMeterView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        final int frameColor = context.getColor(R.color.batterymeter_frame_color);
+        final int frameColor = context.getColor(R.color.meter_background_color);
         mAccentColorFilter = new PorterDuffColorFilter(
                 Utils.getColorAttr(context, android.R.attr.colorAccent), PorterDuff.Mode.SRC_IN);
         mErrorColorFilter = new PorterDuffColorFilter(
