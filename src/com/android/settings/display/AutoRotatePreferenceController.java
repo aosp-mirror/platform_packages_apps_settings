@@ -45,6 +45,7 @@ public class AutoRotatePreferenceController extends PreferenceController impleme
     public void updateState(Preference preference) {
         final DropDownPreference rotatePreference = (DropDownPreference) preference;
         final int rotateLockedResourceId;
+        preference.setSummary("%s");
         // The following block sets the string used when rotation is locked.
         // If the device locks specifically to portrait or landscape (rather than current
         // rotation), then we use a different string to include this information.
