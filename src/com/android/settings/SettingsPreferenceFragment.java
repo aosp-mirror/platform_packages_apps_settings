@@ -48,8 +48,8 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.widget.FooterPreferenceMixin;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.UUID;
 

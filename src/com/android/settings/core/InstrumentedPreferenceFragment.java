@@ -22,9 +22,9 @@ import android.os.Bundle;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
+import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 /**
  * Instrumented fragment that logs visibility state.

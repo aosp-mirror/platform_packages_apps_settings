@@ -23,11 +23,11 @@ import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnStart;
-import com.android.settings.core.lifecycle.events.OnStop;
 import com.android.settings.widget.VideoPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public abstract class GesturePreferenceController extends PreferenceController
         implements Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart, OnStop {
