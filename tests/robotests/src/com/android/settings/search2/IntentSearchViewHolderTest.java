@@ -107,7 +107,8 @@ public class IntentSearchViewHolderTest {
 
     @Test
     public void testBindViewElements_emptySummary_hideSummaryView() {
-        final SearchResult result = new Builder().addTitle(TITLE)
+        final SearchResult result = new Builder()
+                .addTitle(TITLE)
                 .addRank(1)
                 .addPayload(new ResultPayload(null))
                 .addIcon(mIcon)
@@ -123,7 +124,8 @@ public class IntentSearchViewHolderTest {
         breadcrumbs.add("a");
         breadcrumbs.add("b");
         breadcrumbs.add("c");
-        final SearchResult result = new Builder().addTitle(TITLE)
+        final SearchResult result = new Builder()
+                .addTitle(TITLE)
                 .addRank(1)
                 .addPayload(new ResultPayload(null))
                 .addBreadcrumbs(breadcrumbs)
@@ -133,6 +135,20 @@ public class IntentSearchViewHolderTest {
         mHolder.onBind(mFragment, result);
         assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mHolder.breadcrumbView.getText()).isEqualTo("a > b > c");
+    }
+
+    @Test
+    public void testBindElements_placeholderSummary_visibilityIsGone() {
+        String nonBreakingSpace = mContext.getString(R.string.summary_placeholder);
+        SearchResult result = new Builder()
+                .addTitle(TITLE)
+                .addSummary(nonBreakingSpace)
+                .addPayload(new ResultPayload(null))
+                .build();
+
+        mHolder.onBind(mFragment, result);
+
+        assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
     }
 
     private SearchResult getSearchResult() {
