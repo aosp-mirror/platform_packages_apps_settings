@@ -28,6 +28,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -58,6 +59,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
  */
-public final class BluetoothSettings extends DeviceListPreferenceFragment implements Indexable {
+public class BluetoothSettings extends DeviceListPreferenceFragment implements Indexable {
     private static final String TAG = "BluetoothSettings";
 
     private static final int MENU_ID_SCAN = Menu.FIRST;
@@ -361,13 +363,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     startScanning();
                 }
 
-                final Resources res = getResources();
-                final Locale locale = res.getConfiguration().getLocales().get(0);
-                final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
-                mMyDevicePreference.setTitle(res.getString(
-                        R.string.bluetooth_is_visible_message,
-                        bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
-
+                updateMyDevicePreference(mMyDevicePreference);
                 getActivity().invalidateOptionsMenu();
 
                 // mLocalAdapter.setScanMode is internally synchronized so it is okay for multiple
@@ -475,6 +471,20 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
                 briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+    }
+
+    @VisibleForTesting
+    void updateMyDevicePreference(Preference myDevicePreference) {
+        final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
+
+        myDevicePreference.setTitle(getString(
+                R.string.bluetooth_footer_mac_message,
+                bidiFormatter.unicodeWrap(mLocalAdapter.getAddress())));
+    }
+
+    @VisibleForTesting
+    void setLocalBluetoothAdapter(LocalBluetoothAdapter localAdapter) {
+        mLocalAdapter = localAdapter;
     }
 
     private final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
