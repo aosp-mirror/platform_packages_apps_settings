@@ -291,6 +291,9 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
      */
     @Override
     public void onIndexingFinished() {
+        if (getActivity() == null) {
+            return;
+        }
         if (mShowingSavedQuery) {
             mSavedQueryController.loadSavedQueries();
         } else {

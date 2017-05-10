@@ -349,4 +349,21 @@ public class SearchFragmentTest {
 
         verify(fragment.mSavedQueryController).loadSavedQueries();
     }
+
+    @Test
+    public void onIndexingFinished_noActivity_shouldNotCrash() {
+        ActivityController<SearchActivity> activityController =
+            Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) spy(activityController.get().getFragmentManager()
+            .findFragmentById(R.id.main_content));
+        when(mFeatureFactory.searchFeatureProvider.isIndexingComplete(any(Context.class)))
+            .thenReturn(true);
+        fragment.mQuery = "bright";
+        ReflectionHelpers.setField(fragment, "mLoaderManager", null);
+        ReflectionHelpers.setField(fragment, "mHost", null);
+
+        fragment.onIndexingFinished();
+        // no crash
+    }
 }
