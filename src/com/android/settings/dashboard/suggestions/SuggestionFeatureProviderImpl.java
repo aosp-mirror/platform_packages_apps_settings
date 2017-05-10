@@ -78,7 +78,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 suggestion.intent.getComponent(),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
-        parser.markCategoryDone(suggestion.category);
     }
 
     @Override

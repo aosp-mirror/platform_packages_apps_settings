@@ -111,9 +111,9 @@ public class SuggestionFeatureProviderImplTest {
     public void getSuggestionIdentifier_nullContext_shouldNotCrash() {
         final Tile suggestion = new Tile();
         suggestion.intent = new Intent()
-            .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
+                .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
         assertThat(mProvider.getSuggestionIdentifier(null, suggestion))
-            .isNotEmpty();
+                .isNotEmpty();
     }
 
     @Test
@@ -152,6 +152,5 @@ public class SuggestionFeatureProviderImplTest {
                 .setComponentEnabledSetting(mSuggestion.intent.getComponent(),
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                         PackageManager.DONT_KILL_APP);
-        verify(mSuggestionParser).markCategoryDone(mSuggestion.category);
     }
 }

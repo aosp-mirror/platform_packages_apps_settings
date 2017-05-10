@@ -330,11 +330,10 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Kontod"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Asukoht"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Kontod"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"Turvalisus ja asukoht"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Turvalisus ja asukoht"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Krüpteerimine ja mandaat"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon on krüpteeritud"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Seade on krüpteeritud"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Lukustuskuva eelistused"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Määrake Minu asukoht, ekraani avamine, SIM-kaardi lukk, mandaadi talletuslukk"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Määrake oma asukoht, ekraani avamine, mandaadi talletuslukk"</string>
@@ -1292,7 +1291,7 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"Sisemine salvestusruum ja kõik andmed lähtestatakse"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"See kustutab kõik andmed teie tahvelarvuti "<b>"sisemälust"</b>", sh:\n\n"<li>"teie Google\'i konto"</li>\n<li>"süsteemi ja rakenduste andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"See kustutab kõik andmed telefoni "<b>"sisemälust"</b>", sh:\n\n"<li>"teie Google\'i konto"</li>\n<li>"süsteemi ja rakenduse andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"See kustutab kõik andmed telefoni "<b>"sisemälust"</b>", sh:\n\n"<li>"Teie Google\'i konto"</li>\n<li>"Süsteemi- ja rakenduste andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Olete praegu sisse logitud järgmistele kontodele:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Seadmes on teisi kasutajaid.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muusika"</li>\n<li>"Fotod"</li>\n<li>"Muud kasutajaandmed"</li></string>
@@ -1318,7 +1317,7 @@
     <string name="call_settings_summary" msgid="7291195704801002886">"Seadista kõnepost, kõne edastamine, ootel kõne, helistaja ID"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB jagamine"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Kantav tööpunkt"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetoothi jagamine"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Jagamine Bluetoothiga"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Jagamine"</string>
     <string name="tether_settings_title_all" msgid="3058586928118801157">"Kuumkoht ja jagamine"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Leviala on sees, jagamine"</string>
@@ -1333,7 +1332,7 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB ei ole ühendatud"</string>
     <string name="usb_tethering_turnon_subtext" msgid="4748616058219273033">"Ühendage sisselülitamiseks"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB jagamise viga"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetoothi jagamine"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Jagamine Bluetoothiga"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="2092766774943506688">"Tahvelarvuti Interneti-üh. jagam. Bluetoothi kaudu"</string>
     <string name="bluetooth_tethering_available_subtext" product="default" msgid="313873759999970236">"Telefoni Interneti-ühenduse jag. Bluetoothi kaudu"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="6388191062495199481">"Tahvelarv. Interneti-üh. jag. Bluetoothi kaudu ühe seadmega"</string>
@@ -1494,10 +1493,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Rakenduse seaded"</string>
     <string name="install_applications" msgid="4872012136210802181">"Tundmatud allikad"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Luba kõik rakenduse allikad"</string>
-    <!-- no translation found for recent_app_category_title (8449656234283016115) -->
-    <skip />
-    <!-- no translation found for see_all_apps_title (1810966300215671576) -->
-    <skip />
+    <string name="recent_app_category_title" msgid="8449656234283016115">"Hiljuti kasutatud rakendused"</string>
+    <string name="see_all_apps_title" msgid="1810966300215671576">"Vaadake kõiki rakendusi"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Teie tahvelarvuti ja isiklikud andmed on tundmatute rakenduste rünnakute suhtes haavatavamad. Sellest allikast rakendusi installides nõustute, et vastutate tahvelarvuti kahjude ja andmekao eest, mis võib selliste rakenduste kasutamisest tuleneda."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Teie telefon ja isiklikud andmed on tundmatute rakenduste rünnakute suhtes haavatavamad. Sellest allikast rakendusi installides nõustute, et vastutate telefoni kahjude ja andmekao eest, mis võib selliste rakenduste kasutamisest tuleneda."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Täpsemad seaded"</string>
@@ -1862,6 +1859,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Kas soovite kasutada teenust <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> teeb järgmist:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Seaded ei saa teie vastust kinnitada, sest rakendus varjab loataotlust."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Kui lülitate sisse teenuse <xliff:g id="SERVICE">%1$s</xliff:g>, ei kasuta seade andmete krüpteerimise täiustamiseks ekraanilukku."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Kuna lülitasite sisse juurdepääsetavuse teenuse, siis ei kasuta teie seade andmete krüpteerimise täiustamiseks ekraanilukku."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Kuna teenuse <xliff:g id="SERVICE">%1$s</xliff:g> sisselülitamine mõjutab andmete krüpteerimist, peate kinnitama oma mustri."</string>
@@ -1950,8 +1949,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Kasuta detaile"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Reguleerige energiakasutust"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Kaasnevad paketid"</string>
-    <!-- no translation found for battery_abnormal_details_title (7803612642167433678) -->
-    <skip />
+    <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Rakenduse ebatavaline käitumine"</string>
     <string name="power_screen" msgid="3023346080675904613">"Ekraan"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Taskulamp"</string>
     <string name="power_camera" msgid="4976286950934622605">"Kaamera"</string>
@@ -2977,11 +2975,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Seda tööprofiili hallatakse rakendusega"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Haldab <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Katseline)"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"Seadme pööramine"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Ekraanikuva sisu pööramine"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Vertikaalkuva säilitamine"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Horisontaalkuva säilitamine"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Praeguse suuna säilitamine"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Turvaline käivitamine"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Jätka"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Seadme tõhusamaks kaitsmiseks saate nõuda PIN-koodi sisestamist, enne kui seade käivitub. Enne käivitumist ei saa seadmega kõnesid, sõnumeid ega märguandeid, sealhulgas alarme, vastu võtta. \n\nSee aitab kaitsta kaotsiläinud või varastatud seadmetes olevaid andmeid. Kas soovite nõuda seadme käivitamiseks PIN-koodi sisestamist?"</string>
@@ -3108,7 +3101,10 @@
     <string name="show_all_apps" msgid="1742726460081356745">"Kõigi rakenduste kuvamine"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"Lisarakenduste peitmine"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Suur kasutus"</string>
-    <!-- no translation found for power_high_usage_summary (467347882627862744) -->
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> rakendust käitub ebatavaliselt</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> käitub ebatavaliselt</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Pole optimeeritud"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Pole optimeeritud"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Akukasutuse optimeerimine"</string>
@@ -3313,8 +3309,8 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus / <xliff:g id="ID_2">%2$s</xliff:g> – andmemahu piirang"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Arveldustsükkel"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"Kuupõhine tsükkel algab iga kuu <xliff:g id="ID_1">%1$s</xliff:g>. päeval"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Kuupõhine alates <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
+    <skip />
     <string name="network_restrictions" msgid="8234695294536675380">"Võrgupiirangud"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> piirangut</item>
@@ -3399,7 +3395,6 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Märguande sisu kuvamine või peitmine"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Kõik"</string>
     <string name="page_tab_title_support" msgid="6330657582897417458">"Tugi"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Kõige väiksem laius"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Ükski installitud rakendus pole taotlenud juurdepääsu tasuliste SMS-ide saatmiseks"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Tasuliste SMS-ide saatmisel võidakse teilt nõuda tasu, mis lisatakse operaatori esitatud arvele. Kui annate rakendusele loa, saate selle rakendusega tasulisi SMS-e saata."</string>
@@ -3486,11 +3481,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Märguannete kontrollimiseks pühkige telefoni tagaküljel oleval sõrmejäljeanduril alla."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Märguannete kontrollimiseks pühkige tahvelarvuti tagaküljel oleval sõrmejäljeanduril alla."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Märguannete kontrollimiseks pühkige seadme tagaküljel oleval sõrmejäljeanduril alla."</string>
-    <!-- no translation found for camera_lift_trigger_title (2758206307949942951) -->
-    <skip />
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Tõstke kaamera avamiseks"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Kaamera automaatseks avamiseks tõstke oma telefon foto jäädvustamise asendisse (maastiku- või portreevõte). Töötab ka siis, kui telefon on unerežiimis või lukustatud."</string>
-    <!-- no translation found for camera_lift_trigger_suggestion_summary (3574391686649107540) -->
-    <skip />
+    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Jäädvustage fotosid lukustuskuval"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Abiliigutus"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Tundlikkus"</string>

@@ -35,6 +35,7 @@ public abstract class Condition {
 
     protected final ConditionManager mManager;
     protected final MetricsFeatureProvider mMetricsFeatureProvider;
+    protected boolean mReceiverRegistered;
 
     private boolean mIsSilenced;
     private boolean mIsActive;
@@ -110,9 +111,15 @@ public abstract class Condition {
             return;
         }
         if (silenced) {
-            mManager.getContext().registerReceiver(receiver, getIntentFilter());
+            if (!mReceiverRegistered) {
+                mManager.getContext().registerReceiver(receiver, getIntentFilter());
+                mReceiverRegistered = true;
+            }
         } else {
-            mManager.getContext().unregisterReceiver(receiver);
+            if (mReceiverRegistered) {
+                mManager.getContext().unregisterReceiver(receiver);
+                mReceiverRegistered = false;
+            }
         }
     }
 

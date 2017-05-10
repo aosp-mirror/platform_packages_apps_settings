@@ -334,11 +334,10 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Računi"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Lokacija"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Računi"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"Varnost in lokacija"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Varnost in lokacija"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Šifriranje in poverilnice"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon je šifriran"</string>
-    <!-- no translation found for encryption_and_credential_settings_summary (7200428573872395685) -->
-    <skip />
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Naprava je šifrirana"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Nastavitve zaklenjenega zaslona"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Nastavi Mojo lokacijo, odklepanje zaslona, zaklepanje kartice SIM, zaklepanje shrambe poverilnic"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavitev Moje lokacije, odklepanja zaslona, zaklepanja shrambe poverilnic"</string>
@@ -1900,6 +1899,8 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Želite uporabiti storitev <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> mora:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Ker aplikacija zakriva zahtevo za dovoljenje, z nastavitvami ni mogoče preveriti vašega odziva."</string>
+    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
+    <skip />
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Če vklopite storitev <xliff:g id="SERVICE">%1$s</xliff:g>, vaša naprava ne bo uporabljala zaklepanja zaslona za izboljšanje šifriranja podatkov."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Vaša naprava ne bo uporabljala zaklepanja zaslona za izboljšanje šifriranja podatkov, ker ste vklopili storitev za ljudi s posebnimi potrebami."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Ker vklop storitve <xliff:g id="SERVICE">%1$s</xliff:g> vpliva na šifriranje podatkov, morate potrditi vzorec."</string>
@@ -1932,7 +1933,7 @@
     <string name="print_no_printers_found" msgid="989018646884973683">"Tiskalnikov ni mogoče najti"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Nastavitve"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Dodajanje tiskalnikov"</string>
-    <string name="print_feature_state_on" msgid="8098901852502441048">"Vklop"</string>
+    <string name="print_feature_state_on" msgid="8098901852502441048">"Vklopljeno"</string>
     <string name="print_feature_state_off" msgid="7294876968403966040">"Izklop"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Dodaj storitev"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Dodajanje tiskalnika"</string>
@@ -3040,11 +3041,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Ta delovni profil upravlja:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Upravlja: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Poskusno)"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"Zasuk zaslona"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Zasukaj vsebino zaslona"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Ohrani pokončni pogled"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Ohrani ležeči pogled"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Ohrani trenutno postavitev"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Varni zagon"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Naprej"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Napravo lahko dodatno zaščitite tako, da ob zagonu zahteva vašo kodo PIN. Dokler se naprava ne zažene, ne more prejemati klicev, sporočil ali obvestil, vključno z alarmi. \n\nTo je v pomoč pri zaščiti podatkov v izgubljenih ali ukradenih napravah. Ali želite nastaviti zahtevo za kodo PIN za zagon naprave?"</string>
@@ -3393,8 +3389,8 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Opozorilo za prenos podatkov: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Opozorilo za prenos podatkov: <xliff:g id="ID_1">%1$s</xliff:g>/omejitev prenosa podatkov: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Obračunsko obdobje"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"Mesečno obdobje se začne vsakega <xliff:g id="ID_1">%1$s</xliff:g>. v mesecu"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Mesečno obdobje se začne <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
+    <skip />
     <string name="network_restrictions" msgid="8234695294536675380">"Omejitve omrežja"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> omejitev</item>
@@ -3485,7 +3481,6 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Prikaz ali skrivanje vsebine obvestil"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Vse"</string>
     <string name="page_tab_title_support" msgid="6330657582897417458">"Podpora"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Najmanjša širina"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Nobena nameščena aplikacija ni zahtevala dostopa za plačljiva sporočila SMS."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Plačljiva sporočila SMS vam lahko povzročijo stroške in povečajo račun za mobilno telefonijo. Če za aplikacijo omogočite dovoljenje, boste lahko s tisto aplikacijo pošiljali plačljiva sporočila SMS."</string>
