@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
+import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,5 +43,11 @@ public class AnomalyUtilsTest {
     public void testGetAnomalyAction_typeWakeLock_returnForceStop() {
         assertThat(mAnomalyUtils.getAnomalyAction(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
                 ForceStopAction.class);
+    }
+
+    @Test
+    public void testGetAnomalyDetector_typeWakeLock_returnWakeLockDetector() {
+        assertThat(mAnomalyUtils.getAnomalyDetector(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
+                WakeLockAnomalyDetector.class);
     }
 }

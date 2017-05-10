@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Process;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
@@ -110,5 +111,10 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public long getTimeRemainingEstimate(Cursor cursor) {
         return 0;
+    }
+
+    @Override
+    public boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type) {
+        return false;
     }
 }
