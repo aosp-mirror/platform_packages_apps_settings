@@ -16,12 +16,12 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import android.os.UserHandle;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.R;
 
@@ -34,11 +34,14 @@ public class BluetoothPairingPreferenceController extends PreferenceController {
 
     public static final String KEY_PAIRING = "pref_bt_pairing";
     private PreferenceFragment mFragment;
+    private SettingsActivity mActivity;
     private Preference mPreference;
 
-    public BluetoothPairingPreferenceController(Context context, PreferenceFragment fragment) {
-       super(context);
+    public BluetoothPairingPreferenceController(Context context, PreferenceFragment fragment,
+            SettingsActivity activity) {
+        super(context);
         mFragment = fragment;
+        mActivity = activity;
     }
 
     @Override
@@ -54,7 +57,9 @@ public class BluetoothPairingPreferenceController extends PreferenceController {
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_PAIRING.equals(preference.getKey())) {
-            //TODO: open the pairing page
+            mActivity.startPreferencePanelAsUser(mFragment, BluetoothPairingDetail.class.getName(),
+                    null, R.string.bluetooth_pairing_page_title, null,
+                    new UserHandle(UserHandle.myUserId()));
             return true;
         }
 
@@ -66,10 +71,11 @@ public class BluetoothPairingPreferenceController extends PreferenceController {
      *
      * @return bluetooth preference that created in this method
      */
-    public Preference createBluetoothPairingPreference() {
+    public Preference createBluetoothPairingPreference(int order) {
         mPreference = new Preference(mFragment.getPreferenceScreen().getContext());
         mPreference.setKey(KEY_PAIRING);
         mPreference.setIcon(R.drawable.ic_add);
+        mPreference.setOrder(order);
         mPreference.setTitle(R.string.bluetooth_pairing_pref_title);
 
         return mPreference;
