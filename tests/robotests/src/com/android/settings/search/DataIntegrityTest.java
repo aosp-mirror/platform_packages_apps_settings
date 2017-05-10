@@ -93,10 +93,7 @@ public class DataIntegrityTest {
         for (Integer xmlResId : xmlList) {
             // Get all keys to be indexed
             final List<String> prefKeys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlResId);
-
             pageKeys.addAll(prefKeys);
-            // Remove grandfathered keys.
-            pageKeys.removeAll(grandfatheredKeys);
             // Find all already-existing keys.
             pageKeys.retainAll(masterKeys);
             // Keep list of offending duplicate keys.
@@ -105,7 +102,7 @@ public class DataIntegrityTest {
             masterKeys.addAll(prefKeys);
             pageKeys.clear();
         }
-        assertThat(duplicateKeys).isEmpty();
+        assertThat(duplicateKeys).containsExactlyElementsIn(grandfatheredKeys);
     }
 
     /**

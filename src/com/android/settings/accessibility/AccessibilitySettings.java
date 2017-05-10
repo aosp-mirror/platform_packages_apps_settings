@@ -46,6 +46,7 @@ import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
+import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -721,7 +722,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             new BaseSearchIndexProvider() {
         @Override
         public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
+            List<SearchIndexableRaw> indexables = new ArrayList<>();
 
             PackageManager packageManager = context.getPackageManager();
             AccessibilityManager accessibilityManager =
@@ -762,6 +763,17 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             indexable.xmlResId = R.xml.accessibility_settings;
             indexables.add(indexable);
             return indexables;
+        }
+
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            List<String> keys = new ArrayList<>();
+            // Duplicates in Display
+            keys.add(FONT_SIZE_PREFERENCE_SCREEN);
+            // TODO (b/37741509) Remove this non-indexble key when bug is resolved.
+            keys.add(DisplaySettings.KEY_DISPLAY_SIZE);
+
+            return keys;
         }
     };
 }

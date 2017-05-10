@@ -42,7 +42,7 @@ import java.util.List;
 public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     private static final String TAG = "BaseSearchIndex";
-    private static final List<String> EMPTY_LIST = Collections.emptyList();
+    private static final List<String> EMPTY_LIST = new ArrayList<>();
 
     public BaseSearchIndexProvider() {
     }
