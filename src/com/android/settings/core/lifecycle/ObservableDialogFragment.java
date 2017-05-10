@@ -17,6 +17,7 @@ package com.android.settings.core.lifecycle;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,7 +27,7 @@ import android.view.MenuItem;
  */
 public class ObservableDialogFragment extends DialogFragment {
 
-    protected final Lifecycle mLifecycle = new Lifecycle();
+    protected final Lifecycle mLifecycle = createLifecycle();
 
     @Override
     public void onAttach(Context context) {
@@ -83,5 +84,11 @@ public class ObservableDialogFragment extends DialogFragment {
             return super.onOptionsItemSelected(menuItem);
         }
         return lifecycleHandled;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    /** @return a new lifecycle. */
+    public static Lifecycle createLifecycle() {
+        return new Lifecycle();
     }
 }
