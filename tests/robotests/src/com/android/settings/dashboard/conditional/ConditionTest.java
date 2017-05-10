@@ -29,11 +29,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -45,14 +48,14 @@ public class ConditionTest {
     private ConditionManager mConditionManager;
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    @Mock
-    private Context mContext;
 
+    private Context mContext;
     private TestCondition mCondition;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mCondition = new TestCondition(mConditionManager, mMetricsFeatureProvider);
         when(mConditionManager.getContext()).thenReturn(mContext);
     }
@@ -82,10 +85,20 @@ public class ConditionTest {
     }
 
     @Test
-    public void onSilenceChanged_notSilenced_shouldUnregisterReceiver() {
+    public void onSilenceChanged_notSilenced_registered_shouldUnregisterReceiver() {
+        mCondition.onSilenceChanged(true);
+
         mCondition.onSilenceChanged(false);
 
         verify(mContext).unregisterReceiver(TestCondition.mReceiver);
+    }
+
+    @Test
+    public void onSilenceChanged_notSilenced_notRegistered_shouldNotCrash() {
+        mCondition.onSilenceChanged(false);
+
+        verify(mContext, never()).unregisterReceiver(TestCondition.mReceiver);
+        // no crash
     }
 
     private static final class TestCondition extends Condition {
