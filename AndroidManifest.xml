@@ -766,9 +766,9 @@
                 android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
-            <intent-filter android:priority="1">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.SETTINGS_ONLY" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ZenModeSettings" />
@@ -792,7 +792,7 @@
                   android:label="@string/wallpaper_settings_title"
                   android:icon="@drawable/ic_wallpaper"
                   android:theme="@android:style/Theme.NoDisplay">
-            <intent-filter android:priority="1">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.SETTINGS_ONLY" />
             </intent-filter>
@@ -1561,10 +1561,10 @@
             android:icon="@drawable/ic_suggestion_fingerprint">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.SETTINGS_ONLY" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
             <meta-data android:name="com.android.settings.dismiss"
-                android:value="10,30" />
+                android:value="4,8,30" />
             <meta-data android:name="com.android.settings.require_feature"
                 android:value="android.hardware.fingerprint" />
             <meta-data android:name="com.android.settings.title"
@@ -2769,7 +2769,7 @@
                   android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.SETTINGS_ONLY" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.WifiCallingSettings" />
@@ -3082,10 +3082,16 @@
             android:label="@string/camera_lift_trigger_title"
             android:icon="@drawable/ic_settings_camera"
             android:enabled="@bool/config_cameraLiftTriggerAvailable">
-            <intent-filter android:priority="1">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.dismiss"
+                       android:value="3,7,30" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.gestures.CameraLiftTriggerSettings"/>
             <meta-data android:name="com.android.settings.title"
