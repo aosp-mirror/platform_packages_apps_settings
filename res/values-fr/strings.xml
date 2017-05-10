@@ -673,7 +673,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Désactivé"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Indisponible, car la NFC est désactivée"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible NFC en rapprochant les appareils. Vous pouvez, par exemple, partager des pages Web, des vidéos YouTube ou des contacts.\n\nIl vous suffit de rapprocher les appareils, en les plaçant dos à dos, puis d\'appuyer sur votre écran. L\'application détermine le contenu à partager."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible NFC en rapprochant les appareils. Vous pouvez par exemple partager des pages Web, des vidéos YouTube ou des contacts.\n\nIl vous suffit de rapprocher les appareil (en les plaçant dos à dos), puis d\'appuyer sur votre écran. L\'application détermine le contenu à partager."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Activer le Wi-Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi-Fi"</string>
@@ -697,7 +697,7 @@
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Connexion aux réseaux ouverts"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Se connecter automatiquement aux réseaux publics haute qualité"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installation de certificats"</string>
-    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Pour améliorer la précision de la localisation, les applications et les services système peuvent toujours rechercher les réseaux Wi-Fi. Vous pouvez modifier ce paramètre dans les <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>paramètres de recherche<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Pour améliorer la précision de la localisation, les applications et les services système peuvent rechercher en permanence les réseaux Wi-Fi. Vous pouvez modifier ce paramètre dans les <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>paramètres de recherche<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Pour améliorer la précision de la position, activez la recherche Wi-Fi dans les <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>paramètres de recherche<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Ne plus afficher"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Wi-Fi actif en veille"</string>
@@ -1854,8 +1854,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> doit pouvoir :"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Une application masque la demande d\'autorisation. Impossible de valider votre réponse via l\'application Paramètres."</string>
-    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
-    <skip />
+    <string name="window_obscured_warning" msgid="8711643931674708175">"L\'application Paramètres ne peut pas répondre à votre action, car une autre application se superpose à ces options."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si vous activez <xliff:g id="SERVICE">%1$s</xliff:g>, votre appareil n\'utilisera pas le verrouillage de l\'écran pour améliorer le chiffrement des données."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Vous avez activé un service d\'accessibilité. Votre appareil n\'utilisera donc pas le verrouillage de l\'écran pour améliorer le chiffrement des données."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Vous devez confirmer le schéma, car l\'activation du service <xliff:g id="SERVICE">%1$s</xliff:g> influe sur le chiffrement des données."</string>
@@ -2018,7 +2017,7 @@
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Depuis la charge complète"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"Gérer l\'utilisation de la batterie"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"Temps restant estimé"</string>
-    <string name="estimated_charging_time_left" msgid="5614442409326164691">"Avant une charge complète"</string>
+    <string name="estimated_charging_time_left" msgid="5614442409326164691">"Jusqu\'à la charge complète"</string>
     <string name="estimated_time_description" msgid="8760210909000037089">"L\'estimation peut changer en fonction de l\'utilisation"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Depuis le dernier débranchement (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
@@ -2803,7 +2802,8 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Moyenne"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Élevée"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Urgente"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"Émettre un signal sonore"</string>
+    <!-- no translation found for allow_sound (1820188704793497324) -->
+    <skip />
     <string name="show_silently_summary" msgid="7616604629123146565">"Ne pas émettre de son, activer le vibreur ni afficher ces notifications sur l\'écran actif"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistant de notifications"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accès aux notifications"</string>
@@ -2820,7 +2820,7 @@
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Désactiver"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuler"</string>
     <string name="vr_listeners_title" msgid="1318901577754715777">"Assistance réalité virtuelle"</string>
-    <string name="no_vr_listeners" msgid="2689382881717507390">"Aucune demande d\'exécution en tant que services de soutien de réalité virtuelle n\'a été envoyée pour les applications installées."</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Aucune demande d\'exécution en tant que service d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applications installées."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle ?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"L\'écouteur \"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>\" pourra être exécuté lorsque vous utiliserez des applications en mode Réalité virtuelle."</string>
     <string name="display_vr_pref_title" msgid="8104485269504335481">"Lorsque l\'appareil est en mode Réalité virtuelle"</string>
@@ -2859,8 +2859,8 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Ne jamais afficher ces notifications"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Afficher les notifications"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Ne jamais afficher les notifications dans le volet ou sur les périphériques"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Icône Badge"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Afficher les notifications sous forme de badges dans l\'application Google Home (si disponible)."</string>
+    <!-- no translation found for notification_badge_title (7734903868300369178) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignorer l\'option \"Ne pas déranger\""</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Autoriser les interruptions par ces notifications lorsque l\'option \"Ne pas déranger\" est définie sur \"Prioritaires uniquement\""</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Sur l\'écran de verrouillage"</string>
@@ -3297,7 +3297,7 @@
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> de données Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> de données Ethernet"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Limite déclenchant un avertissement sur la consommation des données : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Seuil à partir duquel un avertissement relatif à la consommation des données est envoyé : <xliff:g id="ID_1">%1$s</xliff:g> / Limite de consommation des données : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="cell_warning_and_limit" msgid="2273413629267437470">"Avertissement relatif aux données : <xliff:g id="ID_1">%1$s</xliff:g> / Limite de consommation des données : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Cycle de facturation"</string>
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Le cycle mensuel débute le <xliff:g id="ID_1">%1$s</xliff:g> de chaque mois."</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Tous les mois à partir du <xliff:g id="ID_1">%1$s</xliff:g>"</string>
