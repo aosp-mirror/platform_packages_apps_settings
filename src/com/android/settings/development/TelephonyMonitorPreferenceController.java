@@ -23,14 +23,26 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.R;
 
 public class TelephonyMonitorPreferenceController extends PreferenceController {
 
     private static final String KEY_TELEPHONY_MONITOR_SWITCH = "telephony_monitor_switch";
+    @VisibleForTesting
     static final String BUILD_TYPE = "ro.build.type";
+    @VisibleForTesting
     static final String PROPERTY_TELEPHONY_MONITOR = "persist.radio.enable_tel_mon";
+
+    @VisibleForTesting
+    static final String ENABLED_STATUS = "enabled";
+    @VisibleForTesting
+    static final String DISABLED_STATUS = "disabled";
+    @VisibleForTesting
+    static final String USER_ENABLED_STATUS = "user_enabled";
+    @VisibleForTesting
+    static final String USER_DISABLED_STATUS = "user_disabled";
 
     private SwitchPreference mPreference;
 
@@ -43,7 +55,7 @@ public class TelephonyMonitorPreferenceController extends PreferenceController {
         super.displayPreference(screen);
         if (isAvailable()) {
             mPreference = (SwitchPreference) screen.findPreference(KEY_TELEPHONY_MONITOR_SWITCH);
-            mPreference.setChecked(SystemProperties.getBoolean(PROPERTY_TELEPHONY_MONITOR, false));
+            mPreference.setChecked(isTelephonyMonitorEnabled());
         }
     }
 
@@ -69,7 +81,7 @@ public class TelephonyMonitorPreferenceController extends PreferenceController {
         if (KEY_TELEPHONY_MONITOR_SWITCH.equals(preference.getKey())) {
             final SwitchPreference switchPreference = (SwitchPreference) preference;
             SystemProperties.set(PROPERTY_TELEPHONY_MONITOR,
-                    switchPreference.isChecked() ? "true" : "false");
+                    switchPreference.isChecked() ? USER_ENABLED_STATUS : USER_DISABLED_STATUS);
             Toast.makeText(mContext, R.string.telephony_monitor_toast,
                     Toast.LENGTH_LONG).show();
             return true;
@@ -87,9 +99,14 @@ public class TelephonyMonitorPreferenceController extends PreferenceController {
         if (!isAvailable()) {
             return false;
         }
-        final boolean enabled = SystemProperties.getBoolean(PROPERTY_TELEPHONY_MONITOR, false);
+        final boolean enabled = isTelephonyMonitorEnabled();
         mPreference.setChecked(enabled);
         return enabled;
+    }
+
+    private boolean isTelephonyMonitorEnabled() {
+        final String tmStatus = SystemProperties.get(PROPERTY_TELEPHONY_MONITOR, DISABLED_STATUS);
+        return ENABLED_STATUS.equals(tmStatus) || USER_ENABLED_STATUS.equals(tmStatus);
     }
 
 }
