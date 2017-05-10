@@ -99,6 +99,7 @@ public class DatabaseIndexingManagerTest {
     private final String screenTitle = "screen title";
     private final String className = "class name";
     private final int iconResId = 0xff;
+    private final int noIcon = 0;
     private final String action = "action";
     private final String targetPackage = "target package";
     private final String targetClass = "target class";
@@ -388,7 +389,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
@@ -442,7 +443,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
@@ -496,7 +497,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
@@ -513,6 +514,18 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getInt(19)).isEqualTo(0);
         // Payload - should be updated to real payloads as controllers are added
         assertThat(cursor.getBlob(20)).isNull();
+    }
+
+    @Test
+    public void testAddResource_iconAddedFromXml() {
+        SearchIndexableResource resource = getFakeResource(R.xml.connected_devices);
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
+        cursor.moveToPosition(0);
+
+        // Icon
+        assertThat(cursor.getInt(12)).isNotEqualTo(noIcon);
     }
 
     // Tests for the flow: IndexOneResource -> IndexFromProvider -> IndexFromResource ->
@@ -565,7 +578,7 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(11))
                 .isEqualTo("com.android.settings.display.ScreenZoomSettings");
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isNull();
         // Target Package
@@ -630,7 +643,7 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(11))
                 .isEqualTo("com.android.settings.display.ScreenZoomSettings");
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isNull();
         // Target Package
