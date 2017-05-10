@@ -166,7 +166,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 }
             };
 
-    private LoaderManager.LoaderCallbacks<Cursor> mBatteryPredictionLoaderCallbacks =
+    @VisibleForTesting
+    LoaderManager.LoaderCallbacks<Cursor> mBatteryPredictionLoaderCallbacks =
             new LoaderManager.LoaderCallbacks<Cursor>() {
 
                 @Override
@@ -177,8 +178,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+                    if (cursor == null) {
+                        return;
+                    }
                     try {
-                        if (cursor != null && cursor.moveToFirst()) {
+                        if (cursor.moveToFirst()) {
                             mEnhancedEstimate =
                                     mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
                         }
@@ -746,7 +750,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void useEnhancedEstimateIfAvailable(Context context, BatteryInfo batteryInfo) {
-        if (mEnhancedEstimate > 0) {
+        if (mEnhancedEstimate > 0
+                && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
             final Resources resources = context.getResources();
             batteryInfo.remainingTimeUs = mEnhancedEstimate;
             String timeString = Formatter.formatShortElapsedTime(context, mEnhancedEstimate);

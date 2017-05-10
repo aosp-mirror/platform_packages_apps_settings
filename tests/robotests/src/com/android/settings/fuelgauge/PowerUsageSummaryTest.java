@@ -494,6 +494,7 @@ public class PowerUsageSummaryTest {
         // mock out the provider
         final long time = 60 * 1000 * 1000;
         PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
+        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(true);
         mFragment.mPowerFeatureProvider = provider;
         mFragment.mEnhancedEstimate = time;
 
@@ -503,6 +504,30 @@ public class PowerUsageSummaryTest {
         // so we're just going to check that it contains the correct value we care about.
         assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(time);
         assertThat(mBatteryInfo.remainingLabel).contains("About 17 hrs");
+    }
+
+    @Test
+    public void testUseEnhancedEstimateIfAvailable_noOpsOnDisabled() {
+        // mock out the provider
+        final long time = 60 * 1000 * 1000;
+        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
+        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(false);
+        mFragment.mPowerFeatureProvider = provider;
+        mFragment.mEnhancedEstimate = time;
+        mBatteryInfo.remainingTimeUs = TIME_SINCE_LAST_FULL_CHARGE_US;
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+
+        mFragment.useEnhancedEstimateIfAvailable(mRealContext, mBatteryInfo);
+
+        // check to make sure the values did not change
+        assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_US);
+        assertThat(mBatteryInfo.remainingLabel).contains(TIME_LEFT);
+    }
+
+    @Test
+    public void testBatteryPredictionLoaderCallbacks_DoesNotCrashOnNull() {
+        // Sanity test to check for crash
+        mFragment.mBatteryPredictionLoaderCallbacks.onLoadFinished(null, null);
     }
 
     @Test
