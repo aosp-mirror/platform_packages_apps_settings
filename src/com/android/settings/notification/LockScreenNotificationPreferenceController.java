@@ -281,6 +281,7 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
             return;
         }
         mLockscreenSelectedValue = getSummaryResource();
+        mLockscreen.setSummary("%s");
         mLockscreen.setValue(Integer.toString(mLockscreenSelectedValue));
     }
 
