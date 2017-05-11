@@ -19,6 +19,7 @@ package com.android.settings.testutils.shadow;
 import android.content.Context;
 
 import com.android.settings.Utils;
+import com.android.settings.password.IFingerprintManager;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -26,8 +27,23 @@ import org.robolectric.annotation.Implements;
 @Implements(Utils.class)
 public class ShadowUtils {
 
+    private static IFingerprintManager sFingerprintManager = null;
+
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
         return userId;
+    }
+
+    @Implementation
+    public static IFingerprintManager getFingerprintManagerWrapperOrNull(Context context) {
+        return sFingerprintManager;
+    }
+
+    public static void setFingerprintManager(IFingerprintManager fingerprintManager) {
+        sFingerprintManager = fingerprintManager;
+    }
+
+    public static void reset() {
+        sFingerprintManager = null;
     }
 }
