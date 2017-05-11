@@ -41,12 +41,13 @@ import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionsChecks;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionList;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -257,7 +258,9 @@ public class DashboardSummary extends InstrumentedFragment
             final Context context = getContext();
             boolean isSmartSuggestionEnabled =
                     mSuggestionFeatureProvider.isSmartSuggestionEnabled(context);
-            List<Tile> suggestions = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
+            final SuggestionList sl = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
+            final List<Tile> suggestions = sl.getSuggestions();
+
             if (isSmartSuggestionEnabled) {
                 List<String> suggestionIds = new ArrayList<>(suggestions.size());
                 for (Tile suggestion : suggestions) {
@@ -274,6 +277,9 @@ public class DashboardSummary extends InstrumentedFragment
                             context, mSuggestionParser, suggestion);
                     suggestions.remove(i--);
                 }
+            }
+            if (sl.isExclusiveSuggestionCategory()) {
+                mSuggestionFeatureProvider.filterExclusiveSuggestions(suggestions);
             }
             return suggestions;
         }
