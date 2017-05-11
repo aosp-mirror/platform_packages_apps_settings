@@ -16,7 +16,9 @@
 package com.android.settings.dashboard;
 
 import android.annotation.IntDef;
+import android.graphics.drawable.Icon;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
 import android.text.TextUtils;
 
@@ -38,9 +40,22 @@ import java.util.Objects;
  * ItemsData has inner class Item, which represents the Item in data list.
  */
 public class DashboardData {
+    @Deprecated
     public static final int SUGGESTION_MODE_DEFAULT = 0;
+    @Deprecated
     public static final int SUGGESTION_MODE_COLLAPSED = 1;
+    @Deprecated
     public static final int SUGGESTION_MODE_EXPANDED = 2;
+
+    public static final int HEADER_MODE_DEFAULT = 0;
+    public static final int HEADER_MODE_SUGGESTION_EXPANDED = 1;
+    public static final int HEADER_MODE_FULLY_EXPANDED = 2;
+    public static final int HEADER_MODE_COLLAPSED = 3;
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({HEADER_MODE_DEFAULT, HEADER_MODE_SUGGESTION_EXPANDED, HEADER_MODE_FULLY_EXPANDED,
+        HEADER_MODE_COLLAPSED})
+    public @interface HeaderMode{}
+
     public static final int POSITION_NOT_FOUND = -1;
     public static final int DEFAULT_SUGGESTION_COUNT = 2;
 
@@ -49,14 +64,19 @@ public class DashboardData {
     private static final int NS_SPACER = 1000;
     private static final int NS_ITEMS = 2000;
     private static final int NS_CONDITION = 3000;
+    private static final int NS_SUGGESTION_CONDITION = 4000;
 
     private final List<Item> mItems;
     private final List<DashboardCategory> mCategories;
     private final List<Condition> mConditions;
     private final List<Tile> mSuggestions;
+    @Deprecated
     private final int mSuggestionMode;
+    @Deprecated
     private final Condition mExpandedCondition;
+    private final @HeaderMode int mSuggestionConditionMode;
     private int mId;
+    private boolean mCombineSuggestionAndCondition;
 
     private DashboardData(Builder builder) {
         mCategories = builder.mCategories;
@@ -64,6 +84,8 @@ public class DashboardData {
         mSuggestions = builder.mSuggestions;
         mSuggestionMode = builder.mSuggestionMode;
         mExpandedCondition = builder.mExpandedCondition;
+        mSuggestionConditionMode = builder.mSuggestionConditionMode;
+        mCombineSuggestionAndCondition = builder.mCombineSuggestionAndCondition;
 
         mItems = new ArrayList<>();
         mId = 0;
@@ -116,6 +138,11 @@ public class DashboardData {
         return mSuggestionMode;
     }
 
+    public int getSuggestionConditionMode() {
+        return mSuggestionConditionMode;
+    }
+
+    @Deprecated
     public Condition getExpandedCondition() {
         return mExpandedCondition;
     }
@@ -177,14 +204,31 @@ public class DashboardData {
      * @return the count of suggestions to display
      */
     public int getDisplayableSuggestionCount() {
-        final int suggestionSize = mSuggestions.size();
-        return mSuggestionMode == SUGGESTION_MODE_DEFAULT
-                ? Math.min(DEFAULT_SUGGESTION_COUNT, suggestionSize)
-                : mSuggestionMode == SUGGESTION_MODE_EXPANDED
-                        ? suggestionSize : 0;
+        final int suggestionSize = sizeOf(mSuggestions);
+        if (mCombineSuggestionAndCondition) {
+            if (mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
+                return 0;
+            }
+            if (mSuggestionConditionMode == HEADER_MODE_DEFAULT) {
+                return Math.min(DEFAULT_SUGGESTION_COUNT, suggestionSize);
+            }
+            return suggestionSize;
+        }
+        if (mSuggestionMode == SUGGESTION_MODE_DEFAULT) {
+            return Math.min(DEFAULT_SUGGESTION_COUNT, suggestionSize);
+        }
+        if (mSuggestionMode == SUGGESTION_MODE_EXPANDED) {
+            return suggestionSize;
+        }
+        return 0;
     }
 
     public boolean hasMoreSuggestions() {
+        if (mCombineSuggestionAndCondition) {
+            return mSuggestionConditionMode == HEADER_MODE_COLLAPSED && mSuggestions.size() > 0
+                || mSuggestionConditionMode == HEADER_MODE_DEFAULT
+                    && mSuggestions.size() > DEFAULT_SUGGESTION_COUNT;
+        }
         return mSuggestionMode == SUGGESTION_MODE_COLLAPSED
                 || (mSuggestionMode == SUGGESTION_MODE_DEFAULT
                 && mSuggestions.size() > DEFAULT_SUGGESTION_COUNT);
@@ -208,7 +252,11 @@ public class DashboardData {
      */
     private void countItem(Object object, int type, boolean add, int nameSpace) {
         if (add) {
-            mItems.add(new Item(object, type, mId + nameSpace, object == mExpandedCondition));
+            if (mCombineSuggestionAndCondition) {
+                mItems.add(new Item(object, type, mId + nameSpace));
+            } else {
+                mItems.add(new Item(object, type, mId + nameSpace, object == mExpandedCondition));
+            }
         }
         mId++;
     }
@@ -238,26 +286,75 @@ public class DashboardData {
         // add the view that goes under the search bar
         countItem(null, R.layout.dashboard_header_spacer, true, NS_HEADER_SPACER);
         resetCount();
-        boolean hasConditions = false;
-        for (int i = 0; mConditions != null && i < mConditions.size(); i++) {
-            boolean shouldShow = mConditions.get(i).shouldShow();
-            hasConditions |= shouldShow;
-            countItem(mConditions.get(i), R.layout.condition_card, shouldShow, NS_CONDITION);
-        }
+        final boolean hasSuggestions = sizeOf(mSuggestions) > 0;
+        if (!mCombineSuggestionAndCondition) {
+            boolean hasConditions = false;
+            for (int i = 0; mConditions != null && i < mConditions.size(); i++) {
+                boolean shouldShow = mConditions.get(i).shouldShow();
+                hasConditions |= shouldShow;
+                countItem(mConditions.get(i), R.layout.condition_card, shouldShow, NS_CONDITION);
+            }
 
-        resetCount();
-        final boolean hasSuggestions = mSuggestions != null && mSuggestions.size() != 0;
-        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions, NS_SPACER);
-        countItem(buildSuggestionHeaderData(), R.layout.suggestion_header, hasSuggestions,
+            resetCount();
+            countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions, NS_SPACER);
+            countItem(buildSuggestionHeaderData(), R.layout.suggestion_header, hasSuggestions,
                 NS_SPACER);
 
-        resetCount();
-        if (mSuggestions != null) {
-            int maxSuggestions = getDisplayableSuggestionCount();
-            for (int i = 0; i < mSuggestions.size(); i++) {
-                countSuggestion(mSuggestions.get(i), i < maxSuggestions);
+            resetCount();
+            if (mSuggestions != null) {
+                int maxSuggestions = getDisplayableSuggestionCount();
+                for (int i = 0; i < mSuggestions.size(); i++) {
+                    countSuggestion(mSuggestions.get(i), i < maxSuggestions);
+                }
             }
+        } else {
+            final List<Condition> conditions = getConditionsToShow(mConditions);
+            final boolean hasConditions = sizeOf(conditions) > 0;
+
+            final List<Tile> suggestions = getSuggestionsToShow(mSuggestions);
+            final int hiddenSuggestion =
+                hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
+
+            resetCount();
+            /* Top suggestion/condition header. This will be present when there is any suggestion or
+             * condition to show, except in the case that there is only conditions to show and the
+             * mode is fully expanded. */
+            countItem(new SuggestionConditionHeaderData(conditions, hiddenSuggestion),
+                R.layout.suggestion_condition_header, hasSuggestions
+                    || hasConditions && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED,
+                NS_SUGGESTION_CONDITION);
+
+            /* Suggestion container. This is the card view that contains the list of suggestions.
+             * This will be added whenever the suggestion list is not empty */
+            countItem(suggestions, R.layout.suggestion_condition_container, sizeOf(suggestions) > 0,
+                NS_SUGGESTION_CONDITION);
+
+            /* Second suggestion/condition header. This will be added when there is at least one
+             * suggestion or condition that is not currently displayed, and the user can expand the
+              * section to view more items. */
+            countItem(new SuggestionConditionHeaderData(conditions, hiddenSuggestion),
+                R.layout.suggestion_condition_header,
+                mSuggestionConditionMode != HEADER_MODE_COLLAPSED
+                    && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED
+                    && (hiddenSuggestion > 0
+                        || hasConditions && hasSuggestions),
+                NS_SUGGESTION_CONDITION);
+
+            /* Condition container. This is the card view that contains the list of conditions.
+             * This will be added whenever the condition list is not empty */
+            countItem(conditions, R.layout.suggestion_condition_container,
+                hasConditions && mSuggestionConditionMode == HEADER_MODE_FULLY_EXPANDED,
+                NS_SUGGESTION_CONDITION);
+
+            /* Suggestion/condition footer. This will be present when the section is fully expanded
+             * or when there is no conditions and no hidden suggestions */
+            countItem(null, R.layout.suggestion_condition_footer,
+                (hasConditions || hasSuggestions) &&
+                    mSuggestionConditionMode == HEADER_MODE_FULLY_EXPANDED
+                || hasSuggestions && !hasConditions && hiddenSuggestion == 0,
+                NS_SUGGESTION_CONDITION);
         }
+
         resetCount();
         for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
@@ -268,6 +365,10 @@ public class DashboardData {
                 countItem(tile, R.layout.dashboard_tile, true, NS_ITEMS);
             }
         }
+    }
+
+    private static int sizeOf(List<?> list) {
+        return list == null ? 0 : list.size();
     }
 
     private SuggestionHeaderData buildSuggestionHeaderData() {
@@ -285,19 +386,49 @@ public class DashboardData {
         return data;
     }
 
+    private List<Condition> getConditionsToShow(List<Condition> conditions) {
+        if (conditions == null) {
+            return null;
+        }
+        List<Condition> result = new ArrayList<Condition>();
+        final int size = conditions == null ? 0 : conditions.size();
+        for (int i = 0; i < size; i++) {
+            final Condition condition = conditions.get(i);
+            if (condition.shouldShow()) {
+                result.add(condition);
+            }
+        }
+        return result;
+    }
+
+    private List<Tile> getSuggestionsToShow(List<Tile> suggestions) {
+        if (suggestions == null || mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
+            return null;
+        }
+        if (mSuggestionConditionMode != HEADER_MODE_DEFAULT
+                || suggestions.size() <= DEFAULT_SUGGESTION_COUNT) {
+            return suggestions;
+        }
+        return suggestions.subList(0, DEFAULT_SUGGESTION_COUNT);
+    }
+
     /**
      * Builder used to build the ItemsData
      * <p>
-     * {@link #mExpandedCondition} and {@link #mSuggestionMode} have default value
-     * while others are not.
+     * {@link #mExpandedCondition}, {@link #mSuggestionConditionMode} and {@link #mSuggestionMode}
+     * have default value while others are not.
      */
     public static class Builder {
+        @Deprecated
         private int mSuggestionMode = SUGGESTION_MODE_DEFAULT;
+        @Deprecated
         private Condition mExpandedCondition = null;
+        private @HeaderMode int mSuggestionConditionMode = HEADER_MODE_DEFAULT;
 
         private List<DashboardCategory> mCategories;
         private List<Condition> mConditions;
         private List<Tile> mSuggestions;
+        private boolean mCombineSuggestionAndCondition;
 
         public Builder() {
         }
@@ -308,6 +439,8 @@ public class DashboardData {
             mSuggestions = dashboardData.mSuggestions;
             mSuggestionMode = dashboardData.mSuggestionMode;
             mExpandedCondition = dashboardData.mExpandedCondition;
+            mSuggestionConditionMode = dashboardData.mSuggestionConditionMode;
+            mCombineSuggestionAndCondition = dashboardData.mCombineSuggestionAndCondition;
         }
 
         public Builder setCategories(List<DashboardCategory> categories) {
@@ -330,8 +463,19 @@ public class DashboardData {
             return this;
         }
 
+        @Deprecated
         public Builder setExpandedCondition(Condition expandedCondition) {
             this.mExpandedCondition = expandedCondition;
+            return this;
+        }
+
+        public Builder setSuggestionConditionMode(@HeaderMode int mode) {
+            this.mSuggestionConditionMode = mode;
+            return this;
+        }
+
+        public Builder setCombineSuggestionAndCondition(boolean combine) {
+            this.mCombineSuggestionAndCondition = combine;
             return this;
         }
 
@@ -373,6 +517,8 @@ public class DashboardData {
             return mOldItems.get(oldItemPosition).equals(mNewItems.get(newItemPosition));
         }
 
+        // not needed in combined UI
+        @Deprecated
         @Nullable
         @Override
         public Object getChangePayload(int oldItemPosition, int newItemPosition) {
@@ -390,13 +536,24 @@ public class DashboardData {
         // valid types in field type
         private static final int TYPE_DASHBOARD_CATEGORY = R.layout.dashboard_category;
         private static final int TYPE_DASHBOARD_TILE = R.layout.dashboard_tile;
+        @Deprecated
         private static final int TYPE_SUGGESTION_HEADER = R.layout.suggestion_header;
+        @Deprecated
         private static final int TYPE_SUGGESTION_TILE = R.layout.suggestion_tile;
+        private static final int TYPE_SUGGESTION_CONDITION_CONTAINER =
+            R.layout.suggestion_condition_container;
+        private static final int TYPE_SUGGESTION_CONDITION_HEADER =
+            R.layout.suggestion_condition_header;
+        @Deprecated
         private static final int TYPE_CONDITION_CARD = R.layout.condition_card;
+        private static final int TYPE_SUGGESTION_CONDITION_FOOTER =
+                R.layout.suggestion_condition_footer;
         private static final int TYPE_DASHBOARD_SPACER = R.layout.dashboard_spacer;
 
         @IntDef({TYPE_DASHBOARD_CATEGORY, TYPE_DASHBOARD_TILE, TYPE_SUGGESTION_HEADER,
-                TYPE_SUGGESTION_TILE, TYPE_CONDITION_CARD, TYPE_DASHBOARD_SPACER})
+                TYPE_SUGGESTION_TILE, TYPE_SUGGESTION_CONDITION_CONTAINER,
+                TYPE_SUGGESTION_CONDITION_HEADER, TYPE_CONDITION_CARD,
+                TYPE_SUGGESTION_CONDITION_FOOTER, TYPE_DASHBOARD_SPACER})
         @Retention(RetentionPolicy.SOURCE)
         public @interface ItemTypes{}
 
@@ -422,13 +579,19 @@ public class DashboardData {
          * To store whether the condition is expanded, useless when {@link #type} is not
          * {@link #TYPE_CONDITION_CARD}
          */
+        @Deprecated
         public final boolean conditionExpanded;
 
+        @Deprecated
         public Item(Object entity, @ItemTypes int type, int id, boolean conditionExpanded) {
             this.entity = entity;
             this.type = type;
             this.id = id;
             this.conditionExpanded = conditionExpanded;
+        }
+
+        public Item(Object entity, @ItemTypes int type, int id) {
+            this(entity, type, id, false);
         }
 
         /**
@@ -513,6 +676,29 @@ public class DashboardData {
             return hasMoreSuggestions == targetData.hasMoreSuggestions
                     && suggestionSize == targetData.suggestionSize
                     && undisplayedSuggestionCount == targetData.undisplayedSuggestionCount;
+        }
+    }
+
+    /**
+     * This class contains the data needed to build the suggestion/condition header. The data can
+     * also be used to check the diff in DiffUtil.Callback
+     */
+    public static class SuggestionConditionHeaderData {
+        public final List<Icon> conditionIcons;
+        public final CharSequence title;
+        public final int conditionCount;
+        public final int hiddenSuggestionCount;
+
+        public SuggestionConditionHeaderData(List<Condition> conditions,
+                int hiddenSuggestionCount) {
+            conditionCount = sizeOf(conditions);
+            this.hiddenSuggestionCount = hiddenSuggestionCount;
+            title = conditionCount > 0 ? conditions.get(0).getTitle() : null;
+            conditionIcons = new ArrayList<Icon>();
+            for (int i = 0; conditions != null && i < conditions.size(); i++) {
+                final Condition condition = conditions.get(i);
+                conditionIcons.add(condition.getIcon());
+            }
         }
     }
 
