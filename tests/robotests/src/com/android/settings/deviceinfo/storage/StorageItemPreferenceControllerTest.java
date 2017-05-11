@@ -298,6 +298,8 @@ public class StorageItemPreferenceControllerTest {
     public void settingUserIdAppliesNewIcons() {
         StorageItemPreference audio = spy(new StorageItemPreference(mContext));
         audio.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference video = spy(new StorageItemPreference(mContext));
+        video.setIcon(R.drawable.ic_photo_library_vd_theme_24);
         StorageItemPreference image = spy(new StorageItemPreference(mContext));
         image.setIcon(R.drawable.ic_photo_library_vd_theme_24);
         StorageItemPreference games = spy(new StorageItemPreference(mContext));
@@ -311,6 +313,8 @@ public class StorageItemPreferenceControllerTest {
         PreferenceScreen screen = mock(PreferenceScreen.class);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.MOVIES_KEY))).thenReturn(video);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.PHOTO_KEY))).thenReturn(image);
         when(screen.findPreference(
@@ -326,6 +330,7 @@ public class StorageItemPreferenceControllerTest {
         mController.setUserId(new UserHandle(10));
 
         verify(audio, times(2)).setIcon(any(Drawable.class));
+        verify(video, times(2)).setIcon(any(Drawable.class));
         verify(image, times(2)).setIcon(any(Drawable.class));
         verify(games, times(2)).setIcon(any(Drawable.class));
         verify(apps, times(2)).setIcon(any(Drawable.class));

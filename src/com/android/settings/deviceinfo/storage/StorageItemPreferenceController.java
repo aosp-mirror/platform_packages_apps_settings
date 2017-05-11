@@ -196,6 +196,7 @@ public class StorageItemPreferenceController extends PreferenceController {
 
         PackageManager pm = mContext.getPackageManager();
         badgePreference(pm, userHandle, mPhotoPreference);
+        badgePreference(pm, userHandle, mMoviesPreference);
         badgePreference(pm, userHandle, mAudioPreference);
         badgePreference(pm, userHandle, mGamePreference);
         badgePreference(pm, userHandle, mAppPreference);
