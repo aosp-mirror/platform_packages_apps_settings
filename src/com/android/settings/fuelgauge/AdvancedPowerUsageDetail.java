@@ -28,7 +28,6 @@ import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -45,6 +44,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 
 import java.util.ArrayList;
@@ -202,7 +202,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             mState.ensureIcon(mAppEntry);
             controller.setLabel(mAppEntry);
             controller.setIcon(mAppEntry);
-            controller.setSummary(getString(Utils.getInstallationStatus(mAppEntry.info)));
+            boolean isInstantApp = AppUtils.isInstant(mAppEntry.info);
+            CharSequence summary = isInstantApp
+                    ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
+            controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
+            controller.setSummary(summary);
         }
 
         controller.done(context, true /* rebindActions */);

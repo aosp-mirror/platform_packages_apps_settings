@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -46,7 +47,9 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +61,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
-
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -175,11 +177,37 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testInitHeader_HasAppEntry_BuildByAppEntry() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                new InstantAppDataProvider() {
+                    @Override
+                    public boolean isInstantApp(ApplicationInfo info) {
+                        return false;
+                    }
+                });
         mFragment.mAppEntry = mAppEntry;
         mFragment.initHeader();
 
         verify(mAppHeaderController).setIcon(mAppEntry);
         verify(mAppHeaderController).setLabel(mAppEntry);
+        verify(mAppHeaderController).setIsInstantApp(false);
+    }
+
+    @Test
+    public void testInitHeader_HasAppEntry_InstantApp() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                new InstantAppDataProvider() {
+                    @Override
+                    public boolean isInstantApp(ApplicationInfo info) {
+                        return true;
+                    }
+                });
+        mFragment.mAppEntry = mAppEntry;
+        mFragment.initHeader();
+
+        verify(mAppHeaderController).setIcon(mAppEntry);
+        verify(mAppHeaderController).setLabel(mAppEntry);
+        verify(mAppHeaderController).setIsInstantApp(true);
+        verify(mAppHeaderController).setSummary((CharSequence) null);
     }
 
     @Test
