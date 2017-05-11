@@ -16,12 +16,19 @@
 
 package com.android.settings;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,13 +41,15 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.AttributeSet;
 import android.util.Log;
-import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -58,12 +67,6 @@ import com.android.setupwizardlib.GlifLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC;
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 
 public class ChooseLockPassword extends SettingsActivity {
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
@@ -356,23 +359,6 @@ public class ChooseLockPassword extends SettingsActivity {
                 mSaveAndFinishWorker = (SaveAndFinishWorker) getFragmentManager().findFragmentByTag(
                         FRAGMENT_TAG_SAVE_AND_FINISH);
             }
-
-            // Workaround to show one password requirement below EditText when IME is shown.
-            // By adding an inset to the edit text background, we make the EditText occupy more
-            // vertical space, and the keyboard will then avoid hiding it. We have also set
-            // negative margin in the layout below in order to have them show in the correct
-            // position.
-            final int visibleVerticalSpaceBelowPassword =
-                    getResources().getDimensionPixelOffset(
-                        R.dimen.visible_vertical_space_below_password);
-            InsetDrawable drawable =
-                    new InsetDrawable(
-                    mPasswordEntry.getBackground(), 0, 0, 0, visibleVerticalSpaceBelowPassword);
-            mPasswordEntry.setBackgroundDrawable(drawable);
-            LinearLayout bottomContainer = (LinearLayout) view.findViewById(R.id.bottom_container);
-            LinearLayout.LayoutParams bottomContainerLp =
-                    (LinearLayout.LayoutParams) bottomContainer.getLayoutParams();
-            bottomContainerLp.setMargins(0, -visibleVerticalSpaceBelowPassword, 0, 0);
 
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;

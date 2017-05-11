@@ -136,6 +136,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
 
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
+            if (mHeaderTextView == null) {
+                mHeaderTextView = view.findViewById(R.id.suw_layout_title);
+            }
             mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
