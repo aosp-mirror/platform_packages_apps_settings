@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import com.android.internal.os.BatterySipper;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 /**
  * Feature Provider used in power usage
@@ -85,4 +86,9 @@ public interface PowerUsageFeatureProvider {
      * Returns the the estimate in the cursor as a long or -1 if the cursor is null
      */
     long getTimeRemainingEstimate(Cursor cursor);
+
+    /**
+     * Check whether a specific anomaly detector is enabled
+     */
+    boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type);
 }

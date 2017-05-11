@@ -176,6 +176,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mLocationcontroller = new LocationPreferenceController(context, getLifecycle());
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -205,7 +211,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mTrustAgentClickIntent = savedInstanceState.getParcelable(TRUST_AGENT_CLICK_INTENT);
         }
 
-        mLocationcontroller = new LocationPreferenceController(activity);
         mManageDeviceAdminPreferenceController
                 = new ManageDeviceAdminPreferenceController(activity);
         mEnterprisePrivacyPreferenceController

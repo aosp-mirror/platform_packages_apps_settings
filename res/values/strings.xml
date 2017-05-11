@@ -246,6 +246,8 @@
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message">Bluetooth MAC address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
     <!-- Bluetooth Visibility discoonect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
     <string name="bluetooth_is_disconnect_question">Disconnect <xliff:g id="device_name">%1$s</xliff:g>?</string>
     <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
@@ -6624,8 +6626,8 @@
     <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
     <string name="notification_importance_high_title">Urgent</string>
 
-    <!-- [CHAR LIMIT=40] Notification importance title -->
-    <string name="allow_sound">Allow Sound</string>
+    <!-- [CHAR LIMIT=40 BACKUP_MESSAGE_ID:6585849855452076626] Notification importance title -->
+    <string name="allow_sound">Allow sound</string>
 
     <!-- [CHAR LIMIT=180] Notification importance summary -->
     <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
@@ -6784,11 +6786,8 @@
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
     <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
 
-    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badging option title -->
-    <string name="notification_badge_title">Badge app icon</string>
-
-    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badge option description-->
-    <string name="notification_badge_summary">Show notifications as badges on the Home app, if supported.</string>
+    <!-- [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
+    <string name="notification_badge_title">Allow icon badge</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>

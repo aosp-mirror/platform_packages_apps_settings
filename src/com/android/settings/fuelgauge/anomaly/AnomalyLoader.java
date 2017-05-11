@@ -17,9 +17,11 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
@@ -29,13 +31,18 @@ import java.util.List;
  * Loader to compute which apps are anomaly and return a anomaly list. It will return
  * an empty list if there is no anomaly.
  */
-//TODO(b/36924669): add test for this file, for now it seems there is nothing to test
 public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
     private BatteryStatsHelper mBatteryStatsHelper;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    @VisibleForTesting
+    AnomalyUtils mAnomalyUtils;
 
     public AnomalyLoader(Context context, BatteryStatsHelper batteryStatsHelper) {
         super(context);
         mBatteryStatsHelper = batteryStatsHelper;
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(
+                context).getPowerUsageFeatureProvider(context);
+        mAnomalyUtils = AnomalyUtils.getInstance(context);
     }
 
     @Override
@@ -45,8 +52,12 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
     @Override
     public List<Anomaly> loadInBackground() {
         final List<Anomaly> anomalies = new ArrayList<>();
-        anomalies.addAll(new WakeLockAnomalyDetector(getContext())
-                .detectAnomalies(mBatteryStatsHelper));
+        for (@Anomaly.AnomalyType int type : Anomaly.ANOMALY_TYPE_LIST) {
+            if (mPowerUsageFeatureProvider.isAnomalyDetectorEnabled(type)) {
+                anomalies.addAll(mAnomalyUtils.getAnomalyDetector(type).detectAnomalies(
+                        mBatteryStatsHelper));
+            }
+        }
 
         return anomalies;
     }
