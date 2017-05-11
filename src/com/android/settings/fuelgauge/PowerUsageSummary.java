@@ -181,13 +181,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     if (cursor == null) {
                         return;
                     }
-                    try {
-                        if (cursor.moveToFirst()) {
-                            mEnhancedEstimate =
-                                    mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
-                        }
-                    } finally {
-                        cursor.close();
+                    if (cursor.moveToFirst()) {
+                        mEnhancedEstimate =
+                                mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
                     }
                     final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
                     Intent batteryBroadcast = getContext().registerReceiver(null,
