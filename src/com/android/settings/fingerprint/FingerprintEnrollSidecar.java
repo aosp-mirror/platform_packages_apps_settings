@@ -28,12 +28,13 @@ import android.os.UserHandle;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.password.IFingerprintManager;
 
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
  */
-public class FingerprintEnrollSidecar extends InstrumentedPreferenceFragment {
+public class FingerprintEnrollSidecar extends InstrumentedFragment {
 
     private int mEnrollmentSteps = -1;
     private int mEnrollmentRemaining = 0;
@@ -44,7 +45,7 @@ public class FingerprintEnrollSidecar extends InstrumentedPreferenceFragment {
     private byte[] mToken;
     private boolean mDone;
     private int mUserId;
-    private FingerprintManager mFingerprintManager;
+    private IFingerprintManager mFingerprintManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class FingerprintEnrollSidecar extends InstrumentedPreferenceFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+        mFingerprintManager = Utils.getFingerprintManagerWrapperOrNull(activity);
         mToken = activity.getIntent().getByteArrayExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         mUserId = activity.getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);
