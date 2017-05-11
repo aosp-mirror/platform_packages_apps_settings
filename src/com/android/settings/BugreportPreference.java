@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.CustomDialogPreference;
 
 public class BugreportPreference extends CustomDialogPreference {
 
