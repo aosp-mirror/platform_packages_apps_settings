@@ -82,9 +82,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             @Override
             public void onEnrollmentProgressChange(int steps, int remaining) {
                 mNextClicked = true;
-                if (!mSidecar.cancelEnrollment()) {
-                    proceedToEnrolling();
-                }
+                proceedToEnrolling(true /* cancelEnrollment */);
             }
 
             @Override
@@ -95,7 +93,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             public void onEnrollmentError(int errMsgId, CharSequence errString) {
                 if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
                     mNextClicked = false;
-                    proceedToEnrolling();
+                    proceedToEnrolling(false /* cancelEnrollment */);
                 }
             }
         });
@@ -123,15 +121,23 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onNextButtonClick() {
         mNextClicked = true;
-        if (mSidecar == null || (mSidecar != null && !mSidecar.cancelEnrollment())) {
-            proceedToEnrolling();
-        }
+        proceedToEnrolling(true /* cancelEnrollment */);
     }
 
-    private void proceedToEnrolling() {
-        getFragmentManager().beginTransaction().remove(mSidecar).commit();
-        mSidecar = null;
-        startActivityForResult(getEnrollingIntent(), ENROLLING);
+    private void proceedToEnrolling(boolean cancelEnrollment) {
+        if (mSidecar != null) {
+            if (cancelEnrollment) {
+                if (mSidecar.cancelEnrollment()) {
+                    // Enrollment cancel requested. When the cancellation is successful,
+                    // onEnrollmentError will be called with FINGERPRINT_ERROR_CANCELED, calling
+                    // this again.
+                    return;
+                }
+            }
+            getFragmentManager().beginTransaction().remove(mSidecar).commit();
+            mSidecar = null;
+            startActivityForResult(getEnrollingIntent(), ENROLLING);
+        }
     }
 
     @Override

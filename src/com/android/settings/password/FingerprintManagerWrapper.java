@@ -18,6 +18,8 @@ package com.android.settings.password;
 
 import android.annotation.NonNull;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
+import android.os.CancellationSignal;
 
 import com.android.internal.util.Preconditions;
 
@@ -33,15 +35,33 @@ public class FingerprintManagerWrapper implements IFingerprintManager {
         mFingerprintManager = fingerprintManager;
     }
 
+    @Override
     public boolean isHardwareDetected() {
         return mFingerprintManager.isHardwareDetected();
     }
 
+    @Override
     public boolean hasEnrolledFingerprints(int userId) {
         return mFingerprintManager.hasEnrolledFingerprints(userId);
     }
 
+    @Override
     public long preEnroll() {
         return mFingerprintManager.preEnroll();
+    }
+
+    @Override
+    public void setActiveUser(int userId) {
+        mFingerprintManager.setActiveUser(userId);
+    }
+
+    @Override
+    public void enroll(
+            byte[] token,
+            CancellationSignal cancel,
+            int flags,
+            int userId,
+            EnrollmentCallback callback) {
+        mFingerprintManager.enroll(token, cancel, flags, userId, callback);
     }
 }
