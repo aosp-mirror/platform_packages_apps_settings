@@ -34,6 +34,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -117,6 +118,14 @@ public class AccountPreferenceController extends PreferenceController
          * The {@link UserInfo} of the profile.
          */
         public UserInfo userInfo;
+        /**
+         * The {@link UserInfo} of the profile.
+         */
+        public boolean pendingRemoval;
+        /**
+         * The map from account name to account preference
+         */
+        public ArrayMap<CharSequence, AccountTypePreference> accountPreferences = new ArrayMap<>();
     }
 
     public AccountPreferenceController(Context context, SettingsPreferenceFragment parent,
@@ -147,6 +156,12 @@ public class AccountPreferenceController extends PreferenceController
     @Override
     public String getPreferenceKey() {
         return null;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        updateUi();
     }
 
     @Override
@@ -189,7 +204,6 @@ public class AccountPreferenceController extends PreferenceController
 
     @Override
     public void onResume() {
-        cleanUpPreferences();
         updateUi();
         mManagedProfileBroadcastReceiver.register(mContext);
         listenToAccountUpdates();
@@ -253,6 +267,9 @@ public class AccountPreferenceController extends PreferenceController
             return;
         }
 
+        for (int i = 0, size = mProfiles.size(); i < size; i++) {
+            mProfiles.valueAt(i).pendingRemoval = true;
+        }
         if (mUm.isLinkedUser()) {
             // Restricted user or similar
             UserInfo userInfo = mUm.getUserInfo(UserHandle.myUserId());
@@ -264,6 +281,7 @@ public class AccountPreferenceController extends PreferenceController
                 updateProfileUi(profiles.get(i));
             }
         }
+        cleanUpPreferences();
 
         // Add all preferences, starting with one for the primary profile.
         // Note that we're relying on the ordering given by the SparseArray keys, and on the
@@ -276,6 +294,11 @@ public class AccountPreferenceController extends PreferenceController
 
     private void updateProfileUi(final UserInfo userInfo) {
         if (mParent.getPreferenceManager() == null) {
+            return;
+        }
+        final ProfileData data = mProfiles.get(userInfo.id);
+        if (data != null) {
+            data.pendingRemoval = false;
             return;
         }
         final Context context = mContext;
@@ -366,12 +389,14 @@ public class AccountPreferenceController extends PreferenceController
         if (screen == null) {
             return;
         }
-        for (int i = 0; i < mProfiles.size(); i++) {
-            final PreferenceGroup preferenceGroup = mProfiles.valueAt(i).preferenceGroup;
-            screen.removePreference(preferenceGroup);
+        final int count = mProfiles.size();
+        for (int i = count-1; i >= 0; i--) {
+            final ProfileData data = mProfiles.valueAt(i);
+            if (data.pendingRemoval) {
+                screen.removePreference(data.preferenceGroup);
+                mProfiles.removeAt(i);
+            }
         }
-        mProfiles.clear();
-        mAccountProfileOrder = ORDER_ACCOUNT_PROFILES;
     }
 
     private void listenToAccountUpdates() {
@@ -400,18 +425,31 @@ public class AccountPreferenceController extends PreferenceController
             // This could happen if activity is finishing
             return;
         }
-        profileData.preferenceGroup.removeAll();
         if (profileData.userInfo.isEnabled()) {
+            final ArrayMap<CharSequence, AccountTypePreference> preferenceToRemove =
+                    new ArrayMap<>(profileData.accountPreferences);
             final ArrayList<AccountTypePreference> preferences = getAccountTypePreferences(
-                    profileData.authenticatorHelper, profileData.userInfo.getUserHandle());
+                    profileData.authenticatorHelper, profileData.userInfo.getUserHandle(),
+                    preferenceToRemove);
             final int count = preferences.size();
             for (int i = 0; i < count; i++) {
-                profileData.preferenceGroup.addPreference(preferences.get(i));
+                final AccountTypePreference preference = preferences.get(i);
+                preference.setOrder(i);
+                if (!profileData.accountPreferences.containsValue(preference)) {
+                    profileData.preferenceGroup.addPreference(preferences.get(i));
+                    profileData.accountPreferences.put(preference.getTitle(), preference);
+                }
             }
             if (profileData.addAccountPreference != null) {
                 profileData.preferenceGroup.addPreference(profileData.addAccountPreference);
             }
+            for (CharSequence name : preferenceToRemove.keySet()) {
+                profileData.preferenceGroup.removePreference(
+                    profileData.accountPreferences.get(name));
+                profileData.accountPreferences.remove(name);
+            }
         } else {
+            profileData.preferenceGroup.removeAll();
             // Put a label instead of the accounts list
             if (mProfileNotAvailablePreference == null) {
                 mProfileNotAvailablePreference =
@@ -433,7 +471,8 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private ArrayList<AccountTypePreference> getAccountTypePreferences(AuthenticatorHelper helper,
-            UserHandle userHandle) {
+            UserHandle userHandle,
+            ArrayMap<CharSequence, AccountTypePreference> preferenceToRemove) {
         final String[] accountTypes = helper.getEnabledAccountTypes();
         final ArrayList<AccountTypePreference> accountTypePreferences =
                 new ArrayList<>(accountTypes.length);
@@ -453,13 +492,16 @@ public class AccountPreferenceController extends PreferenceController
 
             final Account[] accounts = AccountManager.get(mContext)
                     .getAccountsByTypeAsUser(accountType, userHandle);
-            final boolean skipToAccount = accounts.length == 1
-                    && !helper.hasAccountPreferences(accountType);
             final Drawable icon = helper.getDrawableForType(mContext, accountType);
             final Context prefContext = mParent.getPreferenceManager().getContext();
 
             // Add a preference row for each individual account
             for (Account account : accounts) {
+                final AccountTypePreference preference = preferenceToRemove.remove(account.name);
+                if (preference != null) {
+                    accountTypePreferences.add(preference);
+                    continue;
+                }
                 final ArrayList<String> auths =
                     helper.getAuthoritiesForAccountType(account.type);
                 if (!AccountRestrictionHelper.showAccount(mAuthorities, auths)) {
@@ -531,7 +573,6 @@ public class AccountPreferenceController extends PreferenceController
                     || action.equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
                 // Clean old state
                 stopListeningToAccountUpdates();
-                cleanUpPreferences();
                 // Build new state
                 updateUi();
                 listenToAccountUpdates();
