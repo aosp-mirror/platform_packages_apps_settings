@@ -111,6 +111,8 @@
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Cette opération va mettre fin à votre connexion avec :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Vous n\'êtes pas autorisé à modifier les paramètres Bluetooth."</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Lorsque le Bluetooth est activé, votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g> est visible par les appareils à proximité."</string>
+    <!-- no translation found for bluetooth_footer_mac_message (7829164289195116782) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Déconnecter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Diffusion"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Désactiver le profil?"</string>
@@ -1859,8 +1861,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> doit pouvoir :"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Une application obscurcit une demande d\'autorisation, alors Paramètres ne peut pas vérifier votre réponse."</string>
-    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
-    <skip />
+    <string name="window_obscured_warning" msgid="8711643931674708175">"L\'application Paramètres ne peut pas répondre à votre action, car une autre application se superpose à ces options."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si vous activez <xliff:g id="SERVICE">%1$s</xliff:g>, votre appareil n\'utilisera pas le verrouillage de l\'écran pour améliorer le chiffrement des données."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Vous avez activé un service d\'accessibilité. Votre appareil n\'utilisera donc pas le verrouillage de l\'écran pour améliorer le chiffrement des données."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Étant donné que l\'activation du service <xliff:g id="SERVICE">%1$s</xliff:g> touche le chiffrement de données, vous devez confirmer votre schéma."</string>
@@ -2813,7 +2814,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Moyenne"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Élevée"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Urgente"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"Autoriser le son"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"Autoriser le son"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Ne pas émettre de son, activer le vibreur ni afficher ces notifications sur l\'écran actif."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistant des notifications"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accès aux notifications"</string>
@@ -2869,8 +2870,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Ne jamais afficher ces notifications"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Afficher les notifications"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Ne jamais afficher les notifications dans l\'ombre ou sur des appareils périphériques"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Icône de badge d\'application"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Afficher les notifications comme des badges dans l\'application Accueil, le cas échéant."</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"Autoriser l\'insigne de l\'icône"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignorer le mode « Ne pas déranger »"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Activer les notifications de cette application même lorsque l\'option « Ne pas déranger » est définie sur « Prioritaires uniquement »"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"À l\'écran de verrouillage"</string>
@@ -3309,8 +3309,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Seuil à partir duquel un avertissement relatif à la consommation des données est envoyé : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Seuil à partir duquel un avertissement relatif à la consommation des données est envoyé : <xliff:g id="ID_1">%1$s</xliff:g> / Limite de consommation des données : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Cycle de facturation"</string>
-    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
-    <skip />
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Mensuel (<xliff:g id="ID_1">%1$s</xliff:g> jour du mois)"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Restrictions réseau"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> restriction</item>
