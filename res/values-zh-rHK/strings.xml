@@ -1321,7 +1321,7 @@
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"已開啟熱點和網絡共享功能"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"已開啟熱點"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"已開啟網絡共享功能"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"啟用數據節省程式時，無法使用網絡共享功能或便攜熱點。"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"「數據節省模式」開啟時，網絡共享功能或便攜熱點便無法使用。"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 網絡共享"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"已連接 USB，勾選即可共享網絡"</string>
@@ -1486,7 +1486,7 @@
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"與裝置的螢幕鎖定相同"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理應用程式"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理及移除已安裝的應用程式"</string>
-    <string name="applications_settings" msgid="5281808652705396152">"應用程式資訊"</string>
+    <string name="applications_settings" msgid="5281808652705396152">"應用程式資料"</string>
     <string name="applications_settings_summary" msgid="6683465446264515367">"管理應用程式，設定快速啟動鍵"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"應用程式設定"</string>
     <string name="install_applications" msgid="4872012136210802181">"不明來源"</string>
@@ -1495,7 +1495,7 @@
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"來源不明的應用程式可能會侵害您的手機和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致手機損壞或資料遺失的責任。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"啟用更多設定選項"</string>
-    <string name="application_info_label" msgid="5736524913065714880">"應用程式資訊"</string>
+    <string name="application_info_label" msgid="5736524913065714880">"應用程式資料"</string>
     <string name="storage_label" msgid="8700867073480107253">"儲存空間"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"預設開啟"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"預設設定"</string>
@@ -1855,8 +1855,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"使用「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由於有應用程式阻礙權限請求，「設定」無法驗證您的回覆。"</string>
-    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
-    <skip />
+    <string name="window_obscured_warning" msgid="8711643931674708175">"由於另一個應用程式正在這些選項上顯示內容，因此「設定」無法回應您的操作。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您開啟<xliff:g id="SERVICE">%1$s</xliff:g>，您的裝置將不能透過螢幕鎖定加強資料加密。"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"因為您已開啟無障礙功能，您的裝置將不能透過螢幕鎖定加強資料加密。"</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響您的資料加密強度，因此您需要確認解鎖圖案。"</string>
@@ -1978,7 +1977,7 @@
     <string name="usage_type_computed_power" msgid="5862792259009981479">"經計算的用電量"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"監測到的用電量"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"強制停止"</string>
-    <string name="battery_action_app_details" msgid="7861051816778419018">"應用程式資訊"</string>
+    <string name="battery_action_app_details" msgid="7861051816778419018">"應用程式資料"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"應用程式設定"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"螢幕設定"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"Wi-Fi 設定"</string>
@@ -2759,7 +2758,7 @@
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動規則"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"設定請勿騷擾規則"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"在特定時間限制音效和震動"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"僅限優先"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"只限優先"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"只限鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
@@ -2806,7 +2805,8 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"緊急"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"允許發出音效"</string>
+    <!-- no translation found for allow_sound (1820188704793497324) -->
+    <skip />
     <string name="show_silently_summary" msgid="7616604629123146565">"禁止這些通知發出音效、震動或不時於目前螢幕上出現。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知小幫手"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知存取權"</string>
@@ -2862,10 +2862,10 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"永不顯示這些通知"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"顯示通知"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"永不在通知欄或周邊裝置上顯示通知"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"標誌應用程式圖示"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"在 Home 應用程式以狀態標籤形式顯示通知 (如支援)。"</string>
+    <!-- no translation found for notification_badge_title (7734903868300369178) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"取代「請勿騷擾」"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"當「請勿騷擾」設定為「僅限優先」時，允許顯示這些通知"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"當「請勿騷擾」設定為「只限優先」時，允許顯示這些通知"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"螢幕鎖定畫面上"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"已封鎖"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"重要"</string>
@@ -3322,7 +3322,7 @@
       <item quantity="other">「數據節省模式」開啟時，允許 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式使用無限制數據</item>
       <item quantity="one">「數據節省模式」開啟時，允許 1 個應用程式使用無限制數據</item>
     </plurals>
-    <string name="data_saver_title" msgid="398458827917495765">"數據節省程式"</string>
+    <string name="data_saver_title" msgid="398458827917495765">"數據節省模式"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"數據用量不限"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"背景數據已關閉"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"開啟"</string>
@@ -3405,7 +3405,7 @@
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我們的支援團隊全天候為您提供服務"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"搜尋說明，或於支援服務時間 (當地時間) 聯絡我們：&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"手機支援時間 (當地時間)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"搜尋說明，或探索提示和技巧"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"搜尋說明，或查看提示和技巧"</string>
     <string name="support_country_list_title" msgid="823853371280534111">"支援的國家/地區："</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%1$s</xliff:g> (<xliff:g id="PHONE">%2$s</xliff:g>)"</string>
@@ -3413,7 +3413,7 @@
     <string name="support_international_phone_summary" msgid="208231793637026927">"可能需要支付國際通話費用"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"電話"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"即時通訊"</string>
-    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"探索提示和技巧"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"查看提示和技巧"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"搜尋說明和傳送意見"</string>
     <string name="support_sign_in_required_title" msgid="1367187789121480440">"聯絡支援團隊"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登入"</string>
