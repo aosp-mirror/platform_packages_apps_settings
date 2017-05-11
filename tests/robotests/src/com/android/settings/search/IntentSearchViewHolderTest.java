@@ -82,7 +82,7 @@ public class IntentSearchViewHolderTest {
     }
 
     @Test
-    public void testConstructor_MembersNotNull() {
+    public void testConstructor_membersNotNull() {
         assertThat(mHolder.titleView).isNotNull();
         assertThat(mHolder.summaryView).isNotNull();
         assertThat(mHolder.iconView).isNotNull();
@@ -90,8 +90,8 @@ public class IntentSearchViewHolderTest {
     }
 
     @Test
-    public void testBindViewElements_AllUpdated() {
-        SearchResult result = getSearchResult();
+    public void testBindViewElements_allUpdated() {
+        SearchResult result = getSearchResult(TITLE, SUMMARY, mIcon);
         mHolder.onBind(mFragment, result);
         mHolder.itemView.performClick();
 
@@ -107,6 +107,14 @@ public class IntentSearchViewHolderTest {
                 eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
                 eq(((IntentPayload)result.payload).intent.getComponent().flattenToString()),
                 any(Pair.class));
+    }
+
+    @Test
+    public void testBindViewIcon_nullIcon_imageDrawableIsNull() {
+        final SearchResult result = getSearchResult(TITLE, SUMMARY, null);
+        mHolder.onBind(mFragment, result);
+
+        assertThat(mHolder.iconView.getDrawable()).isNull();
     }
 
     @Test
@@ -155,15 +163,15 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
     }
 
-    private SearchResult getSearchResult() {
+    private SearchResult getSearchResult(String title, String summary, Drawable icon) {
         Builder builder = new Builder();
-        builder.addTitle(TITLE)
-                .addSummary(SUMMARY)
+        builder.addTitle(title)
+                .addSummary(summary)
                 .addRank(1)
                 .addPayload(new IntentPayload(
                         new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(mIcon);
+                .addIcon(icon);
 
         return builder.build();
     }

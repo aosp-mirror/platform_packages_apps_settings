@@ -33,6 +33,7 @@ import android.os.Build;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -525,8 +526,6 @@ public class DatabaseIndexingManager {
             final int count = cursor.getCount();
             if (count > 0) {
                 while (cursor.moveToNext()) {
-                    final int providerRank = cursor.getInt(COLUMN_INDEX_XML_RES_RANK);
-                    // TODO remove provider rank
                     final int xmlResId = cursor.getInt(COLUMN_INDEX_XML_RES_RESID);
 
                     final String className = cursor.getString(COLUMN_INDEX_XML_RES_CLASS_NAME);
@@ -720,7 +719,6 @@ public class DatabaseIndexingManager {
             final AttributeSet attrs = Xml.asAttributeSet(parser);
 
             final String screenTitle = XmlParserUtils.getDataTitle(context, attrs);
-
             String key = XmlParserUtils.getDataKey(context, attrs);
 
             String title;
@@ -730,10 +728,11 @@ public class DatabaseIndexingManager {
             String keywords;
             String headerKeywords;
             String childFragment;
+            @DrawableRes
+            int iconResId;
             ResultPayload payload;
             boolean enabled;
             final String fragmentName = sir.className;
-            final int iconResId = sir.iconResId;
             final int rank = sir.rank;
             final String intentAction = sir.intentAction;
             final String intentTargetPackage = sir.intentTargetPackage;
@@ -784,6 +783,7 @@ public class DatabaseIndexingManager {
                 key = XmlParserUtils.getDataKey(context, attrs);
                 enabled = ! nonIndexableKeys.contains(key);
                 keywords = XmlParserUtils.getDataKeywords(context, attrs);
+                iconResId = XmlParserUtils.getDataIcon(context, attrs);
 
                 if (isHeaderUnique && TextUtils.equals(headerTitle, title)) {
                     isHeaderUnique = false;
@@ -853,7 +853,6 @@ public class DatabaseIndexingManager {
             List<String> nonIndexableKeys) {
 
         final String className = sir.className;
-        final int iconResId = sir.iconResId;
         final int rank = sir.rank;
 
         if (provider == null) {
@@ -881,7 +880,7 @@ public class DatabaseIndexingManager {
                         .setEntries(raw.entries)
                         .setClassName(className)
                         .setScreenTitle(raw.screenTitle)
-                        .setIconResId(iconResId)
+                        .setIconResId(raw.iconResId)
                         .setRank(rank)
                         .setIntentAction(raw.intentAction)
                         .setIntentTargetPackage(raw.intentTargetPackage)
@@ -907,7 +906,6 @@ public class DatabaseIndexingManager {
                     continue;
                 }
 
-                item.iconResId = (item.iconResId == 0) ? iconResId : item.iconResId;
                 item.className = (TextUtils.isEmpty(item.className)) ? className : item.className;
 
                 indexFromResource(database, localeStr, item, nonIndexableKeys);
