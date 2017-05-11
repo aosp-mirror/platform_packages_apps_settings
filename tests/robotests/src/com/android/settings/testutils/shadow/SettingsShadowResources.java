@@ -127,6 +127,16 @@ public class SettingsShadowResources extends ShadowResources {
                 realResources, Resources.class, "getString", ClassParameter.from(int.class, id));
     }
 
+    @Implementation
+    public int getInteger(int id) {
+        final Object override = sResourceOverrides.get(id);
+        if (override instanceof Integer) {
+            return (Integer) override;
+        }
+        return Shadow.directlyOn(
+                realResources, Resources.class, "getInteger", ClassParameter.from(int.class, id));
+    }
+
     @Implements(Theme.class)
     public static class SettingsShadowTheme extends ShadowTheme {
 

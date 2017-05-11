@@ -853,11 +853,18 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void setAdditionalSettingsSummaries() {
         mAdditionalSettingsPreferenceCategory.addPreference(mConfigureWifiSettingsPreference);
-        boolean wifiWakeupEnabled = Settings.Global.getInt(
-                getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
-        mConfigureWifiSettingsPreference.setSummary(getString(wifiWakeupEnabled
-                ? R.string.wifi_configure_settings_preference_summary_wakeup_on
-                : R.string.wifi_configure_settings_preference_summary_wakeup_off));
+        final int defaultWakeupAvailable = getResources().getInteger(
+                com.android.internal.R.integer.config_wifi_wakeup_available);
+        boolean wifiWakeupAvailable = Settings.Global.getInt(
+                getContentResolver(), Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultWakeupAvailable)
+                == 1;
+        if (wifiWakeupAvailable) {
+            boolean wifiWakeupEnabled = Settings.Global.getInt(
+                    getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+            mConfigureWifiSettingsPreference.setSummary(getString(wifiWakeupEnabled
+                    ? R.string.wifi_configure_settings_preference_summary_wakeup_on
+                    : R.string.wifi_configure_settings_preference_summary_wakeup_off));
+        }
         int numSavedNetworks = mWifiTracker.getNumSavedNetworks();
         if (numSavedNetworks > 0) {
             mAdditionalSettingsPreferenceCategory.addPreference(mSavedNetworksPreference);
