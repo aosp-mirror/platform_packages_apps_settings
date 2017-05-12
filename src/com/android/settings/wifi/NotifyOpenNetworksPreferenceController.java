@@ -100,13 +100,11 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
         final SwitchPreference notifyOpenNetworks = (SwitchPreference) preference;
         notifyOpenNetworks.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
-        notifyOpenNetworks.setEnabled(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1);
     }
 
     class SettingObserver extends ContentObserver {
-        private final Uri NETWORK_RECOMMENDATIONS_ENABLED_URI =
-                Settings.Global.getUriFor(Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED);
+        private final Uri NETWORKS_AVAILABLE_URI = Settings.Global.getUriFor(
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON);
 
         private final Preference mPreference;
 
@@ -117,7 +115,7 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
 
         public void register(ContentResolver cr, boolean register) {
             if (register) {
-                cr.registerContentObserver(NETWORK_RECOMMENDATIONS_ENABLED_URI, false, this);
+                cr.registerContentObserver(NETWORKS_AVAILABLE_URI, false, this);
             } else {
                 cr.unregisterContentObserver(this);
             }
@@ -126,7 +124,7 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
-            if (NETWORK_RECOMMENDATIONS_ENABLED_URI.equals(uri)) {
+            if (NETWORKS_AVAILABLE_URI.equals(uri)) {
                 updateState(mPreference);
             }
         }

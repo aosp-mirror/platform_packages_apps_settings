@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi;
 
-import static android.provider.Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED;
 import static android.provider.Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -87,28 +86,24 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_preferenceSetCheckedAndSetEnabledWhenSettingsAreEnabled() {
+    public void updateState_preferenceSetCheckedWhenSettingsAreEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
         Settings.System.putInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 1);
 
         mController.updateState(preference);
 
         verify(preference).setChecked(true);
-        verify(preference).setEnabled(true);
     }
 
     @Test
-    public void updateState_preferenceSetCheckedAndSetEnabledWhenSettingsAreDisabled() {
+    public void updateState_preferenceSetCheckedWhenSettingsAreDisabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 0);
         Settings.System.putInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0);
 
         mController.updateState(preference);
 
         verify(preference).setChecked(false);
-        verify(preference).setEnabled(false);
     }
 }
