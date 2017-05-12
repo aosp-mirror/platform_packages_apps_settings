@@ -39,7 +39,11 @@ public class HelpTrampoline extends Activity {
 
             final Intent intent = HelpUtils.getHelpIntent(this, value, null);
             if (intent != null) {
-                startActivity(intent);
+                /*
+                 * TODO: b/38230998.
+                 * Move to startActivity once the HelpUtils.getHelpIntent is refactored
+                 */
+                startActivityForResult(intent, 0);
             }
 
         } catch (Resources.NotFoundException | ActivityNotFoundException e) {
