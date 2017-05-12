@@ -95,10 +95,11 @@ public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchR
 
                 final AppSearchResult.Builder builder = new AppSearchResult.Builder();
                 builder.setAppInfo(info)
-                        .addTitle(info.loadLabel(pm))
-                        .addRank(getRank(wordDiff))
+                        .setStableId(info.packageName.hashCode())
+                        .setTitle(info.loadLabel(pm))
+                        .setRank(getRank(wordDiff))
                         .addBreadcrumbs(getBreadCrumb())
-                        .addPayload(new ResultPayload(intent));
+                        .setPayload(new ResultPayload(intent));
                 results.add(builder.build());
             }
         }

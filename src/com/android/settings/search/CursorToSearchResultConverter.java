@@ -28,9 +28,7 @@ import android.util.Log;
 
 import com.android.settings.dashboard.SiteMapManager;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -64,11 +62,7 @@ class CursorToSearchResultConverter {
 
     private final String TAG = "CursorConverter";
 
-    private final String mQueryText;
-
     private final Context mContext;
-
-    private final Set<String> mKeys;
 
     private final int LONG_TITLE_LENGTH = 20;
 
@@ -87,19 +81,17 @@ class CursorToSearchResultConverter {
     private static final Set<String> prioritySettings = new HashSet(Arrays.asList(whiteList));
 
 
-    public CursorToSearchResultConverter(Context context, String queryText) {
+    public CursorToSearchResultConverter(Context context) {
         mContext = context;
-        mKeys = new HashSet<>();
-        mQueryText = queryText;
     }
 
-    public List<SearchResult> convertCursor(SiteMapManager sitemapManager,
+    public Set<SearchResult> convertCursor(SiteMapManager sitemapManager,
             Cursor cursorResults, int baseRank) {
         if (cursorResults == null) {
             return null;
         }
         final Map<String, Context> contextMap = new HashMap<>();
-        final List<SearchResult> results = new ArrayList<>();
+        final Set<SearchResult> results = new HashSet<>();
 
         while (cursorResults.moveToNext()) {
             SearchResult result = buildSingleSearchResultFromCursor(sitemapManager,
@@ -108,22 +100,12 @@ class CursorToSearchResultConverter {
                 results.add(result);
             }
         }
-        Collections.sort(results);
         return results;
     }
 
     private SearchResult buildSingleSearchResultFromCursor(SiteMapManager sitemapManager,
             Map<String, Context> contextMap, Cursor cursor, int baseRank) {
-        final String docId = cursor.getString(COLUMN_INDEX_ID);
-        /* Make sure that this result has not yet been added as a result. Checking the docID
-           covers the case of multiple queries matching the same row, but we need to also to check
-           for potentially the same named or slightly varied names pointing to the same page.
-         */
-        if (mKeys.contains(docId)) {
-            return null;
-        }
-        mKeys.add(docId);
-
+        final int docId = cursor.getInt(COLUMN_INDEX_ID);
         final String pkgName = cursor.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
         final String title = cursor.getString(COLUMN_INDEX_TITLE);
         final String summaryOn = cursor.getString(COLUMN_INDEX_SUMMARY_ON);
@@ -135,15 +117,16 @@ class CursorToSearchResultConverter {
         final ResultPayload payload = getUnmarshalledPayload(marshalledPayload, payloadType);
 
         final List<String> breadcrumbs = getBreadcrumbs(sitemapManager, cursor);
-        final int rank = getRank(title, breadcrumbs, baseRank, key);
+        final int rank = getRank(title, baseRank, key);
 
-        final SearchResult.Builder builder = new SearchResult.Builder();
-        builder.addTitle(title)
-                .addSummary(summaryOn)
+        final SearchResult.Builder builder = new SearchResult.Builder()
+                .setStableId(docId)
+                .setTitle(title)
+                .setSummary(summaryOn)
                 .addBreadcrumbs(breadcrumbs)
-                .addRank(rank)
-                .addIcon(getIconForPackage(contextMap, pkgName, className, iconResStr))
-                .addPayload(payload);
+                .setRank(rank)
+                .setIcon(getIconForPackage(contextMap, pkgName, className, iconResStr))
+                .setPayload(payload);
         return builder.build();
     }
 
@@ -206,27 +189,23 @@ class CursorToSearchResultConverter {
      *  There are three checks
      *  A) If the result is prioritized and the highest base level
      *  B) If the query matches the highest level menu title
-     *  C) If the query matches a subsequent menu title
-     *  D) Is the title longer than 20
+     *  C) If the query is longer than 20
      *
      *  If the query matches A, set it to TOP_RANK
-     *  If the query matches B and C, the offset is 0.
-     *  If the query matches C only, the offset is 1.
-     *  If the query matches neither B nor C, the offset is 2.
-     *  If the query matches D, the offset is 2
+     *  If the query matches B, the offset is 0.
+     *  If the query matches C, the offset is 1
 
      * @param title of the result.
-     * @param crumbs from the Information Architecture
      * @param baseRank of the result. Lower if it's a better result.
      * @return
      */
-    private int getRank(String title, List<String> crumbs, int baseRank, String key) {
+    private int getRank(String title, int baseRank, String key) {
         // The result can only be prioritized if it is a top ranked result.
         if (prioritySettings.contains(key) && baseRank < BASE_RANKS[1]) {
             return TOP_RANK;
         }
         if (title.length() > LONG_TITLE_LENGTH) {
-            return baseRank + 2;
+            return baseRank + 1;
         }
         return baseRank;
     }

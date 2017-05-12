@@ -21,13 +21,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
 import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
@@ -108,7 +110,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
         mSiteMapManager = mapManager;
         mContext = context;
         mQueryText = cleanQuery(queryText);
-        mConverter = new CursorToSearchResultConverter(context, mQueryText);
+        mConverter = new CursorToSearchResultConverter(context);
     }
 
     @Override
@@ -122,28 +124,16 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
             return null;
         }
 
-        final List<SearchResult> primaryFirstWordResults;
-        final List<SearchResult> primaryMidWordResults;
-        final List<SearchResult> secondaryResults;
-        final List<SearchResult> tertiaryResults;
+        final Set<SearchResult> resultSet = new HashSet<>();
 
-        primaryFirstWordResults = firstWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]);
-        primaryMidWordResults = secondaryWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[1]);
-        secondaryResults = anyWordQuery(MATCH_COLUMNS_SECONDARY, BASE_RANKS[2]);
-        tertiaryResults = anyWordQuery(MATCH_COLUMNS_TERTIARY, BASE_RANKS[3]);
+        resultSet.addAll(firstWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]));
+        resultSet.addAll(secondaryWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[1]));
+        resultSet.addAll(anyWordQuery(MATCH_COLUMNS_SECONDARY, BASE_RANKS[2]));
+        resultSet.addAll(anyWordQuery(MATCH_COLUMNS_TERTIARY, BASE_RANKS[3]));
 
-        final List<SearchResult> results = new ArrayList<>(
-                primaryFirstWordResults.size()
-                + primaryMidWordResults.size()
-                + secondaryResults.size()
-                + tertiaryResults.size());
-
-        results.addAll(primaryFirstWordResults);
-        results.addAll(primaryMidWordResults);
-        results.addAll(secondaryResults);
-        results.addAll(tertiaryResults);
-
-        return removeDuplicates(results);
+        final List<SearchResult> results = new ArrayList<>(resultSet);
+        Collections.sort(results);
+        return results;
     }
 
     @Override
@@ -171,7 +161,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      * @param baseRank The highest rank achievable by these results
      * @return A list of the matching results.
      */
-    private List<SearchResult> firstWordQuery(String[] matchColumns, int baseRank) {
+    private Set<SearchResult> firstWordQuery(String[] matchColumns, int baseRank) {
         final String whereClause = buildSingleWordWhereClause(matchColumns);
         final String query = mQueryText + "%";
         final String[] selection = buildSingleWordSelection(query, matchColumns.length);
@@ -187,7 +177,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      * @param baseRank The highest rank achievable by these results
      * @return A list of the matching results.
      */
-    private List<SearchResult> secondaryWordQuery(String[] matchColumns, int baseRank) {
+    private Set<SearchResult> secondaryWordQuery(String[] matchColumns, int baseRank) {
         final String whereClause = buildSingleWordWhereClause(matchColumns);
         final String query = "% " + mQueryText + "%";
         final String[] selection = buildSingleWordSelection(query, matchColumns.length);
@@ -202,7 +192,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      * @param baseRank The highest rank achievable by these results
      * @return A list of the matching results.
      */
-    private List<SearchResult> anyWordQuery(String[] matchColumns, int baseRank) {
+    private Set<SearchResult> anyWordQuery(String[] matchColumns, int baseRank) {
         final String whereClause = buildTwoWordWhereClause(matchColumns);
         final String[] selection = buildAnyWordSelection(matchColumns.length * 2);
 
@@ -217,9 +207,8 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      * @param baseRank The highest rank achievable by these results.
      * @return A list of the matching results.
      */
-    private List<SearchResult> query(String whereClause, String[] selection, int baseRank) {
-        final SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext)
-                .getReadableDatabase();
+    private Set<SearchResult> query(String whereClause, String[] selection, int baseRank) {
+        SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext).getReadableDatabase();
         final Cursor resultCursor = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
                 selection, null, null, null);
         return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
@@ -298,56 +287,5 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
             selection[i + 1] = subStringQuery;
         }
         return selection;
-    }
-
-    /**
-     * Goes through the list of search results and verifies that none of the results are duplicates.
-     * A duplicate is quantified by a result with the same Title and the same non-empty Summary.
-     *
-     * The method walks through the results starting with the highest priority result. It removes
-     * the duplicates by doing the first rule that applies below:
-     * - If a result is inline, remove the intent result.
-     * - Remove the lower rank item.
-     * @param results A list of results with potential duplicates
-     * @return The list of results with duplicates removed.
-     */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    List<SearchResult> removeDuplicates(List<SearchResult> results) {
-        SearchResult primaryResult, secondaryResult;
-
-        // We accept the O(n^2) solution because the number of results is small.
-        for (int i = results.size() - 1; i >= 0; i--) {
-            secondaryResult = results.get(i);
-
-            for (int j = i - 1; j >= 0; j--) {
-                primaryResult = results.get(j);
-                if (areDuplicateResults(primaryResult, secondaryResult)) {
-
-                    if (primaryResult.viewType != ResultPayload.PayloadType.INTENT) {
-                        // Case where both payloads are inline
-                        results.remove(i);
-                        break;
-                    } else if (secondaryResult.viewType != ResultPayload.PayloadType.INTENT) {
-                        // Case where only second result is inline
-                        results.remove(j);
-                        i--; // shift the top index to reflect the lower element being removed
-                    } else {
-                        // Case where both payloads are intent
-                        results.remove(i);
-                    }
-                }
-            }
-        }
-        return results;
-    }
-
-    /**
-     * @return True when the two {@link SearchResult SearchResults} have the same title, and the same
-     * non-empty summary.
-     */
-    private boolean areDuplicateResults(SearchResult primary, SearchResult secondary) {
-        return TextUtils.equals(primary.title, secondary.title)
-                && TextUtils.equals(primary.summary, secondary.summary)
-                && !TextUtils.isEmpty(primary.summary);
     }
 }
