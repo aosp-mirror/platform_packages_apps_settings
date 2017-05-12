@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <!-- Show badge -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -23,22 +23,5 @@
         android:title="@string/notification_badge_title"
         settings:useAdditionalSummary="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
-    <!-- Importance toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="allow_sound"
-        android:title="@string/allow_sound" />
-
-    <!-- Visibility Override -->
-    <com.android.settings.notification.RestrictedDropDownPreference
-        android:key="visibility_override"
-        android:title="@string/app_notification_visibility_override_title" />
-
-    <!-- Bypass DND -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="bypass_dnd"
-        android:title="@string/app_notification_override_dnd_title"
-        android:summary="@string/app_notification_override_dnd_summary"
-        settings:useAdditionalSummary="true" />
 
 </PreferenceScreen>
