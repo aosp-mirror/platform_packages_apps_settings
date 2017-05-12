@@ -22,7 +22,7 @@ import android.content.Context;
 
 import android.provider.Settings.Global;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ChargingSoundPreferenceController extends SettingPrefController {
 

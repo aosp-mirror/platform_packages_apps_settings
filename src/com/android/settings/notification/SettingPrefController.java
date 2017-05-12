@@ -28,10 +28,10 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.List;
 
 public abstract class SettingPrefController extends PreferenceController implements

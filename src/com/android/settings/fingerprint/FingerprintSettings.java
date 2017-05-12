@@ -63,9 +63,9 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.widget.FooterPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.List;
 import java.util.HashMap;

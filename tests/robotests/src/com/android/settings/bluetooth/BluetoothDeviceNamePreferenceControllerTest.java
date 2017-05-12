@@ -38,8 +38,8 @@ import android.text.style.ForegroundColorSpan;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;

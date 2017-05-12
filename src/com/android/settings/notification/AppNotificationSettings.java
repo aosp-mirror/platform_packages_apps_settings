@@ -46,10 +46,10 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.FooterPreference;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
