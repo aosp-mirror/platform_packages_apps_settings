@@ -305,4 +305,14 @@ public class FakeUid extends Uid {
     public long getMobileRadioApWakeupCount(int which) {
         return 0;
     }
+
+    @Override
+    public long[] getCpuFreqTimes(int which) {
+        return null;
+    }
+
+    @Override
+    public long[] getScreenOffCpuFreqTimes(int which) {
+        return null;
+    }
 }
