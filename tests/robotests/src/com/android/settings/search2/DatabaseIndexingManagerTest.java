@@ -259,7 +259,7 @@ public class DatabaseIndexingManagerTest {
         SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(18);
+        assertThat(cursor.getCount()).isEqualTo(19);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class DatabaseIndexingManagerTest {
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
         assertThat(cursor.getCount()).isEqualTo(2);
         cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(16);
+        assertThat(cursor.getCount()).isEqualTo(17);
     }
 
     @Test
