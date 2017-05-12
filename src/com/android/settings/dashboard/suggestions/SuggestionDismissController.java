@@ -22,8 +22,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
 
 public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback {
 
