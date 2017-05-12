@@ -31,10 +31,11 @@
         android:title="@string/use_open_wifi_automatically_title"
         android:summary="@string/use_open_wifi_automatically_summary" />
 
-    <Preference
+    <SwitchPreference
             android:key="notify_open_networks"
             android:title="@string/wifi_notify_open_networks"
-            android:icon="@drawable/ic_open_wifi_notifications"/>
+            android:icon="@drawable/ic_open_wifi_notifications"
+            android:summary="@string/wifi_notify_open_networks_summary" />
 
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"
