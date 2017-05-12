@@ -6608,6 +6608,12 @@
     <!-- [CHAR LIMIT=100] Notification Importance: blocked importance level description -->
     <string name="notification_importance_blocked">Never show notifications</string>
 
+    <!-- [CHAR LIMIT=100] Notification Importance template for the channel importance summary -->
+    <string name="notification_importance_divider" translatable="false"><xliff:g id="importance_title">%1$s</xliff:g>: <xliff:g id="importance_summary">%2$s</xliff:g></string>
+
+    <!-- Importance title strings for the Importance page. Also the second part of the importance
+     summary on the channel page-->
+
     <!-- [CHAR LIMIT=100] Notification Importance: min importance level description -->
     <string name="notification_importance_min">No sound or visual interruption</string>
 
@@ -6619,6 +6625,9 @@
 
     <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
+
+    <!-- Importance title strings for the Importance page. Also the first part of the importance
+     summary on the channel page-->
 
     <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
     <string name="notification_importance_min_title">Low</string>
