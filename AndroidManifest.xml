@@ -1880,6 +1880,20 @@
                 android:value="true" />
         </activity>
 
+        <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
+             activity is disabled to be CTS compliant. -->
+        <activity
+            android:name=".development.DevelopmentSettingsDisabledActivity"
+            android:icon="@drawable/ic_settings_development"
+            android:label="@string/development_settings_title"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="-1">
+                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$PrintSettingsActivity"
                 android:label="@string/print_settings"
                 android:icon="@drawable/ic_settings_print"
