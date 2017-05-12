@@ -14,8 +14,6 @@
 
 package com.android.settings.datausage;
 
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
-
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -23,7 +21,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
@@ -34,7 +31,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -50,7 +46,6 @@ import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
@@ -60,6 +55,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -344,17 +341,21 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         } catch (PackageManager.NameNotFoundException e) {
         }
 
+        final boolean showInfoButton = mAppItem.key > 0;
+
         final Activity activity = getActivity();
         final Preference pref = FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this, null /* appHeader */)
-            .setIcon(mIcon)
-            .setLabel(mLabel)
-            .setPackageName(pkg)
-            .setUid(uid)
-            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                AppHeaderController.ActionType.ACTION_NONE)
-            .done(activity, getPrefContext());
+                .getApplicationFeatureProvider(activity)
+                .newAppHeaderController(this, null /* appHeader */)
+                .setButtonActions(showInfoButton
+                                ? AppHeaderController.ActionType.ACTION_APP_INFO
+                                : AppHeaderController.ActionType.ACTION_NONE,
+                        AppHeaderController.ActionType.ACTION_NONE)
+                .setIcon(mIcon)
+                .setLabel(mLabel)
+                .setPackageName(pkg)
+                .setUid(uid)
+                .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 
