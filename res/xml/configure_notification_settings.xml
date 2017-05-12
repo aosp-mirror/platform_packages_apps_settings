@@ -22,6 +22,11 @@
         android:key="dashboard_tile_placeholder"
         android:order="1"/>
 
+    <!-- Notification badging -->
+    <SwitchPreference
+        android:key="notification_badging"
+        android:title="@string/notification_badging_title"/>
+
     <!-- Pulse notification light -->
     <SwitchPreference
         android:key="notification_pulse"
