@@ -16,46 +16,75 @@
 
 package com.android.settings.wifi;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.NetworkScorerAppData;
-import android.os.RemoteException;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.Log;
-import com.android.settings.R;
+
 import com.android.settings.core.PreferenceController;
-import com.android.settings.network.NetworkScoreManagerWrapper;
-import com.android.settings.utils.NotificationChannelHelper;
-import com.android.settings.utils.NotificationChannelHelper.NotificationChannelWrapper;
+import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnPause;
+import com.android.settings.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} that shows whether we should notify user when open network is
- * available. The preference links to {@link NotificationChannel} settings.
+ * {@link PreferenceController} that controls whether we should notify user when open network is
+ * available.
  */
-public class NotifyOpenNetworksPreferenceController extends PreferenceController {
+public class NotifyOpenNetworksPreferenceController extends PreferenceController implements
+        LifecycleObserver, OnResume, OnPause {
 
-    private static final String TAG = "OpenNetworks";
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
+    private SettingObserver mSettingObserver;
 
-    private NetworkScoreManagerWrapper mNetworkScoreManager;
-    private NotificationChannelHelper mNotificationChannelHelper;
-    private PackageManager mPackageManager;
-
-    public NotifyOpenNetworksPreferenceController(
-            Context context,
-            NetworkScoreManagerWrapper networkScoreManager,
-            NotificationChannelHelper notificationChannelHelper,
-            PackageManager packageManager) {
+    public NotifyOpenNetworksPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
-        mNetworkScoreManager = networkScoreManager;
-        mNotificationChannelHelper = notificationChannelHelper;
-        mPackageManager = packageManager;
+        lifecycle.addObserver(this);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mSettingObserver = new SettingObserver(screen.findPreference(KEY_NOTIFY_OPEN_NETWORKS));
+    }
+
+    @Override
+    public void onResume() {
+        if (mSettingObserver != null) {
+            mSettingObserver.register(mContext.getContentResolver(), true /* register */);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mSettingObserver != null) {
+            mSettingObserver.register(mContext.getContentResolver(), false /* register */);
+        }
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), KEY_NOTIFY_OPEN_NETWORKS)) {
+            return false;
+        }
+        if (!(preference instanceof SwitchPreference)) {
+            return false;
+        }
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
+                ((SwitchPreference) preference).isChecked() ? 1 : 0);
+        return true;
     }
 
     @Override
@@ -64,59 +93,40 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
-        return getNotificationChannel() != null;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_NOTIFY_OPEN_NETWORKS)) {
-            return false;
-        }
-        NetworkScorerAppData scorer = mNetworkScoreManager.getActiveScorer();
-        if (scorer == null) {
-            return false;
-        }
-
-        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
-        intent.putExtra(Settings.EXTRA_CHANNEL_ID,
-                scorer.getNetworkAvailableNotificationChannelId());
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, scorer.getRecommendationServicePackageName());
-        mContext.startActivity(intent);
-        return true;
-    }
-
-    @Override
     public void updateState(Preference preference) {
-        NotificationChannelWrapper channel = getNotificationChannel();
-        if (channel == null) {
-            preference.setSummary(null);
-        } else {
-            preference.setSummary(channel.getImportance() != NotificationManager.IMPORTANCE_NONE ?
-                    R.string.notification_toggle_on : R.string.notification_toggle_off);
+        if (!(preference instanceof SwitchPreference)) {
+            return;
         }
+        final SwitchPreference notifyOpenNetworks = (SwitchPreference) preference;
+        notifyOpenNetworks.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
     }
 
-    @Nullable
-    private NotificationChannelWrapper getNotificationChannel() {
-        NetworkScorerAppData scorer = mNetworkScoreManager.getActiveScorer();
-        if (scorer == null) {
-            return null;
+    class SettingObserver extends ContentObserver {
+        private final Uri NETWORKS_AVAILABLE_URI = Settings.Global.getUriFor(
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON);
+
+        private final Preference mPreference;
+
+        public SettingObserver(Preference preference) {
+            super(new Handler());
+            mPreference = preference;
         }
-        String packageName = scorer.getRecommendationServicePackageName();
-        String channelId = scorer.getNetworkAvailableNotificationChannelId();
-        if (packageName == null || channelId == null) {
-            return null;
+
+        public void register(ContentResolver cr, boolean register) {
+            if (register) {
+                cr.registerContentObserver(NETWORKS_AVAILABLE_URI, false, this);
+            } else {
+                cr.unregisterContentObserver(this);
+            }
         }
-        try {
-            return mNotificationChannelHelper.getNotificationChannelForPackage(
-                    packageName,
-                    mPackageManager.getPackageUid(packageName, 0 /* flags */),
-                    channelId,
-                    false /* includeDeleted */ );
-        } catch (RemoteException | PackageManager.NameNotFoundException e) {
-            Log.d(TAG, "Failed to get notification channel.", e);
-            return null;
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (NETWORKS_AVAILABLE_URI.equals(uri)) {
+                updateState(mPreference);
+            }
         }
     }
 }
