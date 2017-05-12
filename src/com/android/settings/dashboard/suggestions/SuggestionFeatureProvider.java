@@ -18,8 +18,8 @@ package com.android.settings.dashboard.suggestions;
 
 import android.content.Context;
 
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.List;
 
@@ -44,6 +44,11 @@ public interface SuggestionFeatureProvider {
      * @param suggestionIds List of suggestion ids corresponding to the suggestion tiles.
      */
     void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds);
+
+    /**
+     * Only keep top few suggestions from exclusive suggestions.
+     */
+    void filterExclusiveSuggestions(List<Tile> suggestions);
 
     /**
      * Dismisses a suggestion.
