@@ -111,8 +111,7 @@
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Dette vil afslutte din forbindelse med:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Du har ikke tilladelse til at ændre Bluetooth-indstillinger."</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er synlig for enheder i nærheden, når Bluetooth-indstillingerne er åbne."</string>
-    <!-- no translation found for bluetooth_footer_mac_message (7829164289195116782) -->
-    <skip />
+    <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"Bluetooth-MAC-adresse: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Vil du afbryde <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Dataudveksling"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vil du deaktivere profilen?"</string>
@@ -160,6 +159,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vil gerne have adgang til dine beskeder. Vil du give %2$s adgang?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Anmodning om SIM-adgang"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vil have adgang til dit SIM-kort. Hvis du giver adgang til SIM-kortet, deaktiveres dataforbindelsen på din enhed, så længe den anden enhed er forbundet. Giv adgang til <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_device_name_summary (4418784300859596202) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"Dato og klokkeslæt"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Vælg tidszone"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -1023,6 +1024,10 @@
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Løft enheden for at vække den"</string>
     <string name="doze_title" msgid="2259176504273878294">"Aktiv låseskærm"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Væk skærmen, når du modtager underretninger"</string>
+    <!-- no translation found for doze_always_on_title (1046222370442629646) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary (1254238982577776475) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"Skriftstørrelse"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Gør teksten større eller mindre"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Indstillinger for låst SIM-kort"</string>
@@ -1861,7 +1866,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Vil du bruge <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> har brug for at:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Indstillinger kan ikke bekræfte dit svar, fordi en app tilslører tilladelsesanmodningen."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"Da en anden app vises oven på disse valgmuligheder, kan Indstillinger ikke reagere i forhold til din handling."</string>
+    <string name="window_obscured_warning" msgid="8711643931674708175">"Da en anden app vises oven på disse valgmuligheder, kan Indstillinger ikke reagere på din handling."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Hvis du aktiverer <xliff:g id="SERVICE">%1$s</xliff:g>, vil enheden ikke benytte skærmlåsen til at forbedre datakrypteringen."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Fordi du har aktiveret en tilgængelighedstjeneste, vil enheden ikke benytte skærmlåsen for at forbedre datakrypteringen."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Fordi det påvirker datakryptering at slå <xliff:g id="SERVICE">%1$s</xliff:g> til, skal du bekræfte dit mønster."</string>
@@ -2789,6 +2794,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Underretninger"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avanceret"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Arbejdsunderretninger"</string>
+    <!-- no translation found for notification_badging_title (5125022693565388760) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkende lys"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"På låseskærmen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Vis alt indhold i underretninger"</string>
@@ -2814,8 +2821,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Middel"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Høj"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Haster"</string>
-    <!-- no translation found for allow_sound (1820188704793497324) -->
-    <skip />
+    <string name="allow_sound" msgid="1820188704793497324">"Tillad lyd"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Undlad at give lyd, vibrere eller vise disse underretninger på den aktuelle skærm."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Underretningsassistent"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Adgang til underretninger"</string>
@@ -2871,7 +2877,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Vis aldrig disse underretninger"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Vis underretninger"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Vis aldrig underretninger i underretningspanelet eller på eksterne enheder"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Badge på appikon"</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"Tillad ikonbadge"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Tilsidesæt Forstyr ikke"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Lad disse underretninger fortsætte med at afbryde, når Forstyr ikke er slået til med angivelsen Kun prioritet"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"På låseskærmen"</string>
