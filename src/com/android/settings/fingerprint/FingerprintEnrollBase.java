@@ -26,9 +26,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.settings.ChooseLockSettingsHelper;
-import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedActivity;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.setupwizardlib.GlifLayout;
 
 /**

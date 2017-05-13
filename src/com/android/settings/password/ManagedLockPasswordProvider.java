@@ -14,10 +14,12 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.content.Context;
 import android.content.Intent;
+
+import com.android.settings.R;
 
 /**
  * Helper for handling managed passwords in security settings UI.
@@ -28,7 +30,7 @@ import android.content.Intent;
  */
 public class ManagedLockPasswordProvider {
     /** Factory method to make it easier to inject extended ManagedLockPasswordProviders. */
-    static ManagedLockPasswordProvider get(Context context, int userId) {
+    public static ManagedLockPasswordProvider get(Context context, int userId) {
         return new ManagedLockPasswordProvider();
     }
 
@@ -58,7 +60,7 @@ public class ManagedLockPasswordProvider {
      * {@link android.app.admin.DevicePolicyManager#PASSWORD_QUALITY_MANAGED}.
      * @param forProfile Whether the settings are shown for a user profile rather than a user.
      */
-    int getResIdForLockUnlockScreen(boolean forProfile) {
+    public int getResIdForLockUnlockScreen(boolean forProfile) {
         return forProfile ? R.xml.security_settings_password_profile
                 : R.xml.security_settings_password;
     }
@@ -68,7 +70,7 @@ public class ManagedLockPasswordProvider {
      * screen preference in security settings if the current password quality is set to
      * {@link android.app.admin.DevicePolicyManager#PASSWORD_QUALITY_MANAGED}.
      */
-    int getResIdForLockUnlockSubScreen() {
+    public int getResIdForLockUnlockSubScreen() {
         return R.xml.security_settings_password_sub;
     }
 

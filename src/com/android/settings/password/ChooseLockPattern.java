@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -37,9 +37,14 @@ import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
+import com.android.settings.EncryptionInterstitial;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.setupwizardlib.GlifLayout;
+
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -75,29 +80,35 @@ public class ChooseLockPattern extends SettingsActivity {
         return modIntent;
     }
 
-    public static Intent createIntent(Context context,
-            boolean requirePassword, boolean confirmCredentials, int userId) {
-        Intent intent = new Intent(context, ChooseLockPattern.class);
-        intent.putExtra("key_lock_method", "pattern");
-        intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
-        intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePassword);
-        intent.putExtra(Intent.EXTRA_USER_ID, userId);
-        return intent;
-    }
+    public static class IntentBuilder {
+        private final Intent mIntent;
 
-    public static Intent createIntent(Context context,
-            boolean requirePassword, String pattern, int userId) {
-        Intent intent = createIntent(context, requirePassword, false, userId);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pattern);
-        return intent;
-    }
+        public IntentBuilder(Context context) {
+            mIntent = new Intent(context, ChooseLockPattern.class);
+            mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
+            mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
+        }
 
-    public static Intent createIntent(Context context,
-            boolean requirePassword, long challenge, int userId) {
-        Intent intent = createIntent(context, requirePassword, false, userId);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
-        return intent;
+        public IntentBuilder setUserId(int userId) {
+            mIntent.putExtra(Intent.EXTRA_USER_ID, userId);
+            return this;
+        }
+
+        public IntentBuilder setChallenge(long challenge) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+            return this;
+        }
+
+        public IntentBuilder setPattern(String pattern) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pattern);
+            return this;
+        }
+
+        public Intent build() {
+            return mIntent;
+        }
     }
 
     @Override
@@ -442,7 +453,7 @@ public class ChooseLockPattern extends SettingsActivity {
             topLayout.setDefaultTouchRecepient(mLockPatternView);
 
             final boolean confirmCredentials = getActivity().getIntent()
-                    .getBooleanExtra("confirm_credentials", true);
+                    .getBooleanExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, true);
             Intent intent = getActivity().getIntent();
             mCurrentPattern = intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mHasChallenge = intent.getBooleanExtra(

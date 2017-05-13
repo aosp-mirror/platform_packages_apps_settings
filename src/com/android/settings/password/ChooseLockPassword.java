@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC;
@@ -28,8 +28,6 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
-import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,14 +39,12 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,9 +56,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.TextViewInputDisabler;
+import com.android.settings.EncryptionInterstitial;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.notification.RedactionInterstitial;
-import com.android.settings.password.PasswordRequirementAdapter;
 import com.android.setupwizardlib.GlifLayout;
 
 import java.util.ArrayList;
@@ -87,58 +86,47 @@ public class ChooseLockPassword extends SettingsActivity {
         return modIntent;
     }
 
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt,
-            boolean confirmCredentials) {
-        Intent intent = new Intent().setClass(context, ChooseLockPassword.class);
-        intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, quality);
-        intent.putExtra(PASSWORD_MIN_KEY, minLength);
-        intent.putExtra(PASSWORD_MAX_KEY, maxLength);
-        intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
-        intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePasswordToDecrypt);
-        return intent;
-    }
+    public static class IntentBuilder {
 
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt,
-            boolean confirmCredentials, int userId) {
-        Intent intent = createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, confirmCredentials);
-        intent.putExtra(Intent.EXTRA_USER_ID, userId);
-        return intent;
-    }
+        private final Intent mIntent;
 
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt, String password) {
-        Intent intent = createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, false);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
-        return intent;
-    }
+        public IntentBuilder(Context context) {
+            mIntent = new Intent(context, ChooseLockPassword.class);
+            mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
+            mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
+        }
 
-    public static Intent createIntent(Context context, int quality, int minLength,
-            int maxLength, boolean requirePasswordToDecrypt, String password, int userId) {
-        Intent intent = createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, password);
-        intent.putExtra(Intent.EXTRA_USER_ID, userId);
-        return intent;
-    }
+        public IntentBuilder setPasswordQuality(int quality) {
+            mIntent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, quality);
+            return this;
+        }
 
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt, long challenge) {
-        Intent intent = createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, false);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
-        return intent;
-    }
+        public IntentBuilder setPasswordLengthRange(int min, int max) {
+            mIntent.putExtra(PASSWORD_MIN_KEY, min);
+            mIntent.putExtra(PASSWORD_MAX_KEY, max);
+            return this;
+        }
 
-    public static Intent createIntent(Context context, int quality, int minLength,
-            int maxLength, boolean requirePasswordToDecrypt, long challenge, int userId) {
-        Intent intent = createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, challenge);
-        intent.putExtra(Intent.EXTRA_USER_ID, userId);
-        return intent;
+        public IntentBuilder setUserId(int userId) {
+            mIntent.putExtra(Intent.EXTRA_USER_ID, userId);
+            return this;
+        }
+
+        public IntentBuilder setChallenge(long challenge) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+            return this;
+        }
+
+        public IntentBuilder setPassword(String password) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
+            return this;
+        }
+
+        public Intent build() {
+            return mIntent;
+        }
     }
 
     @Override

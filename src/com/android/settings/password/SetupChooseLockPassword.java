@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -22,6 +22,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+
+import com.android.settings.R;
+import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.SetupWizardUtils;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -32,32 +36,12 @@ import android.widget.LinearLayout;
  */
 public class SetupChooseLockPassword extends ChooseLockPassword {
 
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt,
-            boolean confirmCredentials) {
-        Intent intent = ChooseLockPassword.createIntent(context, quality, minLength,
-                maxLength, requirePasswordToDecrypt, confirmCredentials);
-        intent.setClass(context, SetupChooseLockPassword.class);
-        intent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false);
-        return intent;
-    }
-
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt, String password) {
-        Intent intent = ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, password);
-        intent.setClass(context, SetupChooseLockPassword.class);
-        intent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false);
-        return intent;
-    }
-
-    public static Intent createIntent(Context context, int quality,
-            int minLength, final int maxLength, boolean requirePasswordToDecrypt, long challenge) {
-        Intent intent = ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
-                requirePasswordToDecrypt, challenge);
-        intent.setClass(context, SetupChooseLockPassword.class);
-        intent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false);
-        return intent;
+    public static Intent modifyIntentForSetup(
+            Context context,
+            Intent chooseLockPasswordIntent) {
+        chooseLockPasswordIntent.setClass(context, SetupChooseLockPassword.class);
+        chooseLockPasswordIntent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false);
+        return chooseLockPasswordIntent;
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.fingerprint.FingerprintSettings;
+import com.android.settings.password.ChooseLockGeneric;
 
 /**
  * Top-level Settings activity

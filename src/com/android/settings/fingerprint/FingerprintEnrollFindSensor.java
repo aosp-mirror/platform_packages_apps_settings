@@ -22,10 +22,10 @@ import android.os.Bundle;
 import android.os.UserHandle;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintEnrollSidecar.Listener;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.

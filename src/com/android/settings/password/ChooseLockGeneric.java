@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
-import static com.android.settings.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
@@ -50,10 +50,17 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.EncryptionInterstitial;
+import com.android.settings.EventLogTags;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fingerprint.FingerprintEnrollBase;
 import com.android.settings.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
@@ -120,7 +127,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mWaitingForConfirmation = false;
         private int mEncryptionRequestQuality;
         private boolean mEncryptionRequestDisabled;
-        private boolean mRequirePassword;
         private boolean mForChangeCredRequiredForBoot = false;
         private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
@@ -271,7 +277,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mEncryptionRequestDisabled = disabled;
                 // Get the intent that the encryption interstitial should start for creating
                 // the new unlock method.
-                Intent unlockMethodIntent = getIntentForUnlockMethod(quality, disabled);
+                Intent unlockMethodIntent = getIntentForUnlockMethod(quality);
                 unlockMethodIntent.putExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT,
                         mForChangeCredRequiredForBoot);
@@ -297,7 +303,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                     finish();
                     return;
                 }
-                mRequirePassword = false; // device encryption not enabled or not device owner.
                 updateUnlockMethodAndFinish(quality, disabled);
             }
         }
@@ -595,44 +600,34 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        protected Intent getLockManagedPasswordIntent(boolean requirePassword, String password) {
-            return mManagedPasswordProvider.createIntent(requirePassword, password);
+        protected Intent getLockManagedPasswordIntent(String password) {
+            return mManagedPasswordProvider.createIntent(false, password);
         }
 
-        protected Intent getLockPasswordIntent(Context context, int quality,
-                int minLength, final int maxLength,
-                boolean requirePasswordToDecrypt, boolean confirmCredentials, int userId) {
-            return ChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, confirmCredentials, userId);
+        protected Intent getLockPasswordIntent(int quality, int minLength, int maxLength) {
+            ChooseLockPassword.IntentBuilder builder =
+                    new ChooseLockPassword.IntentBuilder(getContext())
+                            .setPasswordQuality(quality)
+                            .setPasswordLengthRange(minLength, maxLength)
+                            .setUserId(mUserId);
+            if (mHasChallenge) {
+                builder.setChallenge(mChallenge);
+            } else {
+                builder.setPassword(mUserPassword);
+            }
+            return builder.build();
         }
 
-        protected Intent getLockPasswordIntent(Context context, int quality,
-                int minLength, final int maxLength,
-                boolean requirePasswordToDecrypt, long challenge, int userId) {
-            return ChooseLockPassword.createIntent(context, quality, minLength,
-                    maxLength, requirePasswordToDecrypt, challenge, userId);
-        }
-
-        protected Intent getLockPasswordIntent(Context context, int quality, int minLength,
-                int maxLength, boolean requirePasswordToDecrypt, String password, int userId) {
-            return ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
-                    requirePasswordToDecrypt, password, userId);
-        }
-
-        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                final boolean confirmCredentials, int userId) {
-            return ChooseLockPattern.createIntent(context, requirePassword,
-                    confirmCredentials, userId);
-        }
-
-        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-               long challenge, int userId) {
-            return ChooseLockPattern.createIntent(context, requirePassword, challenge, userId);
-        }
-
-        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
-                final String pattern, int userId) {
-            return ChooseLockPattern.createIntent(context, requirePassword, pattern, userId);
+        protected Intent getLockPatternIntent() {
+            ChooseLockPattern.IntentBuilder builder =
+                    new ChooseLockPattern.IntentBuilder(getContext())
+                            .setUserId(mUserId);
+            if (mHasChallenge) {
+                builder.setChallenge(mChallenge);
+            } else {
+                builder.setPattern(mUserPassword);
+            }
+            return builder.build();
         }
 
         protected Intent getEncryptionInterstitialIntent(Context context, int quality,
@@ -657,7 +652,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
 
             quality = upgradeQuality(quality);
-            Intent intent = getIntentForUnlockMethod(quality, disabled);
+            Intent intent = getIntentForUnlockMethod(quality);
             if (intent != null) {
                 startActivityForResult(intent,
                         mIsSetNewPassword && mHasChallenge
@@ -677,32 +672,19 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        private Intent getIntentForUnlockMethod(int quality, boolean disabled) {
+        private Intent getIntentForUnlockMethod(int quality) {
             Intent intent = null;
-            final Context context = getActivity();
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
-                intent = getLockManagedPasswordIntent(mRequirePassword, mUserPassword);
+                intent = getLockManagedPasswordIntent(mUserPassword);
             } else if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null, mUserId);
                 if (minLength < MIN_PASSWORD_LENGTH) {
                     minLength = MIN_PASSWORD_LENGTH;
                 }
                 final int maxLength = mDPM.getPasswordMaximumLength(quality);
-                if (mHasChallenge) {
-                    intent = getLockPasswordIntent(context, quality, minLength,
-                            maxLength, mRequirePassword, mChallenge, mUserId);
-                } else {
-                    intent = getLockPasswordIntent(context, quality, minLength,
-                            maxLength, mRequirePassword, mUserPassword, mUserId);
-                }
+                intent = getLockPasswordIntent(quality, minLength, maxLength);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-                if (mHasChallenge) {
-                    intent = getLockPatternIntent(context, mRequirePassword,
-                            mChallenge, mUserId);
-                } else {
-                    intent = getLockPatternIntent(context, mRequirePassword,
-                            mUserPassword, mUserId);
-                }
+                intent = getLockPatternIntent();
             }
             if (intent != null) {
                 intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);

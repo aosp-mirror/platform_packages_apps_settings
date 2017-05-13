@@ -26,8 +26,8 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.password.SetupChooseLockGeneric;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
 

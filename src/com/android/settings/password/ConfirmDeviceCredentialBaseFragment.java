@@ -15,7 +15,7 @@
  */
 
 // TODO (b/35202196): move this class out of the root of the package.
-package com.android.settings;
+package com.android.settings.password;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
@@ -47,6 +47,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.OptionsMenuFragment;
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintUiHelper;
 
 /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.annotation.Nullable;
 import android.app.Activity;
@@ -26,11 +26,13 @@ import android.os.UserManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 
 public final class ChooseLockSettingsHelper {
 
-    static final String EXTRA_KEY_TYPE = "type";
-    static final String EXTRA_KEY_PASSWORD = "password";
+    public static final String EXTRA_KEY_TYPE = "type";
+    public static final String EXTRA_KEY_PASSWORD = "password";
     public static final String EXTRA_KEY_RETURN_CREDENTIALS = "return_credentials";
     public static final String EXTRA_KEY_HAS_CHALLENGE = "has_challenge";
     public static final String EXTRA_KEY_CHALLENGE = "challenge";
@@ -77,7 +79,7 @@ public final class ChooseLockSettingsHelper {
      * @return true if one exists and we launched an activity to confirm it
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
-    boolean launchConfirmationActivity(int request, CharSequence title, boolean returnCredentials) {
+    public boolean launchConfirmationActivity(int request, CharSequence title, boolean returnCredentials) {
         return launchConfirmationActivity(request, title, null, null, returnCredentials, false);
     }
 

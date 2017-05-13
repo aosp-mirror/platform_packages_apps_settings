@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.UserHandle;
+
+import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.SetupWizardUtils;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -31,26 +33,9 @@ import android.os.UserHandle;
  */
 public class SetupChooseLockPattern extends ChooseLockPattern {
 
-    public static Intent createIntent(Context context, boolean requirePassword,
-            boolean confirmCredentials) {
-        Intent intent = ChooseLockPattern.createIntent(context, requirePassword,
-                confirmCredentials, UserHandle.myUserId());
-        intent.setClass(context, SetupChooseLockPattern.class);
-        return intent;
-    }
-
-    public static Intent createIntent(Context context, boolean requirePassword, String pattern) {
-        Intent intent = ChooseLockPattern.createIntent(
-                context, requirePassword, pattern, UserHandle.myUserId());
-        intent.setClass(context, SetupChooseLockPattern.class);
-        return intent;
-    }
-
-    public static Intent createIntent(Context context, boolean requirePassword, long challenge) {
-        Intent intent = ChooseLockPattern.createIntent(
-                context, requirePassword, challenge, UserHandle.myUserId());
-        intent.setClass(context, SetupChooseLockPattern.class);
-        return intent;
+    public static Intent modifyIntentForSetup(Context context, Intent chooseLockPatternIntent) {
+        chooseLockPatternIntent.setClass(context, SetupChooseLockPattern.class);
+        return chooseLockPatternIntent;
     }
 
     @Override

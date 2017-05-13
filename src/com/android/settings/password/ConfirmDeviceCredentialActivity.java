@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -27,6 +27,7 @@ import android.os.UserManager;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.Utils;
 
 /**
  * Launch this when you want to confirm the user is present by asking them to enter their

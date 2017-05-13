@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
@@ -65,6 +66,9 @@ import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ManagedLockPasswordProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -635,7 +639,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     return false;
                 }
             }
-            startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+            startFragment(this, ChooseLockGenericFragment.class.getName(),
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_UNLOCK_SET_OR_CHANGE_PROFILE.equals(key)) {
             if (Utils.startQuietModeDialogIfNecessary(this.getActivity(), mUm,
@@ -644,7 +648,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
             Bundle extras = new Bundle();
             extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
-            startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+            startFragment(this, ChooseLockGenericFragment.class.getName(),
                     R.string.lock_settings_picker_title_profile,
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
         } else if (KEY_TRUST_AGENT.equals(key)) {
@@ -744,7 +748,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void unifyUncompliantLocks() {
         mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
                 mCurrentProfilePassword);
-        startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+        startFragment(this, ChooseLockGenericFragment.class.getName(),
                 R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
     }
 
@@ -752,7 +756,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         Bundle extras = new Bundle();
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         startFragment(this,
-                "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                ChooseLockGenericFragment.class.getName(),
                 R.string.lock_settings_picker_title_profile,
                 SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
     }
