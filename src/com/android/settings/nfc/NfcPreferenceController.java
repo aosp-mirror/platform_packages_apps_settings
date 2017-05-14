@@ -27,12 +27,12 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 

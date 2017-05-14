@@ -20,11 +20,11 @@ import android.provider.Settings.Global;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.users.UserCapabilities;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class AddUserWhenLockedPreferenceController extends PreferenceController
         implements Preference.OnPreferenceChangeListener, LifecycleObserver, OnPause, OnResume {

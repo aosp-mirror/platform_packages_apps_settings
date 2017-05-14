@@ -111,6 +111,7 @@
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Isto terminará a sua ligação com:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Não tem autorização para alterar as definições de Bluetooth."</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> é visível para dispositivos próximos enquanto as definições de Bluetooth estiverem abertas."</string>
+    <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"Endereço MAC de Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Desligar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Difusão"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Desativar perfil?"</string>
@@ -158,6 +159,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s pretende aceder às suas mensagens. Conceder acesso a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Pedido de acesso ao SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> pretende aceder ao seu cartão SIM. Ao conceder acesso ao cartão SIM, desativa a conetividade de dados no seu dispositivo durante a ligação. Fornecer acesso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_device_name_summary (4418784300859596202) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"Data e hora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Escolher o fuso horário"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -1021,6 +1024,10 @@
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ativar ao levantar"</string>
     <string name="doze_title" msgid="2259176504273878294">"Visualização de ambiente"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Ativar o ecrã quando recebe notificações"</string>
+    <!-- no translation found for doze_always_on_title (1046222370442629646) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary (1254238982577776475) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"Tamanho do tipo de letra"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumentar ou diminuir o texto"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Definições de bloqueio do cartão SIM"</string>
@@ -1859,8 +1866,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Utilizar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necessita de:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Uma vez que uma aplicação está a ocultar um pedido de autorização, as Definições não conseguem validar a sua resposta."</string>
-    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
-    <skip />
+    <string name="window_obscured_warning" msgid="8711643931674708175">"Uma vez que outra aplicação está a ser apresentada por cima destas opções, as Definições não podem responder à sua ação."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se ativar o <xliff:g id="SERVICE">%1$s</xliff:g>, o dispositivo não utilizará o bloqueio de ecrã para otimizar a encriptação de dados."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Uma vez que ativou um serviço de acessibilidade, o dispositivo não utilizará o bloqueio de ecrã para otimizar a encriptação de dados."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Uma vez que ligar <xliff:g id="SERVICE">%1$s</xliff:g> afeta a encriptação de dados, o utilizador tem de confirmar o seu padrão."</string>
@@ -2788,6 +2794,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notificações"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avançadas"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificações de trabalho"</string>
+    <!-- no translation found for notification_badging_title (5125022693565388760) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Emitir luz intermitente"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"No ecrã de bloqueio"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todas as notificações"</string>
@@ -2813,7 +2821,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Média"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Urgente"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"Permitir som"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"Permitir som"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Não emitir som, vibrar, nem mostrar estas notificações no ecrã atual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistente de notificações"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acesso a notificações"</string>
@@ -2869,8 +2877,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Nunca mostrar estas notificações"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Mostrar notificações"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Nunca mostrar notificações no painel ou nos dispositivos periféricos"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Balão do ícone da aplicação"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Mostrar notificações como emblemas na aplicação Google Home, se tal for suportado."</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"Permitir emblema de ícone"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Substituir o modo Não incomodar"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Permitir que estas notificações continuem a interrompê-lo quando o modo Não incomodar estiver definido como Apenas prioridade"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"No ecrã de bloqueio"</string>
@@ -3309,8 +3316,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Aviso de dados de <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Aviso de dados de <xliff:g id="ID_1">%1$s</xliff:g>/limite de dados de <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciclo de faturação"</string>
-    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
-    <skip />
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Mensalmente no dia <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Restrições de rede"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> restrições</item>

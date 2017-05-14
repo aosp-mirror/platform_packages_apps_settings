@@ -1497,7 +1497,7 @@
         <!-- Second and third-level settings -->
 
         <!-- Lock screen settings -->
-        <activity android:name="ConfirmDeviceCredentialActivity"
+        <activity android:name=".password.ConfirmDeviceCredentialActivity"
             android:exported="true"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter android:priority="1">
@@ -1505,9 +1505,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- Activity alias for compatibility -->
+        <activity-alias android:name=".ConfirmDeviceCredentialActivity"
+            android:targetActivity=".password.ConfirmDeviceCredentialActivity"
+            android:exported="true" />
 
         <!-- Note this must not be exported since it authenticates the given user -->
-        <activity android:name="ConfirmDeviceCredentialActivity$InternalActivity"
+        <activity android:name=".password.ConfirmDeviceCredentialActivity$InternalActivity"
             android:exported="false"
             android:permission="android.permission.MANAGE_USERS"
             android:resizeableActivity="false"
@@ -1548,10 +1552,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ConfirmLockPattern"
+        <activity android:name=".password.ConfirmLockPattern"
             android:theme="@style/GlifTheme.Light"/>
 
-        <activity android:name="ConfirmLockPassword"
+        <activity android:name=".password.ConfirmLockPassword"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GlifTheme.Light"/>
 
@@ -1593,17 +1597,17 @@
         </activity>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
-        <activity android:name="ConfirmLockPattern$InternalActivity"
+        <activity android:name=".password.ConfirmLockPattern$InternalActivity"
             android:exported="false"
             android:theme="@style/GlifTheme.Light"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
-        <activity android:name="ConfirmLockPassword$InternalActivity"
+        <activity android:name=".password.ConfirmLockPassword$InternalActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/GlifTheme.Light"/>
 
-        <activity android:name="SetupChooseLockGeneric"
+        <activity android:name=".password.SetupChooseLockGeneric"
             android:taskAffinity="com.android.wizard"
             android:theme="@style/GlifTheme.Light"
             android:label="@string/lock_settings_picker_title">
@@ -1613,7 +1617,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ChooseLockGeneric"
+        <activity android:name=".password.ChooseLockGeneric"
             android:label="@string/lockpassword_choose_lock_generic_header"
             android:excludeFromRecents="true"
             android:exported="false" />
@@ -1660,27 +1664,27 @@
                 android:resource="@string/suggested_fingerprint_lock_settings_summary" />
         </activity>
 
-        <activity android:name="ChooseLockGeneric$InternalActivity" android:exported="false"
+        <activity android:name=".password.ChooseLockGeneric$InternalActivity"
+            android:exported="false"
             android:label="@string/lockpassword_choose_lock_generic_header"
-            android:excludeFromRecents="true"
-        />
+            android:excludeFromRecents="true" />
 
-        <activity android:name="SetupChooseLockPattern"
+        <activity android:name=".password.SetupChooseLockPattern"
             android:exported="false"
             android:taskAffinity="com.android.wizard"
             android:theme="@style/GlifTheme.Light" />
 
-        <activity android:name="ChooseLockPattern"
+        <activity android:name=".password.ChooseLockPattern"
             android:exported="false"
             android:theme="@style/GlifTheme.Light" />
 
-        <activity android:name="SetupChooseLockPassword"
+        <activity android:name=".password.SetupChooseLockPassword"
             android:exported="false"
             android:taskAffinity="com.android.wizard"
             android:theme="@style/GlifTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
-        <activity android:name="ChooseLockPassword"
+        <activity android:name=".password.ChooseLockPassword"
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
@@ -1874,6 +1878,20 @@
                 android:value="com.android.settings.development.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
+             activity is disabled to be CTS compliant. -->
+        <activity
+            android:name=".development.DevelopmentSettingsDisabledActivity"
+            android:icon="@drawable/ic_settings_development"
+            android:label="@string/development_settings_title"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="-1">
+                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name="Settings$PrintSettingsActivity"

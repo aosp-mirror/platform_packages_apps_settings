@@ -14,16 +14,15 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.os.Build;
-import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
@@ -31,13 +30,18 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION
 public class DozePreferenceController extends PreferenceController implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_DOZE = "doze";
+    @VisibleForTesting
+    static final String KEY_DOZE = "doze";
+    private static final int MY_USER = UserHandle.myUserId();
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final AmbientDisplayConfiguration mConfig;
 
-    public DozePreferenceController(Context context) {
+    public DozePreferenceController(Context context, AmbientDisplayConfiguration config,
+            MetricsFeatureProvider metricsFeatureProvider) {
         super(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = metricsFeatureProvider;
+        mConfig = config;
     }
 
     @Override
@@ -55,8 +59,7 @@ public class DozePreferenceController extends PreferenceController implements
 
     @Override
     public void updateState(Preference preference) {
-        int value = Settings.Secure.getInt(mContext.getContentResolver(), DOZE_ENABLED, 1);
-        ((SwitchPreference) preference).setChecked(value != 0);
+        ((SwitchPreference) preference).setChecked(mConfig.pulseOnNotificationEnabled(MY_USER));
     }
 
     @Override
@@ -68,11 +71,6 @@ public class DozePreferenceController extends PreferenceController implements
 
     @Override
     public boolean isAvailable() {
-        String name = Build.IS_DEBUGGABLE ? SystemProperties.get("debug.doze.component") : null;
-        if (TextUtils.isEmpty(name)) {
-            name = mContext.getResources().getString(
-                    com.android.internal.R.string.config_dozeComponent);
-        }
-        return !TextUtils.isEmpty(name);
+        return mConfig.pulseOnNotificationAvailable();
     }
 }

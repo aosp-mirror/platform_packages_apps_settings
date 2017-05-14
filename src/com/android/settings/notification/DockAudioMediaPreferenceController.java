@@ -24,7 +24,7 @@ import android.content.res.Resources;
 import android.provider.Settings.Global;
 import android.telephony.TelephonyManager;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DockAudioMediaPreferenceController extends SettingPrefController {
 

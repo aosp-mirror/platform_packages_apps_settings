@@ -111,6 +111,7 @@
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Finalizará la conexión con&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;."</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"No tienes permiso para cambiar los ajustes de Bluetooth."</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será visible para dispositivos cercanos mientras los ajustes de Bluetooth estén abiertos."</string>
+    <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"Dirección MAC de Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"¿Desconectar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Emisiones"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"¿Inhabilitar perfil?"</string>
@@ -158,6 +159,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s quiere acceder a tus mensajes. ¿Quieres permitir el acceso a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitud de acceso de SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> quiere acceder a tu tarjeta SIM. Si lo permites, se inhabilitará la conexión de datos del dispositivo durante la conexión. Conceder acceso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <!-- no translation found for bluetooth_device_name_summary (4418784300859596202) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"Fecha y hora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Elige una zona horaria"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -1021,6 +1024,10 @@
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activar pantalla al recibir notificaciones"</string>
+    <!-- no translation found for doze_always_on_title (1046222370442629646) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary (1254238982577776475) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de la fuente"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumenta o disminuye el tamaño del texto"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ajustes de bloqueo de tarjeta SIM"</string>
@@ -1859,8 +1866,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"¿Usar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Una aplicación está bloqueando una solicitud de permiso, por lo que Ajustes no puede verificar tu respuesta."</string>
-    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
-    <skip />
+    <string name="window_obscured_warning" msgid="8711643931674708175">"La aplicación Ajustes no puede responder a tu acción porque otra aplicación tapa estas opciones."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si activas <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Has activado un servicio de accesibilidad, por lo que el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Activar <xliff:g id="SERVICE">%1$s</xliff:g> afecta al cifrado de datos, por lo que debes confirmar tu patrón."</string>
@@ -2159,7 +2165,7 @@
     <string name="privacy_settings_title" msgid="2978878794187459190">"Copia de seguridad"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Copia de seguridad"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Datos personales"</string>
-    <string name="backup_data_title" msgid="1239105919852668016">"Copiar mis datos"</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"Copia de seguridad de mis datos"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Crear copia de seguridad de los datos de las aplicaciones, las contraseñas de redes Wi-Fi y otros ajustes en los servidores de Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Cuenta de copia de seguridad"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Incluir datos de aplicaciones"</string>
@@ -2788,6 +2794,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notificaciones"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Opciones avanzadas"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificaciones de trabajo"</string>
+    <!-- no translation found for notification_badging_title (5125022693565388760) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luz parpadeante"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"En la pantalla de bloqueo"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todo el contenido de las notificaciones"</string>
@@ -2813,7 +2821,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Media"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Urgente"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"Permitir sonido"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"Permitir sonido"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"No emitir sonido, vibrar ni mostrar notificaciones en la pantalla actual."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Asistente de notificaciones"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acceso a notificaciones"</string>
@@ -2869,8 +2877,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"No mostrar nunca estas notificaciones"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Mostrar notificaciones"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"No mostrar nunca notificaciones en el panel de notificaciones ni en dispositivos periféricos"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Mostrar icono de la aplicación"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Mostrar notificaciones como iconos en la aplicación Home (si es compatible)"</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"Permitir insignia de icono"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Priorizar"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"No bloquear notificaciones cuando la opción No molestar esté establecida en Solo prioritarias"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"En la pantalla de bloqueo"</string>
@@ -3309,8 +3316,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>/Límite de datos: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciclo de facturación"</string>
-    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
-    <skip />
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Cada mes (el día <xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Restricciones de red"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> restricciones</item>

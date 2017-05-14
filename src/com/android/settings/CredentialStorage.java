@@ -47,13 +47,15 @@ import android.widget.Toast;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
-
-import sun.security.util.ObjectIdentifier;
-import sun.security.x509.AlgorithmId;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+
+import sun.security.util.ObjectIdentifier;
+import sun.security.x509.AlgorithmId;
 
 /**
  * CredentialStorage handles KeyStore reset, unlock, and install.

@@ -16,6 +16,8 @@
 
 package com.android.settings.accounts;
 
+import static android.content.Intent.EXTRA_USER;
+
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
@@ -32,14 +34,12 @@ import android.os.UserManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 import java.io.IOException;
-
-import static android.content.Intent.EXTRA_USER;
 /**
  * Entry point Activity for account setup. Works as follows
  *
