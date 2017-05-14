@@ -149,10 +149,14 @@ public class SettingsShadowResources extends ShadowResources {
             // Replace all private string references with a placeholder.
             if (set != null) {
                 for (int i = 0; i < set.getAttributeCount(); ++i) {
-                    if (set.getAttributeValue(i).startsWith("@*android:string")) {
-                        Node node = ReflectionHelpers.callInstanceMethod(
-                                XmlResourceParserImpl.class, set, "getAttributeAt",
-                                ReflectionHelpers.ClassParameter.from(int.class, i));
+                    String attributeValue = set.getAttributeValue(i);
+                    Node node = ReflectionHelpers.callInstanceMethod(
+                            XmlResourceParserImpl.class, set, "getAttributeAt",
+                            ReflectionHelpers.ClassParameter.from(int.class, i));
+                    if (attributeValue.contains("attr/fingerprint_layout_theme")) {
+                        // Workaround for https://github.com/robolectric/robolectric/issues/2641
+                        node.setNodeValue("@style/FingerprintLayoutTheme");
+                    } else if (attributeValue.startsWith("@*android:string")) {
                         node.setNodeValue("PLACEHOLDER");
                     }
                 }
@@ -166,7 +170,6 @@ public class SettingsShadowResources extends ShadowResources {
                     ReflectionHelpers.getField(assetManager, "appliedStyles");
             for (Long idx : appliedStylesList.keySet()) {
                 List<Object> appliedStyles = appliedStylesList.get(idx);
-                int i = 1;
                 for (Object appliedStyle : appliedStyles) {
                     StyleResolver styleResolver = ReflectionHelpers.getField(appliedStyle, "style");
                     List<StyleData> styleDatas =

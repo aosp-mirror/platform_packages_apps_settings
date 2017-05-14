@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi;
+package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,36 +22,38 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
+import android.support.v7.preference.TwoStatePreference;
+import android.util.Log;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 
-/**
- * {@link PreferenceController} that controls whether we should notify user when open network is
- * available.
- */
-public class NotifyOpenNetworksPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause {
+import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
-    private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
+public class BadgingNotificationPreferenceController extends PreferenceController implements
+        Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
+
+    private static final String TAG = "BadgeNotifPrefContr";
+    private static final String KEY_NOTIFICATION_BADGING = "notification_badging";
+    private static final int DEFAULT_VALUE = 1;
+
     private SettingObserver mSettingObserver;
 
-    public NotifyOpenNetworksPreferenceController(Context context, Lifecycle lifecycle) {
+    public BadgingNotificationPreferenceController(Context context) {
         super(context);
-        lifecycle.addObserver(this);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY_NOTIFY_OPEN_NETWORKS));
+        Preference preference = screen.findPreference(NOTIFICATION_BADGING);
+        if (preference != null) {
+            mSettingObserver = new SettingObserver(preference);
+        }
     }
 
     @Override
@@ -69,42 +71,34 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_NOTIFY_OPEN_NETWORKS)) {
-            return false;
-        }
-        if (!(preference instanceof SwitchPreference)) {
-            return false;
-        }
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
-                ((SwitchPreference) preference).isChecked() ? 1 : 0);
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
-        return KEY_NOTIFY_OPEN_NETWORKS;
+        return KEY_NOTIFICATION_BADGING;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_notificationBadging);
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
-            return;
-        }
-        final SwitchPreference notifyOpenNetworks = (SwitchPreference) preference;
-        notifyOpenNetworks.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
+        final boolean checked = Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BADGING, DEFAULT_VALUE) == 1;
+        ((TwoStatePreference) preference).setChecked(checked);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final boolean val = (Boolean) newValue;
+        return Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BADGING, val ? 1 : 0);
     }
 
     class SettingObserver extends ContentObserver {
-        private final Uri NETWORKS_AVAILABLE_URI = Settings.Global.getUriFor(
-                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON);
+
+        private final Uri NOTIFICATION_BADGING_URI =
+                Settings.Secure.getUriFor(NOTIFICATION_BADGING);
 
         private final Preference mPreference;
 
@@ -115,7 +109,7 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
 
         public void register(ContentResolver cr, boolean register) {
             if (register) {
-                cr.registerContentObserver(NETWORKS_AVAILABLE_URI, false, this);
+                cr.registerContentObserver(NOTIFICATION_BADGING_URI, false, this);
             } else {
                 cr.unregisterContentObserver(this);
             }
@@ -124,7 +118,7 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
-            if (NETWORKS_AVAILABLE_URI.equals(uri)) {
+            if (NOTIFICATION_BADGING_URI.equals(uri)) {
                 updateState(mPreference);
             }
         }

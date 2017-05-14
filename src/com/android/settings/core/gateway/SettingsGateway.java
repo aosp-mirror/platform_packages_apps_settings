@@ -271,6 +271,7 @@ public class SettingsGateway {
             Settings.PrintSettingsActivity.class.getName(),
             // Home page > Apps & Notifications
             Settings.UserSettingsActivity.class.getName(),
+            Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Security & screen lock

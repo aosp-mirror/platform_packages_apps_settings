@@ -22,6 +22,11 @@
         android:key="dashboard_tile_placeholder"
         android:order="1"/>
 
+    <!-- Notification badging -->
+    <SwitchPreference
+        android:key="notification_badging"
+        android:title="@string/notification_badging_title"/>
+
     <!-- Pulse notification light -->
     <SwitchPreference
         android:key="notification_pulse"
@@ -31,7 +36,7 @@
     <com.android.settings.notification.RestrictedDropDownPreference
         android:key="lock_screen_notifications"
         android:title="@string/lock_screen_notifications_title"
-        android:summary="%s"/>
+        android:summary="@string/summary_placeholder"/>
 
     <SwitchPreference
         android:key="gesture_swipe_down_fingerprint"
@@ -45,7 +50,7 @@
         <com.android.settings.notification.RestrictedDropDownPreference
             android:key="lock_screen_notifications_profile"
             android:title="@string/lock_screen_notifications_title"
-            android:summary="%s"/>
+            android:summary="@string/summary_placeholder"/>
 
     </PreferenceCategory>
 
