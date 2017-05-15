@@ -24,6 +24,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
 /**
  * Inspector takes a list of class objects and perform static code analysis in its {@link #run()}
  * method.
@@ -45,6 +47,17 @@ public abstract class CodeInspector {
      * Code inspection runner method.
      */
     public abstract void run();
+
+    protected void assertNoObsoleteInGrandfatherList(String listName, List<String> list) {
+        final StringBuilder obsoleteGrandfatherItems = new StringBuilder(
+                listName + " contains item that should not be grandfathered.\n");
+        for (String c : list) {
+            obsoleteGrandfatherItems.append(c).append("\n");
+        }
+        assertWithMessage(obsoleteGrandfatherItems.toString())
+                .that(list)
+                .isEmpty();
+    }
 
     protected boolean isConcreteSettingsClass(Class clazz) {
         // Abstract classes
