@@ -1367,8 +1367,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 case LIST_TYPE_USAGE_ACCESS:
                     if (holder.entry.extraInfo != null) {
                         holder.summary.setText((new UsageState((PermissionState) holder.entry
-                                .extraInfo)).isPermissible() ? R.string.switch_on_text :
-                                R.string.switch_off_text);
+                                .extraInfo)).isPermissible()
+                                ? R.string.app_permission_summary_allowed
+                                : R.string.app_permission_summary_not_allowed);
                     } else {
                         holder.summary.setText(null);
                     }

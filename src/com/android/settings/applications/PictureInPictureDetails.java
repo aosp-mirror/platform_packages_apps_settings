@@ -15,10 +15,6 @@
  */
 package com.android.settings.applications;
 
-import static android.app.AppOpsManager.MODE_ALLOWED;
-import static android.app.AppOpsManager.MODE_ERRORED;
-import static android.app.AppOpsManager.OP_PICTURE_IN_PICTURE;
-
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -33,6 +29,10 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+
+import static android.app.AppOpsManager.MODE_ALLOWED;
+import static android.app.AppOpsManager.MODE_ERRORED;
+import static android.app.AppOpsManager.OP_PICTURE_IN_PICTURE;
 
 public class PictureInPictureDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
@@ -124,7 +124,8 @@ public class PictureInPictureDetails extends AppInfoWithHeader
     static int getPreferenceSummary(Context context, int uid, String packageName) {
         final boolean enabled = PictureInPictureDetails.getEnterPipStateForPackage(context, uid,
                 packageName);
-        return enabled ? R.string.picture_in_picture_on : R.string.picture_in_picture_off;
+        return enabled ? R.string.app_permission_summary_allowed
+                : R.string.app_permission_summary_not_allowed;
     }
 
     @VisibleForTesting
