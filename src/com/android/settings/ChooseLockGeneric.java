@@ -167,16 +167,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
-            if (mIsSetNewPassword) {
-                // In ACTION_SET_NEW_PARENT_PROFILE_PASSWORD or ACTION_SET_NEW_PASSWORD, the user
-                // will be asked to confirm the password if one has been set.
-                // On fingerprint supported device, fingerprint options are represented in the
-                // options. If the user chooses to skip fingerprint setup, ChooseLockGeneric is
-                // relaunched to only show options without fingerprint. In this case, we shouldn't
-                // ask the user to confirm the password again.
-                mPasswordConfirmed = getActivity().getIntent().getBooleanExtra(
-                        PASSWORD_CONFIRMED, false);
-            }
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -247,11 +237,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                 showFactoryResetProtectionWarningDialog(key);
                 return true;
             } else if (KEY_SKIP_FINGERPRINT.equals(key)) {
-                Intent chooseLockGenericIntent = new Intent(getActivity(), ChooseLockGeneric.class);
+                Intent chooseLockGenericIntent = new Intent(getActivity(),
+                    ChooseLockGeneric.InternalActivity.class);
                 chooseLockGenericIntent.setAction(getIntent().getAction());
                 // Forward the target user id to  ChooseLockGeneric.
                 chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-                chooseLockGenericIntent.putExtra(PASSWORD_CONFIRMED, mPasswordConfirmed);
+                chooseLockGenericIntent.putExtra(CONFIRM_CREDENTIALS, !mPasswordConfirmed);
                 startActivityForResult(chooseLockGenericIntent, SKIP_FINGERPRINT_REQUEST);
                 return true;
             } else {
