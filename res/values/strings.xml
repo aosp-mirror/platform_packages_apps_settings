@@ -43,6 +43,9 @@
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
     <string name="show_dev_already">No need, you are already a developer.</string>
 
+    <!-- [CHAR LIMIT=NONE] Toast message when user attemps to launch developer otions before enabling it. -->
+    <string name="dev_settings_disabled_warning">Please enable developer options first.</string>
+
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
     <string name="header_category_wireless_networks">Wireless &amp; networks</string>
@@ -6739,12 +6742,6 @@
     <!-- Apps > App Details > Picture-in-picture > Description. [CHAR LIMIT=NONE] -->
     <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you're using.</string>
 
-    <!-- Summary of app allowed to enter picture-in-picture. [CHAR LIMIT=60] -->
-    <string name="picture_in_picture_on">Yes</string>
-
-    <!-- Summary of app not allowed to enter picture-in-picture. [CHAR LIMIT=60] -->
-    <string name="picture_in_picture_off">No</string>
-
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
 
@@ -7705,10 +7702,12 @@
 
     <!-- Label for showing apps that can display over other apps [CHAR LIMIT=45] -->
     <string name="filter_overlay_apps">Apps with permission</string>
-    <!-- Summary of app allowed to display over other apps [CHAR LIMIT=60] -->
-    <string name="system_alert_window_on">Yes</string>
-    <!-- Summary of app not allowed to display over other apps [CHAR LIMIT=60] -->
-    <string name="system_alert_window_off">No</string>
+
+    <!-- Preference summary text for an app when it is allowed for a permission. [CHAR LIMIT=45] -->
+    <string name="app_permission_summary_allowed">Allowed</string>
+
+    <!-- Preference summary text for an app when it is disallowed for a permission. [CHAR LIMIT=45] -->
+    <string name="app_permission_summary_not_allowed">Not allowed</string>
 
     <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
     <string name="install_other_apps">Install unknown apps</string>
@@ -7737,14 +7736,6 @@
     <string name="permit_write_settings">Allow modify system settings</string>
     <!-- Description of the write system settings [CHAR LIMIT=NONE] -->
     <string name="write_settings_description">This permission allows an app to modify system settings.</string>
-    <!-- Summary of app allowed to write system settings [CHAR LIMIT=45] -->
-    <string name="write_settings_on">Yes</string>
-    <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
-    <string name="write_settings_off">No</string>
-    <!-- Summary of app trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_trusted">Allowed</string>
-    <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_untrusted">Not allowed</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
     <string name="external_source_switch_title">Allow from this source</string>
 
