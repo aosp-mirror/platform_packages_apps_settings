@@ -94,6 +94,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     private PreferenceGroup mPairedDevicesCategory;
     private PreferenceGroup mAvailableDevicesCategory;
     private Preference mDeviceNamePreference;
+    private Preference mPairingPreference;
     private boolean mAvailableDevicesCategoryIsPresent;
 
     private boolean mInitialScanStarted;
@@ -103,6 +104,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
     private final IntentFilter mIntentFilter;
     private BluetoothDeviceNamePreferenceController mDeviceNamePrefController;
+    private BluetoothPairingPreferenceController mPairingPrefController;
 
     // For Search
     private static final String DATA_KEY_REFERENCE = "main_toggle_bluetooth";
@@ -174,6 +176,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
         mMyDevicePreference = mFooterPreferenceMixin.createFooterPreference();
         mMyDevicePreference.setSelectable(false);
+
+        mPairingPreference = mPairingPrefController.createBluetoothPairingPreference();
 
         setHasOptionsMenu(true);
     }
@@ -323,6 +327,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 addDeviceCategory(mPairedDevicesCategory,
                         R.string.bluetooth_preference_paired_devices,
                         BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
+                mPairedDevicesCategory.addPreference(mPairingPreference);
                 int numberOfPairedDevices = mPairedDevicesCategory.getPreferenceCount();
 
                 if (isUiRestricted() || numberOfPairedDevices <= 0) {
@@ -523,7 +528,9 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         List<PreferenceController> controllers = new ArrayList<>();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context,
                 this, getLifecycle());
+        mPairingPrefController = new BluetoothPairingPreferenceController(context, this);
         controllers.add(mDeviceNamePrefController);
+        controllers.add(mPairingPrefController);
 
         return controllers;
     }
