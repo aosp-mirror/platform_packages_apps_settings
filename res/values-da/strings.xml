@@ -2385,10 +2385,10 @@
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(ingen bekræftelse af serveren)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(modtaget fra serveren)"</string>
     <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Denne VPN-type kan ikke være forbundet hele tiden"</string>
-    <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Åbne VPN-forbindelser, understøtter kun numeriske serveradresser"</string>
-    <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Der skal angives en DNS-server for åbne VPN-forbindelser"</string>
-    <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"DNS-serveradressen skal være numerisk for åbne VPN-forbindelser"</string>
-    <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"De indtastede oplysninger understøtter ikke åbne VPN-forbindelser"</string>
+    <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Altid aktiveret VPN understøtter kun numeriske serveradresser"</string>
+    <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Der skal angives en DNS-server for altid aktiveret VPN"</string>
+    <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"DNS-serveradressen skal være numerisk for altid aktiverede VPN-netværk"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"De indtastede oplysninger understøtter ikke altid aktiveret VPN"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"Annuller"</string>
     <string name="vpn_done" msgid="8678655203910995914">"Annuller"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Gem"</string>
@@ -2402,19 +2402,19 @@
     <string name="vpn_version" msgid="1939804054179766249">"Version <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="2232239391189465752">"Glem VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="2963898301277610248">"Erstat det eksisterende VPN-netværk?"</string>
-    <string name="vpn_set_vpn_title" msgid="4009987321156037267">"Skal VPN altid være slået til?"</string>
+    <string name="vpn_set_vpn_title" msgid="4009987321156037267">"Vil du konfigurere altid aktiveret VPN?"</string>
     <string name="vpn_first_always_on_vpn_message" msgid="3025322109743675467">"Hvis du aktiverer denne indstilling, vil du ikke have nogen internetforbindelse, før VPN-netværket etablerer forbindelse."</string>
     <string name="vpn_replace_always_on_vpn_enable_message" msgid="2577928591361606641">"Dit eksisterende VPN-netværk erstattes, og du vil ikke have nogen internetforbindelse, før VPN-netværket etablerer forbindelse."</string>
-    <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"Du har allerede forbindelse til et VPN-netværk, der altid er slået til. Hvis du opretter forbindelse til et andet netværk, erstattes dit eksisterende VPN, og Altid slået til-tilstanden deaktiveres."</string>
+    <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"Du har allerede forbindelse til et altid aktiveret VPN-netværk. Hvis du opretter forbindelse til et andet netværk, erstattes dit eksisterende VPN, og Altid aktiveret-tilstanden deaktiveres."</string>
     <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"Du har allerede forbindelse til et VPN-netværk. Hvis du opretter forbindelse til et andet, erstattes dit eksisterende VPN."</string>
     <string name="vpn_turn_on" msgid="2363136869284273872">"Aktivér"</string>
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> kan ikke oprette forbindelse"</string>
-    <string name="vpn_cant_connect_message" msgid="1352832123114214283">"Denne app understøtter ikke åben VPN-forbindelse"</string>
+    <string name="vpn_cant_connect_message" msgid="1352832123114214283">"Denne app understøtter ikke altid aktiveret VPN"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Tilføj VPN-profil"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediger profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Slet profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN altid aktiveret"</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Altid aktiveret VPN"</string>
     <string name="vpn_no_vpns_added" msgid="5002741367858707244">"Der er ikke tilføjet nogen VPN-netværk"</string>
     <string name="vpn_always_on_summary" msgid="2821344524094363617">"Vær forbundet til VPN hele tiden"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"Understøttes ikke af denne app"</string>
@@ -2471,8 +2471,8 @@
     </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"En tredjepart kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
-      <item quantity="one">Kontrollér certifikat</item>
-      <item quantity="other">Kontrollér certifikater</item>
+      <item quantity="one">Tjek certifikat</item>
+      <item quantity="other">Tjek certifikater</item>
     </plurals>
     <string name="user_settings_title" msgid="6151874007858148344">"Brugere"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Brugere og profiler"</string>
@@ -2777,8 +2777,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Underretninger"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avanceret"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Arbejdsunderretninger"</string>
-    <!-- no translation found for notification_badging_title (5125022693565388760) -->
-    <skip />
+    <string name="notification_badging_title" msgid="5125022693565388760">"Tillad ikonbadges"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkende lys"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"På låseskærmen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Vis alt indhold i underretninger"</string>
@@ -3525,9 +3524,9 @@
     </plurals>
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"Standardtastatur"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"Indstillet til <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"\"VPN-netværk altid aktiveret\" er slået til"</string>
-    <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"\"VPN-netværk altid aktiveret\" er slået til i din personlige profil"</string>
-    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"\"VPN-netværk altid aktiveret\" er slået til i din arbejdsprofil"</string>
+    <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"\"Altid aktiveret VPN\" er aktiveret"</string>
+    <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"\"Altid aktiveret VPN\" er aktiveret på din personlige profil"</string>
+    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"\"Altid aktiveret VPN\" er aktiveret på din arbejdsprofil"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Global HTTP-proxy er konfigureret"</string>
     <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Pålidelige loginoplysninger"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
