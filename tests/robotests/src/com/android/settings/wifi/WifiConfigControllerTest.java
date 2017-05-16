@@ -16,10 +16,6 @@
 
 package com.android.settings.wifi;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +35,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -109,11 +108,19 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.isSaved()).thenReturn(true);
         assertThat(mController.isSubmittable()).isTrue();
     }
+
     @Test
     public void isSubmittable_nullAccessPoint_noException() {
         mController = new TestWifiConfigController(mConfigUiBase, mView, null,
                 WifiConfigUiBase.MODE_CONNECT);
         mController.isSubmittable();
+    }
+
+    @Test
+    public void getSignalString_notReachable_shouldHaveNoSignalString() {
+        when(mAccessPoint.isReachable()).thenReturn(false);
+
+        assertThat(mController.getSignalString()).isNull();
     }
 
     public class TestWifiConfigController extends WifiConfigController {
