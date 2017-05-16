@@ -23,6 +23,7 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceAdminSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
+import com.android.settings.dashboard.SupportDashboardActivity;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
@@ -262,6 +263,7 @@ public class SettingsGateway {
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
+            SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),

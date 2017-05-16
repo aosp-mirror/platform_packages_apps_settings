@@ -27,8 +27,6 @@ import com.android.settings.overlay.SupportFeatureProvider;
  */
 public class SupportDashboardActivity extends Activity {
 
-    public SupportDashboardActivity() {}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
