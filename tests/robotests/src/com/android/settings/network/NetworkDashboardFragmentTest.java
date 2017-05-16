@@ -19,15 +19,18 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.view.Menu;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
@@ -38,16 +41,23 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkDashboardFragmentTest {
 
+    @Mock
+    private Context mContext;
+
     private NetworkDashboardFragment mFragment;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mFragment = new NetworkDashboardFragment();
     }
 
@@ -88,5 +98,59 @@ public class NetworkDashboardFragmentTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void testSummaryProvider_hasMobileAndHotspot_shouldReturnMobileSummary() {
+        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
+                mock(MobileNetworkPreferenceController.class);
+        final TetherPreferenceController tetherPreferenceController =
+                mock(TetherPreferenceController.class);
+
+        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
+        final SummaryLoader.SummaryProvider provider =
+                new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
+                        mobileNetworkPreferenceController, tetherPreferenceController);
+
+        provider.setListening(false);
+
+        verifyZeroInteractions(summaryLoader);
+
+        when(mobileNetworkPreferenceController.isAvailable()).thenReturn(true);
+        when(tetherPreferenceController.isAvailable()).thenReturn(true);
+
+        provider.setListening(true);
+
+        verify(mContext).getString(R.string.wifi_settings_title);
+        verify(mContext).getString(R.string.network_dashboard_summary_data_usage);
+        verify(mContext).getString(R.string.network_dashboard_summary_hotspot);
+        verify(mContext).getString(R.string.network_dashboard_summary_mobile);
+        verify(mContext, times(3)).getString(R.string.join_many_items_middle, null, null);
+    }
+
+    @Test
+    public void testSummaryProvider_noMobileOrHotspot_shouldReturnSimpleSummary() {
+        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
+                mock(MobileNetworkPreferenceController.class);
+        final TetherPreferenceController tetherPreferenceController =
+                mock(TetherPreferenceController.class);
+
+        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
+        final SummaryLoader.SummaryProvider provider =
+                new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
+                        mobileNetworkPreferenceController, tetherPreferenceController);
+
+        provider.setListening(false);
+
+        verifyZeroInteractions(summaryLoader);
+
+        when(mobileNetworkPreferenceController.isAvailable()).thenReturn(false);
+        when(tetherPreferenceController.isAvailable()).thenReturn(false);
+
+        provider.setListening(true);
+
+        verify(mContext).getString(R.string.wifi_settings_title);
+        verify(mContext).getString(R.string.network_dashboard_summary_data_usage);
+        verify(mContext).getString(R.string.join_many_items_middle, null, null);
     }
 }
