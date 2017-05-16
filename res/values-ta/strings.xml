@@ -111,6 +111,7 @@
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"இது, பின்வருவதுடனான உங்கள் இணைப்பைத் துண்டிக்கும்:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"புளுடூத் அமைப்புகளை மாற்ற உங்களுக்கு அனுமதியில்லை."</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"புளூடூத் அமைப்புகள் இயக்கப்பட்டிருக்கும்போது, அருகிலுள்ள சாதனங்களுக்கு <xliff:g id="DEVICE_NAME">%1$s</xliff:g> தெரியும்."</string>
+    <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"புளூடூத் MAC முகவரி: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ஐ துண்டிக்கவா?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"அலைபரப்புதல்"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"சுயவிவரத்தை முடக்கவா?"</string>
@@ -158,6 +159,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"உங்கள் செய்திகளை %1$s அணுக விரும்புகிறது. %2$s க்கு அணுகலை வழங்கவா?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM அணுகல் கோரிக்கை"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> உங்கள் சிம் கார்டை அணுக விரும்புகிறது. சிம் கார்டிற்கு அணுகல் வழங்குவது இணைப்பின் போது, உங்கள் சாதனத்தின் தரவு இணைப்பை முடக்கும். <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>க்கு அணுகல் வழங்கவும்"</string>
+    <!-- no translation found for bluetooth_device_name_summary (4418784300859596202) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"தேதி &amp; நேரம்"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"நேரமண்டலத்தைத் தேர்வுசெய்க"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -1022,6 +1025,10 @@
     <string name="lift_to_wake_title" msgid="4555378006856277635">"விரலை எடுக்கும் போது இயங்கு"</string>
     <string name="doze_title" msgid="2259176504273878294">"சூழல்சார் திரை"</string>
     <string name="doze_summary" msgid="3846219936142814032">"அறிவிப்புகளைப் பெறும் போது திரையை இயக்கு"</string>
+    <!-- no translation found for doze_always_on_title (1046222370442629646) -->
+    <skip />
+    <!-- no translation found for doze_always_on_summary (1254238982577776475) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"எழுத்துரு அளவு"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"உரையைப் பெரிதாக்கும் அல்லது சிறிதாக்கும்"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"சிம் கார்டின் பூட்டு அமைப்பு"</string>
@@ -1860,8 +1867,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> சேவையை பயன்படுத்தவா?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> செய்வது:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"அனுமதிக் கோரிக்கையைப் பயன்பாடு மறைப்பதால், அமைப்புகளால் உங்கள் பதிலைச் சரிபார்க்க முடியாது."</string>
-    <!-- no translation found for window_obscured_warning (8711643931674708175) -->
-    <skip />
+    <string name="window_obscured_warning" msgid="8711643931674708175">"இந்த விருப்பங்களின் மேலே மற்றொரு பயன்பாடு தோன்றுவதால், உங்கள் செயலுக்கு ஏற்ப அமைப்புகளால் செயல்பட முடியவில்லை."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>ஐ இயக்கினால், தரவு மறையாக்கத்தை மேம்படுத்த சாதனம் திரைப் பூட்டைப் பயன்படுத்தாது."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"அணுகல்தன்மை சேவையை இயக்கியுள்ளதால், தரவு மறையாக்கத்தை மேம்படுத்த சாதனம் திரைப் பூட்டைப் பயன்படுத்தாது."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> சேவையை இயக்குவது தரவுக் குறியாக்கத்தைப் பாதிக்கும் என்பதால், வடிவத்தை நீங்கள் உறுதிப்படுத்த வேண்டும்."</string>
@@ -2789,6 +2795,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"அறிவிப்புகள்"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"மேம்பட்டவை"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"பணி அறிவிப்புகள்"</string>
+    <!-- no translation found for notification_badging_title (5125022693565388760) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"ஒளியைச் சிமிட்டு"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"பூட்டுத் திரையில்"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"எல்லா அறிவிப்பு விவரத்தையும் காட்டு"</string>
@@ -2814,7 +2822,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"நடுத்தர முக்கியத்துவம்"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"அதிக முக்கியத்துவம்"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"மிக அதிக முக்கியத்துவம்"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"ஒலியை அனுமதி"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"ஒலியை அனுமதிக்கவும்"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"இந்த அறிவிப்புகளை நடப்புத் திரையில் காட்டும் போது ஒலி, அதிர்வை ஏற்படுத்தாது அல்லது திரையின் மேல் பகுதியில் காட்டாது."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"அறிவிப்பு உதவி"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"அறிவிப்பு அணுகல்"</string>
@@ -2870,8 +2878,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"இந்த அறிவிப்புகளை ஒருபோதும் காட்டாது"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"அறிவிப்புகளைக் காட்டு"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"ஷேட்டில் அல்லது துணைச் சாதனங்களில் அறிவிப்புகளை ஒருபோதும் காட்டாது"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"பேட்ஜ் பயன்பாட்டு ஐகான்"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"ஆதரித்தால், முகப்புப் பயன்பாட்டில் அறிவிப்புகளை பேட்ஜ்களாகக் காட்டும்."</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"ஐகான் பேட்ஜை அனுமதிக்கவும்"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"தொந்தரவு செய்ய வேண்டாம் அமைப்பை மாற்றவும்"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"தொந்தரவு செய்ய வேண்டாம் என்பது முன்னுரிமை மட்டும் என்பதாக அமைக்கப்படும் போது இந்த அறிவிப்புகளைத் தொடர்ந்து குறுக்கிட அனுமதிக்கவும்"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"பூட்டுத் திரையில்"</string>
@@ -3310,8 +3317,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> தரவு எச்சரிக்கை"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> தரவு எச்சரிக்கை / <xliff:g id="ID_2">%2$s</xliff:g> தரவு வரம்பு"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"பில்லிங் சுழற்சி"</string>
-    <!-- no translation found for billing_cycle_fragment_summary (8231066353654583106) -->
-    <skip />
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"மாதந்தோறும், <xliff:g id="ID_1">%1$s</xliff:g>வது நாள்"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"நெட்வொர்க் கட்டுப்பாடுகள்"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> கட்டுப்பாடுகள்</item>

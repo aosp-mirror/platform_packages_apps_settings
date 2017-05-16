@@ -16,6 +16,9 @@
 
 package com.android.settings.password;
 
+import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
+import android.os.CancellationSignal;
+
 /**
  * This is the workaround to allow us test {@link SetNewPasswordController} which uses a new hidden
  * API {@link android.hardware.fingerprint.FingerprintManager#hasEnrolledFingerprints(int)} that
@@ -28,4 +31,9 @@ public interface IFingerprintManager {
     boolean hasEnrolledFingerprints(int userId);
 
     long preEnroll();
+
+    void setActiveUser(int userId);
+
+    void enroll(byte [] token, CancellationSignal cancel, int flags,
+            int userId, EnrollmentCallback callback);
 }

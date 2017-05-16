@@ -26,6 +26,8 @@ import android.content.pm.ResolveInfo;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
+import com.android.settings.applications.PackageManagerWrapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,11 +108,10 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         return false;
     }
 
-    public static boolean isHomeDefault(String pkg, Context context) {
-        ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
-        PackageManager pm = context.getPackageManager();
+    public static boolean isHomeDefault(String pkg, PackageManagerWrapper pm) {
+        final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         ComponentName def = pm.getHomeActivities(homeActivities);
 
-        return def != null && def.getPackageName().equals(pkg);
+        return def == null || def.getPackageName().equals(pkg);
     }
 }

@@ -133,8 +133,7 @@ public final class SearchIndexableResources {
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
         addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(ManageAssist.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
-        addIndex(SpecialAccessSettings.class,
-                R.xml.special_access, R.drawable.ic_settings_applications);
+        addIndex(SpecialAccessSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
         addIndex(AssistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(PickupGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);

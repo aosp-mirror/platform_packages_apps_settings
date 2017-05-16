@@ -25,10 +25,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 /* Class to prompt for conversion of userdata to file based encryption
  */

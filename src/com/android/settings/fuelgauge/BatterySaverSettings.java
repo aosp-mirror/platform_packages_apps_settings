@@ -99,7 +99,6 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
             }
         };
         mTriggerPref.init(this);
-
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
     }
 

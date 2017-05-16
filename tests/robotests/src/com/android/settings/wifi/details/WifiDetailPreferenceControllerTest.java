@@ -58,9 +58,9 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 import com.android.settings.wifi.WifiDetailPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;

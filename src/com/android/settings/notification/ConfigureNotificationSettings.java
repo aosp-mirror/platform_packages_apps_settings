@@ -22,11 +22,11 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +58,8 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
+        final BadgingNotificationPreferenceController badgeController =
+                new BadgingNotificationPreferenceController(context);
         final PulseNotificationPreferenceController pulseController =
                 new PulseNotificationPreferenceController(context);
         final LockScreenNotificationPreferenceController lockScreenNotificationController =
@@ -67,6 +69,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             lifecycle.addObserver(lockScreenNotificationController);
         }
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
+        controllers.add(badgeController);
         controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);
         return controllers;
