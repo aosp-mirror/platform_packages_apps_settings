@@ -192,8 +192,7 @@ public class BatteryUtilsTest {
         final double totalUsage = mBatteryUtils.removeHiddenBatterySippers(sippers);
 
         assertThat(sippers).containsExactly(mNormalBatterySipper);
-        assertThat(totalUsage).isWithin(PRECISION).of(
-                BATTERY_SYSTEM_USAGE + BATTERY_UNACCOUNTED_USAGE);
+        assertThat(totalUsage).isWithin(PRECISION).of(BATTERY_SYSTEM_USAGE);
     }
 
     @Test

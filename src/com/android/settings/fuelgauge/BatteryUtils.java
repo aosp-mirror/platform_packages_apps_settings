@@ -132,8 +132,9 @@ public class BatteryUtils {
             if (shouldHideSipper(sipper)) {
                 sippers.remove(i);
                 if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED
-                        && sipper.drainType != BatterySipper.DrainType.SCREEN) {
-                    // Don't add it if it is overcounted or screen
+                        && sipper.drainType != BatterySipper.DrainType.SCREEN
+                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED) {
+                    // Don't add it if it is overcounted, unaccounted or screen
                     proportionalSmearPowerMah += sipper.totalPowerMah;
                 }
             }
