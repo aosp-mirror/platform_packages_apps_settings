@@ -95,5 +95,13 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
                 public List<PreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null, null /* host */);
                 }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add((new SpecialAppAccessPreferenceController(context))
+                            .getPreferenceKey());
+                    return keys;
+                }
             };
 }
