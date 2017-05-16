@@ -111,8 +111,7 @@
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"這樣會結束您與下列裝置的連線：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"您沒有變更藍牙設定的權限。"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"開啟藍牙設定時，附近的裝置可偵測到 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
-    <!-- no translation found for bluetooth_footer_mac_message (7829164289195116782) -->
-    <skip />
+    <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"藍牙 MAC 位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"解除與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」的連結？"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"廣播"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"停用個人資料？"</string>
@@ -160,8 +159,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s 想存取您的訊息，要授予 %2$s 存取權嗎？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 卡存取權要求"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> 要存取您的 SIM 卡。如果允許存取 SIM 卡，您裝置上的數據連線將於連線期間停用。允許 <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> 存取"</string>
-    <!-- no translation found for bluetooth_device_name_summary (4418784300859596202) -->
-    <skip />
+    <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"對其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期與時間"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"選擇時區"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -1025,10 +1023,8 @@
     <string name="lift_to_wake_title" msgid="4555378006856277635">"舉起即可喚醒"</string>
     <string name="doze_title" msgid="2259176504273878294">"環境顯示"</string>
     <string name="doze_summary" msgid="3846219936142814032">"收到通知時喚醒螢幕"</string>
-    <!-- no translation found for doze_always_on_title (1046222370442629646) -->
-    <skip />
-    <!-- no translation found for doze_always_on_summary (1254238982577776475) -->
-    <skip />
+    <string name="doze_always_on_title" msgid="1046222370442629646">"永遠開啟"</string>
+    <string name="doze_always_on_summary" msgid="1254238982577776475">"顯示時間、通知圖示和其他資料"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或縮小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
@@ -2798,8 +2794,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"通知"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"進階"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"工作通知"</string>
-    <!-- no translation found for notification_badging_title (5125022693565388760) -->
-    <skip />
+    <string name="notification_badging_title" msgid="5125022693565388760">"允許使用圖示標籤"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"閃燈"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"螢幕鎖定畫面上"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"顯示所有通知內容"</string>
@@ -2825,7 +2820,7 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"緊急"</string>
-    <string name="allow_sound" msgid="1820188704793497324">"開啟音效"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"允許發出音效"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"禁止這些通知發出音效、震動或不時於目前螢幕上出現。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知小幫手"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知存取權"</string>
@@ -2881,7 +2876,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"永不顯示這些通知"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"顯示通知"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"永不在通知欄或周邊裝置上顯示通知"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"標誌應用程式圖示"</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"允許顯示狀態標籤圖示"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"取代「請勿騷擾」"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"當「請勿騷擾」設定為「只限優先」時，允許顯示這些通知"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"螢幕鎖定畫面上"</string>
