@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,6 +22,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -89,6 +90,10 @@ public class SeekBarPreference extends RestrictedPreference
         mSeekBar.setMax(mMax);
         mSeekBar.setProgress(mProgress);
         mSeekBar.setEnabled(isEnabled());
+        final CharSequence title = getTitle();
+        if (!TextUtils.isEmpty(title)) {
+            mSeekBar.setContentDescription(title);
+        }
         if (mSeekBar instanceof DefaultIndicatorSeekBar) {
             ((DefaultIndicatorSeekBar) mSeekBar).setDefaultProgress(mDefaultProgress);
         }
