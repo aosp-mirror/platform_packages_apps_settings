@@ -9,6 +9,7 @@ LOCAL_JAVA_LIBRARIES := android.test.runner bouncycastle
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \
+    guava \
     mockito-target \
     espresso-core \
     espresso-contrib-nodep \
