@@ -39,6 +39,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +56,9 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WakeLockAnomalyDetectorTest {
-    private static final long ANOMALY_WAKELOCK_TIME_MS = DateUtils.HOUR_IN_MILLIS;
+    private static final long ANOMALY_WAKELOCK_TIME_MS = 2 * DateUtils.HOUR_IN_MILLIS;
     private static final long NORMAL_WAKELOCK_TIME_MS = DateUtils.SECOND_IN_MILLIS;
+    private static final long WAKELOCK_THRESHOLD_MS = DateUtils.HOUR_IN_MILLIS;
     private static final int ANOMALY_UID = 111;
     private static final int NORMAL_UID = 222;
     @Mock
@@ -82,6 +85,8 @@ public class WakeLockAnomalyDetectorTest {
     private PackageManager mPackageManager;
     @Mock
     private ApplicationInfo mApplicationInfo;
+    @Mock
+    private AnomalyDetectionPolicy mPolicy;
 
     private ArrayMap<String, BatteryStats.Uid.Wakelock> mAnomalyWakelocks;
     private ArrayMap<String, BatteryStats.Uid.Wakelock> mNormalWakelocks;
@@ -94,6 +99,7 @@ public class WakeLockAnomalyDetectorTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        ReflectionHelpers.setField(mPolicy, "wakeLockThreshold", WAKELOCK_THRESHOLD_MS);
 
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
         doReturn(mPackageManager).when(mContext).getPackageManager();
@@ -118,7 +124,7 @@ public class WakeLockAnomalyDetectorTest {
         mUsageList.add(mNormalSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
-        mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext));
+        mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext, mPolicy));
         mWakelockAnomalyDetector.mBatteryUtils = mBatteryUtils;
         doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
                 eq(mAnomalyTimer), anyLong());
@@ -136,5 +142,10 @@ public class WakeLockAnomalyDetectorTest {
         List<Anomaly> mAnomalies = mWakelockAnomalyDetector.detectAnomalies(mBatteryStatsHelper);
 
         assertThat(mAnomalies).containsExactly(anomaly);
+    }
+
+    @Test
+    public void testContainsThresholdFromPolicy() {
+        assertThat(mWakelockAnomalyDetector.mWakeLockThresholdMs).isEqualTo(WAKELOCK_THRESHOLD_MS);
     }
 }
