@@ -206,12 +206,6 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testShouldHideSipper_TypeWifi_ReturnTrue() {
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.WIFI;
-        assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
-    }
-
-    @Test
     public void testShouldHideSipper_TypeCell_ReturnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.CELL;
         assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
@@ -220,12 +214,6 @@ public class BatteryUtilsTest {
     @Test
     public void testShouldHideSipper_TypeScreen_ReturnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
-        assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSipper_TypeBluetooth_ReturnTrue() {
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
         assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
