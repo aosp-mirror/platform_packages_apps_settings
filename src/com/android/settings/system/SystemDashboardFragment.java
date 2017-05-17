@@ -37,6 +37,8 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";
 
+    private static final String KEY_RESET = "reset_dashboard";
+
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_SYSTEM_CATEGORY;
@@ -81,6 +83,15 @@ public class SystemDashboardFragment extends DashboardFragment {
                 @Override
                 public List<PreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add((new BackupSettingsActivityPreferenceController(context)
+                            .getPreferenceKey()));
+                    keys.add(KEY_RESET);
+                    return keys;
                 }
             };
 }
