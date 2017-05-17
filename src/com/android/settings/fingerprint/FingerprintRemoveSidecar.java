@@ -53,7 +53,7 @@ public class FingerprintRemoveSidecar extends InstrumentedPreferenceFragment {
     private FingerprintManager.RemovalCallback
             mRemoveCallback = new FingerprintManager.RemovalCallback() {
         @Override
-        public void onRemovalSucceeded(Fingerprint fingerprint) {
+        public void onRemovalSucceeded(Fingerprint fingerprint, int remaining) {
             if (mListener != null) {
                 mListener.onRemovalSucceeded(fingerprint);
             } else {
