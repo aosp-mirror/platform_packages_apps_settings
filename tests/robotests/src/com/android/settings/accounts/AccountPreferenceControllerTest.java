@@ -26,8 +26,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
-
 import android.text.TextUtils;
+
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -92,7 +92,7 @@ public class AccountPreferenceControllerTest {
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(
-            new AuthenticatorDescription[0]);
+                new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
         mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper);
     }
@@ -363,6 +363,51 @@ public class AccountPreferenceControllerTest {
 
         // should add 2 individual account and the Add account preference
         verify(preferenceGroup, times(3)).addPreference(any(Preference.class));
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void onResume_twoAccountsOfSameName_shouldAddFivePreferences() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        final Account[] accountType1 = new Account[2];
+        accountType1[0] = new Account("Account1", "com.acct1");
+        accountType1[1] = new Account("Account2", "com.acct1");
+        final Account[] accountType2 = new Account[2];
+        accountType2[0] = new Account("Account1", "com.acct2");
+        accountType2[1] = new Account("Account2", "com.acct2");
+        final Account[] allAccounts = new Account[4];
+        allAccounts[0] = accountType1[0];
+        allAccounts[1] = accountType1[1];
+        allAccounts[2] = accountType2[0];
+        allAccounts[3] = accountType2[1];
+        final AuthenticatorDescription[] authDescs = {
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false),
+                new AuthenticatorDescription("com.acct2", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false)
+        };
+
+        when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(allAccounts);
+        when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
+                .thenReturn(accountType1);
+        when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct2"), any(UserHandle.class)))
+                .thenReturn(accountType2);
+        when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
+
+        AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
+        when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
+        when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
+                preferenceGroup);
+
+        mController.onResume();
+
+        // should add 4 individual account and the Add account preference
+        verify(preferenceGroup, times(5)).addPreference(any(Preference.class));
     }
 
     @Test
