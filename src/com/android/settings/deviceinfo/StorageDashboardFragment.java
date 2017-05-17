@@ -133,7 +133,11 @@ public class StorageDashboardFragment extends DashboardFragment
 
         mPreferenceController.onLoadFinished(mAppsResult.get(UserHandle.myUserId()));
         updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
-        setLoading(false, true);
+
+        // setLoading always causes a flicker, so let's avoid doing it.
+        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
+            setLoading(false, true);
+        }
     }
 
     @Override
