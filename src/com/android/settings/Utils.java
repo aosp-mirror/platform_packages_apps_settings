@@ -103,6 +103,8 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.FingerprintManagerWrapper;
+import com.android.settings.password.IFingerprintManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -1192,6 +1194,15 @@ public final class Utils extends com.android.settingslib.Utils {
     public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             return context.getSystemService(FingerprintManager.class);
+        } else {
+            return null;
+        }
+    }
+
+    public static IFingerprintManager getFingerprintManagerWrapperOrNull(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        if (fingerprintManager != null) {
+            return new FingerprintManagerWrapper(fingerprintManager);
         } else {
             return null;
         }

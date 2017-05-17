@@ -40,7 +40,7 @@
         android:title="@string/notifications_label"
         android:selectable="true"/>
 
-    <Preference
+    <com.android.settings.widget.SingleLineSummaryPreference
         android:key="permission_settings"
         android:title="@string/permissions_label"
         android:summary="@string/summary_placeholder"

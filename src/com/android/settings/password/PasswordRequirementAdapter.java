@@ -23,12 +23,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.settings.R;
-
-import static com.android.settings.password.PasswordRequirementAdapter
-        .PasswordRequirementViewHolder;
+import com.android.settings.password.PasswordRequirementAdapter.PasswordRequirementViewHolder;
 
 /**
- * Used in {@link com.android.settings.ChooseLockPassword} to show password requirements.
+ * Used in {@link ChooseLockPassword} to show password requirements.
  */
 public class PasswordRequirementAdapter extends
         RecyclerView.Adapter<PasswordRequirementViewHolder> {

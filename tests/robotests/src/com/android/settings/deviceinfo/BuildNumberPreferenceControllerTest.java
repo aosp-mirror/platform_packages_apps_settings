@@ -29,9 +29,9 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.search2.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;

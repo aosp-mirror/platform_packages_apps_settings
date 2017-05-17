@@ -31,14 +31,13 @@ import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
-import android.provider.SearchIndexablesContract;
 import android.util.ArrayMap;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.IndexDatabaseHelper;
+import com.android.settings.search.IndexingCallback;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.shadow.ShadowDatabaseIndexingUtils;
@@ -49,6 +48,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
@@ -62,13 +62,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -96,6 +99,7 @@ public class DatabaseIndexingManagerTest {
     private final String screenTitle = "screen title";
     private final String className = "class name";
     private final int iconResId = 0xff;
+    private final int noIcon = 0;
     private final String action = "action";
     private final String targetPackage = "target package";
     private final String targetClass = "target class";
@@ -255,7 +259,7 @@ public class DatabaseIndexingManagerTest {
         SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(18);
+        assertThat(cursor.getCount()).isEqualTo(19);
     }
 
     @Test
@@ -270,7 +274,7 @@ public class DatabaseIndexingManagerTest {
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
         assertThat(cursor.getCount()).isEqualTo(2);
         cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(16);
+        assertThat(cursor.getCount()).isEqualTo(17);
     }
 
     @Test
@@ -391,7 +395,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
@@ -448,7 +452,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
@@ -505,7 +509,7 @@ public class DatabaseIndexingManagerTest {
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isEqualTo(action);
         // Target Package
@@ -525,6 +529,18 @@ public class DatabaseIndexingManagerTest {
         ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
                 ResultPayload.CREATOR);
         assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
+    }
+
+    @Test
+    public void testAddResource_iconAddedFromXml() {
+        SearchIndexableResource resource = getFakeResource(R.xml.connected_devices);
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
+        cursor.moveToPosition(0);
+
+        // Icon
+        assertThat(cursor.getInt(12)).isNotEqualTo(noIcon);
     }
 
     // Tests for the flow: IndexOneResource -> IndexFromProvider -> IndexFromResource ->
@@ -577,7 +593,7 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(11))
                 .isEqualTo("com.android.settings.display.ScreenZoomSettings");
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isNull();
         // Target Package
@@ -645,7 +661,7 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(11))
                 .isEqualTo("com.android.settings.display.ScreenZoomSettings");
         // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
         // Intent Action
         assertThat(cursor.getString(13)).isNull();
         // Target Package
@@ -927,7 +943,7 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testUpdateDataInDatabase_DisabledResultsAreIndexable_BecomeEnabled() {
+    public void testUpdateDataInDatabase_disabledResultsAreIndexable_becomeEnabled() {
         // Both results are initially disabled, and then TITLE_TWO gets enabled.
         final boolean enabled = false;
         insertSpecialCase(TITLE_ONE, enabled, KEY_ONE);
@@ -943,6 +959,44 @@ public class DatabaseIndexingManagerTest {
         cursor.moveToPosition(0);
 
         assertThat(cursor.getString(2)).isEqualTo(TITLE_TWO);
+    }
+
+    @Test
+    @Config(shadows = {ShadowContentResolver.class})
+    public void testEmptyNonIndexableKeys_emptyDataKeyResources_addedToDatabase() {
+        insertSpecialCase(TITLE_ONE, true /* enabled */, null /* dataReferenceKey */);
+
+        mManager.updateDatabase(false, localeStr);
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
+        cursor.moveToPosition(0);
+        assertThat(cursor.getCount()).isEqualTo(1);
+        assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
+    }
+
+    @Test
+    public void testUpdateAsyncTask_onPostExecute_performsCallback() {
+        IndexingCallback callback = mock(IndexingCallback.class);
+
+        DatabaseIndexingManager.IndexingTask task = mManager.new IndexingTask(callback);
+        task.execute();
+
+        Robolectric.flushForegroundThreadScheduler();
+
+        verify(callback).onIndexingFinished();
+    }
+
+    @Test
+    public void testUpdateAsyncTask_onPostExecute_setsIndexingComplete() {
+        SearchFeatureProviderImpl provider = new SearchFeatureProviderImpl();
+        DatabaseIndexingManager manager = spy(provider.getIndexingManager(mContext));
+        DatabaseIndexingManager.IndexingTask task = manager.new IndexingTask(null);
+        doNothing().when(manager).performIndexing();
+
+        task.execute();
+        Robolectric.flushForegroundThreadScheduler();
+
+        assertThat(provider.isIndexingComplete(mContext)).isTrue();
     }
 
     // Util functions
@@ -1010,11 +1064,11 @@ public class DatabaseIndexingManagerTest {
     // TODO move this method and its counterpart in CursorToSearchResultConverterTest into
     // a util class with public fields to assert values.
     private Cursor getDummyCursor() {
-        MatrixCursor cursor = new MatrixCursor(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         final String BLANK = "";
 
         ArrayList<String> item =
-                new ArrayList<>(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS.length);
+                new ArrayList<>(INDEXABLES_RAW_COLUMNS.length);
         item.add("42"); // Rank
         item.add(TITLE_ONE); // Title
         item.add(BLANK); // Summary on

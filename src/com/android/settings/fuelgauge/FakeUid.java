@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.os.BatteryStats;
+import android.os.BatteryStats.Counter;
 import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
 import android.util.ArrayMap;
@@ -291,6 +292,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public Counter getBluetoothScanResultCounter() {
+        return null;
+    }
+
+    @Override
     public long getWifiRadioApWakeupCount(int which) {
         return 0;
     }
@@ -298,5 +304,15 @@ public class FakeUid extends Uid {
     @Override
     public long getMobileRadioApWakeupCount(int which) {
         return 0;
+    }
+
+    @Override
+    public long[] getCpuFreqTimes(int which) {
+        return null;
+    }
+
+    @Override
+    public long[] getScreenOffCpuFreqTimes(int which) {
+        return null;
     }
 }

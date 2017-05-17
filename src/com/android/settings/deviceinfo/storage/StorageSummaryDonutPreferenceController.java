@@ -34,6 +34,7 @@ import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 public class StorageSummaryDonutPreferenceController extends PreferenceController {
     private long mUsedBytes;
     private long mTotalBytes;
+    private StorageSummaryDonutPreference mSummary;
 
     public StorageSummaryDonutPreferenceController(Context context) {
         super(context);
@@ -41,9 +42,8 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        StorageSummaryDonutPreference summary = (StorageSummaryDonutPreference)
-                screen.findPreference("pref_summary");
-        summary.setEnabled(true);
+        mSummary = (StorageSummaryDonutPreference) screen.findPreference("pref_summary");
+        mSummary.setEnabled(true);
     }
 
     @Override
@@ -59,6 +59,13 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
                 Formatter.formatShortFileSize(mContext, mTotalBytes)));
         summary.setPercent(mUsedBytes, mTotalBytes);
         summary.setEnabled(true);
+    }
+
+    /** Invalidates the data on the view and re-renders. */
+    public void invalidateData() {
+        if (mSummary != null) {
+            updateState(mSummary);
+        }
     }
 
     @Override
@@ -79,6 +86,7 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
     public void updateBytes(long used, long total) {
         mUsedBytes = used;
         mTotalBytes = total;
+        invalidateData();
     }
 
     /**

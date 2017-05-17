@@ -16,6 +16,25 @@
 
 package com.android.settings.password;
 
+import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
+
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
+        .HIDE_DISABLED_PREFS;
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
+        .MINIMUM_QUALITY_KEY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -32,20 +51,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
-import static com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS;
-import static com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY;
-import static com.android.settings.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE;
-import static com.android.settings.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
-import static com.android.settings.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 /**

@@ -39,7 +39,7 @@ import android.support.v7.preference.Preference;
 import com.android.settings.network.NetworkScoreManagerWrapper;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;

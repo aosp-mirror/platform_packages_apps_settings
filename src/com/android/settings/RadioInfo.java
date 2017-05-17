@@ -412,7 +412,7 @@ public class RadioInfo extends Activity {
         imsVolteProvisionedSwitch = (Switch) findViewById(R.id.volte_provisioned_switch);
         imsVtProvisionedSwitch = (Switch) findViewById(R.id.vt_provisioned_switch);
         imsWfcProvisionedSwitch = (Switch) findViewById(R.id.wfc_provisioned_switch);
-        eabProvisionedSwitch = (Switch) findViewById(R.id.wfc_provisioned_switch);
+        eabProvisionedSwitch = (Switch) findViewById(R.id.eab_provisioned_switch);
 
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 

@@ -24,8 +24,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +35,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -111,9 +114,9 @@ public class SuggestionFeatureProviderImplTest {
     public void getSuggestionIdentifier_nullContext_shouldNotCrash() {
         final Tile suggestion = new Tile();
         suggestion.intent = new Intent()
-            .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
+                .setClassName(RuntimeEnvironment.application.getPackageName(), "123");
         assertThat(mProvider.getSuggestionIdentifier(null, suggestion))
-            .isNotEmpty();
+                .isNotEmpty();
     }
 
     @Test
@@ -152,6 +155,21 @@ public class SuggestionFeatureProviderImplTest {
                 .setComponentEnabledSetting(mSuggestion.intent.getComponent(),
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                         PackageManager.DONT_KILL_APP);
-        verify(mSuggestionParser).markCategoryDone(mSuggestion.category);
+    }
+
+    @Test
+    public void filterExclusiveSuggestions_shouldOnlyKeepFirst3() {
+        final List<Tile> suggestions = new ArrayList<>();
+        suggestions.add(new Tile());
+        suggestions.add(new Tile());
+        suggestions.add(new Tile());
+        suggestions.add(new Tile());
+        suggestions.add(new Tile());
+        suggestions.add(new Tile());
+        suggestions.add(new Tile());
+
+        mProvider.filterExclusiveSuggestions(suggestions);
+
+        assertThat(suggestions).hasSize(3);
     }
 }

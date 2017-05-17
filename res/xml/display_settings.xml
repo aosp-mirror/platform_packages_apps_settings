@@ -31,6 +31,7 @@
         android:key="night_display"
         android:title="@string/night_display_title"
         android:fragment="com.android.settings.display.NightDisplaySettings"
+        android:widgetLayout="@null"
         settings:widgetLayout="@null"
         settings:keywords="@string/keywords_display_night_display" />
 
@@ -53,14 +54,13 @@
     <com.android.settings.TimeoutListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout"
-        android:summary="@string/screen_timeout_summary"
+        android:summary="@string/summary_placeholder"
         android:entries="@array/screen_timeout_entries"
         android:entryValues="@array/screen_timeout_values" />
 
-    <DropDownPreference
+    <SwitchPreference
         android:key="auto_rotate"
-        android:summary="%s"
-        android:title="@string/display_auto_rotate_title" />
+        android:title="@string/accelerometer_title" />
 
     <Preference
         android:key="font_size"
@@ -76,7 +76,7 @@
     <Preference
         android:key="screensaver"
         android:title="@string/screensaver_settings_title"
-        android:fragment="com.android.settings.DreamSettings" />
+        android:fragment="com.android.settings.dream.DreamSettings" />
 
     <!-- Hide night mode for now
     <ListPreference
@@ -112,6 +112,11 @@
         android:summary="@string/doze_summary" />
 
     <SwitchPreference
+        android:key="doze_always_on"
+        android:title="@string/doze_always_on_title"
+        android:summary="@string/doze_always_on_summary" />
+
+    <SwitchPreference
         android:key="tap_to_wake"
         android:title="@string/tap_to_wake"
         android:summary="@string/tap_to_wake_summary" />
@@ -119,7 +124,7 @@
     <ListPreference
         android:key="theme"
         android:title="@string/device_theme"
-        android:summary="%s" />
+        android:summary="@string/summary_placeholder" />
 
     <Preference
         android:key="vr_display_pref"

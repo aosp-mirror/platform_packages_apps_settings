@@ -47,6 +47,7 @@ import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
+import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
@@ -132,8 +133,7 @@ public final class SearchIndexableResources {
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
         addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(ManageAssist.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
-        addIndex(SpecialAccessSettings.class,
-                R.xml.special_access, R.drawable.ic_settings_applications);
+        addIndex(SpecialAccessSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
         addIndex(AssistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(PickupGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
@@ -185,6 +185,7 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_accessibility);
         addIndex(ChannelImportanceSettings.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_notifications);
+        addIndex(DreamSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
     }
 
     private SearchIndexableResources() {

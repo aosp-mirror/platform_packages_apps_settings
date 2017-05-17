@@ -43,6 +43,9 @@
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
     <string name="show_dev_already">No need, you are already a developer.</string>
 
+    <!-- [CHAR LIMIT=NONE] Toast message when user attemps to launch developer otions before enabling it. -->
+    <string name="dev_settings_disabled_warning">Please enable developer options first.</string>
+
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
     <string name="header_category_wireless_networks">Wireless &amp; networks</string>
@@ -243,9 +246,13 @@
     <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
     <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
+    <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
+    <string name="bluetooth_pairing_pref_title">Pair a new device</string>
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message">Bluetooth MAC address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
     <!-- Bluetooth Visibility discoonect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
     <string name="bluetooth_is_disconnect_question">Disconnect <xliff:g id="device_name">%1$s</xliff:g>?</string>
     <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
@@ -367,6 +374,9 @@
 
     <!-- Bluetooth SIM access permission Alert Activity text [CHAR LIMIT=none] -->
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
+
+    <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
+    <string name="bluetooth_device_name_summary">Visible as <xliff:g id="device_name">^1</xliff:g> to other devices</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -746,11 +756,13 @@
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security &amp; Location</string>
+    <string name="security_settings_title">Security &amp; location</string>
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
-    <string name="encryption_and_credential_settings_summary">Phone encrypted</string>
+    <string name="encryption_and_credential_settings_summary" product="default">Phone encrypted</string>
+    <!-- Security Settings screen Encryption and crendential summary -->
+    <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen preferences</string>
 
@@ -2125,6 +2137,9 @@
     <string name="sound_settings">Sound</string>
     <!-- DO NOT TRANSLATE Summary placeholder -->
     <string name="summary_placeholder" translatable="false">&#160;</string>
+    <!-- DO NOT TRANSLATE Summary placeholder reserving 2 lines -->
+    <string name="summary_two_lines_placeholder" translatable="false">&#160;\n&#160;</string>
+
     <!-- DO NOT TRANSLATE Empty summary for dynamic preferences -->
     <string name="summary_empty" translatable="false"></string>
     <!-- Sound settings screen, volume title -->
@@ -2382,6 +2397,10 @@
     <string name="doze_title">Ambient display</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the ambient display feature. -->
     <string name="doze_summary">Wake screen when you receive notifications</string>
+    <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the always-on ambient display feature is enabled. -->
+    <string name="doze_always_on_title">Always on</string>
+    <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature. -->
+    <string name="doze_always_on_summary">Show time, notification icons, and other info</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
@@ -3470,6 +3489,10 @@
     <string name="install_applications">Unknown sources</string>
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  [CHAR LIMIT=30] -->
     <string name="install_applications_title">Allow all app sources</string>
+    <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
+    <string name="recent_app_category_title">Recently used apps</string>
+    <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
+    <string name="see_all_apps_title">See all apps</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="tablet">
@@ -4309,6 +4332,11 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
+    <!-- Warning shown when user input has been blocked due to another app overlaying screen
+         content. Since we don't know what the app is showing on top of the input target, we
+         can't verify user consent. [CHAR LIMIT=NONE] -->
+    <string name="window_obscured_warning">Because another app is displaying on top of these options,
+        Settings can\u2019t respond to your action.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
         enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
     <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
@@ -4539,6 +4567,9 @@
     <string name="controls_subtitle">Adjust power use</string>
     <!-- Subtitle for list of packages -->
     <string name="packages_subtitle">Included packages</string>
+
+    <!-- Activity title for battery abnormal details page [CHAR LIMIT=60] -->
+    <string name="battery_abnormal_details_title">Abnormal app behavior</string>
 
     <!-- Label for power consumed by the screen -->
     <string name="power_screen">Screen</string>
@@ -6522,6 +6553,9 @@
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
 
+    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30] -->
+    <string name="notification_badging_title">Allow icon badges</string>
+
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
@@ -6583,6 +6617,12 @@
     <!-- [CHAR LIMIT=100] Notification Importance: blocked importance level description -->
     <string name="notification_importance_blocked">Never show notifications</string>
 
+    <!-- [CHAR LIMIT=100] Notification Importance template for the channel importance summary -->
+    <string name="notification_importance_divider" translatable="false"><xliff:g id="importance_title">%1$s</xliff:g>: <xliff:g id="importance_summary">%2$s</xliff:g></string>
+
+    <!-- Importance title strings for the Importance page. Also the second part of the importance
+     summary on the channel page-->
+
     <!-- [CHAR LIMIT=100] Notification Importance: min importance level description -->
     <string name="notification_importance_min">No sound or visual interruption</string>
 
@@ -6594,6 +6634,9 @@
 
     <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
+
+    <!-- Importance title strings for the Importance page. Also the first part of the importance
+     summary on the channel page-->
 
     <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
     <string name="notification_importance_min_title">Low</string>
@@ -6607,8 +6650,8 @@
     <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
     <string name="notification_importance_high_title">Urgent</string>
 
-    <!-- [CHAR LIMIT=40] Notification importance title -->
-    <string name="allow_sound">Allow Sound</string>
+    <!-- [CHAR LIMIT=40 BACKUP_MESSAGE_ID:6585849855452076626] Notification importance title -->
+    <string name="allow_sound">Allow sound</string>
 
     <!-- [CHAR LIMIT=180] Notification importance summary -->
     <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
@@ -6699,12 +6742,6 @@
     <!-- Apps > App Details > Picture-in-picture > Description. [CHAR LIMIT=NONE] -->
     <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you're using.</string>
 
-    <!-- Summary of app allowed to enter picture-in-picture. [CHAR LIMIT=60] -->
-    <string name="picture_in_picture_on">Yes</string>
-
-    <!-- Summary of app not allowed to enter picture-in-picture. [CHAR LIMIT=60] -->
-    <string name="picture_in_picture_off">No</string>
-
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
 
@@ -6767,11 +6804,8 @@
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
     <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
 
-    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badging option title -->
-    <string name="notification_badge_title">Badge app icon</string>
-
-    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badge option description-->
-    <string name="notification_badge_summary">Show notifications as badges on the Home app, if supported.</string>
+    <!-- [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
+    <string name="notification_badge_title">Allow icon badge</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
@@ -7065,17 +7099,6 @@
 
     <!-- Summary Title for saying that the preference is experimental and will evolve over time due to User feedback. [CHAR LIMIT=NONE] -->
     <string name="experimental_preference">(Experimental)</string>
-
-    <!-- [CHAR LIMIT=45] Auto-rotate setting title -->
-    <string name="display_auto_rotate_title">Device rotation</string>
-    <!-- [CHAR LIMIT=70] Rotate when screen is turned option -->
-    <string name="display_auto_rotate_rotate">Rotate the contents of the screen</string>
-    <!-- [CHAR LIMIT=70] Keep the screen in portrait when rotated -->
-    <string name="display_auto_rotate_stay_in_portrait">Stay in portrait view</string>
-    <!-- [CHAR LIMIT=70] Keep the screen in landscape when rotated -->
-    <string name="display_auto_rotate_stay_in_landscape">Stay in landscape view</string>
-    <!-- [CHAR LIMIT=70] Don't rotate when screen is turned option -->
-    <string name="display_auto_rotate_stay_in_current">Stay in current orientation</string>
 
     <!-- Encryption interstitial title. This screen asks the user whether the device will ask for a PIN / pattern / password before the device starts up. [CHAR LIMIT=30] -->
     <string name="encryption_interstitial_header">Secure start-up</string>
@@ -7407,11 +7430,11 @@
     <!-- Title for high usage item, which means power high usage [CHAR LIMIT=30] -->
     <string name="power_high_usage_title">High usage</string>
 
-    <!-- Summary for high usage item, showing one app is behaving abnormally [CHAR LIMIT=80] -->
-    <string name="power_high_usage_summary"><xliff:g id="app">%1$s</xliff:g> behaving abnormally</string>
-
-    <!-- Summary for high usage item, showing several apps are behaving abnormally [CHAR LIMIT=80] -->
-    <string name="power_high_usage_multiple_apps_summary"><xliff:g id="number">%1$d</xliff:g> apps behaving abnormally</string>
+    <!-- Summary for high usage item, showing app/apps are behaving abnormally [CHAR LIMIT=80] -->
+    <plurals name="power_high_usage_summary">
+        <item quantity="one"><xliff:g id="app">%1$s</xliff:g> behaving abnormally</item>
+        <item quantity="other"><xliff:g id="number">%2$d</xliff:g> apps behaving abnormally</item>
+    </plurals>
 
     <!-- Filter for apps allowed to use a lot of power [CHAR LIMIT=25] -->
     <string name="high_power_filter_on">Not optimized</string>
@@ -7679,10 +7702,12 @@
 
     <!-- Label for showing apps that can display over other apps [CHAR LIMIT=45] -->
     <string name="filter_overlay_apps">Apps with permission</string>
-    <!-- Summary of app allowed to display over other apps [CHAR LIMIT=60] -->
-    <string name="system_alert_window_on">Yes</string>
-    <!-- Summary of app not allowed to display over other apps [CHAR LIMIT=60] -->
-    <string name="system_alert_window_off">No</string>
+
+    <!-- Preference summary text for an app when it is allowed for a permission. [CHAR LIMIT=45] -->
+    <string name="app_permission_summary_allowed">Allowed</string>
+
+    <!-- Preference summary text for an app when it is disallowed for a permission. [CHAR LIMIT=45] -->
+    <string name="app_permission_summary_not_allowed">Not allowed</string>
 
     <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
     <string name="install_other_apps">Install unknown apps</string>
@@ -7711,14 +7736,6 @@
     <string name="permit_write_settings">Allow modify system settings</string>
     <!-- Description of the write system settings [CHAR LIMIT=NONE] -->
     <string name="write_settings_description">This permission allows an app to modify system settings.</string>
-    <!-- Summary of app allowed to write system settings [CHAR LIMIT=45] -->
-    <string name="write_settings_on">Yes</string>
-    <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
-    <string name="write_settings_off">No</string>
-    <!-- Summary of app trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_trusted">Allowed</string>
-    <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_untrusted">Not allowed</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
     <string name="external_source_switch_title">Allow from this source</string>
 
@@ -7975,10 +7992,7 @@
     <string name="billing_cycle">Billing cycle</string>
 
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
-    <string name="billing_cycle_summary">Monthly cycle starts on the <xliff:g name="day" example="1st">%1$s</xliff:g> of every month</string>
-
-    <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
-    <string name="billing_cycle_fragment_summary">Monthly starting <xliff:g name="day_of_month" example="1st">%1$s</xliff:g></string>
+    <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>
 
     <!-- Title of button and screen for which wifi networks have data restrictions [CHAR LIMIT=30 -->
     <string name="network_restrictions">Network restrictions</string>
@@ -8192,7 +8206,7 @@
     <string name="page_tab_title_support">Support</string>
 
     <!-- Summary of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
-    <string name="developer_density_summary"><xliff:g name="count" example="320">%d</xliff:g> dp</string>
+    <string name="density_pixel_summary" translatable="false"><xliff:g name="count" example="320">%1$s</xliff:g> dp</string>
 
     <!-- Title of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
     <string name="developer_smallest_width">Smallest width</string>
@@ -8435,13 +8449,13 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device">To check your notifications, swipe down on the fingerprint sensor on the back of your device.</string>
 
     <!-- Title and settings suggestion title text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
-    <string name="camera_lift_trigger_title">Lift to open camera</string>
+    <string name="camera_lift_trigger_title">Raise to open camera</string>
 
     <!-- Summary text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=none]-->
     <string name="camera_lift_trigger_summary">To open the camera automatically, lift up your phone into a photo-taking position (landscape or portrait). Works when your phone is asleep or locked.</string>
 
     <!-- Settings suggestion summary text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
-    <string name="camera_lift_trigger_suggestion_summary">Never miss a moment</string>
+    <string name="camera_lift_trigger_suggestion_summary">Take photos from lock screen</string>
 
     <!-- Title text for the assist gesture [CHAR LIMIT=60]-->
     <string name="assist_gesture_title">Assist gesture</string>
@@ -8716,5 +8730,6 @@
     <!-- Trigger Carrier Provisioning [CHAR LIMIT=NONE] -->
     <string name="trigger_carrier_provisioning">Trigger Carrier Provisioning</string>
 
-
+    <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
+    <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
 </resources>

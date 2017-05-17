@@ -25,10 +25,10 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * {@link PreferenceController} to toggle Wifi Direct preference on Wi-Fi state.

@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -115,6 +113,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -1200,7 +1200,8 @@ public class InstalledAppDetails extends AppInfoBase
         Preference pref = findPreference("default_home");
 
         if (pref != null) {
-            pref.setSummary(DefaultHomePreferenceController.isHomeDefault(mPackageName, context)
+            pref.setSummary(DefaultHomePreferenceController.isHomeDefault(mPackageName,
+                    new PackageManagerWrapperImpl(context.getPackageManager()))
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_browser");

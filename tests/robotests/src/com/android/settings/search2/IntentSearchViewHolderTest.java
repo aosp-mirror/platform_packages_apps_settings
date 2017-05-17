@@ -78,7 +78,7 @@ public class IntentSearchViewHolderTest {
     }
 
     @Test
-    public void testConstructor_MembersNotNull() {
+    public void testConstructor_membersNotNull() {
         assertThat(mHolder.titleView).isNotNull();
         assertThat(mHolder.summaryView).isNotNull();
         assertThat(mHolder.iconView).isNotNull();
@@ -86,8 +86,8 @@ public class IntentSearchViewHolderTest {
     }
 
     @Test
-    public void testBindViewElements_AllUpdated() {
-        SearchResult result = getSearchResult();
+    public void testBindViewElements_allUpdated() {
+        SearchResult result = getSearchResult(TITLE, SUMMARY, mIcon);
         mHolder.onBind(mFragment, result);
         mHolder.itemView.performClick();
 
@@ -106,8 +106,17 @@ public class IntentSearchViewHolderTest {
     }
 
     @Test
+    public void testBindViewIcon_nullIcon_imageDrawableIsNull() {
+        final SearchResult result = getSearchResult(TITLE, SUMMARY, null);
+        mHolder.onBind(mFragment, result);
+
+        assertThat(mHolder.iconView.getDrawable()).isNull();
+    }
+
+    @Test
     public void testBindViewElements_emptySummary_hideSummaryView() {
-        final SearchResult result = new Builder().addTitle(TITLE)
+        final SearchResult result = new Builder()
+                .addTitle(TITLE)
                 .addRank(1)
                 .addPayload(new ResultPayload(null))
                 .addIcon(mIcon)
@@ -123,7 +132,8 @@ public class IntentSearchViewHolderTest {
         breadcrumbs.add("a");
         breadcrumbs.add("b");
         breadcrumbs.add("c");
-        final SearchResult result = new Builder().addTitle(TITLE)
+        final SearchResult result = new Builder()
+                .addTitle(TITLE)
                 .addRank(1)
                 .addPayload(new ResultPayload(null))
                 .addBreadcrumbs(breadcrumbs)
@@ -135,15 +145,29 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.breadcrumbView.getText()).isEqualTo("a > b > c");
     }
 
-    private SearchResult getSearchResult() {
+    @Test
+    public void testBindElements_placeholderSummary_visibilityIsGone() {
+        String nonBreakingSpace = mContext.getString(R.string.summary_placeholder);
+        SearchResult result = new Builder()
+                .addTitle(TITLE)
+                .addSummary(nonBreakingSpace)
+                .addPayload(new ResultPayload(null))
+                .build();
+
+        mHolder.onBind(mFragment, result);
+
+        assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    private SearchResult getSearchResult(String title, String summary, Drawable icon) {
         Builder builder = new Builder();
-        builder.addTitle(TITLE)
-                .addSummary(SUMMARY)
+        builder.addTitle(title)
+                .addSummary(summary)
                 .addRank(1)
                 .addPayload(new ResultPayload(
                         new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(mIcon);
+                .addIcon(icon);
 
         return builder.build();
     }

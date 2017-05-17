@@ -15,12 +15,17 @@
  */
 package com.android.settings.fuelgauge;
 
+import java.util.List;
+import org.robolectric.RuntimeEnvironment;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.content.ContentResolver;
 import android.os.PowerManager;
-import android.os.Process;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +42,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
@@ -47,14 +53,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
@@ -65,7 +68,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -91,6 +93,7 @@ public class PowerUsageSummaryTest {
     private static final String STUB_STRING = "stub_string";
     private static final int BATTERY_LEVEL = 55;
     private static final int UID = 123;
+    private static final int UID_2 = 234;
     private static final int POWER_MAH = 100;
     private static final long REMAINING_TIME_US = 100000;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
@@ -128,8 +131,6 @@ public class PowerUsageSummaryTest {
     @Mock
     private LayoutPreference mBatteryLayoutPref;
     @Mock
-    private TextView mBatteryPercentText;
-    @Mock
     private TextView mSummary1;
     @Mock
     private BatteryInfo mBatteryInfo;
@@ -139,7 +140,12 @@ public class PowerUsageSummaryTest {
     private PowerManager mPowerManager;
     @Mock
     private SettingsActivity mSettingsActivity;
+    @Mock
+    private LoaderManager mLoaderManager;
+    @Mock
+    private ContentResolver mContentResolver;
 
+    private TextView mBatteryPercentText;
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
     private TestFragment mFragment;
@@ -148,6 +154,7 @@ public class PowerUsageSummaryTest {
     private PowerGaugePreference mPreference;
     private PowerGaugePreference mScreenUsagePref;
     private PowerGaugePreference mLastFullChargePref;
+    private SparseArray<List<Anomaly>> mAnomalySparseArray;
 
     @Before
     public void setUp() {
@@ -163,7 +170,7 @@ public class PowerUsageSummaryTest {
         mLastFullChargePref = new PowerGaugePreference(mRealContext);
         mFragment = spy(new TestFragment(mContext));
         mFragment.initFeatureProvider();
-        mBatteryMeterView = new BatteryMeterView(mRealContext);
+        mBatteryMeterView = spy(new BatteryMeterView(mRealContext));
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
@@ -185,6 +192,7 @@ public class PowerUsageSummaryTest {
         mCellBatterySipper.drainType = BatterySipper.DrainType.CELL;
         mCellBatterySipper.totalPowerMah = POWER_MAH;
 
+        mBatteryPercentText = new TextView(mRealContext);
         when(mBatteryLayoutPref.findViewById(R.id.summary1)).thenReturn(mSummary1);
         when(mBatteryLayoutPref.findViewById(R.id.battery_percent)).thenReturn(mBatteryPercentText);
         when(mBatteryLayoutPref.findViewById(R.id.battery_header_icon))
@@ -275,6 +283,50 @@ public class PowerUsageSummaryTest {
     public void testOptionsMenu_clickToggleAppsMenu_dataChanged() {
         testToggleAllApps(true);
         testToggleAllApps(false);
+    }
+
+    @Test
+    public void testInitHeaderPreference_initCorrectly() {
+        mFragment.mBatteryLevel = 100;
+
+        mFragment.initHeaderPreference();
+
+        assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(100);
+        assertThat(mBatteryPercentText.getText().toString()).isEqualTo("100%");
+    }
+
+    @Test
+    public void testStartBatteryHeaderAnimationIfNecessary_batteryLevelChanged_animationStarted() {
+        final int prevLevel = 100;
+        final int curLevel = 80;
+
+        mFragment.startBatteryHeaderAnimationIfNecessary(mBatteryMeterView, mBatteryPercentText,
+                prevLevel, curLevel);
+
+        assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(curLevel);
+        assertThat(mBatteryPercentText.getText().toString()).isEqualTo("80%");
+    }
+
+    @Test
+    public void testOnSaveInstanceState_saveBatteryLevel() {
+        Bundle bundle = new Bundle();
+        mFragment.mBatteryLevel = BATTERY_LEVEL;
+        // mock it to stop crash in getPreferenceScreen
+        doReturn(null).when(mFragment).getPreferenceScreen();
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.getInt(PowerUsageSummary.ARG_BATTERY_LEVEL)).isEqualTo(BATTERY_LEVEL);
+    }
+
+    @Test
+    public void testOnActivityCreated_setBatteryLevel() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(PowerUsageSummary.ARG_BATTERY_LEVEL, BATTERY_LEVEL);
+
+        mFragment.onActivityCreated(bundle);
+
+        assertThat(mFragment.mBatteryLevel).isEqualTo(BATTERY_LEVEL);
     }
 
     @Test
@@ -462,6 +514,76 @@ public class PowerUsageSummaryTest {
         }
 
         assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
+    }
+
+    @Test
+    public void testUpdateAnomalySparseArray() {
+        mFragment.mAnomalySparseArray = new SparseArray<>();
+        final List<Anomaly> anomalies = new ArrayList<>();
+        final Anomaly anomaly1 = new Anomaly.Builder().setUid(UID).build();
+        final Anomaly anomaly2 = new Anomaly.Builder().setUid(UID).build();
+        final Anomaly anomaly3 = new Anomaly.Builder().setUid(UID_2).build();
+        anomalies.add(anomaly1);
+        anomalies.add(anomaly2);
+        anomalies.add(anomaly3);
+
+        mFragment.updateAnomalySparseArray(anomalies);
+
+        assertThat(mFragment.mAnomalySparseArray.get(UID)).containsExactly(anomaly1, anomaly2);
+        assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
+    }
+
+    @Test
+    public void testUseEnhancedEstimateIfAvailable() {
+        // mock out the provider
+        final long time = 60 * 1000 * 1000;
+        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
+        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(true);
+        mFragment.mPowerFeatureProvider = provider;
+        mFragment.mEnhancedEstimate = time;
+
+        mFragment.useEnhancedEstimateIfAvailable(mRealContext, mBatteryInfo);
+
+        // The string that gets returned always has weird whitespacing to make it fit
+        // so we're just going to check that it contains the correct value we care about.
+        assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(time);
+        assertThat(mBatteryInfo.remainingLabel).contains("About 17 hrs");
+    }
+
+    @Test
+    public void testUseEnhancedEstimateIfAvailable_noOpsOnDisabled() {
+        // mock out the provider
+        final long time = 60 * 1000 * 1000;
+        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
+        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(false);
+        mFragment.mPowerFeatureProvider = provider;
+        mFragment.mEnhancedEstimate = time;
+        mBatteryInfo.remainingTimeUs = TIME_SINCE_LAST_FULL_CHARGE_US;
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+
+        mFragment.useEnhancedEstimateIfAvailable(mRealContext, mBatteryInfo);
+
+        // check to make sure the values did not change
+        assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_US);
+        assertThat(mBatteryInfo.remainingLabel).contains(TIME_LEFT);
+    }
+
+    @Test
+    public void testBatteryPredictionLoaderCallbacks_DoesNotCrashOnNull() {
+        // Sanity test to check for crash
+        mFragment.mBatteryPredictionLoaderCallbacks.onLoadFinished(null, null);
+    }
+
+    @Test
+    public void testInitAnomalyDetectionIfPossible_detectionEnabled_init() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isAnomalyDetectionEnabled()).thenReturn(
+                true);
+        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+
+        mFragment.initAnomalyDetectionIfPossible();
+
+        verify(mLoaderManager).initLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
+                any());
     }
 
     public static class TestFragment extends PowerUsageSummary {

@@ -29,10 +29,10 @@ import android.text.TextUtils;
 import com.android.settings.R;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * {@link PreferenceController} that controls whether the Wi-Fi Wakeup feature should be enabled.
@@ -70,7 +70,10 @@ public class WifiWakeupPreferenceController extends PreferenceController impleme
 
     @Override
     public boolean isAvailable() {
-        return true;
+        final int defaultValue = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_wifi_wakeup_available);
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultValue) == 1;
     }
 
     @Override

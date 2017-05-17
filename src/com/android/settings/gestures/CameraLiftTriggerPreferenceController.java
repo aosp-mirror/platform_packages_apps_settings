@@ -22,9 +22,9 @@ import android.support.v7.preference.Preference;
 
 import android.util.ArrayMap;
 import com.android.settings.R;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.search2.InlineSwitchPayload;
 import com.android.settings.search2.ResultPayload;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class CameraLiftTriggerPreferenceController extends GesturePreferenceController {
 
@@ -57,7 +57,7 @@ public class CameraLiftTriggerPreferenceController extends GesturePreferenceCont
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean enabled = (boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED, enabled ? 0 : 1);
+                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED, enabled ? 1 : 0);
         return true;
     }
 

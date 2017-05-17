@@ -67,6 +67,12 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
     }
 
     @Override
+    void setupBadge() {}
+
+    @Override
+    void updateDependents(boolean banned) {}
+
+    @Override
     public void onPause() {
         super.onPause();
     }

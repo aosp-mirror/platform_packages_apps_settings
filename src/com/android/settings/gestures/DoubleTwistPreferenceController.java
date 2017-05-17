@@ -26,9 +26,9 @@ import android.text.TextUtils;
 
 import android.util.ArrayMap;
 import com.android.settings.R;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.search2.InlineSwitchPayload;
 import com.android.settings.search2.ResultPayload;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
 

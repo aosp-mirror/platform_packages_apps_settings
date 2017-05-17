@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.annotation.IdRes;
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -130,13 +131,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int SIZE_EXTERNAL = 2;
 
     // Filter options used for displayed list of applications
-    // The order which they appear is the order they will show when spinner is present.
+    // Filters will appear sorted based on their value defined here.
     public static final int FILTER_APPS_POWER_WHITELIST = 0;
     public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
     public static final int FILTER_APPS_ALL = 2;
     public static final int FILTER_APPS_ENABLED = 3;
-    public static final int FILTER_APPS_DISABLED = 4;
-    public static final int FILTER_APPS_INSTANT = 5;
+    public static final int FILTER_APPS_INSTANT = 4;
+    public static final int FILTER_APPS_DISABLED = 5;
     public static final int FILTER_APPS_BLOCKED = 6;
     public static final int FILTER_APPS_PERSONAL = 7;
     public static final int FILTER_APPS_WORK = 8;
@@ -416,20 +417,31 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
-        if (mListType == LIST_TYPE_STORAGE) {
-            AppFilter filter = new VolumeFilter(mVolumeUuid);
-            if (mStorageType == STORAGE_TYPE_MUSIC) {
+
+        AppFilter overrideFilter = getOverrideFilter(mListType, mStorageType, mVolumeUuid);
+        if (overrideFilter != null) {
+            mApplications.setOverrideFilter(overrideFilter);
+        }
+    }
+
+    @VisibleForTesting
+    static @Nullable AppFilter getOverrideFilter(int listType, int storageType, String volumeUuid) {
+        AppFilter filter = new VolumeFilter(volumeUuid);
+        if (listType == LIST_TYPE_STORAGE) {
+            if (storageType == STORAGE_TYPE_MUSIC) {
                 filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
             } else {
                 filter = new CompoundFilter(ApplicationsState.FILTER_OTHER_APPS, filter);
             }
-            mApplications.setOverrideFilter(filter);
+            return filter;
         }
-        if (mListType == LIST_TYPE_GAMES) {
-            mApplications.setOverrideFilter(ApplicationsState.FILTER_GAMES);
-        } else if (mListType == LIST_TYPE_MOVIES) {
-            mApplications.setOverrideFilter(ApplicationsState.FILTER_MOVIES);
+        if (listType == LIST_TYPE_GAMES) {
+            return new CompoundFilter(ApplicationsState.FILTER_GAMES, filter);
+        } else if (listType == LIST_TYPE_MOVIES) {
+            return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
         }
+
+        return null;
     }
 
     private int getDefaultFilter() {
@@ -1355,8 +1367,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 case LIST_TYPE_USAGE_ACCESS:
                     if (holder.entry.extraInfo != null) {
                         holder.summary.setText((new UsageState((PermissionState) holder.entry
-                                .extraInfo)).isPermissible() ? R.string.switch_on_text :
-                                R.string.switch_off_text);
+                                .extraInfo)).isPermissible()
+                                ? R.string.app_permission_summary_allowed
+                                : R.string.app_permission_summary_not_allowed);
                     } else {
                         holder.summary.setText(null);
                     }

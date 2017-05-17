@@ -23,12 +23,12 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.AutoRotatePreferenceController;
 import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settings.display.CameraGesturePreferenceController;
+import com.android.settings.display.DozeAlwaysOnPreferenceController;
 import com.android.settings.display.DozePreferenceController;
 import com.android.settings.display.FontSizePreferenceController;
 import com.android.settings.display.LiftToWakePreferenceController;
@@ -42,8 +42,10 @@ import com.android.settings.display.VrDisplayPreferenceController;
 import com.android.settings.display.WallpaperPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,8 @@ public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
 
     public static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
+    public static final String KEY_DISPLAY_SIZE = "screen_zoom";
+
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
 
     @Override
@@ -88,16 +92,18 @@ public class DisplaySettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
+        final AmbientDisplayConfiguration ambientDisplayConfig = new AmbientDisplayConfiguration(context);
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
-        controllers.add(new AutoRotatePreferenceController(context));
+        controllers.add(new AutoRotatePreferenceController(context, lifecycle));
         controllers.add(new CameraGesturePreferenceController(context));
-        controllers.add(new DozePreferenceController(context));
+        controllers.add(new DozePreferenceController(context, ambientDisplayConfig,
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider()));
+        controllers.add(new DozeAlwaysOnPreferenceController(context, ambientDisplayConfig));
         controllers.add(new FontSizePreferenceController(context));
         controllers.add(new LiftToWakePreferenceController(context));
         controllers.add(new NightDisplayPreferenceController(context));
         controllers.add(new NightModePreferenceController(context));
         controllers.add(new ScreenSaverPreferenceController(context));
-        AmbientDisplayConfiguration ambientDisplayConfig = new AmbientDisplayConfiguration(context);
         controllers.add(new PickupGesturePreferenceController(
                 context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new DoubleTapScreenPreferenceController(
@@ -122,6 +128,13 @@ public class DisplaySettings extends DashboardFragment {
                     sir.xmlResId = R.xml.display_settings;
                     result.add(sir);
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_DISPLAY_SIZE);
+                    return keys;
                 }
 
                 @Override

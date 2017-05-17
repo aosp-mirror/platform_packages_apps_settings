@@ -19,13 +19,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.widget.Button;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.ArrayList;
@@ -40,35 +41,13 @@ import java.util.List;
 public class WifiNetworkDetailsFragment extends DashboardFragment {
     private static final String TAG = "WifiNetworkDetailsFrg";
 
-    // XML KEYS
-    private static final String KEY_FORGET_BUTTON = "forget_button";
-
     private AccessPoint mAccessPoint;
-    private Button mForgetButton;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
 
     @Override
     public void onAttach(Context context) {
         mAccessPoint = new AccessPoint(context, getArguments());
         super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // Header Title set automatically from launching Preference
-
-        LayoutPreference forgetPreference = ((LayoutPreference) findPreference(KEY_FORGET_BUTTON));
-        forgetPreference.setVisible(mWifiDetailPreferenceController.canForgetNetwork());
-        mForgetButton = (Button) forgetPreference.findViewById(R.id.button);
-        mForgetButton.setText(R.string.forget);
-        mForgetButton.setOnClickListener(view -> forgetNetwork());
-    }
-
-    private void forgetNetwork() {
-        mMetricsFeatureProvider.action(getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
-        mWifiDetailPreferenceController.forgetNetwork();
     }
 
     @Override
@@ -88,13 +67,16 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         mWifiDetailPreferenceController = new WifiDetailPreferenceController(
                 mAccessPoint,
-                context.getSystemService(ConnectivityManager.class),
+                new ConnectivityManagerWrapperImpl(cm),
                 context,
                 this,
+                new Handler(Looper.getMainLooper()),  // UI thread.
                 getLifecycle(),
-                context.getSystemService(WifiManager.class));
+                context.getSystemService(WifiManager.class),
+                mMetricsFeatureProvider);
 
         ArrayList<PreferenceController> controllers = new ArrayList(1);
         controllers.add(mWifiDetailPreferenceController);

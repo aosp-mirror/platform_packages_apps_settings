@@ -52,15 +52,16 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnDestroy;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -155,7 +156,8 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
 
     @Override
     public boolean isAvailable() {
-        return mAppEntry != null;
+        // TODO(b/37313605): Re-enable once this controller supports instant apps
+        return mAppEntry != null && !AppUtils.isInstant(mAppEntry.info);
     }
 
     @Override

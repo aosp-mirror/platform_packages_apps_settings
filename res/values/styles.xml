@@ -282,6 +282,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">viewStart</item>
     </style>
 
     <style name="vpn_warning">
@@ -421,6 +422,8 @@
 
     <style name="AppActionPrimaryButton" parent="android:Widget.Material.Button.Colored"/>
 
+    <style name="DreamStartButton" parent="android:Widget.Material.Button" />
+
     <style name="LockPatternStyle">
         <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
         <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
@@ -444,6 +447,11 @@
     <style name="LockPatternStyle.Setup">
         <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
         <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
+    </style>
+
+    <!-- Overridden in sw400dp -->
+    <style name="LockPatternIconStyle" parent="SuwGlifIcon">
+        <item name="android:visibility">gone</item>
     </style>
 
 </resources>

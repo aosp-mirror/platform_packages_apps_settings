@@ -30,10 +30,10 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnCreate;
-import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -231,7 +231,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     /**
      * Add preference to collapsed list.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void addToCollapsedList(Preference preference) {
         // Insert preference based on it's order.
         int insertionIndex = Collections.binarySearch(mCollapsedPrefs, preference);
@@ -242,12 +242,12 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         updateExpandButtonSummary();
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     List<Preference> getCollapsedPrefs() {
         return mCollapsedPrefs;
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void updateExpandButtonSummary() {
         final int size = mCollapsedPrefs.size();
         if (size == 0) {
@@ -257,8 +257,11 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         } else {
             CharSequence summary = mCollapsedPrefs.get(0).getTitle();
             for (int i = 1; i < size; i++) {
-                summary = mContext.getString(R.string.join_many_items_middle, summary,
-                        mCollapsedPrefs.get(i).getTitle());
+                final CharSequence nextSummary = mCollapsedPrefs.get(i).getTitle();
+                if (!TextUtils.isEmpty(nextSummary)) {
+                    summary = mContext.getString(R.string.join_many_items_middle, summary,
+                            nextSummary);
+                }
             }
             mExpandButton.setSummary(summary);
         }

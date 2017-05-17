@@ -18,14 +18,13 @@ package com.android.settings.core.gateway;
 
 import com.android.settings.ApnEditor;
 import com.android.settings.ApnSettings;
-import com.android.settings.ChooseLockPassword;
-import com.android.settings.ChooseLockPattern;
 import com.android.settings.CryptKeeperSettings;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceAdminSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
-import com.android.settings.DreamSettings;
+import com.android.settings.dashboard.SupportDashboardActivity;
+import com.android.settings.dream.DreamSettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
 import com.android.settings.PrivacySettings;
@@ -80,6 +79,7 @@ import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.AssistGestureSettings;
+import com.android.settings.gestures.CameraLiftTriggerSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -108,6 +108,8 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
+import com.android.settings.password.ChooseLockPassword;
+import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
@@ -177,6 +179,7 @@ public class SettingsGateway {
             AccountSyncSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
+            CameraLiftTriggerSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
             DoubleTapScreenSettings.class.getName(),
             PickupGestureSettings.class.getName(),
@@ -260,7 +263,7 @@ public class SettingsGateway {
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
-            Settings.SupportDashboardActivity.class.getName(),
+            SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
@@ -271,6 +274,7 @@ public class SettingsGateway {
             Settings.PrintSettingsActivity.class.getName(),
             // Home page > Apps & Notifications
             Settings.UserSettingsActivity.class.getName(),
+            Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Security & screen lock

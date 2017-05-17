@@ -148,6 +148,15 @@ public class NotificationBackend {
         }
     }
 
+    public boolean onlyHasDefaultChannel(String pkg, int uid) {
+        try {
+            return sINM.onlyHasDefaultChannel(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
     static class Row {
         public String section;
     }

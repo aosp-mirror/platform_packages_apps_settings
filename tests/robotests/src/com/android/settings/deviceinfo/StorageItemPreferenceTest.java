@@ -15,7 +15,7 @@
  */
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.TestUtils.KILOBYTE;
+import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -54,8 +54,8 @@ public class StorageItemPreferenceTest {
 
     @Test
     public void testAfterLoad() {
-        mPreference.setStorageSize(KILOBYTE, KILOBYTE * 10);
-        assertThat(((String) mPreference.getSummary())).isEqualTo("1.00KB");
+        mPreference.setStorageSize(MEGABYTE_IN_BYTES * 10, MEGABYTE_IN_BYTES * 100);
+        assertThat(((String) mPreference.getSummary())).isEqualTo("0.01GB");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class StorageItemPreferenceTest {
                 (ProgressBar) holder.itemView.findViewById(android.R.id.progress);
 
         mPreference.onBindViewHolder(holder);
-        mPreference.setStorageSize(KILOBYTE, KILOBYTE * 10);
+        mPreference.setStorageSize(MEGABYTE_IN_BYTES, MEGABYTE_IN_BYTES * 10);
 
         assertThat(progressBar.getProgress()).isEqualTo(10);
     }

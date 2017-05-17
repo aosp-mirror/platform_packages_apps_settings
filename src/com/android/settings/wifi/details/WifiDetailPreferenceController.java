@@ -15,6 +15,9 @@
  */
 package com.android.settings.wifi.details;
 
+import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
+import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
+
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,30 +25,40 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
+import android.net.ConnectivityManager.NetworkCallback;
 import android.net.IpPrefix;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkBadging;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.net.NetworkUtils;
 import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.vpn2.ConnectivityManagerWrapper;
 import com.android.settings.wifi.WifiDetailPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.Inet4Address;
@@ -66,6 +79,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
     @VisibleForTesting
     static final String KEY_CONNECTION_DETAIL_PREF = "connection_detail";
+    @VisibleForTesting
+    static final String KEY_BUTTONS_PREF = "buttons";
     @VisibleForTesting
     static final String KEY_SIGNAL_STRENGTH_PREF = "signal_strength";
     @VisibleForTesting
@@ -88,18 +103,27 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     static final String KEY_IPV6_ADDRESS_CATEGORY = "ipv6_details_category";
 
     private AccessPoint mAccessPoint;
+    private final ConnectivityManagerWrapper mConnectivityManagerWrapper;
     private final ConnectivityManager mConnectivityManager;
     private final Fragment mFragment;
+    private final Handler mHandler;
+    private LinkProperties mLinkProperties;
+    private Network mNetwork;
     private NetworkInfo mNetworkInfo;
+    private NetworkCapabilities mNetworkCapabilities;
     private Context mPrefContext;
     private int mRssi;
     private String[] mSignalStr;
     private final WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    // Preferences - in order of appearance
+    // UI elements - in order of appearance
     private Preference mConnectionDetailPref;
+    private LayoutPreference mButtonsPref;
+    private Button mForgetButton;
+    private Button mSignInButton;
     private WifiDetailPreference mSignalStrengthPref;
     private WifiDetailPreference mLinkSpeedPref;
     private WifiDetailPreference mFrequencyPref;
@@ -109,8 +133,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private WifiDetailPreference mGatewayPref;
     private WifiDetailPreference mSubnetPref;
     private WifiDetailPreference mDnsPref;
-    private PreferenceCategory mIpv6AddressCategory;
 
+    private PreferenceCategory mIpv6AddressCategory;
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -123,23 +147,55 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         }
     };
 
+    private final NetworkRequest mNetworkRequest = new NetworkRequest.Builder()
+            .clearCapabilities().addTransportType(TRANSPORT_WIFI).build();
+
+    // Must be run on the UI thread since it directly manipulates UI state.
+    private final NetworkCallback mNetworkCallback = new NetworkCallback() {
+        @Override
+        public void onLinkPropertiesChanged(Network network, LinkProperties lp) {
+            if (network.equals(mNetwork) && !lp.equals(mLinkProperties)) {
+                mLinkProperties = lp;
+                updateIpLayerInfo();
+            }
+        }
+
+        @Override
+        public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
+            if (network.equals(mNetwork) && !nc.equals(mNetworkCapabilities)) {
+                mNetworkCapabilities = nc;
+                updateIpLayerInfo();
+            }
+        }
+
+        @Override
+        public void onLost(Network network) {
+            if (network.equals(mNetwork)) {
+                exitActivity();
+            }
+        }
+    };
+
     public WifiDetailPreferenceController(
             AccessPoint accessPoint,
-            ConnectivityManager connectivityManager,
+            ConnectivityManagerWrapper connectivityManagerWrapper,
             Context context,
             Fragment fragment,
+            Handler handler,
             Lifecycle lifecycle,
-            WifiManager wifiManager) {
+            WifiManager wifiManager,
+            MetricsFeatureProvider metricsFeatureProvider) {
         super(context);
 
         mAccessPoint = accessPoint;
-        mConnectivityManager = connectivityManager;
+        mConnectivityManager = connectivityManagerWrapper.getConnectivityManager();
+        mConnectivityManagerWrapper = connectivityManagerWrapper;
         mFragment = fragment;
-        mNetworkInfo = accessPoint.getNetworkInfo();
-        mRssi = accessPoint.getRssi();
+        mHandler = handler;
         mSignalStr = context.getResources().getStringArray(R.array.wifi_signal);
         mWifiConfig = accessPoint.getConfig();
         mWifiManager = wifiManager;
+        mMetricsFeatureProvider = metricsFeatureProvider;
 
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -167,6 +223,12 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         mConnectionDetailPref = screen.findPreference(KEY_CONNECTION_DETAIL_PREF);
 
+        mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
+        mSignInButton = (Button) mButtonsPref.findViewById(R.id.right_button);
+        mSignInButton.setText(com.android.internal.R.string.network_available_sign_in);
+        mSignInButton.setOnClickListener(
+            view -> mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork));
+
         mSignalStrengthPref =
                 (WifiDetailPreference) screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mLinkSpeedPref = (WifiDetailPreference) screen.findPreference(KEY_LINK_SPEED);
@@ -183,31 +245,45 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 (PreferenceCategory) screen.findPreference(KEY_IPV6_ADDRESS_CATEGORY);
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
-    }
-
-    public WifiInfo getWifiInfo() {
-        return mWifiInfo;
+        mForgetButton = (Button) mButtonsPref.findViewById(R.id.left_button);
+        mForgetButton.setText(R.string.forget);
+        mForgetButton.setOnClickListener(view -> forgetNetwork());
+        updateInfo();
     }
 
     @Override
     public void onResume() {
-        updateInfo();
-
+        mConnectivityManagerWrapper.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
+                mHandler);
+        // updateInfo() will be called during registration because NETWORK_STATE_CHANGED_ACTION is
+        // a sticky broadcast.
         mContext.registerReceiver(mReceiver, mFilter);
     }
 
     @Override
     public void onPause() {
+        mNetwork = null;
+        mLinkProperties = null;
+        mNetworkCapabilities = null;
+        mNetworkInfo = null;
+        mWifiInfo = null;
         mContext.unregisterReceiver(mReceiver);
+        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
     private void updateInfo() {
-        mNetworkInfo = mConnectivityManager.getNetworkInfo(mWifiManager.getCurrentNetwork());
+        mNetwork = mWifiManager.getCurrentNetwork();
+        mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
+        mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
+        mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
         mWifiInfo = mWifiManager.getConnectionInfo();
-        if (mNetworkInfo == null || mWifiInfo == null) {
+        if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
             exitActivity();
             return;
         }
+
+        // Update whether the forgot button should be displayed.
+        mForgetButton.setVisibility(canForgetNetwork() ? View.VISIBLE : View.INVISIBLE);
 
         refreshNetworkState();
 
@@ -238,7 +314,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         }
         mFrequencyPref.setDetailText(band);
 
-        setIpText();
+        updateIpLayerInfo();
+        mButtonsPref.setVisible(mForgetButton.getVisibility() == View.VISIBLE
+                || mSignInButton.getVisibility() == View.VISIBLE);
     }
 
     private void exitActivity() {
@@ -270,7 +348,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
     }
 
-    private void setIpText() {
+    private void updateIpLayerInfo() {
+        mSignInButton.setVisibility(canSignIntoNetwork() ? View.VISIBLE : View.INVISIBLE);
+
         // Reset all fields
         mIpv6AddressCategory.removeAll();
         mIpv6AddressCategory.setVisible(false);
@@ -279,18 +359,12 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mGatewayPref.setVisible(false);
         mDnsPref.setVisible(false);
 
-        Network currentNetwork = mWifiManager.getCurrentNetwork();
-        if (currentNetwork == null) {
+        if (mNetwork == null || mLinkProperties == null) {
             return;
         }
+        List<InetAddress> addresses = mLinkProperties.getAddresses();
 
-        LinkProperties linkProperties = mConnectivityManager.getLinkProperties(currentNetwork);
-        if (linkProperties == null) {
-            return;
-        }
-        List<InetAddress> addresses = linkProperties.getAddresses();
-
-        // Set IPv4 and Ipv6 addresses
+        // Set IPv4 and IPv6 addresses
         for (int i = 0; i < addresses.size(); i++) {
             InetAddress addr = addresses.get(i);
             if (addr instanceof Inet4Address) {
@@ -310,7 +384,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         // Set up IPv4 gateway and subnet mask
         String gateway = null;
         String subnet = null;
-        for (RouteInfo routeInfo : linkProperties.getRoutes()) {
+        for (RouteInfo routeInfo : mLinkProperties.getRoutes()) {
             if (routeInfo.hasGateway() && routeInfo.getGateway() instanceof Inet4Address) {
                 gateway = routeInfo.getGateway().getHostAddress();
             }
@@ -333,7 +407,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         // Set IPv4 DNS addresses
         StringJoiner stringJoiner = new StringJoiner(",");
-        for (InetAddress dnsServer : linkProperties.getDnsServers()) {
+        for (InetAddress dnsServer : mLinkProperties.getDnsServers()) {
             if (dnsServer instanceof Inet4Address) {
                 stringJoiner.add(dnsServer.getHostAddress());
             }
@@ -358,14 +432,22 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     /**
      * Returns whether the network represented by this preference can be forgotten.
      */
-    public boolean canForgetNetwork() {
+    private boolean canForgetNetwork() {
         return mWifiInfo != null && mWifiInfo.isEphemeral() || mWifiConfig != null;
+    }
+
+    /**
+     * Returns whether the user can sign into the network represented by this preference.
+     */
+    private boolean canSignIntoNetwork() {
+        return mNetworkCapabilities != null && mNetworkCapabilities.hasCapability(
+                NET_CAPABILITY_CAPTIVE_PORTAL);
     }
 
     /**
      * Forgets the wifi network associated with this preference.
      */
-    public void forgetNetwork() {
+    private void forgetNetwork() {
         if (mWifiInfo != null && mWifiInfo.isEphemeral()) {
             mWifiManager.disableEphemeralNetwork(mWifiInfo.getSSID());
         } else if (mWifiConfig != null) {
@@ -375,6 +457,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
             }
         }
+        mMetricsFeatureProvider.action(
+                mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
     }
 }

@@ -289,8 +289,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (usageData.usageList.size() <= 1) {
             CharSequence timeSequence = Utils.formatElapsedTime(getContext(),
                     usageData.totalUsageTimeMs, false);
-            usageData.summary = TextUtils.expandTemplate(getText(R.string.battery_used_for),
-                    timeSequence);
+            usageData.summary = usageData.usageType == UsageType.IDLE ? timeSequence
+                    : TextUtils.expandTemplate(getText(R.string.battery_used_for), timeSequence);
         } else {
             BatterySipper sipper = findBatterySipperWithMaxBatteryUsage(usageData.usageList);
             BatteryEntry batteryEntry = new BatteryEntry(getContext(), mHandler, mUserManager,
@@ -305,7 +305,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     boolean shouldHideSummary(PowerUsageData powerUsageData) {
         @UsageType final int usageType = powerUsageData.usageType;
 
-        return usageType == UsageType.CELL;
+        return usageType == UsageType.CELL
+                || usageType == UsageType.BLUETOOTH
+                || usageType == UsageType.WIFI;
     }
 
     @VisibleForTesting

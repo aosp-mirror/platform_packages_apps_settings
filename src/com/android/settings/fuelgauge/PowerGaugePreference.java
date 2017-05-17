@@ -21,6 +21,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class PowerGaugePreference extends TintablePreference {
     private BatteryEntry mInfo;
     private CharSequence mContentDescription;
     private CharSequence mProgress;
+    private boolean mShowAnomalyIcon;
 
     public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
             BatteryEntry info) {
@@ -63,6 +65,7 @@ public class PowerGaugePreference extends TintablePreference {
         mInfo = info;
         mContentDescription = contentDescription;
         mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+        mShowAnomalyIcon = false;
     }
 
     public void setContentDescription(String name) {
@@ -88,6 +91,11 @@ public class PowerGaugePreference extends TintablePreference {
         return mProgress;
     }
 
+    public void shouldShowAnomalyIcon(boolean showAnomalyIcon) {
+        mShowAnomalyIcon = showAnomalyIcon;
+        notifyChanged();
+    }
+
     BatteryEntry getInfo() {
         return mInfo;
     }
@@ -98,7 +106,14 @@ public class PowerGaugePreference extends TintablePreference {
         ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
         icon.setLayoutParams(new LinearLayout.LayoutParams(mIconSize, mIconSize));
 
-        ((TextView) view.findViewById(R.id.widget_summary)).setText(mProgress);
+        final TextView subtitle = (TextView) view.findViewById(R.id.widget_summary);
+        subtitle.setText(mProgress);
+        if (mShowAnomalyIcon) {
+            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_warning_24dp, 0,
+                    0, 0);
+        } else {
+            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
+        }
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);

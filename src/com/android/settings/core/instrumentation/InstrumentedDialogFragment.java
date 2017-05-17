@@ -18,8 +18,8 @@ package com.android.settings.core.instrumentation;
 import android.content.Context;
 
 import com.android.settings.DialogCreatable;
-import com.android.settings.core.lifecycle.ObservableDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.ObservableDialogFragment;
 
 public abstract class InstrumentedDialogFragment extends ObservableDialogFragment
         implements Instrumentable {

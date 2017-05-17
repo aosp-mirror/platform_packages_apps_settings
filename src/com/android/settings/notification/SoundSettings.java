@@ -32,9 +32,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +73,11 @@ public class SoundSettings extends DashboardFragment {
                 mRequestPreference = (RingtonePreference) findPreference(selectedPreference);
             }
         }
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_sound;
     }
 
     @Override
@@ -181,7 +186,8 @@ public class SoundSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePreferenceController(context));
-        controllers.add(new EmergencyBroadcastPreferenceController(context));
+        controllers.add(new EmergencyBroadcastPreferenceController(
+                context, "cell_broadcast_settings"));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
         // === Volumes ===

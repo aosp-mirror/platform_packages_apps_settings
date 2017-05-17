@@ -14,8 +14,6 @@
 
 package com.android.settings.datausage;
 
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
-
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -23,18 +21,15 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -50,16 +45,12 @@ import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -79,6 +70,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
 
     private static final int LOADER_CHART_DATA = 2;
+    private static final int LOADER_APP_PREF = 3;
 
     private final ArraySet<String> mPackages = new ArraySet<>();
     private Preference mTotalUsage;
@@ -104,12 +96,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private SpinnerPreference mCycle;
     private SwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
-
-    // Parameters to construct an efficient ThreadPoolExecutor
-    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-    private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
-    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
-    private static final int KEEP_ALIVE_SECONDS = 30;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -197,14 +183,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
 
             if (mPackages.size() > 1) {
                 mAppList = (PreferenceCategory) findPreference(KEY_APP_LIST);
-                final int packageSize = mPackages.size();
-                final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(packageSize);
-                final ThreadPoolExecutor executor = new ThreadPoolExecutor(CORE_POOL_SIZE,
-                        MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS, workQueue);
-                for (int i = 1; i < mPackages.size(); i++) {
-                    final AppPrefLoader loader = new AppPrefLoader();
-                        loader.executeOnExecutor(executor, mPackages.valueAt(i));
-                }
+                getLoaderManager().initLoader(LOADER_APP_PREF, Bundle.EMPTY, mAppPrefCallbacks);
             } else {
                 removePreference(KEY_APP_LIST);
             }
@@ -344,17 +323,21 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         } catch (PackageManager.NameNotFoundException e) {
         }
 
+        final boolean showInfoButton = mAppItem.key > 0;
+
         final Activity activity = getActivity();
         final Preference pref = FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this, null /* appHeader */)
-            .setIcon(mIcon)
-            .setLabel(mLabel)
-            .setPackageName(pkg)
-            .setUid(uid)
-            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                AppHeaderController.ActionType.ACTION_NONE)
-            .done(activity, getPrefContext());
+                .getApplicationFeatureProvider(activity)
+                .newAppHeaderController(this, null /* appHeader */)
+                .setButtonActions(showInfoButton
+                                ? AppHeaderController.ActionType.ACTION_APP_INFO
+                                : AppHeaderController.ActionType.ACTION_NONE,
+                        AppHeaderController.ActionType.ACTION_NONE)
+                .setIcon(mIcon)
+                .setLabel(mLabel)
+                .setPackageName(pkg)
+                .setUid(uid)
+                .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 
@@ -399,30 +382,27 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         }
     };
 
-    private class AppPrefLoader extends AsyncTask<String, Void, Preference> {
-        @Override
-        protected Preference doInBackground(String... params) {
-            PackageManager pm = getPackageManager();
-            String pkg = params[0];
-            try {
-                ApplicationInfo info = pm.getApplicationInfo(pkg, 0);
-                Preference preference = new Preference(getPrefContext());
-                preference.setIcon(info.loadIcon(pm));
-                preference.setTitle(info.loadLabel(pm));
-                preference.setSelectable(false);
-                return preference;
-            } catch (PackageManager.NameNotFoundException e) {
+    private final LoaderManager.LoaderCallbacks<ArraySet<Preference>> mAppPrefCallbacks =
+        new LoaderManager.LoaderCallbacks<ArraySet<Preference>>() {
+            @Override
+            public Loader<ArraySet<Preference>> onCreateLoader(int i, Bundle bundle) {
+                return new AppPrefLoader(getPrefContext(), mPackages, getPackageManager());
             }
-            return null;
-        }
 
-        @Override
-        protected void onPostExecute(Preference pref) {
-            if (pref != null && mAppList != null) {
-                mAppList.addPreference(pref);
+            @Override
+            public void onLoadFinished(Loader<ArraySet<Preference>> loader,
+                    ArraySet<Preference> preferences) {
+                if (preferences != null && mAppList != null) {
+                    for (Preference preference : preferences) {
+                        mAppList.addPreference(preference);
+                    }
+                }
             }
-        }
-    }
+
+            @Override
+            public void onLoaderReset(Loader<ArraySet<Preference>> loader) {
+            }
+        };
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {

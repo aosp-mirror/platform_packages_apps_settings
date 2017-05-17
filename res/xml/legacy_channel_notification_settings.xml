@@ -17,6 +17,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
+    <!-- Show badge -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="badge"
+        android:title="@string/notification_badge_title"
+        settings:useAdditionalSummary="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference

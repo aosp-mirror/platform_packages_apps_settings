@@ -18,16 +18,20 @@ package com.android.settings.dashboard.suggestions;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
+
+    private static final String TAG = "SuggestionFeature";
+    private static final int EXCLUSIVE_SUGGESTION_MAX_COUNT = 3;
 
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -62,6 +66,17 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
+    public void filterExclusiveSuggestions(List<Tile> suggestions) {
+        if (suggestions == null) {
+            return;
+        }
+        for (int i = suggestions.size() - 1; i >= EXCLUSIVE_SUGGESTION_MAX_COUNT; i--) {
+            Log.d(TAG, "Removing exclusive suggestion");
+            suggestions.remove(i);
+        }
+    }
+
+    @Override
     public void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion) {
         if (parser == null || suggestion == null || context == null) {
             return;
@@ -78,7 +93,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 suggestion.intent.getComponent(),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
-        parser.markCategoryDone(suggestion.category);
     }
 
     @Override

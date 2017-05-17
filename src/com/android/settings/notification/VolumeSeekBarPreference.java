@@ -31,7 +31,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 import java.util.Objects;
 

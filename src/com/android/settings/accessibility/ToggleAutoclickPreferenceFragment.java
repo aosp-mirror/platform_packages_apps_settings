@@ -26,7 +26,7 @@ import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
 
 

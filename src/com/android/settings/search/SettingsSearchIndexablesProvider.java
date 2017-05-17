@@ -26,6 +26,7 @@ import android.util.Log;
 import com.android.settings.search2.DatabaseIndexingUtils;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -102,12 +103,21 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             }
 
             List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(context);
-            if (providerNonIndexableKeys != null && providerNonIndexableKeys.size() > 0) {
-                values.addAll(providerNonIndexableKeys);
+
+            if (providerNonIndexableKeys == null || providerNonIndexableKeys.isEmpty()) {
+                continue;
             }
+
+            if (providerNonIndexableKeys.removeAll(Collections.singleton(null))
+                    || providerNonIndexableKeys.removeAll(Collections.singleton(""))) {
+                Log.v(TAG, clazz.getName() + " tried to add an empty non-indexable key");
+            }
+
+            values.addAll(providerNonIndexableKeys);
         }
 
         for (String nik : values) {
+
             final Object[] ref = new Object[NON_INDEXABLES_KEYS_COLUMNS.length];
             ref[COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE] = nik;
             cursor.addRow(ref);

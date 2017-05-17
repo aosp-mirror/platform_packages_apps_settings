@@ -28,7 +28,7 @@ import android.widget.TimePicker;
 import com.android.internal.app.NightDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.DateFormat;

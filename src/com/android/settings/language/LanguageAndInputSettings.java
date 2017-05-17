@@ -16,6 +16,7 @@
 
 package com.android.settings.language;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -35,7 +36,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.AssistGesturePreferenceController;
@@ -50,6 +50,7 @@ import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +78,20 @@ public class LanguageAndInputSettings extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mProgressiveDisclosureMixin.setTileLimit(2);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Hack to update action bar title. It's necessary to refresh title because this page user
+        // can change locale from here and fragment won't relaunch. Once language changes, title
+        // must display in the new language.
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        activity.setTitle(R.string.language_keyboard_settings_title);
     }
 
     @Override

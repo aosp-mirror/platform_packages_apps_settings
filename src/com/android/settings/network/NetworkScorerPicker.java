@@ -74,14 +74,19 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
         screen.removeAll();
 
         final List<NetworkScorerAppData> scorers = mNetworkScoreManager.getAllValidScorers();
-        if (scorers.isEmpty()) {
-            final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
-            nonePref.setTitle(R.string.network_scorer_picker_none_preference);
-            nonePref.setChecked(true);
-            screen.addPreference(nonePref);
-            return;
-        }
         final String defaultAppKey = getActiveScorerPackage();
+
+        final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
+        nonePref.setTitle(R.string.network_scorer_picker_none_preference);
+        if (scorers.isEmpty()) {
+            nonePref.setChecked(true);
+        } else {
+            nonePref.setKey(null);
+            nonePref.setChecked(TextUtils.isEmpty(defaultAppKey));
+            nonePref.setOnClickListener(this);
+        }
+        screen.addPreference(nonePref);
+
         final int numScorers = scorers.size();
         for (int i = 0; i < numScorers; i++) {
             final RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());

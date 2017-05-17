@@ -46,6 +46,7 @@ import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
+import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -478,7 +479,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             final String serviceState = serviceEnabled ?
                     getString(R.string.accessibility_summary_state_enabled) :
                     getString(R.string.accessibility_summary_state_disabled);
-            final String serviceSummary = info.loadSummary(getPackageManager());
+            final CharSequence serviceSummary = info.loadSummary(getPackageManager());
             final String stateSummaryCombo = getString(
                     R.string.accessibility_summary_default_combination,
                     serviceState, serviceSummary);
@@ -721,7 +722,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             new BaseSearchIndexProvider() {
         @Override
         public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
+            List<SearchIndexableRaw> indexables = new ArrayList<>();
 
             PackageManager packageManager = context.getPackageManager();
             AccessibilityManager accessibilityManager =
@@ -762,6 +763,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             indexable.xmlResId = R.xml.accessibility_settings;
             indexables.add(indexable);
             return indexables;
+        }
+
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            List<String> keys = super.getNonIndexableKeys(context);
+            // Duplicates in Display
+            keys.add(FONT_SIZE_PREFERENCE_SCREEN);
+            keys.add(DisplaySettings.KEY_DISPLAY_SIZE);
+
+            return keys;
         }
     };
 }
