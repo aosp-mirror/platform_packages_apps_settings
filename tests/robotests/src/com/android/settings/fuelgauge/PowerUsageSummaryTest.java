@@ -360,10 +360,10 @@ public class PowerUsageSummaryTest {
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
         final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
+        doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
+                R.string.battery_screen_usage);
         doReturn(mRealContext).when(mFragment).getContext();
-        final String expectedSummary = "Used for 2m";
+        final String expectedSummary = "Screen usage 2m";
 
         mFragment.setUsageSummary(mPreference, usageTimeMs);
 

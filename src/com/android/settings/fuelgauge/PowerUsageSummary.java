@@ -652,7 +652,7 @@ public class PowerUsageSummary extends PowerUsageBase {
             final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
                     false);
             preference.setSummary(
-                    TextUtils.expandTemplate(getText(R.string.battery_used_for), timeSequence));
+                    TextUtils.expandTemplate(getText(R.string.battery_screen_usage), timeSequence));
         }
     }
 
