@@ -93,7 +93,7 @@ public class AppHeaderController {
             mAppHeader = appHeader;
         } else {
             mAppHeader = LayoutInflater.from(fragment.getContext())
-                    .inflate(R.layout.app_details, null /* root */);
+                    .inflate(R.layout.settings_entity_header, null /* root */);
         }
     }
 
