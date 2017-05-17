@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,11 +38,14 @@ import java.util.WeakHashMap;
  * Parent class for settings fragments that contain a list of Bluetooth
  * devices.
  *
- * @see BluetoothSettings
+ * This fragment stores old implementation of {@link DeviceListPreferenceFragment} and is
+ * deprecated, please use {@link DeviceListPreferenceFragment} instead.
+ *
+ * @see BluetoothSettingsObsolete
  * @see DevicePickerFragment
  */
-// TODO: Refactor this fragment
-public abstract class DeviceListPreferenceFragment extends
+@Deprecated
+public abstract class DeviceListPreferenceObsoleteFragment extends
         RestrictedDashboardFragment implements BluetoothCallback {
 
     private static final String TAG = "DeviceListPreferenceFragment";
@@ -62,7 +65,7 @@ public abstract class DeviceListPreferenceFragment extends
     final WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
             new WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference>();
 
-    DeviceListPreferenceFragment(String restrictedKey) {
+    DeviceListPreferenceObsoleteFragment(String restrictedKey) {
         super(restrictedKey);
         mFilter = BluetoothDeviceFilter.ALL_FILTER;
     }

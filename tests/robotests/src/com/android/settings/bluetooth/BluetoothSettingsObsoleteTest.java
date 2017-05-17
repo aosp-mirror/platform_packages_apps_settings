@@ -17,22 +17,14 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,26 +32,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BluetoothSettingsTest {
-    private static final String FOOTAGE_MAC_STRING = "Bluetooth mac: xxxx";
-
-    @Mock
-    private UserManager mUserManager;
-    @Mock
-    private Resources mResource;
+public class BluetoothSettingsObsoleteTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
-    private LocalBluetoothAdapter mLocalAdapter;
-    private BluetoothSettings mFragment;
-    private Preference mMyDevicePreference;
+    private BluetoothSettingsObsolete mFragment;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -69,47 +51,26 @@ public class BluetoothSettingsTest {
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
 
-        mFragment = spy(new BluetoothSettings());
+        mFragment = spy(new BluetoothSettingsObsolete());
         doReturn(mContext).when(mFragment).getContext();
-        doReturn(mResource).when(mFragment).getResources();
-
-        mMyDevicePreference = new Preference(RuntimeEnvironment.application);
-
-        mFragment.setLocalBluetoothAdapter(mLocalAdapter);
     }
 
     @Test
-    public void setTextSpan_notSpannable_shouldNotCrash() {
-        final String str = "test";
-        mFragment.setTextSpan(str, "hello");
-    }
-
-    @Test
-    public void setUpdateMyDevicePreference_setTitleCorrectly() {
-        doReturn(FOOTAGE_MAC_STRING).when(mFragment).getString(
-                eq(R.string.bluetooth_footer_mac_message), any());
-
-        mFragment.updateMyDevicePreference(mMyDevicePreference);
-
-        assertThat(mMyDevicePreference.getTitle()).isEqualTo(FOOTAGE_MAC_STRING);
-    }
-
-    @Test
-    public void testSearchIndexProvider_pairPageEnabled_keyNotAdded() {
+    public void testSearchIndexProvider_pairPageEnabled_keyAdded() {
         doReturn(true).when(mFeatureFactory.bluetoothFeatureProvider).isPairingPageEnabled();
 
         final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
                 mContext);
 
-        assertThat(keys).doesNotContain(BluetoothSettings.DATA_KEY_REFERENCE);
+        assertThat(keys).contains(BluetoothSettingsObsolete.DATA_KEY_REFERENCE);
     }
 
     @Test
-    public void testSearchIndexProvider_pairPageDisabled_keyAdded() {
+    public void testSearchIndexProvider_pairPageDisabled_keyNotAdded() {
         final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
                 mContext);
 
-        assertThat(keys).contains(BluetoothSettings.DATA_KEY_REFERENCE);
+        assertThat(keys).doesNotContain(BluetoothSettingsObsolete.DATA_KEY_REFERENCE);
     }
 
 }

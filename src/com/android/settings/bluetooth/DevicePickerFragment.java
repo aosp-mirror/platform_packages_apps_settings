@@ -40,7 +40,7 @@ import java.util.List;
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
  */
-public final class DevicePickerFragment extends DeviceListPreferenceFragment {
+public final class DevicePickerFragment extends DeviceListPreferenceObsoleteFragment {
     private static final int MENU_ID_REFRESH = Menu.FIRST;
     private static final String TAG = "DevicePickerFragment";
 

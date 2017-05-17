@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 
 package com.android.settings.bluetooth;
+
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -67,16 +69,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
-
 /**
- * BluetoothSettings is the Settings screen for Bluetooth configuration and
+ * BluetoothSettingsObsolete is the Settings screen for Bluetooth configuration and
  * connection management.
  *
+ * This fragment stores old implementation of {@link BluetoothSettings} and is
+ * deprecated, please use {@link BluetoothSettings} instead.
  */
-// TODO: Refactor this fragment
-public class BluetoothSettings extends DeviceListPreferenceFragment implements Indexable {
-    private static final String TAG = "BluetoothSettings";
+@Deprecated
+public class BluetoothSettingsObsolete extends DeviceListPreferenceObsoleteFragment
+        implements Indexable {
+    private static final String TAG = "BluetoothSettingsObsolete";
 
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 1;
@@ -96,7 +99,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     private PreferenceGroup mPairedDevicesCategory;
     private PreferenceGroup mAvailableDevicesCategory;
     private Preference mDeviceNamePreference;
-    private Preference mPairingPreference;
     private boolean mAvailableDevicesCategoryIsPresent;
 
     private boolean mInitialScanStarted;
@@ -106,11 +108,10 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
     private final IntentFilter mIntentFilter;
     private BluetoothDeviceNamePreferenceController mDeviceNamePrefController;
-    private BluetoothPairingPreferenceController mPairingPrefController;
 
     // For Search
     @VisibleForTesting
-    static final String DATA_KEY_REFERENCE = "main_toggle_bluetooth";
+    static final String DATA_KEY_REFERENCE = "main_toggle_bluetooth_obsolete";
 
     // accessed from inner class (not private to avoid thunks)
     FooterPreference mMyDevicePreference;
@@ -128,7 +129,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         }
     };
 
-    public BluetoothSettings() {
+    public BluetoothSettingsObsolete() {
         super(DISALLOW_CONFIG_BLUETOOTH);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
     }
@@ -148,8 +149,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         mSwitchBar = activity.getSwitchBar();
 
         mBluetoothEnabler = new BluetoothEnabler(activity, new SwitchBarController(mSwitchBar),
-            mMetricsFeatureProvider, Utils.getLocalBtManager(activity),
-            MetricsEvent.ACTION_BLUETOOTH_TOGGLE);
+                mMetricsFeatureProvider, Utils.getLocalBtManager(activity),
+                MetricsEvent.ACTION_BLUETOOTH_TOGGLE);
         mBluetoothEnabler.setupSwitchController();
     }
 
@@ -179,8 +180,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
         mMyDevicePreference = mFooterPreferenceMixin.createFooterPreference();
         mMyDevicePreference.setSelectable(false);
-
-        mPairingPreference = mPairingPrefController.createBluetoothPairingPreference();
 
         setHasOptionsMenu(true);
     }
@@ -330,7 +329,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 addDeviceCategory(mPairedDevicesCategory,
                         R.string.bluetooth_preference_paired_devices,
                         BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
-                mPairedDevicesCategory.addPreference(mPairingPreference);
                 int numberOfPairedDevices = mPairedDevicesCategory.getPreferenceCount();
 
                 if (isUiRestricted() || numberOfPairedDevices <= 0) {
@@ -414,8 +412,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 @Override
                 public void onClick() {
                     final SettingsActivity activity =
-                            (SettingsActivity) BluetoothSettings.this.getActivity();
-                    activity.startPreferencePanel(BluetoothSettings.this,
+                            (SettingsActivity) BluetoothSettingsObsolete.this.getActivity();
+                    activity.startPreferencePanel(BluetoothSettingsObsolete.this,
                             ScanningSettings.class.getName(), null,
                             R.string.location_scanning_screen_title, null, null, 0);
                 }
@@ -457,8 +455,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         if (text instanceof Spannable) {
             Spannable boldSpan = (Spannable) text;
             boldSpan.setSpan(
-                new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
-                briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
+                    briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
 
@@ -523,7 +521,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.bluetooth_settings;
+        return R.xml.bluetooth_settings_obsolete;
     }
 
     @Override
@@ -531,9 +529,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         List<PreferenceController> controllers = new ArrayList<>();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context,
                 this, getLifecycle());
-        mPairingPrefController = new BluetoothPairingPreferenceController(context, this);
         controllers.add(mDeviceNamePrefController);
-        controllers.add(mPairingPrefController);
 
         return controllers;
     }
@@ -596,18 +592,34 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                     data.key = DATA_KEY_REFERENCE;
                     result.add(data);
 
-                    // Removed paired bluetooth device indexing. See BluetoothSettingsObsolete.java.
+                    // Add cached paired BT devices
+                    LocalBluetoothManager lbtm = Utils.getLocalBtManager(context);
+                    // LocalBluetoothManager.getInstance can return null if the device does not
+                    // support bluetooth (e.g. the emulator).
+                    if (lbtm != null) {
+                        Set<BluetoothDevice> bondedDevices =
+                                lbtm.getBluetoothAdapter().getBondedDevices();
+
+                        for (BluetoothDevice device : bondedDevices) {
+                            data = new SearchIndexableRaw(context);
+                            data.title = device.getName();
+                            data.screenTitle = res.getString(R.string.bluetooth_settings);
+                            data.enabled = enabled;
+                            result.add(data);
+                        }
+                    }
                     return result;
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    if (!FeatureFactory.getFactory(context).getBluetoothFeatureProvider(
+                    if (FeatureFactory.getFactory(context).getBluetoothFeatureProvider(
                             context).isPairingPageEnabled()) {
                         keys.add(DATA_KEY_REFERENCE);
                     }
                     return keys;
                 }
+
             };
 }
