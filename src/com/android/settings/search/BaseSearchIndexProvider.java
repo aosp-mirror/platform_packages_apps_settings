@@ -72,7 +72,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
             }
             return nonIndexableKeys;
         } else {
-            return EMPTY_LIST;
+            return new ArrayList<>();
         }
     }
 
