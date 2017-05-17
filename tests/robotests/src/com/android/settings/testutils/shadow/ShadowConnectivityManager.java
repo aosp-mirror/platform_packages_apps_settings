@@ -24,9 +24,14 @@ import org.robolectric.annotation.Implements;
 @Implements(ConnectivityManager.class)
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
+    private static boolean mIsNetworkSupported;
+
     @Implementation
     public boolean isNetworkSupported(int networkType) {
-        return false;
+        return mIsNetworkSupported;
     }
 
+    public static void setIsNetworkSupported(boolean isNetworkSupported) {
+        mIsNetworkSupported = isNetworkSupported;
+    }
 }
