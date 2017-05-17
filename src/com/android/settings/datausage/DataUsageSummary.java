@@ -71,10 +71,11 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     public static final boolean TEST_RADIOS = false;
     public static final String TEST_RADIOS_PROP = "test.radios";
 
+    public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
+    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
+
     private static final String KEY_STATUS_HEADER = "status_header";
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
-    private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
-    private static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
     private static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
 
     private DataUsageController mDataUsageController;
@@ -465,7 +466,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             @Override
             public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                     boolean enabled) {
-                ArrayList<SearchIndexableResource> resources = new ArrayList<>();
+                List<SearchIndexableResource> resources = new ArrayList<>();
                 SearchIndexableResource resource = new SearchIndexableResource(context);
                 resource.xmlResId = R.xml.data_usage;
                 resources.add(resource);
@@ -485,12 +486,13 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
             @Override
             public List<String> getNonIndexableKeys(Context context) {
-                ArrayList<String> keys = new ArrayList<>();
-                boolean hasMobileData = ConnectivityManager.from(context).isNetworkSupported(
-                        ConnectivityManager.TYPE_MOBILE);
+                List<String> keys = super.getNonIndexableKeys(context);
 
-                if (hasMobileData) {
+                if (hasMobileData(context)) {
                     keys.add(KEY_RESTRICT_BACKGROUND);
+                }
+                if (hasWifiRadio(context)) {
+                    keys.add(KEY_NETWORK_RESTRICTIONS);
                 }
                 keys.add(KEY_WIFI_USAGE_TITLE);
 
