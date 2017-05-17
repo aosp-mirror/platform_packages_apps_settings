@@ -51,6 +51,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static final String LOG_TAG = "DeviceInfoSettings";
 
+    private static final String KEY_LEGAL_CONTAINER = "legal_container";
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO;
@@ -150,6 +152,13 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 public List<PreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null /*activity */,
                             null /* fragment */, null /* lifecycle */);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_LEGAL_CONTAINER);
+                    return keys;
                 }
             };
 }

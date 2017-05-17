@@ -46,4 +46,9 @@ public class ShadowUtils {
     public static void reset() {
         sFingerprintManager = null;
     }
+
+    @Implementation
+    public static boolean isWifiOnly(Context context) {
+        return true;
+    }
 }
