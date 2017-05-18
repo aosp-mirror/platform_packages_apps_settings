@@ -185,9 +185,7 @@ public class BatteryUtils {
 
         return drainType == BatterySipper.DrainType.IDLE
                 || drainType == BatterySipper.DrainType.CELL
-                || drainType == BatterySipper.DrainType.WIFI
                 || drainType == BatterySipper.DrainType.SCREEN
-                || drainType == BatterySipper.DrainType.BLUETOOTH
                 || drainType == BatterySipper.DrainType.UNACCOUNTED
                 || drainType == BatterySipper.DrainType.OVERCOUNTED
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
