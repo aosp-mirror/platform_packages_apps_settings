@@ -19,6 +19,7 @@ package com.android.settings.language;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
@@ -119,7 +120,6 @@ public class LanguageAndInputSettingsTest {
     }
 
     @Test
-
     public void testGetPreferenceControllers_shouldAllBeCreated() {
         final List<PreferenceController> controllers =
                 mFragment.getPreferenceControllers(mActivity);
@@ -135,7 +135,8 @@ public class LanguageAndInputSettingsTest {
         final Activity activity = mock(Activity.class);
         final SummaryLoader loader = mock(SummaryLoader.class);
         final ComponentName componentName = new ComponentName("pkg", "cls");
-        ShadowSecureSettings.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD,
+        final ContentResolver cr = activity.getContentResolver();
+        Settings.Secure.putString(cr, Settings.Secure.DEFAULT_INPUT_METHOD,
                 componentName.flattenToString());
         when(activity.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .thenReturn(mInputMethodManager);
@@ -168,11 +169,12 @@ public class LanguageAndInputSettingsTest {
         SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, loader);
 
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
+        final ContentResolver cr = mActivity.getContentResolver();
+        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
         provider.setListening(true);
         verify(mActivity).getString(R.string.language_input_gesture_summary_off);
 
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
+        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
         provider.setListening(true);
         verify(mActivity).getString(R.string.language_input_gesture_summary_on_with_assist);
     }

@@ -21,9 +21,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.content.ContentResolver;
+import android.provider.Settings.Secure;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
@@ -50,6 +54,9 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     @Override
     public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
         final String className = component.getClassName();
+        if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
+            return hasUsedNightDisplay(context);
+        }
         if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         }
@@ -119,4 +126,11 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return packageName;
     }
 
+    @VisibleForTesting
+    boolean hasUsedNightDisplay(Context context) {
+        final ContentResolver cr = context.getContentResolver();
+        final long lastActivatedTimeMillis = Secure.getLong(cr,
+            Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, -1);
+        return lastActivatedTimeMillis > 0;
+    }
 }

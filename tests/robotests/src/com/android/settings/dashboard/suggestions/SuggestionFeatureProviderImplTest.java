@@ -16,14 +16,19 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.provider.Settings.Secure;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.Settings;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
@@ -50,7 +55,9 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowSecureSettings.class)
 public class SuggestionFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -171,5 +178,31 @@ public class SuggestionFeatureProviderImplTest {
         mProvider.filterExclusiveSuggestions(suggestions);
 
         assertThat(suggestions).hasSize(3);
+    }
+
+    @Test
+    public void hasUsedNightDisplay_returnsFalse_byDefault() {
+        assertThat(mProvider.hasUsedNightDisplay(mContext)).isFalse();
+    }
+
+    @Test
+    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivated() {
+        Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
+        assertThat(mProvider.hasUsedNightDisplay(mContext)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifPreviouslyActivated() {
+        Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
+        final ComponentName componentName =
+            new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isNotCompleted_byDefault() {
+        final ComponentName componentName =
+            new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isFalse();
     }
 }
