@@ -499,7 +499,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
         BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
         updateHeaderPreference(batteryInfo);
 
-        final long runningTime = calculateRunningTimeBasedOnStatsType();
+        final long runningTime = mBatteryUtils.calculateRunningTimeBasedOnStatsType(mStatsHelper,
+                mStatsType);
         updateScreenPreference();
         updateLastFullChargePreference(runningTime);
 
@@ -653,14 +654,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mLastFullChargePref.setSubtitle(
                 TextUtils.expandTemplate(getText(R.string.power_last_full_charge_summary),
                         timeSequence));
-    }
-
-    @VisibleForTesting
-    long calculateRunningTimeBasedOnStatsType() {
-        final long elapsedRealtimeUs = mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
-        // Return the battery time (millisecond) on status mStatsType
-        return mStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs,
-                mStatsType /* STATS_SINCE_CHARGED */) / 1000;
     }
 
     @VisibleForTesting
