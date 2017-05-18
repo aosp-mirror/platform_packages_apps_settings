@@ -43,6 +43,8 @@ public class AdvancedAppSettings extends DashboardFragment {
 
     static final String TAG = "AdvancedAppSettings";
 
+    private static final String KEY_ASSIST_VOICE_INPUT = "assist_and_voice_input";
+
     @Override
     protected String getLogTag() {
         return TAG;
@@ -79,6 +81,18 @@ public class AdvancedAppSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.app_default_settings;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_ASSIST_VOICE_INPUT);
+                    // TODO (b/38230148) Remove these keys when we can differentiate work results
+                    keys.add((new DefaultWorkPhonePreferenceController(context))
+                            .getPreferenceKey());
+                    keys.add((new DefaultWorkBrowserPreferenceController(context))
+                            .getPreferenceKey());
+                    return keys;
                 }
             };
 

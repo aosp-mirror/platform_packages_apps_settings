@@ -35,7 +35,7 @@ import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
 import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
 
 /**
- * Listens to {@link Intent.ACTION_BOOT_COMPLETED} and {@link Intent.ACTION_PRE_BOOT_COMPLETED}
+ * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}
  * performs setup steps for a managed profile (disables the launcher icon of the Settings app,
  * adds cross-profile intent filters for the appropriate Settings activities), and disables the
  * webview setting for non-admin users.
@@ -89,10 +89,12 @@ public class SettingsInitialize extends BroadcastReceiver {
         }
 
         // Disable launcher icon
-        // Note: This needs to happen after forwarding intents, otherwise the main Settings
-        // intent gets lost
         ComponentName settingsComponentName = new ComponentName(context, Settings.class);
         pm.setComponentEnabledSetting(settingsComponentName,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        // Disable shortcut picker.
+        ComponentName shortcutComponentName = new ComponentName(context, CreateShortcut.class);
+        pm.setComponentEnabledSetting(shortcutComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 

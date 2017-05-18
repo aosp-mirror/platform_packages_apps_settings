@@ -53,8 +53,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
+
+    public static final String KEY_VISUAL_SETTINGS = "visual_interruptions_settings";
+
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
-    private static final String KEY_VISUAL_SETTINGS = "visual_interruptions_settings";
     private static final String KEY_AUTOMATIC_RULES = "automatic_rules";
 
     static final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();

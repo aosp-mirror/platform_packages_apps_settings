@@ -16,22 +16,22 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.net.ConnectivityManager;
-
+import android.os.UserHandle;
+import android.os.UserManager;
+import com.android.settings.notification.AudioHelper;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(ConnectivityManager.class)
-public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
-
-    private static boolean mIsNetworkSupported;
+@Implements(AudioHelper.class)
+public class ShadowAudioHelper {
 
     @Implementation
-    public boolean isNetworkSupported(int networkType) {
-        return mIsNetworkSupported;
+    public boolean isSingleVolume() {
+        return true;
     }
 
-    public static void setIsNetworkSupported(boolean isNetworkSupported) {
-        mIsNetworkSupported = isNetworkSupported;
+    @Implementation
+    public int getManagedProfileId(UserManager um) {
+        return UserHandle.USER_CURRENT;
     }
 }
