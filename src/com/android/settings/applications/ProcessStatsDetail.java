@@ -16,7 +16,7 @@
 
 package com.android.settings.applications;
 
-import static com.android.settings.applications.AppHeaderController.ActionType;
+import static com.android.settings.applications.EntityHeaderController.ActionType;
 
 import android.app.Activity;
 import android.app.ActivityManager;

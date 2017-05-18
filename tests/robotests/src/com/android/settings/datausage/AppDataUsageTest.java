@@ -25,8 +25,8 @@ import android.view.View;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AppHeaderController;
-import com.android.settings.applications.AppHeaderController.ActionType;
+import com.android.settings.applications.EntityHeaderController;
+import com.android.settings.applications.EntityHeaderController.ActionType;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.AppItem;
 
@@ -54,7 +54,7 @@ public class AppDataUsageTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private AppHeaderController mHeaderController;
+    private EntityHeaderController mHeaderController;
     private FakeFeatureFactory mFeatureFactory;
     private AppDataUsage mFragment;
 

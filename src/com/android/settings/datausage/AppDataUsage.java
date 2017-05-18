@@ -41,7 +41,7 @@ import android.widget.AdapterView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.applications.AppHeaderController;
+import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.AppItem;
@@ -330,9 +330,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 .getApplicationFeatureProvider(activity)
                 .newAppHeaderController(this, null /* appHeader */)
                 .setButtonActions(showInfoButton
-                                ? AppHeaderController.ActionType.ACTION_APP_INFO
-                                : AppHeaderController.ActionType.ACTION_NONE,
-                        AppHeaderController.ActionType.ACTION_NONE)
+                                ? EntityHeaderController.ActionType.ACTION_APP_INFO
+                                : EntityHeaderController.ActionType.ACTION_NONE,
+                        EntityHeaderController.ActionType.ACTION_NONE)
                 .setIcon(mIcon)
                 .setLabel(mLabel)
                 .setPackageName(pkg)

@@ -68,12 +68,12 @@ public class AppInfoWithHeaderTest {
 
     @Test
     public void testAppHeaderIsAdded() {
-        final AppHeaderController appHeaderController = new AppHeaderController(
+        final EntityHeaderController entityHeaderController = new EntityHeaderController(
                 ShadowApplication.getInstance().getApplicationContext(),
                 mAppInfoWithHeader,
                 null);
         when(mFactory.applicationFeatureProvider.newAppHeaderController(mAppInfoWithHeader, null))
-                .thenReturn(appHeaderController);
+                .thenReturn(entityHeaderController);
         mAppInfoWithHeader.onActivityCreated(null);
 
         verify(mAppInfoWithHeader.mScreen).addPreference(any(LayoutPreference.class));

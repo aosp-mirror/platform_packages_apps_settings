@@ -37,7 +37,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppHeaderController;
+import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -180,14 +180,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @VisibleForTesting
     void initHeader() {
-        final View appSnippet = mHeaderPreference.findViewById(R.id.app_snippet);
+        final View appSnippet = mHeaderPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
-        AppHeaderController controller = FeatureFactory.getFactory(context)
+        EntityHeaderController controller = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context)
                 .newAppHeaderController(this, appSnippet)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_NONE,
-                        AppHeaderController.ActionType.ACTION_NONE);
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
+                        EntityHeaderController.ActionType.ACTION_NONE);
 
         if (mAppEntry == null) {
             controller.setLabel(bundle.getString(EXTRA_LABEL));

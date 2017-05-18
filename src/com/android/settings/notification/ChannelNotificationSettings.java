@@ -24,10 +24,8 @@ import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
@@ -38,12 +36,11 @@ import android.view.View;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppHeaderController;
+import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.overlay.FeatureFactory;
@@ -122,8 +119,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 .setSummary(mAppRow.label)
                 .setPackageName(mAppRow.pkg)
                 .setUid(mAppRow.uid)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_INFO,
+                        EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
                 .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }

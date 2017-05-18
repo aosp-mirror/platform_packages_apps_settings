@@ -15,102 +15,96 @@
   limitations under the License.
   -->
 
-<LinearLayout
+<!-- Entity header -->
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/entity_header"
+    style="@style/EntityHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="0dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp">
 
-    <!-- App snippet with buttons -->
-    <RelativeLayout
-        android:id="@+id/app_snippet"
-        style="@style/EntityHeader"
+    <ImageView
+        android:id="@+id/entity_header_icon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:antialias="true" />
+
+    <LinearLayout
+        android:id="@+id/entity_header_links"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@android:id/button1"
+            style="?android:attr/actionOverflowButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:minWidth="@dimen/min_tap_target_size"
+            android:src="@drawable/ic_settings_24dp"
+            android:tint="?android:attr/colorAccent" />
+
+        <ImageButton
+            android:id="@android:id/button2"
+            style="?android:attr/actionOverflowButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:minWidth="@dimen/min_tap_target_size"
+            android:src="@null"
+            android:tint="?android:attr/colorAccent" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="0dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp">
-        <ImageView
-            android:id="@+id/app_detail_icon"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_horizontal"
-            android:antialias="true"/>
+        android:layout_toEndOf="@id/entity_header_icon"
+        android:layout_toStartOf="@id/entity_header_links"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/app_detail_links"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/right_button"
-                style="?android:attr/actionOverflowButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                android:minWidth="@dimen/min_tap_target_size"
-                android:src="@drawable/ic_settings_24dp"
-                android:tint="?android:attr/colorAccent"/>
-
-            <ImageButton
-                android:id="@+id/left_button"
-                style="?android:attr/actionOverflowButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                android:minWidth="@dimen/min_tap_target_size"
-                android:src="@null"
-                android:tint="?android:attr/colorAccent"/>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/entity_header_title"
+            style="@style/TextAppearance.EntityHeaderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/app_detail_icon"
-            android:layout_toStartOf="@id/app_detail_links"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:orientation="vertical">
+            android:singleLine="false"
+            android:ellipsize="marquee"
+            android:gravity="start"
+            android:textDirection="locale"
+            android:paddingTop="8dp" />
 
-            <TextView
-                android:id="@+id/app_detail_title"
-                style="@style/TextAppearance.EntityHeaderTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="false"
-                android:ellipsize="marquee"
-                android:gravity="start"
-                android:textDirection="locale"
-                android:paddingTop="8dp"/>
+        <TextView
+            android:id="@+id/install_type"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary" />
 
-            <TextView
-                android:id="@+id/install_type"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:textColor="?android:attr/textColorSecondary"/>
+        <TextView
+            android:id="@+id/entity_header_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary" />
 
-            <TextView
-                android:id="@+id/app_detail_summary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:textColor="?android:attr/textColorSecondary"/>
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

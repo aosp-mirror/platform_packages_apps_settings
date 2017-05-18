@@ -16,10 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.IMPORTANCE_LOW;
-import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -41,8 +37,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
@@ -51,11 +47,14 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.widget.FooterPreference;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static android.app.NotificationManager.IMPORTANCE_LOW;
+import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 /** These settings are per app, so should not be returned in global search results. */
 public class AppNotificationSettings extends NotificationSettingsBase {
@@ -139,8 +138,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 .setLabel(mAppRow.label)
                 .setPackageName(mAppRow.pkg)
                 .setUid(mAppRow.uid)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_INFO,
+                        EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
                 .done(activity, getPrefContext());
         pref.setKey(KEY_HEADER);
         getPreferenceScreen().addPreference(pref);

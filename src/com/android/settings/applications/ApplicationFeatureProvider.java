@@ -28,14 +28,13 @@ import java.util.List;
 public interface ApplicationFeatureProvider {
 
     /**
-     * Returns a new {@link AppHeaderController} instance to customize app header.
+     * Returns a new {@link EntityHeaderController} instance to customize app header.
      */
-    AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
+    EntityHeaderController newAppHeaderController(Fragment fragment, View appHeader);
 
     /**
-     *
-     *  Returns a new {@link InstantAppButtonsController} instance for showing buttons
-     *  only relevant to instant apps.
+     * Returns a new {@link InstantAppButtonsController} instance for showing buttons
+     * only relevant to instant apps.
      */
     InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
             View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate);
@@ -44,7 +43,7 @@ public interface ApplicationFeatureProvider {
      * Calculates the total number of apps installed on the device via policy in the current user
      * and all its managed profiles.
      *
-     * @param async Whether to count asynchronously in a background thread
+     * @param async    Whether to count asynchronously in a background thread
      * @param callback The callback to invoke with the result
      */
     void calculateNumberOfPolicyInstalledApps(boolean async, NumberOfAppsCallback callback);
@@ -61,10 +60,10 @@ public interface ApplicationFeatureProvider {
      * Asynchronously calculates the total number of apps installed in the current user and all its
      * managed profiles that have been granted one or more of the given permissions by the admin.
      *
-     * @param permissions Only consider apps that have been granted one or more of these permissions
-     *        by the admin, either at run-time or install-time
-     * @param async Whether to count asynchronously in a background thread
-     * @param callback The callback to invoke with the result
+     * @param permissions Only consider apps that have been granted one or more of these
+     *                    permissions by the admin, either at run-time or install-time
+     * @param async       Whether to count asynchronously in a background thread
+     * @param callback    The callback to invoke with the result
      */
     void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions, boolean async,
             NumberOfAppsCallback callback);
@@ -73,9 +72,9 @@ public interface ApplicationFeatureProvider {
      * Asynchronously builds the list of apps installed in the current user and all its
      * managed profiles that have been granted one or more of the given permissions by the admin.
      *
-     * @param permissions Only consider apps that have been granted one or more of these permissions
-     *        by the admin, either at run-time or install-time
-     * @param callback The callback to invoke with the result
+     * @param permissions Only consider apps that have been granted one or more of these
+     *                    permissions by the admin, either at run-time or install-time
+     * @param callback    The callback to invoke with the result
      */
     void listAppsWithAdminGrantedPermissions(String[] permissions, ListOfAppsCallback callback);
 
@@ -85,10 +84,9 @@ public interface ApplicationFeatureProvider {
      * given intent (e.g. open browser), even if the user has other apps installed that would also
      * be able to handle the intent.
      *
-     * @param userId ID of the user for which to find persistent preferred activities
-     * @param intent The intents for which to find persistent preferred activities
-     *
-     * @return the persistent preferred activites for the given intents, ordered first by user id,
+     * @param userId  ID of the user for which to find persistent preferred activities
+     * @param intents The intents for which to find persistent preferred activities
+     * @return the persistent preferred activities for the given intents, ordered first by user id,
      * then by package name
      */
     List<UserAppInfo> findPersistentPreferredActivities(@UserIdInt int userId, Intent[] intents);

@@ -37,7 +37,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.icu.text.ListFormatter;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
@@ -60,16 +59,12 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
@@ -413,12 +408,12 @@ public class InstalledAppDetails extends AppInfoBase
         mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
         FeatureFactory.getFactory(activity)
                 .getApplicationFeatureProvider(activity)
-                .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
+                .newAppHeaderController(this, mHeader.findViewById(R.id.entity_header))
                 .setPackageName(mPackageName)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
-                        AppHeaderController.ActionType.ACTION_NONE)
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
+                        EntityHeaderController.ActionType.ACTION_NONE)
                 .styleActionBar(activity)
-                .bindAppHeaderButtons();
+                .bindHeaderButtons();
         prepareUninstallAndStop();
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
@@ -584,7 +579,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     // Utility method to set application label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
-        final View appSnippet = mHeader.findViewById(R.id.app_snippet);
+        final View appSnippet = mHeader.findViewById(R.id.entity_header);
         mState.ensureIcon(mAppEntry);
         final Activity activity = getActivity();
         final boolean isInstantApp = AppUtils.isInstant(mPackageInfo.applicationInfo);
@@ -1242,32 +1237,6 @@ public class InstalledAppDetails extends AppInfoBase
         pref = findPreference("install_other_apps");
         if (pref != null) {
             pref.setSummary(ExternalSourcesDetails.getPreferenceSummary(getContext(), mAppEntry));
-        }
-    }
-
-    /**
-     * @deprecated app info pages should use {@link AppHeaderController} to show the app header.
-     */
-    public static void setupAppSnippet(View appSnippet, CharSequence label, Drawable icon,
-            CharSequence versionName) {
-        LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,
-                (ViewGroup) appSnippet.findViewById(android.R.id.widget_frame));
-
-        ImageView iconView = (ImageView) appSnippet.findViewById(R.id.app_detail_icon);
-        iconView.setImageDrawable(icon);
-        // Set application name.
-        TextView labelView = (TextView) appSnippet.findViewById(R.id.app_detail_title);
-        labelView.setText(label);
-        // Version number of application
-        TextView appVersion = (TextView) appSnippet.findViewById(R.id.widget_text1);
-
-        if (!TextUtils.isEmpty(versionName)) {
-            appVersion.setSelected(true);
-            appVersion.setVisibility(View.VISIBLE);
-            appVersion.setText(appSnippet.getContext().getString(R.string.version_text,
-                    String.valueOf(versionName)));
-        } else {
-            appVersion.setVisibility(View.INVISIBLE);
         }
     }
 

@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settings.applications.AppHeaderController.ActionType;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
@@ -26,6 +24,8 @@ import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.AppUtils;
+
+import static com.android.settings.applications.EntityHeaderController.ActionType;
 
 public abstract class AppInfoWithHeader extends AppInfoBase {
 
