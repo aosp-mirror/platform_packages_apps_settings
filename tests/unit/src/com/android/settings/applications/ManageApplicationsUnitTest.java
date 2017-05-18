@@ -16,18 +16,22 @@
 
 package com.android.settings.applications;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
-
 import android.content.pm.ApplicationInfo;
+import android.support.test.filters.SmallTest;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class ManageApplicationsTest {
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+
+@SmallTest
+@RunWith(AndroidJUnit4.class)
+public class ManageApplicationsUnitTest {
     @Test
     public void getOverrideFilter_filtersVolumeForAudio() {
         AppFilter filter =
