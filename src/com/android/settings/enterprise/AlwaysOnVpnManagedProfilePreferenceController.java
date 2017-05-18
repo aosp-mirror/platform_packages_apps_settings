@@ -33,7 +33,9 @@ public class AlwaysOnVpnManagedProfilePreferenceController
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.isAlwaysOnVpnSetInManagedProfile();
+        final boolean available = mFeatureProvider.isAlwaysOnVpnSetInManagedProfile();
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override

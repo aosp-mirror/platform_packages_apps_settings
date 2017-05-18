@@ -61,23 +61,32 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
-        controllers.add(new EnterpriseInstalledPackagesPreferenceController(context, lifecycle,
-                async));
-        controllers.add(new AdminGrantedLocationPermissionsPreferenceController(context, lifecycle,
-                async));
-        controllers.add(new AdminGrantedMicrophonePermissionPreferenceController(context, lifecycle,
-                async));
-        controllers.add(new AdminGrantedCameraPermissionPreferenceController(context, lifecycle,
-                async));
-        controllers.add(new EnterpriseSetDefaultAppsPreferenceController(context, lifecycle));
-        controllers.add(new AlwaysOnVpnCurrentUserPreferenceController(context, lifecycle));
-        controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context, lifecycle));
-        controllers.add(new GlobalHttpProxyPreferenceController(context, lifecycle));
-        controllers.add(new CaCertsPreferenceController(context, lifecycle));
+        final List exposureChangesCategoryControllers = new ArrayList<PreferenceController>();
+        exposureChangesCategoryControllers.add(new EnterpriseInstalledPackagesPreferenceController(
+                context, lifecycle, async));
+        exposureChangesCategoryControllers.add(
+                new AdminGrantedLocationPermissionsPreferenceController(context, lifecycle, async));
+        exposureChangesCategoryControllers.add(
+                new AdminGrantedMicrophonePermissionPreferenceController(context, lifecycle,
+                        async));
+        exposureChangesCategoryControllers.add(new AdminGrantedCameraPermissionPreferenceController(
+                context, lifecycle, async));
+        exposureChangesCategoryControllers.add(new EnterpriseSetDefaultAppsPreferenceController(
+                context, lifecycle));
+        exposureChangesCategoryControllers.add(new AlwaysOnVpnCurrentUserPreferenceController(
+                context, lifecycle));
+        exposureChangesCategoryControllers.add(new AlwaysOnVpnManagedProfilePreferenceController(
+                context, lifecycle));
+        exposureChangesCategoryControllers.add(new ImePreferenceController(context, lifecycle));
+        exposureChangesCategoryControllers.add(new GlobalHttpProxyPreferenceController(context,
+                lifecycle));
+        exposureChangesCategoryControllers.add(new CaCertsPreferenceController(context, lifecycle));
+        controllers.addAll(exposureChangesCategoryControllers);
+        controllers.add(new ExposureChangesCategoryPreferenceController(context, lifecycle,
+                exposureChangesCategoryControllers, async));
         controllers.add(new FailedPasswordWipeCurrentUserPreferenceController(context, lifecycle));
         controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context,
                 lifecycle));
-        controllers.add(new ImePreferenceController(context, lifecycle));
         return controllers;
     }
 

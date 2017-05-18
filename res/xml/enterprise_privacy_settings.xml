@@ -45,7 +45,8 @@
                     android:selectable="false"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
+    <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category"
+                        android:key="exposure_changes_category">
         <Preference android:fragment="com.android.settings.enterprise.ApplicationListFragment$EnterpriseInstalledPackages"
                     android:key="number_enterprise_installed_packages"
                     android:title="@string/enterprise_privacy_enterprise_installed_packages"/>

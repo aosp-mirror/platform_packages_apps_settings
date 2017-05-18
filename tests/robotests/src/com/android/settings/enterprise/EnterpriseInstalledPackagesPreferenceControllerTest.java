@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -37,9 +38,12 @@ import org.mockito.stubbing.Answer;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyObject;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -49,9 +53,13 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterpriseInstalledPackagesPreferenceControllerTest {
 
+    private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES
+            = "number_enterprise_installed_packages";
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
+    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private EnterpriseInstalledPackagesPreferenceController mController;
 
@@ -62,6 +70,12 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mController = new EnterpriseInstalledPackagesPreferenceController(mContext,
                 null /* lifecycle */, true /* async */);
+        mController.setAvailabilityObserver(mObserver);
+    }
+
+    @Test
+    public void testGetAvailabilityObserver() {
+        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
     }
 
     private void setNumberOfEnterpriseInstalledPackages(int number, boolean async) {
@@ -82,6 +96,8 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         setNumberOfEnterpriseInstalledPackages(0, true /* async */);
         mController.updateState(preference);
         assertThat(preference.isVisible()).isFalse();
+        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES,
+                false);
 
         setNumberOfEnterpriseInstalledPackages(20, true /* async */);
         when(mContext.getResources().getQuantityString(
@@ -90,6 +106,8 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("minimum 20 apps");
         assertThat(preference.isVisible()).isTrue();
+        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES,
+                true);
     }
 
     @Test
@@ -97,21 +115,30 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         final EnterpriseInstalledPackagesPreferenceController controller
                 = new EnterpriseInstalledPackagesPreferenceController(mContext,
                         null /* lifecycle */, false /* async */);
+        controller.setAvailabilityObserver(mObserver);
 
         setNumberOfEnterpriseInstalledPackages(0, false /* async */);
         assertThat(controller.isAvailable()).isFalse();
+        verify(mObserver).onPreferenceAvailabilityUpdated(
+                KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES, false);
 
         setNumberOfEnterpriseInstalledPackages(20, false /* async */);
         assertThat(controller.isAvailable()).isTrue();
+        verify(mObserver).onPreferenceAvailabilityUpdated(
+                KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES, true);
     }
 
     @Test
     public void testIsAvailableAsync() {
         setNumberOfEnterpriseInstalledPackages(0, true /* async */);
         assertThat(mController.isAvailable()).isTrue();
+        verify(mObserver, never()).onPreferenceAvailabilityUpdated(
+                eq(KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES), anyBoolean());
 
         setNumberOfEnterpriseInstalledPackages(20, true /* async */);
         assertThat(mController.isAvailable()).isTrue();
+        verify(mObserver, never()).onPreferenceAvailabilityUpdated(
+                eq(KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES), anyBoolean());
     }
 
     @Test
@@ -123,6 +150,6 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
     @Test
     public void testGetPreferenceKey() {
         assertThat(mController.getPreferenceKey())
-                .isEqualTo("number_enterprise_installed_packages");
+                .isEqualTo(KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES);
     }
 }
