@@ -111,6 +111,9 @@ public class SharedPreferencesLogger implements SharedPreferences {
             mPreferenceKeySet.add(prefKey);
             return;
         }
+        // TODO: Remove count logging to save some resource.
+        mMetricsFeature.count(mContext, prefKey + "|" + value, 1);
+
         // Pref key exists in set, log it's change in metrics.
         mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE,
                 Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, prefKey),
