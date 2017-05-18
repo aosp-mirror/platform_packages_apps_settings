@@ -68,6 +68,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -165,6 +166,7 @@ public class PowerUsageSummaryTest {
         mFragment.initFeatureProvider();
         mBatteryMeterView = spy(new BatteryMeterView(mRealContext));
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
+        doNothing().when(mFragment).restartBatteryStatsLoader();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())

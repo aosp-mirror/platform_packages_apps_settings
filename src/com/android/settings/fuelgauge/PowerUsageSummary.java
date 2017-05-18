@@ -287,7 +287,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
-                refreshUi();
+                restartBatteryStatsLoader();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
