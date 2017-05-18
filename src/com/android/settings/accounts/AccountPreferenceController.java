@@ -123,9 +123,9 @@ public class AccountPreferenceController extends PreferenceController
          */
         public boolean pendingRemoval;
         /**
-         * The map from account name to account preference
+         * The map from account key to account preference
          */
-        public ArrayMap<CharSequence, AccountTypePreference> accountPreferences = new ArrayMap<>();
+        public ArrayMap<String, AccountTypePreference> accountPreferences = new ArrayMap<>();
     }
 
     public AccountPreferenceController(Context context, SettingsPreferenceFragment parent,
@@ -426,7 +426,7 @@ public class AccountPreferenceController extends PreferenceController
             return;
         }
         if (profileData.userInfo.isEnabled()) {
-            final ArrayMap<CharSequence, AccountTypePreference> preferenceToRemove =
+            final ArrayMap<String, AccountTypePreference> preferenceToRemove =
                     new ArrayMap<>(profileData.accountPreferences);
             final ArrayList<AccountTypePreference> preferences = getAccountTypePreferences(
                     profileData.authenticatorHelper, profileData.userInfo.getUserHandle(),
@@ -435,18 +435,19 @@ public class AccountPreferenceController extends PreferenceController
             for (int i = 0; i < count; i++) {
                 final AccountTypePreference preference = preferences.get(i);
                 preference.setOrder(i);
-                if (!profileData.accountPreferences.containsValue(preference)) {
-                    profileData.preferenceGroup.addPreference(preferences.get(i));
-                    profileData.accountPreferences.put(preference.getTitle(), preference);
+                final String key = preference.getKey();
+                if (!profileData.accountPreferences.containsKey(key)) {
+                    profileData.preferenceGroup.addPreference(preference);
+                    profileData.accountPreferences.put(key, preference);
                 }
             }
             if (profileData.addAccountPreference != null) {
                 profileData.preferenceGroup.addPreference(profileData.addAccountPreference);
             }
-            for (CharSequence name : preferenceToRemove.keySet()) {
+            for (String key : preferenceToRemove.keySet()) {
                 profileData.preferenceGroup.removePreference(
-                    profileData.accountPreferences.get(name));
-                profileData.accountPreferences.remove(name);
+                    profileData.accountPreferences.get(key));
+                profileData.accountPreferences.remove(key);
             }
         } else {
             profileData.preferenceGroup.removeAll();
@@ -471,8 +472,7 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private ArrayList<AccountTypePreference> getAccountTypePreferences(AuthenticatorHelper helper,
-            UserHandle userHandle,
-            ArrayMap<CharSequence, AccountTypePreference> preferenceToRemove) {
+            UserHandle userHandle, ArrayMap<String, AccountTypePreference> preferenceToRemove) {
         final String[] accountTypes = helper.getEnabledAccountTypes();
         final ArrayList<AccountTypePreference> accountTypePreferences =
                 new ArrayList<>(accountTypes.length);
@@ -497,7 +497,8 @@ public class AccountPreferenceController extends PreferenceController
 
             // Add a preference row for each individual account
             for (Account account : accounts) {
-                final AccountTypePreference preference = preferenceToRemove.remove(account.name);
+                final AccountTypePreference preference =
+                        preferenceToRemove.remove(AccountTypePreference.buildKey(account));
                 if (preference != null) {
                     accountTypePreferences.add(preference);
                     continue;
@@ -521,7 +522,7 @@ public class AccountPreferenceController extends PreferenceController
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
                 accountTypePreferences.add(new AccountTypePreference(
                     prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent),
-                    account.name, titleResPackageName, titleResId, label,
+                    account, titleResPackageName, titleResId, label,
                     AccountDetailDashboardFragment.class.getName(), fragmentArguments, icon));
             }
             helper.preloadDrawableForType(mContext, accountType);

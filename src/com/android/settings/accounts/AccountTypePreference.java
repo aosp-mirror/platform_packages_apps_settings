@@ -16,6 +16,7 @@
 
 package com.android.settings.accounts;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -67,18 +68,11 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
 
     private final int mMetricsCategory;
 
-    public AccountTypePreference(Context context, int metricsCategory, CharSequence title,
-            String titleResPackageName, int titleResId, String fragment, Bundle fragmentArguments,
-            Drawable icon) {
-        this(context, metricsCategory, title, titleResPackageName, titleResId, null, fragment,
-                fragmentArguments, icon);
-    }
-
-    public AccountTypePreference(Context context, int metricsCategory, CharSequence title,
+    public AccountTypePreference(Context context, int metricsCategory, Account account,
             String titleResPackageName, int titleResId, CharSequence summary, String fragment,
             Bundle fragmentArguments, Drawable icon) {
         super(context);
-        mTitle = title;
+        mTitle = account.name;
         mTitleResPackageName = titleResPackageName;
         mTitleResId = titleResId;
         mSummary = summary;
@@ -87,7 +81,8 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
         mMetricsCategory = metricsCategory;
         setWidgetLayoutResource(R.layout.account_type_preference);
 
-        setTitle(title);
+        setKey(buildKey(account));
+        setTitle(mTitle);
         setSummary(summary);
         setIcon(icon);
 
@@ -115,6 +110,13 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
         return false;
     }
 
+    /**
+     * Build a unique preference key based on account.
+     */
+    public static String buildKey(Account account) {
+        return String.valueOf(account.hashCode());
+    }
+
     public CharSequence getTitle() {
         return mTitle;
     }
@@ -122,5 +124,4 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
     public CharSequence getSummary() {
         return mSummary;
     }
-
 }
