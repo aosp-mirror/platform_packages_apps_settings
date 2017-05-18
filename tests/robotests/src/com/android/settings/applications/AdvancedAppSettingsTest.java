@@ -26,6 +26,7 @@ import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceCon
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.XmlTestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,11 +35,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.List;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -136,4 +140,16 @@ public class AdvancedAppSettingsTest {
 
     }
 
+
+    @Test
+    public void testNonIndexableKeys_existInXmlLayout() {
+        final Context context = spy(RuntimeEnvironment.application);
+        final List<String> niks = AdvancedAppSettings.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+        final int xmlId = (new AdvancedAppSettings()).getPreferenceScreenResId();
+
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
+
+        assertThat(keys).containsAllIn(niks);
+    }
 }

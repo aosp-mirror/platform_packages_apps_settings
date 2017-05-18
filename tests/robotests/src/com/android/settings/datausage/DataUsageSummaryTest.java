@@ -25,8 +25,8 @@ import android.net.wifi.WifiManager;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.NetworkPolicyEditor;
 
 import org.junit.Before;
@@ -159,5 +159,17 @@ public class DataUsageSummaryTest {
         keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage));
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    @Config(shadows = ShadowConnectivityManager.class)
+    public void testNonIndexableKeys_hasMobileData_restrictedAccessesAdded() {
+        ShadowConnectivityManager.setIsNetworkSupported(true);
+        List<String> keys = DataUsageSummary.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(DataUsageSummary.KEY_RESTRICT_BACKGROUND);
+        assertThat(keys).contains(DataUsageSummary.KEY_NETWORK_RESTRICTIONS);
+        ShadowConnectivityManager.setIsNetworkSupported(false);
     }
 }

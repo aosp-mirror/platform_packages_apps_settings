@@ -671,9 +671,9 @@ public class DatabaseIndexingManagerTest {
                 new HashMap<String, Set<String>>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(2);
+        assertThat(cursor.getCount()).isEqualTo(1);
         cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
-        assertThat(cursor.getCount()).isEqualTo(4);
+        assertThat(cursor.getCount()).isEqualTo(5);
     }
 
     @Test
