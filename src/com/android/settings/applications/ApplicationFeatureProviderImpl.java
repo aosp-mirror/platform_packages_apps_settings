@@ -53,11 +53,6 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
-    public EntityHeaderController newAppHeaderController(Fragment fragment, View appHeader) {
-        return new EntityHeaderController(mContext, fragment, appHeader);
-    }
-
-    @Override
     public InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
             View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate) {
         return new InstantAppButtonsController(mContext, fragment, view, showDialogDelegate);

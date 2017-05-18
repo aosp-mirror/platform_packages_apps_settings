@@ -91,6 +91,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -406,9 +407,7 @@ public class InstalledAppDetails extends AppInfoBase
         final Activity activity = getActivity();
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
         mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
-        FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity)
-                .newAppHeaderController(this, mHeader.findViewById(R.id.entity_header))
+        EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
                 .setPackageName(mPackageName)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE)
@@ -585,9 +584,7 @@ public class InstalledAppDetails extends AppInfoBase
         final boolean isInstantApp = AppUtils.isInstant(mPackageInfo.applicationInfo);
         final CharSequence summary =
                 isInstantApp ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
-        FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this, appSnippet)
+        EntityHeaderController.newInstance(activity, this, appSnippet)
             .setLabel(mAppEntry)
             .setIcon(mAppEntry)
             .setSummary(summary)

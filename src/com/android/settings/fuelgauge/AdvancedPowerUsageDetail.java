@@ -37,13 +37,12 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -183,9 +182,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final View appSnippet = mHeaderPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
-        EntityHeaderController controller = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context)
-                .newAppHeaderController(this, appSnippet)
+        EntityHeaderController controller = EntityHeaderController
+                .newInstance(context, this, appSnippet)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 

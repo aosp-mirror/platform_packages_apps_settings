@@ -38,10 +38,9 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -127,13 +126,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void addHeaderPref() {
-        ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
+        ArrayMap<String, AppRow> rows = new ArrayMap<>();
         rows.put(mAppRow.pkg, mAppRow);
         collectConfigActivities(rows);
         final Activity activity = getActivity();
-        final Preference pref = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity)
-                .newAppHeaderController(this /* fragment */, null /* appHeader */)
+        final Preference pref = EntityHeaderController
+                .newInstance(activity, this /* fragment */, null /* header */)
                 .setIcon(mAppRow.icon)
                 .setLabel(mAppRow.label)
                 .setPackageName(mAppRow.pkg)

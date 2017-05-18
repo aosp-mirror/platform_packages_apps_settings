@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.widget;
 
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
@@ -41,6 +41,9 @@ import android.widget.TextView;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -84,7 +87,18 @@ public class EntityHeaderController {
 
     private boolean mIsInstantApp;
 
-    public EntityHeaderController(Context context, Fragment fragment, View header) {
+    /**
+     * Creates a new instance of the controller.
+     *
+     * @param fragment The fragment that header will be placed in.
+     * @param header   Optional: header view if it's already created.
+     */
+    public static EntityHeaderController newInstance(Context context, Fragment fragment,
+            View header) {
+        return new EntityHeaderController(context.getApplicationContext(), fragment, header);
+    }
+
+    private EntityHeaderController(Context context, Fragment fragment, View header) {
         mContext = context;
         mFragment = fragment;
         mMetricsCategory = FeatureFactory.getFactory(context).getMetricsFeatureProvider()
@@ -245,9 +259,16 @@ public class EntityHeaderController {
                     button.setContentDescription(
                             mContext.getString(R.string.application_info_label));
                     button.setImageResource(com.android.settings.R.drawable.ic_info);
-                    button.setOnClickListener(v -> AppInfoBase.startAppInfoFragment(
-                            InstalledAppDetails.class, R.string.application_info_label,
-                            mPackageName, mUid, mFragment, 0 /* request */, mMetricsCategory));
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AppInfoBase.startAppInfoFragment(
+                                    InstalledAppDetails.class, R.string.application_info_label,
+                                    mPackageName, mUid, mFragment, 0 /* request */,
+                                    mMetricsCategory);
+
+                        }
+                    });
                     button.setVisibility(View.VISIBLE);
                 }
                 return;
@@ -256,7 +277,12 @@ public class EntityHeaderController {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setOnClickListener(v -> mFragment.startActivity(mAppNotifPrefIntent));
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mFragment.startActivity(mAppNotifPrefIntent);
+                        }
+                    });
                     button.setVisibility(View.VISIBLE);
                 }
                 return;
@@ -268,7 +294,12 @@ public class EntityHeaderController {
                     button.setVisibility(View.GONE);
                     return;
                 }
-                button.setOnClickListener(v -> mFragment.startActivity(intent));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mFragment.startActivity(intent);
+                    }
+                });
                 button.setVisibility(View.VISIBLE);
                 return;
             }

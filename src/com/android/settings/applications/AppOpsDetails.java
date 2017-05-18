@@ -44,6 +44,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.widget.EntityHeaderController;
 
 import java.util.List;
 

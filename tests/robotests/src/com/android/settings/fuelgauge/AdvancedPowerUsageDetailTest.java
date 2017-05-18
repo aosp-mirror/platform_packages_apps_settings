@@ -17,27 +17,27 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
-import android.view.View;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.EntityHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +64,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowEntityHeaderController.class)
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -120,8 +121,7 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(APP_LABEL).when(mBundle).getString(anyString());
         doReturn(mBundle).when(mFragment).getArguments();
 
-        doReturn(mEntityHeaderController).when(mFeatureFactory.applicationFeatureProvider)
-                .newAppHeaderController(any(Fragment.class), any(View.class));
+        ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
@@ -163,6 +163,11 @@ public class AdvancedPowerUsageDetailTest {
         };
         doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(any(), anyString(),
                 captor.capture(), anyInt(), any(), any());
+    }
+
+    @After
+    public void reset() {
+        ShadowEntityHeaderController.reset();
     }
 
     @Test

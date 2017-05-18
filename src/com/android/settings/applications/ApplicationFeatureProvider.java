@@ -28,11 +28,6 @@ import java.util.List;
 public interface ApplicationFeatureProvider {
 
     /**
-     * Returns a new {@link EntityHeaderController} instance to customize app header.
-     */
-    EntityHeaderController newAppHeaderController(Fragment fragment, View appHeader);
-
-    /**
      * Returns a new {@link InstantAppButtonsController} instance for showing buttons
      * only relevant to instant apps.
      */
