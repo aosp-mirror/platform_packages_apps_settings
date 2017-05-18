@@ -17,6 +17,7 @@
 package com.android.settings.fingerprint;
 
 import android.app.KeyguardManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserHandle;
@@ -27,13 +28,19 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.SetupChooseLockGeneric;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
 
     @Override
     protected Intent getChooseLockIntent() {
-        Intent intent = new Intent(this, SetupChooseLockGeneric.class);
+        Intent intent = new Intent(this, SetupChooseLockGeneric.class)
+                .putExtra(
+                        LockPatternUtils.PASSWORD_TYPE_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
     }
