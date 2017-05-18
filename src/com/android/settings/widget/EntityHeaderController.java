@@ -175,7 +175,7 @@ public class EntityHeaderController {
     }
 
     /**
-     * Done mutating appheader, rebinds everything and return a new {@link LayoutPreference}.
+     * Done mutating entity header, rebinds everything and return a new {@link LayoutPreference}.
      */
     public LayoutPreference done(Activity activity, Context uiContext) {
         final LayoutPreference pref = new LayoutPreference(uiContext, done(activity));
@@ -209,7 +209,7 @@ public class EntityHeaderController {
     }
 
     /**
-     * Only binds app header with button actions.
+     * Only binds entity header with button actions.
      */
     public EntityHeaderController bindHeaderButtons() {
         ImageButton button1 = mHeader.findViewById(android.R.id.button1);
