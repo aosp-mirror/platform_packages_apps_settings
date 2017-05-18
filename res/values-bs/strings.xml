@@ -31,6 +31,8 @@
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Sada ste programer!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nema potrebe, već ste programer."</string>
+    <!-- no translation found for dev_settings_disabled_warning (4909448907673974370) -->
+    <skip />
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Bežična veza i mreže"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"Veze"</string>
     <string name="header_category_device" msgid="4544026001618307754">"Uređaj"</string>
@@ -111,6 +113,8 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Prekinuti vezu?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Time će se okončati vaša veza s uređajem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Nemate dozvolu da mijenjate postavke za Bluetooth."</string>
+    <!-- no translation found for bluetooth_pairing_pref_title (4601203665214962983) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je vidljiv uređajima u blizini, dok su postavke Bluetootha otvorene."</string>
     <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"MAC adresa za Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Želite li prekinuti vezu sa uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -1769,12 +1773,12 @@
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Kreirati vidžet i omogućiti pristup?"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"Nakon što kreirate vidžet, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> može pristupiti svim podacima koje prikazuje."</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"Uvijek dopusti da aplikacija <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> kreira vidžete i koristi njihove podatke"</string>
-    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g>d <xliff:g id="HOURS">%2$d</xliff:g>h <xliff:g id="MINUTES">%3$d</xliff:g>m <xliff:g id="SECONDS">%4$d</xliff:g>s"</string>
-    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g>h <xliff:g id="MINUTES">%2$d</xliff:g>m <xliff:g id="SECONDS">%3$d</xliff:g>s"</string>
-    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>m <xliff:g id="SECONDS">%2$d</xliff:g>s"</string>
-    <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g>s"</string>
-    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g>d <xliff:g id="HOURS">%2$d</xliff:g>h <xliff:g id="MINUTES">%3$d</xliff:g>m"</string>
-    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> s <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> d, <xliff:g id="HOURS">%2$d</xliff:g> h, <xliff:g id="MINUTES">%3$d</xliff:g> min, <xliff:g id="SECONDS">%4$d</xliff:g> s"</string>
+    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min, <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
+    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> min, <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
+    <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
+    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> d, <xliff:g id="HOURS">%2$d</xliff:g> h, <xliff:g id="MINUTES">%3$d</xliff:g> min"</string>
+    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> min"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistika korištenja"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Statistika korištenja"</string>
@@ -1965,7 +1969,7 @@
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Ekran uključen"</string>
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS uključen"</string>
     <string name="battery_stats_camera_on_label" msgid="4935637383628414968">"Kamera je uključena"</string>
-    <string name="battery_stats_flashlight_on_label" msgid="4319637669889411307">"Lampa je uključena"</string>
+    <string name="battery_stats_flashlight_on_label" msgid="4319637669889411307">"Svjetiljka je uključena"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"Wi-Fi"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Aktivan"</string>
     <!-- no translation found for battery_stats_phone_signal_label (4137799310329041341) -->
@@ -1983,7 +1987,7 @@
     <string name="packages_subtitle" msgid="4736416171658062768">"Uključeni paketi"</string>
     <string name="battery_abnormal_details_title" msgid="7803612642167433678">"Aplikacija se ne ponaša kako treba"</string>
     <string name="power_screen" msgid="3023346080675904613">"Ekran"</string>
-    <string name="power_flashlight" msgid="7794409781003567614">"Lampa"</string>
+    <string name="power_flashlight" msgid="7794409781003567614">"Svjetiljka"</string>
     <string name="power_camera" msgid="4976286950934622605">"Fotoaparat"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
@@ -2012,7 +2016,7 @@
     <string name="usage_type_audio" msgid="6957269406840886290">"Zvuk"</string>
     <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
     <string name="usage_type_camera" msgid="8299433109956769757">"Kamera"</string>
-    <string name="usage_type_flashlight" msgid="1516392356962208230">"Lampa"</string>
+    <string name="usage_type_flashlight" msgid="1516392356962208230">"Svjetiljka"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"Vrijeme rada"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Vrijeme bez signala"</string>
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Ukupni kapacitet baterije"</string>
@@ -2029,7 +2033,7 @@
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Potrošnja baterije kada je telefon u stanju pripravnosti"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Potrošnja baterije za mobilni radio"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Prebacite se na način rada u avionu kako biste štedili napajanje na područjima u kojima nema pokrivenosti mobilnom mrežom"</string>
-    <string name="battery_desc_flashlight" msgid="2908579430841025494">"Potrošnja baterije upotrebom baterijske lampe"</string>
+    <string name="battery_desc_flashlight" msgid="2908579430841025494">"Potrošnja baterije upotrebom svjetiljke"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"Potrošnja baterije upotrebom kamere"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Potrošnja baterije na prikaz i pozadinsko osvjetljenje"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Smanjite osvjetljenje ekrana i/ili trajanje perioda do isključivanja ekrana"</string>
@@ -2889,8 +2893,6 @@
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Slika u slici"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Dozvoli način rada Slika u slici"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Dozvoli ovoj aplikaciji da kreira prozor u načinu rada Slika u slici dok je aplikacija otvorena ili nakon što je napustite (naprimjer, da nastavite gledati videozapis). Ovaj videozapis se prikazuje preko drugih aplikacija koje koristite."</string>
-    <string name="picture_in_picture_on" msgid="6103704909710176555">"Da"</string>
-    <string name="picture_in_picture_off" msgid="5654388666434625247">"Ne"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Pristup opciji Ne ometaj"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nijedna instalirana aplikacija nije zatražila pristup za Ne ometaj"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Učitavaju se aplikacije..."</string>
@@ -3254,8 +3256,10 @@
     <string name="overlay_settings" msgid="6930854109449524280">"Prikaz preko drugih aplikacija"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"Aplikacije s dozvolom za prikaz preko drugih aplikacija: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije s dozvolom"</string>
-    <string name="system_alert_window_on" msgid="2939489395109048888">"Da"</string>
-    <string name="system_alert_window_off" msgid="6189115687233061992">"Ne"</string>
+    <!-- no translation found for app_permission_summary_allowed (1505409933012886711) -->
+    <skip />
+    <!-- no translation found for app_permission_summary_not_allowed (2592617058101882802) -->
+    <skip />
     <string name="install_other_apps" msgid="6986686991775883017">"Instaliranje nepoznatih aplikacija"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instaliranje aplikacije nepoznati izvori"</string>
     <string name="write_settings" msgid="4797457275727195681">"Izmjena postavki sistema"</string>
@@ -3268,10 +3272,6 @@
     <string name="write_settings_preference" msgid="3407383041273067448">"Dozvola za izmjenu postavki sistema aplikacije"</string>
     <string name="permit_write_settings" msgid="6393779336656870080">"Dozvoli izmijenu postavki sistema"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"Ovo odobrenje omogućava aplikaciji da izmijeni postavke sistema."</string>
-    <string name="write_settings_on" msgid="8230580416068832239">"Da"</string>
-    <string name="write_settings_off" msgid="5156104383386336233">"Ne"</string>
-    <string name="external_source_trusted" msgid="2707996266575928037">"Dozvoljeno"</string>
-    <string name="external_source_untrusted" msgid="2677442511837596726">"Nije dozvoljeno"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"Dozvoli iz ovog izvora"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dvostruko uvrtanje za otvaranje kamere"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Da biste otvorili aplikaciju za kameru, dva puta uvrnite zglob"</string>
