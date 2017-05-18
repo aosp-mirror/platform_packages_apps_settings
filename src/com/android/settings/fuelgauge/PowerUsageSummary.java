@@ -106,7 +106,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     static final int ANOMALY_LOADER = 1;
-    private static final int BATTERY_ESTIMATE_LOADER = 2;
+    @VisibleForTesting
+    static final int BATTERY_ESTIMATE_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -173,6 +174,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
                     final Uri queryUri = mPowerFeatureProvider.getEnhancedBatteryPredictionUri();
+
                     return new CursorLoader(getContext(), queryUri, null, null, null, null);
                 }
 
@@ -221,10 +223,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mAnomalySparseArray = new SparseArray<>();
 
         initFeatureProvider();
-        if (mPowerFeatureProvider != null) {
-            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
-                    mBatteryPredictionLoaderCallbacks);
-        }
+        initializeBatteryEstimateLoader();
     }
 
     @Override
@@ -758,6 +757,15 @@ public class PowerUsageSummary extends PowerUsageBase implements
             batteryInfo.remainingLabel = resources.getString(
                     com.android.settingslib.R.string.power_remaining_duration_only,
                     timeString);
+        }
+    }
+
+    @VisibleForTesting
+    void initializeBatteryEstimateLoader() {
+        if (mPowerFeatureProvider != null
+                && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(getContext())) {
+            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
+                    mBatteryPredictionLoaderCallbacks);
         }
     }
 
