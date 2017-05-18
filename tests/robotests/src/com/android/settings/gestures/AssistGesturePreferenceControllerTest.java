@@ -52,12 +52,14 @@ public class AssistGesturePreferenceControllerTest {
     private FakeFeatureFactory mFactory;
     private AssistGesturePreferenceController mController;
 
+    private static final String KEY_ASSIST = "gesture_assist";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AssistGesturePreferenceController(mContext, null);
+        mController = new AssistGesturePreferenceController(mContext, null, KEY_ASSIST);
     }
 
     @Test
@@ -77,7 +79,7 @@ public class AssistGesturePreferenceControllerTest {
         // Set the setting to be enabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), ASSIST_GESTURE_ENABLED, 1);
-        mController = new AssistGesturePreferenceController(context, null);
+        mController = new AssistGesturePreferenceController(context, null, KEY_ASSIST);
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
@@ -87,7 +89,7 @@ public class AssistGesturePreferenceControllerTest {
         // Set the setting to be disabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), ASSIST_GESTURE_ENABLED, 0);
-        mController = new AssistGesturePreferenceController(context, null);
+        mController = new AssistGesturePreferenceController(context, null, KEY_ASSIST);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }

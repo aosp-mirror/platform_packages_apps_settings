@@ -47,11 +47,13 @@ public class PIckupGesturePreferenceControllerTest {
 
     private PickupGesturePreferenceController mController;
 
+    private static final String KEY_PICK_UP = "gesture_pick_up";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new PickupGesturePreferenceController(
-                mContext, null, mAmbientDisplayConfiguration, 0);
+                mContext, null, mAmbientDisplayConfiguration, 0, KEY_PICK_UP);
     }
 
     @Test
