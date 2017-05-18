@@ -98,7 +98,7 @@ public class AppHeaderControllerTest {
 
     @Test
     public void testBuildView_constructedWithView_shouldReturnSameView() {
-        View inputView = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
+        View inputView = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         mController = new AppHeaderController(mShadowContext, mFragment, inputView);
         View view = mController.done(mActivity);
 
@@ -108,7 +108,7 @@ public class AppHeaderControllerTest {
     @Test
     public void bindViews_shouldBindAllData() {
         final String testString = "test";
-        final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
+        final View appHeader = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final TextView label = appHeader.findViewById(R.id.app_detail_title);
         final TextView version = appHeader.findViewById(R.id.app_detail_summary);
 
@@ -129,7 +129,7 @@ public class AppHeaderControllerTest {
         info.activityInfo.packageName = "123";
         info.activityInfo.name = "321";
         final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
+                .inflate(R.layout.settings_entity_header, null /* root */);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(info);
 
@@ -154,7 +154,7 @@ public class AppHeaderControllerTest {
     @Test
     public void bindButton_noAppPref_shouldNotShowButton() {
         final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
+                .inflate(R.layout.settings_entity_header, null /* root */);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(null);
 
@@ -173,7 +173,7 @@ public class AppHeaderControllerTest {
     @Test
     public void bindButton_noAppInfo_shouldNotShowButton() {
         final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
+                .inflate(R.layout.settings_entity_header, null /* root */);
 
         mController = new AppHeaderController(mContext, mFragment, appLinks);
         mController.setPackageName(null)
@@ -191,7 +191,7 @@ public class AppHeaderControllerTest {
     @Test
     public void bindButton_hasAppInfo_shouldShowButton() {
         final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
+                .inflate(R.layout.settings_entity_header, null /* root */);
         when(mFragment.getActivity()).thenReturn(mock(Activity.class));
 
         mController = new AppHeaderController(mContext, mFragment, appLinks);
@@ -211,7 +211,7 @@ public class AppHeaderControllerTest {
     @Test
     public void bindButton_hasAppInfo_shouldHaveContentDescription() {
         final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
+                .inflate(R.layout.settings_entity_header, null /* root */);
         when(mFragment.getActivity()).thenReturn(mock(Activity.class));
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
 
@@ -230,7 +230,7 @@ public class AppHeaderControllerTest {
     @Test
     public void bindButton_hasAppNotifIntent_shouldShowButton() {
         final View appLinks = mLayoutInflater
-                .inflate(R.layout.app_details, null /* root */);
+                .inflate(R.layout.settings_entity_header, null /* root */);
 
         mController = new AppHeaderController(mContext, mFragment, appLinks);
         mController.setAppNotifPrefIntent(new Intent())
@@ -249,7 +249,7 @@ public class AppHeaderControllerTest {
     // app is instant.
     @Test
     public void instantApps_normalAppsDontGetLabel() {
-        final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
+        final View appHeader = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
         mController.done(mActivity);
         assertThat(appHeader.findViewById(R.id.install_type).getVisibility())
@@ -259,7 +259,7 @@ public class AppHeaderControllerTest {
     // Test that the "instant apps" label is present in the header when we have an instant app.
     @Test
     public void instantApps_expectedHeaderItem() {
-        final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
+        final View appHeader = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
         mController.setIsInstantApp(true);
         mController.done(mActivity);

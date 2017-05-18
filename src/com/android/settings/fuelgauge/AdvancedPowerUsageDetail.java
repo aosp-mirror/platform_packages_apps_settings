@@ -224,7 +224,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.power_usage_detail_ia;
+        return R.xml.power_usage_detail;
     }
 
     @Override

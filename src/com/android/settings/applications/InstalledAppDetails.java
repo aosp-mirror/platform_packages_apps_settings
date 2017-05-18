@@ -349,7 +349,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         setHasOptionsMenu(true);
-        addPreferencesFromResource(R.xml.installed_app_details_ia);
+        addPreferencesFromResource(R.xml.installed_app_details);
         addDynamicPrefs();
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(

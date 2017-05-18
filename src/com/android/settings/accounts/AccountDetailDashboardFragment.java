@@ -48,10 +48,10 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     public static final String KEY_ACCOUNT_HEADER = "account_header";
     public static final String KEY_USER_HANDLE = "user_handle";
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     Account mAccount;
     private String mAccountLabel;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     String mAccountType;
     private AccountSyncPreferenceController mAccountSynController;
     private RemoveAccountPreferenceController mRemoveAccountController;
