@@ -20,6 +20,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 import android.app.ActivityManager;
+import android.app.AppOpsManager;
 import android.content.Context;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -37,33 +38,36 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class ForceStopActionTest {
+public class BackgroundCheckActionTest {
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final int UID = 111;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private ActivityManager mActivityManager;
+    private AppOpsManager mAppOpsManagerr;
     private Anomaly mAnomaly;
-    private ForceStopAction mForceStopAction;
+    private BackgroundCheckAction mBackgroundCheckAction;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest(mContext);
-        doReturn(mActivityManager).when(mContext).getSystemService(Context.ACTIVITY_SERVICE);
+        doReturn(mAppOpsManagerr).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
 
         mAnomaly = new Anomaly.Builder()
+                .setUid(UID)
                 .setPackageName(PACKAGE_NAME)
                 .build();
-        mForceStopAction = new ForceStopAction(mContext);
+        mBackgroundCheckAction = new BackgroundCheckAction(mContext);
     }
 
     @Test
     public void testHandlePositiveAction_forceStopPackage() {
-        mForceStopAction.handlePositiveAction(mAnomaly, 0 /* metricskey */);
+        mBackgroundCheckAction.handlePositiveAction(mAnomaly, 0 /* metricskey */);
 
-        verify(mActivityManager).forceStopPackage(PACKAGE_NAME);
+        verify(mAppOpsManagerr).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME,
+                AppOpsManager.MODE_IGNORED);
     }
 }

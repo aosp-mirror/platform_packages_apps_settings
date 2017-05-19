@@ -16,44 +16,37 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
-import android.app.ActivityManager;
+import android.app.AppOpsManager;
 import android.content.Context;
-import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
- * Force stop action for anomaly app, which means to stop the app which causes anomaly
+ * Background check action for anomaly app, which means to stop app running in the background
  */
-public class ForceStopAction implements AnomalyAction {
+public class BackgroundCheckAction implements AnomalyAction {
 
     private Context mContext;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private ActivityManager mActivityManager;
+    private AppOpsManager mAppOpsManager;
 
-    public ForceStopAction(Context context) {
+    public BackgroundCheckAction(Context context) {
         mContext = context;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mActivityManager = (ActivityManager) context.getSystemService(
-                Context.ACTIVITY_SERVICE);
+        mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
     }
 
     @Override
     public void handlePositiveAction(Anomaly anomaly, int metricsKey) {
-        final String packageName = anomaly.packageName;
-        // force stop the package
-        mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP, packageName,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
-
-        mActivityManager.forceStopPackage(packageName);
+        // TODO(b/37681923): add metric log here if possible
+        mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid, anomaly.packageName,
+                AppOpsManager.MODE_IGNORED);
     }
 
     @Override
     public int getActionType() {
-        return Anomaly.AnomalyActionType.FORCE_STOP;
+        return Anomaly.AnomalyActionType.BACKGROUND_CHECK;
     }
 }

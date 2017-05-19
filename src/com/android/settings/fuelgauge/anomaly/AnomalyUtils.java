@@ -20,9 +20,11 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
+import com.android.settings.fuelgauge.anomaly.action.BackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.checker.AnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
+import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
 
 /**
  * Utility class for anomaly detection
@@ -53,6 +55,8 @@ public class AnomalyUtils {
         switch (anomalyType) {
             case Anomaly.AnomalyType.WAKE_LOCK:
                 return new ForceStopAction(mContext);
+            case Anomaly.AnomalyType.WAKEUP_ALARM:
+                return new BackgroundCheckAction(mContext);
             default:
                 return null;
         }
@@ -68,6 +72,8 @@ public class AnomalyUtils {
         switch (anomalyType) {
             case Anomaly.AnomalyType.WAKE_LOCK:
                 return new WakeLockAnomalyDetector(mContext);
+            case Anomaly.AnomalyType.WAKEUP_ALARM:
+                return new WakeupAlarmAnomalyDetector(mContext);
             default:
                 return null;
         }
