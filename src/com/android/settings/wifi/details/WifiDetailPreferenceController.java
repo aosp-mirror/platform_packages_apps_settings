@@ -225,7 +225,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
         mSignInButton = (Button) mButtonsPref.findViewById(R.id.right_button);
-        mSignInButton.setText(com.android.internal.R.string.network_available_sign_in);
+        mSignInButton.setText(R.string.support_sign_in_button_text);
         mSignInButton.setOnClickListener(
             view -> mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork));
 
