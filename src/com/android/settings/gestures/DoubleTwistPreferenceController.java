@@ -24,19 +24,17 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
-import android.util.ArrayMap;
 import com.android.settings.R;
 import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
 
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_double_twist_video";
-    private static final String PREF_KEY_DOUBLE_TWIST = "gesture_double_twist";
+    private final String mDoubleTwistPrefKey;
 
-    public DoubleTwistPreferenceController(Context context, Lifecycle lifecycle) {
+    public DoubleTwistPreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, lifecycle);
+        mDoubleTwistPrefKey = key;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY_DOUBLE_TWIST;
+        return mDoubleTwistPrefKey;
     }
 
     @Override

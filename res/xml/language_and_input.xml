@@ -66,32 +66,32 @@
         android:title="@string/gesture_preference_title">
 
         <Preference
-            android:key="gesture_assist"
+            android:key="gesture_assist_input_summary"
             android:title="@string/assist_gesture_title"
             android:fragment="com.android.settings.gestures.AssistGestureSettings"/>
 
         <Preference
-            android:key="gesture_swipe_down_fingerprint"
+            android:key="gesture_swipe_down_fingerprint_input_summary"
             android:title="@string/fingerprint_swipe_for_notifications_title"
             android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"/>
 
         <Preference
-            android:key="gesture_double_tap_power"
+            android:key="gesture_double_tap_power_input_summary"
             android:title="@string/double_tap_power_for_camera_title"
             android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"/>
 
         <Preference
-            android:key="gesture_double_twist"
+            android:key="gesture_double_twist_input_summary"
             android:title="@string/double_twist_for_camera_mode_title"
             android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"/>
 
         <Preference
-            android:key="gesture_double_tap_screen"
+            android:key="gesture_double_tap_screen_input_summary"
             android:title="@string/ambient_display_title"
             android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"/>
 
         <Preference
-            android:key="gesture_pick_up"
+            android:key="gesture_pick_up_input_summary"
             android:title="@string/ambient_display_pickup_title"
             android:fragment="com.android.settings.gestures.PickupGestureSettings"/>
 
@@ -105,7 +105,7 @@
             android:dialogTitle="@string/pointer_speed"/>
 
         <Preference
-            android:key="tts_settings"
+            android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"/>
 

@@ -18,7 +18,9 @@ package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -44,6 +46,8 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
@@ -52,6 +56,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -142,6 +147,37 @@ public class LanguageAndInputSettingsTest {
 
         verify(imis.get(0)).loadLabel(mPackageManager);
         verify(loader).setSummary(provider, null);
+    }
+
+    @Test
+    public void testNonIndexableKeys_existInXmlLayout() {
+        final Context context = spy(RuntimeEnvironment.application);
+        //(InputManager) context.getSystemService(Context.INPUT_SERVICE);
+        InputManager manager = mock(InputManager.class);
+        when(manager.getInputDeviceIds()).thenReturn(new int[]{});
+        doReturn(manager).when(context).getSystemService(Context.INPUT_SERVICE);
+        final List<String> niks = LanguageAndInputSettings.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+        final int xmlId = (new LanguageAndInputSettings()).getPreferenceScreenResId();
+
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
+
+        assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
+        final Context context = RuntimeEnvironment.application;
+        final LanguageAndInputSettings fragment = new LanguageAndInputSettings();
+        final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
+                fragment.getPreferenceScreenResId());
+        final List<String> preferenceKeys = new ArrayList<>();
+
+        for (PreferenceController controller : fragment.getPreferenceControllers(context)) {
+            preferenceKeys.add(controller.getPreferenceKey());
+        }
+
+        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
     }
 
     /**
