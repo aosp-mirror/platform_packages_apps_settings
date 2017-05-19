@@ -23,7 +23,8 @@ import com.android.settings.core.PreferenceController;
 
 public class TtsPreferenceController extends PreferenceController {
 
-    private static final String KEY_TTS_SETTINGS = "tts_settings";
+    private static final String KEY_VOICE_CATEGORY = "voice_category";
+    private static final String KEY_TTS_SETTINGS = "tts_settings_summary";
 
     private final TtsEngines mTtsEngines;
 

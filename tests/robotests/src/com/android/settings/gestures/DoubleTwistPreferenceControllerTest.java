@@ -53,11 +53,12 @@ public class DoubleTwistPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SensorManager mSensorManager;
     private DoubleTwistPreferenceController mController;
+    private static final String KEY_DOUBLE_TWIST = "gesture_double_twist";
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new DoubleTwistPreferenceController(mContext, null);
+        mController = new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST);
     }
 
     @Test
@@ -98,7 +99,7 @@ public class DoubleTwistPreferenceControllerTest {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(),
                 CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
-        mController = new DoubleTwistPreferenceController(context, null);
+        mController = new DoubleTwistPreferenceController(context, null, KEY_DOUBLE_TWIST);
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
@@ -109,7 +110,7 @@ public class DoubleTwistPreferenceControllerTest {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(),
                 CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0);
-        mController = new DoubleTwistPreferenceController(context, null);
+        mController = new DoubleTwistPreferenceController(context, null, KEY_DOUBLE_TWIST);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }

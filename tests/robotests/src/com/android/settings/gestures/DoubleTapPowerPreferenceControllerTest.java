@@ -47,11 +47,12 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     private DoubleTapPowerPreferenceController mController;
+    private static final String KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new DoubleTapPowerPreferenceController(mContext, null);
+        mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
     }
 
     @Test
@@ -78,7 +79,7 @@ public class DoubleTapPowerPreferenceControllerTest {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(),
                 CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
-        mController = new DoubleTapPowerPreferenceController(context, null);
+        mController = new DoubleTapPowerPreferenceController(context, null, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
@@ -89,7 +90,7 @@ public class DoubleTapPowerPreferenceControllerTest {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(),
                 CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 1);
-        mController = new DoubleTapPowerPreferenceController(context, null);
+        mController = new DoubleTapPowerPreferenceController(context, null, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
