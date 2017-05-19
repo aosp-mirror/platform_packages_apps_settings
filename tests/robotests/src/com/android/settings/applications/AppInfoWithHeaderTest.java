@@ -28,9 +28,12 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,10 +50,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowEntityHeaderController.class)
 public class AppInfoWithHeaderTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private EntityHeaderController mHeaderController;
 
     private FakeFeatureFactory mFactory;
     private TestFragment mAppInfoWithHeader;
@@ -64,16 +70,16 @@ public class AppInfoWithHeaderTest {
         when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
                 .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
         mAppInfoWithHeader = new TestFragment();
+        ShadowEntityHeaderController.setUseMock(mHeaderController);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowEntityHeaderController.reset();
     }
 
     @Test
     public void testAppHeaderIsAdded() {
-        final AppHeaderController appHeaderController = new AppHeaderController(
-                ShadowApplication.getInstance().getApplicationContext(),
-                mAppInfoWithHeader,
-                null);
-        when(mFactory.applicationFeatureProvider.newAppHeaderController(mAppInfoWithHeader, null))
-                .thenReturn(appHeaderController);
         mAppInfoWithHeader.onActivityCreated(null);
 
         verify(mAppInfoWithHeader.mScreen).addPreference(any(LayoutPreference.class));
@@ -93,7 +99,7 @@ public class AppInfoWithHeaderTest {
             mPackageInfo.applicationInfo = new ApplicationInfo();
             mShadowContext = ShadowApplication.getInstance().getApplicationContext();
             ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                                             (InstantAppDataProvider) (info -> false));
+                    (InstantAppDataProvider) (info -> false));
             when(mManager.getContext()).thenReturn(mShadowContext);
         }
 

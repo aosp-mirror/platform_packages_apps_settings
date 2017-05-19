@@ -25,11 +25,13 @@ import android.view.View;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AppHeaderController;
-import com.android.settings.applications.AppHeaderController.ActionType;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.widget.EntityHeaderController.ActionType;
 import com.android.settingslib.AppItem;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,28 +47,33 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowEntityHeaderController.class)
 public class AppDataUsageTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private AppHeaderController mHeaderController;
-    private FakeFeatureFactory mFeatureFactory;
+    private EntityHeaderController mHeaderController;
+
     private AppDataUsage mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowEntityHeaderController.reset();
     }
 
     @Test
     public void bindAppHeader_allWorkApps_shouldNotShowAppInfoLink() {
+        ShadowEntityHeaderController.setUseMock(mHeaderController);
         mFragment = spy(new AppDataUsage());
 
         doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
@@ -74,8 +81,6 @@ public class AppDataUsageTest {
                 .getPreferenceManager();
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         ReflectionHelpers.setField(mFragment, "mAppItem", mock(AppItem.class));
-        when(mFeatureFactory.applicationFeatureProvider.newAppHeaderController(mFragment, null))
-                .thenReturn(mHeaderController);
 
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
 

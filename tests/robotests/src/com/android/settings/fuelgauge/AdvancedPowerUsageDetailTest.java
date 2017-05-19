@@ -16,41 +16,28 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
-import android.view.View;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,8 +51,21 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowEntityHeaderController.class)
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -85,7 +85,7 @@ public class AdvancedPowerUsageDetailTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock
-    private AppHeaderController mAppHeaderController;
+    private EntityHeaderController mEntityHeaderController;
     @Mock
     private LayoutPreference mHeaderPreference;
     @Mock
@@ -121,18 +121,17 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(APP_LABEL).when(mBundle).getString(anyString());
         doReturn(mBundle).when(mFragment).getArguments();
 
-        doReturn(mAppHeaderController).when(mFeatureFactory.applicationFeatureProvider)
-                .newAppHeaderController(any(Fragment.class), any(View.class));
-        doReturn(mAppHeaderController).when(mAppHeaderController).setButtonActions(anyInt(),
-                anyInt());
-        doReturn(mAppHeaderController).when(mAppHeaderController).setIcon(any(Drawable.class));
-        doReturn(mAppHeaderController).when(mAppHeaderController).setIcon(any(
+        ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setButtonActions(anyInt(), anyInt());
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setIcon(any(Drawable.class));
+        doReturn(mEntityHeaderController).when(mEntityHeaderController).setIcon(any(
                 ApplicationsState.AppEntry.class));
-        doReturn(mAppHeaderController).when(mAppHeaderController).setLabel(anyString());
-        doReturn(mAppHeaderController).when(mAppHeaderController).setLabel(any(
-                ApplicationsState.AppEntry.class));
-        doReturn(mAppHeaderController).when(mAppHeaderController).setSummary(anyString());
-
+        doReturn(mEntityHeaderController).when(mEntityHeaderController).setLabel(anyString());
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setLabel(any(ApplicationsState.AppEntry.class));
+        doReturn(mEntityHeaderController).when(mEntityHeaderController).setSummary(anyString());
 
         doReturn(UID).when(mBatterySipper).getUid();
         doReturn(APP_LABEL).when(mBatteryEntry).getLabel();
@@ -166,13 +165,18 @@ public class AdvancedPowerUsageDetailTest {
                 captor.capture(), anyInt(), any(), any());
     }
 
+    @After
+    public void reset() {
+        ShadowEntityHeaderController.reset();
+    }
+
     @Test
     public void testInitHeader_NoAppEntry_BuildByBundle() {
         mFragment.mAppEntry = null;
         mFragment.initHeader();
 
-        verify(mAppHeaderController).setIcon(any(Drawable.class));
-        verify(mAppHeaderController).setLabel(APP_LABEL);
+        verify(mEntityHeaderController).setIcon(any(Drawable.class));
+        verify(mEntityHeaderController).setLabel(APP_LABEL);
     }
 
     @Test
@@ -187,9 +191,9 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mAppEntry = mAppEntry;
         mFragment.initHeader();
 
-        verify(mAppHeaderController).setIcon(mAppEntry);
-        verify(mAppHeaderController).setLabel(mAppEntry);
-        verify(mAppHeaderController).setIsInstantApp(false);
+        verify(mEntityHeaderController).setIcon(mAppEntry);
+        verify(mEntityHeaderController).setLabel(mAppEntry);
+        verify(mEntityHeaderController).setIsInstantApp(false);
     }
 
     @Test
@@ -204,10 +208,10 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mAppEntry = mAppEntry;
         mFragment.initHeader();
 
-        verify(mAppHeaderController).setIcon(mAppEntry);
-        verify(mAppHeaderController).setLabel(mAppEntry);
-        verify(mAppHeaderController).setIsInstantApp(true);
-        verify(mAppHeaderController).setSummary((CharSequence) null);
+        verify(mEntityHeaderController).setIcon(mAppEntry);
+        verify(mEntityHeaderController).setLabel(mAppEntry);
+        verify(mEntityHeaderController).setIsInstantApp(true);
+        verify(mEntityHeaderController).setSummary((CharSequence) null);
     }
 
     @Test
