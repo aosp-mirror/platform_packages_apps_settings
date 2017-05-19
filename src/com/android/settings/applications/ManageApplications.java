@@ -506,10 +506,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         updateView();
-        updateOptionsMenu();
         if (mApplications != null) {
             mApplications.resume(mSortOrder);
             mApplications.updateLoading();
@@ -527,16 +526,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         if (mApplications != null) {
             mApplications.pause();
         }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
         mResetAppsHelper.stop();
     }
 
