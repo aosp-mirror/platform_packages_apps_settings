@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothDevice;
@@ -45,6 +46,12 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
     private static final String NOTIFICATION_TAG_PBAP = "Phonebook Access" ;
     private static final String NOTIFICATION_TAG_MAP = "Message Access";
     private static final String NOTIFICATION_TAG_SAP = "SIM Access";
+    /* TODO: Consolidate this multiple defined but common channel ID with other
+     * handlers that declare and use the same channel ID */
+    private static final String BLUETOOTH_NOTIFICATION_CHANNEL =
+        "bluetooth_notification_channel";
+
+    private NotificationChannel mNotificationChannel = null;
 
     Context mContext;
     int mRequestType;
@@ -151,7 +158,16 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                                 deviceAlias, deviceAlias);
                         break;
                 }
-                Notification notification = new Notification.Builder(context)
+                NotificationManager notificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                if (mNotificationChannel == null) {
+                    mNotificationChannel = new NotificationChannel(BLUETOOTH_NOTIFICATION_CHANNEL,
+                            context.getString(R.string.bluetooth),
+                            NotificationManager.IMPORTANCE_HIGH);
+                    notificationManager.createNotificationChannel(mNotificationChannel);
+                }
+                Notification notification = new Notification.Builder(context,
+                        BLUETOOTH_NOTIFICATION_CHANNEL)
                         .setContentTitle(title)
                         .setTicker(message)
                         .setContentText(message)
@@ -168,9 +184,6 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         .build();
 
                 notification.flags |= Notification.FLAG_NO_CLEAR; // Cannot be set with the builder.
-
-                NotificationManager notificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
                 notificationManager.notify(getNotificationTag(mRequestType), NOTIFICATION_ID,
                         notification);
