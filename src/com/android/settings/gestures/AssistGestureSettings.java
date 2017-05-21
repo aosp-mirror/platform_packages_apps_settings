@@ -34,6 +34,8 @@ public class AssistGestureSettings extends DashboardFragment {
 
     private static final String TAG = "AssistGesture";
 
+    private static final String KEY_ASSIST = "gesture_assist";
+
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
@@ -57,7 +59,7 @@ public class AssistGestureSettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
         controllers.add(new AssistGestureSensitivityPreferenceController(context, lifecycle));
         return controllers;
     }

@@ -35,7 +35,7 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
         implements OnPause, OnResume {
 
     private static final String PREF_KEY_VIDEO = "gesture_assist_video";
-    private static final String PREF_KEY_ASSIST_GESTURE = "gesture_assist";
+    private final String mAssistGesturePrefKey;
 
     private final AssistGestureFeatureProvider mFeatureProvider;
     private final SettingObserver mSettingObserver;
@@ -44,11 +44,12 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
     private PreferenceScreen mScreen;
     private Preference mPreference;
 
-    public AssistGesturePreferenceController(Context context, Lifecycle lifecycle) {
+    public AssistGesturePreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
         mSettingObserver = new SettingObserver();
         mWasAvailable = isAvailable();
+        mAssistGesturePrefKey = key;
     }
 
     @Override
@@ -110,7 +111,7 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY_ASSIST_GESTURE;
+        return mAssistGesturePrefKey;
     }
 
     @Override

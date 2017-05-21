@@ -35,6 +35,7 @@ import java.util.List;
 public class PickupGestureSettings extends DashboardFragment {
 
     private static final String TAG = "PickupGestureSettings";
+    private static final String KEY_PICK_UP = "gesture_pick_up";
 
     @Override
     public int getMetricsCategory() {
@@ -60,7 +61,7 @@ public class PickupGestureSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new PickupGesturePreferenceController(context, lifecycle,
-                new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
+                new AmbientDisplayConfiguration(context), UserHandle.myUserId(), KEY_PICK_UP));
         return controllers;
     }
 

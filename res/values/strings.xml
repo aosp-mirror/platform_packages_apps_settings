@@ -4686,6 +4686,8 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
+    <!-- Description for battery screen usage time for an app, i.e. Screen usage 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
+    <string name="battery_screen_usage">Screen usage <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
     <string name="battery_used_by"><xliff:g id="percent">%1$s</xliff:g> used by <xliff:g id="app">%2$s</xliff:g></string>
     <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
@@ -8617,10 +8619,6 @@
 
     <!-- Preference label for the Files storage section. [CHAR LIMIT=50] -->
     <string name="storage_files">Files</string>
-
-    <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings_2" product="tablet">Tablet storage</string>
-    <string name="storage_settings_2" product="default">Phone storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>

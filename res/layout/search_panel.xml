@@ -61,18 +61,20 @@
             android:id="@+id/no_results_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:paddingTop="80dp"
             android:orientation="vertical"
             android:visibility="gone">
 
             <ImageView
-            android:layout_height="112dp"
-            android:layout_width="112dp"
-            android:src="@drawable/no_search_results"/>
+            android:layout_height="160dp"
+            android:layout_width="160dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/empty_search_results"/>
 
             <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:paddingTop="24dp"
             android:textSize="18sp"
             android:text="@string/search_settings_no_results"
             android:gravity="center"/>
