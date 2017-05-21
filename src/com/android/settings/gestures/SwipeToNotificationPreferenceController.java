@@ -28,15 +28,17 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_swipe_down_fingerprint_video";
-    private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
+    private final String mSwipeDownFingerPrefKey;
 
-    public SwipeToNotificationPreferenceController(Context context, Lifecycle lifecycle) {
+    public SwipeToNotificationPreferenceController(Context context, Lifecycle lifecycle,
+            String key) {
         super(context, lifecycle);
+        mSwipeDownFingerPrefKey = key;
     }
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY_SWIPE_DOWN_FINGERPRINT;
+        return mSwipeDownFingerPrefKey;
     }
 
     @Override

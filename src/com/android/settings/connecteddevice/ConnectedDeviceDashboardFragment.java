@@ -15,9 +15,11 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -25,6 +27,7 @@ import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -67,12 +70,49 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         lifecycle.addObserver(mUsbPrefController);
         controllers.add(mUsbPrefController);
         final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
-            new BluetoothMasterSwitchPreferenceController(
-                context, Utils.getLocalBtManager(context));
+                new BluetoothMasterSwitchPreferenceController(
+                        context, Utils.getLocalBtManager(context));
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
         return controllers;
     }
+
+    @VisibleForTesting
+    static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+        private final NfcPreferenceController mNfcPreferenceController;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+            mNfcPreferenceController = new NfcPreferenceController(context);
+        }
+
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                if (mNfcPreferenceController.isAvailable()) {
+                    mSummaryLoader.setSummary(this,
+                            mContext.getString(R.string.connected_devices_dashboard_summary));
+                } else {
+                    mSummaryLoader.setSummary(this, mContext.getString(
+                            R.string.connected_devices_dashboard_no_nfc_summary));
+                }
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 
     /**
      * For Search.

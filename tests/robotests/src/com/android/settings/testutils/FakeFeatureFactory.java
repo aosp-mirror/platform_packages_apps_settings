@@ -28,14 +28,13 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
-import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
+import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 /**
@@ -64,7 +63,7 @@ public class FakeFeatureFactory extends FeatureFactory {
      *
      * @param context The context must be a deep mock.
      */
-    public static void setupForTest(Context context) {
+    public static FakeFeatureFactory setupForTest(Context context) {
         sFactory = null;
         when(context.getString(com.android.settings.R.string.config_featureFactory))
                 .thenReturn(FakeFeatureFactory.class.getName());
@@ -74,6 +73,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         } catch (ClassNotFoundException e) {
             // Ignore.
         }
+        return (FakeFeatureFactory) FakeFeatureFactory.getFactory(context);
     }
 
     /**

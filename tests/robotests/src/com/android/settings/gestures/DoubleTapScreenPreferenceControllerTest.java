@@ -46,11 +46,13 @@ public class DoubleTapScreenPreferenceControllerTest {
     private AmbientDisplayConfiguration mAmbientDisplayConfiguration;
     private DoubleTapScreenPreferenceController mController;
 
+    private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new DoubleTapScreenPreferenceController(
-                mContext, null, mAmbientDisplayConfiguration, 0);
+                mContext, null, mAmbientDisplayConfiguration, 0, KEY_DOUBLE_TAP_SCREEN);
     }
 
     @Test

@@ -52,7 +52,7 @@ public class ManagedLockPasswordProvider {
      * Should be overridden if {@link #isManagedPasswordSupported()} returns true.
      * @param forFingerprint Whether fingerprint unlock is enabled.
      */
-    String getPickerOptionTitle(boolean forFingerprint) { return ""; }
+    CharSequence getPickerOptionTitle(boolean forFingerprint) { return ""; }
 
     /**
      * Gets resource id of the lock screen preference that should be displayed in security settings

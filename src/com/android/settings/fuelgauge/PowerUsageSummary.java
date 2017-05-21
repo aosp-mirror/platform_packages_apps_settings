@@ -113,7 +113,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     static final int ANOMALY_LOADER = 1;
-    private static final int BATTERY_ESTIMATE_LOADER = 2;
+    @VisibleForTesting
+    static final int BATTERY_ESTIMATE_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -182,6 +183,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
                     final Uri queryUri = mPowerFeatureProvider.getEnhancedBatteryPredictionUri();
+
                     return new CursorLoader(getContext(), queryUri, null, null, null, null);
                 }
 
@@ -228,10 +230,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mAnomalySparseArray = new SparseArray<>();
 
         initFeatureProvider();
-        if (mPowerFeatureProvider != null) {
-            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
-                    mBatteryPredictionLoaderCallbacks);
-        }
+        initializeBatteryEstimateLoader();
     }
 
     @Override
@@ -377,7 +376,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
-                refreshUi();
+                restartBatteryStatsLoader();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -760,7 +759,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
                     false);
             preference.setSummary(
-                    TextUtils.expandTemplate(getText(R.string.battery_used_for), timeSequence));
+                    TextUtils.expandTemplate(getText(R.string.battery_screen_usage), timeSequence));
         }
     }
 
@@ -812,6 +811,15 @@ public class PowerUsageSummary extends PowerUsageBase implements
             batteryInfo.remainingLabel = resources.getString(
                     com.android.settingslib.R.string.power_remaining_duration_only,
                     timeString);
+        }
+    }
+
+    @VisibleForTesting
+    void initializeBatteryEstimateLoader() {
+        if (mPowerFeatureProvider != null
+                && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(getContext())) {
+            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
+                    mBatteryPredictionLoaderCallbacks);
         }
     }
 

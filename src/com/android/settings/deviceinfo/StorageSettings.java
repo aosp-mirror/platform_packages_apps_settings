@@ -235,7 +235,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
             Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
                     StorageDashboardFragment.class.getName(), args, null,
-                    R.string.storage_settings_2, null, false, getMetricsCategory());
+                    R.string.storage_settings, null, false, getMetricsCategory());
             intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
             getActivity().startActivity(intent);
             finish();
@@ -280,7 +280,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
                 if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(vol.getId())) {
                     startFragment(this, StorageDashboardFragment.class.getCanonicalName(),
-                            R.string.storage_settings_2, 0, args);
+                            R.string.storage_settings, 0, args);
                 } else {
                     // TODO: Go to the StorageDashboardFragment once it fully handles all of the
                     //       SD card cases and other private internal storage cases.

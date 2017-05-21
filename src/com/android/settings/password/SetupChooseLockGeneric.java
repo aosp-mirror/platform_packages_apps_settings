@@ -111,20 +111,16 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if (resultCode != RESULT_CANCELED) {
-                if (data == null) {
-                    data = new Intent();
-                }
-                // Add the password quality extra to the intent data that will be sent back for
-                // Setup Wizard.
-                LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
-                data.putExtra(EXTRA_PASSWORD_QUALITY,
-                        lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
-
-                super.onActivityResult(requestCode, resultCode, data);
+            if (data == null) {
+                data = new Intent();
             }
-            // If the started activity was cancelled (e.g. the user presses back), then this
-            // activity will be resumed to foreground.
+            // Add the password quality extra to the intent data that will be sent back for
+            // Setup Wizard.
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+            data.putExtra(EXTRA_PASSWORD_QUALITY,
+                    lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
+
+            super.onActivityResult(requestCode, resultCode, data);
         }
 
         @Override
