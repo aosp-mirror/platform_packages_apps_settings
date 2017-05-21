@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.widget;
 
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
@@ -41,13 +41,16 @@ import android.widget.TextView;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class AppHeaderController {
+public class EntityHeaderController {
 
     @IntDef({ActionType.ACTION_NONE,
             ActionType.ACTION_APP_INFO,
@@ -68,7 +71,7 @@ public class AppHeaderController {
     private final Context mContext;
     private final Fragment mFragment;
     private final int mMetricsCategory;
-    private final View mAppHeader;
+    private final View mHeader;
 
     private Drawable mIcon;
     private CharSequence mLabel;
@@ -78,90 +81,101 @@ public class AppHeaderController {
     @UserIdInt
     private int mUid = UserHandle.USER_NULL;
     @ActionType
-    private int mLeftAction;
+    private int mAction1;
     @ActionType
-    private int mRightAction;
+    private int mAction2;
 
     private boolean mIsInstantApp;
 
-    public AppHeaderController(Context context, Fragment fragment, View appHeader) {
+    /**
+     * Creates a new instance of the controller.
+     *
+     * @param fragment The fragment that header will be placed in.
+     * @param header   Optional: header view if it's already created.
+     */
+    public static EntityHeaderController newInstance(Context context, Fragment fragment,
+            View header) {
+        return new EntityHeaderController(context.getApplicationContext(), fragment, header);
+    }
+
+    private EntityHeaderController(Context context, Fragment fragment, View header) {
         mContext = context;
         mFragment = fragment;
         mMetricsCategory = FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .getMetricsCategory(fragment);
-        if (appHeader != null) {
-            mAppHeader = appHeader;
+        if (header != null) {
+            mHeader = header;
         } else {
-            mAppHeader = LayoutInflater.from(fragment.getContext())
-                    .inflate(R.layout.app_details, null /* root */);
+            mHeader = LayoutInflater.from(fragment.getContext())
+                    .inflate(R.layout.settings_entity_header, null /* root */);
         }
     }
 
-    public AppHeaderController setIcon(Drawable icon) {
+    public EntityHeaderController setIcon(Drawable icon) {
         if (icon != null) {
             mIcon = icon.getConstantState().newDrawable(mContext.getResources());
         }
         return this;
     }
 
-    public AppHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
+    public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
         if (appEntry.icon != null) {
             mIcon = appEntry.icon.getConstantState().newDrawable(mContext.getResources());
         }
         return this;
     }
 
-    public AppHeaderController setLabel(CharSequence label) {
+    public EntityHeaderController setLabel(CharSequence label) {
         mLabel = label;
         return this;
     }
 
-    public AppHeaderController setLabel(ApplicationsState.AppEntry appEntry) {
+    public EntityHeaderController setLabel(ApplicationsState.AppEntry appEntry) {
         mLabel = appEntry.label;
         return this;
     }
 
-    public AppHeaderController setSummary(CharSequence summary) {
+    public EntityHeaderController setSummary(CharSequence summary) {
         mSummary = summary;
         return this;
     }
 
-    public AppHeaderController setSummary(PackageInfo packageInfo) {
+    public EntityHeaderController setSummary(PackageInfo packageInfo) {
         if (packageInfo != null) {
             mSummary = packageInfo.versionName;
         }
         return this;
     }
 
-    public AppHeaderController setButtonActions(@ActionType int leftAction,
-            @ActionType int rightAction) {
-        mLeftAction = leftAction;
-        mRightAction = rightAction;
+    public EntityHeaderController setButtonActions(@ActionType int action1,
+            @ActionType int action2) {
+        mAction1 = action1;
+        mAction2 = action2;
         return this;
     }
 
-    public AppHeaderController setPackageName(String packageName) {
+    public EntityHeaderController setPackageName(String packageName) {
         mPackageName = packageName;
         return this;
     }
 
-    public AppHeaderController setUid(int uid) {
+    public EntityHeaderController setUid(int uid) {
         mUid = uid;
         return this;
     }
 
-    public AppHeaderController setAppNotifPrefIntent(Intent appNotifPrefIntent) {
+    public EntityHeaderController setAppNotifPrefIntent(Intent appNotifPrefIntent) {
         mAppNotifPrefIntent = appNotifPrefIntent;
         return this;
     }
 
-    public AppHeaderController setIsInstantApp(boolean isInstantApp) {
+    public EntityHeaderController setIsInstantApp(boolean isInstantApp) {
         this.mIsInstantApp = isInstantApp;
         return this;
     }
 
     /**
-     * Done mutating appheader, rebinds everything and return a new {@link LayoutPreference}.
+     * Done mutating entity header, rebinds everything and return a new {@link LayoutPreference}.
      */
     public LayoutPreference done(Activity activity, Context uiContext) {
         final LayoutPreference pref = new LayoutPreference(uiContext, done(activity));
@@ -172,41 +186,41 @@ public class AppHeaderController {
     }
 
     /**
-     * Done mutating appheader, rebinds everything (optionally skip rebinding buttons).
+     * Done mutating entity header, rebinds everything (optionally skip rebinding buttons).
      */
     public View done(Activity activity, boolean rebindActions) {
         styleActionBar(activity);
-        ImageView iconView = mAppHeader.findViewById(R.id.app_detail_icon);
+        ImageView iconView = mHeader.findViewById(R.id.entity_header_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
         }
-        setText(R.id.app_detail_title, mLabel);
-        setText(R.id.app_detail_summary, mSummary);
+        setText(R.id.entity_header_title, mLabel);
+        setText(R.id.entity_header_summary, mSummary);
         if (mIsInstantApp) {
             setText(R.id.install_type,
-                    mAppHeader.getResources().getString(R.string.install_type_instant));
+                    mHeader.getResources().getString(R.string.install_type_instant));
         }
 
         if (rebindActions) {
-            bindAppHeaderButtons();
+            bindHeaderButtons();
         }
 
-        return mAppHeader;
+        return mHeader;
     }
 
     /**
-     * Only binds app header with button actions.
+     * Only binds entity header with button actions.
      */
-    public AppHeaderController bindAppHeaderButtons() {
-        ImageButton leftButton = mAppHeader.findViewById(R.id.left_button);
-        ImageButton rightButton = mAppHeader.findViewById(R.id.right_button);
+    public EntityHeaderController bindHeaderButtons() {
+        ImageButton button1 = mHeader.findViewById(android.R.id.button1);
+        ImageButton button2 = mHeader.findViewById(android.R.id.button2);
 
-        bindButton(leftButton, mLeftAction);
-        bindButton(rightButton, mRightAction);
+        bindButton(button1, mAction1);
+        bindButton(button2, mAction2);
         return this;
     }
 
-    public AppHeaderController styleActionBar(Activity activity) {
+    public EntityHeaderController styleActionBar(Activity activity) {
         if (activity == null) {
             Log.w(TAG, "No activity, cannot style actionbar.");
             return this;
@@ -224,7 +238,7 @@ public class AppHeaderController {
     }
 
     /**
-     * Done mutating appheader, rebinds everything.
+     * Done mutating entity header, rebinds everything.
      */
     @VisibleForTesting
     View done(Activity activity) {
@@ -245,9 +259,16 @@ public class AppHeaderController {
                     button.setContentDescription(
                             mContext.getString(R.string.application_info_label));
                     button.setImageResource(com.android.settings.R.drawable.ic_info);
-                    button.setOnClickListener(v -> AppInfoBase.startAppInfoFragment(
-                            InstalledAppDetails.class, R.string.application_info_label,
-                            mPackageName, mUid, mFragment, 0 /* request */, mMetricsCategory));
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AppInfoBase.startAppInfoFragment(
+                                    InstalledAppDetails.class, R.string.application_info_label,
+                                    mPackageName, mUid, mFragment, 0 /* request */,
+                                    mMetricsCategory);
+
+                        }
+                    });
                     button.setVisibility(View.VISIBLE);
                 }
                 return;
@@ -256,7 +277,12 @@ public class AppHeaderController {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setOnClickListener(v -> mFragment.startActivity(mAppNotifPrefIntent));
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mFragment.startActivity(mAppNotifPrefIntent);
+                        }
+                    });
                     button.setVisibility(View.VISIBLE);
                 }
                 return;
@@ -268,7 +294,12 @@ public class AppHeaderController {
                     button.setVisibility(View.GONE);
                     return;
                 }
-                button.setOnClickListener(v -> mFragment.startActivity(intent));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mFragment.startActivity(intent);
+                    }
+                });
                 button.setVisibility(View.VISIBLE);
                 return;
             }
@@ -289,7 +320,7 @@ public class AppHeaderController {
     }
 
     private void setText(@IdRes int id, CharSequence text) {
-        TextView textView = mAppHeader.findViewById(id);
+        TextView textView = mHeader.findViewById(id);
         if (textView != null) {
             textView.setText(text);
             textView.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);

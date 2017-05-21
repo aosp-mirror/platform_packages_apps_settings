@@ -299,6 +299,11 @@ public class AccountPreferenceController extends PreferenceController
         final ProfileData data = mProfiles.get(userInfo.id);
         if (data != null) {
             data.pendingRemoval = false;
+            if (userInfo.isEnabled()) {
+                // recreate the authentication helper to refresh the list of enabled accounts
+                data.authenticatorHelper =
+                    new AuthenticatorHelper(mContext, userInfo.getUserHandle(), this);
+            }
             return;
         }
         final Context context = mContext;

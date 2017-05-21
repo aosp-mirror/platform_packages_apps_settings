@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settings.applications.AppHeaderController.ActionType;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -53,13 +51,15 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SummaryPreference;
 import com.android.settings.applications.ProcStatsEntry.Service;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.EntityHeaderController;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
@@ -126,9 +126,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             return;
         }
         final Activity activity = getActivity();
-        final Preference pref = FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this, null /* appHeader */)
+        final Preference pref = EntityHeaderController
+                .newInstance(activity, this, null /* appHeader */)
             .setIcon(mApp.mUiTargetApp != null
                 ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
                 : new ColorDrawable(0))

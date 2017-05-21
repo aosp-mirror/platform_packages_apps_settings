@@ -57,7 +57,7 @@ public abstract class PowerUsageBase extends DashboardFragment
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(getContext());
         mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
-            getLoaderManager().restartLoader(0, null, this);
+            restartBatteryStatsLoader();
         });
 
         getLoaderManager().initLoader(0, icicle, this);
@@ -93,6 +93,10 @@ public abstract class PowerUsageBase extends DashboardFragment
         if (getActivity().isChangingConfigurations()) {
             mStatsHelper.storeState();
         }
+    }
+
+    protected void restartBatteryStatsLoader() {
+        getLoaderManager().restartLoader(0, Bundle.EMPTY, this);
     }
 
     protected abstract void refreshUi();

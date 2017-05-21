@@ -69,6 +69,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -172,6 +173,7 @@ public class PowerUsageSummaryTest {
         mFragment.initFeatureProvider();
         mBatteryMeterView = spy(new BatteryMeterView(mRealContext));
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
+        doNothing().when(mFragment).restartBatteryStatsLoader();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())
@@ -367,10 +369,10 @@ public class PowerUsageSummaryTest {
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
         final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
+        doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
+                R.string.battery_screen_usage);
         doReturn(mRealContext).when(mFragment).getContext();
-        final String expectedSummary = "Used for 2m";
+        final String expectedSummary = "Screen usage 2m";
 
         mFragment.setUsageSummary(mPreference, usageTimeMs);
 
@@ -572,6 +574,18 @@ public class PowerUsageSummaryTest {
     public void testBatteryPredictionLoaderCallbacks_DoesNotCrashOnNull() {
         // Sanity test to check for crash
         mFragment.mBatteryPredictionLoaderCallbacks.onLoadFinished(null, null);
+    }
+
+    @Test
+    public void testOnCreate_BatteryPredictionSkippedWhenDisabled() {
+        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
+        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(false);
+        mFragment.mPowerFeatureProvider = provider;
+        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        mFragment.initializeBatteryEstimateLoader();
+
+        verify(mLoaderManager, never()).initLoader(eq(PowerUsageSummary.BATTERY_ESTIMATE_LOADER),
+                eq(Bundle.EMPTY), any());
     }
 
     @Test

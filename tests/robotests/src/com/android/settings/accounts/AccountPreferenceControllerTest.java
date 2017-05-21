@@ -493,6 +493,42 @@ public class AccountPreferenceControllerTest {
 
     @Test
     @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void onResume_oneNewAccountType_shouldAddOneAccountPreference() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        infos.add(new UserInfo(2, "user 2", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
+        when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
+        when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
+            preferenceGroup);
+
+        // First time resume will build the UI with no account
+        mController.onResume();
+
+        // Add new account
+        Account[] accounts = {new Account("Acct1", "com.acct1")};
+        when(mAccountManager.getAccountsAsUser(2)).thenReturn(accounts);
+        when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
+            .thenReturn(accounts);
+
+        AuthenticatorDescription[] authDescs = {
+            new AuthenticatorDescription("com.acct1", "com.android.settings",
+                R.string.account_settings_title, 0, 0, 0, false)
+        };
+        when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
+
+        // Resume should show the newly added account
+        mController.onResume();
+
+        verify(preferenceGroup).addPreference(argThat(new PreferenceMatcher("Acct1")));
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneAccountRemoved_shouldRemoveOneAccountPreference() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));

@@ -137,6 +137,16 @@ public class SettingsShadowResources extends ShadowResources {
                 realResources, Resources.class, "getInteger", ClassParameter.from(int.class, id));
     }
 
+    @Implementation
+    public boolean getBoolean(int id) {
+        final Object override = sResourceOverrides.get(id);
+        if (override instanceof Boolean) {
+            return (boolean) override;
+        }
+        return Shadow.directlyOn(realResources, Resources.class, "getBoolean",
+                ClassParameter.from(int.class, id));
+    }
+
     @Implements(Theme.class)
     public static class SettingsShadowTheme extends ShadowTheme {
 

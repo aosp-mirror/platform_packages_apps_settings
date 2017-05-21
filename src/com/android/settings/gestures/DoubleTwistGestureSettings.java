@@ -33,6 +33,7 @@ import java.util.List;
 public class DoubleTwistGestureSettings extends DashboardFragment {
 
     private static final String TAG = "DoubleTwistGesture";
+    private static final String KEY_DOUBLE_TWIST = "gesture_double_twist";
 
     @Override
     public int getMetricsCategory() {
@@ -57,7 +58,7 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
+        controllers.add(new DoubleTwistPreferenceController(context, lifecycle, KEY_DOUBLE_TWIST));
         return controllers;
     }
 

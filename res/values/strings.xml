@@ -1091,6 +1091,9 @@
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for fingerprint. Users can choose to use this method to unlock the screen instead of fingerprint, or when fingerprint is not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_fingerprint_message">Choose your backup screen lock method</string>
 
+    <!-- Label for button in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
+    <string name="setup_lock_settings_options_button_label">Screen lock options</string>
+
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title">Screen lock</string>
@@ -4720,6 +4723,8 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
+    <!-- Description for battery screen usage time for an app, i.e. Screen usage 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
+    <string name="battery_screen_usage">Screen usage <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
     <string name="battery_used_by"><xliff:g id="percent">%1$s</xliff:g> used by <xliff:g id="app">%2$s</xliff:g></string>
     <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
@@ -6273,12 +6278,19 @@
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; Internet</string>
-    <!-- Summary for Network and Internet settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary">Wi-Fi, mobile, data usage, hotspot</string>
+    <!-- Summary for Network and Internet settings, explaining it contains mobile network setting [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_mobile">mobile</string>
+    <!-- Summary for Network and Internet settings, explaining it contains network data usage setting [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_data_usage">data usage</string>
+    <!-- Summary for Network and Internet settings, explaining it contains hotspot (tethering) setting [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_hotspot">hotspot</string>
+
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_summary">Bluetooth, Cast, NFC</string>
+    <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="connected_devices_dashboard_no_nfc_summary">Bluetooth, Cast</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
@@ -8650,10 +8662,6 @@
 
     <!-- Preference label for the Files storage section. [CHAR LIMIT=50] -->
     <string name="storage_files">Files</string>
-
-    <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings_2" product="tablet">Tablet storage</string>
-    <string name="storage_settings_2" product="default">Phone storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>
