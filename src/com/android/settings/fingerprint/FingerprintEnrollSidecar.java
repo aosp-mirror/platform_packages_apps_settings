@@ -31,6 +31,8 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.password.IFingerprintManager;
 
+import java.util.ArrayList;
+
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
  */
@@ -46,6 +48,57 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     private boolean mDone;
     private int mUserId;
     private IFingerprintManager mFingerprintManager;
+    private ArrayList<QueuedEvent> mQueuedEvents;
+
+    private abstract class QueuedEvent {
+        public abstract void send(Listener listener);
+    }
+
+    private class QueuedEnrollmentProgress extends QueuedEvent {
+        int enrollmentSteps;
+        int remaining;
+        public QueuedEnrollmentProgress(int enrollmentSteps, int remaining) {
+            this.enrollmentSteps = enrollmentSteps;
+            this.remaining = remaining;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onEnrollmentProgressChange(enrollmentSteps, remaining);
+        }
+    }
+
+    private class QueuedEnrollmentHelp extends QueuedEvent {
+        int helpMsgId;
+        CharSequence helpString;
+        public QueuedEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+            this.helpMsgId = helpMsgId;
+            this.helpString = helpString;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onEnrollmentHelp(helpString);
+        }
+    }
+
+    private class QueuedEnrollmentError extends QueuedEvent {
+        int errMsgId;
+        CharSequence errString;
+        public QueuedEnrollmentError(int errMsgId, CharSequence errString) {
+            this.errMsgId = errMsgId;
+            this.errString = errString;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onEnrollmentError(errMsgId, errString);
+        }
+    }
+
+    public FingerprintEnrollSidecar() {
+        mQueuedEvents = new ArrayList<>();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +156,13 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
 
     public void setListener(Listener listener) {
         mListener = listener;
+        if (mListener != null) {
+            for (int i=0; i<mQueuedEvents.size(); i++) {
+                QueuedEvent event = mQueuedEvents.get(i);
+                event.send(mListener);
+            }
+            mQueuedEvents.clear();
+        }
     }
 
     public int getEnrollmentSteps() {
@@ -129,6 +189,8 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
             mDone = remaining == 0;
             if (mListener != null) {
                 mListener.onEnrollmentProgressChange(mEnrollmentSteps, remaining);
+            } else {
+                mQueuedEvents.add(new QueuedEnrollmentProgress(mEnrollmentSteps, remaining));
             }
         }
 
@@ -136,6 +198,8 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
         public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
             if (mListener != null) {
                 mListener.onEnrollmentHelp(helpString);
+            } else {
+                mQueuedEvents.add(new QueuedEnrollmentHelp(helpMsgId, helpString));
             }
         }
 
@@ -143,6 +207,8 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
             if (mListener != null) {
                 mListener.onEnrollmentError(errMsgId, errString);
+            } else {
+                mQueuedEvents.add(new QueuedEnrollmentError(errMsgId, errString));
             }
             mEnrolling = false;
         }
