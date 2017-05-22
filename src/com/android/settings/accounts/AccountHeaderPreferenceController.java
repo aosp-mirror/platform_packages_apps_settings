@@ -18,10 +18,10 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -29,6 +29,7 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_ACCOUNT;
 import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_USER_HANDLE;
@@ -38,15 +39,17 @@ public class AccountHeaderPreferenceController extends PreferenceController {
     private static final String KEY_ACCOUNT_HEADER = "account_header";
 
     private final Activity mActivity;
-    private final Fragment mHost;
+    private final PreferenceFragment mHost;
     private final Account mAccount;
     private final UserHandle mUserHandle;
+    private final Lifecycle mLifecycle;
 
-    public AccountHeaderPreferenceController(Context context, Activity activity, Fragment host,
-            Bundle args) {
+    public AccountHeaderPreferenceController(Context context, Lifecycle lifecycle,
+            Activity activity, PreferenceFragment host, Bundle args) {
         super(context);
         mActivity = activity;
         mHost = host;
+        mLifecycle = lifecycle;
         if (args != null && args.containsKey(KEY_ACCOUNT)) {
             mAccount = args.getParcelable(KEY_ACCOUNT);
         } else {
@@ -80,6 +83,7 @@ public class AccountHeaderPreferenceController extends PreferenceController {
 
         EntityHeaderController
                 .newInstance(mActivity, mHost, headerPreference.findViewById(R.id.entity_header))
+                .setRecyclerView(mHost.getListView(), mLifecycle)
                 .setLabel(mAccount.name)
                 .setIcon(helper.getDrawableForType(mContext, mAccount.type))
                 .done(mActivity, true /* rebindButtons */);

@@ -30,6 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -68,11 +70,13 @@ public class EntityHeaderController {
 
     private static final String TAG = "AppDetailFeature";
 
-    private final Context mContext;
+    private final Context mAppContext;
+    private final Activity mActivity;
     private final Fragment mFragment;
     private final int mMetricsCategory;
     private final View mHeader;
-
+    private Lifecycle mLifecycle;
+    private RecyclerView mRecyclerView;
     private Drawable mIcon;
     private CharSequence mLabel;
     private CharSequence mSummary;
@@ -93,15 +97,16 @@ public class EntityHeaderController {
      * @param fragment The fragment that header will be placed in.
      * @param header   Optional: header view if it's already created.
      */
-    public static EntityHeaderController newInstance(Context context, Fragment fragment,
+    public static EntityHeaderController newInstance(Activity activity, Fragment fragment,
             View header) {
-        return new EntityHeaderController(context.getApplicationContext(), fragment, header);
+        return new EntityHeaderController(activity, fragment, header);
     }
 
-    private EntityHeaderController(Context context, Fragment fragment, View header) {
-        mContext = context;
+    private EntityHeaderController(Activity activity, Fragment fragment, View header) {
+        mActivity = activity;
+        mAppContext = activity.getApplicationContext();
         mFragment = fragment;
-        mMetricsCategory = FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        mMetricsCategory = FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
                 .getMetricsCategory(fragment);
         if (header != null) {
             mHeader = header;
@@ -111,16 +116,22 @@ public class EntityHeaderController {
         }
     }
 
+    public EntityHeaderController setRecyclerView(RecyclerView recyclerView, Lifecycle lifecycle) {
+        mRecyclerView = recyclerView;
+        mLifecycle = lifecycle;
+        return this;
+    }
+
     public EntityHeaderController setIcon(Drawable icon) {
         if (icon != null) {
-            mIcon = icon.getConstantState().newDrawable(mContext.getResources());
+            mIcon = icon.getConstantState().newDrawable(mAppContext.getResources());
         }
         return this;
     }
 
     public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
         if (appEntry.icon != null) {
-            mIcon = appEntry.icon.getConstantState().newDrawable(mContext.getResources());
+            mIcon = appEntry.icon.getConstantState().newDrawable(mAppContext.getResources());
         }
         return this;
     }
@@ -233,6 +244,9 @@ public class EntityHeaderController {
         actionBar.setBackgroundDrawable(
                 new ColorDrawable(Utils.getColorAttr(activity, android.R.attr.colorSecondary)));
         actionBar.setElevation(0);
+        if (mRecyclerView != null && mLifecycle != null) {
+            ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);
+        }
 
         return this;
     }
@@ -257,7 +271,7 @@ public class EntityHeaderController {
                     button.setVisibility(View.GONE);
                 } else {
                     button.setContentDescription(
-                            mContext.getString(R.string.application_info_label));
+                            mAppContext.getString(R.string.application_info_label));
                     button.setImageResource(com.android.settings.R.drawable.ic_info);
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -311,7 +325,7 @@ public class EntityHeaderController {
     }
 
     private Intent resolveIntent(Intent i) {
-        ResolveInfo result = mContext.getPackageManager().resolveActivity(i, 0);
+        ResolveInfo result = mAppContext.getPackageManager().resolveActivity(i, 0);
         if (result != null) {
             return new Intent(i.getAction())
                     .setClassName(result.activityInfo.packageName, result.activityInfo.name);
