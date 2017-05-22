@@ -21,9 +21,9 @@ import android.support.v7.preference.Preference;
 
 import android.util.ArrayMap;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.search2.DatabaseIndexingUtils;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settings.R;
 
 import java.util.Map;

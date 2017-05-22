@@ -27,18 +27,7 @@ import android.widget.FrameLayout;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.AppSearchResult;
-import com.android.settings.search2.DatabaseResultLoader;
-import com.android.settings.search2.InlineSwitchViewHolder;
-import com.android.settings.search2.InstalledAppResultLoader;
-import com.android.settings.search2.ResultPayload;
-import com.android.settings.search2.IntentSearchViewHolder;
-import com.android.settings.search2.SearchFeatureProvider;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.search2.SearchResult;
-import com.android.settings.search2.SearchResult.Builder;
-import com.android.settings.search2.SearchResultsAdapter;
-import com.android.settings.search2.SearchViewHolder;
+import com.android.settings.search.SearchResult.Builder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +46,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;

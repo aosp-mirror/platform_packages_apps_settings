@@ -24,9 +24,7 @@ import android.graphics.drawable.Drawable;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.ResultPayload;
-import com.android.settings.search2.SearchResult;
-import com.android.settings.search2.SearchResult.Builder;
+import com.android.settings.search.SearchResult.Builder;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -22,7 +22,6 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
-import com.android.settings.search2.DatabaseIndexingManager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

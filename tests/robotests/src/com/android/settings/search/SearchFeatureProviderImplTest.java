@@ -23,7 +23,6 @@ import android.view.Menu;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search2.SearchFeatureProviderImpl;
 
 import org.junit.Before;
 import org.junit.Test;
