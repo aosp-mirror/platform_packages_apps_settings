@@ -211,6 +211,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private DevicePolicyManager mDpm;
 
+    /**
+     * Check if the color transforms are color accelerated. Some transforms are experimental only
+     * on non-accelerated platforms due to the performance implications.
+     *
+     * @param context The current context
+     * @return
+     */
+    public static boolean isColorTransformAccelerated(Context context) {
+        return context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
+    }
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY;
@@ -616,11 +628,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-    }
-
-    private boolean isColorTransformAccelerated(Context context) {
-        return context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
     }
 
     private void updateMagnificationSummary(Preference pref) {
