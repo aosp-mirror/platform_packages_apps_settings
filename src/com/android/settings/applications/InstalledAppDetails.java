@@ -86,6 +86,7 @@ import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
+import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
@@ -139,6 +140,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_STORAGE = 3;
+    private static final int LOADER_BATTERY = 4;
 
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
@@ -199,6 +201,31 @@ public class InstalledAppDetails extends AppInfoBase
     private AppStorageStats mLastResult;
     private String mBatteryPercent;
     private BatteryUtils mBatteryUtils;
+
+    private final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
+            new LoaderCallbacks<BatteryStatsHelper>() {
+
+                @Override
+                public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
+                    return new BatteryStatsHelperLoader(getContext(), args);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<BatteryStatsHelper> loader,
+                        BatteryStatsHelper batteryHelper) {
+                    mBatteryHelper = batteryHelper;
+                    if (mPackageInfo != null) {
+                        mSipper = findTargetSipper(batteryHelper, mPackageInfo.applicationInfo.uid);
+                        if (getActivity() != null) {
+                            updateBattery();
+                        }
+                    }
+                }
+
+                @Override
+                public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
+                }
+            };
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -358,7 +385,6 @@ public class InstalledAppDetails extends AppInfoBase
         } else {
             removePreference(KEY_DATA);
         }
-        mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
@@ -382,7 +408,7 @@ public class InstalledAppDetails extends AppInfoBase
                     mDataCallbacks);
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
-        new BatteryUpdater().execute();
+        getLoaderManager().initLoader(LOADER_BATTERY, Bundle.EMPTY, mBatteryCallbacks);
         new MemoryUpdater().execute();
         updateDynamicPrefs();
     }
@@ -618,6 +644,19 @@ public class InstalledAppDetails extends AppInfoBase
         return showIt;
     }
 
+    @VisibleForTesting
+    BatterySipper findTargetSipper(BatteryStatsHelper batteryHelper, int uid) {
+        List<BatterySipper> usageList = batteryHelper.getUsageList();
+        for (int i = 0, size = usageList.size(); i < size; i++) {
+            BatterySipper sipper = usageList.get(i);
+            if (sipper.getUid() == uid) {
+                return sipper;
+            }
+        }
+
+        return null;
+    }
+
     private boolean signaturesMatch(String pkg1, String pkg2) {
         if (pkg1 != null && pkg2 != null) {
             try {
@@ -712,7 +751,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void updateBattery() {
-        if (mSipper != null) {
+        if (mSipper != null && mBatteryHelper != null) {
             mBatteryPreference.setEnabled(true);
             final int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
                     BatteryStats.STATS_SINCE_CHARGED);
@@ -1309,33 +1348,6 @@ public class InstalledAppDetails extends AppInfoBase
             }
         }
 
-    }
-
-    private class BatteryUpdater extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            mBatteryHelper.create((Bundle) null);
-            mBatteryHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED,
-                    mUserManager.getUserProfiles());
-            List<BatterySipper> usageList = mBatteryHelper.getUsageList();
-            final int N = usageList.size();
-            for (int i = 0; i < N; i++) {
-                BatterySipper sipper = usageList.get(i);
-                if (sipper.getUid() == mPackageInfo.applicationInfo.uid) {
-                    mSipper = sipper;
-                    break;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            if (getActivity() == null) {
-                return;
-            }
-            refreshUi();
-        }
     }
 
     /**
