@@ -187,12 +187,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
                         mEnhancedEstimate =
                                 mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
                     }
-                    final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+                    final long elapsedRealtimeUs =
+                            mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
                     Intent batteryBroadcast = getContext().registerReceiver(null,
                             new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                    BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(getContext(),
-                            batteryBroadcast, mStatsHelper.getStats(), elapsedRealtimeUs, false);
-                    useEnhancedEstimateIfAvailable(getContext(), batteryInfo);
+                    BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
                     updateHeaderPreference(batteryInfo);
                 }
 
@@ -494,12 +493,10 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         initAnomalyDetectionIfPossible();
 
-        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+        final long elapsedRealtimeUs = mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
         Intent batteryBroadcast = context.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast,
-                mStatsHelper.getStats(), elapsedRealtimeUs, false);
-        useEnhancedEstimateIfAvailable(context, batteryInfo);
+        BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
         updateHeaderPreference(batteryInfo);
 
         final long runningTime = calculateRunningTimeBasedOnStatsType();
@@ -660,7 +657,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     long calculateRunningTimeBasedOnStatsType() {
-        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+        final long elapsedRealtimeUs = mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
         // Return the battery time (millisecond) on status mStatsType
         return mStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs,
                 mStatsType /* STATS_SINCE_CHARGED */) / 1000;
@@ -743,17 +740,20 @@ public class PowerUsageSummary extends PowerUsageBase implements
         }
     }
 
-    @VisibleForTesting
-    void useEnhancedEstimateIfAvailable(Context context, BatteryInfo batteryInfo) {
-        if (mEnhancedEstimate > 0
-                && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
-            final Resources resources = context.getResources();
-            batteryInfo.remainingTimeUs = mEnhancedEstimate;
-            String timeString = Formatter.formatShortElapsedTime(context, mEnhancedEstimate);
-            batteryInfo.remainingLabel = resources.getString(
-                    com.android.settingslib.R.string.power_remaining_duration_only,
-                    timeString);
+    private BatteryInfo getBatteryInfo(long elapsedRealtimeUs, Intent batteryBroadcast) {
+        BatteryInfo batteryInfo;
+        if (mEnhancedEstimate > 0 &&
+                mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(
+                        getContext())) {
+            // Drain time is in micro-seconds so we have to multiply by 1000
+            batteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
+                    mStatsHelper.getStats(), elapsedRealtimeUs, false,
+                    mBatteryUtils.convertMsToUs(mEnhancedEstimate), true);
+        } else {
+            batteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
+                    mStatsHelper.getStats(), elapsedRealtimeUs, false);
         }
+        return batteryInfo;
     }
 
     @VisibleForTesting
