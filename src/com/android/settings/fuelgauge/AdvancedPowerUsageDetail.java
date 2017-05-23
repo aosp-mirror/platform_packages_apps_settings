@@ -128,7 +128,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
-                R.string.battery_details_title, null, new UserHandle(UserHandle.myUserId()));
+                R.string.battery_details_title, null,
+                new UserHandle(UserHandle.getUserId(sipper.getUid())));
     }
 
     @Override
@@ -184,6 +185,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final Bundle bundle = getArguments();
         EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
+                .setRecyclerView(getListView(), getLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 

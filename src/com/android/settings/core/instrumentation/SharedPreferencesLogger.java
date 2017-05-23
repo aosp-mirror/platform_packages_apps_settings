@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -31,6 +32,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 public class SharedPreferencesLogger implements SharedPreferences {
+
+    private static final String LOG_TAG = "SharedPreferencesLogger";
 
     private final String mTag;
     private final Context mContext;
@@ -99,11 +102,11 @@ public class SharedPreferencesLogger implements SharedPreferences {
             OnSharedPreferenceChangeListener listener) {
     }
 
-    private void logValue(String key, String value) {
+    private void logValue(String key, Object value) {
         logValue(key, value, false /* forceLog */);
     }
 
-    private void logValue(String key, String value, boolean forceLog) {
+    private void logValue(String key, Object value, boolean forceLog) {
         final String prefKey = mTag + "/" + key;
         if (!forceLog && !mPreferenceKeySet.contains(prefKey)) {
             // Pref key doesn't exist in set, this is initial display so we skip metrics but
@@ -114,10 +117,32 @@ public class SharedPreferencesLogger implements SharedPreferences {
         // TODO: Remove count logging to save some resource.
         mMetricsFeature.count(mContext, prefKey + "|" + value, 1);
 
-        // Pref key exists in set, log it's change in metrics.
-        mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE,
-                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, prefKey),
-                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_VALUE, value));
+        final Pair<Integer, Object> valueData;
+        if (value instanceof Long) {
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE,
+                    value);
+        } else if (value instanceof Integer) {
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE,
+                    ((Integer) value).longValue());
+        } else if (value instanceof Boolean) {
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE,
+                    (Boolean) value ? 1L : 0L);
+        } else if (value instanceof Float) {
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE,
+                    value);
+        } else if (value instanceof String){
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_VALUE,
+                    value);
+        } else {
+            Log.w(LOG_TAG, "Tried to log unloggable object"  + value);
+            valueData = null;
+        }
+        if (valueData != null) {
+            // Pref key exists in set, log it's change in metrics.
+            mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE,
+                    Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, prefKey),
+                    valueData);
+        }
     }
 
     private void logPackageName(String key, String value) {
@@ -173,25 +198,25 @@ public class SharedPreferencesLogger implements SharedPreferences {
 
         @Override
         public Editor putInt(String key, int value) {
-            logValue(key, String.valueOf(value));
+            logValue(key, value);
             return this;
         }
 
         @Override
         public Editor putLong(String key, long value) {
-            logValue(key, String.valueOf(value));
+            logValue(key, value);
             return this;
         }
 
         @Override
         public Editor putFloat(String key, float value) {
-            logValue(key, String.valueOf(value));
+            logValue(key, value);
             return this;
         }
 
         @Override
         public Editor putBoolean(String key, boolean value) {
-            logValue(key, String.valueOf(value));
+            logValue(key, value);
             return this;
         }
 

@@ -16,6 +16,19 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -23,6 +36,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.support.v7.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -36,6 +51,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,18 +66,6 @@ import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -122,6 +126,8 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mBundle).when(mFragment).getArguments();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
@@ -264,5 +270,17 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(null);
+    }
+
+    @Test
+    public void testStartBatteryDetailPage_WorkApp() {
+        final int appUid = 1010019;
+        mBatterySipper.mPackages = PACKAGE_NAME;
+        doReturn(appUid).when(mBatterySipper).getUid();
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
+                mBatteryEntry, USAGE_PERCENT);
+
+        verify(mTestActivity).startPreferencePanelAsUser(
+                any(), anyString(), any(), anyInt(), any(), eq(new UserHandle(10)));
     }
 }

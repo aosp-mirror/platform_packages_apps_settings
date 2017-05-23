@@ -18,10 +18,10 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.TextView;
 
@@ -31,6 +31,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class AccountHeaderPreferenceControllerTest {
     @Mock
     private Activity mActivity;
     @Mock
-    private Fragment mFragment;
+    private PreferenceFragment mFragment;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -76,7 +77,7 @@ public class AccountHeaderPreferenceControllerTest {
     @Test
     public void isAvailable_noArgs_shouldReturnNull() {
         mController = new AccountHeaderPreferenceController(RuntimeEnvironment.application,
-                mActivity, mFragment, null /* args */);
+                new Lifecycle(), mActivity, mFragment, null /* args */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -89,7 +90,7 @@ public class AccountHeaderPreferenceControllerTest {
         args.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT, account);
         args.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE, UserHandle.CURRENT);
         mController = new AccountHeaderPreferenceController(RuntimeEnvironment.application,
-                mActivity, mFragment, args);
+                new Lifecycle(), mActivity, mFragment, args);
 
         assertThat(mController.isAvailable()).isTrue();
 

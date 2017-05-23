@@ -152,7 +152,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
-        mEmptyView.setText(R.string.wifi_calling_off_explanation);
+        String emptyViewText = activity.getString(R.string.wifi_calling_off_explanation)
+                + activity.getString(R.string.wifi_calling_off_explanation_2);
+        mEmptyView.setText(emptyViewText);
     }
 
     @Override

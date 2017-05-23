@@ -66,7 +66,6 @@ public class EntityHeaderControllerTest {
     @Mock
     private Fragment mFragment;
 
-    private FakeFeatureFactory mFeatureFactory;
     private Context mShadowContext;
     private LayoutInflater mLayoutInflater;
     private PackageInfo mInfo;
@@ -76,8 +75,8 @@ public class EntityHeaderControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mShadowContext = RuntimeEnvironment.application;
+        when(mActivity.getApplicationContext()).thenReturn(mShadowContext);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mShadowContext);
         mLayoutInflater = LayoutInflater.from(mShadowContext);
@@ -87,7 +86,7 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void testBuildView_constructedWithoutView_shouldCreateNewView() {
-        mController = EntityHeaderController.newInstance(mShadowContext, mFragment, null);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
         View view = mController.done(mActivity);
 
         assertThat(view).isNotNull();
@@ -95,7 +94,7 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void testBuildView_withContext_shouldBuildPreference() {
-        mController = EntityHeaderController.newInstance(mShadowContext, mFragment, null);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
         Preference preference = mController.done(mActivity, mShadowContext);
 
         assertThat(preference instanceof LayoutPreference).isTrue();
@@ -104,7 +103,7 @@ public class EntityHeaderControllerTest {
     @Test
     public void testBuildView_constructedWithView_shouldReturnSameView() {
         View inputView = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        mController = EntityHeaderController.newInstance(mShadowContext, mFragment, inputView);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, inputView);
         View view = mController.done(mActivity);
 
         assertThat(view).isSameAs(inputView);
@@ -118,7 +117,7 @@ public class EntityHeaderControllerTest {
         final TextView label = header.findViewById(R.id.entity_header_title);
         final TextView version = header.findViewById(R.id.entity_header_summary);
 
-        mController = EntityHeaderController.newInstance(mShadowContext, mFragment, header);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
         mController.setLabel(testString);
         mController.setSummary(testString);
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
@@ -136,10 +135,11 @@ public class EntityHeaderControllerTest {
         info.activityInfo.name = "321";
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
+        when(mActivity.getApplicationContext()).thenReturn(mContext);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(info);
 
-        mController = EntityHeaderController.newInstance(mContext, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setButtonActions(
                 EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
@@ -164,7 +164,7 @@ public class EntityHeaderControllerTest {
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(null);
 
-        mController = EntityHeaderController.newInstance(mContext, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setButtonActions(
                 EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
@@ -181,7 +181,7 @@ public class EntityHeaderControllerTest {
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
 
-        mController = EntityHeaderController.newInstance(mContext, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName(null)
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_APP_INFO,
@@ -200,7 +200,7 @@ public class EntityHeaderControllerTest {
                 .inflate(R.layout.settings_entity_header, null /* root */);
         when(mFragment.getActivity()).thenReturn(mock(Activity.class));
 
-        mController = EntityHeaderController.newInstance(mContext, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName("123")
                 .setUid(UserHandle.USER_SYSTEM)
                 .setButtonActions(
@@ -221,7 +221,7 @@ public class EntityHeaderControllerTest {
         when(mFragment.getActivity()).thenReturn(mock(Activity.class));
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
 
-        mController = EntityHeaderController.newInstance(mContext, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName("123")
                 .setUid(UserHandle.USER_SYSTEM)
                 .setButtonActions(
@@ -229,8 +229,8 @@ public class EntityHeaderControllerTest {
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
         mController.done(mActivity);
 
-        assertThat(appLinks.findViewById(android.R.id.button1).getContentDescription())
-                .isEqualTo("App Info");
+        assertThat(appLinks.findViewById(android.R.id.button1).getContentDescription().toString())
+                .isEqualTo("App info");
     }
 
     @Test
@@ -238,7 +238,7 @@ public class EntityHeaderControllerTest {
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
 
-        mController = EntityHeaderController.newInstance(mContext, mFragment, appLinks);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setAppNotifPrefIntent(new Intent())
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
@@ -257,7 +257,7 @@ public class EntityHeaderControllerTest {
     public void instantApps_normalAppsDontGetLabel() {
         final View header = mLayoutInflater.inflate(
                 R.layout.settings_entity_header, null /* root */);
-        mController = EntityHeaderController.newInstance(mContext, mFragment, header);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
         mController.done(mActivity);
 
         assertThat(header.findViewById(R.id.install_type).getVisibility())
@@ -269,7 +269,7 @@ public class EntityHeaderControllerTest {
     public void instantApps_expectedHeaderItem() {
         final View header = mLayoutInflater.inflate(
                 R.layout.settings_entity_header, null /* root */);
-        mController = EntityHeaderController.newInstance(mContext, mFragment, header);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
         mController.setIsInstantApp(true);
         mController.done(mActivity);
         TextView label = header.findViewById(R.id.install_type);
@@ -283,7 +283,7 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void styleActionBar_invalidObjects_shouldNotCrash() {
-        mController = EntityHeaderController.newInstance(mShadowContext, mFragment, null);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
         mController.styleActionBar(null);
 
         when(mActivity.getActionBar()).thenReturn(null);
@@ -296,7 +296,7 @@ public class EntityHeaderControllerTest {
     public void styleActionBar_setElevationAndBackground() {
         final ActionBar actionBar = mActivity.getActionBar();
 
-        mController = EntityHeaderController.newInstance(mShadowContext, mFragment, null);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
         mController.styleActionBar(mActivity);
 
         verify(actionBar).setElevation(0);
@@ -307,7 +307,7 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void initAppHeaderController_appHeaderNull_useFragmentContext() {
-        mController = EntityHeaderController.newInstance(mContext, mFragment, null);
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
 
         // Fragment.getContext() is invoked to inflate the view
         verify(mFragment).getContext();

@@ -78,6 +78,11 @@ public class BluetoothDeviceNamePreferenceController extends PreferenceControlle
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        mPreference = screen.findPreference(KEY_DEVICE_NAME);
+    }
+
+    @Override
     public void onStart() {
         mContext.registerReceiver(mReceiver,
                 new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED));
