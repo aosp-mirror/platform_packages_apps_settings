@@ -43,6 +43,7 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle())
                 .setIcon(IconDrawableFactory.newInstance(activity)
                         .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))

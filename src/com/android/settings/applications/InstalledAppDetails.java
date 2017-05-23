@@ -408,6 +408,7 @@ public class InstalledAppDetails extends AppInfoBase
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
         mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
         EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
+                .setRecyclerView(getListView(), getLifecycle())
                 .setPackageName(mPackageName)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE)
@@ -585,11 +586,11 @@ public class InstalledAppDetails extends AppInfoBase
         final CharSequence summary =
                 isInstantApp ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
         EntityHeaderController.newInstance(activity, this, appSnippet)
-            .setLabel(mAppEntry)
-            .setIcon(mAppEntry)
-            .setSummary(summary)
-            .setIsInstantApp(isInstantApp)
-            .done(activity, false /* rebindActions */);
+                .setLabel(mAppEntry)
+                .setIcon(mAppEntry)
+                .setSummary(summary)
+                .setIsInstantApp(isInstantApp)
+                .done(activity, false /* rebindActions */);
         mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
     }
 

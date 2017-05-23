@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -36,6 +37,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
@@ -122,6 +124,8 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mBundle).when(mFragment).getArguments();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)

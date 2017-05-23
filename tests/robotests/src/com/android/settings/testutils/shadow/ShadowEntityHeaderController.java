@@ -16,8 +16,8 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.view.View;
 
 import com.android.settings.widget.EntityHeaderController;
@@ -41,7 +41,7 @@ public class ShadowEntityHeaderController {
     }
 
     @Implementation
-    public static EntityHeaderController newInstance(Context context, Fragment fragment,
+    public static EntityHeaderController newInstance(Activity activity, Fragment fragment,
             View header) {
         return sMockController;
     }

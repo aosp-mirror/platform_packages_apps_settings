@@ -327,6 +327,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle())
                 .setButtonActions(showInfoButton
                                 ? EntityHeaderController.ActionType.ACTION_APP_INFO
                                 : EntityHeaderController.ActionType.ACTION_NONE,

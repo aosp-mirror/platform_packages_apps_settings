@@ -128,16 +128,17 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* appHeader */)
-            .setIcon(mApp.mUiTargetApp != null
-                ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
-                : new ColorDrawable(0))
-            .setLabel(mApp.mUiLabel)
-            .setPackageName(mApp.mPackage)
-            .setUid(mApp.mUiTargetApp != null
-                ? mApp.mUiTargetApp.uid
-                : UserHandle.USER_NULL)
-            .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
-            .done(activity, getPrefContext());
+                .setRecyclerView(getListView(), getLifecycle())
+                .setIcon(mApp.mUiTargetApp != null
+                        ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
+                        : new ColorDrawable(0))
+                .setLabel(mApp.mUiLabel)
+                .setPackageName(mApp.mPackage)
+                .setUid(mApp.mUiTargetApp != null
+                        ? mApp.mUiTargetApp.uid
+                        : UserHandle.USER_NULL)
+                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
+                .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 
