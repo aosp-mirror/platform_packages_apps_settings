@@ -23,6 +23,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.PreferenceController;
@@ -71,7 +72,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         controllers.add(mUsbPrefController);
         final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
                 new BluetoothMasterSwitchPreferenceController(
-                        context, Utils.getLocalBtManager(context));
+                        context, Utils.getLocalBtManager(context), this,
+                        (SettingsActivity) getActivity());
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
         return controllers;

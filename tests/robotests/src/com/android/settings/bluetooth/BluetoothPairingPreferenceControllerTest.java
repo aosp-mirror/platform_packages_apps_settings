@@ -18,6 +18,11 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.FragmentManager;
@@ -27,6 +32,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.R;
@@ -45,7 +51,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothPairingPreferenceControllerTest {
-
+    private static final int ORDER = 1;
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceFragment mFragment;
@@ -59,6 +65,8 @@ public class BluetoothPairingPreferenceControllerTest {
     private FragmentTransaction mFragmentTransaction;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private SettingsActivity mSettingsActivity;
     private Preference mPreference;
 
     private BluetoothPairingPreferenceController mController;
@@ -70,16 +78,29 @@ public class BluetoothPairingPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         when(mFragment.getPreferenceScreen().getContext()).thenReturn(mContext);
 
-        mController = new BluetoothPairingPreferenceController(mContext, mFragment);
+        mPreference = new Preference(mContext);
+        mPreference.setKey(BluetoothPairingPreferenceController.KEY_PAIRING);
+
+        mController = new BluetoothPairingPreferenceController(mContext, mFragment,
+                mSettingsActivity);
     }
 
     @Test
     public void testCreateBluetoothPairingPreference() {
-        Preference pref = mController.createBluetoothPairingPreference();
+        Preference pref = mController.createBluetoothPairingPreference(ORDER);
 
         assertThat(pref.getKey()).isEqualTo(BluetoothPairingPreferenceController.KEY_PAIRING);
         assertThat(pref.getIcon()).isEqualTo(mContext.getDrawable(R.drawable.ic_add));
+        assertThat(pref.getOrder()).isEqualTo(ORDER);
         assertThat(pref.getTitle()).isEqualTo(
                 mContext.getString(R.string.bluetooth_pairing_pref_title));
+    }
+
+    @Test
+    public void testHandlePreferenceTreeClick_startFragment() {
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mSettingsActivity).startPreferencePanelAsUser(eq(mFragment), anyString(), any(),
+                anyInt(), any(), any());
     }
 }

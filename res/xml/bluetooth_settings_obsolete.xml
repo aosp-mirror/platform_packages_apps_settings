@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!-- Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,15 +16,6 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/bluetooth_settings">
-
-    <Preference
-        android:key="device_name"/>
-
-    <PreferenceCategory
-        android:key="paired_devices"
-        android:title="@string/bluetooth_paired_device_title"/>
-
-    <com.android.settingslib.widget.FooterPreference/>
+    android:title="@string/bluetooth_settings" >
 
 </PreferenceScreen>

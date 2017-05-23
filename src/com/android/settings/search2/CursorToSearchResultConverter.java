@@ -74,6 +74,7 @@ class CursorToSearchResultConverter {
     private static final String[] whiteList = {
             "main_toggle_wifi",
             "main_toggle_bluetooth",
+            "main_toggle_bluetooth_obsolete",
             "toggle_airplane",
             "tether_settings",
             "battery_saver",
