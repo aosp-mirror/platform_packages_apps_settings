@@ -429,8 +429,9 @@ public class PowerUsageSummary extends PowerUsageBase {
         updateLastFullChargePreference(runningTime);
 
         final CharSequence timeSequence = Utils.formatElapsedTime(context, runningTime, false);
-        mAppListGroup.setTitle(
-                TextUtils.expandTemplate(getText(R.string.power_usage_list_summary), timeSequence));
+        final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
+                : R.string.power_usage_list_summary;
+        mAppListGroup.setTitle(TextUtils.expandTemplate(getText(resId), timeSequence));
 
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
