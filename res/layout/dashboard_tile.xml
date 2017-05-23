@@ -30,8 +30,8 @@
         android:layout_width="@dimen/dashboard_tile_image_size"
         android:layout_height="@dimen/dashboard_tile_image_size"
         android:scaleType="centerInside"
-        android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
-        android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end" />
+        android:layout_marginStart="@dimen/dashboard_tile_image_margin"
+        android:layout_marginEnd="@dimen/dashboard_tile_image_margin" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:textColor="?android:attr/textColorSecondary"
             android:maxLines="1"
             android:ellipsize="end"
-            android:paddingEnd="@dimen/dashboard_tile_image_margin_start" />
+            android:paddingEnd="@dimen/dashboard_tile_image_margin" />
 
     </LinearLayout>
 
