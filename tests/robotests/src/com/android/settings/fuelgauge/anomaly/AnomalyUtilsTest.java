@@ -22,6 +22,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
+import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        ShadowKeyValueListParserWrapperImpl.class})
 public class AnomalyUtilsTest {
     private AnomalyUtils mAnomalyUtils;
 
