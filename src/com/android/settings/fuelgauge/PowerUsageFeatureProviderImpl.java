@@ -77,11 +77,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isAdvancedUiEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isPowerAccountingToggleEnabled() {
-        return false;
+        return true;
     }
 }
