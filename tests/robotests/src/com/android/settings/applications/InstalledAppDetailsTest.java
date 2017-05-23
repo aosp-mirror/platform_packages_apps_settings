@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -65,12 +66,17 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class InstalledAppDetailsTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
+    private static final int TARGET_UID = 111;
+    private static final int OTHER_UID = 222;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -86,6 +92,8 @@ public final class InstalledAppDetailsTest {
     private Preference mBatteryPreference;
     @Mock
     private BatterySipper mBatterySipper;
+    @Mock
+    private BatterySipper mOtherBatterySipper;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -105,6 +113,8 @@ public final class InstalledAppDetailsTest {
 
         mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mBatterySipper.uidObj = mUid;
+        doReturn(TARGET_UID).when(mBatterySipper).getUid();
+        doReturn(OTHER_UID).when(mOtherBatterySipper).getUid();
         doReturn(mActivity).when(mAppDetail).getActivity();
         doReturn(mShadowContext).when(mAppDetail).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
@@ -387,5 +397,16 @@ public final class InstalledAppDetailsTest {
         mAppDetail.onActivityResult(InstalledAppDetails.REQUEST_UNINSTALL, 0, mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
+    }
+
+    @Test
+    public void findTargetSipper_findCorrectSipper() {
+        List<BatterySipper> usageList = new ArrayList<>();
+        usageList.add(mBatterySipper);
+        usageList.add(mOtherBatterySipper);
+        doReturn(usageList).when(mBatteryStatsHelper).getUsageList();
+
+        assertThat(mAppDetail.findTargetSipper(mBatteryStatsHelper, TARGET_UID)).isEqualTo(
+                mBatterySipper);
     }
 }
