@@ -192,6 +192,8 @@ public class InstalledAppDetails extends AppInfoBase
     BatterySipper mSipper;
     @VisibleForTesting
     BatteryStatsHelper mBatteryHelper;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
 
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
@@ -200,7 +202,6 @@ public class InstalledAppDetails extends AppInfoBase
 
     private AppStorageStats mLastResult;
     private String mBatteryPercent;
-    private BatteryUtils mBatteryUtils;
 
     private final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
             new LoaderCallbacks<BatteryStatsHelper>() {
@@ -722,8 +723,6 @@ public class InstalledAppDetails extends AppInfoBase
             mDataPreference.setSummary(getDataSummary());
         }
 
-        updateBattery();
-
         if (!mInitialized) {
             // First time init: are we displaying an uninstalled app?
             mInitialized = true;
@@ -750,9 +749,10 @@ public class InstalledAppDetails extends AppInfoBase
         return true;
     }
 
-    private void updateBattery() {
-        if (mSipper != null && mBatteryHelper != null) {
-            mBatteryPreference.setEnabled(true);
+    @VisibleForTesting
+    void updateBattery() {
+        mBatteryPreference.setEnabled(true);
+        if (isBatteryStatsAvailable()) {
             final int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
                     BatteryStats.STATS_SINCE_CHARGED);
 
@@ -764,7 +764,6 @@ public class InstalledAppDetails extends AppInfoBase
             mBatteryPercent = Utils.formatPercentage(percentOfMax);
             mBatteryPreference.setSummary(getString(R.string.battery_summary, mBatteryPercent));
         } else {
-            mBatteryPreference.setEnabled(false);
             mBatteryPreference.setSummary(getString(R.string.no_battery_summary));
         }
     }
@@ -796,6 +795,11 @@ public class InstalledAppDetails extends AppInfoBase
             return context.getString(R.string.storage_summary_format,
                     getSize(context, stats), storageType.toString().toLowerCase());
         }
+    }
+
+    @VisibleForTesting
+    boolean isBatteryStatsAvailable() {
+        return mBatteryHelper != null && mSipper != null;
     }
 
     private static CharSequence getSize(Context context, AppStorageStats stats) {
@@ -1036,9 +1040,15 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mDataPreference) {
             startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
         } else if (preference == mBatteryPreference) {
-            BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
-            AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
-                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
+            if (isBatteryStatsAvailable()) {
+                BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
+                AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
+                        this, mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry,
+                        mBatteryPercent);
+            } else {
+                AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
+                        this, mPackageName);
+            }
         } else {
             return false;
         }
