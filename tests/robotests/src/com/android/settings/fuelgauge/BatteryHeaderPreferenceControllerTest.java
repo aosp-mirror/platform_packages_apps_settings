@@ -83,6 +83,7 @@ public class BatteryHeaderPreferenceControllerTest {
     private BatteryMeterView mBatteryMeterView;
     private TextView mTimeText;
     private TextView mSummary;
+    private TextView mSummary2;
     private LayoutPreference mBatteryLayoutPref;
     private Intent mBatteryIntent;
     private Lifecycle mLifecycle;
@@ -97,6 +98,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mTimeText = new TextView(mContext);
         mSummary = new TextView(mContext);
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
+        mSummary2 = new TextView(mContext);
 
         mBatteryIntent = new Intent();
         mBatteryIntent.putExtra(BatteryManager.EXTRA_LEVEL, BATTERY_LEVEL);
@@ -113,7 +115,8 @@ public class BatteryHeaderPreferenceControllerTest {
                 mContext, mActivity, mPreferenceFragment, mLifecycle);
         mController.mBatteryMeterView = mBatteryMeterView;
         mController.mTimeText = mTimeText;
-        mController.mSummary = mSummary;
+        mController.mSummary1 = mSummary;
+        mController.mSummary2 = mSummary2;
     }
 
     @After

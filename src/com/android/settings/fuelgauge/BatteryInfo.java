@@ -30,7 +30,6 @@ import android.text.format.Formatter;
 import android.util.SparseIntArray;
 
 import com.android.internal.os.BatteryStatsHelper;
-
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.R;
 import com.android.settings.Utils;

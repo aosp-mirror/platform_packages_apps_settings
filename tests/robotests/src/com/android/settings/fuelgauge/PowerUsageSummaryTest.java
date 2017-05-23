@@ -15,7 +15,9 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.view.View;
 import java.util.List;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -106,6 +108,8 @@ public class PowerUsageSummaryTest {
     private static final double POWER_USAGE_PERCENTAGE = 50;
     private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
             new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
+    public static final String NEW_ML_EST_SUFFIX = "(New ML est)";
+    public static final String OLD_EST_SUFFIX = "(Old est)";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -448,6 +452,18 @@ public class PowerUsageSummaryTest {
 
         verify(mLoaderManager).initLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
                 any());
+    }
+
+    @Test
+    public void testShowBothEstimates_summariesAreBothModified() {
+        doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary2);
+        doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary1);
+        mFragment.onLongClick(new View(mRealContext));
+        TextView summary1 = mFragment.mBatteryLayoutPref.findViewById(R.id.summary1);
+        TextView summary2 = mFragment.mBatteryLayoutPref.findViewById(R.id.summary2);
+        Robolectric.flushBackgroundThreadScheduler();
+        assertThat(summary2.getText().toString().contains(NEW_ML_EST_SUFFIX));
+        assertThat(summary1.getText().toString().contains(OLD_EST_SUFFIX));
     }
 
     public static class TestFragment extends PowerUsageSummary {
