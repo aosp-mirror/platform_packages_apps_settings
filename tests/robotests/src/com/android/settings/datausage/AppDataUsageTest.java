@@ -42,11 +42,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -74,6 +76,8 @@ public class AppDataUsageTest {
     @Test
     public void bindAppHeader_allWorkApps_shouldNotShowAppInfoLink() {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
+        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
+
         mFragment = spy(new AppDataUsage());
 
         doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))

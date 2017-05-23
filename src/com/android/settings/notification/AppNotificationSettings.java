@@ -132,6 +132,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this /* fragment */, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle())
                 .setIcon(mAppRow.icon)
                 .setLabel(mAppRow.label)
                 .setPackageName(mAppRow.pkg)

@@ -22,10 +22,10 @@ import android.nfc.NfcManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 

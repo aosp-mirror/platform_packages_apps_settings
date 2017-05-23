@@ -90,11 +90,20 @@ public class ThemePreferenceController extends PreferenceController implements
         pref.setEntries(labels);
         pref.setEntryValues(pkgs);
         String theme = getCurrentTheme();
-        if (TextUtils.isEmpty(theme)) {
-            theme = mContext.getString(R.string.default_theme);
-            pref.setSummary(theme);
+        CharSequence themeLabel = null;
+
+        for (int i = 0; i < pkgs.length; i++) {
+            if (TextUtils.equals(pkgs[i], theme)) {
+                themeLabel = labels[i];
+                break;
+            }
         }
-        pref.setSummary(theme);
+
+        if (TextUtils.isEmpty(themeLabel)) {
+            themeLabel = mContext.getString(R.string.default_theme);
+        }
+
+        pref.setSummary(themeLabel);
         pref.setValue(theme);
     }
 
@@ -127,7 +136,7 @@ public class ThemePreferenceController extends PreferenceController implements
                     UserHandle.myUserId());
             for (int i = 0, size = infos.size(); i < size; i++) {
                 if (infos.get(i).isEnabled() &&
-                         isChangeableOverlay(infos.get(i).packageName)) {
+                        isChangeableOverlay(infos.get(i).packageName)) {
                     return infos.get(i).packageName;
                 }
             }

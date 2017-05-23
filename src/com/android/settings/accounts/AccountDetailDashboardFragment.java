@@ -109,7 +109,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         mRemoveAccountController = new RemoveAccountPreferenceController(context, this);
         controllers.add(mRemoveAccountController);
         controllers.add(new AccountHeaderPreferenceController(
-                context, getActivity(), this, getArguments()));
+                context, getLifecycle(), getActivity(), this, getArguments()));
         return controllers;
     }
 

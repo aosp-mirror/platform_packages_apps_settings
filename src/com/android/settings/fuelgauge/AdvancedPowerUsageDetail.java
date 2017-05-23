@@ -184,6 +184,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final Bundle bundle = getArguments();
         EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
+                .setRecyclerView(getListView(), getLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 

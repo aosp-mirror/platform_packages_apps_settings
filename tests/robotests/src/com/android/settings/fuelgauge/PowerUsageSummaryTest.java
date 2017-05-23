@@ -132,6 +132,8 @@ public class PowerUsageSummaryTest {
     @Mock
     private LayoutPreference mBatteryLayoutPref;
     @Mock
+    private TextView mBatteryPercentText;
+    @Mock
     private TextView mSummary1;
     @Mock
     private BatteryInfo mBatteryInfo;
@@ -146,7 +148,6 @@ public class PowerUsageSummaryTest {
     @Mock
     private ContentResolver mContentResolver;
 
-    private TextView mBatteryPercentText;
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
     private TestFragment mFragment;
@@ -171,7 +172,7 @@ public class PowerUsageSummaryTest {
         mLastFullChargePref = new PowerGaugePreference(mRealContext);
         mFragment = spy(new TestFragment(mContext));
         mFragment.initFeatureProvider();
-        mBatteryMeterView = spy(new BatteryMeterView(mRealContext));
+        mBatteryMeterView = new BatteryMeterView(mRealContext);
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
         doNothing().when(mFragment).restartBatteryStatsLoader();
 
@@ -194,7 +195,6 @@ public class PowerUsageSummaryTest {
         mCellBatterySipper.drainType = BatterySipper.DrainType.CELL;
         mCellBatterySipper.totalPowerMah = POWER_MAH;
 
-        mBatteryPercentText = new TextView(mRealContext);
         when(mBatteryLayoutPref.findViewById(R.id.summary1)).thenReturn(mSummary1);
         when(mBatteryLayoutPref.findViewById(R.id.battery_percent)).thenReturn(mBatteryPercentText);
         when(mBatteryLayoutPref.findViewById(R.id.battery_header_icon))
@@ -285,50 +285,6 @@ public class PowerUsageSummaryTest {
     public void testOptionsMenu_clickToggleAppsMenu_dataChanged() {
         testToggleAllApps(true);
         testToggleAllApps(false);
-    }
-
-    @Test
-    public void testInitHeaderPreference_initCorrectly() {
-        mFragment.mBatteryLevel = 100;
-
-        mFragment.initHeaderPreference();
-
-        assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(100);
-        assertThat(mBatteryPercentText.getText().toString()).isEqualTo("100%");
-    }
-
-    @Test
-    public void testStartBatteryHeaderAnimationIfNecessary_batteryLevelChanged_animationStarted() {
-        final int prevLevel = 100;
-        final int curLevel = 80;
-
-        mFragment.startBatteryHeaderAnimationIfNecessary(mBatteryMeterView, mBatteryPercentText,
-                prevLevel, curLevel);
-
-        assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(curLevel);
-        assertThat(mBatteryPercentText.getText().toString()).isEqualTo("80%");
-    }
-
-    @Test
-    public void testOnSaveInstanceState_saveBatteryLevel() {
-        Bundle bundle = new Bundle();
-        mFragment.mBatteryLevel = BATTERY_LEVEL;
-        // mock it to stop crash in getPreferenceScreen
-        doReturn(null).when(mFragment).getPreferenceScreen();
-
-        mFragment.onSaveInstanceState(bundle);
-
-        assertThat(bundle.getInt(PowerUsageSummary.ARG_BATTERY_LEVEL)).isEqualTo(BATTERY_LEVEL);
-    }
-
-    @Test
-    public void testOnActivityCreated_setBatteryLevel() {
-        Bundle bundle = new Bundle();
-        bundle.putInt(PowerUsageSummary.ARG_BATTERY_LEVEL, BATTERY_LEVEL);
-
-        mFragment.onActivityCreated(bundle);
-
-        assertThat(mFragment.mBatteryLevel).isEqualTo(BATTERY_LEVEL);
     }
 
     @Test
@@ -533,41 +489,6 @@ public class PowerUsageSummaryTest {
 
         assertThat(mFragment.mAnomalySparseArray.get(UID)).containsExactly(anomaly1, anomaly2);
         assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
-    }
-
-    @Test
-    public void testUseEnhancedEstimateIfAvailable() {
-        // mock out the provider
-        final long time = 60 * 1000 * 1000;
-        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
-        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(true);
-        mFragment.mPowerFeatureProvider = provider;
-        mFragment.mEnhancedEstimate = time;
-
-        mFragment.useEnhancedEstimateIfAvailable(mRealContext, mBatteryInfo);
-
-        // The string that gets returned always has weird whitespacing to make it fit
-        // so we're just going to check that it contains the correct value we care about.
-        assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(time);
-        assertThat(mBatteryInfo.remainingLabel).contains("About 17 hrs");
-    }
-
-    @Test
-    public void testUseEnhancedEstimateIfAvailable_noOpsOnDisabled() {
-        // mock out the provider
-        final long time = 60 * 1000 * 1000;
-        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
-        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(false);
-        mFragment.mPowerFeatureProvider = provider;
-        mFragment.mEnhancedEstimate = time;
-        mBatteryInfo.remainingTimeUs = TIME_SINCE_LAST_FULL_CHARGE_US;
-        mBatteryInfo.remainingLabel = TIME_LEFT;
-
-        mFragment.useEnhancedEstimateIfAvailable(mRealContext, mBatteryInfo);
-
-        // check to make sure the values did not change
-        assertThat(mBatteryInfo.remainingTimeUs).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_US);
-        assertThat(mBatteryInfo.remainingLabel).contains(TIME_LEFT);
     }
 
     @Test

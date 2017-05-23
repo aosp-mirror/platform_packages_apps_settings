@@ -42,6 +42,7 @@ import java.util.List;
  */
 public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private static final int MENU_ID_REFRESH = Menu.FIRST;
+    private static final String KEY_BT_DEVICE_LIST = "bt_device_list";
     private static final String TAG = "DevicePickerFragment";
 
     public DevicePickerFragment() {
@@ -54,7 +55,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private boolean mStartScanOnStart;
 
     @Override
-    void addPreferencesForActivity() {
+    void initPreferencesFromPreferenceScreen() {
         Intent intent = getActivity().getIntent();
         mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
         setFilter(intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
@@ -165,6 +166,11 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         return null;
+    }
+
+    @Override
+    public String getDeviceListKey() {
+        return KEY_BT_DEVICE_LIST;
     }
 
     private void sendDevicePickedIntent(BluetoothDevice device) {
