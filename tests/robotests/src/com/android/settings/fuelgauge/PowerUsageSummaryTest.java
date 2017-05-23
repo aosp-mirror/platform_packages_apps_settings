@@ -442,12 +442,6 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testCalculateRunningTimeBasedOnStatsType() {
-        assertThat(mFragment.calculateRunningTimeBasedOnStatsType()).isEqualTo(
-                TIME_SINCE_LAST_FULL_CHARGE_MS);
-    }
-
-    @Test
     public void testNonIndexableKeys_MatchPreferenceKeys() {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks = PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER

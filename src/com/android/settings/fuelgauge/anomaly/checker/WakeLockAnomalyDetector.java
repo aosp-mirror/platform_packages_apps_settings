@@ -84,7 +84,7 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
             // TODO: add more attributes to detect wakelock anomaly
             if (maxPartialWakeLockMs > WAKE_LOCK_THRESHOLD_MS
                     && !mBatteryUtils.shouldHideSipper(sipper)) {
-                final String packageName = getPackageName(uid.getUid());
+                final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                 final CharSequence displayName = Utils.getApplicationLabel(mContext,
                         packageName);
 
@@ -99,12 +99,6 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
 
         }
         return anomalies;
-    }
-
-    private String getPackageName(int uid) {
-        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
-
-        return packageNames == null ? null : packageNames[0];
     }
 
     @VisibleForTesting
