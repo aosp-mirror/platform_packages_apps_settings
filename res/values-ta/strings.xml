@@ -30,8 +30,7 @@
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"இப்போது டெவெலப்பராகிவிட்டீர்கள்!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"தேவையில்லை, நீங்கள் ஏற்கனவே ஒரு டெவெலப்பர்."</string>
-    <!-- no translation found for dev_settings_disabled_warning (4909448907673974370) -->
-    <skip />
+    <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"முதலில் டெவெலப்பர் விருப்பங்களை இயக்கவும்."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"வயர்லெஸ் &amp; நெட்வொர்க்குகள்"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"இணைப்புகள்"</string>
     <string name="header_category_device" msgid="4544026001618307754">"சாதனம்"</string>
@@ -112,8 +111,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"துண்டிக்கவா?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"இது, பின்வருவதுடனான உங்கள் இணைப்பைத் துண்டிக்கும்:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"புளுடூத் அமைப்புகளை மாற்ற உங்களுக்கு அனுமதியில்லை."</string>
-    <!-- no translation found for bluetooth_pairing_pref_title (4601203665214962983) -->
-    <skip />
+    <string name="bluetooth_pairing_pref_title" msgid="4601203665214962983">"புதிய சாதனத்தை இணை"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"புளூடூத் அமைப்புகள் இயக்கப்பட்டிருக்கும்போது, அருகிலுள்ள சாதனங்களுக்கு <xliff:g id="DEVICE_NAME">%1$s</xliff:g> தெரியும்."</string>
     <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"புளூடூத் MAC முகவரி: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ஐ துண்டிக்கவா?"</string>
@@ -164,6 +162,10 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM அணுகல் கோரிக்கை"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> உங்கள் சிம் கார்டை அணுக விரும்புகிறது. சிம் கார்டிற்கு அணுகல் வழங்குவது இணைப்பின் போது, உங்கள் சாதனத்தின் தரவு இணைப்பை முடக்கும். <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>க்கு அணுகல் வழங்கவும்"</string>
     <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"பிற சாதனங்களில் <xliff:g id="DEVICE_NAME">^1</xliff:g> எனத் தெரியும்"</string>
+    <!-- no translation found for bluetooth_paired_device_title (8638994696317952019) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_page_title (5218444163161190061) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"தேதி &amp; நேரம்"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"நேரமண்டலத்தைத் தேர்வுசெய்க"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -457,6 +459,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"சாதனப் பாதுகாப்பு அம்சங்களைச் செயல்படுத்தினால், உங்கள் அனுமதியின்றி பிறர் இந்தச் சாதனத்தைப் பயன்படுத்த முடியாது. பயன்படுத்த விரும்பும் திரைப் பூட்டைத் தேர்வுசெய்யவும்."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"சாதனப் பாதுகாப்பு அம்சங்களைச் செயல்படுத்தினால், உங்கள் அனுமதியின்றி பிறர் உங்கள் ஃபோனைப் பயன்படுத்த முடியாது. பயன்படுத்த விரும்பும் திரைப் பூட்டைத் தேர்வுசெய்யவும்."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"மாற்றுத் திரைப் பூட்டு முறையைத் தேர்வுசெய்க"</string>
+    <!-- no translation found for setup_lock_settings_options_button_label (8511153243629402929) -->
+    <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"திரைப் பூட்டு"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / உறக்கத்திற்குப் பின் உடனடியாக"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / உறக்கத்திற்குப் பின் <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>"</string>
@@ -902,6 +906,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"வைஃபை அழைப்பு இயக்கத்தில் இருக்கும் போது, முன்னுரிமை மற்றும் வலிமையாக இருக்கிற சிக்னலைப் பொறுத்து வைஃபை நெட்வொர்க்குகள் அல்லது மொபைல் நிறுவன நெட்வொர்க்குக்கு அழைப்புகளை உங்கள் ஃபோன் திசைதிருப்பும். இந்த அம்சத்தை இயக்குவதற்கு முன், கட்டணங்கள் மற்றும் பிற விவரங்கள் குறித்து உங்கள் மொபைல் நிறுவனத்திடமிருந்து தெரிந்துகொள்ளவும்."</string>
+    <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"எமர்ஜென்சி முகவரியை மாற்று"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"வைஃபையைப் பயன்படுத்தி 911 என்ற எண்ணிற்கு அழைத்தால், அவசர சேவைகள் உங்கள் இருப்பிடத்தை முகவரியாகப் பயன்படுத்தும்"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"தோற்றம்"</string>
@@ -2024,6 +2029,8 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"ஆற்றல் பயன்பாடு அதிகமாகப் பயன்படுத்தப்பட்டது"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>க்குப் பயன்படுத்தியது"</string>
+    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> பயன்படுத்துவது: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"ஒட்டுமொத்த பேட்டரியில் <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"கடைசியாக முழுவதும் சார்ஜ் ஆனதிலிருந்து பிரேக் டவுன்"</string>
@@ -2672,9 +2679,16 @@
       <item quantity="one">மறைந்துள்ள %d உருப்படியைக் காட்டு</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"நெட்வொர்க் &amp; இணையம்"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"வைஃபை, மொபைல், தரவு உபயோகம், ஹாட்ஸ்பாட்"</string>
+    <!-- no translation found for network_dashboard_summary_mobile (3851083934739500429) -->
+    <skip />
+    <!-- no translation found for network_dashboard_summary_data_usage (3843261364705042212) -->
+    <skip />
+    <!-- no translation found for network_dashboard_summary_hotspot (8494210248613254574) -->
+    <skip />
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"இணைத்த சாதனங்கள்"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"புளூடூத், Cast, NFC"</string>
+    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (9106040742715366495) -->
+    <skip />
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"பயன்பாடுகள் &amp; அறிவிப்புகள்"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"அனுமதிகள், இயல்புப் பயன்பாடுகள்"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"பயனர்களும் கணக்குகளும்"</string>
@@ -3203,10 +3217,8 @@
     <string name="overlay_settings" msgid="6930854109449524280">"பிற பயன்பாடுகளின் மேலே காட்டு"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"பிற பயன்பாடுகளின் மேலே காட்டுவதற்கு <xliff:g id="COUNT_1">%2$d</xliff:g> இல் <xliff:g id="COUNT_0">%1$d</xliff:g> பயன்பாடுகள் அனுமதிக்கப்பட்டுள்ளன"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"அனுமதி பெற்ற பயன்பாடுகள்"</string>
-    <!-- no translation found for app_permission_summary_allowed (1505409933012886711) -->
-    <skip />
-    <!-- no translation found for app_permission_summary_not_allowed (2592617058101882802) -->
-    <skip />
+    <string name="app_permission_summary_allowed" msgid="1505409933012886711">"அனுமதிக்கப்பட்டது"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"அனுமதிக்கப்படவில்லை"</string>
     <string name="install_other_apps" msgid="6986686991775883017">"அறியப்படாத பயன்பாடுகளை நிறுவு"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"நிறுவு பயன்பாடுகள் அறியப்படாத மூலங்கள்"</string>
     <string name="write_settings" msgid="4797457275727195681">"முறைமை அமைப்புகளை மாற்று"</string>
@@ -3583,8 +3595,6 @@
     <string name="storage_games" msgid="7703159201697117621">"கேம்கள்"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"பிற பயன்பாடுகள்"</string>
     <string name="storage_files" msgid="8581083146777364063">"கோப்புகள்"</string>
-    <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"டேப்லெட் சேமிப்பகம்"</string>
-    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"மொபைல் சேமிப்பகம்"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"<xliff:g id="TOTAL">%1$s</xliff:g> இல் பயன்படுத்தியது:"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"உபயோகம்"</string>
