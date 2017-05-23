@@ -803,6 +803,7 @@ public class DatabaseIndexingManager {
                         entries = XmlParserUtils.getDataEntries(context, attrs);
                     }
 
+                    // TODO (b/62254931) index primitives instead of payload
                     payload = DatabaseIndexingUtils.getPayloadFromUriMap(controllerUriMap, key);
                     childFragment = XmlParserUtils.getDataChildFragment(context, attrs);
 

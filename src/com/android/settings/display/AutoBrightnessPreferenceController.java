@@ -19,14 +19,11 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
-import android.util.ArrayMap;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.R;
-
-import java.util.Map;
 
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
@@ -71,15 +68,12 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
 
     @Override
     public ResultPayload getResultPayload() {
-        final Map<Integer, Boolean> valueMap = new ArrayMap<>();
-        valueMap.put(SCREEN_BRIGHTNESS_MODE_AUTOMATIC, true);
-        valueMap.put(SCREEN_BRIGHTNESS_MODE_MANUAL, false);
-
         final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
                 getClass().getName(), mAutoBrightnessKey,
                 mContext.getString(R.string.display_settings));
 
         return new InlineSwitchPayload(SCREEN_BRIGHTNESS_MODE,
-                ResultPayload.SettingsSource.SYSTEM, valueMap, intent);
+                ResultPayload.SettingsSource.SYSTEM, SCREEN_BRIGHTNESS_MODE_AUTOMATIC, intent,
+                isAvailable());
     }
 }

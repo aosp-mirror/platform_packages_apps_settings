@@ -52,13 +52,14 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
             return;
         }
         final InlineSwitchPayload payload = (InlineSwitchPayload) result.payload;
-        switchView.setChecked(payload.getSwitchValue(mContext));
+        switchView.setChecked(payload.getValue(mContext) == InlineSwitchPayload.TRUE);
         switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
             final Pair<Integer, Object> value = Pair.create(
                     MetricsEvent.FIELD_SETTINGS_SEARCH_INLINE_RESULT_VALUE, isChecked
                             ? 1L : 0L);
-            fragment.onSearchResultClicked(this, payload.settingsUri, value);
-            payload.setSwitchValue(mContext, isChecked);
+            fragment.onSearchResultClicked(this, payload.mSettingKey, value);
+            int newValue = isChecked ? InlineSwitchPayload.TRUE : InlineSwitchPayload.FALSE;
+            payload.setValue(mContext, newValue);
         });
     }
 }

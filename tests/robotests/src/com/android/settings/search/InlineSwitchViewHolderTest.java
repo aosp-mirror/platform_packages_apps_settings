@@ -86,7 +86,7 @@ public class InlineSwitchViewHolderTest {
 
     @Test
     public void testBindViewElements_AllUpdated() {
-        when(mPayload.getSwitchValue(any(Context.class))).thenReturn(true);
+        when(mPayload.getValue(any(Context.class))).thenReturn(1);
         SearchResult result = getSearchResult();
         mHolder.onBind(mFragment, result);
         // Precondition: switch is on.
@@ -102,10 +102,12 @@ public class InlineSwitchViewHolderTest {
 
     private SearchResult getSearchResult() {
         SearchResult.Builder builder = new SearchResult.Builder();
+
         builder.setTitle(TITLE)
                 .setSummary(SUMMARY)
                 .setRank(1)
-                .setPayload(new InlineSwitchPayload("", 0, null, null))
+                .setPayload(new InlineSwitchPayload("" /* uri */, 0 /* mSettingSource */,
+                        1 /* onValue */, null /* intent */, true /* isDeviceSupported */))
                 .addBreadcrumbs(new ArrayList<>())
                 .setIcon(mIcon)
                 .setPayload(mPayload)
