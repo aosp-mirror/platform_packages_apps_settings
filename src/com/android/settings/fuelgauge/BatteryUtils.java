@@ -31,6 +31,8 @@ import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -211,6 +213,19 @@ public class BatteryUtils {
         }
 
         return (powerUsageMah / (totalPowerMah - hiddenPowerMah)) * dischargeAmount;
+    }
+
+    /**
+     * Sort the {@code usageList} based on {@link BatterySipper#totalPowerMah}
+     * @param usageList
+     */
+    public void sortUsageList(List<BatterySipper> usageList) {
+        Collections.sort(usageList, new Comparator<BatterySipper>() {
+            @Override
+            public int compare(BatterySipper a, BatterySipper b) {
+                return Double.compare(b.totalPowerMah, a.totalPowerMah);
+            }
+        });
     }
 
     private long convertUsToMs(long timeUs) {
