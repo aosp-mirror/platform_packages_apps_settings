@@ -39,6 +39,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +79,8 @@ public class WakeupAlarmAnomalyDetectorTest {
     private BatteryStats.Uid.Pkg mPkg;
     @Mock
     private BatteryStats.Counter mCounter;
+    @Mock
+    private AnomalyDetectionPolicy mPolicy;
 
     private WakeupAlarmAnomalyDetector mWakeupAlarmAnomalyDetector;
     private Context mContext;
@@ -87,6 +91,7 @@ public class WakeupAlarmAnomalyDetectorTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        ReflectionHelpers.setField(mPolicy, "wakeupAlarmThreshold", 60);
 
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
         doReturn(RUNNING_TIME_MS).when(mBatteryUtils).calculateRunningTimeBasedOnStatsType(any(),
@@ -102,7 +107,7 @@ public class WakeupAlarmAnomalyDetectorTest {
         mUsageList.add(mNormalSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
-        mWakeupAlarmAnomalyDetector = spy(new WakeupAlarmAnomalyDetector(mContext));
+        mWakeupAlarmAnomalyDetector = spy(new WakeupAlarmAnomalyDetector(mContext, mPolicy));
         mWakeupAlarmAnomalyDetector.mBatteryUtils = mBatteryUtils;
     }
 
