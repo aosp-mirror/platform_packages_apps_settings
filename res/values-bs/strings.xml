@@ -2032,6 +2032,8 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Prekoračenje potrošnje energije"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Korišteno <xliff:g id="TIME">^1</xliff:g>"</string>
+    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"Aplikacija <xliff:g id="APP">%2$s</xliff:g> koristi <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> ukupne baterije"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Pregled od posljednje potpune napunjenosti"</string>
@@ -2696,7 +2698,7 @@
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Povezani uređaji"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, emitiranje, NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplikacije i obavještenja"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Dopuštenja, zadane aplikacije"</string>
+    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Odobrenja, zadane aplikacije"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Korisnici i računi"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Zadane aplikacije"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Jezici, vrijeme, sigurnosna kopija, ažuriranja"</string>
@@ -3061,9 +3063,9 @@
     <string name="notification_summary_level" msgid="2726571692704140826">"Nivo %d"</string>
     <string name="notification_summary_channel" msgid="5831124672372023524">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> dodijeljena dozvola</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> dodijeljene dozvole</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dodijeljenih dozvola</item>
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> dodijeljeno odobrenje</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> dodijeljena odobrenja</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dodijeljenih odobrenja</item>
     </plurals>
     <plurals name="runtime_permissions_summary" formatted="false" msgid="1564663886246010959">
       <item quantity="one"><xliff:g id="COUNT_2">%d</xliff:g> od <xliff:g id="COUNT_3">%d</xliff:g> odobrenja je dato</item>
@@ -3071,12 +3073,12 @@
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> od <xliff:g id="COUNT_3">%d</xliff:g> odobrenja je dato</item>
     </plurals>
     <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> dodatna dozvola</item>
-      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> dodatne dozvole</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dodatnih dozvola</item>
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> dodatno odobrenje</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> dodatna odobrenje</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> dodatnih odobrenja</item>
     </plurals>
-    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Nema dodijeljenih dozvola"</string>
-    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Nema zatraženih dozvola"</string>
+    <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Nema dodijeljenih odobrenja"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Nema zatraženih odobrenja"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Sve aplikacije"</string>
     <string name="filter_enabled_apps" msgid="5395727306799456250">"Instalirane aplikacije"</string>
     <string name="filter_instant_apps" msgid="574277769963965565">"Instant-aplikacije"</string>
@@ -3235,15 +3237,15 @@
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr slušalac virtuelne realnosti stereo pomoćna usluga"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"sistem upozorenje prozor dijaloški okvir prikazivanje preko drugih aplikacija"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Prikaz preko drugih aplikacija"</string>
-    <string name="system_alert_window_summary" msgid="602892301318324492">"Aplikacije s dozvolom za prikaz preko drugih aplikacija: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije s dozvolom"</string>
+    <string name="system_alert_window_summary" msgid="602892301318324492">"Aplikacije s odobrenjem za prikaz preko drugih aplikacija: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
+    <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije s odobrenjem"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Da"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"Ne"</string>
     <string name="install_other_apps" msgid="6986686991775883017">"Instaliranje nepoznatih aplikacija"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instaliranje aplikacije nepoznati izvori"</string>
     <string name="write_settings" msgid="4797457275727195681">"Izmjena postavki sistema"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"pisati izmijeniti sistemske postavke"</string>
-    <string name="write_settings_summary" msgid="4302268998611412696">"Aplikacije sa dozvolom za mijenjanje postavki sistema: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
+    <string name="write_settings_summary" msgid="4302268998611412696">"Aplikacije sa odobrenjem za mijenjanje postavki sistema: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="filter_install_sources_apps" msgid="3102976274848199118">"Mogu instalirati druge aplikacije"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"Mogu mijenjati postavke sistema"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"Mogu mijenjati postavke sistema"</string>
@@ -3574,8 +3576,8 @@
       <item quantity="other">Najmanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
     </plurals>
     <string name="enterprise_privacy_location_access" msgid="4158197200885270634">"Odobrenja za lokacije"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"Dopuštenja za mikrofon"</string>
-    <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"Dopuštenja za kameru"</string>
+    <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"Odobrenja za mikrofon"</string>
+    <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"Odobrenja za kameru"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3288495615791128724">"Zadane aplikacije"</string>
     <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="2765037387436064893">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
@@ -3632,8 +3634,6 @@
     <string name="storage_games" msgid="7703159201697117621">"Igre"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Druge aplikacije"</string>
     <string name="storage_files" msgid="8581083146777364063">"Fajlovi"</string>
-    <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"Pohrana na tabletu"</string>
-    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Pohrana na telefonu"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Iskorišteno od <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"iskor."</string>
