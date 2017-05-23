@@ -39,15 +39,20 @@ import java.util.List;
  */
 public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
     private static final String TAG = "WakeupAlarmAnomalyDetector";
-    //TODO: add this threshold into AnomalyDetectionPolicy
-    private static final int WAKEUP_ALARM_THRESHOLD = 60;
-    private Context mContext;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    private long mWakeupAlarmThreshold;
+    private Context mContext;
 
     public WakeupAlarmAnomalyDetector(Context context) {
+        this(context, new AnomalyDetectionPolicy(context));
+    }
+
+    @VisibleForTesting
+    WakeupAlarmAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
         mContext = context;
         mBatteryUtils = BatteryUtils.getInstance(context);
+        mWakeupAlarmThreshold = policy.wakeupAlarmThreshold;
     }
 
     @Override
@@ -66,7 +71,7 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
                 }
 
                 final int wakeups = getWakeupAlarmCountFromUid(uid);
-                if ((wakeups / totalRunningHours) > WAKEUP_ALARM_THRESHOLD) {
+                if ((wakeups / totalRunningHours) > mWakeupAlarmThreshold) {
                     final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                     final CharSequence displayName = Utils.getApplicationLabel(mContext,
                             packageName);
