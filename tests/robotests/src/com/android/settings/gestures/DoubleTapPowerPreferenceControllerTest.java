@@ -23,8 +23,6 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

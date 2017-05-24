@@ -7,7 +7,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
-import com.android.settings.search2.XmlParserUtils;
+import com.android.settings.search.XmlParserUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

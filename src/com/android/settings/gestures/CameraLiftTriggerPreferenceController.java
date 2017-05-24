@@ -20,10 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import android.util.ArrayMap;
 import com.android.settings.R;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class CameraLiftTriggerPreferenceController extends GesturePreferenceController {

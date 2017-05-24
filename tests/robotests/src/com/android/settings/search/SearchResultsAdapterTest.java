@@ -27,18 +27,7 @@ import android.widget.FrameLayout;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.AppSearchResult;
-import com.android.settings.search2.DatabaseResultLoader;
-import com.android.settings.search2.InlineSwitchViewHolder;
-import com.android.settings.search2.InstalledAppResultLoader;
-import com.android.settings.search2.ResultPayload;
-import com.android.settings.search2.IntentSearchViewHolder;
-import com.android.settings.search2.SearchFeatureProvider;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.search2.SearchResult;
-import com.android.settings.search2.SearchResult.Builder;
-import com.android.settings.search2.SearchResultsAdapter;
-import com.android.settings.search2.SearchViewHolder;
+import com.android.settings.search.SearchResult.Builder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,8 +46,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -200,18 +189,20 @@ public class SearchResultsAdapterTest {
         List<SearchResult> results = new ArrayList<>();
         ResultPayload payload = new ResultPayload(new Intent());
         SearchResult.Builder builder = new SearchResult.Builder();
-        builder.addPayload(payload);
-
-        builder.addTitle(TITLES[0])
-                .addRank(1);
+        builder.setPayload(payload)
+                .setTitle(TITLES[0])
+                .setRank(1)
+                .setStableId(Objects.hash(TITLES[0], "db"));
         results.add(builder.build());
 
-        builder.addTitle(TITLES[1])
-                .addRank(3);
+        builder.setTitle(TITLES[1])
+                .setRank(3)
+                .setStableId(Objects.hash(TITLES[1], "db"));
         results.add(builder.build());
 
-        builder.addTitle(TITLES[2])
-                .addRank(6);
+        builder.setTitle(TITLES[2])
+                .setRank(6)
+                .setStableId(Objects.hash(TITLES[2], "db"));
         results.add(builder.build());
 
         return results;
@@ -221,18 +212,20 @@ public class SearchResultsAdapterTest {
         List<AppSearchResult> results = new ArrayList<>();
         ResultPayload payload = new ResultPayload(new Intent());
         AppSearchResult.Builder builder = new AppSearchResult.Builder();
-        builder.addPayload(payload);
-
-        builder.addTitle(TITLES[3])
-                .addRank(1);
+        builder.setPayload(payload)
+                .setTitle(TITLES[3])
+                .setRank(1)
+                .setStableId(Objects.hash(TITLES[3], "app"));
         results.add(builder.build());
 
-        builder.addTitle(TITLES[4])
-                .addRank(2);
+        builder.setTitle(TITLES[4])
+                .setRank(2)
+                .setStableId(Objects.hash(TITLES[4], "app"));
         results.add(builder.build());
 
-        builder.addTitle(TITLES[5])
-                .addRank(4);
+        builder.setTitle(TITLES[5])
+                .setRank(4)
+                .setStableId(Objects.hash(TITLES[5], "app"));
         results.add(builder.build());
 
         return results;
@@ -244,18 +237,21 @@ public class SearchResultsAdapterTest {
         final Drawable icon = mContext.getDrawable(R.drawable.ic_search_history);
         final ResultPayload payload = new ResultPayload(null);
         final SearchResult.Builder builder = new Builder();
-        builder.addTitle("title")
-                .addSummary("summary")
-                .addRank(1)
+        builder.setTitle("title")
+                .setSummary("summary")
+                .setRank(1)
                 .addBreadcrumbs(breadcrumbs)
-                .addIcon(icon)
-                .addPayload(payload);
+                .setIcon(icon)
+                .setPayload(payload)
+                .setStableId(Objects.hash("title", "summary", 1));
         sampleResults.add(builder.build());
 
-        builder.addRank(2);
+        builder.setRank(2)
+                .setStableId(Objects.hash("title", "summary", 2));
         sampleResults.add(builder.build());
 
-        builder.addRank(3);
+        builder.setRank(3)
+                .setStableId(Objects.hash("title", "summary", 3));
         sampleResults.add(builder.build());
         return sampleResults;
     }

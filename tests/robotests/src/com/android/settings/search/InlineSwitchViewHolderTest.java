@@ -26,10 +26,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.InlineSwitchViewHolder;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.search2.SearchResult;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -114,13 +110,14 @@ public class InlineSwitchViewHolderTest {
 
     private SearchResult getSearchResult() {
         SearchResult.Builder builder = new SearchResult.Builder();
-        builder.addTitle(TITLE)
-                .addSummary(SUMMARY)
-                .addRank(1)
-                .addPayload(new InlineSwitchPayload("", 0, null, null))
+        builder.setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setRank(1)
+                .setPayload(new InlineSwitchPayload("", 0, null, null))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(mIcon)
-                .addPayload(mPayload);
+                .setIcon(mIcon)
+                .setPayload(mPayload)
+                .setStableId(TITLE.hashCode());
 
         return builder.build();
     }

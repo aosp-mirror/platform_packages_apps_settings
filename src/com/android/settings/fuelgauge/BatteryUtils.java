@@ -27,6 +27,8 @@ import android.util.Log;
 import android.util.SparseLongArray;
 
 import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
@@ -211,6 +213,38 @@ public class BatteryUtils {
         }
 
         return (powerUsageMah / (totalPowerMah - hiddenPowerMah)) * dischargeAmount;
+    }
+
+    /**
+     * Calculate the whole running time in the state {@code statsType}
+     *
+     * @param batteryStatsHelper utility class that contains the data
+     * @param statsType state that we want to calculate the time for
+     * @return the running time in millis
+     */
+    public long calculateRunningTimeBasedOnStatsType(BatteryStatsHelper batteryStatsHelper,
+            int statsType) {
+        final long elapsedRealtimeUs = convertMsToUs(SystemClock.elapsedRealtime());
+        // Return the battery time (millisecond) on status mStatsType
+        return convertUsToMs(
+                batteryStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs, statsType));
+
+    }
+
+    /**
+     * Find the package name for a {@link android.os.BatteryStats.Uid}
+     *
+     * @param uid id to get the package name
+     * @return the package name. If there are multiple packages related to
+     * given id, return the first one. Or return null if there are no known
+     * packages with the given id
+     *
+     * @see PackageManager#getPackagesForUid(int)
+     */
+    public String getPackageName(int uid) {
+        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
+
+        return ArrayUtils.isEmpty(packageNames) ? null : packageNames[0];
     }
 
     private long convertUsToMs(long timeUs) {

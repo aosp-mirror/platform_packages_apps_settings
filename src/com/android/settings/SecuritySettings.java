@@ -106,6 +106,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_UNIFICATION = "unification";
     @VisibleForTesting
     static final String KEY_LOCKSCREEN_PREFERENCES = "lockscreen_preferences";
+    private static final String KEY_ENCRYPTION_AND_CREDENTIALS = "encryption_and_credential";
+    private static final String KEY_LOCATION_SCANNING  = "location_scanning";
+    private static final String KEY_LOCATION = "location";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
@@ -939,7 +942,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         @Override
         public List<String> getNonIndexableKeys(Context context) {
-            final List<String> keys = new ArrayList<String>();
+            final List<String> keys = super.getNonIndexableKeys(context);
 
             LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
 
@@ -960,6 +963,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     .isAvailable()) {
                 keys.add(KEY_ENTERPRISE_PRIVACY);
             }
+
+            // Duplicate in special app access
+            keys.add(KEY_MANAGE_DEVICE_ADMIN);
+            // Duplicates between parent-child
+            keys.add(KEY_LOCATION);
+            keys.add(KEY_ENCRYPTION_AND_CREDENTIALS);
+            keys.add(KEY_SCREEN_PINNING);
+            keys.add(KEY_LOCATION_SCANNING);
 
             return keys;
         }

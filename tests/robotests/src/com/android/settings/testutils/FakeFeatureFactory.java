@@ -28,9 +28,9 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
-import com.android.settings.overlay.SurveyFeatureProvider;
-import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
 import static org.mockito.Matchers.anyString;

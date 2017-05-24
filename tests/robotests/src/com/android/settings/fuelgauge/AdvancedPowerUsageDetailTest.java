@@ -283,4 +283,26 @@ public class AdvancedPowerUsageDetailTest {
         verify(mTestActivity).startPreferencePanelAsUser(
                 any(), anyString(), any(), anyInt(), any(), eq(new UserHandle(10)));
     }
+
+    @Test
+    public void testStartBatteryDetailPage_noBatteryUsage_hasBasicData() {
+        final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
+        Answer<Void> callable = new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocation) throws Exception {
+                mBundle = captor.getValue();
+                return null;
+            }
+        };
+        doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(any(), anyString(),
+                captor.capture(), anyInt(), any(), any());
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, PACKAGE_NAME[0]);
+
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
+                PACKAGE_NAME[0]);
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT)).isEqualTo(
+                "0%");
+    }
+
 }

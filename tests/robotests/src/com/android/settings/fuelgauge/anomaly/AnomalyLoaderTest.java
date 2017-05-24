@@ -49,6 +49,7 @@ public class AnomalyLoaderTest {
     private Context mContext;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
+    @Mock
     private WakeLockAnomalyDetector mWakeLockAnomalyDetector;
     private Anomaly mWakeLockAnomaly;
     private List<Anomaly> mWakeLockAnomalies;
@@ -62,7 +63,6 @@ public class AnomalyLoaderTest {
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
 
-        mWakeLockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext));
         mWakeLockAnomalies = new ArrayList<>();
         mWakeLockAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)

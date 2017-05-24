@@ -17,12 +17,14 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -50,20 +52,26 @@ public class DonutView extends View {
         super(context, attrs);
         mDeviceDensity = getResources().getDisplayMetrics().density;
         mStrokeWidth = 6f * mDeviceDensity;
+        final ColorFilter mAccentColorFilter =
+                new PorterDuffColorFilter(
+                        Utils.getColorAttr(context, android.R.attr.colorAccent),
+                        PorterDuff.Mode.SRC_IN);
 
         mBackgroundCircle = new Paint();
         mBackgroundCircle.setAntiAlias(true);
         mBackgroundCircle.setStrokeCap(Paint.Cap.BUTT);
         mBackgroundCircle.setStyle(Paint.Style.STROKE);
         mBackgroundCircle.setStrokeWidth(mStrokeWidth);
-        mBackgroundCircle.setColor(getResources().getColor(R.color.donut_background_grey));
+        mBackgroundCircle.setColorFilter(mAccentColorFilter);
+        mBackgroundCircle.setColor(context.getColor(R.color.meter_background_color));
 
         mFilledArc = new Paint();
         mFilledArc.setAntiAlias(true);
         mFilledArc.setStrokeCap(Paint.Cap.BUTT);
         mFilledArc.setStyle(Paint.Style.STROKE);
         mFilledArc.setStrokeWidth(mStrokeWidth);
-        mFilledArc.setColor(Utils.getColorAccent(getContext()));
+        mFilledArc.setColor(Utils.getDefaultColor(mContext, R.color.meter_consumed_color));
+        mFilledArc.setColorFilter(mAccentColorFilter);
 
         mTextPaint = new TextPaint();
         mTextPaint.setColor(Utils.getColorAccent(getContext()));
@@ -86,11 +94,25 @@ public class DonutView extends View {
     }
 
     private void drawDonut(Canvas canvas) {
-        canvas.drawArc(0 + mStrokeWidth, 0 + mStrokeWidth, getWidth() - mStrokeWidth,
-                getHeight() - mStrokeWidth, TOP, 360, false, mBackgroundCircle);
+        canvas.drawArc(
+                0 + mStrokeWidth,
+                0 + mStrokeWidth,
+                getWidth() - mStrokeWidth,
+                getHeight() - mStrokeWidth,
+                TOP,
+                360,
+                false,
+                mBackgroundCircle);
 
-        canvas.drawArc(0 + mStrokeWidth, 0 + mStrokeWidth, getWidth() - mStrokeWidth,
-                getHeight() - mStrokeWidth, TOP, (360 * mPercent / 100), false, mFilledArc);
+        canvas.drawArc(
+                0 + mStrokeWidth,
+                0 + mStrokeWidth,
+                getWidth() - mStrokeWidth,
+                getHeight() - mStrokeWidth,
+                TOP,
+                (360 * mPercent / 100),
+                false,
+                mFilledArc);
     }
 
     private void drawInnerText(Canvas canvas) {

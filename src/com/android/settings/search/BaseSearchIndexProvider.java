@@ -26,7 +26,6 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.search2.XmlParserUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
