@@ -49,6 +49,10 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
         mType = (ListPreference) findPreference("type");
 
+        if (!AccessibilitySettings.isColorTransformAccelerated(getActivity())) {
+            mFooterPreferenceMixin.createFooterPreference().setTitle(
+                    R.string.accessibility_display_daltonizer_preference_subtitle);
+        }
         initPreferences();
     }
 
