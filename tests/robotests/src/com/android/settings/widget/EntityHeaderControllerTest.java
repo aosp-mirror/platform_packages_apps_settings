@@ -234,6 +234,33 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
+    public void iconContentDescription_shouldWorkWithSetIcon() {
+        final View view = mLayoutInflater
+                .inflate(R.layout.settings_entity_header, null /* root */);
+        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        String description = "Fake Description";
+        mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
+        mController.setIconContentDescription(description);
+        mController.done(mActivity);
+        assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
+                .isEqualTo(description);
+    }
+
+    @Test
+    public void iconContentDescription_shouldWorkWithoutSetIcon() {
+        final View view = mLayoutInflater
+                .inflate(R.layout.settings_entity_header, null /* root */);
+        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        String description = "Fake Description";
+        mController.setIconContentDescription(description);
+        mController.done(mActivity);
+        assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
+                .isEqualTo(description);
+    }
+
+    @Test
     public void bindButton_hasAppNotifIntent_shouldShowButton() {
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
