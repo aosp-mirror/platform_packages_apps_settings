@@ -16,17 +16,19 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
+import com.android.settings.fuelgauge.anomaly.Anomaly;
+
 /**
  * Interface for anomaly action, which is triggered if we need to handle the anomaly
  */
 public interface AnomalyAction {
     /**
      * handle the action when user clicks positive button
-     * @param packageName about the app that we need to handle
+     * @param Anomaly about the app that we need to handle
      * @param metricsKey key for the page that invokes the action
      *
      * @see com.android.internal.logging.nano.MetricsProto
      */
-    void handlePositiveAction(String packageName, int metricsKey);
+    void handlePositiveAction(Anomaly Anomaly, int metricsKey);
     int getActionType();
 }

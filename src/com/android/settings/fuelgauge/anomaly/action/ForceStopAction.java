@@ -42,7 +42,8 @@ public class ForceStopAction implements AnomalyAction {
     }
 
     @Override
-    public void handlePositiveAction(String packageName, int metricsKey) {
+    public void handlePositiveAction(Anomaly anomaly, int metricsKey) {
+        final String packageName = anomaly.packageName;
         // force stop the package
         mMetricsFeatureProvider.action(mContext,
                 MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP, packageName,

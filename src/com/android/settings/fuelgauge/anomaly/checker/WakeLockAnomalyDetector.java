@@ -31,6 +31,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,17 +41,24 @@ import java.util.List;
  */
 public class WakeLockAnomalyDetector implements AnomalyDetector {
     private static final String TAG = "WakeLockAnomalyChecker";
-    // TODO: get threshold form server side
-    private static final long WAKE_LOCK_THRESHOLD_MS = 2 * DateUtils.MINUTE_IN_MILLIS;
     private PackageManager mPackageManager;
     private Context mContext;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    long mWakeLockThresholdMs;
 
     public WakeLockAnomalyDetector(Context context) {
+        this(context, new AnomalyDetectionPolicy(context));
+    }
+
+    @VisibleForTesting
+    WakeLockAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mBatteryUtils = BatteryUtils.getInstance(context);
+
+        mWakeLockThresholdMs = policy.wakeLockThreshold;
     }
 
     @Override
@@ -82,9 +90,9 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
 
             // Report it if wakelock time is too long and it is not a hidden batterysipper
             // TODO: add more attributes to detect wakelock anomaly
-            if (maxPartialWakeLockMs > WAKE_LOCK_THRESHOLD_MS
+            if (maxPartialWakeLockMs > mWakeLockThresholdMs
                     && !mBatteryUtils.shouldHideSipper(sipper)) {
-                final String packageName = getPackageName(uid.getUid());
+                final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                 final CharSequence displayName = Utils.getApplicationLabel(mContext,
                         packageName);
 
@@ -99,12 +107,6 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
 
         }
         return anomalies;
-    }
-
-    private String getPackageName(int uid) {
-        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
-
-        return packageNames == null ? null : packageNames[0];
     }
 
     @VisibleForTesting

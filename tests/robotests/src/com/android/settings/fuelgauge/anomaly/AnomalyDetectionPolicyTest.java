@@ -42,7 +42,9 @@ import org.robolectric.annotation.Config;
 public class AnomalyDetectionPolicyTest {
     private static final String ANOMALY_DETECTION_CONSTANTS_VALUE = "anomaly_detection_enabled=true"
             + ",wakelock_enabled=false"
-            + ",wakelock_threshold=3000";
+            + ",wakelock_threshold=3000"
+            + ",wakeup_alarm_enabled=true"
+            + ",wakeup_alarm_threshold=100";
     private Context mContext;
     private KeyValueListParserWrapper mKeyValueListParserWrapper;
 
@@ -62,6 +64,8 @@ public class AnomalyDetectionPolicyTest {
                 AnomalyDetectionPolicy.KEY_ANOMALY_DETECTION_ENABLED, true);
         doReturn(false).when(mKeyValueListParserWrapper).getBoolean(
                 AnomalyDetectionPolicy.KEY_WAKELOCK_DETECTION_ENABLED, true);
+        doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
+                AnomalyDetectionPolicy.KEY_WAKEUP_ALARM_DETECTION_ENABLED, true);
 
         AnomalyDetectionPolicy anomalyDetectionPolicy = new AnomalyDetectionPolicy(mContext,
                 mKeyValueListParserWrapper);
@@ -69,6 +73,8 @@ public class AnomalyDetectionPolicyTest {
         assertThat(anomalyDetectionPolicy.anomalyDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeLockDetectionEnabled).isFalse();
         assertThat(anomalyDetectionPolicy.wakeLockThreshold).isEqualTo(3000);
+        assertThat(anomalyDetectionPolicy.wakeupAlarmDetectionEnabled).isTrue();
+        assertThat(anomalyDetectionPolicy.wakeupAlarmThreshold).isEqualTo(100);
     }
 
     @Test
@@ -85,5 +91,7 @@ public class AnomalyDetectionPolicyTest {
         assertThat(anomalyDetectionPolicy.anomalyDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeLockDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeLockThreshold).isEqualTo(DateUtils.HOUR_IN_MILLIS);
+        assertThat(anomalyDetectionPolicy.wakeupAlarmDetectionEnabled).isTrue();
+        assertThat(anomalyDetectionPolicy.wakeupAlarmThreshold).isEqualTo(60);
     }
 }

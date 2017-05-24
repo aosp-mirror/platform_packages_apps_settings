@@ -144,7 +144,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
         mVideoPreference.setOrder(0);
-        mSummaryPreference.setOrder(1);
         mConfigWarningPreference.setOrder(2);
         preferenceScreen.addPreference(mVideoPreference);
         preferenceScreen.addPreference(mConfigWarningPreference);

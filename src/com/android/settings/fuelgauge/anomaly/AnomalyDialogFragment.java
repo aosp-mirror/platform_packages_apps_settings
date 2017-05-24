@@ -87,7 +87,7 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
         final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly.type);
         final int metricsKey = getArguments().getInt(ARG_METRICS_KEY);
 
-        anomalyAction.handlePositiveAction(mAnomaly.packageName, metricsKey);
+        anomalyAction.handlePositiveAction(mAnomaly, metricsKey);
         lsn.onAnomalyHandled(mAnomaly);
     }
 

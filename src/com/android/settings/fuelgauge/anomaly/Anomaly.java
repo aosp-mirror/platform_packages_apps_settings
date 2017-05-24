@@ -34,19 +34,25 @@ import java.util.Objects;
  */
 public class Anomaly implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({AnomalyType.WAKE_LOCK})
+    @IntDef({AnomalyType.WAKE_LOCK,
+            AnomalyType.WAKEUP_ALARM})
     public @interface AnomalyType {
         int WAKE_LOCK = 0;
+        int WAKEUP_ALARM = 1;
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({AnomalyActionType.FORCE_STOP})
+    @IntDef({AnomalyActionType.FORCE_STOP,
+            AnomalyActionType.BACKGROUND_CHECK})
     public @interface AnomalyActionType {
         int FORCE_STOP = 0;
+        int BACKGROUND_CHECK = 1;
     }
 
     @AnomalyType
-    public static final int[] ANOMALY_TYPE_LIST = {AnomalyType.WAKE_LOCK};
+    public static final int[] ANOMALY_TYPE_LIST =
+            {AnomalyType.WAKE_LOCK,
+            AnomalyType.WAKEUP_ALARM};
 
     /**
      * Type of this this anomaly

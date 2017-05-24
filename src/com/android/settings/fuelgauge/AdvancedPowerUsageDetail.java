@@ -128,6 +128,17 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
+                R.string.battery_details_title, null,
+                new UserHandle(UserHandle.getUserId(sipper.getUid())));
+    }
+
+    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
+            String packageName) {
+        final Bundle args = new Bundle(2);
+        args.putString(EXTRA_PACKAGE_NAME, packageName);
+        args.putString(EXTRA_POWER_USAGE_PERCENT, Utils.formatPercentage(0));
+
+        caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
                 R.string.battery_details_title, null, new UserHandle(UserHandle.myUserId()));
     }
 

@@ -206,7 +206,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".search2.SearchActivity"
+        <activity android:name=".search.SearchActivity"
                   android:label="@string/search_settings"
                   android:icon="@drawable/ic_search_history"
                   android:parentActivityName="Settings">
@@ -2894,7 +2894,7 @@
                 <action android:name="android.settings.HOME_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="130">
+            <intent-filter android:priority="120">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"

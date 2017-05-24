@@ -198,7 +198,7 @@ public class WifiP2pSettings extends DashboardFragment
 
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DIALOG_PEER)) {
             WifiP2pDevice device = savedInstanceState.getParcelable(SAVE_DIALOG_PEER);
-            mSelectedWifiPeer = new WifiP2pPeer(getActivity(), device);
+            mSelectedWifiPeer = new WifiP2pPeer(getPrefContext(), device);
         }
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DEVICE_NAME)) {
             mSavedDeviceName = savedInstanceState.getString(SAVE_DEVICE_NAME);
@@ -533,7 +533,7 @@ public class WifiP2pSettings extends DashboardFragment
         if (DBG) Log.d(TAG, "List of available peers");
         for (WifiP2pDevice peer: mPeers.getDeviceList()) {
             if (DBG) Log.d(TAG, "-> " + peer);
-            mPeerCategoryController.addChild(new WifiP2pPeer(getActivity(), peer));
+            mPeerCategoryController.addChild(new WifiP2pPeer(getPrefContext(), peer));
             if (peer.status == WifiP2pDevice.CONNECTED) mConnectedDevices++;
         }
         if (DBG) Log.d(TAG, " mConnectedDevices " + mConnectedDevices);

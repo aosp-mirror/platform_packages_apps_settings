@@ -139,6 +139,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     SparseArray<List<Anomaly>> mAnomalySparseArray;
 
+    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
@@ -192,7 +193,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     Intent batteryBroadcast = getContext().registerReceiver(null,
                             new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                     BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
-                    updateHeaderPreference(batteryInfo);
+                    mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
                 }
 
                 @Override
@@ -224,11 +225,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -277,6 +273,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
+        mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(context);
+        controllers.add(mBatteryHeaderPreferenceController);
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new BatterySaverController(context, getLifecycle()));
@@ -497,15 +495,17 @@ public class PowerUsageSummary extends PowerUsageBase implements
         Intent batteryBroadcast = context.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
-        updateHeaderPreference(batteryInfo);
+        mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
 
-        final long runningTime = calculateRunningTimeBasedOnStatsType();
+        final long runningTime = mBatteryUtils.calculateRunningTimeBasedOnStatsType(mStatsHelper,
+                mStatsType);
         updateScreenPreference();
         updateLastFullChargePreference(runningTime);
 
         final CharSequence timeSequence = Utils.formatElapsedTime(context, runningTime, false);
-        mAppListGroup.setTitle(
-                TextUtils.expandTemplate(getText(R.string.power_usage_list_summary), timeSequence));
+        final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
+                : R.string.power_usage_list_summary;
+        mAppListGroup.setTitle(TextUtils.expandTemplate(getText(resId), timeSequence));
 
         refreshAppListGroup();
     }
@@ -653,35 +653,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mLastFullChargePref.setSubtitle(
                 TextUtils.expandTemplate(getText(R.string.power_last_full_charge_summary),
                         timeSequence));
-    }
-
-    @VisibleForTesting
-    long calculateRunningTimeBasedOnStatsType() {
-        final long elapsedRealtimeUs = mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
-        // Return the battery time (millisecond) on status mStatsType
-        return mStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs,
-                mStatsType /* STATS_SINCE_CHARGED */) / 1000;
-    }
-
-    @VisibleForTesting
-    void updateHeaderPreference(BatteryInfo info) {
-        final Context context = getContext();
-        if (context == null) {
-            return;
-        }
-        final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
-                .findViewById(R.id.battery_header_icon);
-        final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent);
-        final TextView summary1 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
-        timeText.setText(Utils.formatPercentage(info.batteryLevel));
-        if (info.remainingLabel == null ) {
-            summary1.setText(info.statusLabel);
-        } else {
-            summary1.setText(info.remainingLabel);
-        }
-
-        batteryView.setBatteryLevel(info.batteryLevel);
-        batteryView.setCharging(!info.discharging);
     }
 
     @VisibleForTesting
@@ -877,7 +848,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    List<String> niks = new ArrayList<>();
+                    List<String> niks = super.getNonIndexableKeys(context);
                     // Duplicates in display
                     niks.add(KEY_AUTO_BRIGHTNESS);
                     niks.add(KEY_SCREEN_TIMEOUT);

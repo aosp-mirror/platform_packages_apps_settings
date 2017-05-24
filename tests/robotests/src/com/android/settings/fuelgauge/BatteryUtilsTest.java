@@ -21,6 +21,7 @@ import android.os.Process;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -68,6 +69,9 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
     private static final long TIME_FOREGROUND_ACTIVITY_ZERO = 0;
     private static final long TIME_FOREGROUND_ACTIVITY = 100 * DateUtils.MINUTE_IN_MILLIS;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
+            TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
 
     private static final int UID = 123;
     private static final long TIME_EXPECTED_FOREGROUND = 1500;
@@ -100,6 +104,8 @@ public class BatteryUtilsTest {
     private BatterySipper mCellBatterySipper;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private BatteryStatsHelper mBatteryStatsHelper;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
@@ -122,6 +128,8 @@ public class BatteryUtilsTest {
                 anyLong(), anyInt());
         doReturn(TIME_STATE_BACKGROUND).when(mUid).getProcessStateTime(eq(PROCESS_STATE_BACKGROUND),
                 anyLong(), anyInt());
+        when(mBatteryStatsHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
+                TIME_SINCE_LAST_FULL_CHARGE_US);
 
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         mNormalBatterySipper.totalPowerMah = TOTAL_BATTERY_USAGE;
@@ -276,6 +284,12 @@ public class BatteryUtilsTest {
         assertThat(sipperBg.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
         assertThat(sipperFg.totalPowerMah).isWithin(PRECISION).of(
                 BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE);
+    }
+
+    @Test
+    public void testCalculateRunningTimeBasedOnStatsType() {
+        assertThat(mBatteryUtils.calculateRunningTimeBasedOnStatsType(mBatteryStatsHelper,
+                BatteryStats.STATS_SINCE_CHARGED)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
     private BatterySipper createTestSmearBatterySipper(long activityTime, double totalPowerMah,

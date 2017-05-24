@@ -131,9 +131,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
                     PackageManager pm = context.getPackageManager();
-                    final List<String> keys = new ArrayList<String>();
-
                     if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
                         keys.add(NfcPreferenceController.KEY_TOGGLE_NFC);
                         keys.add(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);

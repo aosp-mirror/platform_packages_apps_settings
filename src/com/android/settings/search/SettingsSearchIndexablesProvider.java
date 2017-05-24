@@ -23,8 +23,6 @@ import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesProvider;
 import android.util.Log;
 
-import com.android.settings.search2.DatabaseIndexingUtils;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;

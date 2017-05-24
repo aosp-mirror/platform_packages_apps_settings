@@ -23,11 +23,12 @@
     <com.android.settings.widget.VideoPreference
         android:key="gesture_pick_up_video"
         app:animation="@raw/gesture_ambient_lift"
-        app:preview="@drawable/gesture_ambient_lift"/>
+        app:preview="@drawable/gesture_ambient_lift" />
 
     <SwitchPreference
         android:key="gesture_pick_up"
         android:title="@string/ambient_display_pickup_title"
-        android:summary="@string/ambient_display_pickup_summary"/>
+        android:summary="@string/ambient_display_pickup_summary"
+        app:keywords="@string/keywords_gesture" />
 
 </PreferenceScreen>

@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -60,7 +61,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     /**
      * Set when the fragment is implementing ACTION_REQUEST_SET_AUTOFILL_SERVICE.
      */
-    public DialogInterface.OnClickListener mCancelListener;
+    private DialogInterface.OnClickListener mCancelListener;
     private final Handler mHandler = new Handler();
 
     @Override
@@ -75,15 +76,33 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
             };
         }
 
-        mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
+        mSettingsPackageMonitor.register(activity, activity.getMainLooper(), false);
         update();
     }
 
     @Override
     protected ConfirmationDialogFragment newConfirmationDialogFragment(String selectedKey,
             CharSequence confirmationMessage) {
-        return ConfirmationDialogFragment.newInstance(this, selectedKey, confirmationMessage,
-                mCancelListener);
+        final AutofillPickerConfirmationDialogFragment fragment =
+                new AutofillPickerConfirmationDialogFragment();
+        fragment.init(this, selectedKey, confirmationMessage);
+        return fragment;
+    }
+
+    /**
+     * Custom dialog fragment that has a cancel listener used to propagate the result back to
+     * caller (for the cases where the picker is launched by
+     * {@code android.settings.REQUEST_SET_AUTOFILL_SERVICE}.
+     */
+    public static class AutofillPickerConfirmationDialogFragment
+            extends ConfirmationDialogFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            final DefaultAutofillPicker target = (DefaultAutofillPicker) getTargetFragment();
+            setCancelListener(target.mCancelListener);
+            super.onCreate(savedInstanceState);
+        }
     }
 
     @Override

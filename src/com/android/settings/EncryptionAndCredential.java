@@ -253,7 +253,7 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
 
         @Override
         public List<String> getNonIndexableKeys(Context context) {
-            final List<String> keys = new ArrayList<String>();
+            final List<String> keys = super.getNonIndexableKeys(context);
 
             final UserManager um = UserManager.get(context);
 
