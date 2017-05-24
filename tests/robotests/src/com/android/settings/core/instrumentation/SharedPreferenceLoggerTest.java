@@ -15,6 +15,19 @@
  */
 package com.android.settings.core.instrumentation;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_NAME;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
@@ -34,18 +47,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_NAME;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SharedPreferenceLoggerTest {
@@ -56,7 +57,7 @@ public class SharedPreferenceLoggerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
-    private PairMatcher mNamePairMatcher;
+    private ArgumentMatcher<Pair<Integer, Object>> mNamePairMatcher;
     private FakeFeatureFactory mFactory;
     private MetricsFeatureProvider mMetricsFeature;
     private SharedPreferencesLogger mSharedPrefLogger;
@@ -69,7 +70,7 @@ public class SharedPreferenceLoggerTest {
         mMetricsFeature = mFactory.metricsFeatureProvider;
 
         mSharedPrefLogger = new SharedPreferencesLogger(mContext, TEST_TAG);
-        mNamePairMatcher = new PairMatcher(FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, String.class);
+        mNamePairMatcher = pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, String.class);
     }
 
     @Test
@@ -83,11 +84,9 @@ public class SharedPreferenceLoggerTest {
         editor.putInt(TEST_KEY, 2);
         editor.putInt(TEST_KEY, 2);
 
-        final PairMatcher longMatcher =
-                new PairMatcher(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class);
-
         verify(mMetricsFeature, times(6)).action(any(Context.class), anyInt(),
-                argThat(mNamePairMatcher), argThat(longMatcher));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class)));
     }
 
     @Test
@@ -100,15 +99,12 @@ public class SharedPreferenceLoggerTest {
         editor.putBoolean(TEST_KEY, false);
 
 
-        final PairMatcher trueMatcher =
-                new PairMatcher(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, true);
-        final PairMatcher falseMatcher =
-                new PairMatcher(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, false);
-
         verify(mMetricsFeature).action(any(Context.class), anyInt(),
-                argThat(mNamePairMatcher), argThat(trueMatcher));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, true)));
         verify(mMetricsFeature, times(3)).action(any(Context.class), anyInt(),
-                argThat(mNamePairMatcher), argThat(falseMatcher));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, false)));
     }
 
     @Test
@@ -120,11 +116,9 @@ public class SharedPreferenceLoggerTest {
         editor.putLong(TEST_KEY, 1);
         editor.putLong(TEST_KEY, 2);
 
-        final PairMatcher longMatcher =
-                new PairMatcher(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class);
-
         verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
-                argThat(mNamePairMatcher), argThat(longMatcher));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class)));
     }
 
     @Test
@@ -136,40 +130,19 @@ public class SharedPreferenceLoggerTest {
         editor.putFloat(TEST_KEY, 1);
         editor.putFloat(TEST_KEY, 2);
 
-        final PairMatcher floatMatcher =
-                new PairMatcher(FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE, Float.class);
-
         verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
-                argThat(mNamePairMatcher), argThat(floatMatcher));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE, Float.class)));
     }
 
-    private static class PairMatcher extends ArgumentMatcher<Pair<Integer, Object>> {
+    private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, Class clazz) {
+        return pair -> pair.first == tag && Platform.isInstanceOfType(pair.second, clazz);
+    }
 
-        private final int mExpectedTag;
-        private final Class mExpectedClass;
-        private final Long mExpectedBoolean;
-
-
-        public PairMatcher(int tag, Class clazz) {
-            mExpectedTag = tag;
-            mExpectedClass = clazz;
-            mExpectedBoolean = null;
-        }
-
-        public PairMatcher(int tag, boolean bool) {
-            mExpectedTag = tag;
-            mExpectedClass = Long.class;
-            mExpectedBoolean = bool ? 1L : 0L;
-        }
-
-        @Override
-        public boolean matches(Object arg) {
-            final Pair<Integer, Object> pair = (Pair) arg;
-            boolean booleanMatch = mExpectedBoolean == null
-                    || mExpectedBoolean == pair.second;
-            return pair.first == mExpectedTag
-                    && Platform.isInstanceOfType(pair.second, mExpectedClass)
-                    && booleanMatch;
-        }
+    private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, boolean bool) {
+        return pair ->
+                pair.first == tag
+                && Platform.isInstanceOfType(pair.second, Long.class)
+                && pair.second.equals((bool ? 1L : 0L));
     }
 }
