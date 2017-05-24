@@ -369,6 +369,7 @@ public class DatabaseIndexingManagerTest {
                 mContext.getString(R.string.fingerprint_swipe_for_notifications_title);
         final String prefSummary =
                 mContext.getString(R.string.fingerprint_swipe_for_notifications_summary);
+        final String keywords = mContext.getString(R.string.keywords_gesture);
         Cursor cursor = mDb.rawQuery(
                 "SELECT * FROM prefs_index where data_title='" + prefTitle + "'", null);
         cursor.moveToFirst();
@@ -392,7 +393,7 @@ public class DatabaseIndexingManagerTest {
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isNull();
         // Keywords
-        assertThat(cursor.getString(9)).isEmpty();
+        assertThat(cursor.getString(9)).isEqualTo(keywords);
         // Screen Title
         assertThat(cursor.getString(10)).isEqualTo(
                 mContext.getString(R.string.fingerprint_swipe_for_notifications_title));

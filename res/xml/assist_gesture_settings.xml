@@ -27,7 +27,8 @@
     <SwitchPreference
         android:key="gesture_assist"
         android:title="@string/assist_gesture_title"
-        android:summary="@string/assist_gesture_summary" />
+        android:summary="@string/assist_gesture_summary"
+        app:keywords="@string/keywords_gesture"/>
 
     <com.android.settings.widget.SeekBarPreference
         android:key="gesture_assist_sensitivity"

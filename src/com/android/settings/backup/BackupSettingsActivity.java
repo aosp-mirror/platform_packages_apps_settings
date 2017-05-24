@@ -110,7 +110,7 @@ public class BackupSettingsActivity extends Activity implements Indexable {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = new ArrayList<String>();
+                    final List<String> keys = super.getNonIndexableKeys(context);
 
                     // For non-primary user, no backup is available, so don't show it in search
                     // TODO: http://b/22388012

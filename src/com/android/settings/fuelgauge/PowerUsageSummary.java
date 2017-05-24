@@ -848,7 +848,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    List<String> niks = new ArrayList<>();
+                    List<String> niks = super.getNonIndexableKeys(context);
                     // Duplicates in display
                     niks.add(KEY_AUTO_BRIGHTNESS);
                     niks.add(KEY_SCREEN_TIMEOUT);
