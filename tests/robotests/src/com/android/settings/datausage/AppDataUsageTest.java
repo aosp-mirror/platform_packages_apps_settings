@@ -18,13 +18,16 @@ package com.android.settings.datausage;
 
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.ArraySet;
 import android.view.View;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -43,6 +46,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -59,6 +64,8 @@ public class AppDataUsageTest {
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
+    @Mock
+    private PackageManagerWrapper mPackageManagerWrapper;
 
     private AppDataUsage mFragment;
 
@@ -77,6 +84,7 @@ public class AppDataUsageTest {
     public void bindAppHeader_allWorkApps_shouldNotShowAppInfoLink() {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
+        when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
 
         mFragment = spy(new AppDataUsage());
 
@@ -89,5 +97,39 @@ public class AppDataUsageTest {
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
 
         verify(mHeaderController).setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE);
+    }
+
+    @Test
+    public void bindAppHeader_workApp_shouldSetWorkAppUid() throws
+            PackageManager.NameNotFoundException {
+        final int fakeUserId = 100;
+
+        mFragment = spy(new AppDataUsage());
+        final ArraySet<String> packages = new ArraySet<>();
+        packages.add("pkg");
+        final AppItem appItem = new AppItem(123456789);
+
+        ReflectionHelpers.setField(mFragment, "mPackageManagerWrapper", mPackageManagerWrapper);
+        ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
+        ReflectionHelpers.setField(mFragment, "mPackages", packages);
+
+        when(mPackageManagerWrapper.getPackageUidAsUser(anyString(), anyInt()))
+                .thenReturn(fakeUserId);
+
+        ShadowEntityHeaderController.setUseMock(mHeaderController);
+        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
+        when(mHeaderController.setUid(fakeUserId)).thenReturn(mHeaderController);
+
+        doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
+                .when(mFragment)
+                .getPreferenceManager();
+        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+
+        mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
+
+        verify(mHeaderController)
+                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE);
+        verify(mHeaderController)
+                .setUid(fakeUserId);
     }
 }
