@@ -28,6 +28,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -37,6 +38,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.View;
 
 import com.android.internal.os.BatterySipper;
@@ -62,6 +64,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -260,5 +264,17 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(null);
+    }
+
+    @Test
+    public void testStartBatteryDetailPage_WorkApp() {
+        final int appUid = 1010019;
+        mBatterySipper.mPackages = PACKAGE_NAME;
+        doReturn(appUid).when(mBatterySipper).getUid();
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
+                mBatteryEntry, USAGE_PERCENT);
+
+        verify(mTestActivity).startPreferencePanelAsUser(
+                any(), anyString(), any(), anyInt(), any(), eq(new UserHandle(10)));
     }
 }
