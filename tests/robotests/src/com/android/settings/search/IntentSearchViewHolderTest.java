@@ -47,6 +47,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -120,10 +121,11 @@ public class IntentSearchViewHolderTest {
     @Test
     public void testBindViewElements_emptySummary_hideSummaryView() {
         final SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addRank(1)
-                .addPayload(new ResultPayload(null))
-                .addIcon(mIcon)
+                .setTitle(TITLE)
+                .setRank(1)
+                .setPayload(new ResultPayload(null))
+                .setIcon(mIcon)
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -137,11 +139,12 @@ public class IntentSearchViewHolderTest {
         breadcrumbs.add("b");
         breadcrumbs.add("c");
         final SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addRank(1)
-                .addPayload(new ResultPayload(null))
+                .setTitle(TITLE)
+                .setRank(1)
+                .setPayload(new ResultPayload(null))
                 .addBreadcrumbs(breadcrumbs)
-                .addIcon(mIcon)
+                .setIcon(mIcon)
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -153,9 +156,10 @@ public class IntentSearchViewHolderTest {
     public void testBindElements_placeholderSummary_visibilityIsGone() {
         String nonBreakingSpace = mContext.getString(R.string.summary_placeholder);
         SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addSummary(nonBreakingSpace)
-                .addPayload(new ResultPayload(null))
+                .setTitle(TITLE)
+                .setSummary(nonBreakingSpace)
+                .setPayload(new ResultPayload(null))
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -165,13 +169,15 @@ public class IntentSearchViewHolderTest {
 
     private SearchResult getSearchResult(String title, String summary, Drawable icon) {
         Builder builder = new Builder();
-        builder.addTitle(title)
-                .addSummary(summary)
-                .addRank(1)
-                .addPayload(new ResultPayload(
+        builder.setStableId(Objects.hash(title, summary, icon))
+                .setTitle(title)
+                .setSummary(summary)
+                .setRank(1)
+                .setPayload(new ResultPayload(
                         new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(icon);
+                .setStableId(1)
+                .setIcon(icon);
 
         return builder.build();
     }

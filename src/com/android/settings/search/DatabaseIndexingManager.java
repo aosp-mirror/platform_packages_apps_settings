@@ -1061,10 +1061,11 @@ public class DatabaseIndexingManager {
          * Returns the doc id for this row.
          */
         public int getDocId() {
-            // The DocID should contains more than the title string itself (you may have two
-            // settings with the same title). So we need to use a combination of multiple
-            // attributes from this row.
-            return Objects.hash(updatedTitle, screenTitle, key, payloadType);
+            // Eventually we want all DocIds to be the data_reference key. For settings values,
+            // this will be preference keys, and for non-settings they should be unique.
+            return TextUtils.isEmpty(key)
+                    ? Objects.hash(updatedTitle, className, screenTitle, intentTargetClass)
+                    : key.hashCode();
         }
 
         public static class Builder {

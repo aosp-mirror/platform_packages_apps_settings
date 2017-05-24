@@ -68,8 +68,9 @@ public class SavedQueryLoader extends AsyncLoader<List<? extends SearchResult>> 
             final SavedQueryPayload payload = new SavedQueryPayload(
                     cursor.getString(cursor.getColumnIndex(SavedQueriesColumns.QUERY)));
             results.add(new SearchResult.Builder()
-                    .addTitle(payload.query)
-                    .addPayload(payload)
+                    .setStableId(payload.hashCode())
+                    .setTitle(payload.query)
+                    .setPayload(payload)
                     .build());
         }
         return results;
