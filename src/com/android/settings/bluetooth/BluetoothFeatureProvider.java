@@ -21,7 +21,12 @@ package com.android.settings.bluetooth;
  */
 public interface BluetoothFeatureProvider {
     /**
-     * Check whether additional pairing page is enabled
+     * @return whether additional pairing page is enabled
      */
     boolean isPairingPageEnabled();
+
+    /**
+     * @return whether device details should be shown as a separate page (true) or a dialog (false)
+     */
+    boolean isDeviceDetailPageEnabled();
 }
