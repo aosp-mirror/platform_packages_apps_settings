@@ -30,8 +30,7 @@
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Olet nyt kehittäjä!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Ei tarvitse klikata, olet jo kehittäjä."</string>
-    <!-- no translation found for dev_settings_disabled_warning (4909448907673974370) -->
-    <skip />
+    <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"Ota kehittäjäasetukset ensin käyttöön."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Langaton verkko ja verkot"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"Yhteydet"</string>
     <string name="header_category_device" msgid="4544026001618307754">"Laite"</string>
@@ -112,8 +111,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Katkaistaanko yhteys?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Katkaisee yhteyden laitteeseen:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Sinulla ei ole lupaa muuttaa Bluetooth-asetuksia."</string>
-    <!-- no translation found for bluetooth_pairing_pref_title (4601203665214962983) -->
-    <skip />
+    <string name="bluetooth_pairing_pref_title" msgid="4601203665214962983">"Lisää uusi laitepari"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> näkyy lähellä olevissa laitteissa, kun Bluetooth-asetukset on auki."</string>
     <string name="bluetooth_footer_mac_message" msgid="7829164289195116782">"Bluetoothin MAC-osoite: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Katkaistaanko yhteys laitteeseen <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -164,6 +162,10 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM-kortin käyttöoikeuspyyntö"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> haluaa käyttää SIM-korttiasi. SIM-kortin käyttöoikeuden myöntäminen poistaa laitteesi datayhteyden käytöstä yhteyden ajaksi. Myönnä käyttöoikeus laitteelle <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>?"</string>
     <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"Muille laitteille näkyvä nimi: <xliff:g id="DEVICE_NAME">^1</xliff:g>"</string>
+    <!-- no translation found for bluetooth_paired_device_title (8638994696317952019) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_page_title (5218444163161190061) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"Päivämäärä ja aika"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Valitse aikavyöhyke"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -456,6 +458,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Estä laitteesi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Estä puhelimesi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Valitse toissijainen näytönlukitusmenetelmä"</string>
+    <!-- no translation found for setup_lock_settings_options_button_label (8511153243629402929) -->
+    <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Näytön lukitus"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / välittömästi virransäästötilaan siirtymisen jälkeen"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> virransäästötilaan siirtymisen jälkeen"</string>
@@ -901,6 +905,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kun Wi-Fi-puhelut on käytössä, puhelimesi voi ohjata puhelut Wi-Fi-verkkojen tai operaattorisi verkon kautta, riippuen asetuksistasi ja siitä, kummassa on voimakkaampi signaali. Ennen kuin otat tämän ominaisuuden käyttöön, tarkista maksut ja muut tiedot operaattoriltasi."</string>
+    <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Päivitä hätäosoite"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"Osoite, jota hätäpalvelut käyttävät sijaintinasi, jos soitat hätäpuhelun Wi-Fillä"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Näyttö"</string>
@@ -2023,6 +2028,8 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Yliarvioitu virrankulutus"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Käyttöaika: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> on käyttänyt <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> kaikesta virrankulutuksesta"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Erittely edellisen täyden latauksen jälkeen"</string>
@@ -2671,9 +2678,16 @@
       <item quantity="one">Näytä %d piilotettu kohde</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Verkko ja internet"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, mobiiliyhteys, datan käyttö, hotspot"</string>
+    <!-- no translation found for network_dashboard_summary_mobile (3851083934739500429) -->
+    <skip />
+    <!-- no translation found for network_dashboard_summary_data_usage (3843261364705042212) -->
+    <skip />
+    <!-- no translation found for network_dashboard_summary_hotspot (8494210248613254574) -->
+    <skip />
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Yhdistetyt laitteet"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, suoratoisto, NFC"</string>
+    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (9106040742715366495) -->
+    <skip />
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Sovellukset ja ilmoitukset"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Käyttöoikeudet, oletussovellukset"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Käyttäjät ja tilit"</string>
@@ -3202,10 +3216,8 @@
     <string name="overlay_settings" msgid="6930854109449524280">"Sovellusten päällä näkyminen"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> sovellusta saa näkyä muiden sovellusten päällä."</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Sovellukset, joilla on käyttöoikeus"</string>
-    <!-- no translation found for app_permission_summary_allowed (1505409933012886711) -->
-    <skip />
-    <!-- no translation found for app_permission_summary_not_allowed (2592617058101882802) -->
-    <skip />
+    <string name="app_permission_summary_allowed" msgid="1505409933012886711">"Sallittu"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"Ei sallittu"</string>
     <string name="install_other_apps" msgid="6986686991775883017">"Tuntemattomien sovellusten asentaminen"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"sovellusten asentaminen tuntemattomista lähteistä"</string>
     <string name="write_settings" msgid="4797457275727195681">"Muokkaa järjestelmäasetuksia"</string>
@@ -3582,8 +3594,6 @@
     <string name="storage_games" msgid="7703159201697117621">"Pelit"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Muut sovellukset"</string>
     <string name="storage_files" msgid="8581083146777364063">"Tiedostot"</string>
-    <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"Tabletin tallennustila"</string>
-    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Puhelimen tallennustila"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Tallennustilasta (<xliff:g id="TOTAL">%1$s</xliff:g>) käytössä"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"käyt."</string>
