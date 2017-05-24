@@ -226,6 +226,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final String SHOW_NOTIFICATION_CHANNEL_WARNINGS_KEY = "show_notification_channel_warnings";
+
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
     private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
@@ -325,6 +327,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAppProcessLimit;
 
     private SwitchPreference mShowAllANRs;
+
+    private SwitchPreference mShowNotificationChannelWarnings;
 
     private ColorModePreference mColorModePreference;
 
@@ -522,6 +526,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetSwitchPrefs.add(mShowAllANRs);
+
+        mShowNotificationChannelWarnings = (SwitchPreference) findPreference(
+                SHOW_NOTIFICATION_CHANNEL_WARNINGS_KEY);
+        mAllPrefs.add(mShowNotificationChannelWarnings);
+        mResetSwitchPrefs.add(mShowNotificationChannelWarnings);
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
@@ -788,6 +797,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
+        updateShowNotificationChannelWarningsOptions();
         mVerifyAppsOverUsbController.updatePreference();
         updateOtaDisableAutomaticUpdateOptions();
         updateBugreportOptions();
@@ -2268,6 +2278,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
+    private void writeShowNotificationChannelWarningsOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.SHOW_NOTIFICATION_CHANNEL_WARNINGS,
+                mShowNotificationChannelWarnings.isChecked() ? 1 : 0);
+    }
+
+    private void updateShowNotificationChannelWarningsOptions() {
+        final int defaultWarningEnabled = Build.IS_DEBUGGABLE ? 1 : 0;
+        updateSwitchPreference(mShowNotificationChannelWarnings, Settings.Global.getInt(
+                getActivity().getContentResolver(),
+                Settings.Global.SHOW_NOTIFICATION_CHANNEL_WARNINGS, defaultWarningEnabled) != 0);
+    }
+
     private void confirmEnableOemUnlock() {
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -2454,6 +2477,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeImmediatelyDestroyActivitiesOptions();
         } else if (preference == mShowAllANRs) {
             writeShowAllANRsOptions();
+        } else if (preference == mShowNotificationChannelWarnings) {
+            writeShowNotificationChannelWarningsOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
         } else if (preference == mForceMsaa) {

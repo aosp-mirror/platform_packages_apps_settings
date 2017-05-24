@@ -23,6 +23,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -76,7 +77,9 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
 
     protected ConfirmationDialogFragment newConfirmationDialogFragment(String selectedKey,
             CharSequence confirmationMessage) {
-        return ConfirmationDialogFragment.newInstance(this, selectedKey, confirmationMessage);
+        final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment();
+        fragment.init(this, selectedKey, confirmationMessage);
+        return fragment;
     }
 
     protected CharSequence getConfirmationMessage(CandidateInfo info) {
@@ -90,33 +93,29 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         public static final String EXTRA_KEY = "extra_key";
         public static final String EXTRA_MESSAGE = "extra_message";
 
-        private final DialogInterface.OnClickListener mCancelListener;
-
-        private ConfirmationDialogFragment(DialogInterface.OnClickListener cancelListener) {
-            mCancelListener = cancelListener;
-        }
+        private DialogInterface.OnClickListener mCancelListener;
 
         @Override
         public int getMetricsCategory() {
             return MetricsProto.MetricsEvent.DEFAULT_APP_PICKER_CONFIRMATION_DIALOG;
         }
 
-        public static ConfirmationDialogFragment newInstance(DefaultAppPickerFragment parent,
-                String key, CharSequence message) {
-            return newInstance(parent, key, message, null);
-        }
-
-        // TODO: add test case for cancelListener
-        public static ConfirmationDialogFragment newInstance(DefaultAppPickerFragment parent,
-                String key, CharSequence message, DialogInterface.OnClickListener cancelListener) {
-            final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment(
-                    cancelListener);
+        /**
+         * Initializes the fragment.
+         *
+         * <p>Should be called after it's constructed.
+         */
+        public void init(DefaultAppPickerFragment parent, String key, CharSequence message) {
             final Bundle argument = new Bundle();
             argument.putString(EXTRA_KEY, key);
             argument.putCharSequence(EXTRA_MESSAGE, message);
-            fragment.setArguments(argument);
-            fragment.setTargetFragment(parent, 0);
-            return fragment;
+            setArguments(argument);
+            setTargetFragment(parent, 0);
+        }
+
+        // TODO: add test case for cancelListener
+        public void setCancelListener(DialogInterface.OnClickListener cancelListener) {
+            this.mCancelListener = cancelListener;
         }
 
         @Override

@@ -129,7 +129,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
-                R.string.battery_details_title, null, new UserHandle(UserHandle.myUserId()));
+                R.string.battery_details_title, null,
+                new UserHandle(UserHandle.getUserId(sipper.getUid())));
     }
 
     @Override
