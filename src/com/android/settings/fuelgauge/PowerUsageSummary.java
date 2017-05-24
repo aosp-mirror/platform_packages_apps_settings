@@ -115,6 +115,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
 
+    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
@@ -139,11 +140,6 @@ public class PowerUsageSummary extends PowerUsageBase {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -189,6 +185,8 @@ public class PowerUsageSummary extends PowerUsageBase {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
+        mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(context);
+        controllers.add(mBatteryHeaderPreferenceController);
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new BatterySaverController(context, getLifecycle()));
@@ -416,7 +414,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast,
                 mStatsHelper.getStats(), elapsedRealtimeUs, false);
-        updateHeaderPreference(batteryInfo);
+        mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
 
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
@@ -558,27 +556,6 @@ public class PowerUsageSummary extends PowerUsageBase {
         // Return the battery time (millisecond) on status mStatsType
         return mStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs,
                 mStatsType /* STATS_SINCE_CHARGED */) / 1000;
-    }
-
-    @VisibleForTesting
-    void updateHeaderPreference(BatteryInfo info) {
-        final Context context = getContext();
-        if (context == null) {
-            return;
-        }
-        final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
-                .findViewById(R.id.battery_header_icon);
-        final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent);
-        final TextView summary1 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
-        timeText.setText(Utils.formatPercentage(info.batteryLevel));
-        if (info.remainingLabel == null ) {
-            summary1.setText(info.statusLabel);
-        } else {
-            summary1.setText(info.remainingLabel);
-        }
-
-        batteryView.setBatteryLevel(info.batteryLevel);
-        batteryView.setCharging(!info.discharging);
     }
 
     @VisibleForTesting
