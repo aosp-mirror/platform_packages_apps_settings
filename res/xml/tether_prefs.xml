@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto">
+                  xmlns:settings="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreference
         android:key="usb_tether_settings"
@@ -23,7 +23,8 @@
 
     <SwitchPreference
         android:key="enable_wifi_ap"
-        android:title="@string/wifi_tether_checkbox_text" />
+        android:title="@string/wifi_tether_checkbox_text"
+        android:summary="@string/summary_two_lines_placeholder" />
 
     <Preference
         android:key="wifi_ap_ssid_and_security"
@@ -34,9 +35,9 @@
         android:key="enable_bluetooth_tethering"
         android:title="@string/bluetooth_tether_checkbox_text" />
 
-    <com.android.settings.DividerPreference
-            android:key="disabled_on_data_saver"
-            android:summary="@string/tether_settings_disabled_on_data_saver"
-            android:selectable="false"
-            settings:allowDividerAbove="true" />
+    <Preference
+        android:key="disabled_on_data_saver"
+        android:summary="@string/tether_settings_disabled_on_data_saver"
+        android:selectable="false"
+        settings:allowDividerAbove="true" />
 </PreferenceScreen>
