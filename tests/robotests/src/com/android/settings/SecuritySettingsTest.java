@@ -21,8 +21,7 @@ import android.content.Context;
 import android.content.IContentProvider;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.Bundle;
-import android.provider.Settings;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -31,33 +30,30 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.List;
 import java.util.Map;
-import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.isNull;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -181,5 +177,27 @@ public class SecuritySettingsTest {
         when(controller.getSummaryResource()).thenReturn(1234);
         securitySettings.setLockscreenPreferencesSummary(group);
         verify(preference).setSummary(1234);
+    }
+
+    @Test
+    @Config (shadows = {
+            ShadowLockPatternUtils.class,
+    })
+    public void testNonIndexableKeys_existInXmlLayout() {
+        final Context context = spy(RuntimeEnvironment.application);
+        UserManager manager = mock(UserManager.class);
+        when(manager.isAdminUser()).thenReturn(false);
+        doReturn(manager).when(context).getSystemService(Context.USER_SERVICE);
+        final List<String> niks = SecuritySettings.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(context);
+
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context,
+                R.xml.security_settings_misc);
+        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context,
+                R.xml.location_settings));
+        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context,
+                R.xml.encryption_and_credential));
+
+        assertThat(keys).containsAllIn(niks);
     }
 }

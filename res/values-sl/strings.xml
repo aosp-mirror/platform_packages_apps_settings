@@ -2047,6 +2047,8 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Preveč šteta uporaba energije"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Trajanje uporabe: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
+    <skip />
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> uporablja <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> celotne napolnjenosti akumulatorja"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Razčlenitev od zadnje napol. akumulatorja"</string>
@@ -3100,7 +3102,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Ni zahtevanih dovoljenj"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Vse aplikacije"</string>
     <string name="filter_enabled_apps" msgid="5395727306799456250">"Nameščene aplikacije"</string>
-    <string name="filter_instant_apps" msgid="574277769963965565">"Aplikacije brez nameščanja"</string>
+    <string name="filter_instant_apps" msgid="574277769963965565">"Nenamestljive aplikacije"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Osebno"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Služba"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Aplikacije: vse"</string>
@@ -3569,10 +3571,10 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Povežite se z internetom ali se obrnite na operaterja"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Ni na voljo v napravah, zaklenjenih na operaterja"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Skupaj sproščeno: <xliff:g id="SIZE">%1$s</xliff:g>\n\nNazadnje zagnano: <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="web_action_enable_title" msgid="4051513950976670853">"Aplikacije brez nameščanja"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"Nenamestljive aplikacije"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Odpri povezave v aplikacijah, tudi če niso nameščene"</string>
-    <string name="web_action_section_title" msgid="7364647086538399136">"Aplikacije brez nameščanja"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Račun za aplikacije brez nameščanja"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"Nenamestljive aplikacije"</string>
+    <string name="instant_apps_account" msgid="1433620209791992528">"Račun za nenamestljive aplikacije"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Nameščene aplikacije"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Shrambo zdaj upravlja upravitelj shrambe"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Računi uporabnika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3669,13 +3671,11 @@
     <string name="storage_games" msgid="7703159201697117621">"Igre"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Druge aplikacije"</string>
     <string name="storage_files" msgid="8581083146777364063">"Datoteke"</string>
-    <string name="storage_settings_2" product="tablet" msgid="1939009096334525216">"Shramba tabl. računalnika"</string>
-    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Pomnilnik telefona"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Uporabljeno od <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"uporab."</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Počisti aplikacijo"</string>
-    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Ali želite odstraniti to aplikacijo brez nameščanja?"</string>
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Ali želite odstraniti to nenamestljivo aplikacijo?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Igre"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Zvočne datoteke"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(odstranjeno za uporabnika <xliff:g id="USER">%s</xliff:g>)"</string>
@@ -3688,7 +3688,7 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Upravitelj shrambe: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Izklopljeno"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Vklopljeno"</string>
-    <string name="install_type_instant" msgid="3174425974536078647">"Aplikacija brez nameščanja"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"Nenamestljiva aplikacija"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"Želite izklopiti upravitelja shrambe?"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"Aplikacije za filme in TV"</string>
     <string name="app_info_storage_title" msgid="5554719444625611987">"Uporabljen prostor"</string>
