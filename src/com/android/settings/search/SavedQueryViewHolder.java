@@ -20,6 +20,8 @@ package com.android.settings.search;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
+
 public class SavedQueryViewHolder extends SearchViewHolder {
 
     public final TextView titleView;
@@ -29,6 +31,11 @@ public class SavedQueryViewHolder extends SearchViewHolder {
         super(view);
         titleView = view.findViewById(android.R.id.title);
         removeButton = view.findViewById(android.R.id.icon);
+    }
+
+    @Override
+    public int getClickActionMetricName() {
+        return MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY;
     }
 
     @Override

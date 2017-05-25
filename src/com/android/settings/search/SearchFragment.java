@@ -28,6 +28,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +37,15 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -118,7 +121,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS;
+        return MetricsEvent.DASHBOARD_SEARCH_RESULTS;
     }
 
     @Override
@@ -191,7 +194,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mMetricsFeatureProvider.histogram(activity, RESULT_CLICK_COUNT, mResultClickCount);
             if (mNeverEnteredQuery) {
                 mMetricsFeatureProvider.action(activity,
-                        MetricsProto.MetricsEvent.ACTION_LEAVE_SEARCH_RESULT_WITHOUT_QUERY);
+                        MetricsEvent.ACTION_LEAVE_SEARCH_RESULT_WITHOUT_QUERY);
             }
         }
     }
@@ -306,7 +309,26 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         requery();
     }
 
-    public void onSearchResultClicked() {
+    public void onSearchResultClicked(SearchViewHolder result, String settingName,
+            Pair<Integer, Object>... logTaggedData) {
+        final List<Pair<Integer, Object>> taggedData = new ArrayList<>();
+        if (logTaggedData != null) {
+            taggedData.addAll(Arrays.asList(logTaggedData));
+        }
+        taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT,
+                mSearchAdapter.getItemCount()));
+        taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK,
+                result.getAdapterPosition()));
+        taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH,
+                TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));
+
+        mMetricsFeatureProvider.action(getContext(),
+                MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
+                settingName,
+                taggedData.toArray(new Pair[0]));
         mSavedQueryController.saveQuery(mQuery);
         mResultClickCount++;
     }
@@ -314,7 +336,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     public void onSavedQueryClicked(CharSequence query) {
         final String queryString = query.toString();
         mMetricsFeatureProvider.action(getContext(),
-                MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY);
+                MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY);
         mSearchView.setQuery(queryString, false /* submit */);
         onQueryTextChange(queryString);
     }
