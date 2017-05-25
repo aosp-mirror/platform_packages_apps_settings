@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -23,6 +24,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.List;
@@ -99,7 +102,9 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
         }
         mAdapter = new ScreenLockAdapter(context, locks, mController);
         builder.setAdapter(mAdapter, this);
-        return builder.create();
+        builder.setTitle(R.string.setup_lock_settings_options_dialog_title);
+        AlertDialog alertDialog = builder.create();
+        return alertDialog;
     }
 
     @Override
@@ -115,18 +120,39 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
                 Context context,
                 List<ScreenLockType> locks,
                 ChooseLockGenericController controller) {
-            super(context, android.R.layout.simple_list_item_1, locks);
+            super(context, R.layout.choose_lock_dialog_item, locks);
             mController = controller;
         }
 
         @Override
         public View getView(int position, View view, ViewGroup parent) {
+            Context context = parent.getContext();
             if (view == null) {
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(android.R.layout.simple_list_item_1, parent, false);
+                view = LayoutInflater.from(context)
+                        .inflate(R.layout.choose_lock_dialog_item, parent, false);
             }
-            ((TextView) view).setText(mController.getTitle(getItem(position)));
+            ScreenLockType lock = getItem(position);
+            TextView textView = (TextView) view;
+            textView.setText(mController.getTitle(lock));
+            textView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    getIconForScreenLock(context, lock), null, null, null);
             return view;
+        }
+
+        private static Drawable getIconForScreenLock(Context context, ScreenLockType lock) {
+            switch (lock) {
+                case PATTERN:
+                    return context.getDrawable(R.drawable.ic_pattern);
+                case PIN:
+                    return context.getDrawable(R.drawable.ic_pin);
+                case PASSWORD:
+                    return context.getDrawable(R.drawable.ic_password);
+                case NONE:
+                case SWIPE:
+                case MANAGED:
+                default:
+                        return null;
+            }
         }
     }
 }
