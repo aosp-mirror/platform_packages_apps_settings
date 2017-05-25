@@ -33,6 +33,8 @@ import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -219,7 +221,7 @@ public class BatteryUtils {
      * Calculate the whole running time in the state {@code statsType}
      *
      * @param batteryStatsHelper utility class that contains the data
-     * @param statsType state that we want to calculate the time for
+     * @param statsType          state that we want to calculate the time for
      * @return the running time in millis
      */
     public long calculateRunningTimeBasedOnStatsType(BatteryStatsHelper batteryStatsHelper,
@@ -245,6 +247,18 @@ public class BatteryUtils {
         final String[] packageNames = mPackageManager.getPackagesForUid(uid);
 
         return ArrayUtils.isEmpty(packageNames) ? null : packageNames[0];
+    }
+
+    /**
+     * Sort the {@code usageList} based on {@link BatterySipper#totalPowerMah}
+     */
+    public void sortUsageList(List<BatterySipper> usageList) {
+        Collections.sort(usageList, new Comparator<BatterySipper>() {
+            @Override
+            public int compare(BatterySipper a, BatterySipper b) {
+                return Double.compare(b.totalPowerMah, a.totalPowerMah);
+            }
+        });
     }
 
     private long convertUsToMs(long timeUs) {
