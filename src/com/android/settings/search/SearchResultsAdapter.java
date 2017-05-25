@@ -30,15 +30,17 @@ import android.view.ViewGroup;
 import com.android.settings.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     private final SearchFragment mFragment;
 
     private List<SearchResult> mSearchResults;
-    private Map<String, List<? extends SearchResult>> mResultsMap;
+    private Map<String, Set<? extends SearchResult>> mResultsMap;
     private final SearchFeatureProvider mSearchFeatureProvider;
 
     public SearchResultsAdapter(SearchFragment fragment,
@@ -98,7 +100,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
      * @param loaderClassName class name of the loader.
      */
     @MainThread
-    public void addSearchResults(List<? extends SearchResult> results, String loaderClassName) {
+    public void addSearchResults(Set<? extends SearchResult> results, String loaderClassName) {
         if (results == null) {
             return;
         }
@@ -125,12 +127,22 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
      * @return Number of matched results
      */
     public int displaySearchResults(String query) {
-        final List<? extends SearchResult> databaseResults = mResultsMap
-                .get(DatabaseResultLoader.class.getName());
-        final List<? extends SearchResult> installedAppResults = mResultsMap
-                .get(InstalledAppResultLoader.class.getName());
-        final int dbSize = (databaseResults != null) ? databaseResults.size() : 0;
-        final int appSize = (installedAppResults != null) ? installedAppResults.size() : 0;
+        List<? extends SearchResult> databaseResults = null;
+        List<? extends SearchResult> installedAppResults = null;
+        final String dbLoaderKey = DatabaseResultLoader.class.getName();
+        final String appLoaderKey = InstalledAppResultLoader.class.getName();
+        int dbSize = 0;
+        int appSize = 0;
+        if (mResultsMap.containsKey(dbLoaderKey)) {
+            databaseResults = new ArrayList<>(mResultsMap.get(dbLoaderKey));
+            dbSize = databaseResults.size();
+            Collections.sort(databaseResults);
+        }
+        if (mResultsMap.containsKey(appLoaderKey)) {
+            installedAppResults = new ArrayList<>(mResultsMap.get(appLoaderKey));
+            appSize = installedAppResults.size();
+            Collections.sort(installedAppResults);
+        }
         final List<SearchResult> newResults = new ArrayList<>(dbSize + appSize);
 
         int dbIndex = 0;

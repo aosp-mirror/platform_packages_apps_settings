@@ -41,7 +41,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -249,7 +249,7 @@ public class SearchFragmentTest {
 
         Robolectric.flushForegroundThreadScheduler();
 
-        verify(fragment, times(2)).onLoadFinished(any(Loader.class), any(List.class));
+        verify(fragment, times(2)).onLoadFinished(any(Loader.class), any(Set.class));
     }
 
     @Test
