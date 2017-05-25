@@ -344,6 +344,14 @@ public class AppButtonsPreferenceControllerTest {
         assertThat(controllable).isTrue();
     }
 
+    @Test
+    public void testRefreshUi_packageNull_shouldNotCrash() {
+        mController.mPackageName = null;
+
+        // Should not crash in this method
+        assertThat(mController.refreshUi()).isFalse();
+    }
+
     /**
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
