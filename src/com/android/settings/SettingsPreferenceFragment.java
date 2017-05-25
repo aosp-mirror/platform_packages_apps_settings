@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -423,11 +424,28 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         return -1;
     }
 
-    protected void removePreference(String key) {
-        Preference pref = findPreference(key);
-        if (pref != null) {
-            getPreferenceScreen().removePreference(pref);
+    protected boolean removePreference(String key) {
+        return removePreference(getPreferenceScreen(), key);
+    }
+
+    @VisibleForTesting
+    boolean removePreference(PreferenceGroup group, String key) {
+        final int preferenceCount = group.getPreferenceCount();
+        for (int i = 0; i < preferenceCount; i++) {
+            final Preference preference = group.getPreference(i);
+            final String curKey = preference.getKey();
+
+            if (TextUtils.equals(curKey, key)) {
+                return group.removePreference(preference);
+            }
+
+            if (preference instanceof PreferenceGroup) {
+                if (removePreference((PreferenceGroup) preference, key)) {
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     /**
