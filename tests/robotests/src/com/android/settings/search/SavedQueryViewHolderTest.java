@@ -17,6 +17,10 @@
 
 package com.android.settings.search;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +39,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -71,7 +71,7 @@ public class SavedQueryViewHolderTest {
         mTitleView.performClick();
         mRemoveButton.performClick();
 
-        verify(mSearchFragment).onSavedQueryClicked(any(CharSequence.class));
-        verify(mSearchFragment).onRemoveSavedQueryClicked(any(CharSequence.class));
+        verify(mSearchFragment).onSavedQueryClicked(nullable(CharSequence.class));
+        verify(mSearchFragment).onRemoveSavedQueryClicked(nullable(CharSequence.class));
     }
 }

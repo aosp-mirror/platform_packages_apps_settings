@@ -19,10 +19,9 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -32,6 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +53,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
+import com.android.settings.applications.instantapps.InstantAppButtonsController.ShowDialogDelegate;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.AppUtils;
@@ -137,7 +138,7 @@ public final class InstalledAppDetailsTest {
 
     @Test
     public void shouldShowUninstallForAll_installForOneOtherUserOnly_shouldReturnTrue() {
-        when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
+        when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
         ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
         ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
@@ -153,7 +154,7 @@ public final class InstalledAppDetailsTest {
 
     @Test
     public void shouldShowUninstallForAll_installForSelfOnly_shouldReturnFalse() {
-        when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
+        when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
         ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
         ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
@@ -239,7 +240,7 @@ public final class InstalledAppDetailsTest {
         // Make this app appear to be instant.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (i -> true));
-        when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
+        when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
 
         final ApplicationInfo info = new ApplicationInfo();
@@ -349,16 +350,18 @@ public final class InstalledAppDetailsTest {
 
         final InstantAppButtonsController buttonsController =
                 mock(InstantAppButtonsController.class);
-        when(buttonsController.setPackageName(anyString())).thenReturn(buttonsController);
+        when(buttonsController.setPackageName(nullable(String.class)))
+                .thenReturn(buttonsController);
 
         FakeFeatureFactory.setupForTest(mContext);
         FakeFeatureFactory factory =
                 (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         when(factory.applicationFeatureProvider.newInstantAppButtonsController(
-                any(), any(), any())).thenReturn(buttonsController);
+                nullable(Fragment.class), nullable(View.class), nullable(ShowDialogDelegate.class)))
+                .thenReturn(buttonsController);
 
         fragment.maybeAddInstantAppButtons();
-        verify(buttonsController).setPackageName(anyString());
+        verify(buttonsController).setPackageName(nullable(String.class));
         verify(buttonsController).show();
     }
 

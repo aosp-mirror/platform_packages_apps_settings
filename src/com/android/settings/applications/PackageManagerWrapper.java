@@ -111,4 +111,6 @@ public interface PackageManagerWrapper {
      */
     void deletePackageAsUser(String packageName, IPackageDeleteObserver observer, int flags,
             int userId);
+
+    int getPackageUidAsUser(String pkg, int userId) throws PackageManager.NameNotFoundException;
 }

@@ -16,6 +16,15 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -34,14 +43,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -110,7 +111,7 @@ public class SuggestionDismissControllerTest {
         mController.onSwiped(vh, ItemTouchHelper.START);
 
         verify(mFactory.suggestionsFeatureProvider).dismissSuggestion(
-                eq(mContext), eq(mSuggestionParser), any(Tile.class));
-        verify(mCallback).onSuggestionDismissed(any(Tile.class));
+                eq(mContext), eq(mSuggestionParser), nullable(Tile.class));
+        verify(mCallback).onSuggestionDismissed(nullable(Tile.class));
     }
 }

@@ -9,4 +9,9 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
     public boolean isPairingPageEnabled() {
         return false;
     }
+
+    @Override
+    public boolean isDeviceDetailPageEnabled() {
+        return false;
+    }
 }

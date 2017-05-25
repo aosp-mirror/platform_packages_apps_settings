@@ -16,8 +16,13 @@
 
 package com.android.settings.deviceinfo;
 
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 
@@ -27,16 +32,9 @@ import com.android.settings.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -70,13 +68,7 @@ public class UsbBackendTest {
         usbBackend.getCurrentMode();
 
         verify(mContext).registerReceiver(eq(null),
-            argThat(new ArgumentMatcher<IntentFilter>() {
-                @Override
-                public boolean matches(Object i) {
-                    final IntentFilter intentFilter = (IntentFilter) i;
-                    return intentFilter != null &&
-                        UsbManager.ACTION_USB_STATE.equals(intentFilter.getAction(0));
-                }
-            }));
+            argThat(intentFilter -> intentFilter != null &&
+                UsbManager.ACTION_USB_STATE.equals(intentFilter.getAction(0))));
     }
 }

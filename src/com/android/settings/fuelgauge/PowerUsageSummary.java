@@ -77,8 +77,6 @@ import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -399,7 +397,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
      *
      * @return A sorted list of apps using power.
      */
-    private static List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
+    private List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
         final SparseArray<BatterySipper> uidList = new SparseArray<>();
 
         final ArrayList<BatterySipper> results = new ArrayList<>();
@@ -474,12 +472,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         }
 
         // The sort order must have changed, so re-sort based on total power use.
-        Collections.sort(results, new Comparator<BatterySipper>() {
-            @Override
-            public int compare(BatterySipper a, BatterySipper b) {
-                return Double.compare(b.totalPowerMah, a.totalPowerMah);
-            }
-        });
+        mBatteryUtils.sortUsageList(results);
         return results;
     }
 
@@ -531,9 +524,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
-
             double hiddenPowerMah = mShowAllApps ? 0 :
                     mBatteryUtils.removeHiddenBatterySippers(usageList);
+            mBatteryUtils.sortUsageList(usageList);
 
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
