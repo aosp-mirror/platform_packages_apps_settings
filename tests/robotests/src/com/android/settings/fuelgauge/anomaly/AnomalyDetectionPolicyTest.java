@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -57,18 +58,7 @@ public class AnomalyDetectionPolicyTest {
 
     @Test
     public void testInit_containsDataFromSettings() {
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.ANOMALY_DETECTION_CONSTANTS, ANOMALY_DETECTION_CONSTANTS_VALUE);
-        // Mock it to avoid noSuchMethodError
-        doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
-                AnomalyDetectionPolicy.KEY_ANOMALY_DETECTION_ENABLED, true);
-        doReturn(false).when(mKeyValueListParserWrapper).getBoolean(
-                AnomalyDetectionPolicy.KEY_WAKELOCK_DETECTION_ENABLED, true);
-        doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
-                AnomalyDetectionPolicy.KEY_WAKEUP_ALARM_DETECTION_ENABLED, true);
-
-        AnomalyDetectionPolicy anomalyDetectionPolicy = new AnomalyDetectionPolicy(mContext,
-                mKeyValueListParserWrapper);
+        AnomalyDetectionPolicy anomalyDetectionPolicy = createAnomalyPolicyWithConfig();
 
         assertThat(anomalyDetectionPolicy.anomalyDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeLockDetectionEnabled).isFalse();
@@ -94,4 +84,30 @@ public class AnomalyDetectionPolicyTest {
         assertThat(anomalyDetectionPolicy.wakeupAlarmDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeupAlarmThreshold).isEqualTo(60);
     }
+
+    @Test
+    public void testIsAnomalyDetectorEnabled() {
+        AnomalyDetectionPolicy anomalyDetectionPolicy = createAnomalyPolicyWithConfig();
+
+        assertThat(anomalyDetectionPolicy.isAnomalyDetectorEnabled(
+                Anomaly.AnomalyType.WAKE_LOCK)).isFalse();
+        assertThat(anomalyDetectionPolicy.isAnomalyDetectorEnabled(
+                Anomaly.AnomalyType.WAKEUP_ALARM)).isTrue();
+    }
+
+    private AnomalyDetectionPolicy createAnomalyPolicyWithConfig() {
+        Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.ANOMALY_DETECTION_CONSTANTS, ANOMALY_DETECTION_CONSTANTS_VALUE);
+        // Mock it to avoid noSuchMethodError
+        doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
+                AnomalyDetectionPolicy.KEY_ANOMALY_DETECTION_ENABLED, true);
+        doReturn(false).when(mKeyValueListParserWrapper).getBoolean(
+                AnomalyDetectionPolicy.KEY_WAKELOCK_DETECTION_ENABLED, true);
+        doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
+                AnomalyDetectionPolicy.KEY_WAKEUP_ALARM_DETECTION_ENABLED, true);
+
+        return new AnomalyDetectionPolicy(mContext, mKeyValueListParserWrapper);
+    }
+
+
 }

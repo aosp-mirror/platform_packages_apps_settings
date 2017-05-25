@@ -90,5 +90,6 @@ public interface PowerUsageFeatureProvider {
     /**
      * Check whether a specific anomaly detector is enabled
      */
+    //TODO(b/62096650): remove this method and use AnomalyDetectionPolicy instead
     boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type);
 }

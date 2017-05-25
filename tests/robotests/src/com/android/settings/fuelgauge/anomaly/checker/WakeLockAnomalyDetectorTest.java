@@ -55,15 +55,19 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WakeLockAnomalyDetectorTest {
+    private static final String TARGET_PACKAGE_NAME = "com.android.app";
     private static final long ANOMALY_WAKELOCK_TIME_MS = 2 * DateUtils.HOUR_IN_MILLIS;
     private static final long NORMAL_WAKELOCK_TIME_MS = DateUtils.SECOND_IN_MILLIS;
     private static final long WAKELOCK_THRESHOLD_MS = DateUtils.HOUR_IN_MILLIS;
     private static final int ANOMALY_UID = 111;
     private static final int NORMAL_UID = 222;
+    private static final int TARGET_UID = 333;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private BatterySipper mAnomalySipper;
+    @Mock
+    private BatterySipper mTargetSipper;
     @Mock
     private BatteryStats.Timer mAnomalyTimer;
     @Mock
@@ -73,11 +77,17 @@ public class WakeLockAnomalyDetectorTest {
     @Mock
     private BatteryStats.Timer mNormalTimer;
     @Mock
+    private BatteryStats.Timer mTargetTimer;
+    @Mock
     private BatteryStats.Uid.Wakelock mNormalWakelock;
+    @Mock
+    private BatteryStats.Uid.Wakelock mTargetWakelock;
     @Mock
     private BatteryStats.Uid mAnomalyUid;
     @Mock
     private BatteryStats.Uid mNormalUid;
+    @Mock
+    private BatteryStats.Uid mTargetUid;
     @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
@@ -89,6 +99,7 @@ public class WakeLockAnomalyDetectorTest {
 
     private ArrayMap<String, BatteryStats.Uid.Wakelock> mAnomalyWakelocks;
     private ArrayMap<String, BatteryStats.Uid.Wakelock> mNormalWakelocks;
+    private ArrayMap<String, BatteryStats.Uid.Wakelock> mTargetWakelocks;
     private WakeLockAnomalyDetector mWakelockAnomalyDetector;
     private Context mContext;
     private List<BatterySipper> mUsageList;
@@ -119,29 +130,58 @@ public class WakeLockAnomalyDetectorTest {
         doReturn(mNormalWakelocks).when(mNormalUid).getWakelockStats();
         doReturn(NORMAL_UID).when(mNormalUid).getUid();
 
+        mTargetSipper.uidObj = mTargetUid;
+        mTargetWakelocks = new ArrayMap<>();
+        mTargetWakelocks.put("", mTargetWakelock);
+        doReturn(mTargetTimer).when(mTargetWakelock).getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
+        doReturn(mTargetWakelocks).when(mTargetUid).getWakelockStats();
+        doReturn(TARGET_UID).when(mTargetUid).getUid();
+
         mUsageList = new ArrayList<>();
         mUsageList.add(mAnomalySipper);
         mUsageList.add(mNormalSipper);
+        mUsageList.add(mTargetSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
         mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext, mPolicy));
         mWakelockAnomalyDetector.mBatteryUtils = mBatteryUtils;
         doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
                 eq(mAnomalyTimer), anyLong());
+        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
+                eq(mTargetTimer), anyLong());
         doReturn(NORMAL_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
                 eq(mNormalTimer), anyLong());
     }
 
     @Test
     public void testDetectAnomalies_containsAnomaly_detectIt() {
+        doReturn(BatteryUtils.UID_NULL).when(mBatteryUtils).getPackageUid(nullable(String.class));
         final Anomaly anomaly = new Anomaly.Builder()
                 .setUid(ANOMALY_UID)
+                .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .build();
+        final Anomaly targetAnomaly = new Anomaly.Builder()
+                .setUid(TARGET_UID)
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)
                 .build();
 
         List<Anomaly> mAnomalies = mWakelockAnomalyDetector.detectAnomalies(mBatteryStatsHelper);
 
-        assertThat(mAnomalies).containsExactly(anomaly);
+        assertThat(mAnomalies).containsExactly(anomaly, targetAnomaly);
+    }
+
+    @Test
+    public void testDetectAnomalies_containsTargetpackage_detectIt() {
+        doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
+        final Anomaly targetAnomaly = new Anomaly.Builder()
+                .setUid(TARGET_UID)
+                .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .build();
+
+        List<Anomaly> mAnomalies = mWakelockAnomalyDetector.detectAnomalies(mBatteryStatsHelper,
+                TARGET_PACKAGE_NAME);
+
+        assertThat(mAnomalies).containsExactly(targetAnomaly);
     }
 
     @Test
