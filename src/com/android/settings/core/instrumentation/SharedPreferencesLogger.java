@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -145,12 +146,11 @@ public class SharedPreferencesLogger implements SharedPreferences {
         }
     }
 
-    private void logPackageName(String key, String value) {
+    @VisibleForTesting
+    void logPackageName(String key, String value) {
         final String prefKey = mTag + "/" + key;
-        mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE,
+        mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE, value,
                 Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, prefKey));
-        mMetricsFeature.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
-                prefKey + "|" + value);
     }
 
     private void safeLogValue(String key, String value) {
