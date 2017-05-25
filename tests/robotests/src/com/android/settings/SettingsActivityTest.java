@@ -16,6 +16,16 @@
 
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.FragmentManager;
@@ -23,10 +33,11 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-
 import android.os.Bundle;
 import android.view.Menu;
+
 import com.android.settings.testutils.FakeFeatureFactory;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,15 +47,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -89,7 +91,7 @@ public class SettingsActivityTest {
     public void testSetTaskDescription_IconChanged() {
         mActivity.setTaskDescription(mTaskDescription);
 
-        verify(mTaskDescription).setIcon(any());
+        verify(mTaskDescription).setIcon(nullable(Bitmap.class));
     }
 
     @Test
@@ -99,8 +101,8 @@ public class SettingsActivityTest {
         mActivity.mDisplaySearch = true;
         mActivity.onCreateOptionsMenu(null);
 
-        verify(mFeatureFactory.getSearchFeatureProvider()).setUpSearchMenu(any(Menu.class),
-                any(Activity.class));
+        verify(mFeatureFactory.getSearchFeatureProvider()).setUpSearchMenu(nullable(Menu.class),
+                nullable(Activity.class));
     }
 
     @Test

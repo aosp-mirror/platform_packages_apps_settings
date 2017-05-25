@@ -15,6 +15,15 @@
  */
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
@@ -43,15 +52,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DashboardFragmentTest {
@@ -75,9 +75,10 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles.add(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
         when(mFakeFeatureFactory.dashboardFeatureProvider.getProgressiveDisclosureMixin(
-                any(Context.class), eq(mTestFragment), any(Bundle.class)))
+                nullable(Context.class), eq(mTestFragment), nullable(Bundle.class)))
                 .thenReturn(mDisclosureMixin);
-        when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
         mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
         when(mContext.getPackageName()).thenReturn("TestPackage");
@@ -96,21 +97,23 @@ public class DashboardFragmentTest {
 
     @Test
     public void displayTilesAsPreference_shouldAddTilesWithIntent() {
-        when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
-        when(mFakeFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(any(Tile.class)))
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(nullable(Tile.class)))
                 .thenReturn("test_key");
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mDisclosureMixin).addPreference(any(PreferenceScreen.class),
-                any(Preference.class));
+        verify(mDisclosureMixin).addPreference(nullable(PreferenceScreen.class),
+                nullable(Preference.class));
     }
 
     @Test
     public void displayTilesAsPreference_shouldNotAddTilesWithoutIntent() {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen, never()).addPreference(any(Preference.class));
+        verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
     }
 
     @Test
@@ -118,7 +121,7 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = null;
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen, never()).addPreference(any(Preference.class));
+        verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
     }
 
     @Test

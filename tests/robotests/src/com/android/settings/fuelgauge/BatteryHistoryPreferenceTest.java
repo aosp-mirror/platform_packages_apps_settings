@@ -15,8 +15,13 @@
  */
 package com.android.settings.fuelgauge;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.os.PowerManager;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,16 +40,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
-
-import static org.mockito.AdditionalMatchers.not;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -84,7 +79,7 @@ public class BatteryHistoryPreferenceTest {
         mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
 
         verify(mViewHolder).findViewById(R.id.battery_usage);
-        verify(mTextView).setText(anyString());
+        verify(mTextView).setText(nullable(String.class));
         verify(mBatteryInfo).bindHistory(mUsageView);
     }
 }

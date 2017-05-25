@@ -15,6 +15,20 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
@@ -48,19 +62,6 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -442,8 +443,8 @@ public class AccountPreferenceControllerTest {
         mController.onResume();
 
         // each account should be added only once
-        verify(preferenceGroup).addPreference(argThat(new PreferenceMatcher("Acct11")));
-        verify(preferenceGroup).addPreference(argThat(new PreferenceMatcher("Acct12")));
+        verify(preferenceGroup).addPreference(argThat(titleMatches("Acct11")));
+        verify(preferenceGroup).addPreference(argThat(titleMatches("Acct12")));
     }
 
     @Test
@@ -486,9 +487,9 @@ public class AccountPreferenceControllerTest {
         mController.onResume();
 
         // each account should be added only once
-        verify(preferenceGroup, times(1)).addPreference(argThat(new PreferenceMatcher("Acct11")));
-        verify(preferenceGroup, times(1)).addPreference(argThat(new PreferenceMatcher("Acct12")));
-        verify(preferenceGroup, times(1)).addPreference(argThat(new PreferenceMatcher("Acct13")));
+        verify(preferenceGroup, times(1)).addPreference(argThat(titleMatches("Acct11")));
+        verify(preferenceGroup, times(1)).addPreference(argThat(titleMatches("Acct12")));
+        verify(preferenceGroup, times(1)).addPreference(argThat(titleMatches("Acct13")));
     }
 
     @Test
@@ -524,7 +525,7 @@ public class AccountPreferenceControllerTest {
         // Resume should show the newly added account
         mController.onResume();
 
-        verify(preferenceGroup).addPreference(argThat(new PreferenceMatcher("Acct1")));
+        verify(preferenceGroup).addPreference(argThat(titleMatches("Acct1")));
     }
 
     @Test
@@ -565,25 +566,12 @@ public class AccountPreferenceControllerTest {
 
         mController.onResume();
 
-        verify(preferenceGroup, times(1)).addPreference(argThat(new PreferenceMatcher("Acct11")));
-        verify(preferenceGroup, times(1)).addPreference(argThat(new PreferenceMatcher("Acct12")));
-        verify(preferenceGroup, times(1)).removePreference(
-            argThat(new PreferenceMatcher("Acct12")));
+        verify(preferenceGroup, times(1)).addPreference(argThat(titleMatches("Acct11")));
+        verify(preferenceGroup, times(1)).addPreference(argThat(titleMatches("Acct12")));
+        verify(preferenceGroup, times(1)).removePreference(argThat(titleMatches("Acct12")));
     }
 
-    private static class PreferenceMatcher extends ArgumentMatcher<Preference> {
-
-        private final String mExpectedTitle;
-
-        public PreferenceMatcher(String title) {
-            mExpectedTitle = title;
-        }
-
-        @Override
-        public boolean matches(Object arg) {
-            final Preference preference = (Preference) arg;
-            return TextUtils.equals(mExpectedTitle, preference.getTitle());
-        }
+    private static ArgumentMatcher<Preference> titleMatches(String expected) {
+        return preference -> TextUtils.equals(expected, preference.getTitle());
     }
-
 }

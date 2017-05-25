@@ -39,6 +39,8 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -85,7 +87,7 @@ public class NetworkDashboardFragmentTest {
 
         mFragment.onCreateOptionsMenu(null, null);
 
-        verify(resetController).buildMenuItem(any(Menu.class));
+        verify(resetController).buildMenuItem(nullable(Menu.class));
     }
 
     @Test
