@@ -299,10 +299,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         mDetailsTextView.setText(getDefaultDetails());
                     }
                     mErrorTextView.setText("");
-                    if (isProfileChallenge()) {
-                        updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(
-                                mEffectiveUserId));
-                    }
+                    updateErrorMessage(
+                            mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
 
                     mLockPatternView.setEnabled(true);
                     mLockPatternView.enableInput();
@@ -497,7 +495,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView.setEnabled(true);
             if (matched) {
                 if (newResult) {
-                    reportSuccessfullAttempt();
+                    reportSuccessfulAttempt();
                 }
                 startDisappearAnimation(intent);
                 checkForPendingIntent();
@@ -524,8 +522,17 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        protected int getLastTryErrorMessage() {
-            return R.string.lock_profile_wipe_warning_content_pattern;
+        protected int getLastTryErrorMessage(int userType) {
+            switch (userType) {
+                case USER_TYPE_PRIMARY:
+                    return R.string.lock_last_pattern_attempt_before_wipe_device;
+                case USER_TYPE_MANAGED_PROFILE:
+                    return R.string.lock_last_pattern_attempt_before_wipe_profile;
+                case USER_TYPE_SECONDARY:
+                    return R.string.lock_last_pattern_attempt_before_wipe_user;
+                default:
+                    throw new IllegalArgumentException("Unrecognized user type:" + userType);
+            }
         }
 
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {
