@@ -125,4 +125,14 @@ public class PowerUsageFeatureProviderImplTest {
 
         assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isFalse();
     }
+
+    @Test
+    public void testIsAdvancedUiEnabled_returnTrue() {
+        assertThat(mPowerFeatureProvider.isAdvancedUiEnabled()).isTrue();
+    }
+
+    @Test
+    public void testIsPowerAccountingToggleEnabled_returnTrue() {
+        assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
+    }
 }
