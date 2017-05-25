@@ -18,6 +18,8 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.accounts.AddUserWhenLockedPreferenceController;
@@ -26,6 +28,7 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +40,15 @@ public class LockscreenDashboardFragment extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
 
     private static final String TAG = "LockscreenDashboardFragment";
+
+    @VisibleForTesting
+    static final String KEY_LOCK_SCREEN_NOTIFICATON = "security_setting_lock_screen_notif";
+    @VisibleForTesting
+    static final String KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER =
+            "security_setting_lock_screen_notif_work_header";
+    @VisibleForTesting
+    static final String KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE =
+            "security_setting_lock_screen_notif_work";
 
     private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
 
@@ -60,7 +72,10 @@ public class LockscreenDashboardFragment extends DashboardFragment
         final List<PreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
         final LockScreenNotificationPreferenceController notificationController =
-            new LockScreenNotificationPreferenceController(context);
+            new LockScreenNotificationPreferenceController(context,
+                    KEY_LOCK_SCREEN_NOTIFICATON,
+                    KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER,
+                    KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
         lifecycle.addObserver(notificationController);
         controllers.add(notificationController);
         final AddUserWhenLockedPreferenceController addUserWhenLockedController =
