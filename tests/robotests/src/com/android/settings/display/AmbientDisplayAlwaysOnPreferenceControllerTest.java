@@ -41,18 +41,18 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {ShadowSecureSettings.class})
-public class DozeAlwaysOnPreferenceControllerTest {
+public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
     @Mock Context mContext;
     @Mock AmbientDisplayConfiguration mConfig;
     @Mock SwitchPreference mSwitchPreference;
 
-    DozeAlwaysOnPreferenceController mController;
+    AmbientDisplayAlwaysOnPreferenceController mController;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mController = new DozeAlwaysOnPreferenceController(mContext, mConfig);
+        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, mConfig);
     }
 
     @Test

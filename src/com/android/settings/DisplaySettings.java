@@ -17,19 +17,17 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.AmbientDisplayPreferenceController;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.AutoRotatePreferenceController;
 import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settings.display.CameraGesturePreferenceController;
-import com.android.settings.display.DozeAlwaysOnPreferenceController;
-import com.android.settings.display.DozePreferenceController;
 import com.android.settings.display.FontSizePreferenceController;
 import com.android.settings.display.LiftToWakePreferenceController;
 import com.android.settings.display.NightDisplayPreferenceController;
@@ -40,9 +38,6 @@ import com.android.settings.display.ThemePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.display.VrDisplayPreferenceController;
 import com.android.settings.display.WallpaperPreferenceController;
-import com.android.settings.gestures.DoubleTapScreenPreferenceController;
-import com.android.settings.gestures.PickupGesturePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -57,8 +52,7 @@ public class DisplaySettings extends DashboardFragment {
     public static final String KEY_DISPLAY_SIZE = "screen_zoom";
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
-    private static final String KEY_PICK_UP = "gesture_pick_up_display_summary";
-    private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen_display_summary";
+    private static final String KEY_AMBIENT_DISPLAY = "ambient_display";
 
     @Override
     public int getMetricsCategory() {
@@ -98,19 +92,13 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new AutoRotatePreferenceController(context, lifecycle));
         controllers.add(new CameraGesturePreferenceController(context));
-        controllers.add(new DozePreferenceController(context, ambientDisplayConfig,
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider()));
-        controllers.add(new DozeAlwaysOnPreferenceController(context, ambientDisplayConfig));
         controllers.add(new FontSizePreferenceController(context));
         controllers.add(new LiftToWakePreferenceController(context));
         controllers.add(new NightDisplayPreferenceController(context));
         controllers.add(new NightModePreferenceController(context));
         controllers.add(new ScreenSaverPreferenceController(context));
-        controllers.add(new PickupGesturePreferenceController(
-                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId(), KEY_PICK_UP));
-        controllers.add(new DoubleTapScreenPreferenceController(
-                context, lifecycle, ambientDisplayConfig, UserHandle.myUserId(),
-                KEY_DOUBLE_TAP_SCREEN));
+        controllers.add(new AmbientDisplayPreferenceController(context, ambientDisplayConfig,
+                KEY_AMBIENT_DISPLAY));
         controllers.add(new TapToWakePreferenceController(context));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new VrDisplayPreferenceController(context));
