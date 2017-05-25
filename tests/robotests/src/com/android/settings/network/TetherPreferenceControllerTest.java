@@ -20,7 +20,10 @@ package com.android.settings.network;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
@@ -41,6 +44,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -148,6 +152,38 @@ public class TetherPreferenceControllerTest {
         observer.onChange(true, Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON));
 
         verify(mPreference).setSummary(R.string.switch_off_text);
+    }
+
+    @Test
+    public void onResume_shouldRegisterTetherReceiver() {
+        when(mContext.getContentResolver()).thenReturn(mock(ContentResolver.class));
+
+        mController.onResume();
+
+        verify(mContext).registerReceiver(
+            any(TetherPreferenceController.TetherBroadcastReceiver.class), any(IntentFilter.class));
+    }
+
+    @Test
+    public void onPause_shouldUnregisterTetherReceiver() {
+        when(mContext.getContentResolver()).thenReturn(mock(ContentResolver.class));
+        mController.onResume();
+
+        mController.onPause();
+
+        verify(mContext).unregisterReceiver(
+            any(TetherPreferenceController.TetherBroadcastReceiver.class));
+    }
+
+    @Test
+    public void tetherStatesChanged_shouldUpdateSummary() {
+        final Context context = RuntimeEnvironment.application;
+        ReflectionHelpers.setField(mController, "mContext", context);
+        mController.onResume();
+
+        context.sendBroadcast(new Intent(ConnectivityManager.ACTION_TETHER_STATE_CHANGED));
+
+        verify(mController).updateSummary();
     }
 
 }
