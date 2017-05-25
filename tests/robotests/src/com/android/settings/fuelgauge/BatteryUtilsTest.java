@@ -21,6 +21,7 @@ import android.os.Process;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -68,6 +69,7 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
     private static final long TIME_FOREGROUND_ACTIVITY_ZERO = 0;
     private static final long TIME_FOREGROUND_ACTIVITY = 100 * DateUtils.MINUTE_IN_MILLIS;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
 
     private static final int UID = 123;
     private static final long TIME_EXPECTED_FOREGROUND = 1500;
@@ -100,6 +102,8 @@ public class BatteryUtilsTest {
     private BatterySipper mCellBatterySipper;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private BatteryStatsHelper mBatteryStatsHelper;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
@@ -289,6 +293,16 @@ public class BatteryUtilsTest {
 
         assertThat(sippers).containsExactly(mNormalBatterySipper, mSystemBatterySipper,
                 mScreenBatterySipper);
+    }
+
+    @Test
+    public void testCalculateLastFullChargeTime() {
+        final long currentTimeMs = System.currentTimeMillis();
+        when(mBatteryStatsHelper.getStats().getStartClockTime()).thenReturn(
+                currentTimeMs - TIME_SINCE_LAST_FULL_CHARGE_MS);
+
+        assertThat(mBatteryUtils.calculateLastFullChargeTime(
+                mBatteryStatsHelper, currentTimeMs)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
     private BatterySipper createTestSmearBatterySipper(long activityTime, double totalPowerMah,
