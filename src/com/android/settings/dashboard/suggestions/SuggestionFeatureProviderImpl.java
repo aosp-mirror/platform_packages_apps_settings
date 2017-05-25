@@ -16,8 +16,10 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -42,12 +44,12 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public boolean isPresent(String className) {
+    public boolean isPresent(@NonNull ComponentName component) {
         return false;
     }
 
     @Override
-    public boolean isSuggestionCompleted(Context context) {
+    public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
         return false;
     }
 

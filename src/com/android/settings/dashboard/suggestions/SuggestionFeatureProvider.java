@@ -16,7 +16,9 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
@@ -31,11 +33,11 @@ public interface SuggestionFeatureProvider {
      */
     boolean isSmartSuggestionEnabled(Context context);
 
-    /** Return true if className is the name of a class of one of your newly added suggestion. */
-    boolean isPresent(String className);
+    /** Return true if {@code suggestion} is managed by this provider. */
+    boolean isPresent(@NonNull ComponentName suggestion);
 
     /** Return true if the suggestion has already been completed and does not need to be shown */
-    boolean isSuggestionCompleted(Context context);
+    boolean isSuggestionCompleted(Context context, @NonNull ComponentName suggestion);
 
     /**
      * Ranks the list of suggestions in place.
