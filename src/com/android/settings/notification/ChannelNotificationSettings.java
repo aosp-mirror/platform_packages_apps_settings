@@ -232,7 +232,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mBlockBar.setKey(KEY_BLOCK);
         getPreferenceScreen().addPreference(mBlockBar);
 
-        if (mAppRow.systemApp && mChannel.getImportance() != NotificationManager.IMPORTANCE_NONE) {
+        if (!isChannelBlockable(mAppRow.systemApp, mChannel)) {
             setVisible(mBlockBar, false);
         }
 
