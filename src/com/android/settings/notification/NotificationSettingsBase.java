@@ -443,4 +443,12 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
         return lockscreenSecure;
     }
+
+    protected boolean isChannelBlockable(boolean systemApp, NotificationChannel channel) {
+        if (!mAppRow.systemApp) {
+            return true;
+        }
+        return channel.isBlockableSystem()
+                || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
+    }
 }
