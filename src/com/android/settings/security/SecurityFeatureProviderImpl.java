@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+import com.android.settings.R;
 import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settings.trustagent.TrustAgentManagerImpl;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -49,8 +50,6 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
 
     @VisibleForTesting
     static final Drawable DEFAULT_ICON = null;
-    @VisibleForTesting
-    static final String DEFAULT_SUMMARY = " ";
 
     @VisibleForTesting
     static Map<String, Pair<String, Integer>> sIconCache = new TreeMap<>();
@@ -118,7 +117,7 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
             // from shifting when the final summary is injected.
             final String summaryUri =
                     tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
-            String summary = DEFAULT_SUMMARY;
+            String summary = context.getString(R.string.summary_placeholder);
             if ((summaryUri != null) && sSummaryCache.containsKey(summaryUri)) {
                 summary = sSummaryCache.get(summaryUri);
             }
