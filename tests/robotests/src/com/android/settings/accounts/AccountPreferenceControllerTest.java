@@ -15,25 +15,13 @@
  */
 package com.android.settings.accounts;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -50,6 +38,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,10 +47,25 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -212,12 +216,12 @@ public class AccountPreferenceControllerTest {
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
-            preferenceGroup);
+                preferenceGroup);
 
         mController.onResume();
 
         verify(preferenceGroup).setTitle(
-            mContext.getString(R.string.account_for_section_header, "user 1"));
+                mContext.getString(R.string.account_for_section_header, "user 1"));
 
     }
 
@@ -310,7 +314,7 @@ public class AccountPreferenceControllerTest {
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
         when(mAccountHelper.hasBaseUserRestriction(
                 eq(UserManager.DISALLOW_REMOVE_MANAGED_PROFILE), anyInt()))
-            .thenReturn(true);
+                .thenReturn(true);
 
         mController.updateRawDataToIndex(data);
 
@@ -325,7 +329,7 @@ public class AccountPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
         when(mAccountHelper.hasBaseUserRestriction(
-            eq(UserManager.DISALLOW_MODIFY_ACCOUNTS), anyInt())).thenReturn(true);
+                eq(UserManager.DISALLOW_MODIFY_ACCOUNTS), anyInt())).thenReturn(true);
 
         mController.updateRawDataToIndex(data);
 
@@ -347,18 +351,18 @@ public class AccountPreferenceControllerTest {
         accountType1[0] = new Account("Account11", "com.acct1");
         accountType1[1] = new Account("Account12", "com.acct1");
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accountType1);
+                .thenReturn(accountType1);
 
         AuthenticatorDescription[] authDescs = {
-            new AuthenticatorDescription("com.acct1", "com.android.settings",
-                R.string.account_settings_title, 0, 0, 0, false)
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false)
         };
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
 
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
-            preferenceGroup);
+                preferenceGroup);
 
         mController.onResume();
 
@@ -367,7 +371,8 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
+            ShadowAuthenticatorHelper.class})
     public void onResume_twoAccountsOfSameName_shouldAddFivePreferences() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -426,18 +431,18 @@ public class AccountPreferenceControllerTest {
         accountType1[0] = new Account("Acct11", "com.acct1");
         accountType1[1] = new Account("Acct12", "com.acct1");
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accountType1);
+                .thenReturn(accountType1);
 
         AuthenticatorDescription[] authDescs = {
-            new AuthenticatorDescription("com.acct1", "com.android.settings",
-                R.string.account_settings_title, 0, 0, 0, false)
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false)
         };
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
 
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
-            preferenceGroup);
+                preferenceGroup);
         mController.onResume();
 
         mController.onResume();
@@ -461,18 +466,18 @@ public class AccountPreferenceControllerTest {
         accountType1[0] = new Account("Acct11", "com.acct1");
         accountType1[1] = new Account("Acct12", "com.acct1");
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accountType1);
+                .thenReturn(accountType1);
 
         AuthenticatorDescription[] authDescs = {
-            new AuthenticatorDescription("com.acct1", "com.android.settings",
-                R.string.account_settings_title, 0, 0, 0, false)
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false)
         };
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
 
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
-            preferenceGroup);
+                preferenceGroup);
 
         mController.onResume();
 
@@ -482,7 +487,7 @@ public class AccountPreferenceControllerTest {
         accountType1[1] = new Account("Acct12", "com.acct1");
         accountType1[2] = new Account("Acct13", "com.acct1");
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accountType1);
+                .thenReturn(accountType1);
 
         mController.onResume();
 
@@ -505,7 +510,7 @@ public class AccountPreferenceControllerTest {
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
-            preferenceGroup);
+                preferenceGroup);
 
         // First time resume will build the UI with no account
         mController.onResume();
@@ -514,11 +519,11 @@ public class AccountPreferenceControllerTest {
         Account[] accounts = {new Account("Acct1", "com.acct1")};
         when(mAccountManager.getAccountsAsUser(2)).thenReturn(accounts);
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accounts);
+                .thenReturn(accounts);
 
         AuthenticatorDescription[] authDescs = {
-            new AuthenticatorDescription("com.acct1", "com.android.settings",
-                R.string.account_settings_title, 0, 0, 0, false)
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false)
         };
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
 
@@ -543,18 +548,18 @@ public class AccountPreferenceControllerTest {
         accountType1[0] = new Account("Acct11", "com.acct1");
         accountType1[1] = new Account("Acct12", "com.acct1");
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accountType1);
+                .thenReturn(accountType1);
 
         AuthenticatorDescription[] authDescs = {
-            new AuthenticatorDescription("com.acct1", "com.android.settings",
-                R.string.account_settings_title, 0, 0, 0, false)
+                new AuthenticatorDescription("com.acct1", "com.android.settings",
+                        R.string.account_settings_title, 0, 0, 0, false)
         };
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
 
         AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
         when(preferenceGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
-            preferenceGroup);
+                preferenceGroup);
 
         mController.onResume();
 
@@ -562,7 +567,7 @@ public class AccountPreferenceControllerTest {
         accountType1 = new Account[1];
         accountType1[0] = new Account("Acct11", "com.acct1");
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
-            .thenReturn(accountType1);
+                .thenReturn(accountType1);
 
         mController.onResume();
 
@@ -573,5 +578,13 @@ public class AccountPreferenceControllerTest {
 
     private static ArgumentMatcher<Preference> titleMatches(String expected) {
         return preference -> TextUtils.equals(expected, preference.getTitle());
+    }
+
+    @Implements(AuthenticatorHelper.class)
+    public static class ShadowAuthenticatorHelper {
+        @Implementation
+        public Drawable getDrawableForType(Context context, final String accountType) {
+            return new ColorDrawable();
+        }
     }
 }
