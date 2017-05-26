@@ -22,10 +22,6 @@ import android.content.Context;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search.SavedQueryLoader;
-import com.android.settings.search.SavedQueryRecorder;
-import com.android.settings.search.SavedQueryRemover;
-import com.android.settings.search.SearchResult;
 import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
@@ -54,7 +50,7 @@ public class SavedQueryRecorderAndRemoverTest {
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb();
+        DatabaseTestUtils.clearDb(mContext);
     }
 
     @Test

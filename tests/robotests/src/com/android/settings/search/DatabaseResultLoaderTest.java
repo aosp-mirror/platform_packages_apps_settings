@@ -25,13 +25,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.DatabaseResultLoader;
-import com.android.settings.search.IndexDatabaseHelper;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.ResultPayloadUtils;
-import com.android.settings.search.SearchResult;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -84,7 +77,7 @@ public class DatabaseResultLoaderTest {
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb();
+        DatabaseTestUtils.clearDb(mContext);
     }
 
     @Test

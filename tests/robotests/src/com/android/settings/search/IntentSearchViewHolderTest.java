@@ -21,18 +21,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search.IntentSearchViewHolder;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.SearchFragment;
-import com.android.settings.search.SearchResult;
 import com.android.settings.search.SearchResult.Builder;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -51,6 +45,7 @@ import java.util.Objects;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
@@ -102,12 +97,8 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.GONE);
 
-        verify(mFragment).onSearchResultClicked();
+        verify(mFragment).onSearchResultClicked(eq(mHolder), anyString());
         verify(mFragment).startActivity(any(Intent.class));
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
-                eq(((ResultPayload)result.payload).getIntent().getComponent().flattenToString()),
-                any(Pair.class));
     }
 
     @Test
