@@ -21,8 +21,8 @@ import android.content.Context;
 import com.android.settings.search.DatabaseResultLoader;
 import com.android.settings.search.SearchResult;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Mock loader to subvert the requirements of returning data while also driving the Loader
@@ -35,12 +35,12 @@ class MockDBLoader extends DatabaseResultLoader {
     }
 
     @Override
-    public List<? extends SearchResult> loadInBackground() {
-        return new ArrayList<>();
+    public Set<? extends SearchResult> loadInBackground() {
+        return new HashSet<>();
     }
 
     @Override
-    protected void onDiscardResult(List<? extends SearchResult> result) {
+    protected void onDiscardResult(Set<? extends SearchResult> result) {
 
     }
 }

@@ -44,6 +44,7 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -57,7 +58,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * the query if the user has entered text.
  */
 public class SearchFragment extends InstrumentedFragment implements SearchView.OnQueryTextListener,
-        LoaderManager.LoaderCallbacks<List<? extends SearchResult>>, IndexingCallback {
+        LoaderManager.LoaderCallbacks<Set<? extends SearchResult>>, IndexingCallback {
     private static final String TAG = "SearchFragment";
 
     @VisibleForTesting
@@ -251,7 +252,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     @Override
-    public Loader<List<? extends SearchResult>> onCreateLoader(int id, Bundle args) {
+    public Loader<Set<? extends SearchResult>> onCreateLoader(int id, Bundle args) {
         final Activity activity = getActivity();
 
         switch (id) {
@@ -265,8 +266,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     @Override
-    public void onLoadFinished(Loader<List<? extends SearchResult>> loader,
-            List<? extends SearchResult> data) {
+    public void onLoadFinished(Loader<Set<? extends SearchResult>> loader,
+            Set<? extends SearchResult> data) {
         mSearchAdapter.addSearchResults(data, loader.getClass().getName());
         if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
             return;
@@ -284,7 +285,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     @Override
-    public void onLoaderReset(Loader<List<? extends SearchResult>> loader) {
+    public void onLoaderReset(Loader<Set<? extends SearchResult>> loader) {
     }
 
     /**

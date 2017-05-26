@@ -43,7 +43,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
@@ -185,18 +187,19 @@ public class InstalledAppResultLoaderTest {
     }
 
     @Test
-    public void query_matchingQuery_shouldRankBasedOnSimilarity() {
+    public void query_matchingQuery_multipleResults() {
         final String query = "app";
 
         mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
                 mSiteMapManager);
-        final List<? extends SearchResult> results = mLoader.loadInBackground();
+        final Set<? extends SearchResult> results = mLoader.loadInBackground();
 
-        // List is sorted by rank
-        assertThat(results.get(0).rank).isAtMost(results.get(1).rank);
-        assertThat(results.get(0).title).isEqualTo("app4");
-        assertThat(results.get(1).title).isEqualTo("app");
-        assertThat(results.get(2).title).isEqualTo("appBuffer");
+        Set<CharSequence> expectedTitles = new HashSet<>(Arrays.asList("app4", "app", "appBuffer"));
+        Set<CharSequence> actualTitles = new HashSet<>();
+        for (SearchResult result : results) {
+            actualTitles.add(result.title);
+        }
+        assertThat(actualTitles).isEqualTo(expectedTitles);
     }
 
     @Test
