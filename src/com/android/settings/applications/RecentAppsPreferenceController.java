@@ -77,6 +77,7 @@ public class RecentAppsPreferenceController extends PreferenceController
 
     private PreferenceCategory mCategory;
     private Preference mSeeAllPref;
+    private boolean mHasRecentApps;
 
     static {
         SKIP_SYSTEM_PACKAGES.addAll(Arrays.asList(
@@ -133,15 +134,20 @@ public class RecentAppsPreferenceController extends PreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        refreshUi(mCategory.getContext());
         // Show total number of installed apps as See all's summary.
         new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
                 new PackageManagerWrapperImpl(mContext.getPackageManager())) {
             @Override
             protected void onCountComplete(int num) {
-                mSeeAllPref.setSummary(mContext.getString(R.string.apps_summary, num));
+                if (mHasRecentApps) {
+                    mSeeAllPref.setTitle(mContext.getString(R.string.see_all_apps_title, num));
+                } else {
+                    mSeeAllPref.setSummary(mContext.getString(R.string.apps_summary, num));
+                }
             }
         }.execute();
-        refreshUi(mCategory.getContext());
+
     }
 
     @Override
@@ -155,8 +161,10 @@ public class RecentAppsPreferenceController extends PreferenceController
         reloadData();
         final List<UsageStats> recentApps = getDisplayableRecentAppList();
         if (recentApps != null && !recentApps.isEmpty()) {
+            mHasRecentApps = true;
             displayRecentApps(prefContext, recentApps);
         } else {
+            mHasRecentApps = false;
             displayOnlyAppInfo();
         }
     }
@@ -185,7 +193,7 @@ public class RecentAppsPreferenceController extends PreferenceController
 
     private void displayRecentApps(Context prefContext, List<UsageStats> recentApps) {
         mCategory.setTitle(R.string.recent_app_category_title);
-        mSeeAllPref.setTitle(R.string.see_all_apps_title);
+        mSeeAllPref.setSummary(null);
         mSeeAllPref.setIcon(R.drawable.ic_chevron_right_24dp);
 
         // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.

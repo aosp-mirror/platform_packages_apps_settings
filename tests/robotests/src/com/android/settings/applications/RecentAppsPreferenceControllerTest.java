@@ -178,7 +178,7 @@ public class RecentAppsPreferenceControllerTest {
         // it's invalid app.
         verify(mCategory, times(1)).addPreference(any(Preference.class));
 
-        verify(mSeeAllPref).setTitle(R.string.see_all_apps_title);
+        verify(mSeeAllPref).setSummary(null);
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
     }
 
