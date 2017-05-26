@@ -15,19 +15,6 @@
  */
 package com.android.settings.core.instrumentation;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_NAME;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Pair;
@@ -46,6 +33,21 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .ACTION_SETTINGS_PREFERENCE_CHANGE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_NAME;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -135,13 +137,21 @@ public class SharedPreferenceLoggerTest {
                 argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE, Float.class)));
     }
 
+    @Test
+    public void logPackage_shouldUseLogPackageApi() {
+        mSharedPrefLogger.logPackageName("key", "com.android.settings");
+        verify(mMetricsFeature).action(any(Context.class),
+                eq(ACTION_SETTINGS_PREFERENCE_CHANGE),
+                eq("com.android.settings"),
+                any(Pair.class));
+    }
+
     private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, Class clazz) {
         return pair -> pair.first == tag && Platform.isInstanceOfType(pair.second, clazz);
     }
 
     private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, boolean bool) {
-        return pair ->
-                pair.first == tag
+        return pair -> pair.first == tag
                 && Platform.isInstanceOfType(pair.second, Long.class)
                 && pair.second.equals((bool ? 1L : 0L));
     }
