@@ -16,34 +16,30 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.Utils.setOverlayAllowed;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
@@ -77,6 +73,8 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     private int mShownDialogId;
 
+    private final IBinder mToken = new Binder();
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_SERVICE;
@@ -107,12 +105,18 @@ public class ToggleAccessibilityServicePreferenceFragment
     public void onResume() {
         mSettingsContentObserver.register(getContentResolver());
         updateSwitchBarToggleSwitch();
+        if (mToken != null) {
+            setOverlayAllowed(getActivity(), mToken, false);
+        }
         super.onResume();
     }
 
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
+        if (mToken != null) {
+            setOverlayAllowed(getActivity(), mToken, true);
+        }
         super.onPause();
     }
 
