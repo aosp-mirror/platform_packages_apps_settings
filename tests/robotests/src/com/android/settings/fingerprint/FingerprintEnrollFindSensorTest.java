@@ -93,18 +93,11 @@ public class FingerprintEnrollFindSensorTest {
 
     @Test
     public void clickNextAndFingerprint_shouldNotCrash() {
-        ArgumentCaptor<EnrollmentCallback> callbackCaptor =
-                ArgumentCaptor.forClass(EnrollmentCallback.class);
-        verify(mFingerprintManager).enroll(
-                any(byte[].class),
-                any(CancellationSignal.class),
-                anyInt(),
-                anyInt(),
-                callbackCaptor.capture());
+        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
 
         Button nextButton = mActivity.findViewById(R.id.next_button);
         nextButton.performClick();
-        callbackCaptor.getValue().onEnrollmentProgress(123);
+        enrollmentCallback.onEnrollmentProgress(123);
         nextButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
@@ -117,5 +110,38 @@ public class FingerprintEnrollFindSensorTest {
         // Should only start one next activity
         assertThat(shadowActivity.getNextStartedActivityForResult()).named("Next activity 2")
                 .isNull();
+    }
+
+    // Use a non-default resource qualifier to load the test layout in
+    // robotests/res/layout-mcc999/fingerprint_enroll_find_sensor. This layout is a copy of the
+    // regular find sensor layout, with the animation removed.
+    @Config(qualifiers = "mcc999")
+    @Test
+    public void layoutWithoutAnimation_shouldNotCrash() {
+        EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
+        enrollmentCallback.onEnrollmentProgress(123);
+
+        Button nextButton = mActivity.findViewById(R.id.next_button);
+        nextButton.performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
+        IntentForResult startedActivity =
+                shadowActivity.getNextStartedActivityForResult();
+        assertThat(startedActivity).named("Next activity").isNotNull();
+        assertThat(startedActivity.intent.getComponent())
+                .isEqualTo(new ComponentName(application, FingerprintEnrollEnrolling.class));
+    }
+
+    private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {
+        ArgumentCaptor<EnrollmentCallback> callbackCaptor =
+                ArgumentCaptor.forClass(EnrollmentCallback.class);
+        verify(mFingerprintManager).enroll(
+                any(byte[].class),
+                any(CancellationSignal.class),
+                anyInt(),
+                anyInt(),
+                callbackCaptor.capture());
+
+        return callbackCaptor.getValue();
     }
 }

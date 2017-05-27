@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -36,6 +38,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     private static final int ENROLLING = 2;
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
+    @Nullable
     private FingerprintFindSensorAnimation mAnimation;
     private boolean mLaunchedConfirmLock;
     private FingerprintEnrollSidecar mSidecar;
@@ -56,8 +59,12 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
         } else if (mToken != null) {
             startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
         }
-        mAnimation = (FingerprintFindSensorAnimation) findViewById(
-                R.id.fingerprint_sensor_location_animation);
+        View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
+        if (animationView instanceof FingerprintFindSensorAnimation) {
+            mAnimation = (FingerprintFindSensorAnimation) animationView;
+        } else {
+            mAnimation = null;
+        }
     }
 
     protected int getContentView() {
@@ -67,7 +74,9 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onStart() {
         super.onStart();
-        mAnimation.startAnimation();
+        if (mAnimation != null) {
+            mAnimation.startAnimation();
+        }
     }
 
     private void startLookingForFingerprint() {
@@ -102,13 +111,17 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onStop() {
         super.onStop();
-        mAnimation.pauseAnimation();
+        if (mAnimation != null) {
+            mAnimation.pauseAnimation();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAnimation.stopAnimation();
+        if (mAnimation != null) {
+            mAnimation.stopAnimation();
+        }
     }
 
     @Override
