@@ -4307,11 +4307,6 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
-    <!-- Warning shown when user input has been blocked due to another app overlaying screen
-         content. Since we don't know what the app is showing on top of the input target, we
-         can't verify user consent. [CHAR LIMIT=NONE] -->
-    <string name="window_obscured_warning">Because another app is displaying on top of these options,
-        Settings can\u2019t respond to your action.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
         enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
     <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
@@ -6519,8 +6514,8 @@
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
 
-    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30] -->
-    <string name="notification_badging_title">Allow icon badges</string>
+    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
+    <string name="notification_badging_title">Allow notification dots</string>
 
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
@@ -6755,9 +6750,6 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories deleted</item>
     </plurals>
 
-    <!-- [CHAR LIMIT=45\ Global notification badge setting -->
-    <string name="notification_badges">Notification badges</string>
-
     <!-- [CHAR LIMIT=NONE] App notification settings: notifications enabled-->
     <string name="notification_toggle_on">On</string>
 
@@ -6776,8 +6768,11 @@
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
     <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
 
-    <!-- [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
-    <string name="notification_badge_title">Allow icon badge</string>
+    <!-- [CHAR LIMIT=NONE BACKUP_MESSAGE_ID:7166470350070693657] App notification settings: Badging option title -->
+    <string name="notification_badge_title">Allow notification dot</string>
+
+    <!-- [CHAR LIMIT=NONE BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
+    <string name="notification_channel_badge_title">Show notification dot</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
