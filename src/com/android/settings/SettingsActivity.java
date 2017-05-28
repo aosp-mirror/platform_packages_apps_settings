@@ -50,6 +50,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toolbar;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
@@ -62,6 +63,7 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DynamicIndexableContentMonitor;
+import com.android.settings.search2.SearchActivity;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
@@ -75,7 +77,7 @@ import java.util.Set;
 public class SettingsActivity extends SettingsDrawerActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
-        ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
+        ButtonBarHandler, FragmentManager.OnBackStackChangedListener, OnClickListener {
 
     private static final String LOG_TAG = "Settings";
 
@@ -345,6 +347,14 @@ public class SettingsActivity extends SettingsDrawerActivity
             launchSettingFragment(initialFragmentName, isSubSettings, intent);
         }
 
+        if (mIsShowingDashboard) {
+            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
+            findViewById(R.id.action_bar).setVisibility(View.GONE);
+            Toolbar toolbar = findViewById(R.id.search_action_bar);
+            toolbar.setOnClickListener(this);
+            setActionBar(toolbar);
+        }
+
         mActionBar = getActionBar();
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
@@ -432,10 +442,10 @@ public class SettingsActivity extends SettingsDrawerActivity
             switchToFragment(initialFragmentName, initialArguments, true, false,
                 mInitialTitleResId, mInitialTitle, false);
         } else {
-            // No UP affordance if we are displaying the main Dashboard
-            mDisplayHomeAsUpEnabled = false;
-            // Show Search affordance
-            mDisplaySearch = true;
+            // Show search icon as up affordance if we are displaying the main Dashboard
+            mDisplayHomeAsUpEnabled = true;
+            // toolbar is search affordance so don't show search
+            mDisplaySearch = false;
             mInitialTitleResId = R.string.dashboard_title;
 
             switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
@@ -939,5 +949,11 @@ public class SettingsActivity extends SettingsDrawerActivity
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 }
