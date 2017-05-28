@@ -165,6 +165,12 @@
         <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.SubSettings</item>
     </style>
 
+    <!-- Variant of the settings theme with no action bar. -->
+    <style name="Theme.Settings.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="Theme.ProvisioningActivity" parent="@android:style/Theme.Translucent.NoTitleBar">
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowIsTranslucent">true</item>
