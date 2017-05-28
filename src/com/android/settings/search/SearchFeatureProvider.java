@@ -19,8 +19,8 @@ package com.android.settings.search;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
-
 import android.view.View;
+
 import com.android.settings.dashboard.SiteMapManager;
 
 import java.util.List;

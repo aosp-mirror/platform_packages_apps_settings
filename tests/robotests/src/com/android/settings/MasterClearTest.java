@@ -17,13 +17,18 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -80,6 +85,60 @@ public class MasterClearTest {
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
         when(mScrollView.getChildCount()).thenReturn(1);
+    }
+
+    @Test
+    public void testShowWipeEuicc_euiccDisabled() {
+        prepareEuiccState(
+                false /* isEuiccEnabled */, true /* isEuiccProvisioned */,
+                true /* isDevelopmentSettingsEnabled */);
+        assertThat(mMasterClear.showWipeEuicc()).isFalse();
+    }
+
+    @Test
+    public void testShowWipeEuicc_euiccEnabled_unprovisioned() {
+        prepareEuiccState(
+                true /* isEuiccEnabled */, false /* isEuiccProvisioned */,
+                false /* isDevelopmentSettingsEnabled */);
+        assertThat(mMasterClear.showWipeEuicc()).isFalse();
+    }
+
+    @Test
+    public void testShowWipeEuicc_euiccEnabled_provisioned() {
+        prepareEuiccState(
+                true /* isEuiccEnabled */, true /* isEuiccProvisioned */,
+                false /* isDevelopmentSettingsEnabled */);
+        assertThat(mMasterClear.showWipeEuicc()).isTrue();
+    }
+
+    @Test
+    public void testShowWipeEuicc_euiccEnabled_developmentSettingsEnabled() {
+        prepareEuiccState(
+                true /* isEuiccEnabled */, false /* isEuiccProvisioned */,
+                true /* isDevelopmentSettingsEnabled */);
+        assertThat(mMasterClear.showWipeEuicc()).isTrue();
+    }
+
+    @Test
+    public void testShowWipeEuicc_euiccEnabled_provisioned_developmentSettingsEnabled() {
+        prepareEuiccState(
+                true /* isEuiccEnabled */, true /* isEuiccProvisioned */,
+                true /* isDevelopmentSettingsEnabled */);
+        assertThat(mMasterClear.showWipeEuicc()).isTrue();
+    }
+
+    private void prepareEuiccState(
+            boolean isEuiccEnabled,
+            boolean isEuiccProvisioned,
+            boolean isDevelopmentSettingsEnabled) {
+        doReturn(mActivity).when(mMasterClear).getContext();
+        doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
+        ContentResolver cr = mActivity.getContentResolver();
+        Settings.Global.putInt(
+                cr, android.provider.Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
+        Settings.Global.putInt(
+                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
+                isDevelopmentSettingsEnabled ? 1 : 0);
     }
 
     @Test

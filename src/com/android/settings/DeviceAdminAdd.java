@@ -65,8 +65,6 @@ import com.android.settings.R;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.SecureTouchListener;
-
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -352,8 +350,6 @@ public class DeviceAdminAdd extends Activity {
 
         final View restrictedAction = findViewById(R.id.restricted_action);
         restrictedAction.setFilterTouchesWhenObscured(true);
-        restrictedAction.setOnTouchListener(
-                new SecureTouchListener(getString(R.string.window_obscured_warning)));
         restrictedAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mAdding) {
