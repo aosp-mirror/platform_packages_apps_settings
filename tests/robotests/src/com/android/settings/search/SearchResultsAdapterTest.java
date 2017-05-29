@@ -46,8 +46,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -85,7 +87,7 @@ public class SearchResultsAdapterTest {
 
     @Test
     public void testSingleSourceMerge_exactCopyReturned() {
-        ArrayList<SearchResult> intentResults = getIntentSampleResults();
+        Set<SearchResult> intentResults = getIntentSampleResults();
         mAdapter.addSearchResults(intentResults, mLoaderClassName);
         mAdapter.displaySearchResults("");
 
@@ -111,8 +113,10 @@ public class SearchResultsAdapterTest {
 
     @Test
     public void testEndToEndSearch_properResultsMerged_correctOrder() {
-        mAdapter.addSearchResults(getDummyAppResults(), InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(getDummyDbResults(), DatabaseResultLoader.class.getName());
+        mAdapter.addSearchResults(new HashSet<SearchResult>(getDummyAppResults()),
+                InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(new HashSet<SearchResult>(getDummyDbResults()),
+                DatabaseResultLoader.class.getName());
         int count = mAdapter.displaySearchResults("");
 
         List<SearchResult> results = mAdapter.getSearchResults();
@@ -130,13 +134,16 @@ public class SearchResultsAdapterTest {
         List<AppSearchResult> appResults = getDummyAppResults();
         List<SearchResult> dbResults = getDummyDbResults();
         // Add two individual items
-        mAdapter.addSearchResults(appResults.subList(0,1),
+        mAdapter.addSearchResults(new HashSet<SearchResult>(appResults.subList(0, 1)),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(dbResults.subList(0,1), DatabaseResultLoader.class.getName());
+        mAdapter.addSearchResults(new HashSet<SearchResult>(dbResults.subList(0, 1)),
+                DatabaseResultLoader.class.getName());
         mAdapter.displaySearchResults("");
         // Add super-set of items
-        mAdapter.addSearchResults(appResults, InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(dbResults, DatabaseResultLoader.class.getName());
+        mAdapter.addSearchResults(
+                new HashSet<SearchResult>(appResults), InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(
+                new HashSet<SearchResult>(dbResults), DatabaseResultLoader.class.getName());
         int count = mAdapter.displaySearchResults("");
 
         List<SearchResult> results = mAdapter.getSearchResults();
@@ -170,13 +177,16 @@ public class SearchResultsAdapterTest {
         List<AppSearchResult> appResults = getDummyAppResults();
         List<SearchResult> dbResults = getDummyDbResults();
         // Add list of items
-        mAdapter.addSearchResults(appResults, InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(dbResults, DatabaseResultLoader.class.getName());
+        mAdapter.addSearchResults(new HashSet<SearchResult>(appResults),
+                InstalledAppResultLoader.class.getName());
+        mAdapter.addSearchResults(new HashSet<SearchResult>(dbResults),
+                DatabaseResultLoader.class.getName());
         mAdapter.displaySearchResults("");
         // Add subset of items
-        mAdapter.addSearchResults(appResults.subList(0,1),
+        mAdapter.addSearchResults(new HashSet<SearchResult>(appResults.subList(0, 1)),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(dbResults.subList(0,1), DatabaseResultLoader.class.getName());
+        mAdapter.addSearchResults(new HashSet<>(dbResults.subList(0, 1)),
+                DatabaseResultLoader.class.getName());
         int count = mAdapter.displaySearchResults("");
 
         List<SearchResult> results = mAdapter.getSearchResults();
@@ -231,8 +241,8 @@ public class SearchResultsAdapterTest {
         return results;
     }
 
-    private ArrayList<SearchResult> getIntentSampleResults() {
-        ArrayList<SearchResult> sampleResults = new ArrayList<>();
+    private Set<SearchResult> getIntentSampleResults() {
+        Set<SearchResult> sampleResults = new HashSet<>();
         ArrayList<String> breadcrumbs = new ArrayList<>();
         final Drawable icon = mContext.getDrawable(R.drawable.ic_search_history);
         final ResultPayload payload = new ResultPayload(null);

@@ -25,10 +25,7 @@ import android.text.TextUtils;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
@@ -37,7 +34,7 @@ import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS
 /**
  * AsyncTask to retrieve Settings, First party app and any intent based results.
  */
-public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResult>> {
+public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult>> {
     private static final String LOG = "DatabaseResultLoader";
 
     /* These indices are used to match the columns of the this loader's SELECT statement.
@@ -114,25 +111,22 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
     }
 
     @Override
-    protected void onDiscardResult(List<? extends SearchResult> result) {
+    protected void onDiscardResult(Set<? extends SearchResult> result) {
         // TODO Search
     }
 
     @Override
-    public List<? extends SearchResult> loadInBackground() {
+    public Set<? extends SearchResult> loadInBackground() {
         if (mQueryText == null || mQueryText.isEmpty()) {
             return null;
         }
 
-        final Set<SearchResult> resultSet = new HashSet<>();
+        final Set<SearchResult> results = new HashSet<>();
 
-        resultSet.addAll(firstWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]));
-        resultSet.addAll(secondaryWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[1]));
-        resultSet.addAll(anyWordQuery(MATCH_COLUMNS_SECONDARY, BASE_RANKS[2]));
-        resultSet.addAll(anyWordQuery(MATCH_COLUMNS_TERTIARY, BASE_RANKS[3]));
-
-        final List<SearchResult> results = new ArrayList<>(resultSet);
-        Collections.sort(results);
+        results.addAll(firstWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]));
+        results.addAll(secondaryWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[1]));
+        results.addAll(anyWordQuery(MATCH_COLUMNS_SECONDARY, BASE_RANKS[2]));
+        results.addAll(anyWordQuery(MATCH_COLUMNS_TERTIARY, BASE_RANKS[3]));
         return results;
     }
 
@@ -159,7 +153,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      *
      * @param matchColumns The columns to match on
      * @param baseRank The highest rank achievable by these results
-     * @return A list of the matching results.
+     * @return A set of the matching results.
      */
     private Set<SearchResult> firstWordQuery(String[] matchColumns, int baseRank) {
         final String whereClause = buildSingleWordWhereClause(matchColumns);
@@ -175,7 +169,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      *
      * @param matchColumns The columns to match on
      * @param baseRank The highest rank achievable by these results
-     * @return A list of the matching results.
+     * @return A set of the matching results.
      */
     private Set<SearchResult> secondaryWordQuery(String[] matchColumns, int baseRank) {
         final String whereClause = buildSingleWordWhereClause(matchColumns);
@@ -190,7 +184,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      *
      * @param matchColumns The columns to match on
      * @param baseRank The highest rank achievable by these results
-     * @return A list of the matching results.
+     * @return A set of the matching results.
      */
     private Set<SearchResult> anyWordQuery(String[] matchColumns, int baseRank) {
         final String whereClause = buildTwoWordWhereClause(matchColumns);
@@ -205,7 +199,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      * @param whereClause Where clause for the SQL query which uses bindings.
      * @param selection List of the transformed query to match each bind in the whereClause
      * @param baseRank The highest rank achievable by these results.
-     * @return A list of the matching results.
+     * @return A set of the matching results.
      */
     private Set<SearchResult> query(String whereClause, String[] selection, int baseRank) {
         SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext).getReadableDatabase();

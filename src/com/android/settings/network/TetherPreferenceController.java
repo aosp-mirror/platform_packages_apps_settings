@@ -18,7 +18,10 @@ package com.android.settings.network;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -67,6 +70,7 @@ public class TetherPreferenceController extends PreferenceController
 
     private SettingObserver mAirplaneModeObserver;
     private Preference mPreference;
+    private TetherBroadcastReceiver mTetherReceiver;
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     TetherPreferenceController() {
@@ -131,6 +135,11 @@ public class TetherPreferenceController extends PreferenceController
         if (mAirplaneModeObserver == null) {
             mAirplaneModeObserver = new SettingObserver();
         }
+        if (mTetherReceiver == null) {
+            mTetherReceiver = new TetherBroadcastReceiver();
+        }
+        mContext.registerReceiver(
+            mTetherReceiver, new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED));
         mContext.getContentResolver()
                 .registerContentObserver(mAirplaneModeObserver.uri, false, mAirplaneModeObserver);
     }
@@ -139,6 +148,9 @@ public class TetherPreferenceController extends PreferenceController
     public void onPause() {
         if (mAirplaneModeObserver != null) {
             mContext.getContentResolver().unregisterContentObserver(mAirplaneModeObserver);
+        }
+        if (mTetherReceiver != null) {
+            mContext.unregisterReceiver(mTetherReceiver);
         }
     }
 
@@ -237,5 +249,15 @@ public class TetherPreferenceController extends PreferenceController
                 }
             }
         }
+    }
+
+    @VisibleForTesting
+    class TetherBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateSummary();
+        }
+
     }
 }

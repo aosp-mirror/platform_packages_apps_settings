@@ -18,6 +18,7 @@ package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
@@ -209,7 +210,8 @@ public class ChooseLockGenericControllerTest {
     @Test
     public void upgradeQuality_noDpmRequirement_shouldReturnQuality() {
         doReturn(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED)
-                .when(mDevicePolicyManager).getPasswordQuality(any(ComponentName.class), anyInt());
+                .when(mDevicePolicyManager)
+                .getPasswordQuality(nullable(ComponentName.class), anyInt());
 
         int upgradedQuality = mController.upgradeQuality(
                 DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
@@ -220,7 +222,8 @@ public class ChooseLockGenericControllerTest {
     @Test
     public void upgradeQuality_dpmRequirement_shouldReturnRequiredQuality() {
         doReturn(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC)
-                .when(mDevicePolicyManager).getPasswordQuality(any(ComponentName.class), anyInt());
+                .when(mDevicePolicyManager)
+                .getPasswordQuality(nullable(ComponentName.class), anyInt());
 
         int upgradedQuality = mController.upgradeQuality(
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);

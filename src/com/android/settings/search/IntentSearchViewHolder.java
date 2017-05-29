@@ -19,7 +19,6 @@ package com.android.settings.search;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Pair;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -36,23 +35,22 @@ public class IntentSearchViewHolder extends SearchViewHolder {
     }
 
     @Override
+    public int getClickActionMetricName() {
+        return MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT;
+    }
+
+    @Override
     public void onBind(final SearchFragment fragment, final SearchResult result) {
         super.onBind(fragment, result);
 
         itemView.setOnClickListener(v -> {
-            fragment.onSearchResultClicked();
             final Intent intent = result.payload.getIntent();
             final ComponentName cn = intent.getComponent();
-            final Pair<Integer, Object> rank = Pair.create(
-                    MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK, getAdapterPosition());
             String resultName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
             if (TextUtils.isEmpty(resultName) && cn != null) {
                 resultName = cn.flattenToString();
             }
-            mMetricsFeatureProvider.action(v.getContext(),
-                    MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
-                    resultName, rank);
-            mSearchFeatureProvider.searchResultClicked(fragment.mQuery, result);
+            fragment.onSearchResultClicked(this, resultName);
             fragment.startActivity(intent);
         });
     }

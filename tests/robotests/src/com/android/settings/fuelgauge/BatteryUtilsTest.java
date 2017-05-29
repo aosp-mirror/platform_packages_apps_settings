@@ -292,6 +292,19 @@ public class BatteryUtilsTest {
                 BatteryStats.STATS_SINCE_CHARGED)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
+    @Test
+    public void testSortUsageList() {
+        final List<BatterySipper> sippers = new ArrayList<>();
+        sippers.add(mNormalBatterySipper);
+        sippers.add(mScreenBatterySipper);
+        sippers.add(mSystemBatterySipper);
+
+        mBatteryUtils.sortUsageList(sippers);
+
+        assertThat(sippers).containsExactly(mNormalBatterySipper, mSystemBatterySipper,
+                mScreenBatterySipper);
+    }
+
     private BatterySipper createTestSmearBatterySipper(long activityTime, double totalPowerMah,
             int uidCode, boolean isUidNull) {
         final BatterySipper sipper = mock(BatterySipper.class);

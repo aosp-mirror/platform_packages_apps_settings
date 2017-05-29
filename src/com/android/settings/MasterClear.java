@@ -23,6 +23,7 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,6 +35,7 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.euicc.EuiccManager;
 import android.util.Log;
@@ -208,9 +210,7 @@ public class MasterClear extends OptionsMenuFragment
             });
         }
 
-        EuiccManager euiccManager =
-                        (EuiccManager) getActivity().getSystemService(Context.EUICC_SERVICE);
-        if (euiccManager.isEnabled()) {
+        if (showWipeEuicc()) {
             mEsimStorageContainer.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -242,6 +242,30 @@ public class MasterClear extends OptionsMenuFragment
 
         // Set the initial state of the initiateButton
         mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+    }
+
+    /**
+     * Whether to show the checkbox to wipe the eUICC.
+     *
+     * <p>We show the checkbox on any device which supports eUICC as long as either the eUICC was
+     * ever provisioned (that is, at least one profile was ever downloaded onto it), or if the user
+     * has enabled development mode.
+     */
+    @VisibleForTesting
+    boolean showWipeEuicc() {
+        Context context = getContext();
+        if (!isEuiccEnabled(context)) {
+            return false;
+        }
+        ContentResolver cr = context.getContentResolver();
+        return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0
+                || Settings.Global.getInt(cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+    }
+
+    @VisibleForTesting
+    protected boolean isEuiccEnabled(Context context) {
+        EuiccManager euiccManager = (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
+        return euiccManager.isEnabled();
     }
 
     @VisibleForTesting

@@ -78,6 +78,7 @@ public class EntityHeaderController {
     private Lifecycle mLifecycle;
     private RecyclerView mRecyclerView;
     private Drawable mIcon;
+    private String mIconContentDescription;
     private CharSequence mLabel;
     private CharSequence mSummary;
     private String mPackageName;
@@ -122,6 +123,10 @@ public class EntityHeaderController {
         return this;
     }
 
+    /**
+     * Set the icon in the header. Callers should also consider calling setIconContentDescription
+     * to provide a description of this icon for accessibility purposes.
+     */
     public EntityHeaderController setIcon(Drawable icon) {
         if (icon != null) {
             mIcon = icon.getConstantState().newDrawable(mAppContext.getResources());
@@ -129,10 +134,20 @@ public class EntityHeaderController {
         return this;
     }
 
+    /**
+     * Convenience method to set the header icon from an ApplicationsState.AppEntry. Callers should
+     * also consider calling setIconContentDescription to provide a description of this icon for
+     * accessibility purposes.
+     */
     public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
         if (appEntry.icon != null) {
             mIcon = appEntry.icon.getConstantState().newDrawable(mAppContext.getResources());
         }
+        return this;
+    }
+
+    public EntityHeaderController setIconContentDescription(String contentDescription) {
+        mIconContentDescription = contentDescription;
         return this;
     }
 
@@ -204,6 +219,7 @@ public class EntityHeaderController {
         ImageView iconView = mHeader.findViewById(R.id.entity_header_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
+            iconView.setContentDescription(mIconContentDescription);
         }
         setText(R.id.entity_header_title, mLabel);
         setText(R.id.entity_header_summary, mSummary);

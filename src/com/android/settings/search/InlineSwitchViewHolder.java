@@ -41,6 +41,11 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
     }
 
     @Override
+    public int getClickActionMetricName() {
+        return MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_INLINE_RESULT;
+    }
+
+    @Override
     public void onBind(SearchFragment fragment, SearchResult result) {
         super.onBind(fragment, result);
         if (mContext == null) {
@@ -49,19 +54,10 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
         final InlineSwitchPayload payload = (InlineSwitchPayload) result.payload;
         switchView.setChecked(payload.getSwitchValue(mContext));
         switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            final Pair<Integer, Object> name = Pair.create(
-                    MetricsEvent.FIELD_SETTINGS_SEARCH_INLINE_RESULT_NAME, payload.settingsUri);
             final Pair<Integer, Object> value = Pair.create(
                     MetricsEvent.FIELD_SETTINGS_SEARCH_INLINE_RESULT_VALUE, isChecked
-                            ? "checked"
-                            : "not-checked");
-            final Pair<Integer, Object> rank = Pair.create(
-                    MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK, getAdapterPosition());
-            mMetricsFeatureProvider.action(mContext,
-                    MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_INLINE_RESULT,
-                    name, value, rank);
-
-            fragment.onSearchResultClicked();
+                            ? 1L : 0L);
+            fragment.onSearchResultClicked(this, payload.settingsUri, value);
             payload.setSwitchValue(mContext, isChecked);
         });
     }

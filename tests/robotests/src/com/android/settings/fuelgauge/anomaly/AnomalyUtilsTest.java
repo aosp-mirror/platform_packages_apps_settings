@@ -20,9 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.anomaly.action.BackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
+import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,8 +50,20 @@ public class AnomalyUtilsTest {
     }
 
     @Test
+    public void testGetAnomalyAction_typeWakeUpAlarm_returnBackgroundCheck() {
+        assertThat(mAnomalyUtils.getAnomalyAction(Anomaly.AnomalyType.WAKEUP_ALARM)).isInstanceOf(
+                BackgroundCheckAction.class);
+    }
+
+    @Test
     public void testGetAnomalyDetector_typeWakeLock_returnWakeLockDetector() {
         assertThat(mAnomalyUtils.getAnomalyDetector(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
                 WakeLockAnomalyDetector.class);
+    }
+
+    @Test
+    public void testGetAnomalyDetector_typeWakeUpAlarm_returnWakeUpAlarmDetector() {
+        assertThat(mAnomalyUtils.getAnomalyDetector(Anomaly.AnomalyType.WAKEUP_ALARM)).isInstanceOf(
+                WakeupAlarmAnomalyDetector.class);
     }
 }

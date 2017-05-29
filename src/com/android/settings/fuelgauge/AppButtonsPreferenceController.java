@@ -98,6 +98,8 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
     @VisibleForTesting
     Button mUninstallButton;
     @VisibleForTesting
+    String mPackageName;
+    @VisibleForTesting
     boolean mDisableAfterUninstall = false;
 
     private final int mRequestUninstall;
@@ -113,7 +115,6 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private LayoutPreference mButtonsPref;
-    private String mPackageName;
     private int mUserId;
     private boolean mUpdatedSysApp = false;
     private boolean mListeningToPackageRemove = false;
@@ -134,7 +135,6 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
         mMetricsFeatureProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
 
         mState = state;
-        mSession = mState.newSession(this);
         mDpm = dpm;
         mUserManager = userManager;
         mPm = packageManager;
@@ -145,10 +145,10 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
         mRequestUninstall = requestUninstall;
         mRequestRemoveDeviceAdmin = requestRemoveDeviceAdmin;
 
-        lifecycle.addObserver(this);
-
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, mUserId);
+            mSession = mState.newSession(this);
+            lifecycle.addObserver(this);
         } else {
             mFinishing = true;
         }
@@ -620,7 +620,11 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
         return false;
     }
 
-    private boolean refreshUi() {
+    @VisibleForTesting
+    boolean refreshUi() {
+        if (mPackageName == null) {
+            return false;
+        }
         retrieveAppEntry();
         if (mAppEntry == null || mPackageInfo == null) {
             return false;

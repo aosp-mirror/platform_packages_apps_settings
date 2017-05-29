@@ -26,6 +26,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -46,11 +47,10 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
         Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "LockScreenNotifPref";
-    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
-    private static final String KEY_LOCK_SCREEN_PROFILE_HEADER =
-            "lock_screen_notifications_profile_header";
-    private static final String KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS =
-            "lock_screen_notifications_profile";
+
+    private final String mSettingKey;
+    private final String mWorkSettingCategoryKey;
+    private final String mWorkSettingKey;
 
     private RestrictedDropDownPreference mLockscreen;
     private RestrictedDropDownPreference mLockscreenProfile;
@@ -64,7 +64,16 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
     private int mLockscreenSelectedValueProfile;
 
     public LockScreenNotificationPreferenceController(Context context) {
+        this(context, null, null, null);
+    }
+
+    public LockScreenNotificationPreferenceController(Context context,
+            String settingKey, String workSettingCategoryKey, String workSettingKey) {
         super(context);
+        mSettingKey = settingKey;
+        mWorkSettingCategoryKey = workSettingCategoryKey;
+        mWorkSettingKey = workSettingKey;
+
         mProfileChallengeUserId = Utils.getManagedProfileId(
                 UserManager.get(context), UserHandle.myUserId());
         final LockPatternUtils utils = new LockPatternUtils(context);
@@ -79,17 +88,17 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mLockscreen =
-                (RestrictedDropDownPreference) screen.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
+                (RestrictedDropDownPreference) screen.findPreference(mSettingKey);
         if (mLockscreen == null) {
-            Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_NOTIFICATIONS);
+            Log.i(TAG, "Preference not found: " + mSettingKey);
             return;
         }
         if (mProfileChallengeUserId != UserHandle.USER_NULL) {
             mLockscreenProfile = (RestrictedDropDownPreference) screen.findPreference(
-                    KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS);
+                    mWorkSettingKey);
         } else {
-            removePreference(screen, KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS);
-            removePreference(screen, KEY_LOCK_SCREEN_PROFILE_HEADER);
+            removePreference(screen, mWorkSettingKey);
+            removePreference(screen, mWorkSettingCategoryKey);
         }
         mSettingObserver = new SettingObserver();
         initLockScreenNotificationPrefDisplay();
@@ -136,7 +145,7 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
 
     private void initLockscreenNotificationPrefForProfile() {
         if (mLockscreenProfile == null) {
-            Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS);
+            Log.i(TAG, "Preference not found: " + mWorkSettingKey);
             return;
         }
         ArrayList<CharSequence> entries = new ArrayList<>();
@@ -205,8 +214,8 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        switch (preference.getKey()) {
-            case KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS: {
+        final String key = preference.getKey();
+        if (TextUtils.equals(mWorkSettingKey, key)) {
                 final int val = Integer.parseInt((String) newValue);
                 if (val == mLockscreenSelectedValueProfile) {
                     return false;
@@ -223,8 +232,7 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
                         enabled ? 1 : 0, mProfileChallengeUserId);
                 mLockscreenSelectedValueProfile = val;
                 return true;
-            }
-            case KEY_LOCK_SCREEN_NOTIFICATIONS: {
+        } else if (TextUtils.equals(mSettingKey, key)) {
                 final int val = Integer.parseInt((String) newValue);
                 if (val == mLockscreenSelectedValue) {
                     return false;
@@ -238,10 +246,8 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
                         Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
                 mLockscreenSelectedValue = val;
                 return true;
-            }
-            default:
-                return false;
         }
+        return false;
     }
 
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
@@ -295,6 +301,7 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
         final boolean enabled = getLockscreenNotificationsEnabled(mProfileChallengeUserId);
         final boolean allowPrivate = !mSecureProfile
                 || getLockscreenAllowPrivateNotifications(mProfileChallengeUserId);
+        mLockscreenProfile.setSummary("%s");
         mLockscreenSelectedValueProfile = !enabled
                 ? R.string.lock_screen_notifications_summary_disable_profile
                 : (allowPrivate ? R.string.lock_screen_notifications_summary_show_profile

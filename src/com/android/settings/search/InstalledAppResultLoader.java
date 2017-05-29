@@ -37,14 +37,14 @@ import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Search loader for installed apps.
  */
-public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchResult>> {
+public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchResult>> {
 
     private static final int NAME_NO_MATCH = -1;
     private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
@@ -67,8 +67,8 @@ public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchR
     }
 
     @Override
-    public List<? extends SearchResult> loadInBackground() {
-        final List<AppSearchResult> results = new ArrayList<>();
+    public Set<? extends SearchResult> loadInBackground() {
+        final Set<AppSearchResult> results = new HashSet<>();
         final PackageManager pm = mPackageManager.getPackageManager();
 
         for (UserInfo user : getUsersToCount()) {
@@ -103,7 +103,6 @@ public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchR
                 results.add(builder.build());
             }
         }
-        Collections.sort(results);
         return results;
     }
 
@@ -124,7 +123,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchR
     }
 
     @Override
-    protected void onDiscardResult(List<? extends SearchResult> result) {
+    protected void onDiscardResult(Set<? extends SearchResult> result) {
 
     }
 

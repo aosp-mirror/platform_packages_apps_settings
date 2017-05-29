@@ -21,18 +21,22 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -41,11 +45,13 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -77,6 +83,11 @@ public class SearchFragmentTest {
 
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        DatabaseTestUtils.clearDb(RuntimeEnvironment.application);
     }
 
     @Test
@@ -249,7 +260,7 @@ public class SearchFragmentTest {
 
         Robolectric.flushForegroundThreadScheduler();
 
-        verify(fragment, times(2)).onLoadFinished(any(Loader.class), any(List.class));
+        verify(fragment, times(2)).onLoadFinished(any(Loader.class), any(Set.class));
     }
 
     @Test
@@ -353,17 +364,42 @@ public class SearchFragmentTest {
     @Test
     public void onIndexingFinished_noActivity_shouldNotCrash() {
         ActivityController<SearchActivity> activityController =
-            Robolectric.buildActivity(SearchActivity.class);
+                Robolectric.buildActivity(SearchActivity.class);
         activityController.setup();
         SearchFragment fragment = (SearchFragment) spy(activityController.get().getFragmentManager()
-            .findFragmentById(R.id.main_content));
+                .findFragmentById(R.id.main_content));
         when(mFeatureFactory.searchFeatureProvider.isIndexingComplete(any(Context.class)))
-            .thenReturn(true);
+                .thenReturn(true);
         fragment.mQuery = "bright";
         ReflectionHelpers.setField(fragment, "mLoaderManager", null);
         ReflectionHelpers.setField(fragment, "mHost", null);
 
         fragment.onIndexingFinished();
         // no crash
+    }
+
+    @Test
+    public void onSearchResultClicked_shouldLogResultMeta() {
+        SearchFragment fragment = new SearchFragment();
+        ReflectionHelpers.setField(fragment, "mMetricsFeatureProvider",
+                mFeatureFactory.metricsFeatureProvider);
+        ReflectionHelpers.setField(fragment, "mSearchAdapter", mock(SearchResultsAdapter.class));
+        fragment.mSavedQueryController = mock(SavedQueryController.class);
+
+        // Should log result name, result count, clicked rank, etc.
+        final SearchViewHolder result = mock(SearchViewHolder.class);
+        fragment.onSearchResultClicked(result, "test_setting");
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                nullable(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
+                eq("test_setting"),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT)),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK)),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH)));
+    }
+
+    private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag) {
+        return pair -> pair.first == tag;
     }
 }
