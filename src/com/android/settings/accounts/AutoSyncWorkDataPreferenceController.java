@@ -27,7 +27,7 @@ public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPr
 
     public AutoSyncWorkDataPreferenceController(Context context, Fragment parent) {
         super(context, parent);
-        mUserHandle = Utils.getManagedProfile(mUserManager);
+        mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
     }
 
     @Override
