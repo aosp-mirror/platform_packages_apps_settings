@@ -418,14 +418,14 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
 
-        AppFilter overrideFilter = getOverrideFilter(mListType, mStorageType, mVolumeUuid);
-        if (overrideFilter != null) {
-            mApplications.setOverrideFilter(overrideFilter);
+        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (compositeFilter != null) {
+            mApplications.setCompositeFilter(compositeFilter);
         }
     }
 
     @VisibleForTesting
-    static @Nullable AppFilter getOverrideFilter(int listType, int storageType, String volumeUuid) {
+    static @Nullable AppFilter getCompositeFilter(int listType, int storageType, String volumeUuid) {
         AppFilter filter = new VolumeFilter(volumeUuid);
         if (listType == LIST_TYPE_STORAGE) {
             if (storageType == STORAGE_TYPE_MUSIC) {
@@ -845,7 +845,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private int mWhichSize = SIZE_TOTAL;
         CharSequence mCurFilterPrefix;
         private PackageManager mPm;
-        private AppFilter mOverrideFilter;
+        private AppFilter mCompositeFilter;
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
         private FileViewHolderController mExtraViewController;
@@ -909,8 +909,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
         }
 
-        public void setOverrideFilter(AppFilter overrideFilter) {
-            mOverrideFilter = overrideFilter;
+        public void setCompositeFilter(AppFilter compositeFilter) {
+            mCompositeFilter = compositeFilter;
             rebuild(true);
         }
 
@@ -988,8 +988,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mWhichSize = SIZE_INTERNAL;
             }
             filterObj = FILTERS[mFilterMode];
-            if (mOverrideFilter != null) {
-                filterObj = mOverrideFilter;
+            if (mCompositeFilter != null) {
+                filterObj = new CompoundFilter(filterObj, mCompositeFilter);
             }
             if (!mManageApplications.mShowSystem) {
                 if (LIST_TYPES_WITH_INSTANT.contains(mManageApplications.mListType)) {
