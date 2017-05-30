@@ -24,9 +24,12 @@ import android.os.BatteryStats;
 import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
 import com.android.internal.os.BatteryStatsHelper;
+import android.support.annotation.VisibleForTesting;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.graph.UsageView;
@@ -103,38 +106,57 @@ public class BatteryInfo {
 
     public static void getBatteryInfo(final Context context, final Callback callback,
             boolean shortString) {
-        new AsyncTask<Void, Void, BatteryStats>() {
+        BatteryStatsHelper statsHelper = new BatteryStatsHelper(context, true);
+        statsHelper.create((Bundle) null);
+        BatteryInfo.getBatteryInfo(context, callback, statsHelper, shortString);
+    }
+
+    public static void getBatteryInfo(final Context context, final Callback callback,
+            BatteryStatsHelper statsHelper, boolean shortString) {
+        getBatteryInfo(context, callback, statsHelper.getStats(), shortString);
+    }
+
+    public static void getBatteryInfo(final Context context, final Callback callback,
+            BatteryStats stats, boolean shortString) {
+        new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
-            protected BatteryStats doInBackground(Void... params) {
-                BatteryStatsHelper statsHelper = new BatteryStatsHelper(context, true);
-                statsHelper.create((Bundle) null);
-                return statsHelper.getStats();
+            protected BatteryInfo doInBackground(Void... params) {
+                PowerUsageFeatureProvider provider =
+                        FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+                final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
+                final long elapsedRealtimeUs =
+                        batteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+                Intent batteryBroadcast = context.registerReceiver(null,
+                        new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                BatteryUtils utils = BatteryUtils.getInstance(context);
+
+                if (provider != null && provider.isEnhancedBatteryPredictionEnabled(context)) {
+                    return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                            elapsedRealtimeUs, shortString,
+                            utils.convertMsToUs(provider.getEnhancedBatteryPrediction(context)),
+                            true);
+                } else {
+                    return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                            elapsedRealtimeUs, shortString,
+                            stats.computeBatteryTimeRemaining(elapsedRealtimeUs), false);
+                }
             }
 
             @Override
-            protected void onPostExecute(BatteryStats batteryStats) {
-                final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
-                Intent batteryBroadcast = context.registerReceiver(null,
-                        new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                BatteryInfo batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast,
-                        batteryStats, elapsedRealtimeUs, shortString);
+            protected void onPostExecute(BatteryInfo batteryInfo) {
                 callback.onBatteryInfoLoaded(batteryInfo);
             }
         }.execute();
     }
 
-    public static BatteryInfo getBatteryInfo(Context context, Intent batteryBroadcast,
-                                             BatteryStats stats, long elapsedRealtimeUs) {
-        return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats, elapsedRealtimeUs,
-                false /* shortString */);
-    }
-
-    public static BatteryInfo getBatteryInfo(Context context, Intent batteryBroadcast,
+    @WorkerThread
+    public static BatteryInfo getBatteryInfoOld(Context context, Intent batteryBroadcast,
             BatteryStats stats, long elapsedRealtimeUs, boolean shortString) {
         return getBatteryInfo(context, batteryBroadcast, stats, elapsedRealtimeUs, shortString,
                 stats.computeBatteryTimeRemaining(elapsedRealtimeUs), false);
     }
 
+    @WorkerThread
     public static BatteryInfo getBatteryInfo(Context context, Intent batteryBroadcast,
             BatteryStats stats, long elapsedRealtimeUs, boolean shortString, long drainTimeUs,
             boolean basedOnUsage) {
@@ -144,13 +166,14 @@ public class BatteryInfo {
         info.batteryPercentString = Utils.formatPercentage(info.batteryLevel);
         info.mCharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
         final Resources resources = context.getResources();
+        final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
 
         info.statusLabel = Utils.getBatteryStatus(resources, batteryBroadcast);
         if (!info.mCharging) {
             if (drainTimeUs > 0) {
                 info.remainingTimeUs = drainTimeUs;
                 String timeString = Formatter.formatShortElapsedTime(context,
-                        drainTimeUs / 1000);
+                        batteryUtils.convertUsToMs(drainTimeUs));
                 info.remainingLabel = resources.getString(
                         shortString ?
                                 (basedOnUsage ?
@@ -179,7 +202,7 @@ public class BatteryInfo {
             if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
                 info.remainingTimeUs = chargeTime;
                 String timeString = Formatter.formatShortElapsedTime(context,
-                        chargeTime / 1000);
+                        batteryUtils.convertUsToMs(chargeTime));
                 int resId = shortString ? R.string.power_charging_duration_short
                         : R.string.power_charging_duration;
                 info.remainingLabel = resources.getString(
