@@ -15,7 +15,9 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.android.settings.applications.LayoutPreference
         android:key="header_view"
@@ -40,11 +42,12 @@
         android:title="@string/notifications_label"
         android:selectable="true"/>
 
-    <com.android.settings.widget.SingleLineSummaryPreference
+    <com.android.settings.widget.FixedLineSummaryPreference
         android:key="permission_settings"
         android:title="@string/permissions_label"
-        android:summary="@string/summary_placeholder"
-        android:selectable="true"/>
+        android:summary="@string/summary_two_lines_placeholder"
+        android:selectable="true"
+        app:summaryLineCount="2" />
 
     <Preference
         android:key="storage_settings"
