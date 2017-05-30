@@ -120,7 +120,8 @@ public class StorageProfileFragment extends DashboardFragment
     @Override
     public void onLoadFinished(Loader<SparseArray<AppsStorageResult>> loader,
             SparseArray<AppsStorageResult> result) {
-        mPreferenceController.onLoadFinished(scrubAppsFromResult(result.get(mUserId)));
+        scrubAppsFromResult(result.get(mUserId));
+        mPreferenceController.onLoadFinished(result, mUserId);
     }
 
     @Override

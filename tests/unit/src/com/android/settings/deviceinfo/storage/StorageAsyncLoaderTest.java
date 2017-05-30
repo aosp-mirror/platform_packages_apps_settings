@@ -133,28 +133,15 @@ public class StorageAsyncLoaderTest {
         info.id = SECONDARY_USER_ID;
         mUsers.add(info);
         when(mSource.getExternalStorageStats(anyString(), eq(UserHandle.SYSTEM)))
-                .thenReturn(new StorageStatsSource.ExternalStorageStats(9, 2, 3, 4));
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(9, 2, 3, 4, 0));
         when(mSource.getExternalStorageStats(anyString(), eq(new UserHandle(SECONDARY_USER_ID))))
-                .thenReturn(new StorageStatsSource.ExternalStorageStats(10, 3, 3, 4));
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(10, 3, 3, 4, 0));
 
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(2);
         assertThat(result.get(PRIMARY_USER_ID).externalStats.totalBytes).isEqualTo(9L);
         assertThat(result.get(SECONDARY_USER_ID).externalStats.totalBytes).isEqualTo(10L);
-    }
-
-    @Test
-    public void testSystemAppsBaseSizeIsAddedToSystem() throws Exception {
-        ApplicationInfo systemApp =
-                addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
-        systemApp.flags = ApplicationInfo.FLAG_SYSTEM;
-
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
-
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(10L);
-        assertThat(result.get(PRIMARY_USER_ID).systemSize).isEqualTo(1L);
     }
 
     @Test

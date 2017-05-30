@@ -28,7 +28,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +35,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -275,22 +275,22 @@ public class StorageItemPreferenceControllerTest {
         result.videoAppsSize = MEGABYTE_IN_BYTES * 160;
         result.musicAppsSize = MEGABYTE_IN_BYTES * 40;
         result.otherAppsSize = MEGABYTE_IN_BYTES * 90;
-        result.systemSize = MEGABYTE_IN_BYTES * 100; // This value is ignored and overridden now.
         result.externalStats =
                 new StorageStatsSource.ExternalStorageStats(
                         MEGABYTE_IN_BYTES * 500, // total
                         MEGABYTE_IN_BYTES * 100, // audio
                         MEGABYTE_IN_BYTES * 150, // video
-                        MEGABYTE_IN_BYTES * 200); // image
+                        MEGABYTE_IN_BYTES * 200, 0); // image
 
-        mController.onLoadFinished(result);
+        SparseArray<StorageAsyncLoader.AppsStorageResult> results = new SparseArray<>();
+        results.put(0, result);
+        mController.onLoadFinished(results, 0);
 
         assertThat(audio.getSummary().toString()).isEqualTo("0.14GB");
         assertThat(image.getSummary().toString()).isEqualTo("0.35GB");
         assertThat(games.getSummary().toString()).isEqualTo("0.08GB");
         assertThat(movies.getSummary().toString()).isEqualTo("0.16GB");
         assertThat(apps.getSummary().toString()).isEqualTo("0.09GB");
-        assertThat(system.getSummary().toString()).isEqualTo("0.10GB");
         assertThat(files.getSummary().toString()).isEqualTo("0.05GB");
     }
 
