@@ -17,25 +17,24 @@ package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
+import static com.android.settings.Utils.setOverlayAllowed;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageParser;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.DialogCreatable;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -118,6 +117,7 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
             implements DialogInterface.OnClickListener {
         private static final String EXTRA_KEY = "extra_key";
         private static final String TAG = "ConfirmationDialogFragment";
+        private IBinder mToken;
 
         public static ConfirmationDialogFragment newInstance(ShortcutServicePickerFragment parent,
                 String key) {
@@ -126,6 +126,7 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
             argument.putString(EXTRA_KEY, key);
             fragment.setArguments(argument);
             fragment.setTargetFragment(parent, 0);
+            fragment.mToken = new Binder();
             return fragment;
         }
 
@@ -144,6 +145,22 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
             AccessibilityServiceInfo info = accessibilityManager
                     .getInstalledServiceInfoWithComponentName(serviceComponentName);
             return AccessibilityServiceWarning.createCapabilitiesDialog(getActivity(), info, this);
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            if (mToken != null) {
+                setOverlayAllowed(getActivity(), mToken, false);
+            }
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            if (mToken != null) {
+                setOverlayAllowed(getActivity(), mToken, true);
+            }
         }
 
         @Override

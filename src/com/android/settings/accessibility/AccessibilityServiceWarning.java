@@ -48,14 +48,14 @@ public class AccessibilityServiceWarning {
                 .setTitle(parentActivity.getString(R.string.enable_service_title,
                         getServiceName(parentActivity, info)))
                 .setView(createEnableDialogContentView(parentActivity, info))
-                .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, listener)
                 .setNegativeButton(android.R.string.cancel, listener)
                 .create();
 
         final View.OnTouchListener filterTouchListener = (View v, MotionEvent event) -> {
             // Filter obscured touches by consuming them.
-            if ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0) {
+            if (((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0)
+                || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
                             Toast.LENGTH_SHORT).show();
@@ -67,6 +67,8 @@ public class AccessibilityServiceWarning {
 
         ad.create();
         ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(filterTouchListener);
+        ad.setCanceledOnTouchOutside(true);
+
         return ad;
     }
 
