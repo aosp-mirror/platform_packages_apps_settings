@@ -47,6 +47,7 @@ import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
+import com.android.settings.display.AmbientDisplaySettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -117,6 +118,7 @@ public final class SearchIndexableResources {
         addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(DisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
+        addIndex(AmbientDisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(WallpaperTypeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(ConfigureNotificationSettings.class,
                 R.xml.configure_notification_settings, R.drawable.ic_settings_notifications);

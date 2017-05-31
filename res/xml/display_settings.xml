@@ -78,6 +78,11 @@
         android:title="@string/screensaver_settings_title"
         android:fragment="com.android.settings.dream.DreamSettings" />
 
+    <Preference
+        android:key="ambient_display"
+        android:title="@string/ambient_display_screen_title"
+        android:fragment="com.android.settings.display.AmbientDisplaySettings" />
+
     <!-- Hide night mode for now
     <ListPreference
         android:key="night_mode"
@@ -95,26 +100,6 @@
     <SwitchPreference
         android:key="lift_to_wake"
         android:title="@string/lift_to_wake_title" />
-
-    <Preference
-        android:key="gesture_double_tap_screen_display_summary"
-        android:title="@string/ambient_display_title"
-        android:fragment="com.android.settings.gestures.DoubleTapScreenSettings" />
-
-    <Preference
-        android:key="gesture_pick_up_display_summary"
-        android:title="@string/ambient_display_pickup_title"
-        android:fragment="com.android.settings.gestures.PickupGestureSettings" />
-
-    <SwitchPreference
-        android:key="doze"
-        android:title="@string/doze_title"
-        android:summary="@string/doze_summary" />
-
-    <SwitchPreference
-        android:key="doze_always_on"
-        android:title="@string/doze_always_on_title"
-        android:summary="@string/doze_always_on_summary" />
 
     <SwitchPreference
         android:key="tap_to_wake"
