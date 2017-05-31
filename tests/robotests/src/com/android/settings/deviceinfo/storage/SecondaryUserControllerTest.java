@@ -168,7 +168,7 @@ public class SecondaryUserControllerTest {
                         MEGABYTE_IN_BYTES * 30,
                         MEGABYTE_IN_BYTES * 10,
                         MEGABYTE_IN_BYTES * 10,
-                        MEGABYTE_IN_BYTES * 10);
+                        MEGABYTE_IN_BYTES * 10, 0);
         result.put(10, userResult);
 
         mController.handleResult(result);
