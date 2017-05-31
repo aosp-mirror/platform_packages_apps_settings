@@ -245,6 +245,12 @@ public final class ApplicationFeatureProviderImplTest {
                 .isEqualTo(expectedManagedUserActivities);
     }
 
+    @Test
+    public void getKeepEnabledPackages_shouldContainNothing() {
+        assertThat(mProvider.getKeepEnabledPackages())
+                .isEmpty();
+    }
+
     private void setUpUsersAndInstalledApps() {
         when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),

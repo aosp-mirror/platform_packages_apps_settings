@@ -129,6 +129,11 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         return preferredActivities;
     }
 
+    @Override
+    public Set<String> getKeepEnabledPackages() {
+        return new ArraySet<>();
+    }
+
     private static class CurrentUserAndManagedProfilePolicyInstalledAppCounter
             extends InstalledAppCounter {
         private NumberOfAppsCallback mCallback;
