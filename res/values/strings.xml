@@ -2000,12 +2000,31 @@
     <string name="wifi_tether_checkbox_text">Portable Wi\u2011Fi hotspot</string>
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
-    <!-- Label for Wifi tether checkbox summary. Toggles Access Point on/off  [CHAR LIMIT=60] -->
-    <string name="wifi_hotspot_checkbox_text_summary">Use mobile connection to provide Wi\u2011Fi network</string>
     <!-- Summary text when turning hotspot off -->
-    <string name="wifi_hotspot_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection via hotspot</string>
-    <!-- Summary text when turning hotspot off -->
-    <string name="wifi_hotspot_off_subtext" product="default">Not sharing this phone\u2019s Internet connection via hotspot</string>
+    <string name="wifi_hotspot_off_subtext">Not sharing Internet or content with other devices</string>
+    <!-- Summary text when tethering is on -->
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet">Sharing this tablet\u2019s Internet connection via hotspot</string>
+    <!-- Summary text when tethering is on -->
+    <string name="wifi_hotspot_tethering_on_subtext" product="default">Sharing this phone\u2019s Internet connection via hotspot</string>
+    <!-- Summary text when hotspot is on for local-only -->
+    <string name="wifi_hotspot_on_local_only_subtext">App is sharing content. To share Internet connection, turn hotspot off, then on</string>
+
+    <!-- Wifi hotspot settings -->
+    <!-- Label for Wifi hotspot name. -->
+    <string name="wifi_hotspot_name_title">Wi\u2011Fi name</string>
+    <!-- Summary for Wifi hotspot name when connection is in progress. -->
+    <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>...</string>
+    <!-- Summary for Wifi hotspot name when connected. -->
+    <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
+    <!-- Label for Wifi hotspot password. -->
+    <string name="wifi_hotspot_password_title">Wi\u2011Fi password</string>
+    <!-- Label for Wifi hotspot AP Band. -->
+    <string name="wifi_hotspot_ap_band_title">AP Band</string>
+    <!-- Wifi hotspot footer info for regular hotspot [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_footer_info_regular">Use hotspot to create a Wi\u2011Fi network for your other devices. Hotspot provides Internet using your mobile data connection. Additional mobile data charges may apply.</string>
+    <!-- Wifi hotspot footer info [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_footer_info_local_only">Apps can create a hotspot to share content with nearby devices.</string>
+
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
     <!-- Summary text when turning hotspot off -->
@@ -3151,49 +3170,25 @@
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
     <string name="usb_tethering_button_text">USB tethering</string>
-    <!-- USB available subtext - shown when USB is connected but not currently being tethered -->
-    <string name="usb_tethering_available_subtext">USB connected, check to tether</string>
-    <!-- USB tethered subtext - shown when USB is connected and being tethered -->
-    <string name="usb_tethering_active_subtext">Tethered</string>
-    <!-- USB storage subtext - shown when tethering is disabled because USB storage is active -->
-    <string name="usb_tethering_storage_active_subtext">Can\u2019t tether when USB storage is in use</string>
-    <!-- USB unavailable subtext - shown when USB is not connected -->
-    <string name="usb_tethering_unavailable_subtext">USB not connected</string>
-    <!-- USB unavailable subtext - shown when USB is not connected -->
-    <string name="usb_tethering_turnon_subtext">Connect to turn on</string>
-    <!-- USB errored subtext - shown when USB is broken for some reason -->
-    <string name="usb_tethering_errored_subtext">USB tethering error</string>
+    <string name="usb_tethering_subtext" product="default">Share phone\u2019s Internet connection via USB</string>
+    <string name="usb_tethering_subtext" product="tablet">Share tablet\u2019s Internet connection via USB</string>
 
     <!-- Bluetooth Tethering settings-->
     <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
     <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
-    <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=70]-->
-    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=70]-->
-    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to 1 device via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to 1 device via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices via Bluetooth</string>
+    <!-- Bluetooth Tethering subtext [CHAR LIMIT=70]-->
+    <string name="bluetooth_tethering_subtext" product="tablet">Share tablet\u2019s Internet connection via Bluetooth</string>
+    <!-- Bluetooth Tethering subtext [CHAR LIMIT=70]-->
+    <string name="bluetooth_tethering_subtext" product="default">Share phone\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=80]-->
     <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=80]-->
-    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=80]-->
-    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth errored subtext - shown when Bluetooth is broken for some reason [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_errored_subtext">Not tethered</string>
     <!-- Bluetooth Tethering settings. Error message shown when trying to connect an 8th device [CHAR LIMIT=50]-->
     <string name="bluetooth_tethering_overflow_error">Can\u2019t tether to more than <xliff:g id="maxConnection">%1$d</xliff:g> devices.</string>
     <!-- Bluetooth Tethering settings.  Message for untethering from a bluetooth device [CHAR LIMIT=50]-->
     <string name="bluetooth_untether_blank"><xliff:g id="device_name">%1$s</xliff:g> will be untethered.</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
-    <string name="tethering_footer_info">Use hotspot and tethering to provide Internet to other devices through your mobile data connection.</string>
+    <string name="tethering_footer_info">Use hotspot and tethering to provide Internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
 
     <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
