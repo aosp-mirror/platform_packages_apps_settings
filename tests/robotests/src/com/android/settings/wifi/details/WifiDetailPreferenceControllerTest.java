@@ -195,9 +195,9 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockConnectionDetailPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_BUTTONS_PREF))
                 .thenReturn(mockButtonsPref);
-        when(mockButtonsPref.findViewById(R.id.left_button))
+        when(mockButtonsPref.findViewById(R.id.forget_button))
                 .thenReturn(mockForgetButton);
-        when(mockButtonsPref.findViewById(R.id.right_button))
+        when(mockButtonsPref.findViewById(R.id.signin_button))
                 .thenReturn(mockSignInButton);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
                 .thenReturn(mockSignalStrengthPref);
