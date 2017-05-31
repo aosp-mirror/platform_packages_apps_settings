@@ -1854,7 +1854,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"ໃຊ້ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> ຕ້ອງການ:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"ເພາະ​ວ່າ​ແອັບຯ​ກຳ​ລັງ​ຂັດ​ຂວາງ​ການ​ຂໍ​ອະ​ນຸ​ຍາດ, ການ​ຕັ້ງ​ຄ່າ​ບໍ່​ສາ​ມາດກວດ​ສອບ​ການ​ຕອບ​ຮັບ​ຂອງ​ທ່ານ​ໄດ້."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"ເນື່ອງຈາກແອັບອື່ນກຳລັງສະແດງຜົນບັງຕົວເລືອກເຫຼົ່ານີ້, ການຕັ້ງຄ່າຈຶ່ງບໍ່ສາມາດຕອບສະໜອງຄຳສັ່ງຂອງທ່ານໄດ້."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"ຫາກ​ທ່ານ​ເປີດ​ໃຊ້ <xliff:g id="SERVICE">%1$s</xliff:g>, ​ອຸ​ປະ​ກອນ​ຂອງ​ທ່ານ​ຈະ​ບໍ່​ໃຊ້​ການ​ລັອກ​ໜ້າ​ຈໍ​ຂອງ​ທ່ານ​ເພື່ອ​ເພີ່ມ​ການ​ເຂົ້າ​ລະ​ຫັດ​ຂໍ້​ມູນ."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"​ເນື່ອງ​ຈາກ​ທ່ານ​ໄດ້​ເປີດ​ບໍ​ລິ​ການ​ການ​ຊ່ວຍ​ການ​ເຂົ້າ​ເຖິງ, ອຸ​ປະ​ກອນ​ຂອງ​ທ່ານ​ຈະ​ບໍ່​ໃຊ້​ການ​ລັອກ​ໜ້າ​ຈໍ​ຂອງ​ທ່ານ​ເພື່ອ​ເພີ່ມ​ການ​ເຂົ້າ​ລະ​ຫັດ​ຂໍ້​ມູນ."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"ເພາະ​ວ່າ​ການ​ເປີດ <xliff:g id="SERVICE">%1$s</xliff:g> ມີ​ຜົນ​ຕໍ່​ການ​ເຂົ້າ​ລະ​ຫັດ, ​ທ່ານ​ຈຶ່ງ​ຈຳ​ຕ້ອງ​ຢືນ​ຢັນ​ຮູບ​ແບບ​ການ​ລັອກ​ຂອງ​ທ່ານ."</string>
@@ -1914,6 +1913,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"ການສະແກນເຄືອຂ່າຍມືຖື"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> ກ່ອນ"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"ການນຳໃຊ້ແອັບຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ (<xliff:g id="TIME">^1</xliff:g> ກ່ອນ)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"ການນຳໃຊ້ອຸປະກອນຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ (<xliff:g id="TIME">^1</xliff:g> ກ່ອນ)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"ໄລຍະເວລາທີ່ໜ້າຈໍເປີດຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"ການນຳໃຊ້ອຸປະກອນຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"ການນຳໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ຖອດສາຍສາກ"</string>
@@ -2005,8 +2005,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"ການໃຊ້ພະລັງງານທີ່ຄິດໄລ່ເກີນ"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"ໃຊ້ເປັນເວລາ <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"ການນຳໃຊ້ໜ້າຈໍ <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> ໃຊ້ໄປແລ້ວໂດຍ <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> ຂອງແບັດເຕີຣີໂດຍຮວມ"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"ວິເຄາະນັບຕັ້ງແຕ່ສາກເຕັມຫຼ້າສຸດ"</string>
@@ -2779,7 +2778,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"ການແຈ້ງເຕືອນ"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"​ຂັ້ນ​ສູງ"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"ການແຈ້ງເຕືອນວຽກ"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"ອະນຸຍາດປ້າຍໄອຄອນ"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"ກະພິບໄຟ"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"ຢູ່ໜ້າຈໍລັອກ"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"ສະແດງ​ເນື້ອຫາ​ການແຈ້ງເຕືອນ​ທັງໝົດ"</string>
@@ -2854,14 +2854,16 @@
       <item quantity="other">ລຶບ <xliff:g id="COUNT_1">%d</xliff:g> ໝວດໝູ່ອອກແລ້ວ</item>
       <item quantity="one">ລຶບ <xliff:g id="COUNT_0">%d</xliff:g> ໝວດໝູ່ອອກແລ້ວ</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"ປ້າຍການແຈ້ງເຕືອນ"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"ເປີດ"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"ປິດ"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"ບ​ລັອກ​ທັງ​ໝົດ"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"ຢ່າສະແດງການແຈ້ງເຕືອນເຫຼົ່ານີ້ອີກ"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"ສະແດງການແຈ້ງເຕືອນ"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"ຢ່າສະແດງການແຈ້ງເຕືອນໃນເງົາ ຫຼື ອຸປະກອນຕໍ່ພ່ວງອີກ."</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"ອະນຸຍາດປ້າຍໄອຄອນ"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"ຍົກເລີກຫ້າມລົບກວນ"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"ອະນຸຍາດ​ໃຫ້ການ​ແຈ້ງ​ເຕືອນ​​ເຫຼົ່າ​ນີ້​ສືບ​ຕໍ່​ຂັດ​ຈັງຫວະ ​ເມື່ອຄຸນສົມບັດ ຫ້າມ​ລົບ​ກວນ ຖືກ​ຕັ້ງ​ເປັນແບບບຸລິ​ມະ​ສິດ​ເທົ່າ​ນັ້ນ"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"ຢູ່ໜ້າຈໍລັອກ"</string>
@@ -3094,8 +3096,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"ການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"ການແຈ້ງເຕືອນການນຳໃຊ້"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"ສະແດງແອັບທັງໝົດ"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"ເຊື່ອງແອັບເພີ່ມເຕີມ"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"ສະແດງການນຳໃຊ້ແອັບແບບເຕັມ"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"ສະແດງການນຳໃຊ້ແອັບ"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ບໍ່ໄດ້ປັບໃຫ້ເໝາະສົມ"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ບໍ່ໄດ້ປັບໃຫ້ເໝາະສົມ"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ກຳລັງປັບການໃຊ້ແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
