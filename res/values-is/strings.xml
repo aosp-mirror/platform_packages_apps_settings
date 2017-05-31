@@ -1854,7 +1854,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Nota <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> þarf að:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Stillingar geta ekki staðfest svarið þitt vegna þess að forrit er að fela heimildarbeiðni."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"Stillingar geta ekki brugðist við aðgerðinni því að annað forrit er birt yfir þessum valkostum."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ef þú kveikir á <xliff:g id="SERVICE">%1$s</xliff:g> mun tækið ekki nota skjálásinn til að efla dulkóðun gagna."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Þar sem þú hefur kveikt á aðgengisþjónustu mun tækið ekki nota skjálásinn til að efla dulkóðun gagna."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Ef <xliff:g id="SERVICE">%1$s</xliff:g> er gert virkt hefur það áhrif á dulkóðun gagna og því þarftu að staðfesta mynstrið þitt."</string>
@@ -1914,6 +1913,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"Leit að farsímaneti"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"fyrir <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"Notkun forrita frá fullri hleðslu (fyrir <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Notkun tækis frá fullri hleðslu (fyrir <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Liðinn tími frá síðustu fullu hleðslu"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Tækjanotkun frá síðustu fullu hleðslu"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Rafhlöðunotkun frá síðustu hleðslu"</string>
@@ -2005,8 +2005,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Oftalin orkunotkun"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Notað fyrir <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"Skjánotkun <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> notuð af <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> af heildarrafhlöðuorku"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Greining frá síðustu fullu hleðslu"</string>
@@ -2779,7 +2778,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Tilkynningar"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Ítarlegt"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Vinnutilkynningar"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"Leyfa merkingu á skjöldum"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikkandi ljós"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Á lásskjá"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Sýna allt innihald tilkynninga"</string>
@@ -2854,14 +2854,16 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> flokki eytt</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> flokkum eytt</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"Tilkynningaskildir"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"Kveikt"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"Slökkt"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Útiloka allt"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Aldrei sýna þessar tilkynningar"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Sýna tilkynningar"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Aldrei sýna tilkynningar í skugga eða á jaðartækjum"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Leyfa merkingu á tákni"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Hnekkja „Ónáðið ekki“"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Láta þessar tilkynningar halda áfram að trufla þegar „Ónáðið ekki“ er stillt á „Aðeins forgangur“"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Á lásskjá"</string>
@@ -3094,8 +3096,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Rafhlöðusparnaður"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Notkunartilkynningar"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"Sýna öll forrit"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"Fela aukaforrit"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Sýna alla notkun tækis"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Sýna forritanotkun"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Enginn sparnaður"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Enginn sparnaður"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Sparar rafhlöðunotkun"</string>

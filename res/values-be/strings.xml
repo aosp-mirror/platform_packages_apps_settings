@@ -1895,7 +1895,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Выкарыстоўваць службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> патрабуе:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Паверх запыту дазволу адлюстроўваецца дадатак, таму ваш адказ не можа быць правераны ў Наладах."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"Іншая праграма адлюстроўваецца паверх гэтых опцый, таму налады не адказваюць на ваша дзеянне."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Калі вы ўключыце <xliff:g id="SERVICE">%1$s</xliff:g>, прылада не будзе выкарыстоўваць блакіроўку экрана для паляпшэння шыфравання даных."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Вы ўключылі службу доступу, таму ваша прылада не будзе выкарыстоўваць блакіроўку экрана для паляпшэння шыфравання даных."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Уключэнне <xliff:g id="SERVICE">%1$s</xliff:g> уплывае на шыфраванне даных, таму вы павінны пацвердзіць свой графічны ключ."</string>
@@ -1957,6 +1956,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"Сканіраванне мабільнай сеткі"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> таму"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"Спажыванне праграмамі з моманту поўнай зарадкі (<xliff:g id="TIME">^1</xliff:g> таму)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Спажыванне прыладай з моманту поўнай зарадкі (<xliff:g id="TIME">^1</xliff:g> таму)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Колькасць часу, калі экран быў уключаны, з моманту поўнай зарадкі"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Выкарыстанне прылады з моманту поўнай зарадкі"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Выкарыстанне акумулятару з моманту адключэння"</string>
@@ -2048,8 +2048,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Няўлічанае спажыванне энергіі"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мАг"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Выкарыстана на працягу <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"Выкарыстанне экрана: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> выкарыстана праграмай <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> ад усяго зараду"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Разбіўка з моманту апошняй поўнай зарадкі"</string>
@@ -2834,7 +2833,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Апавяшчэнні"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Пашыраныя"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Апавяшчэнні працоўнага профілю"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"Дазволіць паказваць паметкі на значку"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Мігценне святла"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"На экране блакіроўкі"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Паказваць усё змесціва ў апавяшчэннях"</string>
@@ -2915,14 +2915,16 @@
       <item quantity="many">Выдалены <xliff:g id="COUNT_1">%d</xliff:g> катэгорый</item>
       <item quantity="other">Выдалены <xliff:g id="COUNT_1">%d</xliff:g> катэгорыі</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"Мадыфікатары значка ў якасці апавяшч-няў"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"Уключаны"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"Адключаны"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блакіраваць усё"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Ніколі не паказваць гэтыя апавяшчэнні"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Паказваць апавяшчэнні"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Ніколі не паказваць апавяшчэнні на \"шторцы\" або на перыферыйных прыладах"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Дазволіць паказваць паметкі на значку"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ігнараваць рэжым «Не турбаваць»"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Паказваць гэтыя апавяшчэнні, калі ў рэжыме «Не турбаваць» выбрана «Толькі прыярытэтныя»"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"На экране блакіроўкі"</string>
@@ -3168,8 +3170,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Аптымізацыя акумулятара"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Абвесткі аб выкарыстанні"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"Паказваць усе праграмы"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"Не паказваць дадатк. праграмы"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Паказаць поўнае выкарыстанне прылады"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Паказаць спажыванне праграмамі"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Не аптымізаваныя"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Не аптымізавана"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Аптымізацыя выкарыстання акумулятара"</string>

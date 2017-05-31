@@ -1854,7 +1854,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>에 필요한 기능:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"권한 요청을 보이지 않게 하는 앱이 있어서 설정에서 내 응답을 확인할 수 없습니다."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"다른 앱이 이 옵션 위에 표시되므로 설정에서 내 작업에 응답할 수 없습니다."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용 설정하면 기기에서 데이터 암호화를 개선하기 위해 화면 잠금을 사용하지 않습니다."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"접근성 서비스를 사용 설정했으므로 기기에서 데이터 암호화를 개선하기 위해 화면 잠금을 사용하지 않습니다."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용 설정하면 데이터 암호화에 영향을 주기 때문에 패턴 확인이 필요합니다."</string>
@@ -1914,6 +1913,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"모바일 네트워크 검색"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> 전"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"충전 완료(<xliff:g id="TIME">^1</xliff:g> 전) 후 앱 사용"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"충전 완료 후 기기 사용(<xliff:g id="TIME">^1</xliff:g> 전)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"충전 완료 후 화면이 켜진 시간"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"충전 완료 후 기기 사용"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"플러그를 뽑은 이후 배터리 전원 사용"</string>
@@ -2005,8 +2005,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"전력 사용량 과다 산정됨"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> 사용됨"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"화면 사용 시간: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g>에서 <xliff:g id="PERCENT">%1$s</xliff:g> 사용"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"전체 배터리 사용량의 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"마지막 충전 완료 후 사용 내역 분석"</string>
@@ -2779,7 +2778,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"알림"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"고급"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"직장 알림"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"아이콘 배지 허용"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"표시등이 깜박거림"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"잠금 화면에서"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"모든 알림 내용 표시"</string>
@@ -2854,14 +2854,16 @@
       <item quantity="other">카테고리 <xliff:g id="COUNT_1">%d</xliff:g>개 삭제됨</item>
       <item quantity="one">카테고리 <xliff:g id="COUNT_0">%d</xliff:g>개 삭제됨</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"알림 배지"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"사용"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"사용 안함"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"모두 차단"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"이러한 알림을 다시 표시하지 않음"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"알림 표시"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"알림을 창이나 주변기기에 표시하지 않음"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"아이콘 배지 허용"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"알림 일시중지 무시"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"알림 일시중지가 중요 알림만으로 설정된 경우 이러한 알림을 계속 받도록 허용"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"잠금 화면에서"</string>
@@ -3094,8 +3096,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g>(<xliff:g id="COUNT">%2$d</xliff:g>개)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"배터리 최적화"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"배터리 사용량 알림"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"모든 앱 표시"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"추가 앱 숨기기"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"전체 기기 사용 정보 표시"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"앱 사용 정보 표시"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"최적화되지 않음"</string>
     <string name="high_power_on" msgid="6216293998227583810">"최적화되지 않음"</string>
     <string name="high_power_off" msgid="3393904131961263278">"배터리 최적화 사용"</string>
