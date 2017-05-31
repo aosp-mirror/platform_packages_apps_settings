@@ -24,6 +24,7 @@ import android.view.View;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ApplicationFeatureProvider {
 
@@ -92,6 +93,11 @@ public interface ApplicationFeatureProvider {
      * then by package name
      */
     List<UserAppInfo> findPersistentPreferredActivities(@UserIdInt int userId, Intent[] intents);
+
+    /**
+     * Returns a list of package names that should be kept enabled.
+     */
+    Set<String> getKeepEnabledPackages();
 
     /**
      * Callback that receives the number of packages installed on the device.
