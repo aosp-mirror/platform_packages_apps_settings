@@ -83,7 +83,7 @@ public class MusicViewHolderControllerTest {
     @Test
     public void storageShouldRepresentStorageStatsQuery() throws Exception {
         when(mSource.getExternalStorageStats(any(String.class), any(UserHandle.class))).thenReturn(
-                new StorageStatsSource.ExternalStorageStats(1, 1, 0, 0));
+                new StorageStatsSource.ExternalStorageStats(1, 1, 0, 0, 0));
 
         mController.queryStats();
         mController.setupView(mHolder);
