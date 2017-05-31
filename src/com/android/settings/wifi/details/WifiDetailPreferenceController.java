@@ -224,7 +224,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mConnectionDetailPref = screen.findPreference(KEY_CONNECTION_DETAIL_PREF);
 
         mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
-        mSignInButton = (Button) mButtonsPref.findViewById(R.id.right_button);
+        mSignInButton = (Button) mButtonsPref.findViewById(R.id.signin_button);
         mSignInButton.setText(R.string.support_sign_in_button_text);
         mSignInButton.setOnClickListener(
             view -> mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork));
@@ -245,7 +245,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
                 (PreferenceCategory) screen.findPreference(KEY_IPV6_ADDRESS_CATEGORY);
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
-        mForgetButton = (Button) mButtonsPref.findViewById(R.id.left_button);
+        mForgetButton = (Button) mButtonsPref.findViewById(R.id.forget_button);
         mForgetButton.setText(R.string.forget);
         mForgetButton.setOnClickListener(view -> forgetNetwork());
         updateInfo();

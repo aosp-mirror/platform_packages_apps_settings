@@ -38,7 +38,7 @@ public class AssistGestureSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+        return MetricsProto.MetricsEvent.SETTINGS_ASSIST_GESTURE;
     }
 
     @Override

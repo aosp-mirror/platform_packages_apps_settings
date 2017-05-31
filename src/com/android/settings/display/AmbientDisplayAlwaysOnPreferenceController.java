@@ -27,22 +27,23 @@ import android.support.v7.preference.Preference;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.core.PreferenceController;
 
-public class DozeAlwaysOnPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class AmbientDisplayAlwaysOnPreferenceController extends PreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_DOZE_ALWAYS_ON = "doze_always_on";
+    private static final String KEY_ALWAYS_ON = "ambient_display_always_on";
     private static final int MY_USER = UserHandle.myUserId();
 
     private final AmbientDisplayConfiguration mConfig;
 
-    public DozeAlwaysOnPreferenceController(Context context, AmbientDisplayConfiguration config) {
+    public AmbientDisplayAlwaysOnPreferenceController(Context context,
+            AmbientDisplayConfiguration config) {
         super(context);
         mConfig = config;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_DOZE_ALWAYS_ON;
+        return KEY_ALWAYS_ON;
     }
 
     @Override

@@ -16,6 +16,10 @@
 
 package com.android.settings.applications;
 
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.nullable;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -34,10 +38,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -66,11 +66,11 @@ public class DrawOverlayDetailsTest {
     public void logSpecialPermissionChange() {
         mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
         mFragment.logSpecialPermissionChange(true, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW), eq("app"));
 
         mFragment.logSpecialPermissionChange(false, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY), eq("app"));
     }
 

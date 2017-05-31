@@ -18,10 +18,9 @@ package com.android.settings.fuelgauge.anomaly.checker;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -101,9 +100,10 @@ public class WakeLockAnomalyDetectorTest {
         mContext = spy(RuntimeEnvironment.application);
         ReflectionHelpers.setField(mPolicy, "wakeLockThreshold", WAKELOCK_THRESHOLD_MS);
 
-        doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
+        doReturn(false).when(mBatteryUtils).shouldHideSipper(nullable(BatterySipper.class));
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(anyString(), anyInt());
+        doReturn(mApplicationInfo).when(mPackageManager)
+                .getApplicationInfo(nullable(String.class), anyInt());
 
         mAnomalySipper.uidObj = mAnomalyUid;
         mAnomalyWakelocks = new ArrayMap<>();

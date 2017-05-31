@@ -15,19 +15,16 @@
  */
 package com.android.settings.widget;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.widget.SingleLineSummaryPreference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,25 +33,30 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class SingleLineSummaryPreferenceTest {
+public class FixedLineSummaryPreferenceTest {
 
-    @Mock private TextView mSummary;
+    @Mock
+    private TextView mSummary;
 
     private Context mContext;
     private PreferenceViewHolder mHolder;
-    private SingleLineSummaryPreference mPreference;
+    private FixedLineSummaryPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mPreference = new SingleLineSummaryPreference(mContext, null);
+        mPreference = new FixedLineSummaryPreference(mContext, null);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(mPreference.getLayoutResource(),
-            new LinearLayout(mContext), false);
+                new LinearLayout(mContext), false);
         mHolder = spy(PreferenceViewHolder.createInstanceForTests(view));
         when(mHolder.findViewById(android.R.id.summary)).thenReturn(mSummary);
     }
@@ -62,8 +64,17 @@ public class SingleLineSummaryPreferenceTest {
     @Test
     public void onBindViewHolder_shouldSetSingleLine() {
         mPreference.onBindViewHolder(mHolder);
-        final TextView summary = (TextView) mHolder.findViewById(android.R.id.summary);
 
-        verify(mSummary).setSingleLine();
+        verify(mSummary).setMinLines(1);
+        verify(mSummary).setMaxLines(1);
+    }
+
+    @Test
+    public void onBindViewHolder_TwoLineSummary_shouldSetTwoLines() {
+        mPreference.setSummaryLineCount(2);
+        mPreference.onBindViewHolder(mHolder);
+
+        verify(mSummary).setMinLines(2);
+        verify(mSummary).setMaxLines(2);
     }
 }

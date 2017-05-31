@@ -33,19 +33,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.SearchIndexableResource;
 import android.util.ArrayMap;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search.DatabaseIndexingManager;
-import com.android.settings.search.IndexDatabaseHelper;
-import com.android.settings.search.IndexingCallback;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.ResultPayloadUtils;
-import com.android.settings.search.SearchFeatureProviderImpl;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.shadow.ShadowDatabaseIndexingUtils;
 import com.android.settings.testutils.shadow.ShadowRunnableAsyncTask;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -140,7 +135,7 @@ public class DatabaseIndexingManagerTest {
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb();
+        DatabaseTestUtils.clearDb(mContext);
     }
 
     @Test
@@ -263,7 +258,7 @@ public class DatabaseIndexingManagerTest {
         SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(19);
+        assertThat(cursor.getCount()).isEqualTo(16);
     }
 
     @Test
@@ -278,7 +273,7 @@ public class DatabaseIndexingManagerTest {
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
         assertThat(cursor.getCount()).isEqualTo(2);
         cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(17);
+        assertThat(cursor.getCount()).isEqualTo(14);
     }
 
     @Test

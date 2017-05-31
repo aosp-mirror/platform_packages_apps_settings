@@ -16,6 +16,10 @@
 
 package com.android.settings.applications;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -32,10 +36,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -60,17 +60,17 @@ public class PremiumSmsAccessTest {
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER,
                 "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK), eq("app"));
 
         mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW,
                 "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY), eq("app"));
 
         mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW,
                 "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW),
                 eq("app"));
     }

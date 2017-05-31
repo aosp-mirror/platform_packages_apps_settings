@@ -59,6 +59,8 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
         mPlaceholderSummary = view.getContext().getString(R.string.summary_placeholder);
     }
 
+    public abstract int getClickActionMetricName();
+
     public void onBind(SearchFragment fragment, SearchResult result) {
         titleView.setText(result.title);
         if (TextUtils.isEmpty(result.summary)

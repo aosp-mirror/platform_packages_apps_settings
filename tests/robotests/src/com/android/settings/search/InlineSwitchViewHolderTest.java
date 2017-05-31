@@ -19,10 +19,8 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Pair;
 import android.view.LayoutInflater;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -42,8 +40,6 @@ import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -98,10 +94,6 @@ public class InlineSwitchViewHolderTest {
 
         mHolder.switchView.performClick();
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_INLINE_RESULT),
-                any(Pair.class), any(Pair.class), any(Pair.class));
         assertThat(mHolder.titleView.getText()).isEqualTo(TITLE);
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.iconView.getDrawable()).isEqualTo(mIcon);

@@ -66,6 +66,10 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         Intent intent = getIntent();
         String title = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         String details = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
+        String alternateButton = intent.getStringExtra(
+                KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
+        boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
+
         int userId = Utils.getCredentialOwnerUserId(this);
         if (isInternalActivity()) {
             try {
@@ -86,7 +90,9 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         // If the target is a managed user and user key not unlocked yet, we will force unlock
         // tied profile so it will enable work mode and unlock managed profile, when personal
         // challenge is unlocked.
-        if (isManagedProfile && isInternalActivity()
+        if (frp) {
+            launched = helper.launchFrpConfirmationActivity(0, title, details, alternateButton);
+        } else if (isManagedProfile && isInternalActivity()
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(userId)) {
             // We set the challenge as 0L, so it will force to unlock managed profile when it
             // unlocks primary profile screen lock, by calling verifyTiedProfileChallenge()

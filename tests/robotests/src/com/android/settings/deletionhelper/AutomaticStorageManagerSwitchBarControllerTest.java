@@ -71,6 +71,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
         mSwitchBar = new SwitchBar(mContext);
 
         Context fakeContextForFakeProvider = mock(Context.class, RETURNS_DEEP_STUBS);
+        FakeFeatureFactory.setupForTest(fakeContextForFakeProvider);
         FeatureFactory featureFactory = FakeFeatureFactory.getFactory(fakeContextForFakeProvider);
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mPreference = new Preference(mContext);

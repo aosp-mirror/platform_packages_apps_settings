@@ -24,6 +24,7 @@ import android.content.Context;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -43,6 +44,7 @@ public class ForceStopActionTest {
     private Context mContext;
     @Mock
     private ActivityManager mActivityManager;
+    private Anomaly mAnomaly;
     private ForceStopAction mForceStopAction;
 
     @Before
@@ -52,12 +54,15 @@ public class ForceStopActionTest {
         FakeFeatureFactory.setupForTest(mContext);
         doReturn(mActivityManager).when(mContext).getSystemService(Context.ACTIVITY_SERVICE);
 
+        mAnomaly = new Anomaly.Builder()
+                .setPackageName(PACKAGE_NAME)
+                .build();
         mForceStopAction = new ForceStopAction(mContext);
     }
 
     @Test
     public void testHandlePositiveAction_forceStopPackage() {
-        mForceStopAction.handlePositiveAction(PACKAGE_NAME, 0 /* metricskey */);
+        mForceStopAction.handlePositiveAction(mAnomaly, 0 /* metricskey */);
 
         verify(mActivityManager).forceStopPackage(PACKAGE_NAME);
     }

@@ -59,7 +59,7 @@ public class SavedQueryLoaderTest {
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb();
+        DatabaseTestUtils.clearDb(mContext);
     }
 
     @Test

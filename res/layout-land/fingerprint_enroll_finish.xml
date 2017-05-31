@@ -20,6 +20,7 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout="@layout/suw_glif_blank_template"
     style="?attr/fingerprint_layout_theme">
 
     <LinearLayout
@@ -28,17 +29,33 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:clipToPadding="false"
-        android:clipChildren="false"
-        android:paddingBottom="0dp">
+        android:clipChildren="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="match_parent"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/suw_layout_icon"
+                style="@style/SuwGlifIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_fingerprint_header"/>
+
+            <TextView
+                android:id="@+id/suw_layout_title"
+                style="@style/SuwGlifHeaderTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"/>
 
             <TextView
                 android:id="@+id/message"
@@ -56,6 +73,11 @@
                 android:text="@string/setup_fingerprint_enroll_finish_message_secondary"
                 android:textColor="?android:attr/textColorSecondary"
                 android:visibility="gone" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,21 +111,20 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <com.android.setupwizardlib.view.FillContentLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/fingerprint_in_app_indicator"
-                android:layout_width="@dimen/fingerprint_in_app_indicator_size"
-                android:layout_height="@dimen/fingerprint_in_app_indicator_size"
-                android:layout_gravity="center_horizontal"
+                style="@style/SuwContentIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:contentDescription="@android:string/fingerprint_icon_content_description"
                 android:src="@drawable/fp_app_indicator" />
 
-        </FrameLayout>
+        </com.android.setupwizardlib.view.FillContentLayout>
 
     </LinearLayout>
 

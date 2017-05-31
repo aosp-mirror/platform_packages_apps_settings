@@ -80,7 +80,7 @@ public class SiteMapManagerTest {
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb();
+        DatabaseTestUtils.clearDb(mContext);
     }
 
     @Test

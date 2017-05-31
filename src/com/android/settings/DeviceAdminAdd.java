@@ -40,6 +40,7 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -65,8 +66,6 @@ import com.android.settings.R;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.SecureTouchListener;
-
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -92,6 +91,7 @@ public class DeviceAdminAdd extends Activity {
     public static final String EXTRA_CALLED_FROM_SUPPORT_DIALOG =
             "android.app.extra.CALLED_FROM_SUPPORT_DIALOG";
 
+    private final IBinder mToken = new Binder();
     Handler mHandler;
 
     DevicePolicyManager mDPM;
@@ -120,8 +120,6 @@ public class DeviceAdminAdd extends Activity {
     boolean mWaitingForRemoveMsg;
     boolean mAddingProfileOwner;
     boolean mAdminPoliciesInitialized;
-    int mCurSysAppOpMode;
-    int mCurToastAppOpMode;
 
     boolean mIsCalledFromSupportDialog = false;
 
@@ -352,10 +350,11 @@ public class DeviceAdminAdd extends Activity {
 
         final View restrictedAction = findViewById(R.id.restricted_action);
         restrictedAction.setFilterTouchesWhenObscured(true);
-        restrictedAction.setOnTouchListener(
-                new SecureTouchListener(getString(R.string.window_obscured_warning)));
         restrictedAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (!mActionButton.isEnabled()) {
+                    return;
+                }
                 if (mAdding) {
                     addAndFinish();
                 } else if (isManagedProfile(mDeviceAdmin)
@@ -477,24 +476,21 @@ public class DeviceAdminAdd extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        mActionButton.setEnabled(true);
         updateInterface();
-        // As long as we are running, don't let this admin overlay stuff on top of the screen.
-        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
-        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
-        mCurSysAppOpMode = mAppOps.checkOp(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg);
-        mCurToastAppOpMode = mAppOps.checkOp(AppOpsManager.OP_TOAST_WINDOW, uid, pkg);
-        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
-        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
+        // As long as we are running, don't let anyone overlay stuff on top of the screen.
+        mAppOps.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, true, mToken);
+        mAppOps.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW, true, mToken);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // As long as we are running, don't let this admin overlay stuff on top of the screen.
-        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
-        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
-        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, mCurSysAppOpMode);
-        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, mCurToastAppOpMode);
+        // This just greys out the button. The actual listener is attached to R.id.restricted_action
+        mActionButton.setEnabled(false);
+        mAppOps.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, false, mToken);
+        mAppOps.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW, false, mToken);
         try {
             ActivityManager.getService().resumeAppSwitches();
         } catch (RemoteException e) {

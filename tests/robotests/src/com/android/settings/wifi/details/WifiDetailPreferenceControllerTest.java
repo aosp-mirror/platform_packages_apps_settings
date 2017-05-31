@@ -17,6 +17,7 @@ package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
@@ -158,7 +159,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockConnectivityManager.getNetworkInfo(any(Network.class)))
                 .thenReturn(mockNetworkInfo);
         doNothing().when(mockConnectivityManagerWrapper).registerNetworkCallback(
-                any(NetworkRequest.class), mCallbackCaptor.capture(), any(Handler.class));
+                nullable(NetworkRequest.class), mCallbackCaptor.capture(), nullable(Handler.class));
         doNothing().when(mockForgetButton).setOnClickListener(mForgetClickListener.capture());
 
         when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
@@ -195,9 +196,9 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockConnectionDetailPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_BUTTONS_PREF))
                 .thenReturn(mockButtonsPref);
-        when(mockButtonsPref.findViewById(R.id.left_button))
+        when(mockButtonsPref.findViewById(R.id.forget_button))
                 .thenReturn(mockForgetButton);
-        when(mockButtonsPref.findViewById(R.id.right_button))
+        when(mockButtonsPref.findViewById(R.id.signin_button))
                 .thenReturn(mockSignInButton);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
                 .thenReturn(mockSignalStrengthPref);
@@ -254,7 +255,7 @@ public class WifiDetailPreferenceControllerTest {
         mController.onResume();
 
         verify(mockConnectivityManagerWrapper, times(1)).registerNetworkCallback(
-                any(NetworkRequest.class), mCallbackCaptor.capture(), any(Handler.class));
+                nullable(NetworkRequest.class), mCallbackCaptor.capture(), nullable(Handler.class));
     }
 
     @Test

@@ -103,4 +103,10 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
             int userId) {
         mPm.deletePackageAsUser(packageName, observer, flags, userId);
     }
+
+    @Override
+    public int getPackageUidAsUser(String pkg, int userId)
+            throws PackageManager.NameNotFoundException {
+        return mPm.getPackageUidAsUser(pkg, userId);
+    }
 }

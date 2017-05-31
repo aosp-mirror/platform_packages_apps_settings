@@ -27,18 +27,18 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
-public class DozePreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class AmbientDisplayNotificationsPreferenceController extends PreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     @VisibleForTesting
-    static final String KEY_DOZE = "doze";
+    static final String KEY_AMBIENT_DISPLAY_NOTIFICATIONS = "ambient_display_notification";
     private static final int MY_USER = UserHandle.myUserId();
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final AmbientDisplayConfiguration mConfig;
 
-    public DozePreferenceController(Context context, AmbientDisplayConfiguration config,
-            MetricsFeatureProvider metricsFeatureProvider) {
+    public AmbientDisplayNotificationsPreferenceController(Context context,
+            AmbientDisplayConfiguration config, MetricsFeatureProvider metricsFeatureProvider) {
         super(context);
         mMetricsFeatureProvider = metricsFeatureProvider;
         mConfig = config;
@@ -46,12 +46,12 @@ public class DozePreferenceController extends PreferenceController implements
 
     @Override
     public String getPreferenceKey() {
-        return KEY_DOZE;
+        return KEY_AMBIENT_DISPLAY_NOTIFICATIONS;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_DOZE.equals(preference.getKey())) {
+        if (KEY_AMBIENT_DISPLAY_NOTIFICATIONS.equals(preference.getKey())) {
             mMetricsFeatureProvider.action(mContext, ACTION_AMBIENT_DISPLAY);
         }
         return false;

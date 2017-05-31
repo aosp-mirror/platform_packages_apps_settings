@@ -25,12 +25,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.IActivityManager;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.UserInfo;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -39,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -70,6 +73,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     public static final String SHOW_WHEN_LOCKED =
             PACKAGE + ".ConfirmCredentials.showWhenLocked";
 
+    protected static final int USER_TYPE_PRIMARY = 1;
+    protected static final int USER_TYPE_MANAGED_PROFILE = 2;
+    protected static final int USER_TYPE_SECONDARY = 3;
+
     private FingerprintUiHelper mFingerprintHelper;
     protected boolean mReturnCredentials = false;
     protected Button mCancelButton;
@@ -78,20 +85,28 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected int mUserId;
     protected UserManager mUserManager;
     protected LockPatternUtils mLockPatternUtils;
+    protected DevicePolicyManager mDevicePolicyManager;
     protected TextView mErrorTextView;
     protected final Handler mHandler = new Handler();
+    protected boolean mFrp;
+    private CharSequence mFrpAlternateButtonText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFrpAlternateButtonText = getActivity().getIntent().getCharSequenceExtra(
+                KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
         mReturnCredentials = getActivity().getIntent().getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mFrp = (mUserId == LockPatternUtils.USER_FRP);
         mUserManager = UserManager.get(getActivity());
         mEffectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
         mLockPatternUtils = new LockPatternUtils(getActivity());
+        mDevicePolicyManager = (DevicePolicyManager) getActivity().getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
     }
 
     @Override
@@ -104,10 +119,18 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 (TextView) view.findViewById(R.id.errorText), this, mEffectiveUserId);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
-        mCancelButton.setVisibility(showCancelButton ? View.VISIBLE : View.GONE);
+        boolean hasAlternateButton = mFrp && !TextUtils.isEmpty(mFrpAlternateButtonText);
+        mCancelButton.setVisibility(showCancelButton || hasAlternateButton
+                ? View.VISIBLE : View.GONE);
+        if (hasAlternateButton) {
+            mCancelButton.setText(mFrpAlternateButtonText);
+        }
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (hasAlternateButton) {
+                    getActivity().setResult(KeyguardManager.RESULT_ALTERNATE);
+                }
                 getActivity().finish();
             }
         });
@@ -122,9 +145,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     }
 
     private boolean isFingerprintDisabledByAdmin() {
-        DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
-                Context.DEVICE_POLICY_SERVICE);
-        final int disabledFeatures = dpm.getKeyguardDisabledFeatures(null, mEffectiveUserId);
+        final int disabledFeatures =
+                mDevicePolicyManager.getKeyguardDisabledFeatures(null, mEffectiveUserId);
         return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
     }
 
@@ -132,15 +154,16 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     // credential. Otherwise, fingerprint can't unlock fbe/keystore through
     // verifyTiedProfileChallenge. In such case, we also wanna show the user message that
     // fingerprint is disabled due to device restart.
-    protected boolean isFingerprintDisallowedByStrongAuth() {
-        return !(mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
-                && mUserManager.isUserUnlocked(mUserId));
+    protected boolean isStrongAuthRequired() {
+        return mFrp
+                || !mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
+                || !mUserManager.isUserUnlocked(mUserId);
     }
 
     private boolean isFingerprintAllowed() {
         return !mReturnCredentials
                 && getActivity().getIntent().getBooleanExtra(ALLOW_FP_AUTHENTICATION, false)
-                && !isFingerprintDisallowedByStrongAuth()
+                && !isStrongAuthRequired()
                 && !isFingerprintDisabledByAdmin();
     }
 
@@ -158,10 +181,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 mFingerprintHelper.stopListening();
             }
         }
-        if (isProfileChallenge()) {
-            updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(
-                    mEffectiveUserId));
-        }
+        updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
     }
 
     protected void setAccessibilityTitle(CharSequence supplementalText) {
@@ -245,9 +265,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             mainContent.setPadding(0, 0, 0, 0);
         }
 
-        DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
-                Context.DEVICE_POLICY_SERVICE);
-        baseView.setBackground(new ColorDrawable(dpm.getOrganizationColorForUser(userId)));
+        baseView.setBackground(
+                new ColorDrawable(mDevicePolicyManager.getOrganizationColorForUser(userId)));
         ImageView imageView = (ImageView) baseView.findViewById(R.id.background_image);
         if (imageView != null) {
             Drawable image = getResources().getDrawable(R.drawable.work_challenge_background);
@@ -263,13 +282,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         }
     }
 
-    protected boolean isProfileChallenge() {
-        return mUserManager.isManagedProfile(mEffectiveUserId);
-    }
-
-    protected void reportSuccessfullAttempt() {
-        if (isProfileChallenge()) {
-            mLockPatternUtils.reportSuccessfulPasswordAttempt(mEffectiveUserId);
+    protected void reportSuccessfulAttempt() {
+        mLockPatternUtils.reportSuccessfulPasswordAttempt(mEffectiveUserId);
+        if (mUserManager.isManagedProfile(mEffectiveUserId)) {
             // Keyguard is responsible to disable StrongAuth for primary user. Disable StrongAuth
             // for work challenge only here.
             mLockPatternUtils.userPresent(mEffectiveUserId);
@@ -277,40 +292,73 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     }
 
     protected void reportFailedAttempt() {
-        if (isProfileChallenge()) {
-            // + 1 for this attempt.
-            updateErrorMessage(
-                    mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId) + 1);
-            mLockPatternUtils.reportFailedPasswordAttempt(mEffectiveUserId);
-        }
+        updateErrorMessage(
+                mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId) + 1);
+        mLockPatternUtils.reportFailedPasswordAttempt(mEffectiveUserId);
     }
 
     protected void updateErrorMessage(int numAttempts) {
         final int maxAttempts =
                 mLockPatternUtils.getMaximumFailedPasswordsForWipe(mEffectiveUserId);
-        if (maxAttempts > 0 && numAttempts > 0) {
-            int remainingAttempts = maxAttempts - numAttempts;
-            if (remainingAttempts == 1) {
-                // Last try
-                final String title = getActivity().getString(
-                        R.string.lock_profile_wipe_warning_title);
-                LastTryDialog.show(getFragmentManager(), title, getLastTryErrorMessage(),
-                        android.R.string.ok, false /* dismiss */);
-            } else if (remainingAttempts <= 0) {
-                // Profile is wiped
-                LastTryDialog.show(getFragmentManager(), null /* title */,
-                        R.string.lock_profile_wipe_content, R.string.lock_profile_wipe_dismiss,
-                        true /* dismiss */);
-            }
-            if (mErrorTextView != null) {
-                final String message = getActivity().getString(R.string.lock_profile_wipe_attempts,
-                        numAttempts, maxAttempts);
-                showError(message, 0);
-            }
+        if (maxAttempts <= 0 || numAttempts <= 0) {
+            return;
+        }
+
+        // Update the on-screen error string
+        if (mErrorTextView != null) {
+            final String message = getActivity().getString(
+                    R.string.lock_failed_attempts_before_wipe, numAttempts, maxAttempts);
+            showError(message, 0);
+        }
+
+        // Only show popup dialog before the last attempt and before wipe
+        final int remainingAttempts = maxAttempts - numAttempts;
+        if (remainingAttempts > 1) {
+            return;
+        }
+        final FragmentManager fragmentManager = getChildFragmentManager();
+        final int userType = getUserTypeForWipe();
+        if (remainingAttempts == 1) {
+            // Last try
+            final String title = getActivity().getString(
+                    R.string.lock_last_attempt_before_wipe_warning_title);
+            final int messageId = getLastTryErrorMessage(userType);
+            LastTryDialog.show(fragmentManager, title, messageId,
+                    android.R.string.ok, false /* dismiss */);
+        } else {
+            // Device, profile, or secondary user is wiped
+            final int messageId = getWipeMessage(userType);
+            LastTryDialog.show(fragmentManager, null /* title */, messageId,
+                    R.string.lock_failed_attempts_now_wiping_dialog_dismiss, true /* dismiss */);
         }
     }
 
-    protected abstract int getLastTryErrorMessage();
+    private int getUserTypeForWipe() {
+        final UserInfo userToBeWiped = mUserManager.getUserInfo(
+                mDevicePolicyManager.getProfileWithMinimumFailedPasswordsForWipe(mEffectiveUserId));
+        if (userToBeWiped == null || userToBeWiped.isPrimary()) {
+            return USER_TYPE_PRIMARY;
+        } else if (userToBeWiped.isManagedProfile()) {
+            return USER_TYPE_MANAGED_PROFILE;
+        } else {
+            return USER_TYPE_SECONDARY;
+        }
+    }
+
+    protected abstract int getLastTryErrorMessage(int userType);
+
+    private int getWipeMessage(int userType) {
+        switch (userType) {
+            case USER_TYPE_PRIMARY:
+                return R.string.lock_failed_attempts_now_wiping_device;
+            case USER_TYPE_MANAGED_PROFILE:
+                return R.string.lock_failed_attempts_now_wiping_profile;
+            case USER_TYPE_SECONDARY:
+                return R.string.lock_failed_attempts_now_wiping_user;
+            default:
+                throw new IllegalArgumentException("Unrecognized user type:" + userType);
+        }
+    }
 
     private final Runnable mResetErrorRunnable = new Runnable() {
         @Override
@@ -357,6 +405,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             DialogFragment dialog = new LastTryDialog();
             dialog.setArguments(args);
             dialog.show(from, TAG);
+            from.executePendingTransactions();
             return true;
         }
 

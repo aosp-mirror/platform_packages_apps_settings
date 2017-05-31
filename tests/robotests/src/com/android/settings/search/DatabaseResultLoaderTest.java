@@ -25,13 +25,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.DatabaseResultLoader;
-import com.android.settings.search.IndexDatabaseHelper;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.ResultPayloadUtils;
-import com.android.settings.search.SearchResult;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -45,7 +38,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -81,7 +77,7 @@ public class DatabaseResultLoaderTest {
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb();
+        DatabaseTestUtils.clearDb(mContext);
     }
 
     @Test
@@ -224,17 +220,19 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
-    public void testSpecialCaseTwoWords_firstWordMatches_ranksHigher() {
+    public void testSpecialCaseTwoWords_multipleResults() {
         final String caseOne = "Apple pear";
         final String caseTwo = "Banana apple";
         insertSpecialCase(caseOne);
         insertSpecialCase(caseTwo);
         DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "App", null);
-        List<? extends SearchResult> results = loader.loadInBackground();
-
-        assertThat(results.get(0).title).isEqualTo(caseOne);
-        assertThat(results.get(1).title).isEqualTo(caseTwo);
-        assertThat(results.get(0).rank).isLessThan(results.get(1).rank);
+        Set<? extends SearchResult> results = loader.loadInBackground();
+        Set<CharSequence> expectedTitles = new HashSet<>(Arrays.asList(caseOne, caseTwo));
+        Set<CharSequence> actualTitles = new HashSet<>();
+        for (SearchResult result : results) {
+            actualTitles.add(result.title);
+        }
+        assertThat(actualTitles).isEqualTo(expectedTitles);
     }
 
     private void insertSpecialCase(String specialCase) {

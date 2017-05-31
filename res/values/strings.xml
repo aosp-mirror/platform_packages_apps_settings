@@ -1099,6 +1099,9 @@
     <!-- Label for button in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
     <string name="setup_lock_settings_options_button_label">Screen lock options</string>
 
+    <!-- Title for dialog in screen lock settings, allowing users to choose other types of screen locks. [CHAR LIMIT=40] -->
+    <string name="setup_lock_settings_options_dialog_title">Screen lock options</string>
+
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_title">Screen lock</string>
@@ -1240,20 +1243,38 @@
     <!-- Title shown on security settings to allow the user to change their lockscreen password [CHAR LIMIT=22]-->
     <string name="unlock_change_lock_password_title">Change unlock password</string>
 
-    <!-- Message shown when the user incorrectly enters their lock and it counts towards the max attempts before wiping the work profile. -->
-    <string name="lock_profile_wipe_attempts">Try again. Attempt <xliff:g id="current_attempts">%1$d</xliff:g> of <xliff:g id="total_attempts">%2$d</xliff:g>.</string>
-    <!-- Title of a dialog shown when the user only has one attempt left to provide the lock before the work profile is wiped. -->
-    <string name="lock_profile_wipe_warning_title">Last try</string>
-    <!-- Content of the dialog shown when the user only has one attempt left to provide the work pattern before the work profile is wiped. -->
-    <string name="lock_profile_wipe_warning_content_pattern">If you enter an incorrect work pattern on this attempt, your work profile and associated data will be removed from this device.</string>
-    <!-- Content of the dialog shown when the user only has one attempt left to provide the work PIN before the work profile is wiped. -->
-    <string name="lock_profile_wipe_warning_content_pin">If you enter an incorrect work PIN on this attempt, your work profile and associated data will be removed from this device.</string>
-    <!-- Content of the dialog shown when the user only has one attempt left to provide the work password before the work profile is wiped. -->
-    <string name="lock_profile_wipe_warning_content_password">If you enter an incorrect work password on this attempt, your work profile and associated data will be removed from this device.</string>
-    <!-- Content of the dialog shown when the user has failed to provide the work lock too many times and the work profile is wiped. -->
-    <string name="lock_profile_wipe_content">Too many incorrect attempts. Your work profile and associated data will be removed from this device.</string>
+    <!-- Message shown on the lock screen when the user incorrectly enters their lock and it counts towards the max attempts before their data on the device is wiped. [CHAR LIMIT=NONE] -->
+    <string name="lock_failed_attempts_before_wipe">Try again. Attempt <xliff:g id="current_attempts">%1$d</xliff:g> of <xliff:g id="total_attempts">%2$d</xliff:g>.</string>
+
+    <!-- Title of a dialog shown when the user only has one attempt left to provide the lock before the device, one of its users, or a work profile is wiped. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_attempt_before_wipe_warning_title">Your data will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the device lock pattern before the device is wiped. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_pattern_attempt_before_wipe_device">If you enter an incorrect pattern on the next attempt, this device's data will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the device lock PIN before the device is wiped. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_pin_attempt_before_wipe_device">If you enter an incorrect PIN on the next attempt, this device's data will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the device lock password before the device is wiped. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_password_attempt_before_wipe_device">If you enter an incorrect password on the next attempt, this device's data will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the user lock pattern before the user is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_pattern_attempt_before_wipe_user">If you enter an incorrect pattern on the next attempt, this user will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the user lock PIN before the user is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_pin_attempt_before_wipe_user">If you enter an incorrect PIN on the next attempt, this user will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the user lock password before the user is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_password_attempt_before_wipe_user">If you enter an incorrect password on the next attempt, this user will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the work lock pattern before the work profile is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_pattern_attempt_before_wipe_profile">If you enter an incorrect pattern on the next attempt, your work profile and its data will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the work lock PIN before the work profile is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_pin_attempt_before_wipe_profile">If you enter an incorrect PIN on the next attempt, your work profile and its data will be deleted</string>
+    <!-- Content of the dialog shown when the user only has one attempt left to provide the work lock password before the work profile is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_last_password_attempt_before_wipe_profile">If you enter an incorrect password on the next attempt, your work profile and its data will be deleted</string>
+
+    <!-- Content of the dialog shown when the user has failed to provide the device lock too many times and the device is wiped. [CHAR LIMIT=NONE] -->
+    <string name="lock_failed_attempts_now_wiping_device">Too many incorrect attempts. This device's data will be deleted.</string>
+    <!-- Content of the dialog shown when the user has failed to provide the user lock too many times and the user is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_failed_attempts_now_wiping_user">Too many incorrect attempts. This user will be deleted.</string>
+    <!-- Content of the dialog shown when the user has failed to provide the work lock too many times and the work profile is removed. [CHAR LIMIT=NONE] -->
+    <string name="lock_failed_attempts_now_wiping_profile">Too many incorrect attempts. This work profile and its data will be deleted.</string>
     <!-- Button label to dismiss the dialog telling the user the work profile has been wiped. [CHAR LIMIT=40] -->
-    <string name="lock_profile_wipe_dismiss">Dismiss</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss">Dismiss</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
     <string name="lockpassword_password_too_short">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</string>
@@ -2403,9 +2424,18 @@
     <string name="automatic_brightness">Automatic brightness</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
-    <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the ambient display feature is enabled. -->
-    <string name="doze_title">Ambient display</string>
-    <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the ambient display feature. -->
+
+    <!-- [CHAR LIMIT=30] Title of the preference that opens the Ambient display settings screen. -->
+    <string name="ambient_display_screen_title">Ambient display</string>
+    <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to be always on -->
+    <string name="ambient_display_screen_summary_always_on">Always on</string>
+    <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to show when new notifications come in. -->
+    <string name="ambient_display_screen_summary_notifications">New notifications</string>
+    <!-- [CHAR LIMIT=30] Category title for the settings that control when Ambient display shows. -->
+    <string name="ambient_display_category_triggers">When to show</string>
+    <!-- [CHAR LIMIT=30] Ambient display screen, title for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
+    <string name="doze_title">New notifications</string>
+    <!-- [CHAR LIMIT=NONE] Ambient display screen, summary for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
     <string name="doze_summary">Wake screen when you receive notifications</string>
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the always-on ambient display feature is enabled. -->
     <string name="doze_always_on_title">Always on</string>
@@ -3005,6 +3035,8 @@
     <string name="error_mcc_not3">MCC field must be 3 digits.</string>
     <!-- APN error dialog messages: -->
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
+    <!-- APN error dialog messages: -->
+    <string name="error_adding_apn_type">Carrier does not allow adding APNs of type %s.</string>
     <!-- The message of dialog indicated restoring default APN settings in progress -->
     <string name="restore_default_apn">Restoring default APN settings.</string>
     <!-- APNs screen menu option to reset default APN settings -->
@@ -3500,9 +3532,9 @@
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  [CHAR LIMIT=30] -->
     <string name="install_applications_title">Allow all app sources</string>
     <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
-    <string name="recent_app_category_title">Recently used apps</string>
+    <string name="recent_app_category_title">Recently opened</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
-    <string name="see_all_apps_title">See all apps</string>
+    <string name="see_all_apps_title">See all <xliff:g>%1$d</xliff:g> installed apps</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="tablet">
@@ -4342,11 +4374,6 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
-    <!-- Warning shown when user input has been blocked due to another app overlaying screen
-         content. Since we don't know what the app is showing on top of the input target, we
-         can't verify user consent. [CHAR LIMIT=NONE] -->
-    <string name="window_obscured_warning">Because another app is displaying on top of these options,
-        Settings can\u2019t respond to your action.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
         enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
     <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
@@ -6575,8 +6602,8 @@
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
 
-    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30] -->
-    <string name="notification_badging_title">Allow icon badges</string>
+    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
+    <string name="notification_badging_title">Allow notification dots</string>
 
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
@@ -6805,9 +6832,6 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories deleted</item>
     </plurals>
 
-    <!-- [CHAR LIMIT=45\ Global notification badge setting -->
-    <string name="notification_badges">Notification badges</string>
-
     <!-- [CHAR LIMIT=NONE] App notification settings: notifications enabled-->
     <string name="notification_toggle_on">On</string>
 
@@ -6826,8 +6850,11 @@
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
     <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
 
-    <!-- [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
-    <string name="notification_badge_title">Allow icon badge</string>
+    <!-- [CHAR LIMIT=NONE BACKUP_MESSAGE_ID:7166470350070693657] App notification settings: Badging option title -->
+    <string name="notification_badge_title">Allow notification dot</string>
+
+    <!-- [CHAR LIMIT=NONE BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
+    <string name="notification_channel_badge_title">Show notification dot</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
@@ -8414,7 +8441,7 @@
     <!-- Preference menu title for accessing the deletion helper from the storage manager settings. [CHAR LIMIT=30]-->
     <string name="deletion_helper_preference_title">Free up space now</string>
 
-    <!-- Preference title for gesture settings [CHAR LIMIT=25]-->
+    <!-- Preference title for gesture settings [CHAR LIMIT=40]-->
     <string name="gesture_preference_title">Gesture shortcuts</string>
 
     <!-- Preference summary for gesture settings (phone) [CHAR LIMIT=NONE]-->
@@ -8443,8 +8470,8 @@
     <!-- Title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
-    <!-- Summary text for ambient display double tap [CHAR LIMIT=160]-->
-    <string name="ambient_display_summary">To quickly check your notifications, double-tap your screen.</string>
+    <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_summary">To check time, notification icons, and other info, double-tap your screen.</string>
 
     <!-- Title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="default">Lift to check phone</string>
@@ -8453,12 +8480,12 @@
     <!-- Title text for ambient display pick up (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="device">Lift to check device</string>
 
-    <!-- Summary text for ambient display (phone) [CHAR LIMIT=160]-->
-    <string name="ambient_display_pickup_summary" product="default">To quickly check your notifications, pick up your phone.</string>
-    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=160]-->
-    <string name="ambient_display_pickup_summary" product="tablet">To quickly check your notifications, pick up your tablet.</string>
-    <!-- Summary text for ambient display (device) [CHAR LIMIT=160]-->
-    <string name="ambient_display_pickup_summary" product="device">To quickly check your notifications, pick up your device.</string>
+    <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="default">To check time, notification icons, and other info, pick up your phone.</string>
+    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="tablet">To check time, notification icons, and other info, pick up your tablet.</string>
+    <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="device">To check time, notification icons, and other info, pick up your device.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -8477,7 +8504,7 @@
     <string name="camera_lift_trigger_summary">To open the camera automatically, lift up your phone into a photo-taking position (landscape or portrait). Works when your phone is asleep or locked.</string>
 
     <!-- Settings suggestion summary text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
-    <string name="camera_lift_trigger_suggestion_summary">Take photos from lock screen</string>
+    <string name="camera_lift_trigger_suggestion_summary">Take photos when phone is asleep or locked</string>
 
     <!-- Title text for the assist gesture [CHAR LIMIT=60]-->
     <string name="assist_gesture_title">Assist gesture</string>
@@ -8750,4 +8777,10 @@
 
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
+
+    <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_title">What's new and exciting?</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary">Check out the top 5 features</string>
 </resources>

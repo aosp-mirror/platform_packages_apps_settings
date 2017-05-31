@@ -57,4 +57,12 @@ public class AmbientDisplayConfiguration {
     public boolean alwaysOnAvailable() {
         return true;
     }
+
+    public boolean available() {
+        return true;
+    }
+
+    public boolean enabled(int user) {
+        return true;
+    }
 }

@@ -18,10 +18,9 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -30,6 +29,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -61,7 +61,6 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -122,22 +121,26 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(SUMMARY).when(mFragment).getString(anyInt());
-        doReturn(APP_LABEL).when(mBundle).getString(anyString());
+        doReturn(APP_LABEL).when(mBundle).getString(nullable(String.class));
         doReturn(mBundle).when(mFragment).getArguments();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
-                .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
+                .setRecyclerView(nullable(RecyclerView.class), nullable(Lifecycle.class));
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
-                .setIcon(any(Drawable.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController).setIcon(any(
+                .setIcon(nullable(Drawable.class));
+        doReturn(mEntityHeaderController).when(mEntityHeaderController).setIcon(nullable(
                 ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController).setLabel(anyString());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
-                .setLabel(any(ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController).setSummary(anyString());
+                .setLabel(nullable(String.class));
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setLabel(nullable(String.class));
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setLabel(nullable(ApplicationsState.AppEntry.class));
+        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+                .setSummary(nullable(String.class));
 
         doReturn(UID).when(mBatterySipper).getUid();
         doReturn(APP_LABEL).when(mBatteryEntry).getLabel();
@@ -160,15 +163,13 @@ public class AdvancedPowerUsageDetailTest {
 
         final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
 
-        Answer<Void> callable = new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Exception {
-                mBundle = captor.getValue();
-                return null;
-            }
+        Answer<Void> callable = invocation -> {
+            mBundle = captor.getValue();
+            return null;
         };
-        doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(any(), anyString(),
-                captor.capture(), anyInt(), any(), any());
+        doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(
+                nullable(Fragment.class), nullable(String.class), captor.capture(), anyInt(),
+                nullable(CharSequence.class), nullable(UserHandle.class));
     }
 
     @After
@@ -181,7 +182,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mAppEntry = null;
         mFragment.initHeader();
 
-        verify(mEntityHeaderController).setIcon(any(Drawable.class));
+        verify(mEntityHeaderController).setIcon(nullable(Drawable.class));
         verify(mEntityHeaderController).setLabel(APP_LABEL);
     }
 
@@ -281,21 +282,20 @@ public class AdvancedPowerUsageDetailTest {
                 mBatteryEntry, USAGE_PERCENT);
 
         verify(mTestActivity).startPreferencePanelAsUser(
-                any(), anyString(), any(), anyInt(), any(), eq(new UserHandle(10)));
+                nullable(Fragment.class), nullable(String.class), nullable(Bundle.class), anyInt(),
+                nullable(CharSequence.class), eq(new UserHandle(10)));
     }
 
     @Test
     public void testStartBatteryDetailPage_noBatteryUsage_hasBasicData() {
         final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
-        Answer<Void> callable = new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Exception {
-                mBundle = captor.getValue();
-                return null;
-            }
+        Answer<Void> callable = invocation -> {
+            mBundle = captor.getValue();
+            return null;
         };
-        doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(any(), anyString(),
-                captor.capture(), anyInt(), any(), any());
+        doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(nullable(Fragment.class),
+                nullable(String.class), captor.capture(), anyInt(), nullable(CharSequence.class),
+                nullable(UserHandle.class));
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, PACKAGE_NAME[0]);
 

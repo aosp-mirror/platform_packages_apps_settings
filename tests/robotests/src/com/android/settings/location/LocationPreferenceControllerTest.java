@@ -15,6 +15,13 @@
  */
 package com.android.settings.location;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,13 +43,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -75,7 +75,7 @@ public class LocationPreferenceControllerTest {
     public void updateState_shouldSetSummary() {
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(anyString());
+        verify(mPreference).setSummary(nullable(String.class));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class LocationPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.updateSummary();
 
-        verify(mPreference).setSummary(anyString());
+        verify(mPreference).setSummary(nullable(String.class));
     }
 
     @Test

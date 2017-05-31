@@ -47,19 +47,20 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {ShadowSecureSettings.class})
-public class DozePreferenceControllerTest {
+public class AmbientDisplayNotificationsPreferenceControllerTest {
 
     @Mock Context mContext;
     @Mock AmbientDisplayConfiguration mConfig;
     @Mock SwitchPreference mSwitchPreference;
     @Mock MetricsFeatureProvider mMetricsFeatureProvider;
 
-    DozePreferenceController mController;
+    AmbientDisplayNotificationsPreferenceController mController;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mController = new DozePreferenceController(mContext, mConfig, mMetricsFeatureProvider);
+        mController = new AmbientDisplayNotificationsPreferenceController(mContext, mConfig,
+                mMetricsFeatureProvider);
     }
 
     @Test
@@ -116,7 +117,8 @@ public class DozePreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_reportsEventForItsPreference() throws Exception {
-        when(mSwitchPreference.getKey()).thenReturn(DozePreferenceController.KEY_DOZE);
+        when(mSwitchPreference.getKey()).thenReturn(
+                AmbientDisplayNotificationsPreferenceController.KEY_AMBIENT_DISPLAY_NOTIFICATIONS);
 
         mController.handlePreferenceTreeClick(mSwitchPreference);
 

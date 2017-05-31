@@ -38,7 +38,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
@@ -155,7 +154,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 // on first launch, if no lock pattern is set, then finish with
                 // success (don't want user to get stuck confirming something that
                 // doesn't exist).
-                if (!mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
+                // Don't do this check for FRP though, because the pattern is not stored
+                // in a way that isLockPatternEnabled is aware of for that case.
+                // TODO(roosa): This block should no longer be needed since we removed the
+                //              ability to disable the pattern in L. Remove this block after
+                //              ensuring it's safe to do so. (Note that ConfirmLockPassword
+                //              doesn't have this).
+                if (!mFrp && !mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
@@ -238,7 +243,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
-            boolean isStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
+            boolean isStrongAuthRequired = isStrongAuthRequired();
             if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
                 return isStrongAuthRequired
                         ? R.string.lockpassword_strong_auth_required_reason_restart_work_pattern
@@ -299,10 +304,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         mDetailsTextView.setText(getDefaultDetails());
                     }
                     mErrorTextView.setText("");
-                    if (isProfileChallenge()) {
-                        updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(
-                                mEffectiveUserId));
-                    }
+                    updateErrorMessage(
+                            mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
 
                     mLockPatternView.setEnabled(true);
                     mLockPatternView.enableInput();
@@ -497,7 +500,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView.setEnabled(true);
             if (matched) {
                 if (newResult) {
-                    reportSuccessfullAttempt();
+                    reportSuccessfulAttempt();
                 }
                 startDisappearAnimation(intent);
                 checkForPendingIntent();
@@ -524,8 +527,17 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        protected int getLastTryErrorMessage() {
-            return R.string.lock_profile_wipe_warning_content_pattern;
+        protected int getLastTryErrorMessage(int userType) {
+            switch (userType) {
+                case USER_TYPE_PRIMARY:
+                    return R.string.lock_last_pattern_attempt_before_wipe_device;
+                case USER_TYPE_MANAGED_PROFILE:
+                    return R.string.lock_last_pattern_attempt_before_wipe_profile;
+                case USER_TYPE_SECONDARY:
+                    return R.string.lock_last_pattern_attempt_before_wipe_user;
+                default:
+                    throw new IllegalArgumentException("Unrecognized user type:" + userType);
+            }
         }
 
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {

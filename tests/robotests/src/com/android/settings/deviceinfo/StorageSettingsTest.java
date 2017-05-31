@@ -17,6 +17,12 @@
 package com.android.settings.deviceinfo;
 
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.usage.StorageStatsManager;
 import android.icu.text.NumberFormat;
@@ -40,12 +46,6 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -78,10 +78,10 @@ public class StorageSettingsTest {
         when(volumeInfo.isMountedReadable()).thenReturn(true);
         when(volumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
         when(mStorageManagerVolumeProvider.getTotalBytes(
-                        any(StorageStatsManager.class), any(VolumeInfo.class)))
+                        nullable(StorageStatsManager.class), nullable(VolumeInfo.class)))
                 .thenReturn(500L);
         when(mStorageManagerVolumeProvider.getFreeBytes(
-                        any(StorageStatsManager.class), any(VolumeInfo.class)))
+                        nullable(StorageStatsManager.class), nullable(VolumeInfo.class)))
                 .thenReturn(0L);
 
         ReflectionHelpers.setField(

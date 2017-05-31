@@ -1457,7 +1457,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void updateBluetoothEnableInbandRingingOptions() {
         if (mBluetoothEnableInbandRinging != null) {
             updateSwitchPreference(mBluetoothEnableInbandRinging,
-                SystemProperties.getBoolean(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, false));
+                SystemProperties.getBoolean(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, true));
         }
     }
 
