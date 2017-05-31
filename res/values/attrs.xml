@@ -94,6 +94,10 @@
 
     <attr name="footerPreferenceStyle" format="reference" />
 
+    <declare-styleable name="FixedLineSummaryPreference">
+        <attr name="summaryLineCount" format="integer" />
+    </declare-styleable>
+
     <!-- For Search -->
     <declare-styleable name="Preference">
         <attr name="keywords" format="string" />
@@ -155,7 +159,7 @@
     </declare-styleable>
 
     <declare-styleable name="TintablePreference">
-        <attr name="android:tint" format="color|reference"/>
+        <attr name="android:tint" format="color|reference" />
     </declare-styleable>
 
 </resources>

@@ -20,9 +20,13 @@ import android.content.pm.ApplicationInfo;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
+import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import java.lang.reflect.Field;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,9 +37,9 @@ import static org.mockito.Mockito.mock;
 @RunWith(AndroidJUnit4.class)
 public class ManageApplicationsUnitTest {
     @Test
-    public void getOverrideFilter_filtersVolumeForAudio() {
+    public void getCompositeFilter_filtersVolumeForAudio() {
         AppFilter filter =
-                ManageApplications.getOverrideFilter(
+                ManageApplications.getCompositeFilter(
                         ManageApplications.LIST_TYPE_STORAGE,
                         ManageApplications.STORAGE_TYPE_MUSIC,
                         "uuid");
@@ -49,9 +53,9 @@ public class ManageApplicationsUnitTest {
     }
 
     @Test
-    public void getOverrideFilter_filtersVolumeForVideo() {
+    public void getCompositeFilter_filtersVolumeForVideo() {
         AppFilter filter =
-                ManageApplications.getOverrideFilter(
+                ManageApplications.getCompositeFilter(
                         ManageApplications.LIST_TYPE_MOVIES,
                         ManageApplications.STORAGE_TYPE_DEFAULT,
                         "uuid");
@@ -65,9 +69,9 @@ public class ManageApplicationsUnitTest {
     }
 
     @Test
-    public void getOverrideFilter_filtersVolumeForGames() {
+    public void getCompositeFilter_filtersVolumeForGames() {
         ApplicationsState.AppFilter filter =
-                ManageApplications.getOverrideFilter(
+                ManageApplications.getCompositeFilter(
                         ManageApplications.LIST_TYPE_GAMES,
                         ManageApplications.STORAGE_TYPE_DEFAULT,
                         "uuid");
@@ -81,12 +85,35 @@ public class ManageApplicationsUnitTest {
     }
 
     @Test
-    public void getOverrideFilter_isEmptyNormally() {
+    public void getCompositeFilter_isEmptyNormally() {
         ApplicationsState.AppFilter filter =
-                ManageApplications.getOverrideFilter(
+                ManageApplications.getCompositeFilter(
                         ManageApplications.LIST_TYPE_MAIN,
                         ManageApplications.STORAGE_TYPE_DEFAULT,
                         "uuid");
         assertThat(filter).isNull();
+    }
+
+    @Test
+    public void getCompositeFilter_worksWithInstantApps() throws Exception {
+        Field field = AppUtils.class.getDeclaredField("sInstantAppDataProvider");
+        field.setAccessible(true);
+        field.set(AppUtils.class, (InstantAppDataProvider) (i -> true));
+
+        AppFilter filter =
+            ManageApplications.getCompositeFilter(
+                ManageApplications.LIST_TYPE_STORAGE,
+                ManageApplications.STORAGE_TYPE_MUSIC,
+                "uuid");
+        AppFilter composedFilter = new CompoundFilter(ApplicationsState.FILTER_INSTANT, filter);
+
+        final ApplicationInfo info = new ApplicationInfo();
+        info.volumeUuid = "uuid";
+        info.category = ApplicationInfo.CATEGORY_AUDIO;
+        info.privateFlags = ApplicationInfo.PRIVATE_FLAG_INSTANT;
+        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = info;
+
+        assertThat(composedFilter.filterApp(appEntry)).isTrue();
     }
 }

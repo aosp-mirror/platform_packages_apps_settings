@@ -2424,9 +2424,18 @@
     <string name="automatic_brightness">Automatic brightness</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
-    <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the ambient display feature is enabled. -->
-    <string name="doze_title">Ambient display</string>
-    <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the ambient display feature. -->
+
+    <!-- [CHAR LIMIT=30] Title of the preference that opens the Ambient display settings screen. -->
+    <string name="ambient_display_screen_title">Ambient display</string>
+    <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to be always on -->
+    <string name="ambient_display_screen_summary_always_on">Always on</string>
+    <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to show when new notifications come in. -->
+    <string name="ambient_display_screen_summary_notifications">New notifications</string>
+    <!-- [CHAR LIMIT=30] Category title for the settings that control when Ambient display shows. -->
+    <string name="ambient_display_category_triggers">When to show</string>
+    <!-- [CHAR LIMIT=30] Ambient display screen, title for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
+    <string name="doze_title">New notifications</string>
+    <!-- [CHAR LIMIT=NONE] Ambient display screen, summary for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
     <string name="doze_summary">Wake screen when you receive notifications</string>
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the always-on ambient display feature is enabled. -->
     <string name="doze_always_on_title">Always on</string>
@@ -3026,6 +3035,8 @@
     <string name="error_mcc_not3">MCC field must be 3 digits.</string>
     <!-- APN error dialog messages: -->
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
+    <!-- APN error dialog messages: -->
+    <string name="error_adding_apn_type">Carrier does not allow adding APNs of type %s.</string>
     <!-- The message of dialog indicated restoring default APN settings in progress -->
     <string name="restore_default_apn">Restoring default APN settings.</string>
     <!-- APNs screen menu option to reset default APN settings -->
@@ -8430,7 +8441,7 @@
     <!-- Preference menu title for accessing the deletion helper from the storage manager settings. [CHAR LIMIT=30]-->
     <string name="deletion_helper_preference_title">Free up space now</string>
 
-    <!-- Preference title for gesture settings [CHAR LIMIT=25]-->
+    <!-- Preference title for gesture settings [CHAR LIMIT=40]-->
     <string name="gesture_preference_title">Gesture shortcuts</string>
 
     <!-- Preference summary for gesture settings (phone) [CHAR LIMIT=NONE]-->
@@ -8459,8 +8470,8 @@
     <!-- Title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
-    <!-- Summary text for ambient display double tap [CHAR LIMIT=160]-->
-    <string name="ambient_display_summary">To quickly check your notifications, double-tap your screen.</string>
+    <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_summary">To check time, notification icons, and other info, double-tap your screen.</string>
 
     <!-- Title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="default">Lift to check phone</string>
@@ -8469,12 +8480,12 @@
     <!-- Title text for ambient display pick up (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="device">Lift to check device</string>
 
-    <!-- Summary text for ambient display (phone) [CHAR LIMIT=160]-->
-    <string name="ambient_display_pickup_summary" product="default">To quickly check your notifications, pick up your phone.</string>
-    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=160]-->
-    <string name="ambient_display_pickup_summary" product="tablet">To quickly check your notifications, pick up your tablet.</string>
-    <!-- Summary text for ambient display (device) [CHAR LIMIT=160]-->
-    <string name="ambient_display_pickup_summary" product="device">To quickly check your notifications, pick up your device.</string>
+    <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="default">To check time, notification icons, and other info, pick up your phone.</string>
+    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="tablet">To check time, notification icons, and other info, pick up your tablet.</string>
+    <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="device">To check time, notification icons, and other info, pick up your device.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -8493,7 +8504,7 @@
     <string name="camera_lift_trigger_summary">To open the camera automatically, lift up your phone into a photo-taking position (landscape or portrait). Works when your phone is asleep or locked.</string>
 
     <!-- Settings suggestion summary text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
-    <string name="camera_lift_trigger_suggestion_summary">Take photos from lock screen</string>
+    <string name="camera_lift_trigger_suggestion_summary">Take photos when phone is asleep or locked</string>
 
     <!-- Title text for the assist gesture [CHAR LIMIT=60]-->
     <string name="assist_gesture_title">Assist gesture</string>
@@ -8766,4 +8777,10 @@
 
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
+
+    <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_title">What's new and exciting?</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary">Check out the top 5 features</string>
 </resources>

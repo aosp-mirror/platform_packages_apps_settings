@@ -25,6 +25,7 @@ import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
@@ -1011,7 +1012,24 @@ public final class Utils extends com.android.settingslib.Utils {
             return getCredentialOwnerUserId(context);
         }
         int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        return enforceSameOwner(context, userId);
+        if (userId == LockPatternUtils.USER_FRP) {
+            return enforceSystemUser(context, userId);
+        } else {
+            return enforceSameOwner(context, userId);
+        }
+    }
+
+    /**
+     * Returns the given user id if the current user is the system user.
+     *
+     * @throws SecurityException if the current user is not the system user.
+     */
+    public static int enforceSystemUser(Context context, int userId) {
+        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+            return userId;
+        }
+        throw new SecurityException("Given user id " + userId + " must only be used from "
+                + "USER_SYSTEM, but current user is " + UserHandle.myUserId());
     }
 
     /**
@@ -1270,6 +1288,20 @@ public final class Utils extends com.android.settingslib.Utils {
             return R.string.not_installed;
         }
         return info.enabled ? R.string.installed : R.string.disabled;
+    }
+
+    /**
+     * Control if other apps can display overlays. By default this is allowed. Be sure to
+     * re-enable overlays, as the effect is system-wide.
+     */
+    public static void setOverlayAllowed(Context context, IBinder token, boolean allowed) {
+        AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
+        if (appOpsManager != null) {
+            appOpsManager.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
+                    !allowed, token);
+            appOpsManager.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW,
+                    !allowed, token);
+        }
     }
 
     private static boolean isVolumeValid(VolumeInfo volume) {

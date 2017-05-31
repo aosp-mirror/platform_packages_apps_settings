@@ -395,7 +395,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     int wifiApState = wifiManager.getWifiApState();
                     if (desiredState && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
                                          (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
-                        wifiManager.setWifiApEnabled(null, false);
+                        final ConnectivityManager connectivityManager =
+                                (ConnectivityManager) context.getSystemService(
+                                        Context.CONNECTIVITY_SERVICE);
+                        connectivityManager.stopTethering(ConnectivityManager.TETHERING_WIFI);
                     }
 
                     wifiManager.setWifiEnabled(desiredState);

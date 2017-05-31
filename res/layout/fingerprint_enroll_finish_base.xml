@@ -50,29 +50,20 @@
             android:textColor="?android:attr/textColorSecondary"
             android:visibility="gone" />
 
-        <View
-            android:layout_height="24dp"
+        <com.android.setupwizardlib.view.FillContentLayout
             android:layout_width="match_parent"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:id="@+id/fingerprint_in_app_indicator"
             android:layout_height="0dp"
-            android:layout_width="wrap_content"
-            android:layout_weight="5"
-            android:adjustViewBounds="true"
-            android:minHeight="@dimen/fingerprint_in_app_indicator_min_size"
-            android:minWidth="@dimen/fingerprint_in_app_indicator_min_size"
-            android:maxHeight="@dimen/fingerprint_in_app_indicator_max_size"
-            android:maxWidth="@dimen/fingerprint_in_app_indicator_max_size"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@android:string/fingerprint_icon_content_description"
-            android:src="@drawable/fp_app_indicator" />
+            android:layout_weight="1">
 
-        <View
-            android:layout_height="24dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/fingerprint_in_app_indicator"
+                style="@style/SuwContentIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@android:string/fingerprint_icon_content_description"
+                android:src="@drawable/fp_app_indicator" />
+
+        </com.android.setupwizardlib.view.FillContentLayout>
 
     </LinearLayout>
 
