@@ -25,6 +25,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.IActivityManager;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
@@ -40,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -86,15 +88,20 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected DevicePolicyManager mDevicePolicyManager;
     protected TextView mErrorTextView;
     protected final Handler mHandler = new Handler();
+    protected boolean mFrp;
+    private CharSequence mFrpAlternateButtonText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFrpAlternateButtonText = getActivity().getIntent().getCharSequenceExtra(
+                KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
         mReturnCredentials = getActivity().getIntent().getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mFrp = (mUserId == LockPatternUtils.USER_FRP);
         mUserManager = UserManager.get(getActivity());
         mEffectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
         mLockPatternUtils = new LockPatternUtils(getActivity());
@@ -112,10 +119,18 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 (TextView) view.findViewById(R.id.errorText), this, mEffectiveUserId);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
-        mCancelButton.setVisibility(showCancelButton ? View.VISIBLE : View.GONE);
+        boolean hasAlternateButton = mFrp && !TextUtils.isEmpty(mFrpAlternateButtonText);
+        mCancelButton.setVisibility(showCancelButton || hasAlternateButton
+                ? View.VISIBLE : View.GONE);
+        if (hasAlternateButton) {
+            mCancelButton.setText(mFrpAlternateButtonText);
+        }
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (hasAlternateButton) {
+                    getActivity().setResult(KeyguardManager.RESULT_ALTERNATE);
+                }
                 getActivity().finish();
             }
         });
@@ -139,15 +154,16 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     // credential. Otherwise, fingerprint can't unlock fbe/keystore through
     // verifyTiedProfileChallenge. In such case, we also wanna show the user message that
     // fingerprint is disabled due to device restart.
-    protected boolean isFingerprintDisallowedByStrongAuth() {
-        return !(mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
-                && mUserManager.isUserUnlocked(mUserId));
+    protected boolean isStrongAuthRequired() {
+        return mFrp
+                || !mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
+                || !mUserManager.isUserUnlocked(mUserId);
     }
 
     private boolean isFingerprintAllowed() {
         return !mReturnCredentials
                 && getActivity().getIntent().getBooleanExtra(ALLOW_FP_AUTHENTICATION, false)
-                && !isFingerprintDisallowedByStrongAuth()
+                && !isStrongAuthRequired()
                 && !isFingerprintDisabledByAdmin();
     }
 

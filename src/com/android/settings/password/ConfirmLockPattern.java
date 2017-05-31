@@ -38,7 +38,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
@@ -155,7 +154,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 // on first launch, if no lock pattern is set, then finish with
                 // success (don't want user to get stuck confirming something that
                 // doesn't exist).
-                if (!mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
+                // Don't do this check for FRP though, because the pattern is not stored
+                // in a way that isLockPatternEnabled is aware of for that case.
+                // TODO(roosa): This block should no longer be needed since we removed the
+                //              ability to disable the pattern in L. Remove this block after
+                //              ensuring it's safe to do so. (Note that ConfirmLockPassword
+                //              doesn't have this).
+                if (!mFrp && !mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }
@@ -238,7 +243,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
-            boolean isStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
+            boolean isStrongAuthRequired = isStrongAuthRequired();
             if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
                 return isStrongAuthRequired
                         ? R.string.lockpassword_strong_auth_required_reason_restart_work_pattern
