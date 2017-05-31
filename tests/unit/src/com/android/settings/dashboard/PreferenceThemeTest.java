@@ -58,8 +58,7 @@ public class PreferenceThemeTest {
     @Test
     public void startPhoneStatus_preferenceIconSpaceReserved() throws InterruptedException {
         launchPhoneStatus();
-        onView(withId(R.id.icon_frame)).check(doesNotExist());
-        onView(withFirstId(R.id.icon_container)).check(matches(isDisplayed()));
+        onView(withFirstId(R.id.icon_frame)).check(matches(isDisplayed()));
     }
 
     @Test
