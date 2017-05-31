@@ -91,7 +91,6 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils;
@@ -228,7 +227,8 @@ public class InstalledAppDetails extends AppInfoBase
                 }
             };
 
-    private boolean handleDisableable(Button button) {
+    @VisibleForTesting
+    boolean handleDisableable(Button button) {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
         // by not allowing disabling of apps signed with the
@@ -239,7 +239,8 @@ public class InstalledAppDetails extends AppInfoBase
             button.setText(R.string.disable_text);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             button.setText(R.string.disable_text);
-            disableable = true;
+            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
+                    .contains(mAppEntry.info.packageName);
         } else {
             button.setText(R.string.enable_text);
             disableable = true;
@@ -1214,9 +1215,7 @@ public class InstalledAppDetails extends AppInfoBase
     void maybeAddInstantAppButtons() {
         if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
-            final Activity activity = getActivity();
-            mInstantAppButtonsController = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
+            mInstantAppButtonsController = mApplicationFeatureProvider
                     .newInstantAppButtonsController(this,
                             buttons.findViewById(R.id.instant_app_button_container),
                             id -> showDialogInner(id, 0))
