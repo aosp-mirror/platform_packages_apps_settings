@@ -72,6 +72,7 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
             String titleResPackageName, int titleResId, CharSequence summary, String fragment,
             Bundle fragmentArguments, Drawable icon) {
         super(context);
+        setLayoutResource(R.layout.preference_small_icon);
         mTitle = account.name;
         mTitleResPackageName = titleResPackageName;
         mTitleResId = titleResId;
@@ -79,7 +80,6 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
         mFragment = fragment;
         mFragmentArguments = fragmentArguments;
         mMetricsCategory = metricsCategory;
-        setWidgetLayoutResource(R.layout.account_type_preference);
 
         setKey(buildKey(account));
         setTitle(mTitle);
