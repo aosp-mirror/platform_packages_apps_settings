@@ -185,8 +185,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
+        private GlifLayout mLayout;
 
-        private TextView mHeaderText;
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
@@ -292,6 +292,8 @@ public class ChooseLockPassword extends SettingsActivity {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
+            mLayout = (GlifLayout) view;
+
             // Make the password container consume the optical insets so the edit text is aligned
             // with the sides of the parent visually.
             ViewGroup container = view.findViewById(R.id.password_container);
@@ -316,7 +318,6 @@ public class ChooseLockPassword extends SettingsActivity {
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
 
             final Activity activity = getActivity();
-            mHeaderText = (TextView) view.findViewById(R.id.headerText);
 
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(mIsAlphaMode ? currentType
@@ -360,7 +361,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         : R.string.lockpassword_choose_your_pin_header;
                 CharSequence title = getText(id);
                 sa.setTitle(title);
-                ((GlifLayout) view).setHeaderText(title);
+                mLayout.setHeaderText(title);
             }
         }
 
@@ -479,7 +480,7 @@ public class ChooseLockPassword extends SettingsActivity {
             // If the stage changed, announce the header for accessibility. This
             // is a no-op when accessibility is disabled.
             if (previousStage != stage) {
-                mHeaderText.announceForAccessibility(mHeaderText.getText());
+                mLayout.announceForAccessibility(mLayout.getHeaderText());
             }
         }
 
@@ -788,11 +789,11 @@ public class ChooseLockPassword extends SettingsActivity {
 
         private void setHeaderText(String text) {
             // Only set the text if it is different than the existing one to avoid announcing again.
-            if (!TextUtils.isEmpty(mHeaderText.getText())
-                    && mHeaderText.getText().toString().equals(text)) {
+            if (!TextUtils.isEmpty(mLayout.getHeaderText())
+                    && mLayout.getHeaderText().toString().equals(text)) {
                 return;
             }
-            mHeaderText.setText(text);
+            mLayout.setHeaderText(text);
         }
 
         public void afterTextChanged(Editable s) {
