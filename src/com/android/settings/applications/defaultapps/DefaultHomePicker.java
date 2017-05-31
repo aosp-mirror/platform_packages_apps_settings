@@ -63,13 +63,15 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
             }
 
             final String summary;
+            boolean enabled = true;
             if (mustSupportManagedProfile && !launcherHasManagedProfilesFeature(resolveInfo)) {
                 summary = getContext().getString(R.string.home_work_profile_not_supported);
+                enabled = false;
             } else {
                 summary = null;
             }
             final DefaultAppInfo candidate =
-                    new DefaultAppInfo(mPm, mUserId, activityName, summary);
+                    new DefaultAppInfo(mPm, mUserId, activityName, summary, enabled);
             candidates.add(candidate);
         }
         return candidates;
