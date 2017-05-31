@@ -175,6 +175,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private void setupVibrate() {
         mVibrate = (RestrictedSwitchPreference) findPreference(KEY_VIBRATE);
         mVibrate.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mVibrate.setEnabled(!(mAppRow.lockedImportance || mVibrate.isDisabledByAdmin()));
         mVibrate.setChecked(mChannel.shouldVibrate());
         mVibrate.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -191,6 +192,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private void setupRingtone() {
         mRingtone = (NotificationSoundPreference) findPreference(KEY_RINGTONE);
         mRingtone.setRingtone(mChannel.getSound());
+        mRingtone.setEnabled(!(mAppRow.lockedImportance));
         mRingtone.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -246,12 +248,15 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, mChannel.getId());
-        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                ChannelImportanceSettings.class.getName(),
-                channelArgs, null, R.string.notification_importance_title, null,
-                false, getMetricsCategory());
-        mImportance.setIntent(channelIntent);
-        mImportance.setEnabled(mSuspendedAppsAdmin == null);
+        mImportance.setEnabled(mSuspendedAppsAdmin == null && !mAppRow.lockedImportance);
+        // Set up intent to show importance selection only if this setting is enabled.
+        if (mImportance.isEnabled()) {
+            Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                    ChannelImportanceSettings.class.getName(),
+                    channelArgs, null, R.string.notification_importance_title, null,
+                    false, getMetricsCategory());
+            mImportance.setIntent(channelIntent);
+        }
         mImportance.setSummary(getImportanceSummary(mChannel.getImportance()));
     }
 
