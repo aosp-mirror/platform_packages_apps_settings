@@ -241,19 +241,30 @@
     <!-- Bluetooth settings screen, confirmation button for rename device dialog. [CHAR LIMIT=20] -->
     <string name="bluetooth_rename_button">Rename</string>
     <!-- Bluetooth settings.  Dialog title to confirm disconnecting from all profiles of a device. [CHAR LIMIT=30] -->
-    <string name="bluetooth_disconnect_title">Disconnect?</string>
+    <string name="bluetooth_disconnect_title">Disconnect device?</string>
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
+    <string name="bluetooth_disconnect_all_profiles" product="default">Your phone will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="tablet">Your tablet will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="device">Your device will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- dialog ok button for disconnect dialog [CHAR LIMIT=10] -->
+    <string name="bluetooth_disconnect_dialog_ok">Disconnect</string>
     <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
     <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
-    <string name="bluetooth_pairing_pref_title">Pair a new device</string>
+    <string name="bluetooth_pairing_pref_title">Pair new device</string>
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
-    <string name="bluetooth_footer_mac_message">Bluetooth MAC address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
-    <!-- Bluetooth Visibility discoonect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
+    <string name="bluetooth_footer_mac_message" product="default">Your phone\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="tablet">Your tablet\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="device">Your device\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+
+    <!-- Bluetooth Visibility disconnect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
     <string name="bluetooth_is_disconnect_question">Disconnect <xliff:g id="device_name">%1$s</xliff:g>?</string>
     <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
     <string name="bluetooth_broadcasting">Broadcasting</string>
@@ -276,8 +287,8 @@
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
-    <!-- Bluetooth settings screen, menu to show the list of received files [CHAR LIMIT=30] -->
-    <string name="bluetooth_show_received_files">Show received files</string>
+    <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
+    <string name="bluetooth_show_received_files">Received files</string>
 
     <!-- Strings for BluetoothDevicePicker [CHAR LIMIT=40]-->
     <string name="device_picker">Choose Bluetooth device</string>
@@ -376,12 +387,12 @@
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
-    <string name="bluetooth_device_name_summary">Visible as <xliff:g id="device_name">^1</xliff:g> to other devices</string>
+    <string name="bluetooth_device_name_summary">Visible to other devices as: <xliff:g id="device_name">^1</xliff:g></string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
-    <string name="bluetooth_pairing_page_title">Pair bluetooth device</string>
+    <string name="bluetooth_pairing_page_title">Pair new device</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -1511,6 +1522,8 @@
       still detect Bluetooth devices. You can change this in
       <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
       settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
+    <!-- Bluetooth connecting error message [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connect_failed">Couldn\'t connect. Try again.</string>
 
 
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the user to choose which one he wants to connect to. -->
