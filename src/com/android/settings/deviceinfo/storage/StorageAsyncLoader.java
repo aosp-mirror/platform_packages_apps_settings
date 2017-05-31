@@ -22,8 +22,8 @@ import static android.content.pm.ApplicationInfo.CATEGORY_VIDEO;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.UserInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -87,45 +87,43 @@ public class StorageAsyncLoader
                 stats = mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
             } catch (NameNotFoundException | IOException e) {
                 // This may happen if the package was removed during our calculation.
-                Log.w("App unexpectedly not found", e);
+                Log.w(TAG, "App unexpectedly not found", e);
                 continue;
             }
 
-            long attributedAppSizeInBytes = stats.getDataBytes();
-            // This matches how the package manager calculates sizes -- by zeroing out code sizes of
-            // system apps which are not updated. My initial tests suggest that this results in the
-            // original code size being counted for updated system apps when they shouldn't, but
-            // I am not sure how to avoid this problem without specifically going in to find that
-            // code size.
-            if (!app.isSystemApp() || app.isUpdatedSystemApp()) {
-                attributedAppSizeInBytes += stats.getCodeBytes();
-            } else {
-                result.systemSize += stats.getCodeBytes();
+            long blamedSize = stats.getDataBytes() - stats.getCacheBytes();
+
+            // Only count app code against the current user; we don't want
+            // double-counting on multi-user devices.
+            if (userId == UserHandle.myUserId()) {
+                blamedSize += stats.getCodeBytes();
             }
+
             switch (app.category) {
                 case CATEGORY_GAME:
-                    result.gamesSize += attributedAppSizeInBytes;
+                    result.gamesSize += blamedSize;
                     break;
                 case CATEGORY_AUDIO:
-                    result.musicAppsSize += attributedAppSizeInBytes;
+                    result.musicAppsSize += blamedSize;
                     break;
                 case CATEGORY_VIDEO:
-                    result.videoAppsSize += attributedAppSizeInBytes;
+                    result.videoAppsSize += blamedSize;
                     break;
                 default:
                     // The deprecated game flag does not set the category.
                     if ((app.flags & ApplicationInfo.FLAG_IS_GAME) != 0) {
-                        result.gamesSize += attributedAppSizeInBytes;
+                        result.gamesSize += blamedSize;
                         break;
                     }
-                    result.otherAppsSize += attributedAppSizeInBytes;
+                    result.otherAppsSize += blamedSize;
                     break;
             }
         }
 
         Log.d(TAG, "Loading external stats");
         try {
-            result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(userId));
+            result.externalStats = mStatsManager.getExternalStorageStats(mUuid,
+                    UserHandle.of(userId));
         } catch (IOException e) {
             Log.w(TAG, e);
         }
@@ -142,7 +140,6 @@ public class StorageAsyncLoader
         public long musicAppsSize;
         public long videoAppsSize;
         public long otherAppsSize;
-        public long systemSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
     }
 
