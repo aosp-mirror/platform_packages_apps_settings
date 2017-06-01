@@ -93,6 +93,10 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
                         getPackageName(),
                         Fs.fileFromPath("./frameworks/support/v7/appcompat/res"),
                         null));
+                paths.add(new ResourcePath(
+                        getPackageName(),
+                        Fs.fileFromPath("./frameworks/support/v7/cardview/res"),
+                        null));
                 return paths;
             }
         };
