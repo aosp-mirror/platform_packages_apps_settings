@@ -926,7 +926,7 @@
     <string name="volume_media_mute" msgid="3399059928695998166">"Համրեցնել երաժշտությունը &amp; այլ մեդիան"</string>
     <string name="volume_notification_mute" msgid="7955193480006444159">"Խլացնել ծանուցումները"</string>
     <string name="volume_alarm_mute" msgid="4452239420351035936">"Համրեցնել ահազանգերը"</string>
-    <string name="dock_settings" msgid="1820107306693002541">"Միակցել"</string>
+    <string name="dock_settings" msgid="1820107306693002541">"Կայան"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Հարակցման կարգավորումներ"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Աուդիո"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Կցված աշխատասեղանի համակցման կարգավորումներ"</string>
@@ -1854,7 +1854,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Օգտագործե՞լ <xliff:g id="SERVICE">%1$s</xliff:g>-ը"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>-ին անհրաժեշտ է`"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Քանի որ ներածումն արգելափակված է ինչ-որ հավելվածի կողմից, Կարգավորումները չեն կարող հաստատել ձեր պատասխանը:"</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"Քանի որ այս ընտրանքների վրա ցուցադրվում է մեկ այլ հավելված, Կարգավորումները չեն կարող արձագանքել ձեր գործողությանը:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Եթե ​​միացնեք <xliff:g id="SERVICE">%1$s</xliff:g>-ը, ձեր սարքը չի օգտագործի էկրանի կողպումը՝ տվյալների կոդավորումը լավացնելու համար:"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Քանի որ միացրել եք մատչելիության ծառայությունը, ձեր սարքը չի օգտագործի էկրանի կողպումը՝ տվյալների կոդավորումը լավացնելու համար:"</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Քանի որ <xliff:g id="SERVICE">%1$s</xliff:g> ծառայության միացումն ազդում է տվյալների կոդավորմանը, դուք պետք է հաստատեք ձեր ապակողպման նախշը:"</string>
@@ -1914,6 +1913,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"Բջջային ցանցի որոնում"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> առաջ"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"Հավելվածների օգտագործումը լրիվ լիցքավորումից հետո (<xliff:g id="TIME">^1</xliff:g> առաջ)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Սարքի օգտագործումը լրիվ լիցքավորումից հետո (<xliff:g id="TIME">^1</xliff:g> առաջ)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Ժամանակը, որի ընթացքում էկրանը միացած է եղել լրիվ լիցքավորումից հետո"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Սարքի օգտագործումը վերջին լրիվ լիցքավորումից հետո"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Մարտկոցի օգտագործման չափը անջատումից հետո"</string>
@@ -2005,8 +2005,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Մարտկոցի գերօգտագործում"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Օգտագործվել է <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"էկրանի օգտագործում՝ <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> օգտագործվել է <xliff:g id="APP">%2$s</xliff:g> հավելվածի կողմից"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Մարտկոցի ընդհանուր լիցքի <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Օգտագործումը վերջին լիցքավորումից հետո"</string>
@@ -2779,7 +2778,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Ծանուցումներ"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Լրացուցիչ"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Աշխատանքային ծանուցումներ"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"Թույլատրել պատկերակների նշանակները"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Թարթող լույս"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Կողպէկրանին"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Ցուցադրել ամբողջ ծանուցումը"</string>
@@ -2828,10 +2828,10 @@
     <string name="display_vr_pref_title" msgid="8104485269504335481">"Երբ սարքը գտնվում է VR ռեժիմում"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Նվազեցնել շաղումը (խորհուրդ է տրվում)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Նվազեցնել թարթումը"</string>
-    <string name="picture_in_picture_title" msgid="5824849294270017113">"Նկարը նկարի մեջ"</string>
+    <string name="picture_in_picture_title" msgid="5824849294270017113">"Նկար նկարի մեջ"</string>
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Տեղադրված հավելվածներից ոչ մեկը չի աջակցում Նկար նկարի մեջ"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"նկարը նկարի մեջ, նկար, ննմ"</string>
-    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Նկարը նկարի մեջ"</string>
+    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Նկար նկարի մեջ"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Թույլատրել «նկարը նկարի մեջ» ռեժիմը"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Թույլ տալ այս հավելվածին ստեղծել «նկարը նկարի մեջ» պատուհան՝ երբ հավելվածը բաց է կամ այն լքելուց հետո (օրինակ՝ տեսանյութի դիտումը շարունակելու համար): Այս պատուհանը ցուցադրվում է ձեր կողմից օգտագործվող այլ հավելվածների վերևում:"</string>
     <string name="picture_in_picture_on" msgid="6103704909710176555">"Այո"</string>
@@ -2854,14 +2854,16 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> categories deleted</item>
       <item quantity="other">Ջնջվել է <xliff:g id="COUNT_1">%d</xliff:g> կատեգորիա</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"Ծանուցման նշանակներ"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"Միացված է"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"Անջատված է"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Արգելափակել բոլորը"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Երբեք չցուցադրել այս ծանուցումները"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Ցուցադրել ծանուցումները"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Երբեք չցուցադրել ծանուցումները ստվերում կամ արտաքին սարքերի վրա"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Թույլատրել պատկերակի նշանակը"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Վրագրել «Չանհանգստացնել» պարամետրը"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Թույլ տալ այս ծանուցումների կողմից ընդհատումները, երբ «Չանհանգստացնել» պարամետրի համար նշանակված է «Միայն կարևորները» արժեքը"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Կողպէկրանին"</string>
@@ -3094,8 +3096,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Մարտկոցի օպտիմալացում"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Օգտագործման զգուշացումներ"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"Ցուցադրել բոլոր հավելվածները"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"Թաքցնել լրացուցիչ հավելվածները"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Ցույց տալ ամբողջ սարքի օգտագործումը"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Ցույց տալ հավելվածների օգտագործումը"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Չեն տնտեսում լիցքը"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Չօպտիմալացված"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Մարտկոցի սպառման օպտիմալացում"</string>
@@ -3470,9 +3472,9 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Ծանուցումներն արագ տեսնելու համար վերցրեք պլանշետը:"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Ծանուցումներն արագ տեսնելու համար վերցրեք սարքը:"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Ծանուցումները դիտելու համար օգտագործել մատնահետքերի սկաները"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Ծանուցումները տեսնելու համար՝ մատը սահեցրեք ներքև հեռախոսի հետնամասում գտնվող մատնահետքերի սկաների վրա"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Ծանուցումները տեսնելու համար պլանշետի հետնամասում գտնվող մատնահետքերի սկաների վրա մատը ներքև սահեցրեք:"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Ծանուցումները տեսնելու համար սարքի հետնամասում գտնվող մատնահետքերի սկաների վրա մատը ներքև սահեցրեք:"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Ծանուցումները տեսնելու համար՝ մատը սահեցրեք ներքև հեռախոսի հետևի մասում գտնվող մատնահետքերի սկաների վրա"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Ծանուցումները տեսնելու համար պլանշետի հետևի մասում գտնվող մատնահետքերի սկաների վրա մատը ներքև սահեցրեք:"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Ծանուցումները տեսնելու համար սարքի հետևի մասում գտնվող մատնահետքերի սկաների վրա մատը ներքև սահեցրեք:"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Օժանդակ ժեստ"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Զգայունություն"</string>

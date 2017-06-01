@@ -1854,7 +1854,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> वापरायचे?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"यासाठी <xliff:g id="SERVICE">%1$s</xliff:g> आवश्यक आहे:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"अ‍ॅप परवानगी विनंती अस्पष्‍ट करीत असल्‍याने, सेटिंग्ज आपला प्रतिसाद सत्यापित करू शकत नाहीत."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"या पर्यायांच्‍यावर दुसरे अॅप प्रदर्शित होत असल्याने, सेटिंग्ज आपल्या क्रियेला प्रतिसाद देऊ शकत नाहीत."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"आपण <xliff:g id="SERVICE">%1$s</xliff:g> चालू केल्‍यास, आपले डिव्‍हाइस डेटा कूटबद्धीकरण वर्धित करण्‍यासाठी आपला स्क्रीन लॉक वापरणार नाही."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"आपण प्रवेशयोग्यता सेवा चालू केली असल्‍यामुळे, आपले डिव्‍हाइस डेटा कूटबद्धीकरण वर्धित करण्‍यासाठी आपला स्क्रीन लॉक वापरणार नाही."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> चालू करण्यामुळे डेटा कूटबद्धीकरण प्रभावित होते, आपल्याला आपल्या नमुन्याची पुष्टी करण्याची आवश्यकता आहे."</string>
@@ -1914,6 +1913,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"मोबाइल नेटवर्क स्कॅनिंग"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> पूर्वी"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"पूर्ण चार्ज झाल्यापासून अॅप वापर (<xliff:g id="TIME">^1</xliff:g> पूर्वी)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"पूर्ण चार्ज झाल्यापासूनचा डिव्हाइस वापर (<xliff:g id="TIME">^1</xliff:g> पूर्वी)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"पूर्ण चार्जपासून स्क्रीन चालू असण्याच्या वेळाचे प्रमाण"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"शेवटच्या पूर्ण चार्जपासून डिव्हाइस वापर"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"अनप्लग केल्यापासून बॅटरी वापर"</string>
@@ -2005,8 +2005,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"जास्त प्रमाणात पॉवर वापर"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>साठी वापरले"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"स्क्रीनचा वापर <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> ने <xliff:g id="PERCENT">%1$s</xliff:g> वापरले"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"एकूण बॅटरीचे <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"मागच्या वेळेस पूर्ण चार्ज झाल्यापासूनचा ब्रेकडाउन"</string>
@@ -2779,7 +2778,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"सूचना"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"प्रगत"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"कार्य सूचना"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"चिन्‍ह बॅजना अनुमती द्या"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"लुकलुकता प्रकाश"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"लॉक स्क्रीनवर"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"सर्व सूचना सामग्री दर्शवा"</string>
@@ -2854,14 +2854,16 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> श्रेणी हटवली</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> श्रेण्या हटवल्या</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"सूचना बॅज"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"चालू"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"बंद"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"सर्व अवरोधित करा"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"या सूचना कधीही दर्शवू नका"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"सूचना दर्शवा"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"सूचना कधीही रंगछटांंमध्ये किंवा डिव्हाइसच्या किनारीवर दर्शवू नका"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"चिन्ह बॅजला अनुमती द्या"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"व्यत्यय आणू नका अधिशून्य करा"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"व्यत्यय आणू नका केवळ प्राधान्यावर सेट केले असते तेव्‍हा या सूचनांना व्यत्यय आणणे सुरु ठेवू द्या"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"लॉक स्क्रीनवर"</string>
@@ -3094,8 +3096,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"बॅटरी ऑप्टिमायझेशन"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"वापरासंबंधी सूचना"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"सर्व अॅप्स दर्शवा"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"अतिरिक्त अॅप्स लपवा"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"पूर्ण डिव्हाइस वापर दाखवा"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"अॅपचा वापर दाखवा"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ऑप्टिमाइझ न केलेले"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ऑप्टिमाइझ न केलेले"</string>
     <string name="high_power_off" msgid="3393904131961263278">"बॅटरी वापर ऑप्टिमाइझ करीत आहे"</string>

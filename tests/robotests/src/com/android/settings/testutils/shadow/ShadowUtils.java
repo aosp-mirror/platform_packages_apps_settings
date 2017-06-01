@@ -28,6 +28,7 @@ import org.robolectric.annotation.Implements;
 public class ShadowUtils {
 
     private static IFingerprintManager sFingerprintManager = null;
+    private static boolean sIsCarrierDemoUser;
 
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
@@ -45,10 +46,20 @@ public class ShadowUtils {
 
     public static void reset() {
         sFingerprintManager = null;
+        sIsCarrierDemoUser = false;
     }
 
     @Implementation
     public static boolean isWifiOnly(Context context) {
         return true;
+    }
+
+    public static void setIsCarrierDemoUser(boolean isCarrierDemoUser) {
+        sIsCarrierDemoUser = isCarrierDemoUser;
+    }
+
+    @Implementation
+    public static boolean isCarrierDemoUser(Context context) {
+        return sIsCarrierDemoUser;
     }
 }

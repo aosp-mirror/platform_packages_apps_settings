@@ -1854,7 +1854,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> erabili nahi duzu?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuak hauek egin behar ditu:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Aplikazio bat baimen-eskaera oztopatzen ari denez, ezarpenek ezin dute egiaztatu erantzuna."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"Aukera hauen gainean beste aplikazio bat ageri denez, \"Ezarpenak\" atalak ezin du egin eskatu diozuna."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> aktibatzen baduzu, gailuak ez du pantailaren blokeoa erabiliko datuen enkriptatzea hobetzeko."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Erabilerraztasun-zerbitzua aktibatu duzunez, gailuak ez du pantailaren blokeoa erabiliko datuen enkriptatzea hobetzeko."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzua aktibatzeak datu-enkriptatzeari eragiten dionez, eredua berretsi behar duzu."</string>
@@ -1914,6 +1913,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"Sare mugikorra bilatzen"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"Duela <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"Aplikazioen erabilera gailua guztiz kargatu zenetik (duela <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Gailuaren erabilera gailua guztiz kargatu zenetik (duela <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Gailua guztiz kargatu zenetik pantaila piztuta egon den denbora"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Gailuaren erabilera hura guztiz kargatu zenetik"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Bateriaren erabilera entxufea atera ondoren"</string>
@@ -2005,8 +2005,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Uste baino energia gutxiago erabili da."</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Erabilera-denbora: <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"Pantailaren erabilera: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> erabili du <xliff:g id="APP">%2$s</xliff:g> aplikazioak"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Bateria osoaren <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Guztiz kargatu zenetik emandako erabileraren datuak"</string>
@@ -2779,7 +2778,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Jakinarazpenak"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Ezarpen aurreratuak"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Laneko jakinarazpenak"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"Baimendu ikonoen bereizgarriak"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Argi keinukaria"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Pantaila blokeatuan"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Erakutsi jakinarazpenen eduki guztia"</string>
@@ -2854,14 +2854,16 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategoria ezabatu dira</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategoria ezabatu da</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"Jakinarazpenen bereizgarriak"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"Aktibatuta"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"Desaktibatuta"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokeatu guztiak"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Ez erakutsi jakinarazpen hauek inoiz"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Erakutsi jakinarazpenak"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Ez erakutsi inoiz jakinarazpenak edo ilundutako eremuetan edo gailu osagarrietan"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Baimendu ikonoaren bereizgarria erabiltzea"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\"Ez molestatu\" moduaren salbuespenak"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Baimendu jakinarazpenek jarduera etenaraztea \"Ez molestatu\" aukera Lehentasunezkoak soilik gisa ezarrita dagoenean"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Pantaila blokeatuan"</string>
@@ -3094,8 +3096,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Bateria-optimizazioa"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Erabilera-abisuak"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"Erakutsi aplikazio guztiak"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"Ezkutatu aplikazio gehigarriak"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Erakutsi gailuaren erabilera guztia"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Erakutsi aplikazioaren erabilera"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Optimizaziorik gabe"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Optimizaziorik gabe"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Bateria-optimizazioa aplikatzen da"</string>
@@ -3107,7 +3109,7 @@
     <string name="battery_power_management" msgid="5571519699679107523">"Bateriaren kudeaketa"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Ez du bateriarik erabili bateria guztiz kargatu zenetik"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Aplikazioaren ezarpenak"</string>
-    <string name="system_ui_settings" msgid="579824306467081123">"Erakutsi sistemako UI konfiguratzailea"</string>
+    <string name="system_ui_settings" msgid="579824306467081123">"Erakutsi sistemako erabiltzaile-interfazearen konfiguratzailea"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Baimen gehigarriak"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Beste <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Akatsen txostena partekatu nahi duzu?"</string>
