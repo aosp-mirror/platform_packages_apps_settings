@@ -303,7 +303,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     public void onSearchResultClicked(SearchViewHolder resultViewHolder, SearchResult result,
             Pair<Integer, Object>... logTaggedData) {
         logSearchResultClicked(resultViewHolder, result, logTaggedData);
-
+        mSearchFeatureProvider.searchResultClicked(getContext(), mQuery, result);
         mSavedQueryController.saveQuery(mQuery);
         mResultClickCount++;
     }
@@ -397,9 +397,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));
 
         mMetricsFeatureProvider.action(getContext(),
-                MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
+                resultViewHolder.getClickActionMetricName(),
                 resultName,
                 taggedData.toArray(new Pair[0]));
-        mSearchFeatureProvider.searchResultClicked(getContext(), mQuery, result);
     }
 }

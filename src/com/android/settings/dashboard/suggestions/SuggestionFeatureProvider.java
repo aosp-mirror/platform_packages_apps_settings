@@ -18,6 +18,7 @@ package com.android.settings.dashboard.suggestions;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.android.settingslib.drawer.Tile;
@@ -33,11 +34,13 @@ public interface SuggestionFeatureProvider {
      */
     boolean isSmartSuggestionEnabled(Context context);
 
-    /** Return true if {@code suggestion} is managed by this provider. */
-    boolean isPresent(@NonNull ComponentName suggestion);
-
     /** Return true if the suggestion has already been completed and does not need to be shown */
     boolean isSuggestionCompleted(Context context, @NonNull ComponentName suggestion);
+
+    /**
+     * Returns the {@link SharedPreferences} that holds metadata for suggestions.
+     */
+    SharedPreferences getSharedPrefs(Context context);
 
     /**
      * Ranks the list of suggestions in place.

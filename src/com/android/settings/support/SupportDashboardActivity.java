@@ -68,6 +68,8 @@ public class SupportDashboardActivity extends Activity implements Indexable {
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.page_tab_title_support);
                     data.screenTitle = context.getString(R.string.settings_label);
+                    data.summaryOn = context.getString(R.string.support_summary);
+                    data.iconResId = R.drawable.ic_help;
                     data.intentTargetPackage = context.getPackageName();
                     data.intentTargetClass = SupportDashboardActivity.class.getName();
                     data.intentAction = Intent.ACTION_MAIN;

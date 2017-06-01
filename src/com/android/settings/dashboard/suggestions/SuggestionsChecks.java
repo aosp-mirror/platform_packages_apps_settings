@@ -79,13 +79,10 @@ public class SuggestionsChecks {
             return isCameraLiftTriggerEnabled();
         }
 
-        SuggestionFeatureProvider provider =
+        final SuggestionFeatureProvider provider =
                 FeatureFactory.getFactory(mContext).getSuggestionFeatureProvider(mContext);
-        if (provider != null && provider.isPresent(component)) {
-            return provider.isSuggestionCompleted(mContext, component);
-        }
 
-        return false;
+        return provider.isSuggestionCompleted(mContext, component);
     }
 
     private boolean isDeviceSecured() {

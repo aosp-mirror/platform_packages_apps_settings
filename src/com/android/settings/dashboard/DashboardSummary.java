@@ -60,7 +60,6 @@ public class DashboardSummary extends InstrumentedFragment
     private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
 
-    private static final String SUGGESTIONS = "suggestions";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
 
@@ -98,7 +97,7 @@ public class DashboardSummary extends InstrumentedFragment
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
         mSuggestionParser = new SuggestionParser(activity,
-                activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+                mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
@@ -276,8 +275,6 @@ public class DashboardSummary extends InstrumentedFragment
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
-                    mSuggestionFeatureProvider.dismissSuggestion(
-                            context, mSuggestionParser, suggestion);
                     suggestions.remove(i--);
                 }
             }
