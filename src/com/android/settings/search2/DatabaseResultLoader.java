@@ -323,18 +323,18 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
             for (int j = i - 1; j >= 0; j--) {
                 primaryResult = results.get(j);
                 if (areDuplicateResults(primaryResult, secondaryResult)) {
-
                     if (primaryResult.viewType != ResultPayload.PayloadType.INTENT) {
                         // Case where both payloads are inline
                         results.remove(i);
                         break;
                     } else if (secondaryResult.viewType != ResultPayload.PayloadType.INTENT) {
-                        // Case where only second result is inline
+                        // Case where only second result is inline.
                         results.remove(j);
                         i--; // shift the top index to reflect the lower element being removed
                     } else {
-                        // Case where both payloads are intent
+                        // Case where both payloads are intent.
                         results.remove(i);
+                        break;
                     }
                 }
             }
