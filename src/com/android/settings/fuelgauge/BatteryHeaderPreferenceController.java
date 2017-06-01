@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
-import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.Utils;
 
 /**
