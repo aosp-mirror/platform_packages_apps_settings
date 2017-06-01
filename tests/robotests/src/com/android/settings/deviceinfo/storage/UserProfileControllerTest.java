@@ -114,7 +114,7 @@ public class UserProfileControllerTest {
                         99 * MEGABYTE_IN_BYTES,
                         33 * MEGABYTE_IN_BYTES,
                         33 * MEGABYTE_IN_BYTES,
-                        33 * MEGABYTE_IN_BYTES);
+                        33 * MEGABYTE_IN_BYTES, 0);
         result.put(10, userResult);
 
         mController.handleResult(result);

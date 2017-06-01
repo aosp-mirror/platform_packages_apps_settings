@@ -400,7 +400,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     private void updateState(String[] available, String[] tethered,
             String[] errored) {
         updateUsbState(available, tethered, errored);
-        updateBluetoothState(available, tethered, errored);
+        updateBluetoothState();
     }
 
 
@@ -431,41 +431,18 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
 
         if (usbTethered) {
-            mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
             mUsbTether.setEnabled(!mDataSaverEnabled);
             mUsbTether.setChecked(true);
         } else if (usbAvailable) {
-            if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-                mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
-            } else {
-                mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
-            }
             mUsbTether.setEnabled(!mDataSaverEnabled);
             mUsbTether.setChecked(false);
-        } else if (usbErrored) {
-            mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
-            mUsbTether.setEnabled(false);
-            mUsbTether.setChecked(false);
-        } else if (mMassStorageActive) {
-            mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
-            mUsbTether.setEnabled(false);
-            mUsbTether.setChecked(false);
         } else {
-            mUsbTether.setSummary(R.string.usb_tethering_unavailable_subtext);
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
         }
     }
 
-    private void updateBluetoothState(String[] available, String[] tethered,
-            String[] errored) {
-        boolean bluetoothErrored = false;
-        for (String s: errored) {
-            for (String regex : mBluetoothRegexs) {
-                if (s.matches(regex)) bluetoothErrored = true;
-            }
-        }
-
+    private void updateBluetoothState() {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter == null) {
             return;
@@ -473,34 +450,17 @@ public class TetherSettings extends RestrictedSettingsFragment
         int btState = adapter.getState();
         if (btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mBluetoothTether.setEnabled(false);
-            mBluetoothTether.setSummary(R.string.bluetooth_turning_off);
         } else if (btState == BluetoothAdapter.STATE_TURNING_ON) {
             mBluetoothTether.setEnabled(false);
-            mBluetoothTether.setSummary(R.string.bluetooth_turning_on);
         } else {
             BluetoothPan bluetoothPan = mBluetoothPan.get();
             if (btState == BluetoothAdapter.STATE_ON && bluetoothPan != null
                     && bluetoothPan.isTetheringOn()) {
                 mBluetoothTether.setChecked(true);
                 mBluetoothTether.setEnabled(!mDataSaverEnabled);
-                int bluetoothTethered = bluetoothPan.getConnectedDevices().size();
-                if (bluetoothTethered > 1) {
-                    String summary = getString(
-                            R.string.bluetooth_tethering_devices_connected_subtext,
-                            bluetoothTethered);
-                    mBluetoothTether.setSummary(summary);
-                } else if (bluetoothTethered == 1) {
-                    mBluetoothTether.setSummary(
-                            R.string.bluetooth_tethering_device_connected_subtext);
-                } else if (bluetoothErrored) {
-                    mBluetoothTether.setSummary(R.string.bluetooth_tethering_errored_subtext);
-                } else {
-                    mBluetoothTether.setSummary(R.string.bluetooth_tethering_available_subtext);
-                }
             } else {
                 mBluetoothTether.setEnabled(!mDataSaverEnabled);
                 mBluetoothTether.setChecked(false);
-                mBluetoothTether.setSummary(R.string.bluetooth_tethering_off_subtext);
             }
         }
     }

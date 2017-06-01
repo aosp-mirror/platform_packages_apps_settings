@@ -31,8 +31,6 @@
     <string name="dlg_switch">Switch</string>
 
     <!-- Device Info --> <skip />
-    <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
-    <string name="device_info_default">Unknown</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
     <plurals name="show_dev_countdown">
         <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
@@ -241,19 +239,30 @@
     <!-- Bluetooth settings screen, confirmation button for rename device dialog. [CHAR LIMIT=20] -->
     <string name="bluetooth_rename_button">Rename</string>
     <!-- Bluetooth settings.  Dialog title to confirm disconnecting from all profiles of a device. [CHAR LIMIT=30] -->
-    <string name="bluetooth_disconnect_title">Disconnect?</string>
+    <string name="bluetooth_disconnect_title">Disconnect device?</string>
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
+    <string name="bluetooth_disconnect_all_profiles" product="default">Your phone will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="tablet">Your tablet will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="device">Your device will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- dialog ok button for disconnect dialog [CHAR LIMIT=10] -->
+    <string name="bluetooth_disconnect_dialog_ok">Disconnect</string>
     <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
     <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
-    <string name="bluetooth_pairing_pref_title">Pair a new device</string>
+    <string name="bluetooth_pairing_pref_title">Pair new device</string>
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
-    <string name="bluetooth_footer_mac_message">Bluetooth MAC address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
-    <!-- Bluetooth Visibility discoonect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
+    <string name="bluetooth_footer_mac_message" product="default">Your phone\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="tablet">Your tablet\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="device">Your device\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+
+    <!-- Bluetooth Visibility disconnect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
     <string name="bluetooth_is_disconnect_question">Disconnect <xliff:g id="device_name">%1$s</xliff:g>?</string>
     <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
     <string name="bluetooth_broadcasting">Broadcasting</string>
@@ -276,8 +285,8 @@
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
-    <!-- Bluetooth settings screen, menu to show the list of received files [CHAR LIMIT=30] -->
-    <string name="bluetooth_show_received_files">Show received files</string>
+    <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
+    <string name="bluetooth_show_received_files">Received files</string>
 
     <!-- Strings for BluetoothDevicePicker [CHAR LIMIT=40]-->
     <string name="device_picker">Choose Bluetooth device</string>
@@ -376,12 +385,12 @@
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
-    <string name="bluetooth_device_name_summary">Visible as <xliff:g id="device_name">^1</xliff:g> to other devices</string>
+    <string name="bluetooth_device_name_summary">Visible to other devices as: <xliff:g id="device_name">^1</xliff:g></string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
-    <string name="bluetooth_pairing_page_title">Pair bluetooth device</string>
+    <string name="bluetooth_pairing_page_title">Pair new device</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -1511,6 +1520,8 @@
       still detect Bluetooth devices. You can change this in
       <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
       settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
+    <!-- Bluetooth connecting error message [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connect_failed">Couldn\'t connect. Try again.</string>
 
 
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the user to choose which one he wants to connect to. -->
@@ -2000,12 +2011,31 @@
     <string name="wifi_tether_checkbox_text">Portable Wi\u2011Fi hotspot</string>
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
-    <!-- Label for Wifi tether checkbox summary. Toggles Access Point on/off  [CHAR LIMIT=60] -->
-    <string name="wifi_hotspot_checkbox_text_summary">Use mobile connection to provide Wi\u2011Fi network</string>
     <!-- Summary text when turning hotspot off -->
-    <string name="wifi_hotspot_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection via hotspot</string>
-    <!-- Summary text when turning hotspot off -->
-    <string name="wifi_hotspot_off_subtext" product="default">Not sharing this phone\u2019s Internet connection via hotspot</string>
+    <string name="wifi_hotspot_off_subtext">Not sharing Internet or content with other devices</string>
+    <!-- Summary text when tethering is on -->
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet">Sharing this tablet\u2019s Internet connection via hotspot</string>
+    <!-- Summary text when tethering is on -->
+    <string name="wifi_hotspot_tethering_on_subtext" product="default">Sharing this phone\u2019s Internet connection via hotspot</string>
+    <!-- Summary text when hotspot is on for local-only -->
+    <string name="wifi_hotspot_on_local_only_subtext">App is sharing content. To share Internet connection, turn hotspot off, then on</string>
+
+    <!-- Wifi hotspot settings -->
+    <!-- Label for Wifi hotspot name. -->
+    <string name="wifi_hotspot_name_title">Wi\u2011Fi name</string>
+    <!-- Summary for Wifi hotspot name when connection is in progress. -->
+    <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>...</string>
+    <!-- Summary for Wifi hotspot name when connected. -->
+    <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
+    <!-- Label for Wifi hotspot password. -->
+    <string name="wifi_hotspot_password_title">Wi\u2011Fi password</string>
+    <!-- Label for Wifi hotspot AP Band. -->
+    <string name="wifi_hotspot_ap_band_title">AP Band</string>
+    <!-- Wifi hotspot footer info for regular hotspot [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_footer_info_regular">Use hotspot to create a Wi\u2011Fi network for your other devices. Hotspot provides Internet using your mobile data connection. Additional mobile data charges may apply.</string>
+    <!-- Wifi hotspot footer info [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_footer_info_local_only">Apps can create a hotspot to share content with nearby devices.</string>
+
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
     <!-- Summary text when turning hotspot off -->
@@ -2343,40 +2373,38 @@
     <string name="night_display_title">Night Light</string>
     <!-- Night display screen, description of night display feature (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
     <string name="night_display_text">Night Light tints your screen amber. This makes it easier to look at your screen or read in dim light, and may help you fall asleep more easily.</string>
-    <!-- Night display screen, category title for settings to schedule when night display activates automatically. [CHAR LIMIT=30] -->
-    <string name="night_display_category_schedule">Schedule</string>
-    <!-- Night display screen, category title for settings to manually activate night display. [CHAR LIMIT=30] -->
-    <string name="night_display_category_status">Status</string>
     <!-- Night display screen, setting option name to configure whether night display turn on/off automatically. [CHAR LIMIT=30] -->
-    <string name="night_display_auto_mode_title">Turn on automatically</string>
+    <string name="night_display_auto_mode_title">Schedule</string>
     <!-- Night display screen, setting option value for night display to *never* turn on/off automatically. [CHAR LIMIT=30] -->
-    <string name="night_display_auto_mode_never">Never</string>
-    <!-- Night display screen, setting option value for night display to turn on/off automatically according to a user defined schedule. [CHAR LIMIT=30] -->
-    <string name="night_display_auto_mode_custom">Custom schedule</string>
-    <!-- Night display screen, setting option value for night display to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=30] -->
-    <string name="night_display_auto_mode_twilight">Sunset to sunrise</string>
+    <string name="night_display_auto_mode_never">None</string>
+    <!-- Night display screen, setting option value for night display to turn on/off automatically according to a user defined schedule. [CHAR LIMIT=32] -->
+    <string name="night_display_auto_mode_custom">Turns on at custom time</string>
+    <!-- Night display screen, setting option value for night display to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
+    <string name="night_display_auto_mode_twilight">Turns on from sunset to sunrise</string>
     <!-- Night display screen, setting option name to configure time to automatically turn on night display. [CHAR LIMIT=30] -->
     <string name="night_display_start_time_title">Start time</string>
     <!-- Night display screen, setting option name to configure time to automatically turn off night display. [CHAR LIMIT=30] -->
     <string name="night_display_end_time_title">End time</string>
+    <!-- Night display screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
+    <string name="night_display_status_title">Status</string>
     <!-- Night display screen, setting the color temperature of the display. [CHAR LIMIT=30] -->
     <string name="night_display_temperature_title">Intensity</string>
     <!-- Display settings screen, summary format of night display when off. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off">Off. <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
+    <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically.</string>
+    <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g>.</string>
+    <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset.</string>
+    <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
     <!-- Display settings screen, summary format of night display when on. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on">On. <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
+    <string name="night_display_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on_auto_mode_never">Will never turn off automatically.</string>
+    <string name="night_display_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g>.</string>
+    <string name="night_display_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on_auto_mode_twilight">Will turn off automatically at sunrise.</string>
+    <string name="night_display_summary_on_auto_mode_twilight">Will turn off automatically at sunrise</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Sleep</string>
@@ -3151,49 +3179,25 @@
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
     <string name="usb_tethering_button_text">USB tethering</string>
-    <!-- USB available subtext - shown when USB is connected but not currently being tethered -->
-    <string name="usb_tethering_available_subtext">USB connected, check to tether</string>
-    <!-- USB tethered subtext - shown when USB is connected and being tethered -->
-    <string name="usb_tethering_active_subtext">Tethered</string>
-    <!-- USB storage subtext - shown when tethering is disabled because USB storage is active -->
-    <string name="usb_tethering_storage_active_subtext">Can\u2019t tether when USB storage is in use</string>
-    <!-- USB unavailable subtext - shown when USB is not connected -->
-    <string name="usb_tethering_unavailable_subtext">USB not connected</string>
-    <!-- USB unavailable subtext - shown when USB is not connected -->
-    <string name="usb_tethering_turnon_subtext">Connect to turn on</string>
-    <!-- USB errored subtext - shown when USB is broken for some reason -->
-    <string name="usb_tethering_errored_subtext">USB tethering error</string>
+    <string name="usb_tethering_subtext" product="default">Share phone\u2019s Internet connection via USB</string>
+    <string name="usb_tethering_subtext" product="tablet">Share tablet\u2019s Internet connection via USB</string>
 
     <!-- Bluetooth Tethering settings-->
     <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
     <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
-    <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=70]-->
-    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=70]-->
-    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to 1 device via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to 1 device via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices via Bluetooth</string>
-    <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=90]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices via Bluetooth</string>
+    <!-- Bluetooth Tethering subtext [CHAR LIMIT=70]-->
+    <string name="bluetooth_tethering_subtext" product="tablet">Share tablet\u2019s Internet connection via Bluetooth</string>
+    <!-- Bluetooth Tethering subtext [CHAR LIMIT=70]-->
+    <string name="bluetooth_tethering_subtext" product="default">Share phone\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=80]-->
     <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=80]-->
-    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=80]-->
-    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\u2019s Internet connection via Bluetooth</string>
-    <!-- Bluetooth errored subtext - shown when Bluetooth is broken for some reason [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_errored_subtext">Not tethered</string>
     <!-- Bluetooth Tethering settings. Error message shown when trying to connect an 8th device [CHAR LIMIT=50]-->
     <string name="bluetooth_tethering_overflow_error">Can\u2019t tether to more than <xliff:g id="maxConnection">%1$d</xliff:g> devices.</string>
     <!-- Bluetooth Tethering settings.  Message for untethering from a bluetooth device [CHAR LIMIT=50]-->
     <string name="bluetooth_untether_blank"><xliff:g id="device_name">%1$s</xliff:g> will be untethered.</string>
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
-    <string name="tethering_footer_info">Use hotspot and tethering to provide Internet to other devices through your mobile data connection.</string>
+    <string name="tethering_footer_info">Use hotspot and tethering to provide Internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
 
     <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
@@ -3936,6 +3940,15 @@
         and then on again.</string>
 
     <!-- Languages Settings --> <skip />
+    <!-- Title of Language, input & gestures setting on main settings screen. -->
+    <string name="language_input_gesture_title">Languages, input &amp; gestures</string>
+    <!-- Summary of Language, input & gestures setting on main settings screen when both gesture setting and assistant feature is on. -->
+    <string name="language_input_gesture_summary_on_with_assist"></string>
+    <!-- Summary of Language, input & gestures setting on main settings screen when both gesture setting and non-assistant feature is on. -->
+    <string name="language_input_gesture_summary_on_non_assist"></string>
+    <!-- Summary of Language, input & gestures setting on main settings screen when gesture setting is off. -->
+    <string name="language_input_gesture_summary_off"></string>
+
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings">Languages&#160;&amp; input</string>
     <!-- Title of Languages & input settings screen -->
@@ -4639,7 +4652,7 @@
     <!-- Label for power consumed by system [CHAR LIMIT=30] -->
     <string name="power_system">System</string>
     <!-- Label for power consumed by user [CHAR LIMIT=30] -->
-    <string name="power_user">User</string>
+    <string name="power_user">Other users</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -6393,10 +6406,12 @@
     <string name="keywords_lockscreen">slide to unlock, password, pattern, PIN</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
-    <!-- Search keyword for gesture settings -->
     <string name="keywords_gesture">gesture</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
+    <string name="keywords_squeeze_to_launch_gesture">gesture, edge, side, active edge, squeeze, grip, assist, assistant, squeezy, squeezie, squeezey, squeezee, ok google, google assistant</string>
+    <string name="keywords_wake_squeeze_gesture">gesture, wake, notifications, screen, display, screen off, screen on, squeeze, edge, asleep, sleep, grip</string>
+    <string name="keywords_alarm_silence_gesture">gesture, silence, snooze, alarm, incoming call, quiet, display, lockscreen, squeeze, grip, edge, stop</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -8457,27 +8472,46 @@
     <!-- Summary text for double tap power for camera [CHAR LIMIT=160]-->
     <string name="double_tap_power_for_camera_summary">To quickly open camera, press the power button twice. Works from any screen.</string>
 
+    <!-- Title for settings suggestion for double tap power for camera [CHAR LIMIT=60] -->
+    <string name="double_tap_power_for_camera_suggestion_title">Open camera quickly</string>
+
+    <!-- Summary for settings suggestion for double tap power for camera [CHAR LIMIT=60] -->
+    <string name="double_tap_power_for_camera_suggestion_summary">Press power button twice to open camera</string>
+
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
     <string name="double_twist_for_camera_mode_title">Flip camera</string>
 
     <!-- Summary text for double twist for camera mode  [CHAR LIMIT=160]-->
     <string name="double_twist_for_camera_mode_summary"></string>
 
-    <!-- Title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
+    <!-- Title for settings suggestion for double twist for camera [CHAR LIMIT=60] -->
+    <string name="double_twist_for_camera_suggestion_title">Take selfies faster</string>
+
+    <!-- Summary for settings suggestion for double twist for camera (phone) [CHAR LIMIT=60] -->
+    <string name="double_twist_for_camera_suggestion_summary" product="default">Double-twist phone for selfie mode</string>
+    <!-- Summary for settings suggestion for double twist for camera (tablet) [CHAR LIMIT=60] -->
+    <string name="double_twist_for_camera_suggestion_summary" product="tablet">Double-twist tablet for selfie mode</string>
+    <!-- Summary for settings suggestion for double twist for camera (device) [CHAR LIMIT=60] -->
+    <string name="double_twist_for_camera_suggestion_summary" product="device">Double-twist device for selfie mode</string>
+
+    <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
-    <!-- Title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
+    <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="tablet">Double-tap to check tablet</string>
-    <!-- Title text for ambient display double tap (device) [CHAR LIMIT=60]-->
+    <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notification icons, and other info, double-tap your screen.</string>
 
-    <!-- Title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
+    <!-- Summary for settings suggestion for double tap power for camera [CHAR LIMIT=60] -->
+    <string name="ambient_display_suggestion_summary">Check notifications when screen is off</string>
+
+    <!-- Preference and settings suggestion title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="default">Lift to check phone</string>
-    <!-- Title text for ambient display pick up (tablet) [CHAR LIMIT=60]-->
+    <!-- Preference and settings suggestion title text for ambient display pick up (tablet) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="tablet">Lift to check tablet</string>
-    <!-- Title text for ambient display pick up (device) [CHAR LIMIT=60]-->
+    <!-- Preference and settings suggestion title text for ambient display pick up (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="device">Lift to check device</string>
 
     <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
@@ -8486,6 +8520,9 @@
     <string name="ambient_display_pickup_summary" product="tablet">To check time, notification icons, and other info, pick up your tablet.</string>
     <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
     <string name="ambient_display_pickup_summary" product="device">To check time, notification icons, and other info, pick up your device.</string>
+
+    <!-- Summary for settings suggestion for ambient display pick up [CHAR LIMIT=60] -->
+    <string name="ambient_display_pickup_suggestion_summary">Check notifications when screen is off</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -8496,6 +8533,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet">To check your notifications, swipe down on the fingerprint sensor on the back of your tablet.</string>
     <!-- Summary text for fingerprint swipe for notifications (device) [CHAR LIMIT=160]-->
     <string name="fingerprint_swipe_for_notifications_summary" product="device">To check your notifications, swipe down on the fingerprint sensor on the back of your device.</string>
+
+    <!-- Title for settings suggestion for fingerprint swipe for notifications [CHAR LIMIT=60] -->
+    <string name="fingerprint_swipe_for_notifications_suggestion_title">See notifications quickly</string>
+
+    <!-- Summary for settings suggestion for fingerprint swipe for notifications [CHAR LIMIT=60] -->
+    <string name="fingerprint_swipe_for_notifications_suggestion_summary">Swipe down on the fingerprint sensor</string>
 
     <!-- Title and settings suggestion title text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
     <string name="camera_lift_trigger_title">Raise to open camera</string>
