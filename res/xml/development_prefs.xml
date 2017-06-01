@@ -210,6 +210,11 @@
             android:entryValues="@array/usb_configuration_values" />
 
         <SwitchPreference
+            android:key="bluetooth_show_devices_without_names"
+            android:title="@string/bluetooth_show_devices_without_names"
+            android:summary="@string/bluetooth_show_devices_without_names_summary"/>
+
+        <SwitchPreference
             android:key="bluetooth_disable_absolute_volume"
             android:title="@string/bluetooth_disable_absolute_volume"
             android:summary="@string/bluetooth_disable_absolute_volume_summary"/>

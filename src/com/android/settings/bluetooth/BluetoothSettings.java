@@ -140,6 +140,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
             mBluetoothEnabler.resume(getActivity());
         }
         super.onStart();
+        // Always show paired devices regardless whether user-friendly name exists
+        mShowDevicesWithoutNames = true;
         if (isUiRestricted()) {
             getPreferenceScreen().removeAll();
             if (!isUiRestrictedByOnlyAdmin()) {
