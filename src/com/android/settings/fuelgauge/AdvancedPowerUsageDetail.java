@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -86,9 +87,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
 
-    private Preference mForegroundPreference;
-    private Preference mBackgroundPreference;
-    private Preference mPowerUsagePreference;
+    @VisibleForTesting
+    Preference mForegroundPreference;
+    @VisibleForTesting
+    Preference mBackgroundPreference;
+    @VisibleForTesting
+    Preference mPowerUsagePreference;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
 
     private DevicePolicyManagerWrapper mDpm;
@@ -174,18 +178,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onResume();
 
         initHeader();
-
-        final Bundle bundle = getArguments();
-        final Context context = getContext();
-
-        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final String usagePercent = bundle.getString(EXTRA_POWER_USAGE_PERCENT);
-        final int powerMah = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
-        mForegroundPreference.setSummary(Utils.formatElapsedTime(context, foregroundTimeMs, false));
-        mBackgroundPreference.setSummary(Utils.formatElapsedTime(context, backgroundTimeMs, false));
-        mPowerUsagePreference.setSummary(
-                getString(R.string.battery_detail_power_percentage, usagePercent, powerMah));
+        initPreference();
     }
 
     @VisibleForTesting
@@ -220,6 +213,25 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
 
         controller.done(context, true /* rebindActions */);
+    }
+
+    @VisibleForTesting
+    void initPreference() {
+        final Bundle bundle = getArguments();
+        final Context context = getContext();
+
+        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        final String usagePercent = bundle.getString(EXTRA_POWER_USAGE_PERCENT);
+        final int powerMah = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        mForegroundPreference.setSummary(
+                TextUtils.expandTemplate(getText(R.string.battery_used_for),
+                        Utils.formatElapsedTime(context, foregroundTimeMs, false)));
+        mBackgroundPreference.setSummary(
+                TextUtils.expandTemplate(getText(R.string.battery_active_for),
+                        Utils.formatElapsedTime(context, backgroundTimeMs, false)));
+        mPowerUsagePreference.setSummary(
+                getString(R.string.battery_detail_power_percentage, usagePercent, powerMah));
     }
 
     @Override

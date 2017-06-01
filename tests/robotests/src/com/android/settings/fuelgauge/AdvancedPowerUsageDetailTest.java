@@ -37,6 +37,7 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.v7.preference.Preference;
 import android.support.v7.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
@@ -45,6 +46,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -73,9 +75,10 @@ public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
     private static final String[] PACKAGE_NAME = {"com.android.app"};
-    private static final String USAGE_PERCENT = "16";
+    private static final String USAGE_PERCENT = "16%";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
+    private static final int POWER_MAH = 150;
     private static final long BACKGROUND_TIME_US = 100 * 1000;
     private static final long FOREGROUND_TIME_US = 200 * 1000;
     private static final long BACKGROUND_TIME_MS = 100;
@@ -83,8 +86,6 @@ public class AdvancedPowerUsageDetailTest {
     private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
     private static final long PHONE_BACKGROUND_TIME_MS = 0;
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock
@@ -107,6 +108,10 @@ public class AdvancedPowerUsageDetailTest {
     private BatteryStats.Uid mUid;
     @Mock
     private PackageManager mPackageManager;
+    private Context mContext;
+    private Preference mForegroundPreference;
+    private Preference mBackgroundPreference;
+    private Preference mPowerUsagePreference;
     private AdvancedPowerUsageDetail mFragment;
     private FakeFeatureFactory mFeatureFactory;
     private SettingsActivity mTestActivity;
@@ -114,6 +119,8 @@ public class AdvancedPowerUsageDetailTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        mContext = spy(RuntimeEnvironment.application);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
 
@@ -170,6 +177,13 @@ public class AdvancedPowerUsageDetailTest {
         doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(
                 nullable(Fragment.class), nullable(String.class), captor.capture(), anyInt(),
                 nullable(CharSequence.class), nullable(UserHandle.class));
+
+        mForegroundPreference = new Preference(mContext);
+        mBackgroundPreference = new Preference(mContext);
+        mPowerUsagePreference = new Preference(mContext);
+        mFragment.mForegroundPreference = mForegroundPreference;
+        mFragment.mBackgroundPreference = mBackgroundPreference;
+        mFragment.mPowerUsagePreference = mPowerUsagePreference;
     }
 
     @After
@@ -303,6 +317,30 @@ public class AdvancedPowerUsageDetailTest {
                 PACKAGE_NAME[0]);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT)).isEqualTo(
                 "0%");
+    }
+
+    @Test
+    public void testInitPreference_hasCorrectSummary() {
+        Bundle bundle = new Bundle(4);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, FOREGROUND_TIME_MS);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT, USAGE_PERCENT);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, POWER_MAH);
+        doReturn(bundle).when(mFragment).getArguments();
+
+        doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
+        doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
+                R.string.battery_active_for);
+        doReturn(mContext.getString(R.string.battery_detail_power_percentage, USAGE_PERCENT,
+                POWER_MAH)).when(mFragment)
+                .getString(R.string.battery_detail_power_percentage, USAGE_PERCENT, POWER_MAH);
+
+        mFragment.initPreference();
+
+        assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0m");
+        assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0m");
+        assertThat(mPowerUsagePreference.getSummary()).isEqualTo("16% of total app usage (150mAh)");
     }
 
 }
