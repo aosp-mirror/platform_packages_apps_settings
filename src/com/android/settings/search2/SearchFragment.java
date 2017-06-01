@@ -16,7 +16,6 @@
 
 package com.android.settings.search2;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -32,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -59,9 +57,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SearchFragment extends InstrumentedFragment implements SearchView.OnQueryTextListener,
         LoaderManager.LoaderCallbacks<List<? extends SearchResult>>, IndexingCallback {
     private static final String TAG = "SearchFragment";
-
-    @VisibleForTesting
-    static final int SEARCH_TAG = "SearchViewTag".hashCode();
 
     // State values
     private static final String STATE_QUERY = "state_query";
@@ -95,12 +90,12 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     SavedQueryController mSavedQueryController;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     SearchFeatureProvider mSearchFeatureProvider;
 
     private SearchResultsAdapter mSearchAdapter;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     RecyclerView mResultsRecyclerView;
     @VisibleForTesting
     SearchView mSearchView;
@@ -149,13 +144,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         }
 
         final Activity activity = getActivity();
-        final ActionBar actionBar = activity.getActionBar();
-        mSearchView = makeSearchView(actionBar, mQuery);
-        actionBar.setCustomView(mSearchView);
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
-        mSearchView.requestFocus();
-
         // Run the Index update only if we have some space
         if (!Utils.isLowStorage(activity)) {
             mSearchFeatureProvider.updateIndex(activity, this /* indexingCallback */);
@@ -172,8 +160,14 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mResultsRecyclerView.addOnScrollListener(mScrollListener);
+        mResultsRecyclerView.addItemDecoration(new HeaderDecorator());
 
         mNoResultsView = view.findViewById(R.id.no_results_layout);
+
+        mSearchView = view.findViewById(R.id.search_view);
+        mSearchView.setQuery(mQuery, false /* submitQuery */);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.requestFocus();
         return view;
     }
 
@@ -345,19 +339,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         final String query = mQuery;
         mQuery = "";
         onQueryTextChange(query);
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    SearchView makeSearchView(ActionBar actionBar, String query) {
-        final SearchView searchView = new SearchView(actionBar.getThemedContext());
-        searchView.setIconifiedByDefault(false);
-        searchView.setQuery(query, false /* submitQuery */);
-        searchView.setOnQueryTextListener(this);
-        searchView.setTag(SEARCH_TAG, searchView);
-        final LayoutParams lp =
-                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        searchView.setLayoutParams(lp);
-        return searchView;
     }
 
     private void hideKeyboard() {
