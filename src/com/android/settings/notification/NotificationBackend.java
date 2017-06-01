@@ -122,6 +122,19 @@ public class NotificationBackend {
         }
     }
 
+
+    public NotificationChannelGroup getGroup(String groupId, String pkg, int uid) {
+        if (groupId == null) {
+            return null;
+        }
+        try {
+            return sINM.getNotificationChannelGroupForPackage(groupId, pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return null;
+        }
+    }
+
     public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
         try {
             return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
