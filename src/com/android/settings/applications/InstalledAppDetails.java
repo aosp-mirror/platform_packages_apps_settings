@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -116,6 +114,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -232,7 +232,8 @@ public class InstalledAppDetails extends AppInfoBase
                 }
             };
 
-    private boolean handleDisableable(Button button) {
+    @VisibleForTesting
+    boolean handleDisableable(Button button) {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
         // by not allowing disabling of apps signed with the
@@ -243,7 +244,8 @@ public class InstalledAppDetails extends AppInfoBase
             button.setText(R.string.disable_text);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             button.setText(R.string.disable_text);
-            disableable = true;
+            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
+                    .contains(mAppEntry.info.packageName);
         } else {
             button.setText(R.string.enable_text);
             disableable = true;
@@ -1221,9 +1223,7 @@ public class InstalledAppDetails extends AppInfoBase
     void maybeAddInstantAppButtons() {
         if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
-            final Activity activity = getActivity();
-            mInstantAppButtonsController = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
+            mInstantAppButtonsController = mApplicationFeatureProvider
                     .newInstantAppButtonsController(this,
                             buttons.findViewById(R.id.instant_app_button_container),
                             id -> showDialogInner(id, 0))
