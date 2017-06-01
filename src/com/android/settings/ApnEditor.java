@@ -1056,7 +1056,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         if (errorMsg == null) {
             // if carrier does not allow editing certain apn types, make sure type does not include
             // those
-            if (mReadOnlyApnTypes.length > 0
+            if (!ArrayUtils.isEmpty(mReadOnlyApnTypes)
                     && apnTypesMatch(mReadOnlyApnTypes, mApnType.getText())) {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (String type : mReadOnlyApnTypes) {
