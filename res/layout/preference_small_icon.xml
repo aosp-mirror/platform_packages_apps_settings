@@ -29,10 +29,10 @@
               android:focusable="true" >
 
     <LinearLayout
-        android:id="@android:id/icon_frame"
+        android:id="@+id/icon_frame"
+        style="@style/preference_icon_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="56dp"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
         android:paddingEnd="12dp"
