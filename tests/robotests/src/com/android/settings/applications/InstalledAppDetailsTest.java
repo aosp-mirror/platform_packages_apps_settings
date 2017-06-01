@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.app.AlertDialog;
+import android.app.LoaderManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.BatteryStats;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
@@ -107,8 +109,10 @@ public final class InstalledAppDetailsTest {
     private PackageManager mPackageManager;
     @Mock
     private BatteryUtils mBatteryUtils;
-    private FakeFeatureFactory mFeatureFactory;
+    @Mock
+    private LoaderManager mLoaderManager;
 
+    private FakeFeatureFactory mFeatureFactory;
     private InstalledAppDetails mAppDetail;
     private Context mShadowContext;
     private Preference mBatteryPreference;
@@ -526,6 +530,16 @@ public final class InstalledAppDetailsTest {
 
         assertThat(mAppDetail.handleDisableable(button)).isFalse();
         verify(button).setText(R.string.disable_text);
+    }
+
+    @Test
+    public void testRestartBatteryStatsLoader() {
+        doReturn(mLoaderManager).when(mAppDetail).getLoaderManager();
+
+        mAppDetail.restartBatteryStatsLoader();
+
+        verify(mLoaderManager).restartLoader(InstalledAppDetails.LOADER_BATTERY, Bundle.EMPTY,
+                mAppDetail.mBatteryCallbacks);
     }
 
     @Implements(Utils.class)
