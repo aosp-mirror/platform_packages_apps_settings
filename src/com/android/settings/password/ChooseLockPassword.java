@@ -32,6 +32,7 @@ import android.graphics.Insets;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -125,6 +126,11 @@ public class ChooseLockPassword extends SettingsActivity {
             return this;
         }
 
+        public IntentBuilder setForFingerprint(boolean forFingerprint) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, forFingerprint);
+            return this;
+        }
+
         public Intent build() {
             return mIntent;
         }
@@ -143,7 +149,11 @@ public class ChooseLockPassword extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CharSequence msg = getText(R.string.lockpassword_choose_your_password_header);
+        boolean forFingerprint = getIntent()
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+        CharSequence msg = getText(forFingerprint
+                ? R.string.lockpassword_choose_your_password_header_for_fingerprint
+                : R.string.lockpassword_choose_your_password_header);
         setTitle(msg);
         LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
         layout.setFitsSystemWindows(false);
@@ -186,6 +196,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
+        private boolean mForFingerprint;
 
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
@@ -225,27 +236,49 @@ public class ChooseLockPassword extends SettingsActivity {
          */
         protected enum Stage {
 
-            Introduction(R.string.lockpassword_choose_your_password_header,
+            Introduction(
+                    R.string.lockpassword_choose_your_password_header,
+                    R.string.lockpassword_choose_your_password_header_for_fingerprint,
                     R.string.lockpassword_choose_your_pin_header,
+                    R.string.lockpassword_choose_your_pin_header_for_fingerprint,
                     R.string.lockpassword_continue_label),
 
-            NeedToConfirm(R.string.lockpassword_confirm_your_password_header,
+            NeedToConfirm(
+                    R.string.lockpassword_confirm_your_password_header,
+                    R.string.lockpassword_confirm_your_password_header,
+                    R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_ok_label),
 
-            ConfirmWrong(R.string.lockpassword_confirm_passwords_dont_match,
+            ConfirmWrong(
+                    R.string.lockpassword_confirm_passwords_dont_match,
+                    R.string.lockpassword_confirm_passwords_dont_match,
+                    R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_continue_label);
 
-            Stage(int hintInAlpha, int hintInNumeric, int nextButtonText) {
+            Stage(int hintInAlpha, int hintInAlphaForFingerprint,
+                    int hintInNumeric, int hintInNumericForFingerprint, int nextButtonText) {
                 this.alphaHint = hintInAlpha;
+                this.alphaHintForFingerprint = hintInAlphaForFingerprint;
                 this.numericHint = hintInNumeric;
+                this.numericHintForFingerprint = hintInNumericForFingerprint;
                 this.buttonText = nextButtonText;
             }
 
             public final int alphaHint;
+            public final int alphaHintForFingerprint;
             public final int numericHint;
+            public final int numericHintForFingerprint;
             public final int buttonText;
+
+            public @StringRes int getHint(boolean isAlpha, boolean isFingerprint) {
+                if (isAlpha) {
+                    return isFingerprint ? alphaHintForFingerprint : alphaHint;
+                } else {
+                    return isFingerprint ? numericHintForFingerprint : numericHint;
+                }
+            }
         }
 
         // required constructor for fragments
@@ -263,6 +296,8 @@ public class ChooseLockPassword extends SettingsActivity {
             }
             // Only take this argument into account if it belongs to the current profile.
             mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+            mForFingerprint = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             processPasswordRequirements(intent);
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
@@ -357,9 +392,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
-                int id = mIsAlphaMode ? R.string.lockpassword_choose_your_password_header
-                        : R.string.lockpassword_choose_your_pin_header;
-                CharSequence title = getText(id);
+                int title = Stage.Introduction.getHint(mIsAlphaMode, mForFingerprint);
                 sa.setTitle(title);
                 mLayout.setHeaderText(title);
             }
@@ -779,8 +812,7 @@ public class ChooseLockPassword extends SettingsActivity {
             } else {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
-                setHeaderText(getString(
-                        mIsAlphaMode ? mUiStage.alphaHint : mUiStage.numericHint));
+                setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, mForFingerprint)));
                 setNextEnabled(canInput && length > 0);
             }
             setNextText(mUiStage.buttonText);

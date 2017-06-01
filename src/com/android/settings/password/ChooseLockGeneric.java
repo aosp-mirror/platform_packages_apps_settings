@@ -575,6 +575,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     new ChooseLockPassword.IntentBuilder(getContext())
                             .setPasswordQuality(quality)
                             .setPasswordLengthRange(minLength, maxLength)
+                            .setForFingerprint(mForFingerprint)
                             .setUserId(mUserId);
             if (mHasChallenge) {
                 builder.setChallenge(mChallenge);
@@ -587,6 +588,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected Intent getLockPatternIntent() {
             ChooseLockPattern.IntentBuilder builder =
                     new ChooseLockPattern.IntentBuilder(getContext())
+                            .setForFingerprint(mForFingerprint)
                             .setUserId(mUserId);
             if (mHasChallenge) {
                 builder.setChallenge(mChallenge);
