@@ -112,7 +112,7 @@ public class DashboardDataTest {
     public void testBuildItemsData_containsAllData() {
         final DashboardData.SuggestionHeaderData data =
                 new DashboardData.SuggestionHeaderData(false, 1, 0);
-        final Object[] expectedObjects = {mTestCondition, null, data, mTestSuggestion,
+        final Object[] expectedObjects = {null, mTestCondition, null, data, mTestSuggestion,
                 mDashboardCategory, mTestCategoryTile};
         final int expectedSize = expectedObjects.length;
 
@@ -171,7 +171,7 @@ public class DashboardDataTest {
     @Test
     public void testDiffUtil_DataEqual_noResultData() {
         List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
-        testDiffUtil(mDashboardDataWithOneConditions, 
+        testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithOneConditions, testResultData);
     }
 
@@ -180,7 +180,7 @@ public class DashboardDataTest {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_INSERT, 1, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_INSERT, 2, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -191,7 +191,7 @@ public class DashboardDataTest {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 6));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 1, 6));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
     }
@@ -203,8 +203,8 @@ public class DashboardDataTest {
                 mDashboardDataWithOneConditions.getItemList(),
                 mDashboardDataWithOneConditions.getItemList());
 
-        // Item in position 0 is condition card, which payload should not be null
-        assertThat(callback.getChangePayload(0, 0)).isNotEqualTo(null);
+        // Item in position 1 is condition card, which payload should not be null
+        assertThat(callback.getChangePayload(1, 1)).isNotNull();
     }
 
     @Test
@@ -214,9 +214,9 @@ public class DashboardDataTest {
                 mDashboardDataWithOneConditions.getItemList(),
                 mDashboardDataWithOneConditions.getItemList());
 
-        // Only item in position 0 is condition card, so others' payload should be null
-        for (int i = 1; i < mDashboardDataWithOneConditions.getItemList().size(); i++) {
-            assertThat(callback.getChangePayload(i, i)).isEqualTo(null);
+        // Position 0 is spacer, 1 is condition card, so others' payload should be null
+        for (int i = 2; i < mDashboardDataWithOneConditions.getItemList().size(); i++) {
+            assertThat(callback.getChangePayload(i, i)).isNull();
         }
 
     }
@@ -355,6 +355,11 @@ public class DashboardDataTest {
                 }
 
                 return arg2 - resultData.arg2;
+            }
+
+            @Override
+            public String toString() {
+                return "op:" + operation + ",arg1:" + arg1 + ",arg2:" + arg2;
             }
         }
     }
