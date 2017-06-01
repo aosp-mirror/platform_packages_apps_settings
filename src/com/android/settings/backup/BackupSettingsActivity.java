@@ -94,14 +94,12 @@ public class BackupSettingsActivity extends Activity implements Indexable {
 
                     // Add the activity title
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = context.getResources().getString(R.string.privacy_settings_title);
-                    data.screenTitle = context.getResources().getString(
-                            R.string.privacy_settings_title);
-                    data.keywords = context.getResources().getString(
-                            R.string.keywords_backup);
+                    data.title = context.getString(R.string.privacy_settings_title);
+                    data.screenTitle = context.getString(R.string.settings_label);
+                    data.keywords = context.getString(R.string.keywords_backup);
                     data.intentTargetPackage = context.getPackageName();
                     data.intentTargetClass = BackupSettingsActivity.class.getName();
-                    data.intentAction = "android.intent.action.MAIN";
+                    data.intentAction = Intent.ACTION_MAIN;
                     data.key = BACKUP_SEARCH_INDEX_KEY;
                     result.add(data);
 
