@@ -14,11 +14,9 @@ import com.android.settings.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
@@ -82,15 +80,15 @@ public class AppStorageSizesControllerTest {
         when(result.getCodeBytes()).thenReturn(1L);
         when(result.getCacheBytes()).thenReturn(10L);
         when(result.getDataBytes()).thenReturn(100L);
-        when(result.getTotalBytes()).thenReturn(111L);
+        when(result.getTotalBytes()).thenReturn(101L);
 
         mController.setResult(result);
         mController.updateUi(mContext);
 
         assertThat(mAppPreference.getSummary()).isEqualTo("1.00B");
         assertThat(mCachePreference.getSummary()).isEqualTo("10.00B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("100B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("111B");
+        assertThat(mDataPreference.getSummary()).isEqualTo("90.00B");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("101B");
     }
 
     @Test
@@ -99,7 +97,7 @@ public class AppStorageSizesControllerTest {
         when(result.getCodeBytes()).thenReturn(1L);
         when(result.getCacheBytes()).thenReturn(10L);
         when(result.getDataBytes()).thenReturn(100L);
-        when(result.getTotalBytes()).thenReturn(111L);
+        when(result.getTotalBytes()).thenReturn(101L);
 
         mController.setResult(result);
         mController.setCacheCleared(true);
@@ -107,8 +105,8 @@ public class AppStorageSizesControllerTest {
 
         assertThat(mAppPreference.getSummary()).isEqualTo("1.00B");
         assertThat(mCachePreference.getSummary()).isEqualTo("0.00B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("100B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("101B");
+        assertThat(mDataPreference.getSummary()).isEqualTo("90.00B");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("91.00B");
     }
 
     @Test
@@ -117,7 +115,7 @@ public class AppStorageSizesControllerTest {
         when(result.getCodeBytes()).thenReturn(1L);
         when(result.getCacheBytes()).thenReturn(10L);
         when(result.getDataBytes()).thenReturn(100L);
-        when(result.getTotalBytes()).thenReturn(111L);
+        when(result.getTotalBytes()).thenReturn(101L);
 
         mController.setResult(result);
         mController.setDataCleared(true);

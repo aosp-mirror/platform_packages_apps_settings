@@ -70,7 +70,8 @@ public class AppStorageSizesController {
             mTotalSize.setSummary(errorRes);
         } else {
             long codeSize = mLastResult.getCodeBytes();
-            long dataSize = mDataCleared ? 0 : mLastResult.getDataBytes();
+            long dataSize =
+                    mDataCleared ? 0 : mLastResult.getDataBytes() - mLastResult.getCacheBytes();
             if (mLastCodeSize != codeSize) {
                 mLastCodeSize = codeSize;
                 mAppSize.setSummary(getSizeStr(context, codeSize));
