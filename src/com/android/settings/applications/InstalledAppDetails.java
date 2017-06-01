@@ -139,7 +139,8 @@ public class InstalledAppDetails extends AppInfoBase
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_STORAGE = 3;
-    private static final int LOADER_BATTERY = 4;
+    @VisibleForTesting
+    static final int LOADER_BATTERY = 4;
 
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
@@ -202,7 +203,8 @@ public class InstalledAppDetails extends AppInfoBase
     private AppStorageStats mLastResult;
     private String mBatteryPercent;
 
-    private final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
+    @VisibleForTesting
+    final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
             new LoaderCallbacks<BatteryStatsHelper>() {
 
                 @Override
@@ -410,9 +412,14 @@ public class InstalledAppDetails extends AppInfoBase
                     mDataCallbacks);
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
-        getLoaderManager().initLoader(LOADER_BATTERY, Bundle.EMPTY, mBatteryCallbacks);
+        restartBatteryStatsLoader();
         new MemoryUpdater().execute();
         updateDynamicPrefs();
+    }
+
+    @VisibleForTesting
+    public void restartBatteryStatsLoader() {
+        getLoaderManager().restartLoader(LOADER_BATTERY, Bundle.EMPTY, mBatteryCallbacks);
     }
 
     @Override
