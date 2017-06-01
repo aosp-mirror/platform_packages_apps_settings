@@ -20,12 +20,15 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
 import android.os.Bundle;
 import android.view.Menu;
+
+import com.android.settings.search2.SearchActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +38,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -137,5 +141,16 @@ public class SettingsActivityTest {
         mActivity.onRestoreInstanceState(bundle);
 
         assertThat(mActivity.mDisplaySearch).isTrue();
+    }
+
+    @Test
+    public void testOnClick() {
+        doReturn("com.android.settings").when(mActivity).getPackageName();
+
+        mActivity.onClick(null);
+
+        Intent intent = ShadowApplication.getInstance().getNextStartedActivity();
+        assertThat(intent.getComponent()).isEqualTo(
+                new ComponentName("com.android.settings", SearchActivity.class.getName()));
     }
 }
