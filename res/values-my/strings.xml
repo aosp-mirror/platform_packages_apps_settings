@@ -162,10 +162,8 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM ကဒ် သုံးခွင့် တောင်းဆိုမှု"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> သည် သင့် SIM ကဒ်အား ဝင်ရောက်သုံးလို၏။ SIM ကဒ်အား ဝင်ရောက်သုံးခွင့်ပြုပါက ချိတ်ဆက်နေစဉ်ကာလအတွင်း သင့် စက်ကိရိယာ၏ ဒေတာချိတ်ဆက်မှုအား ပိတ်ထားလိမ့်မည်။ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> အား ဝင်ရောက်သုံးခွင့်ပြုရန်"</string>
     <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"အခြားစက်ပစ္စည်းများက <xliff:g id="DEVICE_NAME">^1</xliff:g> အဖြစ် တွေ့နိုင်ပါမည်"</string>
-    <!-- no translation found for bluetooth_paired_device_title (8638994696317952019) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_page_title (5218444163161190061) -->
-    <skip />
+    <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"သင်၏ စက်ပစ္စည်းများ"</string>
+    <string name="bluetooth_pairing_page_title" msgid="5218444163161190061">"ဘလူးတုသ် စက်ပစ္စည်းကို တွဲချိတ်ပါ"</string>
     <string name="date_and_time" msgid="9062980487860757694">"ရက်စွဲနှင့် အချိန်"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"အချိန်ဇုန်အား ရွေးချယ်ခြင်း"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -459,7 +457,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"စက်ပစ္စည်းကာကွယ်ခြင်း ဝန်ဆောင်မှုများကိုဖွင့်ခြင်းအားဖြင့် ဤစက်ပစ္စည်းကို သင့်ခွင့်ပြုချက်မရဘဲ မည်သူမျှအသုံးပြု၍မရအောင် ကာကွယ်ပါ။ သင်အသုံးပြုလိုသည့် မျက်နှာပြင်လော့ခ်ချမှုကို ရွေးချယ်ပါ။"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"စက်ပစ္စည်းကာကွယ်ခြင်း ဝန်ဆောင်မှုများကိုဖွင့်ခြင်းအားဖြင့် ဤဖုန်းကို သင့်ခွင့်ပြုချက်မရဘဲ မည်သူမျှအသုံးပြု၍မရအောင် ကာကွယ်ပါ။ သင်အသုံးပြုလိုသည့် မျက်နှာပြင်လော့ခ်ချမှုကို ရွေးချယ်ပါ။"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"သင့်ရဲ့အရန်သင့်သိမ်းဆည်းမျက်နှာပြင်သော့ခတ်တဲ့နည်းလမ်းကိုရွေးချယ်ပါ"</string>
-    <!-- no translation found for setup_lock_settings_options_button_label (8511153243629402929) -->
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"မျက်နှာပြင် လော့ခ်ချရန် ရွေးချယ်စရာများ"</string>
+    <!-- no translation found for setup_lock_settings_options_dialog_title (5058207955455973917) -->
     <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"ဖန်သားပြင် လော့ခ်ချခြင်း"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / ပိတ်သွားလျှင်သွားချင်း"</string>
@@ -531,13 +530,36 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"သော့ဖွင့်ရန်ပုံဖော်မှုအား ပြောင်းမည်"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ပင်နံပါတ်ပြောင်းမည်"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ဖွင့်ရန်စကားဝှက်အား ပြောင်းမည်"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"ထပ်စမ်းကြည့်ပါ။ <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> အတွင်းမှ <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> ခေါက်ကြိုးပမ်းမှု ဖြစ်သည်။"</string>
-    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"နောက်ဆုံးအကြိမ် စမ်းခြင်းဖြစ်သည်"</string>
-    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"ဤကြိုးပမ်းမှုတွင် မမှန်ကန်သည့်အလုပ်သုံး ပုံစံအား သင်ထည့်သွင်းခဲ့မည်ဆိုလျှင်၊ သင့်စက်ပစ္စည်းမှ သင့်အလုပ်ပရိုဖိုင်နှင့် ဆက်စပ်ဒေတာများကို ဖယ်ရှားသွားပါမည်။"</string>
-    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"ဤကြိုးပမ်းမှုတွင် မမှန်ကန်သည့်အလုပ်သုံး ပင်နံပါတ်အား သင်ထည့်သွင်းခဲ့မည်ဆိုလျှင်၊ သင့်စက်ပစ္စည်းမှ သင့်အလုပ်ပရိုဖိုင်နှင့် ဆက်စပ်ဒေတာများကို ဖယ်ရှားသွားပါမည်။"</string>
-    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"ဤကြိုးပမ်းမှုတွင် မမှန်ကန်သည့်အလုပ်သုံး စကားဝှက်အား သင်ထည့်သွင်းခဲ့မည်ဆိုလျှင်၊ သင့်စက်ပစ္စည်းမှ သင့်အလုပ်ပရိုဖိုင်နှင့် ဆက်စပ်ဒေတာများကို ဖယ်ရှားသွားပါမည်။"</string>
-    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"မှားယွင်းသည့် ကြိုးပမ်းမှု အလွန်များနေပါပြီ။ ဤစက်ပစ္စည်းမှ သင့်အလုပ်ပရိုဖိုင်နှင့် ဆက်စပ်ဒေတာများကို ဖယ်ရှားသွားပါမည်။"</string>
-    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"ပယ်ရန်"</string>
+    <!-- no translation found for lock_failed_attempts_before_wipe (2219711062197089783) -->
+    <skip />
+    <!-- no translation found for lock_last_attempt_before_wipe_warning_title (4277765862798876826) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (4999108263936246210) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (2191214314973933300) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6526655065466746563) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_user (7851504071368235547) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_user (4049024921333961715) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_user (4660886542496781672) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_profile (2437716252059050291) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_profile (5799931839127476913) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_profile (6786586046975042158) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (1951676829299522277) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_user (6188180643494518001) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_profile (1745475043685915442) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_dialog_dismiss (8246716090548717312) -->
+    <skip />
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"အနည်းဆုံး အက္ခရာ <xliff:g id="COUNT">%d</xliff:g> လုံး ရှိရမည်"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ပင်နံပါတ်သည် အနည်းဆုံး ဂဏန်း <xliff:g id="COUNT">%d</xliff:g> လုံးရှိရမည်"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ဆက်လုပ်ရန်"</string>
@@ -1286,6 +1308,8 @@
     <string name="error_apn_empty" msgid="4932211013600863642">"APNမှာ ကွက်လပ်ဖြစ်မနေစေရပါ"</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MNC အကွက်မှာ ဂဏန်း (၃)လုံးဖြစ်ရမည်"</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC အကွက်မှာ ဂဏန်း (၂)လုံး သို့မဟုတ် (၃)လုံးဖြစ်ရမည်"</string>
+    <!-- no translation found for error_adding_apn_type (4181334016628549645) -->
+    <skip />
     <string name="restore_default_apn" msgid="8178010218751639581">"မူရင်း APNဆက်တင်များကိုပြန်လည်ရယူစေမည်"</string>
     <string name="menu_restore" msgid="8260067415075573273">"စနစ်အား မူလစက်ရုံအခြအေနေထံ ပြန်လည်သတ်မှတ်ရန်"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN ၏မူရင်းအပြင်အဆင်များကို အစသို့ပြန်လည်စတင်မှုအား ပြီးဆုံးပါပြီ"</string>
@@ -1507,8 +1531,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"အပ်ပလီကေးရှင်းဆက်တင်များ"</string>
     <string name="install_applications" msgid="4872012136210802181">"မူရင်းမသိရသော အရင်းအမြစ်များ"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"အက်ပ်ရင်းမြစ်များ ခွင့်ပြုရန်"</string>
-    <string name="recent_app_category_title" msgid="8449656234283016115">"မကြာသေးမီကအသုံးပြုထားသော အက်ပ်များ"</string>
-    <string name="see_all_apps_title" msgid="1810966300215671576">"အက်ပ်အားလုံးကိုကြည့်ရန်"</string>
+    <!-- no translation found for recent_app_category_title (7212519567652392872) -->
+    <skip />
+    <!-- no translation found for see_all_apps_title (2428036869072119705) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"သင်၏တက်ဘလက်နှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းဖြင့် ဖြစ်ပေါ်လာနိုင်သော ဖုန်းပျက်စီးမှု သို့မဟုတ် ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်က သဘောတူရာရောက်ပါသည်။"</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"သင်၏ဖုန်းနှင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်များသည် အမျိုးအမည် မသိသောအက်ပ်များ၏ တိုက်ခိုက်ခြင်းကို ပိုမိုခံရနိုင်ပါသည်။ ဤနေရာမှ ရယူထားသည့် အက်ပ်များကို ထည့်သွင်းအသုံးပြုခြင်းဖြင့် ဖြစ်ပေါ်လာနိုင်သော ဖုန်းပျက်စီးမှု သို့မဟုတ် ဒေတာဆုံးရှုံးမှုများအတွက် သင့်ထံ၌သာ တာဝန်ရှိကြောင်းကို သင်က သဘောတူရာရောက်ပါသည်။"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"အဆင့်မြင့်အပြင်အဆင်များ"</string>
@@ -1873,7 +1899,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> ကို သုံးမလား။"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> ကလုပ်ဆောင်ရန်များ-"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"အပလီကေးရှင်းသည် ခွင့်ပြုချက်တောင်းခံမှုကို ပိတ်လိုက်ခြင်းကြောင့်၊ သင့်တုန့်ပြန်မှုကို အချိန်ညှိချက်များ အတည်မပြုနိုင်ပါ။"</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"အခြားအက်ပ်တစ်ခုက ဤအကြောင်းအရာများထိပ်မှာ ပေါ်နေသောကြောင့် ဆက်တင်များက သင်၏ လုပ်ဆောင်ကို တုံ့ပြန်နိုင်ခြင်းမရှိပါ။"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"သင် ဖွင့်လိုက်လျှင် <xliff:g id="SERVICE">%1$s</xliff:g>၊ သင့်ကိရိယာက သင်၏ မျက်နှာပြင် သော့ပိတ်မှုကို ဒေတာ လျှို့ဝှက်ကုဒ်သွင်းမှု မြှင့်တင်ရန် သုံးမည် မဟုတ်ပါ။"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"သင်က ရယူသုံးစွဲရန် ဝန်ဆောင်မှုကို ဖွင့်ထား၍ ၊ သင့်ကိရိယာက သင်၏ မျက်နှာပြင် သော့ပိတ်မှုကို ဒေတာ လျှို့ဝှက်ကုဒ်သွင်းမှု မြှင့်တင်ရန် သုံးမည် မဟုတ်ပါ။"</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g>အား ဖွင့်ခြင်းသည် ဒေတာများ လျှို့ဝှက်ကုဒ်အသွင်​​ပြောင်းခြင်းအား အကျိုးသက်ရောက်စေသော​ကြောင့်၊ သင့် ရေးဆွဲပုံစံဖြင့် အတည်ပြုရန် လိုသည်။"</string>
@@ -1937,6 +1962,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"မိုဘိုင်းကွန်ရက် ရှာဖွေခြင်း"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"ပြီးခဲ့သည့် <xliff:g id="TIME">^1</xliff:g> က"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"အားဖြည့်ပြီးချိန်မှစ၍ (ပြီးခဲ့သည့် <xliff:g id="TIME">^1</xliff:g> က)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"အားအပြည့် သွင်းပြီးချိန်မှစ၍ အက်ပ်အသုံးပြုမှု (ပြီးခဲ့သည့် <xliff:g id="TIME">^1</xliff:g> က)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"အားအပြည့်သွင်းပြီးသည့် အချိန်မှစ၍ မျက်နှာပြင်ကို ဖွင့်ထားသောအချိန်"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"အားအပြည့်သွင်းထားသည့် အချိန်မှစ၍ စက်ပစ္စည်း အသုံးပြုမှု"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"အားသွင်းကြိုးဖြုတ်စဉ်မှဘတ္တရီအသုံးပြုနှုန်း"</string>
@@ -2029,8 +2055,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"အပိုရေတွက်မှု စွမ်းရည် အသုံးပြုမှု"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> ကြာ သုံးထားသည်"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"မျက်နှာပြင်အသုံးပြုချိန် <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> ကို <xliff:g id="APP">%2$s</xliff:g> က အသုံးပြုထားသည်"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"စုစုပေါင်း ဘက်ထရီ၏<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"နောက်ဆုံးအကြိမ် အားဖြည့်ပြီးချိန်မှစ၍ ခွဲခြမ်းစိတ်ဖြာချက်"</string>
@@ -2679,16 +2704,12 @@
       <item quantity="one">ဖျောက်ထားသည့် %d ခုကို ပြပါ</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"ကွန်ရက်နှင့် အင်တာနက်"</string>
-    <!-- no translation found for network_dashboard_summary_mobile (3851083934739500429) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_data_usage (3843261364705042212) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_hotspot (8494210248613254574) -->
-    <skip />
+    <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"မိုဘိုင်း"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"‌‌ဒေတာသုံးစွဲမှု"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"ဟော့စပေါ့"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"ချိတ်ဆက်ထားသော စက်များ"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"ဘလူးတုသ်၊ ကာစ်၊ NFC"</string>
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (9106040742715366495) -->
-    <skip />
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"ဘလူးတုသ်၊ ကာစ်"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"အက်ပ်နှင့်အကြောင်းကြားချက်များ"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"ခွင့်ပြုချက်များ၊ မူရင်းအက်ပ်များ"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"အသုံးပြုသူနှင့် အကောင့်များ"</string>
@@ -2810,7 +2831,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"အကြောင်းကြားချက်များ"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"အဆင့်မြင့်"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"အလုပ်သတိပေးချက်များ"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"သင်္ကေတတံဆိပ်များကို ခွင့်ပြုရန်"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"မီး မှိတ်တုတ်မှိတ်တုတ်လုပ်ရန်"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"လော့ခ်ချထားသည့်မျက်နှာပြင်ပေါ်တွင်"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"အကြောင်းကြားချက်ပါ အကြောင်းအရာအားလုံးကို ပြမည်"</string>
@@ -2883,14 +2905,16 @@
       <item quantity="other">အုပ်စု <xliff:g id="COUNT_1">%d</xliff:g> ခုကို ဖျက်လိုက်ပါပြီ</item>
       <item quantity="one">အုပ်စု <xliff:g id="COUNT_0">%d</xliff:g> ခုကို ဖျက်လိုက်ပါပြီ</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"အကြောင်းကြားချက် တံဆိပ်များ"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"ဖွင့်ထားသည်"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"ပိတ်ထားသည်"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"အားလုံးကို ပိတ်ဆို့ရန်။"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"ဤအကြောင်းကြားချက်များကို ဘယ်တော့မှ မပြပါနှင့်"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"အကြောင်းကြားချက်များ ပြပါ"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"အရိပ်ထဲ သို့မဟုတ် တွဲချိတ်ထားသည့် စက်ပစ္စည်းများပေါ်တွင် အကြောင်းကြားချက်များကို ဘယ်တော့မှ မပြပါနှင့်"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"သင်္ကေတတံဆိပ်ကို ခွင့်ပြုရန်"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"မနှောင်ယှက်ပါနှင့် ကို အပေါ်မှဖျက်ရေးပါ"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"မနှောင်ယှက်ပါနှင့် ကို ဦးစားပေးမှု အတွက်သာ ဆိုပြီး သတ်မှတ်ထားလျှင် ဤသတိပေးချက်များအား ဆက်လက်ပြီး စွက်ဖက်ခွင့် ပြုပါ"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"လော့ခ်ချထားသည့်မျက်နှာပြင်ပေါ်တွင်"</string>
@@ -3118,8 +3142,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> ( <xliff:g id="COUNT">%2$d</xliff:g> )"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"ဘက်ထရီအသုံးမြှင့်ခြင်း"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"သုံးစွဲမှုသတိပေးချက်များ"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"အက်ပ်အားလုံးပြရန်"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"အပိုအက်ပ်များကို ဝှက်ရန်"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"စက်ပစ္စည်း အသုံးပြုမှု အပြည့်အစုံကို ပြရန်"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"အက်ပ်အသုံးပြုမှုကို ပြရန်"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"ပါဝါအသုံပြုမှု မြင့်သည်"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other">ပုံမှန်မဟုတ်သည့်အက်ပ် <xliff:g id="NUMBER">%2$d</xliff:g> ခု</item>
@@ -3474,7 +3498,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"အလိုအလျောက်"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"ကိုယ်တိုင်ထည့်သွင်းခြင်း"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"ယခုနေရာလွတ်ပြုလုပ်ပါ"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"အမူအရာ"</string>
+    <string name="gesture_preference_title" msgid="4033736910560673690">"လက်ဟန် ဖြတ်လမ်းလင့်ခ်"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"သင့်ဖုန်းကို ထိန်းချုပ်နိုင်ရန်အတွက် လျင်မြန်သည့်အမူအယာများ"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"သင့်တက်ဘလက်ကို ထိန်းချုပ်ရန်အတွက် အမြန်သုံးလက်ဟန်များ"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"သင့်ဖုန်းကို ထိန်းချုပ်ရန်အတွက် အမြန်သုံးလက်ဟန်များ"</string>
@@ -3498,7 +3522,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"အကြောင်းကြားချက်များကို ကြည့်ရန် ကိရိယာ၏ နောက်ကျောဘက်ရှိ လက်ဗွေ အာရုံခံကိရိယာပေါ်တွင် အောက်သို့ ပွတ်ဆွဲပါ။"</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"ကင်မရာကိုဖွင့်ရန် မြှောက်လိုက်ပါ"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"ကင်မရာကို  အလိုအလျောက်ဖွင့်ရန် သင်၏ဖုန်းကို ဓာတ်ပုံရိုက်ယူမည့့််အနေအထား (အလျားလိုက် သို့မဟုတ် ထောင်လိုက်) အဖြစ်သို့  မြှောက်လိုက်ပါ။ သင့်ဖုန်းကို ပိတ်ထားချိန် သို့မဟုတ် လော့ခ်ချထားချိန်တို့တွင် အသုံးပြုနိုင်သည်။"</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"လော့ခ်မျက်နှာပြင်က ဓါတ်ပုံများကိုယူရန်"</string>
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (7209899898244722404) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"ဟန်ကို အထောက်အကူပေးရန်"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"အထိအတွေ့ အာရုံခံနိုင်မှု"</string>

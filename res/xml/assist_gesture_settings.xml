@@ -17,6 +17,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
                   android:title="@string/assist_gesture_title">
 
     <com.android.settings.widget.VideoPreference
@@ -28,7 +29,7 @@
         android:key="gesture_assist"
         android:title="@string/assist_gesture_title"
         android:summary="@string/assist_gesture_summary"
-        app:keywords="@string/keywords_gesture"/>
+        app:keywords="@string/keywords_squeeze_to_launch_gesture"/>
 
     <com.android.settings.widget.SeekBarPreference
         android:key="gesture_assist_sensitivity"

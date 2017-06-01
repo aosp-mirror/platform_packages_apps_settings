@@ -19,7 +19,8 @@
 
     <SwitchPreference
         android:key="usb_tether_settings"
-        android:title="@string/usb_tethering_button_text" />
+        android:title="@string/usb_tethering_button_text"
+        android:summary="@string/usb_tethering_subtext"/>
 
     <SwitchPreference
         android:key="enable_wifi_ap"
@@ -33,7 +34,8 @@
 
     <SwitchPreference
         android:key="enable_bluetooth_tethering"
-        android:title="@string/bluetooth_tether_checkbox_text" />
+        android:title="@string/bluetooth_tether_checkbox_text"
+        android:summary="@string/bluetooth_tethering_subtext"/>
 
     <Preference
         android:key="disabled_on_data_saver"

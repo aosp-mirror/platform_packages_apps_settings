@@ -17,6 +17,7 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -31,11 +32,16 @@ import com.android.settingslib.applications.StorageStatsSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageProfileFragmentTest {
+    @Captor
+    private ArgumentCaptor<SparseArray<StorageAsyncLoader.AppsStorageResult>> mCaptor;
+
     @Test
     public void verifyAppSizesAreZeroedOut() {
         StorageItemPreferenceController controller = mock(StorageItemPreferenceController.class);
@@ -45,18 +51,17 @@ public class StorageProfileFragmentTest {
         result.otherAppsSize = 200;
         result.gamesSize = 300;
         result.videoAppsSize = 400;
-        result.externalStats = new StorageStatsSource.ExternalStorageStats(6, 1, 2, 3);
+        result.externalStats = new StorageStatsSource.ExternalStorageStats(6, 1, 2, 3, 0);
         SparseArray<StorageAsyncLoader.AppsStorageResult> resultsArray = new SparseArray<>();
         resultsArray.put(0, result);
         fragment.setPreferenceController(controller);
 
         fragment.onLoadFinished(null, resultsArray);
 
-        ArgumentCaptor<StorageAsyncLoader.AppsStorageResult> resultCaptor = ArgumentCaptor.forClass(
-                StorageAsyncLoader.AppsStorageResult.class);
-        verify(controller).onLoadFinished(resultCaptor.capture());
+        MockitoAnnotations.initMocks(this);
+        verify(controller).onLoadFinished(mCaptor.capture(), anyInt());
 
-        StorageAsyncLoader.AppsStorageResult extractedResult = resultCaptor.getValue();
+        StorageAsyncLoader.AppsStorageResult extractedResult = mCaptor.getValue().get(0);
         assertThat(extractedResult.musicAppsSize).isEqualTo(0);
         assertThat(extractedResult.videoAppsSize).isEqualTo(0);
         assertThat(extractedResult.otherAppsSize).isEqualTo(0);

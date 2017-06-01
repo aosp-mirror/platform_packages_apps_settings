@@ -162,10 +162,8 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM ആക്‌സസ്സ് അഭ്യർത്ഥന"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ഉപകരണം SIM കാർഡ് ആക്‌സസ്സ് ചെയ്യാൻ താൽപ്പര്യപ്പെടുന്നു. SIM കാർഡിലേക്ക് ആക്‌സസ്സ് അനുവദിക്കുന്നത് കണക്ഷന്റെ സമയപരിധിയ്‌ക്കായി ഉപകരണത്തിൽ ഡാറ്റ കണക്റ്റിവിറ്റിയെ പ്രവർത്തനരഹിതമാക്കുന്നതിനിടയാക്കും. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> ഉപകരണത്തിന് ആക്‌സസ്സ് നൽകുക"</string>
     <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"<xliff:g id="DEVICE_NAME">^1</xliff:g> എന്നതായി മറ്റ് ഉപകരണങ്ങൾക്ക് ദൃശ്യമാക്കുക"</string>
-    <!-- no translation found for bluetooth_paired_device_title (8638994696317952019) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_page_title (5218444163161190061) -->
-    <skip />
+    <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"നിങ്ങളുടെ ഉപകരണങ്ങൾ"</string>
+    <string name="bluetooth_pairing_page_title" msgid="5218444163161190061">"Bluetooth ഉപകരണം ജോടിയാക്കുക"</string>
     <string name="date_and_time" msgid="9062980487860757694">"തീയതിയും സമയവും"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"സമയ മേഖല തിരഞ്ഞെടുക്കുക"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -459,7 +457,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ഉപകരണം ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ഫോൺ ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"നിങ്ങളുടെ ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് രീതി തിരഞ്ഞെടുക്കുക"</string>
-    <!-- no translation found for setup_lock_settings_options_button_label (8511153243629402929) -->
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"സ്‌ക്രീൻ ലോക്ക് ഓപ്ഷനുകള്‍"</string>
+    <!-- no translation found for setup_lock_settings_options_dialog_title (5058207955455973917) -->
     <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"സ്ക്രീൻ ലോക്ക്"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / സുഷുപ്‌തിയിലായ ശേഷം ഉടൻ"</string>
@@ -531,13 +530,36 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"അൺലോക്ക് പാറ്റേൺ മാറ്റുക"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"അൺലോക്ക് പിൻ മാറ്റുക"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"അൺലോക്ക് പാസ്‌വേഡ് മാറ്റുക"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"വീണ്ടും ശ്രമിക്കുക. <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> / <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> ശ്രമം."</string>
-    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"അവസാന ശ്രമം"</string>
-    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"ഈ ശ്രമത്തിൽ നിങ്ങൾ തെറ്റായ ഔദ്യോഗിക പാറ്റേണാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും ബന്ധപ്പെട്ട വിവരങ്ങളും ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കംചെയ്യപ്പെടും."</string>
-    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"ഈ ശ്രമത്തിൽ നിങ്ങൾ തെറ്റായ ഔദ്യോഗിക പിൻ ആണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും ബന്ധപ്പെട്ട വിവരങ്ങളും ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കംചെയ്യപ്പെടും."</string>
-    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"ഈ ശ്രമത്തിൽ നിങ്ങൾ തെറ്റായ ഔദ്യോഗിക പാസ്‌വേഡാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും ബന്ധപ്പെട്ട വിവരങ്ങളും ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കംചെയ്യപ്പെടും."</string>
-    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും ബന്ധപ്പെട്ട വിവരങ്ങളും ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കംചെയ്യപ്പെടും."</string>
-    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"ഡിസ്മിസ് ചെയ്യുക"</string>
+    <!-- no translation found for lock_failed_attempts_before_wipe (2219711062197089783) -->
+    <skip />
+    <!-- no translation found for lock_last_attempt_before_wipe_warning_title (4277765862798876826) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (4999108263936246210) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (2191214314973933300) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6526655065466746563) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_user (7851504071368235547) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_user (4049024921333961715) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_user (4660886542496781672) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_profile (2437716252059050291) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_profile (5799931839127476913) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_profile (6786586046975042158) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (1951676829299522277) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_user (6188180643494518001) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_profile (1745475043685915442) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_dialog_dismiss (8246716090548717312) -->
+    <skip />
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"കുറഞ്ഞത് <xliff:g id="COUNT">%d</xliff:g> പ്രതീകങ്ങളെങ്കിലും അടങ്ങിയിരിക്കണം"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"പിൻ നമ്പറിൽ കുറഞ്ഞത് <xliff:g id="COUNT">%d</xliff:g> അക്കങ്ങളെങ്കിലും അടങ്ങിയിരിക്കണം"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"തുടരുക"</string>
@@ -1286,6 +1308,8 @@
     <string name="error_apn_empty" msgid="4932211013600863642">"APN ശൂന്യമായിരിക്കരുത്."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC ഫീൽഡിൽ 3 സംഖ്യകൾ ഉണ്ടായിരിക്കണം."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC ഫീൽഡിൽ 2 അല്ലെങ്കിൽ 3 സംഖ്യകൾ ഉണ്ടായിരിക്കണം."</string>
+    <!-- no translation found for error_adding_apn_type (4181334016628549645) -->
+    <skip />
     <string name="restore_default_apn" msgid="8178010218751639581">"സ്ഥിര APN ക്രമീകരണങ്ങൾ പുനഃസ്ഥാപിക്കുന്നു"</string>
     <string name="menu_restore" msgid="8260067415075573273">"സ്ഥിരമായതിലേക്ക് പുനഃസജ്ജമാക്കുക"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"സ്ഥിര APN ക്രമീകരണങ്ങൾ പുനഃസജ്ജീകരിക്കൽ പൂർത്തിയാക്കി."</string>
@@ -1507,8 +1531,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"അപ്ലിക്കേഷൻ ക്രമീകരണങ്ങൾ"</string>
     <string name="install_applications" msgid="4872012136210802181">"അജ്ഞാത ഉറവിടങ്ങൾ"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"എല്ലാ അപ്ലിക്കേഷൻ ഉറവിടങ്ങളും അനുവദിക്കുക"</string>
-    <string name="recent_app_category_title" msgid="8449656234283016115">"അടുത്തിടെ ഉപയോഗിച്ച ആപ്പുകൾ"</string>
-    <string name="see_all_apps_title" msgid="1810966300215671576">"എല്ലാ ആപ്പുകളും കാണുക"</string>
+    <!-- no translation found for recent_app_category_title (7212519567652392872) -->
+    <skip />
+    <!-- no translation found for see_all_apps_title (2428036869072119705) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ഫോണും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ഫോണിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"വിപുലമായ ക്രമീകരണം"</string>
@@ -1873,7 +1899,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> ഉപയോഗിക്കണോ?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> എന്നതിന് ഇവ ആവശ്യമാണ്:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"അനുമതി അഭ്യർത്ഥനയെ ഒരു അപ്ലിക്കേഷൻ മറയ്‌ക്കുന്നതിനാൽ, ക്രമീകരണത്തിന് നിങ്ങളുടെ പ്രതികരണം പരിശോധിച്ചുറപ്പിക്കാനാകില്ല."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"ഈ ഓപ്‌ഷനുകളുടെ മുകളിൽ മറ്റൊരു ആപ്പ് ദൃശ്യമാകുന്നതിനാൽ, ക്രമീകരണത്തിന് നിങ്ങളുടെ നടപടിയോട് പ്രതികരിക്കാനാവില്ല."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> ഓണാക്കിയെങ്കിൽ, ഡാറ്റ എൻക്രിപ്‌ഷൻ മെച്ചപ്പെടുത്താനായി ഉപകരണം നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കില്ല."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"നിങ്ങൾ ഉപയോഗസഹായി സേവനം ഓണാക്കിയതിനാൽ, ഡാറ്റ എൻക്രിപ്‌ഷൻ മെച്ചപ്പെടുത്താനായി ഉപകരണം നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കില്ല."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> ഓണാക്കുന്നത് ഡാറ്റ എൻക്രിപ്‌ഷനെ ബാധിക്കുന്നതിനാൽ, നിങ്ങളുടെ പാറ്റേൺ സ്ഥിരീകരിക്കേണ്ടതുണ്ട്."</string>
@@ -1937,6 +1962,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"മൊബൈൽ നെറ്റ്‌വർക്ക് സ്‌കാൻ ചെയ്യൽ"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> മുമ്പ്"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"ഫുൾ ചാർജുചെയ്തശേഷമുള്ള ആപ്പ് ഉപയോഗം (<xliff:g id="TIME">^1</xliff:g> മുമ്പ്)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"പൂർണ്ണമായി ചാർജുചെയ്‌തതിന് ശേഷമുള്ള ഉപകരണ ഉപയോഗം (<xliff:g id="TIME">^1</xliff:g> മുമ്പ്)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"പൂർണ്ണമായി ചാർജ് ചെയ്‌തത് മുതൽ സ്‌ക്രീൻ ഓണായിരുന്ന സമയം"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"പൂർണ്ണമായി ചാർജ്ജുചെയ്തത് മുതലുള്ള ഉപകരണ ഉപയോഗം"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"അൺപ്ലഗ്ഗുചെയ്‌തതിനുശേഷമുള്ള ബാറ്ററി ഉപയോഗം"</string>
@@ -2029,8 +2055,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"കണക്കാക്കിയ പവർ ഉപയോഗം"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> സമയം ഉപയോഗിച്ചു"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"സ്‌ക്രീൻ ഉപയോഗം <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> ആപ്പ് <xliff:g id="PERCENT">%1$s</xliff:g> ഉപയോഗിച്ചു"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"മൊത്തം ബാറ്ററിയുടെ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"ഫുൾ ചാർജിനുശേഷമുള്ള ഉപയോഗ വിശദാംശങ്ങൾ"</string>
@@ -2679,16 +2704,12 @@
       <item quantity="one">മറച്ച %d ഇനം കാണിക്കുക</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"നെറ്റ്‌വർക്കും ഇന്റർനെറ്റും"</string>
-    <!-- no translation found for network_dashboard_summary_mobile (3851083934739500429) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_data_usage (3843261364705042212) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_hotspot (8494210248613254574) -->
-    <skip />
+    <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"മൊബൈല്‍"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ഡാറ്റ ഉപയോഗം"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"ഹോട്ട്‌സ്‌പോട്ട്"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"കണക്‌റ്റുചെയ്ത ഉപകരണം"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, കാസ്റ്റ്, NFC"</string>
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (9106040742715366495) -->
-    <skip />
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, കാസ്‌റ്റ്"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ആപ്‌സും അറിയിപ്പുകളും"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"അനുമതികൾ, ‌ഡിഫോൾട്ട് ആപ്പുകൾ"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"ഉപയോക്താക്കളും അക്കൗണ്ടും"</string>
@@ -2810,7 +2831,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"അറിയിപ്പുകൾ"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"വിപുലമായത്"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"ഔദ്യോഗിക അറിയിപ്പുകൾ"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"ഐക്കൺ ബാഡ്‌ജുകൾ അനുവദിക്കുക"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"ലൈറ്റ് മിന്നുക"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"ലോക്ക് സ്ക്രീനിൽ"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"എല്ലാ അറിയിപ്പുകളും കാണിക്കുക"</string>
@@ -2883,14 +2905,16 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> വിഭാഗങ്ങൾ ഇല്ലാതാക്കി</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> വിഭാഗം ഇല്ലാതാക്കി</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"അറിയിപ്പ് ബാഡ്‌ജുകൾ"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"ഓൺ"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"ഓഫ്"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"എല്ലാം തടയുക"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"ഈ അറിയിപ്പുകൾ ഒരിക്കലും കാണിക്കരുത്"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"അറിയിപ്പുകൾ കാണിക്കുക"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"ഷെയ്‌ഡിലോ പെരിഫെറൽ ഉപകരണങ്ങളിലോ ഒരിക്കലും അറിയിപ്പുകൾ കാണിക്കരുത്"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"ഐക്കൺ ബാഡ്‌ജ് അനുവദിക്കുക"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\'ശല്യപ്പെടുത്തരുത്\' അസാധുവാക്കുക"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"\'മുൻഗണനയുള്ളവ മാത്രം\' എന്നതിലേക്ക് \'ശല്യപ്പെടുത്തരുത്\' സജ്ജമാക്കിയിട്ടുള്ളപ്പോൾ തടസ്സപ്പെടുത്തുന്നത് തുടരാൻ ഈ അറിയിപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"ലോക്ക് സ്ക്രീനിൽ"</string>
@@ -3118,8 +3142,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"ബാറ്ററി ഓപ്റ്റിമൈസേഷൻ"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"ബാറ്ററി ഉപഭോഗ മുന്നറിയിപ്പ്"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"എല്ലാ ആപ്പുകളും കാണിക്കൂ"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"അധികമുള്ള ആപ്പുകൾ ‌മറയ്ക്കുക"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"ഉപകരണത്തിന്റെ മുഴുവൻ ഉപയോഗം കാണിക്കുക"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"ആപ്പ് ഉപയോഗം കാണിക്കുക"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"ഉയർന്ന ഉപയോഗം"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> ആപ്പുകൾ അസ്വാഭാവികമായി പ്രവർത്തിക്കുന്നു</item>
@@ -3474,7 +3498,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"സ്വയമേവ"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"മാനുവൽ"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"ഇപ്പോൾ ഇടം സൃഷ്ടിക്കുക"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"ജെസ്‌റ്ററുകൾ"</string>
+    <string name="gesture_preference_title" msgid="4033736910560673690">"ജെസ്‌റ്റർ കുറുക്കുവഴികൾ"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"നിങ്ങളുടെ ഫോൺ നിയന്ത്രിക്കുന്നതിനുള്ള ദ്രുത ജെസ്റ്ററുകൾ"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് നിയന്ത്രിക്കുന്നതിനുള്ള അതിവേഗ ജെസ്റ്ററുകൾ"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"നിങ്ങളുടെ ഉപകരണം നിയന്ത്രിക്കുന്നതിനുള്ള അതിവേഗ ജെസ്റ്ററുകൾ"</string>
@@ -3498,7 +3522,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ഉപകരണത്തിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"ക്യാമറ തുറക്കാൻ ഫോൺ ഉയർത്തുക"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"ക്യാമറ സ്വയമേവ തുറക്കാൻ, ഫോൺ ഫോട്ടോ എടുക്കുന്ന രീതിയിൽ (ലാൻഡ്‌സ്‌കേപ്പ് അല്ലെങ്കിൽ പോർട്രെയ്‌റ്റ്) ഉയർത്തിപ്പിടിക്കുക. നിങ്ങളുടെ ഫോൺ സുഷുപ്‌തിയിലായിരിക്കുമ്പോഴോ ലോക്കുചെയ്‌തിരിക്കുമ്പോഴോ ഇത് പ്രവർത്തിക്കുന്നു."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"ലോക്ക് സ്‌ക്രീനിൽ നിന്ന് ഫോട്ടോകളെടുക്കുക"</string>
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (7209899898244722404) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"ജെസ്‌റ്റർ സഹായം"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"സെന്‍‌സിറ്റിവിറ്റി"</string>

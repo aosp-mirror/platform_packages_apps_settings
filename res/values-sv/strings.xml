@@ -162,10 +162,8 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Begäran om åtkomst till SIM-kort"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vill ha åtkomst till ditt SIM-kort. Om du ger den åtkomst till SIM-kortet inaktiveras dataanslutningen på enheten under tiden som anslutningen är upprättad. Ge <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> åtkomst"</string>
     <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"Synlig för andra enheter som <xliff:g id="DEVICE_NAME">^1</xliff:g>"</string>
-    <!-- no translation found for bluetooth_paired_device_title (8638994696317952019) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_page_title (5218444163161190061) -->
-    <skip />
+    <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Dina enheter"</string>
+    <string name="bluetooth_pairing_page_title" msgid="5218444163161190061">"Koppla Bluetooth-enheten"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum och tid"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Välj tidszon"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -458,7 +456,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Hindra andra från att använda enheten utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindra andra från att använda mobilen utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Välj en reservmetod för skärmlås"</string>
-    <!-- no translation found for setup_lock_settings_options_button_label (8511153243629402929) -->
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Alternativ för skärmlås"</string>
+    <!-- no translation found for setup_lock_settings_options_dialog_title (5058207955455973917) -->
     <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skärmlås"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/omedelbart efter viloläge"</string>
@@ -530,13 +529,36 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Byt grafiskt lösenord"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Ändra PIN-kod för upplåsning"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Ändra lösenord för upplåsning"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Försök igen. Försök <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> av <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
-    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Sista försöket"</string>
-    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Om du anger fel grafiskt lösenord under det här försöket kommer jobbprofilen och den data som har kopplats till profilen att tas bort från enheten."</string>
-    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Om du anger fel pinkod under det här försöket kommer jobbprofilen och den data som har kopplats till profilen att tas bort från enheten."</string>
-    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Om du anger fel lösenord under det här försöket kommer jobbprofilen och den data som har kopplats till profilen att tas bort från enheten."</string>
-    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"För många felaktiga försök. Jobbprofilen och data som har kopplats till den tas bort från enheten."</string>
-    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Ignorera"</string>
+    <!-- no translation found for lock_failed_attempts_before_wipe (2219711062197089783) -->
+    <skip />
+    <!-- no translation found for lock_last_attempt_before_wipe_warning_title (4277765862798876826) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (4999108263936246210) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (2191214314973933300) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6526655065466746563) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_user (7851504071368235547) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_user (4049024921333961715) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_user (4660886542496781672) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_profile (2437716252059050291) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_profile (5799931839127476913) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_profile (6786586046975042158) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (1951676829299522277) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_user (6188180643494518001) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_profile (1745475043685915442) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_dialog_dismiss (8246716090548717312) -->
+    <skip />
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Lösenordet måste innehålla minst <xliff:g id="COUNT">%d</xliff:g> tecken"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"Pinkoden måste innehålla minst <xliff:g id="COUNT">%d</xliff:g> siffror"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Fortsätt"</string>
@@ -1285,6 +1307,8 @@
     <string name="error_apn_empty" msgid="4932211013600863642">"APN får inte vara tomt."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC-fältet måste bestå av 3 siffror."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC-fältet måste vara 2 eller 3 siffror"</string>
+    <!-- no translation found for error_adding_apn_type (4181334016628549645) -->
+    <skip />
     <string name="restore_default_apn" msgid="8178010218751639581">"Återställer standardinställningar för APN."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Återställ standardinst."</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Återställning av standardinställningar för APN har slutförts."</string>
@@ -1506,8 +1530,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Appinställningar"</string>
     <string name="install_applications" msgid="4872012136210802181">"Okända källor"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Tillåt alla appkällor"</string>
-    <string name="recent_app_category_title" msgid="8449656234283016115">"Senast använda appar"</string>
-    <string name="see_all_apps_title" msgid="1810966300215671576">"Visa alla appar"</string>
+    <!-- no translation found for recent_app_category_title (7212519567652392872) -->
+    <skip />
+    <!-- no translation found for see_all_apps_title (2428036869072119705) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Surfplattan och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på surfplattan eller förlust av data som kan uppstå när du använder dessa appar."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Mobilen och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på mobilen eller förlust av data som kan uppstå när du använder dessa appar."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Avancerade inställningar"</string>
@@ -1872,7 +1898,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Vill du använda <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> behöver:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Svaret kan inte verifieras av Inställningar, eftersom en app skymmer en begäran om behörighet."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"Det går inte att använda Inställningar eftersom en annan app visas ovanpå alternativen."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> används inte skärmlåset för att förbättra datakryptering på enheten."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Eftersom du har aktiverat en tillgänglighetstjänst används inte skärmlåset för att förbättra datakryptering på enheten."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta ditt grafiska lösenord."</string>
@@ -1936,6 +1961,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"Genomsökning av mobilnätverk"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> sedan"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"Appanvändning sedan fulladdning (<xliff:g id="TIME">^1</xliff:g> sedan)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Enhetsanvändning sedan fulladdning (<xliff:g id="TIME">^1</xliff:g> sedan)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Den totala tidsperiod skärmen har varit på sedan den senaste fulladdningen"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Enhetsanvändning sedan batteriet var fulladdat"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Batteriförbrukning sedan bortkoppling"</string>
@@ -2028,8 +2054,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"För högt räknad strömförbrukning"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Har använts i <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"Skärmanvändning <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> har använts av <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> av den totala batterianvändningen"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Fördelning sedan senaste fulladdningen"</string>
@@ -2678,16 +2703,12 @@
       <item quantity="one">Visa %d dolt objekt</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Nätverk och internet"</string>
-    <!-- no translation found for network_dashboard_summary_mobile (3851083934739500429) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_data_usage (3843261364705042212) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_hotspot (8494210248613254574) -->
-    <skip />
+    <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobilnätverk"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"dataanvändning"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"trådlös surfzon"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Anslutna enheter"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, casta, NFC"</string>
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (9106040742715366495) -->
-    <skip />
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, casta"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Appar och aviseringar"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Behörigheter, standardappar"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Användare och konton"</string>
@@ -2809,7 +2830,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Meddelanden"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avancerat"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Jobbaviseringar"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"Tillåt ikonmärken"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkande ljus"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"På låsskärmen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Visa allt aviseringsinnehåll"</string>
@@ -2882,14 +2904,16 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorier har raderats</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kategori har raderats</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"Aviseringsmärken"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"Aktiverat"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"Av"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blockera alla"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Visa aldrig de här aviseringarna"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Visa aviseringar"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Visa aldrig aviseringar i panelen eller på perifera enheter"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Tillåt ikonmärke"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Åsidosätt Stör ej"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Fortsätt att få dessa aviseringar när Endast prioriterade har angetts för Stör ej"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"På låsskärmen"</string>
@@ -3117,8 +3141,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Batterioptimering"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Aviseringar om användning"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"Visa alla appar"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"Dölj extra appar"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Visa fullständig enhetsanvändning"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Visa appanvändning"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Hög förbrukning"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> appar fungerar inte normalt</item>
@@ -3473,7 +3497,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatiskt"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuellt"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigör utrymme nu"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"Rörelser"</string>
+    <string name="gesture_preference_title" msgid="4033736910560673690">"Kortkommandon för rörelse"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med snabba rörelser"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med snabba rörelser"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med snabba rörelser"</string>
@@ -3497,7 +3521,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av enheten."</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Höj mobilen för att öppna kameran"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Öppna kameran automatiskt genom att lyfta mobilen som om du skulle ta ett foto (liggande eller stående). Fungerar när mobilen är i viloläge eller låst."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Ta foton från låsskärmen"</string>
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (7209899898244722404) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Assistentrörelse"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Känslighet"</string>

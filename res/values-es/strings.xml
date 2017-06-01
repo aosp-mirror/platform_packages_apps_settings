@@ -162,10 +162,8 @@
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitud de acceso de SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> quiere acceder a tu tarjeta SIM. Si lo permites, se inhabilitará la conexión de datos del dispositivo durante la conexión. Conceder acceso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="bluetooth_device_name_summary" msgid="4418784300859596202">"Visible como <xliff:g id="DEVICE_NAME">^1</xliff:g> para otros dispositivos"</string>
-    <!-- no translation found for bluetooth_paired_device_title (8638994696317952019) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_page_title (5218444163161190061) -->
-    <skip />
+    <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Tus dispositivos"</string>
+    <string name="bluetooth_pairing_page_title" msgid="5218444163161190061">"Vincular dispositivo Bluetooth"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Fecha y hora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Elige una zona horaria"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -458,7 +456,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activa las funciones de protección del dispositivo para evitar que otros lo utilicen sin tu permiso. Elige el bloqueo de pantalla que quieras utilizar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activa las funciones de protección del dispositivo para evitar que otros utilicen el teléfono sin tu permiso. Elige el bloqueo de pantalla que quieras utilizar."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Selecciona el método de bloqueo de pantalla alternativo"</string>
-    <!-- no translation found for setup_lock_settings_options_button_label (8511153243629402929) -->
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Opciones de bloqueo de pantalla"</string>
+    <!-- no translation found for setup_lock_settings_options_dialog_title (5058207955455973917) -->
     <skip />
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueo de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/Inmediatamente después de activar el modo de suspensión"</string>
@@ -530,13 +529,36 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Cambiar patrón desbloqueo"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Cambiar PIN de desbloqueo"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Cambiar contraseña de desbloqueo"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Vuelve a intentarlo. Intento <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> de <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
-    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Último intento"</string>
-    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Si vuelves a introducir un patrón de trabajo incorrecto, el perfil de trabajo y los datos asociados se quitarán de este dispositivo."</string>
-    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Si vuelves a introducir un PIN de trabajo incorrecto, el perfil de trabajo y los datos asociados se quitarán de este dispositivo."</string>
-    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Si vuelves a introducir una contraseña de trabajo incorrecta, el perfil de trabajo y los datos asociados se quitarán de este dispositivo."</string>
-    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Has fallado demasiadas veces. El perfil de trabajo y los datos asociados se quitarán de este dispositivo."</string>
-    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Descartar"</string>
+    <!-- no translation found for lock_failed_attempts_before_wipe (2219711062197089783) -->
+    <skip />
+    <!-- no translation found for lock_last_attempt_before_wipe_warning_title (4277765862798876826) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (4999108263936246210) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (2191214314973933300) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6526655065466746563) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_user (7851504071368235547) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_user (4049024921333961715) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_user (4660886542496781672) -->
+    <skip />
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_profile (2437716252059050291) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_profile (5799931839127476913) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_profile (6786586046975042158) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (1951676829299522277) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_user (6188180643494518001) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_profile (1745475043685915442) -->
+    <skip />
+    <!-- no translation found for lock_failed_attempts_now_wiping_dialog_dismiss (8246716090548717312) -->
+    <skip />
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Debe tener al menos <xliff:g id="COUNT">%d</xliff:g> caracteres"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"El PIN debe tener al menos <xliff:g id="COUNT">%d</xliff:g> dígitos"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuar"</string>
@@ -1285,6 +1307,8 @@
     <string name="error_apn_empty" msgid="4932211013600863642">"El campo APN no puede estar vacío."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"El campo MCC debe contener 3 dígitos."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"El campo MNC debe contener 2 o 3 dígitos."</string>
+    <!-- no translation found for error_adding_apn_type (4181334016628549645) -->
+    <skip />
     <string name="restore_default_apn" msgid="8178010218751639581">"Restaurando la configuración de APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer ajustes"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se ha restablecido la configuración predeterminada de APN."</string>
@@ -1506,8 +1530,10 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Ajustes de aplicación"</string>
     <string name="install_applications" msgid="4872012136210802181">"Orígenes desconocidos"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Permitir todas las fuentes"</string>
-    <string name="recent_app_category_title" msgid="8449656234283016115">"Aplicaciones utilizadas recientemente"</string>
-    <string name="see_all_apps_title" msgid="1810966300215671576">"Ver todas las aplicaciones"</string>
+    <!-- no translation found for recent_app_category_title (7212519567652392872) -->
+    <skip />
+    <!-- no translation found for see_all_apps_title (2428036869072119705) -->
+    <skip />
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Tu tablet y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu tablet o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Tu teléfono y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu teléfono o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Ajustes avanzados"</string>
@@ -1872,7 +1898,6 @@
     <string name="enable_service_title" msgid="3061307612673835592">"¿Usar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Una aplicación está bloqueando una solicitud de permiso, por lo que Ajustes no puede verificar tu respuesta."</string>
-    <string name="window_obscured_warning" msgid="8711643931674708175">"La aplicación Ajustes no puede responder a tu acción porque otra aplicación tapa estas opciones."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si activas <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Has activado un servicio de accesibilidad, por lo que el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Activar <xliff:g id="SERVICE">%1$s</xliff:g> afecta al cifrado de datos, por lo que debes confirmar tu patrón."</string>
@@ -1936,6 +1961,7 @@
     <string name="device_cellular_network" msgid="4724773411762382950">"Búsqueda de redes móviles"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"hace <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso de apps desde la carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Uso del dispositivo desde la carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tiempo que la pantalla ha estado encendida desde la carga completa"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Uso del dispositivo desde la carga completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se cargó"</string>
@@ -2028,8 +2054,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Uso de potencia sobrecalculado"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"En uso durante <xliff:g id="TIME">^1</xliff:g>"</string>
-    <!-- no translation found for battery_screen_usage (6537658662149713585) -->
-    <skip />
+    <string name="battery_screen_usage" msgid="6537658662149713585">"Uso de la pantalla: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> usado por <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> del total de batería"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Desglose desde la última carga completa"</string>
@@ -2328,7 +2353,7 @@
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sincr. autom. datos trabajo"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Día del mes para restablecer ciclo de uso de datos:"</string>
-    <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación ha usado datos en este período."</string>
+    <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación ha usado datos en este periodo."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Primer plano"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Segundo plano"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"con restricción"</string>
@@ -2678,16 +2703,12 @@
       <item quantity="one">Mostrar %d elemento oculto</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Red e Internet"</string>
-    <!-- no translation found for network_dashboard_summary_mobile (3851083934739500429) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_data_usage (3843261364705042212) -->
-    <skip />
-    <!-- no translation found for network_dashboard_summary_hotspot (8494210248613254574) -->
-    <skip />
+    <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"móvil"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"uso de datos"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"punto de acceso"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Dispositivos conectados"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Enviar pantalla, NFC"</string>
-    <!-- no translation found for connected_devices_dashboard_no_nfc_summary (9106040742715366495) -->
-    <skip />
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, enviar contenido"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplicaciones y notificaciones"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Permisos, aplicaciones predeterminadas"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Usuarios y cuentas"</string>
@@ -2809,7 +2830,8 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notificaciones"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Opciones avanzadas"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificaciones de trabajo"</string>
-    <string name="notification_badging_title" msgid="5125022693565388760">"Permitir insignias de iconos"</string>
+    <!-- no translation found for notification_badging_title (5938709971403474078) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luz parpadeante"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"En la pantalla de bloqueo"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todo el contenido de las notificaciones"</string>
@@ -2882,14 +2904,16 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categorías eliminadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categoría eliminada</item>
     </plurals>
-    <string name="notification_badges" msgid="4468378071033143539">"Insignias de notificaciones"</string>
     <string name="notification_toggle_on" msgid="650145396718191048">"Activadas"</string>
     <string name="notification_toggle_off" msgid="2142010737190671762">"Desactivadas"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Bloquear todo"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"No mostrar nunca estas notificaciones"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Mostrar notificaciones"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"No mostrar nunca notificaciones en el panel de notificaciones ni en dispositivos periféricos"</string>
-    <string name="notification_badge_title" msgid="7734903868300369178">"Permitir insignia de icono"</string>
+    <!-- no translation found for notification_badge_title (6370122441168519809) -->
+    <skip />
+    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Priorizar"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"No bloquear notificaciones cuando la opción No molestar esté establecida en Solo prioritarias"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"En la pantalla de bloqueo"</string>
@@ -3117,8 +3141,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Optimización de batería"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Alertas de uso"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"Mostrar todas las aplicaciones"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"Ocultar aplicaciones extra"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Mostrar uso completo del dispositivo"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Mostrar uso de la aplicación"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Uso elevado"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> aplicaciones no funcionan con normalidad</item>
@@ -3473,7 +3497,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automático"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Liberar espacio"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"Gestos"</string>
+    <string name="gesture_preference_title" msgid="4033736910560673690">"Accesos directos de gestos"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestos rápidos para controlar el teléfono"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestos rápidos para controlar el tablet"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestos rápidos para controlar el dispositivo"</string>
@@ -3497,7 +3521,8 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del dispositivo."</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Levanta el teléfono para abrir la cámara"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Para abrir la cámara de forma automática, levanta el teléfono como si quisieras hacer una foto (en posición horizontal o vertical). Funciona cuando el teléfono está bloqueado o en suspensión."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="3574391686649107540">"Haz fotos desde la pantalla de bloqueo"</string>
+    <!-- no translation found for camera_lift_trigger_suggestion_summary (7209899898244722404) -->
+    <skip />
     <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto de asistencia"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidad"</string>
