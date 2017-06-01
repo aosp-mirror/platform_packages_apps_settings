@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -26,9 +25,6 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
 /**

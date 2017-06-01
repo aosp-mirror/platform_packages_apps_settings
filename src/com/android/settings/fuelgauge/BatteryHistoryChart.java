@@ -40,7 +40,6 @@ import android.util.TypedValue;
 import android.view.View;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.BatteryInfo;
 import libcore.icu.LocaleData;
 
 import java.util.ArrayList;

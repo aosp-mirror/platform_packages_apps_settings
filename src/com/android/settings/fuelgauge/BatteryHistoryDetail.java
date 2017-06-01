@@ -31,7 +31,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
-import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
 public class BatteryHistoryDetail extends SettingsPreferenceFragment {

@@ -47,7 +47,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settingslib.BatteryInfo;
 
 import org.junit.Before;
 import org.junit.Test;
