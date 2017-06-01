@@ -697,6 +697,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
+                setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
                 break;
         }
