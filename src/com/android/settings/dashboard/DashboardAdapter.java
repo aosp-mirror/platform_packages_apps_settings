@@ -15,6 +15,8 @@
  */
 package com.android.settings.dashboard;
 
+import android.annotation.AttrRes;
+import android.annotation.ColorInt;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -55,6 +57,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private static final String STATE_CATEGORY_LIST = "category_list";
     private static final String STATE_SUGGESTION_MODE = "suggestion_mode";
     private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
+    private static final int DONT_SET_BACKGROUND_ATTR = -1;
 
     private final IconCache mCache;
     private final Context mContext;
@@ -222,6 +225,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void onBindViewHolder(DashboardItemHolder holder, int position) {
         final int type = mDashboardData.getItemTypeByPosition(position);
         switch (type) {
+            case R.layout.dashboard_header_spacer:
+                onBindHeaderSpacer(holder, position);
+                break;
             case R.layout.dashboard_category:
                 onBindCategory(holder,
                         (DashboardCategory) mDashboardData.getItemEntityByPosition(position));
@@ -350,6 +356,33 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .setSuggestions(suggestions)
                 .build();
         notifyDashboardDataChanged(prevData);
+    }
+
+    private void onBindHeaderSpacer(DashboardItemHolder holder, int position) {
+        if (mDashboardData.size() > (position + 1)) {
+            // The spacer that goes underneath the search bar needs to match the
+            // background of the first real view. That view is either a condition,
+            // a suggestion, or the dashboard item.
+            //
+            // If it's a dashboard item, set null background so it uses the parent's
+            // background like the other views. Otherwise, match the colors.
+            int nextType = mDashboardData.getItemTypeByPosition(position + 1);
+            int colorAttr = nextType == R.layout.suggestion_header
+                    ? android.R.attr.colorSecondary
+                    : nextType == R.layout.condition_card
+                            ? android.R.attr.colorAccent
+                            : DONT_SET_BACKGROUND_ATTR;
+
+            if (colorAttr != DONT_SET_BACKGROUND_ATTR) {
+                TypedArray array = holder.itemView.getContext()
+                        .obtainStyledAttributes(new int[]{colorAttr});
+                @ColorInt int color = array.getColor(0, 0);
+                array.recycle();
+                holder.itemView.setBackgroundColor(color);
+            } else {
+                holder.itemView.setBackground(null);
+            }
+        }
     }
 
     @VisibleForTesting
