@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.res.TypedArray;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -42,13 +41,11 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
@@ -490,12 +487,13 @@ public class PowerUsageSummary extends PowerUsageBase implements
         BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
         mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
 
-        final long runningTime = mBatteryUtils.calculateRunningTimeBasedOnStatsType(mStatsHelper,
-                mStatsType);
+        final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
+                System.currentTimeMillis());
         updateScreenPreference();
-        updateLastFullChargePreference(runningTime);
+        updateLastFullChargePreference(lastFullChargeTime);
 
-        final CharSequence timeSequence = Utils.formatElapsedTime(context, runningTime, false);
+        final CharSequence timeSequence = Utils.formatElapsedTime(context, lastFullChargeTime,
+                false);
         final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
                 : R.string.power_usage_list_summary;
         mAppListGroup.setTitle(TextUtils.expandTemplate(getText(resId), timeSequence));

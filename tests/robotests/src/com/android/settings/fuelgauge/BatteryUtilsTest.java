@@ -305,6 +305,16 @@ public class BatteryUtilsTest {
                 mScreenBatterySipper);
     }
 
+    @Test
+    public void testCalculateLastFullChargeTime() {
+        final long currentTimeMs = System.currentTimeMillis();
+        when(mBatteryStatsHelper.getStats().getStartClockTime()).thenReturn(
+                currentTimeMs - TIME_SINCE_LAST_FULL_CHARGE_MS);
+
+        assertThat(mBatteryUtils.calculateLastFullChargeTime(
+                mBatteryStatsHelper, currentTimeMs)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
+    }
+
     private BatterySipper createTestSmearBatterySipper(long activityTime, double totalPowerMah,
             int uidCode, boolean isUidNull) {
         final BatterySipper sipper = mock(BatterySipper.class);
