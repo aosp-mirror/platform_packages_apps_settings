@@ -58,9 +58,9 @@ import static com.android.settings.search.SearchResult.TOP_RANK;
  * - {@link Drawable} icon
  * - {@link ResultPayload} payload
  */
-class CursorToSearchResultConverter {
+public class CursorToSearchResultConverter {
 
-    private final String TAG = "CursorConverter";
+    private static final String TAG = "CursorConverter";
 
     private final Context mContext;
 
@@ -101,6 +101,23 @@ class CursorToSearchResultConverter {
             }
         }
         return results;
+    }
+
+    public static ResultPayload getUnmarshalledPayload(byte[] marshalledPayload,
+            int payloadType) {
+        try {
+            switch (payloadType) {
+                case ResultPayload.PayloadType.INTENT:
+                    return ResultPayloadUtils.unmarshall(marshalledPayload,
+                            ResultPayload.CREATOR);
+                case ResultPayload.PayloadType.INLINE_SWITCH:
+                    return ResultPayloadUtils.unmarshall(marshalledPayload,
+                            InlineSwitchPayload.CREATOR);
+            }
+        } catch (BadParcelableException e) {
+            Log.w(TAG, "Error creating parcelable: " + e);
+        }
+        return null;
     }
 
     private SearchResult buildSingleSearchResultFromCursor(SiteMapManager sitemapManager,
@@ -160,22 +177,6 @@ class CursorToSearchResultConverter {
             }
         }
         return icon;
-    }
-
-    private ResultPayload getUnmarshalledPayload(byte[] unmarshalledPayload, int payloadType) {
-        try {
-            switch (payloadType) {
-                case ResultPayload.PayloadType.INTENT:
-                    return ResultPayloadUtils.unmarshall(unmarshalledPayload,
-                            ResultPayload.CREATOR);
-                case ResultPayload.PayloadType.INLINE_SWITCH:
-                    return ResultPayloadUtils.unmarshall(unmarshalledPayload,
-                            InlineSwitchPayload.CREATOR);
-            }
-        } catch (BadParcelableException e) {
-            Log.w(TAG, "Error creating parcelable: " + e);
-        }
-        return null;
     }
 
     private List<String> getBreadcrumbs(SiteMapManager siteMapManager, Cursor cursor) {
