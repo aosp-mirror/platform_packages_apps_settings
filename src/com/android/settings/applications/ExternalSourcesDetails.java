@@ -89,13 +89,9 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
                 return context.getString(R.string.disabled);
         }
 
-        final InstallAppsState appsState;
-        if (entry.extraInfo instanceof InstallAppsState) {
-            appsState = (InstallAppsState) entry.extraInfo;
-        } else {
-            appsState = new AppStateInstallAppsBridge(context, null, null)
-                    .createInstallAppsStateFor(entry.info.packageName, entry.info.uid);
-        }
+        final InstallAppsState appsState = new AppStateInstallAppsBridge(context, null, null)
+                .createInstallAppsStateFor(entry.info.packageName, entry.info.uid);
+
         return context.getString(appsState.canInstallApps()
                 ? R.string.app_permission_summary_allowed
                 : R.string.app_permission_summary_not_allowed);
