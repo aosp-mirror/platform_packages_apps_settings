@@ -20,11 +20,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.internal.os.BatteryStatsHelper;
@@ -48,6 +50,9 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyLoaderTest {
+    private static final String PACKAGE_NAME = "com.android.settings";
+    private static final CharSequence DISPLAY_NAME = "Settings";
+    private static final int UID = 0;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -67,12 +72,13 @@ public class AnomalyLoaderTest {
     private AnomalyLoader mAnomalyLoader;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest(mContext);
         doReturn(true).when(mAnomalyDetectionPolicy).isAnomalyDetectorEnabled(anyInt());
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        when(mContext.getPackageManager().getPackageUid(anyString(), anyInt())).thenReturn(UID);
 
         mWakeLockAnomalies = new ArrayList<>();
         mWakeLockAnomaly = createAnomaly(Anomaly.AnomalyType.WAKE_LOCK);
@@ -105,6 +111,16 @@ public class AnomalyLoaderTest {
     private Anomaly createAnomaly(@Anomaly.AnomalyType int type) {
         return new Anomaly.Builder()
                 .setType(type)
+                .setUid(UID)
+                .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
                 .build();
+    }
+
+    @Test
+    public void testGenerateFakeData() {
+        List<Anomaly> anomalies = mAnomalyLoader.generateFakeData();
+
+        assertThat(anomalies).containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly);
     }
 }
