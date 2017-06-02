@@ -97,6 +97,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness_battery";
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
+    private static final String KEY_HIGH_USAGE = "high_usage";
 
     @VisibleForTesting
     static final int ANOMALY_LOADER = 1;
@@ -843,6 +844,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     niks.add(KEY_AUTO_BRIGHTNESS);
                     niks.add(KEY_SCREEN_TIMEOUT);
                     niks.add(KEY_BATTERY_SAVER_SUMMARY);
+                    niks.add(KEY_HIGH_USAGE);
                     return niks;
                 }
             };
