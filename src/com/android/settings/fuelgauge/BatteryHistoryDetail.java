@@ -30,7 +30,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 public class BatteryHistoryDetail extends SettingsPreferenceFragment {
     public static final String EXTRA_STATS = "stats";
