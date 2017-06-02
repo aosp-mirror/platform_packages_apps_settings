@@ -445,6 +445,17 @@ public class WifiDetailPreferenceControllerTest {
         mCallbackCaptor.getValue().onLinkPropertiesChanged(mockNetwork, new LinkProperties(lp));
     }
 
+    private void updateNetworkCapabilities(NetworkCapabilities nc) {
+        mCallbackCaptor.getValue().onCapabilitiesChanged(mockNetwork, new NetworkCapabilities(nc));
+    }
+
+    private NetworkCapabilities makeNetworkCapabilities() {
+        NetworkCapabilities nc = new NetworkCapabilities();
+        nc.clearAll();
+        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        return nc;
+    }
+
     private void verifyDisplayedIpv6Addresses(InOrder inOrder, LinkAddress... addresses) {
         String text = Arrays.stream(addresses)
                 .map(address -> asString(address))
@@ -589,7 +600,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void networkDisconnectdState_shouldFinishActivity() {
+    public void networkDisconnectedState_shouldFinishActivity() {
         mController.onResume();
 
         when(mockConnectivityManager.getNetworkInfo(any(Network.class))).thenReturn(null);
@@ -644,22 +655,16 @@ public class WifiDetailPreferenceControllerTest {
 
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
 
-        NetworkCapabilities nc = new NetworkCapabilities();
-        nc.clearAll();
-        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
-
-        NetworkCallback callback = mCallbackCaptor.getValue();
-        callback.onCapabilitiesChanged(mockNetwork, nc);
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        updateNetworkCapabilities(nc);
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
 
-        nc = new NetworkCapabilities(nc);
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
-        callback.onCapabilitiesChanged(mockNetwork, nc);
+        updateNetworkCapabilities(nc);
         inOrder.verify(mockSignInButton).setVisibility(View.VISIBLE);
 
-        nc = new NetworkCapabilities(nc);
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
-        callback.onCapabilitiesChanged(mockNetwork, nc);
+        updateNetworkCapabilities(nc);
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
     }
 
