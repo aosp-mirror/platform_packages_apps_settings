@@ -95,7 +95,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         getPreferenceScreen().setOrderingAsAdded(true);
         setupBlock();
         addHeaderPref();
-        addAppLinkPref();
 
         mShowLegacyChannelConfig = mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid);
         if (mShowLegacyChannelConfig) {
@@ -120,6 +119,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                         return;
                     }
                     populateChannelList();
+                    addAppLinkPref();
                 }
             }.execute();
         }
