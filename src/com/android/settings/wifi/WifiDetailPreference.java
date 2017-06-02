@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class WifiDetailPreference extends Preference {
     }
 
     public void setDetailText(String text) {
+        if (TextUtils.equals(mDetailText, text)) return;
         mDetailText = text;
         notifyChanged();
     }
