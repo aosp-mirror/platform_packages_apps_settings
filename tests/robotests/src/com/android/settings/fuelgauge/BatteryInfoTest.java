@@ -24,6 +24,7 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.R;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +70,7 @@ public class BatteryInfoTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
 
         mDisChargingBatteryBroadcast = new Intent();
         mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_PLUGGED, 0);
@@ -97,8 +99,9 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_hasStatusLabel() {
         doReturn(REMAINING_TIME_NULL).when(mBatteryStats).computeBatteryTimeRemaining(anyLong());
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
+        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext,
+                mDisChargingBatteryBroadcast, mBatteryStats, SystemClock.elapsedRealtime() * 1000,
+                true /* shortString */);
 
         assertThat(info.statusLabel).isEqualTo(STATUS_FULL);
     }
@@ -106,7 +109,7 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_doNotShowChargingMethod_hasRemainingTime() {
         doReturn(REMAINING_TIME).when(mBatteryStats).computeChargeTimeRemaining(anyLong());
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */);
 
         assertThat(info.chargeLabelString).isEqualTo(STATUS_CHARGING_TIME);
@@ -115,7 +118,7 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_doNotShowChargingMethod_noRemainingTime() {
         doReturn(REMAINING_TIME_NULL).when(mBatteryStats).computeChargeTimeRemaining(anyLong());
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */);
 
         assertThat(info.chargeLabelString).isEqualTo(STATUS_CHARGING_NO_TIME);
@@ -123,7 +126,7 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_pluggedIn_dischargingFalse() {
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
 
         assertThat(info.discharging).isEqualTo(false);

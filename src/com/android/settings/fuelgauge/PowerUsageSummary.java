@@ -19,21 +19,15 @@ package com.android.settings.fuelgauge;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.res.TypedArray;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
@@ -102,7 +96,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     static final int ANOMALY_LOADER = 1;
     @VisibleForTesting
-    static final int BATTERY_ESTIMATE_LOADER = 2;
+    static final int BATTERY_INFO_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -125,8 +119,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    long mEnhancedEstimate = -1;
 
     /**
      * SparseArray that maps uid to {@link Anomaly}, so we could find {@link Anomaly} by uid
@@ -164,35 +156,21 @@ public class PowerUsageSummary extends PowerUsageBase implements
             };
 
     @VisibleForTesting
-    LoaderManager.LoaderCallbacks<Cursor> mBatteryPredictionLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<Cursor>() {
+    LoaderManager.LoaderCallbacks<BatteryInfo> BatteryInfoLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<BatteryInfo>() {
 
                 @Override
-                public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-                    final Uri queryUri = mPowerFeatureProvider.getEnhancedBatteryPredictionUri();
-
-                    return new CursorLoader(getContext(), queryUri, null, null, null, null);
+                public Loader<BatteryInfo> onCreateLoader(int i, Bundle bundle) {
+                    return new BatteryInfoLoader(getContext(), mStatsHelper);
                 }
 
                 @Override
-                public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-                    if (cursor == null) {
-                        return;
-                    }
-                    if (cursor.moveToFirst()) {
-                        mEnhancedEstimate =
-                                mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
-                    }
-                    final long elapsedRealtimeUs =
-                            mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
-                    Intent batteryBroadcast = getContext().registerReceiver(null,
-                            new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                    BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
+                public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
                     mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
                 }
 
                 @Override
-                public void onLoaderReset(Loader<Cursor> loader) {
+                public void onLoaderReset(Loader<BatteryInfo> loader) {
                     // do nothing
                 }
             };
@@ -214,7 +192,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mAnomalySparseArray = new SparseArray<>();
 
         initFeatureProvider();
-        initializeBatteryEstimateLoader();
+        restartBatteryInfoLoader();
     }
 
     @Override
@@ -481,12 +459,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         initAnomalyDetectionIfPossible();
 
-        final long elapsedRealtimeUs = mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
-        Intent batteryBroadcast = context.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
-        mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
-
+        // reload BatteryInfo and updateUI
+        restartBatteryInfoLoader();
         final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
                 System.currentTimeMillis());
         updateScreenPreference();
@@ -702,28 +676,12 @@ public class PowerUsageSummary extends PowerUsageBase implements
         }
     }
 
-    private BatteryInfo getBatteryInfo(long elapsedRealtimeUs, Intent batteryBroadcast) {
-        BatteryInfo batteryInfo;
-        if (mEnhancedEstimate > 0 &&
-                mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(
-                        getContext())) {
-            // Drain time is in micro-seconds so we have to multiply by 1000
-            batteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
-                    mStatsHelper.getStats(), elapsedRealtimeUs, false,
-                    mBatteryUtils.convertMsToUs(mEnhancedEstimate), true);
-        } else {
-            batteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
-                    mStatsHelper.getStats(), elapsedRealtimeUs, false);
-        }
-        return batteryInfo;
-    }
-
     @VisibleForTesting
-    void initializeBatteryEstimateLoader() {
+    void restartBatteryInfoLoader() {
         if (mPowerFeatureProvider != null
                 && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(getContext())) {
-            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
-                    mBatteryPredictionLoaderCallbacks);
+            getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
+                    BatteryInfoLoaderCallbacks);
         }
     }
 

@@ -439,24 +439,6 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testBatteryPredictionLoaderCallbacks_DoesNotCrashOnNull() {
-        // Sanity test to check for crash
-        mFragment.mBatteryPredictionLoaderCallbacks.onLoadFinished(null, null);
-    }
-
-    @Test
-    public void testOnCreate_BatteryPredictionSkippedWhenDisabled() {
-        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
-        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(false);
-        mFragment.mPowerFeatureProvider = provider;
-        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
-        mFragment.initializeBatteryEstimateLoader();
-
-        verify(mLoaderManager, never()).initLoader(eq(PowerUsageSummary.BATTERY_ESTIMATE_LOADER),
-                eq(Bundle.EMPTY), any());
-    }
-
-    @Test
     public void testInitAnomalyDetectionIfPossible_detectionEnabled_init() {
         when(mFeatureFactory.powerUsageFeatureProvider.isAnomalyDetectionEnabled()).thenReturn(
                 true);

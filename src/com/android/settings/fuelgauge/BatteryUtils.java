@@ -274,7 +274,7 @@ public class BatteryUtils {
 
     }
 
-    private long convertUsToMs(long timeUs) {
+    public long convertUsToMs(long timeUs) {
         return timeUs / 1000;
     }
 
