@@ -160,6 +160,14 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mSidecar != null) {
+            mSidecar.setListener(this);
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         if (mSidecar != null) {
