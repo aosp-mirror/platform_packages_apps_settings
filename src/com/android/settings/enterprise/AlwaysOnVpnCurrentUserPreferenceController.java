@@ -42,7 +42,9 @@ public class AlwaysOnVpnCurrentUserPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.isAlwaysOnVpnSetInCurrentUser();
+        final boolean available = mFeatureProvider.isAlwaysOnVpnSetInCurrentUser();
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override
