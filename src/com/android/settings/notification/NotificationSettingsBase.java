@@ -263,7 +263,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void addAppLinkPref() {
-        if (mAppRow.settingsIntent != null) {
+        if (mAppRow.settingsIntent != null && mAppLink == null) {
             mAppLink = new Preference(getPrefContext());
             mAppLink.setKey(KEY_APP_LINK);
             mAppLink.setOrder(500);
