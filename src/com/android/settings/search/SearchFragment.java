@@ -100,7 +100,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     SearchFeatureProvider mSearchFeatureProvider;
 
-    private SearchResultsAdapter mSearchAdapter;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    SearchResultsAdapter mSearchAdapter;
 
     @VisibleForTesting
     RecyclerView mResultsRecyclerView;

@@ -384,7 +384,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         return mHandler;
     }
 
-    private void postSearchResults(List<SearchResult> newSearchResults, boolean detectMoves) {
+    @VisibleForTesting
+    public void postSearchResults(List<SearchResult> newSearchResults, boolean detectMoves) {
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
                 new SearchResultDiffCallback(mSearchResults, newSearchResults), detectMoves);
         mSearchResults.clear();
