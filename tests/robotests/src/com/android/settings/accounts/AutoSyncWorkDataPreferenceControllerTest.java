@@ -21,6 +21,7 @@ import static android.content.pm.UserInfo.FLAG_MANAGED_PROFILE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
@@ -45,6 +46,8 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutoSyncWorkDataPreferenceControllerTest {
+
+    private static int MANAGED_PROFILE_ID = 10;
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
@@ -80,29 +83,30 @@ public class AutoSyncWorkDataPreferenceControllerTest {
 
     @Test
     public void checkIsAvailable_singleUserProfile_shouldNotDisplay() {
-        final List<UserInfo> infos = new ArrayList<>();
-        infos.add(new UserInfo(1, "user 1", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.isLinkedUser()).thenReturn(false);
-        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));
+        when(mUserManager.getProfiles(eq(UserHandle.USER_SYSTEM))).thenReturn(infos);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void multipleProfile_shouldInitWithWorkProfileUserHandle() {
-        final int id1 = 1;
-        final int id2 = 2;
-        final UserInfo managedUser = new UserInfo(id2, "user 2", FLAG_MANAGED_PROFILE);
-        final List<UserHandle> infos = new ArrayList<>();
-        infos.add(new UserHandle(id1));
-        infos.add(new UserHandle(id2));
-        when(mUserManager.getUserProfiles()).thenReturn(infos);
-        when(mUserManager.getUserHandle()).thenReturn(id1);
-        when(mUserManager.getUserInfo(id2)).thenReturn(managedUser);
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));
+        infos.add(new UserInfo(
+                MANAGED_PROFILE_ID, "work profile", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mUserManager.getProfiles(eq(UserHandle.USER_SYSTEM))).thenReturn(infos);
 
         mController = new AutoSyncWorkDataPreferenceController(mContext, mFragment);
 
-        assertThat(mController.mUserHandle.getIdentifier()).isEqualTo(id2);
+        assertThat(mController.mUserHandle.getIdentifier()).isEqualTo(MANAGED_PROFILE_ID);
+        assertThat(mController.isAvailable()).isTrue();
     }
 }
