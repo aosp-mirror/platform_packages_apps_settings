@@ -25,23 +25,25 @@ import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.WorkerThread;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
+
 import com.android.internal.os.BatteryStatsHelper;
-import android.support.annotation.VisibleForTesting;
+
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.R;
-import com.android.settingslib.Utils;
+import com.android.settings.Utils;
 import com.android.settingslib.graph.UsageView;
 
 public class BatteryInfo {
 
-    public String chargeLabelString;
+    public CharSequence chargeLabel;
+    public CharSequence remainingLabel;
     public int batteryLevel;
     public boolean discharging = true;
     public long remainingTimeUs = 0;
     public String batteryPercentString;
-    public String remainingLabel;
     public String statusLabel;
     private boolean mCharging;
     private BatteryStats mStats;
@@ -172,27 +174,25 @@ public class BatteryInfo {
         if (!info.mCharging) {
             if (drainTimeUs > 0) {
                 info.remainingTimeUs = drainTimeUs;
-                String timeString = Formatter.formatShortElapsedTime(context,
-                        batteryUtils.convertUsToMs(drainTimeUs));
-                info.remainingLabel = resources.getString(
-                        shortString ?
-                                (basedOnUsage ?
-                                        R.string.power_remaining_duration_only_short_enhanced :
-                                        R.string.power_remaining_duration_only_short) :
-                                (basedOnUsage ?
-                                        R.string.power_remaining_duration_only_enhanced :
-                                        R.string.power_remaining_duration_only),
-                        timeString);
-                info.chargeLabelString = resources.getString(
+                CharSequence timeString = Utils.formatElapsedTime(context,
+                        batteryUtils.convertUsToMs(drainTimeUs), false /* withSeconds */);
+                info.remainingLabel = TextUtils.expandTemplate(context.getText(shortString ?
+                        (basedOnUsage ?
+                                R.string.power_remaining_duration_only_short_enhanced :
+                                R.string.power_remaining_duration_only_short) :
+                        (basedOnUsage ?
+                                R.string.power_remaining_duration_only_enhanced :
+                                R.string.power_remaining_duration_only)), timeString);
+                info.chargeLabel = TextUtils.expandTemplate(context.getText(
                         shortString ?
                                 R.string.power_discharging_duration_short :
                                 basedOnUsage ?
                                         R.string.power_discharging_duration_enhanced :
-                                        R.string.power_discharging_duration,
+                                        R.string.power_discharging_duration),
                         info.batteryPercentString, timeString);
             } else {
                 info.remainingLabel = null;
-                info.chargeLabelString = info.batteryPercentString;
+                info.chargeLabel = info.batteryPercentString;
             }
         } else {
             final long chargeTime = stats.computeChargeTimeRemaining(elapsedRealtimeUs);
@@ -201,19 +201,19 @@ public class BatteryInfo {
             info.discharging = false;
             if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
                 info.remainingTimeUs = chargeTime;
-                String timeString = Formatter.formatShortElapsedTime(context,
-                        batteryUtils.convertUsToMs(chargeTime));
+                CharSequence timeString = Utils.formatElapsedTime(context,
+                        batteryUtils.convertUsToMs(drainTimeUs), false /* withSeconds */);
                 int resId = shortString ? R.string.power_charging_duration_short
                         : R.string.power_charging_duration;
-                info.remainingLabel = resources.getString(
-                        R.string.power_remaining_charging_duration_only, timeString);
-                info.chargeLabelString = resources.getString(
-                        resId, info.batteryPercentString, timeString);
+                info.remainingLabel = TextUtils.expandTemplate(context.getText(
+                        R.string.power_remaining_charging_duration_only), timeString);
+                info.chargeLabel = TextUtils.expandTemplate(context.getText(resId),
+                        info.batteryPercentString, timeString);
             } else {
                 final String chargeStatusLabel = resources.getString(
                         R.string.battery_info_status_charging_lower);
                 info.remainingLabel = null;
-                info.chargeLabelString = resources.getString(
+                info.chargeLabel = resources.getString(
                         R.string.power_charging, info.batteryPercentString, chargeStatusLabel);
             }
         }
