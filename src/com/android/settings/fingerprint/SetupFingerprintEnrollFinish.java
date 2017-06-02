@@ -49,12 +49,6 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
     @Override
     protected void initViews() {
         super.initViews();
-
-        final TextView message = (TextView) findViewById(R.id.message);
-        message.setText(R.string.setup_fingerprint_enroll_finish_message);
-
-        final TextView secondaryMessage = (TextView) findViewById(R.id.message_secondary);
-        secondaryMessage.setVisibility(View.VISIBLE);
     }
 
     @Override
