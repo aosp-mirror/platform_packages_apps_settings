@@ -32,7 +32,9 @@ public class GlobalHttpProxyPreferenceController extends DynamicAvailabilityPref
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.isGlobalHttpProxySet();
+        final boolean available = mFeatureProvider.isGlobalHttpProxySet();
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override

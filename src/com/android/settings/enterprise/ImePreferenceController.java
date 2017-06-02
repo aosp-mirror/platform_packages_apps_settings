@@ -43,7 +43,9 @@ public class ImePreferenceController extends DynamicAvailabilityPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.getImeLabelIfOwnerSet() != null;
+        final boolean available = mFeatureProvider.getImeLabelIfOwnerSet() != null;
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override

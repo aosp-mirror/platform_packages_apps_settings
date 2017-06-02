@@ -22,6 +22,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -50,6 +51,7 @@ public final class DynamicAvailabilityPreferenceControllerTest {
     private @Mock Preference mPreference;
     private @Mock PreferenceScreen mScreen;
     private @Mock Lifecycle mLifecycle;
+    private @Mock PreferenceAvailabilityObserver mObserver;
 
     private boolean mIsAvailable;
     private Preference mUpdatedPreference = null;
@@ -115,6 +117,21 @@ public final class DynamicAvailabilityPreferenceControllerTest {
         assertThat(mUpdatedPreference).isEqualTo(mPreference);
     }
 
+    @Test
+    public void testNotifyOnAvailabilityUpdate() {
+        final DynamicAvailabilityPreferenceController controller
+                = new DynamicAvailabilityPreferenceControllerTestable(mLifecycle);
+        controller.setAvailabilityObserver(mObserver);
+        assertThat(controller.getAvailabilityObserver()).isEqualTo(mObserver);
+
+        mIsAvailable = false;
+        controller.isAvailable();
+        verify(mObserver).onPreferenceAvailabilityUpdated(PREFERENCE_KEY, false);
+
+        mIsAvailable = true;
+        controller.isAvailable();
+        verify(mObserver).onPreferenceAvailabilityUpdated(PREFERENCE_KEY, true);
+    }
 
     private class DynamicAvailabilityPreferenceControllerTestable
             extends DynamicAvailabilityPreferenceController {
@@ -124,6 +141,7 @@ public final class DynamicAvailabilityPreferenceControllerTest {
 
         @Override
         public boolean isAvailable() {
+            notifyOnAvailabilityUpdate(mIsAvailable);
             return mIsAvailable;
         }
 

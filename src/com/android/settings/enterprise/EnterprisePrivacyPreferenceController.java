@@ -45,7 +45,9 @@ public class EnterprisePrivacyPreferenceController extends DynamicAvailabilityPr
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.hasDeviceOwner();
+        final boolean available = mFeatureProvider.hasDeviceOwner();
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override

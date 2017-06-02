@@ -42,14 +42,18 @@ public class EnterpriseInstalledPackagesPreferenceController
     public void updateState(Preference preference) {
         mFeatureProvider.calculateNumberOfPolicyInstalledApps(true /* async */,
                 (num) -> {
+                    final boolean available;
                     if (num == 0) {
-                        preference.setVisible(false);
+                        available = false;
                     } else {
-                        preference.setVisible(true);
+                        available = true;
                         preference.setSummary(mContext.getResources().getQuantityString(
                                 R.plurals.enterprise_privacy_number_packages_lower_bound, num,
                                 num));
+
                     }
+                    preference.setVisible(available);
+                    notifyOnAvailabilityUpdate(available);
                 });
     }
 
@@ -68,7 +72,9 @@ public class EnterpriseInstalledPackagesPreferenceController
         final Boolean[] haveEnterpriseInstalledPackages = { null };
         mFeatureProvider.calculateNumberOfPolicyInstalledApps(false /* async */,
                 (num) -> haveEnterpriseInstalledPackages[0] = num > 0);
-        return haveEnterpriseInstalledPackages[0];
+        final boolean available = haveEnterpriseInstalledPackages[0];
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override

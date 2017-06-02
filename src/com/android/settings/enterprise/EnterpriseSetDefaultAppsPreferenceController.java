@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2017 The Android Open Source Project
  *
@@ -48,7 +49,9 @@ public class EnterpriseSetDefaultAppsPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return getNumberOfEnterpriseSetDefaultApps() > 0;
+        final boolean available = getNumberOfEnterpriseSetDefaultApps() > 0;
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override
