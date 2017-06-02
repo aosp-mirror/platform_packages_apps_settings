@@ -519,6 +519,45 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    public void onCapabilitiesChanged_callsRefreshIfNecessary() {
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        when(mockConnectivityManager.getNetworkCapabilities(mockNetwork))
+                .thenReturn(new NetworkCapabilities(nc));
+
+        String summary = "Connected, no Internet";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+
+        InOrder inOrder = inOrder(mockConnectionDetailPref);
+        mController.displayPreference(mockScreen);
+        mController.onResume();
+        inOrder.verify(mockConnectionDetailPref).setTitle(summary);
+
+        // Check that an irrelevant capability update does not update the access point summary, as
+        // doing so could cause unnecessary jank...
+        summary = "Connected";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref, never()).setTitle(any());
+
+        // ... but that if the network validates, then we do refresh.
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref).setTitle(summary);
+
+        summary = "Connected, no Internet";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+
+        // Another irrelevant update won't cause the UI to refresh...
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref, never()).setTitle(any());
+
+        // ... but if the network is no longer validated, then we display "connected, no Internet".
+        nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref).setTitle(summary);
+    }
+
+    @Test
     public void canForgetNetwork_noNetwork() {
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
