@@ -18,6 +18,7 @@
 package com.android.settings.search;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.DatabaseTestUtils;
@@ -36,7 +38,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -75,6 +79,11 @@ public class SearchFragmentTest {
     private SavedQueryLoader mSavedQueryLoader;
     @Mock
     private SavedQueryController mSavedQueryController;
+    @Mock
+    private SearchResultsAdapter mSearchResultsAdapter;
+    @Captor
+    private ArgumentCaptor<String> mQueryCaptor = ArgumentCaptor.forClass(String.class);
+
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -148,7 +157,7 @@ public class SearchFragmentTest {
     }
 
     @Test
-    public void queryTextChange_shouldTriggerLoader() {
+    public void queryTextChange_shouldTriggerLoaderAndInitializeSearch() {
         when(mFeatureFactory.searchFeatureProvider
                 .getDatabaseSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mDatabaseResultLoader);
@@ -167,6 +176,7 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider.isIndexingComplete(any(Context.class)))
                 .thenReturn(true);
 
+        ReflectionHelpers.setField(fragment, "mSearchAdapter", mSearchResultsAdapter);
         fragment.onQueryTextChange(testQuery);
         activityController.get().onBackPressed();
 
@@ -181,10 +191,12 @@ public class SearchFragmentTest {
                 .getDatabaseSearchLoader(any(Context.class), anyString());
         verify(mFeatureFactory.searchFeatureProvider)
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
+        verify(mSearchResultsAdapter).initializeSearch(mQueryCaptor.capture());
+        assertThat(mQueryCaptor.getValue()).isEqualTo(testQuery);
     }
 
     @Test
-    public void queryTextChangeToEmpty_shouldLoadSavedQuery() {
+    public void queryTextChangeToEmpty_shouldLoadSavedQueryAndNotInitializeSearch() {
         when(mFeatureFactory.searchFeatureProvider
                 .getDatabaseSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mDatabaseResultLoader);
@@ -201,6 +213,7 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider.isIndexingComplete(any(Context.class)))
                 .thenReturn(true);
         ReflectionHelpers.setField(fragment, "mSavedQueryController", mSavedQueryController);
+        ReflectionHelpers.setField(fragment, "mSearchAdapter", mSearchResultsAdapter);
         fragment.mQuery = "123";
 
         fragment.onQueryTextChange("");
@@ -210,6 +223,7 @@ public class SearchFragmentTest {
         verify(mFeatureFactory.searchFeatureProvider, never())
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
         verify(mSavedQueryController).loadSavedQueries();
+        verify(mSearchResultsAdapter, never()).initializeSearch(anyString());
     }
 
     @Test
@@ -383,12 +397,21 @@ public class SearchFragmentTest {
         SearchFragment fragment = new SearchFragment();
         ReflectionHelpers.setField(fragment, "mMetricsFeatureProvider",
                 mFeatureFactory.metricsFeatureProvider);
+        ReflectionHelpers.setField(fragment, "mSearchFeatureProvider",
+                mFeatureFactory.searchFeatureProvider);
         ReflectionHelpers.setField(fragment, "mSearchAdapter", mock(SearchResultsAdapter.class));
         fragment.mSavedQueryController = mock(SavedQueryController.class);
 
         // Should log result name, result count, clicked rank, etc.
-        final SearchViewHolder result = mock(SearchViewHolder.class);
-        fragment.onSearchResultClicked(result, "test_setting");
+        final SearchViewHolder resultViewHolder = mock(SearchViewHolder.class);
+        ResultPayload payLoad = new ResultPayload(
+                (new Intent()).putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, "test_setting"));
+        SearchResult searchResult = new SearchResult.Builder()
+                .setStableId(payLoad.hashCode())
+                .setPayload(payLoad)
+                .setTitle("setting_title")
+                .build();
+        fragment.onSearchResultClicked(resultViewHolder, searchResult);
 
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 nullable(Context.class),
@@ -397,6 +420,9 @@ public class SearchFragmentTest {
                 argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT)),
                 argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK)),
                 argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH)));
+
+        verify(mFeatureFactory.searchFeatureProvider).searchResultClicked(nullable(Context.class),
+                nullable(String.class), eq(searchResult));
     }
 
     private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag) {

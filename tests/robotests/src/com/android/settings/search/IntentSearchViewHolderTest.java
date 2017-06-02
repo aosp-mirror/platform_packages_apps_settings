@@ -97,7 +97,7 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.GONE);
 
-        verify(mFragment).onSearchResultClicked(eq(mHolder), anyString());
+        verify(mFragment).onSearchResultClicked(eq(mHolder), any(SearchResult.class));
         verify(mFragment).startActivity(any(Intent.class));
     }
 

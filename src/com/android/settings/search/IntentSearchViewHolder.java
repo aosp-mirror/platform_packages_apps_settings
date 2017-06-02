@@ -16,13 +16,9 @@
  */
 package com.android.settings.search;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.SettingsActivity;
 
 /**
  * ViewHolder for intent based search results.
@@ -44,14 +40,8 @@ public class IntentSearchViewHolder extends SearchViewHolder {
         super.onBind(fragment, result);
 
         itemView.setOnClickListener(v -> {
-            final Intent intent = result.payload.getIntent();
-            final ComponentName cn = intent.getComponent();
-            String resultName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
-            if (TextUtils.isEmpty(resultName) && cn != null) {
-                resultName = cn.flattenToString();
-            }
-            fragment.onSearchResultClicked(this, resultName);
-            fragment.startActivity(intent);
+           fragment.onSearchResultClicked(this, result);
+           fragment.startActivity(result.payload.getIntent());
         });
     }
 }

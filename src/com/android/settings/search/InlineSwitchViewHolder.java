@@ -46,7 +46,7 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
     }
 
     @Override
-    public void onBind(SearchFragment fragment, SearchResult result) {
+    public void onBind(SearchFragment fragment, final SearchResult result) {
         super.onBind(fragment, result);
         if (mContext == null) {
             return;
@@ -57,7 +57,7 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
             final Pair<Integer, Object> value = Pair.create(
                     MetricsEvent.FIELD_SETTINGS_SEARCH_INLINE_RESULT_VALUE, isChecked
                             ? 1L : 0L);
-            fragment.onSearchResultClicked(this, payload.mSettingKey, value);
+            fragment.onSearchResultClicked(this, result, value);
             int newValue = isChecked ? InlineSwitchPayload.TRUE : InlineSwitchPayload.FALSE;
             payload.setValue(mContext, newValue);
         });

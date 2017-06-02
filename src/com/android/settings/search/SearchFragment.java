@@ -19,7 +19,9 @@ package com.android.settings.search;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
@@ -37,6 +39,7 @@ import android.widget.SearchView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -234,6 +237,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mSavedQueryController.loadSavedQueries();
             mSearchFeatureProvider.hideFeedbackButton();
         } else {
+            mSearchAdapter.initializeSearch(mQuery);
             restartLoaders();
         }
 
@@ -270,15 +274,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             return;
         }
 
-        final int resultCount = mSearchAdapter.displaySearchResults(mQuery);
-
-        if (resultCount == 0) {
-            mNoResultsView.setVisibility(View.VISIBLE);
-        } else {
-            mNoResultsView.setVisibility(View.GONE);
-            mResultsRecyclerView.scrollToPosition(0);
-        }
-        mSearchFeatureProvider.showFeedbackButton(this, getView());
+        mSearchAdapter.notifyResultsLoaded();
     }
 
     @Override
@@ -304,28 +300,22 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         requery();
     }
 
-    public void onSearchResultClicked(SearchViewHolder result, String settingName,
+    public void onSearchResultClicked(SearchViewHolder resultViewHolder, SearchResult result,
             Pair<Integer, Object>... logTaggedData) {
-        final List<Pair<Integer, Object>> taggedData = new ArrayList<>();
-        if (logTaggedData != null) {
-            taggedData.addAll(Arrays.asList(logTaggedData));
-        }
-        taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT,
-                mSearchAdapter.getItemCount()));
-        taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK,
-                result.getAdapterPosition()));
-        taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH,
-                TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));
+        logSearchResultClicked(resultViewHolder, result, logTaggedData);
 
-        mMetricsFeatureProvider.action(getContext(),
-                MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
-                settingName,
-                taggedData.toArray(new Pair[0]));
         mSavedQueryController.saveQuery(mQuery);
         mResultClickCount++;
+    }
+
+    public void onSearchResultsDisplayed(int resultCount) {
+        if (resultCount == 0) {
+            mNoResultsView.setVisibility(View.VISIBLE);
+        } else {
+            mNoResultsView.setVisibility(View.GONE);
+            mResultsRecyclerView.scrollToPosition(0);
+        }
+        mSearchFeatureProvider.showFeedbackButton(this, getView());
     }
 
     public void onSavedQueryClicked(CharSequence query) {
@@ -377,5 +367,39 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         if (mResultsRecyclerView != null) {
             mResultsRecyclerView.requestFocus();
         }
+    }
+
+    private void logSearchResultClicked(SearchViewHolder resultViewHolder, SearchResult result,
+            Pair<Integer, Object>... logTaggedData) {
+        final Intent intent = result.payload.getIntent();
+        if (intent == null) {
+            Log.w(TAG, "Skipped logging click on search result because of null intent, which can " +
+                    "happen on saved query results.");
+            return;
+        }
+        final ComponentName cn = intent.getComponent();
+        String resultName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
+        if (TextUtils.isEmpty(resultName) && cn != null) {
+            resultName = cn.flattenToString();
+        }
+        final List<Pair<Integer, Object>> taggedData = new ArrayList<>();
+        if (logTaggedData != null) {
+            taggedData.addAll(Arrays.asList(logTaggedData));
+        }
+        taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT,
+                mSearchAdapter.getItemCount()));
+        taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK,
+                resultViewHolder.getAdapterPosition()));
+        taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH,
+                TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));
+
+        mMetricsFeatureProvider.action(getContext(),
+                MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
+                resultName,
+                taggedData.toArray(new Pair[0]));
+        mSearchFeatureProvider.searchResultClicked(getContext(), mQuery, result);
     }
 }
