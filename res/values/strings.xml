@@ -3695,8 +3695,6 @@
     <!-- Text for filter option in ManageApps screen to display list of
     packages installed on sdcard. -->
     <string name="filter_apps_onsdcard" product="default">On SD card</string>
-    <!-- [CHAR LIMIT=25] Manage applications, text telling using an application is disabled. -->
-    <string name="disabled">Disabled</string>
     <!-- [CHAR LIMIT=30] Manage applications, text telling using an application is not installed for the current user. The key part is that it's not installed. -->
     <string name="not_installed">Not installed for this user</string>
     <!-- [CHAR LIMIT=30] App details, text telling an application is installed. -->
@@ -7838,8 +7836,6 @@
     <!-- Preference summary text for an app when it is disallowed for a permission. [CHAR LIMIT=45] -->
     <string name="app_permission_summary_not_allowed">Not allowed</string>
 
-    <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
-    <string name="install_other_apps">Install unknown apps</string>
     <!-- Keywords for setting screen for controlling apps that can install other apps on device -->
     <string name="keywords_install_other_apps">install apps unknown sources</string>
 
@@ -7865,6 +7861,10 @@
     <string name="permit_write_settings">Allow modify system settings</string>
     <!-- Description of the write system settings [CHAR LIMIT=NONE] -->
     <string name="write_settings_description">This permission allows an app to modify system settings.</string>
+    <!-- Summary of app allowed to write system settings [CHAR LIMIT=45] -->
+    <string name="write_settings_on">Yes</string>
+    <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
+    <string name="write_settings_off">No</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
     <string name="external_source_switch_title">Allow from this source</string>
 
