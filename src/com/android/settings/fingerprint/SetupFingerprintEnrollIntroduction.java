@@ -28,9 +28,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
-import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.SetupChooseLockGeneric;
+import com.android.settings.password.SetupSkipDialog;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
 
@@ -98,9 +98,8 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
             setResult(RESULT_SKIP);
             finish();
         } else {
-            SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                    getIntent().getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
-            dialog.show(getFragmentManager());
+            setResult(SetupSkipDialog.RESULT_SKIP);
+            finish();
         }
     }
 
