@@ -206,6 +206,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         launchIntentOrSelectProfile(activity, tile, intent, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
+    @Override
+    public boolean combineSuggestionAndCondition() {
+        return false;
+    }
+
     private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,
             int sourceMetricCategory) {
         if (!isIntentResolvable(intent)) {

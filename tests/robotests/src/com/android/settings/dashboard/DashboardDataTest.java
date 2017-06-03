@@ -88,17 +88,21 @@ public class DashboardDataTest {
         mDashboardCategory.tiles.add(mTestCategoryTile);
         categories.add(mDashboardCategory);
 
-        // Build DashboardData 
+        // Build DashboardData
         mDashboardDataWithOneConditions = new DashboardData.Builder()
                 .setConditions(oneItemConditions)
                 .setCategories(categories)
                 .setSuggestions(suggestions)
+                .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
+                .setCombineSuggestionAndCondition(true)
                 .build();
 
         mDashboardDataWithTwoConditions = new DashboardData.Builder()
                 .setConditions(twoItemsConditions)
                 .setCategories(categories)
                 .setSuggestions(suggestions)
+                .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
+                .setCombineSuggestionAndCondition(true)
                 .build();
 
         mDashboardDataWithNoItems = new DashboardData.Builder()
@@ -110,23 +114,33 @@ public class DashboardDataTest {
 
     @Test
     public void testBuildItemsData_containsAllData() {
-        final DashboardData.SuggestionHeaderData data =
-                new DashboardData.SuggestionHeaderData(false, 1, 0);
-        final Object[] expectedObjects = {null, mTestCondition, null, data, mTestSuggestion,
-                mDashboardCategory, mTestCategoryTile};
+        final DashboardData.SuggestionConditionHeaderData data =
+                new DashboardData.SuggestionConditionHeaderData(
+                    mDashboardDataWithOneConditions.getConditions(), 0);
+        final Object[] expectedObjects = {null, data,
+            mDashboardDataWithOneConditions.getSuggestions(),
+            mDashboardDataWithOneConditions.getConditions(),
+            null, mDashboardCategory, mTestCategoryTile};
         final int expectedSize = expectedObjects.length;
 
         assertThat(mDashboardDataWithOneConditions.getItemList().size())
                 .isEqualTo(expectedSize);
         for (int i = 0; i < expectedSize; i++) {
-            if (mDashboardDataWithOneConditions.getItemEntityByPosition(i)
-                    instanceof DashboardData.SuggestionHeaderData) {
+            final Object item = mDashboardDataWithOneConditions.getItemEntityByPosition(i);
+            if (item instanceof DashboardData.SuggestionHeaderData
+                || item instanceof List) {
                 // SuggestionHeaderData is created inside when build, we can only use isEqualTo
-                assertThat(mDashboardDataWithOneConditions.getItemEntityByPosition(i))
-                        .isEqualTo(expectedObjects[i]);
+                assertThat(item).isEqualTo(expectedObjects[i]);
+            } else if (item instanceof DashboardData.SuggestionConditionHeaderData) {
+                DashboardData.SuggestionConditionHeaderData i1 =
+                    (DashboardData.SuggestionConditionHeaderData)item;
+                DashboardData.SuggestionConditionHeaderData i2 =
+                    (DashboardData.SuggestionConditionHeaderData)expectedObjects[i];
+                assertThat(i1.title).isEqualTo(i2.title);
+                assertThat(i1.conditionCount).isEqualTo(i2.conditionCount);
+                assertThat(i1.hiddenSuggestionCount).isEqualTo(i2.hiddenSuggestionCount);
             } else {
-                assertThat(mDashboardDataWithOneConditions.getItemEntityByPosition(i))
-                        .isSameAs(expectedObjects[i]);
+                assertThat(item).isSameAs(expectedObjects[i]);
             }
         }
     }
@@ -134,7 +148,7 @@ public class DashboardDataTest {
     @Test
     public void testGetPositionByEntity_selfInstance_returnPositionFound() {
         final int position = mDashboardDataWithOneConditions
-                .getPositionByEntity(mTestCondition);
+                .getPositionByEntity(mDashboardDataWithOneConditions.getConditions());
         assertThat(position).isNotEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
 
@@ -176,11 +190,17 @@ public class DashboardDataTest {
     }
 
     @Test
-    public void testDiffUtil_InsertOneCondition_ResultDataOneInserted() {
+    public void testDiffUtil_InsertOneCondition_ResultDataTwoChanged() {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
+        // Item in position 1 is the header, which contains the number of conditions, changed from
+        // 1 to 2
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_INSERT, 2, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
+        // Item in position 3 is the condition container containing the list of conditions, which
+        // gets 1 more item
+        testResultData.add(new ListUpdateResult.ResultData(
+            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 3, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -194,31 +214,6 @@ public class DashboardDataTest {
                 ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 1, 6));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
-    }
-
-    @Test
-    public void testPayload_ItemConditionCard_returnNotNull() {
-        final DashboardData.ItemsDataDiffCallback callback = new DashboardData
-                .ItemsDataDiffCallback(
-                mDashboardDataWithOneConditions.getItemList(),
-                mDashboardDataWithOneConditions.getItemList());
-
-        // Item in position 1 is condition card, which payload should not be null
-        assertThat(callback.getChangePayload(1, 1)).isNotNull();
-    }
-
-    @Test
-    public void testPayload_ItemNotConditionCard_returnNull() {
-        final DashboardData.ItemsDataDiffCallback callback = new DashboardData
-                .ItemsDataDiffCallback(
-                mDashboardDataWithOneConditions.getItemList(),
-                mDashboardDataWithOneConditions.getItemList());
-
-        // Position 0 is spacer, 1 is condition card, so others' payload should be null
-        for (int i = 2; i < mDashboardDataWithOneConditions.getItemList().size(); i++) {
-            assertThat(callback.getChangePayload(i, i)).isNull();
-        }
-
     }
 
     /**

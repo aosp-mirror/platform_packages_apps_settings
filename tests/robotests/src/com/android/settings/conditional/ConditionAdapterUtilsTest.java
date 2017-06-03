@@ -36,6 +36,8 @@ import com.android.settings.R;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
+// Not needed in new UI as the view is always expanded
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConditionAdapterUtilsTest{

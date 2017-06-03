@@ -196,13 +196,16 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
         Log.d(TAG, "adapter created");
-        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions());
+        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
+            mSuggestionParser, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
-        mSuggestionDismissHandler = new SuggestionDismissController(
+        if (!mDashboardFeatureProvider.combineSuggestionAndCondition()) {
+            mSuggestionDismissHandler = new SuggestionDismissController(
                 getContext(), mDashboard, mSuggestionParser, this);
+            ConditionAdapterUtils.addDismiss(mDashboard);
+        }
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
-        ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) {
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
@@ -242,7 +245,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public Tile getSuggestionForPosition(int position) {
-        return (Tile) mAdapter.getItem(mAdapter.getItemId(position));
+        return mAdapter.getSuggestion(position);
     }
 
     @Override

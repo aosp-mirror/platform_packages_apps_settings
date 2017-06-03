@@ -44,22 +44,28 @@ public class ConditionAdapterUtils {
             @Override
             public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 return viewHolder.getItemViewType() == R.layout.condition_card
+                    || viewHolder.getItemViewType() == R.layout.condition_tile_new_ui
                         ? super.getSwipeDirs(recyclerView, viewHolder) : 0;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                DashboardAdapter adapter = (DashboardAdapter) recyclerView.getAdapter();
-                Object item = adapter.getItem(viewHolder.getItemId());
-                if (item instanceof Condition) {
-                    ((Condition) item).silence();
+                Object item;
+                if (viewHolder.getItemViewType() == R.layout.condition_card) {
+                    DashboardAdapter adapter = (DashboardAdapter) recyclerView.getAdapter();
+                    item = adapter.getItem(viewHolder.getItemId());
+                } else {
+                    ConditionAdapter adapter = (ConditionAdapter) recyclerView.getAdapter();
+                    item = adapter.getItem(viewHolder.getItemId());
                 }
+                ((Condition) item).silence();
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    @Deprecated
     public static void bindViews(final Condition condition,
             DashboardAdapter.DashboardItemHolder view, boolean isExpanded,
             View.OnClickListener onClickListener, View.OnClickListener onExpandListener) {
@@ -119,6 +125,49 @@ public class ConditionAdapterUtils {
                 }
             }
         }
+    }
+
+    public static void bindViews(final Condition condition,
+            DashboardAdapter.DashboardItemHolder view, boolean isLastItem,
+            View.OnClickListener onClickListener) {
+        if (condition instanceof AirplaneModeCondition) {
+            Log.d(TAG, "Airplane mode condition has been bound with "
+                + "isActive=" + condition.isActive() + ". Airplane mode is currently " +
+                WirelessUtils.isAirplaneModeOn(condition.mManager.getContext()));
+        }
+        View card = view.itemView.findViewById(R.id.content);
+        card.setTag(condition);
+        card.setOnClickListener(onClickListener);
+        view.icon.setImageIcon(condition.getIcon());
+        view.title.setText(condition.getTitle());
+
+        CharSequence[] actions = condition.getActions();
+        final boolean hasButtons = actions.length > 0;
+        setViewVisibility(view.itemView, R.id.buttonBar, hasButtons);
+
+        view.summary.setText(condition.getSummary());
+        for (int i = 0; i < 2; i++) {
+            Button button = (Button) view.itemView.findViewById(i == 0
+                ? R.id.first_action : R.id.second_action);
+            if (actions.length > i) {
+                button.setVisibility(View.VISIBLE);
+                button.setText(actions[i]);
+                final int index = i;
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                            .action(context, MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
+                                condition.getMetricsConstant());
+                        condition.onActionClick(index);
+                    }
+                });
+            } else {
+                button.setVisibility(View.GONE);
+            }
+        }
+        setViewVisibility(view.itemView, R.id.divider, !isLastItem);
     }
 
     private static void setViewVisibility(View containerView, int viewId, boolean visible) {

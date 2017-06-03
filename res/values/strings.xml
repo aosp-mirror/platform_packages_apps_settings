@@ -8060,11 +8060,29 @@
     <!-- Summary of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
     <string name="condition_night_display_summary">Screen is tinted amber. This may help you fall asleep.</string>
 
+    <!-- Summary for the condition section on the dashboard, representing number of conditions. [CHAR LIMIT=10] -->
+    <string name="condition_summary" translatable="false"><xliff:g name="count" example="3">%1$d</xliff:g></string>
+
     <!-- Title for the suggestions section on the dashboard [CHAR LIMIT=30] -->
     <string name="suggestions_title">Suggestions</string>
 
     <!-- Summary for the suggestions section on the dashboard, representing number of suggestions. [CHAR LIMIT=10] -->
     <string name="suggestions_summary">+<xliff:g name="count" example="3">%1$d</xliff:g></string>
+
+    <!-- Title for the suggestions section on the dashboard, representing number of suggestions to show when expanded. [CHAR LIMIT=10] -->
+    <string name="suggestions_more_title">+<xliff:g name="count" example="3">%1$d</xliff:g> more</string>
+
+    <!-- Title for the collapsed suggestions section on the dashboard, representing number of suggestions. [CHAR LIMIT=30] -->
+    <plurals name="suggestions_collapsed_title">
+        <item quantity="one">1 suggestion</item>
+        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> suggestions</item>
+    </plurals>
+
+    <!-- Summary for the collapsed suggestions section on the dashboard, representing number of suggestions. [CHAR LIMIT=30] -->
+    <plurals name="suggestions_collapsed_summary">
+        <item quantity="one">+1 suggestion</item>
+        <item quantity="other">+<xliff:g id="count" example="10">%1$d</xliff:g> suggestions</item>
+    </plurals>
 
     <!-- Name of option to remove a suggestion from the list [CHAR LIMIT=30] -->
     <string name="suggestion_remove">Remove</string>

@@ -164,14 +164,6 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSetConditions_AfterSetConditions_ExpandedConditionNull() {
-        mDashboardAdapter.onExpandClick(mView);
-        assertThat(mDashboardAdapter.mDashboardData.getExpandedCondition()).isEqualTo(mCondition);
-        mDashboardAdapter.setConditions(null);
-        assertThat(mDashboardAdapter.mDashboardData.getExpandedCondition()).isNull();
-    }
-
-    @Test
     public void testSuggestionsLogs_NotExpanded() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
         verify(mFactory.metricsFeatureProvider, times(2)).action(
