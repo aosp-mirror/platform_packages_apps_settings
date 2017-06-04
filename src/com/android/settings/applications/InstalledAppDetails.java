@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -117,6 +115,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 /**
  * Activity to display application information from Settings. This activity presents
  * extended information associated with a package like code, data, total size, permissions
@@ -144,7 +144,8 @@ public class InstalledAppDetails extends AppInfoBase
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_STORAGE = 3;
-    private static final int LOADER_BATTERY = 4;
+    @VisibleForTesting
+    static final int LOADER_BATTERY = 4;
 
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
@@ -207,7 +208,8 @@ public class InstalledAppDetails extends AppInfoBase
     private AppStorageStats mLastResult;
     private String mBatteryPercent;
 
-    private final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
+    @VisibleForTesting
+    final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
             new LoaderCallbacks<BatteryStatsHelper>() {
 
                 @Override
@@ -232,7 +234,8 @@ public class InstalledAppDetails extends AppInfoBase
                 }
             };
 
-    private boolean handleDisableable(Button button) {
+    @VisibleForTesting
+    boolean handleDisableable(Button button) {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
         // by not allowing disabling of apps signed with the
@@ -243,7 +246,8 @@ public class InstalledAppDetails extends AppInfoBase
             button.setText(R.string.disable_text);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             button.setText(R.string.disable_text);
-            disableable = true;
+            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
+                    .contains(mAppEntry.info.packageName);
         } else {
             button.setText(R.string.enable_text);
             disableable = true;
@@ -413,9 +417,14 @@ public class InstalledAppDetails extends AppInfoBase
                     mDataCallbacks);
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
-        getLoaderManager().initLoader(LOADER_BATTERY, Bundle.EMPTY, mBatteryCallbacks);
+        restartBatteryStatsLoader();
         new MemoryUpdater().execute();
         updateDynamicPrefs();
+    }
+
+    @VisibleForTesting
+    public void restartBatteryStatsLoader() {
+        getLoaderManager().restartLoader(LOADER_BATTERY, Bundle.EMPTY, mBatteryCallbacks);
     }
 
     @Override
@@ -1221,9 +1230,7 @@ public class InstalledAppDetails extends AppInfoBase
     void maybeAddInstantAppButtons() {
         if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
-            final Activity activity = getActivity();
-            mInstantAppButtonsController = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
+            mInstantAppButtonsController = mApplicationFeatureProvider
                     .newInstantAppButtonsController(this,
                             buttons.findViewById(R.id.instant_app_button_container),
                             id -> showDialogInner(id, 0))

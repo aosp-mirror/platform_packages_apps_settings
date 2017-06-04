@@ -27,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.IpPrefix;
+import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkBadging;
@@ -67,6 +68,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 /**
  * Controller for logic pertaining to displaying Wifi information for the
@@ -100,7 +102,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     @VisibleForTesting
     static final String KEY_DNS_PREF = "dns";
     @VisibleForTesting
-    static final String KEY_IPV6_ADDRESS_CATEGORY = "ipv6_details_category";
+    static final String KEY_IPV6_CATEGORY = "ipv6_category";
+    @VisibleForTesting
+    static final String KEY_IPV6_ADDRESSES_PREF = "ipv6_addresses";
 
     private AccessPoint mAccessPoint;
     private final ConnectivityManagerWrapper mConnectivityManagerWrapper;
@@ -133,8 +137,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     private WifiDetailPreference mGatewayPref;
     private WifiDetailPreference mSubnetPref;
     private WifiDetailPreference mDnsPref;
+    private PreferenceCategory mIpv6Category;
+    private Preference mIpv6AddressPref;
 
-    private PreferenceCategory mIpv6AddressCategory;
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -241,8 +246,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mSubnetPref = (WifiDetailPreference) screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = (WifiDetailPreference) screen.findPreference(KEY_DNS_PREF);
 
-        mIpv6AddressCategory =
-                (PreferenceCategory) screen.findPreference(KEY_IPV6_ADDRESS_CATEGORY);
+        mIpv6Category = (PreferenceCategory) screen.findPreference(KEY_IPV6_CATEGORY);
+        mIpv6AddressPref = (Preference) screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
         mForgetButton = (Button) mButtonsPref.findViewById(R.id.forget_button);
@@ -315,8 +320,6 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mFrequencyPref.setDetailText(band);
 
         updateIpLayerInfo();
-        mButtonsPref.setVisible(mForgetButton.getVisibility() == View.VISIBLE
-                || mSignInButton.getVisibility() == View.VISIBLE);
     }
 
     private void exitActivity() {
@@ -348,74 +351,69 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
     }
 
+    private void updatePreference(WifiDetailPreference pref, String detailText) {
+        if (!TextUtils.isEmpty(detailText)) {
+            pref.setDetailText(detailText);
+            pref.setVisible(true);
+        } else {
+            pref.setVisible(false);
+        }
+    }
+
     private void updateIpLayerInfo() {
         mSignInButton.setVisibility(canSignIntoNetwork() ? View.VISIBLE : View.INVISIBLE);
-
-        // Reset all fields
-        mIpv6AddressCategory.removeAll();
-        mIpv6AddressCategory.setVisible(false);
-        mIpAddressPref.setVisible(false);
-        mSubnetPref.setVisible(false);
-        mGatewayPref.setVisible(false);
-        mDnsPref.setVisible(false);
+        mButtonsPref.setVisible(mForgetButton.getVisibility() == View.VISIBLE
+                || mSignInButton.getVisibility() == View.VISIBLE);
 
         if (mNetwork == null || mLinkProperties == null) {
+            mIpAddressPref.setVisible(false);
+            mSubnetPref.setVisible(false);
+            mGatewayPref.setVisible(false);
+            mDnsPref.setVisible(false);
+            mIpv6Category.setVisible(false);
             return;
         }
-        List<InetAddress> addresses = mLinkProperties.getAddresses();
 
-        // Set IPv4 and IPv6 addresses
-        for (int i = 0; i < addresses.size(); i++) {
-            InetAddress addr = addresses.get(i);
-            if (addr instanceof Inet4Address) {
-                mIpAddressPref.setDetailText(addr.getHostAddress());
-                mIpAddressPref.setVisible(true);
-            } else if (addr instanceof Inet6Address) {
-                String ip = addr.getHostAddress();
-                Preference pref = new Preference(mPrefContext);
-                pref.setKey(ip);
-                pref.setTitle(ip);
-                pref.setSelectable(false);
-                mIpv6AddressCategory.addPreference(pref);
-                mIpv6AddressCategory.setVisible(true);
-            }
-        }
-
-        // Set up IPv4 gateway and subnet mask
-        String gateway = null;
+        // Find IPv4 and IPv6 addresses.
+        String ipv4Address = null;
         String subnet = null;
+        StringJoiner ipv6Addresses = new StringJoiner("\n");
+
+        for (LinkAddress addr : mLinkProperties.getLinkAddresses()) {
+            if (addr.getAddress() instanceof Inet4Address) {
+                ipv4Address = addr.getAddress().getHostAddress();
+                subnet = ipv4PrefixLengthToSubnetMask(addr.getPrefixLength());
+            } else if (addr.getAddress() instanceof Inet6Address) {
+                ipv6Addresses.add(addr.getAddress().getHostAddress());
+            }
+        }
+
+        // Find IPv4 default gateway.
+        String gateway = null;
         for (RouteInfo routeInfo : mLinkProperties.getRoutes()) {
-            if (routeInfo.hasGateway() && routeInfo.getGateway() instanceof Inet4Address) {
+            if (routeInfo.isIPv4Default() && routeInfo.hasGateway()) {
                 gateway = routeInfo.getGateway().getHostAddress();
-            }
-            IpPrefix ipPrefix = routeInfo.getDestination();
-            if (ipPrefix != null && ipPrefix.getAddress() instanceof Inet4Address
-                    && ipPrefix.getPrefixLength() > 0) {
-                subnet = ipv4PrefixLengthToSubnetMask(ipPrefix.getPrefixLength());
+                break;
             }
         }
 
-        if (!TextUtils.isEmpty(subnet)) {
-            mSubnetPref.setDetailText(subnet);
-            mSubnetPref.setVisible(true);
-        }
+        // Find IPv4 DNS addresses.
+        String dnsServers = mLinkProperties.getDnsServers().stream()
+                .filter(Inet4Address.class::isInstance)
+                .map(InetAddress::getHostAddress)
+                .collect(Collectors.joining(","));
 
-        if (!TextUtils.isEmpty(gateway)) {
-            mGatewayPref.setDetailText(gateway);
-            mGatewayPref.setVisible(true);
-        }
+        // Update UI.
+        updatePreference(mIpAddressPref, ipv4Address);
+        updatePreference(mSubnetPref, subnet);
+        updatePreference(mGatewayPref, gateway);
+        updatePreference(mDnsPref, dnsServers);
 
-        // Set IPv4 DNS addresses
-        StringJoiner stringJoiner = new StringJoiner(",");
-        for (InetAddress dnsServer : mLinkProperties.getDnsServers()) {
-            if (dnsServer instanceof Inet4Address) {
-                stringJoiner.add(dnsServer.getHostAddress());
-            }
-        }
-        String dnsText = stringJoiner.toString();
-        if (!dnsText.isEmpty()) {
-            mDnsPref.setDetailText(dnsText);
-            mDnsPref.setVisible(true);
+        if (ipv6Addresses.length() > 0) {
+            mIpv6AddressPref.setSummary(ipv6Addresses.toString());
+            mIpv6Category.setVisible(true);
+        } else {
+            mIpv6Category.setVisible(false);
         }
     }
 

@@ -41,7 +41,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
@@ -415,11 +414,13 @@ public class PowerUsageSummary extends PowerUsageBase {
         final int dischargeAmount = USE_FAKE_DATA ? 5000
                 : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
 
-        final long runningTime = calculateRunningTimeBasedOnStatsType();
+        final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
+                System.currentTimeMillis());
         updateScreenPreference();
-        updateLastFullChargePreference(runningTime);
+        updateLastFullChargePreference(lastFullChargeTime);
 
-        final CharSequence timeSequence = Utils.formatElapsedTime(context, runningTime, false);
+        final CharSequence timeSequence = Utils.formatElapsedTime(context, lastFullChargeTime,
+                false);
         final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
                 : R.string.power_usage_list_summary;
         mAppListGroup.setTitle(TextUtils.expandTemplate(getText(resId), timeSequence));

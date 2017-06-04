@@ -27,6 +27,7 @@ import android.util.Log;
 import android.util.SparseLongArray;
 
 import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
@@ -226,6 +227,19 @@ public class BatteryUtils {
                 return Double.compare(b.totalPowerMah, a.totalPowerMah);
             }
         });
+    }
+
+    /**
+     * Calculate the time since last full charge, including the device off time
+     *
+     * @param batteryStatsHelper utility class that contains the data
+     * @param currentTimeMs      current wall time
+     * @return time in millis
+     */
+    public long calculateLastFullChargeTime(BatteryStatsHelper batteryStatsHelper,
+            long currentTimeMs) {
+        return currentTimeMs - batteryStatsHelper.getStats().getStartClockTime();
+
     }
 
     private long convertUsToMs(long timeUs) {

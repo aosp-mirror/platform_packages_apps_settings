@@ -23,6 +23,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -34,6 +35,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -43,12 +45,14 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class ImePreferenceControllerTest {
 
-    private final String DEFAULT_IME_LABEL = "Test IME";
-    private final String DEFAULT_IME_TEXT = "Set to Test IME";
+    private static final String DEFAULT_IME_LABEL = "Test IME";
+    private static final String DEFAULT_IME_TEXT = "Set to Test IME";
+    private static final String KEY_INPUT_METHOD = "input_method";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
+    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private ImePreferenceController mController;
 
@@ -60,6 +64,12 @@ public final class ImePreferenceControllerTest {
         mController = new ImePreferenceController(mContext, null /* lifecycle */);
         when(mContext.getResources().getString(R.string.enterprise_privacy_input_method_name,
                 DEFAULT_IME_LABEL)).thenReturn(DEFAULT_IME_TEXT);
+        mController.setAvailabilityObserver(mObserver);
+    }
+
+    @Test
+    public void testGetAvailabilityObserver() {
+        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
     }
 
     @Test
@@ -77,10 +87,12 @@ public final class ImePreferenceControllerTest {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
             .thenReturn(null);
         assertThat(mController.isAvailable()).isFalse();
+        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_INPUT_METHOD, false);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
             .thenReturn(DEFAULT_IME_LABEL);
         assertThat(mController.isAvailable()).isTrue();
+        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_INPUT_METHOD, true);
     }
 
     @Test
@@ -91,6 +103,6 @@ public final class ImePreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("input_method");
+        assertThat(mController.getPreferenceKey()).isEqualTo(KEY_INPUT_METHOD);
     }
 }

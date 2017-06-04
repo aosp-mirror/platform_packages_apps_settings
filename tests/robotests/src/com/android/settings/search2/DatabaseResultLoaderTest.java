@@ -379,6 +379,47 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
+    public void testDeDupe_threeDuplicates_onlyOneStays() {
+        /*
+         * Create a list as follows:
+         * (3) Intent One
+         * (2) Intent One
+         * (1) Intent One
+         *
+         * After removing duplicates:
+         * (1) Intent One
+         */
+        List<SearchResult> results = new ArrayList();
+        IntentPayload intentPayload = new IntentPayload(new Intent());
+
+        SearchResult.Builder builder = new SearchResult.Builder();
+        // Intent One
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addPayload(intentPayload);
+        SearchResult resultOne = builder.build();
+        results.add(resultOne);
+
+        // Intent Two
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addPayload(intentPayload);
+        SearchResult resultTwo = builder.build();
+        results.add(resultTwo);
+
+        // Intent Three
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addPayload(intentPayload);
+        SearchResult resultThree = builder.build();
+        results.add(resultThree);
+
+        loader = new DatabaseResultLoader(mContext, "", null);
+        loader.removeDuplicates(results);
+        assertThat(results.size()).isEqualTo(1);
+    }
+
+    @Test
     public void testSpecialCaseTwoWords_firstWordMatches_ranksHigher() {
         final String caseOne = "Apple pear";
         final String caseTwo = "Banana apple";

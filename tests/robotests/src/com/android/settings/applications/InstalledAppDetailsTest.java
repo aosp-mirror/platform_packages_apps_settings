@@ -16,29 +16,17 @@
 
 package com.android.settings.applications;
 
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.app.AlertDialog;
+import android.app.LoaderManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.BatteryStats;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
@@ -55,6 +43,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
@@ -68,10 +57,26 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -86,8 +91,6 @@ public final class InstalledAppDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
-    ApplicationFeatureProvider mApplicationFeatureProvider;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -106,15 +109,20 @@ public final class InstalledAppDetailsTest {
     private PackageManager mPackageManager;
     @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private LoaderManager mLoaderManager;
 
+    private FakeFeatureFactory mFeatureFactory;
     private InstalledAppDetails mAppDetail;
     private Context mShadowContext;
     private Preference mBatteryPreference;
 
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new InstalledAppDetails());
         mAppDetail.mBatteryUtils = mBatteryUtils;
@@ -346,15 +354,14 @@ public final class InstalledAppDetailsTest {
         final InstalledAppDetailsWithMockInstantButtons
                 fragment = new InstalledAppDetailsWithMockInstantButtons();
         ReflectionHelpers.setField(fragment, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(fragment, "mApplicationFeatureProvider",
+                mFeatureFactory.applicationFeatureProvider);
 
         final InstantAppButtonsController buttonsController =
                 mock(InstantAppButtonsController.class);
         when(buttonsController.setPackageName(anyString())).thenReturn(buttonsController);
 
-        FakeFeatureFactory.setupForTest(mContext);
-        FakeFeatureFactory factory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        when(factory.applicationFeatureProvider.newInstantAppButtonsController(
+        when(mFeatureFactory.applicationFeatureProvider.newInstantAppButtonsController(
                 any(), any(), any())).thenReturn(buttonsController);
 
         fragment.maybeAddInstantAppButtons();
@@ -457,5 +464,90 @@ public final class InstalledAppDetailsTest {
     @Test
     public void isBatteryStatsAvailable_parametersNull_returnFalse() {
         assertThat(mAppDetail.isBatteryStatsAvailable()).isFalse();
+    }
+
+    @Test
+    public void handleDisableable_appIsHomeApp_buttonShouldNotWork() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.packageName = "pkg";
+        info.enabled = true;
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+        final HashSet<String> homePackages = new HashSet<>();
+        homePackages.add(info.packageName);
+
+        ReflectionHelpers.setField(mAppDetail, "mHomePackages", homePackages);
+        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        final Button button = mock(Button.class);
+
+        assertThat(mAppDetail.handleDisableable(button)).isFalse();
+        verify(button).setText(R.string.disable_text);
+    }
+
+    @Test
+    @Config(shadows = ShadowUtils.class)
+    public void handleDisableable_appIsEnabled_buttonShouldWork() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.packageName = "pkg";
+        info.enabled = true;
+        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+        when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
+                new HashSet<>());
+
+        ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
+                mFeatureFactory.applicationFeatureProvider);
+        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        final Button button = mock(Button.class);
+
+        assertThat(mAppDetail.handleDisableable(button)).isTrue();
+        verify(button).setText(R.string.disable_text);
+    }
+
+    @Test
+    @Config(shadows = ShadowUtils.class)
+    public void handleDisableable_appIsEnabledAndInKeepEnabledWhitelist_buttonShouldNotWork() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.packageName = "pkg";
+        info.enabled = true;
+        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+
+        final HashSet<String> packages = new HashSet<>();
+        packages.add(info.packageName);
+        when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
+                packages);
+
+        ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
+                mFeatureFactory.applicationFeatureProvider);
+        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+
+        final Button button = mock(Button.class);
+
+        assertThat(mAppDetail.handleDisableable(button)).isFalse();
+        verify(button).setText(R.string.disable_text);
+    }
+
+    @Test
+    public void testRestartBatteryStatsLoader() {
+        doReturn(mLoaderManager).when(mAppDetail).getLoaderManager();
+
+        mAppDetail.restartBatteryStatsLoader();
+
+        verify(mLoaderManager).restartLoader(InstalledAppDetails.LOADER_BATTERY, Bundle.EMPTY,
+                mAppDetail.mBatteryCallbacks);
+    }
+
+    @Implements(Utils.class)
+    public static class ShadowUtils {
+        @Implementation
+        public static boolean isSystemPackage(Resources resources, PackageManager pm,
+                PackageInfo pkg) {
+            return false;
+        }
     }
 }

@@ -45,7 +45,8 @@ public class DashboardData {
     public static final int DEFAULT_SUGGESTION_COUNT = 2;
 
     // id namespace for different type of items.
-    private static final int NS_SPACER = 0;
+    private static final int NS_HEADER_SPACER = 0;
+    private static final int NS_SPACER = 1000;
     private static final int NS_ITEMS = 2000;
     private static final int NS_CONDITION = 3000;
 
@@ -228,6 +229,9 @@ public class DashboardData {
      * and mIsShowingAll, mSuggestionMode flag.
      */
     private void buildItemsData() {
+        // add the view that goes under the search bar
+        countItem(null, R.layout.dashboard_header_spacer, true, NS_HEADER_SPACER);
+        resetCount();
         boolean hasConditions = false;
         for (int i = 0; mConditions != null && i < mConditions.size(); i++) {
             boolean shouldShow = mConditions.get(i).shouldShow();
