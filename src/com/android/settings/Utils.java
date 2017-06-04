@@ -603,7 +603,8 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns the managed profile of the current user or null if none found.
+     * Returns the managed profile of the current user or {@code null} if none is found or a profile
+     * exists but it is disabled.
      */
     public static UserHandle getManagedProfile(UserManager userManager) {
         List<UserHandle> userProfiles = userManager.getUserProfiles();
@@ -616,6 +617,29 @@ public final class Utils extends com.android.settingslib.Utils {
             final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
             if (userInfo.isManagedProfile()) {
                 return profile;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the managed profile of the current user or {@code null} if none is found. Unlike
+     * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
+     */
+    public static UserHandle getManagedProfileWithDisabled(UserManager userManager) {
+        // TODO: Call getManagedProfileId from here once Robolectric supports
+        // API level 24 and UserManager.getProfileIdsWithDisabled can be Mocked (to avoid having
+        // yet another implementation that loops over user profiles in this method). In the meantime
+        // we need to use UserManager.getProfiles that is available on API 23 (the one currently
+        // used for Settings Robolectric tests).
+        final int myUserId = UserHandle.myUserId();
+        List<UserInfo> profiles = userManager.getProfiles(myUserId);
+        final int count = profiles.size();
+        for (int i = 0; i < count; i++) {
+            final UserInfo profile = profiles.get(i);
+            if (profile.isManagedProfile()
+                    && profile.getUserHandle().getIdentifier() != myUserId) {
+                return profile.getUserHandle();
             }
         }
         return null;

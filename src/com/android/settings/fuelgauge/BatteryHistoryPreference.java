@@ -17,8 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -26,9 +24,6 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
 /**
@@ -47,10 +42,10 @@ public class BatteryHistoryPreference extends Preference {
     }
 
     public void setStats(BatteryStatsHelper batteryStats) {
-        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
-        mBatteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryStats.getBatteryBroadcast(),
-                batteryStats.getStats(), elapsedRealtimeUs);
-        notifyChanged();
+        BatteryInfo.getBatteryInfo(getContext(), info -> {
+            mBatteryInfo = info;
+            notifyChanged();
+        }, batteryStats.getStats(), false);
     }
 
     @Override

@@ -16,12 +16,16 @@
 
 package com.android.settings.enterprise;
 
+import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -31,10 +35,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.xmlpull.v1.XmlPullParser;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -45,6 +53,9 @@ import static org.mockito.Mockito.when;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterprisePrivacySettingsTest {
+
+    private final static String RESOURCES_NAMESPACE = "http://schemas.android.com/apk/res/android";
+    private final static String ATTR_KEY = "key";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -101,23 +112,24 @@ public final class EnterprisePrivacySettingsTest {
     }
 
     @Test
-    public void getPreferenceControllers() {
+    public void getPreferenceControllers() throws Exception {
         final List<PreferenceController> controllers = mSettings.getPreferenceControllers(
                 ShadowApplication.getInstance().getApplicationContext());
         verifyPreferenceControllers(controllers);
     }
 
     @Test
-    public void getSearchIndexProviderPreferenceControllers() {
+    public void getSearchIndexProviderPreferenceControllers() throws Exception {
         final List<PreferenceController> controllers
                 = EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(
                         ShadowApplication.getInstance().getApplicationContext());
         verifyPreferenceControllers(controllers);
     }
 
-    private void verifyPreferenceControllers(List<PreferenceController> controllers) {
+    private void verifyPreferenceControllers(List<PreferenceController> controllers)
+            throws Exception {
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(15);
+        assertThat(controllers.size()).isEqualTo(16);
         int position = 0;
         assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
@@ -137,14 +149,71 @@ public final class EnterprisePrivacySettingsTest {
                 AlwaysOnVpnCurrentUserPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 AlwaysOnVpnManagedProfilePreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(ImePreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 GlobalHttpProxyPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 CaCertsPreferenceController.class);
+        final PreferenceController exposureChangesCategoryController = controllers.get(position);
+        final int exposureChangesCategoryControllerIndex = position;
+        assertThat(controllers.get(position++)).isInstanceOf(
+                ExposureChangesCategoryPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 FailedPasswordWipeCurrentUserPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 FailedPasswordWipeManagedProfilePreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(ImePreferenceController.class);
+
+        // The "Changes made by your organization's admin" category is hidden when all Preferences
+        // inside it become unavailable. To do this correctly, the category's controller must:
+        // a) Observe the availability of all Preferences in the category and
+        // b) Be listed after those Preferences' controllers, so that availability is updated in
+        //    the correct order
+
+        // Find all Preferences in the category.
+        final XmlResourceParser parser = RuntimeEnvironment.application.getResources().getXml(
+                R.xml.enterprise_privacy_settings);
+        boolean done = false;
+        int type;
+        final Set<String> expectedObserved = new HashSet<>();
+        while (!done && (type = parser.next()) != XmlPullParser.END_DOCUMENT) {
+            if (type != XmlPullParser.START_TAG || !"exposure_changes_category".equals(
+                    parser.getAttributeValue(RESOURCES_NAMESPACE, ATTR_KEY))) {
+                continue;
+            }
+            int depth = 1;
+            while ((type = parser.next()) != XmlPullParser.END_DOCUMENT) {
+                if (type == XmlPullParser.START_TAG) {
+                    final String key = parser.getAttributeValue(RESOURCES_NAMESPACE, ATTR_KEY);
+                    if (key != null) {
+                        expectedObserved.add(key);
+                    }
+                    depth++;
+                } else if (type == XmlPullParser.END_TAG) {
+                    depth--;
+                    if (depth == 0) {
+                        done = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Find all Preferences the category's controller is observing.
+        final Set<String> actualObserved = new HashSet<>();
+        int maxObservedIndex = -1;
+        for (int i = 0; i < controllers.size(); i++) {
+            final PreferenceController controller = controllers.get(i);
+            if (controller instanceof DynamicAvailabilityPreferenceController &&
+                    ((DynamicAvailabilityPreferenceController) controller).getAvailabilityObserver()
+                            == exposureChangesCategoryController) {
+                actualObserved.add(controller.getPreferenceKey());
+                maxObservedIndex = i;
+            }
+        }
+
+        // Verify that the category's controller is observing the Preferences inside it.
+        assertThat(actualObserved).isEqualTo(expectedObserved);
+        // Verify that the category's controller is listed after the Preferences' controllers.
+        assertThat(maxObservedIndex).isLessThan(exposureChangesCategoryControllerIndex);
     }
 }

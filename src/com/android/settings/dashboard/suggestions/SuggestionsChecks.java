@@ -21,6 +21,7 @@ import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
@@ -56,7 +57,8 @@ public class SuggestionsChecks {
     }
 
     public boolean isSuggestionComplete(Tile suggestion) {
-        String className = suggestion.intent.getComponent().getClassName();
+        ComponentName component = suggestion.intent.getComponent();
+        String className = component.getClassName();
         if (className.equals(ZenModeAutomationSuggestionActivity.class.getName())) {
             return hasEnabledZenAutoRules();
         } else if (className.equals(WallpaperSuggestionActivity.class.getName())) {
@@ -77,13 +79,10 @@ public class SuggestionsChecks {
             return isCameraLiftTriggerEnabled();
         }
 
-        SuggestionFeatureProvider provider =
+        final SuggestionFeatureProvider provider =
                 FeatureFactory.getFactory(mContext).getSuggestionFeatureProvider(mContext);
-        if (provider != null && provider.isPresent(className)) {
-            return provider.isSuggestionCompleted(mContext);
-        }
 
-        return false;
+        return provider.isSuggestionCompleted(mContext, component);
     }
 
     private boolean isDeviceSecured() {

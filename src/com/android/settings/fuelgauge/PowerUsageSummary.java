@@ -19,22 +19,15 @@ package com.android.settings.fuelgauge;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.res.TypedArray;
-import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
-import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
@@ -42,13 +35,11 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
@@ -72,7 +63,6 @@ import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.ArrayList;
@@ -101,11 +91,12 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness_battery";
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
+    private static final String KEY_HIGH_USAGE = "high_usage";
 
     @VisibleForTesting
     static final int ANOMALY_LOADER = 1;
     @VisibleForTesting
-    static final int BATTERY_ESTIMATE_LOADER = 2;
+    static final int BATTERY_INFO_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -128,8 +119,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    long mEnhancedEstimate = -1;
 
     /**
      * SparseArray that maps uid to {@link Anomaly}, so we could find {@link Anomaly} by uid
@@ -167,35 +156,21 @@ public class PowerUsageSummary extends PowerUsageBase implements
             };
 
     @VisibleForTesting
-    LoaderManager.LoaderCallbacks<Cursor> mBatteryPredictionLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<Cursor>() {
+    LoaderManager.LoaderCallbacks<BatteryInfo> BatteryInfoLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<BatteryInfo>() {
 
                 @Override
-                public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-                    final Uri queryUri = mPowerFeatureProvider.getEnhancedBatteryPredictionUri();
-
-                    return new CursorLoader(getContext(), queryUri, null, null, null, null);
+                public Loader<BatteryInfo> onCreateLoader(int i, Bundle bundle) {
+                    return new BatteryInfoLoader(getContext(), mStatsHelper);
                 }
 
                 @Override
-                public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-                    if (cursor == null) {
-                        return;
-                    }
-                    if (cursor.moveToFirst()) {
-                        mEnhancedEstimate =
-                                mPowerFeatureProvider.getTimeRemainingEstimate(cursor);
-                    }
-                    final long elapsedRealtimeUs =
-                            mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
-                    Intent batteryBroadcast = getContext().registerReceiver(null,
-                            new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                    BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
+                public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
                     mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
                 }
 
                 @Override
-                public void onLoaderReset(Loader<Cursor> loader) {
+                public void onLoaderReset(Loader<BatteryInfo> loader) {
                     // do nothing
                 }
             };
@@ -217,7 +192,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mAnomalySparseArray = new SparseArray<>();
 
         initFeatureProvider();
-        initializeBatteryEstimateLoader();
+        restartBatteryInfoLoader();
     }
 
     @Override
@@ -484,18 +459,15 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         initAnomalyDetectionIfPossible();
 
-        final long elapsedRealtimeUs = mBatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
-        Intent batteryBroadcast = context.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        BatteryInfo batteryInfo = getBatteryInfo(elapsedRealtimeUs, batteryBroadcast);
-        mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
-
-        final long runningTime = mBatteryUtils.calculateRunningTimeBasedOnStatsType(mStatsHelper,
-                mStatsType);
+        // reload BatteryInfo and updateUI
+        restartBatteryInfoLoader();
+        final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
+                System.currentTimeMillis());
         updateScreenPreference();
-        updateLastFullChargePreference(runningTime);
+        updateLastFullChargePreference(lastFullChargeTime);
 
-        final CharSequence timeSequence = Utils.formatElapsedTime(context, runningTime, false);
+        final CharSequence timeSequence = Utils.formatElapsedTime(context, lastFullChargeTime,
+                false);
         final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
                 : R.string.power_usage_list_summary;
         mAppListGroup.setTitle(TextUtils.expandTemplate(getText(resId), timeSequence));
@@ -704,28 +676,12 @@ public class PowerUsageSummary extends PowerUsageBase implements
         }
     }
 
-    private BatteryInfo getBatteryInfo(long elapsedRealtimeUs, Intent batteryBroadcast) {
-        BatteryInfo batteryInfo;
-        if (mEnhancedEstimate > 0 &&
-                mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(
-                        getContext())) {
-            // Drain time is in micro-seconds so we have to multiply by 1000
-            batteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
-                    mStatsHelper.getStats(), elapsedRealtimeUs, false,
-                    mBatteryUtils.convertMsToUs(mEnhancedEstimate), true);
-        } else {
-            batteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
-                    mStatsHelper.getStats(), elapsedRealtimeUs, false);
-        }
-        return batteryInfo;
-    }
-
     @VisibleForTesting
-    void initializeBatteryEstimateLoader() {
+    void restartBatteryInfoLoader() {
         if (mPowerFeatureProvider != null
                 && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(getContext())) {
-            getLoaderManager().initLoader(BATTERY_ESTIMATE_LOADER, Bundle.EMPTY,
-                    mBatteryPredictionLoaderCallbacks);
+            getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
+                    BatteryInfoLoaderCallbacks);
         }
     }
 
@@ -846,6 +802,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     niks.add(KEY_AUTO_BRIGHTNESS);
                     niks.add(KEY_SCREEN_TIMEOUT);
                     niks.add(KEY_BATTERY_SAVER_SUMMARY);
+                    niks.add(KEY_HIGH_USAGE);
                     return niks;
                 }
             };

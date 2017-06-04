@@ -94,7 +94,7 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         final Object[] spans = ((SpannableStringBuilder) summary).getSpans(0, summary.length(),
                 Object.class);
         assertThat(summary.toString())
-                .isEqualTo("Visible to other devices as: Nightshade");
+                .isEqualTo("Visible as 'Nightshade' to other devices");
 
         // Test summary only has one color span
         assertThat(spans).asList().hasSize(1);

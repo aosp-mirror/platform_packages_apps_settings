@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
-import android.util.ArrayMap;
 
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
@@ -31,14 +30,9 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.gestures.SwipeToNotificationSettings;
-import com.android.settings.search.CursorToSearchResultConverter;
-import com.android.settings.search.DatabaseResultLoader;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
+import com.android.settings.search.ResultPayload.Availability;
 import com.android.settings.search.ResultPayload.PayloadType;
 
-import com.android.settings.search.ResultPayloadUtils;
-import com.android.settings.search.SearchResult;
 import com.android.settings.wifi.WifiSettings;
 import org.junit.Before;
 import org.junit.Test;
@@ -221,14 +215,12 @@ public class CursorToSearchResultConverterTest {
         final String uri = "test.com";
         final int type = ResultPayload.PayloadType.INLINE_SWITCH;
         final int source = ResultPayload.SettingsSource.SECURE;
-        final ArrayMap<Integer, Boolean> map = new ArrayMap<>();
-        map.put(1, true);
-        map.put(0, false);
         final String intentKey = "key";
         final String intentVal = "value";
         final Intent intent = new Intent();
         intent.putExtra(intentKey, intentVal);
-        final InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map, intent);
+        final InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1 /* onValue */,
+                intent, true /* isDeviceSupported */);
 
         cursor.addRow(new Object[]{
                 KEY.hashCode(),      // Doc ID
@@ -251,11 +243,11 @@ public class CursorToSearchResultConverterTest {
         for (SearchResult result : results) {
             final InlineSwitchPayload newPayload = (InlineSwitchPayload) result.payload;
             final Intent rebuiltIntent = newPayload.getIntent();
-            assertThat(newPayload.settingsUri).isEqualTo(uri);
-            assertThat(newPayload.inlineType).isEqualTo(type);
-            assertThat(newPayload.settingSource).isEqualTo(source);
-            assertThat(newPayload.valueMap.get(1)).isTrue();
-            assertThat(newPayload.valueMap.get(0)).isFalse();
+            assertThat(newPayload.mSettingKey).isEqualTo(uri);
+            assertThat(newPayload.mInlineType).isEqualTo(type);
+            assertThat(newPayload.mSettingSource).isEqualTo(source);
+            assertThat(newPayload.isStandard()).isTrue();
+            assertThat(newPayload.getAvailability()).isEqualTo(Availability.AVAILABLE);
             assertThat(rebuiltIntent.getStringExtra(intentKey)).isEqualTo(intentVal);
         }
     }

@@ -1089,7 +1089,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     private void insertSpecialCase(String specialCase, boolean enabled, String key) {
-
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, specialCase.hashCode());
         values.put(IndexDatabaseHelper.IndexColumns.LOCALE, localeStr);

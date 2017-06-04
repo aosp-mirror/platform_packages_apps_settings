@@ -50,15 +50,15 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
                 true /* async */,
                 (num) -> {
                     if (num == 0) {
-                        preference.setVisible(false);
                         mHasApps = false;
                     } else {
-                        preference.setVisible(true);
                         preference.setSummary(mContext.getResources().getQuantityString(
                                 R.plurals.enterprise_privacy_number_packages_lower_bound,
                                 num, num));
                         mHasApps = true;
                     }
+                    preference.setVisible(mHasApps);
+                    notifyOnAvailabilityUpdate(mHasApps);
                 });
     }
 
@@ -80,6 +80,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
         mFeatureProvider.calculateNumberOfAppsWithAdminGrantedPermissions(mPermissions,
                 false /* async */, (num) -> haveAppsWithAdminGrantedPermissions[0] = num > 0);
         mHasApps = haveAppsWithAdminGrantedPermissions[0];
+        notifyOnAvailabilityUpdate(mHasApps);
         return mHasApps;
     }
 

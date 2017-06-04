@@ -543,8 +543,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             mClearCacheButton.setEnabled(false);
         } else {
             long codeSize = result.getCodeBytes();
-            long dataSize = result.getDataBytes();
             long cacheSize = result.getCacheBytes();
+            long dataSize = result.getDataBytes() - cacheSize;
 
             if (dataSize <= 0 || !mCanClearData || mDataCleared) {
                 mClearDataButton.setEnabled(false);

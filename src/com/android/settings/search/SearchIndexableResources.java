@@ -42,6 +42,7 @@ import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.bluetooth.BluetoothSettingsObsolete;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.development.DevelopmentSettings;
@@ -55,12 +56,12 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.AssistGestureSettings;
+import com.android.settings.gestures.CameraLiftTriggerSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
-import com.android.settings.gestures.CameraLiftTriggerSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
@@ -190,6 +191,7 @@ public final class SearchIndexableResources {
         addIndex(ChannelImportanceSettings.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_notifications);
         addIndex(DreamSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
+        addIndex(SupportDashboardActivity.class, NO_DATA_RES_ID, R.drawable.ic_help);
     }
 
     private SearchIndexableResources() {

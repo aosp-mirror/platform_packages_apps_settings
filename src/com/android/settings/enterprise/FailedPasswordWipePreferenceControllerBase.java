@@ -46,6 +46,8 @@ public abstract class FailedPasswordWipePreferenceControllerBase
 
     @Override
     public boolean isAvailable() {
-        return getMaximumFailedPasswordsBeforeWipe() > 0;
+        final boolean available = getMaximumFailedPasswordsBeforeWipe() > 0;
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 }

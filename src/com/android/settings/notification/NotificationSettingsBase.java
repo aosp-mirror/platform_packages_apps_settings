@@ -263,7 +263,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void addAppLinkPref() {
-        if (mAppRow.settingsIntent != null) {
+        if (mAppRow.settingsIntent != null && mAppLink == null) {
             mAppLink = new Preference(getPrefContext());
             mAppLink.setKey(KEY_APP_LINK);
             mAppLink.setOrder(500);
@@ -293,6 +293,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     private void setupImportanceToggle() {
         mImportanceToggle = (RestrictedSwitchPreference) findPreference(KEY_ALLOW_SOUND);
         mImportanceToggle.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mImportanceToggle.setEnabled(!(mAppRow.lockedImportance
+                || mImportanceToggle.isDisabledByAdmin()));
         mImportanceToggle.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
                 || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
         mImportanceToggle.setOnPreferenceChangeListener(
@@ -313,6 +315,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected void setupPriorityPref(boolean priority) {
         mPriority = (RestrictedSwitchPreference) findPreference(KEY_BYPASS_DND);
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mPriority.setEnabled(!(mAppRow.lockedImportance || mPriority.isDisabledByAdmin()));
         mPriority.setChecked(priority);
         mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override

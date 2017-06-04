@@ -261,7 +261,20 @@ public class BatteryUtils {
         });
     }
 
-    private long convertUsToMs(long timeUs) {
+    /**
+     * Calculate the time since last full charge, including the device off time
+     *
+     * @param batteryStatsHelper utility class that contains the data
+     * @param currentTimeMs      current wall time
+     * @return time in millis
+     */
+    public long calculateLastFullChargeTime(BatteryStatsHelper batteryStatsHelper,
+            long currentTimeMs) {
+        return currentTimeMs - batteryStatsHelper.getStats().getStartClockTime();
+
+    }
+
+    public long convertUsToMs(long timeUs) {
         return timeUs / 1000;
     }
 

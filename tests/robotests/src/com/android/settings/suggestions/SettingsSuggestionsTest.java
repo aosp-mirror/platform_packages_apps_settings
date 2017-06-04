@@ -60,7 +60,7 @@ public class SettingsSuggestionsTest {
     @Test
     public void wallpaperSuggestion_isValid() {
         assertSuggestionEquals("com.android.settings.wallpaper.WallpaperSuggestionActivity",
-                CATEGORY_SETTINGS_ONLY,
+                CATEGORY_FIRST_IMPRESSION,
                 R.string.wallpaper_suggestion_title, R.string.wallpaper_suggestion_summary);
     }
 
