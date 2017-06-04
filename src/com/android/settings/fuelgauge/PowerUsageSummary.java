@@ -63,7 +63,6 @@ import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,9 +104,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     static final int MENU_TOGGLE_APPS = Menu.FIRST + 5;
     private static final int MENU_HELP = Menu.FIRST + 6;
-
-    private final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
 
     @VisibleForTesting
     boolean mShowAllApps = false;
@@ -246,7 +242,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(context);
+        mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
+                context, getActivity(), this /* host */, getLifecycle());
         controllers.add(mBatteryHeaderPreferenceController);
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
