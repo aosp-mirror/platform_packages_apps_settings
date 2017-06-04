@@ -18,8 +18,8 @@
 package com.android.settings.search;
 
 import android.app.LoaderManager;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.util.Pair;
@@ -404,6 +404,8 @@ public class SearchFragmentTest {
 
         // Should log result name, result count, clicked rank, etc.
         final SearchViewHolder resultViewHolder = mock(SearchViewHolder.class);
+        when(resultViewHolder.getClickActionMetricName())
+                .thenReturn(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT);
         ResultPayload payLoad = new ResultPayload(
                 (new Intent()).putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, "test_setting"));
         SearchResult searchResult = new SearchResult.Builder()

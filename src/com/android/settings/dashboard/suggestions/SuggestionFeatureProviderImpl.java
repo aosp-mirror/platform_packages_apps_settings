@@ -18,6 +18,7 @@ package com.android.settings.dashboard.suggestions;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -25,6 +26,7 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
@@ -35,6 +37,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     private static final String TAG = "SuggestionFeature";
     private static final int EXCLUSIVE_SUGGESTION_MAX_COUNT = 3;
 
+    private static final String SHARED_PREF_FILENAME = "suggestions";
+
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -44,15 +48,18 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public boolean isPresent(@NonNull ComponentName component) {
+    public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
+        final String className = component.getClassName();
+        if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
+            return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
+        }
         return false;
     }
 
     @Override
-    public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
-        return false;
+    public SharedPreferences getSharedPrefs(Context context) {
+        return context.getSharedPreferences(SHARED_PREF_FILENAME, Context.MODE_PRIVATE);
     }
-
 
     public SuggestionFeatureProviderImpl(Context context) {
         final Context appContext = context.getApplicationContext();
