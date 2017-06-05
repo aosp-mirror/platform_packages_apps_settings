@@ -82,7 +82,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
         // Make the device only visible to connected devices.
         mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
-        mLocalAdapter.stopScanning();
+        disableScanning();
     }
 
     @Override
@@ -98,25 +98,29 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         return MetricsEvent.BLUETOOTH;
     }
 
-    @VisibleForTesting
-    void startScanning() {
-        if (mAvailableDevicesCategory != null) {
-            removeAllDevices();
+    @Override
+    void enableScanning() {
+        // Clear all device states before first scan
+        if (!mInitialScanStarted) {
+            if (mAvailableDevicesCategory != null) {
+                removeAllDevices();
+            }
+            mLocalManager.getCachedDeviceManager().clearNonBondedDevices();
+            mInitialScanStarted = true;
         }
-
-        mLocalManager.getCachedDeviceManager().clearNonBondedDevices();
-        mInitialScanStarted = true;
-        mLocalAdapter.startScanning(true);
+        super.enableScanning();
     }
 
     @Override
     void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
-        mLocalAdapter.stopScanning();
+        disableScanning();
         super.onDevicePreferenceClick(btPreference);
     }
 
     @Override
     public void onScanningStateChanged(boolean started) {
+        super.onScanningStateChanged(started);
+        started |= mScanEnabled;
         mAvailableDevicesCategory.setProgress(started);
     }
 
@@ -131,14 +135,10 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
                         R.string.bluetooth_preference_found_devices,
                         BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
                 updateFooterPreference(mFooterPreference);
-
-                if (!mInitialScanStarted) {
-                    startScanning();
-                }
-
                 // mLocalAdapter.setScanMode is internally synchronized so it is okay for multiple
                 // threads to execute.
                 mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+                enableScanning();
                 break;
 
             case BluetoothAdapter.STATE_OFF:
@@ -158,6 +158,15 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         if (bondState == BluetoothDevice.BOND_BONDED) {
             // If one device is connected(bonded), then close this fragment.
             finish();
+            return;
+        }
+        if (mSelectedDevice != null && cachedDevice != null) {
+            BluetoothDevice device = cachedDevice.getDevice();
+            if (device != null && mSelectedDevice.equals(device)
+                    && bondState == BluetoothDevice.BOND_NONE) {
+                // If currently selected device failed to bond, restart scanning
+                enableScanning();
+            }
         }
     }
 

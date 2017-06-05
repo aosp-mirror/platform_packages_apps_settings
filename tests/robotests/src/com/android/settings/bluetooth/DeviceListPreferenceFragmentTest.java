@@ -19,9 +19,12 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -83,6 +86,92 @@ public class DeviceListPreferenceFragmentTest {
         assertThat(mMyDevicePreference.getTitle()).isEqualTo(FOOTAGE_MAC_STRING);
     }
 
+    @Test
+    public void testEnableDisableScanning_testStateAfterEanbleDisable() {
+        mFragment.enableScanning();
+        verify(mLocalAdapter).startScanning(true);
+        assertThat(mFragment.mScanEnabled).isTrue();
+
+        mFragment.disableScanning();
+        verify(mLocalAdapter).stopScanning();
+        assertThat(mFragment.mScanEnabled).isFalse();
+    }
+
+    @Test
+    public void testScanningStateChanged_testScanStarted() {
+        mFragment.enableScanning();
+        assertThat(mFragment.mScanEnabled).isTrue();
+        verify(mLocalAdapter).startScanning(true);
+
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+    }
+
+    @Test
+    public void testScanningStateChanged_testScanFinished() {
+        // Could happen when last scanning not done while current scan gets enabled
+        mFragment.enableScanning();
+        verify(mLocalAdapter).startScanning(true);
+        assertThat(mFragment.mScanEnabled).isTrue();
+
+        mFragment.onScanningStateChanged(false);
+        verify(mLocalAdapter, times(2)).startScanning(true);
+    }
+
+    @Test
+    public void testScanningStateChanged_testScanStateMultiple() {
+        // Could happen when last scanning not done while current scan gets enabled
+        mFragment.enableScanning();
+        assertThat(mFragment.mScanEnabled).isTrue();
+        verify(mLocalAdapter).startScanning(true);
+
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+
+        mFragment.onScanningStateChanged(false);
+        verify(mLocalAdapter, times(2)).startScanning(true);
+
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+
+        mFragment.disableScanning();
+        verify(mLocalAdapter).stopScanning();
+
+        mFragment.onScanningStateChanged(false);
+        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+    }
+
+    @Test
+    public void testScanningStateChanged_testScanFinishedAfterDisable() {
+        mFragment.enableScanning();
+        verify(mLocalAdapter).startScanning(true);
+        assertThat(mFragment.mScanEnabled).isTrue();
+
+        mFragment.disableScanning();
+        verify(mLocalAdapter).stopScanning();
+        assertThat(mFragment.mScanEnabled).isFalse();
+
+        mFragment.onScanningStateChanged(false);
+        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+    }
+
+    @Test
+    public void testScanningStateChanged_testScanStartedAfterDisable() {
+        mFragment.enableScanning();
+        verify(mLocalAdapter).startScanning(true);
+        assertThat(mFragment.mScanEnabled).isTrue();
+
+        mFragment.disableScanning();
+        verify(mLocalAdapter).stopScanning();
+        assertThat(mFragment.mScanEnabled).isFalse();
+
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+    }
+
     /**
      * Fragment to test since {@code DeviceListPreferenceFragment} is abstract
      */
@@ -98,14 +187,10 @@ public class DeviceListPreferenceFragmentTest {
         }
 
         @Override
-        public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
-
-        }
+        public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {}
 
         @Override
-        void initPreferencesFromPreferenceScreen() {
-
-        }
+        void initPreferencesFromPreferenceScreen() {}
 
         @Override
         public String getDeviceListKey() {

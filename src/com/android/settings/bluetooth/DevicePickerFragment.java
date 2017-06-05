@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -41,7 +40,6 @@ import java.util.List;
  * connection management.
  */
 public final class DevicePickerFragment extends DeviceListPreferenceFragment {
-    private static final int MENU_ID_REFRESH = Menu.FIRST;
     private static final String KEY_BT_DEVICE_LIST = "bt_device_list";
     private static final String TAG = "DevicePickerFragment";
 
@@ -52,7 +50,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private boolean mNeedAuth;
     private String mLaunchPackage;
     private String mLaunchClass;
-    private boolean mStartScanOnStart;
+    private boolean mScanAllowed;
 
     @Override
     void initPreferencesFromPreferenceScreen() {
@@ -66,20 +64,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, MENU_ID_REFRESH, 0, R.string.bluetooth_search_for_devices)
-                .setEnabled(true)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_ID_REFRESH:
-                mLocalAdapter.startScanning(true);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -92,8 +77,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(getString(R.string.device_picker));
         UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        mStartScanOnStart = !um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)
-                && (savedInstanceState == null);  // don't start scan after rotation
+        mScanAllowed = !um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH);
         setHasOptionsMenu(true);
     }
 
@@ -102,10 +86,16 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         super.onStart();
         addCachedDevices();
         mSelectedDevice = null;
-        if (mStartScanOnStart) {
-            mLocalAdapter.startScanning(true);
-            mStartScanOnStart = false;
+        if (mScanAllowed) {
+            enableScanning();
         }
+    }
+
+    @Override
+    public void onStop() {
+        // Try disable scanning no matter what, no effect if enableScanning has not been called
+        disableScanning();
+        super.onStop();
     }
 
     @Override
@@ -121,7 +111,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     @Override
     void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
-        mLocalAdapter.stopScanning();
+        disableScanning();
         LocalBluetoothPreferences.persistSelectedDeviceInPicker(
                 getActivity(), mSelectedDevice.getAddress());
         if ((btPreference.getCachedDevice().getBondState() ==
@@ -135,12 +125,15 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice,
             int bondState) {
+        BluetoothDevice device = cachedDevice.getDevice();
+        if (!device.equals(mSelectedDevice)) {
+            return;
+        }
         if (bondState == BluetoothDevice.BOND_BONDED) {
-            BluetoothDevice device = cachedDevice.getDevice();
-            if (device.equals(mSelectedDevice)) {
-                sendDevicePickedIntent(device);
-                finish();
-            }
+            sendDevicePickedIntent(device);
+            finish();
+        } else if (bondState == BluetoothDevice.BOND_NONE) {
+            enableScanning();
         }
     }
 
@@ -149,7 +142,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         super.onBluetoothStateChanged(bluetoothState);
 
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
-            mLocalAdapter.startScanning(false);
+            enableScanning();
         }
     }
 
