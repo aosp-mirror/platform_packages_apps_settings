@@ -106,6 +106,11 @@ public class ChooseLockPattern extends SettingsActivity {
             return this;
         }
 
+        public IntentBuilder setForFingerprint(boolean forFingerprint) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, forFingerprint);
+            return this;
+        }
+
         public Intent build() {
             return mIntent;
         }
@@ -125,8 +130,10 @@ public class ChooseLockPattern extends SettingsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        CharSequence msg = getText(R.string.lockpassword_choose_your_pattern_header);
-        setTitle(msg);
+        boolean forFingerprint = getIntent()
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+        setTitle(forFingerprint ? R.string.lockpassword_choose_your_pattern_header_for_fingerprint
+                : R.string.lockpassword_choose_your_pattern_header);
         LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
         layout.setFitsSystemWindows(false);
     }
