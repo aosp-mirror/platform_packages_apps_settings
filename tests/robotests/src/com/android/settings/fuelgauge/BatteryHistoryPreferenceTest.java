@@ -30,7 +30,6 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
 import org.junit.Before;

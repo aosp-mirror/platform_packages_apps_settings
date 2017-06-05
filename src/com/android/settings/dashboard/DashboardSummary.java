@@ -60,7 +60,6 @@ public class DashboardSummary extends InstrumentedFragment
     private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
 
-    private static final String SUGGESTIONS = "suggestions";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
 
@@ -98,7 +97,7 @@ public class DashboardSummary extends InstrumentedFragment
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
         mSuggestionParser = new SuggestionParser(activity,
-                activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+                mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
@@ -196,13 +195,16 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
         Log.d(TAG, "adapter created");
-        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions());
+        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
+            mSuggestionParser, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
-        mSuggestionDismissHandler = new SuggestionDismissController(
+        if (!mDashboardFeatureProvider.combineSuggestionAndCondition()) {
+            mSuggestionDismissHandler = new SuggestionDismissController(
                 getContext(), mDashboard, mSuggestionParser, this);
+            ConditionAdapterUtils.addDismiss(mDashboard);
+        }
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
-        ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) {
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
@@ -242,7 +244,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public Tile getSuggestionForPosition(int position) {
-        return (Tile) mAdapter.getItem(mAdapter.getItemId(position));
+        return mAdapter.getSuggestion(position);
     }
 
     @Override
@@ -273,8 +275,6 @@ public class DashboardSummary extends InstrumentedFragment
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
-                    mSuggestionFeatureProvider.dismissSuggestion(
-                            context, mSuggestionParser, suggestion);
                     suggestions.remove(i--);
                 }
             }

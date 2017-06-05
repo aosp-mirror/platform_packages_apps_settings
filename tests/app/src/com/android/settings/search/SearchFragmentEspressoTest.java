@@ -28,10 +28,12 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
-import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.AllOf.allOf;
+
+import com.android.settings.R;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -43,7 +45,7 @@ public class SearchFragmentEspressoTest {
 
     @Test
     public void test_OpenKeyboardOnSearchLaunch() {
-        onView(allOf(hasFocus(), withTagKey(SearchFragment.SEARCH_TAG)))
+        onView(allOf(hasFocus(), withId(R.id.search_view)))
                 .check(matches(withClassName(containsString(SearchView.class.getName()))));
     }
 }

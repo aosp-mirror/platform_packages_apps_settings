@@ -44,8 +44,11 @@ public class CaCertsPreferenceController extends DynamicAvailabilityPreferenceCo
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()
-                > 0;
+        final boolean available =
+                mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()
+                        > 0;
+        notifyOnAvailabilityUpdate(available);
+        return available;
     }
 
     @Override

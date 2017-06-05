@@ -18,36 +18,79 @@
 package com.android.settings.search;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.settings.R;
+import com.android.settings.search.ranking.SearchResultsRankerCallback;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder> {
+public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
+        implements SearchResultsRankerCallback {
+    private static final String TAG = "SearchResultsAdapter";
 
+    @VisibleForTesting
+    static final String DB_RESULTS_LOADER_KEY = DatabaseResultLoader.class.getName();
+
+    @VisibleForTesting
+    static final String APP_RESULTS_LOADER_KEY = InstalledAppResultLoader.class.getName();
+
+    @VisibleForTesting
+    static final int MSG_RANKING_TIMED_OUT = 1;
+
+    // TODO(b/38197948): Tune this timeout based on latency of static and async rankings. Also, we
+    // should add a gservices flag to control this.
+    private static final long RANKING_TIMEOUT_MS = 300;
     private final SearchFragment mFragment;
-
-    private List<SearchResult> mSearchResults;
+    private final Context mContext;
+    private final List<SearchResult> mSearchResults;
+    private final List<SearchResult> mStaticallyRankedSearchResults;
     private Map<String, Set<? extends SearchResult>> mResultsMap;
     private final SearchFeatureProvider mSearchFeatureProvider;
+    private List<Pair<String, Float>> mSearchRankingScores;
+    private Handler mHandler;
+    private boolean mSearchResultsLoaded;
+    private boolean mSearchResultsUpdated;
+
+    @IntDef({DISABLED, PENDING_RESULTS, SUCCEEDED, FAILED, TIMED_OUT})
+    @Retention(RetentionPolicy.SOURCE)
+    private @interface AsyncRankingState {}
+    private static final int DISABLED = 0;
+    private static final int PENDING_RESULTS = 1;
+    private static final int SUCCEEDED = 2;
+    private static final int FAILED = 3;
+    private static final int TIMED_OUT = 4;
+    private @AsyncRankingState int mAsyncRankingState;
 
     public SearchResultsAdapter(SearchFragment fragment,
             SearchFeatureProvider searchFeatureProvider) {
         mFragment = fragment;
+        mContext = fragment.getContext().getApplicationContext();
         mSearchResults = new ArrayList<>();
         mResultsMap = new ArrayMap<>();
+        mSearchRankingScores = new ArrayList<>();
+        mStaticallyRankedSearchResults = new ArrayList<>();
         mSearchFeatureProvider = searchFeatureProvider;
 
         setHasStableIds(true);
@@ -93,7 +136,37 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         return mSearchResults.size();
     }
 
-    /**
+    @MainThread
+    @Override
+    public void onRankingScoresAvailable(List<Pair<String, Float>> searchRankingScores) {
+        // Received the scores, stop the timeout timer.
+        getHandler().removeMessages(MSG_RANKING_TIMED_OUT);
+        if (mAsyncRankingState == PENDING_RESULTS) {
+            mAsyncRankingState = SUCCEEDED;
+            mSearchRankingScores.clear();
+            mSearchRankingScores.addAll(searchRankingScores);
+            if (canUpdateSearchResults()) {
+                updateSearchResults();
+            }
+        } else {
+            Log.w(TAG, "Ranking scores became available in invalid state: " + mAsyncRankingState);
+        }
+    }
+
+    @MainThread
+    @Override
+    public void onRankingFailed() {
+        if (mAsyncRankingState == PENDING_RESULTS) {
+            mAsyncRankingState = FAILED;
+            if (canUpdateSearchResults()) {
+                updateSearchResults();
+            }
+        } else {
+            Log.w(TAG, "Ranking scores failed in invalid states: " + mAsyncRankingState);
+        }
+    }
+
+   /**
      * Store the results from each of the loaders to be merged when all loaders are finished.
      *
      * @param results         the results from the loader.
@@ -120,71 +193,24 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
     }
 
     /**
-     * Merge the results from each of the loaders into one list for the adapter.
-     * Prioritizes results from the local database over installed apps.
-     *
-     * @param query user query corresponding to these results
-     * @return Number of matched results
+     * Notifies the adapter that all the unsorted results are loaded and now the ladapter can
+     * proceed with ranking the results.
      */
-    public int displaySearchResults(String query) {
-        List<? extends SearchResult> databaseResults = null;
-        List<? extends SearchResult> installedAppResults = null;
-        final String dbLoaderKey = DatabaseResultLoader.class.getName();
-        final String appLoaderKey = InstalledAppResultLoader.class.getName();
-        int dbSize = 0;
-        int appSize = 0;
-        if (mResultsMap.containsKey(dbLoaderKey)) {
-            databaseResults = new ArrayList<>(mResultsMap.get(dbLoaderKey));
-            dbSize = databaseResults.size();
-            Collections.sort(databaseResults);
+    @MainThread
+    public void notifyResultsLoaded() {
+        mSearchResultsLoaded = true;
+        // static ranking is skipped only if asyc ranking is already succeeded.
+        if (mAsyncRankingState != SUCCEEDED) {
+            doStaticRanking();
         }
-        if (mResultsMap.containsKey(appLoaderKey)) {
-            installedAppResults = new ArrayList<>(mResultsMap.get(appLoaderKey));
-            appSize = installedAppResults.size();
-            Collections.sort(installedAppResults);
+        if (canUpdateSearchResults()) {
+            updateSearchResults();
         }
-        final List<SearchResult> newResults = new ArrayList<>(dbSize + appSize);
-
-        int dbIndex = 0;
-        int appIndex = 0;
-        int rank = SearchResult.TOP_RANK;
-
-        while (rank <= SearchResult.BOTTOM_RANK) {
-            while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
-                newResults.add(databaseResults.get(dbIndex++));
-            }
-            while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
-                newResults.add(installedAppResults.get(appIndex++));
-            }
-            rank++;
-        }
-
-        while (dbIndex < dbSize) {
-            newResults.add(databaseResults.get(dbIndex++));
-        }
-        while (appIndex < appSize) {
-            newResults.add(installedAppResults.get(appIndex++));
-        }
-
-        final boolean isSmartSearchRankingEnabled = mSearchFeatureProvider
-                .isSmartSearchRankingEnabled(mFragment.getContext().getApplicationContext());
-
-        if (isSmartSearchRankingEnabled) {
-            // TODO: run this in parallel to loading the results if takes too long
-            mSearchFeatureProvider.rankSearchResults(query, newResults);
-        }
-
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
-                new SearchResultDiffCallback(mSearchResults, newResults),
-                isSmartSearchRankingEnabled);
-        mSearchResults = newResults;
-        diffResult.dispatchUpdatesTo(this);
-
-        return mSearchResults.size();
     }
 
     public void clearResults() {
         mSearchResults.clear();
+        mStaticallyRankedSearchResults.clear();
         mResultsMap.clear();
         notifyDataSetChanged();
     }
@@ -192,5 +218,179 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
     @VisibleForTesting
     public List<SearchResult> getSearchResults() {
         return mSearchResults;
+    }
+
+    @MainThread
+    public void initializeSearch(String query) {
+        clearResults();
+        mSearchResultsLoaded = false;
+        mSearchResultsUpdated = false;
+        if (mSearchFeatureProvider.isSmartSearchRankingEnabled(mContext)) {
+            mAsyncRankingState = PENDING_RESULTS;
+            mSearchFeatureProvider.cancelPendingSearchQuery(mContext);
+            final Handler handler = getHandler();
+            handler.sendMessageDelayed(
+                    handler.obtainMessage(MSG_RANKING_TIMED_OUT), RANKING_TIMEOUT_MS);
+            mSearchFeatureProvider.querySearchResults(mContext, query, this);
+        } else {
+            mAsyncRankingState = DISABLED;
+        }
+    }
+
+    /**
+     * Merge the results from each of the loaders into one list for the adapter.
+     * Prioritizes results from the local database over installed apps.
+     */
+    private void doStaticRanking() {
+        List<? extends SearchResult> databaseResults =
+                getSortedLoadedResults(DB_RESULTS_LOADER_KEY);
+        List<? extends SearchResult> installedAppResults =
+                getSortedLoadedResults(APP_RESULTS_LOADER_KEY);
+        int dbSize = databaseResults.size();
+        int appSize = installedAppResults.size();
+
+        int dbIndex = 0;
+        int appIndex = 0;
+        int rank = SearchResult.TOP_RANK;
+
+        mStaticallyRankedSearchResults.clear();
+        while (rank <= SearchResult.BOTTOM_RANK) {
+            while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
+                mStaticallyRankedSearchResults.add(databaseResults.get(dbIndex++));
+            }
+            while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
+                mStaticallyRankedSearchResults.add(installedAppResults.get(appIndex++));
+            }
+            rank++;
+        }
+
+        while (dbIndex < dbSize) {
+            mStaticallyRankedSearchResults.add(databaseResults.get(dbIndex++));
+        }
+        while (appIndex < appSize) {
+            mStaticallyRankedSearchResults.add(installedAppResults.get(appIndex++));
+        }
+    }
+
+    private void updateSearchResults() {
+        switch (mAsyncRankingState) {
+            case PENDING_RESULTS:
+                break;
+            case DISABLED:
+            case FAILED:
+            case TIMED_OUT:
+                // When DISABLED or FAILED or TIMED_OUT, we use static ranking results.
+                postSearchResults(mStaticallyRankedSearchResults, false);
+                break;
+            case SUCCEEDED:
+                postSearchResults(doAsyncRanking(), true);
+                break;
+        }
+    }
+
+    private boolean canUpdateSearchResults() {
+        // Results are not updated yet and db results are loaded and we are not waiting on async
+        // ranking scores.
+        return !mSearchResultsUpdated
+                && mSearchResultsLoaded
+                && mAsyncRankingState != PENDING_RESULTS;
+    }
+
+    @VisibleForTesting
+    List<SearchResult> doAsyncRanking() {
+        Set<? extends SearchResult> databaseResults =
+                getUnsortedLoadedResults(DB_RESULTS_LOADER_KEY);
+        List<? extends SearchResult> installedAppResults =
+                getSortedLoadedResults(APP_RESULTS_LOADER_KEY);
+        int dbSize = databaseResults.size();
+        int appSize = installedAppResults.size();
+
+        final List<SearchResult> asyncRankingResults = new ArrayList<>(dbSize + appSize);
+        List<SearchResult> databaseResultsSortedByScores = new ArrayList<>(databaseResults);
+        Collections.sort(databaseResultsSortedByScores, new Comparator<SearchResult>() {
+            @Override
+            public int compare(SearchResult o1, SearchResult o2) {
+                float score1 = getRankingScoreByStableId(o1.stableId);
+                float score2 = getRankingScoreByStableId(o2.stableId);
+                if (score1 > score2) {
+                    return -1;
+                } else if (score1 == score2) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        asyncRankingResults.addAll(databaseResultsSortedByScores);
+        // App results are not ranked by async ranking and appended at the end of the list.
+        asyncRankingResults.addAll(installedAppResults);
+        return asyncRankingResults;
+    }
+
+    @VisibleForTesting
+    Set<? extends SearchResult> getUnsortedLoadedResults(String loaderKey) {
+        return mResultsMap.containsKey(loaderKey) ?
+                mResultsMap.get(loaderKey) : new HashSet<SearchResult>();
+    }
+
+    @VisibleForTesting
+    List<? extends SearchResult> getSortedLoadedResults(String loaderKey) {
+        List<? extends SearchResult> sortedLoadedResults =
+                new ArrayList<>(getUnsortedLoadedResults(loaderKey));
+        Collections.sort(sortedLoadedResults);
+        return sortedLoadedResults;
+    }
+
+    /**
+     * Looks up ranking score for stableId
+     * @param stableId String of stableId
+     * @return the ranking score corresponding to the given stableId. If there is no score
+     * available for this stableId, -Float.MAX_VALUE is returned.
+     */
+    @VisibleForTesting
+    Float getRankingScoreByStableId(int stableId) {
+        for (Pair<String, Float> rankingScore : mSearchRankingScores) {
+            if (Integer.toString(stableId).compareTo(rankingScore.first) == 0) {
+                return rankingScore.second;
+            }
+        }
+        // If stableId not found in the list, we assign the minimum score so it will appear at
+        // the end of the list.
+        Log.w(TAG, "stableId " + stableId + " was not in the ranking scores.");
+        return -Float.MAX_VALUE;
+    }
+
+    @VisibleForTesting
+    Handler getHandler() {
+        if (mHandler == null) {
+            mHandler = new Handler(Looper.getMainLooper()) {
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what == MSG_RANKING_TIMED_OUT) {
+                        mSearchFeatureProvider.cancelPendingSearchQuery(mContext);
+                        if (mAsyncRankingState == PENDING_RESULTS) {
+                            mAsyncRankingState = TIMED_OUT;
+                            if (canUpdateSearchResults()) {
+                                updateSearchResults();
+                            }
+                        } else {
+                            Log.w(TAG, "Ranking scores timed out in invalid state: " +
+                                    mAsyncRankingState);
+                        }
+                    }
+                }
+            };
+        }
+        return mHandler;
+    }
+
+    private void postSearchResults(List<SearchResult> newSearchResults, boolean detectMoves) {
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
+                new SearchResultDiffCallback(mSearchResults, newSearchResults), detectMoves);
+        mSearchResults.clear();
+        mSearchResults.addAll(newSearchResults);
+        diffResult.dispatchUpdatesTo(this);
+        mFragment.onSearchResultsDisplayed(mSearchResults.size());
+        mSearchResultsUpdated = true;
     }
 }

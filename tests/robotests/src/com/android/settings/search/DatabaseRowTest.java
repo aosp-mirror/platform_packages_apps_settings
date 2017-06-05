@@ -26,16 +26,11 @@ import com.android.settings.TestConfig;
 import com.android.settings.search.DatabaseIndexingManager.DatabaseRow;
 import com.android.settings.search.DatabaseIndexingManager.DatabaseRow.Builder;
 
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.ResultPayloadUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.HashMap;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -118,15 +113,15 @@ public class DatabaseRowTest {
     @Test
     public void testRowWithInlinePayload_genericPayloadNotAdded() {
         final String URI = "test uri";
-        final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0,
-                new HashMap<Integer, Boolean>(), null);
+        final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
+                1 /* onValue */, null /* intent */, true /* isDeviceSupported */);
         mBuilder.setPayload(payload);
         final DatabaseRow row = generateRow();
         final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
                 .unmarshall(row.payload, InlineSwitchPayload.CREATOR);
 
         assertThat(row.payloadType).isEqualTo(ResultPayload.PayloadType.INLINE_SWITCH);
-        assertThat(unmarshalledPayload.settingsUri).isEqualTo(URI);
+        assertThat(unmarshalledPayload.mSettingKey).isEqualTo(URI);
     }
 
     @Test
@@ -137,8 +132,8 @@ public class DatabaseRowTest {
         final Intent intent = new Intent();
         intent.setComponent(component);
 
-        final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0,
-                new HashMap<Integer, Boolean>(), intent);
+        final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
+                1 /* onValue */, intent, true /* isDeviceSupported */);
         mBuilder.setPayload(payload);
         final DatabaseRow row = generateRow();
         final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils

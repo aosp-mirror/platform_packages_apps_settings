@@ -47,7 +47,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settingslib.BatteryInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -437,24 +436,6 @@ public class PowerUsageSummaryTest {
 
         assertThat(mFragment.mAnomalySparseArray.get(UID)).containsExactly(anomaly1, anomaly2);
         assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
-    }
-
-    @Test
-    public void testBatteryPredictionLoaderCallbacks_DoesNotCrashOnNull() {
-        // Sanity test to check for crash
-        mFragment.mBatteryPredictionLoaderCallbacks.onLoadFinished(null, null);
-    }
-
-    @Test
-    public void testOnCreate_BatteryPredictionSkippedWhenDisabled() {
-        PowerUsageFeatureProvider provider = mFeatureFactory.getPowerUsageFeatureProvider(mContext);
-        when(provider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(false);
-        mFragment.mPowerFeatureProvider = provider;
-        doReturn(mLoaderManager).when(mFragment).getLoaderManager();
-        mFragment.initializeBatteryEstimateLoader();
-
-        verify(mLoaderManager, never()).initLoader(eq(PowerUsageSummary.BATTERY_ESTIMATE_LOADER),
-                eq(Bundle.EMPTY), any());
     }
 
     @Test

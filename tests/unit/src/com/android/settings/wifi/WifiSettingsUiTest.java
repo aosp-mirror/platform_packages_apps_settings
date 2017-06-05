@@ -15,6 +15,36 @@
  */
 package com.android.settings.wifi;
 
+import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiSsid;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTracker.WifiListener;
+import com.android.settingslib.wifi.WifiTrackerFactory;
+
+import com.google.common.collect.Lists;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.List;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -28,33 +58,6 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.net.wifi.WifiSsid;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import com.android.settings.Settings.WifiSettingsActivity;
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.WifiTracker;
-import com.android.settingslib.wifi.WifiTracker.WifiListener;
-import com.android.settingslib.wifi.WifiTrackerFactory;
-import com.google.common.collect.Lists;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class WifiSettingsUiTest {
@@ -76,8 +79,10 @@ public class WifiSettingsUiTest {
     private static final int TEST_RSSI = 123;
     private static final int TEST_NETWORK_ID = 1;
 
-    @Mock private WifiTracker mWifiTracker;
-    @Mock private WifiManager mWifiManager;
+    @Mock
+    private WifiTracker mWifiTracker;
+    @Mock
+    private WifiManager mWifiManager;
     private Context mContext;
     private WifiListener mWifiListener;
 
@@ -136,7 +141,7 @@ public class WifiSettingsUiTest {
 
     private void callOnWifiStateChanged(int state) {
         mActivityRule.getActivity().getMainThreadHandler()
-                .post( () -> mWifiListener.onWifiStateChanged(state) );
+                .post(() -> mWifiListener.onWifiStateChanged(state));
     }
 
     @Test
@@ -152,13 +157,23 @@ public class WifiSettingsUiTest {
     }
 
     @Test
-    public void noSavedNetworks_shouldNotShowSavedNetworksButton() {
+    public void noSavedNetworks_wifiEnabled_shouldNotShowSavedNetworksButton() {
         setWifiState(WifiManager.WIFI_STATE_ENABLED);
         when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
 
         launchActivity();
 
         onView(withText(SAVED_NETWORKS)).check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void noSavedNetworks_wifiDisabled_shouldNotShowSavedNetworksButton() {
+        setWifiState(WifiManager.WIFI_STATE_DISABLED);
+        when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
+
+        launchActivity();
+
+        onView(withText(SAVED_NETWORKS)).check(doesNotExist());
     }
 
     @Test

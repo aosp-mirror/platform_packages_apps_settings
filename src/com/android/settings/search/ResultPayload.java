@@ -57,6 +57,37 @@ public class ResultPayload implements Parcelable {
         int SAVED_QUERY = 3;
     }
 
+    /**
+     * Enumerates the possible values for the Availability of a setting.
+     */
+    @IntDef({Availability.AVAILABLE,
+            Availability.DISABLED_DEPENDENCY,
+            Availability.DISABLED_UNSUPPORTED,
+            Availability.RESOURCE_CONTENTION})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Availability {
+        /**
+         * The setting is available.
+         */
+        int AVAILABLE = 0;
+
+        /**
+         * The setting has a dependency which is currently disabled, blocking access.
+         */
+        int DISABLED_DEPENDENCY = 1;
+
+        /**
+         * The setting is not supported by the device.
+         */
+        int DISABLED_UNSUPPORTED = 2;
+
+        /**
+         * The setting you are trying to change is being used by another application and cannot
+         * be changed until it is released by said application.
+         */
+        int RESOURCE_CONTENTION = 3;
+    }
+
     @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
             SettingsSource.GLOBAL})
     @Retention(RetentionPolicy.SOURCE)
