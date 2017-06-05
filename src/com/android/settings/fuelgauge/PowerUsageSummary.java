@@ -769,7 +769,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
                     @Override
                     public void onBatteryInfoLoaded(BatteryInfo info) {
-                        mLoader.setSummary(SummaryProvider.this, info.chargeLabelString);
+                        mLoader.setSummary(SummaryProvider.this, info.chargeLabel);
                     }
                 });
             });
