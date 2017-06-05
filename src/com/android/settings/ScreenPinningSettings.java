@@ -75,6 +75,11 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_screen_pinning;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewGroup parent = (ViewGroup) view.findViewById(android.R.id.list_container);

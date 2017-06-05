@@ -16,17 +16,19 @@
 
 package com.android.settings.dream;
 
+import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
+
 import java.util.ArrayList;
-import android.content.Context;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import java.util.Arrays;
 import java.util.List;
 
@@ -94,6 +96,11 @@ public class DreamSettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.dream_fragment_overview;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_screen_saver;
     }
 
     @Override

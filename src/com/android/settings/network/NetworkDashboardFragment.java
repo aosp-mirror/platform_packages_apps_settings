@@ -70,6 +70,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_network_dashboard;
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         mNetworkResetController.buildMenuItem(menu);

@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import android.annotation.IdRes;
 import android.annotation.Nullable;
+import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -148,7 +149,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_COUNT = 13;  // This should always be the last entry
 
     // Mapping to string labels for the FILTER_APPS_* constants above.
-    public static final @IdRes int[] FILTER_LABELS = new int[FILTER_APPS_COUNT];
+    @IdRes
+    public static final int[] FILTER_LABELS = new int[FILTER_APPS_COUNT];
 
     // Mapping to filters for the FILTER_APPS_* constants above.
     public static final AppFilter[] FILTERS = new AppFilter[FILTER_APPS_COUNT];
@@ -261,8 +263,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
-                    LIST_TYPE_MAIN,
-                    LIST_TYPE_STORAGE));
+            LIST_TYPE_MAIN,
+            LIST_TYPE_STORAGE));
 
     private View mRootView;
 
@@ -338,7 +340,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // initialize the inflater
         mInflater = inflater;
 
@@ -425,7 +427,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     }
 
     @VisibleForTesting
-    static @Nullable AppFilter getCompositeFilter(int listType, int storageType, String volumeUuid) {
+    @Nullable
+    static AppFilter getCompositeFilter(int listType, int storageType, String volumeUuid) {
         AppFilter filter = new VolumeFilter(volumeUuid);
         if (listType == LIST_TYPE_STORAGE) {
             if (storageType == STORAGE_TYPE_MUSIC) {
@@ -595,8 +598,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_movies_tv);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
-            // process ahead of time, to avoid a long load of data when user clicks on a managed app.
-            // Maybe when they load the list of apps that contains managed profile apps.
+            // process ahead of time, to avoid a long load of data when user clicks on a managed
+            // app. Maybe when they load the list of apps that contains managed profile apps.
             default:
                 startAppInfoFragment(InstalledAppDetails.class, R.string.application_info_label);
                 break;
@@ -610,8 +613,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        HelpUtils.prepareHelpMenuItem(getActivity(), menu, mListType == LIST_TYPE_MAIN
-                ? R.string.help_uri_apps : R.string.help_uri_notifications, getClass().getName());
+        HelpUtils.prepareHelpMenuItem(getActivity(), menu, getHelpResource(), getClass().getName());
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
         updateOptionsMenu();
@@ -625,6 +627,17 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     @Override
     public void onDestroyOptionsMenu() {
         mOptionsMenu = null;
+    }
+
+    @StringRes
+    int getHelpResource() {
+        if (mListType == LIST_TYPE_MAIN) {
+            return R.string.help_uri_apps;
+        } else if (mListType == LIST_TYPE_USAGE_ACCESS) {
+            return R.string.help_url_usage_access;
+        } else {
+            return R.string.help_uri_notifications;
+        }
     }
 
     void updateOptionsMenu() {
@@ -670,7 +683,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 if (mListType == LIST_TYPE_NOTIFICATION) {
                     ((SettingsActivity) getActivity()).startPreferencePanel(this,
                             ConfigureNotificationSettings.class.getName(), null,
-                            R.string.configure_notification_settings, null, this, ADVANCED_SETTINGS);
+                            R.string.configure_notification_settings, null, this,
+                            ADVANCED_SETTINGS);
                 } else {
                     ((SettingsActivity) getActivity()).startPreferencePanel(this,
                             AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
@@ -877,7 +891,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         };
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
-                                   int filterMode) {
+                int filterMode) {
             mState = state;
             mFgHandler = new Handler();
             mBgHandler = new Handler(mState.getBackgroundLooper());
@@ -950,7 +964,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             // Record the current scroll position before pausing.
             mLastIndex = mManageApplications.mListView.getFirstVisiblePosition();
             View v = mManageApplications.mListView.getChildAt(0);
-            mLastTop = (v == null) ? 0 : (v.getTop() - mManageApplications.mListView.getPaddingTop());
+            mLastTop =
+                    (v == null) ? 0 : (v.getTop() - mManageApplications.mListView.getPaddingTop());
         }
 
         public void release() {
@@ -1037,8 +1052,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         private ArrayList<ApplicationsState.AppEntry> removeDuplicateIgnoringUser(
-                ArrayList<ApplicationsState.AppEntry> entries)
-        {
+                ArrayList<ApplicationsState.AppEntry> entries) {
             int size = entries.size();
             // returnList will not have more entries than entries
             ArrayList<ApplicationsState.AppEntry> returnEntries = new
@@ -1097,7 +1111,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         private void rebuildSections() {
-            if (mEntries!= null && mManageApplications.mListView.isFastScrollEnabled()) {
+            if (mEntries != null && mManageApplications.mListView.isFastScrollEnabled()) {
                 // Rebuild sections
                 if (mIndex == null) {
                     LocaleList locales = mContext.getResources().getConfiguration().getLocales();
@@ -1142,7 +1156,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,
-                                                                ArrayList<ApplicationsState.AppEntry> origEntries) {
+                ArrayList<ApplicationsState.AppEntry> origEntries) {
             if (prefix == null || prefix.length() == 0) {
                 return origEntries;
             } else {
@@ -1464,7 +1478,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             = new SummaryLoader.SummaryProviderFactory() {
         @Override
         public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
+                SummaryLoader summaryLoader) {
             return new SummaryProvider(activity, summaryLoader);
         }
     };
