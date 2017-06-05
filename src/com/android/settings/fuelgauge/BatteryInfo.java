@@ -34,7 +34,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.R;
 import com.android.settings.Utils;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 public class BatteryInfo {
 

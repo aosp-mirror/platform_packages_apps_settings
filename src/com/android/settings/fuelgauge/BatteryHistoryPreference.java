@@ -24,7 +24,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
