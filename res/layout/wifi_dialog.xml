@@ -53,9 +53,21 @@
                         android:layout_height="wrap_content"
                         style="@style/wifi_item_edit_content"
                         android:hint="@string/wifi_ssid_hint"
-                        android:maxLength="32"
                         android:singleLine="true"
                         android:inputType="textNoSuggestions" />
+
+                <LinearLayout android:id="@+id/ssid_too_long_warning"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:visibility="gone"
+                              style="@style/wifi_item" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/wifi_item_warning"
+                        android:text="@string/wifi_ssid_too_long" />
+                </LinearLayout>
+
              </LinearLayout>
 
             <LinearLayout
