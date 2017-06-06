@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Loader;
 import android.content.res.TypedArray;
@@ -35,12 +36,16 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -58,12 +63,11 @@ import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
+import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment.AnomalyDialogListener;
 import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,7 +77,7 @@ import java.util.List;
  * consumed since the last time it was unplugged.
  */
 public class PowerUsageSummary extends PowerUsageBase implements
-        AnomalyDialogFragment.AnomalyDialogListener {
+        AnomalyDialogListener, OnLongClickListener, OnClickListener {
 
     static final String TAG = "PowerUsageSummary";
 
@@ -104,6 +108,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     static final int MENU_TOGGLE_APPS = Menu.FIRST + 5;
     private static final int MENU_HELP = Menu.FIRST + 6;
+    public static final int DEBUG_INFO_LOADER = 3;
 
     @VisibleForTesting
     boolean mShowAllApps = false;
@@ -115,15 +120,15 @@ public class PowerUsageSummary extends PowerUsageBase implements
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    LayoutPreference mBatteryLayoutPref;
 
     /**
      * SparseArray that maps uid to {@link Anomaly}, so we could find {@link Anomaly} by uid
      */
     @VisibleForTesting
     SparseArray<List<Anomaly>> mAnomalySparseArray;
-
     private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
-    private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
@@ -152,7 +157,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             };
 
     @VisibleForTesting
-    LoaderManager.LoaderCallbacks<BatteryInfo> BatteryInfoLoaderCallbacks =
+    LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
             new LoaderManager.LoaderCallbacks<BatteryInfo>() {
 
                 @Override
@@ -171,12 +176,61 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 }
             };
 
+    LoaderManager.LoaderCallbacks<List<BatteryInfo>> mBatteryInfoDebugLoaderCallbacks =
+            new LoaderCallbacks<List<BatteryInfo>>() {
+                @Override
+                public Loader<List<BatteryInfo>> onCreateLoader(int i, Bundle bundle) {
+                    return new DebugEstimatesLoader(getContext(), mStatsHelper);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<List<BatteryInfo>> loader,
+                        List<BatteryInfo> batteryInfos) {
+                    final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
+                            .findViewById(R.id.battery_header_icon);
+                    final TextView percentRemaining =
+                            mBatteryLayoutPref.findViewById(R.id.battery_percent);
+                    final TextView summary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
+                    final TextView summary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
+                    BatteryInfo oldInfo = batteryInfos.get(0);
+                    BatteryInfo newInfo = batteryInfos.get(1);
+                    percentRemaining.setText(Utils.formatPercentage(oldInfo.batteryLevel));
+
+                    // set the text to the old estimate (copied from battery info). Note that this
+                    // can sometimes say 0 time remaining because battery stats requires the phone
+                    // be unplugged for a period of time before being willing ot make an estimate.
+                    summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
+                            Formatter.formatShortElapsedTime(getContext(),
+                                    mBatteryUtils.convertUsToMs(oldInfo.remainingTimeUs))));
+
+                    // for this one we can just set the string directly
+                    summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
+                            Formatter.formatShortElapsedTime(getContext(),
+                                    mBatteryUtils.convertUsToMs(newInfo.remainingTimeUs))));
+
+                    batteryView.setBatteryLevel(oldInfo.batteryLevel);
+                    batteryView.setCharging(!oldInfo.discharging);
+                }
+
+                @Override
+                public void onLoaderReset(Loader<List<BatteryInfo>> loader) {
+                }
+            };
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
 
+        initFeatureProvider();
         mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
+        View header = mBatteryLayoutPref.findViewById(R.id.summary1);
+        // Unfortunately setting a long click listener on a means it will no longer pass the regular
+        // click event to the parent, so we have to register a regular click listener as well.
+        if (mPowerFeatureProvider.isEstimateDebugEnabled()) {
+            header.setOnLongClickListener(this);
+            header.setOnClickListener(this);
+        }
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mScreenUsagePref = (PowerGaugePreference) findPreference(KEY_SCREEN_USAGE);
         mLastFullChargePref = (PowerGaugePreference) findPreference(
@@ -187,7 +241,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mBatteryUtils = BatteryUtils.getInstance(getContext());
         mAnomalySparseArray = new SparseArray<>();
 
-        initFeatureProvider();
         restartBatteryInfoLoader();
     }
 
@@ -305,8 +358,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
                 return true;
             case MENU_ADDITIONAL_BATTERY_INFO:
-                startActivity(FeatureFactory.getFactory(getContext())
-                        .getPowerUsageFeatureProvider(getContext())
+                startActivity(mPowerFeatureProvider
                         .getAdditionalBatteryInfoIntent());
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_USAGE_ALERTS);
@@ -335,11 +387,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     private void performBatteryHeaderClick() {
-        final Context context = getContext();
-        final PowerUsageFeatureProvider featureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
-
-        if (featureProvider.isAdvancedUiEnabled()) {
+        if (mPowerFeatureProvider.isAdvancedUiEnabled()) {
             Utils.startWithFragment(getContext(), PowerUsageAdvanced.class.getName(), null,
                     null, 0, R.string.advanced_battery_title, null, getMetricsCategory());
         } else {
@@ -618,6 +666,17 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @VisibleForTesting
+    void showBothEstimates() {
+        final Context context = getContext();
+        if (context == null
+                || !mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
+            return;
+        }
+        getLoaderManager().restartLoader(DEBUG_INFO_LOADER, Bundle.EMPTY,
+                mBatteryInfoDebugLoaderCallbacks);
+    }
+
+    @VisibleForTesting
     double calculatePercentage(double powerUsage, double dischargeAmount) {
         final double totalPower = mStatsHelper.getTotalPower();
         return totalPower == 0 ? 0 :
@@ -678,7 +737,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         if (mPowerFeatureProvider != null
                 && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(getContext())) {
             getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
-                    BatteryInfoLoaderCallbacks);
+                    mBatteryInfoLoaderCallbacks);
         }
     }
 
@@ -751,6 +810,18 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @Override
     public void onAnomalyHandled(Anomaly anomaly) {
         mAnomalySummaryPreferenceController.hideHighUsagePreference();
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        showBothEstimates();
+        view.setOnLongClickListener(null);
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        performBatteryHeaderClick();
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {

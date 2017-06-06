@@ -48,7 +48,9 @@ public class BatteryHeaderPreferenceController extends PreferenceController
     @VisibleForTesting
     TextView mTimeText;
     @VisibleForTesting
-    TextView mSummary;
+    TextView mSummary1;
+    @VisibleForTesting
+    TextView mSummary2;
 
     private final Activity mActivity;
     private final PreferenceFragment mHost;
@@ -73,8 +75,9 @@ public class BatteryHeaderPreferenceController extends PreferenceController
         mBatteryLayoutPref = (LayoutPreference) screen.findPreference(KEY_BATTERY_HEADER);
         mBatteryMeterView = (BatteryMeterView) mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
-        mTimeText = (TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent);
-        mSummary = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
+        mTimeText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
+        mSummary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
+        mSummary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
 
         Intent batteryBroadcast = mContext.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -105,10 +108,13 @@ public class BatteryHeaderPreferenceController extends PreferenceController
     public void updateHeaderPreference(BatteryInfo info) {
         mTimeText.setText(Utils.formatPercentage(info.batteryLevel));
         if (info.remainingLabel == null) {
-            mSummary.setText(info.statusLabel);
+            mSummary1.setText(info.statusLabel);
         } else {
-            mSummary.setText(info.remainingLabel);
+            mSummary1.setText(info.remainingLabel);
         }
+        // Clear this just to be sure we don't get UI jank on re-entering this view from another
+        // activity.
+        mSummary2.setText("");
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
         mBatteryMeterView.setCharging(!info.discharging);

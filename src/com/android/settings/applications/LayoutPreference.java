@@ -88,7 +88,7 @@ public class LayoutPreference extends Preference {
         layout.addView(mRootView);
     }
 
-    public View findViewById(int id) {
+    public <T extends View> T findViewById(int id) {
         return mRootView.findViewById(id);
     }
 
