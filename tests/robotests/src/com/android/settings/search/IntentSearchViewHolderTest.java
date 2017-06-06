@@ -163,6 +163,20 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
+    public void testBindElements_dynamicSummary_visibilityIsGone() {
+        String dynamicSummary = "%s";
+        SearchResult result = new Builder()
+                .addTitle(TITLE)
+                .addSummary(dynamicSummary)
+                .addPayload(new IntentPayload(null))
+                .build();
+
+        mHolder.onBind(mFragment, result);
+
+        assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
+    }
+
     private SearchResult getSearchResult(String title, String summary, Drawable icon) {
         Builder builder = new Builder();
         builder.addTitle(title)
