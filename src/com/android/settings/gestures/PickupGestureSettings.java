@@ -53,6 +53,11 @@ public class PickupGestureSettings extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_pickup_gesture;
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
     }

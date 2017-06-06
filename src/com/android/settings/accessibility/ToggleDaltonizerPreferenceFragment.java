@@ -42,6 +42,11 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_color_correction;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

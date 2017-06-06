@@ -97,6 +97,11 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_account_detail;
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.account_type_settings;
     }
