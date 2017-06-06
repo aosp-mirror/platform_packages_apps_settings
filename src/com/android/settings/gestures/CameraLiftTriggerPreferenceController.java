@@ -61,7 +61,8 @@ public class CameraLiftTriggerPreferenceController extends GesturePreferenceCont
     @Override
     protected boolean isSwitchPrefEnabled() {
         final int triggerEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED, 0);
+                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED,
+                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED_DEFAULT);
         return triggerEnabled == 1;
     }
 }

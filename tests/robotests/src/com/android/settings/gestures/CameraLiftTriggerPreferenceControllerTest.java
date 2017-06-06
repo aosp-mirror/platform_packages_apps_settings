@@ -75,6 +75,15 @@ public class CameraLiftTriggerPreferenceControllerTest {
     }
 
     @Test
+    public void testSwitchEnabled_defaultConfig_shouldReturnTrue() {
+        final Context context = RuntimeEnvironment.application;
+        mController = new CameraLiftTriggerPreferenceController(context, null,
+                KEY_CAMERA_LIFT_TRIGGER);
+
+        assertThat(mController.isSwitchPrefEnabled()).isTrue();
+    }
+
+    @Test
     public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be enabled.
         final Context context = RuntimeEnvironment.application;
