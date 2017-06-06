@@ -126,10 +126,11 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
                 PaymentBackend paymentBackend = new PaymentBackend(mContext);
                 paymentBackend.refresh();
                 PaymentAppInfo app = paymentBackend.getDefaultApp();
+                String summary = null;
                 if (app != null) {
-                    mSummaryLoader.setSummary(this, mContext.getString(R.string.payment_summary,
-                            app.label));
+                    summary = mContext.getString(R.string.payment_summary, app.label);
                 }
+                mSummaryLoader.setSummary(this, summary);
             }
         }
     }
