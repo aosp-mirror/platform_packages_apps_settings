@@ -37,6 +37,7 @@ import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +56,7 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
     private final String mQuery;
     private final UserManager mUserManager;
     private final PackageManagerWrapper mPackageManager;
-
+    private final List<ResolveInfo> mHomeActivities = new ArrayList<>();
 
     public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
             String query, SiteMapManager mapManager) {
@@ -70,6 +71,9 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
     public Set<? extends SearchResult> loadInBackground() {
         final Set<AppSearchResult> results = new HashSet<>();
         final PackageManager pm = mPackageManager.getPackageManager();
+
+        mHomeActivities.clear();
+        mPackageManager.getHomeActivities(mHomeActivities);
 
         for (UserInfo user : getUsersToCount()) {
             final List<ApplicationInfo> apps =
@@ -106,11 +110,18 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
         return results;
     }
 
+    /**
+     * Returns true if the candidate should be included in candidate list
+     * <p/>
+     * This method matches logic in {@code ApplicationState#FILTER_DOWNLOADED_AND_LAUNCHER}.
+     */
     private boolean shouldIncludeAsCandidate(ApplicationInfo info, UserInfo user) {
+        // Not system app
         if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
                 || (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
             return true;
         }
+        // Shows up in launcher
         final Intent launchIntent = new Intent(LAUNCHER_PROBE)
                 .setPackage(info.packageName);
         final List<ResolveInfo> intents = mPackageManager.queryIntentActivitiesAsUser(
@@ -119,7 +130,11 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
                         | PackageManager.MATCH_DIRECT_BOOT_AWARE
                         | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
                 user.id);
-        return intents != null && intents.size() != 0;
+        if (intents != null && intents.size() != 0) {
+            return true;
+        }
+        // Is launcher app itself
+        return isPackageInList(mHomeActivities, info.packageName);
     }
 
     @Override
@@ -194,6 +209,15 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
         return NAME_NO_MATCH;
     }
 
+    private boolean isPackageInList(List<ResolveInfo> resolveInfos, String pkg) {
+        for (ResolveInfo info : resolveInfos) {
+            if (TextUtils.equals(info.activityInfo.packageName, pkg)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private List<String> getBreadCrumb() {
         if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
             final Context context = getContext();
@@ -206,6 +230,7 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
 
     /**
      * A temporary ranking scheme for installed apps.
+     *
      * @param wordDiff difference between query length and app name length.
      * @return the ranking.
      */
