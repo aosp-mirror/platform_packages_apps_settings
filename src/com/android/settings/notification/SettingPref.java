@@ -121,19 +121,6 @@ public class SettingPref {
         if (mTwoState != null) {
             mTwoState.setChecked(val != 0);
         } else if (mDropDown != null) {
-            if (mValues != null) {
-                int index = 0;
-                for (int len = mValues.length; index < len; index++) {
-                    if (mValues[index] == val) {
-                        break;
-                    }
-                }
-
-                if (index < mValues.length) {
-                    CharSequence entry = mDropDown.getEntries()[index];
-                    mDropDown.setSummary(entry);
-                }
-            }
             mDropDown.setValue(Integer.toString(val));
         }
     }
