@@ -33,6 +33,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -74,9 +75,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
         mDaysToRetain.setOnPreferenceChangeListener(this);
 
         ContentResolver cr = getContentResolver();
-        int photosDaysToRetain = Settings.Secure.getInt(cr,
-                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
-                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT);
+        int photosDaysToRetain =
+                Settings.Secure.getInt(
+                        cr,
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
+                        Utils.getDefaultStorageManagerDaysToRetain(getResources()));
         String[] stringValues =
                 getResources().getStringArray(R.array.automatic_storage_management_days_values);
         mDaysToRetain.setValue(stringValues[daysValueToIndex(photosDaysToRetain, stringValues)]);
@@ -164,4 +167,5 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
         }
         return indices.length - 1;
     }
+
 }
