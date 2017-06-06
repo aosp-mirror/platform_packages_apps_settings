@@ -23,7 +23,9 @@ import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.bluetooth.BluetoothAdapter;
@@ -103,7 +105,7 @@ public class BluetoothPairingDetailTest {
         mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
         mFragment.mDeviceListGroup = mAvailableDevicesCategory;
 
-        mFragment.startScanning();
+        mFragment.enableScanning();
 
         verify(mLocalAdapter).startScanning(true);
         verify(mAvailableDevicesCategory).removeAll();
@@ -129,5 +131,55 @@ public class BluetoothPairingDetailTest {
 
         verify(mFragment).finish();
     }
+
+    @Test
+    public void testOnScanningStateChanged_restartScanAfterInitialScanning() {
+        mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
+        mFragment.mFooterPreference = mFooterPreference;
+        mFragment.mDeviceListGroup = mAvailableDevicesCategory;
+        doNothing().when(mFragment).addDeviceCategory(any(), anyInt(), any(), anyBoolean());
+
+        // Initial Bluetooth ON will trigger scan enable, list clear and scan start
+        mFragment.updateContent(BluetoothAdapter.STATE_ON);
+        verify(mFragment).enableScanning();
+        assertThat(mAvailableDevicesCategory.getPreferenceCount()).isEqualTo(0);
+        verify(mLocalAdapter).startScanning(true);
+
+        // Subsequent scan started event will not trigger start/stop nor list clear
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(1)).startScanning(anyBoolean());
+        verify(mAvailableDevicesCategory, times(1)).setProgress(true);
+
+        // Subsequent scan finished event will trigger scan start without list clean
+        mFragment.onScanningStateChanged(false);
+        verify(mLocalAdapter, times(2)).startScanning(true);
+        verify(mAvailableDevicesCategory, times(2)).setProgress(true);
+
+        // Subsequent scan started event will not trigger any change
+        mFragment.onScanningStateChanged(true);
+        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+        verify(mAvailableDevicesCategory, times(3)).setProgress(true);
+        verify(mLocalAdapter, never()).stopScanning();
+
+        // Disable scanning will trigger scan stop
+        mFragment.disableScanning();
+        verify(mLocalAdapter, times(1)).stopScanning();
+
+        // Subsequent scan start event will not trigger any change besides progress circle
+        mFragment.onScanningStateChanged(true);
+        verify(mAvailableDevicesCategory, times(4)).setProgress(true);
+
+        // However, subsequent scan finished event won't trigger new scan start and will stop
+        // progress circle from spinning
+        mFragment.onScanningStateChanged(false);
+        verify(mAvailableDevicesCategory, times(1)).setProgress(false);
+        verify(mLocalAdapter, times(2)).startScanning(anyBoolean());
+        verify(mLocalAdapter, times(1)).stopScanning();
+
+        // Verify that clean up only happen once at initialization
+        verify(mAvailableDevicesCategory, times(1)).removeAll();
+    }
+
+
 
 }

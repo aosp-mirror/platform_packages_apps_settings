@@ -57,6 +57,7 @@ import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.applications.assist.ManageAssist;
+import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.dashboard.SupportFragment;
@@ -247,6 +248,7 @@ public class SettingsGateway {
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
+            BluetoothDeviceDetailsFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

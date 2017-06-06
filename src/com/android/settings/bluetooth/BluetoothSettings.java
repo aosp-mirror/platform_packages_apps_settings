@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ContentResolver;
@@ -25,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -352,12 +354,28 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
             return;
         }
         final Bundle args = new Bundle();
-        args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
-                device.getDevice().getAddress());
-        final DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
-        profileSettings.setArguments(args);
-        profileSettings.show(getFragmentManager(),
-                DeviceProfilesSettings.class.getSimpleName());
+        Context context = getActivity();
+        boolean useDetailPage = FeatureFactory.getFactory(context).getBluetoothFeatureProvider(
+                context).isDeviceDetailPageEnabled();
+        if (!useDetailPage) {
+            // Old version - uses a dialog.
+            args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
+                    device.getDevice().getAddress());
+            final DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
+            profileSettings.setArguments(args);
+            profileSettings.show(getFragmentManager(),
+                    DeviceProfilesSettings.class.getSimpleName());
+        } else {
+            // New version - uses a separate screen.
+            args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
+                    device.getDevice().getAddress());
+            BluetoothDeviceDetailsFragment fragment = new BluetoothDeviceDetailsFragment();
+            final SettingsActivity activity =
+                    (SettingsActivity) BluetoothSettings.this.getActivity();
+            activity.startPreferencePanel(this,
+                    BluetoothDeviceDetailsFragment.class.getName(), args,
+                    R.string.device_details_title, null, null, 0);
+        }
     };
 
     /**

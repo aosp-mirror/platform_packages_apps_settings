@@ -117,4 +117,19 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type) {
         return false;
     }
+
+    @Override
+    public String getEnhancedEstimateDebugString(String timeRemaining) {
+        return null;
+    }
+
+    @Override
+    public boolean isEstimateDebugEnabled() {
+        return false;
+    }
+
+    @Override
+    public String getOldEstimateDebugString(String timeRemaining) {
+        return null;
+    }
 }

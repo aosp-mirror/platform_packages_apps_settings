@@ -54,6 +54,9 @@ public abstract class DeviceListPreferenceFragment extends
 
     private BluetoothDeviceFilter.Filter mFilter;
 
+    @VisibleForTesting
+    boolean mScanEnabled;
+
     BluetoothDevice mSelectedDevice;
 
     LocalBluetoothAdapter mLocalAdapter;
@@ -216,8 +219,25 @@ public abstract class DeviceListPreferenceFragment extends
         }
     }
 
+    @VisibleForTesting
+    void enableScanning() {
+        // LocalBluetoothAdapter already handles repeated scan requests
+        mLocalAdapter.startScanning(true);
+        mScanEnabled = true;
+    }
+
+    @VisibleForTesting
+    void disableScanning() {
+        mLocalAdapter.stopScanning();
+        mScanEnabled = false;
+    }
+
     @Override
-    public void onScanningStateChanged(boolean started) {}
+    public void onScanningStateChanged(boolean started) {
+        if (!started && mScanEnabled) {
+            mLocalAdapter.startScanning(true);
+        }
+    }
 
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {}

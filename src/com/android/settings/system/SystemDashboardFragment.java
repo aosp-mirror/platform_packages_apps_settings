@@ -55,6 +55,11 @@ public class SystemDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_system_dashboard;
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
     }

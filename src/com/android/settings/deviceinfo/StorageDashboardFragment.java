@@ -113,6 +113,11 @@ public class StorageDashboardFragment extends DashboardFragment
         getLoaderManager().initLoader(VOLUME_SIZE_JOB_ID, Bundle.EMPTY, new VolumeSizeCallbacks());
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_storage_dashboard;
+    }
+
     private void onReceivedSizes() {
         if (mStorageInfo == null || mAppsResult == null) {
             return;

@@ -74,6 +74,11 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_night_display;
+    }
+
+    @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
 

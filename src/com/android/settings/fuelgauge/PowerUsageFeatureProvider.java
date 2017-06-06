@@ -91,4 +91,25 @@ public interface PowerUsageFeatureProvider {
      * Check whether a specific anomaly detector is enabled
      */
     boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type);
+
+    /**
+     * Checks whether debugging should be enabled for battery estimates.
+     * @return
+     */
+    boolean isEstimateDebugEnabled();
+
+    /**
+     * Converts the provided string containing the remaining time into a debug string for enhanced
+     * estimates.
+     * @param timeRemaining
+     * @return A string containing the estimate and a label indicating it is an enhanced estimate
+     */
+    String getEnhancedEstimateDebugString(String timeRemaining);
+
+    /**
+     * Converts the provided string containing the remaining time into a debug string.
+     * @param timeRemaining
+     * @return A string containing the estimate and a label indicating it is a normal estimate
+     */
+    String getOldEstimateDebugString(String timeRemaining);
 }

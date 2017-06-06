@@ -1,0 +1,89 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.bluetooth;
+
+import android.content.Context;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceScreen;
+
+import com.android.settings.core.PreferenceController;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
+
+/**
+ * This class provides common lifecycle and bluetooth device event registration for Bluetooth device
+ * details controllers.
+ */
+public abstract class BluetoothDetailsController extends PreferenceController
+        implements CachedBluetoothDevice.Callback, LifecycleObserver, OnPause, OnResume {
+
+    protected final Context mContext;
+    protected final PreferenceFragment mFragment;
+    protected final CachedBluetoothDevice mCachedDevice;
+
+    public BluetoothDetailsController(Context context, PreferenceFragment fragment,
+            CachedBluetoothDevice device, Lifecycle lifecycle) {
+        super(context);
+        mContext = context;
+        mFragment = fragment;
+        mCachedDevice = device;
+        lifecycle.addObserver(this);
+    }
+
+    @Override
+    public void onPause() {
+        mCachedDevice.unregisterCallback(this);
+    }
+
+    @Override
+    public void onResume() {
+        mCachedDevice.registerCallback(this);
+        refresh();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
+    }
+
+    @Override
+    public void onDeviceAttributesChanged() {
+        refresh();
+    }
+
+    @Override
+    public final void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        init(screen);
+    }
+
+    /**
+     * This is a method to do one-time initialization when the screen is first created, such as
+     * adding preferences.
+     * @param screen the screen where this controller's preferences should be added
+     */
+    protected abstract void init(PreferenceScreen screen);
+
+    /**
+     * This method is called when something about the bluetooth device has changed, and this object
+     * should update the preferences it manages based on the new state.
+     */
+    protected abstract void refresh();
+}

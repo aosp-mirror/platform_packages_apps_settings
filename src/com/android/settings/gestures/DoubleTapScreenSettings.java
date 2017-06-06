@@ -53,6 +53,11 @@ public class DoubleTapScreenSettings extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_double_tap_screen;
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
     }

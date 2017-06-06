@@ -68,6 +68,11 @@ public class LockscreenDashboardFragment extends DashboardFragment
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_lockscreen;
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
