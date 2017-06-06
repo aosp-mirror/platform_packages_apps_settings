@@ -16,6 +16,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -34,6 +35,8 @@ import com.android.settings.Utils;
  */
 public class DonutView extends View {
     private static final int TOP = -90;
+    // From manual testing, this is the longest we can go without visual errors.
+    private static final int LINE_CHARACTER_LIMIT = 10;
     private float mStrokeWidth;
     private float mDeviceDensity;
     private int mPercent;
@@ -73,16 +76,19 @@ public class DonutView extends View {
         mFilledArc.setColor(Utils.getDefaultColor(mContext, R.color.meter_consumed_color));
         mFilledArc.setColorFilter(mAccentColorFilter);
 
+        Resources resources = context.getResources();
         mTextPaint = new TextPaint();
         mTextPaint.setColor(Utils.getColorAccent(getContext()));
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextSize(14f * mDeviceDensity);
+        mTextPaint.setTextSize(
+                resources.getDimension(R.dimen.storage_donut_view_label_text_size));
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
         mBigNumberPaint = new TextPaint();
         mBigNumberPaint.setColor(Utils.getColorAccent(getContext()));
         mBigNumberPaint.setAntiAlias(true);
-        mBigNumberPaint.setTextSize(30f * mDeviceDensity);
+        mBigNumberPaint.setTextSize(
+                resources.getDimension(R.dimen.storage_donut_view_percent_text_size));
         mBigNumberPaint.setTextAlign(Paint.Align.CENTER);
     }
 
@@ -136,6 +142,13 @@ public class DonutView extends View {
         mPercent = percent;
         mPercentString = Utils.formatPercentage(mPercent);
         mFullString = getContext().getString(R.string.storage_percent_full);
+        if (mFullString.length() > LINE_CHARACTER_LIMIT) {
+            mTextPaint.setTextSize(
+                    getContext()
+                            .getResources()
+                            .getDimension(
+                                    R.dimen.storage_donut_view_shrunken_label_text_size));
+        }
         invalidate();
     }
 
