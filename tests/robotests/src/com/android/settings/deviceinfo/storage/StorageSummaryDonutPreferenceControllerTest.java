@@ -41,6 +41,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
@@ -57,7 +58,11 @@ import static com.android.settings.TestUtils.MEGABYTE;
 import static com.android.settings.TestUtils.GIGABYTE;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {
+        SettingsShadowResources.class,
+        SettingsShadowResources.SettingsShadowTheme.class
+})
 public class StorageSummaryDonutPreferenceControllerTest {
     private Context mContext;
     private StorageSummaryDonutPreferenceController mController;
