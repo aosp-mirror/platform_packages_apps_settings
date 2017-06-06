@@ -20,21 +20,27 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.lifecycle.Lifecycle;
 
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_double_twist_video";
     private final String mDoubleTwistPrefKey;
+    private final UserManager mUserManager;
 
     public DoubleTwistPreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, lifecycle);
         mDoubleTwistPrefKey = key;
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override
@@ -55,9 +61,14 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean enabled = (boolean) newValue;
+        final int enabled = (boolean) newValue ? 1 : 0;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
+                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled);
+        final int managedProfileUserId = getManagedProfileUserId();
+        if (managedProfileUserId != UserHandle.USER_NULL) {
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled, managedProfileUserId);
+        }
         return true;
     }
 
@@ -66,6 +77,11 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
         final int doubleTwistEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
         return doubleTwistEnabled != 0;
+    }
+
+    @VisibleForTesting
+    int getManagedProfileUserId() {
+        return Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
     }
 
     private boolean hasSensor(int nameResId, int vendorResId) {

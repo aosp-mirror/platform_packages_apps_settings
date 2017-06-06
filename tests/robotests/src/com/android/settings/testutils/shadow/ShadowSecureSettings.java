@@ -68,4 +68,8 @@ public class ShadowSecureSettings {
         Integer value = (Integer) mValueMap.get(name);
         return value == null ? defaultValue : value;
     }
+
+    public static void clear() {
+        mValueMap.clear();
+    }
 }

@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
@@ -27,6 +28,7 @@ import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -43,6 +45,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
     private final SwitchWidgetController mSwitchWidget;
     private final WifiManager mWifiManager;
+    private final ConnectivityManagerWrapper mConnectivityManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private Context mContext;
@@ -76,12 +79,21 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
     private static final int EVENT_UPDATE_INDEX = 0;
 
     public WifiEnabler(Context context, SwitchWidgetController switchWidget,
-            MetricsFeatureProvider metricsFeatureProvider) {
+        MetricsFeatureProvider metricsFeatureProvider) {
+        this(context, switchWidget, metricsFeatureProvider, new ConnectivityManagerWrapper(
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)));
+    }
+
+    @VisibleForTesting
+    WifiEnabler(Context context, SwitchWidgetController switchWidget,
+            MetricsFeatureProvider metricsFeatureProvider,
+            ConnectivityManagerWrapper connectivityManagerWrapper) {
         mContext = context;
         mSwitchWidget = switchWidget;
         mSwitchWidget.setListener(this);
         mMetricsFeatureProvider = metricsFeatureProvider;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mConnectivityManager = connectivityManagerWrapper;
 
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         // The order matters! We really should not depend on this. :(
@@ -198,7 +210,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
         // Disable tethering if enabling Wifi
         if (mayDisableTethering(isChecked)) {
-            mWifiManager.setWifiApEnabled(null, false);
+            mConnectivityManager.stopTethering(ConnectivityManager.TETHERING_WIFI);
         }
         if (isChecked) {
             mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_ON);
