@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 import org.junit.Before;
 import org.junit.Test;

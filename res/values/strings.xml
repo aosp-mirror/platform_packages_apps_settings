@@ -31,6 +31,8 @@
     <string name="dlg_switch">Switch</string>
 
     <!-- Device Info --> <skip />
+    <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
+    <string name="device_info_default">Unknown</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
     <plurals name="show_dev_countdown">
         <item quantity="one">You are now <xliff:g id="step_count">%1$d</xliff:g> step away from being a developer.</item>
@@ -1882,6 +1884,8 @@
     <string name="wifi_do_not_validate_eap_server">Do not validate</string>
     <!-- Warning message displayed if user choses not to validate the EAP server -->
     <string name="wifi_do_not_validate_eap_server_warning">No certificate specified. Your connection will not be private.</string>
+    <!-- Warning message displayed if network name (ssid) is too long -->
+    <string name="wifi_ssid_too_long">Network name is too long.</string>
     <!-- Warning message displayed if user does not specify a domain for the CA certificate.
          Only displayed if the user also chooses to use system certificates. -->
     <string name="wifi_no_domain_warning">Must specify a domain.</string>
@@ -3387,10 +3391,16 @@
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_password_header">Choose your password</string>
+    <!-- Header on first screen of choose password/PIN as backup for fingerprint flow [CHAR LIMIT=30] -->
+    <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pattern_header">Choose your pattern</string>
+    <!-- Header on first screen of choose pattern as backup for fingerprint flow [CHAR LIMIT=30] -->
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint">To use fingerprint, set pattern</string>
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pin_header">Choose your PIN</string>
+    <!-- Header on first screen of choose password/PIN as backup for fingerprint flow [CHAR LIMIT=30] -->
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
     <!-- Header on password confirm screen [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_password_header">Confirm your password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
@@ -6120,7 +6130,7 @@
     <string name="help_label">Help &amp; feedback</string>
 
     <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
-    <string name="support_summary">Help articles, phone &amp; chat support</string>
+    <string name="support_summary">Help articles, phone &amp; chat, getting started</string>
 
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
@@ -6181,6 +6191,8 @@
     <string name="help_url_location_access" translatable="false"></string>
     <!-- Help URL, Security settings [DO NOT TRANSLATE] -->
     <string name="help_url_security" translatable="false"></string>
+    <!-- Help URL, Encryption settings [DO NOT TRANSLATE] -->
+    <string name="help_url_encryption" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
@@ -6197,6 +6209,26 @@
     <string name="help_url_font_size" translatable="false"></string>
     <!-- Help URL, Display size [DO NOT TRANSLATE] -->
     <string name="help_url_display_size" translatable="false"></string>
+
+    <string name="help_url_network_dashboard" translatable="false"></string>
+    <string name="help_url_connected_devices" translatable="false"></string>
+    <string name="help_url_apps_and_notifications" translatable="false"></string>
+    <string name="help_url_night_display" translatable="false"></string>
+    <string name="help_url_screen_saver" translatable="false"></string>
+    <string name="help_url_pickup_gesture" translatable="false"></string>
+    <string name="help_url_storage_dashboard" translatable="false"></string>
+    <string name="help_url_lockscreen" translatable="false"></string>
+    <string name="help_url_trust_agent" translatable="false"></string>
+    <string name="help_url_usage_access" translatable="false"></string>
+    <string name="help_url_screen_pinning" translatable="false"></string>
+    <string name="help_url_user_and_account_dashboard" translatable="false"></string>
+    <string name="help_url_accessibility_shortcut" translatable="false"></string>
+    <string name="help_url_magnification" translatable="false"></string>
+    <string name="help_url_color_correction" translatable="false"></string>
+    <string name="help_url_autoclick" translatable="false"></string>
+    <string name="help_url_system_dashboard" translatable="false"></string>
+    <string name="help_url_double_tap_screen" translatable="false"></string>
+    <string name="help_url_account_detail" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -8350,7 +8382,7 @@
     <!-- Setting tab title for all setting options. [CHAR LIMIT=20] -->
     <string name="page_tab_title_summary">All</string>
     <!-- Setting tab title for support setting options. [CHAR LIMIT=20] -->
-    <string name="page_tab_title_support">Support</string>
+    <string name="page_tab_title_support">Support &amp; tips</string>
 
     <!-- Summary of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
     <string name="density_pixel_summary" translatable="false"><xliff:g name="count" example="320">%1$s</xliff:g> dp</string>

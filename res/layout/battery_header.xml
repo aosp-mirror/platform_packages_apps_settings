@@ -17,7 +17,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/app_snippet"
+    android:id="@+id/battery_entity_header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -46,6 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"/>
+
+        <TextView
+            android:id="@+id/summary2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
     </LinearLayout>

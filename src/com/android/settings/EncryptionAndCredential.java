@@ -168,7 +168,7 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
 
     @Override
     protected int getHelpResource() {
-        return R.string.help_url_security;
+        return R.string.help_url_encryption;
     }
 
     /**

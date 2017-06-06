@@ -510,7 +510,7 @@ public class BatteryHistoryChart extends View {
             mInfo = info;
             mDrainString = "";
             mChargeDurationString = "";
-            setContentDescription(mInfo.chargeLabelString);
+            setContentDescription(mInfo.chargeLabel);
 
             int pos = 0;
             int lastInteresting = 0;
@@ -589,7 +589,8 @@ public class BatteryHistoryChart extends View {
         mMaxPercentLabelStringWidth = (int)mTextPaint.measureText(mMaxPercentLabelString);
         mMinPercentLabelStringWidth = (int)mTextPaint.measureText(mMinPercentLabelString);
         mDrainStringWidth = (int)mHeaderTextPaint.measureText(mDrainString);
-        mChargeLabelStringWidth = (int)mHeaderTextPaint.measureText(mInfo.chargeLabelString);
+        mChargeLabelStringWidth = (int) mHeaderTextPaint.measureText(
+                mInfo.chargeLabel.toString());
         mChargeDurationStringWidth = (int)mHeaderTextPaint.measureText(mChargeDurationString);
         mTextAscent = (int)mTextPaint.ascent();
         mTextDescent = (int)mTextPaint.descent();
@@ -1211,8 +1212,9 @@ public class BatteryHistoryChart extends View {
 
         int headerTop = -mHeaderTextAscent + (mHeaderTextDescent-mHeaderTextAscent)/3;
         mHeaderTextPaint.setTextAlign(textAlignLeft);
-        if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mInfo.chargeLabelString);
-        canvas.drawText(mInfo.chargeLabelString, textStartX, headerTop, mHeaderTextPaint);
+        if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mInfo.chargeLabel);
+        canvas.drawText(mInfo.chargeLabel.toString(), textStartX, headerTop,
+                mHeaderTextPaint);
         int stringHalfWidth = mChargeDurationStringWidth / 2;
         if (layoutRtl) stringHalfWidth = -stringHalfWidth;
         int headerCenter = ((width-mChargeDurationStringWidth-mDrainStringWidth)/2)

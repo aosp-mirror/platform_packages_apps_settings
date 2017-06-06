@@ -17,10 +17,13 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -29,7 +32,11 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
+import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,9 +46,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
@@ -49,7 +60,8 @@ import static org.mockito.Mockito.spy;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class
+                ShadowDynamicIndexableContentMonitor.class,
+                ShadowEntityHeaderController.class
         })
 public class BatteryHeaderPreferenceControllerTest {
     private static final int BATTERY_LEVEL = 60;
@@ -57,25 +69,36 @@ public class BatteryHeaderPreferenceControllerTest {
     private static final String BATTERY_STATUS = "Charging";
 
     @Mock
+    private Activity mActivity;
+    @Mock
+    private PreferenceFragment mPreferenceFragment;
+    @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private BatteryInfo mBatteryInfo;
+    @Mock
+    private EntityHeaderController mEntityHeaderController;
     private BatteryHeaderPreferenceController mController;
     private Context mContext;
     private BatteryMeterView mBatteryMeterView;
     private TextView mTimeText;
     private TextView mSummary;
+    private TextView mSummary2;
     private LayoutPreference mBatteryLayoutPref;
     private Intent mBatteryIntent;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mLifecycle = new Lifecycle();
         mContext = spy(RuntimeEnvironment.application);
         mBatteryMeterView = new BatteryMeterView(mContext);
         mTimeText = new TextView(mContext);
         mSummary = new TextView(mContext);
+        ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
+        mSummary2 = new TextView(mContext);
 
         mBatteryIntent = new Intent();
         mBatteryIntent.putExtra(BatteryManager.EXTRA_LEVEL, BATTERY_LEVEL);
@@ -88,10 +111,17 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
 
-        mController = new BatteryHeaderPreferenceController(mContext);
+        mController = new BatteryHeaderPreferenceController(
+                mContext, mActivity, mPreferenceFragment, mLifecycle);
         mController.mBatteryMeterView = mBatteryMeterView;
         mController.mTimeText = mTimeText;
-        mController.mSummary = mSummary;
+        mController.mSummary1 = mSummary;
+        mController.mSummary2 = mSummary2;
+    }
+
+    @After
+    public void tearDown() {
+        ShadowEntityHeaderController.reset();
     }
 
     @Test
@@ -133,5 +163,16 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.updateHeaderPreference(mBatteryInfo);
 
         assertThat(mSummary.getText()).isEqualTo(BATTERY_STATUS);
+    }
+
+    @Test
+    public void testOnStart_shouldStyleActionBar() {
+        when(mEntityHeaderController.setRecyclerView(nullable(RecyclerView.class), eq(mLifecycle)))
+                .thenReturn(mEntityHeaderController);
+
+        mController.displayPreference(mPreferenceScreen);
+        mLifecycle.onStart();
+
+        verify(mEntityHeaderController).styleActionBar(mActivity);
     }
 }

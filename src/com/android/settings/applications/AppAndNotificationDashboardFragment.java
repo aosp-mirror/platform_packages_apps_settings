@@ -54,6 +54,11 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_apps_and_notifications;
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.app_and_notification;
     }

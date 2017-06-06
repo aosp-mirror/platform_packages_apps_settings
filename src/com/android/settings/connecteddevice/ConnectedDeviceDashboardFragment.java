@@ -55,6 +55,11 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_connected_devices;
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.connected_devices;
     }
