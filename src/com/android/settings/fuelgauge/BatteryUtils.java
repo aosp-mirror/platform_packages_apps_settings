@@ -41,6 +41,7 @@ import java.util.List;
  * Utils for battery operation
  */
 public class BatteryUtils {
+    public static final int UID_NULL = -1;
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.FOREGROUND,
             StatusType.BACKGROUND,
@@ -272,6 +273,22 @@ public class BatteryUtils {
             long currentTimeMs) {
         return currentTimeMs - batteryStatsHelper.getStats().getStartClockTime();
 
+    }
+
+    /**
+     * Find package uid from package name
+     *
+     * @param packageName used to find the uid
+     * @return uid for packageName, or {@link #UID_NULL} if exception happens or
+     * {@code packageName} is null
+     */
+    public int getPackageUid(String packageName) {
+        try {
+            return packageName == null ? UID_NULL : mPackageManager.getPackageUid(packageName,
+                    PackageManager.GET_META_DATA);
+        } catch (PackageManager.NameNotFoundException e) {
+            return UID_NULL;
+        }
     }
 
     public long convertUsToMs(long timeUs) {

@@ -108,4 +108,14 @@ public class AnomalyDetectionPolicy {
         wakeupAlarmThreshold = mParserWrapper.getLong(KEY_WAKEUP_ALARM_THRESHOLD, 60);
     }
 
+    public boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type) {
+        switch (type) {
+            case Anomaly.AnomalyType.WAKE_LOCK:
+                return wakeLockDetectionEnabled;
+            case Anomaly.AnomalyType.WAKEUP_ALARM:
+                return wakeupAlarmDetectionEnabled;
+            default:
+                return false; // Disabled when no this type
+        }
+    }
 }
