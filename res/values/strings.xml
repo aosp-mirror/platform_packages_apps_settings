@@ -6755,8 +6755,11 @@
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
 
+    <!-- Notification Settings: Title for an individual app's notification settings. [CHAR LIMIT=30] -->
+    <string name="notifications_title">Notifications</string>
+
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
-    <string name="app_notifications_title">Notifications</string>
+    <string name="app_notifications_title">App notifications</string>
 
     <!-- [CHAR LIMIT=100] Notification channel title -->
     <string name="notification_channel_title">Notification category</string>
@@ -6808,6 +6811,20 @@
 
     <!-- [CHAR LIMIT=180] Notification importance summary -->
     <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
+
+    <!-- Channel summaries for the app notification page -->
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
+    <string name="notification_channel_summary_min">Low importance</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level title -->
+    <string name="notification_channel_summary_low">Medium importance</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level title -->
+    <string name="notification_channel_summary_default">High importance</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
+    <string name="notification_channel_summary_high">Urgent importance</string>
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Notification assistant</string>
