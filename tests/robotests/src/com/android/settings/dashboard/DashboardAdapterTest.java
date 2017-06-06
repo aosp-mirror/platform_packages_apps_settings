@@ -19,23 +19,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Icon;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
-import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -54,7 +47,6 @@ import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -108,53 +100,6 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testOnBindViewHolder_spacer_noSuggestions_noConditions() {
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNull();
-    }
-
-    @Test
-    public void testOnBindViewHolder_spacer_suggestion_noConditions() {
-        setupSuggestions(makeSuggestions("pkg1"));
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNotNull();
-        assertThat(holder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
-    }
-
-    @Test
-    public void testOnBindViewHolder_spacer_noSuggestion_condition() {
-        makeCondition();
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNotNull();
-        assertThat(holder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
-    }
-
-    @Test
-    public void testOnBindViewHolder_spacer_suggestion_condition() {
-        setupSuggestions(makeSuggestions("pkg1"));
-        makeCondition();
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNotNull();
-        assertThat(holder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
-    }
-
-    @Test
     public void testSetConditions_AfterSetConditions_ExpandedConditionNull() {
         mDashboardAdapter.onExpandClick(mView);
         assertThat(mDashboardAdapter.mDashboardData.getExpandedCondition()).isEqualTo(mCondition);
@@ -164,7 +109,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_NotExpanded() {
-        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         verify(mFactory.metricsFeatureProvider, times(2)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
                 mActionPackageCaptor.capture());
@@ -179,7 +124,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_NotExpandedAndPaused() {
-        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         mDashboardAdapter.onPause();
         verify(mFactory.metricsFeatureProvider, times(4)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
@@ -196,7 +141,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_Expanded() {
-        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
@@ -215,7 +160,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedAndPaused() {
-        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
@@ -238,7 +183,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedAfterPause() {
-        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
@@ -263,7 +208,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedAfterPauseAndPausedAgain() {
-        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1", "pkg2", "pkg3"}));
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
@@ -292,7 +237,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShown() {
-        setupSuggestions(makeSuggestions("pkg1"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1"}));
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
@@ -309,7 +254,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShownAndPaused() {
-        setupSuggestions(makeSuggestions("pkg1"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1"}));
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
@@ -328,7 +273,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShownAfterPause() {
-        setupSuggestions(makeSuggestions("pkg1"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1"}));
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
@@ -348,7 +293,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShownAfterPauseAndPausedAgain() {
-        setupSuggestions(makeSuggestions("pkg1"));
+        setUpSuggestions(makeSuggestions(new String[]{"pkg1"}));
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionHeader(
                 mSuggestionHolder, mSuggestionHeaderData);
@@ -368,7 +313,7 @@ public class DashboardAdapterTest {
         assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
     }
 
-    private List<Tile> makeSuggestions(String... pkgNames) {
+    private List<Tile> makeSuggestions(String[] pkgNames) {
         final List<Tile> suggestions = new ArrayList<>();
         for (String pkgName : pkgNames) {
             Tile suggestion = new Tile();
@@ -379,31 +324,11 @@ public class DashboardAdapterTest {
         return suggestions;
     }
 
-    private void setupSuggestions(List<Tile> suggestions) {
+    private void setUpSuggestions(List<Tile> suggestions) {
         mDashboardAdapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
         mSuggestionHolder = mDashboardAdapter.onCreateViewHolder(
                 new FrameLayout(RuntimeEnvironment.application),
-                mDashboardAdapter.getItemViewType(1));
+                mDashboardAdapter.getItemViewType(0));
     }
 
-    private void makeCondition() {
-        final List<Condition> conditions = new ArrayList<>();
-        Condition condition = mock(Condition.class);
-        when(condition.shouldShow()).thenReturn(true);
-        conditions.add(condition);
-        mDashboardAdapter.setConditions(conditions);
-    }
-
-    private void makeCategory() {
-        List<DashboardCategory> categories = new ArrayList<>();
-        categories.add(new DashboardCategory());
-        mDashboardAdapter.setCategory(categories);
-    }
-
-    private DashboardAdapter.DashboardItemHolder setupSpacer() {
-        Context context = RuntimeEnvironment.application;
-        final View view = LayoutInflater.from(context)
-                .inflate(R.layout.dashboard_header_spacer, new LinearLayout(context), false);
-        return new DashboardAdapter.DashboardItemHolder(view);
-    }
 }
