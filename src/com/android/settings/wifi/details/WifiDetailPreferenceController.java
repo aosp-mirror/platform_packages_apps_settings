@@ -16,6 +16,7 @@
 package com.android.settings.wifi.details;
 
 import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import android.app.Fragment;
@@ -165,9 +166,24 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
             }
         }
 
+        private boolean hasCapabilityChanged(NetworkCapabilities nc, int cap) {
+            // If this is the first time we get NetworkCapabilities, report that something changed.
+            if (mNetworkCapabilities == null) return true;
+
+            // nc can never be null, see ConnectivityService#callCallbackForRequest.
+            return mNetworkCapabilities.hasCapability(cap) != nc.hasCapability(cap);
+        }
+
         @Override
         public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
+            // If the network just validated or lost Internet access, refresh network state.
+            // Don't do this on every NetworkCapabilities change because refreshNetworkState
+            // sends IPCs to the system server from the UI thread, which can cause jank.
             if (network.equals(mNetwork) && !nc.equals(mNetworkCapabilities)) {
+                if (hasCapabilityChanged(nc, NET_CAPABILITY_VALIDATED) ||
+                        hasCapabilityChanged(nc, NET_CAPABILITY_CAPTIVE_PORTAL)) {
+                    refreshNetworkState();
+                }
                 mNetworkCapabilities = nc;
                 updateIpLayerInfo();
             }

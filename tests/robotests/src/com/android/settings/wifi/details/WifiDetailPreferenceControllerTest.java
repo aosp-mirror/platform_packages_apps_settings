@@ -445,6 +445,17 @@ public class WifiDetailPreferenceControllerTest {
         mCallbackCaptor.getValue().onLinkPropertiesChanged(mockNetwork, new LinkProperties(lp));
     }
 
+    private void updateNetworkCapabilities(NetworkCapabilities nc) {
+        mCallbackCaptor.getValue().onCapabilitiesChanged(mockNetwork, new NetworkCapabilities(nc));
+    }
+
+    private NetworkCapabilities makeNetworkCapabilities() {
+        NetworkCapabilities nc = new NetworkCapabilities();
+        nc.clearAll();
+        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        return nc;
+    }
+
     private void verifyDisplayedIpv6Addresses(InOrder inOrder, LinkAddress... addresses) {
         String text = Arrays.stream(addresses)
                 .map(address -> asString(address))
@@ -505,6 +516,45 @@ public class WifiDetailPreferenceControllerTest {
                 Constants.IPV4_DNS1.getHostAddress() + "," +
                 Constants.IPV4_DNS2.getHostAddress());
         inOrder.verify(mockDnsPref).setVisible(true);
+    }
+
+    @Test
+    public void onCapabilitiesChanged_callsRefreshIfNecessary() {
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        when(mockConnectivityManager.getNetworkCapabilities(mockNetwork))
+                .thenReturn(new NetworkCapabilities(nc));
+
+        String summary = "Connected, no Internet";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+
+        InOrder inOrder = inOrder(mockConnectionDetailPref);
+        mController.displayPreference(mockScreen);
+        mController.onResume();
+        inOrder.verify(mockConnectionDetailPref).setTitle(summary);
+
+        // Check that an irrelevant capability update does not update the access point summary, as
+        // doing so could cause unnecessary jank...
+        summary = "Connected";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref, never()).setTitle(any());
+
+        // ... but that if the network validates, then we do refresh.
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref).setTitle(summary);
+
+        summary = "Connected, no Internet";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+
+        // Another irrelevant update won't cause the UI to refresh...
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref, never()).setTitle(any());
+
+        // ... but if the network is no longer validated, then we display "connected, no Internet".
+        nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockConnectionDetailPref).setTitle(summary);
     }
 
     @Test
@@ -589,7 +639,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void networkDisconnectdState_shouldFinishActivity() {
+    public void networkDisconnectedState_shouldFinishActivity() {
         mController.onResume();
 
         when(mockConnectivityManager.getNetworkInfo(any(Network.class))).thenReturn(null);
@@ -644,22 +694,16 @@ public class WifiDetailPreferenceControllerTest {
 
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
 
-        NetworkCapabilities nc = new NetworkCapabilities();
-        nc.clearAll();
-        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
-
-        NetworkCallback callback = mCallbackCaptor.getValue();
-        callback.onCapabilitiesChanged(mockNetwork, nc);
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        updateNetworkCapabilities(nc);
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
 
-        nc = new NetworkCapabilities(nc);
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
-        callback.onCapabilitiesChanged(mockNetwork, nc);
+        updateNetworkCapabilities(nc);
         inOrder.verify(mockSignInButton).setVisibility(View.VISIBLE);
 
-        nc = new NetworkCapabilities(nc);
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
-        callback.onCapabilitiesChanged(mockNetwork, nc);
+        updateNetworkCapabilities(nc);
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
     }
 
