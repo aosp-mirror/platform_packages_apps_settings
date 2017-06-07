@@ -22,6 +22,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -90,6 +91,9 @@ public class DonutView extends View {
         mBigNumberPaint.setTextSize(
                 resources.getDimension(R.dimen.storage_donut_view_percent_text_size));
         mBigNumberPaint.setTextAlign(Paint.Align.CENTER);
+        mBigNumberPaint.setTypeface(Typeface.create(
+                getContext().getString(com.android.internal.R.string.config_headlineFontFamily),
+                Typeface.NORMAL));
     }
 
     @Override
