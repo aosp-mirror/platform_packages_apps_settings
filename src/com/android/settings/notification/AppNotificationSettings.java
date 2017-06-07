@@ -145,6 +145,15 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void populateChannelList() {
+        if (!mChannelGroups.isEmpty()) {
+            // If there's anything in mChannelGroups, we've called populateChannelList twice.
+            // Clear out existing channels and log.
+            Log.w(TAG, "Notification channel group posted twice to settings - old size " +
+                    mChannelGroups.size() + ", new size " + mChannelGroupList.size());
+            for (Preference p : mChannelGroups) {
+                getPreferenceScreen().removePreference(p);
+            }
+        }
         if (mChannelGroupList.isEmpty()) {
             PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
             groupCategory.setTitle(R.string.notification_channels);
