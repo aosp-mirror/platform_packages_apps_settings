@@ -129,7 +129,7 @@ public class DisplaySettings extends DashboardFragment {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = new ArrayList<>();
+                    List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(KEY_DISPLAY_SIZE);
                     return keys;
                 }
