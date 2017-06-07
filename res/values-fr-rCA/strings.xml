@@ -23,7 +23,6 @@
     <string name="deny" msgid="6947806159746484865">"Refusers"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Fermer"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Changer"</string>
-    <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">Plus qu’<xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir un développeur.</item>
       <item quantity="other">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étapes pour devenir un développeur.</item>
@@ -274,7 +273,7 @@
     <string name="airplane_mode" msgid="8837269988154128601">"Mode avion"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Plus"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Sans fil et réseaux"</string>
-    <string name="radio_controls_summary" msgid="1838624369870907268">"Gérer le Wi-Fi, le Bluetooth, le mode Avion, les réseaux mobiles et les VPN"</string>
+    <string name="radio_controls_summary" msgid="1838624369870907268">"Gérer le Wi-Fi, le Bluetooth, le mode Avion, les réseaux mobiles et les RPV"</string>
     <string name="cellular_data_title" msgid="6835451574385496662">"Données cellulaires"</string>
     <string name="calls_title" msgid="3544471959217176768">"Appels"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"Messages texte"</string>
@@ -2395,7 +2394,7 @@
     <string name="vpn_save" msgid="4233484051644764510">"Enregistrer"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Connexion"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"Remplacer"</string>
-    <string name="vpn_edit" msgid="8647191407179996943">"Modifier le profil VPN"</string>
+    <string name="vpn_edit" msgid="8647191407179996943">"Modifier le profil RPV"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Supprimer"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Se connecter à <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"Déconnecter ce RPV?"</string>
@@ -2412,19 +2411,19 @@
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> n\'est pas en mesure de se connecter"</string>
     <string name="vpn_cant_connect_message" msgid="1352832123114214283">"Cette application ne prend pas en charge le RPV permanent"</string>
     <string name="vpn_title" msgid="6317731879966640551">"RPV"</string>
-    <string name="vpn_create" msgid="5628219087569761496">"Ajouter un profil VPN"</string>
+    <string name="vpn_create" msgid="5628219087569761496">"Ajouter un profil RPV"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Modifier le profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Supprimer le profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN permanent"</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"RPV permanent"</string>
     <string name="vpn_no_vpns_added" msgid="5002741367858707244">"Aucun RPV ajouté"</string>
     <string name="vpn_always_on_summary" msgid="2821344524094363617">"Rester connecté au RPV en permanence"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"Non compatible avec cette application"</string>
     <string name="vpn_always_on_summary_active" msgid="8800736191241875669">"RPV toujours actif : activé"</string>
     <string name="vpn_require_connection" msgid="8388183166574269666">"Bloquer les connexions sans RPV"</string>
     <string name="vpn_require_connection_title" msgid="159053539340576331">"Exiger une connexion RPV?"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Sélectionnez un profil VPN auquel rester connecté en permanence. Le trafic réseau ne sera autorisé que lorsque vous serez connecté à ce VPN."</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Sélectionnez un profil RPV auquel rester connecté en permanence. Le trafic réseau ne sera autorisé que lorsque vous serez connecté à ce RPV."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Aucun"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Le VPN permanent nécessite une adresse IP pour le serveur et le DNS."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Le RPV permanent nécessite une adresse IP pour le serveur et le DNS."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Aucune connexion réseau. Veuillez réessayer plus tard."</string>
     <string name="vpn_disconnected" msgid="280531508768927471">"Déconnecté du RPV"</string>
     <string name="vpn_disconnected_summary" msgid="3082851661207900606">"Aucun"</string>
@@ -2778,8 +2777,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notifications"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Paramètres avancés"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notifications professionnelles"</string>
-    <!-- no translation found for notification_badging_title (5938709971403474078) -->
-    <skip />
+    <string name="notification_badging_title" msgid="5938709971403474078">"Autoriser points de notification"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Faire clignoter le voyant"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"À l\'écran de verrouillage"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afficher tout le contenu des notifications"</string>
@@ -2860,10 +2858,8 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Ne jamais afficher ces notifications"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Afficher les notifications"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Ne jamais afficher les notifications dans l\'ombre ou sur des appareils périphériques"</string>
-    <!-- no translation found for notification_badge_title (6370122441168519809) -->
-    <skip />
-    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
-    <skip />
+    <string name="notification_badge_title" msgid="6370122441168519809">"Autoriser le point de notification"</string>
+    <string name="notification_channel_badge_title" msgid="2240827899882847087">"Afficher le point de notification"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignorer le mode « Ne pas déranger »"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Activer les notifications de cette application même lorsque l\'option « Ne pas déranger » est définie sur « Prioritaires uniquement »"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"À l\'écran de verrouillage"</string>
