@@ -265,6 +265,11 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockIpv6AddressesPref);
     }
 
+    private void displayAndResume() {
+        mController.displayPreference(mockScreen);
+        mController.onResume();
+    }
+
     @Test
     public void isAvailable_shouldAlwaysReturnTrue() {
         mController.displayPreference(mockScreen);
@@ -274,28 +279,28 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void securityPreference_stringShouldBeSet() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockSecurityPref).setDetailText(SECURITY);
     }
 
     @Test
     public void latestWifiInfo_shouldBeFetchedInDisplayPreference() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockWifiManager, times(1)).getConnectionInfo();
     }
 
     @Test
     public void latestNetworkInfo_shouldBeFetchedInDisplayPreference() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
     }
 
     @Test
     public void networkCallback_shouldBeRegisteredOnResume() {
-        mController.onResume();
+        displayAndResume();
 
         verify(mockConnectivityManagerWrapper, times(1)).registerNetworkCallback(
                 any(NetworkRequest.class), mCallbackCaptor.capture(), any(Handler.class));
@@ -303,7 +308,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkCallback_shouldBeUnregisteredOnPause() {
-        mController.onResume();
+        displayAndResume();
         mController.onPause();
 
         verify(mockConnectivityManager, times(1)).unregisterNetworkCallback(
@@ -315,7 +320,7 @@ public class WifiDetailPreferenceControllerTest {
         Drawable expectedIcon =
                 NetworkBadging.getWifiIcon(LEVEL, NetworkBadging.BADGING_NONE, mContext.getTheme());
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockConnectionDetailPref).setIcon(expectedIcon);
     }
@@ -325,14 +330,14 @@ public class WifiDetailPreferenceControllerTest {
         String summary = "summary";
         when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockConnectionDetailPref).setTitle(summary);
     }
 
     @Test
     public void signalStrengthPref_shouldHaveIconSet() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockSignalStrengthPref).setIcon(any(Drawable.class));
     }
@@ -342,7 +347,7 @@ public class WifiDetailPreferenceControllerTest {
         String expectedStrength =
                 mContext.getResources().getStringArray(R.array.wifi_signal)[LEVEL];
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockSignalStrengthPref).setDetailText(expectedStrength);
     }
@@ -351,7 +356,7 @@ public class WifiDetailPreferenceControllerTest {
     public void linkSpeedPref_shouldHaveDetailTextSet() {
         String expectedLinkSpeed = mContext.getString(R.string.link_speed, LINK_SPEED);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockLinkSpeedPref).setDetailText(expectedLinkSpeed);
     }
@@ -360,14 +365,14 @@ public class WifiDetailPreferenceControllerTest {
     public void linkSpeedPref_shouldNotShowIfNotSet() {
         when(mockWifiInfo.getLinkSpeed()).thenReturn(-1);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockLinkSpeedPref).setVisible(false);
     }
 
     @Test
     public void macAddressPref_shouldHaveDetailTextSet() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockMacAddressPref).setDetailText(MAC_ADDRESS);
     }
@@ -376,7 +381,7 @@ public class WifiDetailPreferenceControllerTest {
     public void ipAddressPref_shouldHaveDetailTextSet() {
         mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockIpAddressPref).setDetailText(Constants.IPV4_ADDR.getAddress().getHostAddress());
     }
@@ -387,7 +392,7 @@ public class WifiDetailPreferenceControllerTest {
         mLinkProperties.addRoute(Constants.IPV4_DEFAULT);
         mLinkProperties.addRoute(Constants.IPV4_SUBNET);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockSubnetPref).setDetailText("255.255.255.128");
         verify(mockGatewayPref).setDetailText("192.0.2.127");
@@ -398,7 +403,7 @@ public class WifiDetailPreferenceControllerTest {
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,4,4}));
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,8,8}));
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockDnsPref).setDetailText("8.8.4.4,8.8.8.8");
     }
@@ -409,7 +414,7 @@ public class WifiDetailPreferenceControllerTest {
         // nor connecting and WifiStateMachine has not reached L2ConnectedState.
         when(mockWifiManager.getCurrentNetwork()).thenReturn(null);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockActivity).finish();
     }
@@ -420,7 +425,7 @@ public class WifiDetailPreferenceControllerTest {
         reset(mockIpv6Category, mockIpAddressPref, mockSubnetPref, mockGatewayPref,
                 mockDnsPref);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockIpv6Category).setVisible(false);
         verify(mockIpAddressPref).setVisible(false);
@@ -465,8 +470,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void onLinkPropertiesChanged_updatesFields() {
-        mController.displayPreference(mockScreen);
-        mController.onResume();
+        displayAndResume();
 
         InOrder inOrder = inOrder(mockIpAddressPref, mockGatewayPref, mockSubnetPref,
                 mockDnsPref, mockIpv6Category, mockIpv6AddressesPref);
@@ -528,8 +532,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
 
         InOrder inOrder = inOrder(mockConnectionDetailPref);
-        mController.displayPreference(mockScreen);
-        mController.onResume();
+        displayAndResume();
         inOrder.verify(mockConnectionDetailPref).setTitle(summary);
 
         // Check that an irrelevant capability update does not update the access point summary, as
@@ -562,7 +565,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
         mController = newWifiDetailPreferenceController();
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockForgetButton).setVisibility(View.INVISIBLE);
     }
@@ -572,14 +575,14 @@ public class WifiDetailPreferenceControllerTest {
         when(mockWifiInfo.isEphemeral()).thenReturn(true);
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockForgetButton).setVisibility(View.VISIBLE);
     }
 
     @Test
     public void canForgetNetwork_saved() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockForgetButton).setVisibility(View.VISIBLE);
     }
@@ -590,7 +593,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockWifiInfo.isEphemeral()).thenReturn(true);
         when(mockWifiInfo.getSSID()).thenReturn(ssid);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
         mForgetClickListener.getValue().onClick(null);
 
         verify(mockWifiManager).disableEphemeralNetwork(ssid);
@@ -612,8 +615,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkStateChangedIntent_shouldRefetchInfo() {
-        mController.displayPreference(mockScreen);
-        mController.onResume();
+        displayAndResume();
 
         verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
         verify(mockWifiManager, times(1)).getConnectionInfo();
@@ -626,8 +628,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void rssiChangedIntent_shouldRefetchInfo() {
-        mController.displayPreference(mockScreen);
-        mController.onResume();
+        displayAndResume();
 
         verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
         verify(mockWifiManager, times(1)).getConnectionInfo();
@@ -640,7 +641,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkDisconnectedState_shouldFinishActivity() {
-        mController.onResume();
+        displayAndResume();
 
         when(mockConnectivityManager.getNetworkInfo(any(Network.class))).thenReturn(null);
         mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
@@ -650,8 +651,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkOnLost_shouldFinishActivity() {
-        mController.displayPreference(mockScreen);
-        mController.onResume();
+        displayAndResume();
 
         mCallbackCaptor.getValue().onLost(mockNetwork);
 
@@ -664,7 +664,7 @@ public class WifiDetailPreferenceControllerTest {
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL1);
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         List <Preference> addrs = mIpv6AddressCaptor.getAllValues();
 
@@ -680,7 +680,7 @@ public class WifiDetailPreferenceControllerTest {
     public void ipv6AddressPref_shouldNotBeSelectable() {
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         assertThat(mockIpv6AddressesPref.isSelectable()).isFalse();
     }
@@ -689,8 +689,7 @@ public class WifiDetailPreferenceControllerTest {
     public void captivePortal_shouldShowSignInButton() {
         InOrder inOrder = inOrder(mockSignInButton);
 
-        mController.displayPreference(mockScreen);
-        mController.onResume();
+        displayAndResume();
 
         inOrder.verify(mockSignInButton).setVisibility(View.INVISIBLE);
 
@@ -709,7 +708,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void testSignInButton_shouldStartCaptivePortalApp() {
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         ArgumentCaptor<OnClickListener> captor = ArgumentCaptor.forClass(OnClickListener.class);
         verify(mockSignInButton).setOnClickListener(captor.capture());
@@ -722,7 +721,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockSignInButton.getVisibility()).thenReturn(View.VISIBLE);
         when(mockForgetButton.getVisibility()).thenReturn(View.INVISIBLE);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockButtonsPref).setVisible(true);
     }
@@ -732,7 +731,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockSignInButton.getVisibility()).thenReturn(View.INVISIBLE);
         when(mockForgetButton.getVisibility()).thenReturn(View.VISIBLE);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockButtonsPref).setVisible(true);
     }
@@ -742,7 +741,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockSignInButton.getVisibility()).thenReturn(View.INVISIBLE);
         when(mockForgetButton.getVisibility()).thenReturn(View.INVISIBLE);
 
-        mController.displayPreference(mockScreen);
+        displayAndResume();
 
         verify(mockButtonsPref).setVisible(false);
     }
