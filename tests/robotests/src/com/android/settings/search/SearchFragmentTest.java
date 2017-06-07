@@ -54,6 +54,7 @@ import java.util.Set;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
@@ -90,8 +91,7 @@ public class SearchFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
     }
 
     @After
@@ -193,6 +193,22 @@ public class SearchFragmentTest {
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
         verify(mSearchResultsAdapter).initializeSearch(mQueryCaptor.capture());
         assertThat(mQueryCaptor.getValue()).isEqualTo(testQuery);
+    }
+
+    @Test
+    public void onSearchResultsDisplayed_noResult_shouldShowNoResultView() {
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = spy((SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content));
+        fragment.onSearchResultsDisplayed(0 /* count */);
+
+        assertThat(fragment.mNoResultsView.getVisibility()).isEqualTo(View.VISIBLE);
+        verify(mFeatureFactory.metricsFeatureProvider).visible(
+                any(Context.class),
+                anyInt(),
+                eq(MetricsProto.MetricsEvent.SETTINGS_SEARCH_NO_RESULT));
     }
 
     @Test

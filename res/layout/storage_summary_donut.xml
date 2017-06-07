@@ -36,10 +36,11 @@
 
         <TextView
             android:id="@android:id/title"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
             android:singleLine="true"
             android:textAlignment="viewStart"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"

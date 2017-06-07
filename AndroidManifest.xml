@@ -2614,7 +2614,6 @@
 
         <!-- Show application-level notification settings (app passed in as extras) -->
         <activity android:name="Settings$AppNotificationSettingsActivity"
-                android:label="@string/app_notifications_title"
                 android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APP_NOTIFICATION_SETTINGS" />
@@ -2630,7 +2629,6 @@
 
         <!-- Show channel-level notification settings (channel passed in as extras) -->
         <activity android:name="Settings$ChannelNotificationSettingsActivity"
-                  android:label="@string/app_notifications_title"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS" />

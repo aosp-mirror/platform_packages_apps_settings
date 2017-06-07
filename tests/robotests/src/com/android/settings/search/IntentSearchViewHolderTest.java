@@ -45,7 +45,6 @@ import java.util.Objects;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
@@ -149,6 +148,21 @@ public class IntentSearchViewHolderTest {
         SearchResult result = new Builder()
                 .setTitle(TITLE)
                 .setSummary(nonBreakingSpace)
+                .setPayload(new ResultPayload(null))
+                .setStableId(1)
+                .build();
+
+        mHolder.onBind(mFragment, result);
+
+        assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void testBindElements_dynamicSummary_visibilityIsGone() {
+        String dynamicSummary = "%s";
+        SearchResult result = new Builder()
+                .setTitle(TITLE)
+                .setSummary(dynamicSummary)
                 .setPayload(new ResultPayload(null))
                 .setStableId(1)
                 .build();

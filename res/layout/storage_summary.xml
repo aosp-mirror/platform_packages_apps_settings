@@ -30,13 +30,14 @@
         android:id="@android:id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:fontFamily="@*android:string/config_headlineFontFamily"
         android:singleLine="true"
         android:textAlignment="viewStart"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
         android:textColor="?android:attr/colorAccent"
-        android:textSize="36sp"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal" />
+        android:textSize="36sp"/>
 
     <TextView
         android:id="@android:id/summary"

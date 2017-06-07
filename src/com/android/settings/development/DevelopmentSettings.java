@@ -193,7 +193,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
     private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
-    private static final String KEY_COLOR_MODE = "color_mode";
+    private static final String KEY_COLOR_MODE = "picture_color_mode";
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 
@@ -555,7 +555,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mColorModePreference = (ColorModePreference) findPreference(KEY_COLOR_MODE);
         mColorModePreference.updateCurrentAndSupported();
-        if (mColorModePreference.getColorModeCount() < 2) {
+        if (mColorModePreference.getColorModeCount() < 2 ||
+                getContext().getDisplay().isWideColorGamut()) {
             removePreference(KEY_COLOR_MODE);
             mColorModePreference = null;
         }
