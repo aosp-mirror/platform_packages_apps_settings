@@ -62,7 +62,7 @@ public class ChartDataUsagePreference extends Preference {
 
         int top = getTop();
         chart.clearPaths();
-        chart.configureGraph(toInt(mEnd - mStart), top, false, false);
+        chart.configureGraph(toInt(mEnd - mStart), top);
         calcPoints(chart);
         chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
