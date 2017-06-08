@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.content.ContentResolver;
 import android.os.PowerManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.SparseArray;
@@ -145,6 +146,8 @@ public class PowerUsageSummaryTest {
     private LoaderManager mLoaderManager;
     @Mock
     private ContentResolver mContentResolver;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -464,6 +467,18 @@ public class PowerUsageSummaryTest {
         Robolectric.flushBackgroundThreadScheduler();
         assertThat(summary2.getText().toString().contains(NEW_ML_EST_SUFFIX));
         assertThat(summary1.getText().toString().contains(OLD_EST_SUFFIX));
+    }
+
+    @Test
+    public void testSaveInstanceState_showAllAppsRestored() {
+        Bundle bundle = new Bundle();
+        mFragment.mShowAllApps = true;
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+
+        mFragment.onSaveInstanceState(bundle);
+        mFragment.restoreSavedInstance(bundle);
+
+        assertThat(mFragment.mShowAllApps).isTrue();
     }
 
     public static class TestFragment extends PowerUsageSummary {
