@@ -19,6 +19,7 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
@@ -28,8 +29,6 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search.InstalledAppResultLoader;
-import com.android.settings.search.SearchResult;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -39,6 +38,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -157,6 +159,36 @@ public class InstalledAppResultLoaderTest {
         when(mPackageManagerWrapper.queryIntentActivitiesAsUser(
                 any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(list);
+
+        final String query = "app";
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_matchingQuery_shouldReturnSystemAppIfHomeApp() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
+        when(mPackageManagerWrapper.queryIntentActivitiesAsUser(
+                any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(null);
+
+        when(mPackageManagerWrapper.getHomeActivities(anyList())).thenAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                final List<ResolveInfo> list = (List<ResolveInfo>) invocation.getArguments()[0];
+                final ResolveInfo info = new ResolveInfo();
+                info.activityInfo = new ActivityInfo();
+                info.activityInfo.packageName = "app1";
+                list.add(info);
+                return null;
+            }
+        });
 
         final String query = "app";
 

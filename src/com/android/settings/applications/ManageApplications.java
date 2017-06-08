@@ -569,8 +569,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private void startApplicationDetailsActivity() {
         switch (mListType) {
             case LIST_TYPE_NOTIFICATION:
-                startAppInfoFragment(AppNotificationSettings.class,
-                        R.string.app_notifications_title);
+                startAppInfoFragment(AppNotificationSettings.class, R.string.notifications_title);
                 break;
             case LIST_TYPE_USAGE_ACCESS:
                 startAppInfoFragment(UsageAccessDetails.class, R.string.usage_access);

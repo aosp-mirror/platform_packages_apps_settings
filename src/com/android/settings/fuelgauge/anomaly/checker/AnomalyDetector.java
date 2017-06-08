@@ -17,11 +17,30 @@
 
 package com.android.settings.fuelgauge.anomaly.checker;
 
+import android.annotation.Nullable;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 import java.util.List;
 
 public interface AnomalyDetector {
+    /**
+     * Detect whether there is anomaly among all the applications in the device
+     *
+     * @param batteryStatsHelper used to detect the anomaly
+     * @return anomaly list
+     */
     List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper);
+
+    /**
+     * Detect whether application with {@code targetPackageName} has anomaly. When
+     * {@code targetPackageName} is null, start detection among all the applications.
+     *
+     * @param batteryStatsHelper used to detect the anomaly
+     * @param targetPackageName  represents the app need to be detected
+     * @return anomaly list
+     */
+    List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper,
+            @Nullable String targetPackageName);
 }

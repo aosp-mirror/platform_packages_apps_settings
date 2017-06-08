@@ -16,6 +16,7 @@
 package com.android.settings.wifi.details;
 
 import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import android.app.Fragment;
@@ -165,9 +166,24 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
             }
         }
 
+        private boolean hasCapabilityChanged(NetworkCapabilities nc, int cap) {
+            // If this is the first time we get NetworkCapabilities, report that something changed.
+            if (mNetworkCapabilities == null) return true;
+
+            // nc can never be null, see ConnectivityService#callCallbackForRequest.
+            return mNetworkCapabilities.hasCapability(cap) != nc.hasCapability(cap);
+        }
+
         @Override
         public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
+            // If the network just validated or lost Internet access, refresh network state.
+            // Don't do this on every NetworkCapabilities change because refreshNetworkState
+            // sends IPCs to the system server from the UI thread, which can cause jank.
             if (network.equals(mNetwork) && !nc.equals(mNetworkCapabilities)) {
+                if (hasCapabilityChanged(nc, NET_CAPABILITY_VALIDATED) ||
+                        hasCapabilityChanged(nc, NET_CAPABILITY_CAPTIVE_PORTAL)) {
+                    refreshNetworkState();
+                }
                 mNetworkCapabilities = nc;
                 updateIpLayerInfo();
             }
@@ -253,16 +269,19 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mForgetButton = (Button) mButtonsPref.findViewById(R.id.forget_button);
         mForgetButton.setText(R.string.forget);
         mForgetButton.setOnClickListener(view -> forgetNetwork());
-        updateInfo();
     }
 
     @Override
     public void onResume() {
+        // Ensure mNetwork is set before any callbacks above are delivered, since our
+        // NetworkCallback only looks at changes to mNetwork.
+        mNetwork = mWifiManager.getCurrentNetwork();
+        mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
+        mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
+        updateInfo();
+        mContext.registerReceiver(mReceiver, mFilter);
         mConnectivityManagerWrapper.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
                 mHandler);
-        // updateInfo() will be called during registration because NETWORK_STATE_CHANGED_ACTION is
-        // a sticky broadcast.
-        mContext.registerReceiver(mReceiver, mFilter);
     }
 
     @Override
@@ -277,9 +296,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
     }
 
     private void updateInfo() {
-        mNetwork = mWifiManager.getCurrentNetwork();
-        mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
-        mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
+        // No need to fetch LinkProperties and NetworkCapabilities, they are updated by the
+        // callbacks. mNetwork doesn't change except in onResume.
         mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
         mWifiInfo = mWifiManager.getConnectionInfo();
         if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {

@@ -19,16 +19,21 @@ package com.android.settings.fuelgauge.anomaly;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.UserManager;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
+import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -45,31 +50,49 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyLoaderTest {
+    private static final String PACKAGE_NAME = "com.android.settings";
+    private static final CharSequence DISPLAY_NAME = "Settings";
+    private static final int UID = 0;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private WakeLockAnomalyDetector mWakeLockAnomalyDetector;
+    @Mock
+    private WakeupAlarmAnomalyDetector mWakeupAlarmAnomalyDetector;
+    @Mock
+    private AnomalyDetectionPolicy mAnomalyDetectionPolicy;
+    @Mock
+    private UserManager mUserManager;
     private Anomaly mWakeLockAnomaly;
+    private Anomaly mWakeupAlarmAnomaly;
     private List<Anomaly> mWakeLockAnomalies;
+    private List<Anomaly> mWakeupAlarmAnomalies;
     private AnomalyLoader mAnomalyLoader;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        doReturn(true).when(mAnomalyDetectionPolicy).isAnomalyDetectorEnabled(anyInt());
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        when(mContext.getPackageManager().getPackageUid(anyString(), anyInt())).thenReturn(UID);
 
         mWakeLockAnomalies = new ArrayList<>();
-        mWakeLockAnomaly = new Anomaly.Builder()
-                .setType(Anomaly.AnomalyType.WAKE_LOCK)
-                .build();
+        mWakeLockAnomaly = createAnomaly(Anomaly.AnomalyType.WAKE_LOCK);
         mWakeLockAnomalies.add(mWakeLockAnomaly);
+        doReturn(mWakeLockAnomalies).when(mWakeLockAnomalyDetector).detectAnomalies(any(), any());
 
-        mAnomalyLoader = new AnomalyLoader(mContext, mBatteryStatsHelper);
+        mWakeupAlarmAnomalies = new ArrayList<>();
+        mWakeupAlarmAnomaly = createAnomaly(Anomaly.AnomalyType.WAKEUP_ALARM);
+        mWakeupAlarmAnomalies.add(mWakeupAlarmAnomaly);
+        doReturn(mWakeupAlarmAnomalies).when(mWakeupAlarmAnomalyDetector).detectAnomalies(any(),
+                any());
+
+        mAnomalyLoader = new AnomalyLoader(mContext, mBatteryStatsHelper, null,
+                mAnomalyDetectionPolicy);
         mAnomalyLoader.mAnomalyUtils = spy(new AnomalyUtils(mContext));
     }
 
@@ -77,12 +100,27 @@ public class AnomalyLoaderTest {
     public void testLoadInBackground_containsValidAnomalies() {
         doReturn(mWakeLockAnomalyDetector).when(mAnomalyLoader.mAnomalyUtils).getAnomalyDetector(
                 Anomaly.AnomalyType.WAKE_LOCK);
-        doReturn(mWakeLockAnomalies).when(mWakeLockAnomalyDetector).detectAnomalies(any());
-        when(mFeatureFactory.powerUsageFeatureProvider.isAnomalyDetectorEnabled(
-                Anomaly.AnomalyType.WAKE_LOCK)).thenReturn(true);
+        doReturn(mWakeupAlarmAnomalyDetector).when(mAnomalyLoader.mAnomalyUtils).getAnomalyDetector(
+                Anomaly.AnomalyType.WAKEUP_ALARM);
 
         List<Anomaly> anomalies = mAnomalyLoader.loadInBackground();
 
-        assertThat(anomalies).containsExactly(mWakeLockAnomaly);
+        assertThat(anomalies).containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly);
+    }
+
+    private Anomaly createAnomaly(@Anomaly.AnomalyType int type) {
+        return new Anomaly.Builder()
+                .setType(type)
+                .setUid(UID)
+                .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
+                .build();
+    }
+
+    @Test
+    public void testGenerateFakeData() {
+        List<Anomaly> anomalies = mAnomalyLoader.generateFakeData();
+
+        assertThat(anomalies).containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly);
     }
 }

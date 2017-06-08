@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.anomaly.checker;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -56,8 +57,10 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WakeupAlarmAnomalyDetectorTest {
+    private static final String TARGET_PACKAGE_NAME = "com.android.app";
     private static final int ANOMALY_UID = 111;
     private static final int NORMAL_UID = 222;
+    private static final int TARGET_UID = 333;
     private static final long RUNNING_TIME_MS = 2 * DateUtils.HOUR_IN_MILLIS;
     private static final int ANOMALY_WAKEUP_COUNT = 500;
     private static final int NORMAL_WAKEUP_COUNT = 50;
@@ -68,9 +71,13 @@ public class WakeupAlarmAnomalyDetectorTest {
     @Mock
     private BatterySipper mNormalSipper;
     @Mock
+    private BatterySipper mTargetSipper;
+    @Mock
     private BatteryStats.Uid mAnomalyUid;
     @Mock
     private BatteryStats.Uid mNormalUid;
+    @Mock
+    private BatteryStats.Uid mTargetUid;
     @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
@@ -101,10 +108,13 @@ public class WakeupAlarmAnomalyDetectorTest {
         doReturn(ANOMALY_UID).when(mAnomalyUid).getUid();
         mNormalSipper.uidObj = mNormalUid;
         doReturn(NORMAL_UID).when(mNormalUid).getUid();
+        mTargetSipper.uidObj = mTargetUid;
+        doReturn(TARGET_UID).when(mTargetUid).getUid();
 
         mUsageList = new ArrayList<>();
         mUsageList.add(mAnomalySipper);
         mUsageList.add(mNormalSipper);
+        mUsageList.add(mTargetSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
         mWakeupAlarmAnomalyDetector = spy(new WakeupAlarmAnomalyDetector(mContext, mPolicy));
@@ -113,18 +123,45 @@ public class WakeupAlarmAnomalyDetectorTest {
 
     @Test
     public void testDetectAnomalies_containsAnomaly_detectIt() {
+        doReturn(-1).when(mBatteryUtils).getPackageUid(nullable(String.class));
         doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
                 mAnomalyUid);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
+                mTargetUid);
         doReturn(NORMAL_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
                 mNormalUid);
         final Anomaly anomaly = new Anomaly.Builder()
                 .setUid(ANOMALY_UID)
                 .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
                 .build();
+        final Anomaly targetAnomaly = new Anomaly.Builder()
+                .setUid(TARGET_UID)
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .build();
 
         List<Anomaly> mAnomalies = mWakeupAlarmAnomalyDetector.detectAnomalies(mBatteryStatsHelper);
 
-        assertThat(mAnomalies).containsExactly(anomaly);
+        assertThat(mAnomalies).containsExactly(anomaly, targetAnomaly);
+    }
+
+    @Test
+    public void testDetectAnomalies_detectTargetAnomaly_detectIt() {
+        doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
+                mAnomalyUid);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
+                mTargetUid);
+        doReturn(NORMAL_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
+                mNormalUid);
+        final Anomaly targetAnomaly = new Anomaly.Builder()
+                .setUid(TARGET_UID)
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .build();
+
+        List<Anomaly> mAnomalies = mWakeupAlarmAnomalyDetector.detectAnomalies(mBatteryStatsHelper,
+                TARGET_PACKAGE_NAME);
+
+        assertThat(mAnomalies).containsExactly(targetAnomaly);
     }
 
     @Test

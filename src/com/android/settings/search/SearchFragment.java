@@ -106,7 +106,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     RecyclerView mResultsRecyclerView;
     @VisibleForTesting
     SearchView mSearchView;
-    private LinearLayout mNoResultsView;
+    @VisibleForTesting
+    LinearLayout mNoResultsView;
 
     @VisibleForTesting
     final RecyclerView.OnScrollListener mScrollListener = new RecyclerView.OnScrollListener() {
@@ -215,8 +216,9 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         final boolean isEmptyQuery = TextUtils.isEmpty(query);
 
         // Hide no-results-view when the new query is not a super-string of the previous
-        if ((mQuery != null) && (mNoResultsView.getVisibility() == View.VISIBLE)
-                && (query.length() < mQuery.length())) {
+        if (mQuery != null
+                && mNoResultsView.getVisibility() == View.VISIBLE
+                && query.length() < mQuery.length()) {
             mNoResultsView.setVisibility(View.GONE);
         }
 
@@ -311,6 +313,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     public void onSearchResultsDisplayed(int resultCount) {
         if (resultCount == 0) {
             mNoResultsView.setVisibility(View.VISIBLE);
+            mMetricsFeatureProvider.visible(getContext(), getMetricsCategory(),
+                    MetricsEvent.SETTINGS_SEARCH_NO_RESULT);
         } else {
             mNoResultsView.setVisibility(View.GONE);
             mResultsRecyclerView.scrollToPosition(0);

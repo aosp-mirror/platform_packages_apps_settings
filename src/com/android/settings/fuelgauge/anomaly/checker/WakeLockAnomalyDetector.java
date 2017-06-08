@@ -63,17 +63,27 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
 
     @Override
     public List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper) {
+        return detectAnomalies(batteryStatsHelper, null);
+    }
+
+    @Override
+    public List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper,
+            String targetPackageName) {
         final List<BatterySipper> batterySippers = batteryStatsHelper.getUsageList();
         final List<Anomaly> anomalies = new ArrayList<>();
         final long rawRealtime = SystemClock.elapsedRealtime();
+        final int targetUid = mBatteryUtils.getPackageUid(targetPackageName);
 
         // Check the app one by one
         for (int i = 0, size = batterySippers.size(); i < size; i++) {
             final BatterySipper sipper = batterySippers.get(i);
             final BatteryStats.Uid uid = sipper.uidObj;
-            if (uid == null) {
+            if (uid == null
+                    || mBatteryUtils.shouldHideSipper(sipper)
+                    || (targetUid != BatteryUtils.UID_NULL && targetUid != uid.getUid())) {
                 continue;
             }
+
             final ArrayMap<String, ? extends BatteryStats.Uid.Wakelock> wakelocks =
                     uid.getWakelockStats();
             long maxPartialWakeLockMs = 0;
@@ -88,10 +98,9 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                         getTotalDurationMs(timer, rawRealtime));
             }
 
-            // Report it if wakelock time is too long and it is not a hidden batterysipper
-            // TODO: add more attributes to detect wakelock anomaly
-            if (maxPartialWakeLockMs > mWakeLockThresholdMs
-                    && !mBatteryUtils.shouldHideSipper(sipper)) {
+            // Report application as anomaly if wakelock time is too long
+            // TODO(b/38233034): add more attributes to detect wakelock anomaly
+            if (maxPartialWakeLockMs > mWakeLockThresholdMs) {
                 final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                 final CharSequence displayName = Utils.getApplicationLabel(mContext,
                         packageName);
