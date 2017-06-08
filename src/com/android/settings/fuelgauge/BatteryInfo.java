@@ -55,18 +55,23 @@ public class BatteryInfo {
     public void bindHistory(final UsageView view, BatteryDataParser... parsers) {
         BatteryDataParser parser = new BatteryDataParser() {
             SparseIntArray points = new SparseIntArray();
+            int lastTime = -1;
+            byte lastLevel;
+            int maxTime;
 
             @Override
             public void onParsingStarted(long startTime, long endTime) {
-                timePeriod = endTime - startTime - remainingTimeUs / 1000;
+                this.maxTime = (int) (endTime - startTime);
+                timePeriod = maxTime - (remainingTimeUs / 1000);
                 view.clearPaths();
-                view.configureGraph((int) (endTime - startTime), 100, remainingTimeUs != 0,
-                        mCharging);
+                view.configureGraph(maxTime, 100);
             }
 
             @Override
             public void onDataPoint(long time, HistoryItem record) {
-                points.put((int) time, record.batteryLevel);
+                lastTime = (int) time;
+                lastLevel = record.batteryLevel;
+                points.put(lastTime, lastLevel);
             }
 
             @Override
@@ -79,8 +84,13 @@ public class BatteryInfo {
 
             @Override
             public void onParsingDone() {
-                if (points.size() > 1) {
-                    view.addPath(points);
+                onDataGap();
+
+                // Add linear projection
+                if (lastTime >= 0 && remainingTimeUs != 0) {
+                    points.put(lastTime, lastLevel);
+                    points.put(maxTime, mCharging ? 100 : 0);
+                    view.addProjectedPath(points);
                 }
             }
         };
