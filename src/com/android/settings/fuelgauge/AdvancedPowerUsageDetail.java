@@ -119,7 +119,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             args.putString(EXTRA_PACKAGE_NAME, null);
         } else {
             // populate data for normal app
-            args.putString(EXTRA_PACKAGE_NAME, sipper.mPackages[0]);
+            args.putString(EXTRA_PACKAGE_NAME, entry.defaultPackageName);
         }
 
         args.putInt(EXTRA_UID, sipper.getUid());
