@@ -248,6 +248,7 @@ public class AdvancedPowerUsageDetailTest {
     @Test
     public void testStartBatteryDetailPage_NormalApp() {
         mBatterySipper.mPackages = PACKAGE_NAME;
+        mBatteryEntry.defaultPackageName = PACKAGE_NAME[0];
         AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
                 mBatteryEntry, USAGE_PERCENT);
 
