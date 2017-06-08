@@ -79,6 +79,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final boolean USE_FAKE_DATA = false;
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_HEADER = "battery_header";
+    private static final String KEY_SHOW_ALL_APPS = "show_all_apps";
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
 
@@ -131,6 +132,7 @@ public class PowerUsageSummary extends PowerUsageBase {
 
         mBatteryUtils = BatteryUtils.getInstance(getContext());
 
+        restoreSavedInstance(icicle);
         initFeatureProvider();
     }
 
@@ -152,6 +154,12 @@ public class PowerUsageSummary extends PowerUsageBase {
         if (getActivity().isChangingConfigurations()) {
             BatteryEntry.clearUidCache();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_SHOW_ALL_APPS, mShowAllApps);
     }
 
     @Override
@@ -259,6 +267,13 @@ public class PowerUsageSummary extends PowerUsageBase {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @VisibleForTesting
+    void restoreSavedInstance(Bundle savedInstance) {
+        if (savedInstance != null) {
+            mShowAllApps = savedInstance.getBoolean(KEY_SHOW_ALL_APPS, false);
         }
     }
 

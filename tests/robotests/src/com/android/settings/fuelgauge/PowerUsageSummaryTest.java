@@ -15,10 +15,12 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.Process;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.Menu;
@@ -41,13 +43,11 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settingslib.BatteryInfo;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -65,7 +65,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -135,6 +134,8 @@ public class PowerUsageSummaryTest {
     private PowerManager mPowerManager;
     @Mock
     private SettingsActivity mSettingsActivity;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -418,6 +419,18 @@ public class PowerUsageSummaryTest {
         }
 
         assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
+    }
+
+    @Test
+    public void testSaveInstanceState_showAllAppsRestored() {
+        Bundle bundle = new Bundle();
+        mFragment.mShowAllApps = true;
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+
+        mFragment.onSaveInstanceState(bundle);
+        mFragment.restoreSavedInstance(bundle);
+
+        assertThat(mFragment.mShowAllApps).isTrue();
     }
 
     public static class TestFragment extends PowerUsageSummary {
