@@ -293,8 +293,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     private void setupImportanceToggle() {
         mImportanceToggle = (RestrictedSwitchPreference) findPreference(KEY_ALLOW_SOUND);
         mImportanceToggle.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mImportanceToggle.setEnabled(!(mAppRow.lockedImportance
-                || mImportanceToggle.isDisabledByAdmin()));
+        mImportanceToggle.setEnabled(isChannelConfigurable(mChannel)
+                && !mImportanceToggle.isDisabledByAdmin());
         mImportanceToggle.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
                 || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
         mImportanceToggle.setOnPreferenceChangeListener(
@@ -315,7 +315,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected void setupPriorityPref(boolean priority) {
         mPriority = (RestrictedSwitchPreference) findPreference(KEY_BYPASS_DND);
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mPriority.setEnabled(!(mAppRow.lockedImportance || mPriority.isDisabledByAdmin()));
+        mPriority.setEnabled(isChannelConfigurable(mChannel) && !mPriority.isDisabledByAdmin());
         mPriority.setChecked(priority);
         mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -447,10 +447,15 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         return lockscreenSecure;
     }
 
+    protected boolean isChannelConfigurable(NotificationChannel channel) {
+        return !channel.getId().equals(mAppRow.lockedChannelId);
+    }
+
     protected boolean isChannelBlockable(boolean systemApp, NotificationChannel channel) {
         if (!mAppRow.systemApp) {
             return true;
         }
+
         return channel.isBlockableSystem()
                 || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
     }
