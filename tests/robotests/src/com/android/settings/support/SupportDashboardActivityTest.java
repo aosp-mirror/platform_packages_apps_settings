@@ -17,8 +17,12 @@
 package com.android.settings.support;
 
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -32,8 +36,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -61,5 +63,18 @@ public class SupportDashboardActivityTest {
         assertThat(value.intentTargetPackage).isEqualTo(mContext.getPackageName());
         assertThat(value.intentTargetClass).isEqualTo(SupportDashboardActivity.class.getName());
         assertThat(value.intentAction).isEqualTo(Intent.ACTION_MAIN);
+    }
+
+    @Test
+    public void shouldHandleIntentAction() {
+        RuntimeEnvironment.getRobolectricPackageManager().setQueryIntentImplicitly(true);
+        // Intent action used by setup wizard to start support settings
+        Intent intent = new Intent("com.android.settings.action.SUPPORT_SETTINGS");
+        ResolveInfo resolveInfo = RuntimeEnvironment.getPackageManager().resolveActivity(
+                intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        assertThat(resolveInfo).isNotNull();
+        assertThat(resolveInfo.activityInfo.targetActivity)
+                .isEqualTo(SupportDashboardActivity.class.getName());
     }
 }
