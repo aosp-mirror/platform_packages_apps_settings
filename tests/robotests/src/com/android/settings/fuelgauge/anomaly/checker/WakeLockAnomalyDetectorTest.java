@@ -171,7 +171,7 @@ public class WakeLockAnomalyDetectorTest {
     }
 
     @Test
-    public void testDetectAnomalies_containsTargetpackage_detectIt() {
+    public void testDetectAnomalies_containsTargetPackage_detectIt() {
         doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
         final Anomaly targetAnomaly = new Anomaly.Builder()
                 .setUid(TARGET_UID)
