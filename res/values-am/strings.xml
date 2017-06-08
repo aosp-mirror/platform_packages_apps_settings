@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"ይከልክሉ"</string>
     <string name="dlg_close" msgid="7471087791340790015">"ዝጋ"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"ቀይር"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"ያልታወቀ"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">አሁን ገንቢ ለመሆን <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ደረጃዎች ይቀርዎታል።</item>
       <item quantity="other">አሁን ገንቢ ለመሆን <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ደረጃዎች ይቀርዎታል።</item>
@@ -1548,7 +1549,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"አሂድ"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"የUSB  ማከማቻ"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"በSD ካርድ ላይ"</string>
-    <string name="disabled" msgid="9206776641295849915">"ቦዝኗል"</string>
     <string name="not_installed" msgid="2797554494953450291">"ለዚህ ተጠቃሚ አልተጫነም"</string>
     <string name="installed" msgid="3070865169422600098">"ተጭኗል"</string>
     <string name="no_applications" msgid="7336588977497084921">"ምንም መተግበሪያዎች የሉም::"</string>
@@ -2777,8 +2777,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"ማሳወቂያዎች"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"የላቀ"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"የስራ ማሳወቂያዎች"</string>
-    <!-- no translation found for notification_badging_title (5938709971403474078) -->
-    <skip />
+    <string name="notification_badging_title" msgid="5938709971403474078">"የማሳወቂያ ነጥቦችን ፍቀድ"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"ብርሃን አብለጭለጭ"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"በማያ ገጽ ቁልፉ ላይ"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"ሁሉንም የማሳወቂያ ይዘቶችን አሳይ"</string>
@@ -2859,10 +2858,8 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"እነዚህን ማሳወቂያዎች በጭራሽ አታሳይ"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"ማሳወቂያዎች አሳይ"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"በጥላ ወይም በጎን ያሉ ውጫዊ መሣሪያዎች ላይ ማሳወቂያዎችን በጭራሽ አታሳይ"</string>
-    <!-- no translation found for notification_badge_title (6370122441168519809) -->
-    <skip />
-    <!-- no translation found for notification_channel_badge_title (2240827899882847087) -->
-    <skip />
+    <string name="notification_badge_title" msgid="6370122441168519809">"የማሳወቂያ ነጥብ ፍቀድ"</string>
+    <string name="notification_channel_badge_title" msgid="2240827899882847087">"የማሳወቂያ ነጥብን አሳይ"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"«አትረብሽ»ን ሻር"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"«አትረብሽ» ወደ ቅድሚያ ብቻ በሚቀናበርበት ጊዜ እነዚህ ማሳወቂያዎች እንዲያቋርጡ ይፍቀዱ"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"በማያ ገጽ ቁልፉ ላይ"</string>
@@ -3191,7 +3188,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"ፍቃድ ያላቸው መተግበሪያዎች"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"አዎ"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"አይ"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"ያልታወቁ መተግበሪያዎችን ይጫኑ"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"መተግበሪያዎችን ጫን ያልታወቁ ምንጮች"</string>
     <string name="write_settings" msgid="4797457275727195681">"የስርዓት ቅንብሮችን ይቀይራል"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"የስርዓት ቅንብሮችን ጻፍ ቀይር"</string>
@@ -3205,8 +3201,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"ይህ ፈቃድ መተግበሪያው የስርዓት ቅንብሮችን ለመቀየር ያስችለዋል።"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"አዎ"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"አይ"</string>
-    <string name="external_source_trusted" msgid="2707996266575928037">"ይፈቀዳል"</string>
-    <string name="external_source_untrusted" msgid="2677442511837596726">"አይፈቀድም"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"ከዚህ ምንጭ ፍቀድ"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"ለካሜራ ሁለት ጊዜ ይጠምዝዙት"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"የእጅ አንጓዎን ሁለት ጊዜ በመጠምዘዝ የካሜራ መተግበሪያውን ይክፈቱ"</string>
