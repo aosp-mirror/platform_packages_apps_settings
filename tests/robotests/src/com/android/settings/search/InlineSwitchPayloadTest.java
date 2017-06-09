@@ -23,7 +23,7 @@ import android.os.Parcel;
 import android.provider.Settings;
 import android.content.Context;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.ResultPayload.Availability;
 import com.android.settings.search.ResultPayload.SettingsSource;

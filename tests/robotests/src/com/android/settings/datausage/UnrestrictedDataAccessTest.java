@@ -26,7 +26,7 @@ import android.content.pm.ApplicationInfo;
 import android.os.Process;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;

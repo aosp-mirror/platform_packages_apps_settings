@@ -16,7 +16,7 @@
 
 package com.android.settings.enterprise;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.runner.RunWith;

@@ -24,11 +24,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.password.ChooseLockPassword;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
-import com.android.settings.password.ChooseLockSettingsHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -23,7 +23,7 @@ import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 

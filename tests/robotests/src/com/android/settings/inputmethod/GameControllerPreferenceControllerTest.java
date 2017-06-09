@@ -20,7 +20,7 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

@@ -19,12 +19,12 @@ package com.android.settings.display;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
-import com.android.settings.search.ResultPayload.Availability;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

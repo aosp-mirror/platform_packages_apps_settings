@@ -21,7 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

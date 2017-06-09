@@ -21,7 +21,7 @@ import android.content.Context;
 import android.os.UserManager;
 
 import android.test.mock.MockContentResolver;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -33,7 +33,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;

@@ -30,7 +30,7 @@ import android.os.CancellationSignal;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.IFingerprintManager;
