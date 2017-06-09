@@ -543,7 +543,7 @@
         </activity>
 
         <activity android:name=".Settings$LanguageAndInputSettingsActivity"
-            android:label="@string/language_keyboard_settings_title"
+            android:label="@string/language_input_gesture_title"
             android:icon="@drawable/ic_settings_language"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings$SystemDashboardActivity">
@@ -619,7 +619,7 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="LanguageSettings"
-                android:label="@string/language_keyboard_settings_title"
+                android:label="@string/language_input_gesture_title"
                 android:clearTaskOnLaunch="true"
                 android:exported="true"
                 android:targetActivity="Settings$LanguageAndInputSettingsActivity">

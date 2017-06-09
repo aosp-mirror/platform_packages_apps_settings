@@ -38,6 +38,7 @@ import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceCo
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.gestures.CameraLiftTriggerPreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
@@ -49,6 +50,7 @@ import com.android.settings.inputmethod.GameControllerPreferenceController;
 import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -98,7 +100,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
         if (activity == null) {
             return;
         }
-        activity.setTitle(R.string.language_keyboard_settings_title);
+        activity.setTitle(R.string.language_input_gesture_title);
     }
 
     @Override
@@ -160,32 +162,42 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
+        private final AssistGestureFeatureProvider mFeatureProvider;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
+            mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                final String flattenComponent = Settings.Secure.getString(
+                if (mFeatureProvider.isSupported(mContext)) {
+                    final int assistGestureEnabled = Settings.Secure.getInt(
+                        mContext.getContentResolver(), Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
+                    mSummaryLoader.setSummary(this, mContext.getString(assistGestureEnabled == 0
+                        ? R.string.language_input_gesture_summary_off
+                        : R.string.language_input_gesture_summary_on_with_assist));
+                } else {
+                    final String flattenComponent = Settings.Secure.getString(
                         mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
-                if (!TextUtils.isEmpty(flattenComponent)) {
-                    final PackageManager packageManage = mContext.getPackageManager();
-                    final String pkg = ComponentName.unflattenFromString(flattenComponent)
+                    if (!TextUtils.isEmpty(flattenComponent)) {
+                        final PackageManager packageManage = mContext.getPackageManager();
+                        final String pkg = ComponentName.unflattenFromString(flattenComponent)
                             .getPackageName();
-                    final InputMethodManager imm = (InputMethodManager) mContext.getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-                    final List<InputMethodInfo> imis = imm.getInputMethodList();
-                    for (InputMethodInfo imi : imis) {
-                        if (TextUtils.equals(imi.getPackageName(), pkg)) {
-                            mSummaryLoader.setSummary(this, imi.loadLabel(packageManage));
-                            return;
+                        final InputMethodManager imm = (InputMethodManager)
+                            mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        final List<InputMethodInfo> imis = imm.getInputMethodList();
+                        for (InputMethodInfo imi : imis) {
+                            if (TextUtils.equals(imi.getPackageName(), pkg)) {
+                                mSummaryLoader.setSummary(this, imi.loadLabel(packageManage));
+                                return;
+                            }
                         }
                     }
+                    mSummaryLoader.setSummary(this, "");
                 }
-                mSummaryLoader.setSummary(this, "");
             }
         }
     }
