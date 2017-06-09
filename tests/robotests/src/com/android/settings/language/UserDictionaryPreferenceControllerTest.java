@@ -20,7 +20,7 @@ import android.content.Context;
 import android.speech.tts.TtsEngines;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.inputmethod.UserDictionaryList;

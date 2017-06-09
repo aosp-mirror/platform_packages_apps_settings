@@ -23,8 +23,7 @@ import android.support.v14.preference.PreferenceFragment;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.OwnerInfoSettings;
-import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;

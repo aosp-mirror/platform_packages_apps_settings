@@ -22,7 +22,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Xml;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.R;
 

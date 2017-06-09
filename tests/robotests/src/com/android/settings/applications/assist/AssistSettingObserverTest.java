@@ -19,7 +19,7 @@ package com.android.settings.applications.assist;
 
 import android.net.Uri;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Test;

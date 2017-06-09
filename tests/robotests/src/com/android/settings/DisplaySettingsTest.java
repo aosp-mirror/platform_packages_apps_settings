@@ -1,8 +1,9 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.os.PowerManager;
+
 import com.android.settings.core.PreferenceController;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowPowerManagerWrapper;
 import org.junit.Test;
@@ -14,9 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
+
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)

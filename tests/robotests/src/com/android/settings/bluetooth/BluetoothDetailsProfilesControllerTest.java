@@ -30,10 +30,9 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceManager;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settingslib.bluetooth.A2dpProfile;

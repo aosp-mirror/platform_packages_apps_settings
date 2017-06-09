@@ -21,11 +21,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.dashboard.DashboardData;
-import com.android.settings.dashboard.conditional.Condition;
 
 import java.util.ArrayList;
 import java.util.List;

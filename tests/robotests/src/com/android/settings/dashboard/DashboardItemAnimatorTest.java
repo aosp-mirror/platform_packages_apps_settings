@@ -18,7 +18,7 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 import android.widget.TextView;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SupportItemAdapter.ViewHolder;
 import com.android.settingslib.drawer.Tile;
