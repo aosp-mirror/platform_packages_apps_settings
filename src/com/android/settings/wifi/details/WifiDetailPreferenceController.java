@@ -247,8 +247,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
         mSignInButton = (Button) mButtonsPref.findViewById(R.id.signin_button);
         mSignInButton.setText(R.string.support_sign_in_button_text);
-        mSignInButton.setOnClickListener(
-            view -> mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork));
+        mSignInButton.setOnClickListener(view -> signIntoNetwork());
 
         mSignalStrengthPref =
                 (WifiDetailPreference) screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
@@ -476,5 +475,14 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
+    }
+
+    /**
+     * Sign in to the captive portal found on this wifi network associated with this preference.
+     */
+    private void signIntoNetwork() {
+        mMetricsFeatureProvider.action(
+                mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
+        mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork);
     }
 }
