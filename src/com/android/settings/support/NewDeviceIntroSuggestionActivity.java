@@ -28,9 +28,9 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 
-import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.overlay.SupportFeatureProvider;
 
 import java.util.List;
 
@@ -107,7 +107,12 @@ public class NewDeviceIntroSuggestionActivity extends Activity {
 
     @VisibleForTesting
     static Intent getLaunchIntent(Context context) {
-        final String url = context.getString(R.string.new_device_suggestion_intro_url);
+        final SupportFeatureProvider supportProvider = FeatureFactory.getFactory(context)
+                .getSupportFeatureProvider(context);
+        if (supportProvider == null) {
+            return null;
+        }
+        final String url = supportProvider.getNewDeviceIntroUrl(context);
         if (TextUtils.isEmpty(url)) {
             return null;
         }
