@@ -18,6 +18,9 @@ package com.android.settings.fuelgauge.anomaly.action;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -25,20 +28,25 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
+import java.util.List;
+
 /**
  * Force stop action for anomaly app, which means to stop the app which causes anomaly
  */
 public class ForceStopAction implements AnomalyAction {
+    private static final String TAG = "ForceStopAction";
 
     private Context mContext;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private ActivityManager mActivityManager;
+    private PackageManager mPackageManager;
 
     public ForceStopAction(Context context) {
         mContext = context;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mActivityManager = (ActivityManager) context.getSystemService(
                 Context.ACTIVITY_SERVICE);
+        mPackageManager = context.getPackageManager();
     }
 
     @Override
@@ -50,6 +58,18 @@ public class ForceStopAction implements AnomalyAction {
                 Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
 
         mActivityManager.forceStopPackage(packageName);
+    }
+
+    @Override
+    public boolean isActionActive(Anomaly anomaly) {
+        try {
+            ApplicationInfo info = mPackageManager.getApplicationInfo(anomaly.packageName,
+                    PackageManager.GET_META_DATA);
+            return (info.flags & ApplicationInfo.FLAG_STOPPED) == 0;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot find info for app: " + anomaly.packageName);
+        }
+        return false;
     }
 
     @Override

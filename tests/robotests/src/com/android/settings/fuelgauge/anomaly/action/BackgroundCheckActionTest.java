@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -68,5 +70,21 @@ public class BackgroundCheckActionTest {
 
         verify(mAppOpsManagerr).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME,
                 AppOpsManager.MODE_IGNORED);
+    }
+
+    @Test
+    public void testIsActionActive_modeAllowed_returnTrue() {
+        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManagerr).checkOpNoThrow(
+                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+
+        assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isTrue();
+    }
+
+    @Test
+    public void testIsActionActive_modeIgnored_returnFalse() {
+        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManagerr).checkOpNoThrow(
+                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+
+        assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
     }
 }
