@@ -15,7 +15,6 @@
  */
 package com.android.settings.dashboard;
 
-import android.annotation.AttrRes;
 import android.annotation.ColorInt;
 import android.app.Activity;
 import android.content.Context;
@@ -47,7 +46,6 @@ import com.android.settings.dashboard.DashboardData.SuggestionConditionHeaderDat
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
-import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -55,8 +53,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-
 import com.android.settingslib.suggestions.SuggestionParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -192,12 +190,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 for (int j = 0; j < categories.get(i).tiles.size(); j++) {
                     final Tile tile = categories.get(i).tiles.get(j);
 
-                    if (!mContext.getPackageName().equals(
-                            tile.intent.getComponent().getPackageName())) {
-                        // If this drawable is coming from outside Settings, tint it to match the
-                        // color.
+                    if (tile.isIconTintable) {
+                        // If this drawable is tintable, tint it to match the color.
                         tile.icon.setTint(tintColor);
                     }
+                }
+            }
+
+            for (Tile suggestion : suggestions) {
+                if (suggestion.isIconTintable) {
+                    suggestion.icon.setTint(tintColor);
                 }
             }
         }
