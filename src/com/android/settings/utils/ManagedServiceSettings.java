@@ -20,6 +20,8 @@ import android.annotation.Nullable;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -54,6 +56,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
     protected ServiceListing mServiceListing;
+    protected NotificationManager mNm;
 
     abstract protected Config getConfig();
 
@@ -68,6 +71,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         mContext = getActivity();
         mPm = mContext.getPackageManager();
         mDpm = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mNm = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mServiceListing = new ServiceListing(mContext, mConfig);
         mServiceListing.addCallback(new ServiceListing.Callback() {
             @Override
@@ -124,7 +128,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             } else {
                 pref.setTitle(summary);
             }
-            pref.setChecked(mServiceListing.isEnabled(cn));
+            pref.setChecked(isServiceEnabled(cn));
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
                             service.packageName, managedProfileId)) {
@@ -148,6 +152,10 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         return UserHandle.myUserId();
     }
 
+    protected boolean isServiceEnabled(ComponentName cn) {
+        return mServiceListing.isEnabled(cn);
+    }
+
     protected boolean setEnabled(ComponentName service, String title, boolean enable) {
         if (!enable) {
             // the simple version: disabling
@@ -163,6 +171,10 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                     .show(getFragmentManager(), "dialog");
             return false;
         }
+    }
+
+    protected void enable(ComponentName service) {
+        mServiceListing.setEnabled(service, true);
     }
 
     public static class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
@@ -202,7 +214,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                     .setPositiveButton(R.string.allow,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    parent.mServiceListing.setEnabled(cn, true);
+                                    parent.enable(cn);
                                 }
                             })
                     .setNegativeButton(R.string.deny,
