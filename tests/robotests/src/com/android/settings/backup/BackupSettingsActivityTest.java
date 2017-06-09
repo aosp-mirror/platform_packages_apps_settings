@@ -32,7 +32,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
 
@@ -50,7 +50,6 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 import org.robolectric.res.builder.RobolectricPackageManager;
 import org.robolectric.util.ActivityController;
-import org.robolectric.shadows.ShadowActivity;
 
 import static com.google.common.truth.Truth.assertThat;
 

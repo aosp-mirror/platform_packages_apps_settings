@@ -2,7 +2,7 @@ package com.android.settings.datausage;
 
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 import org.junit.Before;

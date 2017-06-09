@@ -17,10 +17,9 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
@@ -31,7 +30,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowSystemProperties;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;

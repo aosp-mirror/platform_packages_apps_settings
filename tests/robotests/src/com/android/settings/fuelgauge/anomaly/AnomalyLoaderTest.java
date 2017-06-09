@@ -30,7 +30,7 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;

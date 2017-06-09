@@ -30,7 +30,7 @@ import static org.robolectric.Shadows.shadowOf;
 import android.graphics.Rect;
 import android.widget.FrameLayout;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

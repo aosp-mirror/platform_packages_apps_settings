@@ -18,6 +18,8 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.io.ByteArrayInputStream;
