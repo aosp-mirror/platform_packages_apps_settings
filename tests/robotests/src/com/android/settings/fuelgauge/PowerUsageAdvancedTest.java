@@ -15,10 +15,22 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import android.text.TextUtils;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceManager;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -42,16 +54,6 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -117,6 +119,21 @@ public class PowerUsageAdvancedTest {
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
         mMaxBatterySipper.drainType = DrainType.BLUETOOTH;
         mNormalBatterySipper.drainType = DrainType.SCREEN;
+    }
+
+    @Test
+    public void testPrefs_shouldNotBeSelectable() {
+        PreferenceManager pm = new PreferenceManager(mShadowContext);
+        when(mPowerUsageAdvanced.getPreferenceManager()).thenReturn(pm);
+        PreferenceGroup prefGroup = spy(new PreferenceCategory(mShadowContext));
+        when(prefGroup.getPreferenceManager()).thenReturn(pm);
+
+        mPowerUsageAdvanced.refreshPowerUsageDataList(mBatteryStatsHelper, prefGroup);
+        assertThat(prefGroup.getPreferenceCount()).isAtLeast(1);
+        for (int i = 0, count = prefGroup.getPreferenceCount(); i < count; i++) {
+            PowerGaugePreference pref = (PowerGaugePreference) prefGroup.getPreference(i);
+            assertThat(pref.isSelectable()).isFalse();
+        }
     }
 
     @Test
