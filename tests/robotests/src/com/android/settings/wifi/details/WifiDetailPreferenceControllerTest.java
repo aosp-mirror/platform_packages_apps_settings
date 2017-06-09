@@ -715,6 +715,8 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockSignInButton).setOnClickListener(captor.capture());
         captor.getValue().onClick(mockSignInButton);
         verify(mockConnectivityManagerWrapper).startCaptivePortalApp(mockNetwork);
+        verify(mockMetricsFeatureProvider)
+                .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
     }
 
     @Test
