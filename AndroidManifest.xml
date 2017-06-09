@@ -3038,6 +3038,10 @@
             <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.settings.action.SUPPORT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
