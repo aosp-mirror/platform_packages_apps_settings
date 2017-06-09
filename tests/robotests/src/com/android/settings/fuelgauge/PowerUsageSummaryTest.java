@@ -301,21 +301,33 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testSetUsageSummary_timeLessThanOneMinute_DoNotSetSummary() {
-        final long usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
+        mNormalBatterySipper.usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
 
-        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
         assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
-    public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
-        final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+    public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
         doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
                 R.string.battery_screen_usage);
         doReturn(mRealContext).when(mFragment).getContext();
         final String expectedSummary = "Screen usage 2m";
 
-        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void testSetUsageSummary_timeMoreThanOneMinute_hiddenApp_setUsedSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        doReturn(true).when(mFragment.mBatteryUtils).shouldHideSipper(mNormalBatterySipper);
+        doReturn(mRealContext).when(mFragment).getContext();
+        final String expectedSummary = "2m";
+
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
     }

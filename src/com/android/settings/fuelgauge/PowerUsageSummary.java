@@ -494,7 +494,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                     sipper.usageTimeMs = mBatteryUtils.getProcessTimeMs(
                             BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
                 }
-                setUsageSummary(pref, sipper.usageTimeMs);
+                setUsageSummary(pref, sipper);
                 if ((sipper.drainType != DrainType.APP
                         || sipper.uidObj.getUid() == Process.ROOT_UID)
                         && sipper.drainType != DrainType.USER) {
@@ -560,12 +560,13 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
-    void setUsageSummary(Preference preference, long usageTimeMs) {
+    void setUsageSummary(Preference preference, BatterySipper sipper) {
         // Only show summary when usage time is longer than one minute
+        final long usageTimeMs = sipper.usageTimeMs;
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
                     false);
-            preference.setSummary(
+            preference.setSummary(mBatteryUtils.shouldHideSipper(sipper) ? timeSequence :
                     TextUtils.expandTemplate(getText(R.string.battery_screen_usage), timeSequence));
         }
     }
