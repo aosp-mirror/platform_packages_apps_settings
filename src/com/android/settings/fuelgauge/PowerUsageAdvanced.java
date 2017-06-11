@@ -168,11 +168,16 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (context == null) {
             return;
         }
-
         updatePreference(mHistPref);
+        refreshPowerUsageDataList(mStatsHelper, mUsageListGroup);
+        BatteryEntry.startRequestQueue();
+    }
 
-        List<PowerUsageData> dataList = parsePowerUsageData(mStatsHelper);
-        mUsageListGroup.removeAll();
+    @VisibleForTesting
+    void refreshPowerUsageDataList(BatteryStatsHelper statsHelper,
+            PreferenceGroup preferenceGroup) {
+        List<PowerUsageData> dataList = parsePowerUsageData(statsHelper);
+        preferenceGroup.removeAll();
         for (int i = 0, size = dataList.size(); i < size; i++) {
             final PowerUsageData batteryData = dataList.get(i);
             if (shouldHideCategory(batteryData)) {
@@ -184,10 +189,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             pref.setTitle(batteryData.titleResId);
             pref.setSummary(batteryData.summary);
             pref.setPercent(batteryData.percentage);
-            mUsageListGroup.addPreference(pref);
+            pref.setSelectable(false);
+            preferenceGroup.addPreference(pref);
         }
-
-        BatteryEntry.startRequestQueue();
     }
 
     @VisibleForTesting

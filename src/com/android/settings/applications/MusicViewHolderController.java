@@ -71,7 +71,7 @@ public class MusicViewHolderController implements FileViewHolderController {
 
     @Override
     public void setupView(AppViewHolder holder) {
-        holder.appIcon.setImageDrawable(mContext.getDrawable(R.drawable.ic_media_stream_on_24dp));
+        holder.appIcon.setImageDrawable(mContext.getDrawable(R.drawable.ic_headset_24dp));
         holder.appName.setText(mContext.getText(R.string.audio_files_title));
         holder.summary.setText(Formatter.formatFileSize(mContext, mMusicSize));
     }

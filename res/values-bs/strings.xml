@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"Odbij"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Zatvori"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Prebaci"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Nepoznato"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas dijeli od toga da postanete programer.</item>
       <item quantity="few">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas dijele od toga da postanete programer.</item>
@@ -99,10 +100,10 @@
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Zaključaj glasovno biranje"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Spriječi korištenje bluetooth birača kada je ekran zaključan"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth uređaji"</string>
-    <string name="bluetooth_device_name" msgid="8415828355207423800">"Naziv uređaja"</string>
+    <string name="bluetooth_device_name" msgid="8415828355207423800">"Ime uređaja"</string>
     <string name="bluetooth_device_details" msgid="4594773497930028085">"Postavke uređaja"</string>
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Postavke profila"</string>
-    <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Nije postavljen naziv, koristi se naziv računa"</string>
+    <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Nije postavljeno ime, koristi se ime računa"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Potraži uređaje"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"Preimenuj ovaj uređaj"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Preimenuj"</string>
@@ -374,7 +375,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Pronađite senzor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Pronađite senzor za otisak prsta na stražnjem dijelu telefona."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustracija sa uređajem i lokacijom senzora za otisak prsta"</string>
-    <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Naziv"</string>
+    <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Ime"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"U redu"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"Počnimo!"</string>
@@ -596,7 +597,7 @@
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Uključi Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
-    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Upravljajte vezama, postavite naziv uređaja i vidljivost"</string>
+    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Upravljajte vezama, postavite ime uređaja i vidljivost"</string>
     <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Upariti sa uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Kod za Bluetooth uparivanje"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Upišite kod za uparivanje, zatim pritisnite Return ili Enter"</string>
@@ -630,8 +631,8 @@
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Poveži se"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Prekini vezu"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Upari i poveži"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Ukini uparivanje"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Prekini vezu i ukini uparivanje"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Prekini uparivanje"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Prekini vezu i uparivanje"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opcije..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Napredno"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Napredni Bluetooth"</string>
@@ -758,7 +759,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Sigurnosna postavka za bežični usmjerivač (TKIP) nije podržana"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Provjeravanje vjerodostojnosti nije uspjelo. Pokušajte ponovo."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Otkrivena je još jedna WPS sesija. Pokušajte ponovo za nekoliko minuta."</string>
-    <string name="wifi_ssid" msgid="5519636102673067319">"Naziv mreže"</string>
+    <string name="wifi_ssid" msgid="5519636102673067319">"Ime mreže"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Unesite SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sigurnost"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Jačina signala"</string>
@@ -1550,7 +1551,7 @@
     <string name="ask_compatibility" msgid="7225195569089607846">"Pitaj prilikom pokretanja"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"Skaliraj aplikaciju"</string>
     <string name="unknown" msgid="1592123443519355854">"Nepoznato"</string>
-    <string name="sort_order_alpha" msgid="1410278099123670628">"Poredaj po nazivu"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Poredaj po imenu"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Poredaj po veličini"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Prikaži pokrenute usluge"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Prikaži procese iz keš memorije"</string>
@@ -1568,7 +1569,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"Pokretanje"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB pohrana"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Na SD kartici"</string>
-    <string name="disabled" msgid="9206776641295849915">"Onemogućeno"</string>
     <string name="not_installed" msgid="2797554494953450291">"Nije instal. za ovog korisnika"</string>
     <string name="installed" msgid="3070865169422600098">"Instalirano"</string>
     <string name="no_applications" msgid="7336588977497084921">"Nema aplikacija."</string>
@@ -2661,8 +2661,8 @@
     <string name="sim_select_card" msgid="211285163525563293">"Odaberite SIM karticu"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM kartica je prazna"</string>
-    <string name="sim_editor_name" msgid="1722945976676142029">"Naziv SIM-a"</string>
-    <string name="sim_name_hint" msgid="7038643345238968930">"Unesite naziv SIM-a"</string>
+    <string name="sim_editor_name" msgid="1722945976676142029">"Ime SIM-a"</string>
+    <string name="sim_name_hint" msgid="7038643345238968930">"Unesite ime SIM-a"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM slot %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operater"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Broj"</string>
@@ -2676,9 +2676,9 @@
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"SIM za odlazne pozive"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Ostale postavke poziva"</string>
     <string name="preferred_network_offload_title" msgid="1605829724169550275">"Pron. preferiranih mreža"</string>
-    <string name="preferred_network_offload_header" msgid="2321173571529106767">"Onem. emit. naziva mreže"</string>
-    <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Funkcija Onemogući emitiranje naziva mreže sprječava da treće strane dobiju informacije o vašoj mreži."</string>
-    <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Onemogućavanje Emitiranja naziva mreže će spriječiti automatsko povezivanje na skrivene mreže."</string>
+    <string name="preferred_network_offload_header" msgid="2321173571529106767">"Onem. emit. imena mreže"</string>
+    <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Funkcija Onemogući emitiranje imena mreže sprječava da treće strane dobiju informacije o vašoj mreži."</string>
+    <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Onemogućavanje emitiranja imena mreže će spriječiti automatsko povezivanje na skrivene mreže."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6272913297433198340">"SIM kartice promijenjene."</string>
     <string name="sim_notification_summary" msgid="8858043655706669772">"Dodirnite za postavke"</string>
@@ -2916,8 +2916,8 @@
     <string name="notification_channel_sound_title" msgid="3899212238513507941">"Zvuk"</string>
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"Izbriši"</string>
     <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"Preimenuj"</string>
-    <string name="zen_mode_rule_name" msgid="5149068059383837549">"Naziv pravila"</string>
-    <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Unesite naziv pravila"</string>
+    <string name="zen_mode_rule_name" msgid="5149068059383837549">"Ime pravila"</string>
+    <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Unesite ime pravila"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Ime pravila se već koristi"</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"Dodajte još"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"Obrisati pravilo"</string>
@@ -3239,7 +3239,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije s odobrenjem"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Da"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"Ne"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"Instaliranje nepoznatih aplikacija"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instaliranje aplikacije nepoznati izvori"</string>
     <string name="write_settings" msgid="4797457275727195681">"Izmjena postavki sistema"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"pisati izmijeniti sistemske postavke"</string>
@@ -3253,8 +3252,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Ovo odobrenje omogućava aplikaciji da izmijeni postavke sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Da"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Ne"</string>
-    <string name="external_source_trusted" msgid="2707996266575928037">"Dozvoljeno"</string>
-    <string name="external_source_untrusted" msgid="2677442511837596726">"Nije dozvoljeno"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"Dozvoli iz ovog izvora"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dvostruko uvrtanje za otvaranje kamere"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Da biste otvorili aplikaciju za kameru, dva puta uvrnite zglob"</string>

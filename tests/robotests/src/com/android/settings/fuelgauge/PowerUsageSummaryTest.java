@@ -15,10 +15,12 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.Process;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.Menu;
@@ -41,13 +43,11 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settingslib.BatteryInfo;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -65,7 +65,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -135,6 +134,8 @@ public class PowerUsageSummaryTest {
     private PowerManager mPowerManager;
     @Mock
     private SettingsActivity mSettingsActivity;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -301,21 +302,33 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testSetUsageSummary_timeLessThanOneMinute_DoNotSetSummary() {
-        final long usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
+        mNormalBatterySipper.usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
 
-        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
         assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
-    public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
-        final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+    public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
         doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
                 R.string.battery_screen_usage);
         doReturn(mRealContext).when(mFragment).getContext();
         final String expectedSummary = "Screen usage 2m";
 
-        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void testSetUsageSummary_timeMoreThanOneMinute_hiddenApp_setUsedSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        doReturn(true).when(mFragment.mBatteryUtils).shouldHideSipper(mNormalBatterySipper);
+        doReturn(mRealContext).when(mFragment).getContext();
+        final String expectedSummary = "2m";
+
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
     }
@@ -418,6 +431,18 @@ public class PowerUsageSummaryTest {
         }
 
         assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
+    }
+
+    @Test
+    public void testSaveInstanceState_showAllAppsRestored() {
+        Bundle bundle = new Bundle();
+        mFragment.mShowAllApps = true;
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+
+        mFragment.onSaveInstanceState(bundle);
+        mFragment.restoreSavedInstance(bundle);
+
+        assertThat(mFragment.mShowAllApps).isTrue();
     }
 
     public static class TestFragment extends PowerUsageSummary {
