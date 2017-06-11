@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchResult.Builder;
 import com.android.settings.search.ranking.SearchResultsRankerCallback;

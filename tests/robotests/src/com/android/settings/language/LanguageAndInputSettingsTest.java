@@ -31,13 +31,12 @@ import android.view.textservice.TextServicesManager;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -68,7 +67,7 @@ import static org.mockito.Mockito.when;
 public class LanguageAndInputSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
+    private Activity mActivity;
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -86,17 +85,18 @@ public class LanguageAndInputSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
-        when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mock(InputManager.class));
-        when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mIm);
-        when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
+        FakeFeatureFactory.setupForTest(mActivity);
+        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
+        when(mActivity.getSystemService(Context.INPUT_SERVICE))
+                .thenReturn(mock(InputManager.class));
+        when(mActivity.getSystemService(Context.INPUT_SERVICE)).thenReturn(mIm);
+        when(mActivity.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
                 .thenReturn(mock(TextServicesManager.class));
-        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(mDpm);
-        when(mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).thenReturn(mImm);
-        when((Object) mContext.getSystemService(AutofillManager.class))
+        when(mActivity.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(mDpm);
+        when(mActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).thenReturn(mImm);
+        when((Object) mActivity.getSystemService(AutofillManager.class))
                 .thenReturn(mAutofillManager);
-        mFragment = new TestFragment(mContext);
+        mFragment = new TestFragment(mActivity);
     }
 
     @Test
@@ -106,7 +106,8 @@ public class LanguageAndInputSettingsTest {
 
     @Test
     public void testGetPreferenceControllers_shouldRegisterLifecycleObservers() {
-        final List<PreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
+        final List<PreferenceController> controllers =
+                mFragment.getPreferenceControllers(mActivity);
         int lifecycleObserverCount = 0;
         for (PreferenceController controller : controllers) {
             if (controller instanceof LifecycleObserver) {
@@ -120,7 +121,8 @@ public class LanguageAndInputSettingsTest {
     @Test
 
     public void testGetPreferenceControllers_shouldAllBeCreated() {
-        final List<PreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
+        final List<PreferenceController> controllers =
+                mFragment.getPreferenceControllers(mActivity);
 
         assertThat(controllers.isEmpty()).isFalse();
     }
@@ -150,6 +152,29 @@ public class LanguageAndInputSettingsTest {
 
         verify(imis.get(0)).loadLabel(mPackageManager);
         verify(loader).setSummary(provider, null);
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowSecureSettings.class,
+    })
+    public void testSummary_assistSupported_shouldSetToAssistGestureStatus() {
+        final FakeFeatureFactory featureFactory =
+            (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+        when(featureFactory.assistGestureFeatureProvider.isSupported(any(Context.class)))
+            .thenReturn(true);
+
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(mActivity, loader);
+
+        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
+        provider.setListening(true);
+        verify(mActivity).getString(R.string.language_input_gesture_summary_off);
+
+        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
+        provider.setListening(true);
+        verify(mActivity).getString(R.string.language_input_gesture_summary_on_with_assist);
     }
 
     @Test

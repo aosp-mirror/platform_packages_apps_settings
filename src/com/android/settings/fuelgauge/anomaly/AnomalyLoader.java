@@ -17,12 +17,14 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.Utils;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.List;
  * an empty list if there is no anomaly.
  */
 public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
+    private static final boolean USE_FAKE_DATA = false;
     private BatteryStatsHelper mBatteryStatsHelper;
     private String mPackageName;
     private UserManager mUserManager;
@@ -56,7 +59,6 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
      *
      * This constructor will create {@link BatteryStatsHelper} in background thread.
      *
-     * @param context
      * @param packageName if set, only finds anomalies for this package. If {@code null},
      *                    detects all anomalies of this type.
      */
@@ -81,6 +83,9 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
 
     @Override
     public List<Anomaly> loadInBackground() {
+        if (USE_FAKE_DATA) {
+            return generateFakeData();
+        }
         if (mBatteryStatsHelper == null) {
             mBatteryStatsHelper = new BatteryStatsHelper(getContext());
             mBatteryStatsHelper.create((Bundle) null);
@@ -96,6 +101,33 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
             }
         }
 
+        return anomalies;
+    }
+
+    @VisibleForTesting
+    List<Anomaly> generateFakeData() {
+        final List<Anomaly> anomalies = new ArrayList<>();
+        final Context context = getContext();
+        try {
+            final String packageName = "com.android.settings";
+            final CharSequence displayName = "Settings";
+            final int uid = context.getPackageManager().getPackageUid(packageName, 0);
+
+            anomalies.add(new Anomaly.Builder()
+                    .setUid(uid)
+                    .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                    .setPackageName(packageName)
+                    .setDisplayName(displayName)
+                    .build());
+            anomalies.add(new Anomaly.Builder()
+                    .setUid(uid)
+                    .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                    .setPackageName(packageName)
+                    .setDisplayName(displayName)
+                    .build());
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         return anomalies;
     }
 

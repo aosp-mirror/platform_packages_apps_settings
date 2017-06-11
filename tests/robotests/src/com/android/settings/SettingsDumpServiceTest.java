@@ -34,6 +34,8 @@ import java.io.PrintWriter;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsDumpServiceTest {

@@ -27,7 +27,7 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 

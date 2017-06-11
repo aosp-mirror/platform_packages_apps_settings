@@ -91,9 +91,12 @@ public class UsageView extends FrameLayout {
         mUsageGraph.addPath(points);
     }
 
-    public void configureGraph(int maxX, int maxY, boolean showProjection, boolean projectUp) {
+    public void addProjectedPath(SparseIntArray points) {
+        mUsageGraph.addProjectedPath(points);
+    }
+
+    public void configureGraph(int maxX, int maxY) {
         mUsageGraph.setMax(maxX, maxY);
-        mUsageGraph.setShowProjection(showProjection, projectUp);
     }
 
     public void setAccentColor(int color) {

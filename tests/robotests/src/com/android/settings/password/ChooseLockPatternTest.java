@@ -22,11 +22,9 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
-import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;

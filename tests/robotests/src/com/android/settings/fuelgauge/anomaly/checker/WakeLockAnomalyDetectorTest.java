@@ -34,7 +34,7 @@ import android.util.ArrayMap;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
@@ -171,7 +171,7 @@ public class WakeLockAnomalyDetectorTest {
     }
 
     @Test
-    public void testDetectAnomalies_containsTargetpackage_detectIt() {
+    public void testDetectAnomalies_containsTargetPackage_detectIt() {
         doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
         final Anomaly targetAnomaly = new Anomaly.Builder()
                 .setUid(TARGET_UID)

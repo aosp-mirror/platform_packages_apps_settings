@@ -6,7 +6,7 @@ import android.util.ArraySet;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.R;
 import com.android.settings.SecuritySettings;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.datausage.DataUsageSummary;

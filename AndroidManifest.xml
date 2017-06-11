@@ -543,7 +543,7 @@
         </activity>
 
         <activity android:name=".Settings$LanguageAndInputSettingsActivity"
-            android:label="@string/language_keyboard_settings_title"
+            android:label="@string/language_input_gesture_title"
             android:icon="@drawable/ic_settings_language"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings$SystemDashboardActivity">
@@ -619,7 +619,7 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="LanguageSettings"
-                android:label="@string/language_keyboard_settings_title"
+                android:label="@string/language_input_gesture_title"
                 android:clearTaskOnLaunch="true"
                 android:exported="true"
                 android:targetActivity="Settings$LanguageAndInputSettingsActivity">
@@ -1548,7 +1548,7 @@
             android:icon="@drawable/ic_suggested_notifications">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.DEFAULT_SETUP_WIZARD_ONLY" />
+                <category android:name="com.android.settings.suggested.category.LOCK_SCREEN_REDACTION" />
             </intent-filter>
             <meta-data android:name="com.android.settings.require_user_type"
                        android:value="primary" />
@@ -3037,6 +3037,10 @@
                   android:enabled="@bool/config_support_enabled">
             <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.settings.action.SUPPORT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>

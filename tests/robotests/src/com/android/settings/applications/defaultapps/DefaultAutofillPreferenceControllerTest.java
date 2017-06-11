@@ -25,7 +25,7 @@ import android.support.v7.preference.Preference;
 import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.AutofillManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapper;

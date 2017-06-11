@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.content.ContentResolver;
 import android.os.PowerManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.SparseArray;
@@ -39,7 +40,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
@@ -145,6 +146,8 @@ public class PowerUsageSummaryTest {
     private LoaderManager mLoaderManager;
     @Mock
     private ContentResolver mContentResolver;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -312,21 +315,33 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testSetUsageSummary_timeLessThanOneMinute_DoNotSetSummary() {
-        final long usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
+        mNormalBatterySipper.usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
 
-        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
         assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
-    public void testSetUsageSummary_timeMoreThanOneMinute_setSummary() {
-        final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+    public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
         doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
                 R.string.battery_screen_usage);
         doReturn(mRealContext).when(mFragment).getContext();
         final String expectedSummary = "Screen usage 2m";
 
-        mFragment.setUsageSummary(mPreference, usageTimeMs);
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void testSetUsageSummary_timeMoreThanOneMinute_hiddenApp_setUsedSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        doReturn(true).when(mFragment.mBatteryUtils).shouldHideSipper(mNormalBatterySipper);
+        doReturn(mRealContext).when(mFragment).getContext();
+        final String expectedSummary = "2m";
+
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
     }
@@ -464,6 +479,18 @@ public class PowerUsageSummaryTest {
         Robolectric.flushBackgroundThreadScheduler();
         assertThat(summary2.getText().toString().contains(NEW_ML_EST_SUFFIX));
         assertThat(summary1.getText().toString().contains(OLD_EST_SUFFIX));
+    }
+
+    @Test
+    public void testSaveInstanceState_showAllAppsRestored() {
+        Bundle bundle = new Bundle();
+        mFragment.mShowAllApps = true;
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+
+        mFragment.onSaveInstanceState(bundle);
+        mFragment.restoreSavedInstance(bundle);
+
+        assertThat(mFragment.mShowAllApps).isTrue();
     }
 
     public static class TestFragment extends PowerUsageSummary {

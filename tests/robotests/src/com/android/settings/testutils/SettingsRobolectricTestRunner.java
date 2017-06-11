@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.testutils;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -31,6 +31,8 @@ import java.util.List;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 import static org.robolectric.Robolectric.getShadowsAdapter;
+
+import com.android.settings.SettingsActivity;
 
 /**
  * Custom test runner for the testing of BluetoothPairingDialogs. This is needed because the
@@ -65,38 +67,7 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
             @Override
             public List<ResourcePath> getIncludedResourcePaths() {
                 List<ResourcePath> paths = super.getIncludedResourcePaths();
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./packages/apps/Settings/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/base/packages/SettingsLib/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/base/core/res/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/main/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/gingerbread/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/opt/setupwizard/library/recyclerview/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/support/v7/appcompat/res"),
-                        null));
-                paths.add(new ResourcePath(
-                        getPackageName(),
-                        Fs.fileFromPath("./frameworks/support/v7/cardview/res"),
-                        null));
+                SettingsRobolectricTestRunner.getIncludedResourcePaths(getPackageName(), paths);
                 return paths;
             }
         };
@@ -104,6 +75,41 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
         // Set the package name to the renamed one
         manifest.setPackageName("com.android.settings");
         return manifest;
+    }
+
+    public static void getIncludedResourcePaths(String packageName, List<ResourcePath> paths) {
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./packages/apps/Settings/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/base/packages/SettingsLib/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/base/core/res/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/opt/setupwizard/library/main/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/opt/setupwizard/library/gingerbread/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/opt/setupwizard/library/recyclerview/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/support/v7/appcompat/res"),
+                null));
+        paths.add(new ResourcePath(
+                packageName,
+                Fs.fileFromPath("./frameworks/support/v7/cardview/res"),
+                null));
     }
 
     // A simple utility class to start a Settings fragment with an intent. The code here is almost

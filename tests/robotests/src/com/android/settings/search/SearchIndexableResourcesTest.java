@@ -29,7 +29,7 @@ import android.provider.SearchIndexableResource;
 
 import android.text.TextUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.wifi.WifiSettings;
 

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 

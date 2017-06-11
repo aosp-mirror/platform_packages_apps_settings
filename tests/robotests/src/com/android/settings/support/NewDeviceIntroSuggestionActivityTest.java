@@ -22,8 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 
-import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -82,32 +81,27 @@ public class NewDeviceIntroSuggestionActivityTest {
 
     @Test
     public void isSuggestionComplete_noUrl_shouldReturnTrue() {
-        assertThat(mContext.getString(R.string.new_device_suggestion_intro_url))
-                .isEqualTo("");
+        when(mFeatureFactory.supportFeatureProvider.getNewDeviceIntroUrl(any(Context.class)))
+                .thenReturn(null);
         assertThat(isSuggestionComplete(mContext))
                 .isTrue();
     }
 
-    // Use a non-default resource qualifier to load the test string in
-    // res/values-mcc999/strings.xml.
-    @Config(qualifiers = "mcc999")
     @Test
     public void isSuggestionComplete_alreadyLaunchedBefore_shouldReturnTrue() {
-        assertThat(mContext.getString(R.string.new_device_suggestion_intro_url))
-                .startsWith("http");
+        when(mFeatureFactory.supportFeatureProvider.getNewDeviceIntroUrl(any(Context.class)))
+                .thenReturn("https://com.android.settings");
+
         getSharedPreferences().edit().putBoolean(PREF_KEY_SUGGGESTION_COMPLETE, true).commit();
 
         assertThat(isSuggestionComplete(mContext))
                 .isTrue();
     }
 
-    // Use a non-default resource qualifier to load the test string in
-    // res/values-mcc999/strings.xml.
-    @Config(qualifiers = "mcc999")
     @Test
     public void isSuggestionComplete_notExpiredAndCanOpenUrlInBrowser_shouldReturnFalse() {
-        assertThat(mContext.getString(R.string.new_device_suggestion_intro_url))
-                .startsWith("http");
+        when(mFeatureFactory.supportFeatureProvider.getNewDeviceIntroUrl(any(Context.class)))
+                .thenReturn("https://com.android.settings");
 
         final Intent intent = NewDeviceIntroSuggestionActivity.getLaunchIntent(mContext);
         mRobolectricPackageManager.addResolveInfoForIntent(intent, new ResolveInfo());
