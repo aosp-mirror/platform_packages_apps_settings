@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.action.BackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;

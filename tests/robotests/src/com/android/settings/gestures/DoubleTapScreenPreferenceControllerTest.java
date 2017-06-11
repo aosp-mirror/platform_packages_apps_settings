@@ -19,7 +19,7 @@ package com.android.settings.gestures;
 import android.content.Context;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

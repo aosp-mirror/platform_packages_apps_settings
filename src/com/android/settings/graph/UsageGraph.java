@@ -32,6 +32,7 @@ import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.View;
+
 import com.android.settingslib.R;
 
 public class UsageGraph extends View {
@@ -52,11 +53,14 @@ public class UsageGraph extends View {
     private final SparseIntArray mPaths = new SparseIntArray();
     // Paths in local coordinates for drawing.
     private final SparseIntArray mLocalPaths = new SparseIntArray();
-    private final int mCornerRadius;
 
+    // Paths for projection in coordinates they are passed in.
+    private final SparseIntArray mProjectedPaths = new SparseIntArray();
+    // Paths for projection in local coordinates for drawing.
+    private final SparseIntArray mLocalProjectedPaths = new SparseIntArray();
+
+    private final int mCornerRadius;
     private int mAccentColor;
-    private boolean mShowProjection;
-    private boolean mProjectUp;
 
     private float mMaxX = 100;
     private float mMaxY = 100;
@@ -86,7 +90,7 @@ public class UsageGraph extends View {
         float dots = resources.getDimensionPixelSize(R.dimen.usage_graph_dot_size);
         float interval = resources.getDimensionPixelSize(R.dimen.usage_graph_dot_interval);
         mDottedPaint.setStrokeWidth(dots * 3);
-        mDottedPaint.setPathEffect(new DashPathEffect(new float[] {dots, interval}, 0));
+        mDottedPaint.setPathEffect(new DashPathEffect(new float[]{dots, interval}, 0));
         mDottedPaint.setColor(context.getColor(R.color.usage_graph_dots));
 
         TypedValue v = new TypedValue();
@@ -98,6 +102,9 @@ public class UsageGraph extends View {
 
     void clearPaths() {
         mPaths.clear();
+        mLocalPaths.clear();
+        mProjectedPaths.clear();
+        mLocalProjectedPaths.clear();
     }
 
     void setMax(int maxX, int maxY) {
@@ -115,11 +122,21 @@ public class UsageGraph extends View {
     }
 
     public void addPath(SparseIntArray points) {
-        for (int i = 0; i < points.size(); i++) {
-            mPaths.put(points.keyAt(i), points.valueAt(i));
+        addPathAndUpdate(points, mPaths, mLocalPaths);
+    }
+
+    public void addProjectedPath(SparseIntArray points) {
+        addPathAndUpdate(points, mProjectedPaths, mLocalProjectedPaths);
+    }
+
+    private void addPathAndUpdate(SparseIntArray points, SparseIntArray paths,
+            SparseIntArray localPaths) {
+        for (int i = 0, size = points.size(); i < size; i++) {
+            paths.put(points.keyAt(i), points.valueAt(i));
         }
-        mPaths.put(points.keyAt(points.size() - 1) + 1, PATH_DELIM);
-        calculateLocalPaths();
+        // Add a delimiting value immediately after the last point.
+        paths.put(points.keyAt(points.size() - 1) + 1, PATH_DELIM);
+        calculateLocalPaths(paths, localPaths);
         postInvalidate();
     }
 
@@ -130,48 +147,45 @@ public class UsageGraph extends View {
         postInvalidate();
     }
 
-    void setShowProjection(boolean showProjection, boolean projectUp) {
-        mShowProjection = showProjection;
-        mProjectUp = projectUp;
-        postInvalidate();
-    }
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         updateGradient();
-        calculateLocalPaths();
+        calculateLocalPaths(mPaths, mLocalPaths);
+        calculateLocalPaths(mProjectedPaths, mLocalProjectedPaths);
     }
 
-    private void calculateLocalPaths() {
-        if (getWidth() == 0) return;
-        mLocalPaths.clear();
+    private void calculateLocalPaths(SparseIntArray paths, SparseIntArray localPaths) {
+        if (getWidth() == 0) {
+            return;
+        }
+        localPaths.clear();
         int pendingXLoc = 0;
         int pendingYLoc = PATH_DELIM;
-        for (int i = 0; i < mPaths.size(); i++) {
-            int x = mPaths.keyAt(i);
-            int y = mPaths.valueAt(i);
+        for (int i = 0; i < paths.size(); i++) {
+            int x = paths.keyAt(i);
+            int y = paths.valueAt(i);
             if (y == PATH_DELIM) {
-                if (i == mPaths.size() - 1 && pendingYLoc != PATH_DELIM) {
+                if (i == paths.size() - 1 && pendingYLoc != PATH_DELIM) {
                     // Connect to the end of the graph.
-                    mLocalPaths.put(pendingXLoc, pendingYLoc);
+                    localPaths.put(pendingXLoc, pendingYLoc);
                 }
                 // Clear out any pending points.
                 pendingYLoc = PATH_DELIM;
-                mLocalPaths.put(pendingXLoc + 1, PATH_DELIM);
+                localPaths.put(pendingXLoc + 1, PATH_DELIM);
             } else {
                 final int lx = getX(x);
                 final int ly = getY(y);
                 pendingXLoc = lx;
-                if (mLocalPaths.size() > 0) {
-                    int lastX = mLocalPaths.keyAt(mLocalPaths.size() - 1);
-                    int lastY = mLocalPaths.valueAt(mLocalPaths.size() - 1);
+                if (localPaths.size() > 0) {
+                    int lastX = localPaths.keyAt(localPaths.size() - 1);
+                    int lastY = localPaths.valueAt(localPaths.size() - 1);
                     if (lastY != PATH_DELIM && !hasDiff(lastX, lx) && !hasDiff(lastY, ly)) {
                         pendingYLoc = ly;
                         continue;
                     }
                 }
-                mLocalPaths.put(lx, ly);
+                localPaths.put(lx, ly);
             }
         }
     }
@@ -189,8 +203,9 @@ public class UsageGraph extends View {
     }
 
     private void updateGradient() {
-        mFillPaint.setShader(new LinearGradient(0, 0, 0, getHeight(),
-                getColor(mAccentColor, .2f), 0, TileMode.CLAMP));
+        mFillPaint.setShader(
+                new LinearGradient(0, 0, 0, getHeight(), getColor(mAccentColor, .2f), 0,
+                        TileMode.CLAMP));
     }
 
     private int getColor(int color, float alphaScale) {
@@ -207,62 +222,54 @@ public class UsageGraph extends View {
                 mMiddleDividerTint);
         drawDivider(canvas.getHeight() - mDividerSize, canvas, -1);
 
-        if (mLocalPaths.size() == 0) {
+        if (mLocalPaths.size() == 0 && mProjectedPaths.size() == 0) {
             return;
         }
-        if (mShowProjection) {
-            drawProjection(canvas);
+        drawLinePath(canvas, mLocalProjectedPaths, mDottedPaint);
+        drawFilledPath(canvas, mLocalPaths, mFillPaint);
+        drawLinePath(canvas, mLocalPaths, mLinePaint);
+    }
+
+    private void drawLinePath(Canvas canvas, SparseIntArray localPaths, Paint paint) {
+        if (localPaths.size() == 0) {
+            return;
         }
-        drawFilledPath(canvas);
-        drawLinePath(canvas);
-    }
-
-    private void drawProjection(Canvas canvas) {
         mPath.reset();
-        int x = mLocalPaths.keyAt(mLocalPaths.size() - 2);
-        int y = mLocalPaths.valueAt(mLocalPaths.size() - 2);
-        mPath.moveTo(x, y);
-        mPath.lineTo(canvas.getWidth(), mProjectUp ? 0 : canvas.getHeight());
-        canvas.drawPath(mPath, mDottedPaint);
-    }
-
-    private void drawLinePath(Canvas canvas) {
-        mPath.reset();
-        mPath.moveTo(mLocalPaths.keyAt(0), mLocalPaths.valueAt(0));
-        for (int i = 1; i < mLocalPaths.size(); i++) {
-            int x = mLocalPaths.keyAt(i);
-            int y = mLocalPaths.valueAt(i);
+        mPath.moveTo(localPaths.keyAt(0), localPaths.valueAt(0));
+        for (int i = 1; i < localPaths.size(); i++) {
+            int x = localPaths.keyAt(i);
+            int y = localPaths.valueAt(i);
             if (y == PATH_DELIM) {
-                if (++i < mLocalPaths.size()) {
-                    mPath.moveTo(mLocalPaths.keyAt(i), mLocalPaths.valueAt(i));
+                if (++i < localPaths.size()) {
+                    mPath.moveTo(localPaths.keyAt(i), localPaths.valueAt(i));
                 }
             } else {
                 mPath.lineTo(x, y);
             }
         }
-        canvas.drawPath(mPath, mLinePaint);
+        canvas.drawPath(mPath, paint);
     }
 
-    private void drawFilledPath(Canvas canvas) {
+    private void drawFilledPath(Canvas canvas, SparseIntArray localPaths, Paint paint) {
         mPath.reset();
-        float lastStartX = mLocalPaths.keyAt(0);
-        mPath.moveTo(mLocalPaths.keyAt(0), mLocalPaths.valueAt(0));
-        for (int i = 1; i < mLocalPaths.size(); i++) {
-            int x = mLocalPaths.keyAt(i);
-            int y = mLocalPaths.valueAt(i);
+        float lastStartX = localPaths.keyAt(0);
+        mPath.moveTo(localPaths.keyAt(0), localPaths.valueAt(0));
+        for (int i = 1; i < localPaths.size(); i++) {
+            int x = localPaths.keyAt(i);
+            int y = localPaths.valueAt(i);
             if (y == PATH_DELIM) {
-                mPath.lineTo(mLocalPaths.keyAt(i - 1), getHeight());
+                mPath.lineTo(localPaths.keyAt(i - 1), getHeight());
                 mPath.lineTo(lastStartX, getHeight());
                 mPath.close();
-                if (++i < mLocalPaths.size()) {
-                    lastStartX = mLocalPaths.keyAt(i);
-                    mPath.moveTo(mLocalPaths.keyAt(i), mLocalPaths.valueAt(i));
+                if (++i < localPaths.size()) {
+                    lastStartX = localPaths.keyAt(i);
+                    mPath.moveTo(localPaths.keyAt(i), localPaths.valueAt(i));
                 }
             } else {
                 mPath.lineTo(x, y);
             }
         }
-        canvas.drawPath(mPath, mFillPaint);
+        canvas.drawPath(mPath, paint);
     }
 
     private void drawDivider(int y, Canvas canvas, int tintColor) {

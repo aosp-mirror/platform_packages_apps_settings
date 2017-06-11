@@ -25,7 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchResult.Builder;
 import com.android.settings.testutils.FakeFeatureFactory;

@@ -16,14 +16,12 @@
 
 package com.android.settings.enterprise;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.core.PreferenceController;

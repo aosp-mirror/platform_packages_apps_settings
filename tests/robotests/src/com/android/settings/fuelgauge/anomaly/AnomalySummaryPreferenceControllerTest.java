@@ -32,7 +32,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

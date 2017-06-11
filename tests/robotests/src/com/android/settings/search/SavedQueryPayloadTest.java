@@ -18,11 +18,9 @@
 package com.android.settings.search;
 
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.SavedQueryPayload;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;

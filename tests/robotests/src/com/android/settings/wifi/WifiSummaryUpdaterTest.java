@@ -23,7 +23,7 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.wifi.WifiStatusTracker;

@@ -18,7 +18,7 @@ package com.android.settings.dream;
 
 import android.content.ComponentName;
 import android.content.Context;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.dream.DreamBackend;

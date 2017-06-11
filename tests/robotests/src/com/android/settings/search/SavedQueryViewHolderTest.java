@@ -26,12 +26,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
-import com.android.settings.search.SavedQueryViewHolder;
-import com.android.settings.search.SearchFragment;
-import com.android.settings.search.SearchResult;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

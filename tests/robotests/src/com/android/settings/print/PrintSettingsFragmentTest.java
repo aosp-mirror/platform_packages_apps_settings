@@ -28,9 +28,9 @@ import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;

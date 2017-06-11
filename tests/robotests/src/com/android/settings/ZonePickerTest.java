@@ -26,6 +26,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.android.settings.datetime.ZonePicker;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLibcoreTimeZoneNames;
 import com.android.settings.testutils.shadow.ShadowTimeZoneNames;
 

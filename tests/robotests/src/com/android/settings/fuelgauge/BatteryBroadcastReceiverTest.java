@@ -19,7 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 

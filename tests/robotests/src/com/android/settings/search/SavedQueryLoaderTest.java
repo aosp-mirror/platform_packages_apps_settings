@@ -22,12 +22,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search.IndexDatabaseHelper;
-import com.android.settings.search.ResultPayload;
-import com.android.settings.search.SavedQueryLoader;
-import com.android.settings.search.SearchResult;
 import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;

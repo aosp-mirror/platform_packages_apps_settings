@@ -23,7 +23,7 @@ import android.content.Context;
 import android.util.ArrayMap;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;

@@ -23,7 +23,7 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.NotificationBackend;
@@ -43,7 +43,6 @@ import org.robolectric.util.ReflectionHelpers;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
