@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.R;
@@ -47,6 +48,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
@@ -386,5 +388,42 @@ public class InstalledAppResultLoaderTest {
                 mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void query_appExistsInBothProfiles() {
+        final String query = "carrot";
+        final String packageName = "carrot";
+        final int user1 = 0;
+        final int user2 = 10;
+        final int uid = 67672;
+        List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(user1, "user 1", 0));
+        infos.add(new UserInfo(user2, "user 2", UserInfo.FLAG_MANAGED_PROFILE));
+
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), eq(user1)))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(UserHandle.getUid(user1, uid) /* uid */,
+                                packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), eq(user2)))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(UserHandle.getUid(user2, uid) /* uid */,
+                                packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
+
+        Set<AppSearchResult> searchResults = (Set<AppSearchResult>) mLoader.loadInBackground();
+        assertThat(searchResults).hasSize(2);
+
+        Set<Integer> uidResults = searchResults.stream().map(result -> result.info.uid).collect(
+                Collectors.toSet());
+        assertThat(uidResults).containsExactly(
+                UserHandle.getUid(user1, uid),
+                UserHandle.getUid(user2, uid));
     }
 }
