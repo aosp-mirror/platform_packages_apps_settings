@@ -30,6 +30,7 @@ import android.os.UserHandle;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.Utils;
 
 public class NotificationBackend {
@@ -60,15 +61,28 @@ public class NotificationBackend {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
                     com.android.internal.R.array.config_nonBlockableNotificationPackages);
+        markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
+        return row;
+    }
+
+    @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
+            String packageName) {
         if (nonBlockablePkgs != null) {
             int N = nonBlockablePkgs.length;
             for (int i = 0; i < N; i++) {
-                if (app.packageName.equals(nonBlockablePkgs[i])) {
+                String pkg = nonBlockablePkgs[i];
+                if (pkg == null) {
+                    continue;
+                } else if (pkg.contains(":")) {
+                    // Interpret as channel; lock only this channel for this app.
+                    if (packageName.equals(pkg.split(":", 2)[0])) {
+                        row.lockedChannelId = pkg.split(":", 2 )[1];
+                    }
+                } else if (packageName.equals(nonBlockablePkgs[i])) {
                     row.systemApp = row.lockedImportance = true;
                 }
             }
         }
-        return row;
     }
 
     public boolean getNotificationsBanned(String pkg, int uid) {
@@ -184,6 +198,7 @@ public class NotificationBackend {
         public boolean first;  // first app in section
         public boolean systemApp;
         public boolean lockedImportance;
+        public String lockedChannelId;
         public boolean showBadge;
         public int userId;
     }
