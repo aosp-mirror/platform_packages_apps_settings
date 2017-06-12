@@ -44,6 +44,7 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
+import com.android.settings.widget.ImeAwareEditText;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
@@ -93,7 +94,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             CredentialCheckResultTracker.Listener {
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
-        private TextView mPasswordEntry;
+        private ImeAwareEditText mPasswordEntry;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
         private AsyncTask<?, ?, ?> mPendingLockCheck;
         private CredentialCheckResultTracker mCredentialCheckResultTracker;
@@ -132,7 +133,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     container,
                     false);
 
-            mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
+            mPasswordEntry = (ImeAwareEditText) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             // EditText inside ScrollView doesn't automatically get focus.
             mPasswordEntry.requestFocus();
@@ -310,7 +311,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mPasswordEntry.setEnabled(true);
             mPasswordEntryInputDisabler.setInputEnabled(true);
             if (shouldAutoShowSoftKeyboard()) {
-                mImm.showSoftInput(mPasswordEntry, InputMethodManager.SHOW_IMPLICIT);
+                mPasswordEntry.scheduleShowSoftInput();
             }
         }
 
