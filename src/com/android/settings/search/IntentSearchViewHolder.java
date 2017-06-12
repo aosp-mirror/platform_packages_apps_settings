@@ -16,9 +16,11 @@
  */
 package com.android.settings.search;
 
+import android.content.Intent;
+import android.os.UserHandle;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 
 /**
  * ViewHolder for intent based search results.
@@ -32,7 +34,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
 
     @Override
     public int getClickActionMetricName() {
-        return MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT;
+        return MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT;
     }
 
     @Override
@@ -41,7 +43,15 @@ public class IntentSearchViewHolder extends SearchViewHolder {
 
         itemView.setOnClickListener(v -> {
            fragment.onSearchResultClicked(this, result);
-           fragment.startActivity(result.payload.getIntent());
+            final Intent intent = result.payload.getIntent();
+            // Use app user id to support work profile use case.
+            if (result instanceof AppSearchResult) {
+                AppSearchResult appResult = (AppSearchResult) result;
+                UserHandle userHandle = appResult.getAppUserHandle();
+                fragment.getActivity().startActivityAsUser(intent, userHandle);
+            } else {
+                fragment.startActivity(intent);
+            }
         });
     }
 }
