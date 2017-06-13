@@ -134,6 +134,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
+            // EditText inside ScrollView doesn't automatically get focus.
+            mPasswordEntry.requestFocus();
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
 
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);

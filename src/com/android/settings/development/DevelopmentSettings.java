@@ -355,6 +355,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
+    private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
 
     public DevelopmentSettings() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -393,6 +394,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mTelephonyMonitorController = new TelephonyMonitorPreferenceController(getActivity());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
         mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
+        mCameraHalHdrplusController = new CameraHalHdrplusPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
@@ -425,6 +427,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugReportInPowerController.displayPreference(getPreferenceScreen());
         mTelephonyMonitorController.displayPreference(getPreferenceScreen());
         mWebViewAppPrefController.displayPreference(getPreferenceScreen());
+        mCameraHalHdrplusController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -647,6 +650,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugReportInPowerController.enablePreference(enabled);
         mTelephonyMonitorController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
+        mCameraHalHdrplusController.enablePreference(enabled);
         updateAllOptions();
     }
 
@@ -765,6 +769,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
         mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
+        mHaveDebugSettings |= mCameraHalHdrplusController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, SystemProperties.getBoolean(
@@ -2391,6 +2396,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         if (mVerifyAppsOverUsbController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
+        if (mCameraHalHdrplusController.handlePreferenceTreeClick(preference)) {
             return true;
         }
 
