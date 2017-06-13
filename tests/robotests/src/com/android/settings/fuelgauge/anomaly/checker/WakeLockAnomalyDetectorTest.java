@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.anomaly.checker;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
@@ -39,6 +40,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
+import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -96,6 +98,8 @@ public class WakeLockAnomalyDetectorTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private AnomalyDetectionPolicy mPolicy;
+    @Mock
+    private AnomalyAction mAnomalyAction;
 
     private ArrayMap<String, BatteryStats.Uid.Wakelock> mAnomalyWakelocks;
     private ArrayMap<String, BatteryStats.Uid.Wakelock> mNormalWakelocks;
@@ -115,6 +119,7 @@ public class WakeLockAnomalyDetectorTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mApplicationInfo).when(mPackageManager)
                 .getApplicationInfo(nullable(String.class), anyInt());
+        doReturn(true).when(mAnomalyAction).isActionActive(any());
 
         mAnomalySipper.uidObj = mAnomalyUid;
         mAnomalyWakelocks = new ArrayMap<>();
@@ -145,6 +150,7 @@ public class WakeLockAnomalyDetectorTest {
 
         mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext, mPolicy));
         mWakelockAnomalyDetector.mBatteryUtils = mBatteryUtils;
+        mWakelockAnomalyDetector.mAnomalyAction = mAnomalyAction;
         doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
                 eq(mAnomalyTimer), anyLong());
         doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(

@@ -16,11 +16,15 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -44,15 +48,22 @@ public class ForceStopActionTest {
     private Context mContext;
     @Mock
     private ActivityManager mActivityManager;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
+    @Mock
+    private PackageManager mPackageManager;
     private Anomaly mAnomaly;
     private ForceStopAction mForceStopAction;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest(mContext);
         doReturn(mActivityManager).when(mContext).getSystemService(Context.ACTIVITY_SERVICE);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
+                PackageManager.GET_META_DATA);
 
         mAnomaly = new Anomaly.Builder()
                 .setPackageName(PACKAGE_NAME)
@@ -65,5 +76,19 @@ public class ForceStopActionTest {
         mForceStopAction.handlePositiveAction(mAnomaly, 0 /* metricskey */);
 
         verify(mActivityManager).forceStopPackage(PACKAGE_NAME);
+    }
+
+    @Test
+    public void testIsActionActive_appStopped_returnFalse() {
+        mApplicationInfo.flags = ApplicationInfo.FLAG_STOPPED;
+
+        assertThat(mForceStopAction.isActionActive(mAnomaly)).isFalse();
+    }
+
+    @Test
+    public void testIsActionActive_appRunning_returnTrue() {
+        mApplicationInfo.flags = 0;
+
+        assertThat(mForceStopAction.isActionActive(mAnomaly)).isTrue();
     }
 }
