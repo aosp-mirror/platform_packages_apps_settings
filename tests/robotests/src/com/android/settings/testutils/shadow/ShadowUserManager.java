@@ -16,11 +16,19 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.UserIdInt;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserManager;
+import android.util.SparseArray;
 
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.internal.ShadowExtractor;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class provides the API 24 implementation of UserManager.get(Context).
@@ -28,8 +36,34 @@ import org.robolectric.annotation.Implements;
 @Implements(UserManager.class)
 public class ShadowUserManager {
 
+    private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
+
+    public void setUserInfo(int userHandle, UserInfo userInfo) {
+        mUserInfos.put(userHandle, userInfo);
+    }
+
+    @Implementation
+    public UserInfo getUserInfo(int userHandle) {
+        return mUserInfos.get(userHandle);
+    }
+
+    @Implementation
+    public List<UserInfo> getProfiles(@UserIdInt int userHandle) {
+        return Collections.emptyList();
+    }
+
+    @Implementation
+    public int getCredentialOwnerProfile(@UserIdInt int userHandle) {
+        return userHandle;
+    }
+
     @Implementation
     public static UserManager get(Context context) {
         return (UserManager) context.getSystemService(Context.USER_SERVICE);
+    }
+
+    public static ShadowUserManager getShadow() {
+        return (ShadowUserManager) ShadowExtractor.extract(
+                RuntimeEnvironment.application.getSystemService(UserManager.class));
     }
 }

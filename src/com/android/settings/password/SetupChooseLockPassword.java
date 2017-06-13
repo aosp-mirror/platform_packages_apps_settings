@@ -84,6 +84,9 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+
+            mCancelButton.setText(R.string.skip_label);
+
             boolean showOptionsButton = getActivity().getIntent().getBooleanExtra(
                     ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (showOptionsButton) {
@@ -98,6 +101,12 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             switch (v.getId()) {
                 case R.id.screen_lock_options:
                     launchChooseLockGeneric();
+                    break;
+                case R.id.cancel_button:
+                    SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                            getActivity().getIntent()
+                                    .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                    dialog.show(getFragmentManager());
                     break;
                 default:
                     super.onClick(v);
