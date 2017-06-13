@@ -17,9 +17,7 @@
 package com.android.settings.fuelgauge.anomaly.checker;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.BatteryStats;
-import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
@@ -30,6 +28,8 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
+import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,8 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
     private static final String TAG = "WakeupAlarmAnomalyDetector";
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
+    AnomalyAction mAnomalyAction;
     private long mWakeupAlarmThreshold;
     private Context mContext;
 
@@ -52,6 +54,8 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
     WakeupAlarmAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
         mContext = context;
         mBatteryUtils = BatteryUtils.getInstance(context);
+        mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
+                Anomaly.AnomalyType.WAKEUP_ALARM);
         mWakeupAlarmThreshold = policy.wakeupAlarmThreshold;
     }
 
@@ -91,7 +95,10 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
                             .setDisplayName(displayName)
                             .setPackageName(packageName)
                             .build();
-                    anomalies.add(anomaly);
+
+                    if (mAnomalyAction.isActionActive(anomaly)) {
+                        anomalies.add(anomaly);
+                    }
                 }
             }
         }

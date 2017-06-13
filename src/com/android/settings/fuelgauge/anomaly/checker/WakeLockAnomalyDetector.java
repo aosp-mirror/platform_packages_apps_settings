@@ -17,14 +17,11 @@
 package com.android.settings.fuelgauge.anomaly.checker;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
-import android.text.format.DateUtils;
 import android.util.ArrayMap;
-import android.util.Log;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -32,6 +29,8 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
+import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +46,8 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
     long mWakeLockThresholdMs;
+    @VisibleForTesting
+    AnomalyAction mAnomalyAction;
 
     public WakeLockAnomalyDetector(Context context) {
         this(context, new AnomalyDetectionPolicy(context));
@@ -57,6 +58,8 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mBatteryUtils = BatteryUtils.getInstance(context);
+        mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
+                Anomaly.AnomalyType.WAKE_LOCK);
 
         mWakeLockThresholdMs = policy.wakeLockThreshold;
     }
@@ -111,7 +114,10 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                         .setDisplayName(displayName)
                         .setPackageName(packageName)
                         .build();
-                anomalies.add(anomaly);
+
+                if (mAnomalyAction.isActionActive(anomaly)) {
+                    anomalies.add(anomaly);
+                }
             }
 
         }
