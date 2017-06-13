@@ -40,46 +40,77 @@ import org.robolectric.util.FragmentTestUtil;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyDialogFragmentTest {
-    @Anomaly.AnomalyType
-    private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final String DISPLAY_NAME = "app";
     private static final int UID = 111;
-    private Anomaly mAnomaly;
+    private Anomaly mWakeLockAnomaly;
+    private Anomaly mWakeupAlarmAnomaly;
     private AnomalyDialogFragment mAnomalyDialogFragment;
     private Context mContext;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mAnomaly = new Anomaly.Builder()
-                .setType(ANOMALY_TYPE)
+        mWakeLockAnomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKE_LOCK)
                 .setUid(UID)
                 .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
                 .build();
-
-        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mAnomaly, 0 /* metricskey */);
+        mWakeupAlarmAnomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setUid(UID)
+                .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
+                .build();
     }
 
     @Test
     public void testOnCreateDialog_hasCorrectData() {
+        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mWakeLockAnomaly,
+                0 /* metricskey */);
         FragmentTestUtil.startFragment(mAnomalyDialogFragment);
 
-        assertThat(mAnomalyDialogFragment.mAnomaly).isEqualTo(mAnomaly);
+        assertThat(mAnomalyDialogFragment.mAnomaly).isEqualTo(mWakeLockAnomaly);
     }
 
     @Test
-    public void testOnCreateDialog_hasCorrectDialog() {
+    public void testOnCreateDialog_wakelockAnomaly_fireForceStopDialog() {
+        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mWakeLockAnomaly,
+                0 /* metricskey */);
+
         FragmentTestUtil.startFragment(mAnomalyDialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.force_stop_dlg_text));
+                mContext.getString(R.string.dialog_stop_message, mWakeLockAnomaly.displayName));
         assertThat(shadowDialog.getTitle()).isEqualTo(
-                mContext.getString(R.string.force_stop_dlg_title));
+                mContext.getString(R.string.dialog_stop_title));
         assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
-                mContext.getString(R.string.dlg_ok));
+                mContext.getString(R.string.dialog_stop_ok));
+        assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
+                mContext.getString(R.string.dlg_cancel));
+    }
+
+    @Test
+    public void testOnCreateDialog_wakeupAlarmAnomaly_fireBackgroundCheckDialog() {
+        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mWakeupAlarmAnomaly,
+                0 /* metricskey */);
+
+        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.dialog_background_check_message,
+                        mWakeLockAnomaly.displayName));
+        assertThat(shadowDialog.getTitle()).isEqualTo(
+                mContext.getString(R.string.dialog_background_check_title));
+        assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
+                mContext.getString(R.string.dialog_background_check_ok));
         assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
                 mContext.getString(R.string.dlg_cancel));
     }

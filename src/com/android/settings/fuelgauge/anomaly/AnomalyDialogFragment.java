@@ -101,9 +101,17 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
         switch (anomalyAction.getActionType()) {
             case Anomaly.AnomalyActionType.FORCE_STOP:
                 return new AlertDialog.Builder(context)
-                        .setTitle(R.string.force_stop_dlg_title)
-                        .setMessage(R.string.force_stop_dlg_text)
-                        .setPositiveButton(R.string.dlg_ok, this)
+                        .setTitle(R.string.dialog_stop_title)
+                        .setMessage(getString(R.string.dialog_stop_message, mAnomaly.displayName))
+                        .setPositiveButton(R.string.dialog_stop_ok, this)
+                        .setNegativeButton(R.string.dlg_cancel, null)
+                        .create();
+            case Anomaly.AnomalyActionType.BACKGROUND_CHECK:
+                return new AlertDialog.Builder(context)
+                        .setTitle(R.string.dialog_background_check_title)
+                        .setMessage(getString(R.string.dialog_background_check_message,
+                                mAnomaly.displayName))
+                        .setPositiveButton(R.string.dialog_background_check_ok, this)
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
             default:
