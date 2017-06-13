@@ -50,13 +50,14 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -76,9 +77,9 @@ import java.util.List;
  * {@link #handleActivityResult(int, int, Intent)} in this controller.
  */
 //TODO(b/35810915): Make InstalledAppDetails use this controller
-public class AppButtonsPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause, OnDestroy, View.OnClickListener,
-        ApplicationsState.Callbacks {
+public class AppButtonsPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause, OnDestroy,
+        View.OnClickListener, ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
 
     private static final String TAG = "AppButtonsPrefCtl";

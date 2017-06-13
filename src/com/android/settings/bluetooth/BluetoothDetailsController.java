@@ -20,8 +20,9 @@ import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -31,8 +32,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  * This class provides common lifecycle and bluetooth device event registration for Bluetooth device
  * details controllers.
  */
-public abstract class BluetoothDetailsController extends PreferenceController
-        implements CachedBluetoothDevice.Callback, LifecycleObserver, OnPause, OnResume {
+public abstract class BluetoothDetailsController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, CachedBluetoothDevice.Callback, LifecycleObserver,
+        OnPause, OnResume {
 
     protected final Context mContext;
     protected final PreferenceFragment mFragment;

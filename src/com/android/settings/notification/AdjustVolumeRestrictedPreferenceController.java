@@ -23,14 +23,16 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.accounts.AccountRestrictionHelper;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Base class for preference controller that handles preference that enforce adjust volume
  * restriction
  */
-public abstract class AdjustVolumeRestrictedPreferenceController extends PreferenceController {
+public abstract class AdjustVolumeRestrictedPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin {
 
     private AccountRestrictionHelper mHelper;
 

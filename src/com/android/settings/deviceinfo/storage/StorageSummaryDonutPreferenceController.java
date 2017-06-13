@@ -24,14 +24,16 @@ import android.text.TextUtils;
 import android.text.format.Formatter;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 /**
  * StorgaeSummaryPreferenceController updates the donut storage summary preference to have the
  * correct sizes showing.
  */
-public class StorageSummaryDonutPreferenceController extends PreferenceController {
+public class StorageSummaryDonutPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
     private long mUsedBytes;
     private long mTotalBytes;
     private StorageSummaryDonutPreference mSummary;

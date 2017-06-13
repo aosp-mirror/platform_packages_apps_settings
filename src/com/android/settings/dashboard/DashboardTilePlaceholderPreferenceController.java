@@ -20,7 +20,8 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * PreferenceController for a dashboard_tile_placeholder, a special preference marking where
@@ -28,7 +29,8 @@ import com.android.settings.core.PreferenceController;
  * preference screen in xml. If not present, all dynamic dashboard tiles will be added to the
  * bottom of page.
  */
-class DashboardTilePlaceholderPreferenceController extends PreferenceController {
+class DashboardTilePlaceholderPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_PLACEHOLDER = "dashboard_tile_placeholder";
 

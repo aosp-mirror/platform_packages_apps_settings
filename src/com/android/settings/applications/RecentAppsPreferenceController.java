@@ -16,6 +16,9 @@
 
 package com.android.settings.applications;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .SETTINGS_APP_NOTIF_CATEGORY;
+
 import android.app.Application;
 import android.app.Fragment;
 import android.app.usage.UsageStats;
@@ -29,7 +32,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
@@ -37,8 +39,9 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,15 +52,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .SETTINGS_APP_NOTIF_CATEGORY;
-
 /**
  * This controller displays a list of recently used apps and a "See all" button. If there is
  * no recently used app, "See all" will be displayed as "App info".
  */
-public class RecentAppsPreferenceController extends PreferenceController
-        implements Comparator<UsageStats> {
+public class RecentAppsPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Comparator<UsageStats> {
 
     private static final String TAG = "RecentAppsCtrl";
     private static final String KEY_PREF_CATEGORY = "recent_apps_category";
@@ -122,7 +122,7 @@ public class RecentAppsPreferenceController extends PreferenceController
 
     @Override
     public void updateNonIndexableKeys(List<String> keys) {
-        super.updateNonIndexableKeys(keys);
+        PreferenceControllerMixin.super.updateNonIndexableKeys(keys);
         // Don't index category name into search. It's not actionable.
         keys.add(KEY_PREF_CATEGORY);
         keys.add(KEY_DIVIDER);

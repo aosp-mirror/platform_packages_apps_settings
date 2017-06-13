@@ -22,14 +22,16 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller that shows received files
  */
-public class BluetoothFilesPreferenceController extends PreferenceController {
+public class BluetoothFilesPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
     private static final String TAG = "BluetoothFilesPrefCtrl";
 
     public static final String KEY_RECEIVED_FILES = "bt_received_files";

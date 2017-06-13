@@ -22,10 +22,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 
-public class StartNowPreferenceController extends PreferenceController {
+public class StartNowPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
     private static final String TAG = "StartNowPreferenceController";
     private static final String PREF_KEY = "dream_start_now_button_container";
     private final DreamBackend mBackend;

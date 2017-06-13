@@ -16,11 +16,12 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AdditionalSystemUpdatePreferenceController extends PreferenceController {
+public class AdditionalSystemUpdatePreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin {
 
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
 

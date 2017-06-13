@@ -18,7 +18,8 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
@@ -69,8 +70,9 @@ public interface Indexable {
 
         /**
          * @param context
-         * @return a list of {@link PreferenceController} for ResultPayload data during Indexing.
+         * @return a list of {@link AbstractPreferenceController} for ResultPayload data during
+         * Indexing.
          */
-        List<PreferenceController> getPreferenceControllers(Context context);
+        List<AbstractPreferenceController> getPreferenceControllers(Context context);
     }
 }

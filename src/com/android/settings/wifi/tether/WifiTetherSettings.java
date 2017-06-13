@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
+import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,15 +34,12 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
-import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
@@ -124,8 +124,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSSIDPreferenceController = new WifiTetherSSIDPreferenceController(context, this);
         mPasswordPreferenceController = new WifiTetherPasswordPreferenceController(context, this);
         mApBandPreferenceController = new WifiTetherApBandPreferenceController(context, this);

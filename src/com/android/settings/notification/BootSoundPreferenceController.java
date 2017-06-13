@@ -22,9 +22,11 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class BootSoundPreferenceController extends PreferenceController {
+public class BootSoundPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     // Boot Sounds needs to be a system property so it can be accessed during boot.
     private static final String KEY_BOOT_SOUNDS = "boot_sounds";

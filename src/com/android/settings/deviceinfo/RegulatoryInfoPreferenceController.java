@@ -19,9 +19,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class RegulatoryInfoPreferenceController extends PreferenceController {
+public class RegulatoryInfoPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
     private static final Intent INTENT_PROBE = new Intent(Settings.ACTION_SHOW_REGULATORY_INFO);

@@ -27,9 +27,9 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
@@ -108,8 +108,8 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mAccountSynController = new AccountSyncPreferenceController(context);
         controllers.add(mAccountSynController);
         mRemoveAccountController = new RemoveAccountPreferenceController(context, this);

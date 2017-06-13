@@ -42,7 +42,7 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -730,7 +730,7 @@ public class DatabaseIndexingManager {
             final String intentTargetPackage = sir.intentTargetPackage;
             final String intentTargetClass = sir.intentTargetClass;
 
-            Map<String, PreferenceController> controllerUriMap = null;
+            Map<String, PreferenceControllerMixin> controllerUriMap = null;
 
             if (fragmentName != null) {
                 controllerUriMap = DatabaseIndexingUtils

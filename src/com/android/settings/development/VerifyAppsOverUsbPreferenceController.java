@@ -27,17 +27,19 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
 /**
  * Controller to manage the state of "Verify apps over USB" toggle.
  */
-public class VerifyAppsOverUsbPreferenceController extends PreferenceController {
+public class VerifyAppsOverUsbPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 

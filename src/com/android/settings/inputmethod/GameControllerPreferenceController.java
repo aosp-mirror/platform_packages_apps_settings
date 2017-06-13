@@ -25,13 +25,15 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.InputDevice;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class GameControllerPreferenceController extends PreferenceController
-        implements InputManager.InputDeviceListener, LifecycleObserver, OnResume, OnPause {
+public class GameControllerPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, InputManager.InputDeviceListener, LifecycleObserver,
+        OnResume, OnPause {
 
     public static final String PREF_KEY = "vibrate_input_devices";
     private static final String CATEGORY_KEY = "game_controller_settings_category";

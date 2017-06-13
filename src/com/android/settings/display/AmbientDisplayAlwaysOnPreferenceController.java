@@ -25,10 +25,12 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AmbientDisplayAlwaysOnPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class AmbientDisplayAlwaysOnPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin,
+        Preference.OnPreferenceChangeListener {
 
     private static final String KEY_ALWAYS_ON = "ambient_display_always_on";
     private static final int MY_USER = UserHandle.myUserId();

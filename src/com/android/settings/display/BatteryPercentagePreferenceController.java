@@ -20,7 +20,8 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 
@@ -28,8 +29,8 @@ import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
  * A controller to manage the switch for showing battery percentage in the status bar.
  */
 
-public class BatteryPercentagePreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class BatteryPercentagePreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
 

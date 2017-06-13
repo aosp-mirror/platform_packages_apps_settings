@@ -25,7 +25,7 @@ import android.util.ArrayMap;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 
 import org.junit.Before;
@@ -67,7 +67,7 @@ public class DatabaseIndexingUtilsTest {
     @Test
     public void testGetPreferenceControllerUriMap_CompatibleClass_ReturnsValidMap() {
         final String className = "com.android.settings.system.SystemDashboardFragment";
-        final Map<String, PreferenceController> map =
+        final Map<String, PreferenceControllerMixin> map =
                 DatabaseIndexingUtils.getPreferenceControllerUriMap(className, mContext);
         assertThat(map.get("system_update_settings"))
                 .isInstanceOf(SystemUpdatePreferenceController.class);
@@ -82,23 +82,13 @@ public class DatabaseIndexingUtilsTest {
     @Test
     public void testGetPayloadFromMap_MatchingKey_ReturnsPayload() {
         final String key = "key";
-        PreferenceController prefController = new PreferenceController(mContext) {
-            @Override
-            public boolean isAvailable() {
-                return false;
-            }
-
-            @Override
-            public String getPreferenceKey() {
-                return key;
-            }
-
+        PreferenceControllerMixin prefController = new PreferenceControllerMixin() {
             @Override
             public ResultPayload getResultPayload() {
                 return new ResultPayload(null);
             }
         };
-        ArrayMap<String, PreferenceController> map = new ArrayMap<>();
+        ArrayMap<String, PreferenceControllerMixin> map = new ArrayMap<>();
         map.put(key, prefController);
 
         ResultPayload payload = DatabaseIndexingUtils.getPayloadFromUriMap(map, key);

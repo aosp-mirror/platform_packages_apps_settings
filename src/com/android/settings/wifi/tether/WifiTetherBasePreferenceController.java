@@ -22,10 +22,11 @@ import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public abstract class WifiTetherBasePreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public abstract class WifiTetherBasePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     public interface OnTetherConfigUpdateListener {
         void onTetherConfigUpdated();

@@ -18,19 +18,15 @@ package com.android.settings.backup;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.os.Build;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class BackupSettingsActivityPreferenceController extends PreferenceController {
+public class BackupSettingsActivityPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin {
     private static final String KEY_BACKUP_SETTINGS = "backup_settings";
     private static final String TAG = "BackupSettingActivityPC" ;
 

@@ -22,9 +22,11 @@ import android.content.Intent;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class BackupSettingsPreferenceController extends PreferenceController {
+public class BackupSettingsPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
     private static final String BACKUP_SETTINGS = "backup_settings";
     private static final  String MANUFACTURER_SETTINGS = "manufacturer_backup";
     private Intent mBackupSettingsIntent;

@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
-import android.net.IpPrefix;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -53,10 +52,11 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.vpn2.ConnectivityManagerWrapper;
 import com.android.settings.wifi.WifiDetailPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -67,7 +67,6 @@ import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -75,8 +74,8 @@ import java.util.stream.Collectors;
  * Controller for logic pertaining to displaying Wifi information for the
  * {@link WifiNetworkDetailsFragment}.
  */
-public class WifiDetailPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnPause, OnResume {
+public class WifiDetailPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnResume {
     private static final String TAG = "WifiDetailsPrefCtrl";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 

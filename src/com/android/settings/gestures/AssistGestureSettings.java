@@ -21,10 +21,10 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -54,13 +54,13 @@ public class AssistGestureSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context,
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
         controllers.addAll(FeatureFactory.getFactory(context).getAssistGestureFeatureProvider()
                 .getControllers(context, lifecycle));
@@ -79,7 +79,7 @@ public class AssistGestureSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };

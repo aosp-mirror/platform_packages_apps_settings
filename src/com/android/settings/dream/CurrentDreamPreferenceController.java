@@ -18,13 +18,15 @@ package com.android.settings.dream;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import java.util.Optional;
 
-public class CurrentDreamPreferenceController extends PreferenceController {
+public class CurrentDreamPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
     private final DreamBackend mBackend;
     private final static String TAG = "CurrentDreamPreferenceController";
     private final static String CURRENT_SCREENSAVER = "current_screensaver";

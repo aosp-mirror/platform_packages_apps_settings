@@ -38,7 +38,6 @@ import com.android.settings.Utils;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
@@ -50,6 +49,7 @@ import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
@@ -72,7 +72,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
     private PrivateVolumeOptionMenuController mOptionMenuController;
-    private List<PreferenceController> mSecondaryUsers;
+    private List<AbstractPreferenceController> mSecondaryUsers;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -129,7 +129,7 @@ public class StorageDashboardFragment extends DashboardFragment
         mPreferenceController.setUsedSize(privateUsedBytes);
         mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
         for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
-            PreferenceController controller = mSecondaryUsers.get(i);
+            AbstractPreferenceController controller = mSecondaryUsers.get(i);
             if (controller instanceof SecondaryUserController) {
                 SecondaryUserController userController = (SecondaryUserController) controller;
                 userController.setTotalSize(mStorageInfo.totalBytes);
@@ -161,8 +161,8 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController = new StorageSummaryDonutPreferenceController(context);
         controllers.add(mSummaryController);
 
@@ -192,10 +192,10 @@ public class StorageDashboardFragment extends DashboardFragment
     /**
      * Updates the secondary user controller sizes.
      */
-    private void updateSecondaryUserControllers(List<PreferenceController> controllers,
+    private void updateSecondaryUserControllers(List<AbstractPreferenceController> controllers,
             SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
         for (int i = 0, size = controllers.size(); i < size; i++) {
-            PreferenceController controller = controllers.get(i);
+            AbstractPreferenceController controller = controllers.get(i);
             if (controller instanceof StorageAsyncLoader.ResultHandler) {
                 StorageAsyncLoader.ResultHandler userController =
                         (StorageAsyncLoader.ResultHandler) controller;
@@ -218,11 +218,11 @@ public class StorageDashboardFragment extends DashboardFragment
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     final StorageManager sm = context.getSystemService(StorageManager.class);
                     final UserManagerWrapper userManager =
                             new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
-                    final List<PreferenceController> controllers = new ArrayList<>();
+                    final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new StorageSummaryDonutPreferenceController(context));
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
                             null /* volume */, new StorageManagerVolumeProvider(sm)));

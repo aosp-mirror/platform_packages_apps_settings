@@ -25,12 +25,14 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VirtualKeyboardPreferenceController extends PreferenceController {
+public class VirtualKeyboardPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private final InputMethodManager mImm;
     private final DevicePolicyManager mDpm;
