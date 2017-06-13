@@ -46,6 +46,14 @@ public class BackgroundCheckAction implements AnomalyAction {
     }
 
     @Override
+    public boolean isActionActive(Anomaly anomaly) {
+        final int mode = mAppOpsManager
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid,
+                        anomaly.packageName);
+        return mode != AppOpsManager.MODE_IGNORED && mode != AppOpsManager.MODE_ERRORED;
+    }
+
+    @Override
     public int getActionType() {
         return Anomaly.AnomalyActionType.BACKGROUND_CHECK;
     }

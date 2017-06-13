@@ -38,6 +38,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
+import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,6 +86,8 @@ public class WakeupAlarmAnomalyDetectorTest {
     private BatteryStats.Counter mCounter;
     @Mock
     private AnomalyDetectionPolicy mPolicy;
+    @Mock
+    private AnomalyAction mAnomalyAction;
 
     private WakeupAlarmAnomalyDetector mWakeupAlarmAnomalyDetector;
     private Context mContext;
@@ -100,6 +103,7 @@ public class WakeupAlarmAnomalyDetectorTest {
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
         doReturn(RUNNING_TIME_MS).when(mBatteryUtils).calculateRunningTimeBasedOnStatsType(any(),
                 anyInt());
+        doReturn(true).when(mAnomalyAction).isActionActive(any());
 
         mAnomalySipper.uidObj = mAnomalyUid;
         doReturn(ANOMALY_UID).when(mAnomalyUid).getUid();
@@ -116,6 +120,7 @@ public class WakeupAlarmAnomalyDetectorTest {
 
         mWakeupAlarmAnomalyDetector = spy(new WakeupAlarmAnomalyDetector(mContext, mPolicy));
         mWakeupAlarmAnomalyDetector.mBatteryUtils = mBatteryUtils;
+        mWakeupAlarmAnomalyDetector.mAnomalyAction = mAnomalyAction;
     }
 
     @Test
