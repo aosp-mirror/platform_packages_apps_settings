@@ -24,11 +24,18 @@ import com.android.settings.fuelgauge.anomaly.Anomaly;
 public interface AnomalyAction {
     /**
      * handle the action when user clicks positive button
-     * @param Anomaly about the app that we need to handle
+     * @param anomaly about the app that we need to handle
      * @param metricsKey key for the page that invokes the action
      *
      * @see com.android.internal.logging.nano.MetricsProto
      */
-    void handlePositiveAction(Anomaly Anomaly, int metricsKey);
+    void handlePositiveAction(Anomaly anomaly, int metricsKey);
+
+    /**
+     * Check whether the action is active for {@code anomaly}
+     * @param anomaly about the app that we need to handle
+     * @return {@code true} if action is active, otherwise return {@code false}
+     */
+    boolean isActionActive(Anomaly anomaly);
     int getActionType();
 }
