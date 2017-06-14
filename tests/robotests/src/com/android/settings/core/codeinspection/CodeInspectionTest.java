@@ -16,10 +16,10 @@
 
 package com.android.settings.core.codeinspection;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
 import com.android.settings.search.SearchIndexProviderCodeInspector;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;

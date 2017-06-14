@@ -110,7 +110,6 @@ public class WifiConfigController implements TextWatcher,
     public static final int WIFI_PEAP_PHASE2_AKA        = 4;
     public static final int WIFI_PEAP_PHASE2_AKA_PRIME  = 5;
 
-    private static final int SSID_ASCII_MAX_LENGTH = 32;
 
     /* Phase2 methods supported by PEAP are limited */
     private final ArrayAdapter<String> mPhase2PeapAdapter;
@@ -463,7 +462,7 @@ public class WifiConfigController implements TextWatcher,
 
         if (mSsidView != null) {
             final String ssid = mSsidView.getText().toString();
-            if (ssid.length() > SSID_ASCII_MAX_LENGTH) {
+            if (WifiUtils.isSSIDTooLong(ssid)) {
                 mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.VISIBLE);
             }
         }
