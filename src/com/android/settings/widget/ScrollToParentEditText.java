@@ -23,12 +23,14 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.EditText;
 
+import com.android.settings.widget.ImeAwareEditText;
+
 /**
  * An EditText that, instead of scrolling to itself when focused, will request scrolling to its
  * parent. This is used in ChooseLockPassword to do make a best effort for not hiding the error
  * messages for why the password is invalid under the keyboard.
  */
-public class ScrollToParentEditText extends EditText {
+public class ScrollToParentEditText extends ImeAwareEditText {
 
     private Rect mRect = new Rect();
 
