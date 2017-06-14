@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"நிராகரி"</string>
     <string name="dlg_close" msgid="7471087791340790015">"மூடு"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"மாறு"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"அறியப்படாத"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> படிகளே உள்ளன.</item>
       <item quantity="one">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> படியே உள்ளது.</item>
@@ -107,26 +108,17 @@
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"சாதனங்களுக்கு ஸ்கேன் செய்"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"சாதனத்தை மறுபெயரிடுக"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"மறுபெயரிடு"</string>
-    <!-- no translation found for bluetooth_disconnect_title (7830252930348734303) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (8208712728668714199) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (6611038575213485336) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (3995834526315103965) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_dialog_ok (3308586619539119106) -->
-    <skip />
+    <string name="bluetooth_disconnect_title" msgid="7830252930348734303">"சாதனத்தைத் துண்டிக்கவா?"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="8208712728668714199">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இலிருந்து உங்கள் மொபைலின் இணைப்பு துண்டிக்கப்படும்."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="6611038575213485336">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இலிருந்து உங்கள் டேப்லெட்டின் இணைப்பு துண்டிக்கப்படும்."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இலிருந்து உங்கள் சாதனத்தின் இணைப்பு துண்டிக்கப்படும்."</string>
+    <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"துண்டி"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"புளுடூத் அமைப்புகளை மாற்ற உங்களுக்கு அனுமதியில்லை."</string>
-    <!-- no translation found for bluetooth_pairing_pref_title (7429413067477968637) -->
-    <skip />
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"புதிய சாதனத்தை இணை"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"புளூடூத் அமைப்புகள் இயக்கப்பட்டிருக்கும்போது, அருகிலுள்ள சாதனங்களுக்கு <xliff:g id="DEVICE_NAME">%1$s</xliff:g> தெரியும்."</string>
-    <!-- no translation found for bluetooth_footer_mac_message (1109366350000220283) -->
-    <skip />
-    <!-- no translation found for bluetooth_footer_mac_message (6807634484499166486) -->
-    <skip />
-    <!-- no translation found for bluetooth_footer_mac_message (8413944740341742061) -->
-    <skip />
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"மொபைலின் புளூடூத் முகவரி: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"டேப்லெட்டின் புளூடூத் முகவரி: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"சாதனத்தின் புளூடூத் முகவரி: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ஐ துண்டிக்கவா?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"அலைபரப்புதல்"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"சுயவிவரத்தை முடக்கவா?"</string>
@@ -138,8 +130,7 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"புளூடூத் இணைப்பிற்கான கோரிக்கை"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"இணைப்பிற்கான கோரிக்கை"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்க, தட்டவும்."</string>
-    <!-- no translation found for bluetooth_show_received_files (3144149432555230410) -->
-    <skip />
+    <string name="bluetooth_show_received_files" msgid="3144149432555230410">"பெற்ற கோப்புகள்"</string>
     <string name="device_picker" msgid="4978696506172252813">"புளூடூத் சாதனத்தைத் தேர்வுசெய்க"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"புளூடூத்தை இயக்க <xliff:g id="APP_NAME">%1$s</xliff:g> விரும்புகிறது"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"புளூடூத்தை முடக்க <xliff:g id="APP_NAME">%1$s</xliff:g> விரும்புகிறது"</string>
@@ -175,11 +166,9 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"உங்கள் செய்திகளை %1$s அணுக விரும்புகிறது. %2$s க்கு அணுகலை வழங்கவா?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM அணுகல் கோரிக்கை"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> உங்கள் சிம் கார்டை அணுக விரும்புகிறது. சிம் கார்டிற்கு அணுகல் வழங்குவது இணைப்பின் போது, உங்கள் சாதனத்தின் தரவு இணைப்பை முடக்கும். <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>க்கு அணுகல் வழங்கவும்"</string>
-    <!-- no translation found for bluetooth_device_name_summary (4757990010751789977) -->
-    <skip />
+    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"பிற சாதனங்களில் \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' எனத் தெரியும்"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"உங்கள் சாதனங்கள்"</string>
-    <!-- no translation found for bluetooth_pairing_page_title (7712127387361962608) -->
-    <skip />
+    <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"புதிய சாதனத்தை இணை"</string>
     <string name="date_and_time" msgid="9062980487860757694">"தேதி &amp; நேரம்"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"நேரமண்டலத்தைத் தேர்வுசெய்க"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -378,55 +367,38 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"கைரேகை மூலம் திறக்கலாம்"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"கைரேகையைப் பயன்படுத்தவும்"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"மொபைலைத் திறக்க, வாங்குவதை அங்கீகரிக்க அல்லது பயன்பாடுகளில் உள்நுழைய, கைரேகை உணர்வியைத் தொட்டால் போதும். யாருடைய கைரேகையைச் சேர்க்கிறீர்கள் என்பதில் கவனமாக இருக்கவும். சேர்க்கப்பட்ட எந்தக் கைரேகையைப் பயன்படுத்தியும் முன்னர் கூறிய எல்லா செயல்களையும் செய்ய முடியும்.\n\nகுறிப்பு: வலிமையான பேட்டர்ன் அல்லது பின்னை விட, கைரேகையானது பாதுகாப்பு குறைவானதாக இருக்கக்கூடும்."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (1550756694054944874) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (6817326798834882531) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"மொபைலைத் திறக்க அல்லது வாங்குவதை அங்கீகரிக்க, உங்கள் கைரேகையைப் பயன்படுத்தவும்.\n\n குறிப்பு: இந்தச் சாதனத்தைத் திறக்க, கைரேகையைப் பயன்படுத்த முடியாது. மேலும் தகவலுக்கு, உங்கள் நிறுவனத்தின் நிர்வாகியைத் தொடர்புகொள்ளவும்."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"மொபைலைத் திறக்க அல்லது வாங்குவதை அங்கீகரிக்க, உங்கள் கைரேகையைப் பயன்படுத்தவும்.\nகுறிப்பு: உங்கள் கைரேகையானது வலுவான பேட்டர்ன் அல்லது பின்னை விட குறைந்த பாதுகாப்புடையதாக இருக்கக்கூடும்.\n"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ரத்துசெய்"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"தொடரவும்"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"தவிர்"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_continue_setup (1961957425135180242) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (1581834104051243425) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (4629503416877189572) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (2423428240245737909) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (5219287483885558525) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (1466238255429527112) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (3008526710555416125) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"அடுத்து"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"சாதனப் பாதுகாப்பு அம்சங்களை இயக்க முடியாது. இந்த டேப்லெட்டைத் தொலைத்தாலோ, திருடப்பட்டாலோ அல்லது மீட்டமைத்தாலோ, பிறர் இதைப் பயன்படுத்துவதைத் தடுக்க முடியாது."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"சாதனப் பாதுகாப்பு அம்சங்களை இயக்க முடியாது. இந்தச் சாதனத்தைத் தொலைத்தாலோ, திருடப்பட்டாலோ அல்லது மீட்டமைத்தாலோ, பிறர் இதைப் பயன்படுத்துவதைத் தடுக்க முடியாது."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"சாதனப் பாதுகாப்பு அம்சங்களை இயக்க முடியாது. இந்த மொபைலைத் தொலைத்தாலோ, திருடப்பட்டாலோ அல்லது மீட்டமைத்தாலோ, பிறர் இதைப் பயன்படுத்துவதைத் தடுக்க முடியாது."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="5219287483885558525">"சாதனப் பாதுகாப்பு அம்சங்களை இயக்க முடியாது. இந்த டேப்லெட்டைத் தொலைத்தாலோ அல்லது திருடப்பட்டாலோ, பிறர் இதைப் பயன்படுத்துவதைத் தடுக்க முடியாது."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"சாதனப் பாதுகாப்பு அம்சங்களை இயக்க முடியாது. இந்தச் சாதனத்தைத் தொலைத்தாலோ அல்லது திருடப்பட்டாலோ, பிறர் இதைப் பயன்படுத்துவதைத் தடுக்க முடியாது."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"சாதனப் பாதுகாப்பு அம்சங்களை இயக்க முடியாது. இந்த மொபைலைத் தொலைத்தாலோ அல்லது திருடப்பட்டாலோ, பிறர் இதைப் பயன்படுத்துவதைத் தடுக்க முடியாது."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"பரவாயில்லை, தவிர்"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"முந்தையது"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_find_sensor_title (3051496861358227199) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_find_sensor_message (8793966374365960368) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"உணர்வியைத் தொடவும்"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"இது மொபைலின் பின்புறம் இருக்கும். ஆள்காட்டி விரலைப் பயன்படுத்தவும்."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"சாதனத்தில் கைரேகை உணர்வி அமைந்துள்ள இடத்தின் விளக்கப்படம்"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"பெயர்"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"சரி"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"நீக்கு"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_start_title (2068961812439460133) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"உணர்வியைத் தொடவும்"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"விரலை உணர்வியில் வைத்து, அதிர்வை உணர்ந்த பின்னர் விரலை எடுக்கவும்"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (2819679722403209778) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (6158989350522518586) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_title (7567276170287972230) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (4796715961273420536) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"விரலை தூக்கி, மீண்டும் தொடுக"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"கைரேகையின் வெவ்வேறு பகுதிகளைச் சேர்க்க, விரலைத் தூக்கவும்"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"கைரேகை சேர்க்கப்பட்டது"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"இந்த ஐகானைப் பார்க்கும் போது, அடையாளப்படுத்தலுக்கு அல்லது வாங்குவதை அங்கீகரிக்க, உங்கள் கைரேகையைப் பயன்படுத்தவும்."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"கைரேகை அமைவைத் தவிர்க்கவா?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"கைரேகையை மட்டும் பயன்படுத்தி மொபைலைத் திறக்கும் முறையைத் தேர்வுசெய்துள்ளீர்கள். இப்போது தவிர்த்தால், இதைப் பின்னர் அமைக்க வேண்டியிருக்கும். அமைவுக்குத் தோராயமாக ஒரு நிமிடம் மட்டுமே எடுக்கும்."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"திரைப் பூட்டை அமை"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"முடிந்தது"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"அச்சச்சோ, அது உணர்வி இல்லை"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_touch_dialog_message (2989019978041986175) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"ஆள்காட்டி விரலால், பின்புற உணர்வியை தொடவும்."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"பதிவுசெய்ய முடியவில்லை"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"கைரேகையைப் பதிவுசெய்வதற்கான நேரம் முடிந்தது. மீண்டும் முயற்சிக்கவும்."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"கைரேகையைப் பதிவுசெய்ய முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது வேறு விரலைப் பயன்படுத்தவும்."</string>
@@ -675,22 +647,14 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"மேம்பட்ட புளூடூத்"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"புளூடூத் இயக்கத்தில் இருக்கும்போது, உங்கள் சாதனம் அருகிலுள்ள பிற புளூடூத் சாதனங்களைத் தொடர்புகொள்ளலாம்."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"இருப்பிடத்தைத் துல்லியமாக அறிவதை மேம்படுத்த, முறைமையின் பயன்பாடுகளும் சேவைகளும் புளூடூத் முடக்கத்தில் இருக்கும் போதும் புளூடூத் சாதனங்களைக் கண்டறியும். இதை <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ஸ்கேன் செய்தல் அமைப்புகளில்<xliff:g id="LINK_END_1">LINK_END</xliff:g> மாற்றலாம்."</string>
-    <!-- no translation found for bluetooth_connect_failed (4500234659813241053) -->
-    <skip />
-    <!-- no translation found for device_details_title (6576953269221085300) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_mac_address (2513724313558236181) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_title (38467834196432400) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (9087609557757135712) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (7785695793007576501) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (251257782642157557) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_forget_confirm_button (3829370108973879006) -->
-    <skip />
+    <string name="bluetooth_connect_failed" msgid="4500234659813241053">"இணைக்க முடியவில்லை. மீண்டும் முயலவும்."</string>
+    <string name="device_details_title" msgid="6576953269221085300">"சாதன விவரங்கள்"</string>
+    <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"சாதனத்தின் புளூடூத் முகவரி: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"சாதனத்தை அகற்றவா?"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"உங்கள் மொபைல் இனி <xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்கப்பட்டிருக்காது"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"உங்கள் டேப்லெட் இனி <xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்கப்பட்டிருக்காது"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"உங்கள் சாதனம் இனி <xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்கப்பட்டிருக்காது"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"சாதனத்தை அகற்று"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"இதனுடன் இணை..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"மீடியா ஆடியோவிலிருந்து <xliff:g id="DEVICE_NAME">%1$s</xliff:g> துண்டிக்கப்படும்."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"ஹாண்ட்ஸ்ஃப்ரீ ஆடியோவிலிருந்து <xliff:g id="DEVICE_NAME">%1$s</xliff:g> இன் தொடர்பு துண்டிக்கப்படும்."</string>
@@ -843,6 +807,7 @@
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"வழங்காதே"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"சரிபார்க்காதே"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"சான்றிதழ் எதுவும் குறிப்பிடப்படவில்லை. உங்கள் இணைப்பு தனிப்பட்டதாக இருக்காது."</string>
+    <string name="wifi_ssid_too_long" msgid="3474753269579895244">"நெட்வொர்க்கின் பெயர் மிகவும் நீளமாக உள்ளது."</string>
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"டொமைனைக் குறிப்பிட வேண்டும்."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS கிடைக்கிறது"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS கிடைக்கிறது)"</string>
@@ -910,28 +875,17 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"இந்தக் குழுவை மறக்கவா?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"போர்ட்டபில் வைஃபை ஹாட்ஸ்பாட்"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"வைஃபை ஹாட்ஸ்பாட்"</string>
-    <!-- no translation found for wifi_hotspot_off_subtext (5466126533609394170) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_tethering_on_subtext (5752490509369962007) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_tethering_on_subtext (6461075246164300670) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_on_local_only_subtext (2068110388011294735) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_title (1341735529132128887) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (3378299995508671967) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_summary_connected (3888672084861445362) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_password_title (1955592302902091281) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_ap_band_title (1165801173359290681) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_footer_info_regular (1203489406068036455) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_footer_info_local_only (857988412470694109) -->
-    <skip />
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"பிற சாதனங்களுடன் இணையம் அல்லது உள்ளடக்கத்தைப் பகிரவில்லை"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"ஹாட்ஸ்பாட் மூலம் டேப்லெட்டின் இணைய இணைப்பைப் பகிர்கிறது"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"ஹாட்ஸ்பாட் மூலம் மொபைலின் இணைய இணைப்பைப் பகிர்கிறது"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"பயன்பாடானது உள்ளடக்கத்தைப் பகிர்கிறது. இணைய இணைப்பைப் பகிர, ஹாட்ஸ்பாட்டை முடக்கி, பின்னர் இயக்கவும்"</string>
+    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"வைஃபையின் பெயர்"</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>ஐ இயக்குகிறது..."</string>
+    <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> உடன் பிற சாதனங்களை இணைக்கலாம்"</string>
+    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"வைஃபை கடவுச்சொல்"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP பேண்ட்"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"உங்கள் பிற சாதனங்களுக்கு வைஃபை நெட்வொர்க்கை உருவாக்க, ஹாட்ஸ்பாட்டைப் பயன்படுத்தவும். ஹாட்ஸ்பாட்டானது உங்கள் மொபைல் தரவு இணைப்பைப் பயன்படுத்தி இணையத்தை வழங்கும். கூடுதல் மொபைல் தரவுக் கட்டணங்கள் விதிக்கப்படலாம்."</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, பயன்பாடுகள் ஹாட்ஸ்பாட்டையும் உருவாக்கலாம்."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"ஹாட்ஸ்பாட்டை இயக்குகிறது…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"ஹாட்ஸ்பாட்டை முடக்குகிறது…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> செயலில் உள்ளது"</string>
@@ -1036,6 +990,7 @@
     <string name="search_settings_no_results" msgid="8799027492641230999">"முடிவுகள் இல்லை"</string>
     <string name="display_settings" msgid="7965901687241669598">"தோற்றம்"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"திரையைத் தானாகச் சுழற்று"</string>
+    <string name="color_mode_title" msgid="3159275920408338215">"ஒளிமிக்க நிறங்கள்"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"டேப்லெட்டைச் சுழற்றும்போது திசையமைவையும் தானாக மாற்று"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"மொபைலைச் சுழற்றும்போது திசையமைவைத் தானாக மாற்று"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"டேப்லெட்டைச் சுழற்றும்போது திசையமைவையும் தானாக மாற்று"</string>
@@ -1063,33 +1018,22 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"கிடைக்கும் ஒளிக்கேற்ப ஒளிர்வை மேம்படுத்து. இதை இயக்கியிருந்தால், தற்காலிகமாக ஒளிர்வைச் சரிசெய்யலாம்."</string>
     <string name="night_display_title" msgid="2626451512200357686">"இரவு ஒளி"</string>
     <string name="night_display_text" msgid="1837277457033025056">"இரவு ஒளி அம்சமானது உங்கள் திரையை மஞ்சளும் ஆரஞ்சும் கலந்த நிறத்திற்கு மாற்றும். இது மங்கலான ஒளியில் திரையைப் பார்ப்பதை அல்லது படிப்பதை எளிதாக்குவதோடு, விரைவாக உறங்க உதவக்கூடும்."</string>
-    <!-- no translation found for night_display_auto_mode_title (6574111412154833409) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_never (2483761922928753400) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_custom (2379394568898721765) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_twilight (589042813708244059) -->
-    <skip />
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"திட்டமிடு"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"ஏதுமில்லை"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"தனிப்பயன் நேரத்தில் இயக்கும்"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"இயக்கும்: சூரிய அஸ்தமனம் - உதயம்"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"தொடக்க நேரம்"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"முடிவு நேரம்"</string>
-    <!-- no translation found for night_display_status_title (1784041143360286267) -->
-    <skip />
+    <string name="night_display_status_title" msgid="1784041143360286267">"நிலை"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"ஒளிச்செறிவு"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"முடக்கத்தில் / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for night_display_summary_off_auto_mode_never (3583590137322963513) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (6365668239253173208) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (3596291693781757392) -->
-    <skip />
+    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"ஒருபோதும் தானாக இயக்கப்படாது"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"<xliff:g id="ID_1">%1$s</xliff:g>க்குத் தானாக இயக்கப்படும்"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"சூரிய அஸ்தமனத்தின் போது தானாக இயக்கப்படும்"</string>
     <string name="night_display_summary_on" msgid="1355713529996456744">"இயக்கத்தில் / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for night_display_summary_on_auto_mode_never (9117830821363119835) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (5510753572245577263) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (852270120144683507) -->
-    <skip />
+    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"ஒருபோதும் தானாக முடக்கப்படாது"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"<xliff:g id="ID_1">%1$s</xliff:g>க்குத் தானாக முடக்கப்படும்"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"சூரிய உதயத்தின் போது தானாக முடக்கப்படும்"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"உறக்கநிலையிலிரு"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"திரை முடக்கப்படும்"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> செயல்படாமல் இருப்பின்"</string>
@@ -1113,16 +1057,11 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"அமைப்பு"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"தானாக ஒளிர்வைச் சரிசெய்தல்"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"விரலை எடுக்கும் போது இயங்கு"</string>
-    <!-- no translation found for ambient_display_screen_title (4252755516328775766) -->
-    <skip />
-    <!-- no translation found for ambient_display_screen_summary_always_on (7974004969481877214) -->
-    <skip />
-    <!-- no translation found for ambient_display_screen_summary_notifications (1449570742600868654) -->
-    <skip />
-    <!-- no translation found for ambient_display_category_triggers (4359289754456268573) -->
-    <skip />
-    <!-- no translation found for doze_title (2375510714460456687) -->
-    <skip />
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"சூழல்சார் திரை"</string>
+    <string name="ambient_display_screen_summary_always_on" msgid="7974004969481877214">"எப்போதும் இயக்கத்தில் வை"</string>
+    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"புதிய அறிவிப்புகள்"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"காட்டுவதற்கான நேரம்"</string>
+    <string name="doze_title" msgid="2375510714460456687">"புதிய அறிவிப்புகள்"</string>
     <string name="doze_summary" msgid="3846219936142814032">"அறிவிப்புகளைப் பெறும் போது திரையை இயக்கு"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"எப்போதும் இயக்கத்தில் வை"</string>
     <string name="doze_always_on_summary" msgid="1254238982577776475">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைக் காட்டும்"</string>
@@ -1432,20 +1371,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"தரவு சேமிப்பான் இயக்கப்பட்டிருக்கும் போது, இணைக்கவோ போர்ட்டபிள் ஹாட்ஸ்பாட்டுகளைப் பயன்படுத்தவோ முடியாது"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB டெதெரிங்"</string>
-    <!-- no translation found for usb_tethering_subtext (5991482890033484794) -->
-    <skip />
-    <!-- no translation found for usb_tethering_subtext (5988796139573211318) -->
-    <skip />
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"USB மூலம் மொபைலின் இணைய இணைப்பைப் பகிர்"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"USB மூலம் டேப்லெட்டின் இணைய இணைப்பைப் பகிர்"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"புளூடூத் டெதெரிங்"</string>
-    <!-- no translation found for bluetooth_tethering_subtext (4558227863463153412) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_subtext (1055197887836203595) -->
-    <skip />
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"புளூடூத் மூலம் டேப்லெட்டின் இணைய இணைப்பைப் பகிர்"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"புளூடூத் மூலம் மொபைலின் இணைய இணைப்பைப் பகிர்"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"புளூடூத் மூலம் <xliff:g id="DEVICE_NAME">%1$d</xliff:g> இன் இணைய இணைப்பைப் பகிரவில்லை"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> சாதனங்களுக்கு மேல் இணைக்க முடியாது."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இன் இணைப்புமுறை நீக்கப்படும்."</string>
-    <!-- no translation found for tethering_footer_info (1308462275952345985) -->
-    <skip />
+    <string name="tethering_footer_info" msgid="1308462275952345985">"மொபைல் தரவு இணைப்பு மூலமாக, பிற சாதனங்களுக்கு இணைப்பை வழங்க, ஹாட்ஸ்பாட்டையும் இணைப்பு முறையையும் பயன்படுத்தவும். அருகிலுள்ள சாதனங்களுடன் உள்ளடக்கத்தைப் பகிர, பயன்பாடுகள் ஹாட்ஸ்பாட்டையும் உருவாக்கலாம்."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"உதவி"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"மொபைல் நெட்வொர்க்"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"மொபைல் திட்டம்"</string>
@@ -1523,8 +1457,11 @@
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"உங்களுக்குத் தரவு இணைப்பு இல்லை. இப்போது இந்தத் தகவலைப் பார்க்க இணையத்துடன் இணைக்கப்பட்ட எந்தக் கணினியிலிருந்தும் %s க்குச் செல்லவும்."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"ஏற்றுகிறது..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"உங்கள் கடவுச்சொல்லைத் தேர்வுசெய்க"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"கைரேகைக்கு, கடவுச்சொல்லை அமை"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"உங்கள் வடிவத்தைத் தேர்வுசெய்யவும்"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"கைரேகைக்கு, பேட்டர்னை அமை"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"உங்கள் பின் ஐத் தேர்வுசெய்யவும்"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"கைரேகைக்கு, பின்னை அமை"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"உங்கள் வடிவத்தை உறுதிப்படுத்தவும்"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"உங்கள் பின்னை உறுதிசெய்யவும்"</string>
@@ -1593,12 +1530,9 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"பயன்பாட்டு அமைப்பு"</string>
     <string name="install_applications" msgid="4872012136210802181">"அறியப்படாத மூலங்கள்"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"எல்லா பயன்பாட்டு ஆதாரங்களையும் அனுமதி"</string>
-    <!-- no translation found for recent_app_category_title (6673071268966003928) -->
-    <skip />
-    <!-- no translation found for see_all_apps_title (1459400183763114135) -->
-    <skip />
-    <!-- no translation found for recent_app_summary (3366446669844932300) -->
-    <skip />
+    <string name="recent_app_category_title" msgid="6673071268966003928">"சமீபத்தில் திறந்த பயன்பாடுகள்"</string>
+    <string name="see_all_apps_title" msgid="1317153498074308438">"<xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகளையும் பார்க்கவும்"</string>
+    <string name="recent_app_summary" msgid="3366446669844932300">"<xliff:g id="TIME">^1</xliff:g> முன்பு"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"அறியப்படாத பயன்பாடுகளால் உங்கள் டேப்லெட்டும் தனிப்பட்ட தரவும் அதிகம் பாதிப்பிற்கு உள்ளாகும். இந்த மூலத்திலிருந்து பயன்பாடுகளை நிறுவுவதால், அவற்றைப் பயன்படுத்தும் போது உங்கள் டேப்லெட்டுக்கு ஏதேனும் சேதம் ஏற்பட்டாலோ அல்லது தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"அறியப்படாத பயன்பாடுககளால் உங்கள் மொபைலும் தனிப்பட்ட தரவும் அதிகம் பாதிப்பிற்கு உள்ளாகும். இந்த மூலத்திலிருந்து பயன்பாடுகளை நிறுவுவதால், அவற்றைப் பயன்படுத்தும் போது உங்கள் மொபைலுக்கு ஏதேனும் சேதம் ஏற்பட்டாலோ அல்லது தரவை இழந்தாலோ, அதற்கு நீங்கள்தான் பொறுப்பாவீர்கள் என்பதை ஏற்கிறீர்கள்."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"மேம்பட்ட அமைப்பு"</string>
@@ -1658,7 +1592,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"இயங்குகிறது"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB சேமிப்பகம்"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD கார்டில் உள்ளவை"</string>
-    <string name="disabled" msgid="9206776641295849915">"முடக்கப்பட்டது"</string>
     <string name="not_installed" msgid="2797554494953450291">"இவருக்கு நிறுவப்படவில்லை"</string>
     <string name="installed" msgid="3070865169422600098">"நிறுவப்பட்டது"</string>
     <string name="no_applications" msgid="7336588977497084921">"பயன்பாடுகள் இல்லை."</string>
@@ -1768,8 +1701,7 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"அமைப்பின் சேவையை நிறுத்தவா?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"இந்தச் சேவையை நீங்கள் நிறுத்தினால், உங்கள் டேப்லெட்டை முடக்கி மீண்டும் இயக்கும் வரை அதன் சில அம்சங்கள் சரியாக வேலைசெய்வதை நிறுத்திவிடும்."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"இந்தச் சேவையை நீங்கள் நிறுத்தினால், உங்கள் மொபைலை ஸ்விட்ச் ஆஃப் செய்து ஸ்டார்ட் செய்யும் வரை அதன் அம்சங்களில் சில வேலைசெய்யாமல் போகலாம்."</string>
-    <!-- no translation found for language_input_gesture_title (8749227808244881255) -->
-    <skip />
+    <string name="language_input_gesture_title" msgid="8749227808244881255">"மொழிகள், உள்ளீடு &amp; சைகைகள்"</string>
     <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
     <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
@@ -2057,46 +1989,26 @@
     <string name="details_subtitle" msgid="32593908269911734">"விவரங்களைப் பயன்படுத்து"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"ஆற்றல் பயன்பாட்டைச் சரிசெய்க"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"உள்ளடங்கும் தொகுப்புகள்"</string>
-    <!-- no translation found for battery_abnormal_details_title (5469019021857291216) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_wakelock_summary (4326186999058828831) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_wakeup_alarm_summary (644657277875785240) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_location_summary (6552797246798806002) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_apps_summary (792553273248686972) -->
-    <skip />
-    <!-- no translation found for dialog_stop_title (6395127715596746479) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (9149534230295983971) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (5702924180465982412) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (9201053069493107713) -->
-    <skip />
-    <!-- no translation found for dialog_stop_ok (2319777211264004900) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_title (1525936543485084879) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (5539009263025812279) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (4001747292234087612) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (585341224642457664) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_ok (412876934682899659) -->
-    <skip />
-    <!-- no translation found for dialog_location_title (5888917530725874727) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (7684240588903005427) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (7439311770795993356) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (6285773079775018012) -->
-    <skip />
-    <!-- no translation found for dialog_location_ok (4572391197601313986) -->
-    <skip />
+    <string name="battery_abnormal_details_title" msgid="5469019021857291216">"பேட்டரியை அதிகமாகப் பயன்படுத்தும் பயன்பாடுகள்"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"சாதனத்தைச் செயல்பாட்டில் வைத்திருக்கிறது"</string>
+    <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"பின்னணியில் சாதனத்தை எழுப்புகிறது"</string>
+    <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"இருப்பிடத்தை அடிக்கடிக் கோருகிறது"</string>
+    <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> பயன்பாடுகள், வழக்கத்திற்கு மாறாகச் செயல்படுகின்றன"</string>
+    <string name="dialog_stop_title" msgid="6395127715596746479">"பயன்பாட்டை நிறுத்தவா?"</string>
+    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"<xliff:g id="APP">%1$s</xliff:g> உங்கள் மொபைலைத் தொடர்ந்து செயல்பாட்டில் வைப்பதால், மொபைலால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலைத் தீர்க்க, பயன்பாட்டை உடனடியாக நிறுத்தலாம்.\n\nதொடர்ந்து சிக்கல் ஏற்பட்டால், பேட்டரிச் செயல்திறனை மேம்படுத்த, பயன்பாட்டை நிறுவல்நீக்க வேண்டியிருக்கும்."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"<xliff:g id="APP">%1$s</xliff:g> உங்கள் டேப்லெட்டைத் தொடர்ந்து செயல்பாட்டில் வைப்பதால், டேப்லெட்டால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலைத் தீர்க்க, பயன்பாட்டை உடனடியாக நிறுத்தலாம்.\n\nதொடர்ந்து சிக்கல் ஏற்பட்டால், பேட்டரிச் செயல்திறனை மேம்படுத்த, பயன்பாட்டை நிறுவல்நீக்க வேண்டியிருக்கும்."</string>
+    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"<xliff:g id="APP">%1$s</xliff:g> உங்கள் சாதனத்தைத் தொடர்ந்து செயல்பாட்டில் வைப்பதால், சாதனத்தால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலைத் தீர்க்க, பயன்பாட்டை உடனடியாக நிறுத்தலாம்.\n\nதொடர்ந்து சிக்கல் ஏற்பட்டால், பேட்டரிச் செயல்திறனை மேம்படுத்த, பயன்பாட்டை நிறுவல்நீக்க வேண்டியிருக்கும்."</string>
+    <string name="dialog_stop_ok" msgid="2319777211264004900">"பயன்பாட்டை நிறுத்து"</string>
+    <string name="dialog_background_check_title" msgid="1525936543485084879">"பின்னணி உபயோகத்தை முடக்கவா?"</string>
+    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"<xliff:g id="APP">%1$s</xliff:g> உங்கள் மொபைலைத் தொடர்ந்து செயல்பாட்டில் வைத்திருக்கும் என்பதால், மொபைலால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலுக்குத் தீர்வு காண, பின்னணியில் இந்தப் பயன்பாடு இயங்குவதைத் தடுக்கலாம்."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"<xliff:g id="APP">%1$s</xliff:g> உங்கள் டேப்லெட்டைத் தொடர்ந்து செயல்பாட்டில் வைத்திருக்கும் என்பதால், டேப்லெட்டால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலுக்குத் தீர்வு காண, பின்னணியில் இந்தப் பயன்பாடு இயங்குவதைத் தடுக்கலாம்."</string>
+    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"<xliff:g id="APP">%1$s</xliff:g> உங்கள் சாதனத்தைத் தொடர்ந்து செயல்பாட்டில் வைத்திருக்கும் என்பதால், சாதனத்தால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலுக்குத் தீர்வு காண, பின்னணியில் இந்தப் பயன்பாடு இயங்குவதைத் தடுக்கலாம்."</string>
+    <string name="dialog_background_check_ok" msgid="412876934682899659">"முடக்கு"</string>
+    <string name="dialog_location_title" msgid="5888917530725874727">"இருப்பிடத்தை முடக்கவா?"</string>
+    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"<xliff:g id="APP">%1$s</xliff:g>ஐப் பயன்படுத்தாத போதும், அது உங்கள் இருப்பிடத்தை அடிக்கடிக் கோருவதால், மொபைலால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலைத் தீர்க்க, இந்தப் பயன்பாட்டிற்கு இருப்பிடத்தை முடக்கலாம்."</string>
+    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"<xliff:g id="APP">%1$s</xliff:g>ஐப் பயன்படுத்தாத போதும், அது உங்கள் இருப்பிடத்தை அடிக்கடிக் கோருவதால், டேப்லெட்டால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலைத் தீர்க்க, இந்தப் பயன்பாட்டிற்கு இருப்பிடத்தை முடக்கலாம்."</string>
+    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"<xliff:g id="APP">%1$s</xliff:g>ஐப் பயன்படுத்தாத போதும், அது உங்கள் இருப்பிடத்தை அடிக்கடிக் கோருவதால், சாதனத்தால் எப்போதும் போல் பேட்டரியை நிர்வகிக்க முடியாது.\n\nஇந்தச் சிக்கலைத் தீர்க்க, இந்தப் பயன்பாட்டிற்கு இருப்பிடத்தை முடக்கலாம்."</string>
+    <string name="dialog_location_ok" msgid="4572391197601313986">"முடக்கு"</string>
     <string name="power_screen" msgid="3023346080675904613">"திரை"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"டார்ச் லைட்"</string>
     <string name="power_camera" msgid="4976286950934622605">"கேமரா"</string>
@@ -2111,8 +2023,7 @@
     <string name="power_apps" msgid="2043554781293951327">"பயன்பாடுகள்"</string>
     <string name="power_service" msgid="1599661212370831780">"சேவைகள்"</string>
     <string name="power_system" msgid="8290455327965307383">"சாதனம்"</string>
-    <!-- no translation found for power_user (3706143225319881667) -->
-    <skip />
+    <string name="power_user" msgid="3706143225319881667">"பிற பயனர்கள்"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU மொத்தம்"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU முன்புறம்"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"எப்போதும் விழிப்பில்"</string>
@@ -2164,8 +2075,7 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"ஆற்றல் பயன்பாடு அதிகமாகப் பயன்படுத்தப்பட்டது"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>க்குப் பயன்படுத்தியது"</string>
-    <!-- no translation found for battery_active_for (2964359540508103032) -->
-    <skip />
+    <string name="battery_active_for" msgid="2964359540508103032">"<xliff:g id="TIME">^1</xliff:g>க்குச் செயல்பாட்டில் இருந்தது"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"திரை உபயோகம்: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> பயன்படுத்துவது: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"ஒட்டுமொத்த பேட்டரியில் <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2725,7 +2635,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"பின்னை மாற்று"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"அறிவிப்புகளைக் காட்டு"</string>
     <string name="help_label" msgid="6886837949306318591">"உதவி &amp; கருத்து"</string>
-    <string name="support_summary" msgid="8276116616493882830">"உதவிக் கட்டுரைகள், மொபைல் &amp; அரட்டை ஆதரவு"</string>
+    <string name="support_summary" msgid="2705726826263742491">"உதவிக் கட்டுரைகள், மொபைல் &amp; அரட்டை, தொடங்குதல்"</string>
     <string name="user_account_title" msgid="1127193807312271167">"உள்ளடக்கத்திற்கான கணக்கு"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"பட ஐடி"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"அதீத அச்சுறுத்தல்கள்"</string>
@@ -2740,7 +2650,8 @@
     <string name="call_manager_title" msgid="4479949569744516457">"அழைப்பு நிர்வாகி"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="2451014351355183338">"அவசரகால அலைபரப்புகள்"</string>
+    <!-- no translation found for cell_broadcast_settings (4124461751977706019) -->
+    <skip />
     <string name="network_operators_settings" msgid="2583178259504630435">"நெட்வொர்க் ஆபரேட்டர்கள்"</string>
     <string name="access_point_names" msgid="1381602020438634481">"ஆக்சஸ் பாயிண்ட் நேம்கள்"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"மேம்பட்ட 4G LTE பயன்முறை"</string>
@@ -2873,12 +2784,9 @@
     <string name="keywords_gesture" msgid="5696040361482126337">"சைகை"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"கட்டணம் செலுத்தவும், தட்டவும், கட்டணம் செலுத்துதல்"</string>
     <string name="keywords_backup" msgid="470070289135403022">"காப்புப்பிரதி, காப்புப் பிரதி"</string>
-    <!-- no translation found for keywords_squeeze_to_launch_gesture (4459283333825902485) -->
-    <skip />
-    <!-- no translation found for keywords_wake_squeeze_gesture (6923058534235267845) -->
-    <skip />
-    <!-- no translation found for keywords_alarm_silence_gesture (8507935972184597252) -->
-    <skip />
+    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"சைகை, முனை, பக்கம், செயலில் உள்ள முனை, அழுத்து, பிடி, உதவி, அசிஸ்டண்ட், அழுத்தத்தக்கது, ஸ்கூஜி, அழுத்துக, அழுத்துதல், ok google, google அசிஸ்டண்ட்"</string>
+    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"சைகை, எழுப்பு, அறிவிப்புகள், திரை, காட்சி, திரை அணைக்கப்பட்டது, திரை இயக்கப்பட்டது, அழுத்து, முனை, உறக்கநிலையில், உறக்கநிலையிலிரு, பிடி"</string>
+    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"சைகை, நிசப்தம், உறக்கநிலை, அலாரம், உள்வரும் அழைப்பு, அமைதி, காட்சி, பூட்டுத் திரை, அழுத்து, பிடி, முனை, நிறுத்து"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"வைஃபை NFC குறியை அமை"</string>
     <string name="write_tag" msgid="8571858602896222537">"எழுது"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"எழுத, குறியைத் தட்டவும்..."</string>
@@ -2961,7 +2869,8 @@
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"ஒருபோதும் பணி அறிவிப்புகளைக் காட்டாதே"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"சாதனம் பூட்டப்பட்டிருக்கும் போது, சுயவிவர அறிவிப்புகளை எப்படிக் காட்ட வேண்டும்?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"சுயவிவர அறிவிப்புகள்"</string>
-    <string name="app_notifications_title" msgid="139788604658984593">"அறிவிப்புகள்"</string>
+    <string name="notifications_title" msgid="8086372779371204971">"அறிவிப்புகள்"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"பயன்பாடு அறிவிப்புகள்"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"அறிவிப்பு வகை"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"முக்கியத்துவம்"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"பயன்பாடு முடிவு செய்யட்டும்"</string>
@@ -2976,6 +2885,10 @@
     <string name="notification_importance_high_title" msgid="3058778300264746473">"மிக அதிக முக்கியத்துவம்"</string>
     <string name="allow_sound" msgid="1820188704793497324">"ஒலியை அனுமதிக்கவும்"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"இந்த அறிவிப்புகளை நடப்புத் திரையில் காட்டும் போது ஒலி, அதிர்வை ஏற்படுத்தாது அல்லது திரையின் மேல் பகுதியில் காட்டாது."</string>
+    <string name="notification_channel_summary_min" msgid="5401718014765921892">"குறைவான முக்கியத்துவம்"</string>
+    <string name="notification_channel_summary_low" msgid="322317684244981244">"நடுத்தர முக்கியத்துவம்"</string>
+    <string name="notification_channel_summary_default" msgid="1111749130423589931">"அதிக முக்கியத்துவம்"</string>
+    <string name="notification_channel_summary_high" msgid="2085017556511003283">"மிக அதிக முக்கியத்துவம்"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"அறிவிப்பு உதவி"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"அறிவிப்பு அணுகல்"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"பணி விவர அறிவிப்புகளுக்கான அணுகல் தடுக்கப்பட்டுள்ளது"</string>
@@ -3263,7 +3176,10 @@
       <item quantity="other">வழக்கத்திற்கு மாறாக <xliff:g id="NUMBER">%2$d</xliff:g> பயன்பாடுகள் செயல்படுகின்றன</item>
       <item quantity="one">வழக்கத்திற்கு மாறாக <xliff:g id="APP">%1$s</xliff:g> செயல்படுகிறது</item>
     </plurals>
-    <!-- no translation found for power_high_usage_title (3826660033363082922) -->
+    <plurals name="power_high_usage_title" formatted="false" msgid="3826660033363082922">
+      <item quantity="other">பேட்டரியை அதிகமாகப் பயன்படுத்தும் பயன்பாடுகள்</item>
+      <item quantity="one">பேட்டரியை அதிகமாகப் பயன்படுத்தும் <xliff:g id="APP">%1$s</xliff:g> பயன்பாடு</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"மேம்படுத்தப்படாதவை"</string>
     <string name="high_power_on" msgid="6216293998227583810">"மேம்படுத்தப்படாதது"</string>
     <string name="high_power_off" msgid="3393904131961263278">"பேட்டரி உபயோகத்தை மேம்படுத்தும்"</string>
@@ -3358,7 +3274,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"அனுமதி பெற்ற பயன்பாடுகள்"</string>
     <string name="app_permission_summary_allowed" msgid="1505409933012886711">"அனுமதிக்கப்பட்டது"</string>
     <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"அனுமதிக்கப்படவில்லை"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"அறியப்படாத பயன்பாடுகளை நிறுவு"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"நிறுவு பயன்பாடுகள் அறியப்படாத மூலங்கள்"</string>
     <string name="write_settings" msgid="4797457275727195681">"முறைமை அமைப்புகளை மாற்று"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"முறைமை அமைப்புகளை எழுது மாற்று"</string>
@@ -3370,6 +3285,8 @@
     <string name="write_settings_preference" msgid="3407383041273067448">"பயன்பாடானது முறைமை அமைப்புகளை மாற்றுவதற்கான அனுமதி"</string>
     <string name="permit_write_settings" msgid="6393779336656870080">"முறைமை அமைப்புகளை மாற்ற அனுமதி"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"இது முறைமை அமைப்புகளை மாற்ற, பயன்பாட்டை அனுமதிக்கும்."</string>
+    <string name="write_settings_on" msgid="8230580416068832239">"அனுமதிக்கப்பட்டது"</string>
+    <string name="write_settings_off" msgid="5156104383386336233">"அனுமதிக்கப்படவில்லை"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"இந்த மூலத்திலிருந்து அனுமதி"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"கேமராவைத் திறக்க, இருமுறை திருப்புதல்"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"உங்கள் மணிக்கட்டை இருமுறை திருப்புவதன் மூலம் கேமரா பயன்பாட்டைத் திறக்கலாம்"</string>
@@ -3446,6 +3363,15 @@
     <string name="condition_night_display_summary" msgid="5443722724310650381">"மென்னிற மஞ்சளும் ஆரஞ்சும் கலந்த நிறத்தில் திரை இருப்பது நீங்கள் உறங்குவதற்கு உதவக்கூடும்."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"பரிந்துரைகள்"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <string name="suggestions_more_title" msgid="8223690393059519879">"+மேலும் <xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <plurals name="suggestions_collapsed_title" formatted="false" msgid="1857433444865249823">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> பரிந்துரைகள்</item>
+      <item quantity="one">1 பரிந்துரை</item>
+    </plurals>
+    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="7680263825371165461">
+      <item quantity="other">+<xliff:g id="COUNT">%1$d</xliff:g> பரிந்துரைகள்</item>
+      <item quantity="one">+1 பரிந்துரை</item>
+    </plurals>
     <string name="suggestion_remove" msgid="904627293892092439">"அகற்று"</string>
     <string name="color_temperature" msgid="2070126836910615605">"நீல நிற வெப்பநிலை"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"நீல வண்ணங்களைத் திரைக்குப் பயன்படுத்து"</string>
@@ -3548,7 +3474,7 @@
     <string name="notification_suggestion_title" msgid="4506524937307816475">"பூட்டு திரை அறிவிப்புகளை கட்டுப்படுத்து"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"அறிவிப்பு உள்ளடக்கத்தைக் காட்டும் அல்லது மறைக்கும்"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"எல்லாம்"</string>
-    <string name="page_tab_title_support" msgid="6330657582897417458">"ஆதரவு"</string>
+    <string name="page_tab_title_support" msgid="8483187649355540109">"ஆதரவு &amp; டிப்ஸ்"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"மிகக் குறைந்த அகலம்"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"பிரீமிய SMS அணுகலைக் கோரும் பயன்பாடுகள் எதுவும் நிறுவப்படவில்லை"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"பிரீமிய SMSக்குக் கட்டணம் விதிக்கப்படலாம், அது மொபைல் நிறுவன பில்களில் சேர்க்கப்படும். பயன்பாட்டிற்கான அனுமதியை இயக்கினால், அந்தப் பயன்பாட்டைப் பயன்படுத்தி பிரீமிய SMSஐ அனுப்ப முடியும்."</string>
@@ -3619,46 +3545,32 @@
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"சாதனத்தைக் கட்டுப்படுத்துவதற்கான உடனடி சைகைகள்"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"கேமராவிற்கு மாறவும்"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"கேமராவை விரைவாகத் திறக்க, பவர் பொத்தானை இருமுறை அழுத்தவும். எந்தத் திரையிலும் கேமரா இயங்கும்."</string>
-    <!-- no translation found for double_tap_power_for_camera_suggestion_title (6500405261202883589) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_suggestion_summary (7010153544554016996) -->
-    <skip />
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"கேமராவை உடனடியாகத் திறக்கவும்"</string>
+    <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"கேமராவைத் திறக்க, பவர் பொத்தானை இருமுறை அழுத்தவும்"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"கேமராவை மாற்றுதல்"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for double_twist_for_camera_suggestion_title (4689410222517954869) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (447403641027147153) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (1724660290703318739) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (5980398380988039489) -->
-    <skip />
+    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"வேகமாக செல்ஃபிகளை எடுக்கவும்"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"செல்ஃபிப் பயன்முறைக்கு, மொபைலை இருமுறை திருப்பவும்"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"செல்ஃபிப் பயன்முறைக்கு, டேப்லெட்டை இருமுறை திருப்பவும்"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"செல்ஃபிப் பயன்முறைக்கு, சாதனத்தை இருமுறை திருப்பவும்"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"மொபைல் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"டேப்லெட் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"சாதனத் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
-    <!-- no translation found for ambient_display_summary (525662960806416373) -->
-    <skip />
-    <!-- no translation found for ambient_display_suggestion_summary (5987443721392571847) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="525662960806416373">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைப் பார்க்க, திரையை இருமுறை தட்டவும்."</string>
+    <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"திரை அணைக்கப்பட்டிருக்கும் போது, அறிவிப்புகளைப் பார்க்கலாம்"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"திரையில் அறிவிப்புகளைப் பார்க்க, மொபைலை கையில் எடுக்கவும்"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"திரையில் அறிவிப்புகளை பார்க்க, டேப்லெட்டை கையில் எடுக்கவும்"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"திரையில் அறிவிப்புகளைப் பார்க்க, சாதனத்தை கையில் எடுக்கவும்"</string>
-    <!-- no translation found for ambient_display_pickup_summary (4567020486787561873) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (5435283849947236648) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (8256669101643381568) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_suggestion_summary (7014700589991761035) -->
-    <skip />
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைப் பார்க்க, மொபைலைக் கையில் எடுக்கவும்."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைப் பார்க்க, டேப்லெட்டைக் கையில் எடுக்கவும்."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைப் பார்க்க, சாதனத்தைக் கையில் எடுக்கவும்."</string>
+    <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"திரை அணைக்கப்பட்டிருக்கும் போது, அறிவிப்புகளைப் பார்க்கலாம்"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"அறிவிப்புகளுக்கு, உணர்வியின் மீது ஸ்வைப் செய்க"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"அறிவிப்புகளைப் பார்க்க, மொபைலின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"அறிவிப்புகளைப் பார்க்க, டேப்லெட்டின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"அறிவிப்புகளைப் பார்க்க, சாதனத்தின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_suggestion_title (1677291167470357802) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_suggestion_summary (127592803294414082) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"அறிவிப்புகளை உடனடியாகப் பார்க்கவும்"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்"</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"கேமராவைத் திறக்க, மொபைலை எடுக்கவும்"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"கேமராவைத் தானாகத் திறக்க, படமெடுக்கும் நிலையில் (நீளவாக்கில் அல்லது அகலவாக்கில்) மொபைலை எடுக்கவும். மொபைல் உறக்கநிலையில் அல்லது பூட்டப்பட்டிருக்கும் நிலையில் இருக்கும் போது இந்த அம்சம் வேலைசெய்யும்."</string>
     <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"ஃபோன் உறக்கநிலையில் (அ) பூட்டியிருக்கும் போது படமெடுக்கவும்"</string>
@@ -3781,8 +3693,6 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"திரைப்படம் &amp; டிவி பயன்பாடுகள்"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Carrier Provisioning Info"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Trigger Carrier Provisioning"</string>
-    <!-- no translation found for new_device_suggestion_title (8346563796032837800) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (7172709269203435870) -->
-    <skip />
+    <string name="new_device_suggestion_title" msgid="8346563796032837800">"புதியதாகவும் உற்சாகமூட்டும் விதமாகவும் என்ன உள்ளது?"</string>
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"சிறந்த 5 அம்சங்களைப் பார்க்கவும்"</string>
 </resources>
