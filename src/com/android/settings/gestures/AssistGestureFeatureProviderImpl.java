@@ -18,11 +18,33 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 
+import com.android.settings.R;
+import com.android.settings.core.PreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class AssistGestureFeatureProviderImpl implements AssistGestureFeatureProvider {
 
     @Override
     public boolean isSupported(Context context) {
         return false;
+    }
+
+    @Override
+    public boolean isSensorAvailable(Context context) {
+        return false;
+    }
+
+    @Override
+    public int getPreferenceResourceId() {
+        return R.xml.assist_gesture_settings;
+    }
+
+    @Override
+    public List<PreferenceController> getControllers(Context context, Lifecycle lifecycle) {
+        return new ArrayList<>();
     }
 
 }
