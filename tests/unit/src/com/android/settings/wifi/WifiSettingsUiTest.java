@@ -15,6 +15,7 @@
  */
 package com.android.settings.wifi;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +46,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -52,10 +54,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.Visibility.VISI
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
+
+import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -216,5 +222,24 @@ public class WifiSettingsUiTest {
         launchActivity();
 
         onView(withText(CONNECTED)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void resumingAp_shouldNotForceUpdateWhenExistingAPsAreListed() {
+        setWifiState(WifiManager.WIFI_STATE_ENABLED);
+        setupConnectedAccessPoint();
+        when(mWifiTracker.isConnected()).thenReturn(true);
+
+        launchActivity();
+
+        onView(withText(CONNECTED)).check(matches(isDisplayed()));
+        verify(mWifiTracker).forceUpdate();
+
+        Activity activity = mActivityRule.getActivity();
+        activity.finish();
+        getInstrumentation().waitForIdleSync();
+
+        getInstrumentation().callActivityOnStart(activity);
+        verify(mWifiTracker, atMost(1)).forceUpdate();
     }
 }

@@ -32,6 +32,10 @@ import com.android.settings.datausage.DataSaverBackend;
 
 import java.util.ArrayList;
 
+/**
+ * @deprecated in favor of WifiTetherPreferenceController and WifiTetherSettings
+ */
+@Deprecated
 public class WifiApEnabler {
     private final Context mContext;
     private final SwitchPreference mSwitch;
