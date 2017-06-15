@@ -40,6 +40,7 @@ import com.android.settings.utils.AsyncLoader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -99,7 +100,7 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
 
                 final AppSearchResult.Builder builder = new AppSearchResult.Builder();
                 builder.setAppInfo(info)
-                        .setStableId(info.packageName.hashCode())
+                        .setStableId(Objects.hash(info.packageName, user.id))
                         .setTitle(info.loadLabel(pm))
                         .setRank(getRank(wordDiff))
                         .addBreadcrumbs(getBreadCrumb())
