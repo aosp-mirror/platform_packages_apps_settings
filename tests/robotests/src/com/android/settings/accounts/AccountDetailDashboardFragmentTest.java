@@ -74,16 +74,16 @@ public class AccountDetailDashboardFragmentTest {
     }
 
     @Test
-    public void testCategory_isAccount() {
+    public void testCategory_isAccountDetail() {
         assertThat(new AccountDetailDashboardFragment().getCategoryKey())
-                .isEqualTo(CategoryKey.CATEGORY_ACCOUNT);
+                .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
     }
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldDisplay() {
         final Tile tile = new Tile();
         final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
         tile.metaData = metaData;
 
@@ -94,7 +94,7 @@ public class AccountDetailDashboardFragmentTest {
     public void refreshDashboardTiles_NoAccountType_shouldNotDisplay() {
         final Tile tile = new Tile();
         final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         tile.metaData = metaData;
 
         assertThat(mFragment.displayTile(tile)).isFalse();
@@ -104,7 +104,7 @@ public class AccountDetailDashboardFragmentTest {
     public void refreshDashboardTiles_OtherAccountType_shouldNotDisplay() {
         final Tile tile = new Tile();
         final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
         tile.metaData = metaData;
 
