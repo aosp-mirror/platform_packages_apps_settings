@@ -43,7 +43,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -321,7 +320,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
-            updateAccessPointsDelayed();
         }
     }
 
@@ -354,13 +352,28 @@ public class WifiSettings extends RestrictedSettingsFragment
         onWifiStateChanged(mWifiManager.getWifiState());
     }
 
-    private void forceUpdateAPs() {
+    /**
+     * Only update the AP list if there are not any APs currently shown.
+     *
+     * <p>Thus forceUpdate will only be called during cold start or when toggling between wifi on
+     * and off. In other use cases, the previous APs will remain until the next update is received
+     * from {@link WifiTracker}.
+     */
+    private void conditionallyForceUpdateAPs() {
+        if (mAccessPointsPreferenceCategory.getPreferenceCount() > 0
+                && mAccessPointsPreferenceCategory.getPreference(0) instanceof
+                        AccessPointPreference) {
+            // Make sure we don't update due to callbacks initiated by sticky broadcasts in
+            // WifiTracker.
+            Log.d(TAG, "Did not force update APs due to existing APs displayed");
+            getView().removeCallbacks(mUpdateAccessPointsRunnable);
+            return;
+        }
         setProgressBarVisible(true);
         mWifiTracker.forceUpdate();
         if (DEBUG) {
             Log.d(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
         }
-
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
         updateAccessPointPreferences();
     }
@@ -654,6 +667,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     @Override
     public void onAccessPointsChanged() {
+        Log.d(TAG, "onAccessPointsChanged (WifiTracker) callback initiated");
         updateAccessPointsDelayed();
     }
 
@@ -679,7 +693,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final int wifiState = mWifiManager.getWifiState();
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                forceUpdateAPs();
+                conditionallyForceUpdateAPs();
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
@@ -719,6 +733,9 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
+        if (DEBUG) {
+            Log.d(TAG, "updateAccessPoints called for: " + accessPoints);
+        }
 
         boolean hasAvailableAccessPoints = false;
         mAccessPointsPreferenceCategory.removePreference(mStatusMessagePreference);
@@ -1014,6 +1031,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onAccessPointChanged(final AccessPoint accessPoint) {
+        Log.d(TAG, "onAccessPointChanged (singular) callback initiated");
         View view = getView();
         if (view != null) {
             view.post(new Runnable() {
