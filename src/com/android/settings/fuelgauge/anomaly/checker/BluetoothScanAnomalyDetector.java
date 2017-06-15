@@ -57,8 +57,7 @@ public class BluetoothScanAnomalyDetector implements AnomalyDetector {
         mBatteryUtils = BatteryUtils.getInstance(context);
         mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
                 Anomaly.AnomalyType.BLUETOOTH_SCAN);
-        //TODO(b/36921532): hook up it to AnomalyDectionPolicy
-        mBluetoothScanningThreshold = 30 * DateUtils.MINUTE_IN_MILLIS;
+        mBluetoothScanningThreshold = policy.bluetoothScanThreshold;
     }
 
     @Override
