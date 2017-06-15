@@ -15,6 +15,7 @@
  */
 package com.android.settings.wifi;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -22,13 +23,17 @@ import static android.support.test.espresso.matcher.ViewMatchers.Visibility.VISI
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
+import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -41,12 +46,15 @@ import android.net.wifi.WifiSsid;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTracker.WifiListener;
 import com.android.settingslib.wifi.WifiTrackerFactory;
+
 import com.google.common.collect.Lists;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -201,5 +209,24 @@ public class WifiSettingsUiTest {
         launchActivity();
 
         onView(withText(CONNECTED)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void resumingAp_shouldNotForceUpdateWhenExistingAPsAreListed() {
+        setWifiState(WifiManager.WIFI_STATE_ENABLED);
+        setupConnectedAccessPoint();
+        when(mWifiTracker.isConnected()).thenReturn(true);
+
+        launchActivity();
+
+        onView(withText(CONNECTED)).check(matches(isDisplayed()));
+        verify(mWifiTracker).forceUpdate();
+
+        Activity activity = mActivityRule.getActivity();
+        activity.finish();
+        getInstrumentation().waitForIdleSync();
+
+        getInstrumentation().callActivityOnStart(activity);
+        verify(mWifiTracker, atMost(1)).forceUpdate();
     }
 }
