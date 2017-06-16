@@ -14,12 +14,11 @@
  * limitations under the License
  */
 
-package com.android.settings.fingerprint;
+package com.android.settings.password;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
 
     private static final String ARG_FRP_SUPPORTED = "frp_supported";
     private static final String TAG_SKIP_DIALOG = "skip_dialog";
-    private static final int RESULT_SKIP = Activity.RESULT_FIRST_USER + 10;
+    public static final int RESULT_SKIP = Activity.RESULT_FIRST_USER + 10;
 
     public static SetupSkipDialog newInstance(boolean isFrpSupported) {
         SetupSkipDialog dialog = new SetupSkipDialog();

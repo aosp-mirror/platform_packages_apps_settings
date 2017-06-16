@@ -35,7 +35,6 @@ import com.android.settings.R;
 import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.fingerprint.SetupFingerprintEnrollFindSensor;
-import com.android.settings.fingerprint.SetupSkipDialog;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
 
