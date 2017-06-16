@@ -43,7 +43,7 @@ public class StorageProfileFragmentTest {
     private ArgumentCaptor<SparseArray<StorageAsyncLoader.AppsStorageResult>> mCaptor;
 
     @Test
-    public void verifyAppSizesAreZeroedOut() {
+    public void verifyAppSizesAreNotZeroedOut() {
         StorageItemPreferenceController controller = mock(StorageItemPreferenceController.class);
         StorageProfileFragment fragment = new StorageProfileFragment();
         StorageAsyncLoader.AppsStorageResult result = new StorageAsyncLoader.AppsStorageResult();
@@ -62,10 +62,10 @@ public class StorageProfileFragmentTest {
         verify(controller).onLoadFinished(mCaptor.capture(), anyInt());
 
         StorageAsyncLoader.AppsStorageResult extractedResult = mCaptor.getValue().get(0);
-        assertThat(extractedResult.musicAppsSize).isEqualTo(0);
-        assertThat(extractedResult.videoAppsSize).isEqualTo(0);
-        assertThat(extractedResult.otherAppsSize).isEqualTo(0);
-        assertThat(extractedResult.gamesSize).isEqualTo(0);
+        assertThat(extractedResult.musicAppsSize).isEqualTo(100);
+        assertThat(extractedResult.videoAppsSize).isEqualTo(400);
+        assertThat(extractedResult.otherAppsSize).isEqualTo(200);
+        assertThat(extractedResult.gamesSize).isEqualTo(300);
         assertThat(extractedResult.externalStats.audioBytes).isEqualTo(1);
         assertThat(extractedResult.externalStats.videoBytes).isEqualTo(2);
         assertThat(extractedResult.externalStats.imageBytes).isEqualTo(3);
