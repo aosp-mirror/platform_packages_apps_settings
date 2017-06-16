@@ -21,16 +21,15 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.UserManager;
-import android.provider.Settings;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.setupwizardlib.util.WizardManagerHelper;
 
 public final class ChooseLockSettingsHelper {
 
@@ -278,8 +277,10 @@ public final class ChooseLockSettingsHelper {
             }
         } else {
             if (mFragment != null) {
+                copyInternalExtras(mFragment.getActivity().getIntent(), intent);
                 mFragment.startActivityForResult(intent, request);
             } else {
+                copyInternalExtras(mActivity.getIntent(), intent);
                 mActivity.startActivityForResult(intent, request);
             }
         }
@@ -302,6 +303,13 @@ public final class ChooseLockSettingsHelper {
         if (intentSender != null || taskId != -1) {
             outIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             outIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        }
+    }
+
+    private void copyInternalExtras(Intent inIntent, Intent outIntent) {
+        String theme = inIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
+        if (theme != null) {
+            outIntent.putExtra(WizardManagerHelper.EXTRA_THEME, theme);
         }
     }
 }
