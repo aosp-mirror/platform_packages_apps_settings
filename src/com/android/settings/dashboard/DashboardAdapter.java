@@ -293,10 +293,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             case R.layout.dashboard_header_spacer:
                 onBindHeaderSpacer(holder, position);
                 break;
-            case R.layout.dashboard_category:
-                onBindCategory(holder,
-                        (DashboardCategory) mDashboardData.getItemEntityByPosition(position));
-                break;
             case R.layout.dashboard_tile:
                 final Tile tile = (Tile) mDashboardData.getItemEntityByPosition(position);
                 onBindTile(holder, tile);

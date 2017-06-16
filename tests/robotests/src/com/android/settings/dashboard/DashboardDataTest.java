@@ -19,11 +19,13 @@ package com.android.settings.dashboard;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
+
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -116,15 +118,15 @@ public class DashboardDataTest {
     public void testBuildItemsData_containsAllData() {
         final DashboardData.SuggestionConditionHeaderData data =
                 new DashboardData.SuggestionConditionHeaderData(
-                    mDashboardDataWithOneConditions.getConditions(), 0);
+                        mDashboardDataWithOneConditions.getConditions(), 0);
         final Object[] expectedObjects = {null, data,
-            mDashboardDataWithOneConditions.getSuggestions(),
-            mDashboardDataWithOneConditions.getConditions(),
-            null, mDashboardCategory, mTestCategoryTile};
+                mDashboardDataWithOneConditions.getSuggestions(),
+                mDashboardDataWithOneConditions.getConditions(),
+                null, mTestCategoryTile};
         final int expectedSize = expectedObjects.length;
 
-        assertThat(mDashboardDataWithOneConditions.getItemList().size())
-                .isEqualTo(expectedSize);
+        assertThat(mDashboardDataWithOneConditions.getItemList()).hasSize(expectedSize);
+
         for (int i = 0; i < expectedSize; i++) {
             final Object item = mDashboardDataWithOneConditions.getItemEntityByPosition(i);
             if (item instanceof DashboardData.SuggestionHeaderData
@@ -211,7 +213,7 @@ public class DashboardDataTest {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 1, 6));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 1, 5));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
     }

@@ -23,6 +23,7 @@ import android.support.v7.widget.RecyclerView.State;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.TypedValue;
 import android.view.View;
+
 import com.android.settings.R;
 
 public class DashboardDecorator extends RecyclerView.ItemDecoration {
@@ -43,12 +44,7 @@ public class DashboardDecorator extends RecyclerView.ItemDecoration {
         for (int i = 1; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final ViewHolder holder = parent.getChildViewHolder(child);
-            if (holder.getItemViewType() == R.layout.dashboard_category) {
-                if (parent.getChildViewHolder(parent.getChildAt(i - 1)).getItemViewType()
-                        != R.layout.dashboard_tile) {
-                    continue;
-                }
-            } else if (holder.getItemViewType() != R.layout.condition_card) {
+            if (holder.getItemViewType() != R.layout.condition_card) {
                 continue;
             }
 
