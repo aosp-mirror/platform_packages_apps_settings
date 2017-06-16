@@ -34,7 +34,7 @@ import java.util.List;
  * This class provides the API 24 implementation of UserManager.get(Context).
  */
 @Implements(UserManager.class)
-public class ShadowUserManager {
+public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
 

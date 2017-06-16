@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
@@ -56,7 +57,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
             mConfirmCredentialTheme = ConfirmCredentialTheme.DARK;
         } else {
-            setTheme(R.style.GlifTheme_Light);
+            setTheme(SetupWizardUtils.getTheme(getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.INTERNAL;
         }
         super.onCreate(savedState);
