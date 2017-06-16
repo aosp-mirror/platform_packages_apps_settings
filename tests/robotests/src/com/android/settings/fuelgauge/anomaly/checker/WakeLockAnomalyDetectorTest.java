@@ -31,7 +31,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.text.format.DateUtils;
-import android.util.ArrayMap;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -64,6 +63,7 @@ public class WakeLockAnomalyDetectorTest {
     private static final int ANOMALY_UID = 111;
     private static final int NORMAL_UID = 222;
     private static final int TARGET_UID = 333;
+    private static final int INACTIVE_UID = 444;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -71,25 +71,17 @@ public class WakeLockAnomalyDetectorTest {
     @Mock
     private BatterySipper mTargetSipper;
     @Mock
-    private BatteryStats.Timer mAnomalyTimer;
-    @Mock
-    private BatteryStats.Uid.Wakelock mAnomalyWakelock;
-    @Mock
     private BatterySipper mNormalSipper;
     @Mock
-    private BatteryStats.Timer mNormalTimer;
-    @Mock
-    private BatteryStats.Timer mTargetTimer;
-    @Mock
-    private BatteryStats.Uid.Wakelock mNormalWakelock;
-    @Mock
-    private BatteryStats.Uid.Wakelock mTargetWakelock;
+    private BatterySipper mInactiveSipper;
     @Mock
     private BatteryStats.Uid mAnomalyUid;
     @Mock
     private BatteryStats.Uid mNormalUid;
     @Mock
     private BatteryStats.Uid mTargetUid;
+    @Mock
+    private BatteryStats.Uid mInactiveUid;
     @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
@@ -101,9 +93,6 @@ public class WakeLockAnomalyDetectorTest {
     @Mock
     private AnomalyAction mAnomalyAction;
 
-    private ArrayMap<String, BatteryStats.Uid.Wakelock> mAnomalyWakelocks;
-    private ArrayMap<String, BatteryStats.Uid.Wakelock> mNormalWakelocks;
-    private ArrayMap<String, BatteryStats.Uid.Wakelock> mTargetWakelocks;
     private WakeLockAnomalyDetector mWakelockAnomalyDetector;
     private Context mContext;
     private List<BatterySipper> mUsageList;
@@ -121,42 +110,44 @@ public class WakeLockAnomalyDetectorTest {
                 .getApplicationInfo(nullable(String.class), anyInt());
         doReturn(true).when(mAnomalyAction).isActionActive(any());
 
+        mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext, mPolicy));
+        mWakelockAnomalyDetector.mBatteryUtils = mBatteryUtils;
+        mWakelockAnomalyDetector.mAnomalyAction = mAnomalyAction;
+
         mAnomalySipper.uidObj = mAnomalyUid;
-        mAnomalyWakelocks = new ArrayMap<>();
-        mAnomalyWakelocks.put("", mAnomalyWakelock);
-        doReturn(mAnomalyWakelocks).when(mAnomalyUid).getWakelockStats();
-        doReturn(mAnomalyTimer).when(mAnomalyWakelock).getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
+        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector)
+                .getBackgroundTotalDurationMs(eq(mAnomalyUid), anyLong());
+        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getCurrentDurationMs(
+                eq(mAnomalyUid), anyLong());
         doReturn(ANOMALY_UID).when(mAnomalyUid).getUid();
 
         mNormalSipper.uidObj = mNormalUid;
-        mNormalWakelocks = new ArrayMap<>();
-        mNormalWakelocks.put("", mNormalWakelock);
-        doReturn(mNormalTimer).when(mNormalWakelock).getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
-        doReturn(mNormalWakelocks).when(mNormalUid).getWakelockStats();
+        doReturn(NORMAL_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector)
+                .getBackgroundTotalDurationMs(eq(mNormalUid), anyLong());
+        doReturn(0L).when(mWakelockAnomalyDetector).getCurrentDurationMs(eq(mNormalUid),
+                anyLong());
         doReturn(NORMAL_UID).when(mNormalUid).getUid();
 
         mTargetSipper.uidObj = mTargetUid;
-        mTargetWakelocks = new ArrayMap<>();
-        mTargetWakelocks.put("", mTargetWakelock);
-        doReturn(mTargetTimer).when(mTargetWakelock).getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
-        doReturn(mTargetWakelocks).when(mTargetUid).getWakelockStats();
+        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector)
+                .getBackgroundTotalDurationMs(eq(mTargetUid), anyLong());
+        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getCurrentDurationMs(
+                eq(mTargetUid), anyLong());
         doReturn(TARGET_UID).when(mTargetUid).getUid();
+
+        mInactiveSipper.uidObj = mInactiveUid;
+        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector)
+                .getBackgroundTotalDurationMs(eq(mInactiveUid), anyLong());
+        doReturn(0L).when(mWakelockAnomalyDetector).getCurrentDurationMs(eq(mInactiveUid),
+                anyLong());
+        doReturn(INACTIVE_UID).when(mInactiveUid).getUid();
 
         mUsageList = new ArrayList<>();
         mUsageList.add(mAnomalySipper);
         mUsageList.add(mNormalSipper);
         mUsageList.add(mTargetSipper);
+        mUsageList.add(mInactiveSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
-
-        mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext, mPolicy));
-        mWakelockAnomalyDetector.mBatteryUtils = mBatteryUtils;
-        mWakelockAnomalyDetector.mAnomalyAction = mAnomalyAction;
-        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
-                eq(mAnomalyTimer), anyLong());
-        doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
-                eq(mTargetTimer), anyLong());
-        doReturn(NORMAL_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector).getTotalDurationMs(
-                eq(mNormalTimer), anyLong());
     }
 
     @Test
