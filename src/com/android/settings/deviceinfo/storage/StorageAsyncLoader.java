@@ -25,6 +25,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
+import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -34,6 +35,8 @@ import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -48,6 +51,7 @@ public class StorageAsyncLoader
     private String mUuid;
     private StorageStatsSource mStatsManager;
     private PackageManagerWrapper mPackageManager;
+    private ArraySet<String> mSeenPackages;
 
     public StorageAsyncLoader(Context context, UserManagerWrapper userManager,
             String uuid, StorageStatsSource source, PackageManagerWrapper pm) {
@@ -64,8 +68,18 @@ public class StorageAsyncLoader
     }
 
     private SparseArray<AppsStorageResult> loadApps() {
+        mSeenPackages = new ArraySet<>();
         SparseArray<AppsStorageResult> result = new SparseArray<>();
         List<UserInfo> infos = mUserManager.getUsers();
+        // Sort the users by user id ascending.
+        Collections.sort(
+                infos,
+                new Comparator<UserInfo>() {
+                    @Override
+                    public int compare(UserInfo userInfo, UserInfo otherUser) {
+                        return Integer.compare(userInfo.id, otherUser.id);
+                    }
+                });
         for (int i = 0, userCount = infos.size(); i < userCount; i++) {
             UserInfo info = infos.get(i);
             result.put(info.id, getStorageResultForUser(info.id));
@@ -93,10 +107,11 @@ public class StorageAsyncLoader
 
             long blamedSize = stats.getDataBytes() - stats.getCacheBytes();
 
-            // Only count app code against the current user; we don't want
-            // double-counting on multi-user devices.
-            if (userId == UserHandle.myUserId()) {
+            // This isn't quite right because it slams the first user by user id with the whole code
+            // size, but this ensures that we count all apps seen once.
+            if (!mSeenPackages.contains(app.packageName)) {
                 blamedSize += stats.getCodeBytes();
+                mSeenPackages.add(app.packageName);
             }
 
             switch (app.category) {
@@ -140,6 +155,7 @@ public class StorageAsyncLoader
         public long musicAppsSize;
         public long videoAppsSize;
         public long otherAppsSize;
+        public long cacheSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
     }
 
