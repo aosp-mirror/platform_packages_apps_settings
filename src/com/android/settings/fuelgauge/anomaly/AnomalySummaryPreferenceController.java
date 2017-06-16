@@ -32,8 +32,9 @@ import java.util.List;
  */
 public class AnomalySummaryPreferenceController {
     private static final String TAG = "HighUsagePreferenceController";
-    @VisibleForTesting
-    static final String ANOMALY_KEY = "high_usage";
+
+    public static final String ANOMALY_KEY = "high_usage";
+
     private static final int REQUEST_ANOMALY_ACTION = 0;
     private PreferenceFragment mFragment;
     @VisibleForTesting

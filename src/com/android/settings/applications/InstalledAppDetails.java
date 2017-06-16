@@ -1052,7 +1052,7 @@ public class InstalledAppDetails extends AppInfoBase
                 BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
                 AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
                         this, mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry,
-                        mBatteryPercent);
+                        mBatteryPercent, null /* mAnomalies */);
             } else {
                 AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
                         this, mPackageName);

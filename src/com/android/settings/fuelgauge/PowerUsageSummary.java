@@ -286,7 +286,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
         AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
-                this, mStatsHelper, mStatsType, entry, pgp.getPercent());
+                this, mStatsHelper, mStatsType, entry, pgp.getPercent(),
+                mAnomalySparseArray.get(entry.sipper.getUid()));
         return super.onPreferenceTreeClick(preference);
     }
 
