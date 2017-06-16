@@ -20,6 +20,11 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -36,15 +41,42 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
 
+    @VisibleForTesting
+    static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
+
     private String mDeviceAddress;
+    private LocalBluetoothManager mManager;
+    private CachedBluetoothDevice mCachedDevice;
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
     }
 
+    @VisibleForTesting
+    LocalBluetoothManager getLocalBluetoothManager(Context context) {
+        return Utils.getLocalBtManager(context);
+    }
+
+    @VisibleForTesting
+    CachedBluetoothDevice getCachedDevice(String deviceAddress) {
+        BluetoothDevice remoteDevice =
+                mManager.getBluetoothAdapter().getRemoteDevice(deviceAddress);
+        return mManager.getCachedDeviceManager().findDevice(remoteDevice);
+    }
+
+    public static BluetoothDeviceDetailsFragment newInstance(String deviceAddress) {
+        Bundle args = new Bundle(1);
+        args.putString(KEY_DEVICE_ADDRESS, deviceAddress);
+        BluetoothDeviceDetailsFragment fragment = new BluetoothDeviceDetailsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onAttach(Context context) {
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
+        mManager = getLocalBluetoothManager(context);
+        mCachedDevice = getCachedDevice(mDeviceAddress);
         super.onAttach(context);
     }
 
@@ -64,20 +96,36 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
+        item.setIcon(R.drawable.ic_mode_edit);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == EDIT_DEVICE_NAME_ITEM_ID) {
+            RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                    getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         ArrayList<PreferenceController> controllers = new ArrayList<>();
-        LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-        BluetoothDevice remoteDevice = manager.getBluetoothAdapter().getRemoteDevice(
-                mDeviceAddress);
-        CachedBluetoothDevice device = manager.getCachedDeviceManager().findDevice(remoteDevice);
-        if (device != null) {
+
+        if (mCachedDevice != null) {
             Lifecycle lifecycle = getLifecycle();
-            controllers.add(new BluetoothDetailsHeaderController(context, this, device, lifecycle));
-            controllers.add(new BluetoothDetailsButtonsController(context, this, device,
+            controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
                     lifecycle));
-            controllers.add(new BluetoothDetailsProfilesController(context, this, manager, device,
+            controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
                     lifecycle));
-            controllers.add(new BluetoothDetailsMacAddressController(context, this, device,
+            controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
+                    mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
         }
         return controllers;
