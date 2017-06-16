@@ -17,16 +17,23 @@ package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
 import com.android.settings.dashboard.DashboardData;
 import com.android.settings.dashboard.DashboardData.HeaderMode;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.WirelessUtils;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -77,8 +84,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
 
     @Override
     public void onBindViewHolder(DashboardItemHolder holder, int position) {
-        // TODO: merge methods from ConditionAdapterUtils into this class
-        ConditionAdapterUtils.bindViews(mConditions.get(position), holder,
+        bindViews(mConditions.get(position), holder,
             position == mConditions.size() - 1, mConditionClickListener);
     }
 
@@ -100,4 +106,78 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
         return 0;
     }
 
+    public void addDismissHandling(final RecyclerView recyclerView) {
+        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.START | ItemTouchHelper.END) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                    RecyclerView.ViewHolder target) {
+                return true;
+            }
+
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                return viewHolder.getItemViewType() == R.layout.condition_tile_new_ui
+                        ? super.getSwipeDirs(recyclerView, viewHolder) : 0;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                Object item = getItem(viewHolder.getItemId());
+                ((Condition) item).silence();
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    private void bindViews(final Condition condition,
+            DashboardAdapter.DashboardItemHolder view, boolean isLastItem,
+            View.OnClickListener onClickListener) {
+        if (condition instanceof AirplaneModeCondition) {
+            Log.d(TAG, "Airplane mode condition has been bound with "
+                    + "isActive=" + condition.isActive() + ". Airplane mode is currently " +
+                    WirelessUtils.isAirplaneModeOn(condition.mManager.getContext()));
+        }
+        View card = view.itemView.findViewById(R.id.content);
+        card.setTag(condition);
+        card.setOnClickListener(onClickListener);
+        view.icon.setImageIcon(condition.getIcon());
+        view.title.setText(condition.getTitle());
+
+        CharSequence[] actions = condition.getActions();
+        final boolean hasButtons = actions.length > 0;
+        setViewVisibility(view.itemView, R.id.buttonBar, hasButtons);
+
+        view.summary.setText(condition.getSummary());
+        for (int i = 0; i < 2; i++) {
+            Button button = (Button) view.itemView.findViewById(i == 0
+                    ? R.id.first_action : R.id.second_action);
+            if (actions.length > i) {
+                button.setVisibility(View.VISIBLE);
+                button.setText(actions[i]);
+                final int index = i;
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                                .action(context, MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
+                                        condition.getMetricsConstant());
+                        condition.onActionClick(index);
+                    }
+                });
+            } else {
+                button.setVisibility(View.GONE);
+            }
+        }
+        setViewVisibility(view.itemView, R.id.divider, !isLastItem);
+    }
+
+    private void setViewVisibility(View containerView, int viewId, boolean visible) {
+        View view = containerView.findViewById(viewId);
+        if (view != null) {
+            view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
 }
