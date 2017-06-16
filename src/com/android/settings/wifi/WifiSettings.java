@@ -396,20 +396,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             case MENU_ID_WPS_PBC:
                 showDialog(WPS_PBC_DIALOG_ID);
                 return true;
-                /*
-            case MENU_ID_P2P:
-                if (getActivity() instanceof SettingsActivity) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
-                            WifiP2pSettings.class.getCanonicalName(),
-                            null,
-                            R.string.wifi_p2p_settings_title, null,
-                            this, 0);
-                } else {
-                    startFragment(this, WifiP2pSettings.class.getCanonicalName(),
-                            R.string.wifi_p2p_settings_title, -1, null);
-                }
-                return true;
-                */
             case MENU_ID_WPS_PIN:
                 showDialog(WPS_PIN_DIALOG_ID);
                 return true;
