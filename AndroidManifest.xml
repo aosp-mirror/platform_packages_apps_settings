@@ -1435,6 +1435,7 @@
         </activity>
 
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
+                android:icon="@drawable/ic_accessibility_suggestion"
                 android:label="@string/vision_settings_title"
                 android:theme="@style/SetupWizardAccessibilityTheme"
                 android:taskAffinity="com.android.wizard" >
@@ -1442,6 +1443,12 @@
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.DISPLAY_SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.title"
+                android:resource="@string/vision_settings_suggestion_title" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilitySettingsForSetupWizard" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
