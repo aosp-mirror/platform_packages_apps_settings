@@ -1122,8 +1122,8 @@
     <string name="device_status" msgid="607405385799807324">"상태"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"배터리 상태, 네트워크 및 기타 정보"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"전화번호, 신호 등"</string>
-    <string name="storage_settings" msgid="4211799979832404953">"저장소"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"저장소"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"저장용량"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"저장용량"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"저장소 설정"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB 저장소를 마운트 해제하고 사용 가능한 저장공간을 봅니다."</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD 카드 마운트 해제, 사용 가능한 저장공간 보기"</string>
@@ -1319,8 +1319,8 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"기본 APN 설정 복원 중"</string>
     <string name="menu_restore" msgid="8260067415075573273">"초기화"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"기본 APN 설정을 초기화했습니다."</string>
-    <string name="reset_dashboard_title" msgid="4412694650600342973">"재설정"</string>
-    <string name="reset_network_title" msgid="4557113742173895074">"네트워크 설정 초기화"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"옵션 재설정"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi, 모바일, 블루투스 재설정"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"이렇게 하면 다음을 포함한 모든 네트워크 설정이 재설정됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"설정 초기화"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"모든 네트워크 설정을 초기화하시겠습니까? 수행한 후에는 작업을 취소할 수 없습니다."</string>
@@ -1328,7 +1328,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"초기화하시겠습니까?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"네트워크 재설정 권한이 없는 사용자입니다."</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"네트워크 설정이 재설정되었습니다."</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"공장 초기화"</string>
+    <string name="master_clear_title" msgid="6617679904229218425">"모든 데이터 삭제(초기화)"</string>
     <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
       <item quantity="other">계정 <xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g>개가 재설정됨</item>
       <item quantity="one">계정 1개가 재설정됨</item>
@@ -2649,8 +2649,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"통화 관리자"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (4124461751977706019) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="4124461751977706019">"긴급 알림"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"네트워크 이동통신사"</string>
     <string name="access_point_names" msgid="1381602020438634481">"액세스포인트 네임(APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"향상된 4G LTE 모드"</string>
@@ -3376,6 +3375,8 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"더 차가운 디스플레이 색상 사용"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"색상 변경을 적용하려면 화면을 끄세요."</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"통신 모니터의 변경사항을 적용하려면 기기를 재부팅하세요."</string>
+    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"카메라 HAL HDR+"</string>
+    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"카메라 HAL HDR+의 변경사항을 적용하려면 기기를 재부팅하세요."</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"자동 시스템 업데이트"</string>
     <string name="usage" msgid="2977875522080448986">"사용량"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"모바일 데이터 사용량"</string>

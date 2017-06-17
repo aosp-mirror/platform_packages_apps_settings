@@ -874,7 +874,7 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Bu grup unutulsun mu?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Taşınabilir Kablosuz hotspot"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Kablosuz hotspot"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Diğer cihazlarla içerik veya interneti paylaşmıyor"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Diğer cihazlarla içerik veya internet paylaşılmıyor"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Bu tabletin internet bağlantısı hotspot üzerinden paylaşılıyor"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Bu telefonun internet bağlantısı hotspot üzerinden paylaşılıyor"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Uygulama içerik paylaşıyor. İnternet bağlantısını paylaşmak için hotspot\'u kapatıp tekrar açın"</string>
@@ -1319,8 +1319,8 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Varsayılan APN ayarları geri yükleniyor."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Varsayılana sıfırla"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Varsayılan APN ayarlarına sıfırlama tamamlandı."</string>
-    <string name="reset_dashboard_title" msgid="4412694650600342973">"Sıfırla"</string>
-    <string name="reset_network_title" msgid="4557113742173895074">"Ağ ayarlarını sıfırla"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Seçenekleri sıfırlama"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Kablosuz, mobil ve Bluetooth\'u sıfırla"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Bu sıfırlama işlemi, aşağıdakiler de dahil olmak üzere tüm ağ ayarlarınızı sıfırlayacaktır:\n\n"<li>"Kablosuz ağ"</li>\n<li>"Mobil veri"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Ayarları sıfırla"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Tüm ağ ayarlarınız sıfırlansın mı? Bu işlemi geri alamazsınız!"</string>
@@ -1328,7 +1328,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Sıfırlansın mı?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Bu kullanıcı için ağ ayarlarına sıfırlama işlevi kullanılamıyor"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Ağ ayarları sıfırlandı"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"Fab. verilerine sıfırla"</string>
+    <string name="master_clear_title" msgid="6617679904229218425">"Tüm verileri sil (Fabrika ayarlarına sıfırla)"</string>
     <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
       <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> hesap sıfırlanacak</item>
       <item quantity="one">1 hesap sıfırlanacak</item>
@@ -2649,8 +2649,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"Çağrı Yöneticisi"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (4124461751977706019) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="4124461751977706019">"Acil durum uyarıları"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Ağ operatörleri"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Erişim noktası adları"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Geliştirilmiş 4G LTE Modu"</string>
@@ -3376,6 +3375,8 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Daha soğuk ekran renkleri kullan"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Renk değişikliğini uygulamak için ekranı kapatın"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Telephony monitor değişikliğini uygulamak için cihazı yeniden başlatın"</string>
+    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Kamera HAL HDR+"</string>
+    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Kamera HAL HDR+ değişikliğini uygulamak için cihazı yeniden başlatın"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Otomatik sistem güncellemeleri"</string>
     <string name="usage" msgid="2977875522080448986">"Kullanım"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobil veri kullanımı"</string>
@@ -3560,9 +3561,9 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Telefonu kontrol etmek için kaldırın"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Tableti kontrol etmek için kaldırın"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Cihazı kontrol etmek için kaldırın"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için telefonunuzu seçin."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için tabletinizi seçin."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için cihazınızı seçin."</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için telefonunuzu elinize alın."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için tabletinizi elinize alın."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için cihazınızı elinize alın."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Ekran kapalıyken bildirimleri kontrol edin"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Bildirimler için parmak izini hızlıca kaydırın"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Bildirimlerinizi kontrol etmek için telefonunuzun arkasındaki parmak izi sensöründe parmağınızı hızlıca aşağı kaydırın."</string>

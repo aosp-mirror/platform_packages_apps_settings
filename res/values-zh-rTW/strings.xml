@@ -389,7 +389,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"輕觸感應器"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"將你的手指放在感應器上，感到震動即可移開"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"移開手指，然後再次輕觸"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"持續輕觸指紋感應器以新增完整的指紋"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"重覆按壓指紋感應器，即可加入完整的指紋"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"指紋新增成功"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"當你看到這個圖示時，請使用你的指紋來驗證身分或核准購物交易。"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"要略過指紋設定程序嗎？"</string>
@@ -1319,8 +1319,8 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"正在還原預設 APN 設定。"</string>
     <string name="menu_restore" msgid="8260067415075573273">"還原為預設狀態"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"重設預設 APN 設定已完成。"</string>
-    <string name="reset_dashboard_title" msgid="4412694650600342973">"重設"</string>
-    <string name="reset_network_title" msgid="4557113742173895074">"重設網路設定"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"重設選項"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"重設 Wi-Fi、行動網路和藍牙"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"這項操作會重設所有網路設定，包括：\n\n"<li>"Wi‑Fi"</li>\n<li>"行動數據"</li>\n<li>"藍牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重設設定"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"你要重設所有網路設定嗎？這個動作無法復原！"</string>
@@ -1328,7 +1328,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"你要重設嗎？"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"這個使用者無法重設網路設定"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"已重設網路設定"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"恢復原廠設定"</string>
+    <string name="master_clear_title" msgid="6617679904229218425">"清除所有資料 (恢復原廠設定)"</string>
     <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
       <item quantity="other">系統將重設 <xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> 個帳戶</item>
       <item quantity="one">系統將重設 1 個帳戶</item>
@@ -1801,7 +1801,7 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"協助工具設定"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"螢幕閱讀器、顯示、互動控制項"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視覺輔助設定"</string>
-    <string name="vision_settings_description" msgid="5679491180156408260">"你可以根據個人需求自訂這個裝置，而你日後可以前往 [設定] 變更這些協助工具功能。"</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"你可以根據個人需求自訂這個裝置，日後，你可以前往 [設定] 變更這些無障礙功能。"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"螢幕閱讀器"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音訊和畫面上的文字"</string>
     <string name="display_category_title" msgid="685461049938269166">"螢幕"</string>
@@ -1957,7 +1957,7 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"應用程式不使用時可在背景執行"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"應用程式的背景活動會在不使用時受限"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"應用程式無法在背景執行"</string>
-    <string name="device_screen_usage" msgid="3386088035570409683">"上次完全充飽電後的螢幕用電量"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"上次完全充飽電後的螢幕使用時間"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"螢幕耗電量"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"行動網路掃描作業"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g>之前"</string>
@@ -1982,7 +1982,7 @@
     <string name="awake" msgid="387122265874485088">"裝置清醒時間"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"開啟 Wi-Fi 的時間"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"開啟 Wi-Fi 的時間"</string>
-    <string name="advanced_battery_title" msgid="2068039111517508622">"進階電池用量資訊"</string>
+    <string name="advanced_battery_title" msgid="2068039111517508622">"關於電池用量的進階資訊"</string>
     <string name="history_details_title" msgid="3608240585315506067">"詳細記錄"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"電池用量"</string>
     <string name="details_subtitle" msgid="32593908269911734">"使用狀況詳細資訊"</string>
@@ -2097,7 +2097,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"應用程式最佳化"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"省電模式"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"節約耗電量模式"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"永遠不要"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"電量為 <xliff:g id="PERCENT">%1$s</xliff:g> 時"</string>
@@ -2653,8 +2653,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"通話管理工具"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (4124461751977706019) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="4124461751977706019">"緊急警示"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"網路業者"</string>
     <string name="access_point_names" msgid="1381602020438634481">"存取點名稱"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"加強型 4G LTE 模式"</string>
@@ -3380,6 +3379,8 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"使用較冷的顯示器色溫"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"如要套用色溫變更設定，請關閉螢幕"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"如要套用 Telephony Monitor 的變更內容，請重新啟動裝置"</string>
+    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"相機 HAL HDR+"</string>
+    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"如要套用你對「相機 HAL HDR+」設定所做的變更，請重新啟動裝置"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自動系統更新"</string>
     <string name="usage" msgid="2977875522080448986">"使用情況"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"行動數據用量"</string>
@@ -3488,7 +3489,7 @@
     <string name="demo_mode" msgid="2798762752209330277">"系統 UI 示範模式"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"快速設定開發人員圖塊"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"我們很樂意為你提供協助"</string>
-    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我們隨時可為你提供服務"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我們隨時為你提供服務"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我們隨時為你提供服務"</string>
     <string name="support_escalation_summary" msgid="8473084168776014405">"我們的支援小組會協助你解決任何問題"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我們的支援小組全年無休，隨時為你提供服務"</string>
@@ -3575,7 +3576,7 @@
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"快速查看通知"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"將手指放在指紋感應器上並向下滑動"</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"在拿起手機時開啟相機"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"如要自動開啟相機，只要將手機拿起做出拍照 (橫向或縱向) 動作即可。即使手機進入睡眠模式或鎖定狀態，都能使用此功能。"</string>
+    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"如要自動開啟相機，只要將手機拿起做出拍照 (橫向或縱向) 動作即可。即使手機進入睡眠模式或鎖定狀態，也能使用此功能。"</string>
     <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"在手機處於睡眠模式或鎖定狀態時拍攝相片"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"輔助手勢"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
@@ -3697,5 +3698,5 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"電信業者佈建資訊"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"觸發電信業者佈建程序"</string>
     <string name="new_device_suggestion_title" msgid="8346563796032837800">"這個裝置有哪些值得一試的新功能？"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"查看前 5 項功能"</string>
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"查看前 5 大熱門功能"</string>
 </resources>
