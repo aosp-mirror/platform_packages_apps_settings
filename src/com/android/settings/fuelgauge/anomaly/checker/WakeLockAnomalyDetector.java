@@ -21,7 +21,6 @@ import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
-import android.util.ArrayMap;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -87,23 +86,10 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                 continue;
             }
 
-            final ArrayMap<String, ? extends BatteryStats.Uid.Wakelock> wakelocks =
-                    uid.getWakelockStats();
-            long maxPartialWakeLockMs = 0;
+            final long currentDurationMs = getCurrentDurationMs(uid, rawRealtime);
+            final long backgroundDurationMs = getBackgroundTotalDurationMs(uid, rawRealtime);
 
-            for (int iw = wakelocks.size() - 1; iw >= 0; iw--) {
-                final BatteryStats.Timer timer = wakelocks.valueAt(iw).getWakeTime(
-                        BatteryStats.WAKE_TYPE_PARTIAL);
-                if (timer == null) {
-                    continue;
-                }
-                maxPartialWakeLockMs = Math.max(maxPartialWakeLockMs,
-                        getTotalDurationMs(timer, rawRealtime));
-            }
-
-            // Report application as anomaly if wakelock time is too long
-            // TODO(b/38233034): add more attributes to detect wakelock anomaly
-            if (maxPartialWakeLockMs > mWakeLockThresholdMs) {
+            if (backgroundDurationMs > mWakeLockThresholdMs && currentDurationMs != 0) {
                 final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                 final CharSequence displayName = Utils.getApplicationLabel(mContext,
                         packageName);
@@ -119,16 +105,22 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                     anomalies.add(anomaly);
                 }
             }
-
         }
         return anomalies;
     }
 
     @VisibleForTesting
-    long getTotalDurationMs(BatteryStats.Timer timer, long rawRealtime) {
-        if (timer == null) {
-            return 0;
-        }
-        return timer.getTotalDurationMsLocked(rawRealtime);
+    long getCurrentDurationMs(BatteryStats.Uid uid, long elapsedRealtimeMs) {
+        BatteryStats.Timer timer = uid.getAggregatedPartialWakelockTimer();
+
+        return timer != null ? timer.getCurrentDurationMsLocked(elapsedRealtimeMs) : 0;
+    }
+
+    @VisibleForTesting
+    long getBackgroundTotalDurationMs(BatteryStats.Uid uid, long elapsedRealtimeMs) {
+        BatteryStats.Timer timer = uid.getAggregatedPartialWakelockTimer();
+        BatteryStats.Timer subTimer = timer != null ? timer.getSubTimer() : null;
+
+        return subTimer != null ? subTimer.getTotalDurationMsLocked(elapsedRealtimeMs) : 0;
     }
 }

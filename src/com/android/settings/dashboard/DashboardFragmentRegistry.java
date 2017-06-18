@@ -76,7 +76,7 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP.put(SecuritySettings.class.getName(),
                 CategoryKey.CATEGORY_SECURITY);
         PARENT_TO_CATEGORY_KEY_MAP.put(AccountDetailDashboardFragment.class.getName(),
-                CategoryKey.CATEGORY_ACCOUNT);
+                CategoryKey.CATEGORY_ACCOUNT_DETAIL);
         PARENT_TO_CATEGORY_KEY_MAP.put(UserAndAccountDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT);
         PARENT_TO_CATEGORY_KEY_MAP.put(

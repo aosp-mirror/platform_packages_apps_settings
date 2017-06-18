@@ -18,7 +18,6 @@ package com.android.settings.dashboard;
 import android.annotation.IntDef;
 import android.graphics.drawable.Icon;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
 import android.text.TextUtils;
 
@@ -272,8 +271,7 @@ public class DashboardData {
                     tile.remoteViews != null
                             ? R.layout.suggestion_tile_card
                             : R.layout.suggestion_tile,
-                    Objects.hash(tile.title),
-                    false));
+                    Objects.hash(tile.title)));
         }
         mId++;
     }
@@ -358,8 +356,6 @@ public class DashboardData {
         resetCount();
         for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
-            countItem(category, R.layout.dashboard_category,
-                    !TextUtils.isEmpty(category.title), NS_ITEMS);
             for (int j = 0; j < category.tiles.size(); j++) {
                 Tile tile = category.tiles.get(j);
                 countItem(tile, R.layout.dashboard_tile, true, NS_ITEMS);
@@ -534,7 +530,6 @@ public class DashboardData {
      */
     private static class Item {
         // valid types in field type
-        private static final int TYPE_DASHBOARD_CATEGORY = R.layout.dashboard_category;
         private static final int TYPE_DASHBOARD_TILE = R.layout.dashboard_tile;
         @Deprecated
         private static final int TYPE_SUGGESTION_HEADER = R.layout.suggestion_header;
@@ -550,7 +545,7 @@ public class DashboardData {
                 R.layout.suggestion_condition_footer;
         private static final int TYPE_DASHBOARD_SPACER = R.layout.dashboard_spacer;
 
-        @IntDef({TYPE_DASHBOARD_CATEGORY, TYPE_DASHBOARD_TILE, TYPE_SUGGESTION_HEADER,
+        @IntDef({TYPE_DASHBOARD_TILE, TYPE_SUGGESTION_HEADER,
                 TYPE_SUGGESTION_TILE, TYPE_SUGGESTION_CONDITION_CONTAINER,
                 TYPE_SUGGESTION_CONDITION_HEADER, TYPE_CONDITION_CARD,
                 TYPE_SUGGESTION_CONDITION_FOOTER, TYPE_DASHBOARD_SPACER})
@@ -558,8 +553,8 @@ public class DashboardData {
         public @interface ItemTypes{}
 
         /**
-         * The main data object in item, usually is a {@link Tile}, {@link Condition} or
-         * {@link DashboardCategory} object. This object can also be null when the
+         * The main data object in item, usually is a {@link Tile}, {@link Condition}
+         * object. This object can also be null when the
          * item is an divider line. Please refer to {@link #buildItemsData()} for
          * detail usage of the Item.
          */
@@ -615,10 +610,6 @@ public class DashboardData {
             }
 
             switch (type) {
-                case TYPE_DASHBOARD_CATEGORY:
-                    // Only check title for dashboard category
-                    return TextUtils.equals(((DashboardCategory) entity).title,
-                            ((DashboardCategory) targetItem.entity).title);
                 case TYPE_DASHBOARD_TILE:
                     final Tile localTile = (Tile) entity;
                     final Tile targetTile = (Tile) targetItem.entity;

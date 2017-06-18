@@ -67,27 +67,6 @@ public class UserAndAccountDashboardFragmentTest {
     }
 
     @Test
-    public void refreshDashboardTiles_HasAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile();
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
-        metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
-        tile.metaData = metaData;
-
-        assertThat(mFragment.displayTile(tile)).isFalse();
-    }
-
-    @Test
-    public void refreshDashboardTiles_NoAccountType_shouldDisplay() {
-        final Tile tile = new Tile();
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
-        tile.metaData = metaData;
-
-        assertThat(mFragment.displayTile(tile)).isTrue();
-    }
-
-    @Test
     public void updateSummary_shouldDisplaySignedInUser() {
         final Activity activity = mock(Activity.class);
         final SummaryLoader loader = mock(SummaryLoader.class);

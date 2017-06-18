@@ -389,7 +389,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"センサーに触れる"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"指をセンサーに当て、振動したら離します。"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"指を離してからもう一度触れる"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"指を離したままにして、あらゆる角度から指紋を登録します"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"指を何度か離して、あらゆる角度から指紋を登録します"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"このアイコンが表示されているときは、本人確認や購入の承認に指紋認証を使用します。"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"指紋の設定をスキップしますか？"</string>
@@ -649,11 +649,11 @@
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"接続できませんでした。もう一度お試しください。"</string>
     <string name="device_details_title" msgid="6576953269221085300">"端末の詳細"</string>
     <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"端末の Bluetooth アドレス: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"このデバイスとのペアを解除しますか？"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"このデバイスとのペア設定を解除しますか？"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"このスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"このタブレットと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"この端末と <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
-    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"このデバイスとのペアを解除"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"このデバイスとのペア設定を解除"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"接続先..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>はメディアの音声から切断されます。"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>はハンズフリー音声デバイスから切断されます。"</string>
@@ -1319,8 +1319,8 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"デフォルトのAPN設定を復元しています。"</string>
     <string name="menu_restore" msgid="8260067415075573273">"初期設定にリセット"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN設定をリセットしました。"</string>
-    <string name="reset_dashboard_title" msgid="4412694650600342973">"リセット"</string>
-    <string name="reset_network_title" msgid="4557113742173895074">"ネットワーク設定のリセット"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"リセット オプション"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi、モバイル、Bluetooth をリセット"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"以下を含む、すべてのネットワーク設定がリセットされます。\n\n"<li>"Wi‑Fi"</li>\n<li>"モバイルデータ"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"設定をリセット"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"すべてのネットワーク設定をリセットしますか？この操作は元に戻せません。"</string>
@@ -1328,7 +1328,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"リセットしますか？"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ネットワークのリセットはこのユーザーには許可されていません"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ネットワーク設定をリセットしました"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"データの初期化"</string>
+    <string name="master_clear_title" msgid="6617679904229218425">"すべてのデータを消去（初期状態にリセット）"</string>
     <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
       <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> 件のアカウントをリセットします</item>
       <item quantity="one">1 件のアカウントをリセットします</item>
@@ -1989,24 +1989,24 @@
     <string name="controls_subtitle" msgid="390468421138288702">"消費電力の調整"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"含まれているパッケージ"</string>
     <string name="battery_abnormal_details_title" msgid="5469019021857291216">"電池を消費しているアプリ"</string>
-    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"端末をスリープモードにしないようにしています"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"端末がスリープ状態になるのを妨げています"</string>
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"バックグラウンドで端末をスリープ状態から復帰させています"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"位置情報を頻繁にリクエストしています"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> 個のアプリの動作に問題があります"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"アプリを停止しますか？"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"<xliff:g id="APP">%1$s</xliff:g> がスマートフォンをスリープモードにしないようにしているため、スマートフォンが電池を正常に管理できません。\n\nこの問題を解決するには、アプリを強制停止してみてください。\n\n問題が解決しない場合、電池消費を改善するにはこのアプリのアンインストールが必要となる可能性があります。"</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"<xliff:g id="APP">%1$s</xliff:g> がタブレットをスリープモードにしないようにしているため、タブレットが電池を正常に管理できません。\n\nこの問題を解決するには、アプリを強制停止してみてください。\n\n問題が解決しない場合、電池消費を改善するにはこのアプリのアンインストールが必要となる可能性があります。"</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"<xliff:g id="APP">%1$s</xliff:g> が端末をスリープモードにしないようにしているため、端末が電池を正常に管理できません。\n\nこの問題を解決するには、アプリを強制停止してみてください。\n\n問題が解決しない場合、電池消費を改善するにはこのアプリのアンインストールが必要となる可能性があります。"</string>
+    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"<xliff:g id="APP">%1$s</xliff:g> がスリープ状態への移行を妨げているため、スマートフォンで電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
+    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"<xliff:g id="APP">%1$s</xliff:g> がスリープ状態への移行を妨げているため、タブレットで電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
+    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"<xliff:g id="APP">%1$s</xliff:g> がスリープ状態への移行を妨げているため、端末で電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
     <string name="dialog_stop_ok" msgid="2319777211264004900">"アプリを停止する"</string>
     <string name="dialog_background_check_title" msgid="1525936543485084879">"バックグラウンドでの使用を OFF にしますか？"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"<xliff:g id="APP">%1$s</xliff:g> がこのスマートフォンをスリープ状態から復帰させているため、スマートフォンが電池を正常に管理できません。\n\nこの問題を解決するために、スマートフォンでこのアプリのバックグラウンドでの実行を阻止できます。"</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"<xliff:g id="APP">%1$s</xliff:g> がこのタブレットをスリープ状態から復帰させているため、タブレットが電池を正常に管理できません。\n\nこの問題を解決するために、タブレットでこのアプリのバックグラウンドでの実行を阻止できます。"</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"<xliff:g id="APP">%1$s</xliff:g> が端末をスリープ状態から復帰させているため、端末が電池を正常に管理できません。\n\nこの問題を解決するために、端末でこのアプリのバックグラウンドでの実行を阻止できます。"</string>
+    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"<xliff:g id="APP">%1$s</xliff:g> によってスリープ状態から復帰し続けているため、スマートフォンで電池を正常に管理できません。\n\nこの問題を解決するには、スマートフォンでこのアプリのバックグラウンドでの実行を停止します。"</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"<xliff:g id="APP">%1$s</xliff:g> によってスリープ状態から復帰し続けているため、タブレットで電池を正常に管理できません。\n\nこの問題を解決するには、タブレットでこのアプリのバックグラウンドでの実行を停止します。"</string>
+    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"<xliff:g id="APP">%1$s</xliff:g> によってスリープ状態から復帰し続けているため、端末で電池を正常に管理できません。\n\nこの問題を解決するには、端末でこのアプリのバックグラウンドでの実行を停止します。"</string>
     <string name="dialog_background_check_ok" msgid="412876934682899659">"OFF にする"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"位置情報を OFF にしますか？"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"<xliff:g id="APP">%1$s</xliff:g> を使用していないときにこのアプリが位置情報のリクエストを繰り返しているため、スマートフォンが電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"<xliff:g id="APP">%1$s</xliff:g> を使用していないときにこのアプリが位置情報のリクエストを繰り返しているため、タブレットが電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"<xliff:g id="APP">%1$s</xliff:g> を使用していないときにこのアプリが位置情報のリクエストを繰り返しているため、端末が電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
+    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"使用中でないときに <xliff:g id="APP">%1$s</xliff:g> が位置情報のリクエストを繰り返しているため、スマートフォンで電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
+    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"使用中でないときに <xliff:g id="APP">%1$s</xliff:g> が位置情報のリクエストを繰り返しているため、タブレットで電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
+    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"使用中でないときに <xliff:g id="APP">%1$s</xliff:g> が位置情報のリクエストを繰り返しているため、端末で電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
     <string name="dialog_location_ok" msgid="4572391197601313986">"OFF にする"</string>
     <string name="power_screen" msgid="3023346080675904613">"画面"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"ライト"</string>
@@ -2653,8 +2653,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"通話マネージャ"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (4124461751977706019) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="4124461751977706019">"緊急速報メール"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"携帯通信会社"</string>
     <string name="access_point_names" msgid="1381602020438634481">"アクセスポイント名"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"パワーアップした4G LTEモード"</string>
@@ -3380,6 +3379,8 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"寒色の表示色を使用します"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"色の変更を適用するには、画面を OFF にしてください"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Telephony Monitor の変更を適用するには、端末を再起動してください"</string>
+    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"カメラ HAL HDR+"</string>
+    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"カメラ HAL HDR+ の変更を適用するには、端末を再起動してください"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自動システム アップデート"</string>
     <string name="usage" msgid="2977875522080448986">"使用量"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"モバイルデータ使用"</string>
@@ -3552,7 +3553,7 @@
     <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"電源ボタンを 2 回押してカメラを起動"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"カメラの切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"自撮り写真をすばやく撮影する"</string>
+    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"自撮り写真をすばやく撮影"</string>
     <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"2 回ひねる動作でスマートフォンを自撮り写真モードに変更"</string>
     <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"2 回ひねる動作でタブレットを自撮り写真モードに変更"</string>
     <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"2 回ひねる動作で端末を自撮り写真モードに変更"</string>
@@ -3572,7 +3573,7 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"通知を確認するには、スマートフォンの背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"通知を確認するには、タブレットの背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"通知を確認するには、端末の背面にある指紋認証センサーを下にスワイプします。"</string>
-    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"通知をすばやく確認する"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"通知をすばやく確認"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"指紋認証センサーを下にスワイプ"</string>
     <string name="camera_lift_trigger_title" msgid="2758206307949942951">"撮影位置で構えたときにカメラを起動"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"カメラを自動的に起動するには、スマートフォンを撮影位置（横向きまたは縦向き）で構えます。スマートフォンがスリープ状態またはロック状態でも機能します。"</string>

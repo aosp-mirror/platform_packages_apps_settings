@@ -81,15 +81,6 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
         return controllers;
     }
 
-    @Override
-    protected boolean displayTile(Tile tile) {
-        final Bundle metadata = tile.metaData;
-        if (metadata != null) {
-            return metadata.getString(METADATA_IA_ACCOUNT) == null;
-        }
-        return true;
-    }
-
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
         private final Context mContext;
