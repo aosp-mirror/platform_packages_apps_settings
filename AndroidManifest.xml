@@ -405,6 +405,18 @@
                 android:value="com.android.settings.bluetooth.BluetoothSettings" />
         </activity>
 
+        <activity android:name="Settings$AssistGestureSettingsActivity"
+            android:label="@string/assist_gesture_title"
+            android:icon="@drawable/ic_settings_gestures"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.settings.ASSIST_GESTURE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.gestures.AssistGestureSettings" />
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".bluetooth.BluetoothSettings"
                 android:label="@string/bluetooth_settings_title"
