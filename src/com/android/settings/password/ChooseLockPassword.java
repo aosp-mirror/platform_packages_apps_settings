@@ -201,7 +201,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
-        private Button mCancelButton;
+        protected Button mCancelButton;
         private Button mNextButton;
 
         private TextChangedHandler mTextChangedHandler;

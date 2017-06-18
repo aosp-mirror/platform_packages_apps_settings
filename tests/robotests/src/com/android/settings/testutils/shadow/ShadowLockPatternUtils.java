@@ -16,6 +16,8 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.app.admin.DevicePolicyManager;
+
 import com.android.internal.widget.LockPatternUtils;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -26,5 +28,10 @@ public class ShadowLockPatternUtils {
     @Implementation
     public boolean isSecure(int id) {
         return true;
+    }
+
+    @Implementation
+    public int getActivePasswordQuality(int userId) {
+        return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
 }
