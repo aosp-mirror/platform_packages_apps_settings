@@ -18,6 +18,7 @@
 package com.android.settings.search2;
 
 import android.content.pm.ApplicationInfo;
+import android.os.UserHandle;
 
 public class AppSearchResult extends SearchResult {
     /**
@@ -28,6 +29,10 @@ public class AppSearchResult extends SearchResult {
     public AppSearchResult(Builder builder) {
         super(builder);
         info = builder.mInfo;
+    }
+
+    public UserHandle getAppUserHandle() {
+        return new UserHandle(UserHandle.getUserId(info.uid));
     }
 
     public static class Builder extends SearchResult.Builder {

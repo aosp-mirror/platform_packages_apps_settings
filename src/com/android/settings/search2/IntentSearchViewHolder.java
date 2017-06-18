@@ -17,6 +17,7 @@ package com.android.settings.search2;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
@@ -51,7 +52,14 @@ public class IntentSearchViewHolder extends SearchViewHolder {
             mMetricsFeatureProvider.action(v.getContext(),
                     MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
                     resultName, rank);
-            fragment.startActivity(intent);
+            // Use app user id to support work profile use case.
+            if (result instanceof AppSearchResult) {
+                AppSearchResult appResult = (AppSearchResult) result;
+                UserHandle userHandle = appResult.getAppUserHandle();
+                fragment.getActivity().startActivityAsUser(intent, userHandle);
+            } else {
+                fragment.startActivity(intent);
+            }
         });
     }
 }
