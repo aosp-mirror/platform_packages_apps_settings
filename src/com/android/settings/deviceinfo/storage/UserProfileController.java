@@ -96,7 +96,13 @@ public class UserProfileController extends PreferenceController
         int userId = mUser.id;
         StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
         if (result != null) {
-            setSize(result.externalStats.totalBytes, mTotalSizeBytes);
+            setSize(
+                    result.externalStats.totalBytes
+                            + result.otherAppsSize
+                            + result.videoAppsSize
+                            + result.musicAppsSize
+                            + result.gamesSize,
+                    mTotalSizeBytes);
         }
     }
 
