@@ -22,7 +22,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -31,13 +30,9 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -75,15 +70,6 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
  */
 public class BluetoothSettings extends DeviceListPreferenceFragment implements Indexable {
     private static final String TAG = "BluetoothSettings";
-
-    private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 1;
-
-    /* Private intent to show the list of received files */
-    private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
-            "android.btopp.intent.action.OPEN_RECEIVED_FILES";
-    private static final String BTOPP_PACKAGE =
-            "com.android.bluetooth";
-
     private static final int PAIRED_DEVICE_ORDER = 1;
     private static final int PAIRING_PREF_ORDER = 2;
 
@@ -185,31 +171,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mLocalAdapter == null) return;
-        // If the user is not allowed to configure bluetooth, do not show the menu.
-        if (isUiRestricted()) return;
-
-        menu.add(Menu.NONE, MENU_ID_SHOW_RECEIVED, 0, R.string.bluetooth_show_received_files)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_ID_SHOW_RECEIVED:
-                mMetricsFeatureProvider.action(getActivity(),
-                        MetricsEvent.ACTION_BLUETOOTH_FILES);
-                Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
-                intent.setPackage(BTOPP_PACKAGE);
-                getActivity().sendBroadcast(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public String getDeviceListKey() {
         return KEY_PAIRED_DEVICES;
     }
@@ -233,7 +194,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 mPairedDevicesCategory.addPreference(mPairingPreference);
                 updateFooterPreference(mFooterPreference);
 
-                getActivity().invalidateOptionsMenu();
                 mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
                 return; // not break
 
@@ -257,9 +217,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         displayEmptyMessage(true);
         if (messageId != 0) {
             getEmptyTextView().setText(messageId);
-        }
-        if (!isUiRestricted()) {
-            getActivity().invalidateOptionsMenu();
         }
     }
 
@@ -309,16 +266,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
         updateContent(bluetoothState);
-    }
-
-    @Override
-    public void onScanningStateChanged(boolean started) {
-        super.onScanningStateChanged(started);
-        // Update options' enabled state
-        final Activity activity = getActivity();
-        if (activity != null) {
-            activity.invalidateOptionsMenu();
-        }
     }
 
     @Override
@@ -417,6 +364,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 (SettingsActivity) getActivity());
         controllers.add(mDeviceNamePrefController);
         controllers.add(mPairingPrefController);
+        controllers.add(new BluetoothFilesPreferenceController(context));
 
         return controllers;
     }
