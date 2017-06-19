@@ -22,9 +22,9 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.Utils;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
@@ -35,6 +35,8 @@ import java.util.List;
  * an empty list if there is no anomaly.
  */
 public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
+    private static final String TAG = "AnomalyLoader";
+
     private static final boolean USE_FAKE_DATA = false;
     private BatteryStatsHelper mBatteryStatsHelper;
     private String mPackageName;
@@ -108,9 +110,9 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
     List<Anomaly> generateFakeData() {
         final List<Anomaly> anomalies = new ArrayList<>();
         final Context context = getContext();
+        final String packageName = "com.android.settings";
+        final CharSequence displayName = "Settings";
         try {
-            final String packageName = "com.android.settings";
-            final CharSequence displayName = "Settings";
             final int uid = context.getPackageManager().getPackageUid(packageName, 0);
 
             anomalies.add(new Anomaly.Builder()
@@ -125,8 +127,14 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
                     .setPackageName(packageName)
                     .setDisplayName(displayName)
                     .build());
+            anomalies.add(new Anomaly.Builder()
+                    .setUid(uid)
+                    .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
+                    .setPackageName(packageName)
+                    .setDisplayName(displayName)
+                    .build());
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Cannot find package by name: " + packageName, e);
         }
         return anomalies;
     }
