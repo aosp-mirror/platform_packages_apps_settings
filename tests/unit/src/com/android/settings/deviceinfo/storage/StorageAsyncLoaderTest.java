@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.support.test.filters.SmallTest;
@@ -74,7 +75,8 @@ public class StorageAsyncLoaderTest {
         MockitoAnnotations.initMocks(this);
         mInfo = new ArrayList<>();
         mLoader = new StorageAsyncLoader(mContext, mUserManager, "id", mSource, mPackageManager);
-        when(mPackageManager.getInstalledApplicationsAsUser(anyInt(), anyInt())).thenReturn(mInfo);
+        when(mPackageManager.getInstalledApplicationsAsUser(eq(PRIMARY_USER_ID), anyInt()))
+                .thenReturn(mInfo);
         UserInfo info = new UserInfo();
         mUsers = new ArrayList<>();
         mUsers.add(info);
@@ -174,11 +176,35 @@ public class StorageAsyncLoaderTest {
         info.category = ApplicationInfo.CATEGORY_UNDEFINED;
         mInfo.add(info);
         when(mSource.getStatsForPackage(anyString(), anyString(), any(UserHandle.class)))
-                .thenThrow(new IllegalStateException());
+                .thenThrow(new NameNotFoundException());
 
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
         // Should not crash.
+    }
+
+    @Test
+    public void testPackageIsNotDoubleCounted() throws Exception {
+        UserInfo info = new UserInfo();
+        info.id = SECONDARY_USER_ID;
+        mUsers.add(info);
+        when(mSource.getExternalStorageStats(anyString(), eq(UserHandle.SYSTEM)))
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(9, 2, 3, 4, 0));
+        when(mSource.getExternalStorageStats(anyString(), eq(new UserHandle(SECONDARY_USER_ID))))
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(10, 3, 3, 4, 0));
+        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
+        ArrayList<ApplicationInfo> secondaryUserApps = new ArrayList<>();
+        ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.packageName = PACKAGE_NAME_1;
+        appInfo.category = ApplicationInfo.CATEGORY_VIDEO;
+        secondaryUserApps.add(appInfo);
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(11L);
+        // No code size for the second user.
+        assertThat(result.get(SECONDARY_USER_ID).videoAppsSize).isEqualTo(10L);
     }
 
     private ApplicationInfo addPackage(String packageName, long cacheSize, long codeSize,
@@ -196,4 +222,5 @@ public class StorageAsyncLoaderTest {
         mInfo.add(info);
         return info;
     }
+
 }
