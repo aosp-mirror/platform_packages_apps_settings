@@ -16,6 +16,7 @@
 package com.android.settings.utils;
 
 import android.app.ActivityManager;
+import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,16 +36,16 @@ import java.util.Set;
 
 public class ZenServiceListing {
 
-    private final ContentResolver mContentResolver;
     private final Context mContext;
     private final ManagedServiceSettings.Config mConfig;
     private final Set<ServiceInfo> mApprovedServices = new ArraySet<ServiceInfo>();
     private final List<Callback> mZenCallbacks = new ArrayList<>();
+    private final NotificationManager mNm;
 
     public ZenServiceListing(Context context, ManagedServiceSettings.Config config) {
         mContext = context;
         mConfig = config;
-        mContentResolver = context.getContentResolver();
+        mNm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     public ServiceInfo findService(final ComponentName cn) {
@@ -67,47 +68,23 @@ public class ZenServiceListing {
 
     public void reloadApprovedServices() {
         mApprovedServices.clear();
-        String[] settings = {mConfig.setting, mConfig.secondarySetting};
 
-        for (String setting : settings) {
-            if (!TextUtils.isEmpty(setting)) {
-                final String flat = Settings.Secure.getString(mContentResolver, setting);
-                if (!TextUtils.isEmpty(flat)) {
-                    final List<String> names = Arrays.asList(flat.split(":"));
-                    List<ServiceInfo> services = new ArrayList<>();
-                    getServices(mConfig, services, mContext.getPackageManager());
-                    for (ServiceInfo service : services) {
-                        if (matchesApprovedPackage(names, service.getComponentName())) {
-                            mApprovedServices.add(service);
-                        }
-                    }
-                }
+        List<String> enabledNotificationListenerPkgs = mNm.getEnabledNotificationListenerPackages();
+        List<ServiceInfo> services = new ArrayList<>();
+        getServices(mConfig, services, mContext.getPackageManager());
+        for (ServiceInfo service : services) {
+            final String servicePackage = service.getComponentName().getPackageName();
+            if (mNm.isNotificationPolicyAccessGrantedForPackage(servicePackage)
+                || enabledNotificationListenerPkgs.contains(servicePackage)) {
+                mApprovedServices.add(service);
             }
         }
+
         if (!mApprovedServices.isEmpty()) {
             for (Callback callback : mZenCallbacks) {
                 callback.onServicesReloaded(mApprovedServices);
             }
         }
-    }
-
-    // Setting could contain: the component name of the condition provider, the package name of
-    // the condition provider, the component name of the notification listener.
-    private boolean matchesApprovedPackage(List<String> approved, ComponentName serviceOwner) {
-        String flatCn = serviceOwner.flattenToString();
-        if (approved.contains(flatCn) || approved.contains(serviceOwner.getPackageName())) {
-            return true;
-        }
-        for (String entry : approved) {
-            if (!TextUtils.isEmpty(entry)) {
-                ComponentName approvedComponent = ComponentName.unflattenFromString(entry);
-                if (approvedComponent != null && approvedComponent.getPackageName().equals(
-                        serviceOwner.getPackageName())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private static int getServices(ManagedServiceSettings.Config c, List<ServiceInfo> list,
