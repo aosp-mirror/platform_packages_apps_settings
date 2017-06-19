@@ -138,7 +138,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 .setLabel(mAppRow.label)
                 .setPackageName(mAppRow.pkg)
                 .setUid(mAppRow.uid)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                .setButtonActions(AppHeaderController.ActionType.ACTION_NONE,
                         AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
                 .done(activity, getPrefContext());
         pref.setKey(KEY_HEADER);
