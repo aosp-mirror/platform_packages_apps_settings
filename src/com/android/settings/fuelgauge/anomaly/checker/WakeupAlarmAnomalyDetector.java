@@ -61,7 +61,8 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
 
     @Override
     public List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper) {
-        return detectAnomalies(batteryStatsHelper, null);
+        // Detect all apps if targetPackageName is null
+        return detectAnomalies(batteryStatsHelper, null /* targetPackageName */);
     }
 
     @Override

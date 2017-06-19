@@ -17,10 +17,11 @@
 package com.android.settings.fuelgauge.anomaly.checker;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
+import android.util.ArrayMap;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -35,32 +36,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Check whether apps holding wakelock too long
+ * Check whether apps have unoptimized bluetooth scanning in the background
  */
-public class WakeLockAnomalyDetector implements AnomalyDetector {
-    private static final String TAG = "WakeLockAnomalyChecker";
-    private PackageManager mPackageManager;
-    private Context mContext;
+public class BluetoothScanAnomalyDetector implements AnomalyDetector {
+    private static final String TAG = "BluetoothScanAnomalyDetector";
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
-    long mWakeLockThresholdMs;
-    @VisibleForTesting
     AnomalyAction mAnomalyAction;
+    private long mBluetoothScanningThreshold;
+    private Context mContext;
 
-    public WakeLockAnomalyDetector(Context context) {
+    public BluetoothScanAnomalyDetector(Context context) {
         this(context, new AnomalyDetectionPolicy(context));
     }
 
     @VisibleForTesting
-    WakeLockAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
+    BluetoothScanAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
         mContext = context;
-        mPackageManager = context.getPackageManager();
         mBatteryUtils = BatteryUtils.getInstance(context);
         mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
-                Anomaly.AnomalyType.WAKE_LOCK);
-
-        mWakeLockThresholdMs = policy.wakeLockThreshold;
+                Anomaly.AnomalyType.BLUETOOTH_SCAN);
+        //TODO(b/36921532): hook up it to AnomalyDectionPolicy
+        mBluetoothScanningThreshold = 30 * DateUtils.MINUTE_IN_MILLIS;
     }
 
     @Override
@@ -74,10 +72,9 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
             String targetPackageName) {
         final List<BatterySipper> batterySippers = batteryStatsHelper.getUsageList();
         final List<Anomaly> anomalies = new ArrayList<>();
-        final long rawRealtime = SystemClock.elapsedRealtime();
         final int targetUid = mBatteryUtils.getPackageUid(targetPackageName);
+        final long elapsedRealtimeMs = SystemClock.elapsedRealtime();
 
-        // Check the app one by one
         for (int i = 0, size = batterySippers.size(); i < size; i++) {
             final BatterySipper sipper = batterySippers.get(i);
             final BatteryStats.Uid uid = sipper.uidObj;
@@ -87,17 +84,15 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                 continue;
             }
 
-            final long currentDurationMs = getCurrentDurationMs(uid, rawRealtime);
-            final long backgroundDurationMs = getBackgroundTotalDurationMs(uid, rawRealtime);
-
-            if (backgroundDurationMs > mWakeLockThresholdMs && currentDurationMs != 0) {
+            final long bluetoothTimeMs = getBluetoothUnoptimizedBgTimeMs(uid, elapsedRealtimeMs);
+            if (bluetoothTimeMs > mBluetoothScanningThreshold) {
                 final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                 final CharSequence displayName = Utils.getApplicationLabel(mContext,
                         packageName);
 
                 Anomaly anomaly = new Anomaly.Builder()
                         .setUid(uid.getUid())
-                        .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                        .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
                         .setDisplayName(displayName)
                         .setPackageName(packageName)
                         .build();
@@ -107,21 +102,15 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                 }
             }
         }
+
         return anomalies;
     }
 
     @VisibleForTesting
-    long getCurrentDurationMs(BatteryStats.Uid uid, long elapsedRealtimeMs) {
-        BatteryStats.Timer timer = uid.getAggregatedPartialWakelockTimer();
+    public long getBluetoothUnoptimizedBgTimeMs(BatteryStats.Uid uid, long elapsedRealtimeMs) {
+        BatteryStats.Timer timer = uid.getBluetoothUnoptimizedScanBackgroundTimer();
 
-        return timer != null ? timer.getCurrentDurationMsLocked(elapsedRealtimeMs) : 0;
+        return timer != null ? timer.getTotalDurationMsLocked(elapsedRealtimeMs) : 0;
     }
 
-    @VisibleForTesting
-    long getBackgroundTotalDurationMs(BatteryStats.Uid uid, long elapsedRealtimeMs) {
-        BatteryStats.Timer timer = uid.getAggregatedPartialWakelockTimer();
-        BatteryStats.Timer subTimer = timer != null ? timer.getSubTimer() : null;
-
-        return subTimer != null ? subTimer.getTotalDurationMsLocked(elapsedRealtimeMs) : 0;
-    }
 }
