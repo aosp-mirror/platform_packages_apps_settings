@@ -338,15 +338,15 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             case NotificationManager.IMPORTANCE_NONE:
                 return getContext().getString(R.string.notification_toggle_off);
             case NotificationManager.IMPORTANCE_MIN:
-                return getContext().getString(R.string.notification_channel_summary_min);
+                return getContext().getString(R.string.notification_importance_min);
             case NotificationManager.IMPORTANCE_LOW:
-                return getContext().getString(R.string.notification_channel_summary_low);
+                return getContext().getString(R.string.notification_importance_low);
             case NotificationManager.IMPORTANCE_DEFAULT:
-                return getContext().getString(R.string.notification_channel_summary_default);
+                return getContext().getString(R.string.notification_importance_default);
             case NotificationManager.IMPORTANCE_HIGH:
             case NotificationManager.IMPORTANCE_MAX:
             default:
-                return getContext().getString(R.string.notification_channel_summary_high);
+                return getContext().getString(R.string.notification_importance_high);
         }
 
     }
