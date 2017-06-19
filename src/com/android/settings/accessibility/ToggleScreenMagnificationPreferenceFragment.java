@@ -98,6 +98,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
                     videoView.setLayoutParams(videoLp);
                     videoView.invalidate();
                     videoView.start();
+                    mVideoBackgroundView.getViewTreeObserver()
+                            .removeOnGlobalLayoutListener(mLayoutListener);
                 }
             };
 
