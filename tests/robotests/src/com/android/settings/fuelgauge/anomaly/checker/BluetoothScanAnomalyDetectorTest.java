@@ -46,6 +46,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +90,8 @@ public class BluetoothScanAnomalyDetectorTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        ReflectionHelpers.setField(mPolicy, "bluetoothScanThreshold",
+                30 * DateUtils.MINUTE_IN_MILLIS);
 
         mAnomalySipper.uidObj = mAnomalyUid;
         doReturn(ANOMALY_UID).when(mAnomalyUid).getUid();

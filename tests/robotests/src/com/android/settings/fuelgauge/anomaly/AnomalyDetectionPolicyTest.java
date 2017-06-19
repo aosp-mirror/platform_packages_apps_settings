@@ -44,7 +44,9 @@ public class AnomalyDetectionPolicyTest {
             + ",wakelock_enabled=false"
             + ",wakelock_threshold=3000"
             + ",wakeup_alarm_enabled=true"
-            + ",wakeup_alarm_threshold=100";
+            + ",wakeup_alarm_threshold=100"
+            + ",bluetooth_scan_enabled=true"
+            + ",bluetooth_scan_threshold=2000";
     private Context mContext;
     private KeyValueListParserWrapper mKeyValueListParserWrapper;
 
@@ -64,6 +66,8 @@ public class AnomalyDetectionPolicyTest {
         assertThat(anomalyDetectionPolicy.wakeLockThreshold).isEqualTo(3000);
         assertThat(anomalyDetectionPolicy.wakeupAlarmDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeupAlarmThreshold).isEqualTo(100);
+        assertThat(anomalyDetectionPolicy.bluetoothScanDetectionEnabled).isTrue();
+        assertThat(anomalyDetectionPolicy.bluetoothScanThreshold).isEqualTo(2000);
     }
 
     @Test
@@ -82,6 +86,9 @@ public class AnomalyDetectionPolicyTest {
         assertThat(anomalyDetectionPolicy.wakeLockThreshold).isEqualTo(DateUtils.HOUR_IN_MILLIS);
         assertThat(anomalyDetectionPolicy.wakeupAlarmDetectionEnabled).isTrue();
         assertThat(anomalyDetectionPolicy.wakeupAlarmThreshold).isEqualTo(60);
+        assertThat(anomalyDetectionPolicy.bluetoothScanDetectionEnabled).isTrue();
+        assertThat(anomalyDetectionPolicy.bluetoothScanThreshold).isEqualTo(
+                30 * DateUtils.MINUTE_IN_MILLIS);
     }
 
     @Test
@@ -92,6 +99,8 @@ public class AnomalyDetectionPolicyTest {
                 Anomaly.AnomalyType.WAKE_LOCK)).isFalse();
         assertThat(anomalyDetectionPolicy.isAnomalyDetectorEnabled(
                 Anomaly.AnomalyType.WAKEUP_ALARM)).isTrue();
+        assertThat(anomalyDetectionPolicy.isAnomalyDetectorEnabled(
+                Anomaly.AnomalyType.BLUETOOTH_SCAN)).isTrue();
     }
 
     private AnomalyDetectionPolicy createAnomalyPolicyWithConfig() {
@@ -104,6 +113,8 @@ public class AnomalyDetectionPolicyTest {
                 AnomalyDetectionPolicy.KEY_WAKELOCK_DETECTION_ENABLED, true);
         doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
                 AnomalyDetectionPolicy.KEY_WAKEUP_ALARM_DETECTION_ENABLED, true);
+        doReturn(true).when(mKeyValueListParserWrapper).getBoolean(
+                AnomalyDetectionPolicy.KEY_BLUETOOTH_SCAN_DETECTION_ENABLED, true);
 
         return new AnomalyDetectionPolicy(mContext, mKeyValueListParserWrapper);
     }
