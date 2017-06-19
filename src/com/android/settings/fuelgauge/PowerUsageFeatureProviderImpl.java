@@ -132,4 +132,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public String getOldEstimateDebugString(String timeRemaining) {
         return null;
     }
+
+    @Override
+    public String getAdvancedUsageScreenInfoString() {
+        return null;
+    }
 }
