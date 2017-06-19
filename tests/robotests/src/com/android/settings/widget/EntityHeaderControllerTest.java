@@ -32,11 +32,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,11 +71,12 @@ public class EntityHeaderControllerTest {
     private LayoutInflater mLayoutInflater;
     private PackageInfo mInfo;
     private EntityHeaderController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
         mShadowContext = RuntimeEnvironment.application;
         when(mActivity.getApplicationContext()).thenReturn(mShadowContext);
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -154,6 +156,9 @@ public class EntityHeaderControllerTest {
         } catch (Exception e) {
             // Ignore exception because the launching intent is fake.
         }
+        verify(mFeatureFactory.metricsFeatureProvider).actionWithSource(mContext,
+                MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING);
         verify(mFragment).startActivity(any(Intent.class));
     }
 
