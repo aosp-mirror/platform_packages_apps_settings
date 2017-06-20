@@ -14,7 +14,6 @@ public class AnomalyPreference extends Preference {
     public AnomalyPreference(Context context, Anomaly anomaly) {
         super(context);
         mAnomaly = anomaly;
-        setLayoutResource(R.layout.preference_app);
 
         if (anomaly != null) {
             setTitle(anomaly.displayName);

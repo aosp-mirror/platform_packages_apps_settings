@@ -57,6 +57,8 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     PreferenceGroup mAbnormalListGroup;
     @VisibleForTesting
     PackageManager mPackageManager;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
     IconDrawableFactory mIconDrawableFactory;
 
     public static void startBatteryAbnormalPage(SettingsActivity caller,
@@ -78,6 +80,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
         mAbnormalListGroup = (PreferenceGroup) findPreference(KEY_PREF_ANOMALY_LIST);
         mPackageManager = context.getPackageManager();
         mIconDrawableFactory = IconDrawableFactory.newInstance(context, false /* EmbedShadow */);
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
@@ -126,16 +129,16 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     }
 
     void refreshUi() {
-        //TODO(b/37681665): cache the preference so we don't need to create new one every time.
         mAbnormalListGroup.removeAll();
         for (int i = 0, size = mAnomalies.size(); i < size; i++) {
             final Anomaly anomaly = mAnomalies.get(i);
             Preference pref = new AnomalyPreference(getPrefContext(), anomaly);
-
+            pref.setSummary(mBatteryUtils.getSummaryResIdFromAnomalyType(anomaly.type));
             Drawable icon = getIconFromPackageName(anomaly.packageName);
             if (icon != null) {
                 pref.setIcon(icon);
             }
+
             mAbnormalListGroup.addPreference(pref);
         }
     }
