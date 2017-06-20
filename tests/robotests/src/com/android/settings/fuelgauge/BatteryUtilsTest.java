@@ -84,6 +84,8 @@ public class BatteryUtilsTest {
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
     private static final double BATTERY_UNACCOUNTED_USAGE = 700;
     private static final double BATTERY_APP_USAGE = 100;
+    private static final double BATTERY_WIFI_USAGE = 200;
+    private static final double BATTERY_BLUETOOTH_USAGE = 300;
     private static final double TOTAL_BATTERY_USAGE = 1000;
     private static final double HIDDEN_USAGE = 200;
     private static final int DISCHARGE_AMOUNT = 80;
@@ -94,6 +96,10 @@ public class BatteryUtilsTest {
     private BatteryStats.Uid mUid;
     @Mock
     private BatterySipper mNormalBatterySipper;
+    @Mock
+    private BatterySipper mWifiBatterySipper;
+    @Mock
+    private BatterySipper mBluetoothBatterySipper;
     @Mock
     private BatterySipper mScreenBatterySipper;
     @Mock
@@ -135,6 +141,12 @@ public class BatteryUtilsTest {
 
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         mNormalBatterySipper.totalPowerMah = TOTAL_BATTERY_USAGE;
+
+        mWifiBatterySipper.drainType = BatterySipper.DrainType.WIFI;
+        mWifiBatterySipper.totalPowerMah = BATTERY_WIFI_USAGE;
+
+        mBluetoothBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
+        mBluetoothBatterySipper.totalPowerMah = BATTERY_BLUETOOTH_USAGE;
 
         mScreenBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
         mScreenBatterySipper.totalPowerMah = BATTERY_SCREEN_USAGE;
@@ -195,6 +207,8 @@ public class BatteryUtilsTest {
         sippers.add(mSystemBatterySipper);
         sippers.add(mOvercountedBatterySipper);
         sippers.add(mUnaccountedBatterySipper);
+        sippers.add(mWifiBatterySipper);
+        sippers.add(mBluetoothBatterySipper);
         when(mProvider.isTypeSystem(mSystemBatterySipper))
                 .thenReturn(true);
         doNothing().when(mBatteryUtils).smearScreenBatterySipper(any(), any());
@@ -232,6 +246,18 @@ public class BatteryUtilsTest {
     @Test
     public void testShouldHideSipper_TypeScreen_ReturnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
+        assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_TypeWifi_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.WIFI;
+        assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_TypeBluetooth_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
         assertThat(mBatteryUtils.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
