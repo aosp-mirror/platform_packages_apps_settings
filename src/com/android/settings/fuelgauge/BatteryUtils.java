@@ -21,6 +21,7 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -29,6 +30,8 @@ import android.util.SparseLongArray;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
@@ -288,6 +291,20 @@ public class BatteryUtils {
                     PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             return UID_NULL;
+        }
+    }
+
+    @StringRes
+    public int getSummaryResIdFromAnomalyType(@Anomaly.AnomalyType int type) {
+        switch (type) {
+            case Anomaly.AnomalyType.WAKE_LOCK:
+                return R.string.battery_abnormal_wakelock_summary;
+            case Anomaly.AnomalyType.WAKEUP_ALARM:
+                return R.string.battery_abnormal_wakeup_alarm_summary;
+            case Anomaly.AnomalyType.BLUETOOTH_SCAN:
+                return R.string.battery_abnormal_location_summary;
+            default:
+                throw new IllegalArgumentException("Incorrect anomaly type: " + type);
         }
     }
 
