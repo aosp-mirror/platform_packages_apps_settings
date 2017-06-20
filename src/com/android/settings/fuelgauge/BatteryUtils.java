@@ -136,8 +136,10 @@ public class BatteryUtils {
                 sippers.remove(i);
                 if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED
                         && sipper.drainType != BatterySipper.DrainType.SCREEN
-                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED) {
-                    // Don't add it if it is overcounted, unaccounted or screen
+                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
+                        && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
+                        && sipper.drainType != BatterySipper.DrainType.WIFI) {
+                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, or screen
                     proportionalSmearPowerMah += sipper.totalPowerMah;
                 }
             }
@@ -191,6 +193,8 @@ public class BatteryUtils {
                 || drainType == BatterySipper.DrainType.SCREEN
                 || drainType == BatterySipper.DrainType.UNACCOUNTED
                 || drainType == BatterySipper.DrainType.OVERCOUNTED
+                || drainType == BatterySipper.DrainType.BLUETOOTH
+                || drainType == BatterySipper.DrainType.WIFI
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
                 || mPowerUsageFeatureProvider.isTypeService(sipper)
                 || mPowerUsageFeatureProvider.isTypeSystem(sipper);
