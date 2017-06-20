@@ -2390,6 +2390,18 @@
                 android:value="com.android.settings.datausage.DataUsageSummary" />
         </activity>
 
+        <activity android:name="Settings$MobileDataUsageListActivity"
+                  android:label="@string/cellular_data_usage"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MOBILE_DATA_USAGE" />
+                <category android:name="
+                android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataUsageList" />
+        </activity>
+
         <activity android:name="Settings$DreamSettingsActivity"
                 android:label="@string/screensaver_settings_title"
                 android:icon="@drawable/ic_settings_display"
