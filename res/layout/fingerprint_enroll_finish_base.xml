@@ -38,12 +38,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/suw_description_glif_margin_top"
+            android:minLines="3"
             android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
         <com.android.setupwizardlib.view.FillContentLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxWidth="@dimen/fingerprint_finish_max_size"
+            android:maxHeight="@dimen/fingerprint_finish_max_size">
 
             <ImageView
                 android:id="@+id/fingerprint_in_app_indicator"
