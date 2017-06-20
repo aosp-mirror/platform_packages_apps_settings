@@ -261,14 +261,18 @@ public class FingerprintSettings extends SubSettings {
                         mHandler.postDelayed(mFingerprintLockoutReset,
                                 LOCKOUT_DURATION);
                     }
-                    // Fall through to show message
-                default:
-                    // Activity can be null on a screen rotation.
-                    final Activity activity = getActivity();
-                    if (activity != null) {
-                        Toast.makeText(activity, msg , Toast.LENGTH_SHORT);
-                    }
-                break;
+                    break;
+                case FingerprintManager.FINGERPRINT_ERROR_LOCKOUT_PERMANENT:
+                    mInFingerprintLockout = true;
+                    break;
+            }
+
+            if (mInFingerprintLockout) {
+                // Activity can be null on a screen rotation.
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, msg , Toast.LENGTH_SHORT).show();
+                }
             }
             retryFingerprint(); // start again
         }
