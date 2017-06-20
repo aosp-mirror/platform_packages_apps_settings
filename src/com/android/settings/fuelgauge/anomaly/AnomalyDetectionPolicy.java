@@ -37,9 +37,13 @@ public class AnomalyDetectionPolicy {
     @VisibleForTesting
     static final String KEY_WAKEUP_ALARM_DETECTION_ENABLED = "wakeup_alarm_enabled";
     @VisibleForTesting
+    static final String KEY_BLUETOOTH_SCAN_DETECTION_ENABLED = "bluetooth_scan_enabled";
+    @VisibleForTesting
     static final String KEY_WAKELOCK_THRESHOLD = "wakelock_threshold";
     @VisibleForTesting
     static final String KEY_WAKEUP_ALARM_THRESHOLD = "wakeup_alarm_threshold";
+    @VisibleForTesting
+    static final String KEY_BLUETOOTH_SCAN_THRESHOLD = "bluetooth_scan_threshold";
 
     /**
      * {@code true} if general anomaly detection is enabled
@@ -66,6 +70,14 @@ public class AnomalyDetectionPolicy {
     public final boolean wakeupAlarmDetectionEnabled;
 
     /**
+     * {@code true} if bluetooth scanning detection is enabled
+     *
+     * @see Settings.Global#ANOMALY_DETECTION_CONSTANTS
+     * @see #KEY_BLUETOOTH_SCAN_THRESHOLD
+     */
+    public final boolean bluetoothScanDetectionEnabled;
+
+    /**
      * Threshold for wakelock time in milli seconds
      *
      * @see Settings.Global#ANOMALY_DETECTION_CONSTANTS
@@ -80,6 +92,14 @@ public class AnomalyDetectionPolicy {
      * @see #KEY_WAKEUP_ALARM_THRESHOLD
      */
     public final long wakeupAlarmThreshold;
+
+    /**
+     * Threshold for bluetooth unoptimized scanning time in milli seconds
+     *
+     * @see Settings.Global#ANOMALY_DETECTION_CONSTANTS
+     * @see #KEY_BLUETOOTH_SCAN_THRESHOLD
+     */
+    public final long bluetoothScanThreshold;
 
     private final KeyValueListParserWrapper mParserWrapper;
 
@@ -103,9 +123,13 @@ public class AnomalyDetectionPolicy {
         wakeLockDetectionEnabled = mParserWrapper.getBoolean(KEY_WAKELOCK_DETECTION_ENABLED, true);
         wakeupAlarmDetectionEnabled = mParserWrapper.getBoolean(KEY_WAKEUP_ALARM_DETECTION_ENABLED,
                 true);
+        bluetoothScanDetectionEnabled = mParserWrapper.getBoolean(
+                KEY_BLUETOOTH_SCAN_DETECTION_ENABLED, true);
         wakeLockThreshold = mParserWrapper.getLong(KEY_WAKELOCK_THRESHOLD,
                 DateUtils.HOUR_IN_MILLIS);
         wakeupAlarmThreshold = mParserWrapper.getLong(KEY_WAKEUP_ALARM_THRESHOLD, 60);
+        bluetoothScanThreshold = mParserWrapper.getLong(KEY_BLUETOOTH_SCAN_THRESHOLD,
+                30 * DateUtils.MINUTE_IN_MILLIS);
     }
 
     public boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type) {
@@ -114,6 +138,8 @@ public class AnomalyDetectionPolicy {
                 return wakeLockDetectionEnabled;
             case Anomaly.AnomalyType.WAKEUP_ALARM:
                 return wakeupAlarmDetectionEnabled;
+            case Anomaly.AnomalyType.BLUETOOTH_SCAN:
+                return bluetoothScanDetectionEnabled;
             default:
                 return false; // Disabled when no this type
         }
