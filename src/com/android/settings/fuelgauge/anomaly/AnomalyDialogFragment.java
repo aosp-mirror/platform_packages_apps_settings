@@ -38,7 +38,8 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
 
     @VisibleForTesting
     Anomaly mAnomaly;
-    private AnomalyUtils mAnomalyUtils;
+    @VisibleForTesting
+    AnomalyUtils mAnomalyUtils;
 
     /**
      * Listener to give the control back to target fragment
@@ -68,6 +69,11 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initAnomalyUtils();
+    }
+
+    @VisibleForTesting
+    void initAnomalyUtils() {
         mAnomalyUtils = AnomalyUtils.getInstance(getContext());
     }
 
@@ -112,6 +118,14 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
                         .setMessage(getString(R.string.dialog_background_check_message,
                                 mAnomaly.displayName))
                         .setPositiveButton(R.string.dialog_background_check_ok, this)
+                        .setNegativeButton(R.string.dlg_cancel, null)
+                        .create();
+            case Anomaly.AnomalyActionType.LOCATION_CHECK:
+                return new AlertDialog.Builder(context)
+                        .setTitle(R.string.dialog_location_title)
+                        .setMessage(getString(R.string.dialog_location_message,
+                                mAnomaly.displayName))
+                        .setPositiveButton(R.string.dialog_location_ok, this)
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
             default:
