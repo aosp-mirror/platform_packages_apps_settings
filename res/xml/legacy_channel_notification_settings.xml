@@ -27,7 +27,8 @@
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="allow_sound"
-        android:title="@string/allow_sound" />
+        android:title="@string/allow_interruption"
+	android:summary="@string/allow_interruption_summary"/>
 
     <!-- Visibility Override -->
     <com.android.settings.notification.RestrictedDropDownPreference
