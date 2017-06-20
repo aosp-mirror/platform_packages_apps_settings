@@ -27,7 +27,9 @@ import static com.android.internal.notification.NotificationAccessConfirmationAc
 import android.Manifest;
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
@@ -53,12 +55,14 @@ public class NotificationAccessConfirmationActivity extends Activity
     private int mUserId;
     private ComponentName mComponentName;
     private TouchOverlayManager mTouchOverlayManager;
+    private NotificationManager mNm;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mTouchOverlayManager = new TouchOverlayManager(this);
+        mNm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mComponentName = getIntent().getParcelableExtra(EXTRA_COMPONENT_NAME);
         mUserId = getIntent().getIntExtra(EXTRA_USER_ID, UserHandle.USER_NULL);
@@ -94,12 +98,7 @@ public class NotificationAccessConfirmationActivity extends Activity
             return;
         }
 
-        final SettingsStringUtil.SettingStringHelper setting =
-                 new SettingsStringUtil.SettingStringHelper(
-                         getContentResolver(),
-                         Settings.Secure.ENABLED_NOTIFICATION_LISTENERS,
-                         mUserId);
-        setting.write(SettingsStringUtil.ComponentNameSet.add(setting.read(), mComponentName));
+        mNm.setNotificationListenerAccessGranted(mComponentName, true);
 
         finish();
     }

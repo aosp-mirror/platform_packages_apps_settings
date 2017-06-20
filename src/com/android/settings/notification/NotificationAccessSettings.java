@@ -41,7 +41,6 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     private static final String TAG = NotificationAccessSettings.class.getSimpleName();
     private static final Config CONFIG = getNotificationListenerConfig();
 
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -70,10 +69,11 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
         return CONFIG;
     }
 
+    @Override
     protected boolean setEnabled(ComponentName service, String title, boolean enable) {
         logSpecialPermissionChange(enable, service.getPackageName());
         if (!enable) {
-            if (!mServiceListing.isEnabled(service)) {
+            if (!isServiceEnabled(service)) {
                 return true; // already disabled
             }
             // show a friendly dialog
@@ -82,8 +82,25 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
                     .show(getFragmentManager(), "friendlydialog");
             return false;
         } else {
-            return super.setEnabled(service, title, enable);
+            if (isServiceEnabled(service)) {
+                return true; // already enabled
+            }
+            // show a scary dialog
+            new ScaryWarningDialogFragment()
+                    .setServiceInfo(service, title, this)
+                    .show(getFragmentManager(), "dialog");
+            return false;
         }
+    }
+
+    @Override
+    protected boolean isServiceEnabled(ComponentName cn) {
+        return mNm.isNotificationListenerAccessGranted(cn);
+    }
+
+    @Override
+    protected void enable(ComponentName service) {
+        mNm.setNotificationListenerAccessGranted(service, true);
     }
 
     @VisibleForTesting
@@ -94,17 +111,14 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
                 logCategory, packageName);
     }
 
-    private static void disable(final Context context, final NotificationAccessSettings parent,
-            final ComponentName cn) {
-        parent.mServiceListing.setEnabled(cn, false);
+    private static void disable(final NotificationAccessSettings parent, final ComponentName cn) {
+        parent.mNm.setNotificationListenerAccessGranted(cn, false);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-
-                if (!mgr.isNotificationPolicyAccessGrantedForPackage(
+                if (!parent.mNm.isNotificationPolicyAccessGrantedForPackage(
                         cn.getPackageName())) {
-                    mgr.removeAutomaticZenRules(cn.getPackageName());
+                    parent.mNm.removeAutomaticZenRules(cn.getPackageName());
                 }
             }
         });
@@ -145,7 +159,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
                     .setPositiveButton(R.string.notification_listener_disable_warning_confirm,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    disable(getContext(), parent, cn);
+                                    disable(parent, cn);
                                 }
                             })
                     .setNegativeButton(R.string.notification_listener_disable_warning_cancel,

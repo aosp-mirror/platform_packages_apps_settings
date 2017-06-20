@@ -120,7 +120,6 @@ public class StorageProfileFragment extends DashboardFragment
     @Override
     public void onLoadFinished(Loader<SparseArray<AppsStorageResult>> loader,
             SparseArray<AppsStorageResult> result) {
-        scrubAppsFromResult(result.get(mUserId));
         mPreferenceController.onLoadFinished(result, mUserId);
     }
 
@@ -131,18 +130,5 @@ public class StorageProfileFragment extends DashboardFragment
     @VisibleForTesting
     void setPreferenceController(StorageItemPreferenceController controller) {
         mPreferenceController = controller;
-    }
-
-    private AppsStorageResult scrubAppsFromResult(AppsStorageResult result) {
-        if (result == null) {
-            return null;
-        }
-
-        // TODO(b/35927909): Attribute app sizes better than zeroing out for profiles.
-        result.gamesSize = 0;
-        result.musicAppsSize = 0;
-        result.videoAppsSize = 0;
-        result.otherAppsSize = 0;
-        return result;
     }
 }
