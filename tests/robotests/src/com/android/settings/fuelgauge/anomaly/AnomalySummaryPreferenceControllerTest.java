@@ -32,6 +32,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -53,7 +54,7 @@ public class AnomalySummaryPreferenceControllerTest {
     @Anomaly.AnomalyType
     private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static final String PACKAGE_NAME = "com.android.app";
-    private static final String DISPLAY_NAME = "app";
+    private static final String DISPLAY_NAME = "appName";
     private static final int UID = 111;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -80,6 +81,7 @@ public class AnomalySummaryPreferenceControllerTest {
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
         when(mFragment.getContext()).thenReturn(mContext);
+        when(mSettingsActivity.getApplicationContext()).thenReturn(mContext);
 
         mAnomalyList = new ArrayList<>();
 
@@ -100,7 +102,8 @@ public class AnomalySummaryPreferenceControllerTest {
 
         mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalyList);
 
-        assertThat(mPreference.getSummary()).isEqualTo("app behaving abnormally");
+        assertThat(mPreference.getTitle()).isEqualTo("appName draining battery");
+        assertThat(mPreference.getSummary()).isEqualTo("Keeping device awake");
     }
 
     @Test
@@ -110,7 +113,8 @@ public class AnomalySummaryPreferenceControllerTest {
 
         mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalyList);
 
-        assertThat(mPreference.getSummary()).isEqualTo("2 apps behaving abnormally");
+        assertThat(mPreference.getTitle()).isEqualTo("Apps draining battery");
+        assertThat(mPreference.getSummary()).isEqualTo("2 apps misbehaving");
     }
 
     @Test
