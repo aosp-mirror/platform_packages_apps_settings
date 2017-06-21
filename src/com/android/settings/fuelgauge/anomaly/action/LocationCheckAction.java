@@ -20,28 +20,28 @@ import android.content.Context;
 import android.content.pm.permission.RuntimePermissionPresenter;
 import android.support.v4.content.PermissionChecker;
 
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Location action for anomaly app, which means to turn off location permission for this app
  */
-public class LocationCheckAction implements AnomalyAction {
+public class LocationCheckAction extends AnomalyAction {
 
     private static final String TAG = "LocationCheckAction";
     private static final String LOCATION_PERMISSION = "android.permission-group.LOCATION";
 
-    private final Context mContext;
     private final RuntimePermissionPresenter mRuntimePermissionPresenter;
 
     public LocationCheckAction(Context context) {
-        mContext = context;
+        super(context);
         mRuntimePermissionPresenter = RuntimePermissionPresenter.getInstance(context);
+        mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_LOCATION_CHECK;
     }
 
     @Override
-    public void handlePositiveAction(Anomaly anomaly, int metricsKey) {
+    public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
+        super.handlePositiveAction(anomaly, contextMetricsKey);
         mRuntimePermissionPresenter.revokeRuntimePermission(anomaly.packageName,
                 LOCATION_PERMISSION);
     }

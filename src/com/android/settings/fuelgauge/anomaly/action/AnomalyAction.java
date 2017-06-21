@@ -16,26 +16,47 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
+import android.content.Context;
+import android.util.Pair;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
- * Interface for anomaly action, which is triggered if we need to handle the anomaly
+ * Abstract class for anomaly action, which is triggered if we need to handle the anomaly
  */
-public interface AnomalyAction {
+public abstract class AnomalyAction {
+    protected Context mContext;
+    protected int mActionMetricKey;
+
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
+    public AnomalyAction(Context context) {
+        mContext = context;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+    }
+
     /**
      * handle the action when user clicks positive button
-     * @param anomaly about the app that we need to handle
-     * @param metricsKey key for the page that invokes the action
      *
+     * @param anomaly    about the app that we need to handle
+     * @param contextMetricsKey key for the page that invokes the action
      * @see com.android.internal.logging.nano.MetricsProto
      */
-    void handlePositiveAction(Anomaly anomaly, int metricsKey);
+    public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
+        mMetricsFeatureProvider.action(mContext, mActionMetricKey, anomaly.packageName,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, contextMetricsKey));
+    }
 
     /**
      * Check whether the action is active for {@code anomaly}
+     *
      * @param anomaly about the app that we need to handle
      * @return {@code true} if action is active, otherwise return {@code false}
      */
-    boolean isActionActive(Anomaly anomaly);
-    int getActionType();
+    public abstract boolean isActionActive(Anomaly anomaly);
+
+    public abstract int getActionType();
 }
