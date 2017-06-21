@@ -17,13 +17,21 @@
 package com.android.settings;
 
 import android.content.Intent;
+import android.os.SystemProperties;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
 public class SetupWizardUtils {
 
+    @VisibleForTesting
+    static final String SYSTEM_PROP_SETUPWIZARD_THEME = "setupwizard.theme";
+
     public static int getTheme(Intent intent) {
         String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
+        if (theme == null) {
+            theme = SystemProperties.get(SYSTEM_PROP_SETUPWIZARD_THEME);
+        }
         if (theme != null) {
             switch (theme) {
                 case WizardManagerHelper.THEME_GLIF_V2_LIGHT:

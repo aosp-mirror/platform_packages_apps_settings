@@ -52,6 +52,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING;
+
 public class EntityHeaderController {
 
     @IntDef({ActionType.ACTION_NONE,
@@ -310,6 +314,9 @@ public class EntityHeaderController {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
+                                    .actionWithSource(mAppContext, mMetricsCategory,
+                                            ACTION_OPEN_APP_NOTIFICATION_SETTING);
                             mFragment.startActivity(mAppNotifPrefIntent);
                         }
                     });
@@ -327,6 +334,9 @@ public class EntityHeaderController {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
+                                .actionWithSource(mAppContext, mMetricsCategory,
+                                        ACTION_OPEN_APP_SETTING);
                         mFragment.startActivity(intent);
                     }
                 });

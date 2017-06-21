@@ -129,8 +129,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
      */
     @VisibleForTesting
     SparseArray<List<Anomaly>> mAnomalySparseArray;
+    @VisibleForTesting
+    PreferenceGroup mAppListGroup;
     private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
-    private PreferenceGroup mAppListGroup;
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -148,7 +149,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(data);
 
                     updateAnomalySparseArray(data);
-                    refreshAppListGroup();
+                    refreshAnomalyIcon();
                 }
 
                 @Override
@@ -619,7 +620,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
-                pref.shouldShowAnomalyIcon(mAnomalySparseArray.get(sipper.getUid()) != null);
+                pref.shouldShowAnomalyIcon(false);
                 if (sipper.usageTimeMs == 0 && sipper.drainType == DrainType.APP) {
                     sipper.usageTimeMs = mBatteryUtils.getProcessTimeMs(
                             BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
@@ -644,6 +645,18 @@ public class PowerUsageSummary extends PowerUsageBase implements
         removeCachedPrefs(mAppListGroup);
 
         BatteryEntry.startRequestQueue();
+    }
+
+    @VisibleForTesting
+    void refreshAnomalyIcon() {
+        for (int i = 0, size = mAnomalySparseArray.size(); i < size; i++) {
+            final String key = extractKeyFromUid(mAnomalySparseArray.keyAt(i));
+            final PowerGaugePreference pref = (PowerGaugePreference) mAppListGroup.findPreference(
+                    key);
+            if (pref != null) {
+                pref.shouldShowAnomalyIcon(true);
+            }
+        }
     }
 
     @VisibleForTesting
@@ -714,7 +727,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     String extractKeyFromSipper(BatterySipper sipper) {
         if (sipper.uidObj != null) {
-            return Integer.toString(sipper.getUid());
+            return extractKeyFromUid(sipper.getUid());
         } else if (sipper.drainType != DrainType.APP) {
             return sipper.drainType.toString();
         } else if (sipper.getPackages() != null) {
@@ -723,6 +736,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
             Log.w(TAG, "Inappropriate BatterySipper without uid and package names: " + sipper);
             return "-1";
         }
+    }
+
+    @VisibleForTesting
+    String extractKeyFromUid(int uid) {
+        return Integer.toString(uid);
     }
 
     @VisibleForTesting
