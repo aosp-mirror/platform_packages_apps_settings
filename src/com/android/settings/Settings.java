@@ -32,6 +32,7 @@ public class Settings extends SettingsActivity {
     /*
     * Settings subclasses for launching independently.
     */
+    public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
