@@ -46,15 +46,13 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
         implements OnClickListener {
 
     private static final String ARG_USER_ID = "userId";
-    private static final String ARG_EXCLUDE_LOCK = "excludeLock";
 
     private ScreenLockAdapter mAdapter;
     private ChooseLockGenericController mController;
 
-    public static ChooseLockTypeDialogFragment newInstance(int userId, String excludeLock) {
+    public static ChooseLockTypeDialogFragment newInstance(int userId) {
         Bundle args = new Bundle();
         args.putInt(ARG_USER_ID, userId);
-        args.putString(ARG_EXCLUDE_LOCK, excludeLock);
         ChooseLockTypeDialogFragment fragment = new ChooseLockTypeDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -96,10 +94,6 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
                 mController.getVisibleScreenLockTypes(
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING,
                         false /* includeDisabled */);
-        String excludeLockName = getArguments().getString(ARG_EXCLUDE_LOCK);
-        if (excludeLockName != null) {
-            locks.remove(ScreenLockType.valueOf(excludeLockName));
-        }
         mAdapter = new ScreenLockAdapter(context, locks, mController);
         builder.setAdapter(mAdapter, this);
         builder.setTitle(R.string.setup_lock_settings_options_dialog_title);
