@@ -59,6 +59,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     PackageManager mPackageManager;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
+    @VisibleForTesting
     IconDrawableFactory mIconDrawableFactory;
 
     public static void startBatteryAbnormalPage(SettingsActivity caller,
@@ -79,7 +80,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
         mAnomalies = getArguments().getParcelableArrayList(EXTRA_ANOMALY_LIST);
         mAbnormalListGroup = (PreferenceGroup) findPreference(KEY_PREF_ANOMALY_LIST);
         mPackageManager = context.getPackageManager();
-        mIconDrawableFactory = IconDrawableFactory.newInstance(context, false /* EmbedShadow */);
+        mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
@@ -134,7 +135,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
             final Anomaly anomaly = mAnomalies.get(i);
             Preference pref = new AnomalyPreference(getPrefContext(), anomaly);
             pref.setSummary(mBatteryUtils.getSummaryResIdFromAnomalyType(anomaly.type));
-            Drawable icon = getIconFromPackageName(anomaly.packageName);
+            Drawable icon = getBadgedIcon(anomaly.packageName, UserHandle.getUserId(anomaly.uid));
             if (icon != null) {
                 pref.setIcon(icon);
             }
@@ -149,11 +150,12 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
         refreshUi();
     }
 
-    Drawable getIconFromPackageName(String packageName) {
+    @VisibleForTesting
+    Drawable getBadgedIcon(String packageName, int userId) {
         try {
             final ApplicationInfo appInfo = mPackageManager.getApplicationInfo(packageName,
                     PackageManager.GET_META_DATA);
-            return mIconDrawableFactory.getBadgedIcon(appInfo);
+            return mIconDrawableFactory.getBadgedIcon(appInfo, userId);
         } catch (PackageManager.NameNotFoundException e) {
             return mPackageManager.getDefaultActivityIcon();
         }
