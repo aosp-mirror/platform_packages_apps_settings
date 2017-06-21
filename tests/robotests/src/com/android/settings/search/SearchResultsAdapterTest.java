@@ -112,19 +112,20 @@ public class SearchResultsAdapterTest {
     }
 
     @Test
-    public void testCreateViewHolder_returnsInlineSwitchResult() {
+    public void testCreateViewHolder_returnsIntentSwitchResult() {
+        // TODO (b/62807132) test for InlineResult
         ViewGroup group = new FrameLayout(mContext);
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INLINE_SWITCH);
-        assertThat(view).isInstanceOf(InlineSwitchViewHolder.class);
+        assertThat(view).isInstanceOf(IntentSearchViewHolder.class);
     }
 
     @Test
     public void testEndToEndSearch_properResultsMerged_correctOrder() {
         mAdapter.initializeSearch("");
-        mAdapter.addSearchResults(new HashSet<SearchResult>(getDummyAppResults()),
+        mAdapter.addSearchResults(new HashSet<>(getDummyAppResults()),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(new HashSet<SearchResult>(getDummyDbResults()),
+        mAdapter.addSearchResults(new HashSet<>(getDummyDbResults()),
                 DatabaseResultLoader.class.getName());
         mAdapter.notifyResultsLoaded();
 
@@ -145,17 +146,17 @@ public class SearchResultsAdapterTest {
         List<SearchResult> dbResults = getDummyDbResults();
         mAdapter.initializeSearch("");
         // Add two individual items
-        mAdapter.addSearchResults(new HashSet<SearchResult>(appResults.subList(0, 1)),
+        mAdapter.addSearchResults(new HashSet<>(appResults.subList(0, 1)),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(new HashSet<SearchResult>(dbResults.subList(0, 1)),
+        mAdapter.addSearchResults(new HashSet<>(dbResults.subList(0, 1)),
                 DatabaseResultLoader.class.getName());
         mAdapter.notifyResultsLoaded();
         // Add super-set of items
         mAdapter.initializeSearch("");
         mAdapter.addSearchResults(
-                new HashSet<SearchResult>(appResults), InstalledAppResultLoader.class.getName());
+                new HashSet<>(appResults), InstalledAppResultLoader.class.getName());
         mAdapter.addSearchResults(
-                new HashSet<SearchResult>(dbResults), DatabaseResultLoader.class.getName());
+                new HashSet<>(dbResults), DatabaseResultLoader.class.getName());
         mAdapter.notifyResultsLoaded();
 
         List<SearchResult> results = mAdapter.getSearchResults();
@@ -176,14 +177,14 @@ public class SearchResultsAdapterTest {
         List<SearchResult> dbResults = getDummyDbResults();
         // Add list of items
         mAdapter.initializeSearch("");
-        mAdapter.addSearchResults(new HashSet<SearchResult>(appResults),
+        mAdapter.addSearchResults(new HashSet<>(appResults),
                 InstalledAppResultLoader.class.getName());
-        mAdapter.addSearchResults(new HashSet<SearchResult>(dbResults),
+        mAdapter.addSearchResults(new HashSet<>(dbResults),
                 DatabaseResultLoader.class.getName());
         mAdapter.notifyResultsLoaded();
         // Add subset of items
         mAdapter.initializeSearch("");
-        mAdapter.addSearchResults(new HashSet<SearchResult>(appResults.subList(0, 1)),
+        mAdapter.addSearchResults(new HashSet<>(appResults.subList(0, 1)),
                 InstalledAppResultLoader.class.getName());
         mAdapter.addSearchResults(new HashSet<>(dbResults.subList(0, 1)),
                 DatabaseResultLoader.class.getName());
@@ -568,12 +569,9 @@ public class SearchResultsAdapterTest {
     private List<Pair<String, Float>> getDummyRankingScores() {
         List<SearchResult> results = getDummyDbResults();
         List<Pair<String, Float>> scores = new ArrayList<>();
-        scores.add(
-                new Pair<String, Float>(Long.toString(results.get(2).stableId), 0.9f)); // charlie
-        scores.add(
-                new Pair<String, Float>(Long.toString(results.get(0).stableId), 0.8f)); // alpha
-        scores.add(
-                new Pair<String, Float>(Long.toString(results.get(1).stableId), 0.2f)); // bravo
+        scores.add(new Pair<>(Long.toString(results.get(2).stableId), 0.9f)); // charlie
+        scores.add(new Pair<>(Long.toString(results.get(0).stableId), 0.8f)); // alpha
+        scores.add(new Pair<>(Long.toString(results.get(1).stableId), 0.2f)); // bravo
         return scores;
     }
 }
