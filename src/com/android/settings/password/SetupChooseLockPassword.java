@@ -114,9 +114,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         }
 
         private void launchChooseLockGeneric() {
-            ScreenLockType currentLock = mIsAlphaMode
-                    ? ScreenLockType.PASSWORD : ScreenLockType.PIN;
-            ChooseLockTypeDialogFragment.newInstance(mUserId, currentLock.toString())
+            ChooseLockTypeDialogFragment.newInstance(mUserId)
                     .show(getChildFragmentManager(), null);
         }
 
@@ -130,6 +128,12 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
 
         @Override
         public void onLockTypeSelected(ScreenLockType lock) {
+            ScreenLockType currentLockType = mIsAlphaMode ?
+                    ScreenLockType.PASSWORD : ScreenLockType.PIN;
+            if (currentLockType.equals(lock)) {
+                // ignore same lock type.
+                return;
+            }
             Intent activityIntent = getActivity().getIntent();
             Intent intent = new Intent(getContext(), SetupChooseLockGeneric.class);
 
