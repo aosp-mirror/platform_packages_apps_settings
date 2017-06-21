@@ -76,6 +76,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
     private static final String KEY_STATUS_HEADER = "status_header";
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
+    private static final String KEY_MOBILE_USAGE_TITLE = "mobile_category";
     private static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
 
     private DataUsageController mDataUsageController;
@@ -126,7 +127,12 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
                 addMobileSection(defaultSubId);
             }
             for (int i = 0; subscriptions != null && i < subscriptions.size(); i++) {
-                addMobileSection(subscriptions.get(i).getSubscriptionId());
+                SubscriptionInfo subInfo = subscriptions.get(i);
+                if (subscriptions.size() > 1) {
+                    addMobileSection(subInfo.getSubscriptionId(), subInfo);
+                } else {
+                    addMobileSection(subInfo.getSubscriptionId());
+                }
             }
             mSummaryPreference.setSelectable(true);
         } else {
@@ -179,10 +185,18 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     }
 
     private void addMobileSection(int subId) {
+        addMobileSection(subId, null);
+    }
+
+    private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
         category.setTemplate(getNetworkTemplate(subId), subId, services);
         category.pushTemplates(services);
+        if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
+            Preference title  = category.findPreference(KEY_MOBILE_USAGE_TITLE);
+            title.setTitle(subInfo.getDisplayName());
+        }
     }
 
     private void addWifiSection() {
