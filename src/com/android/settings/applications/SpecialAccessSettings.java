@@ -14,8 +14,11 @@
 
 package com.android.settings.applications;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -31,6 +34,9 @@ public class SpecialAccessSettings extends DashboardFragment {
 
     private static final String TAG = "SpecialAccessSettings";
 
+    private static final String[] DISABLED_FEATURES_LOW_RAM =
+            new String[] {"notification_access", "zen_access", "enabled_vr_listeners"};
+
     @Override
     protected String getLogTag() {
         return TAG;
@@ -39,6 +45,20 @@ public class SpecialAccessSettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.special_access;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        if (ActivityManager.isLowRamDeviceStatic()) {
+            for (String disabledFeature : DISABLED_FEATURES_LOW_RAM) {
+                Preference pref = findPreference(disabledFeature);
+                if (pref != null) {
+                    removePreference(disabledFeature);
+                }
+            }
+        }
     }
 
     @Override
