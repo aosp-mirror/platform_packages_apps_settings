@@ -22,6 +22,17 @@
         android:key="dashboard_tile_placeholder"
         android:order="1"/>
 
+    <PreferenceCategory
+        android:key="lock_screen_notifications_profile_header"
+        android:title="@string/profile_section_header">
+
+        <com.android.settings.notification.RestrictedDropDownPreference
+            android:key="lock_screen_notifications_profile"
+            android:title="@string/lock_screen_notifications_title"
+            android:summary="@string/summary_placeholder"/>
+
+    </PreferenceCategory>
+
     <!-- Notification badging -->
     <SwitchPreference
         android:key="notification_badging"
@@ -38,20 +49,17 @@
         android:title="@string/lock_screen_notifications_title"
         android:summary="@string/summary_placeholder"/>
 
+    <!-- Default notification ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="notification_default_ringtone"
+        android:title="@string/notification_ringtone_title"
+        android:dialogTitle="@string/notification_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:ringtoneType="notification" />
+
     <Preference
         android:key="gesture_swipe_down_fingerprint_notifications"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings" />
-
-    <PreferenceCategory
-        android:key="lock_screen_notifications_profile_header"
-        android:title="@string/profile_section_header">
-
-        <com.android.settings.notification.RestrictedDropDownPreference
-            android:key="lock_screen_notifications_profile"
-            android:title="@string/lock_screen_notifications_title"
-            android:summary="@string/summary_placeholder"/>
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
