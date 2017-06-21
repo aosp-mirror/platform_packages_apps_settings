@@ -20,7 +20,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -81,6 +83,10 @@ public class PowerUsageAdvancedTest {
     private PackageManager mPackageManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private BatteryHistoryPreference mHistPref;
+    @Mock
+    private PreferenceGroup mUsageListGroup;
     private PowerUsageAdvanced mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
@@ -351,5 +357,27 @@ public class PowerUsageAdvancedTest {
 
         assertThat(mPowerUsageAdvanced.calculateHiddenPower(powerUsageDataList)).isWithin(
                 PRECISION).of(unaccountedPower);
+    }
+
+    @Test
+    public void testRefreshUi_addsSubtextWhenAppropriate() {
+        // Mock out all the battery stuff
+        mPowerUsageAdvanced.mHistPref = mHistPref;
+        mPowerUsageAdvanced.mStatsHelper = mBatteryStatsHelper;
+        doReturn(new ArrayList<PowerUsageData>())
+                .when(mPowerUsageAdvanced).parsePowerUsageData(any());
+        doReturn("").when(mPowerUsageAdvanced).getString(anyInt());
+        mPowerUsageAdvanced.mUsageListGroup = mUsageListGroup;
+
+        // refresh the ui and check that text was not updated when enhanced prediction disabled
+        when(mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(any()))
+                .thenReturn(false);
+        mPowerUsageAdvanced.refreshUi();
+        verify(mHistPref, never()).setBottomSummary(any());
+
+        // refresh the ui and check that text was updated when enhanced prediction enabled
+        when(mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(any())).thenReturn(true);
+        mPowerUsageAdvanced.refreshUi();
+        verify(mHistPref, atLeastOnce()).setBottomSummary(any());
     }
 }
