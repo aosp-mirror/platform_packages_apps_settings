@@ -18,6 +18,7 @@ package com.android.settings.language;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -137,7 +138,8 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         controllers.add(gameControllerPreferenceController);
         // Gestures
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
+                false /* assistOnly */));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
                 KEY_SWIPE_DOWN));
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle, KEY_DOUBLE_TWIST));
@@ -172,16 +174,28 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         @Override
         public void setListening(boolean listening) {
+            final ContentResolver contentResolver = mContext.getContentResolver();
             if (listening) {
-                if (mFeatureProvider.isSupported(mContext)) {
-                    final int assistGestureEnabled = Settings.Secure.getInt(
-                        mContext.getContentResolver(), Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
-                    mSummaryLoader.setSummary(this, mContext.getString(assistGestureEnabled == 0
-                        ? R.string.language_input_gesture_summary_off
-                        : R.string.language_input_gesture_summary_on_with_assist));
+                if (mFeatureProvider.isSensorAvailable(mContext)) {
+                    final boolean assistGestureEnabled = Settings.Secure.getInt(
+                            contentResolver, Settings.Secure.ASSIST_GESTURE_ENABLED, 1) != 0;
+                    final boolean assistGestureSilenceEnabled = Settings.Secure.getInt(
+                            contentResolver, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED,
+                            1) != 0;
+                    String summary;
+                    if (mFeatureProvider.isSupported(mContext) && assistGestureEnabled) {
+                        summary = mContext.getString(
+                                R.string.language_input_gesture_summary_on_with_assist);
+                    } else if (assistGestureSilenceEnabled) {
+                        summary = mContext.getString(
+                                R.string.language_input_gesture_summary_on_non_assist);
+                    } else {
+                        summary = mContext.getString(R.string.language_input_gesture_summary_off);
+                    }
+                    mSummaryLoader.setSummary(this, summary);
                 } else {
                     final String flattenComponent = Settings.Secure.getString(
-                        mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+                            contentResolver, Settings.Secure.DEFAULT_INPUT_METHOD);
                     if (!TextUtils.isEmpty(flattenComponent)) {
                         final PackageManager packageManage = mContext.getPackageManager();
                         final String pkg = ComponentName.unflattenFromString(flattenComponent)
