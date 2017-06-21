@@ -26,7 +26,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,11 +62,6 @@ public class DoubleTwistPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         mController = new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowSecureSettings.clear();
     }
 
     @Test

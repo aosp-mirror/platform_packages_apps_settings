@@ -60,8 +60,10 @@ import java.util.List;
 public class PowerUsageAnomalyDetailsTest {
     private static final String NAME_APP_1 = "app1";
     private static final String NAME_APP_2 = "app2";
+    private static final String NAME_APP_3 = "app3";
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final String PACKAGE_NAME_2 = "com.android.app2";
+    private static final String PACKAGE_NAME_3 = "com.android.app3";
 
     @Mock
     private SettingsActivity mSettingsActivity;
@@ -71,6 +73,8 @@ public class PowerUsageAnomalyDetailsTest {
     private Drawable mDrawable1;
     @Mock
     private Drawable mDrawable2;
+    @Mock
+    private Drawable mDrawable3;
     private Context mContext;
     private PowerUsageAnomalyDetails mFragment;
     private PreferenceGroup mAbnormalListGroup;
@@ -92,30 +96,36 @@ public class PowerUsageAnomalyDetailsTest {
                 .build();
         mAnomalyList.add(anomaly1);
         Anomaly anomaly2 = new Anomaly.Builder()
-                .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
                 .setPackageName(PACKAGE_NAME_2)
                 .setDisplayName(NAME_APP_2)
                 .build();
         mAnomalyList.add(anomaly2);
+        Anomaly anomaly3 = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
+                .setPackageName(PACKAGE_NAME_3)
+                .setDisplayName(NAME_APP_3)
+                .build();
+        mAnomalyList.add(anomaly3);
 
         mFragment = spy(new PowerUsageAnomalyDetails());
         doReturn(null).when(mFragment).getIconFromPackageName(any());
         mFragment.mAbnormalListGroup = mAbnormalListGroup;
         mFragment.mAnomalies = mAnomalyList;
+        mFragment.mBatteryUtils = new BatteryUtils(mContext);
         doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mContext).when(mPreferenceManager).getContext();
     }
 
     @Test
-    public void testRefreshUi_dataCorrect() {
-        final List<Anomaly> testAnomalyList = new ArrayList<>();
+    public void testRefreshUi_displayCorrectTitleAndSummary() {
+        final List<Preference> testPreferences = new ArrayList<>();
         final ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(
                 Preference.class);
         Answer<Void> prefCallable = new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {
-                testAnomalyList.add(
-                        ((AnomalyPreference) preferenceCaptor.getValue()).getAnomaly());
+                testPreferences.add(preferenceCaptor.getValue());
                 return null;
             }
         };
@@ -123,13 +133,22 @@ public class PowerUsageAnomalyDetailsTest {
 
         mFragment.refreshUi();
 
-        assertThat(testAnomalyList).containsExactlyElementsIn(mAnomalyList);
+        final Preference wakelockPreference = testPreferences.get(0);
+        assertThat(wakelockPreference.getTitle()).isEqualTo(NAME_APP_1);
+        assertThat(wakelockPreference.getSummary()).isEqualTo("Keeping device awake");
+        final Preference wakeupPreference = testPreferences.get(1);
+        assertThat(wakeupPreference.getTitle()).isEqualTo(NAME_APP_2);
+        assertThat(wakeupPreference.getSummary()).isEqualTo("Waking up device in background");
+        final Preference bluetoothPreference = testPreferences.get(2);
+        assertThat(bluetoothPreference.getTitle()).isEqualTo(NAME_APP_3);
+        assertThat(bluetoothPreference.getSummary()).isEqualTo("Requesting location frequently");
     }
 
     @Test
     public void testRefreshUi_iconCorrect() {
         doReturn(mDrawable1).when(mFragment).getIconFromPackageName(PACKAGE_NAME_1);
         doReturn(mDrawable2).when(mFragment).getIconFromPackageName(PACKAGE_NAME_2);
+        doReturn(mDrawable3).when(mFragment).getIconFromPackageName(PACKAGE_NAME_3);
 
         final List<Drawable> testIcons = new ArrayList<>();
         final ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(
@@ -145,7 +164,7 @@ public class PowerUsageAnomalyDetailsTest {
 
         mFragment.refreshUi();
 
-        assertThat(testIcons).containsExactly(mDrawable1, mDrawable2);
+        assertThat(testIcons).containsExactly(mDrawable1, mDrawable2, mDrawable3);
     }
 
     @Test

@@ -39,6 +39,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AccountDetailDashboard";
     private static final String METADATA_IA_ACCOUNT = "com.android.settings.ia.account";
+    private static final String EXTRA_ACCOUNT_NAME = "extra.accountName";
 
     public static final String KEY_ACCOUNT = "account";
     public static final String KEY_ACCOUNT_TYPE = "account_type";
@@ -127,7 +128,11 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         if (metadata == null) {
             return false;
         }
-        return mAccountType.equals(metadata.getString(METADATA_IA_ACCOUNT));
+        final boolean display = mAccountType.equals(metadata.getString(METADATA_IA_ACCOUNT));
+        if (display && tile.intent != null) {
+            tile.intent.putExtra(EXTRA_ACCOUNT_NAME, mAccount.name);
+        }
+        return display;
     }
 
     @VisibleForTesting

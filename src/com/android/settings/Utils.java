@@ -943,6 +943,8 @@ public final class Utils extends com.android.settingslib.Utils {
         return result;
     }
 
+    // TODO: move this out of Utils to a mixin or a controller or a helper class.
+    @Deprecated
     public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
             boolean animate) {
         setViewShown(loading, !done, animate);

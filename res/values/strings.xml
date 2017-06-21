@@ -4853,8 +4853,8 @@
     <string name="battery_detail_since_full_charge">Breakdown since last full charge</string>
     <!-- Title for usage time since last full charge. [CHAR LIMIT=60] -->
     <string name="battery_last_full_charge">Last full charge</string>
-    <!-- Description for text in battery footer. [CHAR LIMIT=120] -->
-    <string name="battery_footer_summary">Remaining battery time is approximate and can change based on usage</string>
+    <!-- Description for text in battery footer. [CHAR LIMIT=NONE] -->
+    <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage</string>
     <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
     <string name="battery_detail_foreground">While in active use</string>
     <!-- Title for text that shows the amount of time an app has been running while in the background. [CHAR LIMIT=80] -->
@@ -6811,11 +6811,11 @@
     <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
     <string name="notification_importance_high_title">Urgent</string>
 
-    <!-- [CHAR LIMIT=40 BACKUP_MESSAGE_ID:6585849855452076626] Notification importance title -->
-    <string name="allow_sound">Allow sound</string>
+    <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
+    <string name="allow_interruption">Allow interruptions</string>
 
-    <!-- [CHAR LIMIT=180] Notification importance summary -->
-    <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
+    <!-- [CHAR LIMIT=180] Notification importance description. More details from allow_interruption string - specifics of how notifications may interrupt. -->
+    <string name="allow_interruption_summary">Let the app make sound, vibrate, and/or pop notifications on screen</string>
 
     <!-- Channel summaries for the app notification page -->
 
@@ -8108,6 +8108,12 @@
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
     <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
 
+    <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
+    <string name="night_display_suggestion_title">Set Night Light schedule</string>
+
+    <!--  Night display: Summary for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
+    <string name="night_display_suggestion_summary">Tint screen amber to help you fall asleep</string>
+
     <!-- Title of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="condition_night_display_title">Night Light is on</string>
 
@@ -8965,7 +8971,7 @@
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
 
     <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
-    <string name="new_device_suggestion_title">What's new and exciting?</string>
+    <string name="new_device_suggestion_title">What\'s new and exciting?</string>
 
     <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="new_device_suggestion_summary">Check out the top 5 features</string>
