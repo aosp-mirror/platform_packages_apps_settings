@@ -539,16 +539,20 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Pakeisti atrakinimo slaptažodį"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Bandykite dar kartą. <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> band. iš <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Duomenys bus ištrinti"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="4999108263936246210">"Jei kitu bandymu nupiešite netinkamą atrakinimo piešinį, šio įrenginio duomenys bus ištrinti"</string>
-    <string name="lock_last_pin_attempt_before_wipe_device" msgid="2191214314973933300">"Jei kitu bandymu įvesite netinkamą PIN kodą, šio įrenginio duomenys bus ištrinti"</string>
-    <string name="lock_last_password_attempt_before_wipe_device" msgid="6526655065466746563">"Jei kitu bandymu įvesite netinkamą slaptažodį, šio įrenginio duomenys bus ištrinti"</string>
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
+    <skip />
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Jei kitu bandymu nupiešite netinkamą atrakinimo piešinį, šis naudotojas bus ištrintas"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Jei kitu bandymu įvesite netinkamą PIN kodą, šis naudotojas bus ištrintas"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Jei kitu bandymu įvesite netinkamą slaptažodį, šis naudotojas bus ištrintas"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Jei kitu bandymu nupiešite netinkamą atrakinimo piešinį, darbo profilis ir jo duomenys bus ištrinti"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Jei kitu bandymu įvesite netinkamą PIN kodą, darbo profilis ir jo duomenys bus ištrinti"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Jei kitu bandymu įvesite netinkamą slaptažodį, darbo profilis ir jo duomenys bus ištrinti"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="1951676829299522277">"Per daug netinkamų bandymų. Šio įrenginio duomenys bus ištrinti."</string>
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
+    <skip />
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Per daug netinkamų bandymų. Šis naudotojas bus ištrintas."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Per daug netinkamų bandymų. Šis darbo profilis ir jo duomenys bus ištrinti."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Atsisakyti"</string>
@@ -1345,10 +1349,8 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Atkuriami numatytieji APN nustatymai."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Nustatyti iš naujo į numatytuosius nustatymus"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Numatytųjų APN nustatymų nustatymas iš naujo baigtas."</string>
-    <!-- no translation found for reset_dashboard_title (6254873816990678620) -->
-    <skip />
-    <!-- no translation found for reset_network_title (6166025966016873843) -->
-    <skip />
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Nustatyti parinktis iš naujo"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Iš naujo nustatyti „Wi-Fi“, mobiliųjų duomenų ir „Bluetooth“ nustatymus"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Bus iš naujo nustatyti visi tinklo nustatymai, įskaitant:\n\n"<li>"„Wi‑Fi“;"</li>\n<li>"mobiliojo ryšio duomenis;"</li>\n<li>"„Bluetooth“."</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Nustatyti iš naujo"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Iš naujo nustatyti visus tinklo nustatymus? Šio veiksmo negalėsite anuliuoti!"</string>
@@ -1356,8 +1358,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Nustatyti iš naujo?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Šis naudotojas negali iš naujo nustatyti tinklo"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Tinklo nustatymai nustatyti iš naujo"</string>
-    <!-- no translation found for master_clear_title (6617679904229218425) -->
-    <skip />
+    <string name="master_clear_title" msgid="6617679904229218425">"Ištrinti visus duomenis (iš naujo nustatyti gamyklinius duomenis)"</string>
     <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
       <item quantity="one"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> paskyra bus nustatyta iš naujo</item>
       <item quantity="few"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> paskyros bus nustatytos iš naujo</item>
@@ -1835,6 +1836,8 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Ekrano skaitytuvai, vaizdo, sąveikos valdikliai"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Matomumo nustatymai"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Galite tinkinti šį įrenginį pagal savo poreikius. Vėliau šias pritaikymo neįgaliesiems funkcijas galite pakeisti nustatymuose."</string>
+    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
+    <skip />
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Ekrano skaitytuvai"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Garsas ir tekstas ekrane"</string>
     <string name="display_category_title" msgid="685461049938269166">"Ekranas"</string>
@@ -2127,7 +2130,8 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> visos akumuliatoriaus įkrovos"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Naudojimo nuo paskutinio visiško įkrovimo analizė"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Paskutinis visiškas įkrovimas"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"Likęs akumuliatoriaus veikimo laikas yra apytikslis ir gali pasikeisti atsižvelgiant į naudojimą"</string>
+    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
+    <skip />
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Aktyviai naudojant"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Kai veikia fone"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Akumuliatoriaus energijos vartojimas"</string>
@@ -2940,8 +2944,10 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Vidutinis"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Aukštas"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Skubus"</string>
-    <string name="allow_sound" msgid="1820188704793497324">"Leisti garsą"</string>
-    <string name="show_silently_summary" msgid="7616604629123146565">"Neskambėti, nevibruoti arba nerodyti šių pranešimų dabartiniame ekrane."</string>
+    <!-- no translation found for allow_interruption (7136150018111848721) -->
+    <skip />
+    <!-- no translation found for allow_interruption_summary (7870159391333957050) -->
+    <skip />
     <string name="notification_channel_summary_min" msgid="5401718014765921892">"Maža svarba"</string>
     <string name="notification_channel_summary_low" msgid="322317684244981244">"Vidutinė svarba"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Didelė svarba"</string>
@@ -3442,6 +3448,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Foniniai duomenys pasiekiami tik prisijungus prie „Wi-Fi“ ryšio. Tai gali paveikti kai kurias programas ar paslaugas, kai „Wi-Fi“ ryšys nepasiekiamas."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Darbo profilis išjungtas"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Programos, sinchronizavimas fone ir kitos su jūsų darbo profiliu susijusios funkcijos išjungtos."</string>
+    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nakties šviesos tvarkaraščio nustatymas"</string>
+    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Sut. ekr. gin. atsp., kad užm."</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Nakties šviesa įjungta"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Ekranas rodomas gintaro spalvos atspalviu. Tai gali padėti užmigti."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Pasiūlymai"</string>
@@ -3464,10 +3472,8 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Naudoti šaltesnes ekrano spalvas"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Kad pritaikytumėte spalvos pakeitimą, išjunkite ekraną"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Kad pritaikytumėte telefonijos stebėjimo priemonės pakeitimą, paleiskite įrenginį iš naujo"</string>
-    <!-- no translation found for camera_hal_hdrplus_switch (8377365197105267466) -->
-    <skip />
-    <!-- no translation found for camera_hal_hdrplus_toast (2063703797270055299) -->
-    <skip />
+    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Fotoaparatas HAL HDR+"</string>
+    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Kad pritaikytumėte fotoaparato HAL HDR+ pakeitimą, paleiskite įrenginį iš naujo"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiniai sistemos naujiniai"</string>
     <string name="usage" msgid="2977875522080448986">"Naudojimas"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobiliojo ryšio duom. naud."</string>
@@ -3642,7 +3648,8 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatiniai"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Neautomatiniai"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Atlaisvinkite vietos dabar"</string>
-    <string name="gesture_preference_title" msgid="4033736910560673690">"Gestų spartieji klavišai"</string>
+    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
+    <skip />
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Spartieji gestai, skirti valdyti telefoną"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Spartieji gestai, skirti valdyti planšetinį kompiuterį"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Spartieji gestai, skirti valdyti įrenginį"</string>

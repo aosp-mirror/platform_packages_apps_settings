@@ -106,7 +106,7 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Configuración del perfil"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No se ha establecido ningún nombre; se utiliza el nombre de cuenta"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Buscar dispositivos"</string>
-    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Cambiar nombre de dispositivo"</string>
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Cambiar nombre del dispositivo"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Cambiar nombre"</string>
     <string name="bluetooth_disconnect_title" msgid="7830252930348734303">"¿Desconectar dispositivo?"</string>
     <string name="bluetooth_disconnect_all_profiles" product="default" msgid="8208712728668714199">"Tu teléfono se desconectará de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -391,7 +391,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Levanta el dedo y vuelve a tocar"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Sigue levantando el dedo para agregar diferentes partes de tu huella digital"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Se agregó la huella digital"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Cuando veas este ícono, usa tu huella digital para identificarte o para aprobar compras."</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Cuando veas este ícono, usa tu huella digital para identificarte o aprobar compras."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"¿Omitir configuración de huella digital?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Decidiste usar la huella digital como una de las formas para desbloquear el teléfono. Si omites este paso, tendrás que configurarla más tarde. La configuración tarda un minuto aproximadamente."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Configurar bloqueo de pantalla"</string>
@@ -533,16 +533,20 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Cambiar la contraseña de desbloqueo"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Vuelve a intentarlo. Intento <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> de <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Se borrarán tus datos"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="4999108263936246210">"Si ingresas un patrón incorrecto en el próximo intento, se borrarán los datos de este dispositivo"</string>
-    <string name="lock_last_pin_attempt_before_wipe_device" msgid="2191214314973933300">"Si ingresas un PIN incorrecto en el próximo intento, se borrarán los datos de este dispositivo"</string>
-    <string name="lock_last_password_attempt_before_wipe_device" msgid="6526655065466746563">"Si ingresas una contraseña incorrecta en el próximo intento, se borrarán los datos de este dispositivo"</string>
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
+    <skip />
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Si ingresas un patrón incorrecto en el próximo intento, se borrará este usuario"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Si ingresas un PIN incorrecto en el próximo intento, se borrará este usuario"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Si ingresas una contraseña incorrecta en el próximo intento, se borrará este usuario"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Si ingresas un patrón incorrecto en el próximo intento, se borrarán tu perfil de trabajo y sus datos"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Si ingresas un PIN incorrecto en el próximo intento, se borrarán tu perfil de trabajo y sus datos"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Si ingresas una contraseña incorrecta en el próximo intento, se borrarán tu perfil de trabajo y sus datos"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="1951676829299522277">"Hubo demasiados intentos incorrectos. Se borrarán los datos de este dispositivo."</string>
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
+    <skip />
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Hubo demasiados intentos incorrectos. Se borrará este usuario."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Hubo demasiados intentos incorrectos. Se borrarán este perfil de trabajo y sus datos."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Descartar"</string>
@@ -1319,7 +1323,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Restaurando la configuración APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer valores predeterminados"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se restableció la configuración predeterminada de APN."</string>
-    <string name="reset_dashboard_title" msgid="6254873816990678620">"Restablecer opciones"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Opciones de restablecimiento"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Restablecer configuración de Wi-Fi, datos móviles y Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Se restablecerán las opciones de configuración de todas las redes, incluidos:\n\n"<li>"Wi‑Fi"</li>\n<li>"datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer configuración"</string>
@@ -1335,7 +1339,7 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"Se restablecerán el almacenamiento interno y todos los datos"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Esto borrará todos los datos del "<b>"almacenamiento interno"</b>" de tu tablet, por ejemplo:\n\n"<li>"tu cuenta de Google"</li>\n<li>"los datos y la configuración del sistema y de las aplicaciones"</li>\n<li>"las aplicaciones descargadas"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del dispositivo, por ejemplo:\n\n"<li>"La cuenta de Google"</li>\n<li>"Datos de apps y configuraciones,"</li>\n<li>"Apps descargadas"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del dispositivo, por ejemplo:\n\n"<li>"La cuenta de Google"</li>\n<li>"Datos de apps y configuraciones"</li>\n<li>"Apps descargadas"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Accediste a las siguientes cuentas:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Hay otros usuarios presentes en este dispositivo.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Otros datos de usuario"</li></string>
@@ -1802,6 +1806,8 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Lectores de pantalla, pantalla, controles de interacción"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Configuración de visión"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Puedes personalizar este dispositivo para que se adapte a tus necesidades. Estas funciones de accesibilidad pueden cambiarse más tarde en Configuración."</string>
+    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
+    <skip />
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio y texto en pantalla"</string>
     <string name="display_category_title" msgid="685461049938269166">"Pantalla"</string>
@@ -1989,7 +1995,7 @@
     <string name="controls_subtitle" msgid="390468421138288702">"Ajustar el uso de energía"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Paquetes incluidos"</string>
     <string name="battery_abnormal_details_title" msgid="5469019021857291216">"Apps que agotan la batería"</string>
-    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"Mantiene el dispositivo activo"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"El dispositivo activo se mantiene activo."</string>
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Activa el dispositivo en segundo plano"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Solicita la ubicación frecuentemente"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> apps no funcionan correctamente"</string>
@@ -2080,7 +2086,8 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> de la batería total"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Desglose desde la última carga completa"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Última carga completa"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"El tiempo restante de batería es aproximado y puede cambiar en función del uso"</string>
+    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
+    <skip />
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Durante el uso activo"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Mientras se ejecuta en segundo plano"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Uso de la batería"</string>
@@ -2860,12 +2867,12 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todas las notificaciones"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ocultar contenido confidencial de notificaciones"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostrar notificaciones"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo deseas ver las notificaciones cuando el dispositivo esté bloqueado?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo deseas ver las notificaciones cuando esté bloqueado el dispositivo?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificaciones"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Mostrar el contenido de notificaciones de trabajo"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Ocultar contenido confidencial de notificaciones"</string>
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"No mostrar notificaciones del perfil de trabajo"</string>
-    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"¿Cómo deseas ver las notificaciones de perfil cuando el dispositivo esté bloqueado?"</string>
+    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"¿Cómo deseas ver las notificaciones de perfil cuando esté bloqueado el dispositivo?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notificaciones de perfil"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notificaciones"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificaciones de aplicaciones"</string>
@@ -2881,8 +2888,10 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Media"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Urgente"</string>
-    <string name="allow_sound" msgid="1820188704793497324">"Permitir sonido"</string>
-    <string name="show_silently_summary" msgid="7616604629123146565">"No emitir sonido, vibrar ni mostrar estas notificaciones en la pantalla actual."</string>
+    <!-- no translation found for allow_interruption (7136150018111848721) -->
+    <skip />
+    <!-- no translation found for allow_interruption_summary (7870159391333957050) -->
+    <skip />
     <string name="notification_channel_summary_min" msgid="5401718014765921892">"Poca importancia"</string>
     <string name="notification_channel_summary_low" msgid="322317684244981244">"Mediana importancia"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Importancia alta"</string>
@@ -3355,6 +3364,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Los datos en segundo plano solo están disponibles por medio de Wi-Fi. Si no hay una conexión Wi-Fi disponible, podrían verse afectados algunos servicios o apps."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Las apps, la sincronización en segundo plano y otras funciones relacionadas con tu perfil de trabajo están desactivadas."</string>
+    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Programar Luz nocturna"</string>
+    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Tono ámbar para la noche"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"\"Luz nocturna\" activada"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"La pantalla tiene un tono ámbar que te ayudará a conciliar el sueño."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Sugerencias"</string>
@@ -3483,8 +3494,8 @@
     <string name="demo_mode" msgid="2798762752209330277">"Modo demostración de la IU del sistema"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Mosaicos de configuración rápida para programadores"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Estamos aquí para ayudarte"</string>
-    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Estamos disponibles a toda hora, todos los días"</string>
-    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Estamos disponibles a toda hora, todos los días"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Estamos disponibles todos los días, las 24 horas."</string>
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Estamos disponibles todos los días, las 24 horas."</string>
     <string name="support_escalation_summary" msgid="8473084168776014405">"Nuestro equipo de asistencia está disponible para solucionar cualquier problema"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Nuestro equipo de asistencia está disponible a toda hora, todos los días"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Busca ayuda o vuelve en el horario de atención (hora local):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3537,7 +3548,8 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automático"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Liberar espacio ahora"</string>
-    <string name="gesture_preference_title" msgid="4033736910560673690">"Gestos de acceso directo"</string>
+    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
+    <skip />
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestos rápidos para controlar tu teléfono"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestos rápidos para controlar tu tablet"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestos rápidos para controlar tu dispositivo"</string>
