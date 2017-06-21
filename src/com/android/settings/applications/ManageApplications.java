@@ -346,7 +346,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
-        mLoadingContainer.setVisibility(View.VISIBLE);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {
             // Create adapter and list view here
@@ -395,7 +394,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         return mRootView;
     }
 
-    private void createHeader() {
+    @VisibleForTesting
+    void createHeader() {
         Activity activity = getActivity();
         FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
         mSpinnerHeader = activity.getLayoutInflater()
@@ -834,6 +834,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     static class ApplicationsAdapter extends BaseAdapter implements Filterable,
             ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
             AbsListView.RecyclerListener, SectionIndexer {
+
+        // how long to wait for app list to populate without showing the loading container
+        private static final long DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS = 100L;
+
         private static final SectionInfo[] EMPTY_SECTIONS = new SectionInfo[0];
 
         private final ApplicationsState mState;
@@ -886,6 +890,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mEntries = (ArrayList<ApplicationsState.AppEntry>) results.values;
                 rebuildSections();
                 notifyDataSetChanged();
+            }
+        };
+
+        private Runnable mShowLoadingContainerRunnable = new Runnable() {
+            public void run() {
+                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
+                        mManageApplications.mListContainer, false /* done */, false /* animate */);
             }
         };
 
@@ -1097,6 +1108,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
             if (mSession.getAllApps().size() != 0
                     && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
+                // Cancel any pending task to show the loading animation and show the list of
+                // apps directly.
+                mFgHandler.removeCallbacks(mShowLoadingContainerRunnable);
                 Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
                         mManageApplications.mListContainer, true, true);
             }
@@ -1148,10 +1162,16 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
         }
 
-        private void updateLoading() {
-            Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                    mManageApplications.mListContainer,
-                    mHasReceivedLoadEntries && mSession.getAllApps().size() != 0, false);
+        @VisibleForTesting
+        void updateLoading() {
+            final boolean appLoaded = mHasReceivedLoadEntries && mSession.getAllApps().size() != 0;
+            if (appLoaded) {
+                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
+                        mManageApplications.mListContainer, true /* done */, false /* animate */);
+            } else {
+                mFgHandler.postDelayed(
+                        mShowLoadingContainerRunnable, DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS);
+            }
         }
 
         ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,

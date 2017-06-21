@@ -17,29 +17,38 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.os.Looper;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenuItem;
 import org.robolectric.util.ReflectionHelpers;
@@ -47,7 +56,12 @@ import org.robolectric.util.ReflectionHelpers;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -130,6 +144,107 @@ public class ManageApplicationsTest {
 
         mFragment.updateOptionsMenu();
         assertThat(mMenu.findItem(R.id.reset_app_preferences).isVisible()).isFalse();
+    }
+
+    @Test
+    public void onCreateView_shouldNotShowLoadingContainer() {
+        final ManageApplications fragment = spy(new ManageApplications());
+        ReflectionHelpers.setField(fragment, "mResetAppsHelper",
+                mock(ResetAppsHelper.class));
+        doNothing().when(fragment).createHeader();
+
+        final LayoutInflater layoutInflater = mock(LayoutInflater.class);
+        final View view = mock(View.class);
+        final View loadingContainer = mock(View.class);
+        when(layoutInflater.inflate(anyInt(), eq(null))).thenReturn(view);
+        when(view.findViewById(R.id.loading_container)).thenReturn(loadingContainer);
+
+        fragment.onCreateView(layoutInflater, mock(ViewGroup.class), null);
+
+        verify(loadingContainer, never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
+    public void updateLoading_appLoaded_shouldNotDelayCallToHandleLoadingContainer() {
+        final ManageApplications fragment = mock(ManageApplications.class);
+        ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
+        ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
+        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        final Runnable showLoadingContainerRunnable = mock(Runnable.class);
+        final Handler handler = mock(Handler.class);
+        final ManageApplications.ApplicationsAdapter adapter =
+            spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
+        ReflectionHelpers.setField(adapter, "mShowLoadingContainerRunnable",
+            showLoadingContainerRunnable);
+        ReflectionHelpers.setField(adapter, "mFgHandler", handler);
+
+        // app loading completed
+        ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", true);
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        appList.add(mock(ApplicationsState.AppEntry.class));
+        when(mSession.getAllApps()).thenReturn(appList);
+
+        adapter.updateLoading();
+
+        verify(handler, never()).postDelayed(eq(showLoadingContainerRunnable), anyLong());
+    }
+
+    @Test
+    public void updateLoading_appNotLoaded_shouldDelayCallToHandleLoadingContainer() {
+        final ManageApplications fragment = mock(ManageApplications.class);
+        ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
+        ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
+        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        final Runnable showLoadingContainerRunnable = mock(Runnable.class);
+        final Handler handler = mock(Handler.class);
+        final ManageApplications.ApplicationsAdapter adapter =
+            spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
+        ReflectionHelpers.setField(adapter, "mShowLoadingContainerRunnable",
+            showLoadingContainerRunnable);
+        ReflectionHelpers.setField(adapter, "mFgHandler", handler);
+
+        // app loading not yet completed
+        ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", false);
+
+        adapter.updateLoading();
+
+        verify(handler).postDelayed(eq(showLoadingContainerRunnable), anyLong());
+    }
+
+    @Test
+    public void onRebuildComplete_shouldCancelDelayedRunnable() {
+        final Context context = RuntimeEnvironment.application;
+        final ManageApplications fragment = mock(ManageApplications.class);
+        final View loadingContainer = mock(View.class);
+        when(loadingContainer.getContext()).thenReturn(context);
+        final View listContainer = mock(View.class);
+        when(listContainer.getVisibility()).thenReturn(View.INVISIBLE);
+        when(listContainer.getContext()).thenReturn(context);
+        ReflectionHelpers.setField(fragment, "mLoadingContainer", loadingContainer);
+        ReflectionHelpers.setField(fragment, "mListContainer", listContainer);
+        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        final Runnable showLoadingContainerRunnable = mock(Runnable.class);
+        final Handler handler = mock(Handler.class);
+        final ManageApplications.ApplicationsAdapter adapter =
+            spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
+        ReflectionHelpers.setField(adapter, "mShowLoadingContainerRunnable",
+            showLoadingContainerRunnable);
+        ReflectionHelpers.setField(adapter, "mFgHandler", handler);
+        ReflectionHelpers.setField(adapter, "mFilterMode", -1);
+
+        // app loading not yet completed
+        ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", false);
+        adapter.updateLoading();
+
+        // app loading completed
+        ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", true);
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        appList.add(mock(ApplicationsState.AppEntry.class));
+        when(mSession.getAllApps()).thenReturn(appList);
+
+        adapter.onRebuildComplete(null);
+
+        verify(handler).removeCallbacks(showLoadingContainerRunnable);
     }
 
     private void setUpOptionMenus() {
