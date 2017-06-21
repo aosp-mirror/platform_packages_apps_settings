@@ -23,6 +23,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.settingslib.CustomEditTextPreference;
+
 /**
  * TODO: Add a soft dialpad for PIN entry.
  */
