@@ -15,16 +15,14 @@
  */
 package com.android.settings.fuelgauge;
 
-import android.view.View;
 import java.util.List;
-import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.content.ContentResolver;
 import android.os.PowerManager;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -32,6 +30,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -58,6 +57,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 
@@ -148,6 +149,8 @@ public class PowerUsageSummaryTest {
     private ContentResolver mContentResolver;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private PreferenceGroup mAppListGroup;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -215,6 +218,7 @@ public class PowerUsageSummaryTest {
         mFragment.mScreenUsagePref = mScreenUsagePref;
         mFragment.mLastFullChargePref = mLastFullChargePref;
         mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
+        mFragment.mAppListGroup = mAppListGroup;
     }
 
     @Test
@@ -491,6 +495,20 @@ public class PowerUsageSummaryTest {
         mFragment.restoreSavedInstance(bundle);
 
         assertThat(mFragment.mShowAllApps).isTrue();
+    }
+
+    @Test
+    public void testRefreshAnomalyIcon_containsAnomaly_showAnomalyIcon() {
+        PowerGaugePreference preference = new PowerGaugePreference(mRealContext);
+        final String key = mFragment.extractKeyFromUid(UID);
+        preference.setKey(key);
+        doReturn(preference).when(mAppListGroup).findPreference(key);
+        mFragment.mAnomalySparseArray = new SparseArray<>();
+        mFragment.mAnomalySparseArray.append(UID, null);
+
+        mFragment.refreshAnomalyIcon();
+
+        assertThat(preference.showAnomalyIcon()).isTrue();
     }
 
     public static class TestFragment extends PowerUsageSummary {

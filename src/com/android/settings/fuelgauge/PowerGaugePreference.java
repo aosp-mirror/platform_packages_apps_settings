@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.settings.R;
 import com.android.settings.TintablePreference;
 import com.android.settings.Utils;
@@ -94,6 +95,10 @@ public class PowerGaugePreference extends TintablePreference {
     public void shouldShowAnomalyIcon(boolean showAnomalyIcon) {
         mShowAnomalyIcon = showAnomalyIcon;
         notifyChanged();
+    }
+
+    public boolean showAnomalyIcon() {
+        return mShowAnomalyIcon;
     }
 
     BatteryEntry getInfo() {
