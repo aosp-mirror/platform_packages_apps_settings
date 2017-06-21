@@ -69,9 +69,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.UNACCOUNTED,
             UsageType.OVERCOUNTED};
 
+    @VisibleForTesting BatteryHistoryPreference mHistPref;
+    @VisibleForTesting PreferenceGroup mUsageListGroup;
     private BatteryUtils mBatteryUtils;
-    private BatteryHistoryPreference mHistPref;
-    private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private PackageManager mPackageManager;
     private UserManager mUserManager;
@@ -170,6 +170,14 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         updatePreference(mHistPref);
         refreshPowerUsageDataList(mStatsHelper, mUsageListGroup);
+
+        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
+            mHistPref.setBottomSummary(
+                    mPowerUsageFeatureProvider.getAdvancedUsageScreenInfoString());
+        } else {
+            mHistPref.hideBottomSummary();
+        }
+
         BatteryEntry.startRequestQueue();
     }
 
