@@ -94,8 +94,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/38383542): add bluetooth pairing category
-        return MetricsEvent.BLUETOOTH;
+        return MetricsEvent.BLUETOOTH_PAIRING;
     }
 
     @Override
