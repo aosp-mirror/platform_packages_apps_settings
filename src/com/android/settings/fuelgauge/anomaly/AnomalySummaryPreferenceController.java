@@ -23,6 +23,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageAnomalyDetails;
 
 import java.util.List;
@@ -41,6 +42,8 @@ public class AnomalySummaryPreferenceController {
     Preference mAnomalyPreference;
     @VisibleForTesting
     List<Anomaly> mAnomalies;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
     private SettingsActivity mSettingsActivity;
 
     /**
@@ -56,6 +59,7 @@ public class AnomalySummaryPreferenceController {
         mSettingsActivity = activity;
         mAnomalyPreference = mFragment.getPreferenceScreen().findPreference(ANOMALY_KEY);
         mMetricsKey = metricsKey;
+        mBatteryUtils = BatteryUtils.getInstance(activity.getApplicationContext());
         hideHighUsagePreference();
     }
 
@@ -89,10 +93,14 @@ public class AnomalySummaryPreferenceController {
         if (!mAnomalies.isEmpty()) {
             mAnomalyPreference.setVisible(true);
             final int count = mAnomalies.size();
-            final String summary = context.getResources().getQuantityString(
-                    R.plurals.power_high_usage_summary, count,
-                    mAnomalies.get(0).displayName, count);
+            final String title = context.getResources().getQuantityString(
+                    R.plurals.power_high_usage_title, count, mAnomalies.get(0).displayName);
+            final String summary = count > 1 ?
+                    context.getString(R.string.battery_abnormal_apps_summary, count)
+                    : context.getString(
+                            mBatteryUtils.getSummaryResIdFromAnomalyType(mAnomalies.get(0).type));
 
+            mAnomalyPreference.setTitle(title);
             mAnomalyPreference.setSummary(summary);
         }
     }
