@@ -27,6 +27,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 
+import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +48,7 @@ import static org.mockito.Mockito.spy;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryInfoTest {
+
     private static final String STATUS_FULL = "Full";
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
     private static final String STATUS_CHARGING_TIME = "50% - 0m until fully charged";
@@ -54,6 +56,9 @@ public class BatteryInfoTest {
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
     public static final String ENHANCED_STRING_SUFFIX = "left based on your usage";
+    public static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
+    public static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
+            "1m left until fully charged";
     private Intent mDisChargingBatteryBroadcast;
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
@@ -146,5 +151,17 @@ public class BatteryInfoTest {
 
         assertThat(info.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
+    }
+
+    @Test
+    public void testGetBatteryInfo_charging_usesChargeTime() {
+        doReturn(TEST_CHARGE_TIME_REMAINING)
+                .when(mBatteryStats)
+                .computeChargeTimeRemaining(anyLong());
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false, 1000, false);
+        assertThat(info.remainingTimeUs = TEST_CHARGE_TIME_REMAINING);
+        assertThat(info.remainingLabel.toString())
+                .isEqualTo(TEST_CHARGE_TIME_REMAINING_STRINGIFIED);
     }
 }
