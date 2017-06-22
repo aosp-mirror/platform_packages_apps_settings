@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.spy;
@@ -49,6 +50,7 @@ import org.robolectric.annotation.Config;
                 SettingsShadowResources.SettingsShadowTheme.class
         })
 public class BatteryHistoryPreferenceTest {
+    public static final String TEST_STRING = "test";
     @Mock
     private PreferenceViewHolder mViewHolder;
     @Mock
@@ -85,5 +87,25 @@ public class BatteryHistoryPreferenceTest {
         verify(mViewHolder).findViewById(R.id.battery_usage);
         verify(mTextView).setText(nullable(String.class));
         verify(mBatteryInfo).bindHistory(mUsageView);
+    }
+
+    @Test
+    public void testSetBottomSummary_updatesBottomSummaryTextIfSet() {
+        mBatteryHistoryPreference.setBottomSummary(TEST_STRING);
+        mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
+
+        TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
+        assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(view.getText()).isEqualTo(TEST_STRING);
+    }
+
+    @Test
+    public void testSetBottomSummary_leavesBottomSummaryTextBlankIfNotSet() {
+        mBatteryHistoryPreference.hideBottomSummary();
+        mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
+
+        TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
+        assertThat(view.getVisibility()).isEqualTo(View.GONE);
+        assertThat(view.getText()).isEqualTo("");
     }
 }

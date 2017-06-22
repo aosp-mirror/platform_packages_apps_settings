@@ -533,16 +533,20 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ロック解除パスワードの変更"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"もう一度お試しください。入力回数: <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>/<xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 回"</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"データが削除されます"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="4999108263936246210">"パターンをあと 1 回間違えると、この端末のデータが削除されます"</string>
-    <string name="lock_last_pin_attempt_before_wipe_device" msgid="2191214314973933300">"PIN をあと 1 回間違えると、この端末のデータが削除されます"</string>
-    <string name="lock_last_password_attempt_before_wipe_device" msgid="6526655065466746563">"パスワードをあと 1 回間違えると、この端末のデータが削除されます"</string>
+    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
+    <skip />
+    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
+    <skip />
+    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
+    <skip />
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"パターンをあと 1 回間違えると、このユーザーが削除されます"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"PIN をあと 1 回間違えると、このユーザーが削除されます"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"パスワードをあと 1 回間違えると、このユーザーが削除されます"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"パターンをあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"PIN をあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"パスワードをあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="1951676829299522277">"間違えた回数が上限を超えました。この端末のデータが削除されます。"</string>
+    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
+    <skip />
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"間違えた回数が上限を超えました。このユーザーが削除されます。"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"間違えた回数が上限を超えました。この仕事用プロファイルと関連データが削除されます。"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"閉じる"</string>
@@ -1802,6 +1806,8 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"スクリーン リーダー、表示、操作のコントロール"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視覚補助"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"この端末を必要に応じてカスタマイズできます。このユーザー補助機能は後から [設定] で変更できます。"</string>
+    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
+    <skip />
     <string name="screen_reader_category_title" msgid="7739154903913400641">"スクリーン リーダー"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音声と画面上のテキスト"</string>
     <string name="display_category_title" msgid="685461049938269166">"表示"</string>
@@ -1989,19 +1995,19 @@
     <string name="controls_subtitle" msgid="390468421138288702">"消費電力の調整"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"含まれているパッケージ"</string>
     <string name="battery_abnormal_details_title" msgid="5469019021857291216">"電池を消費しているアプリ"</string>
-    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"端末がスリープ状態になるのを妨げています"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"端末がスリープ状態に移行しないようにします"</string>
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"バックグラウンドで端末をスリープ状態から復帰させています"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"位置情報を頻繁にリクエストしています"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> 個のアプリの動作に問題があります"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"アプリを停止しますか？"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"<xliff:g id="APP">%1$s</xliff:g> がスリープ状態への移行を妨げているため、スマートフォンで電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"<xliff:g id="APP">%1$s</xliff:g> がスリープ状態への移行を妨げているため、タブレットで電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"<xliff:g id="APP">%1$s</xliff:g> がスリープ状態への移行を妨げているため、端末で電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試してみることができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
+    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、スマートフォンで電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試すことができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
+    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、タブレットで電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試すことができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
+    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、端末で電池を正常に管理できません。\n\nアプリの強制停止を行って、問題が解消するか試すことができます。\n\n問題が解消しない場合、電池を長持ちさせるにはアプリのアンインストールが必要になる可能性があります。"</string>
     <string name="dialog_stop_ok" msgid="2319777211264004900">"アプリを停止する"</string>
     <string name="dialog_background_check_title" msgid="1525936543485084879">"バックグラウンドでの使用を OFF にしますか？"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"<xliff:g id="APP">%1$s</xliff:g> によってスリープ状態から復帰し続けているため、スマートフォンで電池を正常に管理できません。\n\nこの問題を解決するには、スマートフォンでこのアプリのバックグラウンドでの実行を停止します。"</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"<xliff:g id="APP">%1$s</xliff:g> によってスリープ状態から復帰し続けているため、タブレットで電池を正常に管理できません。\n\nこの問題を解決するには、タブレットでこのアプリのバックグラウンドでの実行を停止します。"</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"<xliff:g id="APP">%1$s</xliff:g> によってスリープ状態から復帰し続けているため、端末で電池を正常に管理できません。\n\nこの問題を解決するには、端末でこのアプリのバックグラウンドでの実行を停止します。"</string>
+    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、スマートフォンで電池を正常に管理できません。\n\nこの問題を解決するには、スマートフォンでこのアプリのバックグラウンドでの実行を停止します。"</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、タブレットで電池を正常に管理できません。\n\nこの問題を解決するには、タブレットでこのアプリのバックグラウンドでの実行を停止します。"</string>
+    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"<xliff:g id="APP">%1$s</xliff:g> によりスリープ状態に移行しないため、端末で電池を正常に管理できません。\n\nこの問題を解決するには、端末でこのアプリのバックグラウンドでの実行を停止します。"</string>
     <string name="dialog_background_check_ok" msgid="412876934682899659">"OFF にする"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"位置情報を OFF にしますか？"</string>
     <string name="dialog_location_message" product="default" msgid="7684240588903005427">"使用中でないときに <xliff:g id="APP">%1$s</xliff:g> が位置情報のリクエストを繰り返しているため、スマートフォンで電池を正常に管理できません。\n\nこの問題を解決するには、このアプリでの位置情報の利用を OFF にします。"</string>
@@ -2073,16 +2079,17 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"電池使用量は消費電力の概算であり、電池を消費するすべてのソースが含まれているわけではありません。「その他」は、算出された概算消費電力と実際に確認された電池消費量との差です。"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"過剰算出された消費電力"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>mAh"</string>
-    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>、使用"</string>
-    <string name="battery_active_for" msgid="2964359540508103032">"連続稼働時間: <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>使用"</string>
+    <string name="battery_active_for" msgid="2964359540508103032">"<xliff:g id="TIME">^1</xliff:g>アクティブ"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"画面の使用: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g>: <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"電池使用量全体の <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"前回のフル充電以降の内訳"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"前回のフル充電"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"電池の残り時間は概算値であり、使用状況によって変わります"</string>
-    <string name="battery_detail_foreground" msgid="3350401514602032183">"使用中の場合"</string>
-    <string name="battery_detail_background" msgid="1929644393553768999">"バックグラウンドの場合"</string>
+    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
+    <skip />
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"アクティブ時"</string>
+    <string name="battery_detail_background" msgid="1929644393553768999">"バックグラウンド時"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"電池使用量"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"アプリ使用量全体の <xliff:g id="PERCENT">%1$s</xliff:g>（<xliff:g id="POWER">%2$d</xliff:g> mAh）"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"フル充電以降の電池の使用状況"</string>
@@ -2786,9 +2793,9 @@
     <string name="keywords_gesture" msgid="5696040361482126337">"操作"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支払い, タップ, ペイメント"</string>
     <string name="keywords_backup" msgid="470070289135403022">"バックアップ, バック アップ"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"ジェスチャー, 側面, 側, アクティブな側面, 握る操作, つかむ, アシスト, アシスタント, スクイジー, スクイズィー, スクイーズィー, スクイージー, OK Google, Google アシスタント"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"ジェスチャー, 復帰, 通知, 画面, 表示, 画面を OFF, 画面を ON, 握る操作, 側面, スリープ時, スリープ, つかむ"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"ジェスチャー, マナーモード, スヌーズ, アラーム, 着信, 無音, 表示, ロック画面, 握る操作, つかむ, 側面, 停止"</string>
+    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"ジェスチャー, 側面, 側, アクティブな側面, スクイーズ, つかむ, アシスト, アシスタント, スクイジー, スクイズィー, スクイーズィー, スクイージー, OK Google, Google アシスタント"</string>
+    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"ジェスチャー, 復帰, 通知, 画面, 表示, 画面を OFF, 画面を ON, スクイーズ, 側面, スリープ時, スリープ, つかむ"</string>
+    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"ジェスチャー, マナーモード, スヌーズ, アラーム, 着信, 無音, 表示, ロック画面, スクイーズ, つかむ, 側面, 停止"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFCタグのセットアップ"</string>
     <string name="write_tag" msgid="8571858602896222537">"書き込む"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"書き込むにはタグをタップしてください..."</string>
@@ -3173,7 +3180,7 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"使用状況に関する通知"</string>
     <string name="show_all_apps" msgid="1512506948197818534">"フル充電以降の端末の電池使用状況を表示"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"アプリの使用状況を表示"</string>
-    <string name="power_high_usage_title" msgid="6027369425057347826">"使用が多いアイテム"</string>
+    <string name="power_high_usage_title" msgid="6027369425057347826">"使用量が多いアイテム"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> 個のアプリが正常に動作していません</item>
       <item quantity="one">「<xliff:g id="APP">%1$s</xliff:g>」が正常に動作していません</item>
@@ -3473,7 +3480,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager のレート制限をリセット"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager のレート制限をリセットしました"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"ロック画面の通知を管理"</string>
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"ロック画面の通知を管理する"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"サポートとヒント"</string>
@@ -3541,7 +3548,8 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"今すぐ空き容量を増やす"</string>
-    <string name="gesture_preference_title" msgid="4033736910560673690">"操作のショートカット"</string>
+    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
+    <skip />
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"簡単な操作でスマートフォンを管理できます"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"簡単な操作でタブレットを管理できます"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"簡単な操作で端末を管理できます"</string>
@@ -3573,7 +3581,7 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"通知を確認するには、端末の背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"通知をすばやく確認"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"指紋認証センサーを下にスワイプ"</string>
-    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"撮影位置で構えたときにカメラを起動"</string>
+    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"構えたときにカメラを起動"</string>
     <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"カメラを自動的に起動するには、スマートフォンを撮影位置（横向きまたは縦向き）で構えます。スマートフォンがスリープ状態またはロック状態でも機能します。"</string>
     <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"スリープまたはロック状態でもカメラを起動する"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"アシスト操作"</string>
@@ -3695,6 +3703,7 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"ムービー＆ TV アプリ"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"携帯通信会社のプロビジョニング情報"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"携帯通信会社のプロビジョニングをトリガー"</string>
-    <string name="new_device_suggestion_title" msgid="8346563796032837800">"注目の新機能"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"主な 5 つの特長をチェック"</string>
+    <!-- no translation found for new_device_suggestion_title (698847081680980774) -->
+    <skip />
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"5 つの優れた機能をご覧ください"</string>
 </resources>

@@ -248,7 +248,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="tablet">Your tablet will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disconnect_all_profiles" product="device">Your device will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
-    <!-- dialog ok button for disconnect dialog [CHAR LIMIT=10] -->
+    <!-- dialog ok button for disconnect dialog [CHAR LIMIT=20] -->
     <string name="bluetooth_disconnect_dialog_ok">Disconnect</string>
     <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
@@ -8744,6 +8744,12 @@
     <string name="auto_sync_account_summary">Let apps refresh data automatically</string>
     <!-- Preference label to sync account [CHAR LIMIT=60] -->
     <string name="account_sync_title">Account sync</string>
+    <!-- Preference summary for account sync when syncing is on for some items [CHAR LIMIT=NONE] -->
+    <string name="account_sync_summary_some_on">Sync on for <xliff:g name="count" example="5">%1$d</xliff:g> of <xliff:g name="total" example="8">%2$d</xliff:g> items</string>
+    <!-- Preference summary for account sync when syncing is on for everything [CHAR LIMIT=NONE] -->
+    <string name="account_sync_summary_all_on">Sync on for all items</string>
+    <!-- Preference summary for account sync when syncing is off for everything [CHAR LIMIT=NONE] -->
+    <string name="account_sync_summary_all_off">Sync off for all items</string>
 
     <!-- Enterprise Privacy --> <skip />
 

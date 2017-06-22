@@ -30,9 +30,11 @@ import com.android.settings.utils.FileSizeFormatter;
 public class StorageItemPreference extends Preference {
     public int userHandle;
 
+    private static final int UNINITIALIZED = -1;
+
     private ProgressBar mProgressBar;
     private static final int PROGRESS_MAX = 100;
-    private int mProgressPercent = -1;
+    private int mProgressPercent = UNINITIALIZED;
 
     public StorageItemPreference(Context context) {
         this(context, null);
@@ -60,15 +62,9 @@ public class StorageItemPreference extends Preference {
     }
 
     protected void updateProgressBar() {
-        if (mProgressBar == null)
+        if (mProgressBar == null || mProgressPercent == UNINITIALIZED)
             return;
 
-        if (mProgressPercent == -1) {
-            mProgressBar.setVisibility(View.GONE);
-            return;
-        }
-
-        mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setMax(PROGRESS_MAX);
         mProgressBar.setProgress(mProgressPercent);
     }

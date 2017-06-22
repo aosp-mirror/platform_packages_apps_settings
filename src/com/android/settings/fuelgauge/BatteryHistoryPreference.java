@@ -21,6 +21,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
@@ -31,6 +32,10 @@ import com.android.settings.graph.UsageView;
  * subsystem/app type.
  */
 public class BatteryHistoryPreference extends Preference {
+
+    private CharSequence mSummary;
+    private TextView mSummaryView;
+    private boolean hideSummary;
 
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
@@ -48,6 +53,20 @@ public class BatteryHistoryPreference extends Preference {
         }, batteryStats.getStats(), false);
     }
 
+    public void setBottomSummary(CharSequence text) {
+        mSummary = text;
+        if (mSummaryView != null) {
+            mSummaryView.setText(mSummary);
+        }
+    }
+
+    public void hideBottomSummary() {
+        if (mSummaryView != null) {
+            mSummaryView.setVisibility(View.GONE);
+        }
+        hideSummary = true;
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
@@ -56,6 +75,13 @@ public class BatteryHistoryPreference extends Preference {
         }
 
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
+        mSummaryView = (TextView) view.findViewById(R.id.bottom_summary);
+        if (mSummary != null) {
+            mSummaryView.setText(mSummary);
+        }
+        if (hideSummary) {
+            mSummaryView.setVisibility(View.GONE);
+        }
         UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
         usageView.findViewById(R.id.label_group).setAlpha(.7f);
         mBatteryInfo.bindHistory(usageView);

@@ -106,8 +106,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 view = inflater.inflate(R.layout.search_intent_item, parent, false);
                 return new IntentSearchViewHolder(view);
             case ResultPayload.PayloadType.INLINE_SWITCH:
-                view = inflater.inflate(R.layout.search_inline_switch_item, parent, false);
-                return new InlineSwitchViewHolder(view, context);
+                // TODO (b/62807132) replace layout InlineSwitchViewHolder and return an
+                // InlineSwitchViewHolder.
+                view = inflater.inflate(R.layout.search_intent_item, parent, false);
+                return new IntentSearchViewHolder(view);
             case ResultPayload.PayloadType.SAVED_QUERY:
                 view = inflater.inflate(R.layout.search_saved_query_item, parent, false);
                 return new SavedQueryViewHolder(view);
