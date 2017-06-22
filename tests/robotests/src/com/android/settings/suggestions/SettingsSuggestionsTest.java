@@ -20,6 +20,7 @@ import android.annotation.StringRes;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -66,7 +67,8 @@ public class SettingsSuggestionsTest {
 
     @Test
     public void fingerprintSuggestion_isValid() {
-        assertSuggestionEquals("com.android.settings.Settings$FingerprintSuggestionActivity",
+        assertSuggestionEquals(
+                FingerprintSuggestionActivity.class.getName(),
                 CATEGORY_FIRST_IMPRESSION,
                 R.string.suggestion_additional_fingerprints,
                 R.string.suggestion_additional_fingerprints_summary);
