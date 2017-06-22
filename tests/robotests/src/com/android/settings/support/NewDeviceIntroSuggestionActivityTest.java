@@ -22,9 +22,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +68,16 @@ public class NewDeviceIntroSuggestionActivityTest {
 
         when(mFeatureFactory.suggestionsFeatureProvider.getSharedPrefs(any(Context.class)))
                 .thenReturn(getSharedPreferences());
+    }
+
+    @Test
+    public void isSuggestionComplete_notSupported_shouldReturnTrue() {
+        when(mMockContext.getResources()
+                .getBoolean(R.bool.config_new_device_intro_suggestion_supported))
+                .thenReturn(false);
+
+        assertThat(isSuggestionComplete(mContext))
+                .isTrue();
     }
 
     @Test
