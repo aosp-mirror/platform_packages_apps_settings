@@ -21,6 +21,8 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -440,6 +442,33 @@ public class DashboardAdapterTest {
 
         ViewGroup itemView = (ViewGroup) mSuggestionHolder.itemView;
         assertThat(itemView.getChildCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void testSuggestioDismissed_notOnlySuggestion_doNothing() {
+        final DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null, null));
+        adapter.setCategoriesAndSuggestions(
+                new ArrayList<>(), makeSuggestions("pkg1", "pkg2", "pkg3"));
+        final DashboardData dashboardData = adapter.mDashboardData;
+        reset(adapter); // clear interactions tracking
+
+        adapter.onSuggestionDismissed();
+
+        assertThat(adapter.mDashboardData).isEqualTo(dashboardData);
+        verify(adapter, never()).notifyDashboardDataChanged(any());
+    }
+
+    @Test
+    public void testSuggestioDismissed_onlySuggestion_updateDashboardData() {
+        DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null, null));
+        adapter.setCategoriesAndSuggestions(new ArrayList<>(), makeSuggestions("pkg1"));
+        final DashboardData dashboardData = adapter.mDashboardData;
+        reset(adapter); // clear interactions tracking
+
+        adapter.onSuggestionDismissed();
+
+        assertThat(adapter.mDashboardData).isNotEqualTo(dashboardData);
+        verify(adapter).notifyDashboardDataChanged(any());
     }
 
     private List<Tile> makeSuggestions(String... pkgNames) {
