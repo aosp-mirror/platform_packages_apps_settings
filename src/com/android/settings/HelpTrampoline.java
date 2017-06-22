@@ -21,6 +21,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settingslib.HelpUtils;
@@ -34,6 +35,11 @@ public class HelpTrampoline extends Activity {
 
         try {
             final String name = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+            if (TextUtils.isEmpty(name)) {
+                finishAndRemoveTask();
+                return;
+            }
+
             final int id = getResources().getIdentifier(name, "string", getPackageName());
             final String value = getResources().getString(id);
 
