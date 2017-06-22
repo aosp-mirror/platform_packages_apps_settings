@@ -143,7 +143,6 @@ public class Settings extends SettingsActivity {
 
     public static class WifiCallingSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }
-    public static class FingerprintSuggestionActivity extends FingerprintSettings { /* empty */ }
     public static class FingerprintEnrollSuggestionActivity extends FingerprintEnrollIntroduction {
         /* empty */
     }
