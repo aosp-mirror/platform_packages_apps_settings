@@ -2353,6 +2353,7 @@
         <!-- Triggered when user-selected home app isn't encryption aware -->
         <activity android:name=".FallbackHome"
                   android:excludeFromRecents="true"
+                  android:label=""
                   android:screenOrientation="nosensor"
                   android:theme="@style/FallbackHome">
             <intent-filter android:priority="-1000">
