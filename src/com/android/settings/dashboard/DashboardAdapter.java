@@ -264,6 +264,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDashboardDataChanged(prevData);
     }
 
+    public void onSuggestionDismissed() {
+        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        if (suggestions != null && suggestions.size() == 1) {
+            // The only suggestion is dismissed, and the the empty suggestion container will
+            // remain as the dashboard item. Need to refresh the dashboard list.
+            final DashboardData prevData = mDashboardData;
+            mDashboardData = new DashboardData.Builder(prevData)
+                    .setSuggestions(null)
+                    .build();
+            notifyDashboardDataChanged(prevData);
+        }
+    }
+
     @Override
     public void notifySummaryChanged(Tile tile) {
         final int position = mDashboardData.getPositionByTile(tile);
@@ -445,7 +458,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return (Tile) getItem(getItemId(position));
     }
 
-    private void notifyDashboardDataChanged(DashboardData prevData) {
+    @VisibleForTesting
+    void notifyDashboardDataChanged(DashboardData prevData) {
         if (mFirstFrameDrawn && prevData != null) {
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DashboardData
                     .ItemsDataDiffCallback(prevData.getItemList(), mDashboardData.getItemList()));

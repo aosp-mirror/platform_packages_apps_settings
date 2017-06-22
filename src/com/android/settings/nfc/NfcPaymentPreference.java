@@ -30,9 +30,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.android.settings.CustomDialogPreference;
 import com.android.settings.R;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
+import com.android.settingslib.CustomDialogPreference;
 
 import java.util.List;
 

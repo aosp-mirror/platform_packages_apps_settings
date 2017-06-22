@@ -36,10 +36,10 @@ import android.view.View;
 import android.widget.Checkable;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.CustomDialogPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.CustomDialogPreference;
 
 import java.util.List;
 

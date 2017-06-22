@@ -113,4 +113,10 @@ public interface PowerUsageFeatureProvider {
      * @return A string containing the estimate and a label indicating it is a normal estimate
      */
     String getOldEstimateDebugString(String timeRemaining);
+
+    /**
+     * Returns the string to show in the advanced usage battery page when enhanced estimates are
+     * enabled. This string notifies users that the estimate is using enhanced prediction.
+     */
+    String getAdvancedUsageScreenInfoString();
 }

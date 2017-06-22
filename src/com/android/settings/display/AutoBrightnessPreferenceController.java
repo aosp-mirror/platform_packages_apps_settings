@@ -19,6 +19,7 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.DisplaySettings;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
@@ -69,7 +70,7 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
     @Override
     public ResultPayload getResultPayload() {
         final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
-                getClass().getName(), mAutoBrightnessKey,
+                DisplaySettings.class.getName(), mAutoBrightnessKey,
                 mContext.getString(R.string.display_settings));
 
         return new InlineSwitchPayload(SCREEN_BRIGHTNESS_MODE,

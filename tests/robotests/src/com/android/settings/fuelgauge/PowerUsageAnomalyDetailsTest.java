@@ -22,24 +22,27 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalyPreference;
-
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,6 +67,7 @@ public class PowerUsageAnomalyDetailsTest {
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final String PACKAGE_NAME_2 = "com.android.app2";
     private static final String PACKAGE_NAME_3 = "com.android.app3";
+    private static final int USER_ID = 1;
 
     @Mock
     private SettingsActivity mSettingsActivity;
@@ -75,6 +79,12 @@ public class PowerUsageAnomalyDetailsTest {
     private Drawable mDrawable2;
     @Mock
     private Drawable mDrawable3;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private IconDrawableFactory mIconDrawableFactory;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
     private Context mContext;
     private PowerUsageAnomalyDetails mFragment;
     private PreferenceGroup mAbnormalListGroup;
@@ -109,10 +119,11 @@ public class PowerUsageAnomalyDetailsTest {
         mAnomalyList.add(anomaly3);
 
         mFragment = spy(new PowerUsageAnomalyDetails());
-        doReturn(null).when(mFragment).getIconFromPackageName(any());
         mFragment.mAbnormalListGroup = mAbnormalListGroup;
         mFragment.mAnomalies = mAnomalyList;
         mFragment.mBatteryUtils = new BatteryUtils(mContext);
+        mFragment.mPackageManager = mPackageManager;
+        mFragment.mIconDrawableFactory = mIconDrawableFactory;
         doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mContext).when(mPreferenceManager).getContext();
     }
@@ -146,9 +157,9 @@ public class PowerUsageAnomalyDetailsTest {
 
     @Test
     public void testRefreshUi_iconCorrect() {
-        doReturn(mDrawable1).when(mFragment).getIconFromPackageName(PACKAGE_NAME_1);
-        doReturn(mDrawable2).when(mFragment).getIconFromPackageName(PACKAGE_NAME_2);
-        doReturn(mDrawable3).when(mFragment).getIconFromPackageName(PACKAGE_NAME_3);
+        doReturn(mDrawable1).when(mFragment).getBadgedIcon(eq(PACKAGE_NAME_1), anyInt());
+        doReturn(mDrawable2).when(mFragment).getBadgedIcon(eq(PACKAGE_NAME_2), anyInt());
+        doReturn(mDrawable3).when(mFragment).getBadgedIcon(eq(PACKAGE_NAME_3), anyInt());
 
         final List<Drawable> testIcons = new ArrayList<>();
         final ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(
@@ -186,5 +197,17 @@ public class PowerUsageAnomalyDetailsTest {
 
         assertThat(mBundle.getParcelableArrayList(
                 PowerUsageAnomalyDetails.EXTRA_ANOMALY_LIST)).isEqualTo(mAnomalyList);
+    }
+
+    @Test
+    public void testGetBadgedIcon_usePackageNameAndUserId() throws
+            PackageManager.NameNotFoundException {
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME_1,
+                PackageManager.GET_META_DATA);
+
+        mFragment.getBadgedIcon(PACKAGE_NAME_1, USER_ID);
+
+        // Verify that it uses the correct user id
+        verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
     }
 }
