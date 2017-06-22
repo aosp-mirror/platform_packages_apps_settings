@@ -165,6 +165,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent, 0))
                         .setColor(context.getColor(
                                 com.android.internal.R.color.system_notification_accent_color))
+                        .setLocalOnly(true)
                         .build();
 
                 notification.flags |= Notification.FLAG_NO_CLEAR; // Cannot be set with the builder.

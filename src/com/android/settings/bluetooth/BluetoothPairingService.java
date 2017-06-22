@@ -107,7 +107,8 @@ public final class BluetoothPairingService extends Service {
         Resources res = getResources();
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
-                .setTicker(res.getString(R.string.bluetooth_notif_ticker));
+                .setTicker(res.getString(R.string.bluetooth_notif_ticker))
+                .setLocalOnly(true);
 
         PendingIntent pairIntent = PendingIntent.getActivity(this, 0,
                 getPairingDialogIntent(this, intent), PendingIntent.FLAG_ONE_SHOT);
