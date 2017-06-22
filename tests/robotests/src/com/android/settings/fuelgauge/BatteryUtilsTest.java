@@ -69,8 +69,8 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_TOP_SLEEPING = 2500 * UNIT;
     private static final long TIME_STATE_FOREGROUND = 3000 * UNIT;
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
-    private static final long TIME_FOREGROUND_ACTIVITY_ZERO = 0;
-    private static final long TIME_FOREGROUND_ACTIVITY = 100 * DateUtils.MINUTE_IN_MILLIS;
+    private static final long TIME_FOREGROUND_ZERO = 0;
+    private static final long TIME_FOREGROUND = 100 * DateUtils.MINUTE_IN_MILLIS;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
             TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
@@ -294,24 +294,29 @@ public class BatteryUtilsTest {
 
     @Test
     public void testSmearScreenBatterySipper() {
-        final BatterySipper sipperNull = createTestSmearBatterySipper(TIME_FOREGROUND_ACTIVITY_ZERO,
-                BATTERY_APP_USAGE, 0 /* uid */, true /* isUidNull */);
-        final BatterySipper sipperBg = createTestSmearBatterySipper(TIME_FOREGROUND_ACTIVITY_ZERO,
-                BATTERY_APP_USAGE, 1 /* uid */, false /* isUidNull */);
-        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND_ACTIVITY,
-                BATTERY_APP_USAGE, 2 /* uid */, false /* isUidNull */);
+        final BatterySipper sipperNull = createTestSmearBatterySipper(TIME_FOREGROUND_ZERO,
+                TIME_FOREGROUND_ZERO + 500, BATTERY_APP_USAGE, 0 /* uid */, true /* isUidNull */);
+        final BatterySipper sipperBg = createTestSmearBatterySipper(TIME_FOREGROUND_ZERO + 100,
+                TIME_FOREGROUND_ZERO, BATTERY_APP_USAGE, 1 /* uid */, false /* isUidNull */);
+        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND,
+                TIME_FOREGROUND + 200, BATTERY_APP_USAGE, 2 /* uid */, false /* isUidNull */);
+        final BatterySipper sipperFg2 = createTestSmearBatterySipper(TIME_FOREGROUND + 600,
+                TIME_FOREGROUND, BATTERY_APP_USAGE, 3 /* uid */, false /* isUidNull */);
 
         final List<BatterySipper> sippers = new ArrayList<>();
         sippers.add(sipperNull);
         sippers.add(sipperBg);
         sippers.add(sipperFg);
+        sippers.add(sipperFg2);
 
         mBatteryUtils.smearScreenBatterySipper(sippers, mScreenBatterySipper);
 
         assertThat(sipperNull.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
         assertThat(sipperBg.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
         assertThat(sipperFg.totalPowerMah).isWithin(PRECISION).of(
-                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE);
+                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE / 2);
+        assertThat(sipperFg2.totalPowerMah).isWithin(PRECISION).of(
+                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE / 2);
     }
 
     @Test
@@ -353,8 +358,8 @@ public class BatteryUtilsTest {
                 .isEqualTo(R.string.battery_abnormal_location_summary);
     }
 
-    private BatterySipper createTestSmearBatterySipper(long activityTime, double totalPowerMah,
-            int uidCode, boolean isUidNull) {
+    private BatterySipper createTestSmearBatterySipper(long activityTime, long topTime,
+            double totalPowerMah, int uidCode, boolean isUidNull) {
         final BatterySipper sipper = mock(BatterySipper.class);
         sipper.drainType = BatterySipper.DrainType.APP;
         sipper.totalPowerMah = totalPowerMah;
@@ -363,6 +368,8 @@ public class BatteryUtilsTest {
             final BatteryStats.Uid uid = mock(BatteryStats.Uid.class, RETURNS_DEEP_STUBS);
             doReturn(activityTime).when(mBatteryUtils).getForegroundActivityTotalTimeMs(eq(uid),
                     anyLong());
+            doReturn(topTime).when(mBatteryUtils).getProcessTimeMs(
+                    eq(BatteryUtils.StatusType.FOREGROUND), eq(uid), anyInt());
             doReturn(uidCode).when(uid).getUid();
             sipper.uidObj = uid;
         }
