@@ -137,11 +137,15 @@ public class BatteryInfo {
                 final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
                 final long elapsedRealtimeUs =
                         batteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+
                 Intent batteryBroadcast = context.registerReceiver(null,
                         new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                 BatteryUtils utils = BatteryUtils.getInstance(context);
-
-                if (provider != null && provider.isEnhancedBatteryPredictionEnabled(context)) {
+                // 0 means we are discharging, anything else means charging
+                boolean discharging =
+                        batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+                if (discharging && provider != null
+                        && provider.isEnhancedBatteryPredictionEnabled(context)) {
                     return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                             elapsedRealtimeUs, shortString,
                             utils.convertMsToUs(provider.getEnhancedBatteryPrediction(context)),
@@ -149,7 +153,8 @@ public class BatteryInfo {
                 } else {
                     return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                             elapsedRealtimeUs, shortString,
-                            stats.computeBatteryTimeRemaining(elapsedRealtimeUs), false);
+                            discharging ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0,
+                            false);
                 }
             }
 
@@ -211,7 +216,7 @@ public class BatteryInfo {
             if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
                 info.remainingTimeUs = chargeTime;
                 CharSequence timeString = Utils.formatElapsedTime(context,
-                        batteryUtils.convertUsToMs(drainTimeUs), false /* withSeconds */);
+                        batteryUtils.convertUsToMs(chargeTime), false /* withSeconds */);
                 int resId = shortString ? R.string.power_charging_duration_short
                         : R.string.power_charging_duration;
                 info.remainingLabel = TextUtils.expandTemplate(context.getText(

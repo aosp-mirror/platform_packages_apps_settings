@@ -769,11 +769,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void restartBatteryInfoLoader() {
-        if (mPowerFeatureProvider != null
-                && mPowerFeatureProvider.isEnhancedBatteryPredictionEnabled(getContext())) {
-            getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
-                    mBatteryInfoLoaderCallbacks);
-        }
+        getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
+                mBatteryInfoLoaderCallbacks);
     }
 
     private static List<BatterySipper> getFakeStats() {
