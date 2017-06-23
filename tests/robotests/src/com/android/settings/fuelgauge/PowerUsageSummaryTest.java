@@ -39,6 +39,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
@@ -151,6 +152,8 @@ public class PowerUsageSummaryTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private PreferenceGroup mAppListGroup;
+    @Mock
+    private AnomalyDetectionPolicy mAnomalyDetectionPolicy;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -463,9 +466,9 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testInitAnomalyDetectionIfPossible_detectionEnabled_init() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isAnomalyDetectionEnabled()).thenReturn(
-                true);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        doReturn(mAnomalyDetectionPolicy).when(mFragment).getAnomalyDetectionPolicy();
+        when(mAnomalyDetectionPolicy.isAnomalyDetectionEnabled()).thenReturn(true);
 
         mFragment.initAnomalyDetectionIfPossible();
 
