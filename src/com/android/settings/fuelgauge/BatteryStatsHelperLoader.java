@@ -41,9 +41,12 @@ public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
 
     @Override
     public BatteryStatsHelper loadInBackground() {
-        final BatteryStatsHelper statsHelper = new BatteryStatsHelper(getContext(), true);
+        Context context = getContext();
+        final BatteryStatsHelper statsHelper = new BatteryStatsHelper(context,
+                true /* collectBatteryBroadcast */);
 
-        initBatteryStatsHelper(statsHelper);
+        BatteryUtils.getInstance(context).initBatteryStatsHelper(statsHelper, mBundle,
+                mUserManager);
         return statsHelper;
     }
 
@@ -52,9 +55,5 @@ public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
 
     }
 
-    @VisibleForTesting
-    void initBatteryStatsHelper(BatteryStatsHelper statsHelper) {
-        statsHelper.create(mBundle);
-        statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, mUserManager.getUserProfiles());
-    }
+
 }

@@ -17,8 +17,10 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.os.BatteryStats;
+import android.os.Bundle;
 import android.os.Process;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
@@ -57,6 +59,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.spy;
 
@@ -116,6 +119,10 @@ public class BatteryUtilsTest {
     private BatterySipper mCellBatterySipper;
     @Mock
     private BatterySipper mIdleBatterySipper;
+    @Mock
+    private Bundle mBundle;
+    @Mock
+    private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -396,5 +403,14 @@ public class BatteryUtilsTest {
         }
 
         return sipper;
+    }
+
+    @Test
+    public void testInitBatteryStatsHelper_init() {
+        mBatteryUtils.initBatteryStatsHelper(mBatteryStatsHelper, mBundle, mUserManager);
+
+        verify(mBatteryStatsHelper).create(mBundle);
+        verify(mBatteryStatsHelper).refreshStats(BatteryStats.STATS_SINCE_CHARGED,
+                mUserManager.getUserProfiles());
     }
 }
