@@ -164,4 +164,15 @@ public class BatteryInfoTest {
         assertThat(info.remainingLabel.toString())
                 .isEqualTo(TEST_CHARGE_TIME_REMAINING_STRINGIFIED);
     }
+
+    @Test
+    public void testGetBatteryInfo_pluggedInWithFullBattery_onlyShowBatteryLevel() {
+        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 100);
+
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
+                1000, false /* basedOnUsage */);
+
+        assertThat(info.chargeLabel).isEqualTo("100%");
+    }
 }
