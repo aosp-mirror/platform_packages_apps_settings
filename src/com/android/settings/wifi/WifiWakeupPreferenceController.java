@@ -26,9 +26,10 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import com.android.settings.R;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.NetworkScoreManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -43,10 +44,13 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
+    private final NetworkScoreManagerWrapper mNetworkScoreManager;
     private SettingObserver mSettingObserver;
 
-    public WifiWakeupPreferenceController(Context context, Lifecycle lifecycle) {
+    public WifiWakeupPreferenceController(
+            Context context, Lifecycle lifecycle, NetworkScoreManagerWrapper networkScoreManager) {
         super(context);
+        mNetworkScoreManager = networkScoreManager;
         lifecycle.addObserver(this);
     }
 
@@ -112,11 +116,17 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         boolean networkRecommendationsEnabled = Settings.Global.getInt(
                 mContext.getContentResolver(),
                 Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
-        enableWifiWakeup.setEnabled(networkRecommendationsEnabled && wifiScanningEnabled);
+        boolean activeScorerSet = mNetworkScoreManager.getActiveScorerPackage() != null;
+        enableWifiWakeup.setEnabled(
+                networkRecommendationsEnabled && wifiScanningEnabled && activeScorerSet);
 
-        enableWifiWakeup.setSummary(wifiScanningEnabled ?
-                R.string.wifi_wakeup_summary :
-                R.string.wifi_wakeup_summary_scanning_disabled);
+        if (!activeScorerSet) {
+            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scoring_disabled);
+        } else if (!wifiScanningEnabled) {
+            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scanning_disabled);
+        } else {
+            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary);
+        }
     }
 
     class SettingObserver extends ContentObserver {
