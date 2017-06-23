@@ -105,7 +105,17 @@ public class StorageAsyncLoader
                 continue;
             }
 
-            long blamedSize = stats.getDataBytes() - stats.getCacheBytes();
+            final long dataSize = stats.getDataBytes();
+            final long cacheQuota = mStatsManager.getCacheQuotaBytes(mUuid, app.uid);
+            final long cacheBytes = stats.getCacheBytes();
+            long blamedSize = dataSize;
+            // Technically, we could overages as freeable on the storage settings screen.
+            // If the app is using more cache than its quota, we would accidentally subtract the
+            // overage from the system size (because it shows up as unused) during our attribution.
+            // Thus, we cap the attribution at the quota size.
+            if (cacheQuota < cacheBytes) {
+                blamedSize = blamedSize - cacheBytes + cacheQuota;
+            }
 
             // This isn't quite right because it slams the first user by user id with the whole code
             // size, but this ensures that we count all apps seen once.
