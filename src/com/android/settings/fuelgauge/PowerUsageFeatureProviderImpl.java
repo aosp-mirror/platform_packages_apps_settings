@@ -89,11 +89,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isAnomalyDetectionEnabled() {
-        return false;
-    }
-
-    @Override
     public long getEnhancedBatteryPrediction(Context context) {
         return -1;
     }
@@ -111,11 +106,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public long getTimeRemainingEstimate(Cursor cursor) {
         return 0;
-    }
-
-    @Override
-    public boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type) {
-        return false;
     }
 
     @Override
