@@ -28,6 +28,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
@@ -61,7 +62,15 @@ public class NewDeviceIntroSuggestionActivity extends Activity {
     }
 
     public static boolean isSuggestionComplete(Context context) {
-        return isExpired(context) || hasLaunchedBefore(context) || !canOpenUrlInBrowser(context);
+        return !isSupported(context)
+                || isExpired(context)
+                || hasLaunchedBefore(context)
+                || !canOpenUrlInBrowser(context);
+    }
+
+    private static boolean isSupported(Context context) {
+        return context.getResources()
+                .getBoolean(R.bool.config_new_device_intro_suggestion_supported);
     }
 
     private static boolean isExpired(Context context) {
