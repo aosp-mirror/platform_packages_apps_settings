@@ -533,20 +533,16 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Փոխել ապակողպման գաղտնաբառը"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Փորձեք նորից: Փորձ <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>՝ <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>-ից:"</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Ձեր տվյալները կջնջվեն"</string>
-    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
-    <skip />
-    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
-    <skip />
-    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
-    <skip />
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"Հաջորդ փորձի ընթացքում սխալ նախշ մուտքագրելու դեպքում սարքի տվյալները կջնջվեն"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"Հաջորդ փորձի ընթացքում սխալ PIN կոդ մուտքագրելու դեպքում սարքի տվյալները կջնջվեն"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"Հաջորդ փորձի ընթացքում սխալ գաղտնաբառ մուտքագրելու դեպքում սարքի տվյալները կջնջվեն"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Հաջորդ փորձի ընթացքում սխալ նախշ մուտքագրելու դեպքում օգտատերը կջնջվի"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Հաջորդ փորձի ընթացքում սխալ PIN մուտքագրելու դեպքում օգտատերը կջնջվի"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Հաջորդ փորձի ընթացքում սխալ գաղտնաբառ մուտքագրելու դեպքում այս օգտատերը կջնջվի"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Հաջորդ փորձի ընթացքում սխալ նախշ մուտքագրելու դեպքում ձեր աշխատանքային պրոֆիլը և դրա տվյալները կջնջվեն"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Հաջորդ փորձի ընթացքում սխալ PIN մուտքագրելու դեպքում աշխատանքային պրոֆիլը և դրա տվյալները կջնջվեն"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Հաջորդ փորձի ընթացքում սխալ գաղտնաբառ մուտքագրելու դեպքում աշխատանքային պրոֆիլը և դրա տվյալները կջնջվեն"</string>
-    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
-    <skip />
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Չափից շատ սխալ փորձեր: Այս սարքի տվյալները կջնջվեն:"</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Չափից շատ սխալ փորձեր։ Oգտատերը կջնջվի:"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Չափից շատ սխալ փորձեր։ Աշխատանքային պրոֆիլը և դրա տվյալները կջնջվեն:"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Փակել"</string>
@@ -1806,8 +1802,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Էկրանի ընթերցիչներ, էկրան, փոխազդման կառավարման տարրեր"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Տեսողության կարգավորումներ"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Օգտվեք հատուկ հնարավորություններից՝ հարմար աշխատանքի համար։ Այս գործառույթները կարող եք փոփոխել սարքի կարգավորումներում։"</string>
-    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"Մեծացնել տառաչափը"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Էկրանի ընթերցիչներ"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Աուդիո և էկրանի տեքստ"</string>
     <string name="display_category_title" msgid="685461049938269166">"Էկրան"</string>
@@ -2086,7 +2081,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"Մարտկոցի ընդհանուր լիցքի <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Օգտագործումը վերջին լիցքավորումից հետո"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Վերջին լրիվ լիցքավորումը"</string>
-    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
+    <!-- no translation found for battery_footer_summary (67169726550144016) -->
     <skip />
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Ակտիվ օգտագործման ժամանակը"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Ֆոնում"</string>
@@ -2744,7 +2739,7 @@
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Լեզուներ, ժամանակ, պահուստավորում, թարմացումներ"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Կարգավորումներ"</string>
     <string name="search_menu" msgid="6283419262313758339">"Որոնման կարգավորումներ"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"Որոնման կարգավորումներ"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"Կարգավորումների որոնում"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, ցանցային կապ"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"տեքստային հաղորդագրություն, կարճ հաղորդագրությունների ուղարկում, հաղորդագրություններ, հաղորդակցում"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"բջջային, շարժական, բջջային օպերատոր, անլար, տվյալներ, 4g, 3g, 2g, lte"</string>
@@ -3544,8 +3539,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Ավտոմատ"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ձեռքով"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Ազատել տարածք հիմա"</string>
-    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="8155668859866666018">"Ժեստեր"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Հեռախոսի կառավարման արագ ժեստեր"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Պլանշետի կառավարման արագ ժեստեր"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Սարքի կառավարման արագ ժեստեր"</string>
@@ -3603,6 +3597,12 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Ավտոմատ կերպով համաժամեցնել աշխատանքային տվյալները"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Թույլ տալ հավելվածներին ավտոմատ կերպով թարմացնել տվյալները"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Հաշվի համաժամացում"</string>
+    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
+    <skip />
+    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
+    <skip />
+    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
+    <skip />
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Կառավարվող սարքի տվյալները"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Ձեր կազմակերպության կողմից կառավարվող փոփոխություններ և կարգավորումներ"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> կազմակերպության կողմից կառավարվող փոփոխություններ և կարգավորումներ"</string>
@@ -3699,7 +3699,6 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"Ֆիլմեր և սերիալներ"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Օպերատորի նախապատրաստման տվյալներ"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Գործարկել օպերատորի նախապատրաստումը"</string>
-    <!-- no translation found for new_device_suggestion_title (698847081680980774) -->
-    <skip />
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"Ի՞նչ նորույթներ կան:"</string>
     <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Փորձեք լավագույն 5 գործառույթները"</string>
 </resources>

@@ -539,20 +539,16 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Změnit bezpečnostní heslo"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Zkuste to znovu. Pokus <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> z <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Vaše data budou smazána"</string>
-    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
-    <skip />
-    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
-    <skip />
-    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
-    <skip />
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"Pokud při příštím pokusu zadáte nesprávné gesto, data v tomto zařízení budou smazána"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"Pokud při příštím pokusu zadáte nesprávný PIN, data v tomto zařízení budou smazána"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"Pokud při příštím pokusu zadáte nesprávné heslo, data v tomto zařízení budou smazána"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Pokud při příštím pokusu zadáte nesprávné gesto, tento uživatel bude smazán"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Pokud při příštím pokusu zadáte nesprávný PIN, tento uživatel bude smazán"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Pokud při příštím pokusu zadáte nesprávné heslo, tento uživatel bude smazán"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Pokud při příštím pokusu zadáte nesprávné gesto, váš pracovní profil a přidružená data budou smazána"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Pokud při příštím pokusu zadáte nesprávný PIN, váš pracovní profil a přidružená data budou smazána"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Pokud při příštím pokusu zadáte nesprávné heslo, váš pracovní profil a přidružená data budou smazána"</string>
-    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
-    <skip />
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Příliš mnoho neplatných pokusů. Data v tomto zařízení budou smazána."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Příliš mnoho neplatných pokusů. Tento uživatel bude smazán."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Příliš mnoho neplatných pokusů. Tento pracovní profil a přidružená data budou smazána."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Zavřít"</string>
@@ -1836,8 +1832,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Čtečky obrazovky, zobrazení, ovládací prvky interakce"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Nastavení pro slabozraké"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Toto zařízení můžete přizpůsobit svým potřebám. Funkce přístupnosti lze později změnit v Nastavení."</string>
-    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"Zvětšit písmo"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Čtečky obrazovky"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Zvuk a text na obrazovce"</string>
     <string name="display_category_title" msgid="685461049938269166">"Zobrazení"</string>
@@ -2130,7 +2125,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> z celkové kapacity baterie"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Přehled od posledního úplného nabití"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Poslední úplné nabití"</string>
-    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
+    <!-- no translation found for battery_footer_summary (67169726550144016) -->
     <skip />
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Při aktivním používání"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Na pozadí"</string>
@@ -2797,8 +2792,8 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Výchozí aplikace"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Jazyky, čas, zálohování, aktualizace"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Nastavení"</string>
-    <string name="search_menu" msgid="6283419262313758339">"Nastavení vyhledávání"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"Vyhledávání nastavení"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Prohledat nastavení"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"Prohledat nastavení"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, síť, připojení"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"textová zpráva, posílání SMS, zprávy, odesílání zpráv"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobilní síť, mobilní operátor, mobilní data, bezdrátové, data, 4g, 3g, 2g, lte"</string>
@@ -3642,8 +3637,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automaticky"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ruční"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Uvolnit místo"</string>
-    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="8155668859866666018">"Gesto"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Rychlá gesta k ovládání telefonu"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Rychlá gesta k ovládání tabletu"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Rychlá gesta k ovládání zařízení"</string>
@@ -3701,6 +3695,12 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Automaticky synchronizovat pracovní data"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Nechat aplikace automaticky aktualizovat data"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Synchronizace účtů"</string>
+    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
+    <skip />
+    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
+    <skip />
+    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
+    <skip />
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Informace o spravovaném zařízení"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Změny a nastavení spravuje organizace"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"Změny a nastavení spravuje organizace <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
@@ -3811,7 +3811,6 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"Aplikace pro filmy a TV"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informace o zprovoznění služby u operátora"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Spustit zprovoznění služby u operátora"</string>
-    <!-- no translation found for new_device_suggestion_title (698847081680980774) -->
-    <skip />
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"Co je nové a zajímavé?"</string>
     <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Vyzkoušejte 5 nejpopulárnějších funkcí"</string>
 </resources>
