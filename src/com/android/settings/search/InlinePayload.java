@@ -21,6 +21,7 @@ import android.content.Intent;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.provider.Settings;
 import com.android.internal.annotations.VisibleForTesting;
 
 /**
@@ -38,11 +39,6 @@ public abstract class InlinePayload extends ResultPayload {
     final String mSettingKey;
 
     /**
-     * The UI type for the inline result.
-     */
-    @PayloadType final int mInlineType;
-
-    /**
      * Defines where the Setting is stored.
      */
     @SettingsSource final int mSettingSource;
@@ -54,16 +50,14 @@ public abstract class InlinePayload extends ResultPayload {
 
     /**
      * @param key uniquely identifies the stored setting.
-     * @param payloadType of the setting being stored.
      * @param source of the setting. Used to determine where to get and set the setting.
      * @param intent to the setting page.
      * @param isDeviceSupported is true when the setting is valid for the given device.
      */
-    public InlinePayload(String key, @PayloadType int payloadType, @SettingsSource int source,
-            Intent intent, boolean isDeviceSupported) {
+    public InlinePayload(String key, @SettingsSource int source, Intent intent,
+            boolean isDeviceSupported) {
         super(intent);
         mSettingKey = key;
-        mInlineType = payloadType;
         mSettingSource = source;
         mIsDeviceSupported = isDeviceSupported;
     }
@@ -71,7 +65,6 @@ public abstract class InlinePayload extends ResultPayload {
     InlinePayload(Parcel parcel) {
         super((Intent) parcel.readParcelable(Intent.class.getClassLoader()));
         mSettingKey = parcel.readString();
-        mInlineType = parcel.readInt();
         mSettingSource = parcel.readInt();
         mIsDeviceSupported = parcel.readInt() == TRUE;
     }
@@ -80,10 +73,12 @@ public abstract class InlinePayload extends ResultPayload {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(mSettingKey);
-        dest.writeInt(mInlineType);
         dest.writeInt(mSettingSource);
         dest.writeInt(mIsDeviceSupported ? TRUE : FALSE);
     }
+
+    @Override
+    @PayloadType public abstract int getType();
 
     /**
      * @returns the status of the underlying setting. See {@link ResultPayload.Availability} for
@@ -97,15 +92,63 @@ public abstract class InlinePayload extends ResultPayload {
     }
 
     /**
+     * Checks if the input is valid for the given setting.
+     *
+     * @param input The number to be get or set for the setting.
+     * @return {@param input} mapped to the public-facing API for settings.
+     * @throws IllegalArgumentException when the input is not valid for the given inline type.
+     */
+    protected abstract int standardizeInput(int input) throws IllegalArgumentException;
+
+    /**
      * @returns the current value of the setting.
      */
-    public abstract int getValue(Context context);
+    public int getValue(Context context) {
+        int settingsValue = -1;
+        switch(mSettingSource) {
+            case SettingsSource.SECURE:
+                settingsValue = Settings.Secure.getInt(context.getContentResolver(),
+                        mSettingKey, -1);
+                break;
+            case SettingsSource.SYSTEM:
+                settingsValue = Settings.System.getInt(context.getContentResolver(),
+                        mSettingKey, -1);
+                break;
+
+            case SettingsSource.GLOBAL:
+                settingsValue = Settings.Global.getInt(context.getContentResolver(),
+                        mSettingKey, -1);
+                break;
+        }
+
+        if (settingsValue == -1) {
+            throw new IllegalStateException("Unable to find setting from uri: "
+                    + mSettingKey.toString());
+        }
+
+        return standardizeInput(settingsValue);
+    }
 
     /**
      * Attempts to set the setting value.
      *
-     * @param newValue is the requested new value for the setting.
+     * @param newValue is the requested value for the setting.
      * @returns true when the setting was changed, and false otherwise.
      */
-    public abstract boolean setValue(Context context, int newValue);
+    public boolean setValue(Context context, int newValue) {
+        newValue = standardizeInput(newValue);
+
+        switch(mSettingSource) {
+            case SettingsSource.GLOBAL:
+                return Settings.Global.putInt(context.getContentResolver(), mSettingKey, newValue);
+            case SettingsSource.SECURE:
+                return Settings.Secure.putInt(context.getContentResolver(), mSettingKey, newValue);
+            case SettingsSource.SYSTEM:
+                return Settings.System.putInt(context.getContentResolver(), mSettingKey, newValue);
+            case SettingsSource.UNKNOWN:
+                return false;
+        }
+
+        return false;
+    }
 }

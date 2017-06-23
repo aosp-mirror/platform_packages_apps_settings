@@ -64,7 +64,7 @@ public class InlineSwitchPayloadTest {
         InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1, intent, true);
         final Intent retainedIntent = payload.getIntent();
         assertThat(payload.mSettingKey).isEqualTo(uri);
-        assertThat(payload.mInlineType).isEqualTo(type);
+        assertThat(payload.getType()).isEqualTo(type);
         assertThat(payload.mSettingSource).isEqualTo(source);
         assertThat(payload.isStandard()).isTrue();
         assertThat(payload.getAvailability()).isEqualTo(ResultPayload.Availability.AVAILABLE);
@@ -80,102 +80,23 @@ public class InlineSwitchPayloadTest {
         final String intentVal = "value";
         final Intent intent = new Intent();
         intent.putExtra(intentKey, intentVal);
-
         Parcel parcel = Parcel.obtain();
         parcel.writeParcelable(intent, 0);
         parcel.writeString(uri);
-        parcel.writeInt(type);
         parcel.writeInt(source);
         parcel.writeInt(InlineSwitchPayload.TRUE);
         parcel.writeInt(InlineSwitchPayload.TRUE);
         parcel.setDataPosition(0);
 
         InlineSwitchPayload payload = InlineSwitchPayload.CREATOR.createFromParcel(parcel);
+
         final Intent builtIntent = payload.getIntent();
         assertThat(payload.mSettingKey).isEqualTo(uri);
-        assertThat(payload.mInlineType).isEqualTo(type);
+        assertThat(payload.getType()).isEqualTo(type);
         assertThat(payload.mSettingSource).isEqualTo(source);
         assertThat(payload.isStandard()).isTrue();
         assertThat(payload.getAvailability()).isEqualTo(Availability.AVAILABLE);
         assertThat(builtIntent.getStringExtra(intentKey)).isEqualTo(intentVal);
-    }
-
-    @Test
-    public void testGetSecure_returnsSecureSetting() {
-        InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SECURE,
-                STANDARD_ON, null /* intent */, true);
-        int currentValue = 1;
-        Settings.Secure.putInt(mContext.getContentResolver(), DUMMY_SETTING, currentValue);
-
-        int newValue = payload.getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
-    }
-
-    @Test
-    public void testGetGlobal_returnsGlobalSetting() {
-        InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.GLOBAL,
-                STANDARD_ON, null /* intent */, true);
-        int currentValue = 1;
-        Settings.Global.putInt(mContext.getContentResolver(), DUMMY_SETTING, currentValue);
-
-        int newValue = payload.getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
-    }
-
-    @Test
-    public void testGetSystem_returnsSystemSetting() {
-        InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SYSTEM,
-                STANDARD_ON, null /* intent */, true);
-        int currentValue = 1;
-        Settings.System.putInt(mContext.getContentResolver(), DUMMY_SETTING, currentValue);
-
-        int newValue = payload.getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
-    }
-
-    @Test
-    public void testSetSecure_updatesSecureSetting() {
-        InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SECURE,
-                STANDARD_ON, null /* intent */, true);
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, SCREEN_BRIGHTNESS_MODE, 0);
-
-        payload.setValue(mContext, newValue);
-        int updatedValue = Settings.System.getInt(resolver, DUMMY_SETTING, -1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    public void testSetGlobal_updatesGlobalSetting() {
-        InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.GLOBAL,
-                STANDARD_ON, null /* intent */, true);
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Global.putInt(resolver, SCREEN_BRIGHTNESS_MODE, 0);
-
-        payload.setValue(mContext, newValue);
-        int updatedValue = Settings.Global.getInt(resolver, DUMMY_SETTING, -1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    public void testSetSystem_updatesSystemSetting() {
-        InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SYSTEM,
-                STANDARD_ON, null /* intent */, true);
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.System.putInt(resolver, SCREEN_BRIGHTNESS_MODE, 0);
-
-        payload.setValue(mContext, newValue);
-        int updatedValue = Settings.System.getInt(resolver, DUMMY_SETTING, -1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
     }
 
     @Test

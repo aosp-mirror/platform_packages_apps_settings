@@ -113,6 +113,9 @@ public class CursorToSearchResultConverter {
                 case ResultPayload.PayloadType.INLINE_SWITCH:
                     return ResultPayloadUtils.unmarshall(marshalledPayload,
                             InlineSwitchPayload.CREATOR);
+                case ResultPayload.PayloadType.INLINE_LIST:
+                    return ResultPayloadUtils.unmarshall(marshalledPayload,
+                            InlineListPayload.CREATOR);
             }
         } catch (BadParcelableException e) {
             Log.w(TAG, "Error creating parcelable: " + e);
