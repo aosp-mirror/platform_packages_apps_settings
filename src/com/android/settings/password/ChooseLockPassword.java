@@ -339,6 +339,16 @@ public class ChooseLockPassword extends SettingsActivity {
             mNextButton = (Button) view.findViewById(R.id.next_button);
             mNextButton.setOnClickListener(this);
 
+            if (mForFingerprint) {
+                TextView fingerprintBackupMessage =
+                        view.findViewById(R.id.fingerprint_backup_message);
+                if (fingerprintBackupMessage != null) {
+                    fingerprintBackupMessage.setVisibility(View.VISIBLE);
+                    fingerprintBackupMessage
+                            .setText(R.string.setup_lock_settings_picker_fingerprint_message);
+                }
+            }
+
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mRequestedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mRequestedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mRequestedQuality;
