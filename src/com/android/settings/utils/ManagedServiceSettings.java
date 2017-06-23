@@ -17,6 +17,7 @@
 package com.android.settings.utils;
 
 import android.annotation.Nullable;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -91,8 +92,12 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     @Override
     public void onResume() {
         super.onResume();
-        mServiceListing.reload();
-        mServiceListing.setListening(true);
+        if (!ActivityManager.isLowRamDeviceStatic()) {
+            mServiceListing.reload();
+            mServiceListing.setListening(true);
+        } else {
+            setEmptyText(R.string.disabled_low_ram_device);
+        }
     }
 
     @Override
@@ -230,7 +235,6 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     public static class Config {
         public String tag;
         public String setting;
-        public String secondarySetting;
         public String intentAction;
         public String permission;
         public String noun;
