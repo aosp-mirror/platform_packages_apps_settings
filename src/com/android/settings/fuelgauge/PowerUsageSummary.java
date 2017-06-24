@@ -63,6 +63,7 @@ import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment.AnomalyDialogListener;
 import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
@@ -661,9 +662,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void initAnomalyDetectionIfPossible() {
-        if (mPowerFeatureProvider.isAnomalyDetectionEnabled()) {
+        if (getAnomalyDetectionPolicy().isAnomalyDetectionEnabled()) {
             getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
         }
+    }
+
+    @VisibleForTesting
+    AnomalyDetectionPolicy getAnomalyDetectionPolicy() {
+        return new AnomalyDetectionPolicy(getContext());
     }
 
     @VisibleForTesting
