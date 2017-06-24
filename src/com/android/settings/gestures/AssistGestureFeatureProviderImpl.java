@@ -38,11 +38,6 @@ public class AssistGestureFeatureProviderImpl implements AssistGestureFeaturePro
     }
 
     @Override
-    public int getPreferenceResourceId() {
-        return R.xml.assist_gesture_settings;
-    }
-
-    @Override
     public List<AbstractPreferenceController> getControllers(Context context, Lifecycle lifecycle) {
         return new ArrayList<>();
     }
