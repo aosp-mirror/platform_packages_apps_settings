@@ -124,53 +124,6 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testOnBindViewHolder_spacer_noSuggestions_noConditions() {
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNull();
-    }
-
-    @Test
-    public void testOnBindViewHolder_spacer_suggestion_noConditions() {
-        setupSuggestions(makeSuggestions("pkg1"));
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNotNull();
-        assertThat(holder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
-    }
-
-    @Test
-    public void testOnBindViewHolder_spacer_noSuggestion_condition() {
-        makeCondition();
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNotNull();
-        assertThat(holder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
-    }
-
-    @Test
-    public void testOnBindViewHolder_spacer_suggestion_condition() {
-        setupSuggestions(makeSuggestions("pkg1"));
-        makeCondition();
-        makeCategory();
-        DashboardAdapter.DashboardItemHolder holder = setupSpacer();
-
-        mDashboardAdapter.onBindViewHolder(holder, 0);
-
-        assertThat(holder.itemView.getBackground()).isNotNull();
-        assertThat(holder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
-    }
-
-    @Test
     public void testSuggestionsLogs_NotExpanded() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
         verify(mFactory.metricsFeatureProvider, times(2)).action(
@@ -388,7 +341,7 @@ public class DashboardAdapterTest {
                 new FrameLayout(RuntimeEnvironment.application),
                 R.layout.suggestion_tile_card);
 
-        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 2);
+        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 1);
         assertThat(textView.getParent()).isSameAs(mSuggestionHolder.itemView);
         mSuggestionHolder.itemView.performClick();
 
@@ -413,7 +366,7 @@ public class DashboardAdapterTest {
                 new FrameLayout(context),
                 R.layout.suggestion_tile_card);
 
-        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 2);
+        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 1);
 
         mSuggestionHolder.itemView.performClick();
         assertThat(ShadowApplication.getInstance().getNextStartedActivity()).isNull();
@@ -442,8 +395,8 @@ public class DashboardAdapterTest {
                 new FrameLayout(context),
                 R.layout.suggestion_tile_card);
 
-        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 2);
-        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 2);
+        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 1);
+        mDashboardAdapter.onBindViewHolder(mSuggestionHolder, 1);
 
         ViewGroup itemView = (ViewGroup) mSuggestionHolder.itemView;
         assertThat(itemView.getChildCount()).isEqualTo(1);
@@ -508,26 +461,5 @@ public class DashboardAdapterTest {
         mSuggestionHolder = mDashboardAdapter.onCreateViewHolder(
                 new FrameLayout(RuntimeEnvironment.application),
                 mDashboardAdapter.getItemViewType(1));
-    }
-
-    private void makeCondition() {
-        final List<Condition> conditions = new ArrayList<>();
-        Condition condition = mock(Condition.class);
-        when(condition.shouldShow()).thenReturn(true);
-        conditions.add(condition);
-        mDashboardAdapter.setConditions(conditions);
-    }
-
-    private void makeCategory() {
-        List<DashboardCategory> categories = new ArrayList<>();
-        categories.add(new DashboardCategory());
-        mDashboardAdapter.setCategory(categories);
-    }
-
-    private DashboardAdapter.DashboardItemHolder setupSpacer() {
-        Context context = RuntimeEnvironment.application;
-        final View view = LayoutInflater.from(context)
-                .inflate(R.layout.dashboard_header_spacer, new LinearLayout(context), false);
-        return new DashboardAdapter.DashboardItemHolder(view);
     }
 }
