@@ -44,23 +44,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public void setUpSearchMenu(Menu menu, final Activity activity) {
-        if (menu == null || activity == null) {
-            return;
-        }
-        String menuTitle = activity.getString(R.string.search_menu);
-        MenuItem menuItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE, menuTitle)
-                .setIcon(R.drawable.ic_search_24dp)
-                .setOnMenuItemClickListener(item -> {
-                    Intent intent = new Intent(activity, SearchActivity.class);
-                    activity.startActivity(intent);
-                    return true;
-                });
-
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-    }
-
-    @Override
     public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
         return new DatabaseResultLoader(context, query, getSiteMapManager());
     }
