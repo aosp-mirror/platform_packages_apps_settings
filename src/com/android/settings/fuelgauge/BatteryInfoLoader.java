@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import com.android.internal.os.BatteryStatsHelper;
@@ -57,9 +58,12 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
         final long elapsedRealtimeUs = batteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
         BatteryInfo batteryInfo;
 
-        // Get enhanced prediction if available, otherwise use the old prediction code
+        // 0 means we are discharging, anything else means charging
+        boolean discharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+        // Get enhanced prediction if available and discharging, otherwise use the old code
         Cursor cursor = null;
-        if (powerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
+        if (discharging && powerUsageFeatureProvider != null &&
+                powerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
             final Uri queryUri = powerUsageFeatureProvider.getEnhancedBatteryPredictionUri();
             cursor = context.getContentResolver().query(queryUri, null, null, null, null);
         }
@@ -72,7 +76,8 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
             BatteryStats stats = mStatsHelper.getStats();
             batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                     elapsedRealtimeUs, false /* shortString */,
-                    stats.computeBatteryTimeRemaining(elapsedRealtimeUs), false /* basedOnUsage */);
+                    discharging ? 0 : stats.computeBatteryTimeRemaining(elapsedRealtimeUs),
+                    false /* basedOnUsage */);
         }
 
         return batteryInfo;

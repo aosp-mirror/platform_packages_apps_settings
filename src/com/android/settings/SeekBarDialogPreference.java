@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import com.android.settingslib.CustomDialogPreference;
+
 /**
  * Based on frameworks/base/core/java/android/preference/SeekBarDialogPreference.java
  * except uses support lib preferences.

@@ -63,11 +63,6 @@ public interface PowerUsageFeatureProvider {
     boolean isPowerAccountingToggleEnabled();
 
     /**
-     * Check whether the anomaly detection is enabled
-     */
-    boolean isAnomalyDetectionEnabled();
-
-    /**
      * Returns an improved prediction for battery time remaining.
      */
     long getEnhancedBatteryPrediction(Context context);
@@ -86,12 +81,6 @@ public interface PowerUsageFeatureProvider {
      * Returns the the estimate in the cursor as a long or -1 if the cursor is null
      */
     long getTimeRemainingEstimate(Cursor cursor);
-
-    /**
-     * Check whether a specific anomaly detector is enabled
-     */
-    //TODO(b/62096650): remove this method and use AnomalyDetectionPolicy instead
-    boolean isAnomalyDetectorEnabled(@Anomaly.AnomalyType int type);
 
     /**
      * Checks whether debugging should be enabled for battery estimates.
