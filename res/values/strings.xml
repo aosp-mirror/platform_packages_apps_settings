@@ -883,7 +883,7 @@
     <string name="security_settings_fingerprint_enroll_done">Done</string>
     <!-- Dialog title for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_title">Whoops, that\u2019s not the sensor</string>
-    <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=45] -->
+    <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Touch the sensor on the back of your phone. Use your index finger.</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
     <string name="security_settings_fingerprint_enroll_error_dialog_title">Enrollment was not completed</string>
@@ -4163,27 +4163,6 @@
 
     <!-- Text for checkbox that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
     <string name="allow_bind_app_widget_activity_always_allow_bind">Always allow <xliff:g id="widget_host_name">%1$s</xliff:g> to create widgets and access their data</string>
-
-    <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_days"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m <xliff:g id="seconds">%4$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_hours"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>m <xliff:g id="seconds">%3$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_minutes"><xliff:g id="minutes">%1$d</xliff:g>m <xliff:g id="seconds">%2$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
-    <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_days_no_seconds"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m</string>
-
-    <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_hours_no_seconds"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>m</string>
-
-    <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_minutes_no_seconds"><xliff:g id="minutes">%1$d</xliff:g>m</string>
 
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
@@ -8984,4 +8963,7 @@
 
     <!-- The divider symbol between different parts of the notification header including spaces. not translatable [CHAR LIMIT=3] -->
     <string name="notification_header_divider_symbol_with_spaces" translatable="false">" • "</string>
+
+    <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
+    <string name="disabled_low_ram_device">This feature is not available on this device</string>
 </resources>

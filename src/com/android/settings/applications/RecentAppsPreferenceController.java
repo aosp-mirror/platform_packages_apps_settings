@@ -36,6 +36,7 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -234,10 +235,10 @@ public class RecentAppsPreferenceController extends PreferenceController
             pref.setKey(pkgName);
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
-            pref.setSummary(DateUtils.getRelativeTimeSpanString(stat.getLastTimeUsed(),
-                    System.currentTimeMillis(),
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.FORMAT_ABBREV_RELATIVE));
+            pref.setSummary(TextUtils.expandTemplate(
+                mContext.getResources().getText(R.string.recent_app_summary),
+                Utils.formatElapsedTime(mContext,
+                    System.currentTimeMillis() - stat.getLastTimeUsed(), false)));
             pref.setOrder(i);
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,

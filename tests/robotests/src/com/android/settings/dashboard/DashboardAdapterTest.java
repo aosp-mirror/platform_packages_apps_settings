@@ -17,6 +17,8 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,7 +33,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Icon;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,10 +49,10 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -62,8 +66,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -102,6 +106,7 @@ public class DashboardAdapterTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
         when(mFactory.suggestionsFeatureProvider
                 .getSuggestionIdentifier(any(Context.class), any(Tile.class)))
                 .thenAnswer(invocation -> {
@@ -445,7 +450,7 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestioDismissed_notOnlySuggestion_doNothing() {
+    public void testSuggestionDismissed_notOnlySuggestion_doNothing() {
         final DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null, null));
         adapter.setCategoriesAndSuggestions(
                 new ArrayList<>(), makeSuggestions("pkg1", "pkg2", "pkg3"));
@@ -459,7 +464,7 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestioDismissed_onlySuggestion_updateDashboardData() {
+    public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null, null));
         adapter.setCategoriesAndSuggestions(new ArrayList<>(), makeSuggestions("pkg1"));
         final DashboardData dashboardData = adapter.mDashboardData;
@@ -469,6 +474,22 @@ public class DashboardAdapterTest {
 
         assertThat(adapter.mDashboardData).isNotEqualTo(dashboardData);
         verify(adapter).notifyDashboardDataChanged(any());
+    }
+
+    @Test
+    public void testSetCategoriesAndSuggestions_iconTinted() {
+        TypedArray mockTypedArray = mock(TypedArray.class);
+        doReturn(mockTypedArray).when(mContext).obtainStyledAttributes(any(int[].class));
+        doReturn(0x89000000).when(mockTypedArray).getColor(anyInt(), anyInt());
+
+        List<Tile> packages = makeSuggestions("pkg1");
+        Icon mockIcon = mock(Icon.class);
+        packages.get(0).isIconTintable = true;
+        packages.get(0).icon = mockIcon;
+
+        mDashboardAdapter.setCategoriesAndSuggestions(Collections.emptyList(), packages);
+
+        verify(mockIcon).setTint(eq(0x89000000));
     }
 
     private List<Tile> makeSuggestions(String... pkgNames) {

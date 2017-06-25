@@ -45,6 +45,7 @@ import java.util.List;
  */
 public class BatteryUtils {
     public static final int UID_NULL = -1;
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.FOREGROUND,
             StatusType.BACKGROUND,
@@ -171,7 +172,9 @@ public class BatteryUtils {
         for (int i = 0, size = sippers.size(); i < size; i++) {
             final BatteryStats.Uid uid = sippers.get(i).uidObj;
             if (uid != null) {
-                final long timeMs = getForegroundActivityTotalTimeMs(uid, rawRealtimeMs);
+                final long timeMs = Math.min(getForegroundActivityTotalTimeMs(uid, rawRealtimeMs),
+                        getProcessTimeMs(StatusType.FOREGROUND, uid,
+                                BatteryStats.STATS_SINCE_CHARGED));
                 activityTimeArray.put(uid.getUid(), timeMs);
                 totalActivityTimeMs += timeMs;
             }
@@ -248,7 +251,6 @@ public class BatteryUtils {
      * @return the package name. If there are multiple packages related to
      * given id, return the first one. Or return null if there are no known
      * packages with the given id
-     *
      * @see PackageManager#getPackagesForUid(int)
      */
     public String getPackageName(int uid) {

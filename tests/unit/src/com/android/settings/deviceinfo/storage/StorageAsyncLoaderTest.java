@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
+import android.net.TrafficStats;
 import android.os.UserHandle;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
@@ -55,6 +56,7 @@ public class StorageAsyncLoaderTest {
     private static final int SECONDARY_USER_ID = 10;
     private static final String PACKAGE_NAME_1 = "com.blah.test";
     private static final String PACKAGE_NAME_2 = "com.blah.test2";
+    private static final long DEFAULT_QUOTA = 64 * TrafficStats.MB_IN_BYTES;
 
     @Mock
     private StorageStatsSource mSource;
@@ -81,6 +83,7 @@ public class StorageAsyncLoaderTest {
         mUsers = new ArrayList<>();
         mUsers.add(info);
         when(mUserManager.getUsers()).thenReturn(mUsers);
+        when(mSource.getCacheQuotaBytes(anyString(), anyInt())).thenReturn(DEFAULT_QUOTA);
     }
 
     @Test
@@ -120,13 +123,13 @@ public class StorageAsyncLoaderTest {
     }
 
     @Test
-    public void testCacheIsIgnored() throws Exception {
+    public void testCacheIsNotIgnored() throws Exception {
         addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(111L);
     }
 
     @Test
@@ -155,7 +158,7 @@ public class StorageAsyncLoaderTest {
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(111L);
     }
 
     @Test
@@ -207,12 +210,23 @@ public class StorageAsyncLoaderTest {
         assertThat(result.get(SECONDARY_USER_ID).videoAppsSize).isEqualTo(10L);
     }
 
+    @Test
+    public void testCacheOveragesAreCountedAsFree() throws Exception {
+        addPackage(PACKAGE_NAME_1, DEFAULT_QUOTA + 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(DEFAULT_QUOTA + 11);
+    }
+
     private ApplicationInfo addPackage(String packageName, long cacheSize, long codeSize,
             long dataSize, int category) throws Exception {
         StorageStatsSource.AppStorageStats storageStats =
                 mock(StorageStatsSource.AppStorageStats.class);
         when(storageStats.getCodeBytes()).thenReturn(codeSize);
-        when(storageStats.getDataBytes()).thenReturn(dataSize);
+        when(storageStats.getDataBytes()).thenReturn(dataSize + cacheSize);
+        when(storageStats.getCacheBytes()).thenReturn(cacheSize);
         when(mSource.getStatsForPackage(anyString(), eq(packageName), any(UserHandle.class)))
                 .thenReturn(storageStats);
 
