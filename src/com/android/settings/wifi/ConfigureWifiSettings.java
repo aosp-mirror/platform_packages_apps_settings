@@ -61,7 +61,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
         super.onAttach(context);
         mProgressiveDisclosureMixin.setTileLimit(
             mUseOpenWifiPreferenceController.isAvailable() ? 3 : 2);
-        ((SettingsActivity) getActivity()).setDisplaySearchMenu(true);
     }
 
     @Override

@@ -56,18 +56,6 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
-    public void testPassNull_NoError() {
-        mProvider.setUpSearchMenu(null, null);
-    }
-
-    @Test
-    public void testSetUpMenu_HasItemAdded() {
-        mProvider.setUpSearchMenu(menu, mActivity);
-
-        verify(menu).add(anyInt(), anyInt(), anyInt(), anyString());
-    }
-
-    @Test
     public void getSiteMapManager_shouldCacheInstance() {
         final SiteMapManager manager1 = mProvider.getSiteMapManager();
         final SiteMapManager manager2 = mProvider.getSiteMapManager();

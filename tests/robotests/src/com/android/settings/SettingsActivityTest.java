@@ -67,14 +67,9 @@ public class SettingsActivityTest {
     private Bitmap mBitmap;
     private SettingsActivity mActivity;
 
-    private FakeFeatureFactory mFeatureFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
 
         mActivity = spy(new SettingsActivity());
         doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
@@ -99,50 +94,12 @@ public class SettingsActivityTest {
     }
 
     @Test
-    public void testCreateOptionsMenu_setsUpSearch() {
-        ReflectionHelpers.setField(mActivity, "mSearchFeatureProvider",
-                mFeatureFactory.getSearchFeatureProvider());
-        mActivity.mDisplaySearch = true;
-        mActivity.onCreateOptionsMenu(null);
-
-        verify(mFeatureFactory.getSearchFeatureProvider()).setUpSearchMenu(nullable(Menu.class),
-                nullable(Activity.class));
-    }
-
-    @Test
-    public void testSaveState_DisplaySearchSaved() {
-        mActivity.mDisplaySearch = true;
-        Bundle bundle = new Bundle();
-        mActivity.saveState(bundle);
-
-        assertThat((boolean) bundle.get(SettingsActivity.SAVE_KEY_SHOW_SEARCH)).isTrue();
-    }
-
-    @Test
     public void testSaveState_EnabledHomeSaved() {
         mActivity.mDisplayHomeAsUpEnabled = true;
         Bundle bundle = new Bundle();
         mActivity.saveState(bundle);
 
         assertThat((boolean) bundle.get(SettingsActivity.SAVE_KEY_SHOW_HOME_AS_UP)).isTrue();
-    }
-
-    @Test
-    public void testRestoreState_DisplaySearchRestored() {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(SettingsActivity.SAVE_KEY_SHOW_SEARCH, true);
-        mActivity.onRestoreInstanceState(bundle);
-
-        assertThat(mActivity.mDisplaySearch).isTrue();
-    }
-
-    @Test
-    public void testRestoreState_EnabledHomeRestored() {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(SettingsActivity.SAVE_KEY_SHOW_SEARCH, true);
-        mActivity.onRestoreInstanceState(bundle);
-
-        assertThat(mActivity.mDisplaySearch).isTrue();
     }
 
     @Test
