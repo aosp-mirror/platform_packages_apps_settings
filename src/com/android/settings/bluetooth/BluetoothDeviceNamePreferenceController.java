@@ -111,7 +111,8 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_DEVICE_NAME.equals(preference.getKey())) {
-            new BluetoothNameDialogFragment().show(mFragment.getFragmentManager(), "rename device");
+            LocalDeviceNameDialogFragment.newInstance()
+                    .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;
         }
 

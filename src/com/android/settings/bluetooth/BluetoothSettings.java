@@ -313,7 +313,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
             // New version - uses a separate screen.
             args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
                     device.getDevice().getAddress());
-            BluetoothDeviceDetailsFragment fragment = new BluetoothDeviceDetailsFragment();
             final SettingsActivity activity =
                     (SettingsActivity) BluetoothSettings.this.getActivity();
             activity.startPreferencePanel(this,
