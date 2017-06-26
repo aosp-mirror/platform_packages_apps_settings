@@ -49,8 +49,7 @@ public class AssistGestureSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return FeatureFactory.getFactory(getContext())
-                .getAssistGestureFeatureProvider().getPreferenceResourceId();
+        return R.xml.assist_gesture_settings;
     }
 
     @Override

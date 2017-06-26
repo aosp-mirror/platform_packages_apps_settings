@@ -57,7 +57,6 @@ public class AssistGestureSettingsTest {
 
     @Test
     public void testGetPreferenceScreenResId() {
-        when(mFeatureProvider.getPreferenceResourceId()).thenReturn(R.xml.assist_gesture_settings);
         assertThat(mSettings.getPreferenceScreenResId())
                 .isEqualTo(R.xml.assist_gesture_settings);
     }
@@ -76,7 +75,6 @@ public class AssistGestureSettingsTest {
                         ShadowApplication.getInstance().getApplicationContext(),
                         true /* enabled */);
 
-        when(mFeatureProvider.getPreferenceResourceId()).thenReturn(R.xml.assist_gesture_settings);
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
     }

@@ -32,9 +32,6 @@ public interface AssistGestureFeatureProvider {
     /** Returns true if the sensor is available. */
     boolean isSensorAvailable(Context context);
 
-    /** Returns the resource */
-    int getPreferenceResourceId();
-
     /** Returns a list of additional preference controllers */
     List<PreferenceController> getControllers(Context context, Lifecycle lifecycle);
 
