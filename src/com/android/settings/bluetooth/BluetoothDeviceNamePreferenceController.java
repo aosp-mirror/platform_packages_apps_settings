@@ -37,7 +37,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
@@ -111,7 +110,8 @@ public class BluetoothDeviceNamePreferenceController extends PreferenceControlle
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_DEVICE_NAME.equals(preference.getKey())) {
-            new BluetoothNameDialogFragment().show(mFragment.getFragmentManager(), "rename device");
+            LocalDeviceNameDialogFragment.newInstance()
+                    .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;
         }
 
