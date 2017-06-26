@@ -435,9 +435,9 @@ public class SearchFragmentTest {
                 nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
                 eq("test_setting"),
-                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT)),
-                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK)),
-                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH)));
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_COUNT)),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_RANK)),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_QUERY_LENGTH)));
 
         verify(mFeatureFactory.searchFeatureProvider).searchResultClicked(nullable(Context.class),
                 nullable(String.class), eq(searchResult));
