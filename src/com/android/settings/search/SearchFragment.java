@@ -392,13 +392,13 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             taggedData.addAll(Arrays.asList(logTaggedData));
         }
         taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT,
+                MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_COUNT,
                 mSearchAdapter.getItemCount()));
         taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK,
+                MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_RANK,
                 resultViewHolder.getAdapterPosition()));
         taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH,
+                MetricsEvent.FIELD_SETTINGS_SEARCH_QUERY_LENGTH,
                 TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));
 
         mMetricsFeatureProvider.action(getContext(),
