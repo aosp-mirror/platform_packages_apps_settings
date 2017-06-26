@@ -16,6 +16,7 @@
 package com.android.settings.fuelgauge;
 
 import java.util.List;
+
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -512,6 +513,27 @@ public class PowerUsageSummaryTest {
         mFragment.refreshAnomalyIcon();
 
         assertThat(preference.showAnomalyIcon()).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_typeOvercounted_returnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
+
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_typeUnaccounted_returnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
+
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_typeNormal_returnFalse() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isFalse();
     }
 
     public static class TestFragment extends PowerUsageSummary {
