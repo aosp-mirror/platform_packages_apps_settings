@@ -81,6 +81,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -848,6 +849,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private final AppStateBaseBridge mExtraInfoBridge;
         private final Handler mBgHandler;
         private final Handler mFgHandler;
+        private final LoadingViewController mLoadingViewController;
 
         private int mFilterMode;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
@@ -893,12 +895,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
         };
 
-        private Runnable mShowLoadingContainerRunnable = new Runnable() {
-            public void run() {
-                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                        mManageApplications.mListContainer, false /* done */, false /* animate */);
-            }
-        };
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
                 int filterMode) {
@@ -907,6 +903,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mBgHandler = new Handler(mState.getBackgroundLooper());
             mSession = state.newSession(this);
             mManageApplications = manageApplications;
+            mLoadingViewController = new LoadingViewController(
+                    mManageApplications.mLoadingContainer,
+                    mManageApplications.mListContainer
+            );
             mContext = manageApplications.getActivity();
             mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
@@ -1108,11 +1108,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
             if (mSession.getAllApps().size() != 0
                     && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
-                // Cancel any pending task to show the loading animation and show the list of
-                // apps directly.
-                mFgHandler.removeCallbacks(mShowLoadingContainerRunnable);
-                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                        mManageApplications.mListContainer, true, true);
+                mLoadingViewController.showContent(true /* animate */);
             }
             if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 // No enabled or disabled filters for usage access.
@@ -1166,11 +1162,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         void updateLoading() {
             final boolean appLoaded = mHasReceivedLoadEntries && mSession.getAllApps().size() != 0;
             if (appLoaded) {
-                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                        mManageApplications.mListContainer, true /* done */, false /* animate */);
+                mLoadingViewController.showContent(false /* animate */);
             } else {
-                mFgHandler.postDelayed(
-                        mShowLoadingContainerRunnable, DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS);
+                mLoadingViewController.showLoadingViewDelayed();
             }
         }
 
