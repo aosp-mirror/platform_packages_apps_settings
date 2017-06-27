@@ -319,7 +319,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         return usageType == UsageType.CELL
                 || usageType == UsageType.BLUETOOTH
-                || usageType == UsageType.WIFI;
+                || usageType == UsageType.WIFI
+                || usageType == UsageType.APP;
     }
 
     @VisibleForTesting
