@@ -17,10 +17,12 @@
 
 <com.android.setupwizardlib.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:suwFooter="@layout/fingerprint_enroll_find_sensor_base_footer">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -56,7 +58,7 @@
                 android:layout_weight="1"/>
 
             <Button
-                style="@style/SuwGlifButton.Primary"
+                style="@style/SuwGlifButton.Secondary"
                 android:id="@+id/next_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
