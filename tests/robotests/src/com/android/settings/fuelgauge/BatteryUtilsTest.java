@@ -95,6 +95,8 @@ public class BatteryUtilsTest {
     @Mock
     private BatteryStats.Uid mUid;
     @Mock
+    private BatteryStats.Timer mTimer;
+    @Mock
     private BatterySipper mNormalBatterySipper;
     @Mock
     private BatterySipper mWifiBatterySipper;
@@ -356,6 +358,16 @@ public class BatteryUtilsTest {
                 .isEqualTo(R.string.battery_abnormal_wakeup_alarm_summary);
         assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.BLUETOOTH_SCAN))
                 .isEqualTo(R.string.battery_abnormal_location_summary);
+    }
+
+    @Test
+    public void testGetForegroundActivityTotalTimeMs_returnMilliseconds() {
+        doReturn(mTimer).when(mUid).getForegroundActivityTimer();
+        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US).when(mTimer).getTotalTimeLocked(anyLong(),
+                anyInt());
+
+        assertThat(mBatteryUtils.getForegroundActivityTotalTimeMs(mUid, 0)).isEqualTo(
+                TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
     private BatterySipper createTestSmearBatterySipper(long activityTime, long topTime,
