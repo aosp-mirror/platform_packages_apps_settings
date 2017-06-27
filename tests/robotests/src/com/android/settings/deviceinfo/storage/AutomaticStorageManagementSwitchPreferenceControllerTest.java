@@ -168,4 +168,23 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
 
         verify(transaction, never()).add(any(), eq(ActivationWarningFragment.TAG));
     }
+
+    @Config(shadows = {SettingsShadowSystemProperties.class})
+    @Test
+    public void togglingOnShouldTriggerWarningFragmentIfEnabledByDefaultAndDisabledByPolicy() {
+        FragmentTransaction transaction = mock(FragmentTransaction.class);
+        when(mFragmentManager.beginTransaction()).thenReturn(transaction);
+        SettingsShadowSystemProperties.set(
+                AutomaticStorageManagementSwitchPreferenceController
+                        .STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY,
+                "true");
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY,
+                1);
+
+        mController.onSwitchToggled(true);
+
+        verify(transaction).add(any(), eq(ActivationWarningFragment.TAG));
+    }
 }
