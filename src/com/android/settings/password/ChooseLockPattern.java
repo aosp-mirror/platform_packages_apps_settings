@@ -305,8 +305,8 @@ public class ChooseLockPattern extends SettingsActivity {
          * The states of the right button.
          */
         enum RightButtonMode {
-            Continue(R.string.lockpattern_continue_button_text, true),
-            ContinueDisabled(R.string.lockpattern_continue_button_text, false),
+            Continue(R.string.next_label, true),
+            ContinueDisabled(R.string.next_label, false),
             Confirm(R.string.lockpattern_confirm_button_text, true),
             ConfirmDisabled(R.string.lockpattern_confirm_button_text, false),
             Ok(android.R.string.ok, true);
