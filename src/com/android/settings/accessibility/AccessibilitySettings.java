@@ -493,7 +493,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     getString(R.string.accessibility_summary_state_disabled);
             final CharSequence serviceSummary = info.loadSummary(getPackageManager());
             final String stateSummaryCombo = getString(
-                    R.string.accessibility_summary_default_combination,
+                    R.string.preference_summary_default_combination,
                     serviceState, serviceSummary);
             preference.setSummary((TextUtils.isEmpty(serviceSummary)) ? serviceState
                     : stateSummaryCombo);
