@@ -392,6 +392,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"ยกนิ้วมือเรื่อยๆ เพิ่มส่วนต่างๆ ของลายนิ้วมือ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"เพิ่มลายนิ้วมือแล้ว"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"เมื่อเห็นไอคอนนี้ ให้ใช้ลายนิ้วมือเพื่อระบุตัวตนหรือเพื่ออนุมัติการซื้อ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"ข้ามการตั้งค่าลายนิ้วมือไหม"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"คุณได้เลือกที่จะใช้ลายนิ้วมือเป็นวิธีการหนึ่งในการปลดล็อกโทรศัพท์ หากคุณข้ามในตอนนี้ คุณจะต้องตั้งค่าฟีเจอร์นี้ในภายหลัง การตั้งค่าจะใช้เวลาราว 1 นาทีเท่านั้น"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"ตั้งค่าการล็อกหน้าจอ"</string>
@@ -2081,8 +2083,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> ของแบตเตอรี่ทั้งหมด"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"รายละเอียดนับตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"ชาร์จจนเต็มครั้งล่าสุด"</string>
-    <!-- no translation found for battery_footer_summary (67169726550144016) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"ข้อมูลการใช้งานแบตเตอรี่เป็นเพียงการประมาณการและอาจเปลี่ยนไปตามการใช้งาน"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"ขณะใช้งานอยู่"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"ขณะอยู่ในพื้นหลัง"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"การใช้งานแบตเตอรี่"</string>
@@ -2738,7 +2739,7 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"แอปเริ่มต้น"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"ภาษา เวลา การสำรองข้อมูล การอัปเดต"</string>
     <string name="search_results_title" msgid="1796252422574886932">"การตั้งค่า"</string>
-    <string name="search_menu" msgid="6283419262313758339">"การตั้งค่าการค้นหา"</string>
+    <string name="search_menu" msgid="6283419262313758339">"ค้นหาการตั้งค่า"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"การตั้งค่าการค้นหา"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, การเชื่อมต่อเครือข่าย"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"ข้อความ, การส่งข้อความ, ข้อความ, การส่งข้อความ"</string>
@@ -3597,12 +3598,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"ซิงค์ข้อมูลงานอัตโนมัติ"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"ให้แอปรีเฟรชข้อมูลอัตโนมัติ"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"การซิงค์บัญชี"</string>
-    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
-    <skip />
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"การซิงค์เปิดอยู่สำหรับ <xliff:g id="ID_1">%1$d</xliff:g> จาก <xliff:g id="ID_2">%2$d</xliff:g> รายการ"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"การซิงค์เปิดอยู่สำหรับรายการทั้งหมด"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"การซิงค์ปิดอยู่สำหรับรายการทั้งหมด"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"จัดการข้อมูลอุปกรณ์"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"องค์กรของคุณเป็นผู้จัดการการเปลี่ยนแปลงและการตั้งค่า"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"การเปลี่ยนแปลงและการตั้งค่าได้รับการจัดการโดย <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
