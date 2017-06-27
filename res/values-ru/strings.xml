@@ -398,6 +398,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Немного перемещайте палец, чтобы отсканировать его полностью"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Отпечаток добавлен"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Этот значок указывает на то, что вы можете подтверждать покупки и свою личность с помощью отпечатка пальца."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Не настраивать доступ по отпечаткам?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Для разблокировки телефона вы выбрали сканирование отпечатка пальца. Настройка займет около минуты. Если вы пропустите ее сейчас, вам все равно придется сделать это позже."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Настроить блокировку экрана"</string>
@@ -2125,8 +2127,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> заряда батареи"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Использование с момента полной зарядки"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Последняя полная зарядка"</string>
-    <!-- no translation found for battery_footer_summary (67169726550144016) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"Время работы батареи указано приблизительно и может меняться в зависимости от интенсивности использования"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"В активном режиме"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"В фоновом режиме"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Расход заряда батареи"</string>
@@ -3047,8 +3048,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Дни"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"–"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Каждый день"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Следующий сигнал переопределяет время остановки текущего"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Отключать, когда наступает время остановки сигнала или срабатывает следующий (если это происходит раньше)"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Отключать с будильником"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Отключать по сигналу будильника, если он срабатывает раньше времени окончания"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"с <xliff:g id="START">%1$s</xliff:g> по <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3695,12 +3696,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Автоматическая синхронизация корпоративных данных"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Данные приложений обновляются без участия пользователя"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Синхронизировать аккаунты"</string>
-    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
-    <skip />
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Синхронизация включена для некоторых объектов (<xliff:g id="ID_1">%1$d</xliff:g> из <xliff:g id="ID_2">%2$d</xliff:g>)"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"Синхронизация включена для всех элементов"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Синхронизация отключена для всех элементов"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Информация об управляемом устройстве"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Изменения и настройки, управляемые организацией"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"Изменения и настройки, управляемые организацией \"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>\""</string>
