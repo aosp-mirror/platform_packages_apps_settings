@@ -36,6 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -98,6 +99,10 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
+
+        Button skipButton = findViewById(R.id.skip_button);
+        skipButton.setOnClickListener(this);
+
         final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
         mIconAnimationDrawable = (AnimatedVectorDrawable)
                 fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
@@ -209,6 +214,18 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             mSidecar = null;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.skip_button:
+                setResult(RESULT_SKIP);
+                finish();
+                break;
+            default:
+                super.onClick(v);
+        }
     }
 
     private void animateProgress(int progress) {
