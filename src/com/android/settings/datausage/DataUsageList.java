@@ -50,6 +50,7 @@ import android.widget.Spinner;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
+import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
@@ -96,19 +97,20 @@ public class DataUsageList extends DataUsageBase {
             };
 
     private INetworkStatsSession mStatsSession;
-
     private ChartDataUsagePreference mChart;
 
     private NetworkTemplate mTemplate;
     private int mSubId;
     private ChartData mChartData;
 
+    private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
     private CycleAdapter mCycleAdapter;
     private Spinner mCycleSpinner;
     private Preference mUsageAmount;
     private PreferenceGroup mApps;
     private View mHeader;
+
 
     @Override
     public int getMetricsCategory() {
@@ -176,7 +178,10 @@ public class DataUsageList extends DataUsageBase {
                 mCycleSpinner.setSelection(position);
             }
         }, mCycleListener, true);
-        setLoading(true, false);
+
+        mLoadingViewController = new LoadingViewController(
+                getView().findViewById(R.id.loading_container), getListView());
+        mLoadingViewController.showLoadingViewDelayed();
     }
 
     @Override
@@ -523,7 +528,7 @@ public class DataUsageList extends DataUsageBase {
 
         @Override
         public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
-            setLoading(false, true);
+            mLoadingViewController.showContent(false /* animate */);
             mChartData = data;
             mChart.setNetworkStats(mChartData.network);
 

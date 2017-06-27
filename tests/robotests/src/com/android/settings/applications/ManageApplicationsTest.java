@@ -37,11 +37,9 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
+import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,10 +51,11 @@ import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenuItem;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -170,12 +169,12 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
-        final Runnable showLoadingContainerRunnable = mock(Runnable.class);
         final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
             spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
-        ReflectionHelpers.setField(adapter, "mShowLoadingContainerRunnable",
-            showLoadingContainerRunnable);
+        final LoadingViewController loadingViewController =
+                mock(LoadingViewController.class);
+        ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
         ReflectionHelpers.setField(adapter, "mFgHandler", handler);
 
         // app loading completed
@@ -186,7 +185,7 @@ public class ManageApplicationsTest {
 
         adapter.updateLoading();
 
-        verify(handler, never()).postDelayed(eq(showLoadingContainerRunnable), anyLong());
+        verify(loadingViewController, never()).showLoadingViewDelayed();
     }
 
     @Test
@@ -195,12 +194,13 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
-        final Runnable showLoadingContainerRunnable = mock(Runnable.class);
+
         final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
             spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
-        ReflectionHelpers.setField(adapter, "mShowLoadingContainerRunnable",
-            showLoadingContainerRunnable);
+        final LoadingViewController loadingViewController =
+                mock(LoadingViewController.class);
+        ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
         ReflectionHelpers.setField(adapter, "mFgHandler", handler);
 
         // app loading not yet completed
@@ -208,11 +208,11 @@ public class ManageApplicationsTest {
 
         adapter.updateLoading();
 
-        verify(handler).postDelayed(eq(showLoadingContainerRunnable), anyLong());
+        verify(loadingViewController).showLoadingViewDelayed();
     }
 
     @Test
-    public void onRebuildComplete_shouldCancelDelayedRunnable() {
+    public void onRebuildComplete_shouldHideLoadingView() {
         final Context context = RuntimeEnvironment.application;
         final ManageApplications fragment = mock(ManageApplications.class);
         final View loadingContainer = mock(View.class);
@@ -223,12 +223,12 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(fragment, "mLoadingContainer", loadingContainer);
         ReflectionHelpers.setField(fragment, "mListContainer", listContainer);
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
-        final Runnable showLoadingContainerRunnable = mock(Runnable.class);
         final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
             spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
-        ReflectionHelpers.setField(adapter, "mShowLoadingContainerRunnable",
-            showLoadingContainerRunnable);
+        final LoadingViewController loadingViewController =
+                mock(LoadingViewController.class);
+        ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
         ReflectionHelpers.setField(adapter, "mFgHandler", handler);
         ReflectionHelpers.setField(adapter, "mFilterMode", -1);
 
@@ -244,7 +244,7 @@ public class ManageApplicationsTest {
 
         adapter.onRebuildComplete(null);
 
-        verify(handler).removeCallbacks(showLoadingContainerRunnable);
+        verify(loadingViewController).showContent(true /* animate */);
     }
 
     private void setUpOptionMenus() {
