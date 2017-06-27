@@ -32,6 +32,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
 import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -512,6 +514,27 @@ public class PowerUsageSummaryTest {
         mFragment.refreshAnomalyIcon();
 
         assertThat(preference.showAnomalyIcon()).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_typeOvercounted_returnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
+
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_typeUnaccounted_returnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
+
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_typeNormal_returnFalse() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isFalse();
     }
 
     public static class TestFragment extends PowerUsageSummary {
