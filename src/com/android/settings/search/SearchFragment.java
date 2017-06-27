@@ -36,6 +36,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -169,14 +171,32 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mResultsRecyclerView.addOnScrollListener(mScrollListener);
-        mResultsRecyclerView.addItemDecoration(new HeaderDecorator());
 
         mNoResultsView = view.findViewById(R.id.no_results_layout);
 
-        mSearchView = view.findViewById(R.id.search_view);
+        Toolbar toolbar = view.findViewById(R.id.search_toolbar);
+        getActivity().setActionBar(toolbar);
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mSearchView = toolbar.findViewById(R.id.search_view);
         mSearchView.setQuery(mQuery, false /* submitQuery */);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.requestFocus();
+
+        // Updating internal views inside SearchView was the easiest way to get this too look right.
+        // We null-check here so that tests pass since the robotests can't find the internal views.
+        TextView searchText = mSearchView.findViewById(com.android.internal.R.id.search_src_text);
+        if (searchText != null) {
+            searchText.setTextColor(getContext().getColorStateList(
+                    com.android.internal.R.color.text_color_primary));
+        }
+        View editFrame = mSearchView.findViewById(com.android.internal.R.id.search_edit_frame);
+        if (editFrame != null) {
+            ViewGroup.MarginLayoutParams params =
+                    (ViewGroup.MarginLayoutParams) editFrame.getLayoutParams();
+            params.setMarginStart(0);
+            editFrame.setLayoutParams(params);
+        }
         return view;
     }
 
