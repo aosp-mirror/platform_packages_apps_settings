@@ -19,8 +19,7 @@ package com.android.settings.fingerprint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserHandle;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -49,6 +48,8 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
     @Override
     protected void initViews() {
         super.initViews();
+        Button nextButton = findViewById(R.id.next_button);
+        nextButton.setText(R.string.next_label);
     }
 
     @Override

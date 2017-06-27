@@ -163,18 +163,29 @@ public class LanguageAndInputSettingsTest {
             (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
         when(featureFactory.assistGestureFeatureProvider.isSupported(any(Context.class)))
             .thenReturn(true);
+        when(featureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
+                .thenReturn(true);
 
         final SummaryLoader loader = mock(SummaryLoader.class);
         SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, loader);
 
         ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
+        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
         provider.setListening(true);
         verify(mActivity).getString(R.string.language_input_gesture_summary_off);
 
         ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
+        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
         provider.setListening(true);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_on_with_assist);
+        verify(mActivity).getString(
+                R.string.language_input_gesture_summary_on_with_assist);
+
+        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
+        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1);
+        provider.setListening(true);
+        verify(mActivity).getString(
+                R.string.language_input_gesture_summary_on_non_assist);
     }
 
     @Test

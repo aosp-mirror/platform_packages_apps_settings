@@ -117,7 +117,7 @@ public class DashboardDataTest {
         final DashboardData.SuggestionConditionHeaderData data =
                 new DashboardData.SuggestionConditionHeaderData(
                     mDashboardDataWithOneConditions.getConditions(), 0);
-        final Object[] expectedObjects = {null, data,
+        final Object[] expectedObjects = {data,
             mDashboardDataWithOneConditions.getSuggestions(),
             mDashboardDataWithOneConditions.getConditions(),
             null, mDashboardCategory, mTestCategoryTile};
@@ -196,11 +196,11 @@ public class DashboardDataTest {
         // Item in position 1 is the header, which contains the number of conditions, changed from
         // 1 to 2
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 0, 1));
         // Item in position 3 is the condition container containing the list of conditions, which
         // gets 1 more item
         testResultData.add(new ListUpdateResult.ResultData(
-            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 3, 1));
+            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -211,7 +211,7 @@ public class DashboardDataTest {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 1, 6));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 6));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
     }

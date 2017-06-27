@@ -337,6 +337,14 @@ public class SettingsActivity extends SettingsDrawerActivity
             Toolbar toolbar = findViewById(R.id.search_action_bar);
             toolbar.setOnClickListener(this);
             setActionBar(toolbar);
+
+            // Please forgive me for what I am about to do.
+            //
+            // Need to make the navigation icon non-clickable so that the entire card is clickable
+            // and goes to the search UI. Also set the background to null so there's no ripple.
+            View navView = toolbar.getNavigationView();
+            navView.setClickable(false);
+            navView.setBackground(null);
         }
 
         ActionBar actionBar = getActionBar();

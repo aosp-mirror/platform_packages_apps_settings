@@ -21,7 +21,10 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.TwoStatePreference;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.applications.assist.AssistSettingObserver;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -44,17 +47,26 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
     private PreferenceScreen mScreen;
     private Preference mPreference;
 
-    public AssistGesturePreferenceController(Context context, Lifecycle lifecycle, String key) {
+    @VisibleForTesting
+    boolean mAssistOnly;
+
+    public AssistGesturePreferenceController(Context context, Lifecycle lifecycle, String key,
+            boolean assistOnly) {
         super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
         mSettingObserver = new SettingObserver();
         mWasAvailable = isAvailable();
         mAssistGesturePrefKey = key;
+        mAssistOnly = assistOnly;
     }
 
     @Override
     public boolean isAvailable() {
-        return mFeatureProvider.isSupported(mContext);
+        if (mAssistOnly) {
+            return mFeatureProvider.isSupported(mContext);
+        } else {
+            return mFeatureProvider.isSensorAvailable(mContext);
+        }
     }
 
     @Override
@@ -87,12 +99,34 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
             return;
         }
 
-        if (isAvailable()) {
+        if (mFeatureProvider.isSupported(mContext)) {
             if (mScreen.findPreference(getPreferenceKey()) == null) {
                 mScreen.addPreference(mPreference);
             }
         } else {
             mScreen.removePreference(mPreference);
+        }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        boolean isEnabled = isSwitchPrefEnabled();
+
+        if (!mAssistOnly) {
+            boolean assistGestureSilenceEnabled = Settings.Secure.getInt(
+                    mContext.getContentResolver(),
+                    Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1) != 0;
+            isEnabled = isEnabled || assistGestureSilenceEnabled;
+        }
+
+        if (preference != null) {
+            if (preference instanceof TwoStatePreference) {
+                ((TwoStatePreference) preference).setChecked(isSwitchPrefEnabled());
+            } else {
+                preference.setSummary(isEnabled
+                        ? R.string.gesture_setting_on
+                        : R.string.gesture_setting_off);
+            }
         }
     }
 

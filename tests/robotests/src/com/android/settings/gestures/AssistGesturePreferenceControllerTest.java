@@ -16,12 +16,18 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.ASSIST_GESTURE_ENABLED;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,11 +37,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import static android.provider.Settings.Secure.ASSIST_GESTURE_ENABLED;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -53,12 +54,13 @@ public class AssistGesturePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new AssistGesturePreferenceController(mContext, null, KEY_ASSIST);
+        mController = new AssistGesturePreferenceController(mContext, null, KEY_ASSIST, false);
     }
 
     @Test
     public void isAvailable_whenSupported_shouldReturnTrue() {
-        when(mFactory.assistGestureFeatureProvider.isSupported(mContext)).thenReturn(true);
+        mController.mAssistOnly = false;
+        when(mFactory.assistGestureFeatureProvider.isSensorAvailable(mContext)).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -73,7 +75,7 @@ public class AssistGesturePreferenceControllerTest {
         // Set the setting to be enabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), ASSIST_GESTURE_ENABLED, 1);
-        mController = new AssistGesturePreferenceController(context, null, KEY_ASSIST);
+        mController = new AssistGesturePreferenceController(context, null, KEY_ASSIST, false);
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
@@ -83,7 +85,7 @@ public class AssistGesturePreferenceControllerTest {
         // Set the setting to be disabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), ASSIST_GESTURE_ENABLED, 0);
-        mController = new AssistGesturePreferenceController(context, null, KEY_ASSIST);
+        mController = new AssistGesturePreferenceController(context, null, KEY_ASSIST, false);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
