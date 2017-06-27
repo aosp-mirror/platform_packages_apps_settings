@@ -24,10 +24,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class CameraHalHdrplusPreferenceController extends PreferenceController {
+public class CameraHalHdrplusPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_CAMERA_HAL_HDRPLUS_SWITCH = "camera_hal_hdrplus_switch";
     @VisibleForTesting

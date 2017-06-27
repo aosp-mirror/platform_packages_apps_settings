@@ -28,17 +28,18 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} that updates MAC/IP address.
+ * {@link PreferenceControllerMixin} that updates MAC/IP address.
  */
-public class WifiInfoPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause {
+public class WifiInfoPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_MAC_ADDRESS = "mac_address";

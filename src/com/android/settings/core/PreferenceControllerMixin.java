@@ -15,21 +15,28 @@
  */
 package com.android.settings.core;
 
-import android.content.Context;
-
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.ResultPayload;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
 /**
- * A controller that manages event for preference.
+ * A controller mixin that adds mobile settings specific functionality
  */
-public abstract class PreferenceController extends AbstractPreferenceController {
+public interface PreferenceControllerMixin {
 
-    public PreferenceController(Context context) {
-        super(context);
+    /**
+     * Updates non-indexable keys for search provider.
+     *
+     * Called by SearchIndexProvider#getNonIndexableKeys
+     */
+    default void updateNonIndexableKeys(List<String> keys) {
+        if (this instanceof AbstractPreferenceController) {
+            if (!((AbstractPreferenceController) this).isAvailable()) {
+                keys.add(((AbstractPreferenceController) this).getPreferenceKey());
+            }
+        }
     }
 
     /**
@@ -37,13 +44,13 @@ public abstract class PreferenceController extends AbstractPreferenceController 
      *
      * Called by SearchIndexProvider#getRawDataToIndex
      */
-    public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
+    default void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
     }
 
     /**
      * @return the {@link ResultPayload} corresponding to the search result type for the preference.
      */
-    public ResultPayload getResultPayload() {
+    default ResultPayload getResultPayload() {
         return null;
     }
 }

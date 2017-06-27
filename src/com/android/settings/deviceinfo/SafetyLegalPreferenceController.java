@@ -19,9 +19,11 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class SafetyLegalPreferenceController extends PreferenceController {
+public class SafetyLegalPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";

@@ -23,10 +23,12 @@ import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 
-public class SpellCheckerPreferenceController extends PreferenceController {
+public class SpellCheckerPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     public static final String KEY_SPELL_CHECKERS = "spellcheckers_settings";
 

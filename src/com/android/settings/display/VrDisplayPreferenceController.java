@@ -20,9 +20,11 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class VrDisplayPreferenceController extends PreferenceController {
+public class VrDisplayPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
 

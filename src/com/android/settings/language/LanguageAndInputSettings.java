@@ -18,6 +18,7 @@ package com.android.settings.language;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -35,7 +36,6 @@ import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
@@ -52,6 +52,7 @@ import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -109,7 +110,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         if (mAmbientDisplayConfig == null) {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
         }
@@ -117,10 +118,10 @@ public class LanguageAndInputSettings extends DashboardFragment {
         return buildPreferenceControllers(context, getLifecycle(), mAmbientDisplayConfig);
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(@NonNull Context context,
+    private static List<AbstractPreferenceController> buildPreferenceControllers(@NonNull Context context,
             @Nullable Lifecycle lifecycle,
             @NonNull AmbientDisplayConfiguration ambientDisplayConfiguration) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Language
         controllers.add(new PhoneLanguagePreferenceController(context));
         controllers.add(new SpellCheckerPreferenceController(context));
@@ -137,7 +138,8 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         controllers.add(gameControllerPreferenceController);
         // Gestures
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
+                false /* assistOnly */));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
                 KEY_SWIPE_DOWN));
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle, KEY_DOUBLE_TWIST));
@@ -172,16 +174,28 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         @Override
         public void setListening(boolean listening) {
+            final ContentResolver contentResolver = mContext.getContentResolver();
             if (listening) {
-                if (mFeatureProvider.isSupported(mContext)) {
-                    final int assistGestureEnabled = Settings.Secure.getInt(
-                        mContext.getContentResolver(), Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
-                    mSummaryLoader.setSummary(this, mContext.getString(assistGestureEnabled == 0
-                        ? R.string.language_input_gesture_summary_off
-                        : R.string.language_input_gesture_summary_on_with_assist));
+                if (mFeatureProvider.isSensorAvailable(mContext)) {
+                    final boolean assistGestureEnabled = Settings.Secure.getInt(
+                            contentResolver, Settings.Secure.ASSIST_GESTURE_ENABLED, 1) != 0;
+                    final boolean assistGestureSilenceEnabled = Settings.Secure.getInt(
+                            contentResolver, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED,
+                            1) != 0;
+                    String summary;
+                    if (mFeatureProvider.isSupported(mContext) && assistGestureEnabled) {
+                        summary = mContext.getString(
+                                R.string.language_input_gesture_summary_on_with_assist);
+                    } else if (assistGestureSilenceEnabled) {
+                        summary = mContext.getString(
+                                R.string.language_input_gesture_summary_on_non_assist);
+                    } else {
+                        summary = mContext.getString(R.string.language_input_gesture_summary_off);
+                    }
+                    mSummaryLoader.setSummary(this, summary);
                 } else {
                     final String flattenComponent = Settings.Secure.getString(
-                        mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+                            contentResolver, Settings.Secure.DEFAULT_INPUT_METHOD);
                     if (!TextUtils.isEmpty(flattenComponent)) {
                         final PackageManager packageManage = mContext.getPackageManager();
                         final String pkg = ComponentName.unflattenFromString(flattenComponent)
@@ -216,7 +230,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null,
                             new AmbientDisplayConfiguration(context));
                 }

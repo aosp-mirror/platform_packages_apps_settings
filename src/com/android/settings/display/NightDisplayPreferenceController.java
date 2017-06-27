@@ -14,12 +14,13 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.app.NightDisplayController;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class NightDisplayPreferenceController extends PreferenceController {
+public class NightDisplayPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_NIGHT_DISPLAY = "night_display";
 

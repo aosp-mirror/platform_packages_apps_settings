@@ -32,9 +32,10 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.applications.UserAppInfo;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +46,8 @@ import java.util.List;
 /**
  * PreferenceController that builds a dynamic list of default apps set by device or profile owner.
  */
-public class EnterpriseSetDefaultAppsListPreferenceController extends PreferenceController {
+public class EnterpriseSetDefaultAppsListPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin {
     private final PackageManager mPm;
     private final SettingsPreferenceFragment mParent;
     private final ApplicationFeatureProvider mApplicationFeatureProvider;

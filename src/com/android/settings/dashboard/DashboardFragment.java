@@ -32,9 +32,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
@@ -53,7 +53,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         SummaryLoader.SummaryConsumer {
     private static final String TAG = "DashboardFragment";
 
-    private final Map<Class, PreferenceController> mPreferenceControllers =
+    private final Map<Class, AbstractPreferenceController> mPreferenceControllers =
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
 
@@ -72,14 +72,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 .getProgressiveDisclosureMixin(context, this, getArguments());
         getLifecycle().addObserver(mProgressiveDisclosureMixin);
 
-        List<PreferenceController> controllers = getPreferenceControllers(context);
+        List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers == null) {
             controllers = new ArrayList<>();
         }
         mPlaceholderPreferenceController =
                 new DashboardTilePlaceholderPreferenceController(context);
         controllers.add(mPlaceholderPreferenceController);
-        for (PreferenceController controller : controllers) {
+        for (AbstractPreferenceController controller : controllers) {
             addPreferenceController(controller);
         }
     }
@@ -159,12 +159,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        Collection<AbstractPreferenceController> controllers = mPreferenceControllers.values();
         // If preference contains intent, log it before handling.
         mMetricsFeatureProvider.logDashboardStartIntent(
                 getContext(), preference.getIntent(), getMetricsCategory());
         // Give all controllers a chance to handle click.
-        for (PreferenceController controller : controllers) {
+        for (AbstractPreferenceController controller : controllers) {
             if (controller.handlePreferenceTreeClick(preference)) {
                 return true;
             }
@@ -188,12 +188,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    protected <T extends PreferenceController> T getPreferenceController(Class<T> clazz) {
-        PreferenceController controller = mPreferenceControllers.get(clazz);
+    protected <T extends AbstractPreferenceController> T getPreferenceController(Class<T> clazz) {
+        AbstractPreferenceController controller = mPreferenceControllers.get(clazz);
         return (T) controller;
     }
 
-    protected void addPreferenceController(PreferenceController controller) {
+    protected void addPreferenceController(AbstractPreferenceController controller) {
         mPreferenceControllers.put(controller.getClass(), controller);
     }
 
@@ -216,9 +216,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     protected abstract int getPreferenceScreenResId();
 
     /**
-     * Get a list of {@link PreferenceController} for this fragment.
+     * Get a list of {@link AbstractPreferenceController} for this fragment.
      */
-    protected abstract List<PreferenceController> getPreferenceControllers(Context context);
+    protected abstract List<AbstractPreferenceController> getPreferenceControllers(Context context);
 
     /**
      * Returns true if this tile should be displayed
@@ -237,8 +237,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(resId);
         final PreferenceScreen screen = getPreferenceScreen();
-        Collection<PreferenceController> controllers = mPreferenceControllers.values();
-        for (PreferenceController controller : controllers) {
+        Collection<AbstractPreferenceController> controllers = mPreferenceControllers.values();
+        for (AbstractPreferenceController controller : controllers) {
             controller.displayPreference(screen);
         }
     }
@@ -247,9 +247,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * Update state of each preference managed by PreferenceController.
      */
     protected void updatePreferenceStates() {
-        Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        Collection<AbstractPreferenceController> controllers = mPreferenceControllers.values();
         final PreferenceScreen screen = getPreferenceScreen();
-        for (PreferenceController controller : controllers) {
+        for (AbstractPreferenceController controller : controllers) {
             if (!controller.isAvailable()) {
                 continue;
             }

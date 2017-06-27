@@ -34,9 +34,9 @@ import android.support.v7.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -208,7 +208,7 @@ public class DeviceListPreferenceFragmentTest {
         }
 
         @Override
-        protected List<PreferenceController> getPreferenceControllers(Context context) {
+        protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
             return null;
         }
     }

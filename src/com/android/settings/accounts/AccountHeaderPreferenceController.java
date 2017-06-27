@@ -26,15 +26,17 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_ACCOUNT;
 import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_USER_HANDLE;
 
-public class AccountHeaderPreferenceController extends PreferenceController {
+public class AccountHeaderPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_ACCOUNT_HEADER = "account_header";
 

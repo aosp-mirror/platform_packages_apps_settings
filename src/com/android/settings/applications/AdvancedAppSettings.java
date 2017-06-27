@@ -29,11 +29,11 @@ import com.android.settings.applications.defaultapps.DefaultPhonePreferenceContr
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +56,7 @@ public class AdvancedAppSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
     }
 
@@ -65,8 +65,8 @@ public class AdvancedAppSettings extends DashboardFragment {
         return MetricsEvent.APPLICATIONS_ADVANCED;
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new DefaultBrowserPreferenceController(context));
         controllers.add(new DefaultWorkBrowserPreferenceController(context));
         controllers.add(new DefaultPhonePreferenceController(context));
@@ -100,7 +100,7 @@ public class AdvancedAppSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context);
                 }
             };

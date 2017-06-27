@@ -30,10 +30,11 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.conditional.BatterySaverCondition;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -41,8 +42,9 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
 
-public class BatterySaverController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart, OnStop {
+public class BatterySaverController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnStart, OnStop {
     private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
     private static final String TAG = "BatterySaverController";
     private static final boolean DEBUG = false;

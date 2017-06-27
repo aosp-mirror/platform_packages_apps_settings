@@ -20,12 +20,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import static android.content.Context.UI_MODE_SERVICE;
 
-public class NightModePreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class NightModePreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "NightModePrefContr";
     private static final String KEY_NIGHT_MODE = "night_mode";

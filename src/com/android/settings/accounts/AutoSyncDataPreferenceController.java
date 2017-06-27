@@ -32,10 +32,12 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AutoSyncDataPreferenceController extends PreferenceController {
+public class AutoSyncDataPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String TAG = "AutoSyncDataController";
     private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";

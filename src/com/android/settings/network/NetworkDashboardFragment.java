@@ -15,6 +15,9 @@
  */
 package com.android.settings.network;
 
+import static com.android.settings.network.MobilePlanPreferenceController
+        .MANAGE_MOBILE_PLAN_DIALOG_ID;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,19 +30,16 @@ import android.view.MenuInflater;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.android.settings.network.MobilePlanPreferenceController
-        .MANAGE_MOBILE_PLAN_DIALOG_ID;
 
 public class NetworkDashboardFragment extends DashboardFragment implements
         MobilePlanPreferenceController.MobilePlanPreferenceHost {
@@ -81,7 +81,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final AirplaneModePreferenceController airplaneModePreferenceController =
                 new AirplaneModePreferenceController(context, this /* fragment */);
         final MobilePlanPreferenceController mobilePlanPreferenceController =
@@ -99,7 +99,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         lifecycle.addObserver(mobileNetworkPreferenceController);
         lifecycle.addObserver(vpnPreferenceController);
 
-        final List<PreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(airplaneModePreferenceController);
         controllers.add(mobileNetworkPreferenceController);
         controllers.add(new TetherPreferenceController(context, lifecycle));

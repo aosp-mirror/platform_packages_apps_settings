@@ -25,13 +25,14 @@ import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller to control whether an app can run in the background
  */
-public class BackgroundActivityPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class BackgroundActivityPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "BgActivityPrefContr";
     private static final String KEY_BACKGROUND_ACTIVITY = "background_activity";

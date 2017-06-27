@@ -18,7 +18,7 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.List;
@@ -32,10 +32,7 @@ public interface AssistGestureFeatureProvider {
     /** Returns true if the sensor is available. */
     boolean isSensorAvailable(Context context);
 
-    /** Returns the resource */
-    int getPreferenceResourceId();
-
     /** Returns a list of additional preference controllers */
-    List<PreferenceController> getControllers(Context context, Lifecycle lifecycle);
+    List<AbstractPreferenceController> getControllers(Context context, Lifecycle lifecycle);
 
 }

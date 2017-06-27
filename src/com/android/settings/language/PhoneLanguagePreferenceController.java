@@ -19,10 +19,12 @@ package com.android.settings.language;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class PhoneLanguagePreferenceController extends PreferenceController {
+public class PhoneLanguagePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
 

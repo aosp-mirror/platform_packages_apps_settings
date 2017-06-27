@@ -22,13 +22,14 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.TimeoutListPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-public class TimeoutPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class TimeoutPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "TimeoutPrefContr";
 

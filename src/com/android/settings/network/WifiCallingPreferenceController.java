@@ -21,9 +21,11 @@ import android.telephony.TelephonyManager;
 
 import com.android.ims.ImsManager;
 import com.android.settings.WifiCallingSettings;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class WifiCallingPreferenceController extends PreferenceController {
+public class WifiCallingPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
     private TelephonyManager mTm;

@@ -33,7 +33,8 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.lang.reflect.Field;
 import java.text.Normalizer;
@@ -75,12 +76,12 @@ public class DatabaseIndexingUtils {
 
     /**
      * @param className which wil provide the map between from {@link Uri}s to
-     * {@link PreferenceController}
+     * {@link PreferenceControllerMixin}
      * @param context
-     * @return A map between {@link Uri}s and {@link PreferenceController}s to get the payload
+     * @return A map between {@link Uri}s and {@link PreferenceControllerMixin}s to get the payload
      * types for Settings.
      */
-    public static Map<String, PreferenceController> getPreferenceControllerUriMap(
+    public static Map<String, PreferenceControllerMixin> getPreferenceControllerUriMap(
             String className, Context context) {
         if (context == null) {
             return null;
@@ -98,36 +99,41 @@ public class DatabaseIndexingUtils {
         // SEARCH_INDEX_DATA_PROVIDER field
         final Indexable.SearchIndexProvider provider = getSearchIndexProvider(clazz);
 
-        List<PreferenceController> controllers =
+        List<AbstractPreferenceController> controllers =
                 provider.getPreferenceControllers(context);
 
         if (controllers == null ) {
             return null;
         }
 
-        ArrayMap<String, PreferenceController> map = new ArrayMap<>();
+        ArrayMap<String, PreferenceControllerMixin> map = new ArrayMap<>();
 
-        for (PreferenceController controller : controllers) {
-            map.put(controller.getPreferenceKey(), controller);
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof PreferenceControllerMixin) {
+                map.put(controller.getPreferenceKey(), (PreferenceControllerMixin) controller);
+            } else {
+                throw new IllegalStateException(controller.getClass().getName()
+                        + " must implement " + PreferenceControllerMixin.class.getName());
+            }
         }
 
         return map;
     }
 
     /**
-     * @param uriMap Map between the {@link PreferenceController} keys
+     * @param uriMap Map between the {@link PreferenceControllerMixin} keys
      *               and the controllers themselves.
      * @param key The look-up key
-     * @return The Payload from the {@link PreferenceController} specified by the key, if it exists.
-     * Otherwise null.
+     * @return The Payload from the {@link PreferenceControllerMixin} specified by the key,
+     * if it exists. Otherwise null.
      */
-    public static ResultPayload getPayloadFromUriMap(Map<String, PreferenceController> uriMap,
+    public static ResultPayload getPayloadFromUriMap(Map<String, PreferenceControllerMixin> uriMap,
             String key) {
         if (uriMap == null) {
             return null;
         }
 
-        PreferenceController controller = uriMap.get(key);
+        PreferenceControllerMixin controller = uriMap.get(key);
         if (controller == null) {
             return null;
         }

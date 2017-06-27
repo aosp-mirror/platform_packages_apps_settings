@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.UserHandle;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
@@ -39,13 +38,14 @@ import android.widget.Button;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
 
-public class RemoveAccountPreferenceController extends PreferenceController
-    implements OnClickListener {
+public class RemoveAccountPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, OnClickListener {
 
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
 

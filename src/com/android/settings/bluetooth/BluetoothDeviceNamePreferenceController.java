@@ -32,20 +32,20 @@ import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Controller that shows and updates the bluetooth device name
  */
-public class BluetoothDeviceNamePreferenceController extends PreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
+public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
     private static final String TAG = "BluetoothNamePrefCtrl";
 
     public static final String KEY_DEVICE_NAME = "device_name";
@@ -111,7 +111,8 @@ public class BluetoothDeviceNamePreferenceController extends PreferenceControlle
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_DEVICE_NAME.equals(preference.getKey())) {
-            new BluetoothNameDialogFragment().show(mFragment.getFragmentManager(), "rename device");
+            LocalDeviceNameDialogFragment.newInstance()
+                    .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;
         }
 

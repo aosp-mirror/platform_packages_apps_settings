@@ -20,12 +20,14 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Calendar;
 
-public class TimeZonePreferenceController extends PreferenceController {
+public class TimeZonePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_TIMEZONE = "timezone";
 

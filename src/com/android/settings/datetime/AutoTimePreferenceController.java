@@ -20,12 +20,13 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AutoTimePreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class AutoTimePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String KEY_AUTO_TIME = "auto_time";
     private final UpdateTimeAndDateCallback mCallback;

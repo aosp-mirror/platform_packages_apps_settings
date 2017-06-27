@@ -38,11 +38,12 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
@@ -54,7 +55,8 @@ import java.util.Map;
  * StorageItemPreferenceController handles the storage line items which summarize the storage
  * categorization breakdown.
  */
-public class StorageItemPreferenceController extends PreferenceController {
+public class StorageItemPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
     private static final String TAG = "StorageItemPreference";
 
     private static final String IMAGE_MIME_TYPE = "image/*";

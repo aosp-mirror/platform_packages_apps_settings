@@ -27,10 +27,12 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public abstract class DefaultAppPreferenceController extends PreferenceController {
+public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String TAG = "DefaultAppPrefControl";
 

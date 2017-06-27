@@ -25,7 +25,8 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -34,8 +35,8 @@ import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
-public class MobileNetworkPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause {
+public class MobileNetworkPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 

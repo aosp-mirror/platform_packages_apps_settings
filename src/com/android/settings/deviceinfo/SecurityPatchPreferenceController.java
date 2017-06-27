@@ -22,10 +22,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class SecurityPatchPreferenceController extends PreferenceController {
+public class SecurityPatchPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_SECURITY_PATCH = "security_patch";
     private static final String TAG = "SecurityPatchPref";

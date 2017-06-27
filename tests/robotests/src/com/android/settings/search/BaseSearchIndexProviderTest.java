@@ -17,13 +17,19 @@
 package com.android.settings.search;
 
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,10 +43,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -63,39 +65,53 @@ public class BaseSearchIndexProviderTest {
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEmpty();
     }
 
+    public static class AvailablePreferenceController extends AbstractPreferenceController
+            implements PreferenceControllerMixin {
+        public AvailablePreferenceController(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean isAvailable() {
+            return true;
+        }
+
+        @Override
+        public String getPreferenceKey() {
+            return TEST_PREF_KEY;
+        }
+    }
+
     @Test
     public void getNonIndexableKeys_preferenceIsAvailable_shouldReturnEmptyList() {
-        List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PreferenceController(mContext) {
-            @Override
-            public boolean isAvailable() {
-                return true;
-            }
-
-            @Override
-            public String getPreferenceKey() {
-                return TEST_PREF_KEY;
-            }
-        });
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new AvailablePreferenceController(mContext));
         doReturn(controllers).when(mIndexProvider).getPreferenceControllers(mContext);
 
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEqualTo(Collections.EMPTY_LIST);
     }
 
+    public static class NotAvailablePreferenceController extends AbstractPreferenceController
+            implements PreferenceControllerMixin {
+        public NotAvailablePreferenceController(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean isAvailable() {
+            return false;
+        }
+
+        @Override
+        public String getPreferenceKey() {
+            return TEST_PREF_KEY;
+        }
+    }
+
     @Test
     public void getNonIndexableKeys_preferenceIsNotAvailable_shouldReturnKey() {
-        List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PreferenceController(mContext) {
-            @Override
-            public boolean isAvailable() {
-                return false;
-            }
-
-            @Override
-            public String getPreferenceKey() {
-                return TEST_PREF_KEY;
-            }
-        });
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new NotAvailablePreferenceController(mContext));
         doReturn(controllers).when(mIndexProvider).getPreferenceControllers(mContext);
 
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).contains(TEST_PREF_KEY);

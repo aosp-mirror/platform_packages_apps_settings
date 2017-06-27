@@ -25,12 +25,14 @@ import android.support.v7.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class TimeFormatPreferenceController extends PreferenceController {
+public class TimeFormatPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     static final String HOURS_12 = "12";
     static final String HOURS_24 = "24";

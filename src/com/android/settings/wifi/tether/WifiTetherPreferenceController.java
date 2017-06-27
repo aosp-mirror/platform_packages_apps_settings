@@ -30,7 +30,8 @@ import android.text.BidiFormatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -38,8 +39,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 
-public class WifiTetherPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+public class WifiTetherPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     public static final IntentFilter WIFI_TETHER_INTENT_FILTER;
     private static final String WIFI_TETHER_SETTINGS = "wifi_tether";

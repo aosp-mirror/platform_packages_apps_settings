@@ -26,12 +26,13 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
 
-public class DatePreferenceController extends PreferenceController implements
-        DatePickerDialog.OnDateSetListener {
+public class DatePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, DatePickerDialog.OnDateSetListener {
 
     public interface DatePreferenceHost extends UpdateTimeAndDateCallback {
         void showDatePicker();

@@ -26,15 +26,16 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 
-public class FirmwareVersionPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnResume {
+public class FirmwareVersionPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, LifecycleObserver, OnResume {
 
     private static final String TAG = "FirmwareVersionPref";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";

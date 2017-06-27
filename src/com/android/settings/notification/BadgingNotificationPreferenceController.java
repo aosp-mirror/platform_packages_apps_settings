@@ -25,17 +25,18 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
-import android.util.Log;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
-public class BadgingNotificationPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
+public class BadgingNotificationPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "BadgeNotifPrefContr";
     private static final String KEY_NOTIFICATION_BADGING = "notification_badging";

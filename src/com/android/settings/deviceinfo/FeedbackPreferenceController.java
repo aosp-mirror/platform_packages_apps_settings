@@ -21,10 +21,12 @@ import android.content.Intent;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class FeedbackPreferenceController extends PreferenceController {
+public class FeedbackPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
 
     private final Fragment mHost;

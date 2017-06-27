@@ -24,11 +24,14 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
+
 import java.util.List;
 import java.util.Set;
 
-public class AppPermissionsPreferenceController extends PreferenceController {
+public class AppPermissionsPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String TAG = "AppPermissionPrefCtrl";
     private static final String KEY_APP_PERMISSION_GROUPS = "manage_perms";

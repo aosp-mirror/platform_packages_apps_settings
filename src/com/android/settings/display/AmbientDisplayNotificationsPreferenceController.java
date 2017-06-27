@@ -21,14 +21,16 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
-public class AmbientDisplayNotificationsPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class AmbientDisplayNotificationsPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin,
+        Preference.OnPreferenceChangeListener {
 
     @VisibleForTesting
     static final String KEY_AMBIENT_DISPLAY_NOTIFICATIONS = "ambient_display_notification";
