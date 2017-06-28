@@ -462,6 +462,8 @@
     <string name="radio_info_roaming_label">Roaming:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_imei_label">IMEI:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, DO NOT TRANSLATE. -->
+    <string name="radio_info_imsi_label">IMSI:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_call_redirect_label">Call Redirect:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -872,6 +874,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
     <string name="security_settings_fingerprint_enroll_finish_message">When you see this icon, use your fingerprint for identification or to approve purchases.</string>
+    <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
+    <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
@@ -915,6 +919,12 @@
 
     <!-- Title shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=50]-->
     <string name="fingerprint_last_delete_title">Remove all fingerprints?</string>
+
+    <!-- Title shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=50]-->
+    <string name="fingerprint_delete_title">Remove \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\'</string>
+
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_delete_message">Do you want to delete this fingerprint?</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to
@@ -4233,14 +4243,14 @@
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, use the Accessibility button at the bottom of the screen to quickly magnify.\n\n<b>To zoom</b>, tap the Accessibility button, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, tap the Accessibility button, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_configuration_warning">The Accessibility button is set to <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, touch &amp; hold the Accessibility button, then select magnification.</string>
-    <!-- Title for the preference to configure the accessibility shortcut. [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
+    <!-- Title for the preference to configure the accessibility shortcut, which uses the volume keys. [CHAR LIMIT=35] -->
+    <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
     <!-- Title for the preference to choose the service that is turned on and off by the accessibility shortcut. [CHAR LIMIT=35] -->
     <string name="accessibility_shortcut_service_title">Shortcut service</string>
     <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=35] -->
     <string name="accessibility_shortcut_service_on_lock_screen_title">Allow from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_description">When the shortcut is on, you can press both volume buttons for 3 seconds to start an accessibility feature.</string>
+    <string name="accessibility_shortcut_description">When the shortcut is on, you can press both volume keys for 3 seconds to start an accessibility feature.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -4269,7 +4279,7 @@
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
 
     <!-- Summary text for accessibility service preferences, or preferences including a short description (eg. "ON / High accuracy mode"). -->
-    <string name="accessibility_summary_default_combination"><xliff:g id="state" example="ON">%1$s</xliff:g> / <xliff:g id="description" example="High accuracy mode">%2$s</xliff:g></string>
+    <string name="preference_summary_default_combination"><xliff:g id="state" example="ON">%1$s</xliff:g> / <xliff:g id="description" example="High accuracy mode">%2$s</xliff:g></string>
     <!-- Preference's state when enabled. Note: UPPERCASE -->
     <string name="accessibility_summary_state_enabled">ON</string>
     <!-- Preference's state when disabled. Note: UPPERCASE -->

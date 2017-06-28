@@ -241,7 +241,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_choose_your_password_header_for_fingerprint,
                     R.string.lockpassword_choose_your_pin_header,
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
-                    R.string.lockpassword_continue_label),
+                    R.string.next_label),
 
             NeedToConfirm(
                     R.string.lockpassword_confirm_your_password_header,
@@ -255,7 +255,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
-                    R.string.lockpassword_continue_label);
+                    R.string.next_label);
 
             Stage(int hintInAlpha, int hintInAlphaForFingerprint,
                     int hintInNumeric, int hintInNumericForFingerprint, int nextButtonText) {

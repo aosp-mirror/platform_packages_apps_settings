@@ -2,7 +2,7 @@
 <!--
     Copyright (C) 2017 The Android Open Source Project
 
-    Licensed under the Apache License, Version 2.0 (the "License")
+    Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
@@ -21,23 +21,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- left : cancel -->
-    <Button android:id="@+id/cancel_button"
+    <Button
         style="@style/SuwGlifButton.Secondary"
+        android:id="@+id/skip_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lockpassword_cancel_label" />
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <!-- right : continue -->
-    <Button android:id="@+id/next_button"
-        style="@style/SuwGlifButton.Primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next_label" />
+        android:text="@string/security_settings_fingerprint_enroll_enrolling_skip" />
 
 </LinearLayout>
