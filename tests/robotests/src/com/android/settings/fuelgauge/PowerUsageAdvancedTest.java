@@ -121,7 +121,7 @@ public class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.setUserManager(mUserManager);
         mPowerUsageAdvanced.setBatteryUtils(BatteryUtils.getInstance(mShadowContext));
 
-        mPowerUsageData = new PowerUsageData(UsageType.APP);
+        mPowerUsageData = new PowerUsageData(UsageType.SYSTEM);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
         mMaxBatterySipper.drainType = DrainType.BLUETOOTH;
         mNormalBatterySipper.drainType = DrainType.SCREEN;
@@ -326,8 +326,15 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
-    public void testShouldHideSummary_typeNormal_returnFalse() {
+    public void testShouldHideSummary_typeApp_returnTrue() {
         mPowerUsageData.usageType = UsageType.APP;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeNormal_returnFalse() {
+        mPowerUsageData.usageType = UsageType.SYSTEM;
 
         assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isFalse();
     }
