@@ -53,12 +53,11 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     protected void setHeaderProperties() {
         Pair<Integer, String> pair = Utils.getBtClassDrawableWithDescription
                 (mContext.getResources(), mCachedDevice);
-        int summaryResourceId = mCachedDevice.getConnectionSummary();
+        String summaryText = mCachedDevice.getConnectionSummary();
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(mContext.getDrawable(pair.first));
         mHeaderController.setIconContentDescription(pair.second);
-        mHeaderController.setSummary(
-                summaryResourceId > 0 ? mContext.getString(summaryResourceId) : null);
+        mHeaderController.setSummary(summaryText);
     }
 
     @Override

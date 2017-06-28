@@ -76,7 +76,7 @@ public class BluetoothDetailsControllerTestBase {
         private String address;
         private int majorDeviceClass;
         private boolean connected;
-        private int connectionSummary;
+        private String connectionSummary;
 
         public DeviceConfig setName(String newValue) {
             this.name = newValue;
@@ -97,8 +97,8 @@ public class BluetoothDetailsControllerTestBase {
             this.connected = newValue;
             return this;
         }
-        public DeviceConfig setConnectionSummary(int newValue) {
-            this.connectionSummary = newValue;
+        public DeviceConfig setConnectionSummary(String connectionSummary) {
+            this.connectionSummary = connectionSummary;
             return this;
         }
 
@@ -118,18 +118,18 @@ public class BluetoothDetailsControllerTestBase {
             return connected;
         }
 
-        public int getConnectionSummary() {
+        public String getConnectionSummary() {
             return connectionSummary;
         }
     }
 
-    protected static DeviceConfig makeDefaultDeviceConfig() {
+    protected DeviceConfig makeDefaultDeviceConfig() {
         return new DeviceConfig()
                 .setName("Mock Device")
                 .setAddress("B4:B0:34:B5:3B:1B")
                 .setMajorDeviceClass(BluetoothClass.Device.Major.AUDIO_VIDEO)
                 .setConnected(true)
-                .setConnectionSummary(R.string.bluetooth_connected);
+                .setConnectionSummary(mContext.getString(R.string.bluetooth_connected));
     }
 
     /**
