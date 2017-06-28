@@ -28,6 +28,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.graphics.Insets;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +62,7 @@ import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.notification.RedactionInterstitial;
@@ -86,6 +88,12 @@ public class ChooseLockPassword extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         return modIntent;
+    }
+
+    @Override
+    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     public static class IntentBuilder {
