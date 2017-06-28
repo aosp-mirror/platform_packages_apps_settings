@@ -17,14 +17,10 @@
 
 package com.android.settings.search;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
 
@@ -45,14 +41,14 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
-        return new DatabaseResultLoader(context, query, getSiteMapManager());
+        return new DatabaseResultLoader(context, cleanQuery(query), getSiteMapManager());
     }
 
     @Override
     public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
         return new InstalledAppResultLoader(
-                context, new PackageManagerWrapperImpl(context.getPackageManager()), query,
-                getSiteMapManager());
+                context, new PackageManagerWrapperImpl(context.getPackageManager()),
+                cleanQuery(query), getSiteMapManager());
     }
 
     @Override
@@ -87,5 +83,17 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         getIndexingManager(context).indexDatabase(callback);
         Log.d(TAG, "IndexDatabase() took " +
                 (System.currentTimeMillis() - indexStartTime) + " ms");
+    }
+
+    /**
+     * A generic method to make the query suitable for searching the database.
+     *
+     * @return the cleaned query string
+     */
+    private String cleanQuery(String query) {
+        if (TextUtils.isEmpty(query)) {
+            return null;
+        }
+        return query.trim();
     }
 }

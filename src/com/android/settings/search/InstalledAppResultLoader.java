@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -54,7 +55,8 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
 
     private List<String> mBreadcrumb;
     private SiteMapManager mSiteMapManager;
-    private final String mQuery;
+    @VisibleForTesting
+    final String mQuery;
     private final UserManager mUserManager;
     private final PackageManagerWrapper mPackageManager;
     private final List<ResolveInfo> mHomeActivities = new ArrayList<>();
