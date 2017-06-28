@@ -36,6 +36,8 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Icon;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +53,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.Condition;
+import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -443,6 +446,34 @@ public class DashboardAdapterTest {
         mDashboardAdapter.setCategoriesAndSuggestions(Collections.emptyList(), packages);
 
         verify(mockIcon).setTint(eq(0x89000000));
+    }
+
+    @Test
+    public void testBindConditionAndSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
+        when(mFactory.dashboardFeatureProvider.combineSuggestionAndCondition()).thenReturn(true);
+        mDashboardAdapter = new DashboardAdapter(mContext, null, null);
+        final List<Tile> suggestions = makeSuggestions("pkg1");
+        final List<DashboardCategory> categories = new ArrayList<>();
+        final DashboardCategory category = mock(DashboardCategory.class);
+        final List<Tile> tiles = new ArrayList<>();
+        tiles.add(mock(Tile.class));
+        category.tiles = tiles;
+        mDashboardAdapter.setCategoriesAndSuggestions(categories, suggestions);
+
+        final RecyclerView data = mock(RecyclerView.class);
+        when(data.getResources()).thenReturn(mResources);
+        when(data.getContext()).thenReturn(mContext);
+        when(mResources.getDisplayMetrics()).thenReturn(mock(DisplayMetrics.class));
+        final View itemView = mock(View.class);
+        when(itemView.findViewById(R.id.data)).thenReturn(data);
+        final DashboardAdapter.SuggestionAndConditionContainerHolder holder =
+                new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
+
+        mDashboardAdapter.onBindConditionAndSuggestion(
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION + 1);
+
+        verify(data).setAdapter(any(SuggestionAdapter.class));
+        // should not crash
     }
 
     private List<Tile> makeSuggestions(String... pkgNames) {
