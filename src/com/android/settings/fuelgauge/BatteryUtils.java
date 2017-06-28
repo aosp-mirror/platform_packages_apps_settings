@@ -144,7 +144,8 @@ public class BatteryUtils {
                         && sipper.drainType != BatterySipper.DrainType.SCREEN
                         && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
                         && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
-                        && sipper.drainType != BatterySipper.DrainType.WIFI) {
+                        && sipper.drainType != BatterySipper.DrainType.WIFI
+                        && sipper.drainType != BatterySipper.DrainType.IDLE) {
                     // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, or screen
                     proportionalSmearPowerMah += sipper.totalPowerMah;
                 }
