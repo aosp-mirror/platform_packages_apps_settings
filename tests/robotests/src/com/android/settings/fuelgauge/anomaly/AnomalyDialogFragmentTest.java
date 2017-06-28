@@ -18,6 +18,10 @@ package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlertDialog;
@@ -25,12 +29,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
@@ -43,13 +50,21 @@ public class AnomalyDialogFragmentTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String DISPLAY_NAME = "app";
     private static final int UID = 111;
+
+    @Mock
+    private AnomalyUtils mAnomalyUtils;
+    @Mock
+    private AnomalyAction mAnomalyAction;
     private Anomaly mWakeLockAnomaly;
     private Anomaly mWakeupAlarmAnomaly;
+    private Anomaly mBluetoothAnomaly;
     private AnomalyDialogFragment mAnomalyDialogFragment;
     private Context mContext;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         mContext = RuntimeEnvironment.application;
         mWakeLockAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)
@@ -59,6 +74,12 @@ public class AnomalyDialogFragmentTest {
                 .build();
         mWakeupAlarmAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setUid(UID)
+                .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
+                .build();
+        mBluetoothAnomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
                 .setUid(UID)
                 .setPackageName(PACKAGE_NAME)
                 .setDisplayName(DISPLAY_NAME)
@@ -111,6 +132,31 @@ public class AnomalyDialogFragmentTest {
                 mContext.getString(R.string.dialog_background_check_title));
         assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
                 mContext.getString(R.string.dialog_background_check_ok));
+        assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
+                mContext.getString(R.string.dlg_cancel));
+    }
+
+    @Test
+    public void testOnCreateDialog_bluetoothAnomaly_fireLocationCheckDialog() {
+        mAnomalyDialogFragment = spy(AnomalyDialogFragment.newInstance(mBluetoothAnomaly,
+                0 /* metricskey */));
+        mAnomalyDialogFragment.mAnomalyUtils = mAnomalyUtils;
+        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(anyInt());
+        doNothing().when(mAnomalyDialogFragment).initAnomalyUtils();
+        doReturn(Anomaly.AnomalyActionType.LOCATION_CHECK).when(mAnomalyAction).getActionType();
+
+        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.dialog_location_message,
+                        mWakeLockAnomaly.displayName));
+        assertThat(shadowDialog.getTitle()).isEqualTo(
+                mContext.getString(R.string.dialog_location_title));
+        assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
+                mContext.getString(R.string.dialog_location_ok));
         assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
                 mContext.getString(R.string.dlg_cancel));
     }

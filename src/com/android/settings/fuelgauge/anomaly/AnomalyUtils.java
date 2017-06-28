@@ -22,6 +22,7 @@ import android.support.annotation.VisibleForTesting;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.fuelgauge.anomaly.action.BackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
+import com.android.settings.fuelgauge.anomaly.action.LocationCheckAction;
 import com.android.settings.fuelgauge.anomaly.checker.AnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.BluetoothScanAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
@@ -57,8 +58,9 @@ public class AnomalyUtils {
             case Anomaly.AnomalyType.WAKE_LOCK:
                 return new ForceStopAction(mContext);
             case Anomaly.AnomalyType.WAKEUP_ALARM:
-            case Anomaly.AnomalyType.BLUETOOTH_SCAN:
                 return new BackgroundCheckAction(mContext);
+            case Anomaly.AnomalyType.BLUETOOTH_SCAN:
+                return new LocationCheckAction(mContext);
             default:
                 return null;
         }
