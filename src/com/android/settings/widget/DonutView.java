@@ -39,7 +39,6 @@ public class DonutView extends View {
     // From manual testing, this is the longest we can go without visual errors.
     private static final int LINE_CHARACTER_LIMIT = 10;
     private float mStrokeWidth;
-    private float mDeviceDensity;
     private int mPercent;
     private Paint mBackgroundCircle;
     private Paint mFilledArc;
@@ -54,8 +53,7 @@ public class DonutView extends View {
 
     public DonutView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mDeviceDensity = getResources().getDisplayMetrics().density;
-        mStrokeWidth = 6f * mDeviceDensity;
+        mStrokeWidth = context.getResources().getDimension(R.dimen.storage_donut_thickness);
         final ColorFilter mAccentColorFilter =
                 new PorterDuffColorFilter(
                         Utils.getColorAttr(context, android.R.attr.colorAccent),
@@ -92,7 +90,7 @@ public class DonutView extends View {
                 resources.getDimension(R.dimen.storage_donut_view_percent_text_size));
         mBigNumberPaint.setTextAlign(Paint.Align.CENTER);
         mBigNumberPaint.setTypeface(Typeface.create(
-                getContext().getString(com.android.internal.R.string.config_headlineFontFamily),
+                context.getString(com.android.internal.R.string.config_headlineFontFamily),
                 Typeface.NORMAL));
     }
 
