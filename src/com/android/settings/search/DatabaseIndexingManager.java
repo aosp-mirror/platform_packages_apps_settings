@@ -39,11 +39,14 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Pair;
 import android.util.Xml;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.PreferenceControllerMixin;
 
+import com.android.settings.overlay.FeatureFactory;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -115,6 +118,9 @@ import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS
 public class DatabaseIndexingManager {
     private static final String LOG_TAG = "DatabaseIndexingManager";
 
+    private static final String METRICS_ACTION_SETTINGS_ASYNC_INDEX =
+            "search_asynchronous_indexing";
+
     public static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
             "SEARCH_INDEX_DATA_PROVIDER";
 
@@ -156,8 +162,7 @@ public class DatabaseIndexingManager {
      * Only the first indexing for the default language gets static search results - subsequent
      * calls will only gather non-indexable keys.
      */
-    @VisibleForTesting
-    void performIndexing() {
+    public void performIndexing() {
         final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
         final List<ResolveInfo> list =
                 mContext.getPackageManager().queryIntentContentProviders(intent, 0);
@@ -1262,6 +1267,7 @@ public class DatabaseIndexingManager {
 
         @VisibleForTesting
         IndexingCallback mCallback;
+        private long mIndexStartTime;
 
         public IndexingTask(IndexingCallback callback) {
             mCallback = callback;
@@ -1269,6 +1275,7 @@ public class DatabaseIndexingManager {
 
         @Override
         protected void onPreExecute() {
+            mIndexStartTime = System.currentTimeMillis();
             mIsIndexingComplete.set(false);
         }
 
@@ -1280,6 +1287,10 @@ public class DatabaseIndexingManager {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            int indexingTime = (int) (System.currentTimeMillis() - mIndexStartTime);
+            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                    .histogram(mContext, METRICS_ACTION_SETTINGS_ASYNC_INDEX, indexingTime);
+
             mIsIndexingComplete.set(true);
             if (mCallback != null) {
                 mCallback.onIndexingFinished();

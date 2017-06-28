@@ -268,7 +268,7 @@ public class SearchFragmentTest {
                 .thenReturn(true);
 
         fragment.onAttach(null);
-        verify(mFeatureFactory.searchFeatureProvider).updateIndex(any(Context.class),
+        verify(mFeatureFactory.searchFeatureProvider).updateIndexAsync(any(Context.class),
                 any(IndexingCallback.class));
     }
 

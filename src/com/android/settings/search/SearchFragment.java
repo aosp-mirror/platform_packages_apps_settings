@@ -157,7 +157,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         final Activity activity = getActivity();
         // Run the Index update only if we have some space
         if (!Utils.isLowStorage(activity)) {
-            mSearchFeatureProvider.updateIndex(activity, this /* indexingCallback */);
+            mSearchFeatureProvider.updateIndexAsync(activity, this /* indexingCallback */);
         } else {
             Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
         }

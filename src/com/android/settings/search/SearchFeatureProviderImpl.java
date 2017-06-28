@@ -19,10 +19,9 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
-
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -30,6 +29,8 @@ import com.android.settings.dashboard.SiteMapManager;
 public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     private static final String TAG = "SearchFeatureProvider";
+
+    private static final String METRICS_ACTION_SETTINGS_INDEX = "search_synchronous_indexing";
 
     private DatabaseIndexingManager mDatabaseIndexingManager;
     private SiteMapManager mSiteMapManager;
@@ -78,11 +79,17 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public void updateIndex(Context context, IndexingCallback callback) {
-        long indexStartTime = System.currentTimeMillis();
+    public void updateIndexAsync(Context context, IndexingCallback callback) {
         getIndexingManager(context).indexDatabase(callback);
-        Log.d(TAG, "IndexDatabase() took " +
-                (System.currentTimeMillis() - indexStartTime) + " ms");
+    }
+
+    @Override
+    public void updateIndex(Context context) {
+        long indexStartTime = System.currentTimeMillis();
+        getIndexingManager(context).performIndexing();
+        int indexingTime = (int) (System.currentTimeMillis() - indexStartTime);
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                .histogram(context, METRICS_ACTION_SETTINGS_INDEX, indexingTime);
     }
 
     /**
