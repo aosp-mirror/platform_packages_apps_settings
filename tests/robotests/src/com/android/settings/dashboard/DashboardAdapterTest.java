@@ -449,6 +449,28 @@ public class DashboardAdapterTest {
     }
 
     @Test
+    public void testSetCategories_iconTinted() {
+        TypedArray mockTypedArray = mock(TypedArray.class);
+        doReturn(mockTypedArray).when(mContext).obtainStyledAttributes(any(int[].class));
+        doReturn(0x89000000).when(mockTypedArray).getColor(anyInt(), anyInt());
+
+        final List<DashboardCategory> categories = new ArrayList<>();
+        final DashboardCategory category = mock(DashboardCategory.class);
+        final List<Tile> tiles = new ArrayList<>();
+        final Icon mockIcon = mock(Icon.class);
+        final Tile tile = new Tile();
+        tile.isIconTintable = true;
+        tile.icon = mockIcon;
+        tiles.add(tile);
+        category.tiles = tiles;
+        categories.add(category);
+
+        mDashboardAdapter.setCategory(categories);
+
+        verify(mockIcon).setTint(eq(0x89000000));
+    }
+
+    @Test
     public void testBindConditionAndSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         when(mFactory.dashboardFeatureProvider.combineSuggestionAndCondition()).thenReturn(true);
         mDashboardAdapter = new DashboardAdapter(mContext, null, null);
@@ -458,6 +480,7 @@ public class DashboardAdapterTest {
         final List<Tile> tiles = new ArrayList<>();
         tiles.add(mock(Tile.class));
         category.tiles = tiles;
+        categories.add(category);
         mDashboardAdapter.setCategoriesAndSuggestions(categories, suggestions);
 
         final RecyclerView data = mock(RecyclerView.class);

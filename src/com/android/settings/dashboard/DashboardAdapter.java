@@ -182,29 +182,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
             List<Tile> suggestions) {
-        if (mDashboardFeatureProvider.shouldTintIcon()) {
-            // TODO: Better place for tinting?
-            final TypedArray a = mContext.obtainStyledAttributes(new int[]{
-                    android.R.attr.colorControlNormal});
-            final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
-            a.recycle();
-            for (int i = 0; i < categories.size(); i++) {
-                for (int j = 0; j < categories.get(i).tiles.size(); j++) {
-                    final Tile tile = categories.get(i).tiles.get(j);
-
-                    if (tile.isIconTintable) {
-                        // If this drawable is tintable, tint it to match the color.
-                        tile.icon.setTint(tintColor);
-                    }
-                }
-            }
-
-            for (Tile suggestion : suggestions) {
-                if (suggestion.isIconTintable) {
-                    suggestion.icon.setTint(tintColor);
-                }
-            }
-        }
+        tintIcons(categories, suggestions);
 
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
@@ -244,6 +222,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void setCategory(List<DashboardCategory> category) {
+        tintIcons(category, null);
+
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setCategory called");
         mDashboardData = new DashboardData.Builder(prevData)
@@ -667,6 +647,32 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private void onBindCategory(DashboardItemHolder holder, DashboardCategory category) {
         holder.title.setText(category.title);
+    }
+
+    private void tintIcons(List<DashboardCategory> categories, List<Tile> suggestions) {
+        if (!mDashboardFeatureProvider.shouldTintIcon()) {
+            return;
+        }
+        // TODO: Better place for tinting?
+        final TypedArray a = mContext.obtainStyledAttributes(new int[]{
+                android.R.attr.colorControlNormal});
+        final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
+        a.recycle();
+        for (DashboardCategory category : categories) {
+            for (Tile tile : category.tiles) {
+                if (tile.isIconTintable) {
+                    // If this drawable is tintable, tint it to match the color.
+                    tile.icon.setTint(tintColor);
+                }
+            }
+        }
+        if (suggestions != null) {
+            for (Tile suggestion : suggestions) {
+                if (suggestion.isIconTintable) {
+                    suggestion.icon.setTint(tintColor);
+                }
+            }
+        }
     }
 
     void onSaveInstanceState(Bundle outState) {
