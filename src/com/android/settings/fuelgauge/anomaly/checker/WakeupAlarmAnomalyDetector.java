@@ -70,11 +70,12 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
             String targetPackageName) {
         final List<BatterySipper> batterySippers = batteryStatsHelper.getUsageList();
         final List<Anomaly> anomalies = new ArrayList<>();
-        final long totalRunningHours = mBatteryUtils.calculateRunningTimeBasedOnStatsType(
-                batteryStatsHelper, BatteryStats.STATS_SINCE_CHARGED) / DateUtils.HOUR_IN_MILLIS;
+        final double totalRunningHours = mBatteryUtils.calculateRunningTimeBasedOnStatsType(
+                batteryStatsHelper, BatteryStats.STATS_SINCE_CHARGED)
+                / (double) DateUtils.HOUR_IN_MILLIS;
         final int targetUid = mBatteryUtils.getPackageUid(targetPackageName);
 
-        if (totalRunningHours != 0) {
+        if (totalRunningHours >= 1) {
             for (int i = 0, size = batterySippers.size(); i < size; i++) {
                 final BatterySipper sipper = batterySippers.get(i);
                 final BatteryStats.Uid uid = sipper.uidObj;
