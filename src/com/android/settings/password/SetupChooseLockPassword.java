@@ -85,7 +85,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            mCancelButton.setText(R.string.skip_label);
+            if (mForFingerprint) {
+                mCancelButton.setVisibility(View.GONE);
+            } else {
+                mCancelButton.setText(R.string.skip_label);
+            }
 
             boolean showOptionsButton = getActivity().getIntent().getBooleanExtra(
                     ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
