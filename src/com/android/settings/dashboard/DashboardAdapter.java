@@ -67,6 +67,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
     private static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
 
+    @VisibleForTesting
+    static final int SUGGESTION_CONDITION_HEADER_POSITION = 0;
+
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -364,7 +367,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                    2. SuggestionCondition header - the header that shows the summary info for the
                       suggestion/condition that is currently hidden. It has the expand button to
                       expand the section. */
-                if (mDashboardData.getDisplayableSuggestionCount() > 0 && position == 1
+                if (mDashboardData.getDisplayableSuggestionCount() > 0
+                        && position == SUGGESTION_CONDITION_HEADER_POSITION
                         && mDashboardData.getSuggestionConditionMode()
                             != DashboardData.HEADER_MODE_COLLAPSED) {
                     onBindSuggestionHeader((SuggestionAndConditionHeaderHolder) holder);
@@ -382,7 +386,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     mDashboardData = new DashboardData.Builder(prevData).setSuggestionConditionMode(
                         DashboardData.HEADER_MODE_COLLAPSED).build();
                     notifyDashboardDataChanged(prevData);
-                    mRecyclerView.scrollToPosition(1);
+                    mRecyclerView.scrollToPosition(SUGGESTION_CONDITION_HEADER_POSITION);
                 });
                 break;
         }
@@ -616,17 +620,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .setSuggestionConditionMode(nextMode).build();
             notifyDashboardDataChanged(prevData);
             if (wasCollapsed) {
-                mRecyclerView.scrollToPosition(1);
+                mRecyclerView.scrollToPosition(SUGGESTION_CONDITION_HEADER_POSITION);
             }
         });
     }
 
-    private void onBindConditionAndSuggestion(final SuggestionAndConditionContainerHolder holder,
+    @VisibleForTesting
+    void onBindConditionAndSuggestion(final SuggestionAndConditionContainerHolder holder,
             int position) {
         RecyclerView.Adapter<DashboardItemHolder> adapter;
-        // If there is suggestions to show, it will be at position 2 (position 0 = header spacer,
-        // position 1 is suggestion header.
-        if (position == 2 && mDashboardData.getSuggestions() != null) {
+        // If there is suggestions to show, it will be at position 1
+        // position 0 is suggestion header.
+        if (position == (SUGGESTION_CONDITION_HEADER_POSITION + 1)
+                && mDashboardData.getSuggestions() != null) {
             mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
                 mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
             adapter = mSuggestionAdapter;
