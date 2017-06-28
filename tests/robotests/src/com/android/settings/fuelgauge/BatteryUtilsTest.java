@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.os.BatteryStats;
 import android.os.Process;
+import android.os.SystemClock;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
@@ -362,11 +363,12 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetForegroundActivityTotalTimeMs_returnMilliseconds() {
+        final long rawRealtimeMs = SystemClock.elapsedRealtime();
         doReturn(mTimer).when(mUid).getForegroundActivityTimer();
-        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US).when(mTimer).getTotalTimeLocked(anyLong(),
-                anyInt());
+        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US).when(mTimer)
+                .getTotalTimeLocked(rawRealtimeMs * 1000, BatteryStats.STATS_SINCE_CHARGED);
 
-        assertThat(mBatteryUtils.getForegroundActivityTotalTimeMs(mUid, 0)).isEqualTo(
+        assertThat(mBatteryUtils.getForegroundActivityTotalTimeMs(mUid, rawRealtimeMs)).isEqualTo(
                 TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 

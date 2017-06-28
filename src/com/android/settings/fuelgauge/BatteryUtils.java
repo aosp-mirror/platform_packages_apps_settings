@@ -330,8 +330,8 @@ public class BatteryUtils {
     long getForegroundActivityTotalTimeMs(BatteryStats.Uid uid, long rawRealtimeMs) {
         final BatteryStats.Timer timer = uid.getForegroundActivityTimer();
         if (timer != null) {
-            return convertUsToMs(
-                    timer.getTotalTimeLocked(rawRealtimeMs, BatteryStats.STATS_SINCE_CHARGED));
+            return convertUsToMs(timer.getTotalTimeLocked(convertMsToUs(rawRealtimeMs),
+                            BatteryStats.STATS_SINCE_CHARGED));
         }
 
         return 0;
