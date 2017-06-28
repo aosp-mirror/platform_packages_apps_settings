@@ -1006,6 +1006,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT,
                 isSavedNetwork);
         mWifiManager.connect(config, mConnectListener);
+        scrollToPreference(mConnectedAccessPointPreferenceCategory);
     }
 
     protected void connect(final int networkId, boolean isSavedNetwork) {
