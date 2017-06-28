@@ -15,7 +15,6 @@
  */
 package com.android.settings.dashboard;
 
-import android.annotation.ColorInt;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -40,12 +39,10 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardData.SuggestionConditionHeaderData;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
-import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -63,7 +60,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public static final String TAG = "DashboardAdapter";
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
-    private static final String STATE_SUGGESTION_MODE = "suggestion_mode";
     private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
     private static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
 
@@ -77,7 +73,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
     private final ArrayList<String> mSuggestionsShownLogged;
     private boolean mFirstFrameDrawn;
-    private boolean mCombineSuggestionAndCondition;
     private RecyclerView mRecyclerView;
     private SuggestionParser mSuggestionParser;
     private SuggestionAdapter mSuggestionAdapter;
@@ -99,46 +94,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         @Override
         public void onClick(View v) {
-            if (mCombineSuggestionAndCondition) {
-                Condition condition = (Condition) v.getTag();
-                //TODO: get rid of setTag/getTag
-                mMetricsFeatureProvider.action(mContext,
+            Condition condition = (Condition) v.getTag();
+            //TODO: get rid of setTag/getTag
+            mMetricsFeatureProvider.action(mContext,
                     MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
                     condition.getMetricsConstant());
-                condition.onPrimaryClick();
-            } else {
-                Condition expandedCondition = mDashboardData.getExpandedCondition();
-
-                //TODO: get rid of setTag/getTag
-                if (v.getTag() == expandedCondition) {
-                    mMetricsFeatureProvider.action(mContext,
-                        MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
-                        expandedCondition.getMetricsConstant());
-                    expandedCondition.onPrimaryClick();
-                } else {
-                    expandedCondition = (Condition) v.getTag();
-                    mMetricsFeatureProvider.action(mContext,
-                        MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
-                        expandedCondition.getMetricsConstant());
-
-                    updateExpandedCondition(expandedCondition);
-                }
-            }
+            condition.onPrimaryClick();
         }
     };
-
-    @Deprecated
-    public DashboardAdapter(Context context, Bundle savedInstanceState,
-        List<Condition> conditions) {
-        this(context, savedInstanceState, conditions, null, null);
-    }
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
             List<Condition> conditions, SuggestionParser suggestionParser,
             SuggestionDismissController.Callback callback) {
         List<Tile> suggestions = null;
         List<DashboardCategory> categories = null;
-        int suggestionMode = DashboardData.SUGGESTION_MODE_DEFAULT;
         int suggestionConditionMode = DashboardData.HEADER_MODE_DEFAULT;
 
         mContext = context;
@@ -146,7 +115,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
         mSuggestionFeatureProvider = factory.getSuggestionFeatureProvider(context);
-        mCombineSuggestionAndCondition = mDashboardFeatureProvider.combineSuggestionAndCondition();
         mCache = new IconCache(context);
         mSuggestionParser = suggestionParser;
         mCallback = callback;
@@ -158,8 +126,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             categories = savedInstanceState.getParcelableArrayList(STATE_CATEGORY_LIST);
             suggestionConditionMode = savedInstanceState.getInt(
                 STATE_SUGGESTION_CONDITION_MODE, suggestionConditionMode);
-            suggestionMode = savedInstanceState.getInt(
-                    STATE_SUGGESTION_MODE, DashboardData.SUGGESTION_MODE_DEFAULT);
             mSuggestionsShownLogged = savedInstanceState.getStringArrayList(
                     STATE_SUGGESTIONS_SHOWN_LOGGED);
         } else {
@@ -170,8 +136,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .setConditions(conditions)
                 .setSuggestions(suggestions)
                 .setCategories(categories)
-                .setSuggestionMode(suggestionMode)
-                .setCombineSuggestionAndCondition(mCombineSuggestionAndCondition)
                 .setSuggestionConditionMode(suggestionConditionMode)
                 .build();
     }
@@ -213,24 +177,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .build();
         notifyDashboardDataChanged(prevData);
         List<Tile> shownSuggestions = null;
-        if (mCombineSuggestionAndCondition) {
-            final int mode = mDashboardData.getSuggestionConditionMode();
-            if (mode == DashboardData.HEADER_MODE_DEFAULT) {
-                shownSuggestions = suggestions.subList(0,
+        final int mode = mDashboardData.getSuggestionConditionMode();
+        if (mode == DashboardData.HEADER_MODE_DEFAULT) {
+            shownSuggestions = suggestions.subList(0,
                     Math.min(suggestions.size(), DashboardData.DEFAULT_SUGGESTION_COUNT));
-            } else if (mode != DashboardData.HEADER_MODE_COLLAPSED) {
-                shownSuggestions = suggestions;
-            }
-        } else {
-            switch (mDashboardData.getSuggestionMode()) {
-                case DashboardData.SUGGESTION_MODE_DEFAULT:
-                    shownSuggestions = suggestions.subList(0,
-                        Math.min(suggestions.size(), DashboardData.DEFAULT_SUGGESTION_COUNT));
-                    break;
-                case DashboardData.SUGGESTION_MODE_EXPANDED:
-                    shownSuggestions = suggestions;
-                    break;
-            }
+        } else if (mode != DashboardData.HEADER_MODE_COLLAPSED) {
+            shownSuggestions = suggestions;
         }
         if (shownSuggestions != null) {
             for (Tile suggestion : shownSuggestions) {
@@ -255,16 +207,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void setConditions(List<Condition> conditions) {
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setConditions called");
-        if (mCombineSuggestionAndCondition) {
-            mDashboardData = new DashboardData.Builder(prevData)
+        mDashboardData = new DashboardData.Builder(prevData)
                 .setConditions(conditions)
                 .build();
-        } else {
-            mDashboardData = new DashboardData.Builder(prevData)
-                .setConditions(conditions)
-                .setExpandedCondition(null)
-                .build();
-        }
         notifyDashboardDataChanged(prevData);
     }
 
@@ -312,44 +257,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 onBindTile(holder, tile);
                 holder.itemView.setTag(tile);
                 holder.itemView.setOnClickListener(mTileClickListener);
-                break;
-            case R.layout.suggestion_header:
-                onBindSuggestionHeader(holder, (DashboardData.SuggestionHeaderData)
-                        mDashboardData.getItemEntityByPosition(position));
-                break;
-            case R.layout.suggestion_tile:
-            case R.layout.suggestion_tile_card:
-                final Tile suggestion = (Tile) mDashboardData.getItemEntityByPosition(position);
-                final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
-                        mContext, suggestion);
-                // This is for cases when a suggestion is dismissed and the next one comes to view
-                if (!mSuggestionsShownLogged.contains(suggestionId)) {
-                    mMetricsFeatureProvider.action(
-                            mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId);
-                    mSuggestionsShownLogged.add(suggestionId);
-                }
-                onBindTile(holder, suggestion);
-                View clickHandler = holder.itemView;
-                // If a view with @android:id/primary is defined, use that as the click handler
-                // instead.
-                final View primaryAction = holder.itemView.findViewById(android.R.id.primary);
-                if (primaryAction != null) {
-                    clickHandler = primaryAction;
-                    // set the item view to disabled to remove any touch effects
-                    holder.itemView.setEnabled(false);
-                }
-                clickHandler.setOnClickListener(v -> {
-                    mMetricsFeatureProvider.action(mContext,
-                            MetricsEvent.ACTION_SETTINGS_SUGGESTION, suggestionId);
-                    ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
-                });
-                break;
-            case R.layout.condition_card:
-                final boolean isExpanded = mDashboardData.getItemEntityByPosition(position)
-                        == mDashboardData.getExpandedCondition();
-                ConditionAdapterUtils.bindViews(
-                        (Condition) mDashboardData.getItemEntityByPosition(position),
-                        holder, isExpanded, mConditionClickListener, v -> onExpandClick(v));
                 break;
             case R.layout.suggestion_condition_container:
                 onBindConditionAndSuggestion(
@@ -430,34 +337,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mSuggestionsShownLogged.clear();
     }
 
-    // condition card is always expanded in new suggestion/condition UI.
-    // TODO: Remove when completely move to new suggestion/condition UI
-    @Deprecated
-    public void onExpandClick(View v) {
-        Condition expandedCondition = mDashboardData.getExpandedCondition();
-        if (v.getTag() == expandedCondition) {
-            mMetricsFeatureProvider.action(mContext,
-                    MetricsEvent.ACTION_SETTINGS_CONDITION_COLLAPSE,
-                    expandedCondition.getMetricsConstant());
-            expandedCondition = null;
-        } else {
-            expandedCondition = (Condition) v.getTag();
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
-                    expandedCondition.getMetricsConstant());
-        }
-
-        updateExpandedCondition(expandedCondition);
-    }
-
     public Object getItem(long itemId) {
         return mDashboardData.getItemEntityById(itemId);
     }
 
     public Tile getSuggestion(int position) {
-        if (mCombineSuggestionAndCondition) {
-            return mSuggestionAdapter.getSuggestion(position);
-        }
-        return (Tile) getItem(getItemId(position));
+        return mSuggestionAdapter.getSuggestion(position);
     }
 
     @VisibleForTesting
@@ -470,56 +355,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             mFirstFrameDrawn = true;
             notifyDataSetChanged();
         }
-    }
-
-    private void updateExpandedCondition(Condition condition) {
-        final DashboardData prevData = mDashboardData;
-        mDashboardData = new DashboardData.Builder(prevData)
-                .setExpandedCondition(condition)
-                .build();
-        notifyDashboardDataChanged(prevData);
-    }
-
-    @VisibleForTesting
-    void onBindSuggestionHeader(final DashboardItemHolder holder, DashboardData
-            .SuggestionHeaderData data) {
-        final boolean moreSuggestions = data.hasMoreSuggestions;
-        final int undisplayedSuggestionCount = data.undisplayedSuggestionCount;
-
-        holder.icon.setImageResource(moreSuggestions ? R.drawable.ic_expand_more
-                : R.drawable.ic_expand_less);
-        holder.title.setText(mContext.getString(R.string.suggestions_title, data.suggestionSize));
-        String summaryContentDescription;
-        if (moreSuggestions) {
-            summaryContentDescription = mContext.getResources().getQuantityString(
-                    R.plurals.settings_suggestion_header_summary_hidden_items,
-                    undisplayedSuggestionCount, undisplayedSuggestionCount);
-        } else {
-            summaryContentDescription = mContext.getString(R.string.condition_expand_hide);
-        }
-        holder.summary.setContentDescription(summaryContentDescription);
-
-        if (undisplayedSuggestionCount == 0) {
-            holder.summary.setText(null);
-        } else {
-            holder.summary.setText(
-                    mContext.getString(R.string.suggestions_summary, undisplayedSuggestionCount));
-        }
-        holder.itemView.setOnClickListener(v -> {
-            final int suggestionMode;
-            if (moreSuggestions) {
-                suggestionMode = DashboardData.SUGGESTION_MODE_EXPANDED;
-                logSuggestions();
-            } else {
-                suggestionMode = DashboardData.SUGGESTION_MODE_COLLAPSED;
-            }
-
-            DashboardData prevData = mDashboardData;
-            mDashboardData = new DashboardData.Builder(prevData)
-                    .setSuggestionMode(suggestionMode)
-                    .build();
-            notifyDashboardDataChanged(prevData);
-        });
     }
 
     private void logSuggestions() {
@@ -546,7 +381,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.itemView.setOnClickListener(null);
     }
 
-    private void onBindSuggestionConditionHeader(final SuggestionAndConditionHeaderHolder holder,
+    @VisibleForTesting
+    void onBindSuggestionConditionHeader(final SuggestionAndConditionHeaderHolder holder,
             SuggestionConditionHeaderData data) {
         final int curMode = mDashboardData.getSuggestionConditionMode();
         final int nextMode = data.hiddenSuggestionCount > 0 && data.conditionCount > 0
@@ -628,24 +464,23 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @VisibleForTesting
     void onBindConditionAndSuggestion(final SuggestionAndConditionContainerHolder holder,
             int position) {
-        RecyclerView.Adapter<DashboardItemHolder> adapter;
         // If there is suggestions to show, it will be at position 1
         // position 0 is suggestion header.
         if (position == (SUGGESTION_CONDITION_HEADER_POSITION + 1)
                 && mDashboardData.getSuggestions() != null) {
             mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
                 mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
-            adapter = mSuggestionAdapter;
             mSuggestionDismissHandler = new SuggestionDismissController(mContext,
                 holder.data, mSuggestionParser, mCallback);
+            holder.data.setAdapter(mSuggestionAdapter);
         } else {
-            ConditionAdapterUtils.addDismiss(holder.data);
-            adapter = new ConditionAdapter(mContext,
+            ConditionAdapter adapter = new ConditionAdapter(mContext,
                 (List<Condition>) mDashboardData.getItemEntityByPosition(position),
                     mDashboardData.getSuggestionConditionMode());
+            adapter.addDismissHandling(holder.data);
+            holder.data.setAdapter(adapter);
         }
         holder.data.setLayoutManager(new LinearLayoutManager(mContext));
-        holder.data.setAdapter(adapter);
     }
 
     private void onBindTile(DashboardItemHolder holder, Tile tile) {
@@ -678,7 +513,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (categories != null) {
             outState.putParcelableArrayList(STATE_CATEGORY_LIST, new ArrayList<>(categories));
         }
-        outState.putInt(STATE_SUGGESTION_MODE, mDashboardData.getSuggestionMode());
         outState.putStringArrayList(STATE_SUGGESTIONS_SHOWN_LOGGED, mSuggestionsShownLogged);
         outState.putInt(STATE_SUGGESTION_CONDITION_MODE,
             mDashboardData.getSuggestionConditionMode());
