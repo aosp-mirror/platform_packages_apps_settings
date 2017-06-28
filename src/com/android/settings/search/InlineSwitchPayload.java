@@ -17,16 +17,17 @@
 
 package com.android.settings.search;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.provider.Settings;
 
 /**
  * Payload for inline Switch results. Mappings from integer to boolean.
  */
 public class InlineSwitchPayload extends InlinePayload {
+
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     /**
      * Provides a mapping for how switches are stored.
@@ -45,7 +46,7 @@ public class InlineSwitchPayload extends InlinePayload {
      */
     public InlineSwitchPayload(String key, @SettingsSource int source,
             int onValue, Intent intent, boolean isDeviceSupported) {
-        super(key, PayloadType.INLINE_SWITCH, source, intent, isDeviceSupported);
+        super(key, source, intent, isDeviceSupported);
         // If on is stored as TRUE then the switch is standard.
         mIsStandard = onValue == TRUE;
     }
@@ -56,13 +57,20 @@ public class InlineSwitchPayload extends InlinePayload {
     }
 
     @Override
-    public int getType() {
-        return mInlineType;
+    @PayloadType public int getType() {
+        return PayloadType.INLINE_SWITCH;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    protected int standardizeInput(int value) {
+        if (value != OFF && value != ON) {
+            throw new IllegalArgumentException("Invalid input for InlineSwitch. Expected: "
+                    + ON + " or " + OFF
+                    + " but found: " + value);
+        }
+        return mIsStandard
+                ? value
+                : 1 - value;
     }
 
     @Override
@@ -84,65 +92,7 @@ public class InlineSwitchPayload extends InlinePayload {
         }
     };
 
-    @Override
-    public int getValue(Context context) {
-        int settingsValue = -1;
-        switch(mSettingSource) {
-            case SettingsSource.SECURE:
-                settingsValue = Settings.Secure.getInt(context.getContentResolver(),
-                        mSettingKey, -1);
-                break;
-            case SettingsSource.SYSTEM:
-                settingsValue = Settings.System.getInt(context.getContentResolver(),
-                        mSettingKey, -1);
-                break;
-
-            case SettingsSource.GLOBAL:
-                settingsValue = Settings.Global.getInt(context.getContentResolver(),
-                        mSettingKey, -1);
-                break;
-        }
-
-        if (settingsValue == -1) {
-            throw new IllegalStateException("Unable to find setting from uri: "
-                    + mSettingKey.toString());
-        }
-
-        settingsValue = standardizeInput(settingsValue);
-
-        return settingsValue;
-    }
-
-    @Override
-    public boolean setValue(Context context, int newValue) {
-        if (newValue != 0 && newValue != 1) {
-            throw new IllegalArgumentException("newValue should be 0 for off and 1 for on."
-                    + "The passed value was: " + newValue);
-        }
-
-        newValue = standardizeInput(newValue);
-
-        switch(mSettingSource) {
-            case SettingsSource.GLOBAL:
-                return Settings.Global.putInt(context.getContentResolver(), mSettingKey, newValue);
-            case SettingsSource.SECURE:
-                return Settings.Secure.putInt(context.getContentResolver(), mSettingKey, newValue);
-            case SettingsSource.SYSTEM:
-                return Settings.System.putInt(context.getContentResolver(), mSettingKey, newValue);
-            case SettingsSource.UNKNOWN:
-                return false;
-        }
-
-        return false;
-    }
-
     public boolean isStandard() {
         return mIsStandard;
-    }
-
-    private int standardizeInput(int value) {
-        return mIsStandard
-                ? value
-                : 1 - value;
     }
 }

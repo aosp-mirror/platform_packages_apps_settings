@@ -32,8 +32,8 @@ import java.lang.annotation.RetentionPolicy;
 public class ResultPayload implements Parcelable {
     protected final Intent mIntent;
 
-    @IntDef({PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH,
-            PayloadType.INTENT, PayloadType.SAVED_QUERY})
+    @IntDef({PayloadType.INTENT, PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH,
+            PayloadType.INLINE_LIST, PayloadType.SAVED_QUERY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PayloadType {
         /**
@@ -52,9 +52,14 @@ public class ResultPayload implements Parcelable {
         int INLINE_SWITCH = 2;
 
         /**
+         * Result is an inline list-select, with an undefined UI.
+         */
+        int INLINE_LIST = 3;
+
+        /**
          * Result is a recently saved query.
          */
-        int SAVED_QUERY = 3;
+        int SAVED_QUERY = 4;
     }
 
     /**
