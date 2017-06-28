@@ -7,6 +7,7 @@ import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.internal.Shadow.directlyOn;
 
 import android.annotation.DimenRes;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.content.res.Resources.Theme;
@@ -85,6 +86,15 @@ public class SettingsShadowResources extends ShadowResources {
             return Color.WHITE;
         }
         return directlyOn(realResources, Resources.class).getColor(id, theme);
+    }
+
+    @Implementation
+    public ColorStateList getColorStateList(@ColorRes int id, @Nullable Theme theme)
+            throws NotFoundException {
+        if (id == com.android.internal.R.color.text_color_primary) {
+            return ColorStateList.valueOf(Color.WHITE);
+        }
+        return directlyOn(realResources, Resources.class).getColorStateList(id, theme);
     }
 
     @Implementation

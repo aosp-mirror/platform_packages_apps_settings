@@ -20,8 +20,8 @@ package com.android.settings.search;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.VisibleForTesting;
 
-import android.text.TextUtils;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
 
@@ -97,7 +97,8 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      */
     public static final int[] BASE_RANKS = {1, 3, 7, 9};
 
-    private final String mQueryText;
+    @VisibleForTesting
+    final String mQueryText;
     private final Context mContext;
     private final CursorToSearchResultConverter mConverter;
     private final SiteMapManager mSiteMapManager;
@@ -106,7 +107,7 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
         super(context);
         mSiteMapManager = mapManager;
         mContext = context;
-        mQueryText = cleanQuery(queryText);
+        mQueryText = queryText;
         mConverter = new CursorToSearchResultConverter(context);
     }
 
@@ -134,18 +135,6 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
     protected boolean onCancelLoad() {
         // TODO
         return super.onCancelLoad();
-    }
-
-    /**
-     * A generic method to make the query suitable for searching the database.
-     *
-     * @return the cleaned query string
-     */
-    private static String cleanQuery(String query) {
-        if (TextUtils.isEmpty(query)) {
-            return null;
-        }
-        return query.trim();
     }
 
     /**

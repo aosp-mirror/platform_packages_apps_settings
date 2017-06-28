@@ -22,11 +22,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -111,14 +111,6 @@ public class DatabaseResultLoaderTest {
     public void testSpecialCaseWord_matchesNonPrefix() {
         insertSpecialCase("Data usage");
         DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "usage", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
-    }
-
-    @Test
-    public void testSpecialCaseSpace_matches() {
-        insertSpecialCase("space");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, " space ",
-                mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 

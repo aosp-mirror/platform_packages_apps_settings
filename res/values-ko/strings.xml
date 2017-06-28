@@ -392,6 +392,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"손가락을 들어 지문의 다른 부분을 추가하세요."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"지문 추가됨"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"이 아이콘이 표시되면 지문을 사용하여 사용자 본인임을 인증하거나 구매를 승인하세요."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"지문 설정을 건너뛰시겠습니까?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"지문으로 휴대전화를 잠금 해제하도록 설정했습니다. 지금 건너뛰면 나중에 설정해야 하며 설정에는 약 1분 정도 소요됩니다."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"화면 잠금 설정"</string>
@@ -2081,8 +2083,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"전체 배터리 사용량의 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"마지막 충전 완료 후 사용 내역 분석"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"마지막 충전 완료"</string>
-    <!-- no translation found for battery_footer_summary (67169726550144016) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"배터리 사용 데이터는 대략적인 수치이며, 사용량에 따라 변경될 수 있습니다."</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"연속사용 중일 때"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"백그라운드에 있을 때"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"배터리 사용량"</string>
@@ -3597,12 +3598,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"자동으로 직장 데이터 동기화"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"앱에서 데이터를 자동으로 새로고침하도록 허용"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"계정 동기화"</string>
-    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
-    <skip />
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"<xliff:g id="ID_1">%1$d</xliff:g>/<xliff:g id="ID_2">%2$d</xliff:g>개 항목 동기화"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"모든 항목 동기화"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"모든 항목을 동기화하지 않음"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"관리 기기 정보"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"조직에서 관리하는 변경사항 및 설정"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>에서 관리하는 변경사항 및 설정"</string>

@@ -392,6 +392,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Ves aixecant el dit perquè es puguin afegir les diferents parts de l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Empremta digital afegida"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Quan vegis aquesta icona, podràs fer servir l\'empremta digital per identificar-te o aprovar compres."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Sortir de configuració d\'empremta digital?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Has triat utilitzar la teva empremta digital per desbloquejar el telèfon. Si omets aquest pas ara, hauràs de fer aquesta configuració més endavant. Aquest procés només triga un parell de minuts."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Configura el bloqueig de pantalla"</string>
@@ -794,7 +796,7 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Identitat anònima"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Contrasenya"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Mostra la contrasenya"</string>
-    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Selecciona la banda AP"</string>
+    <string name="wifi_ap_band_config" msgid="1611826705989117930">"Selecciona la banda del punt d\'accés"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"Banda de 5 GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Configuració IP"</string>
@@ -882,7 +884,7 @@
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"S\'està activant <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Altres dispositius es poden connectar a <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Contrasenya de la Wi-Fi"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda AP"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda del punt d\'accés"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Utilitza el punt d\'accés Wi-Fi per crear una xarxa Wi-Fi per a altres dispositius. El punt d\'accés Wi-Fi proporciona Internet mitjançant la teva connexió de dades mòbils. És possible que s\'hi apliquin càrrecs addicionals per l\'ús de dades mòbils."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Les aplicacions poden crear un punt d\'accés Wi-Fi per compartir contingut amb els dispositius que es trobin a prop."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"S\'està activant el punt d\'accés Wi-Fi…"</string>
@@ -2081,8 +2083,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> d\'ús de la bateria"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Desglossament des de l\'última càrrega completa"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Última càrrega completa"</string>
-    <!-- no translation found for battery_footer_summary (67169726550144016) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"Les dades d\'ús de la bateria són aproximades i poden variar en funció de l\'ús del dispositiu"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Durant l\'ús actiu"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"En segon pla"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Ús de la bateria"</string>
@@ -3039,10 +3040,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixació de pantalla"</string>
     <string name="screen_pinning_description" msgid="3360904523688769289">"Si aquesta opció està activada, pots fixar la pantalla per mantenir-la visible fins que deixis de fixar-la.\n\nPer fer-ho:\n\n1. Assegura\'t que la fixació de pantalla estigui activada.\n\n2. Obre la pantalla que vulguis fixar.\n\n3. Toca Aplicacions recents.\n\n4. Llisca cap amunt i toca la icona de fixació."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Sol·licita el patró de desbloqueig per anul·lar"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demana el codi PIN per anul·lar"</string>
-    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demana la contrasenya per anul·lar"</string>
-    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Bloqueja el dispositiu en anul·lar la fixació"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Sol·licita el patró de desbloqueig per deixar de fixar"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demana el codi PIN per deixar de fixar"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demana la contrasenya per deixar de fixar"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Bloqueja el dispositiu en deixar de fixar"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"L\'administrador d\'aquest perfil professional és:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Gestionat per <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
@@ -3597,12 +3598,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Sincronitza les dades professionals automàticament"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Permet que les aplicacions actualitzin les dades automàticament"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Sincronització del compte"</string>
-    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
-    <skip />
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"La sincronització està activada per a <xliff:g id="ID_1">%1$d</xliff:g> de <xliff:g id="ID_2">%2$d</xliff:g> elements"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"La sincronització està activada per a tots els elements"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"La sincronització està desactivada per a tots els elements"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Informació del dispositiu gestionat"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"La teva organització gestiona els canvis i la configuració"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> gestiona els canvis i la configuració"</string>
