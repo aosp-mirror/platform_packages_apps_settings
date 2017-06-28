@@ -62,9 +62,15 @@ public interface SearchFeatureProvider {
     SiteMapManager getSiteMapManager();
 
     /**
-     * Updates the Settings indexes
+     * Updates the Settings indexes and calls {@link IndexingCallback#onIndexingFinished()} on
+     * {@param callback} when indexing is complete.
      */
-    void updateIndex(Context context, IndexingCallback callback);
+    void updateIndexAsync(Context context, IndexingCallback callback);
+
+    /**
+     * Synchronously updates the Settings database.
+     */
+    void updateIndex(Context context);
 
     /**
      * @returns true when indexing is complete.
