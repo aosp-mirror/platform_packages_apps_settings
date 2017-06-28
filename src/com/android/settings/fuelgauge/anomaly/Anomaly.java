@@ -45,10 +45,12 @@ public class Anomaly implements Parcelable {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({AnomalyActionType.FORCE_STOP,
-            AnomalyActionType.BACKGROUND_CHECK})
+            AnomalyActionType.BACKGROUND_CHECK,
+            AnomalyActionType.LOCATION_CHECK})
     public @interface AnomalyActionType {
         int FORCE_STOP = 0;
         int BACKGROUND_CHECK = 1;
+        int LOCATION_CHECK = 2;
     }
 
     @AnomalyType
