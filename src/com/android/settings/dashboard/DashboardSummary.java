@@ -32,7 +32,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
@@ -75,7 +74,6 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
-    private SuggestionDismissController mSuggestionDismissHandler;
 
     @Override
     public int getMetricsCategory() {
@@ -192,17 +190,11 @@ public class DashboardSummary extends InstrumentedFragment
         }
         mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
-        mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
         Log.d(TAG, "adapter created");
         mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
             mSuggestionParser, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
-        if (!mDashboardFeatureProvider.combineSuggestionAndCondition()) {
-            mSuggestionDismissHandler = new SuggestionDismissController(
-                getContext(), mDashboard, mSuggestionParser, this);
-            ConditionAdapterUtils.addDismiss(mDashboard);
-        }
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
         if (DEBUG_TIMING) {
