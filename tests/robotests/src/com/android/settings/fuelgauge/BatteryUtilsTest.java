@@ -80,6 +80,7 @@ public class BatteryUtilsTest {
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
     private static final long TIME_EXPECTED_ALL = 7500;
     private static final double BATTERY_SCREEN_USAGE = 300;
+    private static final double BATTERY_IDLE_USAGE = 600;
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
     private static final double BATTERY_UNACCOUNTED_USAGE = 700;
@@ -110,6 +111,8 @@ public class BatteryUtilsTest {
     private BatterySipper mSystemBatterySipper;
     @Mock
     private BatterySipper mCellBatterySipper;
+    @Mock
+    private BatterySipper mIdleBatterySipper;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -161,6 +164,9 @@ public class BatteryUtilsTest {
         mUnaccountedBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
         mUnaccountedBatterySipper.totalPowerMah = BATTERY_UNACCOUNTED_USAGE;
 
+        mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
+        mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
+
         mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
 
@@ -209,6 +215,7 @@ public class BatteryUtilsTest {
         sippers.add(mUnaccountedBatterySipper);
         sippers.add(mWifiBatterySipper);
         sippers.add(mBluetoothBatterySipper);
+        sippers.add(mIdleBatterySipper);
         when(mProvider.isTypeSystem(mSystemBatterySipper))
                 .thenReturn(true);
         doNothing().when(mBatteryUtils).smearScreenBatterySipper(any(), any());
