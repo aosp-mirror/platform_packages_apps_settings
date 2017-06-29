@@ -19,15 +19,15 @@ package com.android.settings.dashboard.suggestions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-
 import android.provider.Settings.Secure;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.Settings;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
@@ -50,14 +50,15 @@ import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowSecureSettings.class)
+        sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowSecureSettings.class)
 public class SuggestionFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -140,6 +141,25 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
+    public void dismissSuggestion_isShowingFirstImpressionType_dismissWithoutSmartSuggestionRule() {
+        mProvider = spy(mProvider);
+        when(mProvider.isSmartSuggestionEnabled(any(Context.class))).thenReturn(true);
+        final SharedPreferences pref = RuntimeEnvironment.application.getSharedPreferences(
+                "test_pref", Context.MODE_PRIVATE);
+        when(mProvider.getSharedPrefs(mContext)).thenReturn(pref);
+        when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
+                .thenReturn(false);
+
+        mProvider.dismissSuggestion(mContext, mSuggestionParser, mSuggestion);
+
+        verify(mFactory.metricsFeatureProvider).action(
+                eq(mContext),
+                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
+                anyString());
+        verify(mSuggestionParser).dismissSuggestion(any(Tile.class), eq(false));
+    }
+
+    @Test
     public void dismissSuggestion_noContext_shouldDoNothing() {
         mProvider.dismissSuggestion(null, mSuggestionParser, mSuggestion);
 
@@ -195,14 +215,14 @@ public class SuggestionFeatureProviderImplTest {
     public void nightDisplaySuggestion_isCompleted_ifPreviouslyActivated() {
         Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
         final ComponentName componentName =
-            new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
         assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
     }
 
     @Test
     public void nightDisplaySuggestion_isNotCompleted_byDefault() {
         final ComponentName componentName =
-            new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
         assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isFalse();
     }
 }
