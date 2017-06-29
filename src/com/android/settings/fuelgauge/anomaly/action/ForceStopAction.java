@@ -21,43 +21,32 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.overlay.FeatureFactory;
-
-import java.util.List;
 
 /**
  * Force stop action for anomaly app, which means to stop the app which causes anomaly
  */
-public class ForceStopAction implements AnomalyAction {
+public class ForceStopAction extends AnomalyAction {
     private static final String TAG = "ForceStopAction";
 
-    private Context mContext;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
     private ActivityManager mActivityManager;
     private PackageManager mPackageManager;
 
     public ForceStopAction(Context context) {
-        mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        super(context);
         mActivityManager = (ActivityManager) context.getSystemService(
                 Context.ACTIVITY_SERVICE);
         mPackageManager = context.getPackageManager();
+        mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP;
     }
 
     @Override
-    public void handlePositiveAction(Anomaly anomaly, int metricsKey) {
-        final String packageName = anomaly.packageName;
-        // force stop the package
-        mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP, packageName,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
+    public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
+        super.handlePositiveAction(anomaly, contextMetricsKey);
 
-        mActivityManager.forceStopPackage(packageName);
+        mActivityManager.forceStopPackage(anomaly.packageName);
     }
 
     @Override

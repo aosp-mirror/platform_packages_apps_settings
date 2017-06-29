@@ -60,12 +60,6 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
         return SetupRedactionInterstitialFragment.class.getName().equals(fragmentName);
     }
 
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
-    }
-
     public static class SetupRedactionInterstitialFragment extends RedactionInterstitialFragment {
 
         // Setup wizard specific UI customizations can be done here

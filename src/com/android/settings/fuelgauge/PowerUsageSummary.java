@@ -848,6 +848,12 @@ public class PowerUsageSummary extends PowerUsageBase implements
         performBatteryHeaderClick();
     }
 
+    @Override
+    protected void restartBatteryStatsLoader() {
+        super.restartBatteryStatsLoader();
+        mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
+    }
+
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
         private final Context mContext;
         private final SummaryLoader mLoader;

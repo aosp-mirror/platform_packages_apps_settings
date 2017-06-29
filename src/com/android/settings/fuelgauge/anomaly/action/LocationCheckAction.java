@@ -16,43 +16,44 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
-import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.permission.RuntimePermissionPresenter;
+import android.support.v4.content.PermissionChecker;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 /**
- * Background check action for anomaly app, which means to stop app running in the background
+ * Location action for anomaly app, which means to turn off location permission for this app
  */
-public class BackgroundCheckAction extends AnomalyAction {
+public class LocationCheckAction extends AnomalyAction {
 
-    private AppOpsManager mAppOpsManager;
+    private static final String TAG = "LocationCheckAction";
+    private static final String LOCATION_PERMISSION = "android.permission-group.LOCATION";
 
-    public BackgroundCheckAction(Context context) {
+    private final RuntimePermissionPresenter mRuntimePermissionPresenter;
+
+    public LocationCheckAction(Context context) {
         super(context);
-        mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_BACKGROUND_CHECK;
+        mRuntimePermissionPresenter = RuntimePermissionPresenter.getInstance(context);
+        mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_LOCATION_CHECK;
     }
 
     @Override
     public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
         super.handlePositiveAction(anomaly, contextMetricsKey);
-
-        mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid, anomaly.packageName,
-                AppOpsManager.MODE_IGNORED);
+        mRuntimePermissionPresenter.revokeRuntimePermission(anomaly.packageName,
+                LOCATION_PERMISSION);
     }
 
     @Override
     public boolean isActionActive(Anomaly anomaly) {
-        final int mode = mAppOpsManager
-                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid,
-                        anomaly.packageName);
-        return mode != AppOpsManager.MODE_IGNORED && mode != AppOpsManager.MODE_ERRORED;
+        return PermissionChecker.checkPermission(mContext, LOCATION_PERMISSION, -1, anomaly.uid,
+                anomaly.packageName) == PermissionChecker.PERMISSION_GRANTED;
     }
 
     @Override
     public int getActionType() {
-        return Anomaly.AnomalyActionType.BACKGROUND_CHECK;
+        return Anomaly.AnomalyActionType.LOCATION_CHECK;
     }
 }

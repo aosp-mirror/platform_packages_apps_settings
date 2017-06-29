@@ -19,7 +19,6 @@ package com.android.settings.fingerprint;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.UserHandle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,12 +49,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         final Intent intent = new Intent(this, SetupFingerprintEnrollFindSensor.class);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override

@@ -95,9 +95,4 @@ public interface DashboardFeatureProvider {
      */
     void openTileIntent(Activity activity, Tile tile);
 
-    /**
-     * Whether or not we should use new UI that combines the settings suggestions and conditions.
-     */
-    boolean combineSuggestionAndCondition();
-
 }

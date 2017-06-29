@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
@@ -47,7 +48,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     @VisibleForTesting
     BatteryMeterView mBatteryMeterView;
     @VisibleForTesting
-    TextView mTimeText;
+    TextView mBatteryPercentText;
     @VisibleForTesting
     TextView mSummary1;
     @VisibleForTesting
@@ -76,16 +77,11 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
         mBatteryLayoutPref = (LayoutPreference) screen.findPreference(KEY_BATTERY_HEADER);
         mBatteryMeterView = (BatteryMeterView) mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
-        mTimeText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
+        mBatteryPercentText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
         mSummary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
         mSummary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
 
-        Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
-
-        mBatteryMeterView.setBatteryLevel(batteryLevel);
-        mTimeText.setText(Utils.formatPercentage(batteryLevel));
+        quickUpdateHeaderPreference();
     }
 
     @Override
@@ -107,7 +103,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     }
 
     public void updateHeaderPreference(BatteryInfo info) {
-        mTimeText.setText(Utils.formatPercentage(info.batteryLevel));
+        mBatteryPercentText.setText(Utils.formatPercentage(info.batteryLevel));
         if (info.remainingLabel == null) {
             mSummary1.setText(info.statusLabel);
         } else {
@@ -119,5 +115,22 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
         mBatteryMeterView.setCharging(!info.discharging);
+    }
+
+    public void quickUpdateHeaderPreference() {
+        Intent batteryBroadcast = mContext.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
+        final boolean discharging =
+                batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+
+        // Set battery level and charging status
+        mBatteryMeterView.setBatteryLevel(batteryLevel);
+        mBatteryMeterView.setCharging(!discharging);
+        mBatteryPercentText.setText(Utils.formatPercentage(batteryLevel));
+
+        // clear all the summaries
+        mSummary1.setText("");
+        mSummary2.setText("");
     }
 }

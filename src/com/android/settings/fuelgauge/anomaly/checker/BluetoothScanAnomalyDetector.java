@@ -48,15 +48,17 @@ public class BluetoothScanAnomalyDetector implements AnomalyDetector {
     private Context mContext;
 
     public BluetoothScanAnomalyDetector(Context context) {
-        this(context, new AnomalyDetectionPolicy(context));
+        this(context, new AnomalyDetectionPolicy(context),
+                AnomalyUtils.getInstance(context).getAnomalyAction(
+                        Anomaly.AnomalyType.BLUETOOTH_SCAN));
     }
 
     @VisibleForTesting
-    BluetoothScanAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
+    BluetoothScanAnomalyDetector(Context context, AnomalyDetectionPolicy policy,
+            AnomalyAction anomalyAction) {
         mContext = context;
         mBatteryUtils = BatteryUtils.getInstance(context);
-        mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
-                Anomaly.AnomalyType.BLUETOOTH_SCAN);
+        mAnomalyAction = anomalyAction;
         mBluetoothScanningThreshold = policy.bluetoothScanThreshold;
     }
 

@@ -144,7 +144,8 @@ public class BatteryUtils {
                         && sipper.drainType != BatterySipper.DrainType.SCREEN
                         && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
                         && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
-                        && sipper.drainType != BatterySipper.DrainType.WIFI) {
+                        && sipper.drainType != BatterySipper.DrainType.WIFI
+                        && sipper.drainType != BatterySipper.DrainType.IDLE) {
                     // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, or screen
                     proportionalSmearPowerMah += sipper.totalPowerMah;
                 }
@@ -330,7 +331,8 @@ public class BatteryUtils {
     long getForegroundActivityTotalTimeMs(BatteryStats.Uid uid, long rawRealtimeMs) {
         final BatteryStats.Timer timer = uid.getForegroundActivityTimer();
         if (timer != null) {
-            return timer.getTotalTimeLocked(rawRealtimeMs, BatteryStats.STATS_SINCE_CHARGED);
+            return convertUsToMs(timer.getTotalTimeLocked(convertMsToUs(rawRealtimeMs),
+                            BatteryStats.STATS_SINCE_CHARGED));
         }
 
         return 0;

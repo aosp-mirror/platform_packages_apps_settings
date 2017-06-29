@@ -17,7 +17,6 @@
 package com.android.settings.fingerprint;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.UserHandle;
 import android.widget.Button;
 
@@ -37,12 +36,6 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
         }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override

@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.os.BatteryStats;
 import android.os.Process;
+import android.os.SystemClock;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
@@ -80,6 +81,7 @@ public class BatteryUtilsTest {
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
     private static final long TIME_EXPECTED_ALL = 7500;
     private static final double BATTERY_SCREEN_USAGE = 300;
+    private static final double BATTERY_IDLE_USAGE = 600;
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
     private static final double BATTERY_UNACCOUNTED_USAGE = 700;
@@ -94,6 +96,8 @@ public class BatteryUtilsTest {
 
     @Mock
     private BatteryStats.Uid mUid;
+    @Mock
+    private BatteryStats.Timer mTimer;
     @Mock
     private BatterySipper mNormalBatterySipper;
     @Mock
@@ -110,6 +114,8 @@ public class BatteryUtilsTest {
     private BatterySipper mSystemBatterySipper;
     @Mock
     private BatterySipper mCellBatterySipper;
+    @Mock
+    private BatterySipper mIdleBatterySipper;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -161,6 +167,9 @@ public class BatteryUtilsTest {
         mUnaccountedBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
         mUnaccountedBatterySipper.totalPowerMah = BATTERY_UNACCOUNTED_USAGE;
 
+        mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
+        mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
+
         mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
 
@@ -209,6 +218,7 @@ public class BatteryUtilsTest {
         sippers.add(mUnaccountedBatterySipper);
         sippers.add(mWifiBatterySipper);
         sippers.add(mBluetoothBatterySipper);
+        sippers.add(mIdleBatterySipper);
         when(mProvider.isTypeSystem(mSystemBatterySipper))
                 .thenReturn(true);
         doNothing().when(mBatteryUtils).smearScreenBatterySipper(any(), any());
@@ -356,6 +366,17 @@ public class BatteryUtilsTest {
                 .isEqualTo(R.string.battery_abnormal_wakeup_alarm_summary);
         assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.BLUETOOTH_SCAN))
                 .isEqualTo(R.string.battery_abnormal_location_summary);
+    }
+
+    @Test
+    public void testGetForegroundActivityTotalTimeMs_returnMilliseconds() {
+        final long rawRealtimeMs = SystemClock.elapsedRealtime();
+        doReturn(mTimer).when(mUid).getForegroundActivityTimer();
+        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US).when(mTimer)
+                .getTotalTimeLocked(rawRealtimeMs * 1000, BatteryStats.STATS_SINCE_CHARGED);
+
+        assertThat(mBatteryUtils.getForegroundActivityTotalTimeMs(mUid, rawRealtimeMs)).isEqualTo(
+                TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
     private BatterySipper createTestSmearBatterySipper(long activityTime, long topTime,
