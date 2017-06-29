@@ -572,7 +572,7 @@ public class DatabaseIndexingManagerTest {
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
         // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
+        assertThat(cursor.getInt(1)).isEqualTo(0);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("Display size");
         // Normalized Title
@@ -629,7 +629,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testResourceProvider_resourceRowMatches() {
-        SearchIndexableResource resource = getFakeResource(0);
+        SearchIndexableResource resource = getFakeResource(0 /* xml */);
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
@@ -639,7 +639,7 @@ public class DatabaseIndexingManagerTest {
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
         // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
+        assertThat(cursor.getInt(1)).isEqualTo(0);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("Display size");
         // Normalized Title
@@ -687,7 +687,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testResourceProvider_disabledResource_rowsInserted() {
-        SearchIndexableResource resource = getFakeResource(0);
+        SearchIndexableResource resource = getFakeResource(0 /* xml */);
         resource.className = "com.android.settings.LegalSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
@@ -707,6 +707,25 @@ public class DatabaseIndexingManagerTest {
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE" +
                 " enabled = 1", null);
         assertThat(cursor.getCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void testResourceProvider_nonSubsettingIntent() {
+        SearchIndexableResource resource = getFakeResource(0 /* xml */);
+        String fakeAction = "fake_action";
+        resource.className = "com.android.settings.LegalSettings";
+        resource.intentAction = fakeAction;
+        resource.intentTargetPackage = SearchIndexableResources.SUBSETTING_TARGET_PACKAGE;
+
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
+        cursor.moveToPosition(0);
+
+        // Intent Action
+        assertThat(cursor.getString(13)).isEqualTo(fakeAction);
+        // Target Package
+        assertThat(cursor.getString(14))
+                .isEqualTo(SearchIndexableResources.SUBSETTING_TARGET_PACKAGE);
     }
 
     // Test new public indexing flow
