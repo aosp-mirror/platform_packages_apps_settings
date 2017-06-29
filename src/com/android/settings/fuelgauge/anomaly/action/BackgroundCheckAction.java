@@ -19,28 +19,26 @@ package com.android.settings.fuelgauge.anomaly.action;
 import android.app.AppOpsManager;
 import android.content.Context;
 
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Background check action for anomaly app, which means to stop app running in the background
  */
-public class BackgroundCheckAction implements AnomalyAction {
+public class BackgroundCheckAction extends AnomalyAction {
 
-    private Context mContext;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
     private AppOpsManager mAppOpsManager;
 
     public BackgroundCheckAction(Context context) {
-        mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        super(context);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_BACKGROUND_CHECK;
     }
 
     @Override
-    public void handlePositiveAction(Anomaly anomaly, int metricsKey) {
-        // TODO(b/37681923): add metric log here if possible
+    public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
+        super.handlePositiveAction(anomaly, contextMetricsKey);
+
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid, anomaly.packageName,
                 AppOpsManager.MODE_IGNORED);
     }
