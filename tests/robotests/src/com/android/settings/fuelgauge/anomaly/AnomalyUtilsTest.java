@@ -18,9 +18,11 @@ package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.os.Build;
+
+import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckAction;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.fuelgauge.anomaly.action.BackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
@@ -45,20 +47,49 @@ public class AnomalyUtilsTest {
 
     @Test
     public void testGetAnomalyAction_typeWakeLock_returnForceStop() {
-        assertThat(mAnomalyUtils.getAnomalyAction(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
+        Anomaly anomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .build();
+        assertThat(mAnomalyUtils.getAnomalyAction(anomaly)).isInstanceOf(
                 ForceStopAction.class);
-    }
-
-    @Test
-    public void testGetAnomalyAction_typeWakeUpAlarm_returnBackgroundCheck() {
-        assertThat(mAnomalyUtils.getAnomalyAction(Anomaly.AnomalyType.WAKEUP_ALARM)).isInstanceOf(
-                BackgroundCheckAction.class);
     }
 
     @Test
     public void testGetAnomalyDetector_typeWakeLock_returnWakeLockDetector() {
         assertThat(mAnomalyUtils.getAnomalyDetector(Anomaly.AnomalyType.WAKE_LOCK)).isInstanceOf(
                 WakeLockAnomalyDetector.class);
+    }
+
+    @Test
+    public void testGetAnomalyAction_typeWakeUpAlarmTargetO_returnForceStop() {
+        Anomaly anomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setTargetSdkVersion(Build.VERSION_CODES.O)
+                .build();
+        assertThat(mAnomalyUtils.getAnomalyAction(anomaly)).isInstanceOf(
+                ForceStopAction.class);
+    }
+
+    @Test
+    public void testGetAnomalyAction_typeWakeUpAlarmTargetPriorOAndBgOff_returnStopAndBackground() {
+        Anomaly anomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setTargetSdkVersion(Build.VERSION_CODES.L)
+                .setBackgroundRestrictionEnabled(false)
+                .build();
+        assertThat(mAnomalyUtils.getAnomalyAction(anomaly)).isInstanceOf(
+                StopAndBackgroundCheckAction.class);
+    }
+
+    @Test
+    public void testGetAnomalyAction_typeWakeUpAlarmTargetPriorOAndBgOn_returnForceStop() {
+        Anomaly anomaly = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setTargetSdkVersion(Build.VERSION_CODES.L)
+                .setBackgroundRestrictionEnabled(true)
+                .build();
+        assertThat(mAnomalyUtils.getAnomalyAction(anomaly)).isInstanceOf(
+                ForceStopAction.class);
     }
 
     @Test

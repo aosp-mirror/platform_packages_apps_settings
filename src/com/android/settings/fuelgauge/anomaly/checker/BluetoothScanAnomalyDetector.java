@@ -42,24 +42,21 @@ public class BluetoothScanAnomalyDetector implements AnomalyDetector {
     private static final String TAG = "BluetoothScanAnomalyDetector";
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    AnomalyAction mAnomalyAction;
     private long mBluetoothScanningThreshold;
     private Context mContext;
+    private AnomalyUtils mAnomalyUtils;
 
     public BluetoothScanAnomalyDetector(Context context) {
-        this(context, new AnomalyDetectionPolicy(context),
-                AnomalyUtils.getInstance(context).getAnomalyAction(
-                        Anomaly.AnomalyType.BLUETOOTH_SCAN));
+        this(context, new AnomalyDetectionPolicy(context), AnomalyUtils.getInstance(context));
     }
 
     @VisibleForTesting
     BluetoothScanAnomalyDetector(Context context, AnomalyDetectionPolicy policy,
-            AnomalyAction anomalyAction) {
+            AnomalyUtils anomalyUtils) {
         mContext = context;
         mBatteryUtils = BatteryUtils.getInstance(context);
-        mAnomalyAction = anomalyAction;
         mBluetoothScanningThreshold = policy.bluetoothScanThreshold;
+        mAnomalyUtils = anomalyUtils;
     }
 
     @Override
@@ -98,7 +95,7 @@ public class BluetoothScanAnomalyDetector implements AnomalyDetector {
                         .setPackageName(packageName)
                         .build();
 
-                if (mAnomalyAction.isActionActive(anomaly)) {
+                if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {
                     anomalies.add(anomaly);
                 }
             }
