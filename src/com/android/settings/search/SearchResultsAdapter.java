@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         implements SearchResultsRankerCallback {
@@ -312,22 +313,23 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         int appSize = installedAppResults.size();
 
         final List<SearchResult> asyncRankingResults = new ArrayList<>(dbSize + appSize);
-        List<SearchResult> databaseResultsSortedByScores = new ArrayList<>(databaseResults);
-        Collections.sort(databaseResultsSortedByScores, new Comparator<SearchResult>() {
-            @Override
-            public int compare(SearchResult o1, SearchResult o2) {
-                float score1 = getRankingScoreByStableId(o1.stableId);
-                float score2 = getRankingScoreByStableId(o2.stableId);
-                if (score1 > score2) {
-                    return -1;
-                } else if (score1 == score2) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            }
-        });
-        asyncRankingResults.addAll(databaseResultsSortedByScores);
+        TreeSet<SearchResult> dbResultsSortedByScores = new TreeSet<>(
+                new Comparator<SearchResult>() {
+                    @Override
+                    public int compare(SearchResult o1, SearchResult o2) {
+                        float score1 = getRankingScoreByStableId(o1.stableId);
+                        float score2 = getRankingScoreByStableId(o2.stableId);
+                        if (score1 > score2) {
+                            return -1;
+                        } else if (score1 == score2) {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    }
+                });
+        dbResultsSortedByScores.addAll(databaseResults);
+        asyncRankingResults.addAll(dbResultsSortedByScores);
         // App results are not ranked by async ranking and appended at the end of the list.
         asyncRankingResults.addAll(installedAppResults);
         return asyncRankingResults;
