@@ -292,15 +292,12 @@ public class DashboardSummary extends InstrumentedFragment
             return;
         }
 
-        // Temporary hack to wrap homepage category into a list. Soon we will create adapter
-        // API that takes a single category.
-        List<DashboardCategory> categories = new ArrayList<>();
-        categories.add(mDashboardFeatureProvider.getTilesForCategory(
-                CategoryKey.CATEGORY_HOMEPAGE));
+        final DashboardCategory category = mDashboardFeatureProvider.getTilesForCategory(
+                CategoryKey.CATEGORY_HOMEPAGE);
         if (suggestions != null) {
-            mAdapter.setCategoriesAndSuggestions(categories, suggestions);
+            mAdapter.setCategoriesAndSuggestions(category, suggestions);
         } else {
-            mAdapter.setCategory(categories);
+            mAdapter.setCategory(category);
         }
     }
 }

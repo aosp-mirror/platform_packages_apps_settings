@@ -66,14 +66,14 @@ public class DashboardData {
     static final int STABLE_ID_CONDITION_CONTAINER = 4;
 
     private final List<Item> mItems;
-    private final List<DashboardCategory> mCategories;
+    private final DashboardCategory mCategory;
     private final List<Condition> mConditions;
     private final List<Tile> mSuggestions;
     @HeaderMode
     private final int mSuggestionConditionMode;
 
     private DashboardData(Builder builder) {
-        mCategories = builder.mCategories;
+        mCategory = builder.mCategory;
         mConditions = builder.mConditions;
         mSuggestions = builder.mSuggestions;
         mSuggestionConditionMode = builder.mSuggestionConditionMode;
@@ -112,8 +112,8 @@ public class DashboardData {
         return null;
     }
 
-    public List<DashboardCategory> getCategories() {
-        return mCategories;
+    public DashboardCategory getCategory() {
+        return mCategory;
     }
 
     public List<Condition> getConditions() {
@@ -262,10 +262,9 @@ public class DashboardData {
                         && !hasConditions
                         && hiddenSuggestion == 0);
 
-        for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
-            DashboardCategory category = mCategories.get(i);
-            for (int j = 0; j < category.tiles.size(); j++) {
-                final Tile tile = category.tiles.get(j);
+        if(mCategory != null) {
+            for (int j = 0; j < mCategory.tiles.size(); j++) {
+                final Tile tile = mCategory.tiles.get(j);
                 addToItemList(tile, R.layout.dashboard_tile, Objects.hash(tile.title),
                         true /* add */);
             }
@@ -311,7 +310,7 @@ public class DashboardData {
         @HeaderMode
         private int mSuggestionConditionMode = HEADER_MODE_DEFAULT;
 
-        private List<DashboardCategory> mCategories;
+        private DashboardCategory mCategory;
         private List<Condition> mConditions;
         private List<Tile> mSuggestions;
 
@@ -319,14 +318,14 @@ public class DashboardData {
         }
 
         public Builder(DashboardData dashboardData) {
-            mCategories = dashboardData.mCategories;
+            mCategory = dashboardData.mCategory;
             mConditions = dashboardData.mConditions;
             mSuggestions = dashboardData.mSuggestions;
             mSuggestionConditionMode = dashboardData.mSuggestionConditionMode;
         }
 
-        public Builder setCategories(List<DashboardCategory> categories) {
-            this.mCategories = categories;
+        public Builder setCategory(DashboardCategory category) {
+            this.mCategory = category;
             return this;
         }
 

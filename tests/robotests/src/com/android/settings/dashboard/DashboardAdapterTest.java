@@ -15,32 +15,16 @@
  */
 package com.android.settings.dashboard;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Icon;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -68,8 +52,20 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
@@ -321,11 +317,11 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestioDismissed_notOnlySuggestion_doNothing() {
+    public void testSuggestionDismissed_notOnlySuggestion_doNothing() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null, null, null, null));
         adapter.setCategoriesAndSuggestions(
-                new ArrayList<>(), makeSuggestions("pkg1", "pkg2", "pkg3"));
+                null /* category */, makeSuggestions("pkg1", "pkg2", "pkg3"));
         final DashboardData dashboardData = adapter.mDashboardData;
         reset(adapter); // clear interactions tracking
 
@@ -336,10 +332,10 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestioDismissed_onlySuggestion_updateDashboardData() {
+    public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null, null, null, null));
-        adapter.setCategoriesAndSuggestions(new ArrayList<>(), makeSuggestions("pkg1"));
+        adapter.setCategoriesAndSuggestions(null /* category */, makeSuggestions("pkg1"));
         final DashboardData dashboardData = adapter.mDashboardData;
         reset(adapter); // clear interactions tracking
 
@@ -360,7 +356,7 @@ public class DashboardAdapterTest {
         packages.get(0).isIconTintable = true;
         packages.get(0).icon = mockIcon;
 
-        mDashboardAdapter.setCategoriesAndSuggestions(Collections.emptyList(), packages);
+        mDashboardAdapter.setCategoriesAndSuggestions(null /* category */, packages);
 
         verify(mockIcon).setTint(eq(0x89000000));
     }
@@ -371,7 +367,6 @@ public class DashboardAdapterTest {
         doReturn(mockTypedArray).when(mContext).obtainStyledAttributes(any(int[].class));
         doReturn(0x89000000).when(mockTypedArray).getColor(anyInt(), anyInt());
 
-        final List<DashboardCategory> categories = new ArrayList<>();
         final DashboardCategory category = mock(DashboardCategory.class);
         final List<Tile> tiles = new ArrayList<>();
         final Icon mockIcon = mock(Icon.class);
@@ -380,9 +375,8 @@ public class DashboardAdapterTest {
         tile.icon = mockIcon;
         tiles.add(tile);
         category.tiles = tiles;
-        categories.add(category);
 
-        mDashboardAdapter.setCategory(categories);
+        mDashboardAdapter.setCategory(category);
 
         verify(mockIcon).setTint(eq(0x89000000));
     }
@@ -391,13 +385,12 @@ public class DashboardAdapterTest {
     public void testBindConditionAndSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null);
         final List<Tile> suggestions = makeSuggestions("pkg1");
-        final List<DashboardCategory> categories = new ArrayList<>();
         final DashboardCategory category = mock(DashboardCategory.class);
         final List<Tile> tiles = new ArrayList<>();
         tiles.add(mock(Tile.class));
         category.tiles = tiles;
-        categories.add(category);
-        mDashboardAdapter.setCategoriesAndSuggestions(categories, suggestions);
+
+        mDashboardAdapter.setCategoriesAndSuggestions(category, suggestions);
 
         final RecyclerView data = mock(RecyclerView.class);
         when(data.getResources()).thenReturn(mResources);
@@ -427,7 +420,7 @@ public class DashboardAdapterTest {
     }
 
     private void setupSuggestions(List<Tile> suggestions) {
-        mDashboardAdapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
+        mDashboardAdapter.setCategoriesAndSuggestions(null /* category */, suggestions);
         final Context context = RuntimeEnvironment.application;
         mSuggestionHolder = new DashboardAdapter.SuggestionAndConditionHeaderHolder(
                 LayoutInflater.from(context).inflate(
