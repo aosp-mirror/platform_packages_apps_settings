@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.R.layout;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
@@ -114,7 +113,10 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
 
     @Override
     public int getItemViewType(int position) {
-        return layout.suggestion_tile_new_ui;
+        Tile suggestion = getSuggestion(position);
+        return suggestion.remoteViews != null
+                ? R.layout.suggestion_tile_card
+                : R.layout.suggestion_tile_new_ui;
     }
 
     @Override
