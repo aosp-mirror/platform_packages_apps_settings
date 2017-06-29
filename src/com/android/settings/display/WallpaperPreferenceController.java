@@ -25,7 +25,7 @@ import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
 
 public class WallpaperPreferenceController extends PreferenceController {
 
-    private static final String KEY_WALLPAPER = "wallpaper";
+    public static final String KEY_WALLPAPER = "wallpaper";
 
     public WallpaperPreferenceController(Context context) {
         super(context);
