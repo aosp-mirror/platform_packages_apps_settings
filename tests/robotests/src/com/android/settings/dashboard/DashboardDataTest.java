@@ -37,7 +37,13 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_CONTAINER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_FOOTER;
+import static com.android.settings.dashboard.DashboardData
+        .STABLE_ID_SUGGESTION_CONDITION_TOP_HEADER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -110,6 +116,20 @@ public class DashboardDataTest {
                 .setCategories(null)
                 .setSuggestions(null)
                 .build();
+    }
+
+    @Test
+    public void testBuildItemsData_shouldSetstableId() {
+        final List<DashboardData.Item> items = mDashboardDataWithOneConditions.getItemList();
+
+        // Header, suggestion, condition, footer, 1 tile
+        assertThat(items).hasSize(5);
+
+        assertThat(items.get(0).id).isEqualTo(STABLE_ID_SUGGESTION_CONDITION_TOP_HEADER);
+        assertThat(items.get(1).id).isEqualTo(STABLE_ID_SUGGESTION_CONTAINER);
+        assertThat(items.get(2).id).isEqualTo(STABLE_ID_CONDITION_CONTAINER);
+        assertThat(items.get(3).id).isEqualTo(STABLE_ID_SUGGESTION_CONDITION_FOOTER);
+        assertThat(items.get(4).id).isEqualTo(Objects.hash(mTestCategoryTile.title));
     }
 
     @Test
