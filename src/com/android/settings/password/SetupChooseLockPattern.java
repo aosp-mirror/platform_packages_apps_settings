@@ -19,10 +19,8 @@ package com.android.settings.password;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 
 import com.android.settings.SetupRedactionInterstitial;
-import com.android.settings.SetupWizardUtils;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -46,12 +44,6 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
     @Override
     /* package */ Class<? extends Fragment> getFragmentClass() {
         return SetupChooseLockPatternFragment.class;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
