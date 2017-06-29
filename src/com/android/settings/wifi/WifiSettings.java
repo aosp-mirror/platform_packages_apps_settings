@@ -43,7 +43,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -749,7 +748,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
             if (accessPoint.isReachable()) {
-                String key = generateKey(accessPoint);
+                String key = AccessPointPreference.generatePreferenceKey(accessPoint);
                 hasAvailableAccessPoints = true;
                 LongPressAccessPointPreference pref =
                         (LongPressAccessPointPreference) getCachedPreference(key);
@@ -789,18 +788,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             // Continuing showing progress bar for an additional delay to overlap with animation
             getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
         }
-    }
-
-    private String generateKey(AccessPoint accessPoint) {
-        StringBuilder key = new StringBuilder();
-        String bssid = accessPoint.getBssid();
-        if (TextUtils.isEmpty(bssid)) {
-            key.append(accessPoint.getSsidStr());
-        } else {
-            key.append(bssid);
-        }
-        key.append(',').append(accessPoint.getSecurity());
-        return key.toString();
     }
 
     @NonNull
