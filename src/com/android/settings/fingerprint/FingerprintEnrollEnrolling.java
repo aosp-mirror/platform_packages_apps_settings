@@ -341,6 +341,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             animateProgress(progress);
         } else {
             mProgressBar.setProgress(progress);
+            if (progress >= PROGRESS_BAR_MAX) {
+                mDelayedFinishRunnable.run();
+            }
         }
     }
 
