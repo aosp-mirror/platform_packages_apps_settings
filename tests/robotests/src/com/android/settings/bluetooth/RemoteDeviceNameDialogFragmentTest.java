@@ -66,7 +66,7 @@ public class RemoteDeviceNameDialogFragmentTest {
         FakeFeatureFactory.setupForTest(mContext);
 
         String deviceAddress = "55:66:77:88:99:AA";
-        when(mCachedDevice.getDevice().getAddress()).thenReturn(deviceAddress);
+        when(mCachedDevice.getAddress()).thenReturn(deviceAddress);
         mFragment = spy(RemoteDeviceNameDialogFragment.newInstance(mCachedDevice));
         doReturn(mCachedDevice).when(mFragment).getDevice(any());
     }
