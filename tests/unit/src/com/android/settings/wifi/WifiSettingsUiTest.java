@@ -15,6 +15,24 @@
  */
 package com.android.settings.wifi;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.Visibility.VISIBLE;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.startsWith;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -31,6 +49,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.TestAccessPointBuilder;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTracker.WifiListener;
 import com.android.settingslib.wifi.WifiTrackerFactory;
@@ -45,25 +64,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
-
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.Visibility.VISIBLE;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.startsWith;
-
-import static org.mockito.Mockito.atMost;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class WifiSettingsUiTest {
@@ -241,5 +241,35 @@ public class WifiSettingsUiTest {
 
         getInstrumentation().callActivityOnStart(activity);
         verify(mWifiTracker, atMost(1)).forceUpdate();
+    }
+
+    @Test
+    public void changingSecurityStateOnApShouldNotCauseMultipleListItems() {
+        setWifiState(WifiManager.WIFI_STATE_ENABLED);
+        TestAccessPointBuilder builder = new TestAccessPointBuilder(mContext)
+                .setSsid(TEST_SSID).setSecurity(AccessPoint.SECURITY_NONE);
+        AccessPoint open = builder.build();
+
+        builder.setSecurity(AccessPoint.SECURITY_EAP);
+        AccessPoint eap = builder.build();
+
+        builder.setSecurity(AccessPoint.SECURITY_WEP);
+        AccessPoint wep = builder.build();
+
+        // Return a different security state each time getAccessPoints is invoked
+        when(mWifiTracker.getAccessPoints())
+                .thenReturn(Lists.newArrayList(open, eap))
+                .thenReturn(Lists.newArrayList(eap))
+                .thenReturn(Lists.newArrayList(wep));
+
+        launchActivity();
+
+        onView(withText(TEST_SSID)).check(matches(isDisplayed()));
+
+        mWifiListener.onAccessPointsChanged();
+        onView(withText(TEST_SSID)).check(matches(isDisplayed()));
+
+        mWifiListener.onAccessPointsChanged();
+        onView(withText(TEST_SSID)).check(matches(isDisplayed()));
     }
 }

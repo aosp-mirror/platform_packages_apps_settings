@@ -735,10 +735,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
             if (accessPoint.isReachable()) {
-                String key = accessPoint.getBssid();
-                if (TextUtils.isEmpty(key)) {
-                    key = accessPoint.getSsidStr();
-                }
+                String key = generateKey(accessPoint);
                 hasAvailableAccessPoints = true;
                 LongPressAccessPointPreference pref =
                         (LongPressAccessPointPreference) getCachedPreference(key);
@@ -778,6 +775,18 @@ public class WifiSettings extends RestrictedSettingsFragment
             // Continuing showing progress bar for an additional delay to overlap with animation
             getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
         }
+    }
+
+    private String generateKey(AccessPoint accessPoint) {
+        StringBuilder key = new StringBuilder();
+        String bssid = accessPoint.getBssid();
+        if (TextUtils.isEmpty(bssid)) {
+            key.append(accessPoint.getSsidStr());
+        } else {
+            key.append(bssid);
+        }
+        key.append(',').append(accessPoint.getSecurity());
+        return key.toString();
     }
 
     @NonNull
