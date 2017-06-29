@@ -183,10 +183,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         mSearchView.requestFocus();
 
         // Updating internal views inside SearchView was the easiest way to get this too look right.
-        // We null-check here so that tests pass since the robotests can't find the internal views.
-        TextView searchText = mSearchView.findViewById(com.android.internal.R.id.search_src_text);
-        if (searchText != null) {
-            searchText.setTextColor(getContext().getColorStateList(
+        // Instead of grabbing the TextView directly, we grab it as a view and do an instanceof
+        // check. This ensures if we return, say, a LinearLayout in the tests, they won't fail.
+        View searchText = mSearchView.findViewById(com.android.internal.R.id.search_src_text);
+        if (searchText instanceof TextView) {
+            ((TextView) searchText).setTextColor(getContext().getColorStateList(
                     com.android.internal.R.color.text_color_primary));
         }
         View editFrame = mSearchView.findViewById(com.android.internal.R.id.search_edit_frame);
