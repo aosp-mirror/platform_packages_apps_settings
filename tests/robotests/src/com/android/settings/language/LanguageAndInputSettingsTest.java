@@ -32,6 +32,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -192,10 +193,14 @@ public class LanguageAndInputSettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
+        final Resources res = spy(RuntimeEnvironment.application.getResources());
         //(InputManager) context.getSystemService(Context.INPUT_SERVICE);
         InputManager manager = mock(InputManager.class);
         when(manager.getInputDeviceIds()).thenReturn(new int[]{});
         doReturn(manager).when(context).getSystemService(Context.INPUT_SERVICE);
+        doReturn(res).when(context).getResources();
+        doReturn(false).when(res)
+            .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
         final List<String> niks = LanguageAndInputSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
         final int xmlId = (new LanguageAndInputSettings()).getPreferenceScreenResId();
