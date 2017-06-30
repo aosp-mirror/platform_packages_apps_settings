@@ -149,6 +149,13 @@ public class Settings extends SettingsActivity {
     }
     public static class ScreenLockSuggestionActivity extends ChooseLockGeneric { /* empty */ }
     public static class CameraLiftTriggerSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class DoubleTapPowerSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class DoubleTwistSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class AmbientDisplaySuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class AmbientDisplayPickupSuggestionActivity extends SettingsActivity {
+        /* empty */ }
+    public static class SwipeToNotificationSuggestionActivity extends SettingsActivity {
+        /* empty */ }
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
