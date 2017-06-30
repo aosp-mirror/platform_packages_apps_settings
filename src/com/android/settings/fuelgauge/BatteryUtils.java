@@ -285,6 +285,10 @@ public class BatteryUtils {
 
     }
 
+    public static void logRuntime(String tag, String message, long startTime) {
+        Log.d(tag, message + ": " + (System.currentTimeMillis() - startTime) + "ms");
+    }
+
     /**
      * Find package uid from package name
      *

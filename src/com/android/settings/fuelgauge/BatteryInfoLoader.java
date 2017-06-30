@@ -33,7 +33,9 @@ import com.android.settings.utils.AsyncLoader;
  * when not available.
  */
 public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
+
     BatteryStatsHelper mStatsHelper;
+    private static final String LOG_TAG = "BatteryInfoLoader";
 
     public BatteryInfoLoader(Context context, BatteryStatsHelper batteryStatsHelper) {
         super(context);
@@ -47,6 +49,7 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
 
     @Override
     public BatteryInfo loadInBackground() {
+        final long startTime = System.currentTimeMillis();
         Context context = getContext();
         PowerUsageFeatureProvider powerUsageFeatureProvider =
                 FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
@@ -67,19 +70,20 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
             final Uri queryUri = powerUsageFeatureProvider.getEnhancedBatteryPredictionUri();
             cursor = context.getContentResolver().query(queryUri, null, null, null, null);
         }
+        BatteryStats stats = mStatsHelper.getStats();
+        batteryUtils.logRuntime(LOG_TAG, "BatteryInfoLoader post query", startTime);
         if (cursor != null && cursor.moveToFirst()) {
             long enhancedEstimate = powerUsageFeatureProvider.getTimeRemainingEstimate(cursor);
-            batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast,
-                    mStatsHelper.getStats(), elapsedRealtimeUs, false /* shortString */,
+            batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                    elapsedRealtimeUs, false /* shortString */,
                     batteryUtils.convertMsToUs(enhancedEstimate), true /* basedOnUsage */);
         } else {
-            BatteryStats stats = mStatsHelper.getStats();
             batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                     elapsedRealtimeUs, false /* shortString */,
                     discharging ? 0 : stats.computeBatteryTimeRemaining(elapsedRealtimeUs),
                     false /* basedOnUsage */);
         }
-
+        batteryUtils.logRuntime(LOG_TAG, "BatteryInfoLoader.loadInBackground", startTime);
         return batteryInfo;
     }
 }
