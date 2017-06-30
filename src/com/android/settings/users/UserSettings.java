@@ -725,6 +725,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final boolean voiceCapable = Utils.isVoiceCapable(context);
         final ArrayList<Integer> missingIcons = new ArrayList<>();
         final ArrayList<UserPreference> userPreferences = new ArrayList<>();
+        int guestId = UserPreference.USERID_GUEST_DEFAULTS;
         userPreferences.add(mMePreference);
 
         for (UserInfo user : users) {
@@ -738,6 +739,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref = mMePreference;
             } else if (user.isGuest()) {
                 // Skip over Guest. We add generic Guest settings after this loop
+                guestId = user.id;
                 continue;
             } else {
                 // With Telephony:
@@ -814,9 +816,23 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
             pref.setDisabledByAdmin(
                     mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
-            if (!pref.isDisabledByAdmin()) {
-                pref.setSelectable(false);
-            }
+            int finalGuestId = guestId;
+            pref.setOnPreferenceClickListener(preference -> {
+                int id = finalGuestId;
+                if (id == UserPreference.USERID_GUEST_DEFAULTS) {
+                    UserInfo guest = mUserManager.createGuest(
+                            getContext(), preference.getTitle().toString());
+                    if (guest != null) {
+                        id = guest.id;
+                    }
+                }
+                try {
+                    ActivityManager.getService().switchUser(id);
+                } catch (RemoteException e) {
+                    e.rethrowFromSystemServer();
+                }
+                return true;
+            });
         }
 
         // Sort list of users by serialNum
