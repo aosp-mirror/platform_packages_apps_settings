@@ -28,9 +28,11 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:id="@+id/entity_header_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical">
 
         <ImageView

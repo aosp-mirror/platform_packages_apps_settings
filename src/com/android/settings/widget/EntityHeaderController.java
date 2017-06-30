@@ -39,7 +39,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -59,15 +58,13 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION
 public class EntityHeaderController {
 
     @IntDef({ActionType.ACTION_NONE,
-            ActionType.ACTION_APP_INFO,
             ActionType.ACTION_APP_PREFERENCE,
             ActionType.ACTION_NOTIF_PREFERENCE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
-        int ACTION_APP_INFO = 1;
-        int ACTION_APP_PREFERENCE = 2;
-        int ACTION_NOTIF_PREFERENCE = 3;
+        int ACTION_APP_PREFERENCE = 1;
+        int ACTION_NOTIF_PREFERENCE = 2;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
@@ -93,6 +90,8 @@ public class EntityHeaderController {
     private int mAction1;
     @ActionType
     private int mAction2;
+
+    private boolean mHasAppInfoLink;
 
     private boolean mIsInstantApp;
 
@@ -177,6 +176,11 @@ public class EntityHeaderController {
         return this;
     }
 
+    public EntityHeaderController setHasAppInfoLink(boolean hasAppInfoLink) {
+        mHasAppInfoLink = hasAppInfoLink;
+        return this;
+    }
+
     public EntityHeaderController setButtonActions(@ActionType int action1,
             @ActionType int action2) {
         mAction1 = action1;
@@ -243,12 +247,38 @@ public class EntityHeaderController {
      * Only binds entity header with button actions.
      */
     public EntityHeaderController bindHeaderButtons() {
-        ImageButton button1 = mHeader.findViewById(android.R.id.button1);
-        ImageButton button2 = mHeader.findViewById(android.R.id.button2);
-
+        final View entityHeaderContent = mHeader.findViewById(R.id.entity_header_content);
+        final ImageButton button1 = mHeader.findViewById(android.R.id.button1);
+        final ImageButton button2 = mHeader.findViewById(android.R.id.button2);
+        bindAppInfoLink(entityHeaderContent);
         bindButton(button1, mAction1);
         bindButton(button2, mAction2);
         return this;
+    }
+
+    private void bindAppInfoLink(View entityHeaderContent) {
+        if (!mHasAppInfoLink) {
+            // Caller didn't ask for app link, skip.
+            return;
+        }
+        if (entityHeaderContent == null
+                || mPackageName == null
+                || mPackageName.equals(Utils.OS_PKG)
+                || mUid == UserHandle.USER_NULL) {
+            Log.w(TAG, "Missing ingredients to build app info link, skip");
+            return;
+        }
+        entityHeaderContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppInfoBase.startAppInfoFragment(
+                        InstalledAppDetails.class, R.string.application_info_label,
+                        mPackageName, mUid, mFragment, 0 /* request */,
+                        mMetricsCategory);
+
+            }
+        });
+        return;
     }
 
     public EntityHeaderController styleActionBar(Activity activity) {
@@ -284,29 +314,6 @@ public class EntityHeaderController {
             return;
         }
         switch (action) {
-            case ActionType.ACTION_APP_INFO: {
-                if (mPackageName == null || mPackageName.equals(Utils.OS_PKG)
-                        || mUid == UserHandle.USER_NULL
-                        || !AppHeader.includeAppInfo(mFragment)) {
-                    button.setVisibility(View.GONE);
-                } else {
-                    button.setContentDescription(
-                            mAppContext.getString(R.string.application_info_label));
-                    button.setImageResource(com.android.settings.R.drawable.ic_info);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            AppInfoBase.startAppInfoFragment(
-                                    InstalledAppDetails.class, R.string.application_info_label,
-                                    mPackageName, mUid, mFragment, 0 /* request */,
-                                    mMetricsCategory);
-
-                        }
-                    });
-                    button.setVisibility(View.VISIBLE);
-                }
-                return;
-            }
             case ActionType.ACTION_NOTIF_PREFERENCE: {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
