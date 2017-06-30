@@ -58,6 +58,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        getPreferenceManager().setPreferenceComparisonCallback(null);
         Bundle args = getArguments();
         final Activity activity = getActivity();
         UserHandle userHandle = Utils.getSecureTargetUser(activity.getActivityToken(),
