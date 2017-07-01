@@ -395,8 +395,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Ridicați încontinuu degetul pentru a adăuga toate părțile amprentei"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Amprentă adăugată"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Când vedeți această pictogramă, folosiți amprenta pentru identificare sau pentru a aproba achizițiile."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Mai târziu"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Omiteți configurarea amprentei?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Ați ales ca amprenta să fie una dintre modalitățile de deblocare a telefonului. Dacă omiteți acum această etapă, va trebui să o configurați mai târziu. Configurarea durează în jur de un minut."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Configurați blocarea ecranului"</string>
@@ -652,7 +651,7 @@
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Conectați-vă"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Deconectați"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Asociați și conectați"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Anulați împerecherea"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Anulați asocierea"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Deconectați și anulați împerecherea"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opțiuni…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avansate"</string>
@@ -1175,7 +1174,7 @@
     <string name="memory_dcim_usage" msgid="558887013613822577">"Imagini, videoclipuri"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"Audio (muzică, tonuri de sonerie, podcasturi etc.)"</string>
     <string name="memory_media_misc_usage" msgid="6094866738586451683">"Alte fișiere"</string>
-    <string name="memory_media_cache_usage" msgid="6704293333141177910">"Datele memorate în cache"</string>
+    <string name="memory_media_cache_usage" msgid="6704293333141177910">"Date salvate în memoria cache"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Demontați stocare distribuită"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Demontați cardul SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Demontați stocarea USB internă"</string>
@@ -1253,7 +1252,7 @@
     <string name="storage_detail_images" msgid="6950678857740634769">"Imagini"</string>
     <string name="storage_detail_videos" msgid="2919743464827110953">"Videoclipuri"</string>
     <string name="storage_detail_audio" msgid="1197685141676483213">"Audio"</string>
-    <string name="storage_detail_cached" msgid="8547136365247818567">"Datele memorate în cache"</string>
+    <string name="storage_detail_cached" msgid="8547136365247818567">"Date salvate în memoria cache"</string>
     <string name="storage_detail_other" msgid="8404938385075638238">"Altele"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Explorați <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -2019,19 +2018,35 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Se solicită frecvent locația"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> aplicații funcționează incorect"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Opriți aplicația?"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"Telefonul dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> păstrează telefonul activ.\n\nCa să remediați problema, puteți să opriți forțat aplicația.\n\nDacă problema persistă, poate fi necesar să dezinstalați aplicația pentru a îmbunătăți performanța bateriei."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"Tableta dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> păstrează tableta activă.\n\nCa să remediați problema, puteți să opriți forțat aplicația.\n\nDacă problema persistă, poate fi necesar să dezinstalați aplicația pentru a îmbunătăți performanța bateriei."</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"Dispozitivul dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> păstrează dispozitivul activ.\n\nCa să remediați problema, puteți să opriți forțat aplicația.\n\nDacă problema persistă, poate fi necesar să dezinstalați aplicația pentru a îmbunătăți performanța bateriei."</string>
+    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
+    <skip />
     <string name="dialog_stop_ok" msgid="2319777211264004900">"Opriți aplicația"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"Dezactivați utilizarea în fundal?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"Telefonul dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> activează telefonul încontinuu.\n\nPentru a remedia problema, telefonul dvs. poate să împiedice această aplicație să ruleze în fundal."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"Tableta dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> activează tableta încontinuu.\n\nPentru a remedia problema, tableta dvs. poate să împiedice această aplicație să ruleze în fundal."</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"Dispozitivul dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> activează dispozitivul încontinuu.\n\nPentru a remedia problema, dispozitivul dvs. poate să împiedice această aplicație să ruleze în fundal."</string>
+    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
+    <skip />
     <string name="dialog_background_check_ok" msgid="412876934682899659">"Dezactivați"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"Dezactivați locația?"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"Telefonul dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> continuă să solicite locația dvs. când nu folosiți aplicația.\n\nPentru a remedia problema, puteți să dezactivați locația pentru această aplicație."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"Tableta dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> continuă să solicite locația dvs. când nu folosiți aplicația.\n\nPentru a remedia problema, puteți să dezactivați locația pentru această aplicație."</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"Dispozitivul dvs. nu poate gestiona în mod normal bateria, deoarece <xliff:g id="APP">%1$s</xliff:g> continuă să solicite locația dvs. când nu folosiți aplicația.\n\nPentru a remedia problema, puteți să dezactivați locația pentru această aplicație."</string>
+    <!-- no translation found for dialog_location_message (7774807745601479888) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (118745801732181618) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (6783678153382298295) -->
+    <skip />
     <string name="dialog_location_ok" msgid="4572391197601313986">"Dezactivați"</string>
     <string name="power_screen" msgid="3023346080675904613">"Ecran"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Lanternă"</string>
@@ -2809,7 +2824,8 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"glisați pentru a debloca, parolă, model, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"provocare la serviciu, serviciu, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"profil de serviciu, profil gestionat, unificați, unificare, serviciu, profil"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"gest"</string>
+    <!-- no translation found for keywords_gesture (3526905012224714078) -->
+    <skip />
     <string name="keywords_payment_settings" msgid="5220104934130446416">"plată, atingere, plăți"</string>
     <string name="keywords_backup" msgid="470070289135403022">"backup"</string>
     <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"gest, margine, latură, margine activă, strângere, prindere, asistență, asistent, strâns, strângeți, ok google, asistent google"</string>
@@ -3589,7 +3605,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automat"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuale"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Eliberați spațiu acum"</string>
-    <string name="gesture_preference_title" msgid="8155668859866666018">"Gest"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gesturi"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gesturi rapide pentru a controla telefonul"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gesturi rapide pentru controlul tabletei"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gesturi rapide pentru controlul dispozitivului"</string>
