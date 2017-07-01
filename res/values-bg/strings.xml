@@ -392,8 +392,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Продължавайте да вдигате пръста си, за да добавите различните части от отпечатъка си"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Отпечатъкът е добавен"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Когато видите тази икона, използвайте отпечатъка си за идентификация или за одобряване на покупки."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"По-късно"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Пропуск. на настройването на отпечатък?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Избрахте да използвате отпечатъка си като един от начините за отключване на телефона си. Ако пропуснете сега, ще трябва да настроите по-късно. Настройването отнема около минута."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Заключване на екрана: Настройване"</string>
@@ -641,7 +640,7 @@
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Свързване"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Изключване"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Сдвояване и свързване"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Раздвояване"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Прекратяване на сдвояването"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Изключване и раздвояване"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Опции…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Разширени"</string>
@@ -1997,19 +1996,35 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Чести заявки за местоположение"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> приложения не функционират правилно"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Да се спре ли приложението?"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"Телефонът ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> го поддържа в активно състояние.\n\nЗа да опитате да решите този проблем, можете да спрете принудително приложението.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"Таблетът ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> го поддържа в активно състояние.\n\nЗа да опитате да решите този проблем, можете да спрете принудително приложението.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"Устройството ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> го поддържа в активно състояние.\n\nЗа да опитате да решите този проблем, можете да спрете принудително приложението.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
+    <skip />
     <string name="dialog_stop_ok" msgid="2319777211264004900">"Спиране на приложението"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"Да се изключи ли използването на заден план?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"Телефонът ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно го активира.\n\nЗа да решите проблема, можете да попречите на това приложение да се изпълнява на заден план."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"Таблетът ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно го активира.\n\nЗа да решите проблема, можете да попречите на това приложение да се изпълнява на заден план."</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"Устройството ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно го активира.\n\nЗа да решите проблема, можете да попречите на това приложение да се изпълнява на заден план."</string>
+    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
+    <skip />
     <string name="dialog_background_check_ok" msgid="412876934682899659">"Изключване"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"Да се изключи ли местоположението?"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"Телефонът ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно изисква достъп до местоположението ви, когато не използвате приложението.\n\nЗа да решите проблема, можете да изключите местоположението за това приложение."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"Таблетът ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно изисква достъп до местоположението ви, когато не използвате приложението.\n\nЗа да решите проблема, можете да изключите местоположението за това приложение."</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"Устройството ви не може да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно изисква достъп до местоположението ви, когато не използвате приложението.\n\nЗа да решите проблема, можете да изключите местоположението за това приложение."</string>
+    <!-- no translation found for dialog_location_message (7774807745601479888) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (118745801732181618) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (6783678153382298295) -->
+    <skip />
     <string name="dialog_location_ok" msgid="4572391197601313986">"Изключване"</string>
     <string name="power_screen" msgid="3023346080675904613">"Екран"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Светкавица"</string>
@@ -2782,10 +2797,11 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"отключване чрез плъзгане, парола, фигура, ПИН код"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"служебно предизвикателство, работа, потребителски профил"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"служебен потребителски профил, управляван потребителски профил, обединение, обединяване, работа, потребителски профил"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"жест"</string>
+    <!-- no translation found for keywords_gesture (3526905012224714078) -->
+    <skip />
     <string name="keywords_payment_settings" msgid="5220104934130446416">"плащане, докосване, плащания"</string>
     <string name="keywords_backup" msgid="470070289135403022">"резервно копие, създаване на резервно копие"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"жест, ръб, страна, активен ръб, стискане, хващане, помощно приложение, асистент, squeezy, squeezie, squeezey, squeezee, ok google, google асистент"</string>
+    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"жест, ръб, страна, active edge, стискане, хващане, помощно приложение, асистент, squeezy, squeezie, squeezey, squeezee, ok google, google асистент"</string>
     <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"жест, активиране, известия, екран, дисплей, изключен екран, включен екран, стискане, ръб, неактивно, спящ режим, хващане"</string>
     <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"жест, заглушаване, отлагане, будилник, входящо обаждане, тихо, дисплей, заключен екран, стискане, хващане, ръб, спиране"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Маркер за КБП за Wi-Fi: Настр."</string>
@@ -2911,12 +2927,12 @@
     <string name="display_vr_pref_title" msgid="8104485269504335481">"Когато устройството е в режим за VR"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Намаляване на замъгляването (препоръчително)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Намаляване на трептенето"</string>
-    <string name="picture_in_picture_title" msgid="5824849294270017113">"Картина в картина"</string>
-    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Никое от инсталираните приложения не поддържа режим „Картина в картина“"</string>
-    <string name="picture_in_picture_keywords" msgid="8361318686701764690">"картина в картина, картина в"</string>
-    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Картина в картина"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Разрешаване на режима „Картина в картина“"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Разрешете на това приложение да създава прозорец в режима „Картина в картина“, докато е отворено или след излизане от него (например, за да продължите да гледате видеоклип). Съответният прозорец ще се показва върху другите приложения, които използвате."</string>
+    <string name="picture_in_picture_title" msgid="5824849294270017113">"Картина в картината"</string>
+    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Никое от инсталираните приложения не поддържа режим „Картина в картината“"</string>
+    <string name="picture_in_picture_keywords" msgid="8361318686701764690">"картина в картината"</string>
+    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Картина в картината"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Разрешаване на режима „Картина в картината“"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Разрешете на това приложение да създава прозорец в режима „Картина в картината“, докато е отворено или след излизане от него (например, за да продължите да гледате видеоклип). Съответният прозорец ще се показва върху другите приложения, които използвате."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Достъп до „Не безпокойте“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Никое инсталирано приложение не е заявило достъп до „Не безпокойте“"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Приложенията се зареждат..."</string>
@@ -3540,7 +3556,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Автоматично"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ръчни"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Освободете място сега"</string>
-    <string name="gesture_preference_title" msgid="8155668859866666018">"Жест"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Жестове"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Бързи жестове за контролиране на телефона ви"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Бързи жестове за контролиране на таблета ви"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Бързи жестове за контролиране на устройството ви"</string>

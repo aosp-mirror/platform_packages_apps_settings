@@ -392,8 +392,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Déplacez légèrement votre doigt lorsque vous le relevez pour ajouter toutes les parties de votre empreinte digitale."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Empreinte digitale ajoutée"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Lorsque vous voyez cette icône, vous pouvez utiliser votre empreinte digitale pour vous identifier ou pour autoriser un achat."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Plus tard"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Ignorer config. empreintes digitales?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Vous avez choisi de déverrouiller votre téléphone à l\'aide de votre empreinte digitale. Si vous ignorez cette étape maintenant, vous devrez reprendre la configuration plus tard. L\'opération prend environ une minute."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Configurer le verrouil. de l\'écran"</string>
@@ -1639,7 +1638,7 @@
     <string name="system_package" msgid="1352722848400644991">"Les mises à jour du système ne peuvent pas être installées sur des supports externes."</string>
     <string name="move_error_device_admin" msgid="8673026002690505763">"Les applications d\'administration d\'appareils ne peuvent pas être installées sur un support externe"</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"Forcer l\'arrêt?"</string>
-    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Si vous forcez l\'arrêt d\'une application, cela peut provoquer son dysfonctionnement."</string>
+    <string name="force_stop_dlg_text" msgid="7208364204467835578">"Si vous forcez l\'arrêt d\'une application, son fonctionnement peut en être affecté."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Impossible de déplacer l\'application. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Emplacement d\'installation souhaité"</string>
@@ -1997,19 +1996,35 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Demandent la position fréquemment"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> applications se comportent de manière anormale"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Arrêter l\'application?"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"Votre téléphone n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> le garde en activité.\n\nPour corriger le problème, vous pouvez forcer l\'arrêt de l\'application.\n\nSi cela continue de se produire, il se peut que vous deviez désinstaller l\'application pour améliorer le rendement de la pile."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"Votre tablette n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> la garde en activité.\n\nPour corriger le problème, vous pouvez forcer l\'arrêt de l\'application.\n\nSi cela continue de se produire, il se peut que vous deviez désinstaller l\'application pour améliorer le rendement de la pile."</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"Votre appareil n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> le garde en activité.\n\nPour corriger le problème, vous pouvez forcer l\'arrêt de l\'application.\n\nSi cela continue de se produire, il se peut que vous deviez désinstaller l\'application pour améliorer le rendement de la pile."</string>
+    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
+    <skip />
     <string name="dialog_stop_ok" msgid="2319777211264004900">"Arrêter l\'application"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"Désactiver l\'utilisation en arrière-plan?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"Votre téléphone n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> le réactive constamment.\n\nPour résoudre ce problème, votre téléphone peut empêcher cette application de s\'exécuter en arrière-plan."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"Votre tablette n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> la réactive constamment.\n\nPour résoudre ce problème, votre tablette peut empêcher cette application de s\'exécuter en arrière-plan."</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"Votre appareil n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> le réactive constamment.\n\nPour résoudre ce problème, votre appareil peut empêcher cette application de s\'exécuter en arrière-plan."</string>
+    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
+    <skip />
     <string name="dialog_background_check_ok" msgid="412876934682899659">"Désactiver"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"Désactiver la localisation?"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"Votre téléphone n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> demande constamment votre position lorsque vous n\'utilisez pas l\'application.\n\nPour résoudre ce problème, vous pouvez désactiver l\'accès à la localisation pour cette application."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"Votre tablette n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> demande constamment votre position lorsque vous n\'utilisez pas l\'application.\n\nPour résoudre ce problème, vous pouvez désactiver l\'accès à la localisation pour cette application."</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"Votre appareil n\'arrive pas à gérer sa pile normalement, car <xliff:g id="APP">%1$s</xliff:g> demande constamment votre position lorsque vous n\'utilisez pas l\'application.\n\nPour résoudre ce problème, vous pouvez désactiver l\'accès à la localisation pour cette application."</string>
+    <!-- no translation found for dialog_location_message (7774807745601479888) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (118745801732181618) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (6783678153382298295) -->
+    <skip />
     <string name="dialog_location_ok" msgid="4572391197601313986">"Désactiver"</string>
     <string name="power_screen" msgid="3023346080675904613">"Écran"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Lampe de poche"</string>
@@ -2782,10 +2797,11 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"glisser pour déverrouiller, mot de passe, schéma, nip"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"défi professionnel, travail, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"profil professionnel, profil géré, unifier, unification, travail, profil"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"geste"</string>
+    <!-- no translation found for keywords_gesture (3526905012224714078) -->
+    <skip />
     <string name="keywords_payment_settings" msgid="5220104934130446416">"payer, toucher, paiements"</string>
     <string name="keywords_backup" msgid="470070289135403022">"sauvegarde, sauvegarder"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"geste, bordure, côté, côté actif, serrer, prise en main, assistance, assistant, presser, appuyer, ok google, assistant google"</string>
+    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"geste, bordure, côté, côté actif, serrer, prise en main, assistance, assistant, serrer, appuyer, ok google, assistant google"</string>
     <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"geste, réactiver, notifications, écran, affichage, écran désactivé, écran activé, serrer, bordure, en veille, sommeil, prise en main"</string>
     <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"geste, silence, répéter, alarme, appel entrant, tranquille, écran, écran de verrouillage, serrer, prise en main, bordure, arrêter"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Créer une balise NFC par Wi-Fi"</string>
@@ -3540,7 +3556,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatique"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuel"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Libérer de l\'espace maintenant"</string>
-    <string name="gesture_preference_title" msgid="8155668859866666018">"Geste"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gestes"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestes rapides pour contrôler votre téléphone"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestes rapides pour contrôler votre tablette"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestes rapides pour contrôler votre appareil"</string>

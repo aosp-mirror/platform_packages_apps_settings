@@ -392,8 +392,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"तपाईंको फिंगरप्रिन्टका फरक-फरक भागहरू थप्न आफ्नो औंलालाई उठाउँदै राख्दै गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"फिंगरप्रिन्ट थपियो"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"तपाईंले यस आइकनलाई देख्नुहुँदा पहिचान वा खरिदहरूको अनुमोदन गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्नुहोस्‌।"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"यसलाई पछि गर्नुहोस्‌"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"फिंगरप्रिन्ट सेटअप छोड्न चाहनुहुन्छ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"तपाईँले आफ्नो फोन अनलक गर्ने एक तरिका रूपमा फिंगरप्रिन्ट छान्‍नुभएको छ। यदि तपाईँले अहिले छोड्नु भएमा पछि पुन: सेटअप गर्न पर्नेछ। सेटअप गर्न मात्र केहि मिनेट लाग्‍नेछ।"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"स्क्रिन लक सेटअप गर्नुहोस्"</string>
@@ -544,7 +543,7 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"तपाईंले अर्को प्रयासमा गलत ढाँचा प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"तपाईंले अर्को प्रयासमा गलत PIN प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"तपाईंले अर्को प्रयासमा गलत पासवर्ड प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"अनलक गर्ने अत्याधिक गलत प्रयासहरू भए। यो यन्त्रको डेटा मेटाइनेछ।"</string>
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"अनलक गर्ने अत्यधिक गलत प्रयासहरू भए। यो यन्त्रको डेटा मेटाइनेछ।"</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"धेरै पकट गलत प्रयास गरियो। यो प्रयोगकर्तालाई मेटाइनेछ"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"धेरै पकट गलत प्रयास गरियो। यो कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ।"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"खारेज गर्नुहोस्"</string>
@@ -1997,19 +1996,35 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"बारम्बार स्थानसम्बन्धी जानकारी प्राप्त गर्ने अनुरोध गर्दैछ"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> अनुप्रयोगहरूले असामान्य व्यवहार देखाउँदैछन्"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"अनुप्रयोगलाई रोक्ने हो?"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंको फोनलाई निरन्तर सक्रिय अवस्थामा राख्ने भएकाले तपाईंको यन्त्रले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्ने प्रयास गर्न तपाईं उक्त अनुप्रयोगलाई जबरजस्ती रोक्न सक्नुहुन्छ।\n\nयो समस्या बाराम्बार भइरहेमा तपाईंले ब्याट्रीको कार्यप्रदर्शनमा सुधार गर्न उक्त अनुप्रयोगको स्थापना रद्द गर्नुपर्ने हुनसक्छ।"</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंको ट्याब्लेटलाई निरन्तर सक्रिय अवस्थामा राख्ने भएकाले तपाईंको यन्त्रले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्ने प्रयास गर्न तपाईं उक्त अनुप्रयोगलाई जबरजस्ती रोक्न सक्नुहुन्छ।\n\nयो समस्या बाराम्बार भइरहेमा तपाईंले ब्याट्रीको कार्यप्रदर्शनमा सुधार गर्न उक्त अनुप्रयोगको स्थापना रद्द गर्नुपर्ने हुनसक्छ।"</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंको यन्त्रलाई निरन्तर सक्रिय अवस्थामा राख्ने भएकाले तपाईंको यन्त्रले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्ने प्रयास गर्न तपाईं उक्त अनुप्रयोगलाई जबरजस्ती रोक्न सक्नुहुन्छ।\n\nयो समस्या बाराम्बार भइरहेमा तपाईंले ब्याट्रीको कार्यप्रदर्शनमा सुधार गर्न उक्त अनुप्रयोगको स्थापना रद्द गर्नुपर्ने हुनसक्छ।"</string>
+    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
+    <skip />
     <string name="dialog_stop_ok" msgid="2319777211264004900">"अनुप्रयोगलाई रोक्नुहोस्"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"पृष्ठभूमिको प्रयोगलाई निष्क्रिय पार्ने हो?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंको फोनलाई बरम्बार सक्रिय अवस्थामा राख्ने भएकाले तपाईंको फोनले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्न तपाईंको फोनले यस अनुप्रयोगलाई पृष्ठभूमिमा चल्नबाट रोक्नसक्छ।"</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंको ट्याब्लेटलाई बरम्बार सक्रिय अवस्थामा राख्ने भएकाले तपाईंको ट्याब्लेटले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्न तपाईंको ट्याब्लेटले यस अनुप्रयोगलाई पृष्ठभूमिमा चल्नबाट रोक्नसक्छ।"</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंको यन्त्रलाई बरम्बार सक्रिय अवस्थामा राख्ने भएकाले तपाईंको यन्त्रले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्न तपाईंको यन्त्रले यस अनुप्रयोगलाई पृष्ठभूमिमा चल्नबाट रोक्नसक्छ।"</string>
+    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
+    <skip />
     <string name="dialog_background_check_ok" msgid="412876934682899659">"निष्क्रिय पार्नुहोस्"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"स्थानसम्बन्धी जानकारीलाई निष्क्रिय पार्ने हो?"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंले उक्त अनुप्रयोग प्रयोग नगरिरहनुभएको बेलामा पनि स्थानसम्बन्धी जानकारी प्राप्त गर्न बरम्बार अनुरोध गर्ने भएकाले तपाईंको फोनले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्न तपाईं यस फोनको स्थानसम्बन्धी जानकारीलाई निष्क्रिय पार्न सक्नुहुन्छ।"</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंले उक्त अनुप्रायोग प्रयोग नगरिरहनुभएको बेलामा पनि स्थानसम्बन्धी जानकारी प्राप्त गर्न बरम्बार अनुरोध गर्ने भएकाले तपाईंको ट्याब्लेटले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्न तपाईं यस ट्याब्लेटको स्थानसम्बन्धी जानकारीलाई निष्क्रिय पार्न सक्नुहुन्छ।"</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"<xliff:g id="APP">%1$s</xliff:g> ले तपाईंले उक्त अनुप्रयोग प्रयोग नगरेको बेलामा पनि स्थानसम्बन्धी जानकारी प्राप्त गर्न बरम्बार अनुरोध गर्ने भएकाले तपाईंको यन्त्रले सामान्य ढंगले ब्याट्रीको व्यवस्थापन गर्न सक्दैन।\n\nयो समस्याको समाधान गर्न तपाईं यस यन्त्रको स्थानसम्बन्धी जानकारीलाई निष्क्रिय पार्न सक्नुहुन्छ।"</string>
+    <!-- no translation found for dialog_location_message (7774807745601479888) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (118745801732181618) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (6783678153382298295) -->
+    <skip />
     <string name="dialog_location_ok" msgid="4572391197601313986">"निष्क्रिय पार्नुहोस्"</string>
     <string name="power_screen" msgid="3023346080675904613">"स्क्रिन"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"फ्ल्यासलाइट"</string>
@@ -2083,8 +2098,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"समग्र ब्याट्रीको <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"पछिल्लो पटक पूर्ण चार्ज भएदेखिको विश्लेषण"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"पछिल्लो पटकको पूर्ण चार्ज"</string>
-    <!-- no translation found for battery_footer_summary (67169726550144016) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"ब्याट्री प्रयोगसम्बन्धी डेटा अनुमानित हो र प्रयोगको अनुसार यो मान बदलिन सक्छ"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"सक्रिय प्रयोगमा रहँदा"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"पृष्ठभूमिमा हुँदा"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"ब्याट्रीको प्रयोग"</string>
@@ -2783,7 +2797,8 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"अनलक गर्न स्लाइड गर्नुहोस्, पासवर्ड, ढाँचा, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"कार्य चुनौती, कार्य, प्रोफाइल"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"कार्यको प्रोफाइल, व्यवस्थापन गरिएको प्रोफाइल, एकरूपता ल्याउनु, एकरूपता, कार्य, प्रोफाइल"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"इसारा"</string>
+    <!-- no translation found for keywords_gesture (3526905012224714078) -->
+    <skip />
     <string name="keywords_payment_settings" msgid="5220104934130446416">"भुक्तानी गर्नुहोस्, ट्याप गर्नुहोस्, भुक्तानी"</string>
     <string name="keywords_backup" msgid="470070289135403022">"ब्याकअप, ब्याकअप गर्नुहोस्"</string>
     <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"इसारा, किनारा, छेउ, सक्रिय किनारा, थिच्नु, पकड, सहयोग, सहायक, थिच्न मिल्ने, स्क्विजि, स्क्विजि, स्क्विजि, ok google, google सहायक"</string>
@@ -2912,12 +2927,12 @@
     <string name="display_vr_pref_title" msgid="8104485269504335481">"यन्त्र VR मा हुँदा"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"अस्पष्टता कम पार्नुहोस् (सिफारिस गरिएको)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"स्क्रिन झिलमिलाउने प्रभाव कम गर्नुहोस्"</string>
-    <string name="picture_in_picture_title" msgid="5824849294270017113">"तस्बिरमा तस्बिर"</string>
-    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"स्थापना गरिएका कुनै पनि अनुप्रयोगहरूले तस्बिरमा तस्बिर मोडलाई समर्थन गर्दैनन्"</string>
+    <string name="picture_in_picture_title" msgid="5824849294270017113">"Picture-in-picture"</string>
+    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"स्थापना गरिएका कुनै पनि अनुप्रयोगहरूले Picture-in-picture मोडलाई समर्थन गर्दैनन्"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"तस्बिरमा तस्बिर मोडमा तस्बिर"</string>
-    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"तस्बिरमा तस्बिर"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"तस्बिरभित्रको तस्बिरलाई अनुमति दिनुहोस्"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"यो अनुप्रयोग खुला रहेको बेलामा वा तपाईंले यसलाई छाड्नुभएपछि (उदाहरणका लागि, भिडियो हेर्ने कार्य जारी राख्नको लागि) यस अनुप्रयोगलाई कुनै तस्बिरभित्रको तस्बिर विन्डो सिर्जना गर्न अनुमति दिनुहोस्। यो विन्डो तपाईंले प्रयोग गरिरहनुभएका अन्य अनुप्रयोगहरूको माथिपट्टि देखिन्छ।"</string>
+    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Picture-in-picture"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Picture-in-picture लाई अनुमति दिनुहोस्"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"यो अनुप्रयोग खुला रहेको बेलामा वा तपाईंले यसलाई छाड्नुभएपछि (उदाहरणका लागि, भिडियो हेर्ने कार्य जारी राख्नको लागि) यस अनुप्रयोगलाई कुनै picture-in-picture विन्डो सिर्जना गर्न अनुमति दिनुहोस्। यो विन्डो तपाईंले प्रयोग गरिरहनुभएका अन्य अनुप्रयोगहरूको माथिपट्टि देखिन्छ।"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"पहुँचमा बाधा नपुर्‍यानुहोस्"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"कुनै पनि स्थापित अनुप्रयोगहरू द्वारा पहुँचमा बाधा नपुर्‍यानुहोस् को माग गरेका छैनन्"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"अनुप्रयोगहरू लोड हुँदै..."</string>
@@ -3543,7 +3558,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"स्वतः"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"म्यानुअल"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"अहिले नै ठाउँ खाली गर्नुहोस्"</string>
-    <string name="gesture_preference_title" msgid="8155668859866666018">"इसारा"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"इसाराहरू"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"फोनलाई नियन्त्रण गर्ने द्रुत इसाराहरू"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"आफ्नो ट्याब्लेटलाई नियन्त्रण गर्ने द्रुत इसाराहरू"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"आफ्नो यन्त्रलाई नियन्त्रण गर्ने द्रुत इसाराहरू"</string>
@@ -3601,12 +3616,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"कार्य सम्बन्धी डेटा स्वत: सिंक गर्नुहोस्"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"अनुप्रयोगहरूलाई स्वत: डेटालाई ताजा पार्न दिनुहोस्"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"खाताको सिंक"</string>
-    <!-- no translation found for account_sync_summary_some_on (3375930757891381175) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_on (570431636622254156) -->
-    <skip />
-    <!-- no translation found for account_sync_summary_all_off (8782409931761182734) -->
-    <skip />
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"<xliff:g id="ID_2">%2$d</xliff:g> मध्ये <xliff:g id="ID_1">%1$d</xliff:g> वस्तुहरूका लागि सिंक गर्ने सेवा सक्रिय छ"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"सबै वस्तुहरूका लागि सिंक गर्ने सेवा सक्रिय छ"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"सबै वस्तुहरूका लागि सिंक गर्ने सेवा निष्क्रिय छ"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"व्यवस्थित गरिएको यन्त्रको जानकारी"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"तपाईंको संगठनले व्यवस्थापन गरेका परिवर्तन र सेटिङहरू"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ले व्यवस्थापन गरेका परिवर्तन र सेटिङहरू  "</string>
