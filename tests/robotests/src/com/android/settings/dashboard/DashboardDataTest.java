@@ -88,32 +88,30 @@ public class DashboardDataTest {
         twoItemsConditions.add(mTestCondition);
         twoItemsConditions.add(mSecondCondition);
 
-        // Build categories
-        final List<DashboardCategory> categories = new ArrayList<>();
+        // Build category
         mTestCategoryTile.title = TEST_CATEGORY_TILE_TITLE;
         mDashboardCategory.title = "test";
         mDashboardCategory.tiles = new ArrayList<>();
         mDashboardCategory.tiles.add(mTestCategoryTile);
-        categories.add(mDashboardCategory);
 
         // Build DashboardData
         mDashboardDataWithOneConditions = new DashboardData.Builder()
                 .setConditions(oneItemConditions)
-                .setCategories(categories)
+                .setCategory(mDashboardCategory)
                 .setSuggestions(suggestions)
                 .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
                 .build();
 
         mDashboardDataWithTwoConditions = new DashboardData.Builder()
                 .setConditions(twoItemsConditions)
-                .setCategories(categories)
+                .setCategory(mDashboardCategory)
                 .setSuggestions(suggestions)
                 .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
                 .build();
 
         mDashboardDataWithNoItems = new DashboardData.Builder()
                 .setConditions(null)
-                .setCategories(null)
+                .setCategory(null)
                 .setSuggestions(null)
                 .build();
     }
@@ -136,7 +134,7 @@ public class DashboardDataTest {
     public void testBuildItemsData_containsAllData() {
         final DashboardData.SuggestionConditionHeaderData data =
                 new DashboardData.SuggestionConditionHeaderData(
-                    mDashboardDataWithOneConditions.getConditions(), 0);
+                        mDashboardDataWithOneConditions.getConditions(), 0);
         final Object[] expectedObjects = {data,
                 mDashboardDataWithOneConditions.getSuggestions(),
                 mDashboardDataWithOneConditions.getConditions(),
@@ -151,9 +149,9 @@ public class DashboardDataTest {
                 assertThat(item).isEqualTo(expectedObjects[i]);
             } else if (item instanceof DashboardData.SuggestionConditionHeaderData) {
                 DashboardData.SuggestionConditionHeaderData i1 =
-                    (DashboardData.SuggestionConditionHeaderData)item;
+                        (DashboardData.SuggestionConditionHeaderData) item;
                 DashboardData.SuggestionConditionHeaderData i2 =
-                    (DashboardData.SuggestionConditionHeaderData)expectedObjects[i];
+                        (DashboardData.SuggestionConditionHeaderData) expectedObjects[i];
                 assertThat(i1.title).isEqualTo(i2.title);
                 assertThat(i1.conditionCount).isEqualTo(i2.conditionCount);
                 assertThat(i1.hiddenSuggestionCount).isEqualTo(i2.hiddenSuggestionCount);
@@ -218,7 +216,7 @@ public class DashboardDataTest {
         // Item in position 3 is the condition container containing the list of conditions, which
         // gets 1 more item
         testResultData.add(new ListUpdateResult.ResultData(
-            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -252,10 +250,6 @@ public class DashboardDataTest {
      * <p>
      * Because baseResultData and {@paramref testResultData} don't have sequence. When do the
      * comparison, we will sort them first and then compare the inside data from them one by one.
-     *
-     * @param baseDashboardData
-     * @param diffDashboardData
-     * @param testResultData
      */
     private void testDiffUtil(DashboardData baseDashboardData, DashboardData diffDashboardData,
             List<ListUpdateResult.ResultData> testResultData) {
