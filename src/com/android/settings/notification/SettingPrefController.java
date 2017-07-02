@@ -55,6 +55,7 @@ public abstract class SettingPrefController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mPreference.init(mParent);
+        super.displayPreference(screen);
         if (isAvailable()) {
             mSettingsObserver = new SettingsObserver();
         }

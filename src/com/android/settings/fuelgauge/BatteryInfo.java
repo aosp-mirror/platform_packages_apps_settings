@@ -46,6 +46,7 @@ public class BatteryInfo {
     public String statusLabel;
     private boolean mCharging;
     private BatteryStats mStats;
+    private static final String LOG_TAG = "BatteryInfo";
     private long timePeriod;
 
     public interface Callback {
@@ -132,6 +133,7 @@ public class BatteryInfo {
         new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
             protected BatteryInfo doInBackground(Void... params) {
+                final long startTime = System.currentTimeMillis();
                 PowerUsageFeatureProvider provider =
                         FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
                 final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
@@ -144,17 +146,19 @@ public class BatteryInfo {
                 // 0 means we are discharging, anything else means charging
                 boolean discharging =
                         batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+
                 if (discharging && provider != null
                         && provider.isEnhancedBatteryPredictionEnabled(context)) {
+                    final long prediction = provider.getEnhancedBatteryPrediction(context);
+                    BatteryUtils.logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
                     return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                            elapsedRealtimeUs, shortString,
-                            utils.convertMsToUs(provider.getEnhancedBatteryPrediction(context)),
-                            true);
+                            elapsedRealtimeUs, shortString, utils.convertMsToUs(prediction), true);
                 } else {
+                    long prediction = discharging
+                            ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0;
+                    BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
                     return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                            elapsedRealtimeUs, shortString,
-                            discharging ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0,
-                            false);
+                            elapsedRealtimeUs, shortString, prediction, false);
                 }
             }
 
@@ -176,6 +180,7 @@ public class BatteryInfo {
     public static BatteryInfo getBatteryInfo(Context context, Intent batteryBroadcast,
             BatteryStats stats, long elapsedRealtimeUs, boolean shortString, long drainTimeUs,
             boolean basedOnUsage) {
+        final long startTime = System.currentTimeMillis();
         BatteryInfo info = new BatteryInfo();
         info.mStats = stats;
         info.batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
@@ -232,6 +237,7 @@ public class BatteryInfo {
                                 chargeStatusLabel);
             }
         }
+        BatteryUtils.logRuntime(LOG_TAG, "time for getBatteryInfo", startTime);
         return info;
     }
 

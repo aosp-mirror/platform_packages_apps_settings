@@ -107,7 +107,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             List<Condition> conditions, SuggestionParser suggestionParser,
             SuggestionDismissController.Callback callback) {
         List<Tile> suggestions = null;
-        List<DashboardCategory> categories = null;
+        DashboardCategory category = null;
         int suggestionConditionMode = DashboardData.HEADER_MODE_DEFAULT;
 
         mContext = context;
@@ -123,7 +123,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         if (savedInstanceState != null) {
             suggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
-            categories = savedInstanceState.getParcelableArrayList(STATE_CATEGORY_LIST);
+            category = savedInstanceState.getParcelable(STATE_CATEGORY_LIST);
             suggestionConditionMode = savedInstanceState.getInt(
                 STATE_SUGGESTION_CONDITION_MODE, suggestionConditionMode);
             mSuggestionsShownLogged = savedInstanceState.getStringArrayList(
@@ -135,7 +135,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mDashboardData = new DashboardData.Builder()
                 .setConditions(conditions)
                 .setSuggestions(suggestions)
-                .setCategories(categories)
+                .setCategory(category)
                 .setSuggestionConditionMode(suggestionConditionMode)
                 .build();
     }
@@ -144,36 +144,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mDashboardData.getSuggestions();
     }
 
-    public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
+    public void setCategoriesAndSuggestions(DashboardCategory category,
             List<Tile> suggestions) {
-        if (mDashboardFeatureProvider.shouldTintIcon()) {
-            // TODO: Better place for tinting?
-            final TypedArray a = mContext.obtainStyledAttributes(new int[]{
-                    android.R.attr.colorControlNormal});
-            final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
-            a.recycle();
-            for (int i = 0; i < categories.size(); i++) {
-                for (int j = 0; j < categories.get(i).tiles.size(); j++) {
-                    final Tile tile = categories.get(i).tiles.get(j);
-
-                    if (tile.isIconTintable) {
-                        // If this drawable is tintable, tint it to match the color.
-                        tile.icon.setTint(tintColor);
-                    }
-                }
-            }
-
-            for (Tile suggestion : suggestions) {
-                if (suggestion.isIconTintable) {
-                    suggestion.icon.setTint(tintColor);
-                }
-            }
-        }
+        tintIcons(category, suggestions);
 
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
                 .setSuggestions(suggestions)
-                .setCategories(categories)
+                .setCategory(category)
                 .build();
         notifyDashboardDataChanged(prevData);
         List<Tile> shownSuggestions = null;
@@ -195,11 +173,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    public void setCategory(List<DashboardCategory> category) {
+    public void setCategory(DashboardCategory category) {
+        tintIcons(category, null);
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setCategory called");
         mDashboardData = new DashboardData.Builder(prevData)
-                .setCategories(category)
+                .setCategory(category)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
@@ -500,18 +479,40 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    private void onBindCategory(DashboardItemHolder holder, DashboardCategory category) {
-        holder.title.setText(category.title);
+    private void tintIcons(DashboardCategory category, List<Tile> suggestions) {
+        if (!mDashboardFeatureProvider.shouldTintIcon()) {
+            return;
+        }
+        // TODO: Better place for tinting?
+        final TypedArray a = mContext.obtainStyledAttributes(new int[]{
+                android.R.attr.colorControlNormal});
+        final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
+        a.recycle();
+        if (category != null) {
+            for (Tile tile : category.tiles) {
+                if (tile.isIconTintable) {
+                    // If this drawable is tintable, tint it to match the color.
+                    tile.icon.setTint(tintColor);
+                }
+            }
+        }
+        if (suggestions != null) {
+            for (Tile suggestion : suggestions) {
+                if (suggestion.isIconTintable) {
+                    suggestion.icon.setTint(tintColor);
+                }
+            }
+        }
     }
 
     void onSaveInstanceState(Bundle outState) {
         final List<Tile> suggestions = mDashboardData.getSuggestions();
-        final List<DashboardCategory> categories = mDashboardData.getCategories();
+        final DashboardCategory category = mDashboardData.getCategory();
         if (suggestions != null) {
             outState.putParcelableArrayList(STATE_SUGGESTION_LIST, new ArrayList<>(suggestions));
         }
-        if (categories != null) {
-            outState.putParcelableArrayList(STATE_CATEGORY_LIST, new ArrayList<>(categories));
+        if (category != null) {
+            outState.putParcelable(STATE_CATEGORY_LIST, category);
         }
         outState.putStringArrayList(STATE_SUGGESTIONS_SHOWN_LOGGED, mSuggestionsShownLogged);
         outState.putInt(STATE_SUGGESTION_CONDITION_MODE,
