@@ -106,7 +106,8 @@ public class BluetoothScanAnomalyDetectorTest {
         mUsageList.add(mTargetSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
-        mBluetoothScanAnomalyDetector = spy(new BluetoothScanAnomalyDetector(mContext, mPolicy));
+        mBluetoothScanAnomalyDetector = spy(
+                new BluetoothScanAnomalyDetector(mContext, mPolicy, mAnomalyAction));
         mBluetoothScanAnomalyDetector.mBatteryUtils = mBatteryUtils;
         mBluetoothScanAnomalyDetector.mAnomalyAction = mAnomalyAction;
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());

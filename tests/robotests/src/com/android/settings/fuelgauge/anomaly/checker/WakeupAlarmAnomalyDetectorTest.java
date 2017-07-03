@@ -59,9 +59,10 @@ public class WakeupAlarmAnomalyDetectorTest {
     private static final int ANOMALY_UID = 111;
     private static final int NORMAL_UID = 222;
     private static final int TARGET_UID = 333;
-    private static final long RUNNING_TIME_MS = 2 * DateUtils.HOUR_IN_MILLIS;
+    private static final long RUNNING_TIME_MS =
+            1 * DateUtils.HOUR_IN_MILLIS + 10 * DateUtils.MINUTE_IN_MILLIS;
     private static final int ANOMALY_WAKEUP_COUNT = 500;
-    private static final int NORMAL_WAKEUP_COUNT = 50;
+    private static final int NORMAL_WAKEUP_COUNT = 61;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock

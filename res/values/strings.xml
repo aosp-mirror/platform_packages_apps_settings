@@ -4662,34 +4662,41 @@
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
     <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your phone awake.\n\nTo try to fix this issue, you can force stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
+    <string name="dialog_stop_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your phone awake.\n\nTo try to fix this issue, you can stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
     <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your tablet awake.\n\nTo try to fix this issue, you can force stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
+    <string name="dialog_stop_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your tablet awake.\n\nTo try to fix this issue, you can stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
     <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_stop_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your device awake.\n\nTo try to fix this issue, you can force stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
+    <string name="dialog_stop_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> is keeping your device awake.\n\nTo try to fix this issue, you can stop the app.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
+
+    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
+    <string name="dialog_stop_message_wakeup_alarm" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g>.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
+    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your tablet.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g>.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
+    <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
+    <string name="dialog_stop_message_wakeup_alarm" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your device.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g>.\n\nIf this keeps happening, you may need to uninstall the app to improve battery performance.</string>
 
     <!-- Text for OK button in force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_ok">Stop app</string>
 
     <!-- Title for background usage dialog [CHAR LIMIT=60] -->
-    <string name="dialog_background_check_title">Turn off background usage?</string>
+    <string name="dialog_background_check_title">Turn off background usage &amp; stop app?</string>
     <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_background_check_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo address this issue, your phone can prevent this app from running in the background.</string>
+    <string name="dialog_background_check_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
     <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_background_check_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your tablet.\n\nTo address this issue, your tablet can prevent this app from running in the background.</string>
+    <string name="dialog_background_check_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your tablet.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
     <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_background_check_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your device.\n\nTo address this issue, your device can prevent this app from running in the background.</string>
+    <string name="dialog_background_check_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your device.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
     <!-- Text for OK button in background usage dialog [CHAR LIMIT=30] -->
     <string name="dialog_background_check_ok">Turn off</string>
 
     <!-- Title for location dialog [CHAR LIMIT=60] -->
     <string name="dialog_location_title">Turn off location?</string>
     <!-- Message body for location dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_location_message" product="default">Your phone can’t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you're not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
+    <string name="dialog_location_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you\'re not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
     <!-- Message body for location dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_location_message" product="tablet">Your tablet can’t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you're not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
+    <string name="dialog_location_message" product="tablet">Your tablet can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you\'re not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
     <!-- Message body for location dialog [CHAR LIMIT=NONE] -->
-    <string name="dialog_location_message" product="device">Your device can’t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you're not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
+    <string name="dialog_location_message" product="device">Your device can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps requesting your location when you\'re not using the app.\n\nTo fix this issue, you can turn off location for this app.</string>
 
     <!-- Text for OK button in location dialog [CHAR LIMIT=30] -->
     <string name="dialog_location_ok">Turn off</string>
@@ -6502,7 +6509,7 @@
     <string name="keywords_lockscreen">slide to unlock, password, pattern, PIN</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
-    <string name="keywords_gesture">gesture</string>
+    <string name="keywords_gesture">gestures</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_squeeze_to_launch_gesture">gesture, edge, side, active edge, squeeze, grip, assist, assistant, squeezy, squeezie, squeezey, squeezee, ok google, google assistant</string>
@@ -8596,7 +8603,7 @@
     <string name="deletion_helper_preference_title">Free up space now</string>
 
     <!-- Preference title for gesture settings [CHAR LIMIT=40 BACKUP_MESSAGE_ID:5280023307132819052]-->
-    <string name="gesture_preference_title">Gesture</string>
+    <string name="gesture_preference_title">Gestures</string>
 
     <!-- Preference summary for gesture settings (phone) [CHAR LIMIT=NONE]-->
     <string name="gesture_preference_summary" product="default">Quick gestures to control your phone</string>

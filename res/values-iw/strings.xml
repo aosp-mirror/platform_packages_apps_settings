@@ -398,8 +398,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"יש להרים את האצבע ולגעת בחיישן בחלקים שונים שלה כדי להוסיף טביעת אצבע מלאה"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"טביעת האצבע שלך נקלטה"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"כשיוצג לך הסמל הזה, משמעות הדבר היא שאפשר להשתמש בטביעת אצבע לצורכי זיהוי או לאישור רכישה."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_enrolling_skip (3710211704052369752) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"מאוחר יותר"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"האם לדלג על הגדרת טביעת אצבע?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"בחרת להשתמש בטביעת האצבע שלך כאחת מהדרכים שבהן תוכל לבטל את הנעילה בטלפון. אם תדלג על שלב זה עכשיו, תצטרך לבצע את ההגדרה בהמשך. ההגדרה לוקחת רק דקה או שתיים."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"הגדר נעילת מסך"</string>
@@ -1816,9 +1815,9 @@
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"‏האם ליצור Widget‏ ולאפשר גישה?"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"‏לאחר יצירת ה-Widget‏, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> יוכל לגשת לכל הנתונים שהוא מציג."</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"‏אפשר תמיד ל-<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ליצור Widgets ולגשת לנתונים שלהם"</string>
-    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> ימים <xliff:g id="HOURS">%2$d</xliff:g> שעות <xliff:g id="MINUTES">%3$d</xliff:g> דקות <xliff:g id="SECONDS">%4$d</xliff:g> שניות"</string>
-    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> שעות <xliff:g id="MINUTES">%2$d</xliff:g> דקות <xliff:g id="SECONDS">%3$d</xliff:g> שניות"</string>
-    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> דקות <xliff:g id="SECONDS">%2$d</xliff:g> שניות"</string>
+    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> ימים, <xliff:g id="HOURS">%2$d</xliff:g> שעות, <xliff:g id="MINUTES">%3$d</xliff:g> דקות ו-<xliff:g id="SECONDS">%4$d</xliff:g> שניות"</string>
+    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> שעות, <xliff:g id="MINUTES">%2$d</xliff:g> דקות ו-<xliff:g id="SECONDS">%3$d</xliff:g> שניות"</string>
+    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> דקות ו-<xliff:g id="SECONDS">%2$d</xliff:g> שניות"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> שניות"</string>
     <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> ימים <xliff:g id="HOURS">%2$d</xliff:g> שעות <xliff:g id="MINUTES">%3$d</xliff:g> דקות"</string>
     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> שעות <xliff:g id="MINUTES">%2$d</xliff:g> דקות"</string>
@@ -2041,19 +2040,35 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"בקשות מיקום בתדירות גבוהה"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> אפליקציות פועלות בצורה חריגה"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"לעצור את האפליקציה?"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"ניהול השימוש בסוללה של הטלפון לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מוציאה את הטלפון ממצב שינה.\n\nכדי לנסות לפתור את הבעיה, אפשר לאלץ עצירה של האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את ההתקנה של האפליקציה כדי לשפר את הביצועים של הסוללה."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"ניהול השימוש בסוללה של הטאבלט לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מוציאה את הטאבלט ממצב שינה.\n\nכדי לנסות לפתור את הבעיה, אפשר לאלץ עצירה של האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את ההתקנה של האפליקציה כדי לשפר את הביצועים של הסוללה."</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"ניהול השימוש בסוללה של המכשיר לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מוציאה את המכשיר ממצב שינה.\n\nכדי לנסות לפתור את הבעיה, אפשר לאלץ עצירה של האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את ההתקנה של האפליקציה כדי לשפר את הביצועים של הסוללה."</string>
+    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
+    <skip />
+    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
+    <skip />
     <string name="dialog_stop_ok" msgid="2319777211264004900">"אני רוצה לעצור את האפליקציה"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"להשבית שימוש ברקע?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"ניהול השימוש בסוללה של הטלפון לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מוציאה את הטלפון ממצב שינה.\n\nכדי לפתור את הבעיה, אפשר להגדיר את הטלפון כך שימנע מהאפליקציה לפעול ברקע."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"ניהול השימוש בסוללה של הטאבלט לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מוציאה את הטאבלט ממצב שינה.\n\nכדי לפתור את הבעיה, אפשר להגדיר את הטאבלט כך שימנע מהאפליקציה לפעול ברקע."</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"ניהול השימוש בסוללה של המכשיר לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מוציאה את המכשיר ממצב שינה.\n\nכדי לפתור את הבעיה, אפשר להגדיר את המכשיר כך שימנע מהאפליקציה לפעול ברקע."</string>
+    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
+    <skip />
+    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
+    <skip />
     <string name="dialog_background_check_ok" msgid="412876934682899659">"השבת"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"להשבית העברה של נתוני מיקום?"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"ניהול השימוש בסוללה של הטלפון לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מבקשת את נתוני המיקום שלך גם כשהיא לא בשימוש.\n\nכדי לפתור את הבעיה, אפשר להשבית העברה של נתוני מיקום לאפליקציה הזו."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"ניהול השימוש בסוללה של הטאבלט לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מבקשת את נתוני המיקום שלך גם כשהיא לא בשימוש.\n\nכדי לפתור את הבעיה, אפשר להשבית העברה של נתוני מיקום לאפליקציה הזו."</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"ניהול השימוש בסוללה של המכשיר לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> מבקשת את נתוני המיקום שלך גם כשהיא לא בשימוש.\n\nכדי לפתור את הבעיה, אפשר להשבית העברה של נתוני מיקום לאפליקציה הזו."</string>
+    <!-- no translation found for dialog_location_message (7774807745601479888) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (118745801732181618) -->
+    <skip />
+    <!-- no translation found for dialog_location_message (6783678153382298295) -->
+    <skip />
     <string name="dialog_location_ok" msgid="4572391197601313986">"השבת"</string>
     <string name="power_screen" msgid="3023346080675904613">"מסך"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"פנס"</string>
@@ -2838,12 +2853,13 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"החלק כדי לבטל נעילה, סיסמה, קו ביטול נעילה, קוד גישה"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"אתגר בעבודה, עבודה, פרופיל"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"תנועה"</string>
+    <!-- no translation found for keywords_gesture (3526905012224714078) -->
+    <skip />
     <string name="keywords_payment_settings" msgid="5220104934130446416">"שלם, הקש, תשלומים"</string>
     <string name="keywords_backup" msgid="470070289135403022">"‏גיבוי, לגבות, backup, back up"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"‏תנועה, אדג\', צד, אקטיב אדג\', כיווץ, תפיסה, סקוויז, אחיזה, עזרה, אסיסט, אסיסטנט, סקוויזי, Ok Google‏, אוקיי גוגל, אסיסטנט של גוגל, גוגל אסיסטנט, gesture, edge, side, active edge, squeeze, grip, assist, assistant, squeezy, squeezie, squeezey, squeezee, ok google, google assistant"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"‏תנועה, מחווה, להעיר, מסך, צג, תצוגה, כיבוי מסך, הפעלת מסך, הדלקת מסך, לחיצה, אדג\', מצב שינה, שינה, אחיזה, תפיסה, gesture, wake, notifications, screen, display, screen off, screen on, squeeze, edge, asleep, sleep, grip"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"‏תנועה, נודניק, שעון מעורר, שיחה נכנסת, שקט, מסך, צג, תצוגה, מסך נעילה, נעילת מסך, כיווץ, אחיזה, תפיסה, אדג\', עצירה, gesture, silence, snooze, alarm, incoming call, quiet, display, lockscreen, squeeze, grip, edge, stop"</string>
+    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"‏תנועה, אדג\', צד, כיווץ, תפיסה, לחץ משני צדי המכשיר, אחיזה, עזרה, אסיסט, אסיסטנט, סקוויזי, Ok Google‏, אוקיי גוגל, אסיסטנט של גוגל, גוגל אסיסטנט, gesture, edge, side, active edge, squeeze, grip, assist, assistant, squeezy, squeezie, squeezey, squeezee, ok google, google assistant"</string>
+    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"‏תנועה, מחווה, להעיר, מסך, צג, תצוגה, כיבוי מסך, הפעלת מסך, הדלקת מסך, לחץ משני צדי המכשיר, אדג\', מצב שינה, שינה, אחיזה, תפיסה, gesture, wake, notifications, screen, display, screen off, screen on, squeeze, edge, asleep, sleep, grip"</string>
+    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"‏תנועה, נודניק, שעון מעורר, שיחה נכנסת, שקט, מסך, צג, תצוגה, מסך נעילה, נעילת מסך, לחץ משני צדי המכשיר, אחיזה, תפיסה, אדג\', עצירה, gesture, silence, snooze, alarm, incoming call, quiet, display, lockscreen, squeeze, grip, edge, stop"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏הגדר תג NFC של Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"כתוב"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"הקש על תג כדי לכתוב..."</string>
@@ -3062,7 +3078,7 @@
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"מכל אחד"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"רק מאנשי הקשר"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"רק מאלו שמסומנים בכוכב"</string>
-    <string name="zen_mode_from_none" msgid="8219706639954614136">"בלי הודעות"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"אף אחד"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"התראות"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"תזכורות"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"אירועים"</string>
@@ -3640,7 +3656,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"באופן אוטומטי"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"ידני"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"פינוי שטח אחסון עכשיו"</string>
-    <string name="gesture_preference_title" msgid="8155668859866666018">"תנועה"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"תנועות"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"תנועות מהירות לשליטה בטלפון"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"תנועות מהירות לשליטה בטאבלט"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"תנועות מהירות לשליטה במכשיר"</string>

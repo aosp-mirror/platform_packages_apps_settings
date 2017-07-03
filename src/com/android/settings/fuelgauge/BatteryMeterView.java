@@ -78,6 +78,11 @@ public class BatteryMeterView extends ImageView {
 
     public void setCharging(boolean charging) {
         mDrawable.setCharging(charging);
+        postInvalidate();
+    }
+
+    public boolean getCharging() {
+        return mDrawable.getCharging();
     }
 
     public static class BatteryMeterDrawable extends BatteryMeterDrawableBase {

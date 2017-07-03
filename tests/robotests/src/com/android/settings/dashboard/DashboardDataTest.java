@@ -94,7 +94,6 @@ public class DashboardDataTest {
                 .setCategories(categories)
                 .setSuggestions(suggestions)
                 .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
-                .setCombineSuggestionAndCondition(true)
                 .build();
 
         mDashboardDataWithTwoConditions = new DashboardData.Builder()
@@ -102,7 +101,6 @@ public class DashboardDataTest {
                 .setCategories(categories)
                 .setSuggestions(suggestions)
                 .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
-                .setCombineSuggestionAndCondition(true)
                 .build();
 
         mDashboardDataWithNoItems = new DashboardData.Builder()
@@ -127,9 +125,7 @@ public class DashboardDataTest {
                 .isEqualTo(expectedSize);
         for (int i = 0; i < expectedSize; i++) {
             final Object item = mDashboardDataWithOneConditions.getItemEntityByPosition(i);
-            if (item instanceof DashboardData.SuggestionHeaderData
-                || item instanceof List) {
-                // SuggestionHeaderData is created inside when build, we can only use isEqualTo
+            if (item instanceof List) {
                 assertThat(item).isEqualTo(expectedObjects[i]);
             } else if (item instanceof DashboardData.SuggestionConditionHeaderData) {
                 DashboardData.SuggestionConditionHeaderData i1 =

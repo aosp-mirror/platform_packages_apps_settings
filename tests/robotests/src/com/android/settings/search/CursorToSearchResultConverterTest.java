@@ -244,7 +244,7 @@ public class CursorToSearchResultConverterTest {
             final InlineSwitchPayload newPayload = (InlineSwitchPayload) result.payload;
             final Intent rebuiltIntent = newPayload.getIntent();
             assertThat(newPayload.mSettingKey).isEqualTo(uri);
-            assertThat(newPayload.mInlineType).isEqualTo(type);
+            assertThat(newPayload.getType()).isEqualTo(type);
             assertThat(newPayload.mSettingSource).isEqualTo(source);
             assertThat(newPayload.isStandard()).isTrue();
             assertThat(newPayload.getAvailability()).isEqualTo(Availability.AVAILABLE);
