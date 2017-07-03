@@ -53,15 +53,16 @@ import java.util.ArrayList;
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
     // The index of the array is isStrongAuth << 2 + isProfile << 1 + isAlpha.
+    // TODO(b/36511626): add back special strings for strong auth.
     private static final int[] DETAIL_TEXTS = new int[] {
         R.string.lockpassword_confirm_your_pin_generic,
         R.string.lockpassword_confirm_your_password_generic,
         R.string.lockpassword_confirm_your_pin_generic_profile,
         R.string.lockpassword_confirm_your_password_generic_profile,
-        R.string.lockpassword_strong_auth_required_reason_restart_device_pin,
-        R.string.lockpassword_strong_auth_required_reason_restart_device_password,
-        R.string.lockpassword_strong_auth_required_reason_restart_work_pin,
-        R.string.lockpassword_strong_auth_required_reason_restart_work_password,
+        R.string.lockpassword_confirm_your_pin_generic,
+        R.string.lockpassword_confirm_your_password_generic,
+        R.string.lockpassword_confirm_your_pin_generic_profile,
+        R.string.lockpassword_confirm_your_password_generic_profile,
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
