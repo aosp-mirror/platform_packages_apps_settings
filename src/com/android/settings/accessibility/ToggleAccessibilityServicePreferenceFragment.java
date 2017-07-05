@@ -48,8 +48,6 @@ import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
 
-import static com.android.settings.Utils.setOverlayAllowed;
-
 public class ToggleAccessibilityServicePreferenceFragment
         extends ToggleFeaturePreferenceFragment implements DialogInterface.OnClickListener {
 
@@ -71,8 +69,6 @@ public class ToggleAccessibilityServicePreferenceFragment
     private ComponentName mComponentName;
 
     private int mShownDialogId;
-
-    private final IBinder mToken = new Binder();
 
     @Override
     public int getMetricsCategory() {
@@ -96,18 +92,12 @@ public class ToggleAccessibilityServicePreferenceFragment
     public void onResume() {
         mSettingsContentObserver.register(getContentResolver());
         updateSwitchBarToggleSwitch();
-        if (mToken != null) {
-            setOverlayAllowed(getActivity(), mToken, false);
-        }
         super.onResume();
     }
 
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
-        if (mToken != null) {
-            setOverlayAllowed(getActivity(), mToken, true);
-        }
         super.onPause();
     }
 
