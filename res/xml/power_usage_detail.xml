@@ -39,15 +39,18 @@
 
         <Preference
             android:key="app_usage_foreground"
-            android:title="@string/battery_detail_foreground"/>
+            android:title="@string/battery_detail_foreground"
+            android:selectable="false"/>
 
         <Preference
             android:key="app_usage_background"
-            android:title="@string/battery_detail_background"/>
+            android:title="@string/battery_detail_background"
+            android:selectable="false"/>
 
         <Preference
             android:key="app_power_usage"
-            android:title="@string/battery_detail_power_usage"/>
+            android:title="@string/battery_detail_power_usage"
+            android:selectable="false"/>
 
     </PreferenceCategory>
 
