@@ -24,13 +24,14 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.development.DevelopmentSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.search.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -91,7 +92,8 @@ public class BuildNumberPreferenceControllerTest {
     public void displayPref_shouldAlwaysDisplay() {
         mController.displayPreference(mScreen);
 
-        verify(mScreen.findPreference(mController.getPreferenceKey())).setSummary(Build.DISPLAY);
+        verify(mScreen.findPreference(mController.getPreferenceKey()))
+                .setSummary(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
         verify(mScreen, never()).removePreference(any(Preference.class));
     }
 

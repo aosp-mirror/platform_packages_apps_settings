@@ -25,6 +25,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.widget.Toast;
@@ -81,7 +82,7 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
         final Preference preference = screen.findPreference(KEY_BUILD_NUMBER);
         if (preference != null) {
             try {
-                preference.setSummary(Build.DISPLAY);
+                preference.setSummary(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
                 preference.setEnabled(true);
             } catch (Exception e) {
                 preference.setSummary(R.string.device_info_default);
