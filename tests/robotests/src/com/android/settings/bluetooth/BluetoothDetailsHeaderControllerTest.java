@@ -25,13 +25,14 @@ import static org.mockito.Mockito.when;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import org.junit.After;
@@ -49,7 +50,7 @@ import java.util.ArrayList;
         shadows={SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsHeaderController mController;
-    private Preference mPreference;
+    private LayoutPreference mPreference;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
@@ -61,7 +62,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mController = new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice,
                 mLifecycle);
-        mPreference = new Preference(mContext);
+        mPreference = new LayoutPreference(mContext, R.layout.settings_entity_header);
         mPreference.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mPreference);
         setupDevice(mDeviceConfig);
@@ -80,7 +81,6 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIcon(any(Drawable.class));
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
-        verify(mHeaderController).done(mActivity, mContext);
         verify(mHeaderController).done(mActivity, false);
     }
 
