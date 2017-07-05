@@ -45,7 +45,7 @@ public class BluetoothDetailsMacAddressController extends BluetoothDetailsContro
     protected void init(PreferenceScreen screen) {
         mFooterPreference = mFooterPreferenceMixin.createFooterPreference();
         mFooterPreference.setTitle(mContext.getString(
-                    R.string.bluetooth_device_mac_address, mCachedDevice.getDevice().getAddress()));
+                    R.string.bluetooth_device_mac_address, mCachedDevice.getAddress()));
     }
 
     @Override
