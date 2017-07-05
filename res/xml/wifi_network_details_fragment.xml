@@ -18,10 +18,11 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
-    <!-- Connected Network Header -->
-    <Preference
-            android:key="connection_detail"
-            android:layout="@layout/connection_detail_pref"/>
+    <com.android.settings.applications.LayoutPreference
+        android:key="connection_header"
+        android:layout="@layout/settings_entity_header"
+        android:selectable="false"
+        android:order="-10000"/>
 
     <!-- General Details Category -->
     <PreferenceCategory
