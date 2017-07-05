@@ -44,6 +44,22 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
+    /**
+     * An interface to let tests override the normal mechanism for looking up the
+     * CachedBluetoothDevice and LocalBluetoothManager, and substitute their own mocks instead.
+     * This is only needed in situations where you instantiate the fragment indirectly (eg via an
+     * intent) and can't use something like spying on an instance you construct directly via
+     * newInstance.
+     */
+    @VisibleForTesting
+    interface TestDataFactory {
+        CachedBluetoothDevice getDevice(String deviceAddress);
+        LocalBluetoothManager getManager(Context context);
+    }
+
+    @VisibleForTesting
+    static TestDataFactory sTestDataFactory;
+
     private String mDeviceAddress;
     private LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
@@ -54,11 +70,17 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @VisibleForTesting
     LocalBluetoothManager getLocalBluetoothManager(Context context) {
+        if (sTestDataFactory != null) {
+            return sTestDataFactory.getManager(context);
+        }
         return Utils.getLocalBtManager(context);
     }
 
     @VisibleForTesting
     CachedBluetoothDevice getCachedDevice(String deviceAddress) {
+        if (sTestDataFactory != null) {
+            return sTestDataFactory.getDevice(deviceAddress);
+        }
         BluetoothDevice remoteDevice =
                 mManager.getBluetoothAdapter().getRemoteDevice(deviceAddress);
         return mManager.getCachedDeviceManager().findDevice(remoteDevice);
