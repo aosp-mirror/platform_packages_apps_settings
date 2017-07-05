@@ -294,10 +294,12 @@ public class DashboardSummary extends InstrumentedFragment
 
         final DashboardCategory category = mDashboardFeatureProvider.getTilesForCategory(
                 CategoryKey.CATEGORY_HOMEPAGE);
+        mSummaryLoader.updateSummaryToCache(category);
         if (suggestions != null) {
             mAdapter.setCategoriesAndSuggestions(category, suggestions);
         } else {
             mAdapter.setCategory(category);
         }
     }
+
 }

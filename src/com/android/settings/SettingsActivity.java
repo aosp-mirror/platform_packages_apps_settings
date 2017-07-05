@@ -45,7 +45,6 @@ import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -64,7 +63,6 @@ import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.SearchActivity;
-import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -770,68 +768,81 @@ public class SettingsActivity extends SettingsDrawerActivity
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
-
+        boolean somethingChanged = false;
         String packageName = getPackageName();
-        setTileEnabled(new ComponentName(packageName, WifiSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin);
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName, WifiSettingsActivity.class.getName()),
+                pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin) || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.BluetoothSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin);
+                pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DataUsageSummaryActivity.class.getName()),
-                Utils.isBandwidthControlEnabled(), isAdmin);
+                Utils.isBandwidthControlEnabled(), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin);
+                Utils.showSimCardTile(this), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
-                mBatteryPresent, isAdmin);
+                mBatteryPresent, isAdmin) || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
-                        && !Utils.isMonkeyRunning(), isAdmin);
+                        && !Utils.isMonkeyRunning(), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.NetworkDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin);
+                !UserManager.isDeviceInDemoMode(this), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.ConnectedDeviceDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin);
+                !UserManager.isDeviceInDemoMode(this), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DateTimeSettingsActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin);
+                !UserManager.isDeviceInDemoMode(this), isAdmin)
+                || somethingChanged;
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.PaymentSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_NFC)
                         && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
-                        && adapter != null && adapter.isEnabled(), isAdmin);
+                        && adapter != null && adapter.isEnabled(), isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.PrintSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin);
+                pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin)
+                || somethingChanged;
 
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
-                showDev, isAdmin);
+                showDev, isAdmin)
+                || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.
-        setTileEnabled(new ComponentName(packageName,
-                        BackupSettingsActivity.class.getName()), true, isAdmin);
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                BackupSettingsActivity.class.getName()), true, isAdmin)
+                || somethingChanged;
 
-        setTileEnabled(new ComponentName(packageName,
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.WifiDisplaySettingsActivity.class.getName()),
-                WifiDisplaySettings.isAvailable(this), isAdmin);
+                WifiDisplaySettings.isAvailable(this), isAdmin)
+                || somethingChanged;
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
 
@@ -848,7 +859,8 @@ public class SettingsActivity extends SettingsDrawerActivity
                                 SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
                         if (packageName.equals(component.getPackageName())
                                 && !isEnabledForRestricted) {
-                            setTileEnabled(component, false, isAdmin);
+                            somethingChanged = setTileEnabled(component, false, isAdmin)
+                                    || somethingChanged;
                         }
                     }
                 }
@@ -856,16 +868,24 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         // Final step, refresh categories.
-        updateCategories();
+        if (somethingChanged) {
+            Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories");
+            updateCategories();
+        } else {
+            Log.d(LOG_TAG, "No enabled state changed, skipping updateCategory call");
+        }
     }
 
-    private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin) {
+    /**
+     * @return whether or not the enabled state actually changed.
+     */
+    private boolean setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin) {
         if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SettingsGateway.SETTINGS_FOR_RESTRICTED,
                 component.getClassName())) {
             enabled = false;
         }
-        setTileEnabled(component, enabled);
+        return setTileEnabled(component, enabled);
     }
 
     private void getMetaData() {
