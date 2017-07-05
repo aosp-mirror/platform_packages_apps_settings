@@ -320,11 +320,11 @@ public class BatteryUtils {
         }
     }
 
-    public long convertUsToMs(long timeUs) {
+    public static long convertUsToMs(long timeUs) {
         return timeUs / 1000;
     }
 
-    public long convertMsToUs(long timeMs) {
+    public static long convertMsToUs(long timeMs) {
         return timeMs * 1000;
     }
 
