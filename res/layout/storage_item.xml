@@ -21,8 +21,8 @@
               android:minHeight="?android:attr/listPreferredItemHeightSmall"
               android:gravity="center_vertical"
               android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-              android:paddingTop="16dip"
-              android:paddingBottom="16dip"
+              android:paddingTop="14dp"
+              android:paddingBottom="14dp"
               android:background="?android:attr/selectableItemBackground"
               android:clipToPadding="false">
 
@@ -52,36 +52,41 @@
                 android:maxHeight="24dp"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@android:id/title"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-            android:textAlignment="viewStart"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal" />
+            android:gravity="center_vertical" >
 
-        <TextView
-            android:id="@android:id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorSecondaryNoDisable"
-            android:maxLines="10" />
+            <TextView
+                android:id="@android:id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                android:textAlignment="viewStart"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal" />
 
+            <TextView
+                android:id="@android:id/summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondaryNoDisable"
+                android:maxLines="10"
+                android:layout_alignParentEnd="true"/>
+
+            <ProgressBar
+                android:id="@android:id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:max="100"
+                android:layout_below="@android:id/title"
+                android:layout_alignStart="@android:id/title"
+                style="?android:attr/progressBarStyleHorizontal" />
+        </RelativeLayout>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@android:id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:max="100"
-        style="?android:attr/progressBarStyleHorizontal" />
-
 </LinearLayout>
