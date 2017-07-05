@@ -119,6 +119,8 @@ public class AdvancedPowerUsageDetailTest {
     private LoaderManager mLoaderManager;
     @Mock
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
+    @Mock
+    private BatteryStats.Timer mTimer;
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
@@ -168,6 +170,8 @@ public class AdvancedPowerUsageDetailTest {
                 eq(BatteryStats.Uid.PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
         doReturn(FOREGROUND_TIME_US).when(mUid).getProcessStateTime(
                 eq(BatteryStats.Uid.PROCESS_STATE_TOP), anyLong(), anyInt());
+        doReturn(mTimer).when(mUid).getForegroundActivityTimer();
+        doReturn(FOREGROUND_TIME_US).when(mTimer).getTotalTimeLocked(anyLong(), anyInt());
         ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
         mBatteryEntry.iconId = ICON_ID;
         mBatterySipper.uidObj = mUid;
