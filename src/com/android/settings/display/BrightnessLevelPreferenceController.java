@@ -143,7 +143,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
             final float value = Settings.System.getFloat(mContentResolver,
                     System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0);
             // auto brightness is between -1 and 1
-            return ((value + 1)) / 2;
+            return getPercentage(value, -1, 1);
         }
         final double value = Settings.System.getInt(mContentResolver, System.SCREEN_BRIGHTNESS,
                 mMinBrightness);
@@ -151,6 +151,12 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     }
 
     private double getPercentage(double value, int min, int max) {
+        if (value > max) {
+            return 1.0;
+        }
+        if (value < min) {
+            return 0.0;
+        }
         return (value - min) / (max - min);
     }
 
