@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.NetworkScoreManager;
-
 import android.net.NetworkScorerAppData;
 import android.net.Uri;
 import android.os.Handler;
@@ -20,13 +19,16 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
-import com.android.settings.network.NetworkScoreManagerWrapper;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.NetworkScoreManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.util.List;
 
 /**
  * {@link AbstractPreferenceController} that controls whether a user wants to enable the "use open
@@ -45,6 +47,7 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
 
     private Preference mPreference;
     private ComponentName mEnableUseWifiComponentName;
+    private boolean mDoFeatureSupportedScorersExist;
 
     public UseOpenWifiPreferenceController(Context context, Fragment fragment,
             NetworkScoreManagerWrapper networkScoreManagerWrapper, Lifecycle lifecycle) {
@@ -54,6 +57,7 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
         mNetworkScoreManagerWrapper = networkScoreManagerWrapper;
         mSettingObserver = new SettingObserver();
         updateEnableUseWifiComponentName();
+        checkForFeatureSupportedScorers();
         lifecycle.addObserver(this);
     }
 
@@ -61,6 +65,21 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
         NetworkScorerAppData appData = mNetworkScoreManagerWrapper.getActiveScorer();
         mEnableUseWifiComponentName =
                 appData == null ? null : appData.getEnableUseOpenWifiActivity();
+    }
+
+    private void checkForFeatureSupportedScorers() {
+        if (mEnableUseWifiComponentName != null) {
+            mDoFeatureSupportedScorersExist = true;
+            return;
+        }
+        List<NetworkScorerAppData> scorers = mNetworkScoreManagerWrapper.getAllValidScorers();
+        for (NetworkScorerAppData scorer : scorers) {
+            if (scorer.getEnableUseOpenWifiActivity() != null) {
+                mDoFeatureSupportedScorersExist = true;
+                return;
+            }
+        }
+        mDoFeatureSupportedScorersExist = false;
     }
 
     @Override
@@ -81,7 +100,7 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
 
     @Override
     public boolean isAvailable() {
-        return mEnableUseWifiComponentName != null;
+        return mDoFeatureSupportedScorersExist;
     }
 
     @Override
@@ -95,8 +114,23 @@ public class UseOpenWifiPreferenceController extends AbstractPreferenceControlle
             return;
         }
         final SwitchPreference useOpenWifiPreference = (SwitchPreference) preference;
-        useOpenWifiPreference.setVisible(isAvailable());
+
+        boolean isScorerSet = mNetworkScoreManagerWrapper.getActiveScorerPackage() != null;
+        boolean doesActiveScorerSupportFeature = mEnableUseWifiComponentName != null;
+
         useOpenWifiPreference.setChecked(isSettingEnabled());
+        useOpenWifiPreference.setVisible(isAvailable());
+        useOpenWifiPreference.setEnabled(isScorerSet && doesActiveScorerSupportFeature);
+
+        if (!isScorerSet) {
+            useOpenWifiPreference.setSummary(
+                    R.string.use_open_wifi_automatically_summary_scoring_disabled);
+        } else if (!doesActiveScorerSupportFeature) {
+            useOpenWifiPreference.setSummary(
+                    R.string.use_open_wifi_automatically_summary_scorer_unsupported_disabled);
+        } else {
+            useOpenWifiPreference.setSummary(R.string.use_open_wifi_automatically_summary);
+        }
     }
 
     @Override
