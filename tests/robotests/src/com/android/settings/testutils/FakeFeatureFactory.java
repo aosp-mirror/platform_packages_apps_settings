@@ -22,6 +22,7 @@ import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.datausage.DataPlanFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
@@ -57,6 +58,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final BluetoothFeatureProvider bluetoothFeatureProvider;
+    public final DataPlanFeatureProvider dataPlanFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -94,6 +96,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         userFeatureProvider = mock(UserFeatureProvider.class);
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
         bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
+        dataPlanFeatureProvider = mock(DataPlanFeatureProvider.class);
     }
 
     @Override
@@ -159,6 +162,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
         return bluetoothFeatureProvider;
+    }
+
+    @Override
+    public DataPlanFeatureProvider getDataPlanFeatureProvider() {
+        return dataPlanFeatureProvider;
     }
 
     @Override
