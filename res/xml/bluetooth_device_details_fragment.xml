@@ -19,6 +19,11 @@
     android:title="@string/bluetooth_device_advanced_title">
 
     <com.android.settings.applications.LayoutPreference
+        android:key="bluetooth_device_header"
+        android:layout="@layout/settings_entity_header"
+        android:selectable="false"/>
+
+    <com.android.settings.applications.LayoutPreference
         android:key="action_buttons"
         android:layout="@layout/app_action_buttons"
         android:selectable="false"/>
