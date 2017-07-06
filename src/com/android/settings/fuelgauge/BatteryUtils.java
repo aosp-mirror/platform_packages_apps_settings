@@ -18,7 +18,9 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
+import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -326,6 +328,12 @@ public class BatteryUtils {
 
     public static long convertMsToUs(long timeMs) {
         return timeMs * 1000;
+    }
+
+    public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
+            UserManager userManager) {
+        statsHelper.create(bundle);
+        statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, userManager.getUserProfiles());
     }
 
     private boolean isDataCorrupted() {
