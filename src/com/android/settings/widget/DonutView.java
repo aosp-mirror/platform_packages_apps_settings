@@ -39,7 +39,7 @@ public class DonutView extends View {
     // From manual testing, this is the longest we can go without visual errors.
     private static final int LINE_CHARACTER_LIMIT = 10;
     private float mStrokeWidth;
-    private int mPercent;
+    private double mPercent;
     private Paint mBackgroundCircle;
     private Paint mFilledArc;
     private TextPaint mTextPaint;
@@ -118,7 +118,7 @@ public class DonutView extends View {
                 getWidth() - mStrokeWidth,
                 getHeight() - mStrokeWidth,
                 TOP,
-                (360 * mPercent / 100),
+                (360 *  (float) mPercent),
                 false,
                 mFilledArc);
     }
@@ -140,7 +140,7 @@ public class DonutView extends View {
     /**
      * Set a percentage full to have the donut graph.
      */
-    public void setPercentage(int percent) {
+    public void setPercentage(double percent) {
         mPercent = percent;
         mPercentString = Utils.formatPercentage(mPercent);
         mFullString = getContext().getString(R.string.storage_percent_full);
