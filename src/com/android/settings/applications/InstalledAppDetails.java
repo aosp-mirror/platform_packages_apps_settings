@@ -69,7 +69,6 @@ import android.widget.Button;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.AppHeader;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -145,7 +144,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
-
+    private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
     private static final String KEY_HEADER = "header_view";
     private static final String KEY_INSTANT_APP_BUTTONS = "instant_app_buttons";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
@@ -445,6 +444,7 @@ public class InstalledAppDetails extends AppInfoBase
         EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
                 .setRecyclerView(getListView(), getLifecycle())
                 .setPackageName(mPackageName)
+                .setHasAppInfoLink(false)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .styleActionBar(activity)
@@ -935,7 +935,7 @@ public class InstalledAppDetails extends AppInfoBase
         // start new activity to manage app permissions
         Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
         intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
-        intent.putExtra(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+        intent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
         try {
             getActivity().startActivityForResult(intent, SUB_INFO_FRAGMENT);
         } catch (ActivityNotFoundException e) {
@@ -953,7 +953,6 @@ public class InstalledAppDetails extends AppInfoBase
         Bundle args = new Bundle();
         args.putString(ARG_PACKAGE_NAME, appEntry.info.packageName);
         args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
-        args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) caller.getActivity();
         sa.startPreferencePanel(caller, fragment.getName(), args, -1, title, caller,

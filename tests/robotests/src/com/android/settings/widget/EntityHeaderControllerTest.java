@@ -53,6 +53,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -182,14 +183,17 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void bindButton_noAppInfo_shouldNotShowButton() {
+    public void bindButton_noAppInfo_shouldNotAttachClickListener() {
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
+        final Activity activity = mock(Activity.class);
+        when(mFragment.getActivity()).thenReturn(activity);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName(null)
+                .setHasAppInfoLink(true)
                 .setButtonActions(
-                        EntityHeaderController.ActionType.ACTION_APP_INFO,
+                        EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
@@ -197,45 +201,32 @@ public class EntityHeaderControllerTest {
                 .isEqualTo(View.GONE);
         assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
                 .isEqualTo(View.GONE);
+
+        appLinks.findViewById(R.id.entity_header_content).performClick();
+        verify(mFragment, never()).getActivity();
+        verify(activity, never()).startActivity(any(Intent.class));
     }
 
     @Test
-    public void bindButton_hasAppInfo_shouldShowButton() {
+    public void bindButton_hasAppInfo_shouldAttachClickListener() {
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
-        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
-
-        mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
-        mController.setPackageName("123")
-                .setUid(UserHandle.USER_SYSTEM)
-                .setButtonActions(
-                        EntityHeaderController.ActionType.ACTION_APP_INFO,
-                        EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
-        mController.done(mActivity);
-
-        assertThat(appLinks.findViewById(android.R.id.button1).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
-                .isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void bindButton_hasAppInfo_shouldHaveContentDescription() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
-        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        final Activity activity = mock(Activity.class);
+        when(mFragment.getActivity()).thenReturn(activity);
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName("123")
                 .setUid(UserHandle.USER_SYSTEM)
+                .setHasAppInfoLink(true)
                 .setButtonActions(
-                        EntityHeaderController.ActionType.ACTION_APP_INFO,
-                        EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
+                        EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
+                        EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
-        assertThat(appLinks.findViewById(android.R.id.button1).getContentDescription().toString())
-                .isEqualTo("App info");
+        appLinks.findViewById(R.id.entity_header_content).performClick();
+        verify(activity).startActivityForResultAsUser(
+                any(Intent.class), anyInt(), any(UserHandle.class));
     }
 
     @Test

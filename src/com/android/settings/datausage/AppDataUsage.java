@@ -338,9 +338,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getLifecycle())
                 .setUid(uid)
-                .setButtonActions(showInfoButton
-                                ? EntityHeaderController.ActionType.ACTION_APP_INFO
-                                : EntityHeaderController.ActionType.ACTION_NONE,
+                .setHasAppInfoLink(showInfoButton)
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .setIcon(mIcon)
                 .setLabel(mLabel)

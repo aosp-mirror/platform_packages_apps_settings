@@ -34,7 +34,6 @@ import android.view.View;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -137,6 +136,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 .setLabel(mAppRow.label)
                 .setPackageName(mAppRow.pkg)
                 .setUid(mAppRow.uid)
+                .setHasAppInfoLink(true)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
                 .done(activity, getPrefContext());
@@ -219,7 +219,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         channelPref.setSummary(getImportanceSummary(channel));
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-        channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
         Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
