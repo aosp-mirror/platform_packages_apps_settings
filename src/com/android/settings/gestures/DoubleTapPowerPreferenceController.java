@@ -17,9 +17,11 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
@@ -32,10 +34,19 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
         mDoubleTapPowerKey = key;
     }
 
+    public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
+        return !isGestureAvailable(context)
+                || prefs.getBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
+    }
+
+    private static boolean isGestureAvailable(Context context) {
+        return context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
+    }
+
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
+        return isGestureAvailable(mContext);
     }
 
     @Override
