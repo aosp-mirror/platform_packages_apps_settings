@@ -30,10 +30,10 @@ import android.text.format.Formatter;
 import android.util.SparseIntArray;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.R;
 import com.android.settings.Utils;
 import com.android.settings.graph.UsageView;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.R;
 
 public class BatteryInfo {
 
@@ -54,18 +54,20 @@ public class BatteryInfo {
     }
 
     public void bindHistory(final UsageView view, BatteryDataParser... parsers) {
+        final Context context = view.getContext();
         BatteryDataParser parser = new BatteryDataParser() {
             SparseIntArray points = new SparseIntArray();
+            long startTime;
             int lastTime = -1;
             byte lastLevel;
-            int maxTime;
 
             @Override
             public void onParsingStarted(long startTime, long endTime) {
-                this.maxTime = (int) (endTime - startTime);
-                timePeriod = maxTime - (remainingTimeUs / 1000);
+                this.startTime = startTime;
+                timePeriod = endTime - startTime;
                 view.clearPaths();
-                view.configureGraph(maxTime, 100);
+                // Initially configure the graph for history only.
+                view.configureGraph((int) timePeriod, 100);
             }
 
             @Override
@@ -87,10 +89,27 @@ public class BatteryInfo {
             public void onParsingDone() {
                 onDataGap();
 
-                // Add linear projection
-                if (lastTime >= 0 && remainingTimeUs != 0) {
-                    points.put(lastTime, lastLevel);
-                    points.put(maxTime, mCharging ? 100 : 0);
+                // Add projection if we have an estimate.
+                if (remainingTimeUs != 0) {
+                    PowerUsageFeatureProvider provider = FeatureFactory.getFactory(context)
+                            .getPowerUsageFeatureProvider(context);
+                    if (!mCharging && provider.isEnhancedBatteryPredictionEnabled(context)) {
+                        points = provider.getEnhancedBatteryPredictionCurve(context, startTime);
+                    } else {
+                        // Linear extrapolation.
+                        if (lastTime >= 0) {
+                            points.put(lastTime, lastLevel);
+                            points.put((int) (timePeriod +
+                                            BatteryUtils.convertUsToMs(remainingTimeUs)),
+                                    mCharging ? 100 : 0);
+                        }
+                    }
+                }
+
+                // If we have a projection, reconfigure the graph to show it.
+                if (points != null && points.size() > 0) {
+                    int maxTime = points.keyAt(points.size() - 1);
+                    view.configureGraph(maxTime, 100);
                     view.addProjectedPath(points);
                 }
             }
@@ -100,8 +119,7 @@ public class BatteryInfo {
             parserList[i] = parsers[i];
         }
         parserList[parsers.length] = parser;
-        parse(mStats, remainingTimeUs, parserList);
-        final Context context = view.getContext();
+        parse(mStats, parserList);
         String timeString = context.getString(R.string.charge_length_format,
                 Formatter.formatShortElapsedTime(context, timePeriod));
         String remaining = "";
@@ -249,14 +267,11 @@ public class BatteryInfo {
         void onParsingDone();
     }
 
-    private static void parse(BatteryStats stats, long remainingTimeUs,
-            BatteryDataParser... parsers) {
+    private static void parse(BatteryStats stats, BatteryDataParser... parsers) {
         long startWalltime = 0;
-        long endDateWalltime = 0;
         long endWalltime = 0;
         long historyStart = 0;
         long historyEnd = 0;
-        byte lastLevel = -1;
         long curWalltime = startWalltime;
         long lastWallTime = 0;
         long lastRealtime = 0;
@@ -292,17 +307,13 @@ public class BatteryInfo {
                     }
                 }
                 if (rec.isDeltaData()) {
-                    if (rec.batteryLevel != lastLevel || pos == 1) {
-                        lastLevel = rec.batteryLevel;
-                    }
                     lastInteresting = pos;
                     historyEnd = rec.time;
                 }
             }
         }
         stats.finishIteratingHistoryLocked();
-        endDateWalltime = lastWallTime + historyEnd - lastRealtime;
-        endWalltime = endDateWalltime + (remainingTimeUs / 1000);
+        endWalltime = lastWallTime + historyEnd - lastRealtime;
 
         int i = 0;
         final int N = lastInteresting;
@@ -310,7 +321,7 @@ public class BatteryInfo {
         for (int j = 0; j < parsers.length; j++) {
             parsers[j].onParsingStarted(startWalltime, endWalltime);
         }
-        if (endDateWalltime > startWalltime && stats.startIteratingHistoryLocked()) {
+        if (endWalltime > startWalltime && stats.startIteratingHistoryLocked()) {
             final HistoryItem rec = new HistoryItem();
             while (stats.getNextHistoryLocked(rec) && i < N) {
                 if (rec.isDeltaData()) {
