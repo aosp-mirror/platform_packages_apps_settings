@@ -188,10 +188,15 @@
             android:title="@string/wifi_allow_scan_with_traffic"
             android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
 
-       <SwitchPreference
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary"/>
+
+        <SwitchPreference
+            android:key="tethering_hardware_offload"
+            android:title="@string/tethering_hardware_offload"
+            android:summary="@string/tethering_hardware_offload_summary"/>
 
         <ListPreference
             android:key="select_usb_configuration"
