@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -29,6 +30,7 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
@@ -43,10 +45,30 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
+    public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
+        return !isGestureAvailable(context)
+                || prefs.getBoolean(DoubleTwistGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
+    }
+
+    private static boolean isGestureAvailable(Context context) {
+        final Resources resources = context.getResources();
+        final String name = resources.getString(R.string.gesture_double_twist_sensor_name);
+        final String vendor = resources.getString(R.string.gesture_double_twist_sensor_vendor);
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
+            final SensorManager sensorManager =
+                    (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
+                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean isAvailable() {
-        return hasSensor(R.string.gesture_double_twist_sensor_name,
-                R.string.gesture_double_twist_sensor_vendor);
+        return isGestureAvailable(mContext);
     }
 
     @Override
@@ -82,21 +104,5 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
     @VisibleForTesting
     int getManagedProfileUserId() {
         return Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
-    }
-
-    private boolean hasSensor(int nameResId, int vendorResId) {
-        final Resources resources = mContext.getResources();
-        final String name = resources.getString(nameResId);
-        final String vendor = resources.getString(vendorResId);
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
-            final SensorManager sensorManager =
-                    (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-            for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
-                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

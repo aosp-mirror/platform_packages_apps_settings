@@ -20,11 +20,24 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
+import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
+import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
+import com.android.settings.Settings.DoubleTwistSuggestionActivity;
+import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.gestures.DoubleTapPowerPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.DoubleTwistPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
@@ -41,6 +54,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final AmbientDisplayConfiguration mAmbientDisplayConfig;
 
     @Override
     public boolean isSmartSuggestionEnabled(Context context) {
@@ -52,6 +66,21 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final String className = component.getClassName();
         if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(DoubleTapPowerSuggestionActivity.class.getName())) {
+            return DoubleTapPowerPreferenceController
+                    .isSuggestionComplete(context, getSharedPrefs(context));
+        } else if (className.equals(DoubleTwistSuggestionActivity.class.getName())) {
+            return DoubleTwistPreferenceController
+                    .isSuggestionComplete(context, getSharedPrefs(context));
+        } else if (className.equals(AmbientDisplaySuggestionActivity.class.getName())) {
+            return DoubleTapScreenPreferenceController
+                    .isSuggestionComplete(context, getSharedPrefs(context));
+        } else if (className.equals(AmbientDisplayPickupSuggestionActivity.class.getName())) {
+            return PickupGesturePreferenceController
+                    .isSuggestionComplete(context, getSharedPrefs(context));
+        } else if (className.equals(SwipeToNotificationSuggestionActivity.class.getName())) {
+            return SwipeToNotificationPreferenceController
+                    .isSuggestionComplete(context, getSharedPrefs(context));
         }
         return false;
     }
@@ -67,6 +96,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 new SuggestionFeaturizer(new EventStore(appContext)));
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
+        mAmbientDisplayConfig = new AmbientDisplayConfiguration(appContext);
     }
 
     @Override

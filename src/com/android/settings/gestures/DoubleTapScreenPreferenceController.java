@@ -18,10 +18,12 @@ package com.android.settings.gestures;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
@@ -39,6 +41,12 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
         mAmbientConfig = config;
         mUserId = userId;
         mDoubleTapScreenPrefKey = key;
+    }
+
+    public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
+        AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
+        return !ambientConfig.pulseOnDoubleTapAvailable()
+                || prefs.getBoolean(DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
     }
 
     @Override
