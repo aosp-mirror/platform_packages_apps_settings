@@ -22,6 +22,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
 
+import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -31,6 +32,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
  * This class adds a header with device name and status (connected/disconnected, etc.).
  */
 public class BluetoothDetailsHeaderController extends BluetoothDetailsController {
+    private static final String KEY_DEVICE_HEADER = "bluetooth_device_header";
 
     private EntityHeaderController mHeaderController;
 
@@ -41,21 +43,21 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     protected void init(PreferenceScreen screen) {
+        final LayoutPreference headerPreference =
+                (LayoutPreference) screen.findPreference(KEY_DEVICE_HEADER);
         mHeaderController = EntityHeaderController.newInstance(mFragment.getActivity(), mFragment,
-                null);
-        LayoutPreference pref = mHeaderController.done(mFragment.getActivity(), mContext);
-        screen.addPreference(pref);
+                headerPreference.findViewById(R.id.entity_header));
+        screen.addPreference(headerPreference);
     }
 
     protected void setHeaderProperties() {
         Pair<Integer, String> pair = Utils.getBtClassDrawableWithDescription
                 (mContext.getResources(), mCachedDevice);
-        int summaryResourceId = mCachedDevice.getConnectionSummary();
+        String summaryText = mCachedDevice.getConnectionSummary();
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(mContext.getDrawable(pair.first));
         mHeaderController.setIconContentDescription(pair.second);
-        mHeaderController.setSummary(
-                summaryResourceId > 0 ? mContext.getString(summaryResourceId) : null);
+        mHeaderController.setSummary(summaryText);
     }
 
     @Override
@@ -66,6 +68,6 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     public String getPreferenceKey() {
-        return EntityHeaderController.PREF_KEY_APP_HEADER;
+        return KEY_DEVICE_HEADER;
     }
 }

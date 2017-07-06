@@ -117,14 +117,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
          * any preference info has changed from the previous value.
          */
         setTitle(mCachedDevice.getName());
-
-        int summaryResId = mCachedDevice.getConnectionSummary();
-        if (summaryResId != 0) {
-            setSummary(summaryResId);
-        } else {
-            setSummary(null);   // empty summary for unpaired devices
-        }
-
+        // Null check is done at the framework
+        setSummary(mCachedDevice.getConnectionSummary());
 
         Pair<Integer, String> pair = Utils.getBtClassDrawableWithDescription(mResources,
                 mCachedDevice);
