@@ -40,7 +40,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGesturePreferenceController;
-import com.android.settings.gestures.CameraLiftTriggerPreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
@@ -70,7 +69,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String KEY_DOUBLE_TWIST = "gesture_double_twist_input_summary";
     private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen_input_summary";
     private static final String KEY_PICK_UP = "gesture_pick_up_input_summary";
-    private static final String KEY_CAMERA_LIFT_TRIGGER = "gesture_camera_lift_trigger_summary";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
@@ -149,8 +147,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 ambientDisplayConfiguration, UserHandle.myUserId(), KEY_PICK_UP));
         controllers.add(new DoubleTapScreenPreferenceController(context, lifecycle,
                 ambientDisplayConfiguration, UserHandle.myUserId(), KEY_DOUBLE_TAP_SCREEN));
-        controllers.add(new CameraLiftTriggerPreferenceController(context, lifecycle,
-                KEY_CAMERA_LIFT_TRIGGER));
         controllers.add(new DefaultAutofillPreferenceController(context));
         return controllers;
     }
