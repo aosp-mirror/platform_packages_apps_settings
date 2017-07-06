@@ -110,6 +110,8 @@ public class UsageGraph extends View {
     void setMax(int maxX, int maxY) {
         mMaxX = maxX;
         mMaxY = maxY;
+        calculateLocalPaths();
+        postInvalidate();
     }
 
     void setDividerLoc(int height) {
@@ -151,6 +153,10 @@ public class UsageGraph extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         updateGradient();
+        calculateLocalPaths();
+    }
+
+    private void calculateLocalPaths() {
         calculateLocalPaths(mPaths, mLocalPaths);
         calculateLocalPaths(mProjectedPaths, mLocalProjectedPaths);
     }
@@ -222,9 +228,10 @@ public class UsageGraph extends View {
                 mMiddleDividerTint);
         drawDivider(canvas.getHeight() - mDividerSize, canvas, -1);
 
-        if (mLocalPaths.size() == 0 && mProjectedPaths.size() == 0) {
+        if (mLocalPaths.size() == 0 && mLocalProjectedPaths.size() == 0) {
             return;
         }
+
         drawLinePath(canvas, mLocalProjectedPaths, mDottedPaint);
         drawFilledPath(canvas, mLocalPaths, mFillPaint);
         drawLinePath(canvas, mLocalPaths, mLinePaint);
