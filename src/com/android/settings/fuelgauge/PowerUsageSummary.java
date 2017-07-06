@@ -24,7 +24,6 @@ import android.content.Loader;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -206,12 +205,12 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     // be unplugged for a period of time before being willing ot make an estimate.
                     summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
                             Formatter.formatShortElapsedTime(getContext(),
-                                    mBatteryUtils.convertUsToMs(oldInfo.remainingTimeUs))));
+                                    BatteryUtils.convertUsToMs(oldInfo.remainingTimeUs))));
 
                     // for this one we can just set the string directly
                     summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
                             Formatter.formatShortElapsedTime(getContext(),
-                                    mBatteryUtils.convertUsToMs(newInfo.remainingTimeUs))));
+                                    BatteryUtils.convertUsToMs(newInfo.remainingTimeUs))));
 
                     batteryView.setBatteryLevel(oldInfo.batteryLevel);
                     batteryView.setCharging(!oldInfo.discharging);
