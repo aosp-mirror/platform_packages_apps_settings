@@ -160,7 +160,7 @@ public class BatteryInfoTest {
                 .computeChargeTimeRemaining(anyLong());
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, false, 1000, false);
-        assertThat(info.remainingTimeUs = TEST_CHARGE_TIME_REMAINING);
+        assertThat(info.remainingTimeUs).isEqualTo(TEST_CHARGE_TIME_REMAINING);
         assertThat(info.remainingLabel.toString())
                 .isEqualTo(TEST_CHARGE_TIME_REMAINING_STRINGIFIED);
     }

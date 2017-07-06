@@ -1708,6 +1708,7 @@
     <string name="wifi_wakeup_summary">Wi\u2011Fi will turn back on near high\u2011quality saved networks, like your home network</string>
     <!-- Checkbox summary for Wi-Fi wakeup option to explain that Wi-Fi wakeup is disabled because Wi-Fi scanning is turned off -->
     <string name="wifi_wakeup_summary_scanning_disabled">Unavailable because Wi\u2011Fi scanning is turned off</string>
+    <string name="wifi_wakeup_summary_scoring_disabled">Unavailable because network rating provider is set to none</string>
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
@@ -1718,6 +1719,8 @@
     <string name="use_open_wifi_automatically_title">Connect to open networks</string>
     <!-- Checkbox summary for option to connect to open Wi-Fi automatically  [CHAR LIMIT=100] -->
     <string name="use_open_wifi_automatically_summary">Automatically connect to high\u2011quality public networks</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled">Unavailable because network rating provider is set to none</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled">Unavailable because the network rating provider does not support this feature</string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
@@ -8684,15 +8687,6 @@
 
     <!-- Summary for settings suggestion for fingerprint swipe for notifications [CHAR LIMIT=60] -->
     <string name="fingerprint_swipe_for_notifications_suggestion_summary">Swipe down on the fingerprint sensor</string>
-
-    <!-- Title and settings suggestion title text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
-    <string name="camera_lift_trigger_title">Raise to open camera</string>
-
-    <!-- Summary text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=none]-->
-    <string name="camera_lift_trigger_summary">To open the camera automatically, lift up your phone into a photo-taking position (landscape or portrait). Works when your phone is asleep or locked.</string>
-
-    <!-- Settings suggestion summary text for opening camera when lifting the phone to a photo-taking position [CHAR LIMIT=60]-->
-    <string name="camera_lift_trigger_suggestion_summary">Take photos when phone is asleep or locked</string>
 
     <!-- Title text for the assist gesture [CHAR LIMIT=60]-->
     <string name="assist_gesture_title">Assist gesture</string>

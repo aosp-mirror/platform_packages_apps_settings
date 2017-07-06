@@ -90,6 +90,7 @@ public class Settings extends SettingsActivity {
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
+    public static class MobileDataUsageListActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SavedAccessPointsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TextToSpeechSettingsActivity extends SettingsActivity { /* empty */ }
@@ -148,7 +149,13 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
     public static class ScreenLockSuggestionActivity extends ChooseLockGeneric { /* empty */ }
-    public static class CameraLiftTriggerSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class DoubleTapPowerSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class DoubleTwistSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class AmbientDisplaySuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class AmbientDisplayPickupSuggestionActivity extends SettingsActivity {
+        /* empty */ }
+    public static class SwipeToNotificationSuggestionActivity extends SettingsActivity {
+        /* empty */ }
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }

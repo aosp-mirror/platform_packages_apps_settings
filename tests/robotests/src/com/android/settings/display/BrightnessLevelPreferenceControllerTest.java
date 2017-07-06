@@ -19,6 +19,7 @@ package com.android.settings.display;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -130,7 +131,7 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_autoBrightness_shouldSetSummaryToVrBrightness() {
+    public void updateState_autoBrightness_shouldSetSummaryToAutoBrightness() {
         doReturn(false).when(mController).isInVrMode();
         System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
             System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
@@ -143,7 +144,7 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_manualBrightness_shouldSetSummaryToVrBrightness() {
+    public void updateState_manualBrightness_shouldSetSummaryToScreenBrightness() {
         doReturn(false).when(mController).isInVrMode();
         System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
             System.SCREEN_BRIGHTNESS_MODE_MANUAL);
@@ -153,5 +154,46 @@ public class BrightnessLevelPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary("45%");
+    }
+
+    @Test
+    public void updateState_brightnessOutOfRange_shouldSetSummaryInRange() {
+        // VR mode
+        doReturn(true).when(mController).isInVrMode();
+
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR, 105);
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("100%");
+
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR, -20);
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("0%");
+
+        // Auto mode
+        doReturn(false).when(mController).isInVrMode();
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
+                System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+
+        reset(mPreference);
+        System.putFloat(mContentResolver, System.SCREEN_AUTO_BRIGHTNESS_ADJ, 1.5f);
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("100%");
+
+        System.putFloat(mContentResolver, System.SCREEN_AUTO_BRIGHTNESS_ADJ, -1.5f);
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("0%");
+
+        // Manual mode
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
+                System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+
+        reset(mPreference);
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS, 115);
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("100%");
+
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS, -10);
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("0%");
     }
 }

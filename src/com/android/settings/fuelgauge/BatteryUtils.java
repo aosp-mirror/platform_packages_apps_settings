@@ -122,7 +122,10 @@ public class BatteryUtils {
         }
         Log.v(TAG, "foreground time(us): " + timeUs);
 
-        return convertUsToMs(timeUs);
+        // Return the min value of STATE_TOP time and foreground activity time, since both of these
+        // time have some errors.
+        return convertUsToMs(
+                Math.min(timeUs, getForegroundActivityTotalTimeUs(uid, rawRealTimeUs)));
     }
 
     /**
@@ -167,15 +170,13 @@ public class BatteryUtils {
      */
     @VisibleForTesting
     void smearScreenBatterySipper(List<BatterySipper> sippers, BatterySipper screenSipper) {
-        final long rawRealtimeMs = SystemClock.elapsedRealtime();
         long totalActivityTimeMs = 0;
         final SparseLongArray activityTimeArray = new SparseLongArray();
         for (int i = 0, size = sippers.size(); i < size; i++) {
             final BatteryStats.Uid uid = sippers.get(i).uidObj;
             if (uid != null) {
-                final long timeMs = Math.min(getForegroundActivityTotalTimeMs(uid, rawRealtimeMs),
-                        getProcessTimeMs(StatusType.FOREGROUND, uid,
-                                BatteryStats.STATS_SINCE_CHARGED));
+                final long timeMs = getProcessTimeMs(StatusType.FOREGROUND, uid,
+                        BatteryStats.STATS_SINCE_CHARGED);
                 activityTimeArray.put(uid.getUid(), timeMs);
                 totalActivityTimeMs += timeMs;
             }
@@ -319,11 +320,11 @@ public class BatteryUtils {
         }
     }
 
-    public long convertUsToMs(long timeUs) {
+    public static long convertUsToMs(long timeUs) {
         return timeUs / 1000;
     }
 
-    public long convertMsToUs(long timeMs) {
+    public static long convertMsToUs(long timeMs) {
         return timeMs * 1000;
     }
 
@@ -332,11 +333,10 @@ public class BatteryUtils {
     }
 
     @VisibleForTesting
-    long getForegroundActivityTotalTimeMs(BatteryStats.Uid uid, long rawRealtimeMs) {
+    long getForegroundActivityTotalTimeUs(BatteryStats.Uid uid, long rawRealtimeUs) {
         final BatteryStats.Timer timer = uid.getForegroundActivityTimer();
         if (timer != null) {
-            return convertUsToMs(timer.getTotalTimeLocked(convertMsToUs(rawRealtimeMs),
-                            BatteryStats.STATS_SINCE_CHARGED));
+            return timer.getTotalTimeLocked(rawRealtimeUs, BatteryStats.STATS_SINCE_CHARGED);
         }
 
         return 0;

@@ -25,7 +25,6 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.NetworkScoreManagerWrapper;
 import com.android.settings.network.NetworkScorerPickerPreferenceController;
@@ -43,6 +42,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
 
+    private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
     private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
 
     @Override
@@ -58,8 +58,14 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(
-            mUseOpenWifiPreferenceController.isAvailable() ? 3 : 2);
+        int tileLimit = 1;
+        if (mWifiWakeupPreferenceController.isAvailable()) {
+            tileLimit++;
+        }
+        if (mUseOpenWifiPreferenceController.isAvailable()) {
+            tileLimit++;
+        }
+        mProgressiveDisclosureMixin.setTileLimit(tileLimit);
     }
 
     @Override
@@ -71,11 +77,13 @@ public class ConfigureWifiSettings extends DashboardFragment {
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final NetworkScoreManagerWrapper networkScoreManagerWrapper =
                 new NetworkScoreManagerWrapper(context.getSystemService(NetworkScoreManager.class));
+        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(
+                context, getLifecycle(), networkScoreManagerWrapper);
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
                 networkScoreManagerWrapper, getLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
+        controllers.add(mWifiWakeupPreferenceController);
         controllers.add(new NetworkScorerPickerPreferenceController(context,
                 networkScoreManagerWrapper));
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
