@@ -193,6 +193,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
     private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
+    private static final String TETHERING_HARDWARE_OFFLOAD = "tethering_hardware_offload";
     private static final String KEY_COLOR_MODE = "picture_color_mode";
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
@@ -279,6 +280,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mWifiVerboseLogging;
     private SwitchPreference mWifiAggressiveHandover;
     private SwitchPreference mMobileDataAlwaysOn;
+    private SwitchPreference mTetheringHardwareOffload;
     private SwitchPreference mBluetoothDisableAbsVolume;
     private SwitchPreference mBluetoothEnableInbandRinging;
 
@@ -478,6 +480,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWifiAggressiveHandover = findAndInitSwitchPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
         mWifiAllowScansWithTraffic = findAndInitSwitchPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
+        mTetheringHardwareOffload = findAndInitSwitchPref(TETHERING_HARDWARE_OFFLOAD);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
         if ("1".equals(SystemProperties.get("ro.debuggable", "0"))) {
             mLogpersist = addListPreference(SELECT_LOGPERSIST_KEY);
@@ -812,6 +815,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateWifiAggressiveHandoverOptions();
         updateWifiAllowScansWithTrafficOptions();
         updateMobileDataAlwaysOnOptions();
+        updateTetheringHardwareOffloadOptions();
         updateSimulateColorSpace();
         updateUSBAudioOptions();
         updateForceResizableOptions();
@@ -1484,6 +1488,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getActivity().getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON,
                 mMobileDataAlwaysOn.isChecked() ? 1 : 0);
+    }
+
+    private void updateTetheringHardwareOffloadOptions() {
+        updateSwitchPreference(mTetheringHardwareOffload, Settings.Global.getInt(
+                getActivity().getContentResolver(),
+                Settings.Global.TETHER_OFFLOAD_DISABLED, 0) != 1);
+    }
+
+    private void writeTetheringHardwareOffloadOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.TETHER_OFFLOAD_DISABLED,
+                mTetheringHardwareOffload.isChecked() ? 0 : 1);
     }
 
     private String defaultLogdSizeValue() {
@@ -2507,6 +2523,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeWifiAllowScansWithTrafficOptions();
         } else if (preference == mMobileDataAlwaysOn) {
             writeMobileDataAlwaysOnOptions();
+        } else if (preference == mTetheringHardwareOffload) {
+            writeTetheringHardwareOffloadOptions();
         } else if (preference == mColorTemperaturePreference) {
             writeColorTemperature();
         } else if (preference == mUSBAudio) {
