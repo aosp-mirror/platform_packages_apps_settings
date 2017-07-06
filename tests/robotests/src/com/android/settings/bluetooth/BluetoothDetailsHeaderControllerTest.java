@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
@@ -23,7 +25,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -33,7 +34,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import org.junit.After;
 import org.junit.Test;
@@ -42,8 +42,6 @@ import org.mockito.Answers;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -73,6 +71,15 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         ShadowEntityHeaderController.reset();
     }
 
+    /**
+     * Test to verify the current test context object works so that we are not checking null
+     * against null
+     */
+    @Test
+    public void testContextMock() {
+        assertThat(mContext.getString(R.string.bluetooth_connected)).isEqualTo("Connected");
+    }
+
     @Test
     public void header() {
         showScreen(mController);
@@ -86,17 +93,19 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
 
     @Test
     public void connectionStatusChangesWhileScreenOpen() {
-        ArrayList<LocalBluetoothProfile> profiles = new ArrayList<>();
         InOrder inOrder = inOrder(mHeaderController);
-        when(mCachedDevice.getConnectionSummary()).thenReturn(R.string.bluetooth_connected);
+        when(mCachedDevice.getConnectionSummary()).thenReturn(
+                mContext.getString(R.string.bluetooth_connected));
         showScreen(mController);
-        inOrder.verify(mHeaderController).setSummary(mContext.getString(R.string.bluetooth_connected));
+        inOrder.verify(mHeaderController).setSummary(
+                mContext.getString(R.string.bluetooth_connected));
 
-        when(mCachedDevice.getConnectionSummary()).thenReturn(0);
+        when(mCachedDevice.getConnectionSummary()).thenReturn(null);
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController).setSummary((CharSequence) null);
 
-        when(mCachedDevice.getConnectionSummary()).thenReturn(R.string.bluetooth_connecting);
+        when(mCachedDevice.getConnectionSummary()).thenReturn(
+                mContext.getString(R.string.bluetooth_connecting));
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController).setSummary(
                 mContext.getString(R.string.bluetooth_connecting));
