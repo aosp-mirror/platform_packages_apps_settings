@@ -276,7 +276,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void disconnectedDeviceOneProfile() {
-        setupDevice(makeDefaultDeviceConfig().setConnected(false).setConnectionSummary(0));
+        setupDevice(makeDefaultDeviceConfig().setConnected(false).setConnectionSummary(null));
         addFakeProfile(R.string.bluetooth_profile_a2dp, true);
         showScreen(mController);
         verifyProfileSwitchTitles(getProfileSwitches(true));
