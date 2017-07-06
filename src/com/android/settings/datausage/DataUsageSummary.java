@@ -55,7 +55,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,6 @@ import static android.net.NetworkPolicy.LIMIT_DISABLED;
 
 public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
-    private static final String TAG = "DataUsageSummary";
     static final boolean LOGD = false;
 
     public static final boolean TEST_RADIOS = false;
@@ -85,9 +83,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
     private int mDataUsageTemplate;
-    private NetworkRestrictionsPreference mNetworkRestrcitionPreference;
+    private NetworkRestrictionsPreference mNetworkRestrictionPreference;
     private WifiManager mWifiManager;
-    private NetworkPolicyManager mPolicyManager;
     private NetworkPolicyEditor mPolicyEditor;
 
     @Override
@@ -100,9 +97,9 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         super.onCreate(icicle);
 
         final Context context = getContext();
-        mPolicyManager = NetworkPolicyManager.from(context);
+        NetworkPolicyManager policyManager = NetworkPolicyManager.from(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
+        mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
         boolean hasMobileData = hasMobileData(context);
         mDataUsageController = new DataUsageController(context);
@@ -203,7 +200,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
         category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
-        mNetworkRestrcitionPreference =
+        mNetworkRestrictionPreference =
             (NetworkRestrictionsPreference) category.findPreference(KEY_NETWORK_RESTRICTIONS);
     }
 
@@ -293,7 +290,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             mLimitPreference.setSummary(null);
         }
 
-        updateNetworkRestrictionSummary(mNetworkRestrcitionPreference);
+        updateNetworkRestrictionSummary(mNetworkRestrictionPreference);
 
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
@@ -463,13 +460,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
+        = SummaryProvider::new;
 
     /**
      * For search
