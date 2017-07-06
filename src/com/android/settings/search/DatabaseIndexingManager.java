@@ -617,15 +617,22 @@ public class DatabaseIndexingManager {
         if (data instanceof SearchIndexableResource) {
             indexOneResource(database, localeStr, (SearchIndexableResource) data, nonIndexableKeys);
         } else if (data instanceof SearchIndexableRaw) {
-            indexOneRaw(database, localeStr, (SearchIndexableRaw) data);
+            indexOneRaw(database, localeStr, (SearchIndexableRaw) data, nonIndexableKeys);
         }
     }
 
     private void indexOneRaw(SQLiteDatabase database, String localeStr,
-            SearchIndexableRaw raw) {
+            SearchIndexableRaw raw, Map<String, Set<String>> nonIndexableKeysFromResource) {
         // Should be the same locale as the one we are processing
         if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
             return;
+        }
+
+        Set<String> packageKeys = nonIndexableKeysFromResource.get(raw.intentTargetPackage);
+        boolean enabled = raw.enabled;
+
+        if (packageKeys != null && packageKeys.contains(raw.key)) {
+            enabled = false;
         }
 
         DatabaseRow.Builder builder = new DatabaseRow.Builder();
@@ -638,7 +645,7 @@ public class DatabaseIndexingManager {
                 .setIntentAction(raw.intentAction)
                 .setIntentTargetPackage(raw.intentTargetPackage)
                 .setIntentTargetClass(raw.intentTargetClass)
-                .setEnabled(raw.enabled)
+                .setEnabled(enabled)
                 .setKey(raw.key)
                 .setUserId(raw.userId);
 
