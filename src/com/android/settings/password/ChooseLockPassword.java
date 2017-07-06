@@ -204,7 +204,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
-        private boolean mForFingerprint;
+        protected boolean mForFingerprint;
 
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
