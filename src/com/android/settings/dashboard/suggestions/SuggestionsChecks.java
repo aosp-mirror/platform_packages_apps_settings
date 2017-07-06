@@ -28,7 +28,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
-import com.android.settings.Settings.CameraLiftTriggerSuggestionActivity;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.ScreenLockSuggestionActivity;
 import com.android.settings.Settings.WifiCallingSuggestionActivity;
@@ -75,8 +74,6 @@ public class SuggestionsChecks {
                 return true;
             }
             return manager.hasEnrolledFingerprints();
-        } else if (className.equals(CameraLiftTriggerSuggestionActivity.class.getName())) {
-            return isCameraLiftTriggerEnabled();
         }
 
         final SuggestionFeatureProvider provider =
@@ -126,12 +123,5 @@ public class SuggestionsChecks {
         final int dpmFlags = dpManager.getKeyguardDisabledFeatures(null, /* admin */
                 mContext.getUserId());
         return (dpmFlags & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) == 0;
-    }
-
-    private boolean isCameraLiftTriggerEnabled() {
-        final int triggerEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED,
-                Settings.Secure.CAMERA_LIFT_TRIGGER_ENABLED_DEFAULT);
-        return triggerEnabled == 1;
     }
 }

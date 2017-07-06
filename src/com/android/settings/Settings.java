@@ -149,7 +149,6 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
     public static class ScreenLockSuggestionActivity extends ChooseLockGeneric { /* empty */ }
-    public static class CameraLiftTriggerSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class DoubleTapPowerSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class DoubleTwistSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class AmbientDisplaySuggestionActivity extends SettingsActivity { /* empty */ }
