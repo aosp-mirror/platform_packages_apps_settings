@@ -94,9 +94,11 @@ public class DashboardSummary extends InstrumentedFragment
 
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
-        mSuggestionParser = new SuggestionParser(activity,
-                mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
-        mSuggestionsChecks = new SuggestionsChecks(getContext());
+        if (mSuggestionFeatureProvider.isSuggestionEnabled(activity)) {
+            mSuggestionParser = new SuggestionParser(activity,
+                    mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
+            mSuggestionsChecks = new SuggestionsChecks(getContext());
+        }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                     + " ms");
@@ -206,11 +208,16 @@ public class DashboardSummary extends InstrumentedFragment
 
     @VisibleForTesting
     void rebuildUI() {
-        new SuggestionLoader().execute();
-        // Set categories on their own if loading suggestions takes too long.
-        mHandler.postDelayed(() -> {
+        if (!mSuggestionFeatureProvider.isSuggestionEnabled(getContext())) {
+            Log.d(TAG, "Suggestion feature is disabled, skipping suggestion entirely");
             updateCategoryAndSuggestion(null /* tiles */);
-        }, MAX_WAIT_MILLIS);
+        } else {
+            new SuggestionLoader().execute();
+            // Set categories on their own if loading suggestions takes too long.
+            mHandler.postDelayed(() -> {
+                updateCategoryAndSuggestion(null /* tiles */);
+            }, MAX_WAIT_MILLIS);
+        }
     }
 
     @Override
