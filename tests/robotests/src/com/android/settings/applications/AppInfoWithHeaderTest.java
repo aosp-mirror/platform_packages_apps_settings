@@ -17,20 +17,24 @@
 package com.android.settings.applications;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.After;
@@ -40,10 +44,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -85,11 +91,41 @@ public class AppInfoWithHeaderTest {
         verify(mAppInfoWithHeader.mScreen).addPreference(any(LayoutPreference.class));
     }
 
+    @Test
+    public void packageRemoved_noAppEntry_shouldFinishActivity() {
+        BroadcastReceiver packageRemovedReceiver =
+                ReflectionHelpers.getField(mAppInfoWithHeader, "mPackageRemovedReceiver");
+        ReflectionHelpers.setField(mAppInfoWithHeader, "mAppEntry", null);
+
+        final Intent packageRemovedBroadcast = new Intent();
+        packageRemovedBroadcast.setData(Uri.parse("package:com.android.settings"));
+        packageRemovedReceiver.onReceive(RuntimeEnvironment.application, packageRemovedBroadcast);
+
+        assertThat(mAppInfoWithHeader.mPackageRemovedCalled).isTrue();
+    }
+
+    @Test
+    public void packageRemoved_appEntryMatchesPackageName_shouldFinishActivity() {
+        BroadcastReceiver packageRemovedReceiver =
+                ReflectionHelpers.getField(mAppInfoWithHeader, "mPackageRemovedReceiver");
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = "com.android.settings";
+        ReflectionHelpers.setField(mAppInfoWithHeader, "mAppEntry", entry);
+
+        final Intent packageRemovedBroadcast = new Intent();
+        packageRemovedBroadcast.setData(Uri.parse("package:" + entry.info.packageName));
+        packageRemovedReceiver.onReceive(RuntimeEnvironment.application, packageRemovedBroadcast);
+
+        assertThat(mAppInfoWithHeader.mPackageRemovedCalled).isTrue();
+    }
+
     public static class TestFragment extends AppInfoWithHeader {
 
         PreferenceManager mManager;
         PreferenceScreen mScreen;
         Context mShadowContext;
+        boolean mPackageRemovedCalled;
 
         public TestFragment() {
             mPm = mock(PackageManager.class);
@@ -131,6 +167,11 @@ public class AppInfoWithHeaderTest {
         @Override
         public Context getContext() {
             return mShadowContext;
+        }
+
+        @Override
+        protected void onPackageRemoved() {
+            mPackageRemovedCalled = true;
         }
     }
 
