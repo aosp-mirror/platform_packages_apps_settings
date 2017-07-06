@@ -22,9 +22,10 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Process;
+import android.util.SparseIntArray;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
@@ -91,6 +92,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public long getEnhancedBatteryPrediction(Context context) {
         return -1;
+    }
+
+    @Override
+    public SparseIntArray getEnhancedBatteryPredictionCurve(Context context, long zeroTime) {
+        return null;
     }
 
     @Override

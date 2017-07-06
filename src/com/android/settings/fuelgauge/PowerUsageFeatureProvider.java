@@ -20,8 +20,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.SparseIntArray;
+
 import com.android.internal.os.BatterySipper;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 /**
  * Feature Provider used in power usage
@@ -66,6 +67,12 @@ public interface PowerUsageFeatureProvider {
      * Returns an improved prediction for battery time remaining.
      */
     long getEnhancedBatteryPrediction(Context context);
+
+    /**
+     * Returns an improved projection curve for future battery level.
+     * @param zeroTime timestamps (array keys) are shifted by this amount
+     */
+    SparseIntArray getEnhancedBatteryPredictionCurve(Context context, long zeroTime);
 
     /**
      * Checks whether the toggle for enhanced battery predictions is enabled.
