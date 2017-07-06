@@ -46,8 +46,7 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
                 FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
 
         // get stuff we'll need for both BatteryInfo
-        BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
-        final long elapsedRealtimeUs = batteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+        final long elapsedRealtimeUs = BatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
         Intent batteryBroadcast = getContext().registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryStats stats = mStatsHelper.getStats();
@@ -55,7 +54,7 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
         BatteryInfo oldinfo = BatteryInfo.getBatteryInfoOld(getContext(), batteryBroadcast,
                 stats, elapsedRealtimeUs, false);
 
-        final long timeRemainingEnhanced = batteryUtils.convertMsToUs(
+        final long timeRemainingEnhanced = BatteryUtils.convertMsToUs(
                 powerUsageFeatureProvider.getEnhancedBatteryPrediction(getContext()));
         BatteryInfo newinfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
                 elapsedRealtimeUs, false, timeRemainingEnhanced, true);
