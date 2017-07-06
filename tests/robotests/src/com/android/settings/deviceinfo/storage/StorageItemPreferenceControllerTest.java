@@ -298,19 +298,19 @@ public class StorageItemPreferenceControllerTest {
     @Test
     public void settingUserIdAppliesNewIcons() {
         StorageItemPreference audio = spy(new StorageItemPreference(mContext));
-        audio.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        audio.setIcon(R.drawable.ic_media_stream);
         StorageItemPreference video = spy(new StorageItemPreference(mContext));
-        video.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        video.setIcon(R.drawable.ic_local_movies);
         StorageItemPreference image = spy(new StorageItemPreference(mContext));
-        image.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        image.setIcon(R.drawable.ic_photo_library);
         StorageItemPreference games = spy(new StorageItemPreference(mContext));
-        games.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        games.setIcon(R.drawable.ic_videogame_vd_theme_24);
         StorageItemPreference apps = spy(new StorageItemPreference(mContext));
-        apps.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        apps.setIcon(R.drawable.ic_storage_apps);
         StorageItemPreference system = spy(new StorageItemPreference(mContext));
-        system.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        system.setIcon(R.drawable.ic_system_update_vd_theme_24);
         StorageItemPreference files = spy(new StorageItemPreference(mContext));
-        files.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        files.setIcon(R.drawable.ic_folder_vd_theme_24);
         PreferenceScreen screen = mock(PreferenceScreen.class);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);
