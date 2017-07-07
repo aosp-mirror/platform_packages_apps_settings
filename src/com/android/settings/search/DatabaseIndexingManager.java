@@ -17,6 +17,8 @@
 
 package com.android.settings.search;
 
+import com.android.settings.R;
+
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -858,7 +860,8 @@ public class DatabaseIndexingManager {
             List<String> nonIndexableKeys) {
 
         final String className = sir.className;
-        final int rank = sir.rank;
+        final String intentAction = sir.intentAction;
+        final String intentTargetPackage = sir.intentTargetPackage;
 
         if (provider == null) {
             Log.w(LOG_TAG, "Cannot find provider: " + className);
@@ -886,7 +889,6 @@ public class DatabaseIndexingManager {
                         .setClassName(className)
                         .setScreenTitle(raw.screenTitle)
                         .setIconResId(raw.iconResId)
-                        .setRank(rank)
                         .setIntentAction(raw.intentAction)
                         .setIntentTargetPackage(raw.intentTargetPackage)
                         .setIntentTargetClass(raw.intentTargetClass)
@@ -911,7 +913,15 @@ public class DatabaseIndexingManager {
                     continue;
                 }
 
-                item.className = (TextUtils.isEmpty(item.className)) ? className : item.className;
+                item.className = TextUtils.isEmpty(item.className)
+                        ? className
+                        : item.className;
+                item.intentAction = TextUtils.isEmpty(item.intentAction)
+                        ? intentAction
+                        : item.intentAction;
+                item.intentTargetPackage = TextUtils.isEmpty(item.intentTargetPackage)
+                        ? intentTargetPackage
+                        : item.intentTargetPackage;
 
                 indexFromResource(database, localeStr, item, nonIndexableKeys);
             }
@@ -1245,7 +1255,11 @@ public class DatabaseIndexingManager {
             private Intent buildIntent(Context context) {
                 final Intent intent;
 
-                if (TextUtils.isEmpty(mIntentAction)) {
+                boolean isEmptyIntentAction = TextUtils.isEmpty(mIntentAction);
+                // No intent action is set, or the intent action is for a subsetting.
+                if (isEmptyIntentAction
+                        || (!isEmptyIntentAction && TextUtils.equals(mIntentTargetPackage,
+                        SearchIndexableResources.SUBSETTING_TARGET_PACKAGE))) {
                     // Action is null, we will launch it as a sub-setting
                     intent = DatabaseIndexingUtils.buildSubsettingIntent(context, mClassName, mKey,
                             mScreenTitle);
