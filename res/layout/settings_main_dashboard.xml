@@ -37,11 +37,12 @@
             <Toolbar
                 android:id="@+id/search_action_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/search_bar_height"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentInsetStartWithNavigation="64dp"
                 android:navigationIcon="@drawable/ic_search_24dp"
-                android:titleTextColor="@*android:color/text_color_primary"
+                android:title="@string/search_menu"
+                android:titleTextAppearance="@style/TextAppearance.SearchBar"
                 android:theme="?android:attr/actionBarTheme"/>
         </android.support.v7.widget.CardView>
     </FrameLayout>
