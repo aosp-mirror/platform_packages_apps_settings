@@ -434,14 +434,14 @@
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Trebate postaviti PIN za zaključavanje ekrana ili lozinku da biste mogli pokrenuti šifriranje."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"Šifriraj?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="517662068757620756">"Postupak šifriranja je neopoziv te gubite podatke u slučaju prekida. Šifriranje traje jedan sat ili duže, pri čemu se tablet ponovo pokreće nekoliko puta."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="287503113671320916">"Postupak šifriranja je nepovratan; u slučaju prekida, gubite podatke. Šifriranje traje jedan sat ili duže, pri čemu se telefon ponovno pokreće nekoliko puta."</string>
+    <string name="crypt_keeper_final_desc" product="default" msgid="287503113671320916">"Postupak šifriranja je nepovratan; u slučaju prekida, gubite podatke. Šifriranje traje jedan sat ili duže, pri čemu se telefon ponovo pokreće nekoliko puta."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Šifriranje"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Pričekajte dok se tablet šifrira. Dovršeno <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Pričekajte dok se telefon šifrira. Dovršeno <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Pričekajte dok se tablet šifrira. Preostalo vrijeme: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Pričekajte dok se telefon šifrira. Preostalo vrijeme: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Da biste otključali tablet, isključite ga, zatim ponovno uključite."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Da biste otključali tablet, isključite ga, a zatim ponovno uključite."</string>
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Da biste otključali tablet, isključite ga, zatim ponovo uključite."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Da biste otključali tablet, isključite ga, a zatim ponovo uključite."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Upozorenje: Preostalo vam je <xliff:g id="COUNT">^1</xliff:g> pokušaja otključavanja, nakon čega će sadržaj vašeg uređaja biti izbrisan!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Otkucajte lozinku"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Šifriranje nije uspjelo"</string>
@@ -1323,7 +1323,7 @@
     <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN omogućen"</string>
     <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN onemogućen"</string>
     <string name="bearer" msgid="594270280031923558">"Nosilac"</string>
-    <string name="mvno_type" msgid="2543253857818336421">"MVNO tip"</string>
+    <string name="mvno_type" msgid="2543253857818336421">"MVNO vrsta"</string>
     <string name="mvno_match_data" msgid="4560671695220540466">"MVNO vrijednost"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Izbriši APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Novi APN"</string>
@@ -2025,35 +2025,22 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Učestalo zahtijevanje lokacije"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"Ukupno aplikacija koje se ne ponašaju kako treba: <xliff:g id="NUMBER">%1$d</xliff:g>"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Želite zaustaviti aplikaciju?"</string>
-    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
-    <skip />
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Vaš telefon ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno drži vaš telefon aktivnim.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Vaš tablet ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno drži vaš tablet aktivnim.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"Vaš uređaj ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno drži vaš uređaj aktivnim.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"Vaš telefon ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP_0">%1$s</xliff:g> stalno podiže telefon iz stanja mirovanja.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju <xliff:g id="APP_1">%1$s</xliff:g>.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"Vaš tablet ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP_0">%1$s</xliff:g> stalno podiže tablet iz stanja mirovanja.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju <xliff:g id="APP_1">%1$s</xliff:g>.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"Vaš uređaj ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP_0">%1$s</xliff:g> stalno podiže uređaj iz stanja mirovanja.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju <xliff:g id="APP_1">%1$s</xliff:g>.\n\nAko se problem ne riješi, možda ćete trebati deinstalirati aplikaciju da poboljšate rad baterije."</string>
     <string name="dialog_stop_ok" msgid="2319777211264004900">"Zaustavi aplikaciju"</string>
-    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
-    <skip />
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"Želite li isključiti korištenje u pozadini i zaustaviti aplikaciju?"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"Vaš telefon ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP_0">%1$s</xliff:g> stalno podiže vaš telefon iz stanja mirovanja.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju <xliff:g id="APP_1">%1$s</xliff:g> i spriječiti njen rad u pozadini."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"Vaš tablet ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP_0">%1$s</xliff:g> stalno podiže vaš tablet iz stanja mirovanja.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju <xliff:g id="APP_1">%1$s</xliff:g> i spriječiti njen rad u pozadini."</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"Vaš uređaj ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP_0">%1$s</xliff:g> stalno podiže vaš uređaj iz stanja mirovanja.\n\nDa pokušate riješiti ovaj problem, možete zaustaviti aplikaciju <xliff:g id="APP_1">%1$s</xliff:g> i spriječiti njen rad u pozadini."</string>
     <string name="dialog_background_check_ok" msgid="412876934682899659">"Isključi"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"Želite li isključiti uslugu lokacije?"</string>
-    <!-- no translation found for dialog_location_message (7774807745601479888) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (118745801732181618) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (6783678153382298295) -->
-    <skip />
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"Vaš telefon ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno traži vašu lokaciju kada je ne koristite.\n\nDa pokušate riješiti ovaj problem, možete isključiti lokaciju za ovu aplikaciju."</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"Vaš tablet ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno traži vašu lokaciju kada je ne koristite.\n\nDa pokušate riješiti ovaj problem, možete isključiti lokaciju za ovu aplikaciju."</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"Vaš uređaj ne može normalno upravljati baterijom jer aplikacija <xliff:g id="APP">%1$s</xliff:g> stalno traži vašu lokaciju kada je ne koristite.\n\nDa pokušate riješiti ovaj problem, možete isključiti lokaciju za ovu aplikaciju."</string>
     <string name="dialog_location_ok" msgid="4572391197601313986">"Isključi"</string>
     <string name="power_screen" msgid="3023346080675904613">"Ekran"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Svjetiljka"</string>
@@ -2509,7 +2496,7 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(ne koristi se)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(ne verifikuj server)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(primljeno od servera)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Ovaj tip VPN-a ne može biti stalno povezan"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Ova vrsta VPN-a ne može biti stalno povezana"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Uvijek aktivni VPN podržava samo numeričke adrese servera"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"DNS server mora biti naveden za uvijek aktivni VPN"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"Adrese DNS servera moraju biti numeričke za uvijek aktivni VPN"</string>
@@ -2825,7 +2812,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"preciznost"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"račun"</string>
     <string name="keywords_users" msgid="3434190133131387942">"ograničenje, ograničavanje, ograničen"</string>
-    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"korekcija teksta, ispravan, zvuk, vibrirati, auto, jezik, gest, predložiti, prijedlog, tema, uvredljivo, riječ, tip, emoji, međunarodna"</string>
+    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"korekcija teksta, ispravan, zvuk, vibrirati, auto, jezik, gest, predložiti, prijedlog, tema, uvredljivo, riječ, vrsta, emoji, međunarodna"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"ponovo podesi, željene postavke, zadano"</string>
     <string name="keywords_emergency_app" msgid="3143078441279044780">"hitni slučajevi, led, aplikacija, zadano"</string>
     <string name="keywords_default_phone_app" msgid="4213090563141778486">"telefon, brojčanik, zadani"</string>
@@ -2838,8 +2825,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"prevuci za otključavanje, lozinka, uzorak, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"poslovni izazov, rad, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"radni profil, upravljani profil, ujediniti, ujedinjenje, rad, profil"</string>
-    <!-- no translation found for keywords_gesture (3526905012224714078) -->
-    <skip />
+    <string name="keywords_gesture" msgid="3526905012224714078">"pokreti"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"plati, dodir, plaćanja"</string>
     <string name="keywords_backup" msgid="470070289135403022">"sigurnosna kopija"</string>
     <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"pokreti, ivica, strana, active edge, stisak, držanje, pomoć, asistent, stišljiv, ok google, google asistent"</string>
@@ -3652,9 +3638,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Provjera obavještenja prevlačenjem prstom prema dolje po senzoru za otisak prsta na poleđini uređaja."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Brzo pregledajte obavještenja"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Prevucite prstom prema dolje na senzoru za otisak prsta"</string>
-    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Podignite da otvorite kameru"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Za automatsko otvaranje kamere, podignite telefon u položaj za fotografiranje (pejzaž ili portret). Funkcionira kada je telefon u stanju mirovanja ili je zaključan."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"Fotografirajte dok je telefon u stanju mirovanja ili zaključan"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Pokret za pomoć"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Osjetljivost"</string>
