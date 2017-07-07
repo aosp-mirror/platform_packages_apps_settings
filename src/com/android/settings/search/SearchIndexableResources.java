@@ -21,6 +21,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 
+import android.text.TextUtils;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
@@ -92,6 +93,12 @@ import java.util.HashMap;
 
 public final class SearchIndexableResources {
 
+    /**
+     * Identifies subsettings which have an {@link SearchIndexableResource#intentAction} but
+     * whose intents should still be treated as subsettings inside of Settings.
+     */
+    public static final String SUBSETTING_TARGET_PACKAGE = "subsetting_target_package";
+
     @XmlRes
     public static final int NO_DATA_RES_ID = 0;
 
@@ -101,8 +108,22 @@ public final class SearchIndexableResources {
     @VisibleForTesting
     static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,
             @DrawableRes int iconResId) {
+        addIndex(indexClass, xmlResId, iconResId, null /* targetAction */);
+    }
+
+    @VisibleForTesting
+    static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,
+            @DrawableRes int iconResId, String targetAction) {
         String className = indexClass.getName();
-        sResMap.put(className, new SearchIndexableResource(0, xmlResId, className, iconResId));
+        SearchIndexableResource resource =
+                new SearchIndexableResource(0, xmlResId, className, iconResId);
+
+        if (!TextUtils.isEmpty(targetAction)) {
+            resource.intentAction = targetAction;
+            resource.intentTargetPackage = SUBSETTING_TARGET_PACKAGE;
+        }
+
+        sResMap.put(className, resource);
     }
 
     static {
@@ -117,14 +138,16 @@ public final class SearchIndexableResources {
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
-        addIndex(DisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
+        addIndex(DisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display,
+                "android.settings.DISPLAY_SETTINGS");
         addIndex(AmbientDisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(WallpaperTypeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(ConfigureNotificationSettings.class,
                 R.xml.configure_notification_settings, R.drawable.ic_settings_notifications);
         addIndex(AppAndNotificationDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_applications);
-        addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
+        addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound,
+                "android.settings.SOUND_SETTINGS");
         addIndex(ZenModeSettings.class,
                 R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
         addIndex(ZenModePrioritySettings.class,
