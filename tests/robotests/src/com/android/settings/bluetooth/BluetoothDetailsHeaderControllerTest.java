@@ -88,7 +88,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIcon(any(Drawable.class));
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
-        verify(mHeaderController).done(mActivity, false);
+        verify(mHeaderController).done(mActivity, true);
     }
 
     @Test
