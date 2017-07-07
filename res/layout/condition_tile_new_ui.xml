@@ -24,15 +24,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="36dp"
         android:background="?android:attr/selectableItemBackground"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@android:id/icon"
             android:layout_width="@dimen/dashboard_tile_image_size"
             android:layout_height="@dimen/dashboard_tile_image_size"
+            android:layout_marginTop="12dp"
             android:layout_marginStart="14dp"
             android:layout_marginEnd="24dp"
             android:tint="?android:attr/colorAccent" />
@@ -41,6 +41,7 @@
             android:id="@android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/colorAccent" />
 
@@ -62,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="62dp"
-        android:paddingBottom="8dp"
+        android:paddingBottom="1dp"
         style="?android:attr/buttonBarStyle"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
