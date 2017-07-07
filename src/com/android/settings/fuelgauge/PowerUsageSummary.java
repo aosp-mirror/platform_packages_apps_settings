@@ -717,8 +717,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
                     false);
-            preference.setSummary(mBatteryUtils.shouldHideSipper(sipper) ? timeSequence :
-                    TextUtils.expandTemplate(getText(R.string.battery_screen_usage), timeSequence));
+            preference.setSummary(
+                    (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
+                            ? timeSequence
+                            : TextUtils.expandTemplate(getText(R.string.battery_screen_usage),
+                                    timeSequence));
         }
     }
 
