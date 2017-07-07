@@ -29,7 +29,6 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
-import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,27 +38,25 @@ import java.util.List;
  */
 public class WakeLockAnomalyDetector implements AnomalyDetector {
     private static final String TAG = "WakeLockAnomalyChecker";
-    private PackageManager mPackageManager;
-    private Context mContext;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
     long mWakeLockThresholdMs;
-    @VisibleForTesting
-    AnomalyAction mAnomalyAction;
+    private PackageManager mPackageManager;
+    private Context mContext;
+    private AnomalyUtils mAnomalyUtils;
 
     public WakeLockAnomalyDetector(Context context) {
-        this(context, new AnomalyDetectionPolicy(context));
+        this(context, new AnomalyDetectionPolicy(context), AnomalyUtils.getInstance(context));
     }
 
     @VisibleForTesting
-    WakeLockAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
+    WakeLockAnomalyDetector(Context context, AnomalyDetectionPolicy policy,
+            AnomalyUtils anomalyUtils) {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mBatteryUtils = BatteryUtils.getInstance(context);
-        mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
-                Anomaly.AnomalyType.WAKE_LOCK);
-
+        mAnomalyUtils = anomalyUtils;
         mWakeLockThresholdMs = policy.wakeLockThreshold;
     }
 
@@ -94,15 +91,20 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                 final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                 final CharSequence displayName = Utils.getApplicationLabel(mContext,
                         packageName);
+                final int targetSdkVersion = mBatteryUtils.getTargetSdkVersion(packageName);
 
                 Anomaly anomaly = new Anomaly.Builder()
                         .setUid(uid.getUid())
                         .setType(Anomaly.AnomalyType.WAKE_LOCK)
                         .setDisplayName(displayName)
                         .setPackageName(packageName)
+                        .setTargetSdkVersion(targetSdkVersion)
+                        .setBackgroundRestrictionEnabled(
+                                mBatteryUtils.isBackgroundRestrictionEnabled(targetSdkVersion,
+                                        uid.getUid(), packageName))
                         .build();
 
-                if (mAnomalyAction.isActionActive(anomaly)) {
+                if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {
                     anomalies.add(anomaly);
                 }
             }

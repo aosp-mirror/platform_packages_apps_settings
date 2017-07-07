@@ -17,19 +17,15 @@
 package com.android.settings.fuelgauge.anomaly.action;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-import android.app.AppOpsManager;
 import android.content.Context;
-import android.os.Build;
 
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,57 +37,57 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BackgroundCheckActionTest {
+public class StopAndBackgroundActionTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int UID = 111;
-    private static final int SDK_VERSION = Build.VERSION_CODES.L;
+    private static final int METRICS_KEY = 3;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
-    private BatteryUtils mBatteryUtils;
-    private Anomaly mAnomaly;
     private BackgroundCheckAction mBackgroundCheckAction;
+    @Mock
+    private ForceStopAction mForceStopAction;
+    private StopAndBackgroundCheckAction mStopAndBackgroundCheckAction;
+    private Anomaly mAnomaly;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-
-        FakeFeatureFactory.setupForTest(mContext);
-        doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
-
         mAnomaly = new Anomaly.Builder()
                 .setUid(UID)
                 .setPackageName(PACKAGE_NAME)
-                .setTargetSdkVersion(SDK_VERSION)
                 .build();
-        mBackgroundCheckAction = new BackgroundCheckAction(mContext);
-        mBackgroundCheckAction.mBatteryUtils = mBatteryUtils;
+
+        FakeFeatureFactory.setupForTest(mContext);
+        mStopAndBackgroundCheckAction = new StopAndBackgroundCheckAction(mContext, mForceStopAction,
+                mBackgroundCheckAction);
     }
 
     @Test
-    public void testHandlePositiveAction_forceStopPackage() {
-        mBackgroundCheckAction.handlePositiveAction(mAnomaly, 0 /* metricskey */);
+    public void testHandlePositiveAction_stopAndBackgroundCheck() {
+        mStopAndBackgroundCheckAction.handlePositiveAction(mAnomaly, METRICS_KEY);
 
-        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME,
-                AppOpsManager.MODE_IGNORED);
+        verify(mBackgroundCheckAction).handlePositiveAction(mAnomaly, METRICS_KEY);
+        verify(mForceStopAction).handlePositiveAction(mAnomaly, METRICS_KEY);
     }
 
     @Test
-    public void testIsActionActive_modeAllowed_returnTrue() {
-        doReturn(false).when(mBatteryUtils).isBackgroundRestrictionEnabled(SDK_VERSION, UID,
-                PACKAGE_NAME);
+    public void testIsActionActive_restrictionEnabled_returnFalse() {
+        doReturn(true).when(mForceStopAction).isActionActive(mAnomaly);
 
-        assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isTrue();
+        assertThat(mStopAndBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
     }
 
     @Test
-    public void testIsActionActive_modeIgnored_returnFalse() {
-        doReturn(true).when(mBatteryUtils).isBackgroundRestrictionEnabled(SDK_VERSION, UID,
-                PACKAGE_NAME);
+    public void testIsActionActive_appNotRunning_returnFalse() {
+        doReturn(true).when(mBackgroundCheckAction).isActionActive(mAnomaly);
 
-        assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
+        assertThat(mStopAndBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
+    }
+
+    @Test
+    public void testIsActionActive_appStoppedAndRestrictionOn_returnFalse() {
+        assertThat(mStopAndBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
     }
 }

@@ -15,9 +15,13 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.Build;
 import android.os.Process;
 import android.os.SystemClock;
 import android.os.UserManager;
@@ -58,6 +62,7 @@ import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -96,6 +101,8 @@ public class BatteryUtilsTest {
     private static final int DISCHARGE_AMOUNT = 80;
     private static final double PERCENT_SYSTEM_USAGE = 60;
     private static final double PRECISION = 0.001;
+    private static final int SDK_VERSION = Build.VERSION_CODES.L;
+    private static final String PACKAGE_NAME = "com.android.app";
 
     @Mock
     private BatteryStats.Uid mUid;
@@ -123,6 +130,12 @@ public class BatteryUtilsTest {
     private Bundle mBundle;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private AppOpsManager mAppOpsManager;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -177,10 +190,11 @@ public class BatteryUtilsTest {
         mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
 
-        mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
+        final Context shadowContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(shadowContext).getPackageManager();
+        doReturn(mAppOpsManager).when(shadowContext).getSystemService(Context.APP_OPS_SERVICE);
+        mBatteryUtils = spy(new BatteryUtils(shadowContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
-
-        mBatteryUtils = spy(new BatteryUtils(RuntimeEnvironment.application));
     }
 
     @Test
@@ -390,6 +404,44 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.getForegroundActivityTotalTimeUs(mUid, rawRealtimeUs)).isEqualTo(
                 TIME_SINCE_LAST_FULL_CHARGE_US);
+    }
+
+    @Test
+    public void testGetTargetSdkVersion_packageExist_returnSdk() throws
+            PackageManager.NameNotFoundException {
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
+                PackageManager.GET_META_DATA);
+        mApplicationInfo.targetSdkVersion = SDK_VERSION;
+
+        assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME)).isEqualTo(SDK_VERSION);
+    }
+
+    @Test
+    public void testGetTargetSdkVersion_packageNotExist_returnSdkNull() throws
+            PackageManager.NameNotFoundException {
+        doThrow(new PackageManager.NameNotFoundException()).when(
+                mPackageManager).getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA);
+
+        assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME)).isEqualTo(
+                BatteryUtils.SDK_NULL);
+    }
+
+    @Test
+    public void testBackgroundRestrictionOn_restrictionOn_returnTrue() {
+        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(
+                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+
+        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID,
+                PACKAGE_NAME)).isTrue();
+    }
+
+    @Test
+    public void testBackgroundRestrictionOn_restrictionOff_returnFalse() {
+        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager).checkOpNoThrow(
+                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+
+        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID,
+                PACKAGE_NAME)).isFalse();
     }
 
     private BatterySipper createTestSmearBatterySipper(long topTime,

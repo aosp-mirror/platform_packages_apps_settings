@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -27,6 +28,7 @@ import static org.robolectric.Shadows.shadowOf;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
@@ -57,6 +59,7 @@ public class AnomalyDialogFragmentTest {
     private AnomalyAction mAnomalyAction;
     private Anomaly mWakeLockAnomaly;
     private Anomaly mWakeupAlarmAnomaly;
+    private Anomaly mWakeupAlarmAnomaly2;
     private Anomaly mBluetoothAnomaly;
     private AnomalyDialogFragment mAnomalyDialogFragment;
     private Context mContext;
@@ -77,6 +80,13 @@ public class AnomalyDialogFragmentTest {
                 .setUid(UID)
                 .setPackageName(PACKAGE_NAME)
                 .setDisplayName(DISPLAY_NAME)
+                .build();
+        mWakeupAlarmAnomaly2 = new Anomaly.Builder()
+                .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
+                .setUid(UID)
+                .setPackageName(PACKAGE_NAME)
+                .setDisplayName(DISPLAY_NAME)
+                .setTargetSdkVersion(Build.VERSION_CODES.O)
                 .build();
         mBluetoothAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
@@ -116,7 +126,7 @@ public class AnomalyDialogFragmentTest {
     }
 
     @Test
-    public void testOnCreateDialog_wakeupAlarmAnomaly_fireBackgroundCheckDialog() {
+    public void testOnCreateDialog_wakeupAlarmAnomalyPriorO_fireStopAndBackgroundCheckDialog() {
         mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mWakeupAlarmAnomaly,
                 0 /* metricskey */);
 
@@ -137,11 +147,32 @@ public class AnomalyDialogFragmentTest {
     }
 
     @Test
+    public void testOnCreateDialog_wakeupAlarmAnomalyTargetingO_fireForceStopDialog() {
+        mAnomalyDialogFragment = AnomalyDialogFragment.newInstance(mWakeupAlarmAnomaly2,
+                0 /* metricskey */);
+
+        FragmentTestUtil.startFragment(mAnomalyDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.dialog_stop_message_wakeup_alarm,
+                        mWakeLockAnomaly.displayName));
+        assertThat(shadowDialog.getTitle()).isEqualTo(
+                mContext.getString(R.string.dialog_stop_title));
+        assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
+                mContext.getString(R.string.dialog_stop_ok));
+        assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
+                mContext.getString(R.string.dlg_cancel));
+    }
+
+    @Test
     public void testOnCreateDialog_bluetoothAnomaly_fireLocationCheckDialog() {
         mAnomalyDialogFragment = spy(AnomalyDialogFragment.newInstance(mBluetoothAnomaly,
                 0 /* metricskey */));
         mAnomalyDialogFragment.mAnomalyUtils = mAnomalyUtils;
-        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(anyInt());
+        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(any());
         doNothing().when(mAnomalyDialogFragment).initAnomalyUtils();
         doReturn(Anomaly.AnomalyActionType.LOCATION_CHECK).when(mAnomalyAction).getActionType();
 

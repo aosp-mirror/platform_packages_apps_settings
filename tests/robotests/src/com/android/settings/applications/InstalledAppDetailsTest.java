@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.app.admin.DevicePolicyManager;
@@ -113,6 +114,8 @@ public final class InstalledAppDetailsTest {
     private BatteryUtils mBatteryUtils;
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private AppOpsManager mAppOpsManager;
 
     private FakeFeatureFactory mFeatureFactory;
     private InstalledAppDetails mAppDetail;
@@ -138,6 +141,7 @@ public final class InstalledAppDetailsTest {
         doReturn(mActivity).when(mAppDetail).getActivity();
         doReturn(mShadowContext).when(mAppDetail).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
+        doReturn(mAppOpsManager).when(mActivity).getSystemService(Context.APP_OPS_SERVICE);
 
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
