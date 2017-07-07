@@ -335,11 +335,10 @@ public class PowerUsageSummaryTest {
         doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
                 R.string.battery_screen_usage);
         doReturn(mRealContext).when(mFragment).getContext();
-        final String expectedSummary = "Screen usage 2m";
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Screen usage 2m");
     }
 
     @Test
@@ -347,11 +346,21 @@ public class PowerUsageSummaryTest {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
         doReturn(true).when(mFragment.mBatteryUtils).shouldHideSipper(mNormalBatterySipper);
         doReturn(mRealContext).when(mFragment).getContext();
-        final String expectedSummary = "2m";
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo(expectedSummary);
+        assertThat(mPreference.getSummary().toString()).isEqualTo("2m");
+    }
+
+    @Test
+    public void testSetUsageSummary_timeMoreThanOneMinute_notApp_setUsedSummary() {
+        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.PHONE;
+        doReturn(mRealContext).when(mFragment).getContext();
+
+        mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo("2m");
     }
 
     private void testToggleAllApps(final boolean isShowApps) {
