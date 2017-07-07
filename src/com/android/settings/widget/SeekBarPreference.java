@@ -135,6 +135,10 @@ public class SeekBarPreference extends RestrictedPreference
         }
     }
 
+    public int getMax() {
+        return mMax;
+    }
+
     public void setProgress(int progress) {
         setProgress(progress, true);
     }
