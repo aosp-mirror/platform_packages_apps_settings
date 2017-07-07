@@ -41,21 +41,20 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
     private static final String TAG = "WakeupAlarmAnomalyDetector";
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    AnomalyAction mAnomalyAction;
     private long mWakeupAlarmThreshold;
     private Context mContext;
+    private AnomalyUtils mAnomalyUtils;
 
     public WakeupAlarmAnomalyDetector(Context context) {
-        this(context, new AnomalyDetectionPolicy(context));
+        this(context, new AnomalyDetectionPolicy(context), AnomalyUtils.getInstance(context));
     }
 
     @VisibleForTesting
-    WakeupAlarmAnomalyDetector(Context context, AnomalyDetectionPolicy policy) {
+    WakeupAlarmAnomalyDetector(Context context, AnomalyDetectionPolicy policy,
+            AnomalyUtils anomalyUtils) {
         mContext = context;
         mBatteryUtils = BatteryUtils.getInstance(context);
-        mAnomalyAction = AnomalyUtils.getInstance(context).getAnomalyAction(
-                Anomaly.AnomalyType.WAKEUP_ALARM);
+        mAnomalyUtils = anomalyUtils;
         mWakeupAlarmThreshold = policy.wakeupAlarmThreshold;
     }
 
@@ -98,7 +97,7 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
                             .setPackageName(packageName)
                             .build();
 
-                    if (mAnomalyAction.isActionActive(anomaly)) {
+                    if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {
                         anomalies.add(anomaly);
                     }
                 }
