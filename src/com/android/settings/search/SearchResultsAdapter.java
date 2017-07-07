@@ -77,11 +77,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
     @IntDef({DISABLED, PENDING_RESULTS, SUCCEEDED, FAILED, TIMED_OUT})
     @Retention(RetentionPolicy.SOURCE)
     private @interface AsyncRankingState {}
-    private static final int DISABLED = 0;
-    private static final int PENDING_RESULTS = 1;
-    private static final int SUCCEEDED = 2;
-    private static final int FAILED = 3;
-    private static final int TIMED_OUT = 4;
+    @VisibleForTesting
+    static final int DISABLED = 0;
+    @VisibleForTesting
+    static final int PENDING_RESULTS = 1;
+    @VisibleForTesting
+    static final int SUCCEEDED = 2;
+    @VisibleForTesting
+    static final int FAILED = 3;
+    @VisibleForTesting
+    static final int TIMED_OUT = 4;
     private @AsyncRankingState int mAsyncRankingState;
 
     public SearchResultsAdapter(SearchFragment fragment,
@@ -242,6 +247,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         } else {
             mAsyncRankingState = DISABLED;
         }
+    }
+
+    @AsyncRankingState int getAsyncRankingState() {
+        return mAsyncRankingState;
     }
 
     /**

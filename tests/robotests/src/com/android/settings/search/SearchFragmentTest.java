@@ -443,6 +443,8 @@ public class SearchFragmentTest {
                 eq("test_setting"),
                 argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_COUNT)),
                 argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_RANK)),
+                argThat(pairMatches(MetricsProto.MetricsEvent
+                                .FIELD_SETTINGS_SEARCH_RESULT_ASYNC_RANKING_STATE)),
                 argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_QUERY_LENGTH)));
 
         verify(mFeatureFactory.searchFeatureProvider).searchResultClicked(nullable(Context.class),

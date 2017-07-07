@@ -220,6 +220,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[5]); // appCharlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.SUCCEEDED);
     }
 
     @Test
@@ -245,6 +246,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[5]); // appCharlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.SUCCEEDED);
     }
 
     @Test
@@ -270,6 +272,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.FAILED);
     }
 
     @Test
@@ -295,6 +298,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.FAILED);
     }
 
     @Test
@@ -321,6 +325,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.TIMED_OUT);
     }
 
     @Test
@@ -348,6 +353,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.TIMED_OUT);
     }
 
     @Test
@@ -451,6 +457,7 @@ public class SearchResultsAdapterTest {
         mAdapter.notifyResultsLoaded();
         verify(mSearchFeatureProvider, never()).querySearchResults(
                 any(Context.class), anyString(), any(SearchResultsRankerCallback.class));
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.DISABLED);
     }
 
     @Test
@@ -460,6 +467,8 @@ public class SearchResultsAdapterTest {
         mAdapter.notifyResultsLoaded();
         verify(mSearchFeatureProvider, times(1)).querySearchResults(
                 any(Context.class), anyString(), any(SearchResultsRankerCallback.class));
+        assertThat(mAdapter.getAsyncRankingState())
+                .isEqualTo(SearchResultsAdapter.PENDING_RESULTS);
     }
 
     @Test

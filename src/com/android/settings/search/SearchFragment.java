@@ -419,6 +419,9 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_RANK,
                 resultViewHolder.getAdapterPosition()));
         taggedData.add(Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_ASYNC_RANKING_STATE,
+                mSearchAdapter.getAsyncRankingState()));
+        taggedData.add(Pair.create(
                 MetricsEvent.FIELD_SETTINGS_SEARCH_QUERY_LENGTH,
                 TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));
 
