@@ -46,16 +46,18 @@ public class Anomaly implements Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({AnomalyActionType.FORCE_STOP,
             AnomalyActionType.BACKGROUND_CHECK,
-            AnomalyActionType.LOCATION_CHECK})
+            AnomalyActionType.LOCATION_CHECK,
+            AnomalyActionType.STOP_AND_BACKGROUND_CHECK})
     public @interface AnomalyActionType {
         int FORCE_STOP = 0;
         int BACKGROUND_CHECK = 1;
         int LOCATION_CHECK = 2;
+        int STOP_AND_BACKGROUND_CHECK = 3;
     }
 
     @AnomalyType
-    public static final int[] ANOMALY_TYPE_LIST =
-            {AnomalyType.WAKE_LOCK,
+    public static final int[] ANOMALY_TYPE_LIST = {
+            AnomalyType.WAKE_LOCK,
             AnomalyType.WAKEUP_ALARM,
             AnomalyType.BLUETOOTH_SCAN};
 
@@ -64,7 +66,14 @@ public class Anomaly implements Parcelable {
      */
     public final int type;
     public final int uid;
+    public final int targetSdkVersion;
     public final long wakelockTimeMs;
+    /**
+     * {@code true} if background restriction is enabled
+     *
+     * @see android.app.AppOpsManager.OP_RUN_IN_BACKGROUND
+     */
+    public final boolean backgroundRestrictionEnabled;
     /**
      * Display name of this anomaly, usually it is the app name
      */
@@ -77,6 +86,8 @@ public class Anomaly implements Parcelable {
         displayName = builder.mDisplayName;
         packageName = builder.mPackageName;
         wakelockTimeMs = builder.mWakeLockTimeMs;
+        targetSdkVersion = builder.mTargetSdkVersion;
+        backgroundRestrictionEnabled = builder.mBgRestrictionEnabled;
     }
 
     private Anomaly(Parcel in) {
@@ -85,6 +96,8 @@ public class Anomaly implements Parcelable {
         displayName = in.readCharSequence();
         packageName = in.readString();
         wakelockTimeMs = in.readLong();
+        targetSdkVersion = in.readInt();
+        backgroundRestrictionEnabled = in.readBoolean();
     }
 
     @Override
@@ -99,6 +112,8 @@ public class Anomaly implements Parcelable {
         dest.writeCharSequence(displayName);
         dest.writeString(packageName);
         dest.writeLong(wakelockTimeMs);
+        dest.writeInt(targetSdkVersion);
+        dest.writeBoolean(backgroundRestrictionEnabled);
     }
 
     @Override
@@ -115,12 +130,15 @@ public class Anomaly implements Parcelable {
                 && uid == other.uid
                 && wakelockTimeMs == other.wakelockTimeMs
                 && TextUtils.equals(displayName, other.displayName)
-                && TextUtils.equals(packageName, other.packageName);
+                && TextUtils.equals(packageName, other.packageName)
+                && targetSdkVersion == other.targetSdkVersion
+                && backgroundRestrictionEnabled == other.backgroundRestrictionEnabled;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, uid, displayName, packageName, wakelockTimeMs);
+        return Objects.hash(type, uid, displayName, packageName, wakelockTimeMs, targetSdkVersion,
+                backgroundRestrictionEnabled);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -137,9 +155,11 @@ public class Anomaly implements Parcelable {
         @AnomalyType
         private int mType;
         private int mUid;
+        private int mTargetSdkVersion;
         private CharSequence mDisplayName;
         private String mPackageName;
         private long mWakeLockTimeMs;
+        private boolean mBgRestrictionEnabled;
 
         public Builder setType(@AnomalyType int type) {
             mType = type;
@@ -163,6 +183,16 @@ public class Anomaly implements Parcelable {
 
         public Builder setWakeLockTimeMs(long wakeLockTimeMs) {
             mWakeLockTimeMs = wakeLockTimeMs;
+            return this;
+        }
+
+        public Builder setTargetSdkVersion(int targetSdkVersion) {
+            mTargetSdkVersion = targetSdkVersion;
+            return this;
+        }
+
+        public Builder setBackgroundRestrictionEnabled(boolean bgRestrictionEnabled) {
+            mBgRestrictionEnabled = bgRestrictionEnabled;
             return this;
         }
 

@@ -30,6 +30,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.AppOpsManager;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -116,6 +117,8 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
+    private AppOpsManager mAppOpsManager;
+    @Mock
     private LoaderManager mLoaderManager;
     @Mock
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
@@ -184,6 +187,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mTestActivity = spy(new SettingsActivity());
         doReturn(mPackageManager).when(mTestActivity).getPackageManager();
+        doReturn(mAppOpsManager).when(mTestActivity).getSystemService(Context.APP_OPS_SERVICE);
 
         final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
 

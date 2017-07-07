@@ -17,12 +17,13 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
-import com.android.settings.fuelgauge.anomaly.action.BackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.action.LocationCheckAction;
+import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.checker.AnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.BluetoothScanAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
@@ -49,16 +50,22 @@ public class AnomalyUtils {
 
     /**
      * Return the corresponding {@link AnomalyAction} according to
-     * {@link com.android.settings.fuelgauge.anomaly.Anomaly.AnomalyType}
+     * {@link com.android.settings.fuelgauge.anomaly.Anomaly}
      *
      * @return corresponding {@link AnomalyAction}, or null if cannot find it.
      */
-    public AnomalyAction getAnomalyAction(@Anomaly.AnomalyType int anomalyType) {
-        switch (anomalyType) {
+    public AnomalyAction getAnomalyAction(Anomaly anomaly) {
+        switch (anomaly.type) {
             case Anomaly.AnomalyType.WAKE_LOCK:
                 return new ForceStopAction(mContext);
             case Anomaly.AnomalyType.WAKEUP_ALARM:
-                return new BackgroundCheckAction(mContext);
+                if (anomaly.targetSdkVersion >= Build.VERSION_CODES.O
+                        || (anomaly.targetSdkVersion < Build.VERSION_CODES.O
+                                && anomaly.backgroundRestrictionEnabled)) {
+                    return new ForceStopAction(mContext);
+                } else {
+                    return new StopAndBackgroundCheckAction(mContext);
+                }
             case Anomaly.AnomalyType.BLUETOOTH_SCAN:
                 return new LocationCheckAction(mContext);
             default:

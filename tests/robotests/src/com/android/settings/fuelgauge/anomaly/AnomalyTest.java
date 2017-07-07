@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.os.Build;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -30,6 +32,7 @@ import org.robolectric.annotation.Config;
 public class AnomalyTest {
     private static int TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static int UID = 111;
+    private static int SDK_VERSION = Build.VERSION_CODES.L;
     private static long WAKE_LOCK_TIME_MS = 1500;
     private static String PACKAGE_NAME = "com.android.settings";
     private static String DISPLAY_NAME = "settings";
@@ -42,6 +45,8 @@ public class AnomalyTest {
                 .setWakeLockTimeMs(WAKE_LOCK_TIME_MS)
                 .setPackageName(PACKAGE_NAME)
                 .setDisplayName(DISPLAY_NAME)
+                .setTargetSdkVersion(SDK_VERSION)
+                .setBackgroundRestrictionEnabled(true)
                 .build();
 
         assertThat(anomaly.type).isEqualTo(TYPE);
@@ -49,5 +54,7 @@ public class AnomalyTest {
         assertThat(anomaly.wakelockTimeMs).isEqualTo(WAKE_LOCK_TIME_MS);
         assertThat(anomaly.packageName).isEqualTo(PACKAGE_NAME);
         assertThat(anomaly.displayName).isEqualTo(DISPLAY_NAME);
+        assertThat(anomaly.targetSdkVersion).isEqualTo(SDK_VERSION);
+        assertThat(anomaly.backgroundRestrictionEnabled).isTrue();
     }
 }
