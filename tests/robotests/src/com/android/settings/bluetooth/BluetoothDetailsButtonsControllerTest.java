@@ -18,25 +18,30 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows=SettingsShadowBluetoothDevice.class)
+        shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsButtonsController mController;
     private LayoutPreference mLayoutPreference;
@@ -125,13 +130,21 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
     }
 
     @Test
-    public void forget() {
+    public void forgetDialog() {
         showScreen(mController);
+        FragmentManager fragmentManager = mock(FragmentManager.class);
+        when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
+        FragmentTransaction ft = mock(FragmentTransaction.class);
+        when(fragmentManager.beginTransaction()).thenReturn(ft);
         mRightButton.callOnClick();
-        verify(mCachedDevice).unpair();
-        verify(mActivity).finish();
-    }
 
+        ArgumentCaptor<ForgetDeviceDialogFragment> dialogCaptor =
+                ArgumentCaptor.forClass(ForgetDeviceDialogFragment.class);
+        verify(ft).add(dialogCaptor.capture(), anyString());
+
+        ForgetDeviceDialogFragment dialogFragment = dialogCaptor.getValue();
+        assertThat(dialogFragment).isNotNull();
+    }
 
     @Test
     public void startsOutBusy() {
