@@ -16,6 +16,7 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +26,8 @@ import android.provider.Settings.Secure;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
+import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
 import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
 import com.android.settings.Settings.DoubleTwistSuggestionActivity;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
@@ -53,7 +54,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -82,6 +82,8 @@ public class SuggestionFeatureProviderImplTest {
     private SuggestionParser mSuggestionParser;
     @Mock
     private Tile mSuggestion;
+    @Mock
+    private ActivityManager mActivityManager;
 
     private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
@@ -92,6 +94,8 @@ public class SuggestionFeatureProviderImplTest {
         FakeFeatureFactory.setupForTest(mContext);
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         when(mContext.getApplicationContext()).thenReturn(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.ACTIVITY_SERVICE)).thenReturn(mActivityManager);
+        when(mActivityManager.isLowRamDevice()).thenReturn(false);
         mSuggestion.intent = new Intent().setClassName("pkg", "cls");
         mSuggestion.category = "category";
 
@@ -239,6 +243,20 @@ public class SuggestionFeatureProviderImplTest {
         assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
                 new ComponentName(RuntimeEnvironment.application,
                         SwipeToNotificationSuggestionActivity.class))).isTrue();
+    }
+
+    @Test
+    public void isSuggestionEnabled_isLowMemoryDevice_shouldReturnFalse() {
+        when(mActivityManager.isLowRamDevice()).thenReturn(true);
+
+        assertThat(mProvider.isSuggestionEnabled(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSuggestionEnabled_isNotLowMemoryDevice_shouldReturnTrue() {
+        when(mActivityManager.isLowRamDevice()).thenReturn(false);
+
+        assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
     }
 
     @Test

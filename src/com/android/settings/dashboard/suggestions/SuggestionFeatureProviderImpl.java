@@ -16,12 +16,12 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.UserHandle;
 import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
@@ -65,6 +65,13 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final AmbientDisplayConfiguration mAmbientDisplayConfig;
+
+    @Override
+    public boolean isSuggestionEnabled(Context context) {
+        final ActivityManager am =
+                (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        return !am.isLowRamDevice();
+    }
 
     @Override
     public boolean isSmartSuggestionEnabled(Context context) {

@@ -34,6 +34,7 @@ import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -92,6 +93,8 @@ public class WakeLockAnomalyDetectorTest {
     private AnomalyDetectionPolicy mPolicy;
     @Mock
     private AnomalyAction mAnomalyAction;
+    @Mock
+    private AnomalyUtils mAnomalyUtils;
 
     private WakeLockAnomalyDetector mWakelockAnomalyDetector;
     private Context mContext;
@@ -109,10 +112,11 @@ public class WakeLockAnomalyDetectorTest {
         doReturn(mApplicationInfo).when(mPackageManager)
                 .getApplicationInfo(nullable(String.class), anyInt());
         doReturn(true).when(mAnomalyAction).isActionActive(any());
+        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(any());
 
-        mWakelockAnomalyDetector = spy(new WakeLockAnomalyDetector(mContext, mPolicy));
+        mWakelockAnomalyDetector = spy(
+                new WakeLockAnomalyDetector(mContext, mPolicy, mAnomalyUtils));
         mWakelockAnomalyDetector.mBatteryUtils = mBatteryUtils;
-        mWakelockAnomalyDetector.mAnomalyAction = mAnomalyAction;
 
         mAnomalySipper.uidObj = mAnomalyUid;
         doReturn(ANOMALY_WAKELOCK_TIME_MS).when(mWakelockAnomalyDetector)

@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -172,6 +173,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(mIsAlpha ? currentType
                     : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
+            // Can't set via XML since setInputType resets the fontFamily to null
+            mPasswordEntry.setTypeface(Typeface.create(
+                    getContext().getString(com.android.internal.R.string.config_headlineFontFamily),
+                    Typeface.NORMAL));
             mAppearAnimationUtils = new AppearAnimationUtils(getContext(),
                     220, 2f /* translationScale */, 1f /* delayScale*/,
                     AnimationUtils.loadInterpolator(getContext(),

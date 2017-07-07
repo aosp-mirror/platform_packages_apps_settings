@@ -25,13 +25,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.view.View;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.widget.EntityHeaderController.ActionType;
 import com.android.settingslib.AppItem;
 
 import org.junit.After;
@@ -46,6 +45,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
@@ -96,7 +96,7 @@ public class AppDataUsageTest {
 
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
 
-        verify(mHeaderController).setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE);
+        verify(mHeaderController).setHasAppInfoLink(false);
     }
 
     @Test
@@ -119,6 +119,7 @@ public class AppDataUsageTest {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
         when(mHeaderController.setUid(fakeUserId)).thenReturn(mHeaderController);
+        when(mHeaderController.setHasAppInfoLink(anyBoolean())).thenReturn(mHeaderController);
 
         doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
                 .when(mFragment)
@@ -128,7 +129,7 @@ public class AppDataUsageTest {
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
 
         verify(mHeaderController)
-                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE);
+                .setHasAppInfoLink(true);
         verify(mHeaderController)
                 .setUid(fakeUserId);
     }

@@ -33,6 +33,7 @@ import android.util.ArrayMap;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -89,6 +90,8 @@ public class WakeupAlarmAnomalyDetectorTest {
     private AnomalyDetectionPolicy mPolicy;
     @Mock
     private AnomalyAction mAnomalyAction;
+    @Mock
+    private AnomalyUtils mAnomalyUtils;
 
     private WakeupAlarmAnomalyDetector mWakeupAlarmAnomalyDetector;
     private Context mContext;
@@ -105,6 +108,7 @@ public class WakeupAlarmAnomalyDetectorTest {
         doReturn(RUNNING_TIME_MS).when(mBatteryUtils).calculateRunningTimeBasedOnStatsType(any(),
                 anyInt());
         doReturn(true).when(mAnomalyAction).isActionActive(any());
+        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(any());
 
         mAnomalySipper.uidObj = mAnomalyUid;
         doReturn(ANOMALY_UID).when(mAnomalyUid).getUid();
@@ -119,9 +123,9 @@ public class WakeupAlarmAnomalyDetectorTest {
         mUsageList.add(mTargetSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
-        mWakeupAlarmAnomalyDetector = spy(new WakeupAlarmAnomalyDetector(mContext, mPolicy));
+        mWakeupAlarmAnomalyDetector = spy(
+                new WakeupAlarmAnomalyDetector(mContext, mPolicy, mAnomalyUtils));
         mWakeupAlarmAnomalyDetector.mBatteryUtils = mBatteryUtils;
-        mWakeupAlarmAnomalyDetector.mAnomalyAction = mAnomalyAction;
     }
 
     @Test

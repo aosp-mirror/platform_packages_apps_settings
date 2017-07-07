@@ -27,6 +27,8 @@ import android.text.BidiFormatter;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +38,8 @@ import com.android.settings.R;
 
 import java.util.List;
 import java.util.Locale;
+
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 /**
  * Utility class for creating the dialog that asks users for explicit permission to grant
@@ -65,6 +69,10 @@ public class AccessibilityServiceWarning {
             return false;
         };
 
+        Window window = ad.getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.privateFlags |= PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        window.setAttributes(params);
         ad.create();
         ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(filterTouchListener);
         ad.setCanceledOnTouchOutside(true);

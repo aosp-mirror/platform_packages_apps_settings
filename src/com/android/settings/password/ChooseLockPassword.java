@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.graphics.Insets;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -204,7 +205,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
-        private boolean mForFingerprint;
+        protected boolean mForFingerprint;
 
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
@@ -375,6 +376,10 @@ public class ChooseLockPassword extends SettingsActivity {
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(mIsAlphaMode ? currentType
                     : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
+            // Can't set via XML since setInputType resets the fontFamily to null
+            mPasswordEntry.setTypeface(Typeface.create(
+                    getContext().getString(com.android.internal.R.string.config_headlineFontFamily),
+                    Typeface.NORMAL));
 
             Intent intent = getActivity().getIntent();
             final boolean confirmCredentials = intent.getBooleanExtra(
