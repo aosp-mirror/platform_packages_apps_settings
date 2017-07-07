@@ -18,8 +18,11 @@ package com.android.settings.fuelgauge.anomaly.action;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
 /**
@@ -28,6 +31,8 @@ import com.android.settings.fuelgauge.anomaly.Anomaly;
 public class BackgroundCheckAction extends AnomalyAction {
 
     private AppOpsManager mAppOpsManager;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
 
     public BackgroundCheckAction(Context context) {
         super(context);
@@ -38,17 +43,17 @@ public class BackgroundCheckAction extends AnomalyAction {
     @Override
     public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
         super.handlePositiveAction(anomaly, contextMetricsKey);
-
-        mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid, anomaly.packageName,
-                AppOpsManager.MODE_IGNORED);
+        if (anomaly.targetSdkVersion < Build.VERSION_CODES.O) {
+            mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid,
+                    anomaly.packageName,
+                    AppOpsManager.MODE_IGNORED);
+        }
     }
 
     @Override
     public boolean isActionActive(Anomaly anomaly) {
-        final int mode = mAppOpsManager
-                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, anomaly.uid,
-                        anomaly.packageName);
-        return mode != AppOpsManager.MODE_IGNORED && mode != AppOpsManager.MODE_ERRORED;
+        return !mBatteryUtils.isBackgroundRestrictionEnabled(anomaly.targetSdkVersion, anomaly.uid,
+                anomaly.packageName);
     }
 
     @Override

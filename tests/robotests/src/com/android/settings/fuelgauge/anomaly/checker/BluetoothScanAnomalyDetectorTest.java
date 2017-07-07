@@ -36,6 +36,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -80,6 +81,8 @@ public class BluetoothScanAnomalyDetectorTest {
     private AnomalyDetectionPolicy mPolicy;
     @Mock
     private AnomalyAction mAnomalyAction;
+    @Mock
+    private AnomalyUtils mAnomalyUtils;
 
     private BluetoothScanAnomalyDetector mBluetoothScanAnomalyDetector;
     private Context mContext;
@@ -92,6 +95,7 @@ public class BluetoothScanAnomalyDetectorTest {
         mContext = spy(RuntimeEnvironment.application);
         ReflectionHelpers.setField(mPolicy, "bluetoothScanThreshold",
                 30 * DateUtils.MINUTE_IN_MILLIS);
+        doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(any());
 
         mAnomalySipper.uidObj = mAnomalyUid;
         doReturn(ANOMALY_UID).when(mAnomalyUid).getUid();
@@ -106,10 +110,9 @@ public class BluetoothScanAnomalyDetectorTest {
         mUsageList.add(mTargetSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
 
-        mBluetoothScanAnomalyDetector = spy(
-                new BluetoothScanAnomalyDetector(mContext, mPolicy, mAnomalyAction));
+        mBluetoothScanAnomalyDetector = spy(new BluetoothScanAnomalyDetector(mContext, mPolicy,
+                mAnomalyUtils));
         mBluetoothScanAnomalyDetector.mBatteryUtils = mBatteryUtils;
-        mBluetoothScanAnomalyDetector.mAnomalyAction = mAnomalyAction;
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
         doReturn(true).when(mAnomalyAction).isActionActive(any());
 
