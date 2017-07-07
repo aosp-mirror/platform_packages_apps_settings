@@ -16,20 +16,17 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings.Global;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.widget.Switch;
 
@@ -43,10 +40,8 @@ import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.notification.SettingPref;
 import com.android.settings.widget.SwitchBar;
 
-import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
-
 public class BatterySaverSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener, BatterySaverReceiver.BatterySaverListener {
     private static final String TAG = "BatterySaverSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String KEY_TURN_ON_AUTOMATICALLY = "turn_on_automatically";
@@ -54,15 +49,16 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
 
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
-    private final Receiver mReceiver = new Receiver();
 
+    @VisibleForTesting
+    SwitchBar mSwitchBar;
     private Context mContext;
     private boolean mCreated;
     private SettingPref mTriggerPref;
-    private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private boolean mValidListener;
     private PowerManager mPowerManager;
+    private BatterySaverReceiver mReceiver;
 
     @Override
     public int getMetricsCategory() {
@@ -101,6 +97,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         mTriggerPref.init(this);
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mReceiver = new BatterySaverReceiver(mContext);
+        mReceiver.setBatterySaverListener(this);
     }
 
     @Override
@@ -187,37 +185,14 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         }
     };
 
-    private final class Receiver extends BroadcastReceiver {
+    @Override
+    public void onPowerSaveModeChanged() {
+        mHandler.post(mUpdateSwitch);
+    }
 
-        private boolean mRegistered;
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) Log.d(TAG, "Received " + intent.getAction());
-            String action = intent.getAction();
-            if (action.equals(ACTION_POWER_SAVE_MODE_CHANGING)) {
-                mHandler.post(mUpdateSwitch);
-            } else if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-                final int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-                // disable BSM switch if phone is plugged in or at 100% while plugged in
-                mSwitchBar.setEnabled(
-                        !(status == BatteryManager.BATTERY_STATUS_CHARGING
-                                || status == BatteryManager.BATTERY_STATUS_FULL));
-            }
-        }
-        public void setListening(boolean listening) {
-            if (listening && !mRegistered) {
-                final IntentFilter ifilter = new IntentFilter();
-                ifilter.addAction(ACTION_POWER_SAVE_MODE_CHANGING);
-                ifilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-                mContext.registerReceiver(this, ifilter);
-                mRegistered = true;
-            } else if (!listening && mRegistered) {
-                mContext.unregisterReceiver(this);
-                mRegistered = false;
-            }
-        }
-
+    @Override
+    public void onBatteryChanged(boolean pluggedIn) {
+        mSwitchBar.setEnabled(!pluggedIn);
     }
 
     private final class SettingsObserver extends ContentObserver {
