@@ -34,6 +34,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 
@@ -54,6 +55,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
     protected ServiceListing mServiceListing;
+    private IconDrawableFactory mIconDrawableFactory;
 
     abstract protected Config getConfig();
 
@@ -68,6 +70,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         mContext = getActivity();
         mPm = mContext.getPackageManager();
         mDpm = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mServiceListing = new ServiceListing(mContext, mConfig);
         mServiceListing.addCallback(new ServiceListing.Callback() {
             @Override
@@ -117,13 +120,15 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             final String summary = service.loadLabel(mPm).toString();
             final SwitchPreference pref = new SwitchPreference(getPrefContext());
             pref.setPersistent(false);
-            pref.setIcon(service.loadIcon(mPm));
+            pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
+                    UserHandle.getUserId(service.applicationInfo.uid)));
             if (title != null && !title.equals(summary)) {
                 pref.setTitle(title);
                 pref.setSummary(summary);
             } else {
                 pref.setTitle(summary);
             }
+            pref.setKey(cn.flattenToString());
             pref.setChecked(mServiceListing.isEnabled(cn));
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
