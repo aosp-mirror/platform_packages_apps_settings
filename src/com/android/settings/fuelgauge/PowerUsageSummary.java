@@ -46,6 +46,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -59,6 +60,7 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.display.AmbientDisplayPreferenceController;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
@@ -96,6 +98,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness_battery";
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout_battery";
+    private static final String KEY_AMBIENT_DISPLAY = "ambient_display_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
     private static final String KEY_HIGH_USAGE = "high_usage";
 
@@ -314,6 +317,10 @@ public class PowerUsageSummary extends PowerUsageBase implements
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new BatterySaverController(context, getLifecycle()));
         controllers.add(new BatteryPercentagePreferenceController(context));
+        controllers.add(new AmbientDisplayPreferenceController(
+                context,
+                new AmbientDisplayConfiguration(context),
+                KEY_AMBIENT_DISPLAY));
         return controllers;
     }
 
@@ -710,8 +717,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
                     false);
-            preference.setSummary(mBatteryUtils.shouldHideSipper(sipper) ? timeSequence :
-                    TextUtils.expandTemplate(getText(R.string.battery_screen_usage), timeSequence));
+            preference.setSummary(
+                    (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
+                            ? timeSequence
+                            : TextUtils.expandTemplate(getText(R.string.battery_screen_usage),
+                                    timeSequence));
         }
     }
 
@@ -895,11 +905,12 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> niks = super.getNonIndexableKeys(context);
+                    niks.add(KEY_HIGH_USAGE);
+                    niks.add(KEY_BATTERY_SAVER_SUMMARY);
                     // Duplicates in display
                     niks.add(KEY_AUTO_BRIGHTNESS);
                     niks.add(KEY_SCREEN_TIMEOUT);
-                    niks.add(KEY_BATTERY_SAVER_SUMMARY);
-                    niks.add(KEY_HIGH_USAGE);
+                    niks.add(KEY_AMBIENT_DISPLAY);
                     return niks;
                 }
             };

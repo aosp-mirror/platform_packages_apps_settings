@@ -16,34 +16,45 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
+import android.util.SparseIntArray;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.graph.UsageView;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -62,6 +73,7 @@ public class BatteryInfoTest {
     private Intent mDisChargingBatteryBroadcast;
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStats mBatteryStats;
@@ -73,7 +85,7 @@ public class BatteryInfoTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
 
         mDisChargingBatteryBroadcast = new Intent();
         mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_PLUGGED, 0);
@@ -174,5 +186,123 @@ public class BatteryInfoTest {
                 1000, false /* basedOnUsage */);
 
         assertThat(info.chargeLabel).isEqualTo("100%");
+    }
+
+    // Make our battery stats return a sequence of battery events.
+    private void mockBatteryStatsHistory() {
+        // Mock out new data every time start...Locked is called.
+        doAnswer(invocation -> {
+            doAnswer(new Answer() {
+                private int count = 0;
+                private long[] times = {1000, 1500, 2000};
+                private byte[] levels = {99, 98, 97};
+
+                @Override
+                public Object answer(InvocationOnMock invocation) throws Throwable {
+                    if (count == times.length) {
+                        return false;
+                    }
+                    BatteryStats.HistoryItem record = invocation.getArgument(0);
+                    record.cmd = BatteryStats.HistoryItem.CMD_UPDATE;
+                    record.time = times[count];
+                    record.batteryLevel = levels[count];
+                    count++;
+                    return true;
+                }
+            }).when(mBatteryStats).getNextHistoryLocked(any(BatteryStats.HistoryItem.class));
+            return true;
+        }).when(mBatteryStats).startIteratingHistoryLocked();
+    }
+
+    private void assertOnlyHistory(BatteryInfo info) {
+        mockBatteryStatsHistory();
+        UsageView view = mock(UsageView.class);
+        doReturn(mContext).when(view).getContext();
+
+        info.bindHistory(view);
+        verify(view, times(1)).configureGraph(anyInt(), anyInt());
+        verify(view, times(1)).addPath(any(SparseIntArray.class));
+        verify(view, never()).addProjectedPath(any(SparseIntArray.class));
+    }
+
+    private void assertHistoryAndLinearProjection(BatteryInfo info) {
+        mockBatteryStatsHistory();
+        UsageView view = mock(UsageView.class);
+        doReturn(mContext).when(view).getContext();
+
+        info.bindHistory(view);
+        verify(view, times(2)).configureGraph(anyInt(), anyInt());
+        verify(view, times(1)).addPath(any(SparseIntArray.class));
+        ArgumentCaptor<SparseIntArray> pointsActual = ArgumentCaptor.forClass(SparseIntArray.class);
+        verify(view, times(1)).addProjectedPath(pointsActual.capture());
+
+        // Check that we have two points and the first is correct.
+        assertThat(pointsActual.getValue().size()).isEqualTo(2);
+        assertThat(pointsActual.getValue().keyAt(0)).isEqualTo(2000);
+        assertThat(pointsActual.getValue().valueAt(0)).isEqualTo(97);
+    }
+
+    private void assertHistoryAndEnhancedProjection(BatteryInfo info) {
+        mockBatteryStatsHistory();
+        UsageView view = mock(UsageView.class);
+        doReturn(mContext).when(view).getContext();
+        SparseIntArray pointsExpected = new SparseIntArray();
+        pointsExpected.append(2000, 96);
+        pointsExpected.append(2500, 95);
+        pointsExpected.append(3000, 94);
+        doReturn(pointsExpected).when(mFeatureFactory.powerUsageFeatureProvider)
+                .getEnhancedBatteryPredictionCurve(any(Context.class), anyLong());
+
+        info.bindHistory(view);
+        verify(view, times(2)).configureGraph(anyInt(), anyInt());
+        verify(view, times(1)).addPath(any(SparseIntArray.class));
+        ArgumentCaptor<SparseIntArray> pointsActual = ArgumentCaptor.forClass(SparseIntArray.class);
+        verify(view, times(1)).addProjectedPath(pointsActual.capture());
+        assertThat(pointsActual.getValue()).isEqualTo(pointsExpected);
+    }
+
+    private BatteryInfo getBatteryInfo(boolean charging, boolean enhanced, boolean estimate) {
+        if (charging && estimate) {
+            doReturn(1000L).when(mBatteryStats).computeChargeTimeRemaining(anyLong());
+        } else {
+            doReturn(0L).when(mBatteryStats).computeChargeTimeRemaining(anyLong());
+        }
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
+                charging ? mChargingBatteryBroadcast : mDisChargingBatteryBroadcast,
+                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false,
+                estimate ? 1000 : 0 /* drainTimeUs */, false);
+        doReturn(enhanced).when(mFeatureFactory.powerUsageFeatureProvider)
+                .isEnhancedBatteryPredictionEnabled(mContext);
+        return info;
+    }
+
+    @Test
+    public void testBindHistory() {
+        BatteryInfo info;
+
+        info = getBatteryInfo(false /* charging */, false /* enhanced */, false /* estimate */);
+        assertOnlyHistory(info);
+
+        info = getBatteryInfo(false /* charging */, false /* enhanced */, true /* estimate */);
+        assertHistoryAndLinearProjection(info);
+
+        info = getBatteryInfo(false /* charging */, true /* enhanced */, false /* estimate */);
+        assertOnlyHistory(info);
+
+        info = getBatteryInfo(false /* charging */, true /* enhanced */, true /* estimate */);
+        assertHistoryAndEnhancedProjection(info);
+
+        info = getBatteryInfo(true /* charging */, false /* enhanced */, false /* estimate */);
+        assertOnlyHistory(info);
+
+        info = getBatteryInfo(true /* charging */, false /* enhanced */, true /* estimate */);
+        assertHistoryAndLinearProjection(info);
+
+        info = getBatteryInfo(true /* charging */, true /* enhanced */, false /* estimate */);
+        assertOnlyHistory(info);
+
+        // Linear projection for charging even in enhanced mode.
+        info = getBatteryInfo(true /* charging */, true /* enhanced */, true /* estimate */);
+        assertHistoryAndLinearProjection(info);
     }
 }

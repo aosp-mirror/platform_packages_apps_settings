@@ -29,6 +29,7 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
@@ -104,6 +105,89 @@ public class SetupFingerprintEnrollIntroductionTest {
         assertThat(shadowActivity.getResultCode()).named("Result code")
                 .isEqualTo(FingerprintEnrollBase.RESULT_SKIP);
     }
+
+    @Test
+    public void testBackKeyPress_shouldSetIntentDataIfLockScreenAdded() {
+        getShadowKeyguardManager().setIsKeyguardSecure(false);
+
+        mController.create().resume();
+        getShadowKeyguardManager().setIsKeyguardSecure(true);
+        SetupFingerprintEnrollIntroduction activity = mController.get();
+        activity.onBackPressed();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getResultIntent()).isNotNull();
+        assertThat(shadowActivity.getResultIntent().hasExtra(
+                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isTrue();
+    }
+
+    @Test
+    public void testBackKeyPress_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
+        getShadowKeyguardManager().setIsKeyguardSecure(true);
+
+        mController.create().resume();
+        SetupFingerprintEnrollIntroduction activity = mController.get();
+        activity.onBackPressed();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getResultIntent()).isNull();
+    }
+
+    @Test
+    public void testCancelClicked_shouldSetIntentDataIfLockScreenAdded() {
+        getShadowKeyguardManager().setIsKeyguardSecure(false);
+
+        SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
+        final Button skipButton = activity.findViewById(R.id.fingerprint_cancel_button);
+        getShadowKeyguardManager().setIsKeyguardSecure(true);
+        skipButton.performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getResultIntent()).isNotNull();
+        assertThat(shadowActivity.getResultIntent().hasExtra(
+                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isTrue();
+    }
+
+    @Test
+    public void testCancelClicked_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
+        getShadowKeyguardManager().setIsKeyguardSecure(true);
+
+        SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
+        final Button skipButton = activity.findViewById(R.id.fingerprint_cancel_button);
+        skipButton.performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getResultIntent()).isNull();
+    }
+
+    @Test
+    public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
+        getShadowKeyguardManager().setIsKeyguardSecure(true);
+        SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
+        activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
+                FingerprintEnrollBase.RESULT_FINISHED, null);
+        assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
+    }
+
+    @Test
+    public void testOnResultFromFindSensor_shouldSetIntentDataIfLockScreenAdded() {
+        getShadowKeyguardManager().setIsKeyguardSecure(false);
+        SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
+        getShadowKeyguardManager().setIsKeyguardSecure(true);
+        activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
+                FingerprintEnrollBase.RESULT_FINISHED, null);
+        assertThat(Shadows.shadowOf(activity).getResultIntent()).isNotNull();
+    }
+
+    @Test
+    public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenNotAdded() {
+        getShadowKeyguardManager().setIsKeyguardSecure(false);
+        SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
+        activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
+                FingerprintEnrollBase.RESULT_FINISHED, null);
+        assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
+    }
+
 
     private ShadowKeyguardManager getShadowKeyguardManager() {
         return Shadows.shadowOf(application.getSystemService(KeyguardManager.class));

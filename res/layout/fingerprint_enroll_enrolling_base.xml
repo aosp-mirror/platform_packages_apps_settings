@@ -57,10 +57,12 @@
 
         </FrameLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <include layout="@layout/fingerprint_enroll_enrolling_content"
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
@@ -73,13 +75,12 @@
                 android:id="@+id/error_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_gravity="center_horizontal|bottom"
                 android:accessibilityLiveRegion="polite"
                 android:gravity="center"
                 android:visibility="invisible"/>
 
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

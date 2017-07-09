@@ -79,6 +79,7 @@
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
@@ -456,6 +457,10 @@
 
     <style name="SuggestionConditionStyle">
         <item name="android:background">@color/material_grey_300</item>
+    </style>
+
+    <style name="TextAppearance.SearchBar" parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
+        <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
 </resources>

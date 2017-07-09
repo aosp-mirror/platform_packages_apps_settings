@@ -30,6 +30,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -187,8 +188,12 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         // check. This ensures if we return, say, a LinearLayout in the tests, they won't fail.
         View searchText = mSearchView.findViewById(com.android.internal.R.id.search_src_text);
         if (searchText instanceof TextView) {
-            ((TextView) searchText).setTextColor(getContext().getColorStateList(
+            TextView searchTextView = (TextView) searchText;
+            searchTextView.setTextColor(getContext().getColorStateList(
                     com.android.internal.R.color.text_color_primary));
+            searchTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimension(R.dimen.search_bar_text_size));
+
         }
         View editFrame = mSearchView.findViewById(com.android.internal.R.id.search_edit_frame);
         if (editFrame != null) {

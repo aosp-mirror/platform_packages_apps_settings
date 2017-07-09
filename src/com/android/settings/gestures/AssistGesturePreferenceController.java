@@ -65,9 +65,12 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
     public void displayPreference(PreferenceScreen screen) {
         mScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());
+        if (!mFeatureProvider.isSensorAvailable(mContext)) {
+            removePreference(mScreen, getPreferenceKey());
+            return;
+        }
         if (!mFeatureProvider.isSupported(mContext)) {
             mScreen.removePreference(mPreference);
-            removePreference(mScreen, getPreferenceKey());
             return;
         }
         // Call super last or AbstractPreferenceController might remove the preference from the

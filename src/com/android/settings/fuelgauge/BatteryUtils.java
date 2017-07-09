@@ -15,10 +15,15 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
+import android.os.Bundle;
+import android.os.Build;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -45,6 +50,7 @@ import java.util.List;
  */
 public class BatteryUtils {
     public static final int UID_NULL = -1;
+    public static final int SDK_NULL = -1;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.FOREGROUND,
@@ -64,6 +70,7 @@ public class BatteryUtils {
     private static BatteryUtils sInstance;
 
     private PackageManager mPackageManager;
+    private AppOpsManager mAppOpsManager;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
@@ -77,6 +84,7 @@ public class BatteryUtils {
     @VisibleForTesting
     BatteryUtils(Context context) {
         mPackageManager = context.getPackageManager();
+        mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(
                 context).getPowerUsageFeatureProvider(context);
     }
@@ -262,6 +270,37 @@ public class BatteryUtils {
     }
 
     /**
+     * Find the targetSdkVersion for package with name {@code packageName}
+     *
+     * @return the targetSdkVersion, or {@link #SDK_NULL} if {@code packageName} doesn't exist
+     */
+    public int getTargetSdkVersion(final String packageName) {
+        try {
+            ApplicationInfo info = mPackageManager.getApplicationInfo(packageName,
+                    PackageManager.GET_META_DATA);
+
+            return info.targetSdkVersion;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot find package: " + packageName, e);
+        }
+
+        return SDK_NULL;
+    }
+
+    /**
+     * Check whether background restriction is enabled
+     */
+    public boolean isBackgroundRestrictionEnabled(final int targetSdkVersion, final int uid,
+            final String packageName) {
+        if (targetSdkVersion >= Build.VERSION_CODES.O) {
+            return true;
+        }
+        final int mode = mAppOpsManager
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, uid, packageName);
+        return mode == AppOpsManager.MODE_IGNORED || mode == AppOpsManager.MODE_ERRORED;
+    }
+
+    /**
      * Sort the {@code usageList} based on {@link BatterySipper#totalPowerMah}
      */
     public void sortUsageList(List<BatterySipper> usageList) {
@@ -328,8 +367,14 @@ public class BatteryUtils {
         return timeMs * 1000;
     }
 
+    public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
+            UserManager userManager) {
+        statsHelper.create(bundle);
+        statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, userManager.getUserProfiles());
+    }
+
     private boolean isDataCorrupted() {
-        return mPackageManager == null;
+        return mPackageManager == null || mAppOpsManager == null;
     }
 
     @VisibleForTesting

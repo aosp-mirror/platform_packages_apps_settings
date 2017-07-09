@@ -23,7 +23,9 @@ import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.os.Build;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
@@ -42,11 +44,14 @@ import org.robolectric.annotation.Config;
 public class BackgroundCheckActionTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int UID = 111;
+    private static final int SDK_VERSION = Build.VERSION_CODES.L;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private AppOpsManager mAppOpsManagerr;
+    private AppOpsManager mAppOpsManager;
+    @Mock
+    private BatteryUtils mBatteryUtils;
     private Anomaly mAnomaly;
     private BackgroundCheckAction mBackgroundCheckAction;
 
@@ -55,35 +60,37 @@ public class BackgroundCheckActionTest {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest(mContext);
-        doReturn(mAppOpsManagerr).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
+        doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
 
         mAnomaly = new Anomaly.Builder()
                 .setUid(UID)
                 .setPackageName(PACKAGE_NAME)
+                .setTargetSdkVersion(SDK_VERSION)
                 .build();
         mBackgroundCheckAction = new BackgroundCheckAction(mContext);
+        mBackgroundCheckAction.mBatteryUtils = mBatteryUtils;
     }
 
     @Test
     public void testHandlePositiveAction_forceStopPackage() {
         mBackgroundCheckAction.handlePositiveAction(mAnomaly, 0 /* metricskey */);
 
-        verify(mAppOpsManagerr).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME,
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME,
                 AppOpsManager.MODE_IGNORED);
     }
 
     @Test
     public void testIsActionActive_modeAllowed_returnTrue() {
-        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManagerr).checkOpNoThrow(
-                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+        doReturn(false).when(mBatteryUtils).isBackgroundRestrictionEnabled(SDK_VERSION, UID,
+                PACKAGE_NAME);
 
         assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isTrue();
     }
 
     @Test
     public void testIsActionActive_modeIgnored_returnFalse() {
-        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManagerr).checkOpNoThrow(
-                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+        doReturn(true).when(mBatteryUtils).isBackgroundRestrictionEnabled(SDK_VERSION, UID,
+                PACKAGE_NAME);
 
         assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
     }

@@ -90,7 +90,7 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
             return;
         }
 
-        final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly.type);
+        final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly);
         final int metricsKey = getArguments().getInt(ARG_METRICS_KEY);
 
         anomalyAction.handlePositiveAction(mAnomaly, metricsKey);
@@ -103,16 +103,18 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
         mAnomaly = bundle.getParcelable(ARG_ANOMALY);
 
         final Context context = getContext();
-        final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly.type);
+        final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly);
         switch (anomalyAction.getActionType()) {
             case Anomaly.AnomalyActionType.FORCE_STOP:
                 return new AlertDialog.Builder(context)
                         .setTitle(R.string.dialog_stop_title)
-                        .setMessage(getString(R.string.dialog_stop_message, mAnomaly.displayName))
+                        .setMessage(getString(mAnomaly.type == Anomaly.AnomalyType.WAKE_LOCK
+                                ? R.string.dialog_stop_message
+                                : R.string.dialog_stop_message_wakeup_alarm, mAnomaly.displayName))
                         .setPositiveButton(R.string.dialog_stop_ok, this)
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
-            case Anomaly.AnomalyActionType.BACKGROUND_CHECK:
+            case Anomaly.AnomalyActionType.STOP_AND_BACKGROUND_CHECK:
                 return new AlertDialog.Builder(context)
                         .setTitle(R.string.dialog_background_check_title)
                         .setMessage(getString(R.string.dialog_background_check_message,

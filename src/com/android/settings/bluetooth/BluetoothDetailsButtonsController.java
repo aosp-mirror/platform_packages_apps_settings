@@ -43,14 +43,19 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
         mIsConnected = device.isConnected();
     }
 
+    private void onForgetButtonPressed() {
+        ForgetDeviceDialogFragment fragment =
+                ForgetDeviceDialogFragment.newInstance(mCachedDevice.getAddress());
+        fragment.show(mFragment.getFragmentManager(), ForgetDeviceDialogFragment.TAG);
+    }
+
     @Override
     protected void init(PreferenceScreen screen) {
         mActionButtons = (LayoutPreference) screen.findPreference(getPreferenceKey());
         Button rightButton = (Button) mActionButtons.findViewById(R.id.right_button);
         rightButton.setText(R.string.forget);
         rightButton.setOnClickListener((view) -> {
-            mCachedDevice.unpair();
-            mFragment.getActivity().finish();
+            onForgetButtonPressed();
         });
     }
 
