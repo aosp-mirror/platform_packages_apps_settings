@@ -15,15 +15,23 @@
  */
 package com.android.settings.network;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.provider.SearchIndexableResource;
 import android.view.Menu;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -31,22 +39,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -54,6 +51,8 @@ public class NetworkDashboardFragmentTest {
 
     @Mock
     private Context mContext;
+    @Mock
+    private UserInfo mUserInfo;
 
     private NetworkDashboardFragment mFragment;
 
@@ -88,18 +87,6 @@ public class NetworkDashboardFragmentTest {
         mFragment.onCreateOptionsMenu(null, null);
 
         verify(resetController).buildMenuItem(nullable(Menu.class));
-    }
-
-    @Test
-    public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
-        final List<String> niks = NetworkDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
-        final int xmlId = (new NetworkDashboardFragment()).getPreferenceScreenResId();
-
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
-
-        assertThat(keys).containsAllIn(niks);
     }
 
     @Test
@@ -155,4 +142,5 @@ public class NetworkDashboardFragmentTest {
         verify(mContext).getString(R.string.network_dashboard_summary_data_usage);
         verify(mContext).getString(R.string.join_many_items_middle, null, null);
     }
+
 }
