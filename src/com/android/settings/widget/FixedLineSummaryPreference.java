@@ -21,7 +21,6 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.widget.TextView;
-
 import com.android.settings.R;
 
 /**
@@ -41,6 +40,7 @@ public class FixedLineSummaryPreference extends Preference {
         } else {
             mSummaryLineCount = 1;
         }
+        a.recycle();
     }
 
     public void setSummaryLineCount(int count) {
