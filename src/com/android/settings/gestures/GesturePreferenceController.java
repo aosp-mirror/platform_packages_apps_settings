@@ -61,6 +61,8 @@ public abstract class GesturePreferenceController extends PreferenceController
                         ? R.string.gesture_setting_on
                         : R.string.gesture_setting_off);
             }
+            // Different meanings of "Enabled" for the Preference and Controller.
+            preference.setEnabled(canHandleClicks());
         }
     }
 
@@ -81,4 +83,8 @@ public abstract class GesturePreferenceController extends PreferenceController
     protected abstract String getVideoPrefKey();
 
     protected abstract boolean isSwitchPrefEnabled();
+
+    protected boolean canHandleClicks() {
+        return true;
+    }
 }

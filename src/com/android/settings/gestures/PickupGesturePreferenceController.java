@@ -76,4 +76,9 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
                 Settings.Secure.DOZE_PULSE_ON_PICK_UP, enabled ? 1 : 0);
         return true;
     }
+
+    @Override
+    public boolean canHandleClicks() {
+        return mAmbientConfig.pulseOnPickupCanBeModified(mUserId);
+    }
 }
