@@ -357,7 +357,6 @@ public class SimStatus extends SettingsPreferenceFragment {
     void updateSignalStrength(SignalStrength signalStrength) {
         if (mSignalStrength != null) {
             final int state = mPhone.getServiceState().getState();
-            Resources r = getResources();
 
             if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
                     (ServiceState.STATE_POWER_OFF == state)) {
@@ -376,7 +375,7 @@ public class SimStatus extends SettingsPreferenceFragment {
                 signalAsu = 0;
             }
 
-            mSignalStrength.setSummary(r.getString(R.string.sim_signal_strength,
+            mSignalStrength.setSummary(mRes.getString(R.string.sim_signal_strength,
                         signalDbm, signalAsu));
         }
     }
