@@ -294,7 +294,7 @@
     <string name="airplane_mode" msgid="8837269988154128601">"وضع الطائرة"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"المزيد"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"اللاسلكي والشبكات"</string>
-    <string name="radio_controls_summary" msgid="1838624369870907268">"‏إدارة Wi-Fi والبلوتوث ووضع الطائرة وشبكات الجوّال والشبكات الظاهرية الخاصة (VPN)"</string>
+    <string name="radio_controls_summary" msgid="1838624369870907268">"‏إدارة Wi-Fi والبلوتوث ووضع الطائرة وشبكات الجوّال والشبكات الافتراضية الخاصة (VPN)"</string>
     <string name="cellular_data_title" msgid="6835451574385496662">"بيانات الجوّال"</string>
     <string name="calls_title" msgid="3544471959217176768">"المكالمات"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"‏الرسائل القصيرة SMS"</string>
@@ -404,6 +404,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"استمر في رفع إصبعك لإضافة الأجزاء المختلفة لبصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"تمت إضافة بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"عندما ترى هذا الرمز، استخدم بصمة الإصبع لتحديد الهوية أو للموافقة على عمليات الشراء."</string>
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"تنفيذ ذلك لاحقًا"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"هل تريد تخطي إعداد بصمة الإصبع؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"لقد اخترت استخدام بصمة الإصبع كوسيلة لإلغاء تأمين هاتفك. إذا تخطيت ذلك الآن، فستحتاج إلى إعداده لاحقًا. لن يستغرق منك الإعداد سوى دقيقة تقريبًا."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"إعداد تأمين الشاشة"</string>
@@ -422,6 +423,8 @@
     <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"هل تريد إزالة جميع بصمات الإصبع؟"</string>
+    <string name="fingerprint_delete_title" msgid="1368196182612202898">"إزالة \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
+    <string name="fingerprint_delete_message" msgid="8597787803567398131">"هل تريد حذف بصمة الإصبع هذه؟"</string>
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"لن تتمكن من استخدام بصمات إصبعك لإلغاء قفل الهاتف، أو السماح بعمليات الشراء، أو تسجيل الدخول إلى التطبيقات من خلالها."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"لن تتمكن من استخدام بصمات إصبعك لإلغاء تأمين الملف الشخصي للعمل، أو السماح بعمليات الشراء، أو تسجيل الدخول إلى تطبيقات العمل"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"نعم، إزالة"</string>
@@ -545,20 +548,16 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"تغيير كلمة مرور إلغاء التأمين"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"أعد المحاولة. المحاولة <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> من <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"سيتم حذف بياناتك"</string>
-    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
-    <skip />
-    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
-    <skip />
-    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
-    <skip />
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"عند إدخال نقش غير صحيح في المحاولة التالية، سيتم حذف بيانات هذا الجهاز"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"عند إدخال رقم تعريف شخصي غير صحيح في المحاولة التالية، سيتم حذف بيانات هذا الجهاز"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"عند إدخال كلمة مرور غير صحيحة في المحاولة التالية، سيتم حذف بيانات هذا الجهاز"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"عند إدخال نقش غير صحيح في المحاولة التالية، سيتم حذف هذا المستخدم"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"عند إدخال رقم تعريف شخصي غير صحيح في المحاولة التالية، سيتم حذف هذا المستخدم"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"عند إدخال كلمة مرور غير صحيحة في المحاولة التالية، سيتم حذف هذا المستخدم"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"عند إدخال نقش غير صحيح في المحاولة التالية، سيتم حذف ملفك الشخصي للعمل وبياناته"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"عند إدخال رقم تعريف شخصي غير صحيح في المحاولة التالية، سيتم حذف ملفك الشخصي للعمل وبياناته"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"عند إدخال كلمة مرور غير صحيحة في المحاولة التالية، سيتم حذف ملفك الشخصي للعمل وبياناته"</string>
-    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
-    <skip />
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"لقد استنفدت عدد المحاولات غير الصحيحة وسيتم حذف بيانات هذا الجهاز."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"لقد استنفدت عدد المحاولات غير الصحيحة وسيتم حذف هذا المستخدم."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"لقد استنفدت عدد المحاولات غير الصحيحة وسيتم حذف الملف الشخصي للعمل وبياناته."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"تجاهل"</string>
@@ -767,11 +766,17 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"‏تشغيل شبكة Wi‑Fi تلقائيًا"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"‏ستتم إعادة تشغيل شبكة Wi‑Fi بالقرب من الشبكات المحفوظة العالية الجودة، مثل الشبكة المنزلية"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"‏غير متاح لأنه تم إيقاف فحص شبكات Wi‑Fi"</string>
+    <!-- no translation found for wifi_wakeup_summary_scoring_disabled (7607978586276303872) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"تجنب الاتصالات الضعيفة"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"‏عدم استخدام شبكات Wi-Fi ما لم يكن لها اتصال إنترنت جيد"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"استخدام الشبكات ذات اتصال الإنترنت الجيد فقط"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"التوصيل بالشبكات المفتوحة"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"الاتصال تلقائيًا بالشبكات العامة العالية الجودة"</string>
+    <!-- no translation found for use_open_wifi_automatically_summary_scoring_disabled (8093603801818762806) -->
+    <skip />
+    <!-- no translation found for use_open_wifi_automatically_summary_scorer_unsupported_disabled (4570216998917498610) -->
+    <skip />
     <string name="wifi_install_credentials" msgid="3551143317298272860">"تثبيت شهادات"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"‏لتحسين دقة الموقع، سيظل بإمكان تطبيقات وخدمات النظام البحث عن شبكات Wi-Fi. ويمكنك تغيير ذلك من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"‏لتحسين دقة تحديد الموقع، يمكنك تشغيل البحث عن شبكات Wi-Fi من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1009,7 +1014,7 @@
     <string name="audio_record_proc_title" msgid="4271091199976457534">"إلغاء الضجيج"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"الموسيقى والفيديو والألعاب والوسائط الأخرى"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"نغمة الرنين والتنبيهات"</string>
-    <string name="volume_notification_description" msgid="5810902320215328321">"اشعارات"</string>
+    <string name="volume_notification_description" msgid="5810902320215328321">"إشعارات"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"الاشعارات"</string>
     <string name="volume_ring_mute" msgid="3018992671608737202">"كتم صوت نغمة الرنين والإشعارات"</string>
     <string name="volume_media_mute" msgid="3399059928695998166">"كتم صوت الموسيقى والوسائط الأخرى"</string>
@@ -1631,8 +1636,8 @@
     <string name="app_factory_reset" msgid="6635744722502563022">"إزالة التحديثات"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"لقد اخترت تشغيل هذا التطبيق بشكل افتراضي لبعض الإجراءات."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"لقد اخترت السماح لهذا التطبيق بإنشاء الأدوات والوصول إلى بياناتها."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"لم يتم تعيين إعدادات افتراضية."</string>
-    <string name="clear_activities" msgid="7408923511535174430">"محو الإعدادات الافتراضية"</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"لم يتم تعيين إعدادات تلقائية."</string>
+    <string name="clear_activities" msgid="7408923511535174430">"محو الإعدادات التلقائية"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"ربما لم يتم تصميم هذا التطبيق ليلائم شاشتك، يمكنك التحكم في كيفية ضبطه ليلائم شاشتك هنا."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"السؤال عند الإطلاق"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"تغيير حجم التطبيق"</string>
@@ -1787,12 +1792,12 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"الإعدادات"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"اللغة"</string>
     <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"لوحة المفاتيح وطُرق الإدخال"</string>
-    <string name="virtual_keyboard_category" msgid="1012830752318677119">"لوحة المفاتيح الظاهرية"</string>
-    <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"لوحة المفاتيح الظاهرية المتاحة"</string>
+    <string name="virtual_keyboard_category" msgid="1012830752318677119">"لوحة المفاتيح الافتراضية"</string>
+    <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"لوحة المفاتيح الافتراضية المتاحة"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"إدارة لوحات المفاتيح"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"مساعدة لوحة المفاتيح"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"لوحة المفاتيح الفعلية"</string>
-    <string name="show_ime" msgid="2658582193437188227">"إظهار لوحة المفاتيح الظاهرية"</string>
+    <string name="show_ime" msgid="2658582193437188227">"إظهار لوحة المفاتيح الافتراضية"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"استمرار عرضها على الشاشة أثناء نشاط لوحة المفاتيح الفعلية"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"مساعد اختصارات لوحة المفاتيح"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"عرض الاختصارات المتاحة"</string>
@@ -1848,13 +1853,6 @@
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"هل تريد إنشاء الأداة والسماح بالوصول؟"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"بعد إنشاء الأداة، بإمكان <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> الوصول إلى كل البيانات التي تعرضها هذه الأداة."</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"السماح دومًا لـ <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> بإنشاء الأدوات والوصول إلى بياناتها"</string>
-    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> ي <xliff:g id="HOURS">%2$d</xliff:g> س <xliff:g id="MINUTES">%3$d</xliff:g> د <xliff:g id="SECONDS">%4$d</xliff:g> ث"</string>
-    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> س <xliff:g id="MINUTES">%2$d</xliff:g> د <xliff:g id="SECONDS">%3$d</xliff:g> ث"</string>
-    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> دقيقة <xliff:g id="SECONDS">%2$d</xliff:g> ثانية"</string>
-    <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> ث"</string>
-    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> يوم <xliff:g id="HOURS">%2$d</xliff:g> ساعة <xliff:g id="MINUTES">%3$d</xliff:g> دقيقة"</string>
-    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g>ساعة <xliff:g id="MINUTES">%2$d</xliff:g>دقيقة"</string>
-    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> دقيقة"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"إحصاءات الاستخدام"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"إحصاءات الاستخدام"</string>
     <string name="display_order_text" msgid="8592776965827565271">"تصنيف بحسب:"</string>
@@ -1866,8 +1864,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"أجهزة قارئ الشاشة، والعرض، وعناصر التحكم التفاعلية"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"إعدادات الرؤية"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"يمكنك تخصيص هذا الجهاز للتوافق مع احتياجاتك. ويمكن تغيير ميزات إمكانية الوصول هذه لاحقًا من خلال الإعدادات."</string>
-    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"زيادة حجم الخط"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"أجهزة قارئ الشاشة"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"الصوت والنص على الشاشة"</string>
     <string name="display_category_title" msgid="685461049938269166">"العرض"</string>
@@ -1877,7 +1874,7 @@
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"إن تطبيق قارئ الشاشة مُصمَّم في الأساس من أجل الأشخاص الكفيفين والذين يعانون من ضعف في النظر."</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"يمكنك النقر على بيانات على شاشتك لتتم قراءتها بصوت عالٍ"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"التسميات التوضيحية"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"الترجمة والشرح"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"التكبير"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"تكبير باستخدام النقر الثلاثي"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"التكبير باستخدام الزر"</string>
@@ -1888,10 +1885,10 @@
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"للتكبير/التصغير"</b>"، انقر على الشاشة 3 مرات بسرعة.\n"<ul><li>"اسحب بإصبعين أو أكثر للتمرير"</li>\n<li>"اضغط بإصبعين أو أكثر على الشاشة لضبط التكبير/التصغير"</li></ul>\n\n<b>"للتكبير/التصغير مؤقتًا"</b>"، انقر على الشاشة 3 مرات بسرعة واستمر بالضغط بإصبعك بعد النقرة الثالثة.\n"<ul><li>"اسحب للتنقل على الشاشة"</li>\n<li>"ارفع إصبعك للتصغير"</li></ul>\n\n"لا يمكنك استخدام التكبير عند استخدام لوحة المفاتيح وشريط التنقل."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"عند تشغيل ميزة التكبير، استخدم زر إمكانية الوصول في أسفل الشاشة للتكبير بسرعة.\n\n"<b>"للتكبير/التصغير"</b>"، انقر على زر إمكانية الوصول، ثم انقر في أي مكان على الشاشة.\n"<ul><li>"اسحب بإصبعين أو أكثر للتمرير"</li>\n<li>"اضغط بإصبعين أو أكثر على الشاشة لضبط التكبير/التصغير"</li></ul>\n\n<b>"للتكبير/التصغير مؤقتًا"</b>"، انقر على زر إمكانية الوصول، ثم المس أي موضع على الشاشة مع الاستمرار.\n"<ul><li>"اسحب للتنقل على الشاشة"</li>\n<li>"ارفع إصبعك للتصغير"</li></ul>\n\n"لا يمكنك استخدام التكبير عند استخدام لوحة المفاتيح وشريط التنقل."</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"تم تعيين زر إمكانية الوصول لخدمة <xliff:g id="SERVICE">%1$s</xliff:g>. لاستخدام التكبير، المس زر إمكانية الوصول مع الاستمرار ثم اختر التكبير."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"اختصارات تسهيل الدخول"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"مفتاح الاختصار لمستوى الصوت"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"خدمة الاختصار"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"السماح من شاشة التأمين"</string>
-    <string name="accessibility_shortcut_description" msgid="6488524140219209763">"عند تشغيل الاختصار، يمكنك الضغط على زري مستوى الصوت على حد سواء لمدة 3 ثوانٍ لبدء تشغيل ميزة إمكانية الوصول."</string>
+    <string name="accessibility_shortcut_description" msgid="1765853731190717372">"عندما يكون مفتاح الاختصار قيد التفعيل، يمكنك الضغط على مفتاحي مستوى الصوت لمدة 3 ثوانٍ لبدء تشغيل إحدى ميزات إمكانية الوصول."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"نص ذو درجة تباين عالية"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"التحديث التلقائي لتكبير الشاشة"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"تحديث تكبير الشاشة أثناء تنقلات التطبيق"</string>
@@ -1904,7 +1901,7 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"قد يؤثر في الأداء"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"النقر بعد توقف المؤشر عن الحركة"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"مهلة قبل النقر"</string>
-    <string name="accessibility_summary_default_combination" msgid="90096949592817459">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
+    <string name="preference_summary_default_combination" msgid="8532964268242666060">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"تشغيل"</string>
     <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"إيقاف"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"إظهار في الإعدادات السريعة"</string>
@@ -1956,7 +1953,7 @@
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"خيارات قياسية"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"اللغة"</string>
     <string name="captioning_text_size" msgid="6737002449104466028">"حجم النص"</string>
-    <string name="captioning_preset" msgid="8939737196538429044">"نمط التسمية التوضيحية"</string>
+    <string name="captioning_preset" msgid="8939737196538429044">"شكل الترجمة والشرح"</string>
     <string name="captioning_custom_options_title" msgid="5067500939930322405">"خيارات مخصصة"</string>
     <string name="captioning_background_color" msgid="9053011212948992570">"لون الخلفية"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"تعتيم الخلفية"</string>
@@ -1967,7 +1964,7 @@
     <string name="captioning_edge_color" msgid="3670094753735263238">"لون الحافة"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"نوع الحافة"</string>
     <string name="captioning_typeface" msgid="1826169240566563259">"مجموعة الخطوط"</string>
-    <string name="captioning_preview_text" msgid="4067935959797375065">"ستبدو التسميات التوضيحية بالشكل التالي"</string>
+    <string name="captioning_preview_text" msgid="4067935959797375065">"ستبدو الترجمة والشرح بالشكل التالي"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"افتراضي"</string>
     <string name="color_title" msgid="4258931051732243983">"اللون"</string>
@@ -2088,19 +2085,22 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"يطلب معرفة الموقع بشكل متكرر"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"يعمل <xliff:g id="NUMBER">%1$d</xliff:g> من التطبيقات بطريقة غير طبيعية"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"هل تريد إيقاف التطبيق؟"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"يتعذّر على هاتفك إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يُبقي هاتفك مشغّلًا باستمرار.\n\nلمحاولة حلّ هذه المشكلة، يمكنك فرض إيقاف التطبيق.\n\nفي حالة استمرار حدوث ذلك، قد يلزمك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"يتعذّر على جهازك اللوحي إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يُبقي جهازك اللوحي مشغلّا باستمرار.\n\nلمحاولة حلّ هذه المشكلة، يمكنك فرض إيقاف التطبيق.\n\nوفي حال استمرار حدوث ذلك، قد يلزمك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"يتعذّر على جهازك إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يُبقي جهازك مشغّلًا باستمرار.\n\nلمحاولة حلّ هذه المشكلة، يمكنك فرض إيقاف التطبيق.\n\nوفي حال استمرار حدوث ذلك، قد يلزمك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي هاتفك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي جهازك اللوحي نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"لا يستطيع جهازك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي جهازك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP_0">%1$s</xliff:g> يبقي هاتفك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف <xliff:g id="APP_1">%1$s</xliff:g>.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP_0">%1$s</xliff:g> يبقي جهازك اللوحي نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف <xliff:g id="APP_1">%1$s</xliff:g>.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"لا يستطيع جهازك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP_0">%1$s</xliff:g> يبقي جهازك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف <xliff:g id="APP_1">%1$s</xliff:g>.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
     <string name="dialog_stop_ok" msgid="2319777211264004900">"إيقاف التطبيق"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"هل تريد إيقاف الاستخدام في الخلفية؟"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"يتعذّر على هاتفك إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يبقى الهاتف مشغّلًا باستمرار.\n\nلمعالجة هذه المشكلة، يمكنك منع تشغيل هذا التطبيق في الخلفية على هاتفك."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"يتعذّر على جهازك اللوحي إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يبقى الجهاز اللوحي مشغّلًا باستمرار.\n\nلمعالجة هذه المشكلة، يمكنك منع تشغيل هذا التطبيق في الخلفية على الجهاز اللوحي."</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"يتعذّر على جهازك إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يُبقى جهازك مشغّلًا باستمرار.\n\nلمعالجة هذه المشكلة، يمكنك منع تشغيل هذا التطبيق في الخلفية على جهازك."</string>
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"هل تريد إيقاف الاستخدام في الخلفية وإيقاف التطبيق؟"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP_0">%1$s</xliff:g> يُبقي هاتفك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف <xliff:g id="APP_1">%1$s</xliff:g> ومنع تشغيله في الخلفية."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP_0">%1$s</xliff:g> يُبقي جهازك اللوحي نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف <xliff:g id="APP_1">%1$s</xliff:g> ومنع تشغيله في الخلفية."</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"لا يستطيع جهازك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP_0">%1$s</xliff:g> يُبقي جهازك نشطًا بشكل مستمر.\n\nلمحاولة حلّ هذه المشكلة، يمكنك إيقاف <xliff:g id="APP_1">%1$s</xliff:g> ومنع تشغيله في الخلفية."</string>
     <string name="dialog_background_check_ok" msgid="412876934682899659">"إيقاف"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"هل تريد إيقاف تحديد الموقع؟"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"يتعذّر على هاتفك إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يطلب معرفة موقعك باستمرار عند عدم استخدام التطبيق.\n\nلحلّ هذه المشكلة، يمكنك إيقاف تحديد الموقع لهذا التطبيق."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"يتعذّر على جهازك اللوحي إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يطلب معرفة موقعك باستمرار عند عدم استخدام التطبيق.\n\nلحلّ هذه المشكلة، يمكنك إيقاف تحديد الموقع لهذا التطبيق."</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"يتعذّر على جهازك إدارة شحن البطارية بشكل طبيعي لأن تطبيق <xliff:g id="APP">%1$s</xliff:g> يطلب معرفة موقعك باستمرار عند عدم استخدام التطبيق.\n\nلحلّ هذه المشكلة، يمكنك إيقاف تحديد الموقع لهذا التطبيق."</string>
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يطلب باستمرار معرفة موقعك أثناء عدم استخدامك له.\n\nلحلّ هذه المشكلة، يمكنك إيقاف خدمة الموقع لهذا التطبيق."</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يطلب باستمرار معرفة موقعك أثناء عدم استخدامك له.\n\nلحلّ هذه المشكلة، يمكنك إيقاف خدمة الموقع لهذا التطبيق."</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"لا يستطيع جهازك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يطلب باستمرار معرفة موقعك أثناء عدم استخدامك له.\n\nلحلّ هذه المشكلة، يمكنك إيقاف خدمة الموقع لهذا التطبيق."</string>
     <string name="dialog_location_ok" msgid="4572391197601313986">"إيقاف"</string>
     <string name="power_screen" msgid="3023346080675904613">"شاشة العرض"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"الفلاش"</string>
@@ -2174,8 +2174,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> من إجمالي شحن البطارية"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"تفاصيل الاستخدام منذ آخر شحن كامل"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"آخر شحن كامل"</string>
-    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"بيانات استخدام البطارية تقديرية ويمكن أن تتغير حسب الاستخدام"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"أثناء الاستخدام النشط"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"أثناء الاستخدام في الخلفية"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"استخدام البطارية"</string>
@@ -2294,7 +2293,7 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"وحدة تخزين صلبة"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"وحدة تخزين برمجية فقط"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"لا تتوفر بيانات الاعتماد لهذا المستخدم"</string>
-    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"‏تم التثبيت للاستخدام بواسطة الشبكة الظاهرية الخاصة (VPN) والتطبيقات"</string>
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"‏تم التثبيت للاستخدام بواسطة الشبكة الافتراضية الخاصة (VPN) والتطبيقات"</string>
     <string name="credential_for_wifi" msgid="6228425986551591864">"‏تم التثبيت للاستخدام بواسطة Wi-Fi"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"اكتب كلمة المرور لوحدة تخزين بيانات الاعتماد."</string>
@@ -2550,48 +2549,48 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(غير مستخدم)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(عدم التحقق من ملكية الخادم)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(الواردة من الخادم)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"‏لا يمكن أن يظل هذا النوع من الشبكات الظاهرية الخاصة (VPN) متصلاً في جميع الأوقات"</string>
-    <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"‏لا تتوافق الشبكة الظاهرية الخاصة (VPN) التي يتم تشغيلها دائمًا إلا مع عناوين الخادم الرقمية"</string>
-    <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"‏يجب تحديد خادم نظام أسماء نطاقات (DNS) للشبكة الظاهرية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
-    <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"‏يجب أن تكون عناوين خادم نظام أسماء النطاقات (DNS) رقمية للشبكة الظاهرية الخاصة التي يتم تشغيلها دائمًا"</string>
-    <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"‏المعلومات التي تم إدخالها لا تتوافق مع الشبكة الظاهرية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"‏لا يمكن أن يظل هذا النوع من الشبكات الافتراضية الخاصة (VPN) متصلاً في جميع الأوقات"</string>
+    <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"‏لا تتوافق الشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا إلا مع عناوين الخادم الرقمية"</string>
+    <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"‏يجب تحديد خادم نظام أسماء نطاقات (DNS) للشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
+    <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"‏يجب أن تكون عناوين خادم نظام أسماء النطاقات (DNS) رقمية للشبكة الافتراضية الخاصة التي يتم تشغيلها دائمًا"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"‏المعلومات التي تم إدخالها لا تتوافق مع الشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"إلغاء"</string>
     <string name="vpn_done" msgid="8678655203910995914">"تجاهل"</string>
     <string name="vpn_save" msgid="4233484051644764510">"حفظ"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"اتصال"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"استبدال"</string>
-    <string name="vpn_edit" msgid="8647191407179996943">"تعديل ملف شخصي لشبكة ظاهرية خاصة"</string>
+    <string name="vpn_edit" msgid="8647191407179996943">"تعديل ملف شخصي لشبكة افتراضية خاصة"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"حذف"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"الاتصال بـ <xliff:g id="PROFILE">%s</xliff:g>"</string>
-    <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"‏هل تريد قطع الاتصال بهذه الشبكة الظاهرية الخاصة (VPN)؟"</string>
+    <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"‏هل تريد قطع الاتصال بهذه الشبكة الافتراضية الخاصة (VPN)؟"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"قطع الاتصال"</string>
     <string name="vpn_version" msgid="1939804054179766249">"الإصدار <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="vpn_forget_long" msgid="2232239391189465752">"نسيان الشبكة الظاهرية الخاصة"</string>
-    <string name="vpn_replace_vpn_title" msgid="2963898301277610248">"هل تريد استبدال الشبكة الظاهرية الخاصة الحالية؟"</string>
-    <string name="vpn_set_vpn_title" msgid="4009987321156037267">"هل تريد تشغيل الشبكة الظاهرية الخاصة باستمرار؟"</string>
-    <string name="vpn_first_always_on_vpn_message" msgid="3025322109743675467">"‏عند تشغيل هذا الإعداد، لن تتمكن من الاتصال بالإنترنت إلا بعد أن ينجح اتصال الشبكة الظاهرية الخاصة (VPN)"</string>
-    <string name="vpn_replace_always_on_vpn_enable_message" msgid="2577928591361606641">"‏سيتم استبدال شبكتك الظاهرية الخاصة (VPN) الحالية ولن تتمكن من استخدام اتصال الإنترنت إلا بعد أن ينجح اتصال الشبكة الظاهرية الخاصة"</string>
-    <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"‏أنت متصل حاليًا بشبكة ظاهرية خاصة (VPN) مضبوطة على وضع التشغيل الدائم. وإذا اتصلت بشبكة ظاهرية خاصة أخرى، فسيتم استبدال شبكتك الظاهرية الخاصة الحالية، كما سيتم إيقاف وضع التشغيل الدائم."</string>
-    <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"‏أنت متصل حاليًا بشبكة ظاهرية خاصة (VPN). وإذا اتصلت بشبكة ظاهرية خاصة أخرى، فسيتم استبدال شبكتك الظاهرية الخاصة الحالية."</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"نسيان الشبكة الافتراضية الخاصة"</string>
+    <string name="vpn_replace_vpn_title" msgid="2963898301277610248">"هل تريد استبدال الشبكة الافتراضية الخاصة الحالية؟"</string>
+    <string name="vpn_set_vpn_title" msgid="4009987321156037267">"هل تريد تشغيل الشبكة الافتراضية الخاصة باستمرار؟"</string>
+    <string name="vpn_first_always_on_vpn_message" msgid="3025322109743675467">"‏عند تشغيل هذا الإعداد، لن تتمكن من الاتصال بالإنترنت إلا بعد أن ينجح اتصال الشبكة الافتراضية الخاصة (VPN)"</string>
+    <string name="vpn_replace_always_on_vpn_enable_message" msgid="2577928591361606641">"‏سيتم استبدال شبكتك الافتراضية الخاصة (VPN) الحالية ولن تتمكن من استخدام اتصال الإنترنت إلا بعد أن ينجح اتصال الشبكة الافتراضية الخاصة"</string>
+    <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"‏أنت متصل حاليًا بشبكة افتراضية خاصة (VPN) مضبوطة على وضع التشغيل الدائم. وإذا اتصلت بشبكة افتراضية خاصة أخرى، فسيتم استبدال شبكتك الافتراضية الخاصة الحالية، كما سيتم إيقاف وضع التشغيل الدائم."</string>
+    <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"‏أنت متصل حاليًا بشبكة افتراضية خاصة (VPN). وإذا اتصلت بشبكة افتراضية خاصة أخرى، فسيتم استبدال شبكتك الافتراضية الخاصة الحالية."</string>
     <string name="vpn_turn_on" msgid="2363136869284273872">"تشغيل"</string>
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"يتعذر الاتصال بـ <xliff:g id="VPN_NAME">%1$s</xliff:g>"</string>
-    <string name="vpn_cant_connect_message" msgid="1352832123114214283">"‏لا يتوافق هذا التطبيق مع الشبكة الظاهرية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
+    <string name="vpn_cant_connect_message" msgid="1352832123114214283">"‏لا يتوافق هذا التطبيق مع الشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
-    <string name="vpn_create" msgid="5628219087569761496">"‏إضافة ملف شخصي لشبكة ظاهرية خاصة (VPN)"</string>
+    <string name="vpn_create" msgid="5628219087569761496">"‏إضافة ملف شخصي لشبكة افتراضية خاصة (VPN)"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"تعديل الملف الشخصي"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"حذف الملف الشخصي"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"‏شبكة ظاهرية خاصة (VPN) دائمة التشغيل"</string>
-    <string name="vpn_no_vpns_added" msgid="5002741367858707244">"‏لم تتم إضافة أية شبكات ظاهرية خاصة (VPN)"</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"‏شبكة افتراضية خاصة (VPN) دائمة التشغيل"</string>
+    <string name="vpn_no_vpns_added" msgid="5002741367858707244">"‏لم تتم إضافة أية شبكات افتراضية خاصة (VPN)"</string>
     <string name="vpn_always_on_summary" msgid="2821344524094363617">"‏متابعة الاتصال بشبكة VPN في جميع الأوقات"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"عدم التوافق مع هذا التطبيق"</string>
     <string name="vpn_always_on_summary_active" msgid="8800736191241875669">"تنشيط التشغيل دائمًا"</string>
-    <string name="vpn_require_connection" msgid="8388183166574269666">"حظر أي اتصالات بدون شبكة ظاهرية خاصة"</string>
-    <string name="vpn_require_connection_title" msgid="159053539340576331">"أيتطلب الأمر اتصالاً بشبكة ظاهرية خاصة؟"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"‏حدد ملفًا شخصيًا للشبكة الظاهرية الخاصة (VPN) للاتصال الدائم بها. لن يتم السماح بحركة مرور الشبكة إلا عند الاتصال بهذه الشبكة الظاهرية الخاصة."</string>
+    <string name="vpn_require_connection" msgid="8388183166574269666">"حظر أي اتصالات بدون شبكة افتراضية خاصة"</string>
+    <string name="vpn_require_connection_title" msgid="159053539340576331">"أيتطلب الأمر اتصالاً بشبكة افتراضية خاصة؟"</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"‏حدد ملفًا شخصيًا للشبكة الافتراضية الخاصة (VPN) للاتصال الدائم بها. لن يتم السماح بحركة مرور الشبكة إلا عند الاتصال بهذه الشبكة الافتراضية الخاصة."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"لا شيء"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏تتطلب الشبكة الظاهرية الخاصة (VPN) دائمة التشغيل عنوان IP لكل من الخادم ونظام أسماء النطاقات."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏تتطلب الشبكة الافتراضية الخاصة (VPN) دائمة التشغيل عنوان IP لكل من الخادم ونظام أسماء النطاقات."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"ليس هناك اتصال بالشبكة. يُرجى إعادة المحاولة لاحقًا."</string>
-    <string name="vpn_disconnected" msgid="280531508768927471">"تم قطع الاتصال بالشبكة الظاهرية الخاصة"</string>
+    <string name="vpn_disconnected" msgid="280531508768927471">"تم قطع الاتصال بالشبكة الافتراضية الخاصة"</string>
     <string name="vpn_disconnected_summary" msgid="3082851661207900606">"بدون"</string>
     <string name="vpn_missing_cert" msgid="5357192202207234745">"إحدى الشهادات مفقودة. حاول تعديل الملف الشخصي."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"النظام"</string>
@@ -2894,7 +2893,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"مرر لإلغاء التأمين، كلمة مرور، نقش، رقم تعريف شخصي"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"المنافسة في العمل، عمل، ملف شخصي"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"الملف الشخصي للعمل، ملف شخصي مُدار، يوحِّد، توحيد، عمل، ملف شخصي"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"إيماءة"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"الإيماءات"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"دفع، نقر، دفعات"</string>
     <string name="keywords_backup" msgid="470070289135403022">"نسخ احتياطية، نسخة احتياطية"</string>
     <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"‏إيماءة، حافة، جانب، حافة نشطة، ضغط، قَبض، مساعدة، مساعد، squeezy،‏ squeezie،‏ squeezey،‏ squeezee،‏ ok google، مساعد Google"</string>
@@ -2975,13 +2974,13 @@
     <string name="profile_section_header" msgid="2320848161066912001">"إشعارات العمل"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"السماح بنقاط الإشعار"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"وميض الضوء"</string>
-    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"على شاشة التأمين"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"عرض كل محتوى الإشعارات"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"على الشاشة المقفلة"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"عرض محتوى الإشعارات كاملًا"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"إخفاء المحتوى المهم في الإشعارات"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"عدم عرض إشعارات على الإطلاق"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"ما الطريقة التي تريد عرض الإشعارات بها عندما يكون الجهاز مقفولاً؟"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"الإشعارات"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"عرض كل محتوى إشعارات العمل"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"عرض محتوى إشعارات العمل كاملًا"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"إخفاء المحتوى المهم في إشعارات العمل"</string>
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"عدم عرض إشعارات العمل على الإطلاق"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"ما الطريقة التي تريد استخدامها في عرض إشعارات الملف الشخصي عندما يكون الجهاز في وضع القفل؟"</string>
@@ -2996,14 +2995,12 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"بدون تنبيه صوتي"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"إصدار تنبيه صوتي"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"إصدار تنبيه صوتي والظهور بسرعة على الشاشة"</string>
-    <string name="notification_importance_min_title" msgid="6974673091137544803">"مستوى أهمية منخفض"</string>
-    <string name="notification_importance_low_title" msgid="8131254047772814309">"مستوى أهمية متوسط"</string>
-    <string name="notification_importance_default_title" msgid="9120383978536089489">"مستوى أهمية مرتفع"</string>
-    <string name="notification_importance_high_title" msgid="3058778300264746473">"مستوى أهمية ملحّة"</string>
-    <!-- no translation found for allow_interruption (7136150018111848721) -->
-    <skip />
-    <!-- no translation found for allow_interruption_summary (7870159391333957050) -->
-    <skip />
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"منخفض الأهميّة"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"أهميّة متوسّطة"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"شديد الأهميّة"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"طارئ"</string>
+    <string name="allow_interruption" msgid="7136150018111848721">"السماح بالمقاطعات"</string>
+    <string name="allow_interruption_summary" msgid="7870159391333957050">"السماح للتطبيق بإصدار صوت و/أو اهتزاز و/أو عرض إشعارات منبثقة على الشاشة"</string>
     <string name="notification_channel_summary_min" msgid="5401718014765921892">"أهمية منخفضة"</string>
     <string name="notification_channel_summary_low" msgid="322317684244981244">"متوسط الأهمية"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"أهمية عالية"</string>
@@ -3074,8 +3071,8 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"السماح بنقطة الإشعار"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"إظهار نقطة الإشعار"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"إلغاء وضع \"عدم الإزعاج\""</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"السماح لهذه الإشعارات بمتابعة المقاطعة عند تعيين وضع \"عدم الإزعاج\" على \"ذات الأولوية فقط\""</string>
-    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"على شاشة التأمين"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"السماح لهذه الإشعارات بمقاطعتك عند تعيين وضع \"عدم الإزعاج\" على \"ذات الأولوية فقط\""</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"على الشاشة المقفلة"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"محظور"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"الأولوية"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"حساس"</string>
@@ -3746,8 +3743,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"تلقائي"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"يدوي"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"إخلاء بعض المساحة الآن"</string>
-    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"الإيماءات"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"إيماءات سريعة للتحكم في الهاتف"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"إيماءات سريعة للتحكم في جهازك اللوحي"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"إيماءات سريعة للتحكم في جهازك"</string>
@@ -3779,9 +3775,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"للاطلاع على الإشعارات، مرر سريعًا للأسفل على مستشعر بصمات الإصبع على الجزء الخلفي من جهازك."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"الاطلاع على الإشعارات بسرعة"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"تمرير سريع لأسفل على مستشعر بصمات الإصبع"</string>
-    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"رفع الهاتف إلى أعلى لفتح الكاميرا"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"لفتح الكاميرا تلقائيًا، يمكنك رفع الهاتف في وضع التقاط صورة (بالوضع الأفقي أو الرأسي). تعمل هذه الخاصية عندما يكون الهاتف في وضع السكون أو في وضع القفل."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"التقاط صور عندما يكون الهاتف مقفولاً أو في وضع سكون"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"إيماءة المساعدة"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"الحساسية"</string>
@@ -3805,6 +3798,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"مزامنة بيانات العمل تلقائيًا"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"السماح للتطبيقات بتحديث البيانات تلقائيًا"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"مزامنة الحساب"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"المزامنة قيد التشغيل لـ <xliff:g id="ID_1">%1$d</xliff:g> من إجمالي <xliff:g id="ID_2">%2$d</xliff:g> عنصر"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"المزامنة قيد التشغيل لكل العناصر"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"المزامنة متوقفة لكل العناصر"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"معلومات الجهاز المُدار"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"تتولى مؤسستك إدارة التغييرات والإعدادات."</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"تتولى <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> إدارة التغييرات والإعدادات."</string>
@@ -3843,9 +3839,9 @@
     </plurals>
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"لوحة المفاتيح الافتراضية"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"تعيين على <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"‏تم تشغيل إعداد \"شبكة ظاهرية خاصة (VPN) دائمة التشغيل\""</string>
-    <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"‏تم تشغيل إعداد \"شبكة ظاهرية خاصة (VPN) دائمة التشغيل\" في الملف الشخصي"</string>
-    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"‏تم تشغيل \"شبكة ظاهرية خاصة (VPN) دائمة التشغيل\" في الملف الشخصي للعمل"</string>
+    <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"‏تم تشغيل إعداد \"شبكة افتراضية خاصة (VPN) دائمة التشغيل\""</string>
+    <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"‏تم تشغيل إعداد \"شبكة افتراضية خاصة (VPN) دائمة التشغيل\" في الملف الشخصي"</string>
+    <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"‏تم تشغيل \"شبكة افتراضية خاصة (VPN) دائمة التشغيل\" في الملف الشخصي للعمل"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"‏تم تعيين الخادم الوكيل HTTP العام"</string>
     <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"بيانات اعتماد موثوقة"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
@@ -3929,6 +3925,7 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"تطبيقات الأفلام والتلفزيون"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"معلومات توفير خدمة مشغل شبكة الجوال"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"بدء توفير خدمة مشغل شبكة الجوال"</string>
-    <string name="new_device_suggestion_title" msgid="8346563796032837800">"ما الميزات الجديدة والمثيرة للاهتمام؟"</string>
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"ما الميزات الجديدة والمثيرة للاهتمام؟"</string>
     <string name="new_device_suggestion_summary" msgid="7172709269203435870">"الاطلاع على أفضل 5 ميزات"</string>
+    <string name="disabled_low_ram_device" msgid="3751578499721173344">"لا تتوفر هذه الميزة على هذا الجهاز"</string>
 </resources>

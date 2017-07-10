@@ -392,6 +392,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Panatilihing nakaangat ang iyong daliri upang idagdag ang iba\'t ibang bahagi ng fingerprint mo"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Naidagdag ang fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Kapag nakita mo ang icon na ito, gamitin ang iyong fingerprint para sa pagkakakilanlan o upang aprubahan ang mga pagbili."</string>
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Gawin ito sa ibang pagkakataon"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Laktawan ang pag-set up ng fingerprint?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Pinili mong gamitin ang iyong fingerprint bilang isang paraan upang i-unlock ang iyong telepono. Kung lalaktaw ka ngayon, kakailanganin mo itong i-set up sa ibang pagkakataon. Tumatagal lang nang isang minuto o higit pa ang pag-setup."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"I-set up ang screen lock"</string>
@@ -410,6 +411,8 @@
     <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"Naidagdag mo na ang maximum na bilang ng mga fingerprint"</string>
     <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"Hindi na makapagdagdag ng higit pang fingerprint"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Alisin ang lahat ng fingerprint?"</string>
+    <string name="fingerprint_delete_title" msgid="1368196182612202898">"Alisin ang \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
+    <string name="fingerprint_delete_message" msgid="8597787803567398131">"Gusto mo bang i-delete ang fingerprint na ito?"</string>
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"Hindi mo magagamit ang iyong mga fingerprint upang i-unlock ang telepono mo, magpahintulot ng mga pagbili, o mag-sign in sa mga app"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"Hindi mo magagamit ang iyong mga fingerprint upang i-unlock ang profile sa trabaho mo, magpahintulot ng mga pagbili, o mag-sign in sa mga app para sa trabaho"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Oo, alisin"</string>
@@ -533,20 +536,16 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Baguhin ang naka-unlock na password"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Subukang muli. Pagsubok <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> ng <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Made-delete ang iyong data"</string>
-    <!-- no translation found for lock_last_pattern_attempt_before_wipe_device (1688030823464420974) -->
-    <skip />
-    <!-- no translation found for lock_last_pin_attempt_before_wipe_device (5350785938296254352) -->
-    <skip />
-    <!-- no translation found for lock_last_password_attempt_before_wipe_device (6208035114731421034) -->
-    <skip />
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"Kung maling pattern ang mailalagay mo sa susunod na pagsubok, made-delete ang data ng device na ito"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"Kung maling PIN ang mailalagay mo sa susunod na pagsubok, made-delete ang data ng device na ito"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"Kung maling password ang mailalagay mo sa susunod na pagsubok, made-delete ang data ng device na ito"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Kung maling pattern ang mailalagay mo sa susunod na pagsubok, made-delete ang user na ito"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Kung maling PIN ang mailalagay mo sa susunod na pagsubok, made-delete ang user na ito"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Kung maling password ang mailalagay mo sa susunod na pagsubok, made-delete ang user na ito"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Kung maling pattern ang mailalagay mo sa susunod na pagsubok, made-delete ang iyong profile sa trabaho at ang data nito"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Kung maling PIN ang mailalagay mo sa susunod na pagsubok, made-delete ang iyong profile sa trabaho at ang data nito"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Kung maling password ang mailalagay mo sa susunod na pagsubok, made-delete ang iyong profile sa trabaho at ang data nito"</string>
-    <!-- no translation found for lock_failed_attempts_now_wiping_device (5047439819181833824) -->
-    <skip />
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Masyadong maraming maling pagsubok. Made-delete ang data ng device na ito."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Masyadong maraming maling pagsubok. Made-delete ang user na ito."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Masyadong maraming maling pagsubok. Made-delete ang profile sa trabaho na ito at ang data nito."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"I-dismiss"</string>
@@ -723,11 +722,17 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Awtomatikong i-on ang Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Mag-o-on muli ang Wi‑Fi kapag malapit sa mga naka-save na network na may mataas na kalidad, gaya ng iyong home network"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Hindi available dahil naka-off ang pag-scan para sa Wi‑Fi"</string>
+    <!-- no translation found for wifi_wakeup_summary_scoring_disabled (7607978586276303872) -->
+    <skip />
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Iwasan ang mahihinang koneksyon"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Huwag gumamit ng Wi-Fi network maliban kung mayroon itong mahusay na koneksyon sa Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Gamit lang ng network na may maayos na koneksyon sa Internet"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Kumonekta sa mga bukas na network"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Awtomatikong kumonekta sa mga pampublikong network na may mataas na kalidad"</string>
+    <!-- no translation found for use_open_wifi_automatically_summary_scoring_disabled (8093603801818762806) -->
+    <skip />
+    <!-- no translation found for use_open_wifi_automatically_summary_scorer_unsupported_disabled (4570216998917498610) -->
+    <skip />
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Mag-install ng mga certificate"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Upang pahusayin ang katumpakan ng lokasyon, maaari pa ring tumukoy ng mga Wi-Fi network ang mga app at serbisyo ng system. Maaari mo itong baguhin sa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>mga setting ng pag-i-scan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Upang pahusayin ang katumpakan ng lokasyon, i-on ang pag-scan ng Wi-Fi sa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>mga setting ng pag-scan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1788,13 +1793,6 @@
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="2538303018392590627">"Likhain ang widget at payagan ang access?"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="1584388129273282080">"Pagkatapos mong likhain ang widget, maa-access ng <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ang lahat ng data na ipinapakita nito."</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7037503685859688034">"Palaging payagan ang <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> na lumikha ng mga widget at i-access ang data ng mga ito"</string>
-    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g>d <xliff:g id="HOURS">%2$d</xliff:g>h <xliff:g id="MINUTES">%3$d</xliff:g>m <xliff:g id="SECONDS">%4$d</xliff:g>s"</string>
-    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g>h <xliff:g id="MINUTES">%2$d</xliff:g>m <xliff:g id="SECONDS">%3$d</xliff:g>s"</string>
-    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>m <xliff:g id="SECONDS">%2$d</xliff:g>s"</string>
-    <string name="battery_history_seconds" msgid="4283492130945761685">"mga <xliff:g id="SECONDS">%1$d</xliff:g>"</string>
-    <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g>a <xliff:g id="HOURS">%2$d</xliff:g>o <xliff:g id="MINUTES">%3$d</xliff:g>m"</string>
-    <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g>o <xliff:g id="MINUTES">%2$d</xliff:g>m"</string>
-    <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g>m"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Mga istatistika sa paggamit"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Mga istatistika sa paggamit"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Uriin ayon sa:"</string>
@@ -1806,8 +1804,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Mga screen reader, display, kontrol sa pakikipag-ugnayan"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Mga Setting ng Paningin"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Maaari mong i-customize ang device na ito upang maging angkop sa iyong mga pangangailangan. Maaaring baguhin ang mga feature sa accessibility na ito sa ibang pagkakataon sa Mga Setting."</string>
-    <!-- no translation found for vision_settings_suggestion_title (917294957154878441) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"Lakihan ang font"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Mga screen reader"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio at text sa screen"</string>
     <string name="display_category_title" msgid="685461049938269166">"Display"</string>
@@ -1828,10 +1825,10 @@
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Upang mag-zoom"</b>", mabilisang i-tap ang screen nang 3 beses.\n"<ul><li>"I-drag ang 2 o higit pang daliri upang mag-scroll"</li>\n<li>"I-pinch ang 2 o higit pang daliri upang isaayos ang zoom"</li></ul>\n\n<b>"Upang mag-zoom pansamantala"</b>", mabilisang i-tap ang screen nang 3 beses at pumindot nang matagal sa pangatlong pag-tap.\n"<ul><li>"Mag-drag upang gumalaw-galaw sa screen"</li>\n<li>"Iangat ang iyong daliri upang mag-zoom out"</li></ul>\n\n"Hindi ka maaaring mag-zoom in sa keyboard at navigation bar."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Kapag naka-on ang pag-magnify, gamitin ang button na Pagiging Naa-access sa ibaba ng screen upang mabilisang mag-magnify.\n\n"<b>"Upang mag-zoom"</b>", i-tap ang button na Pagiging Naa-access, pagkatapos ay mag-tap saanman sa screen.\n"<ul><li>"I-drag ang 2 o higit pang daliri upang mag-scroll"</li>\n<li>"I-pinch ang 2 o higit pang daliri upang isaayos ang zoom"</li></ul>\n\n<b>"Upang mag-zoom pansamantala"</b>", i-tap ang button na Pagiging Naa-access, pagkatapos ay pumindot nang matagal saanman sa screen.\n"<ul><li>"Mag-drag upang gumalaw-galaw sa screen"</li>\n<li>"Iangat ang daliri upang mag-zoom out"</li></ul>\n\n"Hindi ka maaaring mag-zoom in sa keyboard o navigation bar."</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang button na Pagiging Naa-access. Upang gumamit ng pag-magnify, pindutin nang matagal ang button na Pagiging Naa-access, pagkatapos ay piliin ang pag-magnify."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Shortcut sa pagiging naa-access"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Shortcut gamit ang volume key"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Serbisyo ng shortcut"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Payagan mula sa lock screen"</string>
-    <string name="accessibility_shortcut_description" msgid="6488524140219209763">"Kapag naka-on ang shortcut, maaari mong pindutin nang 3 segundo ang dalawang button ng volume upang magsimula ng feature ng pagiging naa-access."</string>
+    <string name="accessibility_shortcut_description" msgid="1765853731190717372">"Kapag naka-on ang shortcut, maaari mong pindutin ang dalawang volume key nang 3 segundo upang magsimula ng feature sa pagiging naa-access."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Text na high contrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"I-auto update pag-magnify ng screen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"I-update pag-magnify ng screen sa app transition"</string>
@@ -1844,7 +1841,7 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Maaaring makaapekto sa performance"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"I-click kapag huminto ang pointer"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Pagkaantala bago ang pag-click"</string>
-    <string name="accessibility_summary_default_combination" msgid="90096949592817459">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
+    <string name="preference_summary_default_combination" msgid="8532964268242666060">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"NAKA-ON"</string>
     <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"NAKA-OFF"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Ipakita sa Mga Mabilisang Setting"</string>
@@ -1995,24 +1992,27 @@
     <string name="controls_subtitle" msgid="390468421138288702">"Isaayos ang paggamit ng power"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Mga kasamang package"</string>
     <string name="battery_abnormal_details_title" msgid="5469019021857291216">"Mga app na umuubos ng baterya"</string>
-    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"Panatilihing gumagana ang device"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"Panatilihing aktibo ang device"</string>
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Pinapagana ang device sa background"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Madalas humiling ng lokasyon"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> (na) app na hindi normal na gumagana"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Ihinto ang app?"</string>
-    <string name="dialog_stop_message" product="default" msgid="9149534230295983971">"Hindi mapamahalaan nang normal ng iyong telepono ang baterya dahil pinapanatili ng <xliff:g id="APP">%1$s</xliff:g> na gumagana ang iyong telepono.\n\nUpang subukang ayusin ang isyung ito, maaari mong sapilitang ihinto ang app.\n\nKung patuloy pa rin itong nangyayari, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="5702924180465982412">"Hindi mapamahalaan nang normal ng iyong tablet ang baterya dahil pinapanatili ng <xliff:g id="APP">%1$s</xliff:g> na gumagana ang iyong tablet.\n\nUpang subukang ayusin ang isyung ito, maaari mong sapilitang ihinto ang app.\n\nKung patuloy pa rin itong nangyayari, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
-    <string name="dialog_stop_message" product="device" msgid="9201053069493107713">"Hindi mapamahalaan nang normal ng iyong device ang baterya dahil pinapanatili ng <xliff:g id="APP">%1$s</xliff:g> na gumagana ang iyong device.\n\nUpang subukang ayusin ang isyung ito, maaari mong sapilitang ihinto ang app.\n\nKung patuloy pa rin itong nangyayari, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Hindi magawa ng iyong teleponong pamahalaan nang normal ang baterya dahil pinapanatiling bukas ng <xliff:g id="APP">%1$s</xliff:g> ang telepono mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang app.\n\nKung patuloy na mangyayari ito, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Hindi magawa ng iyong tablet na pamahalaan nang normal ang baterya dahil pinapanatiling bukas ng <xliff:g id="APP">%1$s</xliff:g> ang tablet mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang app.\n\nKung patuloy na mangyayari ito, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"Hindi magawa ng iyong device na pamahalaan nang normal ang baterya dahil pinapanatiling bukas ng <xliff:g id="APP">%1$s</xliff:g> ang device mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang app.\n\nKung patuloy na mangyayari ito, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"Hindi magawa ng iyong teleponong pamahalaan nang normal ang baterya dahil palaging wine-wake ng <xliff:g id="APP_0">%1$s</xliff:g> ang telepono mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang <xliff:g id="APP_1">%1$s</xliff:g>.\n\nKung patuloy na mangyayari ito, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"Hindi magawa ng iyong tablet na pamahalaan nang normal ang baterya dahil palaging wine-wake ng <xliff:g id="APP_0">%1$s</xliff:g> ang tablet mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang <xliff:g id="APP_1">%1$s</xliff:g>.\n\nKung patuloy na mangyayari ito, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"Hindi magawa ng iyong device na pamahalaan nang normal ang baterya dahil palaging wine-wake ng <xliff:g id="APP_0">%1$s</xliff:g> ang device mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang <xliff:g id="APP_1">%1$s</xliff:g>.\n\nKung patuloy na mangyayari ito, maaaring kailanganin mong i-uninstall ang app upang mapahusay ang performance ng baterya."</string>
     <string name="dialog_stop_ok" msgid="2319777211264004900">"Ihinto ang app"</string>
-    <string name="dialog_background_check_title" msgid="1525936543485084879">"I-off ang paggamit sa background?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="5539009263025812279">"Hindi mapamahalaan nang normal ng iyong telepono ang baterya dahil pinapanatili ng <xliff:g id="APP">%1$s</xliff:g> na gumagana ang telepono mo.\n\nUpang matugunan ang isyung ito, maaaring pigilan ng telepono mo ang pagtakbo ng app sa background."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="4001747292234087612">"Hindi mapamahalaan nang normal ng iyong tablet ang baterya dahil pinapanatili ng <xliff:g id="APP">%1$s</xliff:g> na gumagana ang tablet mo.\n\nUpang matugunan ang isyung ito, maaaring pigilan ng tablet mo ang pagtakbo ng app sa background."</string>
-    <string name="dialog_background_check_message" product="device" msgid="585341224642457664">"Hindi mapamahalaan nang normal ng iyong device ang baterya dahil pinapanatili ng <xliff:g id="APP">%1$s</xliff:g> na gumagana ang device mo.\n\nUpang matugunan ang isyung ito, maaaring pigilan ng device mo ang pagtakbo ng app sa background."</string>
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"I-off ang paggamit sa background at ihinto ang app?"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"Hindi magawa ng iyong teleponong pamahalaan nang normal ang baterya dahil palaging wine-wake ng <xliff:g id="APP_0">%1$s</xliff:g> ang telepono mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang <xliff:g id="APP_1">%1$s</xliff:g> at pigilan ito sa pagtakbo sa background."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"Hindi magawa ng iyong tablet na pamahalaan nang normal ang baterya dahil palaging wine-wake ng <xliff:g id="APP_0">%1$s</xliff:g> ang tablet mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang <xliff:g id="APP_1">%1$s</xliff:g> at pigilan ito sa pagtakbo sa background."</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"Hindi magawa ng iyong device na pamahalaan nang normal ang baterya dahil palaging wine-wake ng <xliff:g id="APP_0">%1$s</xliff:g> ang device mo.\n\nUpang subukang ayusin ang isyung ito, maaari mong ihinto ang <xliff:g id="APP_1">%1$s</xliff:g> at pigilan ito sa pagtakbo sa background."</string>
     <string name="dialog_background_check_ok" msgid="412876934682899659">"I-off"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"I-off ang lokasyon?"</string>
-    <string name="dialog_location_message" product="default" msgid="7684240588903005427">"Hindi mapamahalaan nang normal ng iyong telepono ang baterya dahil patuloy ang paghiling ng <xliff:g id="APP">%1$s</xliff:g> ng iyong lokasyon kapag hindi mo ginagamit ang app.\n\nUpang ayusin ang isyung ito, maaari mong i-off ang lokasyon para sa app na ito."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7439311770795993356">"Hindi mapamahalaan nang normal ng iyong tablet ang baterya dahil patuloy ang paghiling ng <xliff:g id="APP">%1$s</xliff:g> ng iyong lokasyon kapag hindi mo ginagamit ang app.\n\nUpang ayusin ang isyung ito, maaari mong i-off ang lokasyon para sa app na ito."</string>
-    <string name="dialog_location_message" product="device" msgid="6285773079775018012">"Hindi mapamahalaan nang normal ng iyong device ang baterya dahil patuloy ang paghiling ng <xliff:g id="APP">%1$s</xliff:g> ng iyong lokasyon kapag hindi mo ginagamit ang app.\n\nUpang ayusin ang isyung ito, maaari mong i-off ang lokasyon para sa app na ito."</string>
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"Hindi magawa ng iyong teleponong pamahalaan nang normal ang baterya dahil palaging hinihiling ng <xliff:g id="APP">%1$s</xliff:g> ang lokasyon mo kapag hindi mo ginagamit ang app.\n\nUpang ayusin ang isyung ito, maaari mong i-off ang lokasyon para sa app na ito."</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"Hindi magawa ng iyong tablet na pamahalaan nang normal ang baterya dahil palaging hinihiling ng <xliff:g id="APP">%1$s</xliff:g> ang lokasyon mo kapag hindi mo ginagamit ang app.\n\nUpang ayusin ang isyung ito, maaari mong i-off ang lokasyon para sa app na ito."</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"Hindi magawa ng iyong device na pamahalaan nang normal ang baterya dahil palaging hinihiling ng <xliff:g id="APP">%1$s</xliff:g> ang lokasyon mo kapag hindi mo ginagamit ang app.\n\nUpang ayusin ang isyung ito, maaari mong i-off ang lokasyon para sa app na ito."</string>
     <string name="dialog_location_ok" msgid="4572391197601313986">"I-off"</string>
     <string name="power_screen" msgid="3023346080675904613">"Screen"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Flashlight"</string>
@@ -2086,8 +2086,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> ng kabuuang baterya"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Breakdown mula noong huling napuno ang baterya"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Noong huling napuno ang baterya"</string>
-    <!-- no translation found for battery_footer_summary (2725134194905566773) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="67169726550144016">"Pagtatantya lang ang data ng paggamit ng baterya at maaaring magbago batay sa paggamit"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Habang aktibong ginagamit"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Habang nasa background"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Paggamit ng baterya"</string>
@@ -2743,8 +2742,8 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Mga default na app"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Mga wika, oras, backup, update"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Mga Setting"</string>
-    <string name="search_menu" msgid="6283419262313758339">"Mga setting ng paghahanap"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"Mga setting ng paghahanap"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Hanapin sa mga setting"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"Hanapin sa mga setting"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, koneksyon sa network"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"text message, pag-text, mga mensahe, pagmemensahe"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte"</string>
@@ -2786,10 +2785,10 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"i-slide upang i-unlock, password, pattern, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"hamon sa trabaho, trabaho, profile"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"profile sa trabaho, pinamamahalaang profile, pagsamahin, pagsasama, trabaho, profile"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"galaw"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"mga galaw"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"magbayad, mag-tap, mga pagbabayad"</string>
     <string name="keywords_backup" msgid="470070289135403022">"backup, i-back up"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"galaw, edge, gilid, aktibong edge, i-squeeze, i-grip, tulong, assistant, squeezy, squeezie, squeezey, squeezee, ok google, google assistant"</string>
+    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"galaw, edge, gilid, active edge, i-squeeze, i-grip, tulong, assistant, squeezy, squeezie, squeezey, squeezee, ok google, google assistant"</string>
     <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"galaw, i-wake, mga notification, screen, display, naka-off ang screen, naka-on ang screen, i-squeeze, edge, naka-sleep, i-sleep, i-grip"</string>
     <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"galaw, katahimikan, i-snooze, alarm, papasok na tawag, tahimik, display, lockscreen, i-squeeze, i-grip, edge, ihinto"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"I-set up ang Tag ng NFC sa Wi-Fi"</string>
@@ -2888,10 +2887,8 @@
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Katamtaman"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Mataas"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Kinakailangan"</string>
-    <!-- no translation found for allow_interruption (7136150018111848721) -->
-    <skip />
-    <!-- no translation found for allow_interruption_summary (7870159391333957050) -->
-    <skip />
+    <string name="allow_interruption" msgid="7136150018111848721">"Payagan ang mga pagkaantala"</string>
+    <string name="allow_interruption_summary" msgid="7870159391333957050">"Hayaan ang app na tumunog, mag-vibrate, at/o mag-pop ng mga notification sa screen"</string>
     <string name="notification_channel_summary_min" msgid="5401718014765921892">"Hindi masyadong mahalaga"</string>
     <string name="notification_channel_summary_low" msgid="322317684244981244">"Medyo mahalaga"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Napakahalaga"</string>
@@ -3550,8 +3547,7 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Awtomatiko"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manu-mano"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Magbakante ng espasyo ngayon"</string>
-    <!-- no translation found for gesture_preference_title (8155668859866666018) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Mga Galaw"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Mga mabilisang galaw upang makontrol ang iyong telepono"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Mga mabilisang galaw upang kontrolin ang iyong tablet"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Mga mabilisang galaw upang kontrolin ang iyong device"</string>
@@ -3583,9 +3579,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Upang makita ang iyong mga notification, mag-swipe pababa sa sensor para sa fingerprint sa likod ng device mo."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Mabilisang tingnan ang mga notification"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Mag-swipe pababa sa sensor para sa fingerprint"</string>
-    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Itaas upang buksan ang camera"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Upang awtomatikong buksan ang camera, iangat ang iyong telepono at iposisyon ito para sa pagkuha ng larawan (landscape o portrait). Gagana kapag naka-sleep o naka-lock ang iyong telepono."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"Kumuha ng larawan kapag naka-sleep o naka-lock ang telepono"</string>
     <string name="assist_gesture_title" msgid="7746563137898655539">"Galaw para sa tulong"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Pagkasensitibo"</string>
@@ -3609,6 +3602,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Awtomatikong i-sync ang data sa trabaho"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Hayaan ang mga app na awtomatikong mag-refresh ng data"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Pag-sync ng account"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Naka-on ang pag-sync para sa <xliff:g id="ID_1">%1$d</xliff:g> sa <xliff:g id="ID_2">%2$d</xliff:g> (na) item"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"Naka-on ang pag-sync para sa lahat ng item"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Naka-off ang pag-sync para sa lahat ng item"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Impormasyon ng pinamamahalaang device"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Mga pagbabago at setting na pinamamahalaan ng iyong organisasyon"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"Mga pagbabago at setting na pinamamahalaan ng <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
@@ -3705,6 +3701,7 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"Mga app sa Pelikula at TV"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Impormasyon sa Provisioning ng Carrier"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"I-trigger ang Provisioning ng Carrier"</string>
-    <string name="new_device_suggestion_title" msgid="8346563796032837800">"Ano\'ng bago at kapana-panabik?"</string>
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"Ano ang bago at kapana-panabik?"</string>
     <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Tingnan ang nangungunang 5 feature"</string>
+    <string name="disabled_low_ram_device" msgid="3751578499721173344">"Hindi available ang feature na ito sa device na ito"</string>
 </resources>
