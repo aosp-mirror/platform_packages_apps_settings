@@ -94,4 +94,11 @@ public class BackgroundCheckActionTest {
 
         assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
     }
+
+    @Test
+    public void testConstructor_batteryUtilsNotNull() {
+        mBackgroundCheckAction = new BackgroundCheckAction(mContext);
+
+        assertThat(mBackgroundCheckAction.mBatteryUtils).isNotNull();
+    }
 }
