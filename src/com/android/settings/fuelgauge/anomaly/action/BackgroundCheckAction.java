@@ -38,6 +38,7 @@ public class BackgroundCheckAction extends AnomalyAction {
         super(context);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_BACKGROUND_CHECK;
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
