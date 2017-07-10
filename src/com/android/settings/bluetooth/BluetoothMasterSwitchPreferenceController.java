@@ -86,11 +86,8 @@ public class BluetoothMasterSwitchPreferenceController extends AbstractPreferenc
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_TOGGLE_BLUETOOTH.equals(preference.getKey())) {
-            final String fragmentClass = mBluetoothFeatureProvider.isPairingPageEnabled() ?
-                    BluetoothSettings.class.getName() :
-                    BluetoothSettingsObsolete.class.getName();
-            mActivity.startPreferencePanelAsUser(mFragment, fragmentClass, null, R.string.bluetooth,
-                    null, new UserHandle(UserHandle.myUserId()));
+            mActivity.startPreferencePanelAsUser(mFragment, BluetoothSettings.class.getName(), null,
+                    R.string.bluetooth, null, new UserHandle(UserHandle.myUserId()));
             return true;
         }
         return super.handlePreferenceTreeClick(preference);
