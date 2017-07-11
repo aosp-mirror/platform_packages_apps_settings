@@ -70,10 +70,8 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onStart() {
         super.onStart();
 
-        if (mLocalAdapter != null) {
-            updateContent(mLocalAdapter.getBluetoothState());
-            mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
-        }
+        updateContent(mLocalAdapter.getBluetoothState());
+        mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
     }
 
     @Override
