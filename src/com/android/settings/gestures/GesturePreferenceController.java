@@ -17,6 +17,8 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
@@ -27,14 +29,20 @@ import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public abstract class GesturePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnStart, OnStop {
+        LifecycleObserver, OnStart, OnStop, OnCreate, OnSaveInstanceState  {
+
+    @VisibleForTesting
+    static final String KEY_VIDEO_PAUSED = "key_video_paused";
 
     private VideoPreference mVideoPreference;
+    private boolean mVideoPaused;
 
     public GesturePreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
@@ -67,6 +75,21 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mVideoPaused = savedInstanceState.getBoolean(KEY_VIDEO_PAUSED, false);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mVideoPreference != null) {
+            mVideoPaused = mVideoPreference.isVideoPaused();
+        }
+        outState.putBoolean(KEY_VIDEO_PAUSED, mVideoPaused);
+    }
+
+    @Override
     public void onStop() {
         if (mVideoPreference != null) {
             mVideoPreference.onViewInvisible();
@@ -76,7 +99,7 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
     @Override
     public void onStart() {
         if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible();
+            mVideoPreference.onViewVisible(mVideoPaused);
         }
     }
 
