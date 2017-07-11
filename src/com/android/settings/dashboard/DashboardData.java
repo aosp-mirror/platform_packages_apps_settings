@@ -222,14 +222,15 @@ public class DashboardData {
         final int hiddenSuggestion =
                 hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
 
-        /* Top suggestion/condition header. This will be present when there is any suggestion or
-         * condition to show, except in the case that there is only conditions to show and the
-         * mode is fully expanded. */
+        /* Top suggestion/condition header. This will be present when there is any suggestion
+         * and the mode is collapsed, or it only has conditions and the mode is not fully
+         * expanded. */
         addToItemList(new SuggestionConditionHeaderData(conditions, hiddenSuggestion),
                 R.layout.suggestion_condition_header,
                 STABLE_ID_SUGGESTION_CONDITION_TOP_HEADER,
-                hasSuggestions
-                        || hasConditions && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED);
+                hasSuggestions && mSuggestionConditionMode == HEADER_MODE_COLLAPSED
+                        || !hasSuggestions && hasConditions
+                        && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED);
 
         /* Suggestion container. This is the card view that contains the list of suggestions.
          * This will be added whenever the suggestion list is not empty */

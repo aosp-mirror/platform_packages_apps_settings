@@ -402,7 +402,7 @@ public class DashboardAdapterTest {
                 new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
 
         mDashboardAdapter.onBindConditionAndSuggestion(
-                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION + 1);
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
 
         verify(data).setAdapter(any(SuggestionAdapter.class));
         // should not crash
