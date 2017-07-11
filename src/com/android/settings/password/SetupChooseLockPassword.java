@@ -21,6 +21,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -73,6 +74,9 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @VisibleForTesting
         static final int REQUEST_SCREEN_LOCK_OPTIONS = 1;
 
+        @Nullable
+        private Button mOptionsButton;
+
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
@@ -86,9 +90,9 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             boolean showOptionsButton = getActivity().getIntent().getBooleanExtra(
                     ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (showOptionsButton) {
-                Button optionsButton = view.findViewById(R.id.screen_lock_options);
-                optionsButton.setVisibility(View.VISIBLE);
-                optionsButton.setOnClickListener(this);
+                mOptionsButton = view.findViewById(R.id.screen_lock_options);
+                mOptionsButton.setVisibility(View.VISIBLE);
+                mOptionsButton.setOnClickListener(this);
             }
         }
 
@@ -166,6 +170,15 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                     activity.setResult(resultCode, data);
                     activity.finish();
                 }
+            }
+        }
+
+        @Override
+        protected void updateUi() {
+            super.updateUi();
+            if (mOptionsButton != null) {
+                mOptionsButton.setVisibility(
+                        mUiStage == Stage.Introduction ? View.VISIBLE : View.GONE);
             }
         }
     }
