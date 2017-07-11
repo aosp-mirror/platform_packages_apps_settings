@@ -53,14 +53,16 @@ public class BatteryUtils {
     public static final int SDK_NULL = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({StatusType.FOREGROUND,
+    @IntDef({StatusType.SCREEN_USAGE,
+            StatusType.FOREGROUND,
             StatusType.BACKGROUND,
             StatusType.ALL
     })
     public @interface StatusType {
-        int FOREGROUND = 0;
-        int BACKGROUND = 1;
-        int ALL = 2;
+        int SCREEN_USAGE = 0;
+        int FOREGROUND = 1;
+        int BACKGROUND = 2;
+        int ALL = 3;
     }
 
     private static final String TAG = "BatteryUtils";
@@ -96,6 +98,8 @@ public class BatteryUtils {
         }
 
         switch (type) {
+            case StatusType.SCREEN_USAGE:
+                return getScreenUsageTimeMs(uid, which);
             case StatusType.FOREGROUND:
                 return getProcessForegroundTimeMs(uid, which);
             case StatusType.BACKGROUND:
@@ -105,6 +109,29 @@ public class BatteryUtils {
                         + getProcessBackgroundTimeMs(uid, which);
         }
         return 0;
+    }
+
+    private long getScreenUsageTimeMs(BatteryStats.Uid uid, int which, long rawRealTimeUs) {
+        final int foregroundTypes[] = {BatteryStats.Uid.PROCESS_STATE_TOP};
+        Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
+
+        long timeUs = 0;
+        for (int type : foregroundTypes) {
+            final long localTime = uid.getProcessStateTime(type, rawRealTimeUs, which);
+            Log.v(TAG, "type: " + type + " time(us): " + localTime);
+            timeUs += localTime;
+        }
+        Log.v(TAG, "foreground time(us): " + timeUs);
+
+        // Return the min value of STATE_TOP time and foreground activity time, since both of these
+        // time have some errors
+        return convertUsToMs(
+                Math.min(timeUs, getForegroundActivityTotalTimeUs(uid, rawRealTimeUs)));
+    }
+
+    private long getScreenUsageTimeMs(BatteryStats.Uid uid, int which) {
+        final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
+        return getScreenUsageTimeMs(uid, which, rawRealTimeUs);
     }
 
     private long getProcessBackgroundTimeMs(BatteryStats.Uid uid, int which) {
@@ -119,21 +146,8 @@ public class BatteryUtils {
 
     private long getProcessForegroundTimeMs(BatteryStats.Uid uid, int which) {
         final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
-        final int foregroundTypes[] = {BatteryStats.Uid.PROCESS_STATE_TOP};
-        Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
-
-        long timeUs = 0;
-        for (int type : foregroundTypes) {
-            final long localTime = uid.getProcessStateTime(type, rawRealTimeUs, which);
-            Log.v(TAG, "type: " + type + " time(us): " + localTime);
-            timeUs += localTime;
-        }
-        Log.v(TAG, "foreground time(us): " + timeUs);
-
-        // Return the min value of STATE_TOP time and foreground activity time, since both of these
-        // time have some errors.
-        return convertUsToMs(
-                Math.min(timeUs, getForegroundActivityTotalTimeUs(uid, rawRealTimeUs)));
+        return getScreenUsageTimeMs(uid, which, rawRealTimeUs)
+                + convertUsToMs(getForegroundServiceTotalTimeUs(uid, rawRealTimeUs));
     }
 
     /**
@@ -183,7 +197,7 @@ public class BatteryUtils {
         for (int i = 0, size = sippers.size(); i < size; i++) {
             final BatteryStats.Uid uid = sippers.get(i).uidObj;
             if (uid != null) {
-                final long timeMs = getProcessTimeMs(StatusType.FOREGROUND, uid,
+                final long timeMs = getProcessTimeMs(StatusType.SCREEN_USAGE, uid,
                         BatteryStats.STATS_SINCE_CHARGED);
                 activityTimeArray.put(uid.getUid(), timeMs);
                 totalActivityTimeMs += timeMs;
@@ -381,6 +395,16 @@ public class BatteryUtils {
     @VisibleForTesting
     long getForegroundActivityTotalTimeUs(BatteryStats.Uid uid, long rawRealtimeUs) {
         final BatteryStats.Timer timer = uid.getForegroundActivityTimer();
+        if (timer != null) {
+            return timer.getTotalTimeLocked(rawRealtimeUs, BatteryStats.STATS_SINCE_CHARGED);
+        }
+
+        return 0;
+    }
+
+    @VisibleForTesting
+    long getForegroundServiceTotalTimeUs(BatteryStats.Uid uid, long rawRealtimeUs) {
+        final BatteryStats.Timer timer = uid.getForegroundServiceTimer();
         if (timer != null) {
             return timer.getTotalTimeLocked(rawRealtimeUs, BatteryStats.STATS_SINCE_CHARGED);
         }

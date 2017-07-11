@@ -337,13 +337,13 @@ public class PowerUsageSummaryTest {
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
-                R.string.battery_screen_usage);
+        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
         doReturn(mRealContext).when(mFragment).getContext();
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Screen usage 2m");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2m");
     }
 
     @Test
