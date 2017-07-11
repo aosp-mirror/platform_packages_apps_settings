@@ -48,6 +48,8 @@ public class DonutView extends View {
     private String mPercentString;
     private String mFullString;
     private boolean mShowPercentString = true;
+    private int mMeterBackgroundColor;
+    private int mMeterConsumedColor;
 
     public DonutView(Context context) {
         super(context);
@@ -55,18 +57,18 @@ public class DonutView extends View {
 
     public DonutView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        int meterBackgroundColor = context.getColor(R.color.meter_background_color);
-        int meterConsumedColor = Utils.getDefaultColor(mContext, R.color.meter_consumed_color);
+        mMeterBackgroundColor = context.getColor(R.color.meter_background_color);
+        mMeterConsumedColor = Utils.getDefaultColor(mContext, R.color.meter_consumed_color);
         boolean applyColorAccent = true;
         Resources resources = context.getResources();
         mStrokeWidth = resources.getDimension(R.dimen.storage_donut_thickness);
 
         if (attrs != null) {
             TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.DonutView);
-            meterBackgroundColor = styledAttrs.getColor(R.styleable.DonutView_meterBackgroundColor,
-                    meterBackgroundColor);
-            meterConsumedColor = styledAttrs.getColor(R.styleable.DonutView_meterConsumedColor,
-                    meterConsumedColor);
+            mMeterBackgroundColor = styledAttrs.getColor(R.styleable.DonutView_meterBackgroundColor,
+                    mMeterBackgroundColor);
+            mMeterConsumedColor = styledAttrs.getColor(R.styleable.DonutView_meterConsumedColor,
+                    mMeterConsumedColor);
             applyColorAccent = styledAttrs.getBoolean(R.styleable.DonutView_applyColorAccent,
                     true);
             mShowPercentString = styledAttrs.getBoolean(R.styleable.DonutView_showPercentString,
@@ -81,14 +83,14 @@ public class DonutView extends View {
         mBackgroundCircle.setStrokeCap(Paint.Cap.BUTT);
         mBackgroundCircle.setStyle(Paint.Style.STROKE);
         mBackgroundCircle.setStrokeWidth(mStrokeWidth);
-        mBackgroundCircle.setColor(meterBackgroundColor);
+        mBackgroundCircle.setColor(mMeterBackgroundColor);
 
         mFilledArc = new Paint();
         mFilledArc.setAntiAlias(true);
         mFilledArc.setStrokeCap(Paint.Cap.BUTT);
         mFilledArc.setStyle(Paint.Style.STROKE);
         mFilledArc.setStrokeWidth(mStrokeWidth);
-        mFilledArc.setColor(meterConsumedColor);
+        mFilledArc.setColor(mMeterConsumedColor);
 
         if (applyColorAccent) {
             final ColorFilter mAccentColorFilter =
@@ -179,12 +181,24 @@ public class DonutView extends View {
         invalidate();
     }
 
+    @ColorRes
+    public int getMeterBackgroundColor() {
+        return mMeterBackgroundColor;
+    }
+
     public void setMeterBackgroundColor(@ColorRes int meterBackgroundColor) {
+        mMeterBackgroundColor = meterBackgroundColor;
         mBackgroundCircle.setColor(meterBackgroundColor);
         invalidate();
     }
 
+    @ColorRes
+    public int getMeterConsumedColor() {
+        return mMeterConsumedColor;
+    }
+
     public void setMeterConsumedColor(@ColorRes int meterConsumedColor) {
+        mMeterConsumedColor = meterConsumedColor;
         mFilledArc.setColor(meterConsumedColor);
         invalidate();
     }
