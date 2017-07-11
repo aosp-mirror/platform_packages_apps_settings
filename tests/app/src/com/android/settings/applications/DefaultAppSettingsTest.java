@@ -32,7 +32,7 @@ import org.junit.Test;
  * Test for Advanced App preferences.
  */
 @SmallTest
-public class AdvancedAppSettingsTest extends InstrumentationTestCase {
+public class DefaultAppSettingsTest extends InstrumentationTestCase {
 
     private UiDevice mDevice;
     private Context mTargetContext;

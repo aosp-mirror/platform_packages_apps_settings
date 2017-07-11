@@ -71,7 +71,8 @@ public class ManageAssist extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DefaultAssistPreferenceController(context));
+        controllers.add(new DefaultAssistPreferenceController(context, "default_assist",
+                true /* showSetting */));
         controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
                 true /* assistOnly */));
         controllers.add(new AssistContextPreferenceController(context, lifecycle));
@@ -80,7 +81,6 @@ public class ManageAssist extends DashboardFragment {
         controllers.add(new DefaultVoiceInputPreferenceController(context, lifecycle));
         return controllers;
     }
-
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {

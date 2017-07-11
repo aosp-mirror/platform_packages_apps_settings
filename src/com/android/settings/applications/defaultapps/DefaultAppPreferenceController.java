@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -54,9 +55,11 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
         CharSequence defaultAppLabel = getDefaultAppLabel();
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);
+            preference.setIcon(getDefaultAppIcon());
         } else {
             Log.d(TAG, "No default app");
             preference.setSummary(R.string.app_list_preference_none);
+            preference.setIcon(null);
         }
         mayUpdateGearIcon(app, preference);
     }
@@ -81,6 +84,17 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
      */
     protected Intent getSettingIntent(DefaultAppInfo info) {
         //By default return null. It's up to subclasses to provide logic.
+        return null;
+    }
+
+    public Drawable getDefaultAppIcon() {
+        if (!isAvailable()) {
+            return null;
+        }
+        final DefaultAppInfo app = getDefaultAppInfo();
+        if (app != null) {
+            return app.loadIcon();
+        }
         return null;
     }
 

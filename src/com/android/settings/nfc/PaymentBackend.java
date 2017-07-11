@@ -42,7 +42,7 @@ public class PaymentBackend {
     }
 
     public static class PaymentAppInfo {
-        CharSequence label;
+        public CharSequence label;
         CharSequence description;
         Drawable banner;
         boolean isDefault;

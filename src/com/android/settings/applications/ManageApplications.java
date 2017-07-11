@@ -687,7 +687,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                             ADVANCED_SETTINGS);
                 } else {
                     ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                            AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
+                            DefaultAppSettings.class.getName(), null, R.string.configure_apps,
                             null, this, ADVANCED_SETTINGS);
                 }
                 return true;
