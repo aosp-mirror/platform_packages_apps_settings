@@ -27,6 +27,9 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineListPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -121,4 +124,16 @@ public class LocationPreferenceController extends AbstractPreferenceController
         }
         return 0;
     }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                LocationSettings.class.getName(), KEY_LOCATION,
+                mContext.getString(R.string.location_settings_title));
+
+        return new InlineListPayload(Secure.LOCATION_MODE,
+                ResultPayload.SettingsSource.SECURE, intent, isAvailable(),
+                Secure.LOCATION_MODE_HIGH_ACCURACY + 1);
+    }
+
 }

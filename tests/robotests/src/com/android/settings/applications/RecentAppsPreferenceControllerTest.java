@@ -184,8 +184,6 @@ public class RecentAppsPreferenceControllerTest {
         final Configuration configuration = new Configuration();
         configuration.locale = Locale.US;
         when(mMockContext.getResources().getConfiguration()).thenReturn(configuration);
-        when(mMockContext.getString(eq(R.string.battery_history_minutes_no_seconds), anyInt()))
-            .thenReturn(mContext.getString(R.string.battery_history_minutes_no_seconds, 45));
 
         mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
