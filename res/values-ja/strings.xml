@@ -167,7 +167,7 @@
     <string name="proxy_settings_title" msgid="9049437837600320881">"プロキシ"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"消去"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"プロキシポート"</string>
-    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"プロキシを不使用"</string>
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"プロキシをバイパス"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"初期設定に戻す"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"終了"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"プロキシのホスト名"</string>
@@ -310,9 +310,9 @@
     <string name="date_picker_title" msgid="1338210036394128512">"日付"</string>
     <string name="time_picker_title" msgid="483460752287255019">"時間"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自動ロック"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"スリープ開始後<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"スリープの開始直後（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>がロック解除を管理している場合を除く）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"スリープ開始後<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>がロック解除を管理している場合を除く）"</string>
+    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"スリープ開始後 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"スリープの開始直後（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"スリープ開始後 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"ロック画面に所有者情報を表示"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"ロック画面メッセージ"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ウィジェットの有効化"</string>
@@ -1317,7 +1317,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"位置情報モード"</string>
     <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"GPS、Wi‑Fi、Bluetooth、モバイルネットワークで現在地を特定します"</string>
     <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Wi‑Fi、Bluetooth、モバイルネットワークで現在地を特定します"</string>
-    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"GPSで現在地を特定する"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"GPS で現在地を特定します"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"スキャン"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"スキャン"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fiのスキャン"</string>
@@ -1410,7 +1410,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"プロファイルのパターンを表示する"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"タップ操作時のバイブ"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"電源ボタンですぐにロックする"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>がロック解除を管理している場合を除く"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"ロック解除パターン設定"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"パターンの変更"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"ロック解除パターンの描き方"</string>
@@ -2406,7 +2406,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"発信履歴がこのユーザーと共有されます。"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"通話とSMSをONにしますか？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"通話とSMSの履歴がこのユーザーと共有されます。"</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"緊急情報"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"緊急時情報"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"アプリとコンテンツの許可"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"制限のあるアプリ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"アプリの設定を展開"</string>
@@ -2418,10 +2418,10 @@
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"タップ＆ペイ"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"仕組み"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"店舗でスマートフォンを使用して決済"</string>
-    <string name="nfc_payment_default" msgid="8648420259219150395">"支払いに使用する既定のアプリ"</string>
+    <string name="nfc_payment_default" msgid="8648420259219150395">"お支払いのデフォルトのアプリ"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"未設定"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="3234730182120288495">"既定を使用"</string>
+    <string name="nfc_payment_use_default" msgid="3234730182120288495">"デフォルトのアプリを使用"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"常時"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"別の決済アプリが起動されている場合を除く"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"タップ＆ペイ端末で使用するアプリ:"</string>
@@ -2451,7 +2451,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"通話マネージャ"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="2451014351355183338">"緊急警報"</string>
+    <string name="cell_broadcast_settings" msgid="2451014351355183338">"緊急速報メール"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"携帯通信会社"</string>
     <string name="access_point_names" msgid="1381602020438634481">"アクセスポイント名"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"パワーアップした4G LTEモード"</string>
@@ -2526,8 +2526,8 @@
       <item quantity="one">%d 件の非表示のアイテムを表示</item>
     </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
-    <string name="search_menu" msgid="6283419262313758339">"検索設定"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"検索設定"</string>
+    <string name="search_menu" msgid="6283419262313758339">"検索"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"検索"</string>
     <string name="search_recents_queries_label" msgid="2128811638532309069">"最近の検索"</string>
     <string name="search_results_label" msgid="4163304782363526148">"検索結果"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi、Wi-Fi、ネットワーク接続"</string>
@@ -2759,7 +2759,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"ON"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"OFF"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"画面の固定"</string>
-    <string name="screen_pinning_description" msgid="3360904523688769289">"この設定をオンにして画面固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面固定を使用するには:\n\n1. 画面固定がオンになっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [最近] をタップします。\n\n4. 上にスワイプして固定アイコンをタップします。"</string>
+    <string name="screen_pinning_description" msgid="3360904523688769289">"この設定を ON にして画面固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面固定を使用するには:\n\n1. 画面固定が ON になっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [最近] をタップします。\n\n4. 上にスワイプして固定アイコンをタップします。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"画面固定の解除前にPINを要求"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"画面固定の解除前にパスワードを要求"</string>
@@ -3019,9 +3019,9 @@
     <string name="screen_zoom_conversation_icon_alex" msgid="8443032489384985820">"A"</string>
     <string name="screen_zoom_conversation_icon_pete" msgid="998709701837681129">"P"</string>
     <string name="screen_zoom_conversation_message_1" msgid="6546951024984852686">"一郎さん、こんにちは。"</string>
-    <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"お茶でも飲みながら最近あった話などしませんか？"</string>
-    <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"いいですね。そう遠くないところにいい店があるんですよ。"</string>
-    <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"それはいい。"</string>
+    <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"一緒にコーヒーでもどうですか？"</string>
+    <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"いいですね。近くにいい店がありますよ。"</string>
+    <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"ではそうしましょう！"</string>
     <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"火 午後6:00"</string>
     <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"火 午後6:01"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"火 午後6:02"</string>
@@ -3128,7 +3128,7 @@
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"電池 %1$s で自動的に ON にする"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"電池の最適化を使用しない"</string>
     <string name="lockscreen_remote_input" msgid="969871538778211843">"端末がロックされている場合に、通知で返信などのテキストを入力できないようにする"</string>
-    <string name="default_spell_checker" msgid="8506899870026026660">"スペル チェッカーのデフォルト"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"デフォルトのスペル チェッカー"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"スペル チェッカーの選択"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"選択していません"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"（なし）"</string>
@@ -3164,7 +3164,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager のレート制限をリセット"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager のレート制限をリセットしました"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"ロック画面の通知を管理"</string>
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"ロック画面の通知を管理する"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
     <string name="page_tab_title_support" msgid="6330657582897417458">"サポート"</string>
@@ -3235,11 +3235,11 @@
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"カメラをすばやく起動するには、電源ボタンを 2 回押します。どの画面からでも操作できます"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"カメラの切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"スマートフォンの画面をダブルタップして通知をチェック"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"端末の画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"タブレットの画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"端末の画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_summary" msgid="5817384104520817202">"通知をすばやく確認するには、画面をダブルタップします"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"スマートフォンを持ち上げて通知をチェック"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"端末を持ち上げて通知をチェック"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"タブレットを持ち上げて通知をチェック"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"端末を持ち上げて通知をチェック"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"通知をすばやく確認するには、スマートフォンを持ち上げます"</string>

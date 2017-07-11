@@ -25,8 +25,8 @@
     <string name="dlg_switch" msgid="6243971420240639064">"Alternar"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Desconhecido"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">You are now <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> steps away from being a developer.</item>
       <item quantity="other">Está agora a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> passos de se tornar um programador.</item>
-      <item quantity="one">Está agora a <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> passo de se tornar um programador.</item>
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Agora é um programador!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Não é necessário, já é um programador."</string>
@@ -240,8 +240,8 @@
     <string name="locale_remove_menu" msgid="7651301406723638854">"Remover"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Adicionar um idioma"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
+      <item quantity="one">Remove selected languages?</item>
       <item quantity="other">Pretende remover os idiomas selecionados?</item>
-      <item quantity="one">Pretende remover o idioma selecionado?</item>
     </plurals>
     <string name="dlg_remove_locales_message" msgid="1361354927342876114">"O texto será apresentado noutro idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Não é possível remover todos os idiomas"</string>
@@ -337,11 +337,11 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Adicionar impressão digital"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"bloqueio de ecrã"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> fingerprints set up</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> impressões digitais configuradas</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> impressão digital configurada</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloq. c/ impressão digital"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloquear com impr. digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Utilizar a impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas ao telemóvel podem executar estas ações, pelo que deve ter cuidado com quem adiciona.\n\nNota: a impressão digital pode ser menos segura do que um padrão ou um PIN fortes."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Basta tocar no sensor de impressões digitais para autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas podem executar estas ações, pelo que deve ter cuidado com quem adiciona.\n\nNota: não é possível utilizar a sua impressão digital para desbloquear este dispositivo. Para mais informações, contacte o administrador da sua entidade."</string>
@@ -427,8 +427,8 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Proteger o dispositivo"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Utilizar impressão digital"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Desbloquear com a impressão digital"</string>
-    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Selec. bloq. do ecrã"</string>
-    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Selec. bloq. trabalho"</string>
+    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Escolher bloqueio de ecrã"</string>
+    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Escolher bloqueio de trabalho"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Proteger o seu tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Proteger o dispositivo"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Proteger o telemóvel"</string>
@@ -524,28 +524,28 @@
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Tem de incluir, pelo menos, um dígito"</string>
     <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Tem de incluir, pelo menos, um símbolo"</string>
     <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="one">Must contain at least %d letters</item>
       <item quantity="other">Tem de incluir, pelo menos, %d letras</item>
-      <item quantity="one">Tem de incluir, pelo menos, 1 letra</item>
     </plurals>
     <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="one">Must contain at least %d lowercase letters</item>
       <item quantity="other">Tem de incluir, pelo menos, %d letras minúsculas</item>
-      <item quantity="one">Tem de incluir, pelo menos, 1 letra minúscula</item>
     </plurals>
     <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="one">Must contain at least %d uppercase letters</item>
       <item quantity="other">Tem de incluir, pelo menos, %d letras maiúsculas</item>
-      <item quantity="one">Tem de incluir, pelo menos, 1 letra maiúscula</item>
     </plurals>
     <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="one">Must contain at least %d numerical digits</item>
       <item quantity="other">Tem de incluir, pelo menos, %d dígitos numéricos</item>
-      <item quantity="one">Tem de incluir, pelo menos, 1 dígito numérico</item>
     </plurals>
     <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="one">Must contain at least %d special symbols</item>
       <item quantity="other">Tem de incluir, pelo menos, %d símbolos especiais</item>
-      <item quantity="one">Tem de incluir, pelo menos, 1 símbolo especial</item>
     </plurals>
     <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="one">Must contain at least %d non-letter characters</item>
       <item quantity="other">Tem de incluir, pelo menos, %d carateres que não sejam letras</item>
-      <item quantity="one">Tem de incluir, pelo menos 1 caráter que não seja uma letra</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"O administrador do dispositivo não permite a utilização de uma palavra-passe recente."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"É proibida uma sequência ascendente, descendente ou repetida de dígitos"</string>
@@ -1012,8 +1012,8 @@
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> é o único SIM no seu dispositivo. Pretende utilizar este SIM para dados de telemóvel, chamadas e mensagens SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Código PIN do cartão SIM incorreto. Tem de contactar o seu operador para desbloquear o dispositivo."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="NUMBER_1">%d</xliff:g> remaining attempts.</item>
       <item quantity="other">Código PIN do cartão SIM incorreto. Tem mais <xliff:g id="NUMBER_1">%d</xliff:g> tentativas.</item>
-      <item quantity="one">Cód. PIN cartão SIM incorreto. Tem mais <xliff:g id="NUMBER_0">%d</xliff:g> tentativa antes de contactar operador p/ desbloquear disp.</item>
     </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Falha ao introduzir o PIN do cartão SIM!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Estado do tablet"</string>
@@ -1449,8 +1449,8 @@
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Limpar cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
+      <item quantity="one">%d items</item>
       <item quantity="other">%d itens</item>
-      <item quantity="one">1 item</item>
     </plurals>
     <string name="clear_uri_btn_text" msgid="8575655132961012158">"Limpar acesso"</string>
     <string name="controls_label" msgid="7611113077086853799">"Controlos"</string>
@@ -1731,24 +1731,24 @@
     <string name="enable_quick_setting" msgid="2366999897816894536">"Mostrar nas Definições rápidas"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Modo de correção"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
+      <item quantity="one">Extremely short delay (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="other">Atraso extremamente curto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
-      <item quantity="one">Atraso extremamente curto (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="5589565607652364932">
+      <item quantity="one">Very short delay (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="other">Atraso muito curto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
-      <item quantity="one">Atraso muito curto (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5887754135102768400">
+      <item quantity="one">Short delay (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="other">Atraso curto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
-      <item quantity="one">Atraso curto (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="6340683412750219405">
+      <item quantity="one">Long delay (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="other">Atraso longo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
-      <item quantity="one">Atraso longo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="3503199424330634970">
+      <item quantity="one">Very long delay (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="other">Atraso muito longo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
-      <item quantity="one">Atraso muito longo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configurações"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ativado"</string>
@@ -1800,8 +1800,8 @@
     <string name="settings_button" msgid="3006713718908152930">"Definições"</string>
     <string name="print_settings" msgid="4742428530112487843">"Impressão"</string>
     <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
+      <item quantity="one">%d print jobs</item>
       <item quantity="other">%d tarefas de impressão</item>
-      <item quantity="one">1 tarefa de impressão</item>
     </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Serviços de impressão"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Nenhum serviço instalado"</string>
@@ -1863,8 +1863,8 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"inactividade do telefone"</string>
     <string name="power_phone" msgid="5392641106474567277">"Chamadas de voz"</string>
-    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet inactivo"</string>
-    <string name="power_idle" product="default" msgid="9055659695602194990">"Telefone inactivo"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet inativo"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"Telefone inativo"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"Diversos"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Contabilizada em excesso"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Total da CPU"</string>
@@ -1895,8 +1895,8 @@
     <string name="battery_action_wifi" msgid="8181553479021841207">"Definições de Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Definições de Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Bateria utilizada por chamadas de voz"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Bateria utilizada quando o tablet está inactivo"</string>
-    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Bateria utilizada quando o telefone está inactivo"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Bateria utilizada quando o tablet está inativo"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Bateria utilizada quando o telefone está inativo"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Bateria utilizada pelo rádio do telefone"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Mudar para modo de avião para poupar energia em áreas sem cobertura de rede"</string>
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Bateria utilizada pela lanterna"</string>
@@ -2027,7 +2027,7 @@
     <string name="credentials_not_erased" msgid="7685932772284216097">"Não foi possível apagar o armazenamento de credenciais."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais está ativado."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Para poder utilizar o armazenamento de credenciais, é necessário definir primeiro um PIN ou palavra-passe do ecrã de bloqueio."</string>
-    <string name="usage_access_title" msgid="332333405495457839">"Aplic. com acesso de utiliz."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Apps com acesso de utilização"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir o comportamento quando é efetuada uma chamada de emergência"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Cópia de segurança e reposição"</string>
@@ -2326,21 +2326,21 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"A rede pode ser monitorizada"</string>
     <string name="done_button" msgid="1991471253042622230">"Concluído"</string>
     <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="7145092748045794650">
+      <item quantity="one">Trust or remove certificates</item>
       <item quantity="other">Confiar ou remover os certificados</item>
-      <item quantity="one">Confiar ou remover o certificado</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação no seu dispositivo que podem permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca destes certificados, contacte o administrador.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou uma autoridade de certificação no seu dispositivo que pode permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca deste certificado, contacte o administrador.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação no seu dispositivo que podem permitir monitorizar a atividade na rede do dispositivo, incluindo emails, aplicações e Sites seguros.\n\nPara obter mais informações acerca destes certificados, contacte o administrador.</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação para o seu perfil de trabalho que podem permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca destes certificados, contacte o administrador.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou uma autoridade de certificação para o seu perfil de trabalho que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Websites seguros.\n\nPara obter mais informações acerca deste certificado, contacte o administrador.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação para o seu perfil de trabalho que podem permitir monitorizar a atividade na rede de trabalho, incluindo emails, aplicações e Sites seguros.\n\nPara obter mais informações acerca destes certificados, contacte o administrador.</item>
     </plurals>
-    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"A sua atividade de rede, incluindo emails, aplicações e Websites seguros, pode ser monitorizada por terceiros.\n\nIsto é possível através de uma credencial fidedigna instalada no seu dispositivo."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"A sua atividade de rede, incluindo emails, aplicações e Sites seguros, pode ser monitorizada por terceiros.\n\nIsto é possível através de uma credencial fidedigna instalada no seu dispositivo."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
+      <item quantity="one">Check certificates</item>
       <item quantity="other">Verificar certificados</item>
-      <item quantity="one">Verificar certificado</item>
     </plurals>
     <string name="user_settings_title" msgid="6151874007858148344">"Utilizadores"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Utilizadores e perfis"</string>
@@ -2420,7 +2420,7 @@
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"Utilizar predefinição"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"Sempre"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Exceto quanto estiver aberta outra aplicação de pagamento"</string>
-    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Num terminal compatível com a funcionalidade Tocar e pagar, pagar com:"</string>
+    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Num terminal Tocar e pagar, pagar com:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Pagar num terminal"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configure uma aplicação de pagamento. Basta aproximar a parte de trás do telemóvel a um terminal com o símbolo de contacto desnecessário."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Compreendi"</string>
@@ -2518,8 +2518,8 @@
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"A seleção é necessária"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Definições"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="one">Show %d hidden items</item>
       <item quantity="other">Mostrar %d itens ocultos</item>
-      <item quantity="one">Mostrar %d item oculto</item>
     </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"Definições"</string>
     <string name="search_menu" msgid="6283419262313758339">"Definições de pesquisa"</string>
@@ -2643,8 +2643,8 @@
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acesso a notificações"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"As aplicações não podem ler notificações"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d apps can read notifications</item>
       <item quantity="other">%d aplicações conseguem ler notificações</item>
-      <item quantity="one">%d aplicação consegue ler notificações</item>
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nenhuma aplicação instalada solicitou acesso a notificações"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Pretende permitir o acesso a notificações de <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2731,12 +2731,12 @@
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> do dia seguinte"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"Alterar para alarmes apenas, indefinidamente"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">
+      <item quantity="one">Change to alarms only for <xliff:g id="DURATION">%1$d</xliff:g> minutes (until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
       <item quantity="other">Alterar para alarmes apenas durante <xliff:g id="DURATION">%1$d</xliff:g> minutos, até às <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Alterar para alarmes apenas durante um minuto, até às <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
     </plurals>
     <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
+      <item quantity="one">Change to alarms only for <xliff:g id="DURATION">%1$d</xliff:g> hours until <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="other">Alterar para alarmes apenas durante <xliff:g id="DURATION">%1$d</xliff:g> horas até às <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
-      <item quantity="one">Alterar para alarmes apenas durante uma hora até às <xliff:g id="FORMATTEDTIME_0">%2$s</xliff:g></item>
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Alterar para alarmes apenas, até <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Alterar para interromper sempre"</string>
@@ -2820,16 +2820,16 @@
     <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <string name="notification_summary_level" msgid="2726571692704140826">"Nível %d"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> permissions granted</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> autorizações concedidas</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> autorização concedida</item>
     </plurals>
     <plurals name="runtime_permissions_summary" formatted="false" msgid="1564663886246010959">
+      <item quantity="one"><xliff:g id="COUNT_2">%d</xliff:g> of <xliff:g id="COUNT_3">%d</xliff:g> permissions granted</item>
       <item quantity="other"><xliff:g id="COUNT_2">%d</xliff:g> de <xliff:g id="COUNT_3">%d</xliff:g> autorizações concedidas</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> autorização concedida</item>
     </plurals>
     <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> additional permissions</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> permissões adicionais</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> permissão adicional</item>
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Nenhuma permissão concedida"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Nenhuma permissão solicitada"</string>
@@ -2856,8 +2856,8 @@
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Abrir <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Abrir <xliff:g id="DOMAIN">%s</xliff:g> e outros URLs"</string>
     <plurals name="domain_urls_apps_summary" formatted="false" msgid="4322996467951692661">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> apps can open their supported links</item>
       <item quantity="other"> Os links compatíveis podem ser abertos por <xliff:g id="COUNT">%d</xliff:g> aplicações</item>
-      <item quantity="one">Os links compatíveis podem ser abertos por uma aplicação</item>
     </plurals>
     <string name="app_link_open_always" msgid="2474058700623948148">"Abrir com esta aplicação"</string>
     <string name="app_link_open_ask" msgid="7800878430190575991">"Perguntar sempre"</string>
@@ -2904,8 +2904,8 @@
     <string name="high_power_system" msgid="7362862974428225301">"Otimização da bateria não disponível"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Não aplique a otimização da bateria. A bateria pode descarregar mais rapidamente."</string>
     <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> apps allowed to ignore battery optimization</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicações com permissão para ignorar a otimização da bateria</item>
-      <item quantity="one">1 aplicação com permissão para ignorar a otimização da bateria</item>
     </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Pretende ignorar as otimizações da bateria?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Pretende permitir que a aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> se mantenha ligada em segundo plano? Esta ação pode utilizar mais bateria."</string>
@@ -2956,8 +2956,8 @@
     <string name="free_memory" msgid="4003936141603549746">"Disponível"</string>
     <string name="memory_usage_apps" msgid="5650192998273294098">"Memória utilizada pelas aplicações"</string>
     <plurals name="memory_usage_apps_summary" formatted="false" msgid="6089210945574265774">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> apps used memory in the last <xliff:g id="DURATION_1">%2$s</xliff:g></item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicações utilizaram a memória nos(as) últimos(as) <xliff:g id="DURATION_1">%2$s</xliff:g></item>
-      <item quantity="one">1 aplicação utilizou a memória nos(as) últimos(as) <xliff:g id="DURATION_0">%2$s</xliff:g></item>
     </plurals>
     <string name="running_frequency" msgid="6622624669948277693">"Frequência"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Utilização máxima"</string>
@@ -3027,8 +3027,8 @@
     <string name="disconnected" msgid="5787956818111197212">"Desligado"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> dos dados utilizados"</string>
     <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> apps blocked from sending</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicações impedidas de enviar</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicação impedida de enviar</item>
     </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Todas as aplicações têm autorização para enviar"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplicações instaladas"</string>
@@ -3088,7 +3088,7 @@
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Aviso de dados de <xliff:g id="ID_1">%1$s</xliff:g>/limite de dados de <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciclo de faturação"</string>
     <string name="billing_cycle_summary" msgid="9009106526129293752">"O ciclo mensal começa no dia <xliff:g id="ID_1">%1$s</xliff:g> de cada mês"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Mensalmente a partir de <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Mensalmente a partir do dia <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Restrições de rede"</string>
     <string name="operator_warning" msgid="1862988028996859195">"A contagem de dados do operador pode ser diferente da contagem do dispositivo"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> utilizado(s)"</string>
@@ -3100,8 +3100,8 @@
     <string name="configure" msgid="1029654422228677273">"Configurar"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Outras aplicações incluídas na utilização"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> apps allowed to use unrestricted data when Data Saver is on</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicações autorizadas a utilizar dados sem restrições quando a Poupança de dados está ativada</item>
-      <item quantity="one">1 aplicação autorizada a utilizar dados sem restrições quando a Poupança de dados está ativada</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Poupança de dados"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"Acesso a dados sem restrições"</string>
@@ -3197,16 +3197,16 @@
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Pesquisa de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permitir pesquisa de contactos por parte da sua entidade para identificar autores das chamadas e contactos"</string>
     <plurals name="hours" formatted="false" msgid="7020844602875333472">
+      <item quantity="one"><xliff:g id="NUMBER">%s</xliff:g> hours</item>
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> horas</item>
-      <item quantity="one">1 hora</item>
     </plurals>
     <plurals name="minutes" formatted="false" msgid="4666832442068789413">
+      <item quantity="one"><xliff:g id="NUMBER">%s</xliff:g> minutes</item>
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> minutos</item>
-      <item quantity="one">1 minuto</item>
     </plurals>
     <plurals name="seconds" formatted="false" msgid="3876307354560025025">
+      <item quantity="one"><xliff:g id="NUMBER">%s</xliff:g> seconds</item>
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> segundos</item>
-      <item quantity="one">1 segundo</item>
     </plurals>
     <string name="support_estimated_wait_time" msgid="6523081420029378051">"Tempo de espera de ~<xliff:g id="ESTIMATE">%1$s</xliff:g>"</string>
     <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"Computador"</string>
