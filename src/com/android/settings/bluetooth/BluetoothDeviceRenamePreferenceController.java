@@ -21,6 +21,9 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -30,11 +33,13 @@ public class BluetoothDeviceRenamePreferenceController extends
     public static final String PREF_KEY = "bt_rename_device";
 
     private final Fragment mFragment;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public BluetoothDeviceRenamePreferenceController(Context context, Fragment fragment,
             Lifecycle lifecycle) {
         super(context, lifecycle);
         mFragment = fragment;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @VisibleForTesting
@@ -42,6 +47,7 @@ public class BluetoothDeviceRenamePreferenceController extends
             LocalBluetoothAdapter localAdapter) {
         super(context, localAdapter);
         mFragment = fragment;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -57,6 +63,8 @@ public class BluetoothDeviceRenamePreferenceController extends
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (PREF_KEY.equals(preference.getKey())) {
+            mMetricsFeatureProvider.action(mContext,
+                    MetricsProto.MetricsEvent.ACTION_BLUETOOTH_RENAME);
             LocalDeviceNameDialogFragment.newInstance()
                     .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;
