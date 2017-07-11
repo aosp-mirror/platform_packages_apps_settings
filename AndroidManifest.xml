@@ -807,6 +807,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.PERSONALIZE" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/wallpaper_suggestion_title" />
             <meta-data android:name="com.android.settings.summary"
