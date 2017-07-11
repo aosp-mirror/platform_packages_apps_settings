@@ -243,11 +243,15 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
-            // TODO(b/36511626): add back special strings for strong auth.
+            final boolean isStrongAuthRequired = isStrongAuthRequired();
             if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
-                return R.string.lockpassword_confirm_your_pattern_generic_profile;
+                return isStrongAuthRequired
+                        ? R.string.lockpassword_strong_auth_required_work_pattern
+                        : R.string.lockpassword_confirm_your_pattern_generic_profile;
             } else {
-                return R.string.lockpassword_confirm_your_pattern_generic;
+                return isStrongAuthRequired
+                        ? R.string.lockpassword_strong_auth_required_device_pattern
+                        : R.string.lockpassword_confirm_your_pattern_generic;
             }
         }
 
