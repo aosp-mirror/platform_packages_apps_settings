@@ -1058,13 +1058,15 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"拿起设备时唤醒"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"主动显示"</string>
-    <string name="ambient_display_screen_summary_always_on" msgid="7974004969481877214">"始终开启"</string>
+    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
+    <skip />
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"新通知"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"何时显示"</string>
     <string name="doze_title" msgid="2375510714460456687">"新通知"</string>
     <string name="doze_summary" msgid="3846219936142814032">"收到通知时唤醒屏幕"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"始终开启"</string>
-    <string name="doze_always_on_summary" msgid="1254238982577776475">"显示时间、通知图标和其他信息"</string>
+    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或缩小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM卡锁定设置"</string>
@@ -1996,35 +1998,22 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"请求获取位置信息的频率过高"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> 个应用出现异常"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"要停止该应用吗？"</string>
-    <!-- no translation found for dialog_stop_message (4006631636646776488) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (2369957934555162428) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (6195430620406365292) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message_wakeup_alarm (1638726742782558262) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message_wakeup_alarm (8771690983566539742) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message_wakeup_alarm (2854944538238649520) -->
-    <skip />
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"由于<xliff:g id="APP">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"由于<xliff:g id="APP">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"由于<xliff:g id="APP">%1$s</xliff:g>一直让设备保持唤醒状态，因此您的设备无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让设备保持唤醒状态，因此您的设备无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
     <string name="dialog_stop_ok" msgid="2319777211264004900">"停止应用"</string>
-    <!-- no translation found for dialog_background_check_title (6936542136153283692) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (4045827746349279563) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (8348214419901788270) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (5847977433118915863) -->
-    <skip />
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"要关闭后台使用功能并停止应用吗？"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>，并阻止该应用在后台运行。"</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>，并阻止该应用在后台运行。"</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让设备保持唤醒状态，因此您的设备无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>，并阻止该应用在后台运行。"</string>
     <string name="dialog_background_check_ok" msgid="412876934682899659">"关闭"</string>
     <string name="dialog_location_title" msgid="5888917530725874727">"要禁止获取位置信息吗？"</string>
-    <!-- no translation found for dialog_location_message (7774807745601479888) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (118745801732181618) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (6783678153382298295) -->
-    <skip />
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"由于<xliff:g id="APP">%1$s</xliff:g>在您并未使用它时仍一直请求获取您的位置信息，因此您的手机无法正常管理电池。\n\n要解决此问题，请关闭此应用的位置信息服务。"</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"由于<xliff:g id="APP">%1$s</xliff:g>在您并未使用它时仍一直请求获取您的位置信息，因此您的平板电脑无法正常管理电池。\n\n要解决此问题，请关闭此应用的位置信息服务。"</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"由于<xliff:g id="APP">%1$s</xliff:g>在您并未使用它时仍一直请求获取您的位置信息，因此您的设备无法正常管理电池。\n\n要解决此问题，请关闭此应用的位置信息服务。"</string>
     <string name="dialog_location_ok" msgid="4572391197601313986">"关闭"</string>
     <string name="power_screen" msgid="3023346080675904613">"屏幕"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"手电筒"</string>
@@ -2797,8 +2786,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"滑动解锁, 密码, 图案, PIN 码"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"工作验证, 工作, 资料"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"工作资料, 托管资料, 汇整, 统一, 工作, 资料"</string>
-    <!-- no translation found for keywords_gesture (3526905012224714078) -->
-    <skip />
+    <string name="keywords_gesture" msgid="3526905012224714078">"手势"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支付、点按、付款"</string>
     <string name="keywords_backup" msgid="470070289135403022">"备份内容, 备份"</string>
     <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"手势, 边缘, 侧边, active edge, 握紧, 握压, 持握, 辅助, 智能助理, 压握, 握紧, 挤压, 紧握, Ok Google, Google 智能助理"</string>
