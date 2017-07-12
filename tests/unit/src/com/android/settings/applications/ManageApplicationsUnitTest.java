@@ -116,4 +116,20 @@ public class ManageApplicationsUnitTest {
 
         assertThat(composedFilter.filterApp(appEntry)).isTrue();
     }
+
+    @Test
+    public void getCompositeFilter_worksForLegacyPrivateSettings() throws Exception {
+        ApplicationsState.AppFilter filter =
+                ManageApplications.getCompositeFilter(
+                        ManageApplications.LIST_TYPE_STORAGE,
+                        ManageApplications.STORAGE_TYPE_LEGACY,
+                        "uuid");
+        final ApplicationInfo info = new ApplicationInfo();
+        info.volumeUuid = "uuid";
+        info.category = ApplicationInfo.CATEGORY_GAME;
+        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = info;
+
+        assertThat(filter.filterApp(appEntry)).isTrue();
+    }
 }
