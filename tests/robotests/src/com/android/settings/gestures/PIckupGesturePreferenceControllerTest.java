@@ -83,4 +83,18 @@ public class PIckupGesturePreferenceControllerTest {
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
+
+    @Test
+    public void testCanHandleClicks_configIsSet_shouldReturnTrue() {
+        when(mAmbientDisplayConfiguration.pulseOnPickupCanBeModified(anyInt())).thenReturn(true);
+
+        assertThat(mController.canHandleClicks()).isTrue();
+    }
+
+    @Test
+    public void testCanHandleClicks_configIsNotSet_shouldReturnFalse() {
+        when(mAmbientDisplayConfiguration.pulseOnPickupCanBeModified(anyInt())).thenReturn(false);
+
+        assertThat(mController.canHandleClicks()).isFalse();
+    }
 }
