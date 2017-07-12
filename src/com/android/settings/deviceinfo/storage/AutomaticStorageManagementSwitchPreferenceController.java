@@ -88,9 +88,17 @@ public class AutomaticStorageManagementSwitchPreferenceController extends Prefer
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
                 isChecked ? 1 : 0);
 
-        boolean storageManagerEnabledByDefault = SystemProperties.getBoolean(
-                STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY, false);
-        if (isChecked && !storageManagerEnabledByDefault) {
+        final boolean storageManagerEnabledByDefault =
+                SystemProperties.getBoolean(STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY, false);
+        final boolean storageManagerDisabledByPolicy =
+                Settings.Secure.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY,
+                                0)
+                        != 0;
+        // Show warning if it is disabled by default and turning it on or if it was disabled by
+        // policy and we're turning it on.
+        if ((isChecked && (!storageManagerEnabledByDefault || storageManagerDisabledByPolicy))) {
             ActivationWarningFragment fragment = ActivationWarningFragment.newInstance();
             fragment.show(mFragmentManager, ActivationWarningFragment.TAG);
         }

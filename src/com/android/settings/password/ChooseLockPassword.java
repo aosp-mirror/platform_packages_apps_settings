@@ -202,7 +202,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private SaveAndFinishWorker mSaveAndFinishWorker;
         private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
-        private Stage mUiStage = Stage.Introduction;
+        protected Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
         protected boolean mForFingerprint;
@@ -820,7 +820,7 @@ public class ChooseLockPassword extends SettingsActivity {
         /**
          * Update the hint based on current Stage and length of password entry
          */
-        private void updateUi() {
+        protected void updateUi() {
             final boolean canInput = mSaveAndFinishWorker == null;
             String password = mPasswordEntry.getText().toString();
             final int length = password.length();

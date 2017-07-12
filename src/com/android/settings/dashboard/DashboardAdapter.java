@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -267,27 +268,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     (SuggestionAndConditionContainerHolder) holder, position);
                 break;
             case R.layout.suggestion_condition_header:
-                /* There are 2 different headers for the suggestions/conditions section. To minimize
-                   visual animation when expanding and collapsing the suggestions/conditions, we are
-                   using the same layout to represent the 2 headers:
-                   1. Suggestion header - when there is any suggestion shown, the suggestion header
-                      will be the first item on the section. It only has the text "Suggestion", and
-                      do nothing when clicked. This header will not be shown when the section is
-                      collapsed, in which case, the SuggestionCondition header will be
-                      shown instead to show the summary info.
-                   2. SuggestionCondition header - the header that shows the summary info for the
-                      suggestion/condition that is currently hidden. It has the expand button to
-                      expand the section. */
-                if (mDashboardData.getDisplayableSuggestionCount() > 0
-                        && position == SUGGESTION_CONDITION_HEADER_POSITION
-                        && mDashboardData.getSuggestionConditionMode()
-                            != DashboardData.HEADER_MODE_COLLAPSED) {
-                    onBindSuggestionHeader((SuggestionAndConditionHeaderHolder) holder);
-                } else {
-                    onBindSuggestionConditionHeader((SuggestionAndConditionHeaderHolder) holder,
+                onBindSuggestionConditionHeader((SuggestionAndConditionHeaderHolder) holder,
                         (SuggestionConditionHeaderData)
-                            mDashboardData.getItemEntityByPosition(position));
-                }
+                                mDashboardData.getItemEntityByPosition(position));
                 break;
             case R.layout.suggestion_condition_footer:
                 holder.itemView.setOnClickListener(v -> {
@@ -374,17 +357,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    private void onBindSuggestionHeader(final SuggestionAndConditionHeaderHolder holder) {
-        holder.title.setText(R.string.suggestions_title);
-        holder.title.setTextColor(Color.BLACK);
-        holder.icon.setVisibility(View.INVISIBLE);
-        holder.icons.removeAllViews();
-        holder.icons.setVisibility(View.INVISIBLE);
-        holder.summary.setVisibility(View.INVISIBLE);
-        holder.expandIndicator.setVisibility(View.INVISIBLE);
-        holder.itemView.setOnClickListener(null);
-    }
-
     @VisibleForTesting
     void onBindSuggestionConditionHeader(final SuggestionAndConditionHeaderHolder holder,
             SuggestionConditionHeaderData data) {
@@ -444,8 +416,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         } else {
             holder.summary.setText(null);
         }
-        holder.summary.setVisibility(View.VISIBLE);
-        holder.expandIndicator.setVisibility(View.VISIBLE);
+
+        if (curMode == DashboardData.HEADER_MODE_COLLAPSED) {
+            holder.topSpace.setVisibility(View.VISIBLE);
+        } else {
+            holder.topSpace.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if (moreSuggestions ) {
@@ -468,9 +444,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @VisibleForTesting
     void onBindConditionAndSuggestion(final SuggestionAndConditionContainerHolder holder,
             int position) {
-        // If there is suggestions to show, it will be at position 1
-        // position 0 is suggestion header.
-        if (position == (SUGGESTION_CONDITION_HEADER_POSITION + 1)
+        // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
+        // header anymore.
+        if (position == (SUGGESTION_CONDITION_HEADER_POSITION)
                 && mDashboardData.getSuggestions() != null) {
             mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
                 mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
@@ -572,11 +548,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public static class SuggestionAndConditionHeaderHolder extends DashboardItemHolder {
         public final LinearLayout icons;
         public final ImageView expandIndicator;
+        public final Space topSpace;
 
         public SuggestionAndConditionHeaderHolder(View itemView) {
             super(itemView);
             icons = itemView.findViewById(id.additional_icons);
             expandIndicator = itemView.findViewById(id.expand_indicator);
+            topSpace = itemView.findViewById(id.top_space);
         }
     }
 
