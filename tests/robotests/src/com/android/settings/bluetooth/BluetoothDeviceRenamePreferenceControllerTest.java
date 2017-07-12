@@ -18,16 +18,16 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -36,6 +36,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -43,30 +44,32 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BluetoothDeviceNamePreferenceControllerTest {
-    private static final String DEVICE_NAME = "Nightshade";
-    private static final int ORDER = 1;
+public class BluetoothDeviceRenamePreferenceControllerTest {
 
-    private Context mContext;
+    private static final String DEVICE_NAME = "Nightshade";
+
     @Mock
     private LocalBluetoothAdapter mLocalAdapter;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Fragment mFragment;
     @Mock
-    private PreferenceScreen mPreferenceScreen;
+    private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mFragmentTransaction;
+    private Context mContext;
     private Preference mPreference;
-
-    private BluetoothDeviceNamePreferenceController mController;
+    private BluetoothDeviceRenamePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-
-        doReturn(mContext).when(mPreferenceScreen).getContext();
         mPreference = new Preference(mContext);
-        mPreference.setKey(BluetoothDeviceNamePreferenceController.KEY_DEVICE_NAME);
-        mController = new BluetoothDeviceNamePreferenceController(
-                mContext, mLocalAdapter);
+        mPreference.setKey(BluetoothDeviceRenamePreferenceController.PREF_KEY);
+
+        mController = new BluetoothDeviceRenamePreferenceController(
+                mContext, mFragment, mLocalAdapter);
     }
 
     @Test
@@ -74,38 +77,17 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         mController.updateDeviceName(mPreference, DEVICE_NAME);
 
         final CharSequence summary = mPreference.getSummary();
-        final Object[] spans = ((SpannableStringBuilder) summary).getSpans(0, summary.length(),
-                Object.class);
-        assertThat(summary.toString())
-                .isEqualTo("Visible as 'Nightshade' to other devices");
 
-        // Test summary only has one color span
-        assertThat(spans).asList().hasSize(1);
-        assertThat(spans[0]).isInstanceOf(ForegroundColorSpan.class);
+        assertThat(summary.toString()).isEqualTo(DEVICE_NAME);
     }
 
     @Test
-    public void testCreateBluetoothDeviceNamePreference() {
-        Preference preference = mController.createBluetoothDeviceNamePreference(mPreferenceScreen,
-                ORDER);
+    public void testHandlePreferenceTreeClick_startDialogFragment() {
+        when(mFragment.getFragmentManager().beginTransaction()).thenReturn(mFragmentTransaction);
 
-        assertThat(preference.getKey()).isEqualTo(mController.KEY_DEVICE_NAME);
-        assertThat(preference.getOrder()).isEqualTo(ORDER);
-        verify(mPreferenceScreen).addPreference(preference);
-    }
+        mController.handlePreferenceTreeClick(mPreference);
 
-    @Test
-    public void testOnStart_receiverRegistered() {
-        mController.onStart();
-        verify(mContext).registerReceiver(eq(mController.mReceiver), any());
-    }
-
-    @Test
-    public void testOnStop_receiverUnregistered() {
-        // register it first
-        mContext.registerReceiver(mController.mReceiver, null);
-
-        mController.onStop();
-        verify(mContext).unregisterReceiver(mController.mReceiver);
+        verify(mFragmentTransaction).add(any(), anyString());
+        verify(mFragmentTransaction).commit();
     }
 }
