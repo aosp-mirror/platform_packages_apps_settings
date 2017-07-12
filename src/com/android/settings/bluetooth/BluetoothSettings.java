@@ -23,7 +23,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -55,6 +54,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -63,7 +63,6 @@ import java.util.List;
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
- *
  */
 public class BluetoothSettings extends DeviceListPreferenceFragment implements Indexable {
     private static final String TAG = "BluetoothSettings";
@@ -84,7 +83,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
     private SwitchBar mSwitchBar;
 
-    private final IntentFilter mIntentFilter;
     private BluetoothDeviceNamePreferenceController mDeviceNamePrefController;
     @VisibleForTesting
     BluetoothPairingPreferenceController mPairingPrefController;
@@ -95,7 +93,6 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
     public BluetoothSettings() {
         super(DISALLOW_CONFIG_BLUETOOTH);
-        mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
     }
 
     @Override
@@ -353,14 +350,15 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context,
-                this, getLifecycle());
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final Lifecycle lifecycle = getLifecycle();
+        mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context, lifecycle);
         mPairingPrefController = new BluetoothPairingPreferenceController(context, this,
                 (SettingsActivity) getActivity());
         controllers.add(mDeviceNamePrefController);
         controllers.add(mPairingPrefController);
         controllers.add(new BluetoothFilesPreferenceController(context));
+        controllers.add(new BluetoothDeviceRenamePreferenceController(context, this, lifecycle));
 
         return controllers;
     }

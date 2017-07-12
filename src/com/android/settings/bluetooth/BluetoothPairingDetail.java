@@ -186,7 +186,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context,
-                this, getLifecycle());
+                getLifecycle());
         controllers.add(mDeviceNamePrefController);
 
         return controllers;

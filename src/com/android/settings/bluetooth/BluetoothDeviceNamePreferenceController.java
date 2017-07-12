@@ -16,12 +16,12 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.Spannable;
@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -49,15 +48,15 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
     private static final String TAG = "BluetoothNamePrefCtrl";
 
     public static final String KEY_DEVICE_NAME = "device_name";
-    private int mAccentColor;
-    private Fragment mFragment;
+
+    private final int mAccentColor;
+
     private LocalBluetoothManager mLocalManager;
     private LocalBluetoothAdapter mLocalAdapter;
     private Preference mPreference;
 
-    public BluetoothDeviceNamePreferenceController(Context context, Fragment fragment,
-            Lifecycle lifecycle) {
-        this(context, fragment, (LocalBluetoothAdapter) null);
+    public BluetoothDeviceNamePreferenceController(Context context, Lifecycle lifecycle) {
+        this(context, (LocalBluetoothAdapter) null);
 
         mLocalManager = Utils.getLocalBtManager(context);
         if (mLocalManager == null) {
@@ -69,17 +68,16 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
     }
 
     @VisibleForTesting
-    BluetoothDeviceNamePreferenceController(Context context, Fragment fragment,
-            LocalBluetoothAdapter localAdapter) {
+    BluetoothDeviceNamePreferenceController(Context context, LocalBluetoothAdapter localAdapter) {
         super(context);
         mAccentColor = com.android.settingslib.Utils.getColorAccent(context);
-        mFragment = fragment;
         mLocalAdapter = localAdapter;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mPreference = screen.findPreference(KEY_DEVICE_NAME);
+        super.displayPreference(screen);
     }
 
     @Override
@@ -108,22 +106,11 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
         updateDeviceName(preference, mLocalAdapter.getName());
     }
 
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_DEVICE_NAME.equals(preference.getKey())) {
-            LocalDeviceNameDialogFragment.newInstance()
-                    .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
-            return true;
-        }
-
-        return false;
-    }
-
     /**
      * Create preference to show bluetooth device name
      *
      * @param screen to add the preference in
-     * @param order to decide position of the preference
+     * @param order  to decide position of the preference
      * @return bluetooth preference that created in this method
      */
     public Preference createBluetoothDeviceNamePreference(PreferenceScreen screen, int order) {
@@ -141,7 +128,7 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
      * @param preference to set the summary for
      * @param deviceName bluetooth device name to show in the summary
      */
-    public void updateDeviceName(final Preference preference, final String deviceName) {
+    protected void updateDeviceName(final Preference preference, final String deviceName) {
         if (deviceName == null) {
             // TODO: show error message in preference subtitle
             return;
