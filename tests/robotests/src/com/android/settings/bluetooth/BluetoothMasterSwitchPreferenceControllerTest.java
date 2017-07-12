@@ -127,23 +127,4 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
 
         verify(mPreference).setSummary("test summary");
     }
-
-    @Test
-    public void testHandlePreferenceTreeClick_pairPageEnabled_showNewPage() {
-        when(mFeatureFactory.bluetoothFeatureProvider.isPairingPageEnabled()).thenReturn(true);
-
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mActivity).startPreferencePanelAsUser(eq(mFragment),
-                eq(BluetoothSettings.class.getName()), any(), eq(R.string.bluetooth), any(), any());
-    }
-
-    @Test
-    public void testHandlePreferenceTreeClick_pairPageDisabled_showOldPage() {
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mActivity).startPreferencePanelAsUser(eq(mFragment),
-                eq(BluetoothSettingsObsolete.class.getName()), any(), eq(R.string.bluetooth), any(),
-                any());
-    }
 }
