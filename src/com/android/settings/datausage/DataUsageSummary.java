@@ -14,13 +14,15 @@
 
 package com.android.settings.datausage;
 
+import static android.net.ConnectivityManager.TYPE_ETHERNET;
+import static android.net.ConnectivityManager.TYPE_WIFI;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
-import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
@@ -46,6 +48,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
@@ -55,12 +58,9 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.net.ConnectivityManager.TYPE_ETHERNET;
-import static android.net.ConnectivityManager.TYPE_WIFI;
-import static android.net.NetworkPolicy.LIMIT_DISABLED;
 
 public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
@@ -403,29 +403,12 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         mPolicyEditor.read();
         int count = 0;
         for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
-            if (isMetered(config)) {
+            if (WifiConfiguration.isMetered(config, null)) {
                 count++;
             }
         }
         preference.setSummary(getResources().getQuantityString(
             R.plurals.network_restrictions_summary, count, count));
-    }
-
-    @VisibleForTesting
-    boolean isMetered(WifiConfiguration config) {
-        if (config.SSID == null) {
-            return false;
-        }
-        final String networkId = config.isPasspoint() ? config.providerFriendlyName : config.SSID;
-        final NetworkPolicy policy =
-            mPolicyEditor.getPolicyMaybeUnquoted(NetworkTemplate.buildTemplateWifi(networkId));
-        if (policy == null) {
-            return false;
-        }
-        if (policy.limitBytes != LIMIT_DISABLED) {
-            return true;
-        }
-        return policy.metered;
     }
 
     private static class SummaryProvider
