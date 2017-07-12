@@ -34,6 +34,10 @@ public class AmbientDisplayConfiguration {
         return true;
     }
 
+    public boolean pulseOnPickupCanBeModified(int user) {
+        return true;
+    }
+
     public boolean pulseOnDoubleTapAvailable() {
         return true;
     }
