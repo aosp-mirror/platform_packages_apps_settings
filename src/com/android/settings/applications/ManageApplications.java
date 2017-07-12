@@ -215,8 +215,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     }
 
     // Storage types. Used to determine what the extra item in the list of preferences is.
-    public static final int STORAGE_TYPE_DEFAULT = 0;
+    public static final int STORAGE_TYPE_DEFAULT = 0; // Show all apps that are not categorized.
     public static final int STORAGE_TYPE_MUSIC = 1;
+    public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
 
     // sort order
     private int mSortOrder = R.id.sort_order_alpha;
@@ -434,7 +435,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (listType == LIST_TYPE_STORAGE) {
             if (storageType == STORAGE_TYPE_MUSIC) {
                 filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
-            } else {
+            } else if (storageType == STORAGE_TYPE_DEFAULT) {
                 filter = new CompoundFilter(ApplicationsState.FILTER_OTHER_APPS, filter);
             }
             return filter;
