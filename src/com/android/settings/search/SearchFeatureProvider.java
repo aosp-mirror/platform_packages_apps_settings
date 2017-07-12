@@ -130,4 +130,10 @@ public interface SearchFeatureProvider {
         return false;
     }
 
+    /**
+     * Prepare for search ranking predictions to avoid latency on the first prediction call.
+     */
+    default void searchRankingWarmup(Context context) {
+    }
+
 }

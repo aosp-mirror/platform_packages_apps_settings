@@ -451,6 +451,36 @@ public class SearchFragmentTest {
                 nullable(String.class), eq(searchResult));
     }
 
+    @Test
+    public void onResume_shouldCallSearchRankingWarmupIfSmartSearchRankingEnabled(){
+        when(mFeatureFactory.searchFeatureProvider.isSmartSearchRankingEnabled(any(Context.class)))
+                .thenReturn(true);
+
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        verify(mFeatureFactory.searchFeatureProvider)
+                .searchRankingWarmup(any(Context.class));
+    }
+
+    @Test
+    public void onResume_shouldNotCallSearchRankingWarmupIfSmartSearchRankingDisabled(){
+        when(mFeatureFactory.searchFeatureProvider.isSmartSearchRankingEnabled(any(Context.class)))
+                .thenReturn(false);
+
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        verify(mFeatureFactory.searchFeatureProvider, never())
+                .searchRankingWarmup(any(Context.class));
+    }
+
     private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag) {
         return pair -> pair.first == tag;
     }

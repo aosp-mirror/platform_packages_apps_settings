@@ -209,6 +209,10 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public void onResume() {
         super.onResume();
+        Context appContext = getContext().getApplicationContext();
+        if (mSearchFeatureProvider.isSmartSearchRankingEnabled(appContext)) {
+            mSearchFeatureProvider.searchRankingWarmup(appContext);
+        }
         requery();
     }
 
