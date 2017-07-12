@@ -16,22 +16,28 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/bluetooth_settings">
 
     <Preference
-        android:key="device_name"/>
+        android:key="device_name" />
 
     <PreferenceCategory
         android:key="paired_devices"
-        android:title="@string/bluetooth_paired_device_title"/>
+        android:title="@string/bluetooth_paired_device_title" />
 
-    <com.android.settings.DividerPreference
-        android:key="bt_received_files"
-        android:title="@string/bluetooth_show_received_files"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true"/>
+    <PreferenceCategory>
 
-    <com.android.settingslib.widget.FooterPreference/>
+        <Preference
+            android:key="bt_rename_device"
+            android:title="@string/bluetooth_device_name"
+            android:summary="@string/summary_placeholder" />
+
+        <Preference
+            android:key="bt_received_files"
+            android:title="@string/bluetooth_show_received_files" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference />
 
 </PreferenceScreen>
