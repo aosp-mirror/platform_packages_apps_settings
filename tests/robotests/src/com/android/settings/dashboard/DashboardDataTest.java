@@ -112,10 +112,7 @@ public class DashboardDataTest {
 
     @Test
     public void testBuildItemsData_containsAllData() {
-        final DashboardData.SuggestionConditionHeaderData data =
-                new DashboardData.SuggestionConditionHeaderData(
-                    mDashboardDataWithOneConditions.getConditions(), 0);
-        final Object[] expectedObjects = {data,
+        final Object[] expectedObjects = {
             mDashboardDataWithOneConditions.getSuggestions(),
             mDashboardDataWithOneConditions.getConditions(),
             null, mDashboardCategory, mTestCategoryTile};
@@ -186,17 +183,13 @@ public class DashboardDataTest {
     }
 
     @Test
-    public void testDiffUtil_InsertOneCondition_ResultDataTwoChanged() {
+    public void testDiffUtil_InsertOneCondition_ResultDataOneChanged() {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
-        // Item in position 1 is the header, which contains the number of conditions, changed from
-        // 1 to 2
-        testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 0, 1));
-        // Item in position 3 is the condition container containing the list of conditions, which
+        // Item in position 2 is the condition container containing the list of conditions, which
         // gets 1 more item
         testResultData.add(new ListUpdateResult.ResultData(
-            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
+            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -207,7 +200,7 @@ public class DashboardDataTest {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 6));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 5));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
     }

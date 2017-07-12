@@ -228,12 +228,14 @@ public class DashboardData {
                 hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
 
         resetCount();
-            /* Top suggestion/condition header. This will be present when there is any suggestion or
-             * condition to show, except in the case that there is only conditions to show and the
-             * mode is fully expanded. */
+            /* Top suggestion/condition header. This will be present when there is any suggestion
+             * and the mode is collapsed, or it only has conditions and the mode is not fully
+             * expanded. */
         countItem(new SuggestionConditionHeaderData(conditions, hiddenSuggestion),
-                R.layout.suggestion_condition_header, hasSuggestions
-                        || hasConditions && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED,
+                R.layout.suggestion_condition_header,
+                        hasSuggestions && mSuggestionConditionMode == HEADER_MODE_COLLAPSED
+                        || !hasSuggestions && hasConditions
+                                && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED,
                 NS_SUGGESTION_CONDITION);
 
             /* Suggestion container. This is the card view that contains the list of suggestions.

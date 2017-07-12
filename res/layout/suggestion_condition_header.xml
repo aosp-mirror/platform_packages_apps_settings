@@ -15,62 +15,80 @@
      limitations under the License.
 -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/SuggestionConditionStyle"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:layout_centerHorizontal="true">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@android:id/icon_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_centerVertical="true">
+    <Space
+        android:id="@+id/top_space"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"/>
 
-        <include layout="@layout/condition_header_icon" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_centerHorizontal="true">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@android:id/icon_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_centerVertical="true">
 
-    <ImageView
-        android:id="@+id/expand_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:padding="16dp"
-        android:src="@drawable/ic_expand_more"/>
+            <include layout="@layout/condition_header_icon" />
 
-    <TextView
-        android:id="@android:id/summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_toStartOf="@id/expand_indicator"
-        android:layout_centerVertical="true"
-        android:gravity="end"
-        android:textAppearance="@style/TextAppearance.SuggestionTitle"
-        android:textColor="?android:attr/colorAccent" />
+        </FrameLayout>
 
-    <TextView
-        android:id="@android:id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@android:id/icon_frame"
-        android:layout_toStartOf="@android:id/summary"
-        android:layout_centerVertical="true"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:textAppearance="@style/TextAppearance.SuggestionTitle"
-        android:textColor="?android:attr/colorAccent" />
+        <ImageView
+            android:id="@+id/expand_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="4dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:src="@drawable/ic_expand_more"/>
 
-    <LinearLayout
-        android:id="@+id/additional_icons"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toStartOf="@android:id/summary"
-        android:layout_toEndOf="@android:id/icon_frame"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"/>
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toStartOf="@id/expand_indicator"
+            android:layout_centerVertical="true"
+            android:gravity="end"
+            android:textAppearance="@style/TextAppearance.SuggestionTitle"
+            android:textColor="?android:attr/colorAccent" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@android:id/icon_frame"
+            android:layout_toStartOf="@android:id/summary"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.SuggestionTitle"
+            android:textColor="?android:attr/colorAccent" />
+
+        <LinearLayout
+            android:id="@+id/additional_icons"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@android:id/summary"
+            android:layout_toEndOf="@android:id/icon_frame"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"/>
+
+    </RelativeLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="12dp"/>
+
+</LinearLayout>
