@@ -22,16 +22,19 @@ import android.nfc.NfcManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -50,19 +53,45 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedDeviceDashboardFragmentTest {
 
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     Context mContext;
 
     @Mock
     private PackageManager mManager;
 
+    private FakeFeatureFactory mFeatureFactory;
+    private SmsMirroringFeatureProvider mFeatureProvider;
     private ConnectedDeviceDashboardFragment mFragment;
+    private TestSmsMirroringPreferenceController mSmsMirroringPreferenceController;
+
+    private static final class TestSmsMirroringPreferenceController
+            extends SmsMirroringPreferenceController implements PreferenceControllerMixin {
+
+        private boolean mIsAvailable;
+
+        public TestSmsMirroringPreferenceController(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean isAvailable() {
+            return mIsAvailable;
+        }
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureProvider = mFeatureFactory.smsMirroringFeatureProvider;
+
         mFragment = new ConnectedDeviceDashboardFragment();
         when(mContext.getPackageManager()).thenReturn(mManager);
+
+        mSmsMirroringPreferenceController = new TestSmsMirroringPreferenceController(mContext);
+        when(mFeatureProvider.getController(mContext)).thenReturn(
+                mSmsMirroringPreferenceController);
     }
 
     @Test
@@ -103,11 +132,35 @@ public class ConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
+    public void testSearchIndexProvider_NoSmsMirroring_KeyAdded() {
+        when(mFeatureProvider.shouldShowSmsMirroring(mContext)).thenReturn(false);
+        mSmsMirroringPreferenceController.mIsAvailable = false;
+
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                mContext);
+
+        assertThat(keys).isNotNull();
+        assertThat(keys).contains(mSmsMirroringPreferenceController.getPreferenceKey());
+    }
+
+    @Test
+    public void testSearchIndexProvider_SmsMirroring_KeyNotAdded() {
+        when(mFeatureProvider.shouldShowSmsMirroring(mContext)).thenReturn(true);
+        mSmsMirroringPreferenceController.mIsAvailable = true;
+
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                mContext);
+
+        assertThat(keys).isNotNull();
+        assertThat(keys).doesNotContain(mSmsMirroringPreferenceController.getPreferenceKey());
+    }
+
+    @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
+                .getNonIndexableKeys(mContext);
         final int xmlId = (new ConnectedDeviceDashboardFragment()).getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
@@ -141,6 +194,7 @@ public class ConnectedDeviceDashboardFragmentTest {
         final SummaryLoader summaryLoader = mock(SummaryLoader.class);
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
+        when(mContext.getSystemService(NFC_SERVICE)).thenReturn(null);
 
         SummaryLoader.SummaryProvider provider =
                 new ConnectedDeviceDashboardFragment.SummaryProvider(mContext, summaryLoader);
