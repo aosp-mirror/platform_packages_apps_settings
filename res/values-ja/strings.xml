@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi を自動的に ON にする"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"ホーム ネットワークなどの高品質の保存済みネットワークの検出時に Wi‑Fi を ON にする"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi のスキャンが OFF になっているため利用できません"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"接続不良のとき無効にする"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"安定したインターネット接続があるときのみWi-Fiネットワークを使用する"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"インターネット接続が安定したネットワークのみ使用する"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"オープン ネットワークに接続する"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"高品質の公共ネットワークに自動的に接続する"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"この機能を使用するには、対応するネットワーク評価プロバイダを選択してください"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"証明書のインストール"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"位置情報の精度を向上させるため、Wi-FiがOFFの場合でもシステムのアプリやサービスはWi‑Fiネットワークをスキャンできます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"位置情報の精度を上げるには、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で Wi-Fi のスキャンをオンにしてください。"</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"指を離してスリープ状態から復帰"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"常に画面表示"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"常に ON / 電池使用量が増えます"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"新しい通知"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"表示するタイミング"</string>
     <string name="doze_title" msgid="2375510714460456687">"新しい通知"</string>
     <string name="doze_summary" msgid="3846219936142814032">"通知を受信したときにスリープ状態から復帰"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"常に ON"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"時刻、通知アイコンなどの情報を表示します。電池使用量が増えます。"</string>
     <string name="title_font_size" msgid="4405544325522105222">"フォントサイズ"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"テキストのサイズを変更します"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIMカードロック設定"</string>
@@ -2793,9 +2794,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"操作"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支払い, タップ, ペイメント"</string>
     <string name="keywords_backup" msgid="470070289135403022">"バックアップ, バック アップ"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"ジェスチャー, 側面, 側, Active Edge, スクイーズ, つかむ, アシスト, アシスタント, スクイジー, スクイズィー, スクイーズィー, スクイージー, OK Google, Google アシスタント"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"ジェスチャー, 復帰, 通知, 画面, 表示, 画面を OFF, 画面を ON, スクイーズ, 側面, スリープ時, スリープ, つかむ"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"ジェスチャー, マナーモード, スヌーズ, アラーム, 着信, 無音, 表示, ロック画面, スクイーズ, つかむ, 側面, 停止"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"操作"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFCタグのセットアップ"</string>
     <string name="write_tag" msgid="8571858602896222537">"書き込む"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"書き込むにはタグをタップしてください..."</string>
@@ -3580,9 +3579,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"通知を確認するには、端末の背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"通知をすばやく確認"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"指紋認証センサーを下にスワイプ"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"アシスト操作"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"感度"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"ON"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"OFF"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"ブートローダーは既にロック解除されています"</string>

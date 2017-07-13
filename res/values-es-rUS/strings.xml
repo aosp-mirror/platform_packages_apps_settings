@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activar Wi-Fi automáticamente"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"El Wi-Fi se volverá a activar automáticamente cerca de redes guardadas de alta calidad, como tu red doméstica"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"La opción no está disponible porque la búsqueda de redes Wi-Fi está desactivada"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Para usar la función, selecciona un proveedor de calificación de red"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Evitar malas conexiones"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Usar solo redes con una conexión a Internet estable"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Conectar a redes abiertas"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Conectar automáticamente a redes públicas de alta calidad"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Para usar la función, selecciona un proveedor de calificación de red"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Para usar la función, selecciona un proveedor de calificación de red compatible"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema todavía pueden buscar redes Wi-Fi. Puedes cambiar esta opción en la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuración de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Para mejorar la precisión de la ubicación, activa la búsqueda de Wi-Fi en la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>configuración de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Pantalla ambiente"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Siempre activada/Aumenta el uso de la batería"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nuevas notificaciones"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Cuándo mostrar"</string>
     <string name="doze_title" msgid="2375510714460456687">"Nuevas notificaciones"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activar la pantalla al recibir notificaciones"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Siempre activada"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Muestra la hora, los íconos de notificaciones y otra información. Aumenta el uso de la batería."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumenta o reduce el tamaño del texto en pantalla"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Bloqueo de la tarjeta SIM"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"gestos"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"pagar, presionar, pagos"</string>
     <string name="keywords_backup" msgid="470070289135403022">"copia de seguridad, copia"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"gesto, borde, lado, active edge, apretar, sujetar, asistencia, asistente, función de apretar, apretado, apretando, que se puede apretar, ok google, asistente de google"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"gesto, activar, notificaciones, pantalla, pantalla apagada, pantalla encendida, apretar, borde, inactivo, suspender, sujetar"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"gesto, silencio, posponer, alarma, llamada entrante, volumen bajo, pantalla, pantalla bloqueada, apretar, sujetar, borde, detener"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gesto"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escribir"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Presiona una etiqueta para editarla…"</string>
@@ -3574,9 +3573,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para ver las notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior del dispositivo."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Consulta tus notificaciones rápidamente"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Desliza el dedo hacia abajo en sensor de huellas digitales"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto de asistencia"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidad"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activado"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivado"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"El cargador de inicio está desbloqueado"</string>

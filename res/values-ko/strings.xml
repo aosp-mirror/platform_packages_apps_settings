@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"자동으로 Wi‑Fi 사용 설정"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"홈 네트워크 등의 저장된 고품질 네트워크가 가까이 있을 때 Wi‑Fi가 다시 사용 설정됩니다."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi 검색이 사용 중지되어 사용할 수 없습니다."</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"사용하려면 네트워크 평가 제공업체를 선택하세요."</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"불량 네트워크 방지"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"인터넷 연결이 원활하지 않은 경우 Wi-Fi 네트워크를 사용하지 않음"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"인터넷 연결이 안정적인 네트워크만 사용합니다."</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"개방형 네트워크에 연결"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"고품질 공용 네트워크에 자동으로 연결"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"사용하려면 네트워크 평가 제공업체를 선택하세요."</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"사용하려면 호환되는 네트워크 평가 제공업체를 선택하세요."</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"인증서 설치"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"위치 정확도를 개선하기 위해 시스템 앱과 서비스에서 Wi‑Fi 네트워크를 계속 검색할 수 있습니다. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>검색 설정<xliff:g id="LINK_END_1">LINK_END</xliff:g>에서 설정을 변경할 수 있습니다."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"위치 정확도를 높이려면 <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>검색 설정<xliff:g id="LINK_END_1">LINK_END</xliff:g>에서 Wi-Fi 검색을 사용 설정하세요."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"기기를 들어 대기 모드 해제"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"절전 모드 자동 해제"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"상시 사용 설정/배터리 사용량 증가"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"새로운 알림"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"표시 시점"</string>
     <string name="doze_title" msgid="2375510714460456687">"새로운 알림"</string>
     <string name="doze_summary" msgid="3846219936142814032">"알림을 수신하면 절전 모드를 해제합니다."</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"항상 사용"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"시간, 알림 아이콘 등의 정보가 표시되며 배터리 사용량이 증가합니다."</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"텍스트를 확대 또는 축소"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 카드 잠금 설정"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"동작"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"결제, 탭, 결제"</string>
     <string name="keywords_backup" msgid="470070289135403022">"백업, 백 업"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"동작, edge, 측면, active edge, 쥐기, 잡기, 어시스트, 어시스턴트, squeezy, squeezie, squeezey, squeezee, ok google, google 어시스턴트"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"동작, 깨우기, 알림, 화면, 디스플레이, 화면 끄기, 화면 켜기, 쥐기, edge, 대기 상태, 절전 모드, 잡기"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"동작, 소리 끄기, 일시 중지, 알람, 수신 전화, 무음, 디스플레이, 잠금 화면, 쥐기, 잡기, edge, 중지"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"동작"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC 태그 설정"</string>
     <string name="write_tag" msgid="8571858602896222537">"쓰기"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"태그를 탭하여 작성하세요..."</string>
@@ -3576,9 +3575,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"알림을 확인하려면 기기 뒷면의 지문 센서에서 아래로 스와이프합니다."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"신속하게 알림 확인하기"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"지문 센서에서 아래로 스와이프합니다."</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"지원 동작"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"민감도"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"사용"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"사용 안함"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"부트로더가 이미 잠금해제되었습니다."</string>

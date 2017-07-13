@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Aktivera Wi‑Fi automatiskt"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi aktiveras i närheten av sparade nätverk av hög kvalitet, till exempel ditt hemnätverk"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Detta är inte tillgängligt eftersom Wi‑Fi-sökning har inaktiverats"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Du måste välja en leverantör av nätverksbetyg om du vill använda nätverket"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Undvik dåliga anslutningar"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Använd inte Wi-Fi-nätverk som inte har en bra internetanslutning"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Använd endast nätverk som har en bra internetanslutning"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Anslut till öppna nätverk"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Anslut automatiskt till offentliga nätverk av hög kvalitet"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Du måste välja en leverantör av nätverksbetyg om du vill använda nätverket"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Du måste välja en kompatibel leverantör av nätverksbetyg om du vill använda nätverket"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installera certifikat"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"I syfte att förbättra platsangivelserna kan systemtjänster och -appar fortfarande söka efter Wi-Fi-nätverk. Du kan ändra detta i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>sökinställningarna<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Platsangivelsen kan göras mer exakt om du aktiverar sökning efter Wi-Fi-nätverk i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>genomsökningsinställningarna<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk ljusstyrka"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Gå ur viloläget vid lyft"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Inaktiv låsskärm"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Alltid på/Batterianvändningen ökar"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nya aviseringar"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"När den ska visas"</string>
     <string name="doze_title" msgid="2375510714460456687">"Nya aviseringar"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Aktivera skärmen när du får aviseringar"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Alltid på"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Visa tid, aviseringsikoner och annan information. Batterianvändningen ökar."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Teckenstorlek"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Gör texten större eller mindre."</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Låsinställningar för SIM-kort"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"rörelser"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"betala, tryck, betalningar"</string>
     <string name="keywords_backup" msgid="470070289135403022">"säkerhetskopia, säkerhets kopia"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"rörelse, kant, sida, aktiv kant, klämma, grepp, assistera, assistent, squeezy, squeezie, squeezey, squeezee, ok google, google assistent"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"rörelse, aktivera, aviseringar, skärm, visa, skärm av, skärm på, klämma, kant, inaktiv, inaktiverad, grepp"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"rörelse, tystnad, snooza, inkommande samtal, tyst, visa, låsskärm, klämma, grepp, kant, stopp"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"rörelse"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Ange en NFC-tagg för Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tryck på en etikett för att skriva ..."</string>
@@ -3576,9 +3575,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av enheten."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Visa aviseringar snabbt"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Svep nedåt på fingeravtryckssensorn"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Assistentrörelse"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Känslighet"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"På"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Av"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader har redan låsts upp"</string>

@@ -721,11 +721,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi желісін автоматты түрде қосу"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi үйдегі желі секілді маңайдағы жоғары сапалы сақталған желіге қайта қосылады"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi сканерлеу функциясы өшірулі болғандықтан қолжетімді емес"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Пайдалану үшін желіні бағалау провайдерін таңдаңыз"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Нашар байланыстарды қолданбау"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Егер интернет байланысы жақсы болмаса Wi‑Fi желісін қолданбаңыз"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Тек жақсы интернет байланысы бар желілерді пайдалану"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Ашық желілерге қосылу"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Жоғары сапалы ашық желілерге автоматты қосылу"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Пайдалану үшін желіні бағалау провайдерін таңдаңыз"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Пайдалану үшін үйлесімді желіні бағалау провайдерін таңдаңыз"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Сертификаттар орнату"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Орынды анықтау дәлдігін жақсарту үшін жүйелік қолданбалар мен қызметтер әлі де Wi‑Fi желілерін іздей алады. Мұны <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>іздеу параметрлерінде<xliff:g id="LINK_END_1">LINK_END</xliff:g> өзгертуге болады."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Орналасқан жер дәлірек анықталуы үшін <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>сканерлеу параметрлерінен<xliff:g id="LINK_END_1">LINK_END</xliff:g> Wi-Fi арқылы сканерлеуді қосыңыз."</string>
@@ -1059,15 +1062,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Aвтоматтық жарықтық"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ояту үшін көтеру"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Айналаны көрсету"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Әрдайым қосулы / Батарея заряды тезірек таусылады"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Жаңа хабарландырулар"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Көрсетілетін уақыты"</string>
     <string name="doze_title" msgid="2375510714460456687">"Жаңа хабарландырулар"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Хабарландырулар келгенде, экранды ұйқы режимінен шығару"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Әрқашан қосулы"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Уақытты, хабарландыру белгішелерін және басқа ақпараттарды көрсету. Батарея заряды тезірек таусылады."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Шрифт өлшемі"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Мәтінді үлкейтеді немесе кішірейтеді"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM картасын бекіту параметрлері"</string>
@@ -2790,9 +2791,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"қимылдар"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"төлеу, түрту, төлемдер"</string>
     <string name="keywords_backup" msgid="470070289135403022">"сақтық көшірме, сақтық көшірме жасау"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"қимыл, жиек, жаны, белсенді жиек, қысу, қармау, көмектесу, Assistant, сығылмалы, squeezie, squeezey, squeezee, Ok Google, Google Assistant"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"қимыл, ояту, хабарландырулар, экран, дисплей, экранды өшіру, экранды қосу, қысу, жиек, ұйқыда, ұйқы, қармау"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"қимыл, үнсіздік, кідірту, дабыл, келген қоңырау, тыныш, көрсету, құлып экраны, қысу, қармау, жиек, тоқтату"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"қимыл"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC белгісін реттеу"</string>
     <string name="write_tag" msgid="8571858602896222537">"Жазу"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Жазу үшін белгіні түртіңіз…"</string>
@@ -3577,9 +3576,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Хабарландыруларды көру үшін құрылғының артындағы саусақ ізін оқу сканерін саусақпен төмен қарай сипап өтіңіз."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Хабарландыруларды жылдам көру"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Саусақ ізін оқу сканерінде саусақты төмен сырғыту"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Көмекші қимыл"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Сезгіштік"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Қосулы"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Өшірулі"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Операциялық жүйені жүктеу құралының құлпы ашылған"</string>

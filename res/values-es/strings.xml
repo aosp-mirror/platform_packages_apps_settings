@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Activar Wi-Fi automáticamente"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"La conexión Wi-Fi se volverá a activar automáticamente cerca de las redes de alta calidad guardadas, como la de tu casa"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"No está disponible porque la búsqueda de redes Wi-Fi está desactivada"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Para usar esta función, selecciona un proveedor de valoración de redes"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Solo conexiones estables"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Solo usar redes con buena conexión a Internet"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Conectarse a redes abiertas"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Conectarse automáticamente a redes Wi-Fi públicas de alta calidad"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Para usar esta función, selecciona un proveedor de valoración de redes"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Para usar esta función, selecciona un proveedor de valoración de redes compatible"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden buscar redes Wi-Fi aunque esté desactivada la conexión Wi-Fi. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Para mejorar la precisión de la ubicación, activa la búsqueda de redes Wi-Fi en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de la búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Pantalla ambiente"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Siempre activada/Aumenta el uso de la batería"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nuevas notificaciones"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Cuándo debe mostrarse"</string>
     <string name="doze_title" msgid="2375510714460456687">"Nuevas notificaciones"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activar pantalla al recibir notificaciones"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Siempre activada"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Muestra la hora, iconos de notificación y otra información. Aumenta el uso de la batería."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de la fuente"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumenta o disminuye el tamaño del texto"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ajustes de bloqueo de tarjeta SIM"</string>
@@ -1362,26 +1363,26 @@
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Espera..."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Ajustes de llamadas"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurar buzón, llamada en espera, desvío e identificador"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Compartir por USB"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Compartir conexión por USB"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Zona Wi-Fi portátil"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Compartir por Bluetooth"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Compartir Internet"</string>
-    <string name="tether_settings_title_all" msgid="3058586928118801157">"Punto de acceso/conexión con dispositivo"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Punto de acceso activado, conexión mediante dispositivo portátil"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Compartir conexión por Bluetooth"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Compartir conexión"</string>
+    <string name="tether_settings_title_all" msgid="3058586928118801157">"Zona Wi-Fi/Compartir conexión"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Zona Wi-Fi activada, conexión compartida"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Punto de acceso activado"</string>
-    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"Conexión mediante dispositivo portátil"</string>
+    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"Compartir conexión"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"No se puede hacer el anclaje de red ni utilizar zonas Wi-Fi portátiles mientras el ahorro de datos esté activado"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"Compartir por USB"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"Compartir conexión por USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Compartir la conexión a Internet del teléfono por USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"Compartir la conexión a Internet del tablet por USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Compartir por Bluetooth"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Compartir conexión por Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Comparte la conexión a Internet del tablet por Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Compartir la conexión a Internet del teléfono por Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Compartiendo la conexión a Internet de este <xliff:g id="DEVICE_NAME">%1$d</xliff:g> por Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"No se puede anclar a más de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivos."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Se desactivará el anclaje a red de <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="tethering_footer_info" msgid="1308462275952345985">"Utiliza el punto de acceso y la conexión mediante dispositivo portátil para compartir tu conexión a Internet con otros dispositivos a través de datos móviles. Las aplicaciones también pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
+    <string name="tethering_footer_info" msgid="1308462275952345985">"Utiliza la zona Wi-Fi y la conexión compartida para ofrecer tu conexión a Internet a otros dispositivos a través de datos móviles. Las aplicaciones también pueden crear una zona Wi-Fi para compartir contenido con dispositivos cercanos."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Ayuda"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Red móvil"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Plan móvil"</string>
@@ -2303,10 +2304,10 @@
     <string name="work_mode_label" msgid="5794470908668593961">"Modo de trabajo"</string>
     <string name="work_mode_summary" msgid="1620246003886940776">"Permitir que se utilice el modo de trabajo, incluidas las aplicaciones, la sincronización en segundo plano y las funciones relacionadas"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Quitar perfil de trabajo"</string>
-    <string name="background_data" msgid="5779592891375473817">"Conexiones automáticas"</string>
+    <string name="background_data" msgid="5779592891375473817">"Datos en segundo plano"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar datos, enviarlos y recibirlos."</string>
-    <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Inhabilitar conexiones automáticas?"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas las conexiones automáticas, aumentarás la duración de la batería y reducirás el uso de datos. Es posible que algunas aplicaciones sigan usando las conexiones automáticas."</string>
+    <string name="background_data_dialog_title" msgid="6059217698124786537">"¿Inhabilitar datos en segundo plano?"</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"Si inhabilitas los datos en segundo plano, aumentarás la duración de la batería y reducirás el uso de datos. Es posible que algunas aplicaciones sigan usando los datos en segundo plano."</string>
     <string name="sync_automatically" msgid="1682730255435062059">"Sincronizar datos aplicaciones autom."</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sincronización activa"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"La sincronización está desactivada"</string>
@@ -2338,7 +2339,7 @@
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"No se puede hacer la sincronización de forma manual."</string>
-    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento no está disponible en este momento. Para modificar tu preferencia, activa temporalmente las conexiones automáticas y la sincronización automática."</string>
+    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento no está disponible en este momento. Para modificar tu preferencia, activa temporalmente los datos en segundo plano y la sincronización automática."</string>
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Dirección MAC 4G"</string>
     <string name="enter_password" msgid="8035706727471334122">"Para iniciar tu dispositivo Android, introduce tu contraseña"</string>
@@ -2364,8 +2365,8 @@
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Uso de las aplicaciones"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Itinerancia de datos"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringir conexiones automáticas"</string>
-    <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Permitir conexiones automáticas"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringir datos en segundo plano"</string>
+    <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Permitir datos en segundo plano"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Dividir uso de 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"Mostrar Wi‑Fi"</string>
     <string name="data_usage_menu_hide_wifi" msgid="7290056718050186769">"Ocultar Wi‑Fi"</string>
@@ -2401,13 +2402,13 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"Datos 2G-3G"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos 4G"</string>
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Primer plano:"</string>
-    <string name="data_usage_background_label" msgid="2722008379947694926">"Conexiones automáticas:"</string>
+    <string name="data_usage_background_label" msgid="2722008379947694926">"Datos en segundo plano:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Ajustes de la aplicación"</string>
-    <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Conexiones automáticas"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"Habilitar el uso de datos móviles en segundo plano"</string>
-    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir las conexiones automáticas, establece un límite de datos móviles."</string>
-    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir conexiones automáticas?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar conexiones automáticas cuando solo haya disponibles redes móviles.\n\nPuedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
+    <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Datos en segundo plano"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"Habilitar el uso de datos móviles con datos en segundo plano"</string>
+    <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Para restringir los datos en segundo plano, establece un límite de datos móviles."</string>
+    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"¿Restringir datos en segundo plano?"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos en segundo plano cuando solo haya disponibles redes móviles.\n\nPuedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Solo puedes restringir el uso de datos en segundo plano si estableces un límite de datos móviles."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"¿Activar sincronización automática?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Los cambios que hagas en tus cuentas en la Web se copiarán automáticamente en el tablet.\n\nEs posible que algunas cuentas copien también en la Web los cambios que hagas en el tablet. Así funcionan las cuentas de Google."</string>
@@ -2422,10 +2423,10 @@
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitar uso de datos"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"El tablet desactivará los datos móviles cuando se alcance el límite establecido.\n\nSe tiene en cuenta el uso de datos medido por el tablet, aunque tu operador podría registrarlo de forma diferente. Por tanto, debes ser prudente al establecer un límite."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"El teléfono desactivará los datos móviles cuando se alcance el límite establecido.\n\nSe tiene en cuenta el uso de datos medido por el teléfono, aunque tu operador podría registrarlo de forma diferente. Por tanto, debes ser prudente al establecer un límite."</string>
-    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir conexiones automáticas?"</string>
-    <string name="data_usage_restrict_background" msgid="434093644726734586">"Si restringes el uso de datos móviles en segundo plano, algunas aplicaciones y servicios no funcionarán si no tienes conexión a una red Wi‑Fi."</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Si restringes el uso de datos móviles en segundo plano, algunas aplicaciones y servicios no funcionarán si no tienes conexión a una red Wi‑Fi.\n\nEsta configuración afecta a todos los usuarios del tablet."</string>
-    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"Si restringes el uso de datos móviles en segundo plano, algunas aplicaciones y servicios no funcionarán si no tienes conexión a una red Wi‑Fi.\n\nEsta configuración afecta a todos los usuarios del teléfono."</string>
+    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"¿Restringir datos en segundo plano?"</string>
+    <string name="data_usage_restrict_background" msgid="434093644726734586">"Si restringes el uso de datos en segundo plano móviles, algunas aplicaciones y servicios no funcionarán si no tienes conexión a una red Wi‑Fi."</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Si restringes el uso de datos en segundo plano, algunas aplicaciones y servicios no funcionarán si no tienes conexión a una red Wi‑Fi.\n\nEsta configuración afecta a todos los usuarios del tablet."</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"Si restringes el uso de datos en segundo plano, algunas aplicaciones y servicios no funcionarán si no tienes conexión a una red Wi‑Fi.\n\nEsta configuración afecta a todos los usuarios del teléfono."</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"aviso"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicaciones eliminadas"</string>
@@ -2718,7 +2719,7 @@
     <string name="preferred_network_offload_title" msgid="1605829724169550275">"Descarga de red preferida"</string>
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Inhab. emisión nombre red"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Si no emites el nombre de la red, los usuarios externos no podrá acceder a la información de tu red."</string>
-    <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Si no emites el nombre de la red, las conexiones automáticas no podrán ocultar las redes."</string>
+    <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Si no emites el nombre de la red, los datos en segundo plano no podrán ocultar las redes."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6272913297433198340">"Tarjetas SIM cambiadas."</string>
     <string name="sim_notification_summary" msgid="8858043655706669772">"Toca para configurar"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"gestos"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"pagar, tocar, pagos"</string>
     <string name="keywords_backup" msgid="470070289135403022">"copia de seguridad, copia seguridad"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"gesto, borde, lado, borde activo, apretar, agarrar, asistencia, asistente, función de apretar, apretado, apretando, que se puede apretar, ok google, asistente de google"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"gesto, activar, notificaciones, pantalla, pantalla desactivada, pantalla activada, apretar, borde, suspensión, suspender, agarrar"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"gesto, silenciar, posponer, alarma, llamada entrante, silencio, pantalla, pantalla de bloqueo, apretar, agarrar, borde, detener"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gesto"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Editar"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toca una etiqueta para editarla..."</string>
@@ -3357,11 +3356,11 @@
     <string name="condition_airplane_summary" msgid="5561586417832393666">"La red móvil, la conexión Wi-Fi y el Bluetooth están desactivados. No puedes hacer llamadas ni conectarte a Internet."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"No molestar activado (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Ahorro de batería activado"</string>
-    <string name="condition_battery_summary" msgid="4418839236027977450">"Ha disminuido el rendimiento. Las conexiones automáticas y los servicios de ubicación están desactivados."</string>
+    <string name="condition_battery_summary" msgid="4418839236027977450">"Ha disminuido el rendimiento. Las datos en segundo plano y los servicios de ubicación están desactivados."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Datos móviles desactivados"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet solo está disponible a través de redes Wi-Fi"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"Ahorro de datos activado"</string>
-    <string name="condition_bg_data_summary" msgid="656957852895282228">"Las conexiones automáticas solo están disponibles a través de redes Wi-Fi. Si la conexión Wi-Fi no está disponible, algunas aplicaciones o algunos servicios pueden verse afectados."</string>
+    <string name="condition_bg_data_summary" msgid="656957852895282228">"Las datos en segundo plano solo están disponibles a través de redes Wi-Fi. Si la conexión Wi-Fi no está disponible, algunas aplicaciones o algunos servicios pueden verse afectados."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Las aplicaciones, la sincronización en segundo plano y otras funciones relacionadas con tu perfil de trabajo están desactivadas."</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Luz nocturna activada"</string>
@@ -3416,7 +3415,7 @@
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Ahorro de datos"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Datos no restringidos"</string>
-    <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Las conexiones automáticas están desactivadas"</string>
+    <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Las datos en segundo plano están desactivadas"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Activado"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Desactivado"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Uso de datos sin restricción"</string>
@@ -3576,9 +3575,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del dispositivo."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Ver las notificaciones más rápido"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Desliza el dedo hacia abajo en sensor de huellas digitales"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Gesto de asistencia"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sensibilidad"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activado"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivado"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"El gestor de arranque ya está desbloqueado"</string>

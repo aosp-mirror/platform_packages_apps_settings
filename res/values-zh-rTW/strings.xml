@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"自動開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"位於已儲存的高品質 Wi‑Fi 網路範圍內 (例如家用網路) 時自動重新開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi-Fi 掃描已關閉，因此無法使用"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"如要使用這項功能，請選取網路評分供應商"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"避開品質不佳的連線"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"除非 Wi-Fi 網路連線狀態良好，否則不使用"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"僅使用網際網路連線品質穩定的網路"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"連線至開放網路"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"自動連線至高品質的公用網路"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"如要使用這項功能，請選取網路評分供應商"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"如要使用這項功能，請選取相容的網路評分供應商"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"為了提升定位精確度，系統應用程式和服務仍可掃描 Wi-Fi 網路。你可以前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>變更這項設定。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"如要提升定位精確度，請前往<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>掃描設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>開啟 Wi-Fi 掃描功能。"</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"舉起即可喚醒"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"環境顯示"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"一律開啟/電池用量已增加"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"新通知"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"顯示時機"</string>
     <string name="doze_title" msgid="2375510714460456687">"新通知"</string>
     <string name="doze_summary" msgid="3846219936142814032">"收到通知時喚醒螢幕"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"一律開啟"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"顯示時間、通知圖示和其他資訊。電池用量已增加。"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"縮小或放大文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
@@ -2793,9 +2794,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"手勢"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支付、輕觸、付款"</string>
     <string name="keywords_backup" msgid="470070289135403022">"備份內容, 備份"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"手勢, 邊緣, 側面, active edge, 握壓, 拿握, 協助, 個人助理, 壓握, 抓握, 握住, 緊握, Ok Google, Google 個人助理"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"手勢, 喚醒, 通知, 螢幕, 顯示, 關閉螢幕, 開啟螢幕, 握壓, 邊緣, 睡眠, 休眠, 拿握"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"手勢, 關閉鈴聲, 貪睡, 鬧鐘, 來電, 靜音, 顯示, 螢幕鎖定, 握壓, 拿握, 邊緣, 停止"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"手勢"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標記"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"輕觸標記即可寫入..."</string>
@@ -3580,9 +3579,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"將手指放在裝置背面的指紋感應器上並向下滑動，即可查看通知。"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"快速查看通知"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"將手指放在指紋感應器上並向下滑動"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"輔助手勢"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"敏感度"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"開啟"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"關閉"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"開機載入器已解除鎖定"</string>
