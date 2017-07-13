@@ -62,8 +62,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
     private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
-    private static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
 
+    @VisibleForTesting
+    static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
     @VisibleForTesting
     static final int SUGGESTION_CONDITION_HEADER_POSITION = 0;
 
@@ -421,8 +422,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             int position) {
         // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
         // header anymore.
-        if (position == (SUGGESTION_CONDITION_HEADER_POSITION)
-                && mDashboardData.getSuggestions() != null) {
+        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        if (position == SUGGESTION_CONDITION_HEADER_POSITION
+                && suggestions != null && suggestions.size() > 0) {
             mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
                 mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
             mSuggestionDismissHandler = new SuggestionDismissController(mContext,
