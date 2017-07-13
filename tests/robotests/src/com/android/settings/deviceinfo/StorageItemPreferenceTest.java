@@ -55,7 +55,7 @@ public class StorageItemPreferenceTest {
     @Test
     public void testAfterLoad() {
         mPreference.setStorageSize(MEGABYTE_IN_BYTES * 10, MEGABYTE_IN_BYTES * 100);
-        assertThat(((String) mPreference.getSummary())).isEqualTo("0.01GB");
+        assertThat(((String) mPreference.getSummary())).isEqualTo("0.01 GB");
     }
 
     @Test
