@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.v4.text.BidiFormatter;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -104,7 +105,7 @@ public class WifiInfoPreferenceController extends AbstractPreferenceController
             final String ipAddress = Utils.getWifiIpAddresses(mContext);
             mWifiIpAddressPref.setSummary(ipAddress == null
                     ? mContext.getString(R.string.status_unavailable)
-                    : ipAddress);
+                    : BidiFormatter.getInstance().unicodeWrap(ipAddress));
         }
     }
 
