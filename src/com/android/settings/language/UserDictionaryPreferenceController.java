@@ -21,9 +21,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.TreeSet;

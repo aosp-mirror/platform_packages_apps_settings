@@ -1,25 +1,29 @@
-/**
- * Copyright (C) 2009 Google Inc.
+/*
+ * Copyright (C) 2009 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.inputmethod;
 
+import android.annotation.Nullable;
+import android.app.ActionBar;
 import android.app.ListFragment;
+import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
@@ -38,28 +42,13 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.inputmethod.UserDictionaryAddWordContents;
-import com.android.settings.inputmethod.UserDictionarySettingsUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 
-import java.util.Locale;
-
-public class UserDictionarySettings extends ListFragment implements Instrumentable {
-
-    private static final String[] QUERY_PROJECTION = {
-        UserDictionary.Words._ID, UserDictionary.Words.WORD, UserDictionary.Words.SHORTCUT
-    };
-
-    // The index of the shortcut in the above array.
-    private static final int INDEX_SHORTCUT = 2;
-
-    // Either the locale is empty (means the word is applicable to all locales)
-    // or the word equals our current locale
-    private static final String QUERY_SELECTION =
-            UserDictionary.Words.LOCALE + "=?";
-    private static final String QUERY_SELECTION_ALL_LOCALES =
-            UserDictionary.Words.LOCALE + " is null";
+public class UserDictionarySettings extends ListFragment implements Instrumentable,
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String DELETE_SELECTION_WITH_SHORTCUT = UserDictionary.Words.WORD
             + "=? AND " + UserDictionary.Words.SHORTCUT + "=?";
@@ -68,12 +57,13 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
             + UserDictionary.Words.SHORTCUT + "=''";
 
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
+    private static final int LOADER_ID = 1;
 
     private final VisibilityLoggerMixin mVisibilityLoggerMixin =
             new VisibilityLoggerMixin(getMetricsCategory());
 
     private Cursor mCursor;
-    protected String mLocale;
+    private String mLocale;
 
     @Override
     public int getMetricsCategory() {
@@ -87,16 +77,8 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(
-                com.android.internal.R.layout.preference_list_fragment, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         final Intent intent = getActivity().getIntent();
         final String localeFromIntent =
@@ -116,56 +98,49 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         }
 
         mLocale = locale;
-        mCursor = createCursor(locale);
-        TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
+
+        setHasOptionsMenu(true);
+        getLoaderManager().initLoader(LOADER_ID, null, this /* callback */);
+    }
+
+    @Override
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Show the language as a subtitle of the action bar
+        final ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.user_dict_settings_title);
+            actionBar.setSubtitle(
+                    UserDictionarySettingsUtils.getLocaleDisplayName(getActivity(), mLocale));
+        }
+
+        return inflater.inflate(
+                com.android.internal.R.layout.preference_list_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        TextView emptyView = getView().findViewById(android.R.id.empty);
         emptyView.setText(R.string.user_dict_settings_empty_text);
 
         final ListView listView = getListView();
-        listView.setAdapter(createAdapter());
         listView.setFastScrollEnabled(true);
         listView.setEmptyView(emptyView);
-
-        setHasOptionsMenu(true);
-        // Show the language as a subtitle of the action bar
-        getActivity().getActionBar().setSubtitle(
-                UserDictionarySettingsUtils.getLocaleDisplayName(getActivity(), mLocale));
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mVisibilityLoggerMixin.onResume();
-    }
-
-    private Cursor createCursor(final String locale) {
-        // Locale can be any of:
-        // - The string representation of a locale, as returned by Locale#toString()
-        // - The empty string. This means we want a cursor returning words valid for all locales.
-        // - null. This means we want a cursor for the current locale, whatever this is.
-        // Note that this contrasts with the data inside the database, where NULL means "all
-        // locales" and there should never be an empty string. The confusion is called by the
-        // historical use of null for "all locales".
-        // TODO: it should be easy to make this more readable by making the special values
-        // human-readable, like "all_locales" and "current_locales" strings, provided they
-        // can be guaranteed not to match locales that may exist.
-        if ("".equals(locale)) {
-            // Case-insensitive sort
-            return getActivity().managedQuery(UserDictionary.Words.CONTENT_URI, QUERY_PROJECTION,
-                    QUERY_SELECTION_ALL_LOCALES, null,
-                    "UPPER(" + UserDictionary.Words.WORD + ")");
-        } else {
-            final String queryLocale = null != locale ? locale : Locale.getDefault().toString();
-            return getActivity().managedQuery(UserDictionary.Words.CONTENT_URI, QUERY_PROJECTION,
-                    QUERY_SELECTION, new String[] { queryLocale },
-                    "UPPER(" + UserDictionary.Words.WORD + ")");
-        }
+        getLoaderManager().restartLoader(LOADER_ID, null, this /* callback */);
     }
 
     private ListAdapter createAdapter() {
         return new MyAdapter(getActivity(),
                 R.layout.user_dictionary_item, mCursor,
-                new String[] { UserDictionary.Words.WORD, UserDictionary.Words.SHORTCUT },
-                new int[] { android.R.id.text1, android.R.id.text2 }, this);
+                new String[]{UserDictionary.Words.WORD, UserDictionary.Words.SHORTCUT},
+                new int[]{android.R.id.text1, android.R.id.text2});
     }
 
     @Override
@@ -181,7 +156,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem actionItem =
                 menu.add(0, OPTIONS_MENU_ADD, 0, R.string.user_dict_settings_add_menu_title)
-                .setIcon(R.drawable.ic_menu_add_white);
+                        .setIcon(R.drawable.ic_menu_add_white);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
@@ -203,7 +178,8 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
 
     /**
      * Add or edit a word. If editingWord is null, it's an add; otherwise, it's an edit.
-     * @param editingWord the word to edit, or null if it's an add.
+     *
+     * @param editingWord     the word to edit, or null if it's an add.
      * @param editingShortcut the shortcut for this entry, or null if none.
      */
     private void showAddOrEditDialog(final String editingWord, final String editingShortcut) {
@@ -245,12 +221,28 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         if (TextUtils.isEmpty(shortcut)) {
             resolver.delete(
                     UserDictionary.Words.CONTENT_URI, DELETE_SELECTION_WITHOUT_SHORTCUT,
-                    new String[] { word });
+                    new String[]{word});
         } else {
             resolver.delete(
                     UserDictionary.Words.CONTENT_URI, DELETE_SELECTION_WITH_SHORTCUT,
-                    new String[] { word, shortcut });
+                    new String[]{word, shortcut});
         }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new UserDictionaryCursorLoader(getContext(), mLocale);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mCursor = data;
+        getListView().setAdapter(createAdapter());
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 
     private static class MyAdapter extends SimpleCursorAdapter implements SectionIndexer {
@@ -261,12 +253,12 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
 
             @Override
             public boolean setViewValue(View v, Cursor c, int columnIndex) {
-                if (columnIndex == INDEX_SHORTCUT) {
-                    final String shortcut = c.getString(INDEX_SHORTCUT);
+                if (columnIndex == UserDictionaryCursorLoader.INDEX_SHORTCUT) {
+                    final String shortcut = c.getString(UserDictionaryCursorLoader.INDEX_SHORTCUT);
                     if (TextUtils.isEmpty(shortcut)) {
                         v.setVisibility(View.GONE);
                     } else {
-                        ((TextView)v).setText(shortcut);
+                        ((TextView) v).setText(shortcut);
                         v.setVisibility(View.VISIBLE);
                     }
                     v.invalidate();
@@ -277,8 +269,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
             }
         };
 
-        public MyAdapter(Context context, int layout, Cursor c, String[] from, int[] to,
-                UserDictionarySettings settings) {
+        public MyAdapter(Context context, int layout, Cursor c, String[] from, int[] to) {
             super(context, layout, c, from, to);
 
             if (null != c) {
