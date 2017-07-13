@@ -16,6 +16,7 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
@@ -55,6 +56,31 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
                 MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
                 condition.getMetricsConstant());
             condition.onPrimaryClick();
+        }
+    };
+
+    @VisibleForTesting
+    ItemTouchHelper.SimpleCallback mSwipeCallback = new ItemTouchHelper.SimpleCallback(0,
+            ItemTouchHelper.START | ItemTouchHelper.END) {
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return viewHolder.getItemViewType() == R.layout.condition_tile_new_ui
+                    ? super.getSwipeDirs(recyclerView, viewHolder) : 0;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            Object item = getItem(viewHolder.getItemId());
+            // item can become null when running monkey
+            if (item != null) {
+                ((Condition) item).silence();
+            }
         }
     };
 
@@ -107,27 +133,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
     }
 
     public void addDismissHandling(final RecyclerView recyclerView) {
-        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.START | ItemTouchHelper.END) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
-                    RecyclerView.ViewHolder target) {
-                return true;
-            }
-
-            @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                return viewHolder.getItemViewType() == R.layout.condition_tile_new_ui
-                        ? super.getSwipeDirs(recyclerView, viewHolder) : 0;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Object item = getItem(viewHolder.getItemId());
-                ((Condition) item).silence();
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mSwipeCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
