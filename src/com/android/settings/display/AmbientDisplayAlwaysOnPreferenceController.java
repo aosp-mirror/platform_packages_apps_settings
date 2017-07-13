@@ -36,11 +36,17 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
     private static final int MY_USER = UserHandle.myUserId();
 
     private final AmbientDisplayConfiguration mConfig;
+    private final OnPreferenceChangedCallback mCallback;
+
+    public interface OnPreferenceChangedCallback {
+        void onPreferenceChanged();
+    }
 
     public AmbientDisplayAlwaysOnPreferenceController(Context context,
-            AmbientDisplayConfiguration config) {
+            AmbientDisplayConfiguration config, OnPreferenceChangedCallback callback) {
         super(context);
         mConfig = config;
+        mCallback = callback;
     }
 
     @Override
@@ -57,6 +63,9 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         int enabled = (boolean) newValue ? 1 : 0;
         Settings.Secure.putInt(mContext.getContentResolver(), DOZE_ALWAYS_ON, enabled);
+        if (mCallback != null) {
+            mCallback.onPreferenceChanged();
+        }
         return true;
     }
 

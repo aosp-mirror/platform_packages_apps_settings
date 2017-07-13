@@ -55,7 +55,7 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
                 FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
 
         // Stuff we always need to get BatteryInfo
-        Intent batteryBroadcast = getContext().registerReceiver(null,
+        Intent batteryBroadcast = context.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         final long elapsedRealtimeUs = BatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
         BatteryInfo batteryInfo;
@@ -79,7 +79,7 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
         } else {
             batteryInfo = BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                     elapsedRealtimeUs, false /* shortString */,
-                    discharging ? 0 : stats.computeBatteryTimeRemaining(elapsedRealtimeUs),
+                    discharging ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0,
                     false /* basedOnUsage */);
         }
         BatteryUtils.logRuntime(LOG_TAG, "BatteryInfoLoader.loadInBackground", startTime);

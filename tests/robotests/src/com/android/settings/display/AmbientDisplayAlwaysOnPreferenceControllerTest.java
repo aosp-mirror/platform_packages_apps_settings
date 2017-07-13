@@ -48,11 +48,13 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     @Mock SwitchPreference mSwitchPreference;
 
     AmbientDisplayAlwaysOnPreferenceController mController;
+    boolean mCallbackInvoked;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, mConfig);
+        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, mConfig,
+                () -> { mCallbackInvoked = true; });
     }
 
     @Test
@@ -73,6 +75,13 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         mController.updateState(mSwitchPreference);
 
         verify(mSwitchPreference).setChecked(false);
+    }
+
+    @Test
+    public void onPreferenceChange_callback() throws Exception {
+        assertThat(mCallbackInvoked).isFalse();
+        mController.onPreferenceChange(mSwitchPreference, true);
+        assertThat(mCallbackInvoked).isTrue();
     }
 
     @Test

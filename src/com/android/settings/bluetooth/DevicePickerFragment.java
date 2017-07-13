@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -43,14 +44,17 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     private static final String KEY_BT_DEVICE_LIST = "bt_device_list";
     private static final String TAG = "DevicePickerFragment";
 
-    public DevicePickerFragment() {
-        super(null /* Not tied to any user restrictions. */);
-    }
+    @VisibleForTesting
+    BluetoothProgressCategory mAvailableDevicesCategory;
 
     private boolean mNeedAuth;
     private String mLaunchPackage;
     private String mLaunchClass;
     private boolean mScanAllowed;
+
+    public DevicePickerFragment() {
+        super(null /* Not tied to any user restrictions. */);
+    }
 
     @Override
     void initPreferencesFromPreferenceScreen() {
@@ -60,6 +64,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
                 BluetoothDevicePicker.FILTER_TYPE_ALL));
         mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
         mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
+        mAvailableDevicesCategory = (BluetoothProgressCategory) findPreference(KEY_BT_DEVICE_LIST);
     }
 
     @Override
@@ -88,6 +93,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         mSelectedDevice = null;
         if (mScanAllowed) {
             enableScanning();
+            mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
         }
     }
 
@@ -121,6 +127,13 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         } else {
             super.onDevicePreferenceClick(btPreference);
         }
+    }
+
+    @Override
+    public void onScanningStateChanged(boolean started) {
+        super.onScanningStateChanged(started);
+        started |= mScanEnabled;
+        mAvailableDevicesCategory.setProgress(started);
     }
 
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice,
