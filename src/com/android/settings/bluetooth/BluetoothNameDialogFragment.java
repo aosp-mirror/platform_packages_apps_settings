@@ -24,6 +24,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -111,6 +112,9 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
                 new Utf8ByteLengthFilter(BLUETOOTH_NAME_MAX_LENGTH_BYTES)
         });
         mDeviceNameView.setText(deviceName);    // set initial value before adding listener
+        if (!TextUtils.isEmpty(deviceName)) {
+            mDeviceNameView.setSelection(deviceName.length());
+        }
         mDeviceNameView.addTextChangedListener(this);
         mDeviceNameView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
