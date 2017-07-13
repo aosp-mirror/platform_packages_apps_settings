@@ -41,7 +41,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
-import com.android.settings.applications.AdvancedAppSettings;
+import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.ExternalSourcesDetails;
@@ -220,7 +220,7 @@ public class SettingsGateway {
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
             ExternalSourcesDetails.class.getName(),
-            AdvancedAppSettings.class.getName(),
+            DefaultAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
             PictureInPictureSettings.class.getName(),
@@ -254,7 +254,6 @@ public class SettingsGateway {
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
-            // New IA
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),

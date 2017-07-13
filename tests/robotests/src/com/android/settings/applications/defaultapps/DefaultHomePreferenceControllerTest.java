@@ -17,14 +17,22 @@
 package com.android.settings.applications.defaultapps;
 
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,14 +42,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -79,11 +79,10 @@ public class DefaultHomePreferenceControllerTest {
 
     @Test
     public void updateState_noDefaultApp_shouldAskPackageManagerForOnlyApp() {
-        doReturn(null).when(mController).getDefaultAppInfo();
-
+        when(mPackageManager.getHomeActivities(anyList())).thenReturn(null);
         mController.updateState(mock(Preference.class));
 
-        verify(mPackageManager).getHomeActivities(anyList());
+        verify(mPackageManager, atLeastOnce()).getHomeActivities(anyList());
     }
 
     @Test

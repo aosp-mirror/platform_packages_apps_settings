@@ -2496,11 +2496,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.apps.default" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.nfc.PaymentSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -3001,7 +2996,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.AdvancedAppSettings" />
+                       android:value="com.android.settings.applications.DefaultAppSettings" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"

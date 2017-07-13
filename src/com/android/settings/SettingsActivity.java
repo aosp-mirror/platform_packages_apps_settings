@@ -813,13 +813,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                         Settings.DateTimeSettingsActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.PaymentSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_NFC)
-                        && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
-                        && adapter != null && adapter.isEnabled(), isAdmin)
-                || somethingChanged;
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.PrintSettingsActivity.class.getName()),

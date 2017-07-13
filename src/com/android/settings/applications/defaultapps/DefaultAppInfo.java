@@ -18,7 +18,6 @@ package com.android.settings.applications.defaultapps;
 
 import android.app.AppGlobals;
 import android.content.ComponentName;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageItemInfo;

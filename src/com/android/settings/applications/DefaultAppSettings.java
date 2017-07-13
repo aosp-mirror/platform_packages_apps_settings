@@ -22,6 +22,7 @@ import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.assist.DefaultAssistPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
@@ -29,6 +30,7 @@ import com.android.settings.applications.defaultapps.DefaultPhonePreferenceContr
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPaymentSettingsPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -39,9 +41,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AdvancedAppSettings extends DashboardFragment {
+public class DefaultAppSettings extends DashboardFragment {
 
-    static final String TAG = "AdvancedAppSettings";
+    static final String TAG = "DefaultAppSettings";
 
     private static final String KEY_ASSIST_VOICE_INPUT = "assist_and_voice_input";
 
@@ -67,6 +69,8 @@ public class AdvancedAppSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new DefaultAssistPreferenceController(context, KEY_ASSIST_VOICE_INPUT,
+                false /* showSetting */));
         controllers.add(new DefaultBrowserPreferenceController(context));
         controllers.add(new DefaultWorkBrowserPreferenceController(context));
         controllers.add(new DefaultPhonePreferenceController(context));
@@ -74,6 +78,7 @@ public class AdvancedAppSettings extends DashboardFragment {
         controllers.add(new DefaultSmsPreferenceController(context));
         controllers.add(new DefaultEmergencyPreferenceController(context));
         controllers.add(new DefaultHomePreferenceController(context));
+        controllers.add(new DefaultPaymentSettingsPreferenceController(context));
         return controllers;
     }
 
@@ -100,7 +105,8 @@ public class AdvancedAppSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context);
                 }
             };
@@ -152,7 +158,7 @@ public class AdvancedAppSettings extends DashboardFragment {
                 @Override
                 public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
                         SummaryLoader summaryLoader) {
-                    return new AdvancedAppSettings.SummaryProvider(activity, summaryLoader);
+                    return new DefaultAppSettings.SummaryProvider(activity, summaryLoader);
                 }
             };
 }

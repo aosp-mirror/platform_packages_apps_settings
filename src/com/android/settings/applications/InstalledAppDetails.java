@@ -1070,27 +1070,27 @@ public class InstalledAppDetails extends AppInfoBase
         final Context context = getContext();
         if (DefaultHomePreferenceController.hasHomePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_home", R.string.home_app,
+                    DefaultAppSettings.class, "default_home", R.string.home_app,
                     R.string.configure_apps));
         }
         if (DefaultBrowserPreferenceController.hasBrowserPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_browser", R.string.default_browser_title,
+                    DefaultAppSettings.class, "default_browser", R.string.default_browser_title,
                     R.string.configure_apps));
         }
         if (DefaultPhonePreferenceController.hasPhonePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_phone_app", R.string.default_phone_title,
+                    DefaultAppSettings.class, "default_phone_app", R.string.default_phone_title,
                     R.string.configure_apps));
         }
         if (DefaultEmergencyPreferenceController.hasEmergencyPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_emergency_app",
+                    DefaultAppSettings.class, "default_emergency_app",
                     R.string.default_emergency_app, R.string.configure_apps));
         }
         if (DefaultSmsPreferenceController.hasSmsPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_sms_app", R.string.sms_application_title,
+                    DefaultAppSettings.class, "default_sms_app", R.string.sms_application_title,
                     R.string.configure_apps));
         }
 

@@ -16,12 +16,10 @@
 
 package com.android.settings.nfc;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
@@ -34,8 +32,6 @@ import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -108,40 +104,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
         menuItem.setIntent(howItWorksIntent);
         menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening && NfcAdapter.getDefaultAdapter(mContext) != null) {
-                PaymentBackend paymentBackend = new PaymentBackend(mContext);
-                paymentBackend.refresh();
-                PaymentAppInfo app = paymentBackend.getDefaultApp();
-                String summary = null;
-                if (app != null) {
-                    summary = mContext.getString(R.string.payment_summary, app.label);
-                }
-                mSummaryLoader.setSummary(this, summary);
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
