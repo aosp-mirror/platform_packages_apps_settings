@@ -245,7 +245,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
         mSignInButton = mButtonsPref.findViewById(R.id.signin_button);
-        mSignInButton.setText(R.string.support_sign_in_button_text);
         mSignInButton.setOnClickListener(view -> signIntoNetwork());
 
         mSignalStrengthPref =
@@ -265,7 +264,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
         mForgetButton = mButtonsPref.findViewById(R.id.forget_button);
-        mForgetButton.setText(R.string.forget);
         mForgetButton.setOnClickListener(view -> forgetNetwork());
     }
 
