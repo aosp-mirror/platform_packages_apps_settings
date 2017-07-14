@@ -14,6 +14,8 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -39,7 +41,6 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -51,8 +52,6 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
-
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -117,8 +116,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 : null;
         if (mTemplate == null) {
             Context context = getContext();
-            mTemplate = DataUsageSummary.getDefaultTemplate(context,
-                    DataUsageSummary.getDefaultSubscriptionId(context));
+            mTemplate = DataUsageUtils.getDefaultTemplate(context,
+                    DataUsageUtils.getDefaultSubscriptionId(context));
         }
         if (mAppItem == null) {
             int uid = (args != null) ? args.getInt(AppInfoBase.ARG_PACKAGE_UID, -1)

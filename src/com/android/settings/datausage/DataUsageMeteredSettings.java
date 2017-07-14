@@ -16,8 +16,6 @@ package com.android.settings.datausage;
 
 import static android.net.wifi.WifiInfo.removeDoubleQuotes;
 
-import static com.android.settings.datausage.DataUsageSummary.hasWifiRadio;
-
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.res.Resources;
@@ -29,7 +27,6 @@ import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -37,7 +34,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.NetworkPolicyEditor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +79,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         getPreferenceScreen().removePreference(mMobileCategory);
 
         mWifiCategory.removeAll();
-        if (hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
+        if (DataUsageUtils.hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
             for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
                 final Preference pref = new MeteredPreference(getPrefContext(), config);
                 if (!TextUtils.isEmpty(pref.getTitle())) {
@@ -162,7 +158,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
 
                 final WifiManager wifiManager =
                         (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                if (hasWifiRadio(context) && wifiManager.isWifiEnabled()) {
+                if (DataUsageUtils.hasWifiRadio(context) && wifiManager.isWifiEnabled()) {
                     for (WifiConfiguration config : wifiManager.getConfiguredNetworks()) {
                         if (config.SSID != null) {
                             final String networkId = config.SSID;

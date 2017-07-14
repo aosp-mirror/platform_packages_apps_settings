@@ -15,7 +15,6 @@
 package com.android.settings.datausage;
 
 import static android.net.ConnectivityManager.TYPE_ETHERNET;
-import static android.net.ConnectivityManager.TYPE_WIFI;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -38,7 +37,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -48,7 +46,6 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
@@ -58,16 +55,12 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
     static final boolean LOGD = false;
-
-    public static final boolean TEST_RADIOS = false;
-    public static final String TEST_RADIOS_PROP = "test.radios";
 
     public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
@@ -101,16 +94,16 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        boolean hasMobileData = hasMobileData(context);
+        boolean hasMobileData = DataUsageUtils.hasMobileData(context);
         mDataUsageController = new DataUsageController(context);
         mDataInfoController = new DataUsageInfoController();
         addPreferencesFromResource(R.xml.data_usage);
 
-        int defaultSubId = getDefaultSubscriptionId(context);
+        int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
-        mDefaultTemplate = getDefaultTemplate(context, defaultSubId);
+        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
         mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
@@ -136,7 +129,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             removePreference(KEY_LIMIT_SUMMARY);
             mSummaryPreference.setSelectable(false);
         }
-        boolean hasWifiRadio = hasWifiRadio(context);
+        boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
         if (hasWifiRadio) {
             addWifiSection();
         }
@@ -322,8 +315,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
      * Test if device has an ethernet network connection.
      */
     public boolean hasEthernet(Context context) {
-        if (TEST_RADIOS) {
-            return SystemProperties.get(TEST_RADIOS_PROP).contains("ethernet");
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("ethernet");
         }
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
@@ -346,53 +339,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
         // only show ethernet when both hardware present and traffic has occurred
         return hasEthernet && ethernetBytes > 0;
-    }
-
-    public static boolean hasMobileData(Context context) {
-        return ConnectivityManager.from(context).isNetworkSupported(
-                ConnectivityManager.TYPE_MOBILE);
-    }
-
-    /**
-     * Test if device has a Wi-Fi data radio.
-     */
-    public static boolean hasWifiRadio(Context context) {
-        if (TEST_RADIOS) {
-            return SystemProperties.get(TEST_RADIOS_PROP).contains("wifi");
-        }
-
-        final ConnectivityManager conn = ConnectivityManager.from(context);
-        return conn.isNetworkSupported(TYPE_WIFI);
-    }
-
-    public static int getDefaultSubscriptionId(Context context) {
-        SubscriptionManager subManager = SubscriptionManager.from(context);
-        if (subManager == null) {
-            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        }
-        SubscriptionInfo subscriptionInfo = subManager.getDefaultDataSubscriptionInfo();
-        if (subscriptionInfo == null) {
-            List<SubscriptionInfo> list = subManager.getAllSubscriptionInfoList();
-            if (list.size() == 0) {
-                return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-            }
-            subscriptionInfo = list.get(0);
-        }
-        return subscriptionInfo.getSubscriptionId();
-    }
-
-    public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
-        if (hasMobileData(context) && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            TelephonyManager telephonyManager = TelephonyManager.from(context);
-            NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
-                    telephonyManager.getSubscriberId(defaultSubId));
-            return NetworkTemplate.normalize(mobileAll,
-                    telephonyManager.getMergedSubscriberIds());
-        } else if (hasWifiRadio(context)) {
-            return NetworkTemplate.buildTemplateWifiWildcard();
-        } else {
-            return NetworkTemplate.buildTemplateEthernet();
-        }
     }
 
     @VisibleForTesting
@@ -459,12 +405,12 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
                 resource.xmlResId = R.xml.data_usage;
                 resources.add(resource);
 
-                if (hasMobileData(context)) {
+                if (DataUsageUtils.hasMobileData(context)) {
                     resource = new SearchIndexableResource(context);
                     resource.xmlResId = R.xml.data_usage_cellular;
                     resources.add(resource);
                 }
-                if (hasWifiRadio(context)) {
+                if (DataUsageUtils.hasWifiRadio(context)) {
                     resource = new SearchIndexableResource(context);
                     resource.xmlResId = R.xml.data_usage_wifi;
                     resources.add(resource);
@@ -476,10 +422,10 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             public List<String> getNonIndexableKeys(Context context) {
                 List<String> keys = super.getNonIndexableKeys(context);
 
-                if (hasMobileData(context)) {
+                if (DataUsageUtils.hasMobileData(context)) {
                     keys.add(KEY_RESTRICT_BACKGROUND);
                 }
-                if (hasWifiRadio(context)) {
+                if (DataUsageUtils.hasWifiRadio(context)) {
                     keys.add(KEY_NETWORK_RESTRICTIONS);
                 }
                 keys.add(KEY_WIFI_USAGE_TITLE);

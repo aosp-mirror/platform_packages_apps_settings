@@ -16,19 +16,26 @@
 
 package com.android.settings.datausage;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkPolicy;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.NetworkPolicyEditor;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,18 +45,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -69,12 +64,6 @@ public class DataUsageSummaryTest {
         shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         mContext = shadowContext.getApplicationContext();
         when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
-    }
-
-    @Test
-    public void testMobileDataStatus() {
-        boolean hasMobileData = DataUsageSummary.hasMobileData(mContext);
-        assertThat(hasMobileData).isTrue();
     }
 
     @Test
