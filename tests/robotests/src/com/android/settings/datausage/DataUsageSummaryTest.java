@@ -95,60 +95,6 @@ public class DataUsageSummaryTest {
     }
 
     @Test
-    public void testIsMetered_noSsid_shouldReturnFalse() {
-        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
-        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
-        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
-        WifiConfiguration config = mock(WifiConfiguration.class);
-
-        assertThat(dataUsageSummary.isMetered(config)).isFalse();
-    }
-
-    @Test
-    public void testIsMetered_noNetworkPolicy_shouldReturnFalse() {
-        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
-        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
-        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
-        WifiConfiguration config = mock(WifiConfiguration.class);
-        config.SSID = "network1";
-        doReturn(null).when(policyEditor).getPolicyMaybeUnquoted(any());
-
-        assertThat(dataUsageSummary.isMetered(config)).isFalse();
-    }
-
-    @Test
-    public void testIsMetered_policyHasLimit_shouldReturnTrue() {
-        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
-        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
-        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
-        WifiConfiguration config = mock(WifiConfiguration.class);
-        config.SSID = "network1";
-        NetworkPolicy policy = mock(NetworkPolicy.class);
-        policy.limitBytes = 100;
-        doReturn(policy).when(policyEditor).getPolicyMaybeUnquoted(any());
-
-        assertThat(dataUsageSummary.isMetered(config)).isTrue();
-    }
-
-    @Test
-    public void testIsMetered_noPolicyLimit_shouldReturnMeteredValue() {
-        final DataUsageSummary dataUsageSummary = new DataUsageSummary();
-        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
-        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
-        WifiConfiguration config = mock(WifiConfiguration.class);
-        config.SSID = "network1";
-        NetworkPolicy policy = mock(NetworkPolicy.class);
-        policy.limitBytes = NetworkPolicy.LIMIT_DISABLED;
-        doReturn(policy).when(policyEditor).getPolicyMaybeUnquoted(any());
-
-        policy.metered = true;
-        assertThat(dataUsageSummary.isMetered(config)).isTrue();
-
-        policy.metered = false;
-        assertThat(dataUsageSummary.isMetered(config)).isFalse();
-    }
-
-    @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks = DataUsageSummary.SEARCH_INDEX_DATA_PROVIDER
