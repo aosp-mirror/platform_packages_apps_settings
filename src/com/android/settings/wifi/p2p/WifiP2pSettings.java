@@ -186,7 +186,8 @@ public class WifiP2pSettings extends DashboardFragment
         final Activity activity = getActivity();
         mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         if (mWifiP2pManager != null) {
-            mChannel = mWifiP2pManager.initialize(activity, getActivity().getMainLooper(), null);
+            mChannel = mWifiP2pManager.initialize(activity.getApplicationContext(),
+                    getActivity().getMainLooper(), null);
             if (mChannel == null) {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");
