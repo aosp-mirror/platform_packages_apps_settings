@@ -30,6 +30,7 @@ import android.os.BatteryManager;
 import android.os.BatteryStats;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
@@ -64,12 +65,7 @@ public class BatteryInfoLoaderTest {
                 .setupForTest(mContext)
                 .getPowerUsageFeatureProvider(mContext);
 
-        mDisChargingBatteryBroadcast = new Intent();
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_PLUGGED, 0);
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 0);
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_SCALE, 100);
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_STATUS,
-                BatteryManager.BATTERY_STATUS_FULL);
+        mDisChargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
 
         doReturn(mContext).when(mContext).getApplicationContext();
         when(mStats.computeBatteryTimeRemaining(anyLong())).thenReturn(TEST_TIME_REMAINING);
