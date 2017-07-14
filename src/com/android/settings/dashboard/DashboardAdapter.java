@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -34,7 +35,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -417,11 +417,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             holder.summary.setText(null);
         }
 
-        if (curMode == DashboardData.HEADER_MODE_COLLAPSED) {
-            holder.topSpace.setVisibility(View.VISIBLE);
-        } else {
-            holder.topSpace.setVisibility(View.GONE);
-        }
+        final Resources res = mContext.getResources();
+        final int padding = res.getDimensionPixelOffset(
+                curMode == DashboardData.HEADER_MODE_COLLAPSED
+                        ? R.dimen.suggestion_condition_header_padding_collapsed
+                        : R.dimen.suggestion_condition_header_padding_expanded);
+        holder.itemView.setPadding(0, padding, 0, padding);
 
         holder.itemView.setOnClickListener(v -> {
             if (moreSuggestions ) {
@@ -548,13 +549,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public static class SuggestionAndConditionHeaderHolder extends DashboardItemHolder {
         public final LinearLayout icons;
         public final ImageView expandIndicator;
-        public final Space topSpace;
 
         public SuggestionAndConditionHeaderHolder(View itemView) {
             super(itemView);
             icons = itemView.findViewById(id.additional_icons);
             expandIndicator = itemView.findViewById(id.expand_indicator);
-            topSpace = itemView.findViewById(id.top_space);
         }
     }
 
