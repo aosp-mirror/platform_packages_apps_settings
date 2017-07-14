@@ -115,8 +115,8 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     public int getItemViewType(int position) {
         Tile suggestion = getSuggestion(position);
         return suggestion.remoteViews != null
-                ? R.layout.suggestion_tile_card
-                : R.layout.suggestion_tile_new_ui;
+                ? R.layout.suggestion_tile_remote_container
+                : R.layout.suggestion_tile;
     }
 
     @Override
