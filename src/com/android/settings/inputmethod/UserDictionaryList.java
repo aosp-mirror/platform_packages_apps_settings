@@ -180,7 +180,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
             newPref.getExtras().putString("locale", locale);
         }
         newPref.setIntent(intent);
-        newPref.setFragment(com.android.settings.UserDictionarySettings.class.getName());
+        newPref.setFragment(UserDictionarySettings.class.getName());
         return newPref;
     }
 
