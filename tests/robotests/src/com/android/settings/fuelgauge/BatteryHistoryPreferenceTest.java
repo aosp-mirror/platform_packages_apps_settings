@@ -97,6 +97,7 @@ public class BatteryHistoryPreferenceTest {
         TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
         assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(view.getText()).isEqualTo(TEST_STRING);
+        assertThat(mBatteryHistoryPreference.hideSummary).isFalse();
     }
 
     @Test
@@ -107,5 +108,6 @@ public class BatteryHistoryPreferenceTest {
         TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
         assertThat(view.getVisibility()).isEqualTo(View.GONE);
         assertThat(view.getText()).isEqualTo("");
+        assertThat(mBatteryHistoryPreference.hideSummary).isTrue();
     }
 }

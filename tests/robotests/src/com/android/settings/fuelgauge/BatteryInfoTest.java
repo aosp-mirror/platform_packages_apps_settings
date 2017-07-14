@@ -39,6 +39,7 @@ import android.util.SparseIntArray;
 
 import com.android.settings.TestConfig;
 import com.android.settings.graph.UsageView;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -63,6 +64,7 @@ public class BatteryInfoTest {
     private static final String STATUS_FULL = "Full";
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
     private static final String STATUS_CHARGING_TIME = "50% - 0m until fully charged";
+    private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final int PLUGGED_IN = 1;
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
@@ -87,20 +89,9 @@ public class BatteryInfoTest {
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
 
-        mDisChargingBatteryBroadcast = new Intent();
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_PLUGGED, 0);
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 0);
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_SCALE, 100);
-        mDisChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_STATUS,
-                BatteryManager.BATTERY_STATUS_FULL);
+        mDisChargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
 
-        mChargingBatteryBroadcast = new Intent();
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_PLUGGED,
-                BatteryManager.BATTERY_PLUGGED_AC);
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 50);
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_SCALE, 100);
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_STATUS,
-                BatteryManager.BATTERY_STATUS_UNKNOWN);
+        mChargingBatteryBroadcast = BatteryTestUtils.getChargingIntent();
     }
 
     @Test
@@ -110,7 +101,7 @@ public class BatteryInfoTest {
                 mDisChargingBatteryBroadcast, mBatteryStats, SystemClock.elapsedRealtime() * 1000,
                 true /* shortString */);
 
-        assertThat(info.statusLabel).isEqualTo(STATUS_FULL);
+        assertThat(info.statusLabel).isEqualTo(STATUS_NOT_CHARGING);
     }
 
     @Test
