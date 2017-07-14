@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -67,7 +67,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -86,6 +85,7 @@ import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.development.DevelopmentSettingsEnabler;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
@@ -105,7 +105,6 @@ import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -1303,7 +1302,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (DataUsageList.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }
-        if (DataUsageSummary.hasWifiRadio(context)) {
+        if (DataUsageUtils.hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
         }
         return NetworkTemplate.buildTemplateEthernet();
