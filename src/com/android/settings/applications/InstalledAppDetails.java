@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -83,6 +85,7 @@ import com.android.settings.applications.instantapps.InstantAppButtonsController
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
@@ -108,8 +111,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -176,7 +177,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
     private Preference mVersionPreference;
     private AppDomainsPreference mInstantAppDomainsPreference;
-
+    private DevelopmentSettingsEnabler mDevelopmentSettingsEnabler;
     private boolean mDisableAfterUninstall;
 
     // Used for updating notification preference.
@@ -376,6 +377,7 @@ public class InstalledAppDetails extends AppInfoBase
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details);
+
         addDynamicPrefs();
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
@@ -389,6 +391,8 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryUtils = BatteryUtils.getInstance(getContext());
+        mDevelopmentSettingsEnabler = new DevelopmentSettingsEnabler(
+                activity, null /* lifecycle */);
     }
 
     @Override
@@ -412,7 +416,9 @@ public class InstalledAppDetails extends AppInfoBase
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
         restartBatteryStatsLoader();
-        new MemoryUpdater().execute();
+        if (mDevelopmentSettingsEnabler.getLastEnabledState()) {
+            new MemoryUpdater().execute();
+        }
         updateDynamicPrefs();
     }
 
@@ -466,6 +472,7 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
+        mMemoryPreference.setVisible(mDevelopmentSettingsEnabler.getLastEnabledState());
         mVersionPreference = findPreference(KEY_VERSION);
         mInstantAppDomainsPreference =
                 (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);

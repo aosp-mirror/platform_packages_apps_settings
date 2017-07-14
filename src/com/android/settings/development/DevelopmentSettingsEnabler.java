@@ -34,6 +34,7 @@ public class DevelopmentSettingsEnabler implements LifecycleObserver, OnResume {
         mContext = context;
         mDevelopmentPreferences = context.getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
+        updateEnabledState();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -41,8 +42,7 @@ public class DevelopmentSettingsEnabler implements LifecycleObserver, OnResume {
 
     @Override
     public void onResume() {
-        mLastEnabledState = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+        updateEnabledState();
     }
 
     public static boolean enableDevelopmentSettings(Context context, SharedPreferences prefs) {
@@ -51,6 +51,11 @@ public class DevelopmentSettingsEnabler implements LifecycleObserver, OnResume {
                 .commit();
         return Settings.Global.putInt(context.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+    }
+
+    private void updateEnabledState() {
+        mLastEnabledState = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
     }
 
     public boolean getLastEnabledState() {
