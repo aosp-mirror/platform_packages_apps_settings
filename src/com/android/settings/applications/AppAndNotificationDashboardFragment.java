@@ -50,7 +50,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(2);
+        mProgressiveDisclosureMixin.setTileLimit(3);
     }
 
     @Override
