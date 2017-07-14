@@ -14,44 +14,44 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/date_and_time"
-        settings:keywords="@string/keywords_date_and_time">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/date_and_time"
+    settings:keywords="@string/keywords_date_and_time">
 
-    <com.android.settingslib.RestrictedSwitchPreference android:key="auto_time"
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="auto_time"
         android:title="@string/date_time_auto"
         android:summaryOn="@string/date_time_auto_summaryOn"
         android:summaryOff="@string/date_time_auto_summaryOff"
         settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin"
-        />
+        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
-    <SwitchPreference android:key="auto_zone"
+    <SwitchPreference
+        android:key="auto_zone"
         android:title="@string/zone_auto"
         android:summaryOn="@string/zone_auto_summaryOn"
-        android:summaryOff="@string/zone_auto_summaryOff"
-        />
+        android:summaryOff="@string/zone_auto_summaryOff" />
 
-    <Preference android:key="date"
+    <Preference
+        android:key="date"
         android:title="@string/date_time_set_date"
-        android:summary="03/10/2008"
-        />
+        android:summary="@string/summary_placeholder" />
 
-    <Preference android:key="time"
+    <Preference
+        android:key="time"
         android:title="@string/date_time_set_time"
-        android:summary="12:00am"
-        />
+        android:summary="@string/summary_placeholder" />
 
     <Preference
         android:fragment="com.android.settings.datetime.ZonePicker"
         android:key="timezone"
         android:title="@string/date_time_set_timezone"
-        android:summary="GMT-8:00"
-        />
+        android:summary="GMT-8:00" />
 
-    <SwitchPreference android:key="24 hour"
-        android:title="@string/date_time_24hour"
-        />
+    <SwitchPreference
+        android:key="24 hour"
+        android:title="@string/date_time_24hour" />
 
 </PreferenceScreen>

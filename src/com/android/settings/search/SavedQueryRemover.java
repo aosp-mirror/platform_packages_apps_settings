@@ -17,25 +17,21 @@
 
 package com.android.settings.search;
 
+import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_SAVED_QUERIES;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.utils.AsyncLoader;
-
-import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_SAVED_QUERIES;
 
 public class SavedQueryRemover extends AsyncLoader<Void> {
 
     private static final String LOG_TAG = "SavedQueryRemover";
 
-    private final String mQuery;
-
-    public SavedQueryRemover(Context context, String query) {
+    public SavedQueryRemover(Context context) {
         super(context);
-        mQuery = query;
     }
 
     @Override
@@ -44,8 +40,8 @@ public class SavedQueryRemover extends AsyncLoader<Void> {
         try {
             // First, delete all saved queries that are the same
             database.delete(TABLE_SAVED_QUERIES,
-                    IndexDatabaseHelper.SavedQueriesColumns.QUERY + " = ?",
-                    new String[]{mQuery});
+                    null /* where */,
+                    null /* whereArgs */);
         } catch (Exception e) {
             Log.d(LOG_TAG, "Cannot update saved Search queries", e);
         }

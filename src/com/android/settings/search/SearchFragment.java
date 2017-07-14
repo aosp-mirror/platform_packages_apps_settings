@@ -32,6 +32,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -103,7 +105,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     SearchFeatureProvider mSearchFeatureProvider;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     SearchResultsAdapter mSearchAdapter;
 
     @VisibleForTesting
@@ -162,6 +164,12 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         } else {
             Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        mSavedQueryController.buildMenuItem(menu);
     }
 
     @Override
@@ -359,10 +367,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY);
         mSearchView.setQuery(queryString, false /* submit */);
         onQueryTextChange(queryString);
-    }
-
-    public void onRemoveSavedQueryClicked(CharSequence title) {
-        mSavedQueryController.removeQuery(title.toString());
     }
 
     private void restartLoaders() {
