@@ -14,9 +14,12 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicy.CYCLE_NONE;
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicy.WARNING_DISABLED;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,9 +47,6 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
-
-import static android.net.NetworkPolicy.LIMIT_DISABLED;
-import static android.net.NetworkPolicy.WARNING_DISABLED;
 
 public class BillingCycleSettings extends DataUsageBase implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
@@ -103,11 +103,15 @@ public class BillingCycleSettings extends DataUsageBase implements
     }
 
     private void updatePrefs() {
-        NetworkPolicy policy = services.mPolicyEditor.getPolicy(mNetworkTemplate);
-        mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, policy != null ?
-                policy.cycleDay : 1));
-        if (policy != null && policy.warningBytes != WARNING_DISABLED) {
-            mDataWarning.setSummary(Formatter.formatFileSize(getContext(), policy.warningBytes));
+        final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mNetworkTemplate);
+        if (cycleDay != CYCLE_NONE) {
+            mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, cycleDay));
+        } else {
+            mBillingCycle.setSummary(null);
+        }
+        final long warningBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
+        if (warningBytes != WARNING_DISABLED) {
+            mDataWarning.setSummary(Formatter.formatFileSize(getContext(), warningBytes));
             mDataWarning.setEnabled(true);
             mEnableDataWarning.setChecked(true);
         } else {
@@ -115,8 +119,9 @@ public class BillingCycleSettings extends DataUsageBase implements
             mDataWarning.setEnabled(false);
             mEnableDataWarning.setChecked(false);
         }
-        if (policy != null && policy.limitBytes != LIMIT_DISABLED) {
-            mDataLimit.setSummary(Formatter.formatFileSize(getContext(), policy.limitBytes));
+        final long limitBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
+        if (limitBytes != LIMIT_DISABLED) {
+            mDataLimit.setSummary(Formatter.formatFileSize(getContext(), limitBytes));
             mDataLimit.setEnabled(true);
             mEnableDataLimit.setChecked(true);
         } else {
@@ -319,7 +324,7 @@ public class BillingCycleSettings extends DataUsageBase implements
     }
 
     /**
-     * Dialog to edit {@link NetworkPolicy#cycleDay}.
+     * Dialog to edit {@link NetworkPolicy}.
      */
     public static class CycleEditorFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
