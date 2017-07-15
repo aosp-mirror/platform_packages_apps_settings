@@ -51,7 +51,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -67,6 +66,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.settings.widget.ImeAwareEditText;
 import com.android.setupwizardlib.GlifLayout;
 
 import java.util.ArrayList;
@@ -180,7 +180,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mChosenPassword;
         private boolean mHasChallenge;
         private long mChallenge;
-        private EditText mPasswordEntry;
+        private ImeAwareEditText mPasswordEntry;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
         private int mPasswordMinLength = LockPatternUtils.MIN_LOCK_PASSWORD_SIZE;
         private int mPasswordMaxLength = 16;
@@ -365,7 +365,7 @@ public class ChooseLockPassword extends SettingsActivity {
             setupPasswordRequirementsView(view);
 
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mPasswordEntry = (EditText) view.findViewById(R.id.password_entry);
+            mPasswordEntry = view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
             mPasswordEntry.requestFocus();
@@ -488,6 +488,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 mSaveAndFinishWorker.setListener(this);
             } else {
                 mPasswordEntry.requestFocus();
+                mPasswordEntry.scheduleShowSoftInput();
             }
         }
 
