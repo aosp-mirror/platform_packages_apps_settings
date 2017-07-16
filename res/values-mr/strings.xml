@@ -721,11 +721,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"वाय-फाय स्वयंचलितपणे चालू करा"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"आपल्या होम नेटवर्कसारख्या उच्च दर्जाच्या जतन केलेल्या नेटवर्कजवळ वाय-फाय स्वयंचलितपणे परत चालू होईल"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"वाय-फाय स्कॅनिंग बंद केल्यामुळे उपलब्ध नाही"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"वापरण्‍यासाठी, नेटवर्क रेटिंग पुरवठादार निवडा"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"खराब कनेक्शन टाळा"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"वाय-फाय नेटवर्कचे चांगले इंटरनेट कनेक्शन नसल्यास त्याचा वापर करु नका"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"केवळ चांगले इंटरनेट कनेक्शन असलेली नेटवर्क वापरा"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"खुल्या नेटवर्कशी कनेक्ट करा"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"उच्च गुणवत्तेच्या सार्वजनिक नेटवर्कशी स्वयंचलितपणे कनेक्ट करा"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"वापरण्‍यासाठी, नेटवर्क रेटिंग पुरवठादार निवडा"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"वापरण्‍यासाठी, सुसंगत नेटवर्क रेटिंग पुरवठादार निवडा"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"प्रमाणपत्रे स्थापित करा"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"स्‍थान अचूकता सुधारण्‍यासाठी, सिस्टीम अ‍ॅप्स आणि सेवा अद्याप वाय-फाय नेटवर्कसाठी स्कॅन करू शकतात. आपण हे <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>स्कॅनिंग सेटिंग्ज<xliff:g id="LINK_END_1">LINK_END</xliff:g> मध्‍ये बदलू शकता."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"स्थान अचूकता वाढवण्यासाठी, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>स्कॅनिंग सेटिंग्ज<xliff:g id="LINK_END_1">LINK_END</xliff:g> मध्ये वाय-फाय स्कॅनिंग चालू करा."</string>
@@ -2790,9 +2793,8 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"जेश्चर"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"देय द्या, टॅप करा, पेमेंट"</string>
     <string name="keywords_backup" msgid="470070289135403022">"बॅकअप, बॅक अप"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"जेश्चर, कोपरा, बाजू, सक्रिय कोपरा, दाबणे, पकड, साहाय्य, साहाय्यक, स्क्विझी, स्क्विझी, स्क्विझी, स्क्विझी, ok google, Google साहाय्यक"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"जेश्चर, सक्रिय करणे, सूचना, स्क्रीन, डिस्प्ले, स्क्रीन बंद, स्क्रीन चालू, दाबणे, कोपरा, झोपला, झोपणे, पकड"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"जेश्चर, शांतता, स्नूझ, अलार्म, येणारे कॉल, शांत, डिसप्ले, लॉकस्क्रीन, दाबा, पकड, कोपरा, थांबा"</string>
+    <!-- no translation found for keywords_assist_gesture_launch (813968759791342591) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"वाय-फाय NFC टॅग सेट अप"</string>
     <string name="write_tag" msgid="8571858602896222537">"लिहा"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"लिहिण्यासाठी एक टॅग टॅप करा..."</string>
@@ -3577,9 +3579,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"आपल्या सूचना तपासण्यासाठी, आपल्या डिव्हाइसच्या मागे फिंगरप्रिंट सेन्सरवर खाली स्वाइप करा."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"सूचना पटकन पहा"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"फिंगरप्रिंट सेंसरवर खालच्या बाजूस स्वाइप करा"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"सहाय्यता जेश्चर"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"संवेदनशीलता"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"चालू"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"बंद"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"बुटलोडर आधीपासून अनलॉक केले"</string>

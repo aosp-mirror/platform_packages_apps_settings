@@ -721,11 +721,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Aktibatu Wi-Fi konexioa automatikoki"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Gordetako kalitate handiko sare batetik (adibidez, etxeko saretik) gertu zaudenean aktibatuko da berriro Wi‑Fi konexioa"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Ez dago erabilgarri, Wi-Fi sareak bilatzeko aukera desaktibatuta dagoelako"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Erabiltzeko, hautatu sareen balorazioen hornitzaile bat"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Saihestu konexio ahulak"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ez erabili Wi-Fi sareak ez badute Interneteko konexio onik"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Erabili Interneteko konexio ona duten sareak soilik"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Konektatu sare irekietara"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Konektatu automatikoki kalitate handiko sare publikoetara"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Erabiltzeko, hautatu sareen balorazioen hornitzaile bat"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Erabiltzeko, hautatu sareen balorazioen hornitzaile bateragarri bat"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalatu ziurtagiriak"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Kokapenaren zehaztasuna hobetzeko, sistemaren aplikazioek eta zerbitzuek Wi-Fi sareak hautematen jarraituko dute. Hori aldatzeko, zoaz <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>gailuak bilatzeko ezarpenetara<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Kokapenaren zehaztasuna hobetzeko, aktibatu Wi-Fi sareak bilatzeko aukera <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>bilatzeko ezarpenetan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -2790,9 +2793,8 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"keinuak"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"ordaindu, ukitu, ordainketak"</string>
     <string name="keywords_backup" msgid="470070289135403022">"babeskopia, segurtasun kopia"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"keinua, ertza, alboa, ertz aktiboa, estutu, estutzea, heldu, eutsi, oratu, laguntza, lagundu, laguntzailea, ok google, google laguntzailea"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"keinua, esnatu, iratzarri, esnarazi, jakinarazpenak, pantaila, bistaratu, bistaratzea, pantaila itzalita, pantaila piztuta, estutu, estutzea, ertza, alboa, lo, lotan, inaktibo, lo egin, heldu, eutsi, oratu"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"keinua, isiltasuna, isilarazi, atzeratu, alarma, jasotako deia, sarrerako deia, deia, isilik, bistaratu, bistaratzea, pantaila blokeatua, estutu, estutzea, heldu, eutsi, oratu, ertza, ertzak, gelditu, geldiarazi"</string>
+    <!-- no translation found for keywords_assist_gesture_launch (813968759791342591) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfiguratu Wi-Fi NFC etiketa"</string>
     <string name="write_tag" msgid="8571858602896222537">"Idatzi"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Ukitu etiketa bat bertan idazteko…"</string>
@@ -3577,9 +3579,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Jakinarazpenei begiratu bat emateko, pasatu hatza beherantz gailuaren atzealdeko hatz-marken sentsorean."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Ikusi jakinarazpenak bizkor"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Pasatu hatza beherantz hatz-marken sentsorean"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Laguntza aktibatzeko keinua"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Sentikortasuna"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktibatuta"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desaktibatuta"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Abiarazlea desblokeatuta dago dagoeneko"</string>

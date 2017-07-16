@@ -721,11 +721,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"தானாகவே வைஃபையை இயக்கு"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"உயர்தரம் எனச் சேமிக்கப்பட்ட நெட்வொர்க்குகளுக்கு (எடுத்துக்காட்டு: உங்கள் வீட்டு நெட்வொர்க்) அருகில் இருக்கும் போது, வைஃபை இயக்கப்படும்"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"வைஃபை ஸ்கேனிங் முடக்கப்பட்டுள்ளதால், கிடைக்கவில்லை"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"அம்சத்தைப் பயன்படுத்த, நெட்வொர்க் மதிப்பீட்டு வழங்குநரைத் தேர்ந்தெடுக்கவும்"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"வேகம் குறைந்த இணைப்புகளைத் தவிர்"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"சிறப்பான இணைய இணைப்பைப் பெறும் வரை வைஃபை நெட்வொர்க்கைப் பயன்படுத்தாதே"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"நல்ல இணைய இணைப்பு கொண்ட நெட்வொர்க்குகளை மட்டும் பயன்படுத்து"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"திறந்த நெட்வொர்க்குகளுடன் இணை"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"உயர்தரமான பொது நெட்வொர்க்குகளுடன் தானாக இணை"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"அம்சத்தைப் பயன்படுத்த, நெட்வொர்க் மதிப்பீட்டு வழங்குநரைத் தேர்ந்தெடுக்கவும்"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"அம்சத்தைப் பயன்படுத்த, இணங்கும் நெட்வொர்க் மதிப்பீட்டு வழங்குநரைத் தேர்ந்தெடுக்கவும்"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"சான்றிதழ்களை நிறுவு"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"இருப்பிடத்தைத் துல்லியமாக அறிவதை மேம்படுத்த, முறைமையின் பயன்பாடுகளும் சேவைகளும் வைஃபை முடக்கத்தில் இருக்கும் போதும் வைஃபை நெட்வொர்க்குகளை ஸ்கேன் செய்யும். இதை <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ஸ்கேன் செய்தல் அமைப்புகளில்<xliff:g id="LINK_END_1">LINK_END</xliff:g> மாற்ற முடியும்."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"இருப்பிடத்தின் துல்லியத்தன்மையை மேம்படுத்த, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ஸ்கேனிங் அமைப்புகளில்<xliff:g id="LINK_END_1">LINK_END</xliff:g> வைஃபை ஸ்கேனிங்கை இயக்கவும்."</string>
@@ -1059,15 +1062,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"தானாக ஒளிர்வைச் சரிசெய்தல்"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"விரலை எடுக்கும் போது இயங்கு"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"சூழல்சார் திரை"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"எப்போதும் இயக்கத்தில் வை / பேட்டரியை அதிகமாகப் பயன்படுத்தும்"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"புதிய அறிவிப்புகள்"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"காட்டுவதற்கான நேரம்"</string>
     <string name="doze_title" msgid="2375510714460456687">"புதிய அறிவிப்புகள்"</string>
     <string name="doze_summary" msgid="3846219936142814032">"அறிவிப்புகளைப் பெறும் போது திரையை இயக்கு"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"எப்போதும் இயக்கத்தில் வை"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"நேரம், அறிவிப்பு ஐகான்கள் மற்றும் பிற தகவலைக் காட்டு. அதே நேரதில் பேட்டரியை அதிகமாகப் பயன்படுத்தும்."</string>
     <string name="title_font_size" msgid="4405544325522105222">"எழுத்துரு அளவு"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"உரையைப் பெரிதாக்கும் அல்லது சிறிதாக்கும்"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"சிம் கார்டின் பூட்டு அமைப்பு"</string>
@@ -2790,9 +2791,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"சைகைகள்"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"கட்டணம் செலுத்தவும், தட்டவும், கட்டணம் செலுத்துதல்"</string>
     <string name="keywords_backup" msgid="470070289135403022">"காப்புப்பிரதி, காப்புப் பிரதி"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"சைகை, முனை, பக்கம், active edge, அழுத்து, பிடி, உதவி, அசிஸ்டண்ட், அழுத்தத்தக்கது, ஸ்கூஜி, அழுத்துக, அழுத்துதல், ok google, google அசிஸ்டண்ட்"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"சைகை, எழுப்பு, அறிவிப்புகள், திரை, காட்சி, திரை அணைக்கப்பட்டது, திரை இயக்கப்பட்டது, அழுத்து, முனை, உறக்கநிலையில், உறக்கநிலையிலிரு, பிடி"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"சைகை, நிசப்தம், உறக்கநிலை, அலாரம், உள்வரும் அழைப்பு, அமைதி, காட்சி, பூட்டுத் திரை, அழுத்து, பிடி, முனை, நிறுத்து"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"சைகை"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"வைஃபை NFC குறியை அமை"</string>
     <string name="write_tag" msgid="8571858602896222537">"எழுது"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"எழுத, குறியைத் தட்டவும்..."</string>
@@ -3577,9 +3576,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"அறிவிப்புகளைப் பார்க்க, சாதனத்தின் பின்புறத்தில் உள்ள கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"அறிவிப்புகளை உடனடியாகப் பார்க்கவும்"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"கைரேகை உணர்வியில் கீழே ஸ்வைப் செய்யவும்"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"அசிஸ்ட் சைகை"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"உணர்திறன்"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"இயக்கு"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"முடக்கு"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"பூட்லோடர் ஏற்கனவே திறந்துள்ளது"</string>

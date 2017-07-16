@@ -731,11 +731,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Automatski uključi Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi će se ponovo uključiti u blizini sačuvanih mreža visokog kvaliteta, kao što je kućna mreža"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Nedostupno je jer je isključeno Wi‑Fi skeniranje"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Da biste koristili funkciju, izaberite dobavljača ocene mreže"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Izbegavaj loše veze"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ne koristi Wi-Fi mrežu ako nema dobru internet vezu"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Korišćenje samo onih mreža koje imaju dobru internet vezu"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Povezuj se sa otvorenim mrežama"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Automatski se povezuj sa javnim mrežama visokog kvaliteta"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Da biste koristili funkciju, izaberite dobavljača ocene mreže"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Da biste koristili funkciju, izaberite kompatibilnog dobavljača ocene mreže"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instaliraj sertifikate"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Da bi poboljšale tačnost lokacije, sistemske aplikacije i usluge će i dalje skenirati Wi‑Fi mreže. Ovo možete da promenite u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>podešavanjima skeniranja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Da biste poboljšali preciznost lokacije, uključite Wi-Fi skeniranje u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>podešavanjima skeniranja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1070,15 +1073,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatski nivo osvetljenosti"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Podigni za aktivaciju"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Ambijentalni ekran"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Uvek uključeno/veća potrošnja baterije"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nova obaveštenja"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Kada da se prikazuje"</string>
     <string name="doze_title" msgid="2375510714460456687">"Nova obaveštenja"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Probudite ekran kada primite obaveštenja"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Uvek uključeno"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Prikazuje vreme, ikone obaveštenja i druge informacije. Veća potrošnja baterije."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veličina fonta"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Omogućava da tekst bude veći ili manji"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Zaključavanje SIM kartice"</string>
@@ -2816,9 +2817,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"pokreti"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"platite, dodirnite, plaćanja"</string>
     <string name="keywords_backup" msgid="470070289135403022">"rezervna kopija, praviti rezervnu kopiju"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"pokret, ivica, strana, aktivna ivica, stisnuti, stisak, pomoći, pomoćnik, squeezy, squeezie, squeezey, squeezee, ok google, google pomoćnik"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"pokret, buditi, obaveštenja, ekran, prikaz, isključivanje ekrana, uključivanje ekrana, stisnuti, ivica, spava, spavati, stisak"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"pokret, potpuno utišati, odložiti, alarm, dolazni poziv, tiho, prikaz, zaključani ekran, stisnuti, stisak, ivica, zaustaviti"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"pokret"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Podesite Wi-Fi NFC oznaku"</string>
     <string name="write_tag" msgid="8571858602896222537">"Napiši"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Dodirnite oznaku da biste pisali..."</string>
@@ -3625,9 +3624,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Da biste proverili obaveštenja, prevucite prstom nadole po senzoru za otisak prsta na zadnjoj strani uređaja."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Brzo pregledajte obaveštenja"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Prevucite nadole na senzoru za otisak prsta"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Pokret za pomoć"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Osetljivost"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Uključeno"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Isključeno"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Alatka za pokretanje operativnog sistema je već otključana"</string>

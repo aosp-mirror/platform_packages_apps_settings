@@ -35,8 +35,9 @@ public class BatteryHistoryPreference extends Preference {
 
     private CharSequence mSummary;
     private TextView mSummaryView;
-    private boolean hideSummary;
 
+    @VisibleForTesting
+    boolean hideSummary;
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
@@ -56,8 +57,10 @@ public class BatteryHistoryPreference extends Preference {
     public void setBottomSummary(CharSequence text) {
         mSummary = text;
         if (mSummaryView != null) {
+            mSummaryView.setVisibility(View.VISIBLE);
             mSummaryView.setText(mSummary);
         }
+        hideSummary = false;
     }
 
     public void hideBottomSummary() {

@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi-ს ავტომატურად ჩართვა"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi ჩაირთვება შენახულ, მაღალხარისხიან ქსელებთან სიახლოვისას (მაგალითად, სახლის ქსელისას)"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"მიუწვდომელია, რადგან Wi‑Fi სკანირება გამორთულია"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"გამოსაყენებლად, აირჩიეთ ქსელის ხარისხის შეფასების პროვაიდერი"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Wi-Fi ქსელების ფილტრი"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"არ გამოიყენო Wi‑Fi ქსელი, თუ მას არ აქვს კარგი ინტერნეტ კავშირი"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"მხოლოდ იმ ქსელების გამოყენება, რომლებსაც კარგი ინტერნეტ-კავშირი გააჩნია"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"ღია ქსელებთან დაკავშირება"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"მაღალხარისხიან საჯარო ქსელებთან ავტომატურად დაკავშირება"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"გამოსაყენებლად, აირჩიეთ ქსელის ხარისხის შეფასების პროვაიდერი"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"გამოსაყენებლად, აირჩიეთ თავსებადი ქსელის ხარისხის შეფასების პროვაიდერი"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"სერთიფიკატების ინსტალაცია"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"მდებარეობის სიზუსტის გასაუმჯობესებლად სისტემის აპები და სერვისები კვლავ შეძლებს Wi‑Fi ქსელების აღმოჩენას. ამის შეცვლა <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>სკანირების პარამეტრებში<xliff:g id="LINK_END_1">LINK_END</xliff:g> შეგიძლიათ."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"მდებარეობის სიზუსტის გასაუმჯობესებლად ჩართეთ Wi-Fi სკანირება <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>სკანირების პარამეტრებში<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"ავტომატური სიკაშკაშე"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"გაღვიძება აწევისას"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"ემბიენტური ეკრანი"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"ყოველთვის ჩართული / ბატარეის მოხმარება გაიზრდება"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"ახალი შეტყობინებები"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"ჩვენების წესები"</string>
     <string name="doze_title" msgid="2375510714460456687">"ახალი შეტყობინებები"</string>
     <string name="doze_summary" msgid="3846219936142814032">"ეკრანის გამოღვიძება შეტყობინებების მიღებისას"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"ყოველთვის ჩართული"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"დროის, შეტყობინებათა ხატულების და სხვა ინფორმაციის ჩვენება. ბატარეის მოხმარება გაიზრდება."</string>
     <string name="title_font_size" msgid="4405544325522105222">"შრიფტის ზომა"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ტექსტის გადიდება ან დაპატარავება"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM ბარათის დაბლოკვის პარამეტრები"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"ჟესტები"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"გადახდა, შეხება, გადახდები"</string>
     <string name="keywords_backup" msgid="470070289135403022">"სარეზერვო ასლი, სარეზერვო ასლის შექმნა"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"ჟესტი, კიდე, გვერდი, Active Edge, მოჭერა, ჩავლება, დახმარება, ასისტენტი, squeezy, squeezie, squeezey, squeezee, Ok Google, Google ასისტენტი"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"ჟესტი, გაღვიძება, შეტყობინებები, ეკრანი, ჩვენება, ეკრანი გამორთულია, ეკრანი ჩართულია, მოჭერა, კიდე, ძილის რეჟიმში, დაძინება, ჩავლება"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"ჟესტი, დადუმება, ჩაჩუმება, მაღვიძარა, შემომავალი ზარი, ჩუმი, ჩვენება, დაბლოკილი ეკრანი, მოჭერა, ჩავლება, კიდე, შეწყვეტა"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"ჟესტი"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC თეგის დაყენება"</string>
     <string name="write_tag" msgid="8571858602896222537">"ჩაწერა"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"შეეხეთ თეგს დასაწერად..."</string>
@@ -3576,9 +3575,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"თქვენი შეტყობინებების შესამოწმებლად, ჩამოუსვით თითი თითის ანაბეჭდის სენსორს, რომელიც თქვენი მოწყობილობის უკანა ნაწილზე მდებარეობს."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"შეტყობინებების სწრაფად ნახვა"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"ჩამოუსვით თითი ანაბეჭდის სენსორს"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"დახმარების ჟესტი"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"მგრძნობიარობა"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"ჩართული"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"გამორთული"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"სისტემის ჩამტვირთველი უკვე განბლოკილია"</string>

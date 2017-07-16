@@ -721,11 +721,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi tarmoqni avtomatik yoqish"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Saqlab olingan tarmoqlar (m-n, uy) ichidan signali yaxshisi chiqsa, Wi-Fi qayta yoqilsin"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi tarmoqlarni qidirish o‘chiqligi uchun ishlamaydi"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Foydalanish uchun tarmoqlar reytingi muallifini tanlang"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Sifatsiz ulanishdan chetlashish"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Internet aloqasi yomon bo‘lsa, Wi-Fi tarmog‘iga ulanilmasin"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Faqat kuchli signalga ega tarmoqlardan foydalanilsin"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Ochiq tarmoqlarga ulanish"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Yuqori sifatli ochiq tarmoqlarga avtomatik ulanish"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Foydalanish uchun tarmoqlar reytingi muallifini tanlang"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Foydalanish uchun mos tarmoqlar reytingi muallifini tanlang"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifikatlarni o‘rnatish"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Wi-Fi tarmoqlari o‘chirilgan bo‘lsa-da, joylashuv aniqligini oshirish maqsadida tizimga oid ilova va xizmatlar Wi-Fi tarmoqlarini qidirishda davom etadi. Buni <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>tekshirish sozlamalari<xliff:g id="LINK_END_1">LINK_END</xliff:g> orqali o‘chirib qo‘yish mumkin."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Joylashuv aniqligini oshirish uchun <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>sozlamalar<xliff:g id="LINK_END_1">LINK_END</xliff:g> orqali Wi-Fi tarmoqlarni qidirishni yoqing."</string>
@@ -1059,15 +1062,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Avtomatik yorqinlik"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Tik holatda faollashtirish"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Sezgir ekran"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Doim yoniq (batareya tezroq sarflanadi)"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Yangi bildirishnomalar"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Qachon ko‘rsatilsin"</string>
     <string name="doze_title" msgid="2375510714460456687">"Yangi bildirishnomalar"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Bildirishnoma kelganda ekran yonadi"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Har doim yoniq"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Vaqt, bildirishnoma belgilari va boshqa ma’lumotlarni ko‘rsatish (batareya tezroq sarflanadi)"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Shrift o‘lchami"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Matnni kattalashtirish yoki kichiklashtirish"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM karta qulfi sozlamalari"</string>
@@ -2802,9 +2803,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"imo-ishoralar"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"to‘lash, bosish, to‘lovlar"</string>
     <string name="keywords_backup" msgid="470070289135403022">"zaxira, zaxira nusxa olish"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"imo-ishora, qirra, tomon, faol qirra, qisish, ushlash, yordam, assistent, qisish, ok google, google assistent"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"imo-ishora, uyg‘otish, bildirishnomalar, ekran, displey, ekran o‘chiq, ekran yoniq, qisish, qirra, uyqu, uxlash, ushlash"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"imo-ishora, ovozsiz, kechiktirish, signal, kiruvchi chaqiruv, jimjit, ekran, ekran qulfi, qisish, ushlash, qirra, to‘xtatish"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"imo-ishora"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi’ni sozlash u-n NFC yorliq"</string>
     <string name="write_tag" msgid="8571858602896222537">"Yozish"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Yozish uchun yorliq ustiga bosing…"</string>
@@ -3589,9 +3588,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Bildirishnomalarni tekshirish uchun qurilma orqasidagi barmoq izi skaneri ustida pastga suring"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Bildirishnomalarni tezda ko‘rish"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Barmoq izi skanerida pastga surish"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Qo‘shimcha ishora"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Muhimlik"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Yoniq"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"O‘chiq"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"OT yuklagich allaqachon qulfdan chiqarilgan"</string>

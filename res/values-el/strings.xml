@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Αυτόματη ενεργοποίηση Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Το Wi‑Fi θα ενεργοποιείται ξανά κοντά σε αποθηκευμένα δίκτυα υψηλής ποιότητας, όπως το οικιακό δίκτυό σας"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Η λειτουργία δεν είναι διαθέσιμη επειδή η σάρωση για δίκτυα Wi‑Fi είναι απενεργοποιημένη"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Για να χρησιμοποιήσετε τη λειτουργία, επιλέξτε έναν πάροχο αξιολόγησης δικτύου"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Αποφυγή κακών συνδέσεων"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Να μην γίνεται χρήση δικτύων Wi-Fi, εκτός αν υπάρχει καλή σύνδεση στο Διαδίκτυο"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Να χρησιμοποιούνται μόνο δίκτυα με καλή διαδικτυακή σύνδεση"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Σύνδεση σε ανοικτά δίκτυα"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Αυτόματη σύνδεση σε δημόσια δίκτυα υψηλής ποιότητας"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Για να χρησιμοποιήσετε τη λειτουργία, επιλέξτε έναν πάροχο αξιολόγησης δικτύου"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Για να χρησιμοποιήσετε τη λειτουργία, επιλέξτε έναν συμβατό πάροχο αξιολόγησης δικτύου"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Εγκατάσταση πιστοποιητικών"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Για τη βελτίωση του εντοπισμού τοποθεσίας, οι εφαρμογές και οι υπηρεσίες θα μπορούν ακόμη να εκτελέσουν σάρωση για δίκτυα Wi‑Fi. Μπορείτε να αλλάξετε αυτήν την επιλογή στις <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ρυθμίσεις σάρωσης<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Για τη βελτίωση της ακρίβειας του εντοπισμού τοποθεσίας, ενεργοποιήστε τη σάρωση για δίκτυα Wi-Fi στις <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ρυθμίσεις σάρωσης<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Αυτόματη φωτεινότητα"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Σηκώστε για ενεργοποίηση"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Οθόνη περιβάλλοντος"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Πάντα ενεργή/Αυξημένη χρήση μπαταρίας"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Νέες ειδοποιήσεις"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Χρόνος εμφάνισης"</string>
     <string name="doze_title" msgid="2375510714460456687">"Νέες ειδοποιήσεις"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Αφύπνιση οθόνης κατά τη λήψη ειδοποιήσεων"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Πάντα ενεργό"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Εμφάνιση ώρας, εικονιδίων ειδοποίησης και άλλων πληροφοριών. Αυξημένη χρήση μπαταρίας."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Μέγεθος γραμματοσειράς"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Κάντε το κείμενο μεγαλύτερο ή μικρότερο"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ρυθμίσεις κλειδ/τος SIM"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"κινήσεις"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"πληρωμή, πάτημα, πληρωμές"</string>
     <string name="keywords_backup" msgid="470070289135403022">"αντίγραφο ασφαλείας, δημιουργία αντιγράφου ασφαλείας"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"κίνηση, άκρο, πλάι, ενεργό άκρο, πιέστε, λαβή, βοήθεια, βοηθός, squeezy, squeezie, squeezey, squeezee, ok google, βοηθός google"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"κίνηση, αφύπνιση, ειδοποιήσεις, οθόνη, απενεργοποίηση οθόνης, ενεργοποίηση οθόνης, πιέστε, άκρο, αδρανής, αδράνεια, λαβή"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"κίνηση, σίγαση, αφύπνιση, ξυπνητήρι, εισερχόμενη κλήση, χωρίς ήχο, οθόνη, οθόνη κλειδώματος, πιέστε, λαβή, άκρο, διακοπή"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"κίνηση"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Ρύθμιση ετικέτας ΕΚΠ Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Εγγραφή"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Αγγίξτε μια ετικέτα για εγγραφή…"</string>
@@ -3576,9 +3575,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Για να ελέγξετε τις ειδοποιήσεις σας, σύρετε προς τα κάτω στον αισθητήρα δακτυλικών αποτυπωμάτων στο πίσω μέρος της συσκευής."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Γρήγορη εμφάνιση ειδοποιήσεων"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Σύρετε προς τα κάτω στον αισθητήρα δακτυλικών αποτυπωμάτων"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Κίνηση βοήθειας"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Ευαισθησία"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Ενεργό"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Ανενεργό"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Το bootloader είναι ήδη ξεκλείδωτο"</string>

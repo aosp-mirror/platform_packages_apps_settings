@@ -721,11 +721,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Aktivizo automatikisht Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi-Fi do të aktivizohet përsëri në afërsi të rrjeteve të ruajtura me cilësi të lartë, si p.sh. në rrjetin e shtëpisë"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Nuk ofrohet sepse skanimi i Wi-Fi është çaktivizuar"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Për ta përdorur, zgjidh një ofrues të vlerësimit të rrjetit"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Shmang lidhjet e dobëta"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Mos e përdor një rrjet Wi‑Fi nëse nuk ka lidhje të mirë interneti"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Përdor vetëm rrjete që kanë lidhje të mirë interneti"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Lidhu me rrjete të hapura"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Lidhu automatikisht me rrjete publike me cilësi të lartë"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Për ta përdorur, zgjidh një ofrues të vlerësimit të rrjetit"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Për ta përdorur, zgjidh një ofrues të përputhshëm të vlerësimit të rrjetit"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalo certifikatat"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Për të përmirësuar saktësinë e vendndodhjes, aplikacionet dhe shërbimet e sistemit mund të skanojnë akoma për rrjetet Wi-Fi. Këtë mund ta ndryshosh te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Për të përmirësuar saktësinë e vendndodhjes, aktivizo skanimin e Wi-Fi te <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>cilësimet e skanimit<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1059,15 +1062,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Ndriçimi automatik"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ngrije për ta zgjuar"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Shfaqja e ambientit"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Gjithmonë aktive / Përdorim i rritur i baterisë"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Njoftimet e reja"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Kur të shfaqet"</string>
     <string name="doze_title" msgid="2375510714460456687">"Njoftimet e reja"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Zgjoje ekranin kur të merren njoftime"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Gjithmonë aktiv"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Shfaq orën, ikonat e njoftimeve dhe informacione të tjera. Përdorim i rritur i baterisë."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Madhësa e shkrimit"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Bëje tekstin më të madh ose më të vogël"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Kyçja e kartës SIM"</string>
@@ -2790,9 +2791,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"gjestet"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"paguaj, trokit, pagesa"</string>
     <string name="keywords_backup" msgid="470070289135403022">"rezervim, rezervo"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"gjest, skaji, ana, skaji aktiv, shtrydh, kap, ndihmoj, asistenti, shtrydhje, shtrydhja,ok google, asistenti i google"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"gjest, zgjoj, njoftime, ekrani, shfaq, ekrani joaktiv, ekrani aktiv, shtrydh, skaji, në gjumë, gjumi, kap"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"gjest, heshtje, shtyj, alarm, telefonatë hyrëse, i qetë, ekrani, ekrani i kyçjes, shtrydh, kap, skaji, ndalo"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gjesti"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Cakto një etiketë NFC për Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Shkruaj"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Trokit te një etiketë për të shkruar..."</string>
@@ -3577,9 +3576,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të pajisjes."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Shiko njoftimet me shpejtësi"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Rrëshqit shpejt poshtë mbi sensorin e gishtit"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Gjesti ndihmës"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Ndjeshmëria"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktiv"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Joaktiv"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Ngarkuesi i sistemit është i shkyçur tashmë"</string>

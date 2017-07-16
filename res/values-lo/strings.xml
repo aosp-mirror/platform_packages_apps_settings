@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"ເປີດໃຊ້ Wi‑Fi ອັດຕະໂນມັດ"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi ຈະກັບມາເປີດໃຊ້ຫາກຢູ່ໃກ້ເຄືອຂ່າຍຄຸນນະພາບສູງທີ່ບັນທຶກໄວ້ ເຊັ່ນ: ເຄືອຂ່າຍເຮືອນ"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກການສະແກນ Wi‑Fi ປິດຢູ່"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"ເພື່ອໃຊ້, ໃຫ້ເລືອກຜູ້ໃຫ້ບໍລິການຄະແນນເຄືອຂ່າຍ"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"ຫຼີກເວັ້ນເຄືອຂ່າຍທີ່ສັນຍານອ່ອນ"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"ບໍ່ໃຊ້ເຄືອຂ່າຍ Wi-Fi ເວັ້ນເສຍແຕ່ມັນຈະມີຄວາມໄວການເຊື່ອມຕໍ່ອິນເຕີເນັດທີ່ດີ."</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"ໃຊ້​ສະ​ເພາະ​ເຄືອ​ຂ່າຍ​ທີ່​ມີ​ການ​ເຊື່ອມ​ຕໍ່​ອິນ​ເຕີ​ເນັດ​ທີ່​ດີ​ເທົ່າ​ນັ້ນ"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"ເຊື່ອມຕໍ່ຫາເຄືອຂ່າຍແບບເປີດ"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"ເຊື່ອມຕໍ່ຫາເຄືອຂ່າຍສາທາລະນະທີ່ມີຄຸນນະພາບສູງໂດຍອັດຕະໂນມັດ"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"ເພື່ອໃຊ້, ໃຫ້ເລືອກຜູ້ໃຫ້ບໍລິການຄະແນນເຄືອຂ່າຍ"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"ເພື່ອໃຊ້, ໃຫ້ເລືອກຜູ້ໃຫ້ບໍລິການຄະແນນເຄືອຂ່າຍທີ່ໃຊ້ຮ່ວມກັນໄດ້"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ຕິດຕັ້ງໃບຮັບຮອງ"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"ເພື່ອ​ປັບ​ປຸງ​ຄວາມ​ແມ່ນຍຳຂອງ​ສະຖານທີ່, ແອັບ ແລະ ການ​ບໍ​ລິ​ການຍັງ​ຄົງສາ​ມາດສະ​ແກນ​ຫາເຄືອ​ຂ່າຍ Wi‑Fi ໄດ້. ທ່ານ​ສາ​ມາດ​ປ່ຽນ​ແປງ​ໄດ້​ຢູ່​ໃນ <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ການ​ຕັ້ງ​ຄ່າ​ການ​ສະ​ແກນ<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"ເພື່ອປັບປຸງຄວາມຖືກຕ້ອງຂອງສະຖານທີ່, ໃຫ້ເປີດໃຊ້ການສະແກນ Wi-Fi ໃນ <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ການຕັ້ງຄ່າການສະແກນ<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -2789,9 +2792,8 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"ທ່າທາງ"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"pay, tap, payments"</string>
     <string name="keywords_backup" msgid="470070289135403022">"ສຳຮອງຂໍ້ມູນ, ສຳຮອງ ຂໍ້ມູນ"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"ທ່າທາງ, ຄວາມງຽບ, ເລື່ອນ, ໂມງປຸກ, ສາຍໂທເຂົ້າ, ງຽບ, ສະແດງ, ໜ້າຈໍລັອກ, ຂອບ, ຢຸດ, ok google, ຜູ້ຊ່ວຍ google"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"ທ່າທາງ, ປຸກ, ການແຈ້ງເຕືອນ, ໜ້າຈໍ, ສະແດງ, ປິດໜ້າຈໍ, ເປີດໜ້າຈໍ, ຂອບ, ຫຼັບ, ນອນ"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"ທ່າທາງ, ຄວາມງຽບ, ເລື່ອນ, ໂມງປຸກ, ສາຍໂທເຂົ້າ, ງຽບ, ສະແດງ, ໜ້າຈໍລັອກ, ຂອບ, ຢຸດ"</string>
+    <!-- no translation found for keywords_assist_gesture_launch (813968759791342591) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"ຕັ້ງ​ຄ່າ​ແທັກ Wi-Fi NFC"</string>
     <string name="write_tag" msgid="8571858602896222537">"ຂຽນ"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"​ແ​ຕະ​ທີ່​ແທັກ​ເພື່ອ​ຂຽນ..."</string>
@@ -3576,9 +3578,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"ເພື່ອກວດເບິ່ງການແຈ້ງເຕືອນຂອງທ່ານ, ໃຫ້ເລື່ອນລົງໃສ່ເຊັນເຊີນລາຍນິ້ວມືທີ່ຢູ່ຫຼັງອຸປະກອນຂອງທ່ານ"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"ເບິ່ງການແຈ້ງເຕືອນແບບດ່ວນ"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"ເລື່ອນນິ້ວລົງໃສ່ເຊັນເຊີລາຍນິ້ວມື"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"ທ່າທາງແບບຊ່ວຍ"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"ຄວາມອ່ອນໄຫວ"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"ເປີດ"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ປິດ"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader ຖືກປົດລັອກຢູ່ກ່ອນແລ້ວ"</string>

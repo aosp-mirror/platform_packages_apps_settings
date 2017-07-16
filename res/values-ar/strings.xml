@@ -764,11 +764,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"‏تشغيل شبكة Wi‑Fi تلقائيًا"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"‏ستتم إعادة تشغيل شبكة Wi‑Fi بالقرب من الشبكات المحفوظة العالية الجودة، مثل الشبكة المنزلية"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"‏غير متاح لأنه تم إيقاف فحص شبكات Wi‑Fi"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"لاستخدام الميزة، اختر مقدِّم خدمة تقييم شبكة"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"تجنب الاتصالات الضعيفة"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"‏عدم استخدام شبكات Wi-Fi ما لم يكن لها اتصال إنترنت جيد"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"استخدام الشبكات ذات اتصال الإنترنت الجيد فقط"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"التوصيل بالشبكات المفتوحة"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"الاتصال تلقائيًا بالشبكات العامة العالية الجودة"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"لاستخدام الميزة، اختر مقدِّم خدمة تقييم شبكة"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"لاستخدام الميزة، اختر مقدِّم خدمة تقييم شبكة متوافق"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"تثبيت شهادات"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"‏لتحسين دقة الموقع، سيظل بإمكان تطبيقات وخدمات النظام البحث عن شبكات Wi-Fi. ويمكنك تغيير ذلك من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"‏لتحسين دقة تحديد الموقع، يمكنك تشغيل البحث عن شبكات Wi-Fi من خلال <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>إعدادات البحث<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1106,15 +1109,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"سطوع تلقائي"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"الرفع لتنبيه الجهاز"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"العرض غير النشط"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"قيد التشغيل دائمًا / زيادة استخدام البطارية"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"إشعارات جديدة"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"وقت العرض"</string>
     <string name="doze_title" msgid="2375510714460456687">"إشعارات جديدة"</string>
     <string name="doze_summary" msgid="3846219936142814032">"تنشيط الشاشة عند تلقي إشعارات"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"التشغيل دائمًا"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"عرض الوقت ورموز الإشعارات وغيرها من المعلومات. يؤدي ذلك إلى زيادة استخدام البطارية."</string>
     <string name="title_font_size" msgid="4405544325522105222">"حجم الخط"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"يمكنك تكبير النص أو تصغيره."</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"‏إعدادات تأمين شريحة SIM"</string>
@@ -1501,7 +1502,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"دليل السلامة والمعلومات التنظيمية"</string>
     <string name="copyright_title" msgid="865906688917260647">"حقوق الطبع والنشر"</string>
     <string name="license_title" msgid="1990487604356037871">"الترخيص"</string>
-    <string name="terms_title" msgid="7697580845616764642">"البنود والشروط"</string>
+    <string name="terms_title" msgid="7697580845616764642">"الأحكام والشروط"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"‏ترخيص WebView للنظام"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"الخلفيات"</string>
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"‏الشركات الموفرة لصور القمر الصناعي:\n‎©2014 CNES / Astrium، وDigitalGlobe وBluesky"</string>
@@ -2897,9 +2898,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"الإيماءات"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"دفع، نقر، دفعات"</string>
     <string name="keywords_backup" msgid="470070289135403022">"نسخ احتياطية، نسخة احتياطية"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"‏إيماءة، حافة، جانب، حافة نشطة، ضغط، قَبض، مساعدة، مساعد، squeezy،‏ squeezie،‏ squeezey،‏ squeezee،‏ ok google، مساعد Google"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"إيماءة، تنشيط، إشعارات، شاشة، عرض، إيقاف الشاشة، تشغيل الشاشة، ضغط، حافة، في وضع السكون، سكون، قَبض"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"إيماءة، كتم الصوت، تأجيل، تنبيه، مكالمة واردة، سكون، عرض، شاشة تأمين، ضغط، قَبض، حافة، إيقاف"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"إيماءة"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏إعداد علامة NFC عبر Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"كتابة"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"انقر على كلمة علامة لكتابة..."</string>
@@ -3772,9 +3771,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"للاطلاع على الإشعارات، مرر سريعًا للأسفل على مستشعر بصمات الإصبع على الجزء الخلفي من جهازك."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"الاطلاع على الإشعارات بسرعة"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"تمرير سريع لأسفل على مستشعر بصمات الإصبع"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"إيماءة المساعدة"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"الحساسية"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"تشغيل"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"إيقاف"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"تم إلغاء قفل برنامج التحميل مسبقاً"</string>

@@ -720,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"वाई-फ़ाई अपने आप चालू करें"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"वाई-फ़ाई बढ़िया इंटरनेट देने वाले सहेजे गए नेटवर्क के पास होने पर अपने आप चालू  हो जाएगा, जैसे कि आपके घर का नेटवर्क"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"अनुपलब्ध है क्योंकि वाई-फ़ाई स्कैनिंग बंद कर दी गई है"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"उपयोग करने के लिए, कोई नेटवर्क रेटिंग प्रदाता चुनें"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"खराब कनेक्‍शन से बचें"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"जब तक वाई-फ़ाई  नेटवर्क में अच्छा इंटरनेट कनेक्‍शन न हो, तब तक उसका उपयोग न करें"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"उन्हीं नेटवर्क का उपयोग करें जिनमें अच्छा इंटरनेट कनेक्शन है"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"खुले नेटवर्क से कनेक्ट करें"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"अच्छा इंटरनेट देने वाले सार्वजनिक नेटवर्क से अपने आप कनेक्ट करें"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"उपयोग करने के लिए, कोई नेटवर्क रेटिंग प्रदाता चुनें"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"उपयोग करने के लिए, कोई संगत नेटवर्क रेटिंग प्रदाता चुनें"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"प्रमाणपत्र इंस्टाल करें"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"स्‍थान सटीकता को बेहतर बनाने के लिए, सिस्‍टम ऐप्‍स और सेवाएं अभी भी वाई-फ़ाई नेटवर्कों का पता लगा सकती हैं. आप इसे <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>स्‍कैन करने की सेटिंग<xliff:g id="LINK_END_1">LINK_END</xliff:g> में बदल सकते हैं."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"स्थान सटीकता को बेहतर बनाने के लिए, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>स्कैनिंग सेटिंग<xliff:g id="LINK_END_1">LINK_END</xliff:g> में वाई-फ़ाई स्कैनिंग चालू करें."</string>
@@ -1058,15 +1061,13 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"अपनेआप स्क्रीन की रोशनी"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"सक्रिय करने के लिए उठाएं"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"व्यापक प्रदर्शन"</string>
-    <!-- no translation found for ambient_display_screen_summary_always_on (7337555569694794132) -->
-    <skip />
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"हमेशा चालू / बढ़ा हुआ बैटरी उपयोग"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"नए नोटिफ़िकेशन"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"कब दिखाना है"</string>
     <string name="doze_title" msgid="2375510714460456687">"नए नोटिफ़िकेशन"</string>
     <string name="doze_summary" msgid="3846219936142814032">"आपको नोटिफ़िकेशन मिलने पर स्‍क्रीन सक्रिय करें"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"हमेशा चालू"</string>
-    <!-- no translation found for doze_always_on_summary (6978257596231155345) -->
-    <skip />
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"समय, नोटिफ़िकेशन आइकन और अन्य जानकारी दिखाएं. बढ़ा हुआ बैटरी उपयोग."</string>
     <string name="title_font_size" msgid="4405544325522105222">"अक्षरों का आकार"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"लेख को छोटा या बड़ा करें"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"सिम कार्ड लॉक सेटिंग"</string>
@@ -2789,9 +2790,7 @@
     <string name="keywords_gesture" msgid="3526905012224714078">"हावभाव"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"भुगतान करें, टैप करें, भुगतान"</string>
     <string name="keywords_backup" msgid="470070289135403022">"बैकअप, बैक अप"</string>
-    <string name="keywords_squeeze_to_launch_gesture" msgid="4459283333825902485">"हावभाव, किनारा, साइड,  active edge, दबाना, पकड़, सहायता, assistant, निचोड़, दबाएं, ok google, google assistant"</string>
-    <string name="keywords_wake_squeeze_gesture" msgid="6923058534235267845">"हावभाव, सक्रिय करना, नोटिफ़िकेशन, स्क्रीन, प्रदर्शन, स्क्रीन बंद करना, स्क्रीन चालू करना, दबाना, किनारा, निष्क्रिय, सुप्त, पकड़"</string>
-    <string name="keywords_alarm_silence_gesture" msgid="8507935972184597252">"हावभाव, मौन, याद दिलाना, अलार्म, इनकमिंग कॉल, शांत, प्रदर्शन, लॉक-स्क्रीन, दबाना, पकड़, किनारा, रोकना"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"हावभाव"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"वाई-फ़ाई  NFC टैग सेट करें"</string>
     <string name="write_tag" msgid="8571858602896222537">"लिखें"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"लिखने के लिए टैग टैप करें..."</string>
@@ -3576,9 +3575,6 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"अपने नोटिफ़िकेशन देखने के लिए, अपने डिवाइस के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"झटपट नोटिफ़िकेशन देखें"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"सहायक हावभाव"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"संवेदनशीलता"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"चालू"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"बंद"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"बूटलोडर पहले से ही अनलाॅक किया हुआ है"</string>
