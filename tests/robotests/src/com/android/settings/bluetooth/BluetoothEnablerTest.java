@@ -24,6 +24,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
@@ -58,17 +59,22 @@ public class BluetoothEnablerTest {
     private MasterSwitchController mMasterSwitchController;
     @Mock
     private RestrictionUtils mRestrictionUtils;
+    @Mock
+    private LocalBluetoothManager mBluetoothManager;
+    @Mock
+    private LocalBluetoothAdapter mBluetoothAdapter;
 
     private BluetoothEnabler mBluetoothEnabler;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mBluetoothManager.getBluetoothAdapter()).thenReturn(mBluetoothAdapter);
         mBluetoothEnabler = new BluetoothEnabler(
                 mContext,
                 mMasterSwitchController,
                 mMetricsFeatureProvider,
-                mock(LocalBluetoothManager.class),
+                mBluetoothManager,
                 123,
                 mRestrictionUtils);
     }
@@ -134,6 +140,19 @@ public class BluetoothEnablerTest {
 
         // THEN the switch is unchecked.
         verify(mMasterSwitchController).setChecked(false);
+    }
+
+    @Test
+    public void maybeEnforceRestrictions_disallowBluetoothNotOverriden() {
+        // GIVEN Bluetooth has been disallowed...
+        when(mRestrictionUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+        when(mRestrictionUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
+
+        mBluetoothEnabler.resume(mContext);
+
+        verify(mMasterSwitchController, never()).setEnabled(true);
     }
 
 }

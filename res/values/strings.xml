@@ -1971,6 +1971,8 @@
     <string name="wifi_advanced_ip_address_title">IP address</string>
 
     <!-- Wifi Network Details -->
+    <!-- Wifi details title-->
+    <string name="wifi_details_title">Network info</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Wifi details preference title to display router DNS info -->
@@ -4686,7 +4688,7 @@
     <!-- Text for OK button in force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_ok">Stop app</string>
 
-    <!-- Title for background usage dialog [CHAR LIMIT=60] -->
+    <!-- Title for background usage dialog [CHAR LIMIT=70] -->
     <string name="dialog_background_check_title">Turn off background usage &amp; stop app?</string>
     <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
     <string name="dialog_background_check_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
@@ -5526,6 +5528,9 @@
     <!--  action to select all [CHAR LIMIT=30] -->
     <string name="select_all">Select all</string>
 
+    <!-- A button that gets displayed in data plan usage preference in settings page to manage data plans [CHAR LIMIT=25] -->
+    <string name="data_plan_usage_manage_plans_button_text">Manage plans</string>
+
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
     <!-- Activity title for Appk data usage summary. [CHAR LIMIT=25] -->
@@ -5714,6 +5719,13 @@
     <string name="data_usage_metered_wifi">Metered Wi\u2011Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
     <string name="data_usage_metered_wifi_disabled">To select metered networks, turn Wi\u2011Fi on.</string>
+
+    <!-- Option for indicating that a network being metered (expensive) should be determined automatically. [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_auto">Automatic</string>
+    <!-- Option for indicating that a network is metered (expensive). [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_yes">Metered</string>
+    <!-- Option for indicating that a network is not metered (inexpensive). [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_no">Not metered</string>
 
     <!-- Disclaimer string for data usage measured by device. [CHAR LIMIT=80] -->
     <string name="data_usage_disclaimer">Carrier data accounting may differ from your device.</string>
@@ -8327,11 +8339,6 @@
 
     <!-- Text for the setting on whether you can type text into notifications without unlocking the device. -->
     <string name="lockscreen_remote_input">If device is locked, prevent typing replies or other text in notifications</string>
-
-    <string-array name="bytes_picker_sizes" translatable="false">
-        <item>@*android:string/megabyteShort</item>
-        <item>@*android:string/gigabyteShort</item>
-    </string-array>
 
     <!-- [CHAR LIMIT=30] Label for setting to control the default spell checker -->
     <string name="default_spell_checker">Default spell checker</string>

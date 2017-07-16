@@ -27,7 +27,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.android.settings.R;
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 
 import java.util.ArrayList;

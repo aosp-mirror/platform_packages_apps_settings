@@ -106,7 +106,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             mContext = context;
         }
 
-        maybeEnforceRestrictions();
+        final boolean restricted = maybeEnforceRestrictions();
 
         if (mLocalAdapter == null) {
             mSwitchWidget.setEnabled(false);
@@ -114,7 +114,9 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         }
 
         // Bluetooth state is not sticky, so set it manually
-        handleStateChanged(mLocalAdapter.getBluetoothState());
+        if (!restricted) {
+            handleStateChanged(mLocalAdapter.getBluetoothState());
+        }
 
         mSwitchWidget.startListening();
         mContext.registerReceiver(mReceiver, mIntentFilter);

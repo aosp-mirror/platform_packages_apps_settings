@@ -92,55 +92,32 @@ public class MasterClearTest {
     @Test
     public void testShowWipeEuicc_euiccDisabled() {
         prepareEuiccState(
-                false /* isEuiccEnabled */, true /* isEuiccProvisioned */,
-                true /* isDevelopmentSettingsEnabled */);
+                false /* isEuiccEnabled */, true /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_unprovisioned() {
         prepareEuiccState(
-                true /* isEuiccEnabled */, false /* isEuiccProvisioned */,
-                false /* isDevelopmentSettingsEnabled */);
+                true /* isEuiccEnabled */, false /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_provisioned() {
         prepareEuiccState(
-                true /* isEuiccEnabled */, true /* isEuiccProvisioned */,
-                false /* isDevelopmentSettingsEnabled */);
-        assertThat(mMasterClear.showWipeEuicc()).isTrue();
-    }
-
-    @Test
-    public void testShowWipeEuicc_euiccEnabled_developmentSettingsEnabled() {
-        prepareEuiccState(
-                true /* isEuiccEnabled */, false /* isEuiccProvisioned */,
-                true /* isDevelopmentSettingsEnabled */);
-        assertThat(mMasterClear.showWipeEuicc()).isTrue();
-    }
-
-    @Test
-    public void testShowWipeEuicc_euiccEnabled_provisioned_developmentSettingsEnabled() {
-        prepareEuiccState(
-                true /* isEuiccEnabled */, true /* isEuiccProvisioned */,
-                true /* isDevelopmentSettingsEnabled */);
+                true /* isEuiccEnabled */, true /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isTrue();
     }
 
     private void prepareEuiccState(
             boolean isEuiccEnabled,
-            boolean isEuiccProvisioned,
-            boolean isDevelopmentSettingsEnabled) {
+            boolean isEuiccProvisioned) {
         doReturn(mActivity).when(mMasterClear).getContext();
         doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
         ContentResolver cr = mActivity.getContentResolver();
         Settings.Global.putInt(
                 cr, android.provider.Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
-        Settings.Global.putInt(
-                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
-                isDevelopmentSettingsEnabled ? 1 : 0);
     }
 
     @Test

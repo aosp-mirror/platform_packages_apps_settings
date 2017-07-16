@@ -122,7 +122,7 @@ public class UserProfileControllerTest {
         verify(mScreen).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("0.10GB");
+        assertThat(preference.getSummary()).isEqualTo("0.10 GB");
     }
 
     @Test

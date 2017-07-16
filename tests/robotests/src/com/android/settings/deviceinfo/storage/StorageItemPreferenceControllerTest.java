@@ -84,8 +84,6 @@ public class StorageItemPreferenceControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        SettingsShadowResources.overrideResource("android:string/fileSizeSuffix", "%1$s %2$s");
-        SettingsShadowResources.overrideResource("android:string/gigabyteShort", "GB");
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         FakeFeatureFactory.setupForTest(mContext);
         mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
@@ -287,12 +285,12 @@ public class StorageItemPreferenceControllerTest {
         results.put(0, result);
         mController.onLoadFinished(results, 0);
 
-        assertThat(audio.getSummary().toString()).isEqualTo("0.14GB");
-        assertThat(image.getSummary().toString()).isEqualTo("0.35GB");
-        assertThat(games.getSummary().toString()).isEqualTo("0.08GB");
-        assertThat(movies.getSummary().toString()).isEqualTo("0.16GB");
-        assertThat(apps.getSummary().toString()).isEqualTo("0.09GB");
-        assertThat(files.getSummary().toString()).isEqualTo("0.05GB");
+        assertThat(audio.getSummary().toString()).isEqualTo("0.14 GB");
+        assertThat(image.getSummary().toString()).isEqualTo("0.35 GB");
+        assertThat(games.getSummary().toString()).isEqualTo("0.08 GB");
+        assertThat(movies.getSummary().toString()).isEqualTo("0.16 GB");
+        assertThat(apps.getSummary().toString()).isEqualTo("0.09 GB");
+        assertThat(files.getSummary().toString()).isEqualTo("0.05 GB");
     }
 
     @Test

@@ -304,11 +304,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
             try {
                 ApplicationInfo info = mPm.getApplicationInfo(rule.getOwner().getPackageName(), 0);
-                LoadIconTask task = new LoadIconTask(this);
-                task.execute(info);
                 setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
             } catch (PackageManager.NameNotFoundException e) {
-                setIcon(R.drawable.ic_label);
                 appExists = false;
                 return;
             }
@@ -343,29 +340,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 showDeleteRuleDialog(mId, mName);
             }
         };
-    }
-
-    private class LoadIconTask extends AsyncTask<ApplicationInfo, Void, Drawable> {
-        private final WeakReference<Preference> prefReference;
-
-        public LoadIconTask(Preference pref) {
-            prefReference = new WeakReference<>(pref);
-        }
-
-        @Override
-        protected Drawable doInBackground(ApplicationInfo... params) {
-            return params[0].loadIcon(mPm);
-        }
-
-        @Override
-        protected void onPostExecute(Drawable icon) {
-            if (icon != null) {
-                final Preference pref = prefReference.get();
-                if (pref != null) {
-                    pref.setIcon(icon);
-                }
-            }
-        }
     }
 
     public static class SummaryBuilder {

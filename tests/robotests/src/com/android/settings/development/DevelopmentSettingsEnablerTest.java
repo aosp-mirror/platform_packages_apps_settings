@@ -16,12 +16,14 @@
 
 package com.android.settings.development;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,8 +34,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -50,6 +50,16 @@ public class DevelopmentSettingsEnablerTest {
         mContext = RuntimeEnvironment.application;
         mEnabler = new DevelopmentSettingsEnabler(mContext, null);
         ReflectionHelpers.setField(mEnabler, "mDevelopmentPreferences", mDevelopmentPreferences);
+    }
+
+    @Test
+    public void constructor_shouldInitEnabledState() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+
+        mEnabler = new DevelopmentSettingsEnabler(mContext, null);
+
+        assertThat(mEnabler.getLastEnabledState()).isTrue();
     }
 
     @Test

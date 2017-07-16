@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -34,7 +35,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -62,8 +62,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
     private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
-    private static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
 
+    @VisibleForTesting
+    static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
     @VisibleForTesting
     static final int SUGGESTION_CONDITION_HEADER_POSITION = 0;
 
@@ -392,11 +393,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             holder.summary.setText(null);
         }
 
-        if (curMode == DashboardData.HEADER_MODE_COLLAPSED) {
-            holder.topSpace.setVisibility(View.VISIBLE);
-        } else {
-            holder.topSpace.setVisibility(View.GONE);
-        }
+        final Resources res = mContext.getResources();
+        final int padding = res.getDimensionPixelOffset(
+                curMode == DashboardData.HEADER_MODE_COLLAPSED
+                        ? R.dimen.suggestion_condition_header_padding_collapsed
+                        : R.dimen.suggestion_condition_header_padding_expanded);
+        holder.itemView.setPadding(0, padding, 0, padding);
 
         holder.itemView.setOnClickListener(v -> {
             if (moreSuggestions ) {
@@ -421,8 +423,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             int position) {
         // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
         // header anymore.
-        if (position == (SUGGESTION_CONDITION_HEADER_POSITION)
-                && mDashboardData.getSuggestions() != null) {
+        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        if (position == SUGGESTION_CONDITION_HEADER_POSITION
+                && suggestions != null && suggestions.size() > 0) {
             mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
                 mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
             mSuggestionDismissHandler = new SuggestionDismissController(mContext,
@@ -545,13 +548,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public static class SuggestionAndConditionHeaderHolder extends DashboardItemHolder {
         public final LinearLayout icons;
         public final ImageView expandIndicator;
-        public final Space topSpace;
 
         public SuggestionAndConditionHeaderHolder(View itemView) {
             super(itemView);
             icons = itemView.findViewById(id.additional_icons);
             expandIndicator = itemView.findViewById(id.expand_indicator);
-            topSpace = itemView.findViewById(id.top_space);
         }
     }
 

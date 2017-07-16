@@ -40,6 +40,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.support.v4.text.BidiFormatter;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
@@ -245,7 +246,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
         mSignInButton = mButtonsPref.findViewById(R.id.signin_button);
-        mSignInButton.setText(R.string.support_sign_in_button_text);
         mSignInButton.setOnClickListener(view -> signIntoNetwork());
 
         mSignalStrengthPref =
@@ -265,7 +265,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
         mForgetButton = mButtonsPref.findViewById(R.id.forget_button);
-        mForgetButton.setText(R.string.forget);
         mForgetButton.setOnClickListener(view -> forgetNetwork());
     }
 
@@ -443,7 +442,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         updatePreference(mDnsPref, dnsServers);
 
         if (ipv6Addresses.length() > 0) {
-            mIpv6AddressPref.setSummary(ipv6Addresses.toString());
+            mIpv6AddressPref.setSummary(
+                    BidiFormatter.getInstance().unicodeWrap(ipv6Addresses.toString()));
             mIpv6Category.setVisible(true);
         } else {
             mIpv6Category.setVisible(false);

@@ -31,7 +31,6 @@ import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
 import com.android.settings.TrustedCredentialsSettings;
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.WifiCallingSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
@@ -41,7 +40,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
-import com.android.settings.applications.AdvancedAppSettings;
+import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.ExternalSourcesDetails;
@@ -91,6 +90,7 @@ import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
@@ -220,7 +220,7 @@ public class SettingsGateway {
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
             ExternalSourcesDetails.class.getName(),
-            AdvancedAppSettings.class.getName(),
+            DefaultAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
             PictureInPictureSettings.class.getName(),
@@ -254,7 +254,6 @@ public class SettingsGateway {
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
-            // New IA
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),

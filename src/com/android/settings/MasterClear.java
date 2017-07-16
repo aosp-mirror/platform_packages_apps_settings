@@ -247,9 +247,8 @@ public class MasterClear extends OptionsMenuFragment
     /**
      * Whether to show the checkbox to wipe the eUICC.
      *
-     * <p>We show the checkbox on any device which supports eUICC as long as either the eUICC was
-     * ever provisioned (that is, at least one profile was ever downloaded onto it), or if the user
-     * has enabled development mode.
+     * <p>We show the checkbox on any device which supports eUICC as long as the eUICC was ever
+     * provisioned (that is, at least one profile was ever downloaded onto it).
      */
     @VisibleForTesting
     boolean showWipeEuicc() {
@@ -258,8 +257,7 @@ public class MasterClear extends OptionsMenuFragment
             return false;
         }
         ContentResolver cr = context.getContentResolver();
-        return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0
-                || Settings.Global.getInt(cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+        return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
     }
 
     @VisibleForTesting

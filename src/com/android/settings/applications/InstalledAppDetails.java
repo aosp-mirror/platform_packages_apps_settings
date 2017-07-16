@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -15,6 +15,8 @@
  */
 
 package com.android.settings.applications;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.Manifest.permission;
 import android.app.Activity;
@@ -65,7 +67,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -83,6 +84,8 @@ import com.android.settings.applications.instantapps.InstantAppButtonsController
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.development.DevelopmentSettingsEnabler;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
@@ -102,14 +105,11 @@ import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -176,7 +176,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
     private Preference mVersionPreference;
     private AppDomainsPreference mInstantAppDomainsPreference;
-
+    private DevelopmentSettingsEnabler mDevelopmentSettingsEnabler;
     private boolean mDisableAfterUninstall;
 
     // Used for updating notification preference.
@@ -376,6 +376,7 @@ public class InstalledAppDetails extends AppInfoBase
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details);
+
         addDynamicPrefs();
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
@@ -389,6 +390,8 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryUtils = BatteryUtils.getInstance(getContext());
+        mDevelopmentSettingsEnabler = new DevelopmentSettingsEnabler(
+                activity, null /* lifecycle */);
     }
 
     @Override
@@ -412,7 +415,9 @@ public class InstalledAppDetails extends AppInfoBase
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
         restartBatteryStatsLoader();
-        new MemoryUpdater().execute();
+        if (mDevelopmentSettingsEnabler.getLastEnabledState()) {
+            new MemoryUpdater().execute();
+        }
         updateDynamicPrefs();
     }
 
@@ -466,6 +471,7 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
+        mMemoryPreference.setVisible(mDevelopmentSettingsEnabler.getLastEnabledState());
         mVersionPreference = findPreference(KEY_VERSION);
         mInstantAppDomainsPreference =
                 (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);
@@ -1070,27 +1076,27 @@ public class InstalledAppDetails extends AppInfoBase
         final Context context = getContext();
         if (DefaultHomePreferenceController.hasHomePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_home", R.string.home_app,
+                    DefaultAppSettings.class, "default_home", R.string.home_app,
                     R.string.configure_apps));
         }
         if (DefaultBrowserPreferenceController.hasBrowserPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_browser", R.string.default_browser_title,
+                    DefaultAppSettings.class, "default_browser", R.string.default_browser_title,
                     R.string.configure_apps));
         }
         if (DefaultPhonePreferenceController.hasPhonePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_phone_app", R.string.default_phone_title,
+                    DefaultAppSettings.class, "default_phone_app", R.string.default_phone_title,
                     R.string.configure_apps));
         }
         if (DefaultEmergencyPreferenceController.hasEmergencyPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_emergency_app",
+                    DefaultAppSettings.class, "default_emergency_app",
                     R.string.default_emergency_app, R.string.configure_apps));
         }
         if (DefaultSmsPreferenceController.hasSmsPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_sms_app", R.string.sms_application_title,
+                    DefaultAppSettings.class, "default_sms_app", R.string.sms_application_title,
                     R.string.configure_apps));
         }
 
@@ -1296,7 +1302,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (DataUsageList.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }
-        if (DataUsageSummary.hasWifiRadio(context)) {
+        if (DataUsageUtils.hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
         }
         return NetworkTemplate.buildTemplateEthernet();

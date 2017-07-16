@@ -17,6 +17,7 @@ package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -27,10 +28,12 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -192,7 +195,16 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mBuilder.setPositiveButton(getString(android.R.string.ok), this);
         mBuilder.setNegativeButton(getString(android.R.string.cancel), this);
         AlertDialog dialog = mBuilder.create();
-        dialog.setOnShowListener(d -> mDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false));
+        dialog.setOnShowListener(d -> {
+            mDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+            if (mPairingView != null && mPairingView.requestFocus()) {
+                InputMethodManager imm = (InputMethodManager)
+                        getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(mPairingView, InputMethodManager.SHOW_IMPLICIT);
+                }
+            }
+        });
         return dialog;
     }
 

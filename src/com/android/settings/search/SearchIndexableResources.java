@@ -20,8 +20,8 @@ import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
-
 import android.text.TextUtils;
+
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
@@ -34,15 +34,14 @@ import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.MagnificationPreferenceFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
-import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
+import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.development.DevelopmentSettings;
@@ -78,6 +77,7 @@ import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
@@ -101,7 +101,7 @@ public final class SearchIndexableResources {
     @XmlRes
     public static final int NO_DATA_RES_ID = 0;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
 
     @VisibleForTesting
@@ -156,7 +156,7 @@ public final class SearchIndexableResources {
         addIndex(PowerUsageAdvanced.class, NO_DATA_RES_ID, R.drawable.ic_settings_battery);
         addIndex(BatterySaverSettings.class,
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
-        addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
+        addIndex(DefaultAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(ManageAssist.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(SpecialAccessSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
@@ -201,7 +201,7 @@ public final class SearchIndexableResources {
         addIndex(
                 TtsEnginePreferenceFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(LockscreenDashboardFragment.class, R.xml.security_lockscreen_settings,
-            R.drawable.ic_settings_security);
+                R.drawable.ic_settings_security);
         addIndex(MagnificationPreferenceFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accessibility);
         addIndex(AccessibilityShortcutPreferenceFragment.class, NO_DATA_RES_ID,

@@ -20,16 +20,13 @@
     style="@style/SuggestionConditionStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:orientation="vertical">
-
-    <Space
-        android:id="@+id/top_space"
-        android:layout_width="match_parent"
-        android:layout_height="9dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="36dp"
         android:layout_centerHorizontal="true">
 
         <FrameLayout
@@ -86,9 +83,5 @@
             android:gravity="center_vertical"/>
 
     </RelativeLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="12dp"/>
 
 </LinearLayout>

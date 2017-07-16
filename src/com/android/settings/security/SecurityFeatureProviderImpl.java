@@ -17,31 +17,30 @@
 package com.android.settings.security;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.IContentProvider;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
-import com.android.settings.R;
-import com.android.settings.trustagent.TrustAgentManager;
-import com.android.settings.trustagent.TrustAgentManagerImpl;
-import com.android.settingslib.drawer.DashboardCategory;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Pair;
 
+import com.android.settings.R;
+import com.android.settings.trustagent.TrustAgentManager;
+import com.android.settings.trustagent.TrustAgentManagerImpl;
+import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
-import java.util.concurrent.Executors;
-import java.util.TreeMap;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.Executors;
 
 /** Implementation for {@code SecurityFeatureProvider}. */
 public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {

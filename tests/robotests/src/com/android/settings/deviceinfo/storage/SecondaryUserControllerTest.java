@@ -104,7 +104,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
 
         Preference preference = argumentCaptor.getValue();
-        assertThat(preference.getSummary()).isEqualTo("0.01GB");
+        assertThat(preference.getSummary()).isEqualTo("0.01 GB");
     }
 
     @Test
@@ -177,7 +177,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("0.03GB");
+        assertThat(preference.getSummary()).isEqualTo("0.03 GB");
     }
 
     @Test

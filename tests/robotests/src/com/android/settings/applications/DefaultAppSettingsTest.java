@@ -16,18 +16,29 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
@@ -40,31 +51,19 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class AdvancedAppSettingsTest {
+public class DefaultAppSettingsTest {
 
     private Context mContext;
 
-    private AdvancedAppSettings mFragment;
+    private DefaultAppSettings mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
         mContext = RuntimeEnvironment.application;
-        mFragment = new AdvancedAppSettings();
+        mFragment = new DefaultAppSettings();
         mFragment.onAttach(mContext);
     }
 
@@ -77,8 +76,8 @@ public class AdvancedAppSettingsTest {
     @Test
     public void setListening_shouldUpdateSummary() {
         final SummaryLoader summaryLoader = mock(SummaryLoader.class);
-        final AdvancedAppSettings.SummaryProvider summaryProvider =
-                new AdvancedAppSettings.SummaryProvider(mContext, summaryLoader);
+        final DefaultAppSettings.SummaryProvider summaryProvider =
+                new DefaultAppSettings.SummaryProvider(mContext, summaryLoader);
         final DefaultSmsPreferenceController defaultSms =
                 mock(DefaultSmsPreferenceController.class);
         final DefaultBrowserPreferenceController defaultBrowser =
@@ -149,6 +148,7 @@ public class AdvancedAppSettingsTest {
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         final Context mockContext = mock(Context.class);
+        when(mockContext.getApplicationContext()).thenReturn(mockContext);
         final UserManager userManager = mock(UserManager.class, RETURNS_DEEP_STUBS);
 
         when(mockContext.getSystemService(Context.USER_SERVICE))
@@ -159,10 +159,10 @@ public class AdvancedAppSettingsTest {
                 .thenReturn(mock(TelephonyManager.class));
         when(mockContext.getPackageManager())
                 .thenReturn(mock(PackageManager.class));
-        final List<String> niks = AdvancedAppSettings.SEARCH_INDEX_DATA_PROVIDER
+        final List<String> niks = DefaultAppSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mockContext);
 
-        final int xmlId = (new AdvancedAppSettings()).getPreferenceScreenResId();
+        final int xmlId = (new DefaultAppSettings()).getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
