@@ -80,7 +80,7 @@ public class SuggestionDismissControllerTest {
     @Test
     public void getSwipeDirs_isSuggestionTile_shouldReturnDirection() {
         final RecyclerView.ViewHolder vh = mock(RecyclerView.ViewHolder.class);
-        when(vh.getItemViewType()).thenReturn(R.layout.suggestion_tile_new_ui);
+        when(vh.getItemViewType()).thenReturn(R.layout.suggestion_tile);
 
         assertThat(mController.getSwipeDirs(mRecyclerView, vh))
                 .isEqualTo(ItemTouchHelper.START | ItemTouchHelper.END);
@@ -89,7 +89,7 @@ public class SuggestionDismissControllerTest {
     @Test
     public void getSwipeDirs_isSuggestionTileCard_shouldReturnDirection() {
         final RecyclerView.ViewHolder vh = mock(RecyclerView.ViewHolder.class);
-        when(vh.getItemViewType()).thenReturn(R.layout.suggestion_tile_card);
+        when(vh.getItemViewType()).thenReturn(R.layout.suggestion_tile_remote_container);
 
         assertThat(mController.getSwipeDirs(mRecyclerView, vh))
                 .isEqualTo(ItemTouchHelper.START | ItemTouchHelper.END);
@@ -98,7 +98,7 @@ public class SuggestionDismissControllerTest {
     @Test
     public void getSwipeDirs_isNotSuggestionTile_shouldReturn0() {
         final RecyclerView.ViewHolder vh = mock(RecyclerView.ViewHolder.class);
-        when(vh.getItemViewType()).thenReturn(R.layout.condition_tile_new_ui);
+        when(vh.getItemViewType()).thenReturn(R.layout.condition_tile);
 
         assertThat(mController.getSwipeDirs(mRecyclerView, vh))
                 .isEqualTo(0);

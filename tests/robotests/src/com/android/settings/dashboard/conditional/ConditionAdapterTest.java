@@ -99,13 +99,13 @@ public class ConditionAdapterTest {
     public void getItemViewType_shouldReturnConditionTile() {
         mConditionAdapter = new ConditionAdapter(
             mContext, mTwoConditions, DashboardData.HEADER_MODE_FULLY_EXPANDED);
-        assertThat(mConditionAdapter.getItemViewType(0)).isEqualTo(R.layout.condition_tile_new_ui);
+        assertThat(mConditionAdapter.getItemViewType(0)).isEqualTo(R.layout.condition_tile);
     }
 
     @Test
     public void onBindViewHolder_shouldSetListener() {
         final View view = LayoutInflater.from(mContext).inflate(
-            R.layout.condition_tile_new_ui, new LinearLayout(mContext), true);
+            R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
             new DashboardAdapter.DashboardItemHolder(view);
         mConditionAdapter = new ConditionAdapter(
@@ -119,7 +119,7 @@ public class ConditionAdapterTest {
     @Test
     public void viewClick_shouldInvokeConditionPrimaryClick() {
         final View view = LayoutInflater.from(mContext).inflate(
-            R.layout.condition_tile_new_ui, new LinearLayout(mContext), true);
+            R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
             new DashboardAdapter.DashboardItemHolder(view);
         mConditionAdapter = new ConditionAdapter(
@@ -135,7 +135,7 @@ public class ConditionAdapterTest {
     public void onSwiped_nullCondition_shouldNotCrash() {
         final RecyclerView recyclerView = new RecyclerView(mContext);
         final View view = LayoutInflater.from(mContext).inflate(
-                R.layout.condition_tile_new_ui, new LinearLayout(mContext), true);
+                R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
                 new DashboardAdapter.DashboardItemHolder(view);
         mConditionAdapter = new ConditionAdapter(
