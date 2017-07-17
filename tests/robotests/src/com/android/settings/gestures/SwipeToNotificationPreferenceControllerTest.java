@@ -16,23 +16,34 @@
 
 package com.android.settings.gestures;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings;
 
+import com.android.settings.search.InlinePayload;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -87,5 +98,45 @@ public class SwipeToNotificationPreferenceControllerTest {
         mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
+    }
+
+    @Test
+    public void testPreferenceController_ProperResultPayloadType() {
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
+
+        SwipeToNotificationPreferenceController controller =
+                new SwipeToNotificationPreferenceController(mContext, null /* lifecycle */,
+                        SYSTEM_NAVIGATION_KEYS_ENABLED);
+        ResultPayload payload = controller.getResultPayload();
+        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
+    }
+
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testSetValue_updatesCorrectly() {
+        int newValue = 1;
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.Secure.putInt(resolver, Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
+
+        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
+        int updatedValue = Settings.Secure.getInt(resolver,
+                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, -1);
+
+        assertThat(updatedValue).isEqualTo(newValue);
+    }
+
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testGetValue_correctValueReturned() {
+        int currentValue = 1;
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.Secure.putInt(resolver,
+                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, currentValue);
+
+        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
+
+        assertThat(newValue).isEqualTo(currentValue);
     }
 }
