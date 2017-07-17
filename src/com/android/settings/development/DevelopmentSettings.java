@@ -61,6 +61,7 @@ import android.provider.Settings;
 import android.service.oemlock.OemLockManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -96,6 +97,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -121,7 +123,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
      */
     public static final String PREF_SHOW = "show";
 
-    private static final String ENABLE_ADB = "enable_adb";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
@@ -258,7 +259,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
-    private SwitchPreference mEnableAdb;
+    private EnableAdbPreferenceController mEnableAdbController;
     private Preference mClearAdbKeys;
     private SwitchPreference mEnableTerminal;
     private RestrictedSwitchPreference mKeepScreenOn;
@@ -345,7 +346,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
     private Dialog mEnableDialog;
-    private Dialog mAdbDialog;
 
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
@@ -358,6 +358,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
     private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
+
+    private BroadcastReceiver mEnableAdbReceiver;
 
     public DevelopmentSettings() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -411,7 +413,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
-        mEnableAdb = findAndInitSwitchPref(ENABLE_ADB);
+        mEnableAdbController = new EnableAdbPreferenceController(getActivity());
         mClearAdbKeys = findPreference(CLEAR_ADB_KEYS);
         if (!SystemProperties.getBoolean("ro.adb.secure", false)) {
             if (debugDebuggingCategory != null) {
@@ -430,6 +432,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mTelephonyMonitorController.displayPreference(getPreferenceScreen());
         mWebViewAppPrefController.displayPreference(getPreferenceScreen());
         mCameraHalHdrplusController.displayPreference(getPreferenceScreen());
+        mEnableAdbController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -445,7 +448,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAllPrefs.add(mPassword);
 
         if (!mUm.isAdminUser()) {
-            disableForUser(mEnableAdb);
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
@@ -650,6 +652,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Preference pref = mAllPrefs.get(i);
             pref.setEnabled(enabled && !mDisabledPrefs.contains(pref));
         }
+        mEnableAdbController.enablePreference(enabled);
         mBugReportInPowerController.enablePreference(enabled);
         mTelephonyMonitorController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
@@ -733,6 +736,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateBluetoothA2dpConfigurationValues();
         }
 
+        mEnableAdbReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                mVerifyAppsOverUsbController.updatePreference();
+                updateBugreportOptions();
+            }
+        };
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(mEnableAdbReceiver, new IntentFilter(
+                        AbstractEnableAdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -752,6 +766,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             adapter.closeProfileProxy(BluetoothProfile.A2DP, mBluetoothA2dp);
             mBluetoothA2dp = null;
         }
+
+        if (mEnableAdbReceiver != null) {
+            LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mEnableAdbReceiver);
+            mEnableAdbReceiver = null;
+        }
     }
 
     void updateSwitchPreference(SwitchPreference switchPreference, boolean value) {
@@ -763,8 +782,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         final Context context = getActivity();
         final ContentResolver cr = context.getContentResolver();
         mHaveDebugSettings = false;
-        updateSwitchPreference(mEnableAdb, Settings.Global.getInt(cr,
-                Settings.Global.ADB_ENABLED, 0) != 0);
+        final Preference enableAdb = findPreference(mEnableAdbController.getPreferenceKey());
+        mEnableAdbController.updateState(enableAdb);
+        mHaveDebugSettings |= mEnableAdbController.haveDebugSettings();
         if (mEnableTerminal != null) {
             updateSwitchPreference(mEnableTerminal,
                     context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
@@ -840,6 +860,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
         }
         mBugReportInPowerController.resetPreference();
+        mEnableAdbController.resetPreference();
         resetDebuggerOptions();
         writeLogpersistOption(null, true);
         writeLogdSizeOption(null);
@@ -2419,24 +2440,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
 
-        if (preference == mEnableAdb) {
-            if (mEnableAdb.isChecked()) {
-                mDialogClicked = false;
-                if (mAdbDialog != null) dismissDialogs();
-                mAdbDialog = new AlertDialog.Builder(getActivity()).setMessage(
-                        getActivity().getResources().getString(R.string.adb_warning_message))
-                        .setTitle(R.string.adb_warning_title)
-                        .setPositiveButton(android.R.string.yes, this)
-                        .setNegativeButton(android.R.string.no, this)
-                        .show();
-                mAdbDialog.setOnDismissListener(this);
-            } else {
-                Settings.Global.putInt(getActivity().getContentResolver(),
-                        Settings.Global.ADB_ENABLED, 0);
-                mVerifyAppsOverUsbController.updatePreference();
-                updateBugreportOptions();
-            }
-        } else if (preference == mClearAdbKeys) {
+        if (mEnableAdbController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
+        if (preference == mClearAdbKeys) {
             if (mAdbKeysDialog != null) dismissDialogs();
             mAdbKeysDialog = new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.adb_keys_warning_message)
@@ -2610,10 +2618,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void dismissDialogs() {
-        if (mAdbDialog != null) {
-            mAdbDialog.dismiss();
-            mAdbDialog = null;
-        }
+        mEnableAdbController.dismissDialogs();
         if (mAdbKeysDialog != null) {
             mAdbKeysDialog.dismiss();
             mAdbKeysDialog = null;
@@ -2629,18 +2634,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     public void onClick(DialogInterface dialog, int which) {
-        if (dialog == mAdbDialog) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                mDialogClicked = true;
-                Settings.Global.putInt(getActivity().getContentResolver(),
-                        Settings.Global.ADB_ENABLED, 1);
-                mVerifyAppsOverUsbController.updatePreference();
-                updateBugreportOptions();
-            } else {
-                // Reset the toggle
-                mEnableAdb.setChecked(false);
-            }
-        } else if (dialog == mAdbKeysDialog) {
+        if (dialog == mAdbKeysDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 try {
                     IBinder b = ServiceManager.getService(Context.USB_SERVICE);
@@ -2670,12 +2664,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     public void onDismiss(DialogInterface dialog) {
         // Assuming that onClick gets called first
-        if (dialog == mAdbDialog) {
-            if (!mDialogClicked) {
-                mEnableAdb.setChecked(false);
-            }
-            mAdbDialog = null;
-        } else if (dialog == mEnableDialog) {
+        if (dialog == mEnableDialog) {
             if (!mDialogClicked) {
                 mSwitchBar.setChecked(false);
             }
