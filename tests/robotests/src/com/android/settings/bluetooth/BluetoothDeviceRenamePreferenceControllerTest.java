@@ -24,10 +24,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -53,9 +53,9 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
     @Mock
-    private FragmentManager mFragmentManager;
-    @Mock
     private FragmentTransaction mFragmentTransaction;
+    @Mock
+    private PreferenceScreen mScreen;
     private Context mContext;
     private Preference mPreference;
     private BluetoothDeviceRenamePreferenceController mController;
@@ -89,5 +89,14 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
         verify(mFragmentTransaction).add(any(), anyString());
         verify(mFragmentTransaction).commit();
+    }
+
+    @Test
+    public void displayPreference_shouldFindPreferenceWithMatchingPrefKey() {
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mController.mPreference.getKey()).isEqualTo(mController.getPreferenceKey());
     }
 }
