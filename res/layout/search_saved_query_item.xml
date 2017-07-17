@@ -20,28 +20,25 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:background="?android:attr/selectableItemBackground"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="@dimen/dashboard_tile_image_size"
+        android:layout_height="@dimen/dashboard_tile_image_size"
+        android:scaleType="centerInside"
+        android:layout_marginStart="@dimen/dashboard_tile_image_margin"
+        android:layout_marginEnd="@dimen/dashboard_tile_image_margin"
+        android:src="@drawable/ic_restore" />
 
     <TextView
         android:id="@android:id/title"
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:text="test"
+        android:layout_width="match_parent"
         android:gravity="center_vertical"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingStart="@dimen/preference_no_icon_padding_start"
         android:textAppearance="?android:attr/textAppearanceListItem" />
-
-    <ImageView
-        android:id="@android:id/icon"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_width="@dimen/dashboard_category_height"
-        android:layout_height="@dimen/dashboard_category_height"
-        android:paddingStart="@dimen/search_suggestion_item_image_margin_start"
-        android:paddingEnd="@dimen/search_suggestion_item_image_margin_end"
-        android:scaleType="center"
-        android:src="@drawable/ic_cross_grey_24dp" />
 
 </LinearLayout>
