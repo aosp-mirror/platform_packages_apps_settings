@@ -492,7 +492,7 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
-    /* package */ WifiConfiguration getConfig() {
+    public WifiConfiguration getConfig() {
         if (mMode == WifiConfigUiBase.MODE_VIEW) {
             return null;
         }
