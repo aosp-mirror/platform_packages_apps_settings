@@ -39,10 +39,7 @@ public class UserDictionaryPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        final TreeSet<String> localeSet = getDictionaryLocales();
-        // The locale list is null if and only if the user dictionary service is
-        // not present or disabled. In this case we need to remove the preference.
-        return localeSet != null;
+        return true;
     }
 
     @Override

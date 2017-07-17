@@ -140,6 +140,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        long startTime = System.currentTimeMillis();
         setHasOptionsMenu(true);
 
         final LoaderManager loaderManager = getLoaderManager();
@@ -163,6 +164,9 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mSearchFeatureProvider.updateIndexAsync(activity, this /* indexingCallback */);
         } else {
             Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
+        }
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            Log.d(TAG, "onCreate spent " + (System.currentTimeMillis() - startTime) + " ms");
         }
     }
 
