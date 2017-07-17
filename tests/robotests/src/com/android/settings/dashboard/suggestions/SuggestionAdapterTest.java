@@ -105,13 +105,13 @@ public class SuggestionAdapterTest {
     public void getItemViewType_shouldReturnSuggestionTile() {
         mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemViewType(0))
-            .isEqualTo(R.layout.suggestion_tile_new_ui);
+            .isEqualTo(R.layout.suggestion_tile);
     }
 
     @Test
     public void onBindViewHolder_shouldSetListener() {
         final View view = spy(LayoutInflater.from(mContext).inflate(
-            R.layout.suggestion_tile_new_ui, new LinearLayout(mContext), true));
+            R.layout.suggestion_tile, new LinearLayout(mContext), true));
         mSuggestionHolder = new DashboardAdapter.DashboardItemHolder(view);
         mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion, new ArrayList<>());
 
