@@ -158,11 +158,14 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     @Override
     public int getMaximumFailedPasswordsBeforeWipeInCurrentUser() {
-        final ComponentName profileOwner = mDpm.getProfileOwnerAsUser(MY_USER_ID);
-        if (profileOwner == null) {
+        ComponentName owner = mDpm.getDeviceOwnerComponentOnCallingUser();
+        if (owner == null) {
+            owner = mDpm.getProfileOwnerAsUser(MY_USER_ID);
+        }
+        if (owner == null) {
             return 0;
         }
-        return mDpm.getMaximumFailedPasswordsForWipe(profileOwner, MY_USER_ID);
+        return mDpm.getMaximumFailedPasswordsForWipe(owner, MY_USER_ID);
     }
 
     @Override

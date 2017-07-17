@@ -231,12 +231,17 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
     @Test
     public void testGetMaximumFailedPasswordsForWipeInCurrentUser() {
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnCallingUser()).thenReturn(null);
         when(mDevicePolicyManager.getProfileOwnerAsUser(MY_USER_ID)).thenReturn(null);
         when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, MY_USER_ID))
                 .thenReturn(10);
         assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInCurrentUser()).isEqualTo(0);
 
         when(mDevicePolicyManager.getProfileOwnerAsUser(MY_USER_ID)).thenReturn(OWNER);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInCurrentUser()).isEqualTo(10);
+
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnCallingUser()).thenReturn(OWNER);
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MY_USER_ID)).thenReturn(null);
         assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInCurrentUser()).isEqualTo(10);
     }
 

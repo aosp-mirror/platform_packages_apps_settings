@@ -42,6 +42,11 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     }
 
     @Override
+    public ComponentName getDeviceOwnerComponentOnCallingUser() {
+        return mDpm.getDeviceOwnerComponentOnCallingUser();
+    }
+
+    @Override
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDpm.getDeviceOwnerComponentOnAnyUser();
     }
