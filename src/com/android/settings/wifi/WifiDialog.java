@@ -53,7 +53,9 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
 
     public WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
             int mode) {
-        super(context);
+        // conditionally sets the theme to fullscreen dialog for "Add Network"
+        super(context,
+                mode == WifiConfigUiBase.MODE_CONNECT ? R.style.Theme_Settings_NoActionBar : 0);
         mMode = mode;
         mListener = listener;
         mAccessPoint = accessPoint;
