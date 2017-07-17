@@ -70,7 +70,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
 
         @Override
         public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-            return viewHolder.getItemViewType() == R.layout.condition_tile_new_ui
+            return viewHolder.getItemViewType() == R.layout.condition_tile
                     ? super.getSwipeDirs(recyclerView, viewHolder) : 0;
         }
 
@@ -121,7 +121,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.condition_tile_new_ui;
+        return R.layout.condition_tile;
     }
 
     @Override
