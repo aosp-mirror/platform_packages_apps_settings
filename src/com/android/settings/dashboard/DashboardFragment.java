@@ -38,6 +38,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -227,6 +228,20 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         return true;
     }
 
+    @VisibleForTesting
+    boolean tintTileIcon(Tile tile) {
+        // First check if the tile has set the icon tintable metadata.
+        final Bundle metadata = tile.metaData;
+        if (metadata != null
+                && metadata.containsKey(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE)) {
+            return metadata.getBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE);
+        }
+        final String pkgName = getContext().getPackageName();
+        // If this drawable is coming from outside Settings, tint it to match the color.
+        return pkgName != null && tile.intent != null
+                && !pkgName.equals(tile.intent.getComponent().getPackageName());
+    }
+
     /**
      * Displays resource based tiles.
      */
@@ -315,7 +330,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 android.R.attr.colorControlNormal});
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();
-        final String pkgName = context.getPackageName();
         // Install dashboard tiles.
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
@@ -326,9 +340,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (!displayTile(tile)) {
                 continue;
             }
-            if (pkgName != null && tile.intent != null
-                    && !pkgName.equals(tile.intent.getComponent().getPackageName())) {
-                // If this drawable is coming from outside Settings, tint it to match the color.
+            if (tintTileIcon(tile)) {
                 tile.icon.setTint(tintColor);
             }
             if (mDashboardTilePrefKeys.contains(key)) {
