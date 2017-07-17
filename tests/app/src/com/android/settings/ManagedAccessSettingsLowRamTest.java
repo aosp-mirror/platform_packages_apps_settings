@@ -22,8 +22,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-import static junit.framework.Assert.assertTrue;
-
 import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.content.Context;
@@ -32,10 +30,6 @@ import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiSelector;
-
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +53,7 @@ public class ManagedAccessSettingsLowRamTest {
                 com.android.settings.Settings.SpecialAccessSettingsActivity.class));
 
         String[] managedServiceLabels = new String[] {"Do Not Disturb access",
-                "VR helper services", "Notification access"};
+                "VR helper services", "Notification access", "Picture-in-picture"};
         for (String label : managedServiceLabels) {
             if (ActivityManager.isLowRamDeviceStatic()) {
                 onView(withText(label)).check(doesNotExist());
@@ -111,4 +105,17 @@ public class ManagedAccessSettingsLowRamTest {
         }
     }
 
+    @Test
+    public void launchPictureInPictureSetting_onlyWorksIfNotLowRam() {
+        final Intent intent = new Intent(Settings.ACTION_PICTURE_IN_PICTURE_SETTINGS);
+
+        mInstrumentation.startActivitySync(intent);
+
+        final String label = "This feature is not available on this device";
+        if (ActivityManager.isLowRamDeviceStatic()) {
+            onView(withText(label)).check(matches(isDisplayed()));
+        } else {
+            onView(withText(label)).check(doesNotExist());
+        }
+    }
 }
