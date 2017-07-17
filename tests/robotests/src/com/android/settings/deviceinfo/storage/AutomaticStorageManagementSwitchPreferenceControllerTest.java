@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -33,17 +32,15 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settings.overlay.FeatureFactory;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,8 +81,16 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
+    public void isAvailable_shouldReturnTrue_forHighRamDevice() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {SettingsShadowSystemProperties.class})
+    public void isAvailable_shouldAlwaysReturnFalse_forLowRamDevice() {
+        SettingsShadowSystemProperties.set("ro.config.low_ram", "true");
+        assertThat(mController.isAvailable()).isFalse();
+        SettingsShadowSystemProperties.clear();
     }
 
     @Test

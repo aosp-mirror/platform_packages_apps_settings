@@ -16,13 +16,13 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -61,7 +61,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return !ActivityManager.isLowRamDeviceStatic();
     }
 
     @Override
@@ -71,6 +71,9 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
 
     @Override
     public void onResume() {
+        if (!isAvailable()) {
+            return;
+        }
         boolean isStorageManagerEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
         mSwitch.setChecked(isStorageManagerEnabled);
