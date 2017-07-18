@@ -208,7 +208,7 @@ public class InstalledAppDetails extends AppInfoBase
 
                 @Override
                 public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
-                    return new BatteryStatsHelperLoader(getContext(), args);
+                    return new BatteryStatsHelperLoader(getContext());
                 }
 
                 @Override
