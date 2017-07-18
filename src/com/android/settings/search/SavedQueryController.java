@@ -21,6 +21,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -38,6 +39,7 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
     private static final int LOADER_ID_REMOVE_QUERY_TASK = 1;
     private static final int LOADER_ID_SAVED_QUERIES = 2;
     private static final String ARG_QUERY = "remove_query";
+    private static final String TAG = "SearchSavedQueryCtrl";
 
     private static final int MENU_SEARCH_HISTORY = 1000;
 
@@ -75,6 +77,9 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
                 mLoaderManager.restartLoader(LOADER_ID_SAVED_QUERIES, null, this);
                 break;
             case LOADER_ID_SAVED_QUERIES:
+                if (SettingsSearchIndexablesProvider.DEBUG) {
+                    Log.d(TAG, "Saved queries loaded");
+                }
                 mResultAdapter.displaySavedQuery((List<SearchResult>) data);
                 break;
         }
@@ -114,6 +119,9 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
     }
 
     public void loadSavedQueries() {
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            Log.d(TAG, "loading saved queries");
+        }
         mLoaderManager.restartLoader(LOADER_ID_SAVED_QUERIES, null, this);
     }
 }
