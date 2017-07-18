@@ -51,9 +51,10 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
 
     private final int mAccentColor;
 
+    @VisibleForTesting
+    Preference mPreference;
     private LocalBluetoothManager mLocalManager;
     private LocalBluetoothAdapter mLocalAdapter;
-    private Preference mPreference;
 
     public BluetoothDeviceNamePreferenceController(Context context, Lifecycle lifecycle) {
         this(context, (LocalBluetoothAdapter) null);
@@ -76,7 +77,7 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mPreference = screen.findPreference(KEY_DEVICE_NAME);
+        mPreference = screen.findPreference(getPreferenceKey());
         super.displayPreference(screen);
     }
 
