@@ -41,11 +41,9 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
@@ -88,7 +86,6 @@ public class LanguageAndInputSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         when(mActivity.getSystemService(Context.INPUT_SERVICE))
                 .thenReturn(mock(InputManager.class));
@@ -158,39 +155,6 @@ public class LanguageAndInputSettingsTest {
     }
 
     @Test
-    @Config(shadows = {
-            ShadowSecureSettings.class,
-    })
-    public void testSummary_assistSupported_shouldSetToAssistGestureStatus() {
-        final FakeFeatureFactory featureFactory =
-            (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
-        when(featureFactory.assistGestureFeatureProvider.isSupported(any(Context.class)))
-            .thenReturn(true);
-        when(featureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
-                .thenReturn(true);
-
-        final SummaryLoader loader = mock(SummaryLoader.class);
-        SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
-                .createSummaryProvider(mActivity, loader);
-
-        final ContentResolver cr = mActivity.getContentResolver();
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
-        provider.setListening(true);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_off);
-
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
-        provider.setListening(true);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_on_with_assist);
-
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1);
-        provider.setListening(true);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_on_non_assist);
-    }
-
-    @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         final Resources res = spy(RuntimeEnvironment.application.getResources());
@@ -236,7 +200,6 @@ public class LanguageAndInputSettingsTest {
         public TestFragment(Context context) {
             mContext = context;
             mLifecycle = mock(Lifecycle.class);
-            setAmbientDisplayConfig(mock(AmbientDisplayConfiguration.class));
         }
 
         @Override
