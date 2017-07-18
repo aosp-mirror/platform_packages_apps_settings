@@ -35,6 +35,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +54,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 public class ToggleAccessibilityServicePreferenceFragment
         extends ToggleFeaturePreferenceFragment implements DialogInterface.OnClickListener {
@@ -209,6 +213,10 @@ public class ToggleAccessibilityServicePreferenceFragment
 
                 ad.create();
                 ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(filterTouchListener);
+                Window window = ad.getWindow();
+                WindowManager.LayoutParams params = window.getAttributes();
+                params.privateFlags |= PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+                window.setAttributes(params);
                 return ad;
             }
             case DIALOG_ID_DISABLE_WARNING: {
