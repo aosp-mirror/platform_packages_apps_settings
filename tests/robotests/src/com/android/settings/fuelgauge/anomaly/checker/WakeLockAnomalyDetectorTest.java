@@ -99,6 +99,8 @@ public class WakeLockAnomalyDetectorTest {
     private WakeLockAnomalyDetector mWakelockAnomalyDetector;
     private Context mContext;
     private List<BatterySipper> mUsageList;
+    private Anomaly mAnomaly;
+    private Anomaly mTargetAnomaly;
 
     @Before
     public void setUp() throws Exception {
@@ -152,41 +154,40 @@ public class WakeLockAnomalyDetectorTest {
         mUsageList.add(mTargetSipper);
         mUsageList.add(mInactiveSipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
+
+        mAnomaly = createWakeLockAnomaly(ANOMALY_UID);
+        mTargetAnomaly = createWakeLockAnomaly(TARGET_UID);
     }
 
     @Test
     public void testDetectAnomalies_containsAnomaly_detectIt() {
         doReturn(BatteryUtils.UID_NULL).when(mBatteryUtils).getPackageUid(nullable(String.class));
-        final Anomaly anomaly = new Anomaly.Builder()
-                .setUid(ANOMALY_UID)
-                .setType(Anomaly.AnomalyType.WAKE_LOCK)
-                .build();
-        final Anomaly targetAnomaly = new Anomaly.Builder()
-                .setUid(TARGET_UID)
-                .setType(Anomaly.AnomalyType.WAKE_LOCK)
-                .build();
 
         List<Anomaly> mAnomalies = mWakelockAnomalyDetector.detectAnomalies(mBatteryStatsHelper);
 
-        assertThat(mAnomalies).containsExactly(anomaly, targetAnomaly);
+        assertThat(mAnomalies).containsExactly(mAnomaly, mTargetAnomaly);
     }
 
     @Test
     public void testDetectAnomalies_containsTargetPackage_detectIt() {
         doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
-        final Anomaly targetAnomaly = new Anomaly.Builder()
-                .setUid(TARGET_UID)
-                .setType(Anomaly.AnomalyType.WAKE_LOCK)
-                .build();
 
         List<Anomaly> mAnomalies = mWakelockAnomalyDetector.detectAnomalies(mBatteryStatsHelper,
                 TARGET_PACKAGE_NAME);
 
-        assertThat(mAnomalies).containsExactly(targetAnomaly);
+        assertThat(mAnomalies).containsExactly(mTargetAnomaly);
     }
 
     @Test
     public void testContainsThresholdFromPolicy() {
         assertThat(mWakelockAnomalyDetector.mWakeLockThresholdMs).isEqualTo(WAKELOCK_THRESHOLD_MS);
+    }
+
+    private Anomaly createWakeLockAnomaly(int uid) {
+        return new Anomaly.Builder()
+                .setUid(uid)
+                .setType(Anomaly.AnomalyType.WAKE_LOCK)
+                .setWakeLockTimeMs(ANOMALY_WAKELOCK_TIME_MS)
+                .build();
     }
 }
