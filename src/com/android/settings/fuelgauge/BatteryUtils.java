@@ -370,6 +370,7 @@ public class BatteryUtils {
     public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
             UserManager userManager) {
         statsHelper.create(bundle);
+        statsHelper.clearStats();
         statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, userManager.getUserProfiles());
     }
 
