@@ -46,6 +46,7 @@ public class SeekBarPreference extends RestrictedPreference
     private int mDefaultProgress = -1;
 
     private SeekBar mSeekBar;
+    private boolean mShouldBlink;
 
     public SeekBarPreference(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -80,6 +81,11 @@ public class SeekBarPreference extends RestrictedPreference
         this(context, null);
     }
 
+    public void setShouldBlink(boolean shouldBlink) {
+        mShouldBlink = shouldBlink;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
@@ -96,6 +102,19 @@ public class SeekBarPreference extends RestrictedPreference
         }
         if (mSeekBar instanceof DefaultIndicatorSeekBar) {
             ((DefaultIndicatorSeekBar) mSeekBar).setDefaultProgress(mDefaultProgress);
+        }
+        if (mShouldBlink) {
+            View v = view.itemView;
+            v.post(() -> {
+                if (v.getBackground() != null) {
+                    final int centerX = v.getWidth() / 2;
+                    final int centerY = v.getHeight() / 2;
+                    v.getBackground().setHotspot(centerX, centerY);
+                }
+                v.setPressed(true);
+                v.setPressed(false);
+                mShouldBlink = false;
+            });
         }
     }
 
