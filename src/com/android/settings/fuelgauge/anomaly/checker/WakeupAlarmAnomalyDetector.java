@@ -89,12 +89,17 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
                     final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                     final CharSequence displayName = Utils.getApplicationLabel(mContext,
                             packageName);
+                    final int targetSdkVersion = mBatteryUtils.getTargetSdkVersion(packageName);
 
                     Anomaly anomaly = new Anomaly.Builder()
                             .setUid(uid.getUid())
                             .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
                             .setDisplayName(displayName)
                             .setPackageName(packageName)
+                            .setTargetSdkVersion(targetSdkVersion)
+                            .setBackgroundRestrictionEnabled(
+                                    mBatteryUtils.isBackgroundRestrictionEnabled(targetSdkVersion,
+                                            uid.getUid(), packageName))
                             .build();
 
                     if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {
