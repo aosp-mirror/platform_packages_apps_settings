@@ -17,14 +17,23 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.DisplaySettings;
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
+
+    private final int ON = 0;
+    private final int OFF = 1;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
     private final String mDoubleTapPowerKey;
@@ -63,7 +72,7 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean enabled = (boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? 0 : 1);
+                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? ON : OFF);
         return true;
     }
 
@@ -72,5 +81,15 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
         return cameraDisabled == 0;
+    }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                DoubleTapPowerSettings.class.getName(), mDoubleTapPowerKey,
+                mContext.getString(R.string.display_settings));
+
+        return new InlineSwitchPayload(Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                ResultPayload.SettingsSource.SECURE, ON, intent, isAvailable());
     }
 }

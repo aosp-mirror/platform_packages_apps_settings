@@ -209,6 +209,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public Timer getForegroundServiceTimer() {
+        return null;
+    }
+
+    @Override
     public long getProcessStateTime(int state, long elapsedRealtimeUs, int which) {
         return 0;
     }

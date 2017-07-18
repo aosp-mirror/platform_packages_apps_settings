@@ -17,14 +17,16 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchResult.Builder;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +35,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -57,7 +57,7 @@ public class SearchResultBuilderTest {
         mResultPayload = new ResultPayload(new Intent());
 
         final Context context = ShadowApplication.getInstance().getApplicationContext();
-        mIcon = context.getDrawable(R.drawable.ic_search_history);
+        mIcon = context.getDrawable(R.drawable.ic_search_24dp);
     }
 
     @Test

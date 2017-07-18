@@ -113,16 +113,16 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private List<Anomaly> mAnomalies;
     private String mPackageName;
 
-    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
-            BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent,
-            List<Anomaly> anomalies) {
+    @VisibleForTesting
+    static void startBatteryDetailPage(SettingsActivity caller, BatteryUtils batteryUtils,
+            PreferenceFragment fragment, BatteryStatsHelper helper, int which, BatteryEntry entry,
+            String usagePercent, List<Anomaly> anomalies) {
         // Initialize mStats if necessary.
         helper.getStats();
 
         final Bundle args = new Bundle();
         final BatterySipper sipper = entry.sipper;
         final BatteryStats.Uid uid = sipper.uidObj;
-        final BatteryUtils batteryUtils = BatteryUtils.getInstance(caller);
         final boolean isTypeApp = sipper.drainType == BatterySipper.DrainType.APP;
 
         final long foregroundTimeMs = isTypeApp ? batteryUtils.getProcessTimeMs(
@@ -150,6 +150,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
                 R.string.battery_details_title, null,
                 new UserHandle(UserHandle.getUserId(sipper.getUid())));
+    }
+
+    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
+            BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent,
+            List<Anomaly> anomalies) {
+        startBatteryDetailPage(caller, BatteryUtils.getInstance(caller), fragment, helper, which,
+                entry, usagePercent, anomalies);
     }
 
     public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,

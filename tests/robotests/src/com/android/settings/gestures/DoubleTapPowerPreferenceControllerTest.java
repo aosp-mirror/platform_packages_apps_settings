@@ -16,19 +16,25 @@
 
 package com.android.settings.gestures;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.search.InlinePayload;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -91,5 +97,45 @@ public class DoubleTapPowerPreferenceControllerTest {
         mController = new DoubleTapPowerPreferenceController(context, null, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
+    }
+
+    @Test
+    public void testPreferenceController_ProperResultPayloadType() {
+        final Context context = RuntimeEnvironment.application;
+        DoubleTapPowerPreferenceController controller =
+                new DoubleTapPowerPreferenceController(context, null /* lifecycle */,
+                        KEY_DOUBLE_TAP_POWER);
+        ResultPayload payload = controller.getResultPayload();
+        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
+    }
+
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testSetValue_updatesCorrectly() {
+        int newValue = 1;
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.Secure.putInt(resolver, Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                0);
+
+        InlinePayload payload = ((InlineSwitchPayload) mController.getResultPayload());
+        payload.setValue(mContext, newValue);
+        int updatedValue = Settings.Secure.getInt(resolver,
+                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, -1);
+        updatedValue = 1 - updatedValue; // DoubleTapPower is a non-standard switch
+
+        assertThat(updatedValue).isEqualTo(newValue);
+    }
+
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testGetValue_correctValueReturned() {
+        int currentValue = 1;
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.Secure.putInt(resolver,
+                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, currentValue);
+
+        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
+        newValue = 1 - newValue; // DoubleTapPower is a non-standard switch
+        assertThat(newValue).isEqualTo(currentValue);
     }
 }
