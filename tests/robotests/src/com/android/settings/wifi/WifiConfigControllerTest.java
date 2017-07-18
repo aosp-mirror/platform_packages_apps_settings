@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -159,6 +160,34 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.isReachable()).thenReturn(false);
 
         assertThat(mController.getSignalString()).isNull();
+    }
+
+    @Test
+    public void showForCarrierAp() {
+        // Setup the mock view for wifi dialog.
+        View view = mock(View.class);
+        TextView nameText = mock(TextView.class);
+        TextView valueText = mock(TextView.class);
+        when(view.findViewById(R.id.name)).thenReturn(nameText);
+        when(view.findViewById(R.id.value)).thenReturn(valueText);
+        LayoutInflater inflater = mock(LayoutInflater.class);
+        when(inflater.inflate(anyInt(), any(ViewGroup.class), anyBoolean())).thenReturn(view);
+        when(mConfigUiBase.getLayoutInflater()).thenReturn(inflater);
+
+        String carrierName = "Test Carrier";
+        when(mAccessPoint.isCarrierAp()).thenReturn(true);
+        when(mAccessPoint.getCarrierName()).thenReturn(carrierName);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+        // Verify the content of the text fields.
+        verify(nameText).setText(R.string.wifi_carrier_connect);
+        verify(valueText).setText(
+                String.format(mContext.getString(R.string.wifi_carrier_content), carrierName));
+        // Verify that the advance toggle is not visible.
+        assertThat(mView.findViewById(R.id.wifi_advanced_toggle).getVisibility())
+                .isEqualTo(View.GONE);
+        // Verify that the EAP method menu is not visible.
+        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.GONE);
     }
 
     public class TestWifiConfigController extends WifiConfigController {
