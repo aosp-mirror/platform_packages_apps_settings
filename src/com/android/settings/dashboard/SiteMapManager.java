@@ -16,14 +16,16 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settings.dashboard.DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
+import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.IndexDatabaseHelper;
@@ -31,13 +33,9 @@ import com.android.settings.search.IndexDatabaseHelper.IndexColumns;
 import com.android.settings.search.IndexDatabaseHelper.SiteMapColumns;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.android.settings.dashboard.DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP;
 
 /**
  * A manager class that maintains a "site map" and look up breadcrumb for a certain page on demand.
@@ -135,7 +133,7 @@ public class SiteMapManager {
 
         // Then prepare a local map that contains class name -> screen title mapping. This is needed
         // to figure out the display name for any fragment if it's injected dynamically through IA.
-        final Map<String, String> classToTitleMap = new HashMap<>();
+        final Map<String, String> classToTitleMap = new ArrayMap<>();
         final Cursor titleQuery = db.query(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX,
                 CLASS_TO_SCREEN_TITLE_COLUMNS, null, null, null, null, null);
         while (titleQuery.moveToNext()) {
