@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -14,41 +14,34 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_ETHERNET;
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
 
+import android.annotation.IdRes;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.INetworkStatsSession;
+import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.net.TrafficStats;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.text.BidiFormatter;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -58,30 +51,22 @@ import com.android.settingslib.net.DataUsageController;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Settings preference fragment that displays data usage summary.
- *
- * This class in deprecated use {@link DataPlanUsageSummary}.
- */
-@Deprecated
-public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
-
-    static final boolean LOGD = false;
+public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
 
     public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
+    private static final String KEY_DATA_PLAN_USAGE = "data_plan_usage";
 
     private static final String KEY_STATUS_HEADER = "status_header";
-    private static final String KEY_LIMIT_SUMMARY = "limit_summary";
-    private static final String KEY_MOBILE_USAGE_TITLE = "mobile_category";
+    private static final String KEY_LIMIT_SUMMARY = "plan_summary";
+    private static final String KEY_MOBILE_USAGE_TITLE = "data_usage_mobile_category";
     private static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
-    private SummaryPreference mSummaryPreference;
+    private List<DataPlanSummaryPreference> mDataPlanSummaryPreferenceList;
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
-    private int mDataUsageTemplate;
     private NetworkRestrictionsPreference mNetworkRestrictionPreference;
     private WifiManager mWifiManager;
     private NetworkPolicyEditor mPolicyEditor;
@@ -92,60 +77,38 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
 
         final Context context = getContext();
         NetworkPolicyManager policyManager = NetworkPolicyManager.from(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
-
-        boolean hasMobileData = DataUsageUtils.hasMobileData(context);
         mDataUsageController = new DataUsageController(context);
         mDataInfoController = new DataUsageInfoController();
-        addPreferencesFromResource(R.xml.data_usage);
 
         int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
+        boolean hasMobileData = DataUsageUtils.hasMobileData(context);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
-        mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
+
         if (hasMobileData) {
-            mLimitPreference = findPreference(KEY_LIMIT_SUMMARY);
-            List<SubscriptionInfo> subscriptions =
-                    services.mSubscriptionManager.getActiveSubscriptionInfoList();
-            if (subscriptions == null || subscriptions.size() == 0) {
-                addMobileSection(defaultSubId);
-            }
-            for (int i = 0; subscriptions != null && i < subscriptions.size(); i++) {
-                SubscriptionInfo subInfo = subscriptions.get(i);
-                if (subscriptions.size() > 1) {
-                    addMobileSection(subInfo.getSubscriptionId(), subInfo);
-                } else {
-                    addMobileSection(subInfo.getSubscriptionId());
-                }
-            }
-            mSummaryPreference.setSelectable(true);
-        } else {
-            removePreference(KEY_LIMIT_SUMMARY);
-            mSummaryPreference.setSelectable(false);
+            addDataPlanSection(defaultSubId);
         }
-        boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
-        if (hasWifiRadio) {
+
+        if (DataUsageUtils.hasWifiRadio(context)) {
             addWifiSection();
         }
+
         if (hasEthernet(context)) {
             addEthernetSection();
         }
-        mDataUsageTemplate = hasMobileData ? R.string.cell_data_template
-                : hasWifiRadio ? R.string.wifi_data_template
-                : R.string.ethernet_data_template;
-
         setHasOptionsMenu(true);
     }
 
@@ -161,9 +124,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.data_usage_menu_cellular_networks: {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("com.android.phone",
-                        "com.android.phone.MobileNetworkSettings"));
+                final Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
                 startActivity(intent);
                 return true;
             }
@@ -171,13 +132,52 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         return false;
     }
 
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference == findPreference(KEY_STATUS_HEADER)) {
-            BillingCycleSettings.BytesEditorFragment.show(this, false);
-            return false;
+    private void addDataPlanSection(int defaultSubId) {
+        Context context = getPrefContext();
+        addPreferencesFromResource(R.xml.data_plan_usage);
+        PreferenceScreen screen = getPreferenceScreen();
+        screen.setTitle(context.getString(R.string.data_usage_summary_title));
+
+        PreferenceCategory preferenceCategory =
+                (PreferenceCategory) findPreference(KEY_DATA_PLAN_USAGE);
+        screen.addPreference(preferenceCategory);
+
+        Preference dataPlansSyncTimePreference = new Preference(context);
+        dataPlansSyncTimePreference.setLayoutResource(R.layout.data_plans_sync_time_preference);
+        dataPlansSyncTimePreference.setTitle(MockDataPlanUsage.SYNC_TIME);
+        preferenceCategory.addPreference(dataPlansSyncTimePreference);
+
+        mDataPlanSummaryPreferenceList = new ArrayList<>(MockDataPlanUsage.DATA_PLAN_USAGES.length);
+        for (int i = 0; i < MockDataPlanUsage.DATA_PLAN_USAGES.length; i++) {
+            DataPlanSummaryPreference dataPlanSummaryPreference =
+                    new DataPlanSummaryPreference(context);
+            dataPlanSummaryPreference.setKey(KEY_STATUS_HEADER + (i + 1));
+            mDataPlanSummaryPreferenceList.add(dataPlanSummaryPreference);
+            preferenceCategory.addPreference(dataPlanSummaryPreference);
         }
-        return super.onPreferenceTreeClick(preference);
+
+        Preference preference = new Preference(context);
+        preference.setLayoutResource(R.layout.manage_data_plans_preference);
+        preferenceCategory.addPreference(preference);
+        setPreferenceScreen(screen);
+
+        mLimitPreference = findPreference(KEY_LIMIT_SUMMARY);
+        List<SubscriptionInfo> subscriptions =
+                services.mSubscriptionManager.getActiveSubscriptionInfoList();
+
+        if (subscriptions == null || subscriptions.isEmpty()) {
+            addMobileSection(defaultSubId);
+        }
+
+        for (int i = 0, subscriptionsSize = subscriptions != null ? subscriptions.size() : 0;
+                i < subscriptionsSize; i++) {
+            SubscriptionInfo subInfo = subscriptions.get(i);
+            if (subscriptionsSize > 1) {
+                addMobileSection(subInfo.getSubscriptionId(), subInfo);
+            } else {
+                addMobileSection(subInfo.getSubscriptionId());
+            }
+        }
     }
 
     private void addMobileSection(int subId) {
@@ -186,11 +186,11 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
-                inflatePreferences(R.xml.data_usage_cellular);
+                inflatePreferences(R.xml.data_plan_usage_cell_data_preference_screen);
         category.setTemplate(getNetworkTemplate(subId), subId, services);
         category.pushTemplates(services);
         if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
-            Preference title  = category.findPreference(KEY_MOBILE_USAGE_TITLE);
+            Preference title = category.findPreference(KEY_MOBILE_USAGE_TITLE);
             title.setTitle(subInfo.getDisplayName());
         }
     }
@@ -198,18 +198,18 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private void addWifiSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
-        category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
+        category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0 /* subId */, services);
         mNetworkRestrictionPreference =
-            (NetworkRestrictionsPreference) category.findPreference(KEY_NETWORK_RESTRICTIONS);
+                (NetworkRestrictionsPreference) category.findPreference(KEY_NETWORK_RESTRICTIONS);
     }
 
     private void addEthernetSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_ethernet);
-        category.setTemplate(NetworkTemplate.buildTemplateEthernet(), 0, services);
+        category.setTemplate(NetworkTemplate.buildTemplateEthernet(), 0 /* subId */, services);
     }
 
-    private Preference inflatePreferences(int resId) {
+    private Preference inflatePreferences(@IdRes int resId) {
         PreferenceScreen rootPreferences = getPreferenceManager().inflateFromResource(
                 getPrefContext(), resId, null);
         Preference pref = rootPreferences.getPreference(0);
@@ -235,51 +235,32 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         updateState();
     }
 
-    private static CharSequence formatTitle(Context context, String template, long usageLevel) {
-        final float LARGER_SIZE = 1.25f * 1.25f;  // (1/0.8)^2
-        final float SMALLER_SIZE = 1.0f / LARGER_SIZE;  // 0.8^2
-        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
-
-        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                usageLevel, Formatter.FLAG_SHORTER);
-        final SpannableString enlargedValue = new SpannableString(usedResult.value);
-        enlargedValue.setSpan(new RelativeSizeSpan(LARGER_SIZE), 0, enlargedValue.length(), FLAGS);
-
-        final SpannableString amountTemplate = new SpannableString(
-                context.getString(com.android.internal.R.string.fileSizeSuffix)
-                .replace("%1$s", "^1").replace("%2$s", "^2"));
-        final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
-                enlargedValue, usedResult.units);
-
-        final SpannableString fullTemplate = new SpannableString(template);
-        fullTemplate.setSpan(new RelativeSizeSpan(SMALLER_SIZE), 0, fullTemplate.length(), FLAGS);
-        return TextUtils.expandTemplate(fullTemplate,
-                BidiFormatter.getInstance().unicodeWrap(formattedUsage));
-    }
-
     private void updateState() {
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
+
         Context context = getContext();
         mDataInfoController.updateDataLimit(info,
                 services.mPolicyEditor.getPolicy(mDefaultTemplate));
 
-        if (mSummaryPreference != null) {
-            mSummaryPreference.setTitle(
-                    formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
-            long limit = mDataInfoController.getSummaryLimit(info);
-            mSummaryPreference.setSummary(info.period);
-
-            if (limit <= 0) {
-                mSummaryPreference.setChartEnabled(false);
-            } else {
-                mSummaryPreference.setChartEnabled(true);
-                mSummaryPreference.setLabels(Formatter.formatFileSize(context, 0),
-                        Formatter.formatFileSize(context, limit));
-                mSummaryPreference.setRatios(info.usageLevel / (float) limit, 0,
-                        (limit - info.usageLevel) / (float) limit);
+        // TODO(b/63391323): Get rid of MockDataPlanUsage once we integrate with data plan APIs
+        if (mDataPlanSummaryPreferenceList != null && !mDataPlanSummaryPreferenceList.isEmpty()) {
+            MockDataPlanUsage[] dataPlanUsages = MockDataPlanUsage.getDataPlanUsage();
+            for (int i = 0; i < dataPlanUsages.length; i++) {
+                DataPlanSummaryPreference dataPlanSummaryPreference =
+                        mDataPlanSummaryPreferenceList.get(i);
+                MockDataPlanUsage dataPlanUsage = dataPlanUsages[i];
+                dataPlanSummaryPreference.setTitle(dataPlanUsage.mUsage);
+                dataPlanSummaryPreference.setUsageTextColor(dataPlanUsage.mUsageTextColor);
+                dataPlanSummaryPreference.setName(dataPlanUsage.mName);
+                dataPlanSummaryPreference.setPercentageUsage(dataPlanUsage.mPercentageUsage);
+                dataPlanSummaryPreference
+                        .setMeterBackgroundColor(dataPlanUsage.mMeterBackgroundColor);
+                dataPlanSummaryPreference.setMeterConsumedColor(dataPlanUsage.mMeterConsumedColor);
+                dataPlanSummaryPreference.setDescription(dataPlanUsage.mDescription);
             }
         }
+
         if (mLimitPreference != null && (info.warningLevel > 0 || info.limitLevel > 0)) {
             String warning = Formatter.formatFileSize(context, info.warningLevel);
             String limit = Formatter.formatFileSize(context, info.limitLevel);
@@ -292,7 +273,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         updateNetworkRestrictionSummary(mNetworkRestrictionPreference);
 
         PreferenceScreen screen = getPreferenceScreen();
-        for (int i = 1; i < screen.getPreferenceCount(); i++) {
+        for (int i = 1, preferenceCount = screen.getPreferenceCount(); i < preferenceCount; i++) {
             ((TemplatePreferenceCategory) screen.getPreference(i)).pushTemplates(services);
         }
     }
@@ -302,21 +283,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         return MetricsEvent.DATA_USAGE_SUMMARY;
     }
 
-    @Override
-    public NetworkPolicyEditor getNetworkPolicyEditor() {
-        return services.mPolicyEditor;
-    }
-
-    @Override
-    public NetworkTemplate getNetworkTemplate() {
-        return mDefaultTemplate;
-    }
-
-    @Override
-    public void updateDataUsage() {
-        updateState();
-    }
-
     @VisibleForTesting
     void updateNetworkRestrictionSummary(NetworkRestrictionsPreference preference) {
         if (preference == null) {
@@ -324,13 +290,33 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         }
         mPolicyEditor.read();
         int count = 0;
-        for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
-            if (WifiConfiguration.isMetered(config, null)) {
+        List<WifiConfiguration> configuredNetworks = mWifiManager.getConfiguredNetworks();
+        for (int i = 0, configuredNetworksSize = configuredNetworks.size();
+                i < configuredNetworksSize; i++) {
+            WifiConfiguration config = configuredNetworks.get(i);
+            if (isMetered(config)) {
                 count++;
             }
         }
         preference.setSummary(getResources().getQuantityString(
-            R.plurals.network_restrictions_summary, count, count));
+                R.plurals.network_restrictions_summary, count, count));
+    }
+
+    @VisibleForTesting
+    boolean isMetered(WifiConfiguration config) {
+        if (config.SSID == null) {
+            return false;
+        }
+        final String networkId = config.isPasspoint() ? config.providerFriendlyName : config.SSID;
+        final NetworkPolicy policy =
+                mPolicyEditor.getPolicyMaybeUnquoted(NetworkTemplate.buildTemplateWifi(networkId));
+        if (policy == null) {
+            return false;
+        }
+        if (policy.limitBytes != LIMIT_DISABLED) {
+            return true;
+        }
+        return policy.metered;
     }
 
     private static class SummaryProvider
@@ -365,48 +351,49 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-        = SummaryProvider::new;
+            = SummaryProvider::new;
 
     /**
      * For search
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
 
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                List<SearchIndexableResource> resources = new ArrayList<>();
-                SearchIndexableResource resource = new SearchIndexableResource(context);
-                resource.xmlResId = R.xml.data_usage;
-                resources.add(resource);
-
-                if (DataUsageUtils.hasMobileData(context)) {
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_cellular;
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    List<SearchIndexableResource> resources = new ArrayList<>();
+                    SearchIndexableResource resource = new SearchIndexableResource(context);
+                    resource.xmlResId = R.xml.data_plan_usage;
                     resources.add(resource);
-                }
-                if (DataUsageUtils.hasWifiRadio(context)) {
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_wifi;
-                    resources.add(resource);
-                }
-                return resources;
-            }
 
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                List<String> keys = super.getNonIndexableKeys(context);
-
-                if (DataUsageUtils.hasMobileData(context)) {
-                    keys.add(KEY_RESTRICT_BACKGROUND);
+                    if (DataUsageUtils.hasMobileData(context)) {
+                        resource = new SearchIndexableResource(context);
+                        resource.xmlResId = R.xml.data_plan_usage_cell_data_preference_screen;
+                        resources.add(resource);
+                    }
+                    if (DataUsageUtils.hasWifiRadio(context)) {
+                        resource = new SearchIndexableResource(context);
+                        resource.xmlResId = R.xml.data_usage_wifi;
+                        resources.add(resource);
+                    }
+                    return resources;
                 }
-                if (DataUsageUtils.hasWifiRadio(context)) {
-                    keys.add(KEY_NETWORK_RESTRICTIONS);
-                }
-                keys.add(KEY_WIFI_USAGE_TITLE);
 
-                return keys;
-            }
-        };
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (DataUsageUtils.hasMobileData(context)) {
+                        keys.add(KEY_RESTRICT_BACKGROUND);
+                    }
+                    if (DataUsageUtils.hasWifiRadio(context)) {
+                        keys.add(KEY_NETWORK_RESTRICTIONS);
+                    }
+                    keys.add(KEY_WIFI_USAGE_TITLE);
+
+                    return keys;
+                }
+            };
 }
+

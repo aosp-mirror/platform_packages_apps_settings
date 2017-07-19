@@ -21,7 +21,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 import android.text.TextUtils;
-
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
@@ -42,6 +41,7 @@ import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.development.DevelopmentSettings;
@@ -86,7 +86,6 @@ import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
-
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -133,6 +132,7 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_wireless);
         addIndex(BluetoothSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_bluetooth);
         addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
+        addIndex(DataPlanUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
