@@ -15,13 +15,30 @@
  */
 package com.android.settings.fuelgauge;
 
-import java.util.List;
+import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
+import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
+import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.content.ContentResolver;
 import android.os.PowerManager;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -40,46 +57,31 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
-import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.List;
 
 /**
  * Unit tests for {@link PowerUsageSummary}.
@@ -183,6 +185,7 @@ public class PowerUsageSummaryTest {
         mBatteryMeterView = new BatteryMeterView(mRealContext);
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
         doNothing().when(mFragment).restartBatteryStatsLoader();
+        doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())
@@ -543,6 +546,24 @@ public class PowerUsageSummaryTest {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testDebugMode() {
+        doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isEstimateDebugEnabled();
+
+        mFragment.restartBatteryInfoLoader();
+        ArgumentCaptor<View.OnLongClickListener> listener = ArgumentCaptor.forClass(
+                View.OnLongClickListener.class);
+        verify(mSummary1).setOnLongClickListener(listener.capture());
+
+        // Calling the listener should disable it.
+        listener.getValue().onLongClick(mSummary1);
+        verify(mSummary1).setOnLongClickListener(null);
+
+        // Restarting the loader should reset the listener.
+        mFragment.restartBatteryInfoLoader();
+        verify(mSummary1, times(2)).setOnLongClickListener(any(View.OnLongClickListener.class));
     }
 
     public static class TestFragment extends PowerUsageSummary {

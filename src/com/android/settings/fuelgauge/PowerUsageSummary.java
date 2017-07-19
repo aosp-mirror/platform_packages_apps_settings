@@ -231,13 +231,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         initFeatureProvider();
         mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
-        View header = mBatteryLayoutPref.findViewById(R.id.summary1);
-        // Unfortunately setting a long click listener on a means it will no longer pass the regular
-        // click event to the parent, so we have to register a regular click listener as well.
-        if (mPowerFeatureProvider.isEstimateDebugEnabled()) {
-            header.setOnLongClickListener(this);
-            header.setOnClickListener(this);
-        }
+
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mScreenUsagePref = (PowerGaugePreference) findPreference(KEY_SCREEN_USAGE);
         mLastFullChargePref = (PowerGaugePreference) findPreference(
@@ -772,6 +766,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
     void restartBatteryInfoLoader() {
         getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
                 mBatteryInfoLoaderCallbacks);
+        if (mPowerFeatureProvider.isEstimateDebugEnabled()) {
+            // Unfortunately setting a long click listener on a view means it will no
+            // longer pass the regular click event to the parent, so we have to register
+            // a regular click listener as well.
+            View header = mBatteryLayoutPref.findViewById(R.id.summary1);
+            header.setOnLongClickListener(this);
+            header.setOnClickListener(this);
+        }
     }
 
     private static List<BatterySipper> getFakeStats() {
