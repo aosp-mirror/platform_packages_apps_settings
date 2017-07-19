@@ -117,6 +117,9 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
         if (!TextUtils.equals(preference.getKey(), KEY_BUILD_NUMBER)) {
             return false;
         }
+        if (Utils.isMonkeyRunning()) {
+            return false;
+        }
         // Don't enable developer options for secondary users.
         if (!mUm.isAdminUser()) {
             mMetricsFeatureProvider.action(

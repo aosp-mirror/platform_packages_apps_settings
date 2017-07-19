@@ -16,6 +16,16 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -32,8 +42,10 @@ import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.search.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,18 +56,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {
+                ShadowUtils.class
+        })
 public class BuildNumberPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -77,8 +82,7 @@ public class BuildNumberPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest(mContext);
         mLifecycle = new Lifecycle();
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new BuildNumberPreferenceController(
@@ -86,6 +90,11 @@ public class BuildNumberPreferenceControllerTest {
 
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUtils.reset();
     }
 
     @Test
@@ -125,6 +134,18 @@ public class BuildNumberPreferenceControllerTest {
         verify(mFactory.metricsFeatureProvider).action(
                 any(Context.class),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF));
+    }
+
+    @Test
+    public void handlePrefTreeClick_isMonkeyRun_doNothing() {
+        final Context context = spy(RuntimeEnvironment.application);
+        Settings.Global.putInt(context.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+        ShadowUtils.setIsUserAMonkey(true);
+        mController = new BuildNumberPreferenceController(
+                context, mActivity, mFragment, mLifecycle);
+
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
     @Test

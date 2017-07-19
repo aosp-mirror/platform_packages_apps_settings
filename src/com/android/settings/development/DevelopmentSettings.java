@@ -630,6 +630,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return;
         }
 
+        if (Utils.isMonkeyRunning()) {
+            return;
+        }
         mSwitchBar.addOnSwitchChangeListener(this);
     }
 

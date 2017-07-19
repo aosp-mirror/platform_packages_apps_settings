@@ -29,6 +29,7 @@ public class ShadowUtils {
 
     private static IFingerprintManager sFingerprintManager = null;
     private static boolean sIsCarrierDemoUser;
+    private static boolean sIsUserAMonkey;
 
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
@@ -47,6 +48,7 @@ public class ShadowUtils {
     public static void reset() {
         sFingerprintManager = null;
         sIsCarrierDemoUser = false;
+        sIsUserAMonkey = false;
     }
 
     @Implementation
@@ -58,8 +60,22 @@ public class ShadowUtils {
         sIsCarrierDemoUser = isCarrierDemoUser;
     }
 
+    public static void setIsUserAMonkey(boolean isUserAMonkey) {
+        sIsUserAMonkey = isUserAMonkey;
+    }
+
+
     @Implementation
     public static boolean isCarrierDemoUser(Context context) {
         return sIsCarrierDemoUser;
+    }
+
+    /**
+     * Returns true if Monkey is running.
+     */
+    @Implementation
+    public static boolean isMonkeyRunning() {
+        return sIsUserAMonkey;
+
     }
 }
