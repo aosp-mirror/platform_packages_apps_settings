@@ -16,15 +16,11 @@
  */
 package com.android.settings.search;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.Menu;
 import android.view.View;
 
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.search.ranking.SearchResultsRankerCallback;
-
-import java.util.List;
 
 /**
  * FeatureProvider for Settings Search

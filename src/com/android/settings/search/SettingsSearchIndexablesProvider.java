@@ -16,18 +16,6 @@
 
 package com.android.settings.search;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.provider.SearchIndexableResource;
-import android.provider.SearchIndexablesProvider;
-import android.util.Log;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
@@ -40,8 +28,29 @@ import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.provider.SearchIndexableResource;
+import android.provider.SearchIndexablesProvider;
+import android.util.ArraySet;
+import android.util.Log;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
 public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
+    public static final boolean DEBUG = false;
     private static final String TAG = "SettingsSearchProvider";
+
+    private static final Collection<String> INVALID_KEYS;
+
+    static {
+        INVALID_KEYS = new ArraySet<>();
+        INVALID_KEYS.add(null);
+        INVALID_KEYS.add("");
+    }
 
     @Override
     public boolean onCreate() {
@@ -84,6 +93,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final Context context = getContext();
 
         for (SearchIndexableResource sir : SearchIndexableResources.values()) {
+            if (DEBUG) {
+                Log.d(TAG, "Getting non-indexable from " + sir.className);
+            }
+            final long startTime = System.currentTimeMillis();
             final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(sir.className);
             if (clazz == null) {
                 Log.d(TAG, "SearchIndexableResource '" + sir.className +
@@ -95,22 +108,28 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                     DatabaseIndexingUtils.getSearchIndexProvider(clazz);
 
             if (provider == null) {
-                Log.d(TAG, "Unable to get SearchIndexableProvider from " +
-                        Indexable.class.getName());
+                Log.d(TAG, "Unable to get SearchIndexableProvider from " + clazz);
                 continue;
             }
 
             List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(context);
 
             if (providerNonIndexableKeys == null || providerNonIndexableKeys.isEmpty()) {
+                if (DEBUG) {
+                    final long totalTime = System.currentTimeMillis() - startTime;
+                    Log.d(TAG, "No indexable, total time " + totalTime);
+                }
                 continue;
             }
 
-            if (providerNonIndexableKeys.removeAll(Collections.singleton(null))
-                    || providerNonIndexableKeys.removeAll(Collections.singleton(""))) {
+            if (providerNonIndexableKeys.removeAll(INVALID_KEYS)) {
                 Log.v(TAG, clazz.getName() + " tried to add an empty non-indexable key");
             }
-
+            if (DEBUG) {
+                final long totalTime = System.currentTimeMillis() - startTime;
+                Log.d(TAG, "Non-indexables " + providerNonIndexableKeys.size() + ", total time "
+                        + totalTime);
+            }
             values.addAll(providerNonIndexableKeys);
         }
 

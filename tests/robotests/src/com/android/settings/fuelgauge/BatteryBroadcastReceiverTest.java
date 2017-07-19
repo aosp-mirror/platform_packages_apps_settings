@@ -32,7 +32,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -52,7 +56,7 @@ public class BatteryBroadcastReceiverTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
 
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
         mBatteryBroadcastReceiver.mBatteryLevel = BATTERY_INIT_LEVEL;
@@ -90,6 +94,19 @@ public class BatteryBroadcastReceiverTest {
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel).isEqualTo(batteryLevel);
         assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(batteryStatus);
         verify(mBatteryListener, never()).onBatteryChanged();
+    }
+
+    @Test
+    public void testRegister_updateBatteryStatus() {
+        doReturn(mChargingIntent).when(mContext).registerReceiver(any(), any());
+
+        mBatteryBroadcastReceiver.register();
+
+        assertThat(mBatteryBroadcastReceiver.mBatteryLevel).isEqualTo(
+                Utils.getBatteryPercentage(mChargingIntent));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
+                Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
+        verify(mBatteryListener).onBatteryChanged();
     }
 
 }

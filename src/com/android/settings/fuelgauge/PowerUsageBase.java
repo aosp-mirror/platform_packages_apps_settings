@@ -82,19 +82,6 @@ public abstract class PowerUsageBase extends DashboardFragment
         mBatteryBroadcastReceiver.unRegister();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (getActivity().isChangingConfigurations()) {
-            mStatsHelper.storeState();
-        }
-    }
-
     protected void restartBatteryStatsLoader() {
         getLoaderManager().restartLoader(0, Bundle.EMPTY, this);
     }
@@ -108,7 +95,7 @@ public abstract class PowerUsageBase extends DashboardFragment
     @Override
     public Loader<BatteryStatsHelper> onCreateLoader(int id,
             Bundle args) {
-        return new BatteryStatsHelperLoader(getContext(), args);
+        return new BatteryStatsHelperLoader(getContext());
     }
 
     @Override

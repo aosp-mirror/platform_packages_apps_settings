@@ -31,12 +31,13 @@ import com.android.settings.utils.AsyncLoader;
 public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
     @VisibleForTesting
     UserManager mUserManager;
-    private Bundle mBundle;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
 
-    public BatteryStatsHelperLoader(Context context, Bundle bundle) {
+    public BatteryStatsHelperLoader(Context context) {
         super(context);
-        mBundle = bundle;
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
@@ -44,9 +45,8 @@ public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
         Context context = getContext();
         final BatteryStatsHelper statsHelper = new BatteryStatsHelper(context,
                 true /* collectBatteryBroadcast */);
+        mBatteryUtils.initBatteryStatsHelper(statsHelper, null /* bundle */, mUserManager);
 
-        BatteryUtils.getInstance(context).initBatteryStatsHelper(statsHelper, mBundle,
-                mUserManager);
         return statsHelper;
     }
 
@@ -54,6 +54,5 @@ public class BatteryStatsHelperLoader extends AsyncLoader<BatteryStatsHelper> {
     protected void onDiscardResult(BatteryStatsHelper result) {
 
     }
-
 
 }

@@ -19,6 +19,8 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
+
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
@@ -80,6 +82,9 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public void updateIndexAsync(Context context, IndexingCallback callback) {
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            Log.d(TAG, "updating index async");
+        }
         getIndexingManager(context).indexDatabase(callback);
     }
 

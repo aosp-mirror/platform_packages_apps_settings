@@ -24,7 +24,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
@@ -39,6 +41,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -150,6 +153,35 @@ public class DashboardFragmentTest {
 
         verify(mockController1, never()).getPreferenceKey();
         verify(mockController2).getPreferenceKey();
+    }
+
+    @Test
+    public void tintTileIcon_hasMetadata_shouldReturnIconTintableMetadata() {
+        final Tile tile = new Tile();
+        final Bundle metaData = new Bundle();
+        tile.metaData = metaData;
+
+        metaData.putBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE, false);
+        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
+
+        metaData.putBoolean(TileUtils.META_DATA_PREFERENCE_ICON_TINTABLE, true);
+        assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
+    }
+
+
+    @Test
+    public void tintTileIcon_noMetadata_shouldReturnPackageNameCheck() {
+        final Tile tile = new Tile();
+        final Intent intent = new Intent();
+        tile.intent = intent;
+
+        intent.setComponent(new ComponentName(
+                ShadowApplication.getInstance().getApplicationContext().getPackageName(),
+                "TestClass"));
+        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
+
+        intent.setComponent(new ComponentName("OtherPackage", "TestClass"));
+        assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
     }
 
     public static class TestPreferenceController extends AbstractPreferenceController

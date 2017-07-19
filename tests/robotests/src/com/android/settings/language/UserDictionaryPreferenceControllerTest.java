@@ -56,16 +56,7 @@ public class UserDictionaryPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_noLocale_shouldReturnFalse() {
-        mController.mLocales = null;
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testIsAvailable_hasLocale_shouldReturnTrue() {
-        mController.mLocales.add("en");
-
+    public void testIsAvailable_shouldReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 

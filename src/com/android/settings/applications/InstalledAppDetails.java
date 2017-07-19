@@ -57,6 +57,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
@@ -67,6 +68,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -83,9 +85,8 @@ import com.android.settings.applications.defaultapps.DefaultSmsPreferenceControl
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
-import com.android.settings.datausage.DataUsageSummary;
-import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
@@ -105,6 +106,7 @@ import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -208,7 +210,7 @@ public class InstalledAppDetails extends AppInfoBase
 
                 @Override
                 public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
-                    return new BatteryStatsHelperLoader(getContext(), args);
+                    return new BatteryStatsHelperLoader(getContext());
                 }
 
                 @Override
@@ -632,7 +634,8 @@ public class InstalledAppDetails extends AppInfoBase
                 .setSummary(summary)
                 .setIsInstantApp(isInstantApp)
                 .done(activity, false /* rebindActions */);
-        mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
+        mVersionPreference.setSummary(getString(R.string.version_text,
+                BidiFormatter.getInstance().unicodeWrap(pkgInfo.versionName)));
     }
 
     @VisibleForTesting
