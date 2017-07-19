@@ -33,7 +33,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -50,7 +49,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
-
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.backup.BackupSettingsActivity;
@@ -67,7 +65,6 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -779,10 +776,33 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.DataUsageSummaryActivity.class.getName()),
-                Utils.isBandwidthControlEnabled(), isAdmin)
-                || somethingChanged;
+        boolean isDataPlanFeatureEnabled = FeatureFactory.getFactory(this)
+                .getDataPlanFeatureProvider()
+                .isEnabled();
+
+        // When the data plan feature flag is turned on we disable DataUsageSummaryActivity
+        // and enable DataPlanUsageSummaryActivity. When the feature flag is turned off we do the
+        // reverse.
+
+        // Disable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
+        // disable DataPlanUsageSummaryActivity.
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName,
+                        isDataPlanFeatureEnabled
+                                ? Settings.DataUsageSummaryActivity.class.getName()
+                                : Settings.DataPlanUsageSummaryActivity.class.getName()),
+                false /* enabled */,
+                isAdmin) || somethingChanged;
+
+        // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
+        // enable DataPlanUsageSummaryActivity.
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName,
+                        isDataPlanFeatureEnabled
+                                ? Settings.DataPlanUsageSummaryActivity.class.getName()
+                                : Settings.DataUsageSummaryActivity.class.getName()),
+                Utils.isBandwidthControlEnabled() /* enabled */,
+                isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
