@@ -19,6 +19,7 @@ import android.content.Context;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -59,6 +60,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final BluetoothFeatureProvider bluetoothFeatureProvider;
     public final DataPlanFeatureProvider dataPlanFeatureProvider;
+    public final SmsMirroringFeatureProvider smsMirroringFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -97,6 +99,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
         bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         dataPlanFeatureProvider = mock(DataPlanFeatureProvider.class);
+        smsMirroringFeatureProvider = mock(SmsMirroringFeatureProvider.class);
     }
 
     @Override
@@ -172,5 +175,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
         return assistGestureFeatureProvider;
+    }
+
+    @Override
+    public SmsMirroringFeatureProvider getSmsMirroringFeatureProvider() {
+        return smsMirroringFeatureProvider;
     }
 }
