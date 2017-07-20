@@ -37,6 +37,7 @@ public abstract class PowerUsageBase extends DashboardFragment
     // +1 to allow ordering for PowerUsageSummary.
     @VisibleForTesting
     static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
+    private static final String TAG = "PowerUsageBase";
 
     protected BatteryStatsHelper mStatsHelper;
     protected UserManager mUm;
@@ -89,7 +90,9 @@ public abstract class PowerUsageBase extends DashboardFragment
     protected abstract void refreshUi();
 
     protected void updatePreference(BatteryHistoryPreference historyPref) {
+        final long startTime = System.currentTimeMillis();
         historyPref.setStats(mStatsHelper);
+        BatteryUtils.logRuntime(TAG, "updatePreference", startTime);
     }
 
     @Override

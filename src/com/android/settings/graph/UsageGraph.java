@@ -29,15 +29,18 @@ import android.graphics.Path;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.R;
 
 public class UsageGraph extends View {
 
     private static final int PATH_DELIM = -1;
+    public static final String LOG_TAG = "UsageGraph";
 
     private final Paint mLinePaint;
     private final Paint mFillPaint;
@@ -108,10 +111,12 @@ public class UsageGraph extends View {
     }
 
     void setMax(int maxX, int maxY) {
+        final long startTime = System.currentTimeMillis();
         mMaxX = maxX;
         mMaxY = maxY;
         calculateLocalPaths();
         postInvalidate();
+        BatteryUtils.logRuntime(LOG_TAG, "setMax", startTime);
     }
 
     void setDividerLoc(int height) {
@@ -133,6 +138,7 @@ public class UsageGraph extends View {
 
     private void addPathAndUpdate(SparseIntArray points, SparseIntArray paths,
             SparseIntArray localPaths) {
+        final long startTime = System.currentTimeMillis();
         for (int i = 0, size = points.size(); i < size; i++) {
             paths.put(points.keyAt(i), points.valueAt(i));
         }
@@ -140,6 +146,7 @@ public class UsageGraph extends View {
         paths.put(points.keyAt(points.size() - 1) + 1, PATH_DELIM);
         calculateLocalPaths(paths, localPaths);
         postInvalidate();
+        BatteryUtils.logRuntime(LOG_TAG, "addPathAndUpdate", startTime);
     }
 
     void setAccentColor(int color) {
@@ -151,9 +158,11 @@ public class UsageGraph extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        final long startTime = System.currentTimeMillis();
         super.onSizeChanged(w, h, oldw, oldh);
         updateGradient();
         calculateLocalPaths();
+        BatteryUtils.logRuntime(LOG_TAG, "onSizeChanged", startTime);
     }
 
     private void calculateLocalPaths() {
@@ -162,6 +171,7 @@ public class UsageGraph extends View {
     }
 
     private void calculateLocalPaths(SparseIntArray paths, SparseIntArray localPaths) {
+        final long startTime = System.currentTimeMillis();
         if (getWidth() == 0) {
             return;
         }
@@ -194,6 +204,7 @@ public class UsageGraph extends View {
                 localPaths.put(lx, ly);
             }
         }
+        BatteryUtils.logRuntime(LOG_TAG,"calculateLocalPaths", startTime);
     }
 
     private boolean hasDiff(int x1, int x2) {
@@ -220,6 +231,7 @@ public class UsageGraph extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        final long startTime = System.currentTimeMillis();
         // Draw lines across the top, middle, and bottom.
         if (mMiddleDividerLoc != 0) {
             drawDivider(0, canvas, mTopDividerTint);
@@ -235,6 +247,7 @@ public class UsageGraph extends View {
         drawLinePath(canvas, mLocalProjectedPaths, mDottedPaint);
         drawFilledPath(canvas, mLocalPaths, mFillPaint);
         drawLinePath(canvas, mLocalPaths, mLinePaint);
+        BatteryUtils.logRuntime(LOG_TAG, "onDraw", startTime);
     }
 
     private void drawLinePath(Canvas canvas, SparseIntArray localPaths, Paint paint) {
