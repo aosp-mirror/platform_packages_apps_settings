@@ -15,6 +15,7 @@
  */
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.UserManager;
@@ -135,5 +136,14 @@ public class BluetoothDevicePreferenceTest {
                 .thenReturn(false);
 
         assertThat(mPreference.shouldHideSecondTarget()).isFalse();
+    }
+
+    @Test
+    public void imagingDeviceIcon_isICSettingsPrint() {
+        when(mCachedBluetoothDevice.getBtClass()).thenReturn(
+                new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
+        mPreference.onDeviceAttributesChanged();
+        assertThat(mPreference.getIcon()).isEqualTo(
+                mContext.getDrawable(R.drawable.ic_settings_print));
     }
 }
