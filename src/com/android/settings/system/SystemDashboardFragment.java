@@ -25,6 +25,7 @@ import com.android.settings.backup.BackupSettingsActivityPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
+import com.android.settings.gestures.GesturesSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -69,6 +70,7 @@ public class SystemDashboardFragment extends DashboardFragment {
         controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
         controllers.add(new BackupSettingsActivityPreferenceController(context));
+        controllers.add(new GesturesSettingPreferenceController(context));
         return controllers;
     }
 

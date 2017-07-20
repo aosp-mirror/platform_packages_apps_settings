@@ -16,14 +16,23 @@
 
 package com.android.settings.system;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
@@ -31,18 +40,24 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                ShadowUserManager.class
+                ShadowUserManager.class,
+                SettingsShadowResources.class,
         })
 public class SystemDashboardFragmentTest {
+
+    @Before
+    public void setup() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_supportSystemNavigationKeys, true);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
+    }
 
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
