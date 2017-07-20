@@ -167,6 +167,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     protected void refreshUi() {
+        final long startTime = System.currentTimeMillis();
         final Context context = getContext();
         if (context == null) {
             return;
@@ -186,6 +187,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
 
         BatteryEntry.startRequestQueue();
+        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
     }
 
     @VisibleForTesting
