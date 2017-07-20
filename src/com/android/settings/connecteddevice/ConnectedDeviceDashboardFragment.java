@@ -30,6 +30,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settings.nfc.NfcPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -81,6 +82,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                         (SettingsActivity) getActivity());
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
+
+        SmsMirroringFeatureProvider smsMirroringFeatureProvider =
+                FeatureFactory.getFactory(context).getSmsMirroringFeatureProvider();
+        AbstractPreferenceController smsMirroringController =
+                smsMirroringFeatureProvider.getController(context);
+        controllers.add(smsMirroringController);
         return controllers;
     }
 
@@ -143,6 +150,13 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                         keys.add(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
                     keys.add(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
+
+                    SmsMirroringFeatureProvider smsMirroringFeatureProvider =
+                            FeatureFactory.getFactory(context).getSmsMirroringFeatureProvider();
+                    SmsMirroringPreferenceController smsMirroringController =
+                            smsMirroringFeatureProvider.getController(context);
+                    smsMirroringController.updateNonIndexableKeys(keys);
+
                     return keys;
                 }
             };

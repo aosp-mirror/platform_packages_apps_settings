@@ -45,6 +45,7 @@ import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settingslib.TwoTargetPreference;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -284,7 +285,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         return R.string.help_uri_interruptions;
     }
 
-    private class ZenRulePreference extends Preference {
+    private class ZenRulePreference extends TwoTargetPreference {
         final CharSequence mName;
         final String mId;
         final boolean appExists;
@@ -320,8 +321,11 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             ComponentName settingsActivity = getSettingsActivity(si);
             setIntent(getRuleIntent(action, settingsActivity, mId));
             setSelectable(settingsActivity != null || isSystemRule);
+        }
 
-            setWidgetLayoutResource(R.layout.zen_rule_widget);
+        @Override
+        protected int getSecondTargetResId() {
+            return R.layout.zen_rule_widget;
         }
 
         @Override
