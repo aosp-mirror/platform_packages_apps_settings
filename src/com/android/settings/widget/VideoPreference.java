@@ -134,8 +134,10 @@ public class VideoPreference extends Preference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-                if (mVideoReady && imageView.getVisibility() == View.VISIBLE) {
-                    imageView.setVisibility(View.GONE);
+                if (mVideoReady) {
+                    if (imageView.getVisibility() == View.VISIBLE) {
+                        imageView.setVisibility(View.GONE);
+                    }
                     if (!mVideoPaused && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
                         mMediaPlayer.start();
                         playButton.setVisibility(View.GONE);
