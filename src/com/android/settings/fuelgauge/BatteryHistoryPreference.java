@@ -32,6 +32,7 @@ import com.android.settings.graph.UsageView;
  * subsystem/app type.
  */
 public class BatteryHistoryPreference extends Preference {
+    private static final String TAG = "BatteryHistoryPreference";
 
     private CharSequence mSummary;
     private TextView mSummaryView;
@@ -73,6 +74,7 @@ public class BatteryHistoryPreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        final long startTime = System.currentTimeMillis();
         if (mBatteryInfo == null) {
             return;
         }
@@ -88,5 +90,6 @@ public class BatteryHistoryPreference extends Preference {
         UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
         usageView.findViewById(R.id.label_group).setAlpha(.7f);
         mBatteryInfo.bindHistory(usageView);
+        BatteryUtils.logRuntime(TAG, "onBindViewHolder", startTime);
     }
 }
