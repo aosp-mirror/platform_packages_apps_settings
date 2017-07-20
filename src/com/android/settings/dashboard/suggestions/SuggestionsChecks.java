@@ -65,12 +65,14 @@ public class SuggestionsChecks {
         } else if (className.equals(WifiCallingSuggestionActivity.class.getName())) {
             return isWifiCallingUnavailableOrEnabled();
         } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
-            return isNotSingleFingerprintEnrolled() || !isFingerprintEnabled();
+            return !Utils.hasFingerprintHardware(mContext) || !isFingerprintEnabled()
+                    || isNotSingleFingerprintEnrolled();
         } else if (className.equals(ScreenLockSuggestionActivity.class.getName())) {
             return isDeviceSecured();
         } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
-            FingerprintManager manager = Utils.getFingerprintManagerOrNull(mContext);
-            if (manager == null || !isFingerprintEnabled()) {
+            final FingerprintManager manager = Utils.getFingerprintManagerOrNull(mContext);
+            if (manager == null || !isFingerprintEnabled()
+                    || !Utils.hasFingerprintHardware(mContext)) {
                 return true;
             }
             return manager.hasEnrolledFingerprints();

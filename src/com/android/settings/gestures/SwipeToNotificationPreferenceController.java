@@ -23,7 +23,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.Utils;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
@@ -50,7 +50,7 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     }
 
     private static boolean isGestureAvailable(Context context) {
-        return context.getResources()
+        return Utils.hasFingerprintHardware(context) && context.getResources()
                 .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
     }
 

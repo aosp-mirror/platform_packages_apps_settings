@@ -18,7 +18,9 @@ package com.android.settings.gestures;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
 import com.android.settings.search.InlinePayload;
@@ -52,6 +54,10 @@ public class SwipeToNotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private FingerprintManager mFingerprintManager;
 
     private SwipeToNotificationPreferenceController mController;
     private static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint";
@@ -60,10 +66,27 @@ public class SwipeToNotificationPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new SwipeToNotificationPreferenceController(mContext, null, KEY_SWIPE_DOWN);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        // Explicit casting to object due to MockitoCast bug
+        when((Object) mContext.getSystemService(FingerprintManager.class))
+                .thenReturn(mFingerprintManager);
+    }
+
+    @Test
+    public void isAvailable_hardwareNotAvailable_shouldReturnFalse() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_configIsTrue_shouldReturnTrue() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mContext.getResources().
                 getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
                 .thenReturn(true);
@@ -73,6 +96,8 @@ public class SwipeToNotificationPreferenceControllerTest {
 
     @Test
     public void isAvailable_configIsFalse_shouldReturnFalse() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mContext.getResources().
                 getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
                 .thenReturn(false);
@@ -82,6 +107,8 @@ public class SwipeToNotificationPreferenceControllerTest {
 
     @Test
     public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be enabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
@@ -92,6 +119,8 @@ public class SwipeToNotificationPreferenceControllerTest {
 
     @Test
     public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be disabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
@@ -138,5 +167,10 @@ public class SwipeToNotificationPreferenceControllerTest {
         int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 
         assertThat(newValue).isEqualTo(currentValue);
+    }
+
+    private void stubFingerprintSupported(boolean enabled) {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(enabled);
     }
 }
