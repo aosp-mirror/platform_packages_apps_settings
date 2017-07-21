@@ -40,6 +40,11 @@
         </Preference>
     </PreferenceCategory>
 
+    <!-- Empty category to draw divider -->
+    <PreferenceCategory
+        android:key="all_app_info_divider"
+        android:order="-190"/>
+
     <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"

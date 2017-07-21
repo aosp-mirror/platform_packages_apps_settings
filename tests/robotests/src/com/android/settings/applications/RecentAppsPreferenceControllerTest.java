@@ -72,6 +72,8 @@ public class RecentAppsPreferenceControllerTest {
     private PreferenceCategory mCategory;
     @Mock
     private Preference mSeeAllPref;
+    @Mock
+    private PreferenceCategory mDivider;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
     @Mock
@@ -98,6 +100,8 @@ public class RecentAppsPreferenceControllerTest {
 
         when(mScreen.findPreference(RecentAppsPreferenceController.KEY_SEE_ALL))
                 .thenReturn(mSeeAllPref);
+        when(mScreen.findPreference(RecentAppsPreferenceController.KEY_DIVIDER))
+                .thenReturn(mDivider);
         when(mCategory.getContext()).thenReturn(mContext);
     }
 
@@ -112,7 +116,8 @@ public class RecentAppsPreferenceControllerTest {
 
         mController.updateNonIndexableKeys(nonIndexable);
 
-        assertThat(nonIndexable).containsExactly(mController.getPreferenceKey());
+        assertThat(nonIndexable).containsAllOf(mController.getPreferenceKey(),
+                RecentAppsPreferenceController.KEY_DIVIDER);
     }
 
     @Test
@@ -140,6 +145,7 @@ public class RecentAppsPreferenceControllerTest {
         verify(mCategory).setTitle(null);
         verify(mSeeAllPref).setTitle(R.string.applications_settings);
         verify(mSeeAllPref).setIcon(null);
+        verify(mDivider).setVisible(false);
     }
 
     @Test
@@ -186,6 +192,7 @@ public class RecentAppsPreferenceControllerTest {
 
         verify(mSeeAllPref).setSummary(null);
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
+        verify(mDivider).setVisible(true);
     }
 
     @Test
