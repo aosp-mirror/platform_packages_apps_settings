@@ -26,8 +26,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -74,14 +72,9 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         mController.updateDeviceName(mPreference, DEVICE_NAME);
 
         final CharSequence summary = mPreference.getSummary();
-        final Object[] spans = ((SpannableStringBuilder) summary).getSpans(0, summary.length(),
-                Object.class);
         assertThat(summary.toString())
                 .isEqualTo("Visible as 'Nightshade' to other devices");
-
-        // Test summary only has one color span
-        assertThat(spans).asList().hasSize(1);
-        assertThat(spans[0]).isInstanceOf(ForegroundColorSpan.class);
+        assertThat(mPreference.isSelectable()).isFalse();
     }
 
     @Test
