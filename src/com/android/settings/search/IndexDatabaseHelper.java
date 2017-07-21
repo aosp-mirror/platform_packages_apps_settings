@@ -17,11 +17,16 @@
 package com.android.settings.search;
 
 import android.content.Context;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.Log;
+
+import java.util.List;
 
 public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
@@ -31,6 +36,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 117;
 
     private static final String INDEX = "index";
+
+    private static final String PREF_KEY_INDEXED_PROVIDERS = "indexed_providers";
 
     public interface Tables {
         String TABLE_PREFS_INDEX = "prefs_index";
@@ -245,23 +252,69 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return version;
     }
 
-    public static void clearCachedIndexed(Context context) {
-        context.getSharedPreferences(INDEX, 0).edit().clear().commit();
+    /**
+     * Perform a full index on an OTA or when the locale has changed
+     *
+     * @param locale      is the default for the device
+     * @param fingerprint id for the current build.
+     * @return true when the locale or build has changed since last index.
+     */
+    @VisibleForTesting
+    static boolean isFullIndex(Context context, String locale, String fingerprint,
+            String providerVersionedNames) {
+        final boolean isLocaleIndexed = IndexDatabaseHelper.isLocaleAlreadyIndexed(context, locale);
+        final boolean isBuildIndexed = IndexDatabaseHelper.isBuildIndexed(context, fingerprint);
+        final boolean areProvidersIndexed = IndexDatabaseHelper
+                .areProvidersIndexed(context, providerVersionedNames);
+
+        return !(isLocaleIndexed && isBuildIndexed && areProvidersIndexed);
     }
 
-    public static void setLocaleIndexed(Context context, String locale) {
-        context.getSharedPreferences(INDEX, 0).edit().putBoolean(locale, true).commit();
+    @VisibleForTesting
+    static String buildProviderVersionedNames(List<ResolveInfo> providers) {
+        StringBuilder sb = new StringBuilder();
+        for (ResolveInfo info : providers) {
+            sb.append(info.providerInfo.packageName)
+                    .append(':')
+                    .append(info.providerInfo.applicationInfo.versionCode)
+                    .append(',');
+        }
+        return sb.toString();
     }
 
-    public static boolean isLocaleAlreadyIndexed(Context context, String locale) {
-        return context.getSharedPreferences(INDEX, 0).getBoolean(locale, false);
+    static void clearCachedIndexed(Context context) {
+        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).edit().clear().commit();
     }
 
-    public static boolean isBuildIndexed(Context context, String buildNo) {
-        return context.getSharedPreferences(INDEX, 0).getBoolean(buildNo, false);
+    static void setLocaleIndexed(Context context, String locale) {
+        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(locale, true)
+                .apply();
     }
 
-    public static void setBuildIndexed(Context context, String buildNo) {
+    static void setProvidersIndexed(Context context, String providerVersionedNames) {
+        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+                .edit()
+                .putString(PREF_KEY_INDEXED_PROVIDERS, providerVersionedNames)
+                .apply();
+    }
+
+    static boolean isLocaleAlreadyIndexed(Context context, String locale) {
+        return context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).getBoolean(locale, false);
+    }
+
+    static boolean areProvidersIndexed(Context context, String providerVersionedNames) {
+        final String indexedProviders = context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+                .getString(PREF_KEY_INDEXED_PROVIDERS, null);
+        return TextUtils.equals(indexedProviders, providerVersionedNames);
+    }
+
+    static boolean isBuildIndexed(Context context, String buildNo) {
+        return context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).getBoolean(buildNo, false);
+    }
+
+    static void setBuildIndexed(Context context, String buildNo) {
         context.getSharedPreferences(INDEX, 0).edit().putBoolean(buildNo, true).commit();
     }
 

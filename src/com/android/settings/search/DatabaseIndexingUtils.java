@@ -180,7 +180,7 @@ public class DatabaseIndexingUtils {
      * - have read/write {@link Manifest.permission#READ_SEARCH_INDEXABLES}
      * - be from a privileged package
      */
-    public static boolean isWellKnownProvider(ResolveInfo info, Context context) {
+    static boolean isWellKnownProvider(ResolveInfo info, Context context) {
         final String authority = info.providerInfo.authority;
         final String packageName = info.providerInfo.applicationInfo.packageName;
 
@@ -203,7 +203,22 @@ public class DatabaseIndexingUtils {
         return isPrivilegedPackage(packageName, context);
     }
 
-    public static boolean isPrivilegedPackage(String packageName, Context context) {
+    static String normalizeHyphen(String input) {
+        return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
+    }
+
+    static String normalizeString(String input) {
+        final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
+        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
+
+        return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
+    }
+
+    static String normalizeKeywords(String input) {
+        return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
+    }
+
+    private static boolean isPrivilegedPackage(String packageName, Context context) {
         final PackageManager pm = context.getPackageManager();
         try {
             PackageInfo packInfo = pm.getPackageInfo(packageName, 0);
@@ -212,20 +227,5 @@ public class DatabaseIndexingUtils {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
-    }
-
-    public static String normalizeHyphen(String input) {
-        return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
-    }
-
-    public static String normalizeString(String input) {
-        final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
-        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
-
-        return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
-    }
-
-    public static String normalizeKeywords(String input) {
-        return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
     }
 }

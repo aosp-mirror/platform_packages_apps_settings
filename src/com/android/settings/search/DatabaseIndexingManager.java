@@ -169,18 +169,22 @@ public class DatabaseIndexingManager {
     public void performIndexing() {
         final long startTime = System.currentTimeMillis();
         final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
-        final List<ResolveInfo> list =
+        final List<ResolveInfo> providers =
                 mContext.getPackageManager().queryIntentContentProviders(intent, 0);
 
-        String localeStr = Locale.getDefault().toString();
-        String fingerprint = Build.FINGERPRINT;
-        final boolean isFullIndex = isFullIndex(localeStr, fingerprint);
+        final String localeStr = Locale.getDefault().toString();
+        final String fingerprint = Build.FINGERPRINT;
+        final String providerVersionedNames =
+                IndexDatabaseHelper.buildProviderVersionedNames(providers);
+
+        final boolean isFullIndex = IndexDatabaseHelper.isFullIndex(mContext, localeStr,
+                fingerprint, providerVersionedNames);
 
         if (isFullIndex) {
             rebuildDatabase();
         }
 
-        for (final ResolveInfo info : list) {
+        for (final ResolveInfo info : providers) {
             if (!DatabaseIndexingUtils.isWellKnownProvider(info, mContext)) {
                 continue;
             }
@@ -205,29 +209,16 @@ public class DatabaseIndexingManager {
             Log.d(LOG_TAG, "performIndexing updateDatabase took time: " + updateDatabaseTime);
         }
 
+        //TODO(63922686): Setting indexed should be a single method, not 3 separate setters.
         IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
         IndexDatabaseHelper.setBuildIndexed(mContext, fingerprint);
+        IndexDatabaseHelper.setProvidersIndexed(mContext, providerVersionedNames);
+
         if (SettingsSearchIndexablesProvider.DEBUG) {
             final long indexingTime = System.currentTimeMillis() - startTime;
             Log.d(LOG_TAG, "performIndexing took time: " + indexingTime
                     + "ms. Full index? " + isFullIndex);
         }
-    }
-
-    /**
-     * Perform a full index on an OTA or when the locale has changed
-     *
-     * @param locale      is the default for the device
-     * @param fingerprint id for the current build.
-     * @return true when the locale or build has changed since last index.
-     */
-    @VisibleForTesting
-    boolean isFullIndex(String locale, String fingerprint) {
-        final boolean isLocaleIndexed = IndexDatabaseHelper.getInstance(mContext)
-                .isLocaleAlreadyIndexed(mContext, locale);
-        final boolean isBuildIndexed = IndexDatabaseHelper.getInstance(mContext)
-                .isBuildIndexed(mContext, fingerprint);
-        return !isLocaleIndexed || !isBuildIndexed;
     }
 
     /**
