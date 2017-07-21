@@ -172,9 +172,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 ? getString(R.string.switch_off_text)
                 : getString(R.string.zen_mode_rule_summary_enabled_combination, mode);
 
-        return isSystemRule ? ruleState
-                : getString(R.string.zen_mode_rule_summary_provider_combination,
-                        providerLabel, ruleState);
+        return ruleState;
     }
 
     private static ManagedServiceSettings.Config getConditionProviderConfig() {
