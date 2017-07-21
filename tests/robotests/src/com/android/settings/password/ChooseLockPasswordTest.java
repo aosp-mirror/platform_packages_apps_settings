@@ -22,20 +22,38 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
+import com.android.settings.testutils.shadow.ShadowEventLogWriter;
+import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.setupwizardlib.GlifLayout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowDrawable;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION)
+        sdk = TestConfig.SDK_VERSION,
+        shadows = {
+                SettingsShadowResources.class,
+                SettingsShadowResources.SettingsShadowTheme.class,
+                ShadowDynamicIndexableContentMonitor.class,
+                ShadowEventLogWriter.class,
+                ShadowUtils.class
+        })
 public class ChooseLockPasswordTest {
 
     @Test
@@ -94,5 +112,31 @@ public class ChooseLockPasswordTest {
         assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .named("EXTRA_USER_ID")
                 .isEqualTo(123);
+    }
+
+    @Test
+    public void assertThat_chooseLockIconChanged_WhenFingerprintExtraSet() {
+        ShadowDrawable drawable = setActivityAndGetIconDrawable(true);
+        assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
+    }
+
+    @Test
+    public void assertThat_chooseLockIconNotChanged_WhenFingerprintExtraSet() {
+        ShadowDrawable drawable = setActivityAndGetIconDrawable(false);
+        assertThat(drawable.getCreatedFromResId()).isNotEqualTo(R.drawable.ic_fingerprint_header);
+    }
+
+    private ShadowDrawable setActivityAndGetIconDrawable(boolean addFingerprintExtra) {
+        ChooseLockPassword passwordActivity =
+                Robolectric.buildActivity(
+                        ChooseLockPassword.class,
+                        new IntentBuilder(application)
+                                .setUserId(UserHandle.myUserId())
+                                .setForFingerprint(addFingerprintExtra)
+                                .build())
+                        .setup().get();
+        ChooseLockPasswordFragment fragment = (ChooseLockPasswordFragment)
+                passwordActivity.getFragmentManager().findFragmentById(R.id.main_content);
+        return Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
     }
 }
