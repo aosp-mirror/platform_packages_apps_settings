@@ -174,10 +174,9 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                 }
                 mSelectedAccessPoint = mDlgAccessPoint;
 
-                mDialog = new WifiDialog(getActivity(), this, mDlgAccessPoint,
-                        WifiConfigUiBase.MODE_VIEW, true /* hide the submit button */);
+                mDialog = WifiDialog.createModal(getActivity(), this, mDlgAccessPoint,
+                        WifiConfigUiBase.MODE_VIEW);
                 return mDialog;
-
         }
         return super.onCreateDialog(dialogId);
     }

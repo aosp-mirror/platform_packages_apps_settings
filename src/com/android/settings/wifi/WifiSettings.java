@@ -626,20 +626,23 @@ public class WifiSettings extends RestrictedSettingsFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case WIFI_DIALOG_ID:
-                AccessPoint ap = mDlgAccessPoint; // For manual launch
-                if (ap == null) { // For re-launch from saved state
-                    if (mAccessPointSavedState != null) {
-                        ap = new AccessPoint(getActivity(), mAccessPointSavedState);
-                        // For repeated orientation changes
-                        mDlgAccessPoint = ap;
+                if (mDlgAccessPoint == null && mAccessPointSavedState == null) {
+                    // add new network
+                    mDialog = WifiDialog
+                            .createFullscreen(getActivity(), this, mDlgAccessPoint, mDialogMode);
+                } else {
+                    // modify network
+                    if (mDlgAccessPoint == null) {
+                        // restore AP from save state
+                        mDlgAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
                         // Reset the saved access point data
                         mAccessPointSavedState = null;
                     }
+                    mDialog = WifiDialog
+                            .createModal(getActivity(), this, mDlgAccessPoint, mDialogMode);
                 }
-                // If it's null, fine, it's for Add Network
-                mSelectedAccessPoint = ap;
-                mDialog = new WifiDialog(getActivity(), this, ap, mDialogMode,
-                        /* no hide submit/connect */ false);
+
+                mSelectedAccessPoint = mDlgAccessPoint;
                 return mDialog;
             case WPS_PBC_DIALOG_ID:
                 return new WpsDialog(getActivity(), WpsInfo.PBC);
