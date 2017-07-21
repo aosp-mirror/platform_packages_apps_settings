@@ -45,7 +45,7 @@ public class FactoryResetPreferenceController extends PreferenceController {
     /** Hide "Factory reset" settings for secondary users, except demo users. */
     @Override
     public boolean isAvailable() {
-        return mUm.isAdminUser() || Utils.isCarrierDemoUser(mContext);
+        return mUm.isAdminUser() || Utils.isDemoUser(mContext);
     }
 
     @Override
