@@ -25,7 +25,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
 import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
@@ -54,7 +53,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private final AmbientDisplayConfiguration mAmbientDisplayConfig;
 
     @Override
     public boolean isSmartSuggestionEnabled(Context context) {
@@ -96,7 +94,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 new SuggestionFeaturizer(new EventStore(appContext)));
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
-        mAmbientDisplayConfig = new AmbientDisplayConfiguration(appContext);
     }
 
     @Override
