@@ -22,7 +22,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
-import android.app.FragmentManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +38,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.euicc.EuiccManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,6 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
-import com.android.settings.widget.CarrierDemoPasswordDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
@@ -69,8 +69,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class MasterClear extends OptionsMenuFragment
-        implements CarrierDemoPasswordDialogFragment.Callback {
+public class MasterClear extends OptionsMenuFragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
@@ -137,26 +136,27 @@ public class MasterClear extends OptionsMenuFragment
      * If the user clicks to begin the reset sequence, we next require a
      * keyguard confirmation if the user has currently enabled one.  If there
      * is no keyguard available, we simply go to the final confirmation prompt.
+     *
+     * If the user is in demo mode, route to the demo mode app for confirmation.
      */
-    private final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
+    @VisibleForTesting
+    protected final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
 
-        public void onClick(View v) {
-            if ( Utils.isCarrierDemoUser(v.getContext())) {
-                // Require the carrier password before displaying the final confirmation.
-                final FragmentManager fm = getChildFragmentManager();
-                if (fm != null && !fm.isDestroyed()) {
-                    new CarrierDemoPasswordDialogFragment().show(fm, null /* tag */);
+        public void onClick(View view) {
+            final Context context = view.getContext();
+            if (Utils.isDemoUser(context)) {
+                final String packageName = Utils.getDemoModePackageName(context);
+                if (!TextUtils.isEmpty(packageName)) {
+                    final Intent requestFactoryReset = new Intent()
+                            .setPackage(packageName)
+                            .setAction(Intent.ACTION_FACTORY_RESET);
+                    context.startActivity(requestFactoryReset);
                 }
             } else if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                 showFinalConfirmation();
             }
         }
     };
-
-    @Override
-    public void onPasswordVerified() {
-        showFinalConfirmation();
-    }
 
     /**
      * In its initial state, the activity presents a button for the user to
@@ -395,7 +395,7 @@ public class MasterClear extends OptionsMenuFragment
         final UserManager um = UserManager.get(context);
         final boolean disallow = !um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(
                 context, UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
-        if (disallow && !Utils.isCarrierDemoUser(context)) {
+        if (disallow && !Utils.isDemoUser(context)) {
             return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
         } else if (admin != null) {
             View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
