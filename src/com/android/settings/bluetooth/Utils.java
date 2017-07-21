@@ -169,7 +169,7 @@ public final class Utils {
                                     R.string.bluetooth_talkback_input_peripheral));
 
                 case BluetoothClass.Device.Major.IMAGING:
-                    return new Pair<Integer, String>(R.drawable.ic_bt_imaging,
+                    return new Pair<Integer, String>(R.drawable.ic_settings_print,
                             r.getString(R.string.bluetooth_talkback_imaging));
 
                 default:
