@@ -17,12 +17,28 @@
 
 package com.android.settings.search;
 
+import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.anyMap;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
@@ -35,10 +51,10 @@ import android.provider.SearchIndexableResource;
 import android.util.ArrayMap;
 
 import com.android.settings.R;
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDatabaseIndexingUtils;
 import com.android.settings.testutils.shadow.ShadowRunnableAsyncTask;
 
@@ -61,21 +77,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.anyMap;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -746,7 +747,7 @@ public class DatabaseIndexingManagerTest {
     // Test new public indexing flow
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class})
     public void testPerformIndexing_fullIndex_getsDataFromProviders() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
@@ -758,7 +759,6 @@ public class DatabaseIndexingManagerTest {
 
         DatabaseIndexingManager manager =
                 spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
 
         manager.performIndexing();
 
@@ -769,17 +769,17 @@ public class DatabaseIndexingManagerTest {
     @Test
     @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_incrementalIndex_noDataAdded() {
+        final List<ResolveInfo> providerInfo = getDummyResolveInfo();
+        skipFullIndex(providerInfo);
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
         ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
-
         // Test that Indexables are added for Full indexing
         when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
-                .thenReturn(getDummyResolveInfo());
+                .thenReturn(providerInfo);
 
         DatabaseIndexingManager manager =
                 spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-        doReturn(false).when(manager).isFullIndex(anyString(), anyString());
 
         manager.mDataToProcess.dataToUpdate.clear();
 
@@ -805,7 +805,6 @@ public class DatabaseIndexingManagerTest {
         // Initialize the Manager
         DatabaseIndexingManager manager =
                 spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
 
         // Insert data point which will be dropped
         final String oldTitle = "This is French";
@@ -845,11 +844,32 @@ public class DatabaseIndexingManagerTest {
 
         DatabaseIndexingManager manager =
                 spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
 
         manager.performIndexing();
 
         verify(manager).updateDatabase(true /* isFullIndex */, Locale.getDefault().toString());
+    }
+
+    @Test
+    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
+    public void testPerformIndexing_onPackageChange_shouldFullIndex() {
+        final List<ResolveInfo> providers = getDummyResolveInfo();
+        final String buildNumber = Build.FINGERPRINT;
+        final String locale = Locale.getDefault().toString();
+        skipFullIndex(providers);
+
+        // This snapshot is already indexed. Should return false
+        assertThat(IndexDatabaseHelper.isFullIndex(
+                mContext, locale, buildNumber,
+                IndexDatabaseHelper.buildProviderVersionedNames(providers)))
+                .isFalse();
+
+        // Change provider version number, this should trigger full index.
+        providers.get(0).providerInfo.applicationInfo.versionCode++;
+
+        assertThat(IndexDatabaseHelper.isFullIndex(mContext, locale, buildNumber,
+                IndexDatabaseHelper.buildProviderVersionedNames(providers)))
+                .isTrue();
     }
 
     @Test
@@ -867,7 +887,6 @@ public class DatabaseIndexingManagerTest {
 
         DatabaseIndexingManager manager =
                 spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-        doReturn(true).when(manager).isFullIndex(anyString(), anyString());
 
         manager.performIndexing();
 
@@ -1037,6 +1056,13 @@ public class DatabaseIndexingManagerTest {
 
     // Util functions
 
+    private void skipFullIndex(List<ResolveInfo> providers) {
+        IndexDatabaseHelper.setLocaleIndexed(mContext, Locale.getDefault().toString());
+        IndexDatabaseHelper.setBuildIndexed(mContext, Build.FINGERPRINT);
+        IndexDatabaseHelper.setProvidersIndexed(mContext,
+                IndexDatabaseHelper.buildProviderVersionedNames(providers));
+    }
+
     private SearchIndexableRaw getFakeRaw() {
         return getFakeRaw(localeStr);
     }
@@ -1092,6 +1118,7 @@ public class DatabaseIndexingManagerTest {
         info.providerInfo.exported = true;
         info.providerInfo.authority = AUTHORITY_ONE;
         info.providerInfo.packageName = PACKAGE_ONE;
+        info.providerInfo.applicationInfo = new ApplicationInfo();
         infoList.add(info);
 
         return infoList;
