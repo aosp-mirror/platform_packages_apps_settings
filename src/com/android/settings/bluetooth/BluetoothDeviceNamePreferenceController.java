@@ -24,10 +24,8 @@ import android.content.IntentFilter;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.Spannable;
-import android.text.SpannableString;
+import android.text.BidiFormatter;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -48,7 +46,6 @@ public class BluetoothDeviceNamePreferenceController extends PreferenceControlle
 
     public static final String KEY_DEVICE_NAME = "device_name";
 
-    private final int mAccentColor;
 
     @VisibleForTesting
     Preference mPreference;
@@ -70,7 +67,6 @@ public class BluetoothDeviceNamePreferenceController extends PreferenceControlle
     @VisibleForTesting
     BluetoothDeviceNamePreferenceController(Context context, LocalBluetoothAdapter localAdapter) {
         super(context);
-        mAccentColor = com.android.settingslib.Utils.getColorAccent(context);
         mLocalAdapter = localAdapter;
     }
 
@@ -133,12 +129,10 @@ public class BluetoothDeviceNamePreferenceController extends PreferenceControlle
             // TODO: show error message in preference subtitle
             return;
         }
-        final Spannable spannableName = new SpannableString(deviceName);
-        spannableName.setSpan(new ForegroundColorSpan(mAccentColor), 0,
-                spannableName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         final CharSequence summary = TextUtils.expandTemplate(
-                mContext.getText(R.string.bluetooth_device_name_summary), spannableName);
-
+                mContext.getText(R.string.bluetooth_device_name_summary),
+                BidiFormatter.getInstance().unicodeWrap(deviceName));
+        preference.setSelectable(false);
         preference.setSummary(summary);
     }
 
