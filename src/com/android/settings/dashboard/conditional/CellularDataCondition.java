@@ -44,7 +44,7 @@ public class CellularDataCondition extends Condition {
             setActive(false);
             return;
         }
-        setActive(!telephony.getDataEnabled());
+        setActive(!telephony.isDataEnabled());
     }
 
     @Override

@@ -47,6 +47,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.ActionBarShadowController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -202,6 +203,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             params.setMarginStart(0);
             editFrame.setLayoutParams(params);
         }
+        ActionBarShadowController.attachToRecyclerView(
+                view.findViewById(R.id.search_bar_container), getLifecycle(), mResultsRecyclerView);
         return view;
     }
 
