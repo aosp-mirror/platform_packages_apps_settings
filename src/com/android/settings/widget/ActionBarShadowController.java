@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -26,9 +27,20 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+/**
+ * A controller that adds shadow to actionbar when content view scrolls.
+ * <p/>
+ * It also works on custom views acting as an actionbar.
+ */
 public class ActionBarShadowController implements LifecycleObserver, OnStart, OnStop {
 
-    private ScrollChangeWatcher mScrollChangeWatcher;
+    @VisibleForTesting
+    static final float ELEVATION_HIGH = 8;
+    @VisibleForTesting
+    static final float ELEVATION_LOW = 0;
+
+    @VisibleForTesting
+    ScrollChangeWatcher mScrollChangeWatcher;
     private RecyclerView mRecyclerView;
     private boolean isScrollWatcherAttached;
 
@@ -37,9 +49,22 @@ public class ActionBarShadowController implements LifecycleObserver, OnStart, On
         return new ActionBarShadowController(activity, lifecycle, recyclerView);
     }
 
+    public static ActionBarShadowController attachToRecyclerView(View anchorView,
+            Lifecycle lifecycle, RecyclerView recyclerView) {
+        return new ActionBarShadowController(anchorView, lifecycle, recyclerView);
+    }
+
     private ActionBarShadowController(Activity activity, Lifecycle lifecycle,
             RecyclerView recyclerView) {
         mScrollChangeWatcher = new ScrollChangeWatcher(activity);
+        mRecyclerView = recyclerView;
+        attachScrollWatcher();
+        lifecycle.addObserver(this);
+    }
+
+    private ActionBarShadowController(View anchorView, Lifecycle lifecycle,
+            RecyclerView recyclerView) {
+        mScrollChangeWatcher = new ScrollChangeWatcher(anchorView);
         mRecyclerView = recyclerView;
         attachScrollWatcher();
         lifecycle.addObserver(this);
@@ -71,12 +96,19 @@ public class ActionBarShadowController implements LifecycleObserver, OnStart, On
     /**
      * Update the drop shadow as the scrollable entity is scrolled.
      */
-    private final class ScrollChangeWatcher extends RecyclerView.OnScrollListener {
+    final class ScrollChangeWatcher extends RecyclerView.OnScrollListener {
 
-        private Activity mActivity;
+        private final Activity mActivity;
+        private final View mAnchorView;
 
         public ScrollChangeWatcher(Activity activity) {
             mActivity = activity;
+            mAnchorView = null;
+        }
+
+        public ScrollChangeWatcher(View anchorView) {
+            mAnchorView = anchorView;
+            mActivity = null;
         }
 
         // RecyclerView scrolled.
@@ -87,9 +119,13 @@ public class ActionBarShadowController implements LifecycleObserver, OnStart, On
 
         public void updateDropShadow(View view) {
             final boolean shouldShowShadow = view.canScrollVertically(-1);
-            final ActionBar actionBar = mActivity.getActionBar();
-            if (actionBar != null) {
-                actionBar.setElevation(shouldShowShadow ? 8 : 0);
+            if (mAnchorView != null) {
+                mAnchorView.setElevation(shouldShowShadow ? ELEVATION_HIGH : ELEVATION_LOW);
+            } else {
+                final ActionBar actionBar = mActivity.getActionBar();
+                if (actionBar != null) {
+                    actionBar.setElevation(shouldShowShadow ? ELEVATION_HIGH : ELEVATION_LOW);
+                }
             }
         }
     }
