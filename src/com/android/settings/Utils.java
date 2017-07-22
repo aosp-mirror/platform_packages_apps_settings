@@ -77,6 +77,7 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -1240,14 +1241,13 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static boolean isCarrierDemoUser(Context context) {
-        final String carrierDemoModeSetting =
-                context.getString(com.android.internal.R.string.config_carrierDemoModeSetting);
-        return UserManager.isDeviceInDemoMode(context)
-                && getUserManager(context).isDemoUser()
-                && !TextUtils.isEmpty(carrierDemoModeSetting)
-                && (Settings.Secure.getInt(context.getContentResolver(),
-                        carrierDemoModeSetting, 0) == 1);
+    public static boolean isDemoUser(Context context) {
+        return UserManager.isDeviceInDemoMode(context) && getUserManager(context).isDemoUser();
+    }
+
+    public static String getDemoModePackageName(Context context) {
+        return context.getResources().getString(
+                com.android.internal.R.string.config_demoModePackage);
     }
 
     /**
