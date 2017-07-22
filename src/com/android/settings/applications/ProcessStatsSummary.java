@@ -103,6 +103,11 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_process_stats_summary;
+    }
+
+    @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == mAppListPreference) {
             Bundle args = new Bundle();
