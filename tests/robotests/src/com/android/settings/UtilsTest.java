@@ -16,15 +16,18 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
