@@ -485,9 +485,9 @@ public class PowerUsageSummaryTest {
         doReturn(mAnomalyDetectionPolicy).when(mFragment).getAnomalyDetectionPolicy();
         when(mAnomalyDetectionPolicy.isAnomalyDetectionEnabled()).thenReturn(true);
 
-        mFragment.initAnomalyDetectionIfPossible();
+        mFragment.restartAnomalyDetectionIfPossible();
 
-        verify(mLoaderManager).initLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
+        verify(mLoaderManager).restartLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
                 any());
     }
 
