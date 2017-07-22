@@ -522,7 +522,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             return;
         }
 
-        initAnomalyDetectionIfPossible();
+        restartAnomalyDetectionIfPossible();
 
         // reload BatteryInfo and updateUI
         restartBatteryInfoLoader();
@@ -647,9 +647,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @VisibleForTesting
-    void initAnomalyDetectionIfPossible() {
+    void restartAnomalyDetectionIfPossible() {
         if (getAnomalyDetectionPolicy().isAnomalyDetectionEnabled()) {
-            getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
+            getLoaderManager().restartLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
         }
     }
 
