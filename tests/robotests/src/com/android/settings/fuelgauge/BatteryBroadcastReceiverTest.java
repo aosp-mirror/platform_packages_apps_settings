@@ -37,6 +37,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -101,12 +102,14 @@ public class BatteryBroadcastReceiverTest {
         doReturn(mChargingIntent).when(mContext).registerReceiver(any(), any());
 
         mBatteryBroadcastReceiver.register();
+        mBatteryBroadcastReceiver.register();
 
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel).isEqualTo(
                 Utils.getBatteryPercentage(mChargingIntent));
         assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
                 Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
-        verify(mBatteryListener).onBatteryChanged();
+        // 2 times because register will force update the battery
+        verify(mBatteryListener, times(2)).onBatteryChanged();
     }
 
 }
