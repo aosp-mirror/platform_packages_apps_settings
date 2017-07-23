@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 import android.accounts.AccountManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.provider.Settings;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -76,21 +75,16 @@ public class FactoryResetPreferenceControllerTest {
     @Config(shadows = { ShadowSecureSettings.class, ShadowUtils.class })
     public void isAvailable_nonSystemUser() {
         when(mUserManager.isAdminUser()).thenReturn(false);
-        ShadowUtils.setIsCarrierDemoUser(false);
+        ShadowUtils.setIsDemoUser(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     @Config(shadows = { ShadowSecureSettings.class, ShadowUtils.class })
-    public void isAvailable_carrierDemoUser() {
+    public void isAvailable_demoUser() {
         when(mUserManager.isAdminUser()).thenReturn(false);
-        ShadowUtils.setIsCarrierDemoUser(true);
-
-        final String carrierDemoModeSetting = "carrier_demo_mode";
-        when(mContext.getString(com.android.internal.R.string.config_carrierDemoModeSetting))
-                .thenReturn(carrierDemoModeSetting);
-        Settings.Secure.putInt(null, carrierDemoModeSetting, 1);
+        ShadowUtils.setIsDemoUser(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }

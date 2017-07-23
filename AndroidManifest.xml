@@ -2422,7 +2422,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DreamSettings" />
+                android:value="com.android.settings.dream.DreamSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3074,7 +3074,7 @@
         <activity android:name=".support.SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
                   android:icon="@drawable/ic_help"
-                  android:theme="@android:style/Theme.NoDisplay"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Panel"
                   android:enabled="@bool/config_support_enabled">
             <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS"/>
