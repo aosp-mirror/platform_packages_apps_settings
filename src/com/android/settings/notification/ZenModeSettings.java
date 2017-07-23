@@ -172,9 +172,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 ? getString(R.string.switch_off_text)
                 : getString(R.string.zen_mode_rule_summary_enabled_combination, mode);
 
-        return isSystemRule ? ruleState
-                : getString(R.string.zen_mode_rule_summary_provider_combination,
-                        providerLabel, ruleState);
+        return ruleState;
     }
 
     private static ManagedServiceSettings.Config getConditionProviderConfig() {
@@ -356,10 +354,10 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
         String getPrioritySettingSummary(Policy policy) {
             String s = mContext.getString(R.string.zen_mode_alarms);
-            s = append(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
+            s = prepend(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
+                    R.string.zen_mode_events);
+            s = prepend(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
                 R.string.zen_mode_reminders);
-            s = append(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
-                R.string.zen_mode_events);
             if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
                 if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
                     s = append(s, true, R.string.zen_mode_all_messages);
@@ -420,6 +418,15 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             if (condition) {
                 return mContext.getString(
                     R.string.join_many_items_middle, s, mContext.getString(resId));
+            }
+            return s;
+        }
+
+        @VisibleForTesting
+        String prepend(String s, boolean condition, int resId) {
+            if (condition) {
+                return mContext.getString(
+                        R.string.join_many_items_middle, mContext.getString(resId), s);
             }
             return s;
         }

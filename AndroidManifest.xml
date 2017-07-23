@@ -557,7 +557,7 @@
         </activity>
 
         <activity android:name=".Settings$LanguageAndInputSettingsActivity"
-            android:label="@string/language_input_gesture_title"
+            android:label="@string/language_settings"
             android:icon="@drawable/ic_settings_language"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings$SystemDashboardActivity">
@@ -2474,7 +2474,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DreamSettings" />
+                android:value="com.android.settings.dream.DreamSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3131,7 +3131,7 @@
         <activity android:name=".support.SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
                   android:icon="@drawable/ic_help"
-                  android:theme="@android:style/Theme.NoDisplay"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Panel"
                   android:enabled="@bool/config_support_enabled">
             <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS"/>
@@ -3211,7 +3211,7 @@
         <activity
             android:name=".Settings$DoubleTapPowerSuggestionActivity"
             android:label="@string/double_tap_power_for_camera_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3233,7 +3233,7 @@
         <activity
             android:name=".Settings$DoubleTwistSuggestionActivity"
             android:label="@string/double_twist_for_camera_mode_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3255,7 +3255,7 @@
         <activity
             android:name=".Settings$AmbientDisplaySuggestionActivity"
             android:label="@string/ambient_display_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3277,7 +3277,7 @@
         <activity
             android:name=".Settings$AmbientDisplayPickupSuggestionActivity"
             android:label="@string/ambient_display_pickup_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3299,7 +3299,7 @@
         <activity
             android:name=".Settings$SwipeToNotificationSuggestionActivity"
             android:label="@string/fingerprint_swipe_for_notifications_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />

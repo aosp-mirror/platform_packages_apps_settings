@@ -50,7 +50,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        updateBatteryStatus(intent);
+        updateBatteryStatus(intent, false /* forceUpdate */);
     }
 
     public void setBatteryChangedListener(OnBatteryChangedListener lsn) {
@@ -60,20 +60,21 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
     public void register() {
         final Intent intent = mContext.registerReceiver(this,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        updateBatteryStatus(intent);
+        updateBatteryStatus(intent, true /* forceUpdate */);
     }
 
     public void unRegister() {
         mContext.unregisterReceiver(this);
     }
 
-    private void updateBatteryStatus(Intent intent) {
+    private void updateBatteryStatus(Intent intent, boolean forceUpdate) {
         if (intent != null && mBatteryListener != null && Intent.ACTION_BATTERY_CHANGED.equals(
                 intent.getAction())) {
             String batteryLevel = Utils.getBatteryPercentage(intent);
             String batteryStatus = Utils.getBatteryStatus(
                     mContext.getResources(), intent);
-            if (!batteryLevel.equals(mBatteryLevel) || !batteryStatus.equals(mBatteryStatus)) {
+            if (forceUpdate || !batteryLevel.equals(mBatteryLevel) || !batteryStatus.equals(
+                    mBatteryStatus)) {
                 mBatteryLevel = batteryLevel;
                 mBatteryStatus = batteryStatus;
                 mBatteryListener.onBatteryChanged();
