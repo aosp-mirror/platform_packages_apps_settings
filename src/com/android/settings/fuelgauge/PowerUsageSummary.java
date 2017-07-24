@@ -714,7 +714,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             preference.setSummary(
                     (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
                             ? timeSequence
-                            : TextUtils.expandTemplate(getText(R.string.battery_screen_usage),
+                            : TextUtils.expandTemplate(getText(R.string.battery_used_for),
                                     timeSequence));
         }
     }
