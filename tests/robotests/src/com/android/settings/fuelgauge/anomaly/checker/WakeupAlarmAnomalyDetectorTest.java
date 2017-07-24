@@ -69,6 +69,7 @@ public class WakeupAlarmAnomalyDetectorTest {
             1 * DateUtils.HOUR_IN_MILLIS + 10 * DateUtils.MINUTE_IN_MILLIS;
     private static final int ANOMALY_WAKEUP_COUNT = 500;
     private static final int NORMAL_WAKEUP_COUNT = 61;
+    private static final int ANOMALY_WAKEUP_FREQUENCY = 428; // count per hour
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -145,6 +146,7 @@ public class WakeupAlarmAnomalyDetectorTest {
                 .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
                 .setTargetSdkVersion(ANOMALY_SDK)
                 .setBackgroundRestrictionEnabled(ANOMALY_BACKGROUND_RESTRICTION_ON)
+                .setWakeupAlarmCount(ANOMALY_WAKEUP_FREQUENCY)
                 .build();
         mTargetAnomaly = new Anomaly.Builder()
                 .setUid(TARGET_UID)
@@ -152,6 +154,7 @@ public class WakeupAlarmAnomalyDetectorTest {
                 .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
                 .setTargetSdkVersion(TARGET_SDK)
                 .setBackgroundRestrictionEnabled(TARGET_BACKGROUND_RESTRICTION_ON)
+                .setWakeupAlarmCount(ANOMALY_WAKEUP_FREQUENCY)
                 .build();
 
         mWakeupAlarmAnomalyDetector = spy(
