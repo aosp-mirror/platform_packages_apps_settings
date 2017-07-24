@@ -45,8 +45,8 @@ public class InlineSwitchPayload extends InlinePayload {
      * @param isDeviceSupported is true when the setting is valid for the given device.
      */
     public InlineSwitchPayload(String key, @SettingsSource int source,
-            int onValue, Intent intent, boolean isDeviceSupported) {
-        super(key, source, intent, isDeviceSupported);
+            int onValue, Intent intent, boolean isDeviceSupported, int defaultValue) {
+        super(key, source, intent, isDeviceSupported, defaultValue);
         // If on is stored as TRUE then the switch is standard.
         mIsStandard = onValue == TRUE;
     }

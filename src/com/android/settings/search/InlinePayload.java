@@ -49,24 +49,31 @@ public abstract class InlinePayload extends ResultPayload {
     final boolean mIsDeviceSupported;
 
     /**
+     * The default value for the setting.
+     */
+    final int mDefaultvalue;
+
+    /**
      * @param key uniquely identifies the stored setting.
      * @param source of the setting. Used to determine where to get and set the setting.
      * @param intent to the setting page.
      * @param isDeviceSupported is true when the setting is valid for the given device.
      */
     public InlinePayload(String key, @SettingsSource int source, Intent intent,
-            boolean isDeviceSupported) {
+            boolean isDeviceSupported, int defaultValue) {
         super(intent);
         mSettingKey = key;
         mSettingSource = source;
         mIsDeviceSupported = isDeviceSupported;
+        mDefaultvalue = defaultValue;
     }
 
     InlinePayload(Parcel parcel) {
-        super((Intent) parcel.readParcelable(Intent.class.getClassLoader()));
+        super(parcel.readParcelable(Intent.class.getClassLoader()));
         mSettingKey = parcel.readString();
         mSettingSource = parcel.readInt();
         mIsDeviceSupported = parcel.readInt() == TRUE;
+        mDefaultvalue = parcel.readInt();
     }
 
     @Override
@@ -75,6 +82,7 @@ public abstract class InlinePayload extends ResultPayload {
         dest.writeString(mSettingKey);
         dest.writeInt(mSettingSource);
         dest.writeInt(mIsDeviceSupported ? TRUE : FALSE);
+        dest.writeInt(mDefaultvalue);
     }
 
     @Override
@@ -108,22 +116,17 @@ public abstract class InlinePayload extends ResultPayload {
         switch(mSettingSource) {
             case SettingsSource.SECURE:
                 settingsValue = Settings.Secure.getInt(context.getContentResolver(),
-                        mSettingKey, -1);
+                        mSettingKey, mDefaultvalue);
                 break;
             case SettingsSource.SYSTEM:
                 settingsValue = Settings.System.getInt(context.getContentResolver(),
-                        mSettingKey, -1);
+                        mSettingKey, mDefaultvalue);
                 break;
 
             case SettingsSource.GLOBAL:
                 settingsValue = Settings.Global.getInt(context.getContentResolver(),
-                        mSettingKey, -1);
+                        mSettingKey, mDefaultvalue);
                 break;
-        }
-
-        if (settingsValue == -1) {
-            throw new IllegalStateException("Unable to find setting from uri: "
-                    + mSettingKey.toString());
         }
 
         return standardizeInput(settingsValue);

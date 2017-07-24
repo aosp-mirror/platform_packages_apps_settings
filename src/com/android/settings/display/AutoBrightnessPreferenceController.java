@@ -37,6 +37,9 @@ public class AutoBrightnessPreferenceController extends AbstractPreferenceContro
 
     private final String mAutoBrightnessKey;
 
+    private final String SYSTEM_KEY = SCREEN_BRIGHTNESS_MODE;
+    private final int DEFAULT_VALUE = SCREEN_BRIGHTNESS_MODE_MANUAL;
+
     public AutoBrightnessPreferenceController(Context context, String key) {
         super(context);
         mAutoBrightnessKey = key;
@@ -56,15 +59,15 @@ public class AutoBrightnessPreferenceController extends AbstractPreferenceContro
     @Override
     public void updateState(Preference preference) {
         int brightnessMode = Settings.System.getInt(mContext.getContentResolver(),
-                SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL);
-        ((SwitchPreference) preference).setChecked(brightnessMode != SCREEN_BRIGHTNESS_MODE_MANUAL);
+                SYSTEM_KEY, DEFAULT_VALUE);
+        ((SwitchPreference) preference).setChecked(brightnessMode != DEFAULT_VALUE);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean auto = (Boolean) newValue;
-        Settings.System.putInt(mContext.getContentResolver(), SCREEN_BRIGHTNESS_MODE,
-                auto ? SCREEN_BRIGHTNESS_MODE_AUTOMATIC : SCREEN_BRIGHTNESS_MODE_MANUAL);
+        Settings.System.putInt(mContext.getContentResolver(), SYSTEM_KEY,
+                auto ? SCREEN_BRIGHTNESS_MODE_AUTOMATIC : DEFAULT_VALUE);
         return true;
     }
 
@@ -74,8 +77,8 @@ public class AutoBrightnessPreferenceController extends AbstractPreferenceContro
                 DisplaySettings.class.getName(), mAutoBrightnessKey,
                 mContext.getString(R.string.display_settings));
 
-        return new InlineSwitchPayload(SCREEN_BRIGHTNESS_MODE,
+        return new InlineSwitchPayload(SYSTEM_KEY,
                 ResultPayload.SettingsSource.SYSTEM, SCREEN_BRIGHTNESS_MODE_AUTOMATIC, intent,
-                isAvailable());
+                isAvailable(), DEFAULT_VALUE);
     }
 }

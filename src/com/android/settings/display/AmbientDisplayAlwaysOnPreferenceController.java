@@ -87,6 +87,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
                 mContext.getString(R.string.ambient_display_screen_title));
 
         return new InlineSwitchPayload(Settings.Secure.DOZE_ALWAYS_ON,
-                ResultPayload.SettingsSource.SECURE, ON, intent, isAvailable());
+                ResultPayload.SettingsSource.SECURE, ON /* onValue */, intent, isAvailable(),
+                ON /* defaultValue */);
     }
 }
