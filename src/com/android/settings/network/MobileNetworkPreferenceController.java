@@ -39,18 +39,17 @@ public class MobileNetworkPreferenceController extends PreferenceController impl
 
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 
-    private final UserManager mUserManager;
     private final boolean mIsSecondaryUser;
     private final TelephonyManager mTelephonyManager;
     private Preference mPreference;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     PhoneStateListener mPhoneStateListener;
 
     public MobileNetworkPreferenceController(Context context) {
         super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mIsSecondaryUser = !mUserManager.isAdminUser();
+        mIsSecondaryUser = !userManager.isAdminUser();
     }
 
     @Override
