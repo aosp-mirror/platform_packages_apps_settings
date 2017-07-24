@@ -68,6 +68,8 @@ public class Anomaly implements Parcelable {
     public final int uid;
     public final int targetSdkVersion;
     public final long wakelockTimeMs;
+    public final long bluetoothScanningTimeMs;
+    public final int wakeupAlarmCount;
     /**
      * {@code true} if background restriction is enabled
      *
@@ -88,6 +90,8 @@ public class Anomaly implements Parcelable {
         wakelockTimeMs = builder.mWakeLockTimeMs;
         targetSdkVersion = builder.mTargetSdkVersion;
         backgroundRestrictionEnabled = builder.mBgRestrictionEnabled;
+        bluetoothScanningTimeMs = builder.mBluetoothScanningTimeMs;
+        wakeupAlarmCount = builder.mWakeupAlarmCount;
     }
 
     private Anomaly(Parcel in) {
@@ -98,6 +102,8 @@ public class Anomaly implements Parcelable {
         wakelockTimeMs = in.readLong();
         targetSdkVersion = in.readInt();
         backgroundRestrictionEnabled = in.readBoolean();
+        wakeupAlarmCount = in.readInt();
+        bluetoothScanningTimeMs = in.readLong();
     }
 
     @Override
@@ -114,6 +120,8 @@ public class Anomaly implements Parcelable {
         dest.writeLong(wakelockTimeMs);
         dest.writeInt(targetSdkVersion);
         dest.writeBoolean(backgroundRestrictionEnabled);
+        dest.writeInt(wakeupAlarmCount);
+        dest.writeLong(bluetoothScanningTimeMs);
     }
 
     @Override
@@ -132,13 +140,36 @@ public class Anomaly implements Parcelable {
                 && TextUtils.equals(displayName, other.displayName)
                 && TextUtils.equals(packageName, other.packageName)
                 && targetSdkVersion == other.targetSdkVersion
-                && backgroundRestrictionEnabled == other.backgroundRestrictionEnabled;
+                && backgroundRestrictionEnabled == other.backgroundRestrictionEnabled
+                && wakeupAlarmCount == other.wakeupAlarmCount
+                && bluetoothScanningTimeMs == other.bluetoothScanningTimeMs;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(type, uid, displayName, packageName, wakelockTimeMs, targetSdkVersion,
-                backgroundRestrictionEnabled);
+                backgroundRestrictionEnabled, wakeupAlarmCount, bluetoothScanningTimeMs);
+    }
+
+    @Override
+    public String toString() {
+        return "type=" + toAnomalyTypeText(type) + " uid=" + uid + " package=" + packageName +
+                " displayName=" + displayName + " wakelockTimeMs=" + wakelockTimeMs +
+                " wakeupAlarmCount=" + wakeupAlarmCount + " bluetoothTimeMs="
+                + bluetoothScanningTimeMs;
+    }
+
+    private String toAnomalyTypeText(@AnomalyType int type) {
+        switch (type) {
+            case AnomalyType.WAKEUP_ALARM:
+                return "wakeupAlarm";
+            case AnomalyType.WAKE_LOCK:
+                return "wakelock";
+            case AnomalyType.BLUETOOTH_SCAN:
+                return "unoptimizedBluetoothScan";
+        }
+
+        return "";
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -160,6 +191,8 @@ public class Anomaly implements Parcelable {
         private String mPackageName;
         private long mWakeLockTimeMs;
         private boolean mBgRestrictionEnabled;
+        private int mWakeupAlarmCount;
+        private long mBluetoothScanningTimeMs;
 
         public Builder setType(@AnomalyType int type) {
             mType = type;
@@ -193,6 +226,16 @@ public class Anomaly implements Parcelable {
 
         public Builder setBackgroundRestrictionEnabled(boolean bgRestrictionEnabled) {
             mBgRestrictionEnabled = bgRestrictionEnabled;
+            return this;
+        }
+
+        public Builder setWakeupAlarmCount(int wakeupAlarmCount) {
+            mWakeupAlarmCount = wakeupAlarmCount;
+            return this;
+        }
+
+        public Builder setBluetoothScanningTimeMs(long bluetoothScanningTimeMs) {
+            mBluetoothScanningTimeMs = bluetoothScanningTimeMs;
             return this;
         }
 
