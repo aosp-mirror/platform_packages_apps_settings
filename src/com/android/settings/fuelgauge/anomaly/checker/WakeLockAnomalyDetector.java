@@ -97,6 +97,7 @@ public class WakeLockAnomalyDetector implements AnomalyDetector {
                         .setType(Anomaly.AnomalyType.WAKE_LOCK)
                         .setDisplayName(displayName)
                         .setPackageName(packageName)
+                        .setWakeLockTimeMs(backgroundDurationMs)
                         .build();
 
                 if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {
