@@ -98,6 +98,7 @@
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true">
 
+        <uses-library android:name="org.apache.http.legacy" />
         <!-- Settings -->
 
         <activity android:name="Settings"
