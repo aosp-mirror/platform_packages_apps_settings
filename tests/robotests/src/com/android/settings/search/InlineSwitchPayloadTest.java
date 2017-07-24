@@ -61,7 +61,8 @@ public class InlineSwitchPayloadTest {
         final Intent intent = new Intent();
         intent.putExtra(intentKey, intentVal);
 
-        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1, intent, true);
+        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1, intent, true,
+                1 /* default */);
         final Intent retainedIntent = payload.getIntent();
         assertThat(payload.mSettingKey).isEqualTo(uri);
         assertThat(payload.getType()).isEqualTo(type);
@@ -86,6 +87,7 @@ public class InlineSwitchPayloadTest {
         parcel.writeInt(source);
         parcel.writeInt(InlineSwitchPayload.TRUE);
         parcel.writeInt(InlineSwitchPayload.TRUE);
+        parcel.writeInt(InlineSwitchPayload.TRUE);
         parcel.setDataPosition(0);
 
         InlineSwitchPayload payload = InlineSwitchPayload.CREATOR.createFromParcel(parcel);
@@ -103,7 +105,7 @@ public class InlineSwitchPayloadTest {
     public void testGetSystem_flippedSetting_returnsFlippedValue() {
         // Stores 1s as 0s, and vis versa
         InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SYSTEM,
-                FLIPPED_ON, null /* intent */, true);
+                FLIPPED_ON, null /* intent */, true, 1 /* default */);
         int currentValue = 1;
         Settings.System.putInt(mContext.getContentResolver(), DUMMY_SETTING, currentValue);
 
@@ -116,7 +118,7 @@ public class InlineSwitchPayloadTest {
     public void testSetSystem_flippedSetting_updatesToFlippedValue() {
         // Stores 1s as 0s, and vis versa
         InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SYSTEM,
-                FLIPPED_ON, null /* intent */, true);
+                FLIPPED_ON, null /* intent */, true, 1 /* default */);
         int newValue = 1;
         ContentResolver resolver = mContext.getContentResolver();
         Settings.System.putInt(resolver, SCREEN_BRIGHTNESS_MODE, newValue);
@@ -130,7 +132,7 @@ public class InlineSwitchPayloadTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetSystem_negativeValue_ThrowsError() {
         InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SYSTEM,
-                STANDARD_ON, null /* intent */, true);
+                STANDARD_ON, null /* intent */, true, 1 /* default */);
 
         payload.setValue(mContext, -1);
     }
@@ -138,7 +140,7 @@ public class InlineSwitchPayloadTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetSystem_highValue_ThrowsError() {
         InlineSwitchPayload payload = new InlineSwitchPayload(DUMMY_SETTING, SettingsSource.SYSTEM,
-                STANDARD_ON, null /* intent */, true);
+                STANDARD_ON, null /* intent */, true, 1 /* default */);
 
         payload.setValue(mContext, 2);
     }
