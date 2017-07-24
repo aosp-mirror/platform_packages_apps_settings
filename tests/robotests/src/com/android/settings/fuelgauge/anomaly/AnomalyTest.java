@@ -23,6 +23,7 @@ import android.os.Build;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
@@ -36,10 +37,14 @@ public class AnomalyTest {
     private static long WAKE_LOCK_TIME_MS = 1500;
     private static String PACKAGE_NAME = "com.android.settings";
     private static String DISPLAY_NAME = "settings";
+    private static long BLUETOOTH_TIME_MS = 2555555;
+    private static int WAKEUP_ALARM_COUNT = 100;
 
-    @Test
-    public void testBuilder_buildCorrectly() {
-        Anomaly anomaly = new Anomaly.Builder()
+    private Anomaly mAnomaly;
+
+    @Before
+    public void setUp() {
+        mAnomaly = new Anomaly.Builder()
                 .setType(TYPE)
                 .setUid(UID)
                 .setWakeLockTimeMs(WAKE_LOCK_TIME_MS)
@@ -47,14 +52,28 @@ public class AnomalyTest {
                 .setDisplayName(DISPLAY_NAME)
                 .setTargetSdkVersion(SDK_VERSION)
                 .setBackgroundRestrictionEnabled(true)
+                .setBluetoothScanningTimeMs(BLUETOOTH_TIME_MS)
+                .setWakeupAlarmCount(WAKEUP_ALARM_COUNT)
                 .build();
+    }
 
-        assertThat(anomaly.type).isEqualTo(TYPE);
-        assertThat(anomaly.uid).isEqualTo(UID);
-        assertThat(anomaly.wakelockTimeMs).isEqualTo(WAKE_LOCK_TIME_MS);
-        assertThat(anomaly.packageName).isEqualTo(PACKAGE_NAME);
-        assertThat(anomaly.displayName).isEqualTo(DISPLAY_NAME);
-        assertThat(anomaly.targetSdkVersion).isEqualTo(SDK_VERSION);
-        assertThat(anomaly.backgroundRestrictionEnabled).isTrue();
+    @Test
+    public void testBuilder_buildCorrectly() {
+        assertThat(mAnomaly.type).isEqualTo(TYPE);
+        assertThat(mAnomaly.uid).isEqualTo(UID);
+        assertThat(mAnomaly.wakelockTimeMs).isEqualTo(WAKE_LOCK_TIME_MS);
+        assertThat(mAnomaly.packageName).isEqualTo(PACKAGE_NAME);
+        assertThat(mAnomaly.displayName).isEqualTo(DISPLAY_NAME);
+        assertThat(mAnomaly.targetSdkVersion).isEqualTo(SDK_VERSION);
+        assertThat(mAnomaly.backgroundRestrictionEnabled).isTrue();
+        assertThat(mAnomaly.wakeupAlarmCount).isEqualTo(WAKEUP_ALARM_COUNT);
+        assertThat(mAnomaly.bluetoothScanningTimeMs).isEqualTo(BLUETOOTH_TIME_MS);
+    }
+
+    @Test
+    public void testToString() {
+        assertThat(mAnomaly.toString()).isEqualTo(
+                "type=wakelock uid=111 package=com.android.settings displayName=settings"
+                        + " wakelockTimeMs=1500 wakeupAlarmCount=100 bluetoothTimeMs=2555555");
     }
 }
