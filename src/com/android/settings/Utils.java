@@ -1253,6 +1253,11 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    public static boolean hasFingerprintHardware(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        return fingerprintManager != null && fingerprintManager.isHardwareDetected();
+    }
+
     /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.

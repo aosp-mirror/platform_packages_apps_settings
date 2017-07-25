@@ -155,6 +155,7 @@ public class BluetoothScanAnomalyDetectorTest {
         return new Anomaly.Builder()
                 .setUid(uid)
                 .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
+                .setBluetoothScanningTimeMs(ANOMALY_BLUETOOTH_SCANNING_TIME)
                 .build();
     }
 

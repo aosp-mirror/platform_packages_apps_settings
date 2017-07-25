@@ -19,6 +19,7 @@ package com.android.settings.dashboard.suggestions;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
@@ -29,7 +30,10 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
@@ -72,6 +76,12 @@ public class SuggestionFeatureProviderImplTest {
     private SuggestionParser mSuggestionParser;
     @Mock
     private Tile mSuggestion;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private FingerprintManager mFingerprintManager;
+    @Mock
+    private SharedPreferences mSharedPreferences;
 
     private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
@@ -81,7 +91,12 @@ public class SuggestionFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        // Explicit casting to object due to MockitoCast bug
+        when((Object) mContext.getSystemService(FingerprintManager.class))
+                .thenReturn(mFingerprintManager);
         when(mContext.getApplicationContext()).thenReturn(RuntimeEnvironment.application);
+
         mSuggestion.intent = new Intent().setClassName("pkg", "cls");
         mSuggestion.category = "category";
 
@@ -196,39 +211,56 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
-    public void isSuggestionCompleted_swipeToNotification_trueWhenNotAvailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_supportSystemNavigationKeys, false);
+    public void isSuggestionCompleted_swipeToNotification_trueWhenNotHardwareNotAvailable() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
 
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        SwipeToNotificationSuggestionActivity.class))).isTrue();
+        assertThat(mProvider.isSuggestionCompleted(mContext,
+                new ComponentName(mContext, SwipeToNotificationSuggestionActivity.class))).isTrue();
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
+    public void isSuggestionCompleted_swipeToNotification_trueWhenNotAvailable() {
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(false);
+
+        assertThat(mProvider.isSuggestionCompleted(mContext,
+                new ComponentName(mContext, SwipeToNotificationSuggestionActivity.class))).isTrue();
+    }
+
+    @Test
     public void isSuggestionCompleted_swipeToNotification_falseWhenNotVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_supportSystemNavigationKeys, true);
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
         // No stored value in shared preferences if not visited yet.
 
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
+        assertThat(mProvider.isSuggestionCompleted(mContext,
+                new ComponentName(mContext,
                         SwipeToNotificationSuggestionActivity.class))).isFalse();
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_swipeToNotification_trueWhenVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_supportSystemNavigationKeys, true);
-        mProvider.getSharedPrefs(RuntimeEnvironment.application).edit().putBoolean(
-                SwipeToNotificationSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
+        stubFingerprintSupported(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
+                .thenReturn(true);
+        when(mContext.getSharedPreferences(anyString(), anyInt())).thenReturn(mSharedPreferences);
+        when(mSharedPreferences.getBoolean(
+                SwipeToNotificationSettings.PREF_KEY_SUGGESTION_COMPLETE, false)).thenReturn(true);
 
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        SwipeToNotificationSuggestionActivity.class))).isTrue();
+        assertThat(mProvider.isSuggestionCompleted(mContext,
+                new ComponentName(mContext, SwipeToNotificationSuggestionActivity.class))).isTrue();
     }
 
     @Test
@@ -311,6 +343,11 @@ public class SuggestionFeatureProviderImplTest {
                 .setComponentEnabledSetting(mSuggestion.intent.getComponent(),
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                         PackageManager.DONT_KILL_APP);
+    }
+
+    private void stubFingerprintSupported(boolean enabled) {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(enabled);
     }
 
     @Test

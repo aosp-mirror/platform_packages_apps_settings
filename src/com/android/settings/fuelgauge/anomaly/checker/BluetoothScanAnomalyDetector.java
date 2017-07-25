@@ -93,6 +93,7 @@ public class BluetoothScanAnomalyDetector implements AnomalyDetector {
                         .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)
                         .setDisplayName(displayName)
                         .setPackageName(packageName)
+                        .setBluetoothScanningTimeMs(bluetoothTimeMs)
                         .build();
 
                 if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {
