@@ -38,6 +38,8 @@ import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonito
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -65,6 +67,17 @@ import java.util.List;
                 ShadowUtils.class
         })
 public class SetupChooseLockPasswordTest {
+
+    @Before
+    public void setUp() throws Exception {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_headlineFontFamily, "");
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
+    }
 
     @Test
     public void createActivity_shouldNotCrash() {
