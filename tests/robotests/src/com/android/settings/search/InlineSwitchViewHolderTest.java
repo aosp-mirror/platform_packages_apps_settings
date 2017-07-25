@@ -107,7 +107,8 @@ public class InlineSwitchViewHolderTest {
                 .setSummary(SUMMARY)
                 .setRank(1)
                 .setPayload(new InlineSwitchPayload("" /* uri */, 0 /* mSettingSource */,
-                        1 /* onValue */, null /* intent */, true /* isDeviceSupported */))
+                        1 /* onValue */, null /* intent */, true /* isDeviceSupported */,
+                        1 /* default */))
                 .addBreadcrumbs(new ArrayList<>())
                 .setIcon(mIcon)
                 .setPayload(mPayload)

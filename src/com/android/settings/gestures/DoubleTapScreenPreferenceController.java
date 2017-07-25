@@ -25,11 +25,12 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import static android.provider.Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP;
 
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
 
@@ -38,6 +39,8 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_screen_video";
     private final String mDoubleTapScreenPrefKey;
+
+    private final String SECURE_KEY = DOZE_PULSE_ON_DOUBLE_TAP;
 
     private final AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
@@ -70,8 +73,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP, enabled ? ON : OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, enabled ? ON : OFF);
         return true;
     }
 
@@ -91,7 +93,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
                 DoubleTapScreenSettings.class.getName(), mDoubleTapScreenPrefKey,
                 mContext.getString(R.string.display_settings));
 
-        return new InlineSwitchPayload(Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP,
-                ResultPayload.SettingsSource.SECURE, ON, intent, isAvailable());
+        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
+                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }
