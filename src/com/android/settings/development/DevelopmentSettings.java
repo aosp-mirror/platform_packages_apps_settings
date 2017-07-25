@@ -354,6 +354,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private Dialog mLogpersistClearDialog;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevelopmentSettingsEnabler mSettingsEnabler;
+    private DevelopmentSwitchBarController mSwitchBarController;
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
@@ -622,18 +623,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-
-        mSwitchBar = activity.getSwitchBar();
-        if (mUnavailable) {
-            mSwitchBar.setEnabled(false);
-            return;
-        }
-
-        if (Utils.isMonkeyRunning()) {
-            return;
-        }
-        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBarController = new DevelopmentSwitchBarController(
+                this /* DevelopmentSettings */, mSwitchBar, !mUnavailable,  getLifecycle());
     }
 
     private boolean removePreferenceForProduction(Preference preference) {
@@ -760,8 +752,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mUnavailable) {
             return;
         }
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         getActivity().unregisterReceiver(mUsbReceiver);
         getActivity().unregisterReceiver(mBluetoothA2dpReceiver);
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
