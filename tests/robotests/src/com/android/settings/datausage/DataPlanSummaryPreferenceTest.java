@@ -29,6 +29,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.DonutView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,12 +57,19 @@ public final class DataPlanSummaryPreferenceTest {
 
     @Before
     public void setUp() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_headlineFontFamily, "");
         Context context = RuntimeEnvironment.application;
         mPreference = new DataPlanSummaryPreference(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(mPreference.getLayoutResource(),
                 new LinearLayout(context), false);
         mHolder = PreferenceViewHolder.createInstanceForTests(view);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
