@@ -73,7 +73,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     public boolean isAvailable() {
         return mWifiRegexs != null
                 && mWifiRegexs.length != 0
-                && WifiTetherSettings.isTetherSettingPageEnabled()
                 && !Utils.isMonkeyRunning();
     }
 
