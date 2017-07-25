@@ -16,10 +16,12 @@
 
 package com.android.settings.search;
 
+import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.CallSuper;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -101,18 +103,25 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         }
         final List<String> nonIndexableKeys = new ArrayList<>();
         for (SearchIndexableResource res : resources) {
-            final XmlResourceParser parser = context.getResources().getXml(res.xmlResId);
-            final AttributeSet attrs = Xml.asAttributeSet(parser);
-            try {
-                while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                    final String key = XmlParserUtils.getDataKey(context, attrs);
-                    if (!TextUtils.isEmpty(key)) {
-                        nonIndexableKeys.add(key);
-                    }
+            nonIndexableKeys.addAll(getNonIndexableKeysFromXml(context, res.xmlResId));
+        }
+        return nonIndexableKeys;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public List<String> getNonIndexableKeysFromXml(Context context, @XmlRes int xmlResId) {
+        final List<String> nonIndexableKeys = new ArrayList<>();
+        final XmlResourceParser parser = context.getResources().getXml(xmlResId);
+        final AttributeSet attrs = Xml.asAttributeSet(parser);
+        try {
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                final String key = XmlParserUtils.getDataKey(context, attrs);
+                if (!TextUtils.isEmpty(key)) {
+                    nonIndexableKeys.add(key);
                 }
-            } catch (IOException | XmlPullParserException e) {
-                Log.w(TAG, "Error parsing non-indexable from xml " + res.xmlResId);
             }
+        } catch (IOException | XmlPullParserException e) {
+            Log.w(TAG, "Error parsing non-indexable from xml " + xmlResId);
         }
         return nonIndexableKeys;
     }
