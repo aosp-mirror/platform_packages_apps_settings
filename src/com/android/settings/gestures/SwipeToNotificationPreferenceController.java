@@ -29,6 +29,8 @@ import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
+
 public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
     private final int ON = 1;
@@ -36,6 +38,8 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
 
     private static final String PREF_KEY_VIDEO = "gesture_swipe_down_fingerprint_video";
     private final String mSwipeDownFingerPrefKey;
+
+    private final String SECURE_KEY = SYSTEM_NAVIGATION_KEYS_ENABLED;
 
     public SwipeToNotificationPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
@@ -71,16 +75,14 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, (boolean) newValue ? ON : OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
+                (boolean) newValue ? ON : OFF);
         return true;
     }
 
     @Override
     protected boolean isSwitchPrefEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
-                == 1;
+        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, OFF) == ON;
     }
 
     @Override
@@ -89,7 +91,7 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
                 SwipeToNotificationSettings.class.getName(), mSwipeDownFingerPrefKey,
                 mContext.getString(R.string.display_settings));
 
-        return new InlineSwitchPayload(Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED,
-                ResultPayload.SettingsSource.SECURE, ON, intent, isAvailable());
+        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
+                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }
