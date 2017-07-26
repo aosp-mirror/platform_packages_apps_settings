@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -31,11 +32,14 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import java.util.List;
+
 public class GameControllerPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, InputManager.InputDeviceListener, LifecycleObserver,
         OnResume, OnPause {
 
-    public static final String PREF_KEY = "vibrate_input_devices";
+    @VisibleForTesting
+    static final String PREF_KEY = "vibrate_input_devices";
     private static final String CATEGORY_KEY = "game_controller_settings_category";
 
     private final InputManager mIm;
@@ -103,6 +107,14 @@ public class GameControllerPreferenceController extends AbstractPreferenceContro
         ((SwitchPreference) preference).setChecked(Settings.System.getInt(
                 mContext.getContentResolver(),
                 Settings.System.VIBRATE_INPUT_DEVICES, 1) > 0);
+    }
+
+    @Override
+    public void updateNonIndexableKeys(List<String> keys) {
+        if (!isAvailable()) {
+            keys.add(CATEGORY_KEY);
+            keys.add(PREF_KEY);
+        }
     }
 
     @Override
