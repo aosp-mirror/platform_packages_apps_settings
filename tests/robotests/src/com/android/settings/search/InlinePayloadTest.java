@@ -111,7 +111,7 @@ public class InlinePayloadTest {
 
         public ConcreteInlinePayload(String key, @SettingsSource int source, Intent intent,
                 boolean isDeviceSupported) {
-            super(key, source, intent, isDeviceSupported);
+            super(key, source, intent, isDeviceSupported, 0 /* defaultValue */);
         }
 
         @Override
