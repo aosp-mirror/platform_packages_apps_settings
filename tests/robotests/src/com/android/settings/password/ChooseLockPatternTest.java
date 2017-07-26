@@ -21,19 +21,25 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
+import android.os.UserHandle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.setupwizardlib.GlifLayout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowDrawable;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -94,5 +100,24 @@ public class ChooseLockPatternTest {
                 .getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .named("EXTRA_USER_ID")
                 .isEqualTo(123);
+    }
+
+    @Test
+    public void assertThat_chooseLockIconChanged_WhenFingerprintExtraSet() {
+        ChooseLockPattern activity = createActivity(true);
+        ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
+                activity.getFragmentManager().findFragmentById(R.id.main_content);
+        ShadowDrawable drawable = Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
+        assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
+    }
+
+    private ChooseLockPattern createActivity(boolean addFingerprintExtra) {
+        return Robolectric.buildActivity(
+                ChooseLockPattern.class,
+                new IntentBuilder(application)
+                        .setUserId(UserHandle.myUserId())
+                        .setForFingerprint(addFingerprintExtra)
+                        .build())
+                .setup().get();
     }
 }
