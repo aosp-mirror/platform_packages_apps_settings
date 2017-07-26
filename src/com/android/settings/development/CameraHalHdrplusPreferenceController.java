@@ -102,6 +102,6 @@ public class CameraHalHdrplusPreferenceController extends AbstractPreferenceCont
     }
 
     private boolean isHalHdrplusEnabled() {
-        return SystemProperties.getBoolean(PROPERTY_CAMERA_HAL_HDRPLUS, false);
+        return SystemProperties.getBoolean(PROPERTY_CAMERA_HAL_HDRPLUS, true);
     }
 }
