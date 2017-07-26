@@ -16,16 +16,25 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_URI;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY_URI;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
+import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -37,9 +46,12 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProfileSelectDialog;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Impl for {@code DashboardFeatureProvider}.
@@ -125,14 +137,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         } else {
             pref.setKey(getDashboardKeyForTile(tile));
         }
-        if (tile.summary != null) {
-            pref.setSummary(tile.summary);
-        } else {
-            pref.setSummary(R.string.summary_placeholder);
-        }
-        if (tile.icon != null) {
-            pref.setIcon(tile.icon.loadDrawable(activity));
-        }
+        bindSummary(pref, tile);
+        bindIcon(pref, tile);
         final Bundle metadata = tile.metaData;
         String clsName = null;
         String action = null;
@@ -204,6 +210,50 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, MetricsEvent.DASHBOARD_SUMMARY);
+    }
+
+    private void bindSummary(Preference preference, Tile tile) {
+        if (tile.summary != null) {
+            preference.setSummary(tile.summary);
+        } else if (tile.metaData != null
+                && tile.metaData.containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
+            ThreadUtils.postOnBackgroundThread(() -> {
+                final Map<String, IContentProvider> providerMap = new ArrayMap<>();
+                final String uri = tile.metaData.getString(META_DATA_PREFERENCE_SUMMARY_URI);
+                final String summary = TileUtils.getTextFromUri(
+                        mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
+                ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
+            });
+        } else {
+            preference.setSummary(R.string.summary_placeholder);
+        }
+    }
+
+    @VisibleForTesting
+    void bindIcon(Preference preference, Tile tile) {
+        if (tile.icon != null) {
+            preference.setIcon(tile.icon.loadDrawable(preference.getContext()));
+        } else if (tile.metaData != null
+                && tile.metaData.containsKey(META_DATA_PREFERENCE_ICON_URI))
+            ThreadUtils.postOnBackgroundThread(() -> {
+                String packageName = null;
+                if (tile.intent != null) {
+                    Intent intent = tile.intent;
+                    if (!TextUtils.isEmpty(intent.getPackage())) {
+                        packageName = intent.getPackage();
+                    } else if (intent.getComponent() != null) {
+                        packageName = intent.getComponent().getPackageName();
+                    }
+                }
+                final Map<String, IContentProvider> providerMap = new ArrayMap<>();
+                final String uri = tile.metaData.getString(META_DATA_PREFERENCE_ICON_URI);
+                final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
+                        mContext, packageName, uri, providerMap);
+                tile.icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
+                ThreadUtils.postOnMainThread(() ->
+                        preference.setIcon(tile.icon.loadDrawable(preference.getContext()))
+                );
+            });
     }
 
     private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,

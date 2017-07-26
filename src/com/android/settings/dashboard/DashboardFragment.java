@@ -201,7 +201,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Returns the CategoryKey for loading {@link DashboardCategory} for this fragment.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     public String getCategoryKey() {
         return DashboardFragmentRegistry.PARENT_TO_CATEGORY_KEY_MAP.get(getClass().getName());
     }
