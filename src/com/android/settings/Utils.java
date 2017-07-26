@@ -74,7 +74,6 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
-import android.provider.Settings.Secure;
 import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -1282,13 +1281,12 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static String getDemoModePackageName(Context context) {
-        return context.getResources().getString(
-                com.android.internal.R.string.config_demoModePackage);
+        return context.getString(com.android.internal.R.string.config_demoModePackage);
     }
 
     /**
      * Returns if a given user is a profile of another user.
-     * @param user The user whose profiles will be checked.
+     * @param user The user whose profiles wibe checked.
      * @param profile The (potential) profile.
      * @return if the profile is actually a profile
      */
