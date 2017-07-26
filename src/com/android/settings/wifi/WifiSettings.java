@@ -200,6 +200,15 @@ public class WifiSettings extends RestrictedSettingsFragment
         // loaded (ODR).
         setAnimationAllowed(false);
 
+        addPreferences();
+
+        mIsRestricted = isUiRestricted();
+
+        mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
+        mBgThread.start();
+    }
+
+    private void addPreferences() {
         addPreferencesFromResource(R.xml.wifi_settings);
 
         mConnectedAccessPointPreferenceCategory =
@@ -218,11 +227,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         mStatusMessagePreference = new LinkablePreference(prefContext);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
-
-        mIsRestricted = isUiRestricted();
-
-        mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
-        mBgThread.start();
     }
 
     @Override
@@ -341,14 +345,18 @@ public class WifiSettings extends RestrictedSettingsFragment
         mWifiTracker.startTracking();
 
         if (mIsRestricted) {
-            if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.wifi_empty_list_user_restricted);
-            }
-            getPreferenceScreen().removeAll();
+            restrictUi();
             return;
         }
 
         onWifiStateChanged(mWifiManager.getWifiState());
+    }
+
+    private void restrictUi() {
+        if (!isUiRestrictedByOnlyAdmin()) {
+            getEmptyTextView().setText(R.string.wifi_empty_list_user_restricted);
+        }
+        getPreferenceScreen().removeAll();
     }
 
     /**
@@ -390,6 +398,15 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onResume() {
         final Activity activity = getActivity();
         super.onResume();
+
+        // Because RestrictedSettingsFragment's onResume potentially requests authorization,
+        // which changes the restriction state, recalculate it.
+        final boolean alreadyImmutablyRestricted = mIsRestricted;
+        mIsRestricted = isUiRestricted();
+        if (!alreadyImmutablyRestricted && mIsRestricted) {
+            restrictUi();
+        }
+
         if (mWifiEnabler != null) {
             mWifiEnabler.resume(activity);
         }
@@ -409,6 +426,19 @@ public class WifiSettings extends RestrictedSettingsFragment
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
         super.onStop();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        final boolean formerlyRestricted = mIsRestricted;
+        mIsRestricted = isUiRestricted();
+        if (formerlyRestricted && !mIsRestricted
+                && getPreferenceScreen().getPreferenceCount() == 0) {
+            // De-restrict the ui
+            addPreferences();
+        }
     }
 
     @Override

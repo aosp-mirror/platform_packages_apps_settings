@@ -114,7 +114,7 @@ public class DatabaseRowTest {
     public void testRowWithInlinePayload_genericPayloadNotAdded() {
         final String URI = "test uri";
         final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
-                1 /* onValue */, null /* intent */, true /* isDeviceSupported */);
+                1 /* onValue */, null /* intent */, true /* isDeviceSupported */, 1 /* default */);
         mBuilder.setPayload(payload);
         final DatabaseRow row = generateRow();
         final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
@@ -133,7 +133,7 @@ public class DatabaseRowTest {
         intent.setComponent(component);
 
         final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
-                1 /* onValue */, intent, true /* isDeviceSupported */);
+                1 /* onValue */, intent, true /* isDeviceSupported */, 1 /* default */);
         mBuilder.setPayload(payload);
         final DatabaseRow row = generateRow();
         final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils

@@ -16,8 +16,8 @@ public class InlineListPayload extends InlinePayload {
     private int mNumOptions;
 
     public InlineListPayload(String key, @PayloadType int payloadType, Intent intent,
-            boolean isDeviceSupported, int numOptions) {
-        super(key, payloadType, intent, isDeviceSupported);
+            boolean isDeviceSupported, int numOptions, int defaultValue) {
+        super(key, payloadType, intent, isDeviceSupported, defaultValue);
         mNumOptions = numOptions;
     }
 

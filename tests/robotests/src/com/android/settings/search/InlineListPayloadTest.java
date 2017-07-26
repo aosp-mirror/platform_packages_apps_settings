@@ -37,7 +37,7 @@ public class InlineListPayloadTest {
         intent.putExtra(intentKey, intentVal);
 
         InlineListPayload payload = new InlineListPayload(uri, source,
-                intent, true /* isAvailable */, 1);
+                intent, true /* isAvailable */, 1 /* numOptions */, 1 /* default */);
 
         final Intent retainedIntent = payload.getIntent();
         assertThat(payload.mSettingKey).isEqualTo(uri);
@@ -80,7 +80,7 @@ public class InlineListPayloadTest {
     public void testInputStandardization_inputDoesntChange() {
         InlineListPayload payload = new InlineListPayload(DUMMY_SETTING,
                 ResultPayload.SettingsSource.SYSTEM, null /* intent */, true /* isDeviceSupport */,
-                3 /* numOptions */);
+                3 /* numOptions */, 0 /* default */);
         int input = 2;
 
         assertThat(payload.standardizeInput(input)).isEqualTo(input);
@@ -90,7 +90,7 @@ public class InlineListPayloadTest {
     public void testSetSystem_negativeValue_throwsError() {
         InlineListPayload payload = new InlineListPayload(DUMMY_SETTING,
                 ResultPayload.SettingsSource.SYSTEM, null /* intent */, true /* isDeviceSupport */,
-                3 /* numOptions */);
+                3 /* numOptions */, 0 /* default */);
 
         payload.setValue(mContext, -1);
     }
@@ -100,7 +100,7 @@ public class InlineListPayloadTest {
         int maxOptions = 4;
         InlineListPayload payload = new InlineListPayload(DUMMY_SETTING,
                 ResultPayload.SettingsSource.SYSTEM, null /* intent */, true /* isDeviceSupport */,
-                maxOptions /* numOptions */);
+                maxOptions /* numOptions */, 0 /* default */);
 
         payload.setValue(mContext, maxOptions + 1);
     }

@@ -133,7 +133,6 @@ public class LocationPreferenceController extends AbstractPreferenceController
 
         return new InlineListPayload(Secure.LOCATION_MODE,
                 ResultPayload.SettingsSource.SECURE, intent, isAvailable(),
-                Secure.LOCATION_MODE_HIGH_ACCURACY + 1);
+                Secure.LOCATION_MODE_HIGH_ACCURACY + 1, Secure.LOCATION_MODE_OFF);
     }
-
 }

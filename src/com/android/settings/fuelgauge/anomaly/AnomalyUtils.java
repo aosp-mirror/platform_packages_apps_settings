@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.VisibleForTesting;
 
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.action.LocationCheckAction;
@@ -28,6 +29,9 @@ import com.android.settings.fuelgauge.anomaly.checker.AnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.BluetoothScanAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility class for anomaly detection
@@ -91,4 +95,27 @@ public class AnomalyUtils {
                 return null;
         }
     }
+
+    /**
+     * Detect whether application with {@code targetPackageName} has anomaly. When
+     * {@code targetPackageName} is null, start detection among all the applications.
+     *
+     * @param batteryStatsHelper contains battery stats, used to detect anomaly
+     * @param policy             contains configuration about anomaly check
+     * @param targetPackageName  represents the app need to be detected
+     * @return the list of anomalies
+     */
+    public List<Anomaly> detectAnomalies(BatteryStatsHelper batteryStatsHelper,
+            AnomalyDetectionPolicy policy, String targetPackageName) {
+        final List<Anomaly> anomalies = new ArrayList<>();
+        for (@Anomaly.AnomalyType int type : Anomaly.ANOMALY_TYPE_LIST) {
+            if (policy.isAnomalyDetectorEnabled(type)) {
+                anomalies.addAll(getAnomalyDetector(type).detectAnomalies(
+                        batteryStatsHelper, targetPackageName));
+            }
+        }
+
+        return anomalies;
+    }
+
 }
