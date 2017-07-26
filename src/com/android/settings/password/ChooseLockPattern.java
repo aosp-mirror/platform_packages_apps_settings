@@ -400,6 +400,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private SaveAndFinishWorker mSaveAndFinishWorker;
         private int mUserId;
+        private boolean mForFingerprint;
 
         private static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
@@ -429,6 +430,8 @@ public class ChooseLockPattern extends SettingsActivity {
                         false, 0, LockPatternUtils.stringToPattern(current), current, mUserId);
             }
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
+            mForFingerprint = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
         }
 
         @Override
@@ -437,6 +440,9 @@ public class ChooseLockPattern extends SettingsActivity {
             final GlifLayout layout = (GlifLayout) inflater.inflate(
                     R.layout.choose_lock_pattern, container, false);
             layout.setHeaderText(getActivity().getTitle());
+            if (mForFingerprint) {
+                layout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
+            }
             return layout;
         }
 
