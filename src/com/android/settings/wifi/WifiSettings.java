@@ -146,8 +146,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     // account creation outside of setup wizard.
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
     // This string extra specifies a network to open the connect dialog on, so the user can enter
-    // network credentials.  This is used by quick settings for secured networks.
-    private static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
+    // network credentials.  This is used by quick settings for secured networks, among other
+    // things.
+    public static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
 
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
@@ -742,6 +743,21 @@ public class WifiSettings extends RestrictedSettingsFragment
         changeNextButtonState(mWifiTracker.isConnected());
     }
 
+    /** Helper method to return whether an AccessPoint is disabled due to a wrong password */
+    private static boolean isDisabledByWrongPassword(AccessPoint accessPoint) {
+        WifiConfiguration config = accessPoint.getConfig();
+        if (config == null) {
+            return false;
+        }
+        WifiConfiguration.NetworkSelectionStatus networkStatus =
+                config.getNetworkSelectionStatus();
+        if (networkStatus == null || networkStatus.isNetworkEnabled()) {
+            return false;
+        }
+        int reason = networkStatus.getNetworkSelectionDisableReason();
+        return WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD == reason;
+    }
+
     private void updateAccessPointPreferences() {
         // in case state has changed
         if (!mWifiManager.isWifiEnabled()) {
@@ -777,10 +793,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                 preference.setKey(key);
                 preference.setOrder(index);
                 if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
-                        && !accessPoint.isSaved()
                         && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
-                    onPreferenceTreeClick(preference);
-                    mOpenSsid = null;
+                    if (!accessPoint.isSaved() || isDisabledByWrongPassword(accessPoint)) {
+                        onPreferenceTreeClick(preference);
+                        mOpenSsid = null;
+                    }
                 }
                 mAccessPointsPreferenceCategory.addPreference(preference);
                 accessPoint.setListener(WifiSettings.this);
