@@ -62,6 +62,8 @@ public class RecentAppsPreferenceController extends PreferenceController
     private static final String TAG = "RecentAppsCtrl";
     private static final String KEY_PREF_CATEGORY = "recent_apps_category";
     @VisibleForTesting
+    static final String KEY_DIVIDER = "all_app_info_divider";
+    @VisibleForTesting
     static final String KEY_SEE_ALL = "all_app_info";
     private static final int SHOW_RECENT_APP_COUNT = 5;
     private static final Set<String> SKIP_SYSTEM_PACKAGES = new ArraySet<>();
@@ -78,6 +80,7 @@ public class RecentAppsPreferenceController extends PreferenceController
 
     private PreferenceCategory mCategory;
     private Preference mSeeAllPref;
+    private Preference mDivider;
     private boolean mHasRecentApps;
 
     static {
@@ -122,12 +125,14 @@ public class RecentAppsPreferenceController extends PreferenceController
         super.updateNonIndexableKeys(keys);
         // Don't index category name into search. It's not actionable.
         keys.add(KEY_PREF_CATEGORY);
+        keys.add(KEY_DIVIDER);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
         mSeeAllPref = screen.findPreference(KEY_SEE_ALL);
+        mDivider = screen.findPreference(KEY_DIVIDER);
         super.displayPreference(screen);
         refreshUi(mCategory.getContext());
     }
@@ -181,6 +186,7 @@ public class RecentAppsPreferenceController extends PreferenceController
 
     private void displayOnlyAppInfo() {
         mCategory.setTitle(null);
+        mDivider.setVisible(false);
         mSeeAllPref.setTitle(R.string.applications_settings);
         mSeeAllPref.setIcon(null);
         int prefCount = mCategory.getPreferenceCount();
@@ -194,6 +200,7 @@ public class RecentAppsPreferenceController extends PreferenceController
 
     private void displayRecentApps(Context prefContext, List<UsageStats> recentApps) {
         mCategory.setTitle(R.string.recent_app_category_title);
+        mDivider.setVisible(true);
         mSeeAllPref.setSummary(null);
         mSeeAllPref.setIcon(R.drawable.ic_chevron_right_24dp);
 
