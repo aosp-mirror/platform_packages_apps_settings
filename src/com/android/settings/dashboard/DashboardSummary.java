@@ -245,10 +245,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onSuggestionDismissed(Tile suggestion) {
-        mAdapter.onSuggestionDismissed();
-        // Refresh the UI to pick up suggestions that can now be shown because, say, a higher
-        // priority suggestion has been dismissed, or an exclusive suggestion category is emptied.
-        rebuildUI();
+        mAdapter.onSuggestionDismissed(suggestion);
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
