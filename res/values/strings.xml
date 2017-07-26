@@ -2040,8 +2040,6 @@
     <string name="wifi_p2p_delete_group_message">Forget this group?</string>
 
     <!-- Wifi AP settings-->
-    <!-- Label for Wifi tether checkbox. Toggles Access Point on/off -->
-    <string name="wifi_tether_checkbox_text">Portable Wi\u2011Fi hotspot</string>
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
     <!-- Summary text when turning hotspot off -->
@@ -2055,13 +2053,13 @@
 
     <!-- Wifi hotspot settings -->
     <!-- Label for Wifi hotspot name. -->
-    <string name="wifi_hotspot_name_title">Wi\u2011Fi name</string>
+    <string name="wifi_hotspot_name_title">Hotspot name</string>
     <!-- Summary for Wifi hotspot name when connection is in progress. -->
     <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>...</string>
     <!-- Summary for Wifi hotspot name when connected. -->
     <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
     <!-- Label for Wifi hotspot password. -->
-    <string name="wifi_hotspot_password_title">Wi\u2011Fi password</string>
+    <string name="wifi_hotspot_password_title">Hotspot password</string>
     <!-- Label for Wifi hotspot AP Band. -->
     <string name="wifi_hotspot_ap_band_title">AP Band</string>
     <!-- Wifi hotspot footer info for regular hotspot [CHAR LIMIT=NONE]-->
@@ -3113,6 +3111,9 @@
 
     <!-- Title for a screen containing all device reset options [CHAR LIMIT=50] -->
     <string name="reset_dashboard_title">Reset options</string>
+
+    <!-- Summary text for a screen containing all device reset options [CHAR LIMIT=None] -->
+    <string name="reset_dashboard_summary">Network, apps, or device can be reset</string>
 
     <!-- Reset Network -->
     <!-- Button title to reset Wi-Fi settings, Mobile data setting, bluetooth settings -->
