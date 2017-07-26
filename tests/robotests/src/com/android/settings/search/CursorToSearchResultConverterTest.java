@@ -220,7 +220,7 @@ public class CursorToSearchResultConverterTest {
         final Intent intent = new Intent();
         intent.putExtra(intentKey, intentVal);
         final InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1 /* onValue */,
-                intent, true /* isDeviceSupported */);
+                intent, true /* isDeviceSupported */, 0 /* defautValue */);
 
         cursor.addRow(new Object[]{
                 KEY.hashCode(),      // Doc ID

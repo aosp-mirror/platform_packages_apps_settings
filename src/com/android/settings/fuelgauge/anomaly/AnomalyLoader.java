@@ -98,15 +98,7 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
                     mUserManager.getUserProfiles());
         }
 
-        final List<Anomaly> anomalies = new ArrayList<>();
-        for (@Anomaly.AnomalyType int type : Anomaly.ANOMALY_TYPE_LIST) {
-            if (mPolicy.isAnomalyDetectorEnabled(type)) {
-                anomalies.addAll(mAnomalyUtils.getAnomalyDetector(type).detectAnomalies(
-                        mBatteryStatsHelper, mPackageName));
-            }
-        }
-
-        return anomalies;
+        return mAnomalyUtils.detectAnomalies(mBatteryStatsHelper, mPolicy, mPackageName);
     }
 
     @VisibleForTesting

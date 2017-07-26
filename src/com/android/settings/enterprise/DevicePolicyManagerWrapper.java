@@ -45,6 +45,13 @@ public interface DevicePolicyManagerWrapper {
     int getMaximumFailedPasswordsForWipe(@Nullable ComponentName admin, int userHandle);
 
     /**
+     * Calls {@code DevicePolicyManager.getDeviceOwnerComponentOnCallingUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnCallingUser
+     */
+    ComponentName getDeviceOwnerComponentOnCallingUser();
+
+    /**
      * Calls {@code DevicePolicyManager.getDeviceOwnerComponentOnAnyUser()}.
      *
      * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnAnyUser

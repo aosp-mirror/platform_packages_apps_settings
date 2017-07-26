@@ -30,6 +30,8 @@ import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import static android.provider.Settings.Secure.DOZE_PULSE_ON_PICK_UP;
+
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
     private final int ON = 1;
@@ -37,6 +39,8 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     private static final String PREF_KEY_VIDEO = "gesture_pick_up_video";
     private final String mPickUpPrefKey;
+
+    private final String SECURE_KEY = DOZE_PULSE_ON_PICK_UP;
 
     private final AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
@@ -80,7 +84,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean enabled = (boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.DOZE_PULSE_ON_PICK_UP, enabled ? ON : OFF);
+                SECURE_KEY, enabled ? ON : OFF);
         return true;
     }
 
@@ -95,7 +99,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
                 PickupGestureSettings.class.getName(), mPickUpPrefKey,
                 mContext.getString(R.string.display_settings));
 
-        return new InlineSwitchPayload(Settings.Secure.DOZE_PULSE_ON_PICK_UP,
-                ResultPayload.SettingsSource.SECURE, ON, intent, isAvailable());
+        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
+                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }

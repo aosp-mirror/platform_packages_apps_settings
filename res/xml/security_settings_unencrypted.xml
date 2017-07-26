@@ -18,14 +18,14 @@
                   android:title="@string/crypt_keeper_settings_title">
 
     <PreferenceCategory
-        android:key="security_category"
+        android:key="security_category_for_unencrypted_device"
         android:title="@string/crypt_keeper_settings_title">
 
         <Preference
             android:key="encryption"
             android:title="@string/crypt_keeper_encrypt_title"
             android:fragment="com.android.settings.CryptKeeperSettings" />
-    
+
     </PreferenceCategory>
 
 </PreferenceScreen>

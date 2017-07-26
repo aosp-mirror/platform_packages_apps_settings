@@ -22,13 +22,13 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.DisplaySettings;
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
@@ -37,6 +37,8 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
     private final String mDoubleTapPowerKey;
+
+    private final String SECURE_KEY = CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
     public DoubleTapPowerPreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, lifecycle);
@@ -71,15 +73,14 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? ON : OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, enabled ? ON : OFF);
         return true;
     }
 
     @Override
     protected boolean isSwitchPrefEnabled() {
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
+                SECURE_KEY, ON);
         return cameraDisabled == 0;
     }
 
@@ -89,7 +90,7 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
                 DoubleTapPowerSettings.class.getName(), mDoubleTapPowerKey,
                 mContext.getString(R.string.display_settings));
 
-        return new InlineSwitchPayload(Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
-                ResultPayload.SettingsSource.SECURE, ON, intent, isAvailable());
+        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
+                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }
