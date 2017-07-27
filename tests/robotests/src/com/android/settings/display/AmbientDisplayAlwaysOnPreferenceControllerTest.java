@@ -132,7 +132,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, 0);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, -1);
+        int updatedValue = Settings.Secure.getInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, 1);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }
