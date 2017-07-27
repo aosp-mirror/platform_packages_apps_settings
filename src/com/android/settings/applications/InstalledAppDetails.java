@@ -1058,6 +1058,7 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mBatteryPreference) {
             if (isBatteryStatsAvailable()) {
                 BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
+                entry.defaultPackageName = mPackageName;
                 AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
                         this, mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry,
                         mBatteryPercent, null /* mAnomalies */);
