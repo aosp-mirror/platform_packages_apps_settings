@@ -119,4 +119,16 @@ public class GesturesSettingsPreferenceControllerTest {
         verify(mActivity).getString(R.string.language_input_gesture_summary_on_non_assist);
     }
 
+    @Test
+    @Config(shadows = {ShadowSecureSettings.class})
+    public void updateState_sensorNotAvailable_shouldSetToEmptyStatus() {
+        final FakeFeatureFactory featureFactory =
+                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+        when(featureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
+                .thenReturn(false);
+
+        mController.updateState(mPreference);
+        verify(mPreference).setSummary("");
+    }
+
 }
