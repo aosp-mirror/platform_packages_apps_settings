@@ -356,6 +356,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     fingerprintBackupMessage
                             .setText(R.string.setup_lock_settings_picker_fingerprint_message);
                 }
+                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
             }
 
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mRequestedQuality
