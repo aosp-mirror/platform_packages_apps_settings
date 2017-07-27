@@ -129,7 +129,6 @@ public class FingerprintSettings extends SubSettings {
 
     public static class FingerprintSettingsFragment extends SettingsPreferenceFragment
             implements OnPreferenceChangeListener, FingerprintPreference.OnDeleteClickListener {
-        private static final int MAX_RETRY_ATTEMPTS = 20;
         private static final int RESET_HIGHLIGHT_DELAY_MS = 500;
 
         private static final String TAG = "FingerprintSettings";
@@ -284,6 +283,11 @@ public class FingerprintSettings extends SubSettings {
             if (mRemovalSidecar.inProgress()) {
                 return;
             }
+            // Don't start authentication if ChooseLockGeneric is showing, otherwise if the user
+            // is in FP lockout, a toast will show on top
+            if (mLaunchedConfirm) {
+                return;
+            }
             if (!mInFingerprintLockout) {
                 mFingerprintCancel = new CancellationSignal();
                 mFingerprintManager.authenticate(null, mFingerprintCancel, 0 /* flags */,
@@ -432,6 +436,7 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public void onResume() {
             super.onResume();
+            mInFingerprintLockout = false;
             // Make sure we reload the preference hierarchy since fingerprints may be added,
             // deleted or renamed.
             updatePreferences();
@@ -545,6 +550,7 @@ public class FingerprintSettings extends SubSettings {
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST
                     || requestCode == CONFIRM_REQUEST) {
+                mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     // The lock pin/pattern/password was set. Start enrolling!
                     if (data != null) {
