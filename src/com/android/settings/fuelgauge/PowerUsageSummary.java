@@ -136,7 +136,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     PreferenceGroup mAppListGroup;
-    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
+    @VisibleForTesting
+    BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -381,7 +382,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
-                restartBatteryStatsLoader();
+                restartBatteryStatsLoader(false /* clearHeader */);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -861,8 +862,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     protected void restartBatteryStatsLoader() {
+        restartBatteryStatsLoader(true /* clearHeader */);
+    }
+
+    void restartBatteryStatsLoader(boolean clearHeader) {
         super.restartBatteryStatsLoader();
-        mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
+        if (clearHeader) {
+            mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
+        }
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
