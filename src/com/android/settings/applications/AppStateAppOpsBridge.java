@@ -187,7 +187,11 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      * PermissionState, which describes a particular package.
      */
     private void loadPermissionsStates(SparseArray<ArrayMap<String, PermissionState>> entries) {
-         // Load the packages that have been granted the permission specified in mPermission.
+        // Load the packages that have been granted the permission specified in mPermission.
+        if (entries == null) {
+            return;
+        }
+
         try {
             for (final UserHandle profile : mProfiles) {
                 final int profileId = profile.getIdentifier();
