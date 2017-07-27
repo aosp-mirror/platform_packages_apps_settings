@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -40,13 +39,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.widget.ActionButtonPreference;
+import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -98,10 +98,8 @@ public class AppButtonsPreferenceControllerTest {
     private Application mApplication;
     @Mock
     private PackageInfo mPackageInfo;
-    @Mock
-    private Button mUninstallButton;
-    @Mock
-    private Button mForceStopButton;
+
+    private ActionButtonPreference mButtonPrefs;
 
     private Intent mUninstallIntent;
     private AppButtonsPreferenceController mController;
@@ -129,8 +127,8 @@ public class AppButtonsPreferenceControllerTest {
         mPackageInfo.packageName = PACKAGE_NAME;
         mPackageInfo.applicationInfo = mAppInfo;
 
-        mController.mUninstallButton = mUninstallButton;
-        mController.mForceStopButton = mForceStopButton;
+        mButtonPrefs = ActionButtonPreferenceTest.createMock();
+        mController.mButtonsPref = mButtonPrefs;
         mController.mPackageInfo = mPackageInfo;
 
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
@@ -154,7 +152,6 @@ public class AppButtonsPreferenceControllerTest {
         assertThat(mController.mAppEntry).isNotNull();
         assertThat(mController.mPackageInfo).isNotNull();
     }
-
 
     @Test
     public void testRetrieveAppEntry_noAppEntry_null() throws PackageManager.NameNotFoundException {
@@ -182,13 +179,13 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void testUpdateUninstallButton_isSystemApp_handleAsDisableableButton() {
-        doReturn(false).when(mController).handleDisableable(any());
+        doReturn(false).when(mController).handleDisableable();
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
 
         mController.updateUninstallButton();
 
-        verify(mController).handleDisableable(any());
-        verify(mUninstallButton).setEnabled(false);
+        verify(mController).handleDisableable();
+        verify(mButtonPrefs).setButton1Enabled(false);
     }
 
     @Test
@@ -219,14 +216,14 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void testUpdateUninstallButton_isDeviceAdminApp_setButtonDisable() {
-        doReturn(true).when(mController).handleDisableable(any());
+        doReturn(true).when(mController).handleDisableable();
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
         doReturn(true).when(mDpm).packageHasActiveAdmins(anyString());
 
         mController.updateUninstallButton();
 
-        verify(mController).handleDisableable(any());
-        verify(mUninstallButton).setEnabled(false);
+        verify(mController).handleDisableable();
+        verify(mButtonPrefs).setButton1Enabled(false);
     }
 
     @Test
@@ -235,7 +232,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mUninstallButton).setEnabled(false);
+        verify(mButtonPrefs).setButton1Enabled(false);
     }
 
     @Test
@@ -245,7 +242,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mUninstallButton).setEnabled(false);
+        verify(mButtonPrefs).setButton1Enabled(false);
     }
 
     @Test
@@ -254,7 +251,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mUninstallButton).setEnabled(false);
+        verify(mButtonPrefs).setButton1Enabled(false);
     }
 
     @Test
@@ -264,7 +261,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mUninstallButton).setEnabled(false);
+        verify(mButtonPrefs).setButton1Enabled(false);
     }
 
     @Test
@@ -312,11 +309,10 @@ public class AppButtonsPreferenceControllerTest {
     public void testHandleDisableable_isHomeApp_notControllable() {
         mController.mHomePackages.add(PACKAGE_NAME);
 
-        final boolean controllable = mController.handleDisableable(mUninstallButton);
+        final boolean controllable = mController.handleDisableable();
 
-        verify(mUninstallButton).setText(R.string.disable_text);
+        verify(mButtonPrefs).setButton1Text(R.string.disable_text);
         assertThat(controllable).isFalse();
-
     }
 
     @Test
@@ -325,9 +321,9 @@ public class AppButtonsPreferenceControllerTest {
         mAppEntry.info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
         doReturn(false).when(mController).isSystemPackage(any(), any(), any());
 
-        final boolean controllable = mController.handleDisableable(mUninstallButton);
+        final boolean controllable = mController.handleDisableable();
 
-        verify(mUninstallButton).setText(R.string.disable_text);
+        verify(mButtonPrefs).setButton1Text(R.string.disable_text);
         assertThat(controllable).isTrue();
 
     }
@@ -338,9 +334,9 @@ public class AppButtonsPreferenceControllerTest {
         mAppEntry.info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
         doReturn(false).when(mController).isSystemPackage(any(), any(), any());
 
-        final boolean controllable = mController.handleDisableable(mUninstallButton);
+        final boolean controllable = mController.handleDisableable();
 
-        verify(mUninstallButton).setText(R.string.enable_text);
+        verify(mButtonPrefs).setButton1Text(R.string.enable_text);
         assertThat(controllable).isTrue();
     }
 
@@ -356,7 +352,7 @@ public class AppButtonsPreferenceControllerTest {
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
      */
-    private static class TestFragment extends Fragment implements
+    public static class TestFragment extends Fragment implements
             ButtonActionDialogFragment.AppButtonsDialogListener {
 
         @Override

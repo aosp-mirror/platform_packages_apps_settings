@@ -58,6 +58,7 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.vpn2.ConnectivityManagerWrapper;
+import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -127,10 +128,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     // UI elements - in order of appearance
-    private LayoutPreference mButtonsPref;
+    private ActionButtonPreference mButtonsPref;
     private EntityHeaderController mEntityHeaderController;
-    private Button mForgetButton;
-    private Button mSignInButton;
     private WifiDetailPreference mSignalStrengthPref;
     private WifiDetailPreference mLinkSpeedPref;
     private WifiDetailPreference mFrequencyPref;
@@ -244,9 +243,13 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         setupEntityHeader(screen);
 
-        mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
-        mSignInButton = mButtonsPref.findViewById(R.id.signin_button);
-        mSignInButton.setOnClickListener(view -> signIntoNetwork());
+        mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_BUTTONS_PREF))
+                .setButton1Text(R.string.forget)
+                .setButton1Positive(false)
+                .setButton2Text(R.string.support_sign_in_button_text)
+                .setButton1OnClickListener(view -> forgetNetwork())
+                .setButton2Positive(true)
+                .setButton2OnClickListener(view -> signIntoNetwork());
 
         mSignalStrengthPref =
                 (WifiDetailPreference) screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
@@ -264,8 +267,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
-        mForgetButton = mButtonsPref.findViewById(R.id.forget_button);
-        mForgetButton.setOnClickListener(view -> forgetNetwork());
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
@@ -318,7 +319,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         }
 
         // Update whether the forgot button should be displayed.
-        mForgetButton.setVisibility(canForgetNetwork() ? View.VISIBLE : View.INVISIBLE);
+        mButtonsPref.setButton1Visible(canForgetNetwork());
 
         refreshNetworkState();
 
@@ -393,9 +394,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private void updateIpLayerInfo() {
-        mSignInButton.setVisibility(canSignIntoNetwork() ? View.VISIBLE : View.INVISIBLE);
-        mButtonsPref.setVisible(mForgetButton.getVisibility() == View.VISIBLE
-                || mSignInButton.getVisibility() == View.VISIBLE);
+        mButtonsPref.setButton2Visible(canSignIntoNetwork());
+        mButtonsPref.setVisible(canSignIntoNetwork() || canForgetNetwork());
 
         if (mNetwork == null || mLinkProperties == null) {
             mIpAddressPref.setVisible(false);
