@@ -64,6 +64,7 @@ public class GesturesSettingPreferenceController extends AbstractPreferenceContr
     public void updateState(Preference preference) {
         if (!mFeatureProvider.isSensorAvailable(mContext)) {
             preference.setSummary("");
+            return;
         }
         final ContentResolver contentResolver = mContext.getContentResolver();
         final boolean assistGestureEnabled = Settings.Secure.getInt(
