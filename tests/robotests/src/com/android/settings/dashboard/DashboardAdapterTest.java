@@ -325,17 +325,33 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestioDismissed_notOnlySuggestion_doNothing() {
+    public void testSuggestioDismissed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null, null, null, null));
-        adapter.setCategoriesAndSuggestions(
-                new ArrayList<>(), makeSuggestions("pkg1", "pkg2", "pkg3"));
+        final List<Tile> suggestions = makeSuggestions("pkg1", "pkg2", "pkg3");
+        adapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
+
+        final RecyclerView data = mock(RecyclerView.class);
+        when(data.getResources()).thenReturn(mResources);
+        when(data.getContext()).thenReturn(mContext);
+        when(mResources.getDisplayMetrics()).thenReturn(mock(DisplayMetrics.class));
+        final View itemView = mock(View.class);
+        when(itemView.findViewById(R.id.data)).thenReturn(data);
+        final DashboardAdapter.SuggestionAndConditionContainerHolder holder =
+                new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
+
+        adapter.onBindConditionAndSuggestion(
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
+
         final DashboardData dashboardData = adapter.mDashboardData;
         reset(adapter); // clear interactions tracking
 
-        adapter.onSuggestionDismissed();
+        final Tile suggestionToRemove = suggestions.get(1);
+        adapter.onSuggestionDismissed(suggestionToRemove);
 
         assertThat(adapter.mDashboardData).isEqualTo(dashboardData);
+        assertThat(suggestions.size()).isEqualTo(2);
+        assertThat(suggestions.contains(suggestionToRemove)).isFalse();
         verify(adapter, never()).notifyDashboardDataChanged(any());
     }
 
@@ -343,11 +359,12 @@ public class DashboardAdapterTest {
     public void testSuggestioDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null, null, null, null));
-        adapter.setCategoriesAndSuggestions(new ArrayList<>(), makeSuggestions("pkg1"));
+        final List<Tile> suggestions = makeSuggestions("pkg1");
+        adapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
         final DashboardData dashboardData = adapter.mDashboardData;
         reset(adapter); // clear interactions tracking
 
-        adapter.onSuggestionDismissed();
+        adapter.onSuggestionDismissed(suggestions.get(0));
 
         assertThat(adapter.mDashboardData).isNotEqualTo(dashboardData);
         verify(adapter).notifyDashboardDataChanged(any());
@@ -367,6 +384,16 @@ public class DashboardAdapterTest {
         mDashboardAdapter.setCategoriesAndSuggestions(Collections.emptyList(), packages);
 
         verify(mockIcon).setTint(eq(0x89000000));
+    }
+
+    @Test
+    public void testSetCategoriesAndSuggestions_limitSuggestionSize() {
+        List<Tile> packages =
+                makeSuggestions("pkg1", "pkg2", "pkg3", "pkg4", "pkg5", "pkg6", "pkg7");
+        mDashboardAdapter.setCategoriesAndSuggestions(Collections.emptyList(), packages);
+
+        assertThat(mDashboardAdapter.mDashboardData.getSuggestions().size())
+                .isEqualTo(DashboardAdapter.MAX_SUGGESTION_TO_SHOW);
     }
 
     @Test
