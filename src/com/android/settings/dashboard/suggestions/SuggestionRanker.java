@@ -34,13 +34,13 @@ public class SuggestionRanker {
     // by training a binary classifier to detect the clicked items. The higher the obtained
     // relevance metric, the higher chance of getting clicked.
     private static final Map<String, Double> WEIGHTS = new HashMap<String, Double>() {{
-        put(SuggestionFeaturizer.FEATURE_IS_SHOWN, 4.07506758256);
-        put(SuggestionFeaturizer.FEATURE_IS_DISMISSED, 2.11535473578);
-        put(SuggestionFeaturizer.FEATURE_IS_CLICKED, 1.21885461304);
-        put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_SHOWN, 3.18832024515);
-        put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_DISMISSED, 1.09902706645);
-        put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_CLICKED, 0.262631082877);
-        put(SuggestionFeaturizer.FEATURE_SHOWN_COUNT, -220.4361849);
+        put(SuggestionFeaturizer.FEATURE_IS_SHOWN, 5.05140842519);
+        put(SuggestionFeaturizer.FEATURE_IS_DISMISSED, 2.29641455171);
+        put(SuggestionFeaturizer.FEATURE_IS_CLICKED, -2.98812233623);
+        put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_SHOWN, 5.02807250202);
+        put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_DISMISSED, 2.49589700842);
+        put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_CLICKED, -4.3377039948);
+        put(SuggestionFeaturizer.FEATURE_SHOWN_COUNT, -2.35993512546);
     }};
 
     private final SuggestionFeaturizer mSuggestionFeaturizer;
