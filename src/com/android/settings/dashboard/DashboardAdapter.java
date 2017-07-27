@@ -67,6 +67,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
     @VisibleForTesting
     static final int SUGGESTION_CONDITION_HEADER_POSITION = 0;
+    @VisibleForTesting
+    static final int MAX_SUGGESTION_TO_SHOW = 5;
 
     private final IconCache mCache;
     private final Context mContext;
@@ -174,7 +176,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
-                .setSuggestions(suggestions)
+                .setSuggestions(suggestions.subList(0,
+                        Math.min(suggestions.size(), MAX_SUGGESTION_TO_SHOW)))
                 .setCategories(categories)
                 .build();
         notifyDashboardDataChanged(prevData);
@@ -215,9 +218,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDashboardDataChanged(prevData);
     }
 
-    public void onSuggestionDismissed() {
+    public void onSuggestionDismissed(Tile suggestion) {
         final List<Tile> suggestions = mDashboardData.getSuggestions();
-        if (suggestions != null && suggestions.size() == 1) {
+        if (suggestions == null || suggestions.isEmpty()) {
+            return;
+        }
+        if (suggestions.size() == 1) {
             // The only suggestion is dismissed, and the the empty suggestion container will
             // remain as the dashboard item. Need to refresh the dashboard list.
             final DashboardData prevData = mDashboardData;
@@ -225,6 +231,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     .setSuggestions(null)
                     .build();
             notifyDashboardDataChanged(prevData);
+        } else {
+            suggestions.remove(suggestion);
+            mSuggestionAdapter.notifyDataSetChanged();
         }
     }
 
