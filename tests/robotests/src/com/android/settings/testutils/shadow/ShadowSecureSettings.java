@@ -89,6 +89,32 @@ public class ShadowSecureSettings {
         }
     }
 
+    @Implementation
+    public static boolean putFloatForUser(
+            ContentResolver resolver, String name, float value, int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            userTable.put(userHandle, name, value);
+            return true;
+        }
+    }
+
+    @Implementation
+    public static float getFloatForUser(
+            ContentResolver resolver, String name, float def, int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            final Object object = userTable.get(userHandle, name);
+            return object instanceof Float ? (Float) object : def;
+        }
+    }
+
+    public static void clear() {
+        synchronized (sUserDataMap) {
+            sUserDataMap.clear();
+        }
+    }
+
     private static Table<Integer, String, Object> getUserTable(ContentResolver contentResolver) {
         synchronized (sUserDataMap) {
             Table<Integer, String, Object> table = sUserDataMap.get(contentResolver);
