@@ -28,11 +28,11 @@ import android.support.annotation.VisibleForTesting;
 
 public class UsbBackend {
 
-    private static final int MODE_POWER_MASK  = 0x01;
+    public static final int MODE_POWER_MASK  = 0x01;
     public static final int MODE_POWER_SINK   = 0x00;
     public static final int MODE_POWER_SOURCE = 0x01;
 
-    private static final int MODE_DATA_MASK  = 0x03 << 1;
+    public static final int MODE_DATA_MASK  = 0x03 << 1;
     public static final int MODE_DATA_NONE   = 0x00 << 1;
     public static final int MODE_DATA_MTP    = 0x01 << 1;
     public static final int MODE_DATA_PTP    = 0x02 << 1;
@@ -53,7 +53,7 @@ public class UsbBackend {
     }
 
     @VisibleForTesting
-    UsbBackend(Context context, UserRestrictionUtil userRestrictionUtil) {
+    public UsbBackend(Context context, UserRestrictionUtil userRestrictionUtil) {
         mContext = context;
         mUsbManager = context.getSystemService(UsbManager.class);
 
