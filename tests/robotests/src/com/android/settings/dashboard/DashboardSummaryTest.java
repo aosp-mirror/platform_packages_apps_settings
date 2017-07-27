@@ -118,9 +118,8 @@ public class DashboardSummaryTest {
     }
 
     @Test
-    public void onSuggestionDismissed_categoryShouldBeRefreshed() {
-        doNothing().when(mSummary).rebuildUI();
+    public void onSuggestionDismissed_shouldNotRebuildUI() {
         mSummary.onSuggestionDismissed(mock(Tile.class));
-        verify(mSummary).rebuildUI();
+        verify(mSummary, never()).rebuildUI();
     }
 }
