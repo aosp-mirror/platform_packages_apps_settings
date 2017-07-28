@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"A(z) %1$s hozzáférést kér üzeneteihez. Biztosítja a(z) %2$s számára a hozzáférést?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM-hozzáférési kérelem"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"A következő eszköz szeretne hozzáférni az Ön SIM kártyájához: <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>. A hozzáférés megadásával letiltja eszközén az adatkapcsolatot a csatlakozás idejére. Hozzáférés megadása a következőnek: <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"A többi eszköz számára „<xliff:g id="DEVICE_NAME">^1</xliff:g>” néven jelenik meg"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Más eszközök számára a következőként látható: „<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Eszközei"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Új eszköz párosítása"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dátum és idő"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"A vezeték nélküli router biztonsági beállítása (TKIP) nem támogatott."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Azonsítási hiba. Kérjük, próbálja újra."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Egy másik WPS-munkamenetet észleltünk. Kérjük, próbálkozzon újra néhány perc múlva."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Hálózat neve"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID megadása"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Biztonság"</string>
@@ -846,8 +848,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Speciális Wi-Fi-beállítások"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-cím"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP-cím"</string>
-    <!-- no translation found for wifi_details_title (3471132676909349382) -->
-    <skip />
+    <string name="wifi_details_title" msgid="3471132676909349382">"Hálózati információ"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Alhálózati maszk"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6-címek"</string>
@@ -880,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Törli a meghívást?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Szeretné törölni a(z) <xliff:g id="PEER_NAME">%1$s</xliff:g> eszközhöz való csatlakozásra vonatkozó meghívást?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Elfelejtse ezt a csoportot?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Hordozható wifi-hotspot"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wifi-hotspot"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Nincs internet- és tartalommegosztás más eszközökkel"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Táblagép internetkapcsolatának megosztása hotspoton keresztül"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Telefon internetkapcsolatának megosztása hotspoton keresztül"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Az alkalmazás tartalmat oszt meg. Internetkapcsolat megosztásához kapcsolja ki, majd újra be a hotspotot."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi-Fi-név"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Hotspot neve"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> bekapcsolása…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Más eszközök is csatlakozhatnak a(z) <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> hotspothoz"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi-jelszó"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Hotspot jelszava"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-sáv"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Hotspot használatával hozzon létre Wi‑Fi-hálózatot további eszközei számára. A hotspot internetet biztosít mobiladat-kapcsolata használatával. A szolgáltató további díjat számíthat fel."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Az alkalmazások létrehozhatnak hotspotokat tartalom megosztására a közeli eszközökkel."</string>
@@ -995,8 +995,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Keresés"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Keresési beállítások és előzmények kezelése"</string>
     <string name="search_settings_no_results" msgid="8799027492641230999">"Nincs találat"</string>
-    <!-- no translation found for search_clear_history (4196658962573162457) -->
-    <skip />
+    <string name="search_clear_history" msgid="4196658962573162457">"Előzmények törlése"</string>
     <string name="display_settings" msgid="7965901687241669598">"Megjelenítés"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Automatikus képernyőforgatás"</string>
     <string name="color_mode_title" msgid="3159275920408338215">"Élénk színek"</string>
@@ -1330,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Visszaállítás alaphelyzetbe"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Az alapértelmezett APN-beállítások visszaállítása befejeződött."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Beállítások visszaállítása"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Visszaállítható a hálózat, az alkalmazások és az eszköz"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"A Wi-Fi, a mobiladatok és a Bluetooth beállításainak visszaállítása"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Az összes hálózati beállítást visszaállítja, például a következőket:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiladat"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Beállítások visszaállítása"</string>
@@ -2355,8 +2355,7 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="TOTAL">%2$d</xliff:g>/<xliff:g id="NUMBER">%1$d</xliff:g> kiválasztva"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="TOTAL">%2$s</xliff:g>/<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"Az összes kijelölése"</string>
-    <!-- no translation found for data_plan_usage_manage_plans_button_text (8997761990902708162) -->
-    <skip />
+    <string name="data_plan_usage_manage_plans_button_text" msgid="8997761990902708162">"Előfizetések kezelése"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Adathasználat"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Alkalmazás adathasználata"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"A szolgáltató adatszámlálási módja eltérhet az eszközétől."</string>
@@ -2442,12 +2441,9 @@
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobilhálózatok"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Forgalomkorlátos Wi-Fi-hálózatok"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Forgalomkorlátos hálózat kiválasztásához kapcsolja be a Wi-Fit."</string>
-    <!-- no translation found for data_usage_metered_auto (1262028400911918865) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_yes (9217539611385225894) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_no (4025232961929071789) -->
-    <skip />
+    <string name="data_usage_metered_auto" msgid="1262028400911918865">"Automatikus"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Mért"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"Nem mért"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"A szolgáltató adatszámlálási módja eltérhet az eszközétől."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Segélyhívás"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Hívás folytatása"</string>
@@ -2850,8 +2846,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Csak ébresztések"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Teljes némítás"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Megjelenő értesítések tiltása"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Munkaprofil hangebállításai"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Személyes profil hangjainak használata"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"A munkahelyi és a személyes profil hangjai megegyeznek"</string>
@@ -3012,8 +3007,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Csak a megcsillagozott névjegyektől"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Senkitől"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Riasztások"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Az ébresztések kiemeltek, hangjelzéssel járnak"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Emlékeztetők"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Események"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Minden hívó"</string>
@@ -3491,7 +3485,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Törlés és konvertálás"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Visszaállítja a ShortcutManager gyakoriságkorlátozását"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"A ShortcutManager gyakoriságkorlátozása visszaállítva"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Lezárási képernyő értesítéseinek kezelése"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Összes"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Súgó és tippek"</string>
@@ -3499,8 +3494,7 @@
     <string name="premium_sms_none" msgid="8268105565738040566">"Egy telepített alkalmazás sem kért hozzáférést a Prémium sms-ekhez"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"A Prémium sms-ek használata pénzbe kerülhet Önnek, és a szolgáltató által kiállított számlák végösszegét növeli. Ha engedélyt ad valamelyik alkalmazásnak, akkor azzal lehetősége lesz prémium sms-eket küldeni."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Prémium sms-hozzáférés"</string>
-    <!-- no translation found for bluetooth_disabled (6244000672828617410) -->
-    <skip />
+    <string name="bluetooth_disabled" msgid="6244000672828617410">"Kikapcsolva"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"A(z) <xliff:g id="ID_1">%1$s</xliff:g> eszközhöz csatlakozik"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Több eszközhöz csatlakozik"</string>
     <string name="demo_mode" msgid="2798762752209330277">"A rendszer kezelőfelületének demómódja"</string>

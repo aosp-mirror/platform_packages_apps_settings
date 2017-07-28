@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s muốn truy cập tin nhắn của bạn. Bạn có muốn cấp quyền truy cập cho %2$s không?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Yêu cầu truy cập SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> muốn truy cập vào thẻ SIM của bạn. Cấp quyền truy cập vào thẻ SIM sẽ vô hiệu hóa khả năng kết nối dữ liệu trên thiết bị của bạn trong suốt thời gian kết nối. Cấp quyền truy cập vào <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Hiển thị là <xliff:g id="DEVICE_NAME">^1</xliff:g> với các thiết bị khác"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Hiển thị là \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" với các thiết bị khác"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Thiết bị của bạn"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Ghép nối thiết bị mới"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Ngày và giờ"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Cài đặt bảo mật bộ định tuyến không dây (TKIP) không được hỗ trợ"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Xác thực không thành công. Vui lòng thử lại."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Đã phát hiện một phiên WPS khác. Vui lòng thử lại sau ít phút."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Tên mạng"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Nhập SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Bảo mật"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Hủy lời mời?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Bạn có muốn hủy lời mời kết nối với <xliff:g id="PEER_NAME">%1$s</xliff:g> không?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Bỏ qua nhóm này?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Điểm phát sóng Wi‑Fi di động"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Điểm phát sóng Wi‑Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Không chia sẻ Internet hoặc nội dung với các thiết bị khác"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Chia sẻ kết nối Internet của máy tính bảng này qua điểm phát sóng"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Chia sẻ kết nối Internet của điện thoại này qua điểm phát sóng"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Ứng dụng đang chia sẻ nội dung. Để chia sẻ kết nối Internet, hãy tắt điểm phát sóng, rồi bật lại"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Tên Wi-Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Tên điểm phát sóng"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Đang bật <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Các thiết bị khác có thể kết nối với <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Mật khẩu Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Mật khẩu điểm phát sóng"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Băng tần AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Sử dụng điểm phát sóng để tạo mạng Wi-Fi cho các thiết bị khác của bạn. Điểm phát sóng cung cấp kết nối Internet bằng kết nối dữ liệu di động của bạn. Bạn có thể mất thêm phí dữ liệu di động."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Ứng dụng có thể tạo một điểm phát sóng để chia sẻ nội dung với các thiết bị lân cận."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Đặt lại về mặc định"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Đặt lại cài đặt APN mặc định đã hoàn tất."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Tùy chọn đặt lại"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Có thể đặt lại mạng, ứng dụng hoặc thiết bị"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Đặt lại Wi-Fi, thiết bị di động và Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Tác vụ này sẽ đặt lại tất cả cài đặt mạng, bao gồm:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dữ liệu di động"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Đặt lại cài đặt"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Chỉ báo thức"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Hoàn toàn tắt tiếng"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Ngăn gián đoạn hình ảnh"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Âm thanh hồ sơ công việc"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Sử dụng âm thanh hồ sơ cá nhân"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Âm thanh giống nhau cho hồ sơ cá nhân và công việc"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Chỉ từ các liên hệ có gắn dấu sao"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Không có"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Báo thức"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Báo thức luôn được ưu tiên và phát ra âm thanh"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Lời nhắc"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Sự kiện"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Tất cả người gọi"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Xóa và chuyển đổi"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Đặt lại giới hạn tốc độ trong ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Đã đặt lại giới hạn tốc độ trong ShortcutManager"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Kiểm soát thông báo trên màn hình khóa"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Hiển thị hoặc ẩn nội dung thông báo"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tất cả"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Hỗ trợ và mẹo"</string>

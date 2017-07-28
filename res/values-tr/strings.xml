@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s, iletilerinize erişmek istiyor. %2$s için erişim izni veriyor musunuz?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM\'e erişim isteği"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, SIM kartınıza erişmek istiyor. SIM karta erişim vermek, bağlantı süresince cihazınızın veri bağlantısını devre dışı bırakır. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> adlı cihaza bağlantı verin"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Diğer cihazlar tarafından \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" olarak görülüyor"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Diğer cihazlara \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" olarak görünür"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Cihazlarınız"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Yeni cihaz eşle"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Tarih ve saat"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Kablosuz yönlendirici güvenlik ayarı (TKIP) desteklenmiyor"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Kimlik doğrulama başarısız oldu. Lütfen tekrar deneyin."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Başka bir WPS oturumu saptandı. Lütfen birkaç dakika sonra tekrar deneyin."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Ağ adı"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID\'yi girin"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Güvenlik"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Davetiye iptal edilsin mi?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g> cihazına bağlanma davetiyesini iptal etmek istiyor musunuz?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Bu grup unutulsun mu?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Taşınabilir Kablosuz hotspot"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Kablosuz hotspot"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Diğer cihazlarla içerik veya internet paylaşılmıyor"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Bu tabletin internet bağlantısı hotspot üzerinden paylaşılıyor"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Bu telefonun internet bağlantısı hotspot üzerinden paylaşılıyor"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Uygulama içerik paylaşıyor. İnternet bağlantısını paylaşmak için hotspot\'u kapatıp tekrar açın"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Kablosuz ağ adı"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Hotspot adı"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> etkinleştiriliyor..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Diğer cihazlar şuna bağlanabilir: <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Kablosuz ağ şifresi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Hotspot şifresi"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Erişim Noktası Bandı"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Diğer cihazlarınıza yönelik kablosuz ağ oluşturmak için hotspot\'u kullanın. Hotspot, mobil veri bağlantınızı kullanarak internet bağlantısı sağlar. Bunun için ek mobil veri ücretleri uygulanabilir."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Uygulamalar yakınlardaki cihazlarla içerik paylaşmak için bir hotspot oluşturabilir."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Varsayılana sıfırla"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Varsayılan APN ayarlarına sıfırlama tamamlandı."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Seçenekleri sıfırlayın"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Ağ uygulamaları veya cihaz sıfırlanabilir"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Kablosuz, mobil ve Bluetooth\'u sıfırla"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Bu sıfırlama işlemi, aşağıdakiler de dahil olmak üzere tüm ağ ayarlarınızı sıfırlayacaktır:\n\n"<li>"Kablosuz ağ"</li>\n<li>"Mobil veri"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Ayarları sıfırla"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Yalnızca alarmlar"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Tamamen sessiz"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Görsel bildirimleri engelle"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"İş profili sesleri"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Kişi. profil seslerini kullan"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Sesler, iş profili ve kişisel profil için aynıdır"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Yalnızca yıldızlı kişilerden"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Hiçbiri"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmlar"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmlar her zaman öncelikli ve sesli"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Hatırlatıcılar"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Etkinlikler"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Tüm arayanlar"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Sil ve dönüştür"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager hız sınırlamasını sıfırla"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager hız sınırlaması sıfırlandı"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Kilit ekranı bildirimlerini kontrol edin"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bildirim içeriğini gösterin veya gizleyin"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tümü"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Destek ve ipuçları"</string>

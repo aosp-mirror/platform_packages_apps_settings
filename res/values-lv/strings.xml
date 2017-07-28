@@ -167,7 +167,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"Ierīce “%1$s” vēlas piekļūt jūsu ziņojumiem. Vai sniegt piekļuvi ierīcei “%2$s”?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Pieprasījums piekļūt SIM kartei"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> pieprasa piekļuvi SIM kartei. Piešķirot piekļuvi SIM kartei, savienojuma laikā ierīcē tiks atspējota datu savienojamība. Piešķirt piekļuvi ierīcei <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Citām ierīcēm redzama kā “<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Citām ierīcēm redzama kā “<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Jūsu ierīces"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Savienošana pārī ar jaunu ierīci"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datums un laiks"</string>
@@ -792,6 +792,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Bezvadu maršrutētāja drošības iestatījums (TKIP) netiek atbalstīts."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentificēšana neizdevās. Lūdzu, mēģiniet vēlreiz."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Tika noteikta cita WPS sesija. Lūdzu, pēc dažām minūtēm mēģiniet vēlreiz."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Tīkla nosaukums"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Ievadiet SSID."</string>
     <string name="wifi_security" msgid="6603611185592956936">"Drošība"</string>
@@ -858,8 +860,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Papildu Wi-Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC adrese"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP adrese"</string>
-    <!-- no translation found for wifi_details_title (3471132676909349382) -->
-    <skip />
+    <string name="wifi_details_title" msgid="3471132676909349382">"Tīkla informācija"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Apakštīkla maska"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 adreses"</string>
@@ -892,16 +893,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Vai atcelt uzaicinājumu?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Vai vēlaties atcelt uzaicinājumu izveidot savienojumu ar ierīci <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Vai aizmirst šo grupu?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Pārnēsājams Wi-Fi tīklājs"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi tīklājs"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Nenotiek interneta vai satura kopīgošana ar citām ierīcēm"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Šī planšetdatora interneta savienojums tiek kopīgots, izmantojot tīklāju"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Šī tālruņa interneta savienojums tiek kopīgots, izmantojot tīklāju"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Lietotne kopīgo saturu. Lai kopīgotu interneta savienojumu, izslēdziet un ieslēdziet tīklāju"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi nosaukums"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Tīklāja nosaukums"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Notiek tīklāja <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ieslēgšana..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Citas ierīces var savienot ar tīklāju <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi parole"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Tīklāja parole"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Piekļuves punkta josla"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Izmantojiet tīklāju, lai izveidotu Wi‑Fi tīklu citām savām ierīcēm. Tīklājs nodrošina internetu, izmantojot mobilo datu savienojumu. Var tikt piemērota papildu maksa par mobilo datu pārraidi."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Lietotnes var izveidot tīklāju satura kopīgošanai ar tuvumā esošajām ierīcēm."</string>
@@ -1007,8 +1007,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Meklēt"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Meklēšanas iestatījumu un vēstures pārvaldība"</string>
     <string name="search_settings_no_results" msgid="8799027492641230999">"Nav rezultātu"</string>
-    <!-- no translation found for search_clear_history (4196658962573162457) -->
-    <skip />
+    <string name="search_clear_history" msgid="4196658962573162457">"Dzēst vēsturi"</string>
     <string name="display_settings" msgid="7965901687241669598">"Attēls"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Automātiska ekrāna pagriešana"</string>
     <string name="color_mode_title" msgid="3159275920408338215">"Izteiksmīgas krāsas"</string>
@@ -1343,6 +1342,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Atiestatīt noklusējuma vērtības"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Noklusējuma APN iestatījumu atiestatīšana ir pabeigta."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Atiestatīšanas opcijas"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Var atiestatīt tīklu, lietotnes vai ierīci"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Atiestatīt Wi-Fi, mobilo datu un Bluetooth iestatījumus"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Tādējādi tiks atiestatīti visi tīkla iestatījumi, tostarp:\n\n"<li>"Wi‑Fi;"</li>\n<li>"mobilie dati;"</li>\n<li>"Bluetooth."</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Atiestatīt iestatījumus"</string>
@@ -2375,8 +2375,7 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"Atlasīti <xliff:g id="NUMBER">%1$d</xliff:g> no <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g> no <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"Atlasīt visu"</string>
-    <!-- no translation found for data_plan_usage_manage_plans_button_text (8997761990902708162) -->
-    <skip />
+    <string name="data_plan_usage_manage_plans_button_text" msgid="8997761990902708162">"Pārvaldīt plānus"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datu lietojums"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Lietotnes datu lietojums"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Mobilo sakaru operatora datu uzskaite var atšķirties no datu uzskaites ierīcē."</string>
@@ -2462,12 +2461,9 @@
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mobilie tīkli"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Wi-Fi maksas tīkli"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Lai atlasītu maksas tīklus, ieslēdziet Wi-Fi."</string>
-    <!-- no translation found for data_usage_metered_auto (1262028400911918865) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_yes (9217539611385225894) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_no (4025232961929071789) -->
-    <skip />
+    <string name="data_usage_metered_auto" msgid="1262028400911918865">"Automātiski"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Maksas"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"Nav maksas"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Mobilo sakaru operatora datu uzskaite var atšķirties no datu uzskaites ierīcē."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Ārkārtas zvans"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Atgriezties pie zvana"</string>
@@ -2876,8 +2872,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Tikai signāli"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Pilnīgs klusums"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloķēt vizuālos traucējumus"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Darba profila signāli"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Personiskā profila signāli"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Darba profila signāli ir tādi paši kā personiskā profila signāli."</string>
@@ -3041,8 +3036,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Tikai no kontaktpersonām ar zvaigznīti"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Nav"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Signāli"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Signāliem vienmēr ir prioritāte un skaņa"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Atgādinājumi"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Notikumi"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Visi zvanītāji"</string>
@@ -3535,7 +3529,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Dzēst un pārvērst"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Vai atiestatīt ShortcutManager ātruma ierobežošanu?"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager ātruma ierobežošana ir atiestatīta."</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Bloķēšanas ekrāna paziņojumu kontrole"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Rādīt vai slēpt paziņojumu saturu"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Visas"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Atbalsts un padomi"</string>
@@ -3543,8 +3538,7 @@
     <string name="premium_sms_none" msgid="8268105565738040566">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve maksas īsziņām."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Par maksas īsziņām no jums var tikt iekasēta samaksa, kas tiks pievienota jūsu mobilo sakaru operatora rēķinam. Ja kādai lietotnei iespējosiet piekļuves atļauju, varēsiet sūtīt maksas īsziņas, izmantojot šo lietotni."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Piekļuve maksas īsziņām"</string>
-    <!-- no translation found for bluetooth_disabled (6244000672828617410) -->
-    <skip />
+    <string name="bluetooth_disabled" msgid="6244000672828617410">"Izslēgts"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Izveidots savienojums ar ierīci <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Izveidots savienojums ar vairākām ierīcēm"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistēmas lietotāja saskarnes demonstrācijas režīms"</string>

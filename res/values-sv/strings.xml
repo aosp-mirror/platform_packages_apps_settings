@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vill ha åtkomst till dina meddelanden. Vill du ge %2$s åtkomst?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Begäran om åtkomst till SIM-kort"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vill ha åtkomst till ditt SIM-kort. Om du ger den åtkomst till SIM-kortet inaktiveras dataanslutningen på enheten under tiden som anslutningen är upprättad. Ge <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> åtkomst"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Synlig för andra enheter som <xliff:g id="DEVICE_NAME">^1</xliff:g>"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Synlig för andra enheter som <xliff:g id="DEVICE_NAME">^1</xliff:g>"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Dina enheter"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Koppla en ny enhet"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum och tid"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Säkerhetsinställningen för den trådlösa routern (TKIP) stöds inte"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentiseringsfel. Försök igen."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"En annan WPS-session upptäcktes. Försök igen om några minuter."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Nätverksnamn"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Ange SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Säkerhet"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Avvisa inbjudan?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Vill du avvisa inbjudan att ansluta till <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Vill du glömma den här gruppen?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Mobil Wi-Fi-surfzon"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi-surfzon"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Varken internet eller innehåll delas med andra enheter"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Surfplattans internetanslutning delas via en trådlös surfzon"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Mobilens internetanslutning delas via en trådlös surfzon"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Appen delar innehåll. Om du vill dela internetanslutningen inaktiverar du den trådlösa surfzonen och aktiverar den igen"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi-Fi-namn"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Namn på trådlös surfzon"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Aktiverar <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Andra enheter kan ansluta till <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi-lösenord"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Lösenord för trådlös surfzon"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Använd trådlösa surfzoner för att skapa ett Wi-Fi-nätverk för andra enheter. Med hjälp av surfzonerna ansluts enheterna till internet via din mobils dataanslutning. Ytterligare dataavgifter kan tillkomma."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Trådlösa surfzoner kan också skapas i appar för att dela innehåll med enheter i närheten."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Återställ standardinst."</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Återställning av standardinställningar för APN har slutförts."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Återställningsalternativ"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Nätverk, appar och enheter kan återställas"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Återställ inställningarna för Wi-Fi, mobildata och Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Alla nätverksinställningar återställs, till exempel \n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Återställ inställningar"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Endast alarm"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Helt tyst"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blockera synliga störningar"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Jobbprofilens ljud"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Använd pers. profilens ljud"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Samma ljud används i jobbprofilen och den personliga profilen"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Endast från stjärnmärkta kontakter"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ingen"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarm"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarm är alltid prioriterade och ljuder"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Påminnelser"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Händelser"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Alla ringande"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Rensa och konvertera"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Återställ anropsbegränsning för ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Anropsbegränsningen för ShortcutManager har återställts"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Hantera aviseringar på låsskärmen"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Visa eller dölja innehåll i aviseringar"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alla"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Support och tips"</string>

@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s 想存取您的訊息，要授予 %2$s 存取權嗎？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 卡存取權要求"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> 要存取您的 SIM 卡。如果允許存取 SIM 卡，您裝置上的數據連線將於連線期間停用。允許 <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> 存取"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"您的裝置"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"配對新裝置"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和時間"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"不支援無線路由器安全設定 (TKIP)"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"認證失敗，請再試一次。"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"偵測到其他 WPS 工作階段，請在數分鐘後再試。"</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"網絡名稱"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"輸入 SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"安全性"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"取消邀請？"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"您要取消連接「<xliff:g id="PEER_NAME">%1$s</xliff:g>」的邀請嗎？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"刪除這個群組？"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"可攜式 Wi-Fi 熱點"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi 熱點"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"目前沒有與其他裝置分享互聯網或內容"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"正在透過熱點分享此平板電腦的互聯網連線"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"正在透過熱點分享此手機的互聯網連線"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"應用程式正在分享內容。如要分享互聯網連線，請關閉熱點並重新開啟"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi 名稱"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"熱點名稱"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"正在開啟 <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"其他裝置可以連線至 <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi 密碼"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"熱點密碼"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"存取點頻段"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"使用熱點為其他裝置建立 Wi-Fi 網絡。熱點會使用流動數據連線提供互聯網服務。可能需要支付額外流動數據費用。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"應用程式可以建立熱點，與附近的裝置分享內容。"</string>
@@ -1329,6 +1330,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"重設回預設值"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"重設預設 APN 設定已完成。"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"重設選項"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"網絡、應用程式或裝置可以重設"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"重設 Wi-Fi、流動數據和藍牙"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"此操作會重設所有網絡設定，包括：\n\n"<li>"Wi‑Fi"</li>\n<li>"流動數據"</li>\n<li>"藍牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重設設定"</string>
@@ -2845,8 +2847,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"只限鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"封鎖視覺干擾"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"工作設定檔聲音"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用個人設定檔聲音"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"在工作和個人設定檔中使用相同音效"</string>
@@ -3007,8 +3008,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"只限已加星號的聯絡人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"無"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"鬧鐘"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"鬧鐘永遠可優先發出音效"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活動"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有來電者"</string>
@@ -3486,7 +3486,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除並轉換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"重設 ShortcutManager 的速率限制"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"已重設 ShortcutManager 的速率限制"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"控制上鎖畫面通知"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"顯示或隱藏通知內容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"支援和提示"</string>

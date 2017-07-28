@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s이(가) 메시지에 액세스하려고 합니다. %2$s에 액세스 권한을 제공하시겠습니까?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 액세스 요청"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>이(가) SIM 카드에 액세스하려고 합니다. SIM 카드에 대한 액세스를 허용하면 연결되어 있는 동안 기기의 데이터 연결이 비활성화됩니다. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>에 액세스 권한을 부여하세요."</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"다른 기기에 \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\'(으)로 표시"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"다른 기기에서 \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\'(으)로 표시됩니다."</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"내 기기"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"새 기기와 페어링"</string>
     <string name="date_and_time" msgid="9062980487860757694">"날짜 및 시간"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"무선 공유기 보안 설정(TKIP)은 지원되지 않습니다."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"인증하지 못했습니다. 다시 시도하세요."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"다른 WPS 세션이 감지되었습니다. 잠시 후 다시 시도해 주세요."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"네트워크 이름"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID 입력"</string>
     <string name="wifi_security" msgid="6603611185592956936">"보안"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"초대를 취소하시겠습니까?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g>와(과) 연결하려는 초대를 취소하시겠습니까?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"이 그룹을 삭제할까요?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"휴대용 Wi-Fi 핫스팟"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi 핫스팟"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"다른 기기와 인터넷 또는 콘텐츠를 공유하지 않음"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"핫스팟을 통해 태블릿의 인터넷 연결 공유 중"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"핫스팟을 통해 휴대전화의 인터넷 연결 공유 중"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"앱에서 콘텐츠를 공유하지 않습니다. 인터넷 연결을 공유하려면 핫스팟을 껐다가 켜세요."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi 이름"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"핫스팟 이름"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> 켜는 중..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"다른 기기에서 <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>에 연결할 수 있습니다."</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi 비밀번호"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"핫스팟 비밀번호"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP 대역"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"핫스팟을 사용하여 다른 기기에서 사용할 수 있는 Wi‑Fi 네트워크를 만드세요. 핫스팟은 내 모바일 데이터 연결을 사용하여 인터넷을 제공합니다. 추가 모바일 데이터 요금이 부과될 수 있습니다."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"앱에서 핫스팟을 만들어 주변 기기와 콘텐츠를 공유할 수 있습니다."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"초기화"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"기본 APN 설정을 초기화했습니다."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"옵션 재설정"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"네트워크, 앱, 기기가 재설정될 수 있습니다."</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi, 모바일, 블루투스 재설정"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"이렇게 하면 다음을 포함한 모든 네트워크 설정이 재설정됩니다.\n\n"<li>"Wi‑Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"설정 초기화"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"알람만"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"모두 차단"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"시각적 방해 차단"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"직장 프로필 사운드"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"개인 프로필 사운드 사용"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"직장 프로필과 개인 프로필의 소리가 같습니다."</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"별표 표시한 연락처만"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"없음"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"알람"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"알림이 항상 중요 알림으로 설정되며 소리로 알림"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"알림"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"이벤트"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"모든 발신자"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"삭제 및 변환"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager 대역 제한 기능 재설정"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager 대역 제한 기능이 재설정되었습니다."</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"잠금 화면 알림 제어"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"알림 내용 표시 또는 숨기기"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"전체"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"지원 &amp; 도움말"</string>

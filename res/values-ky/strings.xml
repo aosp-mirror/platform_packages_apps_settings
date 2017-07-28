@@ -165,7 +165,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s сиздин баарлашуу билдирүүлөрүңүзгө жеткиси келет. %2$s уруксат берилсинби?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM карта пайдалануу мүмкүнчүлүгүн суроо"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> SIM картаңызды пайдалануу мүмкүнчүлүгүнө ээ болгусу келет. SIM картаны пайдалануу укугу берилсе, түзмөк SIM картага туташып жатканда дайындарды мобилдик тармак аркылуу өткөрүү кызматтары убактылуу иштебей калат. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> түзмөгүнө SIM картаны пайдалануу мүмкүнчүлүгүн берүү"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Башка түзмөктөргө <xliff:g id="DEVICE_NAME">^1</xliff:g> катары көрүнөт"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Башка түзмөктөргө \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" катары көрүнөт"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Түзмөктөрүңүз"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Жаңы түзмөктү жупташтыруу"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Күн жана убакыт"</string>
@@ -780,6 +780,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Зымсыз роутердин коопсуздук орнотмолору (TKIP) колдоого алынбайт."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Аутентификациядан өткөн жок. Кайрадан аракет кылыңыз."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Башка WPS сессиясы табылды. Бир аздан кийин кайра аракет кылыңыз."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Тармактын аталышы"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID киргизиңиз"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Коопсуздук"</string>
@@ -845,8 +847,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Илгерилетилген Wi‑Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC дареги"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP дарек"</string>
-    <!-- no translation found for wifi_details_title (3471132676909349382) -->
-    <skip />
+    <string name="wifi_details_title" msgid="3471132676909349382">"Тармак жөнүндө маалымат"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Тармак бөлүктөрүнүн маскасы"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 даректери"</string>
@@ -879,16 +880,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Чакыруу жокко чыгарылсынбы?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g> менен байланышууга чакырууну жокко чыгарууну каалайсызбы?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Бул топ унутулсунбу?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Көчмө Wi‑Fi туташуу түйүнү"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi туташуу түйүнү"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Интернет же мазмун башка түзмөктөр менен бөлүшүлгөн жок"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Планшеттин Интернети хотспот аркылуу бөлүшүлүүдө"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Телефондун Интернети хотспот аркылуу бөлүшүлүүдө"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Колдонмо мазмун менен бөлүшүүдө. Интернет байланышы менен бөлүшүү үчүн хотспотту өчүрүп, кайра күйгүзүңүз"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi\'дын аталышы"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Туташуу түйүнүнүн аталышы"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> күйгүзүлүүдө…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Башка түзмөктөр <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> тармагына туташа алышат"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi\'дын сырсөзү"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Туташуу түйүнүнүн сырсөзү"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP жыштыгы"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Башка түзмөктөрүңүз үчүн Wi‑Fi таратуу үчүн хотспот режимин пайдаланыңыз. Хотспот аркылуу башка түзмөктөр сиздин мобилдик Интернетти колдонот. Мобилдик Интернет үчүн кошумча акы алынышы мүмкүн."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Жакын жердеги түзмөктөр менен мазмунду бөлүшүү үчүн колдонмолор хотспот болуп бере алышат."</string>
@@ -994,8 +994,7 @@
     <string name="search_settings" msgid="1910951467596035063">"Издөө"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Издөөнүн жөндөөлөрүн жана таржымалын башкаруу"</string>
     <string name="search_settings_no_results" msgid="8799027492641230999">"Бир да натыйжа жок"</string>
-    <!-- no translation found for search_clear_history (4196658962573162457) -->
-    <skip />
+    <string name="search_clear_history" msgid="4196658962573162457">"Таржымалды тазалоо"</string>
     <string name="display_settings" msgid="7965901687241669598">"Дисплей"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Экранды авто-тегеретүү"</string>
     <string name="color_mode_title" msgid="3159275920408338215">"Ачык түстөр"</string>
@@ -1329,6 +1328,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Баштапкы абалга келтирүү"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Абалкы APN тууралоолорун кайтаруу аяктады."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Баштапкы абалга келтирүү опциялары"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Тармак, колдонмолор же түзмөктү баштапкы абалга келтирсе болот"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi\'ды, мобилдик түзмөктү жана Bluetooth\'ду баштапкы абалга келтирүү"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Ушуну менен тармактын бардык жөндөөлөрү баштапкы абалга келет. Тактап айтканда: \n\n"<li>"Wi‑Fi"</li>\n<li>"Мобилдик Интернет"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Жөндөөлөрдү баштапкы абалга келтирүү"</string>
@@ -2356,8 +2356,7 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="TOTAL">%2$d</xliff:g> ичинен <xliff:g id="NUMBER">%1$d</xliff:g> тандалды"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="TOTAL">%2$s</xliff:g> ичинен <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"Бардыгын тандоо"</string>
-    <!-- no translation found for data_plan_usage_manage_plans_button_text (8997761990902708162) -->
-    <skip />
+    <string name="data_plan_usage_manage_plans_button_text" msgid="8997761990902708162">"Тарифтик план-ы башкаруу"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Дайындардын өткөрүлүшү"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Колдонмонун дайындарынын пайдаланылышы"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Оператор эсептеген дайындар түзмөгүңүздө эсептелген дайындардан айырмаланышы мүмкүн."</string>
@@ -2443,12 +2442,9 @@
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Мобилдик түйүндөр"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Тарифтелген Wi‑Fi тармактары"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Тарифтелген тармактарды тандоо үчүн, Wi‑Fi күйгүзүңүз."</string>
-    <!-- no translation found for data_usage_metered_auto (1262028400911918865) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_yes (9217539611385225894) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_no (4025232961929071789) -->
-    <skip />
+    <string name="data_usage_metered_auto" msgid="1262028400911918865">"Автоматтык"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Трафик ченелет"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"Трафик ченелбейт"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Оператор эсептеген дайындар түзмөгүңүздө эсептелген дайындардан айырмаланышы мүмкүн."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Шашылыш чалуу"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Чалууга кайтуу"</string>
@@ -2851,8 +2847,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Ойготкучтар гана"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Тымтырс"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Визуалдык эскертмелерди бөгөттөө"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Жумуш профилиндеги үндөр"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Жеке профилдин үндөрүн колдонуу"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Жумуш жана жеке профилдер үчүн окшош добуштар колдонулат"</string>
@@ -3013,8 +3008,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Жылдызчаланган байланыштардан гана"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Эч бир"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Ойготкучтар"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Ойготкучтарга артыкчылык берилип, үндөрү чыксын"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Эстеткичтер"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Окуялар"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Бардык чалуучулар"</string>
@@ -3492,7 +3486,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Тазалап туруп өтүү"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager ылдамдыкты чектөөнү баштапкы абалга келтирүү"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager ылдамдыкты чектөө баштапкы абалга келтирилди"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Кулпуланган экрндг эскртмнлрд көзөмөлдөө"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Эскертме мазмунун көрсөтүү же жашыруу"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Бардыгы"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Колдоо жана кеңештер"</string>
@@ -3500,8 +3495,7 @@
     <string name="premium_sms_none" msgid="8268105565738040566">"Орнотулган колдонмолор акы төлөнүүчү SMS пайдаланууга уруксат сураган жок"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Артыкчылыктуу SMS үчүн сизден акы алынып, ал операторуңуздун эсептерине кошулушу мүмкүн. Эгер кайсы бир колдонмого уруксат берсеңиз, ошол колдонмо аркылуу артыкчылыктуу SMS жөнөтө аласыз."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Артыкчылыктуу SMS жөнөтүүгө уруксат"</string>
-    <!-- no translation found for bluetooth_disabled (6244000672828617410) -->
-    <skip />
+    <string name="bluetooth_disabled" msgid="6244000672828617410">"Өчүк"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> менен туташты"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Бир нече түзмөккө туташты"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Тутум интерфейсинин демо режими"</string>

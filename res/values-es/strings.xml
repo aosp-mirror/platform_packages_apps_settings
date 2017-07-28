@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s quiere acceder a tus mensajes. ¿Quieres permitir el acceso a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitud de acceso de SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> quiere acceder a tu tarjeta SIM. Si lo permites, se inhabilitará la conexión de datos del dispositivo durante la conexión. Conceder acceso a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Visible como \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" para otros dispositivos"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Visible como \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" para otros dispositivos"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Tus dispositivos"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Vincular dispositivo nuevo"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Fecha y hora"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"No se admite el ajuste de seguridad del router inalámbrico (protocolo TKIP)."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Se ha producido un error de autenticación. Inténtalo de nuevo."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Se ha detectado otra configuración WPS. Inténtalo de nuevo en unos minutos."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Nombre de la red"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Introduce el SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Seguridad"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"¿Quieres cancelar la invitación?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"¿Quieres cancelar la invitación para conectar con <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"¿Olvidar este grupo?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Crear punto de acceso Wi-Fi"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Punto de acceso Wi-Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"No se está compartiendo la conexión a Internet ni el contenido con otros dispositivos"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Se está compartiendo la conexión a Internet de este tablet mediante un punto de acceso"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Se está compartiendo la conexión a Internet de este teléfono mediante un punto de acceso"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"La aplicación está compartiendo contenido. Para compartir la conexión a Internet, desactiva el punto de acceso y vuelve a activarlo."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Nombre de Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Nombre del punto de acceso"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Activando <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Otros dispositivos pueden conectarse a <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Contraseña de Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Contraseña del punto de acceso"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda de punto de acceso"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Utiliza un punto de acceso con el fin de crear una red Wi-Fi para otros dispositivos. Los puntos de acceso ofrecen acceso a Internet mediante tu conexión de datos móviles. Es posible que se apliquen cargos adicionales por el uso de datos."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Las aplicaciones pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer ajustes"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se ha restablecido la configuración predeterminada de APN."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Recuperar opciones"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Se puede recuperar la configuración de la red, de las aplicaciones o del dispositivo"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Recuperar ajustes de Wi-Fi, red móvil y Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Se recuperarán todos los ajustes de red, como:\n\n"<li>"Wi‑Fi"</li>\n<li>"Datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer ajustes"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Solo alarmas"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Silencio total"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquear interrupciones visuales"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sonidos del perfil de trabajo"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utilizar sonidos del perfil personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Los sonidos de los perfiles personal y de trabajo son los mismos"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Solo de contactos destacados"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ninguno"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmas"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Las alarmas son prioritarias y emiten sonido"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Recordatorios"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Eventos"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Todas las llamadas"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Borrar y convertir"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Restablecer límite de frecuencia de ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Se ha restablecido el límite de frecuencia de ShortcutManager"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Controlar notificac. en pantalla bloqueo"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Mostrar u ocultar contenido de las notificaciones"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Todo"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Ayuda y consejos"</string>

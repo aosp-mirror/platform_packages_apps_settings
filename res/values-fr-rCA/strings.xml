@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s souhaite accéder à vos messages. Autoriser l\'accès à %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Demande d\'accès à la carte SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> souhaite accéder à votre carte SIM. Le fait d\'accorder l\'accès à la carte SIM désactive la connectivité de données sur votre appareil pendant la durée de la connexion. Accorder l\'accès à <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>."</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Visible comme « <xliff:g id="DEVICE_NAME">^1</xliff:g> » aux autres appareils"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Visible comme « <xliff:g id="DEVICE_NAME">^1</xliff:g> » pour les autres appareils"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Vos appareils"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Associer un nouvel appareil"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Date et heure"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"La configuration de sécurité du routeur sans fil (TKIP) n\'est pas compatible."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Échec de l\'authentification. Veuillez réessayer."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Une autre session WPS a été détectée. Veuillez réessayer dans quelques minutes."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Nom du réseau"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Saisissez le SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sécurité"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Annuler l\'invitation?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Voulez-vous annuler l\'invitation à se connecter avec <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Voulez-vous vraiment supprimer ce groupe?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Point d\'accès Wi-Fi mobile"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Point d\'accès Wi‑Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Connexion Internet ou contenu non partagés avec d\'autres appareils"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"La connexion Internet de la tablette est partagée par point d\'accès"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"La connexion Internet du téléphone est partagée par point d\'accès"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"L\'application partage du contenu. Pour partager la connexion Internet, désactivez puis réactivez le point d\'accès."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Nom du réseau Wi-Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Nom du point d\'acces"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Activation du point d\'accès <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> en cours…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"D\'autres appareils peuvent se connecter à <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Mot de passe Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Mot de passe du point d\'accès"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Bande du point d\'accès"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Un point d\'accès vous permet de créer un réseau Wi-Fi pour vos autres appareils. Il les connecte à Internet en utilisant votre connexion de données cellulaires. Des frais cellulaires supplémentaires peuvent s\'appliquer."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Les applications peuvent créer un point d\'accès pour partager du contenu avec les appareils à proximité."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Rétablir les valeurs par défaut"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"La réinitialisation des paramètres APN par défaut est terminée."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Options de réinitialisation"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Impossible de réinitialiser le réseau, les applications ou l\'appareil"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Réinitialiser les paramètres Wi-Fi, cellulaires et Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Cette opération entraîne la réinitialisation de tous les paramètres réseau, y compris :\n\n"<li>"Le Wi‑Fi"</li>\n<li>"Les données cellulaires"</li>\n<li>"Le Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Réinitialiser les paramètres"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarmes uniquement"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Aucune interruption"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquer dérangements visuels"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons du profil professionnel"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utiliser sons du profil perso"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Les sons du profil professionnel sont les mêmes que ceux du profil personnel"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Des contacts favoris seulement"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Aucun"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmes"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Les alarmes sont toujours une priorité et émettent un son"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Rappels"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Événements"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Tous les appelants"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Effacer et convertir"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Réinitialiser la limitation de fréquence ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"La limitation de fréquence ShortcutManager a été réinitialisée"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Gérer notifications écran verrouillage"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Afficher ou masquer le contenu des notifications"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tous"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Assistance et astuces"</string>

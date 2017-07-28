@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s ønsker adgang til meldingene dine. Vil du gi %2$s tilgang?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Forespørsel om tilgang til SIM-kort"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vil ha tilgang til SIM-kortet ditt. Hvis du gir tilgang til SIM-kortet, slås datatilkoblingen på enheten av så lenge tillatelsen varer. Gi tilgang til <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Synlig som «<xliff:g id="DEVICE_NAME">^1</xliff:g>» for andre enheter"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Vises som «<xliff:g id="DEVICE_NAME">^1</xliff:g>» på andre enheter"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Enhetene dine"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Koble til en ny enhet"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dato og klokkeslett"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Sikkerhetsinnstillingen (TKIP) for trådløse rutere støttes ikke"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentiseringsfeil. Prøv på nytt."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"En annen WPS-økt ble oppdaget. Prøv på nytt om noen minutter."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Nettverksnavn"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Skriv inn SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sikkerhet"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Vil du avbryte invitasjonen?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Vil du avbryte invitasjonen til å koble til <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Vil du glemme denne gruppen?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Flyttbar Wi-Fi-sone"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi-sone"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Deler ikke Internett eller innhold med andre enheter"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Deler nettbrettets Internett-tilkobling via Wi-Fi-sone"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Deler telefonens Internett-tilkobling via Wi-Fi-sone"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Appen deler innhold. Slå Wi-Fi-sone av og på for å dele Internett-tilkobling."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi-Fi-navn"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Navn på Wi-Fi-sonen"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Slår på <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Andre enheter kan koble til <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi-passord"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Passord for Wi-Fi-sonen"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-bånd"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Bruk Wi-Fi-soner for å opprette Wi-Fi-nettverk for de andre enhetene dine. Wi-Fi-soner gir Internett-tilgang ved hjelp av mobildatatilkoblingen din."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Du kan bruke apper til å opprette Wi-Fi-soner for deling av innhold med enheter i nærheten."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Tilbakestill til standardvalg"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Tilbakestilling av standard APN-innstillinger er fullført."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Alternativer for tilbakestilling"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Nettverket, appene eller enheten kan tilbakestilles"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Tilbakestil Wi-Fi, mobil og Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Dette tilbakestiller alle nettverksinnstillinger, inkludert:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobildata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Tilbakestill innstillingene"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Bare alarmer"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Total stillhet"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokkér visuelle forstyrrelser"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Lyder i jobbprofilen"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Bruk personlig profil-lyder"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Lydene er like for jobbprofilen og den personlige profilen"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Bare fra stjernemerkede kontakter"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ingen"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmer"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmer er alltid prioritert og avgir lyd"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Påminnelser"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Hendelser"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Alle oppringere"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Slett og konvertér"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Vil du tilbakestille frekvensbegrensning for ShortcutManager?"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Frekvensberegning for ShortcutManager er tilbakestilt"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Kontrollér låseskjermvarsler"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Vis eller skjul varselinnhold"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Brukerstøtte og tips"</string>

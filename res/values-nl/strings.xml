@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s wil toegang tot je berichten. Toegang geven aan %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Toegangsverzoek voor simkaart"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> wil toegang tot je simkaart. Als je toegang tot de simkaart verleent, wordt de gegevensverbinding op je apparaat uitgeschakeld voor de duur van de verbinding. Toegang verlenen aan <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Zichtbaar als <xliff:g id="DEVICE_NAME">^1</xliff:g> voor andere apparaten"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Zichtbaar als \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' voor andere apparaten"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Je apparaten"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Nieuw apparaat koppelen"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum en tijd"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"De beveiligingsinstelling voor de draadloze router (TKIP) wordt niet ondersteund"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Authenticatie is mislukt. Probeer het opnieuw."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Er is een andere WPS-sessie gedetecteerd. Probeer het over een paar minuten opnieuw."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Netwerknaam"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Geef de SSID op"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Beveiliging"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Uitnodiging annuleren?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Wil je de uitnodiging voor verbinding met <xliff:g id="PEER_NAME">%1$s</xliff:g> annuleren?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Deze groep vergeten?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Draagbare wifi-hotspot"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wifi-hotspot"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Internet of content wordt niet gedeeld met andere apparaten"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Internetverbinding van deze tablet delen via hotspot"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Internetverbinding van deze telefoon delen via hotspot"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"App deelt content. Als je je internetverbinding wilt delen, schakel je de hotspot uit en weer in."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wifi-naam"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Naam hotspot"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> inschakelen..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Andere apparaten kunnen verbinding maken met <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wifi-wachtwoord"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Wachtwoord hotspot"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Frequentieband voor toegangspunt"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Gebruik een hotspot om een wifi-netwerk te maken voor je andere apparaten. De hotspot biedt internet via je mobiele dataverbinding. Er kunnen extra kosten voor mobiele data van toepassing zijn."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Apps kunnen hotspots maken om content te delen met apparaten in de buurt."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Standaardinstellingen herstellen"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Herstellen van standaard-APN-instellingen voltooid."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Opties voor resetten"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Netwerk, apps of apparaat kunnen worden gereset"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wifi, mobiel en Bluetooth resetten"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Hiermee worden alle netwerkinstellingen gereset, waaronder:\n\n"<li>"wifi"</li>\n<li>"mobiele data"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Instellingen resetten"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alleen alarmen"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Totale stilte"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokkeer visuele onderbreking"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Geluiden voor werkprofiel"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Gebruik geluid persoonsprofiel"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Geluiden voor werkprofielen en persoonlijke profielen komen overeen"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Alleen van contacten met ster"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Geen"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmen"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmen hebben altijd prioriteit en maken geluid"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Herinneringen"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Evenementen"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Alle bellers"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Wissen en converteren"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Frequentielimieten van ShortcutManager opnieuw instellen"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"De frequentielimieten van ShortcutManager zijn opnieuw ingesteld."</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Meldingen voor vergrendelingsscherm beheren"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Content van meldingen weergeven of verbergen"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Ondersteuning &amp; tips"</string>

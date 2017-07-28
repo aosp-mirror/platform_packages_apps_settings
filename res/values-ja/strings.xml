@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$sがメッセージにアクセスしようとしています。%2$sにアクセスを許可しますか？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIMアクセスリクエスト"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>がSIMカードにアクセスしようとしています。SIMカードへのアクセスを許可すると、接続を処理している間、端末上のデータ接続は無効になります。<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>にアクセスを許可します"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"他の端末には「<xliff:g id="DEVICE_NAME">^1</xliff:g>」として表示されます"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"他の端末には「<xliff:g id="DEVICE_NAME">^1</xliff:g>」として表示されます"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"端末"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"新しいデバイスとペア設定"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日付と時刻"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"無線ルーターのセキュリティ設定（TKIP）はサポートされていません"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"認証に失敗しました。もう一度お試しください。"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"別のWPSセッションが検出されました。数分後にもう一度お試しください。"</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"ネットワーク名"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSIDを入力します"</string>
     <string name="wifi_security" msgid="6603611185592956936">"セキュリティ"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"招待状のキャンセル"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g>との接続への招待をキャンセルしますか？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"このグループを削除しますか？"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"ポータブルWi-Fiアクセスポイント"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fiアクセスポイント"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"インターネット接続やコンテンツを他の端末と共有しません"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"このタブレットのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"このスマートフォンのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"アプリがコンテンツを共有しています。インターネット接続を共有するには、アクセス ポイントをオフにしてから再度オンにします"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi 名"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"アクセス ポイント名"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> を ON にしています..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"他の端末が <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> に接続できます"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi パスワード"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"アクセス ポイントのパスワード"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP 帯域幅"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"アクセス ポイントを使って他の端末との Wi‑Fi ネットワークを作成します。アクセス ポイントはモバイルデータ接続によるインターネット接続を提供します。モバイルデータ通信料が追加で発生する可能性があります。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"アプリを使ってアクセス ポイントを作成し、コンテンツを近くの端末と共有できます。"</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"初期設定にリセット"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN設定をリセットしました。"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"リセット オプション"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"ネットワーク、アプリ、または端末をリセットできます"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi、モバイル、Bluetooth をリセット"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"以下を含む、すべてのネットワーク設定がリセットされます。\n\n"<li>"Wi‑Fi"</li>\n<li>"モバイルデータ"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"設定をリセット"</string>
@@ -2846,8 +2848,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"アラームのみ"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"サイレント"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"視覚的な通知のブロック"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"仕事用プロファイルの音"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"個人用プロファイルの音の使用"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"仕事用プロファイルと個人用プロファイルの音は同じです"</string>
@@ -3008,8 +3009,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"スター付きの連絡先のみ"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"なし"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"アラーム"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"アラームは常に優先的な割り込みとして音が鳴ります"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"リマインダー"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"予定"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"すべての発信者"</string>
@@ -3487,7 +3487,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager のレート制限をリセット"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager のレート制限をリセットしました"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"ロック画面の通知を管理する"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"サポートとヒント"</string>

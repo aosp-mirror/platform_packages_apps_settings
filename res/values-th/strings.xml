@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s ต้องการเข้าถึงข้อความของคุณ ให้สิทธิ์เข้าถึงแก่ %2$s ไหม"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"ส่งคำขอการเข้าถึงซิม"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ต้องการเข้าถึงซิมการ์ด การให้สิทธิ์เข้าถึงซิมการ์ดจะปิดการเชื่อมต่อข้อมูลบนอุปกรณ์ในระหว่างที่มีการเชื่อมต่อ โปรดให้สิทธิ์เข้าถึงแก่ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"อุปกรณ์อื่นๆ จะเห็นเป็นชื่อ \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"อุปกรณ์อื่นๆ จะเห็นเป็นชื่อ \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"อุปกรณ์ของคุณ"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"จับคู่อุปกรณ์ใหม่"</string>
     <string name="date_and_time" msgid="9062980487860757694">"วันที่และเวลา"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"ไม่สนับสนุนการตั้งค่าความปลอดภัยของเราเตอร์ไร้สาย (TKIP)"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"การตรวจสอบสิทธิ์ล้มเหลว โปรดลองอีกครั้ง"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"พบเซสชัน WPS อีกหนึ่งเซสชัน โปรดลองอีกครั้งในอีกสักครู่"</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"ชื่อเครือข่าย"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"ป้อน SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"ความปลอดภัย"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"ยกเลิกข้อความเชิญหรือไม่"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"คุณต้องการยกเลิกข้อความเชิญเพื่อเชื่อมต่อกับ <xliff:g id="PEER_NAME">%1$s</xliff:g> หรือไม่"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"ไม่จำกลุ่มนี้ใช่หรือไม่"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"WiFi ฮอตสปอตแบบพกพา"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi ฮอตสปอต"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"ไม่ได้แชร์อินเทอร์เน็ตหรือเนื้อหากับอุปกรณ์อื่นๆ อยู่"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"กำลังแชร์การเชื่อมต่ออินเทอร์เน็ตของแท็บเล็ตนี้ผ่านฮอตสปอตอยู่"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"กำลังแชร์การเชื่อมต่ออินเทอร์เน็ตของโทรศัพท์นี้ผ่านฮอตสปอตอยู่"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"แอปไม่ได้แชร์เนื้อหาอยู่ หากต้องการแชร์การเชื่อมต่ออินเทอร์เน็ต ให้ปิดฮอตสปอตแล้วเปิดใหม่"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"ชื่อ Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"ชื่อฮอตสปอต"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"กำลังเปิด <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"อุปกรณ์อื่นๆ สามารถเชื่อมต่อกับ <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"รหัสผ่าน Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"รหัสผ่านฮอตสปอต"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"ย่านความถี่ AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"ใช้ฮอตสปอตเพื่อสร้างเครือข่าย Wi‑Fi สำหรับอุปกรณ์อื่นๆ ของคุณ ฮอตสปอตสามารถให้บริการอินเทอร์เน็ตโดยใช้การเชื่อมต่ออินเทอร์เน็ตมือถือ อาจมีค่าบริการอินเทอร์เน็ตมือถือเพิ่มเติม"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"แอปสามารถสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้"</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"รีเซ็ตเป็นค่าเริ่มต้น"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"รีเซ็ตการตั้งค่า APN กลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"ตัวเลือกการรีเซ็ต"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"เครือข่าย แอป หรืออุปกรณ์สามารถรีเซ็ตได้"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"รีเซ็ต Wi-Fi อุปกรณ์เคลื่อนที่ และบลูทูธ"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"การดำเนินการนี้จะรีเซ็ตการตั้งค่าเครือข่ายทั้งหมด รวมถึง:\n\n"<li>"Wi‑Fi"</li>\n<li>"อินเทอร์เน็ตมือถือ"</li>\n<li>"บลูทูธ"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"รีเซ็ตการตั้งค่า"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"เฉพาะปลุกเท่านั้น"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"ปิดเสียงทั้งหมด"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"บล็อกสิ่งรบกวนการมองเห็น"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"เสียงในโปรไฟล์งาน"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"ใช้เสียงในโปรไฟล์ส่วนตัว"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"เสียงในโปรไฟล์งานและโปรไฟล์ส่วนตัวเหมือนกัน"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"จากรายชื่อติดต่อที่ติดดาวเท่านั้น"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ไม่มี"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"การปลุก"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"เสียงปลุกจะเป็นการแจ้งเตือนที่สำคัญและส่งเสียงเสมอ"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"การช่วยเตือน"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"กิจกรรม"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"ผู้โทรทั้งหมด"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"ล้างข้อมูลและแปลง"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"รีเซ็ตการจำกัดอัตราของ ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"รีเซ็ตการจำกัดอัตราของ ShortcutManager แล้ว"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"ควบคุมการแจ้งเตือนบนหน้าจอล็อก"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"แสดงหรือซ่อนเนื้อหาการแจ้งเตือน"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ทั้งหมด"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"การสนับสนุนและเคล็ดลับ"</string>

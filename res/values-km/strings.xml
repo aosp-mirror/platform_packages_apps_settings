@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s ចង់​ចូល​ដំណើរការ​សារ​របស់​អ្នក។ សូម​ផ្ដល់​ការ​ចូល​ដំណើរការ​ទៅ​កាន់​%2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"សំណើចូលដំណើរការស៊ីម"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ចង់ចូលដំណើរការស៊ីមកាតរបស់អ្នក។ ការផ្តល់ការអនុញ្ញាតចូលដំណើរការស៊ីមកាតនឹងបិទដំណើរការតភ្ជាប់ទិន្នន័យនៅលើឧបករណ៍របស់អ្នកក្នុងអំឡុងពេលធ្វើការតភ្ជាប់។ អនុញ្ញាតឲ្យចូលដំណើរការ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"អាច​មើល​ឃើញ​ជា <xliff:g id="DEVICE_NAME">^1</xliff:g> ចំពោះ​ឧបករណ៍ផ្សេង"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"អាចមើលឃើញជា \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" ចំពោះឧបករណ៍ផ្សេងទៀត"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"ឧបករណ៍របស់អ្នក"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"ផ្គូផ្គង​ឧបករណ៍ថ្មី"</string>
     <string name="date_and_time" msgid="9062980487860757694">"កាលបរិច្ឆេទ និង ម៉ោង"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"មិន​បាន​គាំទ្រ​ការ​កំណត់​សុវត្ថិភាព​រ៉ោតទ័រ​​​ឥត​ខ្សែ (TKIP)"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"ការ​ផ្ទៀងផ្ទាត់​បរាជ័យ។ សូម​ព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"បាន​រក​ឃើញ​សម័យ WPS ផ្សេង។ សូម​ព្យាយាម​ម្ដងទៀត​ក្នុង​រយៈ​ពេល​ពីរ​បី​នាទី​ទៀត។"</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"ឈ្មោះ​បណ្ដាញ"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"បញ្ចូល SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"សុវត្ថិភាព"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"បោះបង់​ការ​អញ្ជើញ?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"តើ​អ្នក​ចង់​បោះបង់​ការ​អញ្ជើញ​ឲ្យ​តភ្ជាប់​ជា​មួយ <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"បំភ្លេច​ក្រុម​នេះ?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Wi-Fi ហតស្ប៉ត​ចល័ត"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"ហតស្ប៉ត​វ៉ាយហ្វាយ"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"មិនកំពុងចែករំលែកអ៊ីនធឺណិត ឬមាតិកាជាមួយឧបករណ៍ផ្សេងទៀតទេ"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"កំពុងចែករំលែកការតភ្ជាប់អ៊ីនធឺណិតរបស់ថេប្លេតនេះតាមរយៈហតស្ប៉ត"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"កំពុងចែករំលែកការតភ្ជាប់អ៊ីនធឺណិតរបស់ទូរសព្ទនេះតាមរយៈហតស្ប៉ត"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"កម្មវិធីកំពុងចែករំលែកមាតិកា។ ដើម្បីចែករំលែកការតភ្ជាប់អ៊ីនធឺណិត សូមបិទហតស្ប៉ត បន្ទាប់មកបើកវាវិញ"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"ឈ្មោះ Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"ឈ្មោះ​ហតស្ប៉ត"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"កំពុងបើក <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"ឧបករណ៍​ផ្សេងទៀត​អាចភ្ជាប់​ជាមួយ <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"ពាក្យសម្ងាត់ Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"ពាក្យសម្ងាត់​ហតស្ប៉ត"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP Band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"ប្រើហតស្ប៉តដើម្បីបង្កើតបណ្តាញ Wi‑Fi សម្រាប់ឧបករណ៍ផ្សេងទៀតរបស់អ្នក។ ហតស្ប៉តផ្តល់ជូនអ៊ីនធឺណិតដោយប្រើការ​តភ្ជាប់​ទិន្នន័យ​ចល័តរបស់អ្នក។ អាចនឹងគិតប្រាក់លើទិន្នន័យទូរសព្ទចល័តបន្ថែម។"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"កម្មវិធីអាចបង្កើតហតស្ប៉ត ដើម្បីចែករំលែកមាតិកាជាមួយឧបករណ៍ដែលនៅជិត។"</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"កំណត់​ទៅ​លំនាំដើម​ឡើងវិញ"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"បាន​បញ្ចប់​ការ​កំណត់​នៃ​ការកំណត់​ APN លំនាំដើម។"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"ជម្រើសដែលបានកំណត់ឡើងវិញ"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"បណ្ដាញ កម្មវិធី ឬ​ឧបករណ៍ដែលអាច​កំណត់​ឡើងវិញបាន"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"កំណត់ Wi-Fi ឧបករណ៍ចល័ត និងប៊្លូធូសឡើងវិញ"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"វា​នឹង​កំណត់​ការកំណត់​បណ្តាញ​ទាំងអស់​ឡើងវិញ រួម​មាន៖\n\n"<li>"Wi‑Fi"</li>\n<li>"ទិន្នន័យ​ចល័ត"</li>\n<li>"ប៊្លូធូស"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"កំណត់ការកំណត់ឡើងវិញ"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"សំឡេងរោទ៍ប៉ុណ្ណោះ"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"ស្ងៀមស្ងាត់ទាំងស្រុង"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>៖ <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"រារាំងការរំខានក្នុងការមើល"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"សំឡេងប្រវត្តិរូបការងារ"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"ប្រើសំឡេងប្រវត្តិរូបផ្ទាល់ខ្លួន"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"សំឡេងសម្រាប់កម្រងព័ត៌មានការងារ និងផ្ទាល់ខ្លួនគឺដូចគ្នា"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"ពីទំនាក់ទំនងមានផ្កាយតែប៉ុណ្ណោះ"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"គ្មាន"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"សំឡេងរោទ៍"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"ម៉ោងរោទ៍មានអាទិភាព​ និងមានបន្លឺសំឡេងជានិច្ច"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"កម្មវិធីរំលឹក"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ព្រឹត្តិការណ៍"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"អ្នកហៅទូរស័ព្ទទាំងអស់"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"លុប និងបម្លែង"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"កំណត់ការកម្រិតការវាយតម្លៃលើ ShortcutManager ឡើងវិញ"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ការកម្រិតការវាយតម្លៃ ShortcutManager ត្រូវបានកំណត់ឡើងវិញ"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"គ្រប់គ្រងការជូនដំណឹងអេក្រង់ចាក់សោ"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"បង្ហាញ ឬលាក់មាតិកាជូនដំណឹង"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ទាំងអស់"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"ជំនួយ និងគន្លឹះ"</string>

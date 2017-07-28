@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"‏%1$s می‌خواهد به پیام‌های شما دسترسی یابد. اجازه دسترسی به %2$s داده شود؟"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"درخواست دسترسی به سیم‌‌کارت"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> می‌خواهد به سیم‌کارت شما دسترسی پیدا کند. درصورتی‌که به دسترسی به سیم‌کارت اجازه دهید، اتصال داده در مدت اتصال در دستگاه شما غیرفعال می‌شود. به <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> اجازه دسترسی دهید"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"به‌عنوان «<xliff:g id="DEVICE_NAME">^1</xliff:g>» برای سایر دستگاه‌ها قابل مشاهده است"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"به‌عنوان «<xliff:g id="DEVICE_NAME">^1</xliff:g>» برای دستگاه‌های دیگر قابل مشاهده است"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"دستگاه‌های شما"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"مرتبط‌سازی دستگاه جدید"</string>
     <string name="date_and_time" msgid="9062980487860757694">"تاریخ و زمان"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"‏تنظیمات امنیتی رهیاب بی‌سیم (TKIP) پشتیبانی نمی‌شود"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"احراز هویت ناموفق بود. لطفاً دوباره امتحان کنید."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"‏یک جلسه WPS دیگر شناسایی شد. لطفاً پس از چند دقیقه دوباره امتحان کنید."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"نام شبکه"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"‏SSID را وارد کنید"</string>
     <string name="wifi_security" msgid="6603611185592956936">"امنیت"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"دعوتنامه لغو شود؟"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"آیا می‌خواهید دعوت برای ارتباط با <xliff:g id="PEER_NAME">%1$s</xliff:g> را لغو کنید؟"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"این گروه فراموش شود؟"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"‏نقطه اتصال قابل حمل Wi-Fi"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"‏نقطه اتصال Wi-Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"اینترنت یا محتوا با سایر دستگاه‌ها به اشتراک گذاشته نمی‌شود"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"اتصال اینترنت این رایانه لوحی ازطریق نقطه اتصال اشتراک‌گذاری می‌شود"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"اتصال اینترنت این تلفن ازطریق نقطه اتصال اشتراک‌گذاری می‌شود"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"برنامه محتوا را به اشتراک می‌گذارد. برای اشتراک‌گذاری اتصال اینترنت، نقطه اتصال را خاموش و سپس روشن کنید"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"‏نام Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"نام نقطه اتصال"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"درحال روشن کردن <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"سایر دستگاه‌ها می‌توانند به <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> متصل شوند."</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"‏گذرواژه Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"گذرواژه نقطه اتصال"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"‏باند AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"‏برای ایجاد یک شبکه Wi‑Fi برای سایر دستگاه‌ها، از نقطه اتصال استفاده کنید. نقطه اتصال با استفاده از اتصال داده تلفن همراه، اینترنت ارائه می‌دهد. ممکن است هزینه‌های داده تلفن همراه اضافه اعمال شوند."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"برنامه‌ها می‌توانند نقطه اتصالی ایجاد کنند تا محتوا را با دستگاه‌های اطراف به اشتراک بگذارند."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"بازنشانی به موارد پیش‌فرض"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"بازنشانی تنظیمات پیش‌فرض نام نقطه دستیابی انجام شد."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"بازنشانی گزینه‌ها"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"شبکه، برنامه‌ها یا دستگاه می‌توانند بازنشانی شوند"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"‏بازنشانی Wi-Fi، داده شبکه همراه و بلوتوث"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"‏این کار همه تنظیمات شبکه را بازنشانی می‌کند، ازجمله:\n\n"<li>"Wi-Fi‏"</li>\n<li>"داده شبکه تلفن همراه"</li>\n<li>"بلوتوث"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"بازنشانی تنظیمات"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"فقط هشدارها"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"سکوت کامل"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: ‏<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"مسدود کردن مزاحمت‌های بصری"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"صداهای نمایه کاری"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"استفاده از صداهای نمایه شخصی"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"صداهای نمایه کاری‌ و شخصی‌تان یکسان هستند"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"تنها از مخاطین ستاره‌دار"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"هیچ‌کدام"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"هشدارها"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"هشدارها همیشه اولویت دارند و صدا ایجاد می‌کنند"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"یادآوری‌ها"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"رویدادها"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"همه تماس‌گیرندگان"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"پاک کردن و تبدیل کردن"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"‏بازنشانی محدودکننده سرعت ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"‏محدودکننده سرعت ShortcutManager بازنشانی شد"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"کنترل اعلان‌های قفل صفحه"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"نمایش یا پنهان کردن محتوای اعلان"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"همه"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"پشتیبانی و نکته‌ها"</string>

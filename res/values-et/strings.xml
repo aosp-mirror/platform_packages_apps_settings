@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s soovib saada juurdepääsu sõnumitele. Kas anda seadmele %2$s juurdepääs?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Juurdepääsutaotlus SIM-kaardile"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"Seade <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> soovib juurdepääsu teie SIM-kaardile. Kui annate juurdepääsu SIM-kaardile, keelatakse seadmes ühenduse ajaks andmesideühendus. Juurdepääsu andmine seadmele <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Teistele seadmetele nähtav seadmena „<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Teistele seadmetele nähtav kui „<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Teie seadmed"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Uue seadme sidumine"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Kuupäev ja kellaaeg"</string>
@@ -781,6 +781,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Ruuteri turvaseadet (TKIP) ei toetata"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentimine ebaõnnestus. Proovige uuesti."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Tuvastati teine WPS-i seanss. Proovige mõne minuti pärast uuesti."</string>
+    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
+    <skip />
     <string name="wifi_ssid" msgid="5519636102673067319">"Võrgu nimi"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Sisestage SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Turvalisus"</string>
@@ -879,16 +881,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Kas tühistada kutse?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Kas soovite tühistada kutse kasutajaga <xliff:g id="PEER_NAME">%1$s</xliff:g> ühenduse loomiseks?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Kas unustada see rühm?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Mobiilne WiFi-kuumkoht"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WiFi-leviala"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Interneti-ühendust ega sisu teiste seadmetega ei jagata"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Tahvelarvuti Interneti-ühendust jagatakse leviala kaudu"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Telefoni Interneti-ühendust jagatakse leviala kaudu"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Rakendus jagab sisu. Interneti-ühenduse jagamiseks lülitage leviala välja ja seejärel uuesti sisse"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"WiFi-võrgu nimi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Leviala nimi"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Võrgu <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> sisselülitamine …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Teised seadmed saavad luua ühenduse võrguga <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"WiFi-võrgu parool"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Leviala parool"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-riba"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"WiFi-võrgu loomiseks teiste seadmete jaoks kasutage leviala. Leviala kasutab Interneti pakkumiseks mobiilset andmesideühendust. Rakenduda võivad mobiilse andmeside tasud."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Rakendused saavad leviala luua, et läheduses olevate seadmetega sisu jagada."</string>
@@ -1328,6 +1329,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Lähtesta vaikeseadetele"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN-i vaikeseadete lähtestamine on lõpule viidud."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Valikute lähtestamine"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Võrgustiku, rakendused või seadme saab lähtestada"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Lähtesta WiFi, mobiilne andmeside ja Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"See lähtestab kõik võrguseaded, sh:\n\n"<li>"WiFi"</li>\n<li>"Mobiilne andmeside"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Lähtesta seaded"</string>
@@ -2842,8 +2844,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Ainult alarmid"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Täielik vaikus"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Visuaalsete häirimiste blok."</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Tööprofiili helid"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Kasuta isikl. profiili helisid"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Isikliku ja tööprofiili helid on samad"</string>
@@ -3004,8 +3005,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Ainult tärniga tähistatud kontaktidelt"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Mitte kelleltki"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmid"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmid on alati prioriteetsed ja esitavad heli"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Meeldetuletused"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Sündmused"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Kõik helistajad"</string>
@@ -3483,7 +3483,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Kustuta ja teisenda"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Teenuse ShortcutManager sageduse piiramise lähtestamine"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Teenuse ShortcutManager sageduse piiramine lähtestati"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"Lukustuskuva märguannete juhtimine"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Märguande sisu kuvamine või peitmine"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Kõik"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Tugi ja nõuanded"</string>
