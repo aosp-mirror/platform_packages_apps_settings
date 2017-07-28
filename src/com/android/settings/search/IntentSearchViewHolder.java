@@ -17,16 +17,23 @@
 package com.android.settings.search;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
+
+import java.util.List;
 
 /**
  * ViewHolder for intent based search results.
  * The DatabaseResultLoader is the primary use case for this ViewHolder.
  */
 public class IntentSearchViewHolder extends SearchViewHolder {
+
+    private static final String TAG = "IntentSearchViewHolder";
 
     public IntentSearchViewHolder(View view) {
         super(view);
@@ -42,7 +49,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
         super.onBind(fragment, result);
 
         itemView.setOnClickListener(v -> {
-           fragment.onSearchResultClicked(this, result);
+            fragment.onSearchResultClicked(this, result);
             final Intent intent = result.payload.getIntent();
             // Use app user id to support work profile use case.
             if (result instanceof AppSearchResult) {
@@ -50,7 +57,14 @@ public class IntentSearchViewHolder extends SearchViewHolder {
                 UserHandle userHandle = appResult.getAppUserHandle();
                 fragment.getActivity().startActivityAsUser(intent, userHandle);
             } else {
-                fragment.startActivity(intent);
+                final PackageManager pm = fragment.getActivity().getPackageManager();
+                final List<ResolveInfo> info = pm.queryIntentActivities(intent, 0 /* flags */);
+                if (info != null && !info.isEmpty()) {
+                    fragment.startActivity(intent);
+                } else {
+                    Log.e(TAG, "Cannot launch search result, title: "
+                            + result.title + ", " + intent);
+                }
             }
         });
     }
