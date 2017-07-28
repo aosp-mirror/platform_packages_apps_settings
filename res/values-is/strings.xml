@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vill fá aðgang að skilaboðunum þínum. Viltu gefa %2$s aðgang?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Beiðni um aðgang að SIM-korti"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vill fá aðgang að SIM-kortinu þínu. Ef þú veitir aðgang að SIM-kortinu er slökkt á gagnatengingu tækisins á meðan tengingin varir. Veita <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> aðgang"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Sýnilegt öðrum tækjum sem „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Sýnilegt öðrum tækjum sem „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Tækin þín"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Para nýtt tæki"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dagsetning og tími"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Hætta við boð?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Viltu hætta við boð um að tengjast <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Gleyma þessum hópi?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Heitur Wi-Fi reitur"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Heitur Wi-Fi reitur"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Deilir ekki nettengingu eða efni með öðrum tækjum"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Internettengingu þessarar spjaldtölvu er deilt um heitan reit"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Internettengingu þessa síma er deilt um heitan reit"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Forrit deilir efni. Til að deila nettengingu skaltu slökkva á heita reitnum og kveikja á honum aftur."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Heiti Wi‑Fi reits"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Heiti á heitum reit"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Kveikir á <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Önnur tæki geta tengst <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi aðgangsorð"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Aðgangsorð fyrir heitan reit"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Tíðnisvið"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Notaðu heitan reit til að búa til Wi-Fi net fyrir önnur tæki. Heitir reitir bjóða upp á internetaðgang með því að nota farsímagagnatenginguna þína. Viðbótargjöld vegna farsímagagna kunna að eiga við."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Forrit geta búið til heitan reit til að deila efni með nálægum tækjum."</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Núllstilla"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Sjálfgefnar stillingar aðgangsstaðar endurheimtar."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Valkostir endurstillingar"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Hægt er að endurstilla netkerfi, forrit eða tæki"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Endurstilla Wi-Fi, farsímagögn og Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Þetta mun endurstilla allar netkerfisstillingar, þar á meðal:\n\n"<li>"Wi‑Fi"</li>\n<li>"Farsímagögn"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Endurstilla"</string>
@@ -2842,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Aðeins vekjarar"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Algjör þögn"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Útiloka sjónrænt áreiti"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Hljóð vinnuprófils"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Nota hljóð úr persónulegum prófíl"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Hljóð vinnuprófíls eru þau sömu og í persónulegum prófíl"</string>
@@ -3004,8 +3003,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Aðeins frá stjörnumerktum tengiliðum"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ekkert"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Vekjarar"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Viðvaranir eru ávallt í forgangi og með hljóði"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Áminningar"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Viðburðir"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Allir hringjendur"</string>

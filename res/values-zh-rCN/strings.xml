@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"“%1$s”想要查看您的消息。要向“%2$s”授予权限吗？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 访问权限请求"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>想要访问您的 SIM 卡。如果授权该设备访问 SIM 卡，您设备的数据连接功能在蓝牙连接期间将停用。将访问权限授予<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"向其他设备显示为“<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"向其他设备显示为“<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"您的设备"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"与新设备配对"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和时间"</string>
@@ -846,8 +846,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"高级WLAN"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC地址"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP 地址"</string>
-    <!-- no translation found for wifi_details_title (3471132676909349382) -->
-    <skip />
+    <string name="wifi_details_title" msgid="3471132676909349382">"网络信息"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"子网掩码"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 地址"</string>
@@ -880,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"取消邀请？"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"要取消连接<xliff:g id="PEER_NAME">%1$s</xliff:g>的邀请吗？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"取消保存此群组？"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"便携式WLAN热点"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WLAN热点"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"目前没有与其他设备共享互联网连接或内容"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"正在通过热点共享此平板电脑的互联网连接"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"正在通过热点共享此手机的互联网连接"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"应用正在共享内容。要共享互联网连接，请先关闭热点，然后重新打开"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"WLAN 名称"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"热点名称"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"正在打开<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"其他设备可以连接到<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"WLAN 密码"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"热点密码"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP 频段"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"使用热点创建 WLAN 网络供其他设备使用。热点会使用您的移动数据连接提供互联网连接。这可能会产生额外的移动数据流量费用。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"应用可以通过创建热点，与附近的设备共享内容。"</string>
@@ -995,8 +993,7 @@
     <string name="search_settings" msgid="1910951467596035063">"搜索"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"管理搜索设置和历史记录"</string>
     <string name="search_settings_no_results" msgid="8799027492641230999">"没有结果"</string>
-    <!-- no translation found for search_clear_history (4196658962573162457) -->
-    <skip />
+    <string name="search_clear_history" msgid="4196658962573162457">"清除历史记录"</string>
     <string name="display_settings" msgid="7965901687241669598">"显示"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"自动旋转屏幕"</string>
     <string name="color_mode_title" msgid="3159275920408338215">"鲜明的色彩"</string>
@@ -1330,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"重置为默认设置"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"已重置默认APN设置。"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"重置选项"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"网络、应用或设备可以重置"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"重置 WLAN、移动数据网络和蓝牙设置"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"此操作会重置所有网络设置，包括：\n\n"<li>"WLAN"</li>\n<li>"移动数据网络"</li>\n<li>"蓝牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重置设置"</string>
@@ -2353,8 +2351,7 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"已选择 <xliff:g id="NUMBER">%1$d</xliff:g> 个，共 <xliff:g id="TOTAL">%2$d</xliff:g> 个"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g>，共 <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"全选"</string>
-    <!-- no translation found for data_plan_usage_manage_plans_button_text (8997761990902708162) -->
-    <skip />
+    <string name="data_plan_usage_manage_plans_button_text" msgid="8997761990902708162">"管理套餐"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"流量使用情况"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"应用的流量使用情况"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"运营商的流量计算方式可能与您设备的计算方式不同。"</string>
@@ -2440,12 +2437,9 @@
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"移动网络"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"按流量计费的WLAN网络"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"要选择按流量计费的网络，请开启WLAN网络。"</string>
-    <!-- no translation found for data_usage_metered_auto (1262028400911918865) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_yes (9217539611385225894) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_no (4025232961929071789) -->
-    <skip />
+    <string name="data_usage_metered_auto" msgid="1262028400911918865">"自动"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"按流量计费"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"不按流量计费"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"运营商的流量计算方式可能与您设备的计算方式不同。"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"紧急呼救"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"返回通话"</string>
@@ -2848,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"仅限闹钟"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全阻止"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"屏蔽视觉打扰"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"工作资料提示音"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用个人资料提示音"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"工作资料和个人资料会使用相同的提示音"</string>
@@ -3010,8 +3003,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自收藏的联系人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"无"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"闹钟"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"闹钟始终优先，并发出提示音"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活动"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有来电者"</string>
@@ -3497,8 +3489,7 @@
     <string name="premium_sms_none" msgid="8268105565738040566">"没有任何已安装的应用申请付费短信权限"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"“付费短信”可能会产生费用，而且相关费用将计入您的运营商帐单。如果您为某个应用启用该权限，那么您将能够使用该应用发送付费短信。"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"付费短信权限"</string>
-    <!-- no translation found for bluetooth_disabled (6244000672828617410) -->
-    <skip />
+    <string name="bluetooth_disabled" msgid="6244000672828617410">"关闭"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"已连接到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已连接到多部设备"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系统界面演示模式"</string>

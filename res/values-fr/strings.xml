@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"Une demande d\'accès à vos messages a été envoyée pour \"%1$s\". Accorder l\'accès à \"%2$s\" ?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Demande d\'accès à la carte SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"\"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>\" requiert l\'accès à votre carte SIM. Si vous l\'accordez, la connectivité des données sera désactivée sur votre appareil pour toute la durée de la connexion. Accorder l\'autorisation d\'accès à \"<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>\""</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Visible avec le nom \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" pour les autres appareils"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Visible avec le nom \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" pour les autres appareils"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Vos appareils"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Associer un nouvel appareil"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Date et heure"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Annuler l\'invitation ?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Voulez-vous annuler l\'invitation à se connecter avec <xliff:g id="PEER_NAME">%1$s</xliff:g> ?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Voulez-vous vraiment supprimer ce groupe ?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Point d\'accès Wi-Fi mobile"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Point d\'accès Wi‑Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Connexion Internet ou contenu non partagés avec d\'autres appareils"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Connexion Internet de la tablette partagée via un point d\'accès"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Connexion Internet du téléphone partagée via un point d\'accès"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"L\'application partage du contenu. Pour partager la connexion Internet, désactivez le point d\'accès, puis réactivez-le"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Nom du point d\'accès Wi-Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Nom du point d\'accès"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Activation du point d\'accès \"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>\"…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"D\'autres appareils peuvent se connecter au point d\'accès \"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>\""</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Mot de passe du point d\'accès Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Mot de passe du point d\'accès"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Bande du point d\'accès"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Utilisez un point d\'accès afin de créer un réseau Wi‑Fi pour vos autres appareils. Un point d\'accès fournit un accès à Internet via votre connexion de données mobiles. Des frais supplémentaires peuvent s\'appliquer pour l\'utilisation des données mobiles."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Les applications peuvent créer un point d\'accès pour partager du contenu avec des appareils à proximité."</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Rétablir param. par défaut"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"La réinitialisation des paramètres APN par défaut est terminée."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Options de réinitialisation"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Vous pouvez réinitialiser le réseau, les applications ou l\'appareil"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Réinitialiser le Wi-Fi, les données mobiles et le Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Tous les paramètres réseau seront réinitialisés, y compris les suivants :\n\n"<li>"Wi‑Fi"</li>\n<li>"Données mobiles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Réinitialiser les paramètres"</string>
@@ -2438,8 +2438,8 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Réseaux Wi-Fi facturés à l\'usage"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Activez le Wi‑Fi pour accéder à des réseaux facturés à l\'usage."</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"Automatique"</string>
-    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Limité"</string>
-    <string name="data_usage_metered_no" msgid="4025232961929071789">"Non limité"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Mesuré"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"Non mesuré"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Le suivi de conso effectué par l\'opérateur peut différer de celui de l\'appareil."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Appel d\'urgence"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Retour à l\'appel"</string>
@@ -2842,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarmes uniquement"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Aucune interruption"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquer nuisances visuelles"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons du profil professionnel"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utiliser sons du profil perso"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Les sons des profils professionnel et personnel sont identiques"</string>
@@ -3004,8 +3003,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Des contacts favoris uniquement"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Aucun"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmes"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmes toujours prioritaires et sonores"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Rappels"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Événements"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Tous les appelants"</string>

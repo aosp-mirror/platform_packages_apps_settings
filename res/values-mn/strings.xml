@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s таны зурвасуудад хандалт хийх хүсэлтэй байна. %2$s-д хандалт хийхийг зөвшөөрөх үү?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"СИМ хандалтын хүсэлт"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> нь таны СИМ картанд хандах хүсэлтэй байна. СИМ картанд хандалтыг нээж өгснөөр холболтын хугацааны туршид төхөөрөмжийн дата холболтыг идэвхгүй болгоно. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-д хандалтыг нээх"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Бусад төхөөрөмжид <xliff:g id="DEVICE_NAME">^1</xliff:g>-р харагдана"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Бусад төхөөрөмжид \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\"-р харагдана"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Таны төхөөрөмж"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Шинэ төхөөрөмж холбох"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Огноо &amp; цаг"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Урилгыг цуцлах уу?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Та <xliff:g id="PEER_NAME">%1$s</xliff:g>-тай холбох урилгыг цуцлахыг хүсэж байна уу?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Энэ бүлгэмийг устгах уу?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Зөөврийн Wi‑Fi сүлжээний цэг"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi хотспот"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Интернэт эсвэл агуулгыг бусад төхөөрөмжтэй хуваалцаагүй"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Энэ таблетын интернэт холболтыг сүлжээний цэгээр хуваалцаж байна"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Энэ утасны интернэт холболтыг сүлжээний цэгээр хуваалцаж байна"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Апп агуулга хуваалцаж байна. Интернэт холболтыг хуваалцахын тулд сүлжээний цэгийг унтрааж дахин асаана уу"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi-н нэр"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Сүлжээний цэгийн нэр"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>-г асааж байна..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Бусад төхөөрөмж <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>-д холбогдох боломжтой"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi нууц үг"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Сүлжээний цэгийн нууц үг"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP Band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Бусад төхөөрөмждөө Wi‑Fi холболт үүсгэхийн тулд сүлжээний цэгийг ашиглана уу. Сүлжээний цэг нь таны мобайл датаны холболтоор интернэтэд холбогдоно. Мобайл датаны нэмэлт төлбөр гарна."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Апп ойролцоох төхөөрөмжтэй агуулга хуваалцахын тулд сүлжээний цэг үүсгэх боломжтой."</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Үндсэн рүү сэргээх"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Үндсэн APN тохиргоог дахин шинэчилж дууслаа."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Сонголтыг шинэчлэх"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Сүлжээ, апп эсвэл төхөөрөмжийг шинэчлэх боломжтой"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi, мобайл &amp; Bluetooth-г шинэчлэх"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Энэ нь \n\n"<li>"Wi‑Fi"</li>\n<li>"мобайл дата"</li>\n<li>"Bluetooth"</li>" зэрэг сүлжээний бүх тохиргоог шинэчилнэ"</string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Дахин тохируулах"</string>
@@ -2842,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Зөвхөн сэрүүлэг"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Дуугүй болгох"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Харааны саадыг блоклох"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Ажлын профайлын дуу"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Хувийн профайлын дууг ашиглах"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Ажлын болон хувийн профайлын дуу ижил"</string>
@@ -3002,8 +3001,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Зөвхөн одтой харилцагчаас"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Байхгүй"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Сэрүүлэг"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Сэрүүлгийг тогтмол чухалчилж дуугаргана"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Сануулагч"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Үйл явдал"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Бүх дуудлага"</string>

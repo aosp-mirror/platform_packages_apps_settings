@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s kërkon të ketë qasje te mesazhet e tua. Të lejohet qasja për %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Kërkesa për qasje në kartën SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"Pajisja <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dëshiron të ketë qasje në kartën tënde SIM. Dhënia e të drejtës për qasje në kartën SIM do të çaktivizojë lidhjen e të dhënave në pajisjen tënde gjatë kohëzgjatjes së lidhjes. Jepi qasje pajisjes <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"E dukshme si \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" për pajisjet e tjera"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"I dukshëm si \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" në pajisjet e tjera"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Pajisjet e tua"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Çifto pajisjen e re"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data dhe ora"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Të anulohet ftesa?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Dëshiron të anulosh ftesën për t\'u lidhur me <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Të harrohet ky grup?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Zona e lirë qasjeje Wi-Fi"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Zonë e lirë qasjeje për Wi-Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Nuk po ndan internetin ose përmbajtje me pajisjet e tjera"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Po ndan lidhjen e internetit të këtij tableti nëpërmjet zonës së qasjes së internetit"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Po ndan lidhjen e internetit të këtij telefoni nëpërmjet zonës së qasjes së internetit"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Aplikacioni po ndan përmbajtje. Për të ndarë lidhjen e internetit, çaktivizo zonën e qasjes së internetit dhe më pas aktivizoje përsëri."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Emri i Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Emri i zonës së qasjes për internet"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> po aktivizohet..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Pajisjet e tjera mund të lidhen me <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Fjalëkalimi i Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Fjalëkalimi i zonës së qasjes për internet"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Brezi AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Përdor zonën e qasjes së internetit për të krijuar një rrjet Wi‑Fi për pajisjet e tua të tjera. Zona e qasjes e internetit ofron internet duke përdorur lidhjen e të dhënave celulare. Mund të zbatohen tarifa shtesë për të dhënat celulare."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Aplikacionet mund të krijojnë një zonë qasjeje të internetit për të ndarë përmbajtje me pajisjet në afërsi."</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Rivendos të parazgjedhurën"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Rivendosja e cilësimeve të APN-së me parazgjedhje përfundoi."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Opsionet e rivendosjes"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Rrjeti, aplikacionet ose pajisja mund të rivendosen"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Rivendos Wi-Fi, lidhjen celulare dhe Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Kjo do të rivendosë të gjitha cilësimet e rrjetit, duke përfshirë:\n\n"<li>"Wi‑Fi"</li>\n<li>"Të dhënat celulare"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Rivendos cilësimet"</string>
@@ -2842,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Vetëm alarmet"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Heshtje e plotë"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blloko shqetësimet vizuale"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Tingujt e profilit të punës"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Përdor tingujt e profilit personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Tingujt janë të njëjtë për profilin tënd personal dhe atë të punës"</string>
@@ -3004,8 +3003,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Vetëm nga kontaktet me yll"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Asnjë"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmet"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmet janë gjithmonë me prioritet dhe lëshojnë tingull"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Alarmet rikujtuese"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Ngjarjet"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Të gjithë telefonuesit"</string>

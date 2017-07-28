@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vol accedir als teus missatges. Vols donar-li accés a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Sol·licitud d\'accés a la SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vol accedir a la targeta SIM. Si hi concedeixes accés, es desactivarà la connectivitat de dades al dispositiu mentre duri la connexió. Dona accés a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Visible com a <xliff:g id="DEVICE_NAME">^1</xliff:g> per a altres dispositius"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Visible com a <xliff:g id="DEVICE_NAME">^1</xliff:g> per a altres dispositius"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Els teus dispositius"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Vincula un dispositiu nou"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data i hora"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Vols cancel·lar la invitació?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Vols cancel·lar la invitació per connectar amb <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Vols esborrar aquest grup?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Punt d\'accés Wi-Fi"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Punt d\'accés Wi-Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"No s\'està compartint Internet o contingut amb altres dispositius"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"S\'està compartint la connexió a Internet de la tauleta mitjançant el punt d\'accés Wi-Fi"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"S\'està compartint la connexió a Internet del telèfon mitjançant el punt d\'accés Wi-Fi"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"L\'aplicació està compartint contingut. Per compartir la connexió a Internet, desactiva el punt d\'accés Wi-Fi i torna\'l a activar."</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Nom de la Wi-Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Nom del punt d\'accés Wi-Fi"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"S\'està activant <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Altres dispositius es poden connectar a <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Contrasenya de la Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Contrasenya del punt d\'accés Wi-Fi"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda del punt d\'accés"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Utilitza el punt d\'accés Wi-Fi per crear una xarxa Wi-Fi per a altres dispositius. El punt d\'accés Wi-Fi proporciona Internet mitjançant la teva connexió de dades mòbils. És possible que s\'hi apliquin càrrecs addicionals per l\'ús de dades mòbils."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Les aplicacions poden crear un punt d\'accés Wi-Fi per compartir contingut amb els dispositius que es trobin a prop."</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Restableix valors predeterminats"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"S\'ha restablert la configuració predeterminada d\'APN."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Restableix les opcions"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Es poden restablir la xarxa, les aplicacions o el dispositiu"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Restableix la Wi-Fi, les dades mòbils i el Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Es restabliran totes les opcions de configuració de la xarxa, inclosos:\n\n"<li>"la Wi‑Fi"</li>\n<li>"les dades mòbils"</li>\n<li>"el Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Restableix la configuració"</string>
@@ -2842,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Només alarmes"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Silenci total"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloqueja interrupcions visuals"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons del perfil professional"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utilitza sons del perfil pers."</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Els sons del perfil professional i personal són els mateixos"</string>
@@ -3004,8 +3003,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Només dels contactes destacats"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Cap"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmes"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Les alarmes sempre tenen prioritat i sonen"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Recordatoris"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Esdeveniments"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Totes les trucades"</string>
