@@ -26,9 +26,8 @@
     <PreferenceCategory
             android:key="general_details_category" >
         <!-- Buttons -->
-        <com.android.settings.applications.LayoutPreference
+        <com.android.settings.widget.ActionButtonPreference
             android:key="buttons"
-            android:layout="@layout/wifi_network_details_two_buttons_panel"
             android:selectable="false" />
 
         <com.android.settings.wifi.WifiDetailPreference
