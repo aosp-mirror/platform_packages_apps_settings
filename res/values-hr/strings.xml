@@ -167,7 +167,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s želi pristupiti vašim porukama. Želite li dati pristup korisniku %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Zahtjev za pristup SIM-u"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> želi pristupiti SIM kartici. Dopuštanjem pristupa SIM kartici onemogućit će se podatkovna veza na uređaju za vrijeme povezanosti. Dopustite pristup uređaju <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Drugim uređajima vidljiv kao \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Drugim uređajima vidljiv kao \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Vaši uređaji"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Uparivanje novog uređaja"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum i vrijeme"</string>
@@ -891,16 +891,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Otkazati pozivnicu?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Želite li otkazati pozivnicu za povezivanje s korisnikom <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Zaboraviti ovu grupu?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Prijenosna Wi-Fi žarišna točka"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi žarišna točka"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Internetska veza i sadržaj ne dijele se s drugim uređajima"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Internetska veza ovog tableta dijeli se putem žarišne točke"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Internetska veza ovog telefona dijeli se putem žarišne točke"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Aplikacija dijeli sadržaj. Da biste dijelili internetsku vezu, isključite žarišnu točku, a zatim je ponovo uključite"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Naziv Wi‑Fi-ja"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Naziv žarišne točke"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Uključivanje žarišne točke <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Drugi uređaji mogu se povezati sa žarišnom točkom <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Zaporka za Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Zaporka žarišne točke"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Frekvencija pristupne točke"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Upotrijebite žarišnu točku da biste izradili Wi‑Fi mrežu za ostale uređaje. Žarišna točka omogućuje povezivanje s internetom putem podatkovne veze vašeg mobilnog uređaja. Mogući su dodatni troškovi za prijenos podataka na mobilnom uređaju."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Aplikacije mogu izraditi žarišnu točku radi dijeljenja sadržaja s uređajima u blizini."</string>
@@ -1341,6 +1340,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Vrati na zadano"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Poništavanje zadanih postavki APN-a dovršeno."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Poništavanje opcija"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Mreža, aplikacije ili uređaj mogu se poništiti"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Poništi Wi-Fi, mobilnu mrežu i Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Ovime će se poništiti sve postavke mreže, uključujući:\n\n"<li>"Wi‑Fi"</li>\n<li>"mobilne podatke"</li>\n<li>"Bluetooth."</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Poništi postavke"</string>
@@ -2870,8 +2870,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Samo alarmi"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Potpuna tišina"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokiranje vizualnih ometanja"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Zvukovi radnog profila"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Upotreba zvuka osobnog profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Zvukovi su isti za radni i osobni profil"</string>
@@ -3035,8 +3034,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Samo od kontakata sa zvjezdicom"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ništa"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmi"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmi su uvijek prioritetni i emitiraju zvuk"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Podsjetnici"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Događaji"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Svi pozivatelji"</string>

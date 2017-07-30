@@ -159,6 +159,8 @@ public class PowerUsageSummaryTest {
     private PreferenceGroup mAppListGroup;
     @Mock
     private AnomalyDetectionPolicy mAnomalyDetectionPolicy;
+    @Mock
+    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -566,6 +568,15 @@ public class PowerUsageSummaryTest {
         // Restarting the loader should reset the listener.
         mFragment.restartBatteryInfoLoader();
         verify(mSummary1, times(2)).setOnLongClickListener(any(View.OnLongClickListener.class));
+    }
+
+    @Test
+    public void testRestartBatteryStatsLoader_notClearHeader_quickUpdateNotInvoked() {
+        mFragment.mBatteryHeaderPreferenceController = mBatteryHeaderPreferenceController;
+
+        mFragment.restartBatteryStatsLoader(false /* clearHeader */);
+
+        verify(mBatteryHeaderPreferenceController, never()).quickUpdateHeaderPreference();
     }
 
     public static class TestFragment extends PowerUsageSummary {

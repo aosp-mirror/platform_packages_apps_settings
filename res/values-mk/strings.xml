@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s сака да пристапи кон вашите пораки. Дозволи пристап на %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Побаран е пристап до SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> сака да пристапи до вашата SIM-картичка. Доколку дозволите пристап до SIM-картичката, ќе се исклучи поврзувањето со податоци на уредот сѐ додека трае поврзувањето. Дозволете пристап до <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Другите уреди го гледаат како „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Другите уреди го гледаат како „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Ваши уреди"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Спарување нов уред"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Датум и време"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Откажи покана?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Дали сакате да ја откажете поканата да се поврзете со <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Заборави ја оваа група?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Точка на пристап на пренослива Wi-Fi"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Жешко место за Wi‑Fi"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Не се споделува интернет или содржини со други уреди"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Интернет-врската на таблетов се споделува преку точка на пристап"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Интернет-врската на телефонов се споделува преку точка на пристап"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Апликацијата споделува содржини. За споделување на интернет-врската, исклучете ја, а потоа вклучете ја точката на пристап"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Име на Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Име на точка на пристап"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Се вклучува <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Другите уреди може да се поврзат на <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Лозинка за Wi-Fi"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Лозинка на точка на пристап"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Појас на точката на пристап"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Користете точка на пристап за да создадете Wi‑Fi мрежа за другите уреди. Точката на пристап обезбедува интернет со помош на мобилната интернет-врска. Може да ви се наплатат дополнителни трошоци за мобилниот интернет."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Апликациите може да создадат точка на пристап за да споделуваат содржини со уредите во близина."</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Ресетирај на стандардни вредности"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Ресетирањето стандардни подесувања на APN е завршено."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Опции за ресетирање"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Може да се ресетира мрежа, апликации или уред"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Ресетирај Wi-Fi, мобилен интернет и Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Ова ќе ги ресетира сите мрежни поставки, вклучувајќи:\n\n"<li>"Wi‑Fi"</li>\n<li>"Мобилен интернет"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Ресетирај поставки"</string>
@@ -2842,8 +2842,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Само аларми"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Целосна тишина"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Блокирајте визуелни нарушувања"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Звуци на работниот профил"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Користи звуци од личен профил"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Звуците се исти за работниот и личниот профил"</string>
@@ -3004,8 +3003,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Само од контактите со ѕвезда"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Никој"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Аларми"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Алармите секогаш се приоритетни и со звук"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Потсетници"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Настани"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Сите повикувачи"</string>

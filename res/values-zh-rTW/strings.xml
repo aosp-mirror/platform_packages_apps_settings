@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s 要求存取你的訊息。要將存取權授予 %2$s 嗎？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 存取權請求"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的 SIM 卡。如果授權該裝置存取 SIM 卡，你裝置的數據連線功能在藍牙連線期間將暫時停用。將存取權授予「<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>」"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"你的裝置"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"配對新裝置"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和時間"</string>
@@ -879,16 +879,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"取消邀請？"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"你要取消 <xliff:g id="PEER_NAME">%1$s</xliff:g> 的連線邀請？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"刪除這個群組？"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"可攜式 Wi-Fi 無線基地台"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi‑Fi 無線基地台"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"目前沒有與其他裝置分享網際網路或內容"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"正在透過無線基地台分享這部平板電腦的網際網路連線"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"正在透過無線基地台分享這支手機的網際網路連線"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"應用程式正在分享內容。如要分享網際網路連線，請關閉無線基地台並重新開啟"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi 名稱"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"無線基地台名稱"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"正在開啟 <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"其他裝置可連線至 <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi 密碼"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"無線基地台密碼"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"存取點頻帶"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"使用無線基地台建立 Wi‑Fi 網路供其他裝置使用。無線基地台會使用你的行動數據連線提供網際網路。可能需支付額外的行動數據傳輸費用。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"應用程式可以建立無線基地台來和鄰近的裝置分享內容。"</string>
@@ -1328,6 +1327,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"還原為預設狀態"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"重設預設 APN 設定已完成。"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"重設選項"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"網路、應用程式或裝置可以重設"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"重設 Wi-Fi、行動網路和藍牙"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"這項操作會重設所有網路設定，包括：\n\n"<li>"Wi‑Fi"</li>\n<li>"行動數據"</li>\n<li>"藍牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重設設定"</string>
@@ -2846,8 +2846,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"僅限鬧鐘"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_visual_interruptions_settings_title (7738713773934576844) -->
-    <skip />
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"封鎖視覺干擾"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Work 設定檔音效"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用個人設定檔音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Work 設定檔和個人設定檔使用相同的音效"</string>
@@ -3008,8 +3007,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"來自已加星號的聯絡人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"無"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"鬧鐘"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3774926045611788635) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"鬧鐘一律可優先發出音效"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活動"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有來電者"</string>
