@@ -66,7 +66,8 @@ public class ResultPayload implements Parcelable {
      * Enumerates the possible values for the Availability of a setting.
      */
     @IntDef({Availability.AVAILABLE,
-            Availability.DISABLED_DEPENDENCY,
+            Availability.DISABLED_DEPENDENT_SETTING,
+            Availability.DISABLED_DEPENDENT_APP,
             Availability.DISABLED_UNSUPPORTED,
             Availability.RESOURCE_CONTENTION})
     @Retention(RetentionPolicy.SOURCE)
@@ -77,9 +78,10 @@ public class ResultPayload implements Parcelable {
         int AVAILABLE = 0;
 
         /**
-         * The setting has a dependency which is currently disabled, blocking access.
+         * The setting has a dependency in settings app which is currently disabled, blocking
+         * access.
          */
-        int DISABLED_DEPENDENCY = 1;
+        int DISABLED_DEPENDENT_SETTING = 1;
 
         /**
          * The setting is not supported by the device.
@@ -91,6 +93,11 @@ public class ResultPayload implements Parcelable {
          * be changed until it is released by said application.
          */
         int RESOURCE_CONTENTION = 3;
+
+        /**
+         * The setting is disabled because corresponding app is disabled
+         */
+        int DISABLED_DEPENDENT_APP = 4;
     }
 
     @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
