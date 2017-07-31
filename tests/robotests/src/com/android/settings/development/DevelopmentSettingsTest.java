@@ -28,6 +28,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -113,8 +114,7 @@ public class DevelopmentSettingsTest {
     @Test
     public void searchIndex_pageDisabled_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
-        new DevelopmentSettingsEnabler(appContext, null /* lifecycle */)
-                .disableDevelopmentSettings();
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, false);
 
         final List<String> nonIndexableKeys =
                 DevelopmentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(appContext);
@@ -125,8 +125,7 @@ public class DevelopmentSettingsTest {
     @Test
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
-        new DevelopmentSettingsEnabler(appContext, null /* lifecycle */)
-                .enableDevelopmentSettings();
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
 
         final List<String> nonIndexableKeys =
                 DevelopmentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(appContext);

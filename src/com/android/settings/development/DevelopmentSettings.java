@@ -98,6 +98,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -112,11 +113,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
         OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
     private static final String TAG = "DevelopmentSettings";
-
-    /**
-     * Preference file were development settings prefs are stored.
-     */
-    public static final String PREF_FILE = "development";
 
     /**
      * Whether to show the development settings to the user.  Default is false.
@@ -353,7 +349,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mLogpersistCleared;
     private Dialog mLogpersistClearDialog;
     private DashboardFeatureProvider mDashboardFeatureProvider;
-    private DevelopmentSettingsEnabler mSettingsEnabler;
     private DevelopmentSwitchBarController mSwitchBarController;
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
@@ -374,7 +369,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mSettingsEnabler = new DevelopmentSettingsEnabler(context, getLifecycle());
         mDashboardFeatureProvider = FeatureFactory.getFactory(context)
                 .getDashboardFeatureProvider(context);
     }
@@ -681,18 +675,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mDisabledPrefs.add(mKeepScreenOn);
         }
 
-        final boolean lastEnabledState = mSettingsEnabler.getLastEnabledState();
-        mSwitchBar.setChecked(lastEnabledState);
-        setPrefsEnabledState(lastEnabledState);
+        final boolean developmentEnabledState =
+                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
+        mSwitchBar.setChecked(developmentEnabledState);
+        setPrefsEnabledState(developmentEnabledState);
 
-        if (mHaveDebugSettings && !lastEnabledState) {
+        if (mHaveDebugSettings && !developmentEnabledState) {
             // Overall debugging is disabled, but there are some debug
             // settings that are enabled.  This is an invalid state.  Switch
             // to debug settings being enabled, so the user knows there is
             // stuff enabled and can turn it all off if they want.
-            mSettingsEnabler.enableDevelopmentSettings();
-            mSwitchBar.setChecked(lastEnabledState);
-            setPrefsEnabledState(lastEnabledState);
+            DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), true);
+            mSwitchBar.setChecked(true);
+            setPrefsEnabledState(true);
         }
         mSwitchBar.show();
 
@@ -1543,7 +1538,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                         || currentValue.equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE)) {
                     writeLogpersistOption(null, true);
                     mLogpersist.setEnabled(false);
-                } else if (mSettingsEnabler.getLastEnabledState()) {
+                } else if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
                     mLogpersist.setEnabled(true);
                 }
             }
@@ -2359,8 +2354,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (switchView != mSwitchBar.getSwitch()) {
             return;
         }
-        final boolean lastEnabledState = mSettingsEnabler.getLastEnabledState();
-        if (isChecked != lastEnabledState) {
+        final boolean developmentEnabledState =
+                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
+        if (isChecked != developmentEnabledState) {
             if (isChecked) {
                 mDialogClicked = false;
                 if (mEnableDialog != null) dismissDialogs();
@@ -2374,7 +2370,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mEnableDialog.setOnDismissListener(this);
             } else {
                 resetDangerousOptions();
-                mSettingsEnabler.disableDevelopmentSettings();
+                DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
                 setPrefsEnabledState(false);
             }
         }
@@ -2640,7 +2636,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else if (dialog == mEnableDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 mDialogClicked = true;
-                mSettingsEnabler.enableDevelopmentSettings();
+                DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), true);
                 setPrefsEnabledState(true);
             } else {
                 // Reset the toggle
@@ -2759,10 +2755,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return context.getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                            Context.MODE_PRIVATE).getBoolean(
-                            DevelopmentSettings.PREF_SHOW,
-                            android.os.Build.TYPE.equals("eng"));
+                    return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
                 }
 
                 @Override

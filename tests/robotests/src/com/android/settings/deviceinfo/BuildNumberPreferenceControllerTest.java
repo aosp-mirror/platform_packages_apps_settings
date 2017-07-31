@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -38,12 +39,12 @@ import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.TestConfig;
-import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.search.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
 import org.junit.Before;
@@ -176,8 +177,8 @@ public class BuildNumberPreferenceControllerTest {
                 null);
 
         assertThat(activityResultHandled).isFalse();
-        verify(mContext, never())
-                .getSharedPreferences(DevelopmentSettings.PREF_FILE, Context.MODE_PRIVATE);
+        assertThat(DevelopmentSettingsEnabler
+                .isDevelopmentSettingsEnabled(RuntimeEnvironment.application)).isFalse();
     }
 
     @Test
@@ -188,8 +189,8 @@ public class BuildNumberPreferenceControllerTest {
                 null);
 
         assertThat(activityResultHandled).isTrue();
-        verify(mContext, never())
-                .getSharedPreferences(DevelopmentSettings.PREF_FILE, Context.MODE_PRIVATE);
+        assertThat(DevelopmentSettingsEnabler
+                .isDevelopmentSettingsEnabled(RuntimeEnvironment.application)).isFalse();
     }
 
     @Test
@@ -208,9 +209,8 @@ public class BuildNumberPreferenceControllerTest {
                 null);
 
         assertThat(activityResultHandled).isTrue();
-        assertThat(context.getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW, false))
-                .isTrue();
+        assertThat(DevelopmentSettingsEnabler
+                .isDevelopmentSettingsEnabled(RuntimeEnvironment.application)).isTrue();
     }
 
 }
