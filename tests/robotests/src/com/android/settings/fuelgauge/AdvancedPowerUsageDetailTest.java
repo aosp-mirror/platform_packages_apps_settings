@@ -355,6 +355,18 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
+    public void testStartBatteryDetailPage_defaultPackageNull_choseFromBatterySipper() {
+        mBatteryEntry.defaultPackageName = null;
+        mBatteryEntry.sipper.mPackages = PACKAGE_NAME;
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
+                mBatteryEntry, USAGE_PERCENT, null);
+
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
+                PACKAGE_NAME[0]);
+    }
+
+    @Test
     public void testInitPreference_hasCorrectSummary() {
         Bundle bundle = new Bundle(4);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
