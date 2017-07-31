@@ -39,7 +39,7 @@ public final class DataUsageUtils {
      * Returns whether device has mobile data.
      * TODO: This is the opposite to Utils.isWifiOnly(), it should be refactored into 1 method.
      */
-    static boolean hasMobileData(Context context) {
+    public static boolean hasMobileData(Context context) {
         ConnectivityManager connectivityManager = ConnectivityManager.from(context);
         return connectivityManager != null && connectivityManager
                 .isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
