@@ -68,7 +68,8 @@ public class ResultPayload implements Parcelable {
     @IntDef({Availability.AVAILABLE,
             Availability.DISABLED_DEPENDENCY,
             Availability.DISABLED_UNSUPPORTED,
-            Availability.RESOURCE_CONTENTION})
+            Availability.RESOURCE_CONTENTION,
+            Availability.INTENT_ONLY,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Availability {
         /**
@@ -91,6 +92,11 @@ public class ResultPayload implements Parcelable {
          * be changed until it is released by said application.
          */
         int RESOURCE_CONTENTION = 3;
+
+        /**
+         * This setting is supported on the device but cannot be changed inline.
+         */
+        int INTENT_ONLY = 4;
     }
 
     @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
