@@ -54,13 +54,19 @@ import java.util.List;
 public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
 
     public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
-    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
-    private static final String KEY_DATA_PLAN_USAGE = "data_plan_usage";
+    public static final String KEY_DATA_PLAN_USAGE = "data_plan_usage";
 
-    private static final String KEY_STATUS_HEADER = "status_header";
-    private static final String KEY_LIMIT_SUMMARY = "plan_summary";
-    private static final String KEY_MOBILE_USAGE_TITLE = "data_usage_mobile_category";
-    private static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
+    public static final String KEY_STATUS_HEADER = "status_header";
+    public static final String KEY_LIMIT_SUMMARY = "plan_summary";
+
+    // Mobile data keys
+    public static final String KEY_MOBILE_USAGE_TITLE = "data_usage_mobile_category";
+    public static final String KEY_MOBILE_DATA_USAGE_TOGGLE = "data_usage_enable";
+
+    // Wifi keys
+    public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
+    public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
+    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
@@ -364,19 +370,17 @@ public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
                         boolean enabled) {
                     List<SearchIndexableResource> resources = new ArrayList<>();
                     SearchIndexableResource resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_plan_usage;
+                    resource.xmlResId = R.xml.data_usage;
                     resources.add(resource);
 
-                    if (DataUsageUtils.hasMobileData(context)) {
-                        resource = new SearchIndexableResource(context);
-                        resource.xmlResId = R.xml.data_plan_usage_cell_data_preference_screen;
-                        resources.add(resource);
-                    }
-                    if (DataUsageUtils.hasWifiRadio(context)) {
-                        resource = new SearchIndexableResource(context);
-                        resource.xmlResId = R.xml.data_usage_wifi;
-                        resources.add(resource);
-                    }
+                    resource = new SearchIndexableResource(context);
+                    resource.xmlResId = R.xml.data_plan_usage_cell_data_preference_screen;
+                    resources.add(resource);
+
+                    resource = new SearchIndexableResource(context);
+                    resource.xmlResId = R.xml.data_usage_wifi;
+                    resources.add(resource);
+
                     return resources;
                 }
 
@@ -384,12 +388,16 @@ public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
 
-                    if (DataUsageUtils.hasMobileData(context)) {
-                        keys.add(KEY_RESTRICT_BACKGROUND);
+                    if (!DataUsageUtils.hasMobileData(context)) {
+                        keys.add(KEY_MOBILE_USAGE_TITLE);
+                        keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
                     }
-                    if (DataUsageUtils.hasWifiRadio(context)) {
+
+                    if (!DataUsageUtils.hasWifiRadio(context)) {
+                        keys.add(KEY_WIFI_DATA_USAGE);
                         keys.add(KEY_NETWORK_RESTRICTIONS);
                     }
+
                     keys.add(KEY_WIFI_USAGE_TITLE);
 
                     return keys;
