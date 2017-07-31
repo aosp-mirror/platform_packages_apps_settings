@@ -82,29 +82,4 @@ public class DataUsageSummaryTest {
         verify(preference).setSummary(mContext.getResources().getQuantityString(
             R.plurals.network_restrictions_summary, 0, 0));
     }
-
-    @Test
-    public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
-        final List<String> niks = DataUsageSummary.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
-        final List<String> keys = new ArrayList<>();
-
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage_wifi));
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage));
-
-        assertThat(keys).containsAllIn(niks);
-    }
-
-    @Test
-    @Config(shadows = ShadowConnectivityManager.class)
-    public void testNonIndexableKeys_hasMobileData_restrictedAccessesAdded() {
-        ShadowConnectivityManager.setIsNetworkSupported(true);
-        List<String> keys = DataUsageSummary.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-
-        assertThat(keys).contains(DataUsageSummary.KEY_RESTRICT_BACKGROUND);
-        assertThat(keys).contains(DataUsageSummary.KEY_NETWORK_RESTRICTIONS);
-        ShadowConnectivityManager.setIsNetworkSupported(false);
-    }
 }
