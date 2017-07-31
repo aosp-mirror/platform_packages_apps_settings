@@ -44,7 +44,6 @@ import android.content.res.Resources;
 import android.hardware.usb.IUsbManager;
 import android.hardware.usb.UsbManager;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,6 +98,7 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -839,7 +839,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void resetDangerousOptions() {
-        mDontPokeProperties = true;
+        SystemPropPoker.getInstance().blockPokes();
         for (int i = 0; i < mResetSwitchPrefs.size(); i++) {
             SwitchPreference cb = mResetSwitchPrefs.get(i);
             if (cb.isChecked()) {
@@ -863,8 +863,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
         updateAllOptions();
-        mDontPokeProperties = false;
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().unblockPokes();
+        SystemPropPoker.getInstance().poke();
     }
 
     private void updateHdcpValues() {
@@ -1175,7 +1175,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeHardwareUiOptions() {
         SystemProperties.set(HARDWARE_UI_PROPERTY, mForceHardwareUi.isChecked() ? "true" : "false");
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
     }
 
     private void updateMsaaOptions() {
@@ -1184,7 +1184,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeMsaaOptions() {
         SystemProperties.set(MSAA_PROPERTY, mForceMsaa.isChecked() ? "true" : "false");
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
     }
 
     private void updateTrackFrameTimeOptions() {
@@ -1208,7 +1208,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeTrackFrameTimeOptions(Object newValue) {
         SystemProperties.set(ThreadedRenderer.PROFILE_PROPERTY,
                 newValue == null ? "" : newValue.toString());
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         updateTrackFrameTimeOptions();
     }
 
@@ -1234,7 +1234,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeShowNonRectClipOptions(Object newValue) {
         SystemProperties.set(ThreadedRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY,
                 newValue == null ? "" : newValue.toString());
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         updateShowNonRectClipOptions();
     }
 
@@ -1246,7 +1246,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeShowHwScreenUpdatesOptions() {
         SystemProperties.set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
                 mShowHwScreenUpdates.isChecked() ? "true" : null);
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
     }
 
     private void updateShowHwLayersUpdatesOptions() {
@@ -1257,7 +1257,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeShowHwLayersUpdatesOptions() {
         SystemProperties.set(ThreadedRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY,
                 mShowHwLayersUpdates.isChecked() ? "true" : null);
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
     }
 
     private void updateDebugHwOverdrawOptions() {
@@ -1281,7 +1281,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeDebugHwOverdrawOptions(Object newValue) {
         SystemProperties.set(ThreadedRenderer.DEBUG_OVERDRAW_PROPERTY,
                 newValue == null ? "" : newValue.toString());
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         updateDebugHwOverdrawOptions();
     }
 
@@ -1306,7 +1306,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeDebugHwRendererOptions(Object newValue) {
         SystemProperties.set(ThreadedRenderer.DEBUG_RENDERER_PROPERTY,
                 newValue == null ? "" : newValue.toString());
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         updateDebugHwRendererOptions();
     }
 
@@ -1318,7 +1318,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeDebugLayoutOptions() {
         SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY,
                 mDebugLayout.isChecked() ? "true" : "false");
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
     }
 
     private void updateSimulateColorSpace() {
@@ -1384,7 +1384,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeColorTemperature() {
         SystemProperties.set(COLOR_TEMPERATURE_PROPERTY,
                 mColorTemperaturePreference.isChecked() ? "1" : "0");
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         Toast.makeText(getActivity(), R.string.color_temperature_toast, Toast.LENGTH_LONG).show();
     }
 
@@ -1605,7 +1605,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 newValue.toString() : defaultValue;
         SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, defaultValue.equals(size) ? "" : size);
         SystemProperties.set("ctl.start", "logd-reinit");
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         updateLogdSizeValues();
     }
 
@@ -1652,7 +1652,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else if (!mLogpersistCleared) {
             // would File.delete() directly but need to switch uid/gid to access
             SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_CLEAR);
-            pokeSystemProperties();
+            SystemPropPoker.getInstance().poke();
             mLogpersistCleared = true;
         }
     }
@@ -1664,7 +1664,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, "");
         SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY,
                 update ? "" : SELECT_LOGPERSIST_PROPERTY_STOP);
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         if (update) {
             updateLogpersistValues();
         } else {
@@ -1721,7 +1721,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, newValue.toString());
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_SERVICE);
-        pokeSystemProperties();
+        SystemPropPoker.getInstance().poke();
         for (int i = 0; i < 3; i++) {
             String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
             if ((currentValue != null)
@@ -2551,7 +2551,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
             SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
             updateHdcpValues();
-            pokeSystemProperties();
+            SystemPropPoker.getInstance().poke();
             return true;
         } else if (preference == mBluetoothSelectAvrcpVersion) {
            writeBluetoothAvrcpVersion(newValue);
@@ -2669,13 +2669,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         super.onDestroy();
     }
 
-    void pokeSystemProperties() {
-        if (!mDontPokeProperties) {
-            //noinspection unchecked
-            (new SystemPropPoker()).execute();
-        }
-    }
-
     private BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -2715,28 +2708,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 updateBluetoothA2dpConfigurationValues();
             }
         };
-
-    public static class SystemPropPoker extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            String[] services = ServiceManager.listServices();
-            for (String service : services) {
-                IBinder obj = ServiceManager.checkService(service);
-                if (obj != null) {
-                    Parcel data = Parcel.obtain();
-                    try {
-                        obj.transact(IBinder.SYSPROPS_TRANSACTION, data, null, 0);
-                    } catch (RemoteException e) {
-                    } catch (Exception e) {
-                        Log.i(TAG, "Someone wrote a bad service '" + service
-                                + "' that doesn't like to be poked: " + e);
-                    }
-                    data.recycle();
-                }
-            }
-            return null;
-        }
-    }
 
     private static boolean isPackageInstalled(Context context, String packageName) {
         try {
