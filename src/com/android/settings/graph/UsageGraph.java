@@ -28,8 +28,8 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.View;
@@ -93,7 +93,7 @@ public class UsageGraph extends View {
         float dots = resources.getDimensionPixelSize(R.dimen.usage_graph_dot_size);
         float interval = resources.getDimensionPixelSize(R.dimen.usage_graph_dot_interval);
         mDottedPaint.setStrokeWidth(dots * 3);
-        mDottedPaint.setPathEffect(new DashPathEffect(new float[]{dots, interval}, 0));
+        mDottedPaint.setPathEffect(new DashPathEffect(new float[] {dots, interval}, 0));
         mDottedPaint.setColor(context.getColor(R.color.usage_graph_dots));
 
         TypedValue v = new TypedValue();
@@ -136,8 +136,8 @@ public class UsageGraph extends View {
         addPathAndUpdate(points, mProjectedPaths, mLocalProjectedPaths);
     }
 
-    private void addPathAndUpdate(SparseIntArray points, SparseIntArray paths,
-            SparseIntArray localPaths) {
+    private void addPathAndUpdate(
+            SparseIntArray points, SparseIntArray paths, SparseIntArray localPaths) {
         final long startTime = System.currentTimeMillis();
         for (int i = 0, size = points.size(); i < size; i++) {
             paths.put(points.keyAt(i), points.valueAt(i));
@@ -170,41 +170,44 @@ public class UsageGraph extends View {
         calculateLocalPaths(mProjectedPaths, mLocalProjectedPaths);
     }
 
-    private void calculateLocalPaths(SparseIntArray paths, SparseIntArray localPaths) {
+    @VisibleForTesting
+    void calculateLocalPaths(SparseIntArray paths, SparseIntArray localPaths) {
         final long startTime = System.currentTimeMillis();
         if (getWidth() == 0) {
             return;
         }
         localPaths.clear();
-        int pendingXLoc = 0;
-        int pendingYLoc = PATH_DELIM;
+        // Store the local coordinates of the most recent point.
+        int lx = 0;
+        int ly = PATH_DELIM;
+        boolean skippedLastPoint = false;
         for (int i = 0; i < paths.size(); i++) {
             int x = paths.keyAt(i);
             int y = paths.valueAt(i);
             if (y == PATH_DELIM) {
-                if (i == paths.size() - 1 && pendingYLoc != PATH_DELIM) {
-                    // Connect to the end of the graph.
-                    localPaths.put(pendingXLoc, pendingYLoc);
+                if (i == paths.size() - 1 && skippedLastPoint) {
+                    // Add back skipped point to complete the path.
+                    localPaths.put(lx, ly);
                 }
-                // Clear out any pending points.
-                pendingYLoc = PATH_DELIM;
-                localPaths.put(pendingXLoc + 1, PATH_DELIM);
+                skippedLastPoint = false;
+                localPaths.put(lx + 1, PATH_DELIM);
             } else {
-                final int lx = getX(x);
-                final int ly = getY(y);
-                pendingXLoc = lx;
+                lx = getX(x);
+                ly = getY(y);
+                // Skip this point if it is not far enough from the last one added.
                 if (localPaths.size() > 0) {
                     int lastX = localPaths.keyAt(localPaths.size() - 1);
                     int lastY = localPaths.valueAt(localPaths.size() - 1);
                     if (lastY != PATH_DELIM && !hasDiff(lastX, lx) && !hasDiff(lastY, ly)) {
-                        pendingYLoc = ly;
+                        skippedLastPoint = true;
                         continue;
                     }
                 }
+                skippedLastPoint = false;
                 localPaths.put(lx, ly);
             }
         }
-        BatteryUtils.logRuntime(LOG_TAG,"calculateLocalPaths", startTime);
+        BatteryUtils.logRuntime(LOG_TAG, "calculateLocalPaths", startTime);
     }
 
     private boolean hasDiff(int x1, int x2) {
@@ -221,8 +224,8 @@ public class UsageGraph extends View {
 
     private void updateGradient() {
         mFillPaint.setShader(
-                new LinearGradient(0, 0, 0, getHeight(), getColor(mAccentColor, .2f), 0,
-                        TileMode.CLAMP));
+                new LinearGradient(
+                        0, 0, 0, getHeight(), getColor(mAccentColor, .2f), 0, TileMode.CLAMP));
     }
 
     private int getColor(int color, float alphaScale) {
@@ -236,7 +239,9 @@ public class UsageGraph extends View {
         if (mMiddleDividerLoc != 0) {
             drawDivider(0, canvas, mTopDividerTint);
         }
-        drawDivider((int) ((canvas.getHeight() - mDividerSize) * mMiddleDividerLoc), canvas,
+        drawDivider(
+                (int) ((canvas.getHeight() - mDividerSize) * mMiddleDividerLoc),
+                canvas,
                 mMiddleDividerTint);
         drawDivider(canvas.getHeight() - mDividerSize, canvas, -1);
 
