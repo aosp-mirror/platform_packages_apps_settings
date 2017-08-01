@@ -39,6 +39,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -63,6 +64,7 @@ import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.SearchActivity;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import java.util.ArrayList;
@@ -164,8 +166,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             "android.settings.APPLICATION_DETAILS_SETTINGS"
     };
 
-    private SharedPreferences mDevelopmentPreferences;
-    private SharedPreferences.OnSharedPreferenceChangeListener mDevelopmentPreferencesListener;
+    private BroadcastReceiver mDevelopmentSettingsListener;
 
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -273,9 +274,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-
-        mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE);
 
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
@@ -530,9 +528,14 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected void onResume() {
         super.onResume();
 
-        mDevelopmentPreferencesListener = (sharedPreferences, key) -> updateTilesList();
-        mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
-                mDevelopmentPreferencesListener);
+        mDevelopmentSettingsListener = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateTilesList();
+            }
+        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(mDevelopmentSettingsListener,
+                new IntentFilter(DevelopmentSettingsEnabler.DEVELOPMENT_SETTINGS_CHANGED_ACTION));
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         if (mDynamicIndexableContentMonitor == null) {
@@ -546,9 +549,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onPause() {
         super.onPause();
-        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
-                mDevelopmentPreferencesListener);
-        mDevelopmentPreferencesListener = null;
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mDevelopmentSettingsListener);
+        mDevelopmentSettingsListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
         if (mDynamicIndexableContentMonitor != null) {
             mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
@@ -839,8 +841,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin)
                 || somethingChanged;
 
-        final boolean showDev = mDevelopmentPreferences.getBoolean(
-                DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
+        final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),

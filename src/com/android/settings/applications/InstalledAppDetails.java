@@ -86,7 +86,6 @@ import com.android.settings.applications.instantapps.InstantAppButtonsController
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
@@ -104,6 +103,7 @@ import com.android.settingslib.applications.PermissionsSummaryHelper;
 import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 
@@ -178,7 +178,6 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
     private Preference mVersionPreference;
     private AppDomainsPreference mInstantAppDomainsPreference;
-    private DevelopmentSettingsEnabler mDevelopmentSettingsEnabler;
     private boolean mDisableAfterUninstall;
 
     // Used for updating notification preference.
@@ -392,8 +391,6 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryUtils = BatteryUtils.getInstance(getContext());
-        mDevelopmentSettingsEnabler = new DevelopmentSettingsEnabler(
-                activity, null /* lifecycle */);
     }
 
     @Override
@@ -417,7 +414,7 @@ public class InstalledAppDetails extends AppInfoBase
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
         restartBatteryStatsLoader();
-        if (mDevelopmentSettingsEnabler.getLastEnabledState()) {
+        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
             new MemoryUpdater().execute();
         }
         updateDynamicPrefs();
@@ -473,7 +470,8 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
-        mMemoryPreference.setVisible(mDevelopmentSettingsEnabler.getLastEnabledState());
+        mMemoryPreference.setVisible(
+                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext()));
         mVersionPreference = findPreference(KEY_VERSION);
         mInstantAppDomainsPreference =
                 (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);

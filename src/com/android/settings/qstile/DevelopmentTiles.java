@@ -27,7 +27,7 @@ import android.view.View;
 import android.view.WindowManagerGlobal;
 
 import com.android.internal.app.LocalePicker;
-import com.android.settings.development.DevelopmentSettings;
+import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
 
@@ -49,7 +49,7 @@ public abstract class DevelopmentTiles extends TileService {
     @Override
     public void onClick() {
         setIsEnabled(getQsTile().getState() == Tile.STATE_INACTIVE);
-        new DevelopmentSettings.SystemPropPoker().execute(); // Settings app magic
+        SystemPropPoker.getInstance().poke(); // Settings app magic
         refresh();
     }
 
