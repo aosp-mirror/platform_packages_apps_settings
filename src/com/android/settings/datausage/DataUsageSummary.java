@@ -72,11 +72,21 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     public static final String TEST_RADIOS_PROP = "test.radios";
 
     public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
-    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
 
     private static final String KEY_STATUS_HEADER = "status_header";
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
-    private static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
+
+    // Mobile data keys
+    public static final String KEY_MOBILE_CATEGORY = "mobile_category";
+    public static final String KEY_MOBILE_DATA_USAGE_TOGGLE = "data_usage_enable";
+    public static final String KEY_MOBILE_DATA_USAGE = "cellular_data_usage";
+    public static final String KEY_MOBILE_BILLING_CYCLE = "billing_preference";
+
+    // Wifi keys
+    public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
+    public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
+    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
+
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
@@ -471,16 +481,14 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
                 resource.xmlResId = R.xml.data_usage;
                 resources.add(resource);
 
-                if (hasMobileData(context)) {
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_cellular;
-                    resources.add(resource);
-                }
-                if (hasWifiRadio(context)) {
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_wifi;
-                    resources.add(resource);
-                }
+                resource = new SearchIndexableResource(context);
+                resource.xmlResId = R.xml.data_usage_cellular;
+                resources.add(resource);
+
+                resource = new SearchIndexableResource(context);
+                resource.xmlResId = R.xml.data_usage_wifi;
+                resources.add(resource);
+
                 return resources;
             }
 
@@ -488,12 +496,19 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             public List<String> getNonIndexableKeys(Context context) {
                 List<String> keys = super.getNonIndexableKeys(context);
 
-                if (hasMobileData(context)) {
-                    keys.add(KEY_RESTRICT_BACKGROUND);
+                if (!hasMobileData(context)) {
+                    keys.add(KEY_MOBILE_CATEGORY);
+                    keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
+                    keys.add(KEY_MOBILE_DATA_USAGE);
+                    keys.add(KEY_MOBILE_BILLING_CYCLE);
                 }
-                if (hasWifiRadio(context)) {
+
+                if (!hasWifiRadio(context)) {
+                    keys.add(KEY_WIFI_DATA_USAGE);
                     keys.add(KEY_NETWORK_RESTRICTIONS);
                 }
+
+                // This title is named Wifi, and will confuse users.
                 keys.add(KEY_WIFI_USAGE_TITLE);
 
                 return keys;
