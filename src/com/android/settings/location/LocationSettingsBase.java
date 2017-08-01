@@ -85,13 +85,23 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
     /** Called when location mode has changed. */
     public abstract void onModeChanged(int mode, boolean restricted);
 
-    private boolean isRestricted() {
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+    public static boolean isRestricted(Context context) {
+        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         return um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION);
     }
 
+    public static boolean updateLocationMode(Context context, int oldMode, int newMode) {
+        Intent intent = new Intent(MODE_CHANGING_ACTION);
+        intent.putExtra(CURRENT_MODE_KEY, oldMode);
+        intent.putExtra(NEW_MODE_KEY, newMode);
+        context.sendBroadcast(intent, android.Manifest.permission.WRITE_SECURE_SETTINGS);
+        return Settings.Secure.putInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
+                newMode);
+    }
+
     public void setLocationMode(int mode) {
-        if (isRestricted()) {
+        Context context = getActivity();
+        if (isRestricted(context)) {
             // Location toggling disabled by user restriction. Read the current location mode to
             // update the location master switch.
             if (Log.isLoggable(TAG, Log.INFO)) {
@@ -104,11 +114,8 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
             }
             return;
         }
-        Intent intent = new Intent(MODE_CHANGING_ACTION);
-        intent.putExtra(CURRENT_MODE_KEY, mCurrentMode);
-        intent.putExtra(NEW_MODE_KEY, mode);
-        getActivity().sendBroadcast(intent, android.Manifest.permission.WRITE_SECURE_SETTINGS);
-        Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
+
+        updateLocationMode(context, mCurrentMode, mode);
         refreshLocationMode();
     }
 
@@ -120,7 +127,7 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
             if (Log.isLoggable(TAG, Log.INFO)) {
                 Log.i(TAG, "Location mode has been changed");
             }
-            onModeChanged(mode, isRestricted());
+            onModeChanged(mode, isRestricted(getActivity()));
         }
     }
 }
