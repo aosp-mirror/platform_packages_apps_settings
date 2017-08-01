@@ -67,7 +67,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
-import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
@@ -93,6 +92,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils;
@@ -123,8 +123,7 @@ import java.util.Set;
  * uninstall the application.
  */
 public class InstalledAppDetails extends AppInfoBase
-        implements View.OnClickListener, OnPreferenceClickListener,
-        LoaderManager.LoaderCallbacks<AppStorageStats> {
+        implements OnPreferenceClickListener, LoaderManager.LoaderCallbacks<AppStorageStats> {
 
     private static final String LOG_TAG = "InstalledAppDetails";
 
@@ -166,10 +165,7 @@ public class InstalledAppDetails extends AppInfoBase
     private boolean mInitialized;
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
-    private LayoutPreference mActionButtons;
-    private Button mUninstallButton;
     private boolean mUpdatedSysApp = false;
-    private Button mForceStopButton;
     private Preference mNotificationPreference;
     private Preference mStoragePreference;
     private Preference mPermissionsPreference;
@@ -186,6 +182,8 @@ public class InstalledAppDetails extends AppInfoBase
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
 
+    @VisibleForTesting
+    ActionButtonPreference mActionButtons;
     @VisibleForTesting
     Preference mBatteryPreference;
     @VisibleForTesting
@@ -230,7 +228,7 @@ public class InstalledAppDetails extends AppInfoBase
             };
 
     @VisibleForTesting
-    boolean handleDisableable(Button button) {
+    boolean handleDisableable() {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
         // by not allowing disabling of apps signed with the
@@ -238,13 +236,19 @@ public class InstalledAppDetails extends AppInfoBase
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || Utils.isSystemPackage(getContext().getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            button.setText(R.string.disable_text);
+            mActionButtons
+                    .setButton1Text(R.string.disable_text)
+                    .setButton1Positive(false);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            button.setText(R.string.disable_text);
+            mActionButtons
+                    .setButton1Text(R.string.disable_text)
+                    .setButton1Positive(false);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
-            button.setText(R.string.enable_text);
+            mActionButtons
+                    .setButton1Text(R.string.enable_text)
+                    .setButton1Positive(true);
             disableable = true;
         }
 
@@ -258,11 +262,11 @@ public class InstalledAppDetails extends AppInfoBase
 
     private void initUninstallButtons() {
         final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-        boolean enabled = true;
+        boolean enabled;
         if (isBundled) {
-            enabled = handleDisableable(mUninstallButton);
+            enabled = handleDisableable();
         } else {
-            enabled = initUnintsallButtonForUserApp();
+            enabled = initUninstallButtonForUserApp();
         }
         // If this is a device admin, it can't be uninstalled or disabled.
         // We do this here so the text of the button is still set correctly.
@@ -325,15 +329,15 @@ public class InstalledAppDetails extends AppInfoBase
             throw new RuntimeException(e);
         }
 
-        mUninstallButton.setEnabled(enabled);
+        mActionButtons.setButton1Enabled(enabled);
         if (enabled) {
             // Register listener
-            mUninstallButton.setOnClickListener(this);
+            mActionButtons.setButton1OnClickListener(v -> handleUninstallButtonClick());
         }
     }
 
     @VisibleForTesting
-    boolean initUnintsallButtonForUserApp() {
+    boolean initUninstallButtonForUserApp() {
         boolean enabled = true;
         if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
                 && mUserManager.getUsers().size() >= 2) {
@@ -342,9 +346,9 @@ public class InstalledAppDetails extends AppInfoBase
             enabled = false;
         } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             enabled = false;
-            mUninstallButton.setVisibility(View.GONE);
+            mActionButtons.setButton1Visible(false);
         }
-        mUninstallButton.setText(R.string.uninstall_text);
+        mActionButtons.setButton1Text(R.string.uninstall_text);
         return enabled;
     }
 
@@ -444,7 +448,10 @@ public class InstalledAppDetails extends AppInfoBase
         }
         final Activity activity = getActivity();
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-        mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
+        mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
+                .setButton2Text(R.string.force_stop)
+                .setButton2Positive(false)
+                .setButton2Enabled(false);
         EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
                 .setRecyclerView(getListView(), getLifecycle())
                 .setPackageName(mPackageName)
@@ -453,7 +460,6 @@ public class InstalledAppDetails extends AppInfoBase
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .styleActionBar(activity)
                 .bindHeaderButtons();
-        prepareUninstallAndStop();
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
         mNotificationPreference.setOnPreferenceClickListener(this);
@@ -512,13 +518,6 @@ public class InstalledAppDetails extends AppInfoBase
             return false;
         }
         return true;
-    }
-
-    private void prepareUninstallAndStop() {
-        mForceStopButton = (Button) mActionButtons.findViewById(R.id.right_button);
-        mForceStopButton.setText(R.string.force_stop);
-        mUninstallButton = (Button) mActionButtons.findViewById(R.id.left_button);
-        mForceStopButton.setEnabled(false);
     }
 
     @Override
@@ -903,12 +902,10 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void updateForceStopButton(boolean enabled) {
-        if (mAppsControlDisallowedBySystem) {
-            mForceStopButton.setEnabled(false);
-        } else {
-            mForceStopButton.setEnabled(enabled);
-            mForceStopButton.setOnClickListener(this);
-        }
+        mActionButtons
+                .setButton2Enabled(mAppsControlDisallowedBySystem ? false : enabled)
+                .setButton2OnClickListener(mAppsControlDisallowedBySystem
+                        ? null : v -> handleForceStopButtonClick());
     }
 
     @VisibleForTesting
@@ -919,7 +916,7 @@ public class InstalledAppDetails extends AppInfoBase
             updateForceStopButton(false);
         } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             updateForceStopButton(false);
-            mForceStopButton.setVisibility(View.GONE);
+            mActionButtons.setButton2Visible(false);
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
@@ -966,67 +963,67 @@ public class InstalledAppDetails extends AppInfoBase
                 SUB_INFO_FRAGMENT);
     }
 
-    /*
-     * Method implementing functionality of buttons clicked
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
-    public void onClick(View v) {
+    private void handleUninstallButtonClick() {
         if (mAppEntry == null) {
             setIntentAndFinish(true, true);
             return;
         }
-        String packageName = mAppEntry.info.packageName;
-        if (v == mUninstallButton) {
-            if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
-                stopListeningToPackageRemove();
-                Activity activity = getActivity();
-                Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
-                uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
-                        mPackageName);
-                mMetricsFeatureProvider.action(
-                        activity, MetricsEvent.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN);
-                activity.startActivityForResult(uninstallDAIntent, REQUEST_REMOVE_DEVICE_ADMIN);
-                return;
-            }
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
-                    packageName, mUserId);
-            boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
-                    RestrictedLockUtils.hasBaseUserRestriction(getActivity(), packageName, mUserId);
-            if (admin != null && !uninstallBlockedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
-            } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-                    // If the system app has an update and this is the only user on the device,
-                    // then offer to downgrade the app, otherwise only offer to disable the
-                    // app for this user.
-                    if (mUpdatedSysApp && isSingleUser()) {
-                        showDialogInner(DLG_SPECIAL_DISABLE, 0);
-                    } else {
-                        showDialogInner(DLG_DISABLE, 0);
-                    }
+        final String packageName = mAppEntry.info.packageName;
+        if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+            stopListeningToPackageRemove();
+            Activity activity = getActivity();
+            Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
+            uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
+                    mPackageName);
+            mMetricsFeatureProvider.action(
+                    activity, MetricsEvent.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN);
+            activity.startActivityForResult(uninstallDAIntent, REQUEST_REMOVE_DEVICE_ADMIN);
+            return;
+        }
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
+                packageName, mUserId);
+        boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
+                RestrictedLockUtils.hasBaseUserRestriction(getActivity(), packageName, mUserId);
+        if (admin != null && !uninstallBlockedBySystem) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
+        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
+                // If the system app has an update and this is the only user on the device,
+                // then offer to downgrade the app, otherwise only offer to disable the
+                // app for this user.
+                if (mUpdatedSysApp && isSingleUser()) {
+                    showDialogInner(DLG_SPECIAL_DISABLE, 0);
                 } else {
-                    mMetricsFeatureProvider.action(
-                            getActivity(),
-                            mAppEntry.info.enabled
-                                    ? MetricsEvent.ACTION_SETTINGS_DISABLE_APP
-                                    : MetricsEvent.ACTION_SETTINGS_ENABLE_APP);
-                    new DisableChanger(this, mAppEntry.info,
-                            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
-                                    .execute((Object) null);
+                    showDialogInner(DLG_DISABLE, 0);
                 }
-            } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                uninstallPkg(packageName, true, false);
             } else {
-                uninstallPkg(packageName, false, false);
+                mMetricsFeatureProvider.action(
+                        getActivity(),
+                        mAppEntry.info.enabled
+                                ? MetricsEvent.ACTION_SETTINGS_DISABLE_APP
+                                : MetricsEvent.ACTION_SETTINGS_ENABLE_APP);
+                new DisableChanger(this, mAppEntry.info,
+                        PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
+                        .execute((Object) null);
             }
-        } else if (v == mForceStopButton) {
-            if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                        getActivity(), mAppsControlDisallowedAdmin);
-            } else {
-                showDialogInner(DLG_FORCE_STOP, 0);
-                //forceStopPackage(mAppInfo.packageName);
-            }
+        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+            uninstallPkg(packageName, true, false);
+        } else {
+            uninstallPkg(packageName, false, false);
+        }
+    }
+
+    private void handleForceStopButtonClick() {
+        if (mAppEntry == null) {
+            setIntentAndFinish(true, true);
+            return;
+        }
+        if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                    getActivity(), mAppsControlDisallowedAdmin);
+        } else {
+            showDialogInner(DLG_FORCE_STOP, 0);
+            //forceStopPackage(mAppInfo.packageName);
         }
     }
 

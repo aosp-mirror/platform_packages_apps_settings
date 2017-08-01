@@ -31,11 +31,9 @@
         android:selectable="false"
         android:order="-9999"/>
 
-    <com.android.settings.applications.LayoutPreference
-      android:key="action_buttons"
-      android:layout="@layout/app_action_buttons"
-      android:selectable="false"
-      android:order="-9998"/>
+    <com.android.settings.widget.ActionButtonPreference
+        android:key="action_buttons"
+        android:order="-9998" />
 
     <Preference
         android:key="notification_settings"

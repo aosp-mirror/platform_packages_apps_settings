@@ -48,7 +48,7 @@ public class LayoutPreferenceTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mPreference = new LayoutPreference(mContext, R.layout.app_action_buttons);
+        mPreference = new LayoutPreference(mContext, R.layout.two_action_buttons);
         mRootView = mPreference.mRootView;
         mHolder = PreferenceViewHolder.createInstanceForTests(LayoutInflater.from(mContext)
                 .inflate(R.layout.layout_preference_frame, null, false));
@@ -79,12 +79,12 @@ public class LayoutPreferenceTest {
 
     @Test
     public void disableSomeView_shouldMaintainStateAfterBind() {
-        mPreference.findViewById(R.id.left_button).setEnabled(false);
-        mPreference.findViewById(R.id.right_button).setEnabled(true);
+        mPreference.findViewById(R.id.button1_positive).setEnabled(false);
+        mPreference.findViewById(R.id.button2_positive).setEnabled(true);
 
         mPreference.onBindViewHolder(mHolder);
 
-        assertThat(mPreference.findViewById(R.id.left_button).isEnabled()).isFalse();
-        assertThat(mPreference.findViewById(R.id.right_button).isEnabled()).isTrue();
+        assertThat(mPreference.findViewById(R.id.button1_positive).isEnabled()).isFalse();
+        assertThat(mPreference.findViewById(R.id.button2_positive).isEnabled()).isTrue();
     }
 }

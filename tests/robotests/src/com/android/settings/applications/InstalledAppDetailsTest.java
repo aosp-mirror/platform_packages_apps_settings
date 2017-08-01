@@ -17,6 +17,18 @@
 package com.android.settings.applications;
 
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Fragment;
@@ -35,18 +47,18 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
-import android.widget.Button;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.instantapps.InstantAppButtonsController.ShowDialogDelegate;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settingslib.Utils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -68,18 +80,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -133,6 +133,7 @@ public final class InstalledAppDetailsTest {
 
         mBatteryPreference = new Preference(mShadowContext);
         mAppDetail.mBatteryPreference = mBatteryPreference;
+        mAppDetail.mActionButtons = ActionButtonPreferenceTest.createMock();
 
         mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mBatterySipper.uidObj = mUid;
@@ -281,15 +282,13 @@ public final class InstalledAppDetailsTest {
         appEntry.info = info;
         final PackageInfo packageInfo = mock(PackageInfo.class);
         packageInfo.applicationInfo = info;
-        final Button uninstallButton = mock(Button.class);
 
         ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
         ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
         ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
-        ReflectionHelpers.setField(mAppDetail, "mUninstallButton", uninstallButton);
 
-        mAppDetail.initUnintsallButtonForUserApp();
-        verify(uninstallButton).setVisibility(View.GONE);
+        mAppDetail.initUninstallButtonForUserApp();
+        verify(mAppDetail.mActionButtons).setButton1Visible(false);
     }
 
     // Tests that we don't show the force stop button for instant apps (they aren't allowed to run
@@ -303,15 +302,13 @@ public final class InstalledAppDetailsTest {
         final AppEntry appEntry = mock(AppEntry.class);
         final ApplicationInfo info = new ApplicationInfo();
         appEntry.info = info;
-        final Button forceStopButton = mock(Button.class);
 
         ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
         ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
         ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
-        ReflectionHelpers.setField(mAppDetail, "mForceStopButton", forceStopButton);
 
         mAppDetail.checkForceStop();
-        verify(forceStopButton).setVisibility(View.GONE);
+        verify(mAppDetail.mActionButtons).setButton2Visible(false);
     }
 
     @Test
@@ -484,10 +481,9 @@ public final class InstalledAppDetailsTest {
 
         ReflectionHelpers.setField(mAppDetail, "mHomePackages", homePackages);
         ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
-        final Button button = mock(Button.class);
 
-        assertThat(mAppDetail.handleDisableable(button)).isFalse();
-        verify(button).setText(R.string.disable_text);
+        assertThat(mAppDetail.handleDisableable()).isFalse();
+        verify(mAppDetail.mActionButtons).setButton1Text(R.string.disable_text);
     }
 
     @Test
@@ -506,10 +502,31 @@ public final class InstalledAppDetailsTest {
         ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
                 mFeatureFactory.applicationFeatureProvider);
         ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
-        final Button button = mock(Button.class);
 
-        assertThat(mAppDetail.handleDisableable(button)).isTrue();
-        verify(button).setText(R.string.disable_text);
+        assertThat(mAppDetail.handleDisableable()).isTrue();
+        verify(mAppDetail.mActionButtons).setButton1Text(R.string.disable_text);
+    }
+
+    @Test
+    @Config(shadows = ShadowUtils.class)
+    public void handleDisableable_appIsDisabled_buttonShouldShowEnable() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.packageName = "pkg";
+        info.enabled = false;
+        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+        when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
+                new HashSet<>());
+
+        ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
+                mFeatureFactory.applicationFeatureProvider);
+        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+
+        assertThat(mAppDetail.handleDisableable()).isTrue();
+        verify(mAppDetail.mActionButtons).setButton1Text(R.string.enable_text);
+        verify(mAppDetail.mActionButtons).setButton1Positive(true);
     }
 
     @Test
@@ -532,10 +549,8 @@ public final class InstalledAppDetailsTest {
                 mFeatureFactory.applicationFeatureProvider);
         ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
 
-        final Button button = mock(Button.class);
-
-        assertThat(mAppDetail.handleDisableable(button)).isFalse();
-        verify(button).setText(R.string.disable_text);
+        assertThat(mAppDetail.handleDisableable()).isFalse();
+        verify(mAppDetail.mActionButtons).setButton1Text(R.string.disable_text);
     }
 
     @Test

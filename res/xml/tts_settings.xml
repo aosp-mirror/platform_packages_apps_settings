@@ -51,10 +51,8 @@
             android:defaultValue="100"
             android:max="400"/>
 
-        <com.android.settings.applications.LayoutPreference
-            android:key="action_buttons"
-            android:layout="@layout/tts_action_buttons"
-            android:selectable="false"/>
+        <com.android.settings.widget.ActionButtonPreference
+            android:key="action_buttons" />
 
     </PreferenceCategory>
 </PreferenceScreen>
