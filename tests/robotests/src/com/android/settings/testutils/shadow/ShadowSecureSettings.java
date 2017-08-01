@@ -43,6 +43,13 @@ public class ShadowSecureSettings {
     }
 
     @Implementation
+    public static boolean putStringForUser(ContentResolver resolver, String name, String value,
+            int userHandle) {
+        mValueMap.put(name, value);
+        return true;
+    }
+
+    @Implementation
     public static String getString(ContentResolver resolver, String name) {
         return (String) mValueMap.get(name);
     }

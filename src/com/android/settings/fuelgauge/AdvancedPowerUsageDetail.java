@@ -137,7 +137,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             args.putString(EXTRA_PACKAGE_NAME, null);
         } else {
             // populate data for normal app
-            args.putString(EXTRA_PACKAGE_NAME, entry.defaultPackageName);
+            args.putString(EXTRA_PACKAGE_NAME, entry.defaultPackageName != null
+                    ? entry.defaultPackageName
+                    : sipper.mPackages[0]);
         }
 
         args.putInt(EXTRA_UID, sipper.getUid());
@@ -205,7 +207,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mAnomalies = getArguments().getParcelableArrayList(EXTRA_ANOMALY_LIST);
         if (mAnomalies == null) {
             getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, this);
-        } else if (mAnomalies != null){
+        } else if (mAnomalies != null) {
             mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalies);
         }
     }

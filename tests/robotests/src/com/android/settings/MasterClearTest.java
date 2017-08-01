@@ -123,32 +123,6 @@ public class MasterClearTest {
     }
 
     @Test
-    public void testShowFinalConfirmation_EraseEsimChecked() {
-        ActivityForTest testActivity = new ActivityForTest();
-        when(mMasterClear.getActivity()).thenReturn(testActivity);
-
-        mMasterClear.mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
-        mMasterClear.mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
-        mMasterClear.mEsimStorage.setChecked(true);
-        mMasterClear.showFinalConfirmation();
-        assertThat(testActivity.getArgs().getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
-                .isTrue();
-    }
-
-    @Test
-    public void testShowFinalConfirmation_EraseEsimUnchecked() {
-        ActivityForTest testActivity = new ActivityForTest();
-        when(mMasterClear.getActivity()).thenReturn(testActivity);
-
-        mMasterClear.mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
-        mMasterClear.mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
-        mMasterClear.mEsimStorage.setChecked(false);
-        mMasterClear.showFinalConfirmation();
-        assertThat(testActivity.getArgs().getBoolean(MasterClear.ERASE_ESIMS_EXTRA, true))
-                .isFalse();
-    }
-
-    @Test
     public void testHasReachedBottom_NotScrollDown_returnFalse() {
         initScrollView(100, 0, 200);
 
