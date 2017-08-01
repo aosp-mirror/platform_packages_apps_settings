@@ -1,4 +1,4 @@
-l/*
+/*
  * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,8 +69,7 @@ public class ResultPayload implements Parcelable {
             Availability.DISABLED_DEPENDENT_SETTING,
             Availability.DISABLED_DEPENDENT_APP,
             Availability.DISABLED_UNSUPPORTED,
-            Availability.RESOURCE_CONTENTION,
-            Availability.INTENT_ONLY,})
+            Availability.RESOURCE_CONTENTION})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Availability {
         /**
@@ -99,11 +98,6 @@ public class ResultPayload implements Parcelable {
          * The setting is disabled because corresponding app is disabled
          */
         int DISABLED_DEPENDENT_APP = 4;
-
-        /**
-         * This setting is supported on the device but cannot be changed inline.
-         */
-        int INTENT_ONLY = 5;
     }
 
     @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
