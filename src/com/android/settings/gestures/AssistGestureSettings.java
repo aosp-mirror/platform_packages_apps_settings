@@ -79,8 +79,16 @@ public class AssistGestureSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return new AssistGesturePreferenceController(context, null /* lifecycle */,
+                            null /* key */, false /* assistOnly */)
+                            .isAvailable();
                 }
             };
 }

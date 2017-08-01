@@ -17,7 +17,7 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -45,14 +46,12 @@ public class AssistGestureSettingsTest {
     @Mock
     private Context mContext;
     private FakeFeatureFactory mFakeFeatureFactory;
-    private AssistGestureFeatureProvider mFeatureProvider;
     private AssistGestureSettings mSettings;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mFeatureProvider = mFakeFeatureFactory.getAssistGestureFeatureProvider();
         mSettings = new AssistGestureSettings();
     }
 
@@ -65,7 +64,7 @@ public class AssistGestureSettingsTest {
     @Test
     public void testGetPreferenceControllers_shouldAllBeCreated() {
         final List<AbstractPreferenceController> controllers =
-            mSettings.getPreferenceControllers(mContext);
+                mSettings.getPreferenceControllers(mContext);
         assertThat(controllers.isEmpty()).isFalse();
     }
 
@@ -78,6 +77,16 @@ public class AssistGestureSettingsTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void testSearchIndexProvider_noSensor_shouldDisablePageSearch() {
+        when(mFakeFeatureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
+                .thenReturn(false);
+
+        assertThat(AssistGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                RuntimeEnvironment.application))
+                .contains("gesture_assist_settings_page");
     }
 }
 

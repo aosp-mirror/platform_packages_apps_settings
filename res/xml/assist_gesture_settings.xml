@@ -15,10 +15,11 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-                  android:title="@string/assist_gesture_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="gesture_assist_settings_page"
+    android:title="@string/assist_gesture_title">
 
     <com.android.settings.widget.VideoPreference
         android:key="gesture_assist_video"
@@ -28,6 +29,6 @@
     <SwitchPreference
         android:key="gesture_assist"
         android:title="@string/assist_gesture_title"
-        app:keywords="@string/keywords_assist_gesture_launch"/>
+        app:keywords="@string/keywords_assist_gesture_launch" />
 
 </PreferenceScreen>
