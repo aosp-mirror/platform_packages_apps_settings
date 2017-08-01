@@ -66,10 +66,8 @@ public class NfcPreferenceController extends PreferenceController
         mBeamPreference = (RestrictedPreference) screen.findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
         mNfcEnabler = new NfcEnabler(mContext, mNfcPreference, mBeamPreference);
-        String toggleable = Settings.Global.getString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
         // Manually set dependencies for NFC when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
+        if (!isToggleableInAirplaneMode(mContext)) {
             mAirplaneModeObserver = new AirplaneModeObserver();
             updateNfcPreference();
         }
@@ -131,6 +129,12 @@ public class NfcPreferenceController extends PreferenceController
         }
         mNfcPreference.setEnabled(toggleable);
         mBeamPreference.setEnabled(toggleable);
+    }
+
+    public static boolean isToggleableInAirplaneMode(Context context) {
+        String toggleable = Settings.Global.getString(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        return toggleable != null && toggleable.contains(Settings.Global.RADIO_NFC);
     }
 
     private final class AirplaneModeObserver extends ContentObserver {
