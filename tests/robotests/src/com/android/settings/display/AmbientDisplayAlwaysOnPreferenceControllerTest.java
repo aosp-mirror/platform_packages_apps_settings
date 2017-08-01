@@ -105,7 +105,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
     @Test
     public void isAvailable_available() throws Exception {
-        when(mConfig.alwaysOnAvailable())
+        when(mConfig.alwaysOnAvailableForUser(anyInt()))
                 .thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -113,7 +113,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
     @Test
     public void isAvailable_unavailable() throws Exception {
-        when(mConfig.alwaysOnAvailable())
+        when(mConfig.alwaysOnAvailableForUser(anyInt()))
                 .thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
