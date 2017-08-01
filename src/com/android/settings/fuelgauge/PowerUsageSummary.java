@@ -887,7 +887,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     public void onBatteryInfoLoaded(BatteryInfo info) {
                         mLoader.setSummary(SummaryProvider.this, info.chargeLabel);
                     }
-                });
+                }, true /* shortString */);
             });
         }
 
