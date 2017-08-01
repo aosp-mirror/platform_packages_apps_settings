@@ -81,8 +81,6 @@ public class MasterClear extends OptionsMenuFragment {
     private Button mInitiateButton;
     private View mExternalStorageContainer;
     @VisibleForTesting CheckBox mExternalStorage;
-    private View mEsimStorageContainer;
-    @VisibleForTesting CheckBox mEsimStorage;
     private ScrollView mScrollView;
 
     private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
@@ -126,7 +124,8 @@ public class MasterClear extends OptionsMenuFragment {
     void showFinalConfirmation() {
         Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
+        // TODO: Offer the user a choice to wipe eSIMs when it is technically feasible to do so.
+        args.putBoolean(ERASE_ESIMS_EXTRA, true);
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 this, MasterClearConfirm.class.getName(),
                 args, R.string.master_clear_confirm_title, null, null, 0);
@@ -175,8 +174,6 @@ public class MasterClear extends OptionsMenuFragment {
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
-        mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
-        mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
         mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
@@ -211,15 +208,11 @@ public class MasterClear extends OptionsMenuFragment {
         }
 
         if (showWipeEuicc()) {
-            mEsimStorageContainer.setOnClickListener(new View.OnClickListener() {
+            final View esimAlsoErased = mContentView.findViewById(R.id.also_erases_esim);
+            esimAlsoErased.setVisibility(View.VISIBLE);
 
-                @Override
-                public void onClick(View v) {
-                    mEsimStorage.toggle();
-                }
-            });
-        } else {
-            mEsimStorageContainer.setVisibility(View.GONE);
+            final View noCancelMobilePlan = mContentView.findViewById(R.id.no_cancel_mobile_plan);
+            noCancelMobilePlan.setVisibility(View.VISIBLE);
         }
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
@@ -245,9 +238,9 @@ public class MasterClear extends OptionsMenuFragment {
     }
 
     /**
-     * Whether to show the checkbox to wipe the eUICC.
+     * Whether to show strings indicating that the eUICC will be wiped.
      *
-     * <p>We show the checkbox on any device which supports eUICC as long as the eUICC was ever
+     * <p>We show the strings on any device which supports eUICC as long as the eUICC was ever
      * provisioned (that is, at least one profile was ever downloaded onto it).
      */
     @VisibleForTesting
