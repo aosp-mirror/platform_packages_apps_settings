@@ -16,13 +16,16 @@
 
 package com.android.settings.suggestions;
 
+import static com.android.settings.TestConfig.MANIFEST_PATH;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.annotation.StringRes;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.TestConfig;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,9 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.android.settings.TestConfig.MANIFEST_PATH;
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSuggestionsTest {
@@ -49,14 +49,6 @@ public class SettingsSuggestionsTest {
 
     private static final String CATEGORY_SETTINGS_ONLY =
             "com.android.settings.suggested.category.SETTINGS_ONLY";
-
-    @Test
-    public void zenModeAutomationSuggestion_isValid() {
-        assertSuggestionEquals("Settings$ZenModeAutomationSuggestionActivity",
-                CATEGORY_FIRST_IMPRESSION,
-                R.string.zen_mode_automation_suggestion_title,
-                R.string.zen_mode_automation_suggestion_summary);
-    }
 
     @Test
     public void wallpaperSuggestion_isValid() {

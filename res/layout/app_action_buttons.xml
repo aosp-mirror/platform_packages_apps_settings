@@ -19,8 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="bottom"
-    android:paddingTop="4dp"
+    android:gravity="center"
+    android:paddingTop="8dp"
     android:paddingStart="8dp"
     android:paddingEnd="8dp"
     android:orientation="horizontal">
@@ -31,8 +31,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingEnd="8dp"/>
+        android:layout_marginBottom="4dp" />
 
     <Button
         android:id="@+id/right_button"
@@ -40,7 +39,6 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingStart="8dp"/>
+        android:layout_marginBottom="4dp" />
 
 </LinearLayout>
