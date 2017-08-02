@@ -781,8 +781,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"వైర్‌లెస్ రూటర్ భద్రతా సెట్టింగ్ (TKIP)కి మద్దతు లేదు"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"ప్రామాణీకరణ వైఫల్యం. దయచేసి మళ్లీ ప్రయత్నించండి."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"మరో WPS సెషన్ గుర్తించబడింది. దయచేసి కొన్ని నిమిషాల్లో మళ్లీ ప్రయత్నించండి."</string>
-    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
-    <skip />
+    <string name="wifi_wps_failed_wifi_disconnected" msgid="3829472117754104164">"Wi‑Fi డిస్‌కనెక్ట్ చేయబడింది. WPS సెటప్ రద్దు చేయబడింది."</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"నెట్‌వర్క్ పేరు"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSIDని నమోదు చేయండి"</string>
     <string name="wifi_security" msgid="6603611185592956936">"భద్రత"</string>
@@ -819,6 +818,10 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS అందుబాటులో ఉంది"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS అందుబాటులో ఉంది)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"మీ నెట్‌వర్క్ పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
+    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
+    <skip />
+    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
+    <skip />
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"స్థాన ఖచ్చితత్వాన్ని మెరుగుపరచడానికి మరియు ఇతర ప్రయోజనాల దృష్ట్యా, <xliff:g id="APP_NAME">%1$s</xliff:g> Wi-Fi ఆఫ్‌లో ఉన్నప్పటికీ, నెట్‌వర్క్‌ను స్కాన్ చేయడం ప్రారంభించాలనుకుంటుంది.\n\nస్కాన్ చేయాలనుకునే అన్ని అనువర్తనాల కోసం దీన్ని అనుమతించాలా?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"దీన్ని ఆఫ్ చేయడానికి, ఓవర్‌ఫ్లో మెనులో అధునాతనంకి వెళ్లండి."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"అనుమతించు"</string>
@@ -1349,6 +1352,8 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"మీరు ప్రస్తుతం క్రింది ఖాతాలకు సైన్ ఇన్ చేసారు:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"ఈ పరికరంలో ఇతర వినియోగదారులు ఉన్నారు.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"సంగీతం"</li>\n<li>"ఫోటోలు"</li>\n<li>"ఇతర వినియోగదారు డేటా"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIMలో క్యారియర్‌లు"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"ఇది మీ మొబైల్ సేవ ప్లాన్‌ని రద్దు చేయదు."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"సంగీతం, చిత్రాలు మరియు ఇతర వినియోగదారు డేటాను క్లియర్ చేయడానికి, "<b>"USB నిల్వ"</b>"ను ఎరేజ్ చేయాల్సి ఉంటుంది."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"సంగీతం, చిత్రాలు మరియు ఇతర వినియోగదారు డేటాను క్లియర్ చేయడానికి, "<b>"SD కార్డు"</b>"ను ఎరేజ్ చేయాల్సి ఉంటుంది."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB నిల్వను ఎరేజ్ చేయి"</string>
@@ -1805,7 +1810,8 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"స్క్రీన్ రీడర్‌లు, ప్రదర్శన, పరస్పర చర్య నియంత్రణలు"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"దృశ్యత సెట్టింగ్‌లు"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"మీరు మీ అవసరాలకు అనుగుణంగా ఈ పరికరాన్ని అనుకూలీకరించవచ్చు. ఈ ప్రాప్యత లక్షణాలను సెట్టింగ్‌ల్లో తర్వాత మార్చవచ్చు."</string>
-    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"ఫాంట్ పరిమాణాన్ని పెంచండి"</string>
+    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
+    <skip />
     <string name="screen_reader_category_title" msgid="7739154903913400641">"స్క్రీన్ రీడర్‌లు"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ఆడియో &amp; స్క్రీన్‌పై ఉన్న వచనం"</string>
     <string name="display_category_title" msgid="685461049938269166">"డిస్‌ప్లే"</string>

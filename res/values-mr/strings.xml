@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s ला आपल्या संदेशामध्ये प्रवेश करण्याची आवश्यकता आहे. %2$s ला प्रवेश करण्याची अनुमती द्यायची?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"सिम प्रवेश विनंती"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> आपल्या सिम कार्डवर प्रवेश करू इच्छित आहे. सिम कार्डवर प्रवेश मंजूर केल्यामुळे कनेक्शनच्या कालावधीसाठी आपल्या डिव्हाइसवरील डेटा कनेक्टिव्हिटी अक्षम होईल. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> वर प्रवेश द्या"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"इतर डीव्हाइसना \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" न्हणून दिसत आहे"</string>
+    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"इतर डीव्हाइसना \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" म्हणून दिसत आहे"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"तुमचे डिव्हाइस"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"नवीन डिव्हाइस जोडा"</string>
     <string name="date_and_time" msgid="9062980487860757694">"तारीख आणि वेळ"</string>
@@ -781,8 +781,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"वायरलेस राउटर सुरक्षा सेटिंग (TKIP) समर्थित नाही"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"प्रमाणीकरण अयशस्वी. कृपया पुन्हा प्रयत्न करा."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"दुसरे WPS सत्र सापडले होते. कृपया काही मिनिटांमध्ये पुन्हा प्रयत्न करा."</string>
-    <!-- no translation found for wifi_wps_failed_wifi_disconnected (3829472117754104164) -->
-    <skip />
+    <string name="wifi_wps_failed_wifi_disconnected" msgid="3829472117754104164">"वाय-फाय डिस्‍केनक्‍ट केले. WPS सेटअप रद्द झाले."</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"नेटवर्क नाव"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID प्रविष्ट करा"</string>
     <string name="wifi_security" msgid="6603611185592956936">"सुरक्षितता"</string>
@@ -819,6 +818,10 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS उपलब्ध"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS उपलब्ध)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"आपला नेटवर्क संकेतशब्द प्रविष्ट करा"</string>
+    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
+    <skip />
+    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
+    <skip />
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"स्थान अचूकता सुधारण्यासाठी आणि इतर हेतूंसाठी, <xliff:g id="APP_NAME">%1$s</xliff:g> ला नेटवर्क स्कॅनिंग चालू करण्याची आवश्यकता आहे, वाय-फाय बंद असताना देखील.\n\nस्कॅन करू इच्छित सर्व अॅप्सना अनुमती द्यायची?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"हे बंद करण्यासाठी, ओव्हरफ्लो मेनू मधील प्रगत वर जा."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"अनुमती द्या"</string>
@@ -1349,6 +1352,8 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"आपण खालील खात्यांवर सध्या साइन इन केले आहे:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"या डिव्‍हाइसवर इतर वापरकर्ते उपस्‍थित आहेत.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"संगीत"</li>\n<li>"फोटो"</li>\n<li>"अन्य वापरकर्ता डेटा"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM वरील वाहक"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"असे केल्‍याने तुमच्‍या मोबाइल सेवा प्‍लॅन रद्द होणार नाही."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"संगीत, चित्रे आणि अन्य वापरकर्ता डेटा साफ करण्यासाठी, "<b>"USB संचयन"</b>" मिटविणे आवश्यक आहे."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"संगीत, चित्रे आणि अन्य वापरकर्ता डेटा साफ करण्यासाठी, "<b>"SD कार्ड"</b>" पुसण्याची आवश्यकता आहे."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB संचयन मिटवा"</string>
@@ -1805,7 +1810,8 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"स्क्रीन रीडर, प्रदर्शन, परस्‍परसंवाद नियंत्रणे"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"दृष्टी सेटिंग्ज"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"आपल्या गरजा पूर्ण करण्यासाठी आपण हे डिव्हाइस सानुकूलित करू शकता. ही प्रवेशयोग्यता वैशिष्ट्ये नंतर सेटिंग्जमध्ये बदलू शकता."</string>
-    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"फॉंटचा आकार वाढवा"</string>
+    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
+    <skip />
     <string name="screen_reader_category_title" msgid="7739154903913400641">"स्क्रीन वाचक"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ऑडिओ आणि स्क्रीनवरील मजकूर"</string>
     <string name="display_category_title" msgid="685461049938269166">"प्रदर्शन"</string>
