@@ -857,10 +857,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         // Is the previous currently connected SSID different from the new one?
-        if (!((AccessPointPreference)
-                mConnectedAccessPointPreferenceCategory.getPreference(0))
-                        .getAccessPoint().getSsidStr().equals(
-                                connectedAp.getSsidStr())) {
+        AccessPointPreference preference = (AccessPointPreference)
+            (mConnectedAccessPointPreferenceCategory.getPreference(0));
+        // The AccessPoints need to be the same reference to ensure that updates are reflected
+        // in the UI.
+        if (preference.getAccessPoint() != connectedAp) {
             removeConnectedAccessPointPreference();
             addConnectedAccessPointPreference(connectedAp);
             return true;
