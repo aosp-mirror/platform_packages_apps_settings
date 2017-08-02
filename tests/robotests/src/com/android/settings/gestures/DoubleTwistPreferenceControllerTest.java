@@ -41,10 +41,11 @@ import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+
+import com.android.settings.testutils.shadow.ShadowDoubleTwistPreferenceController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -102,14 +103,16 @@ public class DoubleTwistPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowSecureSettings.class})
+    @Config(shadows = {
+            ShadowDoubleTwistPreferenceController.class,
+            ShadowSecureSettings.class})
     public void onPreferenceChange_hasWorkProfile_shouldUpdateSettingForWorkProfileUser() {
         final int managedId = 2;
         ShadowSecureSettings.putIntForUser(
             null, Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0, managedId);
         DoubleTwistPreferenceController controller =
             spy(new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST));
-        doReturn(managedId).when(controller).getManagedProfileUserId();
+        ShadowDoubleTwistPreferenceController.setManagedProfileId(managedId);
 
         // enable the gesture
         controller.onPreferenceChange(null, true);
