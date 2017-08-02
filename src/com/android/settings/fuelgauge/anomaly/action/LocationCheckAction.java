@@ -49,7 +49,9 @@ public class LocationCheckAction extends AnomalyAction {
     public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
         super.handlePositiveAction(anomaly, contextMetricsKey);
         mRuntimePermissionPresenter.revokeRuntimePermission(anomaly.packageName,
-                Manifest.permission_group.LOCATION);
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+        mRuntimePermissionPresenter.revokeRuntimePermission(anomaly.packageName,
+                Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     @Override
