@@ -817,6 +817,10 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ಲಭ್ಯವಿದೆ"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ಲಭ್ಯವಿದೆ)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್‌ ಪಾಸ್‌ವರ್ಡ್‌ ನಮೂದಿಸಿ"</string>
+    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
+    <skip />
+    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
+    <skip />
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"ಸ್ಥಳ ನಿಖರತೆಯನ್ನು ಸುಧಾರಿಸಲು ಮತ್ತು ಇತರ ಉದ್ದೇಶಗಳಿಗಾಗಿ, ವೈ-ಫೈ ಆಫ್‌ ಇದ್ದಾಗಲೂ ಸಹ <xliff:g id="APP_NAME">%1$s</xliff:g> ನೆಟ್‌ವರ್ಕ್‌ ಸ್ಕ್ಯಾನಿಂಗ್‌ ಆನ್‌ ಮಾಡಲು ಬಯಸುತ್ತದೆ.\n\nಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಬಯಸುವ ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಇದಕ್ಕೆ ಅನುಮತಿಸುವುದೇ?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"ಇದನ್ನು ಆಫ್ ಮಾಡಲು, ಓವರ್‌ಫ್ಲೋ ಮೆನುವಿನಲ್ಲಿನ ಸುಧಾರಿತ ಗೆ ಹೋಗಿ."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"ಅನುಮತಿಸಿ"</string>
@@ -1347,6 +1351,8 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"ನೀವು ಪ್ರಸ್ತುತ ಕೆಳಗಿನ ಖಾತೆಗಳಿಗೆ ಸೈನ್ ಇನ್ ಆಗಿರುವಿರಿ:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"ಈ ಸಾಧನದಲ್ಲಿ ಪ್ರಸ್ತುತ ಇತರ ಬಳಕೆದಾರರಿದ್ದಾರೆ.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"ಸಂಗೀತ"</li>\n<li>"ಫೋಟೋಗಳು"</li>\n<li>"ಇತರ ಬಳಕೆದಾರರ ಡೇಟಾ"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM ನಲ್ಲಿನ ವಾಹಕಗಳು"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n" ಇದು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸೇವಾ ಯೋಜನೆಯನ್ನು ರದ್ದುಗೊಳಿಸುವುದಿಲ್ಲ."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"ಸಂಗೀತ, ಚಿತ್ರಗಳು, ಮತ್ತು ಇತರ ಬಳಕೆದಾರರ ಡೇಟಾವನ್ನು ತೆರವುಗೊಳಿಸಲು, "<b>"USB ಸಂಗ್ರಹಣೆಯನ್ನು"</b>" ಅಳಿಸಬೇಕಾಗುತ್ತದೆ."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"ಸಂಗೀತ, ಚಿತ್ರಗಳು, ಮತ್ತು ಬಳಕೆದಾರರ ಇತರೆ ಡೇಟಾವನ್ನು ತೆರವುಗೊಳಿಸಲು, "<b>"SD ಕಾರ್ಡ್‌ ಅನ್ನು"</b>" ಅಳಿಸಬೇಕಾಗುತ್ತದೆ."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB ಸಂಗ್ರಹಣೆಯನ್ನು ಅಳಿಸಿ"</string>
@@ -1803,7 +1809,8 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"ಪರದೆ ರೀಡರ್‌ಗಳು, ಡಿಸ್‌ಪ್ಲೇ, ಸಂವಾದ ನಿಯಂತ್ರಕಗಳು"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"ವಿಷನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"ನಿಮ್ಮ ಅಗತ್ಯಗಳಿಗೆ ಸರಿಹೊಂದುವಂತೆ ಈ ಸಾಧನವನ್ನು ನೀವು ಕಸ್ಟಮೈಸ್ ಮಾಡಬಹುದು. ಈ ಪ್ರವೇಶಿಸುವಿಕೆ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ನಂತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಬದಲಾಯಿಸಬಹುದು."</string>
-    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"ಫಾಂಟ್ ಗಾತ್ರವನ್ನು ಹೆಚ್ಚಿಸಿ"</string>
+    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
+    <skip />
     <string name="screen_reader_category_title" msgid="7739154903913400641">"ಪರದೆ ರೀಡರ್‌ಗಳು"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ಆಡಿಯೋ ಮತ್ತು ಪರದೆಯ ಮೇಲಿನ ಪಠ್ಯ"</string>
     <string name="display_category_title" msgid="685461049938269166">"ಪ್ರದರ್ಶನ"</string>
@@ -3481,7 +3488,8 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"ಅಳಿಸಿ ಮತ್ತು ಪರಿವರ್ತಿಸು"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager ನ ದರ-ಮಿತಿಗೊಳಿಸುವಿಕೆಯನ್ನು ಮರುಹೊಂದಿಸಿ"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager ದರ-ಮಿತಿಗೊಳಿಸುವಿಕೆಯನ್ನು ಮರುಹೊಂದಿಸಲಾಗಿದೆ"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"ಲಾಕ್‌ ಪರದೆಯ ಅಧಿಸೂಚನೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಿ"</string>
+    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
+    <skip />
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"ಅಧಿಸೂಚನೆಯ ವಿಷಯವನ್ನು ತೋರಿಸು ಅಥವಾ ಮರೆಮಾಡು"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ಎಲ್ಲಾ"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"ಬೆಂಬಲ ಮತ್ತು ಸಲಹೆಗಳು"</string>
