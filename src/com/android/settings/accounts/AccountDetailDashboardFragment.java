@@ -114,7 +114,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         mRemoveAccountController = new RemoveAccountPreferenceController(context, this);
         controllers.add(mRemoveAccountController);
         controllers.add(new AccountHeaderPreferenceController(
-                context, getLifecycle(), getActivity(), this, getArguments()));
+                context, getLifecycle(), getActivity(), this /* host */, getArguments()));
         return controllers;
     }
 
