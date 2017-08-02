@@ -22,8 +22,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -37,10 +35,10 @@ import com.android.settings.trustagent.TrustAgentManagerImpl;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.Executors;
 
 /** Implementation for {@code SecurityFeatureProvider}. */
 public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
@@ -71,12 +69,8 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
 
         // Fetching the summary and icon from the provider introduces latency, so do this on a
         // separate thread.
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                updatePreferencesToRunOnWorkerThread(context, preferenceScreen, dashboardCategory);
-            }
-        });
+        ThreadUtils.postOnBackgroundThread(() ->
+                updatePreferencesToRunOnWorkerThread(context, preferenceScreen, dashboardCategory));
     }
 
     @VisibleForTesting
@@ -162,19 +156,16 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
                     sIconCache.put(iconUri, icon);
                     // Icon is only returned if the icon belongs to Settings or the target app.
                     // setIcon must be called on the UI thread.
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                matchingPref.setIcon(context.getPackageManager()
-                                        .getResourcesForApplication(icon.first /* package name */)
-                                                .getDrawable(icon.second /* res id */,
-                                                        context.getTheme()));
-                            } catch (PackageManager.NameNotFoundException
-                                    | Resources.NotFoundException e) {
-                                // Intentionally ignored. If icon resources cannot be found, do not
-                                // update.
-                            }
+                    ThreadUtils.postOnMainThread(() -> {
+                        try {
+                            matchingPref.setIcon(context.getPackageManager()
+                                    .getResourcesForApplication(icon.first /* package name */)
+                                    .getDrawable(icon.second /* res id */,
+                                            context.getTheme()));
+                        } catch (PackageManager.NameNotFoundException
+                                | Resources.NotFoundException e) {
+                            // Intentionally ignored. If icon resources cannot be found, do not
+                            // update.
                         }
                     });
                 }
@@ -184,17 +175,14 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
                         TileUtils.META_DATA_PREFERENCE_SUMMARY);
                 sSummaryCache.put(summaryUri, summary);
                 // setSummary must be called on UI thread.
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Only update the summary if it has actually changed.
-                        if (summary == null) {
-                            if (matchingPref.getSummary() != null) {
-                                matchingPref.setSummary(summary);
-                            }
-                        } else if (!summary.equals(matchingPref.getSummary())) {
+                ThreadUtils.postOnMainThread(() -> {
+                    // Only update the summary if it has actually changed.
+                    if (summary == null) {
+                        if (matchingPref.getSummary() != null) {
                             matchingPref.setSummary(summary);
                         }
+                    } else if (!summary.equals(matchingPref.getSummary())) {
+                        matchingPref.setSummary(summary);
                     }
                 });
             }

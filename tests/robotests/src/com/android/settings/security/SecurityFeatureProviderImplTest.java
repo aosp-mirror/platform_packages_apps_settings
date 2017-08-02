@@ -16,8 +16,17 @@
 
 package com.android.settings.security;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -25,11 +34,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.Pair;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -41,21 +50,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowLooper;
-
-import java.util.Map;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -76,21 +71,6 @@ public class SecurityFeatureProviderImplTest {
     private Resources mResources;
 
     private SecurityFeatureProviderImpl mImpl;
-
-    @Implements(com.android.settingslib.drawer.TileUtils.class)
-    public static class ShadowTileUtils {
-        @Implementation
-        public static Pair getIconFromUri(Context context, String packageName, String uriString,
-                Map<String, IContentProvider> providerMap) {
-            return Pair.create("package", 161803);
-        }
-
-        @Implementation
-        public static String getTextFromUri(Context context, String uriString,
-                Map<String, IContentProvider> providerMap, String key) {
-            return MOCK_SUMMARY;
-        }
-    }
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
