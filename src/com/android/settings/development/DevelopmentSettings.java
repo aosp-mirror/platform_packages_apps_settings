@@ -114,11 +114,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
     private static final String TAG = "DevelopmentSettings";
 
-    /**
-     * Whether to show the development settings to the user.  Default is false.
-     */
-    public static final String PREF_SHOW = "show";
-
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
@@ -129,8 +124,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
     private static final String MSAA_PROPERTY = "debug.egl.force_msaa";
-    private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
-    private static final String TUNER_UI_KEY = "tuner_ui";
     private static final String COLOR_TEMPERATURE_PROPERTY = "persist.sys.debug.color_temp";
 
     private static final String DEBUG_APP_KEY = "debug_app";
@@ -235,8 +228,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
-    private static final String FLASH_LOCKED_PROP = "ro.boot.flash.locked";
-
     private static final String SHORTCUT_MANAGER_RESET_KEY = "reset_shortcut_manager_throttling";
 
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
@@ -254,7 +245,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchBar mSwitchBar;
 
     private boolean mHaveDebugSettings;
-    private boolean mDontPokeProperties;
     private EnableAdbPreferenceController mEnableAdbController;
     private Preference mClearAdbKeys;
     private SwitchPreference mEnableTerminal;
