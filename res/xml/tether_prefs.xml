@@ -17,10 +17,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto">
 
-    <Preference
+    <com.android.settings.widget.MasterSwitchPreference
         android:key="wifi_tether"
         android:title="@string/wifi_hotspot_checkbox_text"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/summary_two_lines_placeholder"
         android:fragment="com.android.settings.wifi.tether.WifiTetherSettings" />
 
     <SwitchPreference

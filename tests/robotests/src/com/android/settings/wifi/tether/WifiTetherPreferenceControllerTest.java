@@ -16,6 +16,14 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -25,14 +33,16 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,18 +57,11 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class
+                WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
+                WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,
         })
 public class WifiTetherPreferenceControllerTest {
 
@@ -73,13 +76,13 @@ public class WifiTetherPreferenceControllerTest {
 
     private WifiTetherPreferenceController mController;
     private Lifecycle mLifecycle;
-    private Preference mPreference;
+    private MasterSwitchPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLifecycle = new Lifecycle();
-        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference = new MasterSwitchPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
@@ -87,6 +90,11 @@ public class WifiTetherPreferenceControllerTest {
 
         when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowWifiTetherSwitchBarController.reset();
     }
 
     @Test
@@ -103,16 +111,17 @@ public class WifiTetherPreferenceControllerTest {
     }
 
     @Test
-    public void resumeAndPause_shouldRegisterUnregisterReceiver() {
+    public void startAndStop_shouldRegisterUnregisterReceiver() {
         final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
 
         mController.displayPreference(mScreen);
-        mLifecycle.onResume();
-        mLifecycle.onPause();
+        mLifecycle.onStart();
+        mLifecycle.onStop();
 
+        assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
+        assertThat(ShadowWifiTetherSwitchBarController.onStopCalled).isTrue();
         verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
         verify(mContext).unregisterReceiver(receiver);
-
     }
 
     @Test
@@ -181,6 +190,31 @@ public class WifiTetherPreferenceControllerTest {
         @Implementation
         public static boolean isTetherSettingPageEnabled() {
             return true;
+        }
+    }
+
+    @Implements(WifiTetherSwitchBarController.class)
+    public static final class ShadowWifiTetherSwitchBarController {
+
+        public static boolean onStartCalled;
+        public static boolean onStopCalled;
+
+        public void __constructor__(Context context, SwitchWidgetController switchWidget) {
+        }
+
+        public static void reset() {
+            onStartCalled = false;
+            onStopCalled = false;
+        }
+
+        @Implementation
+        public void onStart() {
+            onStartCalled = true;
+        }
+
+        @Implementation
+        public void onStop() {
+            onStopCalled = true;
         }
     }
 }
