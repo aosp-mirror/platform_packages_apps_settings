@@ -16,15 +16,17 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.graphics.ColorFilter;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
-import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +36,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 // TODO: Consider making the shadow class set global using a robolectric.properties file.
 @Config(manifest = TestConfig.MANIFEST_PATH,
@@ -45,7 +43,6 @@ import static org.mockito.Mockito.verify;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class
         })
 public class BatteryMeterViewTest {
     private static final int BATTERY_LEVEL = 100;

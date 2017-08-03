@@ -16,6 +16,17 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -35,7 +46,6 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
-import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
@@ -53,17 +63,6 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 /**
  * Tests for {@link ManageApplications}.
  */
@@ -74,7 +73,6 @@ import static org.mockito.Mockito.when;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class,
                 ShadowEventLogWriter.class
         })
 public class ManageApplicationsTest {
