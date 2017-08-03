@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,75 +17,61 @@
 package com.android.settings.password;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
-import static com.google.common.truth.Truth.assertThat;
 
 import static org.hamcrest.CoreMatchers.not;
 
+import android.app.Instrumentation;
+import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.filters.MediumTest;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.KeyEvent;
 
 import com.android.settings.R;
 
-import org.junit.Rule;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-@MediumTest
-public class SetupChooseLockPasswordAppTest {
+public class ChooseLockPasswordTest {
+    private Instrumentation mInstrumentation;
+    private Context mContext;
 
-    @Rule
-    public ActivityTestRule<SetupChooseLockPassword> mActivityTestRule =
-            new ActivityTestRule<>(
-                    SetupChooseLockPassword.class,
-                    true /* enable touch at launch */,
-                    false /* don't launch at every test */);
-
-    @Test
-    public void testSkipDialogIsShown() throws Throwable {
-        SetupChooseLockPassword activity = mActivityTestRule.launchActivity(null);
-
-        onView(withId(R.id.cancel_button))
-                .check(matches(withText(R.string.skip_label)))
-                .check(matches(isDisplayed()))
-                .perform(click());
-        onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
-
-        assertThat(activity.isFinishing()).named("Is finishing").isTrue();
+    @Before
+    public void setUp() {
+        mInstrumentation = InstrumentationRegistry.getInstrumentation();
+        mContext = mInstrumentation.getTargetContext();
     }
 
     @Test
     public void clearNotVisible_when_activityLaunchedInitially() {
-        mActivityTestRule.launchActivity(null);
+        mInstrumentation.startActivitySync(new Intent(mContext, ChooseLockPassword.class));
         onView(withId(R.id.clear_button)).check(matches(
                 withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
     }
 
     @Test
-    public void clearNotEnabled_when_nothingEntered() throws Throwable {
-        mActivityTestRule.launchActivity(null);
+    public void clearNotEnabled_when_nothingEntered() {
+        mInstrumentation.startActivitySync(new Intent(mContext, ChooseLockPassword.class));
         onView(withId(R.id.password_entry)).perform(ViewActions.typeText("1234"))
                 .perform(pressKey(KeyEvent.KEYCODE_ENTER));
         onView(withId(R.id.clear_button)).check(matches(isDisplayed()))
-                .check(matches(not(isEnabled())));
+            .check(matches(not(isEnabled())));
     }
 
     @Test
     public void clearEnabled_when_somethingEnteredToConfirm() {
-        mActivityTestRule.launchActivity(null);
+        mInstrumentation.startActivitySync(new Intent(mContext, ChooseLockPassword.class));
         onView(withId(R.id.password_entry)).perform(ViewActions.typeText("1234"))
                 .perform(pressKey(KeyEvent.KEYCODE_ENTER))
                 .perform(ViewActions.typeText("1"));
