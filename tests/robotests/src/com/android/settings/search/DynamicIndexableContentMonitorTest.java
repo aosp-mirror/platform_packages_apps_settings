@@ -16,6 +16,19 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Application;
@@ -40,15 +53,14 @@ import android.provider.UserDictionary;
 import android.view.inputmethod.InputMethodInfo;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowActivityWithLoadManager;
 import com.android.settings.testutils.shadow.ShadowContextImplWithRegisterReceiver;
 import com.android.settings.testutils.shadow.ShadowInputManager;
@@ -76,19 +88,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.only;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -269,67 +268,6 @@ public class DynamicIndexableContentMonitorTest {
         listener.onInputDeviceChanged(3 /* deviceId */);
 
         verifyIncrementalIndexing(PhysicalKeyboardFragment.class);
-    }
-
-    @Test
-    public void testAccessibilityServicesMonitor() throws Exception {
-        mMonitor.register(mActivity, LOADER_ID, mIndexManager, true /* isUserUnlocked */);
-
-        verifyIncrementalIndexing(AccessibilitySettings.class);
-
-        /*
-         * When an accessibility service package is installed, incremental indexing happen.
-         */
-        reset(mIndexManager);
-
-        installAccessibilityService(A11Y_PACKAGE_1);
-
-        verifyIncrementalIndexing(AccessibilitySettings.class);
-
-        /*
-         * When another accessibility service package is installed, incremental indexing happens.
-         */
-        reset(mIndexManager);
-
-        installAccessibilityService(A11Y_PACKAGE_2);
-
-        verifyIncrementalIndexing(AccessibilitySettings.class);
-
-        /*
-         * When an accessibility service is disabled, rebuild indexing happens.
-         */
-        reset(mIndexManager);
-
-        disableInstalledPackage(A11Y_PACKAGE_1);
-
-        verifyIncrementalIndexing(AccessibilitySettings.class);
-
-        /*
-         * When an accessibility service is enabled, incremental indexing happens.
-         */
-        reset(mIndexManager);
-
-        enableInstalledPackage(A11Y_PACKAGE_1);
-
-        verifyIncrementalIndexing(AccessibilitySettings.class);
-
-        /*
-         * When an accessibility service package is uninstalled, rebuild indexing happens.
-         */
-        reset(mIndexManager);
-
-        uninstallAccessibilityService(A11Y_PACKAGE_1);
-
-        verifyIncrementalIndexing(AccessibilitySettings.class);
-
-        /*
-         * When an input method service package is installed, nothing happens.
-         */
-        reset(mIndexManager);
-
-        installInputMethodService(IME_PACKAGE_1);
-
-        verifyNoIndexing(AccessibilitySettings.class);
     }
 
     @Test

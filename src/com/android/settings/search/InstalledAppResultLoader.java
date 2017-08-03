@@ -163,8 +163,9 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
      * appName: Abcde, query: bc, Returns NAME_NO_MATCH
      * appName: Abcde, query: xyz, Returns NAME_NO_MATCH
      * appName: Abc de, query: de, Returns 4
+     * TODO: Move this to a common util class.
      */
-    private int getWordDifference(String appName, String query) {
+    static int getWordDifference(String appName, String query) {
         if (TextUtils.isEmpty(appName) || TextUtils.isEmpty(query)) {
             return NAME_NO_MATCH;
         }
