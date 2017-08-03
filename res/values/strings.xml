@@ -387,7 +387,7 @@
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
-    <string name="bluetooth_device_name_summary">Visible as \"<xliff:g id="device_name">^1</xliff:g>\" to other devices</string>
+    <string name="bluetooth_device_name_summary">Visible as \u201C<xliff:g id="device_name">^1</xliff:g>\u201D to other devices</string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
@@ -3140,13 +3140,7 @@
 
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
-    <string name="master_clear_title">Erase all data (Factory reset)</string>
-    <!-- Summary text for factory data reset describing what will be reset [CHAR_LIMIT=NONE]-->
-    <plurals name="master_clear_with_account_summary">
-        <item quantity="one">1 account will be reset</item>
-        <item quantity="other"><xliff:g id="account_count">%1$d</xliff:g> accounts will be reset</item>
-    </plurals>
-    <string name="master_clear_summary">Internal storage &amp; all data will be reset</string>
+    <string name="master_clear_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
