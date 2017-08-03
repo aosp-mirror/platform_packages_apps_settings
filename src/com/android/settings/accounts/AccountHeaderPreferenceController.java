@@ -16,6 +16,9 @@
 
 package com.android.settings.accounts;
 
+import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_ACCOUNT;
+import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_USER_HANDLE;
+
 import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
@@ -31,12 +34,11 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_ACCOUNT;
-import static com.android.settings.accounts.AccountDetailDashboardFragment.KEY_USER_HANDLE;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class AccountHeaderPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume {
 
     private static final String KEY_ACCOUNT_HEADER = "account_header";
 
@@ -44,14 +46,14 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
     private final PreferenceFragment mHost;
     private final Account mAccount;
     private final UserHandle mUserHandle;
-    private final Lifecycle mLifecycle;
+
+    private LayoutPreference mHeaderPreference;
 
     public AccountHeaderPreferenceController(Context context, Lifecycle lifecycle,
             Activity activity, PreferenceFragment host, Bundle args) {
         super(context);
         mActivity = activity;
         mHost = host;
-        mLifecycle = lifecycle;
         if (args != null && args.containsKey(KEY_ACCOUNT)) {
             mAccount = args.getParcelable(KEY_ACCOUNT);
         } else {
@@ -62,6 +64,9 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
             mUserHandle = args.getParcelable(KEY_USER_HANDLE);
         } else {
             mUserHandle = null;
+        }
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
         }
     }
 
@@ -78,14 +83,15 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference headerPreference =
-                (LayoutPreference) screen.findPreference(KEY_ACCOUNT_HEADER);
+        mHeaderPreference = (LayoutPreference) screen.findPreference(KEY_ACCOUNT_HEADER);
+    }
 
+    @Override
+    public void onResume() {
         final AuthenticatorHelper helper = new AuthenticatorHelper(mContext, mUserHandle, null);
 
         EntityHeaderController
-                .newInstance(mActivity, mHost, headerPreference.findViewById(R.id.entity_header))
-                .setRecyclerView(mHost.getListView(), mLifecycle)
+                .newInstance(mActivity, mHost, mHeaderPreference.findViewById(R.id.entity_header))
                 .setLabel(mAccount.name)
                 .setIcon(helper.getDrawableForType(mContext, mAccount.type))
                 .done(mActivity, true /* rebindButtons */);
