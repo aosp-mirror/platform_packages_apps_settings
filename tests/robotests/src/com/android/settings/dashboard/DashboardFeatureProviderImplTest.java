@@ -16,6 +16,15 @@
 
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,14 +40,17 @@ import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,15 +66,6 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
@@ -246,6 +249,26 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    @Config(shadows = {
+            ShadowTileUtils.class,
+            ShadowThreadUtils.class
+    })
+    public void bindPreference_hasSummaryUri_shouldLoadSummaryFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        tile.metaData = new Bundle();
+        tile.metaData.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI,
+                "content://com.android.settings/tile_summary");
+
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, null /*key */, Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getSummary()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
+    }
+
+    @Test
     public void bindPreference_withNullKeyTileKey_shouldUseTileKey() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
@@ -256,6 +279,26 @@ public class DashboardFeatureProviderImplTest {
                 preference, tile, null /* key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isEqualTo(tile.key);
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowTileUtils.class,
+            ShadowThreadUtils.class
+    })
+    public void bindPreference_withIconUri_shouldLoadIconFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.key = "key";
+        tile.intent = new Intent();
+        tile.intent.setComponent(
+                new ComponentName(RuntimeEnvironment.application.getPackageName(), "class"));
+        tile.metaData = new Bundle();
+        tile.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
+                "content://com.android.settings/tile_icon");
+        mImpl.bindIcon(preference, tile);
+
+        assertThat(tile.icon).isNotNull();
     }
 
     @Test

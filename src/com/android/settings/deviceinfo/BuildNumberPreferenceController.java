@@ -36,7 +36,6 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.development.DevelopmentSettings;
-import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtils;
@@ -44,6 +43,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 public class BuildNumberPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume {
@@ -106,9 +106,8 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
                 mContext, UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
         mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
                 mContext, UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
-        mDevHitCountdown = mContext.getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
-                android.os.Build.TYPE.equals("eng")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
+        mDevHitCountdown = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
+                ? -1 : TAPS_TO_BE_A_DEVELOPER;
         mDevHitToast = null;
     }
 
@@ -215,9 +214,7 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
     private void enableDevelopmentSettings() {
         mDevHitCountdown = 0;
         mProcessingLastDevHit = false;
-        DevelopmentSettingsEnabler.enableDevelopmentSettings(mContext,
-                mContext.getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                        Context.MODE_PRIVATE));
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mContext, true);
         if (mDevHitToast != null) {
             mDevHitToast.cancel();
         }

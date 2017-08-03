@@ -77,7 +77,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return mConfig.alwaysOnAvailable();
+        return mConfig.alwaysOnAvailableForUser(MY_USER);
     }
 
     @Override

@@ -16,12 +16,17 @@
 
 package com.android.settings.inputmethod;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +36,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -104,5 +108,19 @@ public class GameControllerPreferenceControllerTest {
         when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void updateNonIndexableKeys_shouldIncludeCategoryAndPrefKeys() {
+        when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
+
+
+        final List<String> nonIndexables = new ArrayList<>();
+        mController.updateNonIndexableKeys(nonIndexables);
+
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(nonIndexables).containsExactlyElementsIn(Arrays.asList(
+                GameControllerPreferenceController.PREF_KEY,
+                mController.getPreferenceKey()));
     }
 }
