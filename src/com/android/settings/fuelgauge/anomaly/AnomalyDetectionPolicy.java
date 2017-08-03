@@ -124,7 +124,7 @@ public class AnomalyDetectionPolicy {
         wakeupAlarmDetectionEnabled = mParserWrapper.getBoolean(KEY_WAKEUP_ALARM_DETECTION_ENABLED,
                 false);
         bluetoothScanDetectionEnabled = mParserWrapper.getBoolean(
-                KEY_BLUETOOTH_SCAN_DETECTION_ENABLED, false);
+                KEY_BLUETOOTH_SCAN_DETECTION_ENABLED, true);
         wakeLockThreshold = mParserWrapper.getLong(KEY_WAKELOCK_THRESHOLD,
                 DateUtils.HOUR_IN_MILLIS);
         wakeupAlarmThreshold = mParserWrapper.getLong(KEY_WAKEUP_ALARM_THRESHOLD, 60);
