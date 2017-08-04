@@ -18,6 +18,10 @@ package com.android.settings.wifi.tether;
 
 import android.net.ConnectivityManager;
 
-class NoOpOnStartTetheringCallback extends ConnectivityManager.OnStartTetheringCallback {
+class NoOpOnStartTetheringCallback {
 
+    public static ConnectivityManager.OnStartTetheringCallback newInstance() {
+        return new ConnectivityManager.OnStartTetheringCallback() {
+        };
+    }
 }

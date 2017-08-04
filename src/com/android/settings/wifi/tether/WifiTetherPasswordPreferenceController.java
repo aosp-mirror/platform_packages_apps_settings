@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
+import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -48,15 +49,14 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        ((ValidatedEditTextPreference) mPreference).setText(mPassword);
-        ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
+        updatePasswordDisplay((EditTextPreference) mPreference);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mPassword = (String) newValue;
-        ((ValidatedEditTextPreference) mPreference).setText(mPassword);
+        updatePasswordDisplay((EditTextPreference) mPreference);
         mListener.onTetherConfigUpdated();
         return true;
     }
@@ -68,5 +68,10 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public boolean isTextValid(String value) {
         return WifiUtils.isPasswordValid(value);
+    }
+
+    private void updatePasswordDisplay(EditTextPreference preference) {
+        preference.setText(mPassword);
+        preference.setSummary(mPassword);
     }
 }
