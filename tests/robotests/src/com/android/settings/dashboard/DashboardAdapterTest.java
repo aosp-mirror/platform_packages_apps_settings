@@ -352,6 +352,30 @@ public class DashboardAdapterTest {
     }
 
     @Test
+    public void testSuggestionDismissed_moreThanTwoSuggestions_defaultMode_shouldNotCrash() {
+        final RecyclerView data = new RecyclerView(RuntimeEnvironment.application);
+        final View itemView = mock(View.class);
+        when(itemView.findViewById(R.id.data)).thenReturn(data);
+        final DashboardAdapter.SuggestionAndConditionContainerHolder holder =
+                new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
+        final List<Tile> suggestions =
+                makeSuggestions("pkg1", "pkg2", "pkg3", "pkg4");
+        final DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null /*savedInstance */,
+                null /* conditions */, null /* suggestionParser */, null /* callback */));
+        adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
+        adapter.onBindConditionAndSuggestion(
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
+        // default mode, only displaying 2 suggestions
+
+        adapter.onSuggestionDismissed(suggestions.get(1));
+
+        // verify operations that access the lists will not cause ConcurrentModificationException
+        assertThat(holder.data.getAdapter().getItemCount()).isEqualTo(1);
+        adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
+        // should not crash
+    }
+
+    @Test
     public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null, null, null, null));

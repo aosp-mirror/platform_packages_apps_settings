@@ -134,4 +134,8 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         return null;
     }
 
+    public void removeSuggestion(Tile suggestion) {
+        mSuggestions.remove(suggestion);
+        notifyDataSetChanged();
+    }
 }
