@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.ConnectivityManager.TETHERING_WIFI;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,53 +26,51 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.widget.Switch;
 
 import com.android.settings.datausage.DataSaverBackend;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import static android.net.ConnectivityManager.TETHERING_WIFI;
-
-public class WifiTetherSwitchBarController implements SwitchBar.OnSwitchChangeListener,
+public class WifiTetherSwitchBarController implements SwitchWidgetController.OnSwitchChangeListener,
         LifecycleObserver, OnStart, OnStop {
 
     private final Context mContext;
-    private final SwitchBar mSwitchBar;
+    private final SwitchWidgetController mSwitchBar;
     private final ConnectivityManager mConnectivityManager;
     private final DataSaverBackend mDataSaverBackend;
-    private final NoOpOnStartTetheringCallback mOnStartTetheringCallback;
 
-    WifiTetherSwitchBarController(Context context, SwitchBar switchBar) {
+    WifiTetherSwitchBarController(Context context, SwitchWidgetController switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
         mDataSaverBackend = new DataSaverBackend(context);
-        mOnStartTetheringCallback = new NoOpOnStartTetheringCallback();
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.setListener(this);
     }
 
     @Override
     public void onStart() {
+        mSwitchBar.startListening();
         mContext.registerReceiver(mReceiver,
                 WifiTetherPreferenceController.WIFI_TETHER_INTENT_FILTER);
     }
 
     @Override
     public void onStop() {
+        mSwitchBar.stopListening();
         mContext.unregisterReceiver(mReceiver);
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public boolean onSwitchToggled(boolean isChecked) {
         if (isChecked) {
             startTether();
         } else {
             stopTether();
         }
+        return true;
     }
 
     void stopTether() {
@@ -81,7 +81,7 @@ public class WifiTetherSwitchBarController implements SwitchBar.OnSwitchChangeLi
     void startTether() {
         mSwitchBar.setEnabled(false);
         mConnectivityManager.startTethering(TETHERING_WIFI, true /* showProvisioningUi */,
-                mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));
+                NoOpOnStartTetheringCallback.newInstance(), new Handler(Looper.getMainLooper()));
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
