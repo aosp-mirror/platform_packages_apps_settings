@@ -281,11 +281,17 @@ public class WifiConfigController implements TextWatcher,
                 showProxyFields();
                 final CheckBox advancedTogglebox =
                         (CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox);
-                mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(
+                        mAccessPoint.isCarrierAp() ? View.GONE : View.VISIBLE);
                 advancedTogglebox.setOnCheckedChangeListener(this);
                 advancedTogglebox.setChecked(showAdvancedFields);
                 mView.findViewById(R.id.wifi_advanced_fields)
                         .setVisibility(showAdvancedFields ? View.VISIBLE : View.GONE);
+                if (mAccessPoint.isCarrierAp()) {
+                    addRow(group, R.string.wifi_carrier_connect,
+                            String.format(mContext.getString(R.string.wifi_carrier_content),
+                            mAccessPoint.getCarrierName()));
+                }
             }
 
             if (mMode == WifiConfigUiBase.MODE_MODIFY) {
@@ -845,6 +851,10 @@ public class WifiConfigController implements TextWatcher,
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
 
+            if (mAccessPoint.isCarrierAp()) {
+                mEapMethodSpinner.setSelection(mAccessPoint.getCarrierApEapType());
+            }
+
             loadCertificates(
                     mEapCaCertSpinner,
                     Credentials.CA_CERTIFICATE,
@@ -1012,6 +1022,9 @@ public class WifiConfigController implements TextWatcher,
                 setUserCertInvisible();
                 setPasswordInvisible();
                 setIdentityInvisible();
+                if (mAccessPoint.isCarrierAp()) {
+                    setEapMethodInvisible();
+                }
                 break;
         }
 
@@ -1075,6 +1088,10 @@ public class WifiConfigController implements TextWatcher,
         mPasswordView.setText("");
         mView.findViewById(R.id.password_layout).setVisibility(View.GONE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.GONE);
+    }
+
+    private void setEapMethodInvisible() {
+        mView.findViewById(R.id.eap).setVisibility(View.GONE);
     }
 
     private void showIpConfigFields() {
