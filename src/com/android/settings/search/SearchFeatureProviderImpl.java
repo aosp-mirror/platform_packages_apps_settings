@@ -55,6 +55,13 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
+    public AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
+            String query) {
+        return new AccessibilityServiceResultLoader(context, cleanQuery(query),
+                getSiteMapManager());
+    }
+
+    @Override
     public SavedQueryLoader getSavedQueryLoader(Context context) {
         return new SavedQueryLoader(context);
     }
