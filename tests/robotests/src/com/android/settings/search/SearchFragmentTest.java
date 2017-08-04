@@ -81,6 +81,8 @@ public class SearchFragmentTest {
     private DatabaseResultLoader mDatabaseResultLoader;
     @Mock
     private InstalledAppResultLoader mInstalledAppResultLoader;
+    @Mock
+    private AccessibilityServiceResultLoader mAccessibilityServiceResultLoader;
 
     @Mock
     private SavedQueryLoader mSavedQueryLoader;
@@ -113,6 +115,9 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -170,6 +175,9 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -225,6 +233,9 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
         ActivityController<SearchActivity> activityController =
@@ -256,6 +267,9 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -333,6 +347,9 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(new MockAccessiblityLoader(RuntimeEnvironment.application));
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
         ActivityController<SearchActivity> activityController =
