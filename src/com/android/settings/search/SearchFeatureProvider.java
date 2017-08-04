@@ -43,6 +43,12 @@ public interface SearchFeatureProvider {
     InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query);
 
     /**
+     * Returns a new loader to search accessibility services.
+     */
+    AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
+            String query);
+
+    /**
      * Returns a new loader to get all recently saved queries search terms.
      */
     SavedQueryLoader getSavedQueryLoader(Context context);
@@ -95,8 +101,8 @@ public interface SearchFeatureProvider {
     /**
      * Query search results based on the input query.
      *
-     * @param context application context
-     * @param query input user query
+     * @param context                     application context
+     * @param query                       input user query
      * @param searchResultsRankerCallback {@link SearchResultsRankerCallback}
      */
     default void querySearchResults(Context context, String query,
@@ -112,8 +118,8 @@ public interface SearchFeatureProvider {
     /**
      * Notify that a search result is clicked.
      *
-     * @param context application context
-     * @param query input user query
+     * @param context      application context
+     * @param query        input user query
      * @param searchResult clicked result
      */
     default void searchResultClicked(Context context, String query, SearchResult searchResult) {

@@ -17,7 +17,6 @@
 package com.android.settings.search;
 
 import android.accessibilityservice.AccessibilityService;
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
@@ -41,13 +40,11 @@ import android.provider.UserDictionary;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
-import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
@@ -89,7 +86,6 @@ public final class DynamicIndexableContentMonitor implements
     @VisibleForTesting
     static void resetForTesting() {
         InputDevicesMonitor.getInstance().resetForTesting();
-        AccessibilityServicesMonitor.getInstance().resetForTesting();
         InputMethodServicesMonitor.getInstance().resetForTesting();
     }
 
@@ -144,7 +140,6 @@ public final class DynamicIndexableContentMonitor implements
         InputDevicesMonitor.getInstance().initialize(context, mIndexManager);
 
         // Start tracking packages.
-        AccessibilityServicesMonitor.getInstance().initialize(context, mIndexManager);
         InputMethodServicesMonitor.getInstance().initialize(context, mIndexManager);
     }
 
@@ -301,83 +296,14 @@ public final class DynamicIndexableContentMonitor implements
 
         private void postPackageAvailable(final String packageName) {
             getRegisteredHandler().postDelayed(() -> {
-                AccessibilityServicesMonitor.getInstance().onPackageAvailable(packageName);
                 InputMethodServicesMonitor.getInstance().onPackageAvailable(packageName);
             }, DELAY_PROCESS_PACKAGE_CHANGE);
         }
 
         private void postPackageUnavailable(final String packageName) {
             getRegisteredHandler().postDelayed(() -> {
-                AccessibilityServicesMonitor.getInstance().onPackageUnavailable(packageName);
                 InputMethodServicesMonitor.getInstance().onPackageUnavailable(packageName);
             }, DELAY_PROCESS_PACKAGE_CHANGE);
-        }
-    }
-
-    // A singleton that holds list of available accessibility services and updates search index.
-    private static class AccessibilityServicesMonitor {
-
-        // Null if not initialized.
-        @Nullable private DatabaseIndexingManager mIndexManager;
-        private PackageManager mPackageManager;
-        private final List<String> mAccessibilityServices = new ArrayList<>();
-
-        private AccessibilityServicesMonitor() {}
-
-        private static class SingletonHolder {
-            private static final AccessibilityServicesMonitor INSTANCE =
-                    new AccessibilityServicesMonitor();
-        }
-
-        static AccessibilityServicesMonitor getInstance() {
-            return SingletonHolder.INSTANCE;
-        }
-
-        @VisibleForTesting
-        synchronized void resetForTesting() {
-            mIndexManager = null;
-        }
-
-        synchronized void initialize(Context context, DatabaseIndexingManager index) {
-            if (mIndexManager != null) return;
-            mIndexManager = index;
-            mPackageManager = context.getPackageManager();
-            mAccessibilityServices.clear();
-            buildIndex();
-
-            // Cache accessibility service packages to know when they go away.
-            AccessibilityManager accessibilityManager = (AccessibilityManager) context
-                    .getSystemService(Context.ACCESSIBILITY_SERVICE);
-            for (final AccessibilityServiceInfo accessibilityService
-                    : accessibilityManager.getInstalledAccessibilityServiceList()) {
-                ResolveInfo resolveInfo = accessibilityService.getResolveInfo();
-                if (resolveInfo != null && resolveInfo.serviceInfo != null) {
-                    mAccessibilityServices.add(resolveInfo.serviceInfo.packageName);
-                }
-            }
-        }
-
-        private void buildIndex() {
-            mIndexManager.updateFromClassNameResource(AccessibilitySettings.class.getName(),
-                    true /* includeInSearchResults */);
-        }
-
-        synchronized void onPackageAvailable(String packageName) {
-            if (mIndexManager == null) return;
-            if (mAccessibilityServices.contains(packageName)) return;
-
-            final Intent intent = getAccessibilityServiceIntent(packageName);
-            final List<ResolveInfo> services = mPackageManager
-                    .queryIntentServices(intent, 0 /* flags */);
-            if (services == null || services.isEmpty()) return;
-            mAccessibilityServices.add(packageName);
-            buildIndex();
-        }
-
-        synchronized void onPackageUnavailable(String packageName) {
-            if (mIndexManager == null) return;
-            if (!mAccessibilityServices.remove(packageName)) return;
-            buildIndex();
         }
     }
 
