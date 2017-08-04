@@ -211,8 +211,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     .build();
             notifyDashboardDataChanged(prevData);
         } else {
-            suggestions.remove(suggestion);
-            mSuggestionAdapter.notifyDataSetChanged();
+            mSuggestionAdapter.removeSuggestion(suggestion);
         }
     }
 
