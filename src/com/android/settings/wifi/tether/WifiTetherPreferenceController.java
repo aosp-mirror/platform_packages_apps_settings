@@ -24,23 +24,24 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.widget.MasterSwitchController;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
 
 public class WifiTetherPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
     public static final IntentFilter WIFI_TETHER_INTENT_FILTER;
     private static final String WIFI_TETHER_SETTINGS = "wifi_tether";
@@ -48,7 +49,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     private final ConnectivityManager mConnectivityManager;
     private final String[] mWifiRegexs;
     private final WifiManager mWifiManager;
-    private Preference mPreference;
+    private final Lifecycle mLifecycle;
+    private WifiTetherSwitchBarController mSwitchController;
+    private MasterSwitchPreference mPreference;
 
     static {
         WIFI_TETHER_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
@@ -61,9 +64,8 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
         mWifiRegexs = mConnectivityManager.getTetherableWifiRegexs();
-
+        mLifecycle = lifecycle;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -80,7 +82,14 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(WIFI_TETHER_SETTINGS);
+        mPreference = (MasterSwitchPreference) screen.findPreference(WIFI_TETHER_SETTINGS);
+        if (mPreference == null) {
+            // unavailable
+            return;
+        }
+        mSwitchController = new WifiTetherSwitchBarController(
+                mContext, new MasterSwitchController(mPreference));
+        mLifecycle.addObserver(mSwitchController);
     }
 
     @Override
@@ -89,7 +98,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mPreference != null) {
             mContext.registerReceiver(mReceiver, WIFI_TETHER_INTENT_FILTER);
             clearSummaryForAirplaneMode();
@@ -97,7 +106,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (mPreference != null) {
             mContext.unregisterReceiver(mReceiver);
         }
