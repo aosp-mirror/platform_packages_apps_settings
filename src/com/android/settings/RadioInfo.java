@@ -1365,25 +1365,21 @@ public class RadioInfo extends Activity {
 
     OnClickListener mCarrierProvisioningButtonHandler = new OnClickListener() {
         public void onClick(View v) {
-            final Intent intent = new Intent();
-            final ComponentName serviceComponent = new ComponentName("com.android.omadm.service",
-                    "DMIntentReceiver");
+            final Intent intent = new Intent("com.android.settings.CARRIER_PROVISIONING");
+            final ComponentName serviceComponent = ComponentName.unflattenFromString(
+                    "com.android.omadm.service/.DMIntentReceiver");
             intent.setComponent(serviceComponent);
-            intent.setAction("com.android.settings.CARRIER_PROVISIONING");
-            getApplicationContext().sendBroadcast(
-                    intent, android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE);
+            sendBroadcast(intent);
         }
     };
 
     OnClickListener mTriggerCarrierProvisioningButtonHandler = new OnClickListener() {
         public void onClick(View v) {
-            final Intent intent = new Intent();
-            final ComponentName serviceComponent = new ComponentName("com.android.omadm.service",
-                    "DMIntentReceiver");
+            final Intent intent = new Intent("com.android.settings.TRIGGER_CARRIER_PROVISIONING");
+            final ComponentName serviceComponent = ComponentName.unflattenFromString(
+                    "com.android.omadm.service/.DMIntentReceiver");
             intent.setComponent(serviceComponent);
-            intent.setAction("com.android.settings.TRIGGER_CARRIER_PROVISIONING");
-            getApplicationContext().sendBroadcast(
-                    intent, android.Manifest.permission.MODIFY_PHONE_STATE);
+            sendBroadcast(intent);
         }
     };
 
