@@ -34,14 +34,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -353,6 +351,30 @@ public class DashboardAdapterTest {
         assertThat(suggestions.size()).isEqualTo(2);
         assertThat(suggestions.contains(suggestionToRemove)).isFalse();
         verify(adapter, never()).notifyDashboardDataChanged(any());
+    }
+
+    @Test
+    public void testSuggestionDismissed_moreThanTwoSuggestions_defaultMode_shouldNotCrash() {
+        final RecyclerView data = new RecyclerView(RuntimeEnvironment.application);
+        final View itemView = mock(View.class);
+        when(itemView.findViewById(R.id.data)).thenReturn(data);
+        final DashboardAdapter.SuggestionAndConditionContainerHolder holder =
+                new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
+        final List<Tile> suggestions =
+                makeSuggestions("pkg1", "pkg2", "pkg3", "pkg4");
+        final DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null /*savedInstance */,
+                null /* conditions */, null /* suggestionParser */, null /* callback */));
+        adapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
+        adapter.onBindConditionAndSuggestion(
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
+        // default mode, only displaying 2 suggestions
+
+        adapter.onSuggestionDismissed(suggestions.get(1));
+
+        // verify operations that access the lists will not cause ConcurrentModificationException
+        assertThat(holder.data.getAdapter().getItemCount()).isEqualTo(1);
+        adapter.setCategoriesAndSuggestions(new ArrayList<>(), suggestions);
+        // should not crash
     }
 
     @Test
