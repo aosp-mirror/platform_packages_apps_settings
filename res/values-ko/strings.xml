@@ -166,7 +166,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s이(가) 메시지에 액세스하려고 합니다. %2$s에 액세스 권한을 제공하시겠습니까?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 액세스 요청"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>이(가) SIM 카드에 액세스하려고 합니다. SIM 카드에 대한 액세스를 허용하면 연결되어 있는 동안 기기의 데이터 연결이 비활성화됩니다. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>에 액세스 권한을 부여하세요."</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"다른 기기에서 \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\'(으)로 표시됩니다."</string>
+    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"내 기기"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"새 기기와 페어링"</string>
     <string name="date_and_time" msgid="9062980487860757694">"날짜 및 시간"</string>
@@ -588,6 +589,8 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"연속으로 올라가거나 내려가는 숫자 또는 반복되는 숫자의 배열은 허용되지 않습니다."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"확인"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"취소"</string>
+    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
+    <skip />
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"취소"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"다음"</string>
     <string name="lock_setup" msgid="3355847066343753943">"설정이 완료되었습니다."</string>
@@ -817,10 +820,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS 사용 가능"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS 사용 가능)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"네트워크 비밀번호 입력"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"이동통신사 Wi‑Fi 네트워크"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1%s</xliff:g>(을)를 통해 연결"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"위치 정확성 개선 등의 목적으로 <xliff:g id="APP_NAME">%1$s</xliff:g>에서 Wi-Fi가 꺼져 있을 때에도 네트워크 검색을 사용하도록 설정하려 합니다.\n\n검색하려는 모든 앱에 대해 이를 허용하시겠습니까?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"이 기능을 사용 중지하려면 더보기 메뉴에서 고급으로 이동하세요."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"허용"</string>
@@ -943,7 +944,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi 통화가 켜져 있으면 휴대전화에서 환경설정과 신호 강도에 따라 Wi-Fi 네트워크나 데이터 네트워크를 통해 통화를 연결할 수 있습니다. 이 기능을 사용하기 전에 이동통신사에 문의하여 요금과 기타 세부정보를 알아보세요."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"긴급 주소 업데이트"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Wi-Fi를 통해 119에 전화를 걸 때 응급 서비스에서 내 위치로 사용한 주소"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Wi-Fi를 통해 긴급 전화를 걸 때 응급 서비스에서 내 위치로 사용할 주소"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"디스플레이"</string>
     <string name="sound_settings" msgid="5534671337768745343">"소리"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"볼륨"</string>
@@ -1340,21 +1341,15 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"초기화하시겠습니까?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"네트워크 재설정 권한이 없는 사용자입니다."</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"네트워크 설정이 재설정되었습니다."</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"모든 데이터 삭제(초기화)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other">계정 <xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g>개가 재설정됨</item>
-      <item quantity="one">계정 1개가 재설정됨</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"내부 저장소 및 모든 데이터가 재설정됩니다."</string>
+    <!-- no translation found for master_clear_title (3531267871084279512) -->
+    <skip />
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"공장 초기화하면 태블릿의 "<b>"내부 저장소의 모든 데이터가 삭제됩니다."</b>\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"공장 초기화하면 다음을 포함한 휴대전화 "<b>"내부 저장소"</b>"의 모든 데이터가 삭제됩니다.\n\n"<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"현재 로그인한 계정:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"이 기기에 다른 사용자가 있습니다.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"음악"</li>\n<li>"사진"</li>\n<li>"기타 사용자 데이터"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM에 등록된 이동통신사"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"모바일 서비스 요금제는 취소되지 않습니다."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"음악이나 사진, 기타 사용자 데이터를 지우려면 "<b>"USB 저장소"</b>"를 삭제해야 합니다."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"음악이나 사진, 기타 사용자 데이터를 지우려면 "<b>"SD 카드"</b>"를 삭제해야 합니다."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB 저장소 지우기"</string>
@@ -1811,8 +1806,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"스크린 리더, 디스플레이, 상호작용 컨트롤"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"보기 설정"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"필요에 따라 기기를 맞춤설정할 수 있습니다. 다음 접근성 기능은 언제든지 설정에서 변경할 수 있습니다."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"글꼴 크기 변경"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"스크린 리더"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"오디오 및 화면에 있는 텍스트"</string>
     <string name="display_category_title" msgid="685461049938269166">"디스플레이"</string>
@@ -3421,7 +3415,8 @@
     <string name="data_warning" msgid="209133958008062117">"데이터 경고"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"데이터 한도 설정"</string>
     <string name="data_limit" msgid="1885406964934590552">"데이터 한도"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g>에 <xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
+    <!-- no translation found for data_usage_template (2923744765873163859) -->
+    <skip />
     <string name="configure" msgid="1029654422228677273">"설정"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"사용량이 집계된 기타 앱"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3490,8 +3485,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"삭제 및 변환"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager 대역 제한 기능 재설정"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager 대역 제한 기능이 재설정되었습니다."</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"잠금 화면에서 정보 제어"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"알림 내용 표시 또는 숨기기"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"전체"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"지원 &amp; 도움말"</string>

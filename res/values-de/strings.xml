@@ -165,7 +165,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s möchte auf deine Nachrichten zugreifen. Möchtest du %2$s den Zugriff erlauben?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Anfrage wegen Zugriff auf SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> möchte auf deine SIM-Karte zugreifen. Wenn du den Zugriff auf die SIM-Karte gewährst, wird die Datenverbindung auf deinem Gerät für die Dauer der Verbindung deaktiviert. Möchtest du <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> den Zugriff erlauben?"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Für andere Geräte sichtbar als \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
+    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Meine Geräte"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Neues Gerät koppeln"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum &amp; Uhrzeit"</string>
@@ -587,6 +588,8 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Aufsteigende, absteigende oder wiederholte Ziffernfolgen sind unzulässig"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Abbrechen"</string>
+    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
+    <skip />
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Abbrechen"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Weiter"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Die Einrichtung ist abgeschlossen."</string>
@@ -817,10 +820,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS verfügbar"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS verfügbar)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Gib dein Netzwerkpasswort ein."</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"WLAN eines Mobilfunkanbieters"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"Über <xliff:g id="NAME">%1%s</xliff:g> verbinden"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Zur Verbesserung der Standortgenauigkeit und zu anderen Zwecken möchte <xliff:g id="APP_NAME">%1$s</xliff:g> die Netzwerküberprüfung aktivieren, auch wenn das WLAN deaktiviert ist.\n\nMöchtest du dies für alle Apps zulassen, die eine Überprüfung durchführen möchten?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Rufe im Überlaufmenü \"Erweitert\" auf, um diese Option zu deaktivieren."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Zulassen"</string>
@@ -943,7 +944,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wenn die Option \"Anrufe über WLAN\" aktiviert ist, kann dein Smartphone abhängig von deiner Einstellung und von der Signalstärke Anrufe über WLANs oder über das Netz deines Mobilfunkanbieters übertragen. Erkundige dich bei deinem Mobilfunkanbieter über die hierfür erhobenen Gebühren und andere Informationen, bevor du diese Funktion aktivierst."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Notfalladresse aktualisieren"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Adresse, die bei einem Notruf über WLAN von Notdiensten als dein Standort verwendet wird"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Adresse, die bei einem Notruf über WLAN von Notdiensten als dein Standort verwendet wird"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Töne"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Lautstärke"</string>
@@ -1340,21 +1341,15 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Zurücksetzen?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Das Zurücksetzen der Netzwerkeinstellungen ist für diesen Nutzer nicht verfügbar."</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Die Netzwerkeinstellungen wurden zurückgesetzt."</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"Alle Daten löschen (auf Werkseinstellungen zurücksetzen)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> Konten werden zurückgesetzt</item>
-      <item quantity="one">1 Konto wird zurückgesetzt</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"Interner Speicher &amp; alle Daten werden zurückgesetzt"</string>
+    <!-- no translation found for master_clear_title (3531267871084279512) -->
+    <skip />
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" deines Tablets gelöscht, u. a.\n\n"<li>"dein Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>"heruntergeladene Apps"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" deines Telefons gelöscht, u. a.\n\n"<li>"dein Google-Konto"</li>\n<li>"System- und App-Daten sowie entsprechende Einstellungen"</li>\n<li>"heruntergeladene Apps"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Du bist zurzeit in folgenden Konten angemeldet:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Auf diesem Gerät sind andere Nutzer vorhanden.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Mobilfunkanbieter auf der eSIM"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Dein Mobilfunkvertrag wird dadurch nicht gekündigt."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, muss der "<b>"USB-Speicher"</b>" gelöscht werden."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, muss die "<b>"SD-Karte"</b>" gelöscht werden."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB-Speicher löschen"</string>
@@ -1811,8 +1806,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Screenreader, Display, Interaktionssteuerung"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Anzeigeeinstellungen"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Du kannst dieses Gerät an deine Bedürfnisse anpassen. Diese Funktionen der Bedienungshilfen kannst du später in den Einstellungen ändern."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Schriftgröße ändern"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Screenreader"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audiodienste und Text auf dem Bildschirm"</string>
     <string name="display_category_title" msgid="685461049938269166">"Bildschirm"</string>
@@ -3421,7 +3415,8 @@
     <string name="data_warning" msgid="209133958008062117">"Warnlimit für mobile Daten"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Datenlimit festlegen"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datenlimit"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> im Zeitraum <xliff:g id="ID_2">%2$s</xliff:g> genutzt"</string>
+    <!-- no translation found for data_usage_template (2923744765873163859) -->
+    <skip />
     <string name="configure" msgid="1029654422228677273">"Konfigurieren"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Weitere bei der Nutzung mitgerechnete Apps"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3490,8 +3485,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Löschen und wechseln"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Zugriffsbegrenzung im ShortcutManager zurücksetzen"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Zugriffsbegrenzung im ShortcutManager zurückgesetzt"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"Infos auf Sperrbildschirm festlegen"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Benachrichtigungsinhalt ein- oder ausblenden"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Support &amp; Tipps"</string>

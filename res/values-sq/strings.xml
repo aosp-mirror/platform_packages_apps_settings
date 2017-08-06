@@ -166,7 +166,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s kërkon të ketë qasje te mesazhet e tua. Të lejohet qasja për %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Kërkesa për qasje në kartën SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"Pajisja <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dëshiron të ketë qasje në kartën tënde SIM. Dhënia e të drejtës për qasje në kartën SIM do të çaktivizojë lidhjen e të dhënave në pajisjen tënde gjatë kohëzgjatjes së lidhjes. Jepi qasje pajisjes <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"I dukshëm si \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" në pajisjet e tjera"</string>
+    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Pajisjet e tua"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Çifto pajisjen e re"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data dhe ora"</string>
@@ -588,6 +589,8 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Nuk lejohet një sekuencë shifrash në rritje, në zbritje ose me përsëritje"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Në rregull"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Anulo"</string>
+    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
+    <skip />
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Anulo"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Përpara"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Konfigurimi përfundoi."</string>
@@ -817,10 +820,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Ofrohet WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Ofrohet WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Fut fjalëkalimin e rrjetit"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"Rrjeti Wi-Fi i operatorit celular"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"E lidhur përmes <xliff:g id="NAME">%1%s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Për të përmirësuar saktësinë e vendndodhjes dhe për qëllime të tjera, <xliff:g id="APP_NAME">%1$s</xliff:g> dëshiron të aktivizojë skanimin e rrjetit, edhe kur Wi-Fi është joaktiv.\n\nTë lejohet kjo për të gjitha aplikacionet që dëshirojnë të skanojnë?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Për ta çaktivizuar këtë, shko te \"Të përparuara\" në menynë e tejkalimit."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Lejo"</string>
@@ -943,7 +944,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kur telefonata me Wi-Fi është e aktivizuar, telefoni mund t\'i kalojë telefonatat nëpërmjet rrjeteve Wi-Fi ose nëpërmjet rrjetit të operatorit celular, në varësi të preferencës dhe se cili sinjal është më i fortë. Para se të aktivizosh këtë funksion, kontakto me operatorin celular në lidhje me tarifat dhe detaje të tjera."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Përditëso adresën e urgjencës"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Adresa përdoret nga shërbimet e urgjencës si vendndodhja jote nëse telefonon në 911 me WiFi"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Adresa përdoret nga shërbimet e urgjencës si vendndodhja jote nëse kryen një telefonatë urgjence me WiFi"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Paraqitja"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Tingulli"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumet"</string>
@@ -1340,21 +1341,15 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Të rivendosen?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Rivendosja e rrjetit nuk është e disponueshme për këtë përdorues"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Cilësimet e rrjetit janë rivendosur"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"Spastro të gjitha të dhënat (rivendosja e fabrikës)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> llogari do të rivendosen</item>
-      <item quantity="one">1 llogari do të rivendoset</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"Hapësira ruajtëse e brendshme dhe të gjitha të dhënat do të rivendosen"</string>
+    <!-- no translation found for master_clear_title (3531267871084279512) -->
+    <skip />
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Kjo do t\'i fshijë të gjitha të dhënat nga "<b>"hapësira e brendshme për ruajtje"</b>" e tabletit, përfshirë:\n\n"<li>"Llogarinë e Google"</li>\n<li>"Të dhënat e sistemit dhe aplikacioneve si dhe cilësimet"</li>\n<li>"Aplikacionet e shkarkuara"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Kjo do t\'i fshijë të gjitha të dhënat nga "<b>"hapësira e brendshme për ruajtje"</b>" e telefonit, përfshirë:\n\n"<li>"Llogarinë e Google"</li>\n<li>"Të dhënat e sistemit dhe aplikacioneve si dhe cilësimet"</li>\n<li>"Aplikacionet e shkarkuara"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Je i identifikuar aktualisht në llogaritë e mëposhtme:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Ka përdorues të tjerë të pranishëm në këtë pajisje.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzika"</li>\n<li>"Fotografitë"</li>\n<li>"Të dhëna të tjera të përdoruesit"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Operatorët celularë në eSIM"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Kjo nuk do ta anulojë planin tënd të shërbimit celular."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Për të hequr muzikën, fotografitë dhe të dhëna të tjera të përdoruesit, "<b>"hapësira ruajtëse e USB-së"</b>" duhet të spastrohet."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Për të hequr muzikën, fotografitë dhe të dhëna të tjera të përdoruesit, "<b>"karta SD"</b>" duhet të spastrohet."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Fshi hapësirën ruajtëse të USB-së"</string>
@@ -1811,8 +1806,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Lexues ekrani, ekran, kontrolle interaktive"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Cilësimet e shikimit"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Mund ta personalizosh këtë pajisje për t\'iu përshtatur nevojave të tua. Këto funksione të qasjes mund të ndryshohen më vonë te \"Cilësimet\"."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Ndrysho madhësinë e shkrimit"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Lexuesit e ekranit"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audioja dhe teksti në ekran"</string>
     <string name="display_category_title" msgid="685461049938269166">"Ekrani"</string>
@@ -3421,7 +3415,8 @@
     <string name="data_warning" msgid="209133958008062117">"Paralajmërimi i të dhënave"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Cakto kufirin e të dhënave"</string>
     <string name="data_limit" msgid="1885406964934590552">"Kufiri i të dhënave"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> të përdorura mes datave <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <!-- no translation found for data_usage_template (2923744765873163859) -->
+    <skip />
     <string name="configure" msgid="1029654422228677273">"Konfiguro"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Aplikacionet e tjera të përfshira në përdorim"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3490,8 +3485,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Pastro dhe konverto"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Rivendos kufizimin e normës së ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Është rivendosur kufizimi i normës së ShortcutManager"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"Informacioni i kontrollit në ekranin e kyçjes"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Shfaq ose fshih përmbajtjet e njoftimeve"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Të gjitha"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Mbështetja dhe këshillat"</string>

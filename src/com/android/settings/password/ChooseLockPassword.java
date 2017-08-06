@@ -211,6 +211,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
         protected Button mCancelButton;
+        private Button mClearButton;
         private Button mNextButton;
 
         private TextChangedHandler mTextChangedHandler;
@@ -347,6 +348,8 @@ public class ChooseLockPassword extends SettingsActivity {
             mCancelButton.setOnClickListener(this);
             mNextButton = (Button) view.findViewById(R.id.next_button);
             mNextButton.setOnClickListener(this);
+            mClearButton = view.findViewById(R.id.clear_button);
+            mClearButton.setOnClickListener(this);
 
             if (mForFingerprint) {
                 TextView fingerprintBackupMessage =
@@ -735,6 +738,10 @@ public class ChooseLockPassword extends SettingsActivity {
                 case R.id.cancel_button:
                     getActivity().finish();
                     break;
+
+                case R.id.clear_button:
+                    mPasswordEntry.setText("");
+                    break;
             }
         }
 
@@ -839,9 +846,18 @@ public class ChooseLockPassword extends SettingsActivity {
                 mPasswordRestrictionView.setVisibility(View.GONE);
                 setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, mForFingerprint)));
                 setNextEnabled(canInput && length > 0);
+                mClearButton.setEnabled(canInput && length > 0);
             }
+
+            mClearButton.setVisibility(toVisibility(mUiStage != Stage.Introduction));
+            mCancelButton.setVisibility(toVisibility(mUiStage == Stage.Introduction));
+
             setNextText(mUiStage.buttonText);
             mPasswordEntryInputDisabler.setInputEnabled(canInput);
+        }
+
+        private int toVisibility(boolean visibleOrGone) {
+            return visibleOrGone ? View.VISIBLE : View.GONE;
         }
 
         private void setHeaderText(String text) {

@@ -166,7 +166,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s 要求存取你的訊息。要將存取權授予 %2$s 嗎？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 存取權請求"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的 SIM 卡。如果授權該裝置存取 SIM 卡，你裝置的數據連線功能在藍牙連線期間將暫時停用。將存取權授予「<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>」"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
+    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"你的裝置"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"配對新裝置"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和時間"</string>
@@ -588,6 +589,8 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"不允許使用依遞增或遞減順序排列或是重複的一串數字"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"確定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
+    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
+    <skip />
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"取消"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"下一步"</string>
     <string name="lock_setup" msgid="3355847066343753943">"設定完成。"</string>
@@ -817,10 +820,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (可使用 WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"輸入你的網路密碼"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"電信業者 Wi‑Fi 網路"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"透過「<xliff:g id="NAME">%1%s</xliff:g>」連線"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"<xliff:g id="APP_NAME">%1$s</xliff:g> 要求開啟網路掃描功能 (即使 Wi-Fi 已關閉)，藉此提升定位精確度及用於其他用途。\n\n你要對所有需要執行掃描的應用程式允許這項要求嗎？"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"如要關閉這項功能，請在溢位選單中選取 [進階]。"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"允許"</string>
@@ -943,7 +944,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"開啟 Wi-Fi 通話功能之後，你的手機可依據你的偏好設定，透過 Wi-Fi 網路或你的行動通訊網路通話 (選擇訊號較強者)。開啟這項功能前，請先與你的電信業者詢問費用與其他細節。"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"更新緊急地址"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"如果你使用 Wi-Fi 撥打 119，緊急服務會判定你位在這個地址"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"如果你使用 Wi-Fi 撥打緊急電話，緊急服務會判定你位在這個地址"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"顯示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"音效"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"音量"</string>
@@ -1340,21 +1341,15 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"你要重設嗎？"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"這個使用者無法重設網路設定"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"已重設網路設定"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"清除所有資料 (恢復原廠設定)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other">系統將重設 <xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> 個帳戶</item>
-      <item quantity="one">系統將重設 1 個帳戶</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"內部儲存空間與所有資料都將重設"</string>
+    <!-- no translation found for master_clear_title (3531267871084279512) -->
+    <skip />
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"這會清除你平板電腦"<b>"內部儲存裝置"</b>"中的所有資料，包括：\n\n"<li>"你的 Google 帳戶"</li>\n<li>"系統和應用程式資料及設定"</li>\n<li>"已下載的應用程式"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"這會清除你手機"<b>"內部儲存裝置"</b>"中的所有資料，包括：\n\n"<li>"你的 Google 帳戶"</li>\n<li>"系統和應用程式資料及設定"</li>\n<li>"已下載的應用程式"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"你目前已登入下列帳戶：\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"這個裝置上還有其他使用者。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音樂"</li>\n<li>"相片"</li>\n<li>"其他使用者資料"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM 卡中的電信業者"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"這項操作並不會取消你的行動服務方案。"</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"如要一併清除音樂、圖片及其他用戶資料，則需清除 "<b>"USB 儲存裝置"</b>"資料。"</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"如要清除音樂、圖片及其他使用者資料，必須先清除 "<b>"SD 卡"</b>"。"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"清除 USB 儲存裝置"</string>
@@ -1811,8 +1806,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"螢幕閱讀器、顯示、互動控制項"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視覺輔助設定"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"你可以根據個人需求自訂這個裝置，日後，你可以前往 [設定] 變更這些無障礙功能。"</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"變更字型大小"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"螢幕閱讀器"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音訊和畫面上的文字"</string>
     <string name="display_category_title" msgid="685461049938269166">"螢幕"</string>
@@ -3425,7 +3419,8 @@
     <string name="data_warning" msgid="209133958008062117">"數據用量警告"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"設定數據用量上限"</string>
     <string name="data_limit" msgid="1885406964934590552">"數據用量上限"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g>這段期間已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <!-- no translation found for data_usage_template (2923744765873163859) -->
+    <skip />
     <string name="configure" msgid="1029654422228677273">"設定"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"計入數據用量的其他應用程式"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3494,8 +3489,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除並轉換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"重設 ShortcutManager 速率限制"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"已重設 ShortcutManager 速率限制"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"控制鎖定畫面上顯示的資訊"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"顯示或隱藏通知內容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"支援和提示"</string>
