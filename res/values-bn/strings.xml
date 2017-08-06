@@ -20,7 +20,7 @@
     <string name="no" msgid="6731231425810196216">"না"</string>
     <string name="create" msgid="3578857613172647409">"তৈরি করুন"</string>
     <string name="allow" msgid="3349662621170855910">"অনুমতি দিন"</string>
-    <string name="deny" msgid="6947806159746484865">"আস্বীকার করুন"</string>
+    <string name="deny" msgid="6947806159746484865">"অস্বীকার করুন"</string>
     <string name="dlg_close" msgid="7471087791340790015">"বন্ধ করুন"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"পাল্টান"</string>
     <string name="device_info_default" msgid="7847265875578739287">"অজানা"</string>
@@ -40,7 +40,7 @@
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"ডেটা সংযোগ নিষ্ক্রিয় আছে"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE প্রস্তুত"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"ভিডিও কলিং এর ব্যবস্থা আছে"</string>
-    <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Wifi কলিং এর ব্যবস্থা আছে"</string>
+    <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"ওয়াই ফাই কলিং এর ব্যবস্থা আছে"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"মোবাইল রেডিওর গুণমান"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"সিম ঠিকানা বই দেখুন"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"স্থায়ী ডায়াল নম্বরগুলি দেখুন"</string>
@@ -51,7 +51,7 @@
     <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"নিবন্ধিত নয়"</string>
     <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"উপলব্ধ"</string>
     <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"অনুপলব্ধ"</string>
-    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS নিবন্ধীকরণ: <xliff:g id="STATUS">%1$s</xliff:g>\nভয়েস ওভার LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nভয়েস ওভার WiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nভিডিও কলিং: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT ইন্টারফেস: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS নিবন্ধীকরণ: <xliff:g id="STATUS">%1$s</xliff:g>\nভয়েস ওভার LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nভয়েস ওভার ওয়াই ফাই: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nভিডিও কলিং: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT ইন্টারফেস: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"পরিষেবায়"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"পরিষেবার বাইরে"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"শুধুমাত্র জরুরি কল"</string>
@@ -123,26 +123,26 @@
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সঙ্গে যুক্ত করতে আলতো চাপুন৷"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"পাওয়া ফাইলগুলি দেখান"</string>
     <string name="device_picker" msgid="4978696506172252813">"ব্লুটুথ ডিভাইস বাছুন"</string>
-    <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth চালু করতে চাইছে"</string>
-    <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth বন্ধ করতে চাইছে"</string>
-    <string name="bluetooth_ask_enablement_no_name" msgid="1644353686104482763">"একটি অ্যাপ Bluetooth চালু করতে চাইছে"</string>
-    <string name="bluetooth_ask_disablement_no_name" msgid="9218830122674868548">"একটি অ্যাপ Bluetooth চালু করতে চাইছে"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="4791779658660357386">"<xliff:g id="APP_NAME">%1$s</xliff:g> আপনার ট্যাবলেটকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="1308225382575535366">"<xliff:g id="APP_NAME">%1$s</xliff:g> আপনার ফোনটিকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="225715443477752935">"একটি অ্যাপ আপনার ট্যাবলেটকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="4949152735544109994">"একটি অ্যাপ আপনার ফোনটিকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8528329166577187961">"<xliff:g id="APP_NAME">%1$s</xliff:g> অন্য Bluetooth ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="4398738575307583138">"<xliff:g id="APP_NAME">%1$s</xliff:g> অন্য Bluetooth ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="1702590641426207062">"একটি অ্যাপ অন্য Bluetooth ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="8549952177383992238">"একটি অ্যাপ অন্য Bluetooth ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="1141843490422565755">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth চালু করতে চাইছে এবং আপনার ট্যাবলেটকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="5195836980079191473">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth চালু করতে চাইছে এবং আপনার ফোনটিকে অন্যান্য ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="7009338445281693765">"একটি অ্যাপ Bluetooth চালু করতে চাইছে এবং আপনার ট্যাবলেটটিকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="8386904242279878734">"একটি অ্যাপ Bluetooth চালু করতে চাইছে এবং আপনার ফোনটিকে অন্যান্য Bluetooth ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="2279471426575892686">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6961969825475461450">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="692477613671555006">"একটি অ্যাপ Bluetooth চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6374480121751597648">"একটি অ্যাপ Bluetooth চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে Bluetooth সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> ব্লুটুথ চালু করতে চাইছে"</string>
+    <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> ব্লুটুথ বন্ধ করতে চাইছে"</string>
+    <string name="bluetooth_ask_enablement_no_name" msgid="1644353686104482763">"একটি অ্যাপ ব্লুটুথ চালু করতে চাইছে"</string>
+    <string name="bluetooth_ask_disablement_no_name" msgid="9218830122674868548">"একটি অ্যাপ ব্লুটুথ চালু করতে চাইছে"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="4791779658660357386">"<xliff:g id="APP_NAME">%1$s</xliff:g> আপনার ট্যাবলেটকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="1308225382575535366">"<xliff:g id="APP_NAME">%1$s</xliff:g> আপনার ফোনটিকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="225715443477752935">"একটি অ্যাপ আপনার ট্যাবলেটকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="4949152735544109994">"একটি অ্যাপ আপনার ফোনটিকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8528329166577187961">"<xliff:g id="APP_NAME">%1$s</xliff:g> অন্য ব্লুটুথ ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="4398738575307583138">"<xliff:g id="APP_NAME">%1$s</xliff:g> অন্য ব্লুটুথ ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="1702590641426207062">"একটি অ্যাপ অন্য ব্লুটুথ ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="8549952177383992238">"একটি অ্যাপ অন্য ব্লুটুথ ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="1141843490422565755">"<xliff:g id="APP_NAME">%1$s</xliff:g> ব্লুটুথ চালু করতে চাইছে এবং আপনার ট্যাবলেটকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="5195836980079191473">"<xliff:g id="APP_NAME">%1$s</xliff:g> ব্লুটুথ চালু করতে চাইছে এবং আপনার ফোনটিকে অন্যান্য ডিভাইসের কাছে <xliff:g id="TIMEOUT">%2$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="7009338445281693765">"একটি অ্যাপ ব্লুটুথ চালু করতে চাইছে এবং আপনার ট্যাবলেটটিকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="8386904242279878734">"একটি অ্যাপ ব্লুটুথ চালু করতে চাইছে এবং আপনার ফোনটিকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="2279471426575892686">"<xliff:g id="APP_NAME">%1$s</xliff:g> ব্লুটুথ চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6961969825475461450">"<xliff:g id="APP_NAME">%1$s</xliff:g> ব্লুটুথ চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="692477613671555006">"একটি অ্যাপ ব্লুটুথ চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ট্যাবলেটটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6374480121751597648">"একটি অ্যাপ ব্লুটুথ চালু করতে চাইছে এবং অন্য ডিভাইসগুলির কাছে আপনার ফোনটিকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"ব্লুটুথ চালু করা হচ্ছে..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"ব্লুটুথ বন্ধ করা হচ্ছে..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"স্বতঃ-সংযোগ"</string>
@@ -203,7 +203,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"রেডিও ব্যান্ড নির্বাচন করুন"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"ভয়েস নেটওয়ার্কের প্রকার:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"ডেটা নেটওয়ার্কের প্রকার:"</string>
-    <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"পছন্দের নেটওয়ার্ক প্রকার সেট করুন:"</string>
+    <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"পছন্দের নেটওয়ার্ক সেট করুন:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"হোস্টনামে(www.google.com) IPv4 পিংগ করুন:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"হোস্টনামে(www.google.com) IPv6 পিংগ করুন:"</string>
     <string name="radio_info_http_client_test" msgid="2382286093023138339">"HTTP ক্লায়েন্ট পরীক্ষা:"</string>
@@ -237,7 +237,7 @@
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"SD কার্ড শুধুমাত্র পাঠযোগ্য অবস্থায় মাউন্ট করা।"</string>
     <string name="skip_label" msgid="47510779345218297">"এড়িয়ে যান"</string>
     <string name="next_label" msgid="4693520878012668114">"পরবর্তী"</string>
-    <string name="language_picker_title" msgid="3596315202551687690">"ভাষাগুলি"</string>
+    <string name="language_picker_title" msgid="3596315202551687690">"ভাষা"</string>
     <string name="pref_title_lang_selection" msgid="2014920136978776034">"ভাষা পছন্দগুলি"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"সরান"</string>
     <string name="add_a_language" msgid="2330538812283783022">"একটি ভাষা যোগ করুন"</string>
@@ -319,7 +319,7 @@
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"লক স্ক্রীনে মালিক তথ্য প্রদর্শন করুন"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"লক স্ক্রীনের বার্তা"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"উইজেটগুলি সক্ষম করুন"</string>
-    <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"প্রশাসক দ্বারা অক্ষমিত"</string>
+    <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"প্রশাসক দ্বারা অক্ষম করা হয়েছে"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"কোনো কিছুই নয়"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"যেমন, জো এর Android৷"</string>
@@ -329,14 +329,18 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"অ্যাকাউন্টগুলি"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"অবস্থান"</string>
     <string name="account_settings_title" msgid="626177544686329806">"অ্যাকাউন্টগুলি"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"নিরাপত্তা এবং স্ক্রিন লক"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"নিরাপত্তা এবং অবস্থান"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"এনক্রিপশান ও শংসাপত্র"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"ফোন এনক্রিপশন"</string>
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"ডিভাইসটি এনক্রিপ্টেড"</string>
+    <string name="lockscreen_settings_title" msgid="3922976395527087455">"স্কিন লকের পছন্দগুলি"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"আমার স্থান, স্ক্রীন আনলক, সিম কার্ড লক, ক্রেডেনশিয়াল সঞ্চয়স্থান লক সেট করুন"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"আমার স্থান, স্ক্রীন আনলক, ক্রেডেনশিয়াল সঞ্চয়স্থান লক সেট করুন"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"গোপনীয়তা"</string>
-    <string name="disabled_by_administrator_summary" msgid="5989801404248162477">"প্রশাসক দ্বারা অক্ষমিত"</string>
+    <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"প্রশাসক দ্বারা অক্ষম করা হয়েছে"</string>
     <string name="security_status_title" msgid="5848766673665944640">"নিরাপত্তা স্থিতি"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"অবস্থান, আঙ্গুলের ছাপ"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"স্ক্রিন লক, আঙ্গুলের ছাপ"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"স্ক্রিন লক"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"আঙ্গুলের ছাপ"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"আঙ্গুলের ছাপগুলি পরিচালনা করুন"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"এর জন্য আঙ্গুলের ছাপ ব্যবহার করুন"</string>
@@ -390,14 +394,14 @@
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"আরেকটি জুড়ুন"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"পরবর্তী"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"উপরন্তু আপনার ফোন আনলক করতে, কেনাকাটা এবং অ্যাপ্লিকেশান অ্যাক্সেস অনুমোদন করতে আপনি আপনার আঙ্গুলের ছাপও ব্যবহার করতে পারেন৷ "<annotation id="url">"আরো জানুন"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"স্ক্রীন লক বিকল্পটি অক্ষম করা আছে। আরো জানতে আপনার সংস্থার প্রশাসকের সাথে যোগাযোগ করুন। "<annotation id="admin_details">"আরো বিশদ বিবরণ"</annotation>\n\n"আপনি এখনও আপনার আঙ্গুলের ছাপ ব্যবহার করে কেনাকাটায় অনুমোদন দিতে ও অ্যাপ্লিকেশান অ্যাক্সেস করতে পারবেন। "<annotation id="url">"আরো জানুন"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7846871823167357942">" স্ক্রিন লক বিকল্প নিষ্ক্রিয় করা হয়েছে। আরো জানতে, আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন। "<annotation id="admin_details">"আরো বিবরণ"</annotation>\n\n"আপনি এখনও কেনাকাটা করতে এবং অ্যাপের অ্যাক্সেস দিতে আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারেন। "<annotation id="url">"আরো জানুন"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"আঙ্গুল তুলুন, তারপরে আবার সেন্সরে স্পর্শ করুন"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"আপনি <xliff:g id="COUNT">%d</xliff:g>টি পর্যন্ত আঙ্গুলের ছাপ যোগ করতে পারেন"</string>
     <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"আপনি অনুমোদিত সর্বোচ্চ সংখ্যক আঙ্গুলের ছাপ যোগ করেছেন"</string>
     <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"এর বেশি আঙ্গুলের ছাপ যোগ করা যাবে না"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"সমস্ত আঙ্গুলের ছাপ সরাবেন?"</string>
-    <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"আপনি আপনার আঙ্গুলের ছাপগুলি দিয়ে আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে প্রবেশ করতে পারবেন না৷"</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"আপনি আপনার আঙ্গুলের ছাপগুলি ব্যবহার করে আপনার কর্মস্থলের প্রোফাইল আনলক করতে, কেনাকাটায় অনুমোদন বা কাজের অ্যাপ্লিকেশানগুলিতে প্রবেশ করতে পারবেন না৷"</string>
+    <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"আপনি আপনার আঙ্গুলের ছাপ দিয়ে আপনার ফোন আনলক করতে, কেনাকাটাগুলি অনুমোদন করতে, বা অ্যাপগুলিতে প্রবেশ করতে পারবেন না"</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"আপনি আপনার আঙ্গুলের ছাপগুলি ব্যবহার করে আপনার কর্মস্থলের প্রোফাইল আনলক করতে, কেনাকাটাগুলি অনুমোদন করতে বা কাজের অ্যাপগুলিতে প্রবেশ করতে পারবেন না"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"হ্যাঁ, সরান"</string>
     <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"অবিরত রাখতে আপনার আঙ্গুলের ছাপ ব্যবহার করুন।"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"এনক্রিপশান"</string>
@@ -446,6 +450,8 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি সক্রিয় করার দ্বারা আপনার অনুমতি ছাড়া অন্যদের এই ফোনটি ব্যবহার করা থেকে আটকান৷ আপনি ব্যবহার করতে চান এমন স্ক্রীন লক বেছে নিন৷"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"আপনার ব্যাক আপ স্ক্রীন লক পদ্ধতি নির্বাচন করুন"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"স্ক্রীন লক"</string>
+    <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / ঘুমোনোর পর অবিলম্বে"</string>
+    <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / ঘুমোনোর <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> পর"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"কর্মস্থলের প্রোফাইল লক"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"লক স্ক্রীন পরিবর্তন করুন"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"প্যাটার্ন, পিন, বা পাসওয়ার্ড সুরক্ষা পরিবর্তন বা অক্ষম করুন"</string>
@@ -467,7 +473,7 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"আঙ্গুলের ছাপ + পাসওয়ার্ড"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"আঙ্গুলের ছাপ ছাড়াই চালিয়ে যান"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"আপনি আপনার আঙ্গুলের ছাপ ব্যবহার করে আপনার ফোন আনলক করতে পারবেন। নিরাপত্তার জন্য, এই বিকল্পটির একটি ব্যাক আপ স্ক্রীন লকের প্রয়োজন।"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"প্রশাসক, এনক্রিপশান নীতি, অথবা শংসাপত্র সঞ্চয়স্থান দ্বারা অক্ষম"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"প্রশাসক, এনক্রিপশন নীতি বা ক্রেডেনশিয়াল সঞ্চয়স্থান দ্বারা অক্ষম"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"কোনো কিছুই নয়"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"সোয়াইপ করুন"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"প্যাটার্ন"</string>
@@ -523,10 +529,10 @@
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"কমপক্ষে <xliff:g id="COUNT">%d</xliff:g>টি অক্ষর থাকতে হবে"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"পিন কমপক্ষে <xliff:g id="COUNT">%d</xliff:g>টি সংখ্যার হতে হবে"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"চালিয়ে যান"</string>
-    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"<xliff:g id="NUMBER">%d</xliff:g>টি অক্ষরের থেকে কম হওয়া আবশ্যক।"</string>
-    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"<xliff:g id="NUMBER">%d</xliff:g>টি সংখ্যার কম হতে হবে।"</string>
-    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"শুধুমাত্র ০-৯ সংখ্যা থাকতে হবে।"</string>
-    <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পিন ব্যবহার করার অনুমতি দেয় না।"</string>
+    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"<xliff:g id="NUMBER">%d</xliff:g>টি অক্ষরের থেকে কম হওয়া আবশ্যক"</string>
+    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g>টি সংখ্যার চেয়ে কম হতে হবে"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"শুধুমাত্র ০-৯ সংখ্যাগুলি থাকবে"</string>
+    <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পিন ব্যবহার করতে দেয় না"</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"এতে কোনো অবৈধ অক্ষর অন্তর্ভুক্ত করা যাবে না"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"কমপক্ষে একটি অক্ষর থাকতে হবে"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"কমপক্ষে একটি সংখ্যা থাকতে হবে"</string>
@@ -555,23 +561,26 @@
       <item quantity="one">কমপক্ষে এমন <xliff:g id="COUNT">%d</xliff:g>টি অক্ষর থাকতে হবে যেটি বর্ণ নয়</item>
       <item quantity="other">কমপক্ষে এমন <xliff:g id="COUNT">%d</xliff:g>টি অক্ষর থাকতে হবে যেটি বর্ণ নয়</item>
     </plurals>
-    <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পাসওয়ার্ড ব্যবহার করার অনুমতি দেয় না।"</string>
-    <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"উর্ধ্বক্রমে, নিম্নক্রমে বা পুনরাবৃত্ত ধারার সংখ্যা নিষিদ্ধ"</string>
+    <string name="lockpassword_password_recently_used" msgid="942665351220525547">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পাসওয়ার্ড ব্যবহার করতে দেয় না"</string>
+    <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"সংখ্যাগুলি ছোট থেকে বড় ক্রমে, বড় থেকে ছোট ক্রমে বা একই সংখ্যাকে বার বার লেখা যাবে না"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"ঠিক আছে"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"বাতিল"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"বাতিল"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"পরবর্তী"</string>
     <string name="lock_setup" msgid="3355847066343753943">"সেটআপ সম্পূর্ণ।"</string>
     <string name="manage_device_admin" msgid="537804979483211453">"ডিভাইস প্রশাসক অ্যাপ"</string>
-    <!-- no translation found for number_of_device_admins_none (7185056721919496069) -->
-    <skip />
+    <string name="number_of_device_admins_none" msgid="7185056721919496069">"কোনো সক্রিয় অ্যাপ নেই"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ সক্রিয় আছে</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ সক্রিয় আছে</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"বিশ্বস্ত এজেন্ট"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"ব্যবহার করার জন্য, প্রথমে একটি স্ক্রীন লক সেট করুন"</string>
-    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"বিশ্বস্ত এজেন্টগুলি দেখুন অথবা নিষ্ক্রিয় করুন"</string>
+    <string name="manage_trust_agents_summary" msgid="1475819820389620546">"কোনো কিছুই নয়"</string>
+    <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g>টি সক্রিয় বিশ্বস্ত এজেন্ট</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>টি সক্রিয় বিশ্বস্ত এজেন্ট</item>
+    </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"ব্লুটুথ"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"ব্লুটুথ চালু করুন"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"ব্লুটুথ"</string>
@@ -674,25 +683,22 @@
     <string name="wifi_select_network" msgid="4210954938345463209">"ওয়াই-ফাই নির্বাচন করুন"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"ওয়াই-ফাই চালু করা হচ্ছে..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"ওয়াই-ফাই বন্ধ করা হচ্ছে..."</string>
-    <string name="wifi_see_all_networks_button_title" msgid="2463270265855243076">"সমস্ত নেটওয়ার্ক দেখুন"</string>
     <string name="wifi_error" msgid="3207971103917128179">"ত্রুটি"</string>
     <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"এই দেশে ৫ GHz ব্যান্ড পাওয়া যায় না"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"বিমান মোডে"</string>
     <string name="wifi_notify_open_networks" msgid="76298880708051981">"খোলা নেটওয়ার্ক সংক্রান্ত বিজ্ঞপ্তি"</string>
-    <!-- no translation found for wifi_notify_open_networks_summary (8422402819267219458) -->
-    <skip />
-    <string name="wifi_wakeup" msgid="5685581457584270802">"আবার ওয়াই-ফাই চালু করুন"</string>
-    <!-- no translation found for wifi_wakeup_summary (7843701854850824229) -->
-    <skip />
+    <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"কোনো উচ্চ মানের বিনামূল্যের নেটওয়ার্ক উপলব্ধ হলে জানান"</string>
+    <string name="wifi_wakeup" msgid="8815640989361538036">"স্বয়ংক্রিয়ভাবে ওয়াই ফাই চালু করুন"</string>
+    <string name="wifi_wakeup_summary" msgid="2530814331062997163">"উচ্চ মানের সংরক্ষিত নেটওয়ার্কের কাছাকাছি এলেই ওয়াই ফাই আবার চালু হবে, যেমন আপনার বাড়ির নেটওয়ার্ক"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"অনুপলব্ধ কারণ ওয়াই-ফাই স্ক্যানিং বন্ধ আছে"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"দুর্বল সংযোগগুলি এড়িয়ে চলুন"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"ভালো ইন্টারনেট সংযোগ না হলে ওয়াই-ফাই ব্যবহার করবেন না"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"শুধুমাত্র ভাল ইন্টারনেট সংযোগ আছে এমন নেটওয়ার্ক ব্যবহার করুন"</string>
-    <!-- no translation found for use_open_wifi_automatically_title (6851951242903078588) -->
-    <skip />
-    <!-- no translation found for use_open_wifi_automatically_summary (8371085123988132834) -->
-    <skip />
+    <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"খোলা নেটওয়ার্কে সংযুক্ত হন"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"উচ্চ গুণমানের বিনামূল্যের নেটওয়ার্কগুলিতে স্বয়ংক্রিয়ভাবে সংযুক্ত হন"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"শংসাপত্রগুলি ইনস্টল করুন"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"অবস্থানের যথার্থতা উন্নত করতে, সিস্টেম অ্যাপ্লিকেশান এবং পরিষেবাগুলি এখনও ওয়াই-ফাই নেটওয়ার্কগুলির জন্য স্ক্যান করতে পারে৷ আপনি এটিকে <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>স্ক্যানিং সেটিংস<xliff:g id="LINK_END_1">LINK_END</xliff:g> এর মধ্যে পরিবর্তন করতে পারেন।"</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"আরো নির্ভুলভাবে অবস্থান নির্ণয় করতে <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>স্ক্যানিং সেটিংসে<xliff:g id="LINK_END_1">LINK_END</xliff:g> ওয়াই ফাই স্ক্যানিং চালু করুন।"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"আগ দেখাবেন না"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"নিষ্ক্রিয় থাকাকালীন ওয়াই-ফাই চালু রাখুন"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"স্ক্রীন বন্ধ থাকলেও ওয়াই-ফাই চালু"</string>
@@ -706,6 +712,8 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"ওয়াই ফাই এ ইন্টারনেট অ্যাক্সেস না থাকলে মোবাইল ডেটা ব্যবহার করুন৷ ডেটা ব্যবহারের খরচ প্রযোজ্য।"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"নেটওয়ার্ক যোগ করুন"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"ওয়াই ফাই পছন্দগুলি"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"ওয়াই ফাই স্বয়ংক্রিয়ভাবে আবার চালু হয়"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"ওয়াই ফাই স্বয়ংক্রিয়ভাবে আবার চালু হয় না"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"ওয়াই-ফাই নেটওয়ার্কগুলি"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS পুশ বোতাম"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"আরও বিকল্প"</string>
@@ -739,6 +747,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"ওয়্যারলেস রাউটার নিরাপত্তা সেটিং (TKIP) সমর্থিত নয়"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"প্রমাণীকরণ ব্যর্থ। অনুগ্রহ করে আবার চেষ্টা করুন।"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"আরেকটি WPS অধিবেশন শনাক্ত হয়েছে। দয়া করে কয়েক মিনিটের মধ্যে আবার চেষ্টা করুন।"</string>
+    <string name="wifi_wps_failed_wifi_disconnected" msgid="3829472117754104164">"ওয়াই-ফাই সংযোগ বিচ্ছিন্ন হয়েছে। WPS এর সেট-আপ বাতিল হয়ে গেছে।"</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"নেটওয়ার্ক নাম"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID প্রবেশ করুন"</string>
     <string name="wifi_security" msgid="6603611185592956936">"নিরাপত্তা"</string>
@@ -784,8 +793,7 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"এই নেটওয়ার্কে কোন ইন্টারনেট অ্যাক্সেস নেই৷ এতে সংযুক্ত থাকতে চান?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"এই নেটওয়ার্কের জন্য আবার জিজ্ঞাসা করবেন না"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi ইন্টারনেটের সাথে সংযুক্ত নেই"</string>
-    <!-- no translation found for lost_internet_access_text (9029649339816197345) -->
-    <skip />
+    <string name="lost_internet_access_text" msgid="9029649339816197345">"ভাল ওয়াই ফাই সংযোগ না পাওয়া গেলে আপনি মোবাইল নেটওয়ার্ক ব্যবহার করতে পারেন৷ ডেটা ব্যবহারের খরচ প্রযোজ্য।"</string>
     <string name="lost_internet_access_switch" msgid="2262459569601190039">"মোবাইল নেটওয়ার্ক ব্যবহার করুন"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi-Fi এ থাকুন"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"আর কখনও দেখাবেন না"</string>
@@ -797,13 +805,17 @@
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"নেটওয়ার্ক সংরক্ষণ করতে ব্যর্থ হয়েছে"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"বাতিল করুন"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"সংরক্ষিত নেটওয়ার্ক"</string>
+    <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="6094679048871529675">
+      <item quantity="one">%dটি নেটওয়ার্ক</item>
+      <item quantity="other">%dটি নেটওয়ার্ক</item>
+    </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"উন্নত ওয়াই-ফাই"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"ওয়াই-ফাই কনফিগার করুন"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC ঠিকানা"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP ঠিকানা"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"সাবনেট মাস্ক"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"সাবনেট মাস্ক"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 ঠিকানাগুলি"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 অ্যাড্রেসগুলি"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"সংরক্ষিত নেটওয়ার্ক"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP সেটিংস"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"এই ব্যবহারকারীর জন্য ওয়াই-ফাই এর উন্নত সেটিংস উপলব্ধ নয়"</string>
@@ -836,21 +848,16 @@
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"পোর্টেবল  ওয়াই-ফাই হটস্পট"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"ওয়াই-ফাই হটস্পট"</string>
     <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"ওয়াই ফাই নেটওয়ার্কের জন্য মোবাইল সংযোগ ব্যবহার করুন"</string>
-    <!-- no translation found for wifi_hotspot_off_subtext (2745508221200463254) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_off_subtext (7746761268472599794) -->
-    <skip />
+    <string name="wifi_hotspot_off_subtext" product="tablet" msgid="2745508221200463254">"হটস্পটের মাধ্যমে এই ট্যাবলেটের ইন্টারনেট সংযোগ শেয়ার করা হচ্ছে না"</string>
+    <string name="wifi_hotspot_off_subtext" product="default" msgid="7746761268472599794">"হটস্পটের মাধ্যমে এই ফোনের ইন্টারনেট সংযোগ শেয়ার করা হচ্ছে না"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"হটস্পট চালু হচ্ছে..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"হটস্পট বন্ধ হচ্ছে..."</string>
-    <!-- no translation found for wifi_tether_enabled_subtext (7842111748046063857) -->
-    <skip />
+    <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> সক্রিয় আছে"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"পোর্টেবল  ওয়াই-ফাই হটস্পট ত্রুটি"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"ওয়াই-ফাই হটস্পট সেট করুন"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"ওয়াই-ফাই হটস্পট সেটআপ"</string>
-    <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5560680057727007011) -->
-    <skip />
-    <!-- no translation found for wifi_tether_configure_subtext (2050196439900426456) -->
-    <skip />
+    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK হটস্পট"</string>
+    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> হটস্পট"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"ওয়াই-ফাই কলিং"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"ওয়াই-ফাই কলিং চালু করুন"</string>
@@ -890,7 +897,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"ওয়াই-ফাই কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশী শক্তিশালী তার উপর নির্ভর করে আপনার ফোন ওয়াই-ফাই নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর কাছে ফি-গুলি এবং অন্যান্য বিশদ বিবরণ সম্বন্ধে পরীক্ষা করুন।"</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"জরুরী ঠিকানা আপডেট করুন"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"আপনি যদি WiFi ব্যবহার করে ৯১১ এ কল করেন তাহলে জরুরি পরিষেবাগুলি  আপনার অবস্থান হিসাবে আপনার ঠিকানাকে ব্যবহার করে৷"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"আপনি যদি ওয়াই ফাই ব্যবহার করে ৯১১ এ কল করেন তাহলে জরুরি পরিষেবাগুলি  আপনার অবস্থান হিসাবে আপনার ঠিকানাকে ব্যবহার করে৷"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"প্রদর্শন"</string>
     <string name="sound_settings" msgid="5534671337768745343">"আওয়াজ"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"ভলিউম"</string>
@@ -901,7 +908,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"রিংটোন"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"বিজ্ঞপ্তি"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"বিজ্ঞপ্তির জন্য ইনকামিং কল ভলিউম ব্যবহার করুন"</string>
-    <string name="home_work_profile_not_supported" msgid="7457951997970419085">"কর্মস্থলের প্রোফাইল সমর্থন করে না"</string>
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"কর্মস্থলের প্রোফাইল সমর্থন করে না"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"ডিফল্ট বিজ্ঞপ্তি শব্দ"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"মিডিয়া"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"সঙ্গীত এবং ভিডিওগুলির জন্য ভলিউম সেট করুন"</string>
@@ -955,6 +962,22 @@
     <string name="brightness_summary" msgid="838917350127550703">"স্ক্রীনের উজ্জ্বলতা সামঞ্জস্য করুন"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"অভিযোজিত উজ্জ্বলতা"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"উপলব্ধ আলোর পরিপ্রেক্ষিতে উজ্জ্বলতার স্তর মানানসই করুন"</string>
+    <string name="auto_brightness_summary_off" msgid="2802336459335410626">"বন্ধ আছে"</string>
+    <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"পছন্দের উজ্জ্বলতার মান খুব কম"</string>
+    <string name="auto_brightness_summary_low" msgid="5609877905833960427">"পছন্দের উজ্জ্বলতার মান কম"</string>
+    <string name="auto_brightness_summary_default" msgid="7225666614394726845">"পছন্দের উজ্জ্বলতার মান ডিফল্ট"</string>
+    <string name="auto_brightness_summary_high" msgid="7172304165631136027">"পছন্দের উজ্জ্বলতার মান বেশি"</string>
+    <string name="auto_brightness_summary_very_high" msgid="979277812582279078">"পছন্দের উজ্জ্বলতার মান খুব বেশি"</string>
+    <string name="auto_brightness_off_title" msgid="2996864829946190795">"বন্ধ আছে"</string>
+    <string name="auto_brightness_very_low_title" msgid="8252988638614126320">"অত্যন্ত কম"</string>
+    <string name="auto_brightness_low_title" msgid="1632186441514863377">"কম"</string>
+    <string name="auto_brightness_default_title" msgid="936771997353506620">"ডিফল্ট"</string>
+    <string name="auto_brightness_high_title" msgid="2527853305981497345">"বেশি"</string>
+    <string name="auto_brightness_very_high_title" msgid="8867164854439331022">"খুব বেশি"</string>
+    <string name="auto_brightness_subtitle" msgid="6454652530864093466">"আপনার পছন্দের উজ্জ্বলতার স্তর"</string>
+    <string name="auto_brightness_off_summary" msgid="7629228736838155268">"উপলব্ধ আলোর জন্য সমন্বয় করবেন না"</string>
+    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"ব্যাটারির ব্যবহার বেড়ে যায়"</string>
+    <string name="auto_brightness_disclaimer" msgid="871436423746343406">"উপলব্ধ আলোর জন্য মানানসই উজ্জ্বলতার স্তর। যখন এই বৈশিষ্ট্যটি চালু থাকবে, তখনও অস্থায়ীভাবে আপনি উজ্জ্বলতা নিয়ন্ত্রণ করতে পারবেন।"</string>
     <string name="night_display_title" msgid="2626451512200357686">"নাইট লাইট"</string>
     <string name="night_display_text" msgid="1837277457033025056">"নাইট লাইট আপনার স্ক্রীনকে হলুদাভ বাদামি দেয়৷ এটি আপনাকে অস্পষ্ট আলোয় স্ক্রীনের দিকে স্বচ্ছন্দে তাকানোর সুবিধা দেয় এবং খুব সহজে ঘুমিয়ে পড়তে সহায়তা করে৷"</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"সময়সূচী"</string>
@@ -965,8 +988,7 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"সূর্যাস্ত থেকে সূর্যোদয়"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"শুরুর সময়"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"সমাপ্তি সময়"</string>
-    <!-- no translation found for night_display_temperature_title (1435292789272017136) -->
-    <skip />
+    <string name="night_display_temperature_title" msgid="1435292789272017136">"প্রাবল্য"</string>
     <string name="night_display_summary_off" msgid="7009821232380000786">"বন্ধ আছে৷ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"কখনই স্বয়ংক্রিয়ভাবে চালু হবে না৷"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g>টায় স্বয়ংক্রিয়ভাবে চালু হবে৷"</string>
@@ -979,17 +1001,21 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"স্ক্রীন বন্ধ হয়"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ধরে নিষ্ক্রিয়তার পরে"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"ওয়ালপেপার"</string>
+    <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"ডিফল্ট"</string>
+    <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"কাস্টম"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"ওয়ালপেপার পরিবর্তন করুন"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"আপনার স্ক্রীন ব্যক্তিগতকৃত করুন"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"ওয়ালপেপার বেছে নিন"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"স্ক্রীন সেভার"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"যখন ডক করা বা নিদ্রিত এবং চার্জ করা হচ্ছে"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"চার্জ অথবা ডক করার সময়"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"উভয় ক্ষেত্রেই"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"চার্জ করার সময়"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ডক করে রাখার সময়"</string>
+    <string name="screensaver_settings_summary_never" msgid="5165622985174349585">"কখনই নয়"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"বন্ধ করুন"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"ফোন ডক করা এবং/অথবা নিদ্রা মোডে থাকাকালীন কি হচ্ছে তা নিয়ন্ত্রণের জন্য স্ক্রীন সেভার চালু করুন।"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"কখন স্ক্রীন সেভার শুরু করতে হবে"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"কখন শুরু করবেন"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"বর্তমান স্ক্রিন সেভার"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"এখন শুরু করুন"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"সেটিংস"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"স্বয়ংক্রিয় উজ্জ্বলতা"</string>
@@ -999,7 +1025,9 @@
     <string name="title_font_size" msgid="4405544325522105222">"হরফের আকার"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"পাঠ্য বড় বা ছোট করুন"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"সিম কার্ড লক সেটিংস"</string>
-    <string name="sim_lock_settings_category" msgid="5136244267576697004">"সিম কার্ড লক সেট আপ করুন"</string>
+    <string name="sim_lock_settings_category" msgid="6242052161214271091">"সিম কার্ড লক"</string>
+    <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"বন্ধ আছে"</string>
+    <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"লক করা আছে"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"সিম কার্ড লক"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"সিম কার্ড লক করুন"</string>
     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"ট্যাবলেট ব্যবহারের জন্য পিন প্রয়োজন"</string>
@@ -1172,10 +1200,9 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"অন্যান্য"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"সিস্টেম"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> এক্সপ্লোর করুন"</string>
-    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"অন্যগুলির মধ্যে, অ্যাপগুলির দ্বারা সংরক্ষিত শেয়ার করা ফাইল, ইন্টারনেট বা Bluetooth থেকে ডাউনলোড করা ফাইল, Android ফাইল এবং এই ধরণের আরো অনেক কিছু অন্তর্ভুক্ত রয়েছে৷\n\n<xliff:g id="NAME">^1</xliff:g> এর দৃশ্যমান সামগ্রী দেখতে, \'ঘুরে দেখুন\' এ আলতো চাপুন৷"</string>
-    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Android পৃথকভাবে প্রদর্শন করতে পারে না এমন ফাইলগুলি সিস্টেমে অন্তর্ভুক্ত রয়েছে৷"</string>
-    <!-- no translation found for storage_detail_dialog_user (3267254783294197804) -->
-    <skip />
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"অন্যগুলির মধ্যে, অ্যাপগুলির দ্বারা সংরক্ষিত শেয়ার করা ফাইল, ইন্টারনেট বা ব্লুটুথ থেকে ডাউনলোড করা ফাইল, Android ফাইল এবং এই ধরণের আরো অনেক কিছু অন্তর্ভুক্ত রয়েছে৷\n\n<xliff:g id="NAME">^1</xliff:g> এর দৃশ্যমান সামগ্রী দেখতে, \'ঘুরে দেখুন\' এ আলতো চাপুন৷"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"সিস্টেমের মধ্যে Android ভার্সন <xliff:g id="VERSION">%s</xliff:g> চালানোর জন্য ফাইলগুলি সামিল থাকে"</string>
+    <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> ফটো, গান, অ্যাপ, বা অন্যান্য ডেটা সংরক্ষণ করতে <xliff:g id="SIZE">^2</xliff:g> সঞ্চয়স্থান ব্যবহার করে থাকতে পারেন। \n\nবিশদ বিবরণ জানতে <xliff:g id="USER_1">^1</xliff:g> হিসাবে প্রবেশ করুন।"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"আপনার <xliff:g id="NAME">^1</xliff:g> সেট আপ করুন"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"পোর্টেবল সঞ্চয়স্থান হিসাবে ব্যবহার করুন"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"ডিভাইসগুলির মধ্যে ফটোগুলি ও অন্যান্য মিডিয়া সরানোর জন্য৷"</string>
@@ -1249,8 +1276,9 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"ডিফল্ট APN সেটিংস পুনরুদ্ধার করা হচ্ছে।"</string>
     <string name="menu_restore" msgid="8260067415075573273">"ডিফল্টে আবার সেট করুন"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"ডিফল্ট APN সেটিংস আবার সেট করা সম্পন্ন হয়েছে।"</string>
+    <string name="reset_dashboard_title" msgid="4412694650600342973">"রিসেট করুন"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"নেটওয়ার্ক সেটিংস আবার সেট করা"</string>
-    <string name="reset_network_desc" msgid="5547979398298881406">\n\n<li>"ওয়াই-ফাই"</li>\n<li>"মোবাইল ডেটা"</li>\n<li>"ব্লুটুথ"</li>" সহ নেটওয়ার্কের সমস্ত সেটিং আবার সেট করা হবে"</string>
+    <string name="reset_network_desc" msgid="5547979398298881406">"এগুলি সহ সমস্ত নেটওয়ার্ক সেটিংস আবার সেট করবে:\n\n"<li>"ওয়াই ফাই "</li>\n<li>"সেলুলার ডাটা "</li>\n<li>"ব্লুটুথ"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"সেটিংস আবার সেট করুন"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"সমস্ত নেটওয়ার্ক সেটিংস আবার সেট করবেন? আপনি এই প্রক্রিয়াটি পূর্বাবস্থায় ফেরাতে পারবেন না!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"সেটিংস আবার সেট করুন"</string>
@@ -1258,6 +1286,11 @@
     <string name="network_reset_not_available" msgid="7188610385577164676">"এই ব্যবহারকারীদের জন্য নেটওয়ার্ক আবার সেট করুন উপলব্ধ নয়"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"নেটওয়ার্ক সেটিংস আবার সেট করা হয়েছে"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"ফ্যাক্টরি ডেটা আবার সেট করুন"</string>
+    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
+      <item quantity="one"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g>টি অ্যাকাউন্ট রিসেট করা হবে</item>
+      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g>টি অ্যাকাউন্ট রিসেট করা হবে</item>
+    </plurals>
+    <string name="master_clear_summary" msgid="6902443944660426951">"অভ্যন্তরীণ স্টোরেজ এবং সমস্ত ডেটা রিসেট করা হবে"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"এটি আপনার ট্যাবলেটের "<b>"অভ্যন্তরীণ সঞ্চয়স্থান"</b>", থেকে সমস্ত ডেটা মুছে দেবে, এগুলি সহ:\n\n"<li>"আপনার Google অ্যাকাউন্ট"</li>\n<li>"সিস্টেম এবং অ্যাপ্লিকেশান ডেটা এবং সেটিংস"</li>\n<li>"ডাউনলোড করা অ্যাপ্লিকেশানগুলি"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"এটি আপনার ফোনের "<b>"অভ্যন্তরীণ সঞ্চয়স্থান"</b>" থেকে সমস্ত ডেটা মুছে দেবে, এগুলি সহ: \n\n"<li>"আপনার Google অ্যাকাউন্ট"</li>\n<li>"সিস্টেম এবং অ্যাপ্লিকেশান ডেটা এবং সেটিংস"</li>\n<li>"ডাউনলোড করা অ্যাপ্লিকেশানগুলি"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"আপনি বর্তমানে নিম্নলিখিত অ্যাকাউন্টে প্রবেশ করে আছেন:\n"</string>
@@ -1284,8 +1317,7 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"পোর্টেবল হটস্পট"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"ব্লুটুথ টেদারিং"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"টেদারিং"</string>
-    <!-- no translation found for tether_settings_title_all (3058586928118801157) -->
-    <skip />
+    <string name="tether_settings_title_all" msgid="3058586928118801157">"হটস্পট এবং টিথারিং"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"হটস্পট, টিথারিং চালু আছে"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"হটস্পট চালু আছে"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"টিথারিং চালু আছে"</string>
@@ -1299,39 +1331,27 @@
     <string name="usb_tethering_turnon_subtext" msgid="4748616058219273033">"চালু করতে সংযোগ করুন"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB টেদারিং ত্রুটি"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"ব্লুটুথ টেদারিং"</string>
-    <!-- no translation found for bluetooth_tethering_available_subtext (2092766774943506688) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_available_subtext (313873759999970236) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (6388191062495199481) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (5970460338828861091) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (3253150865825199632) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8268867745495039177) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_off_subtext_config (6326877798974938021) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_off_subtext (1889565070769307732) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_off_subtext (1838503633450298902) -->
-    <skip />
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="2092766774943506688">"ট্যাবলেটের ইন্টারনেট সংযোগ ব্লুটুথে শেয়ার হচ্ছে"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="313873759999970236">"এই ফোনের ইন্টারনেট সংযোগ ব্লুটুথে শেয়ার করা হচ্ছে"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="6388191062495199481">"ট্যাবলেটের ইন্টারনেট সংযোগ ব্লুটুথে ১টি ডিভাইসে শেয়ার হচ্ছে"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="5970460338828861091">"ফোনের ইন্টারনেট সংযোগ ব্লুটুথে ১টি ডিভাইসের সাথে শেয়ার হচ্ছে"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="3253150865825199632">"ট্যাবলেটের ইন্টারনেট সংযোগ ব্লুটুথে <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g>টি ডিভাইসে শেয়ার হচ্ছে"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8268867745495039177">"ফোনের ইন্টারনেট সংযোগ ব্লুটুথে <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g>টি ডিভাইসের সাথে শেয়ার হচ্ছে"</string>
+    <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"এই <xliff:g id="DEVICE_NAME">%1$d</xliff:g> এর ইন্টারনেট সংযোগ ব্লুটুথে শেয়ার করা হচ্ছে"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="1889565070769307732">"ট্যাবলেটের ইন্টারনেট সংযোগ ব্লুটুথে শেয়ার হচ্ছে না"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="1838503633450298902">"ফোনের ইন্টারনেট সংযোগ ব্লুটুথে শেয়ার করা হচ্ছে না"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"টেদার করা নেই"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g> ডিভাইসের থেকে বেশি ডিভাইসে টেদার করা যাবে না।"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> আনটেদার্ড হয়ে যাবে।"</string>
-    <!-- no translation found for tethering_footer_info (7287131664937054043) -->
-    <skip />
+    <string name="tethering_footer_info" msgid="7287131664937054043">"আপনার মোবাইল ডেটা সংযোগের মাধ্যমে অন্য ডিভাইসে ইন্টারনেট সংযোগ দিতে হটস্পট এবং টিথারিং ব্যবহার করুন।"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"সহায়তা"</string>
-    <!-- no translation found for network_settings_title (2876509814832830757) -->
-    <skip />
+    <string name="network_settings_title" msgid="2876509814832830757">"মোবাইল নেটওয়ার্ক"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"মোবাইল প্ল্যান"</string>
     <string name="sms_application_title" msgid="4903928270533250448">"SMS অ্যাপ্লিকেশান"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS অ্যাপ্লিকেশান পরিবর্তন করবেন?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"<xliff:g id="CURRENT_APP">%2$s</xliff:g> এর পরিবর্তে <xliff:g id="NEW_APP">%1$s</xliff:g> কে SMS অ্যাপ্লিকেশান হিসেবে ব্যবহার করবেন?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g> কে আপনার SMS অ্যাপ্লিকেশান হিসেবে ব্যবহার করবেন?"</string>
-    <!-- no translation found for network_scorer_picker_title (7226219386351714766) -->
-    <skip />
+    <string name="network_scorer_picker_title" msgid="6383879578279046456">"নেটওয়ার্ক রেটিং প্রদানকারী"</string>
     <string name="network_scorer_picker_none_preference" msgid="9028375117241790936">"কোনো কিছুই নয়"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"ওয়াই-ফাই সহকারী পরিবর্তন করবেন?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"আপনার নেটওয়ার্ক সংযোগ পরিচালনা করার জন্য <xliff:g id="CURRENT_APP">%2$s</xliff:g> এর পরিবর্তে <xliff:g id="NEW_APP">%1$s</xliff:g> ব্যবহার করবেন?"</string>
@@ -1357,7 +1377,6 @@
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"অবস্থান নির্ধারণ করতে জিপিএস, ওয়াই ফাই, ব্লুটুথ, বা মোবাইল নেটওয়ার্ক ব্যবহার করুন"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"অবস্থান নির্ধারণ করতে ওয়াই ফাই, ব্লুটুথ, বা মোবাইল নেটওয়ার্ক ব্যবহার করুন"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"অবস্থান নির্ণয় করতে GPS ব্যবহার করুন"</string>
-    <string name="location_menu_scanning" msgid="8536245838478802959">"স্ক্যান করা হচ্ছে"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"স্ক্যান করা হচ্ছে"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"ওয়াই-ফাই স্ক্যানিং"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"যে কোনো সময়ে ওয়াই-ফাই নেটওয়ার্কগুলিকে সনাক্ত করার জন্য সিস্টেম অ্যাপ্লিকেশান এবং পরিষেবাগুলিকে অনুমতি দিয়ে অবস্থান উন্নত করুন।"</string>
@@ -1409,7 +1428,7 @@
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"আপনার পিন নিশ্চিত করুন"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"পাসওয়ার্ডগুলি মিলছে না"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"পিন মিলছে না"</string>
-    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"নির্বাচন আনলক করুন"</string>
+    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"আনলক নির্বাচন করুন"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"পাসওয়ার্ড সেট করা হয়েছে"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"পিন সেট করা হয়েছে"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"প্যাটার্ন সেট করা হয়েছে"</string>
@@ -1460,7 +1479,7 @@
     <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"একটি লক ব্যবহার করুন"</string>
     <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"কর্মস্থলের প্রোফাইল এবং ডিভাইসের স্ক্রীনের জন্য একটি লক ব্যবহার করুন"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"একটি লক ব্যবহার করতে চান?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"আপনার কর্মস্থলের প্রোফাইল এবং ডিভাইসের স্ক্রীন একই লক ব্যবহার করবে। আপনার ডিভাইসের স্ক্রীন লকে যে কোনো কর্মস্থলের লকের নীতিগুলিও প্রযোজ্য হবে।"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="7128305504872026659">"আপনার ডিভাইসে আপনার কর্মস্থলের স্ক্রিন লকটি ব্যবহার করা হবে। উভয় লকেই কাজের নীতিগুলি প্রযোজ্য হবে।"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"আপনার কর্মস্থলের প্রোফাইলের লক আপনার প্রতিষ্ঠানের সুরক্ষার প্রয়োজনীয়তাগুলি পূরণ করছে না৷ আপনি আপনার ডিভাইস এবং কর্মস্থলের প্রোফাইল উভয়ের জন্যই একই লক ব্যবহার করতে পারেন, কিন্তু তার সাথে কর্মস্থলের স্ক্রীন লকের নীতিগুলিও প্রযোজ্য হবে৷"</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"একটি লক ব্যবহার করুন"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"একটি লক ব্যবহার করুন"</string>
@@ -1472,10 +1491,8 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"অ্যাপ্লিকেশান সেটিংস"</string>
     <string name="install_applications" msgid="4872012136210802181">"অজানা উৎসগুলি"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"সব অ্যাপ্লিকেশান উৎসকে অনুমতি দিন"</string>
-    <!-- no translation found for install_all_warning (8310489909586138165) -->
-    <skip />
-    <!-- no translation found for install_all_warning (1952257127370115988) -->
-    <skip />
+    <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"অজানা অ্যাপের দ্বারা আপনার ট্যাবলেট এবং ব্যক্তিগত তথ্য আক্রান্ত হওয়ার সম্ভাবনা সবচেয়ে বেশি। এই উৎস থেকে আসা অ্যাপগুলি ইনস্টল করে আপনি সম্মত হচ্ছেন যে সেগুলি ব্যবহারের ফলে আপনার ট্যাবলেটের কোনো ক্ষতি হলে বা ডেটা হারিয়ে গেলে তার জন্য আপনিই দায়ী থাকবেন।"</string>
+    <string name="install_all_warning" product="default" msgid="1952257127370115988">"অজানা অ্যাপের দ্বারা আপনার ফোন এবং ব্যক্তিগত তথ্য আক্রান্ত হওয়ার সম্ভাবনা সবচেয়ে বেশি। এই উৎস থেকে আসা অ্যাপগুলি ইনস্টল করে আপনি সম্মত হচ্ছেন যে সেগুলি ব্যবহারের ফলে আপনার ফোনের কোনো ক্ষতি হলে বা ডেটা হারিয়ে গেলে তার জন্য আপনিই দায়ী থাকবেন।"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"উন্নত সেটিংস"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"আরো সেটিংস বিকল্প সক্ষম করুন"</string>
     <string name="application_info_label" msgid="5736524913065714880">"অ্যাপ্লিকেশান তথ্য"</string>
@@ -1495,9 +1512,9 @@
     <string name="controls_label" msgid="7611113077086853799">"নিয়ন্ত্রণগুলি"</string>
     <string name="force_stop" msgid="7435006169872876756">"জোর করে বন্ধ করুন"</string>
     <string name="total_size_label" msgid="1048676419552557254">"সর্বমোট"</string>
-    <string name="application_size_label" msgid="8494609207373874267">"অ্যাপ্লিকেশান"</string>
+    <string name="application_size_label" msgid="7376689739076506885">"অ্যাপের মাপ"</string>
     <string name="external_code_size_label" msgid="3459343140355961335">"USB সঞ্চয়স্থান অ্যাপ্লিকেশান"</string>
-    <string name="data_size_label" msgid="8679376373625710107">"ডেটা"</string>
+    <string name="data_size_label" msgid="6117971066063850416">"ব্যবহারকারীর ডেটা"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB সঞ্চয়স্থান ডেটা"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD কার্ড"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"আনইনস্টল"</string>
@@ -1533,7 +1550,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"চলমান"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB সঞ্চয়স্থান"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD কার্ডে"</string>
-    <string name="disabled" msgid="9206776641295849915">"অক্ষম হয়েছে"</string>
     <string name="not_installed" msgid="2797554494953450291">"এই ব্যবহারকারীর জন্য ইনস্টল করা নেই"</string>
     <string name="installed" msgid="3070865169422600098">"ইনস্টল করা হয়েছে"</string>
     <string name="no_applications" msgid="7336588977497084921">"কোনো অ্যাপ্লিকেশান নেই"</string>
@@ -1578,7 +1594,7 @@
     <string name="app_forward_locked" msgid="6331564656683790866">"অ্যাপ্লিকেশানটি অনুলিপি-সুরক্ষিত৷"</string>
     <string name="invalid_location" msgid="4354595459063675191">"ইনস্টল করা অবস্থান বৈধ নয়।"</string>
     <string name="system_package" msgid="1352722848400644991">"সিস্টেম আপডেটগুলি বহিরাগত মিডিয়াতে ইনস্টল করা যাবে না।"</string>
-    <string name="move_error_device_admin" msgid="8148342933314166497">"বাহ্যিক মিডিয়াতে ডিভাইস প্রশাসক ইনস্টল করা যাবে না৷"</string>
+    <string name="move_error_device_admin" msgid="8673026002690505763">"ডিভাইস প্রশাসক অ্যাপটি এক্সটার্নাল মিডিয়াতে ইনস্টল করা যাবে না"</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"জোর করে বন্ধ করবেন?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"আপনি একটি অ্যাপ্লিকেশানকে জোর করে বন্ধ করলে, তা অস্বাভাবিক ব্যবহার করতে পারে।"</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
@@ -1595,6 +1611,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"স্টোর"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"অ্যাপ্লিকেশানের বিশদ বিবরণ"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"অ্যাপটিকে <xliff:g id="APP_STORE">%1$s</xliff:g> থেকে ইনস্টল করা হয়েছে"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"<xliff:g id="APP_STORE">%1$s</xliff:g> সম্পর্কে আরও তথ্য"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"অ্যাপ্লিকেশান ops"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"চলমান"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(কখনো ব্যবহৃত হয়নি)"</string>
@@ -1642,12 +1659,11 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"সিস্টেমের পরিষেবা বন্ধ করবেন?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"আপনি যদি এই পরিষেবা বন্ধ করেন তাহলে আপনার ট্যাবলেটের পাওয়ার বন্ধ করে আবার চালু না করা পর্যন্ত কিছু বৈশিষ্ট্য সঠিকভাবে কাজ করা বন্ধ করে দিতে পারে।"</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"আপনি যদি এই পরিষেবা বন্ধ করেন তাহলে আপনার ফোনের পাওয়ার বন্ধ করে আবার চালু না করা পর্যন্ত কিছু বৈশিষ্ট্য সঠিকভাবে কাজ করা বন্ধ করে দিতে পারে।"</string>
-    <string name="language_settings" msgid="8758655933029560944">"ভাষাগুলি এবং ইনপুট"</string>
-    <string name="language_keyboard_settings_title" msgid="3709159207482544398">"ভাষাগুলি এবং ইনপুট"</string>
-    <!-- no translation found for input_assistance (7577795275222555487) -->
-    <skip />
+    <string name="language_settings" msgid="8758655933029560944">"ভাষা এবং ইনপুট"</string>
+    <string name="language_keyboard_settings_title" msgid="3709159207482544398">"ভাষা এবং ইনপুট"</string>
+    <string name="input_assistance" msgid="7577795275222555487">"ইনপুট সহায়তা"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"কিবোর্ড ও ইনপুট পদ্ধতি"</string>
-    <string name="phone_language" msgid="7116581601133118044">"ভাষাগুলি"</string>
+    <string name="phone_language" msgid="7116581601133118044">"ভাষা"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"স্বতঃ-প্রতিস্থাপন"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"ভুলভাবে টাইপ করা শব্দ সঠিক করুন"</string>
@@ -1658,15 +1674,11 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\"।\" প্রবেশ করাতে দুইবার \'স্পেস\' কী টিপুন"</string>
     <string name="show_password" msgid="4837897357002495384">"পাসওয়ার্ড দেখুন"</string>
     <string name="show_password_summary" msgid="3365397574784829969">"টাইপ করার সময় অক্ষরগুলি কয়েক মুহূর্তের জন্য দেখুন"</string>
-    <string name="ime_security_warning" msgid="4135828934735934248">"এই ইনপুট পদ্ধতিটি হয়তো পাসওয়ার্ড এবং ক্রেডিট কার্ড নম্বর সহ আপনার টাইপ করা সমস্ত পাঠ্য সংগ্রহ করতে সক্ষম হতে পারে। এটি <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> অ্যাপ্লিকেশানের। এই ইনপুট পদ্ধতিটি ব্যবহার করবেন?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"এই বানান পরীক্ষকটি হয়তো পাসওয়ার্ড এবং ক্রেডিট কার্ড নম্বর সহ আপনার টাইপ করা সমস্ত পাঠ্য সংগ্রহ করতে সক্ষম হতে পারে। এটি <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> অ্যাপ্লিকেশানের। এই বানান পরীক্ষকটি ব্যবহার করবেন?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"সেটিংস"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"ভাষা"</string>
-    <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> জন্য সেটিংস খুলতে ব্যর্থ হয়েছে"</string>
-    <!-- no translation found for keyboard_and_input_methods_category (6035224122054465137) -->
-    <skip />
-    <!-- no translation found for virtual_keyboard_category (9084929359894695824) -->
-    <skip />
+    <string name="keyboard_and_input_methods_category" msgid="6035224122054465137">"কিবোর্ড এবং ইনপুট"</string>
+    <string name="virtual_keyboard_category" msgid="1012830752318677119">"ভার্চুয়াল কীবোর্ড"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"উপলব্ধ ভার্চুয়াল কীবোর্ড"</string>
     <string name="add_virtual_keyboard" msgid="3302152381456516928">"কীবোর্ডগুলি পরিচালনা করুন"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"কীবোর্ড সহায়তা"</string>
@@ -1676,7 +1688,6 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"কীবোর্ড শর্টকাট সাহায্যকারী"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"উপলব্ধ শর্টকাটগুলি দেখান"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"ডিফল্ট"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"মাউস/ট্র্যাকপ্যাড"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"পয়েন্টারের গতি"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"গেম নিয়ন্ত্রক"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"কম্পক ব্যবহার করুন"</string>
@@ -1743,28 +1754,33 @@
     <string name="usage_time_label" msgid="295954901452833058">"ব্যবহারের সময়"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"সহজ ব্যবহার"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"সহজ ব্যবহার সেটিংস"</string>
-    <!-- no translation found for accessibility_settings_summary (981260486011624939) -->
-    <skip />
-    <string name="vision_settings_title" msgid="4204111425716868288">"দৃষ্টিশক্তির সেটিংস"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"স্ক্রিন রিডার, ডিসপ্লে, ইন্টারঅ্যাকশন নিয়ন্ত্রণগুলি"</string>
+    <string name="vision_settings_title" msgid="4204111425716868288">"দৃষ্টিশক্তি সেটিংস"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"আপনি এই ডিভাইসটি নিজের পছন্দমত সেট করতে পারেন৷ এই অ্যাক্সেসযোগ্যতার বৈশিষ্ট্যগুলি পরে সেটিংসে গিয়ে পরিবর্তন করা যাবে৷"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"স্ক্রিন রিডার"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"অডিও এবং অন-স্ক্রিন পাঠ্য"</string>
     <string name="display_category_title" msgid="685461049938269166">"ডিসপ্লে"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"ইন্টারঅ্যাকশন নিয়ন্ত্রণগুলি"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"ডাউনলোড করা পরিষেবাগুলি"</string>
-    <!-- no translation found for experimental_category_title (5272318666666893547) -->
-    <skip />
+    <string name="experimental_category_title" msgid="5272318666666893547">"পরীক্ষামূলক"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"স্ক্রীন রিডার প্রাথমিকভাবে অন্ধত্ব এবং কম দৃষ্টি সম্পন্ন ব্যক্তিদের জন্য"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"স্ক্রিনের আইটেমগুলিতে আলতো চাপ দিলে সেগুলি উচ্চারণ করে শোনানো হবে"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"ক্যাপশান"</string>
-    <!-- no translation found for accessibility_screen_magnification_title (6001128808776506021) -->
-    <skip />
-    <!-- no translation found for accessibility_preference_magnification_summary (5867883657521404509) -->
-    <skip />
+    <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"বড় করে দেখা"</string>
+    <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"তিনবার ট্যাপ করে বড় করে দেখুন"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"বোতাম দিয়ে ম্যাগনিফাই করুন"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"বোতাম এবং তিনবার ট্যাপ করার মাধ্যমে ম্যাগনিফাই করুন"</string>
+    <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"স্ক্রিনে জুম বাড়ান"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"জুম করতে ৩ বার আলতো চাপ দিন"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"জুম করতে"</b>", একটি আঙুল দিয়ে দ্রুত ৩ বার স্ক্রীনটিতে আলতো চাপুন৷\n"<ul><li>"স্ক্রোল করার জন্য ২টি বা তার বেশি আঙুল দিয়ে টেনে আনুন৷"</li>\n<li>"জুম সামঞ্জস্য করতে একসাথে ২টি বা তার বেশি আঙ্গুল এক জায়গায় টেনে এনে সেগুলিকে বিস্তৃত করুন।"</li></ul>\n\n<b>"অস্থায়ীভাবে জুম করতে"</b>", দ্রুত ৩ বার স্ক্রীনটিতে আলতো চাপুন এবং তৃতীয়বার আলতো চাপার সময় আপনার আঙুলটি ধরে রাখুন৷\n"<ul><li>"সারা স্ক্রীন জু্ড়ে সরাতে আপনার আঙুলটিকে টেনে আনুন"</li>\n<li>"জুম কমাতে আপনার আঙুলটি তুলে নিন"</li></ul>\n\n"আপনি কীবোর্ড এবং নেভিগেশান দণ্ড জুম করতে পারবেন না৷"</string>
+    <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"জুম করার জন্য বোতামে ট্যাপ করুন"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"জুম করার জন্য"</b>" স্ক্রিনে ৩ বার দ্রুত ট্যাপ করুন।\n"<ul><li>"স্ক্রল করতে ২টি বা তার বেশি আঙ্গুল টেনে নিয়ে যান"</li>\n<li>"জুমের সমন্বয়ের জন্য ২টি বা তার বেশি আঙ্গুল ব্যবহার করুন"</li></ul>\n\n<b>" অস্থায়ী জুমের জন্য"</b>" স্ক্রিনে দ্রুত ৩ বার ট্যাপ করুন এবং তৃতীয় বার ট্যাপ করার সময় আঙ্গুলটি দিয়ে টিপে ধরুন।\n"<ul><li>"স্ক্রিনের উপরে বিভিন্ন দিকে যাওয়ার জন্য আঙ্গুল টেনে নিয়ে যান"</li>\n<li>"জুম কম করতে আঙ্গুল সরিয়ে নিন"</li></ul>\n\n"কিবোর্ডে অথবা নেভিগেশন বারে জুম করতে পারবেন না।"</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"যখন ম্যাগনিফিকেশন চালু থাকবে তখন দ্রুত ম্যাগনিফাই করতে স্ক্রিনের মাঝখানের অ্যাক্সেসযোগ্যতা বোতামটি ব্যবহার করুন। \n\n"<b>" জুমের জন্য"</b>", অ্যাক্সেসযোগ্যতা বোতামটি ট্যাপ করুন, তারপর স্ক্রিনের যেকোনো জায়গায় ট্যাপ করুন।\n"<ul><li>"স্ক্রল করতে ২টি বা তার বেশি আঙ্গুল টেনে নিয়ে যান"</li>\n<li>" জুমের সমন্বয়ের জন্য ২ বা তার বেশি আঙ্গুল ব্যবহার করুন "</li></ul>\n\n<b>" অস্থায়ীভাবে জুমের জন্য"</b>"অ্যাক্সেসযোগ্যতা বোতামটি ট্যাপ করুন, তারপর স্ক্রিনের যেকোনো জায়গায় স্পর্শ করে টিপে ধরুন।\n"<ul><li>"স্ক্রিনের উপরে বিভিন্ন দিকে যাওয়ার জন্য আঙ্গুল টেনে নিয়ে যান"</li>\n<li>"জুম কম করতে আঙ্গুল সরিয়ে নিন"</li></ul>\n\n"কিবোর্ডে অথবা নেভিগেশন বারে জুম করতে পারবেন না।"</string>
+    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"অ্যাক্সেসযোগ্যতা বোতামটি <xliff:g id="SERVICE">%1$s</xliff:g> এর সাথে সেট করা আছে। ম্যগ্নিফিকেশন ব্যবহার করার জন্য অ্যাক্সেসযোগ্যতা বোতামটি স্পর্শ করে টিপে ধরুন, তারপর ম্যাগনিফিকেশন বেছে নিন।"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"সহজ ব্যবহার শর্টকাট"</string>
+    <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"শর্টকাট সার্ভিসগুলি"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"লক স্ক্রিন থেকে অনুমতি নিন"</string>
+    <string name="accessibility_shortcut_description" msgid="6488524140219209763">"যখন শর্টকাটটি চালু থাকবে, কোনো অ্যাক্সেসযোগ্যতা বৈশিষ্ট্য চালু করতে আপনি উভয় ভলিউম বোতামকে ৩ সেকেন্ডের জন্য টিপে ধরতে পারেন।"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"উচ্চ কনট্রাস্ট যুক্ত পাঠ্য"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"স্ক্রীন বৃহত্তরীকরণ স্বতঃ আপডেট"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"অ্যাপ্লিকেশান ট্রানজিশনের উপর স্ক্রীন বৃহত্তরীকরণ আপডেট"</string>
@@ -1774,10 +1790,12 @@
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"অডিও বাজানোর সময় চ্যানেলগুলিকে একত্রিত করুন"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"স্পর্শ করে ধরে রাখায় বিলম্ব"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"রঙ বিলোমক্রিয়া"</string>
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (7052959202195368109) -->
-    <skip />
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"কার্য-সম্পাদনায় প্রভাব রাখতে পারে"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"পয়েন্টার সরানো বন্ধ হবার পরেই ক্লিক করুন"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"ক্লিক করার আগে বিলম্ব"</string>
+    <string name="accessibility_summary_default_combination" msgid="90096949592817459">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
+    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"চালু"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"বন্ধ"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"দ্রুত সেটিংসে দেখান"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"সংশোধন মোড"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -1846,12 +1864,14 @@
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> থামাবেন?"</string>
     <string name="disable_service_message" msgid="2247101878627941561">"\'ঠিক আছে\' এ আলতো চাপলে <xliff:g id="SERVICE">%1$s</xliff:g> থেমে যাবে।"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"কোনো পরিষেবা ইনস্টল করা নেই"</string>
+    <string name="accessibility_no_service_selected" msgid="2840969718780083998">"কোনো সার্ভিস বেছে নেওয়া হয়নি"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"কোনো বিবরণ প্রদান করা নেই।"</string>
     <string name="settings_button" msgid="3006713718908152930">"সেটিংস"</string>
     <string name="print_settings" msgid="4742428530112487843">"প্রিন্ট"</string>
-    <plurals name="print_settings_title" formatted="false" msgid="6994238166067938432">
-      <item quantity="one">%dটি মুদ্রণের কাজ</item>
-      <item quantity="other">%dটি মুদ্রণের কাজ</item>
+    <string name="print_settings_summary_no_service" msgid="6354322414246865875">"বন্ধ আছে"</string>
+    <plurals name="print_settings_summary" formatted="false" msgid="6005468025646083029">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g>টি প্রিন্ট সার্ভিস চালু আছে</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>টি প্রিন্ট সার্ভিস চালু আছে</item>
     </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"প্রিন্ট পরিষেবাগুলি"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"কোনো পরিষেবা ইনস্টল করা নেই"</string>
@@ -1885,11 +1905,17 @@
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> চার্জ করা বাকি"</string>
     <string name="background_activity_title" msgid="8618384801540759730">"পটভূমির কার্যকলাপ"</string>
     <string name="background_activity_summary" msgid="8140094430510517362">"অ্যাপটি পটভূমিতে চলতে দিন"</string>
-    <string name="device_screen_usage" msgid="224482533839040430">"স্ক্রিনের ব্যবহার"</string>
+    <string name="background_activity_summary_on" msgid="649282072540085599">"যখন অ্যাপটি ব্যবহার করা হয় না তখন সেটি পটভূমিতে চালু থাকতে পারে"</string>
+    <string name="background_activity_summary_off" msgid="7666330699090632040">"যখন অ্যাপটি ব্যবহার করা হয় না তখন পটভূমিতে সেটির ব্যবহার সীমিত"</string>
+    <string name="background_activity_summary_disabled" msgid="3710669050484599847">"অ্যাপটির পটভুমিতে চালু থাকার অনুমতি নেই"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"সম্পূর্ণ চার্জ করার সময় থেকে স্ক্রিনের ব্যবহার"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"স্ক্রিনের জন্য ব্যবহার"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"মোবাইল নেটওয়ার্ক স্ক্যান করা"</string>
-    <string name="power_usage_list_summary" msgid="792703666229965848">"শেষ বার সম্পূর্ণ চার্জের পর থেকে অ্যাপের ব্যবহার"</string>
-    <string name="device_usage_list_summary" msgid="1545514224536252111">"শেষ বার সম্পূর্ণ চার্জের পর থেকে ডিভাইসের ব্যবহার"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> আগে"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"সম্পূর্ণ চার্জ হওয়া থেকে অ্যাপের ব্যবহার (<xliff:g id="TIME">^1</xliff:g> আগে)"</string>
+    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"সম্পূর্ণ চার্জ হওয়া থেকে ডিভাইসের ব্যবহার (<xliff:g id="TIME">^1</xliff:g> আগে)"</string>
+    <string name="screen_usage_summary" msgid="6687403051423153550">"সম্পূর্ণ চার্জ হওয়ার সময় থেকে স্ক্রিন কত সময় চালু রয়েছে"</string>
+    <string name="device_usage_list_summary" msgid="5623036661468763251">"সম্পূর্ণ চার্জ করার সময় থেকে ডিভাইসের ব্যবহার"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"আনপ্লাগ করার পর থেকে ব্যাটারি ব্যবহার"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"আবার সেট করা থেকে ব্যাটারি ব্যবহার"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> ব্যাটারিতে"</string>
@@ -1909,7 +1935,7 @@
     <string name="bluetooth_on_time" msgid="3056108148042308690">"ওয়াই-ফাই চালু থাকা মোট সময়"</string>
     <string name="advanced_battery_title" msgid="2068039111517508622">"উন্নত ব্যাটারি ব্যবহার"</string>
     <string name="history_details_title" msgid="3608240585315506067">"ইতিহাস বিবরণ"</string>
-    <string name="details_title" msgid="3792801565213935385">"বিবরণ ব্যবহার করুন"</string>
+    <string name="battery_details_title" msgid="6101394441569858580">"ব্যাটারির ব্যবহার"</string>
     <string name="details_subtitle" msgid="32593908269911734">"বিবরণ ব্যবহার করুন"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"বিদ্যুতের ব্যবহার সামঞ্জস্য করুন"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"অন্তর্ভুক্ত প্যাকেজগুলি"</string>
@@ -1918,7 +1944,7 @@
     <string name="power_camera" msgid="4976286950934622605">"ক্যামেরা"</string>
     <string name="power_wifi" msgid="1135085252964054957">"ওয়াই-ফাই"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"ব্লুটুথ"</string>
-    <string name="power_cell" msgid="6596471490976003056">"সেল স্ট্যান্ডবাই"</string>
+    <string name="power_cell" msgid="3392999761958982492">"মোবাইল নেটওয়ার্ক স্ট্যান্ডবাই এ আছে"</string>
     <string name="power_phone" msgid="5392641106474567277">"ভয়েস কল"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"ট্যাবলেট নিষ্ক্রিয়"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"ফোন নিষ্ক্রিয়"</string>
@@ -1978,12 +2004,22 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"ব্যাটারির ব্যবহার শক্তি ব্যবহারের প্রায় সঠিক পরিমাপ এবং এটি ব্যাটারি নি:শেষ হওয়ার সবধরনের উৎস অন্তর্ভূক্ত করে না। বিবিধ ব্যবহার আসলে শক্তির নির্ণিত আনুমানিক ব্যবহার ও ব্যাটারিতে দেখতে পাওয়া শক্তির প্রকৃত নি:শেষের ব্যবধান।"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"নির্ধারিত শক্তির থেকে বেশী শক্তির ব্যবহার"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"%1$s এর জন্য ব্যবহার করা হয়েছে"</string>
-    <string name="battery_overall_usage" msgid="5541736421708733643">"সম্পূর্ণ ব্যাটারির %1$s"</string>
-    <string name="battery_detail_since_full_charge" msgid="4329720759041042322">"শেষবার সম্পূর্ণ চার্জ দেওয়ার পর থেকে ব্যাটারি ব্যবহারের হিসেব"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> এর জন্য ব্যবহার করা হয়েছে"</string>
+    <string name="battery_screen_usage" msgid="6537658662149713585">"স্ক্রিনের ব্যবহার <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> এর দ্বারা <xliff:g id="PERCENT">%1$s</xliff:g> ব্যবহার করা হয়েছে"</string>
+    <string name="battery_overall_usage" msgid="2093409063297375436">"সামগ্রিক ব্যাটারির <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"শেষবার সম্পূর্ণ চার্জ দেওয়ার পর থেকে ব্যাটারির ব্যবহার"</string>
+    <string name="battery_last_full_charge" msgid="7151251641099019361">"শেষবার সম্পূর্ণ চার্জ দেওয়ার সময়"</string>
+    <string name="battery_footer_summary" msgid="4701358808575132647">"ব্যাটারি ব্যবহারের অবশিষ্ট সময়টি হল আনুমানিক এবং ব্যবহারের উপর ভিত্তি করে সেটি বদলে যেতে পারে"</string>
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"সক্রিয়ভাবে ব্যবহার করার সময়"</string>
+    <string name="battery_detail_background" msgid="1929644393553768999">"যখন এটি পটভূমিতে"</string>
+    <string name="battery_detail_power_usage" msgid="6485766868610469101">"ব্যাটারির ব্যবহার"</string>
+    <string name="battery_detail_power_percentage" msgid="8064814503316094497">"মোট অ্যাপ ব্যবহার এর <xliff:g id="PERCENT">%1$s</xliff:g> (<xliff:g id="POWER">%2$d</xliff:g>mAh)"</string>
+    <string name="battery_detail_info_title" msgid="8227822131405620369">"সম্পূর্ণ চার্জ হওয়ার সময় থেকে"</string>
+    <string name="battery_detail_manage_title" msgid="9094314252105828014">"ব্যাটারির ব্যবহার পরিচালনা করুন"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"আনুমানিক কতক্ষণ বাকি"</string>
-    <string name="estimated_charging_time_left" msgid="5877141166478224765">"পরে সম্পূর্ণ চার্জ হবে"</string>
-    <string name="estimated_time_description" msgid="6722669204902760489">"ব্যবহারের উপর ভিত্তি করে অনুমান পরিবর্তন করা হতে পারে"</string>
+    <string name="estimated_charging_time_left" msgid="5614442409326164691">"সম্পূর্ণ চার্জ না হওয়া পর্যন্ত"</string>
+    <string name="estimated_time_description" msgid="8760210909000037089">"ব্যবহারের উপর ভিত্তি করে আনুমানিক সময় পরিবর্তন হতে পারে"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"আনপ্ল্যাগ করা থেকে <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> এর জন্য শেষ আনপ্ল্যাগ করার সময়"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"মোট ব্যবহার"</string>
@@ -2041,7 +2077,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"ভয়েস ইনপুট ও আউটপুট সেটিংস"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"ভয়েস অনুসন্ধান"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android কীবোর্ড"</string>
-    <string name="voice_category" msgid="1430370497125803904">"কথন"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"ভয়েস ইনপুট সেটিংস"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"ভয়েস ইনপুট"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"ভয়েস ইনপুট পরিষেবা"</string>
@@ -2053,8 +2088,13 @@
     <string name="tts_sliders_title" msgid="992059150784095263">"কথা বলার রেট ও পিচ"</string>
     <string name="tts_engine_section_title" msgid="6289240207677024034">"ইঞ্জিন"</string>
     <string name="tts_install_voice_title" msgid="6275828614052514320">"কন্ঠগুলি"</string>
-    <string name="tts_reset_speech_rate_title" msgid="3993885027390495498">"ভাষ্যের হার আবার সেট করুন"</string>
-    <string name="tts_reset_speech_rate_summary" msgid="8561618897094097540">"যে গতিতে পাঠ্য সাধারণভাবে উচ্চারিত হয় তাতে আবার সেট করুন৷"</string>
+    <string name="tts_spoken_language" msgid="5542499183472504027">"কথ্য ভাষা"</string>
+    <string name="tts_install_voices_title" msgid="8808823756936022641">"ভয়েস ইনস্টল করুন"</string>
+    <string name="tts_install_voices_text" msgid="5292606786380069134">"ভয়েস ইনস্টল করার জন্য <xliff:g id="TTS_APP_NAME">%s</xliff:g> অ্যাপটি চালিয়ে যান"</string>
+    <string name="tts_install_voices_open" msgid="667467793360277465">"অ্যাপটি খুলুন"</string>
+    <string name="tts_install_voices_cancel" msgid="4711492804851107459">"বাতিল করুন"</string>
+    <string name="tts_reset" msgid="2661752909256313270">"রিসেট করুন"</string>
+    <string name="tts_play" msgid="2628469503798633884">"চালান"</string>
     <string name="gadget_title" msgid="5519037532720577836">"পাওয়ার নিয়ন্ত্রণ"</string>
     <string name="gadget_toggle_wifi" msgid="319262861956544493">"ওয়াই-ফাই সেটিং আপডেট করা হচ্ছে"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"ব্লুটুথ সেটিং আপডেট করা হচ্ছে"</string>
@@ -2103,7 +2143,7 @@
     <string name="credentials_not_erased" msgid="7685932772284216097">"ক্রেডেনশিয়াল সঞ্চয়স্থান মুছে ফেলা যাবে না।"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"ক্রেডেনশিয়াল সঞ্চয়স্থান সক্ষম।"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"আপনি ক্রেডেনশিয়াল সঞ্চয়স্থান ব্যবহার করার আগে আপনাকে লক স্ক্রীন পিন বা পাসওয়ার্ড সেট করতে হবে।"</string>
-    <string name="usage_access_title" msgid="332333405495457839">"ব্যবহারের অ্যাক্সেস যুক্ত অ্যাপ্লিকেশান"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"ব্যবহারের অ্যাক্সেস যুক্ত অ্যাপ্স"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"জরুরি টোন"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"জরুরি কল স্থাপন করা সময় কি ধরণের কার্যকলাপ করবে তা সেট করুন"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"ব্যাক আপ"</string>
@@ -2115,30 +2155,30 @@
     <string name="include_app_data_title" msgid="2829970132260278394">"অ্যাপ্লিকেশান ডেটা অন্তর্ভুক্ত করুন"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"স্বয়ংক্রিয়ভাবে পুনঃস্থাপন করুন"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"অ্যাপ্লিকেশান পুনরায় ইনস্টল করার সময়, ব্যাক আপ সেটিংস এবং ডেটা পুনরুদ্ধার করুন"</string>
-    <string name="backup_inactive_title" msgid="5355557151569037197">"ব্যাকআপ পরিষেবা নিষ্ক্রিয় রয়েছে৷"</string>
+    <string name="backup_inactive_title" msgid="685838037986644604">"ব্যাকঅ্যাপ সার্ভিস সক্রিয় নয়"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"কোনো অ্যাকাউন্ট বর্তমানে ব্যাক আপ ডেটা সংরক্ষণ করছে না"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"আপনার ওয়াই-ফাই পাসওয়ার্ড, বুকমার্ক, অন্যান্য সেটিংস, এবং অ্যাপ্লিকেশান ডেটা ব্যাক আপ করা বন্ধ করুন, এছাড়াও Google সার্ভারগুলিতে সব অনুলিপি মুছে ফেলতে চান?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="694766389396659626">"ডিভাইস ডেটা (যেমন ওয়াই-ফাই এর পাসওয়ার্ড এবং কলের ইতিহাস) এবং অ্যাপ্লিকেশান ডেটা (যেমন অ্যাপ্লিকেশানগুলির দ্বারা সংরক্ষিত সেটিংস এবং ফাইলগুলি) এর ব্যাক আপ নেওয়া বন্ধ করবেন, তার সাথে দূরবর্তী সার্ভারে সমস্ত প্রতিলিপি মুছবেন?"</string>
     <string name="fullbackup_data_summary" msgid="960850365007767734">"দূরবর্তীভাবে ডিভাইস ডেটার (যেমন, ওয়াই-ফাই এর পাসওয়ার্ডগুলি এবং কলের ইতিহাস) এবং অ্যাপ্লিকেশান ডেটার (যেমন অ্যাপ্লিকেশানগুলির দ্বারা সঞ্চিত সেটিংস এবং ফাইলগুলি)স্বয়ংক্রিয়ভাবে ব্যাক আপ নেওয়া হয়৷\n\nআপনি যখন স্বয়ংক্রিয় ব্যাক আপ চালু করুন তখন দূরবর্তীভাবে ডিভাইস এবং অ্যাপ্লিকেশানের ডেটা পর্যায়ক্রমে সংরক্ষিত হয়৷ অ্যাপ্লিকেশান ডেটা যেকোনো ডেটা হতে পারে যা অ্যাপ্লিকেশান সংরক্ষণ করে (বিকাশকারীর সেটিংস-এর উপর ভিত্তি করে), পরিচিতি, বার্তা এবং ফটোগুলির মত সম্ভাব্য সংবেদনশীল ডেটা অন্তর্ভুক্ত করে৷"</string>
-    <string name="device_admin_settings_title" msgid="1335557832906433309">"ডিভাইস প্রশাসন সেটিংস"</string>
-    <string name="active_device_admin_msg" msgid="6930903262612422111">"ডিভাইস প্রশাসক"</string>
-    <string name="remove_device_admin" msgid="7736174723276745230">"এই ডিভাইসের প্রশাসককে নিষ্ক্রিয় করুন"</string>
+    <string name="device_admin_settings_title" msgid="4960761799560705902">"ডিভাইসের প্রশাসকের সেটিংস"</string>
+    <string name="active_device_admin_msg" msgid="578748451637360192">"ডিভাইস প্রশাসক অ্যাপ"</string>
+    <string name="remove_device_admin" msgid="9207368982033308173">"এই ডিভাইস প্রশাসক অ্যাপটি নিস্ক্রিয় করুন"</string>
     <string name="uninstall_device_admin" msgid="271120195128542165">"অ্যাপ্লিকেশান আনইনস্টল করুন"</string>
-    <string name="remove_and_uninstall_device_admin" msgid="6983421266937728520">"নিষ্ক্রিয় এবং আনইনস্টল করুন"</string>
-    <string name="select_device_admin_msg" msgid="2645509057946368094">"ডিভাইস প্রশাসক"</string>
-    <string name="no_device_admins" msgid="702695100241728775">"কোনো উপলব্ধ ডিভাইস প্রশাসক নেই"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"নিস্ক্রিয় করুন এবং আনইনস্টল করুন"</string>
+    <string name="select_device_admin_msg" msgid="7347389359013278077">"ডিভাইস প্রশাসক অ্যাপ"</string>
+    <string name="no_device_admins" msgid="4846602835339095768">"কোনো ডিভাইস প্রশাসক অ্যাপ উপলব্ধ নেই"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"ব্যক্তিগত"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"কর্মস্থল"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"কোনো বিশ্বস্ত এজেন্ট উপলব্ধ নেই"</string>
-    <string name="add_device_admin_msg" msgid="6246742476064507965">"ডিভাইস প্রশাসক সক্রিয় করবেন?"</string>
-    <string name="add_device_admin" msgid="1349673618141610506">"এই ডিভাইসের প্রশাসককে সক্রিয় করুন"</string>
-    <string name="device_admin_add_title" msgid="7705551449705676363">"ডিভাইস প্রশাসক"</string>
-    <string name="device_admin_warning" msgid="2026747446313628233">"এই প্রশাসককে সক্রিয় করলে তা অ্যাপ্লিকেশান <xliff:g id="APP_NAME">%1$s</xliff:g> কে নিম্নলিখিত কার্যকলাপগুলি সঞ্চালনা করতে অনুমতি দেবে:"</string>
-    <string name="device_admin_status" msgid="4252975713178851910">"এই প্রশাসক সক্রিয় এবং অ্যাপ্লিকেশান <xliff:g id="APP_NAME">%1$s</xliff:g>কে নিম্নলিখিত কার্যকলাপগুলি সঞ্চালনা করতে অনুমতি দেয়:"</string>
+    <string name="add_device_admin_msg" msgid="1501847129819382149">"ডিভাইস প্রশাসক অ্যাপটি সক্রিয় করবেন?"</string>
+    <string name="add_device_admin" msgid="4192055385312215731">"এই ডিভাইস প্রশাসক অ্যাপটি সক্রিয় করুন"</string>
+    <string name="device_admin_add_title" msgid="3140663753671809044">"ডিভাইসের প্রশাসক"</string>
+    <string name="device_admin_warning" msgid="7482834776510188134">"এই প্রশাসক অ্যাপটি সক্রিয় করলে তা <xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপকে নিম্নলিখিত কাজগুলি করতে দেবে।"</string>
+    <string name="device_admin_status" msgid="7234814785374977990">"এই প্রশাসক অ্যাপটি সক্রিয় এবং <xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপকে নিম্নলিখিত কাজগুলি করতে দেয়।"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"প্রোফাইল ম্যানেজার সক্রিয় করবেন?"</string>
-    <string name="adding_profile_owner_warning" msgid="8081841501073689534">"এগিয়ে যাওয়া হলে, আপনার ব্যবহারকারীকে আপনার প্রশাসক পরিচালনা করবেন যিনি আপনার ব্যক্তিগত ডেটা ছাড়াও সম্পর্কিত ডেটা সংরক্ষণ করতে পারেন।\n\nআপনার প্রশাসক নেটওয়ার্ক কার্যকলাপ ও আপনার ডিভাইসের অবস্থানের তথ্য সহ এই ব্যবহারকারীর সাথে সম্পর্কিত সেটিংস, অ্যাক্সেস, অ্যাপ্লিকেশান এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে সক্ষম।"</string>
-    <string name="admin_disabled_other_options" msgid="4564776259414246934">"আপনার প্রশাসক অন্যান্য বিকল্পগুলিকে অক্ষম করেছেন৷"</string>
+    <string name="adding_profile_owner_warning" msgid="1354474524852805802">"এগিয়ে যাওয়ার মাধ্যমে, প্রশাসক দ্বারা আপনার ব্যবহারকারী পরিচালিত হবে যা আপনার ব্যক্তিগত ডেটা ছাড়াও অন্যান্য সম্পর্কিত ডেটা সঞ্চয়ে সক্ষম।\n\nআপনার প্রশাসক এই ব্যবহারকারীর সাথে সম্পর্কিত সেটিংস, অ্যাক্সেস, অ্যাপ এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন, যাতে সামিল রয়েছে নেটওয়ার্ক কার্যকলাপ এবং আপনার ডিভাইসের অবস্থান তথ্য।"</string>
+    <string name="admin_disabled_other_options" msgid="7712694507069054530">"আপনার প্রশাসক অন্যান্য বিকল্পগুলিকে অক্ষম করেছেন"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"আরো বিশদ বিবরণ"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"শিরোনামহীন"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"সাধারণ"</string>
@@ -2216,7 +2256,7 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"অ্যাকাউন্ট সরাবেন?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"এই অ্যাকাউন্টটি মুছে দিলে এটি ট্যাবলেটটি থেকে সমস্ত বার্তা, পরিচিতি এবং অন্য ডেটা মুছে দেবে!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"এই অ্যাকাউন্টটি মুছে দিলে এটি ফোন থেকে সমস্ত বার্তা, পরিচিতি এবং অন্য ডেটা মুছে দেবে!"</string>
-    <string name="remove_account_failed" msgid="6980737964448187854">"এই পরিবর্তনটি আপনার প্রশাসক দ্বারা অনুমোদিত নয়"</string>
+    <string name="remove_account_failed" msgid="3901397272647112455">"আপনার প্রশাসক এই পরিবর্তনটি করতে দেবেন না"</string>
     <string name="provider_label" msgid="7724593781904508866">"পুশ সদস্যতাগুলি"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
@@ -2287,8 +2327,7 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"পটভূমি:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"অ্যাপ্লিকেশান সেটিংস"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"পশ্চাদপট ডেটা"</string>
-    <!-- no translation found for data_usage_app_restrict_background_summary (5853552187570622572) -->
-    <skip />
+    <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"পটভূমিতে মোবাইল ডেটার ব্যবহার সক্ষম করুন"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"এই অ্যাপ্লিকেশানের জন্য পশ্চাদপটের ডেটা সীমাবদ্ধ করতে, প্রথমে মোবাইল ডেটা সীমা সেট করুন।"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"পশ্চাদপট ডেটা সীমাবদ্ধ করবেন?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"এই বৈশিষ্ট্যটি যখন শুধুমাত্র মোবাইল নেটওয়ার্ক উপলব্ধ তখন কাজ বন্ধ করার জন্য পশ্চাদপট ডেটার উপর নির্ভরশীল হয় এমন অ্যাপ্লিকেশানের উপর প্রভাব ফেলতে পারে।\n\nআপনি অ্যাপ্লিকেশন মধ্যে উপলব্ধ সেটিংসে আরো উপযুক্ত ডেটা ব্যবহার নিয়ন্ত্রণ সম্পর্কে জানতে পারবেন।"</string>
@@ -2304,8 +2343,8 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"ডেটা ব্যবহার সতর্কতা সেট করুন"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"ডেটা ব্যবহার সীমা সেট করুন"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"ডেটা ব্যবহার সীমিত করা"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"ডেটার ব্যবহার আপনার সেট করা সীমায় পৌঁছলে আপনার ট্যাবলেট মোবাইল ডেটা বন্ধ করে দেবে।\n\nযেহেতু আপনার ট্যাবলেট আপনার ডেটা ব্যবহারের হিসাব রাখে এবং আপনার পরিষেবা প্রদানকারীর রাখা হিসাব কিছুটা আলাদা হলেও হতে পারে, তাই আপনি একটি রক্ষণশীল সীমা সেট করার কথা ভাবতে পারেন।"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"ডেটার ব্যবহার আপনার সেট করা সীমায় পৌঁছলে আপনার ফোন মোবাইল ডেটা বন্ধ করে দেবে।\n\nযেহেতু আপনার ফোন আপনার ডেটা ব্যবহারের হিসাব রাখে এবং আপনার পরিষেবা প্রদানকারীর রাখা হিসাব কিছুটা আলাদা হলেও হতে পারে, তাই আপনি একটি রক্ষণশীল সীমা সেট করার কথা ভাবতে পারেন।"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"ডেটার ব্যবহার আপনার সেট করা সীমায় পৌঁছলে আপনার ট্যাবলেট মোবাইল ডেটা বন্ধ করে দেবে।\n\nযেহেতু আপনার ট্যাবলেট আপনার ডেটা ব্যবহারের হিসাব রাখে এবং আপনার পরিষেবা প্রদানকারীর রাখা হিসাব কিছুটা আলাদা হলেও হতে পারে, তাই যাতে কম মোবাইল ডাটা খরচ হোক এমনভাবে সীমা সেট করার কথা ভাবতে পারেন।"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"ডেটার ব্যবহার আপনার সেট করা সীমায় পৌঁছলে আপনার ফোন মোবাইল ডেটা বন্ধ করে দেবে।\n\nযেহেতু আপনার ফোন আপনার ডেটা ব্যবহারের হিসাব রাখে এবং আপনার পরিষেবা প্রদানকারীর রাখা হিসাব কিছুটা আলাদা হলেও হতে পারে, তাই যাতে কম মোবাইল ডাটা খরচ হোক এমনভাবে সীমা সেট করার কথা ভাবতে পারেন।"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"পশ্চাদপট ডেটা সীমাবদ্ধ করবেন?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"আপনি যদি পটভূমির মোবাইল ডেটা সীমাবদ্ধ করেন, তাহলে ওয়াই ফাই এর সাথে সংযুক্ত না হওয়া পর্যন্ত কিছু কিছু অ্যাপ ও পরিষেবা কাজ করবে না।"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"আপনি যদি পটভূমির মোবাইল ডেটা সীমাবদ্ধ করেন, তাহলে ওয়াই ফাই এর সাথে সংযুক্ত না হওয়া পর্যন্ত কিছু কিছু অ্যাপ ও পরিষেবা কাজ করবে না।\n\nএই সেটিংটি এই ট্যাবলেটের সমস্ত ব্যবহারকারীর ক্ষেত্রে প্রযোজ্য।"</string>
@@ -2346,6 +2385,11 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(অব্যবহৃত)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(সার্ভার যাচাই করবেন না)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(সার্ভার থেকে প্রাপ্ত)"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"এই প্রকারের VPN সব সময়ে সংযুক্ত থাকতে পারে না"</string>
+    <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"সর্বদা-চালু VPN গুলিতে শুধুমাত্র সেই DNS সার্ভারগুলি কাজ করে যেগুলির ঠিকানা সংখ্যায় আছে"</string>
+    <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"সর্বদা-চালু VPN গুলির জন্য একটি DNS সার্ভার উল্লেখ করা আবশ্যক"</string>
+    <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"সর্বদা-চালু VPN গুলির জন্য DNS সার্ভারের ঠিকানাগুলি সংখ্যায় হওয়া আবশ্যক"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"দিয়ে থাকা তথ্য সর্বদা-চালু VPN গুলিতে কাজ করে না"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"বাতিল"</string>
     <string name="vpn_done" msgid="8678655203910995914">"খারিজ করুন"</string>
     <string name="vpn_save" msgid="4233484051644764510">"সংরক্ষণ"</string>
@@ -2354,7 +2398,7 @@
     <string name="vpn_edit" msgid="8647191407179996943">"VPN প্রোফাইল সম্পাদনা করুন"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"ভুলে যান"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"<xliff:g id="PROFILE">%s</xliff:g> এতে সংযোগ করুন"</string>
-    <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"এই VPN থেকে সংযোগ বিচ্ছিন্ন করুন৷"</string>
+    <string name="vpn_disconnect_confirm" msgid="3743970132487505659">"এই VPN থেকে সংযোগ বিচ্ছিন্ন করবেন?"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"সংযোগ বিচ্ছিন্ন করুন"</string>
     <string name="vpn_version" msgid="1939804054179766249">"<xliff:g id="VERSION">%s</xliff:g> সংস্করণ"</string>
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN সরিয়ে দিন"</string>
@@ -2366,28 +2410,25 @@
     <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"আপনি ইতিমধ্যেই একটি VPN এর সাথে সংযুক্ত রয়েছেন৷ যদি আপনি অন্য আরেকটিতে সংযুক্ত করে থাকেন তবে আপনার বিদ্যমান VPN প্রতিস্থাপন করা হবে৷"</string>
     <string name="vpn_turn_on" msgid="2363136869284273872">"চালু করুন"</string>
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> সংযোগ করতে পারেনি"</string>
-    <string name="vpn_cant_connect_message" msgid="2593197919352621279">"এই অ্যাপ্লিকেশানটি সর্বদা-চালু VPN সমর্থন করে না৷"</string>
+    <string name="vpn_cant_connect_message" msgid="1352832123114214283">"এই অ্যাপটিতে সর্বদা-চালু VPN কাজ করে না"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPN প্রোফাইল যোগ করুন"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"প্রোফাইল সম্পাদনা করুন"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"প্রোফাইল মুছুন"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"সর্বদা-চালু VPN"</string>
-    <string name="vpn_no_vpns_added" msgid="4308317205962153438">"কোনো VPN যোগ করা হয়নি৷"</string>
-    <string name="vpn_always_on_active" msgid="2789423425184556882">"সর্বদা সক্রিয়"</string>
-    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"\'সর্বদা-চালু\' নিষ্ক্রিয় আছে"</string>
-    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"এই অ্যাপ্লিকেশানটি দ্বারা সমর্থিত নয়"</string>
-    <string name="vpn_require_connection" msgid="4564777707170757146">"শুধুমাত্র VPN মারফৎ সংযোগের অনুমতি দিন"</string>
+    <string name="vpn_no_vpns_added" msgid="5002741367858707244">"কোনো VPN যোগ করা হয়নি"</string>
+    <string name="vpn_always_on_summary" msgid="2821344524094363617">"সব সময়ে VPN এ সংযুক্ত থাকুন"</string>
+    <string name="vpn_always_on_summary_not_supported" msgid="592304911378771510">"এই অ্যাপটিতে কাজ করে না"</string>
+    <string name="vpn_always_on_summary_active" msgid="8800736191241875669">"সর্বদা-চালু সক্রিয় আছে"</string>
+    <string name="vpn_require_connection" msgid="8388183166574269666">"VPN বিহীন সংযোগগুলি ব্লক করুন"</string>
     <string name="vpn_require_connection_title" msgid="159053539340576331">"VPN সংযোগ প্রয়োজন?"</string>
-    <string name="vpn_lockdown_active" msgid="4687243926584886862">"লকডাউন সক্রিয় রয়েছে"</string>
-    <string name="vpn_lockdown_inactive" msgid="3366835171623444107">"লকডাউন নিষ্ক্রিয় রয়েছে"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"সর্বদা সংযুক্ত থাকতে একটি VPN প্রোফাইল নির্বাচন করুন। এই VPN এ সংযুক্ত থাকাকালীন শুধুমাত্র নেটওয়ার্ক ট্রাফিকের অনুমতি দেওয়া হবে।"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"কোনো কিছুই নয়"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"সর্বদা-চালু VPN এর সার্ভার্র এবং DNS উভয়েরই জন্য IP ঠিকানা প্রয়োজন।"</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"কোনো নেটওয়ার্ক সংযোগ নেই। দয়া করে পরে আবার চেষ্টা করুন।"</string>
     <string name="vpn_disconnected" msgid="280531508768927471">"VPN থেকে সংযোগ বিচ্ছিন্ন হয়েছে"</string>
-    <!-- no translation found for vpn_disconnected_summary (3082851661207900606) -->
-    <skip />
-    <string name="vpn_missing_cert" msgid="7972907102570411501">"একটি সার্টিফিকেট নেই। দয়া করে প্রোফাইলটি সম্পাদনা করুন।"</string>
+    <string name="vpn_disconnected_summary" msgid="3082851661207900606">"কোনো কিছুই নয়"</string>
+    <string name="vpn_missing_cert" msgid="5357192202207234745">"একটি শংসাপত্র পাওয়া যাচ্ছে না। প্রোফাইলটি সম্পাদনা করুন।"</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"সিস্টেম"</string>
     <string name="trusted_credentials_user_tab" msgid="2244732111398939475">"ব্যবহারকারী"</string>
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"অক্ষম করুন"</string>
@@ -2402,8 +2443,9 @@
     <string name="one_usercrt" msgid="2150319011101639509">"একটি ব্যবহারকারী শংসাপত্র"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"একটি CA শংসাপত্র"</string>
     <string name="n_cacrts" msgid="5979300323482053820">"%dটি CA শংসাপত্র"</string>
-    <string name="user_credential_title" msgid="1329449215749665378">"শংসাপত্রের বিশদ বিবরণ"</string>
+    <string name="user_credential_title" msgid="1954061209643070652">"শংসাপত্রের বিশদ বিবরণ"</string>
     <string name="user_credential_removed" msgid="6514189495799401838">"সরানো শংসাপত্র: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
+    <string name="user_credential_none_installed" msgid="3729607560420971841">"কোনো ব্যবহারকারীর শংসাপত্র ইনস্টল করা নেই"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"বানান পরিক্ষক"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"এখানে আপনার বর্তমান সম্পূর্ণ ব্যাকআপ পাসওয়ার্ড টাইপ করুন"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"এখানে পুরো ব্যাকআপের জন্য একটি নতুন পাসওয়ার্ড টাইপ করুন"</string>
@@ -2542,7 +2584,7 @@
     <string name="access_point_names" msgid="1381602020438634481">"অ্যাক্সেস পয়েন্টের নামগুলি"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"উন্নত 4G LTE মোড"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"ভয়েস এবং যোগাযোগ উন্নত করার জন্য LTE ডেটা ব্যবহার করুন (প্রস্তাবিত)"</string>
-    <string name="preferred_network_type_title" msgid="3431041717309776341">"পছন্দের নেটওয়ার্ক প্রকার"</string>
+    <string name="preferred_network_type_title" msgid="3431041717309776341">"পছন্দের নেটওয়ার্ক"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (প্রস্তাবিত)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"কর্মস্থলের সিম"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"অ্যাপ্লিকেশান &amp; সামগ্রী অ্যাক্সেস"</string>
@@ -2614,18 +2656,15 @@
     <string name="network_dashboard_title" msgid="4771589228992391573">"নেটওয়ার্ক ও ইন্টারনেট"</string>
     <string name="network_dashboard_summary" msgid="3274556191585905652">"ওয়াই ফাই, মোবাইল, ডেটার ব্যবহার, হটস্পট"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"সংযুক্ত ডিভাইস"</string>
-    <!-- no translation found for connected_devices_dashboard_summary (2390582103384791904) -->
-    <skip />
+    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"ব্লুটুথ, কাস্ট, NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"অ্যাপ্স &amp; বিজ্ঞপ্তি"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"অনুমতিগুলি, ডিফল্ট অ্যাপ্স"</string>
-    <!-- no translation found for account_dashboard_title (4936890821712178853) -->
-    <skip />
+    <string name="account_dashboard_title" msgid="4936890821712178853">"ব্যবহারকারী এবং অ্যাকাউন্টগুলি"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"ডিফল্ট অ্যাপ্স"</string>
-    <string name="system_dashboard_summary" product="default" msgid="3093393529569103150">"ভাষাগুলি, ব্যাকআপ, আপডেটগুলি, ফোনটির বিষয়ে"</string>
-    <string name="system_dashboard_summary" product="tablet" msgid="4126847688457251215">"ভাষা, ব্যাক আপ, আপডেট, ডিভাইস সম্বন্ধে"</string>
+    <string name="system_dashboard_summary" msgid="5797743225249766685">"ভাষা, সময়, ব্যাকআপ, আপডেট"</string>
     <string name="search_results_title" msgid="1796252422574886932">"সেটিংস"</string>
-    <string name="search_menu" msgid="6283419262313758339">"অনুসন্ধান সেটিংস"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"অনুসন্ধান সেটিংস"</string>
+    <string name="search_menu" msgid="6283419262313758339">"সেটিংসে অনুসন্ধান করুন"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"সেটিংসে অনুসন্ধান করুন"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, নেটওয়ার্ক সংযোগ"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"পাঠ্য বার্তা, পাঠ্য বার্তা পাঠানো, বার্তাগুলি, বার্তালাপ"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"সেলুলার, মোবাইল, সেলুলার পরিষেবা প্রদানকারী, ওয়্যারলেস, ডেটা, 4g, 3g, 2g, lte"</string>
@@ -2679,7 +2718,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC ট্যাগ লিখনযোগ্য নয়৷ দয়া করে একটি আলাদা ট্যাগ ব্যবহার করুন৷"</string>
     <string name="default_sound" msgid="8821684447333687810">"ডিফল্ট শব্দ"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"রিং ভলিউম <xliff:g id="PERCENTAGE">%1$s</xliff:g> তে রয়েছে"</string>
-    <string name="sound_dashboard_summary" msgid="2507943820408985874">"ভলিউম, কম্পন, বিরক্ত করবেন না"</string>
+    <string name="sound_dashboard_summary" msgid="3402435125958012986">"ভলিউম, কম্পন, বিরক্ত করবেন না"</string>
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"রিঙ্গারকে কম্পন অবস্থায় সেট করা হয়েছে"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"রিঙ্গারকে নীরব অবস্থায় সেট করা হয়েছে"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"রিং ভলিউম ৮০% তে রয়েছে"</string>
@@ -2689,8 +2728,10 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"বিজ্ঞপ্তির ভলিউম"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"ফোন রিংটোন"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"ডিফল্ট বিজ্ঞপ্তি শব্দ"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"শব্দটি অ্যাপ দ্বারা দেওয়া হয়েছে"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"বিজ্ঞপ্তির ডিফল্ট শব্দ"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"ডিফল্ট অ্যালার্মের শব্দ"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"এছাড়াও কল এলে স্পন্দিত করুন"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"এছাড়াও কল এলে ভাইব্রেট করুন"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"অন্যান্য শব্দগুলি"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ডায়াল প্যাডের টোনগুলি"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"স্ক্রিন লক হওয়ার শব্দ"</string>
@@ -2705,32 +2746,40 @@
     <string name="emergency_tone_alert" msgid="8941852695428130667">"সতর্কতা"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"কম্পন"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"ধ্বনিগুলিতে শক্তি"</string>
-    <string name="zen_mode_settings_title" msgid="9019451272935850774">"বিরক্ত করবেন না পছন্দগুলি"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"শুধুমাত্র অগ্রাধিকারকে অনুমতি দেয়"</string>
+    <string name="zen_mode_settings_summary_off" msgid="1857165567766351925">"কোনো স্বয়ংক্রিয় নিয়ম চালু করা নেই"</string>
+    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1216562765753405784">
+      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g>টি স্বয়ংক্রিয় নিয়ম চালু করা হয়েছে</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>টি স্বয়ংক্রিয় নিয়ম চালু করা হয়েছে</item>
+    </plurals>
+    <string name="zen_mode_settings_title" msgid="842308776768942600">"\'বিরক্ত করবেন না\' বিকল্পগুলি"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"অগ্রাধিকার অনুমতিগুলি"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"স্বয়ংক্রিয় নিয়মগুলি"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"\'বিরক্ত করবেন না\' এর সময়সূচী সেট করুন"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"নির্দিষ্ট সময়ে আপনার ডিভাইসটিকে নীরব করুন"</string>
+    <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"\'বিরক্ত করবেন না\' সেট আপ করুন"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"নির্দিষ্ট সময়ের ক্ষেত্রে শব্দ এবং কম্পন সীমিত করুন"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"শুধুমাত্র অগ্রাধিকার"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"শুধুমাত্র অ্যালার্মগুলি"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"একদম নিরব"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ভিজ্যুয়াল ব্যাঘাতগুলিকে অবরুদ্ধ করুন"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ভিজ্যুয়াল ব্যাঘাতগুলিকে ব্লক করুন"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"কর্মস্থলের প্রোফাইলের ধ্বনিগুলি"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"ব্যক্তিগত প্রোফাইলের ধ্বনিগুলি ব্যবহার করুন"</string>
-    <string name="work_use_personal_sounds_summary" msgid="2940241783139859361">"কর্মস্থলের প্রোফাইলের ধ্বনিগুলি ব্যক্তিগত প্রোফাইলের অনুরূপ"</string>
+    <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"কাজ এবং ব্যক্তিগত প্রোফাইলের জন্য একই শব্দ"</string>
     <string name="work_ringtone_title" msgid="5806657896300235315">"কর্মস্থলের ফোনের রিংটোন"</string>
-    <string name="work_notification_ringtone_title" msgid="2108983018726925833">"ডিফল্ট কর্মস্থলের বিজ্ঞপ্তি টোন"</string>
-    <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"ডিফল্ট কর্মস্থলের অ্যালার্ম রিংটোন"</string>
+    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"ডিফল্ট কাজের বিজ্ঞপ্তির শব্দ"</string>
+    <string name="work_alarm_ringtone_title" msgid="1441926676833738891">"ডিফল্ট কাজের অ্যালার্মের শব্দ"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"ব্যক্তিগত প্রোফাইলের অনুরূপ"</string>
-    <string name="work_sync_dialog_title" msgid="3351285490304048243">"ব্যক্তিগত প্রোফাইলের ধ্বনিগুলি ব্যবহার করবেন?"</string>
+    <string name="work_sync_dialog_title" msgid="7123973297187354813">"শব্দ বদল করবেন?"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"প্রতিস্থাপন করুন"</string>
-    <string name="work_sync_dialog_message" msgid="9066322310245055242">"আপনার বর্তমান কর্মস্থলের প্রোফাইলের ধ্বনির বদলে আপনার ব্যক্তিগত প্রোফাইলের ধ্বনিগুলি ব্যবহার করা হবে"</string>
+    <string name="work_sync_dialog_message" msgid="7841728953710863208">"আপনার ব্যাক্তিগত প্রোফাইলের শব্দ আপনার কাজের প্রোফাইলের ক্ষেত্রে ব্যবহৃত হবে"</string>
+    <string name="ringtones_install_custom_sound_title" msgid="5948792721161302255">"কোনো কাস্টম শব্দ যোগ করবেন?"</string>
+    <string name="ringtones_install_custom_sound_content" msgid="2195581481608512786">"এই ফাইলটি <xliff:g id="FOLDER_NAME">%s</xliff:g> ফোল্ডারে কপি করা হবে"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"রিংটোনগুলি"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"অন্যান্য শব্দ এবং কম্পন"</string>
-    <string name="configure_notification_settings" msgid="7447797716856573587">"বিজ্ঞপ্তির পছন্দগুলি"</string>
+    <string name="configure_notification_settings" msgid="7616737397127242615">"বিজ্ঞপ্তি"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"উন্নত"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"কর্মস্থলের বিজ্ঞপ্তিগুলি"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"পাল্স বিজ্ঞপ্তির জন্য আলো"</string>
+    <string name="notification_badging_title" msgid="5938709971403474078">"একাধিক বিজ্ঞপ্তি ডট দেখাতে দিন"</string>
+    <string name="notification_pulse_title" msgid="1905382958860387030">"মিটমিট করা আলো"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"লক স্ক্রীনে"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"সমস্ত বিজ্ঞপ্তির সামগ্রীগুলি দেখান"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"সংবেদনশীল বিজ্ঞপ্তির সামগ্রী লুকান"</string>
@@ -2743,20 +2792,23 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"আপনার ডিভাইস লক করা অবস্থায় আপনি কিভাবে প্রোফাইল বিজ্ঞপ্তিগুলি প্রদর্শন করতে চান?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"প্রোফাইল বিজ্ঞপ্তিগুলি"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"বিজ্ঞপ্তিগুলি"</string>
-    <!-- no translation found for app_notifications_summary (3421524441126902552) -->
+    <string name="notification_channel_title" msgid="2260666541030178452">"বিজ্ঞপ্তির বিভাগ"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"গুরুত্ব"</string>
-    <string name="notification_importance_none" msgid="3173515479356106227">"সেট করা নেই"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"অ্যাপটিকে সিদ্ধান্ত নিতে দিন"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"কখনোই বিজ্ঞপ্তগুলি দেখায় না"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"কোনো শব্দ বা ভিজ্যুয়াল বাধা নেই"</string>
-    <string name="notification_importance_low" msgid="2445139943005315690">"নিঃশব্দে দেখান"</string>
+    <string name="notification_importance_low" msgid="8881468429453766553">"শব্দ করবে না"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"শব্দ করে"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"শব্দ করে ও স্ক্রীনে ভেসে ওঠে"</string>
-    <string name="importance_reset" msgid="7458420788555607007">"আবার সেট করুন"</string>
-    <string name="show_silently" msgid="2222875799232222056">"নিঃশব্দে দেখান"</string>
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"নিম্ন"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"মাঝারি"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"বেশি"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"জরুরি"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"আওয়াজের অনুমতি দিন"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"শব্দ, কম্পন করে না বা বর্তমান স্ক্রীনে এই বিজ্ঞপ্তিগুলিকে দেখানো হয় না৷"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"বিজ্ঞপ্তি সহায়ক"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"বিজ্ঞপ্তির অ্যাক্সেস"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"কর্মস্থলের প্রোফাইলের বিজ্ঞপ্তিতে অ্যাক্সেস ব্লক করা হয়েছে"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"অ্যাপ্লিকেশানগুলি বিজ্ঞপ্তি পড়তে পারে না"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="one">%dটি অ্যাপ্লিকেশান বিজ্ঞপ্তিগুলি পড়তে পারে</item>
@@ -2779,29 +2831,36 @@
     <string name="picture_in_picture_empty_text" msgid="685224245260197779">"ইনস্টল করা কোনো অ্যাপ ছবির-মধ্যে-ছবি মোড সমর্থন করেনা"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"ছবির-মধ্যে-ছবি"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"ছবির-মধ্যে-ছবি"</string>
-    <!-- no translation found for picture_in_picture_app_detail_switch (1131910667023738296) -->
-    <skip />
-    <!-- no translation found for picture_in_picture_app_detail_summary (7942592478427522244) -->
-    <skip />
-    <!-- no translation found for picture_in_picture_on (6103704909710176555) -->
-    <skip />
-    <!-- no translation found for picture_in_picture_off (5654388666434625247) -->
-    <skip />
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"ছবির-মধ্যে-ছবি তৈরির অনুমতি দিন"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"অ্যাপটি খোলা থাকার সময় অথবা আপনি এটি ছেড়ে বেরিয়ে গেলে (যেমন, কোনো ভিডিও দেখার জন্য) এটিকে একটি ছবির-মধ্যে-ছবি সমেত উইন্ডো তৈরি করার অনুমতি দিন। চালু থাকা অন্যান্য অ্যাপের উপরে এই উইন্ডোটি দেখা যাবে।"</string>
+    <string name="picture_in_picture_on" msgid="6103704909710176555">"হ্যাঁ"</string>
+    <string name="picture_in_picture_off" msgid="5654388666434625247">"না"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"বিরক্ত করবেন না অ্যাক্সেস করুন"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ইনস্টল করা নেই এমন অ্যাপগুলি বিরক্ত করবেন না অ্যাক্সেস করুন এর অনুরোধ জানিয়েছে"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"অ্যাপ্লিকেশানগুলি লোড করা হচ্ছে..."</string>
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android এই অ্যাপের বিজ্ঞপ্তিগুলিকে এই ডিভাইসে দেখাতে দিছে না।"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android এই বিভাগের বিজ্ঞপ্তিগুলিকে এই ডিভাইসে দেখাতে দিছে না।"</string>
     <string name="notification_channels" msgid="5346841743182627500">"বিভাগগুলি"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"অন্যান্য"</string>
     <string name="no_channels" msgid="3077375508177744586">"এই অ্যাপটি দ্বারা কোন বিজ্ঞপ্তি পোস্ট করা হয়নি"</string>
-    <!-- no translation found for app_settings_link (8894946007543660906) -->
-    <skip />
-    <!-- no translation found for deleted_channels (3757203969719476510) -->
+    <string name="app_settings_link" msgid="8894946007543660906">"অ্যাপের আরো সেটিংস"</string>
+    <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"সমস্ত অ্যাপের জন্য চালু আছে"</string>
+    <plurals name="app_notification_listing_summary_others" formatted="false" msgid="5668835155965827890">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপের জন্য বন্ধ করা আছে</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপের জন্য বন্ধ করা আছে</item>
+    </plurals>
+    <plurals name="deleted_channels" formatted="false" msgid="8028574302599397935">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি বিভাগ মোছা হয়েছে</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি বিভাগ মোছা হয়েছে</item>
+    </plurals>
+    <string name="notification_toggle_on" msgid="650145396718191048">"চালু আছে"</string>
+    <string name="notification_toggle_off" msgid="2142010737190671762">"বন্ধ আছে"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"সমস্ত অবরুদ্ধ করুন"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"এই বিজ্ঞপ্তিগুলি কখনোই দেখানো হবে না"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"বিজ্ঞপ্তিগুলি দেখান"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"ছায়া বা পেরিফেরাল ডিভাইসে কখনও বিজ্ঞপ্তিগুলি দেখায় না"</string>
-    <string name="notification_badge_title" msgid="5404669445214920178">"ব্যাজ দেখায়"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"সমর্থিত হলে, হোম ট্যাবে ব্যাজ হিসেবে বিজ্ঞপ্তিগুলি দেখায়।"</string>
+    <string name="notification_badge_title" msgid="6370122441168519809">"বিজ্ঞপ্তির ডট দেখানোর অনুমতি দিন"</string>
+    <string name="notification_channel_badge_title" msgid="2240827899882847087">"বিজ্ঞপ্তির ডট দেখান"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\'বিরক্ত করবেন না\' ওভাররাইড করুন"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"যখন শুধুমাত্র অগ্রাধিকার সাপেক্ষে \'বিরক্ত করবেন না\' সেট করা থাকবে তখন বাধাদানের ক্ষেত্রে এই বিজ্ঞপ্তিগুলিকে চালু থাকতে দিন"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"লক স্ক্রীনে"</string>
@@ -2810,12 +2869,15 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"সংবেদনশীল"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"সম্পন্ন হয়েছে"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"গুরুত্ব"</string>
-    <string name="notification_show_lights_title" msgid="7301956309661349031">"সবর্দা বিজ্ঞপ্তির আলো সক্ষম"</string>
-    <string name="notification_vibrate_title" msgid="4942317478973441720">"সর্বদা কম্পন"</string>
+    <string name="notification_show_lights_title" msgid="7671781299688190532">"মিটমিট করা আলো"</string>
+    <string name="notification_vibrate_title" msgid="1646667807969755957">"কম্পন"</string>
+    <string name="notification_channel_sound_title" msgid="3899212238513507941">"শব্দ"</string>
+    <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"মুছুন"</string>
+    <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"নতুন নাম দিন"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"নিয়মের নাম"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"নিয়মের নাম লিখুন"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"নিয়মের নামটি ইতিমধ্যেই ব্যবহারে রয়েছে"</string>
-    <string name="zen_mode_add_rule" msgid="9100929184624317193">"নিয়ম যোগ করুন"</string>
+    <string name="zen_mode_add_rule" msgid="7459154136384467057">"আরো জুড়ুন"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"নিয়ম মুছুন"</string>
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"কোন ধরণের নিয়ম চান বাছুন"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\"<xliff:g id="RULE">%1$s</xliff:g>\" নিয়ম মুছে ফেলবেন?"</string>
@@ -2861,7 +2923,7 @@
     <string name="zen_mode_all_callers" msgid="584186167367236922">"সমস্ত কলার"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"নির্বাচিত কলারগুলি"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"কলারগুলির পুনরাবৃত্তি করুন"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"যদি একই ব্যক্তি <xliff:g id="MINUTES">%d</xliff:g> মিনিটের মধ্যে দ্বিতীয়বার কলগুলি করেন, তবে এটি অনুমোদন করুন"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"যদি একই ব্যক্তি <xliff:g id="MINUTES">%d</xliff:g> মিনিটের মধ্যে দ্বিতীয়বার কল করেন, তবে এটি অনুমোদন করুন"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"স্বয়ংক্রিয়ভাবে চালু"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"কখনও নয়"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"প্রতিদিন রাতে"</string>
@@ -2891,7 +2953,7 @@
     <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"যখন স্ক্রীন চালু বা বন্ধ থাকে"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"বিজ্ঞপ্তির সেটিংস"</string>
     <string name="device_feedback" msgid="3238056036766293294">"এই ডিভাইসের সম্পর্কে মতামত পাঠান"</string>
-    <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"প্রশাসক পিন লিখুন"</string>
+    <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"প্রশাসকের পিন লিখুন"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"চালু করুন"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"বন্ধ করুন"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"স্ক্রীন পিন করা"</string>
@@ -2910,18 +2972,14 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"বর্তমান সজ্জায় থাকুন"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"নিরাপদ স্টার্ট-আপ"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"অবিরত থাকুন"</string>
-    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"এই ডিভাইসটি শুরু হওয়ার আগে আপনার পিন চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"এই ডিভাইসটি শুরু হওয়ার আগে আপনার প্যাটার্ন চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
-    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"এই ডিভাইসটি শুরু হওয়ার আগে আপনার পাসওয়ার্ড চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"এছাড়া আপনার ডিভাইস আনলক করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহারের ক্ষেত্রে, এটিকে শুরু করার আগে আপনার পিন দিয়ে আপনি ডিভাইসটিকে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবে না।\n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"এছাড়া আপনার ডিভাইস আনলক করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহারের ক্ষেত্রে, এটিকে শুরু করার আগে আপনার প্যাটার্ন দিয়ে আপনি ডিভাইসটিকে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবে না।\n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"এছাড়া আপনার ডিভাইস আনলক করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহারের ক্ষেত্রে, এটিকে শুরু করার আগে আপনার পাসওয়ার্ড দিয়ে আপনি এই ডিভাইসটিকে আরও বেশি সুরক্ষিত করত পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা বা বিজ্ঞপ্তিগুলি প্রাপ্ত করতে পারবে না। \n\nএটি ডিভাইস হারিয়ে বা চুরি হয়ে গেলে সেক্ষেত্রে ডেটা সুরক্ষিত রাখতে সহায়তা করে।"</string>
-    <string name="encrypt_require_pin" msgid="2063945047845243752">"ডিভাইস চালু করার জন্য পিন প্রয়োজন"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"ডিভাইস চালু করার জন্য প্যাটার্ন প্রয়োজন"</string>
-    <string name="encrypt_require_password" msgid="8770628366276570518">"ডিভাইস চালু করার জন্য পাসওয়ার্ড প্রয়োজন"</string>
-    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"না থাক"</string>
-    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"না থাক"</string>
-    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"না থাক"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"এই ডিভাইসটি চালু হওয়ার আগে সেটি আপনার পিন চাইবে এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত সেটিতে কল, বার্তা বা অ্যালার্ম সহ বিজ্ঞপ্তি আসবে না।\n\nআপনার ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলে এটি ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে। আপনার ডিভাইসটি চালু করার জন্য পিন দরকার?"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"এই ডিভাইসটি চালু হওয়ার আগে সেটি আপনার প্যাটার্ন চাইবে এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত সেটিতে কল, বার্তা বা অ্যালার্ম সহ বিজ্ঞপ্তি আসবে না।\n\nআপনার ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলে এটি ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে। আপনার ডিভাইসটি চালু করার জন্য প্যাটার্ন দরকার?"</string>
+    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"এই ডিভাইসটি চালু হওয়ার আগে সেটি আপনার পাসওয়ার্ড চাইবে এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত সেটিতে কল, বার্তা বা অ্যালার্ম সহ বিজ্ঞপ্তি আসবে না।\n\nআপনার ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলে এটি ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে। আপনার ডিভাইসটি চালু করার জন্য পাসওয়ার্ড দরকার?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"আপনার ডিভাইস আনলক করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করা ছাড়াও, এটি চালু হওয়ার আগে আপনার পিন চাওয়ার মাধ্যমে আপনি ডিভাইসটিকে আরো সুরক্ষিত করতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত সেটিতে কল, বার্তা বা অ্যালার্ম সহ বিজ্ঞপ্তি আসবে না।\n\nআপনার ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলে এটি ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে। আপনার ডিভাইসটি চালু করার জন্য পিন দরকার?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"আপনার ডিভাইস আনলক করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করা ছাড়াও, এটি চালু হওয়ার আগে আপনার প্যাটার্ন চাওয়ার মাধ্যমে আপনি ডিভাইসটিকে আরো সুরক্ষিত করতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত সেটিতে কল, বার্তা বা অ্যালার্ম সহ বিজ্ঞপ্তি আসবে না।\n\nআপনার ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলে এটি ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে। আপনার ডিভাইসটি চালু করার জন্য প্যাটার্ন দরকার?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"আপনার ডিভাইস আনলক করার জন্য আপনার আঙ্গুলের ছাপ ব্যবহার করা ছাড়াও, এটি চালু হওয়ার আগে আপনার পাসওয়ার্ড চাওয়ার মাধ্যমে আপনি ডিভাইসটিকে আরো সুরক্ষিত করতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত সেটিতে কল, বার্তা বা অ্যালার্ম সহ বিজ্ঞপ্তি আসবে না।\n\nআপনার ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলে এটি ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে। আপনার ডিভাইসটি চালু করার জন্য পাসওয়ার্ড দরকার?"</string>
+    <string name="encryption_interstitial_yes" msgid="4439509435889513411">"হ্যাঁ"</string>
+    <string name="encryption_interstitial_no" msgid="8935031349097025137">"না"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"পিন-এর প্রয়োজন?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"প্যাটার্নের প্রয়োজন?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"পাসওয়ার্ডের প্রয়োজন?"</string>
@@ -2946,15 +3004,17 @@
     <string name="storage_used" msgid="7128074132917008743">"ব্যবহৃত সঞ্চয়স্থানের পরিমান"</string>
     <string name="change" msgid="6657848623929839991">"পরিবর্তন করুন"</string>
     <string name="change_storage" msgid="600475265207060436">"সঞ্চয়স্থান পরিবর্তন করুন"</string>
-    <string name="notifications_label" msgid="2872668710589600731">"বিজ্ঞপ্তিগুলি"</string>
-    <string name="notifications_enabled" msgid="4386196629684749507">"স্বাভাবিক"</string>
-    <string name="notifications_disabled" msgid="3200751656741989335">"অবরুদ্ধ"</string>
+    <string name="notifications_label" msgid="8543457911148619898">"অ্যাপ বিজ্ঞপ্তিগুলি"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"চালু আছে"</string>
+    <string name="notifications_disabled" msgid="334416731283131597">"সবকিছু বন্ধ আছে"</string>
+    <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_1">%2$d</xliff:g>টির মধ্যে <xliff:g id="COUNT_0">%1$d</xliff:g>টি বিভাগ বন্ধ আছে"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"নিঃশব্দ করা হয়েছে"</string>
     <string name="notifications_redacted" msgid="4493588975742803160">"সংবেদনশীল সামগ্রীকে লক স্ক্রীনে দেখানো হবে না"</string>
     <string name="notifications_hidden" msgid="3619610536038757468">"লক স্ক্রীনে দেখানো হবে না"</string>
     <string name="notifications_priority" msgid="1066342037602085552">"\'বিরক্ত করবেন না\' ওভাররাইড করা হয়েছে"</string>
     <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <string name="notification_summary_level" msgid="2726571692704140826">"লেভেল %d"</string>
+    <string name="notification_summary_channel" msgid="5831124672372023524">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অনুমতি মঞ্জুর করা হয়েছে</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অনুমতি মঞ্জুর করা হয়েছে</item>
@@ -2974,20 +3034,28 @@
     <string name="filter_instant_apps" msgid="574277769963965565">"ঝটপট অ্যাপ"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"ব্যক্তিগত"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"কাজ"</string>
-    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"অবরুদ্ধ রয়েছে"</string>
+    <string name="filter_notif_all_apps" msgid="2299049859443680242">"অ্যাপ: সমস্ত"</string>
+    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"অ্যাপ: বন্ধ আছে"</string>
+    <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"বিভাগগুলি: জরুরী গুরুত্বের"</string>
+    <string name="filter_notif_low_channels" msgid="4128487387390004604">"বিভাগগুলি: কম গুরুত্বের"</string>
+    <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"বিভাগগুলি: বন্ধ আছে"</string>
+    <string name="filter_notif_dnd_channels" msgid="1817930848881696728">"বিভাগগুলি: বিরক্ত করবেন না কে ওভাররাইড করে"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"উন্নত"</string>
     <string name="configure_apps" msgid="6685680790825882528">"অ্যাপ্লিকেশান কনফিগার করুন"</string>
     <string name="unknown_app" msgid="5275921288718717656">"অজানা অ্যাপ্লিকেশান"</string>
     <string name="app_permissions" msgid="4148222031991883874">"অ্যাপ্লিকেশানের অনুমতি"</string>
-    <!-- no translation found for app_permissions_summary (5163974162150406324) -->
-    <skip />
+    <string name="app_permissions_summary" msgid="5163974162150406324">"যে অ্যাপগুলি <xliff:g id="APPS">%1$s</xliff:g> ব্যবহার করছে"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"জাগাতে আলতো চাপুন"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"ডিভাইসকে জাগাতে স্ক্রীনের যেকোনো জায়গায় দুবার আলতো চাপুন"</string>
     <string name="domain_urls_title" msgid="3132983644568821250">"লিঙ্কগুলি খুলছে"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"সমর্থিত লিঙ্কগুলি খোলে না"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g> খোলে"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"<xliff:g id="DOMAIN">%s</xliff:g> এবং অন্য URLগুলি খোলে"</string>
-    <!-- no translation found for domain_urls_apps_summary (6999347849855021374) -->
+    <string name="domain_urls_apps_summary_off" msgid="1833056772600031220">"কোনো অ্যাপ সমর্থিত লিঙ্কগুলি খুলতে পারবে না"</string>
+    <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="240214361240709399">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g>টি অ্যাপ সমর্থিত লিঙ্কগুলি খুলছে</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>টি অ্যাপ সমর্থিত লিঙ্কগুলি খুলছে</item>
+    </plurals>
     <string name="app_link_open_always" msgid="2474058700623948148">"এই অ্যাপ্লিকেশানটির মধ্যে খুলুন"</string>
     <string name="app_link_open_ask" msgid="7800878430190575991">"প্রতিবার জিজ্ঞাসা করুন"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"এই অ্যাপ্লিকেশানটির মধ্যে খুলবেন না"</string>
@@ -3025,16 +3093,16 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"ব্যাটারি অপ্টিমাইজেশান"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"ব্যবহারের সতর্কতা"</string>
-    <string name="show_all_apps" msgid="1742726460081356745">"সব অ্যাপ দেখুন"</string>
-    <string name="hide_extra_apps" msgid="5568177134273528751">"অতিরিক্ত অ্যাপগুলি লুকান"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"সম্পূর্ণ ডিভাইসের ব্যবহার দেখান"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"অ্যাপের ব্যবহার দেখান"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"অপ্টিমাইজ করা নেই"</string>
     <string name="high_power_on" msgid="6216293998227583810">"অপ্টিমাইজ করা নেই"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ব্যাটারির ব্যবহার অপ্টিমাইজ করা হচ্ছে"</string>
     <string name="high_power_system" msgid="7362862974428225301">"ব্যাটারি অপ্টিমাইজেশান উপলব্ধ নেই"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"ব্যাটারি অপ্টিমাইজেশান প্রয়োগ করবেন না। আরো দ্রুত আপনার ব্যাটারির চার্জ শেষ হয়ে যেতে পারে৷"</string>
-    <string name="high_power_prompt_title" msgid="4257734526819699048">"ব্যাটারি অপ্টিমাইজেশানগুলি উপেক্ষা করবেন?"</string>
-    <string name="high_power_prompt_body" msgid="4072587909486730876">"<xliff:g id="APP_NAME">%1$s</xliff:g> কে পটভূমিতে সংযুক্ত থাকার অনুমতি দেবেন? এটি আরো বেশি ব্যাটারি ব্যবহার করতে পারে৷"</string>
-    <string name="battery_summary" msgid="101415762036784289">"শেষ সম্পূর্ণ চার্জ করার সময় থেকে <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ব্যবহার হয়েছে"</string>
+    <string name="high_power_prompt_title" msgid="6358673688590282655">"অ্যাপটিকে সবসময় পটভূমিতে চালু রাখবেন?"</string>
+    <string name="high_power_prompt_body" msgid="1031422980602565049">"<xliff:g id="APP_NAME">%1$s</xliff:g> কে সবসময় পটভূমিতে চালু রাখলে ব্যাটারির ক্ষমতা কমে যেতে পারে। \n\nআপনি পরে সেটিংস &gt; অ্যাপ্স ও বিজ্ঞপ্তি থেকে এটি পরিবর্তন করতে পারেন।"</string>
+    <string name="battery_summary" msgid="8044042095190688654">"শেষ বার সম্পূর্ণ চার্জ করার পর থেকে <xliff:g id="PERCENTAGE">%1$s</xliff:g> ব্যবহার হয়েছে"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"শক্তি পরিচালনা"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"শেষ সম্পূর্ণ চার্জ করার সময় থেকে কোনো ব্যাটারি ব্যবহার করা হয়নি"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"অ্যাপ্লিকেশান সেটিংস"</string>
@@ -3050,18 +3118,20 @@
     <string name="usb_use_charging_only" msgid="2180443097365214467">"এই ডিভাইসটি চার্জ করুন"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"শুধুমাত্র ডিভাইটি চার্জ করুন"</string>
     <string name="usb_use_power_only" msgid="6426550616883919530">"পাওয়ার সরবরাহ করুন"</string>
-    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"অন্যান্য সংযুক্ত ডিভাইসে পাওয়ার সরবরাহ করুন"</string>
-    <!-- no translation found for usb_use_file_transfers (338076823500744605) -->
-    <skip />
+    <string name="usb_use_power_only_desc" msgid="3461232831015575152">"সংযুক্ত ডিভাইসটি চার্জ করুন। শুধুমাত্র USB চার্জিং সমর্থিত ডিভাইসেই এটি করা যাবে।"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"ফাইলগুলি স্থানান্তর করুন"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"অন্য ডিভাইসে ফাইলগুলিকে স্থানান্তর করুন"</string>
-    <!-- no translation found for usb_use_photo_transfers (6743967116266105718) -->
-    <skip />
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"ফটোগুলির স্থানান্তর (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"যদি MTP সমর্থিত না হয় তবে ফটো বা ফাইলগুলি স্থানান্তর করুন (PTP)"</string>
-    <!-- no translation found for usb_use_MIDI (8405244560919283714) -->
-    <skip />
+    <string name="usb_use_MIDI" msgid="870922185938298263">"MIDI হিসাবে ডিভাইসটি ব্যবহার করুন"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"MIDI হিসাবে এই ডিভাইসটি ব্যবহার করুন"</string>
     <string name="usb_use" msgid="3256040963685055320">"এটি করতে USB ব্যবহার করুন"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
+    <string name="usb_summary_charging_only" msgid="7544327009143659751">"এই ডিভাইসটি চার্জ করা হচ্ছে"</string>
+    <string name="usb_summary_power_only" msgid="3629517713817003738">"সংযুক্ত ডিভাইসটি চার্জ করা হচ্ছে"</string>
+    <string name="usb_summary_file_transfers" msgid="6435943692610175111">"ফাইলগুলি স্থানান্তর করা হচ্ছে"</string>
+    <string name="usb_summary_photo_transfers" msgid="8440204169576585250">"ফটোগুলি স্থানান্তর করা হচ্ছে (PTP)"</string>
+    <string name="usb_summary_MIDI" msgid="5687906612187885908">"ডিভাইসটিকে MIDI হিসাবে ব্যবহার করা হচ্ছে"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"পটভূমি পরীক্ষা করুন"</string>
     <string name="background_check_title" msgid="4534254315824525593">"সম্পূর্ণ পটভূমি অ্যাক্সেস করুন"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"স্ক্রীন থেকে পাঠ্য ব্যবহার করুন"</string>
@@ -3103,37 +3173,23 @@
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"ব্যাটারির আয়ু বাড়ানোর জন্য প্রস্তাবিত"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> -কে ব্যাটারি অপ্টিমাইজেশান উপেক্ষা করার অনুমতি দেবেন?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"কোনো কিছুই নয়"</string>
-    <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"এই অ্যাপ্লিকেশানটি ব্যবহারের অ্যাক্সেস বন্ধ করলে তা আপনার কাজের প্রোফাইলের মধ্যে আপনার প্রশাসকের অ্যাপ্লিকেশানের ডেটার ব্যবহার ট্র্যাক করা প্রতিরোধ করবে না।"</string>
+    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"এই অ্যাপের জন্য ব্যবহারের অ্যাক্সেস বন্ধ করলেও তা আপনার প্রশাসককে আপনার কাজের প্রোফাইলের অ্যাপগুলির ডেটার ব্যবহার ট্র্যাক করা আটকাতে পারবে না।"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_1">%2$d</xliff:g>টির মধ্যে <xliff:g id="COUNT_0">%1$d</xliff:g>টি অক্ষর ব্যবহার করা হয়েছে"</string>
-    <!-- no translation found for draw_overlay_title (7524215631960029502) -->
-    <skip />
-    <!-- no translation found for draw_overlay (6564116025404257047) -->
-    <skip />
-    <!-- no translation found for system_alert_window_settings (8466613169103527868) -->
-    <skip />
+    <string name="draw_overlay" msgid="6564116025404257047">"অন্যান্য অ্যাপের উপরে দেখুন"</string>
+    <string name="system_alert_window_settings" msgid="8466613169103527868">"অন্য অ্যাপের উপরে দেখুন"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"অ্যাপ্লিকেশানগুলি"</string>
-    <!-- no translation found for system_alert_window_access_title (6297115362542361241) -->
-    <skip />
-    <!-- no translation found for permit_draw_overlay (7456536798718633432) -->
-    <skip />
-    <!-- no translation found for app_overlay_permission_preference (9039432222453006038) -->
-    <skip />
-    <!-- no translation found for allow_overlay_description (3879905262954599959) -->
-    <skip />
+    <string name="system_alert_window_access_title" msgid="6297115362542361241">"অন্য অ্যাপের উপরে দেখুন"</string>
+    <string name="permit_draw_overlay" msgid="7456536798718633432">"অন্য অ্যাপের উপর প্রদর্শিত হওয়ার অনুমতি দিন"</string>
+    <string name="app_overlay_permission_preference" msgid="9039432222453006038">"অ্যাপ উপরে প্রদর্শিত হওয়ার অনুমতি"</string>
+    <string name="allow_overlay_description" msgid="8961670023925421358">"আপনি অন্য যে সমস্ত অ্যাপ ব্যবহার করছেন, সেগুলির উপরে এই অ্যাপটিকে প্রদর্শিত হওয়ার অনুমতি দিন। এর ফলে বাকি অ্যাপগুলি ব্যবহারে ব্যাঘাত ঘটতে পারে এবং স্ক্রিনে সেগুলির উপস্থিতি অথবা আচরণে পরিবর্তন হতে পারে।"</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"ভার্চুয়াল রিয়েলিটিVR লিসনার স্টিরিও সহায়তাকারী পরিষেবা"</string>
-    <!-- no translation found for keywords_system_alert_window (5049498015597864850) -->
-    <skip />
-    <!-- no translation found for overlay_settings (6930854109449524280) -->
-    <skip />
-    <!-- no translation found for system_alert_window_summary (602892301318324492) -->
-    <skip />
+    <string name="keywords_system_alert_window" msgid="5049498015597864850">"সিস্টেম সতর্কতা উইন্ডো ডায়লগ অন্যান্য অ্যাপের উপরে দেখুন"</string>
+    <string name="overlay_settings" msgid="6930854109449524280">"অন্য অ্যাপের উপরে দেখুন"</string>
+    <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_1">%2$d</xliff:g>টির মধ্যে <xliff:g id="COUNT_0">%1$d</xliff:g>টি অ্যাপকে বাকিগুলির উপরে দেখতে পাওয়া যাবে"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"অনুমতি সহ অ্যাপ্লিকেশানগুলি"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"হ্যাঁ"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"না"</string>
-    <!-- no translation found for install_other_apps (6986686991775883017) -->
-    <skip />
-    <!-- no translation found for keywords_install_other_apps (761078076051006558) -->
-    <skip />
+    <string name="keywords_install_other_apps" msgid="761078076051006558">"অজানা উৎস থেকে আসা অ্যাপ ইনস্টল করুন"</string>
     <string name="write_settings" msgid="4797457275727195681">"সিস্টেম সেটিংস সংশোধন করুন"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"সিস্টেম সেটিংস সংশোধন করা লেখা"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"<xliff:g id="COUNT_1">%2$d</xliff:g>টির মধ্যে <xliff:g id="COUNT_0">%1$d</xliff:g>টি অ্যাপ্লিকেশানকে সিস্টেম সেটিংস সংশোধন করার অনুমতি দেওয়া হয়েছে"</string>
@@ -3146,10 +3202,7 @@
     <string name="write_settings_description" msgid="6868293938839954623">"এই অনুমতিটি কোনো অ্যাপ্লিকেশানকে সিস্টেম সেটিংস সংশোধন করার অনুমতি দেয়৷"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"হ্যাঁ"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"না"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"হ্যাঁ"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"না"</string>
-    <!-- no translation found for external_source_switch_title (5581865736984836418) -->
-    <skip />
+    <string name="external_source_switch_title" msgid="3621381992793251070">"এই উৎস থেকে আসা অ্যাপগুলিকে অনুমতি দিন"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"ক্যামেরার জন্য দুবার ঝাঁকান"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"আপনার কব্জি দুবার ঝাঁকিয়ে ক্যামেরা অ্যাপ্লিকেশানটি খুলুন"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ক্যামেরার জন্য দুবার পাওয়ার বোতাম টিপুন"</string>
@@ -3171,40 +3224,39 @@
     <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"মঙ্গলবার সন্ধ্যা ৬.০১ এ"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"মঙ্গলবার সন্ধ্যা ৬.০২ এ"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"মঙ্গলবার সন্ধ্যা ৬.০৩ এ"</string>
-    <!-- no translation found for disconnected (4836600637485526329) -->
-    <skip />
+    <string name="disconnected" msgid="4836600637485526329">"সংযুক্ত নয়"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ডেটা ব্যবহৃত হয়েছে"</string>
-    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ্লিকেশানের \'পাঠানোর কাজ\' অবরুদ্ধ করা হয়েছে</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ্লিকেশানের \'পাঠানোর কাজ\' অবরুদ্ধ করা হয়েছে</item>
+    <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
+      <item quantity="one">টি অ্যাপের জন্য বন্ধ করা আছে</item>
+      <item quantity="other">টি অ্যাপের জন্য বন্ধ করা আছে</item>
     </plurals>
-    <string name="notification_summary_none" msgid="3440195312233351409">"সমস্ত অ্যাপ্লিকেশান পাঠাতে সক্ষম"</string>
+    <string name="notification_summary_none" msgid="4586376436702610">"সমস্ত অ্যাপের জন্য চালু আছে"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g>টি অ্যাপ্লিকেশান ইনস্টল করা হয়েছে"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"২৪টি অ্যাপ্লিকেশান ইনস্টল করা হয়েছে"</string>
     <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> ব্যবহৃত হয়েছে - <xliff:g id="FREE_SPACE">%2$s</xliff:g> বাকি আছে"</string>
+    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"ইন্টারনাল স্টোরেজ: <xliff:g id="PERCENTAGE">%1$s</xliff:g> ব্যবহৃত হয়েছে - <xliff:g id="FREE_SPACE">%2$s</xliff:g> খালি আছে"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ধরে নিষ্ক্রিয় থাকার পরে নিদ্রা মোডে যায়"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"ওয়ালপেপার, নিদ্রা মোড, হরফের আকার"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"১০ মিনিট ধরে নিষ্ক্রিয় থাকার পরে নিদ্রা মোডে যায়"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> এর মধ্যে <xliff:g id="USED_MEMORY">%1$s</xliff:g> মেমোরি ব্যবহৃত হয়েছে"</string>
-    <!-- no translation found for user_summary (2175367953972182552) -->
-    <skip />
+    <string name="users_and_accounts_summary" msgid="245282689646897882">"বর্তমান ব্যবহারকারী: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g> হিসেবে প্রবেশ করেছেন"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> হল ডিফল্ট"</string>
     <string name="location_on_summary" msgid="5127631544018313587">"চালু / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"বন্ধ"</string>
     <string name="backup_disabled" msgid="485189128759595412">"ব্যাক আপ নেওয়া অক্ষম করা রয়েছে"</string>
-    <!-- no translation found for about_summary (924181828102801010) -->
-    <skip />
+    <string name="about_summary" msgid="924181828102801010">"Android <xliff:g id="VERSION">%1$s</xliff:g> এ আপডেট করা হয়েছে"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"কাজটি অনুমোদিত নয়"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"ভলিউম পরিবর্তন করা যাবে না"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"কল করার অনুমতি নেই"</string>
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"এসএমএস পাঠানোর অনুমতি নেই"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"ক্যামেরা ব্যবহারের অনুমতি নেই"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"স্ক্রিনশটের অনুমতি নেই"</string>
-    <string name="default_admin_support_msg" msgid="239311515653633217">"এই কাজটি অক্ষম করা আছে৷ আরো জানতে, আপনার সংগঠনের প্রশাসকের সাথে যোগাযোগ করুন৷"</string>
+    <string name="default_admin_support_msg" msgid="2853684309779513863">"এই অ্যাকশনটি অক্ষম করা আছে। আরো জানতে আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন।"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"আরো বিশদ বিবরণ"</string>
-    <string name="admin_profile_owner_message" msgid="5834937282929663252">"আপনার প্রশাসক সেটিংস, অনুমতি, কর্পোরেট অ্যাক্সেস, নেটওয়ার্ক কার্যকলাপ এবং আপনার ডিভাইসের অবস্থান সম্পর্কিত তথ্য সহ, আপনার কর্মস্থলের প্রোফাইলের সাথে সংশ্লিষ্ট অ্যাপ্লিকেশান এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন৷"</string>
-    <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"আপনার প্রশাসক সেটিংস, অনুমতি, কর্পোরেট অ্যাক্সেস, নেটওয়ার্ক কার্যকলাপ এবং আপনার ডিভাইসের অবস্থান সম্পর্কিত তথ্য সহ, এই ব্যবহারকারীর সাথে সংশ্লিষ্ট অ্যাপ্লিকেশান এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন৷"</string>
-    <string name="admin_device_owner_message" msgid="8734500370023898028">"আপনার প্রশাসক সেটিংস, অনুমতি, কর্পোরেট অ্যাক্সেস, নেটওয়ার্ক কার্যকলাপ এবং আপনার ডিভাইসের অবস্থান সম্পর্কিত তথ্য সহ, এই ডিভাইসের সাথে সংশ্লিষ্ট অ্যাপ্লিকেশান এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন৷"</string>
+    <string name="admin_profile_owner_message" msgid="5860816886981109626">"আপনার প্রশাসক আপনার কর্মস্থলের প্রোফাইলের সাথে সম্পর্কিত অ্যাপ এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন, যাতে সামিল রয়েছে সেটিংস, অনুমতি, কর্পোরেট অ্যাক্সেস, নেটওয়ার্ক কার্যকলাপ এবং ডিভাইসের অবস্থান তথ্য।"</string>
+    <string name="admin_profile_owner_user_message" msgid="3842630535450382172">"আপনার প্রশাসক এই ব্যবহারকারীর সাথে সম্পর্কিত অ্যাপ এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন, যাতে সামিল রয়েছে সেটিংস, অনুমতি, কর্পোরেট অ্যাক্সেস, নেটওয়ার্ক কার্যকলাপ এবং ডিভাইসের অবস্থান তথ্য।"</string>
+    <string name="admin_device_owner_message" msgid="6232893638259790789">"আপনার প্রশাসক এই ডিভাইসের সাথে সম্পর্কিত অ্যাপ এবং ডেটা নিরীক্ষণ ও পরিচালনা করতে পারেন, যাতে সামিল রয়েছে সেটিংস, অনুমতি, কর্পোরেট অ্যাক্সেস, নেটওয়ার্ক কার্যকলাপ এবং ডিভাইসের অবস্থান তথ্য।"</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"বন্ধ করুন"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"চালু করুন"</string>
     <string name="condition_expand_show" msgid="608202020023489939">"দেখান"</string>
@@ -3232,7 +3284,6 @@
     <string name="color_temperature_toast" msgid="4974218172133854827">"রঙের পরিবর্তন প্রয়োগ করতে, স্ক্রীন বন্ধ করুন"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"টেলিফোনি মনিটর এ করা পরিবর্তন প্রয়োগ করতে ডিভাইসটি বন্ধ করে আবার চালু করুন"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"স্বয়ংক্রিয় সিস্টেম আপডেটগুলি"</string>
-    <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HAL গুলি (আবার চালু করতে হবে)"</string>
     <string name="usage" msgid="2977875522080448986">"ব্যবহার"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"মোবাইল ডেটার ব্যবহার"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"ওয়াই-ফাই ডেটার ব্যবহার"</string>
@@ -3245,10 +3296,13 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ডেটা সতর্কতা"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> ডেটা সতর্কতা / <xliff:g id="ID_2">%2$s</xliff:g> ডেটা সীমা"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"বিলিং চক্র"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"প্রতি মাসের <xliff:g id="ID_1">%1$s</xliff:g> এ মাসিক চক্র শুরু হয়"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"মাসিক চক্র <xliff:g id="ID_1">%1$s</xliff:g> এ শুরু হয়"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"প্রতি মাসের <xliff:g id="ID_1">%1$s</xliff:g> তারিখে মাসিক বিল শুরু হয়"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"মাসিক বিল <xliff:g id="ID_1">%1$s</xliff:g> তরিখ থেকে শুরু হয়"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"নেটওয়ার্ক সীমাবদ্ধতা"</string>
-    <!-- no translation found for network_restrictions_summary (4301618027244595839) -->
+    <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g>টি সীমাবদ্ধতা</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>টি সীমাবদ্ধতা</item>
+    </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"পরিষেবা প্রদানকারী ডেটার হিসাব, ডিভাইসের হিসাব থেকে ভিন্ন হতে পারে"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ব্যবহৃত হয়েছে"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"ডেটা সতর্কতা সেট করুন"</string>
@@ -3315,7 +3369,11 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"কোনো কিছুই নয়"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"রেঙ্কিং অবজেক্ট অনুপস্থিত।"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"রেঙ্কিং অবজেক্টে এই কী থাকে না।"</string>
-    <string name="special_access" msgid="8275242424094109976">"বিশেষ অ্যাক্সেস"</string>
+    <string name="special_access" msgid="3458780842491881155">"বিশেষ অ্যাপ অ্যাক্সেস করুন"</string>
+    <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g>টি অ্যাপ অপরিমিত ডেটা ব্যবহার করতে পারে</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>টি অ্যাপ অপরিমিত ডেটা ব্যবহার করতে পারে</item>
+    </plurals>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"ব্যবহারকারীর ডেটা মুছতে এবং ফাইল এনক্রিপশানে রূপান্তর করার বিষয়ে নিশ্চিত?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"মুছুন ও রূপান্তর করুন"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager রেট-লিমিটিং আবার সেট করুন"</string>
@@ -3329,8 +3387,9 @@
     <string name="premium_sms_none" msgid="8268105565738040566">"ইনস্টল করা কোনো অ্যাপ্লিকেশানই প্রিমিয়াম SMS অ্যাক্সেসের অনুরোধ করেনি"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"প্রিমিয়াম SMS এর জন্য অর্থ খরচ হতে পারে এবং আপনার পরিষেবা প্রদানকারীর বিলে যোগ করা হবে৷ আপনি যদি কোনো অ্যাপ্লিকেশানের জন্য অনুমতি সক্ষম করেন তাহলে আপনি সেই অ্যাপ্লিকেশানটি ব্যবহার করে প্রিমিয়াম SMS পাঠাতে পারবেন৷"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"প্রিমিয়াম SMS অ্যাক্সেস"</string>
-    <!-- no translation found for bluetooth_disabled (2456198532288640046) -->
-    <skip />
+    <string name="bluetooth_disabled" msgid="2456198532288640046">"অন্য ডিভাইস থেকে দেখা যাচ্ছে না"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> এর সাথে সংযুক্ত আছে"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"একাধিক ডিভাইসের সাথে সংযুক্ত আছে"</string>
     <string name="demo_mode" msgid="2798762752209330277">"সিস্টেম UI ডেমো মোড"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"দ্রুত সেটিংস ডেভেলপার টাইলস"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"আপনাকে সাহায্য করতে আমরা প্রস্তুত"</string>
@@ -3406,8 +3465,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার ফোনটিকে হাতে তুলে নিন"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার ট্যাবলেটটিকে হাতে তুলে নিন"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার ডিভাইসটিকে হাতে তুলে নিন"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (5816346492253270243) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"বিজ্ঞপ্তির জন্য আঙ্গুলের ছাপ সোয়াইপ করুন"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ফোনের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ট্যাবলেটের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ডিভাইসের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
@@ -3421,19 +3479,20 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"ইন্টারনেটে সংযোগ করুন বা আপনার পরিষেবা প্রদানকারীর সাথে যোগাযোগ করুন"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"পরিষেবা প্রদানকারীর দ্বারা লক করা ডিভাইসগুলিতে অনুপলব্ধ"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"মোট <xliff:g id="SIZE">%1$s</xliff:g> উপলব্ধ করা হয়েছে\n\n<xliff:g id="DATE">%2$s</xliff:g> তারিখে শেষবার চালানো হয়েছে"</string>
-    <string name="web_action_enable_title" msgid="8502552575492048305">"অ্যাপ্সে লিঙ্কগুলি খুলুন"</string>
-    <string name="web_action_enable_summary" msgid="4679844581193646863">"সমর্থিত অ্যাপ্সে লিঙ্কগুলি খুলুন, এমনকি অ্যাপ্স যদি আপনার ডিভাইসে ইনস্টল না থাকে তাহলেও"</string>
-    <string name="web_action_section_title" msgid="806405168097593614">"অ্যাপ্স ইনস্টল করা হয়নি"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"ঝটপট অ্যাপগুলি"</string>
+    <string name="web_action_enable_summary" msgid="3108127559723396382">"অ্যাপ ইনস্টল করা না থাকলেও অ্যাপের মাধ্যমে লিঙ্ক খুলুন"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"ঝটপট অ্যাপগুলি"</string>
+    <string name="instant_apps_account" msgid="1433620209791992528">"ঝটপট অ্যাপগুলির অ্যাকাউন্ট"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"ইনস্টল করা অ্যাপ্স"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"আপনার সঞ্চয়স্থান এখন সঞ্চয়স্থান পরিচালকের দ্বারা পরিচালিত হচ্ছে"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> এর অ্যাকাউন্ট"</string>
     <string name="configure_section_header" msgid="7391183586410814450">"কনফিগার"</string>
-    <string name="auto_sync_account_title" msgid="7647106425106072285">"অ্যাকাউন্টের ডেটা স্বতঃসিঙ্ক"</string>
-    <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ব্যক্তিগত অ্যাকাউন্টের ডেটা স্বতঃসিঙ্ক"</string>
-    <string name="auto_sync_work_account_title" msgid="3073278154593727844">"কাজের অ্যাকাউন্টের ডেটা স্বতঃসিঙ্ক"</string>
+    <string name="auto_sync_account_title" msgid="898796354710116383">"ডেটা স্বয়ংক্রিয়ভাবে সিঙ্ক করুন"</string>
+    <string name="auto_sync_personal_account_title" msgid="8496263182646100610">"ব্যাক্তিগত ডেটা স্বয়ংক্রিয়ভাবে সিঙ্ক করুন"</string>
+    <string name="auto_sync_work_account_title" msgid="4489172450037434152">"কাজের ডেটা স্বয়ংক্রিয়ভাবে সিঙ্ক করুন"</string>
+    <string name="auto_sync_account_summary" msgid="692499211629185107">"অ্যাপকে স্বয়ংক্রিয়ভাবে ডেটা রিফ্রেশ করতে দিন"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"অ্যাকাউন্ট সিঙ্ক"</string>
-    <!-- no translation found for enterprise_privacy_settings (1177106810374146496) -->
-    <skip />
+    <string name="enterprise_privacy_settings" msgid="1177106810374146496">"পরিচালিত ডিভাইসের তথ্য"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"আপনার প্রতিষ্ঠান দ্বারা পরিচালিত পরিবর্তন এবং সেটিংগুলি"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> দ্বারা পরিচালিত পরিবর্তন এবং সেটিংগুলি"</string>
     <string name="enterprise_privacy_header" msgid="7402406406883832509">"আপনাকে আপনার কর্মস্থলের ডেটাতে অ্যাক্সেস দেওয়ার জন্য আপনার প্রতিষ্ঠান আপনার ডিভাইসের সেটিংস পরিবর্তন করতে এবং তাতে সফ্টওয়্যার ইনস্টল করতে পারে।\n\nবিশদ বিবরণের জন্য আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন।"</string>
@@ -3442,38 +3501,36 @@
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"এই ডিভাইসে আপনার অ্যাক্সেস"</string>
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"ইমেল এবং ক্যালেন্ডারের মতো আপনার কর্মক্ষেত্রের অ্যাকাউন্টের সাথে যুক্ত ডেটা"</string>
     <string name="enterprise_privacy_installed_packages" msgid="2313698828178764590">"আপনার ডিভাইসের অ্যাপের তালিকা"</string>
-    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="2765037387436064893">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ</item>
-    </plurals>
-    <plurals name="enterprise_privacy_number_packages_actionable" formatted="false" msgid="3351021029919034993">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ। দেখতে ট্যাপ করুন।</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ। দেখতে ট্যাপ করুন।</item>
-    </plurals>
-    <string name="enterprise_privacy_usage_stats" msgid="6257434796480671245">"আপনার ডিভাইসের প্রতিটি অ্যাপে খরচ হওয়া সময় এবং ডেটা"</string>
-    <string name="enterprise_privacy_network_logs" msgid="6594098950963377666">"আপনার ডিভাইসে নেটওয়ার্ক ট্রাফিকের লগ"</string>
+    <string name="enterprise_privacy_usage_stats" msgid="4398411405572759370">"প্রতিটি অ্যাপের জন্য ব্যবহার হওয়া সময় এবং ডেটার পরিমাণ"</string>
+    <string name="enterprise_privacy_network_logs" msgid="161722817268849590">"সাম্প্রতিকতম নেটওয়ার্ক ট্রাফিক লগ"</string>
     <string name="enterprise_privacy_bug_reports" msgid="843225086779037863">"সাম্প্রতিকতম ত্রুটির প্রতিবেদন"</string>
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"সাম্প্রতিকতম নিরাপত্তা লগ"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"কোনো কিছুই নয়"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"অ্যাপগুলি ইনস্টল করা আছে"</string>
-    <!-- no translation found for enterprise_privacy_location_access (4158197200885270634) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_microphone_access (5717375623568864441) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_camera_access (4858146118537519375) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_enterprise_set_default_apps (3288495615791128724) -->
-    <skip />
+    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7433213592572082606">"অ্যাপগুলির সংখ্যা অনুমান করা হয়। Play স্টোরের বাইরে থেকে ইনস্টল করা অ্যাপগুলি এখানে নাও থাকতে পারে।"</string>
+    <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="3005116533873542976">
+      <item quantity="one">কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ</item>
+      <item quantity="other">কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ</item>
+    </plurals>
+    <string name="enterprise_privacy_location_access" msgid="4158197200885270634">"অবস্থানের অনুমতি"</string>
+    <string name="enterprise_privacy_microphone_access" msgid="5717375623568864441">"মাইক্রোফোনের অনুমতি"</string>
+    <string name="enterprise_privacy_camera_access" msgid="4858146118537519375">"ক্যামেরার অনুমতি"</string>
+    <string name="enterprise_privacy_enterprise_set_default_apps" msgid="3288495615791128724">"ডিফল্ট অ্যাপগুলি"</string>
+    <plurals name="enterprise_privacy_number_packages" formatted="false" msgid="2765037387436064893">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপ</item>
+    </plurals>
     <string name="enterprise_privacy_input_method" msgid="6531350246850814920">"ডিফল্ট কিবোর্ড"</string>
     <string name="enterprise_privacy_input_method_name" msgid="4941106433683067953">"<xliff:g id="APP_LABEL">%s</xliff:g> এ সেট করুন"</string>
     <string name="enterprise_privacy_always_on_vpn_device" msgid="4409098287763221215">"সর্বদা-চালু VPN অন করা আছে"</string>
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"আপনার ব্যক্তিগত প্রোফাইলে সর্বদা-চালু VPN অন করা আছে"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"আপনার কর্মস্থলের প্রোফাইলে সর্বদা-চালু VPN অন করা আছে"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"বৈশ্বিক HTTP প্রক্সী সেট করা আছে"</string>
-    <!-- no translation found for enterprise_privacy_ca_certs (5885892204903688909) -->
-    <skip />
-    <!-- no translation found for enterprise_privacy_number_ca_certs (9073641163359459048) -->
-    <!-- no translation found for enterprise_privacy_number_ca_certs_actionable (5823294380629654635) -->
+    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"বিশ্বস্ত শংসাপত্রগুলি"</string>
+    <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
+      <item quantity="one">কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g>টি CA শংসাপত্র</item>
+      <item quantity="other">কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g>টি CA শংসাপত্র</item>
+    </plurals>
     <string name="enterprise_privacy_lock_device" msgid="8791656477097208540">"প্রশাসক ডিভাইসটি লক করতে ও পাসওয়ার্ড আবার সেট করতে পারেন"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"প্রশাসক ডিভাইসের সমস্ত ডেটা মুছে দিতে পারবেন"</string>
     <string name="enterprise_privacy_failed_password_wipe_device" msgid="1001255609345002878">"ডিভাইসের সমস্ত ডেটা মুছে যাওয়ার আগে পাসওয়ার্ড দেওয়ার সর্বাধিক সংখ্যা"</string>
@@ -3486,32 +3543,47 @@
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"এই ডিভাইসটি <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> দ্বারা পরিচালিত।"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"আরো জানুন"</string>
+    <plurals name="default_camera_app_title" formatted="false" msgid="1134677050353971363">
+      <item quantity="one">ক্যামেরা অ্যাপগুলি</item>
+      <item quantity="other">ক্যামেরা অ্যাপগুলি</item>
+    </plurals>
+    <string name="default_calendar_app_title" msgid="3545972964391065220">"ক্যালেন্ডার অ্যাপ"</string>
+    <string name="default_contacts_app_title" msgid="3497370557378660098">"পরিচিতি অ্যাপ"</string>
+    <plurals name="default_email_app_title" formatted="false" msgid="42826975161049245">
+      <item quantity="one">ইমেল ক্লায়েন্ট অ্যাপগুলি</item>
+      <item quantity="other">ইমেল ক্লায়েন্ট অ্যাপগুলি</item>
+    </plurals>
+    <string name="default_map_app_title" msgid="7560143381633608567">"মানচিত্র অ্যাপ"</string>
+    <plurals name="default_phone_app_title" formatted="false" msgid="6714041230953195024">
+      <item quantity="one">ফোন অ্যাপগুলি</item>
+      <item quantity="other">ফোন অ্যাপগুলি</item>
+    </plurals>
+    <string name="app_names_concatenation_template_2" msgid="4309216198909946380">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="app_names_concatenation_template_3" msgid="8949045544491604376">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_photos_videos" msgid="319854636702241898">"ফটো এবং ভিডিওগুলি"</string>
     <string name="storage_music_audio" msgid="789779084825206838">"গান এবং অডিও"</string>
     <string name="storage_games" msgid="7703159201697117621">"গেম্স"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"অন্যান্য অ্যাপ্লিকেশান"</string>
     <string name="storage_files" msgid="8581083146777364063">"ফাইল"</string>
-    <!-- no translation found for storage_settings_2 (1939009096334525216) -->
-    <skip />
-    <string name="storage_settings_2" product="default" msgid="4306047711760327031">"ফোনের সঞ্চয়স্থান"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
-    <!-- no translation found for storage_volume_total (3499221850532701342) -->
-    <skip />
-    <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g>%%"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"<xliff:g id="TOTAL">%1$s</xliff:g> এর মধ্যে ব্যবহার হয়েছে"</string>
+    <string name="storage_percent_full" msgid="6095012055875077036">"ব্যবহৃত"</string>
+    <string name="clear_instant_app_data" msgid="2004222610585890909">"অ্যাপের ডেটা সাফ করুন"</string>
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"আপনি কি এই ঝটপট অ্যাপটি সরাতে চান?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"গেম্স"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"অডিও ফাইলগুলি"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(ইউজার <xliff:g id="USER">%s</xliff:g> এর জন্য আনইনস্টল হয়েছে)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(ইউজার <xliff:g id="USER">%s</xliff:g> এর জন্য অক্ষম হয়েছে)"</string>
-    <!-- no translation found for autofill_app (7338387238377914374) -->
-    <skip />
+    <string name="autofill_app" msgid="7338387238377914374">"আপনাআপনি পূরণ করার পরিষেবা"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"স্বতঃ, পূরণ, স্বতঃপূরণ"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> কে আপনার স্বতঃপূরণ অ্যাপ করবেন? <xliff:g id="APP_NAME_1">%1$s</xliff:g> আপনার স্ক্রিন পড়তে ও অন্যান্য অ্যাপে বিভিন্ন ফিল্ডগুলি পূরণ করতে পারবে।"</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;নিশ্চিত করুন যে এই অ্যাপটি বিশ্বাসযোগ্য&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; কোনও তথ্য নিজে থেকে পূরণ করা যাবে কি না, তা নির্ণয় করতে &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; অ্যাপটি আপনার স্ক্রিনে যা দেখা যাচ্ছে সেই অনুযায়ী সিদ্ধান্ত নেয়।"</string>
     <string name="device_theme" msgid="4571803018917608588">"ডিভাইসের থিম"</string>
     <string name="default_theme" msgid="7085644992078579076">"ডিফল্ট"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"সঞ্চয়স্থান পরিচালক: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"বন্ধ আছে"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"চালু আছে"</string>
     <string name="install_type_instant" msgid="3174425974536078647">"ঝটপট অ্যাপ"</string>
-    <!-- no translation found for automatic_storage_manager_deactivation_warning (5605210730828410482) -->
-    <skip />
+    <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"সঞ্চয়স্থান পরিচালক বন্ধ করবেন?"</string>
+    <string name="storage_movies_tv" msgid="5498394447562086890">"সিনেমা এবং TV অ্যাপগুলি"</string>
+    <string name="app_info_storage_title" msgid="5554719444625611987">"সঞ্চয়স্থান ব্যবহার হয়েছে"</string>
 </resources>
