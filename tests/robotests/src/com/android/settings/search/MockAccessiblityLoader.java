@@ -14,14 +14,26 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi.tether;
+package com.android.settings.search;
 
-import android.net.ConnectivityManager;
+import android.content.Context;
 
-class NoOpOnStartTetheringCallback {
+import java.util.HashSet;
+import java.util.Set;
 
-    public static ConnectivityManager.OnStartTetheringCallback newInstance() {
-        return new ConnectivityManager.OnStartTetheringCallback() {
-        };
+public class MockAccessiblityLoader extends AccessibilityServiceResultLoader {
+
+    public MockAccessiblityLoader(Context context) {
+        super(context, "test_query", null);
+    }
+
+    @Override
+    public Set<? extends SearchResult> loadInBackground() {
+        return new HashSet<>();
+    }
+
+    @Override
+    protected void onDiscardResult(Set<? extends SearchResult> result) {
+
     }
 }

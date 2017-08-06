@@ -672,13 +672,6 @@
                 android:value="true" />
         </activity>
 
-        <receiver android:name=".inputmethod.InputMethodDialogReceiver"
-                android:enabled="true">
-            <intent-filter>
-                <action android:name="android.settings.SHOW_INPUT_METHOD_PICKER" />
-            </intent-filter>
-        </receiver>
-
         <activity android:name="Settings$UserDictionarySettingsActivity"
                 android:label="@string/user_dict_settings_title"
                 android:taskAffinity="com.android.settings"

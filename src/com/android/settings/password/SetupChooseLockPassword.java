@@ -84,13 +84,6 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-
-            if (mForFingerprint) {
-                mCancelButton.setVisibility(View.GONE);
-            } else {
-                mCancelButton.setText(R.string.skip_label);
-            }
-
             final Activity activity = getActivity();
             ChooseLockGenericController chooseLockGenericController =
                     new ChooseLockGenericController(activity, mUserId);
@@ -190,6 +183,12 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         protected void updateUi() {
             super.updateUi();
+            if (mForFingerprint) {
+                mCancelButton.setVisibility(View.GONE);
+            } else {
+                mCancelButton.setText(R.string.skip_label);
+            }
+
             if (mOptionsButton != null) {
                 mOptionsButton.setVisibility(
                         mUiStage == Stage.Introduction ? View.VISIBLE : View.GONE);
