@@ -166,7 +166,8 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s haluaa käyttää viestejäsi. Myönnetäänkö käyttöoikeus kohteeseen %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM-kortin käyttöoikeuspyyntö"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> haluaa käyttää SIM-korttiasi. SIM-kortin käyttöoikeuden myöntäminen poistaa laitteesi datayhteyden käytöstä yhteyden ajaksi. Myönnä käyttöoikeus laitteelle <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>?"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Muille laitteille näkyvä nimi on <xliff:g id="DEVICE_NAME">^1</xliff:g>."</string>
+    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Omat laitteet"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Muodosta laitepari uuden laitteen kanssa"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Päivämäärä ja aika"</string>
@@ -588,6 +589,8 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Nousevat, laskevat tai toistuvat numerosarjat on kielletty."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Peruuta"</string>
+    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
+    <skip />
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Peruuta"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Seuraava"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Asennus on valmis."</string>
@@ -817,10 +820,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS käytettävissä"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS käytettävissä)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Anna verkkosalasana"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"Operaattorin Wi‑Fi-verkko"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"Muodosta yhteys: <xliff:g id="NAME">%1%s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa parantaa sijainnin tarkkuutta ja suorittaa muita toimintoja ottamalla verkon etsinnän käyttöön, vaikka Wi-Fi-yhteys ei ole käytössä.\n\nAnnetaanko tämä lupa kaikille sovelluksille, jotka haluavat etsiä verkkoja?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Poista asetus käytöstä ylivuotovalikon lisäasetuksista."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Salli"</string>
@@ -943,7 +944,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kun Wi-Fi-puhelut on käytössä, puhelimesi voi ohjata puhelut Wi-Fi-verkkojen tai operaattorisi verkon kautta, riippuen asetuksistasi ja siitä, kummassa on voimakkaampi signaali. Ennen kuin otat tämän ominaisuuden käyttöön, tarkista maksut ja muut tiedot operaattoriltasi."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Päivitä hätäosoite"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Osoite, jota hätäpalvelut käyttävät sijaintinasi, jos soitat hätäpuhelun Wi-Fillä"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Hätäpalveluiden käyttämä osoite, kun soitat hätäpuhelun Wi-Fillä"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Näyttö"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Ääni"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Äänenvoimakkuudet"</string>
@@ -1340,21 +1341,15 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Nollataanko?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Tämä käyttäjä ei voi palauttaa verkon asetuksia."</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Verkkoasetuksesi on nollattu."</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"Poista kaikki tiedot (palauta tehdasasetukset)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> tilin asetukset palautetaan.</item>
-      <item quantity="one">1 tilin asetukset palautetaan.</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"Sisäinen tallennustila ja kaikki tiedot nollataan."</string>
+    <!-- no translation found for master_clear_title (3531267871084279512) -->
+    <skip />
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tämä poistaa kaikki tablet-laitteesi "<b>"sisäisen tallennustilan"</b>" tiedot, kuten:\n\n"<li>"Google-tilisi"</li>\n<li>"Järjestelmä- ja sovellustiedot ja -asetukset"</li>\n<li>"Ladatut sovellukset"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Tämä poistaa kaikki puhelimesi "<b>"sisäisen tallennustilan"</b>" tiedot, kuten:\n\n"<li>"Google-tilisi"</li>\n<li>"Järjestelmä- ja sovellustiedot ja -asetukset"</li>\n<li>"Ladatut sovellukset"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Olet kirjautunut sisään seuraaviin tileihin:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Tällä laitteella on muita paikalla olevia käyttäjiä.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musiikki"</li>\n<li>"Valokuvat"</li>\n<li>"Muut käyttäjän tiedot"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIMiä käyttävät operaattorit"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Tämä ei peruuta mobiilipalvelupakettiasi."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Jos haluat poistaa musiikin, kuvat ja muut käyttäjän tiedot, "<b>"USB-tallennustila"</b>" tulee tyhjentää."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Jos haluat poistaa musiikin, kuvat ja muut käyttäjän tiedot, "<b>"SD-kortti"</b>" tulee tyhjentää."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Tyhjennä USB-tallennustila"</string>
@@ -1811,8 +1806,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Näytönlukijat, näyttö, käytönhallinta"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Näköasetukset"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Voit muokata laitteen ominaisuuksia tarpeidesi mukaan. Käytettävyysvalintoja voi muuttaa myöhemmin asetuksissa."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Muuta kirjasinkokoa"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Näytönlukuohjelmat"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Ääni ja näyttöteksti"</string>
     <string name="display_category_title" msgid="685461049938269166">"Näyttö"</string>
@@ -3421,7 +3415,8 @@
     <string name="data_warning" msgid="209133958008062117">"Datavaroitus"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Aseta tiedonsiirtoraja"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datankäyttöraja"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> käytetty välillä <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <!-- no translation found for data_usage_template (2923744765873163859) -->
+    <skip />
     <string name="configure" msgid="1029654422228677273">"Määritä"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Muut datan käyttöön laskettavat sovellukset"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3490,8 +3485,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Poista ja salaa"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Nollaa ShortcutManagerin kutsurajoitus"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManagerin kutsurajoitus nollattiin."</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"Hallinnoi lukitusnäytön tietoja"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Näytä tai piilota ilmoituksien sisältö."</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Kaikki"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Tuki ja vinkit"</string>

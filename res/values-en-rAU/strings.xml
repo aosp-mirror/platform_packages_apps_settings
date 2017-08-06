@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s wants to access your messages. Give access to %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM access request"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"Visible as \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' to other devices"</string>
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Visible as “<xliff:g id="DEVICE_NAME">^1</xliff:g>” to other devices"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Your devices"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Pair new device"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Date &amp; time"</string>
@@ -588,6 +588,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Ascending, descending or repeated sequence of digits isn\'t allowed"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Cancel"</string>
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"Clear"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Cancel"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Next"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Set up is complete."</string>
@@ -817,10 +818,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS available"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS available)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Enter your network password"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"Operator Wi‑Fi network"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"Connect via <xliff:g id="NAME">%1%s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"To improve location accuracy and for other purposes, <xliff:g id="APP_NAME">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"To turn this off, go to Advanced in the overflow menu."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Allow"</string>
@@ -943,7 +942,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your operator\'s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your operator regarding fees and other details."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Update Emergency Address"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Address used by emergency services as your location if you make a 999 call using Wi-Fi"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Address used by emergency services as your location if you make an emergency call using Wi‑Fi"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Sound"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumes"</string>
@@ -1340,21 +1339,14 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Reset?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Network reset is not available for this user"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Network settings have been reset"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"Erase all data (factory reset)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> accounts will be reset</item>
-      <item quantity="one">1 account will be reset</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"Internal storage &amp; all data will be reset"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"Erase all data (factory reset)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"This will erase all data from your tablet\'s "<b>"internal storage"</b>", including:\n\n"<li>"Your Google account"</li>\n<li>"System and app data and settings"</li>\n<li>"Downloaded apps"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"This will erase all data from your phone\'s "<b>"internal storage"</b>", including:\n\n"<li>"Your Google account"</li>\n<li>"System and app data and settings"</li>\n<li>"Downloaded apps"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"You are currently signed in to the following accounts:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"There are other users present on this device.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Music"</li>\n<li>"Photos"</li>\n<li>"Other user data"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Operators on eSIM"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"This will not cancel your mobile service plan."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"To clear music, pictures and other user data, the "<b>"USB storage"</b>" needs to be erased."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"To clear music, pictures and other user data, the "<b>"SD card"</b>" needs to be erased."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Erase USB storage"</string>
@@ -1811,8 +1803,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Screen readers, display, interaction controls"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Vision settings"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"You can customise this device to fit your needs. These accessibility features can be changed later in Settings."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Change font size"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Screen readers"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio &amp; on-screen text"</string>
     <string name="display_category_title" msgid="685461049938269166">"Display"</string>
@@ -3421,7 +3412,7 @@
     <string name="data_warning" msgid="209133958008062117">"Data warning"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Set data limit"</string>
     <string name="data_limit" msgid="1885406964934590552">"Data limit"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> used between <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> used <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Configure"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Other apps included in usage"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3490,8 +3481,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Wipe and convert"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Reset ShortcutManager rate-limiting"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager rate-limiting has been reset"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"Control info on lock screen"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Show or hide notification content"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"All"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"Support &amp; tips"</string>
