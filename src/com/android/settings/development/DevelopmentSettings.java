@@ -153,29 +153,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
-    private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
-    private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
-    private static final String SELECT_LOGD_TAG_PROPERTY = "persist.log.tag";
-    // Tricky, isLoggable only checks for first character, assumes silence
-    private static final String SELECT_LOGD_TAG_SILENCE = "Settings";
-    private static final String SELECT_LOGD_SNET_TAG_PROPERTY = "persist.log.tag.snet_event_log";
-    private static final String SELECT_LOGD_RUNTIME_SNET_TAG_PROPERTY = "log.tag.snet_event_log";
-    private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
-    private static final String SELECT_LOGD_DEFAULT_SIZE_VALUE = "262144";
-    private static final String SELECT_LOGD_SVELTE_DEFAULT_SIZE_VALUE = "65536";
-    // 32768 is merely a menu marker, 64K is our lowest log buffer size we replace it with.
-    private static final String SELECT_LOGD_MINIMUM_SIZE_VALUE = "65536";
-    private static final String SELECT_LOGD_OFF_SIZE_MARKER_VALUE = "32768";
-    private static final String SELECT_LOGPERSIST_KEY = "select_logpersist";
-    private static final String SELECT_LOGPERSIST_PROPERTY = "persist.logd.logpersistd";
-    private static final String ACTUAL_LOGPERSIST_PROPERTY = "logd.logpersistd";
-    private static final String SELECT_LOGPERSIST_PROPERTY_SERVICE = "logcatd";
-    private static final String SELECT_LOGPERSIST_PROPERTY_CLEAR = "clear";
-    private static final String SELECT_LOGPERSIST_PROPERTY_STOP = "stop";
-    private static final String SELECT_LOGPERSIST_PROPERTY_BUFFER =
-            "persist.logd.logpersistd.buffer";
-    private static final String ACTUAL_LOGPERSIST_PROPERTY_BUFFER = "logd.logpersistd.buffer";
-    private static final String ACTUAL_LOGPERSIST_PROPERTY_ENABLE = "logd.logpersistd.enable";
 
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
@@ -295,8 +272,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mForceRtlLayout;
     private ListPreference mDebugHwOverdraw;
     private ListPreference mDebugHwRenderer;
-    private ListPreference mLogdSize;
-    private ListPreference mLogpersist;
+    private LogdSizePreferenceController mLogdSizeController;
+    private LogpersistPreferenceController mLogpersistController;
     private ListPreference mUsbConfiguration;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
@@ -336,8 +313,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
 
-    private boolean mLogpersistCleared;
-    private Dialog mLogpersistClearDialog;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevelopmentSwitchBarController mSwitchBarController;
     private BugReportPreferenceController mBugReportController;
@@ -381,6 +356,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugReportController = new BugReportPreferenceController(getActivity());
         mBugReportInPowerController = new BugReportInPowerPreferenceController(getActivity());
         mTelephonyMonitorController = new TelephonyMonitorPreferenceController(getActivity());
+        mLogdSizeController = new LogdSizePreferenceController(getActivity());
+        mLogpersistController = new LogpersistPreferenceController(getActivity(), getLifecycle());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
         mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
         mCameraHalHdrplusController = new CameraHalHdrplusPreferenceController(getActivity());
@@ -395,6 +372,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         addPreferencesFromResource(R.xml.development_prefs);
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
@@ -412,12 +390,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnableTerminal = null;
         }
 
-        mBugReportController.displayPreference(getPreferenceScreen());
-        mBugReportInPowerController.displayPreference(getPreferenceScreen());
-        mTelephonyMonitorController.displayPreference(getPreferenceScreen());
-        mWebViewAppPrefController.displayPreference(getPreferenceScreen());
-        mCameraHalHdrplusController.displayPreference(getPreferenceScreen());
-        mEnableAdbController.displayPreference(getPreferenceScreen());
+        mBugReportController.displayPreference(preferenceScreen);
+        mBugReportInPowerController.displayPreference(preferenceScreen);
+        mTelephonyMonitorController.displayPreference(preferenceScreen);
+        mLogdSizeController.displayPreference(preferenceScreen);
+        mLogpersistController.displayPreference(preferenceScreen);
+        mWebViewAppPrefController.displayPreference(preferenceScreen);
+        mCameraHalHdrplusController.displayPreference(preferenceScreen);
+        mEnableAdbController.displayPreference(preferenceScreen);
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -445,7 +425,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mMockLocationAppPref = findPreference(MOCK_LOCATION_APP_KEY);
         mAllPrefs.add(mMockLocationAppPref);
 
-        mVerifyAppsOverUsbController.displayPreference(getPreferenceScreen());
+        mVerifyAppsOverUsbController.displayPreference(preferenceScreen);
 
         mStrictMode = findAndInitSwitchPref(STRICT_MODE_KEY);
         mPointerLocation = findAndInitSwitchPref(POINTER_LOCATION_KEY);
@@ -468,19 +448,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWifiAllowScansWithTraffic = findAndInitSwitchPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
         mTetheringHardwareOffload = findAndInitSwitchPref(TETHERING_HARDWARE_OFFLOAD);
-        mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
-        if ("1".equals(SystemProperties.get("ro.debuggable", "0"))) {
-            mLogpersist = addListPreference(SELECT_LOGPERSIST_KEY);
-        } else {
-            mLogpersist = (ListPreference) findPreference(SELECT_LOGPERSIST_KEY);
-            if (mLogpersist != null) {
-                mLogpersist.setEnabled(false);
-                if (debugDebuggingCategory != null) {
-                    debugDebuggingCategory.removePreference(mLogpersist);
-                }
-            }
-            mLogpersist = null;
-        }
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
         mBluetoothEnableInbandRinging = findAndInitSwitchPref(BLUETOOTH_ENABLE_INBAND_RINGING_KEY);
@@ -634,6 +601,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mEnableAdbController.enablePreference(enabled);
         mBugReportInPowerController.enablePreference(enabled);
         mTelephonyMonitorController.enablePreference(enabled);
+        mLogdSizeController.enablePreference(enabled);
+        mLogpersistController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
         mCameraHalHdrplusController.enablePreference(enabled);
         updateAllOptions();
@@ -806,8 +775,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateOtaDisableAutomaticUpdateOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
-        updateLogdSizeValues();
-        updateLogpersistValues();
+        mLogdSizeController.updateLogdSizeValues();
+        mLogpersistController.updateLogpersistValues();
         updateWifiDisplayCertificationOptions();
         updateWifiVerboseLoggingOptions();
         updateWifiAggressiveHandoverOptions();
@@ -840,8 +809,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugReportInPowerController.resetPreference();
         mEnableAdbController.resetPreference();
         resetDebuggerOptions();
-        writeLogpersistOption(null, true);
-        writeLogdSizeOption(null);
+        mLogpersistController.writeLogpersistOption(null, true);
+        mLogdSizeController.writeLogdSizeOption(null);
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -1499,231 +1468,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getActivity().getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED,
                 mTetheringHardwareOffload.isChecked() ? 0 : 1);
-    }
-
-    private String defaultLogdSizeValue() {
-        String defaultValue = SystemProperties.get(SELECT_LOGD_DEFAULT_SIZE_PROPERTY);
-        if ((defaultValue == null) || (defaultValue.length() == 0)) {
-            if (SystemProperties.get("ro.config.low_ram").equals("true")) {
-                defaultValue = SELECT_LOGD_SVELTE_DEFAULT_SIZE_VALUE;
-            } else {
-                defaultValue = SELECT_LOGD_DEFAULT_SIZE_VALUE;
-            }
-        }
-        return defaultValue;
-    }
-
-    private void updateLogdSizeValues() {
-        if (mLogdSize != null) {
-            String currentTag = SystemProperties.get(SELECT_LOGD_TAG_PROPERTY);
-            String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
-            if ((currentTag != null) && currentTag.startsWith(SELECT_LOGD_TAG_SILENCE)) {
-                currentValue = SELECT_LOGD_OFF_SIZE_MARKER_VALUE;
-            }
-            if (mLogpersist != null) {
-                String currentLogpersistEnable
-                        = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_ENABLE);
-                if ((currentLogpersistEnable == null)
-                        || !currentLogpersistEnable.equals("true")
-                        || currentValue.equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE)) {
-                    writeLogpersistOption(null, true);
-                    mLogpersist.setEnabled(false);
-                } else if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
-                    mLogpersist.setEnabled(true);
-                }
-            }
-            if ((currentValue == null) || (currentValue.length() == 0)) {
-                currentValue = defaultLogdSizeValue();
-            }
-            String[] values = getResources().getStringArray(R.array.select_logd_size_values);
-            String[] titles = getResources().getStringArray(R.array.select_logd_size_titles);
-            int index = 2; // punt to second entry if not found
-            if (SystemProperties.get("ro.config.low_ram").equals("true")) {
-                mLogdSize.setEntries(R.array.select_logd_size_lowram_titles);
-                titles = getResources().getStringArray(R.array.select_logd_size_lowram_titles);
-                index = 1;
-            }
-            String[] summaries = getResources().getStringArray(R.array.select_logd_size_summaries);
-            for (int i = 0; i < titles.length; i++) {
-                if (currentValue.equals(values[i])
-                        || currentValue.equals(titles[i])) {
-                    index = i;
-                    break;
-                }
-            }
-            mLogdSize.setValue(values[index]);
-            mLogdSize.setSummary(summaries[index]);
-            mLogdSize.setOnPreferenceChangeListener(this);
-        }
-    }
-
-    private void writeLogdSizeOption(Object newValue) {
-        boolean disable = (newValue != null) &&
-                (newValue.toString().equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE));
-        String currentTag = SystemProperties.get(SELECT_LOGD_TAG_PROPERTY);
-        if (currentTag == null) {
-            currentTag = "";
-        }
-        // filter clean and unstack all references to our setting
-        String newTag = currentTag.replaceAll(
-                ",+" + SELECT_LOGD_TAG_SILENCE, "").replaceFirst(
-                "^" + SELECT_LOGD_TAG_SILENCE + ",*", "").replaceAll(
-                ",+", ",").replaceFirst(
-                ",+$", "");
-        if (disable) {
-            newValue = SELECT_LOGD_MINIMUM_SIZE_VALUE;
-            // Make sure snet_event_log get through first, but do not override
-            String snetValue = SystemProperties.get(SELECT_LOGD_SNET_TAG_PROPERTY);
-            if ((snetValue == null) || (snetValue.length() == 0)) {
-                snetValue = SystemProperties.get(SELECT_LOGD_RUNTIME_SNET_TAG_PROPERTY);
-                if ((snetValue == null) || (snetValue.length() == 0)) {
-                    SystemProperties.set(SELECT_LOGD_SNET_TAG_PROPERTY, "I");
-                }
-            }
-            // Silence all log sources, security logs notwithstanding
-            if (newTag.length() != 0) {
-                newTag = "," + newTag;
-            }
-            // Stack settings, stack to help preserve original value
-            newTag = SELECT_LOGD_TAG_SILENCE + newTag;
-        }
-        if (!newTag.equals(currentTag)) {
-            SystemProperties.set(SELECT_LOGD_TAG_PROPERTY, newTag);
-        }
-        String defaultValue = defaultLogdSizeValue();
-        final String size = ((newValue != null) && (newValue.toString().length() != 0)) ?
-                newValue.toString() : defaultValue;
-        SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, defaultValue.equals(size) ? "" : size);
-        SystemProperties.set("ctl.start", "logd-reinit");
-        SystemPropPoker.getInstance().poke();
-        updateLogdSizeValues();
-    }
-
-    private void updateLogpersistValues() {
-        if (mLogpersist == null) {
-            return;
-        }
-        String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
-        if (currentValue == null) {
-            currentValue = "";
-        }
-        String currentBuffers = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_BUFFER);
-        if ((currentBuffers == null) || (currentBuffers.length() == 0)) {
-            currentBuffers = "all";
-        }
-        int index = 0;
-        if (currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
-            index = 1;
-            if (currentBuffers.equals("kernel")) {
-                index = 3;
-            } else if (!currentBuffers.equals("all") &&
-                    !currentBuffers.contains("radio") &&
-                    currentBuffers.contains("security") &&
-                    currentBuffers.contains("kernel")) {
-                index = 2;
-                if (!currentBuffers.contains("default")) {
-                    String[] contains = {"main", "events", "system", "crash"};
-                    for (int i = 0; i < contains.length; i++) {
-                        if (!currentBuffers.contains(contains[i])) {
-                            index = 1;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        mLogpersist.setValue(
-                getResources().getStringArray(R.array.select_logpersist_values)[index]);
-        mLogpersist.setSummary(
-                getResources().getStringArray(R.array.select_logpersist_summaries)[index]);
-        mLogpersist.setOnPreferenceChangeListener(this);
-        if (index != 0) {
-            mLogpersistCleared = false;
-        } else if (!mLogpersistCleared) {
-            // would File.delete() directly but need to switch uid/gid to access
-            SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_CLEAR);
-            SystemPropPoker.getInstance().poke();
-            mLogpersistCleared = true;
-        }
-    }
-
-    private void setLogpersistOff(boolean update) {
-        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, "");
-        // deal with trampoline of empty properties
-        SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY_BUFFER, "");
-        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, "");
-        SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY,
-                update ? "" : SELECT_LOGPERSIST_PROPERTY_STOP);
-        SystemPropPoker.getInstance().poke();
-        if (update) {
-            updateLogpersistValues();
-        } else {
-            for (int i = 0; i < 3; i++) {
-                String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
-                if ((currentValue == null) || currentValue.equals("")) {
-                    break;
-                }
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                }
-            }
-        }
-    }
-
-    private void writeLogpersistOption(Object newValue, boolean skipWarning) {
-        if (mLogpersist == null) {
-            return;
-        }
-        String currentTag = SystemProperties.get(SELECT_LOGD_TAG_PROPERTY);
-        if ((currentTag != null) && currentTag.startsWith(SELECT_LOGD_TAG_SILENCE)) {
-            newValue = null;
-            skipWarning = true;
-        }
-
-        if ((newValue == null) || newValue.toString().equals("")) {
-            if (skipWarning) {
-                mLogpersistCleared = false;
-            } else if (!mLogpersistCleared) {
-                // if transitioning from on to off, pop up an are you sure?
-                String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
-                if ((currentValue != null) &&
-                        currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
-                    if (mLogpersistClearDialog != null) dismissDialogs();
-                    mLogpersistClearDialog = new AlertDialog.Builder(getActivity()).setMessage(
-                            getActivity().getResources().getString(
-                                    R.string.dev_logpersist_clear_warning_message))
-                            .setTitle(R.string.dev_logpersist_clear_warning_title)
-                            .setPositiveButton(android.R.string.yes, this)
-                            .setNegativeButton(android.R.string.no, this)
-                            .show();
-                    mLogpersistClearDialog.setOnDismissListener(this);
-                    return;
-                }
-            }
-            setLogpersistOff(true);
-            return;
-        }
-
-        String currentBuffer = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_BUFFER);
-        if ((currentBuffer != null) && !currentBuffer.equals(newValue.toString())) {
-            setLogpersistOff(false);
-        }
-        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, newValue.toString());
-        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_SERVICE);
-        SystemPropPoker.getInstance().poke();
-        for (int i = 0; i < 3; i++) {
-            String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
-            if ((currentValue != null)
-                    && currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
-                break;
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
-        }
-        updateLogpersistValues();
     }
 
     private void updateUsbConfigurationValues() {
@@ -2553,12 +2297,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                    (preference == mBluetoothSelectA2dpLdacPlaybackQuality)) {
             writeBluetoothConfigurationOption(preference, newValue);
             return true;
-        } else if (preference == mLogdSize) {
-            writeLogdSizeOption(newValue);
-            return true;
-        } else if (preference == mLogpersist) {
-            writeLogpersistOption(newValue, false);
-            return true;
         } else if (preference == mUsbConfiguration) {
             writeUsbConfigurationOption(newValue);
             return true;
@@ -2606,10 +2344,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnableDialog.dismiss();
             mEnableDialog = null;
         }
-        if (mLogpersistClearDialog != null) {
-            mLogpersistClearDialog.dismiss();
-            mLogpersistClearDialog = null;
-        }
+        mLogpersistController.dismissDialogs();
     }
 
     public void onClick(DialogInterface dialog, int which) {
@@ -2632,12 +2367,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 // Reset the toggle
                 mSwitchBar.setChecked(false);
             }
-        } else if (dialog == mLogpersistClearDialog) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                setLogpersistOff(true);
-            } else {
-                updateLogpersistValues();
-            }
         }
     }
 
@@ -2648,8 +2377,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mSwitchBar.setChecked(false);
             }
             mEnableDialog = null;
-        } else if (dialog == mLogpersistClearDialog) {
-            mLogpersistClearDialog = null;
         }
     }
 
