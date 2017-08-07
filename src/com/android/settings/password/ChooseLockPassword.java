@@ -228,19 +228,20 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final int MIN_NON_LETTER_IN_PASSWORD = 5;
 
         // Error code returned from {@link #validatePassword(String)}.
-        private static final int NO_ERROR = 0;
-        private static final int CONTAIN_INVALID_CHARACTERS = 1 << 0;
-        private static final int TOO_SHORT = 1 << 1;
-        private static final int TOO_LONG = 1 << 2;
-        private static final int CONTAIN_NON_DIGITS = 1 << 3;
-        private static final int CONTAIN_SEQUENTIAL_DIGITS = 1 << 4;
-        private static final int RECENTLY_USED = 1 << 5;
-        private static final int NOT_ENOUGH_LETTER = 1 << 6;
-        private static final int NOT_ENOUGH_UPPER_CASE = 1 << 7;
-        private static final int NOT_ENOUGH_LOWER_CASE = 1 << 8;
-        private static final int NOT_ENOUGH_DIGITS = 1 << 9;
-        private static final int NOT_ENOUGH_SYMBOLS = 1 << 10;
-        private static final int NOT_ENOUGH_NON_LETTER = 1 << 11;
+        static final int NO_ERROR = 0;
+        static final int CONTAIN_INVALID_CHARACTERS = 1 << 0;
+        static final int TOO_SHORT = 1 << 1;
+        static final int TOO_LONG = 1 << 2;
+        static final int CONTAIN_NON_DIGITS = 1 << 3;
+        static final int CONTAIN_SEQUENTIAL_DIGITS = 1 << 4;
+        static final int RECENTLY_USED = 1 << 5;
+        static final int NOT_ENOUGH_LETTER = 1 << 6;
+        static final int NOT_ENOUGH_UPPER_CASE = 1 << 7;
+        static final int NOT_ENOUGH_LOWER_CASE = 1 << 8;
+        static final int NOT_ENOUGH_DIGITS = 1 << 9;
+        static final int NOT_ENOUGH_SYMBOLS = 1 << 10;
+        static final int NOT_ENOUGH_NON_LETTER = 1 << 11;
+        static final int BLACKLISTED = 1 << 12;
 
         /**
          * Keep track internally of where the user is in choosing a pattern.
@@ -720,6 +721,17 @@ public class ChooseLockPassword extends SettingsActivity {
                         break;
                 }
             }
+
+            // Only check the blacklist if the password is otherwise valid. Checking the blacklist
+            // can be expensive and it is not useful to report the fact it is on a blacklist if it
+            // couldn't be set anyway.
+            if (errorCode == NO_ERROR) {
+                if (mLockPatternUtils.getDevicePolicyManager()
+                        .isPasswordBlacklisted(mUserId, password)) {
+                    errorCode |= BLACKLISTED;
+                }
+            }
+
             return errorCode;
         }
 
@@ -787,7 +799,7 @@ public class ChooseLockPassword extends SettingsActivity {
          * @param errorCode error code returned from {@link #validatePassword(String)}.
          * @return an array of messages describing the error, important messages come first.
          */
-        private String[] convertErrorCodeToMessages(int errorCode) {
+        String[] convertErrorCodeToMessages(int errorCode) {
             List<String> messages = new ArrayList<>();
             if ((errorCode & CONTAIN_INVALID_CHARACTERS) > 0) {
                 messages.add(getString(R.string.lockpassword_illegal_character));
@@ -841,6 +853,11 @@ public class ChooseLockPassword extends SettingsActivity {
             if ((errorCode & RECENTLY_USED) > 0) {
                 messages.add(getString((mIsAlphaMode) ? R.string.lockpassword_password_recently_used
                         : R.string.lockpassword_pin_recently_used));
+            }
+            if ((errorCode & BLACKLISTED) > 0) {
+                messages.add(getString((mIsAlphaMode)
+                        ? R.string.lockpassword_password_blacklisted_by_admin
+                        : R.string.lockpassword_pin_blacklisted_by_admin));
             }
             return messages.toArray(new String[0]);
         }
