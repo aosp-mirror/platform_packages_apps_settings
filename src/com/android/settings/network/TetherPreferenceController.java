@@ -88,8 +88,7 @@ public class TetherPreferenceController extends PreferenceController
     public TetherPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
         mBluetoothPan = new AtomicReference<>();
-        mAdminDisallowedTetherConfig = checkIfRestrictionEnforced(
-                context, DISALLOW_CONFIG_TETHERING, UserHandle.myUserId()) != null;
+        mAdminDisallowedTetherConfig = isTetherConfigDisallowed(context);
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -168,6 +167,11 @@ public class TetherPreferenceController extends PreferenceController
         if (profile != null && mBluetoothAdapter != null) {
             mBluetoothAdapter.closeProfileProxy(BluetoothProfile.PAN, profile);
         }
+    }
+
+    public static boolean isTetherConfigDisallowed(Context context) {
+        return checkIfRestrictionEnforced(
+                context, DISALLOW_CONFIG_TETHERING, UserHandle.myUserId()) != null;
     }
 
     @VisibleForTesting
