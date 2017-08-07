@@ -851,7 +851,7 @@ public class WifiConfigController implements TextWatcher,
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
 
-            if (mAccessPoint.isCarrierAp()) {
+            if (mAccessPoint != null && mAccessPoint.isCarrierAp()) {
                 mEapMethodSpinner.setSelection(mAccessPoint.getCarrierApEapType());
             }
 
