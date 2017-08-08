@@ -369,6 +369,16 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
+    public void testStartBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName() throws
+            PackageManager.NameNotFoundException{
+        doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, PACKAGE_NAME[0]);
+
+        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
+    }
+
+    @Test
     public void testStartBatteryDetailPage_defaultPackageNull_chooseFromBatterySipper() {
         mBatteryEntry.defaultPackageName = null;
         mBatteryEntry.sipper.mPackages = PACKAGE_NAME;
