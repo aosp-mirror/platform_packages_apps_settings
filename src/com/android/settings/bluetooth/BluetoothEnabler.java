@@ -210,12 +210,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
      */
     @VisibleForTesting
     boolean maybeEnforceRestrictions() {
-        EnforcedAdmin admin = mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_BLUETOOTH);
-        if (admin == null) {
-            admin = mRestrictionUtils.checkIfRestrictionEnforced(
-                    mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH);
-        }
+        EnforcedAdmin admin = getEnforcedAdmin(mRestrictionUtils, mContext);
         mSwitchWidget.setDisabledByAdmin(admin);
         if (admin != null) {
             mSwitchWidget.setChecked(false);
@@ -225,6 +220,17 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             }
         }
         return admin != null;
+    }
+
+    public static EnforcedAdmin getEnforcedAdmin(RestrictionUtils mRestrictionUtils,
+            Context mContext) {
+        EnforcedAdmin admin = mRestrictionUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH);
+        if (admin == null) {
+            admin = mRestrictionUtils.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH);
+        }
+        return admin;
     }
 
 }
