@@ -35,8 +35,10 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -108,6 +110,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected NotificationBackend.AppRow mAppRow;
     protected boolean mShowLegacyChannelConfig = false;
 
+    protected boolean mListeningToPackageRemove;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -159,6 +163,13 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
 
         mUserId = UserHandle.getUserId(mUid);
+        startListeningToPackageRemove();
+    }
+
+    @Override
+    public void onDestroy() {
+        stopListeningToPackageRemove();
+        super.onDestroy();
     }
 
     @Override
@@ -456,4 +467,38 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         return channel.isBlockableSystem()
                 || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
     }
+
+    protected void startListeningToPackageRemove() {
+        if (mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = true;
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageRemovedReceiver, filter);
+    }
+
+    protected void stopListeningToPackageRemove() {
+        if (!mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = false;
+        getContext().unregisterReceiver(mPackageRemovedReceiver);
+    }
+
+    protected void onPackageRemoved() {
+        getActivity().finishAndRemoveTask();
+    }
+
+    protected final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String packageName = intent.getData().getSchemeSpecificPart();
+            if (mPkgInfo == null || TextUtils.equals(mPkgInfo.packageName, packageName)) {
+                if (DEBUG) Log.d(TAG, "Package (" + packageName + ") removed. Removing"
+                        + "NotificationSettingsBase.");
+                onPackageRemoved();
+            }
+        }
+    };
 }
