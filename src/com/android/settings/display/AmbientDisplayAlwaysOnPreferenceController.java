@@ -35,7 +35,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends PreferenceContro
     private final int ON = 1;
     private final int OFF = 0;
 
-    private static final String KEY_ALWAYS_ON = "ambient_display_always_on";
+    public static final String KEY_ALWAYS_ON = "ambient_display_always_on";
     private static final int MY_USER = UserHandle.myUserId();
 
     private final AmbientDisplayConfiguration mConfig;
@@ -59,7 +59,11 @@ public class AmbientDisplayAlwaysOnPreferenceController extends PreferenceContro
 
     @Override
     public void updateState(Preference preference) {
-        ((SwitchPreference) preference).setChecked(mConfig.alwaysOnEnabled(MY_USER));
+        ((SwitchPreference) preference).setChecked(isAlwaysOnEnabled(mConfig));
+    }
+
+    public static boolean isAlwaysOnEnabled(AmbientDisplayConfiguration config) {
+        return config.alwaysOnEnabled(MY_USER);
     }
 
     @Override
@@ -75,7 +79,15 @@ public class AmbientDisplayAlwaysOnPreferenceController extends PreferenceContro
 
     @Override
     public boolean isAvailable() {
-        return mConfig.alwaysOnAvailableForUser(MY_USER);
+        return isAvailable(mConfig);
+    }
+
+    public static boolean isAvailable(AmbientDisplayConfiguration config) {
+        return config.alwaysOnAvailableForUser(MY_USER);
+    }
+
+    public static boolean accessibilityInversionEnabled(AmbientDisplayConfiguration config) {
+        return config.accessibilityInversionEnabled(MY_USER);
     }
 
     @Override
