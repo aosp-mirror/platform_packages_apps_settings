@@ -17,8 +17,17 @@
 package com.android.settings.dashboard.suggestions;
 
 
-import android.app.ActivityManager;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -58,18 +67,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
@@ -337,7 +334,7 @@ public class SuggestionFeatureProviderImplTest {
 
     @Test
     public void dismissSuggestion_hasMoreDismissCount_shouldNotDisableComponent() {
-        when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
+        when(mSuggestionParser.dismissSuggestion(any(Tile.class)))
                 .thenReturn(false);
         mProvider.dismissSuggestion(mContext, mSuggestionParser, mSuggestion);
 
@@ -349,25 +346,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void dismissSuggestion_isShowingFirstImpressionType_dismissWithoutSmartSuggestionRule() {
-        mProvider = spy(mProvider);
-        when(mProvider.isSmartSuggestionEnabled(any(Context.class))).thenReturn(true);
-        final SharedPreferences pref = RuntimeEnvironment.application.getSharedPreferences(
-                "test_pref", Context.MODE_PRIVATE);
-        when(mProvider.getSharedPrefs(mContext)).thenReturn(pref);
-        when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
-                .thenReturn(false);
-
-        mProvider.dismissSuggestion(mContext, mSuggestionParser, mSuggestion);
-
-        verify(mFactory.metricsFeatureProvider).action(
-                eq(mContext),
-                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
-        verify(mSuggestionParser).dismissSuggestion(any(Tile.class), eq(false));
-    }
-
-    @Test
     public void dismissSuggestion_noContext_shouldDoNothing() {
         mProvider.dismissSuggestion(null, mSuggestionParser, mSuggestion);
 
@@ -376,7 +354,7 @@ public class SuggestionFeatureProviderImplTest {
 
     @Test
     public void dismissSuggestion_hasNoMoreDismissCount_shouldDisableComponent() {
-        when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
+        when(mSuggestionParser.dismissSuggestion(any(Tile.class)))
                 .thenReturn(true);
 
         mProvider.dismissSuggestion(mContext, mSuggestionParser, mSuggestion);
