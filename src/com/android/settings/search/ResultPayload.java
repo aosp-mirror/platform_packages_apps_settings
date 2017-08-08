@@ -70,7 +70,8 @@ public class ResultPayload implements Parcelable {
             Availability.DISABLED_DEPENDENT_APP,
             Availability.DISABLED_UNSUPPORTED,
             Availability.RESOURCE_CONTENTION,
-            Availability.INTENT_ONLY,})
+            Availability.INTENT_ONLY,
+            Availability.DISABLED_FOR_USER,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Availability {
         /**
@@ -96,7 +97,7 @@ public class ResultPayload implements Parcelable {
         int RESOURCE_CONTENTION = 3;
 
         /**
-         * The setting is disabled because corresponding app is disabled
+         * The setting is disabled because corresponding app is disabled.
          */
         int DISABLED_DEPENDENT_APP = 4;
 
@@ -104,6 +105,12 @@ public class ResultPayload implements Parcelable {
          * This setting is supported on the device but cannot be changed inline.
          */
         int INTENT_ONLY = 5;
+
+        /**
+         * The setting cannot be changed by the current user.
+         * ex: MobileNetworkTakeMeThereSetting should not be available to a secondary user.
+         */
+        int DISABLED_FOR_USER = 6;
     }
 
     @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
