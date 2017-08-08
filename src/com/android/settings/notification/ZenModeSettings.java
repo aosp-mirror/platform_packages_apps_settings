@@ -136,7 +136,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             }
         }
         final Preference p = new Preference(getPrefContext());
-        p.setIcon(R.drawable.ic_add);
+        p.setIcon(R.drawable.ic_menu_add);
         p.setTitle(R.string.zen_mode_add_rule);
         p.setPersistent(false);
         p.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
