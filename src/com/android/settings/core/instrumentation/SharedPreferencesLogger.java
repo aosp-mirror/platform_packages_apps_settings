@@ -120,19 +120,29 @@ public class SharedPreferencesLogger implements SharedPreferences {
 
         final Pair<Integer, Object> valueData;
         if (value instanceof Long) {
-            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE,
-                    value);
+            final Long longVal = (Long) value;
+            final int intVal;
+            if (longVal > Integer.MAX_VALUE) {
+                intVal = Integer.MAX_VALUE;
+            } else if (longVal < Integer.MIN_VALUE) {
+                intVal = Integer.MIN_VALUE;
+            } else {
+                intVal = longVal.intValue();
+            }
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE,
+                    intVal);
         } else if (value instanceof Integer) {
-            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE,
-                    ((Integer) value).longValue());
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE,
+                    value);
         } else if (value instanceof Boolean) {
-            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE,
-                    (Boolean) value ? 1L : 0L);
+            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE,
+                    (Boolean) value ? 1 : 0);
         } else if (value instanceof Float) {
             valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE,
                     value);
         } else if (value instanceof String) {
-            valueData = Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_VALUE, value);
+            Log.d(LOG_TAG, "Tried to log string preference " + prefKey + " = " + value);
+            valueData = null;
         } else {
             Log.w(LOG_TAG, "Tried to log unloggable object" + value);
             valueData = null;
