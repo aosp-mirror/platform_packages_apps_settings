@@ -18,6 +18,7 @@ import android.content.Context;
 import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.util.SparseIntArray;
 
@@ -38,7 +39,7 @@ public class DataSaverBackend {
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private final Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final NetworkPolicyManager mPolicyManager;
     private final ArrayList<Listener> mListeners = new ArrayList<>();
     private SparseIntArray mUidPolicies = new SparseIntArray();
@@ -194,12 +195,7 @@ public class DataSaverBackend {
 
         @Override
         public void onUidPoliciesChanged(final int uid, final int uidPolicies) {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    handleUidPoliciesChanged(uid, uidPolicies);
-                }
-            });
+            mHandler.post(() -> handleUidPoliciesChanged(uid, uidPolicies));
         }
 
         @Override
@@ -208,12 +204,7 @@ public class DataSaverBackend {
 
         @Override
         public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    handleRestrictBackgroundChanged(isDataSaving);
-                }
-            });
+            mHandler.post(() -> handleRestrictBackgroundChanged(isDataSaving));
         }
     };
 
