@@ -19,8 +19,9 @@ package com.android.settings.development;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
+import android.support.annotation.Nullable;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -37,33 +38,43 @@ public class EnableAdbPreferenceController extends AbstractEnableAdbPreferenceCo
     }
 
     @Override
-    public void showConfirmationDialog(SwitchPreference preference) {
+    public void showConfirmationDialog(@Nullable Preference preference) {
+        if (preference == null) {
+            return;
+        }
+        final TwoStatePreference twoStatePreference = (TwoStatePreference) preference;
         mDialogClicked = false;
-        dismissDialogs();
+        dismissConfirmationDialog();
         mAdbDialog = new AlertDialog.Builder(mContext).setMessage(
                 mContext.getString(R.string.adb_warning_message))
                 .setTitle(R.string.adb_warning_title)
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                     mDialogClicked = true;
                     writeAdbSetting(true);
+                    twoStatePreference.setChecked(true);
                 })
-                .setNegativeButton(android.R.string.no, (dialog, which) -> {
-                    preference.setChecked(false);
-                })
+                .setNegativeButton(android.R.string.no,
+                        (dialog, which) -> twoStatePreference.setChecked(false))
                 .show();
         mAdbDialog.setOnDismissListener(dialog -> {
             // Assuming that onClick gets called first
             if (!mDialogClicked) {
-                preference.setChecked(false);
+                twoStatePreference.setChecked(false);
             }
             mAdbDialog = null;
         });
     }
 
-    public void dismissDialogs() {
+    @Override
+    public void dismissConfirmationDialog() {
         if (mAdbDialog != null) {
             mAdbDialog.dismiss();
             mAdbDialog = null;
         }
+    }
+
+    @Override
+    public boolean isConfirmationDialogShowing() {
+        return mAdbDialog != null;
     }
 }

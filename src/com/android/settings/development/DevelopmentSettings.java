@@ -96,6 +96,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.ConfirmationDialogController;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
@@ -210,6 +211,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
     private static final int[] MOCK_LOCATION_APP_OPS = new int[]{AppOpsManager.OP_MOCK_LOCATION};
+
+    private static final String STATE_SHOWING_DIALOG_KEY = "showing_dialog_key";
+
+    private String mPendingDialogKey;
 
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
@@ -341,6 +346,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        if (icicle != null) {
+            // Don't show this in onCreate since we might be on the back stack
+            mPendingDialogKey = icicle.getString(STATE_SHOWING_DIALOG_KEY);
+        }
 
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         mBackupManager = IBackupManager.Stub.asInterface(
@@ -654,6 +664,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mColorModePreference.startListening();
             mColorModePreference.updateCurrentAndSupported();
         }
+
+        if (mPendingDialogKey != null) {
+            recreateDialogForKey(mPendingDialogKey);
+            mPendingDialogKey = null;
+        }
     }
 
     @Override
@@ -662,6 +677,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mColorModePreference != null) {
             mColorModePreference.stopListening();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_SHOWING_DIALOG_KEY, getKeyForShowingDialog());
     }
 
     @Override
@@ -2334,8 +2355,44 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return false;
     }
 
+    /**
+     * Iterates through preference controllers that show confirmation dialogs and returns the
+     * preference key for the first currently showing dialog. Ideally there should only ever be one.
+     * @return Preference key, or null if no dialog is showing
+     */
+    private String getKeyForShowingDialog() {
+        // TODO: iterate through a fragment-wide list of PreferenceControllers and just pick out the
+        // ConfirmationDialogController objects
+        final List<ConfirmationDialogController> dialogControllers = new ArrayList<>(2);
+        dialogControllers.add(mEnableAdbController);
+        dialogControllers.add(mLogpersistController);
+        for (ConfirmationDialogController dialogController : dialogControllers) {
+            if (dialogController.isConfirmationDialogShowing()) {
+                return dialogController.getPreferenceKey();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Re-show the dialog we lost previously
+     * @param preferenceKey Key for the preference the dialog is for
+     */
+    private void recreateDialogForKey(String preferenceKey) {
+        // TODO: iterate through a fragment-wide list of PreferenceControllers and just pick out the
+        // ConfirmationDialogController objects
+        final List<ConfirmationDialogController> dialogControllers = new ArrayList<>(2);
+        dialogControllers.add(mEnableAdbController);
+        dialogControllers.add(mLogpersistController);
+        for (ConfirmationDialogController dialogController : dialogControllers) {
+            if (TextUtils.equals(preferenceKey, dialogController.getPreferenceKey())) {
+                dialogController.showConfirmationDialog(findPreference(preferenceKey));
+            }
+        }
+    }
+
     private void dismissDialogs() {
-        mEnableAdbController.dismissDialogs();
+        mEnableAdbController.dismissConfirmationDialog();
         if (mAdbKeysDialog != null) {
             mAdbKeysDialog.dismiss();
             mAdbKeysDialog = null;
@@ -2344,7 +2401,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnableDialog.dismiss();
             mEnableDialog = null;
         }
-        mLogpersistController.dismissDialogs();
+        mLogpersistController.dismissConfirmationDialog();
     }
 
     public void onClick(DialogInterface dialog, int which) {
