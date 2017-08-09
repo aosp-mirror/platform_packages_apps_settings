@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s మీ సందేశాలను ప్రాప్యత చేయాలనుకుంటోంది. %2$sకు ప్రాప్యత అందించాలా?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM ప్రాప్యత అభ్యర్థన"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> మీ SIM కార్డ్‌ను ప్రాప్యత చేయాలనుకుంటోంది. SIM కార్డ్‌కి ప్రాప్యత మంజూరు చేయడం వలన మీ పరికరంలో కనెక్షన్ కాలంలో డేటా కనెక్టివిటీ నిలిపివేయబడుతుంది. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>కి ప్రాప్యత మంజూరు చేయండి"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"ఇతర పరికరాలకు \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\"గా కనిపిస్తుంది"</string>
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"ఇతర పరికరాలకు “<xliff:g id="DEVICE_NAME">^1</xliff:g>” వలె కనిపిస్తుంది"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"మీ పరికరాలు"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"కొత్త పరికరాన్ని జత చేయండి"</string>
     <string name="date_and_time" msgid="9062980487860757694">"తేదీ &amp; సమయం"</string>
@@ -588,6 +588,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"అంకెలను ఆరోహణ, అవరోహణ క్రమంలో లేదా ఒకే అంకెను వరుసగా పునరావృతంగా ఉపయోగించకూడదు"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"సరే"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"రద్దు చేయి"</string>
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"తీసివేయండి"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"రద్దు చేయి"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"తదుపరి"</string>
     <string name="lock_setup" msgid="3355847066343753943">"సెటప్ పూర్తయింది."</string>
@@ -818,10 +819,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS అందుబాటులో ఉంది"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS అందుబాటులో ఉంది)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"మీ నెట్‌వర్క్ పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"క్యారియర్ Wi‑Fi నెట్‌వర్క్"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1%s</xliff:g> ద్వారా కనెక్ట్ చేయండి"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"స్థాన ఖచ్చితత్వాన్ని మెరుగుపరచడానికి మరియు ఇతర ప్రయోజనాల దృష్ట్యా, <xliff:g id="APP_NAME">%1$s</xliff:g> Wi-Fi ఆఫ్‌లో ఉన్నప్పటికీ, నెట్‌వర్క్‌ను స్కాన్ చేయడం ప్రారంభించాలనుకుంటుంది.\n\nస్కాన్ చేయాలనుకునే అన్ని అనువర్తనాల కోసం దీన్ని అనుమతించాలా?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"దీన్ని ఆఫ్ చేయడానికి, ఓవర్‌ఫ్లో మెనులో అధునాతనంకి వెళ్లండి."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"అనుమతించు"</string>
@@ -944,7 +943,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi కాలింగ్ ఆన్‌లో ఉన్నప్పుడు, మీ ఫోన్ మీ ప్రాధాన్యత మరియు ఏ సిగ్నల్ సామర్థ్యం ఎక్కువగా ఉంది వంటి అంశాల ఆధారంగా Wi-Fi నెట్‌వర్క్‌లు లేదా మీ క్యారియర్ నెట్‌వర్క్ ద్వారా కాల్‌లు వెళ్లేలా చేస్తుంది. ఈ లక్షణాన్ని ఆన్ చేయడానికి ముందు, రుసుములు మరియు ఇతర వివరాల గురించి తెలుసుకోవడానికి మీ క్యారియర్‌ను సంప్రదించండి."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"అత్యవసర చిరునామాను నవీకరించండి"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"మీరు WiFiని ఉపయోగించి 911 కాల్ చేస్తే, అత్యవసర సేవలు మీ స్థానంగా వినియోగించే చిరునామా"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"మీరు WiFiని ఉపయోగించి అత్యవసర కాల్ చేస్తే, అత్యవసర సేవలు మీ స్థానంగా వినియోగించే చిరునామా"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ప్రదర్శన"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ధ్వని"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"వాల్యూమ్‌లు"</string>
@@ -1341,19 +1340,14 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"రీసెట్ చేయాలా?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ఈ వినియోగదారు కోసం నెట్‌వర్క్ రీసెట్ అందుబాటులో లేదు"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"నెట్‌వర్క్ సెట్టింగ్‌లు రీసెట్ చేయబడ్డాయి"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"మొత్తం డేటాను తొలగించండి (ఫ్యాక్టరీ రీసెట్)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> ఖాతాలు రీసెట్ చేయబడతాయి</item>
-      <item quantity="one">1 ఖాతా రీసెట్ చేయబడుతుంది</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"అంతర్గత నిల్వను &amp; మొత్తం డేటాని రీసెట్ చేస్తుంది"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"మొత్తం డేటాను తొలగించండి (ఫ్యాక్టరీ రీసెట్)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"ఇందువలన మీ టాబ్లెట్ యొక్క "<b>"అంతర్గత నిల్వ"</b>" నుండి వీటితో సహా, మొత్తం డేటా ఎరేజ్ చేయబడుతుంది:\n\n"<li>"మీ Google ఖాతా"</li>\n<li>"సిస్టమ్ మరియు అనువర్తన డేటా మరియు సెట్టింగ్‌లు"</li>\n<li>"డౌన్‌లోడ్ చేయబడిన అనువర్తనాలు"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"ఇందువలన మీ ఫోన్ "<b>"అంతర్గత నిల్వ"</b>" నుండి వీటితో సహా మొత్తం డేటా ఎరేజ్ చేయబడుతుంది:\n\n"<li>"Google ఖాతా"</li>\n<li>"సిస్టమ్ మరియు అనువర్తన డేటా మరియు సెట్టింగ్‌లు"</li>\n<li>"డౌన్‌లోడ్ చేయబడిన అనువర్తనాలు"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"మీరు ప్రస్తుతం క్రింది ఖాతాలకు సైన్ ఇన్ చేసారు:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"ఈ పరికరంలో ఇతర వినియోగదారులు ఉన్నారు.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"సంగీతం"</li>\n<li>"ఫోటోలు"</li>\n<li>"ఇతర వినియోగదారు డేటా"</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIMలో క్యారియర్‌లు"</li></string>
-    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"ఇది మీ మొబైల్ సేవ ప్లాన్‌ని రద్దు చేయదు."</string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"ఇది మొబైల్ సేవా ప్లాన్‌ని రద్దు చేయదు."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"సంగీతం, చిత్రాలు మరియు ఇతర వినియోగదారు డేటాను క్లియర్ చేయడానికి, "<b>"USB నిల్వ"</b>"ను ఎరేజ్ చేయాల్సి ఉంటుంది."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"సంగీతం, చిత్రాలు మరియు ఇతర వినియోగదారు డేటాను క్లియర్ చేయడానికి, "<b>"SD కార్డు"</b>"ను ఎరేజ్ చేయాల్సి ఉంటుంది."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB నిల్వను ఎరేజ్ చేయి"</string>
@@ -1810,8 +1804,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"స్క్రీన్ రీడర్‌లు, ప్రదర్శన, పరస్పర చర్య నియంత్రణలు"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"దృశ్యత సెట్టింగ్‌లు"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"మీరు మీ అవసరాలకు అనుగుణంగా ఈ పరికరాన్ని అనుకూలీకరించవచ్చు. ఈ ప్రాప్యత లక్షణాలను సెట్టింగ్‌ల్లో తర్వాత మార్చవచ్చు."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"ఫాంట్ ఆకృతిని మార్చండి"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"స్క్రీన్ రీడర్‌లు"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ఆడియో &amp; స్క్రీన్‌పై ఉన్న వచనం"</string>
     <string name="display_category_title" msgid="685461049938269166">"డిస్‌ప్లే"</string>
@@ -2891,6 +2884,8 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"ధ్వని చేయదు"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"శబ్దం చేయి"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"శబ్దం చేసి, స్క్రీన్‌పై చూపు"</string>
+    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
+    <skip />
     <string name="notification_importance_min_title" msgid="6974673091137544803">"తక్కువ"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"మధ్యస్థం"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"అధికం"</string>
@@ -3422,7 +3417,7 @@
     <string name="data_warning" msgid="209133958008062117">"డేటా హెచ్చరిక"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"డేటా పరిమితిని సెట్ చేయి"</string>
     <string name="data_limit" msgid="1885406964934590552">"డేటా పరిమితి"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g> వ్యవధిలో <xliff:g id="ID_1">%1$s</xliff:g> వినియోగించబడింది"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g> కాలంలో ఉపయోగించబడింది"</string>
     <string name="configure" msgid="1029654422228677273">"కాన్ఫిగర్ చేయి"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"వినియోగంలో చేర్చబడిన ఇతర అనువర్తనాలు"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3491,8 +3486,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"తొలగించి, మార్చు"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"సత్వరమార్గ నిర్వాహికి రేట్-పరిమిత ప్రక్రియను రీసెట్ చేయండి"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"సత్వరమార్గ నిర్వాహికి రేట్-పరిమిత ప్రక్రియను రీసెట్ చేయబడింది"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"లాక్ స్క్రీన్‌పై నియంత్రణ సమాచారం"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"నోటిఫికేషన్ కంటెంట్‌ను చూపు లేదా దాచు"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"అన్నీ"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"మద్దతు &amp; చిట్కాలు"</string>

@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$sがメッセージにアクセスしようとしています。%2$sにアクセスを許可しますか？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIMアクセスリクエスト"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>がSIMカードにアクセスしようとしています。SIMカードへのアクセスを許可すると、接続を処理している間、端末上のデータ接続は無効になります。<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>にアクセスを許可します"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"他の端末には「<xliff:g id="DEVICE_NAME">^1</xliff:g>」として表示されます"</string>
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"他の端末には「<xliff:g id="DEVICE_NAME">^1</xliff:g>」として表示されます"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"端末"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"新しいデバイスとペア設定"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日付と時刻"</string>
@@ -588,6 +588,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"一連の数字を昇順や降順にしたり、繰り返したりすることはできません"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"キャンセル"</string>
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"消去"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"キャンセル"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"次へ"</string>
     <string name="lock_setup" msgid="3355847066343753943">"設定が完了しました。"</string>
@@ -818,10 +819,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS利用可"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （WPS利用可）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ネットワークパスワードを入力してください"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"携帯通信会社の Wi‑Fi ネットワーク"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1%s</xliff:g> 経由で接続"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"現在地情報の精度向上やその他の目的で、<xliff:g id="APP_NAME">%1$s</xliff:g>ではWi-FiがOFFのときでもネットワークスキャンをオンにすることを要求しています。\n\nスキャンを必要とするすべてのアプリでスキャンを許可しますか？"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"この機能をOFFにするには、オーバーフローメニューの[詳細設定]にアクセスします。"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"許可する"</string>
@@ -944,7 +943,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi発信をONにすると、ユーザーの設定と信号の強度に応じて、スマートフォンからWi-Fiネットワークか携帯通信会社ネットワークのいずれかを経由して通話をルーティングできるようになります。この機能をONにする場合は、事前に料金などの条件について携帯通信会社にご確認ください。"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"緊急対応の住所の更新"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Wi-Fi を使用して 110 に電話した場合に、緊急サービスが現在地として使用する住所"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Wi‑Fi を使用して緊急通報を行った場合に、緊急サービスが現在地として使用する住所"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"表示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"音"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"音量"</string>
@@ -1341,21 +1340,14 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"リセットしますか？"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ネットワークのリセットはこのユーザーには許可されていません"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ネットワーク設定をリセットしました"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"すべてのデータを消去（初期状態にリセット）"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> 件のアカウントをリセットします</item>
-      <item quantity="one">1 件のアカウントをリセットします</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"内部ストレージとすべてのデータをリセットします"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"すべてのデータを消去（初期状態にリセット）"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"この操作を行うと、タブレットの以下のデータを含む"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Googleアカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"この操作を行うと、モバイル端末の以下のデータを含む"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Googleアカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"以下のアカウントにログインしています:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"この端末には他にもユーザーがいます。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音楽"</li>\n<li>"画像"</li>\n<li>"他のユーザーデータ"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM の携帯通信会社"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"この操作を行っても、ご利用のモバイル サービス プランはキャンセルされません。"</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"音楽、画像、その他のユーザーデータを消去する場合は"<b>"USBストレージデータ"</b>"を消去する必要があります。"</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"音楽、画像、その他のユーザーデータを消去するには、"<b>"SDカード"</b>"を消去する必要があります。"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USBストレージ内データの消去"</string>
@@ -1812,8 +1804,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"スクリーン リーダー、表示、操作のコントロール"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視覚補助"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"この端末を必要に応じてカスタマイズできます。このユーザー補助機能は後から [設定] で変更できます。"</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"フォントサイズの変更"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"スクリーン リーダー"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音声と画面上のテキスト"</string>
     <string name="display_category_title" msgid="685461049938269166">"表示"</string>
@@ -2897,6 +2888,8 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"音声なし"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"音声で知らせる"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"音声とポップアップで知らせる"</string>
+    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
+    <skip />
     <string name="notification_importance_min_title" msgid="6974673091137544803">"低"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
@@ -3426,7 +3419,7 @@
     <string name="data_warning" msgid="209133958008062117">"データ警告"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"データ上限の設定"</string>
     <string name="data_limit" msgid="1885406964934590552">"データ上限"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1029654422228677273">"設定"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"データ使用量に含まれている他のアプリ"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3495,8 +3488,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager のレート制限をリセット"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager のレート制限をリセットしました"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"ロック画面に表示される情報の管理"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"サポートとヒント"</string>

@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s-ს უნდა თქვენს შეტყობინებებზე წვდომა. მისცემთ %2$s-ს წვდომას?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM-ზე წვდომის მოთხოვნა"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>-ს სურს თქვენს SIM ბარათზე წვდომა. SIM ბარათზე წვდომის დაშვება კავშირის განმავლობაში გათიშავს მონაცემთა გადაცემას მოწყობილობაზე. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-ისთვის წვდომის მიცემა"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"სხვა მოწყობილობებისთვის ჩანს, როგორც „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"სხვა მოწყობილობებისთვის ჩანს, როგორც „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"თქვენი მოწყობილობები"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"ახალი მოწყობილობის დაწყვილება"</string>
     <string name="date_and_time" msgid="9062980487860757694">"თარიღი და დრო"</string>
@@ -588,6 +588,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"ციფრების ზრდადი, კლებადი ან გამეორებადი მიმდევრობის გამოყენება ნებადართული არ არის"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"კარგი"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"გაუქმება"</string>
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"გასუფთავება"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"გაუქმება"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"მომდევნო"</string>
     <string name="lock_setup" msgid="3355847066343753943">"დაბლოკვის პარამეტრები დაყენებულია."</string>
@@ -818,10 +819,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"ხელმისაწვდომია WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ხელმისაწვდომია)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"შეიყვანეთ თქვენი ქსელის პაროლი"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"ოპერატორის Wi‑Fi ქსელი"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1%s</xliff:g>-ით დაკავშირება"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"მდებარეობის ზუსტი განსაზღვრის და სხვა ფუნქციების გასაუმჯობესებლად <xliff:g id="APP_NAME">%1$s</xliff:g>-ს სურს, გააქტიურდეს ქსელების მოძიება, მაშინაც კი, როცა გამორთულია Wi-Fi.\n\nმიეცეს ამის უფლება ყველა აპს?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"ამის გამოსართავად, მოინახულეთ გაფართოებული სექცია გადავსების მენიუში."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"ნებართვა"</string>
@@ -944,7 +943,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"როდესაც Wi-Fi ზარი ჩართულია, თქვენს ტელეფონს შეუძლია გადაამისამართოს ზარი Wi-Fi ან თქვენს ოპერატორ ქსელზე, თქვენი პრეფერენციებისა და სიგნალის სიძლიერის მიხედვით. ამ ფუნქციის ჩართვამდე, დააზუსტეთ თქვენს ოპერატორთან შესაძლო თანხები და სხვა დეტალები."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"საგანგებო ვითარებისას საკონტაქტო მისამართის განახლება"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"მისამართი, რომელსაც 911-ზე Wi-Fi-ს მეშვეობით დარეკვისას, საგანგებო სამსახურები თქვენი მდებარეობის დასადგენად გამოიყენებს."</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"მისამართი, რომელსაც გადაუდებელი ზარის Wi-Fi-ს მეშვეობით განხორციელებისას, საგანგებო სამსახურები თქვენი მდებარეობის დასადგენად გამოიყენებს"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ეკრანი"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ხმა"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"ხმის კონტროლი"</string>
@@ -1341,21 +1340,14 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"ჩამოვყაროთ პარამეტრები?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ქსელის გადაყენება ამ მომხმარებლისათვის მიუწვდომელია"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ქსელის პარამეტრები ჩამოიყარა"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"ყველა მონაცემის ამოშლა (ქარხნული პარამეტრების დაბრუნება)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> ანგარიში გადაყენდება</item>
-      <item quantity="one">1 ანგარიში გადაყენდება</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"შიდა მეხსიერება და ყველა მონაცემი გადაყენდება"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"ყველა მონაცემის ამოშლა (ქარხნული პარამეტრების დაბრუნება)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"ეს მოქმედება წაშლის ყველა მონაცემებს თქვენი ტაბლეტის "<b>"შიდა მეხსიერებიდან"</b>", მათ შორის:\n\n"<li>"თქვენს Google-ის ანგარიშს"</li>\n<li>"სისტემისა და აპების მონაცემებს და პარამეტრებს"</li>\n<li>"ჩამოტვირთულ აპებს"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"ეს მოქმედება წაშლის ყველა მონაცემებს თქვენი ტელეფონის "<b>"შიდა მეხსიერებიდან"</b>", მათ შორის:\n\n"<li>"თქვენს Google-ის ანგარიშს"</li>\n<li>"სისტემისა და აპების მონაცემებს და პარამეტრებს"</li>\n<li>"ჩამოტვირთულ აპებს"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"ამჟამად შესული ხართ შემდეგ ანგარიშებში:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n" ამ მოწყობილობაზე წარმოდგენილია სხვა მომხმარებლები. \n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"მუსიკა"</li>\n<li>"ფოტოები"</li>\n<li>"მომხმარებლის სხვა მონაცემები"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"ოპერატორები eSIM-ზე"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"ეს არ გააუქმებს თქვენს მობილურ სერვისთა პაკეტს."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"მუსიკის, ფოტოების და მომხმარებლის სხვა მონაცემების წასაშლელად საჭიროა "<b>"USB მეხსიერების"</b>" წაშლა."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"მუსიკის, სურათებისა და მომხმარებლის სხვა მონაცემების წასაშლელად უნდა წაიშალოს "<b>"SD ბარათი"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB მეხსიერების წაშლა"</string>
@@ -1812,8 +1804,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"ეკრანის წამკითხველები, ჩვენება, ინტერაქციის მართვის საშუალებები"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"მხედველობის პარამეტრები"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"ამ მოწყობილობის მორგება თქვენი საჭიროებების შესაბამისად შეგიძლიათ. მარტივი წვდომის ამ პარამეტრების მოგვიანებით შეცვლა პარამეტრებიდან არის შესაძლებელი."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"შრიფტის ზომის შეცვლა"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"ეკრანის წამკითხველები"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"აუდიო და ეკრანზე გამოტანილი ტექსტი"</string>
     <string name="display_category_title" msgid="685461049938269166">"ეკრანი"</string>
@@ -2893,6 +2884,8 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"ხმის გარეშე"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"ხმის გამოცემა"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"ხმის გამოცემა და ეკრანზე გამოჩენა"</string>
+    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
+    <skip />
     <string name="notification_importance_min_title" msgid="6974673091137544803">"დაბალი"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"საშუალო"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"მაღალი"</string>
@@ -3422,7 +3415,7 @@
     <string name="data_warning" msgid="209133958008062117">"მოხმარების შესახებ გაფრთხილება"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"მონაცემთა ლიმიტის დაყენება"</string>
     <string name="data_limit" msgid="1885406964934590552">"მონაცემთა ლიმიტი"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"გამოყენებულია: <xliff:g id="ID_1">%1$s</xliff:g> (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_2">%2$s</xliff:g>-ის განმავლობაში გამოყენებულია <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"კონფიგურაცია"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"მოხმარების გამოთვლისას გათვალისწინებული სხვა აპები"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3491,8 +3484,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"ამოშლა და გარდაქმნა"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager-ის სიხშირის შეზღუდვის გადაყენება"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager-ის სიხშირის შეზღუდვა გადაყენებულია"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"გააკონტროლეთ ჩაკეტილ ეკრანზე ნაჩვენები ინფორმაცია"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"შეტყობინების კონტენტის ჩვენება ან დამალვა"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"ყველა"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"მხარდაჭერა და მინიშნებები"</string>
