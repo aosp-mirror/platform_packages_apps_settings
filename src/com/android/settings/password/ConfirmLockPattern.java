@@ -243,6 +243,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
+            if (mFrp) {
+                return R.string.lockpassword_confirm_your_pattern_details_frp;
+            }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
             if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
                 return isStrongAuthRequired
@@ -296,7 +299,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     if (mHeaderText != null) {
                         mHeaderTextView.setText(mHeaderText);
                     } else {
-                        mHeaderTextView.setText(R.string.lockpassword_confirm_your_pattern_header);
+                        mHeaderTextView.setText(getDefaultHeader());
                     }
                     if (mDetailsText != null) {
                         mDetailsTextView.setText(mDetailsText);
@@ -329,6 +332,11 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             // Always announce the header for accessibility. This is a no-op
             // when accessibility is disabled.
             mHeaderTextView.announceForAccessibility(mHeaderTextView.getText());
+        }
+
+        private int getDefaultHeader() {
+            return mFrp ? R.string.lockpassword_confirm_your_pattern_header_frp
+                    : R.string.lockpassword_confirm_your_pattern_header;
         }
 
         private Runnable mClearPatternRunnable = new Runnable() {
