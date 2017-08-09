@@ -31,6 +31,7 @@ public class ShadowUtils {
     private static IFingerprintManager sFingerprintManager = null;
     private static boolean sIsUserAMonkey;
     private static boolean sIsDemoUser;
+    private static ComponentName sDeviceOwnerComponentName;
 
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
@@ -61,14 +62,13 @@ public class ShadowUtils {
         sIsDemoUser = isDemoUser;
     }
 
-    public static void setIsUserAMonkey(boolean isUserAMonkey) {
-        sIsUserAMonkey = isUserAMonkey;
-    }
-
-
     @Implementation
     public static boolean isDemoUser(Context context) {
         return sIsDemoUser;
+    }
+
+    public static void setIsUserAMonkey(boolean isUserAMonkey) {
+        sIsUserAMonkey = isUserAMonkey;
     }
 
     /**
@@ -77,6 +77,14 @@ public class ShadowUtils {
     @Implementation
     public static boolean isMonkeyRunning() {
         return sIsUserAMonkey;
+    }
 
+    public static void setDeviceOwnerComponent(ComponentName componentName) {
+        sDeviceOwnerComponentName = componentName;
+    }
+
+    @Implementation
+    public static ComponentName getDeviceOwnerComponent(Context context) {
+        return sDeviceOwnerComponentName;
     }
 }

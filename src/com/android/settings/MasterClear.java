@@ -144,10 +144,10 @@ public class MasterClear extends OptionsMenuFragment {
         public void onClick(View view) {
             final Context context = view.getContext();
             if (Utils.isDemoUser(context)) {
-                final String packageName = Utils.getDemoModePackageName(context);
-                if (!TextUtils.isEmpty(packageName)) {
+                final ComponentName componentName = Utils.getDeviceOwnerComponent(context);
+                if (componentName != null) {
                     final Intent requestFactoryReset = new Intent()
-                            .setPackage(packageName)
+                            .setPackage(componentName.getPackageName())
                             .setAction(Intent.ACTION_FACTORY_RESET);
                     context.startActivity(requestFactoryReset);
                 }
