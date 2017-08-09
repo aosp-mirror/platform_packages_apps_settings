@@ -32,6 +32,7 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -41,6 +42,7 @@ import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -234,6 +236,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
             mDataSaverBackend.setIsBlacklisted(mAppItem.key, mPackageName, !(Boolean) newValue);
+            updatePrefs();
             return true;
         } else if (preference == mUnrestrictedData) {
             mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
@@ -253,7 +256,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         return super.onPreferenceTreeClick(preference);
     }
 
-    private void updatePrefs() {
+    @VisibleForTesting
+    void updatePrefs() {
         updatePrefs(getAppRestrictBackground(), getUnrestrictData());
     }
 
