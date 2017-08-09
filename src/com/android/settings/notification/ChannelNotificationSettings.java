@@ -352,7 +352,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         if (mRingtone != null) {
             mRingtone.onActivityResult(requestCode, resultCode, data);
         }
-        mImportance.setSummary(getImportanceSummary(mChannel.getImportance()));
+        if (mChannel != null) {
+            mImportance.setSummary(getImportanceSummary(mChannel.getImportance()));
+        }
     }
 
     boolean canPulseLight() {
