@@ -129,46 +129,6 @@ public class SwipeToNotificationPreferenceControllerTest {
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
 
-    @Test
-    public void testPreferenceController_ProperResultPayloadType() {
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
-                .thenReturn(true);
-
-        SwipeToNotificationPreferenceController controller =
-                new SwipeToNotificationPreferenceController(mContext, null /* lifecycle */,
-                        SYSTEM_NAVIGATION_KEYS_ENABLED);
-        ResultPayload payload = controller.getResultPayload();
-        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testSetValue_updatesCorrectly() {
-        int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
-
-        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver,
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, -1);
-
-        assertThat(updatedValue).isEqualTo(newValue);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver,
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, currentValue);
-
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
-
-        assertThat(newValue).isEqualTo(currentValue);
-    }
-
     private void stubFingerprintSupported(boolean enabled) {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
                 .thenReturn(enabled);
