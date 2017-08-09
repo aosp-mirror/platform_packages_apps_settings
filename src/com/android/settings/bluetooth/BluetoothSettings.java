@@ -84,6 +84,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     FooterPreference mFooterPreference;
     private Preference mPairingPreference;
     private BluetoothEnabler mBluetoothEnabler;
+    private AlwaysDiscoverable mAlwaysDiscoverable;
 
     private SwitchBar mSwitchBar;
 
@@ -115,6 +116,9 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 mMetricsFeatureProvider, Utils.getLocalBtManager(activity),
                 MetricsEvent.ACTION_BLUETOOTH_TOGGLE);
         mBluetoothEnabler.setupSwitchController();
+        if (mLocalAdapter != null) {
+            mAlwaysDiscoverable = new AlwaysDiscoverable(getContext(), mLocalAdapter);
+        }
     }
 
     @Override
@@ -161,7 +165,9 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         }
 
         // Make the device only visible to connected devices.
-        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
+        if (mAlwaysDiscoverable != null) {
+            mAlwaysDiscoverable.stop();
+        }
 
         if (isUiRestricted()) {
             return;
@@ -192,7 +198,9 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
                 mPairedDevicesCategory.addPreference(mPairingPreference);
                 updateFooterPreference(mFooterPreference);
 
-                mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+                if (mAlwaysDiscoverable != null) {
+                    mAlwaysDiscoverable.start();
+                }
                 return; // not break
 
             case BluetoothAdapter.STATE_TURNING_OFF:
