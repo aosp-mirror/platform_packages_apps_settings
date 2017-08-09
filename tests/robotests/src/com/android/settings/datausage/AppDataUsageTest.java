@@ -17,9 +17,22 @@
 package com.android.settings.datausage;
 
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.ArraySet;
@@ -43,17 +56,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -128,9 +130,24 @@ public class AppDataUsageTest {
 
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
 
-        verify(mHeaderController)
-                .setHasAppInfoLink(true);
-        verify(mHeaderController)
-                .setUid(fakeUserId);
+        verify(mHeaderController).setHasAppInfoLink(true);
+        verify(mHeaderController).setUid(fakeUserId);
+    }
+
+    @Test
+    public void changePreference_backgroundData_shouldUpdateUI() {
+        mFragment = spy(new AppDataUsage());
+        final AppItem appItem = new AppItem(123456789);
+        final SwitchPreference pref = mock(SwitchPreference.class);
+        final DataSaverBackend dataSaverBackend = mock(DataSaverBackend.class);
+        ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
+        ReflectionHelpers.setField(mFragment, "mRestrictBackground", pref);
+        ReflectionHelpers.setField(mFragment, "mDataSaverBackend", dataSaverBackend);
+
+        doNothing().when(mFragment).updatePrefs();
+
+        mFragment.onPreferenceChange(pref, true /* value */);
+
+        verify(mFragment).updatePrefs();
     }
 }
