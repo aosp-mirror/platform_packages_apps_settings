@@ -40,6 +40,7 @@ import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -243,7 +244,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     boolean shouldHideCategory(PowerUsageData powerUsageData) {
         return powerUsageData.usageType == UsageType.UNACCOUNTED
                 || powerUsageData.usageType == UsageType.OVERCOUNTED
-                || (powerUsageData.usageType == UsageType.USER && mUserManager.getUserCount() == 1);
+                || (powerUsageData.usageType == UsageType.USER && mUserManager.getUserCount() == 1)
+                || (powerUsageData.usageType == UsageType.CELL
+                && !DataUsageUtils.hasMobileData(getContext()));
     }
 
     @VisibleForTesting
