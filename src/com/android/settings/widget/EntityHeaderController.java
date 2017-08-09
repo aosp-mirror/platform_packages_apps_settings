@@ -215,6 +215,7 @@ public class EntityHeaderController {
         final LayoutPreference pref = new LayoutPreference(uiContext, done(activity));
         // Makes sure it's the first preference onscreen.
         pref.setOrder(-1000);
+        pref.setSelectable(false);
         pref.setKey(PREF_KEY_APP_HEADER);
         return pref;
     }

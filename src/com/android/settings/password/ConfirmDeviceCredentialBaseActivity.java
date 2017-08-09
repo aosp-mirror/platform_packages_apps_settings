@@ -68,7 +68,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
             layout.setFitsSystemWindows(false);
         }
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         mIsKeyguardLocked = savedState == null
                 ? getSystemService(KeyguardManager.class).isKeyguardLocked()
                 : savedState.getBoolean(STATE_IS_KEYGUARD_LOCKED, false);
