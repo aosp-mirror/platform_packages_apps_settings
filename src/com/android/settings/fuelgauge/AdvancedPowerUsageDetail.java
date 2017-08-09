@@ -31,6 +31,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -163,9 +164,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
             String packageName) {
-        final Bundle args = new Bundle(2);
+        final Bundle args = new Bundle(3);
+        final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
         args.putString(EXTRA_POWER_USAGE_PERCENT, Utils.formatPercentage(0));
+        try {
+            args.putInt(EXTRA_UID, packageManager.getPackageUid(packageName, 0 /* no flag */));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot find package: " + packageName, e);
+        }
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
                 R.string.battery_details_title, null, new UserHandle(UserHandle.myUserId()));
