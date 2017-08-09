@@ -166,8 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vol accedir als teus missatges. Vols donar-li accés a %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Sol·licitud d\'accés a la SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vol accedir a la targeta SIM. Si hi concedeixes accés, es desactivarà la connectivitat de dades al dispositiu mentre duri la connexió. Dona accés a <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
-    <skip />
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Visible com a <xliff:g id="DEVICE_NAME">^1</xliff:g> per a altres dispositius"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Els teus dispositius"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Vincula un dispositiu nou"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data i hora"</string>
@@ -589,8 +588,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"No es permet cap seqüència de dígits ascendents, descendents ni repetits"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"D\'acord"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Cancel·la"</string>
-    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
-    <skip />
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"Esborra"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Cancel·la"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Següent"</string>
     <string name="lock_setup" msgid="3355847066343753943">"S\'ha completat la configuració."</string>
@@ -1341,8 +1339,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Restablir?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"El restabliment de xarxa no està disponible per a aquest usuari"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"S\'ha restablert la configuració de la xarxa"</string>
-    <!-- no translation found for master_clear_title (3531267871084279512) -->
-    <skip />
+    <string name="master_clear_title" msgid="3531267871084279512">"Esborra totes les dades (restabliment de les dades de fàbrica)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Aquesta acció esborrarà totes les dades de l\'"<b>"emmagatzematge intern"</b>" de la tauleta, com ara:\n\n"<li>"El teu compte de Google"</li>\n<li>"Les dades i la configuració del sistema i de les aplicacions"</li>\n<li>"Les aplicacions baixades"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Aquesta acció esborrarà totes les dades de l\'"<b>"emmagatzematge intern"</b>" del teu telèfon, també:\n\n"<li>"El teu compte de Google"</li>\n<li>"Les dades i la configuració del sistema i de les aplicacions"</li>\n<li>"Les aplicacions baixades"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualment has iniciat la sessió als comptes següents:\n"</string>
@@ -2886,6 +2883,8 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Sense so"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Amb so"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Amb so i amb una finestra emergent"</string>
+    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
+    <skip />
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Baixa"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Mitjana"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
@@ -2917,12 +2916,12 @@
     <string name="display_vr_pref_title" msgid="8104485269504335481">"Amb el dispositiu en mode RV"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Redueix el desenfocament (recomanat)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Redueix el parpelleig"</string>
-    <string name="picture_in_picture_title" msgid="5824849294270017113">"Imatge en imatge"</string>
-    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Cap de les aplicacions instal·lades no admet el mode d\'imatge en imatge"</string>
+    <string name="picture_in_picture_title" msgid="5824849294270017113">"Pantalla en pantalla"</string>
+    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Cap de les aplicacions instal·lades no admet el mode de pantalla en pantalla"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"pip imatge en"</string>
-    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Imatge en imatge"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Permet el mode d\'imatge en imatge"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="1264019085827708920">"Permet que aquesta aplicació creï una finestra d\'imatge en imatge mentre l\'aplicació està oberta o després de sortir-ne (per exemple, per seguir veient un vídeo). Aquesta finestra es mostra sobre altres aplicacions que estàs utilitzant."</string>
+    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Pantalla en pantalla"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Permet el mode de pantalla en pantalla"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="1264019085827708920">"Permet que aquesta aplicació creï una finestra de pantalla en pantalla mentre l\'aplicació està oberta o després de sortir-ne (per exemple, per seguir veient un vídeo). Aquesta finestra es mostra sobre altres aplicacions que estàs utilitzant."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Accés a No molestis"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Cap aplicació instal·lada no ha sol·licitat accés a No molestis."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"S\'estan carregant les aplicacions..."</string>
@@ -3189,7 +3188,7 @@
       <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> consumeix molta bateria</item>
     </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Sense optimitzar"</string>
-    <string name="high_power_on" msgid="6216293998227583810">"No optimitzen la bateria"</string>
+    <string name="high_power_on" msgid="6216293998227583810">"Sense optimitzar"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimitza l\'ús de la bateria"</string>
     <string name="high_power_system" msgid="7362862974428225301">"L\'optimització de la bateria no està disponible"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"No s\'aplica l\'optimització de la bateria. És possible que es consumeixi més ràpidament."</string>
@@ -3296,7 +3295,7 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Aquest permís permet que una aplicació modifiqui la configuració del sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Sí"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"No"</string>
-    <string name="external_source_switch_title" msgid="3621381992793251070">"Permet d\'aquesta font"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"Permet baixades d\'aquesta font"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Doble gir per obrir Càmera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Gira el canell dues vegades per obrir l\'aplicació Càmera"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Botó d\'engegada dos cops per obrir càmera"</string>
@@ -3415,8 +3414,7 @@
     <string name="data_warning" msgid="209133958008062117">"Advertiment de dades"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Defineix un límit de dades"</string>
     <string name="data_limit" msgid="1885406964934590552">"Límit de dades"</string>
-    <!-- no translation found for data_usage_template (2923744765873163859) -->
-    <skip />
+    <string name="data_usage_template" msgid="2923744765873163859">"S\'han fet servir <xliff:g id="ID_1">%1$s</xliff:g> (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
     <string name="configure" msgid="1029654422228677273">"Configura"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Altres aplicacions que utilitzen dades"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
