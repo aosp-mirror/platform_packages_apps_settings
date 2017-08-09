@@ -24,8 +24,6 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.UiScrollable;
 import android.test.InstrumentationTestCase;
 
-import com.android.settings.R;
-
 import org.junit.Test;
 
 @SmallTest
