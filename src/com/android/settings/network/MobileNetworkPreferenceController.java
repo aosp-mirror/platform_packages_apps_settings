@@ -33,7 +33,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
@@ -42,22 +41,30 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     private final boolean mIsSecondaryUser;
     private final TelephonyManager mTelephonyManager;
+    private final UserManager mUserManager;
     private Preference mPreference;
     @VisibleForTesting
     PhoneStateListener mPhoneStateListener;
 
     public MobileNetworkPreferenceController(Context context) {
         super(context);
-        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mIsSecondaryUser = !userManager.isAdminUser();
+        mIsSecondaryUser = !mUserManager.isAdminUser();
     }
 
     @Override
     public boolean isAvailable() {
-        return !mIsSecondaryUser
-                && !Utils.isWifiOnly(mContext)
-                && !hasBaseUserRestriction(mContext, DISALLOW_CONFIG_MOBILE_NETWORKS, myUserId());
+        return !isUserRestricted() && !Utils.isWifiOnly(mContext);
+    }
+
+    public boolean isUserRestricted() {
+        final RestrictedLockUtilsWrapper wrapper = new RestrictedLockUtilsWrapper();
+        return mIsSecondaryUser ||
+                wrapper.hasBaseUserRestriction(
+                        mContext,
+                        DISALLOW_CONFIG_MOBILE_NETWORKS,
+                        myUserId());
     }
 
     @Override
