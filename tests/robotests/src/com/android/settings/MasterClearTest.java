@@ -26,6 +26,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +38,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
@@ -144,19 +144,19 @@ public class MasterClearTest {
     }
 
     @Test
-    @Config(shadows = { ShadowUtils.class, SettingsShadowResources.class })
+    @Config(shadows = { ShadowUtils.class })
     public void testInitiateMasterClear_inDemoMode_sendsIntent() {
-        SettingsShadowResources.overrideResource(
-            com.android.internal.R.string.config_demoModePackage, "package");
-
         ShadowUtils.setIsDemoUser(true);
+
+        final ComponentName componentName = ComponentName.unflattenFromString(
+                "com.android.retaildemo/.DeviceAdminReceiver");
+        ShadowUtils.setDeviceOwnerComponent(componentName);
 
         mMasterClear.mInitiateListener.onClick(
                 mContentView.findViewById(R.id.initiate_master_clear));
         final Intent intent = mShadowActivity.getNextStartedActivity();
         assertThat(Intent.ACTION_FACTORY_RESET).isEqualTo(intent.getAction());
-        final String packageName = Utils.getDemoModePackageName(RuntimeEnvironment.application);
-        assertThat(packageName).isEqualTo(intent.getPackage());
+        assertThat(componentName.getPackageName()).isEqualTo(intent.getPackage());
     }
 
     private void initScrollView(int height, int scrollY, int childBottom) {

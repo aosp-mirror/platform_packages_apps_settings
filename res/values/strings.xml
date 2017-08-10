@@ -834,6 +834,12 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
+    <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
+    <string name="fingerprint_enroll_skip_after_adding_lock_title">Skip fingerprint setup?</string>
+    <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_enroll_skip_after_adding_lock_text">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+    <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or reset.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (device) [CHAR LIMIT=NONE] -->
@@ -2093,8 +2099,6 @@
     <string name="wifi_hotspot_configure_ap_text">Wi\u2011Fi hotspot setup</string>
     <!-- Summary Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=60] -->
     <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK hotspot</string>
-    <!-- Subtext on configuration preference to indicate SSID and security chosen -->
-    <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> hotspot</string>
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
 
@@ -3501,6 +3505,20 @@
          managed by their employer. This is an extra security measure that's required for them to
          continue. [CHAR LIMIT=100] -->
     <string name="lockpassword_strong_auth_required_work_password">For added security, enter your work password</string>
+
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+
+    <!-- Header shown when pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_header_frp">Verify pattern</string>
+    <!-- Header shown when the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_header_frp">Verify PIN</string>
+    <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
 
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
@@ -5180,7 +5198,6 @@
     <string name="credentials_old_password">Current password:</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
-    <string name="credentials_password_too_short">The password must have at least 8 characters.</string>
     <!-- Error message [CHAR LIMIT=NONE] -->
     <string name="credentials_wrong_password">Incorrect password.</string>
     <!-- Error message [CHAR LIMIT=NONE] -->
@@ -9011,7 +9028,13 @@
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>
 
     <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
-    <string name="new_device_suggestion_summary">Check out the top 5 features</string>
+    <string name="new_device_suggestion_summary" product="default">Take a tour of your new phone</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary" product="tablet">Take a tour of your new tablet</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary" product="device">Take a tour of your new device</string>
 
     <!-- The divider symbol between different parts of the notification header including spaces. not translatable [CHAR LIMIT=3] -->
     <string name="notification_header_divider_symbol_with_spaces" translatable="false">" • "</string>

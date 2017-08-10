@@ -21,9 +21,9 @@ import android.content.Context;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MockAccessiblityLoader extends AccessibilityServiceResultLoader {
+public class MockAccessibilityLoader extends AccessibilityServiceResultLoader {
 
-    public MockAccessiblityLoader(Context context) {
+    public MockAccessibilityLoader(Context context) {
         super(context, "test_query", null);
     }
 

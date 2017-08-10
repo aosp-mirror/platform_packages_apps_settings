@@ -197,11 +197,19 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultHeader() {
+            if (mFrp) {
+                return mIsAlpha ? R.string.lockpassword_confirm_your_password_header_frp
+                        : R.string.lockpassword_confirm_your_pin_header_frp;
+            }
             return mIsAlpha ? R.string.lockpassword_confirm_your_password_header
                     : R.string.lockpassword_confirm_your_pin_header;
         }
 
         private int getDefaultDetails() {
+            if (mFrp) {
+                return mIsAlpha ? R.string.lockpassword_confirm_your_password_details_frp
+                        : R.string.lockpassword_confirm_your_pin_details_frp;
+            }
             boolean isStrongAuthRequired = isStrongAuthRequired();
             boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
             // Map boolean flags to an index by isStrongAuth << 2 + isProfile << 1 + isAlpha.

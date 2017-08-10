@@ -60,7 +60,6 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.SearchActivity;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
@@ -77,8 +76,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         ButtonBarHandler, FragmentManager.OnBackStackChangedListener, OnClickListener {
 
     private static final String LOG_TAG = "Settings";
-
-    public static final int LOADER_ID_INDEXABLE_CONTENT_MONITOR = 1;
 
     // Constants for state save/restore
     private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
@@ -183,8 +180,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
     };
-
-    private DynamicIndexableContentMonitor mDynamicIndexableContentMonitor;
 
     private SwitchBar mSwitchBar;
 
@@ -538,10 +533,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 new IntentFilter(DevelopmentSettingsEnabler.DEVELOPMENT_SETTINGS_CHANGED_ACTION));
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        if (mDynamicIndexableContentMonitor == null) {
-            mDynamicIndexableContentMonitor = new DynamicIndexableContentMonitor();
-        }
-        mDynamicIndexableContentMonitor.register(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
 
         updateTilesList();
     }
@@ -552,9 +543,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mDevelopmentSettingsListener);
         mDevelopmentSettingsListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
-        if (mDynamicIndexableContentMonitor != null) {
-            mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
-        }
     }
 
     @Override

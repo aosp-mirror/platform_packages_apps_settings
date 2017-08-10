@@ -168,7 +168,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"‏%1$s רוצה לגשת להודעות שלך. להעניק גישה ל-%2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"‏בקשת גישה אל כרטיס SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"‏<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> רוצה לגשת אל כרטיס ה-SIM. הענקת גישה אל כרטיס ה-SIM תשבית את קישוריות הנתונים במכשיר לכל משך החיבור. הענק גישה ל-<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="6210079027471483881">"גלוי למכשירים אחרים. מופיע בשם <xliff:g id="DEVICE_NAME">^1</xliff:g>"</string>
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"משתמשים אחרים יכולים לראות את המכשיר שלך בתור \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\'"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"המכשירים שלך"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"התאמה של מכשיר חדש"</string>
     <string name="date_and_time" msgid="9062980487860757694">"תאריך ושעה"</string>
@@ -606,6 +606,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"אין להגדיר רצף ספרות עולה, יורד או חוזר"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"אישור"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"ביטול"</string>
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"נקה"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"ביטול"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"הבא"</string>
     <string name="lock_setup" msgid="3355847066343753943">"ההגדרה הושלמה."</string>
@@ -840,10 +841,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"‏WPS זמין"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" ‏ (WPS זמין)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"הזן את סיסמת הרשת שלך"</string>
-    <!-- no translation found for wifi_carrier_connect (8174696557882299911) -->
-    <skip />
-    <!-- no translation found for wifi_carrier_content (4634077285415851933) -->
-    <skip />
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"‏רשת Wi-Fi של ספק"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"חיבור לרשת של <xliff:g id="NAME">%1%s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"‏לשיפור דיוק המיקום ולמטרות אחרות, <xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפעיל את סריקת הרשתות, גם כאשר ה-Wi-Fi כבוי.\n\nהאם להתיר זאת עבור כל האפליקציות שרוצות לסרוק?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"כדי לכבות, עבור אל \'מתקדם\' באפשרויות הנוספות."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"כן, זה בסדר"</string>
@@ -968,7 +967,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"‏כשהתקשרות Wi-Fi פועלת, הטלפון יכול לנתב שיחות ברשתות Wi-Fi או ברשת של הספק, בהתאם להעדפה שלך ולאות שחזק יותר. לפני הפעלת תכונה זו, בדוק עם הספק פרטים הקשורים לעמלות ופרטים אחרים."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"עדכן כתובת למקרה חירום"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"‏כתובת שתשמש כמיקום שלך לטובת שירותי החירום, אם תתקשר למוקד החירום באמצעות רשת Wi-Fi"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"‏הכתובת ששירותי החירום ישתמשו בה כדי להגיע אליך, אם תתקשר למוקד החירום באמצעות רשת Wi-Fi"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"תצוגה"</string>
     <string name="sound_settings" msgid="5534671337768745343">"צלילים"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"עוצמות קול"</string>
@@ -1367,23 +1366,14 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"האם לאפס?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"המשתמש הזה לא יכול לאפס את הגדרות הרשת"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"הגדרות הרשת אופסו"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"מחק את כל הנתונים (איפוס להגדרות היצרן)"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="two"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> חשבונות יאופסו</item>
-      <item quantity="many"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> חשבונות יאופסו</item>
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> חשבונות יאופסו</item>
-      <item quantity="one">חשבון אחד יאופס</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"האחסון הפנימי וכל הנתונים יאופסו"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"מחק את כל הנתונים (איפוס להגדרות היצרן)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"‏פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטאבלט שלך, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות שלך"</li>\n<li>"האפליקציות שהורדת"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"‏פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטלפון שלך, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות שלך"</li>\n<li>"האפליקציות שהורדת"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"אתה מחובר כעת לחשבונות הבאים:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"קיימים משתמשים אחרים במכשיר זה.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"מוסיקה"</li>\n<li>"תמונות"</li>\n<li>"נתוני משתמש אחרים"</li></string>
-    <!-- no translation found for master_clear_desc_also_erases_esim (312352697653096008) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_no_cancel_mobile_plan (5460926449093211144) -->
-    <skip />
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008">"‏"<li>"הספקים ב-eSIM"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"מחיקת הנתונים לא תבטל את תוכנית השירות הסלולרי שלך."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">"‏\n\nכדי למחוק פריטי מוזיקה, תמונות ונתוני משתמש אחרים, יש למחוק את "<b>"אחסון ה-USB"</b>"."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">"‏\n\nכדי למחוק פריטי מוזיקה, תמונות ונתוני משתמש אחרים, יש למחוק את "<b>"כרטיס ה-SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"‏מחק אחסון USB"</string>
@@ -1842,8 +1832,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"קוראי מסך, פקדי אינטראקציה, תצוגה"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"הגדרות תצוגה"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"ניתן להתאים אישית את המכשיר הזה כדי שיתאים לצרכיך. ניתן לשנות את תכונות הנגישות מאוחר יותר ב\'הגדרות\'."</string>
-    <!-- no translation found for vision_settings_suggestion_title (8058794060304707004) -->
-    <skip />
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"שינוי גודל הגופן"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"קוראי מסך"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"הקראת טקסט שמופיע במסך"</string>
     <string name="display_category_title" msgid="685461049938269166">"תצוגה"</string>
@@ -2951,6 +2940,8 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"ללא צליל"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"השמע צליל"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"השמע צליל והצג במסך"</string>
+    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
+    <skip />
     <string name="notification_importance_min_title" msgid="6974673091137544803">"נמוכה"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"בינונית"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"גבוהה"</string>
@@ -3512,7 +3503,7 @@
     <string name="data_warning" msgid="209133958008062117">"אזהרה לגבי שימוש בנתונים"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"הגדרה של הגבלת נתונים"</string>
     <string name="data_limit" msgid="1885406964934590552">"מגבלת נתונים"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"בתקופה <xliff:g id="ID_2">%2$s</xliff:g> נעשה שימוש ב-<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"השתמשת ב-<xliff:g id="ID_1">%1$s</xliff:g> בתאריכים <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"הגדר"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"אפליקציות אחרות שנכללות בנתוני השימוש"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3585,8 +3576,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"מחיקה והמרה"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"‏אפס הגבלת דירוג ב-ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"‏אופסה הגבלת דירוג ב-ShortcutManager"</string>
-    <!-- no translation found for notification_suggestion_title (387052719462473500) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="387052719462473500">"בחירת הפרטים שמופיעים במסך הנעילה"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"הצג או הסתר תוכן הודעה"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"הכול"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"תמיכה וטיפים"</string>

@@ -29,16 +29,6 @@
         android:summary="@string/usb_tethering_subtext" />
 
     <SwitchPreference
-        android:key="enable_wifi_ap"
-        android:title="@string/wifi_hotspot_checkbox_text"
-        android:summary="@string/summary_two_lines_placeholder" />
-
-    <Preference
-        android:key="wifi_ap_ssid_and_security"
-        android:title="@string/wifi_tether_configure_ap_text"
-        android:persistent="false" />
-
-    <SwitchPreference
         android:key="enable_bluetooth_tethering"
         android:title="@string/bluetooth_tether_checkbox_text"
         android:summary="@string/bluetooth_tethering_subtext" />
