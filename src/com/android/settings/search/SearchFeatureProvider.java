@@ -49,6 +49,11 @@ public interface SearchFeatureProvider {
             String query);
 
     /**
+     * Returns a new loader to search input devices.
+     */
+    InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query);
+
+    /**
      * Returns a new loader to get all recently saved queries search terms.
      */
     SavedQueryLoader getSavedQueryLoader(Context context);
