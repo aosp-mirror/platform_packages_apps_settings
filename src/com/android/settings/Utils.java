@@ -1280,8 +1280,10 @@ public final class Utils extends com.android.settingslib.Utils {
         return UserManager.isDeviceInDemoMode(context) && getUserManager(context).isDemoUser();
     }
 
-    public static String getDemoModePackageName(Context context) {
-        return context.getString(com.android.internal.R.string.config_demoModePackage);
+    public static ComponentName getDeviceOwnerComponent(Context context) {
+        final DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        return dpm.getDeviceOwnerComponentOnAnyUser();
     }
 
     /**
