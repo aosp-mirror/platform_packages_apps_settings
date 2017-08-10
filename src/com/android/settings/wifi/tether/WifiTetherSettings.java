@@ -26,7 +26,6 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
@@ -44,10 +43,6 @@ import java.util.List;
 
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
-
-    public static boolean isTetherSettingPageEnabled() {
-        return SystemProperties.getBoolean("settings.ui.wifi.tether.enabled", true);
-    }
 
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
 
