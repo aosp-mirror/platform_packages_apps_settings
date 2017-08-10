@@ -34,7 +34,7 @@ import java.util.List;
 public class SavedQueryLoader extends AsyncLoader<List<? extends SearchResult>> {
 
     // Max number of proposed suggestions
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     static final int MAX_PROPOSED_SUGGESTIONS = 5;
 
     private final SQLiteDatabase mDatabase;
@@ -51,15 +51,17 @@ public class SavedQueryLoader extends AsyncLoader<List<? extends SearchResult>> 
 
     @Override
     public List<? extends SearchResult> loadInBackground() {
-        Cursor cursor = mDatabase.query(IndexDatabaseHelper.Tables.TABLE_SAVED_QUERIES /* table */,
+        try (final Cursor cursor = mDatabase.query(
+                IndexDatabaseHelper.Tables.TABLE_SAVED_QUERIES /* table */,
                 new String[]{SavedQueriesColumns.QUERY} /* columns */,
                 null /* selection */,
                 null /* selectionArgs */,
                 null /* groupBy */,
                 null /* having */,
                 "rowId DESC" /* orderBy */,
-                String.valueOf(MAX_PROPOSED_SUGGESTIONS) /* limit */);
-        return convertCursorToResult(cursor);
+                String.valueOf(MAX_PROPOSED_SUGGESTIONS) /* limit */)) {
+            return convertCursorToResult(cursor);
+        }
     }
 
     private List<SearchResult> convertCursorToResult(Cursor cursor) {
