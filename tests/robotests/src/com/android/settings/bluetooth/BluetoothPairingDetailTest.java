@@ -85,6 +85,7 @@ public class BluetoothPairingDetailTest {
         mFragment.mLocalAdapter = mLocalAdapter;
         mFragment.mLocalManager = mLocalManager;
         mFragment.mDeviceListGroup = mPreferenceGroup;
+        mFragment.mAlwaysDiscoverable = new AlwaysDiscoverable(mContext, mLocalAdapter);
     }
 
     @Test
