@@ -1,25 +1,22 @@
 package com.android.settings;
 
-import android.content.Intent;
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Instrumentation;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroupAdapter;
-import com.android.settings.accessibility.AccessibilitySettings;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroupAdapter;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.google.common.truth.Truth.assertThat;
+import com.android.settings.accessibility.AccessibilitySettings;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest

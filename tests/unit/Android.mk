@@ -14,6 +14,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     mockito-target-minus-junit4 \
     truth-prebuilt \
     ub-uiautomator \
+    espresso-intents-nodep \
 
 
 # Include all test java files.
