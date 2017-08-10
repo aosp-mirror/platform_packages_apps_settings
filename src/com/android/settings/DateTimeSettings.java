@@ -26,6 +26,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.datetime.AutoTimeFormatPreferenceController;
 import com.android.settings.datetime.AutoTimePreferenceController;
 import com.android.settings.datetime.AutoTimeZonePreferenceController;
 import com.android.settings.datetime.DatePreferenceController;
@@ -84,8 +85,12 @@ public class DateTimeSettings extends DashboardFragment implements
         final AutoTimePreferenceController autoTimePreferenceController =
                 new AutoTimePreferenceController(
                         activity, this /* UpdateTimeAndDateCallback */);
+        final AutoTimeFormatPreferenceController autoTimeFormatPreferenceController =
+                new AutoTimeFormatPreferenceController(
+                        activity, this /* UpdateTimeAndDateCallback */);
         controllers.add(autoTimeZonePreferenceController);
         controllers.add(autoTimePreferenceController);
+        controllers.add(autoTimeFormatPreferenceController);
 
         controllers.add(new TimeFormatPreferenceController(
                 activity, this /* UpdateTimeAndDateCallback */, isFromSUW));
