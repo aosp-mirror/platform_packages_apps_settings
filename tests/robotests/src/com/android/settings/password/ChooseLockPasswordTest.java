@@ -31,7 +31,6 @@ import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragme
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.setupwizardlib.GlifLayout;
@@ -52,7 +51,6 @@ import org.robolectric.shadows.ShadowDrawable;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class,
                 ShadowEventLogWriter.class,
                 ShadowUtils.class
         })

@@ -52,6 +52,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String TAG = "LangAndInputSettings";
 
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
+    private static final String KEY_PHYSICAL_KEYBOARD = "physical_keyboard_pref";
 
     @Override
     public int getMetricsCategory() {
@@ -174,6 +175,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicates in summary and details pages.
                     keys.add(KEY_TEXT_TO_SPEECH);
+                    keys.add(KEY_PHYSICAL_KEYBOARD);
 
                     return keys;
                 }

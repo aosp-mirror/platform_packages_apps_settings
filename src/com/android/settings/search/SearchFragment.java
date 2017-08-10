@@ -84,8 +84,10 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     static final int LOADER_ID_INSTALLED_APPS = 2;
     @VisibleForTesting
     static final int LOADER_ID_ACCESSIBILITY_SERVICES = 3;
+    @VisibleForTesting
+    static final int LOADER_ID_INPUT_DEVICES = 4;
 
-    private static final int NUM_QUERY_LOADERS = 3;
+    private static final int NUM_QUERY_LOADERS = 4;
 
     @VisibleForTesting
     AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);
@@ -284,6 +286,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             loaderManager.destroyLoader(LOADER_ID_DATABASE);
             loaderManager.destroyLoader(LOADER_ID_INSTALLED_APPS);
             loaderManager.destroyLoader(LOADER_ID_ACCESSIBILITY_SERVICES);
+            loaderManager.destroyLoader(LOADER_ID_INPUT_DEVICES);
             mShowingSavedQuery = true;
             mSavedQueryController.loadSavedQueries();
             mSearchFeatureProvider.hideFeedbackButton();
@@ -314,6 +317,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 return mSearchFeatureProvider.getInstalledAppSearchLoader(activity, mQuery);
             case LOADER_ID_ACCESSIBILITY_SERVICES:
                 return mSearchFeatureProvider.getAccessibilityServiceResultLoader(activity, mQuery);
+            case LOADER_ID_INPUT_DEVICES:
+                return mSearchFeatureProvider.getInputDeviceResultLoader(activity, mQuery);
             default:
                 return null;
         }
@@ -351,6 +356,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                     LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
             loaderManager.initLoader(
                     LOADER_ID_ACCESSIBILITY_SERVICES, null /* args */, this /* callback */);
+            loaderManager.initLoader(
+                    LOADER_ID_INPUT_DEVICES, null /* args */, this /* callback */);
         }
 
         requery();
@@ -391,6 +398,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
         loaderManager.restartLoader(LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
         loaderManager.restartLoader(LOADER_ID_ACCESSIBILITY_SERVICES, null /* args */,
+                this /* callback */);
+        loaderManager.restartLoader(LOADER_ID_INPUT_DEVICES, null /* args */,
                 this /* callback */);
     }
 
