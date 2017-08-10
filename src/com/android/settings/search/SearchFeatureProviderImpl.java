@@ -62,6 +62,11 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
+    public InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query) {
+        return new InputDeviceResultLoader(context, cleanQuery(query), getSiteMapManager());
+    }
+
+    @Override
     public SavedQueryLoader getSavedQueryLoader(Context context) {
         return new SavedQueryLoader(context);
     }

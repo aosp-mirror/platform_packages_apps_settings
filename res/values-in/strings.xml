@@ -166,8 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s ingin mengakses pesan Anda. Berikan akses pada %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Permintaan akses SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ingin mengakses kartu SIM. Memberi akses ke kartu SIM akan menonaktifkan konektivitas data di perangkat selama tersambung. Berikan akses ke <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <!-- no translation found for bluetooth_device_name_summary (522235742194965734) -->
-    <skip />
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Terlihat sebagai “<xliff:g id="DEVICE_NAME">^1</xliff:g>” oleh perangkat lain"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Perangkat Anda"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Sambungkan perangkat baru"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Tanggal &amp; waktu"</string>
@@ -469,7 +468,7 @@
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Langsung setelah tidur"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> setelah tidur"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"Kunci profil kerja"</string>
-    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ubah layar gembok"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Ubah layar kunci"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Ubah atau nonaktifkan pola, PIN, atau sandi keamanan"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Pilih metode untuk mengunci layar"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Tidak ada"</string>
@@ -589,8 +588,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Urutan digit naik, turun, atau berulang tidak diizinkan"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Oke"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Batal"</string>
-    <!-- no translation found for lockpassword_clear_label (5724429464960458155) -->
-    <skip />
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"Hapus"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Batal"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Selanjutnya"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Penyiapan selesai."</string>
@@ -1341,8 +1339,7 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Setel ulang?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Setel ulang jaringan tidak tersedia untuk pengguna ini"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Setelan jaringan telah disetel ulang"</string>
-    <!-- no translation found for master_clear_title (3531267871084279512) -->
-    <skip />
+    <string name="master_clear_title" msgid="3531267871084279512">"Hapus semua data (kembali ke setelan pabrik)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan apl serta setelan"</li>\n<li>"Apl download"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan apl serta setelan"</li>\n<li>"Apl download"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Saat ini Anda telah masuk ke akun berikut ini:\n"</string>
@@ -2886,6 +2883,8 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Tanpa suara"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Buat suara"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Buat suara dan munculkan di layar"</string>
+    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
+    <skip />
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Rendah"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Sedang"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Tinggi"</string>
@@ -3415,8 +3414,7 @@
     <string name="data_warning" msgid="209133958008062117">"Peringatan data"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Setel batas data"</string>
     <string name="data_limit" msgid="1885406964934590552">"Batas data"</string>
-    <!-- no translation found for data_usage_template (2923744765873163859) -->
-    <skip />
+    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> digunakan <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Konfigurasi"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Aplikasi lain yang disertakan dalam penggunaan"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
