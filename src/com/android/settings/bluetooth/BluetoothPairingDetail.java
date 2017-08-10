@@ -53,6 +53,8 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     BluetoothProgressCategory mAvailableDevicesCategory;
     @VisibleForTesting
     FooterPreference mFooterPreference;
+    @VisibleForTesting
+    AlwaysDiscoverable mAlwaysDiscoverable;
 
     private boolean mInitialScanStarted;
 
@@ -64,6 +66,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mInitialScanStarted = false;
+        mAlwaysDiscoverable = new AlwaysDiscoverable(getContext(), mLocalAdapter);
     }
 
     @Override
@@ -79,7 +82,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
         super.onStop();
 
         // Make the device only visible to connected devices.
-        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
+        mAlwaysDiscoverable.stop();
         disableScanning();
     }
 
@@ -132,9 +135,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
                         R.string.bluetooth_preference_found_devices,
                         BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
                 updateFooterPreference(mFooterPreference);
-                // mLocalAdapter.setScanMode is internally synchronized so it is okay for multiple
-                // threads to execute.
-                mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+                mAlwaysDiscoverable.start();
                 enableScanning();
                 break;
 
