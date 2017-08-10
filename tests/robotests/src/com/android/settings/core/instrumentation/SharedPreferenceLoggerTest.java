@@ -39,7 +39,7 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
         .FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE;
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE;
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE;
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
         .FIELD_SETTINGS_PREFERENCE_CHANGE_NAME;
 import static org.mockito.Matchers.any;
@@ -88,7 +88,7 @@ public class SharedPreferenceLoggerTest {
 
         verify(mMetricsFeature, times(6)).action(any(Context.class), anyInt(),
                 argThat(mNamePairMatcher),
-                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class)));
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, Integer.class)));
     }
 
     @Test
@@ -103,10 +103,10 @@ public class SharedPreferenceLoggerTest {
 
         verify(mMetricsFeature).action(any(Context.class), anyInt(),
                 argThat(mNamePairMatcher),
-                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, true)));
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, true)));
         verify(mMetricsFeature, times(3)).action(any(Context.class), anyInt(),
                 argThat(mNamePairMatcher),
-                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, false)));
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, false)));
     }
 
     @Test
@@ -120,7 +120,33 @@ public class SharedPreferenceLoggerTest {
 
         verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
                 argThat(mNamePairMatcher),
-                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class)));
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, Integer.class)));
+    }
+
+    @Test
+    public void putLong_biggerThanIntMax_shouldLogIntMax() {
+        final SharedPreferences.Editor editor = mSharedPrefLogger.edit();
+        final long veryBigNumber = 500L + Integer.MAX_VALUE;
+        editor.putLong(TEST_KEY, 1);
+        editor.putLong(TEST_KEY, veryBigNumber);
+
+        verify(mMetricsFeature).action(any(Context.class), anyInt(),
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(
+                        FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, Integer.MAX_VALUE)));
+    }
+
+    @Test
+    public void putLong_smallerThanIntMin_shouldLogIntMin() {
+        final SharedPreferences.Editor editor = mSharedPrefLogger.edit();
+        final long veryNegativeNumber = -500L + Integer.MIN_VALUE;
+        editor.putLong(TEST_KEY, 1);
+        editor.putLong(TEST_KEY, veryNegativeNumber);
+
+        verify(mMetricsFeature).action(any(Context.class), anyInt(),
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(
+                        FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, Integer.MIN_VALUE)));
     }
 
     @Test
@@ -152,7 +178,13 @@ public class SharedPreferenceLoggerTest {
 
     private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, boolean bool) {
         return pair -> pair.first == tag
-                && Platform.isInstanceOfType(pair.second, Long.class)
-                && pair.second.equals((bool ? 1L : 0L));
+                && Platform.isInstanceOfType(pair.second, Integer.class)
+                && pair.second.equals((bool ? 1 : 0));
+    }
+
+    private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, int val) {
+        return pair -> pair.first == tag
+                && Platform.isInstanceOfType(pair.second, Integer.class)
+                && pair.second.equals(val);
     }
 }
