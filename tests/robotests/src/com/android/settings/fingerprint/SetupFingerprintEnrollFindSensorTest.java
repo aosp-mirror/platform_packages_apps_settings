@@ -95,7 +95,7 @@ public class SetupFingerprintEnrollFindSensorTest {
         AlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
         assertNotNull(alertDialog);
         ShadowAlertDialog shadowAlertDialog = Shadows.shadowOf(alertDialog);
-        int titleRes = R.string.fingerprint_enroll_skip_after_adding_lock_title;
+        int titleRes = R.string.setup_fingerprint_enroll_skip_title;
         assertEquals(application.getString(titleRes), shadowAlertDialog.getTitle());
     }
 
