@@ -22,8 +22,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -44,7 +44,16 @@ import java.util.List;
 public class ConfigureNotificationSettings extends DashboardFragment {
     private static final String TAG = "ConfigNotiSettings";
 
-    private static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
+    @VisibleForTesting
+    static final String KEY_LOCKSCREEN = "lock_screen_notifications";
+    @VisibleForTesting
+    static final String KEY_LOCKSCREEN_WORK_PROFILE_HEADER =
+            "lock_screen_notifications_profile_header";
+    @VisibleForTesting
+    static final String KEY_LOCKSCREEN_WORK_PROFILE = "lock_screen_notifications_profile";
+    @VisibleForTesting
+    static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
+
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
 
     private RingtonePreference mRequestPreference;
@@ -80,9 +89,9 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                 new PulseNotificationPreferenceController(context);
         final LockScreenNotificationPreferenceController lockScreenNotificationController =
                 new LockScreenNotificationPreferenceController(context,
-                        "lock_screen_notifications",
-                        "lock_screen_notifications_profile_header",
-                        "lock_screen_notifications_profile");
+                        KEY_LOCKSCREEN,
+                        KEY_LOCKSCREEN_WORK_PROFILE_HEADER,
+                        KEY_LOCKSCREEN_WORK_PROFILE);
         if (lifecycle != null) {
             lifecycle.addObserver(pulseController);
             lifecycle.addObserver(lockScreenNotificationController);
@@ -156,9 +165,19 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context, null);
                 }
 
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_SWIPE_DOWN);
+                    keys.add(KEY_LOCKSCREEN);
+                    keys.add(KEY_LOCKSCREEN_WORK_PROFILE);
+                    keys.add(KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
+                    return keys;
+                }
             };
 }
