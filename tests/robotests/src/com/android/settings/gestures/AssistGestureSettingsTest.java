@@ -62,13 +62,6 @@ public class AssistGestureSettingsTest {
     }
 
     @Test
-    public void testGetPreferenceControllers_shouldAllBeCreated() {
-        final List<AbstractPreferenceController> controllers =
-                mSettings.getPreferenceControllers(mContext);
-        assertThat(controllers.isEmpty()).isFalse();
-    }
-
-    @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
                 AssistGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
