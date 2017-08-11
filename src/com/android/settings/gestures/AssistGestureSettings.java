@@ -35,8 +35,6 @@ public class AssistGestureSettings extends DashboardFragment {
 
     private static final String TAG = "AssistGesture";
 
-    private static final String KEY_ASSIST = "gesture_assist";
-
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_ASSIST_GESTURE;
@@ -60,8 +58,6 @@ public class AssistGestureSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
-                false /* assistOnly */));
         controllers.addAll(FeatureFactory.getFactory(context).getAssistGestureFeatureProvider()
                 .getControllers(context, lifecycle));
 
@@ -86,8 +82,8 @@ public class AssistGestureSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return new AssistGesturePreferenceController(context, null /* lifecycle */,
-                            null /* key */, false /* assistOnly */)
+                    return new AssistGestureSettingsPreferenceController(context,
+                            null /* lifecycle */, null /* key */, false /* assistOnly */)
                             .isAvailable();
                 }
             };
