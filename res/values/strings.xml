@@ -835,9 +835,9 @@
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
-    <string name="fingerprint_enroll_skip_after_adding_lock_title">Skip fingerprint setup?</string>
+    <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_enroll_skip_after_adding_lock_text">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text">Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
@@ -1381,7 +1381,7 @@
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_cancel_label">Cancel</string>
 
-    <!-- Label for ChoosePassword/PIN OK button -->
+    <!-- Label for ChoosePassword/PIN Clear button that clears all text entered by the user so far. -->
     <string name="lockpassword_clear_label">Clear</string>
 
     <!-- Label for LockPatternTutorial Cancel button -->
