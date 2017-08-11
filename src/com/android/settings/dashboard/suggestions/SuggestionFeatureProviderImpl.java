@@ -26,8 +26,9 @@ import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
+import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
 import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
 import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
@@ -45,6 +46,7 @@ import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
@@ -130,10 +132,13 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         if (parser == null || suggestion == null || context == null) {
             return;
         }
-        mMetricsFeatureProvider.action(
-                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                getSuggestionIdentifier(context, suggestion));
+        final Pair<Integer, Object>[] taggedData =
+                SuggestionLogHelper.getSuggestionTaggedData(isSmartSuggestionEnabled(context));
 
+        mMetricsFeatureProvider.action(
+                context, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                getSuggestionIdentifier(context, suggestion),
+                taggedData);
         if (!parser.dismissSuggestion(suggestion)) {
             return;
         }
