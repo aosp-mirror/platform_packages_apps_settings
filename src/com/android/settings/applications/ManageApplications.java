@@ -115,6 +115,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final String EXTRA_VOLUME_UUID = "volumeUuid";
     public static final String EXTRA_VOLUME_NAME = "volumeName";
     public static final String EXTRA_STORAGE_TYPE = "storageType";
+    public static final String EXTRA_WORK_ONLY = "workProfileOnly";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -277,6 +278,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
     private int mStorageType;
+    private boolean mIsWorkOnly;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -328,6 +330,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mListType = LIST_TYPE_MAIN;
         }
         mFilter = getDefaultFilter();
+        mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
@@ -423,6 +426,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (mIsWorkOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter, FILTERS[FILTER_APPS_WORK]);
+        }
         if (compositeFilter != null) {
             mApplications.setCompositeFilter(compositeFilter);
         }
