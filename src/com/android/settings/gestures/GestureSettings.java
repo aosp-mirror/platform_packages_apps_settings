@@ -75,8 +75,8 @@ public class GestureSettings extends DashboardFragment {
             @NonNull Context context, @Nullable Lifecycle lifecycle,
             @NonNull AmbientDisplayConfiguration ambientDisplayConfiguration) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
-                false /* assistOnly */));
+        controllers.add(new AssistGestureSettingsPreferenceController(context, lifecycle,
+                KEY_ASSIST, false /* assistOnly */));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
                 KEY_SWIPE_DOWN));
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle, KEY_DOUBLE_TWIST));
