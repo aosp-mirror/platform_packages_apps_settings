@@ -18,6 +18,7 @@ package com.android.settings.dashboard.suggestions;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,11 +68,12 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     public void onBindViewHolder(DashboardItemHolder holder, int position) {
         final Tile suggestion = (Tile) mSuggestions.get(position);
         final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
-            mContext, suggestion);
+                mContext, suggestion);
         // This is for cases when a suggestion is dismissed and the next one comes to view
         if (!mSuggestionsShownLogged.contains(suggestionId)) {
             mMetricsFeatureProvider.action(
-                mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId);
+                    mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId,
+                    getSuggestionTaggedData());
             mSuggestionsShownLogged.add(suggestionId);
         }
         if (suggestion.remoteViews != null) {
@@ -102,9 +104,11 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
             // set the item view to disabled to remove any touch effects
             holder.itemView.setEnabled(false);
         }
+
         clickHandler.setOnClickListener(v -> {
             mMetricsFeatureProvider.action(mContext,
-                MetricsEvent.ACTION_SETTINGS_SUGGESTION, suggestionId);
+                    MetricsEvent.ACTION_SETTINGS_SUGGESTION, suggestionId,
+                    getSuggestionTaggedData());
             ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
         });
     }
@@ -129,7 +133,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
 
     public Tile getSuggestion(int position) {
         final long itemId = getItemId(position);
-        for (Tile tile: mSuggestions) {
+        for (Tile tile : mSuggestions) {
             if (Objects.hash(tile.title) == itemId) {
                 return tile;
             }
@@ -141,4 +145,10 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         mSuggestions.remove(suggestion);
         notifyDataSetChanged();
     }
+
+    private Pair<Integer, Object>[] getSuggestionTaggedData() {
+        return SuggestionLogHelper.getSuggestionTaggedData(
+                mSuggestionFeatureProvider.isSmartSuggestionEnabled(mContext));
+    }
+
 }
