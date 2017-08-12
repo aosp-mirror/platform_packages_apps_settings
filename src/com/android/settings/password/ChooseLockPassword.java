@@ -213,6 +213,7 @@ public class ChooseLockPassword extends SettingsActivity {
         protected Button mCancelButton;
         private Button mClearButton;
         private Button mNextButton;
+        private TextView mMessage;
 
         private TextChangedHandler mTextChangedHandler;
 
@@ -247,10 +248,14 @@ public class ChooseLockPassword extends SettingsActivity {
         protected enum Stage {
 
             Introduction(
-                    R.string.lockpassword_choose_your_password_header,
+                    R.string.lockpassword_choose_your_screen_lock_header,
                     R.string.lockpassword_choose_your_password_header_for_fingerprint,
-                    R.string.lockpassword_choose_your_pin_header,
+                    R.string.lockpassword_choose_your_screen_lock_header,
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
+                    R.string.lockpassword_choose_your_password_message,
+                    R.string.lock_settings_picker_fingerprint_added_security_message,
+                    R.string.lockpassword_choose_your_pin_message,
+                    R.string.lock_settings_picker_fingerprint_added_security_message,
                     R.string.next_label),
 
             NeedToConfirm(
@@ -258,6 +263,10 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
+                    0,
+                    0,
+                    0,
+                    0,
                     R.string.lockpassword_ok_label),
 
             ConfirmWrong(
@@ -265,14 +274,25 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
+                    0,
+                    0,
+                    0,
+                    0,
                     R.string.next_label);
 
             Stage(int hintInAlpha, int hintInAlphaForFingerprint,
-                    int hintInNumeric, int hintInNumericForFingerprint, int nextButtonText) {
+                    int hintInNumeric, int hintInNumericForFingerprint,
+                    int messageInAlpha, int messageInAlphaForFingerprint,
+                    int messageInNumeric, int messageInNumericForFingerprint,
+                    int nextButtonText) {
                 this.alphaHint = hintInAlpha;
                 this.alphaHintForFingerprint = hintInAlphaForFingerprint;
                 this.numericHint = hintInNumeric;
                 this.numericHintForFingerprint = hintInNumericForFingerprint;
+                this.alphaMessage = messageInAlpha;
+                this.alphaMessageForFingerprint = messageInAlphaForFingerprint;
+                this.numericMessage = messageInNumeric;
+                this.numericMessageForFingerprint = messageInNumericForFingerprint;
                 this.buttonText = nextButtonText;
             }
 
@@ -280,6 +300,10 @@ public class ChooseLockPassword extends SettingsActivity {
             public final int alphaHintForFingerprint;
             public final int numericHint;
             public final int numericHintForFingerprint;
+            public final int alphaMessage;
+            public final int alphaMessageForFingerprint;
+            public final int numericMessage;
+            public final int numericMessageForFingerprint;
             public final int buttonText;
 
             public @StringRes int getHint(boolean isAlpha, boolean isFingerprint) {
@@ -287,6 +311,14 @@ public class ChooseLockPassword extends SettingsActivity {
                     return isFingerprint ? alphaHintForFingerprint : alphaHint;
                 } else {
                     return isFingerprint ? numericHintForFingerprint : numericHint;
+                }
+            }
+
+            public @StringRes int getMessage(boolean isAlpha, boolean isFingerprint) {
+                if (isAlpha) {
+                    return isFingerprint ? alphaMessageForFingerprint : alphaMessage;
+                } else {
+                    return isFingerprint ? numericMessageForFingerprint : numericMessage;
                 }
             }
         }
@@ -351,14 +383,9 @@ public class ChooseLockPassword extends SettingsActivity {
             mClearButton = view.findViewById(R.id.clear_button);
             mClearButton.setOnClickListener(this);
 
+
+            mMessage = view.findViewById(R.id.message);
             if (mForFingerprint) {
-                TextView fingerprintBackupMessage =
-                        view.findViewById(R.id.fingerprint_backup_message);
-                if (fingerprintBackupMessage != null) {
-                    fingerprintBackupMessage.setVisibility(View.VISIBLE);
-                    fingerprintBackupMessage
-                            .setText(R.string.setup_lock_settings_picker_fingerprint_message);
-                }
                 mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
             }
 
@@ -847,6 +874,13 @@ public class ChooseLockPassword extends SettingsActivity {
                 setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, mForFingerprint)));
                 setNextEnabled(canInput && length > 0);
                 mClearButton.setEnabled(canInput && length > 0);
+            }
+            int message = mUiStage.getMessage(mIsAlphaMode, mForFingerprint);
+            if (message != 0) {
+                mMessage.setVisibility(View.VISIBLE);
+                mMessage.setText(message);
+            } else {
+                mMessage.setVisibility(View.INVISIBLE);
             }
 
             mClearButton.setVisibility(toVisibility(mUiStage != Stage.Introduction));
