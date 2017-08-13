@@ -31,6 +31,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -358,5 +359,24 @@ public class WifiSettingsUiTest {
         onView(withText(resourceId(STRING, WIFI_SHOW_PASSWORD))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD_LAYOUT))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD))).check(matches(isDisplayed()));
+    }
+
+    public void onConnectedChanged_shouldNotFetchAPs() {
+        setWifiState(WifiManager.WIFI_STATE_ENABLED);
+        when(mWifiTracker.isConnected()).thenReturn(true);
+
+        launchActivity();
+
+        verify(mWifiTracker, atMost(1)).forceUpdate();
+        verify(mWifiTracker, times(1)).getAccessPoints();
+        onView(withText(WIFI_DISPLAY_STATUS_CONNECTED)).check(matches(isDisplayed()));
+
+        // Invoke onConnectedChanged
+        when(mWifiTracker.isConnected()).thenReturn(false);
+        mWifiListener.onConnectedChanged();
+
+        // Verify no additional call to getAccessPoints
+        getInstrumentation().waitForIdleSync();
+        verify(mWifiTracker, times(1)).getAccessPoints();
     }
 }

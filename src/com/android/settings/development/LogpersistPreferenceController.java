@@ -19,8 +19,10 @@ package com.android.settings.development;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.v7.preference.ListPreference;
+import android.support.annotation.Nullable;
+import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.AbstractLogpersistPreferenceController;
@@ -35,23 +37,30 @@ public class LogpersistPreferenceController extends AbstractLogpersistPreference
     }
 
     @Override
-    public void showConfirmationDialog(ListPreference preference) {
-        if (mLogpersistClearDialog != null) dismissDialogs();
-        mLogpersistClearDialog = new AlertDialog.Builder(mContext).setMessage(
-                mContext.getString(
-                        com.android.settingslib.R.string.dev_logpersist_clear_warning_message))
-                .setTitle(com.android.settingslib.R.string.dev_logpersist_clear_warning_title)
+    public void showConfirmationDialog(@Nullable Preference preference) {
+        if (preference == null) {
+            return;
+        }
+        if (mLogpersistClearDialog != null) dismissConfirmationDialog();
+        mLogpersistClearDialog = new AlertDialog.Builder(mContext)
+                .setMessage(R.string.dev_logpersist_clear_warning_message)
+                .setTitle(R.string.dev_logpersist_clear_warning_title)
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> setLogpersistOff(true))
                 .setNegativeButton(android.R.string.no, (dialog, which) -> updateLogpersistValues())
                 .show();
         mLogpersistClearDialog.setOnDismissListener(dialog -> mLogpersistClearDialog = null);
-
     }
 
-    public void dismissDialogs() {
+    @Override
+    public void dismissConfirmationDialog() {
         if (mLogpersistClearDialog != null) {
             mLogpersistClearDialog.dismiss();
             mLogpersistClearDialog = null;
         }
+    }
+
+    @Override
+    public boolean isConfirmationDialogShowing() {
+        return mLogpersistClearDialog != null;
     }
 }

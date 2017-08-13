@@ -737,12 +737,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /**
-     * Called when the connection state of wifi has changed and isConnected
-     * should be called to get the updated state.
+     * Called when the connection state of wifi has changed.
      */
     @Override
     public void onConnectedChanged() {
-        updateAccessPointsDelayed();
         changeNextButtonState(mWifiTracker.isConnected());
     }
 
