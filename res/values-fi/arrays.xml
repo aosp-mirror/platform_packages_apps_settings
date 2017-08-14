@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"Amerikka"</item>
+    <item msgid="3005562397632768392">"Eurooppa"</item>
+    <item msgid="5696915123093701218">"Afrikka"</item>
+    <item msgid="4439789052790868249">"Aasia"</item>
+    <item msgid="956915953069815961">"Australia"</item>
+    <item msgid="5345178126174698955">"Tyynimeri"</item>
+    <item msgid="8392017019801393511">"Kaikki"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 sekuntia"</item>
+    <item msgid="8881760709354815449">"30 sekuntia"</item>
+    <item msgid="7589406073232279088">"1 minuutti"</item>
+    <item msgid="7001195990902244174">"2 minuuttia"</item>
+    <item msgid="7489864775127957179">"5 minuuttia"</item>
+    <item msgid="2314124409517439288">"10 minuuttia"</item>
+    <item msgid="6864027152847611413">"30 minuuttia"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"Ei koskaan"</item>
+    <item msgid="2194151041885903260">"15 sekuntia"</item>
+    <item msgid="5892295237131074341">"30 sekuntia"</item>
+    <item msgid="3538441365970038213">"1 minuutti"</item>
+    <item msgid="412343871668955639">"2 minuuttia"</item>
+    <item msgid="5076853889688991690">"5 minuuttia"</item>
+    <item msgid="1903860996174927898">"10 minuuttia"</item>
+    <item msgid="6415509612413178727">"30 minuuttia"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"Heti"</item>
+    <item msgid="6736512735606834431">"5 sekuntia"</item>
+    <item msgid="8044619388267891375">"15 sekuntia"</item>
+    <item msgid="1822002388249545488">"30 sekuntia"</item>
+    <item msgid="8538071621211916519">"1 minuutti"</item>
+    <item msgid="5663439580228932882">"2 minuuttia"</item>
+    <item msgid="49888496216106852">"5 minuuttia"</item>
+    <item msgid="9002737361305019353">"10 minuuttia"</item>
+    <item msgid="4322676235684793329">"30 minuuttia"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"Pieni"</item>
+    <item msgid="6986443533756848935">"Oletus"</item>
+    <item msgid="38373998008112077">"Suuri"</item>
+    <item msgid="7635254317531872272">"Suurin"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Etsitään..."</item>
+    <item msgid="8513729475867537913">"Yhdistetään…"</item>
+    <item msgid="515055375277271756">"Varmennetaan…"</item>
+    <item msgid="1943354004029184381">"Haetaan IP-osoitetta..."</item>
+    <item msgid="4221763391123233270">"Yhdistetty"</item>
+    <item msgid="624838831631122137">"Pidätetty"</item>
+    <item msgid="7979680559596111948">"Katkaistaan yhteyttä..."</item>
+    <item msgid="1634960474403853625">"Yhteys katkaistu"</item>
+    <item msgid="746097431216080650">"Epäonnistui"</item>
+    <item msgid="6367044185730295334">"Estetty"</item>
+    <item msgid="503942654197908005">"Vältetään huonoa yhteyttä tilapäisesti"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Etsitään..."</item>
+    <item msgid="355508996603873860">"Yhdistetään verkkoon <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="554971459996405634">"Varmennetaan verkkoon <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="7928343808033020343">"Haetaan IP-osoitetta verkosta <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="8937994881315223448">"Yhdistetty verkkoon <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"Pidätetty"</item>
+    <item msgid="7698638434317271902">"Katkaistaan yhteys verkosta <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="197508606402264311">"Yhteys katkaistu"</item>
+    <item msgid="8578370891960825148">"Epäonnistui"</item>
+    <item msgid="5660739516542454527">"Estetty"</item>
+    <item msgid="1805837518286731242">"Vältetään huonoa yhteyttä tilapäisesti"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+    <item msgid="8549485714107012129">"SIM"</item>
+    <item msgid="1023893786681286517">"AKA"</item>
+    <item msgid="3030483188676375009">"AKA\'"</item>
+  </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
+    <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
+    <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
+    <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"Paina painiketta"</item>
+    <item msgid="1624323946324499595">"Vertaislaitteen PIN-koodi"</item>
+    <item msgid="5366790421523328066">"PIN-koodi laitteelta"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"Yhdistetty"</item>
+    <item msgid="3189211552661432651">"Kutsuttu"</item>
+    <item msgid="3206450250360237549">"Epäonnistui"</item>
+    <item msgid="7785896708926971207">"Käytettävissä"</item>
+    <item msgid="2330782789550628803">"Katvealueella"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"2 minuuttia"</item>
+    <item msgid="8675215713017289017">"5 minuuttia"</item>
+    <item msgid="477015974247590543">"1 tunti"</item>
+    <item msgid="5198271470953124739">"Ei aikakatkaisua"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"Huono"</item>
+    <item msgid="2042505933058940139">"Heikko"</item>
+    <item msgid="1344546617235886412">"Kohtalainen"</item>
+    <item msgid="6019931571712517411">"Hyvä"</item>
+    <item msgid="8986346415847956850">"Erinomainen"</item>
+  </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"30 viime päivää"</item>
+    <item msgid="6600989128423965319">"Aseta käyttöjakso…"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"Käyttöaika"</item>
+    <item msgid="4796160515314745154">"Viimeinen käyttöaika"</item>
+    <item msgid="2502754479975776899">"Sovelluksen nimi"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"–"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+    <item msgid="5760470455461128892">"–"</item>
+    <item msgid="7480272092408291086">"MSCHAPV2"</item>
+    <item msgid="5881794903338319324">"GTC"</item>
+    <item msgid="5610607665198791980">"SIM"</item>
+    <item msgid="2860798636241124128">"AKA"</item>
+    <item msgid="8926455723452645935">"AKA\'"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"Ei mitään"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"Staattinen"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"Ei mitään"</item>
+    <item msgid="8673874894887358090">"Manuaalinen"</item>
+    <item msgid="168893341855953140">"Välitysp. autom. määritys"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"Ei mitään"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP tai CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1697455674244601285">"Määrittelemätön"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"Ei mitään"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"Laitteen sisäinen tallennustila"</item>
+    <item msgid="3738430123799803530">"Poistettava SD-kortti"</item>
+    <item msgid="4498124044785815005">"Anna järjestelmän päättää"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"Sijainti"</item>
+    <item msgid="255608127647030286">"Henkilökohtaiset"</item>
+    <item msgid="4588829735729884491">"Viestit"</item>
+    <item msgid="886742181977884584">"Media"</item>
+    <item msgid="7924928667052300589">"Laite"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"karkea sijainti"</item>
+    <item msgid="5789673140227507995">"tarkka sijainti"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"värinä"</item>
+    <item msgid="3434165993711230924">"lue yhteystietoja"</item>
+    <item msgid="616161687718081936">"muokkaa kontakteja"</item>
+    <item msgid="7638002295329050091">"lue puhelulokia"</item>
+    <item msgid="6546959730920410907">"muokkaa puhelulokia"</item>
+    <item msgid="446877710771379667">"lue kalenteria"</item>
+    <item msgid="7674458294386319722">"muokkaa kalenteria"</item>
+    <item msgid="8281201165558093009">"Wi-Fi-haku"</item>
+    <item msgid="8694611243479480497">"ilmoitus"</item>
+    <item msgid="7776439107987345446">"soluhaku"</item>
+    <item msgid="514615766544675057">"soita numeroon"</item>
+    <item msgid="8181415497109310680">"lue tekstiviestejä"</item>
+    <item msgid="6816551144382117307">"kirjoita tekstiviestejä"</item>
+    <item msgid="4600463921908905030">"vastaanota tekstiviestejä"</item>
+    <item msgid="5958926493289432745">"vastaanota hätätekstiviestejä"</item>
+    <item msgid="4945269495221089540">"vastaanota multimediaviestejä"</item>
+    <item msgid="5570472453573929087">"vastaanota WAP push -viestejä"</item>
+    <item msgid="7125408150230860501">"lähetä tekstiviestejä"</item>
+    <item msgid="7080337936612188061">"lue ICC-tekstiviestejä"</item>
+    <item msgid="587124103118495063">"kirjoita ICC-tekstiviestejä"</item>
+    <item msgid="2320577158869025503">"muokkaa asetuksia"</item>
+    <item msgid="1545733463471924009">"piirrä päälle"</item>
+    <item msgid="3609046903962454582">"käytä ilmoituksia"</item>
+    <item msgid="4671646036128214513">"kamera"</item>
+    <item msgid="1097324338692486211">"tallenna ääntä"</item>
+    <item msgid="5031552983987798163">"toista ääntä"</item>
+    <item msgid="8374996688066472414">"lue leikepöytä"</item>
+    <item msgid="3045529469061083747">"muokkaa leikepöytää"</item>
+    <item msgid="5124443975763747838">"mediapainikkeet"</item>
+    <item msgid="4547883971364273343">"äänen painopiste"</item>
+    <item msgid="2603878814882344450">"pää-äänenvoimakkuus"</item>
+    <item msgid="7136963238377062018">"puheäänen voimakkuus"</item>
+    <item msgid="4270236897655923007">"soittoäänen voimakkuus"</item>
+    <item msgid="6325739889222559394">"median äänenvoimakkuus"</item>
+    <item msgid="5762123934816216821">"hälytyksen äänenvoimakkuus"</item>
+    <item msgid="785049718065337473">"ilmoituksen äänenvoimakkuus"</item>
+    <item msgid="6700305533746877052">"bluetooth-äänenvoimakkuus"</item>
+    <item msgid="2029227495214047094">"ei virransäästötilaa"</item>
+    <item msgid="26109888160231211">"sijainnin seuranta"</item>
+    <item msgid="5753382310468855812">"seuraa suuritehoista sijaintia"</item>
+    <item msgid="3356591542543137332">"hae käyttötilastot"</item>
+    <item msgid="3073734345226842233">"mykistä mikrofoni / poista mykistys"</item>
+    <item msgid="2111767435887685265">"näytä ilmoitus"</item>
+    <item msgid="1091168669714823370">"lähetä media"</item>
+    <item msgid="485564189219029300">"aktivoi VPN"</item>
+    <item msgid="7155384795265164395">"kirjoita taustakuva"</item>
+    <item msgid="1835836196806147034">"apurakenne"</item>
+    <item msgid="5989890403088155055">"apukuvakaappaus"</item>
+    <item msgid="8582699692765917557">"tarkastele puhelimen tilaa"</item>
+    <item msgid="1474039653814954902">"lisää vastaajaviesti"</item>
+    <item msgid="7222837656938871633">"käytä SIP:tä"</item>
+    <item msgid="6108267038969274380">"käsittele lähtevä puhelu"</item>
+    <item msgid="4823402479973873358">"sormenjälki"</item>
+    <item msgid="5895843015407713543">"kehon anturit"</item>
+    <item msgid="1436446526955010826">"tarkastele solulähetyksiä"</item>
+    <item msgid="884172201575690484">"käytä imitoitua sijaintia"</item>
+    <item msgid="3591971310048485247">"tarkastele tallennustilaa"</item>
+    <item msgid="4041187808621866119">"kirjoita tallennustilaan"</item>
+    <item msgid="6628873315024166197">"kytke näyttö päälle"</item>
+    <item msgid="3253368931113490863">"hae tilit"</item>
+    <item msgid="780392378084812901">"toimi taustalla"</item>
+    <item msgid="2629748510881309577">"esteettömyys äänenvoimakkuus"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"Sijainti"</item>
+    <item msgid="8677040780775113033">"Sijainti"</item>
+    <item msgid="1660743989948992916">"Sijainti"</item>
+    <item msgid="8791172739860195290">"Värinä"</item>
+    <item msgid="383413555642128046">"Lue yhteystietoja"</item>
+    <item msgid="3654594895269697313">"Muokkaa kontakteja"</item>
+    <item msgid="7928393476362362538">"Lue puhelulokia"</item>
+    <item msgid="6248591205254641116">"Muokkaa puhelulokia"</item>
+    <item msgid="6093344633066170692">"Lue kalenteria"</item>
+    <item msgid="1334886368750347692">"Muokkaa kalenteria"</item>
+    <item msgid="1638204101698708656">"Sijainti"</item>
+    <item msgid="2154671955760380322">"Lisää ilmoitus"</item>
+    <item msgid="4282477730595931828">"Sijainti"</item>
+    <item msgid="4891423912898525905">"Soita numeroon"</item>
+    <item msgid="2623604824935968113">"Lue SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Kirjoita SMS/MMS"</item>
+    <item msgid="3986142739951490025">"Vastaanota multimedia- tai tekstiviestejä"</item>
+    <item msgid="3984213795861739778">"Vastaanota multimedia- tai tekstiviestejä"</item>
+    <item msgid="3656243523752472788">"Vastaanota multimedia- tai tekstiviestejä"</item>
+    <item msgid="8105802370238551510">"Vastaanota multimedia- tai tekstiviestejä"</item>
+    <item msgid="1407766984645388488">"Lähetä multimedia- tai tekstiviestejä"</item>
+    <item msgid="3527273606643794973">"Lue SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Kirjoita SMS/MMS"</item>
+    <item msgid="4218544235221631789">"Muokkaa asetuksia"</item>
+    <item msgid="736541391767350377">"Piirrä päälle"</item>
+    <item msgid="5530815681721654194">"Käytä ilmoituksia"</item>
+    <item msgid="781213371706962767">"Kamera"</item>
+    <item msgid="1720492593061838172">"Tallenna ääntä"</item>
+    <item msgid="3493046322001257041">"Toista ääntä"</item>
+    <item msgid="136815868796597058">"Lue leikepöytä"</item>
+    <item msgid="5238692940326972503">"Muokkaa leikepöytää"</item>
+    <item msgid="5753789168376302997">"Mediapainikkeet"</item>
+    <item msgid="3265262911688671938">"Äänen painopiste"</item>
+    <item msgid="2098976479485046797">"Pää-äänenvoimakkuus"</item>
+    <item msgid="5660213838861789350">"Puheäänen voimakkuus"</item>
+    <item msgid="7983336752371254444">"Soittoäänen voimakkuus"</item>
+    <item msgid="7878027809189330917">"Median äänenvoimakkuus"</item>
+    <item msgid="7260546305036218513">"Hälytyksen voimakkuus"</item>
+    <item msgid="9103719301075748925">"Ilmoituksen äänenvoimakkuus"</item>
+    <item msgid="7025966722295861512">"Bluetooth-äänenvoimakkuus"</item>
+    <item msgid="4665183401128289653">"Ei virransäästötilaa"</item>
+    <item msgid="8584357129746649222">"Sijainti"</item>
+    <item msgid="7669257279311110599">"Sijainti"</item>
+    <item msgid="3459320345690097795">"Hae käyttötilastot"</item>
+    <item msgid="1312534577834048535">"Mykistä mikrofoni / poista mykistys"</item>
+    <item msgid="427580389823724225">"Näytä ilmoitus"</item>
+    <item msgid="4992007785575926253">"Lähetä media"</item>
+    <item msgid="2482631530338029480">"Aktivoi VPN"</item>
+    <item msgid="1662979573471871926">"Kirjoita taustakuva"</item>
+    <item msgid="5964768335278263478">"Apurakenne"</item>
+    <item msgid="2657138701132782702">"Apukuvakaappaus"</item>
+    <item msgid="8571369610363539266">"Tarkastele puhelimen tilaa"</item>
+    <item msgid="4542463358215230845">"Lisää vastaajaviesti"</item>
+    <item msgid="864565065016166003">"Käytä SIP:tä"</item>
+    <item msgid="1958009349883195116">"Käsittele lähtevä puhelu"</item>
+    <item msgid="8526563410140613458">"Sormenjälki"</item>
+    <item msgid="7864822459293570891">"Kehon anturit"</item>
+    <item msgid="6798698496904810960">"Tarkastele solulähetyksiä"</item>
+    <item msgid="5242052845700875820">"Käytä imitoitua sijaintia"</item>
+    <item msgid="1246296877820358565">"Tarkastele tallennustilaa"</item>
+    <item msgid="2404067308793740341">"Kirjoita tallennustilaan"</item>
+    <item msgid="5832543806893763620">"Kytke näyttö päälle"</item>
+    <item msgid="5258373962467495905">"Hae tilit"</item>
+    <item msgid="334625385979270703">"Toimi taustalla"</item>
+    <item msgid="9039213578110332702">"Esteettömyys äänenvoimakkuus"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"Lyhyt"</item>
+    <item msgid="2560532955514699713">"Keskipitkä"</item>
+    <item msgid="2372711992605524591">"Pitkä"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Oletus"</item>
+    <item msgid="1016452621833735880">"Sans Serif"</item>
+    <item msgid="2496277987934654454">"Sans Serif, tiivistetty"</item>
+    <item msgid="7247838127505318669">"Sans Serif Monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif Monospace"</item>
+    <item msgid="639503332147461010">"Casual"</item>
+    <item msgid="7967169925231332424">"Kursiivi"</item>
+    <item msgid="561832997193039673">"Isot kirjaimet"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Hyvin pieni"</item>
+    <item msgid="6781094565687692782">"Pieni"</item>
+    <item msgid="8222123259497646551">"Normaali"</item>
+    <item msgid="5813217276778560466">"Suuri"</item>
+    <item msgid="9044232017390975191">"Hyvin suuri"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="4733815704128258753">"Oletusarvo"</item>
+    <item msgid="3217099060748617005">"Ei mitään"</item>
+    <item msgid="7467615139904599420">"Ääriviiva"</item>
+    <item msgid="5623165557468608975">"Varjostus"</item>
+    <item msgid="8088451174058214588">"Korotettu"</item>
+    <item msgid="3821418743395480313">"Laskettu"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25 %"</item>
+    <item msgid="2367156416247936773">"50 %"</item>
+    <item msgid="5395560410107149298">"75 %"</item>
+    <item msgid="8342334626783983353">"100 %"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="7009918361545506251">"Käytä sovelluksen oletusarvoja"</item>
+    <item msgid="1770533843436933500">"Valkoinen mustalla"</item>
+    <item msgid="758587126802411846">"Musta valkoisella"</item>
+    <item msgid="1495307195241623402">"Keltainen mustalla"</item>
+    <item msgid="6039700130994371612">"Keltainen sinisellä"</item>
+    <item msgid="7169235156349580064">"Muokattu"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"Esijaettuun avaimeen perustuva L2TP-/IPSec-VPN-verkko"</item>
+    <item msgid="4725504331295252103">"L2TP/IPSec-suojattu VPN-verkko varmenteilla"</item>
+    <item msgid="7526551163264034377">"Esijaettuun avaimeen perustuva IPSec-suojattu VPN-verkko Xauth-todennuksella"</item>
+    <item msgid="8064740940687465039">"IPSec-suojattu VPN-verkko varmenteilla ja Xauth-todennuksella"</item>
+    <item msgid="4946199982372391490">"IPSec-suojattu VPN-verkko varmenteilla ja hybriditodennuksella"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"Yhteys katkaistu"</item>
+    <item msgid="6692305604213080515">"Alustetaan..."</item>
+    <item msgid="8001704909356800092">"Yhdistetään..."</item>
+    <item msgid="4039737283841672166">"Yhdistetty"</item>
+    <item msgid="4042143101664725090">"Aikaraja"</item>
+    <item msgid="7664124146786465092">"Epäonnistui"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"Kysy"</item>
+    <item msgid="5077768429488260031">"Älä salli koskaan"</item>
+    <item msgid="1417929597727989746">"Salli aina"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="3944681673818150669">"Normaali"</item>
+    <item msgid="3256987280393708586">"Tyydyttävä"</item>
+    <item msgid="4662917179231875995">"Matala"</item>
+    <item msgid="5264929699714647509">"Kriittinen"</item>
+    <item msgid="5606155978847838966">"?"</item>
+  </string-array>
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"Normaali"</item>
+    <item msgid="866544120205026771">"Keskitaso"</item>
+    <item msgid="7851902244436886890">"Matala"</item>
+    <item msgid="3022922196817563960">"Kriittinen"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"Pysyvä"</item>
+    <item msgid="5779398140277006695">"Tärkein toiminta"</item>
+    <item msgid="1439598363694578255">"Tärkeä (etualalla)"</item>
+    <item msgid="3396458970745718652">"Tärkeä (taustalla)"</item>
+    <item msgid="5214825238247511992">"Varmuuskopio"</item>
+    <item msgid="311372689168254967">"Resursseja kuluttava"</item>
+    <item msgid="7438189122367820362">"Palvelu (käynnissä)"</item>
+    <item msgid="918687422516982498">"Palvelu (käynnistyy uudelleen)"</item>
+    <item msgid="6807727069641853029">"Vastaanottaja"</item>
+    <item msgid="6782857406100845127">"Aloitusruutu"</item>
+    <item msgid="2860945127596974299">"Viimeinen toiminta"</item>
+    <item msgid="8610560843693675830">"Välimuistissa (toiminta)"</item>
+    <item msgid="4338089220026248848">"Välimuistissa (toiminnan suorittaja)"</item>
+    <item msgid="6652164677254579050">"Välimuistissa (tyhjä)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Turkoosi"</item>
+    <item msgid="8332294763632946560">"Sininen"</item>
+    <item msgid="2023216417616991392">"Indigo"</item>
+    <item msgid="3170497246594232819">"Violetti"</item>
+    <item msgid="4608643045752965568">"Vaaleanpunainen"</item>
+    <item msgid="6131821495505931173">"Punainen"</item>
+  </string-array>
+  <string-array name="automatic_storage_management_days">
+    <item msgid="687318592238852312">"Yli 30 päivää vanhat"</item>
+    <item msgid="2900554746706302178">"Yli 60 päivää vanhat"</item>
+    <item msgid="5692284879054004388">"Yli 90 päivää vanhat"</item>
+  </string-array>
+</resources>
