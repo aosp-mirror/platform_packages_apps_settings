@@ -724,6 +724,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     String extractKeyFromSipper(BatterySipper sipper) {
         if (sipper.uidObj != null) {
             return extractKeyFromUid(sipper.getUid());
+        } else if (sipper.drainType == DrainType.USER) {
+            return sipper.drainType.toString() + sipper.userId;
         } else if (sipper.drainType != DrainType.APP) {
             return sipper.drainType.toString();
         } else if (sipper.getPackages() != null) {

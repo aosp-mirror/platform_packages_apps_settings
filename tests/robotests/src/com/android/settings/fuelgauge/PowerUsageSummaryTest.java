@@ -314,6 +314,16 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
+    public void testExtractKeyFromSipper_typeUser_returnDrainTypeWithUserId() {
+        mNormalBatterySipper.uidObj = null;
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.USER;
+        mNormalBatterySipper.userId = 2;
+
+        final String key = mFragment.extractKeyFromSipper(mNormalBatterySipper);
+        assertThat(key).isEqualTo("USER2");
+    }
+
+    @Test
     public void testExtractKeyFromSipper_typeAPPUidObjectNotNull_returnUid() {
         mNormalBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
