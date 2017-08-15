@@ -107,6 +107,16 @@ public class AnomalySummaryPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateAnomalySummaryPreference_emptyAnomaly_preferenceInvisible() {
+        mPreference.setVisible(true);
+        mAnomalyList.clear();
+
+        mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(mAnomalyList);
+
+        assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
     public void testUpdateAnomalySummaryPreference_multipleAnomalies_showCorrectSummary() {
         mAnomalyList.add(createTestAnomaly());
         mAnomalyList.add(createTestAnomaly());
