@@ -22,11 +22,13 @@ import android.widget.FrameLayout;
 import com.android.settings.R;
 
 /**
- * A {@link FrameLayout} with customizable aspect ration.
+ * A {@link FrameLayout} with customizable aspect ratio.
  * This is used to avoid dynamically calculating the height for the frame. Default aspect
  * ratio will be 1 if none is set in layout attribute.
  */
 public final class AspectRatioFrameLayout extends FrameLayout {
+
+    private static final float ASPECT_RATIO_CHANGE_THREASHOLD = 0.01f;
 
     private float mAspectRatio = 1.0f;
 
@@ -51,7 +53,25 @@ public final class AspectRatioFrameLayout extends FrameLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, (int) (widthMeasureSpec / mAspectRatio));
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+        if (width == 0 || height == 0) {
+            return;
+        }
+        final float viewAspectRatio = (float) width / height;
+        final float aspectRatioDiff = mAspectRatio - viewAspectRatio;
+        if (Math.abs(aspectRatioDiff) <= ASPECT_RATIO_CHANGE_THREASHOLD) {
+            // Close enough, skip.
+            return;
+        }
+        if (aspectRatioDiff > 0) {
+            width = (int) (height * mAspectRatio);
+        } else {
+            height = (int) (width / mAspectRatio);
+        }
+        super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
     }
 
 }
