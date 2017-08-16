@@ -23,8 +23,10 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
@@ -39,11 +41,14 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -55,7 +60,7 @@ import java.util.Set;
 
 public class TextToSpeechSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
-                GearPreference.OnGearClickListener {
+        GearPreference.OnGearClickListener, Indexable {
 
     private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
     private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";
@@ -225,7 +230,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             // Do set pitch correctly after it may have changed, and unlike speed, it doesn't change
             // immediately.
             final ContentResolver resolver = getContentResolver();
-            mTts.setPitch(android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH)/100.0f);
+            mTts.setPitch(android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH,
+                    TextToSpeech.Engine.DEFAULT_PITCH) / 100.0f);
         }
 
         Locale ttsDefaultLocale = mTts.getDefaultLanguage();
@@ -241,10 +247,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
         mTts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
-            public void onStart(String utteranceId) {}
+            public void onStart(String utteranceId) {
+            }
 
             @Override
-            public void onDone(String utteranceId) {}
+            public void onDone(String utteranceId) {
+            }
 
             @Override
             public void onError(String utteranceId) {
@@ -313,7 +321,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             EngineInfo info = mEnginesHelper.getEngineInfo(mCurrentEngine);
 
 
-
             Preference mEnginePreference = findPreference(KEY_TTS_ENGINE_PREFERENCE);
             ((GearPreference) mEnginePreference).setOnGearClickListener(this);
             mEnginePreference.setSummary(info.label);
@@ -364,7 +371,10 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                                 }
                             });
         } else {
-            if (DBG) Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
+            if (DBG) {
+                Log.d(TAG,
+                        "TTS engine for settings screen failed to initialize successfully.");
+            }
             updateWidgetState(false);
         }
     }
@@ -411,8 +421,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
             for (String loc : mAvailableStrLocals) {
                 if (loc.equalsIgnoreCase(defaultLocaleStr)) {
-                  notInAvailableLangauges = false;
-                  break;
+                    notInAvailableLangauges = false;
+                    break;
                 }
             }
         } catch (MissingResourceException e) {
@@ -572,7 +582,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private boolean isNetworkRequiredForSynthesis() {
         Set<String> features = mTts.getFeatures(mCurrentDefaultLocale);
         if (features == null) {
-          return false;
+            return false;
         }
         return features.contains(TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS) &&
                 !features.contains(TextToSpeech.Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS);
@@ -735,7 +745,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             return;
         }
 
-        if (data == null){
+        if (data == null) {
             Log.e(TAG, "Engine failed voice data integrity check (null return)" +
                     mTts.getCurrentEngine());
             return;
@@ -744,7 +754,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         android.provider.Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
 
         mAvailableStrLocals = data.getStringArrayListExtra(
-            TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
+                TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
         if (mAvailableStrLocals == null) {
             Log.e(TAG, "Voice data check complete, but no available voices found");
             // Set mAvailableStrLocals to empty list
@@ -763,5 +773,23 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             startActivity(settingsIntent);
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.tts_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add("tts_engine_preference");
+                    return keys;
+                }
+            };
 
 }
