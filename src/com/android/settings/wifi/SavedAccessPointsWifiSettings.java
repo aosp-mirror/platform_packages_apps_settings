@@ -18,13 +18,9 @@ package com.android.settings.wifi;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Resources;
 import android.icu.text.Collator;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.net.wifi.hotspot2.PasspointConfiguration;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -33,15 +29,11 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -51,7 +43,7 @@ import java.util.List;
  */
 public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         implements Indexable, WifiDialog.WifiDialogListener {
-    private static final String TAG = "SavedAccessPointsWifiSettings";
+    private static final String TAG = "SavedAccessPoints";
     private static final Comparator<AccessPoint> SAVED_NETWORK_COMPARATOR =
             new Comparator<AccessPoint>() {
         final Collator mCollator = Collator.getInstance();
@@ -239,47 +231,4 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
             return super.onPreferenceTreeClick(preference);
         }
     }
-
-    /**
-     * For search.
-     */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.wifi_display_saved_access_points;
-                return Arrays.asList(sir);
-            }
-
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                final Resources res = context.getResources();
-                final String title = res.getString(R.string.wifi_saved_access_points_titlebar);
-
-                // Add fragment title
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = title;
-                data.screenTitle = title;
-                data.enabled = enabled;
-                result.add(data);
-
-                // Add available Wi-Fi access points
-                final List<AccessPoint> accessPoints = WifiSavedConfigUtils.getAllConfigs(
-                        context, context.getSystemService(WifiManager.class));
-
-                final int accessPointsSize = accessPoints.size();
-                for (int i = 0; i < accessPointsSize; ++i){
-                    data = new SearchIndexableRaw(context);
-                    data.title = accessPoints.get(i).getSsidStr();
-                    data.screenTitle = title;
-                    data.enabled = enabled;
-                    result.add(data);
-                }
-
-                return result;
-            }
-        };
 }
