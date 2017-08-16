@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
@@ -88,7 +90,6 @@ public class DeviceAdminAdd extends Activity {
     Handler mHandler;
 
     DevicePolicyManager mDPM;
-    AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
     CharSequence mAddMsgText;
     String mProfileOwnerName;
@@ -113,19 +114,17 @@ public class DeviceAdminAdd extends Activity {
     boolean mWaitingForRemoveMsg;
     boolean mAddingProfileOwner;
     boolean mAdminPoliciesInitialized;
-    int mCurSysAppOpMode;
-    int mCurToastAppOpMode;
 
     boolean mIsCalledFromSupportDialog = false;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         mHandler = new Handler(getMainLooper());
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mAppOps = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
         PackageManager packageManager = getPackageManager();
 
         if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
@@ -447,24 +446,14 @@ public class DeviceAdminAdd extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        mActionButton.setEnabled(true);
         updateInterface();
-        // As long as we are running, don't let this admin overlay stuff on top of the screen.
-        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
-        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
-        mCurSysAppOpMode = mAppOps.checkOp(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg);
-        mCurToastAppOpMode = mAppOps.checkOp(AppOpsManager.OP_TOAST_WINDOW, uid, pkg);
-        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
-        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // As long as we are running, don't let this admin overlay stuff on top of the screen.
-        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
-        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
-        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, mCurSysAppOpMode);
-        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, mCurToastAppOpMode);
+        mActionButton.setEnabled(false);
         try {
             ActivityManagerNative.getDefault().resumeAppSwitches();
         } catch (RemoteException e) {
