@@ -117,7 +117,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private Network mNetwork;
     private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
-    private int mRssi;
+    private int mRssiSignalLevel = -1;
     private String[] mSignalStr;
     private final WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
@@ -338,7 +338,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         refreshNetworkState();
 
         // Update Connection Header icon and Signal Strength Preference
-        mRssi = mWifiInfo.getRssi();
         refreshRssiViews();
 
         // MAC Address Pref
@@ -381,9 +380,13 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private void refreshRssiViews() {
-        int iconSignalLevel = WifiManager.calculateSignalLevel(
-                mRssi, WifiManager.RSSI_LEVELS);
-        Drawable wifiIcon = mIconInjector.getIcon(iconSignalLevel);
+        int signalLevel = mAccessPoint.getLevel();
+
+        if (mRssiSignalLevel == signalLevel) {
+            return;
+        }
+        mRssiSignalLevel = signalLevel;
+        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
 
         wifiIcon.setTint(Utils.getColorAccent(mContext));
         mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(), true /* rebind */);
@@ -393,8 +396,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 R.color.wifi_details_icon_color, mContext.getTheme()));
         mSignalStrengthPref.setIcon(wifiIconDark);
 
-        int summarySignalLevel = mAccessPoint.getLevel();
-        mSignalStrengthPref.setDetailText(mSignalStr[summarySignalLevel]);
+        mSignalStrengthPref.setDetailText(mSignalStr[mRssiSignalLevel]);
     }
 
     private void updatePreference(WifiDetailPreference pref, String detailText) {
