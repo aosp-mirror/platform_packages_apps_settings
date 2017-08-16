@@ -22,6 +22,7 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
+import android.os.PowerManager;
 import android.util.Log;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class AnomalyActions {
     public static final String KEY_RESULT_RECEIVER = "result_receiver";
 
     public static final String ACTION_BLE_SCAN_UNOPTIMIZED = "action.ble_scan_unoptimized";
+    public static final String ACTION_WAKE_LOCK = "action.wake_lock";
 
     public static void doAction(Context ctx, String actionCode, long durationMs) {
         if (actionCode == null) {
@@ -47,6 +49,8 @@ public class AnomalyActions {
             case ACTION_BLE_SCAN_UNOPTIMIZED:
                 doUnoptimizedBleScan(ctx, durationMs);
                 break;
+            case ACTION_WAKE_LOCK:
+                doHoldWakelock(ctx, durationMs);
             default:
                 Log.e(TAG, "Intent had invalid action");
         }
@@ -92,5 +96,18 @@ public class AnomalyActions {
             Log.e(TAG, "Thread couldn't sleep for " + durationMs, e);
         }
         bleScanner.stopScan(scanCallback);
+    }
+
+    private static void doHoldWakelock(Context ctx, long durationMs) {
+        PowerManager powerManager = ctx.getSystemService(PowerManager.class);
+        PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "AnomalyWakeLock");
+        wl.acquire();
+        try {
+            Thread.sleep(durationMs);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Thread couldn't sleep for " + durationMs, e);
+        }
+        wl.release();
     }
 }
