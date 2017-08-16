@@ -219,7 +219,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             mManagedPasswordProvider = ManagedLockPasswordProvider.get(getActivity(), mUserId);
 
             if (mPasswordConfirmed) {
-                updatePreferencesOrFinish();
+                updatePreferencesOrFinish(savedInstanceState != null);
                 if (mForChangeCredRequiredForBoot) {
                     maybeEnableEncryption(mLockPatternUtils.getKeyguardStoredPasswordQuality(
                             mUserId), false);
@@ -234,7 +234,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                         || !helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
                         getString(R.string.unlock_set_unlock_launch_picker_title), true, mUserId)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
-                    updatePreferencesOrFinish();
+                    updatePreferencesOrFinish(savedInstanceState != null);
                 } else {
                     mWaitingForConfirmation = true;
                 }
@@ -332,7 +332,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 mUserPassword = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-                updatePreferencesOrFinish();
+                updatePreferencesOrFinish(false /* isRecreatingActivity */);
                 if (mForChangeCredRequiredForBoot) {
                     if (!TextUtils.isEmpty(mUserPassword)) {
                         maybeEnableEncryption(
@@ -395,7 +395,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             outState.putBoolean(ENCRYPT_REQUESTED_DISABLED, mEncryptionRequestDisabled);
         }
 
-        private void updatePreferencesOrFinish() {
+        private void updatePreferencesOrFinish(boolean isRecreatingActivity) {
             Intent intent = getActivity().getIntent();
             int quality = intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
             if (quality == -1) {
@@ -413,7 +413,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 updatePreferenceText();
                 updateCurrentPreference();
                 updatePreferenceSummaryIfNeeded();
-            } else {
+            } else if (!isRecreatingActivity) {
+                // Don't start the activity again if we are recreated for configuration change
                 updateUnlockMethodAndFinish(quality, false, true /* chooseLockSkipped */);
             }
         }
