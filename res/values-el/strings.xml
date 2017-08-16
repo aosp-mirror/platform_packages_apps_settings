@@ -372,6 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Συνέχεια"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Παράλειψη"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Επόμενο"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Παράβλεψη δακτ. αποτυπώματος;"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Απαιτούνται ένα έως δύο λεπτά για τη ρύθμιση δακτυλικού αποτυπώματος. Εάν παραβλέψετε αυτό το βήμα, μπορείτε να προσθέσετε το δακτυλικό αποτύπωμά σας αργότερα στις ρυθμίσεις."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Παράβλεψη κλειδώματος οθόνης;"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Οι λειτουργίες προστασίας συσκευής δεν θα ενεργοποιηθούν. Δεν θα μπορείτε να αποτρέψετε άλλους χρήστες από τη χρήση αυτού του tablet εάν χαθεί, κλαπεί ή επαναφερθεί."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Οι λειτουργίες προστασίας συσκευής δεν θα ενεργοποιηθούν. Δεν θα μπορείτε να αποτρέψετε άλλους χρήστες από τη χρήση αυτής της συσκευής εάν χαθεί, κλαπεί ή επαναφερθεί."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Οι λειτουργίες προστασίας συσκευής δεν θα ενεργοποιηθούν. Δεν θα μπορείτε να αποτρέψετε άλλους χρήστες από τη χρήση αυτού του τηλεφώνου εάν χαθεί, κλαπεί ή επαναφερθεί."</string>
@@ -457,7 +460,8 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Προστατέψτε το tablet σας"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Προστατέψτε τη συσκευή σας"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Προστασία τηλεφώνου"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Για πρόσθετη ασφάλεια, ρυθμίστε μια εφεδρική μέθοδο κλειδώματος οθόνης"</string>
+    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Αποτρέψτε άλλους από τη χρήση αυτού του tablet χωρίς την άδειά σας ενεργοποιώντας τις λειτουργίες προστασίας συσκευής. Επιλέξτε το κλείδωμα οθόνης που θέλετε να χρησιμοποιήσετε."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Αποτρέψτε άλλους από τη χρήση αυτής της συσκευής χωρίς την άδειά σας ενεργοποιώντας τις λειτουργίες προστασίας συσκευής. Επιλέξτε το κλείδωμα οθόνης που θέλετε να χρησιμοποιήσετε."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Αποτρέψτε άλλους από τη χρήση αυτού του τηλεφώνου χωρίς την άδειά σας ενεργοποιώντας τις λειτουργίες προστασίας συσκευής. Επιλέξτε το κλείδωμα οθόνης που θέλετε να χρησιμοποιήσετε."</string>
@@ -837,6 +841,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Σύνδεση"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Αποτυχία σύνδεσης στο δίκτυο"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Διαγραφή"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Τροποποίηση"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Αποτυχία κατάργησης απομνημόνευσης δικτύου"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Αποθήκευση"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Αποτυχία αποθήκευσης δικτύου"</string>
@@ -1463,15 +1468,21 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Πληροφορίες ασφάλειας"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Δεν είστε συνδεδεμένοι σε υπηρεσία δεδομένων. Για να προβάλετε αυτές τις πληροφορίες τώρα, μεταβείτε στο %s από οποιονδήποτε υπολογιστή με σύνδεση στο Διαδίκτυο."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Φόρτωση..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Επιλέξτε τον κωδικό πρ/σης"</string>
+    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
+    <skip />
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Για χρήση δακτ. αποτ. ορίστε κωδ. πρόσβ."</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Επιλέξτε το μοτίβο σας"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Για χρήση δακτ. αποτ. ορίστε μοτίβο"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Επιλέξτε τον αριθμό PIN"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Για χρήση δακτ. αποτ. ορίστε αρ. PIN"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Επιβεβαιώστε τον κωδικό πρόσβασης"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Επιβεβαίωση μοτίβου"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Επιβεβαιώστε το PIN"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
+    <skip />
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Οι κωδικοί πρόσβασης δεν ταιριάζουν"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Οι αριθμοί PIN δεν ταιριάζουν"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Επιλογή ξεκλειδώματος"</string>
@@ -1490,6 +1501,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Για πρόσθετη ασφάλεια, εισαγάγετε το μοτίβο εργασίας σας"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Για πρόσθετη ασφάλεια, εισαγάγετε τον αριθμό PIN εργασίας σας"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Για πρόσθετη ασφάλεια, εισαγάγετε τον κωδικό πρόσβασης εργασίας σας"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Έγινε επαναφορά των εργοστασιακών ρυθμίσεων του τηλεφώνου. Εισαγάγετε το παλιό μοτίβο."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Έγινε επαναφορά των εργοστασιακών ρυθμίσεων του τηλεφώνου. Εισαγάγετε τον παλιό κωδικό PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Έγινε επαναφορά των εργοστασιακών ρυθμίσεων του τηλεφώνου. Εισαγάγετε τον παλιό κωδικό πρόσβασης."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Επαλήθευση μοτίβου"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Επιβεβαίωση κωδικού PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Επαλήθευση κωδικού πρόσβασης"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Λανθασμένος κωδικός PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Λανθασμένος κωδικός πρόσβασης"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Λάθος μοτίβο"</string>
@@ -2883,8 +2900,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Χωρίς ήχο"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Αναπαραγωγή ήχου"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Αναπαραγωγή ήχου και εμφάνιση στην οθόνη"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Εμφάνιση στην οθόνη"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Χαμηλή"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Μεσαία"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Υψηλή"</string>
@@ -3190,7 +3206,7 @@
     <string name="high_power_filter_on" msgid="3222265297576680099">"Χωρίς βελτιστοποίηση"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Χωρίς βελτιστοποίηση"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Βελτιστοποίηση χρήσης μπαταρίας"</string>
-    <string name="high_power_system" msgid="7362862974428225301">"Η βελτιστοποίηση μπαταρίας δεν είναι διαθέσιμη"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Η βελτιστοποίηση μπατ. δεν είναι διαθέσιμη"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Να μην εφαρμόζεται βελτιστοποίηση μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Να επιτρέπεται στην εφαρμογή να εκτελείται πάντα στο παρασκήνιο;"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"Εάν επιτρέπεται στην εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> να εκτελείται πάντα στο παρασκήνιο, η διάρκεια ζωής της μπαταρίας μπορεί να μειωθεί. \n\nΜπορείτε να αλλάξτε αυτήν τη ρύθμιση αργότερα από τις Ρυθμίσεις &gt; Εφαρμογές και ειδοποιήσεις."</string>
@@ -3593,7 +3609,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Instant Εφαρμογές"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Άνοιγμα συνδέσμων σε εφαρμογές, ακόμα και αν δεν είναι εγκατεστημένες"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Instant Εφαρμογές"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Λογαριασμός Instant Εφαρμογών"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Εγκατεστημένες εφαρμογές"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Στο εξής, γίνεται διαχείριση του αποθηκευτικού σας χώρου από τον διαχειριστή αποθηκευτικού χώρου"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Λογαριασμοί για τον χρήστη <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3703,6 +3720,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Πληροφορίες παροχής εταιρείας κινητής τηλεφωνίας"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Ενεργοποίηση παροχής εταιρείας κινητής τηλεφωνίας"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Τι νέο και συναρπαστικό υπάρχει;"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Δείτε τις κορυφαίες 5 λειτουργίες"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Περιηγηθείτε στο νέο τηλέφωνό σας"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Περιηγηθείτε στο νέο σας tablet"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Περιηγηθείτε στη νέα συσκευή σας"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Αυτή η λειτουργία δεν είναι διαθέσιμη σε αυτήν τη συσκευή"</string>
 </resources>

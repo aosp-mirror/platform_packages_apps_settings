@@ -372,6 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Davam edin"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Ötürün"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Növbəti"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Barmaq izi ötürülsün?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Barmaq izinin ayarlanması bir-iki dəqiqə çəkəcək. Bu mərhələni ötürsəniz, barmaq izini sonradan ayarlarda əlavə edə bilərsiniz."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Ekran kilidi ötürülsün?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Cihaz qoruma funksiyası aktiv edilməyəcək. Planşet itərsə, oğurlanarsa və ya sıfırlanarsa, başqalarının bu planşetdən istifadəsinin qarşısını ala bilməyəcəksiniz."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Cihaz qoruma funksiyası aktiv edilməyəcək. Cihaz itərsə, oğurlanarsa və ya sıfırlanarsa, başqalarının bu cihazdan istifadəsinin qarşısını ala bilməyəcəksiniz."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Cihaz qoruma funksiyası aktiv edilməyəcək. Telefon itərsə, oğurlanarsa və ya sıfırlanarsa, başqalarının bu telefondan istifadəsinin qarşısını ala bilməyəcəksiniz."</string>
@@ -457,7 +460,8 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Planşetinizi qoruyun"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Cihazınızı qoruyun"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Telefonunuzu qoruyun"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Əlavə edilmiş təhlükəsizlik üçün, arxa fon ekran kilidini quraşdırın."</string>
+    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Cihazın qorunması xüsusiyyətlərini aktivləşdirməklə, icazəniz olmadan başqalarının bu planşetdən istifadəsinə mane olun. İsifadə etmək istədiyiniz ekran kilidini seçin."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Cihazın qorunması xüsusiyyətlərini aktivləşdirməklə, icazəniz olmadan başqalarının bu cihazdan istifadəsinə mane olun. İsifadə etmək istədiyiniz ekran kilidini seçin."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Cihazın qorunması xüsusiyyətlərini aktivləşdirməklə, icazəniz olmadan başqalarının bu telefondan istifadəsinə mane olun. İsifadə etmək istədiyiniz ekran kilidini seçin."</string>
@@ -837,6 +841,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Qoşul"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Şəbəkəyə qoşulmaq alınmadı"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Unut"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Dəyişdirin"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Şəbəkəni unutmaq alınmadı"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Yadda saxla"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Şəbəkəni yadda saxlamaq alınmadı"</string>
@@ -1463,15 +1468,21 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Təhlükəsizlik məlumatı"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Sizin data bağlantınız yoxdur. Bu informasiyanı indi görüntüləmək üçün, internetə qoşulu olan istənilən kompüterdən %s daxil olun."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Yüklənir…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Parolunuzu seçin"</string>
+    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
+    <skip />
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Barmaq izi üçün parol seçin"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Modelinizi seçin"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Barmaq izi üçün nümunə seçin"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PİN seçin"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Barmaq izi üçün PIN ayarlayın"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Parolu təsdiq edin"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Modeli təsdiq edin"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PİN kodunuzu təsdiq edin"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
+    <skip />
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Parollar uyğun gəlmir"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN-lər üst-üstə düşmür"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Kilid açma seçimi"</string>
@@ -1490,6 +1501,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Əlavə edilmiş təhlükəsizlik üçün iş modelini istifadə edin"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Əlavə edilmiş təhlükəsizlik üçün iş PIN kodunu daxil edin"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Əlavə edilmiş təhlükəsizlik üçün iş parolunu daxil edin"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Telefonunuz zavod ayarlarına sıfırlanıb. Telefondan istifadə etmək üçün əvvəlki nümunəni daxil edin."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Telefonunuz zavod ayarlarına sıfırlanıb. Telefondan istifadə etmək üçün əvvəlki PIN kodu daxil edin."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Telefonunuz zavod ayarlarına sıfırlanıb. Telefondan istifadə etmək üçün əvvəlki parolu daxil edin."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Nümunəni doğrulayın"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN kodu doğrulayın"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Parolu doğrulayın"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN səhvdir"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Yanlış parol"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Yanlış model"</string>
@@ -2883,8 +2900,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Səs yoxdur"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Səsli"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Səsli və ekranda pəncərə ilə"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Ekrana toxunun"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Aşağı"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Orta"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Yüksək"</string>
@@ -3577,7 +3593,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Vaxt, bildiriş ikonası və digər məlumatı yoxlamaq üçün planşeti götürün."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Vaxt, bildiriş ikonası və digər məlumatı yoxlamaq üçün cihazı götürün."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Ekran deaktiv olduğu zaman bildirişləri yoxlayın"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Bildirişlər üçün barmaq izini sürüşdürün"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Bildirişlər üçün barmağınızı sürüşdürün"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Bildirişləri yoxlamaq üçün, barmaq sensorunda aşağı sürüşdürün."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Bildirişləri yoxlamaq üçün, planşetin arxasındakı barmaq sensorunda aşağı sürüşdürün."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Bildirişləri yoxlamaq üçün, cihazın arxasındakı barmaq sensorunda aşağı sürüşdürün."</string>
@@ -3593,7 +3609,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Ani tətbiqlər"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Hətta quraşdırılmasa belə, linki tətbiqlərdə açın"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Ani tətbiqlər"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Ani tətbiq hesabı"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Quraşdırılmış tətbiqlər"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Yaddaşınız indi yaddaş meneceri tərəfindən idarə olunur"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> üçün hesablar"</string>
@@ -3703,6 +3720,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Operator Təchizat Məlumatı"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Operator Təchizatlanmasını Tətikləyin"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Yeni və maraqlı olan nədir?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Ən çox istifadə olunan 5 funksiyanı yoxlayın"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Yeni telefonunuz ilə tanış olun"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Yeni planşetiniz ilə tanış olun"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Yeni cihazınız ilə tanış olun"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Bu funksiya artıq bu cihazda əlçatan deyil"</string>
 </resources>
