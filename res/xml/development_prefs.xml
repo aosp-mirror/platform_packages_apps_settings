@@ -167,6 +167,11 @@
             android:key="camera_hal_hdrplus_switch"
             android:title="@string/camera_hal_hdrplus_switch" />
 
+        <Preference
+            android:key="feature_flags_dashboard"
+            android:title="@string/feature_flags_dashboard_title"
+            android:fragment="com.android.settings.development.featureflags.FeatureFlagsDashboard"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_networking_category"
