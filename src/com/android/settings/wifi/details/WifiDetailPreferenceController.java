@@ -30,7 +30,6 @@ import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
-import android.net.NetworkBadging;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
@@ -46,8 +45,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -142,6 +139,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
 
+    private final IconInjector mIconInjector;
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -198,7 +196,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         }
     };
 
-    public WifiDetailPreferenceController(
+    public static WifiDetailPreferenceController newInstance(
             AccessPoint accessPoint,
             ConnectivityManagerWrapper connectivityManagerWrapper,
             Context context,
@@ -207,6 +205,22 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             Lifecycle lifecycle,
             WifiManager wifiManager,
             MetricsFeatureProvider metricsFeatureProvider) {
+        return new WifiDetailPreferenceController(
+                accessPoint, connectivityManagerWrapper, context, fragment, handler, lifecycle,
+                wifiManager, metricsFeatureProvider, new IconInjector(context));
+    }
+
+    @VisibleForTesting
+    /* package */ WifiDetailPreferenceController(
+            AccessPoint accessPoint,
+            ConnectivityManagerWrapper connectivityManagerWrapper,
+            Context context,
+            Fragment fragment,
+            Handler handler,
+            Lifecycle lifecycle,
+            WifiManager wifiManager,
+            MetricsFeatureProvider metricsFeatureProvider,
+            IconInjector injector) {
         super(context);
 
         mAccessPoint = accessPoint;
@@ -218,11 +232,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mWifiConfig = accessPoint.getConfig();
         mWifiManager = wifiManager;
         mMetricsFeatureProvider = metricsFeatureProvider;
+        mIconInjector = injector;
 
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
-
         lifecycle.addObserver(this);
     }
 
@@ -369,8 +383,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private void refreshRssiViews() {
         int iconSignalLevel = WifiManager.calculateSignalLevel(
                 mRssi, WifiManager.RSSI_LEVELS);
-        Drawable wifiIcon = NetworkBadging.getWifiIcon(
-                iconSignalLevel, NetworkBadging.BADGING_NONE, mContext.getTheme()).mutate();
+        Drawable wifiIcon = mIconInjector.getIcon(iconSignalLevel);
 
         wifiIcon.setTint(Utils.getColorAccent(mContext));
         mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(), true /* rebind */);
@@ -500,5 +513,21 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
         mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork);
+    }
+
+    /**
+     * Wrapper for testing compatibility.
+     */
+    @VisibleForTesting
+    static class IconInjector {
+        private final Context mContext;
+
+        public IconInjector(Context context) {
+            mContext = context;
+        }
+
+        public Drawable getIcon(int level) {
+            return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        }
     }
 }
