@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
@@ -88,7 +90,7 @@ public class DeviceAdminAdd extends Activity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         mHandler = new Handler(getMainLooper());
         
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -264,13 +266,20 @@ public class DeviceAdminAdd extends Activity {
             }
         });
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
+        mActionButton.setEnabled(true);
         updateInterface();
     }
-    
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mActionButton.setEnabled(false);
+    }
+
     @Override
     protected Dialog onCreateDialog(int id, Bundle args) {
         switch (id) {
