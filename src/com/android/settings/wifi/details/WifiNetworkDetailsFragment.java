@@ -25,6 +25,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
+import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
-        mWifiDetailPreferenceController = new WifiDetailPreferenceController(
+        mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
                 mAccessPoint,
                 new ConnectivityManagerWrapperImpl(cm),
                 context,

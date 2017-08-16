@@ -16,6 +16,7 @@
 package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
@@ -37,7 +39,6 @@ import android.net.IpPrefix;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
-import android.net.NetworkBadging;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
@@ -112,6 +113,7 @@ public class WifiDetailPreferenceControllerTest {
     @Mock private WifiNetworkDetailsFragment mockFragment;
     @Mock private WifiManager mockWifiManager;
     @Mock private MetricsFeatureProvider mockMetricsFeatureProvider;
+    @Mock private WifiDetailPreferenceController.IconInjector mockIconInjector;
 
     @Mock (answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mockHeaderController;
@@ -229,6 +231,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockHeaderController.setRecyclerView(mockFragment.getListView(), mLifecycle))
                 .thenReturn(mockHeaderController);
         when(mockHeaderController.setSummary(anyString())).thenReturn(mockHeaderController);
+        when(mockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
 
         setupMockedPreferenceScreen();
         mController = newWifiDetailPreferenceController();
@@ -243,7 +246,8 @@ public class WifiDetailPreferenceControllerTest {
                 null,  // Handler
                 mLifecycle,
                 mockWifiManager,
-                mockMetricsFeatureProvider);
+                mockMetricsFeatureProvider,
+                mockIconInjector);
     }
 
     private void setupMockedPreferenceScreen() {
@@ -332,8 +336,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void entityHeader_shouldHaveIconSet() {
-        Drawable expectedIcon =
-                NetworkBadging.getWifiIcon(LEVEL, NetworkBadging.BADGING_NONE, mContext.getTheme());
+        Drawable expectedIcon = mockIconInjector.getIcon(LEVEL);
 
         displayAndResume();
 
