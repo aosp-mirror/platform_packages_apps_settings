@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -40,9 +43,6 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
-
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 
 public class LockScreenNotificationPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
@@ -79,11 +79,10 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         mProfileChallengeUserId = Utils.getManagedProfileId(
                 UserManager.get(context), UserHandle.myUserId());
         final LockPatternUtils utils = new LockPatternUtils(context);
-        final boolean isUnified =
-                !utils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId);
         mSecure = utils.isSecure(UserHandle.myUserId());
         mSecureProfile = (mProfileChallengeUserId != UserHandle.USER_NULL)
-                && (utils.isSecure(mProfileChallengeUserId) || (isUnified && mSecure));
+                && (utils.isSecure(mProfileChallengeUserId)
+                || (!utils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId) && mSecure));
     }
 
     @Override
