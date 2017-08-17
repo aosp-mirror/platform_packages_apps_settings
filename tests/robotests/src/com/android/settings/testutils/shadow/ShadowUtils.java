@@ -18,6 +18,8 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.Utils;
 import com.android.settings.password.IFingerprintManager;
@@ -86,5 +88,10 @@ public class ShadowUtils {
     @Implementation
     public static ComponentName getDeviceOwnerComponent(Context context) {
         return sDeviceOwnerComponentName;
+    }
+
+    @Implementation
+    public static int getManagedProfileId(UserManager um, int parentUserId) {
+        return UserHandle.USER_NULL;
     }
 }
