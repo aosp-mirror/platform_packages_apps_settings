@@ -55,12 +55,6 @@ public class SoundSettings extends DashboardFragment {
     private RingtonePreference mRequestPreference;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(1);
-    }
-
-    @Override
     public int getMetricsCategory() {
         return MetricsEvent.SOUND;
     }
@@ -109,8 +103,7 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mProgressiveDisclosureMixin.isEnabled()
-                ? R.xml.sound_settings : R.xml.sound_settings_new_advance_button;
+        return R.xml.sound_settings;
     }
 
     @Override

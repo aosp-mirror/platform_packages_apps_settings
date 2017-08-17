@@ -189,16 +189,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
-            DashboardFragment fragment, Bundle args) {
-        boolean keepExpanded = false;
-        if (args != null) {
-            keepExpanded = args.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY) != null;
-        }
-        return new ProgressiveDisclosureMixin(context, fragment, keepExpanded);
-    }
-
-    @Override
     public String getExtraIntentAction() {
         return null;
     }

@@ -23,6 +23,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -60,8 +61,8 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         int tileLimit = 1;
         if (mWifiWakeupPreferenceController.isAvailable()) {
             tileLimit++;
@@ -69,7 +70,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
         if (mUseOpenWifiPreferenceController.isAvailable()) {
             tileLimit++;
         }
-        mProgressiveDisclosureMixin.setTileLimit(tileLimit);
+        getPreferenceScreen().setInitialExpandedChildrenCount(tileLimit);
     }
 
     @Override

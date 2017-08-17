@@ -65,13 +65,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(2);
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         // Hack to update action bar title. It's necessary to refresh title because this page user
@@ -86,8 +79,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mProgressiveDisclosureMixin.isEnabled()
-                ? R.xml.language_and_input : R.xml.language_and_input_new_advance_button;
+        return R.xml.language_and_input;
     }
 
     @Override

@@ -66,15 +66,8 @@ public class DisplaySettings extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(4);
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
-        return mProgressiveDisclosureMixin.isEnabled()
-                ? R.xml.display_settings : R.xml.display_settings_new_advance_button;
+        return R.xml.display_settings;
     }
 
     @Override

@@ -58,7 +58,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
 import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
@@ -275,11 +274,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (root != null) {
             root.removeAll();
         }
-        if (ProgressiveDisclosureMixin.isV2Enabled()) {
-            addPreferencesFromResource(R.xml.security_settings_advanced_button);
-        } else {
-            addPreferencesFromResource(R.xml.security_settings);
-        }
+        addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
 
         // Add category for security status

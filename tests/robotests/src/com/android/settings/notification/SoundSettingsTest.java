@@ -21,7 +21,6 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.UserManager;
 import com.android.settings.R;
-import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.XmlTestUtils;
@@ -62,8 +61,6 @@ public class SoundSettingsTest {
         final List<String> niks = SoundSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
         SoundSettings settings = new SoundSettings();
-        ReflectionHelpers.setField(settings, "mProgressiveDisclosureMixin",
-                mock(ProgressiveDisclosureMixin.class));
         final int xmlId = settings.getPreferenceScreenResId();
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
         keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context,

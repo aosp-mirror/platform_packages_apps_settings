@@ -19,59 +19,62 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/sound_settings"
     android:key="sound_settings"
-    settings:keywords="@string/keywords_sounds">
+    settings:keywords="@string/keywords_sounds"
+    settings:initialExpandedChildrenCount="6">
 
-    <PreferenceCategory
-        android:key="sound_settings_primary_items_category"
-        android:order="-100">
-        <!-- Media volume -->
-        <com.android.settings.notification.VolumeSeekBarPreference
-                android:key="media_volume"
-                android:icon="@*android:drawable/ic_audio_media"
-                android:title="@string/media_volume_option_title" />
+    <!-- Media volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="media_volume"
+        android:icon="@*android:drawable/ic_audio_media"
+        android:title="@string/media_volume_option_title"
+        android:order="-106"/>
 
-        <!-- Alarm volume -->
-        <com.android.settings.notification.VolumeSeekBarPreference
-                android:key="alarm_volume"
-                android:icon="@*android:drawable/ic_audio_alarm"
-                android:title="@string/alarm_volume_option_title" />
+    <!-- Alarm volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="alarm_volume"
+        android:icon="@*android:drawable/ic_audio_alarm"
+        android:title="@string/alarm_volume_option_title"
+        android:order="-105"/>
 
-        <!-- Ring volume -->
-        <com.android.settings.notification.VolumeSeekBarPreference
-                android:key="ring_volume"
-                android:icon="@*android:drawable/ic_audio_ring_notif"
-                android:title="@string/ring_volume_option_title" />
+    <!-- Ring volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="ring_volume"
+        android:icon="@*android:drawable/ic_audio_ring_notif"
+        android:title="@string/ring_volume_option_title"
+        android:order="-104"/>
 
-        <!-- Notification volume -->
-        <com.android.settings.notification.VolumeSeekBarPreference
-                android:key="notification_volume"
-                android:icon="@*android:drawable/ic_audio_ring_notif"
-                android:title="@string/notification_volume_option_title" />
+    <!-- Notification volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="notification_volume"
+        android:icon="@*android:drawable/ic_audio_ring_notif"
+        android:title="@string/notification_volume_option_title"
+        android:order="-103"/>
 
-        <!-- Also vibrate for calls -->
-        <SwitchPreference
-                android:key="vibrate_when_ringing"
-                android:title="@string/vibrate_when_ringing_title" />
+    <!-- Also vibrate for calls -->
+    <SwitchPreference
+        android:key="vibrate_when_ringing"
+        android:title="@string/vibrate_when_ringing_title"
+        android:order="-102"/>
 
-        <!-- Interruptions -->
-        <com.android.settingslib.RestrictedPreference
-                android:key="zen_mode"
-                android:title="@string/zen_mode_settings_title"
-                settings:useAdminDisabledSummary="true"
-                settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
-                android:fragment="com.android.settings.notification.ZenModeSettings"
-                settings:allowDividerAbove="true" />
+    <!-- Interruptions -->
+    <com.android.settingslib.RestrictedPreference
+        android:key="zen_mode"
+        android:title="@string/zen_mode_settings_title"
+        settings:useAdminDisabledSummary="true"
+        settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
+        android:fragment="com.android.settings.notification.ZenModeSettings"
+        settings:allowDividerAbove="true"
+        android:order="-101"/>
 
-        <!-- Phone ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="ringtone"
-            android:title="@string/ringtone_title"
-            android:dialogTitle="@string/ringtone_title"
-            android:summary="@string/summary_placeholder"
-            android:ringtoneType="ringtone"
-            settings:allowDividerAbove="true" />
-
-    </PreferenceCategory>
+    <!-- Phone ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="ringtone"
+        android:title="@string/ringtone_title"
+        android:dialogTitle="@string/ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:ringtoneType="ringtone"
+        settings:allowDividerAbove="true"
+        android:order="-100"/>
 
     <!-- Default notification ringtone -->
     <com.android.settings.DefaultRingtonePreference
