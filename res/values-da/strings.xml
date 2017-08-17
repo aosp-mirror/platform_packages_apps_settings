@@ -1007,7 +1007,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Tilpas din skærm"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vælg baggrund fra"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Pauseskærm"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Under opladning, eller når enheden er sluttet til dockingstationen"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Under opladning, eller når enheden er sluttet til en dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Begge dele"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Under opladning"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Når enheden er tilsluttet en dockingstation"</string>
@@ -2722,7 +2722,7 @@
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Ringesignalet er indstillet til vibration"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Ringesignalet er indstillet til lydløs"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Lydstyrken for ringetonen er på 80 %"</string>
-    <string name="media_volume_option_title" msgid="2811531786073003825">"Medielydstyrke"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Lydstyrke for medier"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Lydstyrke for alarmer"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Lydstyrke for ringetone"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Lydstyrke for underretninger"</string>
@@ -2734,8 +2734,8 @@
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrer også ved opkald"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Andre lyde"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Toner for numerisk tastatur"</string>
-    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Lyde for skærmlås"</string>
-    <string name="charging_sounds_title" msgid="1132272552057504251">"Opladningslyde"</string>
+    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Lyd ved skærmlås"</string>
+    <string name="charging_sounds_title" msgid="1132272552057504251">"Lyd ved opladning"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Lyde for dockingstation"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"Lyd ved berøring"</string>
     <string name="vibrate_on_touch_title" msgid="5388579924689395023">"Vibrer ved tryk"</string>
@@ -2752,7 +2752,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> automatiske regler er slået til</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="842308776768942600">"Præferencer for Forstyr ikke"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritet tillader kun"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Kun prioritet tillader"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Angiv regler for Forstyr ikke"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Begræns lyde og vibrationer på bestemte tidspunkter"</string>
@@ -2862,7 +2862,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Tillad underretningscirkel"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Vis underretningscirkel"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Tilsidesæt Forstyr ikke"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Lad disse underretninger fortsætte med at afbryde, når Forstyr ikke er slået til med angivelsen Kun prioritet"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Lad disse underretninger fortsætte med at afbryde, når Forstyr ikke er konfigureret som Kun prioritet"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"På låseskærmen"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokeret"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritet"</string>
@@ -2889,8 +2889,8 @@
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Der er oprettet en automatisk regel om at aktivere \"Forstyr ikke\" på bestemte tidspunkter"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Regel for begivenheder"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"En automatisk regel er indstillet til at slå \"Forstyr ikke\" til ved bestemte begivenheder"</string>
-    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Under begivenheder for"</string>
-    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Under begivenheder for <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Under begivenheder fra"</string>
+    <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Under begivenheder fra <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"enhver kalender"</string>
     <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Hvor svaret er <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Enhver kalender"</string>
@@ -3465,7 +3465,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"Du kan hurtigt se dine underretninger ved at tage din telefon op."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Du kan hurtigt se dine underretninger ved at samle din tablet op."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Du kan hurtigt se dine underretninger ved at samle din enhed op."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Stryg over fingeraftryk for at se underretninger"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Stryg over fingeraftrykslæser for at se underretninger"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Du kan tjekke dine underretninger ved at stryge nedad på fingeraftrykslæseren på bagsiden af telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Du kan tjekke dine underretninger ved at stryge nedad på fingeraftrykslæseren på bagsiden af din tablet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Du kan tjekke dine underretninger ved at stryge nedad på fingeraftrykslæseren på bagsiden af enheden."</string>

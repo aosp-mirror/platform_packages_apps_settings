@@ -95,7 +95,7 @@
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"सभी आस-पास के ब्लूटूथ डिवाइस के लि‍ए दिखाई दे रहा है"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"अन्‍य ब्लूटूथ डिवाइस के लि‍ए दिखाई नहीं दे रहा है"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"केवल युग्‍मि‍त डिवाइस के लि‍ए दिखाई दे रहा है"</string>
-    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"समयबाह्य दृश्यता"</string>
+    <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"ब्लूटूथ में खोजने का टाइम आउट"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ध्‍वनि डायलिंग लॉक करें"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"जब स्‍क्रीन लॉक हो, तो bluetooth डायलर के उपयोग को रोकें"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"ब्लूटूथ डिवाइस"</string>
@@ -118,8 +118,8 @@
     <string name="bluetooth_device" msgid="5291950341750186887">"अनामित ब्लूटूथ डिवाइस"</string>
     <string name="progress_scanning" msgid="192587958424295789">"खोजना"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"आस-पास कोई ब्लूटूथ डिवाइस नहीं मिला."</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"ब्लूटूथ युग्‍मन अनुरोध"</string>
-    <string name="bluetooth_notif_title" msgid="2485175521845371514">"युग्‍मन अनुरोध"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"ब्लूटूथ से जोड़ने का अनुरोध"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"दूसरे डिवाइस से जोड़ना का अनुरोध"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> से युग्मित करने के लिए टैप करें."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"प्राप्त फ़ाइलें दिखाएं"</string>
     <string name="device_picker" msgid="4978696506172252813">"ब्लूटूथ डिवाइस चुनें"</string>
@@ -278,8 +278,8 @@
     <string name="cellular_data_title" msgid="6835451574385496662">"मोबाइल डेटा"</string>
     <string name="calls_title" msgid="3544471959217176768">"कॉल"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS संदेश"</string>
-    <string name="cellular_data_summary" msgid="4660351864416939504">"मोबाइल नेटवर्क पर डेटा उपयोग की अनुमति दें"</string>
-    <string name="allow_data_usage_title" msgid="2238205944729213062">"रोमिंग में डेटा उपयोग करने दें"</string>
+    <string name="cellular_data_summary" msgid="4660351864416939504">"मोबाइल नेटवर्क पर डेटा खर्च की अनुमति"</string>
+    <string name="allow_data_usage_title" msgid="2238205944729213062">"रोमिंग में डेटा खर्च करने की अनुमति दें"</string>
     <string name="roaming" msgid="3596055926335478572">"रोमिंग डेटा"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"रोमिंग के समय डेटा सेवाएं कनेक्ट करें"</string>
     <string name="roaming_disable" msgid="1295279574370898378">"रोमिंग के समय डेटा सेवाएं कनेक्ट करें"</string>
@@ -315,7 +315,7 @@
     <string name="lock_after_timeout" msgid="4590337686681194648">"अपने आप लॉक करें"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> निष्क्रियता के बाद"</string>
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"सो जाने के तुरंत बाद, <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> के द्वारा अनलॉक रखे जाने को छोड़कर"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"निष्क्रिय होने के बाद <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, तब को छोड़कर जब <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> के द्वारा अनलॉक रखा गया हो"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> के अनलॉक रखे जाने के अलावा, कम बैटरी मोड में होने के बाद <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"लॉक स्‍क्रीन पर अपनी जानकारी दिखाएं"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"लॉक स्‍क्रीन संदेश"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"शॉर्टकट सक्षम करें"</string>
@@ -408,8 +408,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"टेबलेट एन्‍क्रिप्‍ट करें"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"फ़ोन एन्‍क्रिप्‍ट करें"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"एन्‍िक्रप्ट किया गया"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="503014594435731275">"आप अपने खाते, सेटिंग, डाउनलोड किए गए ऐप्स और उनका डेटा, मीडिया, तथा अन्य फ़ाइलें एन्क्रिप्ट कर सकते हैं. अपना टेबलेट एन्क्रिप्ट करने के बाद, यह मानते हुए कि आपने स्क्रीन लॉक (अर्थात्, प्रतिमान या संख्यात्मक पिन या पासवर्ड) सेट कर लिया है, आपको प्रत्येक बार अपना टेबलेट चालू करते समय इसे डीक्रिप्ट करने के लिए स्क्रीन को अनलॉक करना होगा. डीक्रिप्ट करने का एकमात्र अन्य तरीका अपना सभी डेटा मिटाते हुए, फ़ैक्टरी डेटा रीसेट करना है.\n\nएन्क्रिप्शन में एक घंटा या इससे अधिक समय लगता है. आपको चार्ज की गई बैटरी से प्रारंभ करना चाहिए और पूरी प्रक्रिया के दौरान अपने टेबलेट को प्लग इन करके रखना चाहिए. यदि आप इसमें बाधा डालते हैं, तो आप अपना कुछ या सभी डेटा खो देंगे"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="2579929266645543631">"आप अपने खाते, सेटिंग, डाउनलोड किए गए ऐप्स और उनका डेटा, मीडिया, तथा अन्य फ़ाइलें एन्क्रिप्ट कर सकते हैं. अपना फ़ोन एन्क्रिप्ट करने के बाद, यह मानते हुए कि आपने स्क्रीन लॉक (अर्थात्, प्रतिमान या संख्यात्मक पिन या पासवर्ड) सेट कर लिया है, आपको प्रत्येक बार अपना फ़ोन चालू करते समय इसे डीक्रिप्ट करने के लिए स्क्रीन को अनलॉक करना होगा. डीक्रिप्ट करने का एकमात्र अन्य तरीका अपना सभी डेटा मिटाते हुए, फ़ैक्टरी डेटा रीसेट करना है.\n\nएन्क्रिप्शन में एक घंटा या इससे अधिक समय लगता है. आपको चार्ज की गई बैटरी से प्रारंभ करना चाहिए और पूरी प्रक्रिया के दौरान अपने फ़ोन को प्लग इन करके रखना चाहिए. यदि आप इसमें बाधा डालते हैं, तो आप अपना कुछ या सभी डेटा खो देंगे."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="503014594435731275">"आप अपने खाते, सेटिंग, डाउनलोड किए गए ऐप और उनका डेटा, मीडिया और अन्य फ़ाइलें एन्क्रिप्ट कर सकते हैं. अपना फ़ोन एन्क्रिप्ट करने के बाद, यह मानते हुए कि आपने स्क्रीन लॉक (जैसे पैटर्न या पिन या पासवर्ड) सेट कर लिया है, आपको हर बार अपना फ़ोन चालू करते समय इसे डीक्रिप्ट करने के लिए स्क्रीन को अनलॉक करना होगा. आप फ़ैक्ट्री डेटा रीसेट करके भी फ़ोन को डीक्रिप्ट कर सकते हैं. \n\nएन्क्रिप्शन में एक घंटा या इससे ज़्यादा समय लग सकता है. आप जब एन्क्रिप्शन शुरू करें तो बैटरी को पूरी चार्ज रखें और पूरी प्रक्रिया के दौरान अपने फ़ोन को चार्जिंग पर रखें. अगर एन्क्रिप्शन के दौरान कोई रुकावट आती है, तो आप अपना थोड़ा या सारा डेटा खो सकते हैं."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="2579929266645543631">"आप अपने खाते, सेटिंग, डाउनलोड किए गए ऐप और उनका डेटा, मीडिया और अन्य फ़ाइलें एन्क्रिप्ट कर सकते हैं. अपना फ़ोन एन्क्रिप्ट करने के बाद, यह मानते हुए कि आपने स्क्रीन लॉक (जैसे पैटर्न या पिन या पासवर्ड) सेट कर लिया है, आपको हर बार अपना फ़ोन चालू करते समय इसे डीक्रिप्ट करने के लिए स्क्रीन को अनलॉक करना होगा. आप फ़ैक्ट्री डेटा रीसेट करके भी फ़ोन को डीक्रिप्ट कर सकते हैं. \n\nएन्क्रिप्शन में एक घंटा या इससे ज़्यादा समय लग सकता है. आप जब एन्क्रिप्शन शुरू करें तो बैटरी को पूरी चार्ज रखें और पूरी प्रक्रिया के दौरान अपने फ़ोन को चार्जिंग पर रखें. अगर एन्क्रिप्शन के दौरान कोई रुकावट आती है, तो आप अपना थोड़ा या सारा डेटा खो सकते हैं."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"टेबलेट एन्‍क्रिप्‍ट करें"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"फ़ोन एन्‍क्रिप्‍ट करें"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"अपनी बैटरी चार्ज करें और पुन: प्रयास करें."</string>
@@ -450,8 +450,8 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"डिवाइस सुरक्षा सुविधाओं को सक्रिय करके अन्य लोगों को आपकी अनुमति के बिना इस फ़ोन का उपयोग करने से रोकें. वह स्क्रीन लॉक चुनें जिसका आप उपयोग करना चाहते हैं."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"अपनी बैकअप स्‍क्रीन लॉक विधि चुनें"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"स्क्रीन लॉक"</string>
-    <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / निष्क्रिय होने के तुरंत बाद"</string>
-    <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> निष्क्रिय होने के बाद"</string>
+    <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / कम बैटरी मोड में जाने के तुरंत बाद"</string>
+    <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> कम बैटरी मोड में जाने के बाद"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"कार्य प्रोफ़ाइल लॉक"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"लॉक स्‍क्रीन बदलें"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"आकार, पिन या पासवर्ड सुरक्षा बदलें या अक्षम करें"</string>
@@ -473,7 +473,7 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"फ़िंगरप्रिंट + पासवर्ड"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"फ़िंगरप्रिंट के बिना जारी रखें"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"आप अपने फ़िंगरप्रिंट का उपयोग करके अपना फ़ोन अनलॉक कर सकते हैं. सुरक्षा के लिए, इस विकल्प के लिए बैकअप स्क्रीन लॉक आवश्यक है."</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"व्यवस्थापक, एन्क्रिप्शन नीति या क्रेडेंशियल संग्रहण ने अक्षम किया है"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"एडमिन, एन्क्रिप्शन नीति या क्रेडेंशियल स्टोरेज ने बंद किया है"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"कोई नहीं"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"स्वाइप करें"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"आकार"</string>
@@ -578,24 +578,24 @@
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"उपयोग करने के लिए, सबसे पहले स्क्रीन लॉक सेट करें"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"कोई नहीं"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> सक्रिय विश्वसनीय एजेंट</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> सक्रिय विश्वसनीय एजेंट</item>
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> सक्रिय भरोसेमंद एजेंट</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> सक्रिय भरोसेमंद एजेंट</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"ब्लूटूथ"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"ब्लूटूथ चालू करें"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"कनेक्‍शन प्रबंधित करें, डिवाइस नाम और खोज योग्‍यता सेट करें"</string>
-    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> के साथ युग्‍मित करें?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"ब्‍लूटूथ युग्‍मन कोड"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"युग्मन कोड लिखें फिर Return या Enter दबाएं"</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ें?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"ब्‍लूटूथ से जोड़ने वाला कोड"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"दूसरे डिवाइस से जोड़ना वाला कोड लिखें और फिर Return या Enter दबाएं"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"पिन में अक्षर या प्रतीक शामिल होते हैं"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"आमतौर पर 0000 या 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"16 अंक होने चाहिए"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"आपको अन्‍य डिवाइस पर भी यह पि‍न लिखने की आवश्‍यकता हो सकती है."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"आपको अन्‍य डिवाइस पर भी यह पासकी लिखनी होगी."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"इससे युग्मित करने के लिए:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;सुनिश्चित करें कि वह यह पासकी दिखा रहा है:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"इससे:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;इस डिवाइस के साथ युग्मित करें?"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"इससे:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;इस डिवाइस से जोड़ें?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"इसके साथ युग्‍मित करने के लिए:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>इस पर लिखें:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, फिर Return या Enter दबाएं."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> को अपने संपर्कों तथा कॉल इतिहास ऐक्‍सेस करने की अनुमति दें"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
@@ -609,7 +609,7 @@
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"इंटरनेट कनेक्शन"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"कीबोर्ड"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"संपर्क और कॉल इतिहास"</string>
-    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"इस डिवाइस के साथ युग्‍मित करें?"</string>
+    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"इस डिवाइस से जोड़ें?"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"फ़ोन बुक साझा करें?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> आपके संपर्कों और कॉल इतिहास को एक्सेस करना चाहता है."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ब्लूटूथ से युग्मित होना चाहता है. कनेक्ट होने पर, उसके पास आपके संपर्कों और कॉल इतिहास के लिए एक्सेस होगी."</string>
@@ -619,10 +619,10 @@
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"जोड़ दें"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"डिस्‍कनेक्‍ट करें"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"युग्‍मित और कनेक्‍ट करें"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"अयुग्‍मित करें"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"डिस्‍कनेक्‍ट करें और अयुग्‍मित करें"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"जुड़ा हुआ डिवाइस हटाएं"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"डिस्‍कनेक्‍ट करें और जुड़ा हुआ डिवाइस हटाएं"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"विकल्प…"</string>
-    <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"अतिरिक्त सेटिंग"</string>
+    <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"बेहतर सेटिंग"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"उन्नत ब्लूटूथ"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"ब्लूटूथ के चालू होने पर, आपका डिवाइस आसपास के अन्य ब्लूटूथ डिवाइसों से संचार कर सकता है."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"स्‍थान सटीकता को बेहतर बनाने के लिए, सिस्‍टम ऐप्‍स और सेवाएं अभी भी ब्‍लूटूथ डिवाइसों का पता लगा सकती हैं. आप इसे <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>स्‍कैन करने की सेटिंग<xliff:g id="LINK_END_1">LINK_END</xliff:g> में बदल सकते हैं."</string>
@@ -647,7 +647,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"संगीत और मीडिया के लिए"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"सेटिंग याद रखें"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"कास्ट करें"</string>
-    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"वायरलेस डिस्प्ले सक्षम करें"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"बिना वायर के स्क्रीन दिखाना (वायरलेस डिसप्ले) सक्षम करें"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"आस-पास कोई भी डिवाइस नहीं मिला."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"कनेक्ट कर रहा है"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"कनेक्ट किया गया"</string>
@@ -668,11 +668,11 @@
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"जब फ़ोन अन्य डिवाइस को स्पर्श करे तो डेटा ट्रांसफर करने दें"</string>
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC चालू करें"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC इस डिवाइस और आस-पास के अन्य डिवाइस या लक्ष्यों के बीच डेटा का आदान-प्रदान करता है, जैसे कि भुगतान टर्मिनल, एक्सेस रीडर और सहभागी विज्ञापन या टैग."</string>
-    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
+    <string name="android_beam_settings_title" msgid="7832812974600338649">"Android बीम"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"NFC के माध्यम से ऐप्स सामग्री प्रसारित करने के लिए तैयार"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"बंद"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"अनुपलब्‍ध है क्‍योंकि NFC बंद है"</string>
-    <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
+    <string name="android_beam_label" msgid="6257036050366775040">"Android बीम"</string>
     <string name="android_beam_explained" msgid="1810540319385192758">"इस सुविधा के चालू होने पर, आप ऐप्लिकेशन की सामग्री को किसी दूसरे NFC-सक्षम डिवाइस पर बीम कर सकते हैं, जिसके लिए आपको दोनों डिवाइस पास-पास पकड़कर रखने होंगे. उदाहरण के लिए, आप वेब पेज, YouTube वीडियो, संपर्कों आदि को बीम कर सकते हैं.\n\nबस दोनों डिवाइस साथ लाएं (आमतौर एक के पीछे एक) और फिर अपनी स्क्रीन टैप करें. ऐप्लिकेशन पता लगा लेता है कि कौन सी चीज़ बीम हो रही है."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"वाई-फ़ाई"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"वाई-फ़ाई  चालू करें"</string>
@@ -701,7 +701,7 @@
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"स्थान सटीकता को बेहतर बनाने के लिए, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>स्कैनिंग सेटिंग<xliff:g id="LINK_END_1">LINK_END</xliff:g> में वाई-फ़ाई स्कैनिंग चालू करें."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"फिर से न दिखाएं"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"प्रयोग में नहीं रहने के दौरान वाई-फ़ाई चालू रखें"</string>
-    <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"निष्क्रिय रहने पर वाई-फ़ाई चालू"</string>
+    <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"सुलाएं मोड में वाई-फ़ाई चालू"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"सेटिंग बदलने में एक समस्‍या थी"</string>
     <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"कार्यक्षमता सुधारें"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"वाई-फ़ाई  ऑप्टिमाइज़ेशन"</string>
@@ -720,7 +720,7 @@
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS पिन प्रविष्टि"</string>
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"वाई-फ़ाई डायरेक्ट"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"स्कैन करें"</string>
-    <string name="wifi_menu_advanced" msgid="7522252991919573664">"अतिरिक्त सेटिंग"</string>
+    <string name="wifi_menu_advanced" msgid="7522252991919573664">"बेहतर सेटिंग"</string>
     <string name="wifi_menu_configure" msgid="6150926852602171938">"कॉन्फ़िगर करें"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"नेटवर्क से कनेक्‍ट करें"</string>
     <string name="wifi_menu_remember" msgid="8814185749388713796">"नेटवर्क याद रखें"</string>
@@ -732,7 +732,7 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"आपको वाई-फ़ाई नेटवर्क बदलने की अनुमति नहीं है."</string>
     <string name="wifi_more" msgid="3195296805089107950">"अधिक"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"स्‍वचालित सेटअप (WPS)"</string>
-    <string name="wifi_show_advanced" msgid="3409422789616520979">"अतिरिक्त सेटिंग"</string>
+    <string name="wifi_show_advanced" msgid="3409422789616520979">"बेहतर विकल्प"</string>
     <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"ड्रॉप डाउन सूची उन्नत विकल्प. संक्षिप्त करने के लिए डबल टैप करें."</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"ड्रॉप डाउन सूची उन्नत विकल्प. विस्तृत करने के लिए डबल टैप करें."</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"वाई-फ़ाई  सुरक्षित सेटअप"</string>
@@ -784,7 +784,7 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS उपलब्‍ध)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"अपना नेटवर्क पासवर्ड डालें"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"स्थान की सटीकता को बेहतर बनाने और अन्य प्रयोजनों के लिए, वाई-फ़ाई  बंद होने पर भी <xliff:g id="APP_NAME">%1$s</xliff:g> नेटवर्क स्कैनिंग को चालू करना चाहता है.\n\nइसकी अनुमति उन सभी ऐप्स  के लिए दें जो स्कैन करना चाहते हैं?"</string>
-    <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"इसे बंद करने के लिए, ओवरफ़्लो मेनू में उन्नत पर जाएं."</string>
+    <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"इसे बंद करने के लिए, ओवरफ़्लो मेन्यू में बेहतर पर जाएं."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"अनुमति दें"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"अस्वीकार करें"</string>
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"कनेक्ट करने के लिए प्रवेश करें?"</string>
@@ -793,7 +793,7 @@
     <string name="no_internet_access_text" msgid="7133561752896706392">"इस नेटवर्क में कोई इंटरनेट ऐक्‍सेस नहीं है. कनेक्‍ट रहें?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"इस नेटवर्क के लिए फिर से ना पूछें"</string>
     <string name="lost_internet_access_title" msgid="6228530645663584505">"वाई-फ़ाई इंटरनेट से नहीं जुड़ा है"</string>
-    <string name="lost_internet_access_text" msgid="9029649339816197345">"जब भी वाई-फ़ाई कनेक्शन खराब हो तब आप मोबाइल नेटवर्क पर स्विच कर सकते हैं. डेटा उपयोग का पैसा लग सकता है."</string>
+    <string name="lost_internet_access_text" msgid="9029649339816197345">"जब भी वाई-फ़ाई कनेक्शन खराब हो तब आप मोबाइल नेटवर्क का इस्तेमाल कर सकते हैं. डेटा खर्च शुल्क लागू किया जा सकता है."</string>
     <string name="lost_internet_access_switch" msgid="2262459569601190039">"मोबाइल पर स्विच करें"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"वाई-फ़ाई पर रहें"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"फिर कभी ना दिखाएं"</string>
@@ -809,7 +809,7 @@
       <item quantity="one">%d नेटवर्क</item>
       <item quantity="other">%d नेटवर्क</item>
     </plurals>
-    <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"अतिरिक्त सेटिंग"</string>
+    <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"बेहतर वाई-फ़ाई"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"वाई-फ़ाई कॉन्‍फ़िगर करें"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC पता"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP पता"</string>
@@ -895,7 +895,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"वाई-फ़ाई कॉलिंग चालू होने पर, आपका फ़ोन आपकी प्राथमिकता और अधिक सशक्त सिग्‍नल के आधार पर वाई-फ़ाई नेटवर्क या आपके वाहक के नेटवर्क के द्वारा कॉल को रूट कर सकता है. इस सुविधा को चालू करने से पहले, शुल्‍क और अन्‍य विवरणों के बारे में अपने वाहक से बात करें."</string>
+    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"वाई-फ़ाई कॉलिंग चालू होने पर, आपका फ़ोन वाई-फ़ाई या मोबाइल और इंटरनेट सेवा देने वाली कंपनी के नेटवर्क के ज़रिए कॉल भेज सकता है. एेसा आपकी पसंद और सिग्‍नल की मज़बूती के आधार पर होता है. इस सुविधा को चालू करने से पहले, शुल्‍क और अन्‍य जानकारी के बारे में अपनी मोबाइल और इंटरनेट सेवा देने वाली कंपनी से बात करें."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"आपातकालीन पता अपडेट करें"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"जब आप वाई-फ़ाई का उपयोग करके 911 पर कॉल करते है तब आपातकालीन सेवाओं द्वारा आपके स्थान के रूप में उपयोग किया जाने वाला पता"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"स्क्रीन सेटिंग देखें"</string>
@@ -907,7 +907,7 @@
     <string name="notification_sound_title" msgid="5137483249425507572">"साधारण नोटिफ़िकेशन ध्वनी"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"रिंगटोन"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"नोटिफ़िकेशन"</string>
-    <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"नोटिफ़िकेशन के लिए इनकमिंग कॉल वॉल्‍यूम का उपयोग करें"</string>
+    <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"सूचना के लिए आने वाले कॉल (इनकमिंग) की आवाज़ का इस्तेमाल करें"</string>
     <string name="home_work_profile_not_supported" msgid="1357721012342357037">"कार्य प्रोफ़ाइल का समर्थन नहीं करता है"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"साधारण नोटिफ़िकेशन ध्वनी"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"मीडिया"</string>
@@ -953,10 +953,10 @@
     <string name="search_settings_no_results" msgid="8799027492641230999">"कोई परिणाम नहीं"</string>
     <string name="display_settings" msgid="7965901687241669598">"स्क्रीन सेटिंग"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"स्‍क्रीन अपनेआप घुमाएं"</string>
-    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"टेबलेट घुमाने पर स्‍वचालित रूप से अभिविन्‍यास स्‍विच करें"</string>
-    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"फ़ोन घुमाने पर अभिविन्‍यास स्‍वचालित रूप से स्‍विच करें"</string>
-    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"टेबलेट घुमाने पर स्‍वचालित रूप से अभिविन्‍यास स्‍विच करें"</string>
-    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"फ़ोन घुमाने पर अभिविन्‍यास स्‍वचालित रूप से स्‍विच करें"</string>
+    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"टैबलेट घुमाने पर स्क्रीन की दिशा अपने आप बदलें"</string>
+    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"फ़ोन घुमाने पर स्क्रीन की दिशा अपने आप बदलें"</string>
+    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"टैबलेट घुमाने पर स्क्रीन की दिशा अपने आप बदलें"</string>
+    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"फ़ोन घुमाने पर स्क्रीन की दिशा अपने आप बदलें"</string>
     <string name="brightness" msgid="8480105032417444275">"स्क्रीन की रोशनी का स्तर"</string>
     <string name="brightness_title" msgid="5746272622112982836">"स्क्रीन की रोशनी"</string>
     <string name="brightness_summary" msgid="838917350127550703">"स्‍क्रीन की रोशनी एडजस्ट करें"</string>
@@ -1037,7 +1037,7 @@
     <string name="sim_pin_change" msgid="6311414184279932368">"सिम पिन बदलें"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"सिम पिन"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"सिम कार्ड लॉक करें"</string>
-    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"सिम कार्ड अनलॉक करें"</string>
+    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"सिम कार्ड से रोक हटाएं"</string>
     <string name="sim_enter_old" msgid="6074196344494634348">"पुरानी सिम पिन"</string>
     <string name="sim_enter_new" msgid="8742727032729243562">"नया सिम पिन"</string>
     <string name="sim_reenter_new" msgid="6523819386793546888">"नया पिन पुन: लिखें"</string>
@@ -1055,10 +1055,10 @@
     <string name="sim_change_data_message" msgid="5854582807996717811">"मोबाइल डेटा के लिए <xliff:g id="OLD_SIM">%2$s</xliff:g> के बजाय <xliff:g id="NEW_SIM">%1$s</xliff:g> का उपयोग करना चाहते हैं?"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"पसंदीदा सिम कार्ड अपडेट करें?"</string>
     <string name="sim_preferred_message" msgid="8466930554330635780">"<xliff:g id="NEW_SIM">%1$s</xliff:g> आपके डिवाइस में मौजूद अकेला SIM है. क्या आप इस SIM का उपयोग मोबाइल डेटा, कॉल और SMS संदेशों के लिए करना चाहते हैं?"</string>
-    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"गलत सिम पिन कोड अपने डिवाइस को अनलॉक करने के लिए अब आपको अपने वाहक से संपर्क करना होगा."</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"गलत सिम पिन कोड, अपने डिवाइस को अनलॉक करने के लिए अब आपको अपनी मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करना होगा."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
-      <item quantity="one">गलत सिम PIN कोड, आपके पास <xliff:g id="NUMBER_1">%d</xliff:g> प्रयास शेष हैं.</item>
-      <item quantity="other">गलत सिम PIN कोड, आपके पास <xliff:g id="NUMBER_1">%d</xliff:g> प्रयास शेष हैं.</item>
+      <item quantity="one">गलत सिम पिन कोड, आप <xliff:g id="NUMBER_1">%d</xliff:g> बार और कोशिश कर सकते हैं.</item>
+      <item quantity="other">गलत सिम पिन कोड, आप <xliff:g id="NUMBER_1">%d</xliff:g> बार और कोशिश कर सकते हैं.</item>
     </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"सिम PIN की कार्यवाही विफल रही!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"टेबलेट स्‍थिति"</string>
@@ -1290,7 +1290,7 @@
       <item quantity="one"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> खाते रीसेट किए जाएंगे</item>
       <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> खाते रीसेट किए जाएंगे</item>
     </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"आंतरिक संग्रहण और सभी डेटा रीसेट कर दिया जाएगा"</string>
+    <string name="master_clear_summary" msgid="6902443944660426951">"डिवाइस की मेमोरी और सभी डेटा रीसेट कर दिया जाएगा"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"इससे आपके टेबलेट के "<b>"मोबाइल मेमोरी"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और ऐप्स डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्स"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"इससे आपके फ़ोन के "<b>"मोबाइल मेमोरी"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और ऐप्स डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्स"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"आप वर्तमान में निम्‍न खातों में प्रवेश किए हुए हैं:\n"</string>
@@ -1312,7 +1312,7 @@
     <string name="master_clear_progress_title" msgid="5194793778701994634">"मिटाया जा रहा है"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"कृपया प्रतीक्षा करें..."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"कॉल सेटिंग"</string>
-    <string name="call_settings_summary" msgid="7291195704801002886">"वॉयस मेल, कॉल अग्रेषण, कॉल प्रतीक्षा, कॉलर आईडी सेट करें"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"वॉइसमेल, कॉल को दूसरे नंबर पर भेजना, कॉल वेटिंग (कॉल के दौरान आ रहा दूसरा कॉल), कॉलर आईडी सेट करें"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB टेदरिंग"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"पोर्टेबल हॉटस्‍पॉट"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"ब्लूटूथ टेदरिंग"</string>
@@ -1321,7 +1321,7 @@
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"हॉटस्पॉट चालू है, टेदर हो रहा है"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"हॉटस्पॉट चालू है"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"टेदर हो रहा है"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"डेटा बचतकर्ता चालू होने के दौरान टेदर नहीं किया जा सकता या पोर्टेबल हॉटस्पॉट का उपयोग नहीं किया जा सकता"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"डेटा बचाने की सेटिंग चालू होने पर इंटरनेट शेयर नहीं किया जा सकता या पोर्टेबल हॉटस्पॉट का इस्तेमाल नहीं किया जा सकता"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB टेदरिंग"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB कनेक्‍ट किया गया, टेदर के लिए जांचें"</string>
@@ -1363,7 +1363,7 @@
     <string name="location_title" msgid="1029961368397484576">"मेरा स्थान"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"कार्य प्रोफ़ाइल का स्‍थान"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"मोड"</string>
-    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"उच्च सटीकता"</string>
+    <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"बहुत ज़्यादा सही"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"बैटरी की बचत"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"केवल डिवाइस"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"स्थान बंद"</string>
@@ -1408,7 +1408,7 @@
     <string name="copyright_title" msgid="865906688917260647">"कॉपीराइट"</string>
     <string name="license_title" msgid="1990487604356037871">"लाइसेंस"</string>
     <string name="terms_title" msgid="7697580845616764642">"नियम और शर्तें"</string>
-    <string name="webview_license_title" msgid="2813507464175738967">"सिस्टम WebView लाइसेंस"</string>
+    <string name="webview_license_title" msgid="2813507464175738967">"सिस्टम वेबव्यू लाइसेंस"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"वॉलपेपर"</string>
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"उपग्रह इमेजरी प्रदाता:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"मैन्युअल"</string>
@@ -1489,11 +1489,11 @@
     <string name="applications_settings" msgid="5281808652705396152">"ऐप की जानकारी"</string>
     <string name="applications_settings_summary" msgid="6683465446264515367">"ऐप्स प्रबंधित करें, त्‍वरित लॉन्‍च शॉर्टकट सेट करें"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"ऐप्स सेटिंग"</string>
-    <string name="install_applications" msgid="4872012136210802181">"अज्ञात स्रोत"</string>
+    <string name="install_applications" msgid="4872012136210802181">"नामालूम स्रोत"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"सभी ऐप्स स्रोतों को अनुमति दें"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"आपके टैबलेट और व्यक्तिगत डेटा पर अनजान ऐप्लिकेशन की ओर से हमला किए जाने का जोखिम ज़्यादा है. इस स्रोत से आने वाले ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि उनके उपयोग के कारण आपके टैबलेट को होने वाले किसी भी नुकसान या डेटा की हानि के लिए आप ही ज़िम्मेदार हैं."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"आपके फ़ोन और व्यक्तिगत डेटा पर अनजान ऐप्लिकेशन की ओर से हमला किए जाने का जोखिम ज़्यादा है. इस स्रोत से आने वाले ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि उनके उपयोग के कारण आपके फ़ोन को होने वाले किसी भी नुकसान या डेटा की हानि के लिए आप ही ज़िम्मेदार हैं."</string>
-    <string name="advanced_settings" msgid="1777249286757067969">"अतिरिक्त सेटिंग"</string>
+    <string name="advanced_settings" msgid="1777249286757067969">"बेहतर सेटिंग"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"अधिक सेटिंग विकल्‍प सक्षम करें"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ऐप्स की जानकारी"</string>
     <string name="storage_label" msgid="8700867073480107253">"स्टोरेज"</string>
@@ -1510,7 +1510,7 @@
     </plurals>
     <string name="clear_uri_btn_text" msgid="8575655132961012158">"एक्सेस साफ़ करें"</string>
     <string name="controls_label" msgid="7611113077086853799">"नियंत्रण"</string>
-    <string name="force_stop" msgid="7435006169872876756">"बलपूर्वक रोकें"</string>
+    <string name="force_stop" msgid="7435006169872876756">"ज़बरदस्ती रोकें"</string>
     <string name="total_size_label" msgid="1048676419552557254">"सम्पूर्ण जगह"</string>
     <string name="application_size_label" msgid="7376689739076506885">"ऐप्लिकेशन का आकार"</string>
     <string name="external_code_size_label" msgid="3459343140355961335">"USB मेमोरी ऐप्स"</string>
@@ -1595,7 +1595,7 @@
     <string name="invalid_location" msgid="4354595459063675191">"इंस्‍टॉल स्‍थान मान्‍य नहीं है."</string>
     <string name="system_package" msgid="1352722848400644991">"सिस्‍टम के बारे में नई जानकारी बाहरी मीडिया से नहीं हटाया जा सकता."</string>
     <string name="move_error_device_admin" msgid="8673026002690505763">"डिवाइस व्यवस्थापक ऐप्लिकेशन को बाहरी मीडिया पर इंस्टॉल नहीं किया जा सकता"</string>
-    <string name="force_stop_dlg_title" msgid="977530651470711366">"बलपूर्वक रोकें?"</string>
+    <string name="force_stop_dlg_title" msgid="977530651470711366">"ज़बरदस्ती रोकें?"</string>
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"अगर आप किसी ऐप को बलपूर्वक रोकते हैं, तो यह गलत व्यवहार कर सकता है."</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"ऐप्स  नहीं ले जाया जा सका. <xliff:g id="REASON">%1$s</xliff:g>"</string>
@@ -1756,14 +1756,14 @@
     <string name="accessibility_settings_title" msgid="2130492524656204459">"सरल उपयोग सेटिंग"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"स्क्रीन रीडर, प्रदर्शन, इंटरैक्शन नियंत्रण"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"दृश्य संबंधी सेटिंग"</string>
-    <string name="vision_settings_description" msgid="5679491180156408260">"आप अपनी आवश्यकताओं के अनुरूप इस डिवाइस को कस्टमाइज़ कर सकते हैं. ये एक्सेस-योग्यता सुविधाएं बाद में सेटिंग में बदली जा सकती हैं."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"आप इस डिवाइस में अपनी जरूरतों के हिसाब से बदलाव ला सकते हैं. ये सुलभता सुविधाएं बाद में सेटिंग में बदली जा सकती हैं."</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"स्क्रीन रीडर"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ऑडियो और ऑन-स्क्रीन लेख"</string>
     <string name="display_category_title" msgid="685461049938269166">"प्रदर्शन"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"इंटरैक्शन नियंत्रण"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"डाउनलोड की गई सेवाएं"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"प्रयोगात्मक"</string>
-    <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
+    <string name="talkback_title" msgid="7912059827205988080">"टॉकबैक"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"स्क्रीन रीडर प्राथमिक रूप से दृष्टिहीन और कमज़ोर दृष्टि वाले लोगों के लिए है"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"अपनी स्क्रीन पर दिए गए आइटम तेज़ आवाज़ में सुनने के लिए उन्हें टैप करें"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"कैप्शन"</string>
@@ -1775,15 +1775,15 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"ज़ूम करने के लिए 3 बार टैप करें"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"ज़ूम करने के लिए किसी बटन पर टैप करें"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"ज़ूम करने के लिए"</b>", स्क्रीन पर 3 बार जल्दी-जल्दी टैप करें.\n"<ul><li>"स्क्रॉल करने के लिए 2 या उससे ज़्यादा अंगुलियां खींचें"</li>\n<li>"ज़ूम एडजस्ट करने के लिए 2 या उससे ज़्यादा अंगुलियों से पिंच करें"</li></ul>\n\n<b>"थोड़ी देर तक ज़ूम करने के लिए"</b>", स्क्रीन पर 3 बार जल्दी-जल्दी टैप करें और तीसरे टैप पर अपनी अंगुली दबाए रखें.\n"<ul><li>"स्क्रीन पर यहां-वहां ले जाने के लिए खींचें"</li>\n<li>"ज़ूम आउट करने के लिए अपनी अंगुली उठा लें"</li></ul>\n\n"आप कीबोर्ड या नेविगेशन बार पर ज़ूम इन नहीं कर सकते हैं."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"आवर्धन चालू किए जाने पर, तुरंत आवर्धित करने के लिए स्क्रीन के नीचे दिए गए एक्सेस-योग्यता बटन का उपयोग करें.\n\n"<b>"ज़ूम करने के लिए"</b>", एक्सेस-योग्यता बटन पर टैप करें, फिर स्क्रीन पर कहीं भी टैप करें.\n"<ul><li>"स्क्रॉल करने के लिए 2 या उससे ज़्यादा अंगुलियां खींचें"</li>\n<li>"ज़ूम एडजस्ट करने के लिए 2 या उससे ज़्यादा अंगुलियों से पिंच करें"</li></ul>\n\n<b>"थोड़े समय तक ज़ूम करने के लिए"</b>", एक्सेस-योग्यता बटन पर टैप करें, फिर स्क्रीन पर कहीं भी स्पर्श करके रखें.\n"<ul><li>"स्क्रीन पर यहां-वहां ले जाने के लिए खींचें"</li>\n<li>"ज़ूम आउट करने के लिए अंगुली उठा लें"</li></ul>\n\n"आप कीबोर्ड या नेविगेशन बार पर ज़ूम इन नहीं कर सकते हैं."</string>
-    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"एक्सेस-योग्यता बटन <xliff:g id="SERVICE">%1$s</xliff:g> पर सेट है. आवर्धन का उपयोग करने के लिए, एक्सेस-योग्यता बटन को स्पर्श करके रखें, फिर आवर्धन चुनें."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"बड़ा करने की सुविधा चालू होने पर, फटाफट बड़ा करने के लिए स्क्रीन के नीचे दिए गए सुलभता बटन का इस्तेमाल करें.\n\n"<b>"ज़ूम करने के लिए"</b>", सुलभता बटन पर टैप करें, फिर स्क्रीन पर कहीं भी टैप करें.\n"<ul><li>"स्क्रोल करने के लिए 2 या उससे ज़्यादा अंगुलियां खींचें"</li>\n<li>"ज़ूम को कम या ज़्यादा करने के लिए 2 या उससे ज़्यादा अंगुलियों से पिंच करें"</li></ul>\n\n<b>"थोड़े समय तक ज़ूम करने के लिए"</b>", सुलभता बटन पर टैप करें, फिर स्क्रीन पर कहीं भी छुएं और दबाकर रखें.\n"<ul><li>"स्क्रीन पर इधर-उधर ले जाने के लिए खींचें"</li>\n<li>"ज़ूम आउट करने के लिए अंगुली उठाएं"</li></ul>\n\n"आप कीबोर्ड या नेविगेशन बार पर ज़ूम इन नहीं कर सकते."</string>
+    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"सुलभता बटन <xliff:g id="SERVICE">%1$s</xliff:g> पर सेट है. बड़ा करने के लिए, सुलभता बटन को दबाकर रखें, फिर बड़ा करना चुनें."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"सरल उपयोग शॉर्टकट"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"शॉर्टकट सेवा"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"लॉक स्क्रीन से अनुमति दें"</string>
     <string name="accessibility_shortcut_description" msgid="6488524140219209763">"शॉर्टकट चालू होने पर, दोनों वॉल्यूम बटनों को 3 सेकंड तक दबाए रखकर आप किसी एक्सेस-योग्यता सेवा को चालू कर सकते हैं."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"उच्च कंट्रास्ट लेख"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"स्क्रीन आवर्धन का नई जानकारी अपने आप पाएं"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"ऐप्स  संक्रमणों पर स्क्रीन आवर्धन का नई जानकारी पाएं"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"एेप ट्रांज़िशन पर स्क्रीन को बड़ा दिखाना अपडेट करें"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"पावर बटन कॉल बंद करता है"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"बड़ा माउस सूचक"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"मोनो ऑडियो"</string>
@@ -1946,8 +1946,8 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"ब्लूटूथ"</string>
     <string name="power_cell" msgid="3392999761958982492">"मोबाइल नेटवर्क स्टैंडबाय"</string>
     <string name="power_phone" msgid="5392641106474567277">"ध्‍वनि कॉल"</string>
-    <string name="power_idle" product="tablet" msgid="4612478572401640759">"टेबलेट निष्‍क्रिय"</string>
-    <string name="power_idle" product="default" msgid="9055659695602194990">"फ़ोन निष्‍क्रिय"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"टेबलेट इस्तेमाल नहीं किया जा रहा"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"फ़ोन इस्तेमाल नहीं किया जा रहा"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"विविध"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"अत्यधिक"</string>
     <string name="power_apps" msgid="2043554781293951327">"ऐप"</string>
@@ -1975,21 +1975,21 @@
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"कुल बैटरी क्षमता"</string>
     <string name="usage_type_computed_power" msgid="5862792259009981479">"पावर का परिकलित उपयोग"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"पावर का देखा गया उपयोग"</string>
-    <string name="battery_action_stop" msgid="649958863744041872">"बलपूर्वक रोकें"</string>
+    <string name="battery_action_stop" msgid="649958863744041872">"ज़बरदस्ती रोकें"</string>
     <string name="battery_action_app_details" msgid="7861051816778419018">"ऐप्स की जानकारी"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"ऐप्स सेटिंग"</string>
     <string name="battery_action_display" msgid="7338551244519110831">"स्‍क्रीन सेटिंग"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"वाई-फ़ाई सेटिंग"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"ब्लूटूथ सेटिंग"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"ध्‍वनि कॉल द्वारा उपयोग की गई बैटरी"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"टेबलेट के निष्‍क्रिय रहने पर उपयोग की गई बैटरी"</string>
-    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"फ़ोन के निष्‍क्रिय रहते समय उपयोग की गई बैटरी"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"टेबलेट के इस्तेमाल न होने पर, उपयोग की गई बैटरी"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"फ़ोन के इस्तेमाल न होने पर, उपयोग की गई बैटरी"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"सेल रेडियो द्वारा उपयोग की गई बैटरी"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"बिना सेट कवरेज वाले क्षेत्रों में पावर बचाने के लिए हवाई जहाज मोड पर स्‍विच करें"</string>
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"फ़्लैशलाइट द्वारा उपयोग की गई बैटरी"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"कैमरे द्वारा उपयोग की गई बैटरी"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"स्क्रीन सेटिंग और बैकलाइट द्वारा उपयोग की गई बैटरी"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"स्‍क्रीन की रोशनी और/या स्‍क्रीन की समयबाह्य अवधि कम करें"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"स्‍क्रीन की रोशनी घटाएं और/या स्‍क्रीन के बंद होने का समय कम करें"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"वाई-फ़ाई द्वारा उपयोग की गई बैटरी"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"जब वाई-फ़ाई  का उपयोग नहीं हो रहा हो या वह उपलब्‍ध नहीं हो, तो उसे बंद कर दें"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"ब्लूटूथ द्वारा उपयोग की गई बैटरी"</string>
@@ -2032,7 +2032,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"कभी नहीं"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> बैटरी होने पर"</string>
     <string name="battery_percentage" msgid="723291197508049369">"बैटरी का प्रतिशत"</string>
-    <string name="battery_percentage_description" msgid="8511658577507384014">"बैटरी का प्रतिशत स्थिति बार में दिखाएं"</string>
+    <string name="battery_percentage_description" msgid="8511658577507384014">"स्टेटस बार में दिखाएं कि कितने प्रतिशत बैटरी बची है"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"प्रोसेस के आंकड़े"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"चल रही प्रक्रिया के बारे में आकंड़े"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"मेमोरी उपयोग"</string>
@@ -2073,16 +2073,16 @@
     <string name="menu_proc_stats_type_background" msgid="2236161340134898852">"पृष्ठभूमि"</string>
     <string name="menu_proc_stats_type_foreground" msgid="2286182659954958586">"अग्रभूमि"</string>
     <string name="menu_proc_stats_type_cached" msgid="5084272779786820693">"संचित"</string>
-    <string name="voice_input_output_settings" msgid="1336135218350444783">"ध्‍वनि इनपुट और आउटपुट"</string>
-    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"ध्‍वनि इनपुट और आउटपुट सेटिंग"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"बोलकर फ़ोन को निर्देश और आउटपुट"</string>
+    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"बोलकर फ़ोन को निर्देश और आउटपुट सेटिंग"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"बोलकर खोजें"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android कीबोर्ड"</string>
-    <string name="voice_input_settings" msgid="1099937800539324567">"ध्वनि इनपुट सेटिंग"</string>
-    <string name="voice_input_settings_title" msgid="2676028028084981891">"ध्‍वनि इनपुट"</string>
-    <string name="voice_service_preference_section_title" msgid="3778706644257601021">"ध्वनि इनपुट सेवाएं"</string>
+    <string name="voice_input_settings" msgid="1099937800539324567">"बोलकर फ़ोन को निर्देश सेटिंग"</string>
+    <string name="voice_input_settings_title" msgid="2676028028084981891">"बोलकर फ़ोन को निर्देश"</string>
+    <string name="voice_service_preference_section_title" msgid="3778706644257601021">"बोलकर फ़ोन को निर्देश सेवाएं"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"पूर्ण हॉटवर्ड और इंटरैक्शन"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"आसान वाक् से लेख"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"यह ध्वनि इनपुट सेवा आपकी ओर से, हमेशा चालू रहने वाली ध्वनि निगरानी को निष्पादित कर सकेगी और ध्वनि सक्षम ऐप्लिकेशन नियंत्रित कर सकेगी. यह <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> ऐप्लिकेशन की ओर से आती है. क्या इस सेवा का उपयोग सक्षम करें?"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"बोलकर फ़ोन को निर्देश देने की यह सेवा, आपकी ओर से हमेशा आवाज़ की निगरानी और आवाज़ सक्षम एेप को नियंत्रित करने में मदद करेगी. यह <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> एेप से आता है. इस सेवा को चालू करें?"</string>
     <string name="tts_engine_preference_title" msgid="1578826947311494239">"पसंदीदा इंजन"</string>
     <string name="tts_engine_settings_title" msgid="6886964122861384818">"इंजन सेटिंग"</string>
     <string name="tts_sliders_title" msgid="992059150784095263">"बोलने की दर और पिच"</string>
@@ -2124,7 +2124,7 @@
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"विश्वस्त CA प्रमाणपत्र दिखाएं"</string>
     <string name="user_credentials" msgid="3719013347787187083">"उपयोगकर्ता प्रमाणिकता"</string>
     <string name="user_credentials_summary" msgid="7271228342106080167">"संग्रहित प्रमाणिकता देखें और बदलाव करें"</string>
-    <string name="advanced_security_title" msgid="2434776238010578865">"अतिरिक्त सेटिंग"</string>
+    <string name="advanced_security_title" msgid="2434776238010578865">"बेहतर सेटिंग"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"मेमोरी का प्रकार"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"हार्डवेयर-समर्थित"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"केवल सॉफ़्टवेयर"</string>
@@ -2163,9 +2163,9 @@
     <string name="fullbackup_data_summary" msgid="960850365007767734">"दूरस्थ रूप से अपने आप डिवाइस डेटा (जैसे वाई-फ़ाई पासवर्ड और कॉल इतिहास) और ऐप डेटा (जैसे ऐप्स द्वारा संग्रहित सेटिंग और फ़ाइलों) का बैक अप लें.\n\nजब आप स्वचालित बैकअप चालू करते हैं, तो डिवाइस और ऐप डेटा को दूरस्थ रूप से समय-समय पर सहेजा जाता है. ऐप डेटा कोई भी ऐसा डेटा हो सकता है जिसे किसी ऐप द्वारा सहेजा गया है (डेवलपर सेटिंग के आधार पर), जिसमें संभावित रूप से संवेदनशील डेटा जैसे संपर्क, संदेश और फ़ोटो शामिल हैं."</string>
     <string name="device_admin_settings_title" msgid="4960761799560705902">"डिवाइस व्यवस्थापक सेटिंग"</string>
     <string name="active_device_admin_msg" msgid="578748451637360192">"डिवाइस व्यवस्थापक ऐप्लिकेशन"</string>
-    <string name="remove_device_admin" msgid="9207368982033308173">"इस डिवाइस व्यवस्थापक ऐप्लिकेशन को निष्क्रिय करें"</string>
+    <string name="remove_device_admin" msgid="9207368982033308173">"इस डिवाइस का एडमिन एेप बंद करें"</string>
     <string name="uninstall_device_admin" msgid="271120195128542165">"ऐप अनइंस्टॉल करें"</string>
-    <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"निष्क्रिय करें और अनइंस्टॉल करें"</string>
+    <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"बंद करें और अनइंस्टॉल करें"</string>
     <string name="select_device_admin_msg" msgid="7347389359013278077">"डिवाइस व्यवस्थापक ऐप्लिकेशन"</string>
     <string name="no_device_admins" msgid="4846602835339095768">"कोई भी डिवाइस व्यवस्थापक ऐप्लिकेशन उपलब्ध नहीं है"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"व्यक्तिगत"</string>
@@ -2219,7 +2219,7 @@
     <string name="accessibility_sync_error" msgid="8703299118794272041">"समन्वयन गड़बड़ी."</string>
     <string name="sync_failed" msgid="1696499856374109647">"समन्‍वयन विफल"</string>
     <string name="sync_active" msgid="8476943765960863040">"समन्‍वयन सक्रिय"</string>
-    <string name="account_sync_settings_title" msgid="5131314922423053588">"समन्वयित करें"</string>
+    <string name="account_sync_settings_title" msgid="5131314922423053588">"सिंक करें"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"किसी समस्या के कारण अभी समन्वयन नहीं हो पाया.यह शीघ्र ही उपलब्ध होगा."</string>
     <string name="add_account_label" msgid="7811707265834013767">"खाता जोड़ें"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"कार्य प्रोफ़ाइल अभी तक उपलब्ध नहीं है"</string>
@@ -2229,8 +2229,8 @@
     <string name="background_data" msgid="5779592891375473817">"पृष्ठभूमि डेटा"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"ऐप्स किसी भी समय डेटा समन्वयित, भेज और प्राप्त कर सकते हैं"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"पृष्ठभू. डेटा अक्षम करें?"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"पृष्ठभूमि डेटा को अक्षम करने से बैटरी का जीवनकाल बढ़ जाता है और डेटा उपयोग कम होता है. हो सकता है कि कुछ ऐप्स  अब भी पृष्ठभूमि डेटा कनेक्शन का उपयोग करते हों."</string>
-    <string name="sync_automatically" msgid="1682730255435062059">"ऐप्स  डेटा स्‍वत: समन्‍वयित करें"</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"बैकग्राउंड डेटा को बंद करने से बैटरी ज़्यादा चलती है और डेटा कम खर्च होता है. हो सकता है कि कुछ ऐप अब भी बैकग्राउंड में डेटा इस्तेमाल कर रहे हों."</string>
+    <string name="sync_automatically" msgid="1682730255435062059">"ऐप डेटा अपने आप सिंक करें"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"समन्वयन चालू है"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"समन्वयन बंद है"</string>
     <string name="sync_error" msgid="5060969083117872149">"समन्वयन गड़बड़ी"</string>
@@ -2277,14 +2277,14 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="TOTAL">%2$d</xliff:g> में से <xliff:g id="NUMBER">%1$d</xliff:g> चयनित"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="TOTAL">%2$s</xliff:g> में से <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"सभी को चुनें"</string>
-    <string name="data_usage_summary_title" msgid="3804110657238092929">"डेटा उपयोग"</string>
-    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"ऐप्स डेटा उपयोग"</string>
-    <string name="data_usage_accounting" msgid="7170028915873577387">"वाहक की डेटा गणना आपके डिवाइस से भिन्न हो सकती है."</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"डेटा खर्च"</string>
+    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"डेटा खर्च एेप"</string>
+    <string name="data_usage_accounting" msgid="7170028915873577387">"डेटा खर्च को लेकर मोबाइल और इंटरनेट सेवा देने वाली कंपनी का हिसाब आपके डिवाइस के हिसाब से अलग हो सकता है."</string>
     <string name="data_usage_app" msgid="4970478397515423303">"ऐप्स का उपयोग"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"ऐप्स की जानकारी"</string>
     <string name="data_usage_cellular_data" msgid="9168928285122125137">"मोबाइल डेटा"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"डेटा की सीमा सेट करें"</string>
-    <string name="data_usage_cycle" msgid="5652529796195787949">"डेटा उपयोग चक्र"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"डेटा खर्च की अवधि"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"ऐप्स का उपयोग"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"रोमिंग डेटा"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"पृष्ठभूमि डेटा प्रतिबंधित करें"</string>
@@ -2300,10 +2300,10 @@
     <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"मोबाइल नेटवर्क"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"सीमा पर रोका गया"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"अपने आप डेटा समन्वयन"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"निजी डेटा स्वत: समन्वयित करें"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"कार्य डेटा स्वत: समन्वयित करें"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"निजी डेटा अपने आप सिंक करें"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"काम से जुड़ा डेटा अपने आप सिंक करें"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"चक्र बदलें ..."</string>
-    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"डेटा उपयोग चक्र रीसेट करने के लिए माह का दिन:"</string>
+    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"डेटा खर्च की अवधि रीसेट करने के लिए महीने का दिन:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"इस दौरान कि‍सी भी ऐप्स ने डेटा का उपयोग नहीं कि‍या."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"अग्रभूमि‍"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"पृष्ठभूमि"</string>
@@ -2330,7 +2330,7 @@
     <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"बैकग्राउंड में मोबाइल डेटा का उपयोग करना सक्षम करें"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"इस एप्‍लि. के लिए पृष्ठभूमि डेटा प्रतिबंधित करने के लिए, पहले मो. डेटा सीमा सेट करें."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"पृष्ठभूमि डेटा प्रतिबंधित करें?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"यह सुविधा केवल मोबाइल नेटवर्क उपलब्ध होने पर उस एप्ल‍िकेशन को कार्य करने से रोक सकती है जो पृष्ठभूमि डेटा पर निर्भर है.\n\nआपको एप्ल‍िकेशन में उपलब्ध सेटिंग में अधिक उपयुक्त डेटा उपयोग नियंत्रण मिल सकते हैं."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"यह सुविधा सिर्फ़ मोबाइल नेटवर्क उपलब्ध होने पर उस एेप को काम करने से रोक सकती है जो बैकग्राउंड डेटा पर निर्भर है.\n\nआप एेप में उपलब्ध सेटिंग में ज़्यादा उचित डेटा खर्च नियंत्रण पा सकते हैं."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"बैकग्राउंड डेटा प्रतिबंधित करना तभी संभव है जब आपने कोई नेटवर्क डेटा सीमा सेट की हुई हो."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"अपने आप डेटा सिंक चालू करें?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"आपने वेब पर अपने खातों में जो भी बदलाव किए हैं उनकी कॉपी आपके टेबलेट में अपने आप बन जाएगी.\n\nआपने जो भी बदलाव टेबलेट पर किए हैं, उन्हें कुछ खाते वेब पर भी कॉपी कर सकते हैं. Google खाता इसी तरह काम करता है."</string>
@@ -2340,11 +2340,11 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"उपयोग चक्र रीसेट दिनांक"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"प्रत्येक माह का दिनांक:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"सेट करें"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"डेटा उपयोग चेतावनी सेट करें"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"डेटा उपयोग की सीमा सेट करें"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"डेटा उपयोग सीमित करना"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"जैसे ही आपका मोबाइल डेटा आपकी सेट की हुई सीमा पर पहुंचेगा, आपका टैबलेट मोबाइल डेटा को बंद कर देगा.\n\nचूंकि डेटा उपयोग को आपके टैबलेट से मापा जाता है और आपका वाहक उपयोग का हिसाब अलग तरीके से लगा सकता है, इसलिए सीमा को कम पर सेट करने के बारे में विचार करें."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"जैसे ही आपका मोबाइल डेटा आपकी सेट की हुई सीमा पर पहुंचेगा, आपका फ़ोन मोबाइल डेटा को बंद कर देगा.\n\nचूंकि डेटा उपयोग को आपके फ़ोन से मापा जाता है और आपका वाहक उपयोग का हिसाब अलग तरीके से लगा सकता है, इसलिए सीमा को कम पर सेट करने के बारे में विचार करें."</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"डेटा खर्च की चेतावनी सेट करें"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"डेटा खर्च की सीमा सेट करें"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"डेटा र्खच सीमित करना"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"जैसे ही आपका टैबलेट डेटा, आपकी सेट की हुई सीमा पर पहुंचेगा, आपका टैबलेट उसे बंद कर देगा.\n\nचूंकि डेटा खर्च आपके टैबलेट से मापा जाता है और आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी, इस्तेमाल किए गए डेटा का हिसाब अलग तरीके से लगा सकती है. इसलिए सीमा को कम पर सेट करने के बारे में विचार करें."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"जैसे ही आपका मोबाइल डेटा आपकी सेट की हुई सीमा पर पहुंचेगा, आपका फ़ोन उसे बंद कर देगा.\n\nचूंकि डेटा खर्च आपके फ़ोन से मापा जाता है और आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी, इस्तेमाल किए गए डेटा का हिसाब अलग तरीके से लगा सकती है. इसलिए सीमा को कम पर सेट करने के बारे में विचार करें."</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"पृष्ठभूमि डेटा प्रतिबंधित करें?"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"अगर आप बैकग्राउंड मोबाइल डेटा प्रतिबंधित करते हैं, तो जब तक आप वाई-फ़ाई से कनेक्ट नहीं हो जाते, तब तक कुछ ऐप्लिकेशन और सेवाएं काम नहीं करेंगी."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"अगर आप बैकग्राउंड मोबाइल डेटा प्रतिबंधित करते हैं, तो जब तक आप वाई-फ़ाई से कनेक्ट नहीं हो जाते, तब तक कुछ ऐप्लिकेशन और सेवाएं काम नहीं करेंगी.\n\nइस सेटिंग से इस टैबलेट पर मौजूद सभी उपयोगकर्ता प्रभावित होते हैं."</string>
@@ -2362,7 +2362,7 @@
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"मोबाइल नेटवर्क"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"मीटर किए गए वाई-फ़ाई नेटवर्क"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"मापे जाने वाले नेटवर्क चुनने के लिए, वाई-फ़ाई चालू करें."</string>
-    <string name="data_usage_disclaimer" msgid="6887858149980673444">"वाहक की डेटा गणना आपके डिवाइस से भिन्न हो सकती है."</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"डेटा खर्च को लेकर मोबाइल और इंटरनेट सेवा देने वाली कंपनी का हिसाब आपके डिवाइस के हिसाब से अलग हो सकता है."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"आपातकालीन कॉल"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"कॉल पर वापस लौटें"</string>
     <string name="vpn_name" msgid="4689699885361002297">"नाम"</string>
@@ -2375,7 +2375,7 @@
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec उपयोगकर्ता प्रमाणपत्र"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA प्रमाणपत्र"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec सर्वर प्रमाणपत्र"</string>
-    <string name="vpn_show_options" msgid="7182688955890457003">"अतिरिक्त सेटिंग दिखाएं"</string>
+    <string name="vpn_show_options" msgid="7182688955890457003">"बेहतर विकल्प दिखाएं"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS खोज डोमेन"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS सर्वर (उदा. 8.8.8.8)"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"अग्रेषण मार्ग (उदा. 10.0.0.0/8)"</string>
@@ -2452,7 +2452,7 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"यहां अपना नया पूर्ण बैकअप पासवर्ड फिर से लिखें"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"बैकअप पासवर्ड सेट करें"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"अभी नहीं"</string>
-    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"सिस्‍टम के बारे में अतिरिक्त नई जानकारी"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"अतिरिक्त सिस्टम अपडेट"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"अक्षम"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"अनुमति देने वाला"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"लागू किया जा रहा है"</string>
@@ -2495,7 +2495,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"उपयोगकर्ता"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"प्रतिबंधित प्रोफ़ाइल"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"नया उपयोगकर्ता जोड़ें?"</string>
-    <string name="user_add_user_message_long" msgid="8562152293752222985">"आप अतिरिक्त उपयोगकर्ता बनाकर इस डिवाइस को अन्य लोगों से साझा कर सकते हैं. प्रत्येक उपयोगकर्ता के पास अपना स्वयं का स्थान होता है, जिसे वह अपने स्वयं के ऐप्स, वॉलपेपर आदि से कस्टमाइज़ कर सकता है. उपयोगकर्ता वाई-फ़ाई जैसी डिवाइस सेटिंग भी एडजस्‍ट कर सकते हैं जिनसे हर कोई प्रभावित होता है.\n\nजब आप नया उपयोगकर्ता जोड़ते हैं, तो उस व्यक्ति को अपना स्थान सेट करना होता है.\n\nकोई भी उपयोगकर्ता अन्य सभी उपयोगकर्ताओं के लिए ऐप्स अपडेट कर सकता है."</string>
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"आप और ज़्यादा उपयोगकर्ता बनाकर इस डिवाइस को अन्य लोगों से शेयर कर सकते हैं. हर उपयोगकर्ता ऐप, वॉलपेपर जैसी चीज़ों से अपनी जगह में मनपसंद तरीके से बदलाव कर सकते हैं. उपयोगकर्ता वाई-फ़ाई जैसी डिवाइस सेटिंग को भी बदल कर, हर किसी पर असर डाल सकते हैं.\n\nजब आप एक नया उपयोगकर्ता जोड़ते हैं, तो उस उपयोगकर्ता को अपनी जगह सेट करनी पड़ती है.\n\nकोई भी उपयोगकर्ता और सभी उपयोगकर्ताओं के लिए ऐप अपडेट कर सकता है."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"जब आप कोई नया उपयोगकर्ता जोड़ते हैं तो उस व्यक्ति को अपना स्थान सेट करना होता है.\n\nकोई भी उपयोगकर्ता अन्य सभी उपयोगकर्ताओं के लिए ऐप्स अपडेट कर सकता है."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"उपयोगकर्ता को अभी सेट करें?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"सुनिश्चित करें कि व्यक्ति डिवाइस लेने और अपना स्थान सेट करने के लिए उपलब्ध है"</string>
@@ -2551,7 +2551,7 @@
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"डिफ़ॉल्ट का उपयोग करें"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"हमेशा"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"सिवाय तब जब दूसरा भुगतान ऐप खुला हो"</string>
-    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"टैप करें और भुगतान करें टर्मिनल पर, इससे भुगतान करें:"</string>
+    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"एक टैप करके और AMP के ज़रिये; भुगतान टर्मिनल पर, इससे भुगतान करें:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"टर्मिनल पर भुगतान करना"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"भुगतान ऐप सेट करें. फिर बस अपने फ़ोन के पिछले भाग को संपर्क-रहित प्रतीक वाले किसी टर्मिनल की ओर रखकर पकड़ें."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"समझ लिया"</string>
@@ -2582,7 +2582,7 @@
     <string name="cell_broadcast_settings" msgid="2451014351355183338">"आपातकालीन प्रसारण"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"नेटवर्क ऑपरेटर"</string>
     <string name="access_point_names" msgid="1381602020438634481">"एक्सेस पॉइंट नाम"</string>
-    <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"उन्नत 4G LTE मोड"</string>
+    <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"बेहतर 4G LTE मोड"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"ध्वनि और संचारों को उन्नत बनाने के लिए LTE डेटा का उपयोग करें (सुझाए गए)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"पसंदीदा नेटवर्क प्रकार"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (सुझाया गया)"</string>
@@ -2596,7 +2596,7 @@
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"वाई-फ़ाई और मोबाइल"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"वाई-फ़ाई और मोबाइल सेटिंग में बदलाव की अनुमति दें"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"ब्लूटूथ"</string>
-    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"ब्लूटूथ युग्‍मन और सेटिंग में बदलाव की अनुमति दें"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"ब्लूटूथ से जोड़ने और सेटिंग में बदलाव की अनुमति दें"</string>
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary_config" msgid="3232480757215851738">"जब यह <xliff:g id="DEVICE_NAME">%1$s</xliff:g> किसी अन्य NFC डिवाइस को स्पर्श करे तब डेटा का आदान-प्रदान होने दें"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"जब टेबलेट अन्य डिवाइस को स्पर्श करे तो डेटा ट्रांसफर करने दें"</string>
@@ -2627,7 +2627,7 @@
     <string name="sim_editor_name" msgid="1722945976676142029">"सिम का नाम"</string>
     <string name="sim_name_hint" msgid="7038643345238968930">"सिम का नाम डालें"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"सिम स्‍लॉट %1$d"</string>
-    <string name="sim_editor_carrier" msgid="5684523444677746573">"वाहक"</string>
+    <string name="sim_editor_carrier" msgid="5684523444677746573">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"नंबर"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"सिम का रंग"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"सिम कार्ड चुनें"</string>
@@ -2636,7 +2636,7 @@
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"कोई सिम कार्ड नहीं डाला गया"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"सिम स्थिति"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"डिफ़ॉल्ट सिम से कॉल करें"</string>
-    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"आउटगोइंग कॉल के लिए सिम"</string>
+    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"किया जाने वाला कॉल (आउटगोइंग) के लिए सिम"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"अन्य कॉल सेटिंग"</string>
     <string name="preferred_network_offload_title" msgid="1605829724169550275">"पसंदीदा नेटवर्क ऑफ़लोड"</string>
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"नेटवर्क नाम प्रसारण अक्षम करें"</string>
@@ -2654,7 +2654,7 @@
       <item quantity="other">छिपे हुए %d आइटम दिखाएं</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"नेटवर्क और इंटरनेट"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"वाई-फ़ाई, मोबाइल, डेटा उपयोग, हॉटस्पॉट"</string>
+    <string name="network_dashboard_summary" msgid="3274556191585905652">"वाई-फ़ाई, मोबाइल, डेटा खर्च, हॉटस्पॉट"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"कनेक्ट किए गए डिवाइस"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"ब्लूटूथ, कास्ट, NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ऐप्लिकेशन और नोटिफ़िकेशन"</string>
@@ -2667,7 +2667,7 @@
     <string name="query_hint_text" msgid="3350700807437473939">"सेटिंग में खोजें"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"वाईफ़ाई, वाई-फ़ाई नेटवर्क कनेक्शन"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"पाठ संदेश पाठ संदेश भेजना मेसेज सेवा"</string>
-    <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"सेल्युलर, मोबाइल, सेल वाहक, वायरलेस, डेटा, 4g,3g, 2g, lte"</string>
+    <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"सेल्युलर, मोबाइल, मोबाइल और इंटरनेट सेवा देने वाली कंपनी, वायरलेस, डेटा, 4g,3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"वाईफ़ाई, वाई-फ़ाई, कॉल, कॉलिंग"</string>
     <string name="keywords_home" msgid="3626170808219458848">"लॉन्चर"</string>
     <string name="keywords_display" msgid="8910345814565493016">"स्क्रीन, टचस्क्रीन"</string>
@@ -2680,7 +2680,7 @@
     <string name="keywords_storage" msgid="3299217909546089225">"स्थान डिस्क हार्ड डिस्क डिवाइस उपयोग"</string>
     <string name="keywords_battery" msgid="1173830745699768388">"पावर उपयोग, शुल्क"</string>
     <string name="keywords_spell_checker" msgid="1399641226370605729">"वर्तनी शब्दकोश वर्तनीजांच स्‍वत: सुधार"</string>
-    <string name="keywords_voice_input" msgid="769778245192531102">"पहचानकर्ता, इनपुट, बोली, बोलें, भाषा, हैंड्सफ़्री, हैंड फ़्री, पहचान, आपत्तिजनक, शब्द, ऑडियो, इतिहास, ब्लूटूथ, हैडसेट"</string>
+    <string name="keywords_voice_input" msgid="769778245192531102">"पहचानकर्ता, इनपुट, बोली, बोलें, भाषा, हैंड्सफ़्री, हैंड फ़्री, पहचान, आपत्तिजनक, शब्द, ऑडियो, इतिहास, ब्लूटूथ, हेडसेट"</string>
     <string name="keywords_text_to_speech_output" msgid="5150660047085754699">"रेट करें, भाषा, डिफ़ॉल्ट, बोलें, बोलना, tts, एक्सेस-योग्यता स्क्रीन रीडर, नेत्रहीन"</string>
     <string name="keywords_date_and_time" msgid="758325881602648204">"घड़ी, सेना"</string>
     <string name="keywords_network_reset" msgid="6024276007080940820">"रीसेट करें, पुन: स्‍थापित करें, फ़ैक्टरी"</string>
@@ -2693,20 +2693,20 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"सटीकता"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"खाता"</string>
     <string name="keywords_users" msgid="3434190133131387942">"प्रतिबंध, प्रतिबंधित करें, प्रतिबंधित"</string>
-    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"लेख सुधार सही ध्वनि कंपन स्वतः भाषा हावभाव सुझाव दें सुझाव थीम आपत्तिजनक शब्द प्रकार इमोजी अंतर्राष्ट्रीय"</string>
+    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"लिखी हुई सामग्री में सुधार, सही आवाज़, वाइब्रेशन (कंपन), अपने आप आने वाले भाषा के सुझाव, जेस्चर के सुझाव, थीम, आपत्तिजनक शब्द, प्रकार, इमोजी, अंतर्राष्ट्रीय"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"रीसेट करें, प्राथमिकताएं, डिफ़ॉल्‍ट"</string>
     <string name="keywords_emergency_app" msgid="3143078441279044780">"आपातकालीन, बर्फ़, ऐप, डिफ़ॉल्‍ट"</string>
     <string name="keywords_default_phone_app" msgid="4213090563141778486">"फ़ोन, डायलर, डिफ़ॉल्ट"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"ऐप्स, डाउनलोड करें, ऐप्‍लिकेशन, सिस्‍टम"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"ऐप्स, अनुमतियां, सुरक्षा"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"ऐप्स, डिफ़ॉल्ट"</string>
-    <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ऑप्टिमाइज़ेशन अनदेखा करें, बचत, ऐप स्टैंडबाय"</string>
+    <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"ऑप्टिमाइज़ेशन, बैटरी बचाएं (डोज़), ऐप स्टैंडबाय पर ध्यान न दें"</string>
     <string name="keywords_color_mode" msgid="6362744316886077510">"चमकीला, RGB, sRGB, रंग, प्राकृतिक, मानक"</string>
     <string name="keywords_color_temperature" msgid="2688947724153266364">"रंग तापमान D65 D73 सफ़ेद पीला नीला वॉर्म कूल"</string>
     <string name="keywords_lockscreen" msgid="5746561909668570047">"अनलॉक करने के लिए स्लाइड करें, पासवर्ड, पैटर्न, पिन"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"कार्य चुनौती, कार्य, प्रोफ़ाइल"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"कार्य प्रोफ़ाइल, प्रबंधित प्रोफ़ाइल, एक करना, एकीकरण, कार्य, प्रोफ़ाइल"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"हावभाव"</string>
+    <string name="keywords_gesture" msgid="5696040361482126337">"जेस्चर"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"भुगतान करें, टैप करें, भुगतान"</string>
     <string name="keywords_backup" msgid="470070289135403022">"बैकअप, बैक अप"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"वाई-फ़ाई  NFC टैग सेट करें"</string>
@@ -2760,7 +2760,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"केवल अलार्म"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"पूरी तरह शांत"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"दृश्य संबंधी गड़बड़ी अवरुद्ध करें"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"मैसेज पर स्क्रीन चमकने से रोकें"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"कार्य प्रोफ़ाइल की ध्वनियां"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"व्यक्तिगत प्रोफाइल ध्वनि काम में लें"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"कार्य और व्यक्तिगत प्रोफ़ाइल के लिए ध्वनियां एक समान होती हैं"</string>
@@ -2827,12 +2827,12 @@
     <string name="display_vr_pref_title" msgid="8104485269504335481">"जब डिवाइस VR मोड में हो"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"धुंधलापन कम करें (अनुशंसित)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"फ़्लिकर कम करें"</string>
-    <string name="picture_in_picture_title" msgid="5824849294270017113">"स्क्रीन में स्क्रीन"</string>
-    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"इंस्टॉल किए हुए किसी भी ऐप्लिकेशन में स्क्रीन में स्क्रीन सुविधा काम नहीं करती है"</string>
+    <string name="picture_in_picture_title" msgid="5824849294270017113">"पिक्चर में पिक्चर"</string>
+    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"इंस्टॉल किए हुए किसी भी ऐप में पिक्चर में पिक्चर की सुविधा काम नहीं करती है"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"पीआईपी तस्वीर डालें"</string>
-    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"स्क्रीन में स्क्रीन"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"स्क्रीन में स्क्रीन की अनुमति दें"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"इस ऐप्लिकेशन के खुले होने पर या जब आप उसे छोड़ दें, उसके बाद (उदाहरण के लिए, कोई वीडियो देखते रहने के लिए), उसे एक स्क्रीन में स्क्रीन विंडो बनाने दें. यह विंडो उन दूसरे ऐप्लिकेशन के ऊपर दिखाई देती है जिनका आप उपयोग कर रहे हैं."</string>
+    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"पिक्चर में पिक्चर"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"पिक्चर में पिक्चर बनाने की अनुमति दें"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"ऐप के खुले होने पर या आपके उसे छोड़ देने के बाद, उस ऐप को पिक्चर में पिक्चर बनाने की अनुमति दें (उदाहरण के लिए, कोई वीडियो देखते रहने के लिए). यह विंडो उन दूसरे ऐप्लिकेशन के ऊपर दिखाई देती है जिनका आप उपयोग कर रहे हैं."</string>
     <string name="picture_in_picture_on" msgid="6103704909710176555">"हां"</string>
     <string name="picture_in_picture_off" msgid="5654388666434625247">"नहीं"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"परेशान ना करें एक्सेस"</string>
@@ -2859,7 +2859,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"ये नोटिफ़िकेशन कभी ना दिखाएं"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"नोटिफ़िकेशन दिखाएं"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"नोटिफ़िकेशन कभी भी शेड में या पेरिफ़ेरल डिवाइस पर ना दिखाएं"</string>
-    <string name="notification_badge_title" msgid="6370122441168519809">"सूचना बिंदुु की अनुमति दें"</string>
+    <string name="notification_badge_title" msgid="6370122441168519809">"नए नोटिफ़िकेशन बताने वाले गोल निशान की अनुमति दें"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"सूचना बिंदु दिखाएं"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"परेशान ना करें को ओवरराइड करें"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"जब परेशान ना करें को केवल प्राथमिकता पर सेट किया गया हो, तब इन नोटिफ़िकेशन को बाधित करते रहने दें"</string>
@@ -2920,9 +2920,9 @@
     <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्म"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"रिमाइंडर्स"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"इवेंट"</string>
-    <string name="zen_mode_all_callers" msgid="584186167367236922">"सभी कॉलर"</string>
-    <string name="zen_mode_selected_callers" msgid="3127598874060615742">"चयनित कॉलर"</string>
-    <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"कॉलर दोहराएं"</string>
+    <string name="zen_mode_all_callers" msgid="584186167367236922">"सभी कॉल करने वाले (कॉलर)"</string>
+    <string name="zen_mode_selected_callers" msgid="3127598874060615742">"चुनिंदा कॉल करने वाले (कॉलर)"</string>
+    <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"बार-बार कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"यदि वही व्‍यक्‍ति <xliff:g id="MINUTES">%d</xliff:g> मिनट की अवधि के भीतर दूसरी बार कॉल करता है, तो उसे अनुमति दें"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वचालित रूप से चालू"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कभी नहीं"</string>
@@ -2942,9 +2942,9 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"केवल <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> तक के लिए अलार्म को बदलें"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"हमेशा बाधित करें में बदलें"</string>
-    <string name="zen_mode_screen_on" msgid="7712038508173845101">"स्क्रीन के चालू होने पर अवरुद्ध करें"</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"स्क्रीन चालू होने पर रोकें"</string>
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"परेशान न करें द्वारा मौन किए गए नोटिफ़िकेशन को स्क्रीन पर तांक-झांक करने या पॉप अप होने से रोकें"</string>
-    <string name="zen_mode_screen_off" msgid="5026854939192419879">"स्क्रीन बंद होने पर अवरुद्ध करें"</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"स्क्रीन बंद होने पर रोकें"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"परेशान न करें द्वारा मौन किए गए नोटिफ़िकेशन को स्क्रीन को चालू करने से या नोटिफ़िकेशन की रोशनी को पल्स करने से रोकें"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"परेशान न करें द्वारा मौन किए गए नोटिफ़िकेशन को स्क्रीन चालू करने से रोकें"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"बंद"</string>
@@ -2957,8 +2957,8 @@
     <string name="switch_on_text" msgid="1124106706920572386">"चालू"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"बंद"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"स्क्रीन पिन करना"</string>
-    <string name="screen_pinning_description" msgid="3360904523688769289">"यह सेटिंग चालू होने पर, आप अनपिन करने तक वर्तमान स्क्रीन को दृश्य में बनाए रखने के लिए स्क्रीन पिन करना उपयोग कर सकते हैं.\n\nस्क्रीन पिन करना उपयोग करने हेतु:\n\n1. सुनिश्चित करें कि स्क्रीन पिन करना चालू है.\n\n2. वह स्क्रीन खोलें जिसे आप पिन करना चाहते हैं.\n\n3. अवलोकन टैप करें.\n\n4. ऊपर स्वाइप करें फिर पिन आइकन टैप करें."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"अनपिन करने से पहले अनलॉक पैटर्न के लिए पूछें"</string>
+    <string name="screen_pinning_description" msgid="3360904523688769289">"इस सेटिंग के चालू होने पर, आप अनपिन करने तक, मौजूदा स्क्रीन को पिन करके दिखा सकते हैं.\n\nस्क्रीन को पिन करने के लिए :\n\n1. ध्यान रखें कि, स्क्रीन पिन करें, चालू है.\n\n2. उस स्क्रीन को खोलें जिसे आप पिन करना चाहते हैं.\n\n3. खास जानकारी टैप करें.\n\n4. ऊपर की ओर स्वाइप करें और फिर पिन आइकन टैप करें."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"अनपिन करने से पहले लॉक खोलने के पैटर्न के लिए पूछें"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"अनपिन करने से पहले पिन के लिए पूछें"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"अनपिन करने से पहले पासवर्ड के लिए पूछें"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"अनपिन करते समय डिवाइस लॉक करें"</string>
@@ -2969,7 +2969,7 @@
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"स्क्रीन की सामग्री को घुमाएं"</string>
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"पोर्ट्रेट दृश्य में बने रहें"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"भू-दृश्य में बने रहें"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"वर्तमान अभिविन्यास में बने रहें"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"मौजूदा स्क्रीन दिशा में बने रहें"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"सुरक्षित स्‍टार्ट-अप"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"जारी रखें"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"आप इसके चालू होने से पहले अपना पिन डालना ज़रूरी बनाकर इसे और सुरक्षित बना सकते हैं. जब तक डिवाइस चालू नहीं होता, तब तक उसे अलार्म के साथ ही, कॉल, संदेश या नोटिफ़िकेशन नहीं मिल सकते हैं. \n\nइससे खोए या चोरी चले गए डिवाइसों पर मौजूद डेटा को सुरक्षित करने में सहायता मिलती है. क्या आप अपना डिवाइस चालू होने से पहले पिन डालना ज़रूरी बनाना चाहते हैं?"</string>
@@ -2999,7 +2999,7 @@
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> में <xliff:g id="SIZE">%1$s</xliff:g> का उपयोग किया गया"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"मोबाइल मेमोरी"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"बाहरी मेमोरी"</string>
-    <string name="app_data_usage" msgid="7942375313697452803">"ऐप्स डेटा उपयोग"</string>
+    <string name="app_data_usage" msgid="7942375313697452803">"डेटा खर्च एेप"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="DATE">%2$s</xliff:g> से <xliff:g id="SIZE">%1$s</xliff:g> उपयोग हुआ"</string>
     <string name="storage_used" msgid="7128074132917008743">"उपयोग की गई मेमोरी"</string>
     <string name="change" msgid="6657848623929839991">"बदलें"</string>
@@ -3024,8 +3024,8 @@
       <item quantity="other"><xliff:g id="COUNT_3">%d</xliff:g> में से <xliff:g id="COUNT_2">%d</xliff:g> अनुमतियां दी गईं</item>
     </plurals>
     <plurals name="runtime_permissions_additional_count" formatted="false" msgid="931276038884210752">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> अतिरिक्‍त अनुमतियां</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> अतिरिक्‍त अनुमतियां</item>
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> अतिरिक्त अनुमतियां</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> अतिरिक्त अनुमतियां</item>
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"कोई अनुमति नहीं दी गई"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"किसी अनुमति का अनुरोध नहीं किया गया"</string>
@@ -3040,7 +3040,7 @@
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"श्रेणियां: कम महत्व के"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"श्रेणियां: बंद हैं"</string>
     <string name="filter_notif_dnd_channels" msgid="1817930848881696728">"श्रेणियां: परेशान न करें ओवरराइड करती हैं"</string>
-    <string name="advanced_apps" msgid="4812975097124803873">"अतिरिक्‍त सेटिंग"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"बेहतर सेटिंग"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ऐप्स कॉन्‍फ़िगर करें"</string>
     <string name="unknown_app" msgid="5275921288718717656">"अज्ञात ऐप"</string>
     <string name="app_permissions" msgid="4148222031991883874">"ऐप अनुमतियां"</string>
@@ -3079,7 +3079,7 @@
     <string name="usage_access" msgid="5479504953931038165">"उपयोग एक्‍सेस"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"उपयोग की ऐक्‍सेस की अनुमति दें"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"ऐप उपयोग की प्राथमिकताएं"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"उपयोग की ऐक्‍सेस किसी ऐप को यह ट्रैक करने देती है कि आप कौन से अन्‍य ऐप्‍स का उपयोग कर रहे हैं और आप उनका उपयोग कितनी बार करते हैं, साथ ही आपके वाहक, भाषा सेटिंग और अन्‍य विवरण भी ट्रैक करने देती है."</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"उपयोग का ऐक्‍सेस, किसी ऐप को यह ट्रैक करने देता है कि आप कौन-कौन से एेप इस्तेमाल कर रहे हैं और उन्हें कितनी बार इस्तेमाल करते हैं. साथ ही आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी, भाषा सेटिंग और अन्‍य जानकारी भी ट्रैक करने देती है."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"मेमोरी"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"मेमोरी का विवरण"</string>
     <string name="always_running" msgid="6042448320077429656">"हमेशा चलने वाला (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3132,7 +3132,7 @@
     <string name="usb_summary_file_transfers" msgid="6435943692610175111">"फ़ाइलें स्थानान्तरित करना"</string>
     <string name="usb_summary_photo_transfers" msgid="8440204169576585250">"फ़ोटो स्थानान्तरित करना (PTP)"</string>
     <string name="usb_summary_MIDI" msgid="5687906612187885908">"डिवाइस का उपयोग MIDI के रूप में करना"</string>
-    <string name="background_check_pref" msgid="7550258400138010979">"पृष्ठभूमि जांच"</string>
+    <string name="background_check_pref" msgid="7550258400138010979">"बैकग्राउंड चैक"</string>
     <string name="background_check_title" msgid="4534254315824525593">"पूर्ण पृष्ठभूमि एक्सेस"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"स्क्रीन के लेख का उपयोग करना"</string>
     <string name="assist_access_context_summary" msgid="1991421283142279560">"सहायक ऐप को स्क्रीन की सामग्रियों को लेख के रूप में ऐक्सेस करने दें"</string>
@@ -3140,7 +3140,7 @@
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"सहायक ऐप को स्क्रीन की छवि को ऐक्सेस करने दें"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"स्क्रीन फ़्लैश करें"</string>
     <string name="assist_flash_summary" msgid="9160668468824099262">"सहायक ऐप्लिकेशन द्वारा स्क्रीन या स्क्रीनशॉट से लेख एक्सेस करने पर स्क्रीन के किनारे फ़्लैश करें"</string>
-    <string name="assist_footer" msgid="1982791172085896864">"आप जो स्क्रीन देख रहे हैं, उसकी जानकारी के आधार पर सहायक ऐप्स आपकी सहायता कर सकते हैं. कुछ ऐप्स आपको एकीकृत सहायता देने के लिए लॉन्चर और ध्‍वनि इनपुट सेवाएं दोनों का समर्थन करते हैं."</string>
+    <string name="assist_footer" msgid="1982791172085896864">"आप जो स्क्रीन देख रहे हैं, उसकी जानकारी के आधार पर सहायक ऐप आपकी मदद कर सकते हैं. कुछ ऐप आपकी पूरी तरह से मदद करने के लिए लॉन्चर और बोलकर फ़ोन को निर्देश, दोनों सेवाअों  का समर्थन करते हैं."</string>
     <string name="average_memory_use" msgid="829566450150198512">"औसत मेमोरी उपयोग"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"अधिकतम मेमोरी उपयोग"</string>
     <string name="memory_usage" msgid="1781358557214390033">"मेमोरी का उपयोग"</string>
@@ -3173,7 +3173,7 @@
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"बेहतर बैटरी जीवनकाल के लिए सुझाया गया"</string>
     <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> को बैटरी ऑप्टिमाइज़ेशन को अनदेखा करने की अनुमति दें?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"कोई नहीं"</string>
-    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"इस ऐप्लिकेशन के लिए उपयोग एक्सेस बंद करने से आपके व्यवस्थापक को आपकी कार्य प्रोफ़ाइल के ऐप्लिकेशन का डेटा उपयोग ट्रैक करने से नहीं रोका जाता"</string>
+    <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"इस ऐप के इस्तेमाल का एक्सेस बंद करने के बाद भी आपका एडमिन आपकी वर्क प्रोफ़ाइल के ऐप का डेटा खर्च ट्रैक कर सकते हैं"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_1">%2$d</xliff:g> में से <xliff:g id="COUNT_0">%1$d</xliff:g> वर्णों का उपयोग किया गया"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"दूसरे ऐप्स पर प्रदर्शित करें"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"दूसरे ऐप्स पर प्रदर्शित करें"</string>
@@ -3234,10 +3234,10 @@
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> ऐप्‍स इंस्‍टॉल किए गए हैं"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 ऐप्स इंस्टॉल किए गए"</string>
     <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> उपयोग किया गया - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली है"</string>
-    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"आंतरिक संग्रहण: <xliff:g id="PERCENTAGE">%1$s</xliff:g> उपयोग किया गया - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली है"</string>
-    <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> तक कोई गतिविधि ना होने पर निष्क्रिय मोड में ले जाएं"</string>
-    <string name="display_dashboard_summary" msgid="4145888780290131488">"वॉलपेपर, निष्क्रिय, फ़ॉन्ट आकार"</string>
-    <string name="display_summary_example" msgid="9102633726811090523">"10 मिनट तक कोई गतिविधि ना होने पर निष्क्रिय मोड में ले जाएं"</string>
+    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"डिवाइस की मेमोरी: <xliff:g id="PERCENTAGE">%1$s</xliff:g> इस्तेमाल किया गया - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली है"</string>
+    <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> तक कोई गतिविधि न होने पर, कम बैटरी मोड में जाएं"</string>
+    <string name="display_dashboard_summary" msgid="4145888780290131488">"वॉलपेपर, सुलाएं (कम बैटरी मोड), फ़ॉन्ट आकार"</string>
+    <string name="display_summary_example" msgid="9102633726811090523">"10 मिनट तक कोई गतिविधि ना होने पर कम बैटरी मोड में जाएं"</string>
     <string name="memory_summary" msgid="8080825904671961872">"औसतन <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> में से <xliff:g id="USED_MEMORY">%1$s</xliff:g> मेमोरी उपयोग की गई"</string>
     <string name="users_and_accounts_summary" msgid="245282689646897882">"अभी वाला उपयोगकर्ता: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g> के रूप में प्रवेश किया हुआ है"</string>
@@ -3270,7 +3270,7 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"प्रदर्शन कम कर दिया गया है. स्थान सेवाएं और बैकग्राउंड डेटा बंद है."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"मोबाइल डेटा बंद है"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"इंटरनेट केवल वाई-फ़ाई के द्वारा उपलब्ध है"</string>
-    <string name="condition_bg_data_title" msgid="2483860304802846542">"डेटा बचतकर्ता चालू है"</string>
+    <string name="condition_bg_data_title" msgid="2483860304802846542">"डेटा बचाने की सेटिंग चालू है"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"बैकग्राउंड डेटा केवल वाई-फ़ाई के द्वारा उपलब्ध है. इससे वाई-फ़ाई के उपलब्ध नहीं रहने पर कुछ ऐप्स या सेवाएं प्रभावित हो सकती हैं."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"कार्य प्रोफ़ाइल बंद है"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"आपकी कार्य प्रोफ़ाइल से संबंधित ऐप्स, पृष्ठभूमि समन्वयन और अन्य सुविधाएं बंद हैं."</string>
@@ -3285,9 +3285,9 @@
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"टेलीफ़ोनी मॉनिटर बदलाव लागू करने के लिए, डिवाइस को रीबूट करें"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"स्वचालित सिस्टम अपडेट"</string>
     <string name="usage" msgid="2977875522080448986">"उपयोग"</string>
-    <string name="cellular_data_usage" msgid="2155683719898158203">"मोबाइल डेटा उपयोग"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"वाई-फ़ाई डेटा उपयोग"</string>
-    <string name="ethernet_data_usage" msgid="5108764537574354616">"ईथरनेट डेटा उपयोग"</string>
+    <string name="cellular_data_usage" msgid="2155683719898158203">"मोबाइल डेटा खर्च"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"वाई-फ़ाई डेटा खर्च"</string>
+    <string name="ethernet_data_usage" msgid="5108764537574354616">"ईथरनेट डेटा खर्च"</string>
     <string name="wifi" msgid="1081550856200013637">"वाई-फ़ाई"</string>
     <string name="ethernet" msgid="6600095783781389720">"ईथरनेट"</string>
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> मोबाइल डेटा"</string>
@@ -3303,7 +3303,7 @@
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> प्रतिबंध</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> प्रतिबंध</item>
     </plurals>
-    <string name="operator_warning" msgid="1862988028996859195">"वाहक की डेटा गणना आपके डिवाइस से भिन्न हो सकती है."</string>
+    <string name="operator_warning" msgid="1862988028996859195">"डेटा खर्च को लेकर मोबाइल और इंटरनेट सेवा देने वाली कंपनी का हिसाब आपके डिवाइस के हिसाब से अलग हो सकता है."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> का उपयोग किया गया"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"डेटा चेतावनी सेट करें"</string>
     <string name="data_warning" msgid="209133958008062117">"डेटा चेतावनी"</string>
@@ -3313,16 +3313,16 @@
     <string name="configure" msgid="1029654422228677273">"कॉन्फ़िगर करें"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"उपयोग में शामिल अन्य ऐप्लिकेशन"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="one">डेटा बचतकर्ता चालू होने पर <xliff:g id="COUNT">%1$d</xliff:g> ऐप्‍स को अप्रतिबंधित डेटा का उपयोग करने की अनुमति है</item>
-      <item quantity="other">डेटा बचतकर्ता चालू होने पर <xliff:g id="COUNT">%1$d</xliff:g> ऐप्‍स को अप्रतिबंधित डेटा का उपयोग करने की अनुमति है</item>
+      <item quantity="one">डेटा बचाने की सेटिंग चालू होने पर <xliff:g id="COUNT">%1$d</xliff:g> ऐप असीमित डेटा इस्तेमाल कर सकते हैं</item>
+      <item quantity="other">डेटा बचाने की सेटिंग चालू होने पर <xliff:g id="COUNT">%1$d</xliff:g> ऐप असीमित डेटा इस्तेमाल कर सकते हैं</item>
     </plurals>
-    <string name="data_saver_title" msgid="398458827917495765">"डेटा बचतकर्ता"</string>
+    <string name="data_saver_title" msgid="398458827917495765">"डेटा बचाने की सेटिंग"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"अप्रतिबंधित डेटा एक्‍सेस"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"पृष्ठभूमि डेटा बंद है"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"चालू"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"बंद"</string>
-    <string name="unrestricted_app_title" msgid="4465437191723332066">"अप्रतिबंधित डेटा उपयोग"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"डेटा बचतकर्ता चालू होने पर अप्रतिबंधित डेटा की अनुमति दें"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"असीमित डेटा खर्च"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"डेटा बचाने की सेटिंग चालू होने पर असीमित डेटा एक्सेस"</string>
     <string name="home_app" msgid="4066188520886810030">"होम ऐप"</string>
     <string name="no_default_home" msgid="7184117487704520238">"कोई डिफ़ॉल्‍ट होम नहीं"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"सुरक्षित स्‍टार्ट-अप"</string>
@@ -3359,7 +3359,7 @@
     <string name="notification_log_details_title" msgid="7177091647508863295">"शीर्षक"</string>
     <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"रिमोट इनपुट"</string>
     <string name="notification_log_details_content_view" msgid="6638731378278561786">"कस्टम दृश्य"</string>
-    <string name="notification_log_details_extras" msgid="4188418723779942047">"अतिरिक्त"</string>
+    <string name="notification_log_details_extras" msgid="4188418723779942047">"कुछ और"</string>
     <string name="notification_log_details_icon" msgid="8939114059726188218">"आइकन"</string>
     <string name="notification_log_details_parcel" msgid="243148037601903212">"पार्सल का आकार"</string>
     <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
@@ -3385,7 +3385,7 @@
     <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"न्यूनतम चौड़ाई"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"इंस्टॉल किए गए किसी भी ऐप्लिकेशन ने प्रीमियम SMS एक्सेस का अनुरोध नहीं किया गया"</string>
-    <string name="premium_sms_warning" msgid="9086859595338944882">"प्रीमियम SMS से शुल्क लग सकता है और इससे आपके वाहक बिल में बढ़ोतरी हो जाएगी. यदि आप किसी ऐप्लिकेशन के लिए अनुमति सक्षम करते हैं, तो आप उस ऐप्लिकेशन का उपयोग करके प्रीमियम SMS भेज सकेंगे."</string>
+    <string name="premium_sms_warning" msgid="9086859595338944882">"प्रीमियम SMS के लिए आपको पैसे देने पड़ सकते हैं और इससे आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी का बिल बढ़ जाएगा. अगर आप किसी ऐप के लिए अनुमति देते हैं, तो आप उस ऐप का इस्तेमाल करके प्रीमियम SMS भेज सकते हैं."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"प्रीमियम SMS एक्सेस"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"दूसरे डिवाइसों को दिखाई नहीं देता"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> से कनेक्‍ट है"</string>
@@ -3419,7 +3419,7 @@
     <string name="support_system_information_title" msgid="3439905790018934773">"सिस्टम जानकारी"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"कार्य प्रोफ़ाइल सेटिंग"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"संपर्क खोज"</string>
-    <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"कॉलर और संपर्कों की पहचान करने के लिए अपने संगठन में संपर्क खोज करने दें"</string>
+    <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"कॉल करने वालों (कॉलर) और संपर्कों की पहचान करने के लिए अपने संगठन को संपर्क खोज करने दें"</string>
     <plurals name="hours" formatted="false" msgid="7020844602875333472">
       <item quantity="one"><xliff:g id="NUMBER">%s</xliff:g> घंटे</item>
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> घंटे</item>
@@ -3434,7 +3434,7 @@
     </plurals>
     <string name="support_estimated_wait_time" msgid="6523081420029378051">"~<xliff:g id="ESTIMATE">%1$s</xliff:g> प्रतीक्षा करें"</string>
     <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"कंप्यूटर"</string>
-    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"हैडसेट"</string>
+    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"हेडसेट"</string>
     <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"फ़ोन"</string>
     <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"इमेजिंग"</string>
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"हेडफ़ोन"</string>
@@ -3447,10 +3447,10 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"स्वचालित"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"मैन्युअल"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"अभी स्पेस खाली करें"</string>
-    <string name="gesture_preference_title" msgid="5280023307132819052">"हावभाव"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"अपना फ़ोन नियंत्रित करने के लिए त्वरित हावभाव"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"अपना टैबलेट नियंत्रित करने के लिए त्वरित हावभाव"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"अपना डिवाइस नियंत्रित करने के लिए त्वरित हावभाव"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"जेस्चर"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"अपना फ़ोन नियंत्रित करने के लिए फटाफट किए जाने वाले जेस्चर"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"अपना टैबलेट नियंत्रित करने के लिए फटाफट किए जाने वाले जेस्चर"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"अपना डिवाइस नियंत्रित करने के लिए फटाफट किए जाने वाले जेस्चर"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"सीधे कैमरे पर जाएं"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"कैमरा तुरंत खोलने के लिए, पावर बटन दो बार दबाएं. ऐसा किसी भी स्क्रीन से किया जा सकता है."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"कैमरा फ़्लिप करें"</string>
@@ -3469,15 +3469,15 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"अपने नोटिफ़िकेशन देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"अपने नोटिफ़िकेशन देखने के लिए, अपने टैबलेट के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"अपने नोटिफ़िकेशन देखने के लिए, अपने डिवाइस के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें."</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"सहायक हावभाव"</string>
+    <string name="assist_gesture_title" msgid="7746563137898655539">"सहायक जेस्चर"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"संवेदनशीलता"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"चालू"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"बंद"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"बूटलोडर पहले से ही अनलाॅक किया हुआ है"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"पहले इंटरनेट से कनेक्ट करें"</string>
-    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"इंटरनेट से कनेक्ट करें या अपने वाहक से संपर्क करें"</string>
-    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"वाहक द्वारा लॉक किए गए डिवाइस पर उपलब्ध नहीं है"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"इंटरनेट से जुड़ें या अपनी मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करें"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी के लॉक किए गए डिवाइस पर नहीं पाया जा सकता"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> कुल उपलब्ध कराया गया\n\nपिछली बार <xliff:g id="DATE">%2$s</xliff:g> को चलाया गया"</string>
     <string name="web_action_enable_title" msgid="4051513950976670853">"झटपट ऐप्स"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"सभी लिंक एप्लिकेशन में खोलें, भले ही वे इंस्टॉल न हों"</string>
