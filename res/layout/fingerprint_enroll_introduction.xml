@@ -45,6 +45,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <com.android.setupwizardlib.view.FillContentLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/SuwContentIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:src="@drawable/fingerprint_enroll_introduction" />
+
+        </com.android.setupwizardlib.view.FillContentLayout>
+
     </LinearLayout>
 
 </com.android.setupwizardlib.GlifLayout>
