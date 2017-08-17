@@ -162,7 +162,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
         CharSequence msg = getText(forFingerprint
                 ? R.string.lockpassword_choose_your_password_header_for_fingerprint
-                : R.string.lockpassword_choose_your_password_header);
+                : R.string.lockpassword_choose_your_screen_lock_header);
         setTitle(msg);
         LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
         layout.setFitsSystemWindows(false);
