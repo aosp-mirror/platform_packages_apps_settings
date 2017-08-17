@@ -74,8 +74,8 @@
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
     <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
-    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Demontera USB-enhet"</string>
-    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Montera bort SD-kort"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Avmontera USB-enhet"</string>
+    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Avmontera SD-kort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Radera USB-lagring"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Radera SD-kort"</string>
     <string name="preview_pager_content_description" msgid="8926235999291761243">"Förhandsgranskning"</string>
@@ -372,6 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Fortsätt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Hoppa över"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Nästa"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Ska fingeravtryck hoppas över?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Det tar bara ett par minuter att konfigurera fingeravtrycket. Hoppar du över det kan du lägga till fingeravtryck i inställningarna senare."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Vill du hoppa över skärmlås?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Enhetens skyddsfunktioner aktiveras inte. Du kan inte hindra andra från att använda surfplattan om den blir stulen, tappas bort eller återställs."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Enhetens skyddsfunktioner aktiveras inte. Du kan inte hindra andra från att använda enheten om den blir stulen, tappas bort eller återställs."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Enhetens skyddsfunktioner aktiveras inte. Du kan inte hindra andra från att använda mobilen om den blir stulen, tappas bort eller återställs."</string>
@@ -457,7 +460,8 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Skydda surfplattan"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Skydda enheten"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Skydda mobilen"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Konfigurera ett skärmlås för ytterligare skydd."</string>
+    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindra andra från att använda surfplattan utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Hindra andra från att använda enheten utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindra andra från att använda mobilen utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
@@ -837,6 +841,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Anslut"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Det gick inte att ansluta till nätverket."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Glöm"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Ändra"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Det gick inte att glömma nätverket"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Spara"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Det gick inte att spara närverket"</string>
@@ -1053,20 +1058,20 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Anpassa skärmen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Välj bakgrund från"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Skärmsläckare"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"När enheten laddas eller dockas"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Vid laddning eller dockning"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Båda"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Telefonen laddar"</string>
-    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Enheten dockas"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Vid laddning"</string>
+    <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Vid dockning"</string>
     <string name="screensaver_settings_summary_never" msgid="5165622985174349585">"Aldrig"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Av"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Om du vill styra vad som händer när mobilen är dockad eller i viloläge aktiverar du skärmsläckaren."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Vid start"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Startas"</string>
     <string name="screensaver_settings_current" msgid="4663846038247130023">"Aktuell skärmsläckare"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Starta nu"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Inställningar"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk ljusstyrka"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Gå ur viloläget vid lyft"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Inaktiv låsskärm"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Aktiv låsskärm"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Alltid på/Batterianvändningen ökar"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nya aviseringar"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"När den ska visas"</string>
@@ -1135,8 +1140,8 @@
     <string name="storage_settings" msgid="4211799979832404953">"Lagring"</string>
     <string name="storage_usb_settings" msgid="7293054033137078060">"Lagring"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Lagringsinställningar"</string>
-    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Demontera USB-lagringsenheten och visa tillgängligt lagringsutrymme"</string>
-    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Montera bort SD-kort, visa tillgängligt lagringsutrymme"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Avmontera USB-lagringsenheten och visa tillgängligt lagringsutrymme"</string>
+    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Avmontera SD-kort, visa tillgängligt lagringsutrymme"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"Mobilnummer (MDN)"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"Mitt telefonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -1171,10 +1176,10 @@
     <string name="memory_music_usage" msgid="1363785144783011606">"Ljud (musik, ringsignaler, poddsändningar m.m.)"</string>
     <string name="memory_media_misc_usage" msgid="6094866738586451683">"Andra filer"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"Cachelagrade data"</string>
-    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Montera bort enhet"</string>
-    <string name="sd_eject" product="default" msgid="6915293408836853020">"Montera bort SD-kort"</string>
-    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Demontera intern USB-lagring"</string>
-    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Demontera SD-kortet för säker borttagning"</string>
+    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Avmontera enhet"</string>
+    <string name="sd_eject" product="default" msgid="6915293408836853020">"Avmontera SD-kort"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Avmontera intern USB-lagring"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Avmontera SD-kortet för säker borttagning"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Sätt i USB om du vill montera"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Sätt in ett SD-kort för montering"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Sätt i USB-enheten"</string>
@@ -1194,12 +1199,12 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"Om du tar bort SD-kortet avbryts några av de appar som körs och de kanske inte blir tillgängliga igen förrän du sätter tillbaka SD-kortet."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="4642742385125426529"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="4642742385125426529"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="9191518889746166147">"Det går inte att ta bort USB-lagringsenheten. Försök igen senare."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="3500976899159848422">"Det går inte att ta bort SD-kortet. Försök senare."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="9191518889746166147">"Det går inte att avmontera USB-lagringsenheten. Försök igen senare."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="3500976899159848422">"Det går inte att avmontera SD-kortet. Försök senare."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"USB-lagringsenheten demonteras."</string>
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"Delad lagringsenhet monteras bort."</string>
-    <string name="sd_ejecting_title" msgid="8824572198034365468">"Monterar bort"</string>
-    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Monterar bort"</string>
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"Avmonterar"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Avmonterar"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"Lagringsutrymmet börjar ta slut"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"Vissa systemfunktioner, t.ex. synkronisering, fungerar kanske inte som de ska. Försök att frigöra utrymme genom att ta bort eller lossa objekt, till exempel appar eller medieinnehåll."</string>
     <string name="storage_menu_rename" msgid="7141058657592615390">"Byt namn"</string>
@@ -1463,15 +1468,21 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Säkerhetsinformation"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Du har inte någon dataanslutning. Besök %s på en dator som är ansluten till Internet om du vill visa informationen nu."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Läser in …"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Välj ett lösenord"</string>
+    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
+    <skip />
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Lösenord krävs för fingeravtryck"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Välj grafiskt lösenord"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Grafiskt lösenord krävs för fingeravtryck"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Välj en PIN-kod"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Pinkod krävs för fingeravtryck"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Bekräfta ditt lösenord"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Bekräfta grafiskt lösenord"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Bekräfta din PIN-kod"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
+    <skip />
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Lösenorden matchar inte"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN-koderna matchar inte"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Upplåsningsalternativ"</string>
@@ -1490,6 +1501,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Använd det grafiska lösenordet för jobbprofilen för att öka säkerheten"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Ange pinkoden för jobbprofilen för att öka säkerheten"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Ange lösenordet för jobbprofilen för att öka säkerheten"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Mobilen återställdes till standardinställningarna. Ange det tidigare grafiska lösenordet."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Mobilen återställdes till standardinställningarna. Ange den tidigare pinkoden."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Mobilen återställdes till standardinställningarna. Ange det tidigare lösenordet."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Bekräfta det grafiska lösenordet"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Bekräfta pinkoden"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Bekräfta lösenordet"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Fel pinkod"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Fel lösenord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Fel grafiskt lösenord"</string>
@@ -2808,7 +2825,7 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarmvolym"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Ringvolym"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Aviseringsvolym"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Telefonens ringsignal"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"Ringsignal"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Standardljud för aviseringar"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Ljud från appen"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"Standardljud för aviseringar"</string>
@@ -2883,8 +2900,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Inget ljud."</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Spela upp ljud"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Spela upp ljud och visa på skärmen"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Visa på skärmen"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Låg"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Medelhög"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Hög"</string>
@@ -3074,7 +3090,7 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Relativ information om IMEI-kod"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Plats <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Öppna som standard"</string>
-    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Länköppning"</string>
+    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Öppnar länkar"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Öppna länkar som stöds"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Öppna utan att fråga"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Länkar som stöds"</string>
@@ -3130,7 +3146,7 @@
     <string name="app_permissions_summary" msgid="5163974162150406324">"Appar som använder <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Väck genom att trycka"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Väck enheten genom att trycka två gånger var som helst på skärmen"</string>
-    <string name="domain_urls_title" msgid="3132983644568821250">"Länköppning"</string>
+    <string name="domain_urls_title" msgid="3132983644568821250">"Öppna länkar"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Öppna inte länkar som stöds"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Öppna <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Öppna <xliff:g id="DOMAIN">%s</xliff:g> och andra webbadresser"</string>
@@ -3154,7 +3170,7 @@
     <string name="choose_voice_input_title" msgid="975471367067718019">"Välj röstinmatning"</string>
     <string name="default_browser_title" msgid="8101772675085814670">"Webbläsarapp"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Ingen standardwebbläsare"</string>
-    <string name="default_phone_title" msgid="282005908059637350">"Appen Telefon"</string>
+    <string name="default_phone_title" msgid="282005908059637350">"Telefonapp"</string>
     <string name="default_app" msgid="6864503001385843060">"(Standard)"</string>
     <string name="system_app" msgid="9068313769550747372">"(System)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Systemstandard)"</string>
@@ -3577,7 +3593,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Visa tid, aviseringsikoner och annan information genom att plocka upp surfplattan."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Visa tid, aviseringsikoner och annan information genom att plocka upp enheten."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Kolla aviseringar när skärmen är avstängd"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Visa aviseringar genom att svepa med fingret"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Svep med fingret för aviseringar"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av mobilen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av surfplattan."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av enheten."</string>
@@ -3593,7 +3609,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Snabbappar"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Öppna länkar i appar, även om de inte har installerats"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Snabbappar"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Konto för snabbappar"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installerade appar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Ditt lagringsutrymme hanteras nu av lagringshanteraren"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Konton som tillhör <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3703,6 +3720,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Information om operatörsadministration"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Aktivera operatörsadministration"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Vad är nytt?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Kolla in de fem populäraste funktionerna"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Ta en rundtur på din nya mobil"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Ta en rundtur på din nya surfplatta"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Ta en rundtur på din nya enhet"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Den här funktionen är inte tillgänglig på den här enheten."</string>
 </resources>

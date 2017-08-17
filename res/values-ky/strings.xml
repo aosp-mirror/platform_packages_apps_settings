@@ -371,6 +371,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Улантуу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Өткөрүп жиберүү"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Кийинки"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Манжа изин жөндөбөйсүзбү?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Манжа изин жөндөө бир-эки эле мүнөткө созулат. Азыр өткөрүп жиберсеңиз, манжа изиңизди кийинчерээк кошсоңуз болот."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Экран кулпусун жөндөбөйсүзбү?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Түзмөктү коргоо мүмкүнчүлүктөрү жандырылбайт. Эгер планшет жоголуп же уурдалып кетсе, же баштапкы абалга келтирилсе, башкалар аны пайдалана беришет."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Түзмөктү коргоо мүмкүнчүлүктөрү жандырылбайт. Эгер түзмөк жоголуп же уурдалып кетсе, же баштапкы абалга келтирилсе, башкалар аны пайдалана беришет."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Түзмөктү коргоо мүмкүнчүлүктөрү жандырылбайт. Эгер телефон жоголуп же уурдалып кетсе, же баштапкы абалга келтирилсе, башкалар аны пайдалана беришет."</string>
@@ -456,7 +459,8 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Планшетиңизди коргоңуз"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Түзмөгүңүздү коргоңуз"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Телефонуңузду коргоңуз"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Кошумча коопсуздук үчүн көмөкчү экран кулпусун жөндөп коюңуз."</string>
+    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул планшетти сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул түзмөктү сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул телефонду сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
@@ -836,6 +840,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Туташуу"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Түйүндгө байланышкан жок"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Унутулсун"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Өзгөртүү"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Түйүн унутулган жок"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Сактоо"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Түйүн сакталган жок"</string>
@@ -946,7 +951,7 @@
     <string name="sound_settings" msgid="5534671337768745343">"Үн"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Үн бийиктиги"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Музыка эффектилери"</string>
-    <string name="ring_volume_title" msgid="5592466070832128777">"Шыңгырдын катуулугу"</string>
+    <string name="ring_volume_title" msgid="5592466070832128777">"Шыңгырдын үнү"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Үнсүз режимде дирилдесин"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Эскертменин абалкы үнү"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Шыңгыр"</string>
@@ -1462,15 +1467,21 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Коопсуздук маалыматы"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Сизде азыр интернет-байланыш жок. Бул маалыматтарды азыр көрүш үчүн, интернет байланышы бар компүтерден  %s кирсеңиз болот:"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Жүктөлүүдө…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Сырсөзүңүздү тандаңыз"</string>
+    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
+    <skip />
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Манжа изин колдонуу үчүн сырсөздү жөндөңүз"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Графикалык ачкычты тандаңыз"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Манжа изин колдонуу үчүн графикалык ачкычты жөндөңүз"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PIN кодуңузду тандаңыз"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Манжа изин колдонуу үчүн PIN кодду жөндөңүз"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Сырсөзүңүздү ырастаңыз"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Графикалык ачкычыңызды ырастаңыз"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PIN кодуңузду ырастаңыз"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
+    <skip />
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Сырсөздөр дал келген жок"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN коддор дал келген жок"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Кулпуну ачуу ыкмасын тандоо"</string>
@@ -1489,6 +1500,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Кошумча коопсуздук үчүн жумуш профилиңиздин графикалык ачкычын колдонуңуз"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Кошумча коопсуздук үчүн жумуш профилиңиздин PIN кодун киргизиңиз"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Кошумча коопсуздук үчүн жумуш профилиңиздин сырсөзүн киргизиңиз"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Телефонуңуз заводдук жөнд-нө кайт-лды. Бул тел-ду колдонуу ү-н мурунку графикалык ачкыч-ды киргиз-з."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Телефонуңуз заводдук жөндөөлөрүнө кайтарылды. Бул тел-ду колдонуу ү-н мурунку PIN кодуң-ду киргиз-з."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Телефонуңуз заводдук жөндөөлөрүнө кайтарылды. Бул тел-ду колдонуу ү-н мурунку сырсөзүңүздү киргиз-з."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Графикалык ачкычты ырастоо"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN кодду ырастоо"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Сырсөздү ырастоо"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN код туура эмес"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Сырсөз туура эмес"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Үлгү туура эмес"</string>
@@ -1799,7 +1816,7 @@
     <string name="usage_time_label" msgid="295954901452833058">"Колдонулган убакыт"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Атайын мүмкүнчүлүктөр"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Атайын мүмкүнчүлүктөрдүн жөндөөлөрү"</string>
-    <string name="accessibility_settings_summary" msgid="981260486011624939">"Экрандагыны окугучтар, дисплей, карым-катнашты көзөмөлдөө"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"Экрандагыны окугучтар, экран, башкаруу элементтери"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Атайн мүмкүнчлктрдн жөндлр"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Түзмөктү өзүңүзгө карап ыңгайлаштырып алыңыз. Бул атайын мүмкүнчүлүктөрдүн параметрлерин кийинчерээк өзгөртсөңүз болот."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Арип өлчөмүн өзгөртүү"</string>
@@ -1948,7 +1965,7 @@
     <string name="printer_info_desc" msgid="5824995108703060003">"Бул принтер жөнүндө көбүрөөк маалымат"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Батарея"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Батареяны эмне колдонуп жатты эле"</string>
-    <string name="power_usage_not_available" msgid="3109326074656512387">"Батарей колдонуу берилиштери жок."</string>
+    <string name="power_usage_not_available" msgid="3109326074656512387">"Дайындар жок."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> калды"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> кубаттоо"</string>
@@ -1961,7 +1978,7 @@
     <string name="device_screen_consumption" msgid="4607589286438986687">"Экран керектеген кубат"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Мобилдик тармак скандалууда"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> мурун"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Толук кубаттлг бери иштегн колднмлр (<xliff:g id="TIME">^1</xliff:g> мурун)"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Толук кубатталгандан бери иштетилген колдонмолор (<xliff:g id="TIME">^1</xliff:g> мурун)"</string>
     <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Толук кубатталгандан бери түзмөктүн колдонулушу (<xliff:g id="TIME">^1</xliff:g> мурун)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Толук кубатталгандан бери экрандын күйүп турган убактысы"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Толук кубатталгандан бери түзмөктүн колдонулушу"</string>
@@ -2645,7 +2662,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN алмаштыруу"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Эскертүүнү көргөзүү"</string>
     <string name="help_label" msgid="6886837949306318591">"Жардам/пикир билдирүү"</string>
-    <string name="support_summary" msgid="2705726826263742491">"Жардам макалалары, телефон жана чат, баштадык"</string>
+    <string name="support_summary" msgid="2705726826263742491">"Жардам макалалары, телефон жана чат аркылуу колдоо көрсөтүү"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Мазмун үчүн эсеп"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Сүрөттүн ID\'си"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"Олуттуу коркунучтар"</string>
@@ -2807,9 +2824,9 @@
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Коңгуроо дирилдейт"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Коңгуроонун үнү өчүрүлгөн"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Шыңгырдын катуулугу 80%"</string>
-    <string name="media_volume_option_title" msgid="2811531786073003825">"Музыка, видео, оюндар жана башка медиафайлдар"</string>
-    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Ойготкучтун үнүнүн катуулугу"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"Шыңгырдын катуулугу"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Мультимедианын үнү"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Ойготкучтун үнү"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Шыңгырдын үнү"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Эскертме үнүнүн катуулугу"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Телефондун шыңгыры"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Эскертменин демейки үнү"</string>
@@ -2886,8 +2903,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Добушу жок"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Добуш чыгарсын"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Добуш менен экранга калкып чыксын"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Экранга калкып чыксын"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Төмөн"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Орто"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Жогору"</string>
@@ -2899,7 +2915,7 @@
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Маанилүү"</string>
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"Өтө маанилүү"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Эскертме жардамчысы"</string>
-    <string name="manage_notification_access_title" msgid="7510080164564944891">"Эскертмелерди ишт мүмкүнчлгү"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"Эскертмелерди иштетүү"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Жумуш профилинин эскертмелерине кирүү бөгөттөлгөн"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Колдонмолор эскертмелерди окуй алышпайт"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -2952,7 +2968,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Эскертме белгисине уруксат берүү"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Эскертме белгисин көрсөтүү"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Тынчымды албаны өзгөртүп коюу"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"\"Тынчымды алба режиминде\" \"Шашылыш эскертмелер гана\" деп белгиленсе ушул эскертмелер көрүнөт"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"\"Тынчымды алба\" режиминде \"Шашылыш эскертмелер гана\" деп белгиленсе ушул эскертмелер көрүнөт"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Кулпуланган экранда"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Бөгөттөлгөн"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Маанилүүлүгү"</string>
@@ -3596,7 +3612,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Ыкчам ачылуучу колдонмолор"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Орнотулган эмес болсо да, колдонмолордогу шилтемелерди ачыңыз"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Ыкчам ачылуучу колдонмолор"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Ыкчам ачылуучу колдонмолордун каттоо эсеби"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Орнотулган колдонмолор"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Учурда сактагычыңыз сактагычты көзөмөлдөгүч тарабынан башкарылууда"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> каттоо эсептери"</string>
@@ -3706,6 +3723,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Байланыш оператору жөнүндө маалымат"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Байланыш операторун өзгөртүү"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Эмне жаңылык бар?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Мыкты 5 функцияны карап чыгыңыз"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Жаңы телефонуңузду карап чыгыңыз"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Жаңы планшетиңизди карап чыгыңыз"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Жаңы түзмөгүңүзду карап чыгыңыз"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Бул функция бул түзмөктө иштебейт"</string>
 </resources>
