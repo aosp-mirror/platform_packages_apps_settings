@@ -23,11 +23,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.provider.Settings.Secure;
+import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
 import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
@@ -46,7 +49,6 @@ import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
@@ -55,6 +57,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     private static final int EXCLUSIVE_SUGGESTION_MAX_COUNT = 3;
 
     private static final String SHARED_PREF_FILENAME = "suggestions";
+    @VisibleForTesting
+    static final String FEATURE_FLAG_SUGGESTIONS_V2 = "new_settings_suggestion";
 
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -63,7 +67,20 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     public boolean isSuggestionEnabled(Context context) {
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        return !am.isLowRamDevice();
+        boolean isLowRamDevice = am.isLowRamDevice();
+        return !isLowRamDevice && !isV2Enabled();
+    }
+
+    @Override
+    public boolean isSuggestionV2Enabled(Context context) {
+        final ActivityManager am =
+                (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        boolean isLowRamDevice = am.isLowRamDevice();
+        return !isLowRamDevice && isV2Enabled();
+    }
+
+    private static boolean isV2Enabled() {
+        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_SUGGESTIONS_V2);
     }
 
     @Override
@@ -146,6 +163,17 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 suggestion.intent.getComponent(),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
+    }
+
+    @Override
+    public void dismissSuggestion(Context context, Suggestion suggestion) {
+        if (suggestion == null || context == null) {
+            return;
+        }
+        mMetricsFeatureProvider.action(
+                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                suggestion.getId());
+        // TODO: Call SettingsIntelligence to dismiss suggestion.
     }
 
     @Override

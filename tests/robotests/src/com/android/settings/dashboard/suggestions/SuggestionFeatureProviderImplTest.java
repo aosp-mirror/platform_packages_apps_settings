@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings.Secure;
+import android.util.FeatureFlagUtils;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -54,10 +55,12 @@ import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,7 +79,10 @@ import java.util.List;
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
     sdk = TestConfig.SDK_VERSION,
-    shadows = {ShadowSecureSettings.class, SettingsShadowResources.class}
+    shadows = {ShadowSecureSettings.class,
+            SettingsShadowResources.class,
+            SettingsShadowSystemProperties.class
+    }
 )
 public class SuggestionFeatureProviderImplTest {
 
@@ -120,6 +126,11 @@ public class SuggestionFeatureProviderImplTest {
         mSuggestion.category = "category";
 
         mProvider = new SuggestionFeatureProviderImpl(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowSystemProperties.clear();
     }
 
     @Test
@@ -287,6 +298,23 @@ public class SuggestionFeatureProviderImplTest {
 
         assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
     }
+
+    @Test
+    public void isSuggestionV2Enabled_isNotLowMemoryDevice_sysPropOn_shouldReturnTrue() {
+        when(mActivityManager.isLowRamDevice()).thenReturn(false);
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + mProvider.FEATURE_FLAG_SUGGESTIONS_V2, "true");
+        assertThat(mProvider.isSuggestionV2Enabled(mContext)).isTrue();
+    }
+
+    @Test
+    public void isSuggestionV2Enabled_isNotLowMemoryDevice_sysPropOff_shouldReturnTrue() {
+        when(mActivityManager.isLowRamDevice()).thenReturn(false);
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + mProvider.FEATURE_FLAG_SUGGESTIONS_V2, "false");
+        assertThat(mProvider.isSuggestionV2Enabled(mContext)).isFalse();
+    }
+
 
     @Test
     public void dismissSuggestion_noParserOrSuggestion_noop() {

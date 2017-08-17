@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.annotation.IntDef;
 import android.graphics.drawable.Icon;
+import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
 import android.text.TextUtils;
@@ -69,6 +70,7 @@ public class DashboardData {
     private final DashboardCategory mCategory;
     private final List<Condition> mConditions;
     private final List<Tile> mSuggestions;
+    private final List<Suggestion> mSuggestionsV2;
     @HeaderMode
     private final int mSuggestionConditionMode;
 
@@ -76,6 +78,7 @@ public class DashboardData {
         mCategory = builder.mCategory;
         mConditions = builder.mConditions;
         mSuggestions = builder.mSuggestions;
+        mSuggestionsV2 = builder.mSuggestionsV2;
         mSuggestionConditionMode = builder.mSuggestionConditionMode;
 
         mItems = new ArrayList<>();
@@ -122,6 +125,10 @@ public class DashboardData {
 
     public List<Tile> getSuggestions() {
         return mSuggestions;
+    }
+
+    public List<Suggestion> getSuggestionsV2() {
+        return mSuggestionsV2;
     }
 
     public int getSuggestionConditionMode() {
@@ -190,13 +197,22 @@ public class DashboardData {
      * and mIsShowingAll, mSuggestionConditionMode flag.
      */
     private void buildItemsData() {
-        final boolean hasSuggestions = sizeOf(mSuggestions) > 0;
+        final boolean useSuggestionV2 = mSuggestionsV2 != null;
+        final boolean hasSuggestions = useSuggestionV2
+                ? sizeOf(mSuggestionsV2) > 0
+                : sizeOf(mSuggestions) > 0;
         final List<Condition> conditions = getConditionsToShow(mConditions);
         final boolean hasConditions = sizeOf(conditions) > 0;
 
         final List<Tile> suggestions = getSuggestionsToShow(mSuggestions);
-        final int hiddenSuggestion =
-                hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
+        final List<Suggestion> suggestionsV2 = getSuggestionsV2ToShow(mSuggestionsV2);
+
+        final int hiddenSuggestion;
+        if (useSuggestionV2) {
+            hiddenSuggestion = hasSuggestions ? sizeOf(mSuggestionsV2) - sizeOf(suggestionsV2) : 0;
+        } else {
+            hiddenSuggestion = hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
+        }
 
         final boolean hasSuggestionAndCollapsed = hasSuggestions
                 && mSuggestionConditionMode == HEADER_MODE_COLLAPSED;
@@ -215,10 +231,15 @@ public class DashboardData {
                 R.layout.suggestion_condition_header,
                 STABLE_ID_SUGGESTION_CONDITION_MIDDLE_HEADER, onlyHasConditionAndCollapsed);
 
-        /* Suggestion container. This is the card view that contains the list of suggestions.
-         * This will be added whenever the suggestion list is not empty */
-        addToItemList(suggestions, R.layout.suggestion_condition_container,
-                STABLE_ID_SUGGESTION_CONTAINER, sizeOf(suggestions) > 0);
+        if (useSuggestionV2) {
+            addToItemList(suggestionsV2, R.layout.suggestion_condition_container,
+                    STABLE_ID_SUGGESTION_CONTAINER, sizeOf(suggestionsV2) > 0);
+        } else {
+            /* Suggestion container. This is the card view that contains the list of suggestions.
+             * This will be added whenever the suggestion list is not empty */
+            addToItemList(suggestions, R.layout.suggestion_condition_container,
+                    STABLE_ID_SUGGESTION_CONTAINER, sizeOf(suggestions) > 0);
+        }
 
         /* Second suggestion/condition header. This will be added when there is at least one
          * suggestion or condition that is not currently displayed, and the user can expand the
@@ -246,7 +267,7 @@ public class DashboardData {
                         && !hasConditions
                         && hiddenSuggestion == 0);
 
-        if(mCategory != null) {
+        if (mCategory != null) {
             for (int j = 0; j < mCategory.tiles.size(); j++) {
                 final Tile tile = mCategory.tiles.get(j);
                 addToItemList(tile, R.layout.dashboard_tile, Objects.hash(tile.title),
@@ -274,7 +295,22 @@ public class DashboardData {
         return result;
     }
 
+    /**
+     * @deprecated in favor of {@link #getSuggestionsV2ToShow}.
+     */
+    @Deprecated
     private List<Tile> getSuggestionsToShow(List<Tile> suggestions) {
+        if (suggestions == null || mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
+            return null;
+        }
+        if (mSuggestionConditionMode != HEADER_MODE_DEFAULT
+                || suggestions.size() <= DEFAULT_SUGGESTION_COUNT) {
+            return suggestions;
+        }
+        return suggestions.subList(0, DEFAULT_SUGGESTION_COUNT);
+    }
+
+    private List<Suggestion> getSuggestionsV2ToShow(List<Suggestion> suggestions) {
         if (suggestions == null || mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
             return null;
         }
@@ -296,7 +332,12 @@ public class DashboardData {
 
         private DashboardCategory mCategory;
         private List<Condition> mConditions;
+        /**
+         * @deprecated in favor of SuggestionList
+         */
+        @Deprecated
         private List<Tile> mSuggestions;
+        private List<Suggestion> mSuggestionsV2;
 
         public Builder() {
         }
@@ -305,6 +346,7 @@ public class DashboardData {
             mCategory = dashboardData.mCategory;
             mConditions = dashboardData.mConditions;
             mSuggestions = dashboardData.mSuggestions;
+            mSuggestionsV2 = dashboardData.mSuggestionsV2;
             mSuggestionConditionMode = dashboardData.mSuggestionConditionMode;
         }
 
@@ -318,8 +360,17 @@ public class DashboardData {
             return this;
         }
 
+        /**
+         * @deprecated in favor of {@link #setSuggestionsV2(List)})}
+         */
+        @Deprecated
         public Builder setSuggestions(List<Tile> suggestions) {
             this.mSuggestions = suggestions;
+            return this;
+        }
+
+        public Builder setSuggestionsV2(List<Suggestion> suggestions) {
+            this.mSuggestionsV2 = suggestions;
             return this;
         }
 
