@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -46,12 +45,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowUtils.class}
+)
 public class MasterClearTest {
 
     @Mock
@@ -144,7 +146,6 @@ public class MasterClearTest {
     }
 
     @Test
-    @Config(shadows = { ShadowUtils.class })
     public void testInitiateMasterClear_inDemoMode_sendsIntent() {
         ShadowUtils.setIsDemoUser(true);
 
