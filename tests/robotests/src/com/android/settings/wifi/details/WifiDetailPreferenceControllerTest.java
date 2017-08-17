@@ -745,4 +745,24 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockMetricsFeatureProvider)
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
     }
+
+    @Test
+    public void testRefreshRssiViews_shouldNotUpdateIfLevelIsSame() {
+        displayAndResume();
+
+        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
+
+        verify(mockAccessPoint, times(2)).getLevel();
+        verify(mockIconInjector, times(1)).getIcon(anyInt());
+    }
+    @Test
+    public void testRefreshRssiViews_shouldUpdateOnLevelChange() {
+        displayAndResume();
+
+        when(mockAccessPoint.getLevel()).thenReturn(0);
+        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
+
+        verify(mockAccessPoint, times(2)).getLevel();
+        verify(mockIconInjector, times(2)).getIcon(anyInt());
+    }
 }
