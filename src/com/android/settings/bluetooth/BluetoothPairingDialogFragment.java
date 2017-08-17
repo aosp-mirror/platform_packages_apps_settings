@@ -25,6 +25,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -186,6 +188,19 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     }
 
     /**
+     * Helper method to return the text of the pin entry field - this exists primarily to help us
+     * simulate having existing text when the dialog is recreated, for example after a screen
+     * rotation.
+     */
+    @VisibleForTesting
+    CharSequence getPairingViewText() {
+        if (mPairingView != null) {
+            return mPairingView.getText();
+        }
+        return null;
+    }
+
+    /**
      * Returns a dialog with UI elements that allow a user to provide input.
      */
     private AlertDialog createUserEntryDialog() {
@@ -196,7 +211,9 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mBuilder.setNegativeButton(getString(android.R.string.cancel), this);
         AlertDialog dialog = mBuilder.create();
         dialog.setOnShowListener(d -> {
-            mDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+            if (TextUtils.isEmpty(getPairingViewText())) {
+                mDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+            }
             if (mPairingView != null && mPairingView.requestFocus()) {
                 InputMethodManager imm = (InputMethodManager)
                         getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
