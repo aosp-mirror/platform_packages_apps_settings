@@ -93,7 +93,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     public static class ConfirmLockPasswordFragment extends ConfirmDeviceCredentialBaseFragment
             implements OnClickListener, OnEditorActionListener,
             CredentialCheckResultTracker.Listener {
-        private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
         private ImeAwareEditText mPasswordEntry;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
@@ -460,7 +459,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             effectiveUserId, timeoutMs);
                     handleAttemptLockout(deadline);
                 } else {
-                    showError(getErrorMessage(), ERROR_MESSAGE_TIMEOUT);
+                    showError(getErrorMessage(), CLEAR_WRONG_ATTEMPT_TIMEOUT_MS);
                 }
                 if (newResult) {
                     reportFailedAttempt();
