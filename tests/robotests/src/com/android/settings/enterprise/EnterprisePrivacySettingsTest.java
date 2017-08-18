@@ -128,7 +128,7 @@ public final class EnterprisePrivacySettingsTest {
     private void verifyPreferenceControllers(List<AbstractPreferenceController> controllers)
             throws Exception {
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(16);
+        assertThat(controllers.size()).isEqualTo(17);
         int position = 0;
         assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
@@ -152,7 +152,9 @@ public final class EnterprisePrivacySettingsTest {
         assertThat(controllers.get(position++)).isInstanceOf(
                 GlobalHttpProxyPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
-                CaCertsPreferenceController.class);
+                CaCertsCurrentUserPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                CaCertsManagedProfilePreferenceController.class);
         final AbstractPreferenceController exposureChangesCategoryController =
                 controllers.get(position);
         final int exposureChangesCategoryControllerIndex = position;
