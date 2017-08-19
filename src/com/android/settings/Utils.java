@@ -1297,22 +1297,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return info.enabled ? R.string.installed : R.string.disabled;
     }
 
-    /**
-     * Control if other apps can display overlays. By default this is allowed. Be sure to
-     * re-enable overlays, as the effect is system-wide.
-     */
-    public static void setOverlayAllowed(Context context, IBinder token, boolean allowed) {
-        AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
-        if (appOpsManager != null) {
-            appOpsManager.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                    !allowed, token);
-            appOpsManager.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW,
-                    !allowed, token);
-        }
-    }
-
-
-
     private static boolean isVolumeValid(VolumeInfo volume) {
         return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)
                 && volume.isMountedReadable();
