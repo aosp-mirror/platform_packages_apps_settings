@@ -372,6 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Passer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Suivant"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Ignorer l\'empreinte digitale?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"La configuration des empreintes digitales ne prend qu\'une minute ou deux. Si vous ignorez cette étape, vous pouvez ajouter votre empreinte digitale plus tard dans les paramètres."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Ignorer verrouillage d\'écran?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Les fonctionnalités de protection de l\'appareil ne seront pas activées. Vous ne pourrez pas empêcher d\'autres personnes d\'utiliser cette tablette en cas de perte, de vol ou de réinitialisation."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Les fonctionnalités de protection de l\'appareil ne seront pas activées. Vous ne pourrez pas empêcher d\'autres personnes d\'utiliser cet appareil en cas de perte, de vol ou de réinitialisation."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Les fonctionnalités de protection de l\'appareil ne seront pas activées. Vous ne pourrez pas empêcher d\'autres personnes d\'utiliser ce téléphone en cas de perte, de vol ou de réinitialisation."</string>
@@ -457,7 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protégez votre tablette"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protégez votre appareil"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protégez votre téléphone"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Pour plus de sécurité, configurez une méthode alternative pour verrouiller l\'écran."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Pour plus de sécurité, configurez une méthode secondaire pour verrouiller l\'écran."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cette tablette sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cet appareil sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser ce téléphone sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
@@ -837,6 +840,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Connexion"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Échec de la connexion au réseau."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Supprimer"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Modifier"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Échec de la suppression du réseau."</string>
     <string name="wifi_save" msgid="3331121567988522826">"Enregistrer"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Échec de l\'enregistrement du réseau."</string>
@@ -1049,13 +1053,13 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fond d\'écran"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Par défaut"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Personnalisé"</string>
-    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Change le fond d\'écran"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Changer le fond d\'écran"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personnalisez votre écran"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Sélectionner un fond d\'écran dans"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Écran de veille"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Pendant la charge ou sur une station d\'accueil"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Les deux"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"En charge"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Pendant la charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Sur la station d\'accueil"</string>
     <string name="screensaver_settings_summary_never" msgid="5165622985174349585">"Jamais"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Désactivé"</string>
@@ -1069,7 +1073,7 @@
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Affichage en mode Veille"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Toujours activé / Utilisation accrue de la pile"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nouvelles notifications"</string>
-    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Quand afficher"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Activation du mode Veille"</string>
     <string name="doze_title" msgid="2375510714460456687">"Nouvelles notifications"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activer l\'écran lorsque vous recevez des notifications"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Toujours activé"</string>
@@ -1463,15 +1467,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informations de sécurité"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Vous n\'avez pas de connexion Internet. Pour consulter ces informations maintenant, accédez à %s depuis un ordinateur connecté à Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Chargement en cours..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Choisir votre mot de passe"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Configurer le verrouillage de l\'écran"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Pour plus de sécurité, définissez un mot de passe"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Pour util. empr. digit., config. m. de passe"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Choisir votre schéma"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Pour util. empr. digit., config. schéma"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Choisir votre NIP"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Pour plus de sécurité, définissez un NIP"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Pour util. empr. digit., config. NIP"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Confirmez le mot de passe."</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Entrez de nouveau votre mot de passe"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirmez votre schéma"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Confirmer votre NIP"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Entrez de nouveau votre NIP"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Les mots de passe ne correspondent pas."</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Les NIP ne correspondent pas."</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Méthode de déverrouillage"</string>
@@ -1490,6 +1495,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Pour plus de sécurité, tracez votre schéma professionnel"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Pour plus de sécurité, entrez votre NIP professionnel"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Pour plus de sécurité, entrez votre mot de passe professionnel"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"La configuration d\'usine du téléphone a été rétablie. Pour l\'utiliser, entrez le schéma précédent."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"La configuration d\'usine du téléphone a été rétablie. Pour l\'utiliser, entrez le NIP précédent."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"La configuration d\'usine du téléphone a été rétablie. Pour l\'utiliser, entrez le mot passe précédent."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Vérifier le schéma"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Vérifier le NIP"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Vérifier le mot de passe"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"NIP erroné"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Mot de passe incorrect"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Schéma erroné"</string>
@@ -1538,7 +1549,7 @@
     <string name="install_applications" msgid="4872012136210802181">"Sources inconnues"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Autoriser toutes sources appli"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"Applications récemment ouvertes"</string>
-    <string name="see_all_apps_title" msgid="1317153498074308438">"Afficher toutes les <xliff:g id="COUNT">%1$d</xliff:g> applications"</string>
+    <string name="see_all_apps_title" msgid="1317153498074308438">"Afficher les <xliff:g id="COUNT">%1$d</xliff:g> applications"</string>
     <string name="recent_app_summary" msgid="3366446669844932300">"Il y a <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Votre tablette et vos données personnelles sont plus vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre tablette ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Votre téléphone et vos données personnelles sont plus vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre téléphone ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
@@ -1549,7 +1560,7 @@
     <string name="auto_launch_label" msgid="2669236885531442195">"Ouvert par défaut"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Valeurs par défaut"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilité de l\'écran"</string>
-    <string name="permissions_label" msgid="2605296874922726203">"Permissions"</string>
+    <string name="permissions_label" msgid="2605296874922726203">"Autorisations"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Vider le cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
@@ -1949,7 +1960,7 @@
     <string name="printer_info_desc" msgid="5824995108703060003">"Plus d\'information sur cette imprimante"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Pile"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Répartition·de·l\'utilisation·de·la·batterie"</string>
-    <string name="power_usage_not_available" msgid="3109326074656512387">"Info d\'utilisation batterie indispo"</string>
+    <string name="power_usage_not_available" msgid="3109326074656512387">"Info d\'utilisation pile non dispo"</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant : <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> avant le chargement complet"</string>
@@ -2834,12 +2845,12 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> règles automatiques activées</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="842308776768942600">"Préférences Ne pas déranger"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priorités seulement"</string>
+    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritaires seulement"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Règles automatiques"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Créer règles Ne pas déranger"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Limiter sons et vibrations à certains moments"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Priorités seulement"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarmes uniquement"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Prioritaires seulement"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alarmes seulement"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Aucune interruption"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquer dérangements visuels"</string>
@@ -2874,7 +2885,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Lorsque votre appareil est verrouillé, comment voulez-vous que les notifications de profil s\'affichent?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notifications de profil"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notifications"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"Notifications de l\'application"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Notifications de l\'appli"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Catégorie de notifications"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importance"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Laisser l\'application décider"</string>
@@ -2883,8 +2894,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Aucun son"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Émettre un son"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Émettre un son et s\'afficher à l\'écran"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Afficher sur l\'écran"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Faible"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Moyenne"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Élevée"</string>
@@ -2949,7 +2959,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Autoriser la pastille de notification"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Afficher le point de notification"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignorer le mode Ne pas déranger"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Activer les notifications de cette application même lorsque l\'option « Ne pas déranger » est définie sur « Prioritaires uniquement »"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Activer les notifications de cette application même lorsque l\'option Ne pas déranger est définie sur Prioritaires uniquement"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"À l\'écran de verrouillage"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloqué"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priorité"</string>
@@ -2979,9 +2989,9 @@
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Pendant les événements suivants :"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Pendant les événements de l\'agenda <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"tout agenda"</string>
-    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Où se trouve la réponse : <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="6590671260829837157">"Si la réponse est : <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="6485568415998569885">"Tout agenda"</string>
-    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Où se trouve la réponse"</string>
+    <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Si la réponse est"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"Oui, Peut-être ou Sans réponse"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"Oui ou Peut-être"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Oui"</string>
@@ -3083,7 +3093,7 @@
     <string name="storage_type_internal" msgid="6042049833565674948">"Mémoire stockage interne"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"Stockage externe"</string>
     <string name="app_data_usage" msgid="7942375313697452803">"Utilisation données application"</string>
-    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé depuis <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"Espace de stockage utilisé"</string>
     <string name="change" msgid="6657848623929839991">"Modifier"</string>
     <string name="change_storage" msgid="600475265207060436">"Modifier type de stockage"</string>
@@ -3118,7 +3128,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Personnel"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Travail"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Applications : toutes"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"Applications : notif. bloquées"</string>
+    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"Applis : notifications bloquées"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"Catégories : importance urgente"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"Catégories : importance faible"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"Catégories : notif. bloquées"</string>
@@ -3326,7 +3336,7 @@
     <string name="notification_summary_none" msgid="4586376436702610">"Activées pour toutes les applications"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> applications installées"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 applications installées"</string>
-    <string name="storage_summary" msgid="3801281635351732202">"Utilisé : <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Libre : <xliff:g id="FREE_SPACE">%2$s</xliff:g>."</string>
+    <string name="storage_summary" msgid="3801281635351732202">"Utilisé : <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Libre : <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Stockage interne : <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilisé - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponible"</string>
     <string name="display_summary" msgid="6737806235882127328">"Passer en veille après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fond d\'écran, mode sommeil, taille de la police"</string>
@@ -3477,7 +3487,7 @@
     <string name="special_access" msgid="3458780842491881155">"Accès spéciaux aux applis"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application peut utiliser les données sans restriction</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> application peuvent utiliser les données sans restriction</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> applications peuvent utiliser les données sans restriction</item>
     </plurals>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Voulez-vous vraiment effacer les données des utilisateurs et chiffrer les fichiers?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Effacer et convertir"</string>
@@ -3570,10 +3580,10 @@
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Touchez l\'écran deux fois pour consulter votre appareil"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Pour vérifier l\'heure, les icônes de notification et d\'autres renseignements, touchez deux fois l\'écran."</string>
     <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Consulter les notifications lorsque l\'écran est éteint"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Saisir le téléphone pour le consulter"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Saisir pour consulter le téléphone"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Saisissez la tablette pour consulter les notifications"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Saisissez l\'appareil pour consulter les notifications"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Pour vérifier l\'heure, les icônes de notification et d\'autres renseignements, saisissez votre téléphone."</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Pour vérifier l\'heure, les icônes de notification et d\'autres renseignements, saisir votre téléphone."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Pour vérifier l\'heure, les icônes de notification et d\'autres renseignements, saisissez votre tablette."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Pour vérifier l\'heure, les icônes de notification et d\'autres renseignements, saisissez votre appareil."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Consulter les notifications lorsque l\'écran est éteint"</string>
@@ -3593,7 +3603,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Applications instantanées"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Ouvrir les liens dans les applications, même si elles ne sont pas installées"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Applications instantanées"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Compte pour les applications instantanées"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Applications installées"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Votre espace de stockage est maintenant géré par le gestionnaire de stockage"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Comptes pour <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3703,6 +3714,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Données d\'approvisionnement du fournisseur de services"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Déclencher l\'approvisionnement du fournisseur de services"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Quelles sont les nouveautés toutes chaudes?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Découvrez les cinq principales fonctionnalités"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Découvrez votre nouveau téléphone"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Découvrez votre nouvelle tablette"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Découvrez votre nouvel appareil"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Cette fonctionnalité n\'est pas accessible sur cet appareil."</string>
 </resources>

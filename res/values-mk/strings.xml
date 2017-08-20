@@ -372,6 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Продолжи"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Прескокни"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Следно"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Да се прескокне отпечаток?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Поставувањето отпечаток трае само една или две минути. Ако го прескокнете ова, може да го додадете вашиот отпечаток подоцна во поставките."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Прескокни заклучување екран?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Функциите за заштита на уредот нема да се вклучат. Нема да може да ги спречите другите да го користат таблетов ако го изгубите, ви го украдат или се ресетира."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Функциите за заштита на уредот нема да се вклучат. Нема да може да ги спречите другите да го користат уредов ако го изгубите, ви го украдат или се ресетира."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Функциите за заштита на уредот нема да се вклучат. Нема да може да ги спречите другите да го користат телефонов ако го изгубите, ви го украдат или се ресетира."</string>
@@ -457,7 +460,8 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Заштитете го таблетот"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Заштитете го уредот"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Заштитете го телефонот"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"За дополнителна безбедност, поставете резервно заклучување екран."</string>
+    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Спречете ги другите да го користат телефонот без ваша дозвола со активирање на функциите за заштита на уред. Изберете го заклучувањето екран што сакате да го користите."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Спречете ги другите да го користат уредот без ваша дозвола со активирање на функциите за заштита на уред. Изберете го заклучувањето екран што сакате да го користите."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Спречете ги другите да го користат телефонот без ваша дозвола со активирање на функциите за заштита на уред. Изберете го заклучувањето екран што сакате да го користите."</string>
@@ -837,6 +841,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Поврзи се"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Не успеа да се поврзе со мрежата"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Заборави"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Измени"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Не успеа да се заборави мрежата"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Зачувај"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Не успеа да се зачува мрежата"</string>
@@ -1132,8 +1137,8 @@
     <string name="device_status" msgid="607405385799807324">"Статус"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Статус на батерија, мрежа и други информации"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Телефонски број, сигнал, итн."</string>
-    <string name="storage_settings" msgid="4211799979832404953">"Меморија"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"Меморија"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"Капацитет"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"Капацитет"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Подесување на меморија"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Одмонтирај USB меморија, погледни расположлива меморија"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Одмонтирај СД картичка, прикажи расположлива меморија"</string>
@@ -1157,7 +1162,7 @@
     <string name="status_unavailable" msgid="7862009036663793314">"Недостапен"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Време од последно рестартирање"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Време на активност"</string>
-    <string name="internal_memory" msgid="9129595691484260784">"Внатрешна меморија"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"Внатрешен капацитет"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB меморија"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD картичка"</string>
     <string name="memory_available" msgid="5052397223077021181">"Достапен"</string>
@@ -1223,7 +1228,7 @@
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
     <string name="usb_midi_summary" msgid="539169474810956358">"Овозможува апликациите со овозможен MIDI да работат преку USB со софтвер MIDI на компјутерот."</string>
     <string name="storage_other_users" msgid="808708845102611856">"Други корисници"</string>
-    <string name="storage_internal_title" msgid="690771193137801021">"Меморија на уредот"</string>
+    <string name="storage_internal_title" msgid="690771193137801021">"Капацитет на уредот"</string>
     <string name="storage_external_title" msgid="3433462910096848696">"Пренослива меморија"</string>
     <string name="storage_volume_summary" msgid="7023441974367853372">"<xliff:g id="USED">%1$s</xliff:g> искористено од <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="storage_size_large" msgid="5691585991420946254">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
@@ -1258,9 +1263,9 @@
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Поставете <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Користи како пренослива меморија"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"За преместување фотографии и други медиуми меѓу уреди."</string>
-    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"Користи како внатрешна меморија"</string>
+    <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"Користи како внатрешен капацитет"</string>
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"За меморирање на што било само на овој уред, вклучувајќи и апликации и фотографии. Бара форматирање што го спречува да работи со други уреди."</string>
-    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Формат. како внатрешна меморија"</string>
+    <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"Формат. како внатрешен капацитет"</string>
     <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"Ова бара меморискиот уред <xliff:g id="NAME_0">^1</xliff:g> да биде форматиран за да биде безбеден. \n\nПо форматирањето, <xliff:g id="NAME_1">^1</xliff:g> ќе работи само на овој уред. \n\n"<b>"Форматирањето ги брише сите податоци тековно складирани на <xliff:g id="NAME_2">^1</xliff:g>."</b>" За да избегнете губење на податоците, размислете да направите резервна копија од нив."</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="4905690038882041566">"Формат. како пренослива меморија"</string>
     <string name="storage_wizard_format_confirm_public_body" msgid="1516932692920060272">"Ова бара <xliff:g id="NAME_0">^1</xliff:g> да се форматира. \n\n"<b>"Форматирањето ги брише сите податоци што моментално се меморирани на <xliff:g id="NAME_1">^1</xliff:g>."</b>" За да избегнете губење на податоците, размислете да направите резервна копија од нив."</string>
@@ -1463,15 +1468,21 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Безбедносни информации"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Немате врска со податоци. За да ги видите овие информации сега, одете на %s од кој било компјутер поврзан на интернет."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Се вчитува..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Изберете лозинка"</string>
+    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
+    <skip />
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Поставете лозинка за отпечаток"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Изберете шема"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Поставете шема за отпечаток"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Изберете PIN"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Поставете PIN за отпечаток"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Потврдете ја лозинката"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Потврдете ја шемата"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Потврдете го PIN-от"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
+    <skip />
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Лозинките не се совпаѓаат"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN-овите не се совпаѓаат"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Избери начин на отклучување"</string>
@@ -1490,6 +1501,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"За дополнителна безбедност, користете ја шемата на работниот профил"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"За дополнителна безбедност, внесете го PIN-кодот на работниот профил"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"За дополнителна безбедност, внесете ја лозинката на работниот профил"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете ја претходната шема."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете го претходниот PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете ја претходната лозинка."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Потврдете ја шемата"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Потврди PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Потврдете ја лозинката"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Погрешен PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Погрешна лозинка"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Погрешна шема"</string>
@@ -1545,7 +1562,7 @@
     <string name="advanced_settings" msgid="1777249286757067969">"Напредни поставки"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Овозможи повеќе опции за подесување"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Информации за апликацијата"</string>
-    <string name="storage_label" msgid="8700867073480107253">"Меморија"</string>
+    <string name="storage_label" msgid="8700867073480107253">"Капацитет"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"Отвори стандардно"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Стандардни вредности"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Компатибилност на екран"</string>
@@ -1602,8 +1619,8 @@
     <string name="not_installed" msgid="2797554494953450291">"Не е инсталирано за корисникот"</string>
     <string name="installed" msgid="3070865169422600098">"Инсталирано"</string>
     <string name="no_applications" msgid="7336588977497084921">"Нема апликации."</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Внатрешна меморија"</string>
-    <string name="internal_storage_sentence" msgid="889098931914857143">"внатрешна меморија"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Внатрешен капацитет"</string>
+    <string name="internal_storage_sentence" msgid="889098931914857143">"внатрешен капацитет"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB меморија"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"СД мемо картич."</string>
     <string name="recompute_size" msgid="7722567982831691718">"Повторно пресметување големина..."</string>
@@ -2883,8 +2900,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Без звук"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Испушти звук"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Испушти звук и прикажи го на екранот"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Прикажи го на екранот"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Мало"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Средно"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Висока"</string>
@@ -3080,14 +3096,14 @@
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Поддржани врски"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Останати стандарди"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> употребени во <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="6042049833565674948">"Внатрешна меморија"</string>
+    <string name="storage_type_internal" msgid="6042049833565674948">"Внатрешен капацитет"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"Надворешна меморија"</string>
     <string name="app_data_usage" msgid="7942375313697452803">"Сообраќај по аплик."</string>
-    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> користено од <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> користени од <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"Искористена меморија"</string>
     <string name="change" msgid="6657848623929839991">"Промени"</string>
     <string name="change_storage" msgid="600475265207060436">"Промени ја меморијата"</string>
-    <string name="notifications_label" msgid="8543457911148619898">"Известувања за апликација"</string>
+    <string name="notifications_label" msgid="8543457911148619898">"Известувања за апл."</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Вклучено"</string>
     <string name="notifications_disabled" msgid="334416731283131597">"Сè е исклучено"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_0">%1$d</xliff:g> од <xliff:g id="COUNT_1">%2$d</xliff:g> категории се исклучени"</string>
@@ -3176,7 +3192,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Оптимизација на батерија"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Предупредувања за батеријата"</string>
-    <string name="show_all_apps" msgid="1512506948197818534">"Прикажи ја употребата на целосно полниот уред"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Употреба на целосно полн уред"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"Прикажи употреба на апликација"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Голема искористеност"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
@@ -3327,7 +3343,7 @@
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се инсталирани"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Инсталирани се 24 апликации"</string>
     <string name="storage_summary" msgid="3801281635351732202">"Искористено <xliff:g id="PERCENTAGE">%1$s</xliff:g> - слободен простор <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
-    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Внатрешна меморија: искористено <xliff:g id="PERCENTAGE">%1$s</xliff:g> - слободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Внатрешен капацитет: искористено <xliff:g id="PERCENTAGE">%1$s</xliff:g> - слободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Стави во режим на мирување по <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Тапет, режим во мирување, големина на фонт"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Стави на режим во мирување по 10 минути неактивност"</string>
@@ -3474,7 +3490,7 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"нема"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Рангираниот објект недостастасува."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Рангираниот објект не го содржи овој клуч."</string>
-    <string name="special_access" msgid="3458780842491881155">"Посебен пристап до апликации"</string>
+    <string name="special_access" msgid="3458780842491881155">"Посебен пристап за апликации"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> апликација може да користи неограничен интернет</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апликации може да користат неограничен интернет</item>
@@ -3593,7 +3609,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Инстант апликации"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Отворај линкови во апликации, дури и ако не се инсталирани"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Инстант апликации"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Сметка за инстант апликација"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Инсталирани апликации"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Управникот со меморија сега управува со вашата меморија"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Сметки за <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3703,6 +3720,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Информации за обезбедување оператор"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Активирајте обезбедување оператор"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Што има ново и интересно?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Погледнете ги најдобрите 5 функции"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Запознајте се со новиот телефон"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Запознајте се со новиот таблет"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Запознајте се со новиот уред"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Функцијава не е достапна на овој уред"</string>
 </resources>

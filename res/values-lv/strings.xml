@@ -375,6 +375,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Turpināt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Izlaist"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Tālāk"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Izlaist pirksta nospiedumu?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Pirksta nospieduma iestatīšana ilgst tikai pāris minūtes. Ja to izlaidīsiet, varēsiet pirksta nospiedumu pievienot vēlāk iestatījumos."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Vai izlaist ekrāna bloķēšanu?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Ierīces aizsardzības funkcijas netiks ieslēgtas. Jūs nevarēsiet nodrošināt, ka šo planšetdatoru neizmantos citas personas, ja tas tiks pazaudēts, nozagts vai atiestatīts."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Ierīces aizsardzības funkcijas netiks ieslēgtas. Jūs nevarēsiet nodrošināt, ka šo ierīci neizmantos citas personas, ja tā tiks pazaudēta, nozagta vai atiestatīta."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Ierīces aizsardzības funkcijas netiks ieslēgtas. Jūs nevarēsiet nodrošināt, ka šo tālruni neizmantos citas personas, ja tas tiks pazaudēts, nozagts vai atiestatīts."</string>
@@ -460,7 +463,8 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Aizsargājiet planšetd."</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Aizsargājiet ierīci"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Aizsargājiet tālruni"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Papildu drošībai iestatiet rezerves ekrāna bloķēšanu."</string>
+    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Aktivizējiet ierīces aizsardzības funkcijas, lai neļautu citiem lietot šo planšetdatoru bez jūsu atļaujas. Izvēlieties bloķēšanas ekrānu, kuru vēlaties izmantot."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Aktivizējiet ierīces aizsardzības funkcijas, lai neļautu citiem lietot šo ierīci bez jūsu atļaujas. Izvēlieties bloķēšanas ekrānu, kuru vēlaties izmantot."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Aktivizējiet ierīces aizsardzības funkcijas, lai neļautu citiem lietot šo tālruni bez jūsu atļaujas. Izvēlieties bloķēšanas ekrānu, kuru vēlaties izmantot."</string>
@@ -848,6 +852,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Izveidot savienojumu"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Neizdevās izveidot savienojumu ar tīklu."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Neiegaumēt"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Mainīt"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Neizdevās aizmirst tīklu."</string>
     <string name="wifi_save" msgid="3331121567988522826">"Saglabāt"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Neizdevās saglabāt tīklu."</string>
@@ -1476,15 +1481,21 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informācija par drošību"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Nav izveidots datu pārraides savienojums. Lai skatītu šo informāciju tūlīt, jebkurā datorā ar interneta savienojumu apmeklējiet vietni %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Notiek ielāde…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Izvēlieties paroli"</string>
+    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
+    <skip />
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Parole pirksta nosp. lietošanai"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Izvēlieties kombināciju"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Komb. pirksta nosp. lietošanai"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Izvēlieties PIN kodu"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"PIN pirksta nosp. lietošanai"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Apstipriniet paroli"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
+    <skip />
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Apstipriniet kombināciju"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Apstipriniet savu PIN kodu"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
+    <skip />
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Paroles nav vienādas"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN kodi ir atšķirīgi"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Atbloķēšanas atlase"</string>
@@ -1503,6 +1514,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Papildu drošībai izmantojiet darba profila kombināciju."</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Papildu drošībai ievadiet darba profila PIN."</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Papildu drošībai ievadiet darba profila paroli."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Tālrunī atiestatīti rūpnīcas iestatījumi. Lai izmantotu tālruni, ievadiet iepriekšējo kombināciju."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Tālrunī atiestatīti rūpnīcas iestatījumi. Lai izmantotu tālruni, ievadiet iepriekšējo PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Tālrunī atiestatīti rūpnīcas iestatījumi. Lai izmantotu tālruni, ievadiet iepriekšējo paroli."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Verificējiet kombināciju"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Verificējiet PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Verificējiet paroli"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Nepareizs PIN kods"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Nepareiza parole"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Nepareiza kombinācija"</string>
@@ -2910,8 +2927,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Bez skaņas"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Atskaņot skaņas signālu"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Atskaņot skaņas signālu un īslaicīgi parādīt ekrānā"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Uznirst ekrānā"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Mazsvarīgs"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Vidēji svarīgs"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Svarīgs"</string>
@@ -3641,7 +3657,8 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Tūlītējās lietotnes"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Atveriet saites lietotnēs, pat ja tās nav instalētas."</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Tūlītējās lietotnes"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Tūlītējo lietotņu konts"</string>
+    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
+    <skip />
     <string name="domain_url_section_title" msgid="7046835219056428883">"Instalētās lietotnes"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Tagad jūsu krātuvi pārvalda krātuves pārvaldnieks"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Lietotāja <xliff:g id="USER_NAME">%1$s</xliff:g> konti"</string>
@@ -3758,6 +3775,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informācija par operatora nodrošināšanu"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Aktivizēt operatora nodrošināšanu"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Kādi ir jaunumi?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Skatiet 5 jaunākās funkcijas"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Apskatiet savu jauno tālruni"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Apskatiet savu jauno planšetdatoru"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Apskatiet savu jauno ierīci"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Šī funkcija šajā ierīcē nav pieejama."</string>
 </resources>
