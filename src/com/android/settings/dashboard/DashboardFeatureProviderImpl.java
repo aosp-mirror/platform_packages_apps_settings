@@ -249,6 +249,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 final String uri = tile.metaData.getString(META_DATA_PREFERENCE_ICON_URI);
                 final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
                         mContext, packageName, uri, providerMap);
+                if (iconInfo == null) {
+                    Log.w(TAG, "Failed to get icon from uri " + uri);
+                    return;
+                }
                 tile.icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
                 ThreadUtils.postOnMainThread(() ->
                         preference.setIcon(tile.icon.loadDrawable(preference.getContext()))

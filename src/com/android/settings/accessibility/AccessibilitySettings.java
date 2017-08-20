@@ -107,6 +107,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "magnification_preference_screen";
     private static final String FONT_SIZE_PREFERENCE_SCREEN =
             "font_size_preference_screen";
+    private static final String TTS_SETTINGS_PREFERENCE =
+            "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
             "autoclick_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
@@ -742,6 +744,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // Duplicates in Display
             keys.add(FONT_SIZE_PREFERENCE_SCREEN);
             keys.add(DisplaySettings.KEY_DISPLAY_SIZE);
+
+            // Duplicates in Language & Input
+            keys.add(TTS_SETTINGS_PREFERENCE);
 
             return keys;
         }
