@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
@@ -126,7 +127,14 @@ public class UserProfileController extends AbstractPreferenceController implemen
     public void handleUserIcons(SparseArray<Drawable> fetchedIcons) {
         Drawable userIcon = fetchedIcons.get(mUser.id);
         if (userIcon != null) {
-            mStoragePreference.setIcon(userIcon);
+            mStoragePreference.setIcon(applyTint(mContext, userIcon));
         }
     }
+
+    private static Drawable applyTint(Context context, Drawable icon) {
+        icon = icon.mutate();
+        icon.setTint(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        return icon;
+    }
+
 }
