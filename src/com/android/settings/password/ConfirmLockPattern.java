@@ -79,9 +79,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
     public static class ConfirmLockPatternFragment extends ConfirmDeviceCredentialBaseFragment
             implements AppearAnimationCreator<Object>, CredentialCheckResultTracker.Listener {
 
-        // how long we wait to clear a wrong pattern
-        private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 2000;
-
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
 
         private LockPatternView mLockPatternView;
@@ -315,7 +312,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     mLockPatternView.clearPattern();
                     break;
                 case NeedToUnlockWrong:
-                    mErrorTextView.setText(R.string.lockpattern_need_to_unlock_wrong);
+                    showError(R.string.lockpattern_need_to_unlock_wrong,
+                            CLEAR_WRONG_ATTEMPT_TIMEOUT_MS);
 
                     mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Wrong);
                     mLockPatternView.setEnabled(true);
@@ -349,7 +347,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         // already
         private void postClearPatternRunnable() {
             mLockPatternView.removeCallbacks(mClearPatternRunnable);
-            mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
+            mLockPatternView.postDelayed(mClearPatternRunnable, CLEAR_WRONG_ATTEMPT_TIMEOUT_MS);
         }
 
         @Override
