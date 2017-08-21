@@ -26,10 +26,14 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
+
+import java.util.Locale;
 
 /**
  * DonutView represents a donut graph. It visualizes a certain percentage of fullness with a
@@ -101,12 +105,19 @@ public class DonutView extends View {
             mFilledArc.setColorFilter(mAccentColorFilter);
         }
 
+        final Locale locale = resources.getConfiguration().locale;
+        final int layoutDirection = TextUtils.getLayoutDirectionFromLocale(locale);
+        final int bidiFlags = (layoutDirection == LAYOUT_DIRECTION_LTR)
+                ? Paint.BIDI_LTR
+                : Paint.BIDI_RTL;
+
         mTextPaint = new TextPaint();
         mTextPaint.setColor(Utils.getColorAccent(getContext()));
         mTextPaint.setAntiAlias(true);
         mTextPaint.setTextSize(
                 resources.getDimension(R.dimen.storage_donut_view_label_text_size));
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setBidiFlags(bidiFlags);
 
         mBigNumberPaint = new TextPaint();
         mBigNumberPaint.setColor(Utils.getColorAccent(getContext()));
@@ -117,6 +128,7 @@ public class DonutView extends View {
         mBigNumberPaint.setTypeface(Typeface.create(
                 context.getString(com.android.internal.R.string.config_headlineFontFamily),
                 Typeface.NORMAL));
+        mBigNumberPaint.setBidiFlags(bidiFlags);
     }
 
     @Override
