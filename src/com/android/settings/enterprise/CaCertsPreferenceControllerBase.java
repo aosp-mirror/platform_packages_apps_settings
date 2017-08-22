@@ -15,7 +15,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -23,12 +22,12 @@ import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class CaCertsPreferenceController extends DynamicAvailabilityPreferenceController {
+public abstract class CaCertsPreferenceControllerBase
+        extends DynamicAvailabilityPreferenceController {
 
-    private static final String CA_CERTS = "ca_certs";
-    private final EnterprisePrivacyFeatureProvider mFeatureProvider;
+    protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public CaCertsPreferenceController(Context context, Lifecycle lifecycle) {
+    public CaCertsPreferenceControllerBase(Context context, Lifecycle lifecycle) {
         super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
@@ -36,23 +35,17 @@ public class CaCertsPreferenceController extends DynamicAvailabilityPreferenceCo
 
     @Override
     public void updateState(Preference preference) {
-        final int certs =
-                mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile();
+        final int certs = getNumberOfCaCerts();
         preference.setSummary(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
     }
 
     @Override
     public boolean isAvailable() {
-        final boolean available =
-                mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()
-                        > 0;
+        final boolean available = getNumberOfCaCerts() > 0;
         notifyOnAvailabilityUpdate(available);
         return available;
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return CA_CERTS;
-    }
+    protected abstract int getNumberOfCaCerts();
 }
