@@ -77,6 +77,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected static final int USER_TYPE_MANAGED_PROFILE = 2;
     protected static final int USER_TYPE_SECONDARY = 3;
 
+    /** Time we wait before clearing a wrong input attempt (e.g. pattern) and the error message. */
+    protected static final long CLEAR_WRONG_ATTEMPT_TIMEOUT_MS = 3000;
+
     private FingerprintUiHelper mFingerprintHelper;
     protected boolean mReturnCredentials = false;
     protected Button mCancelButton;
