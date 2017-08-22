@@ -16,50 +16,42 @@
 
 package com.android.settings.enterprise;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.R;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link CaCertsPreferenceController}.
+ * Base test class for testing {@link CaCertsPreferenceControllerBase}'s subclass.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class CaCertsPreferenceControllerTest {
-
-    private static final String KEY_CA_CERTS = "ca_certs";
+public abstract class CaCertsPreferenceControllerTestBase {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
-
-    private CaCertsPreferenceController mController;
+    protected Context mContext;
+    protected FakeFeatureFactory mFeatureFactory;
+    protected CaCertsPreferenceControllerBase mController;
+    @Mock
+    private PreferenceAvailabilityObserver mObserver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new CaCertsPreferenceController(mContext, null /* lifecycle */);
+        mController = createController();
         mController.setAvailabilityObserver(mObserver);
     }
 
@@ -74,23 +66,20 @@ public final class CaCertsPreferenceControllerTest {
 
         when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
                 10, 10)).thenReturn("10 certs");
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(10);
+        mockGetNumberOfCaCerts(10);
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("10 certs");
     }
 
     @Test
     public void testIsAvailable() {
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(0);
+        mockGetNumberOfCaCerts(0);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_CA_CERTS, false);
+        verify(mObserver).onPreferenceAvailabilityUpdated(getPreferenceKey(), false);
 
-        when(mFeatureFactory.enterprisePrivacyFeatureProvider
-                .getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()).thenReturn(10);
+        mockGetNumberOfCaCerts(10);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_CA_CERTS, true);
+        verify(mObserver).onPreferenceAvailabilityUpdated(getPreferenceKey(), true);
     }
 
     @Test
@@ -101,6 +90,13 @@ public final class CaCertsPreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo(KEY_CA_CERTS);
+        assertThat(mController.getPreferenceKey()).isEqualTo(getPreferenceKey());
     }
+
+    abstract void mockGetNumberOfCaCerts(int numOfCaCerts);
+
+    abstract String getPreferenceKey();
+
+    abstract CaCertsPreferenceControllerBase createController();
+
 }
