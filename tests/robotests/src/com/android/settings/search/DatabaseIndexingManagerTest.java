@@ -17,24 +17,20 @@
 
 package com.android.settings.search;
 
-import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -43,19 +39,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Build;
+import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.util.ArrayMap;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.search.indexing.PreIndexData;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowDatabaseIndexingUtils;
 import com.android.settings.testutils.shadow.ShadowRunnableAsyncTask;
 
 import org.junit.After;
@@ -67,7 +62,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,8 +78,6 @@ import java.util.Set;
     sdk = TestConfig.SDK_VERSION,
     shadows = {
         ShadowRunnableAsyncTask.class,
-        ShadowDatabaseIndexingUtils.class,
-        ShadowContentResolver.class
     }
 )
 public class DatabaseIndexingManagerTest {
@@ -129,6 +121,8 @@ public class DatabaseIndexingManagerTest {
     private DatabaseIndexingManager mManager;
     private SQLiteDatabase mDb;
 
+    private final List<ResolveInfo> FAKE_PROVIDER_LIST = new ArrayList<>();
+
     @Mock
     private PackageManager mPackageManager;
 
@@ -136,10 +130,12 @@ public class DatabaseIndexingManagerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mManager = spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+        mManager = spy(new DatabaseIndexingManager(mContext));
         mDb = IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
 
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(FAKE_PROVIDER_LIST).when(mPackageManager)
+                .queryIntentContentProviders(any(Intent.class), anyInt());
         FakeFeatureFactory.setupForTest(mContext);
     }
 
@@ -755,113 +751,60 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testPerformIndexing_fullIndex_getsDataFromProviders() {
-        DummyProvider provider = new DummyProvider();
-        provider.onCreate();
-        ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
+        SearchIndexableRaw rawData = getFakeRaw();
+        PreIndexData data = getPreIndexData(rawData);
+        doReturn(data).when(mManager).getIndexDataFromProviders(anyList(), anyBoolean());
+        doReturn(true).when(mManager).isFullIndex(any(Context.class), anyString(), anyString(),
+                anyString());
 
-        // Test that Indexables are added for Full indexing
-        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
-                .thenReturn(getDummyResolveInfo());
+        mManager.performIndexing();
 
-        DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-
-        manager.performIndexing();
-
-        verify(manager).addIndexablesFromRemoteProvider(PACKAGE_ONE, AUTHORITY_ONE);
-        verify(manager).updateDatabase(true /* isFullIndex */, Locale.getDefault().toString());
+        verify(mManager).updateDatabase(data, true /* isFullIndex */,
+                Locale.getDefault().toString());
     }
 
     @Test
-    public void testPerformIndexing_incrementalIndex_noDataAdded() {
-        final List<ResolveInfo> providerInfo = getDummyResolveInfo();
-        skipFullIndex(providerInfo);
-        DummyProvider provider = new DummyProvider();
-        provider.onCreate();
-        ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
-        // Test that Indexables are added for Full indexing
-        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
-                .thenReturn(providerInfo);
-
+    public void testPerformIndexing_fullIndex_databaseDropped() {
+        // Initialize the Manager and force rebuild
         DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-
-        manager.mDataToProcess.dataToUpdate.clear();
-
-        manager.performIndexing();
-
-        verify(manager, times(0)).addDataToDatabase(any(SQLiteDatabase.class), anyString(),
-                anyList(), anyMap());
-        verify(manager, times(0)).addIndexablesFromRemoteProvider(PACKAGE_ONE, AUTHORITY_ONE);
-        verify(manager).updateDataInDatabase(any(SQLiteDatabase.class), anyMap());
-    }
-
-    @Test
-    public void testPerformIndexing_localeChanged_databaseDropped() {
-        DummyProvider provider = new DummyProvider();
-        provider.onCreate();
-        ShadowContentResolver.registerProvider(AUTHORITY_ONE, provider);
-
-        // Test that Indexables are added for Full indexing
-        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
-                .thenReturn(getDummyResolveInfo());
-
-        // Initialize the Manager
-        DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
+                spy(new DatabaseIndexingManager(mContext));
+        doReturn(false).when(mManager).isFullIndex(any(Context.class), anyString(), anyString(),
+                anyString());
 
         // Insert data point which will be dropped
-        final String oldTitle = "This is French";
-        insertSpecialCase(oldTitle, true, "key");
-
-        // Add a data point to be added by the indexing
-        SearchIndexableRaw raw = new SearchIndexableRaw(mContext);
-        final String newTitle = "This is English";
-        raw.title = newTitle;
-        manager.mDataToProcess.dataToUpdate.add(raw);
+        insertSpecialCase("Ceci n'est pas un pipe", true, "oui oui mon ami");
 
         manager.performIndexing();
 
-        // Assert that the New Title is inserted
-        final Cursor newCursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE data_title = '" +
-                newTitle + "'", null);
-        assertThat(newCursor.getCount()).isEqualTo(1);
-
         // Assert that the Old Title is no longer in the database, since it was dropped
-        final Cursor oldCursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE data_title = '" +
-                oldTitle + "'", null);
+        final Cursor oldCursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
+
         assertThat(oldCursor.getCount()).isEqualTo(0);
     }
 
     @Test
-    public void testPerformIndexing_onOta_FullIndex() {
-        DummyProvider provider = new DummyProvider();
-        provider.onCreate();
-        ShadowContentResolver.registerProvider(
-                AUTHORITY_ONE, provider
-        );
+    public void testPerformIndexing_isfullIndex() {
+        SearchIndexableRaw rawData = getFakeRaw();
+        PreIndexData data = getPreIndexData(rawData);
+        doReturn(data).when(mManager).getIndexDataFromProviders(anyList(), anyBoolean());
+        doReturn(true).when(mManager).isFullIndex(any(Context.class), anyString(), anyString(),
+                anyString());
 
-        // Test that Indexables are added for Full indexing
-        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
-                .thenReturn(getDummyResolveInfo());
+        mManager.performIndexing();
 
-        DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-
-        manager.performIndexing();
-
-        verify(manager).updateDatabase(true /* isFullIndex */, Locale.getDefault().toString());
+        verify(mManager).updateDatabase(data, true /* isFullIndex */,
+                Locale.getDefault().toString());
     }
 
     @Test
-    public void testPerformIndexing_onPackageChange_shouldFullIndex() {
+    public void testPerformIndexing_onPackageChange_fullIndex() {
         final List<ResolveInfo> providers = getDummyResolveInfo();
         final String buildNumber = Build.FINGERPRINT;
         final String locale = Locale.getDefault().toString();
         skipFullIndex(providers);
 
         // This snapshot is already indexed. Should return false
-        assertThat(IndexDatabaseHelper.isFullIndex(
+        assertThat(mManager.isFullIndex(
                 mContext, locale, buildNumber,
                 IndexDatabaseHelper.buildProviderVersionedNames(providers)))
                 .isFalse();
@@ -869,65 +812,46 @@ public class DatabaseIndexingManagerTest {
         // Change provider version number, this should trigger full index.
         providers.get(0).providerInfo.applicationInfo.versionCode++;
 
-        assertThat(IndexDatabaseHelper.isFullIndex(mContext, locale, buildNumber,
+        assertThat(mManager.isFullIndex(mContext, locale, buildNumber,
                 IndexDatabaseHelper.buildProviderVersionedNames(providers)))
                 .isTrue();
     }
 
     @Test
     public void testPerformIndexing_onOta_buildNumberIsCached() {
-        DummyProvider provider = new DummyProvider();
-        provider.onCreate();
-        ShadowContentResolver.registerProvider(
-                AUTHORITY_ONE, provider
-        );
+        mManager.performIndexing();
 
-        // Test that Indexables are added for Full indexing
-        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
-                .thenReturn(getDummyResolveInfo());
-
-        DatabaseIndexingManager manager =
-                spy(new DatabaseIndexingManager(mContext, PACKAGE_ONE));
-
-        manager.performIndexing();
-
-        assertThat(IndexDatabaseHelper.getInstance(mContext).isBuildIndexed(mContext,
-                Build.FINGERPRINT)).isTrue();
+        assertThat(IndexDatabaseHelper.isBuildIndexed(mContext, Build.FINGERPRINT)).isTrue();
     }
 
     @Test
     public void testFullUpdatedDatabase_noData_addDataToDatabaseNotCalled() {
-        mManager.updateDatabase(true /* isFullIndex */, localeStr);
-        mManager.mDataToProcess.dataToUpdate.clear();
+        PreIndexData emptydata = new PreIndexData();
+        mManager.updateDatabase(emptydata, true /* isFullIndex */, localeStr);
         verify(mManager, times(0)).addDataToDatabase(any(SQLiteDatabase.class), anyString(),
                 anyList(), anyMap());
     }
 
     @Test
-    public void testFullUpdatedDatabase_updatedDataInDatabaseNotCalled() {
-        mManager.updateDatabase(true /* isFullIndex */, localeStr);
-        verify(mManager, times(0)).updateDataInDatabase(any(SQLiteDatabase.class), anyMap());
-    }
-
-    @Test
     public void testLocaleUpdated_afterIndexing_localeNotAdded() {
-        mManager.updateDatabase(true /* isFullIndex */, localeStr);
-        assertThat(IndexDatabaseHelper.getInstance(mContext)
-                .isLocaleAlreadyIndexed(mContext, localeStr)).isFalse();
+        PreIndexData emptydata = new PreIndexData();
+        mManager.updateDatabase(emptydata, true /* isFullIndex */, localeStr);
+
+        assertThat(IndexDatabaseHelper.isLocaleAlreadyIndexed(mContext, localeStr)).isFalse();
     }
 
     @Test
     public void testLocaleUpdated_afterFullIndexing_localeAdded() {
         mManager.performIndexing();
-        assertThat(IndexDatabaseHelper.getInstance(mContext)
-                .isLocaleAlreadyIndexed(mContext, localeStr)).isTrue();
+        assertThat(IndexDatabaseHelper.isLocaleAlreadyIndexed(mContext, localeStr)).isTrue();
     }
 
     @Test
     public void testUpdateDatabase_newEligibleData_addedToDatabase() {
         // Test that addDataToDatabase is called when dataToUpdate is non-empty
-        mManager.mDataToProcess.dataToUpdate.add(getFakeRaw());
-        mManager.updateDatabase(true /* isFullIndex */, localeStr);
+        PreIndexData indexData = new PreIndexData();
+        indexData.dataToUpdate.add(getFakeRaw());
+        mManager.updateDatabase(indexData, true /* isFullIndex */, localeStr);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         cursor.moveToPosition(0);
@@ -1020,8 +944,8 @@ public class DatabaseIndexingManagerTest {
     @Test
     public void testEmptyNonIndexableKeys_emptyDataKeyResources_addedToDatabase() {
         insertSpecialCase(TITLE_ONE, true /* enabled */, null /* dataReferenceKey */);
-
-        mManager.updateDatabase(false, localeStr);
+        PreIndexData emptydata = new PreIndexData();
+        mManager.updateDatabase(emptydata, false /* needsReindexing */, localeStr);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
         cursor.moveToPosition(0);
@@ -1111,46 +1035,6 @@ public class DatabaseIndexingManagerTest {
         return niks;
     }
 
-    private List<ResolveInfo> getDummyResolveInfo() {
-        List<ResolveInfo> infoList = new ArrayList<>();
-        ResolveInfo info = new ResolveInfo();
-        info.providerInfo = new ProviderInfo();
-        info.providerInfo.exported = true;
-        info.providerInfo.authority = AUTHORITY_ONE;
-        info.providerInfo.packageName = PACKAGE_ONE;
-        info.providerInfo.applicationInfo = new ApplicationInfo();
-        infoList.add(info);
-
-        return infoList;
-    }
-
-    // TODO move this method and its counterpart in CursorToSearchResultConverterTest into
-    // a util class with public fields to assert values.
-    private Cursor getDummyCursor() {
-        MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
-        final String BLANK = "";
-
-        ArrayList<String> item =
-                new ArrayList<>(INDEXABLES_RAW_COLUMNS.length);
-        item.add("42"); // Rank
-        item.add(TITLE_ONE); // Title
-        item.add(BLANK); // Summary on
-        item.add(BLANK); // summary off
-        item.add(BLANK); // entries
-        item.add(BLANK); // keywords
-        item.add(BLANK); // screen title
-        item.add(BLANK); // classname
-        item.add("123"); // Icon
-        item.add(BLANK); // Intent action
-        item.add(BLANK); // target package
-        item.add(BLANK); // target class
-        item.add(KEY_ONE); // Key
-        item.add("-1"); // userId
-        cursor.addRow(item);
-
-        return cursor;
-    }
-
     private void insertSpecialCase(String specialCase, boolean enabled, String key) {
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, specialCase.hashCode());
@@ -1179,43 +1063,22 @@ public class DatabaseIndexingManagerTest {
         mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
     }
 
-    private class DummyProvider extends ContentProvider {
+    private PreIndexData getPreIndexData(SearchIndexableData fakeData) {
+        PreIndexData data = new PreIndexData();
+        data.dataToUpdate.add(fakeData);
+        return data;
+    }
 
-        @Override
-        public boolean onCreate() {
-            return false;
-        }
+    private List<ResolveInfo> getDummyResolveInfo() {
+        List<ResolveInfo> infoList = new ArrayList<>();
+        ResolveInfo info = new ResolveInfo();
+        info.providerInfo = new ProviderInfo();
+        info.providerInfo.exported = true;
+        info.providerInfo.authority = AUTHORITY_ONE;
+        info.providerInfo.packageName = PACKAGE_ONE;
+        info.providerInfo.applicationInfo = new ApplicationInfo();
+        infoList.add(info);
 
-        @Override
-        public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
-                @Nullable String selection, @Nullable String[] selectionArgs,
-                @Nullable String sortOrder) {
-            if (uri.toString().contains("xml")) {
-                return null;
-            }
-            return getDummyCursor();
-        }
-
-        @Override
-        public String getType(@NonNull Uri uri) {
-            return null;
-        }
-
-        @Override
-        public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-            return null;
-        }
-
-        @Override
-        public int delete(@NonNull Uri uri, @Nullable String selection,
-                @Nullable String[] selectionArgs) {
-            return 0;
-        }
-
-        @Override
-        public int update(@NonNull Uri uri, @Nullable ContentValues values,
-                @Nullable String selection, @Nullable String[] selectionArgs) {
-            return 0;
-        }
+        return infoList;
     }
 }

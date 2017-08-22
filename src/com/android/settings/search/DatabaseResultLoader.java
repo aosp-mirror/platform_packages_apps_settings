@@ -40,19 +40,19 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
     /* These indices are used to match the columns of the this loader's SELECT statement.
      These are not necessarily the same order nor similar coverage as the schema defined in
      IndexDatabaseHelper */
-    static final int COLUMN_INDEX_ID = 0;
-    static final int COLUMN_INDEX_TITLE = 1;
-    static final int COLUMN_INDEX_SUMMARY_ON = 2;
-    static final int COLUMN_INDEX_SUMMARY_OFF = 3;
-    static final int COLUMN_INDEX_CLASS_NAME = 4;
-    static final int COLUMN_INDEX_SCREEN_TITLE = 5;
-    static final int COLUMN_INDEX_ICON = 6;
-    static final int COLUMN_INDEX_INTENT_ACTION = 7;
-    static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
-    static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 9;
-    static final int COLUMN_INDEX_KEY = 10;
-    static final int COLUMN_INDEX_PAYLOAD_TYPE = 11;
-    static final int COLUMN_INDEX_PAYLOAD = 12;
+    public static final int COLUMN_INDEX_ID = 0;
+    public static final int COLUMN_INDEX_TITLE = 1;
+    public static final int COLUMN_INDEX_SUMMARY_ON = 2;
+    public static final int COLUMN_INDEX_SUMMARY_OFF = 3;
+    public static final int COLUMN_INDEX_CLASS_NAME = 4;
+    public static final int COLUMN_INDEX_SCREEN_TITLE = 5;
+    public static final int COLUMN_INDEX_ICON = 6;
+    public static final int COLUMN_INDEX_INTENT_ACTION = 7;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 9;
+    public static final int COLUMN_INDEX_KEY = 10;
+    public static final int COLUMN_INDEX_PAYLOAD_TYPE = 11;
+    public static final int COLUMN_INDEX_PAYLOAD = 12;
 
     public static final String[] SELECT_COLUMNS = {
             IndexColumns.DOCID,
