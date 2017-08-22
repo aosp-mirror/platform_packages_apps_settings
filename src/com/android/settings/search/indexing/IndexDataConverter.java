@@ -147,12 +147,14 @@ public class IndexDataConverter {
         }
 
         IndexData.Builder builder = new IndexData.Builder();
-        builder.setLocale(localeStr)
+        builder.setTitle(raw.title)
+                .setSummaryOn(raw.summaryOn)
+                .setLocale(localeStr)
                 .setEntries(raw.entries)
+                .setKeywords(raw.keywords)
                 .setClassName(raw.className)
                 .setScreenTitle(raw.screenTitle)
                 .setIconResId(raw.iconResId)
-                .setRank(raw.rank)
                 .setIntentAction(raw.intentAction)
                 .setIntentTargetPackage(raw.intentTargetPackage)
                 .setIntentTargetClass(raw.intentTargetClass)
@@ -160,8 +162,7 @@ public class IndexDataConverter {
                 .setKey(raw.key)
                 .setUserId(raw.userId);
 
-        updateOneRowWithFilteredData(builder, raw.title, raw.summaryOn, raw.summaryOff,
-                raw.keywords);
+        updateOneRow(builder.build(mContext));
     }
 
     @VisibleForTesting
@@ -249,7 +250,6 @@ public class IndexDataConverter {
             ResultPayload payload;
             boolean enabled;
             final String fragmentName = sir.className;
-            final int rank = sir.rank;
             final String intentAction = sir.intentAction;
             final String intentTargetPackage = sir.intentTargetPackage;
             final String intentTargetClass = sir.intentTargetClass;
@@ -271,11 +271,12 @@ public class IndexDataConverter {
 
             // TODO: Set payload type for header results
             IndexData.Builder headerBuilder = new IndexData.Builder();
-            headerBuilder.setLocale(localeStr)
-                    .setEntries(null)
+            headerBuilder.setTitle(headerTitle)
+                    .setSummaryOn(headerSummary)
+                    .setKeywords(headerKeywords)
+                    .setLocale(localeStr)
                     .setClassName(fragmentName)
                     .setScreenTitle(screenTitle)
-                    .setRank(rank)
                     .setIntentAction(intentAction)
                     .setIntentTargetPackage(intentTargetPackage)
                     .setIntentTargetClass(intentTargetClass)
@@ -306,11 +307,12 @@ public class IndexDataConverter {
                 }
 
                 builder = new IndexData.Builder();
-                builder.setLocale(localeStr)
+                builder.setTitle(title)
+                        .setLocale(localeStr)
+                        .setKeywords(keywords)
                         .setClassName(fragmentName)
                         .setScreenTitle(screenTitle)
                         .setIconResId(iconResId)
-                        .setRank(rank)
                         .setIntentAction(intentAction)
                         .setIntentTargetPackage(intentTargetPackage)
                         .setIntentTargetClass(intentTargetClass)
@@ -331,14 +333,17 @@ public class IndexDataConverter {
                     payload = DatabaseIndexingUtils.getPayloadFromUriMap(controllerUriMap, key);
                     childFragment = XmlParserUtils.getDataChildFragment(context, attrs);
 
-                    builder.setEntries(entries)
+                    builder.setSummaryOn(summary)
+                            .setEntries(entries)
                             .setChildClassName(childFragment)
                             .setPayload(payload);
 
                     // Insert rows for the child nodes of PreferenceScreen
-                    updateOneRowWithFilteredData(builder, title, summary,
-                            null /* summary off */, keywords);
+                    updateOneRow(builder.build(mContext));
                 } else {
+                    // TODO (b/33577327) We removed summary off here. We should check if we can
+                    // merge this 'else' section with the one above. Put a break point to
+                    // investigate.
                     String summaryOn = XmlParserUtils.getDataSummaryOn(context, attrs);
                     String summaryOff = XmlParserUtils.getDataSummaryOff(context, attrs);
 
@@ -346,15 +351,15 @@ public class IndexDataConverter {
                         summaryOn = XmlParserUtils.getDataSummary(context, attrs);
                     }
 
-                    updateOneRowWithFilteredData(builder, title, summaryOn, summaryOff,
-                            keywords);
+                    builder.setSummaryOn(summaryOn);
+
+                    updateOneRow(builder.build(mContext));
                 }
             }
 
             // The xml header's title does not match the title of one of the child settings.
             if (isHeaderUnique) {
-                updateOneRowWithFilteredData(headerBuilder, headerTitle, headerSummary,
-                        null /* summary off */, headerKeywords);
+                updateOneRow(headerBuilder.build(mContext));
             }
         } catch (XmlPullParserException e) {
             throw new RuntimeException("Error parsing PreferenceScreen", e);
@@ -394,8 +399,11 @@ public class IndexDataConverter {
                 boolean enabled = !nonIndexableKeys.contains(raw.key);
 
                 IndexData.Builder builder = new IndexData.Builder();
-                builder.setLocale(localeStr)
+                builder.setTitle(raw.title)
+                        .setSummaryOn(raw.summaryOn)
+                        .setLocale(localeStr)
                         .setEntries(raw.entries)
+                        .setKeywords(raw.keywords)
                         .setClassName(className)
                         .setScreenTitle(raw.screenTitle)
                         .setIconResId(raw.iconResId)
@@ -406,8 +414,7 @@ public class IndexDataConverter {
                         .setKey(raw.key)
                         .setUserId(raw.userId);
 
-                updateOneRowWithFilteredData(builder, raw.title, raw.summaryOn, raw.summaryOff,
-                        raw.keywords);
+                updateOneRow(builder.build(mContext));
             }
         }
 
@@ -438,32 +445,6 @@ public class IndexDataConverter {
         }
     }
 
-    @VisibleForTesting
-    void updateOneRowWithFilteredData(IndexData.Builder builder,
-            String title, String summaryOn, String summaryOff, String keywords) {
-
-        final String updatedTitle = DatabaseIndexingUtils.normalizeHyphen(title);
-        final String updatedSummaryOn = DatabaseIndexingUtils.normalizeHyphen(summaryOn);
-        final String updatedSummaryOff = DatabaseIndexingUtils.normalizeHyphen(summaryOff);
-
-        final String normalizedTitle = DatabaseIndexingUtils.normalizeString(updatedTitle);
-        final String normalizedSummaryOn = DatabaseIndexingUtils.normalizeString(updatedSummaryOn);
-        final String normalizedSummaryOff = DatabaseIndexingUtils
-                .normalizeString(updatedSummaryOff);
-
-        final String spaceDelimitedKeywords = DatabaseIndexingUtils.normalizeKeywords(keywords);
-
-        builder.setUpdatedTitle(updatedTitle)
-                .setUpdatedSummaryOn(updatedSummaryOn)
-                .setUpdatedSummaryOff(updatedSummaryOff)
-                .setNormalizedTitle(normalizedTitle)
-                .setNormalizedSummaryOn(normalizedSummaryOn)
-                .setNormalizedSummaryOff(normalizedSummaryOff)
-                .setSpaceDelimitedKeywords(spaceDelimitedKeywords);
-
-        updateOneRow(builder.build(mContext));
-    }
-
     private void updateOneRow(IndexData row) {
         if (TextUtils.isEmpty(row.updatedTitle)) {
             return;
@@ -472,13 +453,10 @@ public class IndexDataConverter {
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, row.getDocId());
         values.put(LOCALE, row.locale);
-        values.put(DATA_RANK, row.rank);
         values.put(DATA_TITLE, row.updatedTitle);
         values.put(DATA_TITLE_NORMALIZED, row.normalizedTitle);
         values.put(DATA_SUMMARY_ON, row.updatedSummaryOn);
         values.put(DATA_SUMMARY_ON_NORMALIZED, row.normalizedSummaryOn);
-        values.put(DATA_SUMMARY_OFF, row.updatedSummaryOff);
-        values.put(DATA_SUMMARY_OFF_NORMALIZED, row.normalizedSummaryOff);
         values.put(DATA_ENTRIES, row.entries);
         values.put(DATA_KEYWORDS, row.spaceDelimitedKeywords);
         values.put(CLASS_NAME, row.className);

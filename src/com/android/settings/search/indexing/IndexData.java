@@ -27,7 +27,9 @@ import com.android.settings.search.ResultPayload;
 import com.android.settings.search.ResultPayloadUtils;
 import com.android.settings.search.SearchIndexableResources;
 
+import java.text.Normalizer;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * Data class representing a single row in the Setting Search results database.
@@ -38,14 +40,11 @@ public class IndexData {
     public final String normalizedTitle;
     public final String updatedSummaryOn;
     public final String normalizedSummaryOn;
-    public final String updatedSummaryOff;
-    public final String normalizedSummaryOff;
     public final String entries;
     public final String className;
     public final String childClassName;
     public final String screenTitle;
     public final int iconResId;
-    public final int rank;
     public final String spaceDelimitedKeywords;
     public final String intentAction;
     public final String intentTargetPackage;
@@ -56,21 +55,28 @@ public class IndexData {
     public final int payloadType;
     public final byte[] payload;
 
+    private static final String NON_BREAKING_HYPHEN = "\u2011";
+    private static final String EMPTY = "";
+    private static final String HYPHEN = "-";
+    private static final String SPACE = " ";
+    // Regex matching a comma, and any number of subsequent white spaces.
+    private static final String LIST_DELIMITERS = "[,]\\s*";
+
+    private static final Pattern REMOVE_DIACRITICALS_PATTERN
+            = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+
     private IndexData(Builder builder) {
         locale = builder.mLocale;
-        updatedTitle = builder.mUpdatedTitle;
-        normalizedTitle = builder.mNormalizedTitle;
-        updatedSummaryOn = builder.mUpdatedSummaryOn;
-        normalizedSummaryOn = builder.mNormalizedSummaryOn;
-        updatedSummaryOff = builder.mUpdatedSummaryOff;
-        normalizedSummaryOff = builder.mNormalizedSummaryOff;
+        updatedTitle = normalizeHyphen(builder.mTitle);
+        normalizedTitle = normalizeString(builder.mTitle);
+        updatedSummaryOn = normalizeHyphen(builder.mSummaryOn);
+        normalizedSummaryOn = normalizeString(builder.mSummaryOn);
         entries = builder.mEntries;
         className = builder.mClassName;
         childClassName = builder.mChildClassName;
         screenTitle = builder.mScreenTitle;
         iconResId = builder.mIconResId;
-        rank = builder.mRank;
-        spaceDelimitedKeywords = builder.mSpaceDelimitedKeywords;
+        spaceDelimitedKeywords = normalizeKeywords(builder.mKeywords);
         intentAction = builder.mIntentAction;
         intentTargetPackage = builder.mIntentTargetPackage;
         intentTargetClass = builder.mIntentTargetClass;
@@ -93,21 +99,49 @@ public class IndexData {
                 : key.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return new StringBuilder(updatedTitle)
+                .append(": ")
+                .append(updatedSummaryOn)
+                .toString();
+    }
+
+    /**
+     * In the list of keywords, replace the comma and all subsequent whitespace with a single space.
+     */
+    public static String normalizeKeywords(String input) {
+        return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
+    }
+
+    /**
+     * @return {@param input} where all non-standard hyphens are replaced by normal hyphens.
+     */
+    public static String normalizeHyphen(String input) {
+        return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
+    }
+
+    /**
+     * @return {@param input} with all hyphens removed, and all letters lower case.
+     */
+    public static String normalizeString(String input) {
+        final String normalizedHypen = normalizeHyphen(input);
+        final String nohyphen = (input != null) ? normalizedHypen.replaceAll(HYPHEN, EMPTY) : EMPTY;
+        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
+
+        return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
+    }
+
     public static class Builder {
         private String mLocale;
-        private String mUpdatedTitle;
-        private String mNormalizedTitle;
-        private String mUpdatedSummaryOn;
-        private String mNormalizedSummaryOn;
-        private String mUpdatedSummaryOff;
-        private String mNormalizedSummaryOff;
+        private String mTitle;
+        private String mSummaryOn;
         private String mEntries;
         private String mClassName;
         private String mChildClassName;
         private String mScreenTitle;
         private int mIconResId;
-        private int mRank;
-        private String mSpaceDelimitedKeywords;
+        private String mKeywords;
         private String mIntentAction;
         private String mIntentTargetPackage;
         private String mIntentTargetClass;
@@ -123,33 +157,13 @@ public class IndexData {
             return this;
         }
 
-        public Builder setUpdatedTitle(String updatedTitle) {
-            mUpdatedTitle = updatedTitle;
+        public Builder setTitle(String title) {
+            mTitle = title;
             return this;
         }
 
-        public Builder setNormalizedTitle(String normalizedTitle) {
-            mNormalizedTitle = normalizedTitle;
-            return this;
-        }
-
-        public Builder setUpdatedSummaryOn(String updatedSummaryOn) {
-            mUpdatedSummaryOn = updatedSummaryOn;
-            return this;
-        }
-
-        public Builder setNormalizedSummaryOn(String normalizedSummaryOn) {
-            mNormalizedSummaryOn = normalizedSummaryOn;
-            return this;
-        }
-
-        public Builder setUpdatedSummaryOff(String updatedSummaryOff) {
-            mUpdatedSummaryOff = updatedSummaryOff;
-            return this;
-        }
-
-        public Builder setNormalizedSummaryOff(String normalizedSummaryOff) {
-            this.mNormalizedSummaryOff = normalizedSummaryOff;
+        public Builder setSummaryOn(String summaryOn) {
+            mSummaryOn = summaryOn;
             return this;
         }
 
@@ -178,13 +192,8 @@ public class IndexData {
             return this;
         }
 
-        public Builder setRank(int rank) {
-            mRank = rank;
-            return this;
-        }
-
-        public Builder setSpaceDelimitedKeywords(String spaceDelimitedKeywords) {
-            mSpaceDelimitedKeywords = spaceDelimitedKeywords;
+        public Builder setKeywords(String keywords) {
+            mKeywords = keywords;
             return this;
         }
 
@@ -260,8 +269,8 @@ public class IndexData {
             boolean isEmptyIntentAction = TextUtils.isEmpty(mIntentAction);
             // No intent action is set, or the intent action is for a subsetting.
             if (isEmptyIntentAction
-                    || (!isEmptyIntentAction && TextUtils.equals(mIntentTargetPackage,
-                    SearchIndexableResources.SUBSETTING_TARGET_PACKAGE))) {
+                    || TextUtils.equals(mIntentTargetPackage,
+                    SearchIndexableResources.SUBSETTING_TARGET_PACKAGE)) {
                 // Action is null, we will launch it as a sub-setting
                 intent = DatabaseIndexingUtils.buildSubsettingIntent(context, mClassName, mKey,
                         mScreenTitle);

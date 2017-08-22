@@ -24,6 +24,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.search.indexing.IndexData;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -227,8 +228,8 @@ public class DatabaseResultLoaderTest {
     }
 
     private void insertSpecialCase(String specialCase) {
-        String normalized = DatabaseIndexingUtils.normalizeHyphen(specialCase);
-        normalized = DatabaseIndexingUtils.normalizeString(normalized);
+        String normalized = IndexData.normalizeHyphen(specialCase);
+        normalized = IndexData.normalizeString(normalized);
         final ResultPayload payload = new ResultPayload(new Intent());
 
         ContentValues values = new ContentValues();
