@@ -45,6 +45,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.instantapps.InstantAppButtonsController.ShowDialogDelegate;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.Utils;
@@ -103,7 +104,7 @@ public final class InstalledAppDetailsTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
     @Mock
-    private DevicePolicyManager mDevicePolicyManager;
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
     @Mock
     private BatterySipper mBatterySipper;
     @Mock
