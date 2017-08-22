@@ -64,7 +64,7 @@ public class InlineSwitchPayloadTest {
         InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1, intent, true,
                 1 /* default */);
         final Intent retainedIntent = payload.getIntent();
-        assertThat(payload.mSettingKey).isEqualTo(uri);
+        assertThat(payload.getKey()).isEqualTo(uri);
         assertThat(payload.getType()).isEqualTo(type);
         assertThat(payload.mSettingSource).isEqualTo(source);
         assertThat(payload.isStandard()).isTrue();
@@ -93,7 +93,7 @@ public class InlineSwitchPayloadTest {
         InlineSwitchPayload payload = InlineSwitchPayload.CREATOR.createFromParcel(parcel);
 
         final Intent builtIntent = payload.getIntent();
-        assertThat(payload.mSettingKey).isEqualTo(uri);
+        assertThat(payload.getKey()).isEqualTo(uri);
         assertThat(payload.getType()).isEqualTo(type);
         assertThat(payload.mSettingSource).isEqualTo(source);
         assertThat(payload.isStandard()).isTrue();

@@ -40,7 +40,7 @@ public class InlineListPayloadTest {
                 intent, true /* isAvailable */, 1 /* numOptions */, 1 /* default */);
 
         final Intent retainedIntent = payload.getIntent();
-        assertThat(payload.mSettingKey).isEqualTo(uri);
+        assertThat(payload.getKey()).isEqualTo(uri);
         assertThat(payload.getType()).isEqualTo(type);
         assertThat(payload.mSettingSource).isEqualTo(source);
         assertThat(payload.getAvailability()).isEqualTo(ResultPayload.Availability.AVAILABLE);
@@ -69,7 +69,7 @@ public class InlineListPayloadTest {
                 .CREATOR.createFromParcel(parcel);
 
         final Intent builtIntent = payload.getIntent();
-        assertThat(payload.mSettingKey).isEqualTo(uri);
+        assertThat(payload.getKey()).isEqualTo(uri);
         assertThat(payload.getType()).isEqualTo(type);
         assertThat(payload.mSettingSource).isEqualTo(source);
         assertThat(payload.getAvailability()).isEqualTo(ResultPayload.Availability.AVAILABLE);

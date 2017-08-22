@@ -15,16 +15,17 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.search.indexing;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.Context;
 
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
+import com.android.settings.search.ResultPayloadUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search.DatabaseIndexingManager.DatabaseRow;
-import com.android.settings.search.DatabaseIndexingManager.DatabaseRow.Builder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +37,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class DatabaseRowTest {
-    private Builder mBuilder;
+public class IndexDataTest {
+    private IndexData.Builder mBuilder;
 
     private static final String LOCALE = "locale";
     private static final String UPDATED_TITLE = "updated title";
@@ -69,13 +70,13 @@ public class DatabaseRowTest {
 
     @Test
     public void testFullRowBuild_nonNull() {
-        DatabaseRow row = generateRow();
+        IndexData row = generateRow();
         assertThat(row).isNotNull();
     }
 
     @Test
     public void testPrimitivesBuild_noDataLoss() {
-        DatabaseRow row = generateRow();
+        IndexData row = generateRow();
 
         assertThat(row.locale).isEqualTo(LOCALE);
         assertThat(row.updatedTitle).isEqualTo(UPDATED_TITLE);
@@ -102,7 +103,7 @@ public class DatabaseRowTest {
 
     @Test
     public void testGenericIntent_addedToPayload() {
-        final DatabaseRow row = generateRow();
+        final IndexData row = generateRow();
         final ResultPayload payload = ResultPayloadUtils.unmarshall(row.payload,
                 ResultPayload.CREATOR);
         final ComponentName name = payload.getIntent().getComponent();
@@ -116,12 +117,12 @@ public class DatabaseRowTest {
         final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
                 1 /* onValue */, null /* intent */, true /* isDeviceSupported */, 1 /* default */);
         mBuilder.setPayload(payload);
-        final DatabaseRow row = generateRow();
+        final IndexData row = generateRow();
         final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
                 .unmarshall(row.payload, InlineSwitchPayload.CREATOR);
 
         assertThat(row.payloadType).isEqualTo(ResultPayload.PayloadType.INLINE_SWITCH);
-        assertThat(unmarshalledPayload.mSettingKey).isEqualTo(URI);
+        assertThat(unmarshalledPayload.getKey()).isEqualTo(URI);
     }
 
     @Test
@@ -135,7 +136,7 @@ public class DatabaseRowTest {
         final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
                 1 /* onValue */, intent, true /* isDeviceSupported */, 1 /* default */);
         mBuilder.setPayload(payload);
-        final DatabaseRow row = generateRow();
+        final IndexData row = generateRow();
         final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
                 .unmarshall(row.payload, InlineSwitchPayload.CREATOR);
         final ComponentName name = unmarshalledPayload.getIntent().getComponent();
@@ -145,12 +146,12 @@ public class DatabaseRowTest {
     }
 
 
-    private DatabaseRow generateRow() {
+    private IndexData generateRow() {
         return mBuilder.build(mContext);
     }
 
-    private DatabaseRow.Builder createBuilder() {
-        mBuilder = new DatabaseRow.Builder();
+    private IndexData.Builder createBuilder() {
+        mBuilder = new IndexData.Builder();
         mBuilder.setLocale(LOCALE)
                 .setUpdatedTitle(UPDATED_TITLE)
                 .setNormalizedTitle(NORMALIZED_TITLE)
