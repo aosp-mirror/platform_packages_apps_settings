@@ -118,7 +118,6 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String[] mReadOnlyApnTypes;
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
-    private String mUserEnteredApnType;
 
     /**
      * Standard projection for the interesting columns of a normal note.
@@ -214,7 +213,6 @@ public class ApnEditor extends SettingsPreferenceFragment
         mReadOnlyApn = false;
         mReadOnlyApnTypes = null;
         mReadOnlyApnFields = null;
-        mUserEnteredApnType = null;
 
         CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
@@ -1117,15 +1115,11 @@ public class ApnEditor extends SettingsPreferenceFragment
     }
 
     private String getUserEnteredApnType() {
-        if (mUserEnteredApnType != null) {
-            return mUserEnteredApnType;
-        }
-
         // if user has not specified a type, map it to "ALL APN TYPES THAT ARE NOT READ-ONLY"
-        mUserEnteredApnType = mApnType.getText();
-        if (mUserEnteredApnType != null) mUserEnteredApnType = mUserEnteredApnType.trim();
-        if ((TextUtils.isEmpty(mUserEnteredApnType)
-                || PhoneConstants.APN_TYPE_ALL.equals(mUserEnteredApnType))
+        String userEnteredApnType = mApnType.getText();
+        if (userEnteredApnType != null) userEnteredApnType = userEnteredApnType.trim();
+        if ((TextUtils.isEmpty(userEnteredApnType)
+                || PhoneConstants.APN_TYPE_ALL.equals(userEnteredApnType))
                 && !ArrayUtils.isEmpty(mReadOnlyApnTypes)) {
             StringBuilder editableApnTypes = new StringBuilder();
             List<String> readOnlyApnTypes = Arrays.asList(mReadOnlyApnTypes);
@@ -1143,12 +1137,12 @@ public class ApnEditor extends SettingsPreferenceFragment
                     editableApnTypes.append(apnType);
                 }
             }
-            mUserEnteredApnType = editableApnTypes.toString();
+            userEnteredApnType = editableApnTypes.toString();
             Log.d(TAG, "getUserEnteredApnType: changed apn type to editable apn types: "
-                    + mUserEnteredApnType);
+                    + userEnteredApnType);
         }
 
-        return mUserEnteredApnType;
+        return userEnteredApnType;
     }
 
     public static class ErrorDialog extends InstrumentedDialogFragment {
