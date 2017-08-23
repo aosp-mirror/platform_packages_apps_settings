@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,7 +84,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     // If an account type is set, then show only accounts of that type
     private String mAccountType;
-    // Temporary hack, to deal with backward compatibility 
+    // Temporary hack, to deal with backward compatibility
     // mFirstAccount is used for the injected preferences
     private Account mFirstAccount;
 
@@ -440,15 +441,18 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     /**
-     * Filters through the preference list provided by GoogleLoginService.
+     * Recursively filters through the preference list provided by GoogleLoginService.
      *
      * This method removes all the invalid intent from the list, adds account name as extra into the
      * intent, and hack the location settings to start it as a fragment.
      */
-    private void updatePreferenceIntents(PreferenceScreen prefs) {
+    private void updatePreferenceIntents(PreferenceGroup prefs) {
         final PackageManager pm = getActivity().getPackageManager();
         for (int i = 0; i < prefs.getPreferenceCount();) {
             Preference pref = prefs.getPreference(i);
+            if (pref instanceof PreferenceGroup) {
+                updatePreferenceIntents((PreferenceGroup) pref);
+            }
             Intent intent = pref.getIntent();
             if (intent != null) {
                 // Hack. Launch "Location" as fragment instead of as activity.
@@ -497,8 +501,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                                 } else {
                                     Log.e(TAG,
                                             "Refusing to launch authenticator intent because"
-                                            + "it exploits Settings permissions: "
-                                            + prefIntent);
+                                                    + " it exploits Settings permissions: "
+                                                    + prefIntent);
                                 }
                                 return true;
                             }
@@ -518,20 +522,26 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private boolean isSafeIntent(PackageManager pm, Intent intent) {
         AuthenticatorDescription authDesc =
                 mAuthenticatorHelper.getAccountTypeDescription(mAccountType);
-        ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
+        ResolveInfo resolveInfo =
+            pm.resolveActivityAsUser(intent, 0, mUserHandle.getIdentifier());
         if (resolveInfo == null) {
             return false;
         }
         ActivityInfo resolvedActivityInfo = resolveInfo.activityInfo;
         ApplicationInfo resolvedAppInfo = resolvedActivityInfo.applicationInfo;
         try {
+            if (resolvedActivityInfo.exported) {
+                if (resolvedActivityInfo.permission == null) {
+                    return true; // exported activity without permission.
+                } else if (pm.checkPermission(resolvedActivityInfo.permission,
+                        authDesc.packageName) == PackageManager.PERMISSION_GRANTED) {
+                    return true;
+                }
+            }
             ApplicationInfo authenticatorAppInf = pm.getApplicationInfo(authDesc.packageName, 0);
-            return resolvedActivityInfo.exported
-                    || resolvedAppInfo.uid == authenticatorAppInf.uid;
+            return  resolvedAppInfo.uid == authenticatorAppInf.uid;
         } catch (NameNotFoundException e) {
-            Log.e(TAG,
-                    "Intent considered unsafe due to exception.",
-                    e);
+            Log.e(TAG, "Intent considered unsafe due to exception.", e);
             return false;
         }
     }
