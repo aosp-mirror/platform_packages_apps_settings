@@ -82,7 +82,10 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         exposureChangesCategoryControllers.add(new ImePreferenceController(context, lifecycle));
         exposureChangesCategoryControllers.add(new GlobalHttpProxyPreferenceController(context,
                 lifecycle));
-        exposureChangesCategoryControllers.add(new CaCertsPreferenceController(context, lifecycle));
+        exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(
+                context, lifecycle));
+        exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
+                context, lifecycle));
         controllers.addAll(exposureChangesCategoryControllers);
         controllers.add(new ExposureChangesCategoryPreferenceController(context, lifecycle,
                 exposureChangesCategoryControllers, async));
