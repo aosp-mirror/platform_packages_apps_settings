@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -91,6 +92,8 @@ public class PowerUsageAdvancedTest {
     private BatteryHistoryPreference mHistPref;
     @Mock
     private PreferenceGroup mUsageListGroup;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
     private PowerUsageAdvanced mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
@@ -127,6 +130,8 @@ public class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
         mPowerUsageAdvanced.setUserManager(mUserManager);
         mPowerUsageAdvanced.setBatteryUtils(BatteryUtils.getInstance(mShadowContext));
+        when(mShadowContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
+                mConnectivityManager);
 
         mPowerUsageData = new PowerUsageData(UsageType.SYSTEM);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
@@ -294,6 +299,24 @@ public class PowerUsageAdvancedTest {
         doReturn(1).when(mUserManager).getUserCount();
 
         assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideCategory_typeCellWhileNotSupported_returnTrue() {
+        mPowerUsageData.usageType = UsageType.CELL;
+        doReturn(false).when(mConnectivityManager).isNetworkSupported(
+                ConnectivityManager.TYPE_MOBILE);
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideCategory_typeCellWhileSupported_returnFalse() {
+        mPowerUsageData.usageType = UsageType.CELL;
+        doReturn(true).when(mConnectivityManager).isNetworkSupported(
+                ConnectivityManager.TYPE_MOBILE);
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
     }
 
     @Test
