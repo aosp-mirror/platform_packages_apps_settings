@@ -20,8 +20,38 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Anomaly App"/>
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:padding="4dp"
+        android:textSize="16sp">
+        <TextView
+            android:id="@+id/displayText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="100000"/>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#444444"/>
+
+    <ScrollView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="6"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <include layout="@layout/bluetooth_anomaly"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
