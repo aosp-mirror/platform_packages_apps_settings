@@ -1145,7 +1145,7 @@
     <string name="status_signal_strength" msgid="3732655254188304547">"信号强度"</string>
     <string name="status_roaming" msgid="2638800467430913403">"漫游"</string>
     <string name="status_operator" msgid="2274875196954742087">"网络"</string>
-    <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLANMAC 地址"</string>
+    <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLAN MAC 地址"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"蓝牙地址"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"序列号"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"无法获取"</string>
@@ -1339,7 +1339,7 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"内部存储空间和所有数据都将被重置"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"此操作会清除您平板电脑"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"此操作会清除您手机"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"此操作会清除您手机"<b>"内部存储空间"</b>"中的所有数据，包括：\n\n"<li>"您的 Google 帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"已下载的应用"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"目前，您已登录以下帐号：\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"此设备上目前还有其他用户。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他的用户数据"</li></string>
@@ -1543,7 +1543,7 @@
     <string name="advanced_settings" msgid="1777249286757067969">"高级设置"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"启用更多设置选项"</string>
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
-    <string name="storage_label" msgid="8700867073480107253">"存储空间"</string>
+    <string name="storage_label" msgid="8700867073480107253">"存储"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"默认打开"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"默认操作"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
@@ -2090,7 +2090,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"整体用电量的 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"自上次充满电后的用电明细"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"上次充满电"</string>
-    <string name="battery_footer_summary" msgid="67169726550144016">"电池用量数据为大致数据，可能会因使用情形而变化"</string>
+    <string name="battery_footer_summary" msgid="67169726550144016">"电池消耗量为大致值，可能会因使用情形而变化"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"在前台运行时"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"在后台运行时"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"电池用量"</string>
@@ -2413,8 +2413,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"只能连接到移动网络时，此功能可能会导致需要使用后台流量的应用无法正常运行。\n\n您可以在相关应用的设置中为其设定更合适的数据流量控制选项。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"您必须先设置移动数据流量上限，才能限制后台数据流量。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"要打开自动同步数据功能吗？"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐号还可以将您在平板电脑上进行的所有更改自动同步到网络上。Google帐号就支持此类双向同步。"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google帐号就支持此类双向同步。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐号还可以将您在平板电脑上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"要关闭自动同步数据功能吗？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"这样可以节省数据流量和电池电量，但您需要手动同步每个帐号才能获得最新信息，并且在有更新时不会收到通知。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"流量重置日期"</string>
@@ -2991,8 +2991,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"星期几"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"无"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"每天"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"闹钟响铃时间可覆盖结束时间"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"在所设结束时间或下一次闹钟响铃时（两者取其先）停止"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"闹钟设置优先于结束时间设置"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"在所设结束时间或闹钟下一次响铃时（两者取其先）退出此模式"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"， "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3565,7 +3565,7 @@
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"点按两次屏幕即可查看时间、通知图标和其他信息。"</string>
     <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"屏幕关闭时查看通知"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"触碰即主动显示"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"拿起手机即显示"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"拿起平板电脑即可查看"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"拿起设备即可查看"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"拿起您的手机即可查看时间、通知图标和其他信息。"</string>
@@ -3584,7 +3584,7 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"请先连接到互联网"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"请连接到互联网或与您的运营商联系"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"在与运营商绑定的设备上无法使用"</string>
-    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已释放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次运行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"总共释放空间：<xliff:g id="SIZE">%1$s</xliff:g>\n\n上次执行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="4051513950976670853">"免安装应用"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"在应用中打开链接（即使未安装相关应用也无妨）"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"免安装应用"</string>

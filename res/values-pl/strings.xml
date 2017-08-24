@@ -1084,7 +1084,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Ustawienia"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatyczna"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Podnieś, by wybudzić"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Ekran dostosowany do otoczenia"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Ekran zgodny z otoczeniem"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Zawsze włączony/ Zwiększone zużycie baterii"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nowe powiadomienia"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Kiedy wyświetlać"</string>
@@ -1368,7 +1368,7 @@
     <string name="master_clear_summary" msgid="6902443944660426951">"Pamięć wewnętrzna i wszystkie dane zostaną zresetowane"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Zostaną usunięte wszystkie dane z "<b>"wewnętrznej pamięci"</b>" tabletu, w tym:\n\n"<li>"Dane konta Google"</li>\n<li>"Dane i ustawienia systemu oraz aplikacji"</li>\n<li>"Pobrane aplikacje"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Zostaną usunięte wszystkie dane z "<b>"wewnętrznej pamięci"</b>" telefonu, w tym:\n\n"<li>"Dane konta Google"</li>\n<li>"Dane i ustawienia systemu oraz aplikacji"</li>\n<li>"Pobrane aplikacje"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Zalogowano się na konta:\n"</string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"W tej chwili używasz kont:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Z tego urządzenia korzystają inni użytkownicy.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzyka"</li>\n<li>"Zdjęcia"</li>\n<li>"Inne dane użytkownika"</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Operatorzy na karcie eSIM"</li></string>
@@ -1835,7 +1835,7 @@
     <string name="usage_time_label" msgid="295954901452833058">"Czas użycia"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Ułatwienia dostępu"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ustawienia ułatwień dostępu"</string>
-    <string name="accessibility_settings_summary" msgid="981260486011624939">"Czytniki ekranu, wyświetlacz, sterowanie interakcją"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"Czytniki, wyświetlacz, sterowanie interakcją"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Dla niedowidzących"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Możesz dostosować urządzenie do swoich potrzeb. Ułatwienia dostępu możesz zawsze zmienić w Ustawieniach."</string>
     <string name="vision_settings_suggestion_title" msgid="917294957154878441">"Zwiększ rozmiar czcionki"</string>
@@ -2155,9 +2155,7 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Włącz automatycznie"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nigdy"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"przy <xliff:g id="PERCENT">%1$s</xliff:g> baterii"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"Poziom naładowania baterii w %%"</string>
     <string name="battery_percentage_description" msgid="8511658577507384014">"Pokazuj procentowy poziom naładowania baterii na pasku stanu"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Rozbudowane statystyki uruchomionych procesów"</string>
@@ -2459,8 +2457,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Gdy będą dostępne tylko sieci komórkowe, funkcja ta może zakłócić działanie aplikacji, które korzystają z przesyłu danych w tle.\n\nSzczegółowe ustawienia transmisji danych są zazwyczaj dostępne bezpośrednio w poszczególnych aplikacjach."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Ograniczenie transmisji danych w tle jest możliwe tylko po ustawieniu limitu mobilnej transmisji danych."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Włączyć autosynchronizację?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, wszystkie zmiany, które wprowadzisz na telefonie.  W ten sposób działa właśnie konto Google."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, wszystkie zmiany, które wprowadzisz na telefonie.  W ten sposób działa właśnie konto Google."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, które wprowadzisz na telefonie. W ten sposób działa właśnie konto Google."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, które wprowadzisz na telefonie. W ten sposób działa właśnie konto Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Wyłączyć autosynchronizację?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Powoduje przesyłanie mniejszej ilości danych oraz zmniejsza użycie baterii, ale pobranie najnowszych informacji będzie wymagało ręcznej synchronizacji każdego konta. Poza tym nie będziesz otrzymywać powiadomień o aktualizacjach."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data resetowania cyklu transmisji danych"</string>
