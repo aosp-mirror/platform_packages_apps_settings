@@ -170,8 +170,9 @@ public class ChartGridView extends View {
         paint.setColor(mLabelColor);
         paint.setTextSize(mLabelSize);
 
-        return new StaticLayout(text, paint,
-                (int) Math.ceil(Layout.getDesiredWidth(text, paint)),
-                Layout.Alignment.ALIGN_NORMAL, 1.f, 0, true);
+        return StaticLayout.Builder.obtain(text, 0, text.length(), paint,
+                (int) Math.ceil(Layout.getDesiredWidth(text, paint)))
+                .setUseLineSpacingFromFallbacks(true)
+                .build();
     }
 }
