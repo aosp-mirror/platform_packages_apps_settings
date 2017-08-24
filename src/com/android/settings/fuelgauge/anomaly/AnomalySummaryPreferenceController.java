@@ -102,6 +102,8 @@ public class AnomalySummaryPreferenceController {
 
             mAnomalyPreference.setTitle(title);
             mAnomalyPreference.setSummary(summary);
+        } else {
+            mAnomalyPreference.setVisible(false);
         }
     }
 

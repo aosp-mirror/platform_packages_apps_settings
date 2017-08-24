@@ -319,6 +319,21 @@ public class DashboardAdapterTest {
     }
 
     @Test
+    public void testSuggestionsLogs_nullSuggestionsList_shouldNotCrash() {
+        setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3", "pkg4", "pkg5"));
+        mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
+
+        // set suggestions to null
+        final DashboardData prevData = mDashboardAdapter.mDashboardData;
+        mDashboardAdapter.mDashboardData = new DashboardData.Builder(prevData)
+                .setSuggestions(null)
+                .build();
+
+        mSuggestionHolder.itemView.callOnClick();
+        // no crash
+    }
+
+    @Test
     public void testSuggestionDismissed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null, null, null, null));

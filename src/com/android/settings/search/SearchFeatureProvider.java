@@ -138,6 +138,13 @@ public interface SearchFeatureProvider {
     }
 
     /**
+     * @return smart ranking timeout in milliseconds.
+     */
+    default long smartSearchRankingTimeoutMs(Context context) {
+        return 300L;
+    }
+
+    /**
      * Prepare for search ranking predictions to avoid latency on the first prediction call.
      */
     default void searchRankingWarmup(Context context) {
