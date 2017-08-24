@@ -79,8 +79,15 @@ import java.util.Map;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowRunnableAsyncTask.class})
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {
+        ShadowRunnableAsyncTask.class,
+        ShadowDatabaseIndexingUtils.class,
+        ShadowContentResolver.class
+    }
+)
 public class DatabaseIndexingManagerTest {
     private final String localeStr = "en_US";
 
@@ -747,7 +754,6 @@ public class DatabaseIndexingManagerTest {
     // Test new public indexing flow
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class})
     public void testPerformIndexing_fullIndex_getsDataFromProviders() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
@@ -767,7 +773,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_incrementalIndex_noDataAdded() {
         final List<ResolveInfo> providerInfo = getDummyResolveInfo();
         skipFullIndex(providerInfo);
@@ -792,7 +797,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_localeChanged_databaseDropped() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
@@ -830,7 +834,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_onOta_FullIndex() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
@@ -851,7 +854,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_onPackageChange_shouldFullIndex() {
         final List<ResolveInfo> providers = getDummyResolveInfo();
         final String buildNumber = Build.FINGERPRINT;
@@ -873,7 +875,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowDatabaseIndexingUtils.class,})
     public void testPerformIndexing_onOta_buildNumberIsCached() {
         DummyProvider provider = new DummyProvider();
         provider.onCreate();
@@ -1017,7 +1018,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowContentResolver.class})
     public void testEmptyNonIndexableKeys_emptyDataKeyResources_addedToDatabase() {
         insertSpecialCase(TITLE_ONE, true /* enabled */, null /* dataReferenceKey */);
 

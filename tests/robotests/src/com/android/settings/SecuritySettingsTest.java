@@ -56,7 +56,11 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowLockPatternUtils.class}
+)
 public class SecuritySettingsTest {
 
 
@@ -165,9 +169,6 @@ public class SecuritySettingsTest {
     }
 
     @Test
-    @Config (shadows = {
-            ShadowLockPatternUtils.class,
-    })
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         UserManager manager = mock(UserManager.class);
