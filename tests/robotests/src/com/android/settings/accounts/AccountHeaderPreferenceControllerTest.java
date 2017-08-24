@@ -50,7 +50,11 @@ import org.robolectric.annotation.Implements;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class
+)
 public class AccountHeaderPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -83,7 +87,6 @@ public class AccountHeaderPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowAuthenticatorHelper.class)
     public void onResume_shouldDisplayAccountInEntityHeader() {
         final Lifecycle lifecycle = new Lifecycle();
         final Account account = new Account("name1@abc.com", "com.abc");

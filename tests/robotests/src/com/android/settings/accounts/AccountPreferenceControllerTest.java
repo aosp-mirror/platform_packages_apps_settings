@@ -111,7 +111,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_linkedUser_shouldAddOneAccountCategory() {
         final UserInfo info = new UserInfo(1, "user 1", 0);
         when(mUserManager.isManagedProfile()).thenReturn(false);
@@ -124,7 +123,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneProfile_shouldAddOneAccountCategory() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -138,7 +136,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_twoProfiles_shouldAddTwoAccountCategory() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -153,7 +150,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_noProfileChange_shouldNotAddOrRemoveAccountCategory() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -171,7 +167,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneNewProfile_shouldAddOneAccountCategory() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -189,7 +184,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneProfileRemoved_shouldRemoveOneAccountCategory() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -207,7 +201,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneProfile_shouldSetAccountTitleWithUserName() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
@@ -226,7 +219,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_noPreferenceScreen_shouldNotCrash() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -244,7 +236,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_noPreferenceManager_shouldNotCrash() {
         when(mFragment.getPreferenceManager()).thenReturn(null);
         final List<UserInfo> infos = new ArrayList<>();
@@ -337,7 +328,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_twoAccountsOfSameType_shouldAddThreePreferences() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -417,7 +407,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_noAccountChange_shouldNotAddAccountPreference() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -498,7 +487,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneNewAccountType_shouldAddOneAccountPreference() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -534,7 +522,6 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_oneAccountRemoved_shouldRemoveOneAccountPreference() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));

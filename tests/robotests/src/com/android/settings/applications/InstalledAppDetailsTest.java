@@ -83,7 +83,11 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = InstalledAppDetailsTest.ShadowUtils.class
+)
 public final class InstalledAppDetailsTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
@@ -491,7 +495,6 @@ public final class InstalledAppDetailsTest {
     }
 
     @Test
-    @Config(shadows = ShadowUtils.class)
     public void handleDisableable_appIsEnabled_buttonShouldWork() {
         final ApplicationInfo info = new ApplicationInfo();
         info.packageName = "pkg";
@@ -513,7 +516,6 @@ public final class InstalledAppDetailsTest {
     }
 
     @Test
-    @Config(shadows = ShadowUtils.class)
     public void handleDisableable_appIsEnabledAndInKeepEnabledWhitelist_buttonShouldNotWork() {
         final ApplicationInfo info = new ApplicationInfo();
         info.packageName = "pkg";
