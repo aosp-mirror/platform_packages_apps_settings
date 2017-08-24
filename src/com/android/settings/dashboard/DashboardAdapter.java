@@ -329,7 +329,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     private void logSuggestions() {
-        for (Tile suggestion : mDashboardData.getSuggestions()) {
+        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        if (suggestions == null) {
+            return;
+        }
+        for (Tile suggestion : suggestions) {
             final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
                 mContext, suggestion);
             if (!mSuggestionsShownLogged.contains(suggestionId)) {
