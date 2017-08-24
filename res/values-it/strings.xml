@@ -460,8 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Proteggi il tuo tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Proteggi dispositivo"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Proteggi il telefono"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Per maggiore sicurezza, imposta un blocco schermo di backup."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Impedisci ad altri di utilizzare il tablet senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Impedisci ad altri di utilizzare il dispositivo senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Impedisci ad altri di utilizzare il telefono senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
@@ -1058,7 +1057,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizza lo schermo"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Scegli sfondo da"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Screensaver"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Durante la ricarica o l\'inserimento nel dock"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Durante la ricarica o quando inserito nel dock"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Entrambi i casi"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Durante la ricarica"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Quando inserito nel dock"</string>
@@ -1258,7 +1257,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistema"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Esplora <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"In Altro sono inclusi file condivisi salvati dalle app, file scaricati da Internet o tramite Bluetooth, file Android e così via. \n\nPer vedere i contenuti visibili di <xliff:g id="NAME">^1</xliff:g>, tocca Esplora."</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Il sistema include i file utilizzati per eseguire la versione di Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Il sistema include i file utilizzati per eseguire Android versione <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> potrebbe aver salvato foto, musica, film, app o altri dati che occupano <xliff:g id="SIZE">^2</xliff:g> di spazio di archiviazione. \n\nPer i dettagli, passa a <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configura la tua <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utilizza come memoria portatile"</string>
@@ -1334,7 +1333,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Ripristino delle impostazioni APN predefinite."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Ripristina impostazioni predefinite"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Ripristino delle impostazioni APN predefinite completato."</string>
-    <string name="reset_dashboard_title" msgid="6254873816990678620">"Reimposta opzioni"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Opzioni di reimpostazione"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"È possibile reimpostare la rete, le app o il dispositivo"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Reimposta Wi-Fi, dati mobili e Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Verranno reimpostate tutte le impostazioni di rete, tra cui:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dati mobili"</li>\n<li>"Bluetooth"</li></string>
@@ -1468,21 +1467,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informazioni sulla sicurezza"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Nessuna connessione dati disponibile. Per visualizzare ora le informazioni, visita il sito %s da qualsiasi computer collegato a Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Caricamento..."</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Imposta il blocco schermo"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Per motivi di sicurezza, imposta una password"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Per usare l\'impronta digitale, imposta la password"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Scegli la tua sequenza"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Per usare l\'impronta digitale, imposta la sequenza"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Per motivi di sicurezza, imposta un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Per usare l\'impronta digitale, imposta il PIN"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Inserisci di nuovo la password"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Conferma la tua sequenza"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Inserisci di nuovo il PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Le password non corrispondono"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"I PIN non corrispondono"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Selezione metodo di sblocco"</string>
@@ -1882,7 +1876,7 @@
       <item quantity="one">Ritardo molto lungo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Impostazioni"</string>
-    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"ON"</string>
+    <string name="accessibility_feature_state_on" msgid="2864292320042673806">"On"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"OFF"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Anteprima"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Opzioni standard"</string>
@@ -1945,7 +1939,7 @@
     <string name="print_no_printers_found" msgid="989018646884973683">"Nessuna stampante trovata"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Impostazioni"</string>
     <string name="print_menu_item_add_printers" msgid="2890738028215834012">"Aggiungi stampanti"</string>
-    <string name="print_feature_state_on" msgid="8098901852502441048">"ON"</string>
+    <string name="print_feature_state_on" msgid="8098901852502441048">"On"</string>
     <string name="print_feature_state_off" msgid="7294876968403966040">"OFF"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"Aggiungi servizio"</string>
     <string name="print_menu_item_add_printer" msgid="8251218970577291032">"Aggiungi stampante"</string>
@@ -3174,7 +3168,7 @@
     <string name="default_app" msgid="6864503001385843060">"(Predefinita)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Sistema)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Predefinito)"</string>
-    <string name="apps_storage" msgid="4353308027210435513">"Quota di archiviaz. per app"</string>
+    <string name="apps_storage" msgid="4353308027210435513">"Spazio archiviazione per app"</string>
     <string name="usage_access" msgid="5479504953931038165">"Accesso ai dati di utilizzo"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"Consenti accesso ai dati di utilizzo"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Preferenze di utilizzo delle app"</string>
@@ -3600,7 +3594,7 @@
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Visualizza rapidamente le notifiche"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Scorri verso il basso sul sensore di impronte digitali"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"On"</string>
-    <string name="gesture_setting_off" msgid="5230169535435881894">"Disattivato"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Off"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Il bootloader è già sbloccato"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Devi prima connetterti a Internet"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connettiti a Internet o contatta il tuo operatore"</string>
@@ -3609,8 +3603,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"App istantanee"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Apri i link nelle app, anche se non sono installate"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"App istantanee"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Preferenze per le app istantanee"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"App installate"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Il tuo spazio di archiviazione è ora gestito dalla Gestione memoria"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Account di <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3657,7 +3650,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Opzione VPN sempre attiva attivata nel tuo profilo personale"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Opzione VPN sempre attiva attivata nel tuo profilo di lavoro"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Proxy HTTP globale impostato"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Credenziali attendibili"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Credenziali attendibili"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Credenziali attendibili nel profilo personale"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Credenziali attendibili nel profilo di lavoro"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Minimo <xliff:g id="COUNT_1">%d</xliff:g> certificati CA</item>
       <item quantity="one">Minimo <xliff:g id="COUNT_0">%d</xliff:g> certificato CA</item>
@@ -3706,7 +3701,7 @@
     <string name="app_info_storage_title" msgid="5554719444625611987">"Spazio occupato"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(disinstallato per l\'utente <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(disattivato per l\'utente <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="autofill_app" msgid="7338387238377914374">"Servizio di compilazione automatica"</string>
+    <string name="autofill_app" msgid="7338387238377914374">"Compilazione automatica"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automatico, compilazione, compilazione automatica"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Verifica che questa app sia attendibile&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=La Compilazione Automatica di Google&gt;%1$s&lt;/xliff:g&gt; usa ciò che è presente nella schermata per stabilire quali contenuti possono essere compilati automaticamente."</string>
     <string name="device_theme" msgid="4571803018917608588">"Tema del dispositivo"</string>

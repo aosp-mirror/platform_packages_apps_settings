@@ -306,7 +306,7 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"തീയതിയും സമയവും"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"തീയതിയും സമയവും സജ്ജീകരിക്കുക"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"തീയതി, സമയം, സമയ മേഖല, ഫോർമാറ്റുകൾ എന്നിവ സജ്ജീകരിക്കുക"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"തീയതിയും സമയവും സ്വയമേ നൽകൂ"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"സ്വമേധയാ തീയതിയും സമയവും നൽകൂ"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"നെറ്റ്‌വർക്ക് നൽകുന്ന സമയം ഉപയോഗിക്കുക"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"നെറ്റ്‌വർക്ക് നൽകുന്ന സമയം ഉപയോഗിക്കുക"</string>
     <string name="zone_auto" msgid="334783869352026648">"സ്വയമേയുള്ള സമയക്രമീകരണം"</string>
@@ -372,12 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"തുടരൂ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"ഒഴിവാക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"അടുത്തത്"</string>
-    <!-- no translation found for setup_fingerprint_enroll_skip_title (362050541117362034) -->
-    <skip />
-    <!-- no translation found for setup_fingerprint_enroll_skip_after_adding_lock_text (958990414356204763) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_title (4988210105913705679) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"ഫിംഗർപ്രിന്‍റ് ഒഴിവാക്കണോ?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"ഫിംഗർപ്രിന്‍റ് സജ്ജമാക്കാൻ ഒന്നോ രണ്ടോ മിനിറ്റോ മാത്രമേ എടുക്കൂ. ഈ ഘട്ടം ഒഴിവാക്കുകയാണെങ്കിൽ, പിന്നീട് ക്രമീകരണത്തിൽ നിങ്ങൾക്ക് ഫിംഗർപ്രിന്‍റ് ചേർക്കാവുന്നതാണ്."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"സ്‌ക്രീൻ ലോക്ക് ഒഴിവാക്കണോ?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ടാബ്‌ലെറ്റ് നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ പുനഃക്രമീകരിക്കുകയോ ചെയ്താൽ, ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ഉപകരണം നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ പുനഃക്രമീകരിക്കുകയോ ചെയ്താൽ, ഉപകരണം ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ഫോൺ നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ പുനഃക്രമീകരിക്കുകയോ ചെയ്താൽ, ഫോൺ ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
@@ -463,8 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"ടാബ്‌ലെറ്റ് പരിരക്ഷിക്കുക"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"ഉപകരണം പരിരക്ഷിക്കുക"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"ഫോൺ പരിരക്ഷിക്കുക"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"അധിക സുരക്ഷയ്ക്ക്, ഒരു ബാക്കപ്പ് സ്ക്രീൻ ലോക്ക് സജ്ജമാക്കുക."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ഉപകരണം ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ സജീവമാക്കുന്നതിലൂടെ നിങ്ങളുടെ അനുമതിയില്ലാതെ മറ്റുള്ളവർ ഈ ഫോൺ ഉപയോഗിക്കുന്നത് തടയുക. നിങ്ങൾ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്ന സ്ക്രീൻ ലോക്ക് തിരഞ്ഞെടുക്കുക."</string>
@@ -844,8 +840,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"കണക്റ്റുചെയ്യുക"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"നെറ്റ്‌വർക്കിൽ കണക്റ്റുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"മറക്കുക"</string>
-    <!-- no translation found for wifi_modify (6100248070440710782) -->
-    <skip />
+    <string name="wifi_modify" msgid="6100248070440710782">"പരിഷ്‌ക്കരിക്കുക"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"നെറ്റ്‌വർക്ക് നിരസിക്കുന്നതിൽ പരാജയപ്പെട്ടു"</string>
     <string name="wifi_save" msgid="3331121567988522826">"സംരക്ഷിക്കുക"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"നെറ്റ്‌വർക്ക് സംരക്ഷിക്കുന്നതിൽ പരാജയപ്പെട്ടു"</string>
@@ -1472,21 +1467,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"സുരക്ഷാ വിവരം"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"നിങ്ങൾക്ക് ഒരു ഡാറ്റ കണ‌ക്ഷൻ ഇല്ല. ഈ വിവരം ഇപ്പോൾ കാണുന്നതിന്, ഇന്റ‌ർനെറ്റിൽ കണ‌ക്റ്റുചെ‌യ്‌തിരിക്കുന്ന ഏതൊരു കമ്പ്യൂട്ടറിൽ നിന്നും %s എന്നതിലേക്ക് പോകുക."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"ലോഡുചെയ്യുന്നു..."</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"ഒരു സ്‌ക്രീൻ ലോക്ക് സജ്ജമാക്കുക"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"സുരക്ഷയ്‌ക്കായി, ഒരു പാസ്‌വേഡ് സജ്ജമാക്കുക"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"വിരലടയാളം ഉപയോഗിക്കാൻ, പാസ്‌വേഡ് സജ്ജമാക്കുക"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"പാറ്റേൺ തിരഞ്ഞെടുക്കൂ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"വിരലടയാളം ഉപയോഗിക്കാൻ, പാറ്റേൺ സജ്ജമാക്കുക"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"സുരക്ഷയ്‌ക്കായി, ഒരു പിൻ സജ്ജമാക്കുക"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"വിരലടയാളം ഉപയോഗിക്കാൻ, പിൻ സജ്ജമാക്കുക"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"നിങ്ങളുടെ പാസ്‌വേഡ് വീണ്ടും നൽകുക"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"നിങ്ങളുടെ പാറ്റേൺ സ്ഥിരീകരിക്കുക"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"നിങ്ങളുടെ പിൻ വീണ്ടും നൽകുക"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"പാസ്‌വേഡുകൾ പൊരുത്തപ്പെടുന്നില്ല"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"പിൻ നമ്പറുകൾ പൊരുത്തപ്പെടുന്നില്ല"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"അൺലോക്ക് തിരഞ്ഞെടുക്കൽ"</string>
@@ -1505,18 +1495,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"അധിക സുരക്ഷയ്ക്ക്, നിങ്ങളുടെ ഔദ്യോഗിക പാറ്റേൺ ഉപയോഗിക്കുക"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"അധിക സുരക്ഷയ്ക്ക്, നിങ്ങളുടെ ഔദ്യോഗിക പിൻ നൽകുക"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"അധിക സുരക്ഷയ്ക്ക്, നിങ്ങളുടെ ഔദ്യോഗിക പാസ്‌വേഡ് നൽകുക"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_details_frp (6757336656791723193) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_details_frp (826520613445990470) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_details_frp (8944081074615739040) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_header_frp (2898036091609128286) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_header_frp (4141601774778898803) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_header_frp (3762615419295360480) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"ഫാക്‌ടറി ക്രമീകരണത്തിലേക്ക് നിങ്ങളുടെ ഫോൺ റീസെറ്റ് ചെയ്‌തു. ഫോൺ ഉപയോഗിക്കാനായി മുമ്പത്തെ പാറ്റേൺ നൽകുക."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"ഫാക്‌ടറി ക്രമീകരണത്തിലേക്ക് നിങ്ങളുടെ ഫോൺ റീസെറ്റ് ചെയ്‌തു. ഫോൺ ഉപയോഗിക്കാനായി മുമ്പത്തെ പിൻ നൽകുക."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"ഫാക്‌ടറി ക്രമീകരണത്തിലേക്ക് നിങ്ങളുടെ ഫോൺ റീസെറ്റ് ചെയ്‌തു. ഫോൺ ഉപയോഗിക്കാനായി മുമ്പത്തെ പാസ്‌വേഡ് നൽകുക."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"പാറ്റേൺ പരിശോധിക്കുക"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"പിൻ പരിശോധിക്കുക"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"പാസ്‌വേഡ് പരിശോധിക്കുക"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"പിൻ തെറ്റാണ്"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"പാസ്‌വേഡ് തെറ്റാണ്"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"പാറ്റേൺ തെറ്റാണ്"</string>
@@ -3619,8 +3603,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"ഇൻസ്‌റ്റ‌ന്റ് ആപ്പ്"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"ആപ്പുകൾ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ലെങ്കിൽ പോലും, അവയിൽ ലിങ്കുകൾ തുറക്കുക"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"ഇൻസ്‌റ്റ‌ന്റ് ആപ്പ്"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"ഇൻസ്‌റ്റന്‍റ് ആപ്പ് മുൻഗണനകൾ"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"ഇൻസ്‌റ്റാളുചെയ്‌ത അപ്ലിക്കേഷനുകൾ"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"നിങ്ങളുടെ സ്റ്റോറേജ് ഇപ്പോൾ മാനേജുചെയ്യുന്നത് സ്റ്റോറേജ് ​​മാനേജരാണ്"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> എന്ന ഉപയോക്താവിന്റെ അക്കൗണ്ടുകൾ"</string>
@@ -3667,7 +3650,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"എപ്പോഴും ഓണായിരിക്കുന്ന VPN നിങ്ങളുടെ സ്വകാര്യ പ്രൊഫൈലിൽ ഓണായിരിക്കുന്നു"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"എല്ലായ്‌പ്പോഴും ഓണായിരിക്കുന്ന VPN നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലിൽ ഓണായിരിക്കുന്നു"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"ഗ്ലോബൽ HTTP പ്രോക്സി സെറ്റ്"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"പരിചിത ക്രെഡൻഷ്യൽ"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"വിശ്വാസയോഗ്യമായ ക്രെഡൻഷ്യലുകൾ"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"നിങ്ങളുടെ വ്യക്തിഗത പ്രൊഫൈലിലെ വിശ്വാസയോഗ്യമായ ക്രെഡൻഷ്യലുകൾ"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലിലെ വിശ്വാസയോഗ്യമായ ക്രെഡൻഷ്യലുകൾ"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">ചുരുങ്ങിയത് <xliff:g id="COUNT_1">%d</xliff:g> CA സർട്ടിഫിക്കറ്റുകൾ</item>
       <item quantity="one">ചുരുങ്ങിയത് <xliff:g id="COUNT_0">%d</xliff:g> CA സർട്ടിഫിക്കറ്റ്</item>
@@ -3730,11 +3715,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"കാരിയര്‍ പ്രൊവിഷനിംഗ് വിവരം"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"കാരിയർ പ്രൊവിഷനിംഗ് തുടങ്ങുക"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"പുതിയതും ആവേശമുണർത്തുന്നതുമായ കാര്യങ്ങൾ എന്തൊക്കെയാണ്?"</string>
-    <!-- no translation found for new_device_suggestion_summary (206396571522515855) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (393751455688210956) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (2939870049868336652) -->
-    <skip />
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"നിങ്ങളുടെ പുതിയ ഫോണിനെ അറിയുക‌"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"നിങ്ങളുടെ ‌പുതിയ ‌ടാബ്‌ലെറ്റിനെ അറിയുക‌"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"നിങ്ങളുടെ പുതിയ ഉപകരണത്തെ അറിയുക"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ഈ ഫീച്ചർ ഈ ഉപകരണത്തിൽ ലഭ്യമല്ല"</string>
 </resources>

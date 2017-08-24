@@ -251,7 +251,7 @@
     <string name="skip_label" msgid="47510779345218297">"Omiteți"</string>
     <string name="next_label" msgid="4693520878012668114">"Înainte"</string>
     <string name="language_picker_title" msgid="3596315202551687690">"Limbi"</string>
-    <string name="pref_title_lang_selection" msgid="2014920136978776034">"Preferințele pentru limbă"</string>
+    <string name="pref_title_lang_selection" msgid="2014920136978776034">"Preferințe pentru limbă"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Eliminați"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Adăugați o limbă"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
@@ -463,8 +463,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protejați tableta"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protejați dispozitivul"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protejați telefonul"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Pentru mai multă siguranță, configurați o blocare a ecranului de rezervă."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activați funcțiile de protecție a dispozitivului pentru a împiedica alte persoane să folosească această tabletă fără permisiunea dvs. Alegeți blocarea ecranului pe care doriți să o folosiți."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activați funcțiile de protecție a dispozitivului pentru a împiedica alte persoane să folosească acest dispozitiv fără permisiunea dvs. Alegeți blocarea ecranului pe care doriți să o folosiți."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activați funcțiile de protecție a dispozitivului pentru a împiedica alte persoane să folosească acest telefon fără permisiunea dvs. Alegeți blocarea ecranului pe care doriți să o folosiți."</string>
@@ -1362,7 +1361,7 @@
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a telefonului dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate;"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"În prezent sunteți conectat(ă) la următoarele conturi:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Pe acest dispozitiv sunt prezenți și alți utilizatori.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzică"</li>\n<li>"Fotografii"</li>\n<li>"Alte date ale utilizatorului"</li></string>
+    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzică;"</li>\n<li>"Fotografii;"</li>\n<li>"Alte date ale utilizatorului."</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Operatori pe eSIM"</li></string>
     <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Planul dvs. de servicii mobile nu va fi anulat astfel."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Pentru a șterge muzică, imagini și alte date ale utilizatorului, "<b>"stocarea USB"</b>" trebuie să fie ștearsă."</string>
@@ -1471,7 +1470,7 @@
     <string name="terms_title" msgid="7697580845616764642">"Termeni și condiții"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Licență de sistem pentru WebView"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Imagini de fundal"</string>
-    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Furnizorii de imagini din satelit:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Furnizori de imagini din satelit:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"A apărut o problemă la încărcarea manualului."</string>
     <string name="settings_license_activity_title" msgid="8525014571806471216">"Licențe terță parte"</string>
@@ -1481,21 +1480,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informații privind siguranța"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Nu aveți o conexiune de date. Pentru a vedea aceste informații acum, accesați %s de pe orice computer conectat la internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Se încarcă…"</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Setați o blocare a ecranului"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Din motive de securitate, setați o parolă"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Pentru a utiliza amprenta, setați parola"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Alegeți modelul"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Pentru a utiliza amprenta, setați modelul"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Din motive de securitate, setați un cod PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Pentru a utiliza amprenta, setați codul PIN"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Reintroduceți parola"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirmați modelul"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Reintroduceți codul PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Parolele nu corespund"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Codurile PIN nu corespund"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Selectați metoda de deblocare"</string>
@@ -3657,8 +3651,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Aplicații instantanee"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Deschideți linkuri în aplicații, chiar dacă acestea nu sunt instalate"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Aplicații instantanee"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Preferințe pentru aplicații instantanee"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Aplicații instalate"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Spațiul de stocare este acum gestionat de managerul spațiului de stocare"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Conturi pentru <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3707,7 +3700,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Rețeaua VPN activată permanent a fost activată în profilul dvs. personal"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Rețeaua VPN activată permanent a fost activată în profilul dvs. de serviciu"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Proxy global HTTP setat"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Acreditări de încredere"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Acreditări de încredere"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Acreditări de încredere în profilul personal"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Acreditări de încredere în profilul de serviciu"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="few">Cel puțin <xliff:g id="COUNT_1">%d</xliff:g> certificate CA</item>
       <item quantity="other">Cel puțin <xliff:g id="COUNT_1">%d</xliff:g> de certificate CA</item>

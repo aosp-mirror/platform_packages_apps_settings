@@ -372,12 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"跳过"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"下一屏幕"</string>
-    <!-- no translation found for setup_fingerprint_enroll_skip_title (362050541117362034) -->
-    <skip />
-    <!-- no translation found for setup_fingerprint_enroll_skip_after_adding_lock_text (958990414356204763) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_title (4988210105913705679) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"要跳过指纹设置？"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"指纹设置只需片刻时间。如果您跳过此设置，之后可以在设置中添加您的指纹。"</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"要跳过屏幕锁定吗？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗或被重置，您将无法防止他人使用此平板电脑。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"系统将不会启用设备保护功能。如果您的设备丢失、被盗或被重置，您将无法防止他人使用此设备。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"系统将不会启用设备保护功能。如果您的手机丢失、被盗或被重置，您将无法防止他人使用此手机。"</string>
@@ -463,8 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"保护您的平板电脑"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"保护您的设备"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"为手机启用保护功能"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"为提升安全性，请设置备用屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"启用设备保护功能可防止他人在未经您允许的情况下使用此平板电脑。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"启用设备保护功能可防止他人在未经您允许的情况下使用此设备。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
@@ -844,8 +840,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"连接"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"无法连接网络"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"取消保存"</string>
-    <!-- no translation found for wifi_modify (6100248070440710782) -->
-    <skip />
+    <string name="wifi_modify" msgid="6100248070440710782">"修改"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"无法取消保存网络"</string>
     <string name="wifi_save" msgid="3331121567988522826">"保存"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"无法保存网络"</string>
@@ -1160,7 +1155,7 @@
     <string name="status_signal_strength" msgid="3732655254188304547">"信号强度"</string>
     <string name="status_roaming" msgid="2638800467430913403">"漫游"</string>
     <string name="status_operator" msgid="2274875196954742087">"网络"</string>
-    <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLANMAC 地址"</string>
+    <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLAN MAC 地址"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"蓝牙地址"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"序列号"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"无法获取"</string>
@@ -1348,9 +1343,9 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"要重置网络设置吗？"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"此用户无权重置网络设置"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"网络设置已重置"</string>
-    <string name="master_clear_title" msgid="3531267871084279512">"清空所有数据（恢复出厂设置）"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"清除所有数据（恢复出厂设置）"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"此操作会清除您平板电脑"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"此操作会清除您手机"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"此操作会清除您手机"<b>"内部存储空间"</b>"中的所有数据，包括：\n\n"<li>"您的 Google 帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"已下载的应用"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"目前，您已登录以下帐号：\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"此设备上目前还有其他用户。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他的用户数据"</li></string>
@@ -1472,21 +1467,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全信息"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"您没有数据连接。要立即查看此信息，请使用联网的计算机访问%s。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"正在加载..."</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"设置屏幕锁定"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"为了安全起见，请设置密码"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"要使用指纹，请设置密码"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"选择您的图案"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"要使用指纹，请设置解锁图案"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"为了安全起见，请设置 PIN 码"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"要使用指纹，请设置 PIN 码"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"重新输入密码"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"确认您的图案"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"重新输入 PIN 码"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"密码不匹配"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN码不匹配！"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"选择解锁方式"</string>
@@ -1505,18 +1495,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"为了提升安全性，请绘制您的工作资料解锁图案"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"为了提升安全性，请输入您的工作资料 PIN 码"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"为了提升安全性，请输入您的工作资料密码"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_details_frp (6757336656791723193) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_details_frp (826520613445990470) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_details_frp (8944081074615739040) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_header_frp (2898036091609128286) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_header_frp (4141601774778898803) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_header_frp (3762615419295360480) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的解锁图案。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的 PIN 码。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"您的手机已恢复出厂设置。要使用此手机，请输入您以前的密码。"</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"验证图案"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"验证 PIN 码"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"验证密码"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 码错误"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密码错误"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"图案错误"</string>
@@ -1572,7 +1556,7 @@
     <string name="advanced_settings" msgid="1777249286757067969">"高级设置"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"启用更多设置选项"</string>
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
-    <string name="storage_label" msgid="8700867073480107253">"存储空间"</string>
+    <string name="storage_label" msgid="8700867073480107253">"存储"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"默认打开"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"默认操作"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
@@ -2435,8 +2419,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"只能连接到移动网络时，此功能可能会导致需要使用后台流量的应用无法正常运行。\n\n您可以在相关应用的设置中为其设定更合适的数据流量控制选项。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"您必须先设置移动数据流量上限，才能限制后台数据流量。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"要打开自动同步数据功能吗？"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐号还可以将您在平板电脑上进行的所有更改自动同步到网络上。Google帐号就支持此类双向同步。"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google帐号就支持此类双向同步。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐号还可以将您在平板电脑上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"要关闭自动同步数据功能吗？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"这样可以节省数据流量和电池电量，但您需要手动同步每个帐号才能获得最新信息，并且在有更新时不会收到通知。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"流量重置日期"</string>
@@ -3615,12 +3599,11 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"请先连接到互联网"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"请连接到互联网或与您的运营商联系"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"在与运营商绑定的设备上无法使用"</string>
-    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已释放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次运行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"总共释放空间：<xliff:g id="SIZE">%1$s</xliff:g>\n\n上次执行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="4051513950976670853">"免安装应用"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"在应用中打开链接（即使未安装相关应用也无妨）"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"免安装应用"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"免安装应用偏好设置"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安装的应用"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"您的存储空间目前是由存储空间管理器管理"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>的帐号"</string>
@@ -3667,7 +3650,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"已在您的个人资料中开启“始终开启的 VPN”"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"已在您的工作资料中开启“始终开启的 VPN”"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"已设置全局 HTTP 代理"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"可信凭据"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"可信凭据"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"您个人资料中的可信凭据"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"您工作资料中的可信凭据"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">至少 <xliff:g id="COUNT_1">%d</xliff:g> 个 CA 证书</item>
       <item quantity="one">至少 <xliff:g id="COUNT_0">%d</xliff:g> 个 CA 证书</item>
@@ -3730,11 +3715,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"运营商配置信息"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"触发运营商配置"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"新增了哪些精彩功能？"</string>
-    <!-- no translation found for new_device_suggestion_summary (206396571522515855) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (393751455688210956) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (2939870049868336652) -->
-    <skip />
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"新手机功能导览"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"新平板电脑功能导览"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"新设备功能导览"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"该设备不支持此功能"</string>
 </resources>

@@ -460,8 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Skydda surfplattan"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Skydda enheten"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Skydda mobilen"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Konfigurera ett skärmlås för ytterligare skydd."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindra andra från att använda surfplattan utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Hindra andra från att använda enheten utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindra andra från att använda mobilen utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
@@ -889,24 +888,24 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Vill du glömma den här gruppen?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi-surfzon"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Varken internet eller innehåll delas med andra enheter"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Surfplattans internetanslutning delas via en trådlös surfzon"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Mobilens internetanslutning delas via en trådlös surfzon"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Surfplattans internetanslutning delas via en surfzon"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Mobilens internetanslutning delas via en surfzon"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Appen delar innehåll. Om du vill dela internetanslutningen inaktiverar du den trådlösa surfzonen och aktiverar den igen"</string>
-    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Namn på trådlös surfzon"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Namn på surfzon"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Aktiverar <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Andra enheter kan ansluta till <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Lösenord för trådlös surfzon"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Lösenord för surfzon"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Använd trådlösa surfzoner för att skapa ett Wi-Fi-nätverk för andra enheter. Med hjälp av surfzonerna ansluts enheterna till internet via din mobils dataanslutning. Ytterligare dataavgifter kan tillkomma."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Trådlösa surfzoner kan också skapas i appar för att dela innehåll med enheter i närheten."</string>
-    <string name="wifi_tether_starting" msgid="1322237938998639724">"Aktiverar trådlös surfzon ..."</string>
-    <string name="wifi_tether_stopping" msgid="4835852171686388107">"Trådlös surfzon inaktiveras ..."</string>
+    <string name="wifi_tether_starting" msgid="1322237938998639724">"Aktiverar surfzon ..."</string>
+    <string name="wifi_tether_stopping" msgid="4835852171686388107">"Surfzon inaktiveras ..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> är aktiv"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Fel på mobil Wi-Fi-surfzon"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Konfigurera trådlös surfzon via Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Konfigurera surfzon via Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Installation för Wi-Fi-surfzon"</string>
-    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Trådlös AndroidAP WPA2 PSK-surfzon"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> trådlös surfzon"</string>
+    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK-surfzon"</string>
+    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> surfzon"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi-samtal"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Aktivera samtal via Wi-Fi"</string>
@@ -1376,9 +1375,9 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Mobil surfpunkt"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Delning via Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Internetdelning"</string>
-    <string name="tether_settings_title_all" msgid="3058586928118801157">"Trådlös surfzon och internetdelning"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Trådlös surfzon har aktiverats, internetdelning"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Trådlös surfzon har aktiverats"</string>
+    <string name="tether_settings_title_all" msgid="3058586928118801157">"Surfzon och internetdelning"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Surfzon har aktiverats, internetdelning"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Surfzon har aktiverats"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"Internetdelning"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Det går inte att använda internetdelning eller trådlösa surfzoner när Databesparing är aktiverat."</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
@@ -1468,21 +1467,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Säkerhetsinformation"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Du har inte någon dataanslutning. Besök %s på en dator som är ansluten till Internet om du vill visa informationen nu."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Läser in …"</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Ange ett skärmlås"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Av säkerhetsskäl måste du ange ett lösenord"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Lösenord krävs för fingeravtryck"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Välj grafiskt lösenord"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Grafiskt lösenord krävs för fingeravtryck"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Av säkerhetsskäl måste du ange en pinkod"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Pinkod krävs för fingeravtryck"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Ange ditt lösenord igen"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Bekräfta grafiskt lösenord"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Ange din pinkod igen"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Lösenorden matchar inte"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN-koderna matchar inte"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Upplåsningsalternativ"</string>
@@ -2751,7 +2745,7 @@
     <string name="network_dashboard_title" msgid="4771589228992391573">"Nätverk och internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobilnätverk"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"dataanvändning"</string>
-    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"trådlös surfzon"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"surfzon"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Anslutna enheter"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, casta, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, casta"</string>
@@ -3609,8 +3603,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Snabbappar"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Öppna länkar i appar, även om de inte har installerats"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Snabbappar"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Inställningar för Instant Apps"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installerade appar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Ditt lagringsutrymme hanteras nu av lagringshanteraren"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Konton som tillhör <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3657,7 +3650,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Always-on för VPN har aktiverats i din personliga profil"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Always-on för VPN har aktiverats i jobbprofilen"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Global HTTP-proxy har angetts"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Tillförlitlig autentisering"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Tillförlitlig autentisering"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Tillförlitlig autentisering i din personliga profil"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Tillförlitlig autentisering i din jobbprofil"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Minst <xliff:g id="COUNT_1">%d</xliff:g> CA-certifikat</item>
       <item quantity="one">Minst <xliff:g id="COUNT_0">%d</xliff:g> CA-certifikat</item>
