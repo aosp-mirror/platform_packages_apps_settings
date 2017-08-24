@@ -16,7 +16,7 @@ package com.android.settings.anomaly.tester;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.android.settings.anomaly.tester.R;
+import android.view.View;
 
 public class AnomalyActivity extends Activity {
 
@@ -24,5 +24,9 @@ public class AnomalyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void startBluetoothAnomaly(View view) {
+        // Add in future cl
     }
 }
