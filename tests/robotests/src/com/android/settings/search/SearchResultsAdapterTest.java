@@ -83,6 +83,8 @@ public class SearchResultsAdapterTest {
         mLoaderClassName = DatabaseResultLoader.class.getName();
         when(mFragment.getContext()).thenReturn(mMockContext);
         when(mMockContext.getApplicationContext()).thenReturn(mContext);
+        when(mSearchFeatureProvider.smartSearchRankingTimeoutMs(any(Context.class)))
+                .thenReturn(300L);
         mAdapter = new SearchResultsAdapter(mFragment, mSearchFeatureProvider);
     }
 
