@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.annotation.Nullable;
 import android.app.Dialog;
 import android.content.Context;
 import android.icu.text.Collator;
@@ -40,6 +41,7 @@ import java.util.List;
 
 /**
  * UI to manage saved networks/access points.
+ * TODO(b/64806699): convert to {@link DashboardFragment} with {@link PreferenceController}s
  */
 public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         implements Indexable, WifiDialog.WifiDialogListener {
@@ -75,6 +77,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
     private AccessPoint mSelectedAccessPoint;
+    private Preference mAddNetworkPreference;
 
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
 
@@ -134,23 +137,38 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                 preference.setIcon(null);
                 preferenceScreen.addPreference(preference);
             }
+            preference.setOrder(i);
         }
 
         removeCachedPrefs(preferenceScreen);
+
+        if (mAddNetworkPreference == null) {
+            mAddNetworkPreference = new Preference(getPrefContext());
+            mAddNetworkPreference.setIcon(R.drawable.ic_menu_add_inset);
+            mAddNetworkPreference.setTitle(R.string.wifi_add_network);
+        }
+        mAddNetworkPreference.setOrder(accessPointsSize);
+        preferenceScreen.addPreference(mAddNetworkPreference);
 
         if(getPreferenceScreen().getPreferenceCount() < 1) {
             Log.w(TAG, "Saved networks activity loaded, but there are no saved networks!");
         }
     }
 
-    private void showDialog(LongPressAccessPointPreference accessPoint, boolean edit) {
+    private void showWifiDialog(@Nullable LongPressAccessPointPreference accessPoint) {
         if (mDialog != null) {
             removeDialog(WifiSettings.WIFI_DIALOG_ID);
             mDialog = null;
         }
 
-        // Save the access point and edit mode
-        mDlgAccessPoint = accessPoint.getAccessPoint();
+        if (accessPoint != null) {
+            // Save the access point and edit mode
+            mDlgAccessPoint = accessPoint.getAccessPoint();
+        } else {
+            // No access point is selected. Clear saved state.
+            mDlgAccessPoint = null;
+            mAccessPointSavedState = null;
+        }
 
         showDialog(WifiSettings.WIFI_DIALOG_ID);
     }
@@ -159,15 +177,23 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case WifiSettings.WIFI_DIALOG_ID:
-                if (mDlgAccessPoint == null) { // For re-launch from saved state
-                    mDlgAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
-                    // Reset the saved access point data
-                    mAccessPointSavedState = null;
+                if (mDlgAccessPoint == null && mAccessPointSavedState == null) {
+                    // Add new network
+                    mDialog = WifiDialog.createFullscreen(getActivity(), this, null,
+                            WifiConfigUiBase.MODE_CONNECT);
+                } else {
+                    // Modify network
+                    if (mDlgAccessPoint == null) {
+                        // Restore AP from save state
+                        mDlgAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
+                        // Reset the saved access point data
+                        mAccessPointSavedState = null;
+                    }
+                    mDialog = WifiDialog.createModal(getActivity(), this, mDlgAccessPoint,
+                            WifiConfigUiBase.MODE_VIEW);
                 }
                 mSelectedAccessPoint = mDlgAccessPoint;
 
-                mDialog = WifiDialog.createModal(getActivity(), this, mDlgAccessPoint,
-                        WifiConfigUiBase.MODE_VIEW);
                 return mDialog;
         }
         return super.onCreateDialog(dialogId);
@@ -225,9 +251,12 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof LongPressAccessPointPreference) {
-            showDialog((LongPressAccessPointPreference) preference, false);
+            showWifiDialog((LongPressAccessPointPreference) preference);
             return true;
-        } else{
+        } else if (preference == mAddNetworkPreference) {
+            showWifiDialog(null);
+            return true;
+        } else {
             return super.onPreferenceTreeClick(preference);
         }
     }

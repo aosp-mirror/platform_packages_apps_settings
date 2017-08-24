@@ -123,11 +123,14 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void testGetBatteryInfo_pluggedIn_dischargingFalse() {
+    public void testGetBatteryInfo_pluggedInUsingShortString_usesCorrectData() {
+        doReturn(TEST_CHARGE_TIME_REMAINING).when(mBatteryStats).computeChargeTimeRemaining(
+                anyLong());
         BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
 
         assertThat(info.discharging).isEqualTo(false);
+        assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1m until fully charged");
     }
 
     @Test
