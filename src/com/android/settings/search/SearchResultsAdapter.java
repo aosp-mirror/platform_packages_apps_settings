@@ -64,9 +64,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
     @VisibleForTesting
     static final int MSG_RANKING_TIMED_OUT = 1;
 
-    // TODO(b/38197948): Tune this timeout based on latency of static and async rankings. Also, we
-    // should add a gservices flag to control this.
-    private static final long RANKING_TIMEOUT_MS = 300;
     private final SearchFragment mFragment;
     private final Context mContext;
     private final List<SearchResult> mSearchResults;
@@ -245,8 +242,9 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
             mAsyncRankingState = PENDING_RESULTS;
             mSearchFeatureProvider.cancelPendingSearchQuery(mContext);
             final Handler handler = getHandler();
+            final long timeoutMs = mSearchFeatureProvider.smartSearchRankingTimeoutMs(mContext);
             handler.sendMessageDelayed(
-                    handler.obtainMessage(MSG_RANKING_TIMED_OUT), RANKING_TIMEOUT_MS);
+                    handler.obtainMessage(MSG_RANKING_TIMED_OUT), timeoutMs);
             mSearchFeatureProvider.querySearchResults(mContext, query, this);
         } else {
             mAsyncRankingState = DISABLED;
