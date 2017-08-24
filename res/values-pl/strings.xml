@@ -316,6 +316,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Automatyczna strefa czasowa"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Użyj strefy czasowej podanej przez sieć"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Użyj strefy czasowej podanej przez sieć"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Automatyczny 24-godzinny"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Użyj ustawień domyślnych dla regionu"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"Format 24-godzinny"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Format 24-godzinny"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Godzina"</string>
@@ -378,6 +380,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Dalej"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Pomiń"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Dalej"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Pominąć odcisk palca?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Zapisanie odcisku palca zajmuje tylko chwilę. Zawsze możesz go dodać później w ustawieniach."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Pominąć blokadę ekranu?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Zabezpieczenia urządzenia nie zostaną włączone. Nie będzie można uniemożliwić innym osobom korzystania z tego tabletu, gdy zostanie zgubiony, skradziony lub zresetowany."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Zabezpieczenia urządzenia nie zostaną włączone. Nie będzie można uniemożliwić innym osobom korzystania z urządzenia, gdy zostanie zgubione, skradzione lub zresetowane."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Zabezpieczenia urządzenia nie zostaną włączone. Nie będzie można uniemożliwić innym osobom korzystania z tego telefonu, gdy zostanie zgubiony, skradziony lub zresetowany."</string>
@@ -463,7 +468,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Chroń swój tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Chroń swoje urządzenie"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Zabezpiecz telefon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Ze względów bezpieczeństwa skonfiguruj zapasową blokadę ekranu."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Ze względów bezpieczeństwa skonfiguruj zapasową blokadę ekranu."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Włącz funkcje ochrony urządzenia, by zablokować innym możliwość używania tego tabletu bez Twojej zgody. Wybierz rodzaj blokady ekranu."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Włącz funkcje ochrony urządzenia, by zablokować innym możliwość używania tego urządzenia bez Twojej zgody. Wybierz rodzaj blokady ekranu."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Włącz funkcje ochrony urządzenia, by zablokować innym możliwość używania tego telefonu bez Twojej zgody. Wybierz rodzaj blokady ekranu."</string>
@@ -860,6 +865,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Połącz"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Nie można nawiązać połączenia z siecią"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Zapomnij"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Zmień"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Nie udało się zapomnieć sieci"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Zapisz"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nie udało się zapisać sieci"</string>
@@ -926,7 +932,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Skonfiguruj hotspot Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Konfiguracja hotspotu Wi‑Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Hotspot AndroidAP WPA2 PSK"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"Hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Punkt dostępu Android"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Połączenia przez Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Włącz funkcję połączeń przez Wi-Fi"</string>
@@ -1091,7 +1096,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Ustawienia"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatyczna"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Podnieś, by wybudzić"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Ekran dostosowany do otoczenia"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Ekran zgodny z otoczeniem"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Zawsze włączony/ Zwiększone zużycie baterii"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nowe powiadomienia"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Kiedy wyświetlać"</string>
@@ -1369,7 +1374,7 @@
     <string name="master_clear_title" msgid="3531267871084279512">"Wykasuj wszystkie dane (przywróć dane fabryczne)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Zostaną usunięte wszystkie dane z "<b>"wewnętrznej pamięci"</b>" tabletu, w tym:\n\n"<li>"Dane konta Google"</li>\n<li>"Dane i ustawienia systemu oraz aplikacji"</li>\n<li>"Pobrane aplikacje"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Zostaną usunięte wszystkie dane z "<b>"wewnętrznej pamięci"</b>" telefonu, w tym:\n\n"<li>"Dane konta Google"</li>\n<li>"Dane i ustawienia systemu oraz aplikacji"</li>\n<li>"Pobrane aplikacje"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Zalogowano się na konta:\n"</string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"W tej chwili używasz kont:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Z tego urządzenia korzystają inni użytkownicy.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzyka"</li>\n<li>"Zdjęcia"</li>\n<li>"Inne dane użytkownika"</li></string>
     <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Operatorzy na karcie eSIM"</li></string>
@@ -1490,15 +1495,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informacje o bezpieczeństwie"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Brak połączenia transmisji danych. Aby wyświetlić te informacje teraz, przejdź do strony %s na dowolnym komputerze połączonym z internetem."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Wczytuję..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Wybierz hasło"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Ustawianie blokady ekranu"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Ze względów bezpieczeństwa ustaw hasło"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Aby korzystać z odcisku palca, ustaw hasło"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Wybierz wzór"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Aby korzystać z odcisku palca, ustaw wzór"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Wybierz kod PIN"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Ze względów bezpieczeństwa ustaw kod PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Aby korzystać z odcisku palca, ustaw kod PIN"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Potwierdź hasło"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Podaj ponownie hasło"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Potwierdź wzór"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Potwierdź PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Podaj ponownie kod PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Hasła nie są takie same"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Kody PIN nie są takie same"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Wybór blokady"</string>
@@ -1517,6 +1523,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Ze względów bezpieczeństwa podaj wzór do profilu do pracy"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Ze względów bezpieczeństwa podaj kod PIN do profilu do pracy"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Ze względów bezpieczeństwa podaj hasło do profilu do pracy"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni wzór."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni kod PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wpisz poprzednie hasło."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Zweryfikuj wzór"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Zweryfikuj PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Zweryfikuj hasło"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Nieprawidłowy kod PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Nieprawidłowe hasło"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Nieprawidłowy wzór"</string>
@@ -1829,7 +1841,7 @@
     <string name="usage_time_label" msgid="295954901452833058">"Czas użycia"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Ułatwienia dostępu"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ustawienia ułatwień dostępu"</string>
-    <string name="accessibility_settings_summary" msgid="981260486011624939">"Czytniki ekranu, wyświetlacz, sterowanie interakcją"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"Czytniki, wyświetlacz, sterowanie interakcją"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Dla niedowidzących"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Możesz dostosować urządzenie do swoich potrzeb. Ułatwienia dostępu możesz zawsze zmienić w Ustawieniach."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Zmień rozmiar czcionki"</string>
@@ -2148,9 +2160,7 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Włącz automatycznie"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nigdy"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"przy <xliff:g id="PERCENT">%1$s</xliff:g> baterii"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_percentage (723291197508049369) -->
-    <skip />
+    <string name="battery_percentage" msgid="723291197508049369">"Poziom naładowania baterii w %%"</string>
     <string name="battery_percentage_description" msgid="8511658577507384014">"Pokazuj procentowy poziom naładowania baterii na pasku stanu"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Rozbudowane statystyki uruchomionych procesów"</string>
@@ -2254,7 +2264,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Podaj hasło do magazynu danych logowania."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Bieżące hasło:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Usunąć całą zawartość?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Hasło musi mieć co najmniej 8 znaków."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Nieprawidłowe hasło."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Nieprawidłowe hasło. Pozostała jedna próba przed wyczyszczeniem magazynu danych logowania."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Nieprawidłowe hasło. Pozostała liczba prób przed wyczyszczeniem magazynu danych logowania: <xliff:g id="NUMBER">%1$d</xliff:g>."</string>
@@ -2453,8 +2462,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Gdy będą dostępne tylko sieci komórkowe, funkcja ta może zakłócić działanie aplikacji, które korzystają z przesyłu danych w tle.\n\nSzczegółowe ustawienia transmisji danych są zazwyczaj dostępne bezpośrednio w poszczególnych aplikacjach."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Ograniczenie transmisji danych w tle jest możliwe tylko po ustawieniu limitu mobilnej transmisji danych."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Włączyć autosynchronizację?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, wszystkie zmiany, które wprowadzisz na telefonie.  W ten sposób działa właśnie konto Google."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, wszystkie zmiany, które wprowadzisz na telefonie.  W ten sposób działa właśnie konto Google."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, które wprowadzisz na telefonie. W ten sposób działa właśnie konto Google."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Wszystkie zmiany, które wprowadzisz na swoich kontach w internecie, będą automatycznie kopiowane na Twój telefon.\n\nNiektóre konta mogą też automatycznie kopiować do wersji internetowej wszystkie zmiany, które wprowadzisz na telefonie. W ten sposób działa właśnie konto Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Wyłączyć autosynchronizację?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Powoduje przesyłanie mniejszej ilości danych oraz zmniejsza użycie baterii, ale pobranie najnowszych informacji będzie wymagało ręcznej synchronizacji każdego konta. Poza tym nie będziesz otrzymywać powiadomień o aktualizacjach."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data resetowania cyklu transmisji danych"</string>
@@ -2940,8 +2949,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Brak dźwięku"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Sygnalizacja dźwiękiem"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Sygnalizacja dźwiękiem i wyświetlenie komunikatu"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Pokaż na ekranie"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Niska"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Średnia"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Wysoka"</string>
@@ -3692,7 +3700,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Aplikacje błyskawiczne"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Otwieraj linki nawet w niezainstalowanych aplikacjach"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Aplikacje błyskawiczne"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Konto do aplikacji błyskawicznych"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Ustawienia aplikacji błyskawicznych"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Zainstalowane aplikacje"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Pamięcią zarządza teraz menedżer miejsca"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Konta użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3743,7 +3751,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Wyłączono stały VPN w Twoim profilu osobistym"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Włączono stały VPN w Twoim profilu do pracy"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Ustawiono globalny serwer proxy HTTP"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Zaufane dane uwierzytelniające"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Zaufane dane logowania"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Zaufane dane logowania w Twoim profilu osobistym"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Zaufane dane logowania w Twoim profilu do pracy"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="few">Co najmniej <xliff:g id="COUNT_1">%d</xliff:g> certyfikaty urzędu certyfikacji</item>
       <item quantity="many">Co najmniej <xliff:g id="COUNT_1">%d</xliff:g> certyfikatów urzędu certyfikacji</item>
@@ -3816,6 +3826,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informacje o obsłudze administracyjnej operatora"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Uruchom obsługę administracyjną operatora"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Co nowego i fajnego?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Zobacz 5 najlepszych funkcji"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Poznaj swój nowy telefon"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Poznaj swój nowy tablet"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Poznaj swoje nowe urządzenie"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ta funkcja jest niedostępna na tym urządzeniu."</string>
 </resources>

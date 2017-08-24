@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Otomatik saat dilimi"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Ağ tarafından sağlanan saat dilimini kullan"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Ağ tarafından sağlanan saat dilimini kullan"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Otomatik 24 saat biçimi"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Yerel ayar varsayılanını kullan"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24 saat biçimi"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"24 saat biçimini kullan"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Saat"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Devam"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Atla"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"İleri"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Parmak izi atlansın mı?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Parmak izi kurulumu yalnızca birkaç dakika sürer. Bu adımı atlarsanız parmak izinizi daha sonra ayarlardan ekleyebilirsiniz."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Ekran kilidi atlansın mı?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Cihaz koruma özellikleri etkinleştirilmeyecek. Dolayısıyla tablet kaybolduğunda, çalındığında veya sıfırlandığında başkalarının bu tableti kullanmasını önleyemeyeceksiniz."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Cihaz koruma özellikleri etkinleştirilmeyecek. Dolayısıyla cihaz kaybolduğunda, çalındığında veya sıfırlandığında başkalarının bu cihazı kullanmasını önleyemeyeceksiniz."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Cihaz koruma özellikleri etkinleştirilmeyecek. Dolayısıyla telefon kaybolduğunda, çalındığında veya sıfırlandığında başkalarının bu telefonu kullanmasını önleyemeyeceksiniz."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Tabletinizi koruyun"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Cihazınızı koruyun"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Telefonunuzu koruyun"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Daha fazla güvenlik için yedek ekran kilidi ayarlayın."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Daha fazla güvenlik için yedek ekran kilidi ayarlayın."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Cihaz koruma özelliklerini etkinleştirerek, izniniz olmadan başkalarının bu tableti kullanmasını engelleyin. Kullanmak istediğiniz ekran kilidini seçin."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Cihaz koruma özelliklerini etkinleştirerek, izniniz olmadan başkalarının bu cihazı kullanmasını engelleyin. Kullanmak istediğiniz ekran kilidini seçin."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Cihaz koruma özelliklerini etkinleştirerek, izniniz olmadan başkalarının bu telefonu kullanmasını engelleyin. Kullanmak istediğiniz ekran kilidini seçin."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Bağlan"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Ağa bağlanılamadı"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Unut"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Değiştir"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Ağ unutulamadı"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Kaydet"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Ağ kaydedilemedi"</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Kablosuz hotspot kurulumu yap"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Kablosuz hotspot kurulumu"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK hotspot"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android Ortak Erişim Noktası"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Kablosuz çağrı"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Kablosuz Çağrı\'yı açın"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Güvenlik bilgileri"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Veri bağlantınız yok. Bu bilgileri şimdi görüntülemek için İnternet\'e bağlı herhangi bir bilgisayardan %s adresine gidin."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Yükleniyor…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Şifrenizi seçin"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Ekran kilidi ayarlayın"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Güvenlik için şifre ayarlayın"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Parmak izi için şifre ayarlayın"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Deseninizi seçin"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Parmak izi için desen ayarlayın"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PIN\'inizi seçin"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Güvenlik için PIN ayarlayın"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Parmak izi için PIN ayarlayın"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Şifrenizi onaylayın"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Şifrenizi yeniden girin"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Deseninizi onaylayın"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PIN\'inizi onaylayın"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"PIN\'inizi yeniden girin"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Şifreler eşleşmiyor"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN\'ler eşleşmiyor"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Kilit açma seçeneği"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Daha fazla güvenlik için iş deseninizi kullanın"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Daha fazla güvenlik için iş PIN\'inizi girin"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Daha fazla güvenlik için iş şifrenizi girin"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Telefonunuz fabrika ayarlarına sıfırlandı. Bu telefonu kullanmak için önceki deseninizi girin."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Telefonunuz fabrika ayarlarına sıfırlandı. Bu telefonu kullanmak için önceki PIN\'inizi girin."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Telefonunuz fabrika ayarlarına sıfırlandı. Bu telefonu kullanmak için önceki şifrenizi girin."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Deseni doğrulayın"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN\'i doğrulayın"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Şifreyi doğrulayın"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Yanlış PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Yanlış şifre"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Yanlış desen"</string>
@@ -2210,7 +2222,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Kimlik bilgileri deposu için şifreyi yazın."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Geçerli şifre:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Tüm içerik kaldırılsın mı?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Şifre, en az 8 karakterden oluşmalıdır."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Yanlış şifre."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Yanlış şifre. Kimlik bilgileri deposu silinmeden önce tek bir şansınız kaldı."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Yanlış şifre. Kimlik bilgileri deposu silinmeden önce <xliff:g id="NUMBER">%1$d</xliff:g> şansınız kaldı."</string>
@@ -2650,7 +2661,7 @@
     <string name="extreme_threats_summary" msgid="8777860706500920667">"Cana ve mala karşı aşırı tehditlerle ilgili uyarıları alın"</string>
     <string name="severe_threats_title" msgid="8362676353803170963">"Ciddi tehditler"</string>
     <string name="severe_threats_summary" msgid="8848126509420177320">"Cana ve mala karşı ciddi tehditlerle ilgili uyarıları alın"</string>
-    <string name="amber_alerts_title" msgid="2772220337031146529">"SARI uyarılar"</string>
+    <string name="amber_alerts_title" msgid="2772220337031146529">"AMBER uyarıları"</string>
     <string name="amber_alerts_summary" msgid="4312984614037904489">"Çocuk kaçırma olaylarıyla ilgili bültenleri alın"</string>
     <string name="repeat_title" msgid="6473587828597786996">"Tekrarla"</string>
     <string name="call_manager_enable_title" msgid="7718226115535784017">"Çağrı Yöneticisini Etkinleştir"</string>
@@ -2884,8 +2895,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Sessiz"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Ses çıkar"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Ses çıkar ve ekranda göster"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Ekranda pop-up pencerede göster"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Düşük"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Orta"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Yüksek"</string>
@@ -2965,7 +2975,7 @@
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Kural adı"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Kural adı girin"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Kural adı zaten kullanılıyor"</string>
-    <string name="zen_mode_add_rule" msgid="7459154136384467057">"Daha fazla fotoğraf ekle"</string>
+    <string name="zen_mode_add_rule" msgid="7459154136384467057">"Daha fazla ekle"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"Kuralı sil"</string>
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"Kural türü seçin"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\"<xliff:g id="RULE">%1$s</xliff:g>\" adlı kural silinsin mi?"</string>
@@ -3075,12 +3085,12 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI göreli bilgileri"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Yuva<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Varsayılan olarak aç"</string>
-    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Açılış bağlantıları"</string>
+    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Bağlantıları açma"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Desteklenen bağlantıları aç"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Sormadan aç"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Desteklenen bağlantılar"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Diğer varsayılanlar"</string>
-    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> <xliff:g id="SIZE">%1$s</xliff:g> kullanılıyor"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> kullanılıyor (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"Dahili depolama"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"Harici depolama"</string>
     <string name="app_data_usage" msgid="7942375313697452803">"Uygulama veri kullanımı"</string>
@@ -3131,7 +3141,7 @@
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> kullanan uygulamalar"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Dokunarak uyandır"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Cihazı uyandırmak için ekranda herhangi bir yere iki kez dokunun"</string>
-    <string name="domain_urls_title" msgid="3132983644568821250">"Açılış bağlantıları"</string>
+    <string name="domain_urls_title" msgid="3132983644568821250">"Bağlantıları açma"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Desteklenen bağlantıları açma"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"<xliff:g id="DOMAIN">%s</xliff:g> alanını açan"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"<xliff:g id="DOMAIN">%s</xliff:g> alan adını ve diğer URL\'leri açın"</string>
@@ -3571,7 +3581,7 @@
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Cihazı kontrol etmek için iki kez dokunun"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için ekranınıza iki kez dokunun."</string>
     <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Ekran kapalıyken bildirimleri kontrol edin"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Telefonu kontrol etmek için kaldırın"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Bakmak için telefonu kaldır"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Tableti kontrol etmek için kaldırın"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Cihazı kontrol etmek için kaldırın"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için telefonunuzu elinize alın."</string>
@@ -3594,7 +3604,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Hazır uygulamalar"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Yüklü olmasalar bile uygulamalardaki bağlantıları açın"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Hazır uygulamalar"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Hazır uygulama hesabı"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Hazır Uygulama tercihleri"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Yüklü uygulamalar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Depolama alanınız artık depolama yöneticisi tarafından yönetiliyor"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> adlı kullanıcının hesapları"</string>
@@ -3641,7 +3651,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Her zaman açık VPN kişisel profilinizde açılmış"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Her zaman açık VPN iş profilinizde açılmış"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Genel HTTP proxy\'si ayarlanmış"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Güvenilir kimlik bilgileri"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Güvenilir kimlik bilgileri"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Kişisel profilinizde güvenilir kimlik bilgileri"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"İş profilinizde güvenilir kimlik bilgileri"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> CA sertifikası</item>
       <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> CA sertifikası</item>
@@ -3704,6 +3716,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Operatör Temel Hazırlık Bilgileri"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Tetikleyici Operatör Temel Hazırlığı"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Yeni ve heyecan verici neler var?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"En önemli 5 özelliği inceleyin"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Yeni telefonunuzu tanıyın"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Yeni tabletinizi tanıyın"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Yeni cihazınızı tanıyın"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Bu özellik bu cihazda kullanılamıyor"</string>
 </resources>
