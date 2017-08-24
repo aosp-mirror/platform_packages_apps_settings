@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Automaatne ajavöönd"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Kasuta võrgu pakutud ajavööndit"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Kasuta võrgu pakutud ajavööndit"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Automaatne 24‑tunnine vorming"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Kasuta lokaadi vaikeseadet"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24-tunnine vorming"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"24-tunnise vormingu kasutamine"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Aeg"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Jätka"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Jäta vahele"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Järgmine"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Kas jätta sõrmejälg vahele?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Sõrmejälje seadistamiseks kulub vaid paar minutit. Kui selle vahele jätate, saab sõrmejälje hiljem lisada menüüs Seaded."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Kas jätta ekraanilukk vahele?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Seadme kaitsefunktsioone ei lülitata sisse. Te ei saa tahvelarvuti kaotsimineku, varguse või lähtestamise puhul teistel selle kasutamist takistada."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Seadme kaitsefunktsioone ei lülitata sisse. Te ei saa seadme kaotsimineku, varguse või lähtestamise puhul teistel selle kasutamist takistada."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Seadme kaitsefunktsioone ei lülitata sisse. Te ei saa telefoni kaotsimineku, varguse või lähtestamise puhul teistel selle kasutamist takistada."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Tahvelarvuti kaitsmine"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Seadme kaitsmine"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Telefoni kaitsmine"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Lisaturvalisuse jaoks seadistage varuekraanilukk."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Lisaturvalisuse huvides seadistage varuekraanilukk."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Aktiveerige seadme kaitsefunktsioonid, et teised ei saaks ilma teie loata tahvelarvutit kasutada. Valige kasutatav ekraanilukk."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Aktiveerige seadme kaitsefunktsioonid, et teised ei saaks ilma teie loata seadet kasutada. Valige kasutatav ekraanilukk."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Aktiveerige seadme kaitsefunktsioonid, et teised ei saaks ilma teie loata telefoni kasutada. Valige kasutatav ekraanilukk."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Ühenda"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Võrguga ühenduse loomine ebaõnnestus"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Unusta"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Muuda"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Võrgu unustamine ebaõnnestus"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Salvesta"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Võrgu säilitamine ebaõnnestus"</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"WiFi-kuumkoha seadistamine"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"WiFi-leviala seadistamine"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK leviala"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> leviala"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"WiFi-kõned"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Lülitage sisse WiFi-kõned"</string>
@@ -968,7 +973,7 @@
     <string name="volume_media_description" msgid="7949355934788807863">"Muusika, video, mängud ja muu meedia"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"Helin ja teated"</string>
     <string name="volume_notification_description" msgid="5810902320215328321">"Teated"</string>
-    <string name="volume_alarm_description" msgid="8322615148532654841">"Alarmid"</string>
+    <string name="volume_alarm_description" msgid="8322615148532654841">"Äratused"</string>
     <string name="volume_ring_mute" msgid="3018992671608737202">"Helinate ja teatiste summutamine"</string>
     <string name="volume_media_mute" msgid="3399059928695998166">"Muusika ja muude meediumide summutamine"</string>
     <string name="volume_notification_mute" msgid="7955193480006444159">"Teatiste summutamine"</string>
@@ -1331,7 +1336,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Lähtesta vaikeseadetele"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN-i vaikeseadete lähtestamine on lõpule viidud."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Valikute lähtestamine"</string>
-    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Võrgustiku, rakendused või seadme saab lähtestada"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Võrgu, rakendused või seadme saab lähtestada"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Lähtesta WiFi, mobiilne andmeside ja Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"See lähtestab kõik võrguseaded, sh:\n\n"<li>"WiFi"</li>\n<li>"Mobiilne andmeside"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Lähtesta seaded"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Ohutusteave"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Teil ei ole andmesideühendust. Selle teabe vaatamiseks praegu minge Interneti-ühendusega arvutis aadressile %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Laadimine ..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Valige parool"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Ekraaniluku seadistamine"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Turvalisuse huvides määrake parool"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Sõrmejälje kasutamiseks määrake parool"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Mustri valimine"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Sõrmejälje kasutamiseks määrake muster"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Valige PIN-kood"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Turvalisuse huvides määrake PIN-kood"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Sõrmejälje kasutamiseks määrake PIN-kood"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Kinnitage parool"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Sisestage oma parool uuesti"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Mustri kinnitamine"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Kinnitage PIN-kood"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Sisestage oma PIN-kood uuesti"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Paroolid ei ühti"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN-koodid ei ühti"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Lukust avamise meetod"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Lisaturvalisuse jaoks kasutage oma tööprofiili mustrit"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Lisaturvalisuse jaoks sisestage oma tööprofiili PIN-kood"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Lisaturvalisuse jaoks sisestage oma tööprofiili parool"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Teie telefon lähtestati tehaseseadetele. Selle telefoni kasutamiseks sisestage oma eelmine muster."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Teie telefon lähtestati tehaseseadetele. Selle telefoni kasutamiseks sisestage oma eelmine PIN-kood."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Teie telefon lähtestati tehaseseadetele. Selle telefoni kasutamiseks sisestage oma eelmine parool."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Mustri kinnitamine"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN-koodi kinnitamine"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Parooli kinnitamine"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Vale PIN-kood"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Vale parool"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Vale muster"</string>
@@ -1587,8 +1599,8 @@
     <string name="show_running_services" msgid="5736278767975544570">"Kuva töötavad teenused"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Kuva vahemällu salvestatud protsessid"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Hädaabirakendus"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Läht. rakend. eelistused"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Läht. rakend. eelistused?"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Lähtesta rakenduste eelistused"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Lähtestada rakenduste eelistused?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"See lähtestab kõik järgmised eelistused:\n\n "<li>"Keelatud rakendused"</li>\n" "<li>"Keelatud rakenduse märguanded"</li>\n" "<li>"Toimingute vaikerakendused"</li>\n" "<li>"Rakenduste taustaandmete piirangud"</li>\n" "<li>"Igasugused lubade piirangud"</li>\n\n" Rakenduse andmed säilivad."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Lähtesta rakendused"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Halda ruumi"</string>
@@ -2210,7 +2222,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Sisestage mandaadi salvestamise parool."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Kehtiv parool:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Kas eemaldada kogu sisu?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Parool peab olema vähemalt 8 tähemärki."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Vale parool."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Vale parool. Teil on veel üks võimalus, enne kui mandaatide mälu kustutatakse."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Vale parool. Teil on veel <xliff:g id="NUMBER">%1$d</xliff:g> võimalus(t) enne, kui mandaatide mälu kustutatakse."</string>
@@ -2258,7 +2269,7 @@
     <string name="untitled_apn" msgid="1230060359198685513">"Pealkirjata"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Üldine"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Märguannete logi"</string>
-    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Kõne helin ja vibratsioon"</string>
+    <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Kõne helin ja vibreerimine"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Süsteem"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"WiFi seadistamine"</string>
     <string name="wifi_setup_title_editing_network" msgid="6020614644556717979">"WiFi-võrguga <xliff:g id="NETWORK_NAME">%s</xliff:g> ühenduse loomine"</string>
@@ -2576,10 +2587,10 @@
     <string name="user_add_user_title" msgid="2108112641783146007">"Kas lisada uus kasutaja?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Võite jagada seadet teiste inimestega, luues uusi kasutajaid. Igal kasutajal on oma ruum, mida saab kohandada rakenduste, taustapildi ja muuga. Kasutajad saavad kohandada ka seadme seadeid, näiteks WiFi-valikuid, mis mõjutavad kõiki kasutajaid.\n\nKui lisate uue kasutaja, siis peab ta seadistama oma ruumi.\n\nIga kasutaja saab värskendada rakendusi kõigi kasutajate jaoks."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kui lisate uue kasutaja, siis peab ta seadistama oma ruumi.\n\nIga kasutaja saab värskendada rakendusi kõigi kasutajate jaoks."</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Kas seadistada nüüd kasutaja?"</string>
+    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Kas seadistada kasutaja kohe?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Veenduge, et isik saaks seadet kasutada ja oma ruumi seadistada"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Kas soovite kohe profiili seadistada?"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Seadista nüüd"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Seadista kohe"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Mitte praegu"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="7153048188252553320">"Ainult tahvelarvuti omanik saab hallata kasutajaid."</string>
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Ainult telefoni omanik saab hallata kasutajaid."</string>
@@ -2806,7 +2817,7 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Telefonihelin on seatud hääletuks"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Helina helitugevus on 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Meedia helitugevus"</string>
-    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarmi helitugevus"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Äratuse helitugevus"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Helina helitugevus"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Märguande helitugevus"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefoni helin"</string>
@@ -2827,7 +2838,7 @@
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"Ainult meedia heli"</string>
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Hääletu"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Märguanne"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibratsioon"</string>
+    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibreerimine"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Sisselülitamise helid"</string>
     <string name="zen_mode_settings_summary_off" msgid="1857165567766351925">"Ükski automaatne reegel ei ole sisse lülitatud"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1216562765753405784">
@@ -2840,7 +2851,7 @@
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Režiimi Mitte segada reeglid"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Helid ja värinad on piiratud"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Ainult prioriteetsed"</string>
-    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Ainult alarmid"</string>
+    <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Ainult äratused"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Täielik vaikus"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Visuaalsete häirimiste blok."</string>
@@ -2875,7 +2886,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Kuidas tuleks profiili märguanded kuvada siis, kui seade on lukus?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profiili märguanded"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Märguanded"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"Rakenduse märguanded"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Rakenduste märguanded"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Märguande kategooria"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Tähtsus"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Lubage rakendusel otsustada"</string>
@@ -2884,8 +2895,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Heli puudub"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Esita heli"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Esita heli ja tõsta märguanne esile"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Tõsta märguanne esile"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Madal"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Keskmine"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Kõrge"</string>
@@ -2950,7 +2960,7 @@
     <string name="notification_badge_title" msgid="6370122441168519809">"Luba märguandetäpp"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Kuva märguandetäpp"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Funktsiooni Mitte segada alistamine"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Lubage nendel märguannetel teid jätkuvalt katkestada, kui funktsioon Mitte segada on määratud valikule Ainult prioriteetsed"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Nendel märguannetel lubatakse teid jätkuvalt katkestada, kui funktsioon Mitte segada on määratud valikule Ainult prioriteetsed"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Lukustuskuval"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokeeritud"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioriteet"</string>
@@ -2963,7 +2973,7 @@
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"Kustuta"</string>
     <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"Nimeta ümber"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Reegli nimi"</string>
-    <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Reegli nime sisestamine"</string>
+    <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Sisestage reegli nimi"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Reegli nimi on juba kasutusel"</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"Lisa veel"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"Reegli kustutamine"</string>
@@ -2993,7 +3003,7 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Puudub"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Iga päev"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Äratus võib lõppaja alistada"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Peata lõppajal või järgmise äratuse korral sellest olenevalt, kumb varem saabub."</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Peata lõppajal või järgmise äratuse korral sõltuvalt sellest, kumb varem saabub."</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> kuni <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3005,8 +3015,8 @@
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Ainult kontaktidelt"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Ainult tärniga tähistatud kontaktidelt"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Mitte kelleltki"</string>
-    <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmid"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmid on alati prioriteetsed ja esitavad heli"</string>
+    <string name="zen_mode_alarms" msgid="2165302777886552926">"Äratused"</string>
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Äratused on alati prioriteetsed ja esitavad heli"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Meeldetuletused"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Sündmused"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Kõik helistajad"</string>
@@ -3080,7 +3090,7 @@
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Avamine ilma küsimata"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Toetatud lingid"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"Muud vaikeseaded"</string>
-    <string name="storage_summary_format" msgid="5419902362347539755">"Tüübis <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> on kasutusel <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> kasutusel (<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>)"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"Sisemine salvestusruum"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"Väline salvestusruum"</string>
     <string name="app_data_usage" msgid="7942375313697452803">"Rakenduse andmekasutus"</string>
@@ -3088,7 +3098,7 @@
     <string name="storage_used" msgid="7128074132917008743">"Kasutatud salvestusruum"</string>
     <string name="change" msgid="6657848623929839991">"Muuda"</string>
     <string name="change_storage" msgid="600475265207060436">"Salvestusruumi muutmine"</string>
-    <string name="notifications_label" msgid="8543457911148619898">"Rakenduse märguanded"</string>
+    <string name="notifications_label" msgid="8543457911148619898">"Rakenduste märguanded"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Sees"</string>
     <string name="notifications_disabled" msgid="334416731283131597">"Kõik on välja lülitatud"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_0">%1$d</xliff:g> kategooriat <xliff:g id="COUNT_1">%2$d</xliff:g>-st on väljas"</string>
@@ -3128,7 +3138,7 @@
     <string name="configure_apps" msgid="6685680790825882528">"Rakenduste seadistamine"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Tundmatu rakendus"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Rakenduste load"</string>
-    <string name="app_permissions_summary" msgid="5163974162150406324">"Rakendused, millel on rakenduse <xliff:g id="APPS">%1$s</xliff:g> luba"</string>
+    <string name="app_permissions_summary" msgid="5163974162150406324">"Rakendused, mis kasutavad: <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Puudutusega äratamine"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Seadme äratamiseks topeltpuudutage ekraani"</string>
     <string name="domain_urls_title" msgid="3132983644568821250">"Linkide avamine"</string>
@@ -3423,7 +3433,7 @@
       <item quantity="one">1 rakendusel on lubatud kasutada piiranguteta andmemahtu, kui andmeside mahu säästja on sisse lülitatud</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Andmeside mahu säästja"</string>
-    <string name="unrestricted_data_saver" msgid="952796077540228711">"Piiramata andmed"</string>
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Piiramata andmeside"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Taustaandmed on välja lülitatud"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Sees"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Väljas"</string>
@@ -3470,7 +3480,7 @@
     <string name="notification_log_details_parcel" msgid="243148037601903212">"paki suurus"</string>
     <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
     <string name="notification_log_details_sound" msgid="5506232879598808099">"heli"</string>
-    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibratsioon"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibreerimine"</string>
     <string name="notification_log_details_default" msgid="2345249399796730861">"vaikeseade"</string>
     <string name="notification_log_details_none" msgid="184131801230614059">"puudub"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Asetuse objekt puudub."</string>
@@ -3557,7 +3567,7 @@
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Kiirliigutused tahvelarvuti juhtimiseks"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Kiirliigutused seadme juhtimiseks"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Kaamera avamine"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Kaamera kiireks avamiseks vajutage toitenuppu kaks korda. See töötab igal ekraanil."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Kaamera kiireks avamiseks vajutage toitenuppu kaks korda. See töötab igast kuvast."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Kaamera kiiresti avamine"</string>
     <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"Vajutage kaamera avamiseks kaks korda toitenuppu"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kaamera vahetamine"</string>
@@ -3594,7 +3604,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Installimata avatavad rakendused"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Lingid avatakse rakendustes isegi siis, kui need pole installitud"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Installimata avatavad rakendused"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Installimata avatavate rakenduste konto"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Installimata avatavate rakenduste eelistused"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installitud rakendused"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Teie salvestusruumi haldab nüüd salvestusruumi haldur"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Kasutaja <xliff:g id="USER_NAME">%1$s</xliff:g> kontod"</string>
@@ -3641,7 +3651,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Alati sees VPN on teie isiklikul profiilil sisse lülitatud"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Alati sees VPN on teie tööprofiilil sisse lülitatud"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Üldine HTTP-puhverserver on seadistatud"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Usaldusväärsed mandaadid"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Usaldusväärsed mandaadid"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Usaldusväärsed mandaadid teie isiklikul profiilil"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Usaldusväärsed mandaadid teie tööprofiilil"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Vähemalt <xliff:g id="COUNT_1">%d</xliff:g> CA-sertifikaati</item>
       <item quantity="one">Vähemalt <xliff:g id="COUNT_0">%d</xliff:g> CA-sertifikaat</item>
@@ -3704,6 +3716,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Operaatori ettevalmistamise teave"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Operaatori ettevalmistamise päästik"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Mis on uut ja põnevat?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Vaadake viit populaarseimat funktsiooni"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Tutvuge oma uue telefoniga"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Tutvuge oma uue tahvelarvutiga"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Tutvuge oma uue seadmega"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Sellel seadmel pole see funktsioon saadaval"</string>
 </resources>
