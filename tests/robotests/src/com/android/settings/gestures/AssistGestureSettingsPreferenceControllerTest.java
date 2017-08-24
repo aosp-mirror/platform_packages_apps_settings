@@ -43,7 +43,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowSecureSettings.class
+)
 public class AssistGestureSettingsPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -86,7 +90,6 @@ public class AssistGestureSettingsPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
         int newValue = 1;
         ContentResolver resolver = mContext.getContentResolver();
@@ -99,7 +102,6 @@ public class AssistGestureSettingsPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testGetValue_correctValueReturned() {
         int currentValue = 1;
         ContentResolver resolver = mContext.getContentResolver();
