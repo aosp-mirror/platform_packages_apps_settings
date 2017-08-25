@@ -35,16 +35,21 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:hint="Threshold(ms)"/>
+            android:hint="Threshold(ms)"
+            android:text="3000"
+            android:inputType="number"/>
 
         <EditText
             android:id="@+id/bluetooth_run_time"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:hint="Run time(ms)"/>
+            android:hint="Run time(ms)"
+            android:text="6000"
+            android:inputType="number"/>
 
         <Button
+            android:id="@+id/bluetooth_button"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
