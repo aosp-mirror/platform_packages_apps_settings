@@ -26,6 +26,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
@@ -44,7 +45,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = SettingsShadowResources.class)
 public class BluetoothDevicePreferenceTest {
 
     private Context mContext;
@@ -140,8 +142,11 @@ public class BluetoothDevicePreferenceTest {
 
     @Test
     public void imagingDeviceIcon_isICSettingsPrint() {
+        when(mCachedBluetoothDevice.getBatteryLevel()).thenReturn(
+                BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
         when(mCachedBluetoothDevice.getBtClass()).thenReturn(
                 new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
+
         mPreference.onDeviceAttributesChanged();
         assertThat(mPreference.getIcon()).isEqualTo(
                 mContext.getDrawable(R.drawable.ic_settings_print));

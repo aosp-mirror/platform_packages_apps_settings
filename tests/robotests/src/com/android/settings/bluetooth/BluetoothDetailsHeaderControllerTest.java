@@ -32,6 +32,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 
@@ -45,7 +46,8 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows={SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class})
+        shadows={SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class,
+                SettingsShadowResources.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsHeaderController mController;
     private LayoutPreference mPreference;
