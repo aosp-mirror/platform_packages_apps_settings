@@ -124,6 +124,7 @@ public class Settings extends SettingsActivity {
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ChannelGroupNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageDomainUrlsActivity extends SettingsActivity { /* empty */ }
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
