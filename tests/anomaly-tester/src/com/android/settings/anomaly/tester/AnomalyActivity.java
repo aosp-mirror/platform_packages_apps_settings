@@ -74,6 +74,34 @@ public class AnomalyActivity extends Activity {
         }
     }
 
+    public void startWakelockAnomaly(View view) {
+        try {
+            // Enable anomaly detection and change the threshold
+            final String config = new AnomalyPolicyBuilder()
+                    .addPolicy(AnomalyPolicyBuilder.KEY_ANOMALY_DETECTION_ENABLED, true)
+                    .addPolicy(AnomalyPolicyBuilder.KEY_WAKELOCK_DETECTION_ENABLED, true)
+                    .addPolicy(AnomalyPolicyBuilder.KEY_WAKELOCK_THRESHOLD,
+                            getValueFromEditText(R.id.wakelock_threshold))
+                    .build();
+            Settings.Global.putString(getContentResolver(),
+                    Settings.Global.ANOMALY_DETECTION_CONSTANTS,
+                    config);
+
+            // Start the anomaly service
+            Intent intent = new Intent(this, AnomalyService.class);
+            intent.putExtra(AnomalyActions.KEY_ACTION, AnomalyActions.ACTION_WAKE_LOCK);
+            intent.putExtra(AnomalyActions.KEY_DURATION_MS,
+                    getValueFromEditText(R.id.wakelock_run_time));
+            intent.putExtra(AnomalyActions.KEY_RESULT_RECEIVER, mResultReceiver);
+            intent.putExtra(KEY_TARGET_BUTTON, view.getId());
+            startService(intent);
+
+            view.setEnabled(false);
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private long getValueFromEditText(final int id) throws NumberFormatException {
         final EditText editText = findViewById(id);
         if (editText != null) {
