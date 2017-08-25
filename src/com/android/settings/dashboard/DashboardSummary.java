@@ -75,6 +75,7 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
+    private boolean mOnConditionsChangedCalled;
 
     @Override
     public int getMetricsCategory() {
@@ -237,10 +238,21 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
-        final boolean scrollToTop = mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
-        mAdapter.setConditions(mConditionManager.getConditions());
-        if (scrollToTop) {
-            mDashboard.scrollToPosition(0);
+        // Bypass refreshing the conditions on the first call of onConditionsChanged.
+        // onConditionsChanged is called immediately everytime we start listening to the conditions
+        // change when we gain window focus. Since the conditions are passed to the adapter's
+        // constructor when we create the view, the first handling is not necessary.
+        // But, on the subsequent calls we need to handle it because there might be real changes to
+        // conditions.
+        if (mOnConditionsChangedCalled) {
+            final boolean scrollToTop =
+                    mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
+            mAdapter.setConditions(mConditionManager.getConditions());
+            if (scrollToTop) {
+                mDashboard.scrollToPosition(0);
+            }
+        } else {
+            mOnConditionsChangedCalled = true;
         }
     }
 
