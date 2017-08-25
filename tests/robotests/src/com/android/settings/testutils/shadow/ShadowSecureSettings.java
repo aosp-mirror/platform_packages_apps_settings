@@ -36,7 +36,11 @@ public class ShadowSecureSettings {
         int userHandle) {
         final Table<Integer, String, Object> userTable = getUserTable(resolver);
         synchronized (userTable) {
-            userTable.put(userHandle, name, value);
+            if (value != null) {
+                userTable.put(userHandle, name, value);
+            } else {
+                userTable.remove(userHandle, name);
+            }
             return true;
         }
     }
