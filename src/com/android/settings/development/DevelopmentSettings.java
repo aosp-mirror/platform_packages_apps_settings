@@ -892,14 +892,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void updatePasswordSummary() {
-        try {
-            if (mBackupManager.hasBackupPassword()) {
-                mPassword.setSummary(R.string.local_backup_password_summary_change);
-            } else {
-                mPassword.setSummary(R.string.local_backup_password_summary_none);
+        mPassword.setEnabled(mBackupManager != null);
+        if (mBackupManager != null) {
+            try {
+                if (mBackupManager.hasBackupPassword()) {
+                    mPassword.setSummary(R.string.local_backup_password_summary_change);
+                } else {
+                    mPassword.setSummary(R.string.local_backup_password_summary_none);
+                }
+            } catch (RemoteException e) {
+                // Not much we can do here
             }
-        } catch (RemoteException e) {
-            // Not much we can do here
         }
     }
 
