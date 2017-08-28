@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"시간대 자동설정"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"네트워크 시간대 사용"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"네트워크 시간대 사용"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"자동 24시간 형식"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"언어 기본값 사용"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24시간 형식"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"24시간 형식 사용"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"시간"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"계속"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"건너뛰기"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"다음"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"지문 설정을 건너뛰시겠습니까?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"지문 설정에는 1~2분 정도밖에 걸리지 않습니다. 이 과정을 건너뛰면 나중에 설정에서 지문을 추가할 수 있습니다."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"화면 잠금 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 태블릿을 사용하는 것을 방지할 수 없습니다."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 기기를 사용하는 것을 방지할 수 없습니다."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"기기 보호 기능이 사용 설정되지 않습니다. 분실, 도난 또는 재설정되었을 때 다른 사람이 이 휴대전화를 사용하는 것을 방지할 수 없습니다."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"태블릿 보호"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"기기 보호"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"휴대전화 보호"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"보안을 강화하려면 백업 화면 잠금을 설정하세요."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"보안을 강화하려면 백업 화면 잠금을 설정하세요."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"기기 보호 기능을 활성화하여 다른 사람이 내 허가 없이 이 태블릿을 사용하는 것을 방지합니다. 사용하려는 화면 잠금을 선택하세요."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"기기 보호 기능을 활성화하여 다른 사람이 내 허가 없이 이 기기를 사용하는 것을 방지합니다. 사용하려는 화면 잠금을 선택하세요."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"기기 보호 기능을 활성화하여 다른 사람이 내 허가 없이 이 스마트폰을 사용하는 것을 방지합니다. 사용하려는 화면 잠금을 선택하세요."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"연결"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"네트워크 연결 실패"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"저장 안함"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"수정"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"네트워크 기록 삭제 실패"</string>
     <string name="wifi_save" msgid="3331121567988522826">"저장"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"네트워크 저장 실패"</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Wi-Fi 핫스팟 설정"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Wi‑Fi 핫스팟 설정"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK 핫스팟"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> 핫스팟"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 통화"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Wi-Fi 통화 사용 설정"</string>
@@ -1063,7 +1068,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"휴대전화가 도킹 또는 절전 모드일 때 작동 방식을 조정하려면 화면 보호기를 사용 설정합니다."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"시작 시간"</string>
     <string name="screensaver_settings_current" msgid="4663846038247130023">"현재 화면 보호기"</string>
-    <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"시작하기"</string>
+    <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"지금 시작하기"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"설정"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"기기를 들어 대기 모드 해제"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"안전 정보"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"데이터 서비스에 연결되어 있지 않습니다. 지금 정보를 보려면 인터넷에 연결된 컴퓨터에서 %s(으)로 이동하세요."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"로드 중..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"비밀번호 선택"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"화면 잠금 설정"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"보안을 위해 비밀번호를 설정하세요."</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"비밀번호를 설정하여 지문 사용"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"패턴 선택"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"패턴을 설정하여 지문 사용"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PIN 선택"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"보안을 위해 PIN을 설정하세요."</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"PIN을 설정하여 지문 사용"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"비밀번호 확인"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"비밀번호 다시 입력"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"패턴 확인"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PIN 확인"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"PIN 다시 입력"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"비밀번호가 일치하지 않음"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN이 일치하지 않음"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"잠금해제 선택"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"보안을 강화하려면 직장 패턴을 사용하세요."</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"보안을 강화하려면 직장 PIN을 사용하세요."</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"보안을 강화하려면 직장 비밀번호를 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 패턴을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 PIN을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"휴대전화가 초기화되었습니다. 이 기기를 사용하려면 이전 비밀번호를 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"패턴 확인"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN 확인"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"비밀번호 확인"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"잘못된 PIN입니다."</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"잘못된 비밀번호입니다."</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"잘못된 패턴입니다."</string>
@@ -2210,7 +2222,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"자격증명 저장소 비밀번호를 입력하세요."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"현재 비밀번호:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"콘텐츠를 모두 삭제하시겠습니까?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"비밀번호는 8자 이상이어야 합니다."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"비밀번호가 잘못되었습니다."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"비밀번호가 잘못되었습니다. 한 번 더 실패하면 자격증명 저장소가 지워집니다."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"비밀번호가 잘못되었습니다. <xliff:g id="NUMBER">%1$d</xliff:g>번 더 실패하면 자격증명 저장소가 지워집니다."</string>
@@ -2577,7 +2588,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"추가 사용자 프로필을 만들어 다른 사용자와 기기를 공유할 수 있습니다. 각 사용자는 앱, 배경화면 등으로 맞춤설정할 수 있는 자신만의 공간을 갖게 됩니다. 또한 사용자는 모든 사용자에게 적용되는 Wi‑Fi와 같은 기기 설정도 조정할 수 있습니다.\n\n추가된 새 사용자는 자신의 공간을 설정해야 합니다.\n\n누구나 다른 모든 사용자를 위해 앱을 업데이트할 수 있습니다."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"추가된 새로운 사용자는 자신의 공간을 설정해야 합니다.\n\n모든 사용자는 다른 사용자들을 위하여 앱을 업데이트할 수 있습니다."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"지금 사용자를 설정하시겠습니까?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"사용자가 기기를 사용하여 자신의 공간을 설정할 수 있는지 확인하세요."</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"사용자가 기기를 사용하여 자신의 공간을 설정할 수 있도록 하세요."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"지금 프로필을 설정하시겠습니까?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"지금 설정"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"나중에"</string>
@@ -2643,7 +2654,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN 변경"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"알림 표시"</string>
     <string name="help_label" msgid="6886837949306318591">"고객센터"</string>
-    <string name="support_summary" msgid="2705726826263742491">"도움말, 전화 &amp; 채팅, 시작하기"</string>
+    <string name="support_summary" msgid="2705726826263742491">"도움말, 전화 및 채팅, 시작하기"</string>
     <string name="user_account_title" msgid="1127193807312271167">"콘텐츠용 계정"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"사진 ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"긴급한 위협"</string>
@@ -2658,7 +2669,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"통화 관리자"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="4124461751977706019">"긴급 알림"</string>
+    <string name="cell_broadcast_settings" msgid="4124461751977706019">"긴급 경보"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"네트워크 이동통신사"</string>
     <string name="access_point_names" msgid="1381602020438634481">"액세스포인트 네임(APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"향상된 4G LTE 모드"</string>
@@ -2884,8 +2895,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"소리 안 남"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"소리로 알림"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"소리 및 화면 표시로 알림"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"화면 표시로 알림"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"낮음"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"보통"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"높음"</string>
@@ -3159,7 +3169,7 @@
     <string name="default_app" msgid="6864503001385843060">"(기본)"</string>
     <string name="system_app" msgid="9068313769550747372">"(시스템)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(시스템 기본값)"</string>
-    <string name="apps_storage" msgid="4353308027210435513">"앱 저장소"</string>
+    <string name="apps_storage" msgid="4353308027210435513">"앱 저장용량"</string>
     <string name="usage_access" msgid="5479504953931038165">"사용 기록에 액세스"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"사용 기록에 액세스 허용"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"앱 사용 환경설정"</string>
@@ -3487,7 +3497,7 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"잠금 화면에서 정보 제어"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"알림 내용 표시 또는 숨기기"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"전체"</string>
-    <string name="page_tab_title_support" msgid="8483187649355540109">"지원 &amp; 도움말"</string>
+    <string name="page_tab_title_support" msgid="8483187649355540109">"지원 및 도움말"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"최소 폭"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"설치된 앱 중에서 프리미엄 SMS 액세스를 요청한 앱이 없습니다."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"프리미엄 SMS는 요금이 부과될 수 있으며 이는 이동통신사 요금에 추가됩니다. 앱에 권한을 부여하면 해당 앱을 사용하여 프리미엄 SMS를 사용할 수 있게 됩니다."</string>
@@ -3594,7 +3604,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"인스턴트 앱"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"앱이 설치되어 있지 않아도 앱에서 링크 열기"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"인스턴트 앱"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"인스턴트 앱 계정"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"인스턴트 앱 환경설정"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"설치된 앱"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"현재 저장용량 관리자가 저장용량을 관리하고 있습니다."</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>님의 계정"</string>
@@ -3641,7 +3651,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"개인 프로필에 연결 유지 VPN 사용 설정됨"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"직장 프로필에 연결 유지 VPN 사용 설정됨"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"전체 HTTP 프록시 설정됨"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"신뢰할 수 있는 사용자 인증 정보"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"신뢰할 수 있는 사용자 인증 정보"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"개인 프로필에서 신뢰할 수 있는 사용자 인증 정보"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"직장 프로필에서 신뢰할 수 있는 사용자 인증 정보"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">CA 인증서 최소 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
       <item quantity="one">CA 인증서 최소 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
@@ -3704,6 +3716,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Carrier Provisioning Info"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Trigger Carrier Provisioning"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"흥미로운 새 기능 살펴보기"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"5가지 주요 기능 확인하기"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"새 휴대전화 둘러보기"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"새 태블릿 둘러보기"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"새 기기 둘러보기"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"이 기기에서 지원하지 않는 기능입니다."</string>
 </resources>

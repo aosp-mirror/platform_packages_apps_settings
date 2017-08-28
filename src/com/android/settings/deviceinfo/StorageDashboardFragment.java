@@ -109,8 +109,9 @@ public class StorageDashboardFragment extends DashboardFragment
     public void onResume() {
         super.onResume();
         getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
+        getLoaderManager()
+                .restartLoader(VOLUME_SIZE_JOB_ID, Bundle.EMPTY, new VolumeSizeCallbacks());
         getLoaderManager().initLoader(ICON_JOB_ID, Bundle.EMPTY, new IconLoaderCallbacks());
-        getLoaderManager().initLoader(VOLUME_SIZE_JOB_ID, Bundle.EMPTY, new VolumeSizeCallbacks());
     }
 
     @Override

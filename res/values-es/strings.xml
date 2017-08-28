@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Zona horaria automática"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Usar zona horaria proporcionada por la red"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Usar zona horaria proporcionada por la red"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Formato automático de 24 horas"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Usar la opción predeterminada del la configuración regional"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"Formato de 24 horas"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Hora"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Saltar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Siguiente"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"¿Saltar huella digital?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Solo tardarás un minuto o dos en configurar la huella digital. Si te saltas este paso, puedes añadir tu huella digital en otro momento desde los ajustes."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"¿Saltar bloqueo de pantalla?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otros usuarios utilicen este tablet si lo pierdes, te lo roban o se restablecen sus datos de fábrica."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otros usuarios lo utilicen si lo pierdes, te lo roban o se restablecen sus datos de fábrica."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otros usuarios utilicen este teléfono si lo pierdes, te lo roban o se restablecen sus datos de fábrica."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protege tu tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protege tu dispositivo"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protege tu teléfono"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Para mayor seguridad, configura un bloqueo de pantalla para la copia de seguridad."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Para mayor seguridad, configura un bloqueo de pantalla para la copia de seguridad."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activa las funciones de protección del dispositivo para evitar que otros utilicen el tablet sin tu permiso. Elige el bloqueo de pantalla que quieras utilizar."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activa las funciones de protección del dispositivo para evitar que otros lo utilicen sin tu permiso. Elige el bloqueo de pantalla que quieras utilizar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activa las funciones de protección del dispositivo para evitar que otros utilicen el teléfono sin tu permiso. Elige el bloqueo de pantalla que quieras utilizar."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Conectar"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Error al conectar a la red"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Olvidar"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Modificar"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Error al olvidar la red"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Guardar"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Error al guardar la red"</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar punto de acceso Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Configuración del punto de acceso Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Punto de acceso AndroidAP WPA2 PSK"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"Punto de acceso: <xliff:g id="NETWORK_SSID">%1$s</xliff:g>, <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Llamadas Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Activa la Llamada por Wi-Fi"</string>
@@ -1050,7 +1055,7 @@
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fondo de pantalla"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Predeterminado"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Personalizado"</string>
-    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Cambia el fondo de pantalla"</string>
+    <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Cambiar el fondo de pantalla"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personaliza la pantalla"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Seleccionar fondo de..."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Salvapantallas"</string>
@@ -1214,7 +1219,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Configurar"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Explorar"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Liberar espacio"</string>
-    <string name="storage_menu_manage" msgid="5914482953856430780">"Administrar almacenamiento"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Gestionar almacenamiento"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Conexión USB a ordenador"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectar como"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositivo multimedia (MTP)"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Información de seguridad"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"No tienes conexión de datos. Para ver esta información, accede a %s desde cualquier ordenador conectado a Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Cargando…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Elige tu contraseña"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Establece el bloqueo de pantalla"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Por seguridad, establece una contraseña"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Para usar huella, añade contraseña"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Elige un patrón"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Para usar huella, añade patrón"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Elige tu PIN"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Por seguridad, establece un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Para usar huella, añade PIN"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Confirma tu contraseña"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Vuelve a introducir tu contraseña"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirma el patrón"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Confirma el PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Vuelve a introducir tu PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Las contraseñas no coinciden"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Los números PIN no coinciden"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Método de desbloqueo"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Para mayor seguridad, utiliza el patrón del perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Para mayor seguridad, introduce el PIN del perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Para mayor seguridad, introduce la contraseña del perfil de trabajo"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Se han recuperado los ajustes de fábrica del teléfono. Para usarlo, introduce tu antiguo patrón."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Se han recuperado los ajustes de fábrica del teléfono. Para usarlo, introduce tu antiguo PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Se han recuperado los ajustes de fábrica del teléfono. Para usarlo, introduce tu antigua contraseña."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Verificar patrón"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Verificar PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Verificar contraseña"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN incorrecto"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Contraseña incorrecta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Patrón incorrecto"</string>
@@ -1963,7 +1975,7 @@
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumo de la pantalla"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Búsqueda de redes móviles"</string>
     <string name="power_last_full_charge_summary" msgid="532845389094620657">"hace <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso de apps desde la carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso de las aplicaciones desde la última carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Uso del dispositivo desde la carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tiempo que la pantalla ha estado encendida desde la carga completa"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Uso del dispositivo desde la carga completa"</string>
@@ -2210,7 +2222,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Escribe la contraseña del almacenamiento de credenciales."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Contraseña actual:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"¿Seguro que quieres quitar todos los certificados?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"La contraseña debe tener al menos 8 caracteres."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Contraseña incorrecta"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Contraseña incorrecta. Tienes una oportunidad más antes de que se borre el almacenamiento de credenciales."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Contraseña incorrecta. Tienes <xliff:g id="NUMBER">%1$d</xliff:g> oportunidades más antes de que se borre el almacenamiento de credenciales."</string>
@@ -2771,7 +2782,7 @@
     <string name="keywords_sounds" msgid="7146245090127541167">"sonido del altavoz"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"no molestar, interrumpir, interrupción, descanso"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
-    <string name="keywords_location" msgid="6615286961552714686">"cercano, ubicación, historial, informes"</string>
+    <string name="keywords_location" msgid="6615286961552714686">"nearby, cercano, ubicación, historial, informes"</string>
     <string name="keywords_location_mode" msgid="8584992704568356084">"precisión"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"cuenta"</string>
     <string name="keywords_users" msgid="3434190133131387942">"restricción, restringir, restringido"</string>
@@ -2861,7 +2872,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notificaciones"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Ajustes avanzados"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificaciones de trabajo"</string>
-    <string name="notification_badging_title" msgid="5938709971403474078">"Permitir burbujas notificación"</string>
+    <string name="notification_badging_title" msgid="5938709971403474078">"Permitir burbujas de notificación"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luz parpadeante"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"En la pantalla de bloqueo"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todo el contenido de las notificaciones"</string>
@@ -2884,8 +2895,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Sin sonido"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Emitir sonido"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Emitir sonido y mostrar en pantalla"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Mostrar en pantalla"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Baja"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Media"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Alta"</string>
@@ -3191,12 +3201,12 @@
     <string name="high_power_filter_on" msgid="3222265297576680099">"Sin optimizar"</string>
     <string name="high_power_on" msgid="6216293998227583810">"No optimizada"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimizando el uso de la batería"</string>
-    <string name="high_power_system" msgid="7362862974428225301">"Optimización de la batería no disponible"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"Optimización de batería no disponible"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"No se aplica la optimización de la batería, por lo que se puede agotar más rápido."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"¿Permitir que la aplicación esté activa siempre en segundo plano?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"Si permites que <xliff:g id="APP_NAME">%1$s</xliff:g> está activa siempre en segundo plano, es posible que se reduzca la duración de la batería. \n\nPuedes cambiar esta opción en cualquier momento en Ajustes &gt; Aplicaciones y notificaciones."</string>
     <string name="battery_summary" msgid="8044042095190688654">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso desde la última carga completa"</string>
-    <string name="battery_power_management" msgid="5571519699679107523">"Ajustes de batería"</string>
+    <string name="battery_power_management" msgid="5571519699679107523">"Gestión de la batería"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"No ha usado batería desde la última carga completa"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Ajustes de aplicaciones"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"Mostrar SystemUI Tuner"</string>
@@ -3282,7 +3292,7 @@
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicaciones que se pueden mostrar sobre otras"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplicaciones con permiso"</string>
     <string name="app_permission_summary_allowed" msgid="1505409933012886711">"Permitida"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"No permitida"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"No permitido"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instalar aplicaciones fuentes desconocidas"</string>
     <string name="write_settings" msgid="4797457275727195681">"Modificar ajustes del sistema"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"escribir, modificar, ajustes del sistema"</string>
@@ -3327,8 +3337,8 @@
     <string name="notification_summary_none" msgid="4586376436702610">"Activadas para todas las aplicaciones"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplicaciones instaladas"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 aplicaciones instaladas"</string>
-    <string name="storage_summary" msgid="3801281635351732202">"Usado: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, disponible: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
-    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Almacenamiento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> usado (disponible: <xliff:g id="FREE_SPACE">%2$s</xliff:g>)"</string>
+    <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> usado - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponible"</string>
+    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Almacenamiento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> usado (<xliff:g id="FREE_SPACE">%2$s</xliff:g> disponible)"</string>
     <string name="display_summary" msgid="6737806235882127328">"Suspender tras <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fondo de pantalla, suspensión, tamaño de la fuente"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Suspender tras 10 minutos de inactividad"</string>
@@ -3427,15 +3437,15 @@
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Las datos en segundo plano están desactivadas"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Activado"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Desactivado"</string>
-    <string name="unrestricted_app_title" msgid="4465437191723332066">"Uso de datos sin restricción"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"Uso no restringido de datos"</string>
     <string name="unrestricted_app_summary" msgid="6458008993501723912">"No restringir datos si el ahorro de datos está activado"</string>
-    <string name="home_app" msgid="4066188520886810030">"Aplicación de inicio"</string>
+    <string name="home_app" msgid="4066188520886810030">"Aplicación de página principal"</string>
     <string name="no_default_home" msgid="7184117487704520238">"Sin aplicación de inicio predeterminada"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Inicio seguro"</string>
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Solicitar un patrón para iniciar el dispositivo. Si el dispositivo está apagado, no puede recibir llamadas, mensajes, notificaciones ni alarmas."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Solicitar PIN para iniciar el dispositivo. Si el dispositivo está apagado, no puede recibir llamadas, mensajes, notificaciones ni alarmas."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Solicitar contraseña para iniciar el dispositivo. Si el dispositivo está apagado, no puede recibir llamadas, mensajes, notificaciones ni alarmas."</string>
-    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Añade otra huella digital"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Añadir otra huella digital"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Desbloquear con un dedo diferente"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Activado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Desactivado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3545,7 +3555,7 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Auriculares"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Periférico de entrada"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="automatic_storage_manager_settings" msgid="7819434542155181607">"Administrar almacenamiento"</string>
+    <string name="automatic_storage_manager_settings" msgid="7819434542155181607">"Gestionar almacenamiento"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Para liberar espacio, el Administrador de Almacenamiento borrará de tu dispositivo las fotos y vídeos que tengan copia de seguridad."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Borrar fotos y vídeos"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Administrador de Almacenamiento"</string>
@@ -3574,7 +3584,7 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Levantar el teléfono para comprobarlo"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Levantar el tablet para comprobar las notificaciones"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Levantar el dispositivo para comprobar las notificaciones"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Coge el teléfono para ver la hora, los iconos de notificación y otra información."</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Coger el teléfono para ver la hora, los iconos de notificación y otra información"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Coge el tablet para ver la hora, los iconos de notificación y otra información."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Coge el dispositivo para consultar la hora, iconos de notificación y otra información."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Consulta notificaciones cuando la pantalla esté apagada"</string>
@@ -3594,7 +3604,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Aplicaciones instantáneas"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Abre enlaces en aplicaciones aunque no estén instaladas"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Aplicaciones instantáneas"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Cuenta de aplicaciones instantáneas"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Preferencias de Aplicaciones Instantáneas"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Aplicaciones instaladas"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"El Administrador de Almacenamiento gestiona ahora el almacenamiento"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Cuentas de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3641,7 +3651,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Se ha activado el modo de VPN siempre activada en tu perfil personal"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Se ha activado el modo de VPN siempre activada en tu perfil de trabajo"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Se ha definido el proxy HTTP global"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Credenciales de confianza"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Credenciales de confianza"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Credenciales de confianza en tu perfil personal"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Credenciales de confianza en tu perfil de trabajo"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Como mínimo, <xliff:g id="COUNT_1">%d</xliff:g> certificados de CA</item>
       <item quantity="one">Como mínimo, <xliff:g id="COUNT_0">%d</xliff:g> certificado de CA</item>
@@ -3704,6 +3716,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Información de servicios del operador"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Activar servicios del operador"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"¿Cuáles son las fascinantes novedades?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Consulta las 5 funciones principales"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Descubre tu nuevo teléfono"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Descubre tu nuevo tablet"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Descubre tu nuevo dispositivo"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Esta función no está disponible en este dispositivo"</string>
 </resources>

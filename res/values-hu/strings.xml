@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Automatikus időzóna"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Hálózat által megadott időzóna használata"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Hálózat által megadott időzóna használata"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Automatikus 24 órás formátum"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Helyi alapértelmezés használata"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24 órás formátum"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"24 órás formátum használata"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Idő"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Tovább"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Kihagyás"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Következő"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Kihagyja az ujjlenyomatot?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Az ujjlenyomat beállítása csupán 1-2 percet vesz igénybe. Ha kihagyja ezt a lépést, később a beállításokban megadhatja ujjlenyomatát."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Kihagyja a lezárási képernyőt?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Az eszköz védelmi funkcióit nem lehet bekapcsolni. Nem fogja tudni megakadályozni, hogy mások használják a táblagépet, ha elveszett, ellopták vagy visszaállították."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Az eszköz védelmi funkcióit nem lehet bekapcsolni. Nem fogja tudni megakadályozni, hogy mások használják az eszközt, ha elveszett, ellopták vagy visszaállították."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Az eszköz védelmi funkcióit nem lehet bekapcsolni. Nem fogja tudni megakadályozni, hogy mások használják a telefont ha elveszett, ellopták vagy visszaállították."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Óvja meg táblagépét"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Óvja meg eszközét"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Óvja meg telefonját"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"A nagyobb biztonság érdekében állítson be másodlagos képernyőzárat."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"A nagyobb biztonság érdekében állítson be másodlagos képernyőzárat."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Az eszköz védelmi funkcióinak aktiválásával megakadályozhatja, hogy mások az Ön engedélye nélkül használják a táblagépet. Válassza ki a használni kívánt képernyőlezárási módot."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Az eszköz védelmi funkcióinak aktiválásával megakadályozhatja, hogy mások az Ön engedélye nélkül használják az eszközt. Válassza ki a használni kívánt képernyőlezárási módot."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Az eszköz védelmi funkcióinak aktiválásával megakadályozhatja, hogy mások az Ön engedélye nélkül használják a telefont. Válassza ki a használni kívánt képernyőlezárási módot."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Kapcsolódás"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Nem sikerült hálózathoz csatlakozni."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Elfelejt"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Módosítás"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Nem sikerült elfelejteni a hálózatot."</string>
     <string name="wifi_save" msgid="3331121567988522826">"Mentés"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nem sikerült menteni a hálózatot."</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Wifi-hotspot beállítása"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Wifi-hotspot beállítása"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK hotspot"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi-hívás"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"A Wi-Fi-hívások bekapcsolása"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Biztonsági információk"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Nincs adatkapcsolat. Az információ azonnali megtekintéséhez keresse fel a következő helyet bármelyik számítógépről, amely csatlakozik az internethez: %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Betöltés…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Adjon meg egy jelszót"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Képernyőzár beállítása"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"A biztonság érdekében állítson be jelszót"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Jelszó az ujjlenyomathoz"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Válassza ki a mintát"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Minta az ujjlenyomathoz"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Adja meg PIN-kódját"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"A biztonság érdekében állítson be PIN-kódot"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"PIN-kód az ujjlenyomathoz"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Jelszó megerősítése"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Adja meg újra a jelszót"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Erősítse meg a mintát"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PIN-kód megerősítése"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Adja meg újra a PIN-kódot"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"A jelszavak nem egyeznek"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"A PIN-kódok nem egyeznek"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Feloldás kiválasztása"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"A nagyobb biztonság érdekében használja munkaprofil-feloldási mintáját"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"A nagyobb biztonság érdekében adja meg munkaprofilja PIN-kódját"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"A nagyobb biztonság érdekében adja meg munkaprofilja jelszavát"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző mintáját."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző PIN-kódját."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző jelszavát."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Minta ellenőrzése"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN-kód ellenőrzése"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Jelszó ellenőrzése"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Helytelen PIN-kód"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Helytelen jelszó"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Helytelen minta"</string>
@@ -2212,7 +2224,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Írja be az azonosítótároló jelszavát."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Jelenlegi jelszó:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Eltávolítja az összes tartalmat?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"A jelszónak legalább 8 karakter hosszúnak kell lennie."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Helytelen jelszó."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Helytelen jelszó. Már csak egy lehetősége van, mielőtt a hitelesítési adatok tárolója törlődik."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Helytelen jelszó. <xliff:g id="NUMBER">%1$d</xliff:g> további lehetősége van, mielőtt a hitelesítési adatok tárolóját töröljük."</string>
@@ -2886,8 +2897,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Hang nélkül"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Hangjelzés"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Hangjelzés és felugró értesítés a képernyőn"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Felugró értesítés a képernyőn"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Alacsony"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Közepes"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Magas"</string>
@@ -3596,7 +3606,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Azonnali alkalmazások"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Linkek megnyitása alkalmazásokban, akkor is, ha nincsenek telepítve"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Azonnali alkalmazások"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Az azonnali alkalmazásokhoz tartozó fiók"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Instant Apps-beállítások"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Telepített alkalmazások"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Tárhelyét mostantól a tárhelykezelő kezeli"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> fiókjai"</string>
@@ -3643,7 +3653,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"A „mindig bekapcsolt VPN” lehetőség be van kapcsolva az Ön személyes profiljában"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"A „mindig bekapcsolt VPN” lehetőség be van kapcsolva az Ön munkaprofiljában"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Globális HTTP proxy beállítva"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Megbízható hitelesítési adatok"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Megbízható hitelesítési adatok"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Megbízható hitelesítési adatok a személyes profilban"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Megbízható hitelesítési adatok a munkaprofilban"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Legalább <xliff:g id="COUNT_1">%d</xliff:g> CA tanúsítvány</item>
       <item quantity="one">Legalább <xliff:g id="COUNT_0">%d</xliff:g> CA tanúsítvány</item>
@@ -3706,6 +3718,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Információ a szolgáltatói hozzáférésről"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Szolgáltatói ellátás aktiválása"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Mi új és említésre méltó?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Tekintse meg az 5 legnépszerűbb funkciót"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Az új telefon bemutatójának megtekintése"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Az új táblagép bemutatójának megtekintése"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Az új eszköz bemutatójának megtekintése"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ez a funkció nem áll rendelkezésre ezen az eszközön"</string>
 </resources>

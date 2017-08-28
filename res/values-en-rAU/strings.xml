@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Automatic time zone"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Use network-provided time zone"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Use network-provided time zone"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Automatic 24‑hour format"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Use locale default"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24‑hour format"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Use 24-hour format"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Time"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continue"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Skip"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Next"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Skip fingerprint?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Skip screen lock?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Device protection features won’t be turned on. You won’t be able to prevent others from using this tablet if it’s lost, stolen or reset."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Device protection features won’t be turned on. You won’t be able to prevent others from using this device if it’s lost, stolen or reset."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Device protection features won’t be turned on. You won’t be able to prevent others from using this phone if it’s lost, stolen or reset."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protect your tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protect your device"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protect your phone"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"For added security, set up a backup screen lock."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"For added security, set up a backup screen lock."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Prevent others from using this device without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Prevent others from using this phone without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Connect"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Failed to connect to network"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Forget"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Modify"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Failed to forget network"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Save"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Failed to save network"</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Set up Wi‑Fi hotspot"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Wi‑Fi hotspot setup"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK hotspot"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android Hotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi Calling"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Turn on Wi-Fi Calling"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Safety information"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"You don\'t have a data connection. To view this information now, go to %s from any computer connected to the Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Loading…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Choose your password"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Set a screen lock"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"For security, set a password"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"To use fingerprint, set password"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Choose your pattern"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"To use fingerprint, set pattern"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Choose your PIN"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"For security, set a PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"To use fingerprint, set PIN"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Confirm your password"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Re-enter your password"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Confirm your pattern"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Confirm your PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Re-enter your PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Passwords don\'t match"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PINs don\'t match"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Unlock selection"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"For added security, use your work pattern"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"For added security, enter your work PIN"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"For added security, enter your work password"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Your phone was reset to factory settings. To use this phone, enter your previous pattern."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Your phone was reset to factory settings. To use this phone, enter your previous PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Your phone was reset to factory settings. To use this phone, enter your previous password."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Verify pattern"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Verify PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Verify password"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Wrong PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Wrong password"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Wrong pattern"</string>
@@ -2210,7 +2222,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Type the password for credential storage."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Current password:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Remove all the contents?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"The password must contain at least 8 characters."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Incorrect password."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Incorrect password. You have one more chance before credential storage is erased."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Incorrect password. You have <xliff:g id="NUMBER">%1$d</xliff:g> more chances before credential storage is erased."</string>
@@ -2884,8 +2895,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"No sound"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Make sound"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Make sound and pop up on screen"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Pop on screen"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Low"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Medium"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"High"</string>
@@ -3032,10 +3042,10 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Change to alarms only until <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Change to always interrupt"</string>
     <string name="zen_mode_screen_on" msgid="7712038508173845101">"Block when screen is on"</string>
-    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Prevent notifications silenced by Do Not Disturb from peeking or popping on screen"</string>
+    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Prevent notifications silenced by Do not disturb from peeking or popping on screen"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Block when screen is off"</string>
-    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Prevent notifications silenced by Do Not Disturb from turning on the screen or pulsing the notification light"</string>
-    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Prevent notifications silenced by Do Not Disturb from turning on the screen"</string>
+    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Prevent notifications silenced by Do not disturb from turning on the screen or pulsing the notification light"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Prevent notifications silenced by Do not disturb from turning on the screen"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Off"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"When screen is on"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"When screen is off"</string>
@@ -3594,7 +3604,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Instant apps"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Open links in apps, even if they’re not installed"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Instant apps"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Instant apps account"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Instant Apps preferences"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Installed apps"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Your storage is now being managed by the storage manager"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Accounts for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3641,7 +3651,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Always-on VPN turned on in your personal profile"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Always-on VPN turned on in your work profile"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Global HTTP proxy set"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Trusted credentials"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Trusted credentials"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Trusted credentials in your personal profile"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Trusted credentials in your work profile"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">Minimum <xliff:g id="COUNT_1">%d</xliff:g> CA certificates</item>
       <item quantity="one">Minimum <xliff:g id="COUNT_0">%d</xliff:g> CA certificate</item>
@@ -3704,6 +3716,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Operator Provisioning Info"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Trigger Operator Provisioning"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"What\'s new and exciting?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Check out the top 5 features"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Take a tour of your new phone"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Take a tour of your new tablet"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Take a tour of your new device"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"This feature is not available on this device"</string>
 </resources>

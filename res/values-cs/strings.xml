@@ -316,6 +316,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Automatické čas. pásmo"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Používat časové pásmo ze sítě"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Používat časové pásmo ze sítě"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Automatický 24hodinový formát"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Použít zdejší výchozí formát"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24hodinový formát"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Používat 24hodinový formát"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Čas"</string>
@@ -378,6 +380,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Pokračovat"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Přeskočit"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Další"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Přeskočit zadání otisku prstu?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Nastavení otisku prstu trvá jen minutu nebo dvě. Pokud tento krok přeskočíte, můžete otisk prstu přidat později v nastavení."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Přeskočit zámek obrazovky?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Nebudou zapnuty funkce ochrany zařízení. V případě ztráty, odcizení nebo resetování tabletu nebudete moci ostatním zabránit v jeho používání."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Nebudou zapnuty funkce ochrany zařízení. V případě ztráty, odcizení nebo resetování zařízení nebudete moci ostatním zabránit v jeho používání."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Nebudou zapnuty funkce ochrany zařízení. V případě ztráty, odcizení nebo resetování telefonu nebudete moci ostatním zabránit v jeho používání."</string>
@@ -463,7 +468,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Ochraňte svůj tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Ochraňte své zařízení"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Chraňte svůj telefon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Pro ještě lepší zabezpečení nastavte záložní zámek obrazovky."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Pro ještě lepší zabezpečení nastavte záložní zámek obrazovky."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Aktivujte funkce ochrany zařízení a zabraňte tak ostatním v používání tabletu bez vašeho svolení. Vyberte zámek obrazovky, který chcete používat."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Aktivujte funkce ochrany zařízení a zabraňte tak ostatním v jeho používání bez vašeho svolení. Vyberte zámek obrazovky, který chcete používat."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Aktivujte funkce ochrany zařízení a zabraňte tak ostatním v používání telefonu bez vašeho svolení. Vyberte zámek obrazovky, který chcete používat."</string>
@@ -860,6 +865,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Připojit"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Připojení k síti se nezdařilo."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Odstranit"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Upravit"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Odstranění záznamu sítě se nezdařilo."</string>
     <string name="wifi_save" msgid="3331121567988522826">"Uložit"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Uložení sítě se nezdařilo."</string>
@@ -926,7 +932,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Nastavit hotspot sítě Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Nastavení Wi‑Fi hotspotu"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Hotspot AndroidAP WPA2 PSK"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"Hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Volání přes Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Zapněte volání přes Wi-Fi"</string>
@@ -1490,15 +1495,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Bezpečnostní informace"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Datové připojení momentálně není k dispozici. Chcete-li tyto informace zobrazit, přejděte z libovolného počítače připojeného k internetu na stránku %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Načítání..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Zvolte heslo"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Nastavení zámku obrazovky"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Z bezpečnostních důvodů nastavte heslo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Otisk vyžaduje nastavení hesla"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Vyberte gesto"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Otisk vyžaduje nastavení gesta"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Zvolte kód PIN"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Z bezpečnostních důvodů nastavte PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Otisk vyžaduje nastavení PINu"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Potvrďte heslo"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Znovu zadejte heslo"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Potvrďte své gesto"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Potvrďte kód PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Znovu zadejte PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Hesla nejsou shodná"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Kódy PIN nejsou shodné"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Výběr odemknutí"</string>
@@ -1517,6 +1523,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Za účelem zvýšení zabezpečení použijte pracovní gesto"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Za účelem zvýšení zabezpečení zadejte pracovní PIN"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Za účelem zvýšení zabezpečení zadejte pracovní heslo"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Telefon byl obnoven do továrního nastavení. Chcete-li tento telefon použít, zadejte předchozí gesto."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Telefon byl obnoven do továrního nastavení. Chcete-li tento telefon použít, zadejte předchozí PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Telefon byl obnoven do továrního nastavení. Chcete-li tento telefon použít, zadejte předchozí heslo."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"Ověřte gesto"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"Ověřte PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"Ověřte heslo"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Nesprávný kód PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Nesprávné heslo"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Nesprávné gesto"</string>
@@ -2252,7 +2264,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Zadejte heslo pro úložiště pověření."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Aktuální heslo:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Odstranit veškerý obsah?"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Heslo musí mít alespoň 8 znaků."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Nesprávné heslo."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Nesprávné heslo. Zbývá vám jeden pokus, než bude úložiště pověření smazáno."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Nesprávné heslo. Počet zbývajících pokusů, než bude úložiště pověření smazáno: <xliff:g id="NUMBER">%1$d</xliff:g>"</string>
@@ -2671,7 +2682,7 @@
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Toto nastavení ovlivní všechny uživatele tohoto tabletu."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Toto nastavení ovlivní všechny uživatele tohoto telefonu."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Změna jazyka"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Platby dotykem telefonu"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Platby přiložením telefonu"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Jak to funguje"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Plaťte v obchodech telefonem"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"Výchozí platební aplikace"</string>
@@ -2680,14 +2691,14 @@
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"Použít výchozí"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"Vždy"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Kromě případů, kdy je spuštěna jiná platební aplikace"</string>
-    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Aplikace pro platby dotykem telefonu:"</string>
+    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Aplikace pro platby přiložením telefonu:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Platba na terminálu"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Nastavte platební aplikaci. Poté jen přidržte telefon zadní stranou u terminálu se symbolem bezkontaktních plateb."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Rozumím"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Další..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Nastavit jako předvolbu?"</string>
-    <string name="nfc_payment_set_default" msgid="8532426406310833489">"Chcete při platbě dotykem telefonu vždy používat aplikaci <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="6993301165940432743">"Chcete při platbě dotykem telefonu namísto aplikace <xliff:g id="APP_0">%1$s</xliff:g> vždy používat aplikaci <xliff:g id="APP_1">%2$s</xliff:g>?"</string>
+    <string name="nfc_payment_set_default" msgid="8532426406310833489">"Chcete při platbě přiložením telefonu vždy používat aplikaci <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="6993301165940432743">"Chcete při platbě přiložením telefonu namísto aplikace <xliff:g id="APP_0">%1$s</xliff:g> vždy používat aplikaci <xliff:g id="APP_1">%2$s</xliff:g>?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Omezení"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Odebrat omezení"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Změnit PIN"</string>
@@ -2915,7 +2926,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Oznámení"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Rozšířená nastavení"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Pracovní oznámení"</string>
-    <string name="notification_badging_title" msgid="5938709971403474078">"Povolit puntíky s oznámeními"</string>
+    <string name="notification_badging_title" msgid="5938709971403474078">"Povolit puntíky s oznámením"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikání kontrolky"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Na obrazovce uzamčení"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobrazit veškerý obsah oznámení"</string>
@@ -2938,8 +2949,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Bez zvuku"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Vydat zvukový signál"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Vydat zvukový signál a vyskočit na obrazovku"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Vyskočit na obrazovce"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Nízká"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Střední"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Vysoká"</string>
@@ -3139,7 +3149,7 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Informace související s kódem IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Otevírat ve výchozím nastavení"</string>
-    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Odkazy na otevření"</string>
+    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Otevírání odkazů"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Otevírání podporovaných odkazů"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Otevírat bez dotazu"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Podporované odkazy"</string>
@@ -3189,7 +3199,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Osobní"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Práce"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Aplikace: Vše"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"Aplikace: Vypnuto"</string>
+    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"Aplikace: vypnuto"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"Kategorie: Urgentní důležitost"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"Kategorie: Nízká důležitost"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"Kategorie: Vypnuto"</string>
@@ -3201,7 +3211,7 @@
     <string name="app_permissions_summary" msgid="5163974162150406324">"Aplikace, které používají oprávnění <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Probudit klepnutím"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Dvojitým klepnutím kamkoli na obrazovku zařízení probudíte"</string>
-    <string name="domain_urls_title" msgid="3132983644568821250">"Odkazy na otevření"</string>
+    <string name="domain_urls_title" msgid="3132983644568821250">"Otevírání odkazů"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Neotevírat podporované odkazy"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Otevírat adresy z domény <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Otevřít doménu <xliff:g id="DOMAIN">%s</xliff:g> a další adresy URL"</string>
@@ -3690,7 +3700,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Okamžité aplikace"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Otevírejte odkazy v aplikacích, i když je nemáte nainstalované"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Okamžité aplikace"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Účet okamžitých aplikací"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Předvolby okamžitých aplikací"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Nainstalované aplikace"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Úložiště je nyní spravováno správcem úložiště."</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Účty uživatele <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3741,7 +3751,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Trvalá síť VPN je zapnutá v osobním profilu"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Trvalá síť VPN je zapnutá v pracovním profilu"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Globální proxy server protokolu HTTP je nastaven"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Důvěryhodná pověření"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Důvěryhodné identifikační údaje"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Důvěryhodné identifikační údaje ve vašem osobním profilu"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Důvěryhodné identifikační údaje ve vašem pracovním profilu"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="few">Minimálně <xliff:g id="COUNT_1">%d</xliff:g> certifikáty CA</item>
       <item quantity="many">Minimálně <xliff:g id="COUNT_1">%d</xliff:g> certifikátu CA</item>
@@ -3814,6 +3826,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Informace o zprovoznění služby u operátora"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Spustit zprovoznění služby u operátora"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Co je nové a zajímavé?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Vyzkoušejte 5 nejpopulárnějších funkcí"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Prohlédněte si svůj nový telefon"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Prohlédněte si svůj nový tablet"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Prohlédněte si své nové zařízení"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Funkce v tomto zařízení není k dispozici"</string>
 </resources>

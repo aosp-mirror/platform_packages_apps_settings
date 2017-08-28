@@ -52,7 +52,11 @@ import org.robolectric.annotation.Config;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {SettingsShadowSystemProperties.class}
+)
 public class AutomaticStorageManagementSwitchPreferenceControllerTest {
 
     @Mock
@@ -86,7 +90,6 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     public void isAvailable_shouldAlwaysReturnFalse_forLowRamDevice() {
         SettingsShadowSystemProperties.set("ro.config.low_ram", "true");
         assertThat(mController.isAvailable()).isFalse();
@@ -160,7 +163,6 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     }
 
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void togglingOnShouldNotTriggerWarningFragmentIfEnabledByDefault() {
         FragmentTransaction transaction = mock(FragmentTransaction.class);
@@ -174,7 +176,6 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
         verify(transaction, never()).add(any(), eq(ActivationWarningFragment.TAG));
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void togglingOnShouldTriggerWarningFragmentIfEnabledByDefaultAndDisabledByPolicy() {
         FragmentTransaction transaction = mock(FragmentTransaction.class);

@@ -166,6 +166,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 
+    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY =
+            "bluetooth_show_devices_without_names";
+    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
+            "persist.bluetooth.showdeviceswithoutnames";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY =
             "bluetooth_disable_absolute_volume";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
@@ -250,6 +254,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mWifiAggressiveHandover;
     private SwitchPreference mMobileDataAlwaysOn;
     private SwitchPreference mTetheringHardwareOffload;
+    private SwitchPreference mBluetoothShowDevicesWithoutNames;
     private SwitchPreference mBluetoothDisableAbsVolume;
     private SwitchPreference mBluetoothEnableInbandRinging;
 
@@ -459,6 +464,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
         mTetheringHardwareOffload = findAndInitSwitchPref(TETHERING_HARDWARE_OFFLOAD);
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
+        mBluetoothShowDevicesWithoutNames =
+                findAndInitSwitchPref(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
         mBluetoothEnableInbandRinging = findAndInitSwitchPref(BLUETOOTH_ENABLE_INBAND_RINGING_KEY);
         if (!BluetoothHeadset.isInbandRingingSupported(getContext())) {
@@ -813,6 +820,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mColorTemperaturePreference != null) {
             updateColorTemperature();
         }
+        updateBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         updateBluetoothDisableAbsVolumeOptions();
         updateBluetoothEnableInbandRingingOptions();
         updateBluetoothA2dpConfigurationValues();
@@ -1441,6 +1449,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeWifiAllowScansWithTrafficOptions() {
         mWifiManager.setAllowScansWithTraffic(mWifiAllowScansWithTraffic.isChecked() ? 1 : 0);
+    }
+
+    private void updateBluetoothShowDevicesWithoutUserFriendlyNameOptions() {
+        updateSwitchPreference(mBluetoothShowDevicesWithoutNames,
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false));
+    }
+
+    private void writeBluetoothShowDevicesWithoutUserFriendlyNameOptions() {
+        SystemProperties.set(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY,
+                mBluetoothShowDevicesWithoutNames.isChecked() ? "true" : "false");
     }
 
     private void updateBluetoothDisableAbsVolumeOptions() {
@@ -2283,6 +2302,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeUSBAudioOptions();
         } else if (preference == mForceResizable) {
             writeForceResizableOptions();
+        } else if (preference == mBluetoothShowDevicesWithoutNames) {
+            writeBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mBluetoothEnableInbandRinging) {

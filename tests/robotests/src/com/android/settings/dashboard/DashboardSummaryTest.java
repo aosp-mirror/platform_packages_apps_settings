@@ -36,6 +36,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -90,6 +91,7 @@ public class DashboardSummaryTest {
     public void onConditionChanged_PositionAtTop_ScrollToTop() {
         when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(1);
         mSummary.onConditionsChanged();
+        mSummary.onConditionsChanged();
         verify(mDashboard).scrollToPosition(0);
     }
 
@@ -97,7 +99,21 @@ public class DashboardSummaryTest {
     public void onConditionChanged_PositionNotTop_RemainPosition() {
         when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(2);
         mSummary.onConditionsChanged();
+        mSummary.onConditionsChanged();
         verify(mDashboard, never()).scrollToPosition(0);
+    }
+
+    @Test
+    public void onConditionChanged_firstCall_shouldIgnore() {
+        mSummary.onConditionsChanged();
+        verify(mAdapter, never()).setConditions(any());
+    }
+
+    @Test
+    public void onConditionChanged_secondCall_shouldSetConditionsOnAdapter() {
+        mSummary.onConditionsChanged();
+        mSummary.onConditionsChanged();
+        verify(mAdapter).setConditions(any());
     }
 
     @Test

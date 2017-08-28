@@ -312,6 +312,8 @@
     <string name="zone_auto" msgid="334783869352026648">"Awtomatikong time zone"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Gamitin ang time zone na ibinigay ng network"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Gamitin ang time zone na ibinigay ng network"</string>
+    <string name="date_time_24hour_auto" msgid="2117383168985653422">"Automatikong 24-hour na format"</string>
+    <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Gamitin ang lokal na default"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24-oras na format"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Gamitin ang format na 24-oras"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"Oras"</string>
@@ -372,6 +374,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Magpatuloy"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Laktawan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Susunod"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Laktawan ang fingerprint?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Aabutin lang nang isa o dalawang minuto ang pag-set up ng fingerprint. Kung lalaktawan mo ito, maaari mong idagdag ang iyong fingerprint sa mga setting sa ibang pagkakataon."</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Laktawan ang lock ng screen?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Hindi mao-on ang mga feature sa pagprotekta ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang tablet na ito kung mawala, manakaw, o ma-reset ito."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Hindi mao-on ang mga feature sa pagprotekta ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang device na ito kung mawala, manakaw, o ma-reset ito."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Hindi mao-on ang mga feature sa pagprotekta ng device. Hindi mo mapipigilan ang ibang tao na gamitin ang teleponong ito kung mawala, manakaw, o ma-reset ito."</string>
@@ -457,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protektahan ang tablet mo"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protektahan ang device"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Protektahan phone mo"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Para sa karagdagang seguridad, mag-set up ng backup na lock ng screen."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Para sa karagdagang seguridad, mag-set up ng backup na lock ng screen."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Pigilan ang ibang taong magamit ang tablet na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Pigilan ang ibang taong magamit ang device na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Pigilan ang ibang taong magamit ang teleponong ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
@@ -838,6 +843,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"Kumonekta"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Nabigong kumonekta sa network."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Kalimutan"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"Baguhin"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"Nabigong kalimutan ang network"</string>
     <string name="wifi_save" msgid="3331121567988522826">"I-save"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nabigong i-save ang network"</string>
@@ -902,7 +908,6 @@
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"I-set up ang Wi-Fi hotspot"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Pag-setup ng Wi‑Fi hotspot"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK na hotspot"</string>
-    <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> na hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Pagtawag gamit ang Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"I-on ang Pagtawag gamit ang Wi-Fi"</string>
@@ -1464,15 +1469,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Impormasyon sa kaligtasan"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Wala kang koneksyon ng data. Upang tingnan ang impormasyong ito ngayon, pumunta sa %s mula sa anumang computer na nakakonekta sa Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Naglo-load…"</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Piliin ang iyong password"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Magtakda ng lock ng screen"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Para sa seguridad, magtakda ng password"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Para magamit ang fingerprint, i-set ang pw"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Piliin ang iyong pattern"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Para magamit ang fingerprint, i-set ang pattern"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Piliin ang iyong PIN"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Para sa seguridad, magtakda ng PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Para magamit ang fingerprint, i-set ang PIN"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Kumpirmahin ang iyong password"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Ilagay muli ang iyong password"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Kumpirmahin ang iyong pattern"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Kumpirmahin ang iyong PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Ilagay muli ang iyong PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Hindi tugma ang mga password"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Hindi tugma ang mga PIN"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Pagpipilian sa pag-unlock"</string>
@@ -1491,6 +1497,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"Para sa karagdagang seguridad, gamitin ang iyong pattern sa trabaho"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"Para sa karagdagang seguridad, ilagay ang iyong PIN sa trabaho"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"Para sa karagdagang seguridad, ilagay ang iyong password sa trabaho"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong pattern upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong PIN upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"Na-reset sa mga factory setting ang iyong telepono. Ilagay ang dati mong password upang magamit ito."</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"I-verify ang pattern"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"I-verify ang PIN"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"I-verify ang password"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Maling PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Maling password"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Maling pattern"</string>
@@ -2210,7 +2222,6 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"I-type ang password para sa storage ng kredensyal."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Kasalukuyang password:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Alisin ang lahat ng content"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Dapat na may hindi bababa sa 8 character ang password."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Hindi tamang password."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Hindi tamang password. Mayroon kang isa pang pagkakataon bago mabura ang storage ng kredensyal."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Hindi tamang password. Mayroon kang <xliff:g id="NUMBER">%1$d</xliff:g> pang pagkakataon bago mabura ang storage ng kredensyal."</string>
@@ -2810,7 +2821,7 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume ng pag-ring"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume ng notification"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Ringtone ng telepono"</string>
-    <string name="notification_ringtone_title" msgid="4468722874617061231">"Default, tunog ng notification"</string>
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"Default na notification sound"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Tunog mula sa app"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"Default na tunog ng notification"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Default na tunog ng alarm"</string>
@@ -2843,7 +2854,7 @@
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Mga alarm lang"</string>
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Ganap na katahimikan"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"I-block ang mga visual na abala"</string>
+    <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"I-block ang visual na abala"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Mga tunog sa profile sa trabaho"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Gamitin tunog sa personal na profile"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Pareho ang mga tunog para sa personal na profile at profile sa trabaho"</string>
@@ -2857,7 +2868,7 @@
     <string name="ringtones_install_custom_sound_title" msgid="5948792721161302255">"Magdagdag ng custom na tunog?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="2195581481608512786">"Maglalagay ng kopya ng file na ito sa folder na <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"Mga Ringtone"</string>
-    <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Iba pang mga tunog at pag-vibrate"</string>
+    <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Iba pang tunog at pag-vibrate"</string>
     <string name="configure_notification_settings" msgid="7616737397127242615">"Mga Notification"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Advanced"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Mga notification sa trabaho"</string>
@@ -2884,8 +2895,7 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Walang tunog"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Gumawa ng tunog"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Gumawa ng tunog at mag-pop up sa screen"</string>
-    <!-- no translation found for notification_importance_high_silent (2667033773703765252) -->
-    <skip />
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"Mag-pop sa screen"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Mababa"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"Katamtaman"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Mataas"</string>
@@ -2967,7 +2977,7 @@
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Ginagamit na ang pangalan ng panuntunan"</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"Magdagdag pa"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"I-delete ang panuntunan"</string>
-    <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"Pumili ng uri ng panuntunan"</string>
+    <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"Piliin ang uri ng panuntunan"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"I-delete ang panuntunang \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"I-delete"</string>
     <string name="zen_mode_rule_type" msgid="2289413469580142888">"Uri ng panuntunan"</string>
@@ -3177,7 +3187,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Pag-optimize ng baterya"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Mga alerto sa paggamit"</string>
-    <string name="show_all_apps" msgid="1512506948197818534">"Ipakita ang kumpletong paggamit ng device"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Ipakita ang paggamit ng device"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"Ipakita ang paggamit ng app"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Malakas gumamit ng baterya"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
@@ -3571,7 +3581,7 @@
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Mag-double tap upang suriin ang device"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Upang tingnan ang oras, mga icon ng notification, at iba pang impormasyon, i-double tap ang iyong screen."</string>
     <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Tingnan ang mga notification kapag naka-off ang screen"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Kunin upang suriin ang telepono"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Hawakan para i-check ang phone"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Kunin upang suriin ang tablet"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Kunin upang suriin ang device"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Upang tingnan ang oras, mga icon ng notification, at iba pang impormasyon, kunin ang iyong telepono."</string>
@@ -3594,7 +3604,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Mga instant na app"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Magbukas ng mga link sa mga app, kahit na hindi naka-install ang mga ito"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Mga instant na app"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Account ng mga instant na app"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Mga kagustuhan sa Instant Apps"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Mga naka-install na app"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Pinamamahalaan na ngayon ng storage manager ang iyong storage"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Mga account para kay <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3641,7 +3651,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"Naka-on ang palaging naka-on na VPN sa iyong personal na profile"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"Naka-on ang palaging naka-on na VPN sa iyong profile sa trabaho"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Naitakda na ang pangkalahatang HTTP proxy"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"Mga pinagkakatiwalaang kredensyal"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"Mga pinagkakatiwalaang kredensyal"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"Mga pinagkakatiwalaang kredensyal sa iyong personal na profile"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"Mga pinagkakatiwalaang kredensyal sa iyong profile sa trabaho"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="one">Minimum na <xliff:g id="COUNT_1">%d</xliff:g> CA certificate</item>
       <item quantity="other">Minimum na <xliff:g id="COUNT_1">%d</xliff:g> na CA certificate</item>
@@ -3704,6 +3716,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"Impormasyon sa Provisioning ng Carrier"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"I-trigger ang Provisioning ng Carrier"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Ano ang bago at kapana-panabik?"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Tingnan ang nangungunang 5 feature"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Maglibot sa iyong bagong telepono"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Maglibot sa iyong bagong tablet"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Maglibot sa iyong bagong device"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Hindi available ang feature na ito sa device na ito"</string>
 </resources>
