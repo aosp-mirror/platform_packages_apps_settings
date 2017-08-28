@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -53,16 +54,17 @@ public final class BluetoothDevicePreference extends GearPreference implements
     private final UserManager mUserManager;
 
     private AlertDialog mDisconnectDialog;
-
     private String contentDescription = null;
-
+    private DeviceListPreferenceFragment mDeviceListPreferenceFragment;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
 
-    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
+    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
+            DeviceListPreferenceFragment deviceListPreferenceFragment) {
         super(context, null);
         mResources = getContext().getResources();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mDeviceListPreferenceFragment = deviceListPreferenceFragment;
 
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
@@ -120,15 +122,20 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        Pair<Integer, String> pair = Utils.getBtClassDrawableWithDescription(mResources,
+        final Pair<Drawable, String> pair = Utils.getBtClassDrawableWithDescription(getContext(),
                 mCachedDevice);
-        if (pair.first != 0) {
+        if (pair.first != null) {
             setIcon(pair.first);
             contentDescription = pair.second;
         }
 
         // Used to gray out the item
         setEnabled(!mCachedDevice.isBusy());
+
+        // Device is only visible in the UI if it has a valid name besides MAC address or when user
+        // allows showing devices without user-friendly name in developer settings
+        setVisible(mDeviceListPreferenceFragment.shouldShowDevicesWithoutNames()
+                || mCachedDevice.hasHumanReadableName());
 
         // This could affect ordering, so notify that
         notifyHierarchyChanged();

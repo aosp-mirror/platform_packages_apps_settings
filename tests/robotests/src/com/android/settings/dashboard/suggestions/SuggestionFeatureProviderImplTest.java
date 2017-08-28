@@ -69,9 +69,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowSecureSettings.class)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowSecureSettings.class, SettingsShadowResources.class}
+)
 public class SuggestionFeatureProviderImplTest {
 
     private static final String DOUBLE_TWIST_SENSOR_NAME = "double_twist_sensor_name";
@@ -115,7 +117,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTapPower_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, false);
@@ -126,7 +127,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTapPower_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
@@ -138,7 +138,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTapPower_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
@@ -151,7 +150,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTwist_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
                 R.string.gesture_double_twist_sensor_name, "nonexistant name");
@@ -164,7 +162,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplay_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -178,7 +175,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplay_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -193,7 +189,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplayPickup_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -207,7 +202,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplayPickup_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");

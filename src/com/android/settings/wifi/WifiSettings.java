@@ -176,6 +176,12 @@ public class WifiSettings extends RestrictedSettingsFragment
     // For Search
     private static final String DATA_KEY_REFERENCE = "main_toggle_wifi";
 
+    /**
+     * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
+     * network once connected.
+     */
+    private boolean mClickedConnect;
+
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
@@ -894,6 +900,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
         mConnectedAccessPointPreferenceCategory.setVisible(true);
+        if (mClickedConnect) {
+            mClickedConnect = false;
+            scrollToPreference(mConnectedAccessPointPreferenceCategory);
+        }
     }
 
     /** Removes all preferences and hide the {@link #mConnectedAccessPointPreferenceCategory}. */
@@ -1039,7 +1049,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT,
                 isSavedNetwork);
         mWifiManager.connect(config, mConnectListener);
-        scrollToPreference(mConnectedAccessPointPreferenceCategory);
+        mClickedConnect = true;
     }
 
     protected void connect(final int networkId, boolean isSavedNetwork) {

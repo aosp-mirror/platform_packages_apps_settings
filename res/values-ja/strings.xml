@@ -1750,7 +1750,7 @@
     <string name="show_ime" msgid="2658582193437188227">"仮想キーボードの表示"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"物理キーボードが有効になっていても画面に表示されます"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"キーボード ショートカット ヘルパー"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"使用可能なショートカットを表示"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"使用可能なショートカットを表示します"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"デフォルト"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"ゲーム用コントローラ"</string>
@@ -2578,7 +2578,7 @@
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"セットアップしていません"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"セットアップしていません - 制限付きプロファイル"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"セットアップしていません - 仕事用プロファイル"</string>
-    <string name="user_admin" msgid="993402590002400782">"管理"</string>
+    <string name="user_admin" msgid="993402590002400782">"管理者"</string>
     <string name="user_you" msgid="1639158809315025986">"自分（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_nickname" msgid="5148818000228994488">"ニックネーム"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"追加"</string>
@@ -2591,7 +2591,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"追加ユーザーを作成して、この端末を他のユーザーと共有できます。各ユーザーは各自のスペースを所有でき、アプリや壁紙などを使用してカスタマイズできます。Wi-Fiなど、すべてのユーザーに影響する端末設定を変更することもできます。\n\n新しいユーザーを追加したら、そのユーザーは自分のスペースをセットアップする必要があります。\n\nすべてのユーザーは他のユーザーに代わってアプリを更新できます。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"新しいユーザーを追加したら、そのユーザーは自分のスペースをセットアップする必要があります。\n\nすべてのユーザーは他のユーザーに代わってアプリを更新できます。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"ユーザーを今すぐセットアップ"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"ユーザーが端末を使って各自のスペースをセットアップできるよう確認してください"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"ユーザーが端末を使って各自のスペースをセットアップできるようにします"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"プロファイルを今すぐセットアップしますか？"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"今すぐセットアップ"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"後で行う"</string>
@@ -3607,8 +3607,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Instant Apps"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"アプリがインストールされていなくても、アプリ内のリンクを開くことができます"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Instant Apps"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Instant Apps の設定"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"インストール済みアプリ"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"お使いのストレージの管理はストレージ マネージャが行うようになりました"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>のアカウント"</string>
@@ -3655,7 +3654,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"個人プロフィールで常時接続 VPN は ON です"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"仕事用プロファイルで常時接続 VPN は ON です"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"グローバル HTTP プロキシが設定されています"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"信頼できる認証情報"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"信頼できる認証情報"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"個人用プロファイル内の信頼できる認証情報"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"仕事用プロファイル内の信頼できる認証情報"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">CA 証明書: <xliff:g id="COUNT_1">%d</xliff:g> 件以上</item>
       <item quantity="one">CA 証明書: <xliff:g id="COUNT_0">%d</xliff:g> 件以上</item>

@@ -373,7 +373,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"略過"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"繼續"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"要略過指紋設定程序嗎？"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"指紋設定程序只需一兩分鐘即可完成。如果你略過這個程序，稍後可以在設定中自行新增你的指紋。"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"指紋設定程序只需一兩分鐘即可完成。如果略過這個程序，稍後可以在設定中自行新增你的指紋。"</string>
     <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"要略過螢幕鎖定設定程序嗎？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"裝置保護功能將不會開啟。在這種情況下，你無法在這部平板電腦遺失、遭竊或重設時，防止其他人使用平板電腦。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"裝置保護功能將不會開啟。在這種情況下，你無法在這個裝置遺失、遭竊或重設時，防止其他人使用裝置。"</string>
@@ -460,8 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"保護你的平板電腦"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"保護你的裝置"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"保護你的手機"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5474935724843291107) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"為了進一步提升安全性，請設定備用螢幕鎖定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"只要啟用裝置保護功能，即可防止他人在未獲你授權的情況下使用這台平板電腦。請選擇你要使用的螢幕鎖定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"只要啟用裝置保護功能，即可防止他人在未獲你授權的情況下使用這個裝置。請選擇你要使用的螢幕鎖定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"只要啟用裝置保護功能，即可防止他人在未獲你授權的情況下使用這支手機。請選擇你要使用的螢幕鎖定方式。"</string>
@@ -1258,7 +1257,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"系統"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"探索「<xliff:g id="NAME">^1</xliff:g>」"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"其他檔案包括應用程式所儲存的共用檔案、透過網際網路或藍牙下載的檔案以及 Android 檔案等。\n\n如要查看這個「<xliff:g id="NAME">^1</xliff:g>」中可供檢視的內容，請輕觸 [探索]。"</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"系統包括用於執行 Android <xliff:g id="VERSION">%s</xliff:g> 版的檔案"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"「系統」中包含用來執行 Android <xliff:g id="VERSION">%s</xliff:g> 版的檔案"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> 可能儲存了相片、音樂、應用程式或其他資料 (儲存空間使用量：<xliff:g id="SIZE">^2</xliff:g>)。\n\n如要查看詳細資料，請切換至 <xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"設定你的「<xliff:g id="NAME">^1</xliff:g>」"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"使用可攜式儲存空間"</string>
@@ -1468,21 +1467,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全資訊"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"你沒有數據連線，如要立即查看這項資訊，請使用任何已連上網際網路的電腦前往 %s。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"載入中…"</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (3872462096767152394) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (1197569283524841412) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"設定螢幕鎖定"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"為了安全起見，請設定密碼"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"如要使用指紋，請設定密碼"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"選擇圖案"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"如要使用指紋，請設定解鎖圖案"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (1875420718677275646) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"為了安全起見，請設定 PIN 碼"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"如要使用指紋，請設定 PIN 碼"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (1266027268220850931) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"請重新輸入你的密碼"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"確認圖案"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (7744513791910572550) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"請重新輸入你的 PIN 碼"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"密碼不符"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN 碼不符"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"選擇解鎖方式"</string>
@@ -3613,8 +3607,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"免安裝應用程式"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"即使未安裝應用程式，也能在當中開啟連結"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"免安裝應用程式"</string>
-    <!-- no translation found for instant_apps_settings (8827777916518348213) -->
-    <skip />
+    <string name="instant_apps_settings" msgid="8827777916518348213">"免安裝應用程式偏好設定"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安裝的應用程式"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"你的儲存空間目前是由儲存空間管理員管理"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>的帳戶"</string>
@@ -3661,7 +3654,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"已開啟你個人設定檔中的「永久連線的 VPN」"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"已開啟你 Work 設定檔中的「永久連線的 VPN」"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"已設定全域 HTTP Proxy"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"信任的憑證"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"信任的憑證"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"你的個人設定檔中安裝的信任的憑證"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"你的 Work 設定檔中安裝的信任的憑證"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">最少有 <xliff:g id="COUNT_1">%d</xliff:g> 個 CA 憑證</item>
       <item quantity="one">最少有 <xliff:g id="COUNT_0">%d</xliff:g> 個 CA 憑證</item>
@@ -3724,8 +3719,8 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"電信業者佈建資訊"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"觸發電信業者佈建程序"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"有什麼新奇功能？"</string>
-    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"探索你的新手機"</string>
-    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"探索你的新平板電腦"</string>
-    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"探索你的新裝置"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"認識你的新手機"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"認識你的新平板電腦"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"認識你的新裝置"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"這個裝置不支援此功能"</string>
 </resources>

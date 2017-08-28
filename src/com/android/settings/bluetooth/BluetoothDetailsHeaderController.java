@@ -16,8 +16,8 @@
 
 package com.android.settings.bluetooth;
 
-
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
@@ -51,11 +51,11 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     protected void setHeaderProperties() {
-        Pair<Integer, String> pair = Utils.getBtClassDrawableWithDescription
-                (mContext.getResources(), mCachedDevice);
+        final Pair<Drawable, String> pair = Utils.getBtClassDrawableWithDescription
+                (mContext, mCachedDevice);
         String summaryText = mCachedDevice.getConnectionSummary();
         mHeaderController.setLabel(mCachedDevice.getName());
-        mHeaderController.setIcon(mContext.getDrawable(pair.first));
+        mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);
         mHeaderController.setSummary(summaryText);
     }

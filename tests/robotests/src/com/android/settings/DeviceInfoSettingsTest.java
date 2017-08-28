@@ -45,7 +45,11 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowUtils.class
+)
 public class DeviceInfoSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -83,7 +87,6 @@ public class DeviceInfoSettingsTest {
     }
 
     @Test
-    @Config(shadows = ShadowUtils.class)
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks = DeviceInfoSettings.SEARCH_INDEX_DATA_PROVIDER

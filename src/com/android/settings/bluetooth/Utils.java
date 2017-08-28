@@ -23,6 +23,9 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.VisibleForTesting;
 import android.util.Pair;
 import android.widget.Toast;
@@ -36,6 +39,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 import com.android.settingslib.bluetooth.Utils.ErrorListener;
+import com.android.settingslib.graph.BluetoothDeviceLayerDrawable;
 
 import java.util.List;
 
@@ -150,27 +154,31 @@ public final class Utils {
         }
     };
 
-    static Pair<Integer, String> getBtClassDrawableWithDescription(Resources r,
+    static Pair<Drawable, String> getBtClassDrawableWithDescription(Context context,
             CachedBluetoothDevice cachedDevice) {
         BluetoothClass btClass = cachedDevice.getBtClass();
+        final int level = cachedDevice.getBatteryLevel();
         if (btClass != null) {
             switch (btClass.getMajorDeviceClass()) {
                 case BluetoothClass.Device.Major.COMPUTER:
-                    return new Pair<Integer, String>(R.drawable.ic_bt_laptop,
-                           r.getString(R.string.bluetooth_talkback_computer));
+                    return new Pair<>(getBluetoothDrawable(context, R.drawable.ic_bt_laptop, level),
+                            context.getString(R.string.bluetooth_talkback_computer));
 
                 case BluetoothClass.Device.Major.PHONE:
-                    return new Pair<Integer, String>(R.drawable.ic_bt_cellphone,
-                            r.getString(R.string.bluetooth_talkback_phone));
+                    return new Pair<>(
+                            getBluetoothDrawable(context, R.drawable.ic_bt_cellphone, level),
+                            context.getString(R.string.bluetooth_talkback_phone));
 
                 case BluetoothClass.Device.Major.PERIPHERAL:
-                    return new Pair<Integer, String>(HidProfile.getHidClassDrawable(btClass),
-                            r.getString(
-                                    R.string.bluetooth_talkback_input_peripheral));
+                    return new Pair<>(
+                            getBluetoothDrawable(context, HidProfile.getHidClassDrawable(btClass),
+                                    level),
+                            context.getString(R.string.bluetooth_talkback_input_peripheral));
 
                 case BluetoothClass.Device.Major.IMAGING:
-                    return new Pair<Integer, String>(R.drawable.ic_settings_print,
-                            r.getString(R.string.bluetooth_talkback_imaging));
+                    return new Pair<>(
+                            getBluetoothDrawable(context, R.drawable.ic_settings_print, level),
+                            context.getString(R.string.bluetooth_talkback_imaging));
 
                 default:
                     // unrecognized device class; continue
@@ -181,20 +189,34 @@ public final class Utils {
         for (LocalBluetoothProfile profile : profiles) {
             int resId = profile.getDrawableResource(btClass);
             if (resId != 0) {
-                return new Pair<Integer, String>(resId, null);
+                return new Pair<>(getBluetoothDrawable(context, resId, level), null);
             }
         }
         if (btClass != null) {
             if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
-                return new Pair<Integer, String>(R.drawable.ic_bt_headset_hfp,
-                        r.getString(R.string.bluetooth_talkback_headset));
+                return new Pair<>(
+                        getBluetoothDrawable(context, R.drawable.ic_bt_headset_hfp, level),
+                        context.getString(R.string.bluetooth_talkback_headset));
             }
             if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
-                return new Pair<Integer, String>(R.drawable.ic_bt_headphones_a2dp,
-                        r.getString(R.string.bluetooth_talkback_headphone));
+                return new Pair<>(
+                        getBluetoothDrawable(context, R.drawable.ic_bt_headphones_a2dp, level),
+                        context.getString(R.string.bluetooth_talkback_headphone));
             }
         }
-        return new Pair<Integer, String>(R.drawable.ic_settings_bluetooth,
-                r.getString(R.string.bluetooth_talkback_bluetooth));
+        return new Pair<>(getBluetoothDrawable(context, R.drawable.ic_settings_bluetooth, level),
+                context.getString(R.string.bluetooth_talkback_bluetooth));
+    }
+
+    @VisibleForTesting
+    static Drawable getBluetoothDrawable(Context context, @DrawableRes int resId,
+            int batteryLevel) {
+        if (batteryLevel != BluetoothDevice.BATTERY_LEVEL_UNKNOWN) {
+            return BluetoothDeviceLayerDrawable.createLayerDrawable(context, resId, batteryLevel);
+        } else if (resId != 0) {
+            return context.getDrawable(resId);
+        } else {
+            return null;
+        }
     }
 }
