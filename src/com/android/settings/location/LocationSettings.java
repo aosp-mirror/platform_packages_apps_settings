@@ -211,11 +211,6 @@ public class LocationSettings extends LocationSettingsBase
                     request.contentDescription);
             pref.setIcon(request.icon);
             pref.setTitle(request.label);
-            if (request.isHighBattery) {
-                pref.setSummary(R.string.location_high_battery_use);
-            } else {
-                pref.setSummary(R.string.location_low_battery_use);
-            }
             pref.setOnPreferenceClickListener(
                     new PackageEntryClickedListener(request.packageName, request.userHandle));
             recentLocationPrefs.add(pref);
