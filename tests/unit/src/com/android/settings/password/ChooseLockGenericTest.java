@@ -170,6 +170,14 @@ public class ChooseLockGenericTest {
         enterTestPin(view);
         enterTestPin(view);
 
+        // Dismiss notifications setting
+        view = new UiObject(new UiSelector()
+                .resourceId(mSettingPackage + ":id/redaction_done_button"));
+        if (view.waitForExists(TIMEOUT)) {
+            view.click();
+            mDevice.waitForIdle();
+        }
+
         mDevice.pressBack();
 
         assertThat(getTargetContext().getSystemService(KeyguardManager.class).isDeviceSecure())

@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
-public class PowerUsageSummaryUiTest {
+public class PowerUsageSummaryTest {
     private static final String BATTERY_INTENT = "android.intent.action.POWER_USAGE_SUMMARY";
 
     @Before

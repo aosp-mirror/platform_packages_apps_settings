@@ -17,8 +17,6 @@
 package com.android.settings;
 
 import com.android.settings.Settings;
-import com.android.settings.tests.Manufacturer;
-import com.android.settings.tests.Operator;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +39,7 @@ import java.util.List;
  */
 public class SettingsHookTests extends ActivityInstrumentationTestCase2<Settings> {
 
-    private static final String PACKAGE_NAME = "com.android.settings.tests";
+    private static final String PACKAGE_NAME = "com.android.settings.tests.unit";
 
     private static final String KEY_SETTINGS_ROOT = "parent";
     private static final String KEY_SETTINGS_OPERATOR = "operator_settings";
