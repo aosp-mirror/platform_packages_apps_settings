@@ -119,7 +119,7 @@ public class BillingCycleSettings extends DataUsageBase implements
             mDataWarning.setEnabled(false);
             mEnableDataWarning.setChecked(false);
         }
-        final long limitBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
+        final long limitBytes = services.mPolicyEditor.getPolicyLimitBytes(mNetworkTemplate);
         if (limitBytes != LIMIT_DISABLED) {
             mDataLimit.setSummary(Formatter.formatFileSize(getContext(), limitBytes));
             mDataLimit.setEnabled(true);
