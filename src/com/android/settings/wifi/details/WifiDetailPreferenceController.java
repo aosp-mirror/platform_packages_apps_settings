@@ -419,7 +419,7 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         String dnsServers = mLinkProperties.getDnsServers().stream()
                 .filter(Inet4Address.class::isInstance)
                 .map(InetAddress::getHostAddress)
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining("\n"));
 
         // Update UI.
         updatePreference(mIpAddressPref, ipv4Address);
