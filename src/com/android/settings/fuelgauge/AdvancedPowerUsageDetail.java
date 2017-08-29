@@ -16,7 +16,9 @@
 
 package com.android.settings.fuelgauge;
 
+import android.annotation.UserIdInt;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.LoaderManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -152,7 +154,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
                 R.string.battery_details_title, null,
-                new UserHandle(UserHandle.getUserId(sipper.getUid())));
+                new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)));
+    }
+
+    private static @UserIdInt int getUserIdToLaunchAdvancePowerUsageDetail(BatterySipper bs) {
+        if (bs.drainType == BatterySipper.DrainType.USER) {
+            return ActivityManager.getCurrentUser();
+        }
+        return UserHandle.getUserId(bs.getUid());
     }
 
     public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,

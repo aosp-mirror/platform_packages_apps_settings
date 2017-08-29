@@ -428,7 +428,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     private static boolean isSystemUid(int uid) {
-        return uid >= Process.SYSTEM_UID && uid < Process.FIRST_APPLICATION_UID;
+        final int appUid = UserHandle.getAppId(uid);
+        return appUid >= Process.SYSTEM_UID && appUid < Process.FIRST_APPLICATION_UID;
     }
 
     /**
