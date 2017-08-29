@@ -434,7 +434,7 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        verify(mockDnsPref).setDetailText("8.8.4.4,8.8.8.8");
+        verify(mockDnsPref).setDetailText("8.8.4.4\n8.8.8.8");
     }
 
     @Test
@@ -546,7 +546,7 @@ public class WifiDetailPreferenceControllerTest {
         lp.addDnsServer(Constants.IPV4_DNS2);
         updateLinkProperties(lp);
         inOrder.verify(mockDnsPref).setDetailText(
-                Constants.IPV4_DNS1.getHostAddress() + "," +
+                Constants.IPV4_DNS1.getHostAddress() + "\n" +
                 Constants.IPV4_DNS2.getHostAddress());
         inOrder.verify(mockDnsPref).setVisible(true);
     }
