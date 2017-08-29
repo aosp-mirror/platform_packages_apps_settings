@@ -50,6 +50,7 @@ import com.android.settings.search2.SearchResult.Builder;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -192,6 +193,8 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
+    @Ignore
     public void testBindViewElements_appSearchResult() {
         when(mPackageManager.getUserBadgedLabel(any(CharSequence.class),
                 eq(new UserHandle(USER_ID)))).thenReturn(BADGED_LABEL);
