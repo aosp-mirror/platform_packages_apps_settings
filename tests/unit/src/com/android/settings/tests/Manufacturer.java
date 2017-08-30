@@ -18,13 +18,13 @@ package com.android.settings.tests;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.android.settings.tests.unit.R;
 
-public class Operator extends Activity {
+public class Manufacturer extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.operator_main);
+        setContentView(R.layout.manufacturer_main);
     }
-
 }

@@ -53,6 +53,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
@@ -78,7 +79,7 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowEntityHeaderController.class)
+        shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -347,6 +348,22 @@ public class AdvancedPowerUsageDetailTest {
         verify(mTestActivity).startPreferencePanelAsUser(
                 nullable(Fragment.class), nullable(String.class), nullable(Bundle.class), anyInt(),
                 nullable(CharSequence.class), eq(new UserHandle(10)));
+    }
+
+    @Test
+    public void testStartBatteryDetailPage_typeUser_startByCurrentUser() {
+        mBatterySipper.drainType = BatterySipper.DrainType.USER;
+        mBatterySipper.userId = 10;
+
+        final int currentUser = 20;
+        ShadowActivityManager.setCurrentUser(currentUser);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
+
+
+        verify(mTestActivity).startPreferencePanelAsUser(
+                nullable(Fragment.class), nullable(String.class), nullable(Bundle.class), anyInt(),
+                nullable(CharSequence.class), eq(new UserHandle(currentUser)));
     }
 
     @Test

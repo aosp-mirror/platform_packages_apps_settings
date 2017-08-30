@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 @SmallTest
-public class StorageDashboardFragmentEspressoTest {
+public class StorageDashboardFragmentTest {
 
     public static final String EXTRA_KEY = ":settings:show_fragment";
 
@@ -30,7 +30,7 @@ public class StorageDashboardFragmentEspressoTest {
     @Test
     public void testStorageManagePreference_canClickTextView() throws InterruptedException {
         // Click on the actual textbox instead of just somewhere in the preference
-        onView(withText(R.string.storage_menu_manage)).perform(click());
+        onView(withText(R.string.automatic_storage_manager_preference_title)).perform(click());
 
         // Check that it worked by seeing if we switched screens
         intended(hasExtra(equalTo(EXTRA_KEY),

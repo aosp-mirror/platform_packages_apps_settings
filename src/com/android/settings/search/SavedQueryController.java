@@ -34,10 +34,6 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
         MenuItem.OnMenuItemClickListener {
 
     // TODO: make a generic background task manager to handle one-off tasks like this one.
-
-    private static final int LOADER_ID_SAVE_QUERY_TASK = 0;
-    private static final int LOADER_ID_REMOVE_QUERY_TASK = 1;
-    private static final int LOADER_ID_SAVED_QUERIES = 2;
     private static final String ARG_QUERY = "remove_query";
     private static final String TAG = "SearchSavedQueryCtrl";
 
@@ -60,11 +56,11 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
         switch (id) {
-            case LOADER_ID_SAVE_QUERY_TASK:
+            case SearchFragment.SearchLoaderId.SAVE_QUERY_TASK:
                 return new SavedQueryRecorder(mContext, args.getString(ARG_QUERY));
-            case LOADER_ID_REMOVE_QUERY_TASK:
+            case SearchFragment.SearchLoaderId.REMOVE_QUERY_TASK:
                 return new SavedQueryRemover(mContext);
-            case LOADER_ID_SAVED_QUERIES:
+            case SearchFragment.SearchLoaderId.SAVED_QUERIES:
                 return mSearchFeatureProvider.getSavedQueryLoader(mContext);
         }
         return null;
@@ -73,10 +69,11 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
     @Override
     public void onLoadFinished(Loader loader, Object data) {
         switch (loader.getId()) {
-            case LOADER_ID_REMOVE_QUERY_TASK:
-                mLoaderManager.restartLoader(LOADER_ID_SAVED_QUERIES, null, this);
+            case SearchFragment.SearchLoaderId.REMOVE_QUERY_TASK:
+                mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.SAVED_QUERIES,
+                        null /* args */, this /* callback */);
                 break;
-            case LOADER_ID_SAVED_QUERIES:
+            case SearchFragment.SearchLoaderId.SAVED_QUERIES:
                 if (SettingsSearchIndexablesProvider.DEBUG) {
                     Log.d(TAG, "Saved queries loaded");
                 }
@@ -107,7 +104,8 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
     public void saveQuery(String query) {
         final Bundle args = new Bundle();
         args.putString(ARG_QUERY, query);
-        mLoaderManager.restartLoader(LOADER_ID_SAVE_QUERY_TASK, args, this);
+        mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.SAVE_QUERY_TASK, args,
+                this /* callback */);
     }
 
     /**
@@ -115,13 +113,15 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks,
      */
     public void removeQueries() {
         final Bundle args = new Bundle();
-        mLoaderManager.restartLoader(LOADER_ID_REMOVE_QUERY_TASK, args, this);
+        mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.REMOVE_QUERY_TASK, args,
+                this /* callback */);
     }
 
     public void loadSavedQueries() {
         if (SettingsSearchIndexablesProvider.DEBUG) {
             Log.d(TAG, "loading saved queries");
         }
-        mLoaderManager.restartLoader(LOADER_ID_SAVED_QUERIES, null, this);
+        mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.SAVED_QUERIES, null /* args */,
+                this /* callback */);
     }
 }

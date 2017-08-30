@@ -410,9 +410,9 @@ public class SearchFragmentTest {
 
         fragment.onIndexingFinished();
 
-        verify(loaderManager).initLoader(eq(SearchFragment.LOADER_ID_DATABASE),
+        verify(loaderManager).initLoader(eq(SearchFragment.SearchLoaderId.DATABASE),
                 eq(null), any(LoaderManager.LoaderCallbacks.class));
-        verify(loaderManager).initLoader(eq(SearchFragment.LOADER_ID_INSTALLED_APPS),
+        verify(loaderManager).initLoader(eq(SearchFragment.SearchLoaderId.INSTALLED_APPS),
                 eq(null), any(LoaderManager.LoaderCallbacks.class));
     }
 

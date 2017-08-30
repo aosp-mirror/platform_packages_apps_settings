@@ -21,9 +21,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.uiautomator.UiDevice;
+
 import org.junit.runner.RunWith;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiScrollable;
+import android.support.test.uiautomator.UiSelector;
 import org.junit.Test;
 import com.android.settings.R;
 
@@ -52,8 +56,16 @@ public class DrawOverlayDetailsTest {
         final String appName = (String) packageManager.getApplicationLabel(packageManager
                 .getApplicationInfo(PACKAGE_SYSTEM_UI, PackageManager.GET_META_DATA));
 
+        final UiDevice device = UiDevice.getInstance(instrumentation);
+        device.waitForIdle();
+
         openActionBarOverflowOrOptionsMenu(targetContext);
         onView(withText(targetContext.getString(R.string.menu_show_system))).perform(click());
+        device.waitForIdle();
+
+        final UiScrollable settings = new UiScrollable(
+                new UiSelector().packageName(targetContext.getPackageName()).scrollable(true));
+        settings.scrollTextIntoView(appName);
         onView(withText(appName)).perform(click());
         onView(withText(targetContext.getString(R.string.permit_draw_overlay))).check(matches
                 (not(isEnabled())));

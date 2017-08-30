@@ -66,15 +66,15 @@ public class WifiTetherSettingsTest {
     @Test
     public void launchTetherSettings_shouldHaveAllFields() {
         launchWifiTetherActivity();
-        onView(withText("Network name")).check(matches(isDisplayed()));
-        onView(withText("Password")).check(matches(isDisplayed()));
-        onView(withText("Select AP Band")).check(matches(isDisplayed()));
+        onView(withText("Hotspot name")).check(matches(isDisplayed()));
+        onView(withText("Hotspot password")).check(matches(isDisplayed()));
+        onView(withText("AP Band")).check(matches(isDisplayed()));
     }
 
     private void launchWifiTetherActivity() {
         mInstrumentation.startActivitySync(mTetherActivityIntent);
-        onView(withText("Portable Wi‑Fi hotspot")).perform();
-        UiObject2 item = mDevice.wait(Until.findObject(By.text("Portable Wi‑Fi hotspot")), TIMEOUT);
+        onView(withText("Wi‑Fi hotspot")).perform();
+        UiObject2 item = mDevice.wait(Until.findObject(By.text("Wi‑Fi hotspot")), TIMEOUT);
         item.click();
     }
 }
