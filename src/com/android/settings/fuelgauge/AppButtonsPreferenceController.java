@@ -381,7 +381,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
+        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
             enabled = false;
         }
 
@@ -579,21 +579,6 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         final int userCount = mUserManager.getUserCount();
         return userCount == 1
                 || (mUserManager.isSplitSystemUser() && userCount == 2);
-    }
-
-    /** Returns if the supplied package is device owner or profile owner of at least one user */
-    private boolean isProfileOrDeviceOwner(String packageName) {
-        List<UserInfo> userInfos = mUserManager.getUsers();
-        if (mDpm.isDeviceOwnerAppOnAnyUser(packageName)) {
-            return true;
-        }
-        for (int i = 0, size = userInfos.size(); i < size; i++) {
-            ComponentName cn = mDpm.getProfileOwnerAsUser(userInfos.get(i).id);
-            if (cn != null && cn.getPackageName().equals(packageName)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
