@@ -17,14 +17,17 @@
 package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +65,12 @@ public class BackgroundActivityPreferenceControllerTest {
     private ApplicationInfo mHighApplicationInfo;
     @Mock
     private ApplicationInfo mLowApplicationInfo;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private DevicePolicyManagerWrapper mDevicePolicyManagerWrapper;
     private BackgroundActivityPreferenceController mController;
     private SwitchPreference mPreference;
     private Context mShadowContext;
@@ -73,6 +82,9 @@ public class BackgroundActivityPreferenceControllerTest {
         mShadowContext = RuntimeEnvironment.application;
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getSystemService(Context.APP_OPS_SERVICE)).thenReturn(mAppOpsManager);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(
+                mDevicePolicyManager);
         when(mPackageManager.getPackagesForUid(UID_NORMAL)).thenReturn(PACKAGES_NORMAL);
         when(mPackageManager.getPackagesForUid(UID_SPECIAL)).thenReturn(PACKAGES_SPECIAL);
 
@@ -86,6 +98,7 @@ public class BackgroundActivityPreferenceControllerTest {
         mPreference = new SwitchPreference(mShadowContext);
         mController = spy(new BackgroundActivityPreferenceController(mContext, UID_NORMAL));
         mController.isAvailable();
+        mController.mDpm = mDevicePolicyManagerWrapper;
     }
 
     @Test
@@ -181,6 +194,7 @@ public class BackgroundActivityPreferenceControllerTest {
     @Test
     public void testMultiplePackages_ReturnStatusForTargetPackage() {
         mController = new BackgroundActivityPreferenceController(mContext, UID_SPECIAL);
+        mController.mDpm = mDevicePolicyManagerWrapper;
         when(mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID_SPECIAL, LOW_SDK_PACKAGE))
                 .thenReturn(AppOpsManager.MODE_ALLOWED);

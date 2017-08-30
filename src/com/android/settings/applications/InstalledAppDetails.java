@@ -274,7 +274,7 @@ public class InstalledAppDetails extends AppInfoBase
         // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
+        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
             enabled = false;
         }
 
@@ -347,23 +347,6 @@ public class InstalledAppDetails extends AppInfoBase
         }
         mUninstallButton.setText(R.string.uninstall_text);
         return enabled;
-    }
-
-    /** Returns if the supplied package is device owner or profile owner of at least one user */
-    private boolean isProfileOrDeviceOwner(String packageName) {
-        List<UserInfo> userInfos = mUserManager.getUsers();
-        DevicePolicyManager dpm = (DevicePolicyManager)
-                getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
-        if (dpm.isDeviceOwnerAppOnAnyUser(packageName)) {
-            return true;
-        }
-        for (UserInfo userInfo : userInfos) {
-            ComponentName cn = dpm.getProfileOwnerAsUser(userInfo.id);
-            if (cn != null && cn.getPackageName().equals(packageName)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /** Called when the activity is first created. */
