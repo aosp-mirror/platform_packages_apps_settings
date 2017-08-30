@@ -67,6 +67,9 @@ public class DefaultAppSettingsTest extends InstrumentationTestCase {
         final String titleApps = mTargetContext.getResources().getString(
             R.string.app_and_notification_dashboard_title);
         mDevice.findObject(new UiSelector().text(titleApps)).click();
+        final String titleAdvance = mTargetContext.getResources().getString(
+                R.string.advanced_section_header);
+        mDevice.findObject(new UiSelector().text(titleAdvance)).click();
         final String titleDefaultApps = mTargetContext.getResources().getString(
             R.string.app_default_dashboard_title);
         mDevice.findObject(new UiSelector().text(titleDefaultApps)).click();
