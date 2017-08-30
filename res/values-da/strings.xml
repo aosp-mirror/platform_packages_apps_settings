@@ -1129,7 +1129,7 @@
     <string name="fcc_equipment_id" msgid="149114368246356737">"Udstyrs-id"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Basebandversion"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernesystem"</string>
-    <string name="build_number" msgid="3075795840572241758">"Versionnummer"</string>
+    <string name="build_number" msgid="3075795840572241758">"Buildnummer"</string>
     <string name="selinux_status" msgid="6212165375172061672">"SELinux-status"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Ikke tilgængelig"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
@@ -2231,8 +2231,8 @@
     <string name="usage_access_title" msgid="332333405495457839">"Apps med adgang til forbrug"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Nødtone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Angiv adfærd ved nødopkald"</string>
-    <string name="privacy_settings_title" msgid="2978878794187459190">"Sikkerhedskopiering"</string>
-    <string name="backup_section_title" msgid="7952232291452882740">"Sikkerhedskopiering og gendannelse"</string>
+    <string name="privacy_settings_title" msgid="2978878794187459190">"Backup"</string>
+    <string name="backup_section_title" msgid="7952232291452882740">"Backup og gendannelse"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Personlige oplysninger"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Sikkerhedskopiér data"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Sikkerhedskopiér appdata, Wi-Fi-adgangskoder og andre indstillinger på Googles servere"</string>
@@ -2240,7 +2240,7 @@
     <string name="include_app_data_title" msgid="2829970132260278394">"Inkluder appdata"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisk gendannelse"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Ved geninstallation af en app gendannes sikkerhedskopierede indstillinger og data"</string>
-    <string name="backup_inactive_title" msgid="685838037986644604">"Tjenesten til sikkerhedskopiering er deaktiveret"</string>
+    <string name="backup_inactive_title" msgid="685838037986644604">"Backuptjenesten er deaktiveret"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Der er ingen konto, der i øjeblikket lagrer sikkerhedskopierede data"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
     <string name="backup_erase_dialog_message" msgid="5221011285568343155">"Vil du stoppe sikkerhedskopieringen af dine Wi-Fi-adgangskoder, bogmærker, andre indstillinger og appdata samt slette alle kopier på Googles servere?"</string>
@@ -2321,7 +2321,7 @@
     <string name="sync_error" msgid="5060969083117872149">"Synkroniseringsfejl"</string>
     <string name="last_synced" msgid="4242919465367022234">"Sidst synkroniseret <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="5151314196536070569">"Synkroniserer nu…"</string>
-    <string name="settings_backup" msgid="2274732978260797031">"Indstillinger for sikkerhedskopiering"</string>
+    <string name="settings_backup" msgid="2274732978260797031">"Indstillinger for backup"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Sikkerhedskopier mine indstillinger"</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Synkroniser nu"</string>
     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Annuller synkronisering"</string>
@@ -2536,9 +2536,9 @@
     <string name="user_credential_removed" msgid="6514189495799401838">"Fjernede loginoplysninger: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="3729607560420971841">"Der er ikke installeret nogen brugerloginoplysninger"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Stavekontrol"</string>
-    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Angiv din aktuelle adgangskode til fuldstændig sikkerhedskopiering:"</string>
-    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Angiv din nye adgangskode til fuldstændig sikkerhedskopiering:"</string>
-    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Gentag din nye adgangskode til fuldstændig sikkerhedskopiering:"</string>
+    <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Angiv din aktuelle adgangskode til fuldstændig backup:"</string>
+    <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Angiv din nye adgangskode til fuldstændig backup:"</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Gentag din nye adgangskode til fuldstændig backup:"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Angiv adgangskode til sikkerhedskopi"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annuller"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Yderligere systemopdateringer"</string>
@@ -3565,7 +3565,7 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr din telefon med hurtige bevægelser"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr din tablet med hurtige bevægelser"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr din enhed med hurtige bevægelser"</string>
-    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Gå til kamera"</string>
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Åbn kamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Du kan åbne dit kamera hurtigt ved at trykke to gange på afbryderknappen. Denne genvej fungerer fra enhver skærm."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Åbn kameraet hurtigt"</string>
     <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"Tryk to gange på afbryderknappen for at åbne kameraet"</string>
