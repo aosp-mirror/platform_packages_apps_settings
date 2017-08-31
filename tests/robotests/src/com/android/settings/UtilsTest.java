@@ -8,14 +8,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -23,6 +26,7 @@ import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -34,12 +38,15 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
 
     private static final String TIME_DESCRIPTION = "1 day 20 hours 30 minutes";
+    private static final String PACKAGE_NAME = "com.android.app";
     private Context mContext;
     @Mock
     private WifiManager wifiManager;
@@ -47,6 +54,10 @@ public class UtilsTest {
     private Network network;
     @Mock
     private ConnectivityManager connectivityManager;
+    @Mock
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
 
     @Before
     public void setUp() {
@@ -193,5 +204,26 @@ public class UtilsTest {
         info.enabled = false;
 
         assertThat(Utils.getInstallationStatus(info)).isEqualTo(R.string.disabled);
+    }
+
+    @Test
+    public void testIsProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
+        when(mDevicePolicyManager.isDeviceOwnerAppOnAnyUser(PACKAGE_NAME)).thenReturn(true);
+
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
+                PACKAGE_NAME)).isTrue();
+    }
+
+    @Test
+    public void testIsProfileOrDeviceOwner_profileOwnerApp_returnTrue() {
+        final List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(new UserInfo());
+
+        when(mUserManager.getUsers()).thenReturn(userInfos);
+        when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id)).thenReturn(
+                new ComponentName(PACKAGE_NAME, ""));
+
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
+                PACKAGE_NAME)).isTrue();
     }
 }

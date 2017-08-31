@@ -107,6 +107,7 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.password.FingerprintManagerWrapper;
 import com.android.settings.password.IFingerprintManager;
 
@@ -1277,6 +1278,28 @@ public final class Utils extends com.android.settingslib.Utils {
                 VolumeInfo.ID_PRIVATE_INTERNAL);
         VolumeInfo volume = sm.findVolumeById(volumeId);
         return isVolumeValid(volume) ? volume : null;
+    }
+
+    /**
+     * Return {@code true} if the supplied package is device owner or profile owner of at
+     * least one user.
+     * @param userManager used to get profile owner app for each user
+     * @param devicePolicyManager used to check whether it is device owner app
+     * @param packageName package to check about
+     */
+    public static boolean isProfileOrDeviceOwner(UserManager userManager,
+            DevicePolicyManagerWrapper devicePolicyManager, String packageName) {
+        List<UserInfo> userInfos = userManager.getUsers();
+        if (devicePolicyManager.isDeviceOwnerAppOnAnyUser(packageName)) {
+            return true;
+        }
+        for (int i = 0, size = userInfos.size(); i < size; i++) {
+            ComponentName cn = devicePolicyManager.getProfileOwnerAsUser(userInfos.get(i).id);
+            if (cn != null && cn.getPackageName().equals(packageName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
