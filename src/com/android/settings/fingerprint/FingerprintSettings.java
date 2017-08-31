@@ -903,7 +903,7 @@ public class FingerprintSettings extends SubSettings {
     }
 
     private static class LearnMoreSpan extends URLSpan {
-
+        private static final String TAG = "LearnMoreSpan";
         private static final Typeface TYPEFACE_MEDIUM =
                 Typeface.create("sans-serif-medium", Typeface.NORMAL);
 
@@ -928,6 +928,10 @@ public class FingerprintSettings extends SubSettings {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(ctx, mEnforcedAdmin);
             } else {
                 Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
+                if (intent == null) {
+                    Log.w(LearnMoreSpan.TAG, "Null help intent.");
+                    return;
+                }
                 try {
                     widget.startActivityForResult(intent, 0);
                 } catch (ActivityNotFoundException e) {
