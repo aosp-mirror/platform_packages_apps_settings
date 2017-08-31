@@ -22,7 +22,9 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.IPackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * Counts installed apps across all users that have been granted one or more specific permissions by

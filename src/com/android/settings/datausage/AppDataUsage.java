@@ -46,14 +46,13 @@ import android.widget.AdapterView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -104,7 +103,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mPackageManagerWrapper = new PackageManagerWrapperImpl(getPackageManager());
+        mPackageManagerWrapper = new PackageManagerWrapper(getPackageManager());
         final Bundle args = getArguments();
 
         try {

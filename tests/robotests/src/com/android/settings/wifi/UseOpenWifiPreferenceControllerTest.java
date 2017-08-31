@@ -38,8 +38,8 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.network.NetworkScoreManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.common.collect.Lists;

@@ -29,8 +29,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
-
-import com.android.settings.password.IFingerprintManager;
+import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 import java.util.ArrayList;
 
@@ -48,7 +47,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     private byte[] mToken;
     private boolean mDone;
     private int mUserId;
-    private IFingerprintManager mFingerprintManager;
+    private FingerprintManagerWrapper mFingerprintManager;
     private ArrayList<QueuedEvent> mQueuedEvents;
 
     private abstract class QueuedEvent {

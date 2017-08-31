@@ -12,23 +12,19 @@
  * permissions and limitations under the License.
  */
 
-package com.android.settings.webview;
+package com.android.settings.wrapper;
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.UserInfo;
 import android.webkit.UserPackage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Default implementation of UserPackageWrapper.
  */
-class UserPackageWrapperImpl implements UserPackageWrapper {
+public class UserPackageWrapperImpl implements UserPackageWrapper {
     private final UserPackage mUserPackage;
 
-    UserPackageWrapperImpl(UserPackage userPackage) {
+    public UserPackageWrapperImpl(UserPackage userPackage) {
         mUserPackage = userPackage;
     }
 

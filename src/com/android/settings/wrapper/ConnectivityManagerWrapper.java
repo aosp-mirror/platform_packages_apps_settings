@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.vpn2;
+package com.android.settings.wrapper;
 
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
@@ -24,31 +24,43 @@ import android.os.Handler;
 import android.net.ProxyInfo;
 
 /**
- * This interface replicates a subset of the android.net.ConnectivityManager (CM). The interface
+ * This class replicates a subset of the android.net.ConnectivityManager (CM). The class
  * exists so that we can use a thin wrapper around the CM in production code and a mock in tests.
  * We cannot directly mock or shadow the CM, because some of the methods we rely on are marked as
  * hidden and are thus invisible to Robolectric.
  */
-public interface ConnectivityManagerWrapper {
+public class ConnectivityManagerWrapper {
+
+    private final ConnectivityManager mCm;
+
+    public ConnectivityManagerWrapper(ConnectivityManager cm) {
+        mCm = cm;
+    }
 
     /**
      * Returns the real ConnectivityManager object wrapped by this wrapper.
      */
-    public ConnectivityManager getConnectivityManager();
+    public ConnectivityManager getConnectivityManager() {
+        return mCm;
+    }
 
     /**
      * Calls {@code ConnectivityManager.getAlwaysOnVpnPackageForUser()}.
      *
      * @see android.net.ConnectivityManager#getAlwaysOnVpnPackageForUser
      */
-   String getAlwaysOnVpnPackageForUser(int userId);
+    public String getAlwaysOnVpnPackageForUser(int userId) {
+        return mCm.getAlwaysOnVpnPackageForUser(userId);
+    }
 
     /**
      * Calls {@code ConnectivityManager.getGlobalProxy()}.
      *
      * @see android.net.ConnectivityManager#getGlobalProxy
      */
-   ProxyInfo getGlobalProxy();
+    public ProxyInfo getGlobalProxy() {
+        return mCm.getGlobalProxy();
+    }
 
     /**
      * Calls {@code ConnectivityManager.registerNetworkCallback()}.
@@ -60,7 +72,9 @@ public interface ConnectivityManagerWrapper {
      * @see android.net.ConnectivityManager#registerNetworkCallback(NetworkRequest,NetworkCallback,Handler)
      */
     public void registerNetworkCallback(NetworkRequest request, NetworkCallback callback,
-            Handler handler);
+            Handler handler) {
+        mCm.registerNetworkCallback(request, callback, handler);
+    }
 
     /**
      * Calls {@code ConnectivityManager.startCaptivePortalApp()}.
@@ -71,5 +85,14 @@ public interface ConnectivityManagerWrapper {
      *
      * @see android.net.ConnectivityManager#startCaptivePortalApp(Network)
      */
-    public void startCaptivePortalApp(Network network);
+    public void startCaptivePortalApp(Network network) {
+        mCm.startCaptivePortalApp(network);
+    }
+
+    /**
+     * {@link ConnectivityManager#stopTethering}
+     */
+    public void stopTethering(int type) {
+        mCm.stopTethering(type);
+    }
 }

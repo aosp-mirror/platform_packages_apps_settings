@@ -1,4 +1,4 @@
-package com.android.settings.network;
+package com.android.settings.wrapper;
 
 import android.content.Context;
 import com.android.settingslib.RestrictedLockUtils;

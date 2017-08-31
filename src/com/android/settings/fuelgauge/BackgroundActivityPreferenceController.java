@@ -35,8 +35,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
@@ -71,7 +70,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
         mPowerWhitelistBackend = backend;
         mPackageManager = context.getPackageManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mDpm = new DevicePolicyManagerWrapperImpl(
+        mDpm = new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mUid = uid;

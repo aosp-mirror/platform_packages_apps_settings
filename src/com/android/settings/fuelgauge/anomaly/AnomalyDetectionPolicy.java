@@ -23,6 +23,8 @@ import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
+import com.android.settings.wrapper.KeyValueListParserWrapper;
+
 /**
  * Class to store the policy for anomaly detection, which comes from
  * {@link android.provider.Settings.Global}
@@ -104,7 +106,7 @@ public class AnomalyDetectionPolicy {
     private final KeyValueListParserWrapper mParserWrapper;
 
     public AnomalyDetectionPolicy(Context context) {
-        this(context, new KeyValueListParserWrapperImpl(new KeyValueListParser(',')));
+        this(context, new KeyValueListParserWrapper(new KeyValueListParser(',')));
     }
 
     @VisibleForTesting

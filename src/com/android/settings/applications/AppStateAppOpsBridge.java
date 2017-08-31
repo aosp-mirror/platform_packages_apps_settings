@@ -31,6 +31,7 @@ import android.util.SparseArray;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settings.wrapper.IPackageManagerWrapper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -57,7 +58,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
     public AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions) {
         this(context, appState, callback, appOpsOpCode, permissions,
-            new IPackageManagerWrapperImpl(AppGlobals.getPackageManager()));
+            new IPackageManagerWrapper(AppGlobals.getPackageManager()));
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)

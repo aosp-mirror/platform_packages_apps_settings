@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.defaultapps;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.atLeastOnce;
@@ -31,8 +30,8 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.TestConfig;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

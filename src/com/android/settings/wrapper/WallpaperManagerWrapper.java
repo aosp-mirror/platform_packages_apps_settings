@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
-/**
- * This interface replicates a subset of the android.content.pm.ActivityInfo. The interface
- * exists so that we can use a thin wrapper around the ActivityInfo in production code and a mock in
- * tests.
- */
-public interface ActivityInfoWrapper {
+import android.app.WallpaperManager;
+import android.content.Context;
 
-    /**
-     * Returns whether this activity supports picture-in-picture.
-     */
-    boolean supportsPictureInPicture();
+public class WallpaperManagerWrapper {
+
+    private final WallpaperManager mWallpaperManager;
+
+    public WallpaperManagerWrapper(Context context) {
+        mWallpaperManager = (WallpaperManager) context.getSystemService(Context.WALLPAPER_SERVICE);
+    }
+
+    public int getWallpaperId(int which) {
+        return mWallpaperManager.getWallpaperId(which);
+    }
 }

@@ -35,9 +35,9 @@ import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.SparseArray;
 
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.UserManagerWrapper;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

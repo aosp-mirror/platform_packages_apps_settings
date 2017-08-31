@@ -33,6 +33,8 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.wrapper.NetworkScoreManagerWrapper;
+
 import com.google.android.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +46,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)

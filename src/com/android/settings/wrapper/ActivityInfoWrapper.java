@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
-import android.content.pm.UserInfo;
-import android.os.UserManager;
+import android.content.pm.ActivityInfo;
 
-import java.util.List;
+/**
+ * This class replicates a subset of the android.content.pm.ActivityInfo. The class
+ * exists so that we can use a thin wrapper around the ActivityInfo in production code and a mock in
+ * tests.
+ */
+public class ActivityInfoWrapper {
 
-public class UserManagerWrapperImpl implements UserManagerWrapper {
-    private UserManager mUserManager;
+    private final ActivityInfo mInfo;
 
-    public UserManagerWrapperImpl(UserManager userManager) {
-        mUserManager = userManager;
+    public ActivityInfoWrapper(ActivityInfo info) {
+        mInfo = info;
     }
 
-    @Override
-    public UserInfo getPrimaryUser() {
-        return mUserManager.getPrimaryUser();
-    }
-
-    @Override
-    public List<UserInfo> getUsers() {
-        return mUserManager.getUsers();
+    /**
+     * Returns whether this activity supports picture-in-picture.
+     */
+    public boolean supportsPictureInPicture() {
+        return mInfo.supportsPictureInPicture();
     }
 }

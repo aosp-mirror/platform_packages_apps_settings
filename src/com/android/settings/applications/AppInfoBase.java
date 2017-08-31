@@ -43,9 +43,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -94,7 +93,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 .getApplicationFeatureProvider(activity);
         mState = ApplicationsState.getInstance(activity.getApplication());
         mSession = mState.newSession(this);
-        mDpm = new DevicePolicyManagerWrapperImpl(
+        mDpm = new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();

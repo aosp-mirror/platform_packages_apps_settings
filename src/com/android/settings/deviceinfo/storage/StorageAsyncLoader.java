@@ -30,10 +30,10 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.utils.AsyncLoader;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.io.IOException;
 import java.util.Collections;

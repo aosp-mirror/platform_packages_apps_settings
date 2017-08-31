@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.password;
+package com.android.settings.wrapper;
 
 import android.annotation.NonNull;
 import android.hardware.fingerprint.FingerprintManager;
@@ -24,10 +24,14 @@ import android.os.CancellationSignal;
 import com.android.internal.util.Preconditions;
 
 /**
- * Wrapper of {@link FingerprintManager}. Workaround for roboelectic testing. See
- * {@link IFingerprintManager} for details.
+ * Wrapper of {@link FingerprintManager}. Workaround for robolectic testing.
+ *
+ * This is the workaround to allow us test {@link SetNewPasswordController} which uses a new hidden
+ * API {@link android.hardware.fingerprint.FingerprintManager#hasEnrolledFingerprints(int)} that
+ * robolectric does not support yet. Having robolectic to support latest platform API is tracked
+ * in b/30995831.
  */
-public class FingerprintManagerWrapper implements IFingerprintManager {
+public class FingerprintManagerWrapper {
     private @NonNull FingerprintManager mFingerprintManager;
 
     public FingerprintManagerWrapper(@NonNull FingerprintManager fingerprintManager) {
@@ -35,27 +39,22 @@ public class FingerprintManagerWrapper implements IFingerprintManager {
         mFingerprintManager = fingerprintManager;
     }
 
-    @Override
     public boolean isHardwareDetected() {
         return mFingerprintManager.isHardwareDetected();
     }
 
-    @Override
     public boolean hasEnrolledFingerprints(int userId) {
         return mFingerprintManager.hasEnrolledFingerprints(userId);
     }
 
-    @Override
     public long preEnroll() {
         return mFingerprintManager.preEnroll();
     }
 
-    @Override
     public void setActiveUser(int userId) {
         mFingerprintManager.setActiveUser(userId);
     }
 
-    @Override
     public void enroll(
             byte[] token,
             CancellationSignal cancel,

@@ -12,20 +12,16 @@
  * permissions and limitations under the License.
  */
 
-package com.android.settings.webview;
+package com.android.settings.wrapper;
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.UserInfo;
-import android.webkit.UserPackage;
-
-import java.util.List;
 
 /**
  * Wrapper class around android.webkit.UserPackage - to be able to use UserPackage in Robolectric
  * tests (such tests currently don't support mocking hidden classes).
  */
-interface UserPackageWrapper {
+public interface UserPackageWrapper {
     UserInfo getUserInfo();
     PackageInfo getPackageInfo();
     boolean isEnabledPackage();

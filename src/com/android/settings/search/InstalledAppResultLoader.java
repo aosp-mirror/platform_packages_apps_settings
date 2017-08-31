@@ -34,9 +34,9 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.HashSet;

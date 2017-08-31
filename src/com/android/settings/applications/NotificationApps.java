@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo;
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * Extension of ManageApplications with no changes other than having its own
@@ -39,7 +40,7 @@ public class NotificationApps extends ManageApplications {
             mContext = context;
             mLoader = loader;
             mNotificationBackend = new NotificationBackend();
-            mPackageManager = new PackageManagerWrapperImpl(mContext.getPackageManager());
+            mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
         }
 
         @Override

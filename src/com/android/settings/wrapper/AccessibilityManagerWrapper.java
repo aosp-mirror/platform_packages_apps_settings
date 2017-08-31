@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
 import android.view.accessibility.AccessibilityManager;
 
@@ -23,7 +23,7 @@ import android.view.accessibility.AccessibilityManager;
  * The interface exists so that we can use a thin wrapper around the AccessibilityManager in
  * production code and a mock in tests.
  */
-public class AccessibilityManagerWrapperImpl {
+public class AccessibilityManagerWrapper {
 
     /**
      * Determines if the accessibility button within the system navigation area is supported.

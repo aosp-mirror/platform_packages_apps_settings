@@ -29,9 +29,8 @@ import android.widget.Button;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStoreUtil;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /** Encapsulates a container for buttons relevant to instant apps */
 public class InstantAppButtonsController implements DialogInterface.OnClickListener {
@@ -62,7 +61,7 @@ public class InstantAppButtonsController implements DialogInterface.OnClickListe
       mFragment = fragment;
       mView = view;
       mShowDialogDelegate = showDialogDelegate;
-      mPackageManagerWrapper = new PackageManagerWrapperImpl(context.getPackageManager());
+      mPackageManagerWrapper = new PackageManagerWrapper(context.getPackageManager());
     }
 
     public InstantAppButtonsController setPackageName(String packageName) {

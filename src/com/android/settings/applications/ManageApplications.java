@@ -90,6 +90,7 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -888,7 +889,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private int mLastSortMode = -1;
         private int mWhichSize = SIZE_TOTAL;
         CharSequence mCurFilterPrefix;
-        private PackageManager mPm;
         private AppFilter mCompositeFilter;
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
@@ -938,7 +938,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     mManageApplications.mListContainer
             );
             mContext = manageApplications.getActivity();
-            mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
@@ -1491,7 +1490,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         public void setListening(boolean listening) {
             if (listening) {
                 new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                        new PackageManagerWrapperImpl(mContext.getPackageManager())) {
+                        new PackageManagerWrapper(mContext.getPackageManager())) {
                     @Override
                     protected void onCountComplete(int num) {
                         mLoader.setSummary(SummaryProvider.this,

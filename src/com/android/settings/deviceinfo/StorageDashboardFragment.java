@@ -35,9 +35,6 @@ import android.view.View;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.applications.UserManagerWrapper;
-import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
@@ -49,10 +46,12 @@ import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,7 +94,7 @@ public class StorageDashboardFragment extends DashboardFragment
     @VisibleForTesting
     void initializeOptionsMenu(Activity activity) {
         mOptionMenuController = new PrivateVolumeOptionMenuController(
-                activity, mVolume, new PackageManagerWrapperImpl(activity.getPackageManager()));
+                activity, mVolume, new PackageManagerWrapper(activity.getPackageManager()));
         getLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
@@ -178,7 +177,7 @@ public class StorageDashboardFragment extends DashboardFragment
         controllers.add(mPreferenceController);
 
         UserManagerWrapper userManager =
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+                new UserManagerWrapper(context.getSystemService(UserManager.class));
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
@@ -227,7 +226,7 @@ public class StorageDashboardFragment extends DashboardFragment
                 public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     final StorageManager sm = context.getSystemService(StorageManager.class);
                     final UserManagerWrapper userManager =
-                            new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+                            new UserManagerWrapper(context.getSystemService(UserManager.class));
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new StorageSummaryDonutPreferenceController(context));
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
@@ -244,10 +243,10 @@ public class StorageDashboardFragment extends DashboardFragment
             Bundle args) {
         Context context = getContext();
         return new StorageAsyncLoader(context,
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class)),
+                new UserManagerWrapper(context.getSystemService(UserManager.class)),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapperImpl(context.getPackageManager()));
+                new PackageManagerWrapper(context.getPackageManager()));
     }
 
     @Override

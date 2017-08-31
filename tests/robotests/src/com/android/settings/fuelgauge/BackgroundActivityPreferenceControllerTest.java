@@ -38,7 +38,7 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

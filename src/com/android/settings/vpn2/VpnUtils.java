@@ -27,6 +27,7 @@ import android.util.Log;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
 
 /**
  * Utility functions for vpn.

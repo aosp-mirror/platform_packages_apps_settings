@@ -14,19 +14,31 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
 import android.content.pm.UserInfo;
+import android.os.UserManager;
 
 import java.util.List;
 
 /**
- * This interface replicates a subset of the android.os.UserManager. The interface
+ * This class replicates a subset of the android.os.UserManager. The class
  * exists so that we can use a thin wrapper around the UserManager in production code and a mock in
  * tests. We cannot directly mock or shadow the UserManager, because some of the methods we rely on
  * are newer than the API version supported by Robolectric or are hidden.
  */
-public interface UserManagerWrapper {
-    UserInfo getPrimaryUser();
-    List<UserInfo> getUsers();
+public class UserManagerWrapper {
+    private UserManager mUserManager;
+
+    public UserManagerWrapper(UserManager userManager) {
+        mUserManager = userManager;
+    }
+
+    public UserInfo getPrimaryUser() {
+        return mUserManager.getPrimaryUser();
+    }
+
+    public List<UserInfo> getUsers() {
+        return mUserManager.getUsers();
+    }
 }

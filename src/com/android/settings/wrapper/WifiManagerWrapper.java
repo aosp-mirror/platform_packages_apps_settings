@@ -1,4 +1,4 @@
-package com.android.settings.wifi;
+package com.android.settings.wrapper;
 
 import android.net.wifi.WifiManager;
 

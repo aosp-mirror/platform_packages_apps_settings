@@ -26,11 +26,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -44,7 +43,7 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
 
     public DefaultAppPreferenceController(Context context) {
         super(context);
-        mPackageManager = new PackageManagerWrapperImpl(context.getPackageManager());
+        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mUserId = UserHandle.myUserId();
     }

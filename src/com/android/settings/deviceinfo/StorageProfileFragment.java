@@ -30,15 +30,15 @@ import android.util.SparseArray;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.PackageManagerWrapperImpl;
-import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader.AppsStorageResult;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,10 +116,10 @@ public class StorageProfileFragment extends DashboardFragment
     public Loader<SparseArray<AppsStorageResult>> onCreateLoader(int id, Bundle args) {
         Context context = getContext();
         return new StorageAsyncLoader(context,
-                new UserManagerWrapperImpl(context.getSystemService(UserManager.class)),
+                new UserManagerWrapper(context.getSystemService(UserManager.class)),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapperImpl(context.getPackageManager()));
+                new PackageManagerWrapper(context.getPackageManager()));
     }
 
     @Override

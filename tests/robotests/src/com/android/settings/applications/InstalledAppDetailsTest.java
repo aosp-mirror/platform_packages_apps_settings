@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyDouble;
@@ -33,7 +32,6 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -55,11 +53,11 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.instantapps.InstantAppButtonsController.ShowDialogDelegate;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ActionButtonPreferenceTest;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;

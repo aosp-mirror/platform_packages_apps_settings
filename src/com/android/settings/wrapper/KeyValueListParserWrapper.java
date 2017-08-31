@@ -14,22 +14,29 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge.anomaly;
+package com.android.settings.wrapper;
 
 import android.util.KeyValueListParser;
 
 /**
- * This interface replicates a subset of the {@link KeyValueListParser}. The interface
+ * This class replicates a subset of the {@link KeyValueListParser}. The class
  * exists so that we can use a thin wrapper around the PM in production code and a mock in tests.
  * We cannot directly mock or shadow the {@link KeyValueListParser}, because some of the methods
  * we rely on are newer than the API version supported by Robolectric.
  */
-public interface KeyValueListParserWrapper {
+public class KeyValueListParserWrapper {
+    private KeyValueListParser mParser;
+
+    public KeyValueListParserWrapper(KeyValueListParser parser) {
+        mParser = parser;
+    }
 
     /**
      * Get real {@link KeyValueListParser}
      */
-    KeyValueListParser getKeyValueListParser();
+    public KeyValueListParser getKeyValueListParser() {
+        return mParser;
+    }
 
     /**
      * Resets the parser with a new string to parse. The string is expected to be in the following
@@ -41,7 +48,9 @@ public interface KeyValueListParserWrapper {
      * @param str the string to parse.
      * @throws IllegalArgumentException if the string is malformed.
      */
-    void setString(String str) throws IllegalArgumentException;
+    public void setString(String str) throws IllegalArgumentException {
+        mParser.setString(str);
+    }
 
     /**
      * Get the value for key as a boolean.
@@ -49,7 +58,9 @@ public interface KeyValueListParserWrapper {
      * @param defaultValue The value to return if the key was not found.
      * @return the string value associated with the key.
      */
-    boolean getBoolean(String key, boolean defaultValue);
+    public boolean getBoolean(String key, boolean defaultValue) {
+        return mParser.getBoolean(key, defaultValue);
+    }
 
     /**
      * Get the value for key as a long.
@@ -58,5 +69,7 @@ public interface KeyValueListParserWrapper {
      *                     long.
      * @return the long value associated with the key.
      */
-    long getLong(String key, long defaultValue);
+    public long getLong(String key, long defaultValue) {
+        return mParser.getLong(key, defaultValue);
+    }
 }
