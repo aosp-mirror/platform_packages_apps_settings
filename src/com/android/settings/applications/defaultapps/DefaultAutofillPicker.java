@@ -189,9 +189,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
             final String permission = info.serviceInfo.permission;
-            // TODO(b/37563972): remove BIND_AUTOFILL once clients use BIND_AUTOFILL_SERVICE
-            if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)
-                    || Manifest.permission.BIND_AUTOFILL.equals(permission)) {
+            if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)) {
                 candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
                         info.serviceInfo.packageName, info.serviceInfo.name)));
             }
