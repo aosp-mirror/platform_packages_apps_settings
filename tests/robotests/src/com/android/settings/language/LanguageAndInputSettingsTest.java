@@ -92,7 +92,8 @@ public class LanguageAndInputSettingsTest {
                 .thenReturn(mock(TextServicesManager.class));
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(mDpm);
         when(mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).thenReturn(mImm);
-        when(mContext.getSystemService(AutofillManager.class)).thenReturn(mAutofillManager);
+        when((Object) mContext.getSystemService(AutofillManager.class))
+                .thenReturn(mAutofillManager);
         mFragment = new TestFragment(mContext);
     }
 
