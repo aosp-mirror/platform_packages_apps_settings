@@ -44,6 +44,7 @@ import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
@@ -211,6 +212,10 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_notifications);
         addIndex(DreamSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(SupportDashboardActivity.class, NO_DATA_RES_ID, R.drawable.ic_help);
+        addIndex(
+                AutomaticStorageManagerSettings.class,
+                NO_DATA_RES_ID,
+                R.drawable.ic_settings_storage);
     }
 
     private SearchIndexableResources() {
