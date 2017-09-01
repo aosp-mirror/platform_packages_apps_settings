@@ -660,7 +660,11 @@ public class ApnEditor extends SettingsPreferenceFragment
             return null;
         } else {
             String[] values = mRes.getStringArray(R.array.mvno_type_entries);
-            mMvnoMatchData.setEnabled(mvnoIndex != 0);
+            boolean mvnoMatchDataUneditable =
+                    mReadOnlyApn || (mReadOnlyApnFields != null
+                            && Arrays.asList(mReadOnlyApnFields)
+                            .contains(Telephony.Carriers.MVNO_MATCH_DATA));
+            mMvnoMatchData.setEnabled(!mvnoMatchDataUneditable && mvnoIndex != 0);
             if (newValue != null && newValue.equals(oldValue) == false) {
                 if (values[mvnoIndex].equals("SPN")) {
                     mMvnoMatchData.setText(mTelephonyManager.getSimOperatorName());
