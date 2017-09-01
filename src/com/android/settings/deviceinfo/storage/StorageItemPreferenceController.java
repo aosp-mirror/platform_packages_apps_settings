@@ -95,6 +95,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private StorageItemPreference mSystemPreference;
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
+    private boolean mIsWorkProfile;
 
     public StorageItemPreferenceController(
             Context context, Fragment hostFragment, VolumeInfo volume, StorageVolumeProvider svp) {
@@ -104,6 +105,16 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mSvp = svp;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mUserId = UserHandle.myUserId();
+    }
+
+    public StorageItemPreferenceController(
+            Context context,
+            Fragment hostFragment,
+            VolumeInfo volume,
+            StorageVolumeProvider svp,
+            boolean isWorkProfile) {
+        this(context, hostFragment, volume, svp);
+        mIsWorkProfile = isWorkProfile;
     }
 
     @Override
@@ -212,7 +223,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (preference != null) {
             Drawable currentIcon = preference.getIcon();
             // Sigh... Applying the badge to the icon clobbers the tint on the base drawable.
-            // For some reason, re-applying it here means the tint remains.
+            // For some reason, reapplying it here means the tint remains.
             currentIcon = applyTint(mContext, currentIcon);
             preference.setIcon(pm.getUserBadgedIcon(currentIcon, userHandle));
         }
@@ -220,7 +231,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private static Drawable applyTint(Context context, Drawable icon) {
         TypedArray array =
-                context.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});
+                context.obtainStyledAttributes(new int[] {android.R.attr.colorControlNormal});
         icon = icon.mutate();
         icon.setTint(array.getColor(0, 0));
         array.recycle();
@@ -320,6 +331,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
 
         Bundle args = new Bundle();
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
@@ -336,6 +348,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
 
         Bundle args = new Bundle();
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
@@ -347,6 +360,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Intent getGamesIntent() {
         Bundle args = new Bundle(1);
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.GamesStorageActivity.class.getName());
         return Utils.onBuildStartFragmentIntent(mContext,
@@ -356,6 +370,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Intent getMoviesIntent() {
         Bundle args = new Bundle(1);
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.MoviesStorageActivity.class.getName());
         return Utils.onBuildStartFragmentIntent(mContext,
