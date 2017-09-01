@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
@@ -57,6 +58,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private static final String KEY_VIBRATE = "vibrate";
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_IMPORTANCE = "importance";
+    private static final String KEY_ADVANCED = "advanced";
 
     private Preference mImportance;
     private RestrictedSwitchPreference mLights;
@@ -65,6 +67,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private FooterPreference mFooter;
     private NotificationChannelGroup mChannelGroup;
     private EntityHeaderController mHeaderPref;
+    private PreferenceGroup mAdvanced;
 
     @Override
     public int getMetricsCategory() {
@@ -96,24 +99,10 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             populateUpgradedChannelPrefs();
 
             if (mChannel.getGroup() != null) {
-                // Go look up group name
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... unused) {
-                        if (mChannel.getGroup() != null) {
-                            mChannelGroup = mBackend.getGroup(mChannel.getGroup(), mPkg, mUid);
-                        }
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void unused) {
-                        if (getHost() == null || mChannelGroup == null) {
-                            return;
-                        }
-                        setChannelGroupLabel(mChannelGroup.getName());
-                    }
-                }.execute();
+                mChannelGroup = mBackend.getGroup(mPkg, mUid, mChannel.getGroup());
+                if (mChannelGroup != null) {
+                    setChannelGroupLabel(mChannelGroup.getName());
+                }
             }
         }
 
@@ -129,6 +118,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         setupVibrate();
         setupRingtone();
         setupImportance();
+        mAdvanced = (PreferenceGroup) findPreference(KEY_ADVANCED);
     }
 
     private void addHeaderPref() {
@@ -272,7 +262,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mBlockBar.setKey(KEY_BLOCK);
         getPreferenceScreen().addPreference(mBlockBar);
 
-        if (!isChannelBlockable(mAppRow.systemApp, mChannel)) {
+        if (!isChannelBlockable(mChannel)) {
             setVisible(mBlockBar, false);
         }
 
@@ -373,6 +363,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         if (mShowLegacyChannelConfig) {
             setVisible(mImportanceToggle, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
         } else {
+            setVisible(mAdvanced, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
             setVisible(mImportance, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
             setVisible(mLights, checkCanBeVisible(
                     NotificationManager.IMPORTANCE_DEFAULT) && canPulseLight());

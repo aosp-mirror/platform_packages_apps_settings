@@ -24,8 +24,10 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -33,6 +35,7 @@ import com.android.settingslib.widget.FooterPreference;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -51,8 +54,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
-import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -61,6 +64,7 @@ import android.widget.Toast;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
@@ -106,6 +110,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected EnforcedAdmin mSuspendedAppsAdmin;
     protected boolean mDndVisualEffectsSuppressed;
 
+    protected NotificationChannelGroup mChannelGroup;
     protected NotificationChannel mChannel;
     protected NotificationBackend.AppRow mAppRow;
     protected boolean mShowLegacyChannelConfig = false;
@@ -185,6 +190,11 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
                 mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
 
+        mChannelGroup = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_GROUP_ID)) ?
+                mBackend.getGroupWithChannels(mPkg, mUid,
+                        args.getString(Settings.EXTRA_CHANNEL_GROUP_ID))
+                : null;
+
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
         NotificationManager.Policy policy = mNm.getNotificationPolicy();
@@ -249,6 +259,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             if (mChannel != null) {
                 row.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
             }
+            if (mChannelGroup != null) {
+                row.settingsIntent.putExtra(
+                        Notification.EXTRA_CHANNEL_GROUP_ID, mChannelGroup.getId());
+            }
         }
     }
 
@@ -276,7 +290,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected void addAppLinkPref() {
         if (mAppRow.settingsIntent != null && mAppLink == null) {
             addPreferencesFromResource(R.xml.inapp_notification_settings);
-            mAppLink = (Preference) findPreference(KEY_APP_LINK);
+            mAppLink = findPreference(KEY_APP_LINK);
             mAppLink.setIntent(mAppRow.settingsIntent);
         }
     }
@@ -392,14 +406,54 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void setupBlockDesc(int summaryResId) {
-        mBlockedDesc = (FooterPreference) getPreferenceScreen().findPreference(
-                KEY_BLOCKED_DESC);
         mBlockedDesc = new FooterPreference(getPrefContext());
         mBlockedDesc.setSelectable(false);
         mBlockedDesc.setTitle(summaryResId);
         mBlockedDesc.setEnabled(false);
         mBlockedDesc.setOrder(50);
+        mBlockedDesc.setKey(KEY_BLOCKED_DESC);
         getPreferenceScreen().addPreference(mBlockedDesc);
+    }
+
+    protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
+            final NotificationChannel channel, String summary) {
+        MasterSwitchPreference channelPref = new MasterSwitchPreference(
+                getPrefContext());
+        channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null
+                && isChannelBlockable(channel)
+                && isChannelConfigurable(channel));
+        channelPref.setKey(channel.getId());
+        channelPref.setTitle(channel.getName());
+        channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
+        channelPref.setSummary(summary);
+        Bundle channelArgs = new Bundle();
+        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
+        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
+        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                ChannelNotificationSettings.class.getName(),
+                channelArgs, null, R.string.notification_channel_title, null, false,
+                getMetricsCategory());
+        channelPref.setIntent(channelIntent);
+
+        channelPref.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference,
+                            Object o) {
+                        boolean value = (Boolean) o;
+                        int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
+                        channel.setImportance(importance);
+                        channel.lockFields(
+                                NotificationChannel.USER_LOCKED_IMPORTANCE);
+                        channelPref.setSummary(summary);
+                        mBackend.updateChannel(mPkg, mUid, channel);
+
+                        return true;
+                    }
+                });
+        parent.addPreference(channelPref);
+        return channelPref;
     }
 
     protected boolean checkCanBeVisible(int minImportanceVisible) {
@@ -408,6 +462,26 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             return true;
         }
         return importance >= minImportanceVisible;
+    }
+
+    protected String getImportanceSummary(NotificationChannel channel) {
+        switch (channel.getImportance()) {
+            case NotificationManager.IMPORTANCE_UNSPECIFIED:
+                return getContext().getString(R.string.notification_importance_unspecified);
+            case NotificationManager.IMPORTANCE_NONE:
+                return getContext().getString(R.string.notification_toggle_off);
+            case NotificationManager.IMPORTANCE_MIN:
+                return getContext().getString(R.string.notification_importance_min);
+            case NotificationManager.IMPORTANCE_LOW:
+                return getContext().getString(R.string.notification_importance_low);
+            case NotificationManager.IMPORTANCE_DEFAULT:
+                return getContext().getString(R.string.notification_importance_default);
+            case NotificationManager.IMPORTANCE_HIGH:
+            case NotificationManager.IMPORTANCE_MAX:
+            default:
+                return getContext().getString(R.string.notification_importance_high);
+        }
+
     }
 
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
@@ -459,13 +533,21 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         return !channel.getId().equals(mAppRow.lockedChannelId);
     }
 
-    protected boolean isChannelBlockable(boolean systemApp, NotificationChannel channel) {
+    protected boolean isChannelBlockable(NotificationChannel channel) {
         if (!mAppRow.systemApp) {
             return true;
         }
 
         return channel.isBlockableSystem()
                 || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
+    }
+
+    protected boolean isChannelGroupBlockable(NotificationChannelGroup group) {
+        if (!mAppRow.systemApp) {
+            return true;
+        }
+
+        return group.isBlocked();
     }
 
     protected void startListeningToPackageRemove() {
@@ -501,4 +583,12 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             }
         }
     };
+
+    protected Comparator<NotificationChannel> mChannelComparator =
+            (left, right) -> {
+                if (left.isDeleted() != right.isDeleted()) {
+                    return Boolean.compare(left.isDeleted(), right.isDeleted());
+                }
+                return left.getId().compareTo(right.getId());
+            };
 }
