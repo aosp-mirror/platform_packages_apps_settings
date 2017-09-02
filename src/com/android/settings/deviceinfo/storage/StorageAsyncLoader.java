@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.storage;
 
 import static android.content.pm.ApplicationInfo.CATEGORY_AUDIO;
 import static android.content.pm.ApplicationInfo.CATEGORY_GAME;
+import static android.content.pm.ApplicationInfo.CATEGORY_IMAGE;
 import static android.content.pm.ApplicationInfo.CATEGORY_VIDEO;
 
 import android.content.Context;
@@ -134,6 +135,9 @@ public class StorageAsyncLoader
                 case CATEGORY_VIDEO:
                     result.videoAppsSize += blamedSize;
                     break;
+                case CATEGORY_IMAGE:
+                    result.photosAppsSize += blamedSize;
+                    break;
                 default:
                     // The deprecated game flag does not set the category.
                     if ((app.flags & ApplicationInfo.FLAG_IS_GAME) != 0) {
@@ -163,6 +167,7 @@ public class StorageAsyncLoader
     public static class AppsStorageResult {
         public long gamesSize;
         public long musicAppsSize;
+        public long photosAppsSize;
         public long videoAppsSize;
         public long otherAppsSize;
         public long cacheSize;
