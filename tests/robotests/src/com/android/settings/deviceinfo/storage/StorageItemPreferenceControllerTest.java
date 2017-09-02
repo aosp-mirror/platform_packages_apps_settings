@@ -121,9 +121,12 @@ public class StorageItemPreferenceControllerTest {
                 nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
-        assertThat(intent.getType()).isEqualTo("image/*");
-        assertThat(intent.getAction()).isEqualTo(android.content.Intent.ACTION_VIEW);
-        assertThat(intent.getBooleanExtra(Intent.EXTRA_FROM_STORAGE, false)).isTrue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.storage_photos_videos);
     }
 
     @Test
