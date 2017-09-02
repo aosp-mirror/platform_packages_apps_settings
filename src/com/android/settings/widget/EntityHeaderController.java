@@ -336,6 +336,7 @@ public class EntityHeaderController {
                 final Intent intent = resolveIntent(
                         new Intent(Intent.ACTION_APPLICATION_PREFERENCES).setPackage(mPackageName));
                 if (intent == null) {
+                    button.setImageDrawable(null);
                     button.setVisibility(View.GONE);
                     return;
                 }
@@ -348,6 +349,7 @@ public class EntityHeaderController {
                         mFragment.startActivity(intent);
                     }
                 });
+                button.setImageResource(R.drawable.ic_settings_24dp);
                 button.setVisibility(View.VISIBLE);
                 return;
             }
