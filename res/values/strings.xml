@@ -6836,11 +6836,14 @@
     <!-- [CHAR LIMIT=100] Notification channel title -->
     <string name="notification_channel_title">Notification category</string>
 
+    <!-- [CHAR LIMIT=200] Notification channel group title -->
+    <string name="notification_group_title">Notification category group</string>
+
     <!-- [CHAR LIMIT=100] Notification importance screen title -->
     <string name="notification_importance_title">Importance</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance: unspecified importance level description -->
-    <string name="notification_importance_unspecified">Let the app decide</string>
+    <!-- [CHAR LIMIT=100 BACKUP_MESSAGE_ID=1820188704793497324] Notification Importance: unspecified importance level description -->
+    <string name="notification_importance_unspecified">Allow sound</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance: blocked importance level description -->
     <string name="notification_importance_blocked">Never show notifications</string>
@@ -7003,11 +7006,20 @@
     <!-- [CHAR LIMIT=NONE] Text appearing when channel notifications are off -->
     <string name="channel_notifications_off_desc">Android is blocking this category of notifications from appearing on this device</string>
 
+    <!-- [CHAR LIMIT=NONE] Text appearing when channel group notifications are off -->
+    <string name="channel_group_notifications_off_desc">Android is blocking this group of notifications from appearing on this device</string>
+
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
     <string name="notification_channels">Categories</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: non-grouped-channels title -->
     <string name="notification_channels_other">Other</string>
+
+    <!-- [CHAR LIMIT=45] App notification settings, group summary-->
+    <plurals name="notification_group_summary">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> category</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> categories</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>

@@ -59,7 +59,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         PreferenceControllerMixin {
     private static final String TAG = "StorageItemPreference";
 
-    private static final String IMAGE_MIME_TYPE = "image/*";
     private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
 
     @VisibleForTesting
@@ -93,6 +92,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private StorageItemPreference mAppPreference;
     private StorageItemPreference mFilePreference;
     private StorageItemPreference mSystemPreference;
+    private boolean mIsWorkProfile;
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
@@ -104,6 +104,16 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mSvp = svp;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mUserId = UserHandle.myUserId();
+    }
+
+    public StorageItemPreferenceController(
+            Context context,
+            Fragment hostFragment,
+            VolumeInfo volume,
+            StorageVolumeProvider svp,
+            boolean isWorkProfile) {
+        this(context, hostFragment, volume, svp);
+        mIsWorkProfile = isWorkProfile;
     }
 
     @Override
@@ -212,7 +222,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (preference != null) {
             Drawable currentIcon = preference.getIcon();
             // Sigh... Applying the badge to the icon clobbers the tint on the base drawable.
-            // For some reason, re-applying it here means the tint remains.
+            // For some reason, reapplying it here means the tint remains.
             currentIcon = applyTint(mContext, currentIcon);
             preference.setIcon(pm.getUserBadgedIcon(currentIcon, userHandle));
         }
@@ -220,7 +230,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private static Drawable applyTint(Context context, Drawable icon) {
         TypedArray array =
-                context.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});
+                context.obtainStyledAttributes(new int[] {android.R.attr.colorControlNormal});
         icon = icon.mutate();
         icon.setTint(array.getColor(0, 0));
         array.recycle();
@@ -248,7 +258,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         // TODO(b/35927909): Figure out how to split out apps which are only installed for work
         //       profiles in order to attribute those app's code bytes only to that profile.
         mPhotoPreference.setStorageSize(
-                data.externalStats.imageBytes + data.externalStats.videoBytes, mTotalSize);
+                data.photosAppsSize + data.externalStats.imageBytes + data.externalStats.videoBytes,
+                mTotalSize);
         mAudioPreference.setStorageSize(
                 data.musicAppsSize + data.externalStats.audioBytes, mTotalSize);
         mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
@@ -269,10 +280,12 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             long attributedSize = 0;
             for (int i = 0; i < result.size(); i++) {
                 final StorageAsyncLoader.AppsStorageResult otherData = result.valueAt(i);
-                attributedSize += otherData.gamesSize
-                        + otherData.musicAppsSize
-                        + otherData.videoAppsSize
-                        + otherData.otherAppsSize;
+                attributedSize +=
+                        otherData.gamesSize
+                                + otherData.musicAppsSize
+                                + otherData.videoAppsSize
+                                + otherData.photosAppsSize
+                                + otherData.otherAppsSize;
                 attributedSize += otherData.externalStats.totalBytes
                         - otherData.externalStats.appBytes;
             }
@@ -306,12 +319,21 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private Intent getPhotosIntent() {
-        Intent intent = new Intent();
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        intent.setType(IMAGE_MIME_TYPE);
-        intent.putExtra(Intent.EXTRA_FROM_STORAGE, true);
-        return intent;
+        Bundle args = new Bundle(2);
+        args.putString(
+                ManageApplications.EXTRA_CLASSNAME, Settings.PhotosStorageActivity.class.getName());
+        args.putInt(
+                ManageApplications.EXTRA_STORAGE_TYPE,
+                ManageApplications.STORAGE_TYPE_PHOTOS_VIDEOS);
+        return Utils.onBuildStartFragmentIntent(
+                mContext,
+                ManageApplications.class.getName(),
+                args,
+                null,
+                R.string.storage_photos_videos,
+                null,
+                false,
+                mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
     private Intent getAudioIntent() {
@@ -320,6 +342,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
 
         Bundle args = new Bundle();
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
@@ -336,6 +359,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
 
         Bundle args = new Bundle();
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
@@ -347,6 +371,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Intent getGamesIntent() {
         Bundle args = new Bundle(1);
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.GamesStorageActivity.class.getName());
         return Utils.onBuildStartFragmentIntent(mContext,
@@ -356,6 +381,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Intent getMoviesIntent() {
         Bundle args = new Bundle(1);
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.MoviesStorageActivity.class.getName());
         return Utils.onBuildStartFragmentIntent(mContext,

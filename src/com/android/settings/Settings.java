@@ -21,7 +21,6 @@ import android.os.Bundle;
 import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
-import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.password.ChooseLockGeneric;
 
 /**
@@ -124,10 +123,14 @@ public class Settings extends SettingsActivity {
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ChannelGroupNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageDomainUrlsActivity extends SettingsActivity { /* empty */ }
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
     public static class MoviesStorageActivity extends SettingsActivity { /* empty */ }
+    public static class PhotosStorageActivity extends SettingsActivity {
+        /* empty */
+    }
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }

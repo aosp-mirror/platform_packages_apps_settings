@@ -59,6 +59,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
@@ -115,6 +116,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final String EXTRA_VOLUME_UUID = "volumeUuid";
     public static final String EXTRA_VOLUME_NAME = "volumeName";
     public static final String EXTRA_STORAGE_TYPE = "storageType";
+    public static final String EXTRA_WORK_ONLY = "workProfileOnly";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -218,6 +220,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int STORAGE_TYPE_DEFAULT = 0; // Show all apps that are not categorized.
     public static final int STORAGE_TYPE_MUSIC = 1;
     public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
+    public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
 
     // sort order
     private int mSortOrder = R.id.sort_order_alpha;
@@ -261,6 +264,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_MANAGE_SOURCES = 8;
     public static final int LIST_TYPE_GAMES = 9;
     public static final int LIST_TYPE_MOVIES = 10;
+    public static final int LIST_TYPE_PHOTOGRAPHY = 11;
 
 
     // List types that should show instant apps.
@@ -277,6 +281,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
     private int mStorageType;
+    private boolean mIsWorkOnly;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -324,10 +329,15 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         } else if (className.equals(MoviesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_MOVIES;
             mSortOrder = R.id.sort_order_size;
+        } else if (className.equals(Settings.PhotosStorageActivity.class.getName())) {
+            mListType = LIST_TYPE_PHOTOGRAPHY;
+            mSortOrder = R.id.sort_order_size;
+            mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
         } else {
             mListType = LIST_TYPE_MAIN;
         }
         mFilter = getDefaultFilter();
+        mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
@@ -375,6 +385,14 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                         new StorageStatsSource(context),
                         mVolumeUuid,
                         UserHandle.of(UserHandle.getUserId(mCurrentUid))));
+            } else if (mStorageType == STORAGE_TYPE_PHOTOS_VIDEOS) {
+                Context context = getContext();
+                mApplications.setExtraViewController(
+                        new PhotosViewHolderController(
+                                context,
+                                new StorageStatsSource(context),
+                                mVolumeUuid,
+                                UserHandle.of(UserHandle.getUserId(mCurrentUid))));
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
@@ -423,6 +441,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (mIsWorkOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter, FILTERS[FILTER_APPS_WORK]);
+        }
         if (compositeFilter != null) {
             mApplications.setCompositeFilter(compositeFilter);
         }
@@ -444,6 +465,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             return new CompoundFilter(ApplicationsState.FILTER_GAMES, filter);
         } else if (listType == LIST_TYPE_MOVIES) {
             return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
+        } else if (listType == LIST_TYPE_PHOTOGRAPHY) {
+            return new CompoundFilter(ApplicationsState.FILTER_PHOTOS, filter);
         }
 
         return null;
@@ -473,6 +496,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_STORAGE:
             case LIST_TYPE_GAMES:
             case LIST_TYPE_MOVIES:
+            case LIST_TYPE_PHOTOGRAPHY:
                 return mSortOrder == R.id.sort_order_alpha;
             default:
                 return false;
@@ -495,6 +519,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return MetricsEvent.APPLICATIONS_STORAGE_GAMES;
             case LIST_TYPE_MOVIES:
                 return MetricsEvent.APPLICATIONS_STORAGE_MOVIES;
+            case LIST_TYPE_PHOTOGRAPHY:
+                return MetricsEvent.APPLICATIONS_STORAGE_PHOTOS;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsEvent.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
@@ -597,6 +623,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 break;
             case LIST_TYPE_MOVIES:
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_movies_tv);
+                break;
+            case LIST_TYPE_PHOTOGRAPHY:
+                startAppInfoFragment(AppStorageSettings.class, R.string.storage_photos_videos);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed

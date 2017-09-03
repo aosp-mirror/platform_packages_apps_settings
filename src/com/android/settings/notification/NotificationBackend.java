@@ -136,8 +136,7 @@ public class NotificationBackend {
         }
     }
 
-
-    public NotificationChannelGroup getGroup(String groupId, String pkg, int uid) {
+    public NotificationChannelGroup getGroup(String pkg, int uid, String groupId) {
         if (groupId == null) {
             return null;
         }
@@ -149,7 +148,19 @@ public class NotificationBackend {
         }
     }
 
-    public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
+    public NotificationChannelGroup getGroupWithChannels(String pkg, int uid, String groupId) {
+        if (groupId == null) {
+            return null;
+        }
+        try {
+            return sINM.getPopulatedNotificationChannelGroupForPackage(pkg, uid, groupId, true);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return null;
+        }
+    }
+
+    public ParceledListSlice<NotificationChannelGroup> getGroups(String pkg, int uid) {
         try {
             return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
         } catch (Exception e) {
@@ -165,6 +176,15 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
         }
     }
+
+    public void updateChannelGroup(String pkg, int uid, NotificationChannelGroup group) {
+        try {
+            sINM.updateNotificationChannelGroupForPackage(pkg, uid, group);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
 
     public int getDeletedChannelCount(String pkg, int uid) {
         try {
