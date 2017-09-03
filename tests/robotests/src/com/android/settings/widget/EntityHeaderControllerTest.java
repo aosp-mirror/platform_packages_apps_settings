@@ -16,7 +16,6 @@
 
 package com.android.settings.widget;
 
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -30,6 +29,7 @@ import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -148,8 +148,9 @@ public class EntityHeaderControllerTest {
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
-        assertThat(appLinks.findViewById(android.R.id.button1).getVisibility())
-                .isEqualTo(View.VISIBLE);
+        final ImageButton button1 = appLinks.findViewById(android.R.id.button1);
+        assertThat(button1.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(button1.getDrawable()).isNotNull();
         assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
                 .isEqualTo(View.GONE);
         try {
@@ -176,8 +177,9 @@ public class EntityHeaderControllerTest {
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
-        assertThat(appLinks.findViewById(android.R.id.button1).getVisibility())
-                .isEqualTo(View.GONE);
+        final ImageButton button1 = appLinks.findViewById(android.R.id.button1);
+        assertThat(button1.getVisibility()).isEqualTo(View.GONE);
+        assertThat(button1.getDrawable()).isNull();
         assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
                 .isEqualTo(View.GONE);
     }

@@ -101,8 +101,13 @@ public class StorageProfileFragment extends DashboardFragment
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final StorageManager sm = context.getSystemService(StorageManager.class);
-        mPreferenceController = new StorageItemPreferenceController(context, this,
-                mVolume, new StorageManagerVolumeProvider(sm));
+        mPreferenceController =
+                new StorageItemPreferenceController(
+                        context,
+                        this,
+                        mVolume,
+                        new StorageManagerVolumeProvider(sm),
+                        /* isWorkProfile */ true);
         controllers.add(mPreferenceController);
         return controllers;
     }

@@ -16,12 +16,12 @@
 package com.android.settings.deviceinfo.storage;
 
 
+import static com.android.settings.applications.ManageApplications.EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -121,9 +121,12 @@ public class StorageItemPreferenceControllerTest {
                 nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
-        assertThat(intent.getType()).isEqualTo("image/*");
-        assertThat(intent.getAction()).isEqualTo(android.content.Intent.ACTION_VIEW);
-        assertThat(intent.getBooleanExtra(Intent.EXTRA_FROM_STORAGE, false)).isTrue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.storage_photos_videos);
     }
 
     @Test
@@ -169,6 +172,29 @@ public class StorageItemPreferenceControllerTest {
                 ManageApplications.class.getName());
         assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
                 .isEqualTo(R.string.apps_storage);
+    }
+
+    @Test
+    public void testClickAppsForWork() {
+        mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp, true);
+        mPreference.setKey("pref_other_apps");
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mFragment.getActivity())
+                .startActivityAsUser(argumentCaptor.capture(), nullable(UserHandle.class));
+
+        Intent intent = argumentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.apps_storage);
+        assertThat(
+                        intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                                .getBoolean(EXTRA_WORK_ONLY))
+                .isTrue();
     }
 
     @Test
