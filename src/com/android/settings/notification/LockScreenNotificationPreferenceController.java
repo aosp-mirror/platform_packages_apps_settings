@@ -109,8 +109,6 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     private void initLockScreenNotificationPrefDisplay() {
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
-        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable));
-        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
 
         String summaryShowEntry =
                 mContext.getString(R.string.lock_screen_notifications_summary_show);
@@ -132,6 +130,10 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
 
+        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable));
+        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
+
+
         mLockscreen.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreen.setEntryValues(values.toArray(new CharSequence[values.size()]));
         updateLockscreenNotifications();
@@ -151,8 +153,6 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         }
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
-        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable_profile));
-        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable_profile));
 
         String summaryShowEntry = mContext.getString(
                 R.string.lock_screen_notifications_summary_show_profile);
@@ -173,6 +173,10 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
             setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
+
+        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable_profile));
+        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable_profile));
+
         mLockscreenProfile.setOnPreClickListener(
                 (Preference p) -> Utils.startQuietModeDialogIfNecessary(mContext,
                         UserManager.get(mContext), mProfileChallengeUserId)
