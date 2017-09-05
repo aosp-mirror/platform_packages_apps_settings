@@ -93,7 +93,6 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      * If the query matches the prefix of the other words in the title, the best rank it can be is 3
      * If the query only matches the summary, the best rank it can be is 7
      * If the query only matches keywords or entries, the best rank it can be is 9
-     *
      */
     public static final int[] BASE_RANKS = {1, 3, 7, 9};
 
@@ -141,7 +140,7 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      * Creates and executes the query which matches prefixes of the first word of the given columns.
      *
      * @param matchColumns The columns to match on
-     * @param baseRank The highest rank achievable by these results
+     * @param baseRank     The highest rank achievable by these results
      * @return A set of the matching results.
      */
     private Set<SearchResult> firstWordQuery(String[] matchColumns, int baseRank) {
@@ -157,7 +156,7 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      * given columns.
      *
      * @param matchColumns The columns to match on
-     * @param baseRank The highest rank achievable by these results
+     * @param baseRank     The highest rank achievable by these results
      * @return A set of the matching results.
      */
     private Set<SearchResult> secondaryWordQuery(String[] matchColumns, int baseRank) {
@@ -172,7 +171,7 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      * Creates and executes the query which matches prefixes of the any word of the given columns.
      *
      * @param matchColumns The columns to match on
-     * @param baseRank The highest rank achievable by these results
+     * @param baseRank     The highest rank achievable by these results
      * @return A set of the matching results.
      */
     private Set<SearchResult> anyWordQuery(String[] matchColumns, int baseRank) {
@@ -186,8 +185,8 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      * Generic method used by all of the query methods above to execute a query.
      *
      * @param whereClause Where clause for the SQL query which uses bindings.
-     * @param selection List of the transformed query to match each bind in the whereClause
-     * @param baseRank The highest rank achievable by these results.
+     * @param selection   List of the transformed query to match each bind in the whereClause
+     * @param baseRank    The highest rank achievable by these results.
      * @return A set of the matching results.
      */
     private Set<SearchResult> query(String whereClause, String[] selection, int baseRank) {
@@ -249,7 +248,7 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
     private String[] buildSingleWordSelection(String query, int size) {
         String[] selection = new String[size];
 
-        for(int i = 0; i < size; i ++) {
+        for (int i = 0; i < size; i++) {
             selection[i] = query;
         }
         return selection;
@@ -267,7 +266,7 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
         final String query = mQueryText + "%";
         final String subStringQuery = "% " + mQueryText + "%";
 
-        for(int i = 0; i < (size - 1); i += 2) {
+        for (int i = 0; i < (size - 1); i += 2) {
             selection[i] = query;
             selection[i + 1] = subStringQuery;
         }

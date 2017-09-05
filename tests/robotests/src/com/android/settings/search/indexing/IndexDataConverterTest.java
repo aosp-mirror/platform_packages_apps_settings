@@ -20,6 +20,7 @@ package com.android.settings.search.indexing;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
+
 import com.android.settings.TestConfig;
 import com.android.settings.R;
 import com.android.settings.search.ResultPayload;
@@ -27,6 +28,7 @@ import com.android.settings.search.ResultPayloadUtils;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +42,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -97,7 +100,7 @@ public class IndexDataConverterTest {
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
-        mConverter = spy(new IndexDataConverter(mContext));
+        mConverter = spy(new IndexDataConverter(mContext, localeStr));
     }
 
     @After
@@ -110,8 +113,7 @@ public class IndexDataConverterTest {
         final SearchIndexableRaw raw = getFakeRaw();
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(raw);
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(indexData.size()).isEqualTo(1);
         final IndexData row = indexData.get(0);
@@ -148,8 +150,7 @@ public class IndexDataConverterTest {
         preIndexData.dataToUpdate.add(raw);
         preIndexData.nonIndexableKeys.put(raw.intentTargetPackage, keys);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(indexData.size()).isEqualTo(1);
         assertThat(indexData.get(0).enabled).isFalse();
@@ -163,8 +164,7 @@ public class IndexDataConverterTest {
         final SearchIndexableRaw raw = getFakeRaw("ca-fr");
         PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(raw);
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(indexData).isEmpty();
     }
@@ -175,8 +175,7 @@ public class IndexDataConverterTest {
     @Test
     public void testNullResource_NothingInserted() {
         PreIndexData preIndexData = new PreIndexData();
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(indexData).isEmpty();
     }
@@ -187,8 +186,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        final List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        final List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
         int numEnabled = getEnabledResultCount(indexData);
 
         assertThat(numEnabled).isEqualTo(NUM_DISPLAY_ENTRIES);
@@ -205,8 +203,7 @@ public class IndexDataConverterTest {
         preIndexData.dataToUpdate.add(resource);
         preIndexData.nonIndexableKeys.put(packageName, keys);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(indexData.size()).isEqualTo(NUM_DISPLAY_ENTRIES);
         assertThat(getEnabledResultCount(indexData)).isEqualTo(NUM_DISPLAY_ENTRIES - 2);
@@ -218,8 +215,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         final IndexData row = findIndexDataForTitle(indexData, PAGE_TITLE);
 
@@ -234,8 +230,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         String checkBoxSummaryOn = "summary_on";
         String checkBoxSummaryOff = "summary_off";
@@ -252,8 +247,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         String listSummary = "summary_4";
         String listKey = "pref_key_4";
@@ -268,8 +262,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         final IndexData row = findIndexDataForTitle(indexData, TITLE_THREE);
 
@@ -286,8 +279,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(indexData.size()).isEqualTo(NUM_FAKE_FRAGMENT_ENTRIES);
         assertThat(findIndexDataForTitle(indexData, PAGE_TITLE)).isNotNull();
@@ -306,8 +298,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         final IndexData data = findIndexDataForTitle(indexData, FakeSettingsFragment.TITLE);
         assertFakeFragment(data);
@@ -322,8 +313,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         assertThat(getEnabledResultCount(indexData)).isEqualTo(NUM_ENABLED_FAKE_FRAGMENT_ENTRIES);
     }
@@ -334,8 +324,7 @@ public class IndexDataConverterTest {
         final PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(resource);
 
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
-                localeStr);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         int numEnabled = getEnabledResultCount(indexData);
         final IndexData nonTitlePref = findIndexDataForKey(indexData, "pref_key_1");

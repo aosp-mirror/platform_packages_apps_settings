@@ -28,7 +28,8 @@ import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
+        .DATA_SUMMARY_ON_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ENABLED;
@@ -234,9 +235,9 @@ public class DatabaseIndexingManager {
     @VisibleForTesting
     List<IndexData> getIndexData(String locale, PreIndexData data) {
         if (mConverter == null) {
-            mConverter = new IndexDataConverter(mContext);
+            mConverter = new IndexDataConverter(mContext, locale);
         }
-        return mConverter.convertPreIndexDataToIndexData(data, locale);
+        return mConverter.convertPreIndexDataToIndexData(data);
     }
 
     /**
@@ -248,6 +249,10 @@ public class DatabaseIndexingManager {
         ContentValues values;
 
         for (IndexData dataRow : indexData) {
+            if (TextUtils.isEmpty(dataRow.normalizedTitle)) {
+                continue;
+            }
+
             values = new ContentValues();
             values.put(IndexDatabaseHelper.IndexColumns.DOCID, dataRow.getDocId());
             values.put(LOCALE, dataRow.locale);
