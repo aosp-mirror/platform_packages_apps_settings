@@ -365,17 +365,17 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         } else {
             setVisible(mAdvanced, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
             setVisible(mImportance, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
-            setVisible(mLights, checkCanBeVisible(
+            setVisible(mAdvanced, mLights, checkCanBeVisible(
                     NotificationManager.IMPORTANCE_DEFAULT) && canPulseLight());
             setVisible(mVibrate, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
             setVisible(mRingtone, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
         }
-        setVisible(mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
-        setVisible(mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
+        setVisible(mAdvanced, mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
+        setVisible(mAdvanced, mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
                 || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
                 && mDndVisualEffectsSuppressed));
-        setVisible(mVisibilityOverride, checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
-                && isLockScreenSecure());
+        setVisible(mAdvanced, mVisibilityOverride, isLockScreenSecure()
+                &&checkCanBeVisible(NotificationManager.IMPORTANCE_LOW));
         setVisible(mBlockedDesc, mChannel.getImportance() == IMPORTANCE_NONE);
         if (mAppLink != null) {
             setVisible(mAppLink, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
