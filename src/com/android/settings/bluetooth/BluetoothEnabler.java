@@ -157,7 +157,9 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     }
 
     private void setChecked(boolean isChecked) {
-        if (isChecked != mSwitchWidget.isChecked()) {
+        final boolean currentState =
+                (mSwitchWidget.getSwitch() != null) && mSwitchWidget.getSwitch().isChecked();
+        if (isChecked != currentState) {
             // set listener to null, so onCheckedChanged won't be called
             // if the checked status on Switch isn't changed by user click
             if (mValidListener) {
