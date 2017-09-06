@@ -329,7 +329,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Subito dopo la sospensione, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo la sospensione, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra info proprietario su blocco schermo"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"Msg schermata blocco"</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"Messaggio schermata blocco"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Abilita widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Disattivati dall\'amministratore"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Nessuno"</string>
@@ -365,7 +365,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Sblocca con l\'impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Usa la tua impronta digitale"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app desiderate. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota. La tua impronta digitale potrebbe essere meno sicura di una sequenza o un PIN complesso."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota: la tua impronta digitale potrebbe essere meno sicura di una sequenza o un PIN complesso."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"Utilizza la tua impronta digitale per sbloccare il telefono o approvare un acquisto.\n\nNota: non puoi utilizzare la tua impronta digitale per sbloccare questo dispositivo. Per ulteriori informazioni, contatta l\'amministratore dell\'organizzazione."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Utilizza la tua impronta digitale per sbloccare il telefono o approvare un acquisto.\n\nNota: la tua impronta digitale potrebbe essere meno sicura di una sequenza o un codice PIN complessi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annulla"</string>
@@ -402,9 +402,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fine"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ops, questo non è il sensore"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"Tocca il sensore sulla parte posteriore del telefono. Utilizza il dito indice."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"L\'iscrizione non è stata completata"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Timeout iscrizione mediante impronta digitale. Riprova."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Iscrizione mediante impronta digitale non riuscita. Riprova o utilizza un dito diverso."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registrazione non completata"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Raggiunto tempo limite per la registrazione dell\'impronta digitale. Riprova."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Registrazione dell\'impronta digitale non riuscita. Riprova o utilizza un dito diverso."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Aggiungine un\'altra"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Avanti"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Oltre che per sbloccare il telefono, puoi utilizzare la tua impronta digitale per autorizzare acquisti e accessi alle app. "<annotation id="url">"Ulteriori informazioni"</annotation></string>
@@ -2888,7 +2888,8 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"Notifiche app"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Categoria della notifica"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importanza"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Lascia decidere all\'app"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Non mostrare mai notifiche"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Senza suoneria o interruzione visiva"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Senza suoneria"</string>
@@ -3223,9 +3224,9 @@
     <string name="usb_use_power_only_desc" msgid="3461232831015575152">"Ricarica del dispositivo collegato. Funziona soltanto con dispositivi che supportano la ricarica tramite USB."</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Trasferire file"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Trasferisci i file su un altro dispositivo"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Trasferisci foto (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Trasferire foto (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Trasferisci foto o file se la modalità MTP non è supportata (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="870922185938298263">"Utilizzare il dispositivo per la modalità MIDI"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Usare il dispositivo come MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Utilizzare questo dispositivo per la modalità MIDI"</string>
     <string name="usb_use" msgid="3256040963685055320">"Utilizza USB per"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>

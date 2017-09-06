@@ -329,7 +329,7 @@
     <string name="lock_after_timeout" msgid="4590337686681194648">"Blocare automată"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după inactivitate"</string>
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Imediat după intervalul de inactivitate, cu excepția cazului când este păstrat deblocat prin <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după intrarea în inactivitate, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după intrarea în inactivitate, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Afișați info. proprietar la blocarea ecranului"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mesaj pe ecranul de blocare"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activați widgeturi"</string>
@@ -368,9 +368,9 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Deblocați cu amprenta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Folosiți amprenta"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Puteți să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații atingând senzorul pentru amprente. Aveți grijă ce amprente adăugați. Aceste acțiuni sunt posibile folosind chiar și o singură amprentă adăugată.\n\nNotă: este posibil ca amprenta să fie mai puțin sigură decât un model sau un cod PIN puternic."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Puteți să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații atingând senzorul pentru amprente. Aveți grijă ce amprente adăugați. Aceste acțiuni sunt posibile folosind chiar și o singură amprentă adăugată.\n\nNotă: este posibil ca amprenta să fie mai puțin sigură decât un model sau un cod PIN complex."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"Folosiți amprenta ca să deblocați telefonul sau să aprobați achizițiile.\n\nNotă: nu vă puteți folosi amprenta ca să deblocați acest dispozitiv. Pentru informații suplimentare, contactați administratorul organizației."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Folosiți amprenta ca să deblocați telefonul sau să aprobați achizițiile.\n\nNotă: este posibil ca amprenta să fie mai puțin sigură decât un model sau un cod PIN puternic."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Folosiți amprenta ca să deblocați telefonul sau să aprobați achizițiile.\n\nNotă: este posibil ca amprenta să fie mai puțin sigură decât un model sau un cod PIN complex."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Anulați"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuați"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Omiteți"</string>
@@ -395,7 +395,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Atingeți senzorul"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Puneți degetul pe senzor și ridicați-l după ce simțiți o vibrație"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Ridicați, apoi atingeți din nou"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Ridicați încontinuu degetul pentru a adăuga toate părțile amprentei"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Ridicați degetul și atingeți din nou pentru a adăuga toate părțile amprentei"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Amprentă adăugată"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Când vedeți această pictogramă, folosiți amprenta pentru identificare sau pentru a aproba achizițiile."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Mai târziu"</string>
@@ -746,7 +746,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Pentru a folosi funcția, selectați un furnizor de evaluări ale rețelei"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Pentru a folosi funcția, selectați un furnizor de evaluări ale rețelei compatibil"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalați certificate"</string>
-    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Pentru a îmbunătăți precizia localizării, aplicațiile și serviciile de sistem pot totuși să caute rețelele Wi‑Fi. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Pentru a îmbunătăți precizia localizării, aplicațiile și serviciile de sistem pot totuși să caute rețele Wi‑Fi. Puteți să schimbați acest aspect din <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Pentru a îmbunătăți precizia localizării, activați scanarea Wi-Fi în <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setările de scanare<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Nu mai afișa"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Mențineți Wi-Fi activat în modul inactiv"</string>
@@ -2915,7 +2915,8 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificări din aplicații"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Categoria notificării"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importanță"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Permiteți aplicației să decidă"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Nu afișați niciodată notificările"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Fără sunet sau întrerupere vizuală"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Fără sunet"</string>
@@ -3265,7 +3266,7 @@
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transferați fotografii sau fișiere dacă MTP nu este acceptat (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Folosiți dispozitivul ca MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Folosiți acest dispozitiv ca MIDI"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Folosiți conexiunea USB ca să"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Folosiți conexiunea USB ca să:"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Încărcarea acestui dispozitiv"</string>
     <string name="usb_summary_power_only" msgid="3629517713817003738">"Alimentarea altui dispozitiv"</string>
