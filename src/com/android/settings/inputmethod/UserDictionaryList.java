@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
+import android.support.annotation.NonNull;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
@@ -78,14 +79,15 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         mLocale = locale;
     }
 
+    @NonNull
     public static TreeSet<String> getUserDictionaryLocalesSet(Context context) {
         final Cursor cursor = context.getContentResolver().query(
-                UserDictionary.Words.CONTENT_URI, new String[] { UserDictionary.Words.LOCALE },
+                UserDictionary.Words.CONTENT_URI, new String[]{UserDictionary.Words.LOCALE},
                 null, null, null);
-        final TreeSet<String> localeSet = new TreeSet<String>();
-        if (null == cursor) {
-            // The user dictionary service is not present or disabled. Return null.
-            return null;
+        final TreeSet<String> localeSet = new TreeSet<>();
+        if (cursor == null) {
+            // The user dictionary service is not present or disabled. Return empty set.
+            return localeSet;
         }
         try {
             if (cursor.moveToFirst()) {
@@ -134,6 +136,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
 
     /**
      * Creates the entries that allow the user to go into the user dictionary for each locale.
+     *
      * @param userDictGroup The group to put the settings in.
      */
     protected void createUserDictSettings(PreferenceGroup userDictGroup) {
@@ -163,6 +166,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
 
     /**
      * Create a single User Dictionary Preference object, with its parameters set.
+     *
      * @param locale The locale for which this user dictionary is for.
      * @return The corresponding preference.
      */
@@ -172,10 +176,11 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         if (null == locale) {
             newPref.setTitle(Locale.getDefault().getDisplayName());
         } else {
-            if ("".equals(locale))
+            if ("".equals(locale)) {
                 newPref.setTitle(getString(R.string.user_dict_settings_all_languages));
-            else
+            } else {
                 newPref.setTitle(Utils.createLocaleFromString(locale).getDisplayName());
+            }
             intent.putExtra("locale", locale);
             newPref.getExtras().putString("locale", locale);
         }
