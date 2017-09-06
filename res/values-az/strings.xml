@@ -462,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Planşetinizi qoruyun"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Cihazınızı qoruyun"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Telefonunuzu qoruyun"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Əlavə təhlükəsizlik üçün arxa fon ekran kilidi ayarlayın"</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Əlavə təhlükəsizlik üçün arxa fon ekran kilidi ayarlayın."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Cihazın qorunması xüsusiyyətlərini aktivləşdirməklə, icazəniz olmadan başqalarının bu planşetdən istifadəsinə mane olun. İsifadə etmək istədiyiniz ekran kilidini seçin."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Cihazın qorunması xüsusiyyətlərini aktivləşdirməklə, icazəniz olmadan başqalarının bu cihazdan istifadəsinə mane olun. İsifadə etmək istədiyiniz ekran kilidini seçin."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Cihazın qorunması xüsusiyyətlərini aktivləşdirməklə, icazəniz olmadan başqalarının bu telefondan istifadəsinə mane olun. İsifadə etmək istədiyiniz ekran kilidini seçin."</string>
@@ -2228,7 +2228,8 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Etimadnamə yaddaşı silindi."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Etimad yaddaşı silinə bilmədi."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Etimadnamə yaddaşı aktiv edildi."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Etimad yaddaşını istifadə etmədən öncə Sizin ekran kilidləmə PIN\'i və ya parol quraşdırmağa ehtiyacınız var."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Kredensial yaddaşdan istifadə etmədən öncə cihazınızda təhlükəsiz kilid ekranı olmalıdır"</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"KİLİD AYARLAYIN"</string>
     <string name="usage_access_title" msgid="332333405495457839">"İstifadə girişi olan tətbiqlər"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Həyəcan tonu"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Təcili zəng olduqda davranış təyin et"</string>
@@ -2888,8 +2889,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"Bildirişlər"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Tətbiq bildirişləri"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Bildiriş kateqoriyası"</string>
+    <string name="notification_group_title" msgid="7180506440133859601">"Bildiriş kateqoriyasının qrupu"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Əhəmiyyət"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Tətbiqin öhdəsinə buraxın"</string>
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Səsə icazə verin"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Bildirişləri heç vaxt göstərməyin"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Səs və ya vizual kəsintisiz"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Səs yoxdur"</string>
@@ -2938,8 +2940,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Tətbiqlər endirilir..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android bu tətbiq bildirişinin bu cihazda görünməsini blok edir"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android bu kateqoriyalı bildirişin bu cihazda görünməsini blok edir"</string>
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android bu kateqoriyalı bildirişin cihazda görünməsini blok edir"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Kateqoriyalar"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Digər"</string>
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kateqoriya</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kateqoriya</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Bu tətbiq heç bir bildiriş paylaşmayıb"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Tətbiqdə əlavə ayarlar"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Bütün tətbiqlər üçün deaktiv edildi"</string>

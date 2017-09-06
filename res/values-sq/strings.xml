@@ -462,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Mbroje tabletin tënd"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Mbroje pajisjen tënde"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Mbroje telefonin tënd"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Për më shumë siguri, konfiguro një kyçje rezervë për ekranin."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Për më shumë siguri, cakto një kyçje rezervë për ekranin."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Parandalo që të tjerët ta përdorin këtë tablet pa lejen tënde duke aktivizuar funksionet e mbrojtjes së pajisjes. Zgjidh kyçjen e ekranit që dëshiron të përdorësh."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Parandalo që të tjerët ta përdorin këtë pajisje pa lejen tënde duke aktivizuar funksionet e mbrojtjes së pajisjes. Zgjidh kyçjen e ekranit që dëshiron të përdorësh."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Parandalo që të tjerët ta përdorin këtë telefon pa lejen tënde duke aktivizuar funksionet e mbrojtjes së pajisjes. Zgjidh kyçjen e ekranit që dëshiron të përdorësh."</string>
@@ -2228,7 +2228,8 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Hapësira ruajtëse e kredencialeve është spastruar."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Ruajtja e kred. s\'mund të fshihej."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Është aktivizuar hapësira për ruajtjen e kredencialeve."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Duhet të caktosh një PIN të ekranit të kyçjes para se të mund të përdorësh hapësirën ruajtëse të kredencialeve."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Përpara se të mund të përdorësh hapësirën ruajtëse të kredencialeve, pajisja jote duhet të ketë një ekran kyçjeje të sigurt"</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"CAKTO KYÇJEN"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplikacionet me qasje përdorimi"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Toni i urgjencës"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Cakto sjelljen kur kryhet një telefonatë urgjence"</string>
@@ -2888,8 +2889,11 @@
     <string name="notifications_title" msgid="8086372779371204971">"Njoftimet"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Njoftimet e apl."</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Kategoria e njoftimeve"</string>
+    <!-- no translation found for notification_group_title (7180506440133859601) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"Rëndësia"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Lejoje aplikacionin të vendosë"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Mos i shfaq asnjëherë njoftimet"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Asnjë tingull apo ndërprerje vizuale"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Nuk ka tingull"</string>
@@ -2938,8 +2942,11 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Po ngarkon aplikacionet..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android po bllokon shfaqjen e njoftimeve të këtij aplikacioni në këtë pajisje"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android po bllokon shfaqjen e kësaj kategorie njoftimesh në këtë pajisje"</string>
+    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"Kategoritë"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Të tjera"</string>
+    <!-- no translation found for notification_group_summary (3420621520561455358) -->
     <string name="no_channels" msgid="3077375508177744586">"Ky aplikacion nuk ka postuar asnjë njoftim"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Cilësime shtesë në aplikacion"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Aktivizo për të gjitha aplikacionet"</string>
@@ -3221,7 +3228,7 @@
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Karikuar këtë pajisje"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Vetëm karikoje këtë pajisje"</string>
     <string name="usb_use_power_only" msgid="6426550616883919530">"Furnizuar me energji elektrike"</string>
-    <string name="usb_use_power_only_desc" msgid="3461232831015575152">"Ngarkoje pajisjen e lidhur. Funksionon vetëm me pajisjet që mbështesin ngarkimin me USB."</string>
+    <string name="usb_use_power_only_desc" msgid="3461232831015575152">"Karikoje pajisjen e lidhur. Funksionon vetëm me pajisjet që mbështesin ngarkimin me USB."</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transferuar skedarë"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transfero skedarët te një pajisje tjetër"</string>
     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transferuar fotografi (PTP)"</string>
