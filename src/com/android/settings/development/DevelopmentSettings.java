@@ -54,6 +54,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
@@ -1054,8 +1055,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return context.getSystemService(Context.OEM_LOCK_SERVICE) != null;
     }
 
+    /**
+     * Returns whether OEM unlock is allowed by the user and carrier.
+     *
+     * This does not take into account any restrictions imposed by the device policy.
+     */
+    private boolean isOemUnlockAllowedByUserAndCarrier() {
+        final UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
+        return mOemLockManager.isOemUnlockAllowedByCarrier()
+                && !mUm.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle);
+    }
+
     private boolean enableOemUnlockPreference() {
-        return !isBootloaderUnlocked() && mOemLockManager.canUserAllowOemUnlock();
+        return !isBootloaderUnlocked() && isOemUnlockAllowedByUserAndCarrier();
     }
 
     private void updateOemUnlockOptions() {
@@ -1068,10 +1080,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             if (mEnableOemUnlock.isEnabled()) {
                 // Check restriction, disable mEnableOemUnlock and apply policy transparency.
                 mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-            }
-            if (mEnableOemUnlock.isEnabled()) {
-                // Check restriction, disable mEnableOemUnlock and apply policy transparency.
-                mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_OEM_UNLOCK);
             }
         }
     }
@@ -2834,7 +2842,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
-            } else if (!mOemLockManager.canUserAllowOemUnlock()) {
+            } else if (!isOemUnlockAllowedByUserAndCarrier()) {
                 // If the device isn't SIM-locked but OEM unlock is disallowed by some party, this
                 // means either some other carrier restriction is in place or the device hasn't been
                 // able to confirm which restrictions (SIM-lock or otherwise) apply.
