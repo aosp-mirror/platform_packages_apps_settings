@@ -597,7 +597,7 @@ public class FingerprintSettings extends SubSettings {
             String prefName = genKey(fpId);
             FingerprintPreference fpref = (FingerprintPreference) findPreference(prefName);
             final Drawable highlight = getHighlightDrawable();
-            if (highlight != null) {
+            if (highlight != null && fpref != null) {
                 final View view = fpref.getView();
                 final int centerX = view.getWidth() / 2;
                 final int centerY = view.getHeight() / 2;
