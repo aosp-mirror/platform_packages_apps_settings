@@ -40,6 +40,7 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
     private final SwitchWidgetController mSwitchBar;
     private final ConnectivityManager mConnectivityManager;
     private final DataSaverBackend mDataSaverBackend;
+    private final WifiManager mWifiManager;
 
     WifiTetherSwitchBarController(Context context, SwitchWidgetController switchBar) {
         mContext = context;
@@ -47,6 +48,8 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
         mDataSaverBackend = new DataSaverBackend(context);
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mSwitchBar.setChecked(mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED);
         mSwitchBar.setListener(this);
     }
 
