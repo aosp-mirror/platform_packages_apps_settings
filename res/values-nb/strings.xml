@@ -462,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Beskytt nettbrettet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Beskytt enheten"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Beskytt telefonen"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Velg en reserveskjermlås for bedre beskyttelse."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Angi en reserveskjermlås for bedre beskyttelse."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindre at andre bruker dette nettbrettet uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Hindre at andre bruker denne enheten uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindre at andre bruker denne telefonen uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
@@ -1259,7 +1259,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"System"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Utforsk <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Annet omfatter delte filer lagret av apper, filer lastet ned fra Internett eller Bluetooth, Android-filer og så videre. \n\nFor å se det synlige innholdet på <xliff:g id="NAME">^1</xliff:g>, trykk på Utforsk."</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Delen System inneholder filer som brukes for å kjøre Android-versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Systemet inkluderer filer som brukes for å kjøre Android-versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> kan ha lagret bilder, musikk, apper eller andre data, som bruker <xliff:g id="SIZE">^2</xliff:g> lagringsplass. \n\nFor å se mer informasjon, bytt til <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Konfigurer <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Bruk som bærbar lagring"</string>
@@ -1526,7 +1526,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Gjør mønsteret synlig"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Gjør profilmønsteret synlig"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrer ved trykk"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Av/på låser umiddelbart"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Av/på-knapp låser umiddelbart"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Unntatt når den holdes opplåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Opplåsingsmønster"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Opplåsingsmønster"</string>
@@ -1739,7 +1739,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Innstillinger for fysisk tastatur"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Trykk mellomromstasten to ganger for å skrive punktum"</string>
     <string name="show_password" msgid="4837897357002495384">"Vis passord"</string>
-    <string name="show_password_summary" msgid="3365397574784829969">"Vis tegnene kjapt mens du skriver"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"Vis tegnene mens du skriver"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Denne stavekontrollen kan være i stand til å samle all tekst du skriver, herunder personlige opplysninger som passord og kredittkortnumre. Den kommer fra appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruke denne stavekontrollen?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Innstillinger"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Språk"</string>
@@ -2228,7 +2228,8 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Legitimasjonslageret ble tømt."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Leg.lageret kan ikke slettes."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Akkreditivlageret er aktivert."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Du må angi en PIN-kode eller et passord for skjermlås før du kan bruke legitimasjonslagring."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Enheten din må ha en sikker låseskjerm før du kan bruke legitimasjonslager"</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ANGI LÅS"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apper med brukstilgang"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Nødtone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Velg oppførsel når en nødsamtale opprettes"</string>
@@ -2576,7 +2577,7 @@
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Ikke konfigurert – begrenset profil"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Ikke konfigurert – arbeidsprofil"</string>
     <string name="user_admin" msgid="993402590002400782">"Administrator"</string>
-    <string name="user_you" msgid="1639158809315025986">"Deg (<xliff:g id="NAME">%s</xliff:g>)"</string>
+    <string name="user_you" msgid="1639158809315025986">"Du (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Kallenavn"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"Legg til"</string>
     <string name="user_add_max_count" msgid="5405885348463433157">"Du kan legge til opptil <xliff:g id="USER_COUNT">%1$d</xliff:g> brukere"</string>
@@ -2588,7 +2589,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Du kan dele denne enheten med andre folk ved å opprette flere brukere. Hver bruker har sin egen plass de kan tilpasse med apper, bakgrunner og annet. Brukere kan også endre enhetsinnstillinger, for eksempel Wi-Fi, som påvirker alle.\n\nNår du legger til en ny bruker, må vedkommende angi innstillinger for plassen sin.\n\nAlle brukere kan oppdatere apper for alle andre brukere."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Når du legger til en ny bruker, må vedkommende konfigurere sitt eget område.\n\nAlle brukere kan oppdatere apper for alle andre brukere."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Konfigurere brukeren nå?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Sørg for at brukeren er tilgjengelig sånn at vedkommende kan konfigurere området sitt på enheten"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Sørg for at brukeren er tilgjengelig for å konfigurere området sitt på enheten"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Vil du konfigurere profilen nå?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Konfigurer nå"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ikke nå"</string>
@@ -2888,8 +2889,11 @@
     <string name="notifications_title" msgid="8086372779371204971">"Varsler"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Appvarsler"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Varselkategori"</string>
+    <!-- no translation found for notification_group_title (7180506440133859601) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"Viktighet"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"La appen bestemme"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Vis aldri varsler"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Ingen lyd eller visuell forstyrrelse"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Ingen lyd"</string>
@@ -2938,8 +2942,11 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Laster inn apper …"</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blokkerer varslene fra denne appen fra å vises på denne enheten"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android blokkerer denne varselkategorien fra å vises på denne enheten"</string>
+    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"Kategorier"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Annet"</string>
+    <!-- no translation found for notification_group_summary (3420621520561455358) -->
     <string name="no_channels" msgid="3077375508177744586">"Denne appen har ikke publisert noen varsler"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Flere innstillinger i appen"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Slått på for alle apper"</string>
@@ -3421,8 +3428,8 @@
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"Operatørens måling av databruk samsvarer ikke nødvendigvis med enhetens måling."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt"</string>
-    <string name="set_data_warning" msgid="6115364758236594593">"Angi datavarsel"</string>
-    <string name="data_warning" msgid="209133958008062117">"Advarsel for dataforbruk"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Angi varsel om databruk"</string>
+    <string name="data_warning" msgid="209133958008062117">"Varsel om databruk"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Angi en datagrense"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datagrense"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> brukte <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3567,7 +3574,7 @@
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Hurtigbevegelser for å kontrollere nettbrettet ditt"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Hurtigbevegelser for å kontrollere enheten din"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Åpne kameraet raskt"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Trykk på av/på-knappen to ganger for å åpne kameraet raskt. Dette fungerer fra alle skjermbilder."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Trykk på av/på-knappen to ganger for å åpne kameraet raskt. Dette fungerer på alle skjermer."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Rask åpning av kameraet"</string>
     <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"Trykk på av/på-knappen to ganger for å åpne kameraet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vend kameraet"</string>
@@ -3588,7 +3595,7 @@
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Ta opp nettbrettet for å sjekke tidspunkt, varselikoner og annen informasjon."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Ta opp enheten for å sjekke tidspunkt, varselikoner og annen informasjon."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Sjekk varsler når skjermen er slått av"</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Varsler med fingeravtrykksensor"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Sveip fingersensoren for varsler"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Sjekk varsler ved å sveipe ned på fingeravtrykksensoren på baksiden av telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Sjekk varsler ved å sveipe ned på fingeravtrykksensoren på baksiden av nettbrettet."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Sjekk varsler ved å sveipe ned på fingeravtrykksensoren på baksiden av enheten."</string>

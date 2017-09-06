@@ -363,7 +363,7 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Додај отисак прста"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"закључавање екрана"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="one">Подешен је <xliff:g id="COUNT_1">%1$d</xliff:g> отисак прстију </item>
+      <item quantity="one">Подешен је <xliff:g id="COUNT_1">%1$d</xliff:g> отисак прста </item>
       <item quantity="few">Подешена су <xliff:g id="COUNT_1">%1$d</xliff:g> отиска прстију</item>
       <item quantity="other">Подешено је <xliff:g id="COUNT_1">%1$d</xliff:g> отисака прстију</item>
     </plurals>
@@ -465,7 +465,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Заштитите таблет"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Заштитите уређај"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Заштитите телефон"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Ради веће безбедности подесите резервни метод за закључавање екрана."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Ради додатне безбедности подесите резервни метод за закључавање екрана."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Спречите друге да користе овај таблет без дозволе тако што ћете активирати функције заштите уређаја. Изаберите закључавање екрана које желите да користите."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Спречите друге да користе овај уређај без дозволе тако што ћете активирати функције заштите уређаја. Изаберите закључавање екрана које желите да користите."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Спречите друге да користе овај телефон без дозволе тако што ћете активирати функције заштите уређаја. Изаберите закључавање екрана које желите да користите."</string>
@@ -1971,7 +1971,7 @@
     <string name="print_service_disabled" msgid="7739452396114245222">"Услуга је онемогућена"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Задаци за штампање"</string>
     <string name="print_print_job" msgid="7563741676053287211">"Задатак за штампање"</string>
-    <string name="print_restart" msgid="8373999687329384202">"Поново покрени"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Рестартуј"</string>
     <string name="print_cancel" msgid="3621199386568672235">"Откажи"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Штампа се <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
@@ -2249,7 +2249,8 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Складиште акредитива је избрисано."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Није могуће oбрисати складиште акредитива."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Складиште акредитива је омогућено."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Треба да подесите PIN или лозинку за закључавање екрана да бисте могли да користите складиште акредитива."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Да бисте могли да користите складиште акредитива, уређај мора да има безбедну опцију за закључавање екрана"</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ПОДЕСИТЕ ЗАКЉУЧАВАЊЕ"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Апл. са приступом подацима о коришћењу"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за хитне позиве"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Подешавање понашања када се успоставља хитан позив"</string>
@@ -2440,9 +2441,9 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Желите ли да ограничите позадинске податке?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Ова функција може да заустави апликацију која зависи од позадинских података када су доступне само мобилне мреже.\n\nАдекватније контроле за коришћење података можете да пронађете у подешавањима доступним у оквиру апликације."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Ограничавање позадинских података је могуће само када будете подесили ограничење за мобилне податке."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Укључити аутом. синх. података?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на таблет.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на таблету. Тако функционише Google налог."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на телефон.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на телефону. Тако функционише Google налог."</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Укључујете ауто. синхронизацију?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Све промене које унесете на налоге на вебу ће аутоматски бити копиране на таблет.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на таблету. Тако функционише Google налог."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Све промене које унесете на налоге на вебу ће аутоматски бити копиране на телефон.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на телефону. Тако функционише Google налог."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Искључујете ауто-синх. података?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"То ће се смањити потрошњу података и батерије, али биће потребно да ручно синхронизујете сваки налог да бисте прикупили недавне информације. Нећете примати ни обавештења када дође до ажурирања."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Датум враћања циклуса потрошње на почетне вредности"</string>
@@ -2612,10 +2613,10 @@
     <string name="user_add_user_title" msgid="2108112641783146007">"Додајете новог корисника?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Овај уређај са можете да делите другим људима ако направите још корисника. Сваки корисник има сопствени простор, који може да прилагођава помоћу апликација, позадине и тако даље. Корисници могу да прилагођавају и подешавања уређаја која утичу на свакога, попут Wi‑Fi-ја.\n\nКада додате новог корисника, та особа треба да подеси сопствени простор.\n\nСваки корисник може да ажурира апликације за све остале кориснике."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Када додате новог корисника, та особа треба да подеси сопствени простор.\n\nСваки корисник може да ажурира апликације за све остале кориснике."</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Подешавате корисника одмах?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Проверите да ли је особа доступна да узме уређај и подеси свој простор"</string>
+    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Подешавате корисника?"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Та особа треба да узме уређај и подеси свој простор"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Желите ли да одмах подесите профил?"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Подеси одмах"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Подеси"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не сада"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="7153048188252553320">"Само власник таблета може да управља корисницима."</string>
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Само власник телефона може да управља корисницима."</string>
@@ -2915,8 +2916,11 @@
     <string name="notifications_title" msgid="8086372779371204971">"Обавештења"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Обавештења апликација"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Категорија обавештења"</string>
+    <!-- no translation found for notification_group_title (7180506440133859601) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"Важност"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Нека апликација одлучи"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Никада не приказуј обавештења"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Без звучног сигнала или визуелног обавештења"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Без звука"</string>
@@ -2966,8 +2970,11 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Учитавају се апликације..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android блокира приказивање обавештења ове апликације на овом уређају"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android блокира приказивање ове категорије обавештења на овом уређају"</string>
+    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"Категорије"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Другo"</string>
+    <!-- no translation found for notification_group_summary (3420621520561455358) -->
     <string name="no_channels" msgid="3077375508177744586">"Ова апликација није поставила ниједно обавештење"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Додатна подешавања у апликацији"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Укључено за све апликације"</string>
@@ -3102,7 +3109,7 @@
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Можете додатно да заштитите овај уређај тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме. \n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати шаблон при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Можете додатно да заштитите уређај тако што ћете га подесити да тражи лозинку пре покретања. Док се уређај не покрене, не може да прима позиве, поруке или обавештења, укључујући аларме. \n\nТо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати лозинку при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи PIN пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Желите захтев за PIN при покретању уређаја?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати шаблон при покретању уређаја?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Желите ли захтев шаблона при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи лозинке пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати лозинку при покретању уређаја?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>

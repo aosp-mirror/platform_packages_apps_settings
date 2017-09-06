@@ -462,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Je tablet beschermen"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Je apparaat beschermen"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Bescherm je telefoon"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Stel een extra schermvergrendeling in voor betere beveiliging."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Stel een extra schermvergrendeling in voor betere beveiliging."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze tablet zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen dit apparaat zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze telefoon zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
@@ -2228,7 +2228,8 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Certificaten gewist."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Kan certificaten niet wissen."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Certificaatopslag ingeschakeld."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Je moet een pincode of wachtwoord voor het vergrendelen van het scherm instellen voordat je certificaatgegevens kunt opslaan."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Voordat je de opslag voor certificaatgegevens kunt gebruiken, moet je apparaat een beveiligd vergrendelingsscherm hebben"</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"VERGRENDELING INST."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apps met gebruikstoegang"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Toon voor noodoproep"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Gedrag bij noodoproepen instellen"</string>
@@ -2888,8 +2889,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"Meldingen"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"App-meldingen"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Meldingscategorie"</string>
+    <string name="notification_group_title" msgid="7180506440133859601">"Groep meldingscategorieën"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Belang"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Laat de app beslissen"</string>
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Geluid toestaan"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Nooit meldingen weergeven"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Geen geluid of visuele onderbreking"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Geen geluid"</string>
@@ -2938,8 +2940,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Apps laden..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blokkeert de weergave van meldingen van deze app op dit apparaat"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android blokkeert de weergave van deze categorie meldingen op dit apparaat"</string>
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android blokkeert de weergave van deze groep meldingen op dit apparaat"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Categorieën"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Anders"</string>
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categorieën</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categorie</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Deze app heeft geen meldingen geplaatst"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Extra instellingen in de app"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Ingeschakeld voor alle apps"</string>
