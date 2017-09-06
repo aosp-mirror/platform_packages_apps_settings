@@ -364,6 +364,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
     private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
+    private CameraLaserSensorPreferenceController mCameraLaserSensorController;
 
     private BroadcastReceiver mEnableAdbReceiver;
 
@@ -405,6 +406,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
         mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
         mCameraHalHdrplusController = new CameraHalHdrplusPreferenceController(getActivity());
+        mCameraLaserSensorController = new CameraLaserSensorPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
@@ -439,6 +441,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewAppPrefController.displayPreference(getPreferenceScreen());
         mCameraHalHdrplusController.displayPreference(getPreferenceScreen());
         mEnableAdbController.displayPreference(getPreferenceScreen());
+
+        mCameraLaserSensorController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -659,6 +663,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mTelephonyMonitorController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
         mCameraHalHdrplusController.enablePreference(enabled);
+        mCameraLaserSensorController.enablePreference(enabled);
         updateAllOptions();
     }
 
@@ -793,6 +798,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
         mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
         mHaveDebugSettings |= mCameraHalHdrplusController.updatePreference();
+        mHaveDebugSettings |= mCameraLaserSensorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, SystemProperties.getBoolean(
@@ -2456,6 +2462,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         if (mEnableAdbController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
+        if (mCameraLaserSensorController.handlePreferenceTreeClick(preference)) {
             return true;
         }
 
