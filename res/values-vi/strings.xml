@@ -215,7 +215,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Chọn dải tần số"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Loại mạng thoại:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Loại mạng dữ liệu:"</string>
-    <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Đặt loại mạng ưa thích:"</string>
+    <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Đặt loại mạng ưu tiên:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Tên máy chủ Ping (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Tên máy chủ Ping (www.google.com) IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="2382286093023138339">"Kiểm tra máy khách HTTP:"</string>
@@ -326,24 +326,24 @@
     <string name="time_picker_title" msgid="483460752287255019">"Thời gian"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Tự động khóa"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi ngủ"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Ngay sau khi ngủ, trừ khi được <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mở khóa"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi ngủ, trừ khi vẫn mở khóa bởi <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Ngay sau khi chuyển sang chế độ ngủ, trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mở khóa"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi sang chế độ ngủ, trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mở khóa"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Hiển thị thông tin chủ sở hữu trên màn hình khóa"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Thông báo màn hình khóa"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Bật tiện ích con"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Bị quản trị viên vô hiệu hóa"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Không có"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"Ví dụ: Android của Joe."</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"Ví dụ: Android của Huy."</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Thông tin người dùng"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Hiển thị thông tin tiểu sử trên màn hình khóa"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Thông tin hồ sơ"</string>
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Tài khoản"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Vị trí"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Tài khoản"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"Bảo mật &amp; vị trí"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Bảo mật và vị trí"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Mã hóa và thông tin đăng nhập"</string>
-    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Điện thoại được mã hóa"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Đã mã hóa điện thoại"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Thiết bị được mã hóa"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Tùy chọn màn hình khóa"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Đặt Vị trí của tôi, mở khóa màn hình, khóa thẻ SIM, khóa bộ nhớ thông tin xác thực"</string>
@@ -384,7 +384,7 @@
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Vẫn bỏ qua"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Quay lại"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Chạm vào cảm biến"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Ở mặt sau của điện thoại. Sử dụng ngón tay trỏ của bạn."</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Cảm biến nằm ở mặt sau của điện thoại. Hãy dùng ngón tay trỏ của bạn."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Hình minh họa với vị trí cảm biến vân tay và thiết bị"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Tên"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
@@ -394,7 +394,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Nhấc ngón tay, rồi chạm lại"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Tiếp tục nhấc ngón tay để thêm các phần khác nhau của vân tay"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Đã thêm vân tay"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Khi bạn nhìn thấy biểu tượng này, hãy sử dụng vân tay của bạn để nhận dạng hoặc phê duyệt các giao dịch mua."</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Khi bạn nhìn thấy biểu tượng này, hãy sử dụng vân tay của bạn để nhận dạng hoặc phê duyệt mua hàng."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Thực hiện sau"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Bỏ qua thiết lập vân tay?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Bạn đã chọn sử dụng vân tay là cách mở khóa điện thoại của mình. Nếu bỏ qua ngay bây giờ, bạn sẽ cần thiết lập cài đặt này sau. Thiết lập sẽ chỉ mất ít phút."</string>
@@ -405,7 +405,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Đăng ký chưa hoàn tất"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Đã đến giới hạn thời gian đăng ký dấu vân tay. Hãy thử lại."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Đăng ký dấu vân tay không hoạt động. Hãy thử lại hoặc sử dụng ngón tay khác."</string>
-    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Thêm khác"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Thêm vân tay khác"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Tiếp theo"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Ngoài việc mở khóa điện thoại, bạn còn có thể sử dụng vân tay của mình để ủy quyền mua và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7846871823167357942">" Tùy chọn khóa màn hình đã bị tắt. Hãy liên hệ với quản trị viên của tổ chức bạn để tìm hiểu thêm. "<annotation id="admin_details">"Thông tin chi tiết khác"</annotation>\n\n"Bạn vẫn có thể sử dụng vân tay của mình để ủy quyền mua hàng và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
@@ -598,8 +598,8 @@
     <string name="manage_device_admin" msgid="537804979483211453">"Ư.dụng cho quản trị viên th.bị"</string>
     <string name="number_of_device_admins_none" msgid="7185056721919496069">"Không có ứng dụng nào hiện hoạt"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ứng dụng hiện hoạt</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ứng dụng hiện hoạt</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ứng dụng đang hoạt động</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ứng dụng đang hoạt động</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Tác nhân đáng tin cậy"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Để sử dụng, trước tiên hãy đặt khóa màn hình"</string>
@@ -706,9 +706,9 @@
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Sẵn sàng truyền tải nội dung ứng dụng qua NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Tắt"</string>
-    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Không khả dụng vì NFC bị tắt"</string>
+    <string name="android_beam_disabled_summary" msgid="1737782116894793393">"Không sử dụng được vì NFC bị tắt"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Khi tính năng này được bật, bạn có thể chiếu nội dung ứng dụng tới thiết bị hỗ trợ NFC khác bằng cách giữ các thiết bị gần nhau. Ví dụ: bạn có thể chiếu các trang web, video trên YouTube, danh bạ và nhiều nội dung khác.\n\nBạn chỉ cần đưa các thiết bị lại gần nhau (thường quay lưng vào nhau) rồi nhấn vào màn hình. Ứng dụng sẽ quyết định nội dung nào được chiếu."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Khi tính năng này được bật, bạn có thể truyền nội dung ứng dụng tới một thiết bị hỗ trợ NFC khác bằng cách giữ các thiết bị gần nhau. Ví dụ: bạn có thể truyền các trang web, video trên YouTube, liên hệ và nhiều nội dung khác.\n\nBạn chỉ cần đưa các thiết bị lại gần nhau (thường là chạm lưng vào nhau) rồi nhấn vào màn hình. Ứng dụng sẽ quyết định nội dung nào được truyền."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Bật Wi‑Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
@@ -765,7 +765,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Bỏ qua mạng"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Sửa đổi mạng"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Ghi vào thẻ NFC"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Để xem các mạng khả dụng, hãy bật Wi-Fi."</string>
+    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Để xem các mạng có thể kết nối, hãy bật Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Đang tìm kiếm mạng Wi‑Fi..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Bạn không có quyền thay đổi mạng Wi‑Fi."</string>
     <string name="wifi_more" msgid="3195296805089107950">"Thêm"</string>
@@ -1390,7 +1390,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Chia sẻ kết nối Internet của <xliff:g id="DEVICE_NAME">%1$d</xliff:g> này qua Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Không thể dùng làm điểm truy cập Internet cho hơn <xliff:g id="MAXCONNECTION">%1$d</xliff:g> thiết bị."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ được tháo."</string>
-    <string name="tethering_footer_info" msgid="1308462275952345985">"Sử dụng điểm phát sóng và chia sẻ kết nối để cung cấp kết nối Internet cho các thiết bị khác thông qua kết nối dữ liệu di động của bạn. Ứng dụng cũng có thể tạo một điểm phát sóng để chia sẻ nội dung với các thiết bị lân cận."</string>
+    <string name="tethering_footer_info" msgid="1308462275952345985">"Sử dụng điểm phát sóng và chia sẻ kết nối để cung cấp kết nối Internet cho các thiết bị khác thông qua kết nối dữ liệu di động của bạn. Các ứng dụng cũng có thể tạo một điểm phát sóng để chia sẻ nội dung với các thiết bị lân cận."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Trợ giúp"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Mạng di động"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Gói dịch vụ di động"</string>
@@ -1525,7 +1525,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Hiển thị hình mở khóa hồ sơ"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Rung khi nhấn"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Nút Nguồn khóa tức thì"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Trừ khi vẫn mở khóa bởi <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Trừ khi vẫn được <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mở khóa"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Đặt hình mở khóa"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Thay đổi hình mở khóa"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Cách vẽ hình mở khóa"</string>
@@ -1927,8 +1927,8 @@
     <string name="print_settings" msgid="4742428530112487843">"In"</string>
     <string name="print_settings_summary_no_service" msgid="6354322414246865875">"Tắt"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="6005468025646083029">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> dịch vụ in bật</item>
-      <item quantity="one">1 dịch vụ in bật</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> dịch vụ in đang bật</item>
+      <item quantity="one">1 dịch vụ in đang bật</item>
     </plurals>
     <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> lệnh in</item>
@@ -2426,8 +2426,8 @@
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Ngày đặt lại chu kỳ sử dụng"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Ngày của từng tháng:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Thiết lập"</string>
-    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Thiết lập cảnh báo sử dụng dữ liệu"</string>
-    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Thiết lập giới hạn sử dụng dữ liệu"</string>
+    <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Đặt cảnh báo sử dụng dữ liệu"</string>
+    <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Đặt giới hạn sử dụng dữ liệu"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Giới hạn sử dụng dữ liệu"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"Máy tính bảng của bạn sẽ tắt dữ liệu di động khi đạt đến giới hạn bạn đặt.\n\nDo việc sử dụng dữ liệu được máy tính bảng của bạn tính và nhà cung cấp dịch vụ có thể tính mức sử dụng khác nhau nên hãy xem xét việc đặt giới hạn vừa phải."</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"Điện thoại của bạn sẽ tắt dữ liệu di động khi đạt đến giới hạn bạn đặt.\n\nDo việc sử dụng dữ liệu được điện thoại của bạn tính và nhà cung cấp dịch vụ có thể tính mức sử dụng khác nhau nên hãy xem xét việc đặt giới hạn vừa phải."</string>
@@ -2444,13 +2444,13 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: khoảng <xliff:g id="TOTAL">%1$s</xliff:g> đã được sử dụng, giá trị này được máy tính bảng của bạn đo. Việc tính mức sử dụng dữ liệu của nhà cung cấp dịch vụ của bạn có thể khác nhau."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: khoảng <xliff:g id="TOTAL">%1$s</xliff:g> đã được sử dụng, giá trị này được điện thoại của bạn đo. Việc tính mức sử dụng dữ liệu của nhà cung cấp dịch vụ của bạn có thể khác nhau."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Hạn chế của mạng"</string>
-    <string name="data_usage_metered_body" msgid="7655851702771342507">"Mạng được kiểm soát được coi như mạng di động khi dữ liệu nền bị hạn chế. Các ứng dụng có thể cảnh báo trước khi sử dụng các mạng này để tải xuống dung lượng lớn."</string>
+    <string name="data_usage_metered_body" msgid="7655851702771342507">"Mạng có đo lượng dữ liệu được coi như mạng di động khi dữ liệu nền bị hạn chế. Các ứng dụng có thể cảnh báo trước khi sử dụng các mạng này để tải xuống dung lượng lớn."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Mạng di động"</string>
-    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Mạng Wi‑Fi được kiểm soát"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Để chọn mạng được kiểm soát, hãy bật Wi‑Fi."</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Mạng Wi‑Fi có đo lượng dữ liệu"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Để chọn mạng có đo lượng dữ liệu, hãy bật Wi‑Fi."</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"Tự động"</string>
-    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Tính dung lượng truy cập"</string>
-    <string name="data_usage_metered_no" msgid="4025232961929071789">"Không tính dung lượng truy cập"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"Đo lượng dữ liệu"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"Không đo lượng dữ liệu"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Cách tính dữ liệu của nhà cung cấp dịch vụ có thể khác với thiết bị của bạn."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Cuộc gọi khẩn cấp"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Quay lại cuộc gọi"</string>
@@ -2673,7 +2673,7 @@
     <string name="access_point_names" msgid="1381602020438634481">"Tên điểm truy cập"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Chế độ 4G LTE được tăng cường"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"Sử dụng dữ liệu LTE để cải thiện giọng nói và thông tin liên lạc (Được đề xuất)"</string>
-    <string name="preferred_network_type_title" msgid="3431041717309776341">"Loại mạng ưa thích"</string>
+    <string name="preferred_network_type_title" msgid="3431041717309776341">"Loại mạng ưu tiên"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (được đề xuất)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"SIM công việc"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Quyền truy cập nội dung và ứng dụng"</string>
@@ -2888,7 +2888,8 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"Thông báo ứng dụng"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Loại thông báo"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Mức độ quan trọng"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Để ứng dụng quyết định"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Không bao giờ hiển thị thông báo"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Không làm gián đoạn bằng âm báo hoặc hình ảnh"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Không có âm báo"</string>
@@ -3069,7 +3070,7 @@
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu hình mở khóa trước khi thiết bị khởi động. Cho đến khi khởi động, thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp. Yêu cầu hình mở khóa để khởi động thiết bị của bạn?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mật khẩu trước khi thiết bị khởi động. Cho đến khi khởi động, thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp. Yêu cầu mật khẩu để khởi động thiết bị của bạn?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Ngoài việc sử dụng vân tay để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mã PIN trước khi thiết bị khởi động. Cho đến khi khởi động, thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp. Yêu cầu mã PIN để khởi động thiết bị của bạn?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Ngoài việc sử dụng vân tay để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu hình mở khóa trước khi thiết bị khởi động. Cho đến khi khởi động, thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp. Yêu cầu hình mở khóa để khởi động thiết bị của bạn?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Ngoài việc sử dụng vân tay để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu hình mở khóa trước khi thiết bị khởi động. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp. Yêu cầu hình mở khóa để khởi động thiết bị của bạn?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Ngoài việc sử dụng vân tay để mở khóa thiết bị, bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mật khẩu trước khi thiết bị khởi động. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo bao gồm cả báo thức cho đến khi khởi động.\n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc bị đánh cắp. Yêu cầu mật khẩu để khởi động thiết bị của bạn?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Có"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Không"</string>
@@ -3424,7 +3425,7 @@
     <string name="data_warning" msgid="209133958008062117">"Cảnh báo dữ liệu"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Đặt giới hạn dữ liệu"</string>
     <string name="data_limit" msgid="1885406964934590552">"Giới hạn dữ liệu"</string>
-    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> đã sử dụng <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"Đã sử dụng <xliff:g id="ID_1">%1$s</xliff:g> từ <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Định cấu hình"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Những ứng dụng khác được bao gồm trong mức sử dụng"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
