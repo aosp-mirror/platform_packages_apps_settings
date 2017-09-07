@@ -40,6 +40,7 @@ import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
+import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
@@ -68,6 +69,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private VolumeInfo mVolume;
     private PrivateStorageInfo mStorageInfo;
     private SparseArray<StorageAsyncLoader.AppsStorageResult> mAppsResult;
+    private CachedStorageValuesHelper mCachedStorageValuesHelper;
 
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
@@ -102,7 +104,10 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        setLoading(true, false);
+        initializeCacheProvider();
+        if (mAppsResult == null || mStorageInfo == null) {
+            setLoading(true, false);
+        }
     }
 
     @Override
@@ -249,11 +254,54 @@ public class StorageDashboardFragment extends DashboardFragment
     public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader,
             SparseArray<StorageAsyncLoader.AppsStorageResult> data) {
         mAppsResult = data;
+        maybeCacheFreshValues();
         onReceivedSizes();
     }
 
     @Override
     public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader) {
+    }
+
+    @VisibleForTesting
+    public void setCachedStorageValuesHelper(CachedStorageValuesHelper helper) {
+        mCachedStorageValuesHelper = helper;
+    }
+
+    @VisibleForTesting
+    public PrivateStorageInfo getPrivateStorageInfo() {
+        return mStorageInfo;
+    }
+
+    @VisibleForTesting
+    public SparseArray<StorageAsyncLoader.AppsStorageResult> getAppsStorageResult() {
+        return mAppsResult;
+    }
+
+    @VisibleForTesting
+    public void initializeCachedValues() {
+        PrivateStorageInfo info = mCachedStorageValuesHelper.getCachedPrivateStorageInfo();
+        SparseArray<StorageAsyncLoader.AppsStorageResult> loaderResult =
+                mCachedStorageValuesHelper.getCachedAppsStorageResult();
+        if (info == null || loaderResult == null) {
+            return;
+        }
+
+        mStorageInfo = info;
+        mAppsResult = loaderResult;
+    }
+
+    private void initializeCacheProvider() {
+        mCachedStorageValuesHelper =
+                new CachedStorageValuesHelper(getContext(), UserHandle.myUserId());
+        initializeCachedValues();
+        onReceivedSizes();
+    }
+
+    private void maybeCacheFreshValues() {
+        if (mStorageInfo != null && mAppsResult != null) {
+            mCachedStorageValuesHelper.cacheResult(
+                    mStorageInfo, mAppsResult.get(UserHandle.myUserId()));
+        }
     }
 
     /**
@@ -308,6 +356,7 @@ public class StorageDashboardFragment extends DashboardFragment
             }
 
             mStorageInfo = privateStorageInfo;
+            maybeCacheFreshValues();
             onReceivedSizes();
         }
     }

@@ -20,13 +20,18 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
+import android.util.SparseArray;
 
+import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
+import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -66,6 +71,47 @@ public class StorageDashboardFragmentTest {
         mFragment.initializeOptionsMenu(activity);
 
         verify(activity).invalidateOptionsMenu();
+    }
+
+    @Test
+    public void test_cacheProviderProvidesValuesIfBothCached() {
+        CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
+        PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
+        when(helper.getCachedPrivateStorageInfo()).thenReturn(info);
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
+        when(helper.getCachedAppsStorageResult()).thenReturn(result);
+
+        mFragment.setCachedStorageValuesHelper(helper);
+        mFragment.initializeCachedValues();
+
+        assertThat(mFragment.getPrivateStorageInfo()).isEqualTo(info);
+        assertThat(mFragment.getAppsStorageResult()).isEqualTo(result);
+    }
+
+    @Test
+    public void test_cacheProviderDoesntProvideValuesIfAppsMissing() {
+        CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
+        PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
+        when(helper.getCachedPrivateStorageInfo()).thenReturn(info);
+
+        mFragment.setCachedStorageValuesHelper(helper);
+        mFragment.initializeCachedValues();
+
+        assertThat(mFragment.getPrivateStorageInfo()).isNull();
+        assertThat(mFragment.getAppsStorageResult()).isNull();
+    }
+
+    @Test
+    public void test_cacheProviderDoesntProvideValuesIfVolumeInfoMissing() {
+        CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
+        when(helper.getCachedAppsStorageResult()).thenReturn(result);
+
+        mFragment.setCachedStorageValuesHelper(helper);
+        mFragment.initializeCachedValues();
+
+        assertThat(mFragment.getPrivateStorageInfo()).isNull();
+        assertThat(mFragment.getAppsStorageResult()).isNull();
     }
 
     @Test
