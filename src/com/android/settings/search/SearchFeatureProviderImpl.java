@@ -74,8 +74,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     @Override
     public DatabaseIndexingManager getIndexingManager(Context context) {
         if (mDatabaseIndexingManager == null) {
-            mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext(),
-                    context.getPackageName());
+            mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext());
         }
         return mDatabaseIndexingManager;
     }
