@@ -290,7 +290,6 @@ public class BluetoothPairingDialogTest {
         CheckBox sharingCheckbox = (CheckBox) frag.getmDialog()
                 .findViewById(R.id.phonebook_sharing_message_confirm_pin);
         assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(sharingCheckbox.getText().toString().contains(FAKE_DEVICE_NAME)).isTrue();
     }
 
     @Test
