@@ -19,6 +19,8 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
+import static com.android.settings.wifi.WifiSettings.isEditabilityLockedDown;
+
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -464,7 +466,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the network represented by this preference can be forgotten.
      */
     private boolean canForgetNetwork() {
-        return mWifiInfo != null && mWifiInfo.isEphemeral() || mWifiConfig != null;
+        // TODO(65396674): create test for the locked down scenario
+        return (mWifiInfo != null && mWifiInfo.isEphemeral())
+                || (mWifiConfig != null && !isEditabilityLockedDown(mContext, mWifiConfig));
     }
 
     /**

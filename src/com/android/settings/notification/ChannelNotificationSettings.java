@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
@@ -57,6 +58,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private static final String KEY_VIBRATE = "vibrate";
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_IMPORTANCE = "importance";
+    private static final String KEY_ADVANCED = "advanced";
 
     private Preference mImportance;
     private RestrictedSwitchPreference mLights;
@@ -65,6 +67,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private FooterPreference mFooter;
     private NotificationChannelGroup mChannelGroup;
     private EntityHeaderController mHeaderPref;
+    private PreferenceGroup mAdvanced;
 
     @Override
     public int getMetricsCategory() {
@@ -129,6 +132,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         setupVibrate();
         setupRingtone();
         setupImportance();
+        mAdvanced = (PreferenceGroup) findPreference(KEY_ADVANCED);
     }
 
     private void addHeaderPref() {
@@ -373,18 +377,19 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         if (mShowLegacyChannelConfig) {
             setVisible(mImportanceToggle, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
         } else {
+            setVisible(mAdvanced, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
             setVisible(mImportance, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
-            setVisible(mLights, checkCanBeVisible(
+            setVisible(mAdvanced, mLights, checkCanBeVisible(
                     NotificationManager.IMPORTANCE_DEFAULT) && canPulseLight());
             setVisible(mVibrate, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
             setVisible(mRingtone, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
         }
-        setVisible(mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
-        setVisible(mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
+        setVisible(mAdvanced, mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
+        setVisible(mAdvanced, mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
                 || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
                 && mDndVisualEffectsSuppressed));
-        setVisible(mVisibilityOverride, checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
-                && isLockScreenSecure());
+        setVisible(mAdvanced, mVisibilityOverride, isLockScreenSecure()
+                &&checkCanBeVisible(NotificationManager.IMPORTANCE_LOW));
         setVisible(mBlockedDesc, mChannel.getImportance() == IMPORTANCE_NONE);
         if (mAppLink != null) {
             setVisible(mAppLink, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));

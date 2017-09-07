@@ -334,7 +334,7 @@
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Administraatori keelatud"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Puudub"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"Nt Joe\' Android."</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"Nt Martini Android."</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Kasutajateave"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Kuva lukustusekraanil profiili teave"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Profiili teave"</string>
@@ -390,8 +390,8 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Kustuta"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Puudutage andurit"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Asetage oma sõrm andurile ja tõstke see üles, kui tunnete vibratsiooni"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Tõstke, siis puudutage uuesti"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Asetage oma sõrm andurile ja kui tunnete värinat, siis tõstke see üles"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Tõstke, seejärel puudutage uuesti"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Tõstke sõrme, et lisada sõrmejälje eri osad"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Sõrmejälg on lisatud"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Kui näete seda ikooni, kasutage tuvastamiseks või ostude kinnitamiseks oma sõrmejälge."</string>
@@ -402,7 +402,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Valmis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Vabandust, see pole andur"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"Puud. telefoni tagaküljel asuvat andurit. Kasut. oma nimetissõrme."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registreerumist ei lõpetatud"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registreerimist ei lõpetatud"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Sõrmejälje registreerimisaeg lõppes. Proovige uuesti."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Sõrmejälje registreerimine ei toiminud. Proovige uuesti või kasutage teist sõrme."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Lisa veel üks"</string>
@@ -755,7 +755,7 @@
     <string name="wifi_access_points" msgid="7053990007031968609">"WiFi-võrgud"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-nupp"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"Rohkem valikuid"</string>
-    <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS-i PIN-koodi kirje"</string>
+    <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS-i PIN-koodi sisestus"</string>
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"WiFi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Skannimine"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Täpsemalt"</string>
@@ -886,25 +886,25 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"Kas tühistada kutse?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Kas soovite tühistada kutse kasutajaga <xliff:g id="PEER_NAME">%1$s</xliff:g> ühenduse loomiseks?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Kas unustada see rühm?"</string>
-    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WiFi-leviala"</string>
+    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WiFi-kuumkoht"</string>
     <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Interneti-ühendust ega sisu teiste seadmetega ei jagata"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Tahvelarvuti Interneti-ühendust jagatakse leviala kaudu"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Telefoni Interneti-ühendust jagatakse leviala kaudu"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Tahvelarvuti Interneti-ühendust jagatakse kuumkoha kaudu"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Telefoni Interneti-ühendust jagatakse kuumkoha kaudu"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Rakendus jagab sisu. Interneti-ühenduse jagamiseks lülitage leviala välja ja seejärel uuesti sisse"</string>
-    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Leviala nimi"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Kuumkoha nimi"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Võrgu <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> sisselülitamine …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Teised seadmed saavad luua ühenduse võrguga <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Leviala parool"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Kuumkoha parool"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-riba"</string>
-    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"WiFi-võrgu loomiseks teiste seadmete jaoks kasutage leviala. Leviala kasutab Interneti pakkumiseks mobiilset andmesideühendust. Rakenduda võivad mobiilse andmeside tasud."</string>
-    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Rakendused saavad leviala luua, et läheduses olevate seadmetega sisu jagada."</string>
-    <string name="wifi_tether_starting" msgid="1322237938998639724">"Leviala sisselülitamine ..."</string>
-    <string name="wifi_tether_stopping" msgid="4835852171686388107">"Leviala väljalülitamine ..."</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"WiFi-võrgu loomiseks teiste seadmete jaoks kasutage kuumkohta. Kuumkoht kasutab Interneti pakkumiseks mobiilset andmesideühendust. Rakenduda võivad mobiilse andmeside tasud."</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Rakendused saavad luua kuumkoha, et jagada läheduses olevate seadmetega sisu."</string>
+    <string name="wifi_tether_starting" msgid="1322237938998639724">"Kuumkoha sisselülitamine ..."</string>
+    <string name="wifi_tether_stopping" msgid="4835852171686388107">"Kuumkoha väljalülitamine ..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> on aktiivne"</string>
-    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Kaasaskantava WiFi-tugijaama viga"</string>
+    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Mobiilse WiFi-kuumkoha viga"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"WiFi-kuumkoha seadistamine"</string>
-    <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"WiFi-leviala seadistamine"</string>
-    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK leviala"</string>
+    <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"WiFi-kuumkoha seadistamine"</string>
+    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"AndroidAP WPA2 PSK-kuumkoht"</string>
     <string name="wifi_tether_configure_subtext" msgid="2050196439900426456">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> leviala"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"WiFi-kõned"</string>
@@ -1372,12 +1372,12 @@
     <string name="call_settings_title" msgid="5188713413939232801">"Kõneseaded"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Seadista kõnepost, kõne edastamine, ootel kõne, helistaja ID"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB jagamine"</string>
-    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Kantav tööpunkt"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Mobiilne kuumkoht"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Jagamine Bluetoothiga"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Jagamine"</string>
     <string name="tether_settings_title_all" msgid="3058586928118801157">"Kuumkoht ja jagamine"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Leviala on sees, jagamine"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Leviala on sees"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Kuumkoht on sees, jagamine"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Kuumkoht on sees"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"Jagamine"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Kui andmeside mahu säästja on sisse lülitatud, siis ei saa jagada ega kasutada teisaldatavat leviala"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
@@ -1390,7 +1390,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Seadme <xliff:g id="DEVICE_NAME">%1$d</xliff:g> Interneti-ühenduse jag. Bluetoothi kaudu"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Ei saa jagada rohkem kui <xliff:g id="MAXCONNECTION">%1$d</xliff:g> seadmele."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ühenduse jagamine lõpetatakse."</string>
-    <string name="tethering_footer_info" msgid="1308462275952345985">"Mobiilse andmesideühenduse kaudu teistele seadmetele Interneti-ühenduse pakkumiseks kasutage leviala ja jagamist. Rakendused saavad samuti leviala luua, et läheduses olevate seadmetega sisu jagada."</string>
+    <string name="tethering_footer_info" msgid="1308462275952345985">"Mobiilse andmesideühenduse kaudu teistele seadmetele Interneti-ühenduse pakkumiseks kasutage kuumkohta ja jagamist. Rakendused saavad samuti luua kuumkoha, et jagada läheduses olevate seadmetega sisu."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Abi"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Mobiilsidevõrk"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobiilipakett"</string>
@@ -1737,7 +1737,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Füüsilise klaviatuuri seaded"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Vajutage kaks korda tühikuklahvi, et sisestada „.”"</string>
     <string name="show_password" msgid="4837897357002495384">"Kuva paroolid"</string>
-    <string name="show_password_summary" msgid="3365397574784829969">"Sisestamisel kuvatakse korraks tähemärgid"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"Sisestamisel kuvatakse hetkeks tähemärgid"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"See õigekirjakontrollija võib koguda kogu sisestatava teksti, sh isiklikud andmed (nt paroolid ja krediitkaardinumbrid). See pärineb rakendusest <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Kas soovite seda õigekirjakontrolli kasutada?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Seaded"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"Keel"</string>
@@ -2745,7 +2745,7 @@
     <string name="network_dashboard_title" msgid="4771589228992391573">"Võrk ja Internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobiil"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"andmekasutus"</string>
-    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"leviala"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"kuumkoht"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Ühendatud seadmed"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Cast, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, Cast"</string>
@@ -2888,7 +2888,8 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"Rakenduste märguanded"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Märguande kategooria"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Tähtsus"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Lubage rakendusel otsustada"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Ära kunagi kuva märguandeid"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Heli ja visuaalne katkestus puudub"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Heli puudub"</string>
@@ -3221,13 +3222,13 @@
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Selle seadme laadimine"</string>
     <string name="usb_use_power_only" msgid="6426550616883919530">"Toite andmine"</string>
     <string name="usb_use_power_only_desc" msgid="3461232831015575152">"Laadige ühendatud seadet. Töötab ainult seadmetes, mis toetavad USB kaudu laadimist."</string>
-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Failide teisaldamine"</string>
-    <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Failide teisaldamine teise seadmesse"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Failide edastamine"</string>
+    <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Failide edastamine teise seadmesse"</string>
     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Fotode edastamine (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Fotode või failide edastamine, kui MTP-d ei toetata (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Seadme kasutamine MIDI-na"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Kasutage seda seadet MIDI-na"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Kasutage USB-d järgmiseks."</string>
+    <string name="usb_use" msgid="3256040963685055320">"USB kasutusviisid"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Seadme laadimine"</string>
     <string name="usb_summary_power_only" msgid="3629517713817003738">"Toiteallikas"</string>
@@ -3364,8 +3365,8 @@
     <string name="condition_turn_on" msgid="9089876276117874591">"Lülita sisse"</string>
     <string name="condition_expand_show" msgid="608202020023489939">"Kuva"</string>
     <string name="condition_expand_hide" msgid="948507739223760667">"Peida"</string>
-    <string name="condition_hotspot_title" msgid="7778958849468560027">"Leviala on sees"</string>
-    <string name="condition_hotspot_summary" msgid="3433182779269409683">"Teisaldatav WiFi-leviala <xliff:g id="ID_1">%1$s</xliff:g> on aktiivne, WiFi on selles seadmes välja lülitatud."</string>
+    <string name="condition_hotspot_title" msgid="7778958849468560027">"Kuumkoht on sees"</string>
+    <string name="condition_hotspot_summary" msgid="3433182779269409683">"Teisaldatav WiFi-kuumkoht <xliff:g id="ID_1">%1$s</xliff:g> on aktiivne, WiFi on selles seadmes välja lülitatud."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Lennurežiim on sees"</string>
     <string name="condition_airplane_summary" msgid="5561586417832393666">"WiFi, Bluetooth ja mobiilne andmeside on välja lülitatud. Te ei saa helistada ega Internetiga ühendust luua."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"Režiim Mitte segada on sees (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
@@ -3402,7 +3403,7 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automaatsed süsteemivärskendused"</string>
     <string name="usage" msgid="2977875522080448986">"Kasutus"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobiilse andmeside kasutus"</string>
-    <string name="wifi_data_usage" msgid="686754111095324306">"WiFi andmekasutus"</string>
+    <string name="wifi_data_usage" msgid="686754111095324306">"WiFi-andmekasutus"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Etherneti andmekasutus"</string>
     <string name="wifi" msgid="1081550856200013637">"WiFi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>

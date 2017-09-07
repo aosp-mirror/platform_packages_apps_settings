@@ -114,7 +114,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"この端末と <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
     <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"接続を解除"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Bluetooth設定を変更する権限がありません。"</string>
-    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"新しいデバイスとペア設定"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"新しいデバイスとペア設定する"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth設定を開いている間は、<xliff:g id="DEVICE_NAME">%1$s</xliff:g>は付近のデバイスに表示されています。"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"スマートフォンの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"タブレットの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -392,7 +392,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"センサーに触れる"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"指をセンサーに当て、振動したら離します。"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"指を離してからもう一度触れる"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"指を何度か離して、あらゆる角度から指紋を登録します"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"指を何度か離して、あらゆる角度から指紋を登録します。"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"このアイコンが表示されているときは、本人確認や購入の承認に指紋認証を使用します。"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"後で行う"</string>
@@ -533,7 +533,7 @@
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile" msgid="4994062501123299418">"画面ロックがないと、プロファイル保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>保存してある指紋もこのプロファイルから削除されるため、指紋を使用してプロファイルのロック解除、購入の承認、アプリへのログインを行うことはできなくなります。"</string>
-    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"削除する"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"無効にする"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"ロック解除パターンの変更"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ロック解除PINの変更"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ロック解除パスワードの変更"</string>
@@ -651,8 +651,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"オプション..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"詳細設定"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth詳細設定"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"BluetoothをONにすると、お使いの端末は近くにある他のBluetoothデバイスと通信できます。"</string>
-    <string name="ble_scan_notify_text" msgid="1295915006005700650">"位置情報の精度を向上させるため、BluetoothがOFFの場合でもシステムのアプリやサービスはBluetoothデバイスを検出できます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetooth を ON にすると、お使いの端末は近くにある他の Bluetooth デバイスと通信できます。"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"位置情報の精度を向上させるため、Bluetooth が OFF の場合でもシステムのアプリやサービスは Bluetooth デバイスを検出できます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"接続できませんでした。もう一度お試しください。"</string>
     <string name="device_details_title" msgid="6576953269221085300">"端末の詳細"</string>
     <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"端末の Bluetooth アドレス: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -735,7 +735,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"この機能を使用するには、対応するネットワーク評価プロバイダを選択してください"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"証明書のインストール"</string>
-    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"位置情報の精度を向上させるため、Wi-FiがOFFの場合でもシステムのアプリやサービスはWi‑Fiネットワークをスキャンできます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"位置情報の精度を向上させるため、Wi-Fi が OFF の場合でもシステムのアプリやサービスは Wi‑Fi ネットワークをスキャンできます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"位置情報の精度を上げるには、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で Wi-Fi のスキャンをオンにしてください。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"次回から表示しない"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"スリープ時にWi-Fi接続を維持"</string>
@@ -886,8 +886,8 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"招待状のキャンセル"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g>との接続への招待をキャンセルしますか？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"このグループを削除しますか？"</string>
-    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fiアクセスポイント"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"インターネット接続やコンテンツを他の端末と共有しません"</string>
+    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi アクセス ポイント"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"インターネット接続やコンテンツを他の端末と共有しない"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"このタブレットのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"このスマートフォンのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"アプリがコンテンツを共有しています。インターネット接続を共有するには、アクセス ポイントをオフにしてから再度オンにします"</string>
@@ -1371,7 +1371,7 @@
     <string name="master_clear_progress_text" msgid="6559096229480527510">"お待ちください..."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"ボイスメール、着信転送、発信者番号など"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USBテザリング"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB テザリング"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"ポータブルアクセスポイント"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetoothテザリング"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"テザリング"</string>
@@ -1381,12 +1381,12 @@
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"テザリング"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"データセーバーが ON のときは、テザリングやポータブル アクセス ポイントを使用できません"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USBテザリング"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB テザリング"</string>
     <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"スマートフォンのインターネット接続を USB 経由で共有する"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"タブレットのインターネット接続を USB 経由で共有する"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetoothテザリング"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"タブレットのインターネット接続を Bluetooth で共有"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"スマートフォンのインターネット接続を Bluetooth で共有"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"スマートフォンのインターネット接続を Bluetooth で共有する"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"この <xliff:g id="DEVICE_NAME">%1$d</xliff:g> のインターネット接続を Bluetooth で共有"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"テザリングできるデバイスは<xliff:g id="MAXCONNECTION">%1$d</xliff:g>個までです。"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>のテザリングを解除します。"</string>
@@ -2165,7 +2165,7 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"音声入力の設定"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"音声入力"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"音声入力サービス"</string>
-    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"完全な注目ワードと対話"</string>
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"完全な起動ワードと対話"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"シンプルな音声認識"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"この音声入力サービスを使用すると、常時音声監視を実行し、音声対応アプリの管理をユーザーに代わって行えるようになります。これは<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>の一部です。このサービスの使用を有効にしますか？"</string>
     <string name="tts_engine_preference_title" msgid="1578826947311494239">"優先するエンジン"</string>
@@ -2450,8 +2450,8 @@
     <string name="data_usage_metered_title" msgid="7383175371006596441">"ネットワーク制限"</string>
     <string name="data_usage_metered_body" msgid="7655851702771342507">"バックグラウンド データが制限されている場合、従量制のネットワークはモバイル ネットワークと同様に扱われます。これらのネットワークを使用して大量のダウンロードが行われる前に、アプリが警告を表示することがあります。"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"モバイルネットワーク"</string>
-    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"従量制のWi‑Fiネットワーク"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"従量制のネットワークを選択するにはWi‑FiをONにします。"</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"従量制の Wi‑Fi ネットワーク"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"従量制のネットワークを選択するには Wi‑Fi を ON にします。"</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"自動"</string>
     <string name="data_usage_metered_yes" msgid="9217539611385225894">"従量制"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"定額制"</string>
@@ -2892,7 +2892,8 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"通知のカテゴリ"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要度"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"アプリに判断させる"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"通知を表示しない"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"音声や画面表示を使用しない"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"音声なし"</string>
@@ -3073,7 +3074,7 @@
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"端末の起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパターンを必要としますか？"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"この端末の起動時にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパスワードを必要としますか？"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"端末のロック解除に指紋を使うだけでなく、起動時に PIN を入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動に PIN を必要としますか？"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"端末のロック解除に指紋を使うだけでなく、起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパターンを必要としますか？"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"端末のロック解除に指紋を使うだけでなく、起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパターンの入力を必須としますか？"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"端末のロック解除に指紋を使うだけでなく、起動時にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパスワードを必要としますか？"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"はい"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"いいえ"</string>
@@ -3227,7 +3228,7 @@
     <string name="usb_use_power_only_desc" msgid="3461232831015575152">"接続されている端末を充電します。USB 充電に対応している端末でのみ選択できます。"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"ファイルを転送する"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"ファイルを別の端末に転送します"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"写真の転送（PTP）"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"写真を転送する（PTP）"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"写真を転送またはMTPがサポートされない場合にファイルを転送する（PTP）"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"この端末を MIDI として利用する"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"この端末を MIDI として利用する際に使用します"</string>
