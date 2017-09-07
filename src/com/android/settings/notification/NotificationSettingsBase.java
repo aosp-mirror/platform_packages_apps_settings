@@ -205,12 +205,16 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void setVisible(Preference p, boolean visible) {
-        final boolean isVisible = getPreferenceScreen().findPreference(p.getKey()) != null;
+        setVisible(getPreferenceScreen(), p, visible);
+    }
+
+    protected void setVisible(PreferenceGroup parent, Preference p, boolean visible) {
+        final boolean isVisible = parent.findPreference(p.getKey()) != null;
         if (isVisible == visible) return;
         if (visible) {
-            getPreferenceScreen().addPreference(p);
+            parent.addPreference(p);
         } else {
-            getPreferenceScreen().removePreference(p);
+            parent.removePreference(p);
         }
     }
 

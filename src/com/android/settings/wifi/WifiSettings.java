@@ -1130,7 +1130,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      * @param config The WiFi config.
      * @return true if the config is not editable through Settings.
      */
-    static boolean isEditabilityLockedDown(Context context, WifiConfiguration config) {
+    public static boolean isEditabilityLockedDown(Context context, WifiConfiguration config) {
         return !canModifyNetwork(context, config);
     }
 

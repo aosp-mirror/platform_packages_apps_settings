@@ -37,15 +37,16 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -65,6 +66,8 @@ import java.util.ArrayList;
         })
 public class WifiTetherPreferenceControllerTest {
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mFeatureFactoryContext;
     @Mock
     private Context mContext;
     @Mock
@@ -82,6 +85,7 @@ public class WifiTetherPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLifecycle = new Lifecycle();
+        FakeFeatureFactory.setupForTest(mFeatureFactoryContext);
         mPreference = new MasterSwitchPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
@@ -122,6 +126,36 @@ public class WifiTetherPreferenceControllerTest {
         assertThat(ShadowWifiTetherSwitchBarController.onStopCalled).isTrue();
         verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
         verify(mContext).unregisterReceiver(receiver);
+    }
+
+    @Test
+    public void start_wifiApOff_shouldSetInitialStateToOff() {
+        when(mWifiManager.getWifiApState()).thenReturn(WifiManager.WIFI_AP_STATE_DISABLED);
+        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
+        final MasterSwitchPreference pref = mock(MasterSwitchPreference.class);
+        when(mScreen.findPreference(anyString())).thenReturn(pref);
+
+        mController.displayPreference(mScreen);
+        mLifecycle.onStart();
+
+        assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
+        verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
+        verify(pref).setChecked(false);
+    }
+
+    @Test
+    public void start_wifiApOn_shouldSetInitialStateToOn() {
+        when(mWifiManager.getWifiApState()).thenReturn(WifiManager.WIFI_AP_STATE_ENABLED);
+        final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
+        final MasterSwitchPreference pref = mock(MasterSwitchPreference.class);
+        when(mScreen.findPreference(anyString())).thenReturn(pref);
+
+        mController.displayPreference(mScreen);
+        mLifecycle.onStart();
+
+        assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
+        verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
+        verify(pref).setChecked(true);
     }
 
     @Test
@@ -198,9 +232,6 @@ public class WifiTetherPreferenceControllerTest {
 
         public static boolean onStartCalled;
         public static boolean onStopCalled;
-
-        public void __constructor__(Context context, SwitchWidgetController switchWidget) {
-        }
 
         public static void reset() {
             onStartCalled = false;

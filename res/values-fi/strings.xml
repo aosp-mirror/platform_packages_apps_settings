@@ -462,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Tabletin suojaaminen"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Laitteen suojaaminen"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Suojaa puhelintasi"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"Paranna suojausta määrittämällä näytön varalukitustapa."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Paranna suojausta määrittämällä näytön varalukitustapa."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Estä tablettisi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Estä laitteesi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Estä puhelimesi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
@@ -702,7 +702,7 @@
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC käyttöön"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC vaihtaa tietoja tämän ja muiden lähellä olevien laitteiden tai kohteiden, esimerkiksi maksupäätteiden, syötteenlukijoiden tai interaktiivisten mainosten/tagien, kanssa."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
@@ -1384,11 +1384,11 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Kun Data Saver on käytössä, puhelinta ei voi käyttää modeemina eikä kannettavien hotspotien käyttäminen onnistu."</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Internetin jakaminen USB:n kautta"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Jaa puhelimen internetyhteys USB:llä"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Jaa puhelimen internetyhteys USB:llä."</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"Jaa tabletin internetyhteys USB:llä"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Jaettu Bluetooth-yhteys"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Jaa tabletin internetyhteys Bluetoothilla"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Jaa puhelimen internetyhteys Bluetoothilla"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Jaa puhelimen internetyhteys Bluetoothilla."</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Laitteen <xliff:g id="DEVICE_NAME">%1$d</xliff:g> internetyhteys jaetaan Bluetoothilla"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Voidaan yhdistää korkeintaan <xliff:g id="MAXCONNECTION">%1$d</xliff:g> laitteeseen."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Jaettu internetyhteys katkaistaan laitteesta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -2228,7 +2228,8 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Käyttöoikeustietojen tallennustila on tyhjennetty."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Käyttöoik.tiet. ei poistettu."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Käyttöoikeustietojen tallentaminen on käytössä."</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Ruudunlukituksen PIN-koodi tai salasana on asetettava ennen kuin käyttöoikeustietojen tallennustilaa voi käyttää."</string>
+    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Näytön lukitustapa täytyy määrittää, ennen kuin voit käyttää kirjautumistietojen tallennustilaa."</string>
+    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ASETA LUKITUS"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Sovellukset, joilla käyttölupa"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Hätäpuhelun ääni"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Aseta toiminta hätäpuhelun tapauksessa"</string>
@@ -2690,7 +2691,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary_config" msgid="3232480757215851738">"Salli tiedonsiirto, kun <xliff:g id="DEVICE_NAME">%1$s</xliff:g> koskettaa toista NFC-laitetta"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
-    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
     <string name="restriction_location_enable_title" msgid="5020268888245775164">"Sijainti"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Anna sovellusten käyttää sijaintitietojasi"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Edellinen"</string>
@@ -2888,8 +2889,11 @@
     <string name="notifications_title" msgid="8086372779371204971">"Ilmoitukset"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Sovellusilmoitukset"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Ilmoituksen luokka"</string>
+    <!-- no translation found for notification_group_title (7180506440133859601) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"Tärkeys"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"Anna sovelluksen päättää"</string>
+    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
+    <skip />
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Älä näytä ilmoituksia"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Ei ääntä tai näkyvää ilmoitusta"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Ei ääntä"</string>
@@ -2938,8 +2942,11 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Ladataan sovelluksia…"</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android estää tämän sovelluksen ilmoituksien näyttämisen tällä laitteella."</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android estää tähän luokkaan kuuluvien ilmoituksien näyttämisen tällä laitteella."</string>
+    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"Luokat"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Muut"</string>
+    <!-- no translation found for notification_group_summary (3420621520561455358) -->
     <string name="no_channels" msgid="3077375508177744586">"Tämä sovellus ei ole lähettänyt ilmoituksia."</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Lisäasetukset sovelluksessa"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Käytössä kaikissa sovelluksissa"</string>

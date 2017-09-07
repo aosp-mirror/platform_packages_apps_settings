@@ -835,6 +835,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 onPreferenceTreeClick(cb);
             }
         }
+        if (mBluetoothEnableInbandRinging != null) {
+            mBluetoothEnableInbandRinging.setChecked(true);
+            onPreferenceTreeClick(mBluetoothEnableInbandRinging);
+        }
         mBugReportInPowerController.resetPreference();
         mEnableAdbController.resetPreference();
         resetDebuggerOptions();

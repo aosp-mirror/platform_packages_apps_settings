@@ -18,12 +18,15 @@ package com.android.settings.wifi.details;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -138,7 +141,7 @@ public class WifiDetailPreferenceControllerTest {
     @Captor private ArgumentCaptor<View.OnClickListener> mForgetClickListener;
     @Captor private ArgumentCaptor<Preference> mIpv6AddressCaptor;
 
-    private Context mContext = RuntimeEnvironment.application;
+    private Context mContext;
     private Lifecycle mLifecycle;
     private LinkProperties mLinkProperties;
     private WifiDetailPreferenceController mController;
@@ -199,6 +202,7 @@ public class WifiDetailPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = spy(RuntimeEnvironment.application);
         mLifecycle = new Lifecycle();
 
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
@@ -232,6 +236,8 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockHeaderController);
         when(mockHeaderController.setSummary(anyString())).thenReturn(mockHeaderController);
         when(mockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
+
+        doReturn(null).when(mContext).getSystemService(eq(Context.DEVICE_POLICY_SERVICE));
 
         setupMockedPreferenceScreen();
         mController = newWifiDetailPreferenceController();
