@@ -64,19 +64,31 @@
             android:gravity="center"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp">
 
             <TextView android:id="@+id/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="2"
                 android:gravity="center"
+                android:paddingHorizontal="?attr/suwMarginSides"
                 android:textSize="18sp" />
 
-            <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:layout_weight="1" />
+            <com.android.setupwizardlib.view.FillContentLayout
+                style="@style/LockPatternContainerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.android.internal.widget.LockPatternView
+                    android:id="@+id/lockPattern"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+
+            </com.android.setupwizardlib.view.FillContentLayout>
 
         </LinearLayout>
 
