@@ -230,6 +230,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean tintTileIcon(Tile tile) {
+        if (tile.icon == null) {
+            return false;
+        }
         // First check if the tile has set the icon tintable metadata.
         final Bundle metadata = tile.metaData;
         if (metadata != null
