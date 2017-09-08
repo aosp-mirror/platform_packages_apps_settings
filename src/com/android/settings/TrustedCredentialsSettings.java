@@ -61,6 +61,7 @@ import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
@@ -152,6 +153,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private int mConfirmingCredentialUser;
     private IntConsumer mConfirmingCredentialListener;
     private Set<AdapterData.AliasLoader> mAliasLoaders = new ArraySet<AdapterData.AliasLoader>(2);
+    @GuardedBy("mKeyChainConnectionByProfileId")
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
 
@@ -256,11 +258,13 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     }
 
     private void closeKeyChainConnections() {
-        final int n = mKeyChainConnectionByProfileId.size();
-        for (int i = 0; i < n; ++i) {
-            mKeyChainConnectionByProfileId.valueAt(i).close();
+        synchronized (mKeyChainConnectionByProfileId) {
+            final int n = mKeyChainConnectionByProfileId.size();
+            for (int i = 0; i < n; ++i) {
+                mKeyChainConnectionByProfileId.valueAt(i).close();
+            }
+            mKeyChainConnectionByProfileId.clear();
         }
-        mKeyChainConnectionByProfileId.clear();
     }
 
     private void addTab(Tab tab) {
@@ -684,62 +688,64 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 SparseArray<List<CertHolder>> certHoldersByProfile =
                         new SparseArray<List<CertHolder>>();
                 try {
-                    List<UserHandle> profiles = mUserManager.getUserProfiles();
-                    final int n = profiles.size();
-                    // First we get all aliases for all profiles in order to show progress
-                    // correctly. Otherwise this could all be in a single loop.
-                    SparseArray<List<String>> aliasesByProfileId = new SparseArray<
-                            List<String>>(n);
-                    int max = 0;
-                    int progress = 0;
-                    for (int i = 0; i < n; ++i) {
-                        UserHandle profile = profiles.get(i);
-                        int profileId = profile.getIdentifier();
-                        if (shouldSkipProfile(profile)) {
-                            continue;
+                    synchronized(mKeyChainConnectionByProfileId) {
+                        List<UserHandle> profiles = mUserManager.getUserProfiles();
+                        final int n = profiles.size();
+                        // First we get all aliases for all profiles in order to show progress
+                        // correctly. Otherwise this could all be in a single loop.
+                        SparseArray<List<String>> aliasesByProfileId = new SparseArray<
+                                List<String>>(n);
+                        int max = 0;
+                        int progress = 0;
+                        for (int i = 0; i < n; ++i) {
+                            UserHandle profile = profiles.get(i);
+                            int profileId = profile.getIdentifier();
+                            if (shouldSkipProfile(profile)) {
+                                continue;
+                            }
+                            KeyChainConnection keyChainConnection = KeyChain.bindAsUser(mContext,
+                                    profile);
+                            // Saving the connection for later use on the certificate dialog.
+                            mKeyChainConnectionByProfileId.put(profileId, keyChainConnection);
+                            IKeyChainService service = keyChainConnection.getService();
+                            List<String> aliases = mTab.getAliases(service);
+                            if (isCancelled()) {
+                                return new SparseArray<List<CertHolder>>();
+                            }
+                            max += aliases.size();
+                            aliasesByProfileId.put(profileId, aliases);
                         }
-                        KeyChainConnection keyChainConnection = KeyChain.bindAsUser(mContext,
-                                profile);
-                        // Saving the connection for later use on the certificate dialog.
-                        mKeyChainConnectionByProfileId.put(profileId, keyChainConnection);
-                        IKeyChainService service = keyChainConnection.getService();
-                        List<String> aliases = mTab.getAliases(service);
-                        if (isCancelled()) {
-                            return new SparseArray<List<CertHolder>>();
+                        for (int i = 0; i < n; ++i) {
+                            UserHandle profile = profiles.get(i);
+                            int profileId = profile.getIdentifier();
+                            List<String> aliases = aliasesByProfileId.get(profileId);
+                            if (isCancelled()) {
+                                return new SparseArray<List<CertHolder>>();
+                            }
+                            KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                                    profileId);
+                            if (shouldSkipProfile(profile) || aliases == null
+                                    || keyChainConnection == null) {
+                                certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
+                                continue;
+                            }
+                            IKeyChainService service = keyChainConnection.getService();
+                            List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
+                            final int aliasMax = aliases.size();
+                            for (int j = 0; j < aliasMax; ++j) {
+                                String alias = aliases.get(j);
+                                byte[] encodedCertificate = service.getEncodedCaCertificate(alias,
+                                        true);
+                                X509Certificate cert = KeyChain.toCertificate(encodedCertificate);
+                                certHolders.add(new CertHolder(service, mAdapter,
+                                        mTab, alias, cert, profileId));
+                                publishProgress(++progress, max);
+                            }
+                            Collections.sort(certHolders);
+                            certHoldersByProfile.put(profileId, certHolders);
                         }
-                        max += aliases.size();
-                        aliasesByProfileId.put(profileId, aliases);
+                        return certHoldersByProfile;
                     }
-                    for (int i = 0; i < n; ++i) {
-                        UserHandle profile = profiles.get(i);
-                        int profileId = profile.getIdentifier();
-                        List<String> aliases = aliasesByProfileId.get(profileId);
-                        if (isCancelled()) {
-                            return new SparseArray<List<CertHolder>>();
-                        }
-                        KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
-                                profileId);
-                        if (shouldSkipProfile(profile) || aliases == null
-                                || keyChainConnection == null) {
-                            certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
-                            continue;
-                        }
-                        IKeyChainService service = keyChainConnection.getService();
-                        List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
-                        final int aliasMax = aliases.size();
-                        for (int j = 0; j < aliasMax; ++j) {
-                            String alias = aliases.get(j);
-                            byte[] encodedCertificate = service.getEncodedCaCertificate(alias,
-                                    true);
-                            X509Certificate cert = KeyChain.toCertificate(encodedCertificate);
-                            certHolders.add(new CertHolder(service, mAdapter,
-                                    mTab, alias, cert, profileId));
-                            publishProgress(++progress, max);
-                        }
-                        Collections.sort(certHolders);
-                        certHoldersByProfile.put(profileId, certHolders);
-                    }
-                    return certHoldersByProfile;
                 } catch (RemoteException e) {
                     Log.e(TAG, "Remote exception while loading aliases.", e);
                     return new SparseArray<List<CertHolder>>();
@@ -936,16 +942,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     public List<X509Certificate> getX509CertsFromCertHolder(CertHolder certHolder) {
         List<X509Certificate> certificates = null;
         try {
-            KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
-                    certHolder.mProfileId);
-            IKeyChainService service = keyChainConnection.getService();
-            List<String> chain = service.getCaCertificateChainAliases(certHolder.mAlias, true);
-            final int n = chain.size();
-            certificates = new ArrayList<X509Certificate>(n);
-            for (int i = 0; i < n; ++i) {
-                byte[] encodedCertificate = service.getEncodedCaCertificate(chain.get(i), true);
-                X509Certificate certificate = KeyChain.toCertificate(encodedCertificate);
-                certificates.add(certificate);
+            synchronized (mKeyChainConnectionByProfileId) {
+                KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                        certHolder.mProfileId);
+                IKeyChainService service = keyChainConnection.getService();
+                List<String> chain = service.getCaCertificateChainAliases(certHolder.mAlias, true);
+                final int n = chain.size();
+                certificates = new ArrayList<X509Certificate>(n);
+                for (int i = 0; i < n; ++i) {
+                    byte[] encodedCertificate = service.getEncodedCaCertificate(chain.get(i), true);
+                    X509Certificate certificate = KeyChain.toCertificate(encodedCertificate);
+                    certificates.add(certificate);
+                }
             }
         } catch (RemoteException ex) {
             Log.e(TAG, "RemoteException while retrieving certificate chain for root "
@@ -985,15 +993,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
-                        mCertHolder.mProfileId);
-                IKeyChainService service = keyChainConnection.getService();
-                if (mCertHolder.mDeleted) {
-                    byte[] bytes = mCertHolder.mX509Cert.getEncoded();
-                    service.installCaCertificate(bytes);
-                    return true;
-                } else {
-                    return service.deleteCaCertificate(mCertHolder.mAlias);
+                synchronized (mKeyChainConnectionByProfileId) {
+                    KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                            mCertHolder.mProfileId);
+                    IKeyChainService service = keyChainConnection.getService();
+                    if (mCertHolder.mDeleted) {
+                        byte[] bytes = mCertHolder.mX509Cert.getEncoded();
+                        service.installCaCertificate(bytes);
+                        return true;
+                    } else {
+                        return service.deleteCaCertificate(mCertHolder.mAlias);
+                    }
                 }
             } catch (CertificateEncodingException | SecurityException | IllegalStateException
                     | RemoteException e) {
