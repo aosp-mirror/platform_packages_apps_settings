@@ -32,6 +32,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
+import com.android.settings.password.StorageManagerWrapper;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
     private static final String KEY_LOCK_SCREEN_PRESENT = "wasLockScreenPresent";
@@ -56,11 +57,14 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected Intent getChooseLockIntent() {
-        Intent intent = new Intent(this, SetupChooseLockGeneric.class)
-                .putExtra(
-                        LockPatternUtils.PASSWORD_TYPE_KEY,
-                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
-        intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
+        Intent intent = new Intent(this, SetupChooseLockGeneric.class);
+
+        if (StorageManagerWrapper.isFileEncryptedNativeOrEmulated()) {
+            intent.putExtra(
+                    LockPatternUtils.PASSWORD_TYPE_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+            intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
+        }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
     }
