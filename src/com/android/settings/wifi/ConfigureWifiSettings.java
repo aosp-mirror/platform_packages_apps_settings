@@ -19,6 +19,8 @@ import static android.content.Context.WIFI_SERVICE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
@@ -41,6 +43,8 @@ import java.util.List;
 public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
+
+    public static final String KEY_IP_ADDRESS = "current_ip_address";
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
     private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
@@ -113,6 +117,23 @@ public class ConfigureWifiSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.wifi_configure_settings;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys =  super.getNonIndexableKeys(context);
+
+                    // If connected to WiFi, this IP address will be the same as the Status IP.
+                    // Or, if there is no connection they will say unavailable.
+                    ConnectivityManager cm = (ConnectivityManager)
+                            context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo info = cm.getActiveNetworkInfo();
+                    if (info == null
+                            || info.getType() == ConnectivityManager.TYPE_WIFI) {
+                        keys.add(KEY_IP_ADDRESS);
+                    }
+
+                    return keys;
                 }
             };
 }
