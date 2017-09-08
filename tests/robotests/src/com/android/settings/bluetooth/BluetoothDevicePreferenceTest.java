@@ -42,6 +42,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -98,11 +99,29 @@ public class BluetoothDevicePreferenceTest {
         when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
         when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
         when(mCachedBluetoothDevice.startPairing()).thenReturn(true);
+        when(mCachedBluetoothDevice.hasHumanReadableName()).thenReturn(true);
 
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider).action(
                 mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+        verify(mMetricsFeatureProvider, never()).action(mContext,
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+    }
+
+    @Test
+    public void onClicked_deviceNotBonded_shouldLogBluetoothPairEventAndPairWithoutNameEvent() {
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
+        when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
+        when(mCachedBluetoothDevice.startPairing()).thenReturn(true);
+        when(mCachedBluetoothDevice.hasHumanReadableName()).thenReturn(false);
+
+        mPreference.onClicked();
+
+        verify(mMetricsFeatureProvider).action(
+                mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
     }
 
     @Test

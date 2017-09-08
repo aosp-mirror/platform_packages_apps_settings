@@ -460,6 +460,17 @@ public class DashboardData {
                     // Only check title and summary for dashboard tile
                     return TextUtils.equals(localTile.title, targetTile.title)
                             && TextUtils.equals(localTile.summary, targetTile.summary);
+                case TYPE_SUGGESTION_CONDITION_CONTAINER:
+                    // If entity is suggestion and contains remote view, force refresh
+                    final List entities = (List) entity;
+                    if (!entities.isEmpty()) {
+                        Object firstEntity = entities.get(0);
+                        if (firstEntity instanceof Tile
+                                && ((Tile) firstEntity).remoteViews != null) {
+                            return false;
+                        }
+                    }
+                    // Otherwise Fall through to default
                 default:
                     return entity == null ? targetItem.entity == null
                             : entity.equals(targetItem.entity);
