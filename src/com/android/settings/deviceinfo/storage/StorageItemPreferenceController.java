@@ -208,23 +208,18 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void setUserId(UserHandle userHandle) {
         mUserId = userHandle.getIdentifier();
 
-        PackageManager pm = mContext.getPackageManager();
-        badgePreference(pm, userHandle, mPhotoPreference);
-        badgePreference(pm, userHandle, mMoviesPreference);
-        badgePreference(pm, userHandle, mAudioPreference);
-        badgePreference(pm, userHandle, mGamePreference);
-        badgePreference(pm, userHandle, mAppPreference);
-        badgePreference(pm, userHandle, mSystemPreference);
-        badgePreference(pm, userHandle, mFilePreference);
+        tintPreference(mPhotoPreference);
+        tintPreference(mMoviesPreference);
+        tintPreference(mAudioPreference);
+        tintPreference(mGamePreference);
+        tintPreference(mAppPreference);
+        tintPreference(mSystemPreference);
+        tintPreference(mFilePreference);
     }
 
-    private void badgePreference(PackageManager pm, UserHandle userHandle, Preference preference) {
+    private void tintPreference(Preference preference) {
         if (preference != null) {
-            Drawable currentIcon = preference.getIcon();
-            // Sigh... Applying the badge to the icon clobbers the tint on the base drawable.
-            // For some reason, reapplying it here means the tint remains.
-            currentIcon = applyTint(mContext, currentIcon);
-            preference.setIcon(pm.getUserBadgedIcon(currentIcon, userHandle));
+            preference.setIcon(applyTint(mContext, preference.getIcon()));
         }
     }
 

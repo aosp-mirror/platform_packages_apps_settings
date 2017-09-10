@@ -78,7 +78,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
         final NetworkScoreManagerWrapper networkScoreManagerWrapper =
                 new NetworkScoreManagerWrapper(context.getSystemService(NetworkScoreManager.class));
         mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(
-                context, getLifecycle(), networkScoreManagerWrapper);
+                context, getLifecycle());
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
                 networkScoreManagerWrapper, getLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);

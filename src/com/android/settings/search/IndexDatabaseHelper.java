@@ -35,7 +35,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "search_index.db";
     private static final int DATABASE_VERSION = 117;
 
-    private static final String INDEX = "index";
+    private static final String SHARED_PREFS_TAG = "indexing_manager";
 
     private static final String PREF_KEY_INDEXED_PROVIDERS = "indexed_providers";
 
@@ -179,7 +179,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     public IndexDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     @Override
@@ -230,6 +230,10 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void reconstruct(SQLiteDatabase db) {
+        mContext.getSharedPreferences(SHARED_PREFS_TAG, Context.MODE_PRIVATE)
+                .edit()
+                .clear()
+                .commit();
         dropTables(db);
         bootstrapDB(db);
     }
@@ -252,24 +256,6 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return version;
     }
 
-    /**
-     * Perform a full index on an OTA or when the locale has changed
-     *
-     * @param locale      is the default for the device
-     * @param fingerprint id for the current build.
-     * @return true when the locale or build has changed since last index.
-     */
-    @VisibleForTesting
-    static boolean isFullIndex(Context context, String locale, String fingerprint,
-            String providerVersionedNames) {
-        final boolean isLocaleIndexed = IndexDatabaseHelper.isLocaleAlreadyIndexed(context, locale);
-        final boolean isBuildIndexed = IndexDatabaseHelper.isBuildIndexed(context, fingerprint);
-        final boolean areProvidersIndexed = IndexDatabaseHelper
-                .areProvidersIndexed(context, providerVersionedNames);
-
-        return !(isLocaleIndexed && isBuildIndexed && areProvidersIndexed);
-    }
-
     @VisibleForTesting
     static String buildProviderVersionedNames(List<ResolveInfo> providers) {
         StringBuilder sb = new StringBuilder();
@@ -282,44 +268,42 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return sb.toString();
     }
 
-    static void clearCachedIndexed(Context context) {
-        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).edit().clear().commit();
-    }
-
     static void setLocaleIndexed(Context context, String locale) {
-        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+        context.getSharedPreferences(SHARED_PREFS_TAG, Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean(locale, true)
                 .apply();
     }
 
     static void setProvidersIndexed(Context context, String providerVersionedNames) {
-        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+        context.getSharedPreferences(SHARED_PREFS_TAG, Context.MODE_PRIVATE)
                 .edit()
                 .putString(PREF_KEY_INDEXED_PROVIDERS, providerVersionedNames)
                 .apply();
     }
 
     static boolean isLocaleAlreadyIndexed(Context context, String locale) {
-        return context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).getBoolean(locale, false);
+        return context.getSharedPreferences(SHARED_PREFS_TAG, Context.MODE_PRIVATE)
+                .getBoolean(locale, false);
     }
 
     static boolean areProvidersIndexed(Context context, String providerVersionedNames) {
-        final String indexedProviders = context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
-                .getString(PREF_KEY_INDEXED_PROVIDERS, null);
+        final String indexedProviders =
+                context.getSharedPreferences(SHARED_PREFS_TAG, Context.MODE_PRIVATE)
+                        .getString(PREF_KEY_INDEXED_PROVIDERS, null);
         return TextUtils.equals(indexedProviders, providerVersionedNames);
     }
 
     static boolean isBuildIndexed(Context context, String buildNo) {
-        return context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).getBoolean(buildNo, false);
+        return context.getSharedPreferences(SHARED_PREFS_TAG,
+                Context.MODE_PRIVATE).getBoolean(buildNo, false);
     }
 
     static void setBuildIndexed(Context context, String buildNo) {
-        context.getSharedPreferences(INDEX, 0).edit().putBoolean(buildNo, true).commit();
+        context.getSharedPreferences(SHARED_PREFS_TAG, 0).edit().putBoolean(buildNo, true).commit();
     }
 
     private void dropTables(SQLiteDatabase db) {
-        clearCachedIndexed(mContext);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_META_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_PREFS_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SAVED_QUERIES);

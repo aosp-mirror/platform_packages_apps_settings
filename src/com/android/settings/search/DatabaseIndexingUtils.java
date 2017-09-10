@@ -174,35 +174,6 @@ public class DatabaseIndexingUtils {
         return null;
     }
 
-    /**
-     * Only allow a "well known" SearchIndexablesProvider. The provider should:
-     *
-     * - have read/write {@link Manifest.permission#READ_SEARCH_INDEXABLES}
-     * - be from a privileged package
-     */
-    static boolean isWellKnownProvider(ResolveInfo info, Context context) {
-        final String authority = info.providerInfo.authority;
-        final String packageName = info.providerInfo.applicationInfo.packageName;
-
-        if (TextUtils.isEmpty(authority) || TextUtils.isEmpty(packageName)) {
-            return false;
-        }
-
-        final String readPermission = info.providerInfo.readPermission;
-        final String writePermission = info.providerInfo.writePermission;
-
-        if (TextUtils.isEmpty(readPermission) || TextUtils.isEmpty(writePermission)) {
-            return false;
-        }
-
-        if (!android.Manifest.permission.READ_SEARCH_INDEXABLES.equals(readPermission) ||
-                !android.Manifest.permission.READ_SEARCH_INDEXABLES.equals(writePermission)) {
-            return false;
-        }
-
-        return isPrivilegedPackage(packageName, context);
-    }
-
     static String normalizeHyphen(String input) {
         return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
     }
@@ -216,16 +187,5 @@ public class DatabaseIndexingUtils {
 
     static String normalizeKeywords(String input) {
         return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
-    }
-
-    private static boolean isPrivilegedPackage(String packageName, Context context) {
-        final PackageManager pm = context.getPackageManager();
-        try {
-            PackageInfo packInfo = pm.getPackageInfo(packageName, 0);
-            return ((packInfo.applicationInfo.privateFlags
-                    & ApplicationInfo.PRIVATE_FLAG_PRIVILEGED) != 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
     }
 }

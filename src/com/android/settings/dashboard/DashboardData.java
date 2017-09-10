@@ -172,30 +172,6 @@ public class DashboardData {
     }
 
     /**
-     * Get the count of suggestions to display
-     *
-     * The displayable count mainly depends on the {@link #mSuggestionConditionMode}
-     * and the size of suggestions list.
-     *
-     * When in default mode, displayable count couldn't be larger than
-     * {@link #DEFAULT_SUGGESTION_COUNT}.
-     *
-     * When in expanded mode, display all the suggestions.
-     *
-     * @return the count of suggestions to display
-     */
-    public int getDisplayableSuggestionCount() {
-        final int suggestionSize = sizeOf(mSuggestions);
-        if (mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
-            return 0;
-        }
-        if (mSuggestionConditionMode == HEADER_MODE_DEFAULT) {
-            return Math.min(DEFAULT_SUGGESTION_COUNT, suggestionSize);
-        }
-        return suggestionSize;
-    }
-
-    /**
      * Add item into list when {@paramref add} is true.
      *
      * @param item     maybe {@link Condition}, {@link Tile}, {@link DashboardCategory} or null
@@ -280,7 +256,7 @@ public class DashboardData {
         if (conditions == null) {
             return null;
         }
-        List<Condition> result = new ArrayList<Condition>();
+        List<Condition> result = new ArrayList<>();
         final int size = conditions == null ? 0 : conditions.size();
         for (int i = 0; i < size; i++) {
             final Condition condition = conditions.get(i);
@@ -460,6 +436,17 @@ public class DashboardData {
                     // Only check title and summary for dashboard tile
                     return TextUtils.equals(localTile.title, targetTile.title)
                             && TextUtils.equals(localTile.summary, targetTile.summary);
+                case TYPE_SUGGESTION_CONDITION_CONTAINER:
+                    // If entity is suggestion and contains remote view, force refresh
+                    final List entities = (List) entity;
+                    if (!entities.isEmpty()) {
+                        Object firstEntity = entities.get(0);
+                        if (firstEntity instanceof Tile
+                                && ((Tile) firstEntity).remoteViews != null) {
+                            return false;
+                        }
+                    }
+                    // Otherwise Fall through to default
                 default:
                     return entity == null ? targetItem.entity == null
                             : entity.equals(targetItem.entity);
@@ -482,7 +469,7 @@ public class DashboardData {
             conditionCount = sizeOf(conditions);
             this.hiddenSuggestionCount = hiddenSuggestionCount;
             title = conditionCount > 0 ? conditions.get(0).getTitle() : null;
-            conditionIcons = new ArrayList<Icon>();
+            conditionIcons = new ArrayList<>();
             for (int i = 0; conditions != null && i < conditions.size(); i++) {
                 final Condition condition = conditions.get(i);
                 conditionIcons.add(condition.getIcon());

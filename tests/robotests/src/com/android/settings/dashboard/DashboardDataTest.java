@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
+import android.widget.RemoteViews;
 
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
@@ -35,6 +36,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -222,6 +224,28 @@ public class DashboardDataTest {
                 ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 4));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
+    }
+
+    @Test
+    public void testDiffUtil_typeSuggestedContainer_ResultDataNothingChanged() {
+        //Build testResultData
+        final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
+        testResultData.add(new ListUpdateResult.ResultData(
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 0, 1));
+        Tile tile = new Tile();
+        tile.remoteViews = mock(RemoteViews.class);
+
+        DashboardData prevData = new DashboardData.Builder()
+                .setConditions(null)
+                .setCategory(null)
+                .setSuggestions(Arrays.asList(tile))
+                .build();
+        DashboardData currentData = new DashboardData.Builder()
+                .setConditions(null)
+                .setCategory(null)
+                .setSuggestions(Arrays.asList(tile))
+                .build();
+        testDiffUtil(prevData, currentData, testResultData);
     }
 
     /**
