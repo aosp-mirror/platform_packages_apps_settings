@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
@@ -158,6 +159,7 @@ public class DashboardFragmentTest {
     @Test
     public void tintTileIcon_hasMetadata_shouldReturnIconTintableMetadata() {
         final Tile tile = new Tile();
+        tile.icon = mock(Icon.class);
         final Bundle metaData = new Bundle();
         tile.metaData = metaData;
 
@@ -168,10 +170,19 @@ public class DashboardFragmentTest {
         assertThat(mTestFragment.tintTileIcon(tile)).isTrue();
     }
 
+    @Test
+    public void tintTileIcon_noIcon_shouldReturnFalse() {
+        final Tile tile = new Tile();
+        final Bundle metaData = new Bundle();
+        tile.metaData = metaData;
+
+        assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
+    }
 
     @Test
     public void tintTileIcon_noMetadata_shouldReturnPackageNameCheck() {
         final Tile tile = new Tile();
+        tile.icon = mock(Icon.class);
         final Intent intent = new Intent();
         tile.intent = intent;
 
