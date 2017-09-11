@@ -26,6 +26,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -47,6 +48,7 @@ public class BatteryEntry {
     public static final int MSG_REPORT_FULLY_DRAWN = 2;
 
     private static final String TAG = "BatteryEntry";
+    private static final String PACKAGE_SYSTEM = "android";
 
     static final HashMap<String,UidToDetail> sUidCache = new HashMap<String,UidToDetail>();
 
@@ -268,9 +270,11 @@ public class BatteryEntry {
         if (sipper.mPackages == null) {
             sipper.mPackages = pm.getPackagesForUid(uid);
         }
-        if (sipper.mPackages != null) {
-            String[] packageLabels = new String[sipper.mPackages.length];
-            System.arraycopy(sipper.mPackages, 0, packageLabels, 0, sipper.mPackages.length);
+
+        final String[] packages = extractPackagesFromSipper(sipper);
+        if (packages != null) {
+            String[] packageLabels = new String[packages.length];
+            System.arraycopy(packages, 0, packageLabels, 0, packages.length);
 
             // Convert package names to user-facing labels where possible
             IPackageManager ipm = AppGlobals.getPackageManager();
@@ -289,7 +293,7 @@ public class BatteryEntry {
                         packageLabels[i] = label.toString();
                     }
                     if (ai.icon != 0) {
-                        defaultPackageName = sipper.mPackages[i];
+                        defaultPackageName = packages[i];
                         icon = ai.loadIcon(pm);
                         break;
                     }
@@ -303,7 +307,7 @@ public class BatteryEntry {
                 name = packageLabels[0];
             } else {
                 // Look for an official name for this UID.
-                for (String pkgName : sipper.mPackages) {
+                for (String pkgName : packages) {
                     try {
                         final PackageInfo pi = ipm.getPackageInfo(pkgName, 0 /* no flags */, userId);
                         if (pi == null) {
@@ -348,5 +352,12 @@ public class BatteryEntry {
         if (sHandler != null) {
             sHandler.sendMessage(sHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
         }
+    }
+
+    String[] extractPackagesFromSipper(BatterySipper sipper) {
+        // Only use system package if uid is system uid, so it could find a consistent name and icon
+        return sipper.getUid() == Process.SYSTEM_UID
+                ? new String[]{PACKAGE_SYSTEM}
+                : sipper.mPackages;
     }
 }
