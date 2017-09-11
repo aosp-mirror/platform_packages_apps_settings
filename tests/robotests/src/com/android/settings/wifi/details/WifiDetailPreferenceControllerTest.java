@@ -436,10 +436,14 @@ public class WifiDetailPreferenceControllerTest {
     public void dnsServersPref_shouldHaveDetailTextSet() throws UnknownHostException {
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,4,4}));
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,8,8}));
+        mLinkProperties.addDnsServer(Constants.IPV6_DNS);
 
         displayAndResume();
 
-        verify(mockDnsPref).setDetailText("8.8.4.4\n8.8.8.8");
+        verify(mockDnsPref).setDetailText(
+                "8.8.4.4\n" +
+                "8.8.8.8\n" +
+                Constants.IPV6_DNS.getHostAddress());
     }
 
     @Test
@@ -545,12 +549,14 @@ public class WifiDetailPreferenceControllerTest {
 
         lp.addDnsServer(Constants.IPV6_DNS);
         updateLinkProperties(lp);
-        inOrder.verify(mockDnsPref, never()).setVisible(true);
+        inOrder.verify(mockDnsPref).setDetailText(Constants.IPV6_DNS.getHostAddress());
+        inOrder.verify(mockDnsPref).setVisible(true);
 
         lp.addDnsServer(Constants.IPV4_DNS1);
         lp.addDnsServer(Constants.IPV4_DNS2);
         updateLinkProperties(lp);
         inOrder.verify(mockDnsPref).setDetailText(
+                Constants.IPV6_DNS.getHostAddress() + "\n" +
                 Constants.IPV4_DNS1.getHostAddress() + "\n" +
                 Constants.IPV4_DNS2.getHostAddress());
         inOrder.verify(mockDnsPref).setVisible(true);
