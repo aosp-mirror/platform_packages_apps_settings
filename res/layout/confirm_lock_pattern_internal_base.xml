@@ -61,14 +61,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp">
 
-            <com.android.internal.widget.LockPatternView
-                android:id="@+id/lockPattern"
-                android:layout_width="match_parent"
+            <com.android.setupwizardlib.view.FillContentLayout
+                style="@style/LockPatternContainerStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="4"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_weight="1">
+
+                <com.android.internal.widget.LockPatternView
+                    android:id="@+id/lockPattern"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+
+            </com.android.setupwizardlib.view.FillContentLayout>
 
             <TextView
                 style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
@@ -77,9 +86,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="?attr/suwMarginSides"
                 android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
                 android:gravity="center_vertical"/>
 
             <ImageView
@@ -87,6 +95,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="?attr/suwMarginSides"
                 android:layout_marginBottom="24dp"
                 android:contentDescription="@string/confirm_fingerprint_icon_content_description"
                 android:visibility="gone"/>
