@@ -431,9 +431,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             }
         }
 
-        // Find IPv4 DNS addresses.
+        // Find all (IPv4 and IPv6) DNS addresses.
         String dnsServers = mLinkProperties.getDnsServers().stream()
-                .filter(Inet4Address.class::isInstance)
                 .map(InetAddress::getHostAddress)
                 .collect(Collectors.joining("\n"));
 
