@@ -68,7 +68,8 @@ import java.util.List;
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
         AnomalyDialogFragment.AnomalyDialogListener,
-        LoaderManager.LoaderCallbacks<List<Anomaly>> {
+        LoaderManager.LoaderCallbacks<List<Anomaly>>,
+        BackgroundActivityPreferenceController.WarningConfirmationListener {
 
     public static final String TAG = "AdvancedPowerUsageDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -109,6 +110,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
+    private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
 
     private DevicePolicyManagerWrapper mDpm;
     private UserManager mUserManager;
@@ -319,7 +321,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int uid = bundle.getInt(EXTRA_UID, 0);
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
-        controllers.add(new BackgroundActivityPreferenceController(context, uid));
+        mBackgroundActivityPreferenceController = new BackgroundActivityPreferenceController(
+                context, this, uid, packageName);
+        controllers.add(mBackgroundActivityPreferenceController);
         controllers.add(new BatteryOptimizationPreferenceController(
                 (SettingsActivity) getActivity(), this, packageName));
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
@@ -363,5 +367,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @Override
     public void onLoaderReset(Loader<List<Anomaly>> loader) {
 
+    }
+
+    @Override
+    public void onLimitBackgroundActivity() {
+        mBackgroundActivityPreferenceController.setUnchecked(
+                findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
     }
 }
