@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -70,7 +71,17 @@ public class Settings extends SettingsActivity {
     }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
+
+    /**
+     * @deprecated in favor of {@link DevelopmentSettingsDashboardActivity}.
+     */
+    @Deprecated
     public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DevelopmentSettingsDashboardActivity extends SettingsActivity {
+        public static final boolean isEnabled() {
+            return FeatureFlagUtils.isEnabled("dev_option_v2");
+        }
+    }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }

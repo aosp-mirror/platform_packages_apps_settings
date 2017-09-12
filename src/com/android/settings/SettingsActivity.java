@@ -50,6 +50,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.backup.BackupSettingsActivity;
@@ -58,7 +59,6 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchActivity;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -66,6 +66,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -831,9 +832,16 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
+        final boolean useDevOptionV2 = Settings.DevelopmentSettingsDashboardActivity.isEnabled();
+        // Enable old Dev option if v2 is disabled
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
-                showDev, isAdmin)
+                showDev && !useDevOptionV2, isAdmin)
+                || somethingChanged;
+        // Enable new Dev option if v2 is enable
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                        Settings.DevelopmentSettingsDashboardActivity.class.getName()),
+                showDev && useDevOptionV2, isAdmin)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.

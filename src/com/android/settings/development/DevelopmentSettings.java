@@ -110,7 +110,9 @@ import java.util.List;
 
 /*
  * Displays preferences for application developers.
+ * @deprecated in favor of {@link DevelopmentSettingsDashboardFragment}
  */
+@Deprecated
 public class DevelopmentSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
         OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
