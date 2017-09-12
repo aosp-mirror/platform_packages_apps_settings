@@ -21,8 +21,10 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -61,17 +63,18 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
     @Override
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
-        if (mValidator != null) {
-            final EditText editText = view.findViewById(android.R.id.edit);
-            if (editText != null) {
-                editText.removeTextChangedListener(mTextWatcher);
-                if (mIsPassword) {
-                    editText.setInputType(
-                            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    editText.setMaxLines(1);
-                }
-                editText.addTextChangedListener(mTextWatcher);
+        final EditText editText = view.findViewById(android.R.id.edit);
+        if (editText != null && !TextUtils.isEmpty(editText.getText())) {
+            editText.setSelection(editText.getText().length());
+        }
+        if (mValidator != null && editText != null) {
+            editText.removeTextChangedListener(mTextWatcher);
+            if (mIsPassword) {
+                editText.setInputType(
+                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                editText.setMaxLines(1);
             }
+            editText.addTextChangedListener(mTextWatcher);
         }
     }
 

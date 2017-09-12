@@ -35,9 +35,10 @@ import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -58,10 +59,36 @@ public class ValidatedEditTextPreferenceTest {
     }
 
     @Test
-    public void bindDialogView_noTextWatcher_shouldDoNothing() {
+    public void bindDialogView_nullEditText_shouldNotCrash() {
+        when(mView.findViewById(android.R.id.edit)).thenReturn(null);
+        // should not crash trying to get the EditText text
+        mPreference.onBindDialogView(mView);
+    }
+
+    @Test
+    public void bindDialogView_emptyEditText_shouldNotSetSelection() {
+        final String testText = "";
+        final EditText editText = spy(new EditText(RuntimeEnvironment.application));
+        editText.setText(testText);
+        when(mView.findViewById(android.R.id.edit)).thenReturn(editText);
+
         mPreference.onBindDialogView(mView);
 
-        verifyZeroInteractions(mView);
+        // no need to setSelection if text was empty
+        verify(editText, never()).setSelection(anyInt());
+    }
+
+    @Test
+    public void bindDialogView_nonemptyEditText_shouldSetSelection() {
+        final String testText = "whatever";
+        final EditText editText = spy(new EditText(RuntimeEnvironment.application));
+        editText.setText(testText);
+        when(mView.findViewById(android.R.id.edit)).thenReturn(editText);
+
+        mPreference.onBindDialogView(mView);
+
+        // selection should be set to end of string
+        verify(editText).setSelection(testText.length());
     }
 
     @Test
