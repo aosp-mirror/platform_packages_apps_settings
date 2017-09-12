@@ -124,6 +124,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mPackageManager = context.getPackageManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBatteryUtils = BatteryUtils.getInstance(context);
+
+        // init the summary so other preferences won't have unnecessary move
+        updateHistPrefSummary(context);
     }
 
     @Override
@@ -175,7 +178,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         updatePreference(mHistPref);
         refreshPowerUsageDataList(mStatsHelper, mUsageListGroup);
+        updateHistPrefSummary(context);
 
+        BatteryEntry.startRequestQueue();
+        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
+    }
+
+    private void updateHistPrefSummary(Context context) {
         Intent batteryIntent =
                 context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
@@ -186,9 +195,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         } else {
             mHistPref.hideBottomSummary();
         }
-
-        BatteryEntry.startRequestQueue();
-        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
     }
 
     @VisibleForTesting
