@@ -16,6 +16,7 @@
 package com.android.settings.deviceinfo.storage;
 
 
+import static com.android.settings.applications.ManageApplications.EXTRA_WORK_ID;
 import static com.android.settings.applications.ManageApplications.EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
@@ -195,6 +196,10 @@ public class StorageItemPreferenceControllerTest {
                         intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                                 .getBoolean(EXTRA_WORK_ONLY))
                 .isTrue();
+        assertThat(
+                        intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                                .getInt(EXTRA_WORK_ID))
+                .isEqualTo(0);
     }
 
     @Test
