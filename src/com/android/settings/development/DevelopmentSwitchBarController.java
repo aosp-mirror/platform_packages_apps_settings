@@ -22,18 +22,39 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 public class DevelopmentSwitchBarController implements LifecycleObserver, OnStart, OnStop {
 
     private final SwitchBar mSwitchBar;
     private final boolean mIsAvailable;
     private final DevelopmentSettings mSettings;
+    private final DevelopmentSettingsDashboardFragment mNewSettings;
 
+    /**
+     * @deprecated in favor of the other constructor.
+     */
+    @Deprecated
     public DevelopmentSwitchBarController(DevelopmentSettings settings, SwitchBar switchBar,
             boolean isAvailable, Lifecycle lifecycle) {
         mSwitchBar = switchBar;
         mIsAvailable = isAvailable && !Utils.isMonkeyRunning();
         mSettings = settings;
+        mNewSettings = null;
+
+        if (mIsAvailable) {
+            lifecycle.addObserver(this);
+        } else {
+            mSwitchBar.setEnabled(false);
+        }
+    }
+
+    public DevelopmentSwitchBarController(DevelopmentSettingsDashboardFragment settings,
+            SwitchBar switchBar, boolean isAvailable, Lifecycle lifecycle) {
+        mSwitchBar = switchBar;
+        mIsAvailable = isAvailable && !Utils.isMonkeyRunning();
+        mSettings = null;
+        mNewSettings = settings;
 
         if (mIsAvailable) {
             lifecycle.addObserver(this);
@@ -44,11 +65,24 @@ public class DevelopmentSwitchBarController implements LifecycleObserver, OnStar
 
     @Override
     public void onStart() {
-        mSwitchBar.addOnSwitchChangeListener(mSettings);
+        if (mSettings != null) {
+            mSwitchBar.addOnSwitchChangeListener(mSettings);
+        }
+        if (mNewSettings != null) {
+            final boolean developmentEnabledState = DevelopmentSettingsEnabler
+                    .isDevelopmentSettingsEnabled(mNewSettings.getContext());
+            mSwitchBar.setChecked(developmentEnabledState);
+            mSwitchBar.addOnSwitchChangeListener(mNewSettings);
+        }
     }
 
     @Override
     public void onStop() {
-        mSwitchBar.removeOnSwitchChangeListener(mSettings);
+        if (mSettings != null) {
+            mSwitchBar.removeOnSwitchChangeListener(mSettings);
+        }
+        if (mNewSettings != null) {
+            mSwitchBar.removeOnSwitchChangeListener(mNewSettings);
+        }
     }
 }

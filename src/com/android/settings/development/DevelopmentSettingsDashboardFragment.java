@@ -17,12 +17,16 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
+import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -33,19 +37,65 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import java.util.Arrays;
 import java.util.List;
 
-public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment {
+public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
+        implements SwitchBar.OnSwitchChangeListener {
 
     private static final String TAG = "DevSettingsDashboard";
 
+    private boolean mIsAvailable = true;
     private SwitchBar mSwitchBar;
+    private DevelopmentSwitchBarController mSwitchBarController;
 
     public DevelopmentSettingsDashboardFragment() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
     }
 
     @Override
+    public void onActivityCreated(Bundle icicle) {
+        super.onActivityCreated(icicle);
+        // Apply page-level restrictions
+        setIfOnlyAvailableForAdmins(true);
+        if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
+            // Block access to developer options if the user is not the owner, if user policy
+            // restricts it, or if the device has not been provisioned
+            mIsAvailable = false;
+            // Show error message
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.development_settings_not_available);
+            }
+            getPreferenceScreen().removeAll();
+            return;
+        }
+        // Set up master switch
+        mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBarController = new DevelopmentSwitchBarController(
+                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable, getLifecycle());
+        mSwitchBar.show();
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DEVELOPMENT;
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (switchView != mSwitchBar.getSwitch()) {
+            return;
+        }
+        final boolean developmentEnabledState =
+                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
+        if (isChecked != developmentEnabledState) {
+            if (isChecked) {
+                EnableDevelopmentSettingWarningDialog.show(this /* host */);
+            } else {
+                // TODO: Reset dangerous options (move logic from DevelopmentSettings).
+                // resetDangerousOptions();
+                DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
+                // TODO: Refresh all prefs' enabled state (move logic from DevelopmentSettings).
+                // setPrefsEnabledState(false);
+            }
+        }
     }
 
     @Override
@@ -67,6 +117,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
+    }
+
+    void onEnableDevelopmentOptionsConfirmed() {
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), true);
+        // TODO: Refresh all prefs' enabled state (move logic from DevelopmentSettings).
+    }
+
+    void onEnableDevelopmentOptionsRejected() {
+        // Reset the toggle
+        mSwitchBar.setChecked(false);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
