@@ -411,18 +411,11 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testUpdateLastFullChargePreference_showCorrectSummary() {
-        final CharSequence formattedString = mRealContext.getText(
-                R.string.power_last_full_charge_summary);
-        final CharSequence timeSequence = Utils.formatElapsedTime(mRealContext,
-                TIME_SINCE_LAST_FULL_CHARGE_MS, false);
-        final CharSequence expectedSummary = TextUtils.expandTemplate(
-                formattedString, timeSequence);
-        doReturn(formattedString).when(mFragment).getText(R.string.power_last_full_charge_summary);
         doReturn(mRealContext).when(mFragment).getContext();
 
         mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
 
-        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo(expectedSummary);
+        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hr. ago");
     }
 
     @Test

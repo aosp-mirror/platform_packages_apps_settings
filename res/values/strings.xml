@@ -3633,8 +3633,6 @@
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="see_all_apps_title">See all <xliff:g id="count" example="3">%1$d</xliff:g> apps</string>
-    <!-- Preference summary for each recently used app, which is the time since last used, i.e. "7 h 20 min ago". Note: ^1 should be used in all translations [CHAR_LIMIT=60] -->
-    <string name="recent_app_summary"><xliff:g id="time">^1</xliff:g> ago</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="tablet">
@@ -4644,12 +4642,10 @@
     <!-- Title for the cellular network in power use UI(i.e. Mobile network scanning: 30% of battery usage) [CHAR_LIMIT=40] -->
     <string name="device_cellular_network">Mobile network scanning</string>
 
-    <!-- Label for time since last full charge in power use UI, i.e. "7 h 20 min ago". Note: ^1 should be used in all translations [CHAR_LIMIT=60] -->
-    <string name="power_last_full_charge_summary"><xliff:g id="time">^1</xliff:g> ago</string>
     <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="time">^1</xliff:g> ago)</string>
+    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
     <!-- Label for device components using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary_device">Device usage since full charge (<xliff:g id="time">^1</xliff:g> ago)</string>
+    <string name="power_usage_list_summary_device">Device usage since full charge (<xliff:g id="relative_time">^1</xliff:g>)</string>
     <!-- Description for the screen usage item [CHAR_LIMIT=120] -->
     <string name="screen_usage_summary">Amount of time screen has been on since full charge</string>
     <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->

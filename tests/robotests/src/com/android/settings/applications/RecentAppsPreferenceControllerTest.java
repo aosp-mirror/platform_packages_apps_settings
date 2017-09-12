@@ -249,8 +249,6 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
             .thenReturn(stats);
 
-        when(mMockContext.getResources().getText(eq(R.string.recent_app_summary)))
-            .thenReturn(mContext.getResources().getText(R.string.recent_app_summary));
         final Configuration configuration = new Configuration();
         configuration.locale = Locale.US;
         when(mMockContext.getResources().getConfiguration()).thenReturn(configuration);
@@ -258,7 +256,7 @@ public class RecentAppsPreferenceControllerTest {
         mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(argThat(summaryMatches("0m ago")));
+        verify(mCategory).addPreference(argThat(summaryMatches("0 min. ago")));
     }
 
     private static ArgumentMatcher<Preference> summaryMatches(String expected) {

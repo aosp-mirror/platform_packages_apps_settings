@@ -235,10 +235,8 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             pref.setKey(pkgName);
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
-            pref.setSummary(TextUtils.expandTemplate(
-                mContext.getResources().getText(R.string.recent_app_summary),
-                Utils.formatElapsedTime(mContext,
-                    System.currentTimeMillis() - stat.getLastTimeUsed(), false)));
+            pref.setSummary(Utils.formatRelativeTime(mContext,
+                    System.currentTimeMillis() - stat.getLastTimeUsed(), false));
             pref.setOrder(i);
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,

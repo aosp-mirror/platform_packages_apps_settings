@@ -533,7 +533,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         updateScreenPreference();
         updateLastFullChargePreference(lastFullChargeTime);
 
-        final CharSequence timeSequence = Utils.formatElapsedTime(context, lastFullChargeTime,
+        final CharSequence timeSequence = Utils.formatRelativeTime(context, lastFullChargeTime,
                 false);
         final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
                 : R.string.power_usage_list_summary;
@@ -682,10 +682,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void updateLastFullChargePreference(long timeMs) {
-        final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), timeMs, false);
-        mLastFullChargePref.setSubtitle(
-                TextUtils.expandTemplate(getText(R.string.power_last_full_charge_summary),
-                        timeSequence));
+        final CharSequence timeSequence = Utils.formatRelativeTime(getContext(), timeMs, false);
+        mLastFullChargePref.setSubtitle(timeSequence);
     }
 
     @VisibleForTesting
