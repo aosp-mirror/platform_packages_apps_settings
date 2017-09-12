@@ -14,29 +14,16 @@
  * limitations under the License.
  */
 
-package android.service.oemlock;
+package com.android.settings.password;
+
+import android.os.storage.StorageManager;
 
 /**
- * Make OemLockManager available to Robolectric.
+ * Wrapper class to allow Robolectric to shadow methods introduced in newer API
  */
-public class OemLockManager {
-    public void setOemUnlockAllowedByCarrier(boolean allowed, byte[] signature) {}
+public class StorageManagerWrapper {
 
-    public boolean isOemUnlockAllowedByCarrier() {
-        return true;
-    }
-
-    public void setOemUnlockAllowedByUser(boolean allowed) {}
-
-    public boolean isOemUnlockAllowedByUser() {
-        return false;
-    }
-
-    public boolean isOemUnlockAllowed() {
-        return false;
-    }
-
-    public boolean isDeviceOemUnlocked() {
-        return false;
+    public static boolean isFileEncryptedNativeOrEmulated() {
+        return StorageManager.isFileEncryptedNativeOrEmulated();
     }
 }

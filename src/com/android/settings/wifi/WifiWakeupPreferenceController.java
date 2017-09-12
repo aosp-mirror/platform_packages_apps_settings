@@ -44,13 +44,10 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
-    private final NetworkScoreManagerWrapper mNetworkScoreManager;
     private SettingObserver mSettingObserver;
 
-    public WifiWakeupPreferenceController(
-            Context context, Lifecycle lifecycle, NetworkScoreManagerWrapper networkScoreManager) {
+    public WifiWakeupPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
-        mNetworkScoreManager = networkScoreManager;
         lifecycle.addObserver(this);
     }
 
@@ -116,11 +113,9 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         boolean networkRecommendationsEnabled = Settings.Global.getInt(
                 mContext.getContentResolver(),
                 Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
-        boolean activeScorerSet = mNetworkScoreManager.getActiveScorerPackage() != null;
-        enableWifiWakeup.setEnabled(
-                networkRecommendationsEnabled && wifiScanningEnabled && activeScorerSet);
+        enableWifiWakeup.setEnabled(networkRecommendationsEnabled && wifiScanningEnabled);
 
-        if (!activeScorerSet) {
+        if (!networkRecommendationsEnabled) {
             enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scoring_disabled);
         } else if (!wifiScanningEnabled) {
             enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scanning_disabled);

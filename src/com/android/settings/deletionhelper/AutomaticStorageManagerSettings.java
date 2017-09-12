@@ -16,15 +16,13 @@
 
 package com.android.settings.deletionhelper;
 
-import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,31 +30,27 @@ import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AutomaticStorageManagerSettings is the Settings screen for configuration and management of the
  * automatic storage manager.
  */
-public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
+public class AutomaticStorageManagerSettings extends DashboardFragment
         implements OnPreferenceChangeListener {
     private static final String KEY_DAYS = "days";
-    private static final String KEY_FREED = "freed_bytes";
-    private static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY =
-            "ro.storage_manager.enabled";
 
     private AutomaticStorageManagerSwitchBarController mSwitchController;
     private DropDownPreference mDaysToRetain;
-    private Preference mFreedBytes;
     private SwitchBar mSwitchBar;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.automatic_storage_management_settings);
-    }
 
     @Override
     public View onCreateView(
@@ -64,7 +58,6 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initializeDaysToRetainPreference();
-        initializeFreedBytesPreference();
         initializeSwitchBar();
 
         return view;
@@ -98,35 +91,25 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
                         getFragmentManager());
     }
 
-    private void initializeFreedBytesPreference() {
-        ContentResolver cr = getContentResolver();
-        mFreedBytes = findPreference(KEY_FREED);
-        long freedBytes = Settings.Secure.getLong(cr,
-                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED,
-                0);
-        long lastRunMillis = Settings.Secure.getLong(cr,
-                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_LAST_RUN,
-                0);
-        if (freedBytes == 0 || lastRunMillis == 0) {
-            mFreedBytes.setVisible(false);
-        } else {
-            final Activity activity = getActivity();
-            mFreedBytes.setSummary(
-                    activity.getString(
-                            R.string.automatic_storage_manager_freed_bytes,
-                            Formatter.formatFileSize(activity, freedBytes),
-                            DateUtils.formatDateTime(
-                                    activity, lastRunMillis, DateUtils.FORMAT_SHOW_DATE)));
-        }
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        boolean isStorageManagerChecked =
-                Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-        mDaysToRetain.setEnabled(isStorageManagerChecked);
+        mDaysToRetain.setEnabled(isStorageManagerEnabled());
+    }
+
+    @Override
+    protected String getLogTag() {
+        return null;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.automatic_storage_management_settings;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
     }
 
     @Override
@@ -168,4 +151,30 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment
         return indices.length - 1;
     }
 
+    private boolean isStorageManagerEnabled() {
+        return Settings.Secure.getInt(
+                        getContentResolver(), Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0)
+                != 0;
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new AutomaticStorageManagerDescriptionPreferenceController(context));
+        return controllers;
+    }
+
+    /** For Search. */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context);
+                }
+            };
 }

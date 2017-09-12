@@ -188,22 +188,27 @@ public final class BluetoothDevicePreference extends GearPreference implements
     }
 
     void onClicked() {
+        Context context = getContext();
         int bondState = mCachedDevice.getBondState();
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
 
         if (mCachedDevice.isConnected()) {
-            metricsFeatureProvider.action(getContext(),
+            metricsFeatureProvider.action(context,
                     MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
-            metricsFeatureProvider.action(getContext(),
+            metricsFeatureProvider.action(context,
                     MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
             mCachedDevice.connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
-            metricsFeatureProvider.action(getContext(),
+            metricsFeatureProvider.action(context,
                     MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+            if (!mCachedDevice.hasHumanReadableName()) {
+                metricsFeatureProvider.action(context,
+                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+            }
             pair();
         }
     }

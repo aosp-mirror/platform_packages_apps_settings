@@ -29,6 +29,8 @@ import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
 import com.android.settings.dashboard.DashboardAdapter.IconCache;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -73,6 +75,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
             mSuggestionsShownLogged.add(suggestionId);
         }
         if (suggestion.remoteViews != null) {
+            TileUtils.updateTileUsingSummaryUri(mContext, suggestion);
             final ViewGroup itemView = (ViewGroup) holder.itemView;
             itemView.removeAllViews();
             itemView.addView(suggestion.remoteViews.apply(itemView.getContext(), itemView));
