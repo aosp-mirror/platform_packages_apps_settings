@@ -21,6 +21,7 @@ import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import static com.android.settings.wifi.WifiSettings.isEditabilityLockedDown;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -48,7 +49,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
-
+import android.widget.Toast;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -60,13 +61,14 @@ import com.android.settings.vpn2.ConnectivityManagerWrapper;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDetailPreference;
+import com.android.settings.wifi.WifiDialog;
+import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.wifi.AccessPoint;
-
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -79,7 +81,9 @@ import java.util.stream.Collectors;
  * {@link WifiNetworkDetailsFragment}.
  */
 public class WifiDetailPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnResume {
+        implements PreferenceControllerMixin, WifiDialogListener, LifecycleObserver, OnPause,
+        OnResume {
+
     private static final String TAG = "WifiDetailsPrefCtrl";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -121,7 +125,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
     private String[] mSignalStr;
-    private final WifiConfiguration mWifiConfig;
+    private WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -147,9 +151,21 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         @Override
         public void onReceive(Context context, Intent intent) {
             switch (intent.getAction()) {
+                case WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION:
+                    if (!intent.getBooleanExtra(WifiManager.EXTRA_MULTIPLE_NETWORKS_CHANGED,
+                        false /* defaultValue */)) {
+                        // only one network changed
+                        WifiConfiguration wifiConfiguration = intent
+                            .getParcelableExtra(WifiManager.EXTRA_WIFI_CONFIGURATION);
+                        if (mAccessPoint.matches(wifiConfiguration)) {
+                            mWifiConfig = wifiConfiguration;
+                        }
+                    }
+                    // fall through
                 case WifiManager.NETWORK_STATE_CHANGED_ACTION:
                 case WifiManager.RSSI_CHANGED_ACTION:
                     updateInfo();
+                    break;
             }
         }
     };
@@ -239,6 +255,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION);
+
         lifecycle.addObserver(this);
     }
 
@@ -334,7 +352,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             return;
         }
 
-        // Update whether the forgot button should be displayed.
+        // Update whether the forget button should be displayed.
         mButtonsPref.setButton1Visible(canForgetNetwork());
 
         refreshNetworkState();
@@ -518,6 +536,32 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
         mConnectivityManagerWrapper.startCaptivePortalApp(mNetwork);
+    }
+
+    @Override
+    public void onForget(WifiDialog dialog) {
+        // can't forget network from a 'modify' dialog
+    }
+
+    @Override
+    public void onSubmit(WifiDialog dialog) {
+        if (dialog.getController() != null) {
+            mWifiManager.save(dialog.getController().getConfig(), new WifiManager.ActionListener() {
+                @Override
+                public void onSuccess() {
+                }
+
+                @Override
+                public void onFailure(int reason) {
+                    Activity activity = mFragment.getActivity();
+                    if (activity != null) {
+                        Toast.makeText(activity,
+                                R.string.wifi_failed_save_message,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     /**

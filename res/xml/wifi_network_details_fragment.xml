@@ -22,14 +22,14 @@
         android:selectable="false"
         android:order="-10000"/>
 
+    <!-- Buttons -->
+    <com.android.settings.widget.ActionButtonPreference
+        android:key="buttons"
+        android:selectable="false" />
+
     <!-- General Details Category -->
     <PreferenceCategory
             android:key="general_details_category" >
-        <!-- Buttons -->
-        <com.android.settings.widget.ActionButtonPreference
-            android:key="buttons"
-            android:selectable="false" />
-
         <com.android.settings.wifi.WifiDetailPreference
                 android:key="signal_strength"
                 android:title="@string/wifi_signal"
@@ -87,5 +87,4 @@
                 android:key="ipv6_addresses"
                 android:selectable="false"/>
     </PreferenceCategory>
-
 </PreferenceScreen>
