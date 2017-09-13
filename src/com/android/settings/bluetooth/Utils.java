@@ -156,28 +156,36 @@ public final class Utils {
 
     static Pair<Drawable, String> getBtClassDrawableWithDescription(Context context,
             CachedBluetoothDevice cachedDevice) {
+        return getBtClassDrawableWithDescription(context, cachedDevice, 1 /* iconScale */);
+    }
+
+    static Pair<Drawable, String> getBtClassDrawableWithDescription(Context context,
+            CachedBluetoothDevice cachedDevice, float iconScale) {
         BluetoothClass btClass = cachedDevice.getBtClass();
         final int level = cachedDevice.getBatteryLevel();
         if (btClass != null) {
             switch (btClass.getMajorDeviceClass()) {
                 case BluetoothClass.Device.Major.COMPUTER:
-                    return new Pair<>(getBluetoothDrawable(context, R.drawable.ic_bt_laptop, level),
+                    return new Pair<>(getBluetoothDrawable(context, R.drawable.ic_bt_laptop, level,
+                            iconScale),
                             context.getString(R.string.bluetooth_talkback_computer));
 
                 case BluetoothClass.Device.Major.PHONE:
                     return new Pair<>(
-                            getBluetoothDrawable(context, R.drawable.ic_bt_cellphone, level),
+                            getBluetoothDrawable(context, R.drawable.ic_bt_cellphone, level,
+                                    iconScale),
                             context.getString(R.string.bluetooth_talkback_phone));
 
                 case BluetoothClass.Device.Major.PERIPHERAL:
                     return new Pair<>(
                             getBluetoothDrawable(context, HidProfile.getHidClassDrawable(btClass),
-                                    level),
+                                    level, iconScale),
                             context.getString(R.string.bluetooth_talkback_input_peripheral));
 
                 case BluetoothClass.Device.Major.IMAGING:
                     return new Pair<>(
-                            getBluetoothDrawable(context, R.drawable.ic_settings_print, level),
+                            getBluetoothDrawable(context, R.drawable.ic_settings_print, level,
+                                    iconScale),
                             context.getString(R.string.bluetooth_talkback_imaging));
 
                 default:
@@ -189,30 +197,34 @@ public final class Utils {
         for (LocalBluetoothProfile profile : profiles) {
             int resId = profile.getDrawableResource(btClass);
             if (resId != 0) {
-                return new Pair<>(getBluetoothDrawable(context, resId, level), null);
+                return new Pair<>(getBluetoothDrawable(context, resId, level, iconScale), null);
             }
         }
         if (btClass != null) {
             if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
                 return new Pair<>(
-                        getBluetoothDrawable(context, R.drawable.ic_bt_headset_hfp, level),
+                        getBluetoothDrawable(context, R.drawable.ic_bt_headset_hfp, level,
+                                iconScale),
                         context.getString(R.string.bluetooth_talkback_headset));
             }
             if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
                 return new Pair<>(
-                        getBluetoothDrawable(context, R.drawable.ic_bt_headphones_a2dp, level),
+                        getBluetoothDrawable(context, R.drawable.ic_bt_headphones_a2dp, level,
+                                iconScale),
                         context.getString(R.string.bluetooth_talkback_headphone));
             }
         }
-        return new Pair<>(getBluetoothDrawable(context, R.drawable.ic_settings_bluetooth, level),
+        return new Pair<>(
+                getBluetoothDrawable(context, R.drawable.ic_settings_bluetooth, level, iconScale),
                 context.getString(R.string.bluetooth_talkback_bluetooth));
     }
 
     @VisibleForTesting
     static Drawable getBluetoothDrawable(Context context, @DrawableRes int resId,
-            int batteryLevel) {
+            int batteryLevel, float iconScale) {
         if (batteryLevel != BluetoothDevice.BATTERY_LEVEL_UNKNOWN) {
-            return BluetoothDeviceLayerDrawable.createLayerDrawable(context, resId, batteryLevel);
+            return BluetoothDeviceLayerDrawable.createLayerDrawable(context, resId, batteryLevel,
+                    iconScale);
         } else if (resId != 0) {
             return context.getDrawable(resId);
         } else {

@@ -80,7 +80,7 @@ public class UtilsTest {
     @Test
     public void testGetBluetoothDrawable_noBatteryLevel_returnSimpleDrawable() {
         final Drawable drawable = Utils.getBluetoothDrawable(RuntimeEnvironment.application,
-                R.drawable.ic_bt_laptop, BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
+                R.drawable.ic_bt_laptop, BluetoothDevice.BATTERY_LEVEL_UNKNOWN, 1 /* iconScale */);
 
         assertThat(drawable).isNotInstanceOf(BluetoothDeviceLayerDrawable.class);
     }
@@ -88,7 +88,7 @@ public class UtilsTest {
     @Test
     public void testGetBluetoothDrawable_hasBatteryLevel_returnLayerDrawable() {
         final Drawable drawable = Utils.getBluetoothDrawable(RuntimeEnvironment.application,
-                R.drawable.ic_bt_laptop, 10 /* batteryLevel */);
+                R.drawable.ic_bt_laptop, 10 /* batteryLevel */, 1 /* iconScale */);
 
         assertThat(drawable).isInstanceOf(BluetoothDeviceLayerDrawable.class);
     }
