@@ -1552,7 +1552,6 @@
     <string name="install_applications_title" msgid="4987712352256508946">"Tillad alle appkilder"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"Senest åbnede apps"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"Se alle <xliff:g id="COUNT">%1$d</xliff:g> apps"</string>
-    <string name="recent_app_summary" msgid="3366446669844932300">"For <xliff:g id="TIME">^1</xliff:g> siden"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Din tablet og dine personlige data er mere sårbare over for angreb fra ukendte apps. Når du installerer apps fra denne kilde, accepterer du, at du er ansvarlig for skader på din tablet eller tab af data, der kan skyldes brug af disse apps."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Din telefon og dine personlige data er mere sårbare over for angreb fra ukendte apps. Når du installerer apps fra denne kilde, accepterer du, at du er ansvarlig for skader på din telefon eller tab af data, der kan skyldes brug af disse apps."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Avancerede indstillinger"</string>
@@ -1971,12 +1970,19 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"Appen må køre i baggrunden, når den ikke er i brug"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Appens baggrundsaktivitet er begrænset, når den ikke er i brug"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"Appen har ikke tilladelse til at køre i baggrunden"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (7375400051141016808) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_title (2216249969149568871) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_text (7049624449246121981) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"Brug af skærmen siden fuld opladning"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Skærmens strømforbrug"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Scanning af mobilnetværk"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"For <xliff:g id="TIME">^1</xliff:g> siden"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Appforbrug siden fuld opladning (for <xliff:g id="TIME">^1</xliff:g> siden)"</string>
-    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Brug af enheden siden fuld opladning (for <xliff:g id="TIME">^1</xliff:g> siden)"</string>
+    <!-- no translation found for power_usage_list_summary (6393929085382334341) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary_device (4461926045610455423) -->
+    <skip />
     <string name="screen_usage_summary" msgid="6687403051423153550">"Hvor lang tid skærmen har været tændt siden fuld opladning"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Brug af enheden siden fuld opladning"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Batteriforbrug siden afbrydelse"</string>
@@ -2889,11 +2895,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"Underretninger"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Appunderretninger"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Underretningskategori"</string>
-    <!-- no translation found for notification_group_title (7180506440133859601) -->
-    <skip />
+    <string name="notification_group_title" msgid="7180506440133859601">"Kategorigruppe for underretninger"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Vigtighed"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Tillad lyd"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Vis aldrig underretninger"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Ingen lyd eller pop op-visning"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Ingen lyd"</string>
@@ -2942,11 +2946,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Indlæser apps..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blokerer underretninger for denne app, så de ikke vises på enheden"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android blokerer underretninger i denne kategori, så de ikke vises på enheden"</string>
-    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
-    <skip />
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android blokerer underretninger i denne gruppe, så de ikke vises på enheden"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Kategorier"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Andre"</string>
-    <!-- no translation found for notification_group_summary (3420621520561455358) -->
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> kategori</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorier</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Denne app har ikke sendt nogen underretninger"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Yderligere indstillinger i appen"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Aktiveret for alle apps"</string>
@@ -3727,4 +3733,7 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Få en rundvisning på din nye tablet"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Få en rundvisning på din nye enhed"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Denne funktion er ikke tilgængelig på denne enhed"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"Status for IMS-registrering"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Registreret"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Ikke registreret"</string>
 </resources>

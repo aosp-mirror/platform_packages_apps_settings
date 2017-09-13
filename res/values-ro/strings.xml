@@ -1565,7 +1565,6 @@
     <string name="install_applications_title" msgid="4987712352256508946">"Permite aplic. din orice surse"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"Aplicații deschise recent"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"Afișați toate cele <xliff:g id="COUNT">%1$d</xliff:g> aplicații"</string>
-    <string name="recent_app_summary" msgid="3366446669844932300">"Acum <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Tableta și datele dvs. personale sunt mai vulnerabile la un atac din partea aplicațiilor necunoscute. Dacă instalați aplicații din această sursă, acceptați că sunteți singura persoană responsabilă pentru deteriorarea tabletei sau pentru pierderea datelor, care pot avea loc în urma utilizării acestor aplicații."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Telefonul și datele dvs. personale sunt mai vulnerabile la un atac din partea aplicațiilor necunoscute. Dacă instalați aplicații din această sursă, acceptați că sunteți singura persoană responsabilă pentru deteriorarea telefonului sau pentru pierderea datelor, care pot avea loc în urma utilizării acestor aplicații."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Setări avansate"</string>
@@ -1992,12 +1991,19 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"Aplicația poate rula în fundal când nu este folosită"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Activitatea de fundal a aplicației este limitată când aceasta nu este folosită"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"Aplicației nu i se permite să ruleze în fundal"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (7375400051141016808) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_title (2216249969149568871) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_text (7049624449246121981) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"Utilizarea ecranului de la încărcare"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumul ecranului"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Scanarea rețelei mobile"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"în urmă cu <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Utilizarea de către aplicații de la ultima încărcare (în urmă cu <xliff:g id="TIME">^1</xliff:g>)"</string>
-    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Utilizarea dispozitivului de la ultima încărcare completă (acum <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <!-- no translation found for power_usage_list_summary (6393929085382334341) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary_device (4461926045610455423) -->
+    <skip />
     <string name="screen_usage_summary" msgid="6687403051423153550">"Perioada de timp de la încărcarea completă cât a fost pornit ecranul"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Utilizarea dispozitivului de la încărcarea completă"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilizarea bateriei de la deconectare"</string>
@@ -2916,11 +2922,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"Notificări"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificări din aplicații"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Categoria notificării"</string>
-    <!-- no translation found for notification_group_title (7180506440133859601) -->
-    <skip />
+    <string name="notification_group_title" msgid="7180506440133859601">"Grupul categoriei de notificări"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importanță"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Permiteți sunetul"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Nu afișați niciodată notificările"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Fără sunet sau întrerupere vizuală"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Fără sunet"</string>
@@ -2970,11 +2974,14 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Se încarcă aplicațiile..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blochează notificările acestei aplicații pe acest dispozitiv"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android blochează această categorie de notificări pe acest dispozitiv"</string>
-    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
-    <skip />
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android blochează acest grup de notificări pe dispozitiv"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Categorii"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Altele"</string>
-    <!-- no translation found for notification_group_summary (3420621520561455358) -->
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> categorii</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de categorii</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categorie</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Această aplicație nu a postat nicio notificare"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Setări suplimentare în aplicație"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Activat pentru toate aplicațiile"</string>
@@ -3782,4 +3789,7 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Faceți un tur al noii dvs. tablete"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Faceți un tur al noului dvs. dispozitiv"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Această caracteristică nu este disponibilă pe acest dispozitiv"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"Situația înregistrării IMS"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Înregistrat"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Neînregistrat"</string>
 </resources>
