@@ -111,7 +111,7 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
     }
 
     private CharSequence concatSummaryText(CharSequence currentSummary, String permission) {
-        final CharSequence label = getPermissionGroupLabel(permission);
+        final String label = getPermissionGroupLabel(permission).toString().toLowerCase();
         if (TextUtils.isEmpty(currentSummary)) {
             return label;
         }

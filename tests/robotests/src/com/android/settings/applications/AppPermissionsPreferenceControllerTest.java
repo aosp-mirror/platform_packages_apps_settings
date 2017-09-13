@@ -178,33 +178,33 @@ public class AppPermissionsPreferenceControllerTest {
         permissions[2] = mPermCamera;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Location, Microphone, Camera");
+        verify(mPreference).setSummary("Apps using location, microphone, camera");
 
         permissions[0] = mPermPhone;
         permissions[1] = mPermMic;
         permissions[2] = mPermCamera;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Microphone, Camera, Sms");
+        verify(mPreference).setSummary("Apps using microphone, camera, sms");
 
         permissions[0] = mPermPhone;
         permissions[1] = mPermMic;
         permissions[2] = mPermContacts;
         permissions[3] = mPermSms;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Microphone, Sms, Contacts");
+        verify(mPreference).setSummary("Apps using microphone, sms, contacts");
 
         permissions = new PermissionInfo[2];
         info.permissions = permissions;
         permissions[0] = mPermLocation;
         permissions[1] = mPermCamera;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Location, Camera");
+        verify(mPreference).setSummary("Apps using location, camera");
 
         permissions = new PermissionInfo[1];
         info.permissions = permissions;
         permissions[0] = mPermCamera;
         mController.updateState(mPreference);
-        verify(mPreference).setSummary("Apps using Camera");
+        verify(mPreference).setSummary("Apps using camera");
     }
 }
