@@ -174,6 +174,105 @@ public class UtilsTest {
     }
 
     @Test
+    public void testFormatRelativeTime_WithSeconds_ShowSeconds() {
+        final double testMillis = 40 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "40 sec. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_NoSeconds_DoNotShowSeconds() {
+        final double testMillis = 40 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "1 min. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_LessThanTwoMinutes_withSeconds() {
+        final double testMillis = 119 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "119 sec. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_LessThanTwoMinutes_NoSeconds() {
+        final double testMillis = 119 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "2 min. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_TwoMinutes_withSeconds() {
+        final double testMillis = 2 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "2 min. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_LessThanTwoHours_withSeconds() {
+        final double testMillis = 119 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "119 min. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_TwoHours_withSeconds() {
+        final double testMillis = 2 * DateUtils.HOUR_IN_MILLIS;
+        final String expectedTime = "2 hr. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_LessThanTwoDays_withSeconds() {
+        final double testMillis = 47 * DateUtils.HOUR_IN_MILLIS;
+        final String expectedTime = "47 hr. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_TwoDays_withSeconds() {
+        final double testMillis = 2 * DateUtils.DAY_IN_MILLIS;
+        final String expectedTime = "2 days ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_FormatZero_WithSeconds() {
+        final double testMillis = 0;
+        final String expectedTime = "0 sec. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatRelativeTime_FormatZero_NoSeconds() {
+        final double testMillis = 0;
+        final String expectedTime = "0 min. ago";
+
+        assertThat(Utils.formatRelativeTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
     public void testInitializeVolumeDoesntBreakOnNullVolume() {
         VolumeInfo info = new VolumeInfo("id", 0, new DiskInfo("id", 0), "");
         StorageManager storageManager = mock(StorageManager.class, RETURNS_DEEP_STUBS);

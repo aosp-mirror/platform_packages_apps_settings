@@ -17,22 +17,32 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -44,11 +54,24 @@ import java.util.List;
         })
 public class DevelopmentSettingsDashboardFragmentTest {
 
+    private SwitchBar mSwitchBar;
+    private ToggleSwitch mSwitch;
+    private Context mContext;
     private DevelopmentSettingsDashboardFragment mDashboard;
 
     @Before
     public void setUp() {
-        mDashboard = new DevelopmentSettingsDashboardFragment();
+        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mSwitchBar = new SwitchBar(mContext);
+        mSwitch = mSwitchBar.getSwitch();
+        mDashboard = spy(new DevelopmentSettingsDashboardFragment());
+        ReflectionHelpers.setField(mDashboard, "mSwitchBar", mSwitchBar);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowEnableDevelopmentSettingWarningDialog.reset();
     }
 
     @Test
@@ -94,5 +117,63 @@ public class DevelopmentSettingsDashboardFragmentTest {
                         .getNonIndexableKeys(appContext);
 
         assertThat(nonIndexableKeys).doesNotContain("development_prefs_screen");
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowEnableDevelopmentSettingWarningDialog.class
+    })
+    public void onSwitchChanged_sameState_shouldDoNothing() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+
+        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+        assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowEnableDevelopmentSettingWarningDialog.class
+    })
+    public void onSwitchChanged_turnOn_shouldShowWarningDialog() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+
+        mDashboard.onSwitchChanged(mSwitch, true /* isChecked */);
+        assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowEnableDevelopmentSettingWarningDialog.class
+    })
+    public void onSwitchChanged_turnOff_shouldTurnOff() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+
+        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+
+        assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
+        assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext))
+                .isFalse();
+    }
+
+    @Implements(EnableDevelopmentSettingWarningDialog.class)
+    public static class ShadowEnableDevelopmentSettingWarningDialog {
+
+        static boolean mShown;
+
+        public static void reset() {
+            mShown = false;
+        }
+
+        @Implementation
+        public static void show(
+                DevelopmentSettingsDashboardFragment host) {
+            mShown = true;
+        }
     }
 }

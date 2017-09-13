@@ -884,17 +884,20 @@ public class WifiSettings extends RestrictedSettingsFragment
      * {@link #mConnectedAccessPointPreferenceCategory}.
      */
     private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
-        String key = connectedAp.getBssid();
-        LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
-                getCachedPreference(key);
-        if (pref == null) {
-            pref = createLongPressActionPointPreference(connectedAp);
-        }
+        final LongPressAccessPointPreference pref = getOrCreatePreference(connectedAp);
 
         // Save the state of the current access point in the bundle so that we can restore it
         // in the Wifi Network Details Fragment
         pref.getAccessPoint().saveWifiState(pref.getExtras());
-        pref.setFragment(WifiNetworkDetailsFragment.class.getName());
+
+        // Launch details page on click.
+        pref.setOnPreferenceClickListener(preference -> {
+            SettingsActivity activity = (SettingsActivity) WifiSettings.this.getActivity();
+            activity.startPreferencePanel(this,
+                    WifiNetworkDetailsFragment.class.getName(), pref.getExtras(),
+                    R.string.wifi_details_title, null, null, 0);
+            return true;
+        });
         pref.refresh();
 
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
@@ -903,6 +906,15 @@ public class WifiSettings extends RestrictedSettingsFragment
             mClickedConnect = false;
             scrollToPreference(mConnectedAccessPointPreferenceCategory);
         }
+    }
+
+    private LongPressAccessPointPreference getOrCreatePreference(AccessPoint ap) {
+        LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
+                getCachedPreference(AccessPointPreference.generatePreferenceKey(ap));
+        if (pref == null) {
+            pref = createLongPressActionPointPreference(ap);
+        }
+        return pref;
     }
 
     /** Removes all preferences and hide the {@link #mConnectedAccessPointPreferenceCategory}. */

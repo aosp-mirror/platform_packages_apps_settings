@@ -27,8 +27,7 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
-// TODO(b/64069122) Have this extend a dialogfragment to handle the fullscreen launch case.
-class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
+public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
 
     public interface WifiDialogListener {
         void onForget(WifiDialog dialog);

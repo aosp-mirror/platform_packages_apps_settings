@@ -52,8 +52,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.fingerprint.FingerprintManager;
 import android.icu.text.MeasureFormat;
+import android.icu.text.RelativeDateTimeFormatter;
+import android.icu.text.RelativeDateTimeFormatter.RelativeUnit;
 import android.icu.util.Measure;
 import android.icu.util.MeasureUnit;
+import android.icu.util.ULocale;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -858,6 +861,48 @@ public final class Utils extends com.android.settingslib.Utils {
         }
 
         return sb;
+    }
+
+    /**
+     * Returns relative time for the given millis in the past, in a short format such as "2 days
+     * ago", "5 hr. ago", "40 min. ago", or "29 sec. ago".
+     *
+     * <p>The unit is chosen to have good information value while only using one unit. So 27 hours
+     * and 50 minutes would be formatted as "28 hr. ago", while 50 hours would be formatted as
+     * "2 days ago".
+     *
+     * @param context the application context
+     * @param millis the elapsed time in milli seconds
+     * @param withSeconds include seconds?
+     * @return the formatted elapsed time
+     */
+    public static CharSequence formatRelativeTime(Context context, double millis,
+            boolean withSeconds) {
+        final int seconds = (int) Math.floor(millis / 1000);
+        final RelativeUnit unit;
+        final int value;
+        if (withSeconds && seconds < 2 * SECONDS_PER_MINUTE) {
+            unit = RelativeUnit.SECONDS;
+            value = seconds;
+        } else if (seconds < 2 * SECONDS_PER_HOUR) {
+            unit = RelativeUnit.MINUTES;
+            value = (seconds + SECONDS_PER_MINUTE / 2) / SECONDS_PER_MINUTE;
+        } else if (seconds < 2 * SECONDS_PER_DAY) {
+            unit = RelativeUnit.HOURS;
+            value = (seconds + SECONDS_PER_HOUR / 2) / SECONDS_PER_HOUR;
+        } else {
+            unit = RelativeUnit.DAYS;
+            value = (seconds + SECONDS_PER_DAY / 2) / SECONDS_PER_DAY;
+        }
+
+        final Locale locale = context.getResources().getConfiguration().locale;
+        final RelativeDateTimeFormatter formatter = RelativeDateTimeFormatter.getInstance(
+                ULocale.forLocale(locale),
+                null /* default NumberFormat */,
+                RelativeDateTimeFormatter.Style.SHORT,
+                android.icu.text.DisplayContext.CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE);
+
+        return formatter.format(value, RelativeDateTimeFormatter.Direction.LAST, unit);
     }
 
     /**

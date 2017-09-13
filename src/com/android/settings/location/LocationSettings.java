@@ -35,7 +35,6 @@ import android.util.Log;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -43,6 +42,7 @@ import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.location.RecentLocationApps;
 
@@ -207,8 +207,8 @@ public class LocationSettings extends LocationSettingsBase
 
         List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
         for (final RecentLocationApps.Request request : recentLocationRequests) {
-            DimmableIconPreference pref = new DimmableIconPreference(getPrefContext(),
-                    request.contentDescription);
+            RestrictedPreference pref = new RestrictedPreference(getPrefContext());
+            pref.setSummary(request.contentDescription);
             pref.setIcon(request.icon);
             pref.setTitle(request.label);
             pref.setOnPreferenceClickListener(
