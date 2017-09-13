@@ -1552,7 +1552,6 @@
     <string name="install_applications_title" msgid="4987712352256508946">"Leyfa forrit frá öllum"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"Nýlega opnuð forrit"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"Sjá öll <xliff:g id="COUNT">%1$d</xliff:g> forritin"</string>
-    <string name="recent_app_summary" msgid="3366446669844932300">"fyrir <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Spjaldtölvan þín og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á spjaldtölvunni eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Síminn þinn og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á símanum eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Ítarlegar stillingar"</string>
@@ -1971,12 +1970,19 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"Hægt er að keyra forrit í bakgrunni þegar það er ekki í notkun"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Bakgrunnsvirkni forrits er takmörkuð þegar það er ekki í notkun"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"Forrit má ekki keyra í bakgrunni"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (7375400051141016808) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_title (2216249969149568871) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_text (7049624449246121981) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"Skjánotkun frá síðustu fullu hleðslu"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Orkunotkun skjásins"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Leit að farsímaneti"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"fyrir <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Notkun forrita frá fullri hleðslu (fyrir <xliff:g id="TIME">^1</xliff:g>)"</string>
-    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Notkun tækis frá fullri hleðslu (fyrir <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <!-- no translation found for power_usage_list_summary (6393929085382334341) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary_device (4461926045610455423) -->
+    <skip />
     <string name="screen_usage_summary" msgid="6687403051423153550">"Liðinn tími frá síðustu fullu hleðslu"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Tækjanotkun frá síðustu fullu hleðslu"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Rafhlöðunotkun frá síðustu hleðslu"</string>
@@ -2889,11 +2895,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"Tilkynningar"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Forritatilkynningar"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Tilkynningaflokkur"</string>
-    <!-- no translation found for notification_group_title (7180506440133859601) -->
-    <skip />
+    <string name="notification_group_title" msgid="7180506440133859601">"Hópur tilkynningaflokks"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Mikilvægi"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Leyfa hljóð"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Aldrei sýna tilkynningar"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Ekkert hljóð eða sjónræn truflun"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Ekkert hljóð"</string>
@@ -2942,11 +2946,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Hleður forrit..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android kemur í veg fyrir að tilkynningar þessa forrits birtist í þessu tæki"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android kemur í veg fyrir að tilkynningar birtist í þessu tæki"</string>
-    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
-    <skip />
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android kemur í veg fyrir að þessi tilkynningaflokkur birtist í þessu tæki"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Flokkar"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Annað"</string>
-    <!-- no translation found for notification_group_summary (3420621520561455358) -->
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> flokkur</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> flokkar</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Þetta forrit hefur ekki birt neinar tilkynningar"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Fleiri stillingar í forritinu"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Virkt í öllum forritum"</string>
@@ -3727,4 +3733,7 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Skoðaðu kynningu á nýju spjaldtölvunni þinni"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Skoðaðu kynningu á nýja tækinu þínu"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Þessi eiginleiki er ekki í boði í þessu tæki"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"Staða IMS-skráningar"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Skráð"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Ekki skráð"</string>
 </resources>

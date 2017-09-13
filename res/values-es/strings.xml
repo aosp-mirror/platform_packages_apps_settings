@@ -1552,7 +1552,6 @@
     <string name="install_applications_title" msgid="4987712352256508946">"Permitir todas las fuentes"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"Aplicaciones abiertas recientemente"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"Ver todas las aplicaciones (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
-    <string name="recent_app_summary" msgid="3366446669844932300">"Hace <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Tu tablet y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu tablet o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Tu teléfono y tus datos personales son más vulnerables a los ataques de aplicaciones desconocidas. Al instalar aplicaciones de esta fuente, aceptas ser responsable de cualquier daño que sufra tu teléfono o la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Ajustes avanzados"</string>
@@ -1971,12 +1970,19 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"La aplicación puede funcionar en segundo plano cuando no se está usando"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"La actividad de la aplicación en segundo plano es limitada cuando no se está utilizando"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"La aplicación no puede funcionar en segundo plano"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (7375400051141016808) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_title (2216249969149568871) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_text (7049624449246121981) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"Uso de la pantalla desde la última carga completa"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Consumo de la pantalla"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Búsqueda de redes móviles"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"hace <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Uso de las aplicaciones desde la última carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
-    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Uso del dispositivo desde la carga completa (hace <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <!-- no translation found for power_usage_list_summary (6393929085382334341) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary_device (4461926045610455423) -->
+    <skip />
     <string name="screen_usage_summary" msgid="6687403051423153550">"Tiempo que la pantalla ha estado encendida desde la carga completa"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Uso del dispositivo desde la carga completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se cargó"</string>
@@ -2882,18 +2888,16 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo quieres que se muestren las notificaciones cuando el dispositivo esté bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificaciones"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Mostrar todo (notificaciones de trabajo)"</string>
-    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Ocultar confidencial (notificaciones de trabajo)"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Ocultar sensible (notificaciones de trabajo)"</string>
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"No mostrar ninguna notificación de trabajo"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"¿Cómo quieres que se muestren las notificaciones del perfil cuando el dispositivo esté bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notificaciones del perfil"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notificaciones"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificaciones de aplicaciones"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Categoría de notificaciones"</string>
-    <!-- no translation found for notification_group_title (7180506440133859601) -->
-    <skip />
+    <string name="notification_group_title" msgid="7180506440133859601">"Grupo de categoría de notificaciones"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importancia"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Permitir sonido"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"No mostrar notificaciones nunca"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Sin sonido ni interrupción visual"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Sin sonido"</string>
@@ -2942,11 +2946,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Cargando aplicaciones..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android bloquea las notificaciones de esta aplicación para que no aparezcan en el dispositivo"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android bloquea esta categoría de notificaciones para que no aparezcan en el dispositivo"</string>
-    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
-    <skip />
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android bloquea este grupo de notificaciones para que no aparezcan en el dispositivo"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Categorías"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Otros"</string>
-    <!-- no translation found for notification_group_summary (3420621520561455358) -->
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categorías</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> categoría</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Esta aplicación no ha publicado ninguna notificación"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Ajustes adicionales de la aplicación"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Activado para todas las aplicaciones"</string>
@@ -3727,4 +3733,7 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Descubre tu nuevo tablet"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Descubre tu nuevo dispositivo"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Esta función no está disponible en este dispositivo"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"Estado del registro de IMS"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Registrado"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"No registrado"</string>
 </resources>

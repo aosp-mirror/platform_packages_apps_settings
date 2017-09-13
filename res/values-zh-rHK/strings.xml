@@ -1553,7 +1553,6 @@
     <string name="install_applications_title" msgid="4987712352256508946">"允許安裝所有來源的應用程式"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"最近開啟的應用程式"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"查看全部 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
-    <string name="recent_app_summary" msgid="3366446669844932300">"<xliff:g id="TIME">^1</xliff:g>前"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"來源不明的應用程式可能會侵害您的平板電腦和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致平板電腦損壞或資料遺失的責任。"</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"來源不明的應用程式可能會侵害您的手機和個人資料。安裝來自此來源的應用程式，即表示您同意承擔因使用這些應用程式而導致手機損壞或資料遺失的責任。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"進階設定"</string>
@@ -1972,12 +1971,19 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"在不使用應用程式時，應用程式可在背景中執行"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"在不使用應用程式時，應用程式的背景活動會受限制"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"不允許應用程式在背景中執行"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (7375400051141016808) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_title (2216249969149568871) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_text (7049624449246121981) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"充滿電後的螢幕用量"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"螢幕耗電量"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"流動網絡掃描"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g>前"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"充滿電後的應用程式用量 (<xliff:g id="TIME">^1</xliff:g>前)"</string>
-    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"充滿電 (<xliff:g id="TIME">^1</xliff:g>前) 後的裝置用電量"</string>
+    <!-- no translation found for power_usage_list_summary (6393929085382334341) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary_device (4461926045610455423) -->
+    <skip />
     <string name="screen_usage_summary" msgid="6687403051423153550">"充滿電後的螢幕開啟時間"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"充滿電後的裝置用量"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
@@ -2892,11 +2898,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"通知"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"應用程式通知"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"通知類別"</string>
-    <!-- no translation found for notification_group_title (7180506440133859601) -->
-    <skip />
+    <string name="notification_group_title" msgid="7180506440133859601">"通知類別群組"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要性"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"允許發出音效"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"永不顯示通知"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"不發出音效或顯示通知"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"不發出音效"</string>
@@ -2945,11 +2949,13 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式…"</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android 已禁止這個應用程式在此裝置上顯示通知"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android 已禁止在此裝置上顯示這個類別的通知"</string>
-    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
-    <skip />
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android 已禁止在此裝置上顯示這組通知"</string>
     <string name="notification_channels" msgid="5346841743182627500">"類別"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"其他"</string>
-    <!-- no translation found for notification_group_summary (3420621520561455358) -->
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個類別</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個類別</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"此應用程式未發佈任何通知"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"應用程式中的其他設定"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"已開啟所有應用程式的通知"</string>
@@ -3730,4 +3736,7 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"探索您的新平板電腦"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"探索您的新裝置"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"這部裝置不支援此功能"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"IMS 註冊狀態"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"已註冊"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"未註冊"</string>
 </resources>

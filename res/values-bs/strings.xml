@@ -1565,7 +1565,6 @@
     <string name="install_applications_title" msgid="4987712352256508946">"Dopusti sve izvore aplikacija"</string>
     <string name="recent_app_category_title" msgid="6673071268966003928">"Nedavno otvarane aplikacije"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"Prikaži sve aplikacije: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="recent_app_summary" msgid="3366446669844932300">"Prije <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Vaši podaci na tabletu i lični podaci su više izloženi napadima aplikacija iz nepoznatih izvora. Instaliranjem aplikacija iz takvih izvora, saglasni ste da ste vi odgovorni za bilo kakvu štetu na telefonu ili gubitak podataka koji mogu nastati korištenjem tih aplikacija."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Vaši podaci na telefonu i lični podaci više su izloženi napadima aplikacija iz nepoznatih izvora. Instaliranjem aplikacija iz takvih izvora, saglasni ste da ste vi odgovorni za bilo kakvu štetu na telefonu ili gubitak podataka koji mogu nastati korištenjem tih aplikacija."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Napredne postavke"</string>
@@ -1992,12 +1991,19 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"Aplikacija može raditi u pozadini kada se ne koristi"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Aktivnost aplikacije u pozadini je ograničena kada se ne koristi"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"Aplikaciji nije dopušteno da radi u pozadini"</string>
+    <!-- no translation found for background_activity_summary_whitelisted (7375400051141016808) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_title (2216249969149568871) -->
+    <skip />
+    <!-- no translation found for background_activity_warning_dialog_text (7049624449246121981) -->
+    <skip />
     <string name="device_screen_usage" msgid="3386088035570409683">"Korištenje ekrana od potpune napunjenosti"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Potrošnja ekrana"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Skeniranje mobilne mreže"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Prije <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Korištenje aplikacije od potpune punjenosti (prije <xliff:g id="TIME">^1</xliff:g>)"</string>
-    <string name="power_usage_list_summary_device" msgid="7036566616386864302">"Korištenje uređaja od potpune napunjenosti (prije <xliff:g id="TIME">^1</xliff:g>)"</string>
+    <!-- no translation found for power_usage_list_summary (6393929085382334341) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary_device (4461926045610455423) -->
+    <skip />
     <string name="screen_usage_summary" msgid="6687403051423153550">"Vrijeme koliko je ekran uključen od potpune napunjenosti"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Korištenje uređaja od potpune napunjenosti"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Potrošnja baterije od isključivanja s napajanja"</string>
@@ -2916,11 +2922,9 @@
     <string name="notifications_title" msgid="8086372779371204971">"Obavještenja"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Obavještenja o aplikaciji"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Kategorija obavještenja"</string>
-    <!-- no translation found for notification_group_title (7180506440133859601) -->
-    <skip />
+    <string name="notification_group_title" msgid="7180506440133859601">"Grupa kategorija obavještenja"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Značaj"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Dozvoli zvuk"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Nikad ne prikazuj obavještenja"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Bez ometanja zvukom ili prikazivanjem"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Bez zvuka"</string>
@@ -2970,11 +2974,14 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Učitavaju se aplikacije..."</string>
     <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android blokira prikaz obavještenja ove aplikacije na uređaju"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android blokira prikaz ove kategorije obavještenja na uređaju"</string>
-    <!-- no translation found for channel_group_notifications_off_desc (1620950416247316370) -->
-    <skip />
+    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android blokira prikaz ove kategorije obavještenja na uređaju"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Kategorije"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Ostalo"</string>
-    <!-- no translation found for notification_group_summary (3420621520561455358) -->
+    <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> kategorija</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> kategorije</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kategorija</item>
+    </plurals>
     <string name="no_channels" msgid="3077375508177744586">"Ova aplikacija nije objavila nikakva obavještenja"</string>
     <string name="app_settings_link" msgid="8894946007543660906">"Dodatne postavke u aplikaciji"</string>
     <string name="app_notification_listing_summary_zero" msgid="6482582965081108108">"Uključeno za sve aplikacije"</string>
@@ -3782,4 +3789,7 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Upoznajte se s novim tabletom"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Upoznajte se s novim uređajem"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ova funkcija nije dostupna na ovom uređaju"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"Stanje IMS registracije"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Registrirano"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Nije registrirano"</string>
 </resources>
