@@ -47,7 +47,7 @@ import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class IndexableDataCollectorTest {
+public class PreIndexDataCollectorTest {
 
     private final String AUTHORITY_ONE = "authority";
     private final String PACKAGE_ONE = "com.android.settings";
@@ -57,7 +57,7 @@ public class IndexableDataCollectorTest {
 
     Context mContext;
 
-    IndexableDataCollector mDataCollector;
+    PreIndexDataCollector mDataCollector;
 
     @Before
     public void setUp() {
@@ -66,7 +66,7 @@ public class IndexableDataCollectorTest {
         doReturn(mResolver).when(mContext).getContentResolver();
         //doReturn(mPackageManager).when(mContext).getPackageManager();
 
-        mDataCollector = spy(new IndexableDataCollector(mContext));
+        mDataCollector = spy(new PreIndexDataCollector(mContext));
     }
 
     @Test

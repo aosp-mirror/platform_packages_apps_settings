@@ -65,7 +65,7 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INT
 /**
  * Collects all data from {@link android.provider.SearchIndexablesProvider} to be indexed.
  */
-public class IndexableDataCollector {
+public class PreIndexDataCollector {
 
     private static final String TAG = "IndexableDataCollector";
 
@@ -78,7 +78,7 @@ public class IndexableDataCollector {
 
     private PreIndexData mIndexData;
 
-    public IndexableDataCollector(Context context) {
+    public PreIndexDataCollector(Context context) {
         mContext = context;
     }
 

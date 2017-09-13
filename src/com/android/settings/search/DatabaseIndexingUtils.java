@@ -174,18 +174,18 @@ public class DatabaseIndexingUtils {
         return null;
     }
 
-    static String normalizeHyphen(String input) {
+    public static String normalizeHyphen(String input) {
         return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
     }
 
-    static String normalizeString(String input) {
+    public static String normalizeString(String input) {
         final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
         final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
 
         return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
     }
 
-    static String normalizeKeywords(String input) {
+    public static String normalizeKeywords(String input) {
         return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
     }
 }
