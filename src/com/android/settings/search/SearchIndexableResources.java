@@ -46,6 +46,7 @@ import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettings;
+import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.AmbientDisplaySettings;
@@ -189,6 +190,7 @@ public final class SearchIndexableResources {
         addIndex(PrintSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_print);
         addIndex(DevelopmentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_development);
         addIndex(DeviceInfoSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(Status.class, NO_DATA_RES_ID, 0 /* icon */);
         addIndex(LegalSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(ZenModeVisualInterruptionSettings.class,
                 R.xml.zen_mode_visual_interruptions_settings,
