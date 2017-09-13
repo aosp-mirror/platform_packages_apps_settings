@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.wifi.WifiConfiguration.AP_BAND_2GHZ;
+import static android.net.wifi.WifiConfiguration.AP_BAND_5GHZ;
+
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.support.v7.preference.ListPreference;
@@ -23,9 +26,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-
-import static android.net.wifi.WifiConfiguration.AP_BAND_2GHZ;
-import static android.net.wifi.WifiConfiguration.AP_BAND_5GHZ;
 
 public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferenceController {
 
@@ -41,10 +41,14 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         super(context, listener);
         mBandEntries = mContext.getResources().getStringArray(R.array.wifi_ap_band_config_full);
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config != null) {
+        if (config == null) {
+            mBandIndex = 0;
+        } else if (is5GhzBandSupported()) {
             mBandIndex = config.apBand;
         } else {
-            mBandIndex = 0;
+            config.apBand = 0;
+            mWifiManager.setWifiApConfiguration(config);
+            mBandIndex = config.apBand;
         }
     }
 
@@ -77,10 +81,11 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     }
 
     private boolean is5GhzBandSupported() {
-        if (mBandIndex > 0) {
-            return true;
+        final String countryCode = mWifiManager.getCountryCode();
+        if (!mWifiManager.isDualBandSupported() || countryCode == null) {
+            return false;
         }
-        return mWifiManager.is5GHzBandSupported();
+        return true;
     }
 
     public int getBandIndex() {
