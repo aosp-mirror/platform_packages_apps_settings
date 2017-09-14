@@ -138,6 +138,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
 
     private void handleWifiApStateChanged(int state, int reason) {
         switch (state) {
+            case WifiManager.WIFI_AP_STATE_ENABLING:
             case WifiManager.WIFI_AP_STATE_ENABLED:
                 /**
                  * Summary on enable is handled by tether
