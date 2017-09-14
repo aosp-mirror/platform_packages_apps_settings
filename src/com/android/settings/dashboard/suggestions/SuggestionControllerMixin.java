@@ -26,6 +26,7 @@ import android.os.RemoteException;
 import android.service.settings.suggestions.ISuggestionService;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.VisibleForTesting;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -40,6 +41,8 @@ import java.util.List;
  */
 public class SuggestionControllerMixin implements LifecycleObserver, OnStart, OnStop {
 
+    @VisibleForTesting
+    static final String FEATURE_FLAG = "new_settings_suggestion";
     private static final String TAG = "SuggestionCtrlMixin";
     private static final boolean DEBUG = false;
 
@@ -48,6 +51,10 @@ public class SuggestionControllerMixin implements LifecycleObserver, OnStart, On
     private final ServiceConnection mServiceConnection;
 
     private ISuggestionService mRemoteService;
+
+    public static boolean isEnabled() {
+        return FeatureFlagUtils.isEnabled(FEATURE_FLAG);
+    }
 
     public SuggestionControllerMixin(Context context, Lifecycle lifecycle) {
         mContext = context.getApplicationContext();
@@ -77,11 +84,6 @@ public class SuggestionControllerMixin implements LifecycleObserver, OnStart, On
             mRemoteService = null;
             mContext.unbindService(mServiceConnection);
         }
-    }
-
-    public boolean isEnabled() {
-        // TODO: Set up feature flag
-        return true;
     }
 
     /**

@@ -21,13 +21,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.RemoteException;
 import android.service.settings.suggestions.ISuggestionService;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +39,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {
+                SettingsShadowSystemProperties.class
+        })
 public class SuggestionControllerMixinTest {
 
     @Mock
@@ -55,10 +60,23 @@ public class SuggestionControllerMixinTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
     }
 
+    @After
+    public void tearDown() {
+        SettingsShadowSystemProperties.clear();
+    }
+
     @Test
-    public void verifyIsEnabled() {
-        mMixin = new SuggestionControllerMixin(mContext, mLifecycle);
-        assertThat(mMixin.isEnabled()).isTrue();
+    public void systemPropertySet_verifyIsEnabled() {
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + SuggestionControllerMixin.FEATURE_FLAG, "true");
+        assertThat(SuggestionControllerMixin.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void systemPropertyNotSet_verifyIsDisabled() {
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + SuggestionControllerMixin.FEATURE_FLAG, "false");
+        assertThat(SuggestionControllerMixin.isEnabled()).isFalse();
     }
 
     @Test
