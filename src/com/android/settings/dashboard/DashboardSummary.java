@@ -38,6 +38,7 @@ import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionsChecks;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
@@ -60,7 +61,6 @@ public class DashboardSummary extends InstrumentedFragment
     private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
 
-
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
 
     private final Handler mHandler = new Handler();
@@ -72,6 +72,7 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
     private SuggestionsChecks mSuggestionsChecks;
+    private SuggestionControllerMixin mSuggestionControllerMixin;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
@@ -80,6 +81,12 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DASHBOARD_SUMMARY;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mSuggestionControllerMixin = new SuggestionControllerMixin(context, getLifecycle());
     }
 
     @Override
@@ -196,7 +203,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
-            mSuggestionParser, this /* SuggestionDismissController.Callback */);
+                mSuggestionParser, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
