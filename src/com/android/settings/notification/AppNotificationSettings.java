@@ -21,6 +21,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -191,7 +192,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             }
 
             int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
-            if (deletedChannelCount > 0) {
+            if (deletedChannelCount > 0 &&
+                    getPreferenceScreen().findPreference(KEY_DELETED) == null) {
                 mDeletedChannels = new FooterPreference(getPrefContext());
                 mDeletedChannels.setSelectable(false);
                 mDeletedChannels.setTitle(getResources().getQuantityString(
@@ -341,13 +343,20 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             case NotificationManager.IMPORTANCE_LOW:
                 return getContext().getString(R.string.notification_importance_low);
             case NotificationManager.IMPORTANCE_DEFAULT:
-                return getContext().getString(R.string.notification_importance_default);
+                if (hasValidSound(channel)) {
+                    return getContext().getString(R.string.notification_importance_default);
+                } else { // Silent
+                    return getContext().getString(R.string.notification_importance_low);
+                }
             case NotificationManager.IMPORTANCE_HIGH:
             case NotificationManager.IMPORTANCE_MAX:
             default:
-                return getContext().getString(R.string.notification_importance_high);
+                if (hasValidSound(channel)) {
+                    return getContext().getString(R.string.notification_importance_high);
+                } else { // Silent
+                    return getContext().getString(R.string.notification_importance_high_silent);
+                }
         }
-
     }
 
     private Comparator<NotificationChannel> mChannelComparator =

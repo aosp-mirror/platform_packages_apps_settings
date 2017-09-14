@@ -46,6 +46,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -506,4 +507,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             }
         }
     };
+
+    boolean hasValidSound(NotificationChannel channel) {
+        return channel.getSound() != null && !Uri.EMPTY.equals(channel.getSound());
+    }
 }
