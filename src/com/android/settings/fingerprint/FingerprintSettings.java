@@ -278,7 +278,8 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void retryFingerprint() {
-            if (mRemovalSidecar.inProgress()) {
+            if (mRemovalSidecar.inProgress()
+                    || 0 == mFingerprintManager.getEnrolledFingerprints(mUserId).size()) {
                 return;
             }
             if (!mInFingerprintLockout) {
