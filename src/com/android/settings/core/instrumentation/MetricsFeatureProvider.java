@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,18 +60,44 @@ public class MetricsFeatureProvider {
         }
     }
 
+    /**
+     * Logs a user action. Includes the elapsed time since the containing
+     * fragment has been visible.
+     */
+    public void action(VisibilityLoggerMixin visibilityLogger, int category, int value) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.action(category, value,
+                    sinceVisibleTaggedData(visibilityLogger.elapsedTimeSinceVisible()));
+        }
+    }
+
+    /**
+     * Logs a user action. Includes the elapsed time since the containing
+     * fragment has been visible.
+     */
+    public void action(VisibilityLoggerMixin visibilityLogger, int category, boolean value) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.action(category, value,
+                    sinceVisibleTaggedData(visibilityLogger.elapsedTimeSinceVisible()));
+        }
+    }
+
     public void action(Context context, int category, Pair<Integer, Object>... taggedData) {
         for (LogWriter writer : mLoggerWriters) {
             writer.action(context, category, taggedData);
         }
     }
 
+    /** @deprecated use {@link #action(VisibilityLoggerMixin, int, int)} */
+    @Deprecated
     public void action(Context context, int category, int value) {
         for (LogWriter writer : mLoggerWriters) {
             writer.action(context, category, value);
         }
     }
 
+    /** @deprecated use {@link #action(VisibilityLoggerMixin, int, boolean)} */
+    @Deprecated
     public void action(Context context, int category, boolean value) {
         for (LogWriter writer : mLoggerWriters) {
             writer.action(context, category, value);
@@ -99,7 +125,7 @@ public class MetricsFeatureProvider {
 
     public int getMetricsCategory(Object object) {
         if (object == null || !(object instanceof Instrumentable)) {
-            return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+            return MetricsEvent.VIEW_UNKNOWN;
         }
         return ((Instrumentable) object).getMetricsCategory();
     }
@@ -116,15 +142,19 @@ public class MetricsFeatureProvider {
                 // Not loggable
                 return;
             }
-            action(context, MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK, action,
-                    Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
+            action(context, MetricsEvent.ACTION_SETTINGS_TILE_CLICK, action,
+                    Pair.create(MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
             return;
         } else if (TextUtils.equals(cn.getPackageName(), context.getPackageName())) {
             // Going to a Setting internal page, skip click logging in favor of page's own
             // visibility logging.
             return;
         }
-        action(context, MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK, cn.flattenToString(),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
+        action(context, MetricsEvent.ACTION_SETTINGS_TILE_CLICK, cn.flattenToString(),
+                Pair.create(MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
+    }
+
+    private Pair<Integer, Object> sinceVisibleTaggedData(long timestamp) {
+        return Pair.create(MetricsEvent.NOTIFICATION_SINCE_VISIBLE_MILLIS, timestamp);
     }
 }

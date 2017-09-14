@@ -34,6 +34,16 @@ public interface LogWriter {
     void hidden(Context context, int category);
 
     /**
+     * Logs a user action.
+     */
+    void action(int category, int value, Pair<Integer, Object>... taggedData);
+
+    /**
+     * Logs a user action.
+     */
+    void action(int category, boolean value, Pair<Integer, Object>... taggedData);
+
+    /**
      * Logs an user action.
      */
     void action(Context context, int category, Pair<Integer, Object>... taggedData);
@@ -45,12 +55,16 @@ public interface LogWriter {
 
     /**
      * Logs an user action.
+     * @deprecated use {@link #action(int, int, Pair[])}
      */
+    @Deprecated
     void action(Context context, int category, int value);
 
     /**
      * Logs an user action.
+     * @deprecated use {@link #action(int, boolean, Pair[])}
      */
+    @Deprecated
     void action(Context context, int category, boolean value);
 
     /**
