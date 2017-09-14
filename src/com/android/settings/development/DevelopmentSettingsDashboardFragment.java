@@ -47,6 +47,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     private boolean mIsAvailable = true;
     private SwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mSwitchBarController;
+    private List<AbstractPreferenceController> mPreferenceControllers = new ArrayList<>();
 
     public DevelopmentSettingsDashboardFragment() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -91,11 +92,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (isChecked) {
                 EnableDevelopmentSettingWarningDialog.show(this /* host */);
             } else {
-                // TODO: Reset dangerous options (move logic from DevelopmentSettings).
-                // resetDangerousOptions();
                 DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
-                // TODO: Refresh all prefs' enabled state (move logic from DevelopmentSettings).
-                // setPrefsEnabledState(false);
+                for (AbstractPreferenceController controller : mPreferenceControllers) {
+                    if (controller instanceof DeveloperOptionsPreferenceController) {
+                        ((DeveloperOptionsPreferenceController) controller)
+                                .onDeveloperOptionsDisabled();
+                    }
+                }
             }
         }
     }
@@ -118,12 +121,17 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        mPreferenceControllers = buildPreferenceControllers(context, getLifecycle());
+        return mPreferenceControllers;
     }
 
     void onEnableDevelopmentOptionsConfirmed() {
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), true);
-        // TODO: Refresh all prefs' enabled state (move logic from DevelopmentSettings).
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof DeveloperOptionsPreferenceController) {
+                ((DeveloperOptionsPreferenceController) controller).onDeveloperOptionsEnabled();
+            }
+        }
     }
 
     void onEnableDevelopmentOptionsRejected() {
