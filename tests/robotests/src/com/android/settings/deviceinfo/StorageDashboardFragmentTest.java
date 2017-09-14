@@ -18,7 +18,11 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +30,7 @@ import android.app.Activity;
 import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.util.SparseArray;
+import android.view.View;
 
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
@@ -33,6 +38,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.drawer.CategoryKey;
+import android.support.v7.widget.RecyclerView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -112,6 +118,87 @@ public class StorageDashboardFragmentTest {
 
         assertThat(mFragment.getPrivateStorageInfo()).isNull();
         assertThat(mFragment.getAppsStorageResult()).isNull();
+    }
+
+    @Test
+    public void test_loadWhenQuotaOffIfVolumeInfoNotLoaded() {
+        View fakeView = mock(View.class, RETURNS_DEEP_STUBS);
+        RecyclerView fakeRecyclerView = mock(RecyclerView.class, RETURNS_DEEP_STUBS);
+        when(fakeView.findViewById(anyInt())).thenReturn(fakeView);
+        mFragment = spy(mFragment);
+        when(mFragment.getView()).thenReturn(fakeView);
+        when(mFragment.getListView()).thenReturn(fakeRecyclerView);
+
+        mFragment.maybeSetLoading(false);
+
+        verify(mFragment).setLoading(true, false);
+    }
+
+    @Test
+    public void test_dontLoadWhenQuotaOffIfVolumeInfoNotLoaded() {
+        View fakeView = mock(View.class, RETURNS_DEEP_STUBS);
+        RecyclerView fakeRecyclerView = mock(RecyclerView.class, RETURNS_DEEP_STUBS);
+        when(fakeView.findViewById(anyInt())).thenReturn(fakeView);
+        mFragment = spy(mFragment);
+        when(mFragment.getView()).thenReturn(fakeView);
+        when(mFragment.getListView()).thenReturn(fakeRecyclerView);
+
+        PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
+        mFragment.setPrivateStorageInfo(info);
+
+        mFragment.maybeSetLoading(false);
+
+        verify(mFragment, never()).setLoading(true, false);
+    }
+
+    @Test
+    public void test_loadWhenQuotaOnAndVolumeInfoLoadedButAppsMissing() {
+        View fakeView = mock(View.class, RETURNS_DEEP_STUBS);
+        RecyclerView fakeRecyclerView = mock(RecyclerView.class, RETURNS_DEEP_STUBS);
+        when(fakeView.findViewById(anyInt())).thenReturn(fakeView);
+        mFragment = spy(mFragment);
+        when(mFragment.getView()).thenReturn(fakeView);
+        when(mFragment.getListView()).thenReturn(fakeRecyclerView);
+
+        PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
+        mFragment.setPrivateStorageInfo(info);
+
+        mFragment.maybeSetLoading(true);
+
+        verify(mFragment).setLoading(true, false);
+    }
+
+    @Test
+    public void test_loadWhenQuotaOnAndAppsLoadedButVolumeInfoMissing() {
+        View fakeView = mock(View.class, RETURNS_DEEP_STUBS);
+        RecyclerView fakeRecyclerView = mock(RecyclerView.class, RETURNS_DEEP_STUBS);
+        when(fakeView.findViewById(anyInt())).thenReturn(fakeView);
+        mFragment = spy(mFragment);
+        when(mFragment.getView()).thenReturn(fakeView);
+        when(mFragment.getListView()).thenReturn(fakeRecyclerView);
+        mFragment.setAppsStorageResult(new SparseArray<>());
+
+        mFragment.maybeSetLoading(true);
+
+        verify(mFragment).setLoading(true, false);
+    }
+
+    @Test
+    public void test_dontLoadWhenQuotaOnAndAllLoaded() {
+        View fakeView = mock(View.class, RETURNS_DEEP_STUBS);
+        RecyclerView fakeRecyclerView = mock(RecyclerView.class, RETURNS_DEEP_STUBS);
+        when(fakeView.findViewById(anyInt())).thenReturn(fakeView);
+        mFragment = spy(mFragment);
+        when(mFragment.getView()).thenReturn(fakeView);
+        when(mFragment.getListView()).thenReturn(fakeRecyclerView);
+
+        mFragment.setAppsStorageResult(new SparseArray<>());
+        PrivateStorageInfo storageInfo = new PrivateStorageInfo(0, 0);
+        mFragment.setPrivateStorageInfo(storageInfo);
+
+        mFragment.maybeSetLoading(true);
+
+        verify(mFragment, never()).setLoading(true, false);
     }
 
     @Test
