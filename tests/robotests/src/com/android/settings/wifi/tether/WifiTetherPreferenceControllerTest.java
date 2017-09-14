@@ -175,20 +175,29 @@ public class WifiTetherPreferenceControllerTest {
     }
 
     @Test
-    public void testReceiver_apStateChangedToEnablingOrEnabled_shouldNotUpdatePreferenceSummary() {
+    public void testReceiver_apStateChangedToEnabling_shouldUpdatePreferenceSummary() {
+        mController.displayPreference(mScreen);
+        receiveApStateChangedBroadcast(WifiManager.WIFI_AP_STATE_ENABLING);
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                RuntimeEnvironment.application.getString(R.string.wifi_tether_starting));
+    }
+
+    @Test
+    public void testReceiver_apStateChangedToEnabled_shouldNotUpdatePreferenceSummary() {
         mController.displayPreference(mScreen);
         receiveApStateChangedBroadcast(WifiManager.WIFI_AP_STATE_DISABLED);
         assertThat(mPreference.getSummary().toString()).isEqualTo(
                 RuntimeEnvironment.application.getString(R.string.wifi_hotspot_off_subtext));
 
-        // When turning on the hotspot, we receive STATE_ENABLING followed by STATE_ENABLED. Neither
-        // of these should change the summary.
+        // When turning on the hotspot, we receive STATE_ENABLING followed by STATE_ENABLED. The
+        // first should change the status to wifi_tether_starting, and the second should not change
+        // this.
         receiveApStateChangedBroadcast(WifiManager.WIFI_AP_STATE_ENABLING);
         assertThat(mPreference.getSummary().toString()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.wifi_hotspot_off_subtext));
+                RuntimeEnvironment.application.getString(R.string.wifi_tether_starting));
         receiveApStateChangedBroadcast(WifiManager.WIFI_AP_STATE_ENABLED);
         assertThat(mPreference.getSummary().toString()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.wifi_hotspot_off_subtext));
+                RuntimeEnvironment.application.getString(R.string.wifi_tether_starting));
     }
 
     @Test
