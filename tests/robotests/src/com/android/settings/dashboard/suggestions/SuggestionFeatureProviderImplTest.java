@@ -35,7 +35,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings.Secure;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
@@ -60,6 +62,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -93,6 +97,8 @@ public class SuggestionFeatureProviderImplTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private SharedPreferences mSharedPreferences;
+    @Captor
+    private ArgumentCaptor<Pair> mTaggedDataCaptor = ArgumentCaptor.forClass(Pair.class);
 
     private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
@@ -335,7 +341,10 @@ public class SuggestionFeatureProviderImplTest {
         verify(mFactory.metricsFeatureProvider).action(
                 eq(mContext),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
+                anyString(),
+                mTaggedDataCaptor.capture());
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
         verify(mContext, never()).getPackageManager();
     }
 
@@ -356,8 +365,10 @@ public class SuggestionFeatureProviderImplTest {
         verify(mFactory.metricsFeatureProvider).action(
                 eq(mContext),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
-
+                anyString(),
+                mTaggedDataCaptor.capture());
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
         verify(mContext.getPackageManager())
                 .setComponentEnabledSetting(mSuggestion.intent.getComponent(),
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
