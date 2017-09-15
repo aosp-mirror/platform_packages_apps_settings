@@ -104,9 +104,7 @@ public class StorageDashboardFragment extends DashboardFragment
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         initializeCacheProvider();
-        if (mAppsResult == null || mStorageInfo == null) {
-            setLoading(true, false);
-        }
+        maybeSetLoading(isQuotaSupported());
     }
 
     @Override
@@ -124,21 +122,23 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void onReceivedSizes() {
-        if (mStorageInfo == null || mAppsResult == null) {
-            return;
+        if (mStorageInfo != null) {
+            long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
+            mSummaryController.updateBytes(privateUsedBytes, mStorageInfo.totalBytes);
+            mPreferenceController.setVolume(mVolume);
+            mPreferenceController.setUsedSize(privateUsedBytes);
+            mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
+            for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
+                AbstractPreferenceController controller = mSecondaryUsers.get(i);
+                if (controller instanceof SecondaryUserController) {
+                    SecondaryUserController userController = (SecondaryUserController) controller;
+                    userController.setTotalSize(mStorageInfo.totalBytes);
+                }
+            }
         }
 
-        long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
-        mSummaryController.updateBytes(privateUsedBytes, mStorageInfo.totalBytes);
-        mPreferenceController.setVolume(mVolume);
-        mPreferenceController.setUsedSize(privateUsedBytes);
-        mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
-        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
-            AbstractPreferenceController controller = mSecondaryUsers.get(i);
-            if (controller instanceof SecondaryUserController) {
-                SecondaryUserController userController = (SecondaryUserController) controller;
-                userController.setTotalSize(mStorageInfo.totalBytes);
-            }
+        if (mAppsResult == null) {
+            return;
         }
 
         mPreferenceController.onLoadFinished(mAppsResult, UserHandle.myUserId());
@@ -272,8 +272,18 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @VisibleForTesting
+    public void setPrivateStorageInfo(PrivateStorageInfo info) {
+        mStorageInfo = info;
+    }
+
+    @VisibleForTesting
     public SparseArray<StorageAsyncLoader.AppsStorageResult> getAppsStorageResult() {
         return mAppsResult;
+    }
+
+    @VisibleForTesting
+    public void setAppsStorageResult(SparseArray<StorageAsyncLoader.AppsStorageResult> info) {
+        mAppsResult = info;
     }
 
     @VisibleForTesting
@@ -289,6 +299,16 @@ public class StorageDashboardFragment extends DashboardFragment
         mAppsResult = loaderResult;
     }
 
+    @VisibleForTesting
+    public void maybeSetLoading(boolean isQuotaSupported) {
+        // If we have fast stats, we load until both have loaded.
+        // If we have slow stats, we load when we get the total volume sizes.
+        if ((isQuotaSupported && (mStorageInfo == null || mAppsResult == null)) ||
+                (!isQuotaSupported && mStorageInfo == null)) {
+            setLoading(true /* loading */, false /* animate */);
+        }
+    }
+
     private void initializeCacheProvider() {
         mCachedStorageValuesHelper =
                 new CachedStorageValuesHelper(getContext(), UserHandle.myUserId());
@@ -301,6 +321,11 @@ public class StorageDashboardFragment extends DashboardFragment
             mCachedStorageValuesHelper.cacheResult(
                     mStorageInfo, mAppsResult.get(UserHandle.myUserId()));
         }
+    }
+
+    private boolean isQuotaSupported() {
+        final StorageStatsManager stats = getActivity().getSystemService(StorageStatsManager.class);
+        return stats.isQuotaSupported(mVolume.fsUuid);
     }
 
     /**
