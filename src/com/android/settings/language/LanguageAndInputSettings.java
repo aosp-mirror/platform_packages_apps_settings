@@ -86,7 +86,8 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.language_and_input;
+        return mProgressiveDisclosureMixin.isEnabled()
+                ? R.xml.language_and_input : R.xml.language_and_input_new_advance_button;
     }
 
     @Override

@@ -19,6 +19,8 @@ package com.android.settings.applications;
 import android.content.Context;
 
 import android.os.UserManager;
+
+import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.XmlTestUtils;
@@ -27,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -47,7 +50,10 @@ public class AppAndNotificationDashboardFragmentTest {
         when(context.getSystemService(Context.USER_SERVICE)).thenReturn(manager);
         final List<String> niks = AppAndNotificationDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
-        final int xmlId = (new AppAndNotificationDashboardFragment()).getPreferenceScreenResId();
+        AppAndNotificationDashboardFragment fragment = new AppAndNotificationDashboardFragment();
+        ReflectionHelpers.setField(fragment, "mProgressiveDisclosureMixin",
+                mock(ProgressiveDisclosureMixin.class));
+        final int xmlId = fragment.getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 

@@ -24,6 +24,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -42,6 +43,8 @@ import java.util.List;
 public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickListener,
         LifecycleObserver, OnCreate, OnSaveInstanceState {
 
+    @VisibleForTesting
+    static final String FEATURE_FLAG_NEW_ADVANCE_BUTTON = "new_settings_advance_button";
     private static final String TAG = "ProgressiveDisclosure";
     private static final String STATE_USER_EXPANDED = "state_user_expanded";
     private static final int DEFAULT_TILE_LIMIT = 300;
@@ -102,11 +105,17 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         return false;
     }
 
+    public boolean isEnabled() {
+        return !FeatureFlagUtils.isEnabled(FEATURE_FLAG_NEW_ADVANCE_BUTTON);
+    }
+
     /**
      * Sets the threshold to start collapsing preferences when there are too many.
      */
     public void setTileLimit(int limit) {
-        mTileLimit = limit;
+        if (isEnabled()) {
+            mTileLimit = limit;
+        }
     }
 
     /**

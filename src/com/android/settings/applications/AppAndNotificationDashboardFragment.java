@@ -60,7 +60,8 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.app_and_notification;
+        return mProgressiveDisclosureMixin.isEnabled()
+                ? R.xml.app_and_notification : R.xml.app_and_notification_new_advance_button;
     }
 
     @Override
