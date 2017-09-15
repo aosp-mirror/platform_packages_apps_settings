@@ -26,7 +26,9 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +41,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
+import static android.util.FeatureFlagUtils.FFLAG_PREFIX;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.nullable;
@@ -53,7 +56,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {SettingsShadowSystemProperties.class})
 public class ProgressiveDisclosureTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -78,6 +82,25 @@ public class ProgressiveDisclosureTest {
         ReflectionHelpers.setField(mMixin, "mExpandButton", mExpandButton);
         mPreference = new Preference(mAppContext);
         mPreference.setKey("test");
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowSystemProperties.clear();
+    }
+
+    @Test
+    public void systemPropertySetForNewAdvancedButtonFeature_verifyIsDisabled() {
+        SettingsShadowSystemProperties.set(
+                FFLAG_PREFIX + ProgressiveDisclosureMixin.FEATURE_FLAG_NEW_ADVANCE_BUTTON, "true");
+        assertThat(mMixin.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void systemPropertyNotSet_verifyIsDisabled() {
+        SettingsShadowSystemProperties.set(
+                FFLAG_PREFIX + ProgressiveDisclosureMixin.FEATURE_FLAG_NEW_ADVANCE_BUTTON, "false");
+        assertThat(mMixin.isEnabled()).isTrue();
     }
 
     @Test

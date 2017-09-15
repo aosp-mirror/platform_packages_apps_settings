@@ -109,7 +109,8 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.sound_settings;
+        return mProgressiveDisclosureMixin.isEnabled()
+                ? R.xml.sound_settings : R.xml.sound_settings_new_advance_button;
     }
 
     @Override

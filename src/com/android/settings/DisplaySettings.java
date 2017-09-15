@@ -73,7 +73,8 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.display_settings;
+        return mProgressiveDisclosureMixin.isEnabled()
+                ? R.xml.display_settings : R.xml.display_settings_new_advance_button;
     }
 
     @Override

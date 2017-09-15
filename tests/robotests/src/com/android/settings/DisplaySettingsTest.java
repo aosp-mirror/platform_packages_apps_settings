@@ -2,8 +2,11 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.Context;
 
+import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowPowerManagerWrapper;
@@ -13,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +29,9 @@ public class DisplaySettingsTest {
     @Config(shadows = ShadowPowerManagerWrapper.class)
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
         final Context context = RuntimeEnvironment.application;
-//        PowerManager wrapper = mock(PowerManager.class);
-//        doReturn(wrapper).when(context).getSystemService(Context.POWER_SERVICE);
         final DisplaySettings fragment = new DisplaySettings();
+        ReflectionHelpers.setField(fragment, "mProgressiveDisclosureMixin",
+                mock(ProgressiveDisclosureMixin.class));
         final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
                 fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();
