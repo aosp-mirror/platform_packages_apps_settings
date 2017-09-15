@@ -30,6 +30,7 @@ import android.support.v7.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

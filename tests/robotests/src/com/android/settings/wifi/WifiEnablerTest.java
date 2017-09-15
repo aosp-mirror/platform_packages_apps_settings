@@ -24,6 +24,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

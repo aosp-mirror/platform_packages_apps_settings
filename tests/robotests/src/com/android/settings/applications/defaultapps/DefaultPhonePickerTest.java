@@ -16,14 +16,13 @@
 
 package com.android.settings.applications.defaultapps;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -27,11 +27,11 @@ import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.password.IFingerprintManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -58,7 +58,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 public class SetupFingerprintEnrollFindSensorTest {
 
     @Mock
-    private IFingerprintManager mFingerprintManager;
+    private FingerprintManagerWrapper mFingerprintManager;
 
     private SetupFingerprintEnrollFindSensor mActivity;
 

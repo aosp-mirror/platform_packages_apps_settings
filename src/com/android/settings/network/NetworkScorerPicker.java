@@ -30,6 +30,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 
 import java.util.List;
 

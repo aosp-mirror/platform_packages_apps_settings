@@ -21,9 +21,9 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -50,7 +50,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     @Override
     public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
         return new InstalledAppResultLoader(
-                context, new PackageManagerWrapperImpl(context.getPackageManager()),
+                context, new PackageManagerWrapper(context.getPackageManager()),
                 cleanQuery(query), getSiteMapManager());
     }
 

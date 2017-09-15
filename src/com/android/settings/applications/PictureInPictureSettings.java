@@ -36,6 +36,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.wrapper.ActivityInfoWrapper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,7 +64,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         if (activities != null) {
             wrappedActivities = new ActivityInfoWrapper[activities.length];
             for (int i = 0; i < activities.length; i++) {
-                wrappedActivities[i] = new ActivityInfoWrapperImpl(activities[i]);
+                wrappedActivities[i] = new ActivityInfoWrapper(activities[i]);
             }
         }
         return checkPackageHasPictureInPictureActivities(packageName, wrappedActivities);

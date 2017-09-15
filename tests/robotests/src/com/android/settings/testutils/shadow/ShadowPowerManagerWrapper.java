@@ -17,7 +17,7 @@
 
 package com.android.settings.testutils.shadow;
 
-import com.android.settings.display.PowerManagerWrapper;
+import com.android.settings.wrapper.PowerManagerWrapper;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

@@ -24,7 +24,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -106,6 +105,7 @@ import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -1236,7 +1236,7 @@ public class InstalledAppDetails extends AppInfoBase
 
         if (pref != null) {
             pref.setSummary(DefaultHomePreferenceController.isHomeDefault(mPackageName,
-                    new PackageManagerWrapperImpl(context.getPackageManager()))
+                    new PackageManagerWrapper(context.getPackageManager()))
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_browser");

@@ -24,9 +24,9 @@ import android.text.TextUtils;
 
 import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;

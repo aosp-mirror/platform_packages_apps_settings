@@ -23,8 +23,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
 
-import com.android.settings.applications.AutofillManagerWrapper;
-import com.android.settings.applications.AutofillManagerWrapperImpl;
+import com.android.settings.wrapper.AutofillManagerWrapper;
 
 public class DefaultAutofillPreferenceController extends DefaultAppPreferenceController {
     private AutofillManagerWrapper mAutofillManager;
@@ -32,7 +31,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
     public DefaultAutofillPreferenceController(Context context) {
         super(context);
 
-        mAutofillManager = new AutofillManagerWrapperImpl(
+        mAutofillManager = new AutofillManagerWrapper(
                 mContext.getSystemService(AutofillManager.class));
     }
 

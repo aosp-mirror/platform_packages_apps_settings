@@ -30,6 +30,7 @@ import android.util.KeyValueListParser;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.wrapper.KeyValueListParserWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class AnomalyDetectionPolicyTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mKeyValueListParserWrapper = spy(
-                new KeyValueListParserWrapperImpl(new KeyValueListParser(',')));
+                new KeyValueListParserWrapper(new KeyValueListParser(',')));
     }
 
     @Test

@@ -32,6 +32,7 @@ import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
+import com.android.settings.wrapper.WallpaperManagerWrapper;
 import com.android.settingslib.drawer.Tile;
 
 /**

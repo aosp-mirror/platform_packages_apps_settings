@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
 import android.content.Intent;
 import android.content.pm.IPackageManager;
@@ -23,42 +23,72 @@ import android.content.pm.ParceledListSlice;
 import android.content.pm.ResolveInfo;
 import android.os.RemoteException;
 
-public class IPackageManagerWrapperImpl implements IPackageManagerWrapper {
+/**
+ * This class replicates a subset of the android.content.pm.IPackageManager (PMS). The class
+ * exists so that we can use a thin wrapper around the PMS in production code and a mock in tests.
+ * We cannot directly mock or shadow the PMS, because some of the methods we rely on are newer than
+ * the API version supported by Robolectric.
+ */
+public class IPackageManagerWrapper {
 
     private final IPackageManager mPms;
 
-    public IPackageManagerWrapperImpl(IPackageManager pms) {
+    public IPackageManagerWrapper(IPackageManager pms) {
         mPms = pms;
     }
 
-    @Override
+    /**
+     * Calls {@code IPackageManager.checkUidPermission()}.
+     *
+     * @see android.content.pm.IPackageManager#checkUidPermission
+     */
     public int checkUidPermission(String permName, int uid) throws RemoteException {
         return mPms.checkUidPermission(permName, uid);
     }
 
-    @Override
+    /**
+     * Calls {@code IPackageManager.findPersistentPreferredActivity()}.
+     *
+     * @see android.content.pm.IPackageManager#findPersistentPreferredActivity
+     */
     public ResolveInfo findPersistentPreferredActivity(Intent intent, int userId)
             throws RemoteException {
         return mPms.findPersistentPreferredActivity(intent, userId);
     }
 
-    @Override
+    /**
+     * Calls {@code IPackageManager.getPackageInfo()}.
+     *
+     * @see android.content.pm.IPackageManager#getPackageInfo
+     */
     public PackageInfo getPackageInfo(String packageName, int flags, int userId)
             throws RemoteException {
         return mPms.getPackageInfo(packageName, flags, userId);
     }
 
-    @Override
+    /**
+     * Calls {@code IPackageManager.getAppOpPermissionPackages()}.
+     *
+     * @see android.content.pm.IPackageManager#getAppOpPermissionPackages
+     */
     public String[] getAppOpPermissionPackages(String permissionName) throws RemoteException {
         return mPms.getAppOpPermissionPackages(permissionName);
     }
 
-    @Override
+    /**
+     * Calls {@code IPackageManager.isPackageAvailable()}.
+     *
+     * @see android.content.pm.IPackageManager#isPackageAvailable
+     */
     public boolean isPackageAvailable(String packageName, int userId) throws RemoteException {
         return mPms.isPackageAvailable(packageName, userId);
     }
 
-    @Override
+    /**
+     * Calls {@code IPackageManager.getPackagesHoldingPermissions()}.
+     *
+     * @see android.content.pm.IPackageManager#getPackagesHoldingPermissions
+     */
     public ParceledListSlice<PackageInfo> getPackagesHoldingPermissions(
         String[] permissions, int flags, int userId) throws RemoteException {
         return mPms.getPackagesHoldingPermissions(permissions, flags, userId);

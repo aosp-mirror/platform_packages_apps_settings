@@ -36,7 +36,7 @@ import android.util.SparseArray;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.UserManagerWrapper;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.R;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;

@@ -18,7 +18,9 @@ package com.android.settings.applications;
 
 import android.content.pm.ApplicationInfo;
 import android.os.UserManager;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.IPackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * Lists installed apps across all users that have been granted one or more specific permissions by

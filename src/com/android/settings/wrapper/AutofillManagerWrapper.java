@@ -14,28 +14,46 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
 import android.view.autofill.AutofillManager;
 
 /**
- * This interface replicates a subset of the android.view.autofill.AutofillManager (AFM). The
- * interface exists so that we can use a thin wrapper around the AFM in production code and a mock
+ * This class replicates a subset of the android.view.autofill.AutofillManager (AFM). The
+ * class exists so that we can use a thin wrapper around the AFM in production code and a mock
  * in tests. We cannot directly mock or shadow the AFM, because some of the methods we rely on are
  * newer than the API version supported by Robolectric.
  */
-public interface AutofillManagerWrapper {
+public class AutofillManagerWrapper {
+    private final AutofillManager mAfm;
+
+    public AutofillManagerWrapper(AutofillManager afm) {
+        mAfm = afm;
+    }
+
     /**
      * Calls {@code AutofillManager.hasAutofillFeature()}.
      *
      * @see AutofillManager#hasAutofillFeature
      */
-    public boolean hasAutofillFeature();
+    public boolean hasAutofillFeature() {
+        if (mAfm == null) {
+            return false;
+        }
+
+        return mAfm.hasAutofillFeature();
+    }
 
     /**
      * Calls {@code AutofillManager.isAutofillSupported()}.
      *
      * @see AutofillManager#isAutofillSupported
      */
-    public boolean isAutofillSupported();
+    public boolean isAutofillSupported() {
+        if (mAfm == null) {
+            return false;
+        }
+
+        return mAfm.isAutofillSupported();
+    }
 }

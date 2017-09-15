@@ -42,6 +42,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,7 +144,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         refreshUi(mCategory.getContext());
         // Show total number of installed apps as See all's summary.
         new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                new PackageManagerWrapperImpl(mContext.getPackageManager())) {
+                new PackageManagerWrapper(mContext.getPackageManager())) {
             @Override
             protected void onCountComplete(int num) {
                 if (mHasRecentApps) {

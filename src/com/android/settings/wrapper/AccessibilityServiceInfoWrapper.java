@@ -14,24 +14,34 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.wrapper;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 
 /**
- * This interface replicates a subset of the
- * {@link android.accessibilityservice.AccessibilityServiceInfo}. The interface
+ * This class replicates a subset of the
+ * {@link android.accessibilityservice.AccessibilityServiceInfo}. The class
  * exists so that we can use a thin wrapper around it in production code and a mock in tests.
  * We cannot directly mock or shadow it, because some of the methods we rely on are newer than
  * the API version supported by Robolectric.
  */
-public interface AccessibilityServiceInfoWrapper {
+public class AccessibilityServiceInfoWrapper {
+
+    private final AccessibilityServiceInfo mServiceInfo;
+
+    public AccessibilityServiceInfoWrapper(AccessibilityServiceInfo serviceInfo) {
+        mServiceInfo = serviceInfo;
+    }
 
     /**
      * Returns the real {@code AccessibilityServiceInfo} object.
      */
-    AccessibilityServiceInfo getAccessibilityServiceInfo();
+    public AccessibilityServiceInfo getAccessibilityServiceInfo() {
+        return mServiceInfo;
+    }
 
-    ComponentName getComponentName();
+    public ComponentName getComponentName() {
+        return mServiceInfo.getComponentName();
+    }
 }

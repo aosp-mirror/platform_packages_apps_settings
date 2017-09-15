@@ -16,7 +16,6 @@
 
 package com.android.settings.datausage;
 
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
@@ -39,12 +38,12 @@ import android.util.ArraySet;
 import android.view.View;
 
 import com.android.settings.TestConfig;
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package com.android.settings.testutils.shadow;
 
 import android.content.Context;
-import com.android.settings.network.RestrictedLockUtilsWrapper;
+import com.android.settings.wrapper.RestrictedLockUtilsWrapper;
 import org.robolectric.annotation.Implements;
 
 /**

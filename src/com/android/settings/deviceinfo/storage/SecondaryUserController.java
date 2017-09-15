@@ -27,9 +27,9 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.SparseArray;
 
 import com.android.settings.Utils;
-import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;

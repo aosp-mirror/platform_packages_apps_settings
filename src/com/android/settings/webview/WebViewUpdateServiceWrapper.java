@@ -28,6 +28,8 @@ import android.webkit.WebViewProviderInfo;
 import android.widget.Toast;
 
 import com.android.settings.R;
+import com.android.settings.wrapper.UserPackageWrapper;
+import com.android.settings.wrapper.UserPackageWrapperImpl;
 
 import java.util.ArrayList;
 import java.util.List;

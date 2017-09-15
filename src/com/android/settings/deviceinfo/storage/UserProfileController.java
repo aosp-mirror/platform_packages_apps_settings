@@ -30,10 +30,10 @@ import android.util.SparseArray;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
-import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
+import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
