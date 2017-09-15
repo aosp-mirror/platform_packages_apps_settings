@@ -16,10 +16,13 @@
 
 package com.android.settings.development;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.widget.Switch;
 
@@ -40,7 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -104,6 +107,33 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onOemUnlockDialogConfirmed() {
+        final OemUnlockPreferenceController controller = getDevelopmentOptionsController(
+                OemUnlockPreferenceController.class);
+        controller.onOemUnlockConfirmed();
+    }
+
+    @Override
+    public void onOemUnlockDialogDismissed() {
+        final OemUnlockPreferenceController controller = getDevelopmentOptionsController(
+                OemUnlockPreferenceController.class);
+        controller.onOemUnlockDismissed();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof DeveloperOptionsPreferenceController) {
+                if (((DeveloperOptionsPreferenceController) controller).onActivityResult(
+                        requestCode, resultCode, data)) {
+                    return;
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -121,7 +151,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        mPreferenceControllers = buildPreferenceControllers(context, getLifecycle());
+        mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
+                this /* devOptionsDashboardFragment */);
         return mPreferenceControllers;
     }
 
@@ -140,12 +171,17 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
-
+        controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         return controllers;
+    }
+
+    @VisibleForTesting
+    <T extends AbstractPreferenceController> T getDevelopmentOptionsController(Class<T> clazz) {
+        return getPreferenceController(clazz);
     }
 
     /**
@@ -171,7 +207,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
+                    return buildPreferenceControllers(context, null /* activity */,
+                            null /* lifecycle */, null /* devOptionsDashboardFragment */);
                 }
             };
 }
