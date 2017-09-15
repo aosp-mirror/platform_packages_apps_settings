@@ -222,15 +222,22 @@ public class DashboardData {
         final int hiddenSuggestion =
                 hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
 
+        final boolean hasSuggestionAndCollapsed = hasSuggestions
+                && mSuggestionConditionMode == HEADER_MODE_COLLAPSED;
+        final boolean onlyHasConditionAndCollapsed = !hasSuggestions
+                && hasConditions
+                && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED;
+
         /* Top suggestion/condition header. This will be present when there is any suggestion
-         * and the mode is collapsed, or it only has conditions and the mode is not fully
-         * expanded. */
+         * and the mode is collapsed */
         addToItemList(new SuggestionConditionHeaderData(conditions, hiddenSuggestion),
                 R.layout.suggestion_condition_header,
-                STABLE_ID_SUGGESTION_CONDITION_TOP_HEADER,
-                hasSuggestions && mSuggestionConditionMode == HEADER_MODE_COLLAPSED
-                        || !hasSuggestions && hasConditions
-                        && mSuggestionConditionMode != HEADER_MODE_FULLY_EXPANDED);
+                STABLE_ID_SUGGESTION_CONDITION_TOP_HEADER, hasSuggestionAndCollapsed);
+
+        /* Use mid header if there is only condition & it's in collapsed mode */
+        addToItemList(new SuggestionConditionHeaderData(conditions, hiddenSuggestion),
+                R.layout.suggestion_condition_header,
+                STABLE_ID_SUGGESTION_CONDITION_MIDDLE_HEADER, onlyHasConditionAndCollapsed);
 
         /* Suggestion container. This is the card view that contains the list of suggestions.
          * This will be added whenever the suggestion list is not empty */
