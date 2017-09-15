@@ -117,6 +117,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final String EXTRA_VOLUME_NAME = "volumeName";
     public static final String EXTRA_STORAGE_TYPE = "storageType";
     public static final String EXTRA_WORK_ONLY = "workProfileOnly";
+    public static final String EXTRA_WORK_ID = "workId";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -222,6 +223,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
     public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
 
+    private static final int NO_USER_SPECIFIED = -1;
+
     // sort order
     private int mSortOrder = R.id.sort_order_alpha;
 
@@ -282,6 +285,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private String mVolumeUuid;
     private int mStorageType;
     private boolean mIsWorkOnly;
+    private int mWorkUserId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -338,6 +342,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
         mFilter = getDefaultFilter();
         mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
+        mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
@@ -378,13 +383,15 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mApplications.mHasReceivedBridgeCallback =
                         savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
+            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.getUserId(mCurrentUid);
             if (mStorageType == STORAGE_TYPE_MUSIC) {
                 Context context = getContext();
-                mApplications.setExtraViewController(new MusicViewHolderController(
-                        context,
-                        new StorageStatsSource(context),
-                        mVolumeUuid,
-                        UserHandle.of(UserHandle.getUserId(mCurrentUid))));
+                mApplications.setExtraViewController(
+                        new MusicViewHolderController(
+                                context,
+                                new StorageStatsSource(context),
+                                mVolumeUuid,
+                                UserHandle.of(userId)));
             } else if (mStorageType == STORAGE_TYPE_PHOTOS_VIDEOS) {
                 Context context = getContext();
                 mApplications.setExtraViewController(
@@ -392,7 +399,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                                 context,
                                 new StorageStatsSource(context),
                                 mVolumeUuid,
-                                UserHandle.of(UserHandle.getUserId(mCurrentUid))));
+                                UserHandle.of(userId)));
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
