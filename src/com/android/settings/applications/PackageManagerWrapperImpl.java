@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDeleteObserver;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
@@ -44,6 +45,11 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     @Override
     public List<ApplicationInfo> getInstalledApplicationsAsUser(int flags, int userId) {
         return mPm.getInstalledApplicationsAsUser(flags, userId);
+    }
+
+    @Override
+    public List<PackageInfo> getInstalledPackagesAsUser(int flags, int userId) {
+        return mPm.getInstalledPackagesAsUser(flags, userId);
     }
 
     @Override
