@@ -27,7 +27,6 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.ContentValues;
@@ -287,6 +286,7 @@ public class DatabaseIndexingManagerTest {
     @Test
     public void testLocaleUpdated_afterFullIndexing_localeAdded() {
         mManager.performIndexing();
+
         assertThat(IndexDatabaseHelper.isLocaleAlreadyIndexed(mContext, localeStr)).isTrue();
     }
 
@@ -302,8 +302,6 @@ public class DatabaseIndexingManagerTest {
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo(updatedTitle);
         // Normalized Title
@@ -312,10 +310,6 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(4)).isEqualTo(updatedSummaryOn);
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEqualTo(normalizedSummaryOn);
-        // Summary Off
-        assertThat(cursor.getString(6)).isEqualTo(updatedSummaryOff);
-        // Summary off normalized
-        assertThat(cursor.getString(7)).isEqualTo(normalizedSummaryOff);
         // Entries
         assertThat(cursor.getString(8)).isEqualTo(entries);
         // Keywords
