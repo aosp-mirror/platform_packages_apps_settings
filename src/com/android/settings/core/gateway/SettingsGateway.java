@@ -281,6 +281,7 @@ public class SettingsGateway {
             // Home page > Apps & Notifications
             Settings.UserSettingsActivity.class.getName(),
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
+            Settings.AdvancedAppsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Security & screen lock
