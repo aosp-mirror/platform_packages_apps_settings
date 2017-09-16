@@ -17,11 +17,9 @@
 package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.service.settings.suggestions.ISuggestionService;
 import android.util.FeatureFlagUtils;
 
 import com.android.settings.TestConfig;
@@ -36,32 +34,32 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                SettingsShadowSystemProperties.class
+                SettingsShadowSystemProperties.class,
+                ShadowSuggestionController.class
         })
 public class SuggestionControllerMixinTest {
 
     @Mock
     private Context mContext;
-    @Mock
-    private ISuggestionService mRemoteService;
     private Lifecycle mLifecycle;
     private SuggestionControllerMixin mMixin;
-
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLifecycle = new Lifecycle();
         when(mContext.getApplicationContext()).thenReturn(mContext);
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + SuggestionControllerMixin.FEATURE_FLAG, "true");
     }
 
     @After
     public void tearDown() {
+        ShadowSuggestionController.reset();
         SettingsShadowSystemProperties.clear();
     }
 
@@ -80,12 +78,22 @@ public class SuggestionControllerMixinTest {
     }
 
     @Test
+    public void goThroughLifecycle_onStartStop_shouldStartStopService() {
+        mMixin = new SuggestionControllerMixin(mContext, mLifecycle);
+
+        mLifecycle.onStart();
+        assertThat(ShadowSuggestionController.sStartCalled).isTrue();
+
+        mLifecycle.onStop();
+        assertThat(ShadowSuggestionController.sStopCalled).isTrue();
+    }
+
+    @Test
     public void onServiceConnected_shouldGetSuggestion() {
         mMixin = new SuggestionControllerMixin(mContext, mLifecycle);
-        ReflectionHelpers.setField(mMixin, "mRemoteService", mRemoteService);
         mMixin.onServiceConnected();
 
-        verify(mRemoteService).getSuggestions();
+        assertThat(ShadowSuggestionController.sGetSuggestionCalled).isTrue();
     }
 
 }
