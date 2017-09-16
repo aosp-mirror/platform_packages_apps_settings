@@ -45,8 +45,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
 import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
@@ -194,7 +193,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onAttach(activity);
 
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-        mDpm = new DevicePolicyManagerWrapperImpl(
+        mDpm = new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPackageManager = activity.getPackageManager();

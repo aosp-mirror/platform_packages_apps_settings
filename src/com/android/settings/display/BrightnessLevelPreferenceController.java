@@ -31,6 +31,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.wrapper.PowerManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;

@@ -25,8 +25,6 @@ import android.support.annotation.Keep;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
-import com.android.settings.applications.IPackageManagerWrapperImpl;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
@@ -38,7 +36,6 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.datausage.DataPlanFeatureProvider;
 import com.android.settings.datausage.DataPlanFeatureProviderImpl;
-import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -53,7 +50,10 @@ import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
-import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.IPackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -109,9 +109,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
         if (mApplicationFeatureProvider == null) {
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
-                    new PackageManagerWrapperImpl(context.getPackageManager()),
-                    new IPackageManagerWrapperImpl(AppGlobals.getPackageManager()),
-                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
+                    new PackageManagerWrapper(context.getPackageManager()),
+                    new IPackageManagerWrapper(AppGlobals.getPackageManager()),
+                    new DevicePolicyManagerWrapper((DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE)));
         }
         return mApplicationFeatureProvider;
@@ -129,11 +129,11 @@ public class FeatureFactoryImpl extends FeatureFactory {
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         if (mEnterprisePrivacyFeatureProvider == null) {
             mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
-                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
+                    new DevicePolicyManagerWrapper((DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE)),
-                    new PackageManagerWrapperImpl(context.getPackageManager()),
+                    new PackageManagerWrapper(context.getPackageManager()),
                     UserManager.get(context),
-                    new ConnectivityManagerWrapperImpl((ConnectivityManager) context
+                    new ConnectivityManagerWrapper((ConnectivityManager) context
                             .getSystemService(Context.CONNECTIVITY_SERVICE)),
                     context.getResources());
         }

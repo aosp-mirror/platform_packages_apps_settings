@@ -16,7 +16,7 @@
 
 package com.android.settings.testutils.shadow;
 
-import com.android.settings.applications.AccessibilityManagerWrapperImpl;
+import com.android.settings.wrapper.AccessibilityManagerWrapper;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -24,7 +24,7 @@ import org.robolectric.annotation.Implements;
 /**
  * This class provides shadow for API that is not supported in current roboletric
  */
-@Implements(AccessibilityManagerWrapperImpl.class)
+@Implements(AccessibilityManagerWrapper.class)
 public class ShadowAccessibilityManagerWrapperImpl {
 
     @Implementation

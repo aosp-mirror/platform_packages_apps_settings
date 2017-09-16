@@ -25,7 +25,9 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.IPackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

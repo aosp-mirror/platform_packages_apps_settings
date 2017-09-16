@@ -65,6 +65,7 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;

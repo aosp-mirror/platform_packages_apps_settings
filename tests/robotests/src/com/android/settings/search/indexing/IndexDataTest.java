@@ -41,17 +41,16 @@ public class IndexDataTest {
     private IndexData.Builder mBuilder;
 
     private static final String LOCALE = "locale";
-    private static final String UPDATED_TITLE = "updated title";
-    private static final String NORMALIZED_TITLE = "normal title";
-    private static final String UPDATED_SUMMARY_ON = "updated summary on";
-    private static final String NORMALIZED_SUMMARY_ON = "normalized summary on";
-    private static final String UPDATED_SUMMARY_OFF = "updated summary off";
-    private static final String NORMALIZED_SUMMARY_OFF = "normalized summary off";
+    private static final String TITLE = "updated-title";
+    private static final String NORM_TITLE = "updatedtitle";
+    private static final String SUMMARY_ON = "updated-summary-on";
+    private static final String NORM_SUMMARY_ON = "updatedsummaryon";
+    private static final String SUMMARY_OFF = "updated-summary-off";
+    private static final String NORM_SUMMARY_OFF = "updatedsummaryoff";
     private static final String ENTRIES = "entries";
     private static final String CLASS_NAME = "class name";
     private static final String SCREEN_TITLE = "screen title";
     private static final int ICON_RES_ID = 0xff;
-    private static final int RANK = 1;
     private static final String SPACE_DELIMITED_KEYWORDS = "keywords";
     private static final String INTENT_ACTION = "intent action";
     private static final String INTENT_TARGET_PACKAGE = "target package";
@@ -79,17 +78,14 @@ public class IndexDataTest {
         IndexData row = generateRow();
 
         assertThat(row.locale).isEqualTo(LOCALE);
-        assertThat(row.updatedTitle).isEqualTo(UPDATED_TITLE);
-        assertThat(row.normalizedTitle).isEqualTo(NORMALIZED_TITLE);
-        assertThat(row.updatedSummaryOn).isEqualTo(UPDATED_SUMMARY_ON);
-        assertThat(row.normalizedSummaryOn).isEqualTo(NORMALIZED_SUMMARY_ON);
-        assertThat(row.updatedSummaryOff).isEqualTo(UPDATED_SUMMARY_OFF);
-        assertThat(row.normalizedSummaryOff).isEqualTo(NORMALIZED_SUMMARY_OFF);
+        assertThat(row.updatedTitle).isEqualTo(TITLE);
+        assertThat(row.normalizedTitle).isEqualTo(NORM_TITLE);
+        assertThat(row.updatedSummaryOn).isEqualTo(SUMMARY_ON);
+        assertThat(row.normalizedSummaryOn).isEqualTo(NORM_SUMMARY_ON);
         assertThat(row.entries).isEqualTo(ENTRIES);
         assertThat(row.className).isEqualTo(CLASS_NAME);
         assertThat(row.screenTitle).isEqualTo(SCREEN_TITLE);
         assertThat(row.iconResId).isEqualTo(ICON_RES_ID);
-        assertThat(row.rank).isEqualTo(RANK);
         assertThat(row.spaceDelimitedKeywords).isEqualTo(SPACE_DELIMITED_KEYWORDS);
         assertThat(row.intentAction).isEqualTo(INTENT_ACTION);
         assertThat(row.intentTargetClass).isEqualTo(INTENT_TARGET_CLASS);
@@ -153,18 +149,13 @@ public class IndexDataTest {
     private IndexData.Builder createBuilder() {
         mBuilder = new IndexData.Builder();
         mBuilder.setLocale(LOCALE)
-                .setUpdatedTitle(UPDATED_TITLE)
-                .setNormalizedTitle(NORMALIZED_TITLE)
-                .setUpdatedSummaryOn(UPDATED_SUMMARY_ON)
-                .setNormalizedSummaryOn(NORMALIZED_SUMMARY_ON)
-                .setUpdatedSummaryOff(UPDATED_SUMMARY_OFF)
-                .setNormalizedSummaryOff(NORMALIZED_SUMMARY_OFF)
+                .setTitle(TITLE)
+                .setSummaryOn(SUMMARY_ON)
                 .setEntries(ENTRIES)
                 .setClassName(CLASS_NAME)
                 .setScreenTitle(SCREEN_TITLE)
                 .setIconResId(ICON_RES_ID)
-                .setRank(RANK)
-                .setSpaceDelimitedKeywords(SPACE_DELIMITED_KEYWORDS)
+                .setKeywords(SPACE_DELIMITED_KEYWORDS)
                 .setIntentAction(INTENT_ACTION)
                 .setIntentTargetPackage(INTENT_TARGET_PACKAGE)
                 .setIntentTargetClass(INTENT_TARGET_CLASS)

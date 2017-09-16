@@ -43,6 +43,7 @@ import android.view.textservice.TextServicesManager;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
@@ -59,6 +60,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +103,9 @@ public class LanguageAndInputSettingsTest {
 
     @Test
     public void testGetPreferenceScreenResId() {
+        ProgressiveDisclosureMixin progessiveMixin = mock(ProgressiveDisclosureMixin.class);
+        when(progessiveMixin.isEnabled()).thenReturn(true);
+        ReflectionHelpers.setField(mFragment, "mProgressiveDisclosureMixin", progessiveMixin);
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.language_and_input);
     }
 
@@ -167,7 +172,10 @@ public class LanguageAndInputSettingsTest {
             .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
         final List<String> niks = LanguageAndInputSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
-        final int xmlId = (new LanguageAndInputSettings()).getPreferenceScreenResId();
+        LanguageAndInputSettings settings = new LanguageAndInputSettings();
+        ReflectionHelpers.setField(settings, "mProgressiveDisclosureMixin",
+                mock(ProgressiveDisclosureMixin.class));
+        final int xmlId = settings.getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
@@ -178,6 +186,8 @@ public class LanguageAndInputSettingsTest {
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
         final Context context = RuntimeEnvironment.application;
         final LanguageAndInputSettings fragment = new LanguageAndInputSettings();
+        ReflectionHelpers.setField(fragment, "mProgressiveDisclosureMixin",
+                mock(ProgressiveDisclosureMixin.class));
         final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
                 fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();

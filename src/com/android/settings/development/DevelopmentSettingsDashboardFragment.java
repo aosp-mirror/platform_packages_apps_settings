@@ -32,8 +32,10 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -116,7 +118,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     void onEnableDevelopmentOptionsConfirmed() {
@@ -129,8 +131,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBar.setChecked(false);
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
-        return null;
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new StayAwakePreferenceController(context, lifecycle));
+
+        return controllers;
     }
 
     /**
@@ -156,7 +162,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context);
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 }

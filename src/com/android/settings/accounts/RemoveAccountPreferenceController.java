@@ -43,8 +43,7 @@ import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
-import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
@@ -60,7 +59,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     private DevicePolicyManagerWrapper mDpm;
 
     public RemoveAccountPreferenceController(Context context, Fragment parent) {
-        this(context, parent, new DevicePolicyManagerWrapperImpl(
+        this(context, parent, new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)));
     }
 

@@ -27,6 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
+import com.android.settings.wrapper.WifiManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;

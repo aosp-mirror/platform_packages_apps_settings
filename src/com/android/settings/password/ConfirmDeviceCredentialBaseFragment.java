@@ -243,7 +243,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             try {
                 IActivityManager activityManager = ActivityManager.getService();
                 final ActivityOptions options = ActivityOptions.makeBasic();
-                options.setLaunchStackId(ActivityManager.StackId.INVALID_STACK_ID);
                 activityManager.startActivityFromRecents(taskId, options.toBundle());
                 return;
             } catch (RemoteException e) {

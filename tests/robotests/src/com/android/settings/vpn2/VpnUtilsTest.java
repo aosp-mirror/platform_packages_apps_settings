@@ -18,6 +18,7 @@ package com.android.settings.vpn2;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

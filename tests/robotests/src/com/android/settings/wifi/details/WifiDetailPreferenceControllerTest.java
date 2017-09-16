@@ -64,11 +64,11 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
-import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDetailPreference;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -108,7 +108,7 @@ public class WifiDetailPreferenceControllerTest {
     @Mock private AccessPoint mockAccessPoint;
     @Mock private Activity mockActivity;
     @Mock private ConnectivityManager mockConnectivityManager;
-    @Mock private ConnectivityManagerWrapperImpl mockConnectivityManagerWrapper;
+    @Mock private ConnectivityManagerWrapper mockConnectivityManagerWrapper;
     @Mock private Network mockNetwork;
     @Mock private NetworkInfo mockNetworkInfo;
     @Mock private WifiConfiguration mockWifiConfig;

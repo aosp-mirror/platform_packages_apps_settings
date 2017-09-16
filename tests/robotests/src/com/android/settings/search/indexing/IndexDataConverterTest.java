@@ -54,7 +54,6 @@ public class IndexDataConverterTest {
 
     private final String localeStr = "en_US";
 
-    private final int rank = 8;
     private final String title = "title\u2011title";
     private final String updatedTitle = "title-title";
     private final String normalizedTitle = "titletitle";
@@ -128,8 +127,6 @@ public class IndexDataConverterTest {
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(raw.rank);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo(updatedTitle);
         // Normalized Title
@@ -138,10 +135,6 @@ public class IndexDataConverterTest {
         assertThat(cursor.getString(4)).isEqualTo(updatedSummaryOn);
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEqualTo(normalizedSummaryOn);
-        // Summary Off
-        assertThat(cursor.getString(6)).isEqualTo(updatedSummaryOff);
-        // Summary off normalized
-        assertThat(cursor.getString(7)).isEqualTo(normalizedSummaryOff);
         // Entries
         assertThat(cursor.getString(8)).isEqualTo(raw.entries);
         // Keywords
@@ -225,8 +218,6 @@ public class IndexDataConverterTest {
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("App info");
         // Normalized Title
@@ -235,10 +226,6 @@ public class IndexDataConverterTest {
         assertThat(cursor.getString(4)).isEqualTo("Manage apps, set up quick launch shortcuts");
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEqualTo("manage apps, set up quick launch shortcuts");
-        // Summary Off - only on for checkbox preferences
-        assertThat(cursor.getString(6)).isEmpty();
-        // Summary off normalized - only on for checkbox preferences
-        assertThat(cursor.getString(7)).isEmpty();
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isNull();
         // Keywords
@@ -285,8 +272,6 @@ public class IndexDataConverterTest {
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo(prefTitle);
         // Normalized Title
@@ -295,10 +280,6 @@ public class IndexDataConverterTest {
         assertThat(cursor.getString(4)).isEqualTo(prefSummary);
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEqualTo(prefSummary.toLowerCase());
-        // Summary Off - only on for checkbox preferences
-        assertThat(cursor.getString(6)).isEmpty();
-        // Summary off normalized - only on for checkbox preferences
-        assertThat(cursor.getString(7)).isEmpty();
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isNull();
         // Keywords
@@ -343,8 +324,6 @@ public class IndexDataConverterTest {
         cursor.moveToPosition(0);
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("Advanced settings");
         // Normalized Title
@@ -353,10 +332,6 @@ public class IndexDataConverterTest {
         assertThat(cursor.getString(4)).isEqualTo("Enable more settings options");
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEqualTo("enable more settings options");
-        // Summary Off
-        assertThat(cursor.getString(6)).isEqualTo("Enable more settings options");
-        // Summary Off
-        assertThat(cursor.getString(7)).isEqualTo("enable more settings options");
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isNull();
         // Keywords
@@ -397,8 +372,6 @@ public class IndexDataConverterTest {
         cursor.moveToPosition(3);
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("Preferred install location");
         // Normalized Title
@@ -409,10 +382,6 @@ public class IndexDataConverterTest {
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEqualTo(
                 "change the preferred installation location for new apps");
-        // Summary Off - only on for checkbox preferences
-        assertThat(cursor.getString(6)).isEmpty();
-        // Summary off normalized - only on for checkbox preferences
-        assertThat(cursor.getString(7)).isEmpty();
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isEqualTo("Internal device storage|Removable SD card|" +
                 "Let the system decide|");
@@ -483,8 +452,6 @@ public class IndexDataConverterTest {
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(0);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("Display size");
         // Normalized Title
@@ -493,10 +460,6 @@ public class IndexDataConverterTest {
         assertThat(cursor.getString(4)).isEmpty();
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEmpty();
-        // Summary Off - only on for checkbox preferences
-        assertThat(cursor.getString(6)).isEmpty();
-        // Summary off normalized - only on for checkbox preferences
-        assertThat(cursor.getString(7)).isEmpty();
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isNull();
         // Keywords
@@ -550,8 +513,6 @@ public class IndexDataConverterTest {
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Rank
-        assertThat(cursor.getInt(1)).isEqualTo(0);
         // Data Title
         assertThat(cursor.getString(2)).isEqualTo("Display size");
         // Normalized Title
@@ -560,10 +521,6 @@ public class IndexDataConverterTest {
         assertThat(cursor.getString(4)).isEmpty();
         // Summary On Normalized
         assertThat(cursor.getString(5)).isEmpty();
-        // Summary Off - only on for checkbox preferences
-        assertThat(cursor.getString(6)).isEmpty();
-        // Summary off normalized - only on for checkbox preferences
-        assertThat(cursor.getString(7)).isEmpty();
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isNull();
         // Keywords
@@ -646,7 +603,6 @@ public class IndexDataConverterTest {
     private SearchIndexableRaw getFakeRaw(String localeStr) {
         SearchIndexableRaw data = new SearchIndexableRaw(mContext);
         data.locale = new Locale(localeStr);
-        data.rank = rank;
         data.title = title;
         data.summaryOn = summaryOn;
         data.summaryOff = summaryOff;
@@ -667,7 +623,6 @@ public class IndexDataConverterTest {
 
     private SearchIndexableResource getFakeResource(int xml) {
         SearchIndexableResource sir = new SearchIndexableResource(mContext);
-        sir.rank = rank;
         sir.xmlResId = xml;
         sir.className = className;
         sir.packageName = packageName;

@@ -27,6 +27,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 import java.util.ArrayList;

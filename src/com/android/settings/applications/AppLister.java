@@ -23,6 +23,8 @@ import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settingslib.wrapper.PackageManagerWrapper;
+
 import java.util.ArrayList;
 import java.util.List;
 

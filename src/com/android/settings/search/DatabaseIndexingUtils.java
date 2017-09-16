@@ -17,16 +17,10 @@
 
 package com.android.settings.search;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -37,10 +31,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.lang.reflect.Field;
-import java.text.Normalizer;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * Utility class for {@like DatabaseIndexingManager} to handle the mapping between Payloads
@@ -52,15 +44,6 @@ public class DatabaseIndexingUtils {
 
     private static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
             "SEARCH_INDEX_DATA_PROVIDER";
-
-    private static final String NON_BREAKING_HYPHEN = "\u2011";
-    private static final String EMPTY = "";
-    private static final String LIST_DELIMITERS = "[,]\\s*";
-    private static final String HYPHEN = "-";
-    private static final String SPACE = " ";
-
-    private static final Pattern REMOVE_DIACRITICALS_PATTERN
-            = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 
     /**
      * Builds intent into a subsetting.
@@ -172,20 +155,5 @@ public class DatabaseIndexingUtils {
                     FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         }
         return null;
-    }
-
-    public static String normalizeHyphen(String input) {
-        return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
-    }
-
-    public static String normalizeString(String input) {
-        final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
-        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
-
-        return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
-    }
-
-    public static String normalizeKeywords(String input) {
-        return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
     }
 }

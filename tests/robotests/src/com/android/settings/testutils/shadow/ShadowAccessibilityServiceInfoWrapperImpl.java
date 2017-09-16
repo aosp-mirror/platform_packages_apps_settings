@@ -18,11 +18,11 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ComponentName;
 
-import com.android.settings.applications.AccessibilityServiceInfoWrapperImpl;
+import com.android.settings.wrapper.AccessibilityServiceInfoWrapper;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-@Implements(AccessibilityServiceInfoWrapperImpl.class)
+@Implements(AccessibilityServiceInfoWrapper.class)
 public class ShadowAccessibilityServiceInfoWrapperImpl {
     private static ComponentName sComponentName;
 

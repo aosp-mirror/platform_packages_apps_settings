@@ -29,7 +29,9 @@ import android.util.ArraySet;
 import android.view.View;
 
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
-import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.IPackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;

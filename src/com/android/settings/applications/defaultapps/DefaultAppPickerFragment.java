@@ -29,11 +29,10 @@ import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * A generic app picker fragment that shows a list of app as radio button group.
@@ -45,7 +44,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mPm = new PackageManagerWrapperImpl(context.getPackageManager());
+        mPm = new PackageManagerWrapper(context.getPackageManager());
     }
 
     @Override

@@ -26,8 +26,8 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.UserHandle;
 
-import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**
  * Data model representing an app in DefaultAppPicker UI.

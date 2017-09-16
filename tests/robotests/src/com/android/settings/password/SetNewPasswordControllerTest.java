@@ -43,6 +43,7 @@ import android.os.Bundle;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.wrapper.FingerprintManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
 
 /**
  * Tests for {@link SetNewPasswordController}.
@@ -63,7 +63,7 @@ public final class SetNewPasswordControllerTest {
     private static final long FINGERPRINT_CHALLENGE = -9876512313131L;
 
     @Mock PackageManager mPackageManager;
-    @Mock IFingerprintManager mFingerprintManager;
+    @Mock FingerprintManagerWrapper mFingerprintManager;
     @Mock DevicePolicyManager mDevicePolicyManager;
 
     @Mock private SetNewPasswordController.Ui mUi;

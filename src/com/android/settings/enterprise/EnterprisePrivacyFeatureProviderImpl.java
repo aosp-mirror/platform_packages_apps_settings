@@ -30,9 +30,10 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.vpn2.ConnectivityManagerWrapper;
 import com.android.settings.vpn2.VpnUtils;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.Date;
 import java.util.List;

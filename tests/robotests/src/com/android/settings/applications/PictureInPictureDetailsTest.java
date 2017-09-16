@@ -28,6 +28,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.wrapper.ActivityInfoWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -104,11 +105,12 @@ public class PictureInPictureDetailsTest {
                 activities);
     }
 
-    private class MockActivityInfo implements ActivityInfoWrapper {
+    private class MockActivityInfo extends ActivityInfoWrapper {
 
         private boolean mSupportsPictureInPicture;
 
         public MockActivityInfo(boolean supportsPictureInPicture) {
+            super(null);
             mSupportsPictureInPicture = supportsPictureInPicture;
         }
 

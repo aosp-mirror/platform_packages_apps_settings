@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.defaultapps;
 
-
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
@@ -27,8 +26,8 @@ import android.view.autofill.AutofillManager;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AutofillManagerWrapper;
-import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.wrapper.AutofillManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
