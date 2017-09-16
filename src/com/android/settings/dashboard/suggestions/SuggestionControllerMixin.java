@@ -16,14 +16,8 @@
 
 package com.android.settings.dashboard.suggestions;
 
-import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.service.settings.suggestions.ISuggestionService;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.VisibleForTesting;
 import android.util.FeatureFlagUtils;
@@ -39,7 +33,8 @@ import java.util.List;
 /**
  * Manages IPC communication to SettingsIntelligence for suggestion related services.
  */
-public class SuggestionControllerMixin implements LifecycleObserver, OnStart, OnStop {
+public class SuggestionControllerMixin implements SuggestionController.ServiceConnectionListener,
+        LifecycleObserver, OnStart, OnStop {
 
     @VisibleForTesting
     static final String FEATURE_FLAG = "new_settings_suggestion";
@@ -47,10 +42,7 @@ public class SuggestionControllerMixin implements LifecycleObserver, OnStart, On
     private static final boolean DEBUG = false;
 
     private final Context mContext;
-    private final Intent mServiceIntent;
-    private final ServiceConnection mServiceConnection;
-
-    private ISuggestionService mRemoteService;
+    private final SuggestionController mSuggestionController;
 
     public static boolean isEnabled() {
         return FeatureFlagUtils.isEnabled(FEATURE_FLAG);
@@ -58,11 +50,11 @@ public class SuggestionControllerMixin implements LifecycleObserver, OnStart, On
 
     public SuggestionControllerMixin(Context context, Lifecycle lifecycle) {
         mContext = context.getApplicationContext();
-        mServiceIntent = new Intent().setComponent(
+        mSuggestionController = new SuggestionController(context,
                 new ComponentName(
                         "com.android.settings.intelligence",
-                        "com.android.settings.intelligence.suggestions.SuggestionService"));
-        mServiceConnection = createServiceConnection();
+                        "com.android.settings.intelligence.suggestions.SuggestionService"),
+                this /* serviceConnectionListener */);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -74,73 +66,27 @@ public class SuggestionControllerMixin implements LifecycleObserver, OnStart, On
             Log.w(TAG, "Feature not enabled, skipping");
             return;
         }
-        mContext.bindServiceAsUser(mServiceIntent, mServiceConnection, Context.BIND_AUTO_CREATE,
-                android.os.Process.myUserHandle());
+        mSuggestionController.start();
     }
 
     @Override
     public void onStop() {
-        if (mRemoteService != null) {
-            mRemoteService = null;
-            mContext.unbindService(mServiceConnection);
-        }
+        mSuggestionController.stop();
     }
 
-    /**
-     * Get setting suggestions.
-     */
-    @Nullable
-    public List<Suggestion> getSuggestions() {
-        if (!isReady()) {
-            return null;
-        }
-        try {
-            return mRemoteService.getSuggestions();
-        } catch (RemoteException e) {
-            Log.w(TAG, "Error when calling getSuggestion()", e);
-            return null;
-        }
-    }
-
-    /**
-     * Whether or not the manager is ready
-     */
-    private boolean isReady() {
-        return mRemoteService != null;
-    }
-
-    @VisibleForTesting
-    void onServiceConnected() {
+    @Override
+    public void onServiceConnected() {
         // TODO: Call API to get data from a loader instead of in current thread.
-        final List<Suggestion> data = getSuggestions();
-        Log.d(TAG, "data size " + (data == null ? 0 : data.size()));
+        final List<Suggestion> data = mSuggestionController.getSuggestions();
+        if (DEBUG) {
+            Log.d(TAG, "data size " + (data == null ? 0 : data.size()));
+        }
     }
 
-    private void onServiceDisconnected() {
-
+    @Override
+    public void onServiceDisconnected() {
+        if (DEBUG) {
+            Log.d(TAG, "SuggestionService disconnected");
+        }
     }
-
-    /**
-     * Create a new {@link ServiceConnection} object to handle service connect/disconnect event.
-     */
-    private ServiceConnection createServiceConnection() {
-        return new ServiceConnection() {
-
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                if (DEBUG) {
-                    Log.d(TAG, "Service is connected");
-                }
-                mRemoteService = ISuggestionService.Stub.asInterface(service);
-                SuggestionControllerMixin.this.onServiceConnected();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                mRemoteService = null;
-                SuggestionControllerMixin.this.onServiceDisconnected();
-            }
-        };
-    }
-
 }
