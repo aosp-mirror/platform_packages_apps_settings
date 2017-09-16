@@ -17,6 +17,9 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -154,7 +157,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     public RadioButtonPreference bindPreference(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey) {
         pref.setTitle(info.loadLabel());
-        pref.setIcon(info.loadIcon());
+        Utils.setSafeIcon(pref, info.loadIcon());
         pref.setKey(key);
         if (TextUtils.equals(defaultKey, key)) {
             pref.setChecked(true);
