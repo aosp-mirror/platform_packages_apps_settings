@@ -143,6 +143,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
+        controllers.add(new BluetoothSnoopLogPreferenceController(context));
 
         return controllers;
     }
