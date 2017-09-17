@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -60,6 +76,7 @@ public class StayAwakePreferenceControllerTest {
 
         final int mode = Settings.System.getInt(mContentResolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1);
+
         assertThat(mode).isEqualTo(StayAwakePreferenceController.SETTING_VALUE_ON);
     }
 
@@ -69,6 +86,7 @@ public class StayAwakePreferenceControllerTest {
 
         final int mode = Settings.System.getInt(mContentResolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1);
+
         assertThat(mode).isEqualTo(StayAwakePreferenceController.SETTING_VALUE_OFF);
     }
 
@@ -77,6 +95,7 @@ public class StayAwakePreferenceControllerTest {
         Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
+
         verify(mPreference).setChecked(true);
     }
 
@@ -85,6 +104,7 @@ public class StayAwakePreferenceControllerTest {
         Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
+
         verify(mPreference).setChecked(false);
     }
 
@@ -95,6 +115,7 @@ public class StayAwakePreferenceControllerTest {
                 RestrictedLockUtils.EnforcedAdmin.class);
         doReturn(admin).when(mController).checkIfMaximumTimeToLockSetByAdmin();
         mController.updateState(mPreference);
+
         verify(mPreference).setDisabledByAdmin(admin);
     }
 
@@ -104,6 +125,7 @@ public class StayAwakePreferenceControllerTest {
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.mSettingsObserver.onChange(false,
                 Settings.Global.getUriFor(Settings.Global.STAY_ON_WHILE_PLUGGED_IN));
+
         verify(mPreference).setChecked(true);
     }
 
@@ -112,6 +134,22 @@ public class StayAwakePreferenceControllerTest {
         Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.mSettingsObserver.onChange(false, null);
+
         verify(mPreference, never()).setChecked(true);
+    }
+
+    @Test
+    public void onDeveloperOptionsDisabled_shouldDisablePreference() {
+        mController.onDeveloperOptionsDisabled();
+
+        verify(mPreference).setEnabled(false);
+        verify(mPreference).setChecked(false);
+    }
+
+    @Test
+    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
+        mController.onDeveloperOptionsEnabled();
+
+        verify(mPreference).setEnabled(true);
     }
 }
