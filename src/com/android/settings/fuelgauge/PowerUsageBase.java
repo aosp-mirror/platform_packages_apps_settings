@@ -60,8 +60,6 @@ public abstract class PowerUsageBase extends DashboardFragment
         mBatteryBroadcastReceiver.setBatteryChangedListener(() -> {
             restartBatteryStatsLoader();
         });
-
-        getLoaderManager().initLoader(0, icicle, this);
     }
 
     @Override
