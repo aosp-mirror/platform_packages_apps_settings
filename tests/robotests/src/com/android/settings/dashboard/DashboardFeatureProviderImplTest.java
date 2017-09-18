@@ -315,6 +315,33 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void bindPreference_withOrderMetadata_shouldUseOrderInMetadata() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final int testOrder = -30;
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putInt(mImpl.META_DATA_KEY_ORDER, testOrder);
+        tile.priority = 10;
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getOrder()).isEqualTo(testOrder);
+    }
+
+    @Test
+    public void bindPreference_invalidOrderMetadata_shouldIgnore() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putString(mImpl.META_DATA_KEY_ORDER, "hello");
+        tile.priority = 10;
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.VIEW_UNKNOWN,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getOrder()).isEqualTo(-tile.priority);
+    }
+
+    @Test
     public void bindPreference_withIntentActionMetatdata_shouldSetLaunchAction() {
         Activity activity = Robolectric.buildActivity(Activity.class).get();
         final ShadowApplication application = ShadowApplication.getInstance();
