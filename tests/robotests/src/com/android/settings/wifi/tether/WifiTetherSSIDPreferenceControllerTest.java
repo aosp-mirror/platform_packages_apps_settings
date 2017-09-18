@@ -16,6 +16,12 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
@@ -34,12 +40,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -103,5 +103,23 @@ public class WifiTetherSSIDPreferenceControllerTest {
         assertThat(mController.getSSID()).isEqualTo("0");
 
         verify(mListener, times(2)).onTetherConfigUpdated();
+    }
+
+    @Test
+    public void updateDisplay_shouldUpdateValue() {
+        // Set controller ssid to anything and verify is set.
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, "1");
+        assertThat(mController.getSSID()).isEqualTo("1");
+
+        // Create a new config using different SSID
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "test_1234";
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        // Call updateDisplay and verify it's changed.
+        mController.updateDisplay();
+        assertThat(mController.getSSID()).isEqualTo(config.SSID);
+        assertThat(mPreference.getSummary()).isEqualTo(config.SSID);
     }
 }

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.WifiUtils;
@@ -28,6 +28,7 @@ import com.android.settings.wifi.WifiUtils;
 public class WifiTetherPasswordPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
 
+    private static final String TAG = "WifiTetherPswdPref";
     private static final String PREF_KEY = "wifi_tether_network_password";
 
     private String mPassword;
@@ -35,10 +36,6 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     public WifiTetherPasswordPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config != null) {
-            mPassword = config.preSharedKey;
-        }
     }
 
     @Override
@@ -47,8 +44,12 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
+    public void updateDisplay() {
+        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        if (config != null) {
+            mPassword = config.preSharedKey;
+            Log.d(TAG, "Updating password in Preference, " + mPassword);
+        }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         updatePasswordDisplay((EditTextPreference) mPreference);
     }

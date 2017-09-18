@@ -121,4 +121,20 @@ public class WifiTetherApBandPreferenceControllerTest {
 
         verify(mListener, times(2)).onTetherConfigUpdated();
     }
+
+    @Test
+    public void updateDisplay_shouldUpdateValue() {
+        // Set controller band index to 1 and verify is set.
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mListPreference, "1");
+        assertThat(mController.getBandIndex()).isEqualTo(1);
+
+        // Disable 5Ghz band
+        when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
+
+        // Call updateDisplay and verify it's changed.
+        mController.updateDisplay();
+        assertThat(mController.getBandIndex()).isEqualTo(0);
+    }
 }

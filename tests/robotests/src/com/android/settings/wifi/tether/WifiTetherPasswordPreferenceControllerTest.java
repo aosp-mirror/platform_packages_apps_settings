@@ -99,4 +99,22 @@ public class WifiTetherPasswordPreferenceControllerTest {
 
         verify(mListener, times(2)).onTetherConfigUpdated();
     }
+
+    @Test
+    public void updateDisplay_shouldUpdateValue() {
+        // Set controller password to anything and verify is set.
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, "1");
+        assertThat(mController.getPassword()).isEqualTo("1");
+
+        // Create a new config using different password
+        final WifiConfiguration config = new WifiConfiguration();
+        config.preSharedKey = "test_1234";
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        // Call updateDisplay and verify it's changed.
+        mController.updateDisplay();
+        assertThat(mController.getPassword()).isEqualTo(config.preSharedKey);
+        assertThat(mPreference.getSummary()).isEqualTo(config.preSharedKey);
+    }
 }
