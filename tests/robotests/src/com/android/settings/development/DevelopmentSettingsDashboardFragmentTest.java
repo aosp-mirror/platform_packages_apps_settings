@@ -112,6 +112,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = {
+            ShadowPictureColorModePreferenceController.class
+    })
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
@@ -196,6 +199,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
         public static void show(
                 DevelopmentSettingsDashboardFragment host) {
             mShown = true;
+        }
+    }
+
+    @Implements(PictureColorModePreferenceController.class)
+    public static class ShadowPictureColorModePreferenceController {
+
+        @Implementation
+        public boolean isAvailable() {
+            return true;
         }
     }
 }
