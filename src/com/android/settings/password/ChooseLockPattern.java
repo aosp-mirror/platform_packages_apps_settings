@@ -141,7 +141,7 @@ public class ChooseLockPattern extends SettingsActivity {
         boolean forFingerprint = getIntent()
                 .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
         setTitle(forFingerprint ? R.string.lockpassword_choose_your_pattern_header_for_fingerprint
-                : R.string.lockpassword_choose_your_pattern_header);
+                : R.string.lockpassword_choose_your_screen_lock_header);
         LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
         layout.setFitsSystemWindows(false);
     }
@@ -172,6 +172,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private boolean mHasChallenge;
         private long mChallenge;
         protected TextView mHeaderText;
+        protected TextView mMessageText;
         protected LockPatternView mLockPatternView;
         protected TextView mFooterText;
         private TextView mFooterLeftButton;
@@ -338,44 +339,55 @@ public class ChooseLockPattern extends SettingsActivity {
         protected enum Stage {
 
             Introduction(
+                    R.string.lock_settings_picker_fingerprint_added_security_message,
+                    R.string.lockpassword_choose_your_pattern_message,
                     R.string.lockpattern_recording_intro_header,
                     LeftButtonMode.Cancel, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             HelpScreen(
-                    R.string.lockpattern_settings_help_how_to_record,
+                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_settings_help_how_to_record,
                     LeftButtonMode.Gone, RightButtonMode.Ok, ID_EMPTY_MESSAGE, false),
             ChoiceTooShort(
+                    R.string.lock_settings_picker_fingerprint_added_security_message,
+                    R.string.lockpassword_choose_your_pattern_message,
                     R.string.lockpattern_recording_incorrect_too_short,
                     LeftButtonMode.Retry, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             FirstChoiceValid(
+                    R.string.lock_settings_picker_fingerprint_added_security_message,
+                    R.string.lockpassword_choose_your_pattern_message,
                     R.string.lockpattern_pattern_entered_header,
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
-                    R.string.lockpattern_need_to_confirm,
+                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_confirm,
                     LeftButtonMode.Cancel, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ConfirmWrong(
-                    R.string.lockpattern_need_to_unlock_wrong,
+                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_unlock_wrong,
                     LeftButtonMode.Cancel, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ChoiceConfirmed(
-                    R.string.lockpattern_pattern_confirmed_header,
+                    ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_pattern_confirmed_header,
                     LeftButtonMode.Cancel, RightButtonMode.Confirm, ID_EMPTY_MESSAGE, false);
 
 
             /**
+             * @param messageForFingerprint The message displayed at the top, above header for
+             *                              fingerprint flow.
+             * @param message The message displayed at the top.
              * @param headerMessage The message displayed at the top.
              * @param leftMode The mode of the left button.
              * @param rightMode The mode of the right button.
              * @param footerMessage The footer message.
              * @param patternEnabled Whether the pattern widget is enabled.
              */
-            Stage(int headerMessage,
+            Stage(int messageForFingerprint, int message, int headerMessage,
                     LeftButtonMode leftMode,
                     RightButtonMode rightMode,
                     int footerMessage, boolean patternEnabled) {
                 this.headerMessage = headerMessage;
+                this.messageForFingerprint = messageForFingerprint;
+                this.message = message;
                 this.leftMode = leftMode;
                 this.rightMode = rightMode;
                 this.footerMessage = footerMessage;
@@ -383,6 +395,8 @@ public class ChooseLockPattern extends SettingsActivity {
             }
 
             final int headerMessage;
+            final int messageForFingerprint;
+            final int message;
             final LeftButtonMode leftMode;
             final RightButtonMode rightMode;
             final int footerMessage;
@@ -450,6 +464,7 @@ public class ChooseLockPattern extends SettingsActivity {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
+            mMessageText = view.findViewById(R.id.message);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
             mLockPatternView.setTactileFeedbackEnabled(
@@ -633,6 +648,12 @@ public class ChooseLockPattern extends SettingsActivity {
                                 LockPatternUtils.MIN_LOCK_PATTERN_SIZE));
             } else {
                 mHeaderText.setText(stage.headerMessage);
+            }
+            int message = mForFingerprint ? stage.messageForFingerprint : stage.message;
+            if (message == ID_EMPTY_MESSAGE) {
+                mMessageText.setText("");
+            } else {
+                mMessageText.setText(message);
             }
             if (stage.footerMessage == ID_EMPTY_MESSAGE) {
                 mFooterText.setText("");
