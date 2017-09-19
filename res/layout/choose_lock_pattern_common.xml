@@ -68,6 +68,13 @@
             android:paddingLeft="0dp"
             android:paddingRight="0dp">
 
+            <TextView
+                android:id="@+id/message"
+                style="@style/SuwDescription.Glif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="2" />
+
             <TextView android:id="@+id/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

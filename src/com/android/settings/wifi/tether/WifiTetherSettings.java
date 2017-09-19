@@ -44,6 +44,7 @@ import java.util.List;
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
 
+    private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
 
     private WifiTetherSwitchBarController mSwitchBarController;
@@ -161,27 +162,37 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         return config;
     }
 
+    private void startTether() {
+        mRestartWifiApAfterConfigChange = false;
+        mSwitchBarController.startTether();
+    }
+
+    private void updateDisplayWithNewConfig() {
+        getPreferenceController(WifiTetherSSIDPreferenceController.class)
+                .updateDisplay();
+        getPreferenceController(WifiTetherPasswordPreferenceController.class)
+                .updateDisplay();
+        getPreferenceController(WifiTetherApBandPreferenceController.class)
+                .updateDisplay();
+    }
+
     @VisibleForTesting
     class TetherChangeReceiver extends BroadcastReceiver {
-        private static final String TAG = "TetherChangeReceiver";
-
         @Override
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
+            Log.d(TAG, "updating display config due to receiving broadcast action " + action);
+            updateDisplayWithNewConfig();
             if (action.equals(ACTION_TETHER_STATE_CHANGED)) {
                 if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    Log.d(TAG, "Restarting WifiAp due to prior config change.");
-                    mSwitchBarController.startTether();
+                    startTether();
                 }
             } else if (action.equals(WIFI_AP_STATE_CHANGED_ACTION)) {
                 int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    Log.d(TAG, "Restarting WifiAp due to prior config change.");
-                    mSwitchBarController.startTether();
+                    startTether();
                 }
             }
         }

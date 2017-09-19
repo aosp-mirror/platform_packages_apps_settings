@@ -57,5 +57,8 @@ public abstract class WifiTetherBasePreferenceController extends AbstractPrefere
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        updateDisplay();
     }
+
+    public abstract void updateDisplay();
 }

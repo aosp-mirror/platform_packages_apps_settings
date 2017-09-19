@@ -48,6 +48,7 @@
                 style="@style/SuwGlifIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="?attr/suwGlifHeaderGravity"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
                 android:src="@drawable/ic_lock"/>
@@ -71,13 +72,20 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"/>
 
+                    <TextView
+                        android:id="@+id/message"
+                        style="@style/SuwDescription.Glif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="2" />
+
                     <!-- header message -->
                     <TextView
                         android:id="@+id/headerText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:gravity="start|bottom"
+                        android:gravity="?attr/suwGlifHeaderGravity"
                         android:textSize="18sp"/>
 
                 </LinearLayout>
