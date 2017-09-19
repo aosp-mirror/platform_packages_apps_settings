@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.content.Context;
+import android.os.RemoteException;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -64,5 +65,12 @@ public class UsageAccessDetailsTest {
         mFragment.logSpecialPermissionChange(false, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY), eq("app"));
+    }
+
+    @Test
+    public void refreshUi_nullPackageInfo_shouldNotCrash() throws RemoteException {
+        mFragment.mPackageInfo = null;
+        mFragment.refreshUi();
+        // should not crash
     }
 }
