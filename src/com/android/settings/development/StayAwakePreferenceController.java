@@ -101,19 +101,6 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     @Override
-    public void onDeveloperOptionsEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    public void onDeveloperOptionsDisabled() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STAY_ON_WHILE_PLUGGED_IN, SETTING_VALUE_OFF);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
-    }
-
-    @Override
     public void onResume() {
         if (mPreference != null) {
             mSettingsObserver.register(true /* register */);
@@ -125,6 +112,19 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
         if (mPreference != null) {
             mSettingsObserver.register(false /* unregister */);
         }
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        mPreference.setEnabled(true);
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.STAY_ON_WHILE_PLUGGED_IN, SETTING_VALUE_OFF);
+        mPreference.setChecked(false);
+        mPreference.setEnabled(false);
     }
 
     @VisibleForTesting
