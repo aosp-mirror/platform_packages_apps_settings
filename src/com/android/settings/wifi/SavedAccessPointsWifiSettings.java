@@ -116,6 +116,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     }
 
     private void initPreferences() {
+        Log.d(TAG, "Rebuilding the preferences");
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         final Context context = getPrefContext();
 
