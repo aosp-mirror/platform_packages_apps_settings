@@ -16,5 +16,104 @@
 
 package android.service.settings.suggestions;
 
+import android.app.PendingIntent;
+import android.os.Parcel;
+import android.text.TextUtils;
+
 public class Suggestion {
+    private final String mId;
+    private final CharSequence mTitle;
+    private final CharSequence mSummary;
+    private final PendingIntent mPendingIntent;
+
+    /**
+     * Gets the id for the suggestion object.
+     */
+    public String getId() {
+        return mId;
+    }
+
+    /**
+     * Title of the suggestion that is shown to the user.
+     */
+    public CharSequence getTitle() {
+        return mTitle;
+    }
+
+    /**
+     * Optional summary describing what this suggestion controls.
+     */
+    public CharSequence getSummary() {
+        return mSummary;
+    }
+
+    /**
+     * The Intent to launch when the suggestion is activated.
+     */
+    public PendingIntent getPendingIntent() {
+        return mPendingIntent;
+    }
+
+    private Suggestion(Builder builder) {
+        mTitle = builder.mTitle;
+        mSummary = builder.mSummary;
+        mPendingIntent = builder.mPendingIntent;
+        mId = builder.mId;
+    }
+
+    private Suggestion(Parcel in) {
+        mId = in.readString();
+        mTitle = in.readCharSequence();
+        mSummary = in.readCharSequence();
+        mPendingIntent = in.readParcelable(PendingIntent.class.getClassLoader());
+    }
+
+    /**
+     * Builder class for {@link Suggestion}.
+     */
+    public static class Builder {
+        private final String mId;
+        private CharSequence mTitle;
+        private CharSequence mSummary;
+        private PendingIntent mPendingIntent;
+
+        public Builder(String id) {
+            if (TextUtils.isEmpty(id)) {
+                throw new IllegalArgumentException("Suggestion id cannot be empty");
+            }
+            mId = id;
+        }
+
+        /**
+         * Sets suggestion title
+         */
+
+        public Builder setTitle(CharSequence title) {
+            mTitle = title;
+            return this;
+        }
+
+        /**
+         * Sets suggestion summary
+         */
+        public Builder setSummary(CharSequence summary) {
+            mSummary = summary;
+            return this;
+        }
+
+        /**
+         * Sets suggestion intent
+         */
+        public Builder setPendingIntent(PendingIntent pendingIntent) {
+            mPendingIntent = pendingIntent;
+            return this;
+        }
+
+        /**
+         * Builds an immutable {@link Suggestion} object.
+         */
+        public Suggestion build() {
+            return new Suggestion(this /* builder */);
+        }
+    }
 }

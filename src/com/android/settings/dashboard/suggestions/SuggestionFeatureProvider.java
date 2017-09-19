@@ -19,6 +19,7 @@ package com.android.settings.dashboard.suggestions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
 
 import com.android.settingslib.drawer.Tile;
@@ -31,8 +32,15 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Whether or not the whole suggestion feature is enabled.
+     * @deprecated in favor of {@link #isSuggestionV2Enabled(Context)}
      */
+    @Deprecated
     boolean isSuggestionEnabled(Context context);
+
+    /**
+     * Whether or not the suggestion v2 feature is enabled.
+     */
+    boolean isSuggestionV2Enabled(Context context);
 
     /**
      * Returns true if smart suggestion should be used instead of xml based SuggestionParser.
@@ -52,7 +60,9 @@ public interface SuggestionFeatureProvider {
      *
      * @param suggestions   List of suggestion Tiles
      * @param suggestionIds List of suggestion ids corresponding to the suggestion tiles.
+     * @deprecated in favor of SettingsIntelligence
      */
+    @Deprecated
     void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds);
 
     /**
@@ -62,8 +72,16 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Dismisses a suggestion.
+     *
+     * @deprecated in favor of {@link #dismissSuggestion(Context, Suggestion)}
      */
+    @Deprecated
     void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion);
+
+    /**
+     * Dismisses a suggestion.
+     */
+    void dismissSuggestion(Context context, Suggestion suggestion);
 
     /**
      * Returns an identifier for the suggestion
