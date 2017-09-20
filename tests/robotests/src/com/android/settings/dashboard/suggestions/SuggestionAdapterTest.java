@@ -203,7 +203,7 @@ public class SuggestionAdapterTest {
     public void onBindViewHolder_v2_itemViewShouldHandleClick()
             throws PendingIntent.CanceledException {
         final List<Suggestion> packages = makeSuggestionsV2("pkg1");
-        setupSuggestions(mActivity, null /* suggestionV1 */ , packages);
+        setupSuggestions(mActivity, null /* suggestionV1 */, packages);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionHolder.itemView.performClick();
@@ -231,6 +231,22 @@ public class SuggestionAdapterTest {
 
         ViewGroup itemView = (ViewGroup) mSuggestionHolder.itemView;
         assertThat(itemView.getChildCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void getSuggestionsV2_shouldReturnSuggestionWhenMatch() {
+        final List<Suggestion> suggestionsV2 = makeSuggestionsV2("pkg1");
+        setupSuggestions(mActivity, null /* suggestionV1 */, suggestionsV2);
+
+        assertThat(mSuggestionAdapter.getSuggestion(0)).isNull();
+        assertThat(mSuggestionAdapter.getSuggestionsV2(0)).isNotNull();
+
+        List<Tile> suggestionsV1 = makeSuggestions("pkg1");
+        setupSuggestions(mActivity, suggestionsV1, null /* suggestionV2 */);
+
+        assertThat(mSuggestionAdapter.getSuggestionsV2(0)).isNull();
+        assertThat(mSuggestionAdapter.getSuggestion(0)).isNotNull();
+
     }
 
     private void setupSuggestions(Context context, List<Tile> suggestions,

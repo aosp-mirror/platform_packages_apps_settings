@@ -222,6 +222,9 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
 
     public Tile getSuggestion(int position) {
         final long itemId = getItemId(position);
+        if (mSuggestions == null) {
+            return null;
+        }
         for (Tile tile : mSuggestions) {
             if (Objects.hash(tile.title) == itemId) {
                 return tile;
@@ -232,6 +235,9 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
 
     public Suggestion getSuggestionsV2(int position) {
         final long itemId = getItemId(position);
+        if (mSuggestionsV2 == null) {
+            return null;
+        }
         for (Suggestion suggestion : mSuggestionsV2) {
             if (Objects.hash(suggestion.getId()) == itemId) {
                 return suggestion;
