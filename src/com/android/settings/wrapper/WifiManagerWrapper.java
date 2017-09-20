@@ -1,5 +1,6 @@
 package com.android.settings.wrapper;
 
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
 /**
@@ -37,9 +38,16 @@ public class WifiManagerWrapper {
     }
 
     /**
-     * {@link WifiManager#removePasspointConfiguration}
+     * {@link WifiManager#forget}
      */
     public void forget(int netId, WifiManager.ActionListener listener) {
         mWifiManager.forget(netId, listener);
+    }
+
+    /**
+     * {@link WifiManager#save}
+     */
+    public void save(WifiConfiguration config, WifiManager.ActionListener listener) {
+        mWifiManager.save(config, listener);
     }
 }
