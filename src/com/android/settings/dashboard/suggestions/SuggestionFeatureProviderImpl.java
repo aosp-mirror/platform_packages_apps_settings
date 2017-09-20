@@ -194,8 +194,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     @VisibleForTesting
     boolean hasUsedNightDisplay(Context context) {
         final ContentResolver cr = context.getContentResolver();
-        final long lastActivatedTimeMillis = Secure.getLong(cr,
-                Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, -1);
-        return lastActivatedTimeMillis > 0;
+        return Secure.getInt(cr, Secure.NIGHT_DISPLAY_AUTO_MODE, 0) != 0
+                || Secure.getString(cr, Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME) != null;
     }
 }

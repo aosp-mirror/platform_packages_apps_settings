@@ -72,6 +72,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -430,14 +431,35 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivated() {
-        Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
+    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivatedAndManual() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                LocalDateTime.now().toString());
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
         assertThat(mProvider.hasUsedNightDisplay(mContext)).isTrue();
     }
 
     @Test
     public void nightDisplaySuggestion_isCompleted_ifPreviouslyActivated() {
-        Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                LocalDateTime.now().toString());
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifNonManualMode() {
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifPreviouslyCleared() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                null);
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
         assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
