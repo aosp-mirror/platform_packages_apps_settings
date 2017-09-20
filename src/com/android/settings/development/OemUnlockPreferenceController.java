@@ -122,12 +122,12 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     @Override
-    public void onDeveloperOptionsEnabled() {
+    protected void onDeveloperOptionsSwitchEnabled() {
         handleDeveloperOptionsToggled();
     }
 
     @Override
-    public void onDeveloperOptionsDisabled() {
+    protected void onDeveloperOptionsSwitchDisabled() {
         handleDeveloperOptionsToggled();
     }
 
@@ -143,10 +143,6 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     private void handleDeveloperOptionsToggled() {
-        if (mPreference == null) {
-            return;
-        }
-
         mPreference.setEnabled(enableOemUnlockPreference());
         if (mPreference.isEnabled()) {
             // Check restriction, disable mEnableOemUnlock and apply policy transparency.

@@ -54,10 +54,29 @@ public abstract class DeveloperOptionsPreferenceController extends
     /**
      * Called when developer options is enabled
      */
-    public abstract void onDeveloperOptionsEnabled();
+    public void onDeveloperOptionsEnabled() {
+        if (isAvailable()) {
+            onDeveloperOptionsSwitchEnabled();
+        }
+    }
 
     /**
      * Called when developer options is disabled
      */
-    public abstract void onDeveloperOptionsDisabled();
+    public void onDeveloperOptionsDisabled() {
+        if (isAvailable()) {
+            onDeveloperOptionsSwitchDisabled();
+        }
+    }
+
+    /**
+     * Called when developer options is enabled and the preference is available
+     */
+    protected abstract void onDeveloperOptionsSwitchEnabled();
+
+    /**
+     * Called when developer options is disabled and the preference is available
+     */
+    protected abstract void onDeveloperOptionsSwitchDisabled();
+
 }
