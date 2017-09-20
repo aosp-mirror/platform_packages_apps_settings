@@ -17,6 +17,7 @@
 package com.android.settings.dashboard.suggestions;
 
 import android.content.Context;
+import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -30,18 +31,37 @@ public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback 
     public interface Callback {
 
         /**
+         * @deprecated in favor of {@link #getSuggestionAt(int)}
          * Returns suggestion tile data from the callback
          */
+        @Deprecated
         Tile getSuggestionForPosition(int position);
+
+        /**
+         * @deprecated in favor of {@link #onSuggestionDismissed(Suggestion)}
+         * Called when a suggestion is dismissed.
+         */
+        @Deprecated
+        void onSuggestionDismissed(Tile suggestion);
+
+        /**
+         * Returns suggestion tile data from the callback
+         */
+        Suggestion getSuggestionAt(int position);
 
         /**
          * Called when a suggestion is dismissed.
          */
-        void onSuggestionDismissed(Tile suggestion);
+        void onSuggestionDismissed(Suggestion suggestion);
     }
 
     private final Context mContext;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
+
+    /**
+     * @deprecated in favor of the new Suggestion backend.
+     */
+    @Deprecated
     private final SuggestionParser mSuggestionParser;
     private final Callback mCallback;
 
@@ -79,8 +99,15 @@ public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback 
         if (mCallback == null) {
             return;
         }
-        final Tile suggestion = mCallback.getSuggestionForPosition(viewHolder.getAdapterPosition());
-        mSuggestionFeatureProvider.dismissSuggestion(mContext, mSuggestionParser, suggestion);
-        mCallback.onSuggestionDismissed(suggestion);
+        final int position = viewHolder.getAdapterPosition();
+        final Suggestion suggestionV2 = mCallback.getSuggestionAt(position);
+        if (suggestionV2 != null) {
+            mSuggestionFeatureProvider.dismissSuggestion(mContext, suggestionV2);
+            mCallback.onSuggestionDismissed(suggestionV2);
+        } else {
+            final Tile suggestion = mCallback.getSuggestionForPosition(position);
+            mSuggestionFeatureProvider.dismissSuggestion(mContext, mSuggestionParser, suggestion);
+            mCallback.onSuggestionDismissed(suggestion);
+        }
     }
 }

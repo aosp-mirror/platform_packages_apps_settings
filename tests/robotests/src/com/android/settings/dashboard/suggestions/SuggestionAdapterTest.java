@@ -15,13 +15,23 @@
  */
 package com.android.settings.dashboard.suggestions;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
+import android.service.settings.suggestions.Suggestion;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ContextThemeWrapper;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -31,14 +41,11 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.Tile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,22 +57,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SuggestionAdapterTest {
-    @Mock
-    private Tile mSuggestion1;
-    @Mock
-    private Tile mSuggestion2;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
 
@@ -74,6 +72,8 @@ public class SuggestionAdapterTest {
     private DashboardAdapter.DashboardItemHolder mSuggestionHolder;
     private List<Tile> mOneSuggestion;
     private List<Tile> mTwoSuggestions;
+    private List<Suggestion> mOneSuggestionV2;
+    private List<Suggestion> mTwoSuggestionsV2;
 
     @Before
     public void setUp() {
@@ -81,39 +81,75 @@ public class SuggestionAdapterTest {
         mContext = RuntimeEnvironment.application;
         FakeFeatureFactory.setupForTest(mActivity);
 
-        mSuggestion1.title = "Test Suggestion 1";
-        mSuggestion1.icon = mock(Icon.class);
-        mSuggestion2.title = "Test Suggestion 2";
-        mSuggestion2.icon = mock(Icon.class);
+        final Tile suggestion1 = new Tile();
+        final Tile suggestion2 = new Tile();
+        final Suggestion suggestion1V2 = new Suggestion.Builder("id1")
+                .setTitle("Test suggestion 1")
+                .build();
+        final Suggestion suggestion2V2 = new Suggestion.Builder("id2")
+                .setTitle("Test suggestion 2")
+                .build();
+        suggestion1.title = "Test Suggestion 1";
+        suggestion1.icon = mock(Icon.class);
+        suggestion2.title = "Test Suggestion 2";
+        suggestion2.icon = mock(Icon.class);
         mOneSuggestion = new ArrayList<>();
-        mOneSuggestion.add(mSuggestion1);
+        mOneSuggestion.add(suggestion1);
         mTwoSuggestions = new ArrayList<>();
-        mTwoSuggestions.add(mSuggestion1);
-        mTwoSuggestions.add(mSuggestion2);
+        mTwoSuggestions.add(suggestion1);
+        mTwoSuggestions.add(suggestion2);
+        mOneSuggestionV2 = new ArrayList<>();
+        mOneSuggestionV2.add(suggestion1V2);
+        mTwoSuggestionsV2 = new ArrayList<>();
+        mTwoSuggestionsV2.add(suggestion1V2);
+        mTwoSuggestionsV2.add(suggestion2V2);
     }
 
     @Test
     public void getItemCount_shouldReturnListSize() {
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion,
+                null /* suggestionV2 */, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(1);
 
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mTwoSuggestions, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mTwoSuggestions,
+                null /* suggestionV2 */, new ArrayList<>());
+        assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void getItemCount_v2_shouldReturnListSize() {
+        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
+                mOneSuggestionV2, new ArrayList<>());
+        assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(1);
+
+        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
+                mTwoSuggestionsV2, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(2);
     }
 
     @Test
     public void getItemViewType_shouldReturnSuggestionTile() {
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion,
+                null /* suggestionV2 */, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemViewType(0))
-            .isEqualTo(R.layout.suggestion_tile);
+                .isEqualTo(R.layout.suggestion_tile);
+    }
+
+    @Test
+    public void getItemViewType_v2_shouldReturnSuggestionTile() {
+        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
+                mOneSuggestionV2, new ArrayList<>());
+        assertThat(mSuggestionAdapter.getItemViewType(0))
+                .isEqualTo(R.layout.suggestion_tile);
     }
 
     @Test
     public void onBindViewHolder_shouldSetListener() {
         final View view = spy(LayoutInflater.from(mContext).inflate(
-            R.layout.suggestion_tile, new LinearLayout(mContext), true));
+                R.layout.suggestion_tile, new LinearLayout(mContext), true));
         mSuggestionHolder = new DashboardAdapter.DashboardItemHolder(view);
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion,
+                null /* suggestionV2 */, new ArrayList<>());
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
@@ -127,7 +163,7 @@ public class SuggestionAdapterTest {
         TextView textView = new TextView(RuntimeEnvironment.application);
         doReturn(textView).when(remoteViews).apply(any(Context.class), any(ViewGroup.class));
         packages.get(0).remoteViews = remoteViews;
-        setupSuggestions(mActivity, packages);
+        setupSuggestions(mActivity, packages, null);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
@@ -150,7 +186,7 @@ public class SuggestionAdapterTest {
         layout.addView(primary);
         doReturn(layout).when(remoteViews).apply(any(Context.class), any(ViewGroup.class));
         packages.get(0).remoteViews = remoteViews;
-        setupSuggestions(mActivity, packages);
+        setupSuggestions(mActivity, packages, null /* suggestionV2 */);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionHolder.itemView.performClick();
@@ -161,6 +197,18 @@ public class SuggestionAdapterTest {
         primary.performClick();
 
         verify(mActivity).startSuggestion(any(Intent.class));
+    }
+
+    @Test
+    public void onBindViewHolder_v2_itemViewShouldHandleClick()
+            throws PendingIntent.CanceledException {
+        final List<Suggestion> packages = makeSuggestionsV2("pkg1");
+        setupSuggestions(mActivity, null /* suggestionV1 */ , packages);
+
+        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
+        mSuggestionHolder.itemView.performClick();
+
+        verify(packages.get(0).getPendingIntent()).send();
     }
 
     @Test
@@ -176,7 +224,7 @@ public class SuggestionAdapterTest {
         layout.addView(primary);
         doReturn(layout).when(remoteViews).apply(any(Context.class), any(ViewGroup.class));
         packages.get(0).remoteViews = remoteViews;
-        setupSuggestions(mActivity, packages);
+        setupSuggestions(mActivity, packages, null /* suggestionV2 */);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
@@ -185,8 +233,10 @@ public class SuggestionAdapterTest {
         assertThat(itemView.getChildCount()).isEqualTo(1);
     }
 
-    private void setupSuggestions(Context context, List<Tile> suggestions) {
-        mSuggestionAdapter = new SuggestionAdapter(context, suggestions, new ArrayList<>());
+    private void setupSuggestions(Context context, List<Tile> suggestions,
+            List<Suggestion> suggestionsV2) {
+        mSuggestionAdapter = new SuggestionAdapter(context, suggestions, suggestionsV2,
+                new ArrayList<>());
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
                 new FrameLayout(RuntimeEnvironment.application),
                 mSuggestionAdapter.getItemViewType(0));
@@ -204,4 +254,14 @@ public class SuggestionAdapterTest {
         return suggestions;
     }
 
+    private List<Suggestion> makeSuggestionsV2(String... pkgNames) {
+        final List<Suggestion> suggestions = new ArrayList<>();
+        for (String pkgName : pkgNames) {
+            final Suggestion suggestion = new Suggestion.Builder(pkgName)
+                    .setPendingIntent(mock(PendingIntent.class))
+                    .build();
+            suggestions.add(suggestion);
+        }
+        return suggestions;
+    }
 }

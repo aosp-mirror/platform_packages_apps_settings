@@ -17,14 +17,15 @@
 package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.LoaderManager;
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
@@ -38,13 +39,14 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                SettingsShadowSystemProperties.class,
                 ShadowSuggestionController.class
         })
 public class SuggestionControllerMixinTest {
 
     @Mock
     private Context mContext;
+    @Mock
+    private SuggestionControllerMixin.SuggestionControllerHost mHost;
     private Lifecycle mLifecycle;
     private SuggestionControllerMixin mMixin;
 
@@ -53,33 +55,16 @@ public class SuggestionControllerMixinTest {
         MockitoAnnotations.initMocks(this);
         mLifecycle = new Lifecycle();
         when(mContext.getApplicationContext()).thenReturn(mContext);
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + SuggestionControllerMixin.FEATURE_FLAG, "true");
     }
 
     @After
     public void tearDown() {
         ShadowSuggestionController.reset();
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test
-    public void systemPropertySet_verifyIsEnabled() {
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + SuggestionControllerMixin.FEATURE_FLAG, "true");
-        assertThat(SuggestionControllerMixin.isEnabled()).isTrue();
-    }
-
-    @Test
-    public void systemPropertyNotSet_verifyIsDisabled() {
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + SuggestionControllerMixin.FEATURE_FLAG, "false");
-        assertThat(SuggestionControllerMixin.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void goThroughLifecycle_onStartStop_shouldStartStopService() {
-        mMixin = new SuggestionControllerMixin(mContext, mLifecycle);
+    public void goThroughLifecycle_onStartStop_shouldStartStopController() {
+        mMixin = new SuggestionControllerMixin(mContext, mHost, mLifecycle);
 
         mLifecycle.onStart();
         assertThat(ShadowSuggestionController.sStartCalled).isTrue();
@@ -90,10 +75,13 @@ public class SuggestionControllerMixinTest {
 
     @Test
     public void onServiceConnected_shouldGetSuggestion() {
-        mMixin = new SuggestionControllerMixin(mContext, mLifecycle);
+        final LoaderManager loaderManager = mock(LoaderManager.class);
+        when(mHost.getLoaderManager()).thenReturn(loaderManager);
+
+        mMixin = new SuggestionControllerMixin(mContext, mHost, mLifecycle);
         mMixin.onServiceConnected();
 
-        assertThat(ShadowSuggestionController.sGetSuggestionCalled).isTrue();
+        verify(loaderManager).restartLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS,
+                null /* args */, mMixin /* callback */);
     }
-
 }

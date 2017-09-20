@@ -15,13 +15,17 @@
  */
 package com.android.settings.dashboard.suggestions;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -30,7 +34,6 @@ import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
 import com.android.settings.dashboard.DashboardAdapter.IconCache;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,14 +44,18 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
-    private List<Tile> mSuggestions;
+    @Deprecated // in favor of mNewSuggestions
+    private final List<Tile> mSuggestions;
+    private final List<Suggestion> mSuggestionsV2;
     private final IconCache mCache;
     private final List<String> mSuggestionsShownLogged;
 
     public SuggestionAdapter(Context context, List<Tile> suggestions,
+            List<Suggestion> suggestionsV2,
             List<String> suggestionsShownLogged) {
         mContext = context;
         mSuggestions = suggestions;
+        mSuggestionsV2 = suggestionsV2;
         mSuggestionsShownLogged = suggestionsShownLogged;
         mCache = new IconCache(context);
         final FeatureFactory factory = FeatureFactory.getFactory(context);
@@ -66,6 +73,68 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
 
     @Override
     public void onBindViewHolder(DashboardItemHolder holder, int position) {
+        if (mSuggestions != null) {
+            bindSuggestionTile(holder, position);
+        } else {
+            bindSuggestion(holder, position);
+        }
+    }
+
+    private void bindSuggestion(DashboardItemHolder holder, int position) {
+        final Suggestion suggestion = mSuggestionsV2.get(position);
+        final String id = suggestion.getId();
+        if (!mSuggestionsShownLogged.contains(id)) {
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
+            mSuggestionsShownLogged.add(id);
+        }
+        // TODO: Add remote view field in Suggestion, and enable this.
+        //        if (suggestion.remoteViews != null) {
+        //            final ViewGroup itemView = (ViewGroup) holder.itemView;
+        //            itemView.removeAllViews();
+        //            itemView.addView(suggestion.remoteViews.apply(itemView.getContext(),
+        //                  itemView));
+        //        } else
+        {
+            // TODO: Add icon field in Suggestion, and enable this.
+            //            holder.icon.setImageDrawable(mCache.getIcon(suggestion.icon));
+            holder.title.setText(suggestion.getTitle());
+            final CharSequence summary = suggestion.getSummary();
+            if (!TextUtils.isEmpty(summary)) {
+                holder.summary.setText(summary);
+                holder.summary.setVisibility(View.VISIBLE);
+            } else {
+                holder.summary.setVisibility(View.GONE);
+            }
+        }
+        final View divider = holder.itemView.findViewById(R.id.divider);
+        if (divider != null) {
+            divider.setVisibility(position < mSuggestionsV2.size() - 1 ? View.VISIBLE : View.GONE);
+        }
+        View clickHandler = holder.itemView;
+        // If a view with @android:id/primary is defined, use that as the click handler
+        // instead.
+        final View primaryAction = holder.itemView.findViewById(android.R.id.primary);
+        if (primaryAction != null) {
+            clickHandler = primaryAction;
+            // set the item view to disabled to remove any touch effects
+            holder.itemView.setEnabled(false);
+        }
+        clickHandler.setOnClickListener(v -> {
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_SUGGESTION, id);
+            try {
+                suggestion.getPendingIntent().send();
+            } catch (PendingIntent.CanceledException e) {
+                Log.w(TAG, "Failed to start suggestion " + suggestion.getTitle());
+            }
+        });
+    }
+
+    /**
+     * @deprecated in favor {@link #bindSuggestion(DashboardItemHolder, int)}.
+     */
+    @Deprecated
+    private void bindSuggestionTile(DashboardItemHolder holder, int position) {
         final Tile suggestion = (Tile) mSuggestions.get(position);
         final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
                 mContext, suggestion);
@@ -77,7 +146,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
             mSuggestionsShownLogged.add(suggestionId);
         }
         if (suggestion.remoteViews != null) {
-            TileUtils.updateTileUsingSummaryUri(mContext, suggestion);
             final ViewGroup itemView = (ViewGroup) holder.itemView;
             itemView.removeAllViews();
             itemView.addView(suggestion.remoteViews.apply(itemView.getContext(), itemView));
@@ -115,20 +183,39 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
 
     @Override
     public long getItemId(int position) {
-        return Objects.hash(mSuggestions.get(position).title);
+        if (mSuggestions != null) {
+            return Objects.hash(mSuggestions.get(position).title);
+        } else {
+            return Objects.hash(mSuggestionsV2.get(position).getId());
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
-        Tile suggestion = getSuggestion(position);
-        return suggestion.remoteViews != null
-                ? R.layout.suggestion_tile_remote_container
-                : R.layout.suggestion_tile;
+        if (mSuggestions != null) {
+            Tile suggestion = getSuggestion(position);
+
+            return suggestion.remoteViews != null
+                    ? R.layout.suggestion_tile_remote_container
+                    : R.layout.suggestion_tile;
+        } else {
+
+            return R.layout.suggestion_tile;
+            // TODO: Add remote view field in Suggestion, and enable this.
+            //            Suggestion suggestion = getSuggestionsV2(position);
+            //            return suggestion.remoteViews != null
+            //                    ? R.layout.suggestion_tile_remote_container
+            //                    : R.layout.suggestion_tile;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mSuggestions.size();
+        if (mSuggestions != null) {
+            return mSuggestions.size();
+        } else {
+            return mSuggestionsV2.size();
+        }
     }
 
     public Tile getSuggestion(int position) {
@@ -136,6 +223,16 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         for (Tile tile : mSuggestions) {
             if (Objects.hash(tile.title) == itemId) {
                 return tile;
+            }
+        }
+        return null;
+    }
+
+    public Suggestion getSuggestionsV2(int position) {
+        final long itemId = getItemId(position);
+        for (Suggestion suggestion : mSuggestionsV2) {
+            if (Objects.hash(suggestion.getId()) == itemId) {
+                return suggestion;
             }
         }
         return null;
@@ -151,4 +248,8 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
                 mSuggestionFeatureProvider.isSmartSuggestionEnabled(mContext));
     }
 
+    public void removeSuggestion(Suggestion suggestion) {
+        mSuggestionsV2.remove(suggestion);
+        notifyDataSetChanged();
+    }
 }

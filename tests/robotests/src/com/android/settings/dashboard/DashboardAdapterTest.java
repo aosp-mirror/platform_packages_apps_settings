@@ -28,6 +28,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Pair;
@@ -558,6 +560,33 @@ public class DashboardAdapterTest {
     }
 
     @Test
+    public void testBindConditionAndSuggestion_v2_shouldSetSuggestionAdapterAndNoCrash() {
+        mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null);
+        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        final DashboardCategory category = mock(DashboardCategory.class);
+        final List<Tile> tiles = new ArrayList<>();
+        tiles.add(mock(Tile.class));
+        category.tiles = tiles;
+
+        mDashboardAdapter.setSuggestionsV2(suggestions);
+
+        final RecyclerView data = mock(RecyclerView.class);
+        when(data.getResources()).thenReturn(mResources);
+        when(data.getContext()).thenReturn(mContext);
+        when(mResources.getDisplayMetrics()).thenReturn(mock(DisplayMetrics.class));
+        final View itemView = mock(View.class);
+        when(itemView.findViewById(R.id.data)).thenReturn(data);
+        final DashboardAdapter.SuggestionAndConditionContainerHolder holder =
+                new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
+
+        mDashboardAdapter.onBindConditionAndSuggestion(
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
+
+        verify(data).setAdapter(any(SuggestionAdapter.class));
+        // should not crash
+    }
+
+    @Test
     public void testBindConditionAndSuggestion_emptySuggestion_shouldSetConditionAdpater() {
         final Bundle savedInstance = new Bundle();
         savedInstance.putInt(DashboardAdapter.STATE_SUGGESTION_CONDITION_MODE,
@@ -598,6 +627,17 @@ public class DashboardAdapterTest {
         return suggestions;
     }
 
+    private List<Suggestion> makeSuggestionsV2(String... pkgNames) {
+        final List<Suggestion> suggestions = new ArrayList<>();
+        for (String pkgName : pkgNames) {
+            final Suggestion suggestion = new Suggestion.Builder(pkgName)
+                    .setPendingIntent(mock(PendingIntent.class))
+                    .build();
+            suggestions.add(suggestion);
+        }
+        return suggestions;
+    }
+
     private void setupSuggestions(List<Tile> suggestions) {
         mDashboardAdapter.setCategoriesAndSuggestions(null /* category */, suggestions);
         final Context context = RuntimeEnvironment.application;
@@ -605,4 +645,6 @@ public class DashboardAdapterTest {
                 LayoutInflater.from(context).inflate(
                         R.layout.suggestion_condition_header, new RelativeLayout(context), true));
     }
+
+
 }

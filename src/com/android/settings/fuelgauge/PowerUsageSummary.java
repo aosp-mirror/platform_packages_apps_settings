@@ -110,10 +110,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
     @VisibleForTesting
-    static final int MENU_ADDITIONAL_BATTERY_INFO = Menu.FIRST + 4;
-    @VisibleForTesting
-    static final int MENU_TOGGLE_APPS = Menu.FIRST + 5;
-    private static final int MENU_HELP = Menu.FIRST + 6;
+    static final int MENU_TOGGLE_APPS = Menu.FIRST + 4;
+    private static final int MENU_HELP = Menu.FIRST + 5;
     public static final int DEBUG_INFO_LOADER = 3;
 
     @VisibleForTesting
@@ -329,10 +327,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         menu.add(Menu.NONE, MENU_HIGH_POWER_APPS, Menu.NONE, R.string.high_power_apps);
 
-        if (mPowerFeatureProvider.isAdditionalBatteryInfoEnabled()) {
-            menu.add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
-                    Menu.NONE, R.string.additional_battery_info);
-        }
         if (mPowerFeatureProvider.isPowerAccountingToggleEnabled()) {
             menu.add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE,
                     mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
@@ -370,12 +364,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
                         R.string.high_power_apps, null, null, 0);
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
-                return true;
-            case MENU_ADDITIONAL_BATTERY_INFO:
-                startActivity(mPowerFeatureProvider
-                        .getAdditionalBatteryInfoIntent());
-                metricsFeatureProvider.action(context,
-                        MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_USAGE_ALERTS);
                 return true;
             case MENU_TOGGLE_APPS:
                 mShowAllApps = !mShowAllApps;

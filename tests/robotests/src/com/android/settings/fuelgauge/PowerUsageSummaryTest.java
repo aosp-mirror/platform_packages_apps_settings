@@ -15,7 +15,6 @@
  */
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
 import static com.google.common.truth.Truth.assertThat;
@@ -186,8 +185,6 @@ public class PowerUsageSummaryTest {
         doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
-        when(mAdditionalBatteryInfoMenu.getItemId())
-                .thenReturn(MENU_ADDITIONAL_BATTERY_INFO);
         when(mToggleAppsMenu.getItemId()).thenReturn(MENU_TOGGLE_APPS);
         when(mHighPowerMenu.getItemId()).thenReturn(MENU_HIGH_POWER_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
@@ -227,46 +224,11 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testOptionsMenu_additionalBatteryInfoEnabled() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isAdditionalBatteryInfoEnabled())
-                .thenReturn(true);
-
-        mFragment.onCreateOptionsMenu(mMenu, mMenuInflater);
-
-        verify(mMenu).add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
-                Menu.NONE, R.string.additional_battery_info);
-
-        mFragment.onOptionsItemSelected(mAdditionalBatteryInfoMenu);
-
-        assertThat(mFragment.mStartActivityCalled).isTrue();
-        assertThat(mFragment.mStartActivityIntent).isEqualTo(ADDITIONAL_BATTERY_INFO_INTENT);
-    }
-
-    @Test
-    public void testOptionsMenu_additionalBatteryInfoDisabled() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isAdditionalBatteryInfoEnabled())
-                .thenReturn(false);
-
-        mFragment.onCreateOptionsMenu(mMenu, mMenuInflater);
-
-        verify(mMenu, never()).add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
-                Menu.NONE, R.string.additional_battery_info);
-    }
-
-    @Test
     public void testOptionsMenu_menuHighPower_metricEventInvoked() {
         mFragment.onOptionsItemSelected(mHighPowerMenu);
 
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
-    }
-
-    @Test
-    public void testOptionsMenu_menuAdditionalBattery_metricEventInvoked() {
-        mFragment.onOptionsItemSelected(mAdditionalBatteryInfoMenu);
-
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_USAGE_ALERTS);
     }
 
     @Test

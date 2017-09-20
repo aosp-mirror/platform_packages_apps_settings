@@ -16,11 +16,12 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.app.LoaderManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Loader;
+import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
-import android.support.annotation.VisibleForTesting;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -34,23 +35,32 @@ import java.util.List;
  * Manages IPC communication to SettingsIntelligence for suggestion related services.
  */
 public class SuggestionControllerMixin implements SuggestionController.ServiceConnectionListener,
-        LifecycleObserver, OnStart, OnStop {
+        LifecycleObserver, OnStart, OnStop, LoaderManager.LoaderCallbacks<List<Suggestion>> {
 
-    @VisibleForTesting
-    static final String FEATURE_FLAG = "new_settings_suggestion";
+    public interface SuggestionControllerHost {
+        /**
+         * Called when suggestion data fetching is ready.
+         */
+        void onSuggestionReady(List<Suggestion> data);
+
+        /**
+         * Returns {@link LoaderManager} associated with the host.
+         */
+        LoaderManager getLoaderManager();
+    }
+
     private static final String TAG = "SuggestionCtrlMixin";
     private static final boolean DEBUG = false;
 
     private final Context mContext;
     private final SuggestionController mSuggestionController;
+    private final SuggestionControllerHost mHost;
 
-    public static boolean isEnabled() {
-        return FeatureFlagUtils.isEnabled(FEATURE_FLAG);
-    }
-
-    public SuggestionControllerMixin(Context context, Lifecycle lifecycle) {
+    public SuggestionControllerMixin(Context context, SuggestionControllerHost host,
+            Lifecycle lifecycle) {
         mContext = context.getApplicationContext();
-        mSuggestionController = new SuggestionController(context,
+        mHost = host;
+        mSuggestionController = new SuggestionController(mContext,
                 new ComponentName(
                         "com.android.settings.intelligence",
                         "com.android.settings.intelligence.suggestions.SuggestionService"),
@@ -62,10 +72,6 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
 
     @Override
     public void onStart() {
-        if (!isEnabled()) {
-            Log.w(TAG, "Feature not enabled, skipping");
-            return;
-        }
         mSuggestionController.start();
     }
 
@@ -76,11 +82,8 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
 
     @Override
     public void onServiceConnected() {
-        // TODO: Call API to get data from a loader instead of in current thread.
-        final List<Suggestion> data = mSuggestionController.getSuggestions();
-        if (DEBUG) {
-            Log.d(TAG, "data size " + (data == null ? 0 : data.size()));
-        }
+        mHost.getLoaderManager().restartLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS,
+                null /* args */, this /* callback */);
     }
 
     @Override
@@ -88,5 +91,24 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
         if (DEBUG) {
             Log.d(TAG, "SuggestionService disconnected");
         }
+        mHost.getLoaderManager().destroyLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS);
+    }
+
+    @Override
+    public Loader<List<Suggestion>> onCreateLoader(int id, Bundle args) {
+        if (id == SuggestionLoader.LOADER_ID_SUGGESTIONS) {
+            return new SuggestionLoader(mContext, mSuggestionController);
+        }
+        throw new IllegalArgumentException("This loader id is not supported " + id);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Suggestion>> loader, List<Suggestion> data) {
+        mHost.onSuggestionReady(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Suggestion>> loader) {
+
     }
 }
