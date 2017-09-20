@@ -28,14 +28,14 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class TelephonyMonitorPreferenceController extends AbstractPreferenceController implements
+public class ConnectivityMonitorPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
 
-    private static final String KEY_TELEPHONY_MONITOR_SWITCH = "telephony_monitor_switch";
+    private static final String KEY_CONNECTIVITY_MONITOR_SWITCH = "connectivity_monitor_switch";
     @VisibleForTesting
     static final String BUILD_TYPE = "ro.build.type";
     @VisibleForTesting
-    static final String PROPERTY_TELEPHONY_MONITOR = "persist.radio.enable_tel_mon";
+    static final String PROPERTY_CONNECTIVITY_MONITOR = "persist.radio.enable_tel_mon";
 
     @VisibleForTesting
     static final String ENABLED_STATUS = "enabled";
@@ -48,7 +48,7 @@ public class TelephonyMonitorPreferenceController extends AbstractPreferenceCont
 
     private SwitchPreference mPreference;
 
-    public TelephonyMonitorPreferenceController(Context context) {
+    public ConnectivityMonitorPreferenceController(Context context) {
         super(context);
     }
 
@@ -56,19 +56,19 @@ public class TelephonyMonitorPreferenceController extends AbstractPreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mPreference = (SwitchPreference) screen.findPreference(KEY_TELEPHONY_MONITOR_SWITCH);
-            mPreference.setChecked(isTelephonyMonitorEnabled());
+            mPreference = (SwitchPreference) screen.findPreference(KEY_CONNECTIVITY_MONITOR_SWITCH);
+            mPreference.setChecked(isConnectivityMonitorEnabled());
         }
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_TELEPHONY_MONITOR_SWITCH;
+        return KEY_CONNECTIVITY_MONITOR_SWITCH;
     }
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor) &&
+        return mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor) &&
                 (SystemProperties.get(BUILD_TYPE).equals("userdebug") ||
                         SystemProperties.get(BUILD_TYPE).equals("eng"));
     }
@@ -80,11 +80,11 @@ public class TelephonyMonitorPreferenceController extends AbstractPreferenceCont
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_TELEPHONY_MONITOR_SWITCH.equals(preference.getKey())) {
+        if (KEY_CONNECTIVITY_MONITOR_SWITCH.equals(preference.getKey())) {
             final SwitchPreference switchPreference = (SwitchPreference) preference;
-            SystemProperties.set(PROPERTY_TELEPHONY_MONITOR,
+            SystemProperties.set(PROPERTY_CONNECTIVITY_MONITOR,
                     switchPreference.isChecked() ? USER_ENABLED_STATUS : USER_DISABLED_STATUS);
-            Toast.makeText(mContext, R.string.telephony_monitor_toast,
+            Toast.makeText(mContext, R.string.connectivity_monitor_toast,
                     Toast.LENGTH_LONG).show();
             return true;
         }
@@ -101,14 +101,15 @@ public class TelephonyMonitorPreferenceController extends AbstractPreferenceCont
         if (!isAvailable()) {
             return false;
         }
-        final boolean enabled = isTelephonyMonitorEnabled();
+        final boolean enabled = isConnectivityMonitorEnabled();
         mPreference.setChecked(enabled);
         return enabled;
     }
 
-    private boolean isTelephonyMonitorEnabled() {
-        final String tmStatus = SystemProperties.get(PROPERTY_TELEPHONY_MONITOR, DISABLED_STATUS);
-        return ENABLED_STATUS.equals(tmStatus) || USER_ENABLED_STATUS.equals(tmStatus);
+    private boolean isConnectivityMonitorEnabled() {
+        final String cmStatus = SystemProperties.get(PROPERTY_CONNECTIVITY_MONITOR,
+                DISABLED_STATUS);
+        return ENABLED_STATUS.equals(cmStatus) || USER_ENABLED_STATUS.equals(cmStatus);
     }
 
 }
