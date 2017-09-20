@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import android.os.SystemClock;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -41,6 +42,7 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
 
     private MetricsFeatureProvider mMetricsFeature;
     private int mSourceMetricsCategory = MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+    private long mVisibleTimestamp;
 
     public VisibilityLoggerMixin(int metricsCategory) {
         // MetricsFeature will be set during onAttach.
@@ -59,6 +61,7 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
 
     @Override
     public void onResume() {
+        mVisibleTimestamp = SystemClock.elapsedRealtime();
         if (mMetricsFeature != null && mMetricsCategory != METRICS_CATEGORY_UNKNOWN) {
             mMetricsFeature.visible(null /* context */, mSourceMetricsCategory, mMetricsCategory);
         }
@@ -66,6 +69,7 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
 
     @Override
     public void onPause() {
+        mVisibleTimestamp = 0;
         if (mMetricsFeature != null && mMetricsCategory != METRICS_CATEGORY_UNKNOWN) {
             mMetricsFeature.hidden(null /* context */, mMetricsCategory);
         }
@@ -84,5 +88,13 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
         }
         mSourceMetricsCategory = intent.getIntExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
                 MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+    }
+
+    /** Returns elapsed time since onResume() */
+    public long elapsedTimeSinceVisible() {
+        if (mVisibleTimestamp == 0) {
+            return 0;
+        }
+        return SystemClock.elapsedRealtime() - mVisibleTimestamp;
     }
 }
