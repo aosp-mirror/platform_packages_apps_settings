@@ -17,8 +17,6 @@ package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
-import static com.android.settings.Utils.setOverlayAllowed;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
@@ -145,22 +143,6 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
             AccessibilityServiceInfo info = accessibilityManager
                     .getInstalledServiceInfoWithComponentName(serviceComponentName);
             return AccessibilityServiceWarning.createCapabilitiesDialog(getActivity(), info, this);
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            if (mToken != null) {
-                setOverlayAllowed(getActivity(), mToken, false);
-            }
-        }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            if (mToken != null) {
-                setOverlayAllowed(getActivity(), mToken, true);
-            }
         }
 
         @Override
