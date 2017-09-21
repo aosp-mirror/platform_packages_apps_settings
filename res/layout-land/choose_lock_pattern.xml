@@ -138,10 +138,12 @@
         </LinearLayout>
 
         <!-- right side: lock pattern -->
-        <FrameLayout
+        <com.android.setupwizardlib.view.FillContentLayout
+            style="@style/LockPatternContainerStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.0">
+            android:layout_weight="1.0"
+            android:paddingStart="0dp">
 
             <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
                 android:layout_width="match_parent"
@@ -149,7 +151,7 @@
                 android:layout_gravity="center"
                 android:background="@color/lock_pattern_background" />
 
-        </FrameLayout>
+        </com.android.setupwizardlib.view.FillContentLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 

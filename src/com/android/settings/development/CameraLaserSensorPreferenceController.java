@@ -28,44 +28,42 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class CameraHalHdrplusPreferenceController extends AbstractPreferenceController
+public class CameraLaserSensorPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
-    private static final String KEY_CAMERA_HAL_HDRPLUS_SWITCH = "camera_hal_hdrplus_switch";
+    private static final String KEY_CAMERA_LASER_SENSOR_SWITCH = "camera_laser_sensor_switch";
     @VisibleForTesting
     static final String BUILD_TYPE = "ro.build.type";
     @VisibleForTesting
-    static final String PROPERTY_CAMERA_HAL_HDRPLUS = "persist.camera.hdrplus.enable";
+    static final String PROPERTY_CAMERA_LASER_SENSOR = "persist.camera.stats.disablehaf";
     @VisibleForTesting
-    static final String ENABLED = "1";
+    static final int ENABLED = 0;
     @VisibleForTesting
-    static final String DISABLED = "0";
+    static final int DISABLED = 2;
 
     private SwitchPreference mPreference;
 
-    public CameraHalHdrplusPreferenceController(Context context) {
+    public CameraLaserSensorPreferenceController(Context context) {
         super(context);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreference = (SwitchPreference) screen.findPreference(KEY_CAMERA_HAL_HDRPLUS_SWITCH);
-            mPreference.setChecked(isHalHdrplusEnabled());
-        }
+        mPreference = (SwitchPreference) screen.findPreference(KEY_CAMERA_LASER_SENSOR_SWITCH);
+        updatePreference();
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_CAMERA_HAL_HDRPLUS_SWITCH;
+        return KEY_CAMERA_LASER_SENSOR_SWITCH;
     }
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus) &&
-               (SystemProperties.get(BUILD_TYPE).equals("userdebug") ||
-                SystemProperties.get(BUILD_TYPE).equals("eng"));
+        String buildType = SystemProperties.get(BUILD_TYPE);
+        return mContext.getResources().getBoolean(R.bool.config_show_camera_laser_sensor) &&
+               (buildType.equals("userdebug") || buildType.equals("eng"));
     }
 
     @Override
@@ -75,12 +73,10 @@ public class CameraHalHdrplusPreferenceController extends AbstractPreferenceCont
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_CAMERA_HAL_HDRPLUS_SWITCH.equals(preference.getKey())) {
+        if (KEY_CAMERA_LASER_SENSOR_SWITCH.equals(preference.getKey())) {
             final SwitchPreference switchPreference = (SwitchPreference)preference;
-            SystemProperties.set(PROPERTY_CAMERA_HAL_HDRPLUS,
-                    switchPreference.isChecked() ? ENABLED : DISABLED);
-            Toast.makeText(mContext, R.string.camera_hal_hdrplus_toast,
-                    Toast.LENGTH_LONG).show();
+            String value = Integer.toString(switchPreference.isChecked() ? ENABLED : DISABLED);
+            SystemProperties.set(PROPERTY_CAMERA_LASER_SENSOR, value);
             return true;
         }
         return false;
@@ -96,12 +92,13 @@ public class CameraHalHdrplusPreferenceController extends AbstractPreferenceCont
         if (!isAvailable()) {
             return false;
         }
-        final boolean enabled = isHalHdrplusEnabled();
+        final boolean enabled = isLaserSensorEnabled();
         mPreference.setChecked(enabled);
         return enabled;
     }
 
-    private boolean isHalHdrplusEnabled() {
-        return SystemProperties.getBoolean(PROPERTY_CAMERA_HAL_HDRPLUS, false);
+    private boolean isLaserSensorEnabled() {
+        String prop = SystemProperties.get(PROPERTY_CAMERA_LASER_SENSOR, Integer.toString(ENABLED));
+        return prop.equals(Integer.toString(ENABLED));
     }
 }

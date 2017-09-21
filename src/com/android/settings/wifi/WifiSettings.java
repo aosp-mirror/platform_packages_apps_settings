@@ -88,7 +88,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiSettings";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
@@ -386,8 +385,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         setProgressBarVisible(true);
         mWifiTracker.forceUpdate();
-        if (DEBUG) {
-            Log.d(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
+        if (WifiTracker.sVerboseLogging) {
+            Log.i(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
         }
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
         updateAccessPointPreferences();
@@ -775,8 +774,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-        if (DEBUG) {
-            Log.d(TAG, "updateAccessPoints called for: " + accessPoints);
+        if (WifiTracker.sVerboseLogging) {
+            Log.i(TAG, "updateAccessPoints called for: " + accessPoints);
         }
 
         boolean hasAvailableAccessPoints = false;

@@ -425,6 +425,16 @@
 
     <style name="DreamStartButton" parent="android:Widget.Material.Button" />
 
+    <style name="LockPatternContainerStyle">
+        <item name="android:maxHeight">400dp</item>
+        <item name="android:maxWidth">420dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingHorizontal">44dp</item>
+        <item name="android:paddingTop">0dp</item>
+    </style>
+
     <style name="LockPatternStyle">
         <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
         <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
