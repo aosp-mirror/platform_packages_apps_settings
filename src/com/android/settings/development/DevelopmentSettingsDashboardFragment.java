@@ -181,7 +181,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         // running services
         // convert to file encryption
-        // picture color mode
+        controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         // webview implementation
         // cool color temperature
         // automatic system updates
