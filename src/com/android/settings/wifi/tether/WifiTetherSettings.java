@@ -46,7 +46,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
 
     public static boolean isTetherSettingPageEnabled() {
-        return SystemProperties.getBoolean("settings.ui.wifi.tether.enabled", true);
+        return SystemProperties.getBoolean("settings.ui.wifi.tether.enabled", false);
     }
 
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
