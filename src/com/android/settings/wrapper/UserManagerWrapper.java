@@ -41,4 +41,8 @@ public class UserManagerWrapper {
     public List<UserInfo> getUsers() {
         return mUserManager.getUsers();
     }
+
+    public List<UserInfo> getProfiles(int userHandle) {
+        return mUserManager.getProfiles(userHandle);
+    }
 }

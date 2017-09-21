@@ -22,14 +22,16 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.ArrayMap;
+import android.util.IconDrawableFactory;
+import android.util.Pair;
 import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -37,9 +39,13 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.wrapper.ActivityInfoWrapper;
+import com.android.settings.wrapper.UserManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PictureInPictureSettings extends EmptyTextSettings {
@@ -51,8 +57,38 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         IGNORE_PACKAGE_LIST.add("com.android.systemui");
     }
 
+    /**
+     * Comparator by name, then user id.
+     * {@see PackageItemInfo#DisplayNameComparator}
+     */
+    static class AppComparator implements Comparator<Pair<ApplicationInfo, Integer>> {
+
+        private final Collator mCollator = Collator.getInstance();
+        private final PackageManager mPm;
+
+        public AppComparator(PackageManager pm) {
+            mPm = pm;
+        }
+
+        public final int compare(Pair<ApplicationInfo, Integer> a,
+                Pair<ApplicationInfo, Integer> b) {
+            CharSequence  sa = a.first.loadLabel(mPm);
+            if (sa == null) sa = a.first.name;
+            CharSequence  sb = b.first.loadLabel(mPm);
+            if (sb == null) sb = b.first.name;
+            int nameCmp = mCollator.compare(sa.toString(), sb.toString());
+            if (nameCmp != 0) {
+                return nameCmp;
+            } else {
+                return a.second - b.second;
+            }
+        }
+    }
+
     private Context mContext;
-    private PackageManager mPackageManager;
+    private PackageManagerWrapper mPackageManager;
+    private UserManagerWrapper mUserManager;
+    private IconDrawableFactory mIconDrawableFactory;
 
     /**
      * @return true if the package has any activities that declare that they support
@@ -94,12 +130,23 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         return false;
     }
 
+    public PictureInPictureSettings() {
+        // Do nothing
+    }
+
+    public PictureInPictureSettings(PackageManagerWrapper pm, UserManagerWrapper um) {
+        mPackageManager = pm;
+        mUserManager = um;
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mContext = getActivity();
-        mPackageManager = mContext.getPackageManager();
+        mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
+        mUserManager = new UserManagerWrapper(mContext.getSystemService(UserManager.class));
+        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
     }
 
@@ -111,33 +158,25 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
 
-        // Fetch the set of applications which have at least one activity that declare that they
-        // support picture-in-picture
-        final ArrayMap<String, Boolean> packageToState = new ArrayMap<>();
-        final ArrayList<ApplicationInfo> pipApps = new ArrayList<>();
-        final List<PackageInfo> installedPackages = mPackageManager.getInstalledPackagesAsUser(
-                GET_ACTIVITIES, UserHandle.myUserId());
-        for (PackageInfo packageInfo : installedPackages) {
-            if (checkPackageHasPictureInPictureActivities(packageInfo.packageName,
-                    packageInfo.activities)) {
-                final String packageName = packageInfo.applicationInfo.packageName;
-                final boolean state = PictureInPictureDetails.getEnterPipStateForPackage(
-                        mContext, packageInfo.applicationInfo.uid, packageName);
-                pipApps.add(packageInfo.applicationInfo);
-                packageToState.put(packageName, state);
-            }
-        }
-        Collections.sort(pipApps, new PackageItemInfo.DisplayNameComparator(mPackageManager));
+        // Fetch the set of applications for each profile which have at least one activity that
+        // declare that they support picture-in-picture
+        final PackageManager pm = mPackageManager.getPackageManager();
+        final ArrayList<Pair<ApplicationInfo, Integer>> pipApps =
+                collectPipApps(UserHandle.myUserId());
+        Collections.sort(pipApps, new AppComparator(pm));
 
         // Rebuild the list of prefs
         final Context prefContext = getPrefContext();
-        for (final ApplicationInfo appInfo : pipApps) {
+        for (final Pair<ApplicationInfo, Integer> appData : pipApps) {
+            final ApplicationInfo appInfo = appData.first;
+            final int userId = appData.second;
+            final UserHandle user = UserHandle.of(userId);
             final String packageName = appInfo.packageName;
-            final CharSequence label = appInfo.loadLabel(mPackageManager);
+            final CharSequence label = appInfo.loadLabel(pm);
 
             final Preference pref = new Preference(prefContext);
-            pref.setIcon(appInfo.loadIcon(mPackageManager));
-            pref.setTitle(label);
+            pref.setIcon(mIconDrawableFactory.getBadgedIcon(appInfo, userId));
+            pref.setTitle(pm.getUserBadgedLabel(label, user));
             pref.setSummary(PictureInPictureDetails.getPreferenceSummary(prefContext,
                     appInfo.uid, packageName));
             pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -162,5 +201,29 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
+    }
+
+    /**
+     * @return the list of applications for the given user and all their profiles that have
+     *         activities which support PiP.
+     */
+    ArrayList<Pair<ApplicationInfo, Integer>> collectPipApps(int userId) {
+        final ArrayList<Pair<ApplicationInfo, Integer>> pipApps = new ArrayList<>();
+        final ArrayList<Integer> userIds = new ArrayList<>();
+        for (UserInfo user : mUserManager.getProfiles(userId)) {
+            userIds.add(user.id);
+        }
+
+        for (int id : userIds) {
+            final List<PackageInfo> installedPackages = mPackageManager.getInstalledPackagesAsUser(
+                    GET_ACTIVITIES, id);
+            for (PackageInfo packageInfo : installedPackages) {
+                if (checkPackageHasPictureInPictureActivities(packageInfo.packageName,
+                        packageInfo.activities)) {
+                    pipApps.add(new Pair<>(packageInfo.applicationInfo, id));
+                }
+            }
+        }
+        return pipApps;
     }
 }
