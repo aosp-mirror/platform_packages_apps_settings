@@ -189,7 +189,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // quick settings developer tiles
         // usb debugging
         // revoke usb debugging authorizations
-        // local terminal
+        controllers.add(new LocalTerminalPreferenceController(context));
         // bug report shortcut
         // select mock location app
         // enable view attribute inspection
