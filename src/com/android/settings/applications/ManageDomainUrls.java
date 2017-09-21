@@ -66,31 +66,13 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
-        mSession = mApplicationsState.newSession(this);
+        mSession = mApplicationsState.newSession(this, getLifecycle());
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mSession.resume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mSession.pause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mSession.release();
     }
 
     @Override

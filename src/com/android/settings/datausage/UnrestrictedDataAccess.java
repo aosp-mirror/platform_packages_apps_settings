@@ -64,7 +64,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
-        mSession = mApplicationsState.newSession(this);
+        mSession = mApplicationsState.newSession(this, getLifecycle());
         mShowSystem = icicle != null && icicle.getBoolean(EXTRA_SHOW_SYSTEM);
         mFilter = mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
                 : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER;
@@ -109,7 +109,6 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSession.resume();
         mDataUsageBridge.resume();
     }
 
@@ -117,13 +116,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
         mDataUsageBridge.pause();
-        mSession.pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSession.release();
         mDataUsageBridge.release();
     }
 
