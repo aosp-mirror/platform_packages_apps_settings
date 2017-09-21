@@ -25,7 +25,7 @@ import android.util.SparseArray;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +63,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     public static ShadowUserManager getShadow() {
-        return (ShadowUserManager) ShadowExtractor.extract(
+        return (ShadowUserManager) Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(UserManager.class));
     }
 }

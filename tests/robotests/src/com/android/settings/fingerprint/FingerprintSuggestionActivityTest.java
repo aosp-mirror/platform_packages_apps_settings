@@ -42,10 +42,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowKeyguardManager;
-import org.robolectric.util.ActivityController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(

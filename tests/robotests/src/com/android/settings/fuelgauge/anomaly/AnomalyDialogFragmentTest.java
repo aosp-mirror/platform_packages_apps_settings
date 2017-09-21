@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.anomaly;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;

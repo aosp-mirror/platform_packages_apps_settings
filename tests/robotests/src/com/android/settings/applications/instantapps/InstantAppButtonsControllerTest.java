@@ -51,6 +51,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -66,11 +67,16 @@ public class InstantAppButtonsControllerTest {
 
     private static final String TEST_INSTALLER_PACKAGE_NAME = "com.installer";
     private static final String TEST_INSTALLER_ACTIVITY_NAME = "com.installer.InstallerActivity";
-    private static final ComponentName TEST_INSTALLER_COMPONENT =
-            new ComponentName(
-                    TEST_INSTALLER_PACKAGE_NAME,
-                    TEST_INSTALLER_ACTIVITY_NAME);
     private static final String TEST_AIA_PACKAGE_NAME = "test.aia.package";
+    private static ComponentName sTestInstallerComponent;
+
+    @BeforeClass
+    public static void beforeClass() {
+        sTestInstallerComponent =
+                new ComponentName(
+                        TEST_INSTALLER_PACKAGE_NAME,
+                        TEST_INSTALLER_ACTIVITY_NAME);
+    }
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     Context mockContext;
@@ -133,7 +139,7 @@ public class InstantAppButtonsControllerTest {
         receivedListener.onClick(mockInstallButton);
         assertThat(testFragment.getStartActivityIntent()).isNotNull();
         assertThat(testFragment.getStartActivityIntent().getComponent())
-                .isEqualTo(TEST_INSTALLER_COMPONENT);
+                .isEqualTo(sTestInstallerComponent);
     }
 
     @Test

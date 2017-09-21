@@ -47,7 +47,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
@@ -74,8 +73,6 @@ public class FingerprintEnrollFindSensorTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
-
-        RuntimeEnvironment.getAppResourceLoader().getResourceIndex();
 
         mActivity = Robolectric.buildActivity(
                 FingerprintEnrollFindSensor.class,

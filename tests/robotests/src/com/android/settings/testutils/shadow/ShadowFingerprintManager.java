@@ -25,7 +25,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
-import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContextImpl;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -96,7 +96,7 @@ public class ShadowFingerprintManager {
     }
 
     public static ShadowFingerprintManager get() {
-        return (ShadowFingerprintManager) ShadowExtractor.extract(
+        return (ShadowFingerprintManager) Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(FingerprintManager.class));
     }
 }

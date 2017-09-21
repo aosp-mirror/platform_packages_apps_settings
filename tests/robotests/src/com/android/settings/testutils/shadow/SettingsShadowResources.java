@@ -4,7 +4,7 @@ import static android.util.TypedValue.TYPE_REFERENCE;
 
 import static org.robolectric.RuntimeEnvironment.application;
 import static org.robolectric.Shadows.shadowOf;
-import static org.robolectric.internal.Shadow.directlyOn;
+import static org.robolectric.shadow.api.Shadow.directlyOn;
 
 import android.annotation.DimenRes;
 import android.content.res.ColorStateList;
@@ -25,13 +25,13 @@ import android.util.TypedValue;
 import com.android.settings.R;
 
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.android.XmlResourceParserImpl;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
-import org.robolectric.internal.Shadow;
 import org.robolectric.res.StyleData;
 import org.robolectric.res.StyleResolver;
-import org.robolectric.res.builder.XmlResourceParserImpl;
+import org.robolectric.res.ThemeStyleSet;
 import org.robolectric.shadows.ShadowAssetManager;
 import org.robolectric.shadows.ShadowResources;
 import org.robolectric.util.ReflectionHelpers;
@@ -133,7 +133,7 @@ public class SettingsShadowResources extends ShadowResources {
         if (override instanceof String) {
             return (String) override;
         }
-        return Shadow.directlyOn(
+        return directlyOn(
                 realResources, Resources.class, "getString", ClassParameter.from(int.class, id));
     }
 
@@ -143,7 +143,7 @@ public class SettingsShadowResources extends ShadowResources {
         if (override instanceof Integer) {
             return (Integer) override;
         }
-        return Shadow.directlyOn(
+        return directlyOn(
                 realResources, Resources.class, "getInteger", ClassParameter.from(int.class, id));
     }
 
@@ -153,7 +153,7 @@ public class SettingsShadowResources extends ShadowResources {
         if (override instanceof Boolean) {
             return (boolean) override;
         }
-        return Shadow.directlyOn(realResources, Resources.class, "getBoolean",
+        return directlyOn(realResources, Resources.class, "getBoolean",
                 ClassParameter.from(int.class, id));
     }
 
@@ -184,13 +184,16 @@ public class SettingsShadowResources extends ShadowResources {
 
             // Track down all styles and remove all inheritance from private styles.
             ShadowAssetManager assetManager = shadowOf(RuntimeEnvironment.application.getAssets());
-            // The Object's below are actually ShadowAssetManager.OverlayedStyle. We can't use it
-            // here because it's package private.
-            Map<Long, List<Object>> appliedStylesList =
-                    ReflectionHelpers.getField(assetManager, "appliedStyles");
+            Map<Long, Object /* NativeTheme */> appliedStylesList =
+                    ReflectionHelpers.getField(assetManager, "nativeThemes");
             for (Long idx : appliedStylesList.keySet()) {
-                List<Object> appliedStyles = appliedStylesList.get(idx);
-                for (Object appliedStyle : appliedStyles) {
+                ThemeStyleSet appliedStyles = ReflectionHelpers.getField(
+                        appliedStylesList.get(idx), "themeStyleSet");
+                // The Object's below are actually ShadowAssetManager.OverlayedStyle. We can't use
+                // it here because it's private.
+                List<Object /* OverlayedStyle */> overlayedStyles =
+                        ReflectionHelpers.getField(appliedStyles, "styles");
+                for (Object appliedStyle : overlayedStyles) {
                     StyleResolver styleResolver = ReflectionHelpers.getField(appliedStyle, "style");
                     List<StyleData> styleDatas =
                             ReflectionHelpers.getField(styleResolver, "styles");
@@ -222,6 +225,10 @@ public class SettingsShadowResources extends ShadowResources {
             }
             return directlyOn(realTheme, Theme.class)
                     .resolveAttribute(resid, outValue, resolveRefs);
+        }
+
+        private Resources getResources() {
+            return ReflectionHelpers.callInstanceMethod(ShadowTheme.class, this, "getResources");
         }
     }
 }

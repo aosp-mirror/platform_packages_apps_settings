@@ -26,7 +26,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.os.BatteryStats;
 import android.text.format.DateUtils;
 

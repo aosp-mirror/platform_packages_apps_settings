@@ -17,6 +17,20 @@
 package com.android.settings.support;
 
 
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity
+        .PERMANENT_DISMISS_THRESHOLD;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity
+        .PREF_KEY_SUGGGESTION_COMPLETE;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity
+        .PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.isSuggestionComplete;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+import static org.robolectric.RuntimeEnvironment.application;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,20 +47,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.res.builder.RobolectricPackageManager;
-
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PERMANENT_DISMISS_THRESHOLD;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PREF_KEY_SUGGGESTION_COMPLETE;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity.isSuggestionComplete;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -57,14 +60,14 @@ public class NewDeviceIntroSuggestionActivityTest {
 
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
-    private RobolectricPackageManager mRobolectricPackageManager;
+    private ShadowPackageManager mShadowPackageManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest(mMockContext);
-        mContext = RuntimeEnvironment.application;
-        mRobolectricPackageManager = RuntimeEnvironment.getRobolectricPackageManager();
+        mContext = application;
+        mShadowPackageManager = Shadows.shadowOf(application.getPackageManager());
 
         when(mFeatureFactory.suggestionsFeatureProvider.getSharedPrefs(any(Context.class)))
                 .thenReturn(getSharedPreferences());
@@ -115,7 +118,7 @@ public class NewDeviceIntroSuggestionActivityTest {
                 .thenReturn("https://com.android.settings");
 
         final Intent intent = NewDeviceIntroSuggestionActivity.getLaunchIntent(mContext);
-        mRobolectricPackageManager.addResolveInfoForIntent(intent, new ResolveInfo());
+        mShadowPackageManager.addResolveInfoForIntent(intent, new ResolveInfo());
         assertThat(isSuggestionComplete(mContext)).isFalse();
     }
 

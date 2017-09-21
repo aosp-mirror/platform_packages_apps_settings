@@ -97,8 +97,8 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateBytes(0, 32 * GIGABYTE);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getTitle().toString()).isEqualTo("0.00B");
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 32GB");
+        assertThat(mPreference.getTitle().toString()).isEqualTo("0.00 B");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 32 GB");
     }
 
     @Test
@@ -106,8 +106,8 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateBytes(KILOBYTE, KILOBYTE * 10);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getTitle().toString()).isEqualTo("1.00KB");
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 10KB");
+        assertThat(mPreference.getTitle().toString()).isEqualTo("1.00 KB");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 10 KB");
     }
 
     @Test
@@ -123,8 +123,8 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateSizes(svp, volume);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getTitle().toString()).isEqualTo("9.00KB");
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 10KB");
+        assertThat(mPreference.getTitle().toString()).isEqualTo("9.00 KB");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used of 10 KB");
     }
 
     @Test

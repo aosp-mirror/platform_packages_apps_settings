@@ -77,7 +77,7 @@ public class MusicViewHolderControllerTest {
     public void storageShouldBeZeroBytesIfQueriedBeforeStorageQueryFinishes() {
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("0.00B");
+        assertThat(mHolder.summary.getText().toString()).isEqualTo("0.00 B");
     }
 
     @Test
@@ -88,7 +88,7 @@ public class MusicViewHolderControllerTest {
         mController.queryStats();
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("1.00B");
+        assertThat(mHolder.summary.getText().toString()).isEqualTo("1.00 B");
     }
 
     @Test

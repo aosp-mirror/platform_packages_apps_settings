@@ -38,6 +38,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -62,8 +63,12 @@ import static org.mockito.Mockito.when;
 })
 public class BluetoothEnablerTest {
 
-    private static final EnforcedAdmin FAKE_ENFORCED_ADMIN =
-            new EnforcedAdmin(new ComponentName("test.package", "test.Class"), 10);
+    private static EnforcedAdmin sFakeEnforcedAdmin;
+
+    @BeforeClass
+    public static void beforeClass() {
+        sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"), 10);
+    }
 
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -130,7 +135,7 @@ public class BluetoothEnablerTest {
     public void maybeEnforceRestrictions_disallowBluetoothRestrictionSet() {
         // GIVEN Bluetooth has been disallowed...
         when(mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
 
@@ -139,7 +144,7 @@ public class BluetoothEnablerTest {
         assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isTrue();
 
         // THEN the expected EnfoceAdmin is set.
-        verify(mMasterSwitchController).setDisabledByAdmin(FAKE_ENFORCED_ADMIN);
+        verify(mMasterSwitchController).setDisabledByAdmin(sFakeEnforcedAdmin);
 
         // THEN the switch is unchecked.
         verify(mMasterSwitchController).setChecked(false);
@@ -151,14 +156,14 @@ public class BluetoothEnablerTest {
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(null);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+                mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
 
         // WHEN the maybeEnforceRestrictions is called...
         // THEN true is returned to indicate there was a restriction to enforce.
         assertThat(mBluetoothEnabler.maybeEnforceRestrictions()).isTrue();
 
         // THEN the expected EnfoceAdmin is set.
-        verify(mMasterSwitchController).setDisabledByAdmin(FAKE_ENFORCED_ADMIN);
+        verify(mMasterSwitchController).setDisabledByAdmin(sFakeEnforcedAdmin);
 
         // THEN the switch is unchecked.
         verify(mMasterSwitchController).setChecked(false);
@@ -168,7 +173,7 @@ public class BluetoothEnablerTest {
     public void maybeEnforceRestrictions_disallowBluetoothNotOverriden() {
         // GIVEN Bluetooth has been disallowed...
         when(mRestrictionUtils.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(FAKE_ENFORCED_ADMIN);
+                mContext, UserManager.DISALLOW_BLUETOOTH)).thenReturn(sFakeEnforcedAdmin);
         when(mRestrictionUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH)).thenReturn(null);
 

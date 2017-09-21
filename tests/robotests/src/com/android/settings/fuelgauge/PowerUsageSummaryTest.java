@@ -66,6 +66,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -107,10 +108,14 @@ public class PowerUsageSummaryTest {
     private static final double BATTERY_OVERCOUNTED_USAGE = 500;
     private static final double PRECISION = 0.001;
     private static final double POWER_USAGE_PERCENTAGE = 50;
-    private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
-            new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
     public static final String NEW_ML_EST_SUFFIX = "(New ML est)";
     public static final String OLD_EST_SUFFIX = "(Old est)";
+    private static Intent sAdditionalBatteryInfoIntent;
+
+    @BeforeClass
+    public static void beforeClass() {
+        sAdditionalBatteryInfoIntent =new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
+    }
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -188,7 +193,7 @@ public class PowerUsageSummaryTest {
         when(mToggleAppsMenu.getItemId()).thenReturn(MENU_TOGGLE_APPS);
         when(mHighPowerMenu.getItemId()).thenReturn(MENU_HIGH_POWER_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
-                .thenReturn(ADDITIONAL_BATTERY_INFO_INTENT);
+                .thenReturn(sAdditionalBatteryInfoIntent);
         when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
         when(mBatteryHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
                 TIME_SINCE_LAST_FULL_CHARGE_US);

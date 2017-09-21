@@ -49,7 +49,7 @@ public class UserDictionaryCursorLoaderTest {
         MockitoAnnotations.initMocks(this);
         mContentProvider = new FakeProvider();
         mLoader = new UserDictionaryCursorLoader(RuntimeEnvironment.application, "" /* locale */);
-        ShadowContentResolver.registerProvider(UserDictionary.AUTHORITY, mContentProvider);
+        ShadowContentResolver.registerProviderInternal(UserDictionary.AUTHORITY, mContentProvider);
     }
 
     @Test

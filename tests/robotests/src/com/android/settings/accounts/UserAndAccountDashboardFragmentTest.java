@@ -17,7 +17,6 @@ package com.android.settings.accounts;
 
 import android.app.Activity;
 import android.content.pm.UserInfo;
-import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
@@ -25,7 +24,6 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settingslib.drawer.CategoryKey;
-import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;

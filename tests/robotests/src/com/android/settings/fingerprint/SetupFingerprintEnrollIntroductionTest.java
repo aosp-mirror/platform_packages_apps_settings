@@ -48,15 +48,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowKeyguardManager;
-import org.robolectric.util.ActivityController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -80,7 +79,7 @@ public class SetupFingerprintEnrollIntroductionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        RuntimeEnvironment.getRobolectricPackageManager()
+        Shadows.shadowOf(application.getPackageManager())
                 .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
         ShadowFingerprintManager.addToServiceMap();
 

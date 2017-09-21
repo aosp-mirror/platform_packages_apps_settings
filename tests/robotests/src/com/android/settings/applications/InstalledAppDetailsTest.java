@@ -192,7 +192,7 @@ public final class InstalledAppDetailsTest {
         when(stats.getTotalBytes()).thenReturn(1L);
 
         assertThat(InstalledAppDetails.getStorageSummary(context, stats, true))
-                .isEqualTo("1.00B used in external storage");
+                .isEqualTo("1.00 B used in external storage");
     }
 
     @Test
@@ -202,7 +202,7 @@ public final class InstalledAppDetailsTest {
         when(stats.getTotalBytes()).thenReturn(1L);
 
         assertThat(InstalledAppDetails.getStorageSummary(context, stats, false))
-                .isEqualTo("1.00B used in internal storage");
+                .isEqualTo("1.00 B used in internal storage");
     }
 
     @Test
