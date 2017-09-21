@@ -374,7 +374,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     void updateDependents(boolean banned) {
+        PreferenceGroup parent;
         if (mShowLegacyChannelConfig) {
+            parent = getPreferenceScreen();
             setVisible(mImportanceToggle, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
         } else {
             setVisible(mAdvanced, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
@@ -383,12 +385,13 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                     NotificationManager.IMPORTANCE_DEFAULT) && canPulseLight());
             setVisible(mVibrate, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
             setVisible(mRingtone, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
+            parent = mAdvanced;
         }
-        setVisible(mAdvanced, mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
-        setVisible(mAdvanced, mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
+        setVisible(parent, mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
+        setVisible(parent, mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
                 || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
                 && mDndVisualEffectsSuppressed));
-        setVisible(mAdvanced, mVisibilityOverride, isLockScreenSecure()
+        setVisible(parent, mVisibilityOverride, isLockScreenSecure()
                 &&checkCanBeVisible(NotificationManager.IMPORTANCE_LOW));
         setVisible(mBlockedDesc, mChannel.getImportance() == IMPORTANCE_NONE);
         if (mAppLink != null) {
