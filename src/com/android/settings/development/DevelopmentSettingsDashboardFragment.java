@@ -198,7 +198,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // select mock location app
         controllers.add(new DebugViewAttributesPreferenceController(context));
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
-        //controllers.add(new WaitForDebuggerPreferenceController(context));
+        controllers.add(new WaitForDebuggerPreferenceController(context));
         // verify apps over usb
         // logger buffer sizes
         // store logger data persistently on device
