@@ -21,4 +21,6 @@ package com.android.settings.development;
  */
 public interface DevelopmentOptionsActivityRequestCodes {
     int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
+
+    int REQUEST_CODE_DEBUG_APP = 1;
 }
