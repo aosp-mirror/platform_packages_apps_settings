@@ -21,6 +21,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -168,7 +169,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         } else {
             populateGroupList();
             int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
-            if (deletedChannelCount > 0) {
+            if (deletedChannelCount > 0 &&
+                    getPreferenceScreen().findPreference(KEY_DELETED) == null) {
                 mDeletedChannels = new FooterPreference(getPrefContext());
                 mDeletedChannels.setSelectable(false);
                 mDeletedChannels.setTitle(getResources().getQuantityString(
@@ -321,6 +323,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             setVisible(mBlockBar, false);
         }
     }
+
 
     private Comparator<NotificationChannelGroup> mChannelGroupComparator =
             new Comparator<NotificationChannelGroup>() {
