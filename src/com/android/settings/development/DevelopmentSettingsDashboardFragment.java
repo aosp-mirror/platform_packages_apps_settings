@@ -192,7 +192,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new LocalTerminalPreferenceController(context));
         // bug report shortcut
         // select mock location app
-        // enable view attribute inspection
+        controllers.add(new DebugViewAttributesPreferenceController(context));
         // select debug app
         // wait for debugger
         // verify apps over usb
