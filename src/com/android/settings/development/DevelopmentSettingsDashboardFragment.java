@@ -183,7 +183,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // convert to file encryption
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         // webview implementation
-        // cool color temperature
+        controllers.add(new CoolColorTemperaturePreferenceController(context));
         // automatic system updates
         // system ui demo mode
         // quick settings developer tiles
