@@ -318,15 +318,19 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 break;
             case NotificationManager.IMPORTANCE_DEFAULT:
                 title = getContext().getString(R.string.notification_importance_default_title);
-                if (hasValidSound()) {
+                if (hasValidSound(mChannel)) {
                     summary = getContext().getString(R.string.notification_importance_default);
+                } else {
+                    summary = getContext().getString(R.string.notification_importance_low);
                 }
                 break;
             case NotificationManager.IMPORTANCE_HIGH:
             case NotificationManager.IMPORTANCE_MAX:
                 title = getContext().getString(R.string.notification_importance_high_title);
-                if (hasValidSound()) {
+                if (hasValidSound(mChannel)) {
                     summary = getContext().getString(R.string.notification_importance_high);
+                } else {
+                    summary = getContext().getString(R.string.notification_importance_high_silent);
                 }
                 break;
             default:
@@ -367,10 +371,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         }
         return Settings.System.getInt(getContentResolver(),
                 Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1;
-    }
-
-    boolean hasValidSound() {
-        return mChannel.getSound() != null && !Uri.EMPTY.equals(mChannel.getSound());
     }
 
     void updateDependents(boolean banned) {
