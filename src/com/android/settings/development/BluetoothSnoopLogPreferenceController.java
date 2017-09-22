@@ -69,12 +69,12 @@ public class BluetoothSnoopLogPreferenceController extends
     }
 
     @Override
-    public void onDeveloperOptionsEnabled() {
+    protected void onDeveloperOptionsSwitchEnabled() {
         mPreference.setEnabled(true);
     }
 
     @Override
-    public void onDeveloperOptionsDisabled() {
+    protected void onDeveloperOptionsSwitchDisabled() {
         SystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, Boolean.toString(false));
         mPreference.setChecked(false);
         mPreference.setEnabled(false);

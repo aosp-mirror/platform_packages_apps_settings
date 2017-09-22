@@ -16,10 +16,13 @@
 
 package com.android.settings.development;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.widget.Switch;
 
@@ -40,7 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -104,6 +107,33 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onOemUnlockDialogConfirmed() {
+        final OemUnlockPreferenceController controller = getDevelopmentOptionsController(
+                OemUnlockPreferenceController.class);
+        controller.onOemUnlockConfirmed();
+    }
+
+    @Override
+    public void onOemUnlockDialogDismissed() {
+        final OemUnlockPreferenceController controller = getDevelopmentOptionsController(
+                OemUnlockPreferenceController.class);
+        controller.onOemUnlockDismissed();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof DeveloperOptionsPreferenceController) {
+                if (((DeveloperOptionsPreferenceController) controller).onActivityResult(
+                        requestCode, resultCode, data)) {
+                    return;
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -121,7 +151,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        mPreferenceControllers = buildPreferenceControllers(context, getLifecycle());
+        mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
+                this /* devOptionsDashboardFragment */);
         return mPreferenceControllers;
     }
 
@@ -140,12 +171,90 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        // take bug report
+        // desktop backup password
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
+        // hdcp checking
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
-
+        controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
+        // running services
+        // convert to file encryption
+        controllers.add(new PictureColorModePreferenceController(context, lifecycle));
+        // webview implementation
+        // cool color temperature
+        // automatic system updates
+        // system ui demo mode
+        // quick settings developer tiles
+        // usb debugging
+        // revoke usb debugging authorizations
+        // local terminal
+        // bug report shortcut
+        // select mock location app
+        // enable view attribute inspection
+        // select debug app
+        // wait for debugger
+        // verify apps over usb
+        // logger buffer sizes
+        // store logger data persistently on device
+        // telephony monitor
+        // camera laser sensor
+        // camera HAL HDR+
+        // feature flags
+        // wireless display certification
+        // enable wi-fi verbose logging
+        // aggressive wifi to mobile handover
+        // always allow wifi roam scans
+        // mobile always active
+        // tethering hardware acceleration
+        // select usb configuration
+        // show bluetooth devices without names
+        // disable absolute volume
+        // enable in-band ringing
+        // bluetooth avrcp version
+        // bluetooth audio codec
+        // bluetooth audio sample rate
+        // bluetooth audio bits per sample
+        // bluetooth audio channel mode
+        // bluetooth audio ldac codec: playback quality
+        // show taps
+        // pointer location
+        // show surface updates
+        // show layout bounds
+        // force rtl layout direction
+        // window animation scale
+        // transition animation scale
+        // animator duration scale
+        // simulate secondary displays
+        // smallest width
+        // force gpu rendering
+        // show gpu view updates
+        // show hardware layers updates
+        // debug gpu overdraw
+        // debug non-rectangular clip operations
+        // force 4x msaa
+        // disable hw overlays
+        // simulate color space
+        // set gpu renderer
+        // disable usb audio routing
+        // strict mode enabled
+        // profile gpu rendering
+        // don't keep activities
+        // background process limit
+        // background check
+        // show all anrs
+        // show notification channel warnings
+        // inactive apps
+        // force allow apps on external
+        // force activities to be resizable
+        // reset shortcutmanager rate-limiting
         return controllers;
+    }
+
+    @VisibleForTesting
+    <T extends AbstractPreferenceController> T getDevelopmentOptionsController(Class<T> clazz) {
+        return getPreferenceController(clazz);
     }
 
     /**
@@ -171,7 +280,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
+                    return buildPreferenceControllers(context, null /* activity */,
+                            null /* lifecycle */, null /* devOptionsDashboardFragment */);
                 }
             };
 }

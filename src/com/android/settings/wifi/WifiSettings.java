@@ -1070,7 +1070,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected void connect(final WifiConfiguration config, boolean isSavedNetwork) {
         // Log subtype if configuration is a saved network.
-        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT,
+        mMetricsFeatureProvider.action(getVisibilityLogger(), MetricsEvent.ACTION_WIFI_CONNECT,
                 isSavedNetwork);
         mWifiManager.connect(config, mConnectListener);
         mClickedConnect = true;

@@ -65,4 +65,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     protected final Context getPrefContext() {
         return getPreferenceManager().getContext();
     }
+
+    protected final VisibilityLoggerMixin getVisibilityLogger() {
+        return mVisibilityLoggerMixin;
+    }
 }

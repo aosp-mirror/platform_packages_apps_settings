@@ -17,7 +17,11 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -108,6 +112,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = {
+            ShadowPictureColorModePreferenceController.class
+    })
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
@@ -161,6 +168,24 @@ public class DevelopmentSettingsDashboardFragmentTest {
                 .isFalse();
     }
 
+    @Test
+    public void onOemUnlockDialogConfirmed_shouldCallControllerOemConfirmed() {
+        final OemUnlockPreferenceController controller = mock(OemUnlockPreferenceController.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                OemUnlockPreferenceController.class);
+        mDashboard.onOemUnlockDialogConfirmed();
+        verify(controller).onOemUnlockConfirmed();
+    }
+
+    @Test
+    public void onOemUnlockDialogConfirmed_shouldCallControllerOemDismissed() {
+        final OemUnlockPreferenceController controller = mock(OemUnlockPreferenceController.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                OemUnlockPreferenceController.class);
+        mDashboard.onOemUnlockDialogDismissed();
+        verify(controller).onOemUnlockDismissed();
+    }
+
     @Implements(EnableDevelopmentSettingWarningDialog.class)
     public static class ShadowEnableDevelopmentSettingWarningDialog {
 
@@ -174,6 +199,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
         public static void show(
                 DevelopmentSettingsDashboardFragment host) {
             mShown = true;
+        }
+    }
+
+    @Implements(PictureColorModePreferenceController.class)
+    public static class ShadowPictureColorModePreferenceController {
+
+        @Implementation
+        public boolean isAvailable() {
+            return true;
         }
     }
 }

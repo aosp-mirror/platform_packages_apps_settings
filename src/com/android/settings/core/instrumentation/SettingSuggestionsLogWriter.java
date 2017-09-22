@@ -46,6 +46,14 @@ public class SettingSuggestionsLogWriter implements LogWriter {
     }
 
     @Override
+    public void action(int category, int value, Pair<Integer, Object>... taggedData) {
+    }
+
+    @Override
+    public void action(int category, boolean value, Pair<Integer, Object>... taggedData) {
+    }
+
+    @Override
     public void action(Context context, int category, int value) {
     }
 

@@ -28,6 +28,7 @@ import android.view.Display;
 import com.android.settings.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ColorModePreference extends SwitchPreference implements DisplayListener {
 
@@ -35,7 +36,28 @@ public class ColorModePreference extends SwitchPreference implements DisplayList
     private Display mDisplay;
 
     private int mCurrentIndex;
-    private ArrayList<ColorModeDescription> mDescriptions;
+    private List<ColorModeDescription> mDescriptions;
+
+    public static List<ColorModeDescription> getColorModeDescriptions(Context context) {
+
+        List<ColorModeDescription> colorModeDescriptions = new ArrayList<>();
+        Resources resources = context.getResources();
+        int[] colorModes = resources.getIntArray(R.array.color_mode_ids);
+        String[] titles = resources.getStringArray(R.array.color_mode_names);
+        String[] descriptions = resources.getStringArray(R.array.color_mode_descriptions);
+        // Map the resource information describing color modes.
+        for (int i = 0; i < colorModes.length; i++) {
+            if (colorModes[i] != -1 && i != 1 /* Skip Natural for now. */) {
+                ColorModeDescription desc = new ColorModeDescription();
+                desc.colorMode = colorModes[i];
+                desc.title = titles[i];
+                desc.summary = descriptions[i];
+                colorModeDescriptions.add(desc);
+            }
+        }
+
+        return colorModeDescriptions;
+    }
 
     public ColorModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -75,22 +97,7 @@ public class ColorModePreference extends SwitchPreference implements DisplayList
     public void updateCurrentAndSupported() {
         mDisplay = mDisplayManager.getDisplay(Display.DEFAULT_DISPLAY);
 
-        mDescriptions = new ArrayList<>();
-
-        Resources resources = getContext().getResources();
-        int[] colorModes = resources.getIntArray(R.array.color_mode_ids);
-        String[] titles = resources.getStringArray(R.array.color_mode_names);
-        String[] descriptions = resources.getStringArray(R.array.color_mode_descriptions);
-        // Map the resource information describing color modes.
-        for (int i = 0; i < colorModes.length; i++) {
-            if (colorModes[i] != -1 && i != 1 /* Skip Natural for now. */) {
-                ColorModeDescription desc = new ColorModeDescription();
-                desc.colorMode = colorModes[i];
-                desc.title = titles[i];
-                desc.summary = descriptions[i];
-                mDescriptions.add(desc);
-            }
-        }
+        mDescriptions = getColorModeDescriptions(getContext());
 
         int currentColorMode = mDisplay.getColorMode();
         mCurrentIndex = -1;

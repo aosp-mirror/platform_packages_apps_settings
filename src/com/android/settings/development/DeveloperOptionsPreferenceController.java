@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -35,12 +36,47 @@ public abstract class DeveloperOptionsPreferenceController extends
     }
 
     /**
-     * Called when developer options is enabled
+     * Called when an activity returns to the DeveloperSettingsDashboardFragment.
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode  The integer result code returned by the child activity
+     *                    through its setResult().
+     * @param data        An Intent, which can return result data to the caller
+     *                    (various data can be attached to Intent "extras").
+     * @return true if the controller handled the activity result
      */
-    public abstract void onDeveloperOptionsEnabled();
+    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+        return false;
+    }
 
     /**
-     *Called when developer options is disabled
+     * Called when developer options is enabled
      */
-    public abstract void onDeveloperOptionsDisabled();
+    public void onDeveloperOptionsEnabled() {
+        if (isAvailable()) {
+            onDeveloperOptionsSwitchEnabled();
+        }
+    }
+
+    /**
+     * Called when developer options is disabled
+     */
+    public void onDeveloperOptionsDisabled() {
+        if (isAvailable()) {
+            onDeveloperOptionsSwitchDisabled();
+        }
+    }
+
+    /**
+     * Called when developer options is enabled and the preference is available
+     */
+    protected abstract void onDeveloperOptionsSwitchEnabled();
+
+    /**
+     * Called when developer options is disabled and the preference is available
+     */
+    protected abstract void onDeveloperOptionsSwitchDisabled();
+
 }
