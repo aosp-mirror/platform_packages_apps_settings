@@ -17,13 +17,13 @@
 package com.android.settings.dashboard.suggestions;
 
 import android.app.LoaderManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
 import android.util.Log;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -61,9 +61,9 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
         mContext = context.getApplicationContext();
         mHost = host;
         mSuggestionController = new SuggestionController(mContext,
-                new ComponentName(
-                        "com.android.settings.intelligence",
-                        "com.android.settings.intelligence.suggestions.SuggestionService"),
+                FeatureFactory.getFactory(mContext)
+                        .getSuggestionFeatureProvider(mContext)
+                        .getSuggestionServiceComponent(),
                 this /* serviceConnectionListener */);
         if (lifecycle != null) {
             lifecycle.addObserver(this);

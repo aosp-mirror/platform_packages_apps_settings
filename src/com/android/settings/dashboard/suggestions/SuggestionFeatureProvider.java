@@ -32,6 +32,7 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Whether or not the whole suggestion feature is enabled.
+     *
      * @deprecated in favor of {@link #isSuggestionV2Enabled(Context)}
      */
     @Deprecated
@@ -41,6 +42,11 @@ public interface SuggestionFeatureProvider {
      * Whether or not the suggestion v2 feature is enabled.
      */
     boolean isSuggestionV2Enabled(Context context);
+
+    /**
+     * Returns the component name for SuggestionService.
+     */
+    ComponentName getSuggestionServiceComponent();
 
     /**
      * Returns true if smart suggestion should be used instead of xml based SuggestionParser.
