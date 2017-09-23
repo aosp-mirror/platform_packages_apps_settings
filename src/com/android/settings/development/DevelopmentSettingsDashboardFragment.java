@@ -183,16 +183,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // convert to file encryption
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         // webview implementation
-        // cool color temperature
+        controllers.add(new CoolColorTemperaturePreferenceController(context));
         // automatic system updates
         // system ui demo mode
         // quick settings developer tiles
         // usb debugging
         // revoke usb debugging authorizations
-        // local terminal
+        controllers.add(new LocalTerminalPreferenceController(context));
         // bug report shortcut
         // select mock location app
-        // enable view attribute inspection
+        controllers.add(new DebugViewAttributesPreferenceController(context));
         // select debug app
         // wait for debugger
         // verify apps over usb

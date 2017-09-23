@@ -135,6 +135,12 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
+    public void getSuggestionServiceComponentName_shouldReturnAndroidPackage() {
+        assertThat(mProvider.getSuggestionServiceComponent().getPackageName())
+                .isEqualTo("com.android.settings.intelligence");
+    }
+
+    @Test
     public void isSuggestionCompleted_doubleTapPower_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, false);

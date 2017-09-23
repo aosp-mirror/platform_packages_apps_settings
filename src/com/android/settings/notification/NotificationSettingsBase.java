@@ -49,6 +49,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -479,13 +480,20 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             case NotificationManager.IMPORTANCE_LOW:
                 return getContext().getString(R.string.notification_importance_low);
             case NotificationManager.IMPORTANCE_DEFAULT:
-                return getContext().getString(R.string.notification_importance_default);
+                if (hasValidSound(channel)) {
+                    return getContext().getString(R.string.notification_importance_default);
+                } else { // Silent
+                    return getContext().getString(R.string.notification_importance_low);
+                }
             case NotificationManager.IMPORTANCE_HIGH:
             case NotificationManager.IMPORTANCE_MAX:
             default:
-                return getContext().getString(R.string.notification_importance_high);
+                if (hasValidSound(channel)) {
+                    return getContext().getString(R.string.notification_importance_high);
+                } else { // Silent
+                    return getContext().getString(R.string.notification_importance_high_silent);
+                }
         }
-
     }
 
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
@@ -595,4 +603,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                 }
                 return left.getId().compareTo(right.getId());
             };
+
+    boolean hasValidSound(NotificationChannel channel) {
+        return channel.getSound() != null && !Uri.EMPTY.equals(channel.getSound());
+    }
 }

@@ -79,6 +79,13 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return !isLowRamDevice && isV2Enabled();
     }
 
+    @Override
+    public ComponentName getSuggestionServiceComponent() {
+        return new ComponentName(
+                "com.android.settings.intelligence",
+                "com.android.settings.intelligence.suggestions.SuggestionService");
+    }
+
     private static boolean isV2Enabled() {
         return FeatureFlagUtils.isEnabled(FEATURE_FLAG_SUGGESTIONS_V2);
     }

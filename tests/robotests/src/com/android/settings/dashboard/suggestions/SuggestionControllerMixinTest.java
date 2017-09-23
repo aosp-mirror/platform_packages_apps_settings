@@ -23,8 +23,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.database.MatrixCursor;
 
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -32,6 +34,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
@@ -43,7 +46,7 @@ import org.robolectric.annotation.Config;
         })
 public class SuggestionControllerMixinTest {
 
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private SuggestionControllerMixin.SuggestionControllerHost mHost;
@@ -53,6 +56,7 @@ public class SuggestionControllerMixinTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
         mLifecycle = new Lifecycle();
         when(mContext.getApplicationContext()).thenReturn(mContext);
     }
