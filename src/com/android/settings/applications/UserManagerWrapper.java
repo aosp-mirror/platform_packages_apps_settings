@@ -29,4 +29,5 @@ import java.util.List;
 public interface UserManagerWrapper {
     UserInfo getPrimaryUser();
     List<UserInfo> getUsers();
+    List<UserInfo> getProfiles(int userHandle);
 }

@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationChannel.USER_LOCKED_IMPORTANCE;
+import static android.app.NotificationChannel.USER_LOCKED_SOUND;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
@@ -24,6 +25,7 @@ import static android.app.NotificationManager.IMPORTANCE_MAX;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
 
 import android.content.Context;
+import android.media.RingtoneManager;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -125,6 +127,7 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference clicked) {
+        int oldImportance = mChannel.getImportance();
         switch (clicked.getKey()) {
             case KEY_IMPORTANCE_HIGH:
                 mChannel.setImportance(IMPORTANCE_HIGH);
@@ -140,6 +143,17 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
                 break;
         }
         updateRadioButtons(clicked.getKey());
+
+        // If you are moving from an importance level without sound to one with sound,
+        // but the sound you had selected was "Silence",
+        // then set sound for this channel to your default sound,
+        // because you probably intended to cause this channel to actually start making sound.
+        if (oldImportance < IMPORTANCE_DEFAULT && !hasValidSound(mChannel) &&
+                mChannel.getImportance() >= IMPORTANCE_DEFAULT) {
+            mChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
+                    mChannel.getAudioAttributes());
+            mChannel.lockFields(USER_LOCKED_SOUND);
+        }
         mChannel.lockFields(USER_LOCKED_IMPORTANCE);
         mBackend.updateChannel(mAppRow.pkg, mAppRow.uid, mChannel);
     }
