@@ -40,6 +40,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * deprecated in favour of {@link CameraLaserSensorPreferenceControllerV2}
+ */
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {SettingsShadowSystemProperties.class})

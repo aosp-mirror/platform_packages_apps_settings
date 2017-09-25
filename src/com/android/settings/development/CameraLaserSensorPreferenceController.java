@@ -28,6 +28,10 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+/**
+ * deprecated in favor of {@link CameraLaserSensorPreferenceControllerV2}
+ */
+@Deprecated
 public class CameraLaserSensorPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
