@@ -184,7 +184,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         // webview implementation
         controllers.add(new CoolColorTemperaturePreferenceController(context));
-        // automatic system updates
+        controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         // system ui demo mode
         // quick settings developer tiles
         // usb debugging
