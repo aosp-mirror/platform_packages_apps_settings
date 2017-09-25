@@ -123,7 +123,7 @@ public class Settings extends SettingsActivity {
     public static class PrintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrintJobSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModePrioritySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ZenModeBehaviorSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
