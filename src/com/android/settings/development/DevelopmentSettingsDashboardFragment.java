@@ -204,7 +204,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // feature flags
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         // enable wi-fi verbose logging
-        // aggressive wifi to mobile handover
+        controllers.add(new WifiAggressiveHandoverPreferenceController(context));
         controllers.add(new WifiRoamScansPreferenceController(context));
         // mobile always active
         // tethering hardware acceleration
