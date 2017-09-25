@@ -35,11 +35,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings.Secure;
+import android.service.settings.suggestions.Suggestion;
 import android.util.FeatureFlagUtils;
 import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
 import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
@@ -94,6 +95,8 @@ public class SuggestionFeatureProviderImplTest {
     private Context mContext;
     @Mock
     private SuggestionParser mSuggestionParser;
+    @Mock
+    private SuggestionControllerMixin mSuggestionControllerMixin;
     @Mock
     private Tile mSuggestion;
     @Mock
@@ -325,11 +328,21 @@ public class SuggestionFeatureProviderImplTest {
 
     @Test
     public void dismissSuggestion_noParserOrSuggestion_noop() {
-        mProvider.dismissSuggestion(mContext, null, null);
+        mProvider.dismissSuggestion(mContext, null, (Tile) null);
         mProvider.dismissSuggestion(mContext, mSuggestionParser, null);
         mProvider.dismissSuggestion(mContext, null, mSuggestion);
 
         verifyZeroInteractions(mFactory.metricsFeatureProvider);
+    }
+
+    @Test
+    public void dismissSuggestion_noControllerOrSuggestion_noop() {
+        mProvider.dismissSuggestion(mContext, null, (Suggestion) null);
+        mProvider.dismissSuggestion(mContext, mSuggestionControllerMixin, null);
+        mProvider.dismissSuggestion(mContext, null, new Suggestion.Builder("id").build());
+
+        verifyZeroInteractions(mFactory.metricsFeatureProvider);
+        verifyZeroInteractions(mSuggestionControllerMixin);
     }
 
     @Test

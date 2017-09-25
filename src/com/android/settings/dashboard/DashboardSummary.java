@@ -91,6 +91,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSuggestionFeatureProvider = FeatureFactory.getFactory(context)
                 .getSuggestionFeatureProvider(context);
         if (mSuggestionFeatureProvider.isSuggestionV2Enabled(context)) {
+            Log.d(TAG, "Suggestion v2 is enabled, creating SuggestionControllerMixin");
             mSuggestionControllerMixin = new SuggestionControllerMixin(context, this /* host */,
                     getLifecycle());
         }
@@ -207,7 +208,8 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
-                mSuggestionParser, this /* SuggestionDismissController.Callback */);
+                mSuggestionParser, mSuggestionControllerMixin,
+                this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
@@ -224,7 +226,7 @@ public class DashboardSummary extends InstrumentedFragment
     @VisibleForTesting
     void rebuildUI() {
         if (!mSuggestionFeatureProvider.isSuggestionEnabled(getContext())) {
-            Log.d(TAG, "Suggestion feature is disabled, skipping suggestion entirely");
+            Log.d(TAG, "Suggestion v1 feature is disabled, skipping suggestion v1");
             updateCategory();
         } else {
             new SuggestionLoader().execute();
