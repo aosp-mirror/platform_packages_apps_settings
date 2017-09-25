@@ -202,7 +202,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
         // camera HAL HDR+
         // feature flags
-        // wireless display certification
+        controllers.add(new WifiDisplayCertificationPreferenceController(context));
         // enable wi-fi verbose logging
         // aggressive wifi to mobile handover
         // always allow wifi roam scans
