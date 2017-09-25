@@ -200,7 +200,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // store logger data persistently on device
         // telephony monitor
         controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
-        // camera HAL HDR+
+        controllers.add(new CameraHalHdrPlusPreferenceControllerV2(context));
         // feature flags
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         // enable wi-fi verbose logging
