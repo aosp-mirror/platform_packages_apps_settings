@@ -270,7 +270,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // select usb configuration
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
-        // enable in-band ringing
+        controllers.add(new BluetoothInbandRingingPreferenceController(context));
         // bluetooth avrcp version
         // bluetooth audio codec
         // bluetooth audio sample rate

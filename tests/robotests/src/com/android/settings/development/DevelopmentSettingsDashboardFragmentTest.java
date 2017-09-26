@@ -114,7 +114,8 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     @Config(shadows = {
             ShadowPictureColorModePreferenceController.class,
-            ShadowAdbPreferenceController.class
+            ShadowAdbPreferenceController.class,
+            ShadowBluetoothInbandRingingPreferenceController.class
     })
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
@@ -233,6 +234,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Implements(AdbPreferenceController.class)
     public static class ShadowAdbPreferenceController {
+        @Implementation
+        public boolean isAvailable() {
+            return true;
+        }
+    }
+
+    @Implements(BluetoothInbandRingingPreferenceController.class)
+    public static class ShadowBluetoothInbandRingingPreferenceController {
+
         @Implementation
         public boolean isAvailable() {
             return true;
