@@ -184,7 +184,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         // webview implementation
         controllers.add(new CoolColorTemperaturePreferenceController(context));
-        // automatic system updates
+        controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         // system ui demo mode
         // quick settings developer tiles
         // usb debugging
@@ -199,10 +199,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // logger buffer sizes
         // store logger data persistently on device
         // telephony monitor
-        // camera laser sensor
+        controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
         // camera HAL HDR+
         // feature flags
-        // wireless display certification
+        controllers.add(new WifiDisplayCertificationPreferenceController(context));
         // enable wi-fi verbose logging
         // aggressive wifi to mobile handover
         // always allow wifi roam scans

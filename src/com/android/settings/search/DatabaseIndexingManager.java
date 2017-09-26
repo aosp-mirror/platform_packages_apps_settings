@@ -23,7 +23,24 @@ import static com.android.settings.search.DatabaseResultLoader
 import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_KEY;
 import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ENABLED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ICON;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_ACTION;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.LOCALE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.PAYLOAD;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.SCREEN_TITLE;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.USER_ID;
 import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
 
 import android.content.ContentValues;
@@ -38,10 +55,12 @@ import android.os.Build;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
 
+import com.android.settings.search.indexing.IndexData;
 import com.android.settings.search.indexing.IndexDataConverter;
 import com.android.settings.search.indexing.PreIndexData;
 import com.android.settings.search.indexing.PreIndexDataCollector;
@@ -49,6 +68,7 @@ import com.android.settings.search.indexing.PreIndexDataCollector;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -72,6 +92,7 @@ public class DatabaseIndexingManager {
     final AtomicBoolean mIsIndexingComplete = new AtomicBoolean(false);
 
     private PreIndexDataCollector mCollector;
+    private IndexDataConverter mConverter;
 
     private Context mContext;
 
@@ -182,8 +203,8 @@ public class DatabaseIndexingManager {
      * @param localeStr       the default locale for the device.
      */
     @VisibleForTesting
-    void updateDatabase(PreIndexData indexData, boolean needsReindexing, String localeStr) {
-        final Map<String, Set<String>> nonIndexableKeys = indexData.nonIndexableKeys;
+    void updateDatabase(PreIndexData preIndexData, boolean needsReindexing, String localeStr) {
+        final Map<String, Set<String>> nonIndexableKeys = preIndexData.nonIndexableKeys;
 
         final SQLiteDatabase database = getWritableDatabase();
         if (database == null) {
@@ -194,8 +215,9 @@ public class DatabaseIndexingManager {
         try {
             database.beginTransaction();
 
-            // Add new data from Providers at initial index time, or inserted later.
-            addIndaxebleDataToDatabase(database, localeStr, indexData);
+            // Convert all Pre-index data to Index data.
+            List<IndexData> indexData = getIndexData(localeStr, preIndexData);
+            insertIndexData(database, indexData);
 
             // Only check for non-indexable key updates after initial index.
             // Enabled state with non-indexable keys is checked when items are first inserted.
@@ -209,14 +231,64 @@ public class DatabaseIndexingManager {
         }
     }
 
-
     @VisibleForTesting
-    void addIndaxebleDataToDatabase(SQLiteDatabase database, String locale, PreIndexData data) {
-        if (data.dataToUpdate.size() == 0) {
-            return;
+    List<IndexData> getIndexData(String locale, PreIndexData data) {
+        if (mConverter == null) {
+            mConverter = new IndexDataConverter(mContext);
         }
-        IndexDataConverter manager = new IndexDataConverter(mContext, database);
-        manager.addDataToDatabase(locale, data.dataToUpdate, data.nonIndexableKeys);
+        return mConverter.convertPreIndexDataToIndexData(data, locale);
+    }
+
+    /**
+     * Inserts all of the entries in {@param indexData} into the {@param database}
+     * as Search Data and as part of the Information Hierarchy.
+     */
+    @VisibleForTesting
+    void insertIndexData(SQLiteDatabase database, List<IndexData> indexData) {
+        ContentValues values;
+
+        for (IndexData dataRow : indexData) {
+            values = new ContentValues();
+            values.put(IndexDatabaseHelper.IndexColumns.DOCID, dataRow.getDocId());
+            values.put(LOCALE, dataRow.locale);
+            values.put(DATA_TITLE, dataRow.updatedTitle);
+            values.put(DATA_TITLE_NORMALIZED, dataRow.normalizedTitle);
+            values.put(DATA_SUMMARY_ON, dataRow.updatedSummaryOn);
+            values.put(DATA_SUMMARY_ON_NORMALIZED, dataRow.normalizedSummaryOn);
+            values.put(DATA_ENTRIES, dataRow.entries);
+            values.put(DATA_KEYWORDS, dataRow.spaceDelimitedKeywords);
+            values.put(CLASS_NAME, dataRow.className);
+            values.put(SCREEN_TITLE, dataRow.screenTitle);
+            values.put(INTENT_ACTION, dataRow.intentAction);
+            values.put(INTENT_TARGET_PACKAGE, dataRow.intentTargetPackage);
+            values.put(INTENT_TARGET_CLASS, dataRow.intentTargetClass);
+            values.put(ICON, dataRow.iconResId);
+            values.put(ENABLED, dataRow.enabled);
+            values.put(DATA_KEY_REF, dataRow.key);
+            values.put(USER_ID, dataRow.userId);
+            values.put(PAYLOAD_TYPE, dataRow.payloadType);
+            values.put(PAYLOAD, dataRow.payload);
+
+            database.replaceOrThrow(TABLE_PREFS_INDEX, null, values);
+
+            if (!TextUtils.isEmpty(dataRow.className)
+                    && !TextUtils.isEmpty(dataRow.childClassName)) {
+                ContentValues siteMapPair = new ContentValues();
+                final int pairDocId = Objects.hash(dataRow.className, dataRow.childClassName);
+                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.DOCID, pairDocId);
+                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_CLASS,
+                        dataRow.className);
+                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_TITLE,
+                        dataRow.screenTitle);
+                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_CLASS,
+                        dataRow.childClassName);
+                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_TITLE,
+                        dataRow.updatedTitle);
+
+                database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_SITE_MAP,
+                        null /* nullColumnHack */, siteMapPair);
+            }
+        }
     }
 
     /**
@@ -287,7 +359,6 @@ public class DatabaseIndexingManager {
         }
         disabledResults.close();
     }
-
 
     /**
      * TODO (b/64951285): Deprecate this method

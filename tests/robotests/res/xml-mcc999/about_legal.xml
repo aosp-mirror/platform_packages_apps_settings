@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   Copyright (C) 2017 The Android Open Source Project
 
@@ -12,11 +13,22 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
+
   -->
 
-<resources>
-    <!-- Whether or not new device intro suggestion is supported for this device -->
-    <bool name="config_new_device_intro_suggestion_supported">true</bool>
-    <bool name="config_enableColorTemperature">true</bool>
-    <bool name="config_show_camera_laser_sensor">true</bool>
-</resources>
+<!--
+    WARNING: This resource file is used to test Settings Search indexing.
+    If you change something in here, please run the settings robotests and
+    make sure they still pass.
+ -->
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="bears_bears_bears"
+        settings:keywords="keywords">
+
+    <Preference
+            android:key="pref_key_1"
+            android:title="bears_bears_bears"/>
+</PreferenceScreen>
