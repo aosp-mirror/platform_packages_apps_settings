@@ -198,7 +198,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // verify apps over usb
         // logger buffer sizes
         // store logger data persistently on device
-        // telephony monitor
+        controllers.add(new ConnectivityMonitorPreferenceControllerV2(context));
         controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
         controllers.add(new CameraHalHdrPlusPreferenceControllerV2(context));
         // feature flags
