@@ -205,7 +205,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         // enable wi-fi verbose logging
         // aggressive wifi to mobile handover
-        // always allow wifi roam scans
+        controllers.add(new WifiRoamScansPreferenceController(context));
         // mobile always active
         // tethering hardware acceleration
         // select usb configuration
