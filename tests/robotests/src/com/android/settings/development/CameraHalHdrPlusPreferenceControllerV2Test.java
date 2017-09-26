@@ -21,29 +21,28 @@ import static com.android.settings.development
         .CameraHalHdrPlusPreferenceControllerV2.USERDEBUG_BUILD;
 import static com.android.settings.development.CameraHalHdrPlusPreferenceControllerV2.USER_BUILD;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -75,7 +74,10 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void isAvailable_withConfigNoShow_shouldReturnFalse() {
+    public void isAvailable_withConfigNoShowAndUserDebugBuild_shouldReturnFalse() {
+        SettingsShadowSystemProperties.set(
+                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
+
         assertThat(mController.isAvailable()).isFalse();
     }
 
