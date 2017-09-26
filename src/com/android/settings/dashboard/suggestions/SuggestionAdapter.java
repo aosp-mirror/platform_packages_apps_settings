@@ -96,8 +96,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         //                  itemView));
         //        } else
         {
-            // TODO: Add icon field in Suggestion, and enable this.
-            //            holder.icon.setImageDrawable(mCache.getIcon(suggestion.icon));
+            holder.icon.setImageDrawable(mCache.getIcon(suggestion.getIcon()));
             holder.title.setText(suggestion.getTitle());
             final CharSequence summary = suggestion.getSummary();
             if (!TextUtils.isEmpty(summary)) {
