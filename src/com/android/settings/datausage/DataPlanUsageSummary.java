@@ -53,7 +53,6 @@ import java.util.List;
 
 public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
 
-    public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     public static final String KEY_DATA_PLAN_USAGE = "data_plan_usage";
 
     public static final String KEY_STATUS_HEADER = "status_header";
@@ -99,10 +98,6 @@ public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
             hasMobileData = false;
         }
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
-
-        if (!hasMobileData || !isAdmin()) {
-            removePreference(KEY_RESTRICT_BACKGROUND);
-        }
 
         if (hasMobileData) {
             addDataPlanSection(defaultSubId);
