@@ -209,7 +209,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         // tethering hardware acceleration
         // select usb configuration
-        // show bluetooth devices without names
+        controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         // disable absolute volume
         // enable in-band ringing
         // bluetooth avrcp version
