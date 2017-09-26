@@ -30,7 +30,6 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 
 LOCAL_JAVA_LIBRARIES := \
     bouncycastle \
-    core-oj \
     telephony-common \
     ims-common
 
