@@ -8247,8 +8247,14 @@
     <!-- Toast message letting the user know the color temperature setting is not immediate -->
     <string name="color_temperature_toast">To apply color change, turn off screen</string>
 
-    <!-- Toast message letting the user know the how to trigger telephony monitor -->
-    <string name="telephony_monitor_toast">To apply telephony monitor change, reboot device</string>
+    <!-- UI debug setting: title for ConnectivityMonitor switch [CHAR LIMIT=50] -->
+    <string name="connectivity_monitor_switch">Connectivity Monitor</string>
+
+    <!-- UI debug setting: summary for switch of ConnectivityMonitor [CHAR LIMIT=500] -->
+    <string name="connectivity_monitor_switch_summary">ConnectivityMonitor will collect logs when it detects a connectivity problem and prompt notification to user to file a bug</string>
+
+    <!-- Toast message letting the user know the how to apply connectivity monitor change -->
+    <string name="connectivity_monitor_toast">To apply connectivity monitor change, reboot device</string>
 
     <!-- Title for Camera HAL HDR+ switch [CHAR LIMIT=50] -->
     <string name="camera_hal_hdrplus_switch">Camera HAL HDR+</string>

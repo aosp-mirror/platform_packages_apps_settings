@@ -330,7 +330,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private DevelopmentSwitchBarController mSwitchBarController;
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
-    private TelephonyMonitorPreferenceController mTelephonyMonitorController;
+    private ConnectivityMonitorPreferenceController mConnectivityMonitorController;
     private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
     private CameraLaserSensorPreferenceController mCameraLaserSensorController;
 
@@ -374,7 +374,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugReportController = new BugReportPreferenceController(getActivity());
         mBugReportInPowerController = new BugReportInPowerPreferenceController(getActivity());
-        mTelephonyMonitorController = new TelephonyMonitorPreferenceController(getActivity());
+        mConnectivityMonitorController = new ConnectivityMonitorPreferenceController(getActivity());
         mLogdSizeController = new LogdSizePreferenceController(getActivity());
         mLogpersistController = new LogpersistPreferenceController(getActivity(), getLifecycle());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
@@ -412,7 +412,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugReportController.displayPreference(preferenceScreen);
         mBugReportInPowerController.displayPreference(preferenceScreen);
-        mTelephonyMonitorController.displayPreference(preferenceScreen);
+        mConnectivityMonitorController.displayPreference(preferenceScreen);
         mLogdSizeController.displayPreference(preferenceScreen);
         mLogpersistController.displayPreference(preferenceScreen);
         mWebViewAppPrefController.displayPreference(preferenceScreen);
@@ -624,7 +624,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         mEnableAdbController.enablePreference(enabled);
         mBugReportInPowerController.enablePreference(enabled);
-        mTelephonyMonitorController.enablePreference(enabled);
+        mConnectivityMonitorController.enablePreference(enabled);
         mLogdSizeController.enablePreference(enabled);
         mLogpersistController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
@@ -774,7 +774,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                             == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         }
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
-        mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
+        mHaveDebugSettings |= mConnectivityMonitorController.updatePreference();
         mHaveDebugSettings |= mCameraHalHdrplusController.updatePreference();
         mHaveDebugSettings |= mCameraLaserSensorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
@@ -2210,7 +2210,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
 
-        if (mTelephonyMonitorController.handlePreferenceTreeClick(preference)) {
+        if (mConnectivityMonitorController.handlePreferenceTreeClick(preference)) {
             return true;
         }
 
