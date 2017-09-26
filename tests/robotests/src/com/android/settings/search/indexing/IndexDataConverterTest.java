@@ -18,15 +18,13 @@
 package com.android.settings.search.indexing;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.provider.SearchIndexableResource;
+import android.text.TextUtils;
 import com.android.settings.TestConfig;
-import com.android.settings.search.IndexDatabaseHelper;
+import com.android.settings.R;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.ResultPayloadUtils;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search.SearchIndexableResources;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.After;
@@ -36,58 +34,70 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
-import static com.android.settings.R.*;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, qualifiers = "mcc999")
 public class IndexDataConverterTest {
 
     private final String localeStr = "en_US";
 
-    private final String title = "title\u2011title";
-    private final String updatedTitle = "title-title";
-    private final String normalizedTitle = "titletitle";
-    private final String summaryOn = "summary\u2011on";
-    private final String updatedSummaryOn = "summary-on";
-    private final String normalizedSummaryOn = "summaryon";
-    private final String summaryOff = "summary\u2011off";
-    private final String updatedSummaryOff = "summary-off";
-    private final String normalizedSummaryOff = "summaryoff";
-    private final String entries = "entries";
-    private final String keywords = "keywords, keywordss, keywordsss";
-    private final String spaceDelimittedKeywords = "keywords keywordss keywordsss";
-    private final String screenTitle = "screen title";
-    private final String className = "class name";
-    private final int iconResId = 0xff;
-    private final int noIcon = 0;
-    private final String action = "action";
-    private final String targetPackage = "target package";
-    private final String targetClass = "target class";
-    private final String packageName = "package name";
-    private final String key = "key";
-    private final int userId = -1;
-    private final boolean enabled = true;
+    private static final String title = "title\u2011title";
+    private static final String updatedTitle = "title-title";
+    private static final String normalizedTitle = "titletitle";
+    private static final String summaryOn = "summary\u2011on";
+    private static final String updatedSummaryOn = "summary-on";
+    private static final String normalizedSummaryOn = "summaryon";
+    private static final String summaryOff = "summary\u2011off";
+    private static final String updatedSummaryOff = "summary-off";
+    private static final String normalizedSummaryOff = "summaryoff";
+    private static final String entries = "entries";
+    private static final String keywords = "keywords, keywordss, keywordsss";
+    private static final String spaceDelimittedKeywords = "keywords keywordss keywordsss";
+    private static final String screenTitle = "screen title";
+    private static final String className = "class name";
+    private static final int iconResId = 0xff;
+    private static final String action = "action";
+    private static final String targetPackage = "target package";
+    private static final String targetClass = "target class";
+    private static final String packageName = "package name";
+    private static final String key = "key";
+    private static final int userId = -1;
+    private static final boolean enabled = true;
+
+    // There are 6 entries in the fake display_settings.xml preference.
+    private final int NUM_DISPLAY_ENTRIES = 6;
+    private static final String PAGE_TITLE = "page_title";
+    private static final String TITLE_ONE = "pref_title_1";
+    private static final String TITLE_TWO = "pref_title_2";
+    private static final String TITLE_THREE = "pref_title_3";
+    private static final String TITLE_FOUR = "pref_title_4";
+    private static final String TITLE_FIVE = "pref_title_5";
+    private static final String DISPLAY_SPACE_DELIM_KEYWORDS = "keywords1 keywords2 keywords3";
+
+    // There are 6 display entries from resources, and 1 raw.
+    private static final int NUM_FAKE_FRAGMENT_ENTRIES = 7;
+    private static final int NUM_ENABLED_FAKE_FRAGMENT_ENTRIES = 5;
+    private static final String FAKE_CLASS_NAME =
+            "com.android.settings.search.indexing.FakeSettingsFragment";
+
+    // There is a title and one preference.
+    private final int NUM_LEGAL_SETTINGS = 2;
 
     private Context mContext;
 
     private IndexDataConverter mConverter;
-    private SQLiteDatabase mDb;
 
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
-        mDb = IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
-        mConverter = spy(new IndexDataConverter(mContext, mDb));
+        mConverter = spy(new IndexDataConverter(mContext));
     }
 
     @After
@@ -96,82 +106,67 @@ public class IndexDataConverterTest {
     }
 
     @Test
-    public void testInsertRawColumn_rowInserted() {
-        SearchIndexableRaw raw = getFakeRaw();
-        mConverter.indexOneSearchIndexableData(localeStr, raw,
-                new HashMap<>()/* Non-indexable keys */);
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(1);
-    }
+    public void testInsertRawColumn_rowConverted() {
+        final SearchIndexableRaw raw = getFakeRaw();
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(raw);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
 
-    @Test
-    public void testInsertRawColumn_nonIndexableKey_resultIsDisabled() {
-        SearchIndexableRaw raw = getFakeRaw();
-        Map<String, Set<String>> niks = new HashMap<>();
-        Set<String> keys = new HashSet<>();
-        keys.add(raw.key);
-        niks.put(raw.intentTargetPackage, keys);
+        assertThat(indexData.size()).isEqualTo(1);
+        final IndexData row = indexData.get(0);
 
-        mConverter.indexOneSearchIndexableData(localeStr, raw, niks);
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
-        assertThat(cursor.getCount()).isEqualTo(1);
-    }
-
-    @Test
-    public void testInsertRawColumn_rowMatches() {
-        SearchIndexableRaw raw = getFakeRaw();
-        mConverter.indexOneSearchIndexableData(localeStr, raw,
-                new HashMap<>()/* Non-indexable keys */);
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        cursor.moveToPosition(0);
-
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo(updatedTitle);
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo(normalizedTitle);
-        // Summary On
-        assertThat(cursor.getString(4)).isEqualTo(updatedSummaryOn);
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo(normalizedSummaryOn);
-        // Entries
-        assertThat(cursor.getString(8)).isEqualTo(raw.entries);
-        // Keywords
-        assertThat(cursor.getString(9)).isEqualTo(spaceDelimittedKeywords);
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo(raw.screenTitle);
-        // Class Name
-        assertThat(cursor.getString(11)).isEqualTo(raw.className);
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(raw.iconResId);
-        // Intent Action
-        assertThat(cursor.getString(13)).isEqualTo(raw.intentAction);
-        // Target Package
-        assertThat(cursor.getString(14)).isEqualTo(raw.intentTargetPackage);
-        // Target Class
-        assertThat(cursor.getString(15)).isEqualTo(raw.intentTargetClass);
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(raw.enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isNotNull();
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(raw.userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+        assertThat(row.normalizedTitle).isEqualTo(normalizedTitle);
+        assertThat(row.updatedTitle).isEqualTo(updatedTitle);
+        assertThat(row.locale).isEqualTo(localeStr);
+        assertThat(row.updatedSummaryOn).isEqualTo(updatedSummaryOn);
+        assertThat(row.entries).isEqualTo(entries);
+        assertThat(row.spaceDelimitedKeywords).isEqualTo(spaceDelimittedKeywords);
+        assertThat(row.screenTitle).isEqualTo(screenTitle);
+        assertThat(row.className).isEqualTo(className);
+        assertThat(row.iconResId).isEqualTo(iconResId);
+        assertThat(row.intentAction).isEqualTo(action);
+        assertThat(row.intentTargetPackage).isEqualTo(targetPackage);
+        assertThat(row.intentTargetClass).isEqualTo(targetClass);
+        assertThat(row.enabled).isEqualTo(enabled);
+        assertThat(row.key).isEqualTo(key);
+        assertThat(row.userId).isEqualTo(userId);
+        assertThat(row.payloadType).isEqualTo(0);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(row.payload,
                 ResultPayload.CREATOR);
         assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
     @Test
+    public void testInsertRawColumn_nonIndexableKey_resultIsDisabled() {
+        final SearchIndexableRaw raw = getFakeRaw();
+        // Add non-indexable key for raw row.
+        Set<String> keys = new HashSet<>();
+        keys.add(raw.key);
+
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(raw);
+        preIndexData.nonIndexableKeys.put(raw.intentTargetPackage, keys);
+
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        assertThat(indexData.size()).isEqualTo(1);
+        assertThat(indexData.get(0).enabled).isFalse();
+    }
+
+    /**
+     * TODO (b/66916397) investigate why locale is attached to IndexData
+     */
+    @Test
     public void testInsertRawColumn_mismatchedLocale_noRowInserted() {
-        SearchIndexableRaw raw = getFakeRaw("ca-fr");
-        mConverter.indexOneSearchIndexableData(localeStr, raw, null /* Non-indexable keys */);
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(0);
+        final SearchIndexableRaw raw = getFakeRaw("ca-fr");
+        PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(raw);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        assertThat(indexData).isEmpty();
     }
 
     // Tests for the flow: IndexOneResource -> IndexFromResource ->
@@ -179,421 +174,202 @@ public class IndexDataConverterTest {
 
     @Test
     public void testNullResource_NothingInserted() {
-        mConverter.indexOneSearchIndexableData(localeStr, null /* searchIndexableResource */,
-                new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(0);
+        PreIndexData preIndexData = new PreIndexData();
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        assertThat(indexData).isEmpty();
     }
 
     @Test
     public void testAddResource_RowsInserted() {
-        SearchIndexableResource resource = getFakeResource(xml.display_settings);
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(17);
+        final SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
+
+        final List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+        int numEnabled = getEnabledResultCount(indexData);
+
+        assertThat(numEnabled).isEqualTo(NUM_DISPLAY_ENTRIES);
     }
 
     @Test
     public void testAddResource_withNIKs_rowsInsertedDisabled() {
-        SearchIndexableResource resource = getFakeResource(xml.display_settings);
-        // Only add 2 of 16 items to be disabled.
-        String[] keys = {"brightness", "wallpaper"};
-        Map<String, Set<String>> niks = getNonIndexableKeys(keys);
+        final SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
+        Set<String> keys = new HashSet<>();
+        keys.add("pref_key_1");
+        keys.add("pref_key_3");
 
-        mConverter.indexOneSearchIndexableData(localeStr, resource, niks);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
+        preIndexData.nonIndexableKeys.put(packageName, keys);
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
-        assertThat(cursor.getCount()).isEqualTo(2);
-        cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(15);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        assertThat(indexData.size()).isEqualTo(NUM_DISPLAY_ENTRIES);
+        assertThat(getEnabledResultCount(indexData)).isEqualTo(NUM_DISPLAY_ENTRIES - 2);
     }
 
     @Test
     public void testAddResourceHeader_rowsMatch() {
-        SearchIndexableResource resource = getFakeResource(xml.application_settings);
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
+        final SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
-        cursor.moveToPosition(1);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
 
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("App info");
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("app info");
-        // Summary On
-        assertThat(cursor.getString(4)).isEqualTo("Manage apps, set up quick launch shortcuts");
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo("manage apps, set up quick launch shortcuts");
-        // Entries - only on for list preferences
-        assertThat(cursor.getString(8)).isNull();
-        // Keywords
-        assertThat(cursor.getString(9)).isEmpty();
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("App info");
-        // Class Name
-        assertThat(cursor.getString(11)).isEqualTo(className);
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(0);
-        // Intent Action
-        assertThat(cursor.getString(13)).isEqualTo(action);
-        // Target Package
-        assertThat(cursor.getString(14)).isEqualTo(targetPackage);
-        // Target Class
-        assertThat(cursor.getString(15)).isEqualTo(targetClass);
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isEqualTo("applications_settings");
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload - should be updated to real payloads as controllers are added
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
-                ResultPayload.CREATOR);
-        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
-    }
+        final IndexData row = findIndexDataForTitle(indexData, PAGE_TITLE);
 
-    @Test
-    public void testAddResource_customSetting_rowsMatch() {
-        SearchIndexableResource resource = getFakeResource(xml.swipe_to_notification_settings);
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        final String prefTitle =
-                mContext.getString(string.fingerprint_swipe_for_notifications_title);
-        final String prefSummary =
-                mContext.getString(string.fingerprint_swipe_for_notifications_summary);
-        final String keywords = mContext.getString(string.keywords_gesture);
-        Cursor cursor = mDb.rawQuery(
-                "SELECT * FROM prefs_index where data_title='" + prefTitle + "'", null);
-        cursor.moveToFirst();
-
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo(prefTitle);
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo(prefTitle.toLowerCase());
-        // Summary On
-        assertThat(cursor.getString(4)).isEqualTo(prefSummary);
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo(prefSummary.toLowerCase());
-        // Entries - only on for list preferences
-        assertThat(cursor.getString(8)).isNull();
-        // Keywords
-        assertThat(cursor.getString(9)).isEqualTo(keywords);
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo(
-                mContext.getString(string.fingerprint_swipe_for_notifications_title));
-        // Class Name
-        assertThat(cursor.getString(11)).isEqualTo(className);
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
-        // Intent Action
-        assertThat(cursor.getString(13)).isEqualTo(action);
-        // Target Package
-        assertThat(cursor.getString(14)).isEqualTo(targetPackage);
-        // Target Class
-        assertThat(cursor.getString(15)).isEqualTo(targetClass);
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isEqualTo("gesture_swipe_down_fingerprint");
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload - should be updated to real payloads as controllers are added
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
-                ResultPayload.CREATOR);
-        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
+        // Header exists
+        assertThat(row).isNotNull();
+        assertThat(row.spaceDelimitedKeywords).isEqualTo("keywords");
     }
 
     @Test
     public void testAddResource_checkboxPreference_rowsMatch() {
-        SearchIndexableResource resource = getFakeResource(xml.application_settings);
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
+        final SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
 
-        /* Should return 6 results, with the following titles:
-         * Advanced Settings, Apps, Manage Apps, Preferred install location, Running Services
-         */
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
-        cursor.moveToPosition(0);
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("Advanced settings");
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("advanced settings");
-        // Summary On
-        assertThat(cursor.getString(4)).isEqualTo("Enable more settings options");
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo("enable more settings options");
-        // Entries - only on for list preferences
-        assertThat(cursor.getString(8)).isNull();
-        // Keywords
-        assertThat(cursor.getString(9)).isEmpty();
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("App info");
-        // Class Name
-        assertThat(cursor.getString(11)).isEqualTo(className);
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
-        // Intent Action
-        assertThat(cursor.getString(13)).isEqualTo(action);
-        // Target Package
-        assertThat(cursor.getString(14)).isEqualTo(targetPackage);
-        // Target Class
-        assertThat(cursor.getString(15)).isEqualTo(targetClass);
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isEqualTo("toggle_advanced_settings");
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload - should be updated to real payloads as controllers are added
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
-                ResultPayload.CREATOR);
-        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        String checkBoxSummaryOn = "summary_on";
+        String checkBoxSummaryOff = "summary_off";
+        String checkBoxKey = "pref_key_5";
+        final IndexData row = findIndexDataForTitle(indexData, TITLE_FIVE);
+
+        assertDisplaySetting(row, TITLE_FIVE, checkBoxSummaryOn, checkBoxSummaryOff,
+                checkBoxKey);
     }
 
     @Test
     public void testAddResource_listPreference_rowsMatch() {
-        SearchIndexableResource resource = getFakeResource(xml.application_settings);
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
+        final SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
-        cursor.moveToPosition(3);
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("Preferred install location");
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("preferred install location");
-        // Summary On
-        assertThat(cursor.getString(4)).isEqualTo(
-                "Change the preferred installation location for new apps");
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo(
-                "change the preferred installation location for new apps");
-        // Entries - only on for list preferences
-        assertThat(cursor.getString(8)).isEqualTo("Internal device storage|Removable SD card|" +
-                "Let the system decide|");
-        // Keywords
-        assertThat(cursor.getString(9)).isEmpty();
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("App info");
-        // Class Name
-        assertThat(cursor.getString(11)).isEqualTo(className);
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
-        // Intent Action
-        assertThat(cursor.getString(13)).isEqualTo(action);
-        // Target Package
-        assertThat(cursor.getString(14)).isEqualTo(targetPackage);
-        // Target Class
-        assertThat(cursor.getString(15)).isEqualTo(targetClass);
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isEqualTo("app_install_location");
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload - should be updated to real payloads as controllers are added
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
-                ResultPayload.CREATOR);
-        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        String listSummary = "summary_4";
+        String listKey = "pref_key_4";
+        final IndexData row = findIndexDataForTitle(indexData, TITLE_FOUR);
+
+        assertDisplaySetting(row, TITLE_FOUR, listSummary, "", listKey);
     }
 
     @Test
     public void testAddResource_iconAddedFromXml() {
-        SearchIndexableResource resource = getFakeResource(xml.connected_devices);
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
+        final SearchIndexableResource resource = getFakeResource(R.xml.display_settings);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
-        cursor.moveToPosition(0);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
 
-        // Icon
-        assertThat(cursor.getInt(12)).isNotEqualTo(noIcon);
+        final IndexData row = findIndexDataForTitle(indexData, TITLE_THREE);
+
+        assertThat(row.iconResId).isGreaterThan(0);
     }
 
     // Tests for the flow: IndexOneResource -> IndexFromProvider -> IndexFromResource ->
     //                     UpdateOneRowWithFilteredData -> UpdateOneRow
 
     @Test
-    public void testResourceProvider_rowInserted() {
-        SearchIndexableResource resource = getFakeResource(xml.swipe_to_notification_settings);
-        resource.xmlResId = 0;
-        resource.className = "com.android.settings.display.ScreenZoomSettings";
+    public void testAddProviderWithResource_rowInserted() {
+        final SearchIndexableResource resource = getFakeResource(0 /* xml */);
+        resource.className = FAKE_CLASS_NAME;
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
 
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(1);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        assertThat(indexData.size()).isEqualTo(NUM_FAKE_FRAGMENT_ENTRIES);
+        assertThat(findIndexDataForTitle(indexData, PAGE_TITLE)).isNotNull();
+        assertThat(findIndexDataForTitle(indexData, TITLE_ONE)).isNotNull();
+        assertThat(findIndexDataForTitle(indexData, TITLE_TWO)).isNotNull();
+        assertThat(findIndexDataForTitle(indexData, TITLE_THREE)).isNotNull();
+        assertThat(findIndexDataForTitle(indexData, TITLE_FOUR)).isNotNull();
+        assertThat(findIndexDataForTitle(indexData, TITLE_FIVE)).isNotNull();
+        assertThat(findIndexDataForTitle(indexData, FakeSettingsFragment.TITLE)).isNotNull();
     }
 
     @Test
-    public void testResourceProvider_rowMatches() {
-        SearchIndexableResource resource = getFakeResource(xml.swipe_to_notification_settings);
-        resource.xmlResId = 0;
-        resource.className = "com.android.settings.display.ScreenZoomSettings";
+    public void testAddProviderWithRaw_rowInserted() {
+        final SearchIndexableResource resource = getFakeResource(0 /* xml */);
+        resource.className = FAKE_CLASS_NAME;
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
 
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        cursor.moveToPosition(0);
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
 
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("Display size");
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("display size");
-        // Summary On
-        assertThat(cursor.getString(4)).isEmpty();
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEmpty();
-        // Entries - only on for list preferences
-        assertThat(cursor.getString(8)).isNull();
-        // Keywords
-        assertThat(cursor.getString(9)).isEqualTo("display density screen zoom scale scaling");
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("Display size");
-        // Class Name
-        assertThat(cursor.getString(11))
-                .isEqualTo("com.android.settings.display.ScreenZoomSettings");
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
-        // Intent Action
-        assertThat(cursor.getString(13)).isNull();
-        // Target Package
-        assertThat(cursor.getString(14)).isNull();
-        // Target Class
-        assertThat(cursor.getString(15)).isNull();
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isNull();
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload - should be updated to real payloads as controllers are added
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
+        final IndexData data = findIndexDataForTitle(indexData, FakeSettingsFragment.TITLE);
+        assertFakeFragment(data);
+    }
+
+    @Test
+    public void testAddProvider_disabledRows() {
+        // Note that in FakeSettingsFragment, preferences 1 and 3 are disabled.
+        final SearchIndexableResource resource = getFakeResource(0 /* xml */);
+        resource.className = FAKE_CLASS_NAME;
+
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
+
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        assertThat(getEnabledResultCount(indexData)).isEqualTo(NUM_ENABLED_FAKE_FRAGMENT_ENTRIES);
+    }
+
+    @Test
+    public void testResource_sameTitleForSettingAndPage_titleNotInserted() {
+        final SearchIndexableResource resource = getFakeResource(R.xml.about_legal);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
+
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData,
+                localeStr);
+
+        int numEnabled = getEnabledResultCount(indexData);
+        final IndexData nonTitlePref = findIndexDataForKey(indexData, "pref_key_1");
+
+        assertThat(indexData.size()).isEqualTo(NUM_LEGAL_SETTINGS - 1);
+        assertThat(numEnabled).isEqualTo(NUM_LEGAL_SETTINGS - 1);
+        assertThat(nonTitlePref.enabled).isTrue();
+    }
+
+    private void assertDisplaySetting(IndexData row, String title, String summaryOn,
+            String summaryOff, String key) {
+        assertThat(row.normalizedTitle).isEqualTo(title);
+        assertThat(row.locale).isEqualTo(localeStr);
+        assertThat(row.updatedSummaryOn).isEqualTo(summaryOn);
+        assertThat(row.spaceDelimitedKeywords).isEqualTo(DISPLAY_SPACE_DELIM_KEYWORDS);
+        assertThat(row.screenTitle).isEqualTo(PAGE_TITLE);
+        assertThat(row.className).isEqualTo(className);
+        assertThat(row.enabled).isEqualTo(true);
+        assertThat(row.key).isEqualTo(key);
+        assertThat(row.payloadType).isEqualTo(0);
+        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(row.payload,
                 ResultPayload.CREATOR);
         assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
-    @Test
-    public void testResourceProvider_resourceRowInserted() {
-        SearchIndexableResource resource = getFakeResource(0);
-        resource.className = "com.android.settings.LegalSettings";
-
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(6);
-    }
-
-    @Test
-    public void testResourceProvider_resourceRowMatches() {
-        SearchIndexableResource resource = getFakeResource(0 /* xml */);
-        resource.className = "com.android.settings.display.ScreenZoomSettings";
-
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
-        cursor.moveToPosition(0);
-
-        // Locale
-        assertThat(cursor.getString(0)).isEqualTo(localeStr);
-        // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("Display size");
-        // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("display size");
-        // Summary On
-        assertThat(cursor.getString(4)).isEmpty();
-        // Summary On Normalized
-        assertThat(cursor.getString(5)).isEmpty();
-        // Entries - only on for list preferences
-        assertThat(cursor.getString(8)).isNull();
-        // Keywords
-        assertThat(cursor.getString(9)).isEqualTo(
-                "display density screen zoom scale scaling");
-        // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("Display size");
-        // Class Name
-        assertThat(cursor.getString(11))
-                .isEqualTo("com.android.settings.display.ScreenZoomSettings");
-        // Icon
-        assertThat(cursor.getInt(12)).isEqualTo(noIcon);
-        // Intent Action
-        assertThat(cursor.getString(13)).isNull();
-        // Target Package
-        assertThat(cursor.getString(14)).isNull();
-        // Target Class
-        assertThat(cursor.getString(15)).isNull();
-        // Enabled
-        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
-        // Data ref key
-        assertThat(cursor.getString(17)).isNull();
-        // User Id
-        assertThat(cursor.getInt(18)).isEqualTo(userId);
-        // Payload Type - default is 0
-        assertThat(cursor.getInt(19)).isEqualTo(0);
-        // Payload - should be updated to real payloads as controllers are added
-        byte[] payload = cursor.getBlob(20);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(payload,
-                ResultPayload.CREATOR);
-        assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
-    }
-
-    @Test
-    public void testResourceProvider_disabledResource_rowsInserted() {
-        SearchIndexableResource resource = getFakeResource(0 /* xml */);
-        resource.className = "com.android.settings.LegalSettings";
-
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(1);
-        cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
-        assertThat(cursor.getCount()).isEqualTo(5);
-    }
-
-    @Test
-    public void testResource_withTitleAndSettingName_titleNotInserted() {
-        SearchIndexableResource resource = getFakeResource(xml.swipe_to_notification_settings);
-        mConverter.indexFromResource(localeStr, resource, new ArrayList<>());
-
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE" +
-                " enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(1);
-    }
-
-    @Test
-    public void testResourceProvider_nonSubsettingIntent() {
-        SearchIndexableResource resource = getFakeResource(0 /* xml */);
-        String fakeAction = "fake_action";
-        resource.className = "com.android.settings.LegalSettings";
-        resource.intentAction = fakeAction;
-        resource.intentTargetPackage = SearchIndexableResources.SUBSETTING_TARGET_PACKAGE;
-
-        mConverter.indexOneSearchIndexableData(localeStr, resource, new HashMap<>());
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        cursor.moveToPosition(0);
-
-        // Intent Action
-        assertThat(cursor.getString(13)).isEqualTo(fakeAction);
-        // Target Package
-        assertThat(cursor.getString(14))
-                .isEqualTo(SearchIndexableResources.SUBSETTING_TARGET_PACKAGE);
+    private void assertFakeFragment(IndexData row) {
+        assertThat(row.normalizedTitle).isEqualTo(FakeSettingsFragment.TITLE);
+        assertThat(row.updatedSummaryOn).isEqualTo(FakeSettingsFragment.SUMMARY_ON);
+        assertThat(row.spaceDelimitedKeywords)
+                .isEqualTo(FakeSettingsFragment.SPACE_KEYWORDS);
+        assertThat(row.screenTitle).isEqualTo(FakeSettingsFragment.SCREEN_TITLE);
+        assertThat(row.className).isEqualTo(FakeSettingsFragment.CLASS_NAME);
+        assertThat(row.enabled).isEqualTo(FakeSettingsFragment.ENABLED);
+        assertThat(row.key).isEqualTo(FakeSettingsFragment.KEY);
     }
 
     private SearchIndexableRaw getFakeRaw() {
@@ -634,11 +410,34 @@ public class IndexDataConverterTest {
         return sir;
     }
 
-    private Map<String, Set<String>> getNonIndexableKeys(String[] keys) {
-        Map<String, Set<String>> niks = new HashMap<>();
-        Set<String> keysList = new HashSet<>();
-        keysList.addAll(Arrays.asList(keys));
-        niks.put(packageName, keysList);
-        return niks;
+    private static int getEnabledResultCount(List<IndexData> indexData) {
+        int enabledCount = 0;
+        for (IndexData data : indexData) {
+            if (data.enabled) {
+                enabledCount++;
+            }
+        }
+        return enabledCount;
+    }
+
+    private static IndexData findIndexDataForTitle(List<IndexData> indexData,
+            String indexDataTitle) {
+        for (int i = 0; i < indexData.size(); i++) {
+            IndexData row = indexData.get(i);
+            if (TextUtils.equals(row.updatedTitle, indexDataTitle)) {
+                return row;
+            }
+        }
+        return null;
+    }
+
+    private static IndexData findIndexDataForKey(List<IndexData> indexData, String indexDataKey) {
+        for (int i = 0; i < indexData.size(); i++) {
+            IndexData row = indexData.get(i);
+            if (TextUtils.equals(row.key, indexDataKey)) {
+                return row;
+            }
+        }
+        return null;
     }
 }

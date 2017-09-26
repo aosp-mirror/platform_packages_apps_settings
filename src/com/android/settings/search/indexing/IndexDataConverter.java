@@ -17,10 +17,8 @@
 
 package com.android.settings.search.indexing;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
-import android.database.sqlite.SQLiteDatabase;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
@@ -32,7 +30,6 @@ import android.util.Xml;
 import com.android.settings.core.PreferenceControllerMixin;
 
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
@@ -44,32 +41,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_RANK;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ENABLED;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ICON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_ACTION;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.LOCALE;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.PAYLOAD;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.SCREEN_TITLE;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.USER_ID;
-import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
 
 /**
  * Helper class to convert {@link PreIndexData} to {@link IndexData}.
@@ -86,56 +60,65 @@ public class IndexDataConverter {
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
     private static final String NODE_NAME_LIST_PREFERENCE = "ListPreference";
 
-    private Context mContext;
+    private final Context mContext;
 
-    private SQLiteDatabase mDb;
+    private String mLocale;
 
-    public IndexDataConverter(Context context, SQLiteDatabase database) {
+    private List<IndexData> mIndexData;
+
+    public IndexDataConverter(Context context) {
         mContext = context;
-        mDb = database;
+        mLocale = Locale.getDefault().toString();
+    }
+
+    public List<IndexData> convertPreIndexDataToIndexData(PreIndexData preIndexData,
+            String locale) {
+        mLocale = locale;
+        mIndexData = new ArrayList<>();
+        List<SearchIndexableData> dataToUpdate = preIndexData.dataToUpdate;
+        Map<String, Set<String>> nonIndexableKeys = preIndexData.nonIndexableKeys;
+        parsePreIndexData(dataToUpdate, nonIndexableKeys);
+        return mIndexData;
     }
 
     /**
      * Inserts {@link SearchIndexableData} into the database.
      *
-     * @param localeStr        is the locale of the data to be inserted.
      * @param dataToUpdate     is a {@link List} of the data to be inserted.
      * @param nonIndexableKeys is a {@link Map} from Package Name to a {@link Set} of keys which
      *                         identify search results which should not be surfaced.
      */
-    public void addDataToDatabase(String localeStr, List<SearchIndexableData> dataToUpdate,
+    private void parsePreIndexData(List<SearchIndexableData> dataToUpdate,
             Map<String, Set<String>> nonIndexableKeys) {
         final long current = System.currentTimeMillis();
 
         for (SearchIndexableData data : dataToUpdate) {
             try {
-                indexOneSearchIndexableData(localeStr, data, nonIndexableKeys);
+                addOneIndexData(data, nonIndexableKeys);
             } catch (Exception e) {
                 Log.e(LOG_TAG, "Cannot index: " + (data != null ? data.className : data)
-                        + " for locale: " + localeStr, e);
+                        + " for locale: " + mLocale, e);
             }
         }
 
         final long now = System.currentTimeMillis();
-        Log.d(LOG_TAG, "Indexing locale '" + localeStr + "' took " +
+        Log.d(LOG_TAG, "Indexing locale '" + mLocale + "' took " +
                 (now - current) + " millis");
     }
 
-    @VisibleForTesting
-    void indexOneSearchIndexableData(String localeStr, SearchIndexableData data,
+    private void addOneIndexData(SearchIndexableData data,
             Map<String, Set<String>> nonIndexableKeys) {
         if (data instanceof SearchIndexableResource) {
-            indexOneResource(localeStr, (SearchIndexableResource) data, nonIndexableKeys);
+            addOneResource((SearchIndexableResource) data, nonIndexableKeys);
         } else if (data instanceof SearchIndexableRaw) {
-            indexOneRaw(localeStr, (SearchIndexableRaw) data, nonIndexableKeys);
+            addOneRaw((SearchIndexableRaw) data, nonIndexableKeys);
         }
     }
 
-    @VisibleForTesting
-    void indexOneRaw(String localeStr, SearchIndexableRaw raw, Map<String,
+    private void addOneRaw(SearchIndexableRaw raw, Map<String,
             Set<String>> nonIndexableKeysFromResource) {
         // Should be the same locale as the one we are processing
-        if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+        if (!raw.locale.toString().equalsIgnoreCase(mLocale)) {
             return;
         }
 
@@ -149,7 +132,7 @@ public class IndexDataConverter {
         IndexData.Builder builder = new IndexData.Builder();
         builder.setTitle(raw.title)
                 .setSummaryOn(raw.summaryOn)
-                .setLocale(localeStr)
+                .setLocale(mLocale)
                 .setEntries(raw.entries)
                 .setKeywords(raw.keywords)
                 .setClassName(raw.className)
@@ -162,12 +145,11 @@ public class IndexDataConverter {
                 .setKey(raw.key)
                 .setUserId(raw.userId);
 
-        updateOneRow(builder.build(mContext));
+        addRowToData(builder.build(mContext));
     }
 
-    @VisibleForTesting
-    void indexOneResource(String localeStr, SearchIndexableResource sir,
-            Map<String, Set<String>> nonIndexableKeysFromResource) {
+    private void addOneResource(SearchIndexableResource sir,
+        Map<String, Set<String>> nonIndexableKeysFromResource) {
 
         if (sir == null) {
             Log.e(LOG_TAG, "Cannot index a null resource!");
@@ -182,7 +164,7 @@ public class IndexDataConverter {
                 nonIndexableKeys.addAll(resNonIndexableKeys);
             }
 
-            indexFromResource(localeStr, sir, nonIndexableKeys);
+            addIndexDataFromResource(sir, nonIndexableKeys);
         } else {
             if (TextUtils.isEmpty(sir.className)) {
                 Log.w(LOG_TAG, "Cannot index an empty Search Provider name!");
@@ -202,17 +184,16 @@ public class IndexDataConverter {
                     DatabaseIndexingUtils.getSearchIndexProvider(clazz);
             if (provider != null) {
                 List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(sir.context);
-                if (providerNonIndexableKeys != null && providerNonIndexableKeys.size() > 0) {
+                if (providerNonIndexableKeys != null) {
                     nonIndexableKeys.addAll(providerNonIndexableKeys);
                 }
 
-                indexFromProvider(localeStr, provider, sir, nonIndexableKeys);
+                addIndexDataFromProvider(provider, sir, nonIndexableKeys);
             }
         }
     }
 
-    @VisibleForTesting
-    void indexFromResource(String localeStr, SearchIndexableResource sir,
+    private void addIndexDataFromResource(SearchIndexableResource sir,
             List<String> nonIndexableKeys) {
         final Context context = sir.context;
         XmlResourceParser parser = null;
@@ -274,7 +255,7 @@ public class IndexDataConverter {
             headerBuilder.setTitle(headerTitle)
                     .setSummaryOn(headerSummary)
                     .setKeywords(headerKeywords)
-                    .setLocale(localeStr)
+                    .setLocale(mLocale)
                     .setClassName(fragmentName)
                     .setScreenTitle(screenTitle)
                     .setIntentAction(intentAction)
@@ -308,7 +289,7 @@ public class IndexDataConverter {
 
                 builder = new IndexData.Builder();
                 builder.setTitle(title)
-                        .setLocale(localeStr)
+                        .setLocale(mLocale)
                         .setKeywords(keywords)
                         .setClassName(fragmentName)
                         .setScreenTitle(screenTitle)
@@ -339,7 +320,7 @@ public class IndexDataConverter {
                             .setPayload(payload);
 
                     // Insert rows for the child nodes of PreferenceScreen
-                    updateOneRow(builder.build(mContext));
+                    addRowToData(builder.build(mContext));
                 } else {
                     // TODO (b/33577327) We removed summary off here. We should check if we can
                     // merge this 'else' section with the one above. Put a break point to
@@ -353,13 +334,13 @@ public class IndexDataConverter {
 
                     builder.setSummaryOn(summaryOn);
 
-                    updateOneRow(builder.build(mContext));
+                    addRowToData(builder.build(mContext));
                 }
             }
 
             // The xml header's title does not match the title of one of the child settings.
             if (isHeaderUnique) {
-                updateOneRow(headerBuilder.build(mContext));
+                addRowToData(headerBuilder.build(mContext));
             }
         } catch (XmlPullParserException e) {
             throw new RuntimeException("Error parsing PreferenceScreen", e);
@@ -370,8 +351,7 @@ public class IndexDataConverter {
         }
     }
 
-    @VisibleForTesting
-    void indexFromProvider(String localeStr, Indexable.SearchIndexProvider provider,
+    private void addIndexDataFromProvider(Indexable.SearchIndexProvider provider,
             SearchIndexableResource sir, List<String> nonIndexableKeys) {
 
         final String className = sir.className;
@@ -393,7 +373,7 @@ public class IndexDataConverter {
                 SearchIndexableRaw raw = rawList.get(i);
 
                 // Should be the same locale as the one we are processing
-                if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+                if (!raw.locale.toString().equalsIgnoreCase(mLocale)) {
                     continue;
                 }
                 boolean enabled = !nonIndexableKeys.contains(raw.key);
@@ -401,7 +381,7 @@ public class IndexDataConverter {
                 IndexData.Builder builder = new IndexData.Builder();
                 builder.setTitle(raw.title)
                         .setSummaryOn(raw.summaryOn)
-                        .setLocale(localeStr)
+                        .setLocale(mLocale)
                         .setEntries(raw.entries)
                         .setKeywords(raw.keywords)
                         .setClassName(className)
@@ -414,7 +394,7 @@ public class IndexDataConverter {
                         .setKey(raw.key)
                         .setUserId(raw.userId);
 
-                updateOneRow(builder.build(mContext));
+                addRowToData(builder.build(mContext));
             }
         }
 
@@ -426,7 +406,7 @@ public class IndexDataConverter {
                 SearchIndexableResource item = resList.get(i);
 
                 // Should be the same locale as the one we are processing
-                if (!item.locale.toString().equalsIgnoreCase(localeStr)) {
+                if (!item.locale.toString().equalsIgnoreCase(mLocale)) {
                     continue;
                 }
 
@@ -440,49 +420,16 @@ public class IndexDataConverter {
                         ? intentTargetPackage
                         : item.intentTargetPackage;
 
-                indexFromResource(localeStr, item, nonIndexableKeys);
+                addIndexDataFromResource(item, nonIndexableKeys);
             }
         }
     }
 
-    private void updateOneRow(IndexData row) {
+    private void addRowToData(IndexData row) {
         if (TextUtils.isEmpty(row.updatedTitle)) {
             return;
         }
 
-        ContentValues values = new ContentValues();
-        values.put(IndexDatabaseHelper.IndexColumns.DOCID, row.getDocId());
-        values.put(LOCALE, row.locale);
-        values.put(DATA_TITLE, row.updatedTitle);
-        values.put(DATA_TITLE_NORMALIZED, row.normalizedTitle);
-        values.put(DATA_SUMMARY_ON, row.updatedSummaryOn);
-        values.put(DATA_SUMMARY_ON_NORMALIZED, row.normalizedSummaryOn);
-        values.put(DATA_ENTRIES, row.entries);
-        values.put(DATA_KEYWORDS, row.spaceDelimitedKeywords);
-        values.put(CLASS_NAME, row.className);
-        values.put(SCREEN_TITLE, row.screenTitle);
-        values.put(INTENT_ACTION, row.intentAction);
-        values.put(INTENT_TARGET_PACKAGE, row.intentTargetPackage);
-        values.put(INTENT_TARGET_CLASS, row.intentTargetClass);
-        values.put(ICON, row.iconResId);
-        values.put(ENABLED, row.enabled);
-        values.put(DATA_KEY_REF, row.key);
-        values.put(USER_ID, row.userId);
-        values.put(PAYLOAD_TYPE, row.payloadType);
-        values.put(PAYLOAD, row.payload);
-
-        mDb.replaceOrThrow(TABLE_PREFS_INDEX, null, values);
-
-        if (!TextUtils.isEmpty(row.className) && !TextUtils.isEmpty(row.childClassName)) {
-            ContentValues siteMapPair = new ContentValues();
-            final int pairDocId = Objects.hash(row.className, row.childClassName);
-            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.DOCID, pairDocId);
-            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_CLASS, row.className);
-            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_TITLE, row.screenTitle);
-            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_CLASS, row.childClassName);
-            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_TITLE, row.updatedTitle);
-
-            mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_SITE_MAP, null, siteMapPair);
-        }
+        mIndexData.add(row);
     }
 }
