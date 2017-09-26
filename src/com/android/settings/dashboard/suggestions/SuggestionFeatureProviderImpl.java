@@ -173,14 +173,15 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public void dismissSuggestion(Context context, Suggestion suggestion) {
-        if (suggestion == null || context == null) {
+    public void dismissSuggestion(Context context, SuggestionControllerMixin mixin,
+            Suggestion suggestion) {
+        if (mixin == null || suggestion == null || context == null) {
             return;
         }
         mMetricsFeatureProvider.action(
                 context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
                 suggestion.getId());
-        // TODO: Call SettingsIntelligence to dismiss suggestion.
+        mixin.dismissSuggestion(suggestion);
     }
 
     @Override

@@ -79,7 +79,8 @@ public interface SuggestionFeatureProvider {
     /**
      * Dismisses a suggestion.
      *
-     * @deprecated in favor of {@link #dismissSuggestion(Context, Suggestion)}
+     * @deprecated in favor of {@link #dismissSuggestion(Context, SuggestionControllerMixin,
+     * Suggestion)}
      */
     @Deprecated
     void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion);
@@ -87,7 +88,8 @@ public interface SuggestionFeatureProvider {
     /**
      * Dismisses a suggestion.
      */
-    void dismissSuggestion(Context context, Suggestion suggestion);
+    void dismissSuggestion(Context context, SuggestionControllerMixin suggestionMixin,
+            Suggestion suggestion);
 
     /**
      * Returns an identifier for the suggestion

@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
@@ -55,6 +56,8 @@ public class SuggestionDismissControllerTest {
     @Mock
     private SuggestionParser mSuggestionParser;
     @Mock
+    private SuggestionControllerMixin mSuggestionControllerMixin;
+    @Mock
     private SuggestionDismissController.Callback mCallback;
 
     private FakeFeatureFactory mFactory;
@@ -69,7 +72,7 @@ public class SuggestionDismissControllerTest {
         when(mRecyclerView.getResources().getDimension(anyInt())).thenReturn(50F);
 
         mController = new SuggestionDismissController(mContext, mRecyclerView,
-                mSuggestionParser, mCallback);
+                mSuggestionControllerMixin, mSuggestionParser, mCallback);
     }
 
     @Test
@@ -113,5 +116,18 @@ public class SuggestionDismissControllerTest {
         verify(mFactory.suggestionsFeatureProvider).dismissSuggestion(
                 eq(mContext), eq(mSuggestionParser), nullable(Tile.class));
         verify(mCallback).onSuggestionDismissed(nullable(Tile.class));
+    }
+
+    @Test
+    public void onSwiped_v2_shouldTriggerDismissSuggestion() {
+        final RecyclerView.ViewHolder vh = mock(RecyclerView.ViewHolder.class);
+        when(mCallback.getSuggestionAt(anyInt())).thenReturn(
+                new Suggestion.Builder("id").build());
+
+        mController.onSwiped(vh, ItemTouchHelper.START);
+
+        verify(mFactory.suggestionsFeatureProvider).dismissSuggestion(
+                eq(mContext), eq(mSuggestionControllerMixin), nullable(Suggestion.class));
+        verify(mCallback).onSuggestionDismissed(nullable(Suggestion.class));
     }
 }

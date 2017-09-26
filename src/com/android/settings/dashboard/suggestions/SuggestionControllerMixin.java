@@ -111,4 +111,8 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
     public void onLoaderReset(Loader<List<Suggestion>> loader) {
 
     }
+
+    public void dismissSuggestion(Suggestion suggestion) {
+        mSuggestionController.dismissSuggestions(suggestion);
+    }
 }

@@ -120,7 +120,7 @@ public class DashboardAdapterTest {
         mConditionList = new ArrayList<>();
         mConditionList.add(mCondition);
         when(mCondition.shouldShow()).thenReturn(true);
-        mDashboardAdapter = new DashboardAdapter(mContext, null, mConditionList, null, null);
+        mDashboardAdapter = new DashboardAdapter(mContext, null, mConditionList, null, null, null);
         mSuggestionHeaderData = new DashboardData.SuggestionConditionHeaderData(mConditionList, 1);
         when(mView.getTag()).thenReturn(mCondition);
     }
@@ -419,7 +419,7 @@ public class DashboardAdapterTest {
     @Test
     public void testSuggestionDismissed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapter adapter =
-                spy(new DashboardAdapter(mContext, null, null, null, null));
+                spy(new DashboardAdapter(mContext, null, null, null, null, null));
         final List<Tile> suggestions = makeSuggestions("pkg1", "pkg2", "pkg3");
         adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
 
@@ -457,7 +457,8 @@ public class DashboardAdapterTest {
         final List<Tile> suggestions =
                 makeSuggestions("pkg1", "pkg2", "pkg3", "pkg4");
         final DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null /*savedInstance */,
-                null /* conditions */, null /* suggestionParser */, null /* callback */));
+                null /* conditions */, null /* suggestionParser */,
+                null /* suggestionControllerMixin */, null /* callback */));
         adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
         adapter.onBindConditionAndSuggestion(
                 holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
@@ -474,7 +475,7 @@ public class DashboardAdapterTest {
     @Test
     public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter =
-                spy(new DashboardAdapter(mContext, null, null, null, null));
+                spy(new DashboardAdapter(mContext, null, null, null, null, null));
         final List<Tile> suggestions = makeSuggestions("pkg1");
         adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
         final DashboardData dashboardData = adapter.mDashboardData;
@@ -534,7 +535,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testBindConditionAndSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
-        mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null);
+        mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null, null);
         final List<Tile> suggestions = makeSuggestions("pkg1");
         final DashboardCategory category = mock(DashboardCategory.class);
         final List<Tile> tiles = new ArrayList<>();
@@ -561,7 +562,7 @@ public class DashboardAdapterTest {
 
     @Test
     public void testBindConditionAndSuggestion_v2_shouldSetSuggestionAdapterAndNoCrash() {
-        mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null);
+        mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null, null);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
         final DashboardCategory category = mock(DashboardCategory.class);
         final List<Tile> tiles = new ArrayList<>();
@@ -592,7 +593,8 @@ public class DashboardAdapterTest {
         savedInstance.putInt(DashboardAdapter.STATE_SUGGESTION_CONDITION_MODE,
                 DashboardData.HEADER_MODE_FULLY_EXPANDED);
         mDashboardAdapter = new DashboardAdapter(mContext, savedInstance, mConditionList,
-                null /* SuggestionParser */, null /* SuggestionDismissController.Callback */);
+                null /* SuggestionParser */, null /* suggestionControllerMixin */,
+                null /* SuggestionDismissController.Callback */);
 
         final List<Tile> suggestions = new ArrayList<>();
         final DashboardCategory category = mock(DashboardCategory.class);
