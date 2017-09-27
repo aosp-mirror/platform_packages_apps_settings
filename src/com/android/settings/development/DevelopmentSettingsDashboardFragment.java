@@ -211,7 +211,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiAggressiveHandoverPreferenceController(context));
         controllers.add(new WifiRoamScansPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
-        // tethering hardware acceleration
+        controllers.add(new TetheringHardwareAccelPreferenceController(context));
         // select usb configuration
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         // disable absolute volume
