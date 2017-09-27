@@ -122,15 +122,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
             if (controller instanceof DeveloperOptionsPreferenceController) {
-                if (((DeveloperOptionsPreferenceController) controller).onActivityResult(
-                        requestCode, resultCode, data)) {
-                    return;
-                }
+                // We do not break early because it is possible for multiple controllers to
+                // handle the same result code.
+                handledResult |=
+                        ((DeveloperOptionsPreferenceController) controller).onActivityResult(
+                                requestCode, resultCode, data);
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
+        if (!handledResult) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -193,8 +197,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // bug report shortcut
         // select mock location app
         controllers.add(new DebugViewAttributesPreferenceController(context));
-        // select debug app
-        // wait for debugger
+        controllers.add(new SelectDebugAppPreferenceController(context, fragment));
+        controllers.add(new WaitForDebuggerPreferenceController(context));
         // verify apps over usb
         // logger buffer sizes
         // store logger data persistently on device
