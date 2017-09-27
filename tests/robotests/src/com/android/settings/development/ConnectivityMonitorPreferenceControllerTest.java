@@ -40,7 +40,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class TelephonyMonitorPreferenceControllerTest {
+public class ConnectivityMonitorPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -49,13 +49,13 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Mock
     private SwitchPreference mPreference;
 
-    private TelephonyMonitorPreferenceController mController;
+    private ConnectivityMonitorPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         SettingsShadowSystemProperties.clear();
-        mController = new TelephonyMonitorPreferenceController(mContext);
+        mController = new ConnectivityMonitorPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
@@ -63,10 +63,10 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void isAvailable_trueShowFlagWithUserdebugBuild_shouldReturnTrue() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "userdebug");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "userdebug");
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -74,10 +74,10 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void isAvailable_trueShowFlagWithEngBuild_shouldReturnTrue() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "eng");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "eng");
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -85,10 +85,10 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void isAvailable_trueShowFlagWithUserBuild_shouldReturnFalse() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "user");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "user");
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -96,10 +96,10 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void isAvailable_falseShowFlagWithUserdebugBuild_shouldReturnFalse() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(false);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "userdebug");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "userdebug");
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -107,10 +107,10 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void isAvailable_falseShowFlagWithEngBuild_shouldReturnFalse() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(false);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "eng");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "eng");
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -118,24 +118,24 @@ public class TelephonyMonitorPreferenceControllerTest {
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void isAvailable_falseShowFlagWithUserBuild_shouldReturnFalse() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(false);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "user");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "user");
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void displayPreference_telephonyMonitorEnabled_shouldCheckedPreference() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+    public void displayPreference_connectivityMonitorEnabled_shouldCheckedPreference() {
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.PROPERTY_TELEPHONY_MONITOR,
-                TelephonyMonitorPreferenceController.ENABLED_STATUS);
+                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+                ConnectivityMonitorPreferenceController.ENABLED_STATUS);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "userdebug");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "userdebug");
 
         mController.displayPreference(mScreen);
 
@@ -144,14 +144,14 @@ public class TelephonyMonitorPreferenceControllerTest {
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void displayPreference_telephonyMonitorUserEnabled_shouldCheckedPreference() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+    public void displayPreference_connectivityMonitorUserEnabled_shouldCheckedPreference() {
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.PROPERTY_TELEPHONY_MONITOR,
-                TelephonyMonitorPreferenceController.USER_ENABLED_STATUS);
+                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+                ConnectivityMonitorPreferenceController.USER_ENABLED_STATUS);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "userdebug");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "userdebug");
 
         mController.displayPreference(mScreen);
 
@@ -160,14 +160,14 @@ public class TelephonyMonitorPreferenceControllerTest {
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void displayPreference_telephonyMonitorDisabled_shouldUncheckedPreference() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+    public void displayPreference_connectivityMonitorDisabled_shouldUncheckedPreference() {
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.PROPERTY_TELEPHONY_MONITOR,
-                TelephonyMonitorPreferenceController.DISABLED_STATUS);
+                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+                ConnectivityMonitorPreferenceController.DISABLED_STATUS);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "userdebug");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "userdebug");
 
         mController.displayPreference(mScreen);
 
@@ -176,14 +176,14 @@ public class TelephonyMonitorPreferenceControllerTest {
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void displayPreference_telephonyMonitorUserDisabled_shouldUncheckedPreference() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_telephony_monitor))
+    public void displayPreference_connectivityMonitorUserDisabled_shouldUncheckedPreference() {
+        when(mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor))
                 .thenReturn(true);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.PROPERTY_TELEPHONY_MONITOR,
-                TelephonyMonitorPreferenceController.USER_DISABLED_STATUS);
+                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+                ConnectivityMonitorPreferenceController.USER_DISABLED_STATUS);
         SettingsShadowSystemProperties.set(
-                TelephonyMonitorPreferenceController.BUILD_TYPE, "userdebug");
+                ConnectivityMonitorPreferenceController.BUILD_TYPE, "userdebug");
 
         mController.displayPreference(mScreen);
 
@@ -192,34 +192,34 @@ public class TelephonyMonitorPreferenceControllerTest {
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void handlePreferenceTreeClick_preferenceChecked_shouldEnableTelephonyMonitor() {
+    public void handlePreferenceTreeClick_preferenceChecked_shouldEnableConnectivityMonitor() {
         when(mPreference.isChecked()).thenReturn(true);
 
-        when(mContext.getResources().getString(R.string.telephony_monitor_toast))
-                .thenReturn("To apply telephony monitor change, reboot device");
+        when(mContext.getResources().getString(R.string.connectivity_monitor_toast))
+                .thenReturn("To apply connectivity monitor change, reboot device");
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        assertThat(TelephonyMonitorPreferenceController.USER_ENABLED_STATUS.equals(
+        assertThat(ConnectivityMonitorPreferenceController.USER_ENABLED_STATUS.equals(
                 SystemProperties.get(
-                        TelephonyMonitorPreferenceController.PROPERTY_TELEPHONY_MONITOR,
-                        TelephonyMonitorPreferenceController.DISABLED_STATUS))).isTrue();
+                        ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+                        ConnectivityMonitorPreferenceController.DISABLED_STATUS))).isTrue();
     }
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
-    public void handlePreferenceTreeClick_preferenceUnchecked_shouldDisableTelephonyMonitor() {
+    public void handlePreferenceTreeClick_preferenceUnchecked_shouldDisableConnectivityMonitor() {
         when(mPreference.isChecked()).thenReturn(false);
 
-        when(mContext.getResources().getString(R.string.telephony_monitor_toast))
-                .thenReturn("To apply telephony monitor change, reboot device");
+        when(mContext.getResources().getString(R.string.connectivity_monitor_toast))
+                .thenReturn("To apply connectivity monitor change, reboot device");
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        assertThat(TelephonyMonitorPreferenceController.USER_DISABLED_STATUS.equals(
+        assertThat(ConnectivityMonitorPreferenceController.USER_DISABLED_STATUS.equals(
                 SystemProperties.get(
-                        TelephonyMonitorPreferenceController.PROPERTY_TELEPHONY_MONITOR,
-                        TelephonyMonitorPreferenceController.DISABLED_STATUS))).isTrue();
+                        ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+                        ConnectivityMonitorPreferenceController.DISABLED_STATUS))).isTrue();
     }
 
 }

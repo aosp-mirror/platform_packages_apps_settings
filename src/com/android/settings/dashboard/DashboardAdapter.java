@@ -47,6 +47,8 @@ import com.android.settings.dashboard.DashboardData.SuggestionConditionHeaderDat
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
+import com.android.settings.dashboard.suggestions.SuggestionController;
+import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionLogHelper;
@@ -76,6 +78,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private final IconCache mCache;
     private final Context mContext;
+    private final SuggestionControllerMixin mSuggestionControllerMixin;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
@@ -100,6 +103,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
             List<Condition> conditions, SuggestionParser suggestionParser,
+            SuggestionControllerMixin suggestionControllerMixin,
             SuggestionDismissController.Callback callback) {
 
         // @deprecated In favor of suggestionsV2 below.
@@ -110,6 +114,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         mContext = context;
         final FeatureFactory factory = FeatureFactory.getFactory(context);
+        mSuggestionControllerMixin = suggestionControllerMixin;
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
         mSuggestionFeatureProvider = factory.getSuggestionFeatureProvider(context);
@@ -488,7 +493,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         mDashboardData.getItemEntityByPosition(position),
                         null, mSuggestionsShownLogged);
                 mSuggestionDismissHandler = new SuggestionDismissController(mContext,
-                        holder.data, mSuggestionParser, mCallback);
+                        holder.data, mSuggestionControllerMixin, mSuggestionParser, mCallback);
                 holder.data.setAdapter(mSuggestionAdapter);
             } else if (suggestionsV2 != null && suggestionsV2.size() > 0) {
                 conditionOnly = false;
@@ -496,7 +501,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         (List<Suggestion>) mDashboardData.getItemEntityByPosition(position),
                         mSuggestionsShownLogged);
                 mSuggestionDismissHandler = new SuggestionDismissController(mContext,
-                        holder.data, null /* parser */, mCallback);
+                        holder.data, mSuggestionControllerMixin, null /* parser */, mCallback);
                 holder.data.setAdapter(mSuggestionAdapter);
             }
         }

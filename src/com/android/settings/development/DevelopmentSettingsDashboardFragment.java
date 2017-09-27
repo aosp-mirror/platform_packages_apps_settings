@@ -200,16 +200,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // store logger data persistently on device
         // telephony monitor
         controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
-        // camera HAL HDR+
+        controllers.add(new CameraHalHdrPlusPreferenceControllerV2(context));
         // feature flags
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         // enable wi-fi verbose logging
-        // aggressive wifi to mobile handover
-        // always allow wifi roam scans
-        // mobile always active
+        controllers.add(new WifiAggressiveHandoverPreferenceController(context));
+        controllers.add(new WifiRoamScansPreferenceController(context));
+        controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         // tethering hardware acceleration
         // select usb configuration
-        // show bluetooth devices without names
+        controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         // disable absolute volume
         // enable in-band ringing
         // bluetooth avrcp version

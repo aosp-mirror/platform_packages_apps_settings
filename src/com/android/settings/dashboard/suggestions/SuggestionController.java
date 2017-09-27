@@ -110,6 +110,18 @@ public class SuggestionController {
         }
     }
 
+    public void dismissSuggestions(Suggestion suggestion) {
+        if (!isReady()) {
+            Log.w(TAG, "SuggestionController not ready, cannot dismiss " + suggestion.getId());
+            return;
+        }
+        try {
+            mRemoteService.dismissSuggestion(suggestion);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error when calling dismissSuggestion()", e);
+        }
+    }
+
     /**
      * Whether or not the manager is ready
      */
