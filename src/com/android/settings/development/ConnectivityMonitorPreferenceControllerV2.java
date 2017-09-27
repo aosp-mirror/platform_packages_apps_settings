@@ -21,19 +21,14 @@ import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
 
-/**
- * deprecated in favor of {@link ConnectivityMonitorPreferenceControllerV2}
- */
-@Deprecated
-public class ConnectivityMonitorPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class ConnectivityMonitorPreferenceControllerV2 extends
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_CONNECTIVITY_MONITOR_SWITCH = "connectivity_monitor_switch";
     @VisibleForTesting
@@ -50,19 +45,22 @@ public class ConnectivityMonitorPreferenceController extends AbstractPreferenceC
     @VisibleForTesting
     static final String USER_DISABLED_STATUS = "user_disabled";
 
+    @VisibleForTesting
+    static final String USERDEBUG_BUILD = "userdebug";
+    @VisibleForTesting
+    static final String ENG_BUILD = "eng";
+
     private SwitchPreference mPreference;
 
-    public ConnectivityMonitorPreferenceController(Context context) {
+    public ConnectivityMonitorPreferenceControllerV2(Context context) {
         super(context);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreference = (SwitchPreference) screen.findPreference(KEY_CONNECTIVITY_MONITOR_SWITCH);
-            mPreference.setChecked(isConnectivityMonitorEnabled());
-        }
+
+        mPreference = (SwitchPreference) screen.findPreference(KEY_CONNECTIVITY_MONITOR_SWITCH);
     }
 
     @Override
@@ -72,48 +70,44 @@ public class ConnectivityMonitorPreferenceController extends AbstractPreferenceC
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor) &&
-                (SystemProperties.get(BUILD_TYPE).equals("userdebug") ||
-                        SystemProperties.get(BUILD_TYPE).equals("eng"));
+        final String buildType = SystemProperties.get(BUILD_TYPE);
+        return mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor)
+                && (TextUtils.equals(buildType, USERDEBUG_BUILD)
+                || TextUtils.equals(buildType, ENG_BUILD));
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final boolean isEnabled = (Boolean) newValue;
+        SystemProperties.set(PROPERTY_CONNECTIVITY_MONITOR,
+                isEnabled ? USER_ENABLED_STATUS : USER_DISABLED_STATUS);
+        Toast.makeText(mContext, R.string.connectivity_monitor_toast,
+                Toast.LENGTH_LONG).show();
+        return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        updatePreference();
+        final boolean enabled = isConnectivityMonitorEnabled();
+        mPreference.setChecked(enabled);
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_CONNECTIVITY_MONITOR_SWITCH.equals(preference.getKey())) {
-            final SwitchPreference switchPreference = (SwitchPreference) preference;
-            SystemProperties.set(PROPERTY_CONNECTIVITY_MONITOR,
-                    switchPreference.isChecked() ? USER_ENABLED_STATUS : USER_DISABLED_STATUS);
-            Toast.makeText(mContext, R.string.connectivity_monitor_toast,
-                    Toast.LENGTH_LONG).show();
-            return true;
-        }
-        return false;
+    protected void onDeveloperOptionsSwitchEnabled() {
+        mPreference.setEnabled(true);
     }
 
-    public void enablePreference(boolean enabled) {
-        if (isAvailable()) {
-            mPreference.setEnabled(enabled);
-        }
-    }
-
-    public boolean updatePreference() {
-        if (!isAvailable()) {
-            return false;
-        }
-        final boolean enabled = isConnectivityMonitorEnabled();
-        mPreference.setChecked(enabled);
-        return enabled;
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        SystemProperties.set(PROPERTY_CONNECTIVITY_MONITOR, USER_DISABLED_STATUS);
+        mPreference.setChecked(false);
+        mPreference.setEnabled(false);
     }
 
     private boolean isConnectivityMonitorEnabled() {
         final String cmStatus = SystemProperties.get(PROPERTY_CONNECTIVITY_MONITOR,
                 DISABLED_STATUS);
-        return ENABLED_STATUS.equals(cmStatus) || USER_ENABLED_STATUS.equals(cmStatus);
+        return TextUtils.equals(ENABLED_STATUS, cmStatus) || TextUtils.equals(USER_ENABLED_STATUS,
+                cmStatus);
     }
-
 }
