@@ -222,7 +222,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // bluetooth audio bits per sample
         // bluetooth audio channel mode
         // bluetooth audio ldac codec: playback quality
-        // show taps
+        controllers.add(new ShowTapsPreferenceController(context));
         // pointer location
         // show surface updates
         // show layout bounds
