@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
@@ -76,6 +77,7 @@ public class AccountHeaderPreferenceControllerTest {
         FakeFeatureFactory.setupForTest(mContext);
         mHeaderPreference = new LayoutPreference(
                 RuntimeEnvironment.application, R.layout.settings_entity_header);
+        doReturn(mContext).when(mActivity).getApplicationContext();
     }
 
     @Test

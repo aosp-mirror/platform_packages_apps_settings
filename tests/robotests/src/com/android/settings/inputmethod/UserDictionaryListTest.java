@@ -47,7 +47,7 @@ public class UserDictionaryListTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContentProvider = new FakeProvider();
-        ShadowContentResolver.registerProvider(UserDictionary.AUTHORITY, mContentProvider);
+        ShadowContentResolver.registerProviderInternal(UserDictionary.AUTHORITY, mContentProvider);
     }
 
     @Test

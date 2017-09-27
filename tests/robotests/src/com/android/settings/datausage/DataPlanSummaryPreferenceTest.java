@@ -31,6 +31,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.DonutView;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
@@ -48,9 +49,16 @@ public final class DataPlanSummaryPreferenceTest {
     private static final String TEST_PLAN_USAGE = "Test plan usage";
     private static final String TEST_PLAN_NAME = "Test plan name";
     private static final String TEST_PLAN_DESCRIPTION = "Test plan description";
-    private static final int PLAN_USAGE_TEXT_COLOR = Color.parseColor("#FF5C94F1");
-    private static final int METER_BACKGROUND_COLOR = Color.parseColor("#FFDBDCDC");
-    private static final int METER_CONSUMED_COLOR = Color.parseColor("#FF5C94F1");
+    private static int sPlanUsageTextColor;
+    private static int sMeterBackgroundColor;
+    private static int sMeterConsumedColor;
+
+    @BeforeClass
+    public static void beforeClass() {
+        sPlanUsageTextColor = Color.parseColor("#FF5C94F1");
+        sMeterBackgroundColor = Color.parseColor("#FFDBDCDC");
+        sMeterConsumedColor = Color.parseColor("#FF5C94F1");
+    }
 
     private DataPlanSummaryPreference mPreference;
     private PreferenceViewHolder mHolder;
@@ -87,18 +95,18 @@ public final class DataPlanSummaryPreferenceTest {
     @Test
     public void shouldRender_withData() {
         mPreference.setTitle(TEST_PLAN_USAGE);
-        mPreference.setUsageTextColor(PLAN_USAGE_TEXT_COLOR);
+        mPreference.setUsageTextColor(sPlanUsageTextColor);
         mPreference.setName(TEST_PLAN_NAME);
         mPreference.setDescription(TEST_PLAN_DESCRIPTION);
         mPreference.setPercentageUsage(0.25D);
-        mPreference.setMeterBackgroundColor(METER_BACKGROUND_COLOR);
-        mPreference.setMeterConsumedColor(METER_CONSUMED_COLOR);
+        mPreference.setMeterBackgroundColor(sMeterBackgroundColor);
+        mPreference.setMeterConsumedColor(sMeterConsumedColor);
 
         mPreference.onBindViewHolder(mHolder);
 
         TextView planUsageTextView = (TextView) mHolder.findViewById(android.R.id.title);
         assertThat(planUsageTextView.getTextColors().getDefaultColor())
-                .isEqualTo(PLAN_USAGE_TEXT_COLOR);
+                .isEqualTo(sPlanUsageTextColor);
         assertThat(planUsageTextView.getText()).isEqualTo(TEST_PLAN_USAGE);
 
         TextView planNameTextView = (TextView) mHolder.findViewById(android.R.id.text1);
@@ -108,7 +116,7 @@ public final class DataPlanSummaryPreferenceTest {
         assertThat(planDescriptionTextView.getText()).isEqualTo(TEST_PLAN_DESCRIPTION);
 
         DonutView donutView = (DonutView) mHolder.findViewById(R.id.donut);
-        assertThat(donutView.getMeterBackgroundColor()).isEqualTo(METER_BACKGROUND_COLOR);
-        assertThat(donutView.getMeterConsumedColor()).isEqualTo(METER_CONSUMED_COLOR);
+        assertThat(donutView.getMeterBackgroundColor()).isEqualTo(sMeterBackgroundColor);
+        assertThat(donutView.getMeterConsumedColor()).isEqualTo(sMeterConsumedColor);
     }
 }

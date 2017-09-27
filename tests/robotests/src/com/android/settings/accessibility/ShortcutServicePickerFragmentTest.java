@@ -16,14 +16,19 @@
 
 package com.android.settings.accessibility;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
-import android.test.mock.MockContentResolver;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -34,11 +39,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -58,7 +58,6 @@ public class ShortcutServicePickerFragmentTest {
     private PackageManagerWrapper mPackageManager;
 
     private ShortcutServicePickerFragment mFragment;
-    private MockContentResolver mContentResolver;
 
     @Before
     public void setUp() {

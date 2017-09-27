@@ -34,7 +34,6 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settingslib.NetworkPolicyEditor;
 import java.util.ArrayList;

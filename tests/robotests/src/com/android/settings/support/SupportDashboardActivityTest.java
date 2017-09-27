@@ -19,20 +19,22 @@ package com.android.settings.support;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.robolectric.RuntimeEnvironment.application;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
@@ -45,7 +47,7 @@ public class SupportDashboardActivityTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = application;
     }
 
     @Test
@@ -67,10 +69,11 @@ public class SupportDashboardActivityTest {
 
     @Test
     public void shouldHandleIntentAction() {
-        RuntimeEnvironment.getRobolectricPackageManager().setQueryIntentImplicitly(true);
+        PackageManager packageManager = application.getPackageManager();
+        Shadows.shadowOf(packageManager).setQueryIntentImplicitly(true);
         // Intent action used by setup wizard to start support settings
         Intent intent = new Intent("com.android.settings.action.SUPPORT_SETTINGS");
-        ResolveInfo resolveInfo = RuntimeEnvironment.getPackageManager().resolveActivity(
+        ResolveInfo resolveInfo = packageManager.resolveActivity(
                 intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         assertThat(resolveInfo).isNotNull();

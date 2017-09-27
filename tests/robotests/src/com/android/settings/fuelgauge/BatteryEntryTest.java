@@ -147,7 +147,7 @@ public class BatteryEntryTest {
     }
 
     @Test
-    public void extractPackageFromSipper_normalSipper_returnDefaultPakcage() {
+    public void extractPackageFromSipper_normalSipper_returnDefaultPackage() {
         BatteryEntry entry = createBatteryEntryForApp();
 
         assertThat(entry.extractPackagesFromSipper(entry.sipper)).isEqualTo(entry.sipper.mPackages);

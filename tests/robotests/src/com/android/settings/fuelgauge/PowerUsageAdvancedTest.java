@@ -37,7 +37,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 
-import android.view.View;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;

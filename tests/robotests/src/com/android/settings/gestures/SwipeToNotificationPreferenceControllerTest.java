@@ -16,33 +16,26 @@
 
 package com.android.settings.gestures;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;

@@ -26,8 +26,8 @@ import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.android.controller.FragmentController;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.FragmentController;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
@@ -47,7 +47,7 @@ public class ConfigureKeyGuardDialogTest {
                 Robolectric.buildFragment(ConfigureKeyGuardDialog.class);
         final ConfigureKeyGuardDialog fragment = spy(fragmentController.get());
         doNothing().when(fragment).startPasswordSetup();
-        fragmentController.attach().create().start().resume();
+        fragmentController.create().start().resume();
         fragment.onClick(null /* dialog */, DialogInterface.BUTTON_POSITIVE);
         fragment.onDismiss(null /* dialog */);
 

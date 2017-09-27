@@ -20,11 +20,11 @@ import android.content.Intent;
 
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
 import org.robolectric.res.ResourcePath;
-import org.robolectric.util.ActivityController;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
@@ -79,35 +79,35 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
 
     public static void getIncludedResourcePaths(String packageName, List<ResourcePath> paths) {
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./packages/apps/Settings/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/base/packages/SettingsLib/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/base/core/res/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/opt/setupwizard/library/main/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/opt/setupwizard/library/gingerbread/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/opt/setupwizard/library/recyclerview/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/support/v7/appcompat/res"),
                 null));
         paths.add(new ResourcePath(
-                packageName,
+                null,
                 Fs.fileFromPath("./frameworks/support/v7/cardview/res"),
                 null));
     }

@@ -33,7 +33,6 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
 import org.junit.Test;

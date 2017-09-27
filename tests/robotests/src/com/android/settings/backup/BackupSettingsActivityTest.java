@@ -16,6 +16,8 @@
 
 package com.android.settings.backup;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.isA;
@@ -32,9 +34,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,14 +46,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
-import org.robolectric.res.builder.RobolectricPackageManager;
-import org.robolectric.util.ActivityController;
-
-import static com.google.common.truth.Truth.assertThat;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class BackupSettingsActivityTest {
     private ActivityController<BackupSettingsActivity> mActivityController;
     private BackupSettingsActivity mActivity;
     private Application mApplication;
-    private RobolectricPackageManager mPackageManager;
+    private ShadowPackageManager mPackageManager;
     private static boolean mIsBackupProvidedByOEM;
 
     @Mock
@@ -84,7 +85,7 @@ public class BackupSettingsActivityTest {
         mApplication = RuntimeEnvironment.application;
         mActivityController = Robolectric.buildActivity(BackupSettingsActivity.class);
         mActivity = mActivityController.get();
-        mPackageManager = (RobolectricPackageManager) mApplication.getPackageManager();
+        mPackageManager = Shadows.shadowOf(mApplication.getPackageManager());
         doReturn(mComponent).when(mIntent).getComponent();
     }
 

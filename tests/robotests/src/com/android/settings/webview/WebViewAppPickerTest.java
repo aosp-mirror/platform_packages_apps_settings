@@ -36,6 +36,7 @@ import com.android.settings.wrapper.UserPackageWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -66,10 +67,16 @@ import static org.mockito.Mockito.when;
 public class WebViewAppPickerTest {
     private Context mContext = RuntimeEnvironment.application;
 
-    private final static UserInfo FIRST_USER = new UserInfo(0, "FIRST_USER", 0);
-    private final static UserInfo SECOND_USER = new UserInfo(0, "SECOND_USER", 0);
+    private static UserInfo sFirstUser;
+    private static UserInfo sSecondUser;
 
     private final static String DEFAULT_PACKAGE_NAME = "DEFAULT_PACKAGE_NAME";
+
+    @BeforeClass
+    public static void beforeClass() {
+        sFirstUser = new UserInfo(0, "FIRST_USER", 0);
+        sSecondUser = new UserInfo(0, "SECOND_USER", 0);
+    }
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
@@ -261,14 +268,14 @@ public class WebViewAppPickerTest {
         UserPackageWrapper packageForFirstUser = mock(UserPackageWrapper.class);
         when(packageForFirstUser.isEnabledPackage()).thenReturn(false);
         when(packageForFirstUser.isInstalledPackage()).thenReturn(true);
-        when(packageForFirstUser.getUserInfo()).thenReturn(FIRST_USER);
+        when(packageForFirstUser.getUserInfo()).thenReturn(sFirstUser);
 
         WebViewUpdateServiceWrapper wvusWrapper = mock(WebViewUpdateServiceWrapper.class);
         when(wvusWrapper.getPackageInfosAllUsers(any(), eq(DEFAULT_PACKAGE_NAME)))
                 .thenReturn(Arrays.asList(packageForFirstUser));
 
         final String EXPECTED_DISABLED_REASON = String.format(
-                "(disabled for user %s)", FIRST_USER.name);
+                "(disabled for user %s)", sFirstUser.name);
         assertThat(mPicker.getDisabledReason(wvusWrapper, mContext,
                 DEFAULT_PACKAGE_NAME)).isEqualTo(EXPECTED_DISABLED_REASON);
     }
@@ -278,14 +285,14 @@ public class WebViewAppPickerTest {
         UserPackageWrapper packageForFirstUser = mock(UserPackageWrapper.class);
         when(packageForFirstUser.isEnabledPackage()).thenReturn(true);
         when(packageForFirstUser.isInstalledPackage()).thenReturn(false);
-        when(packageForFirstUser.getUserInfo()).thenReturn(FIRST_USER);
+        when(packageForFirstUser.getUserInfo()).thenReturn(sFirstUser);
 
         WebViewUpdateServiceWrapper wvusWrapper = mock(WebViewUpdateServiceWrapper.class);
         when(wvusWrapper.getPackageInfosAllUsers(any(), eq(DEFAULT_PACKAGE_NAME)))
                 .thenReturn(Arrays.asList(packageForFirstUser));
 
         final String EXPECTED_DISABLED_REASON = String.format(
-                "(uninstalled for user %s)", FIRST_USER.name);
+                "(uninstalled for user %s)", sFirstUser.name);
         assertThat(mPicker.getDisabledReason(wvusWrapper, mContext,
                 DEFAULT_PACKAGE_NAME)).isEqualTo(EXPECTED_DISABLED_REASON);
     }
@@ -295,19 +302,19 @@ public class WebViewAppPickerTest {
         UserPackageWrapper packageForFirstUser = mock(UserPackageWrapper.class);
         when(packageForFirstUser.isEnabledPackage()).thenReturn(false);
         when(packageForFirstUser.isInstalledPackage()).thenReturn(true);
-        when(packageForFirstUser.getUserInfo()).thenReturn(FIRST_USER);
+        when(packageForFirstUser.getUserInfo()).thenReturn(sFirstUser);
 
         UserPackageWrapper packageForSecondUser = mock(UserPackageWrapper.class);
         when(packageForSecondUser.isEnabledPackage()).thenReturn(true);
         when(packageForSecondUser.isInstalledPackage()).thenReturn(false);
-        when(packageForSecondUser.getUserInfo()).thenReturn(SECOND_USER);
+        when(packageForSecondUser.getUserInfo()).thenReturn(sSecondUser);
 
         WebViewUpdateServiceWrapper wvusWrapper = mock(WebViewUpdateServiceWrapper.class);
         when(wvusWrapper.getPackageInfosAllUsers(any(), eq(DEFAULT_PACKAGE_NAME)))
                 .thenReturn(Arrays.asList(packageForFirstUser, packageForSecondUser));
 
         final String EXPECTED_DISABLED_REASON = String.format(
-                "(disabled for user %s)", FIRST_USER.name);
+                "(disabled for user %s)", sFirstUser.name);
         assertThat(mPicker.getDisabledReason(
                 wvusWrapper, mContext, DEFAULT_PACKAGE_NAME)).isEqualTo(EXPECTED_DISABLED_REASON);
     }
@@ -321,19 +328,19 @@ public class WebViewAppPickerTest {
         UserPackageWrapper packageForFirstUser = mock(UserPackageWrapper.class);
         when(packageForFirstUser.isEnabledPackage()).thenReturn(false);
         when(packageForFirstUser.isInstalledPackage()).thenReturn(false);
-        when(packageForFirstUser.getUserInfo()).thenReturn(FIRST_USER);
+        when(packageForFirstUser.getUserInfo()).thenReturn(sFirstUser);
 
         UserPackageWrapper packageForSecondUser = mock(UserPackageWrapper.class);
         when(packageForSecondUser.isEnabledPackage()).thenReturn(true);
         when(packageForSecondUser.isInstalledPackage()).thenReturn(true);
-        when(packageForSecondUser.getUserInfo()).thenReturn(SECOND_USER);
+        when(packageForSecondUser.getUserInfo()).thenReturn(sSecondUser);
 
         WebViewUpdateServiceWrapper wvusWrapper = mock(WebViewUpdateServiceWrapper.class);
         when(wvusWrapper.getPackageInfosAllUsers(any(), eq(DEFAULT_PACKAGE_NAME)))
                 .thenReturn(Arrays.asList(packageForFirstUser, packageForSecondUser));
 
         final String EXPECTED_DISABLED_REASON = String.format(
-                "(uninstalled for user %s)", FIRST_USER.name);
+                "(uninstalled for user %s)", sFirstUser.name);
         assertThat(mPicker.getDisabledReason(wvusWrapper, mContext,
                 DEFAULT_PACKAGE_NAME)).isEqualTo(EXPECTED_DISABLED_REASON);
     }
