@@ -207,7 +207,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new CameraHalHdrPlusPreferenceControllerV2(context));
         // feature flags
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
-        // enable wi-fi verbose logging
+        controllers.add(new WifiVerboseLoggingPreferenceController(context));
         controllers.add(new WifiAggressiveHandoverPreferenceController(context));
         controllers.add(new WifiRoamScansPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
