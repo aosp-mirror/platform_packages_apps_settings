@@ -40,12 +40,6 @@ public class CameraHalHdrPlusPreferenceControllerV2 extends
     static final String ENABLED = "1";
     @VisibleForTesting
     static final String DISABLED = "0";
-    @VisibleForTesting
-    static final String USERDEBUG_BUILD = "userdebug";
-    @VisibleForTesting
-    static final String ENG_BUILD = "eng";
-    @VisibleForTesting
-    static final String USER_BUILD = "user";
 
     private SwitchPreference mPreference;
 
@@ -57,9 +51,7 @@ public class CameraHalHdrPlusPreferenceControllerV2 extends
     public boolean isAvailable() {
         final String buildType = SystemProperties.get(BUILD_TYPE);
 
-        return mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus) &&
-                (TextUtils.equals(USERDEBUG_BUILD, buildType) ||
-                        TextUtils.equals(ENG_BUILD, buildType));
+        return mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus);
     }
 
     @Override
