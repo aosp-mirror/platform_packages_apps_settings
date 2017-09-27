@@ -16,11 +16,6 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.CameraHalHdrPlusPreferenceControllerV2.ENG_BUILD;
-import static com.android.settings.development
-        .CameraHalHdrPlusPreferenceControllerV2.USERDEBUG_BUILD;
-import static com.android.settings.development.CameraHalHdrPlusPreferenceControllerV2.USER_BUILD;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -57,6 +52,8 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     private Context mContext;
     private CameraHalHdrPlusPreferenceControllerV2 mController;
 
+    static final String USERDEBUG_BUILD = "userdebug";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -77,30 +74,6 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     public void isAvailable_withConfigNoShowAndUserDebugBuild_shouldReturnFalse() {
         SettingsShadowSystemProperties.set(
                 CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_withUserdebugBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_withEngBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, ENG_BUILD);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_withUserBuild_shouldReturnFalse() {
-        SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USER_BUILD);
 
         assertThat(mController.isAvailable()).isFalse();
     }
