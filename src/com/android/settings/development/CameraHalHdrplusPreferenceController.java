@@ -63,9 +63,7 @@ public class CameraHalHdrplusPreferenceController extends AbstractPreferenceCont
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus) &&
-               (SystemProperties.get(BUILD_TYPE).equals("userdebug") ||
-                SystemProperties.get(BUILD_TYPE).equals("eng"));
+        return mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus);
     }
 
     @Override
