@@ -988,7 +988,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             if (DEBUG) Log.i(TAG, "Resume!  mResumed=" + mResumed);
             if (!mResumed) {
                 mResumed = true;
-                mSession.resume();
+                mSession.onResume();
                 mLastSortMode = sort;
                 if (mExtraInfoBridge != null) {
                     mExtraInfoBridge.resume();
@@ -1002,7 +1002,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         public void pause() {
             if (mResumed) {
                 mResumed = false;
-                mSession.pause();
+                mSession.onPause();
                 if (mExtraInfoBridge != null) {
                     mExtraInfoBridge.pause();
                 }
@@ -1015,7 +1015,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         public void release() {
-            mSession.release();
+            mSession.onDestroy();
             if (mExtraInfoBridge != null) {
                 mExtraInfoBridge.release();
             }

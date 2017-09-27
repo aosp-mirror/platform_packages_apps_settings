@@ -32,7 +32,6 @@ import com.android.settings.DividerPreference;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
@@ -53,7 +52,7 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
         super.onCreate(icicle);
         mApplicationsState = ApplicationsState.getInstance((Application)
                 getContext().getApplicationContext());
-        mSession = mApplicationsState.newSession(this);
+        mSession = mApplicationsState.newSession(this, getLifecycle());
         mSmsBackend = new AppStateSmsPremBridge(getContext(), mApplicationsState, this);
     }
 
@@ -66,21 +65,18 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
     @Override
     public void onResume() {
         super.onResume();
-        mSession.resume();
         mSmsBackend.resume();
     }
 
     @Override
     public void onPause() {
         mSmsBackend.pause();
-        mSession.pause();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
         mSmsBackend.release();
-        mSession.release();
         super.onDestroy();
     }
 

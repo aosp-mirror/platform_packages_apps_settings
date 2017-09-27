@@ -92,7 +92,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
                 .getApplicationFeatureProvider(activity);
         mState = ApplicationsState.getInstance(activity.getApplication());
-        mSession = mState.newSession(this);
+        mSession = mState.newSession(this, getLifecycle());
         mDpm = new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
@@ -107,7 +107,6 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSession.resume();
         mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
                 UserManager.DISALLOW_APPS_CONTROL, mUserId);
         mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
@@ -118,16 +117,10 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         }
     }
 
-    @Override
-    public void onPause() {
-        mSession.pause();
-        super.onPause();
-    }
 
     @Override
     public void onDestroy() {
         stopListeningToPackageRemove();
-        mSession.release();
         super.onDestroy();
     }
 

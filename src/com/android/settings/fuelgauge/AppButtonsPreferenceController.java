@@ -28,7 +28,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -77,7 +76,7 @@ import java.util.List;
  */
 //TODO(b/35810915): Make InstalledAppDetails use this controller
 public class AppButtonsPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause, OnDestroy,
+        PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
         ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
 
@@ -144,7 +143,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, mUserId);
-            mSession = mState.newSession(this);
+            mSession = mState.newSession(this, lifecycle);
             lifecycle.addObserver(this);
         } else {
             mFinishing = true;
@@ -179,7 +178,6 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onResume() {
-        mSession.resume();
         if (isAvailable() && !mFinishing) {
             mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(mActivity,
                     UserManager.DISALLOW_APPS_CONTROL, mUserId);
@@ -193,14 +191,8 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public void onPause() {
-        mSession.pause();
-    }
-
-    @Override
     public void onDestroy() {
         stopListeningToPackageRemove();
-        mSession.release();
     }
 
     private class UninstallAndDisableButtonListener implements View.OnClickListener {
