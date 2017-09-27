@@ -29,8 +29,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.FingerprintManager.AuthenticationCallback;
-import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
@@ -152,41 +150,44 @@ public class FingerprintSettings extends SubSettings {
         protected static final boolean DEBUG = true;
 
         private FingerprintManager mFingerprintManager;
-        private CancellationSignal mFingerprintCancel;
         private boolean mInFingerprintLockout;
         private byte[] mToken;
         private boolean mLaunchedConfirm;
         private Drawable mHighlightDrawable;
         private int mUserId;
 
+        private static final String TAG_AUTHENTICATE_SIDECAR = "authenticate_sidecar";
         private static final String TAG_REMOVAL_SIDECAR = "removal_sidecar";
+        private FingerprintAuthenticateSidecar mAuthenticateSidecar;
         private FingerprintRemoveSidecar mRemovalSidecar;
         private HashMap<Integer, String> mFingerprintsRenaming;
 
-        private AuthenticationCallback mAuthCallback = new AuthenticationCallback() {
-            @Override
-            public void onAuthenticationSucceeded(AuthenticationResult result) {
-                int fingerId = result.getFingerprint().getFingerId();
-                mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
-            }
+        FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
+            new FingerprintAuthenticateSidecar.Listener() {
+                @Override
+                public void onAuthenticationSucceeded(
+                        FingerprintManager.AuthenticationResult result) {
+                    int fingerId = result.getFingerprint().getFingerId();
+                    mHandler.obtainMessage(MSG_FINGER_AUTH_SUCCESS, fingerId, 0).sendToTarget();
+                }
 
-            @Override
-            public void onAuthenticationFailed() {
-                mHandler.obtainMessage(MSG_FINGER_AUTH_FAIL).sendToTarget();
-            }
+                @Override
+                public void onAuthenticationFailed() {
+                    mHandler.obtainMessage(MSG_FINGER_AUTH_FAIL).sendToTarget();
+                }
 
-            @Override
-            public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                mHandler.obtainMessage(MSG_FINGER_AUTH_ERROR, errMsgId, 0, errString)
-                        .sendToTarget();
-            }
+                @Override
+                public void onAuthenticationError(int errMsgId, CharSequence errString) {
+                    mHandler.obtainMessage(MSG_FINGER_AUTH_ERROR, errMsgId, 0, errString)
+                            .sendToTarget();
+                }
 
-            @Override
-            public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                mHandler.obtainMessage(MSG_FINGER_AUTH_HELP, helpMsgId, 0, helpString)
-                        .sendToTarget();
-            }
-        };
+                @Override
+                public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
+                    mHandler.obtainMessage(MSG_FINGER_AUTH_HELP, helpMsgId, 0, helpString)
+                            .sendToTarget();
+                }
+            };
 
         FingerprintRemoveSidecar.Listener mRemovalListener =
                 new FingerprintRemoveSidecar.Listener() {
@@ -223,7 +224,6 @@ public class FingerprintSettings extends SubSettings {
                         retryFingerprint();
                     break;
                     case MSG_FINGER_AUTH_SUCCESS:
-                        mFingerprintCancel = null;
                         highlightFingerprintItem(msg.arg1);
                         retryFingerprint();
                     break;
@@ -241,18 +241,10 @@ public class FingerprintSettings extends SubSettings {
             }
         };
 
-        private void stopFingerprint() {
-            if (mFingerprintCancel != null && !mFingerprintCancel.isCanceled()) {
-                mFingerprintCancel.cancel();
-            }
-            mFingerprintCancel = null;
-        }
-
         /**
          * @param errMsgId
          */
         protected void handleError(int errMsgId, CharSequence msg) {
-            mFingerprintCancel = null;
             switch (errMsgId) {
                 case FingerprintManager.FINGERPRINT_ERROR_CANCELED:
                     return; // Only happens if we get preempted by another activity. Ignored.
@@ -290,9 +282,8 @@ public class FingerprintSettings extends SubSettings {
                 return;
             }
             if (!mInFingerprintLockout) {
-                mFingerprintCancel = new CancellationSignal();
-                mFingerprintManager.authenticate(null, mFingerprintCancel, 0 /* flags */,
-                        mAuthCallback, null, mUserId);
+                mAuthenticateSidecar.startAuthentication(mUserId);
+                mAuthenticateSidecar.setListener(mAuthenticateListener);
             }
         }
 
@@ -307,6 +298,15 @@ public class FingerprintSettings extends SubSettings {
 
             Activity activity = getActivity();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+
+            mAuthenticateSidecar = (FingerprintAuthenticateSidecar)
+                    getFragmentManager().findFragmentByTag(TAG_AUTHENTICATE_SIDECAR);
+            if (mAuthenticateSidecar == null) {
+                mAuthenticateSidecar = new FingerprintAuthenticateSidecar();
+                getFragmentManager().beginTransaction()
+                        .add(mAuthenticateSidecar, TAG_AUTHENTICATE_SIDECAR).commit();
+            }
+            mAuthenticateSidecar.setFingerprintManager(mFingerprintManager);
 
             mRemovalSidecar = (FingerprintRemoveSidecar)
                     getFragmentManager().findFragmentByTag(TAG_REMOVAL_SIDECAR);
@@ -454,9 +454,12 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public void onPause() {
             super.onPause();
-            stopFingerprint();
             if (mRemovalSidecar != null) {
                 mRemovalSidecar.setListener(null);
+            }
+            if (mAuthenticateSidecar != null) {
+                mAuthenticateSidecar.setListener(null);
+                mAuthenticateSidecar.stopAuthentication();
             }
         }
 
