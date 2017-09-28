@@ -269,7 +269,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         // select usb configuration
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
-        // disable absolute volume
+        controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         // enable in-band ringing
         // bluetooth avrcp version
         // bluetooth audio codec
