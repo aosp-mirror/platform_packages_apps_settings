@@ -40,11 +40,6 @@ public class ShowTapsPreferenceController extends DeveloperOptionsPreferenceCont
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return SHOW_TOUCHES_KEY;
     }

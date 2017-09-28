@@ -49,11 +49,6 @@ public class WaitForDebuggerPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return WAIT_FOR_DEBUGGER_KEY;
     }

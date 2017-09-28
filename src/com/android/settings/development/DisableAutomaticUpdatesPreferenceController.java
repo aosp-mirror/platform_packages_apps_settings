@@ -44,11 +44,6 @@ public class DisableAutomaticUpdatesPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return OTA_DISABLE_AUTOMATIC_UPDATE_KEY;
     }

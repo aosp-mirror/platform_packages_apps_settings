@@ -49,11 +49,6 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return DEBUG_APP_KEY;
     }

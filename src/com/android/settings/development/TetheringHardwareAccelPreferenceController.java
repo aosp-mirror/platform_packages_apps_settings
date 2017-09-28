@@ -42,11 +42,6 @@ public class TetheringHardwareAccelPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return TETHERING_HARDWARE_OFFLOAD;
     }

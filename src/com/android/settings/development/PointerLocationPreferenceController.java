@@ -40,11 +40,6 @@ public class PointerLocationPreferenceController extends DeveloperOptionsPrefere
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return POINTER_LOCATION_KEY;
     }

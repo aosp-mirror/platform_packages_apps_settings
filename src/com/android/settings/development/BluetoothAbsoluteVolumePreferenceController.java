@@ -39,11 +39,6 @@ public class BluetoothAbsoluteVolumePreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY;
     }

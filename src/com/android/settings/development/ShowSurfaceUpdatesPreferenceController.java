@@ -51,11 +51,6 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return SHOW_SCREEN_UPDATES_KEY;
     }

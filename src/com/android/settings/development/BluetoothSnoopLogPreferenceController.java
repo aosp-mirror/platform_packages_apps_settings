@@ -38,11 +38,6 @@ public class BluetoothSnoopLogPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return PREFERENCE_KEY;
     }

@@ -39,11 +39,6 @@ public class BluetoothDeviceNoNamePreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY;
     }

@@ -40,11 +40,6 @@ public class MobileDataAlwaysOnPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return MOBILE_DATA_ALWAYS_ON;
     }

@@ -43,11 +43,6 @@ public class WifiVerboseLoggingPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return WIFI_VERBOSE_LOGGING_KEY;
     }

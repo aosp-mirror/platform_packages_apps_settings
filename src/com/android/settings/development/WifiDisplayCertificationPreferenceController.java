@@ -41,11 +41,6 @@ public class WifiDisplayCertificationPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return WIFI_DISPLAY_CERTIFICATION_KEY;
     }
