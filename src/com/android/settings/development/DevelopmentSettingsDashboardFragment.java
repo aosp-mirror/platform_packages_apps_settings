@@ -298,7 +298,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // debug gpu overdraw
         // debug non-rectangular clip operations
         controllers.add(new ForceMSAAPreferenceController(context));
-        // disable hw overlays
+        controllers.add(new HardwareOverlaysPreferenceController(context));
         // simulate color space
         // set gpu renderer
         // disable usb audio routing
