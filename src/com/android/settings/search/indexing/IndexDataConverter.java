@@ -17,29 +17,31 @@
 
 package com.android.settings.search.indexing;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.settings.core.PreferenceControllerMixin;
 
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search.SearchIndexableResources;
 import com.android.settings.search.XmlParserUtils;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -47,10 +49,6 @@ import java.util.Set;
 
 /**
  * Helper class to convert {@link PreIndexData} to {@link IndexData}.
- *
- * TODO (b/33577327) This is just copied straight from DatabaseIndexingManager. But it's still ugly.
- * TODO              This is currently a long chain of method calls. It needs to be broken up.
- * TODO              but for the sake of easy code reviews, that will happen later.
  */
 public class IndexDataConverter {
 
@@ -64,70 +62,77 @@ public class IndexDataConverter {
 
     private String mLocale;
 
-    private List<IndexData> mIndexData;
-
-    public IndexDataConverter(Context context) {
+    public IndexDataConverter(Context context, String locale) {
         mContext = context;
-        mLocale = Locale.getDefault().toString();
-    }
-
-    public List<IndexData> convertPreIndexDataToIndexData(PreIndexData preIndexData,
-            String locale) {
         mLocale = locale;
-        mIndexData = new ArrayList<>();
-        List<SearchIndexableData> dataToUpdate = preIndexData.dataToUpdate;
-        Map<String, Set<String>> nonIndexableKeys = preIndexData.nonIndexableKeys;
-        parsePreIndexData(dataToUpdate, nonIndexableKeys);
-        return mIndexData;
     }
 
     /**
-     * Inserts {@link SearchIndexableData} into the database.
+     * Return the collection of {@param preIndexData} converted into {@link IndexData}.
      *
-     * @param dataToUpdate     is a {@link List} of the data to be inserted.
-     * @param nonIndexableKeys is a {@link Map} from Package Name to a {@link Set} of keys which
-     *                         identify search results which should not be surfaced.
+     * @param preIndexData a collection of {@link SearchIndexableResource},
+     *                     {@link SearchIndexableRaw} and non-indexable keys.
      */
-    private void parsePreIndexData(List<SearchIndexableData> dataToUpdate,
-            Map<String, Set<String>> nonIndexableKeys) {
-        final long current = System.currentTimeMillis();
+    public List<IndexData> convertPreIndexDataToIndexData(PreIndexData preIndexData) {
 
-        for (SearchIndexableData data : dataToUpdate) {
-            try {
-                addOneIndexData(data, nonIndexableKeys);
-            } catch (Exception e) {
-                Log.e(LOG_TAG, "Cannot index: " + (data != null ? data.className : data)
-                        + " for locale: " + mLocale, e);
+        final long current = System.currentTimeMillis();
+        final List<SearchIndexableData> indexableData = preIndexData.dataToUpdate;
+        final Map<String, Set<String>> nonIndexableKeys = preIndexData.nonIndexableKeys;
+        final List<IndexData> indexData = new ArrayList<>();
+
+        for (SearchIndexableData data : indexableData) {
+            if (data instanceof SearchIndexableRaw) {
+                final SearchIndexableRaw rawData = (SearchIndexableRaw) data;
+                final Set<String> rawNonIndexableKeys = nonIndexableKeys.get(
+                        rawData.intentTargetPackage);
+                final IndexData.Builder builder = convertRaw(rawData, rawNonIndexableKeys);
+
+                if (builder != null) {
+                    indexData.add(builder.build(mContext));
+                }
+            } else if (data instanceof SearchIndexableResource) {
+                final SearchIndexableResource sir = (SearchIndexableResource) data;
+                final Set<String> resourceNonIndexableKeys =
+                        getNonIndexableKeysForResource(nonIndexableKeys, sir.packageName);
+
+                if (sir.xmlResId == 0) {
+                    // Index from provider
+                    final Indexable.SearchIndexProvider provider = getSearchProvider(sir);
+                    if (provider == null) {
+                        continue;
+                    }
+                    indexData.addAll(convertIndexProvider(provider, sir, resourceNonIndexableKeys));
+
+                } else {
+                    final List<IndexData> resourceData = convertResource(sir,
+                            resourceNonIndexableKeys);
+                    indexData.addAll(resourceData);
+                }
+
             }
         }
 
-        final long now = System.currentTimeMillis();
-        Log.d(LOG_TAG, "Indexing locale '" + mLocale + "' took " +
-                (now - current) + " millis");
+        final long endConversion = System.currentTimeMillis();
+        Log.d(LOG_TAG, "Converting pre-index data to index data took: "
+                + (endConversion - current));
+
+        return indexData;
     }
 
-    private void addOneIndexData(SearchIndexableData data,
-            Map<String, Set<String>> nonIndexableKeys) {
-        if (data instanceof SearchIndexableResource) {
-            addOneResource((SearchIndexableResource) data, nonIndexableKeys);
-        } else if (data instanceof SearchIndexableRaw) {
-            addOneRaw((SearchIndexableRaw) data, nonIndexableKeys);
-        }
-    }
-
-    private void addOneRaw(SearchIndexableRaw raw, Map<String,
-            Set<String>> nonIndexableKeysFromResource) {
+    /**
+     * Return the conversion of {@link SearchIndexableRaw} to {@link IndexData}.
+     * The fields of {@link SearchIndexableRaw} are a subset of {@link IndexData},
+     * and there is some data sanitization in the conversion.
+     */
+    @Nullable
+    private IndexData.Builder convertRaw(SearchIndexableRaw raw, Set<String> nonIndexableKeys) {
         // Should be the same locale as the one we are processing
         if (!raw.locale.toString().equalsIgnoreCase(mLocale)) {
-            return;
+            return null;
         }
 
-        Set<String> packageKeys = nonIndexableKeysFromResource.get(raw.intentTargetPackage);
-        boolean enabled = raw.enabled;
-
-        if (packageKeys != null && packageKeys.contains(raw.key)) {
-            enabled = false;
-        }
+        // A row is enabled if it does not show up as an nonIndexableKey
+        boolean enabled = !(nonIndexableKeys != null && nonIndexableKeys.contains(raw.key));
 
         IndexData.Builder builder = new IndexData.Builder();
         builder.setTitle(raw.title)
@@ -145,58 +150,22 @@ public class IndexDataConverter {
                 .setKey(raw.key)
                 .setUserId(raw.userId);
 
-        addRowToData(builder.build(mContext));
+        return builder;
     }
 
-    private void addOneResource(SearchIndexableResource sir,
-        Map<String, Set<String>> nonIndexableKeysFromResource) {
-
-        if (sir == null) {
-            Log.e(LOG_TAG, "Cannot index a null resource!");
-            return;
-        }
-
-        final List<String> nonIndexableKeys = new ArrayList<>();
-
-        if (sir.xmlResId > SearchIndexableResources.NO_DATA_RES_ID) {
-            Set<String> resNonIndexableKeys = nonIndexableKeysFromResource.get(sir.packageName);
-            if (resNonIndexableKeys != null && resNonIndexableKeys.size() > 0) {
-                nonIndexableKeys.addAll(resNonIndexableKeys);
-            }
-
-            addIndexDataFromResource(sir, nonIndexableKeys);
-        } else {
-            if (TextUtils.isEmpty(sir.className)) {
-                Log.w(LOG_TAG, "Cannot index an empty Search Provider name!");
-                return;
-            }
-
-            final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(sir.className);
-            if (clazz == null) {
-                Log.d(LOG_TAG, "SearchIndexableResource '" + sir.className +
-                        "' should implement the " + Indexable.class.getName() + " interface!");
-                return;
-            }
-
-            // Will be non null only for a Local provider implementing a
-            // SEARCH_INDEX_DATA_PROVIDER field
-            final Indexable.SearchIndexProvider provider =
-                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
-            if (provider != null) {
-                List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(sir.context);
-                if (providerNonIndexableKeys != null) {
-                    nonIndexableKeys.addAll(providerNonIndexableKeys);
-                }
-
-                addIndexDataFromProvider(provider, sir, nonIndexableKeys);
-            }
-        }
-    }
-
-    private void addIndexDataFromResource(SearchIndexableResource sir,
-            List<String> nonIndexableKeys) {
+    /**
+     * Return the conversion of the {@link SearchIndexableResource} to {@link IndexData}.
+     * Each of the elements in the xml layout attribute of {@param sir} is a candidate to be
+     * converted (including the header element).
+     *
+     * TODO (b/33577327) simplify this method.
+     */
+    private List<IndexData> convertResource(SearchIndexableResource sir,
+            Set<String> nonIndexableKeys) {
         final Context context = sir.context;
         XmlResourceParser parser = null;
+
+        List<IndexData> resourceIndexData = new ArrayList<>();
         try {
             parser = context.getResources().getXml(sir.xmlResId);
 
@@ -226,8 +195,7 @@ public class IndexDataConverter {
             String keywords;
             String headerKeywords;
             String childFragment;
-            @DrawableRes
-            int iconResId;
+            @DrawableRes int iconResId;
             ResultPayload payload;
             boolean enabled;
             final String fragmentName = sir.className;
@@ -241,9 +209,6 @@ public class IndexDataConverter {
                 controllerUriMap = DatabaseIndexingUtils
                         .getPreferenceControllerUriMap(fragmentName, context);
             }
-
-            // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
-            // hyphens.
 
             headerTitle = XmlParserUtils.getDataTitle(context, attrs);
             headerSummary = XmlParserUtils.getDataSummary(context, attrs);
@@ -319,8 +284,7 @@ public class IndexDataConverter {
                             .setChildClassName(childFragment)
                             .setPayload(payload);
 
-                    // Insert rows for the child nodes of PreferenceScreen
-                    addRowToData(builder.build(mContext));
+                    resourceIndexData.add(builder.build(mContext));
                 } else {
                     // TODO (b/33577327) We removed summary off here. We should check if we can
                     // merge this 'else' section with the one above. Put a break point to
@@ -334,13 +298,13 @@ public class IndexDataConverter {
 
                     builder.setSummaryOn(summaryOn);
 
-                    addRowToData(builder.build(mContext));
+                    resourceIndexData.add(builder.build(mContext));
                 }
             }
 
             // The xml header's title does not match the title of one of the child settings.
             if (isHeaderUnique) {
-                addRowToData(headerBuilder.build(mContext));
+                resourceIndexData.add(headerBuilder.build(mContext));
             }
         } catch (XmlPullParserException e) {
             throw new RuntimeException("Error parsing PreferenceScreen", e);
@@ -349,62 +313,44 @@ public class IndexDataConverter {
         } finally {
             if (parser != null) parser.close();
         }
+        return resourceIndexData;
     }
 
-    private void addIndexDataFromProvider(Indexable.SearchIndexProvider provider,
-            SearchIndexableResource sir, List<String> nonIndexableKeys) {
+    private List<IndexData> convertIndexProvider(Indexable.SearchIndexProvider provider,
+            SearchIndexableResource sir, Set<String> nonIndexableKeys) {
+        final List<IndexData> indexData = new ArrayList<>();
 
         final String className = sir.className;
         final String intentAction = sir.intentAction;
         final String intentTargetPackage = sir.intentTargetPackage;
 
-        if (provider == null) {
-            Log.w(LOG_TAG, "Cannot find provider: " + className);
-            return;
-        }
+        // TODO (b/65376542) Move provider conversion to PreIndexTime
+        // TODO (b/37741509) Providers don't use general non-indexable keys
+        nonIndexableKeys.addAll(provider.getNonIndexableKeys(mContext));
 
         final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(mContext,
                 true /* enabled */);
 
         if (rawList != null) {
+            for (SearchIndexableRaw raw : rawList) {
+                // The classname and intent information comes from the PreIndexData
+                // This will be more clear when provider conversion is done at PreIndex time.
+                raw.className = className;
+                raw.intentAction = intentAction;
+                raw.intentTargetPackage = intentTargetPackage;
 
-            final int rawSize = rawList.size();
-            for (int i = 0; i < rawSize; i++) {
-                SearchIndexableRaw raw = rawList.get(i);
-
-                // Should be the same locale as the one we are processing
-                if (!raw.locale.toString().equalsIgnoreCase(mLocale)) {
-                    continue;
+                IndexData.Builder builder = convertRaw(raw, nonIndexableKeys);
+                if (builder != null) {
+                    indexData.add(builder.build(mContext));
                 }
-                boolean enabled = !nonIndexableKeys.contains(raw.key);
-
-                IndexData.Builder builder = new IndexData.Builder();
-                builder.setTitle(raw.title)
-                        .setSummaryOn(raw.summaryOn)
-                        .setLocale(mLocale)
-                        .setEntries(raw.entries)
-                        .setKeywords(raw.keywords)
-                        .setClassName(className)
-                        .setScreenTitle(raw.screenTitle)
-                        .setIconResId(raw.iconResId)
-                        .setIntentAction(raw.intentAction)
-                        .setIntentTargetPackage(raw.intentTargetPackage)
-                        .setIntentTargetClass(raw.intentTargetClass)
-                        .setEnabled(enabled)
-                        .setKey(raw.key)
-                        .setUserId(raw.userId);
-
-                addRowToData(builder.build(mContext));
             }
         }
 
         final List<SearchIndexableResource> resList =
                 provider.getXmlResourcesToIndex(mContext, true);
-        if (resList != null) {
-            final int resSize = resList.size();
-            for (int i = 0; i < resSize; i++) {
-                SearchIndexableResource item = resList.get(i);
 
+        if (resList != null) {
+            for (SearchIndexableResource item : resList) {
                 // Should be the same locale as the one we are processing
                 if (!item.locale.toString().equalsIgnoreCase(mLocale)) {
                     continue;
@@ -420,16 +366,39 @@ public class IndexDataConverter {
                         ? intentTargetPackage
                         : item.intentTargetPackage;
 
-                addIndexDataFromResource(item, nonIndexableKeys);
+                indexData.addAll(convertResource(item, nonIndexableKeys));
             }
         }
+
+        return indexData;
     }
 
-    private void addRowToData(IndexData row) {
-        if (TextUtils.isEmpty(row.updatedTitle)) {
-            return;
+    private Set<String> getNonIndexableKeysForResource(Map<String, Set<String>> nonIndexableKeys,
+            String packageName) {
+        return nonIndexableKeys.containsKey(packageName)
+                ? nonIndexableKeys.get(packageName)
+                : new HashSet<>();
+    }
+
+    /**
+     * @return Return the {@link Indexable.SearchIndexProvider} corresponding to the
+     * class specified by the Class name specified by {@param sir}.
+     */
+    private Indexable.SearchIndexProvider getSearchProvider(SearchIndexableResource sir) {
+        if (TextUtils.isEmpty(sir.className)) {
+            Log.w(LOG_TAG, "Cannot index an empty Search Provider name!");
+            return null;
         }
 
-        mIndexData.add(row);
+        final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(sir.className);
+        if (clazz == null) {
+            Log.d(LOG_TAG, "SearchIndexableResource '" + sir.className +
+                    "' should implement the " + Indexable.class.getName() + " interface!");
+            return null;
+        }
+
+        // Will be non null only for a Local provider implementing a
+        // SEARCH_INDEX_DATA_PROVIDER field
+        return DatabaseIndexingUtils.getSearchIndexProvider(clazz);
     }
 }

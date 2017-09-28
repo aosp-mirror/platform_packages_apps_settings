@@ -31,6 +31,7 @@ import android.provider.SearchIndexablesContract;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.SettingsSearchIndexablesProvider;
@@ -186,7 +187,7 @@ public class PreIndexDataCollector {
 
     @VisibleForTesting
     List<String> getNonIndexablesKeysFromRemoteProvider(String packageName,
-        String authority) {
+            String authority) {
         try {
             final Context packageContext = mContext.createPackageContext(packageName, 0);
 
