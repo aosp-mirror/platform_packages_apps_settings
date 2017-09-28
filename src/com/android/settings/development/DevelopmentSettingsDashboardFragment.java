@@ -289,7 +289,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // smallest width
         // force gpu rendering
         // show gpu view updates
-        // show hardware layers updates
+        controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         // debug gpu overdraw
         // debug non-rectangular clip operations
         // force 4x msaa
