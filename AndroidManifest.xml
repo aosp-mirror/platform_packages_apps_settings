@@ -2936,6 +2936,15 @@
             </intent-filter>
         </provider>
 
+        <provider
+            android:name=".dashboard.suggestions.SuggestionStateProvider"
+            android:authorities="com.android.settings.suggestions.status"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.action.SUGGESTION_STATE_PROVIDER" />
+            </intent-filter>
+        </provider>
+
         <activity android:name="Settings$OverlaySettingsActivity"
                 android:label="@string/draw_overlay"
                 android:taskAffinity="">
