@@ -79,14 +79,14 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onResume_shouldRegisterObserver() {
+    public void onStart_shouldRegisterObserver() {
         Context context = RuntimeEnvironment.application;
         BrightnessLevelPreferenceController controller =
             new BrightnessLevelPreferenceController(context, null, mPowerManager);
         ShadowContentResolver shadowContentResolver =
             (ShadowContentResolver) ShadowExtractor.extract(context.getContentResolver());
 
-        controller.onResume();
+        controller.onStart();
 
         assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isNotEmpty();
@@ -99,7 +99,7 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onPause_shouldUnregisterObserver() {
+    public void onStop_shouldUnregisterObserver() {
         Context context = RuntimeEnvironment.application;
         BrightnessLevelPreferenceController controller =
             new BrightnessLevelPreferenceController(context, null, mPowerManager);
@@ -107,8 +107,8 @@ public class BrightnessLevelPreferenceControllerTest {
             (ShadowContentResolver) ShadowExtractor.extract(context.getContentResolver());
 
         controller.displayPreference(mScreen);
-        controller.onResume();
-        controller.onPause();
+        controller.onStart();
+        controller.onStop();
 
         assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isEmpty();
