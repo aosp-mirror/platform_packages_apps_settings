@@ -27,6 +27,10 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 
+/**
+ * @deprecated in favor of {@link AdbPreferenceController}
+ */
+@Deprecated
 public class EnableAdbPreferenceController extends AbstractEnableAdbPreferenceController
         implements PreferenceControllerMixin {
 
