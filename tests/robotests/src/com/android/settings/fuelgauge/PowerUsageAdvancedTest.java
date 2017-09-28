@@ -132,7 +132,7 @@ public class PowerUsageAdvancedTest {
         when(mShadowContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
 
-        mPowerUsageData = new PowerUsageData(UsageType.SYSTEM);
+        mPowerUsageData = new PowerUsageData(UsageType.USER);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
         mMaxBatterySipper.drainType = DrainType.BLUETOOTH;
         mNormalBatterySipper.drainType = DrainType.SCREEN;
@@ -341,6 +341,13 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
+    public void testShouldHideSummary_typeSystem_returnTrue() {
+        mPowerUsageData.usageType = UsageType.SYSTEM;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
     public void testShouldHideSummary_typeWifi_returnTrue() {
         mPowerUsageData.usageType = UsageType.WIFI;
 
@@ -363,7 +370,7 @@ public class PowerUsageAdvancedTest {
 
     @Test
     public void testShouldHideSummary_typeNormal_returnFalse() {
-        mPowerUsageData.usageType = UsageType.SYSTEM;
+        mPowerUsageData.usageType = UsageType.IDLE;
 
         assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isFalse();
     }
