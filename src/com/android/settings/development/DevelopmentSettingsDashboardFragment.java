@@ -293,7 +293,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // simulate secondary displays
         // smallest width
         controllers.add(new ForceGpuRenderingPreferenceController(context));
-        // show gpu view updates
+        controllers.add(new GpuViewUpdatesPreferenceController(context));
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         // debug gpu overdraw
         // debug non-rectangular clip operations
