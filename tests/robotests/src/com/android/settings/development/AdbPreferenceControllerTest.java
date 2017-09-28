@@ -18,6 +18,8 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -60,7 +62,8 @@ public class AdbPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        mController = new AdbPreferenceController(mContext, mFragment);
+        mController = spy(new AdbPreferenceController(mContext, mFragment));
+        doNothing().when(mController).notifyStateChanged();
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
