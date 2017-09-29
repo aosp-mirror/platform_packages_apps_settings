@@ -307,7 +307,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // don't keep activities
         // background process limit
         // background check
-        // show all anrs
+        controllers.add(new AppsNotRespondingPreferenceController(context));
         // show notification channel warnings
         // inactive apps
         // force allow apps on external
