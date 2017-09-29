@@ -310,7 +310,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // show all anrs
         // show notification channel warnings
         // inactive apps
-        // force allow apps on external
+        controllers.add(new AllowAppsOnExternalPreferenceController(context));
         // force activities to be resizable
         // reset shortcutmanager rate-limiting
         return controllers;
