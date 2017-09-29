@@ -16,18 +16,26 @@
 
 package com.android.settings.gestures;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
 import android.content.ContentResolver;
 import android.content.Context;
-
+import android.content.SharedPreferences;
 import android.provider.Settings;
+
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.settings.TestConfig;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,12 +45,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        SettingsShadowResources.class
+})
 public class PickupGesturePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -59,6 +65,12 @@ public class PickupGesturePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = new PickupGesturePreferenceController(
                 mContext, null, mAmbientDisplayConfiguration, 0, KEY_PICK_UP);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
+        ShadowSecureSettings.clear();
     }
 
     @Test
@@ -139,5 +151,21 @@ public class PickupGesturePreferenceControllerTest {
         int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 
         assertThat(newValue).isEqualTo(currentValue);
+    }
+
+    @Test
+    public void isSuggestionCompleted_ambientDisplayPickup_trueWhenVisited() {
+        when(mContext.getResources().getBoolean(anyInt()))
+                .thenReturn(true);
+        when(mContext.getResources().getString(anyInt()))
+                .thenReturn("foo");
+        final Context context = RuntimeEnvironment.application;
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+                .getSharedPrefs(context);
+        prefs.edit().putBoolean(
+                PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
+
+        assertThat(PickupGesturePreferenceController.isSuggestionComplete(mContext, prefs))
+                .isTrue();
     }
 }

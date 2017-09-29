@@ -16,18 +16,26 @@
 
 package com.android.settings.gestures;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
 import android.content.ContentResolver;
 import android.content.Context;
-
+import android.content.SharedPreferences;
 import android.provider.Settings;
+
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.settings.TestConfig;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,12 +45,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        SettingsShadowResources.class
+})
 public class DoubleTapScreenPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -58,6 +64,11 @@ public class DoubleTapScreenPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = new DoubleTapScreenPreferenceController(
                 mContext, null, mAmbientDisplayConfiguration, 0, KEY_DOUBLE_TAP_SCREEN);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -124,5 +135,37 @@ public class DoubleTapScreenPreferenceControllerTest {
         int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 
         assertThat(newValue).isEqualTo(currentValue);
+    }
+
+    @Test
+    public void isSuggestionCompleted_ambientDisplay_falseWhenNotVisited() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_dozeComponent, "foo");
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_dozeDoubleTapSensorType, "bar");
+        // No stored value in shared preferences if not visited yet.
+        final Context context = RuntimeEnvironment.application;
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+                .getSharedPrefs(context);
+
+        assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(context, prefs))
+                .isFalse();
+    }
+
+    @Test
+    public void isSuggestionCompleted_ambientDisplay_trueWhenVisited() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_dozeComponent, "foo");
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_dozeDoubleTapSensorType, "bar");
+        final Context context = RuntimeEnvironment.application;
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+                .getSharedPrefs(context);
+
+        prefs.edit().putBoolean(
+                DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
+
+        assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(context, prefs))
+                .isTrue();
     }
 }

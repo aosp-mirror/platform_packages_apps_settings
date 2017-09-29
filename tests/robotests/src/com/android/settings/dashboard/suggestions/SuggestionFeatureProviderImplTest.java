@@ -19,7 +19,6 @@ package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
@@ -31,7 +30,6 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings.Secure;
@@ -41,18 +39,8 @@ import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
-import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
-import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
-import com.android.settings.Settings.DoubleTwistSuggestionActivity;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
-import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
 import com.android.settings.TestConfig;
-import com.android.settings.gestures.DoubleTapPowerSettings;
-import com.android.settings.gestures.DoubleTapScreenSettings;
-import com.android.settings.gestures.PickupGestureSettings;
-import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -78,18 +66,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = {ShadowSecureSettings.class,
-            SettingsShadowResources.class,
-            SettingsShadowSystemProperties.class
-    }
-)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        ShadowSecureSettings.class,
+        SettingsShadowResources.class,
+        SettingsShadowSystemProperties.class
+})
 public class SuggestionFeatureProviderImplTest {
-
-    private static final String DOUBLE_TWIST_SENSOR_NAME = "double_twist_sensor_name";
-    private static final String DOUBLE_TWIST_SENSOR_VENDOR = "double_twist_sensor_vendor";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -105,8 +87,6 @@ public class SuggestionFeatureProviderImplTest {
     private PackageManager mPackageManager;
     @Mock
     private FingerprintManager mFingerprintManager;
-    @Mock
-    private SharedPreferences mSharedPreferences;
     @Captor
     private ArgumentCaptor<Pair> mTaggedDataCaptor = ArgumentCaptor.forClass(Pair.class);
 
@@ -134,6 +114,7 @@ public class SuggestionFeatureProviderImplTest {
 
     @After
     public void tearDown() {
+        SettingsShadowResources.reset();
         SettingsShadowSystemProperties.clear();
     }
 
@@ -141,158 +122,6 @@ public class SuggestionFeatureProviderImplTest {
     public void getSuggestionServiceComponentName_shouldReturnAndroidPackage() {
         assertThat(mProvider.getSuggestionServiceComponent().getPackageName())
                 .isEqualTo("com.android.settings.intelligence");
-    }
-
-    @Test
-    public void isSuggestionCompleted_doubleTapPower_trueWhenNotAvailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, false);
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        DoubleTapPowerSuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_doubleTapPower_falseWhenNotVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
-        // No stored value in shared preferences if not visited yet.
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        DoubleTapPowerSuggestionActivity.class))).isFalse();
-    }
-
-    @Test
-    public void isSuggestionCompleted_doubleTapPower_trueWhenVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
-        mProvider.getSharedPrefs(RuntimeEnvironment.application).edit().putBoolean(
-                DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        DoubleTapPowerSuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_doubleTwist_trueWhenNotAvailable() {
-        SettingsShadowResources.overrideResource(
-                R.string.gesture_double_twist_sensor_name, "nonexistant name");
-        SettingsShadowResources.overrideResource(
-                R.string.gesture_double_twist_sensor_vendor, "nonexistant vendor");
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        DoubleTwistSuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_ambientDisplay_falseWhenNotVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeComponent, "foo");
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeDoubleTapSensorType, "bar");
-        // No stored value in shared preferences if not visited yet.
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        AmbientDisplaySuggestionActivity.class))).isFalse();
-    }
-
-    @Test
-    public void isSuggestionCompleted_ambientDisplay_trueWhenVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeComponent, "foo");
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeDoubleTapSensorType, "bar");
-        mProvider.getSharedPrefs(RuntimeEnvironment.application).edit().putBoolean(
-                DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        AmbientDisplaySuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_ambientDisplayPickup_falseWhenNotVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeComponent, "foo");
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_dozePulsePickup, true);
-        // No stored value in shared preferences if not visited yet.
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        AmbientDisplaySuggestionActivity.class))).isFalse();
-    }
-
-    @Test
-    public void isSuggestionCompleted_ambientDisplayPickup_trueWhenVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeComponent, "foo");
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_dozePulsePickup, true);
-        mProvider.getSharedPrefs(RuntimeEnvironment.application).edit().putBoolean(
-                PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
-
-        assertThat(mProvider.isSuggestionCompleted(RuntimeEnvironment.application,
-                new ComponentName(RuntimeEnvironment.application,
-                        AmbientDisplayPickupSuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_swipeToNotification_trueWhenNotHardwareNotAvailable() {
-        stubFingerprintSupported(true);
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
-                .thenReturn(true);
-
-        assertThat(mProvider.isSuggestionCompleted(mContext,
-                new ComponentName(mContext, SwipeToNotificationSuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_swipeToNotification_trueWhenNotAvailable() {
-        stubFingerprintSupported(true);
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
-                .thenReturn(false);
-
-        assertThat(mProvider.isSuggestionCompleted(mContext,
-                new ComponentName(mContext, SwipeToNotificationSuggestionActivity.class))).isTrue();
-    }
-
-    @Test
-    public void isSuggestionCompleted_swipeToNotification_falseWhenNotVisited() {
-        stubFingerprintSupported(true);
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
-                .thenReturn(true);
-        // No stored value in shared preferences if not visited yet.
-
-        assertThat(mProvider.isSuggestionCompleted(mContext,
-                new ComponentName(mContext,
-                        SwipeToNotificationSuggestionActivity.class))).isFalse();
-    }
-
-    @Test
-    public void isSuggestionCompleted_swipeToNotification_trueWhenVisited() {
-        stubFingerprintSupported(true);
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys))
-                .thenReturn(true);
-        when(mContext.getSharedPreferences(anyString(), anyInt())).thenReturn(mSharedPreferences);
-        when(mSharedPreferences.getBoolean(
-                SwipeToNotificationSettings.PREF_KEY_SUGGESTION_COMPLETE, false)).thenReturn(true);
-
-        assertThat(mProvider.isSuggestionCompleted(mContext,
-                new ComponentName(mContext, SwipeToNotificationSuggestionActivity.class))).isTrue();
     }
 
     @Test
@@ -324,7 +153,6 @@ public class SuggestionFeatureProviderImplTest {
                 FeatureFlagUtils.FFLAG_PREFIX + mProvider.FEATURE_FLAG_SUGGESTIONS_V2, "false");
         assertThat(mProvider.isSuggestionV2Enabled(mContext)).isFalse();
     }
-
 
     @Test
     public void dismissSuggestion_noParserOrSuggestion_noop() {
@@ -423,11 +251,6 @@ public class SuggestionFeatureProviderImplTest {
                         PackageManager.DONT_KILL_APP);
     }
 
-    private void stubFingerprintSupported(boolean enabled) {
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
-                .thenReturn(enabled);
-    }
-
     @Test
     public void filterExclusiveSuggestions_shouldOnlyKeepFirst3() {
         final List<Tile> suggestions = new ArrayList<>();
@@ -463,7 +286,7 @@ public class SuggestionFeatureProviderImplTest {
                 LocalDateTime.now().toString());
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isTrue();
     }
 
     @Test
@@ -471,7 +294,7 @@ public class SuggestionFeatureProviderImplTest {
         Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isTrue();
     }
 
     @Test
@@ -481,13 +304,13 @@ public class SuggestionFeatureProviderImplTest {
         Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isTrue();
     }
 
     @Test
     public void nightDisplaySuggestion_isNotCompleted_byDefault() {
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
-        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isFalse();
+        assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isFalse();
     }
 }
