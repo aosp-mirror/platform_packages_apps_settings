@@ -292,7 +292,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // animator duration scale
         // simulate secondary displays
         // smallest width
-        // force gpu rendering
+        controllers.add(new ForceGpuRenderingPreferenceController(context));
         // show gpu view updates
         // show hardware layers updates
         // debug gpu overdraw
