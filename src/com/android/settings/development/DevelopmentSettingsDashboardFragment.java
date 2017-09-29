@@ -302,7 +302,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // simulate color space
         // set gpu renderer
         // disable usb audio routing
-        // strict mode enabled
+        controllers.add(new StrictModePreferenceController(context));
         // profile gpu rendering
         // don't keep activities
         // background process limit
