@@ -87,7 +87,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
                 getResources().getIntArray(R.array.battery_saver_trigger_values)) {
             @Override
             protected String getCaption(Resources res, int value) {
-                if (value > 0 && value <= 100) {
+                if (value > 0 && value < 100) {
                     return res.getString(R.string.battery_saver_turn_on_automatically_pct,
                                          Utils.formatPercentage(value));
                 }

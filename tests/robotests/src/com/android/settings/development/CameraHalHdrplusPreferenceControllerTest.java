@@ -53,8 +53,6 @@ public class CameraHalHdrplusPreferenceControllerTest {
     private SwitchPreference mPreference;
 
     static final String USERDEBUG_BUILD = "userdebug";
-    static final String ENG_BUILD = "eng";
-    static final String USER_BUILD = "user";
 
     private CameraHalHdrplusPreferenceController mController;
 
@@ -75,39 +73,6 @@ public class CameraHalHdrplusPreferenceControllerTest {
     public void isAvailable_withConfigNoShow_shouldReturnFalse() {
         when(mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus))
                 .thenReturn(false);
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_withUserdebugBuild_shouldReturnTrue() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus))
-                .thenReturn(true);
-
-        SettingsShadowSystemProperties.set(
-                CameraHalHdrplusPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_withEngBuild_shouldReturnTrue() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus))
-                .thenReturn(true);
-
-        SettingsShadowSystemProperties.set(
-                CameraHalHdrplusPreferenceController.BUILD_TYPE, ENG_BUILD);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_withUserBuild_shouldReturnFalse() {
-        when(mContext.getResources().getBoolean(R.bool.config_show_camera_hal_hdrplus))
-                .thenReturn(true);
-
-        SettingsShadowSystemProperties.set(
-                CameraHalHdrplusPreferenceController.BUILD_TYPE, USER_BUILD);
-
         assertThat(mController.isAvailable()).isFalse();
     }
 

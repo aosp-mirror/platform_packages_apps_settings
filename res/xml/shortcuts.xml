@@ -36,10 +36,4 @@
         android:shortcutShortLabel="@string/power_usage_summary_title" >
         <intent android:action="android.intent.action.POWER_USAGE_SUMMARY" />
     </shortcut>
-    <shortcut
-        android:shortcutId="manifest-running-services"
-        android:icon="@drawable/ic_launcher_settings"
-        android:shortcutShortLabel="@string/show_running_services" >
-        <intent android:action="android.intent.action.settings.RUNNING_SERVICES"/>
-    </shortcut>
 </shortcuts>
