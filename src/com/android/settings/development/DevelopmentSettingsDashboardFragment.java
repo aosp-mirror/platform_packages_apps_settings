@@ -301,7 +301,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // disable hw overlays
         // simulate color space
         // set gpu renderer
-        // disable usb audio routing
+        controllers.add(new UsbAudioRoutingPreferenceController(context));
         controllers.add(new StrictModePreferenceController(context));
         // profile gpu rendering
         // don't keep activities
