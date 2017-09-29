@@ -297,7 +297,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         // debug gpu overdraw
         // debug non-rectangular clip operations
-        // force 4x msaa
+        controllers.add(new ForceMSAAPreferenceController(context));
         // disable hw overlays
         // simulate color space
         // set gpu renderer
