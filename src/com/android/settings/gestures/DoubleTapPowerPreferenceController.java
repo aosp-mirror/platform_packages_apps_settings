@@ -16,10 +16,13 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -28,12 +31,12 @@ import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
-
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
-    private final int ON = 0;
-    private final int OFF = 1;
+    @VisibleForTesting
+    static final int ON = 0;
+    @VisibleForTesting
+    static final int OFF = 1;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
     private final String mDoubleTapPowerKey;
@@ -81,7 +84,7 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     protected boolean isSwitchPrefEnabled() {
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 SECURE_KEY, ON);
-        return cameraDisabled == 0;
+        return cameraDisabled == ON;
     }
 
     @Override

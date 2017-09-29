@@ -16,38 +16,44 @@
 
 package com.android.settings.gestures;
 
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.os.UserManager;
-import android.provider.Settings;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.os.UserManager;
+import android.provider.Settings;
+
+import com.android.settings.R;
+import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowDoubleTwistPreferenceController;
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        SettingsShadowResources.class
+})
 public class DoubleTwistPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -62,6 +68,11 @@ public class DoubleTwistPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         mController = new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -97,15 +108,27 @@ public class DoubleTwistPreferenceControllerTest {
     }
 
     @Test
+    public void isSuggestionCompleted_doubleTwist_trueWhenNotAvailable() {
+        SettingsShadowResources.overrideResource(
+                R.string.gesture_double_twist_sensor_name, "nonexistant name");
+        SettingsShadowResources.overrideResource(
+                R.string.gesture_double_twist_sensor_vendor, "nonexistant vendor");
+
+        assertThat(DoubleTwistPreferenceController.isSuggestionComplete(
+                RuntimeEnvironment.application, null /* prefs */))
+                .isTrue();
+    }
+
+    @Test
     @Config(shadows = {
             ShadowDoubleTwistPreferenceController.class,
             ShadowSecureSettings.class})
     public void onPreferenceChange_hasWorkProfile_shouldUpdateSettingForWorkProfileUser() {
         final int managedId = 2;
         ShadowSecureSettings.putIntForUser(
-            null, Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0, managedId);
+                null, Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0, managedId);
         DoubleTwistPreferenceController controller =
-            spy(new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST));
+                spy(new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST));
         ShadowDoubleTwistPreferenceController.setManagedProfileId(managedId);
 
         // enable the gesture

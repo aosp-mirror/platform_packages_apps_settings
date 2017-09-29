@@ -24,7 +24,11 @@ import android.content.Context;
  */
 public class AmbientDisplayConfiguration {
 
-    public AmbientDisplayConfiguration(Context context) {}
+    private final Context mContext;
+
+    public AmbientDisplayConfiguration(Context context) {
+        mContext = context;
+    }
 
     public boolean pulseOnPickupAvailable() {
         return false;

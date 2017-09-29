@@ -54,7 +54,7 @@ public interface SuggestionFeatureProvider {
     boolean isSmartSuggestionEnabled(Context context);
 
     /** Return true if the suggestion has already been completed and does not need to be shown */
-    boolean isSuggestionCompleted(Context context, @NonNull ComponentName suggestion);
+    boolean isSuggestionComplete(Context context, @NonNull ComponentName suggestion);
 
     /**
      * Returns the {@link SharedPreferences} that holds metadata for suggestions.
