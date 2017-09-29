@@ -43,6 +43,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.development.SystemPropPoker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -126,12 +127,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 EnableDevelopmentSettingWarningDialog.show(this /* host */);
             } else {
                 DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
+                final SystemPropPoker poker = SystemPropPoker.getInstance();
+                poker.blockPokes();
                 for (AbstractPreferenceController controller : mPreferenceControllers) {
                     if (controller instanceof DeveloperOptionsPreferenceController) {
                         ((DeveloperOptionsPreferenceController) controller)
                                 .onDeveloperOptionsDisabled();
                     }
                 }
+                poker.unblockPokes();
+                poker.poke();
             }
         }
     }
