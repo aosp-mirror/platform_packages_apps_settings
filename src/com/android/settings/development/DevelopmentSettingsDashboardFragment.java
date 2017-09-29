@@ -304,7 +304,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // disable usb audio routing
         // strict mode enabled
         // profile gpu rendering
-        // don't keep activities
+        controllers.add(new KeepActivitiesPreferenceController(context));
         // background process limit
         // background check
         // show all anrs
