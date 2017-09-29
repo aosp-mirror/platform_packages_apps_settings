@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.reset;
@@ -30,8 +31,8 @@ import android.provider.Settings.System;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.PowerManagerWrapper;
 
 import org.junit.Before;
@@ -41,7 +42,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.internal.ShadowExtractor;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -80,14 +81,13 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onResume_shouldRegisterObserver() {
+    public void onStart_shouldRegisterObserver() {
         Context context = RuntimeEnvironment.application;
         BrightnessLevelPreferenceController controller =
             new BrightnessLevelPreferenceController(context, null, mPowerManager);
-        ShadowContentResolver shadowContentResolver =
-            (ShadowContentResolver) ShadowExtractor.extract(context.getContentResolver());
+        ShadowContentResolver shadowContentResolver = Shadow.extract(context.getContentResolver());
 
-        controller.onResume();
+        controller.onStart();
 
         assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isNotEmpty();
@@ -100,16 +100,15 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onPause_shouldUnregisterObserver() {
+    public void onStop_shouldUnregisterObserver() {
         Context context = RuntimeEnvironment.application;
         BrightnessLevelPreferenceController controller =
             new BrightnessLevelPreferenceController(context, null, mPowerManager);
-        ShadowContentResolver shadowContentResolver =
-            (ShadowContentResolver) ShadowExtractor.extract(context.getContentResolver());
+        ShadowContentResolver shadowContentResolver = Shadow.extract(context.getContentResolver());
 
         controller.displayPreference(mScreen);
-        controller.onResume();
-        controller.onPause();
+        controller.onStart();
+        controller.onStop();
 
         assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isEmpty();

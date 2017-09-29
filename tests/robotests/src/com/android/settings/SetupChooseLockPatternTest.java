@@ -37,9 +37,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.res.builder.RobolectricPackageManager.ComponentState;
+import org.robolectric.shadows.ShadowPackageManager.ComponentState;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -57,7 +57,7 @@ public class SetupChooseLockPatternTest {
 
     @Before
     public void setUp() {
-        RuntimeEnvironment.getRobolectricPackageManager().setComponentEnabledSetting(
+        Shadows.shadowOf(application.getPackageManager()).setComponentEnabledSetting(
                 new ComponentName(application, SetupRedactionInterstitial.class),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
@@ -77,7 +77,7 @@ public class SetupChooseLockPatternTest {
         findFragment(mActivity).onChosenLockSaveFinished(false, null);
 
         ComponentState redactionComponentState =
-                RuntimeEnvironment.getRobolectricPackageManager().getComponentState(
+                Shadows.shadowOf(application.getPackageManager()).getComponentState(
                         new ComponentName(application, SetupRedactionInterstitial.class));
         assertThat(redactionComponentState.newState).named("Redaction component state")
                 .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);

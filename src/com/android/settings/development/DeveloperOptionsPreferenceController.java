@@ -52,6 +52,16 @@ public abstract class DeveloperOptionsPreferenceController extends
     }
 
     /**
+     * Child classes should override this method to create custom logic for hiding preferences.
+     *
+     * @return true if the preference is to be displayed.
+     */
+    @Override
+    public boolean isAvailable() {
+        return true;
+    }
+
+    /**
      * Called when developer options is enabled
      */
     public void onDeveloperOptionsEnabled() {

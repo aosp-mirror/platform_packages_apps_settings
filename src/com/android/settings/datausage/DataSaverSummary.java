@@ -61,7 +61,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataUsageBridge = new AppStateDataUsageBridge(mApplicationsState, this, mDataSaverBackend);
-        mSession = mApplicationsState.newSession(this);
+        mSession = mApplicationsState.newSession(this, getLifecycle());
     }
 
     @Override
@@ -78,7 +78,6 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         mDataSaverBackend.refreshWhitelist();
         mDataSaverBackend.refreshBlacklist();
         mDataSaverBackend.addListener(this);
-        mSession.resume();
         mDataUsageBridge.resume();
     }
 
@@ -87,7 +86,6 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         super.onPause();
         mDataSaverBackend.remListener(this);
         mDataUsageBridge.pause();
-        mSession.pause();
     }
 
     @Override

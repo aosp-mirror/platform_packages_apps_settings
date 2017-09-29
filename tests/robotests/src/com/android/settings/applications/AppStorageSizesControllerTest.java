@@ -85,10 +85,10 @@ public class AppStorageSizesControllerTest {
         mController.setResult(result);
         mController.updateUi(mContext);
 
-        assertThat(mAppPreference.getSummary()).isEqualTo("1.00B");
-        assertThat(mCachePreference.getSummary()).isEqualTo("10.00B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("90.00B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("101B");
+        assertThat(mAppPreference.getSummary()).isEqualTo("1.00 B");
+        assertThat(mCachePreference.getSummary()).isEqualTo("10.00 B");
+        assertThat(mDataPreference.getSummary()).isEqualTo("90.00 B");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("101 B");
     }
 
     @Test
@@ -103,10 +103,10 @@ public class AppStorageSizesControllerTest {
         mController.setCacheCleared(true);
         mController.updateUi(mContext);
 
-        assertThat(mAppPreference.getSummary()).isEqualTo("1.00B");
-        assertThat(mCachePreference.getSummary()).isEqualTo("0.00B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("90.00B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("91.00B");
+        assertThat(mAppPreference.getSummary()).isEqualTo("1.00 B");
+        assertThat(mCachePreference.getSummary()).isEqualTo("0.00 B");
+        assertThat(mDataPreference.getSummary()).isEqualTo("90.00 B");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("91.00 B");
     }
 
     @Test
@@ -121,9 +121,9 @@ public class AppStorageSizesControllerTest {
         mController.setDataCleared(true);
         mController.updateUi(mContext);
 
-        assertThat(mAppPreference.getSummary()).isEqualTo("1.00B");
-        assertThat(mCachePreference.getSummary()).isEqualTo("0.00B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("0.00B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("1.00B");
+        assertThat(mAppPreference.getSummary()).isEqualTo("1.00 B");
+        assertThat(mCachePreference.getSummary()).isEqualTo("0.00 B");
+        assertThat(mDataPreference.getSummary()).isEqualTo("0.00 B");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("1.00 B");
     }
 }

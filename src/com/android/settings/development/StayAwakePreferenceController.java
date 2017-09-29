@@ -62,11 +62,6 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return PREFERENCE_KEY;
     }

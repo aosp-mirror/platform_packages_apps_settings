@@ -59,7 +59,7 @@ public class PhotosViewHolderControllerTest {
     public void storageShouldBeZeroBytesIfQueriedBeforeStorageQueryFinishes() {
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("0.00B");
+        assertThat(mHolder.summary.getText().toString()).isEqualTo("0.00 B");
     }
 
     @Test
@@ -70,7 +70,7 @@ public class PhotosViewHolderControllerTest {
         mController.queryStats();
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("11.00B");
+        assertThat(mHolder.summary.getText().toString()).isEqualTo("11.00 B");
     }
 
     @Test

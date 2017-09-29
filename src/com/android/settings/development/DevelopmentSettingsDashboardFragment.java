@@ -17,13 +17,19 @@
 package com.android.settings.development;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -43,7 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost {
+        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -51,6 +57,17 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     private SwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mSwitchBarController;
     private List<AbstractPreferenceController> mPreferenceControllers = new ArrayList<>();
+
+    private final BroadcastReceiver mEnableAdbReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            for (AbstractPreferenceController controller : mPreferenceControllers) {
+                if (controller instanceof AdbOnChangeListener) {
+                    ((AdbOnChangeListener) controller).onAdbSettingChanged();
+                }
+            }
+        }
+    };
 
     public DevelopmentSettingsDashboardFragment() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -77,6 +94,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBarController = new DevelopmentSwitchBarController(
                 this /* DevelopmentSettings */, mSwitchBar, mIsAvailable, getLifecycle());
         mSwitchBar.show();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        registerReceivers();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unregisterReceivers();
     }
 
     @Override
@@ -121,16 +151,35 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onEnableAdbDialogConfirmed() {
+        final AdbPreferenceController controller = getDevelopmentOptionsController(
+                AdbPreferenceController.class);
+        controller.onAdbDialogConfirmed();
+
+    }
+
+    @Override
+    public void onEnableAdbDialogDismissed() {
+        final AdbPreferenceController controller = getDevelopmentOptionsController(
+                AdbPreferenceController.class);
+        controller.onAdbDialogDismissed();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
             if (controller instanceof DeveloperOptionsPreferenceController) {
-                if (((DeveloperOptionsPreferenceController) controller).onActivityResult(
-                        requestCode, resultCode, data)) {
-                    return;
-                }
+                // We do not break early because it is possible for multiple controllers to
+                // handle the same result code.
+                handledResult |=
+                        ((DeveloperOptionsPreferenceController) controller).onActivityResult(
+                                requestCode, resultCode, data);
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
+        if (!handledResult) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -154,6 +203,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
                 this /* devOptionsDashboardFragment */);
         return mPreferenceControllers;
+    }
+
+    private void registerReceivers() {
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(mEnableAdbReceiver, new IntentFilter(
+                        AdbPreferenceController.ADB_STATE_CHANGED));
+    }
+
+    private void unregisterReceivers() {
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mEnableAdbReceiver);
     }
 
     void onEnableDevelopmentOptionsConfirmed() {
@@ -187,40 +246,40 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         // system ui demo mode
         // quick settings developer tiles
-        // usb debugging
+        controllers.add(new AdbPreferenceController(context, fragment));
         // revoke usb debugging authorizations
         controllers.add(new LocalTerminalPreferenceController(context));
         // bug report shortcut
         // select mock location app
         controllers.add(new DebugViewAttributesPreferenceController(context));
-        // select debug app
-        // wait for debugger
+        controllers.add(new SelectDebugAppPreferenceController(context, fragment));
+        controllers.add(new WaitForDebuggerPreferenceController(context));
         // verify apps over usb
         // logger buffer sizes
         // store logger data persistently on device
-        // telephony monitor
+        controllers.add(new ConnectivityMonitorPreferenceControllerV2(context));
         controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
         controllers.add(new CameraHalHdrPlusPreferenceControllerV2(context));
         // feature flags
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
-        // enable wi-fi verbose logging
+        controllers.add(new WifiVerboseLoggingPreferenceController(context));
         controllers.add(new WifiAggressiveHandoverPreferenceController(context));
         controllers.add(new WifiRoamScansPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
-        // tethering hardware acceleration
+        controllers.add(new TetheringHardwareAccelPreferenceController(context));
         // select usb configuration
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
-        // disable absolute volume
-        // enable in-band ringing
+        controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
+        controllers.add(new BluetoothInbandRingingPreferenceController(context));
         // bluetooth avrcp version
         // bluetooth audio codec
         // bluetooth audio sample rate
         // bluetooth audio bits per sample
         // bluetooth audio channel mode
         // bluetooth audio ldac codec: playback quality
-        // show taps
-        // pointer location
-        // show surface updates
+        controllers.add(new ShowTapsPreferenceController(context));
+        controllers.add(new PointerLocationPreferenceController(context));
+        controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
         // show layout bounds
         // force rtl layout direction
         // window animation scale

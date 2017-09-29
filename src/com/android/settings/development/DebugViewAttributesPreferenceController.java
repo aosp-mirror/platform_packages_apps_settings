@@ -40,11 +40,6 @@ public class DebugViewAttributesPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return DEBUG_VIEW_ATTRIBUTES_KEY;
     }

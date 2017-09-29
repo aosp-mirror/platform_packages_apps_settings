@@ -3,7 +3,6 @@ package com.android.settings.search;
 import android.content.Context;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.os.Parcel;
 import android.provider.Settings;
 import com.android.settings.TestConfig;
 import com.android.settings.search.ResultPayload.SettingsSource;

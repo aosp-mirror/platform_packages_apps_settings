@@ -43,11 +43,6 @@ public class WifiRoamScansPreferenceController extends
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY;
     }

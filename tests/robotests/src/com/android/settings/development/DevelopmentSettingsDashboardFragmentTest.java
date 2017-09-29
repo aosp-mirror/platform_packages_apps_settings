@@ -113,7 +113,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Test
     @Config(shadows = {
-            ShadowPictureColorModePreferenceController.class
+            ShadowPictureColorModePreferenceController.class,
+            ShadowAdbPreferenceController.class,
+            ShadowBluetoothInbandRingingPreferenceController.class
     })
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
@@ -186,6 +188,26 @@ public class DevelopmentSettingsDashboardFragmentTest {
         verify(controller).onOemUnlockDismissed();
     }
 
+    @Test
+    public void onAdbDialogConfirmed_shouldCallControllerDialogConfirmed() {
+        final AdbPreferenceController controller = mock(AdbPreferenceController.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                AdbPreferenceController.class);
+        mDashboard.onEnableAdbDialogConfirmed();
+
+        verify(controller).onAdbDialogConfirmed();
+    }
+
+    @Test
+    public void onAdbDialogDismissed_shouldCallControllerOemDismissed() {
+        final AdbPreferenceController controller = mock(AdbPreferenceController.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                AdbPreferenceController.class);
+        mDashboard.onEnableAdbDialogDismissed();
+
+        verify(controller).onAdbDialogDismissed();
+    }
+
     @Implements(EnableDevelopmentSettingWarningDialog.class)
     public static class ShadowEnableDevelopmentSettingWarningDialog {
 
@@ -204,6 +226,22 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Implements(PictureColorModePreferenceController.class)
     public static class ShadowPictureColorModePreferenceController {
+        @Implementation
+        public boolean isAvailable() {
+            return true;
+        }
+    }
+
+    @Implements(AdbPreferenceController.class)
+    public static class ShadowAdbPreferenceController {
+        @Implementation
+        public boolean isAvailable() {
+            return true;
+        }
+    }
+
+    @Implements(BluetoothInbandRingingPreferenceController.class)
+    public static class ShadowBluetoothInbandRingingPreferenceController {
 
         @Implementation
         public boolean isAvailable() {

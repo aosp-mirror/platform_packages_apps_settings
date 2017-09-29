@@ -50,15 +50,15 @@ public abstract class AppStateBaseBridge implements ApplicationsState.Callbacks 
 
     public void resume() {
         mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
-        mAppSession.resume();
+        mAppSession.onResume();
     }
 
     public void pause() {
-        mAppSession.pause();
+        mAppSession.onPause();
     }
 
     public void release() {
-        mAppSession.release();
+        mAppSession.onDestroy();
     }
 
     public void forceUpdate(String pkg, int uid) {

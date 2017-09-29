@@ -35,13 +35,13 @@ import com.android.settings.wrapper.PowerManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.text.NumberFormat;
 
 public class BrightnessLevelPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+        PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
     private static final String TAG = "BrightnessPrefCtrl";
     private static final String KEY_BRIGHTNESS = "brightness";
@@ -114,7 +114,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         mContentResolver.registerContentObserver(BRIGHTNESS_MODE_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_FOR_VR_URI, false, mBrightnessObserver);
@@ -122,7 +122,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         mContentResolver.unregisterContentObserver(mBrightnessObserver);
     }
 

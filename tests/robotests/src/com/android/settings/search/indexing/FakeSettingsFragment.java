@@ -19,12 +19,12 @@ package com.android.settings.search.indexing;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +76,8 @@ public class FakeSettingsFragment extends DashboardFragment {
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
                     final SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = TITLE;
                     data.summaryOn = SUMMARY_ON;
@@ -118,7 +119,7 @@ public class FakeSettingsFragment extends DashboardFragment {
 
                 @Override
                 public List<AbstractPreferenceController>
-                        getPreferenceControllers(Context context) {
+                getPreferenceControllers(Context context) {
                     return null;
                 }
             };

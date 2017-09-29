@@ -37,6 +37,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -59,9 +60,14 @@ public class CursorToSearchResultConverterTest {
     private static final String TARGET_PACKAGE = "a.b.c";
     private static final String TARGET_CLASS = "a.b.c.class";
     private static final String KEY = "key";
-    private static final Intent INTENT = new Intent("com.android.settings");
     private static final int ICON = R.drawable.ic_search_24dp;
     private static final int BASE_RANK = 1;
+    private static Intent sIntent;
+
+    @BeforeClass
+    public static void beforeClass() {
+        sIntent = new Intent("com.android.settings");
+    }
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SiteMapManager mSiteMapManager;
@@ -120,7 +126,7 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testParseCursor_MatchesIcon() {
         final MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
-        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(INTENT));
+        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(sIntent));
         final String BLANK = "";
         cursor.addRow(new Object[]{
                 KEY.hashCode(),      // Doc ID
@@ -171,7 +177,7 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testLongTitle_PenalizedInRank() {
         final MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
-        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(INTENT));
+        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(sIntent));
         final String BLANK = "";
         cursor.addRow(new Object[]{
                 KEY.hashCode(),      // Doc ID
@@ -203,7 +209,7 @@ public class CursorToSearchResultConverterTest {
         for (SearchResult result : results) {
             payload = result.payload;
             Intent intent = payload.getIntent();
-            assertThat(intent.getAction()).isEqualTo(INTENT.getAction());
+            assertThat(intent.getAction()).isEqualTo(sIntent.getAction());
         }
     }
 
@@ -375,7 +381,7 @@ public class CursorToSearchResultConverterTest {
     private MatrixCursor getDummyCursor(String[] keys, String className) {
         MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
-        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(INTENT));
+        final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(sIntent));
 
         for (int i = 0; i < keys.length; i++) {
             ArrayList<Object> item = new ArrayList<>(DatabaseResultLoader.SELECT_COLUMNS.length);
@@ -386,7 +392,7 @@ public class CursorToSearchResultConverterTest {
             item.add(className); // classname
             item.add(BLANK); // screen title
             item.add(null); // Icon
-            item.add(INTENT.getAction()); // Intent action
+            item.add(sIntent.getAction()); // Intent action
             item.add(TARGET_PACKAGE); // target package
             item.add(TARGET_CLASS); // target class
             item.add(keys[i]); // Key

@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.BatteryManager;
 import android.os.BatteryStats;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.TestConfig;
