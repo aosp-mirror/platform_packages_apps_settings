@@ -1688,14 +1688,12 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name=".Settings$ScreenLockSuggestionActivity"
+        <activity android:name=".password.ScreenLockSuggestionActivity"
             android:icon="@drawable/ic_settings_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.LOCK_SCREEN" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="0,30" />
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/suggested_lock_settings_title" />
             <meta-data android:name="com.android.settings.summary"
@@ -1703,7 +1701,7 @@
             <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity>
 
-        <activity android:name=".Settings$FingerprintEnrollSuggestionActivity"
+        <activity android:name=".fingerprint.FingerprintEnrollSuggestionActivity"
             android:icon="@drawable/ic_suggestion_fingerprint">
             <intent-filter android:priority="2">
                 <action android:name="android.intent.action.MAIN" />
@@ -2406,11 +2404,11 @@
                 android:label="@string/crypt_keeper_encrypt_title">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" /> />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" /> />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.CryptKeeperSettings" />
@@ -2908,7 +2906,7 @@
                        android:value="true" />
         </activity>
 
-        <activity android:name="Settings$WifiCallingSuggestionActivity"
+        <activity android:name=".wifi.WifiCallingSuggestionActivity"
                   android:label="@string/wifi_calling_settings_title"
                   android:icon="@drawable/ic_settings_wireless"
                   android:taskAffinity="">
@@ -2935,6 +2933,15 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.content.action.SEARCH_INDEXABLES_PROVIDER" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:name=".dashboard.suggestions.SuggestionStateProvider"
+            android:authorities="com.android.settings.suggestions.status"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.action.SUGGESTION_STATE_PROVIDER" />
             </intent-filter>
         </provider>
 

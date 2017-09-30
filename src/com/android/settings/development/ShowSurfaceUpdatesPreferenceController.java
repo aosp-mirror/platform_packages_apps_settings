@@ -81,8 +81,12 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        writeShowUpdatesSetting(false);
-        mPreference.setChecked(false);
+        if (mPreference.isChecked()) {
+            // Writing false to the preference when the setting is already off will have a
+            // side effect of turning on the preference that we wish to avoid
+            writeShowUpdatesSetting(false);
+            mPreference.setChecked(false);
+        }
         mPreference.setEnabled(false);
     }
 

@@ -39,13 +39,18 @@ import com.android.settings.Settings.DoubleTwistSuggestionActivity;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
+import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
+import com.android.settings.wallpaper.WallpaperSuggestionActivity;
+import com.android.settings.wifi.WifiCallingSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
@@ -96,12 +101,21 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
+    public boolean isSuggestionComplete(Context context, @NonNull ComponentName component) {
         final String className = component.getClassName();
-        if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
+        if (className.equals(WallpaperSuggestionActivity.class.getName())) {
+            return WallpaperSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
+            return FingerprintSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
+            return FingerprintEnrollSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(ScreenLockSuggestionActivity.class.getName())) {
+            return ScreenLockSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(WifiCallingSuggestionActivity.class.getName())) {
+            return WifiCallingSuggestionActivity.isSuggestionComplete(context);
+        } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
             return hasUsedNightDisplay(context);
-        }
-        if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
+        } else if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(DoubleTapPowerSuggestionActivity.class.getName())) {
             return DoubleTapPowerPreferenceController

@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -110,7 +111,18 @@ public class ShowSurfaceUpdatesPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
+    public void onDeveloperOptionsSwitchDisabled_preferenceUnchecked_shouldNotTurnOffPreference() {
+        when(mPreference.isChecked()).thenReturn(false);
+        mController.onDeveloperOptionsSwitchDisabled();
+
+        verify(mController, never()).writeShowUpdatesSetting(anyBoolean());
+        verify(mPreference, never()).setChecked(anyBoolean());
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void onDeveloperOptionsSwitchDisabled_preferenceChecked_shouldTurnOffPreference() {
+        when(mPreference.isChecked()).thenReturn(true);
         mController.onDeveloperOptionsSwitchDisabled();
 
         verify(mController).writeShowUpdatesSetting(false);

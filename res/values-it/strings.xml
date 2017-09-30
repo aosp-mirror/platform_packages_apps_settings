@@ -462,7 +462,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Proteggi il tuo tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Proteggi dispositivo"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Proteggi il telefono"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Per maggiore sicurezza, imposta un blocco schermo di backup."</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5768002109707648463">"Per maggiore sicurezza, imposta un blocco schermo alternativo."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Impedisci ad altri di utilizzare il tablet senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Impedisci ad altri di utilizzare il dispositivo senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Impedisci ad altri di utilizzare il telefono senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
@@ -1132,7 +1132,6 @@
     <string name="baseband_version" msgid="1848990160763524801">"Versione banda di base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versione kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Numero build"</string>
-    <string name="selinux_status" msgid="6212165375172061672">"Stato di SELinux"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Non disponibile"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Stato"</string>
     <string name="device_status" msgid="607405385799807324">"Stato"</string>
@@ -1474,7 +1473,8 @@
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Per usare l\'impronta digitale, imposta la password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Per usare l\'impronta digitale, imposta la sequenza"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Per motivi di sicurezza, imposta un PIN"</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Per usare l\'impronta digitale, imposta il PIN"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_header_for_fingerprint (1549639053195796674) -->
+    <skip />
     <string name="lockpassword_choose_your_pattern_message" msgid="5986983400689720015">"Per sicurezza, imposta una sequenza"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Inserisci di nuovo la password"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Conferma la tua sequenza"</string>
@@ -2545,9 +2545,6 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Imposta password di backup"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annulla"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Aggiornamenti di sistema aggiuntivi"</string>
-    <string name="selinux_status_disabled" msgid="924551035552323327">"Disattivato"</string>
-    <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissivo"</string>
-    <string name="selinux_status_enforcing" msgid="2252703756208463329">"Applicazione"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"La rete potrebbe essere monitorata"</string>
     <string name="done_button" msgid="1991471253042622230">"Fine"</string>
     <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="7145092748045794650">
@@ -3405,7 +3402,12 @@
     <string name="color_temperature" msgid="2070126836910615605">"Temperatura di colore fredda"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Utilizza colori del display più freddi"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Per applicare la modifica ai colori, disattiva lo schermo"</string>
-    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Per applicare la modifica a TelephonyMonitor, riavvia il dispositivo"</string>
+    <!-- no translation found for connectivity_monitor_switch (9059759348648583421) -->
+    <skip />
+    <!-- no translation found for connectivity_monitor_switch_summary (2828658652378866401) -->
+    <skip />
+    <!-- no translation found for connectivity_monitor_toast (5551859612881173028) -->
+    <skip />
     <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Fotocamera HAL HDR+"</string>
     <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Per applicare la modifica relativa alla Fotocamera HAL HDR+, riavvia il dispositivo"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Sensore laser della fotocamera"</string>

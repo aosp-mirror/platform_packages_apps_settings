@@ -17,6 +17,8 @@
 package com.android.settings.wallpaper;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.wrapper.WallpaperManagerWrapper;
 
 public class WallpaperSuggestionActivity extends Activity {
 
@@ -51,6 +54,12 @@ public class WallpaperSuggestionActivity extends Activity {
         Utils.startWithFragment(this, WallpaperTypeSettings.class.getName(), null, null, 0,
                 R.string.wallpaper_suggestion_title, null,
                 MetricsProto.MetricsEvent.DASHBOARD_SUMMARY);
+    }
+
+    @VisibleForTesting
+    public static boolean isSuggestionComplete(Context context) {
+        final WallpaperManagerWrapper manager = new WallpaperManagerWrapper(context);
+        return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
     }
 
 }

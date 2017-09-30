@@ -40,7 +40,6 @@ import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListene
 import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
-import com.android.settings.dashboard.suggestions.SuggestionsChecks;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
@@ -73,7 +72,6 @@ public class DashboardSummary extends InstrumentedFragment
     private ConditionManager mConditionManager;
     private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
-    private SuggestionsChecks mSuggestionsChecks;
     private SuggestionControllerMixin mSuggestionControllerMixin;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
@@ -112,7 +110,6 @@ public class DashboardSummary extends InstrumentedFragment
         if (mSuggestionFeatureProvider.isSuggestionEnabled(activity)) {
             mSuggestionParser = new SuggestionParser(activity,
                     mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
-            mSuggestionsChecks = new SuggestionsChecks(getContext());
         }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
@@ -295,7 +292,7 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     /**
-     * @deprecated in favor of the real SuggestionLoader.
+     * @deprecated in favor of {@link #mSuggestionControllerMixin}.
      */
     @Deprecated
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
@@ -318,7 +315,8 @@ public class DashboardSummary extends InstrumentedFragment
             }
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
-                if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
+                if (mSuggestionFeatureProvider.isSuggestionComplete(context,
+                        suggestion.intent.getComponent())) {
                     suggestions.remove(i--);
                 }
             }
@@ -344,7 +342,7 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     /**
-     * @deprecated in favor of SuggestionControllerMixin.
+     * @deprecated in favor of {@link #mSuggestionControllerMixin}.
      */
     @Deprecated
     @VisibleForTesting

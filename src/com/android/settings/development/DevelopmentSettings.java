@@ -147,7 +147,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
     private static final String SHOW_NON_RECTANGULAR_CLIP_KEY = "show_non_rect_clip";
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
-    private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
+    private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_updates";
     private static final String DEBUG_HW_OVERDRAW_KEY = "debug_hw_overdraw";
     private static final String DEBUG_HW_RENDERER_KEY = "debug_hw_renderer";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";

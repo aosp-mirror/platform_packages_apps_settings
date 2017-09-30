@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.DOZE_PULSE_ON_PICK_UP;
+
 import android.annotation.UserIdInt;
 import android.content.Context;
 import android.content.Intent;
@@ -29,8 +31,6 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import static android.provider.Settings.Secure.DOZE_PULSE_ON_PICK_UP;
 
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
@@ -56,8 +56,8 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
         AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
-        return !ambientConfig.pulseOnPickupAvailable()
-                || prefs.getBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
+        return prefs.getBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false)
+                || !ambientConfig.pulseOnPickupAvailable();
     }
 
     @Override

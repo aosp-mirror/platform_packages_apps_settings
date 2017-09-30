@@ -1145,7 +1145,6 @@
     <string name="baseband_version" msgid="1848990160763524801">"Verzija nemoduliranog opsega"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verzija jezgre"</string>
     <string name="build_number" msgid="3075795840572241758">"Broj podverzije"</string>
-    <string name="selinux_status" msgid="6212165375172061672">"Status za SELinux"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Nije dostupno"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1487,7 +1486,8 @@
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Da koristite otisak prsta, postavite lozinku"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Da koristite otisak prsta, postavite uzorak"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"Postavite PIN kôd radi sigurnosti"</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Da koristite otisak prsta, postavite PIN kôd"</string>
+    <!-- no translation found for lockpassword_choose_your_pin_header_for_fingerprint (1549639053195796674) -->
+    <skip />
     <string name="lockpassword_choose_your_pattern_message" msgid="5986983400689720015">"Postavite uzorak radi sigurnosti"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Ponovo unesite lozinku"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Potvrdite uzorak"</string>
@@ -1939,7 +1939,7 @@
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Prati vaše aktivnosti"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"Dobija obavještenja kada ostvarujete interakciju s aplikacijom."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Želite li zaustaviti uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"Uslugu <xliff:g id="SERVICE">%1$s</xliff:g> možete zaustaviti dodirom na OK."</string>
+    <string name="disable_service_message" msgid="2247101878627941561">"Uslugu <xliff:g id="SERVICE">%1$s</xliff:g> možete zaustaviti dodirom na UREDU."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Nema instaliranih usluga"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Nije odabrana usluga"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Nije naveden opis."</string>
@@ -2566,9 +2566,6 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Postavi lozinku za sigurnosnu kopiju"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Otkaži"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Dodatna ažuriranja sistema"</string>
-    <string name="selinux_status_disabled" msgid="924551035552323327">"Onemogućeno"</string>
-    <string name="selinux_status_permissive" msgid="6004965534713398778">"Popustljiv"</string>
-    <string name="selinux_status_enforcing" msgid="2252703756208463329">"Izvršavanje"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Mreža može biti nadzirana"</string>
     <string name="done_button" msgid="1991471253042622230">"Gotovo"</string>
     <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="7145092748045794650">
@@ -3448,7 +3445,12 @@
     <string name="color_temperature" msgid="2070126836910615605">"Hladna temperatura boje"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Koristite hladnije boje prikaza"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Isključite ekran kako biste primijenili promjenu boje"</string>
-    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Da primijenite promjenu na nadzoru telefonije, ponovo pokrenite uređaj"</string>
+    <!-- no translation found for connectivity_monitor_switch (9059759348648583421) -->
+    <skip />
+    <!-- no translation found for connectivity_monitor_switch_summary (2828658652378866401) -->
+    <skip />
+    <!-- no translation found for connectivity_monitor_toast (5551859612881173028) -->
+    <skip />
     <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Kamera HAL HDR+"</string>
     <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Da primijenite promjenu za Kamera HAL HDR+, ponovo pokrenite uređaj"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Laserski senzor kamere"</string>
