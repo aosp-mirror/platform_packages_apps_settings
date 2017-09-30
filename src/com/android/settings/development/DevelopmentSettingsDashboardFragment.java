@@ -259,7 +259,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DebugViewAttributesPreferenceController(context));
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
-        // verify apps over usb
+        controllers.add(new VerifyAppsOverUsbPreferenceControllerV2(context));
         // logger buffer sizes
         // store logger data persistently on device
         controllers.add(new ConnectivityMonitorPreferenceControllerV2(context));

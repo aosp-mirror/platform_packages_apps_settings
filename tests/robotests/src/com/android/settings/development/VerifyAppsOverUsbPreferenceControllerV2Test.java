@@ -15,6 +15,8 @@
  */
 package com.android.settings.development;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -25,49 +27,46 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 import java.util.List;
 
-/**
- * deprecated in favor of {@link VerifyAppsOverUsbPreferenceControllerV2}
- */
-@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class VerifyAppsOverUsbPreferenceControllerTest {
+public class VerifyAppsOverUsbPreferenceControllerV2Test {
 
     @Mock
-    private PackageManager mPackageManager;
+    private PackageManagerWrapper mPackageManager;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private RestrictedSwitchPreference mPreference;
 
     @Mock
-    private VerifyAppsOverUsbPreferenceController.RestrictedLockUtilsDelegate
+    private VerifyAppsOverUsbPreferenceControllerV2.RestrictedLockUtilsDelegate
             mRestrictedLockUtilsDelegate;
 
     private Context mContext;
-    private VerifyAppsOverUsbPreferenceController mController;
+    private VerifyAppsOverUsbPreferenceControllerV2 mController;
 
     /** Convenience class for setting global int settings. */
     class GlobalSetter {
@@ -76,18 +75,19 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
             return this;
         }
     }
+
     private final GlobalSetter mGlobals = new GlobalSetter();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        final ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = spy(shadowContext.getApplicationContext());
+        mContext = RuntimeEnvironment.application;
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new VerifyAppsOverUsbPreferenceController(mContext);
+        mController = new VerifyAppsOverUsbPreferenceControllerV2(mContext);
         ReflectionHelpers.setField(
                 mController, "mRestrictedLockUtils", mRestrictedLockUtilsDelegate);
+        ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
+        mController.displayPreference(mScreen);
     }
 
     private void setupVerifyBroadcastReceivers(boolean nonEmpty) {
@@ -104,78 +104,108 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_preferenceCheckedWhenSettingIsOn() {
+    public void updateState_settingEnabled_preferenceShouldBeChecked() {
         setupVerifyBroadcastReceivers(true);
         setupEnforcedAdmin(null);
-        mGlobals.set(Global.ADB_ENABLED, 1).set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1);
-        mController.displayPreference(mScreen);
-        mController.updatePreference();
+        mGlobals.set(Global.ADB_ENABLED, 1 /* setting enabled */)
+                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1 /* setting enabled */);
+        mController.updateState(mPreference);
         verify(mPreference).setChecked(true);
     }
 
     @Test
-    public void updateState_preferenceUncheckedWhenSettingIsOff() {
+    public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         setupVerifyBroadcastReceivers(true);
         setupEnforcedAdmin(null);
-        mGlobals.set(Global.ADB_ENABLED, 1).set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 0);
-        mController.displayPreference(mScreen);
-        mController.updatePreference();
+        mGlobals.set(Global.ADB_ENABLED, 1 /* setting enabled */)
+                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 0 /* setting disabled */);
+        mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
     }
 
     @Test
-    public void updateState_preferenceUncheckedWhenNoAdb() {
+    public void updateState_adbDisabled_preferenceShouldNotBeChecked() {
         setupVerifyBroadcastReceivers(true);
         setupEnforcedAdmin(null);
-        mGlobals.set(Global.ADB_ENABLED, 0).set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1);
-        mController.displayPreference(mScreen);
-        mController.updatePreference();
+        mGlobals.set(Global.ADB_ENABLED, 0 /* setting disabled */)
+                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1 /* setting enabled */);
+        mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
     }
 
     @Test
-    public void updateState_preferenceUncheckedWhenVerifierIsOff() {
+    public void updateState_verifierOff_preferenceShouldNotBeChecked() {
         setupVerifyBroadcastReceivers(true);
         setupEnforcedAdmin(null);
-        mGlobals.set(Global.ADB_ENABLED, 1)
-                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1)
-                .set(Global.PACKAGE_VERIFIER_ENABLE, 0);
-        mController.displayPreference(mScreen);
-        mController.updatePreference();
+        mGlobals.set(Global.ADB_ENABLED, 1 /* setting enabled */)
+                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1 /* setting enabled */)
+                .set(Global.PACKAGE_VERIFIER_ENABLE, 0 /* setting disabled */);
+        mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
     }
 
     @Test
-    public void updateState_preferenceUncheckedWhenNoVerifyBroadcastReceivers() {
+    public void updateState_noBroadcastReceivers_preferenceShouldNotBeChecked() {
         setupVerifyBroadcastReceivers(false);
         setupEnforcedAdmin(null);
-        mGlobals.set(Global.ADB_ENABLED, 1)
-                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1);
-        mController.displayPreference(mScreen);
-        mController.updatePreference();
+        mGlobals.set(Global.ADB_ENABLED, 1 /* setting enabled */)
+                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1 /* setting enabled */);
+        mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
     }
 
     @Test
-    public void updateState_preferenceDisabledWhenRestrictedByAdmin() {
+    public void updateState_restrictedByAdmin_preferenceShouldBeDisabled() {
         setupVerifyBroadcastReceivers(true);
         final EnforcedAdmin admin = new EnforcedAdmin();
         setupEnforcedAdmin(admin);
-        mGlobals.set(Global.ADB_ENABLED, 1)
-                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1);
-        mController.displayPreference(mScreen);
-        mController.updatePreference();
+        mGlobals.set(Global.ADB_ENABLED, 1 /* setting enabled */)
+                .set(Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1 /* setting enabled */);
+        mController.updateState(mPreference);
         verify(mPreference).setDisabledByAdmin(admin);
     }
 
     @Test
-    public void updateState_preferenceRemovedWhenVerifierSettingsVisibleIsOff() {
+    public void isAvailable_verifierNotVisible_shouldReturnFalse() {
         setupVerifyBroadcastReceivers(true);
-        mGlobals.set(Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 0);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(anyInt())).thenReturn(mPreference);
-        mController.displayPreference(mScreen);
-        verify(mScreen).removePreference(mPreference);
+        mGlobals.set(Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 0 /* setting disabled */);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_verifierVisible_shouldReturnTrue() {
+        setupVerifyBroadcastReceivers(true);
+        mGlobals.set(Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1 /* setting enabled */);
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void onPreferenceChange_settingEnabled_shouldEnableUsbVerify() {
+        mController.onPreferenceChange(mPreference, true /* new value */);
+
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, -1 /* default */);
+
+        assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceControllerV2.SETTING_VALUE_ON);
+    }
+
+    @Test
+    public void onPreferenceChange_settingDisabled_shouldDisableUsbVerify() {
+        mController.onPreferenceChange(mPreference, false /* new value */);
+
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, -1 /* default */);
+
+        assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceControllerV2.SETTING_VALUE_OFF);
+    }
+
+    @Test
+    public void onDeveloperOptionsEnabled_shouldUpdateState() {
+        mController = spy(mController);
+        mController.onDeveloperOptionsSwitchEnabled();
+
+        verify(mController).updateState(mPreference);
     }
 }
