@@ -1249,7 +1249,7 @@
     <string name="storage_internal_forget_details" msgid="9028875424669047327">"<xliff:g id="NAME">^1</xliff:g> এর মধ্যে থাকা অ্যাপ্লিকেশন, ছবি বা ডেটা ব্যবহার করার জন্য, এটিকে পুনরায় ঢোকান। \n\nঅনুরূপভাবে, ডিভাইস উপলব্ধ না থাকলে আপনি এই সঞ্চয়স্থান মনে নেই বেছে নিতে পারেন। \n\nআপনি যদি মনে নেই বাছেন, তবে ডিভাইসের মধ্যে থাকা সমস্ত ডেটা চিরতরে হারিয়ে যাবে। \n\nআপনি পরে অ্যাপটিকে পুনরায় ইনস্টল করতে পারেন, তবে এই ডিভাইসটিতে যে ডেটা সঞ্চিত আছে তা হারিয়ে যাবে।"</string>
     <string name="storage_internal_forget_confirm_title" msgid="1370847944388479245">"<xliff:g id="NAME">^1</xliff:g> ভুলতে চান?"</string>
     <string name="storage_internal_forget_confirm" msgid="1148446041396902905">"<xliff:g id="NAME">^1</xliff:g> -এ সঞ্চিত সমস্ত অ্যাপ্লিকেশন, ফটো, এবং ডেটা চিরতরে হারিয়ে যাবে।"</string>
-    <string name="storage_detail_apps" msgid="6141154016753507490">"অ্যাপ্লিকেশানগুলি"</string>
+    <string name="storage_detail_apps" msgid="6141154016753507490">"অ্যাপ"</string>
     <string name="storage_detail_images" msgid="6950678857740634769">"ছবি"</string>
     <string name="storage_detail_videos" msgid="2919743464827110953">"ভিডিও"</string>
     <string name="storage_detail_audio" msgid="1197685141676483213">"অডিও"</string>
@@ -1470,11 +1470,12 @@
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"লোড হচ্ছে..."</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"একটি স্ক্রিন লক সেট করুন"</string>
     <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"নিরাপত্তার জন্য একটি পাসওয়ার্ড সেট করুন"</string>
-    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"আঙ্গুলের ছাপ ব্যবহার করার জন্য পাসওয়ার্ড সেট করুন"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"আঙ্গুলের ছাপ ব্যবহার করার জন্য প্যাটার্ন সেট করুন"</string>
-    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"নিরাপত্তার জন্য একটি পিন সেট করুন"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_header_for_fingerprint (1549639053195796674) -->
+    <!-- no translation found for lockpassword_choose_your_password_header_for_fingerprint (2541818487015343503) -->
     <skip />
+    <!-- no translation found for lockpassword_choose_your_pattern_header_for_fingerprint (7709785406243556723) -->
+    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"নিরাপত্তার জন্য একটি পিন সেট করুন"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="1549639053195796674">"আঙ্গুলের ছাপ ব্যবহার করতে পিন সেট করুন"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5986983400689720015">"নিরাপত্তার জন্য একটি প্যাটার্ন সেট করুন"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"আপনার পাসওয়ার্ডটি আবার লিখুন"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"আপনার প্যাটার্ন নিশ্চিত করুন"</string>
@@ -1699,7 +1700,7 @@
     <string name="running_processes_header_title" msgid="6588371727640789560">"ডিভাইস মেমরি"</string>
     <string name="running_processes_header_footer" msgid="723908176275428442">"অ্যাপ্লিকেশানের RAM ব্যবহার"</string>
     <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"সিস্টেম"</string>
-    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"অ্যাপ্লিকেশানগুলি"</string>
+    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"অ্যাপ"</string>
     <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"খালি"</string>
     <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"ব্যবহৃত"</string>
     <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"ক্যাসে রাখা হয়েছে"</string>
@@ -2037,7 +2038,7 @@
     <string name="power_idle" product="default" msgid="9055659695602194990">"ফোন নিষ্ক্রিয়"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"বিবিধ"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"নির্ধারিত থেকে বেশী"</string>
-    <string name="power_apps" msgid="2043554781293951327">"অ্যাপগুলি"</string>
+    <string name="power_apps" msgid="2043554781293951327">"অ্যাপ"</string>
     <string name="power_service" msgid="1599661212370831780">"পরিষেবাগুলি"</string>
     <string name="power_system" msgid="8290455327965307383">"সিস্টেম"</string>
     <string name="power_user" msgid="3706143225319881667">"অন্যান্য ব্যবহারকারী"</string>
@@ -3402,12 +3403,9 @@
     <string name="color_temperature" msgid="2070126836910615605">"কুল রঙের টেম্পারেচার"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"কুলার প্রদর্শনী রঙগুলি ব্যবহার করুন"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"রঙের পরিবর্তন প্রয়োগ করতে, স্ক্রীন বন্ধ করুন"</string>
-    <!-- no translation found for connectivity_monitor_switch (9059759348648583421) -->
-    <skip />
-    <!-- no translation found for connectivity_monitor_switch_summary (2828658652378866401) -->
-    <skip />
-    <!-- no translation found for connectivity_monitor_toast (5551859612881173028) -->
-    <skip />
+    <string name="connectivity_monitor_switch" msgid="9059759348648583421">"সংযোগ মনিটর"</string>
+    <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"সংযোগে কোনও সমস্যা শনাক্ত হলে সংযোগ মনিটর লগ সংগ্রহ করবে ও ব্যবহারকারীকে বিজ্ঞপ্তি পাঠিয়ে সমস্যার বিষয়ে অভিযোগ করতে বলবে"</string>
+    <string name="connectivity_monitor_toast" msgid="5551859612881173028">"সংযোগ মনিটরে করা পরিবর্তন প্রয়োগ করতে ডিভাইসটি রিবুট করুন"</string>
     <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"ক্যামেরায় HAL HDR+"</string>
     <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"ক্যামেরায় HAL HDR+ পরিবর্তনটি প্রয়োগ করতে ডিভাইসটি বন্ধ করে আবার চালু করুন"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"ক্যামেরা লেজার সেন্সর"</string>
