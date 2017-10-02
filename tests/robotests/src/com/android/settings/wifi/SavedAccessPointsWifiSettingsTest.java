@@ -16,31 +16,36 @@
 
 package com.android.settings.wifi;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager.ActionListener;
 import android.os.Handler;
-
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.wifi.AccessPoint;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SavedAccessPointsWifiSettingsTest {
 
-    @Mock
-    private Handler mHandler;
+    @Mock private WifiManagerWrapper mockWifiManager;
+    @Mock private WifiDialog mockWifiDialog;
+    @Mock private WifiConfigController mockConfigController;
+    @Mock private WifiConfiguration mockWifiConfiguration;
+    @Mock private AccessPoint mockAccessPoint;
+    @Mock private Handler mHandler;
 
     private SavedAccessPointsWifiSettings mSettings;
 
@@ -49,6 +54,10 @@ public class SavedAccessPointsWifiSettingsTest {
         MockitoAnnotations.initMocks(this);
         mSettings = new SavedAccessPointsWifiSettings();
         ReflectionHelpers.setField(mSettings, "mHandler", mHandler);
+        ReflectionHelpers.setField(mSettings, "mWifiManager", mockWifiManager);
+
+        when(mockWifiDialog.getController()).thenReturn(mockConfigController);
+        when(mockConfigController.getConfig()).thenReturn(mockWifiConfiguration);
     }
 
     @Test
@@ -56,7 +65,6 @@ public class SavedAccessPointsWifiSettingsTest {
         final AccessPoint accessPoint = mock(AccessPoint.class);
         when(accessPoint.isPasspointConfig()).thenReturn(true);
         ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", accessPoint);
-        ReflectionHelpers.setField(mSettings, "mWifiManager", mock(WifiManagerWrapper.class));
 
         mSettings.onForget(null);
 
@@ -76,4 +84,18 @@ public class SavedAccessPointsWifiSettingsTest {
 
         verify(mHandler).sendEmptyMessage(mSettings.MSG_UPDATE_PREFERENCES);
     }
+
+    @Test
+    public void onSubmit_shouldInvokeSaveApi() {
+        mSettings.onSubmit(mockWifiDialog);
+        verify(mockWifiManager).save(eq(mockWifiConfiguration), any(ActionListener.class));
+    }
+    @Test
+    public void onForget_shouldInvokeForgetApi() {
+        ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mockAccessPoint);
+        when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfiguration);
+        mSettings.onForget(mockWifiDialog);
+        verify(mockWifiManager).forget(eq(mockWifiConfiguration.networkId), any(ActionListener.class));
+    }
 }
+
