@@ -50,7 +50,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost {
+        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        AdbClearKeysDialogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -171,6 +172,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onAdbClearKeysDialogConfirmed() {
+        final ClearAdbKeysPreferenceController controller = getDevelopmentOptionsController(
+                ClearAdbKeysPreferenceController.class);
+        controller.onClearAdbKeysConfirmed();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -252,7 +260,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // system ui demo mode
         // quick settings developer tiles
         controllers.add(new AdbPreferenceController(context, fragment));
-        // revoke usb debugging authorizations
+        controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
         controllers.add(new LocalTerminalPreferenceController(context));
         // bug report shortcut
         // select mock location app
