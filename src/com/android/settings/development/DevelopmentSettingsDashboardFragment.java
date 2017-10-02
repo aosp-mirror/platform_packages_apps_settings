@@ -308,7 +308,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // background process limit
         // background check
         controllers.add(new AppsNotRespondingPreferenceController(context));
-        // show notification channel warnings
+        controllers.add(new NotificationChannelWarningsPreferenceController(context));
         // inactive apps
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         // force activities to be resizable
