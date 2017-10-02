@@ -254,7 +254,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AdbPreferenceController(context, fragment));
         // revoke usb debugging authorizations
         controllers.add(new LocalTerminalPreferenceController(context));
-        // bug report shortcut
+        controllers.add(new BugReportInPowerPreferenceControllerV2(context));
         // select mock location app
         controllers.add(new DebugViewAttributesPreferenceController(context));
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));

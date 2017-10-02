@@ -47,6 +47,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * deprecated in favor of {@link BugReportInPowerPreferenceControllerV2}
+ */
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BugReportInPowerPreferenceControllerTest {
