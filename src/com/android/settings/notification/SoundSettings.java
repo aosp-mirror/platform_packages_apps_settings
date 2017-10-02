@@ -244,7 +244,6 @@ public class SoundSettings extends DashboardFragment {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicate results
                     keys.add((new ZenModePreferenceController(context)).getPreferenceKey());
-                    keys.add(ZenModeSettings.KEY_VISUAL_SETTINGS);
                     keys.add(KEY_CELL_BROADCAST_SETTINGS);
                     return keys;
                 }

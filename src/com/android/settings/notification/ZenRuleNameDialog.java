@@ -19,6 +19,8 @@ package com.android.settings.notification;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
+import android.service.notification.ZenModeConfig;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,20 +37,21 @@ public abstract class ZenRuleNameDialog {
     private final CharSequence mOriginalRuleName;
     private final boolean mIsNew;
 
-    public ZenRuleNameDialog(Context context, CharSequence ruleName) {
+    public ZenRuleNameDialog(Context context, CharSequence ruleName, Uri conditionId) {
         mIsNew = ruleName == null;
         mOriginalRuleName = ruleName;
-        final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null, false);
-        mEditText = (EditText) v.findViewById(R.id.rule_name);
+        final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null,
+                false);
+        mEditText = (EditText) v.findViewById(R.id.zen_mode_rule_name);
         if (!mIsNew) {
             mEditText.setText(ruleName);
         }
         mEditText.setSelectAllOnFocus(true);
-
         mDialog = new AlertDialog.Builder(context)
-                .setTitle(mIsNew ? R.string.zen_mode_add_rule : R.string.zen_mode_rule_name)
+                .setTitle(getTitleResource(conditionId))
                 .setView(v)
-                .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                .setPositiveButton(mIsNew ? R.string.zen_mode_add : R.string.okay,
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final String newName = trimmedText();
@@ -74,5 +77,19 @@ public abstract class ZenRuleNameDialog {
 
     private String trimmedText() {
         return mEditText.getText() == null ? null : mEditText.getText().toString().trim();
+    }
+
+    private int getTitleResource(Uri conditionId) {
+        final boolean isEvent = ZenModeConfig.isValidEventConditionId(conditionId);
+        final boolean isTime = ZenModeConfig.isValidScheduleConditionId(conditionId);
+        int titleResource =  R.string.zen_mode_rule_name;
+        if (mIsNew) {
+            if (isEvent) {
+                titleResource = R.string.zen_mode_add_event_rule;
+            } else if (isTime) {
+                titleResource = R.string.zen_mode_add_time_rule;
+            }
+        }
+        return titleResource;
     }
 }

@@ -27,7 +27,6 @@ import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.service.notification.ZenModeConfig;
-import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,15 +35,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.utils.ServiceListing;
 import com.android.settings.utils.ZenServiceListing;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -169,7 +164,7 @@ public abstract class ZenRuleSelectionDialog {
             if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
             Set<ZenRuleInfo> externalRuleTypes = new TreeSet<>(RULE_TYPE_COMPARATOR);
             for (ServiceInfo serviceInfo : services) {
-                final ZenRuleInfo ri = ZenModeSettings.getRuleInfo(mPm, serviceInfo);
+                final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, serviceInfo);
                 if (ri != null && ri.configurationActivity != null
                         && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
                         && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit

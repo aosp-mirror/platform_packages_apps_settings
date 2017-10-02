@@ -221,7 +221,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     }
 
     private void showRuleNameDialog() {
-        new ZenRuleNameDialog(mContext, mRule.getName()) {
+        new ZenRuleNameDialog(mContext, mRule.getName(), null) {
             @Override
             public void onOk(String ruleName) {
                 mRule.setName(ruleName);
