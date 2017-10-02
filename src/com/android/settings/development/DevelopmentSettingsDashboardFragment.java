@@ -285,7 +285,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
-        // show layout bounds
+        controllers.add(new ShowLayoutBoundsPreferenceController(context));
         controllers.add(new RtlLayoutPreferenceController(context));
         // window animation scale
         // transition animation scale
