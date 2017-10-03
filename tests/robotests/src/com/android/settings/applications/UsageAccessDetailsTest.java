@@ -16,17 +16,20 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.os.RemoteException;
+import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,9 +71,12 @@ public class UsageAccessDetailsTest {
     }
 
     @Test
-    public void refreshUi_nullPackageInfo_shouldNotCrash() throws RemoteException {
-        mFragment.mPackageInfo = null;
-        mFragment.refreshUi();
-        // should not crash
+    public void refreshUi_hasNoAppEntry_shouldReturnFalse() {
+        mFragment.mState = mock(ApplicationsState.class);
+        mFragment.setArguments(new Bundle());
+
+        assertThat(mFragment.refreshUi()).isFalse();
+        assertThat(mFragment.mAppEntry).isNull();
+        assertThat(mFragment.mPackageInfo).isNull();
     }
 }

@@ -137,8 +137,12 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
     @Override
     protected boolean refreshUi() {
-        if (mPackageInfo == null) {
+        retrieveAppEntry();
+        if (mAppEntry == null) {
             return false;
+        }
+        if (mPackageInfo == null) {
+            return false; // onCreate must have failed, make sure to exit
         }
         mUsageState = mUsageBridge.getUsageInfo(mPackageName,
                 mPackageInfo.applicationInfo.uid);
