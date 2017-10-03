@@ -311,7 +311,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new NotificationChannelWarningsPreferenceController(context));
         // inactive apps
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
-        // force activities to be resizable
+        controllers.add(new ResizableActivityPreferenceController(context));
         // reset shortcutmanager rate-limiting
         return controllers;
     }
