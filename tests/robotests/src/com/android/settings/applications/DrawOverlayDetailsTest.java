@@ -19,52 +19,59 @@ package com.android.settings.applications;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
+import android.app.Activity;
 import android.content.Context;
 
+import android.view.Window;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.TouchOverlayManager;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowPreferenceFragment;
 
+import com.android.settings.testutils.shadow.ShadowAppInfoBase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DrawOverlayDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
-    private FakeFeatureFactory mFeatureFactory;
-    private DrawOverlayDetails mFragment;
+    private Activity mActivity;
 
     @Mock
-    private TouchOverlayManager mTouchOverlayManager;
+    private Window mWindow;
+
+    private FakeFeatureFactory mFeatureFactory;
+
+    @Spy
+    private DrawOverlayDetails mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-
-        mFragment = new DrawOverlayDetails();
-        ReflectionHelpers.setField(mFragment, "mTouchOverlayManager", mTouchOverlayManager);
+        FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
     }
 
     @Test
     public void logSpecialPermissionChange() {
-        mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        when(mFragment.getContext()).thenReturn(
+                ShadowApplication.getInstance().getApplicationContext());
+
         mFragment.logSpecialPermissionChange(true, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW), eq("app"));
@@ -75,16 +82,17 @@ public class DrawOverlayDetailsTest {
     }
 
     @Test
-    @Config(shadows = ShadowPreferenceFragment.class)
-    public void onStart_disableOverlay() {
-        mFragment.onStart();
-        verify(mTouchOverlayManager).setOverlayAllowed(false);
-    }
+    @Config(shadows = {ShadowAppInfoBase.class})
+    public void hideNonSystemOverlaysWhenResumed() {
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mActivity.getWindow()).thenReturn(mWindow);
 
-    @Test
-    @Config(shadows = ShadowPreferenceFragment.class)
-    public void onStop_enableOverlay() {
-        mFragment.onStop();
-        verify(mTouchOverlayManager).setOverlayAllowed(true);
+        mFragment.onResume();
+        mFragment.onPause();
+
+        InOrder inOrder = Mockito.inOrder(mWindow);
+        inOrder.verify(mWindow).addFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        inOrder.verify(mWindow).clearFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        inOrder.verifyNoMoreInteractions();
     }
 }
