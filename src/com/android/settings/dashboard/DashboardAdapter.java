@@ -601,6 +601,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
 
         public Drawable getIcon(Icon icon) {
+            if (icon == null) {
+                return null;
+            }
             Drawable drawable = mMap.get(icon);
             if (drawable == null) {
                 drawable = icon.loadDrawable(mContext);
