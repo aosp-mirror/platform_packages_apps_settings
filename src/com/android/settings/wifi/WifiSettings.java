@@ -37,9 +37,7 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.os.HandlerThread;
 import android.os.PowerManager;
-import android.os.Process;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -162,8 +160,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiTracker mWifiTracker;
     private String mOpenSsid;
 
-    private HandlerThread mBgThread;
-
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
 
     private PreferenceCategory mConnectedAccessPointPreferenceCategory;
@@ -211,9 +207,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         addPreferences();
 
         mIsRestricted = isUiRestricted();
-
-        mBgThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
-        mBgThread.start();
     }
 
     private void addPreferences() {
@@ -238,17 +231,11 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onDestroy() {
-        mBgThread.quit();
-        super.onDestroy();
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         mWifiTracker = WifiTrackerFactory.create(
-                getActivity(), this, mBgThread.getLooper(), true, true, false);
+                getActivity(), this, getLifecycle(), true, true);
         mWifiManager = mWifiTracker.getManager();
 
         mConnectListener = new WifiManager.ActionListener() {
@@ -350,8 +337,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         // On/off switch is hidden for Setup Wizard (returns null)
         mWifiEnabler = createWifiEnabler();
 
-        mWifiTracker.startTracking();
-
         if (mIsRestricted) {
             restrictUi();
             return;
@@ -430,7 +415,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onStop() {
-        mWifiTracker.stopTracking();
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
         super.onStop();
@@ -1137,7 +1121,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                 // Add saved Wi-Fi access points
                 final List<AccessPoint> accessPoints =
-                        WifiTracker.getCurrentAccessPoints(context, true, false, false);
+                        WifiTracker.getCurrentAccessPoints(context, true, false);
                 for (AccessPoint accessPoint : accessPoints) {
                     data = new SearchIndexableRaw(context);
                     data.title = accessPoint.getSsidStr();
