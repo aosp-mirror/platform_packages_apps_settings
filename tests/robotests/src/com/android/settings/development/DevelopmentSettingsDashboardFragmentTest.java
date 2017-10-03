@@ -17,7 +17,6 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -51,11 +50,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class
-        })
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private SwitchBar mSwitchBar;
@@ -100,6 +95,10 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = {
+            SettingsShadowResources.class,
+            SettingsShadowResources.SettingsShadowTheme.class
+    })
     public void searchIndex_pageDisabled_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, false);

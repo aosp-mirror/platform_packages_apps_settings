@@ -254,12 +254,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AdbPreferenceController(context, fragment));
         // revoke usb debugging authorizations
         controllers.add(new LocalTerminalPreferenceController(context));
-        // bug report shortcut
+        controllers.add(new BugReportInPowerPreferenceControllerV2(context));
         // select mock location app
         controllers.add(new DebugViewAttributesPreferenceController(context));
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
-        // verify apps over usb
+        controllers.add(new VerifyAppsOverUsbPreferenceControllerV2(context));
         // logger buffer sizes
         // store logger data persistently on device
         controllers.add(new ConnectivityMonitorPreferenceControllerV2(context));
@@ -285,7 +285,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
-        // show layout bounds
+        controllers.add(new ShowLayoutBoundsPreferenceController(context));
         controllers.add(new RtlLayoutPreferenceController(context));
         // window animation scale
         // transition animation scale
@@ -293,24 +293,24 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // simulate secondary displays
         // smallest width
         controllers.add(new ForceGpuRenderingPreferenceController(context));
-        // show gpu view updates
+        controllers.add(new GpuViewUpdatesPreferenceController(context));
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         // debug gpu overdraw
         // debug non-rectangular clip operations
         controllers.add(new ForceMSAAPreferenceController(context));
-        // disable hw overlays
+        controllers.add(new HardwareOverlaysPreferenceController(context));
         // simulate color space
         // set gpu renderer
-        // disable usb audio routing
+        controllers.add(new UsbAudioRoutingPreferenceController(context));
         controllers.add(new StrictModePreferenceController(context));
         // profile gpu rendering
-        // don't keep activities
+        controllers.add(new KeepActivitiesPreferenceController(context));
         // background process limit
         // background check
-        // show all anrs
+        controllers.add(new AppsNotRespondingPreferenceController(context));
         // show notification channel warnings
         // inactive apps
-        // force allow apps on external
+        controllers.add(new AllowAppsOnExternalPreferenceController(context));
         // force activities to be resizable
         // reset shortcutmanager rate-limiting
         return controllers;

@@ -34,6 +34,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -135,8 +136,8 @@ public class AccountTypePreferenceLoader {
                 // startPreferencePanel() there. In order to inject the title string there, more
                 // dirty further hack is still needed. It's much easier and cleaner to listen to
                 // preference click event here directly.
-                if (intent.getAction().equals(
-                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) {
+                if (TextUtils.equals(intent.getAction(),
+                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) {
                     // The OnPreferenceClickListener overrides the click event completely. No intent
                     // will get fired.
                     pref.setOnPreferenceClickListener(new FragmentStarter(

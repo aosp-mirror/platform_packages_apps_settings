@@ -28,6 +28,10 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+/**
+ * deprecated in favor of {@link BugReportInPowerPreferenceControllerV2}
+ */
+@Deprecated
 public class BugReportInPowerPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
@@ -46,8 +50,8 @@ public class BugReportInPowerPreferenceController extends AbstractPreferenceCont
         if (KEY_BUGREPORT_IN_POWER.equals(preference.getKey())) {
             final SwitchPreference switchPreference = (SwitchPreference) preference;
             Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU,
-                switchPreference.isChecked() ? 1 : 0);
+                    Settings.Global.BUGREPORT_IN_POWER_MENU,
+                    switchPreference.isChecked() ? 1 : 0);
             setBugreportStorageProviderStatus();
             return true;
         }
@@ -95,7 +99,7 @@ public class BugReportInPowerPreferenceController extends AbstractPreferenceCont
             return false;
         }
         final boolean enabled = Settings.Secure.getInt(
-            mContext.getContentResolver(), Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0;
+                mContext.getContentResolver(), Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0;
         mPreference.setChecked(enabled);
         return enabled;
     }
@@ -110,12 +114,12 @@ public class BugReportInPowerPreferenceController extends AbstractPreferenceCont
 
     private void setBugreportStorageProviderStatus() {
         final ComponentName componentName = new ComponentName("com.android.shell",
-            "com.android.shell.BugreportStorageProvider");
+                "com.android.shell.BugreportStorageProvider");
         final boolean enabled = mPreference.isChecked();
         mContext.getPackageManager().setComponentEnabledSetting(componentName,
-            enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
-            0);
+                enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+                0);
     }
 
 }

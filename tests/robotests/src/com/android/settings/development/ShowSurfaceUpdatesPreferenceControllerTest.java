@@ -31,7 +31,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.IBinder;
-import android.os.Parcel;
 import android.os.RemoteException;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
@@ -45,8 +44,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -135,17 +132,5 @@ public class ShowSurfaceUpdatesPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchEnabled();
 
         verify(mPreference).setEnabled(true);
-    }
-
-
-    @Implements(Parcel.class)
-    public static class ShadowParcel {
-
-        static int sReadIntResult;
-
-        @Implementation
-        public int readInt() {
-            return sReadIntResult;
-        }
     }
 }

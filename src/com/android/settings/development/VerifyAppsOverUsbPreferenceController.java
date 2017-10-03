@@ -37,7 +37,10 @@ import java.util.List;
 
 /**
  * Controller to manage the state of "Verify apps over USB" toggle.
+ *
+ * deprecated in favor of {@link VerifyAppsOverUsbPreferenceControllerV2}
  */
+@Deprecated
 public class VerifyAppsOverUsbPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";

@@ -47,6 +47,10 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * deprecated in favor of {@link VerifyAppsOverUsbPreferenceControllerV2}
+ */
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VerifyAppsOverUsbPreferenceControllerTest {
